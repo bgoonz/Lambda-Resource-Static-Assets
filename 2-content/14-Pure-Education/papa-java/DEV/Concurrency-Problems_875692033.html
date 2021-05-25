@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Concurrency Problems</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Java-Problems_858619905.html">Java Problems</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Concurrency Problems
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Dec 26, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1613190962682 {padding: 0px;}
+div.rbtoc1613190962682 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1613190962682 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1613190962682'>
+<ul class='toc-indentation'>
+<li><a href='#ConcurrencyProblems-BlockingQueues'>BlockingQueues</a></li>
+<li><a href='#ConcurrencyProblems-BoundedBuffer'>BoundedBuffer</a>
+<ul class='toc-indentation'>
+<li><a href='#ConcurrencyProblems-WaitNotifyBuffer'>WaitNotifyBuffer</a></li>
+<li><a href='#ConcurrencyProblems-ConditionBuffer'>ConditionBuffer</a></li>
+<li><a href='#ConcurrencyProblems-SemaphoreBuffer'>SemaphoreBuffer</a></li>
+</ul>
+</li>
+<li><a href='#ConcurrencyProblems-CAS(CompareandSwap)'>CAS (Compare and Swap)</a>
+<ul class='toc-indentation'>
+<li><a href='#ConcurrencyProblems-Simulated'>Simulated</a></li>
+<li><a href='#ConcurrencyProblems-Counter'>Counter</a></li>
+<li><a href='#ConcurrencyProblems-NumberRange'>NumberRange</a></li>
+</ul>
+</li>
+<li><a href='#ConcurrencyProblems-ComputeWith2Threads'>ComputeWith2Threads</a></li>
+<li><a href='#ConcurrencyProblems-ConcurrentMapUpdates'>ConcurrentMapUpdates</a></li>
+<li><a href='#ConcurrencyProblems-CountdownLatch'>CountdownLatch</a></li>
+<li><a href='#ConcurrencyProblems-DeadlockDemos'>DeadlockDemos</a></li>
+<li><a href='#ConcurrencyProblems-DoubleCheckedLockingAndSingleton'>DoubleCheckedLockingAndSingleton</a>
+<ul class='toc-indentation'>
+<li><a href='#ConcurrencyProblems-DoubleCheckedLocking'>DoubleCheckedLocking</a></li>
+<li><a href='#ConcurrencyProblems-Singleton'>Singleton</a></li>
+</ul>
+</li>
+<li><a href='#ConcurrencyProblems-ImmutableCache'>ImmutableCache</a></li>
+<li><a href='#ConcurrencyProblems-MaxFinder'>MaxFinder</a></li>
+<li><a href='#ConcurrencyProblems-Memoizer'>Memoizer</a></li>
+<li><a href='#ConcurrencyProblems-MutualExclusionWithBinarySemaphore'>MutualExclusionWithBinarySemaphore</a></li>
+<li><a href='#ConcurrencyProblems-PageRenderer'>PageRenderer</a></li>
+<li><a href='#ConcurrencyProblems-Preloader'>Preloader</a></li>
+<li><a href='#ConcurrencyProblems-ProcessGraphInParallel'>ProcessGraphInParallel</a></li>
+<li><a href='#ConcurrencyProblems-PropagateExceptionFromThread'>PropagateExceptionFromThread</a></li>
+<li><a href='#ConcurrencyProblems-SwingUtilities'>SwingUtilities</a>
+<ul class='toc-indentation'>
+<li><a href='#ConcurrencyProblems-SwingThreadFactory'>SwingThreadFactory</a></li>
+<li><a href='#ConcurrencyProblems-invokeAndWait'>invokeAndWait</a></li>
+<li><a href='#ConcurrencyProblems-invokeLater'>invokeLater</a></li>
+<li><a href='#ConcurrencyProblems-isEventDispatchThread'>isEventDispatchThread</a></li>
+</ul>
+</li>
+<li><a href='#ConcurrencyProblems-TimedRun'>TimedRun</a>
+<ul class='toc-indentation'>
+<li><a href='#ConcurrencyProblems-timedRunWithScheduler'>timedRunWithScheduler</a></li>
+<li><a href='#ConcurrencyProblems-timedRunWithFuture'>timedRunWithFuture</a></li>
+</ul>
+</li>
+<li><a href='#ConcurrencyProblems-UncaughtException'>UncaughtException</a>
+<ul class='toc-indentation'>
+<li><a href='#ConcurrencyProblems-UncaughtExceptionLogger'>UncaughtExceptionLogger</a></li>
+<li><a href='#ConcurrencyProblems-MyThreadFactory,MyAppThread'>MyThreadFactory, MyAppThread</a></li>
+</ul>
+</li>
+</ul>
+</div><p /><h2 id="ConcurrencyProblems-BlockingQueues">BlockingQueues<br/></h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 888.0px;"/><col style="width: 729.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>BlockingQueueus</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void takeAndOfferNext(BlockingQueue&lt;Integer&gt; takeFrom, BlockingQueue&lt;Integer&gt; offerTo)
+{
+    while(true)
+    {
+        try
+        {
+            int i = takeFrom.take();
+            System.out.println(i);
+            offerTo.offer(i + 1);
+        }
+        catch(InterruptedException e)
+        {
+            throw new IllegalStateException(&quot;Unexpected exception&quot;, e);
+        }
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static void main(String... args)
+{
+    BlockingQueue&lt;Integer&gt; evens = new LinkedBlockingDeque&lt;&gt;();
+    BlockingQueue&lt;Integer&gt; odds = new LinkedBlockingDeque&lt;&gt;();
+    ExecutorService exec = Executors.newFixedThreadPool(2);
+    exec.submit(() -&gt; takeAndOfferNext(evens, odds));
+    exec.submit(() -&gt; takeAndOfferNext(odds, evens));
+    evens.offer(0);
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-BoundedBuffer"><br/>BoundedBuffer</h2><h3 id="ConcurrencyProblems-WaitNotifyBuffer"><code>WaitNotifyBuffer</code></h3><h3 id="ConcurrencyProblems-ConditionBuffer"><code>ConditionBuffer</code></h3><h3 id="ConcurrencyProblems-SemaphoreBuffer"><code>SemaphoreBuffer</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 809.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>BoundedBuffer</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static abstract class WaitNotifyBufferBase&lt;T&gt;
+{
+    private final T[] data;
+    private int tail, head, count;
+    protected WaitNotifyBufferBase(int capcacity)
+    {
+        data = (T[]) new Object[capcacity];
+    }
+    protected synchronized void doPut(T t)
+    {
+        data[tail] = t;
+        if(++tail == data.length)
+        {
+            tail = 0;
+        }
+        count++;
+    }
+    protected synchronized T doGet()
+    {
+        T t = data[head];
+        data[head] = null;
+        if(++head == data.length)
+        {
+            head = 0;
+        }
+        count--;
+        return t;
+    }
+    protected synchronized boolean isFull()
+    {
+        return count == data.length;
+    }
+    protected synchronized boolean isEmpty()
+    {
+        return count == 0;
+    }
+}
+
+static class WaitNotifyBuffer&lt;T&gt; extends WaitNotifyBufferBase&lt;T&gt;
+{
+    public WaitNotifyBuffer(int capacity)
+    {
+        super(capacity);
+    }
+    public synchronized void put(T t) throws InterruptedException
+    {
+        while(isFull())
+        {
+            wait();
+        }
+        doPut(t);
+        notifyAll();
+    }
+    public synchronized T get() throws InterruptedException
+    {
+        while(isEmpty())
+        {
+            wait();
+        }
+        T t = doGet();
+        notifyAll();
+        return t;
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class ConditionBuffer&lt;T&gt;
+{
+    private Lock lock = new ReentrantLock();
+    private Condition notFull = lock.newCondition();
+    private Condition notEmpty = lock.newCondition();
+    private T[] data;
+    private int head, tail, count;
+    public ConditionBuffer(int capacity)
+    {
+        data = (T[]) new Object[capacity];
+    }
+    public void put(T t) throws InterruptedException
+    {
+        lock.lock();
+        try
+        {
+            while(count == data.length)
+            {
+                notFull.await();
+            }
+            data[tail] = t;
+            if(++tail == data.length)
+            {
+                tail = 0;
+            }
+            count++;
+            notEmpty.signal();
+        }
+        finally
+        {
+            lock.unlock();
+        }
+    }
+    public T take() throws InterruptedException
+    {
+        lock.lock();
+        try
+        {
+            while(count == 0)
+            {
+                notEmpty.await();
+            }
+            T t = data[head];
+            data[head] = null;
+            if(++head == data.length)
+            {
+                head = 0;
+            }
+            count--;
+            notFull.signal();
+            return t;
+        }
+        finally
+        {
+            lock.unlock();
+        }
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class SemaphoreBuffer&lt;T&gt;
+{
+    private Semaphore items;
+    private Semaphore spaces;
+    private T[] data;
+    private int head, tail;
+    public SemaphoreBuffer(int capacity)
+    {
+        data = (T[]) new Object[capacity];
+        items = new Semaphore(0);
+        spaces = new Semaphore(capacity);
+    }
+    private void doPut(T t)
+    {
+        data[tail] = t;
+        if(++tail == data.length)
+        {
+            tail = 0;
+        }
+    }
+    private T doTake()
+    {
+        T t = data[head];
+        data[head] = null;
+        if(++head == data.length)
+        {
+            head = 0;
+        }
+        return t;
+    }
+    public void put(T t) throws InterruptedException
+    {
+        spaces.acquire();
+        doPut(t);
+        items.release();
+    }
+    public T take() throws InterruptedException
+    {
+        items.acquire();
+        T t = doTake();
+        spaces.release();
+        return t;
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class BoundedSetWithSemaphore&lt;T&gt;
+{
+    private Set&lt;T&gt; set;
+    private Semaphore semaphore;
+    BoundedSetWithSemaphore(int bound)
+    {
+        set = Collections.synchronizedSet(new HashSet&lt;&gt;());
+        semaphore = new Semaphore(bound);
+    }
+    void add(T t) throws InterruptedException
+    {
+        semaphore.acquire();
+        set.add(t);
+        semaphore.release();
+    }
+    T remove() throws InterruptedException
+    {
+        semaphore.acquire();
+        T t = null;
+        if(set.iterator().hasNext())
+        {
+            t = set.iterator().next();
+            set.remove(t);
+        }
+        semaphore.release();
+        return t;
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static void main(String... args) throws InterruptedException
+{
+    WaitNotifyBuffer&lt;Integer&gt; buffer = new WaitNotifyBuffer&lt;&gt;(10);
+    Thread producer = new Thread( () -&gt; {
+        for(int i = 0; i &lt; 100; ++i)
+        {
+            try
+            {
+                buffer.put(i);
+                System.out.printf(&quot;Put %d in the buffer\n&quot;, i);
+                TimeUnit.MILLISECONDS.sleep(randomRange(1, 100));
+            }
+            catch(InterruptedException e)
+            {
+                throw new IllegalStateException(&quot;Unexpected exception&quot;, e);
+            }
+        }
+    });
+    Thread consumer = new Thread(() -&gt; {
+        for(int i = 0; i &lt; 100; ++i)
+        {
+            try
+            {
+                int val = buffer.get();
+                System.out.printf(&quot;Got %d off the buffer\n&quot;, val);
+                TimeUnit.MILLISECONDS.sleep(randomRange(1, 100));
+            }
+            catch(InterruptedException e)
+            {
+                throw new IllegalStateException(&quot;Unexpected exception&quot;, e);
+            }
+        }
+    });
+    producer.start();
+    TimeUnit.MILLISECONDS.sleep(1000);
+    consumer.start();
+    producer.join();
+    consumer.join();
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-CAS(CompareandSwap)">CAS (Compare and Swap)</h2><h3 id="ConcurrencyProblems-Simulated"><code>Simulated</code></h3><h3 id="ConcurrencyProblems-Counter"><code>Counter</code></h3><h3 id="ConcurrencyProblems-NumberRange"><code>NumberRange</code><br/></h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 680.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>CAS</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class Simulated
+{
+    private int value;
+    synchronized int get()
+    {
+        return value;
+    }
+    synchronized int compareAndSwap(int expected, int newValue)
+    {
+        int oldValue = value;
+        if(oldValue == expected)
+        {
+            value = newValue;
+        }
+        return oldValue;
+    }
+    synchronized boolean compareAndSet(int expected, int newValue)
+    {
+        return expected == compareAndSwap(expected, newValue);
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class Counter
+{
+    Simulated casValue;
+    int getValue()
+    {
+        return casValue.get();
+    }
+    int increment()
+    {
+        int v;
+        do
+        {
+            v = casValue.get();
+        } while(v != casValue.compareAndSwap(v, v + 1));
+        return v + 1;
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class NumberRange
+{
+    private static class IntPair
+    {
+        int lower, upper;
+        IntPair(int lower, int upper)
+        {
+            this.lower = lower;
+            this.upper = upper;
+        }
+    }
+    AtomicReference&lt;IntPair&gt; atomicReference = new AtomicReference&lt;&gt;(new IntPair(0, 0));
+    int getLower()
+    {
+        return atomicReference.get().lower;
+    }
+    int getUpper()
+    {
+        return atomicReference.get().upper;
+    }
+    void setLower(int lower)
+    {
+        while(true)
+        {
+            IntPair oldVal = atomicReference.get();
+            IntPair newVal = new IntPair(lower, oldVal.upper);
+            if(atomicReference.compareAndSet(oldVal, newVal))
+            {
+                return;
+            }
+        }
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-ComputeWith2Threads">ComputeWith2Threads<br/></h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 383.0px;"/><col style="width: 577.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ComputeWith2Threads</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class Add extends Thread
+{
+    int value;
+    public void run()
+    {
+        value = 2 + 8;
+    }
+}
+
+static class Multiply extends Thread
+{
+    int value;
+    public void run()
+    {
+        value = 4 * 5;
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static void main(String... args) throws InterruptedException
+{
+    Add t1 = new Add();
+    Multiply t2 = new Multiply();
+    t1.start();
+    t2.start();
+    t1.join();
+    t2.join();
+    int value = t2.value / t1.value;
+    System.out.println(value);
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-ConcurrentMapUpdates"><br/>ConcurrentMapUpdates</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 809.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ConcurrentMapUpdates</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class ConcurrentMapUpdates
+{
+    //  Update value in a map without requiring synchronization
+
+    private ConcurrentMap&lt;String, AtomicInteger&gt; map = new ConcurrentHashMap&lt;&gt;();
+
+    public void addQuantity(String key, int quantity)
+    {
+        AtomicInteger atomicInteger = map.computeIfAbsent(key, x -&gt; new AtomicInteger(0));
+        atomicInteger.addAndGet(quantity);
+    }
+
+    public int getQuantity(String key)
+    {
+        AtomicInteger atomicInteger = map.getOrDefault(key, new AtomicInteger(-1));
+        return atomicInteger.get();
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static void main(String... args)
+{
+    ConcurrentMapUpdates map = new ConcurrentMapUpdates();
+    map.addQuantity(&quot;nick&quot;, 5);
+    map.addQuantity(&quot;nick&quot;, 10);
+    map.addQuantity(&quot;nick&quot;, 15);
+    System.out.println(map.getQuantity(&quot;nick&quot;));
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-CountdownLatch"><br/>CountdownLatch</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 809.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>CountdownLatch</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static long timedTasks(int nThreads, Runnable task) throws InterruptedException
+{
+    CountDownLatch startGate = new CountDownLatch(1);
+    CountDownLatch endGate = new CountDownLatch(nThreads);
+    for(int i = 0; i&lt; nThreads; ++i)
+    {
+        Thread t = new Thread(() -&gt; {
+            try
+            {
+                startGate.await();
+                try
+                {
+                    task.run();
+                }
+                finally
+                {
+                    endGate.countDown();
+                }
+            }
+            catch (InterruptedException e)
+            {
+                throw new IllegalStateException(&quot;Unexpected exception&quot;, e);
+            }
+        });
+        t.start();
+    }
+    long start = System.nanoTime();
+    startGate.countDown();
+    endGate.await();
+    return System.nanoTime() - start;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static void main(String... args) throws InterruptedException
+{
+    Runnable task = () -&gt; {
+        try
+        {
+            TimeUnit.MILLISECONDS.sleep(10);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+    };
+    long time = timedTasks(8, task);
+    System.out.printf(&quot;8 threads executed in %d millis\n&quot;, time / 1000000);
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-DeadlockDemos"><br/>DeadlockDemos</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 895.0px;"/><col style="width: 722.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>DeadlockDemos</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class CreateDeadlock implements Runnable
+{
+    private Object first, second;
+    CreateDeadlock(Object first, Object second)
+    {
+        this.first = first;
+        this.second = second;
+    }
+    @Override
+    public void run()
+    {
+        while(true)
+        {
+            synchronized(first)
+            {
+                try
+                {
+                    TimeUnit.SECONDS.sleep(1);
+                }
+                catch(InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+                synchronized(second)
+                {
+                    System.out.println(Thread.currentThread().getName());
+                }
+            }
+        }
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class AvoidDeadlock
+{
+    static class Account
+    {
+        void credit(double amount) {}
+        void debit(double amount) {}
+        Double getBalance() { return 0.0;}
+    }
+    static Object tieLock = new Object();
+    static void transfer(Account fromAccount, Account toAccount, double amount) throws Exception
+    {
+        class Helper
+        {
+            void transfer() throws Exception
+            {
+                if (fromAccount.getBalance().compareTo(amount) &lt; 0)
+                {
+                    throw new Exception(&quot;Insufficient funds&quot;);
+                }
+                else
+                {
+                    fromAccount.debit(amount);
+                    toAccount.credit(amount);
+                }
+            }
+        }
+        int fromHash = System.identityHashCode(fromAccount);
+        int toHash = System.identityHashCode(toAccount);
+        if(fromHash &lt; toHash)
+        {
+            synchronized(fromAccount)
+            {
+                synchronized(toAccount)
+                {
+                    new Helper().transfer();
+                }
+            }
+        }
+        else if(toHash &lt; fromHash)
+        {
+            synchronized(toAccount)
+            {
+                synchronized(fromAccount)
+                {
+                    new Helper().transfer();
+                }
+            }
+        }
+        else
+        {
+            synchronized (tieLock)
+            {
+                synchronized (fromAccount)
+                {
+                    synchronized (toAccount)
+                    {
+                        new Helper().transfer();
+                    }
+                }
+            }
+        }
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static void main(String... args) throws InterruptedException
+{
+    Object lock1 = new Object();
+    Object lock2 = new Object();
+    Thread t1 = new Thread(new CreateDeadlock(lock1, lock2), &quot;Thread 1&quot;);
+    Thread t2 = new Thread(new CreateDeadlock(lock2, lock1), &quot;Thread 2&quot;);
+    t1.start();
+    t2.start();
+    t1.join();
+    t2.join();
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-DoubleCheckedLockingAndSingleton"><br/>DoubleCheckedLockingAndSingleton</h2><h3 id="ConcurrencyProblems-DoubleCheckedLocking"><code>DoubleCheckedLocking</code></h3><h3 id="ConcurrencyProblems-Singleton"><code>Singleton</code></h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 680.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>DoubleCheckedLockingAndSingleton</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class DoubleCheckedLocking
+{
+    static class Resource
+    {
+    }
+    private static Resource resource;
+    static Resource getInstance()
+    {
+        if(resource == null)
+        {
+            synchronized (DoubleCheckedLocking.class)
+            {
+                if(resource == null)
+                {
+                    resource = new Resource();
+                }
+            }
+        }
+        return resource;
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class Singleton
+{
+    static class Resource
+    {
+    }
+    static class Holder
+    {
+        static Resource resource = new Resource();
+    }
+    static Resource getResource()
+    {
+        return Holder.resource;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-ImmutableCache"><br/>ImmutableCache</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 760.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ImmutableCache</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Immutable
+public class ImmutableCache
+{
+    //  Class that uses ImmutableCache should declare it with volatile keyword
+    //  to make sure that changes are visible to other threads
+    private final BigInteger lastNumber;
+    private final BigInteger[] lastFactors;
+
+    public ImmutableCache(BigInteger i, BigInteger[] factors)
+    {
+        this.lastNumber = i;
+        this.lastFactors = factors;
+    }
+
+    public BigInteger[] getFactors(BigInteger i)
+    {
+        if(lastFactors == null || !lastNumber.equals(i))
+        {
+            return null;
+        }
+
+        return Arrays.copyOf(lastFactors, lastFactors.length);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-MaxFinder"><br/>MaxFinder</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 809.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MaxFinder</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class FindMaxTask implements Callable&lt;Integer&gt;
+{
+    private int[] data;
+    private int start, end;
+    FindMaxTask(int[] data, int start, int end)
+    {
+        this.data = data;
+        this.start = start;
+        this.end = end;
+    }
+    @Override
+    public Integer call()
+    {
+        int max = data[start];
+        for(int i = start + 1; i &lt; end; ++i)
+        {
+            max = Math.max(max, data[i]);
+        }
+        return max;
+    }
+}</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static void main(String... args) throws ExecutionException, InterruptedException
+{
+    int [] data = new Random().ints(10000, 1, 100000).toArray();
+    FindMaxTask findMaxTask1 = new FindMaxTask(data, 0, data.length / 2);
+    FindMaxTask findMaxTask2 = new FindMaxTask(data, data.length / 2, data.length);
+    try
+    {
+        ExecutorService exec = Executors.newFixedThreadPool(2);
+        Future&lt;Integer&gt; future1 = exec.submit(findMaxTask1);
+        Future&lt;Integer&gt; future2 = exec.submit(findMaxTask2);
+        System.out.printf(&quot;Max value = %d\n&quot;, Math.max(future1.get(), future2.get()));
+        exec.shutdown();
+        exec.awaitTermination(10, TimeUnit.SECONDS);
+    }
+    catch(Throwable t)
+    {
+        if(t instanceof RuntimeException || t instanceof Error)
+        {
+            throw t;
+        }
+        else
+        {
+            throw new IllegalStateException(&quot;Checked exception.&quot;, t);
+        }
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-Memoizer"><br/>Memoizer</h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 960.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Memoizer</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">interface Computable&lt;A,V&gt;
+{
+    V compute(A arg) throws ExecutionException, InterruptedException;
+}
+
+public class Memoizer&lt;A,V&gt; implements Computable&lt;A,V&gt;
+{
+    private ConcurrentMap&lt;A,Future&lt;V&gt;&gt; cache = new ConcurrentHashMap&lt;&gt;();
+    private Computable&lt;A,V&gt; computable;
+
+    public Memoizer(Computable&lt;A,V&gt; computable)
+    {
+        this.computable = computable;
+    }
+
+    @Override
+    public V compute(A arg) throws InterruptedException
+    {
+        while(true)
+        {
+            Future&lt;V&gt; future = cache.get(arg);
+            if(future == null)
+            {
+                Callable&lt;V&gt; callable = () -&gt; computable.compute(arg);
+                FutureTask&lt;V&gt; f = new FutureTask&lt;&gt;(callable);
+                future = cache.putIfAbsent(arg, f);
+                if(future == null)
+                {
+                    future = f;
+                    f.run();
+                }
+            }
+
+            try
+            {
+                return future.get();
+            }
+            catch(CancellationException e)
+            {
+                cache.remove(arg, future);
+            }
+            catch(ExecutionException e)
+            {
+                Throwable t = e.getCause();
+                if(t instanceof RuntimeException)
+                {
+                    throw (RuntimeException)t;
+                }
+                else if(t instanceof Error)
+                {
+                    throw (Error)t;
+                }
+                else
+                {
+                    throw new IllegalStateException(&quot;Checked exception.&quot;, t);
+                }
+            }
+        }
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-MutualExclusionWithBinarySemaphore"><br/>MutualExclusionWithBinarySemaphore</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 809.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MutualExclusionWithBinarySemaphore</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class MutualExclusionWithBinarySemaphore
+{
+    private Semaphore binSemaphore = new Semaphore(1);
+    private int value;
+    private boolean isEven = true;
+
+    private void mutualExclusion()
+    {
+        while(true)
+        {
+            try
+            {
+                binSemaphore.acquire();
+                System.out.printf(&quot;%s: %d\n&quot;, isEven ? &quot;Even: &quot; : &quot;Odd: &quot;, value);
+                isEven = !isEven;
+                value++;
+            }
+            catch(InterruptedException e)
+            {
+                throw new IllegalStateException(&quot;Unexpected interrupt&quot;, e);
+            }
+            finally
+            {
+                binSemaphore.release();
+            }
+        }
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static void main(String... args)
+{
+    MutualExclusionWithBinarySemaphore evenOddWithBinarySemaphore = new MutualExclusionWithBinarySemaphore();
+    new Thread(() -&gt; evenOddWithBinarySemaphore.mutualExclusion()).start();
+    new Thread(() -&gt; evenOddWithBinarySemaphore.mutualExclusion()).start();
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-PageRenderer"><br/>PageRenderer</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 894.0px;"/><col style="width: 723.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>PageRenderer</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class PageRenderer
+{
+    static class ImageInfo
+    {
+        String info;
+
+        ImageInfo(String info)
+        {
+            this.info = info;
+        }
+
+        ImageInfo downloadImage() throws InterruptedException
+        {
+            Thread.sleep(50);
+            return new ImageInfo(info);
+        }
+    }
+
+    private static ExecutorService exec = Executors.newCachedThreadPool();
+    private static CompletionService&lt;ImageInfo&gt; completionService = new ExecutorCompletionService&lt;&gt;(exec);
+
+    static List&lt;ImageInfo&gt; renderPage(List&lt;ImageInfo&gt; imageInfos) throws InterruptedException
+    {
+        List&lt;ImageInfo&gt; result = new ArrayList&lt;&gt;();
+
+        for(ImageInfo imageInfo : imageInfos)
+        {
+            completionService.submit(() -&gt; imageInfo.downloadImage());
+        }
+
+        try
+        {
+            for(int i = 0; i &lt; imageInfos.size(); ++i)
+            {
+                Future&lt;ImageInfo&gt; f = completionService.take();
+                ImageInfo imageInfo = f.get();
+                result.add(imageInfo);
+            }
+        }
+        catch(ExecutionException e)
+        {
+            Throwable t = e.getCause();
+            if(t instanceof RuntimeException)
+            {
+                throw (RuntimeException)t;
+            }
+            else if(t instanceof Error)
+            {
+                throw (Error)t;
+            }
+            else
+            {
+                throw new IllegalStateException(&quot;Checked exception.&quot;, t);
+            }
+        }
+
+        return result;
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass() throws InterruptedException
+{
+    List&lt;ImageInfo&gt; images = Arrays.asList(new ImageInfo(&quot;one&quot;), 
+            new ImageInfo(&quot;two&quot;), new ImageInfo(&quot;three&quot;));
+    List&lt;ImageInfo&gt; result = renderPage(images);
+    boolean check = result.size() == 3;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-Preloader">Preloader<br/></h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 809.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Preloader</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class Preloader
+{
+    //  Demonstrates how to start future from a Thread
+    static class ProductInfo
+    {
+        String info;
+        ProductInfo(String info)
+        {
+            this.info = info;
+        }
+    }
+
+
+    private FutureTask&lt;ProductInfo&gt; futureTask = new FutureTask&lt;&gt;(() -&gt; loadProductInfo());
+    private Thread thread = new Thread(futureTask);
+
+
+    private ProductInfo loadProductInfo() throws InterruptedException
+    {
+        Thread.sleep(500);
+        return new ProductInfo(&quot;My product&quot;);
+    }
+
+    public void start()
+    {
+        thread.start();
+    }
+
+    public ProductInfo get() throws InterruptedException
+    {
+        try
+        {
+            return futureTask.get();
+        }
+        catch(ExecutionException e)
+        {
+            Throwable t = e.getCause();
+            if(t instanceof RuntimeException)
+            {
+                throw (RuntimeException)t;
+            }
+            else if(t instanceof Error)
+            {
+                throw (Error)t;
+            }
+            else
+            {
+                throw new IllegalStateException(&quot;Checked exception.&quot;, t);
+            }
+
+        }
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass() throws InterruptedException
+{
+    Preloader preloader = new Preloader();
+    preloader.start();
+    ProductInfo productInfo = preloader.get();
+    boolean check = productInfo.info.equals(&quot;My product&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-ProcessGraphInParallel"><br/>ProcessGraphInParallel</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 917.0px;"/><col style="width: 700.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ProcessGraphInParallel</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class ProcessGraphInParallel
+{
+    static class Node&lt;T&gt;
+    {
+        private T data;
+        private List&lt;Node&lt;T&gt;&gt; children;
+
+        Node(T t)
+        {
+            data = t;
+        }
+
+        void addChildren(Node&lt;T&gt;... nodes)
+        {
+            children = Arrays.stream(nodes).collect(Collectors.toList());
+        }
+
+        T compute()
+        {
+            return data;
+        }
+    }
+
+    static&lt;T&gt; Collection&lt;T&gt; getResults(List&lt;Node&lt;T&gt;&gt; nodes) throws InterruptedException
+    {
+        ExecutorService exec = Executors.newCachedThreadPool();
+        Queue&lt;T&gt; queue = new ConcurrentLinkedQueue&lt;&gt;();
+        parallelRecurse(exec, nodes, queue);
+        exec.shutdown();
+        exec.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
+        return queue;
+    }
+
+    private static&lt;T&gt; void parallelRecurse(Executor exec, List&lt;Node&lt;T&gt;&gt; nodes, Collection&lt;T&gt; result)
+    {
+        if(nodes != null &amp;&amp; !nodes.isEmpty())
+        {
+            for(Node&lt;T&gt; node : nodes)
+            {
+                exec.execute(() -&gt; result.add(node.compute()));
+                parallelRecurse(exec, node.children, result);
+            }
+        }
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass() throws InterruptedException
+{
+    Node&lt;Integer&gt; n1 = new Node(1);
+    Node&lt;Integer&gt; n11 = new Node(11);
+    Node&lt;Integer&gt; n12 = new Node(12);
+    Node&lt;Integer&gt; n13 = new Node(13);
+    n1.addChildren(n11, n12, n13);
+    Node&lt;Integer&gt; n2 = new Node(2);
+    Node&lt;Integer&gt; n21 = new Node(21);
+    Node&lt;Integer&gt; n22 = new Node(22);
+    Node&lt;Integer&gt; n23 = new Node(23);
+    n2.addChildren(n21, n22, n23);
+    Node&lt;Integer&gt; n3 = new Node(3);
+    Node&lt;Integer&gt; n31 = new Node(31);
+    Node&lt;Integer&gt; n32 = new Node(32);
+    Node&lt;Integer&gt; n33 = new Node(33);
+    n3.addChildren(n31, n32, n33);
+    Collection&lt;Integer&gt; result = getResults(Arrays.asList(n1, n2, n3));
+    boolean check = result.size() == 12;
+    if(!check)
+    {
+        return false;
+    }
+    check = result.contains(1) &amp;&amp; result.contains(2) &amp;&amp; result.contains(3) &amp;&amp;
+            result.contains(11) &amp;&amp; result.contains(12) &amp;&amp; result.contains(13) &amp;&amp;
+            result.contains(21) &amp;&amp; result.contains(22) &amp;&amp; result.contains(23) &amp;&amp;
+            result.contains(31) &amp;&amp; result.contains(32) &amp;&amp; result.contains(33);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-PropagateExceptionFromThread"><br/>PropagateExceptionFromThread</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 809.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>PropagateExceptionFromThread</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void propagateUsingFuture(Runnable runnable) throws InterruptedException
+{
+    ExecutorService exec = Executors.newSingleThreadExecutor();
+    Future&lt;?&gt; future = exec.submit(runnable);
+    try
+    {
+        future.get();
+    }
+    catch(ExecutionException e)
+    {
+        Throwable t = e.getCause();
+        if(t instanceof RuntimeException)
+        {
+            throw (RuntimeException)t;
+        }
+        else if(t instanceof Error)
+        {
+            throw (Error)t;
+        }
+        else
+        {
+            throw new IllegalStateException(&quot;Checked exception.&quot;, t);
+        }
+    }
+    finally
+    {
+        future.cancel(true);
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void propagateUsingMemberVariable(Runnable runnable) throws InterruptedException
+{
+    class RethrowableTask implements Runnable
+    {
+        volatile Throwable t;
+        @Override
+        public void run()
+        {
+            try
+            {
+                runnable.run();
+            }
+            catch (Throwable t)
+            {
+                this.t = t;
+            }
+        }
+        void rethrow()
+        {
+            if(t != null)
+            {
+                if(t instanceof RuntimeException)
+                {
+                    throw (RuntimeException)t;
+                }
+                else if(t instanceof Error)
+                {
+                    throw (Error)t;
+                }
+                else
+                {
+                    throw new IllegalStateException(&quot;Checked exception.&quot;, t);
+                }
+            }
+        }
+    }
+    RethrowableTask task = new RethrowableTask();
+    Thread t = new Thread(task);
+    t.start();
+    t.join();
+    task.rethrow();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static void main(String... args)
+{
+    Runnable runnable = () -&gt; {
+        throw new RuntimeException(&quot;Runtime exception thrown&quot;);
+    };
+    try
+    {
+        propagateUsingFuture(runnable);
+    }
+    catch(Throwable t)
+    {
+        System.out.println(t);
+    }
+    try
+    {
+        propagateUsingMemberVariable(runnable);
+    }
+    catch(Throwable t)
+    {
+        System.out.println(t);
+    }
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 960.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ReadWriteLockMap</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class ReadWriteLockMap&lt;K,V&gt;
+{
+    Map&lt;K,V&gt; map = new HashMap&lt;&gt;();
+
+    ReentrantReadWriteLock r = new ReentrantReadWriteLock();
+    ReadWriteLock lock = new ReentrantReadWriteLock();
+    Lock readLock = lock.readLock();
+    Lock writeLock = lock.writeLock();
+
+    V put(K key, V value)
+    {
+        writeLock.lock();
+        try
+        {
+            return map.put(key, value);
+        }
+        finally
+        {
+            writeLock.unlock();
+        }
+    }
+
+    V get(K key)
+    {
+        readLock.lock();
+        try
+        {
+            return map.get(key);
+        }
+        finally
+        {
+            readLock.unlock();
+        }
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-SwingUtilities"><br/>SwingUtilities</h2><h3 id="ConcurrencyProblems-SwingThreadFactory"><code>SwingThreadFactory</code></h3><h3 id="ConcurrencyProblems-invokeAndWait"><code>invokeAndWait</code></h3><h3 id="ConcurrencyProblems-invokeLater"><code>invokeLater</code></h3><h3 id="ConcurrencyProblems-isEventDispatchThread"><code>isEventDispatchThread</code></h3><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 960.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>SwingUtilities</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class SwingUtilities
+{
+    static class SwingThreadFactory implements ThreadFactory
+    {
+        @Override
+        public Thread newThread(Runnable r)
+        {
+            swingThread = new Thread(r);
+            return swingThread;
+        }
+    }
+
+    private static ExecutorService exec = Executors.newSingleThreadExecutor(new SwingThreadFactory());
+    private static volatile Thread swingThread;
+
+    public static void invokeAndWait(Runnable r) throws InterruptedException, InvocationTargetException
+    {
+        Future&lt;?&gt; f = exec.submit(r);
+        try
+        {
+            f.get();
+        }
+        catch(ExecutionException e)
+        {
+            throw new InvocationTargetException(e);
+        }
+    }
+
+    public static void invokeLater(Runnable r)
+    {
+        exec.execute(r);
+    }
+
+    public static boolean isEvenDispatchThread()
+    {
+        return Thread.currentThread() == swingThread;
+    }
+
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-TimedRun"><br/>TimedRun</h2><h3 id="ConcurrencyProblems-timedRunWithScheduler"><code>timedRunWithScheduler</code></h3><h3 id="ConcurrencyProblems-timedRunWithFuture"><code>timedRunWithFuture</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 1617.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>TimedRun</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class TimedRun
+{
+    static ExecutorService taskExec = Executors.newCachedThreadPool();
+    static ScheduledExecutorService cancelExec = Executors.newScheduledThreadPool(1);
+
+    static void timedRunWithScheduler(Runnable runnable, long timeout, TimeUnit timeUnit) throws InterruptedException
+    {
+        Thread t = new Thread(runnable);
+        t.start();
+        cancelExec.schedule(() -&gt; t.interrupt(), timeout, timeUnit);
+        t.join(timeUnit.toMillis(timeout));
+    }
+
+    static void timedRunWithFuture(Runnable runnable, long timeout, TimeUnit timeUnit) throws InterruptedException
+    {
+        Future&lt;?&gt; future = taskExec.submit(runnable);
+        try
+        {
+            future.get(timeout, timeUnit);
+        }
+        catch (TimeoutException e)
+        {
+            //  Task will be cancelled below
+        }
+        catch (ExecutionException e)
+        {
+            Throwable t = e.getCause();
+            if(t instanceof RuntimeException)
+            {
+                throw (RuntimeException)t;
+            }
+            else if(t instanceof Error)
+            {
+                throw (Error)t;
+            }
+            else
+            {
+                throw new IllegalStateException(&quot;Unchecked exception.&quot;, t);
+            }
+        }
+        finally
+        {
+            //  Harmless if completed
+            future.cancel(true); // interrupt if running
+        }
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ConcurrencyProblems-UncaughtException"><br/>UncaughtException</h2><h3 id="ConcurrencyProblems-UncaughtExceptionLogger"><code>UncaughtExceptionLogger </code></h3><h3 id="ConcurrencyProblems-MyThreadFactory,MyAppThread"><code>MyThreadFactory</code>, <code>MyAppThread</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 1617.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>UncaughtException</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class UncaughtException
+{
+    static class UncaughtExceptionLogger implements Thread.UncaughtExceptionHandler
+    {
+        /*
+        The Thread API also provides the UncaughtExceptionHandler facility,
+        which lets you detect when a thread dies due to an uncaught exception.
+        When a thread exits due to an uncaught exception,
+        the JVM reports this event to an application-provided UncaughtExceptionHandler;
+        if no handler  exists, the default behavior is to print the stack trace to System.err
+         */
+        @Override
+        public void uncaughtException(Thread t, Throwable e)
+        {
+            Logger logger = Logger.getAnonymousLogger();
+            logger.log(Level.SEVERE, &quot;Thread terminated with exception &quot; + t.getName(), e);
+        }
+    }
+
+    static class MyThreadFactory implements ThreadFactory
+    {
+        private final String poolName;
+        MyThreadFactory(String name)
+        {
+            this.poolName = name;
+        }
+        @Override
+        public Thread newThread(Runnable r)
+        {
+            return new MyAppThread(r, poolName);
+        }
+    }
+
+    static class MyAppThread extends Thread
+    {
+        /*
+        To set an UncaughtExceptionHandler for pool threads, provide a ThreadFactory to the ThreadPoolExecutor constructor.
+        Exceptions thrown from tasks make it to the uncaught exception handler only for tasks submitted with execute;
+        for tasks submitted with submit, any thrown exception, checked or not, is considered to be part of the task’s return status.
+        If a tasks submitted with submit terminates with an exception, it is re-thrown by Future.get, wrapped in an ExecutionException.
+        */
+        public static final String DEFAULT_NAME = &quot;MyAppThread&quot;;
+        private static volatile boolean debugLifecycle = false;
+        private static final AtomicInteger created = new AtomicInteger();
+        private static final AtomicInteger alive = new AtomicInteger();
+        private static final Logger log = Logger.getAnonymousLogger();
+
+        public MyAppThread(Runnable runnable, String name)
+        {
+            super(runnable, name + &quot;-&quot; + created.incrementAndGet());
+            setUncaughtExceptionHandler((t, e) -&gt; log.log(Level.SEVERE, &quot;UNCAUGHT in thread &quot; + t.getName(), e));
+        }
+
+        @Override
+        public void run()
+        {
+            boolean debug = debugLifecycle;
+            if(debug)
+            {
+                log.log(Level.FINE, &quot;Created &quot; + getName());
+            }
+            try
+            {
+                alive.incrementAndGet();
+                super.run();
+            }
+            finally
+            {
+                alive.decrementAndGet();
+                if (debug)
+                {
+                    log.log(Level.FINE, &quot;Exiting &quot; + getName());
+                }
+            }
+        }
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

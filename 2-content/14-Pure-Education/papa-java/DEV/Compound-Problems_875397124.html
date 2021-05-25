@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Compound Problems</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Java-Problems_858619905.html">Java Problems</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Compound Problems
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Dec 24, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><br/></p><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1613190962608 {padding: 0px;}
+div.rbtoc1613190962608 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1613190962608 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1613190962608'>
+<ul class='toc-indentation'>
+<li><a href='#CompoundProblems-LRUCache'>LRUCache</a></li>
+<li><a href='#CompoundProblems-Trie'>Trie</a></li>
+</ul>
+</div><h2 id="CompoundProblems-LRUCache">LRUCache</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 810.0px;"/><col style="width: 807.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>LRUCache</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class LRUCache&lt;K,V&gt;
+{
+    private static class Node&lt;K, V&gt;
+    {
+        K key;
+        V value;
+        Node&lt;K,V&gt; prev;
+        Node&lt;K,V&gt; next;
+
+        Node(K key, V value)
+        {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+
+
+    private int capacity;
+    private Map&lt;K, Node&lt;K,V&gt;&gt; map = new HashMap&lt;&gt;();
+    private Node&lt;K,V&gt; head;
+    private Node&lt;K,V&gt; tail;
+
+    public LRUCache(int capacity)
+    {
+        this.capacity = capacity;
+    }
+
+    public void set(K key, V value)
+    {
+        if(map.containsKey(key))
+        {
+            Node&lt;K,V&gt; old = map.get(key);
+            old.value = value;
+            remove(old);
+            setHead(old);
+        }
+        else
+        {
+            Node&lt;K,V&gt; node = new Node&lt;&gt;(key, value);
+            if(map.size() &gt;= capacity)
+            {
+                map.remove(tail.key);
+                remove(tail);
+            }
+            setHead(node);
+            map.put(key, node);
+        }
+    }
+
+
+    public V get(K key)
+    {
+        if(map.containsKey(key))
+        {
+            Node&lt;K,V&gt; node = map.get(key);
+            remove(node);
+            setHead(node);
+            return node.value;
+        }
+        return null;
+    }
+
+    private void remove(Node&lt;K,V&gt; node)
+    {
+        if(node.prev != null)
+        {
+            node.prev.next = node.next;
+        }
+        else
+        {
+            head = node.next;
+        }
+
+        if(node.next != null)
+        {
+            node.next.prev = node.prev;
+        }
+        else
+        {
+            tail = node.prev;
+        }
+    }
+
+    private void setHead(Node&lt;K,V&gt; node)
+    {
+        node.next = head;
+        node.prev = null;
+
+        if(head != null)
+        {
+            head.prev = node;
+        }
+
+        head = node;
+
+        if(tail == null)
+        {
+            tail = head;
+        }
+    }
+
+    static boolean testsPass()
+    {
+        LRUCache&lt;String, Integer&gt; cache = new LRUCache&lt;&gt;(3);
+        cache.set(&quot;One&quot;, 1);
+        cache.set(&quot;Two&quot;, 2);
+        cache.set(&quot;Three&quot;, 3);
+        cache.set(&quot;Four&quot;, 4);
+        cache.set(&quot;Five&quot;, 5);
+        cache.set(&quot;Six&quot;, 6);
+        boolean check = cache.get(&quot;Four&quot;) != null &amp;&amp;
+                cache.get(&quot;Five&quot;) != null &amp;&amp; cache.get(&quot;Six&quot;) != null;
+        if(!check)
+        {
+            return false;
+        }
+        check = cache.get(&quot;One&quot;) == null &amp;&amp;
+                cache.get(&quot;Two&quot;) == null &amp;&amp; cache.get(&quot;Three&quot;) == null;
+        if(!check)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static void main(String... args)
+    {
+        if(testsPass())
+        {
+            System.out.println(&quot;Tests passed&quot;);
+        }
+        else
+        {
+            System.out.println(&quot;Tests failed&quot;);
+        }
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    LRUCache&lt;String, Integer&gt; cache = new LRUCache&lt;&gt;(3);
+    cache.set(&quot;One&quot;, 1);
+    cache.set(&quot;Two&quot;, 2);
+    cache.set(&quot;Three&quot;, 3);
+    cache.set(&quot;Four&quot;, 4);
+    cache.set(&quot;Five&quot;, 5);
+    cache.set(&quot;Six&quot;, 6);
+    boolean check = cache.get(&quot;Four&quot;) != null &amp;&amp; 
+            cache.get(&quot;Five&quot;) != null &amp;&amp; cache.get(&quot;Six&quot;) != null;
+    if(!check)
+    {
+        return false;
+    }
+    check = cache.get(&quot;One&quot;) == null &amp;&amp; 
+            cache.get(&quot;Two&quot;) == null &amp;&amp; cache.get(&quot;Three&quot;) == null;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="CompoundProblems-Trie">Trie<br/></h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 812.0px;"/><col style="width: 805.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Trie</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class Trie
+{
+    static class Node
+    {
+        char c;
+        Map&lt;Character, Node&gt; children = new HashMap&lt;&gt;();
+        boolean isLeaf;
+
+        Node(char c)
+        {
+            this.c = c;
+        }
+
+        Node() {}
+    }
+
+    private Node root = new Node();
+
+    public void insert(String word)
+    {
+        Map&lt;Character,Node&gt; children = root.children;
+
+        for(int i = 0; i &lt; word.length(); ++i)
+        {
+            char c = word.charAt(i);
+            Node node = children.get(c);
+            if(node == null)
+            {
+                node = new Node(c);
+                children.put(c, node);
+            }
+
+            if(i == word.length() - 1)
+            {
+                node.isLeaf = true;
+            }
+
+            children = node.children;
+        }
+    }
+
+    public boolean search(String word)
+    {
+        Node node = searchNode(word);
+        return node != null &amp;&amp; node.isLeaf;
+    }
+
+
+    private Node searchNode(String s)
+    {
+        Map&lt;Character, Node&gt; children = root.children;
+
+        Node node = null;
+        for(char c : s.toCharArray())
+        {
+            node = children.get(c);
+            if(node != null)
+            {
+                children = node.children;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        return node;
+    }
+
+    public List&lt;String&gt; searchBFS(String prefix)
+    {
+        List&lt;String&gt; result = new ArrayList&lt;&gt;();
+        Map&lt;Character,Node&gt; children = root.children;
+
+        for(char c : prefix.toCharArray())
+        {
+            Node node = children.get(c);
+            if(node != null)
+            {
+                children = node.children;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+        Queue&lt;Pair&lt;String,Node&gt;&gt; queue = new LinkedList&lt;&gt;();
+        queue.addAll(children.entrySet().stream()
+                .map(e -&gt; Pair.of(prefix, e.getValue()))
+                .collect(Collectors.toList()));
+        while(!queue.isEmpty())
+        {
+            Pair&lt;String,Node&gt; pair = queue.poll();
+            String s = pair.getLeft();
+            Node node = pair.getRight();
+            if(node.isLeaf)
+            {
+                result.add(s + node.c);
+            }
+            children = node.children;
+            if(!children.isEmpty())
+            {
+                queue.addAll(children.entrySet().stream()
+                        .map(e -&gt; Pair.of(s + node.c, e.getValue()))
+                        .collect(Collectors.toList()));
+            }
+        }
+        return result;
+    }
+
+    public List&lt;String&gt; searchDFS(String prefix)
+    {
+        List&lt;String&gt; result = new ArrayList&lt;&gt;();
+
+        Map&lt;Character,Node&gt; children = root.children;
+        for(char c : prefix.toCharArray())
+        {
+            Node node = children.get(c);
+            if(node != null)
+            {
+                children = node.children;
+            }
+            else
+            {
+                return result;
+            }
+        }
+        searchDFS(result, prefix, children);
+        return result;
+    }
+
+    private void searchDFS(List&lt;String&gt; result, String prefix, Map&lt;Character, Node&gt; children)
+    {
+        if(children.isEmpty())
+        {
+            return;
+        }
+
+        for(Map.Entry&lt;Character,Node&gt; e : children.entrySet())
+        {
+            if(e.getValue().isLeaf)
+            {
+                result.add(prefix + e.getValue().c);
+            }
+            searchDFS(result, prefix + e.getValue().c, e.getValue().children);
+        }
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Trie trie = new Trie();
+    trie.insert(&quot;to&quot;);
+    trie.insert(&quot;tea&quot;);
+    trie.insert(&quot;ted&quot;);
+    trie.insert(&quot;ten&quot;);
+    trie.insert(&quot;teddy&quot;);
+    trie.insert(&quot;tenor&quot;);
+    boolean check = trie.search(&quot;to&quot;) &amp;&amp; trie.search(&quot;tea&quot;) &amp;&amp; trie.search(&quot;ten&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = !trie.search(&quot;te&quot;) &amp;&amp; !trie.search(&quot;teno&quot;) &amp;&amp; !trie.search(&quot;tedd&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    List&lt;String&gt; result = trie.searchDFS(&quot;te&quot;);
+    check = result.size() == 5;
+    if(!check)
+    {
+        return false;
+    }
+    check = result.contains(&quot;tea&quot;) &amp;&amp; result.contains(&quot;ted&quot;) &amp;&amp; result.contains(&quot;ten&quot;) &amp;
+            result.contains(&quot;teddy&quot;) &amp;&amp; result.contains(&quot;tenor&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    result = trie.searchBFS(&quot;te&quot;);
+    check = result.size() == 5;
+    if(!check)
+    {
+        return false;
+    }
+    check = result.contains(&quot;tea&quot;) &amp;&amp; result.contains(&quot;ted&quot;) &amp;&amp; result.contains(&quot;ten&quot;) &amp;&amp;
+            result.contains(&quot;teddy&quot;) &amp;&amp; result.contains(&quot;tenor&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p><br/></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

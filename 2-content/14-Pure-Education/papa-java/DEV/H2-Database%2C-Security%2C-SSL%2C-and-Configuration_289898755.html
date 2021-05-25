@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : H2 Database, Security, SSL, and Configuration</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Overrides_290029797.html">Overrides</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : H2 Database, Security, SSL, and Configuration
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Apr 19, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>We will start off with SoD Eligibility project and copy files required for Security, DataSource, SSL, and all files required to create in in-memory database.</p><h1 id="H2Database,Security,SSL,andConfiguration-pom.xmlDependencies">pom.xml Dependencies</h1><p>Note: During early phases of development, we would like to avoid using GS Security dependency because it precludes us from view H2 Console in the Browser. Thus, we will use standard security and enable GS Sercurity later on.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+&lt;dependencies&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+   &lt;/dependency&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-data-rest&lt;/artifactId&gt;
+   &lt;/dependency&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;com.h2database&lt;/groupId&gt;
+      &lt;artifactId&gt;h2&lt;/artifactId&gt;
+      &lt;scope&gt;runtime&lt;/scope&gt;
+   &lt;/dependency&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+   &lt;/dependency&gt;
+    &lt;!--
+     &lt;dependency&gt;
+         &lt;groupId&gt;com.gs.spring&lt;/groupId&gt;
+         &lt;artifactId&gt;gs-spring-boot-security&lt;/artifactId&gt;
+         &lt;version&gt;2.1.4&lt;/version&gt;
+     &lt;/dependency&gt;
+    --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-security-core&lt;/artifactId&gt;
+        &lt;version&gt;5.2.0.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;com.gs.opstech.common&lt;/groupId&gt;
+      &lt;artifactId&gt;gsknex-security&lt;/artifactId&gt;
+      &lt;version&gt;3.8.1&lt;/version&gt;
+   &lt;/dependency&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;com.gs.spring&lt;/groupId&gt;
+      &lt;artifactId&gt;gs-spring-boot-authenticator&lt;/artifactId&gt;
+      &lt;version&gt;2.1.4&lt;/version&gt;
+   &lt;/dependency&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;com.ibm.db2&lt;/groupId&gt;
+      &lt;artifactId&gt;db2jcc4&lt;/artifactId&gt;
+      &lt;version&gt;10.5.7.3.69.49&lt;/version&gt;
+   &lt;/dependency&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;com.gs.spring&lt;/groupId&gt;
+      &lt;artifactId&gt;gs-spring-boot-credential-vault&lt;/artifactId&gt;
+      &lt;version&gt;2.1.7&lt;/version&gt;
+   &lt;/dependency&gt;
+   &lt;dependency&gt;
+      &lt;groupId&gt;com.vaadin.external.google&lt;/groupId&gt;
+      &lt;artifactId&gt;android-json&lt;/artifactId&gt;
+      &lt;version&gt;RELEASE&lt;/version&gt;
+   &lt;/dependency&gt;
+&lt;/dependencies&gt;
+...</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h1 id="H2Database,Security,SSL,andConfiguration-application.propertiesHierarchy">application.properties Hierarchy</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">spring.jpa.show-sql=true
+spring.h2.console.enabled=true
+spring.datasource.url=jdbc:h2:mem:db
+
+spring.profiles.include=people
+
+
+spring.data.rest.defaultMediaType=application/json
+spring.jackson.default-property-inclusion=NON_NULL
+
+spring.jpa.properties.hibernate.jdbc.time_zone=UTC
+
+
+# Enable following 4 lines to generate DDL statements (dialect may not be required)
+#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.DB2Dialect
+#spring.jpa.properties.javax.persistence.schema-generation.create-source=metadata
+#spring.jpa.properties.javax.persistence.schema-generation.scripts.action=create
+#spring.jpa.properties.javax.persistence.schema-generation.scripts.create-target=create.sql
+
+#logging.level.org.springframework=debug</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">server.http.port=8081
+server.port=8443
+server.ssl.key-store-type=JKS
+server.ssl.key-store=classpath:sod-test.jks
+server.ssl.system.account.name=sod_build_test
+server.ssl.system.account.credref=9264f331180146bdb758b34369a76f95</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">spring.profiles.include=ssl</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">spring.profiles.include=ssl
+
+spring.jpa.properties.hibernate.default_schema=SOD_TEST2
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.DB2Dialect
+
+datasource.url=jdbc:db2://nyg13qi8-vip.ny.fw.gs.com:56834/ntrkdi02
+datasource.driver-class-name=com.ibm.db2.jcc.DB2Driver</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">peoplesearchByGuid.url=http://peoplesearch.web.gs.com:6119/GSPeopleSearch/GSPeopleSearch?gsguid=%s&amp;StrictSearch=true&amp;lang=json
+peoplesearchByKerberos.url=http://peoplesearch.web.gs.com:6119/GSPeopleSearch/GSPeopleSearch?kerberos=%s&amp;lang=json
+
+datasource.system.account.credref=d0276c30462d4e3c99d7fc2be92a8c69</pre>
+</div></div></td></tr></tbody></table></div><h1 id="H2Database,Security,SSL,andConfiguration-Security">Security</h1><p>As noted earlier, we will disable GS Security until a later point in development.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Configuration
+@EnableJpaAuditing(auditorAwareRef = &quot;auditorAware&quot;)
+public class JpaConfig
+{
+    @Bean
+    public AuditorAware&lt;String&gt; auditorAware()
+    {
+        return new AuditorAwareImpl();
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class AuditorAwareImpl implements AuditorAware&lt;String&gt;
+{
+    @Override
+    public Optional&lt;String&gt; getCurrentAuditor()
+    {
+        //return Optional.of(SecurityContextHolder.getContext().getAuthentication().getName());
+        return Optional.of(System.getProperty(&quot;user.name&quot;));
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="H2Database,Security,SSL,andConfiguration-DataSource(forDB2Configurations)">Data Source (for DB2 Configurations)</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Configuration
+@Profile({&quot;db2&quot;})
+public class DataSourceConfig
+{
+    @Value(&quot;${datasource.driver-class-name}&quot;)
+    String dataSourceDriverClass;
+
+    @Value(&quot;${datasource.url}&quot;)
+    String dataSourceUrl;
+
+    @Value(&quot;${datasource.system.account.credref}&quot;)
+    String credRef;
+
+    @Bean
+    public DataSource getDataSource()
+    {
+        CredentialLookUp&lt;SystemAccount&gt; credentialLookUp = new CredentialLookUp&lt;&gt;();
+        SystemAccount systemAccount = credentialLookUp.getCredentialObject(credRef);
+        String systemAccountPassword = systemAccount.getPassword();
+        String systemAccountName = systemAccount.getAccountName();
+        String[] systemAccountParts = systemAccountName.split(&quot;\\\\&quot;);
+        return DataSourceBuilder
+                .create()
+                .username(systemAccountParts[1])
+                .password(systemAccountPassword)
+                .url(dataSourceUrl)
+                .driverClassName(dataSourceDriverClass)
+                .build();
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="H2Database,Security,SSL,andConfiguration-SSL(UseHTTPandHTTPS)"><br/>SSL (Use HTTP and HTTPS)</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Component
+@Profile({&quot;h2&quot;, &quot;db2&quot;})
+public class SSLConfig implements WebServerFactoryCustomizer&lt;ConfigurableServletWebServerFactory&gt;
+{
+    @Value(&quot;${server.ssl.key-store}&quot;)
+    private  String keyStore;
+
+    @Value(&quot;${server.ssl.key-store-type}&quot;)
+    private  String keyStoreType;
+
+    @Value(&quot;${server.ssl.system.account.credref}&quot;)
+    String credRef;
+
+    @Value(&quot;${server.ssl.system.account.name}&quot;)
+    String systemAccountName;
+
+    @Override
+    public void customize(ConfigurableServletWebServerFactory serverFactory)
+    {
+        CredentialLookUp&lt;SystemAccount&gt; credentialLookUp = new CredentialLookUp&lt;&gt;();
+        SystemAccount systemAccount = credentialLookUp.getCredentialObject(credRef);
+        String password = systemAccount.getPassword();
+
+        Ssl ssl = new Ssl();
+        ssl.setKeyStore(keyStore);
+        ssl.setKeyStoreType(keyStoreType);
+        ssl.setKeyPassword(password);
+        ssl.setKeyStorePassword(password);
+        serverFactory.setSsl(ssl);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Component
+@Profile({&quot;h2&quot;, &quot;db2&quot;})
+public class HttpServer
+{
+    @Bean
+    public ServletWebServerFactory servletContainer(@Value(&quot;${server.http.port}&quot;) int httpPort)
+    {
+        Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
+        connector.setPort(httpPort);
+
+        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
+        tomcat.addAdditionalTomcatConnectors(connector);
+        return tomcat;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p>Add <code>sod-test.jks</code> file under <code>resources</code> directory</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/plugins/servlet/view-file-macro/placeholder?type=unknown&amp;name=sod-test.jks&amp;attachmentId=647077908&amp;version=1&amp;mimeType=application%2Foctet-stream&amp;height=250" data-image-src="https://confluence.apg.services.gs.com/plugins/servlet/view-file-macro/placeholder?type=unknown&amp;name=sod-test.jks&amp;attachmentId=647077908&amp;version=1&amp;mimeType=application%2Foctet-stream&amp;height=250" loading="lazy"></span><h1 id="H2Database,Security,SSL,andConfiguration-In-MemoryDatabase">In-Memory Database</h1><p>Create Privileges, Duties, Rules, and corresponding mapping objects.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">-- PRIVILEGES - Assigned
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, &#39;PA-1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, &#39;PA-2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, &#39;PA-3&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, &#39;PB-1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, &#39;PB-2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(6, &#39;0006&#39;, &#39;PB-3&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(7, &#39;0007&#39;, &#39;PC-1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(8, &#39;0008&#39;, &#39;PC-2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(9, &#39;0009&#39;, &#39;PX-1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(10, &#39;0010&#39;, &#39;PX-2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(11, &#39;0011&#39;, &#39;PX-3&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(12, &#39;0012&#39;, &#39;PX-4&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(13, &#39;0013&#39;, &#39;PY-1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(14, &#39;0014&#39;, &#39;PY-2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(15, &#39;0015&#39;, &#39;PY-3&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+-- PRIVILEGES - Available
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(16, &#39;0016&#39;, &#39;PA-4&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(17, &#39;0017&#39;, &#39;PA-5&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(18, &#39;0018&#39;, &#39;PA-6&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(19, &#39;0019&#39;, &#39;PB-4&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(20, &#39;0020&#39;, &#39;PB-5&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(21, &#39;0021&#39;, &#39;PB-6&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(22, &#39;0022&#39;, &#39;PC-3&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(23, &#39;0023&#39;, &#39;PC-4&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(24, &#39;0024&#39;, &#39;PC-5&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(25, &#39;0025&#39;, &#39;PC-6&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(26, &#39;0026&#39;, &#39;PX-5&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(27, &#39;0027&#39;, &#39;PX-6&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(28, &#39;0028&#39;, &#39;PY-4&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(29, &#39;0029&#39;, &#39;PY-5&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(30, &#39;0030&#39;, &#39;PY-6&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+
+-- DUTIES
+INSERT INTO DUTY(ID, BI_TEMPORAL_ID, DUTY_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, &#39;Duty-A&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, BI_TEMPORAL_ID, DUTY_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, &#39;Duty-B&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, BI_TEMPORAL_ID, DUTY_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, &#39;Duty-C&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, BI_TEMPORAL_ID, DUTY_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, &#39;Duty-X&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, BI_TEMPORAL_ID, DUTY_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, &#39;Duty-Y&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, BI_TEMPORAL_ID, DUTY_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(6, &#39;0006&#39;, &#39;Duty-Z&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+
+
+-- RULES
+INSERT INTO RULE(ID, BI_TEMPORAL_ID, RULE_NAME, RULE_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, &#39;Rule-AB&#39;, &#39;Segregation&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE(ID, BI_TEMPORAL_ID, RULE_NAME, RULE_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, &#39;Rule-XY&#39;, &#39;Segregation&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+
+-- DUTY_RULE_MAP
+INSERT INTO DUTY_RULE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, 1, 1, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_RULE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, 2, 1, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_RULE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, 4, 2, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_RULE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, 5, 2, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+
+--  DUTY_PRIVILEGE_MAP
+--  Duty-A - Assigned
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, 1, 1, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, 1, 2, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, 1, 3, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  Duty-A - Unassigned
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, 1, 16, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, 1, 17, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(6, &#39;0006&#39;, 1, 18, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  Duty-B - Assigned
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(7, &#39;0007&#39;, 2, 4, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(8, &#39;0008&#39;, 2, 5, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(9, &#39;0009&#39;, 2, 6, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  Duty-B - Unassigned
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(10, &#39;0010&#39;, 2, 19, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(11, &#39;0011&#39;, 2, 20, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(12, &#39;0012&#39;, 2, 21, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  Duty-C - Assigned
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(13, &#39;0013&#39;, 3, 7, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(14, &#39;0014&#39;, 3, 8, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  Duty-C - Inassigned
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(15, &#39;0015&#39;, 3, 22, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(16, &#39;0016&#39;, 3, 23, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(17, &#39;0017&#39;, 3, 24, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(18, &#39;0018&#39;, 3, 25, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  Duty-X - Assigned
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(19, &#39;0019&#39;, 4, 9, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(20, &#39;0020&#39;, 4, 10, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(21, &#39;0021&#39;, 4, 11, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(22, &#39;0022&#39;, 4, 12, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  Duty-X - Unassigned
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(23, &#39;0023&#39;, 4, 26, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(24, &#39;0024&#39;, 4, 27, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  Duty-Y - Assigned
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(25, &#39;0025&#39;, 5, 13, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(26, &#39;0026&#39;, 5, 14, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(27, &#39;0027&#39;, 5, 15, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  Duty-Y - Unassigned
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(28, &#39;0028&#39;, 5, 28, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(29, &#39;0029&#39;, 5, 29, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(30, &#39;0030&#39;, 5, 30, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+
+-- USERS
+INSERT INTO USER(ID, BI_TEMPORAL_ID, USER_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, &#39;A&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER(ID, BI_TEMPORAL_ID, USER_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, &#39;B&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER(ID, BI_TEMPORAL_ID, USER_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, &#39;C&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER(ID, BI_TEMPORAL_ID, USER_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, &#39;X&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER(ID, BI_TEMPORAL_ID, USER_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, &#39;Y&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+
+-- USER_PRIVILEGE
+--  A
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, 1, 1, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, 1, 2, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, 1, 3, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  B
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, 2, 4, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, 2, 5, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(6, &#39;0006&#39;, 2, 6, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  C
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(7, &#39;0007&#39;, 3, 7, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(8, &#39;0008&#39;, 3, 8, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  X
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(9, &#39;0009&#39;, 4, 9, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(10, &#39;0010&#39;, 4, 10, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(11, &#39;0011&#39;, 4, 11, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(12, &#39;0012&#39;, 4, 12, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--  Y
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(13, &#39;0013&#39;, 5, 13, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(14, &#39;0014&#39;, 5, 14, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(15, &#39;0015&#39;, 5, 15, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+
+--SEQUENCE
+alter sequence HIBERNATE_SEQUENCE restart with 100</pre>
+</div></div></td></tr></tbody></table></div><h3 id="H2Database,Security,SSL,andConfiguration-EntityObjects">Entity Objects</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public class BaseEntity extends ResourceSupport
+{
+
+    public static ZonedDateTime DATE_INFINITY = ZonedDateTime.parse(&quot;9999-12-31T00:00:00Z&quot;);
+
+    @Column(name = &quot;in_utc&quot;, nullable = false, updatable = false)
+    @CreatedDate
+    //@JsonIgnore
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date inUtc;
+
+    @Column(name = &quot;out_utc&quot;)
+    private ZonedDateTime outUtc = DATE_INFINITY;
+
+    @CreatedBy
+    //@JsonIgnore
+    @Column(name = &quot;created_by&quot;)
+    private String createdBy;
+
+    @LastModifiedBy
+    //@JsonIgnore
+    @Column(name = &quot;last_modified_by&quot;)
+    private String lastModifiedBy;
+
+
+    public Date getInUtc()
+    {
+        return inUtc;
+    }
+
+    public void setInUtc(Date inUtc)
+    {
+        this.inUtc = inUtc;
+    }
+
+    public ZonedDateTime getOutUtc()
+    {
+        return outUtc;
+    }
+
+    public void setOutUtc(ZonedDateTime outUtc)
+    {
+        this.outUtc = outUtc;
+    }
+
+    public String getCreatedBy()
+    {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy)
+    {
+        this.createdBy = createdBy;
+    }
+
+    public String getLastModifiedBy()
+    {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy)
+    {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = &quot;DUTY&quot;,
+        uniqueConstraints={
+                @UniqueConstraint(columnNames = {&quot;biTemporalId&quot;, &quot;out_utc&quot;})
+        })
+public class Duty extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String biTemporalId = UUID.randomUUID().toString();
+    private String dutyName;
+
+    @OneToMany(mappedBy = &quot;duty&quot;)
+    private List&lt;DutyRulePair&gt; dutyRulePair = new ArrayList&lt;&gt;();
+
+    @OneToMany(mappedBy = &quot;duty&quot;)
+    private List&lt;DutyPrivilegePair&gt; dutyPrivilegePair = new ArrayList&lt;&gt;();
+
+    //  Copy constructor to create Audit Trail
+    public Duty(Duty other)
+    {
+        super();
+        this.biTemporalId = other.biTemporalId;
+        this.dutyName = other.dutyName;
+        this.setOutUtc(ZonedDateTime.now());
+    }
+
+    public Duty()
+    {
+        super();
+    }
+
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getBiTemporalId()
+    {
+        return biTemporalId;
+    }
+
+    public void setBiTemporalId(String biTemporalId)
+    {
+        this.biTemporalId = biTemporalId;
+    }
+
+    public String getDutyName()
+    {
+        return dutyName;
+    }
+
+    public void setDutyName(String dutyName)
+    {
+        this.dutyName = dutyName;
+    }
+
+    public List&lt;DutyRulePair&gt; getDutyRulePair()
+    {
+        return dutyRulePair;
+    }
+
+    public void setDutyRulePair(List&lt;DutyRulePair&gt; dutyRulePair)
+    {
+        this.dutyRulePair = dutyRulePair;
+    }
+
+    public void addDutyRuleMap(DutyRulePair dutyRulePair)
+    {
+        this.dutyRulePair.add(dutyRulePair);
+    }
+
+    public void removeDutyRuleMap(DutyRulePair dutyRulePair)
+    {
+        this.dutyRulePair.remove(dutyRulePair);
+    }
+
+    public List&lt;DutyPrivilegePair&gt; getDutyPrivilegePair()
+    {
+        return dutyPrivilegePair;
+    }
+
+    public void setDutyPrivilegePair(List&lt;DutyPrivilegePair&gt; dutyPrivilegePair)
+    {
+        this.dutyPrivilegePair = dutyPrivilegePair;
+    }
+
+    public void addDutyPrivilegeMap(DutyPrivilegePair dutyPrivilegePair)
+    {
+        this.dutyPrivilegePair.add(dutyPrivilegePair);
+    }
+
+    public void removeDutyPrivilegeMap(DutyPrivilegePair dutyPrivilegePair)
+    {
+        this.dutyPrivilegePair.remove(dutyPrivilegePair);
+    }
+
+    @Override
+    public String toString()
+    {
+        return &quot;Duty{&quot; +
+                &quot;ID=&quot; + ID +
+                &quot;, biTemporalId=&#39;&quot; + biTemporalId + &#39;\&#39;&#39; +
+                &quot;, dutyName=&#39;&quot; + dutyName + &#39;\&#39;&#39; +
+                &#39;}&#39;;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Duty duty = (Duty) o;
+        return ID == duty.ID &amp;&amp;
+                Objects.equals(biTemporalId, duty.biTemporalId) &amp;&amp;
+                Objects.equals(dutyName, duty.dutyName);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), ID, biTemporalId, dutyName);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = &quot;PRIVILEGE&quot;,
+        uniqueConstraints={
+                @UniqueConstraint(columnNames = {&quot;biTemporalId&quot;, &quot;out_utc&quot;})
+        })
+public class Privilege extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String biTemporalId = UUID.randomUUID().toString();
+    private String privilegeName;
+    @OneToMany(mappedBy = &quot;privilege&quot;)
+    private List&lt;DutyPrivilegePair&gt; dutyPrivilegePair = new ArrayList&lt;&gt;();
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getBiTemporalId()
+    {
+        return biTemporalId;
+    }
+
+    public void setBiTemporalId(String biTemporalId)
+    {
+        this.biTemporalId = biTemporalId;
+    }
+
+    public String getPrivilegeName()
+    {
+        return privilegeName;
+    }
+
+    public void setPrivilegeName(String privilegeName)
+    {
+        this.privilegeName = privilegeName;
+    }
+
+    public List&lt;DutyPrivilegePair&gt; getDutyPrivilegePair()
+    {
+        return dutyPrivilegePair;
+    }
+
+    public void setDutyPrivilegePair(List&lt;DutyPrivilegePair&gt; dutyPrivilegePair)
+    {
+        this.dutyPrivilegePair = dutyPrivilegePair;
+    }
+
+    public void addDutyPrivilegeMap(DutyPrivilegePair dutyPrivilegePair)
+    {
+        this.dutyPrivilegePair.add(dutyPrivilegePair);
+    }
+
+    public void removeDutyPrivilegeMap(DutyPrivilegePair dutyPrivilegePair)
+    {
+        this.dutyPrivilegePair.remove(dutyPrivilegePair);
+    }
+
+    
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Privilege privilege = (Privilege) o;
+        return ID == privilege.ID &amp;&amp;
+                Objects.equals(biTemporalId, privilege.biTemporalId) &amp;&amp;
+                Objects.equals(privilegeName, privilege.privilegeName);
+    }
+
+    @Override
+    public int hashCode()
+    {
+
+        return Objects.hash(super.hashCode(), ID, biTemporalId, privilegeName);
+    }
+
+    @Override
+    public String toString()
+    {
+        return &quot;Privilege{&quot; +
+                &quot;ID=&quot; + ID +
+                &quot;, biTemporalId=&#39;&quot; + biTemporalId + &#39;\&#39;&#39; +
+                &quot;, privilegeName=&#39;&quot; + privilegeName + &#39;\&#39;&#39; +
+                &#39;}&#39;;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = &quot;RULE&quot;,
+        uniqueConstraints={
+                @UniqueConstraint(columnNames = {&quot;biTemporalId&quot;, &quot;out_utc&quot;})
+        })
+public class Rule extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String biTemporalId = UUID.randomUUID().toString();
+    private String ruleName;
+    private String ruleType;
+
+    @OneToMany(mappedBy = &quot;rule&quot;)
+    private List&lt;DutyRulePair&gt; dutyRulePair = new ArrayList&lt;&gt;();
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getBiTemporalId()
+    {
+        return biTemporalId;
+    }
+
+    public void setBiTemporalId(String biTemporalId)
+    {
+        this.biTemporalId = biTemporalId;
+    }
+
+    public String getRuleName()
+    {
+        return ruleName;
+    }
+
+    public void setRuleName(String ruleName)
+    {
+        this.ruleName = ruleName;
+    }
+
+    public String getRuleType()
+    {
+        return ruleType;
+    }
+
+    public void setRuleType(String ruleType)
+    {
+        this.ruleType = ruleType;
+    }
+
+     public List&lt;DutyRulePair&gt; getDutyRulePair()
+    {
+        return dutyRulePair;
+    }
+
+    public void setDutyRulePair(List&lt;DutyRulePair&gt; dutyRulePair)
+    {
+        this.dutyRulePair = dutyRulePair;
+    }
+
+    public void addDutyRuleMap(DutyRulePair dutyRulePair)
+    {
+        this.dutyRulePair.add(dutyRulePair);
+    }
+
+    public void removeDutyRuleMap(DutyRulePair dutyRulePair)
+    {
+        this.dutyRulePair.remove(dutyRulePair);
+    }
+
+    @Override
+    public String toString()
+    {
+        return &quot;Rule{&quot; +
+                &quot;ID=&quot; + ID +
+                &quot;, biTemporalId=&#39;&quot; + biTemporalId + &#39;\&#39;&#39; +
+                &quot;, name=&#39;&quot; + ruleName + &#39;\&#39;&#39; +
+                &quot;, type=&#39;&quot; + ruleType + &#39;\&#39;&#39; +
+                &#39;}&#39;;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Rule rule = (Rule) o;
+        return ID == rule.ID &amp;&amp;
+                Objects.equals(biTemporalId, rule.biTemporalId) &amp;&amp;
+                Objects.equals(ruleName, rule.ruleName) &amp;&amp;
+                Objects.equals(ruleType, rule.ruleType);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), ID, biTemporalId, ruleName, ruleType);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = &quot;DUTY_PRIVILEGE_MAP&quot;,
+        uniqueConstraints={
+        @UniqueConstraint(columnNames = {&quot;biTemporalId&quot;, &quot;out_utc&quot;})
+})
+public class DutyPrivilegePair extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String biTemporalId = UUID.randomUUID().toString();
+    @ManyToOne
+    @JoinColumn(name = &quot;duty_id&quot;)
+    private Duty duty;
+    @ManyToOne
+    @JoinColumn(name = &quot;privilege_id&quot;)
+    private Privilege privilege;
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getBiTemporalId()
+    {
+        return biTemporalId;
+    }
+
+    public void setBiTemporalId(String biTemporalId)
+    {
+        this.biTemporalId = biTemporalId;
+    }
+
+    public Duty getDuty()
+    {
+        return duty;
+    }
+
+    public void setDuty(Duty duty)
+    {
+        this.duty = duty;
+    }
+
+    public Privilege getPrivilege()
+    {
+        return privilege;
+    }
+
+    public void setPrivilege(Privilege privilege)
+    {
+        this.privilege = privilege;
+    }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        DutyPrivilegePair that = (DutyPrivilegePair) o;
+        return ID == that.ID &amp;&amp;
+                Objects.equals(biTemporalId, that.biTemporalId) &amp;&amp;
+                Objects.equals(duty, that.duty) &amp;&amp;
+                Objects.equals(privilege, that.privilege);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), ID, biTemporalId, duty, privilege);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(name = &quot;DUTY_RULE_MAP&quot;,
+        uniqueConstraints={
+                @UniqueConstraint(columnNames = {&quot;biTemporalId&quot;, &quot;out_utc&quot;})
+        })
+public class DutyRulePair extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String biTemporalId = UUID.randomUUID().toString();
+    @ManyToOne
+    @JoinColumn(name = &quot;duty_id&quot;)
+    private Duty duty;
+    @ManyToOne
+    @JoinColumn(name = &quot;rule_id&quot;)
+    private Rule rule;
+
+    public DutyRulePair(Duty duty, Rule rule)
+    {
+        this.duty = duty;
+        this.rule = rule;
+    }
+
+    protected DutyRulePair()
+    {}
+
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getBiTemporalId()
+    {
+        return biTemporalId;
+    }
+
+    public void setBiTemporalId(String biTemporalId)
+    {
+        this.biTemporalId = biTemporalId;
+    }
+
+    public Duty getDuty()
+    {
+        return duty;
+    }
+
+    public void setDuty(Duty duty)
+    {
+        this.duty = duty;
+    }
+
+    public Rule getRule()
+    {
+        return rule;
+    }
+
+    public void setRule(Rule rule)
+    {
+        this.rule = rule;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        DutyRulePair that = (DutyRulePair) o;
+        return Objects.equals(duty, that.duty) &amp;&amp;
+                Objects.equals(rule, that.rule);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), duty, rule);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = &quot;USER&quot;,
+        uniqueConstraints={
+                @UniqueConstraint(columnNames = {&quot;biTemporalId&quot;, &quot;out_utc&quot;})
+        })
+public class User extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String biTemporalId = UUID.randomUUID().toString();
+    private String userName;
+    @OneToMany(mappedBy = &quot;user&quot;)
+    private List&lt;UserPrivilegePair&gt; userPrivilegePair = new ArrayList&lt;&gt;();
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getBiTemporalId()
+    {
+        return biTemporalId;
+    }
+
+    public void setBiTemporalId(String biTemporalId)
+    {
+        this.biTemporalId = biTemporalId;
+    }
+
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    public void setUserName(String userName)
+    {
+        this.userName = userName;
+    }
+
+     @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        User user = (User) o;
+        return ID == user.ID &amp;&amp;
+                Objects.equals(biTemporalId, user.biTemporalId) &amp;&amp;
+                Objects.equals(userName, user.userName);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), ID, biTemporalId, userName);
+    }
+
+    @Override
+    public String toString()
+    {
+        return &quot;User{&quot; +
+                &quot;ID=&quot; + ID +
+                &quot;, biTemporalId=&#39;&quot; + biTemporalId + &#39;\&#39;&#39; +
+                &quot;, name=&#39;&quot; + userName + &#39;\&#39;&#39; +
+                &#39;}&#39;;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = &quot;USER_PRIVILEGE_MAP&quot;,
+        uniqueConstraints={
+                @UniqueConstraint(columnNames = {&quot;biTemporalId&quot;, &quot;out_utc&quot;})
+        })
+public class UserPrivilegePair extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String biTemporalId = UUID.randomUUID().toString();
+    @ManyToOne
+    @JoinColumn(name = &quot;user_id&quot;)
+    private User user;
+    @ManyToOne
+    @JoinColumn(name = &quot;privilege_id&quot;)
+    private Privilege privilege;
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getBiTemporalId()
+    {
+        return biTemporalId;
+    }
+
+    public void setBiTemporalId(String biTemporalId)
+    {
+        this.biTemporalId = biTemporalId;
+    }
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
+
+    public Privilege getPrivilege()
+    {
+        return privilege;
+    }
+
+    public void setPrivilege(Privilege privilege)
+    {
+        this.privilege = privilege;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        UserPrivilegePair that = (UserPrivilegePair) o;
+        return ID == that.ID &amp;&amp;
+                Objects.equals(biTemporalId, that.biTemporalId) &amp;&amp;
+                Objects.equals(user, that.user) &amp;&amp;
+                Objects.equals(privilege, that.privilege);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), ID, biTemporalId, user, privilege);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="H2Database,Security,SSL,andConfiguration-RepositoryObjects">Repository Objects</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public interface PrivilegeRepository extends JpaRepository&lt;Privilege, Integer&gt;
+{
+    @Query(&quot;select p from Privilege p where p.ID = :id and p.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    Optional&lt;Privilege&gt; findById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select p from Privilege p where p.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Privilege&gt; findAll();
+}
+
+
+</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public interface DutyRepository extends JpaRepository&lt;Duty, Integer&gt;
+{
+    @Query(&quot;select d from Duty d where d.ID = :id and d.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    Optional&lt;Duty&gt; findById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select d from Duty d where d.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Duty&gt; findAll();
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public interface RuleRepository extends JpaRepository&lt;Rule, Integer&gt;
+{
+    @Query(&quot;select r from Rule r where r.ID = :id and r.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    Optional&lt;Rule&gt; findById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select r from Rule r where r.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Rule&gt; findAll();
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public interface DutyPrivilegeMapRepository extends JpaRepository&lt;DutyPrivilegePair, Integer&gt;
+{
+    @Query(&quot;select m from DutyPrivilegePair m where DUTY_ID = :id and m.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;DutyPrivilegePair&gt; findByDutyId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select m from DutyPrivilegePair m where PRIVILEGE_ID = :id and m.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;DutyPrivilegePair&gt; findByPrivilegeId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select m from DutyPrivilegePair m where m.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;DutyPrivilegePair&gt; findAll();
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public interface DutyPrivilegeMapRepository extends JpaRepository&lt;DutyPrivilegePair, Integer&gt;
+{
+    @Query(&quot;select m from DutyPrivilegePair m where DUTY_ID = :id and m.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;DutyPrivilegePair&gt; findByDutyId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select m from DutyPrivilegePair m where PRIVILEGE_ID = :id and m.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;DutyPrivilegePair&gt; findByPrivilegeId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select m from DutyPrivilegePair m where m.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;DutyPrivilegePair&gt; findAll();
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public interface UserRepository extends JpaRepository&lt;User, Integer&gt;
+{
+    @Query(&quot;select u from User u where u.ID = :id and u.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    Optional&lt;User&gt; findById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select u from User u where u.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;User&gt; findAll();
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public interface UserPrivilegeMapRepository extends JpaRepository&lt;UserPrivilegePair, Integer&gt;
+{
+    @Query(&quot;select m from UserPrivilegePair m where USER_ID = :id and m.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;UserPrivilegePair&gt; findByUserId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select m from UserPrivilegePair m where PRIVILEGE_ID = :id and m.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;UserPrivilegePair&gt; findByPrivilegeId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select m from UserPrivilegePair m where m.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;UserPrivilegePair&gt; findAll();
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="H2Database,Security,SSL,andConfiguration-TestIn-MemoryDatabasewithHTTPandHTTPSRequests">Test In-Memory Database with HTTP and HTTPS Requests</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Request</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p><br/></p><p><a href="http://localhost:8081/h2-console" class="external-link" rel="nofollow">http://localhost:8081/h2-console</a><a href="https://localhost:8443/h2-console" class="external-link" rel="nofollow">https://localhost:8443/h2-console</a></p><p><br/></p></td><td class="confluenceTd"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/647077824/image2019-12-10_12-38-44.png?version=1&amp;modificationDate=1575999524535&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/647077824/image2019-12-10_12-38-44.png?version=1&amp;modificationDate=1575999524535&amp;api=v2" loading="lazy"></span></td></tr></tbody></table></div><p><br/></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

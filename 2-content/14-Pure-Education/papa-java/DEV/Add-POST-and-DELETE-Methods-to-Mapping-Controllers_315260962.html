@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Add POST and DELETE Methods to Mapping Controllers</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Project-Profit-Application_315097089.html">Project Profit Application</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Add POST and DELETE Methods to Mapping Controllers
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 28, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Mapping entity controllers, such as <code>ProjectEmployeeMapController</code> and <code>EmployeeSubscriptionMapController</code> should support 4 methods: GET-ALL, GET-ONE, POST, and DELETE.</p><h1 id="AddPOSTandDELETEMethodstoMappingControllers-ModifyMappingEntityclassestoaddconstructors">Modify Mapping Entity classes to add constructors</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(name = &quot;EMPLOYEE_SUBSCRIPTION_MAP&quot;)
+public class EmployeeSubscriptionPair
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    @ManyToOne
+    @JoinColumn(name = &quot;employee_id&quot;)
+    private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = &quot;subscription_id&quot;)
+    private Subscription subscription;
+
+    public EmployeeSubscriptionPair(Employee employee, Subscription subscription)
+    {
+        this.employee = employee;
+        this.subscription = subscription;
+    }
+
+    private EmployeeSubscriptionPair()
+    {
+    }
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public Employee getEmployee()
+    {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee)
+    {
+        this.employee = employee;
+    }
+
+    public Subscription getSubscription()
+    {
+        return subscription;
+    }
+
+    public void setSubscription(Subscription subscription)
+    {
+        this.subscription = subscription;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(name = &quot;PROJECT_EMPLOYEE_MAP&quot;)
+public class ProjectEmployeePair
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    @ManyToOne
+    @JoinColumn(name = &quot;project_id&quot;)
+    private Project project;
+    @ManyToOne
+    @JoinColumn(name = &quot;employee_id&quot;)
+    private Employee employee;
+
+    public ProjectEmployeePair(Project project, Employee employee)
+    {
+        this.project = project;
+        this.employee = employee;
+    }
+
+    public ProjectEmployeePair()
+    {
+    }
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public Project getProject()
+    {
+        return project;
+    }
+
+    public void setProject(Project project)
+    {
+        this.project = project;
+    }
+
+    public Employee getEmployee()
+    {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee)
+    {
+        this.employee = employee;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="AddPOSTandDELETEMethodstoMappingControllers-Note:">Note:</h3><p>Must also define default constructor</p><h1 id="AddPOSTandDELETEMethodstoMappingControllers-Modifyentityobjectstoadd@OneToManyfields">Modify entity objects to add @OneToMany fields</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+public class Employee
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String employeeCode;
+    private String employeeName;
+    @JsonIgnore
+    @OneToMany(mappedBy = &quot;employee&quot;)
+    private List&lt;ProjectEmployeePair&gt; projectEmployeePairs = new ArrayList&lt;&gt;();
+    @JsonIgnore
+    @OneToMany(mappedBy = &quot;employee&quot;)
+    private List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = new ArrayList&lt;&gt;();
+
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getEmployeeCode()
+    {
+        return employeeCode;
+    }
+
+    public void setEmployeeCode(String employeeCode)
+    {
+        this.employeeCode = employeeCode;
+    }
+
+    public String getEmployeeName()
+    {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName)
+    {
+        this.employeeName = employeeName;
+    }
+
+    public List&lt;ProjectEmployeePair&gt; getProjectEmployeePairs()
+    {
+        return projectEmployeePairs;
+    }
+
+    public void setProjectEmployeePairs(List&lt;ProjectEmployeePair&gt; projectEmployeePairs)
+    {
+        this.projectEmployeePairs = projectEmployeePairs;
+    }
+
+    public List&lt;EmployeeSubscriptionPair&gt; getEmployeeSubscriptionPairs()
+    {
+        return employeeSubscriptionPairs;
+    }
+
+    public void setEmployeeSubscriptionPairs(List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs)
+    {
+        this.employeeSubscriptionPairs = employeeSubscriptionPairs;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+public class Project
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String projectName;
+    private String projectDescription;
+    @JsonIgnore
+    @OneToMany(mappedBy = &quot;project&quot;)
+    private List&lt;ProjectEmployeePair&gt; projectEmployeePairs = new ArrayList&lt;&gt;();
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getProjectName()
+    {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName)
+    {
+        this.projectName = projectName;
+    }
+
+    public String getProjectDescription()
+    {
+        return projectDescription;
+    }
+
+    public void setProjectDescription(String projectDescription)
+    {
+        this.projectDescription = projectDescription;
+    }
+
+    public List&lt;ProjectEmployeePair&gt; getProjectEmployeePairs()
+    {
+        return projectEmployeePairs;
+    }
+
+    public void setProjectEmployeePairs(List&lt;ProjectEmployeePair&gt; projectEmployeePairs)
+    {
+        this.projectEmployeePairs = projectEmployeePairs;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+public class Subscription
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String subscriptionCode;
+    private String subscriptionName;
+    @JsonIgnore
+    @OneToMany(mappedBy = &quot;subscription&quot;)
+    private List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = new ArrayList&lt;&gt;();
+
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getSubscriptionCode()
+    {
+        return subscriptionCode;
+    }
+
+    public void setSubscriptionCode(String subscriptionCode)
+    {
+        this.subscriptionCode = subscriptionCode;
+    }
+
+    public String getSubscriptionName()
+    {
+        return subscriptionName;
+    }
+
+    public void setSubscriptionName(String subscriptionName)
+    {
+        this.subscriptionName = subscriptionName;
+    }
+
+    public List&lt;EmployeeSubscriptionPair&gt; getEmployeeSubscriptionPairs()
+    {
+        return employeeSubscriptionPairs;
+    }
+
+    public void setEmployeeSubscriptionPairs(List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs)
+    {
+        this.employeeSubscriptionPairs = employeeSubscriptionPairs;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="AddPOSTandDELETEMethodstoMappingControllers-Note:.1">Note:</h3><p>Must add @JsonIgnore for @OneToMany fields to be able to return from API calls.</p><h1 id="AddPOSTandDELETEMethodstoMappingControllers-Addnewexceptionclass">Add new exception class</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@ResponseStatus(HttpStatus.NOT_MODIFIED)
+public class AlreadyExistsException  extends RuntimeException
+{
+    public AlreadyExistsException(String message)
+    {
+        super(message);
+    }
+}
+
+
+@ControllerAdvice
+@RestController
+public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler
+{
+...
+   @ExceptionHandler(AlreadyExistsException.class)
+   public final ResponseEntity&lt;Object&gt; handleAlreadyExistsException(AlreadyExistsException ex, WebRequest request)
+   {
+       ExceptionResponse exceptionResponse = new ExceptionResponse(ZonedDateTime.now(), ex.getMessage(),
+               request.getDescription(false));
+       return new ResponseEntity(exceptionResponse, HttpStatus.NOT_MODIFIED);
+   }
+...
+
+</pre>
+</div></div></td></tr></tbody></table></div><h1 id="AddPOSTandDELETEMethodstoMappingControllers-Addmethodstorepositoryclasses">Add methods to repository classes</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public interface EmployeeSubscriptionMapRepository extends JpaRepository&lt;EmployeeSubscriptionPair, Integer&gt;
+{
+    @Query(&quot;select p from EmployeeSubscriptionPair p where EMPLOYEE_ID = :id&quot;)
+    List&lt;EmployeeSubscriptionPair&gt; findByEmployeeId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select p from EmployeeSubscriptionPair p where p.subscription.ID = :id&quot;)
+    List&lt;EmployeeSubscriptionPair&gt; findBySubscriptionId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select p from EmployeeSubscriptionPair p where EMPLOYEE_ID = :employeeId and SUBSCRIPTION_ID = :subscriptionId&quot;)
+    Optional&lt;EmployeeSubscriptionPair&gt; findByEmployeeIdSubscriptionId(@Param(&quot;employeeId&quot;) int employeeId, @Param(&quot;subscriptionId&quot;) int subscriptionId);
+}
+
+
+public interface ProjectEmployeeMapRepository extends JpaRepository&lt;ProjectEmployeePair, Integer&gt;
+{
+    @Query(&quot;select p from ProjectEmployeePair p where PROJECT_ID = :id&quot;)
+    List&lt;ProjectEmployeePair&gt; findByProjectId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select p from ProjectEmployeePair p where p.employee.ID = :id&quot;)
+    List&lt;ProjectEmployeePair&gt; findByEmployeeId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select p from ProjectEmployeePair p where PROJECT_ID = :projectId and EMPLOYEE_ID = :employeeId&quot;)
+    Optional&lt;ProjectEmployeePair&gt; findByProjectIdEmployeeId(@Param(&quot;projectId&quot;) int projectId, @Param(&quot;employeeId&quot;) int employeeId);
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="AddPOSTandDELETEMethodstoMappingControllers-Modifymappingcontrollerstoaddnewmethods">Modify mapping controllers to add new methods</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+public class EmployeeSubscriptionMapController
+{
+    @Autowired
+    private EmployeeSubscriptionMapRepository employeeSubscriptionMapRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
+    @Autowired
+    private SubscriptionRepository subscriptionRepository;
+
+    @GetMapping(&quot;/employees/subscriptions&quot;)
+    public ResponseEntity&lt;List&lt;Employee&gt;&gt; getEmployeesSubscriptions()
+    {
+        List&lt;EmployeeSubscriptionPair&gt; projectEmployeePairs = employeeSubscriptionMapRepository.findAll();
+        Map&lt;Employee, List&lt;Subscription&gt;&gt; groupedMap = projectEmployeePairs.stream()
+                .collect(Collectors
+                        .groupingBy(EmployeeSubscriptionPair::getEmployee,
+                                Collectors.mapping(EmployeeSubscriptionPair::getSubscription, Collectors.toList())));
+
+        List&lt;Employee&gt; result = new ArrayList&lt;&gt;();
+        for(Map.Entry&lt;Employee,List&lt;Subscription&gt;&gt; e : groupedMap.entrySet())
+        {
+            result.add(e.getKey());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping(&quot;/employees/{id}/subscriptions&quot;)
+    public ResponseEntity&lt;List&lt;Subscription&gt;&gt; getEmployeesSubscriptions(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;EmployeeSubscriptionPair&gt; projectEmployeePairs = employeeSubscriptionMapRepository.findByEmployeeId(id);
+        if(projectEmployeePairs.isEmpty())
+        {
+            throw new NotFoundException(&quot;employee-&quot; + id);
+        }
+
+        Map&lt;Subscription, List&lt;Employee&gt;&gt; groupedMap = projectEmployeePairs.stream()
+                .collect(Collectors
+                        .groupingBy(EmployeeSubscriptionPair::getSubscription,
+                                Collectors.mapping(EmployeeSubscriptionPair::getEmployee, Collectors.toList())));
+
+        List&lt;Subscription&gt; result = new ArrayList&lt;&gt;();
+        for(Map.Entry&lt;Subscription, List&lt;Employee&gt;&gt; e : groupedMap.entrySet())
+        {
+            result.add(e.getKey());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping(&quot;/employees/{employeeId}/subscriptions/{subscriptionId}&quot;)
+    public ResponseEntity&lt;?&gt; addSubscriptionToEmployee(@PathVariable(&quot;employeeId&quot;) int employeeId,
+                                                        @PathVariable(&quot;subscriptionId&quot;) int subscriptionId)
+    {
+        return createAssociation(employeeId, subscriptionId);
+    }
+
+    @DeleteMapping(&quot;/employees/{employeeId}/subscriptions/{subscriptionId}&quot;)
+    public ResponseEntity&lt;?&gt; deleteSubscriptionToEmployee(@PathVariable(&quot;employeeId&quot;) int employeeId,
+                                                          @PathVariable(&quot;subscriptionId&quot;) int subscriptionId)
+    {
+        return deleteAssociation(employeeId, subscriptionId);
+    }
+
+
+
+    @GetMapping(&quot;/subscriptions/employees&quot;)
+    public ResponseEntity&lt;List&lt;Subscription&gt;&gt; getSubscriptionsEmployees()
+    {
+        List&lt;EmployeeSubscriptionPair&gt; projectEmployeePairs = employeeSubscriptionMapRepository.findAll();
+        Map&lt;Subscription, List&lt;Employee&gt;&gt; groupedMap = projectEmployeePairs.stream()
+                .collect(Collectors
+                        .groupingBy(EmployeeSubscriptionPair::getSubscription,
+                                Collectors.mapping(EmployeeSubscriptionPair::getEmployee, Collectors.toList())));
+
+        List&lt;Subscription&gt; result = new ArrayList&lt;&gt;();
+        for(Map.Entry&lt;Subscription,List&lt;Employee&gt;&gt; e : groupedMap.entrySet())
+        {
+            result.add(e.getKey());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping(&quot;/subscriptions/{id}/employees&quot;)
+    public ResponseEntity&lt;List&lt;Employee&gt;&gt; getSubscriptionsEmployees(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;EmployeeSubscriptionPair&gt; projectEmployeePairs = employeeSubscriptionMapRepository.findBySubscriptionId(id);
+        if(projectEmployeePairs.isEmpty())
+        {
+            throw new NotFoundException(&quot;subscription-&quot; + id);
+        }
+
+        Map&lt;Employee, List&lt;Subscription&gt;&gt; groupedMap = projectEmployeePairs.stream()
+                .collect(Collectors
+                        .groupingBy(EmployeeSubscriptionPair::getEmployee,
+                                Collectors.mapping(EmployeeSubscriptionPair::getSubscription, Collectors.toList())));
+
+        List&lt;Employee&gt; result = new ArrayList&lt;&gt;();
+        for(Map.Entry&lt;Employee,List&lt;Subscription&gt;&gt; e : groupedMap.entrySet())
+        {
+            result.add(e.getKey());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping(&quot;/subscriptions/{subscriptionId}/employees/{employeeId}&quot;)
+    public ResponseEntity&lt;?&gt; addEmployeeToSubscription(@PathVariable(&quot;subscriptionId&quot;) int subscriptionId,
+                                                       @PathVariable(&quot;employeeId&quot;) int employeeId)
+    {
+        return createAssociation(employeeId, subscriptionId);
+    }
+
+    @DeleteMapping(&quot;/subscriptions/{subscriptionId}/employees/{employeeId}&quot;)
+    public ResponseEntity&lt;?&gt; deleteEmployeeFromSubscription(@PathVariable(&quot;subscriptionId&quot;) int subscriptionId,
+                                                            @PathVariable(&quot;employeeId&quot;) int employeeId)
+    {
+        return deleteAssociation(employeeId, subscriptionId);
+    }
+
+    private ResponseEntity&lt;?&gt; createAssociation(int employeeId, int subscriptionId)
+    {
+        Optional&lt;Employee&gt; employeeOptional = employeeRepository.findById(employeeId);
+        if (!employeeOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;employee-&quot; + employeeId);
+        }
+        Optional&lt;Subscription&gt; subscriptionOptional = subscriptionRepository.findById(subscriptionId);
+        if (!subscriptionOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;subscription-&quot; + employeeId);
+        }
+
+        Employee employee = employeeOptional.get();
+        Subscription subscription = subscriptionOptional.get();
+
+        //  Check to make sure this association does not already exists
+        List&lt;Subscription&gt; subscriptions = employee.getEmployeeSubscriptionPairs().stream().map(EmployeeSubscriptionPair::getSubscription).collect(Collectors.toList());
+        if(!subscriptions.contains(subscription))
+        {
+            EmployeeSubscriptionPair employeeSubscriptionPair = new EmployeeSubscriptionPair(employee, subscription);
+            employeeSubscriptionMapRepository.save(employeeSubscriptionPair);
+
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .buildAndExpand(employee.getID(), subscription.getID())
+                    .toUri();
+            return ResponseEntity.created(location).build();
+        }
+
+        throw new AlreadyExistsException(&quot;employeeId-&quot; + employeeId + &quot;, subscriptionId-&quot; + subscriptionId);
+    }
+
+    private ResponseEntity&lt;?&gt; deleteAssociation(int employeeId, int subscriptionId)
+    {
+        Optional&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairOptional =
+                employeeSubscriptionMapRepository.findByEmployeeIdSubscriptionId(employeeId, subscriptionId);
+        if(!employeeSubscriptionPairOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;employeeId-&quot; + employeeId + &quot;, subscriptionId-&quot; + subscriptionId);
+        }
+
+        EmployeeSubscriptionPair employeeSubscriptionPair = employeeSubscriptionPairOptional.get();
+        employeeSubscriptionMapRepository.delete(employeeSubscriptionPair);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(employeeSubscriptionPair).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+public class ProjectEmployeeMapController
+{
+    @Autowired
+    private ProjectEmployeeMapRepository projectEmployeeMapRepository;
+    @Autowired
+    private ProjectRepository projectRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+
+    @GetMapping(&quot;/projects/employees&quot;)
+    public ResponseEntity&lt;List&lt;Project&gt;&gt; getProjectsEmployees()
+    {
+        List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findAll();
+        Map&lt;Project, List&lt;Employee&gt;&gt; groupedMap = projectEmployeePairs.stream()
+                .collect(Collectors
+                        .groupingBy(ProjectEmployeePair::getProject,
+                                Collectors.mapping(ProjectEmployeePair::getEmployee, Collectors.toList())));
+
+        List&lt;Project&gt; result = new ArrayList&lt;&gt;();
+        for(Map.Entry&lt;Project,List&lt;Employee&gt;&gt; e : groupedMap.entrySet())
+        {
+            result.add(e.getKey());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping(&quot;/projects/{id}/employees&quot;)
+    public ResponseEntity&lt;List&lt;Employee&gt;&gt; getProjectsEmployees(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findByProjectId(id);
+        if(projectEmployeePairs.isEmpty())
+        {
+            throw new NotFoundException(&quot;project-&quot; + id);
+        }
+
+        Map&lt;Employee, List&lt;Project&gt;&gt; groupedMap = projectEmployeePairs.stream()
+                .collect(Collectors
+                        .groupingBy(ProjectEmployeePair::getEmployee,
+                                Collectors.mapping(ProjectEmployeePair::getProject, Collectors.toList())));
+
+        List&lt;Employee&gt; result = new ArrayList&lt;&gt;();
+        for(Map.Entry&lt;Employee,List&lt;Project&gt;&gt; e : groupedMap.entrySet())
+        {
+            result.add(e.getKey());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping(&quot;/projects/{projectId}/employees/{employeeId}&quot;)
+    public ResponseEntity&lt;?&gt; addEmployeeToProject(@PathVariable(&quot;projectId&quot;) int projectId,
+                                                  @PathVariable(&quot;employeeId&quot;) int employeeId)
+    {
+        return createAssociation(projectId, employeeId);
+    }
+
+    @DeleteMapping(&quot;/projects/{projectId}/employees/{employeeId}&quot;)
+    public ResponseEntity&lt;?&gt; deleteEmployeeFromProject(@PathVariable(&quot;projectId&quot;) int projectId,
+                                                        @PathVariable(&quot;employeeId&quot;) int employeeId)
+    {
+        return deleteAssociation(projectId, employeeId);
+    }
+
+
+    @GetMapping(&quot;/employees/projects&quot;)
+    public ResponseEntity&lt;List&lt;Employee&gt;&gt; getEmployeesProjects()
+    {
+        List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findAll();
+        Map&lt;Employee, List&lt;Project&gt;&gt; groupedMap = projectEmployeePairs.stream()
+                .collect(Collectors
+                        .groupingBy(ProjectEmployeePair::getEmployee,
+                                Collectors.mapping(ProjectEmployeePair::getProject, Collectors.toList())));
+
+        List&lt;Employee&gt; result = new ArrayList&lt;&gt;();
+        for(Map.Entry&lt;Employee,List&lt;Project&gt;&gt; e : groupedMap.entrySet())
+        {
+            result.add(e.getKey());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping(&quot;/employees/{id}/projects&quot;)
+    public ResponseEntity&lt;List&lt;Project&gt;&gt; getEmployeesProjects(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findByEmployeeId(id);
+        if(projectEmployeePairs.isEmpty())
+        {
+            throw new NotFoundException(&quot;employee-&quot; + id);
+        }
+
+        Map&lt;Project, List&lt;Employee&gt;&gt; groupedMap = projectEmployeePairs.stream()
+                .collect(Collectors
+                        .groupingBy(ProjectEmployeePair::getProject,
+                                Collectors.mapping(ProjectEmployeePair::getEmployee, Collectors.toList())));
+
+        List&lt;Project&gt; result = new ArrayList&lt;&gt;();
+        for(Map.Entry&lt;Project, List&lt;Employee&gt;&gt; e : groupedMap.entrySet())
+        {
+            result.add(e.getKey());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @PostMapping(&quot;/employees/{employeeId}/projects/{projectId}&quot;)
+    public ResponseEntity&lt;?&gt; addProjectToEmployee(@PathVariable(&quot;employeeId&quot;) int employeeId,
+                                                  @PathVariable(&quot;projectId&quot;) int projectId)
+    {
+        return createAssociation(projectId, employeeId);
+    }
+
+    @DeleteMapping(&quot;/employees/{employeeId}/projects/{projectId}&quot;)
+    public ResponseEntity&lt;?&gt; deleteProjectFromEmployee(@PathVariable(&quot;employeeId&quot;) int employeeId,
+                                                       @PathVariable(&quot;projectId&quot;) int projectId)
+    {
+        return deleteAssociation(projectId, employeeId);
+    }
+
+
+    private ResponseEntity&lt;?&gt; createAssociation(int projectId, int employeeId)
+    {
+        Optional&lt;Project&gt; projectOptional = projectRepository.findById(projectId);
+        if (!projectOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;project-&quot; + projectId);
+        }
+        Optional&lt;Employee&gt; employeeOptional = employeeRepository.findById(employeeId);
+        if (!employeeOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;employee-&quot; + employeeId);
+        }
+
+        Project project = projectOptional.get();
+        Employee employee = employeeOptional.get();
+
+        //  Check to make sure this association does not already exists
+        List&lt;Employee&gt; employees = project.getProjectEmployeePairs().stream().map(ProjectEmployeePair::getEmployee).collect(Collectors.toList());
+        if(!employees.contains(employee))
+        {
+            ProjectEmployeePair projectEmployeePair = new ProjectEmployeePair(project, employee);
+            projectEmployeeMapRepository.save(projectEmployeePair);
+
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .buildAndExpand(project.getID(), employee.getID())
+                    .toUri();
+            return ResponseEntity.created(location).build();
+        }
+
+        throw new AlreadyExistsException(&quot;projectId-&quot; + projectId + &quot;, employeeId-&quot; + employeeId);
+    }
+
+    private ResponseEntity&lt;?&gt; deleteAssociation(int projectId, int employeeId)
+    {
+        Optional&lt;ProjectEmployeePair&gt; projectEmployeePairOptional =
+                projectEmployeeMapRepository.findByProjectIdEmployeeId(projectId, employeeId);
+        if(!projectEmployeePairOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;projectId-&quot; + projectId + &quot;, employeeId-&quot; + employeeId);
+        }
+
+        ProjectEmployeePair projectEmployeePair = projectEmployeePairOptional.get();
+        projectEmployeeMapRepository.delete(projectEmployeePair);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(projectEmployeePair).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="AddPOSTandDELETEMethodstoMappingControllers-Note">Note</h3><p>Because of code refactoring /projects/{id}/employees/{id} and /employees/{id}/projects/{id} will return same location.</p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

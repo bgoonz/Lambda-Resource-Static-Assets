@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Functional Problems</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Java-Problems_858619905.html">Java Problems</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Functional Problems
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Jan 03, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p /><style type='text/css'>/*<![CDATA[*/
+div.rbtoc1613190963089 {padding: 0px;}
+div.rbtoc1613190963089 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1613190963089 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1613190963089'>
+<ul class='toc-indentation'>
+<li><a href='#FunctionalProblems-ClassFactory'>ClassFactory</a></li>
+<li><a href='#FunctionalProblems-Conversions'>Conversions</a>
+<ul class='toc-indentation'>
+<li><a href='#FunctionalProblems-fromIntArrayToList'>fromIntArrayToList</a></li>
+<li><a href='#FunctionalProblems-fromIntArrayToSet'>fromIntArrayToSet</a></li>
+<li><a href='#FunctionalProblems-fromIntToIntegerArray1'>fromIntToIntegerArray1</a></li>
+<li><a href='#FunctionalProblems-fromIntegerToIntArray'>fromIntegerToIntArray</a></li>
+<li><a href='#FunctionalProblems-fromListToIntArray'>fromListToIntArray</a></li>
+<li><a href='#FunctionalProblems-flatten2DArray'>flatten2DArray</a></li>
+<li><a href='#FunctionalProblems-fromIntToStringArray'>fromIntToStringArray</a></li>
+<li><a href='#FunctionalProblems-fromStringToIntArray'>fromStringToIntArray</a></li>
+<li><a href='#FunctionalProblems-arrayOfConsecutiveInts'>arrayOfConsecutiveInts</a></li>
+<li><a href='#FunctionalProblems-arrayOfConsecutiveIntsReversed'>arrayOfConsecutiveIntsReversed</a></li>
+<li><a href='#FunctionalProblems-fill2DIntArray'>fill2DIntArray</a></li>
+<li><a href='#FunctionalProblems-sort'>sort</a></li>
+<li><a href='#FunctionalProblems-sort2DArrayByDimension'>sort2DArrayByDimension</a></li>
+<li><a href='#FunctionalProblems-extractDimension'>extractDimension</a></li>
+<li><a href='#FunctionalProblems-sumTwoArrays'>sumTwoArrays</a></li>
+<li><a href='#FunctionalProblems-productOfArray1'>productOfArray1</a></li>
+<li><a href='#FunctionalProblems-separateIntsIntoPosAndNeg'>separateIntsIntoPosAndNeg</a></li>
+<li><a href='#FunctionalProblems-numberRangeToCharArray'>numberRangeToCharArray</a></li>
+<li><a href='#FunctionalProblems-from2DIntArrayToMap'>from2DIntArrayToMap</a></li>
+<li><a href='#FunctionalProblems-from2DArrayToMap'>from2DArrayToMap</a></li>
+<li><a href='#FunctionalProblems-charArrayToListOfCharacter'>charArrayToListOfCharacter</a></li>
+<li><a href='#FunctionalProblems-stringToCharacterArray1'>stringToCharacterArray1</a></li>
+<li><a href='#FunctionalProblems-characterArrayToString'>characterArrayToString</a></li>
+<li><a href='#FunctionalProblems-listOfCharacterToCharArray'>listOfCharacterToCharArray</a></li>
+<li><a href='#FunctionalProblems-stringArrayToString'>stringArrayToString</a></li>
+<li><a href='#FunctionalProblems-arrayOfWordsToMapOfWordCounts'>arrayOfWordsToMapOfWordCounts</a></li>
+<li><a href='#FunctionalProblems-longestStringInArray'>longestStringInArray</a></li>
+<li><a href='#FunctionalProblems-keyWhoseValueIsMax'>keyWhoseValueIsMax</a></li>
+<li><a href='#FunctionalProblems-indexOfItemInArray'>indexOfItemInArray</a></li>
+<li><a href='#FunctionalProblems-init2DArray'>init2DArray</a></li>
+<li><a href='#FunctionalProblems-init3DArray'>init3DArray</a></li>
+</ul>
+</li>
+<li><a href='#FunctionalProblems-Fibonacci'>Fibonacci</a>
+<ul class='toc-indentation'>
+<li><a href='#FunctionalProblems-fibonacciWithStreamIterate'>fibonacciWithStreamIterate</a></li>
+<li><a href='#FunctionalProblems-fibonacciWithStreamGenerate'>fibonacciWithStreamGenerate</a></li>
+</ul>
+</li>
+<li><a href='#FunctionalProblems-ForkJoinSumCalculator'>ForkJoinSumCalculator</a></li>
+<li><a href='#FunctionalProblems-Optionals'>Optionals</a></li>
+<li><a href='#FunctionalProblems-PairNumbers'>PairNumbers</a></li>
+<li><a href='#FunctionalProblems-Primes'>Primes</a>
+<ul class='toc-indentation'>
+<li><a href='#FunctionalProblems-isPrime'>isPrime</a></li>
+<li><a href='#FunctionalProblems-genPrimesUpTo'>genPrimesUpTo</a></li>
+</ul>
+</li>
+<li><a href='#FunctionalProblems-PrimeCollector'>PrimeCollector</a></li>
+<li><a href='#FunctionalProblems-PythogoreanTuples'>PythogoreanTuples</a></li>
+<li><a href='#FunctionalProblems-WordCounter'>WordCounter</a></li>
+</ul>
+</div><h2 id="FunctionalProblems-ClassFactory">ClassFactory<br/></h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 1004.0px;"/><col style="width: 617.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ClassFactory</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class ClassFactory
+{
+    static abstract class Fruit
+    {
+        int weight;
+        Fruit(int weight)
+        {
+            this.weight = weight;
+        }
+    }
+
+    static class Apple extends Fruit
+    {
+        Apple(int weight)
+        {
+            super(weight);
+        }
+
+        @Override
+        public String toString()
+        {
+            return &quot;Apple{}&quot;;
+        }
+    }
+
+    static class Orange extends Fruit
+    {
+        Orange(int weight)
+        {
+            super(weight);
+        }
+
+        @Override
+        public String toString()
+        {
+            return &quot;Orange{}&quot;;
+        }
+    }
+
+    static Map&lt;String,Function&lt;Integer, Fruit&gt;&gt; constructorMap = new HashMap&lt;String,Function&lt;Integer, Fruit&gt;&gt;() {{
+        put(&quot;apple&quot;, Apple::new);
+        put(&quot;orange&quot;, Orange::new);
+    }};
+
+    static Fruit getFruit(String name, int weight)
+    {
+        return constructorMap.get(name).apply(weight);
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Fruit apple = getFruit(&quot;apple&quot;, 50);
+    boolean check = apple.toString().equals(&quot;Apple{}&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    Fruit orange = getFruit(&quot;orange&quot;, 50);
+    check = orange.toString().equals(&quot;Orange{}&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="FunctionalProblems-Conversions">Conversions</h2><h3 id="FunctionalProblems-fromIntArrayToList"><code>fromIntArrayToList</code></h3><h3 id="FunctionalProblems-fromIntArrayToSet"><code>fromIntArrayToSet</code></h3><h3 id="FunctionalProblems-fromIntToIntegerArray1"><code>fromIntToIntegerArray1</code></h3><h3 id="FunctionalProblems-fromIntegerToIntArray"><code>fromIntegerToIntArray</code></h3><h3 id="FunctionalProblems-fromListToIntArray"><code>fromListToIntArray</code></h3><h3 id="FunctionalProblems-flatten2DArray"><code>flatten2DArray</code></h3><h3 id="FunctionalProblems-fromIntToStringArray"><code>fromIntToStringArray</code></h3><h3 id="FunctionalProblems-fromStringToIntArray"><code>fromStringToIntArray</code></h3><h3 id="FunctionalProblems-arrayOfConsecutiveInts"><code>arrayOfConsecutiveInts</code></h3><h3 id="FunctionalProblems-arrayOfConsecutiveIntsReversed"><code>arrayOfConsecutiveIntsReversed</code></h3><h3 id="FunctionalProblems-fill2DIntArray"><code>fill2DIntArray</code></h3><h3 id="FunctionalProblems-sort"><code>sort</code></h3><h3 id="FunctionalProblems-sort2DArrayByDimension"><code>sort2DArrayByDimension</code></h3><h3 id="FunctionalProblems-extractDimension"><code>extractDimension</code></h3><h3 id="FunctionalProblems-sumTwoArrays"><code>sumTwoArrays</code></h3><h3 id="FunctionalProblems-productOfArray1"><code>productOfArray1</code></h3><h3 id="FunctionalProblems-separateIntsIntoPosAndNeg"><code>separateIntsIntoPosAndNeg</code></h3><h3 id="FunctionalProblems-numberRangeToCharArray"><code>numberRangeToCharArray</code></h3><h3 id="FunctionalProblems-from2DIntArrayToMap"><code>from2DIntArrayToMap</code></h3><h3 id="FunctionalProblems-from2DArrayToMap"><code>from2DArrayToMap</code></h3><h3 id="FunctionalProblems-charArrayToListOfCharacter"><code>charArrayToListOfCharacter</code></h3><h3 id="FunctionalProblems-stringToCharacterArray1"><code>stringToCharacterArray1</code></h3><h3 id="FunctionalProblems-characterArrayToString"><code>characterArrayToString</code></h3><h3 id="FunctionalProblems-listOfCharacterToCharArray"><code>listOfCharacterToCharArray</code></h3><h3 id="FunctionalProblems-stringArrayToString"><code>stringArrayToString</code></h3><h3 id="FunctionalProblems-arrayOfWordsToMapOfWordCounts"><code>arrayOfWordsToMapOfWordCounts</code></h3><h3 id="FunctionalProblems-longestStringInArray"><code>longestStringInArray</code></h3><h3 id="FunctionalProblems-keyWhoseValueIsMax"><code>keyWhoseValueIsMax</code></h3><h3 id="FunctionalProblems-indexOfItemInArray"><code>indexOfItemInArray</code></h3><h3 id="FunctionalProblems-init2DArray"><code>init2DArray</code></h3><h3 id="FunctionalProblems-init3DArray"><code>init3DArray</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 995.0px;"/><col style="width: 626.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Conversions</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static List&lt;Integer&gt; fromIntArrayToList(int[] a)
+{
+    return Arrays.stream(a).boxed().collect(Collectors.toList());
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Set&lt;Integer&gt; fromIntArrayToSet(int[] a)
+{
+    return Arrays.stream(a).boxed().collect(Collectors.toSet());
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Integer[] fromIntToIntegerArray1(int[] a)
+{
+    return Arrays.stream(a).boxed().toArray(Integer[]::new);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Integer[] fromIntToIntegerArray2(int[] a)
+{
+    return IntStream.of(a).boxed().toArray(Integer[]::new);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] fromIntegerToIntArray(Integer[] a)
+{
+    return Arrays.stream(a).mapToInt(x -&gt; x).toArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] fromListToIntArray(List&lt;Integer&gt; list)
+{
+    return list.stream().mapToInt(x -&gt; x).toArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] flatten2DArray(int[][] a)
+{
+    return Arrays.stream(a).flatMapToInt(Arrays::stream).toArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String[] fromIntToStringArray(int[] a)
+{
+    return Arrays.stream(a).mapToObj(String::valueOf).toArray(String[]::new);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] fromStringToIntArray(String[] a)
+{
+    return Arrays.stream(a).mapToInt(Integer::valueOf).toArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] arrayOfConsecutiveInts(int start, int end)
+{
+    return IntStream.rangeClosed(start, end).toArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] arrayOfConsecutiveIntsReversed(int start, int end)
+{
+    return IntStream.rangeClosed(start, end).map(i -&gt; end - i + start).toArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void fill2DIntArray(int[][] a, int val)
+{
+    Arrays.stream(a).forEach(x -&gt; Arrays.fill(x, val));
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void sort(int[] a)
+{
+    Arrays.sort(a);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] sort1(int [] a, boolean reverseOrder)
+{
+    Integer[] temp = Arrays.stream(a).mapToObj(x -&gt; x).toArray(Integer[]::new);
+    if(!reverseOrder)
+    {
+        Arrays.sort(temp);
+    }
+    else
+    {
+        Arrays.sort(temp, Collections.reverseOrder());
+    }
+    return Arrays.stream(temp).mapToInt(x -&gt; x).toArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] sort2(int [] a, boolean reverseOrder)
+{
+    if(!reverseOrder)
+    {
+        return Arrays.stream(a)
+                .mapToObj(x -&gt; x)
+                .sorted(Comparator.naturalOrder())
+                .mapToInt(x -&gt; x).toArray();
+    }
+    return Arrays.stream(a).mapToObj(x -&gt; x)
+            .sorted(Comparator.reverseOrder())
+            .mapToInt(x -&gt; x).toArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void sort2DArrayByDimension(int[][] arr, int dim, boolean reverseOrder)
+{
+    if(!reverseOrder)
+    {
+        Arrays.sort(arr, Comparator.comparingInt((int[] a) -&gt; a[dim]));
+    }
+    else
+    {
+        Arrays.sort(arr, Comparator.comparingInt((int[] a) -&gt; a[dim]).reversed());
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] extractDimension(int[][] a, int dim)
+{
+    Integer[] temp = Arrays.stream(a).map((int[] x) -&gt; x[dim]).toArray(Integer[]::new);
+    return Arrays.stream(temp).mapToInt(x -&gt; x).toArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] sumTwoArrays(int[] a1, int[] a2)
+{
+    int[] a = new int[a1.length];
+    Arrays.setAll(a, i -&gt; a1[i] + a2[i]);
+    return a;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int productOfArray1(int[] a)
+{
+    return Arrays.stream(a).reduce(1, (x, y) -&gt; x * y);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int productOfArray2(int[] a)
+{
+    return Arrays.stream(a).reduce((x, y) -&gt; x * y).getAsInt();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Pair&lt;int[], int[]&gt; separateIntsIntoPosAndNeg(int[] a)
+{
+    Map&lt;Boolean, List&lt;Integer&gt;&gt; map = Arrays.stream(a)
+            .boxed().collect(Collectors.partitioningBy(x -&gt; x &gt;= 0));
+    List&lt;Integer&gt; positive = map.get(true);
+    List&lt;Integer&gt; negative = map.get(false);
+    int[] pos = positive.stream().mapToInt(x -&gt; x).toArray();
+    int[] neg = negative.stream().mapToInt(x -&gt; x).toArray();
+    return Pair.of(pos, neg);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static char[] numberRangeToCharArray(int from, int to)
+{
+    return IntStream.rangeClosed(from, to)
+            .mapToObj(x -&gt; Character.toString((char)(x - 1 + &#39;a&#39;)))
+            .collect(Collectors.joining())
+            .toCharArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Map&lt;Integer, List&lt;Integer&gt;&gt; from2DIntArrayToMap(int[][] a)
+{
+    Map&lt;Integer, List&lt;Integer&gt;&gt; result =
+            Arrays.stream(a).collect(
+                    HashMap::new,
+                    (map, item) -&gt; map.computeIfAbsent(item[0], x -&gt; new ArrayList&lt;&gt;()).add(item[1]),
+                    HashMap::putAll);
+    return result;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T&gt; Map&lt;T, List&lt;T&gt;&gt; from2DArrayToMap(T[][] a)
+{
+    Map&lt;T, List&lt;T&gt;&gt; result = Arrays.stream(a).collect(
+            HashMap::new,
+            (map, item) -&gt; map.computeIfAbsent(item[0], x -&gt; new ArrayList&lt;&gt;()).add(item[1]),
+            HashMap::putAll);
+    return result;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static List&lt;Character&gt; charArrayToListOfCharacter(char[] a)
+{
+    String s = new String(a);
+    return s.chars().mapToObj(c -&gt; (char)c).collect(Collectors.toList());
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Character[] stringToCharacterArray1(String s)
+{
+    return s.chars().mapToObj(c -&gt; (char)c).toArray(Character[]::new);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Character[] stringToCharacterArray2(String s)
+{
+    return IntStream.range(0, s.length()).mapToObj(s::charAt).toArray(Character[]::new);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String characterArrayToString(Character[] a)
+{
+    return Arrays.stream(a).map(Object::toString).collect(Collectors.joining());
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static char[] listOfCharacterToCharArray(List&lt;Character&gt; list)
+{
+    return list.stream().map(Object::toString).collect(Collectors.joining()).toCharArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String stringArrayToString(String[] a, String sep)
+{
+    return Arrays.stream(a).collect(Collectors.joining(sep));
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Map&lt;String,Long&gt; arrayOfWordsToMapOfWordCounts(String[] a)
+{
+    return Arrays.stream(a).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String longestStringInArray(String[] a)
+{
+    Pair&lt;String,Integer&gt; longest = Arrays.stream(a)
+            .map(p -&gt; Pair.of(p, p.length()))
+            .max(Comparator.comparing(Pair::getRight)).get();
+    return longest.getLeft();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int keyWhoseValueIsMax(Map&lt;Integer, Integer&gt; countMap)
+{
+    int maxCount = countMap.values().stream().max(Comparator.naturalOrder()).get();
+    return countMap.entrySet().stream()
+            .filter(e -&gt; e.getValue() == maxCount)
+            .map(Map.Entry::getKey)
+            .findFirst().get();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int indexOfItemInArray(int[] a, int item)
+{
+    return Arrays.stream(a).boxed().collect(Collectors.toList()).indexOf(item);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void init2DArray(int[][] a, int val)
+{
+    Arrays.stream(a).forEach(x -&gt; Arrays.fill(x, val));
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void init3DArray(int[][][] a, int val)
+{
+    Arrays.stream(a).forEach(b -&gt; Arrays.stream(b).forEach(c -&gt; Arrays.fill(c, val)));
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T&gt; Map&lt;T, T&gt; reverseMapKeysValues(Map&lt;T, T&gt; map)
+{
+    return map.entrySet().stream().collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = Arrays.asList(1, 2, 3).equals(fromIntArrayToList(new int[] {1, 2, 3}));
+    if(!check)
+    {
+        return false;
+    }
+    Integer[] A = fromIntToIntegerArray1(new int[] {1, 2, 3});
+    check = A[0] == 1 &amp;&amp; A[1] == 2 &amp;&amp; A[2] == 3;
+    if(!check)
+    {
+        return false;
+    }
+    A = fromIntToIntegerArray2(new int[] {1, 2, 3});
+    check = A[0] == 1 &amp;&amp; A[1] == 2 &amp;&amp; A[2] == 3;
+    if(!check)
+    {
+        return false;
+    }
+    A = new Integer[] {1, 2, 3};
+    check = Arrays.equals(new int[] {1, 2, 3}, fromIntegerToIntArray(A));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {1, 2, 3}, fromListToIntArray(Arrays.asList(1, 2, 3)));
+    if(!check)
+    {
+        return false;
+    }
+    int[][] aa = new int[][] {{1,2}, {3,4}};
+    check = Arrays.equals(new int[] {1, 2, 3, 4}, flatten2DArray(aa));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new String[] {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;}, fromIntToStringArray(new int[] {1, 2, 3}));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {1, 2, 3}, fromStringToIntArray(new String[] {&quot;1&quot;, &quot;2&quot;, &quot;3&quot;}));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {2, 3, 4, 5, 6}, arrayOfConsecutiveInts(2, 6));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {6, 5, 4, 3, 2}, arrayOfConsecutiveIntsReversed(2, 6));
+    if(!check)
+    {
+        return false;
+    }
+    aa = new int[2][2];
+    fill2DIntArray(aa, 2);
+    check = Arrays.equals(new int[] {2, 2}, aa[0]) &amp;&amp; Arrays.equals(new int[] {2, 2}, aa[1]);
+    if(!check)
+    {
+        return false;
+    }
+    int[] a = new int []{3, 1, 7, 4, 9, 2, 6, 5, 8};
+    check = Arrays.equals(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9}, sort1(a, false));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {9, 8, 7, 6, 5, 4, 3, 2, 1}, sort1(a, true));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9}, sort2(a, false));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {9, 8, 7, 6, 5, 4, 3, 2, 1}, sort2(a, true));
+    if(!check)
+    {
+        return false;
+    }
+    aa = new int[][] {{2, 0, 1}, {5, 4, 6}, {4, 3, 2}, {1, 2, 3}};
+    sort2DArrayByDimension(aa, 0, false);
+    check = Arrays.equals(new int[] {1, 2, 3}, aa[0]) &amp;&amp; Arrays.equals(new int[] {2, 0, 1}, aa[1]) &amp;&amp;
+            Arrays.equals(new int[] {4, 3, 2}, aa[2]) &amp;&amp; Arrays.equals(new int[] {5, 4, 6}, aa[3]);
+    if(!check)
+    {
+        return false;
+    }
+    aa = new int[][] {{2, 0, 1}, {5, 4, 6}, {4, 3, 2}, {1, 2, 3}};
+    sort2DArrayByDimension(aa, 1, false);
+    check = Arrays.equals(new int[] {2, 0, 1}, aa[0]) &amp;&amp; Arrays.equals(new int[] {1, 2, 3}, aa[1]) &amp;&amp;
+            Arrays.equals(new int[] {4, 3, 2}, aa[2]) &amp;&amp; Arrays.equals(new int[] {5, 4, 6}, aa[3]);
+    if(!check)
+    {
+        return false;
+    }
+    aa = new int[][] {{2, 0, 1}, {5, 4, 6}, {4, 3, 2}, {1, 2, 3}};
+    sort2DArrayByDimension(aa, 0, true);
+    check = Arrays.equals(new int[] {5, 4, 6}, aa[0]) &amp;&amp; Arrays.equals(new int[] {4, 3, 2}, aa[1]) &amp;&amp;
+            Arrays.equals(new int[] {2, 0, 1}, aa[2]) &amp;&amp; Arrays.equals(new int[] {1, 2, 3}, aa[3]);
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {0, 4, 3, 2}, 
+            extractDimension(new int[][] {{2, 0, 1}, {5, 4, 6}, {4, 3, 2}, {1, 2, 3}}, 1));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {5, 7, 9}, sumTwoArrays(new int [] {1, 2, 3}, new int[] {4, 5, 6}));
+    if(!check)
+    {
+        return false;
+    }
+    a = new int[] {3, 0, -5, 2, -4, 7, -1};
+    Pair&lt;int[], int[]&gt; pair = separateIntsIntoPosAndNeg(a);
+    check = Arrays.equals(new int[] {3, 0, 2, 7}, pair.getLeft()) &amp;&amp; 
+            Arrays.equals(new int[] {-5, -4, -1}, pair.getRight());
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new char[] {&#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;}, numberRangeToCharArray(3, 7));
+    if(!check)
+    {
+        return false;
+    }
+    Map&lt;Integer, List&lt;Integer&gt;&gt; result1 = from2DIntArrayToMap(new int[][] {{1, 2}, {2, 3}, {1, 4}});
+    check = Arrays.equals(new int[] {2, 4}, result1.get(1).stream().mapToInt(x -&gt; x).toArray()) &amp;&amp;
+            Arrays.equals(new int[] {3}, result1.get(2).stream().mapToInt(x -&gt; x).toArray());
+    if(!check)
+    {
+        return false;
+    }
+    Map&lt;String, List&lt;String&gt;&gt; result2 = from2DArrayToMap(new String[][] {{&quot;nick&quot;, &quot;90&quot;}, {&quot;paul&quot;, &quot;70&quot;}, {&quot;nick&quot;, &quot;100&quot;}});
+    check = result2.get(&quot;nick&quot;).size() == 2 &amp;&amp; result2.get(&quot;nick&quot;).contains(&quot;90&quot;) &amp;&amp; result2.get(&quot;nick&quot;).contains(&quot;100&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.asList(&#39;A&#39;, &#39;B&#39;, &#39;C&#39;).equals(charArrayToListOfCharacter(new char[] {&#39;A&#39;, &#39;B&#39;, &#39;C&#39;}));
+    if(!check)
+    {
+        return false;
+    }
+    check = 24 == productOfArray1(new int[] {1, 2, 3, 4});
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new Character[] {&#39;A&#39;, &#39;B&#39;, &#39;C&#39;}, stringToCharacterArray1(&quot;ABC&quot;));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new Character[] {&#39;A&#39;, &#39;B&#39;, &#39;C&#39;}, stringToCharacterArray2(&quot;ABC&quot;));
+    if(!check)
+    {
+        return false;
+    }
+    check = characterArrayToString(new Character[] {&#39;A&#39;, &#39;B&#39;, &#39;C&#39;}).equals(&quot;ABC&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new char[] {&#39;A&#39;, &#39;B&#39;, &#39;C&#39;}, listOfCharacterToCharArray(Arrays.asList(&#39;A&#39;, &#39;B&#39;, &#39;C&#39;)));
+    if(!check)
+    {
+        return false;
+    }
+    check = stringArrayToString(new String[] {&quot;one&quot;, &quot;two&quot;, &quot;three&quot;}, &quot; &quot;).equals(&quot;one two three&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    Map&lt;String,Long&gt; countMap = arrayOfWordsToMapOfWordCounts(new String[] {&quot;three&quot;, &quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;two&quot;, &quot;three&quot;});
+    check = countMap.get(&quot;one&quot;) == 1 &amp;&amp; countMap.get(&quot;two&quot;) == 2 &amp;&amp; countMap.get(&quot;three&quot;) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    check = longestStringInArray(new String[] {&quot;a&quot;, &quot;bb&quot;, &quot;ccc&quot;, &quot;dddd&quot;}).equals(&quot;dddd&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    
+    Map&lt;Integer, Integer&gt; map = new HashMap&lt;Integer, Integer&gt;() {{
+       put(1, 5);
+       put(2, 4);
+       put(3, 3);
+       put(4, 2);
+       put(5, 1);
+    }};
+    check = keyWhoseValueIsMax(map) == 1;
+    if(!check)
+    {
+       return false;
+    }
+    
+    check = indexOfItemInArray(new int[] {1, 2, 3, 4, 5, 6, 7}, 4) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    
+    int[][] t = new int[5][4];
+    init2DArray(t, 2);
+    check = Arrays.equals(t[0], new int[] {2, 2, 2, 2}) &amp;&amp;
+            Arrays.equals(t[1], new int[] {2, 2, 2, 2}) &amp;&amp;
+            Arrays.equals(t[2], new int[] {2, 2, 2, 2}) &amp;&amp;
+            Arrays.equals(t[3], new int[] {2, 2, 2, 2}) &amp;&amp;
+            Arrays.equals(t[4], new int[] {2, 2, 2, 2});
+    if(!check)
+    {
+        return false;
+    }
+    
+    int[][][] s = new int[5][4][3];
+    init3DArray(s, 5);
+    check = Arrays.equals(s[0][0], new int[] {5, 5, 5}) &amp;&amp;
+            Arrays.equals(s[0][1], new int[] {5, 5, 5}) &amp;&amp;
+            Arrays.equals(s[0][2], new int[] {5, 5, 5}) &amp;&amp;
+            Arrays.equals(s[1][0], new int[] {5, 5, 5}) &amp;&amp;
+            Arrays.equals(s[1][1], new int[] {5, 5, 5}) &amp;&amp;
+            Arrays.equals(s[1][2], new int[] {5, 5, 5}) &amp;&amp;
+            Arrays.equals(s[2][0], new int[] {5, 5, 5}) &amp;&amp;
+            Arrays.equals(s[2][1], new int[] {5, 5, 5}) &amp;&amp;
+            Arrays.equals(s[2][2], new int[] {5, 5, 5});
+    if(!check)
+    {
+        return false;
+    }
+    
+    Map&lt;String,String&gt; result = reverseMapKeysValues(new HashMap&lt;String,String&gt;() {{
+        put(&quot;one&quot;, &quot;1&quot;);
+        put(&quot;two&quot;, &quot;2&quot;);
+        put(&quot;three&quot;, &quot;3&quot;);
+    }});
+    check = result.get(&quot;1&quot;).equals(&quot;one&quot;) &amp;&amp;
+            result.get(&quot;2&quot;).equals(&quot;two&quot;) &amp;&amp;
+            result.get(&quot;3&quot;).equals(&quot;three&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p>Notes:</p><ol><li><p>Make sure to user <code>Arrays.sort</code> for sorting in place. Using streams <code>sorted </code>will not modify underlying collection.<br/></p></li></ol><h2 id="FunctionalProblems-Fibonacci">Fibonacci</h2><h3 id="FunctionalProblems-fibonacciWithStreamIterate"><code>fibonacciWithStreamIterate</code></h3><h3 id="FunctionalProblems-fibonacciWithStreamGenerate"><code>fibonacciWithStreamGenerate</code></h3><p /><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 813.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Fibonacci</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int fibonacciWithStreamIterate(int n)
+{
+    return Stream.iterate(new int[] {0, 1}, t -&gt; new int[] {t[1], t[0] + t[1]})
+            .limit(n)
+            .map(t -&gt; t[1])
+            .skip(n - 1)
+            .findFirst().get();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int fibonacciWithStreamGenerate(int n)
+{
+    IntSupplier intSupplier = new IntSupplier()
+    {
+        int a = 0;
+        int b = 1;
+        @Override
+        public int getAsInt()
+        {
+            int c = a + b;
+            a = b;
+            b = c;
+            return b;
+        }
+    };
+    return IntStream.generate(intSupplier)
+            .limit(n - 1)
+            .skip(n - 2)
+            .findFirst()
+            .getAsInt();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = fibonacciWithStreamIterate(14) == 377;
+    if(!check)
+    {
+        return false;
+    }
+    check = fibonacciWithStreamGenerate(14) == 377;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="FunctionalProblems-ForkJoinSumCalculator"><br/>ForkJoinSumCalculator</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 760.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ForkJoinSumCalculator</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class ForkJoinSumCalculator extends RecursiveTask&lt;Long&gt;
+{
+    public static final long THRESHOLD = 10_000;
+
+    private final long[] numbers;
+    private final int start;
+    private final int end;
+
+    public ForkJoinSumCalculator(long[] numbers)
+    {
+        this(numbers, 0, numbers.length);
+    }
+
+    private ForkJoinSumCalculator(long[] numbers, int start, int end)
+    {
+        this.numbers = numbers;
+        this.start = start;
+        this.end = end;
+    }
+
+    @Override
+    protected Long compute()
+    {
+        int length = end - start;
+        if (length &lt;= THRESHOLD)
+        {
+            return computeSequentially();
+        }
+        ForkJoinSumCalculator leftTask =
+                new ForkJoinSumCalculator(numbers, start, start + length / 2);
+        leftTask.fork();
+        ForkJoinSumCalculator rightTask =
+                new ForkJoinSumCalculator(numbers, start + length / 2, end);
+        Long rightResult = rightTask.compute();
+        Long leftResult = leftTask.join();
+        return leftResult + rightResult;
+    }
+
+    private long computeSequentially()
+    {
+        long sum = 0;
+        for (int i = start; i &lt; end; i++)
+        {
+            sum += numbers[i];
+        }
+        return sum;
+    }
+
+    public static long forkJoinSum(long n)
+    {
+        long[] numbers = LongStream.rangeClosed(1, n).toArray();
+        ForkJoinTask&lt;Long&gt; task = new ForkJoinSumCalculator(numbers);
+        return new ForkJoinPool().invoke(task);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="FunctionalProblems-Optionals"><br/>Optionals</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 813.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Optionals</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class Optionals
+{
+/*
+    Consider a person who might have a car which might be insured
+    Some person may not have a car
+    Some person may have a car which is not insured
+    In a typical application this would require a lot of null checks
+*/
+
+    static class Insurance
+    {
+        String insuranceName;
+        Insurance(String name)
+        {
+            this.insuranceName = name;
+        }
+
+        String getInsuranceName()
+        {
+            return insuranceName;
+        }
+    }
+
+    static class Car
+    {
+        Optional&lt;Insurance&gt; insuranceOptional;
+        Car(Optional&lt;Insurance&gt; insuranceOptional)
+        {
+            this.insuranceOptional = insuranceOptional;
+        }
+
+        Optional&lt;Insurance&gt; getInsuranceOptional()
+        {
+            return insuranceOptional;
+        }
+    }
+
+    static class Person
+    {
+        Optional&lt;Car&gt; carOptional;
+        Person(Optional&lt;Car&gt; carOptional)
+        {
+            this.carOptional = carOptional;
+        }
+
+        Optional&lt;Car&gt; getCarOptional()
+        {
+            return carOptional;
+        }
+    }
+
+
+    static String getInsuranceNameNoNullChecks(Optional&lt;Person&gt; personOptional)
+    {
+        return personOptional.flatMap(Person::getCarOptional)
+                .flatMap(Car::getInsuranceOptional)
+                .map(Insurance::getInsuranceName)
+                .orElse(&quot;Unknown&quot;);
+    }
+
+    static String getInsuranceNameSameAsNullChecks(Optional&lt;Person&gt; personOptional)
+    {
+        if(personOptional.isPresent())
+        {
+            Person person = personOptional.get();
+            Optional&lt;Car&gt; carOptional = person.getCarOptional();
+            if(carOptional.isPresent())
+            {
+                Car car = carOptional.get();
+                Optional&lt;Insurance&gt; insuranceOptional = car.getInsuranceOptional();
+                if(insuranceOptional.isPresent())
+                {
+                    Insurance insurance = insuranceOptional.get();
+                    return insurance.getInsuranceName();
+                }
+            }
+        }
+        return &quot;Unknown&quot;;
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Insurance insurance1 = new Insurance(&quot;Geico&quot;);
+    Car car1 = new Car(Optional.of(insurance1));
+    Person person1 = new Person(Optional.of(car1));
+    String insuranceName = getInsuranceNameNoNullChecks(Optional.of(person1));
+    boolean check = insuranceName.equals(&quot;Geico&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    insuranceName = getInsuranceNameSameAsNullChecks(Optional.of(person1));
+    check = insuranceName.equals(&quot;Geico&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    Car car2 = new Car(Optional.empty());
+    Person person2 = new Person(Optional.of(car2));
+    insuranceName = getInsuranceNameNoNullChecks(Optional.of(person2));
+    check = insuranceName.equals(&quot;Unknown&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="FunctionalProblems-PairNumbers"><br/>PairNumbers</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 813.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>PairNumbers</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static List&lt;int[]&gt; pairNumbers(int[] a1, int[] a2)
+{
+    return Arrays.stream(a1).boxed().flatMap(i -&gt;
+            Arrays.stream(a2).mapToObj(j -&gt; new int[] {i, j}))
+            .collect(Collectors.toList());
+}</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int [] a1 = {1, 2, 3};
+    int [] a2 = {3, 4};
+    List&lt;int[]&gt; result = pairNumbers(a1, a2);
+    boolean check = result.size() == 6;
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {1, 3}, result.get(0)) &amp;&amp; 
+            Arrays.equals(new int[] {1, 4}, result.get(1)) &amp;&amp;
+            Arrays.equals(new int[] {2, 3}, result.get(2)) &amp;&amp; 
+            Arrays.equals(new int[] {2, 4}, result.get(3)) &amp;&amp;
+            Arrays.equals(new int[] {3, 3}, result.get(4)) &amp;&amp; 
+            Arrays.equals(new int[] {3, 4}, result.get(5));
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="FunctionalProblems-Primes"><br/>Primes</h2><h3 id="FunctionalProblems-isPrime"><code>isPrime</code></h3><h3 id="FunctionalProblems-genPrimesUpTo"><code>genPrimesUpTo</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 813.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Primes</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static private boolean isPrime(int n)
+{
+    int candidateRoot = (int)Math.sqrt(n);
+    return IntStream.rangeClosed(2, candidateRoot).noneMatch(i -&gt; n % i == 0);
+}
+
+
+static int[] genPrimesUpTo(int n)
+{
+    Map&lt;Boolean,List&lt;Integer&gt;&gt; map = IntStream.rangeClosed(2, n).boxed().collect(
+            Collectors.partitioningBy(x -&gt; isPrime(x)));
+    return map.get(true).stream().mapToInt(x -&gt; x).toArray();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+     boolean check = Arrays.equals(new int[] {2, 3, 5, 7}, genPrimesUpTo(7));
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="FunctionalProblems-PrimeCollector"><br/>PrimeCollector</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 1008.0px;"/><col style="width: 613.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>PrimeCollector</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class PrimeCollector implements Collector&lt;Integer, Map&lt;Boolean, List&lt;Integer&gt;&gt;, Map&lt;Boolean,List&lt;Integer&gt;&gt;&gt;
+{
+    private static List&lt;Integer&gt; takeWhile(List&lt;Integer&gt; list, Predicate&lt;Integer&gt; p)
+    {
+        int i = 0;
+        for(Integer item : list)
+        {
+            if(!p.test(item))
+            {
+                return list.subList(0, i);
+            }
+            i++;
+        }
+        return list;
+    }
+
+    private static boolean isPrime(List&lt;Integer&gt; primes, int candidate)
+    {
+        int candidateSqrt = (int) Math.sqrt(candidate);
+        return takeWhile(primes, i -&gt; i &lt;= candidateSqrt).stream().noneMatch(j -&gt; candidate % j == 0);
+    }
+    
+    @Override
+    public Supplier&lt;Map&lt;Boolean, List&lt;Integer&gt;&gt;&gt; supplier()
+    {
+        return () -&gt; new HashMap&lt;Boolean, List&lt;Integer&gt;&gt;() {{
+            put(true, new ArrayList&lt;&gt;());
+            put(false, new ArrayList&lt;&gt;());
+        }};
+    }
+
+    @Override
+    public BiConsumer&lt;Map&lt;Boolean, List&lt;Integer&gt;&gt;,Integer&gt; accumulator()
+    {
+        return (Map&lt;Boolean,List&lt;Integer&gt;&gt; acc, Integer candidate) -&gt; {
+            acc.get(isPrime(acc.get(true), candidate)).add(candidate);
+        };
+    }
+
+    @Override
+    public BinaryOperator&lt;Map&lt;Boolean, List&lt;Integer&gt;&gt;&gt; combiner()
+    {
+        return (Map&lt;Boolean,List&lt;Integer&gt;&gt; m1, Map&lt;Boolean, List&lt;Integer&gt;&gt; m2) -&gt; {
+            m1.get(true).addAll(m2.get(true));
+            m1.get(false).addAll(m2.get(false));
+            return m1;
+        };
+    }
+
+    @Override
+    public Function&lt;Map&lt;Boolean, List&lt;Integer&gt;&gt;, Map&lt;Boolean, List&lt;Integer&gt;&gt;&gt; finisher()
+    {
+        return Function.identity();
+    }
+
+    @Override
+    public Set&lt;Characteristics&gt; characteristics()
+    {
+        return Collections.unmodifiableSet(EnumSet.of(IDENTITY_FINISH, CONCURRENT));
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Map&lt;Boolean, List&lt;Integer&gt;&gt; map = IntStream.rangeClosed(2, 20).boxed().collect(new PrimeCollector());
+    int[] primes = map.get(true).stream().mapToInt(x -&gt; x).toArray();
+    boolean check = Arrays.equals(new int[] {2, 3, 5, 7, 11, 13, 17, 19}, primes);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="FunctionalProblems-PythogoreanTuples"><br/>PythogoreanTuples</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 977.0px;"/><col style="width: 644.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>PythagoreanTuples</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static List&lt;int[]&gt; generate(int n)
+{
+    List&lt;double[]&gt; triples =
+            IntStream.rangeClosed(1, n)
+            .boxed()
+            .flatMap(a -&gt; IntStream.rangeClosed(a, n)
+                .mapToObj(b -&gt; new double[] {a, b, Math.sqrt(a * a + b * b)}))
+            .filter(t -&gt; t[2] % 1 == 0).collect(Collectors.toList());
+    return triples.stream().map(x -&gt; new int[] {(int)x[0], (int)x[1], (int)x[2]}).collect(Collectors.toList());
+}</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    List&lt;int[]&gt; triples = generate(20);
+    boolean check = Arrays.equals(new int[] {3, 4, 5}, triples.get(0)) &amp;&amp; 
+                    Arrays.equals(new int[] {5, 12, 13}, triples.get(1)) &amp;&amp;
+                    Arrays.equals(new int[] {6, 8, 10}, triples.get(2)) &amp;&amp; 
+                    Arrays.equals(new int[] {8, 15, 17}, triples.get(3)) &amp;&amp;
+                    Arrays.equals(new int[] {9, 12, 15}, triples.get(4)) &amp;&amp; 
+                    Arrays.equals(new int[] {12, 16, 20}, triples.get(5)) &amp;&amp;
+                    Arrays.equals(new int[] {15, 20, 25}, triples.get(6));
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="FunctionalProblems-WordCounter"><br/>WordCounter</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 813.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>WordCounter</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class WordCounter
+{
+    private int counter;
+    private boolean lastSpace;
+
+    public WordCounter(int counter, boolean lastSpace)
+    {
+        this.counter = counter;
+        this.lastSpace = lastSpace;
+    }
+
+    public WordCounter accumulate(Character c)
+    {
+        if(Character.isWhitespace(c))
+        {
+            return lastSpace ? this : new WordCounter(counter, true);
+        }
+        else
+        {
+            return lastSpace ? new WordCounter(counter + 1, false) : this;
+        }
+    }
+
+    public WordCounter combine(WordCounter wordCounter)
+    {
+        return new WordCounter(counter + wordCounter.counter, wordCounter.lastSpace);
+    }
+
+    public int getCounter()
+    {
+        return counter;
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String sentence = &quot;one    two  three    four      five        six&quot;;
+    Stream&lt;Character&gt; stream = sentence.chars().mapToObj(e -&gt; (char)e);
+    WordCounter wordCounter = stream.reduce(new WordCounter(0, true), 
+            WordCounter::accumulate, WordCounter::combine);
+    boolean check = wordCounter.getCounter() == 6;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 340.0px;"/><col style="width: 340.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>WordCounterSplitterator</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><p /></td><td class="confluenceTd"><p /></td></tr></tbody></table></div><p><br/></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Ensure that fields in the POST command have values or limit length of field</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Project-Profit-Application_315097089.html">Project Profit Application</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Other-topics_414351372.html">Other topics</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Ensure that fields in the POST command have values or limit length of field
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Jun 05, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="EnsurethatfieldsinthePOSTcommandhavevaluesorlimitlengthoffield-ModifytheInputclasstoadd@NotNullannotation">Modify the Input class to add @NotNull annotation</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class Project extends BaseEntity
+{
+    ...
+    @NotNull(message=&quot;Project name must be specified.&quot;)
+    private String projectName;
+    @Pattern(regexp = &quot;^[\\p{Alnum}]{1,10}$&quot;, message=&quot;Project description must be less than 11 characters.&quot;)
+    private String projectDescription;
+    ...</pre>
+</div></div></td></tr></tbody></table></div><h2 id="EnsurethatfieldsinthePOSTcommandhavevaluesorlimitlengthoffield-ModifyControllertoadd@Validannotation">Modify Controller to add @Valid annotation</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@PostMapping(&quot;/projects&quot;)
+public ResponseEntity&lt;?&gt; createProject(@RequestBody @Valid Project project)</pre>
+</div></div></td></tr></tbody></table></div><h2 id="EnsurethatfieldsinthePOSTcommandhavevaluesorlimitlengthoffield-ChangestoCustomizedResponseEntityExceptionHandler">Changes to CustomizedResponseEntityExceptionHandler</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@ControllerAdvice
+public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler
+{
+    ...
+    @Override
+    protected ResponseEntity&lt;Object&gt; handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request)
+    {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(ZonedDateTime.now(), &quot;Validation Failed&quot;,
+                ex.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h2 id="EnsurethatfieldsinthePOSTcommandhavevaluesorlimitlengthoffield-Test">Test</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>POST Request</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Body</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p>localhost:8081/projects</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+    &quot;projectDescription&quot;: &quot;Project X&quot;
+}</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;timestamp&quot;: &quot;2020-06-05T15:06:30.54Z&quot;,
+  &quot;message&quot;: &quot;Validation Failed&quot;,
+  &quot;details&quot;: &quot;Project name must be specified.&quot;
+}</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+    &quot;projectName&quot; : &quot;P-X&quot;,
+    &quot;projectDescription&quot;: &quot;Project XXXXXXXXXXXXXXX&quot;
+}</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;timestamp&quot;: &quot;2020-06-05T15:04:03.285Z&quot;,
+  &quot;message&quot;: &quot;Validation Failed&quot;,
+  &quot;details&quot;: &quot;Project description must be less than 11 characters.&quot;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

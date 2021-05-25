@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Map Problems</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Java-Problems_858619905.html">Java Problems</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Map Problems
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Feb 04, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1613190976270 {padding: 0px;}
+div.rbtoc1613190976270 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1613190976270 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1613190976270'>
+<ul class='toc-indentation'>
+<li><a href='#MapProblems-BestAverage'>BestAverage</a>
+<ul class='toc-indentation'>
+<li><a href='#MapProblems-bestAverageGradeUsingMerge'>bestAverageGradeUsingMerge</a></li>
+<li><a href='#MapProblems-bestAverageGradeUsingList'>bestAverageGradeUsingList</a></li>
+<li><a href='#MapProblems-bestAverageGradeUsingListAndReduce'>bestAverageGradeUsingListAndReduce</a></li>
+<li><a href='#MapProblems-bestAverageGradeUsingListAndSummaryStatistics'>bestAverageGradeUsingListAndSummaryStatistics</a></li>
+<li><a href='#MapProblems-bestAverageGradeUsingListAndAverage'>bestAverageGradeUsingListAndAverage</a></li>
+</ul>
+</li>
+<li><a href='#MapProblems-ClosingPrices'>ClosingPrices</a></li>
+<li><a href='#MapProblems-ConstructItinerary'>ConstructItinerary</a></li>
+<li><a href='#MapProblems-CustomSortString'>CustomSortString</a></li>
+<li><a href='#MapProblems-DictionaryWordCount'>DictionaryWordCount</a>
+<ul class='toc-indentation'>
+<li><a href='#MapProblems-wordCountWithMerge'>wordCountWithMerge</a></li>
+<li><a href='#MapProblems-wordCountWithCounting'>wordCountWithCounting</a></li>
+<li><a href='#MapProblems-mostFrequentWord'>mostFrequentWord</a></li>
+<li><a href='#MapProblems-firstMostFrequentWord'>firstMostFrequentWord</a></li>
+</ul>
+</li>
+<li><a href='#MapProblems-FractionToDecimal'>FractionToDecimal</a></li>
+<li><a href='#MapProblems-LengthOfCycle'>LengthOfCycle</a></li>
+<li><a href='#MapProblems-LongestString'>LongestString</a></li>
+<li><a href='#MapProblems-MostCommon'>MostCommon</a>
+<ul class='toc-indentation'>
+<li><a href='#MapProblems-mostCommonInRange'>mostCommonInRange</a></li>
+</ul>
+</li>
+<li><a href='#MapProblems-MostProfitAssigningWork'>MostProfitAssigningWork</a></li>
+<li><a href='#MapProblems-SortArrayByFrequency'>SortArrayByFrequency</a></li>
+<li><a href='#MapProblems-SortLogFile'>SortLogFile</a></li>
+</ul>
+</div><p /><h2 id="MapProblems-BestAverage">BestAverage</h2><h3 id="MapProblems-bestAverageGradeUsingMerge"><code>bestAverageGradeUsingMerge</code></h3><h3 id="MapProblems-bestAverageGradeUsingList"><code>bestAverageGradeUsingList</code></h3><h3 id="MapProblems-bestAverageGradeUsingListAndReduce"><code>bestAverageGradeUsingListAndReduce</code></h3><h3 id="MapProblems-bestAverageGradeUsingListAndSummaryStatistics"><code>bestAverageGradeUsingListAndSummaryStatistics</code></h3><h3 id="MapProblems-bestAverageGradeUsingListAndAverage"><code>bestAverageGradeUsingListAndAverage</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 890.0px;"/><col style="width: 721.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>BestAverage</p></th><th class="confluenceTh"><p /></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static double bestAverageGradeUsingMerge(String[][] data)
+{
+    Map&lt;String,Long&gt; totalsMap = Arrays.stream(data).collect(
+            HashMap::new,
+            (m, i) -&gt; m.merge(i[0], Long.parseLong(i[1]), Long::sum),
+            HashMap::putAll);
+    Map&lt;String,Long&gt; countMap = Arrays.stream(data).collect(
+            Collectors.groupingBy((String[] a) -&gt; a[0], Collectors.counting()));
+    return totalsMap.entrySet().stream()
+            .map(e -&gt; e.getValue() / (double)countMap.get(e.getKey()))
+            .reduce(0.0, Double::max);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static double bestAverageGradeUsingList(String[][] data)
+{
+    Map&lt;String, List&lt;Integer&gt;&gt; totalsMap = Arrays.stream(data).collect(
+            HashMap::new,
+            (m, i) -&gt; m.computeIfAbsent(i[0], a -&gt; new ArrayList&lt;&gt;()).add(Integer.parseInt(i[1])),
+            HashMap::putAll);
+    double max = 0.0;
+    for(List&lt;Integer&gt; list : totalsMap.values())
+    {
+        max = Math.max(max, list.stream().mapToInt(x -&gt; x).sum() / (double) list.size());
+    }
+    return max;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static double bestAverageGradeUsingListAndReduce(String[][] data)
+{
+    Map&lt;String, List&lt;Double&gt;&gt; totalsMap = Arrays.stream(data).collect(
+            HashMap::new,
+            (m, i) -&gt; m.computeIfAbsent(i[0], a -&gt; new ArrayList&lt;&gt;()).add(Double.parseDouble(i[1])),
+            HashMap::putAll);
+    //  Option 1
+    //        return totalsMap.values().stream()
+    //                .map(a -&gt; a.stream().reduce(Double::sum).get() / a.size())
+    //                .reduce(0.0, Double::max);
+    //  Option 2
+    return totalsMap.values().stream()
+            .map(a -&gt; a.stream().reduce(Double::sum).get() / a.size())
+            .reduce(Double::max).get();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static double bestAverageGradeUsingListAndSummaryStatistics(String[][] data)
+{
+    Map&lt;String, List&lt;Integer&gt;&gt; totalsMap = Arrays.stream(data).collect(
+            HashMap::new,
+            (m, i) -&gt; m.computeIfAbsent(i[0], a -&gt; new ArrayList&lt;&gt;()).add(Integer.parseInt(i[1])),
+            HashMap::putAll);
+    double maxAvg = 0.0;
+    for(List&lt;Integer&gt; list : totalsMap.values())
+    {
+        IntSummaryStatistics stats = list.stream().mapToInt(x -&gt; x).summaryStatistics();
+        maxAvg = Math.max(maxAvg, stats.getAverage());
+    }
+    return maxAvg;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static double bestAverageGradeUsingListAndAverage(String[][] data)
+{
+    Map&lt;String, List&lt;Integer&gt;&gt; totalsMap = Arrays.stream(data).collect(
+            HashMap::new,
+            (m, i) -&gt; m.computeIfAbsent(i[0], a -&gt; new ArrayList&lt;&gt;()).add(Integer.parseInt(i[1])),
+            HashMap::putAll);
+    return totalsMap.values().stream()
+            .map(a -&gt; a.stream().mapToDouble(x -&gt; x).average().getAsDouble())
+            .reduce(Double::max).get();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String[][] data = {
+            {&quot;nick&quot;, &quot;81&quot;},
+            {&quot;paul&quot;, &quot;50&quot;},
+            {&quot;ron&quot;, &quot;60&quot;},
+            {&quot;nick&quot;, &quot;100&quot;}
+    };
+    boolean check = bestAverageGradeUsingMerge(data) == 90.5;
+    if(!check)
+    {
+        return false;
+    }
+    check = bestAverageGradeUsingList(data) == 90.5;
+    if(!check)
+    {
+        return false;
+    }
+    check = bestAverageGradeUsingListAndReduce(data) == 90.5;
+    if(!check)
+    {
+        return false;
+    }
+    check = bestAverageGradeUsingListAndSummaryStatistics(data) == 90.5;
+    if(!check)
+    {
+        return false;
+    }
+    check = bestAverageGradeUsingListAndAverage(data) == 90.5;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="MapProblems-ClosingPrices">ClosingPrices</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 807.0px;"/><col style="width: 804.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ClosingPrices</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">We need to process a feed. Each line in the feed is either a ticker or a price.
+For each ticker, we need to report the last (i.e. closing price)
+For example:
+        &quot;007000AA\n&quot; +
+        &quot;15.47\n&quot; +
+        &quot;15.48\n&quot; +
+        &quot;15.49\n&quot; +
+        &quot;008000BB\n&quot; +
+        &quot;45.13\n&quot; +
+        &quot;45.14\n&quot; +
+        &quot;009000CC\n&quot; +
+        &quot;89.10\n&quot;;</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class ClosingPrices
+{
+    private Map&lt;String, Double&gt; closingPrices = new HashMap&lt;&gt;();
+    private enum EntryType {CUSIP, PRICE, ERROR};
+
+    public ClosingPrices(BufferedReader reader) throws IOException
+    {
+        readInput(reader);
+    }
+
+    private void readInput(BufferedReader reader) throws IOException
+    {
+
+        String line;
+        String lastCusip = &quot;&quot;;
+        while((line = reader.readLine()) != null)
+        {
+            line.trim();
+            if(StringUtils.isBlank(line))
+            {
+                continue;
+            }
+
+            EntryType entryType = entryType(line);
+            if(entryType == EntryType.CUSIP)
+            {
+                if(!line.equals(lastCusip))
+                {
+                    lastCusip = line;
+                    closingPrices.put(line, null);
+                }
+            }
+            else if(entryType == EntryType.PRICE)
+            {
+                closingPrices.put(lastCusip, Double.parseDouble(line));
+            }
+        }
+    }
+
+    double getClosingPrice(String ticker)
+    {
+        return closingPrices.get(ticker);
+    }
+
+    private EntryType entryType(String line)
+    {
+        if(line.matches(&quot;[a-zA-Z0-9]{8}&quot;))
+        {
+            return EntryType.CUSIP;
+        }
+        else if(line.matches(&quot;\\d+\\.?\\d+&quot;))
+        {
+            return EntryType.PRICE;
+        }
+        else
+        {
+            return EntryType.ERROR;
+        }
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass() throws IOException
+{
+    String input =  &quot;007000AA\n&quot; +
+                    &quot;15.47\n&quot; +
+                    &quot;15.48\n&quot; +
+                    &quot;15.49\n&quot; +
+                    &quot;008000BB\n&quot; +
+                    &quot;45.13\n&quot; +
+                    &quot;45.14\n&quot; +
+                    &quot;009000CC\n&quot; +
+                    &quot;89.10\n&quot;;
+    BufferedReader reader = new BufferedReader(new StringReader(input));
+    ClosingPrices closingPrices = new ClosingPrices(reader);
+    boolean check = closingPrices.getClosingPrice(&quot;007000AA&quot;) == 15.49 &amp;&amp; 
+            closingPrices.getClosingPrice(&quot;008000BB&quot;) == 45.14;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="MapProblems-ConstructItinerary"><br/>ConstructItinerary</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 807.0px;"/><col style="width: 804.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ConstructItinerary</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Consider trips
+From: To:               Itinerary
+---------               ---------
+B  -&gt; C                 A  -&gt; B
+D  -&gt; E                 B  -&gt; C
+A  -&gt; B                 C  -&gt; D
+C  -&gt; D                 D  -&gt; E
+//  Reverse input map
+//  Starting point will be the key not found in reversed map</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Map&lt;String,String&gt; itinerary(Map&lt;String,String&gt; trips)
+{
+    //  Reverse input map
+    Map&lt;String,String&gt; reveredMap = trips.entrySet().stream().collect(
+            Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+    //  Starting point will be the key not found in reversed map
+    Set&lt;String&gt; startPoint = new HashSet&lt;&gt;(trips.keySet());
+    startPoint.removeAll(reveredMap.keySet());
+    if(startPoint.size() != 1)
+    {
+        return null;
+    }
+    String start = startPoint.iterator().next();
+    String end;
+    Map&lt;String,String&gt; result = new HashMap&lt;&gt;();
+    while((end = trips.get(start)) != null)
+    {
+        result.put(start, end);
+        start = end;
+    }
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Map&lt;String,String&gt; trips = new HashMap&lt;String,String&gt;() {{
+        put(&quot;B&quot;, &quot;C&quot;);
+        put(&quot;D&quot;, &quot;E&quot;);
+        put(&quot;A&quot;, &quot;B&quot;);
+        put(&quot;C&quot;, &quot;D&quot;);
+    }};
+    Map&lt;String, String&gt; result = itinerary(trips);
+    boolean check = result.get(&quot;A&quot;).equals(&quot;B&quot;) &amp;&amp; 
+                    result.get(&quot;B&quot;).equals(&quot;C&quot;) &amp;&amp; 
+                    result.get(&quot;C&quot;).equals(&quot;D&quot;) &amp;&amp; 
+                    result.get(&quot;D&quot;).equals(&quot;E&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p /><h2 id="MapProblems-CustomSortString">CustomSortString</h2><p>See <a href="https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875560984/Strings+Problems#%5BhardBreak%5DCustomSortString" data-card-appearance="inline" rel="nofollow">https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875560984/Strings+Problems#%5BhardBreak%5DCustomSortString</a> </p><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 807.0px;"/><col style="width: 804.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>CustomSortString</p></th><th class="confluenceTh"><p>Test</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Given one string (&#39;abbceeeg&#39;) sort it based on another string (&#39;egbca&#39;)
+Result will be: &#39;eeegbbca&#39;
+Use map for more optimal solution</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static String customSortString(String s, String sortOrder)
+{
+    Map&lt;Character,Integer&gt; map = s.chars().mapToObj(c -&gt; (char)c).collect(
+            HashMap::new,
+            (m, i) -&gt; m.merge(i, 1, Integer::sum),
+            HashMap::putAll);
+    char[] result = new char[s.length()];
+    int pos = 0;
+    for(char c : sortOrder.toCharArray())
+    {
+        int count = map.get(c);
+        Arrays.fill(result, pos, pos + count, c);
+        pos += count;
+    }
+    return new String(result);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = customSortString(&quot;abbceeeg&quot;, &quot;egbca&quot;).equals(&quot;eeegbbca&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><p /><h2 id="MapProblems-DictionaryWordCount">DictionaryWordCount</h2><h3 id="MapProblems-wordCountWithMerge"><code>wordCountWithMerge</code></h3><h3 id="MapProblems-wordCountWithCounting"><code>wordCountWithCounting</code></h3><h3 id="MapProblems-mostFrequentWord"><code>mostFrequentWord</code></h3><h3 id="MapProblems-firstMostFrequentWord"><code>firstMostFrequentWord</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 795.0px;"/><col style="width: 816.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>DictionaryWordCount</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Map&lt;String,Integer&gt; wordCountWithMerge(String dictionary)
+{
+    String[] words = dictionary.split(&quot;\\s+&quot;);
+    return Arrays.stream(words).collect(
+            HashMap::new,
+            (m, i) -&gt; m.merge(i, 1, Integer::sum),
+            HashMap::putAll);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Map&lt;String,Long&gt; wordCountWithCounting(String dictionary)
+{
+    String[] words = dictionary.split(&quot;\\s+&quot;);
+    return Arrays.stream(words)
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static List&lt;String&gt; mostFrequentWord(String dictionary)
+{
+    Map&lt;String,Integer&gt; map = wordCountWithMerge(dictionary);
+    int mostUsedWord = map.values().stream().mapToInt(x -&gt; x).max().getAsInt();
+    return map.entrySet().stream()
+            .filter(e -&gt; e.getValue() == mostUsedWord)
+            .map(Map.Entry::getKey)
+            .collect(Collectors.toList());
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String firstMostFrequentWord(String dictionary)
+{
+    Map&lt;String,Integer&gt; map = wordCountWithMerge(dictionary);
+    List&lt;Pair&lt;String,Integer&gt;&gt; pairs = map.entrySet().stream()
+            .map(e -&gt; Pair.of(e.getKey(), e.getValue())).collect(Collectors.toList());
+    return pairs.stream().max(Comparator.comparing(Pair::getRight)).map(Pair::getLeft).get();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Map&lt;String,Long&gt; result1 = wordCountWithCounting(&quot;one two one three two one one&quot;);
+    boolean check = result1.get(&quot;one&quot;) == 4 &amp;&amp; result1.get(&quot;two&quot;) == 2 &amp;&amp; result1.get(&quot;three&quot;) == 1;
+    if(!check)
+    {
+        return false;
+    }
+    Map&lt;String,Integer&gt; result2 = wordCountWithMerge(&quot;one two one three two one one&quot;);
+    check = result2.get(&quot;one&quot;) == 4 &amp;&amp; result2.get(&quot;two&quot;) == 2 &amp;&amp; result2.get(&quot;three&quot;) == 1;
+    if(!check)
+    {
+        return false;
+    }
+    check = mostFrequentWord(&quot;one two one three two one one&quot;).get(0).equals(&quot;one&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = firstMostFrequentWord(&quot;one two one three two one one&quot;).equals(&quot;one&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="MapProblems-FractionToDecimal"><br/>FractionToDecimal</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 807.0px;"/><col style="width: 804.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>FractionToDecimal</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Numerator = 1, Denominator = 2 -&gt; &quot;0.5&quot;
+Numerator = 2, Denominator = 1 -&gt; &quot;2&quot;
+Numerator = 2, Denominator = 3 -&gt; &quot;0.(6)&quot;
+Consider: 2/3
+                    map
+rem     result  key     value
+20      0.      20      2</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String fractionToDecimal(int n, int d)
+{
+    if(n == 0)
+    {
+        return &quot;0&quot;;
+    }
+    if(d == 0)
+    {
+        return &quot;&quot;;
+    }
+    String result = &quot;&quot;;
+    if((n &lt; 0) ^ (d &lt; 0))
+    {
+        result += &quot;-&quot;;
+    }
+    n = Math.abs(n);
+    d = Math.abs(d);
+    result += n / d;
+    //  Remainder
+    int rem = n % d * 10;
+    if(rem == 0)
+    {
+        return result;
+    }
+    result += &quot;.&quot;;
+    Map&lt;Integer, Integer&gt; map = new HashMap&lt;&gt;();
+    while(rem != 0)
+    {
+        if(map.containsKey(rem))
+        {
+            int beg = map.get(rem);
+            String part1 = result.substring(0, beg);
+            String part2 = result.substring(beg);
+            result = part1 + &quot;(&quot; + part2 + &quot;)&quot;;
+            return result;
+        }
+        map.put(rem, result.length());
+        result += rem / d;
+        rem = rem % d * 10;
+    }
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = fractionToDecimal(1, 2).equals(&quot;0.5&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = fractionToDecimal(2, 1).equals(&quot;2&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = fractionToDecimal(2, 3).equals(&quot;0.(6)&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="MapProblems-LengthOfCycle"><br/>LengthOfCycle</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 807.0px;"/><col style="width: 804.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>LengthOfCycle</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">You are given an integer array of size N.
+Every element of the array is greater than or equal to 0.
+Starting from arr[startIndex], follow each element to the index it points to.
+Continue to do this until you find a cycle.
+Return the length of the cycle. If no cycle is found return -1
+Examples:
+countLengthOfCycle([1, 0], 0) == 2
+countLengthOfCycle([1, 2, 0], 0) == 3</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int lengthOfCycle(int[] a, int startIndex)
+{
+    Map&lt;Integer, Integer&gt; visitedMap = new HashMap&lt;&gt;();
+    int count = 1;
+    int index = startIndex;
+    while(!visitedMap.containsKey(index))
+    {
+        if(a[index] &gt; a.length)
+        {
+            return -1;
+        }
+        visitedMap.put(index, count++);
+        index = a[index];
+    }
+    return count - visitedMap.get(index);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = lengthOfCycle(new int[] {1, 2, 0}, 0) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="MapProblems-LongestString"><br/>LongestString</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 758.0px;"/><col style="width: 853.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>LongestString</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&quot;abcbbbbcccbdddadacb&quot;, 2 -&gt; &quot;bcbbbbcccb&quot;</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Pair&lt;Integer,String&gt; longestSubstringLengthWithNUnique(String s, int n)
+{
+    int max = 0, start = 0;
+    String maxStr = &quot;&quot;;
+    Map&lt;Character,Integer&gt; map = new HashMap&lt;&gt;();
+    for(int i = 0; i &lt; s.length(); ++i)
+    {
+        map.merge(s.charAt(i), 1, Integer::sum);
+        if(map.size() &gt; n)
+        {
+            if(i - start &gt; max)
+            {
+                max = i - start;
+                maxStr = s.substring(start, i);
+            }
+            while(map.size() &gt; n)
+            {
+                char c = s.charAt(start);
+                int count = map.get(c);
+                if(count &gt; 1)
+                {
+                    map.put(c, count - 1);
+                }
+                else
+                {
+                    map.remove(c);
+                }
+                start++;
+            }
+        }
+    }
+    if(s.length() - start &gt; max)
+    {
+        max = s.length() - start;
+        maxStr = s.substring(start, start + max);
+    }
+    return Pair.of(max, maxStr);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Pair&lt;Integer,String&gt; pair = longestSubstringLengthWithNUnique(&quot;abcbbbbcccbdddadacb&quot;, 2);
+    boolean check = pair.getLeft() == 10 &amp;&amp; pair.getRight().equals(&quot;bcbbbbcccb&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="MapProblems-MostCommon"><br/>MostCommon</h2><h3 id="MapProblems-mostCommonInRange"><code>mostCommonInRange</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 1014.0px;"/><col style="width: 597.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MostCommon</p></th><th class="confluenceTh"><p /></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Given a set of consecutive number ranges. Find the most common number.
+We can be assured that second dimension is &gt;= than first
+Given: {{1, 6}, {2, 5}, {3, 8}, {5, 7}}
+The most popular number would be 5
+Same approach can be used to figure out which people are alive on a give year, for Example:
+Person Year Born Year Died
+---------------------------
+A 1958 1988
+B 1961 1999
+.. ... ...</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int mostCommonInRange(int[][] ranges)
+{
+    Map&lt;Integer, Integer&gt; countMap = new HashMap&lt;&gt;();
+    for(int[] range : ranges)
+    {
+        IntStream.rangeClosed(range[0], range[1]).forEach(i -&gt; countMap.merge(i, 1, Integer::sum));
+    }
+    Pair&lt;Integer,Integer&gt; pair = countMap.entrySet().stream()
+            .map(e -&gt; Pair.of(e.getKey(), e.getValue()))
+            .max(Comparator.comparing(Pair::getRight)).get();
+    return pair.getLeft();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int mostCommonInRange1(int[][] ranges)
+{
+    //  Use this method if Pair class  is not available
+    Map&lt;Integer, Integer&gt; countMap = new HashMap&lt;&gt;();
+    for(int[] range : ranges)
+    {
+        IntStream.rangeClosed(range[0], range[1]).forEach(i -&gt; countMap.merge(i, 1, Integer::sum));
+    }
+    int[] pair = countMap.entrySet().stream()
+            .map(e -&gt; new int[]{e.getKey(), e.getValue()})
+            .max(Comparator.comparingInt((int[] a) -&gt; a[1])).get();
+    return pair[0];
+}</pre>
+</div></div></td><td class="confluenceTd"><p /><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[][] data = {{1, 6}, {2, 5}, {3, 8}, {5, 7}};
+    return mostCommonInRange(data) == 5 &amp;&amp; 
+            mostCommonInRange1(data) == 5;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="MapProblems-MostProfitAssigningWork">MostProfitAssigningWork</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 984.0px;"/><col style="width: 627.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MostProfitAssigningWork</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">We have jobs: difficulty[i] is the difficulty of the ith job, and profit[i] is the profit of the ith jo
+Now we have some workers. worker[i] is the ability of the ith worker,
+which means that this worker can only complete a job with difficulty at most worker[i].
+Every worker can be assigned at most one job, but one job can be completed multiple times.
+For example, if 3 people attempt the same job that pays $1, then the total profit will be $3.
+If a worker cannot complete any job, his profit is $0.
+What is the most profit we can make?
+Example:
+    Input: difficulty = [2,4,6,8,10], profit = [10,20,30,40,50], worker = [4,5,6,7]
+    Output: 100
+    Workers are assigned jobs of difficulty [4,4,6,6] and they get profit of [20,20,30,30] seperately.</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int mostProfit(int[] difficulty, int[] profit, int[] worker)
+{
+    Map&lt;Integer,Integer&gt; profitMap = new HashMap&lt;&gt;();
+    for(int i = 0; i &lt; difficulty.length - 1; ++i)
+    {
+        for(int j = difficulty[i]; j &lt; difficulty[i + 1]; ++j)
+        {
+            profitMap.put(j, profit[i]);
+        }
+    }
+    int totalProfit = 0;
+    for(int i = 0; i &lt; worker.length; ++i)
+    {
+        totalProfit += profitMap.get(worker[i]);
+    }
+    return totalProfit;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = mostProfit(new int[] {2,4,6,8,10},
+            new int[] {10,20,30,40,50}, new int[] {4,5,6,7}) == 100;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><p /><h2 id="MapProblems-SortArrayByFrequency">SortArrayByFrequency</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 894.0px;"/><col style="width: 717.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>SortArrayByFrequency</p></th><th class="confluenceTh"><p>Test</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] sortByFrequency(int [] a)
+{
+    Map&lt;Integer,Integer&gt; map = Arrays.stream(a).boxed().collect(
+            LinkedHashMap::new,
+            (m, i) -&gt; m.merge(i, 1, Integer::sum),
+            LinkedHashMap::putAll);
+    Map&lt;Integer,List&lt;Integer&gt;&gt; frequencyMap = new TreeMap&lt;&gt;(Comparator.reverseOrder());
+    for(Map.Entry&lt;Integer, Integer&gt; entry : map.entrySet())
+    {
+        frequencyMap.computeIfAbsent(entry.getValue(), x -&gt; new ArrayList&lt;&gt;()).add(entry.getKey());
+    }
+    List&lt;Integer&gt; result = new ArrayList&lt;&gt;();
+    for(Map.Entry&lt;Integer, List&lt;Integer&gt;&gt; entry : frequencyMap.entrySet())
+    {
+        int frequency = entry.getKey();
+        List&lt;Integer&gt; values = entry.getValue();
+        for(int value : values)
+        {
+            for(int i = 0; i &lt; frequency; ++i)
+            {
+                result.add(value);
+            }
+        }
+    }
+    return result.stream().mapToInt(x -&gt; x).toArray();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = Arrays.equals(sortByFrequency(new int[] {3, 2, 1, 3, 1, 2, 3, 2, 3}),
+            new int[] {3, 3, 3, 3, 2, 2, 2, 1, 1});
+    if(!check)
+    {
+        return false;
+    }
+    int[] x = sortByFrequency(new int[] {3, 3, 1, 1, 2, 2});
+    check = Arrays.equals(sortByFrequency(new int[] {3, 3, 1, 1, 2, 2}),
+            new int[] {3, 3, 1, 1, 2, 2});
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="MapProblems-SortLogFile">SortLogFile</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 807.0px;"/><col style="width: 804.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>SortLogFile</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Message is preceded by ID.
+Messages containing text should come before messages containing all numbers
+If two messages are same, they should be ordered by their ID
+Unsorted                    Sorted
+--------                    ------
+&quot;A3 one two three&quot;;         &quot;A2 hello world&quot;;
+&quot;A2 hello world&quot;;           &quot;A4 hello world&quot;;
+&quot;B2 3 5 8 12&quot;;              &quot;A1 one two three&quot;;
+&quot;A1 one two three&quot;;         &quot;A3 one two three&quot;;
+&quot;B1 5 2 19&quot;;                &quot;B2 3 5 8 12&quot;;
+&quot;A4 hello world&quot;;           &quot;B1 5 2 19&quot;;</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static List&lt;String&gt; sortMessages(String[] messages)
+{
+    Map&lt;String, SortedSet&lt;String&gt;&gt; stringMessageMap = new TreeMap&lt;&gt;();
+    Map&lt;String, SortedSet&lt;String&gt;&gt; numberMessageMap = new TreeMap&lt;&gt;();
+    for(String s : messages)
+    {
+        String[] a = s.split(&quot;\\s+&quot;);
+        String id = a[0];
+        String message = s.substring(id.length()).trim();
+        if(message.matches(&quot;^[\\d ]*$&quot;))
+        {
+            numberMessageMap.computeIfAbsent(message, x -&gt; new TreeSet&lt;&gt;()).add(id);
+        }
+        else
+        {
+            stringMessageMap.computeIfAbsent(message, x -&gt; new TreeSet&lt;&gt;()).add(id);
+        }
+    }
+    List&lt;String&gt; result = new ArrayList&lt;&gt;();
+    for(String message : stringMessageMap.keySet())
+    {
+        SortedSet&lt;String&gt; ids = stringMessageMap.get(message);
+        for(String id : ids)
+        {
+            result.add(id + &quot; &quot; + message);
+        }
+    }
+    for(String message : numberMessageMap.keySet())
+    {
+        SortedSet&lt;String&gt; ids = numberMessageMap.get(message);
+        for(String id : ids)
+        {
+            result.add(id + &quot; &quot; + message);
+        }
+    }
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String [] data = new String[] {
+            &quot;A3 one two three&quot;,
+            &quot;A2 hello world&quot;,
+            &quot;B2 3 5 8 12&quot;,
+            &quot;A1 one two three&quot;,
+            &quot;B1 5 2 19&quot;,
+            &quot;A4 hello world&quot;
+    };
+    List&lt;String&gt; sorted = sortMessages(data);
+    boolean check = sorted.get(0).equals(&quot;A2 hello world&quot;) &amp;&amp; 
+                    sorted.get(1).equals(&quot;A4 hello world&quot;) &amp;&amp;
+                    sorted.get(2).equals(&quot;A1 one two three&quot;) &amp;&amp; 
+                    sorted.get(3).equals(&quot;A3 one two three&quot;) &amp;&amp;
+                    sorted.get(4).equals(&quot;B2 3 5 8 12&quot;) &amp;&amp; 
+                    sorted.get(5).equals(&quot;B1 5 2 19&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p><br/></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

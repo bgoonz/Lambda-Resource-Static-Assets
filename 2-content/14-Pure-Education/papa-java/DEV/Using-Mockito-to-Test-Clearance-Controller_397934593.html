@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Using Mockito to Test Clearance Controller</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Project-Profit-Application_315097089.html">Project Profit Application</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unit-and-Integration-Tests-for-Subscription-Tracker_344522760.html">Unit and Integration Tests for Subscription Tracker</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tests-for-the-ClearanceController_397803521.html">Tests for the ClearanceController</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Using Mockito to Test Clearance Controller
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on May 27, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Prior to the technique to run Spring integration tests with mocked external controllers, we employed Mockito to @InjectMocks into the ClearanceController. We will no longer rely on this approach but present code in this section in case we ever need to fall back on this method.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RunWith(MockitoJUnitRunner.class)
+public class ClearanceControllerMockitoTest
+{
+    @Mock
+    private PeopleSearchController peopleSearchController;
+    @Mock
+    private CampController campController;
+    @Mock
+    private ComController comController;
+    @Mock
+    private AssignableRepository assignableRepository;
+    @Mock
+    private DutyAssignableMapRepository dutyAssignableMapRepository;
+    @Mock
+    private RuleDutyMapRepository ruleDutyMapRepository;
+
+    @InjectMocks
+    private ClearanceController clearanceController;
+
+
+    @Test
+    public void assign_to_vellde_with_no_overrides() throws Exception
+    {
+        //  In this test we will attempt to assign privileges from Duty-C, Duty-B, and Duty-Y to user vellde
+        //  User vellde currently holds privileges from Duty-A, Duty-C, and Duty-X which are all non-toxic to each other.
+        //  We will try assigning:
+        //      non-toxic privilege PC-10 (from Duty-C)
+        //      toxic privilege PB-10 (from Duty-B)
+        //      toxic privilege PY-10 (from Duty-Y)
+        //  Thus,
+        //  Request Expected Result
+        //  ======= ===============
+        //  PC-10   pass
+        //  PB-10   fail (violation of Rule-AB)
+        //  PY-10   fail (violation of Rule-XY)
+        //
+        //  Mock SoD data for user vellde
+        //  Assignables for user vellde
+        Assignable assignablePA_1 = new Assignable(1, &quot;9fb49ead-06fe-36a4-b31b-8e5982603e01&quot;, &quot;PA-1&quot;);
+        Assignable assignablePA_2 = new Assignable(2, &quot;e6ccff9d-690a-3ab9-97c8-66a0ab0b0552&quot;, &quot;PA-2&quot;);
+        Assignable assignablePA_3 = new Assignable(3, &quot;ed6e7618-12ca-38f2-aaca-2b6c6cd6af7a&quot;, &quot;PA-3&quot;);
+        Assignable assignablePC_1 = new Assignable(4, &quot;56d5fd3c-1c0e-3f80-86dc-24dbba67eb18&quot;, &quot;PC-1&quot;);
+        Assignable assignablePC_2 = new Assignable(5, &quot;eac4de19-59ee-3f08-ab27-2312db133307&quot;, &quot;PC-2&quot;);
+        Assignable assignablePC_3 = new Assignable(6, &quot;ac4914d8-b601-3195-87c0-ce4b4d431932&quot;, &quot;PC-3&quot;);
+        Assignable assignablePX_1 = new Assignable(7, &quot;d9874fd9-c1b7-30a5-a74a-316d07e21099&quot;, &quot;PX-1&quot;);
+        Assignable assignablePX_2 = new Assignable(8, &quot;7426b9a4-68da-3397-96d0-55850693025d&quot;, &quot;PX-2&quot;);
+        Assignable assignablePX_3 = new Assignable(9, &quot;23640e5c-b209-38ec-acb9-77c4800a41f4&quot;, &quot;PX-3&quot;);
+         //  Assignables that are non-toxic to user vellde
+        Assignable assignablePC_10 = new Assignable(22, &quot;99999999-0000-9999-0000-000000000022&quot;, &quot;PC-10&quot;);
+        //  Assignables that are toxic to user vellde
+        Assignable assignablePB_10 = new Assignable(19, &quot;99999999-0000-9999-0000-000000000019&quot;, &quot;PB-10&quot;);
+        Assignable assignablePY_10 = new Assignable(28, &quot;99999999-0000-9999-0000-000000000028&quot;, &quot;PY-10&quot;);
+
+        Duty duty_A = new Duty(1, &quot;Duty-A&quot;);
+        Duty duty_B = new Duty(2, &quot;Duty-B&quot;);
+        Duty duty_C = new Duty(3, &quot;Duty-C&quot;);
+        Duty duty_X = new Duty(4, &quot;Duty-X&quot;);
+        Duty duty_Y = new Duty(5, &quot;Duty-Y&quot;);
+
+        Rule rule_AB = new Rule(1, &quot;Rule-AB&quot;, 2097);
+        Rule rule_XY = new Rule(2, &quot;Rule-XY&quot;, 2097);
+
+        //  Assigned Non-toxic
+        DutyAssignablePair dutyAssignablePair_A_PA_1 = new DutyAssignablePair(1, duty_A, assignablePA_1);
+        DutyAssignablePair dutyAssignablePair_A_PA_2 = new DutyAssignablePair(2, duty_A, assignablePA_2);
+        DutyAssignablePair dutyAssignablePair_A_PA_3 = new DutyAssignablePair(3, duty_A, assignablePA_3);
+        DutyAssignablePair dutyAssignablePair_C_PC_1 = new DutyAssignablePair(4, duty_C, assignablePC_1);
+        DutyAssignablePair dutyAssignablePair_C_PC_2 = new DutyAssignablePair(5, duty_C, assignablePC_2);
+        DutyAssignablePair dutyAssignablePair_C_PC_3 = new DutyAssignablePair(6, duty_C, assignablePC_3);
+        DutyAssignablePair dutyAssignablePair_X_PX_1 = new DutyAssignablePair(7, duty_X, assignablePX_1);
+        DutyAssignablePair dutyAssignablePair_X_PX_2 = new DutyAssignablePair(8, duty_X, assignablePX_2);
+        DutyAssignablePair dutyAssignablePair_X_PX_3 = new DutyAssignablePair(9, duty_X, assignablePX_3);
+        //  Non-assigned Non-toxic
+        DutyAssignablePair dutyAssignablePair_C_PC_10 = new DutyAssignablePair(10, duty_C, assignablePC_10);
+        //  Non-assigned Toxic
+        DutyAssignablePair dutyAssignablePair_B_PB_10 = new DutyAssignablePair(11, duty_B, assignablePB_10);
+        DutyAssignablePair dutyAssignablePair_Y_PY10 = new DutyAssignablePair(12, duty_Y, assignablePY_10);
+
+        RuleDutyPair ruleDutyPair_AB_A = new RuleDutyPair(1, rule_AB, duty_A);
+        RuleDutyPair ruleDutyPair_AB_B = new RuleDutyPair(2, rule_AB, duty_B);
+        RuleDutyPair ruleDutyPair_XY_X = new RuleDutyPair(3, rule_XY, duty_X);
+        RuleDutyPair ruleDutyPair_XY_Y = new RuleDutyPair(4, rule_XY, duty_Y);
+
+//        rule_AB.addRuleDutyPair(ruleDutyPair_AB_A);
+//        rule_AB.addRuleDutyPair(ruleDutyPair_AB_B);
+//        rule_XY.addRuleDutyPair(ruleDutyPair_XY_X);
+//        rule_XY.addRuleDutyPair(ruleDutyPair_XY_Y);
+
+        List&lt;String&gt; velldePrivileges = Arrays.asList(
+                &quot;9fb49ead-06fe-36a4-b31b-8e5982603e01&quot;,
+                &quot;e6ccff9d-690a-3ab9-97c8-66a0ab0b0552&quot;,
+                &quot;ed6e7618-12ca-38f2-aaca-2b6c6cd6af7a&quot;,
+                &quot;56d5fd3c-1c0e-3f80-86dc-24dbba67eb18&quot;,
+                &quot;eac4de19-59ee-3f08-ab27-2312db133307&quot;,
+                &quot;ac4914d8-b601-3195-87c0-ce4b4d431932&quot;,
+                &quot;d9874fd9-c1b7-30a5-a74a-316d07e21099&quot;,
+                &quot;7426b9a4-68da-3397-96d0-55850693025d&quot;,
+                &quot;23640e5c-b209-38ec-acb9-77c4800a41f4&quot;
+        );
+        ResponseEntity privilegeResponseEntity = ResponseEntity.ok(velldePrivileges);
+
+        List&lt;Assignable&gt; velldeAssignables = Arrays.asList(
+                assignablePA_1, assignablePA_2, assignablePA_3,
+                assignablePC_1, assignablePC_2, assignablePC_3,
+                assignablePX_1, assignablePX_2, assignablePX_3);
+
+        List&lt;Long&gt; velldeAssignableIDs = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L);
+
+
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PC10 = Arrays.asList(dutyAssignablePair_C_PC_10);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PB10 = Arrays.asList(dutyAssignablePair_B_PB_10);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PY10 = Arrays.asList(dutyAssignablePair_Y_PY10);
+
+
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForCurrentPrivileges = Arrays.asList(
+                dutyAssignablePair_A_PA_1, dutyAssignablePair_A_PA_2, dutyAssignablePair_A_PA_3,
+                dutyAssignablePair_C_PC_1, dutyAssignablePair_C_PC_2, dutyAssignablePair_C_PC_3,
+                dutyAssignablePair_X_PX_1, dutyAssignablePair_X_PX_2, dutyAssignablePair_X_PX_3);
+
+        List&lt;RuleDutyPair&gt; ruleDutyPairListForDuty_A = Arrays.asList(ruleDutyPair_AB_A);
+        List&lt;RuleDutyPair&gt; ruleDutyPairListForDuty_B = Arrays.asList(ruleDutyPair_AB_B);
+        List&lt;RuleDutyPair&gt; ruleDutyPairListForDuty_X = Arrays.asList(ruleDutyPair_XY_X);
+        List&lt;RuleDutyPair&gt; ruleDutyPairListForDuty_Y = Arrays.asList(ruleDutyPair_XY_Y);
+
+        Mockito.when(peopleSearchController.guidFromKerberos(Mockito.anyString())).thenReturn(&quot;800202936&quot;);
+        Mockito.when(assignableRepository.findByPrivilegeIdAndSystem(Mockito.eq(&quot;99999999-0000-9999-0000-000000000022&quot;), Mockito.anyString()))
+                .thenReturn(Optional.of(assignablePC_10));
+        Mockito.when(assignableRepository.findByPrivilegeIdAndSystem(Mockito.eq(&quot;99999999-0000-9999-0000-000000000019&quot;), Mockito.anyString()))
+                .thenReturn(Optional.of(assignablePB_10));
+        Mockito.when(assignableRepository.findByPrivilegeIdAndSystem(Mockito.eq(&quot;99999999-0000-9999-0000-000000000028&quot;), Mockito.anyString()))
+                .thenReturn(Optional.of(assignablePY_10));
+        Mockito.when(campController.getCampPrivilegesByKerberos(Mockito.anyString())).thenReturn(privilegeResponseEntity);
+        Mockito.when(comController.getComOverrides(Mockito.anyString())).thenReturn(ResponseEntity.ok(Collections.emptyMap()));
+        Mockito.when(assignableRepository.findByPrivilegeIdList(Mockito.eq(velldePrivileges))).thenReturn(velldeAssignables);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(22L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PC10);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(19L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PB10);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(28L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PY10);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeIdList(Mockito.eq(velldeAssignableIDs))).thenReturn(dutyAssignablePairsForCurrentPrivileges);
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(1L))).thenReturn(ruleDutyPairListForDuty_A);
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(2L))).thenReturn(ruleDutyPairListForDuty_B);
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(3L))).thenReturn(Collections.emptyList());
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(4L))).thenReturn(ruleDutyPairListForDuty_X);
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(5L))).thenReturn(ruleDutyPairListForDuty_Y);
+
+        //  PC-10
+        ResponseEntity&lt;Resource&lt;?&gt;&gt; response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000022&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Map&lt;String,String&gt; data = (Map&lt;String,String&gt;)response.getBody().getContent();
+        String status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+
+        //  PB-10
+        response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000019&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        data = (Map&lt;String,String&gt;)response.getBody().getContent();
+        status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;fail&quot;, status);
+
+        //  PY-10
+        response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000028&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        data = (Map&lt;String,String&gt;)response.getBody().getContent();
+        status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;fail&quot;, status);
+    }
+
+    @Test
+    public void assign_to_vellde_with_kerberos_level_override_for_PB_10() throws Exception
+    {
+        //  In this test we will attempt to assign privileges from Duty-C, Duty-B, and Duty-Y to user vellde
+        //  User vellde currently holds privileges from Duty-A, Duty-C, and Duty-X which are all non-toxic to each other.
+        //  We will try assigning:
+        //      non-toxic privilege PC-10 (from Duty-C)
+        //      toxic privilege PB-10 (from Duty-B) - vellde has kerberos level override for this privilege
+        //      toxic privilege PY-10 (from Duty-Y)
+        //  Thus,
+        //  Request Expected Result
+        //  ======= ===============
+        //  PC-10   pass
+        //  PB-10   pass (violation of Rule-AB due to privilege level override)
+        //  PY-10   fail (violation of Rule-XY)
+        //
+        //  Mock SoD data for user vellde
+        //  Assignables for user vellde
+
+        //  Assignables for user vellde
+        Assignable assignablePA_1 = new Assignable(1, &quot;9fb49ead-06fe-36a4-b31b-8e5982603e01&quot;, &quot;PA-1&quot;);
+        Assignable assignablePA_2 = new Assignable(2, &quot;e6ccff9d-690a-3ab9-97c8-66a0ab0b0552&quot;, &quot;PA-2&quot;);
+        Assignable assignablePA_3 = new Assignable(3, &quot;ed6e7618-12ca-38f2-aaca-2b6c6cd6af7a&quot;, &quot;PA-3&quot;);
+        Assignable assignablePC_1 = new Assignable(4, &quot;56d5fd3c-1c0e-3f80-86dc-24dbba67eb18&quot;, &quot;PC-1&quot;);
+        Assignable assignablePC_2 = new Assignable(5, &quot;eac4de19-59ee-3f08-ab27-2312db133307&quot;, &quot;PC-2&quot;);
+        Assignable assignablePC_3 = new Assignable(6, &quot;ac4914d8-b601-3195-87c0-ce4b4d431932&quot;, &quot;PC-3&quot;);
+        Assignable assignablePX_1 = new Assignable(7, &quot;d9874fd9-c1b7-30a5-a74a-316d07e21099&quot;, &quot;PX-1&quot;);
+        Assignable assignablePX_2 = new Assignable(8, &quot;7426b9a4-68da-3397-96d0-55850693025d&quot;, &quot;PX-2&quot;);
+        Assignable assignablePX_3 = new Assignable(9, &quot;23640e5c-b209-38ec-acb9-77c4800a41f4&quot;, &quot;PX-3&quot;);
+        //  Assignables that are non-toxic to user vellde
+        Assignable assignablePC_10 = new Assignable(22, &quot;99999999-0000-9999-0000-000000000022&quot;, &quot;PC-10&quot;);
+        //  Assignables that are toxic to user vellde
+        Assignable assignablePB_10 = new Assignable(19, &quot;99999999-0000-9999-0000-000000000019&quot;, &quot;PB-10&quot;);
+        Assignable assignablePY_10 = new Assignable(28, &quot;99999999-0000-9999-0000-000000000028&quot;, &quot;PY-10&quot;);
+
+        Duty duty_A = new Duty(1, &quot;Duty-A&quot;);
+        Duty duty_B = new Duty(2, &quot;Duty-B&quot;);
+        Duty duty_C = new Duty(3, &quot;Duty-C&quot;);
+        Duty duty_X = new Duty(4, &quot;Duty-X&quot;);
+        Duty duty_Y = new Duty(5, &quot;Duty-Y&quot;);
+
+        Rule rule_AB = new Rule(1, &quot;Rule-AB&quot;, 2097);
+        Rule rule_XY = new Rule(2, &quot;Rule-XY&quot;, 2097);
+
+        //  Assigned Non-toxic
+        DutyAssignablePair dutyAssignablePair_A_PA_1 = new DutyAssignablePair(1, duty_A, assignablePA_1);
+        DutyAssignablePair dutyAssignablePair_A_PA_2 = new DutyAssignablePair(2, duty_A, assignablePA_2);
+        DutyAssignablePair dutyAssignablePair_A_PA_3 = new DutyAssignablePair(3, duty_A, assignablePA_3);
+        DutyAssignablePair dutyAssignablePair_C_PC_1 = new DutyAssignablePair(4, duty_C, assignablePC_1);
+        DutyAssignablePair dutyAssignablePair_C_PC_2 = new DutyAssignablePair(5, duty_C, assignablePC_2);
+        DutyAssignablePair dutyAssignablePair_C_PC_3 = new DutyAssignablePair(6, duty_C, assignablePC_3);
+        DutyAssignablePair dutyAssignablePair_X_PX_1 = new DutyAssignablePair(7, duty_X, assignablePX_1);
+        DutyAssignablePair dutyAssignablePair_X_PX_2 = new DutyAssignablePair(8, duty_X, assignablePX_2);
+        DutyAssignablePair dutyAssignablePair_X_PX_3 = new DutyAssignablePair(9, duty_X, assignablePX_3);
+        //  Non-assigned Non-toxic
+        DutyAssignablePair dutyAssignablePair_C_PC_10 = new DutyAssignablePair(10, duty_C, assignablePC_10);
+        //  Non-assigned Toxic
+        DutyAssignablePair dutyAssignablePair_B_PB_10 = new DutyAssignablePair(11, duty_B, assignablePB_10);
+        DutyAssignablePair dutyAssignablePair_Y_PY_10 = new DutyAssignablePair(12, duty_Y, assignablePY_10);
+
+        RuleDutyPair ruleDutyPair_AB_A = new RuleDutyPair(1, rule_AB, duty_A);
+        RuleDutyPair ruleDutyPair_AB_B = new RuleDutyPair(2, rule_AB, duty_B);
+        RuleDutyPair ruleDutyPair_XY_X = new RuleDutyPair(3, rule_XY, duty_X);
+        RuleDutyPair ruleDutyPair_XY_Y = new RuleDutyPair(4, rule_XY, duty_Y);
+
+        rule_AB.addRuleDutyPair(ruleDutyPair_AB_A);
+        rule_AB.addRuleDutyPair(ruleDutyPair_AB_B);
+        rule_XY.addRuleDutyPair(ruleDutyPair_XY_X);
+        rule_XY.addRuleDutyPair(ruleDutyPair_XY_Y);
+
+        List&lt;String&gt; velldePrivileges = Arrays.asList(
+                &quot;9fb49ead-06fe-36a4-b31b-8e5982603e01&quot;,
+                &quot;e6ccff9d-690a-3ab9-97c8-66a0ab0b0552&quot;,
+                &quot;ed6e7618-12ca-38f2-aaca-2b6c6cd6af7a&quot;,
+                &quot;56d5fd3c-1c0e-3f80-86dc-24dbba67eb18&quot;,
+                &quot;eac4de19-59ee-3f08-ab27-2312db133307&quot;,
+                &quot;ac4914d8-b601-3195-87c0-ce4b4d431932&quot;,
+                &quot;d9874fd9-c1b7-30a5-a74a-316d07e21099&quot;,
+                &quot;7426b9a4-68da-3397-96d0-55850693025d&quot;,
+                &quot;23640e5c-b209-38ec-acb9-77c4800a41f4&quot;
+        );
+        ResponseEntity privilegeResponseEntity = ResponseEntity.ok(velldePrivileges);
+
+        List&lt;Assignable&gt; velldeAssignables = Arrays.asList(
+                assignablePA_1, assignablePA_2, assignablePA_3,
+                assignablePC_1, assignablePC_2, assignablePC_3,
+                assignablePX_1, assignablePX_2, assignablePX_3);
+
+        List&lt;Long&gt; velldeAssignableIDs = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L);
+
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PC10 = Arrays.asList(dutyAssignablePair_C_PC_10);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PB10 = Arrays.asList(dutyAssignablePair_B_PB_10);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PY10 = Arrays.asList(dutyAssignablePair_Y_PY_10);
+
+
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForCurrentPrivileges = Arrays.asList(
+                dutyAssignablePair_A_PA_1, dutyAssignablePair_A_PA_2, dutyAssignablePair_A_PA_3,
+                dutyAssignablePair_C_PC_1, dutyAssignablePair_C_PC_2, dutyAssignablePair_C_PC_3,
+                dutyAssignablePair_X_PX_1, dutyAssignablePair_X_PX_2, dutyAssignablePair_X_PX_3);
+
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForDuty_A = Arrays.asList(dutyAssignablePair_A_PA_1, dutyAssignablePair_A_PA_2, dutyAssignablePair_A_PA_3);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForDuty_X = Arrays.asList(dutyAssignablePair_X_PX_1, dutyAssignablePair_X_PX_2, dutyAssignablePair_X_PX_3);
+
+        List&lt;RuleDutyPair&gt; ruleDutyPairListForDuty_A = Arrays.asList(ruleDutyPair_AB_A);
+        List&lt;RuleDutyPair&gt; ruleDutyPairListForDuty_B = Arrays.asList(ruleDutyPair_AB_B);
+        List&lt;RuleDutyPair&gt; ruleDutyPairListForDuty_X = Arrays.asList(ruleDutyPair_XY_X);
+        List&lt;RuleDutyPair&gt; ruleDutyPairListForDuty_Y = Arrays.asList(ruleDutyPair_XY_Y);
+
+        Map&lt;String,List&lt;Map&lt;String, String&gt;&gt;&gt; overrideForPB_10 = new HashMap&lt;&gt;() {{
+                    put(&quot;kerberos overrides&quot;, Arrays.asList(new HashMap&lt;&gt;() {{
+                                                        put(&quot;expiryDate&quot;, &quot;2020-06-13T19:52:44.500Z&quot;);
+                                                        put(&quot;control id&quot;, &quot;2097&quot;);
+                                                        put(&quot;name&quot;, &quot;AC-5.103 Detect Toxic Combination of Access&quot;);
+                                                        put(&quot;comment&quot;, &quot;first comment&quot;);
+                                                        put(&quot;override&quot;, &quot;PRIVILEGE_OVERRIDE@~1~2~3~:~19~&quot;);
+                                                        put(&quot;state&quot;, &quot;APPROVED&quot;);
+                                                        put(&quot;id&quot;, &quot;5014&quot;);
+                                                    }}
+                                                ));
+                                            }};
+        //  Mocks for override to PB-10
+        List&lt;Long&gt; currentDuty_A_ids = Arrays.asList(1L, 2L, 3L);
+        List&lt;Long&gt; requestedDuty_B_ids = Arrays.asList(19L);
+        List&lt;Assignable&gt; assignablesForCurrentIDs = Arrays.asList(assignablePA_1, assignablePA_2, assignablePA_3);
+        List&lt;Assignable&gt; assignablesForRequestedIDs = Arrays.asList(assignablePB_10);
+        List&lt;Long&gt; duty_A_ids = Arrays.asList(1L);
+        List&lt;Long&gt; duty_B_ids = Arrays.asList(2L);
+        List&lt;Long&gt; duty_C_ids = Arrays.asList(3L);
+        List&lt;Long&gt; duty_X_ids = Arrays.asList(4L);
+        List&lt;Long&gt; duty_T_ids = Arrays.asList(5L);
+        List&lt;RuleDutyPair&gt; rule_AB_list = Arrays.asList(ruleDutyPair_AB_A);
+        List&lt;DutyAssignablePair&gt; duty_A_pairs = Arrays.asList(dutyAssignablePair_A_PA_1, dutyAssignablePair_A_PA_2, dutyAssignablePair_A_PA_3);
+        List&lt;DutyAssignablePair&gt; duty_B_pairs = Arrays.asList(dutyAssignablePair_B_PB_10);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PA1 = Arrays.asList(dutyAssignablePair_A_PA_1);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PA2 = Arrays.asList(dutyAssignablePair_A_PA_2);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PA3 = Arrays.asList(dutyAssignablePair_A_PA_3);
+
+
+
+
+        Mockito.when(peopleSearchController.guidFromKerberos(Mockito.anyString())).thenReturn(&quot;800202936&quot;);
+        Mockito.when(assignableRepository.findByPrivilegeIdAndSystem(Mockito.eq(&quot;99999999-0000-9999-0000-000000000022&quot;), Mockito.anyString()))
+                .thenReturn(Optional.of(assignablePC_10));
+        Mockito.when(assignableRepository.findByPrivilegeIdAndSystem(Mockito.eq(&quot;99999999-0000-9999-0000-000000000019&quot;), Mockito.anyString()))
+                .thenReturn(Optional.of(assignablePB_10));
+        Mockito.when(assignableRepository.findByPrivilegeIdAndSystem(Mockito.eq(&quot;99999999-0000-9999-0000-000000000028&quot;), Mockito.anyString()))
+                .thenReturn(Optional.of(assignablePY_10));
+        Mockito.when(campController.getCampPrivilegesByKerberos(Mockito.anyString())).thenReturn(privilegeResponseEntity);
+        Mockito.when(comController.getComOverrides(Mockito.anyString())).thenReturn(ResponseEntity.ok(overrideForPB_10));
+        Mockito.when(assignableRepository.findByPrivilegeIdList(Mockito.eq(velldePrivileges))).thenReturn(velldeAssignables);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(22L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PC10);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(19L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PB10);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(28L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PY10);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeIdList(Mockito.eq(velldeAssignableIDs))).thenReturn(dutyAssignablePairsForCurrentPrivileges);
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(1L))).thenReturn(ruleDutyPairListForDuty_A);
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(2L))).thenReturn(ruleDutyPairListForDuty_B);
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(3L))).thenReturn(Collections.emptyList());
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(4L))).thenReturn(ruleDutyPairListForDuty_X);
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(5L))).thenReturn(ruleDutyPairListForDuty_Y);
+
+        //  Mocks for override to PB-10
+        Mockito.when(assignableRepository.findByIdList(Mockito.eq(currentDuty_A_ids))).thenReturn(assignablesForCurrentIDs);
+        Mockito.when(assignableRepository.findByIdList(Mockito.eq(requestedDuty_B_ids))).thenReturn(assignablesForRequestedIDs);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeIdList(Mockito.eq(currentDuty_A_ids))).thenReturn(duty_A_pairs);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeIdList(Mockito.eq(requestedDuty_B_ids))).thenReturn(duty_B_pairs);
+        Mockito.when(ruleDutyMapRepository.findByDutyIdList(Mockito.eq(duty_A_ids))).thenReturn(rule_AB_list);
+        Mockito.when(ruleDutyMapRepository.findByDutyIdList(Mockito.eq(duty_B_ids))).thenReturn(rule_AB_list);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(1L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PA1);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(2L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PA2);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(3L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PA3);
+        Mockito.when(dutyAssignableMapRepository.findByDutyId(Mockito.eq(1L))).thenReturn(dutyAssignablePairsForDuty_A);
+        Mockito.when(dutyAssignableMapRepository.findByDutyId(Mockito.eq(4L))).thenReturn(dutyAssignablePairsForDuty_X);
+
+        //  PC-10
+        ResponseEntity&lt;Resource&lt;?&gt;&gt; response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000022&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Map&lt;String,String&gt; data = (Map&lt;String,String&gt;)response.getBody().getContent();
+        String status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+
+        //  PB-10
+        response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000019&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        data = (Map&lt;String,String&gt;)response.getBody().getContent();
+        status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+
+        //  PY-10
+        response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000028&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        data = (Map&lt;String,String&gt;)response.getBody().getContent();
+        status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;fail&quot;, status);
+    }
+
+    @Test
+    public void assign_to_vellde_with_kerberos_level_override_for_PB_10_rms_level_override_for_PY_10() throws Exception
+    {
+        //  In this test we will attempt to assign privileges from Duty-C, Duty-B, and Duty-Y to user vellde
+        //  User vellde currently holds privileges from Duty-A, Duty-C, and Duty-X which are all non-toxic to each other.
+        //  We will try assigning:
+        //      non-toxic privilege PC-10 (from Duty-C)
+        //      toxic privilege PB-10 (from Duty-B) - vellde has kerberos level override for this privilege
+        //      toxic privilege PY-10 (from Duty-Y) - vellde has RmsNode level override for this privilege
+        //  Thus,
+        //  Request Expected Result
+        //  ======= ===============
+        //  PC-10   pass
+        //  PB-10   pass (violation of Rule-AB due to privilege level override)
+        //  PY-10   pass (violation of Rule-XY due to RmsNode level override)
+        //
+        //  Mock SoD data for user vellde
+        //  Assignables for user vellde
+        Assignable assignablePA_1 = new Assignable(1, &quot;9fb49ead-06fe-36a4-b31b-8e5982603e01&quot;, &quot;PA-1&quot;);
+        Assignable assignablePA_2 = new Assignable(2, &quot;e6ccff9d-690a-3ab9-97c8-66a0ab0b0552&quot;, &quot;PA-2&quot;);
+        Assignable assignablePA_3 = new Assignable(3, &quot;ed6e7618-12ca-38f2-aaca-2b6c6cd6af7a&quot;, &quot;PA-3&quot;);
+        Assignable assignablePC_1 = new Assignable(4, &quot;56d5fd3c-1c0e-3f80-86dc-24dbba67eb18&quot;, &quot;PC-1&quot;);
+        Assignable assignablePC_2 = new Assignable(5, &quot;eac4de19-59ee-3f08-ab27-2312db133307&quot;, &quot;PC-2&quot;);
+        Assignable assignablePC_3 = new Assignable(6, &quot;ac4914d8-b601-3195-87c0-ce4b4d431932&quot;, &quot;PC-3&quot;);
+        Assignable assignablePX_1 = new Assignable(7, &quot;d9874fd9-c1b7-30a5-a74a-316d07e21099&quot;, &quot;PX-1&quot;);
+        Assignable assignablePX_2 = new Assignable(8, &quot;7426b9a4-68da-3397-96d0-55850693025d&quot;, &quot;PX-2&quot;);
+        Assignable assignablePX_3 = new Assignable(9, &quot;23640e5c-b209-38ec-acb9-77c4800a41f4&quot;, &quot;PX-3&quot;);
+        //  Assignables that are non-toxic to user vellde
+        Assignable assignablePC_10 = new Assignable(22, &quot;99999999-0000-9999-0000-000000000022&quot;, &quot;PC-10&quot;);
+        //  Assignables that are toxic to user vellde
+        Assignable assignablePB_10 = new Assignable(19, &quot;99999999-0000-9999-0000-000000000019&quot;, &quot;PB-10&quot;);
+        Assignable assignablePY_10 = new Assignable(28, &quot;99999999-0000-9999-0000-000000000028&quot;, &quot;PY-10&quot;);
+
+        Duty duty_A = new Duty(1, &quot;Duty-A&quot;);
+        Duty duty_B = new Duty(2, &quot;Duty-B&quot;);
+        Duty duty_C = new Duty(3, &quot;Duty-C&quot;);
+        Duty duty_X = new Duty(4, &quot;Duty-X&quot;);
+        Duty duty_Y = new Duty(5, &quot;Duty-Y&quot;);
+
+        Rule rule_AB = new Rule(1, &quot;Rule-AB&quot;, 2097);
+        Rule rule_XY = new Rule(2, &quot;Rule-XY&quot;, 2097);
+
+        //  Assigned Non-toxic
+        DutyAssignablePair dutyAssignablePair_A_PA_1 = new DutyAssignablePair(1, duty_A, assignablePA_1);
+        DutyAssignablePair dutyAssignablePair_A_PA_2 = new DutyAssignablePair(2, duty_A, assignablePA_2);
+        DutyAssignablePair dutyAssignablePair_A_PA_3 = new DutyAssignablePair(3, duty_A, assignablePA_3);
+        DutyAssignablePair dutyAssignablePair_C_PC_1 = new DutyAssignablePair(4, duty_C, assignablePC_1);
+        DutyAssignablePair dutyAssignablePair_C_PC_2 = new DutyAssignablePair(5, duty_C, assignablePC_2);
+        DutyAssignablePair dutyAssignablePair_C_PC_3 = new DutyAssignablePair(6, duty_C, assignablePC_3);
+        DutyAssignablePair dutyAssignablePair_X_PX_1 = new DutyAssignablePair(7, duty_X, assignablePX_1);
+        DutyAssignablePair dutyAssignablePair_X_PX_2 = new DutyAssignablePair(8, duty_X, assignablePX_2);
+        DutyAssignablePair dutyAssignablePair_X_PX_3 = new DutyAssignablePair(9, duty_X, assignablePX_3);
+        //  Non-assigned Non-toxic
+        DutyAssignablePair dutyAssignablePair_C_PC_10 = new DutyAssignablePair(10, duty_C, assignablePC_10);
+        //  Non-assigned Toxic
+        DutyAssignablePair dutyAssignablePair_B_PB_10 = new DutyAssignablePair(11, duty_B, assignablePB_10);
+        DutyAssignablePair dutyAssignablePair_Y_PY_10 = new DutyAssignablePair(12, duty_Y, assignablePY_10);
+
+        RuleDutyPair ruleDutyPair_AB_A = new RuleDutyPair(1, rule_AB, duty_A);
+        RuleDutyPair ruleDutyPair_AB_B = new RuleDutyPair(2, rule_AB, duty_B);
+        RuleDutyPair ruleDutyPair_XY_X = new RuleDutyPair(3, rule_XY, duty_X);
+        RuleDutyPair ruleDutyPair_XY_Y = new RuleDutyPair(4, rule_XY, duty_Y);
+
+        rule_AB.addRuleDutyPair(ruleDutyPair_AB_A);
+        rule_AB.addRuleDutyPair(ruleDutyPair_AB_B);
+        rule_XY.addRuleDutyPair(ruleDutyPair_XY_X);
+        rule_XY.addRuleDutyPair(ruleDutyPair_XY_Y);
+
+        List&lt;String&gt; velldePrivileges = Arrays.asList(
+                &quot;9fb49ead-06fe-36a4-b31b-8e5982603e01&quot;,
+                &quot;e6ccff9d-690a-3ab9-97c8-66a0ab0b0552&quot;,
+                &quot;ed6e7618-12ca-38f2-aaca-2b6c6cd6af7a&quot;,
+                &quot;56d5fd3c-1c0e-3f80-86dc-24dbba67eb18&quot;,
+                &quot;eac4de19-59ee-3f08-ab27-2312db133307&quot;,
+                &quot;ac4914d8-b601-3195-87c0-ce4b4d431932&quot;,
+                &quot;d9874fd9-c1b7-30a5-a74a-316d07e21099&quot;,
+                &quot;7426b9a4-68da-3397-96d0-55850693025d&quot;,
+                &quot;23640e5c-b209-38ec-acb9-77c4800a41f4&quot;
+        );
+        ResponseEntity privilegeResponseEntity = ResponseEntity.ok(velldePrivileges);
+
+        List&lt;Assignable&gt; velldeAssignables = Arrays.asList(
+                assignablePA_1, assignablePA_2, assignablePA_3,
+                assignablePC_1, assignablePC_2, assignablePC_3,
+                assignablePX_1, assignablePX_2, assignablePX_3);
+
+        List&lt;Long&gt; velldeAssignableIDs = Arrays.asList(1L, 2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L);
+
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PC10 = Arrays.asList(dutyAssignablePair_C_PC_10);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PB10 = Arrays.asList(dutyAssignablePair_B_PB_10);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PY10 = Arrays.asList(dutyAssignablePair_Y_PY_10);
+
+
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForCurrentPrivileges = Arrays.asList(
+                dutyAssignablePair_A_PA_1, dutyAssignablePair_A_PA_2, dutyAssignablePair_A_PA_3,
+                dutyAssignablePair_C_PC_1, dutyAssignablePair_C_PC_2, dutyAssignablePair_C_PC_3,
+                dutyAssignablePair_X_PX_1, dutyAssignablePair_X_PX_2, dutyAssignablePair_X_PX_3);
+
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForDuty_A = Arrays.asList(dutyAssignablePair_A_PA_1, dutyAssignablePair_A_PA_2, dutyAssignablePair_A_PA_3);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForDuty_X = Arrays.asList(dutyAssignablePair_X_PX_1, dutyAssignablePair_X_PX_2, dutyAssignablePair_X_PX_3);
+
+        List&lt;RuleDutyPair&gt; ruleDutyPairListForDuty_A = Arrays.asList(ruleDutyPair_AB_A);
+        List&lt;RuleDutyPair&gt; ruleDutyPairListForDuty_B = Arrays.asList(ruleDutyPair_AB_B);
+        List&lt;RuleDutyPair&gt; ruleDutyPairListForDuty_X = Arrays.asList(ruleDutyPair_XY_X);
+        List&lt;RuleDutyPair&gt; ruleDutyPairListForDuty_Y = Arrays.asList(ruleDutyPair_XY_Y);
+
+        Map&lt;String,List&lt;Map&lt;String, String&gt;&gt;&gt; overrideForPB_10_PY_10 = new HashMap&lt;&gt;() {{
+            put(&quot;kerberos overrides&quot;, Arrays.asList(new HashMap&lt;&gt;() {{
+                    put(&quot;expiryDate&quot;, &quot;2020-06-13T19:52:44.500Z&quot;);
+                    put(&quot;control id&quot;, &quot;2097&quot;);
+                    put(&quot;name&quot;, &quot;AC-5.103 Detect Toxic Combination of Access&quot;);
+                    put(&quot;comment&quot;, &quot;first comment&quot;);
+                    put(&quot;override&quot;, &quot;PRIVILEGE_OVERRIDE@~1~2~3~:~19~&quot;);
+                    put(&quot;state&quot;, &quot;APPROVED&quot;);
+                    put(&quot;id&quot;, &quot;5014&quot;);
+                }}));
+            put(&quot;Team (Core Engineering-OC_TEA12323) override&quot;, Arrays.asList(new HashMap&lt;&gt;() {{
+                put(&quot;expiryDate&quot;, &quot;2020-06-13T19:52:44.500Z&quot;);
+                put(&quot;control id&quot;, &quot;2097&quot;);
+                put(&quot;name&quot;, &quot;AC-5.103 Detect Toxic Combination of Access&quot;);
+                put(&quot;comment&quot;, &quot;second comment&quot;);
+                put(&quot;override&quot;, &quot;PRIVILEGE_OVERRIDE@~7~8~9~:~28~&quot;);
+                put(&quot;state&quot;, &quot;APPROVED&quot;);
+                put(&quot;id&quot;, &quot;5015&quot;);
+            }}));
+        }};
+
+        //  Mocks for override to PB-10
+        List&lt;Long&gt; currentDuty_A_ids = Arrays.asList(1L, 2L, 3L);
+        List&lt;Long&gt; requestedDuty_B_ids = Arrays.asList(19L);
+        List&lt;Assignable&gt; assignablesForCurrentDuty_A_IDs = Arrays.asList(assignablePA_1, assignablePA_2, assignablePA_3);
+        List&lt;Assignable&gt; assignablesForRequestedDuty_B_IDs = Arrays.asList(assignablePB_10);
+        List&lt;Long&gt; duty_A_ids = Arrays.asList(1L);
+        List&lt;Long&gt; duty_B_ids = Arrays.asList(2L);
+        List&lt;RuleDutyPair&gt; rule_AB_list = Arrays.asList(ruleDutyPair_AB_A);
+        List&lt;DutyAssignablePair&gt; duty_A_pairs = Arrays.asList(dutyAssignablePair_A_PA_1, dutyAssignablePair_A_PA_2, dutyAssignablePair_A_PA_3);
+        List&lt;DutyAssignablePair&gt; duty_B_pairs = Arrays.asList(dutyAssignablePair_B_PB_10);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PA1 = Arrays.asList(dutyAssignablePair_A_PA_1);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PA2 = Arrays.asList(dutyAssignablePair_A_PA_2);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PA3 = Arrays.asList(dutyAssignablePair_A_PA_3);
+
+        //  Mocks for override to PY-10
+        List&lt;Long&gt; currentDuty_X_ids = Arrays.asList(7L, 8L, 9L);
+        List&lt;Long&gt; requestedDuty_Y_ids = Arrays.asList(28L);
+        List&lt;Assignable&gt; assignablesForCurrentDuty_X_IDs = Arrays.asList(assignablePX_1, assignablePX_2, assignablePX_3);
+        List&lt;Assignable&gt; assignablesForRequestedDuty_Y_IDs = Arrays.asList(assignablePY_10);
+        List&lt;Long&gt; duty_X_ids = Arrays.asList(4L);
+        List&lt;Long&gt; duty_Y_ids = Arrays.asList(5L);
+        List&lt;RuleDutyPair&gt; rule_XY_list = Arrays.asList(ruleDutyPair_XY_X);
+        List&lt;DutyAssignablePair&gt; duty_X_pairs = Arrays.asList(dutyAssignablePair_X_PX_1, dutyAssignablePair_X_PX_2, dutyAssignablePair_X_PX_3);
+        List&lt;DutyAssignablePair&gt; duty_Y_pairs = Arrays.asList(dutyAssignablePair_Y_PY_10);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PX1 = Arrays.asList(dutyAssignablePair_X_PX_1);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PX2 = Arrays.asList(dutyAssignablePair_X_PX_2);
+        List&lt;DutyAssignablePair&gt; dutyAssignablePairsForRequestedPrivilege_PX3 = Arrays.asList(dutyAssignablePair_X_PX_3);
+
+
+        Mockito.when(assignableRepository.findByPrivilegeIdAndSystem(Mockito.eq(&quot;99999999-0000-9999-0000-000000000022&quot;), Mockito.anyString()))
+                .thenReturn(Optional.of(assignablePC_10));
+        Mockito.when(assignableRepository.findByPrivilegeIdAndSystem(Mockito.eq(&quot;99999999-0000-9999-0000-000000000019&quot;), Mockito.anyString()))
+                .thenReturn(Optional.of(assignablePB_10));
+        Mockito.when(assignableRepository.findByPrivilegeIdAndSystem(Mockito.eq(&quot;99999999-0000-9999-0000-000000000028&quot;), Mockito.anyString()))
+                .thenReturn(Optional.of(assignablePY_10));
+        Mockito.when(campController.getCampPrivilegesByKerberos(Mockito.anyString())).thenReturn(privilegeResponseEntity);
+        Mockito.when(comController.getComOverrides(Mockito.anyString())).thenReturn(ResponseEntity.ok(overrideForPB_10_PY_10));
+        Mockito.when(assignableRepository.findByPrivilegeIdList(Mockito.eq(velldePrivileges))).thenReturn(velldeAssignables);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(22L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PC10);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(19L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PB10);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(28L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PY10);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeIdList(Mockito.eq(velldeAssignableIDs))).thenReturn(dutyAssignablePairsForCurrentPrivileges);
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(1L))).thenReturn(ruleDutyPairListForDuty_A);
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(2L))).thenReturn(ruleDutyPairListForDuty_B);
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(3L))).thenReturn(Collections.emptyList());
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(4L))).thenReturn(ruleDutyPairListForDuty_X);
+        Mockito.when(ruleDutyMapRepository.findByDutyId(Mockito.eq(5L))).thenReturn(ruleDutyPairListForDuty_Y);
+
+        //  Mocks for override to PB-10
+        Mockito.when(assignableRepository.findByIdList(Mockito.eq(currentDuty_A_ids))).thenReturn(assignablesForCurrentDuty_A_IDs);
+        Mockito.when(assignableRepository.findByIdList(Mockito.eq(requestedDuty_B_ids))).thenReturn(assignablesForRequestedDuty_B_IDs);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeIdList(Mockito.eq(currentDuty_A_ids))).thenReturn(duty_A_pairs);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeIdList(Mockito.eq(requestedDuty_B_ids))).thenReturn(duty_B_pairs);
+        Mockito.when(ruleDutyMapRepository.findByDutyIdList(Mockito.eq(duty_A_ids))).thenReturn(rule_AB_list);
+        Mockito.when(ruleDutyMapRepository.findByDutyIdList(Mockito.eq(duty_B_ids))).thenReturn(rule_AB_list);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(1L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PA1);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(2L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PA2);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(3L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PA3);
+        Mockito.when(dutyAssignableMapRepository.findByDutyId(Mockito.eq(1L))).thenReturn(dutyAssignablePairsForDuty_A);
+
+        //  Mocks for override to PY-10
+        Mockito.when(assignableRepository.findByIdList(Mockito.eq(currentDuty_X_ids))).thenReturn(assignablesForCurrentDuty_X_IDs);
+        Mockito.when(assignableRepository.findByIdList(Mockito.eq(requestedDuty_Y_ids))).thenReturn(assignablesForRequestedDuty_Y_IDs);
+
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeIdList(Mockito.eq(currentDuty_X_ids))).thenReturn(duty_X_pairs);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeIdList(Mockito.eq(requestedDuty_Y_ids))).thenReturn(duty_Y_pairs);
+        Mockito.when(ruleDutyMapRepository.findByDutyIdList(Mockito.eq(duty_X_ids))).thenReturn(rule_XY_list);
+        Mockito.when(ruleDutyMapRepository.findByDutyIdList(Mockito.eq(duty_Y_ids))).thenReturn(rule_XY_list);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(7L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PX1);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(8L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PX2);
+        Mockito.when(dutyAssignableMapRepository.findByPrivilegeId(Mockito.eq(9L))).thenReturn(dutyAssignablePairsForRequestedPrivilege_PX3);
+        Mockito.when(dutyAssignableMapRepository.findByDutyId(Mockito.eq(4L))).thenReturn(dutyAssignablePairsForDuty_X);
+
+        //  PC-10
+        ResponseEntity&lt;Resource&lt;?&gt;&gt; response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000022&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Map&lt;String,String&gt; data = (Map&lt;String,String&gt;)response.getBody().getContent();
+        String status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+
+        //  PB-10
+        response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000019&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        data = (Map&lt;String,String&gt;)response.getBody().getContent();
+        status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+
+        //  PY-10
+        response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000028&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        data = (Map&lt;String,String&gt;)response.getBody().getContent();
+        status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+    }
+
+}</pre>
+</div></div></td></tr></tbody></table></div><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

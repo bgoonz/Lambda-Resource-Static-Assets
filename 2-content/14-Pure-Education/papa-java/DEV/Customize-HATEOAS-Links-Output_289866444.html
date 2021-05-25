@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Customize HATEOAS Links Output</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Basic_289898911.html">Basic</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Use-HATEOAS-and-Add-Filtering-to-the-Repository_289866425.html">Use HATEOAS and Add Filtering to the Repository</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Customize HATEOAS Links Output
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 20, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="CustomizeHATEOASLinksOutput-Foradditionaldocumentationreferto:">For additional documentation refer to:</h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 106.0px;"/><col style="width: 854.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL</p></td><td class="confluenceTd"><p><a href="https://stackoverflow.com/questions/49615358/spring-hateoas-controllerlinkbuilder-adds-null-fields" class="external-link" rel="nofollow">https://stackoverflow.com/questions/49615358/spring-hateoas-controllerlinkbuilder-adds-null-fields</a></p></td></tr></tbody></table></div><h2 id="CustomizeHATEOASLinksOutput-DesiredOutputfor&quot;SoDAllRules&quot;">Desired Output for &quot;SoD All Rules&quot;</h2><p>When we point the browser to display all SoD rules, we want them to appear like this:</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 135.0px;"/><col style="width: 825.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL</p></td><td class="confluenceTd"><p><a href="http://localhost.gs.com:8081/sod/v1.1/rules" class="external-link" rel="nofollow">http://localhost.gs.com:8081/sod/v1.1/rules</a></p></td></tr><tr><td class="confluenceTd"><p>Display</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost.gs.com:8081/sod/v1.1/rules&quot;
+  } ],
+  &quot;content&quot; : [ {
+    &quot;text&quot; : &quot;Journal PDGL vs approve GPS&quot;,
+    &quot;links&quot; : [ {
+      &quot;rel&quot; : &quot;self&quot;,
+      &quot;href&quot; : &quot;http://localhost.gs.com:8081/sod/v1.1/rules/1&quot;
+    } ]
+  }, {
+    &quot;text&quot; : &quot;Manager BSS vs create PSGL entry&quot;,
+    &quot;links&quot; : [ {
+      &quot;rel&quot; : &quot;self&quot;,
+      &quot;href&quot; : &quot;http://localhost.gs.com:8081/sod/v1.1/rules/2&quot;
+    } ]
+  }, {
+    &quot;text&quot; : &quot;Manager BSS vs approve GPS&quot;,
+    &quot;links&quot; : [ {
+      &quot;rel&quot; : &quot;self&quot;,
+      &quot;href&quot; : &quot;http://localhost.gs.com:8081/sod/v1.1/rules/3&quot;
+    } ]
+  } ]
+}</pre>
+</div></div></td></tr></tbody></table></div><p>I addition to having display appear like this, we also want add a mapping annotation to the class and have it concatenated with Mapping annotation for each REST API function.</p><p>Thus, we decorate the class with &quot;/sod/v1.1&quot;</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+@RequestMapping(&quot;/sod/v1.1&quot;)
+@Api(value = &quot;Separation Of Duties Rest API Documentation&quot;)
+public class SOD2Controller</pre>
+</div></div></td></tr></tbody></table></div><p>and have the class URL pre-pended to the function URL, for example &quot;/rules&quot;</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"> @GetMapping(&quot;/rules&quot;)
+ public @ResponseBody ResponseEntity&lt;?&gt; getAllRules()
+ {
+     List&lt;SelectListPojo&gt; rules = StreamSupport.stream(ruleService.getAllRules(Constants.ALL).spliterator(), false)
+             .map(u -&gt; {u.add(linkTo(methodOn(getClass()).getAllRules()).slash(&quot;/&quot; + u.getID()).withSelfRel()); return u;})
+             .collect(Collectors.toList());
+     Resources&lt;SelectListPojo&gt; resources = new Resources&lt;&gt;(rules);
+     resources.add(linkTo(methodOn(getClass()).getAllRules()).withSelfRel());
+     return ResponseEntity.ok(resources);
+ }</pre>
+</div></div></td></tr></tbody></table></div><h2 id="CustomizeHATEOASLinksOutput-ConfigurationChanges">Configuration Changes</h2><p>However, getting to the desired display requires making changes to configuration in application.properties file. Without configuration, the output looks like this:</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 108.0px;"/><col style="width: 852.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL</p></td><td class="confluenceTd"><p><a href="http://localhost.gs.com:8081/sod/v1.1/rules" class="external-link" rel="nofollow">http://localhost.gs.com:8081/sod/v1.1/rules</a></p></td></tr><tr><td class="confluenceTd"><p>Display</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;_embedded&quot; : {
+    &quot;selectListPojoes&quot; : [ {
+      &quot;text&quot; : &quot;Journal PDGL vs approve GPS&quot;,
+      &quot;_links&quot; : {
+        &quot;self&quot; : {
+          &quot;href&quot; : &quot;http://localhost.gs.com:8081/sod/v1.1/rules/1&quot;
+        }
+      }
+    }, {
+      &quot;text&quot; : &quot;Manager BSS vs create PSGL entry&quot;,
+      &quot;_links&quot; : {
+        &quot;self&quot; : {
+          &quot;href&quot; : &quot;http://localhost.gs.com:8081/sod/v1.1/rules/2&quot;
+        }
+      }
+    }, {
+      &quot;text&quot; : &quot;Manager BSS vs approve GPS&quot;,
+      &quot;_links&quot; : {
+        &quot;self&quot; : {
+          &quot;href&quot; : &quot;http://localhost.gs.com:8081/sod/v1.1/rules/3&quot;
+        }
+      }
+    } ]
+  },
+  &quot;_links&quot; : {
+    &quot;self&quot; : {
+      &quot;href&quot; : &quot;http://localhost.gs.com:8081/sod/v1.1/rules&quot;
+    }
+  }
+}</pre>
+</div></div></td></tr></tbody></table></div><p>While it may look similar to the desired output, it contains the name of the displayed class - <code>SelectListPojo</code>. We do not want to reveal details of our design. We can add the following line:</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+spring.data.rest.defaultMediaType = application/json</pre>
+</div></div></td></tr></tbody></table></div><p>to force <code>SelectListPojo</code> name to be hidden:</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><tbody><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;links&quot; : [ {
+    &quot;rel&quot; : &quot;self&quot;,
+    &quot;href&quot; : &quot;http://localhost.gs.com:8081/sod/v1.1/rules&quot;,
+    &quot;hreflang&quot; : null,
+    &quot;media&quot; : null,
+    &quot;title&quot; : null,
+    &quot;type&quot; : null,
+    &quot;deprecation&quot; : null
+  } ],
+  &quot;content&quot; : [ {
+    &quot;text&quot; : &quot;Journal PDGL vs approve GPS&quot;,
+    &quot;links&quot; : [ {
+      &quot;rel&quot; : &quot;self&quot;,
+      &quot;href&quot; : &quot;http://localhost.gs.com:8081/sod/v1.1/rules/1&quot;,
+      &quot;hreflang&quot; : null,
+      &quot;media&quot; : null,
+      &quot;title&quot; : null,
+      &quot;type&quot; : null,
+      &quot;deprecation&quot; : null
+    } ]
+  }, {
+    &quot;text&quot; : &quot;Manager BSS vs create PSGL entry&quot;,
+    &quot;links&quot; : [ {
+      &quot;rel&quot; : &quot;self&quot;,
+      &quot;href&quot; : &quot;http://localhost.gs.com:8081/sod/v1.1/rules/2&quot;,
+      &quot;hreflang&quot; : null,
+      &quot;media&quot; : null,
+      &quot;title&quot; : null,
+      &quot;type&quot; : null,
+      &quot;deprecation&quot; : null
+    } ]
+  }, {
+    &quot;text&quot; : &quot;Manager BSS vs approve GPS&quot;,
+    &quot;links&quot; : [ {
+      &quot;rel&quot; : &quot;self&quot;,
+      &quot;href&quot; : &quot;http://localhost.gs.com:8081/sod/v1.1/rules/3&quot;,
+      &quot;hreflang&quot; : null,
+      &quot;media&quot; : null,
+      &quot;title&quot; : null,
+      &quot;type&quot; : null,
+      &quot;deprecation&quot; : null
+    } ]
+  } ]
+}</pre>
+</div></div></td></tr></tbody></table></div><p>Now, the name of our class appears as &quot;<code>content</code>&quot; which is a lot more desirable. However, we are seeing a lot of links attributes which are <code>null</code>. We can suppress display of null values with:</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">spring.data.rest.defaultMediaType = application/json
+spring.jackson.default-property-inclusion=NON_NULL</pre>
+</div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

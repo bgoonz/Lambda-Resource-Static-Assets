@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Add CRUD Operations and Swagger Page</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Basic_289898911.html">Basic</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Use-HATEOAS-and-Add-Filtering-to-the-Repository_289866425.html">Use HATEOAS and Add Filtering to the Repository</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Add CRUD Operations and Swagger Page
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 20, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>We will start where we left off in the <a href="https://confluence.apg.services.gs.com/display/~gunern/Use+HATEOAS+and+Add+Filtering+to+the+Repository" class="external-link" rel="nofollow">Use HATEOAS and Add Filtering to the Repository</a> tutorial, add new REST API methods, and add a Swagger Page.</p><h1 id="AddCRUDOperationsandSwaggerPage-AddaSwaggerPage">Add a Swagger Page</h1><p>We can use steps from the <a href="https://confluence.apg.services.gs.com/display/~gunern/Swagger" class="external-link" rel="nofollow">Swagger</a> tutorial to add a Swagger page.</p><p>Unfortunately, when we try to display it, it will not expose our APIs</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 82.0px;"/><col style="width: 676.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL:</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/swagger-ui.html#/" class="external-link" rel="nofollow">http://localhost:8080/swagger-ui.html#/</a></p></td></tr><tr><td class="confluenceTd"><p>Display:</p></td><td class="confluenceTd"><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource image-center" width="340" src="https://confluence.apg.services.gs.com/download/attachments/599535694/image2019-9-19_9-1-38.png?version=1&amp;modificationDate=1568898098205&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/599535694/image2019-9-19_9-1-38.png?version=1&amp;modificationDate=1568898098205&amp;api=v2" loading="lazy"></span></td></tr></tbody></table></div><p>In the previous tutorial exercise, we changed controller's annotation from <code>@RestController</code> to <code>@RepositoryRestController</code> in order to add support for HATEOAS links. Apparently, Spring's Swagger Page component does not work well with this annotation.</p><p>We can try using both annotations on our controller class:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+public class UserController
+{
+...
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="AddCRUDOperationsandSwaggerPage-Verify">Verify</h3><p>With both annotations, HATEOAS links continue to work and we can see REST API exposed from Swagger</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/599535694/image2019-9-19_9-10-29.png?version=1&amp;modificationDate=1568898629944&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/599535694/image2019-9-19_9-10-29.png?version=1&amp;modificationDate=1568898629944&amp;api=v2" loading="lazy"></span><h2 id="AddCRUDOperationsandSwaggerPage-AddSupportforCRUDOperations-GETALL,GETONE,POST,PUT,andDELETE">Add Support for CRUD Operations - GET ALL, GET ONE, POST, PUT, and DELETE</h2><p>So far, we can issue REST GET command for<code> /users</code> to get a list of all users and the use HATEOAS links to navigate to a specific item. We would like to add support for other operations but if we continue to only use <code>/users</code> path for all of them, we will soon run into a problem.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Operation</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Command</strong></p></th></tr><tr><td class="confluenceTd"><p>GET ALL</p></td><td class="confluenceTd"><p><code>/users</code></p></td></tr><tr><td class="confluenceTd"><p>GET ONE</p></td><td class="confluenceTd"><p><code>/users/{id}</code></p></td></tr><tr><td class="confluenceTd"><p>POST</p></td><td class="confluenceTd"><p><code>/users</code></p></td></tr><tr><td class="confluenceTd"><p>PUT</p></td><td class="confluenceTd"><p><code>/users/{id}</code></p></td></tr><tr><td class="confluenceTd"><p>DELETE</p></td><td class="confluenceTd"><p><code>/users/{id}</code></p></td></tr></tbody></table></div><p><br/></p><h2 id="AddCRUDOperationsandSwaggerPage-AddRESTPOSTCommand">Add REST POST Command</h2><h3 id="AddCRUDOperationsandSwaggerPage-Createnewmethodinthecontroller">Create new method in the controller</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@PostMapping(path=&quot;/users&quot;, consumes = &quot;application/json&quot;)
+public User createUser(@Valid @RequestBody User user)
+{
+    return userRepository.save(user);
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="AddCRUDOperationsandSwaggerPage-AddnewrecordwithPOSTRequestusingPostman">Add new record with POST Request using Postman</h3><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 190.0px;"/><col style="width: 770.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL:</p></td><td class="confluenceTd"><p><code>localhost:8080/users</code></p></td></tr><tr><td class="confluenceTd"><p>Body:</p></td><td class="confluenceTd"><p><code>{</code><br/><code> &quot;name&quot;: &quot;mary&quot;,</code><br/><code> &quot;role&quot;: &quot;ceo&quot;,</code><br/><code> &quot;lastupdate&quot;: &quot;9999-12-01 00:00:00&quot;</code><br/><code>}</code></p></td></tr><tr><td class="confluenceTd"><p>Message Body</p></td><td class="confluenceTd"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/599535694/image2019-9-19_9-51-17.png?version=1&amp;modificationDate=1568901255813&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/599535694/image2019-9-19_9-51-17.png?version=1&amp;modificationDate=1568901255813&amp;api=v2" loading="lazy"></span></td></tr><tr><td class="confluenceTd"><p>Response</p></td><td class="confluenceTd"><p><code>Status: 200</code></p></td></tr></tbody></table></div><h3 id="AddCRUDOperationsandSwaggerPage-VerifywithGET">Verify with GET</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 108.0px;"/><col style="width: 650.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL</p></td><td class="confluenceTd"><p><code>localhost:8080/users/6</code></p></td></tr><tr><td class="confluenceTd"><p>Response:</p></td><td class="confluenceTd"><p><code>{</code><br/><code> &quot;name&quot;: &quot;mary&quot;,</code><br/><code> &quot;role&quot;: &quot;ceo&quot;,</code><br/><code> &quot;lastupdate&quot;: &quot;9999-12-01 00:00:00&quot;,</code><br/><code> &quot;_links&quot;: {</code><br/><code> &quot;self&quot;: {</code><br/><code> &quot;href&quot;: &quot;http://localhost:8080/users/6&quot;</code><br/><code> },</code><br/><code> &quot;user&quot;: {</code><br/><code> &quot;href&quot;: &quot;http://localhost:8080/users/6&quot;</code><br/><code> }</code><br/><code> }</code><br/><code>}</code></p></td></tr></tbody></table></div><h2 id="AddCRUDOperationsandSwaggerPage-AddRESTPUTCommand">Add REST PUT Command</h2><h3 id="AddCRUDOperationsandSwaggerPage-Createnewmethodinthecontroller.1">Create new method in the controller</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@PutMapping(path=&quot;/users/{id}&quot;, consumes = &quot;application/json&quot;)
+public User updateUser(@PathVariable(&quot;id&quot;) long id, @Valid @RequestBody User user)
+{
+    Optional&lt;User&gt; currentUserOptional = userRepository.findById(id);
+    if(currentUserOptional.isPresent())
+    {
+        User currentUser = currentUserOptional.get();
+        currentUser.setName(user.getName());
+        currentUser.setRole(user.getRole());
+        currentUser.setLastupdate(user.getLastupdate());
+        return userRepository.save(currentUser);
+    }
+    return userRepository.save(user);
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="AddCRUDOperationsandSwaggerPage-ModifyexistingrecordwithPUTRequestusingPostman">Modify existing record with PUT Request using Postman</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 120.0px;"/><col style="width: 638.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL:</p></td><td class="confluenceTd"><p><code>localhost:8080/users/1</code></p></td></tr><tr><td class="confluenceTd"><p>Body</p></td><td class="confluenceTd"><p><code>localhost:8080/users/1</code><br/><code>{</code><br/><code> &quot;name&quot; : &quot;nick&quot;,</code><br/><code> &quot;role&quot; : &quot;developer&quot;,</code><br/><code> &quot;lastupdate&quot;: &quot;9999-12-01 00:00:00&quot;</code><br/><code>}</code></p></td></tr><tr><td class="confluenceTd"><p>Message Body</p></td><td class="confluenceTd"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/599535694/image2019-9-19_12-59-3.png?version=1&amp;modificationDate=1568912343753&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/599535694/image2019-9-19_12-59-3.png?version=1&amp;modificationDate=1568912343753&amp;api=v2" loading="lazy"></span></td></tr><tr><td class="confluenceTd"><p>Response:</p></td><td class="confluenceTd"><p><code>Status: 200</code></p></td></tr></tbody></table></div><h3 id="AddCRUDOperationsandSwaggerPage-VerifywithGET.1">Verify with GET</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 105.0px;"/><col style="width: 653.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/users/1" class="external-link" rel="nofollow">http://localhost:8080/users/1</a></p></td></tr><tr><td class="confluenceTd"><p>Response:</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;name&quot; : &quot;nick&quot;,
+  &quot;role&quot; : &quot;developer&quot;,
+  &quot;lastupdate&quot; : &quot;9999-12-01 00:00:00&quot;,
+  &quot;_links&quot; : {
+    &quot;self&quot; : {
+      &quot;href&quot; : &quot;http://localhost:8080/users/1&quot;
+    },
+    &quot;user&quot; : {
+      &quot;href&quot; : &quot;http://localhost:8080/users/1&quot;
+    }
+  }
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="AddCRUDOperationsandSwaggerPage-AddRESTDELETECommand"><br/>Add REST DELETE Command</h2><h3 id="AddCRUDOperationsandSwaggerPage-Createnewmethodinthecontroller.2">Create new method in the controller</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@DeleteMapping(&quot;/users/{id}&quot;)
+public String deleteUser(@PathVariable(&quot;id&quot;) long id)
+{
+    User user = userRepository.getOne(id);
+    if(user != null)
+    {
+        userRepository.delete(user);
+        return &quot;deleted&quot;;
+    }
+    return &quot;not found&quot;;
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h3 id="AddCRUDOperationsandSwaggerPage-DeleteRecordUsingPostman">Delete Record Using Postman</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 115.0px;"/><col style="width: 643.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL</p></td><td class="confluenceTd"><p><code>localhost:8080/users/1</code></p></td></tr><tr><td class="confluenceTd"><p>Response:</p></td><td class="confluenceTd"><p><code>&quot;deleted&quot;</code></p></td></tr></tbody></table></div><h3 id="AddCRUDOperationsandSwaggerPage-VerifywithGET.2">Verify with GET</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 127.0px;"/><col style="width: 631.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL:</p></td><td class="confluenceTd"><p><code>localhost:8080/users</code></p></td></tr><tr><td class="confluenceTd"><p>Response:</p></td><td class="confluenceTd"><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image confluence-external-resource image-center" width="340" src="https://confluence.apg.services.gs.com/download/attachments/599535694/image2019-9-19_13-3-23.png?version=1&amp;modificationDate=1568912603656&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/599535694/image2019-9-19_13-3-23.png?version=1&amp;modificationDate=1568912603656&amp;api=v2" loading="lazy"></span></td></tr></tbody></table></div><p>Note that User with id=1 is gone.</p><h2 id="AddCRUDOperationsandSwaggerPage-AddGET-ONERESTRequest">Add GET-ONE REST Request</h2><p>Being able to use HATEOAS links to navigate to a specific item is great. However, if we are interested in seeing information for a known ID, we may want to be able to jump to it without having to sift through all items.</p><h3 id="AddCRUDOperationsandSwaggerPage-Createnewmethodinthecontroller.3">Create new method in the controller</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@GetMapping(&quot;/users/{id}&quot;)
+public @ResponseBody User getOne(@PathVariable(&quot;id&quot;) long id)
+{
+    Optional&lt;User&gt; currentUserOptional = userRepository.findById(id);
+    if(currentUserOptional.isPresent())
+    {
+        HttpServletRequest httpServletRequest = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        User user = currentUserOptional.get();
+        user.add(linkTo(UserController.class).slash(httpServletRequest.getRequestURI()).withSelfRel());
+        return user;
+    }
+    return currentUserOptional.get();
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="AddCRUDOperationsandSwaggerPage-GetOneRecordUsingPostman">Get One Record Using Postman</h3><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 91.0px;"/><col style="width: 867.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL:</p></td><td class="confluenceTd"><p><a href="http://ocalhost:8080/users/1" class="external-link" rel="nofollow">http://ocalhost:8080/users/1</a></p></td></tr><tr><td class="confluenceTd"><p>Response:</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;name&quot; : &quot;nick&quot;,
+  &quot;role&quot; : &quot;dev&quot;,
+  &quot;lastupdate&quot; : &quot;9999-12-01 00:00:00&quot;,
+  &quot;_links&quot; : {
+    &quot;self&quot; : {
+      &quot;href&quot; : &quot;http://localhost:8080/users/1&quot;
+    }
+  }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h2 id="AddCRUDOperationsandSwaggerPage-CheckSwaggerPage"><br/>Check Swagger Page</h2><p><br/></p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 109.0px;"/><col style="width: 849.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/swagger-ui.html#/user-controller" class="external-link" rel="nofollow">http://localhost:8080/swagger-ui.html#/user-controller</a></p></td></tr><tr><td class="confluenceTd"><p>Display</p></td><td class="confluenceTd"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/599535694/image2019-9-19_16-7-46.png?version=1&amp;modificationDate=1568923666443&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/599535694/image2019-9-19_16-7-46.png?version=1&amp;modificationDate=1568923666443&amp;api=v2" loading="lazy"></span></td></tr></tbody></table></div><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

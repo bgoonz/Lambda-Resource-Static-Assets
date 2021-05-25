@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Ch 4: Design a Rate Limiter</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="System-Design_1031274590.html">System Design</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Ch 4: Design a Rate Limiter
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Dec 30, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>In a network system, a rate limiter is used to control the rate of traffic sent by a client or a<br/>service. In the HTTP world, a rate limiter limits the number of client requests allowed to be<br/>sent over a specified period. If the API request count exceeds the threshold defined by the<br/>rate limiter, all the excess calls are blocked.</p><p>Benefits of using an API rate limiter:</p><ul><li><p>Prevent resource starvation caused by Denial of Service (DoS) attack</p></li><li><p>Reduce cost.</p></li><li><p>Prevent servers from being overloaded</p></li></ul><p>Besides the client and server-side implementations, there is an alternative way. Instead of<br/>putting a rate limiter at the API servers, we create a rate limiter middleware, which throttles<br/>requests to your APIs.</p><p>The HTTP 429 response status code indicates a user has sent too many requests.</p><span class="confluence-embedded-file-wrapper image-left-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-left" width="340" loading="lazy" src="attachments/1039138998/1039139007.png?width=340" data-image-src="attachments/1039138998/1039139007.png" data-height="308" data-width="883" data-unresolved-comment-count="0" data-linked-resource-id="1039139007" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20201229-180807.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1039138998" data-linked-resource-container-version="3" data-media-id="9a349760-f39c-4494-aab2-96bd6c616e24" data-media-type="file"></span><p><strong>API gateway</strong> is a fully managed service that supports rate limiting, SSL termination, authentication, IP whitelisting, servicing static content, etc.</p><h1 id="Ch4:DesignaRateLimiter-Algorithmsforratelimiting">Algorithms for rate limiting</h1><p>• Token bucket<br/>• Leaking bucket<br/>• Fixed window counter<br/>• Sliding window log<br/>• Sliding window counter</p><h2 id="Ch4:DesignaRateLimiter-Tokenbucketalgorithm">Token bucket algorithm</h2><p>A token bucket is a container that has pre-defined capacity. Tokens are put in the bucket<br/>at preset rates periodically. Once the bucket is full, no more tokens are added.</p><span class="confluence-embedded-file-wrapper image-left-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-left" width="340" loading="lazy" src="attachments/1039138998/1048543259.png?width=340" data-image-src="attachments/1039138998/1048543259.png" data-height="568" data-width="564" data-unresolved-comment-count="0" data-linked-resource-id="1048543259" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20201229-181159.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1039138998" data-linked-resource-container-version="3" data-media-id="1019124c-ef4c-4c15-b450-c7ea1c55cd56" data-media-type="file"></span><p>The token bucket algorithm takes two parameters:</p><ul><li><p>Bucket size: the maximum number of tokens allowed in the bucket</p></li><li><p>Refill rate: number of tokens put into the bucket every second</p></li></ul><p>Pros</p><ul><li><p>The algorithm is easy to implement</p></li><li><p>Memory efficient.</p></li><li><p>Token bucket allows a burst of traffic for short periods.</p></li></ul><p>Cons</p><ul><li><p>Two parameters in the algorithm are bucket size and token refill rate. However, it might be challenging to tune them properly.</p></li></ul><h2 id="Ch4:DesignaRateLimiter-Leakingbucketalgorithm">Leaking bucket algorithm</h2><p>The leaking bucket algorithm is similar to the token bucket except that requests are processed<br/>at a fixed rate. It is usually implemented with a first-in-first-out (FIFO) queue.</p><p>When a request arrives, the system checks if the queue is full. If it is not full, the request<br/>is added to the queue. Otherwise, the request is dropped.</p><span class="confluence-embedded-file-wrapper image-left-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-left" width="340" loading="lazy" src="attachments/1039138998/1048150160.png?width=340" data-image-src="attachments/1039138998/1048150160.png" data-height="301" data-width="955" data-unresolved-comment-count="0" data-linked-resource-id="1048150160" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20201230-214431.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1039138998" data-linked-resource-container-version="3" data-media-id="c38651f6-9004-487f-b92a-6335a06f86cf" data-media-type="file"></span><p>Pros</p><ul><li><p>Memory efficient given the limited queue size.</p></li><li><p>Requests are processed at a fixed rate therefore it is suitable for use cases that a stable<br/>outflow rate is needed.</p></li></ul><p>Cons</p><ul><li><p>A burst of traffic fills up the queue with old requests, and if they are not processed in<br/>time, recent requests will be rate limited.</p></li><li><p>There are two parameters in the algorithm. It might not be easy to tune them properly.</p></li></ul><h2 id="Ch4:DesignaRateLimiter-Fixedwindowcounteralgorithm">Fixed window counter algorithm</h2><p>The algorithm divides the timeline into fix-sized time windows and assign a counter for<br/>each window. Each request increments the counter by one. Once the counter reaches the pre-defined threshold, new requests are dropped until a new time window starts.</p><span class="confluence-embedded-file-wrapper image-left-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-left" width="340" loading="lazy" src="attachments/1039138998/1048117459.png?width=340" data-image-src="attachments/1039138998/1048117459.png" data-height="386" data-width="644" data-unresolved-comment-count="0" data-linked-resource-id="1048117459" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20201230-214754.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1039138998" data-linked-resource-container-version="3" data-media-id="c5849c54-eaa5-417c-87f3-28917f4f3a65" data-media-type="file"></span><p>A major problem with this algorithm is that a burst of traffic at the edges of time windows<br/>could cause more requests than allowed quota to go through.</p><span class="confluence-embedded-file-wrapper image-left-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-left" width="340" loading="lazy" src="attachments/1039138998/1048150168.png?width=340" data-image-src="attachments/1039138998/1048150168.png" data-height="419" data-width="435" data-unresolved-comment-count="0" data-linked-resource-id="1048150168" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20201230-214840.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1039138998" data-linked-resource-container-version="3" data-media-id="23f92990-a246-4a06-b366-f044b63bb29a" data-media-type="file"></span><p>Pros</p><p>Memory efficient.</p><ul><li><p>Easy to understand.</p></li><li><p>Resetting available quota at the end of a unit time window fits certain use cases.</p></li></ul><p>Cons</p><ul><li><p>Spike in traffic at the edges of a window could cause more requests than the allowed<br/>quota to go through.</p></li></ul><h2 id="Ch4:DesignaRateLimiter-Slidingwindowlogalgorithm">Sliding window log algorithm</h2><h2 id="Ch4:DesignaRateLimiter-Slidingwindowcounteralgorithm">Sliding window counter algorithm</h2><h1 id="Ch4:DesignaRateLimiter-High-levelarchitecture">High-level architecture</h1><p>Where shall we store counters? Using the database is not a good idea due to slowness of disk<br/>access. In-memory cache is chosen because it is fast and supports time-based expiration<br/>strategy. For instance, Redis [11] is a popular option to implement rate limiting. It is an inmemory<br/>store that offers two commands: INCR and EXPIRE.</p><h2 id="Ch4:DesignaRateLimiter-DetailedDesign">Detailed Design</h2><span class="confluence-embedded-file-wrapper image-left-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-left" width="340" loading="lazy" src="attachments/1039138998/1048150174.png?width=340" data-image-src="attachments/1039138998/1048150174.png" data-height="750" data-width="984" data-unresolved-comment-count="0" data-linked-resource-id="1048150174" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20201230-215432.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1039138998" data-linked-resource-container-version="3" data-media-id="f872dc61-5b4a-4ea7-91b7-5011749d4a2f" data-media-type="file"></span><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1039138998/1048182843.png">image-20201229-180703.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1039138998/1039139007.png">image-20201229-180807.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1039138998/1048543259.png">image-20201229-181159.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1039138998/1048150160.png">image-20201230-214431.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1039138998/1048117459.png">image-20201230-214754.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1039138998/1048150168.png">image-20201230-214840.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1039138998/1048150174.png">image-20201230-215432.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

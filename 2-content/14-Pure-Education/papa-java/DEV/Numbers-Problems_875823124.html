@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Numbers Problems</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Java-Problems_858619905.html">Java Problems</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Numbers Problems
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Feb 12, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1613190976448 {padding: 0px;}
+div.rbtoc1613190976448 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1613190976448 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1613190976448'>
+<ul class='toc-indentation'>
+<li><a href='#NumbersProblems-AddBinary'>AddBinary</a></li>
+<li><a href='#NumbersProblems-BiggestFromArray'>BiggestFromArray</a></li>
+<li><a href='#NumbersProblems-ClockAngle'>ClockAngle</a></li>
+<li><a href='#NumbersProblems-ConsecutiveNumberSum'>ConsecutiveNumberSum</a></li>
+<li><a href='#NumbersProblems-EggDrop'>EggDrop</a></li>
+<li><a href='#NumbersProblems-ExcelColumn'>ExcelColumn</a></li>
+<li><a href='#NumbersProblems-FactorialTrailingZeros'>FactorialTrailingZeros</a></li>
+<li><a href='#NumbersProblems-NumberFromIntsArray'>NumberFromIntsArray</a>
+<ul class='toc-indentation'>
+<li><a href='#NumbersProblems-letToRight'>letToRight</a></li>
+<li><a href='#NumbersProblems-rightToLeft'>rightToLeft</a></li>
+</ul>
+</li>
+<li><a href='#NumbersProblems-NumbersWithRepeatedDitigs'>NumbersWithRepeatedDitigs</a></li>
+<li><a href='#NumbersProblems-GasStations'>GasStations</a></li>
+<li><a href='#NumbersProblems-GCD'>GCD</a></li>
+<li><a href='#NumbersProblems-GcdFromArray'>GcdFromArray</a></li>
+<li><a href='#NumbersProblems-IsPalndrome'>IsPalndrome</a></li>
+<li><a href='#NumbersProblems-Josephus'>Josephus</a></li>
+<li><a href='#NumbersProblems-JourneyStartAmount'>JourneyStartAmount</a></li>
+<li><a href='#NumbersProblems-MakeChange'>MakeChange</a></li>
+<li><a href='#NumbersProblems-MinValueFromSequence'>MinValueFromSequence</a></li>
+<li><a href='#NumbersProblems-NumberToWords'>NumberToWords</a></li>
+<li><a href='#NumbersProblems-PowerOf10'>PowerOf10</a></li>
+<li><a href='#NumbersProblems-PrimeFactorization'>PrimeFactorization</a></li>
+<li><a href='#NumbersProblems-Primes'>Primes</a>
+<ul class='toc-indentation'>
+<li><a href='#NumbersProblems-isPrime'>isPrime</a></li>
+<li><a href='#NumbersProblems-genPrimes'>genPrimes</a></li>
+</ul>
+</li>
+<li><a href='#NumbersProblems-Random7'>Random7</a></li>
+<li><a href='#NumbersProblems-RomanNumeral'>RomanNumeral</a></li>
+<li><a href='#NumbersProblems-SquareRoot'>SquareRoot</a></li>
+<li><a href='#NumbersProblems-StairCaseHeight'>StairCaseHeight</a></li>
+<li><a href='#NumbersProblems-StringToNumber'>StringToNumber</a></li>
+<li><a href='#NumbersProblems-ToBinary'>ToBinary</a></li>
+</ul>
+</div><h2 id="NumbersProblems-AddBinary">AddBinary</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 340.0px;"/><col style="width: 340.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>AddBinary</p></th><th class="confluenceTh"><p>Test</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String addBinary(String s1, String s2)
+{
+    StringBuilder result = new StringBuilder();
+    int s1Pos = s1.length() - 1, s2Pos = s2.length() - 1;
+    int carry = 0;
+    while(s1Pos &gt; -1 &amp;&amp; s2Pos &gt; -1)
+    {
+        int sum = s1.charAt(s1Pos--) - &#39;0&#39; + s2.charAt(s2Pos--) - &#39;0&#39; + carry;
+        carry = sum / 2;
+        result.append(sum % 2);
+    }
+    String rem = s1Pos &gt; -1 ? s1.substring(0, s1Pos + 1) : s2.substring(0, s2Pos + 1);
+    int pos = rem.length() - 1;
+    while(pos &gt; -1)
+    {
+        int sum = rem.charAt(pos--) - &#39;0&#39; + carry;
+        carry = sum / 2;
+        result.append(sum % 2);
+    }
+    if(carry &gt; 0)
+    {
+        result.append(carry);
+    }
+    return result.reverse().toString();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = addBinary(&quot;110111&quot;, &quot;11011&quot;).equals(&quot;1010010&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="NumbersProblems-BiggestFromArray">BiggestFromArray</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 771.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>BiggestFromArray</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int makeBiggestNumberFromIntArray(int[] a)
+{
+    String[] sa = Arrays.stream(a).mapToObj(String::valueOf).toArray(String[]::new);
+    Arrays.sort(sa, (s1, s2) -&gt; {
+        String leftRight = s1 + s2;
+        String rightLeft = s2 + s1;
+        return rightLeft.compareTo(leftRight);
+    });
+    String s = Arrays.stream(sa).collect(Collectors.joining());
+    return Integer.valueOf(s);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = makeBiggestNumberFromIntArray(new int[] {7, 9, 91, 73}) == 991773;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="NumbersProblems-ClockAngle">ClockAngle</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 771.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ClockAngle</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">The minute hand moves 360 degrees in 60 minutes(or 6 degree in one minute)
+The hour hand moves 360 degrees in 12 hours (720 mins), or 0.5 degrees per minute.
+In h hours and m minutes:
+  the hour hand will move (h * 60 + m) * 0.5 degrees
+  the minute hand will move (h * 60 + m) * 6 degrees
+Assume 12:00 as the reference point
+In h hours and m minutes:
+  the hour hand will move (h * 60 + m) * 0.5 degrees
+  the minute hand will move (h * 60 + m) * 6 degrees, or 6 * m
+For them to superimpose, both angles should be equal
+0.5 * (60H + M) = 6*M
+60H + M = 12M
+60H = 11M
+M = 5.45H
+Thus, as H varies from 1 to 11, hands will overlap 11 times in 12 hours
+H   M
+-----
+1   1:05.45
+2   2:10.90
+3   3:16.36</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int angle(double hour, double min)
+{
+    if(hour &lt; 0 || hour &gt; 12 || min &lt; 0 || min &gt; 60)
+    {
+        return -1;
+    }
+    if(hour == 12)
+    {
+        hour = 0;
+    }
+    if(min == 60)
+    {
+        min = 0;
+    }
+    int hourAngle = (int)(0.5 * (hour * 60 + min));
+    int minAngle = (int)(6 * min);
+    int angle = Math.abs(hourAngle - minAngle);
+    angle = Math.min(360 - angle, angle);
+    return angle;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = angle(1, 5.45) == 0;
+    if(!check)
+    {
+        return false;
+    }
+    check = angle(2, 10.9) == 0;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-ConsecutiveNumberSum">ConsecutiveNumberSum</h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 340.0px;"/><col style="width: 340.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>CosecutiveNumberSum</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int numberOfConsecutiveSums(int n)
+{
+    int start = 1, end = (n + 1) / 2, count = 1;
+    while(start &lt; end)
+    {
+        int sum = 0;
+        for(int i = start; i &lt;= end; ++i)
+        {
+            sum += i;
+            if(sum &gt;= n)
+            {
+                if(sum == n)
+                {
+                    count++;
+                }
+                break;
+            }
+        }
+        start++;
+    }
+    return count;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = numberOfConsecutiveSums(9) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    check = numberOfConsecutiveSums(15) == 4;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="NumbersProblems-EggDrop">EggDrop</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 771.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>EggDrop</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">1st Egg If first egg breaks -&gt; 2nd egg                  Drops
+--------------------------------------------------------------
+14      1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6-&gt;7-&gt;8-&gt;9-&gt;10-&gt;11-&gt;12-&gt;13       1+13=14
+27      15-&gt;16-&gt;17-&gt;18-&gt;19-&gt;20-&gt;21-&gt;22-&gt;23-&gt;24-&gt;25-&gt;26  2+2=14
+39
+50
+60
+69
+77
+84
+90                                                      9+5=14
+95                                                      10+4=14
+99                                                      11+3=14
+102                                                     12+2=14
+104                                                     13+1=14
+105                                                     14+0=14
+We can see how this becomes the consecutive range sum problem where n = 14
+Thus,
+n(n + 1)/2 = 14*15/2 = 105
+n*n + n - 210 = 0
+a = 1, b = 1, c = -210
+Using quadratic equation:
+x = (-b +/- SQRT(b^2 - 4ac)) / 2a
+n = (-1 + Sqrt(1 + 840)) / 2 = 14</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int drops(int N)
+{
+    //  a = 1, b = 1, c = -2N
+    int sqrt = (int)Math.sqrt(1 + 8 * N); // SQRT(b^2 - 4ac)
+    return (-1 + sqrt)/ 2;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = drops(105) == 14;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-ExcelColumn">ExcelColumn</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 771.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ExcelColumn</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String numberToExcelColumn(int n)
+{
+    StringBuilder sb = new StringBuilder();
+    while(n &gt; 0)
+    {
+        int rem = n % 26;
+        // if rem == 0, the &#39;Z&#39; must be there
+        if(rem == 0)
+        {
+            sb.append(&quot;Z&quot;);
+            n = n / 26 - 1;
+        }
+        else
+        {
+            sb.append((char) (rem - 1 + &#39;A&#39;));
+            n /= 26;
+        }
+    }
+    return sb.reverse().toString();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = numberToExcelColumn(26).equals(&quot;Z&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = numberToExcelColumn(52).equals(&quot;AZ&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p>Notes:</p><ol><li><p>Make sure to use following <code>(char)</code> cast and syntax: <code>sb.append((char) (rem - 1 + 'A'));</code></p></li></ol><h2 id="NumbersProblems-FactorialTrailingZeros">FactorialTrailingZeros</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 760.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>FactorialTrailingZeros</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int trailingZerosInFactorial(int n)
+{
+    if(n &lt; 0)
+    {
+        return -1;
+    }
+    int count = 0;
+    while(n &gt; 0)
+    {
+        count += n / 5;
+        n /= 5;
+    }
+    return count;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="NumbersProblems-NumberFromIntsArray">NumberFromIntsArray</h2><h3 id="NumbersProblems-letToRight"><code>letToRight</code></h3><h3 id="NumbersProblems-rightToLeft"><code>rightToLeft</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 602.0px;"/><col style="width: 935.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>FromArray</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int letToRight(int [] a)
+{
+    int val = 0;
+    for(int v : a)
+    {
+        val = val * 10 + v;
+    }
+    return val;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int rightToLeft(int [] a)
+{
+    int val = 0; int pos = 0;
+    for(int i = a.length - 1; i &gt;= 0; --i)
+    {
+        val += Math.pow(10, pos++) * a[i];
+    }
+    return val;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = fromArrayOfOneDigitIntsLeftToRight(new int[] {3, 4, 5, 6}) == 3456;
+    if(!check)
+    {
+        return false;
+    }
+    check = fromArrayOfOneDigitIntsRightToLeft(new int[] {3, 4, 5, 6}) == 3456;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-NumbersWithRepeatedDitigs">NumbersWithRepeatedDitigs</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 340.0px;"/><col style="width: 340.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>NumbersWithRepeatedDigits</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int countNumbersWithRepeatedDigits(int n)
+{
+    List&lt;Integer&gt; result = new ArrayList();
+    for(int i = n; i &gt; 10; --i)
+    {
+        int num = i;
+        Set&lt;Integer&gt; set = new HashSet&lt;&gt;();
+        while(num &gt; 0)
+        {
+            int rem = num % 10;
+            if(set.contains(rem))
+            {
+                result.add(i);
+                break;
+            }
+            set.add(rem);
+            num /= 10;
+        }
+    }
+    return result.size();
+}</pre>
+</div></div></td><td class="confluenceTd"><p /><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = countNumbersWithRepeatedDigits(100) == 10;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="NumbersProblems-GasStations">GasStations</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 818.0px;"/><col style="width: 719.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>GasStations</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Input is provided in a 2D array, for example:
+{4, 6},
+{6, 5},
+{1, 3},
+{7, 4},
+Where the first value is the amount of petrol and the next value is the distance to the next station.
+To make it easier, we convert each coordinate to a Unit {petrol, distance}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class GasStations
+{
+    private static class Unit
+    {
+        int petrol;
+        int distance;
+        Unit(int petrol, int distance)
+        {
+            this.petrol = petrol;
+            this.distance = distance;
+        }
+    }
+
+    static int startingStation(int[][] data)
+    {
+        List&lt;Unit&gt; units = Arrays.stream(data).map((int[] a) -&gt; 
+                                              new Unit(a[0], a[1])).collect(Collectors.toList());
+
+        int supply = 0;
+
+        for(int i = 0; i &lt; units.size(); ++i)
+        {
+            Unit unit = units.get(i);
+            if(unit.distance &gt; unit.petrol + supply)
+            {
+                continue;
+            }
+
+            //  Check if we can visit all stations from &quot;good&quot; starting point
+            int j = 0;
+            for(; j &lt; units.size(); ++j)
+            {
+                Unit currentUnit = units.get((i + j) % units.size());
+                if(currentUnit.distance &gt; currentUnit.petrol + supply)
+                {
+                    break;
+                }
+                supply += currentUnit.petrol - currentUnit.distance;
+            }
+
+            //  if we could visit all stations
+            if(j == units.size())
+            {
+                return i;
+            }
+            //  Try competing tour from the next station
+            supply = 0;
+        }
+        return -1;
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = startingStation(new int[][] {{4, 6}, {6, 5}, {1, 3}, {7, 4}}) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p>Notes:</p><ol><li><p>When<code> j </code>is equal to <code>units.size()</code>, we completed the joirney</p></li><li><p>Use <code>units.get((i + j) % units.size())</code> to determine the current unit.</p></li></ol><h2 id="NumbersProblems-GCD">GCD</h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 480.0px;"/><col style="width: 480.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Gcd</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int findGcd(int a, int b)
+{
+    int gcd = Math.min(Math.abs(a), Math.abs(b));
+    while(gcd &gt; 0)
+    {
+        if(a % gcd == 0 &amp;&amp; b % gcd == 0)
+        {
+            break;
+        }
+        gcd--;
+    }
+    return gcd;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = findGcd(8, 36) == 4;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-GcdFromArray">GcdFromArray</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 771.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>GcdFromArray</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int gcdFromArray(int[] a)
+{
+    int minGcd = Integer.MAX_VALUE;
+    for(int i = 0; i &lt; a.length - 1; ++i)
+    {
+        for(int j = i + 1; j &lt; a.length; ++j)
+        {
+            minGcd = Math.min(minGcd, gcd(a[i], a[j]));
+        }
+    }
+    return minGcd;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = gcdFromArray(new int[] {12, 36, 24, 8}) == 4;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-IsPalndrome">IsPalndrome</h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 480.0px;"/><col style="width: 480.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>IsPalindrome</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean isPalindrome(int n)
+{
+    int original = n;
+    int reversed = 0;
+    while(n &gt; 0)
+    {
+        reversed = reversed * 10 + n % 10;
+        n /= 10;
+    }
+    return reversed == original;
+}</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = isPalindrome(123321);
+    if(!check)
+    {
+        return false;
+    }
+    check = isPalindrome(12345);
+    if(check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="NumbersProblems-Josephus">Josephus</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 771.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Josephus</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int josephus(int n, int k)
+{
+    List&lt;Integer&gt; list = IntStream.rangeClosed(1, n).boxed().collect(Collectors.toList());
+    int i = -1;
+    while (list.size() &gt; 1)
+    {
+        list.remove((i + k) % list.size());
+        i = (i + k) % (list.size() + 1) - 1;
+    }
+    return list.get(0);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = josephus(5, 2) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    check = josephus(7, 3) == 4;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="NumbersProblems-JourneyStartAmount">JourneyStartAmount</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 837.0px;"/><col style="width: 700.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>JourneyStartAmount</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">A traveler visits multiple cities.
+He can work daily and make some money. He also spends some money on each day.
+An array is given depicting his daily savings (earnings – expenses) over the course of his journey.
+How much minimum money he should start with in order to have at least some saving ( &gt; 0) 
+at the end of each day.
+ Examples: arr[] = { 10, -5, 7, -8, 5, -9 }
+ He had to have 10 before the start of the last day in order to have 1 left after spending 9
+ At the end of the journey he has $1 left.
+ Thus:
+ 1 - (-9) = 10
+ 10 - 5 = 5
+ 5 - (-8) = 13
+ 13 - 7 = 6
+ 6 - (-5) = 11
+ 11 - 10 = 1</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int amountAtStartOfJourney(int [] a)
+{
+    int sum = 1;
+    for(int i = a.length - 1; i &gt;= 0; i--)
+    {
+        sum -= a[i];
+    }
+    return sum;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = amountAtStartOfJourney(new int[] {10, -5, 7, -8, 5, -9}) == 1;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-MakeChange">MakeChange</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 690.0px;"/><col style="width: 847.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int makeChangeWithLeastNumberOfCoins(int initialAmount, int[] denoms)
+{
+    //  denoms must be sorted
+    Arrays.sort(denoms);
+    int amountRemaining = initialAmount;
+    int coins = 0;
+    for(int i = denoms.length - 1; i &gt;= 0; --i)
+    {
+        int denom = denoms[i];
+        while(amountRemaining &gt;= denom)
+        {
+            coins += amountRemaining / denom;
+            amountRemaining %= denom;
+        }
+    }
+    return coins;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = makeChangeWithLeastNumberOfCoins(99, new int[]{10, 1, 5}) == 14;
+    if (!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="NumbersProblems-MinValueFromSequence">MinValueFromSequence</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 771.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MinValueFromSequence</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Given a pattern containing only I’s and D’s. I for increasing and D for decreasing.
+Devise an algorithm to print the minimum number following that pattern.
+Digits from 1-9 can’t repeat.
+Examples:
+Input: D        Output: 21
+Input: I        Output: 12
+Input: DD       Output: 321
+Input: II       Output: 123
+Input: DIDI     Output: 21435
+Input: IIDDD    Output: 126543
+Input: DDIDDIID Output: 321654798
+Number of digits in output is one more than number of characters in input.
+Note that the first character of input corresponds to two digits in output.
+The tricky part occurs when &#39;D&#39; is encountered at index other than 0.
+In such a case we have to track the nearest &#39;I&#39; to the left of &#39;D&#39;
+and increment each number in the output vector by 1 in between ‘I’ and ‘D’.</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int compute(String s)
+{
+    List&lt;Integer&gt; result = new ArrayList&lt;&gt;();
+    int nextNumber = 3;
+    int posOfLastI = 0;
+    if(s.charAt(0) == &#39;I&#39;)
+    {
+        result.add(1);
+        result.add(2);
+    }
+    else
+    {
+        result.add(2);
+        result.add(1);
+    }
+    for(int i = 1; i &lt; s.length(); ++i)
+    {
+        if(s.charAt(i) == &#39;I&#39;)
+        {
+            result.add(nextNumber++);
+            posOfLastI = i + 1;
+        }
+        else
+        {
+            result.add(result.get(i));
+            for(int j = posOfLastI; j &lt;= i; ++j)
+            {
+                result.set(j, result.get(j) + 1);
+            }
+            nextNumber++;
+        }
+    }
+    int num = 0;
+    for(int i : result)
+    {
+        num = num * 10 + i;
+    }
+    return num;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = compute(&quot;D&quot;) == 21;
+    if(!check)
+    {
+        return false;
+    }
+    check = compute(&quot;I&quot;) == 12;
+    if(!check)
+    {
+        return false;
+    }
+    check = compute(&quot;IIDDD&quot;) == 126543;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-NumberToWords">NumberToWords</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 771.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>NumberToWords</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class NumberToWords
+{
+    static String[] numNames = {
+            &quot;&quot;,
+            &quot;one&quot;,
+            &quot;two&quot;,
+            &quot;three&quot;,
+            &quot;four&quot;,
+            &quot;five&quot;,
+            &quot;six&quot;,
+            &quot;seven&quot;,
+            &quot;eight&quot;,
+            &quot;nine&quot;,
+            &quot;ten&quot;,
+            &quot;eleven&quot;,
+            &quot;twelve&quot;,
+            &quot;thirteen&quot;,
+            &quot;fourteen&quot;,
+            &quot;fifteen&quot;,
+            &quot;sixteen&quot;,
+            &quot;seventeen&quot;,
+            &quot;eighteen&quot;,
+            &quot;nineteen&quot;
+    };
+    static String[] tenNames = {
+            &quot;&quot;,
+            &quot;ten&quot;,
+            &quot;twenty&quot;,
+            &quot;thirty&quot;,
+            &quot;forty&quot;,
+            &quot;fifty&quot;,
+            &quot;sixty&quot;,
+            &quot;seventy&quot;,
+            &quot;eighty&quot;,
+            &quot;ninety&quot;,
+    };
+    static String[] bigNumNames = {
+            &quot;&quot;,
+            &quot;thousand&quot;,
+            &quot;million&quot;,
+            &quot;billion&quot;,
+            &quot;trillion&quot;,
+            &quot;quadrillion&quot;,
+            &quot;quintillion&quot;
+    };
+
+    static String convert(long num)
+    {
+        if(num == 0)
+        {
+            return &quot;zero&quot;;
+        }
+
+        String prefix = &quot;&quot;;
+        if(num &lt; 0)
+        {
+            prefix = &quot;negative&quot;;
+            num = -num;
+        }
+
+        String current = &quot;&quot;;
+        int bigNumPlace = 0;
+
+        do
+        {
+            long n = num % 1000;
+            if(n != 0)
+            {
+                String s = convertLessThan1000(n);
+                current = s + bigNumNames[bigNumPlace++] + current;
+            }
+            num /= 1000;
+        } while (num &gt; 0);
+        return prefix + current;
+    }
+
+    private static String convertLessThan1000(long n)
+    {
+        if(n &lt; 100)
+        {
+            return convertLessThan100(n);
+        }
+
+        long hundreds = n / 100;
+        long rem = n % 100;
+        return numNames[(int)hundreds] + &quot;hundred&quot; + convertLessThan100(rem);
+    }
+
+    private static String convertLessThan100(long n)
+    {
+        if(n &lt; 20)
+        {
+            return convertLessThan20(n);
+        }
+
+        long tens = n / 10;
+        long rem = n % 10;
+        return tenNames[(int)tens] + convertLessThan20(rem);
+    }
+
+    private static String convertLessThan20(long n)
+    {
+        return numNames[(int)n];
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = convert(-12_345_678_901L).equals(&quot;negativetwelvebillionthreehundredfortyfivemillionsixhundredseventyeightthousandninehundredone&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-PowerOf10">PowerOf10</h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 480.0px;"/><col style="width: 480.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>PowerOf10</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean isPowerOf10(int n)
+{
+    for(int i = 1; i &lt;= n; i *= 10)
+    {
+        if(i == n)
+        {
+            return true;
+        }
+        if(i &gt; Integer.MAX_VALUE / 10)
+        {
+            return false;
+        }
+    }
+    return false;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = isPowerOf10(1) &amp;&amp;
+                    isPowerOf10(10) &amp;&amp;
+                    isPowerOf10(100) &amp;&amp;
+                    isPowerOf10(1000) &amp;&amp;
+                    isPowerOf10(1000000);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p /></td></tr></tbody></table></div><h2 id="NumbersProblems-PrimeFactorization">PrimeFactorization</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 631.0px;"/><col style="width: 906.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>PrimeFactorization</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] primeFactorsOfProduct(int n)
+{
+    if(n &lt; 2)
+    {
+        return new int[0];
+    }
+    List&lt;Integer&gt; factors = new ArrayList&lt;&gt;();
+    for(int i = 2; i &lt;= n; ++i)
+    {
+        while(n % i == 0)
+        {
+            factors.add(i);
+            n /= i;
+        }
+    }
+    return factors.stream().mapToInt(x -&gt; x).toArray();
+}</pre>
+</div></div><p /></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = Arrays.equals(new int[] {2, 2, 2, 2}, primeFactorsOfProduct(16));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {2, 5}, primeFactorsOfProduct(10));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {2, 2, 3}, primeFactorsOfProduct(12));
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="NumbersProblems-Primes">Primes</h2><h3 id="NumbersProblems-isPrime"><code>isPrime</code></h3><h3 id="NumbersProblems-genPrimes"><code>genPrimes</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 771.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Primes</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean isPrime(int n)
+{
+    //  1.  2 is the first prime number
+    //  2.  use &lt;= when comparing Sqrt. Consider number 9
+    if(n &lt; 2)
+    {
+        return false;
+    }
+    if(n == 2)
+    {
+        return true;
+    }
+    if(n % 2 == 0)
+    {
+        return false;
+    }
+    for(int i = 3; i &lt;= Math.sqrt(n); i += 2)
+    {
+        if(n % i == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+static int[] genPrimes(int n)
+{
+    if(n &lt; 1)
+    {
+        return new int[0];
+    }
+    int[] primes = new int[n];
+    primes[0] = 2;
+    int idx = 1;
+    int candidate = 3;
+    while(idx &lt; n)
+    {
+        boolean isPrime = true;
+        for(int i = 0; primes[i] &lt;= Math.sqrt(candidate); ++i)
+        {
+            if(candidate % primes[i] == 0)
+            {
+                isPrime = false;
+                break;
+            }
+        }
+        if(isPrime)
+        {
+            primes[idx++] = candidate;
+        }
+        candidate += 2;
+    }
+    return primes;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = isPrime(71);
+    if(!check)
+    {
+        return false;
+    }
+    check = isPrime(81);
+    if(check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {2, 3, 5, 7, 11, 13, 17}, genPrimes(7));
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-Random7">Random7</h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 480.0px;"/><col style="width: 480.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Random7</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int rand7UsingRand5()
+{
+    while(true)
+    {
+        int r01 = rand5();
+        if(r01 &lt; 4)
+        {
+            int r = rand5() * 2 + r01 % 2;
+            if(r &lt; 7)
+            {
+                return r;
+            }
+        }
+    }
+}
+
+private static int rand5()
+{
+    return (int)(Math.random() * 5);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    System.out.println(rand7UsingRand5());
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-RomanNumeral">RomanNumeral</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 771.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>RomanNumeral</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String romanNumeral(int n)
+{
+    String[] romSym = {&quot;M&quot;,&quot;CM&quot;,&quot;D&quot;,&quot;CD&quot;, &quot;C&quot;,&quot;XC&quot;,&quot;L&quot;,&quot;XL&quot;,&quot;X&quot;,&quot;IX&quot;,&quot;V&quot;,&quot;IV&quot;,&quot;I&quot;};
+    int[] decimals = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+    StringBuilder sb = new StringBuilder();
+    for(int i = 0; i &lt; decimals.length; ++i)
+    {
+        while(n &gt;= decimals[i])
+        {
+            sb.append(romSym[i]);
+            n -= decimals[i];
+        }
+        if(n == 0)
+        {
+            break;
+        }
+    }
+    return sb.toString();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = romanNumeral(4998).equals(&quot;MMMMCMXCVIII&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-SquareRoot">SquareRoot</h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 480.0px;"/><col style="width: 480.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>SquareRoot</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int squareRoot(int n)
+{
+    if(n &lt; 2)
+    {
+        return n;
+    }
+    int low = 1, high = n / 2;
+    while(low &lt;= high)
+    {
+        int mid = (low + high) / 2;
+        int sqr = mid * mid;
+        if(sqr == n)
+        {
+            return mid;
+        }
+        else if(sqr &lt; n)
+        {
+            low = mid + 1;
+        }
+        else
+        {
+            high = mid - 1;
+        }
+    }
+    return -1;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = squareRoot(81) == 9;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-StairCaseHeight">StairCaseHeight</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 771.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>StairCaseHeight</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">See EggDrop.drops</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = drops(55) == 10;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="NumbersProblems-StringToNumber">StringToNumber</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 771.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>StringToNumber</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int numericStringToNum(String s)
+{
+    char[] a = s.toCharArray();
+    int n = 0;
+    for(char c : a)
+    {
+        n = n * 10 + c - &#39;0&#39;;
+    }
+    return n;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = 12345 == numericStringToNum(&quot;12345&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="NumbersProblems-ToBinary">ToBinary</h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 480.0px;"/><col style="width: 480.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ToBinary</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String toBinary(int n)
+{
+    StringBuilder sb = new StringBuilder();
+    while(n &gt; 0)
+    {
+        sb.append(n % 2);
+        n /= 2;
+    }
+    return sb.reverse().toString();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = toBinary(14).equals(&quot;1110&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

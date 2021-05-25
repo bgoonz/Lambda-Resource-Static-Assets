@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Bi-Temporality Complete</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Project-Profit-Application_315097089.html">Project Profit Application</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Add-bi-temporality_324108289.html">Add bi-temporality</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Bi-Temporality Complete
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Apr 30, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="Bi-TemporalityComplete-ChangestoEntityObjects">Changes to Entity Objects</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public class BaseEntity extends ResourceSupport
+{
+    public static ZonedDateTime DATE_INFINITY = ZonedDateTime.parse(&quot;9999-12-31T00:00:00Z&quot;);
+    public static final String DATE_INFINITY_STRING = &quot;&#39;9999-12-31&#39;&quot;;
+
+    @CreatedBy
+    @Column(name = &quot;created_by&quot;)
+    private String createdBy;
+
+    @LastModifiedBy
+    @Column(name = &quot;last_modified_by&quot;)
+    private String lastModifiedBy;
+
+    @CreatedDate
+    @Column(name = &quot;in_utc&quot;, nullable = false)
+    private Date inUtc;
+
+    @Column(name = &quot;out_utc&quot;)
+    private ZonedDateTime outUtc = DATE_INFINITY;
+
+    public String getCreatedBy()
+    {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy)
+    {
+        this.createdBy = createdBy;
+    }
+
+    public String getLastModifiedBy()
+    {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy)
+    {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public Date getInUtc()
+    {
+        return inUtc;
+    }
+
+    public void setInUtc(Date inUtc)
+    {
+        this.inUtc = inUtc;
+    }
+
+    public ZonedDateTime getOutUtc()
+    {
+        return outUtc;
+    }
+
+    public void setOutUtc(ZonedDateTime outUtc)
+    {
+        this.outUtc = outUtc;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {&quot;auditId&quot;, &quot;out_utc&quot;})
+})
+public class Employee extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String auditId = UUID.randomUUID().toString();
+    private String employeeCode;
+    private String employeeName;
+    @JsonIgnore
+    @OneToMany(mappedBy = &quot;employee&quot;)
+    private List&lt;ProjectEmployeePair&gt; projectEmployeePairs = new ArrayList&lt;&gt;();
+    @JsonIgnore
+    @OneToMany(mappedBy = &quot;employee&quot;)
+    private List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = new ArrayList&lt;&gt;();
+
+    //  Constructor for the audit record
+    public Employee(Employee other)
+    {
+        super();
+        this.auditId = other.auditId;
+        this.employeeCode = other.employeeCode;
+        this.employeeName = other.employeeName;
+        this.setOutUtc(ZonedDateTime.now());
+        this.setInUtc(other.getInUtc());
+     }
+
+    public Employee()
+    {
+        super();
+    }
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getEmployeeCode()
+    {
+        return employeeCode;
+    }
+
+    public void setEmployeeCode(String employeeCode)
+    {
+        this.employeeCode = employeeCode;
+    }
+
+    public String getEmployeeName()
+    {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName)
+    {
+        this.employeeName = employeeName;
+    }
+
+    public List&lt;ProjectEmployeePair&gt; getProjectEmployeePairs()
+    {
+        return projectEmployeePairs;
+    }
+
+    public void setProjectEmployeePairs(List&lt;ProjectEmployeePair&gt; projectEmployeePairs)
+    {
+        this.projectEmployeePairs = projectEmployeePairs;
+    }
+
+    public List&lt;EmployeeSubscriptionPair&gt; getEmployeeSubscriptionPairs()
+    {
+        return employeeSubscriptionPairs;
+    }
+
+    public void setEmployeeSubscriptionPairs(List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs)
+    {
+        this.employeeSubscriptionPairs = employeeSubscriptionPairs;
+    }
+
+    public String getAuditId()
+    {
+        return auditId;
+    }
+
+    public void setAuditId(String auditId)
+    {
+        this.auditId = auditId;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Employee employee = (Employee) o;
+        return ID == employee.ID &amp;&amp;
+                Objects.equals(employeeCode, employee.employeeCode) &amp;&amp;
+                Objects.equals(employeeName, employee.employeeName);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), ID, employeeCode, employeeName);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {&quot;auditId&quot;, &quot;out_utc&quot;})
+})
+public class Project extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String auditId = UUID.randomUUID().toString();
+    private String projectName;
+    private String projectDescription;
+    @JsonIgnore
+    @OneToMany(mappedBy = &quot;project&quot;)
+    private List&lt;ProjectEmployeePair&gt; projectEmployeePairs = new ArrayList&lt;&gt;();
+
+    //  Constructor for the audit record
+    public Project(Project other)
+    {
+        super();
+        this.auditId = other.auditId;
+        this.projectName = other.projectName;
+        this.projectDescription = other.projectDescription;
+        this.setOutUtc(ZonedDateTime.now());
+        this.setInUtc(other.getInUtc());
+    }
+
+    public Project()
+    {
+        super();
+    }
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getProjectName()
+    {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName)
+    {
+        this.projectName = projectName;
+    }
+
+    public String getProjectDescription()
+    {
+        return projectDescription;
+    }
+
+    public void setProjectDescription(String projectDescription)
+    {
+        this.projectDescription = projectDescription;
+    }
+
+    public List&lt;ProjectEmployeePair&gt; getProjectEmployeePairs()
+    {
+        return projectEmployeePairs;
+    }
+
+    public void setProjectEmployeePairs(List&lt;ProjectEmployeePair&gt; projectEmployeePairs)
+    {
+        this.projectEmployeePairs = projectEmployeePairs;
+    }
+
+    public String getAuditId()
+    {
+        return auditId;
+    }
+
+    public void setAuditId(String auditId)
+    {
+        this.auditId = auditId;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Project project = (Project) o;
+        return ID == project.ID &amp;&amp;
+                Objects.equals(projectName, project.projectName) &amp;&amp;
+                Objects.equals(projectDescription, project.projectDescription);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), ID, projectName, projectDescription);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(uniqueConstraints={
+                @UniqueConstraint(columnNames = {&quot;auditId&quot;, &quot;out_utc&quot;})
+        })
+public class Subscription extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String auditId = UUID.randomUUID().toString();
+    private String subscriptionCode;
+    private String subscriptionName;
+    @JsonIgnore
+    @OneToMany(mappedBy = &quot;subscription&quot;)
+    private List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = new ArrayList&lt;&gt;();
+
+    //  Constructor for the audit record
+    public Subscription(Subscription other)
+    {
+        super();
+        this.auditId = other.auditId;
+        this.subscriptionCode = other.subscriptionCode;
+        this.subscriptionName = other.subscriptionName;
+        this.setOutUtc(ZonedDateTime.now());
+        this.setInUtc(other.getInUtc());
+    }
+
+    public Subscription()
+    {
+        super();
+    }
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getSubscriptionCode()
+    {
+        return subscriptionCode;
+    }
+
+    public void setSubscriptionCode(String subscriptionCode)
+    {
+        this.subscriptionCode = subscriptionCode;
+    }
+
+    public String getSubscriptionName()
+    {
+        return subscriptionName;
+    }
+
+    public void setSubscriptionName(String subscriptionName)
+    {
+        this.subscriptionName = subscriptionName;
+    }
+
+    public List&lt;EmployeeSubscriptionPair&gt; getEmployeeSubscriptionPairs()
+    {
+        return employeeSubscriptionPairs;
+    }
+
+    public void setEmployeeSubscriptionPairs(List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs)
+    {
+        this.employeeSubscriptionPairs = employeeSubscriptionPairs;
+    }
+
+    public String getAuditId()
+    {
+        return auditId;
+    }
+
+    public void setAuditId(String auditId)
+    {
+        this.auditId = auditId;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Subscription that = (Subscription) o;
+        return ID == that.ID &amp;&amp;
+                Objects.equals(subscriptionCode, that.subscriptionCode) &amp;&amp;
+                Objects.equals(subscriptionName, that.subscriptionName);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), ID, subscriptionCode, subscriptionName);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(name = &quot;EMPLOYEE_SUBSCRIPTION_MAP&quot;,
+        uniqueConstraints={
+                @UniqueConstraint(columnNames = {&quot;auditId&quot;, &quot;out_utc&quot;})
+        })
+public class EmployeeSubscriptionPair extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String auditId = UUID.randomUUID().toString();
+    @ManyToOne
+    @JoinColumn(name = &quot;employee_id&quot;)
+    private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = &quot;subscription_id&quot;)
+    private Subscription subscription;
+
+    public EmployeeSubscriptionPair(Employee employee, Subscription subscription)
+    {
+        this.employee = employee;
+        this.subscription = subscription;
+    }
+
+    private EmployeeSubscriptionPair()
+    {
+    }
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public Employee getEmployee()
+    {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee)
+    {
+        this.employee = employee;
+    }
+
+    public Subscription getSubscription()
+    {
+        return subscription;
+    }
+
+    public void setSubscription(Subscription subscription)
+    {
+        this.subscription = subscription;
+    }
+
+    public String getAuditId()
+    {
+        return auditId;
+    }
+
+    public void setAuditId(String auditId)
+    {
+        this.auditId = auditId;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(name = &quot;PROJECT_EMPLOYEE_MAP&quot;,
+        uniqueConstraints={
+        @UniqueConstraint(columnNames = {&quot;auditId&quot;, &quot;out_utc&quot;})
+})
+public class ProjectEmployeePair extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String auditId = UUID.randomUUID().toString();
+    @ManyToOne
+    @JoinColumn(name = &quot;project_id&quot;)
+    private Project project;
+    @ManyToOne
+    @JoinColumn(name = &quot;employee_id&quot;)
+    private Employee employee;
+
+    public ProjectEmployeePair(Project project, Employee employee)
+    {
+        this.project = project;
+        this.employee = employee;
+    }
+
+    public ProjectEmployeePair()
+    {
+    }
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public Project getProject()
+    {
+        return project;
+    }
+
+    public void setProject(Project project)
+    {
+        this.project = project;
+    }
+
+    public Employee getEmployee()
+    {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee)
+    {
+        this.employee = employee;
+    }
+
+    public String getAuditId()
+    {
+        return auditId;
+    }
+
+    public void setAuditId(String auditId)
+    {
+        this.auditId = auditId;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="Bi-TemporalityComplete-ChangestoRepoObjects">Changes to Repo Objects</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public interface EmployeeRepository extends JpaRepository&lt;Employee, Integer&gt;
+{
+    @Query(&quot;from Employee where id =:id and outUtc = &quot; + BaseEntity.DATE_INFINITY_STRING)
+    Optional&lt;Employee&gt; findById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;from Employee where outUtc = &quot; + BaseEntity.DATE_INFINITY_STRING)
+    List&lt;Employee&gt; findAll();
+}
+
+
+public interface EmployeeSubscriptionMapRepository extends JpaRepository&lt;EmployeeSubscriptionPair, Integer&gt;
+{
+    @Query(&quot;from EmployeeSubscriptionPair where employee.ID = :id and outUtc = &quot; + BaseEntity.DATE_INFINITY_STRING)
+    List&lt;EmployeeSubscriptionPair&gt; findByEmployeeId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;from EmployeeSubscriptionPair where subscription.ID = :id and outUtc = &quot; + BaseEntity.DATE_INFINITY_STRING)
+    List&lt;EmployeeSubscriptionPair&gt; findBySubscriptionId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;from EmployeeSubscriptionPair where employee.ID = :employeeId and subscription.ID = :subscriptionId and outUtc = &quot; + BaseEntity.DATE_INFINITY_STRING)
+    Optional&lt;EmployeeSubscriptionPair&gt; findByEmployeeIdSubscriptionId(@Param(&quot;employeeId&quot;) int employeeId, @Param(&quot;subscriptionId&quot;) int subscriptionId);
+}
+
+
+public interface ProjectEmployeeMapRepository extends JpaRepository&lt;ProjectEmployeePair, Integer&gt;
+{
+    @Query(&quot;from ProjectEmployeePair where project.ID = :id and outUtc = &quot; + BaseEntity.DATE_INFINITY_STRING)
+    List&lt;ProjectEmployeePair&gt; findByProjectId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;from ProjectEmployeePair where employee.ID = :id and outUtc = &quot; + BaseEntity.DATE_INFINITY_STRING)
+    List&lt;ProjectEmployeePair&gt; findByEmployeeId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;from ProjectEmployeePair where project.ID = :projectId and employee.ID = :employeeId and outUtc = &quot; + BaseEntity.DATE_INFINITY_STRING)
+    Optional&lt;ProjectEmployeePair&gt; findByProjectIdEmployeeId(@Param(&quot;projectId&quot;) int projectId, @Param(&quot;employeeId&quot;) int employeeId);
+}
+
+
+public interface ProjectRepository extends JpaRepository&lt;Project, Integer&gt;
+{
+    @Query(&quot;from Project where id =:id and outUtc = &quot; + BaseEntity.DATE_INFINITY_STRING)
+    Optional&lt;Project&gt; findById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;from Project where outUtc = &quot; + BaseEntity.DATE_INFINITY_STRING)
+    List&lt;Project&gt; findAll();
+}
+
+
+public interface SubscriptionRepository extends JpaRepository&lt;Subscription, Integer&gt;
+{
+    @Query(&quot;from Subscription where id =:id and outUtc = &quot; + BaseEntity.DATE_INFINITY_STRING)
+    Optional&lt;Subscription&gt; findById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;from Subscription where outUtc = &quot; + BaseEntity.DATE_INFINITY_STRING)
+    List&lt;Subscription&gt; findAll();
+}
+
+
+
+</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h1 id="Bi-TemporalityComplete-ChangestoControllerObjects">Changes to Controller Objects</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Transactional
+@PutMapping(&quot;/employees/{id}&quot;)
+public ResponseEntity&lt;?&gt; updateEmployee(@PathVariable(&quot;id&quot;) int id, @RequestBody Employee employee)
+{
+    Optional&lt;Employee&gt; existingEmployeeOptional = employeeRepository.findById(id);
+    if(!existingEmployeeOptional.isPresent())
+    {
+        throw new NotFoundException(&quot;employee-&quot; + id);
+    }
+    Employee existingEmployee = existingEmployeeOptional.get();
+    Employee autitEmployee = new Employee(existingEmployee);
+    existingEmployee.setInUtc(new Date());
+    if(StringUtils.hasText(employee.getEmployeeCode()))
+    {
+        existingEmployee.setEmployeeCode(employee.getEmployeeCode());
+    }
+    if(StringUtils.hasText(employee.getEmployeeName()))
+    {
+        existingEmployee.setEmployeeName(employee.getEmployeeName());
+    }
+    employeeRepository.save(existingEmployee);
+    employeeRepository.save(autitEmployee);
+    URI location = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .buildAndExpand(existingEmployee).toUri();
+    return ResponseEntity.created(location).build();
+}
+@DeleteMapping(&quot;/employees/{id}&quot;)
+public ResponseEntity&lt;?&gt; deleteEmployee(@PathVariable(&quot;id&quot;) int id)
+{
+    List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findByEmployeeId(id);
+    if(!projectEmployeePairs.isEmpty())
+    {
+        throw new ProjectViolationException(&quot;projects exist for employee-&quot; + id);
+    }
+    List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = employeeSubscriptionMapRepository.findByEmployeeId(id);
+    if(!employeeSubscriptionPairs.isEmpty())
+    {
+        throw new SubscriptionViolationException(&quot;subscription exist for employee-&quot; + id);
+    }
+    Optional&lt;Employee&gt; existingEmployeeOptional = employeeRepository.findById(id);
+    if(!existingEmployeeOptional.isPresent())
+    {
+        throw new NotFoundException(&quot;employee-&quot; + id);
+    }
+    Employee employee = existingEmployeeOptional.get();
+    employee.setOutUtc(ZonedDateTime.now());
+    employeeRepository.save(employee);
+    URI location = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .buildAndExpand().toUri();
+    return ResponseEntity.created(location).build();
+}
+
+
+private ResponseEntity&lt;?&gt; deleteAssociation(int employeeId, int subscriptionId)
+{
+    Optional&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairOptional =
+            employeeSubscriptionMapRepository.findByEmployeeIdSubscriptionId(employeeId, subscriptionId);
+    if(!employeeSubscriptionPairOptional.isPresent())
+    {
+        throw new NotFoundException(&quot;employeeId-&quot; + employeeId + &quot;, subscriptionId-&quot; + subscriptionId);
+    }
+    EmployeeSubscriptionPair employeeSubscriptionPair = employeeSubscriptionPairOptional.get();
+    employeeSubscriptionPair.setOutUtc(ZonedDateTime.now());
+    employeeSubscriptionMapRepository.save(employeeSubscriptionPair);
+    URI location = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .buildAndExpand(employeeSubscriptionPair).toUri();
+    return ResponseEntity.created(location).build();
+}
+
+
+@Transactional
+@PutMapping(&quot;/projects/{id}&quot;)
+public ResponseEntity&lt;?&gt; updateProject(@PathVariable(&quot;id&quot;) int id, @RequestBody Project project)
+{
+    Optional&lt;Project&gt; existingProjectOptional = projectRepository.findById(id);
+    if(!existingProjectOptional.isPresent())
+    {
+        throw new NotFoundException(&quot;project-&quot; + id);
+    }
+    Project existingProject = existingProjectOptional.get();
+    Project autitProject = new Project(existingProject);
+    existingProject.setInUtc(new Date());
+    if(StringUtils.hasText(project.getProjectName()))
+    {
+        existingProject.setProjectName(project.getProjectName());
+    }
+    if(StringUtils.hasText(project.getProjectDescription()))
+    {
+        existingProject.setProjectDescription(project.getProjectDescription());
+    }
+    projectRepository.save(existingProject);
+    projectRepository.save(autitProject);
+    URI location = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .buildAndExpand(existingProject).toUri();
+    return ResponseEntity.created(location).build();
+}
+@DeleteMapping(&quot;/projects/{id}&quot;)
+public ResponseEntity&lt;?&gt; deleteProject(@PathVariable(&quot;id&quot;) int id)
+{
+    List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findByProjectId(id);
+    if(!projectEmployeePairs.isEmpty())
+    {
+        throw new ProjectViolationException(&quot;employee exist for project-&quot; + id);
+    }
+    Optional&lt;Project&gt; existingProjectOptional = projectRepository.findById(id);
+    if(!existingProjectOptional.isPresent())
+    {
+        throw new NotFoundException(&quot;project-&quot; + id);
+    }
+    Project project = existingProjectOptional.get();
+    project.setOutUtc(ZonedDateTime.now());
+    projectRepository.save(project);
+    URI location = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .buildAndExpand().toUri();
+    return ResponseEntity.created(location).build();
+}
+
+
+private ResponseEntity&lt;?&gt; deleteAssociation(int projectId, int employeeId)
+{
+    Optional&lt;ProjectEmployeePair&gt; projectEmployeePairOptional =
+            projectEmployeeMapRepository.findByProjectIdEmployeeId(projectId, employeeId);
+    if(!projectEmployeePairOptional.isPresent())
+    {
+        throw new NotFoundException(&quot;projectId-&quot; + projectId + &quot;, employeeId-&quot; + employeeId);
+    }
+    ProjectEmployeePair projectEmployeePair = projectEmployeePairOptional.get();
+    projectEmployeePair.setOutUtc(ZonedDateTime.now());
+    projectEmployeeMapRepository.save(projectEmployeePair);
+    URI location = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .buildAndExpand(projectEmployeePair).toUri();
+    return ResponseEntity.created(location).build();
+}
+
+
+@Transactional
+@PutMapping(&quot;/subscriptions/{id}&quot;)
+public ResponseEntity&lt;?&gt; updateSubscription(@PathVariable(&quot;id&quot;) int id, @RequestBody Subscription subscription)
+{
+    Optional&lt;Subscription&gt; existingSubscriptionOptional = subscriptionRepository.findById(id);
+    if(!existingSubscriptionOptional.isPresent())
+    {
+        throw new NotFoundException(&quot;subscription-&quot; + id);
+    }
+    Subscription existingSubscription = existingSubscriptionOptional.get();
+    Subscription autitSubscription = new Subscription(existingSubscription);
+    existingSubscription.setInUtc(new Date());
+    if(StringUtils.hasText(subscription.getSubscriptionCode()))
+    {
+        existingSubscription.setSubscriptionCode(subscription.getSubscriptionCode());
+    }
+    if(StringUtils.hasText(subscription.getSubscriptionName()))
+    {
+        existingSubscription.setSubscriptionName(subscription.getSubscriptionName());
+    }
+    subscriptionRepository.save(existingSubscription);
+    subscriptionRepository.save(autitSubscription);
+    URI location = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .buildAndExpand(existingSubscription).toUri();
+    return ResponseEntity.created(location).build();
+}
+@DeleteMapping(&quot;/subscriptions/{id}&quot;)
+public ResponseEntity&lt;?&gt; deleteSubscription(@PathVariable(&quot;id&quot;) int id)
+{
+    List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = employeeSubscriptionMapRepository.findBySubscriptionId(id);
+    if(!employeeSubscriptionPairs.isEmpty())
+    {
+        throw new ProjectViolationException(&quot;subscription exist for employee-&quot; + id);
+    }
+    Optional&lt;Subscription&gt; existingSubscriptionOptional = subscriptionRepository.findById(id);
+    if(!existingSubscriptionOptional.isPresent())
+    {
+        throw new NotFoundException(&quot;subscription-&quot; + id);
+    }
+    Subscription subscription = existingSubscriptionOptional.get();
+    subscription.setOutUtc(ZonedDateTime.now());
+    subscriptionRepository.save(subscription);
+    URI location = ServletUriComponentsBuilder
+            .fromCurrentRequest()
+            .buildAndExpand().toUri();
+    return ResponseEntity.created(location).build();
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="Bi-TemporalityComplete-Note">Note</h1><p>Remove @RestRepositoryController annotation from all controllers since it does not seem to server purpose</p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Bi-Temporal Bug Fixes</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Bi-Temporal-Design_289865729.html">Bi-Temporal Design</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Bi-Temporal Bug Fixes
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Apr 18, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="Bi-TemporalBugFixes-UseUTCTimeZone">Use UTC Time Zone</h1><p>See <a href="https://confluence.apg.services.gs.com/display/~gunern/Enhancements#Enhancements-UTC" class="external-link" rel="nofollow">UTC</a></p><p>Changes were made to in-memory database to use UTC time zone:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;1&#39;, &#39;duty name 1&#39;, &#39;duty type 1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31T00:00:00Z&#39;, &#39;unknown&#39;, &#39;unknown&#39;)</pre>
+</div></div></td></tr></tbody></table></div><p>Specified UTC timezone on <code>application.properties</code></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+hibernate.jdbc.time_zone=UTC
+...</pre>
+</div></div></td></tr></tbody></table></div><p>When the application is launched, the data is adjusted for local timezone:</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/640527036/image2019-11-27_9-54-17.png?version=1&amp;modificationDate=1574866457873&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/640527036/image2019-11-27_9-54-17.png?version=1&amp;modificationDate=1574866457873&amp;api=v2" loading="lazy"></span><h3 id="Bi-TemporalBugFixes-FixingUTCTimezone">Fixing UTC Timezone</h3><p>In <code>application.properties</code>, we need to specify <code>spring.jpa.properties.hibernate.jdbc.time_zone</code> instead of <code>hibernate.jdbc.time_zone</code> property. (But maybe they mean the same thing)</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+spring.jpa.properties.hibernate.jdbc.time_zone=UTC
+...</pre>
+</div></div></td></tr></tbody></table></div><p>Now, we no longer need to identify time values as UTC in <code>data.sql</code> file:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">--  DUTY
+INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;1&#39;, &#39;duty name 1&#39;, &#39;duty type 1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;2&#39;, &#39;duty name 2&#39;, &#39;duty type 2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;3&#39;, &#39;duty name 3&#39;, &#39;duty type 3&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;4&#39;, &#39;duty name 4&#39;, &#39;duty type 4&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;5&#39;, &#39;duty name 5&#39;, &#39;duty type 5&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+
+--  RULE
+INSERT INTO RULE(ID, RULE_ID, RULE_NAME, RULE_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;1&#39;, &#39;rule name 1&#39;, &#39;rule type 1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE(ID, RULE_ID, RULE_NAME, RULE_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;2&#39;, &#39;rule name 2&#39;, &#39;rule type 2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE(ID, RULE_ID, RULE_NAME, RULE_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;3&#39;, &#39;rule name 3&#39;, &#39;rule type 3&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+
+-- DUTY_RULE_MAP
+INSERT INTO DUTY_RULE_MAP(ID, DUTY_RULE_MAP_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;1&#39;, &#39;1&#39;, &#39;1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_RULE_MAP(ID, DUTY_RULE_MAP_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;2&#39;, &#39;2&#39;, &#39;1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_RULE_MAP(ID, DUTY_RULE_MAP_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;3&#39;, &#39;3&#39;, &#39;2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_RULE_MAP(ID, DUTY_RULE_MAP_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;4&#39;, &#39;4&#39;, &#39;2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--
+-- --SEQUENCE
+alter sequence HIBERNATE_SEQUENCE restart with 100</pre>
+</div></div></td></tr></tbody></table></div><p>Checking in-memory database:</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/640527036/image2019-11-27_11-45-2.png?version=1&amp;modificationDate=1574873103005&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/640527036/image2019-11-27_11-45-2.png?version=1&amp;modificationDate=1574873103005&amp;api=v2" loading="lazy"></span><p>Repository classes need to change to avoid comparisons with CURRENT_TIMESTAMP. Make sure to apply same change to all other repository classes.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RepositoryRestResource
+public interface DutyRepository extends JpaRepository&lt;Duty, Integer&gt;
+{
+    @Query(&quot;select d from Duty d where d.ID = :id and out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    Optional&lt;Duty&gt; findById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select d from Duty d where d.ID = :id&quot;)
+    Optional&lt;Duty&gt; findAuditById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select d from Duty d where d.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Duty&gt; findAll();
+
+    @Query(&quot;select d from Duty d where out_utc &lt; TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Duty&gt; findAuditAll();
+
+    @Query(&quot;select d from Duty d where d.dutyName = :dutyName and out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Duty&gt; findByName(@Param(&quot;dutyName&quot;) String dutyName);
+
+    @Query(&quot;select d from Duty d where d.dutyType = :dutyType and out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Duty&gt; findByType(@Param(&quot;dutyType&quot;) String dutyType);
+}</pre>
+</div></div></td></tr></tbody></table></div><p>Execute Integration Tests</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/640527036/image2019-11-27_12-40-47.png?version=1&amp;modificationDate=1574876447681&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/640527036/image2019-11-27_12-40-47.png?version=1&amp;modificationDate=1574876447681&amp;api=v2" loading="lazy"></span><p>Test with API</p><p>We will create a new Rule Entity Object (at 13:38 EST ) and verify that the<code> in_utc</code> fields appears in UTC time format.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/289865842/289898564.png" data-image-src="attachments/289865842/289898564.png" data-height="447" data-width="729" data-unresolved-comment-count="0" data-linked-resource-id="289898564" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200418-195256.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="289865842" data-linked-resource-container-version="2" data-media-id="a08b7d74-6b58-477a-b649-ea58809e54fa" data-media-type="file"></span><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/289865842/289898564.png">image-20200418-195256.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

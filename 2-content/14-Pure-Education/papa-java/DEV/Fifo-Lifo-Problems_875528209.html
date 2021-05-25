@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Fifo-Lifo Problems</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Java-Problems_858619905.html">Java Problems</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Fifo-Lifo Problems
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Feb 05, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1613190962975 {padding: 0px;}
+div.rbtoc1613190962975 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1613190962975 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1613190962975'>
+<ul class='toc-indentation'>
+<li><a href='#Fifo-LifoProblems-AreaUnderHistogram'>AreaUnderHistogram</a></li>
+<li><a href='#Fifo-LifoProblems-BalancedParens'>BalancedParens</a></li>
+<li><a href='#Fifo-LifoProblems-CanConnect'>CanConnect</a></li>
+<li><a href='#Fifo-LifoProblems-Celebrity'>Celebrity</a></li>
+<li><a href='#Fifo-LifoProblems-KnightShortestWalk'>KnightShortestWalk</a></li>
+<li><a href='#Fifo-LifoProblems-Maze'>Maze</a></li>
+<li><a href='#Fifo-LifoProblems-MergeIntervals'>MergeIntervals</a></li>
+<li><a href='#Fifo-LifoProblems-MinStack'>MinStack</a></li>
+<li><a href='#Fifo-LifoProblems-MouseAndCheese'>MouseAndCheese</a></li>
+<li><a href='#Fifo-LifoProblems-Palindrome'>Palindrome</a>
+<ul class='toc-indentation'>
+<li><a href='#Fifo-LifoProblems-isPalindromeString'>isPalindromeString</a></li>
+<li><a href='#Fifo-LifoProblems-isPalindromeList'>isPalindromeList</a></li>
+</ul>
+</li>
+<li><a href='#Fifo-LifoProblems-PhoneNumberAlpha'>PhoneNumberAlpha</a></li>
+<li><a href='#Fifo-LifoProblems-ProductOfDigits'>ProductOfDigits</a></li>
+<li><a href='#Fifo-LifoProblems-SimplifyPath'>SimplifyPath</a></li>
+<li><a href='#Fifo-LifoProblems-SortAscending'>SortAscending</a></li>
+<li><a href='#Fifo-LifoProblems-StructuredOutline'>StructuredOutline</a></li>
+</ul>
+</div><h2 id="Fifo-LifoProblems-AreaUnderHistogram">AreaUnderHistogram</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 769.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>AreaUnderHistogram</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">          _
+6       _| |
+5      | | |        |        _
+4      | | |  _     |      _| |
+3     _| | |_| |_   |    _| | |
+2   _| | | | | | |  |   | | | |
+1  | | | | | | | |  |   | | | |
+ ----------------------------------------</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static int maxAreaUnderHistogram(int[] heights)
+{
+    Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+    int max = 0, i = 0, zeroCount = 0;
+    while(i &lt; heights.length)
+    {
+        if(heights[i] &gt; 0)
+        {
+            if (stack.empty() || heights[i] &gt; heights[stack.peek()])
+            {
+                stack.push(i++);
+            }
+            else
+            {
+                int h = heights[stack.pop()];
+                int w = stack.empty() ? 1 : i - stack.peek() - 1;
+                max = Math.max(max, w * h);
+            }
+        }
+        else
+        {
+            zeroCount++;
+            i++;
+        }
+    }
+    i -= zeroCount;
+    while(!stack.empty())
+    {
+        int h = heights[stack.pop()];
+        int w = stack.empty() ? i : i - stack.peek() - 1;
+        max = Math.max(max, w * h);
+    }
+    return max;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = maxAreaUnderHistogram(new int[] {2, 3, 4}) == 6;
+    if(!check)
+    {
+        return false;
+    }
+    check = maxAreaUnderHistogram(new int[] {1, 2, 5, 6, 2, 3, 2}) == 12;
+    if(!check)
+    {
+        return false;
+    }
+    check = maxAreaUnderHistogram(new int[] {2, 3, 3, 2}) == 8;
+    if(!check)
+    {
+        return false;
+    }
+    check = maxAreaUnderHistogram(new int[] {3, 4}) == 6;
+    if(!check)
+    {
+        return false;
+    }
+    int x = maxAreaUnderHistogram(new int[] {3, 4, 0, 0});
+    check = maxAreaUnderHistogram(new int[] {3, 4, 0, 0}) == 6;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p>Notes:</p><ol><li><p>Make sure to adjust for 0 heights.</p></li><li><p>Use <code>1</code> when <code>stack.empty()</code> inside first <code>while </code>loop and <code>i</code> inside second <code>while </code>loop</p></li></ol><h2 id="Fifo-LifoProblems-BalancedParens">BalancedParens</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 769.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>BalancedParens</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean balancedParens(String s)
+{
+    Map&lt;Character,Character&gt; parensMap = new HashMap&lt;Character,Character&gt;() {{
+        put(&#39;(&#39;, &#39;)&#39;);
+        put(&#39;{&#39;, &#39;}&#39;);
+        put(&#39;[&#39;, &#39;]&#39;);
+        put(&#39;&lt;&#39;, &#39;&gt;&#39;);
+    }};
+    Set&lt;Character&gt; closingSet = parensMap.values().stream().collect(Collectors.toSet());
+    Stack&lt;Character&gt; stack = new Stack&lt;&gt;();
+    for(char c : s.toCharArray())
+    {
+        if(parensMap.containsKey(c))
+        {
+            stack.push(c);
+        }
+        else if(closingSet.contains(c))
+        {
+            if(stack.empty())
+            {
+                return false;
+            }
+            char popped = stack.pop();
+            if(parensMap.get(popped) != c)
+            {
+                return false;
+            }
+        }
+    }
+    return stack.empty();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String balanced = &quot;[he[ll(0) how]{are&lt;(you)&gt;}]&quot;, unbalanced = &quot;[he[ll(0) how]{are&lt;(you&gt;)}]&quot;;
+    boolean check = balancedParens(balanced) &amp;&amp; !balancedParens(unbalanced);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="Fifo-LifoProblems-CanConnect">CanConnect</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 769.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>CanConnect</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Consider 2D array as Source, Destination. For example:
+      {&quot;A&quot;, &quot;B&quot;},
+      {&quot;B&quot;, &quot;C&quot;},
+      {&quot;B&quot;, &quot;D&quot;},
+      {&quot;B&quot;, &quot;E&quot;},
+      {&quot;C&quot;, &quot;A&quot;},
+      {&quot;E&quot;, &quot;A&quot;}
+ Construct map:
+  A -&gt; B
+  B -&gt; C, D, E
+  C -&gt; A
+  E -&gt; A</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean canConnect(String[][] paths, String from, String to)
+{
+    Map&lt;String, Set&lt;String&gt;&gt; map = Arrays.stream(paths).collect(
+            HashMap::new,
+            (m, i) -&gt; m.computeIfAbsent(i[0], x -&gt; new HashSet&lt;&gt;()).add(i[1]),
+            HashMap::putAll);
+    Set&lt;String&gt; visited = new HashSet&lt;&gt;();
+    Queue&lt;String&gt; queue = new LinkedList&lt;&gt;();
+    queue.offer(from);
+    while(!queue.isEmpty())
+    {
+        String s = queue.poll();
+        Set&lt;String&gt; destinations = map.get(s);
+        if (destinations != null)
+        {
+            if (destinations.contains(to))
+            {
+                return true;
+            }
+            destinations.removeAll(visited);
+            visited.addAll(destinations);
+            queue.addAll(destinations);
+        }
+    }
+    return false;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+     String[][] input = {
+             {&quot;A&quot;, &quot;B&quot;},
+             {&quot;B&quot;, &quot;C&quot;},
+             {&quot;B&quot;, &quot;D&quot;},
+             {&quot;B&quot;, &quot;E&quot;},
+             {&quot;C&quot;, &quot;A&quot;},
+             {&quot;E&quot;, &quot;A&quot;}
+     };
+     boolean check = canConnect(input, &quot;A&quot;, &quot;C&quot;) &amp;&amp; 
+             canConnect(input, &quot;E&quot;, &quot;C&quot;) &amp;&amp; 
+             !canConnect(input, &quot;D&quot;, &quot;C&quot;);
+     if(!check)
+     {
+         return false;
+     }
+     return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="Fifo-LifoProblems-Celebrity">Celebrity</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 751.0px;"/><col style="width: 784.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Celebrity</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">In a party of N people, only one person is known to everyone.
+Such a person may be present in the party, if yes, he doesn&#39;t know anyone in the party.
+We can only ask questions like &quot;does A know B?&quot;.
+Find the stranger (celebrity) in minimum number of questions.
+1.  If A knows B, then A can’t be celebrity. Discard A, and B may be celebrity.
+2.  If A doesn&#39;t know B, then B can’t be celebrity. Discard B, and A may be celebrity.
+3.  Repeat above two steps till we left with only one person.
+Use 2D matrix to represent people at the party:
+Row index 2 is a celebrity          No one is a celebrity
+    {0, 1, 1, 1}                    {0, 1, 1, 1}
+    {1, 0, 1, 0}                    {1, 0, 0, 0}
+    {0, 0, 0, 0}                    {0, 0, 0, 0}
+    {1, 0, 1, 0}                    {1, 0, 1, 0}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">private static int [][] data;
+
+private static boolean knows(int a, int b)
+{
+    return data[a][b] == 1;
+}
+
+static int findCelebrity(int[][] data)
+{
+    Celebrity.data = data;
+    Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+    stack.addAll(IntStream.range(0, data.length).boxed().collect(Collectors.toList()));
+    
+    while(stack.size() &gt; 1)
+    {
+        int a = stack.pop();
+        int b = stack.pop();
+        if(knows(a, b))   //  a can&#39;t be a celebrity but b might
+        {
+            stack.push(b);
+        }
+        else    //  b can&#39;t be a celebrity but a might
+        {
+            stack.push(a);
+        }
+    }
+    int lastPerson = stack.pop();
+    for(int i = 0; i &lt; data.length; ++i)
+    {
+        if(i != lastPerson &amp;&amp; (knows(lastPerson, i) || !knows(i, lastPerson)))
+        {
+            return -1;
+        }
+    }
+    return lastPerson;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[][] data = {
+            {0, 1, 1, 1},
+            {1, 0, 1, 0},
+            {0, 0, 0, 0},
+            {1, 0, 1, 0}
+    };
+    boolean check = findCelebrity(data) == 2;
+    if(!check)
+    {
+        return false;
+    }
+    data = new int[][] {
+            {0, 1, 1, 1},
+            {1, 0, 0, 0},
+            {0, 0, 0, 0},
+            {1, 0, 1, 0}
+    };
+    check = findCelebrity(data) == -1;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="Fifo-LifoProblems-KnightShortestWalk">KnightShortestWalk</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 887.0px;"/><col style="width: 648.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>KnightShortestWalk</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class DistancePoint
+{
+    int x, y, distance;
+    DistancePoint(int x, int y, int distance)
+    {
+        this.x = x;
+        this.y = y;
+        this.distance = distance;
+    }
+    DistancePoint(int[] pt, int distance)
+    {
+        this(pt[0], pt[1], distance);
+    }
+    int[] getPoint()
+    {
+        return new int[] {x, y};
+    }
+}
+
+private static int[] X_MOVES = {2, 1,  1,  2, -2, -1, -1, -2};
+private static int[] Y_MOVES = {1, 2, -2, -1,  1,  2, -2, -1};
+private static int SIZE = 8;
+
+private static boolean isValid(int x, int y)
+{
+    return x &gt;= 0 &amp;&amp; x &lt; SIZE &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; SIZE;
+}
+
+static int shortestWalk(int[] start, int[] target)
+{
+    Queue&lt;DistancePoint&gt; queue = new LinkedList&lt;&gt;();
+    queue.offer(new DistancePoint(start, 0));
+    while(!queue.isEmpty())
+    {
+        DistancePoint distancePoint = queue.poll();
+        if(Arrays.equals(distancePoint.getPoint(), target))
+        {
+            return distancePoint.distance;
+        }
+        for(int i = 0; i &lt; SIZE; ++i)
+        {
+            int nextX = distancePoint.x + X_MOVES[i];
+            int nextY = distancePoint.y + Y_MOVES[i];
+            if(isValid(nextX, nextY))
+            {
+                queue.offer(new DistancePoint(nextX, nextY, distancePoint.distance + 1));
+            }
+        }
+    }
+    return -1;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = shortestWalk(new int[] {0, 0}, new int[] {4, 5}) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p>Note: do we need <code>visited </code>array. Seems to be working fine without it.</p><h2 id="Fifo-LifoProblems-Maze">Maze</h2><p>See also <a href="https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875528233/Recursion+Problems#%5BhardBreak%5DMaze" data-card-appearance="inline" rel="nofollow">https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875528233/Recursion+Problems#%5BhardBreak%5DMaze</a> <br/></p><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 769.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Maze</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static private boolean isValid(int x, int y, int[][] maze)
+{
+    return x &gt;= 0 &amp;&amp; x &lt; maze.length &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; maze[0].length &amp;&amp; maze[x][y] == 1;
+}
+
+
+static private boolean isValid(int[] pt, int[][] maze)
+{
+    return isValid(pt[0], pt[1], maze);
+}
+
+
+static boolean solve(int[][] maze)
+{
+    Queue&lt;int[]&gt; queue = new LinkedList&lt;&gt;();
+    queue.offer(maze[0]);
+    while(!queue.isEmpty())
+    {
+        int[] pt = queue.poll();
+        if(pt[0] == maze.length - 1 &amp;&amp; pt[1] == maze[0].length - 1)
+        {
+            return true;
+        }
+        int[] newPt1 = new int[] {pt[0] + 1, pt[1]};
+        int[] newPt2 = new int[] {pt[0], pt[1] + 1};
+        if(isValid(newPt1, maze))
+        {
+            queue.offer(newPt1);
+        }
+        if(isValid(newPt2, maze))
+        {
+            queue.offer(newPt2);
+        }
+    }
+    return false;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[][] data1 = new int [][] {
+            {1, 1, 0, 1},
+            {0, 1, 0, 0},
+            {0, 1, 1, 0},
+            {0, 0, 1, 1},
+            {0, 0, 0, 1}
+    };
+    boolean check = solve(data1);
+    if(!check)
+    {
+        return false;
+    }
+    int[][] data2 = new int [][] {
+            {1, 1, 0, 1},
+            {0, 1, 0, 0},
+            {0, 1, 0, 0},
+            {0, 0, 1, 1},
+            {0, 0, 0, 1}
+    };
+    check = !solve(data2);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="Fifo-LifoProblems-MergeIntervals">MergeIntervals</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 876.0px;"/><col style="width: 659.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MergeIntervals</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static List&lt;int[]&gt; mergeIntervals(int[][] intervals)
+{
+    Arrays.sort(intervals, Comparator.comparingInt((int[] a) -&gt; a[0]));
+    Stack&lt;int[]&gt; stack = new Stack&lt;&gt;();
+    stack.push(intervals[0]);
+    for(int i = 1; i &lt; intervals.length; ++i)
+    {
+        int[] interval = intervals[i];
+        if(interval[0] &gt; stack.peek()[1])
+        {
+            stack.push(interval);
+        }
+        else
+        {
+            if(interval[1] &gt; stack.peek()[1])
+            {
+                stack.peek()[1] = interval[1];
+            }
+        }
+    }
+    return stack.stream().collect(Collectors.toList());
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int [][] intervals = {
+            {8,10},
+            {1,3},
+            {15,18},
+            {7,8},
+            {4,5},
+            {2,6}
+    };
+    List&lt;int[]&gt; result = mergeIntervals(intervals);
+    boolean check = Arrays.equals(new int[] {1,6}, result.get(0)) &amp;&amp;
+                    Arrays.equals(new int[] {7,10}, result.get(1)) &amp;&amp;
+                    Arrays.equals(new int[] {15,18}, result.get(2));
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="Fifo-LifoProblems-MinStack">MinStack<br/></h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 769.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MinStack</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class MinStack extends Stack&lt;Integer&gt;
+{
+    private Stack&lt;Integer&gt; minStack = new Stack&lt;&gt;();
+
+    @Override
+    public Integer push(Integer item)
+    {
+        if(item &lt; min())
+        {
+            minStack.push(item);
+        }
+        return super.push(item);
+    }
+
+    @Override
+    public synchronized Integer pop()
+    {
+        int val = super.pop();
+        if(val == minStack.peek())
+        {
+            minStack.pop();
+        }
+        return val;
+    }
+
+    public int min()
+    {
+        if(minStack.isEmpty())
+        {
+            return Integer.MAX_VALUE;
+        }
+        return minStack.peek();
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    MinStack minStack = new MinStack();
+    minStack.push(3);
+    minStack.push(5);
+    minStack.push(1);
+    minStack.push(4);
+    minStack.push(2);
+    boolean check = minStack.min() == 1;
+    if(!check)
+    {
+        return false;
+    }
+    check = minStack.pop() == 2;
+    if(!check)
+    {
+        return false;
+    }
+    check = minStack.min() == 1;
+    if(!check)
+    {
+        return false;
+    }
+    check = minStack.pop() == 4;
+    if(!check)
+    {
+        return false;
+    }
+    check = minStack.min() == 1;
+    if(!check)
+    {
+        return false;
+    }
+    check = minStack.pop() == 1;
+    if(!check)
+    {
+        return false;
+    }
+    check = minStack.min() == 3;
+    if(!check)
+    {
+        return false;
+    }
+    check = minStack.pop() == 5;
+    if(!check)
+    {
+        return false;
+    }
+    check = minStack.min() == 3;
+    if(!check)
+    {
+        return false;
+    }
+    check = minStack.pop() == 3;
+    if(!check)
+    {
+        return false;
+    }
+    check = minStack.min() == Integer.MAX_VALUE;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="Fifo-LifoProblems-MouseAndCheese">MouseAndCheese</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 941.0px;"/><col style="width: 594.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MouseAndCheese</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class MouseAndCheese
+{
+    //  1 denotes valid move, 0 denotes invalid move, 9 denotes cheese
+
+    private static int[] X_MOVES = {-1, 0, 0,  1};
+    private static int[] Y_MOVES = { 0, 1, -1, 0};
+    private static int[][] maze;
+
+    private static boolean isValid(int x, int y)
+    {
+        return x &gt;= 0 &amp;&amp; x &lt; maze.length &amp;&amp; y &gt;= 0 &amp;&amp; y &lt; maze[0].length &amp;&amp; (maze[x][y] == 1 || maze[x][y] == 9);
+    }
+
+    static int distance(int[][] maze, int[] start)
+    {
+        MouseAndCheese.maze = maze;
+
+        boolean[][] visited = new boolean[maze.length][maze[0].length];
+        visited[start[0]][start[1]] = true;
+
+        Queue&lt;DistancePoint&gt; queue = new LinkedList&lt;&gt;();
+        queue.offer(new DistancePoint(start[0], start[1], 0));
+        while(!queue.isEmpty())
+        {
+            DistancePoint lastPoint = queue.poll();
+            if(maze[lastPoint.x][lastPoint.y] == 9)
+            {
+                return lastPoint.distance;
+            }
+
+            for(int i = 0; i &lt; X_MOVES.length; ++i)
+            {
+                int nextX = lastPoint.x + X_MOVES[i];
+                int nextY = lastPoint.y + Y_MOVES[i];
+
+                if(isValid(nextX, nextY) &amp;&amp; !visited[nextX][nextY])
+                {
+                    visited[nextX][nextY] = true;
+                    queue.offer(new DistancePoint(nextX, nextY, lastPoint.distance + 1));
+                }
+            }
+        }
+        return -1;
+    }
+
+    static class DistancePoint
+    {
+        int x, y, distance;
+        DistancePoint(int x, int y, int distance)
+        {
+            this.x = x;
+            this.y = y;
+            this.distance = distance;
+        }
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int maze[][] = {
+            {1, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
+            {1, 0, 1, 0, 1, 1, 1, 0, 1, 1 },
+            {1, 1, 1, 0, 1, 1, 0, 1, 1, 1 },
+            {0, 0, 0, 0, 9, 0, 0, 1, 0, 1 },
+            {1, 1, 1, 0, 1, 1, 1, 1, 1, 0 },
+            {1, 0, 1, 1, 1, 1, 0, 1, 0, 0 },
+            {1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+            {1, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
+            {1, 1, 1, 0, 0, 1, 1, 1, 0, 1 }};
+    boolean check = distance(maze, new int[] {0, 0}) == 11;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p>Notes:</p><p>Do we really need the <code>visited </code>array?</p><h2 id="Fifo-LifoProblems-Palindrome">Palindrome</h2><h3 id="Fifo-LifoProblems-isPalindromeString"><code>isPalindromeString</code></h3><h3 id="Fifo-LifoProblems-isPalindromeList"><code>isPalindromeList</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 769.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Palindrome</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean isPalindromeString(String s)
+{
+    Stack&lt;Character&gt; stack = new Stack&lt;&gt;();
+    int len = s.length();
+    int idx = 0;
+    while(idx &lt; len / 2)
+    {
+        stack.push(s.charAt(idx++));
+    }
+    if(len % 2 == 1)
+    {
+        idx++;
+    }
+    while(idx &lt; len)
+    {
+        if(stack.empty())
+        {
+            return false;
+        }
+        if(stack.pop() != s.charAt(idx++))
+        {
+            return false;
+        }
+    }
+    return true;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; boolean isPalindromeList(List&lt;T&gt; list)
+{
+    Stack&lt;T&gt; stack = new Stack&lt;&gt;();
+    List.Node&lt;T&gt; slow = list.head, fast = list.head;
+    while(fast != null &amp;&amp; fast.next != null)
+    {
+        stack.push(slow.data);
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    if(fast != null)
+    {
+        slow = slow.next;
+    }
+    while(slow != null)
+    {
+        if(slow.data.compareTo(stack.pop()) != 0)
+        {
+            return false;
+        }
+        slow = slow.next;
+    }
+    return true;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String s1 = &quot;abcddcba&quot;, s2 = &quot;abcdcba&quot;, s3 = &quot;abcdba&quot;;
+    boolean check = isPalindromeString(s1);
+    if(!check)
+    {
+        return false;
+    }
+    check = isPalindromeString(s2);
+    if(!check)
+    {
+        return false;
+    }
+    check = isPalindromeString(s3);
+    if(check)
+    {
+        return false;
+    }
+    List&lt;Integer&gt; l1 = new List&lt;&gt;();
+    l1.add(1, 2, 3, 4, 3, 2, 1);
+    check = isPalindromeList(l1) == true;
+    if(!check)
+    {
+        return false;
+    }
+    List&lt;Integer&gt; l2 = new List&lt;&gt;();
+    l2.add(1, 2, 3, 4, 5, 2, 1);
+    check = isPalindromeList(l2) == true;
+    if(check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="Fifo-LifoProblems-PhoneNumberAlpha">PhoneNumberAlpha</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 768.0px;"/><col style="width: 767.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>PhoneNumberAlpha</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">private static String[] TABLE = {
+        &quot;&quot;,
+        &quot;&quot;,
+        &quot;abc&quot;,
+        &quot;def&quot;,
+        &quot;ghi&quot;,
+        &quot;jkl&quot;,
+        &quot;mno&quot;,
+        &quot;pqrs&quot;,
+        &quot;tuv&quot;,
+        &quot;wxyz&quot;
+};
+
+
+static List&lt;String&gt; generateCombinations(int[] n)
+{
+    int len = n.length;
+    List&lt;String&gt; result = new ArrayList&lt;&gt;();
+    Queue&lt;String&gt; queue = new LinkedList&lt;&gt;();
+    queue.offer(&quot;&quot;);
+    while(!queue.isEmpty())
+    {
+        String s = queue.poll();
+        if(s.length() == len)
+        {
+            result.add(s);
+        }
+        else
+        {
+            String letters = TABLE[n[s.length()]];
+            for(int i = 0; i &lt; letters.length(); ++i)
+            {
+                queue.offer(s + letters.charAt(i));
+            }
+        }
+    }
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    List&lt;String&gt; list = generateCombinations(new int[] {4, 9, 8, 9, 6, 3, 7});
+    boolean check = list.size() == 5184;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p>Notes:</p><p>We start out with string length of 0. Thus, to select letters for the first digit, use <code>TABLE[n[s.length()]]</code></p><h2 id="Fifo-LifoProblems-ProductOfDigits">ProductOfDigits<br/></h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 480.0px;"/><col style="width: 480.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ProductOfDigits</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int productOfDigits(int n)
+{
+    //  455 is a result of 100
+    //  100 = 4 * 5 * 5
+    Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+    for(int factor = 9; factor &gt; 1; factor--)
+    {
+        while(n % factor == 0)
+        {
+            stack.push(factor);
+            n /= factor;
+        }
+    }
+    int num = 0;
+    while(!stack.isEmpty())
+    {
+        num = num * 10 + stack.pop();
+    }
+    return n == 1 ? num : -1;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = productOfDigits(100) == 455;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="Fifo-LifoProblems-SimplifyPath">SimplifyPath</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 769.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>SimplifyDirPath</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String simplifyDirPath(String path)
+{
+    String[] parts = path.split(&quot;/&quot;);
+    if(parts.length == 0)
+    {
+        return path;
+    }
+    Queue&lt;String&gt; queue = new LinkedList&lt;&gt;();
+    for(String token : parts)
+    {
+        if(StringUtils.isNotBlank(token) &amp;&amp; !token.equals(&quot;.&quot;))
+        {
+            if(token.equals(&quot;..&quot;) &amp;&amp; !queue.isEmpty())
+            {
+                queue.poll();
+            }
+            else
+            {
+                queue.offer(token);
+            }
+        }
+    }
+    return &quot;/&quot; + queue.stream().collect(Collectors.joining(&quot;/&quot;));
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = simplifyDirPath(&quot;/a/./b/../../c/&quot;).equals(&quot;/c&quot;) &amp;&amp; 
+            simplifyDirPath(&quot;/home//foo/&quot;).equals(&quot;/home/foo&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="Fifo-LifoProblems-SortAscending">SortAscending</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 769.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>SortAscending</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Stack&lt;Integer&gt; sortAscending(Stack&lt;Integer&gt; stack)
+{
+    Stack&lt;Integer&gt; sortedStack = new Stack&lt;&gt;();
+    while(!stack.isEmpty())
+    {
+        int val = stack.pop();
+        if(sortedStack.isEmpty())
+        {
+            sortedStack.push(val);
+        }
+        else
+        {
+            while(!sortedStack.isEmpty() &amp;&amp; sortedStack.peek() &gt; val)
+            {
+                stack.push(sortedStack.pop());
+            }
+            sortedStack.push(val);
+         }
+    }
+    return sortedStack;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+    stack.push(3); 
+    stack.push(1); 
+    stack.push(4); 
+    stack.push(5); 
+    stack.push(2);
+    stack = sortAscending(stack);
+    int[] a = stack.stream().mapToInt(x -&gt; x).toArray();
+    boolean check = Arrays.equals(new int[] {1, 2, 3, 4, 5}, a);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p /></td></tr></tbody></table></div><h2 id="Fifo-LifoProblems-StructuredOutline">StructuredOutline</h2><p /><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 769.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>StructuredOutline</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Heading(1, &quot;h1_1&quot;);
+Heading(2, &quot;h2_11&quot;);
+Heading(3, &quot;h3_111&quot;);
+Heading(3, &quot;h3_112&quot;);
+Heading(3, &quot;h3_113&quot;);
+Heading(2, &quot;h2_12&quot;);
+Heading(3, &quot;h3_121&quot;);
+Heading(1, &quot;h1_2&quot;);
+Heading(2, &quot;h2_21&quot;);
+Heading(2, &quot;h2_22&quot;);
+Heading(2, &quot;h2_23&quot;);
+Heading(3, &quot;h3_231&quot;);
+Heading(3, &quot;h3_232&quot;);
+Heading(3, &quot;h3_233&quot;);
+Heading(1, &quot;h1_3&quot;);</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class StructuredOutline
+{
+    static class Heading
+    {
+        int weight;
+        String text;
+
+        Heading(int weight, String text)
+        {
+            this.weight = weight;
+            this.text = text;
+        }
+    }
+
+    static class Node
+    {
+        Heading heading;
+        List&lt;Node&gt; children = new ArrayList&lt;&gt;();
+
+        Node(Heading heading)
+        {
+            this.heading = heading;
+        }
+
+        int getWeight() { return heading.weight; }
+    }
+
+    private List&lt;Heading&gt; headings;
+
+    public StructuredOutline(List&lt;Heading&gt; headings)
+    {
+        this.headings = headings;
+    }
+
+    Node createStructuredOutline()
+    {
+        Node root = new Node( new Heading(0, &quot;root&quot;));
+
+        Stack&lt;Node&gt; stack = new Stack&lt;&gt;();
+        stack.push(root);
+
+        for(Heading heading : headings)
+        {
+            Node node = new Node(heading);
+
+            if(stack.peek().getWeight() &lt; heading.weight)
+            {
+                stack.peek().children.add(node);
+            }
+            else if(stack.peek().getWeight() == heading.weight)
+            {
+                stack.pop();
+                stack.peek().children.add(node);
+            }
+            else
+            {
+                while(stack.peek().getWeight() &gt;= heading.weight)
+                {
+                    stack.pop();
+                }
+                stack.peek().children.add(node);
+            }
+            stack.push(node);
+        }
+
+        return root;
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    List&lt;Heading&gt; data = Arrays.asList(
+            new Heading(1, &quot;h1_1&quot;),
+            new Heading(2, &quot;h2_11&quot;),
+            new Heading(3, &quot;h3_111&quot;),
+            new Heading(3, &quot;h3_112&quot;),
+            new Heading(3, &quot;h3_113&quot;),
+            new Heading(2, &quot;h2_12&quot;),
+            new Heading(3, &quot;h3_121&quot;),
+            new Heading(1, &quot;h1_2&quot;),
+            new Heading(2, &quot;h2_21&quot;),
+            new Heading(2, &quot;h2_22&quot;),
+            new Heading(2, &quot;h2_23&quot;),
+            new Heading(3, &quot;h3_231&quot;),
+            new Heading(3, &quot;h3_232&quot;),
+            new Heading(3, &quot;h3_233&quot;),
+            new Heading(1, &quot;h1_3&quot;)
+    );
+    StructuredOutline structuredOutline = new StructuredOutline(data);
+    Node root = structuredOutline.createStructuredOutline();
+    boolean check = root.children.size() == 3;
+    if(!check)
+    {
+        return false;
+    }
+    Node h1_1 = root.children.get(0);
+    Node h1_2 = root.children.get(1);
+    Node h1_3 = root.children.get(2);
+    check = h1_1.heading.text.equals(&quot;h1_1&quot;) &amp;&amp;
+            h1_2.heading.text.equals(&quot;h1_2&quot;) &amp;&amp;
+            h1_3.heading.text.equals(&quot;h1_3&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = h1_1.children.size() == 2;
+    if(!check)
+    {
+        return false;
+    }
+    Node h2_11 = h1_1.children.get(0);
+    Node h2_12 = h1_1.children.get(1);
+    check = h2_11.heading.text.equals(&quot;h2_11&quot;) &amp;&amp; h2_12.heading.text.equals(&quot;h2_12&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = h2_11.children.size() == 3;
+    if(!check)
+    {
+        return false;
+    }
+    Node h3_111 = h2_11.children.get(0);
+    Node h3_112 = h2_11.children.get(1);
+    Node h3_113 = h2_11.children.get(2);
+    check = h3_111.heading.text.equals(&quot;h3_111&quot;) &amp;&amp;
+            h3_112.heading.text.equals(&quot;h3_112&quot;) &amp;&amp;
+            h3_113.heading.text.equals(&quot;h3_113&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p><br/></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

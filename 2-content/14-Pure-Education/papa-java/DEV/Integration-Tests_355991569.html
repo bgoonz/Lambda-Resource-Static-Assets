@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Integration Tests</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Project-Profit-Application_315097089.html">Project Profit Application</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unit-and-Integration-Tests-for-Subscription-Tracker_344522760.html">Unit and Integration Tests for Subscription Tracker</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Integration Tests
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on May 11, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="IntegrationTests-SubscriptionControllerTest">SubscriptionControllerTest</h1><p>Examine <code>SubscriptionController.getSubscriptions()</code> and note that it returns <code>SubscriptionDTO</code> objects. Thus, information from <code>BaseEntity</code>, such as <code>outUtc</code> would not be available.</p><p>To examine values in <code>outUtc, inUtc</code>, etc., we would need to create a <code>SubscriptionAuditControllerTest</code>.</p><h2 id="IntegrationTests-PrivatemethodtocombineURLwithrandomlychosenport">Private method to combine URL with randomly chosen port</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">private String createUrlWithPort(String url)
+{
+    return &quot;http://localhost:&quot; + port + url;
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h2 id="IntegrationTests-ProcessGETRequestsusingJSONArrayandJSONObject">Process GET Requests using JSONArray and JSONObject</h2><p>Note that<code> /subscriptions</code> returns <code>List&lt;Resource&lt;SubscriptionDTO&gt;&gt;</code> while <code>/subscriptions/{id}</code> returns <code>Resource&lt;SubscriptionDTO&gt;</code></p><p>We can always use String.class and use <code>JSONObject</code> and <code>JSONArray</code> to process responses:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>GET-ALL</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>GET-ONE</strong></p></th></tr><tr><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Test
+public void getSubscriptions() throws JSONException
+{
+    Set&lt;Integer&gt; subscriptionIDs = new HashSet(Arrays.asList(1, 2, 3, 4, 5, 6));
+    ResponseEntity&lt;String&gt; response = testRestTemplate.getForEntity(createUrlWithPort( &quot;/subscriptions&quot;), String.class);
+    assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+    JSONArray jsonArray = new JSONArray(response.getBody());
+    for (int i = 0; i &lt; jsonArray.length(); ++i)
+    {
+        JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+        int subscriptionID = (int)jsonObject.get(&quot;subscriptionID&quot;);
+        subscriptionIDs.remove(subscriptionID);
+    }
+    assertTrue(subscriptionIDs.isEmpty());
+}</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Test
+public void getSubscription() throws JSONException
+{
+    ResponseEntity&lt;String&gt; response = testRestTemplate.getForEntity(createUrlWithPort( &quot;/subscriptions/1&quot;), String.class);
+    assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+    JSONObject jsonObject = new JSONObject(response.getBody());
+    int subscriptionID = (int)jsonObject.get(&quot;subscriptionID&quot;);
+    assertEquals(1, subscriptionID);
+    String subscriptionCode = (String)jsonObject.get(&quot;subscriptionCode&quot;);
+    assertEquals(&quot;SUB-1&quot;, subscriptionCode);
+    String subscriptionName = (String)jsonObject.get(&quot;subscriptionName&quot;);
+    assertEquals(&quot;Subscription 1&quot;, subscriptionName);
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="IntegrationTests-ProcessGETRequestsusingDTOObjects">Process GET Requests using DTO Objects</h2><p>Note that <code>/subscriptions</code> returns <code>List&lt;Resource&lt;SubscriptionDTO&gt;&gt;</code> , thus, with Java Generics, we can only use <code>List.class</code> and each <code>Resource</code> will be converted to <code>LinkedHashMap&lt;String,Object&gt;</code>.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Test
+public void getSubscriptions1()
+{
+    Set&lt;Integer&gt; subscriptionIDs = new HashSet(Arrays.asList(1, 2, 3, 4, 5, 6));
+    ResponseEntity&lt;?&gt; response = testRestTemplate.getForEntity(createUrlWithPort(&quot;/subscriptions&quot;), List.class);
+    assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+    ResponseEntity&lt;List&lt;LinkedHashMap&lt;String,Object&gt;&gt;&gt; subscriptionsResponse = (ResponseEntity&lt;List&lt;LinkedHashMap&lt;String,Object&gt;&gt;&gt;)response;
+    List&lt;LinkedHashMap&lt;String,Object&gt;&gt; subscriptions = subscriptionsResponse.getBody();
+    for(LinkedHashMap&lt;String,Object&gt; subscription : subscriptions)
+    {
+        int id = (Integer)subscription.get(&quot;subscriptionID&quot;);
+        subscriptionIDs.remove(Integer.valueOf(id));
+    }
+    assertTrue(subscriptionIDs.isEmpty());
+}</pre>
+</div></div></td></tr></tbody></table></div><p>For GET-ONE request, we can specify <code>SubscriptionDTO.class</code> even though <code>/subscriptions/{id}</code> returns <code>Resource&lt;SubscriptionDTO&gt;</code></p><p>However, a default constructor must be defined on <code>SubscriptionDTO</code>:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public SubscriptionDTO()
+{}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Test
+public void getSubscription1()
+{
+    ResponseEntity&lt;SubscriptionDTO&gt; response = testRestTemplate.getForEntity(createUrlWithPort(&quot;/subscriptions/1&quot;), SubscriptionDTO.class);
+    assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+    SubscriptionDTO subscriptionDTO = response.getBody();
+    assertEquals(1, subscriptionDTO.getSubscriptionID());
+    assertEquals(&quot;SUB-1&quot;, subscriptionDTO.getSubscriptionCode());
+    assertEquals(&quot;Subscription 1&quot;, subscriptionDTO.getSubscriptionName());
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="IntegrationTests-ProcessPOSTRequest">Process POST Request</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Test
+public void createSubscription()
+{
+    //  Create new subscription
+    Subscription subscription = new Subscription();
+    subscription.setSubscriptionCode(&quot;Code-Test&quot;);
+    subscription.setSubscriptionName(&quot;Code-Test Name&quot;);
+    ResponseEntity&lt;?&gt; postResponse = testRestTemplate.postForEntity(createUrlWithPort(&quot;/subscriptions&quot;), subscription, Subscription.class);
+    assertThat(postResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+    //  Read newly created subscription
+    String actual = postResponse.getHeaders().get(HttpHeaders.LOCATION).get(0);
+    String idString = actual.substring(actual.lastIndexOf(&quot;/&quot;) + 1);
+    ResponseEntity&lt;SubscriptionDTO&gt; getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/subscriptions/&quot; + idString), SubscriptionDTO.class);
+    assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+    SubscriptionDTO subscriptionDTO = getResponse.getBody();
+    int id = Integer.valueOf(idString);
+    assertEquals(id, subscriptionDTO.getSubscriptionID());
+    assertEquals(&quot;Code-Test&quot;, subscriptionDTO.getSubscriptionCode());
+    assertEquals(&quot;Code-Test Name&quot;, subscriptionDTO.getSubscriptionName());
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="IntegrationTests-ProcessPUTRequest">Process PUT Request</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Test
+public void updateSubscription()
+{
+    //  Create new subscription
+    Subscription subscription = new Subscription();
+    subscription.setSubscriptionCode(&quot;Code-Test&quot;);
+    subscription.setSubscriptionName(&quot;Code-Test Name&quot;);
+    ResponseEntity&lt;?&gt; postResponse = testRestTemplate.postForEntity(createUrlWithPort(&quot;/subscriptions&quot;), subscription, Subscription.class);
+    assertThat(postResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+    //  Read newly created subscription
+    String actual = postResponse.getHeaders().get(HttpHeaders.LOCATION).get(0);
+    String idString = actual.substring(actual.lastIndexOf(&quot;/&quot;) + 1);
+    ResponseEntity&lt;SubscriptionDTO&gt; getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/subscriptions/&quot; + idString), SubscriptionDTO.class);
+    assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+    SubscriptionDTO subscriptionDTO = getResponse.getBody();
+    int id = Integer.valueOf(idString);
+    assertEquals(id, subscriptionDTO.getSubscriptionID());
+    assertEquals(&quot;Code-Test&quot;, subscriptionDTO.getSubscriptionCode());
+    assertEquals(&quot;Code-Test Name&quot;, subscriptionDTO.getSubscriptionName());
+    //  Update this subscription
+    subscription.setSubscriptionCode(&quot;CODE-TEST&quot;);
+    subscription.setSubscriptionName(&quot;CODE-TEST NAME&quot;);
+    HttpHeaders headers = new HttpHeaders();
+    HttpEntity&lt;Subscription&gt; entity = new HttpEntity&lt;&gt;(subscription, headers);
+    ResponseEntity&lt;?&gt; putResponse = testRestTemplate.exchange(createUrlWithPort(&quot;/subscriptions/&quot; + idString), HttpMethod.PUT, entity, Subscription.class);
+    assertThat(putResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+    //  Read modified subscription
+    getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/subscriptions/&quot; + idString), SubscriptionDTO.class);
+    assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+    subscriptionDTO = getResponse.getBody();
+    assertEquals(&quot;CODE-TEST&quot;, subscriptionDTO.getSubscriptionCode());
+    assertEquals(&quot;CODE-TEST NAME&quot;, subscriptionDTO.getSubscriptionName());
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="IntegrationTests-ProcessDELETERequest">Process DELETE Request</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Test
+public void deleteSubscription()
+{
+    //  Subscription 7 is not associated with any Employee
+    //  delete subscription
+    HttpHeaders headers = new HttpHeaders();
+    HttpEntity&lt;Subscription&gt; entity = new HttpEntity&lt;&gt;(null, headers);
+    ResponseEntity&lt;String&gt; deleteResponse = testRestTemplate.exchange(createUrlWithPort(&quot;/subscriptions/7&quot;), HttpMethod.DELETE, entity, String.class);
+    assertThat(deleteResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+    String actual = deleteResponse.getHeaders().get(HttpHeaders.LOCATION).get(0);
+    assertTrue(actual.contains(&quot;/subscriptions/7&quot;));
+    //  Try reading deleted subscription
+    ResponseEntity&lt;String&gt; response = testRestTemplate.exchange(createUrlWithPort(&quot;/subscriptions/7&quot;), HttpMethod.GET, entity, String.class);
+    assertThat(response.getStatusCode(), equalTo(HttpStatus.NOT_FOUND));
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="IntegrationTests-SubscriptionAuditControllerTest">SubscriptionAuditControllerTest</h1><p>We will need to make sure that tests execute in the specified order. Add annotation:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@FixMethodOrder(MethodSorters.NAME_ASCENDING)</pre>
+</div></div></td></tr></tbody></table></div><p>We will need to access ID field of Subscription. However, since we made it a Resource, this field is not accessible. We can bring it back with JSONProperty annotation:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class Subscription extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    @JsonProperty
+    private int ID;
+
+
+</pre>
+</div></div></td></tr></tbody></table></div><p>Audit Controller Test will test for update and delete bi-temporality</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class SubscriptionAuditControllerTest
+{
+    @LocalServerPort
+    private int port;
+
+    @Autowired
+    private TestRestTemplate testRestTemplate;
+
+    @Test
+    public void testA_getSubscriptions() throws JSONException
+    {
+        ResponseEntity&lt;String&gt; response = testRestTemplate.getForEntity(createUrlWithPort( &quot;/audit/subscriptions&quot;), String.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+
+        JSONArray jsonArray = new JSONArray(response.getBody());
+
+        for (int i = 0; i &lt; jsonArray.length(); ++i)
+        {
+            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+
+            String outUtcString = (String)jsonObject.get(&quot;outUtc&quot;);
+            ZonedDateTime outUtcDate = ZonedDateTime.parse(outUtcString);
+            assertEquals(BaseEntity.DATE_INFINITY.toInstant().toEpochMilli(), outUtcDate.toInstant().toEpochMilli());
+        }
+    }
+
+    @Test
+    public void testB_getSubscription() throws JSONException
+    {
+        ResponseEntity&lt;String&gt; response = testRestTemplate.getForEntity(createUrlWithPort( &quot;/audit/subscriptions/1&quot;), String.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+
+        JSONArray jsonArray = new JSONArray(response.getBody());
+
+        for (int i = 0; i &lt; jsonArray.length(); ++i)
+        {
+            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+
+            String outUtcString = (String)jsonObject.get(&quot;outUtc&quot;);
+            ZonedDateTime outUtcDate = ZonedDateTime.parse(outUtcString);
+            assertEquals(BaseEntity.DATE_INFINITY.toInstant().toEpochMilli(), outUtcDate.toInstant().toEpochMilli());
+        }
+    }
+
+    @Test
+    public void testC_biTemporalUpdate() throws JSONException
+    {
+        //  Create new subscription
+        Subscription subscription = new Subscription();
+        subscription.setSubscriptionCode(&quot;Code-Test&quot;);
+        subscription.setSubscriptionName(&quot;Code-Test Name&quot;);
+
+        ResponseEntity&lt;?&gt; postResponse = testRestTemplate.postForEntity(createUrlWithPort(&quot;/subscriptions&quot;), subscription, String.class);
+        assertThat(postResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+
+        //  Read newly created subscription
+        String actual = postResponse.getHeaders().get(HttpHeaders.LOCATION).get(0);
+        String idString = actual.substring(actual.lastIndexOf(&quot;/&quot;) + 1);
+
+        ResponseEntity&lt;String&gt; getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/audit/subscriptions/&quot; + idString), String.class);
+        assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+
+        JSONArray jsonArray = new JSONArray(getResponse.getBody());
+        assertEquals(1, jsonArray.length());
+
+        JSONObject jsonObject = (JSONObject) jsonArray.get(0);
+        String outUtcString = (String)jsonObject.get(&quot;outUtc&quot;);
+        ZonedDateTime outUtcDate = ZonedDateTime.parse(outUtcString);
+        assertEquals(BaseEntity.DATE_INFINITY.toInstant().toEpochMilli(), outUtcDate.toInstant().toEpochMilli());
+
+
+        //  Update this subscription
+        subscription.setSubscriptionCode(&quot;CODE-TEST&quot;);
+        subscription.setSubscriptionName(&quot;CODE-TEST NAME&quot;);
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity&lt;Subscription&gt; entity = new HttpEntity&lt;&gt;(subscription, headers);
+        ResponseEntity&lt;?&gt; putResponse = testRestTemplate.exchange(createUrlWithPort(&quot;/subscriptions/&quot; + idString), HttpMethod.PUT, entity, Subscription.class);
+        assertThat(putResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+
+        //  Read modified subscription
+        getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/audit/subscriptions/&quot; + idString), String.class);
+        assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+        jsonArray = new JSONArray(getResponse.getBody());
+        assertEquals(2, jsonArray.length());
+
+        for (int i = 0; i &lt; jsonArray.length(); ++i)
+        {
+            jsonObject = (JSONObject) jsonArray.get(i);
+            outUtcString = (String)jsonObject.get(&quot;outUtc&quot;);
+            outUtcDate = ZonedDateTime.parse(outUtcString);
+
+            int id = (int)jsonObject.get(&quot;ID&quot;);
+            if(id == Integer.valueOf(idString))
+            {
+                assertEquals(BaseEntity.DATE_INFINITY.toInstant().toEpochMilli(), outUtcDate.toInstant().toEpochMilli());
+                assertEquals(&quot;CODE-TEST&quot;, (String)jsonObject.get(&quot;subscriptionCode&quot;));
+                assertEquals(&quot;CODE-TEST NAME&quot;, (String)jsonObject.get(&quot;subscriptionName&quot;));
+            }
+            else
+            {
+                assertNotEquals(BaseEntity.DATE_INFINITY.toInstant().toEpochMilli(), outUtcDate.toInstant().toEpochMilli());
+                assertEquals(&quot;Code-Test&quot;, (String)jsonObject.get(&quot;subscriptionCode&quot;));
+                assertEquals(&quot;Code-Test Name&quot;, (String)jsonObject.get(&quot;subscriptionName&quot;));
+            }
+        }
+    }
+
+    @Test
+    public void testD_biTemporalDelete() throws JSONException
+    {
+        //  Subscription 7 is not associated with any Employee
+        //  delete subscription
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity&lt;Subscription&gt; entity = new HttpEntity&lt;&gt;(null, headers);
+        ResponseEntity&lt;String&gt; deleteResponse = testRestTemplate.exchange(createUrlWithPort(&quot;/subscriptions/7&quot;), HttpMethod.DELETE, entity, String.class);
+        assertThat(deleteResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+        String actual = deleteResponse.getHeaders().get(HttpHeaders.LOCATION).get(0);
+        assertTrue(actual.contains(&quot;/subscriptions/7&quot;));
+
+        ResponseEntity&lt;String&gt; getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/audit/subscriptions/7&quot;), String.class);
+        assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+
+        JSONArray jsonArray = new JSONArray(getResponse.getBody());
+        assertEquals(1, jsonArray.length());
+
+        JSONObject jsonObject = (JSONObject) jsonArray.get(0);
+        String outUtcString = (String)jsonObject.get(&quot;outUtc&quot;);
+        ZonedDateTime outUtcDate = ZonedDateTime.parse(outUtcString);
+        assertNotEquals(BaseEntity.DATE_INFINITY.toInstant().toEpochMilli(), outUtcDate.toInstant().toEpochMilli());
+    }
+
+
+    private String createUrlWithPort(String url)
+    {
+        return &quot;http://localhost:&quot; + port + url;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="IntegrationTests-EmployeeSubscriptionControllerTest">EmployeeSubscriptionControllerTest</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class EmployeeSubscriptionControllerTest
+{
+    @LocalServerPort
+    private int port;
+
+    @Autowired
+    private TestRestTemplate testRestTemplate;
+
+    @Test
+    public void testA_getEmployeesSubscriptions() throws JSONException
+    {
+        ResponseEntity&lt;String&gt; response = testRestTemplate.getForEntity(createUrlWithPort(&quot;/employees/subscriptions&quot;), String.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+
+        JSONArray jsonArray = new JSONArray(response.getBody());
+
+        for (int i = 0; i &lt; jsonArray.length(); ++i)
+        {
+            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+            String outUtcString = (String)jsonObject.get(&quot;outUtc&quot;);
+            ZonedDateTime outUtcDate = ZonedDateTime.parse(outUtcString);
+            assertEquals(BaseEntity.DATE_INFINITY.toInstant().toEpochMilli(), outUtcDate.toInstant().toEpochMilli());
+        }
+    }
+
+    @Test
+    public void testB_getEmployeesSubscription()
+    {
+        ResponseEntity&lt;Employee&gt; response = testRestTemplate.getForEntity(createUrlWithPort(&quot;/employees/1/subscriptions&quot;),
+                Employee.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+
+        Employee employee = response.getBody();
+
+        assertEquals(&quot;00000000-0000-0000-0000-000000000001&quot;, employee.getAuditId());
+        assertEquals(&quot;EC-1&quot;, employee.getEmployeeCode());
+        assertEquals(&quot;One First&quot;, employee.getEmployeeName());
+        assertEquals(BaseEntity.DATE_INFINITY.toInstant().toEpochMilli(), employee.getOutUtc().toInstant().toEpochMilli());
+
+        List&lt;String&gt; subscriptionCodes = employee.getSubscriptions().stream().map(Subscription::getSubscriptionCode).collect(Collectors.toList());
+        List&lt;String&gt; allSubscriptionCodes = Arrays.asList(&quot;SUB-1&quot;, &quot;SUB-2&quot;, &quot;SUB-3&quot;, &quot;SUB-4&quot;, &quot;SUB-5&quot;, &quot;SUB-6&quot;, &quot;SUB-7&quot;);
+        assertTrue(allSubscriptionCodes.containsAll(subscriptionCodes));
+    }
+
+
+    @Test
+    public void testC_getSubscriptionsEmployees()
+    {
+        ResponseEntity&lt;List&gt; response = testRestTemplate.getForEntity(createUrlWithPort(&quot;/subscriptions/employees&quot;), List.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+
+        List&lt;LinkedHashMap&lt;String,Object&gt;&gt; responseBody = response.getBody();
+
+        for(LinkedHashMap&lt;String,Object&gt; map : responseBody)
+        {
+            String outUtcString = (String)map.get(&quot;outUtc&quot;);
+            ZonedDateTime outUtcDate = ZonedDateTime.parse(outUtcString);
+            assertEquals(BaseEntity.DATE_INFINITY.toInstant().toEpochMilli(), outUtcDate.toInstant().toEpochMilli());
+        }
+    }
+
+    @Test
+    public void testD_getSubscriptionsEmployee()
+    {
+        ResponseEntity&lt;Subscription&gt; response = testRestTemplate.getForEntity(createUrlWithPort(&quot;/subscriptions/1/employees&quot;),
+                Subscription.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+
+        Subscription subscription = response.getBody();
+
+        assertEquals(&quot;00000000-0000-0000-0000-000000000001&quot;, subscription.getAuditId());
+        assertEquals(&quot;SUB-1&quot;, subscription.getSubscriptionCode());
+        assertEquals(&quot;Subscription 1&quot;, subscription.getSubscriptionName());
+        assertEquals(BaseEntity.DATE_INFINITY.toInstant().toEpochMilli(), subscription.getOutUtc().toInstant().toEpochMilli());
+
+        List&lt;String&gt; employeeCodes = subscription.getEmployees().stream().map(Employee::getEmployeeCode).collect(Collectors.toList());
+        List&lt;String&gt; allEmployeeCodes = Arrays.asList(&quot;EC-1&quot;, &quot;EC-2&quot;, &quot;EC-3&quot;, &quot;EC-4&quot;, &quot;EC-5&quot;, &quot;EC-6&quot;);
+        assertTrue(allEmployeeCodes.containsAll(employeeCodes));
+    }
+
+    @Test
+    public void testE_postSubscriptionToEmployee()
+    {
+        //  Verify that employee 1 does not have subscription 7
+        ResponseEntity&lt;Employee&gt; getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/employees/1/subscriptions&quot;), Employee.class);
+        assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+
+        Employee employee = getResponse.getBody();
+
+        List&lt;String&gt; subscriptionCodes = employee.getSubscriptions().stream().map(Subscription::getSubscriptionCode).collect(Collectors.toList());
+
+        assertFalse(subscriptionCodes.contains(&quot;SUB-7&quot;));
+
+        //  Assign subscription 7 to employee 1
+        ResponseEntity&lt;String&gt; postResponse = testRestTemplate.exchange(createUrlWithPort(&quot;/employees/1/subscriptions/7&quot;),
+                HttpMethod.POST, null, String.class);
+        assertThat(postResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+        String actual = postResponse.getHeaders().get(HttpHeaders.LOCATION).get(0);
+        assertTrue(actual.contains(&quot;/employees/1/subscriptions/7&quot;));
+
+        //  Read newly added subscription to employee
+        getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/employees/1/subscriptions&quot;), Employee.class);
+        assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+
+        employee = getResponse.getBody();
+
+        subscriptionCodes = employee.getSubscriptions().stream().map(Subscription::getSubscriptionCode).collect(Collectors.toList());
+
+        assertTrue(subscriptionCodes.contains(&quot;SUB-7&quot;));
+    }
+
+    @Test
+    public void testF_postEmployeeToSubscription()
+    {
+        //  Verify that subscription 1 does not have employee 6
+        ResponseEntity&lt;Subscription&gt; getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/subscriptions/1/employees&quot;), Subscription.class);
+        assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+
+        Subscription subscription = getResponse.getBody();
+
+        List&lt;String&gt; employeeCodes = subscription.getEmployees().stream().map(Employee::getEmployeeCode).collect(Collectors.toList());
+
+        assertFalse(employeeCodes.contains(&quot;EC-6&quot;));
+
+        //  Assign employee 6 to subscription 1
+        ResponseEntity&lt;String&gt; postResponse = testRestTemplate.exchange(createUrlWithPort(&quot;/subscriptions/1/employees/6&quot;),
+                HttpMethod.POST, null, String.class);
+        assertThat(postResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+        String actual = postResponse.getHeaders().get(HttpHeaders.LOCATION).get(0);
+        assertTrue(actual.contains(&quot;/subscriptions/1/employees/6&quot;));
+
+        //  Read newly added employee to subscription
+        getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/subscriptions/1/employees&quot;), Subscription.class);
+        assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+
+        subscription = getResponse.getBody();
+
+        employeeCodes = subscription.getEmployees().stream().map(Employee::getEmployeeCode).collect(Collectors.toList());
+
+        assertTrue(employeeCodes.contains(&quot;EC-6&quot;));
+     }
+
+    @Test
+    public void testG_deleteSubscriptionFromEmployee()
+    {
+        //  Verify that employee 1 has subscription 3
+        ResponseEntity&lt;Employee&gt; getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/employees/1/subscriptions&quot;), Employee.class);
+        assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+
+        Employee employee = getResponse.getBody();
+
+        List&lt;String&gt; subscriptionCodes = employee.getSubscriptions().stream().map(Subscription::getSubscriptionCode).collect(Collectors.toList());
+
+        assertTrue(subscriptionCodes.contains(&quot;SUB-3&quot;));
+
+        //  Delete subscription 3 from employee
+        ResponseEntity&lt;String&gt; deleteResponse = testRestTemplate.exchange(createUrlWithPort(&quot;/employees/1/subscriptions/3&quot;),
+                HttpMethod.DELETE, null, String.class);
+        assertThat(deleteResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+        String actual = deleteResponse.getHeaders().get(HttpHeaders.LOCATION).get(0);
+        assertTrue(actual.contains(&quot;/employees/1/subscriptions/3&quot;));
+
+        //  Verify that employee 1 does not have subscription 3
+        getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/employees/1/subscriptions&quot;), Employee.class);
+        assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+
+        employee = getResponse.getBody();
+
+        subscriptionCodes = employee.getSubscriptions().stream().map(Subscription::getSubscriptionCode).collect(Collectors.toList());
+
+        assertFalse(subscriptionCodes.contains(&quot;SUB-3&quot;));
+    }
+
+    @Test
+    public void testH_deleteEmployeeFromSubscription()
+    {
+        //  Verify that subscription 1 has employee 1
+        ResponseEntity&lt;Subscription&gt; getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/subscriptions/1/employees&quot;), Subscription.class);
+        assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+
+        Subscription subscription = getResponse.getBody();
+
+        List&lt;String&gt; employeeCodes = subscription.getEmployees().stream().map(Employee::getEmployeeCode).collect(Collectors.toList());
+
+        assertTrue(employeeCodes.contains(&quot;EC-1&quot;));
+
+        //  Delete employee 1 from subscription 1
+        ResponseEntity&lt;String&gt; deleteResponse = testRestTemplate.exchange(createUrlWithPort(&quot;/subscriptions/1/employees/1&quot;),
+                HttpMethod.DELETE, null, String.class);
+        assertThat(deleteResponse.getStatusCode(), equalTo(HttpStatus.CREATED));
+        String actual = deleteResponse.getHeaders().get(HttpHeaders.LOCATION).get(0);
+        assertTrue(actual.contains(&quot;/subscriptions/1/employees/1&quot;));
+
+        //  Verify that subscription 1 does not have employee 1
+        getResponse = testRestTemplate.getForEntity(createUrlWithPort(&quot;/subscriptions/1/employees&quot;), Subscription.class);
+        assertThat(getResponse.getStatusCode(), equalTo(HttpStatus.OK));
+
+        subscription = getResponse.getBody();
+
+        employeeCodes = subscription.getEmployees().stream().map(Employee::getEmployeeCode).collect(Collectors.toList());
+
+        assertFalse(employeeCodes.contains(&quot;EC-1&quot;));
+    }
+
+
+    private String createUrlWithPort(String url)
+    {
+        return &quot;http://localhost:&quot; + port + url;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

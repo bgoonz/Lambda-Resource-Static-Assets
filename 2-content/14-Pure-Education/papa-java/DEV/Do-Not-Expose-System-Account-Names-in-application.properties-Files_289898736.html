@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Do Not Expose System Account Names in application.properties Files</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Eligibility_289898573.html">Eligibility</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Do Not Expose System Account Names in application.properties Files
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 19, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Currently, we expose the name of the system account inside <code>application.properties</code> files, for example:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+datasource.system.account.name=dutysepdbuat
+...</pre>
+</div></div></td></tr></tbody></table></div><p>We use the value of this System Account to authenticate with the database, get credentials for SSL, and to generate a Cookie for making calls to CAMP Service.</p><p>However, all we need is the credential reference which we can use to retrieve the name of the system account. Thus, the name of the system account does not need to be exposed inside our configuration files.</p><p>We can get rid of specifying the name of the system account with following steps.</p><p>Remove <code>CredentialVault</code> (<code>CredrefAuthentication</code> class in SoD) from the project.</p><ol><li><p>Modify <code>DataSourceConfig</code> and <code>SSLConfig</code>, to retrieve system account name via Credential Reference</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+@Bean
+public DataSource getDataSource()
+{
+    CredentialLookUp&lt;SystemAccount&gt; credentialLookUp = new CredentialLookUp&lt;&gt;();
+    SystemAccount systemAccount = credentialLookUp.getCredentialObject(credRef);
+    String systemAccountPassword = systemAccount.getPassword();
+    String systemAccountName = systemAccount.getAccountName();
+    String[] systemAccountParts = systemAccountName.split(&quot;\\\\&quot;);
+    return DataSourceBuilder
+            .create()
+            .username(systemAccountParts[1])
+            .password(systemAccountPassword)
+            .url(dataSourceUrl)
+            .driverClassName(dataSourceDriverClass)
+            .build();
+}
+
+...</pre>
+</div></div><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Override
+public void customize(ConfigurableServletWebServerFactory serverFactory)
+{
+    CredentialLookUp&lt;SystemAccount&gt; credentialLookUp = new CredentialLookUp&lt;&gt;();
+    SystemAccount systemAccount = credentialLookUp.getCredentialObject(credRef);
+    String password = systemAccount.getPassword();
+    Ssl ssl = new Ssl();
+    ssl.setKeyStore(keyStore);
+    ssl.setKeyStoreType(keyStoreType);
+    ssl.setKeyPassword(password);
+    ssl.setKeyStorePassword(password);
+    serverFactory.setSsl(ssl);
+}</pre>
+</div></div><p><br/></p></li><li><p>Remove system account name from all <code>application.properties</code> files.</p></li></ol>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

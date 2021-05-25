@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : JPA Without RestController</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Basic_289898911.html">Basic</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : JPA Without RestController
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 20, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>This tutorial demonstrates steps for creating a JPA application without the <code>RestController</code>.</p><h2 id="JPAWithoutRestController-References">References</h2><p>Refer to following links:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p>GS Git Repo:</p></td><td class="confluenceTd"><p><a href="https://gitlab-uat.gs.com/gunern/springboot-repo.git" class="external-link" rel="nofollow">https://gitlab-uat.gs.com/gunern/springboot-repo.git</a></p></td></tr></tbody></table></div><h2 id="JPAWithoutRestController-CreateSpringBootStarterApplication"><a href="https://confluence.apg.services.gs.com/display/~gunern/Spring+Boot#SpringBoot-INITIALIZR" class="external-link" rel="nofollow">Create Spring Boot Starter Application</a></h2><h2 id="JPAWithoutRestController-ExamineFilesintheStarterApplication">Examine Files in the Starter Application</h2><h3 id="JPAWithoutRestController-EntryPoint-GeneratedSpringBootApplicationClass">Entry Point - Generated SpringBoot Application Class</h3><p>Check the class that was created with the SPRING INITIALIZR with the main method:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@SpringBootApplication
+public class SpringbootRepoApplication
+{
+   public static void main(String[] args)
+   {
+      SpringApplication.run(SpringbootRepoApplication.class, args);
+   }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><p><strong>pom.xml</strong></p><p>Note the <code>&lt;parent&gt;</code> section that is responsible for Spring Boot</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p><code>&lt;parent&gt;</code></p><p><code>&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</code></p><p><code>&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</code></p><p><code>&lt;version&gt;2.1.8.RELEASE&lt;/version&gt;</code></p><p><code>&lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</code></p><p><code>&lt;/parent&gt;</code></p></td></tr></tbody></table></div><h3 id="JPAWithoutRestController-NoteJPA,H2,RestRepositoryDependencies">Note JPA, H2, Rest Repository Dependencies</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-boot-starter-data-rest&lt;/artifactId&gt;
+&lt;/dependency&gt;</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;dependency&gt;
+   &lt;groupId&gt;com.h2database&lt;/groupId&gt;
+   &lt;artifactId&gt;h2&lt;/artifactId&gt;
+   &lt;scope&gt;runtime&lt;/scope&gt;
+&lt;/dependency&gt;</pre>
+</div></div></td></tr></tbody></table></div><h2 id="JPAWithoutRestController-Createclassesforanin-memorydatabase">Create classes for an in-memory database</h2><h3 id="JPAWithoutRestController-CreateanEntityClass">Create an Entity Class</h3><p>We will one Entity class.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+public class User
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
+    private String role;
+
+    public User(String name, String role)
+    {
+        this.name = name;
+        this.role = role;
+    }
+
+    protected User()
+    {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    @Override
+    public String toString()
+    {
+        return &quot;User{&quot; +
+                &quot;id=&quot; + id +
+                &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, role=&#39;&quot; + role + &#39;\&#39;&#39; +
+                &#39;}&#39;;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p>Note the following annotation:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p><code>@GeneratedValue(strategy = GenerationType.IDENTITY)</code></p></td></tr></tbody></table></div><p>Having <code>strategy = GenerationType.IDENTITY</code> is critical to having this model work correctly for POST commands.</p><h3 id="JPAWithoutRestController-CreateaRepositoryclass">Create a Repository class</h3><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RepositoryRestResource(collectionResourceRel = &quot;users&quot;, path=&quot;users&quot;)
+public interface UserRepository extends JpaRepository&lt;User, Long&gt;
+{
+}
+</pre>
+</div></div></td></tr></tbody></table></div><h3 id="JPAWithoutRestController-SetH2datasourceinapplication.properties">Set H2 data source in application.properties</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">spring.jpa.show-sql=true
+spring.h2.console.enabled=true
+spring.datasource.url=jdbc:h2:mem:testdb</pre>
+</div></div></td></tr></tbody></table></div><h3 id="JPAWithoutRestController-Primein-memorydatabasewithData(inresourcesdirectory)">Prime in-memory database with Data (in resources directory)</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">INSERT INTO USER(id, name, role) VALUES(1, &#39;nick&#39;, &#39;dev&#39;)
+INSERT INTO USER(id, name, role) VALUES(2, &#39;paul&#39;, &#39;tech&#39;)
+INSERT INTO USER(id, name, role) VALUES(3, &#39;sam&#39;, &#39;dev&#39;)
+INSERT INTO USER(id, name, role) VALUES(4, &#39;mary&#39;, &#39;support&#39;)
+INSERT INTO USER(id, name, role) VALUES(5, &#39;jim&#39;, &#39;manager&#39;)</pre>
+</div></div></td></tr></tbody></table></div><h2 id="JPAWithoutRestController-RunApplicationandusePostmantoSendRESTCommands">Run Application and use Postman to Send REST Commands</h2><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/plugins/servlet/confluence/placeholder/macro?definition=e2FuY2hvcjpoYXRlb2FzfQ&amp;locale=en_GB&amp;version=2" data-image-src="https://confluence.apg.services.gs.com/plugins/servlet/confluence/placeholder/macro?definition=e2FuY2hvcjpoYXRlb2FzfQ&amp;locale=en_GB&amp;version=2" loading="lazy"></span><p>Note: for PUT and POST commands set Body = raw, and JSON (application/json)</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Command</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>URL</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Body</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p>GET (all)</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/users" class="external-link" rel="nofollow">http://localhost:8080/users</a></p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p><code>{</code></p><p><code>  &quot;_embedded&quot;: {</code></p><p><code>    &quot;users&quot;: [</code></p><p><code>      {</code></p><p><code>        &quot;name&quot;: &quot;nick&quot;,</code></p><p><code>        &quot;role&quot;: &quot;dev&quot;,</code></p><p><code>        &quot;_links&quot;: {</code></p><p><code>          &quot;self&quot;: {</code></p><p><code>            &quot;href&quot;: &quot;http://localhost:8080/users/1&quot;</code></p><p><code>          },</code></p><p><code>          &quot;user&quot;: {</code></p><p><code>            &quot;href&quot;: &quot;http://localhost:8080/users/1&quot;</code></p><p><code>          }</code></p><p><code>        }</code></p><p><code>      },</code></p><p><code>      {</code></p><p><code>        &quot;name&quot;: &quot;paul&quot;,</code></p><p><code>        &quot;role&quot;: &quot;tech&quot;,</code></p><p><code>        &quot;_links&quot;: {</code></p><p><code>          &quot;self&quot;: {</code></p><p><code>            &quot;href&quot;: &quot;http://localhost:8080/users/2&quot;</code></p><p><code>          },</code></p><p><code>          &quot;user&quot;: {</code></p><p><code>            &quot;href&quot;: &quot;http://localhost:8080/users/2&quot;</code></p><p><code>          }</code></p><p><code>        }</code></p><p><code>      },</code></p><p><code>...</code></p><p><code>}</code></p><p><code>}</code></p></td></tr><tr><td class="confluenceTd"><p>GET (one)</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/users/1" class="external-link" rel="nofollow">http://localhost:8080/users/1</a></p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p><code>{</code></p><p><code>  &quot;name&quot;: &quot;nick&quot;,</code></p><p><code>  &quot;role&quot;: &quot;dev&quot;,</code></p><p><code>  &quot;_links&quot;: {</code></p><p><code>    &quot;self&quot;: {</code></p><p><code>      &quot;href&quot;: &quot;http://localhost:8080/users/1&quot;</code></p><p><code>    },</code></p><p><code>    &quot;user&quot;: {</code></p><p><code>      &quot;href&quot;: &quot;http://localhost:8080/users/1&quot;</code></p><p><code>    }</code></p><p><code>  }</code></p><p><code>}</code></p></td></tr><tr><td class="confluenceTd"><p>POST</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/users" class="external-link" rel="nofollow">http://localhost:8080/users</a></p></td><td class="confluenceTd"><p><code>{</code></p><p><code>    &quot;name&quot;: &quot;bob&quot;,</code></p><p><code>    &quot;role&quot;: &quot;singer&quot;</code></p><p><code>}</code></p></td><td class="confluenceTd"><p><code>{</code></p><p><code>  &quot;name&quot;: &quot;bob&quot;,</code></p><p><code>  &quot;role&quot;: &quot;singer&quot;,</code></p><p><code>  &quot;_links&quot;: {</code></p><p><code>    &quot;self&quot;: {</code></p><p><code>      &quot;href&quot;: &quot;http://localhost:8080/users/6&quot;</code></p><p><code>    },</code></p><p><code>    &quot;user&quot;: {</code></p><p><code>      &quot;href&quot;: &quot;http://localhost:8080/users/6&quot;</code></p><p><code>    }</code></p><p><code>  }</code></p><p><code>}</code></p></td></tr><tr><td class="confluenceTd"><p>PUT</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/users/1" class="external-link" rel="nofollow">http://localhost:8080/users/1</a></p></td><td class="confluenceTd"><p><code>{</code></p><p><code>    &quot;name&quot;: &quot;nick&quot;,</code></p><p><code>    &quot;role&quot;: &quot;developer&quot;</code></p><p><code>}</code></p></td><td class="confluenceTd"><p><code>{</code></p><p><code>  &quot;name&quot;: &quot;nick&quot;,</code></p><p><code>  &quot;role&quot;: &quot;developer&quot;,</code></p><p><code>  &quot;_links&quot;: {</code></p><p><code>    &quot;self&quot;: {</code></p><p><code>      &quot;href&quot;: &quot;http://localhost:8080/users/1&quot;</code></p><p><code>    },</code></p><p><code>    &quot;user&quot;: {</code></p><p><code>      &quot;href&quot;: &quot;http://localhost:8080/users/1&quot;</code></p><p><code>    }</code></p><p><code>  }</code></p><p><code>}</code></p></td></tr><tr><td class="confluenceTd"><p>DELETE</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/users/6" class="external-link" rel="nofollow">http://localhost:8080/users/6</a></p></td><td class="confluenceTd"><p><br/></p></td><td class="confluenceTd"><p><code>Status: 204</code></p></td></tr></tbody></table></div><p><br/></p><p>See <a href="https://confluence.apg.services.gs.com/display/~gunern/Use+HATEOAS+and+Add+Filtering+to+the+Repository" class="external-link" rel="nofollow">Use HATEOAS and Add Filtering to the Repository</a></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

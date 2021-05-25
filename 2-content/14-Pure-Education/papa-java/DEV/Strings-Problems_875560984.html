@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Strings Problems</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Java-Problems_858619905.html">Java Problems</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Strings Problems
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Feb 10, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1613190976900 {padding: 0px;}
+div.rbtoc1613190976900 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1613190976900 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1613190976900'>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-Anagrams'>Anagrams</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-isAnagram'>isAnagram</a></li>
+<li><a href='#StringsProblems-isAnagramWithSort'>isAnagramWithSort</a></li>
+<li><a href='#StringsProblems-groupAnagrams'>groupAnagrams</a></li>
+<li><a href='#StringsProblems-groupAnagramsWithStreams'>groupAnagramsWithStreams</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-CompareVersions'>CompareVersions</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-compareVersions'>compareVersions</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-CountAndSay'>CountAndSay</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-countAndSay'>countAndSay</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-CountWords'>CountWords</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-countWordsSeparatedMyMultiplesSpaces'>countWordsSeparatedMyMultiplesSpaces</a></li>
+<li><a href='#StringsProblems-countWordsWithSplit'>countWordsWithSplit</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-CustomSortString'>CustomSortString</a></li>
+<li><a href='#StringsProblems-Encode'>Encode</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-encode'>encode</a></li>
+<li><a href='#StringsProblems-decode'>decode</a></li>
+<li><a href='#StringsProblems-encodeLength'>encodeLength</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-Longest'>Longest</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-longestUniformSubstring'>longestUniformSubstring</a></li>
+<li><a href='#StringsProblems-longestWordWithAllLetters'>longestWordWithAllLetters</a></li>
+<li><a href='#StringsProblems-longestWordWithAllLettersWithStreams'>longestWordWithAllLettersWithStreams</a></li>
+<li><a href='#StringsProblems-longestCommonString'>longestCommonString</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-LongestAwesomeString'>LongestAwesomeString</a></li>
+<li><a href='#StringsProblems-MagicPotion'>MagicPotion</a></li>
+<li><a href='#StringsProblems-MinLengthString'>MinLengthString</a></li>
+<li><a href='#StringsProblems-Palindrome'>Palindrome</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-isPalindrome'>isPalindrome</a></li>
+<li><a href='#StringsProblems-lengthOfLongestPalindrome'>lengthOfLongestPalindrome</a></li>
+<li><a href='#StringsProblems-longestPalindrome'>longestPalindrome</a></li>
+<li><a href='#StringsProblems-makeShortestPalindrome'>makeShortestPalindrome</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-Pangram'>Pangram</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-missingLetters'>missingLetters</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-PatternMatch'>PatternMatch</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-patternMatch'>patternMatch</a></li>
+<li><a href='#StringsProblems-subsequenceMatch'>subsequenceMatch</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-RemoveUnbalancedParens'>RemoveUnbalancedParens</a></li>
+<li><a href='#StringsProblems-RotationalCipher'>RotationalCipher</a></li>
+<li><a href='#StringsProblems-Remove'>Remove</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-removeChars'>removeChars</a></li>
+<li><a href='#StringsProblems-removeCharsWithStreams'>removeCharsWithStreams</a></li>
+<li><a href='#StringsProblems-removeStringFromArrayWithStreams'>removeStringFromArrayWithStreams</a></li>
+<li><a href='#StringsProblems-removeDups'>removeDups</a></li>
+<li><a href='#StringsProblems-removeDupsWithStreams'>removeDupsWithStreams</a></li>
+<li><a href='#StringsProblems-removeAdjacentDups'>removeAdjacentDups</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-ReverseWords'>ReverseWords</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-reverseWords'>reverseWords</a></li>
+<li><a href='#StringsProblems-reverseWordsBruteForce'>reverseWordsBruteForce</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-Rotation'>Rotation</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-isRotation'>isRotation</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-Unique'>Unique</a>
+<ul class='toc-indentation'>
+<li><a href='#StringsProblems-isAllUnique'>isAllUnique</a></li>
+<li><a href='#StringsProblems-isAllUniqueWithStreams'>isAllUniqueWithStreams</a></li>
+<li><a href='#StringsProblems-lengthOfLongestUniqueSubstr'>lengthOfLongestUniqueSubstr</a></li>
+<li><a href='#StringsProblems-firstUnique'>firstUnique</a></li>
+</ul>
+</li>
+<li><a href='#StringsProblems-WordDistance'>WordDistance</a></li>
+</ul>
+</div><h2 id="StringsProblems-Anagrams">Anagrams</h2><h3 id="StringsProblems-isAnagram"><code>isAnagram</code></h3><h3 id="StringsProblems-isAnagramWithSort"><code>isAnagramWithSort</code></h3><h3 id="StringsProblems-groupAnagrams"><code>groupAnagrams</code></h3><h3 id="StringsProblems-groupAnagramsWithStreams"><code>groupAnagramsWithStreams</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 876.0px;"/><col style="width: 659.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Anagrams</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean isAnagram(String s1, String s2)
+{
+    if(s1.length() != s2.length())
+    {
+        return false;
+    }
+    int[] check = new int[256];
+    for(char c : s1.toCharArray())
+    {
+        check[c]++;
+    }
+    for(char c : s2.toCharArray())
+    {
+        if(--check[c] &lt; 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean isAnagramWithSort(String s1, String s2)
+{
+    if(s1.length() != s2.length())
+    {
+        return false;
+    }
+    char[] a1 = s1.toCharArray();
+    char[] a2 = s2.toCharArray();
+    Arrays.sort(a1);
+    Arrays.sort(a2);
+    return Arrays.equals(a1, a2);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Map&lt;String, Set&lt;String&gt;&gt; groupAnagrams(String[] a)
+{
+    Map&lt;String, Set&lt;String&gt;&gt; result = new HashMap&lt;&gt;();
+    for(String s : a)
+    {
+        String sortedString = sortString(s);
+        result.computeIfAbsent(sortedString, x -&gt; new HashSet&lt;&gt;()).add(s);
+    }
+    return result;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Map&lt;String, Set&lt;String&gt;&gt; groupAnagramsWithStreams(String[] a)
+{
+    return Arrays.stream(a).collect(
+            Collectors.groupingBy(x -&gt; sortString(x), Collectors.toSet()));
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String s1 = &quot;abcdefg&quot;, s2 = &quot;gafbedc&quot;, s3 = &quot;abcgfee&quot;;
+    boolean check = isAnagram(s1, s2);
+    if(!check)
+    {
+        return false;
+    }
+    check = isAnagram(s1, s3);
+    if(check)
+    {
+        return false;
+    }
+    check = isAnagramWithSort(s1, s2);
+    if(!check)
+    {
+        return false;
+    }
+    check = isAnagramWithSort(s1, s3);
+    if(check)
+    {
+        return false;
+    }
+    String[] strs = {&quot;abc&quot;, &quot;acb&quot;, &quot;bca&quot;, &quot;xyz&quot;, &quot;zyx&quot;, &quot;yxz&quot;};
+    Map&lt;String, Set&lt;String&gt;&gt; anagrams = groupAnagrams(strs);
+    Set&lt;String&gt; s = anagrams.get(&quot;abc&quot;);
+    if(s.size() != 3 || !(s.contains(&quot;abc&quot;) &amp;&amp; s.contains(&quot;acb&quot;) &amp;&amp; s.contains(&quot;bca&quot;)))
+    {
+        return false;
+    }
+    s = anagrams.get(&quot;xyz&quot;);
+    if(s.size() != 3 || !(s.contains(&quot;xyz&quot;) &amp;&amp; s.contains(&quot;zyx&quot;) &amp;&amp; s.contains(&quot;yxz&quot;)))
+    {
+        return false;
+    }
+    anagrams = groupAnagramsWithStreams(strs);
+    s = anagrams.get(&quot;abc&quot;);
+    if(s.size() != 3 || !(s.contains(&quot;abc&quot;) &amp;&amp; s.contains(&quot;acb&quot;) &amp;&amp; s.contains(&quot;bca&quot;)))
+    {
+        return false;
+    }
+    s = anagrams.get(&quot;xyz&quot;);
+    if(s.size() != 3 || !(s.contains(&quot;xyz&quot;) &amp;&amp; s.contains(&quot;zyx&quot;) &amp;&amp; s.contains(&quot;yxz&quot;)))
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="StringsProblems-CompareVersions">CompareVersions</h2><h3 id="StringsProblems-compareVersions"><code>compareVersions</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 772.0px;"/><col style="width: 763.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>CompareVersions</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int compareVersions(String v1, String v2)
+{
+    String[] a1 = v1.split(&quot;\\.&quot;);
+    String[] a2 = v2.split(&quot;\\.&quot;);
+    int i = 0;
+    while(i &lt; a1.length || i &lt; a2.length)
+    {
+        if(i &lt; a1.length &amp;&amp; i &lt; a2.length)
+        {
+            int v = Integer.parseInt(a1[i]) - Integer.parseInt(a2[i]);
+            if (v &gt; 0)
+            {
+                return 1;
+            }
+            if (v &lt; 0)
+            {
+                return -1;
+            }
+        }
+        else if(i &lt; a1.length)
+        {
+            if(Integer.parseInt(a1[i]) &gt; 0)
+            {
+                return 1;
+            }
+        }
+        else if(i &lt; a2.length)
+        {
+            if(Integer.parseInt(a2[i]) &gt; 0)
+            {
+                return -1;
+            }
+        }
+        i++;
+    }
+    return 0;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = compareVersions(&quot;1.1.2.0&quot;, &quot;1.1.2&quot;) == 0;
+    if(!check)
+    {
+        return false;
+    }
+    check = compareVersions(&quot;1.1.2.0.4&quot;, &quot;1.1.2.1&quot;) == -1;
+    if(!check)
+    {
+        return false;
+    }
+    check = compareVersions(&quot;1.1.2.3.4&quot;, &quot;1.1.2.3&quot;) == 1;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="StringsProblems-CountAndSay">CountAndSay</h2><h3 id="StringsProblems-countAndSay"><code>countAndSay</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 963.0px;"/><col style="width: 572.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>CountAndSay</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String countAndSay(int n)
+{
+    String s = String.valueOf(n);
+    char[] a = s.toCharArray();
+    StringBuilder sb = new StringBuilder();
+    int count = 1;
+    for(int i = 1; i &lt; a.length; ++i)
+    {
+        if(a[i] == a[i - 1])
+        {
+            count++;
+        }
+        else
+        {
+            sb.append(count);
+            sb.append(a[i - 1]);
+            count = 1;
+        }
+    }
+    sb.append(count);
+    sb.append(a[a.length - 1]);
+    return sb.toString();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = countAndSay(121).equals(&quot;111211&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="StringsProblems-CountWords">CountWords</h2><h3 id="StringsProblems-countWordsSeparatedMyMultiplesSpaces"><code>countWordsSeparatedMyMultiplesSpaces</code></h3><h3 id="StringsProblems-countWordsWithSplit"><code>countWordsWithSplit</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 772.0px;"/><col style="width: 763.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>CountWords</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int countWordsSeparatedMyMultiplesSpaces(String s)
+{
+    int count = 0;
+    boolean lastSpace = false;
+    for(char c : s.toCharArray())
+    {
+        if(Character.isWhitespace(c))
+        {
+            lastSpace = true;
+        }
+        else
+        {
+            if(lastSpace)
+            {
+                count++;
+            }
+            lastSpace = false;
+        }
+    }
+    if(!lastSpace)
+    {
+        count++;
+    }
+    return count;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int countWordsWithSplit(String s)
+{
+    return s.split(&quot;\\s+&quot;).length;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String test = &quot;this  is   a t es   t&quot;;
+    boolean check = countWordsSeparatedMyMultiplesSpaces(test) == 6;
+    if(!check)
+    {
+        return false;
+    }
+    check = countWordsWithSplit(test) == 6;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="StringsProblems-CustomSortString">CustomSortString</h2><p>See <a href="https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875560974/Map+Problems#CustomSortString" data-card-appearance="inline" rel="nofollow">https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875560974/Map+Problems#CustomSortString</a> </p><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 768.0px;"/><col style="width: 767.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>CustomSortString</p></th><th class="confluenceTh"><p>Test</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Given one string (&#39;abbceeeg&#39;) sort it based on another string (&#39;egbca&#39;)
+Result will be: &#39;eeegbbca&#39;
+Use map for more optimal solution</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static String customSortString(String s, String sortOrder)
+{
+    char[] result = new char[s.length()];
+    int pos = 0;
+    for(char c : sortOrder.toCharArray())
+    {
+        int count = (int)s.chars().filter(x -&gt; x == c).count();
+        Arrays.fill(result, pos, pos + count, c);
+        pos += count;
+    }
+    return new String(result);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = customSortString(&quot;abbceeeg&quot;, &quot;egbca&quot;).equals(&quot;eeegbbca&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="StringsProblems-Encode">Encode</h2><h3 id="StringsProblems-encode"><code>encode</code></h3><h3 id="StringsProblems-decode"><code>decode</code></h3><h3 id="StringsProblems-encodeLength"><code>encodeLength</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 772.0px;"/><col style="width: 763.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Encode</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String encode(String s)
+{
+    //  aaabbbbbcdddd -&gt; a3b5c1d4
+    if(encodeLength(s) &gt;= s.length())
+    {
+        return s;
+    }
+    char[] a = s.toCharArray();
+    char last = a[0];
+    int count = 1;
+    StringBuilder sb = new StringBuilder();
+    for(int i = 1; i &lt; a.length; ++i)
+    {
+        if(a[i] == last)
+        {
+            count++;
+        }
+        else
+        {
+            sb.append(last);
+            sb.append(count);
+            count = 1;
+            last = a[i];
+        }
+    }
+    sb.append(last);
+    sb.append(count);
+    return sb.toString();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String decode(String s)
+{
+    //  a3b12c2 -&gt; aaabbbbbbbbbbbbcc
+    String[] letters = s.split(&quot;[1-9]+&quot;);
+    String[] numbers = s.split(&quot;[a-zA-Z]+&quot;);
+    //  numbers need to be shifted by 1
+    numbers = Arrays.copyOfRange(numbers, 1, numbers.length);
+    StringBuilder sb = new StringBuilder();
+    for(int i = 0; i &lt; letters.length; ++i)
+    {
+        int n = Integer.parseInt(numbers[i]);
+        char[] a = new char[n];
+        Arrays.fill(a, letters[i].charAt(0));
+        sb.append(a);
+    }
+    return sb.toString();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">private static int encodeLength(String s)
+{
+    char[] a = s.toCharArray();
+    char last = a[0];
+    int count = 1, size = 0;
+    for(int i = 1; i &lt; a.length; ++i)
+    {
+        if(a[i] == last)
+        {
+            count++;
+        }
+        else
+        {
+            size += 1 + String.valueOf(count).length();
+            count = 1;
+            last = a[i];
+        }
+    }
+    size += 1 + String.valueOf(count).length();
+    return size;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = encode(&quot;aaabbbbbcdddd&quot;).equals(&quot;a3b5c1d4&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = decode(&quot;a3b5c1d4&quot;).equals(&quot;aaabbbbbcdddd&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = encodeLength(&quot;aaabbbbbbbbbbbbcc&quot;) == 7;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="StringsProblems-Longest">Longest</h2><h3 id="StringsProblems-longestUniformSubstring"><code>longestUniformSubstring</code></h3><h3 id="StringsProblems-longestWordWithAllLetters"><code>longestWordWithAllLetters</code></h3><h3 id="StringsProblems-longestWordWithAllLettersWithStreams"><code>longestWordWithAllLettersWithStreams</code></h3><h3 id="StringsProblems-longestCommonString"><code>longestCommonString</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 879.0px;"/><col style="width: 656.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Longest</strong></p></th><th class="confluenceTh"><p /></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] longestUniformSubstring(String s)
+{
+    //  for the input: &quot;abbbccda&quot; the longest uniform substring is &quot;bbb&quot;
+    char lastChar = s.charAt(0);
+    int count = 1, start = 0, max = 1;
+    for(int i = 1; i &lt; s.length(); ++i)
+    {
+        if(s.charAt(i) == lastChar)
+        {
+            count++;
+        }
+        else
+        {
+            if(count &gt; max)
+            {
+                max = count;
+                start = i - count;
+            }
+            count = 1;
+            lastChar = s.charAt(i);
+        }
+    }
+    if(count &gt; max)
+    {
+        return new int[] {s.length() - count, count};
+    }
+    return new int[] {start, max};
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String longestWordWithAllLetters(String letters, String[] dictionary)
+{
+    int max = 0;
+    String longest = &quot;&quot;;
+    for(String s : dictionary)
+    {
+        boolean check = true;
+        for(char c : s.toCharArray())
+        {
+            if(letters.indexOf(c) == -1)
+            {
+                check = false;
+                break;
+            }
+        }
+        if(check &amp;&amp; s.length() &gt; max)
+        {
+            max = s.length();
+            longest = s;
+        }
+    }
+    return longest;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String longestWordWithAllLettersWithStreams(String letters, String[] dictionary)
+{
+    Map&lt;Boolean, List&lt;String&gt;&gt; map = Arrays.stream (dictionary)
+            .collect(Collectors.partitioningBy(s -&gt; s.chars().allMatch(c -&gt; letters.indexOf(c) != -1)));
+    Pair&lt;String,Integer&gt; longestPair = map.get(true).stream()
+            .map(s -&gt; Pair.of(s, s.length())).max(Comparator.comparing(Pair::getRight)).get();
+    return longestPair.getLeft();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String longestCommonString(String s1, String s2)
+{
+    //  Strings: &quot;abxcxyze&quot; and &quot;jxyzkl&quot; have &quot;xyz&quot; in common.
+    int max = Integer.MIN_VALUE;
+    String longest = &quot;&quot;;
+    for(int i = 0; i &lt; s1.length(); ++i)
+    {
+        int index = s2.indexOf(s1.charAt(i));
+        if(index != -1)
+        {
+            int count = 0;
+            while(i + count &lt; s1.length() &amp;&amp; index + count &lt; s2.length() &amp;&amp;
+                    s1.charAt(i + count) == s2.charAt(index + count))
+            {
+                count++;
+            }
+            if (count &gt; max)
+            {
+                max = count;
+                longest = s1.substring(i, i + count);
+            }
+        }
+    }
+    return longest;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = Arrays.equals(new int[] {1, 3}, longestUniformSubstring(&quot;abbbccda&quot;)) &amp;&amp;
+            Arrays.equals(new int[] {29, 8}, 
+                    longestUniformSubstring(&quot;1000011010101110110100010010011111111&quot;));
+    if(!check)
+    {
+        return false;
+    }
+    check = longestWordWithAllLetters(&quot;oet&quot;,
+            new String[] {&quot;to&quot;, &quot;toe&quot;, &quot;tooeet&quot;, &quot;toes&quot;}).equals(&quot;tooeet&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = longestWordWithAllLettersWithStreams(&quot;oet&quot;,
+            new String[] {&quot;to&quot;, &quot;toe&quot;, &quot;tooeet&quot;, &quot;toes&quot;}).equals(&quot;tooeet&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = longestCommonString(&quot;abxcxyze&quot;, &quot;jxyzkl&quot;).equals(&quot;xyz&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = longestCommonString(&quot;abcdefwxyz&quot;, &quot;klmnwxyz&quot;).equals(&quot;wxyz&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="StringsProblems-LongestAwesomeString">LongestAwesomeString</h2><p><a href="https://nickguner.atlassian.net/wiki/spaces/DEV/pages/858718211/Arrays+Problems#RearrangeToMakePalindrome" data-card-appearance="inline" rel="nofollow">https://nickguner.atlassian.net/wiki/spaces/DEV/pages/858718211/Arrays+Problems#RearrangeToMakePalindrome</a> </p><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 340.0px;"/><col style="width: 340.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>LongestAwesomeString</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">An awesome substring is a non-empty substring of s such that
+we can make any number of swaps in order to make it palindrome
+Example1:
+   Input: s = &quot;3242415&quot;
+   Output:  5
+   &quot;24241&quot; is the longest awesome substring
+Example2:
+    Input: s = &quot;213123&quot;
+    Output: 6
+    &quot;213123&quot; is the longest awesome substring</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static long longestAwesome(String s)
+{
+    if(s.length() == 1)
+    {
+        return 1;
+    }
+    Map&lt;Character, Long&gt; map = s.chars().mapToObj(c -&gt; (char)c)
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    Map&lt;Boolean, List&lt;Map.Entry&lt;Character, Long&gt;&gt;&gt; partitionedMap = map.entrySet().stream()
+            .collect(Collectors.partitioningBy(e -&gt; e.getValue() % 2 == 0));
+    List&lt;Map.Entry&lt;Character, Long&gt;&gt; evenList = partitionedMap.get(true);
+    List&lt;Map.Entry&lt;Character, Long&gt;&gt; oddList = partitionedMap.get(false);
+    long evenLen = evenList.stream().map(e -&gt; e.getValue()).reduce(0L, Long::sum);
+    long oddLen = 0L;
+    if(oddList.size() &gt; 0)
+    {
+        oddLen = oddList.stream().mapToLong(e -&gt; e.getValue()).max().getAsLong();
+    }
+    return evenLen + oddLen;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = longestAwesome(&quot;3242415&quot;) == 5;
+    if(!check)
+    {
+        return false;
+    }
+    check = longestAwesome(&quot;213123&quot;) == 6;
+    if(!check)
+    {
+        return false;
+    }
+    check = longestAwesome(&quot;112233334445&quot;) == 11;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="StringsProblems-MagicPotion">MagicPotion</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 768.0px;"/><col style="width: 767.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MagicPotion</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Consider the following potion which uses 4 distinct ingredients:
+    A, B, A, B, C, A, B, A, B, C, D
+special instruction, &#39;*&#39;, which means &quot;repeat from the beginning&quot;, thus:
+A, B, A, B, C, A, B, A, B, C, D = A,B,*,C,*,D
+write a function that takes as input an un-encoded potion and returns
+the minimum number of characters required</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Pair&lt;String, Integer&gt; encrypted(String ingredients)
+{
+    int len = ingredients.length();
+    if (len == 0)
+    {
+        return null;
+    }
+    StringBuilder sb = new StringBuilder();
+    sb.append(ingredients.charAt(0));
+    for (int i = 1; i &lt; len; i++)
+    {
+        if(i * 2 &lt;= len)
+        {
+            String stringToCompare = ingredients.substring(0, i);
+            if(stringToCompare.equals(ingredients.substring(i, 2 * i)))
+            {
+                sb.append(&quot;*&quot;);
+                i = 2 * i - 1;
+            }
+            else
+            {
+                sb.append(ingredients.charAt(i));
+            }
+        }
+        else
+        {
+            sb.append(ingredients.charAt(i));
+        }
+    }
+    return Pair.of(sb.toString(), sb.length());
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Pair&lt;String,Integer&gt; pair = encrypted(&quot;ABCABCE&quot;);
+    boolean check = pair.getLeft().equals(&quot;ABC*E&quot;) &amp;&amp; pair.getRight() == 5;
+    if(!check)
+    {
+        return false;
+    }
+    pair = encrypted(&quot;AAAAAA&quot;);
+    check = pair.getLeft().equals(&quot;A**AA&quot;) &amp;&amp; pair.getRight() == 5;
+    if(!check)
+    {
+        return false;
+    }
+    pair = encrypted(&quot;AAAABBBB&quot;);
+    check = pair.getLeft().equals(&quot;A**BBBB&quot;) &amp;&amp; pair.getRight() == 7;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="StringsProblems-MinLengthString">MinLengthString</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 769.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MinLengthString</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int minLengthSubstring(String s, String t)
+{
+    if(t.length() == 1 &amp;&amp; s.indexOf(t.charAt(0)) != -1)
+    {
+        return 1;
+    }
+    int min = Integer.MAX_VALUE;
+    String check = t;
+    for(int i = 0; i &lt; s.length(); ++i)
+    {
+        int index = check.indexOf(s.charAt(i));
+        if(index != -1)
+        {
+            check = check.substring(0, index) + check.substring(index + 1);
+        }
+        for(int j = i + 1; j &lt; s.length(); ++j)
+        {
+            index = check.indexOf(s.charAt(j));
+            if(index != -1)
+            {
+                check = check.substring(0, index) + check.substring(index + 1);
+                if(check.length() == 0)
+                {
+                    min = Math.min(min, j - i + 1);
+                    check = t;
+                    break;
+                }
+            }
+        }
+    }
+    return min;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = minLengthSubstring(&quot;ddcbefebce&quot;, &quot;fd&quot;) == 5;
+    if(!check)
+    {
+        return false;
+    }
+    check = minLengthSubstring(&quot;dcbefedfe&quot;, &quot;fd&quot;) == 2;
+    if(!check)
+    {
+        return false;
+    }
+    check = minLengthSubstring(&quot;dcbefedfe&quot;, &quot;f&quot;) == 1;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="StringsProblems-Palindrome">Palindrome</h2><h3 id="StringsProblems-isPalindrome"><code>isPalindrome</code></h3><h3 id="StringsProblems-lengthOfLongestPalindrome"><code>lengthOfLongestPalindrome</code></h3><h3 id="StringsProblems-longestPalindrome"><code>longestPalindrome</code></h3><h3 id="StringsProblems-makeShortestPalindrome"><code>makeShortestPalindrome</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 769.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Palindrome</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean isPalindrome(String s)
+{
+    char[] a = s.toCharArray();
+    int left = 0, right = a.length -1;
+    while(left &lt; right)
+    {
+        if(a[left++] != a[right--])
+        {
+            return false;
+        }
+    }
+    return true;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int lengthOfLongestPalindrome(String s)
+{
+    int max = 1;
+    for(int i = 0; i &lt; s.length(); ++i)
+    {
+        for(int j = s.length(); j &gt; i; --j)
+        {
+            String subStr = s.substring(i, j);
+            if(isPalindrome(subStr) &amp;&amp; subStr.length() &gt; max)
+            {
+                max = subStr.length();
+            }
+        }
+    }
+    return max;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String longestPalindrome(String s)
+{
+    String longest = &quot;&quot;;
+    for(int i = 0; i &lt; s.length(); ++i)
+    {
+        for(int j = s.length(); j &gt; i; --j)
+        {
+            String subStr = s.substring(i, j);
+            if(isPalindrome(subStr) &amp;&amp; subStr.length() &gt; longest.length())
+            {
+                longest = subStr;
+            }
+        }
+    }
+    return longest;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Consider string &quot;abcd&quot;
+Shortest palindrome would be &quot;dcbabcd&quot;
+Where:
+//  &quot;bcd&quot; is the suffix
+//  &quot;dcb&quot; is the prefix (reverse of the suffix)
+//  and &quot;a&quot; is the character at the left position</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String makeShortestPalindrome(String s)
+{
+    int start = 0, end = s.length() - 1;
+    while(start &lt; end)
+    {
+        if(s.charAt(start) == s.charAt(end))
+        {
+            start++;
+            end--;
+        }
+        else
+        {
+            end--;
+        }
+    }
+    if(start == s.length() / 2)
+    {
+        return s;
+    }
+    String suffix = s.substring(start + 1);
+    String prefix = new StringBuilder(suffix).reverse().toString();
+    return prefix + s.charAt(start) + suffix;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String s1 = &quot;abcddcba&quot;, s2 = &quot;abcdcba&quot;, s3 = &quot;abcdba&quot;;
+    boolean check = isPalindrome(s1);
+    if(!check)
+    {
+        return false;
+    }
+    check = isPalindrome(s2);
+    if(!check)
+    {
+        return false;
+    }
+    check = isPalindrome(s3);
+    if(check)
+    {
+        return false;
+    }
+    check = lengthOfLongestPalindrome(&quot;dfrabcdedcbaprewsg&quot;) == 9;
+    if(!check)
+    {
+        return false;
+    }
+    check = longestPalindrome(&quot;dfrabcdedcbaprewsg&quot;).equals(&quot;abcdedcba&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = makeShortestPalindrome(&quot;cdcba&quot;).equals(&quot;abcdcba&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="StringsProblems-Pangram">Pangram</h2><h3 id="StringsProblems-missingLetters"><code>missingLetters</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 876.0px;"/><col style="width: 659.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Pangram</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">The sentence &quot;The quick brown fox jumps over the lazy dog&quot; contains
+every single letter in the alphabet. Such sentences are called pangrams.
+Write a function findMissingLetters, which takes a String `sentence`,
+and returns all the letters it is missing (which prevent it from being a pangram).</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">private static String ALPHABET = &quot;abcdefghijklmnopqrstuvwxyz&quot;;
+
+static String missingLetters(String s)
+{
+    Set&lt;Character&gt; set = new HashSet&lt;&gt;(ALPHABET.chars().mapToObj(c -&gt; (char)c).collect(Collectors.toSet()));
+    return set.stream().filter(c -&gt; s.indexOf(c) == -1).map(String::valueOf).collect(Collectors.joining());
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = &quot;&quot;.equals(missingLetters(&quot;The quick brown fox jumps over the lazy dog&quot;)) &amp;&amp;
+            &quot;abcdefghijklmnopqrstuvwxyz&quot;.equals(missingLetters(&quot;&quot;));
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="StringsProblems-PatternMatch">PatternMatch</h2><h3 id="StringsProblems-patternMatch"><code>patternMatch</code></h3><h3 id="StringsProblems-subsequenceMatch"><code>subsequenceMatch</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 724.0px;"/><col style="width: 811.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>PatternMatch</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean patternMatch(String s, String pattern)
+{
+    int strLen = s.length(), patLen = pattern.length();
+    if(strLen &lt; patLen)
+    {
+        return false;
+    }
+    if(strLen == patLen)
+    {
+        return s.equals(pattern);
+    }
+    for(int i = 0; i &lt; strLen - patLen; ++i)
+    {
+        if(s.charAt(i) == pattern.charAt(0))
+        {
+            int j;
+            for(j = 0; j &lt; patLen; ++j)
+            {
+                if(s.charAt(i + j) != pattern.charAt(j))
+                {
+                    break;
+                }
+            }
+            if(patLen == j)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Following cases will match:
+String          Pattern
+&quot;abcxdefyzlmn&quot;  &quot;xyz&quot;
+&quot;abcxdefxyzlmn&quot; &quot;xyz&quot;</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean subsequenceMatch(String s, String pat)
+{
+    int patIdx = 0;
+    for(int i = 0; i &lt; s.length() &amp;&amp;  patIdx &lt; pat.length(); ++i)
+    {
+        if(s.charAt(i) == pat.charAt(patIdx))
+        {
+            if(++patIdx == pat.length())
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String test = &quot;Hello world&quot;, pat1 = &quot;o wo&quot;, pat2 = &quot;owo&quot;;
+    boolean check = patternMatch(test, pat1);
+    if(!check)
+    {
+        return false;
+    }
+    check = patternMatch(test, pat2);
+    if(check)
+    {
+        return false;
+    }
+    check = subsequenceMatch(&quot;abcxdefyzlmn&quot;, &quot;xyz&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = subsequenceMatch(&quot;abcxdefxyzlmn&quot;, &quot;xyz&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="StringsProblems-RemoveUnbalancedParens">RemoveUnbalancedParens</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 340.0px;"/><col style="width: 340.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>RemoveUnbalancedParens</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String removeInvalidParentheses(String s)
+{
+    String r = remove(s, new char[]{&#39;(&#39;, &#39;)&#39;});
+    String tmp = remove(new StringBuilder(r).reverse().toString(), new char[]{&#39;)&#39;, &#39;(&#39;});
+    return new StringBuilder(tmp).reverse().toString();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">private static String remove(String s, char[] p)
+{
+    int count = 0;
+    for (int i = 0; i &lt; s.length(); i++)
+    {
+        if (s.charAt(i) == p[0])
+        {
+            count++;
+        }
+        if (s.charAt(i) == p[1])
+        {
+            count--;
+        }
+        if (count &lt; 0)
+        {
+            s = s.substring(0, i) + s.substring(i + 1);
+            i--;
+            count = 0;
+        }
+    }
+    return s;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = removeInvalidParentheses(&quot;()())()&quot;).equals(&quot;()()()&quot;) &amp;&amp;
+                    removeInvalidParentheses(&quot;()&quot;).equals(&quot;()&quot;) &amp;&amp;
+                    removeInvalidParentheses(&quot;(()()))&quot;).equals(&quot;(()())&quot;) &amp;&amp;
+                    removeInvalidParentheses(&quot;((())()&quot;).equals(&quot;(())()&quot;) &amp;&amp;
+                    removeInvalidParentheses(&quot;()))((()&quot;).equals(&quot;()()&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="StringsProblems-RotationalCipher">RotationalCipher</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 768.0px;"/><col style="width: 767.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>RotationalCipher</p></th><th class="confluenceTh"><p>Test</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String rotationalCipher(String input, int rotationFactor)
+{
+    StringBuilder sb = new StringBuilder();
+    for(char c : input.toCharArray())
+    {
+        if(Character.isAlphabetic(c))
+        {
+            if(Character.isUpperCase(c))
+            {
+                sb.append((char)((c + rotationFactor - &#39;A&#39;) % 26 + &#39;A&#39;));
+            }
+            else
+            {
+                sb.append((char)((c + rotationFactor - &#39;a&#39;) % 26 + &#39;a&#39;));
+            }
+        }
+        else if(Character.isDigit(c))
+        {
+            sb.append((char)((c + rotationFactor - &#39;0&#39;) % 10 + &#39;0&#39;));
+        }
+        else
+        {
+            sb.append(c);
+        }
+    }
+    return sb.toString();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = rotationalCipher(&quot;Zebra-493?&quot;, 3).equals(&quot;Cheud-726?&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = rotationalCipher(&quot;abcdefghijklmNOPQRSTUVWXYZ0123456789&quot;, 39)
+            .equals(&quot;nopqrstuvwxyzABCDEFGHIJKLM9012345678&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p /></td></tr></tbody></table></div><h2 id="StringsProblems-Remove">Remove</h2><h3 id="StringsProblems-removeChars"><code>removeChars</code></h3><h3 id="StringsProblems-removeCharsWithStreams"><code>removeCharsWithStreams</code></h3><h3 id="StringsProblems-removeStringFromArrayWithStreams"><code>removeStringFromArrayWithStreams</code></h3><h3 id="StringsProblems-removeDups"><code>removeDups</code></h3><h3 id="StringsProblems-removeDupsWithStreams"><code>removeDupsWithStreams</code></h3><h3 id="StringsProblems-removeAdjacentDups"><code>removeAdjacentDups</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 772.0px;"/><col style="width: 763.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Remove</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String removeChars(String s, String remove)
+{
+    boolean[] charsToRemove = new boolean[256];
+    for(char c : remove.toCharArray())
+    {
+        charsToRemove[c] = true;
+    }
+    int pos = 0;
+    char[] a = s.toCharArray();
+    for(char c : a)
+    {
+        if(!charsToRemove[c])
+        {
+            a[pos++] = c;
+        }
+    }
+    return new String(a, 0, pos);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String removeCharsWithStreams(String s, String remove)
+{
+    return s.chars().filter(x -&gt; remove.indexOf(x) == -1)
+            .mapToObj(c -&gt; (char)c).map(String::valueOf).collect(Collectors.joining());
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String[] removeStringFromArrayWithStreams(String[] input, String value)
+{
+    return Arrays.stream(input).filter(e -&gt; !e.equals(value)).toArray(String[]::new);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String removeDups(String s)
+{
+    if(s == null || s.length() &lt; 2)
+    {
+        return s;
+    }
+    char[] a = s.toCharArray();
+    int pos = 1;
+    for(int i = 1; i &lt; a.length; ++i)
+    {
+        int j;
+        for(j = 0; j &lt; pos; ++j)
+        {
+            if(a[i] == a[j])
+            {
+                break;
+            }
+        }
+        if(j == pos)
+        {
+            a[pos++] = a[i];
+        }
+    }
+    return new String(a, 0, pos);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String removeDupsWithStreams(String s)
+{
+    return s.chars().mapToObj(c -&gt; (char)c).distinct()
+            .map(String::valueOf).collect(Collectors.joining());
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String removeAdjacentDups(String s)
+{
+    char[] a = s.toCharArray();
+    int pos = 1;
+    for(int i = 1; i &lt; a.length; ++i)
+    {
+        if(a[i] != a[i - 1])
+        {
+            a[pos++] = a[i];
+        }
+    }
+    return new String(a, 0, pos);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String s = &quot;Kill all vowels&quot;;
+    String remove = &quot;aeiou &quot;;
+    String result = removeChars(s,remove);
+    boolean check = result.equals(&quot;Kllllvwls&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    result = removeCharsWithStreams(s,remove);
+    check = result.equals(&quot;Kllllvwls&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    String [] input = {&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;};
+    String[] output = removeStringFromArrayWithStreams(input, &quot;e&quot;);
+    check = Arrays.equals(output, new String[] {&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;});
+    if(!check)
+    {
+        return false;
+    }
+    check = removeDups(&quot;abcdacbdabcd&quot;).equals(&quot;abcd&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = removeDupsWithStreams(&quot;abcdacbdabcd&quot;).equals(&quot;abcd&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    check = removeAdjacentDups(&quot;aaabbbbcccb&quot;).equals(&quot;abcb&quot;);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p>Notes:</p><p>In <code>removeAdjacentDups</code> note setting <code>pos = 1</code> and comparing with the previous (not next) value in order to account for last character.</p><h2 id="StringsProblems-ReverseWords">ReverseWords</h2><h3 id="StringsProblems-reverseWords"><code>reverseWords</code></h3><h3 id="StringsProblems-reverseWordsBruteForce"><code>reverseWordsBruteForce</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 912.0px;"/><col style="width: 623.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ReverseWords</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String reverseWords(String sentence)
+{
+    //  1. &quot;one two three&quot; -&gt;  &quot;eerht owt eno&quot;
+    //  2. &quot;eerht owt eno&quot; -&gt;  &quot;eno owt eerht&quot;
+    StringBuilder sb = new StringBuilder(sentence);
+    String reversed = sb.reverse().toString();
+    String[] parts = reversed.split(&quot;\\s+&quot;);
+    reverse(parts);
+    return Arrays.stream(parts).collect(Collectors.joining(&quot; &quot;));
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static String reverseWordsBruteForce(String sentence)
+{
+    StringBuilder sb = new StringBuilder();
+    String[] a = sentence.split(&quot;\\s+&quot;);
+    for(String s : a)
+    {
+        Character[] chars = s.chars().mapToObj(c -&gt; (char)c).toArray(Character[]::new);
+        reverse(chars);
+        String reversedWord = Arrays.stream(chars).map(String::valueOf).collect(Collectors.joining());
+        sb.append(reversedWord).append(&quot; &quot;);
+    }
+    return sb.toString().trim();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String s = &quot;one two three&quot;;
+    return reverseWords(s).equals(&quot;eno owt eerht&quot;);
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="StringsProblems-Rotation">Rotation</h2><h3 id="StringsProblems-isRotation"><code>isRotation</code></h3><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 480.0px;"/><col style="width: 480.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Rotation</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean isRotation(String s1, String s2)
+{
+    if(s1.length() != s2.length())
+    {
+        return false;
+    }
+    String s3 = s1 + s1;
+    return s3.contains(s2);
+}</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String s1 = &quot;abcdefgh&quot;;
+    String s2 = &quot;cdefghab&quot;;
+    String s3 = &quot;hgfedcba&quot;;
+    boolean check = isRotation(s1, s2);
+    if(!check)
+    {
+        return false;
+    }
+    check = isRotation(s2, s1);
+    if(!check)
+    {
+        return false;
+    }
+    check = isRotation(s1, s3);
+    if(check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="StringsProblems-Unique">Unique</h2><h3 id="StringsProblems-isAllUnique"><code>isAllUnique</code></h3><h3 id="StringsProblems-isAllUniqueWithStreams"><code>isAllUniqueWithStreams</code></h3><h3 id="StringsProblems-lengthOfLongestUniqueSubstr"><code>lengthOfLongestUniqueSubstr</code></h3><h3 id="StringsProblems-firstUnique"><code>firstUnique</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 769.0px;"/><col style="width: 766.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Unique</strong></p></th><th class="confluenceTh"><p><strong>Tests</strong></p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean isAllUnique(String s)
+{
+    boolean[] check = new boolean[256];
+    for(char c : s.toCharArray())
+    {
+        if(check[c])
+        {
+            return false;
+        }
+        check[c] = true;
+    }
+    return true;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean isAllUniqueWithStreams(String s)
+{
+    long distinctCount = s.chars().distinct().count();
+    return distinctCount == s.length();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int lengthOfLongestUniqueSubstr(String s)
+{
+    int max = Integer.MIN_VALUE;
+    for(int i = 0; i &lt; s.length(); ++i)
+    {
+        for(int j = s.length(); j &gt;= i; j--)
+        {
+            String subString = s.substring(i, j);
+            if(isAllUnique(subString) &amp;&amp; subString.length() &gt; max)
+            {
+                max = subString.length();
+            }
+        }
+    }
+    return max;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static char firstUnique(String s)
+{
+    Map&lt;Character, Long&gt; map = s.chars()
+            .mapToObj(c -&gt; (char)c)
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    for(char c : s.toCharArray())
+    {
+        if(map.get(c) == 1)
+        {
+            return c;
+        }
+    }
+    return 0;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    String allUnique = &quot;abcdefghijklmnopq&quot;;
+    String notAllUnique = &quot;abcdefghidjklm&quot;;
+    boolean check = isAllUnique(allUnique);
+    if(!check)
+    {
+        return false;
+    }
+    check = isAllUnique(notAllUnique);
+    if(check)
+    {
+        return false;
+    }
+    check = isAllUniqueWithStreams(allUnique);
+    if(!check)
+    {
+        return false;
+    }
+    check = isAllUniqueWithStreams(notAllUnique);
+    if(check)
+    {
+        return false;
+    }
+    String test = &quot;qwertyuiopqazxcvbnm&quot;;
+    check = lengthOfLongestUniqueSubstr(test) == 18;
+    if(!check)
+    {
+        return false;
+    }
+    check = firstUnique(&quot;abcdabc&quot;) == &#39;d&#39;;
+    if(!check)
+    {
+        return false;
+    }
+    check = firstUnique(&quot;abcdefg&quot;) == &#39;a&#39;;
+    if(!check)
+    {
+        return false;
+    }
+    check = firstUnique(&quot;abcddcba&quot;) == 0;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="StringsProblems-WordDistance">WordDistance</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 691.0px;"/><col style="width: 844.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>WordDistance</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">words:  [&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;, &quot;five&quot;]
+word1 = &quot;two&quot;, word2 = &quot;five&quot; ==&gt; distance = 3
+word1 = &quot;four&quot;, word2 = &quot;two&quot; ==&gt; distance = 2</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int wordDistance(String[] words, String word1, String word2)
+{
+    int firstWordPos = -1, secondWordPos = -1;
+    for(int i = 0; i &lt; words.length; ++i)
+    {
+        if(firstWordPos == -1 &amp;&amp; words[i].equals(word1))
+        {
+            firstWordPos = i;
+        }
+        if(secondWordPos == -1 &amp;&amp; words[i].equals(word2))
+        {
+            secondWordPos = i;
+        }
+        if(firstWordPos != -1 &amp;&amp; secondWordPos != -1)
+        {
+            break;
+        }
+    }
+    return Math.abs(secondWordPos - firstWordPos);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = wordDistance(new String[]{&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;, &quot;five&quot;},
+            &quot;two&quot;, &quot;five&quot;) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    check = wordDistance(new String[]{&quot;one&quot;, &quot;two&quot;, &quot;three&quot;, &quot;four&quot;, &quot;five&quot;}, &quot;four&quot;, &quot;two&quot;) == 2;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p><br/></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Use UTC TimeZone</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Eligibility_289898573.html">Eligibility</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Use UTC TimeZone
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 19, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="UseUTCTimeZone-SeeUTCTimeZoneforFixtoSoDBi-TemporalityPOCproject">See <a href="https://confluence.apg.services.gs.com/display/~gunern/SoD+Bi-Temporal+Bug+Fixes#SoDBi-TemporalBugFixes-utctimezone" class="external-link" rel="nofollow">UTC Time Zone</a> for Fix to SoD Bi-Temporality POC project</h2><h2 id="UseUTCTimeZone-SeealsoIncorrectvaluesetinOUT_UTC">See also <a href="https://confluence.apg.services.gs.com/display/~gunern/Incorrect+value+set+in+OUT_UTC" class="external-link" rel="nofollow">Incorrect value set in OUT_UTC</a></h2><h1 id="UseUTCTimeZone-FixesToDatabaseSQLCommands">Fixes To Database SQL Commands</h1><p>When we initially populated the DB2 database, we used commands that looked like this:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p><code>INSERT INTO DUTY(ID, BI_TEMPORAL_ID, DUTY_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, '0001', 'Refreshments', CURRENT_TIMESTAMP, '9999-12-31T00:00:00Z', 'unknown', 'unknown')</code></p></td></tr></tbody></table></div><p>Note how we populated <code>in_utc</code> and <code>out_utc</code> fields:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Field</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Value</strong></p></th></tr><tr><td class="confluenceTd"><p><code>in_utc</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">CURRENT_TIMESTAMP</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>out_utc</code></p></td><td class="confluenceTd"><p><code>'9999-12-31T00:00:00Z'</code></p></td></tr></tbody></table></div><p>If we were to check how data is stored in the database:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p>Command:</p></td><td class="confluenceTd"><p><code>select in_utc, out_utc from Duty where id = 1</code></p></td></tr><tr><td class="confluenceTd"><p>Response</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">IN_UTC                      OUT_UTC                     
+-------------------------------------------------
+2019-11-25 09:39:42.201432  9999-12-31 00:00:00.0       </pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p>This is incorrect since the DB2 database knows nothing about UTC TimeStamps and what we stored in <code>in_utc</code> and <code>out_utc</code> fields is the local time.</p><p>We can view the difference between local and UTC timestamps with the following command:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p>Command:</p></td><td class="confluenceTd"><p><code>select to_date('99991231', 'YYYYMMDD') - CURRENT_TIMEZONE as UTC, to_date('99991231', 'YYYYMMDD') as LOCAL from sysibm.sysdummy1</code></p></td></tr><tr><td class="confluenceTd"><p>Response:</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">UTC                         LOCAL                       
+-------------------------------------------------
+9999-12-31 05:00:00.0       9999-12-31 00:00:00.0       
+
+
+</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p>Note that as of 11/27/2019, the UTC time should be 5 hours ahead of the EST.</p><p>Thus, to insert data into the DB2 database with UTC timestamps, we should use commands that look like this:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p><code>INSERT INTO DUTY(ID, BI_TEMPORAL_ID, DUTY_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, '0005', 'UTC Duty', CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE('9999-12-31', 'YYYY-MM-DD') - CURRENT_TIMEZONE, 'unknown', 'unknown')</code></p></td></tr></tbody></table></div><p>Consider following two records, one that was using local (EST) and the other that was using UTC:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ID  DUTY_NAME    IN_UTC                      OUT_UTC                     
+------------------------------------------------------------------
+6   Local Duty   2019-11-27 13:11:19.156578  9999-12-31 00:00:00.0       
+7   UTC Duty     2019-11-27 18:11:24.73081   9999-12-31 05:00:00.0       </pre>
+</div></div></td></tr></tbody></table></div><p>Following commands will populate SoD database with sample data for Eligibility rules. Make sure to truncate tables prior to executing these commands:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">INSERT INTO KEY_STORE(ID, BI_TEMPORAL_ID, KEY, VALUE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, &#39;Location&#39;, &#39;Singapore&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO KEY_STORE(ID, BI_TEMPORAL_ID, KEY, VALUE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, &#39;Location&#39;, &#39;Moscow&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO KEY_STORE(ID, BI_TEMPORAL_ID, KEY, VALUE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, &#39;Department&#39;, &#39;T123&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO KEY_STORE(ID, BI_TEMPORAL_ID, KEY, VALUE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, &#39;Department&#39;, &#39;T999&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO KEY_STORE(ID, BI_TEMPORAL_ID, KEY, VALUE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, &#39;Level&#39;, &#39;MD&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO KEY_STORE(ID, BI_TEMPORAL_ID, KEY, VALUE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(6, &#39;0006&#39;, &#39;Level&#39;, &#39;VP&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO KEY_STORE(ID, BI_TEMPORAL_ID, KEY, VALUE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(7, &#39;0007&#39;, &#39;Location&#39;, &#39;New-York&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO KEY_STORE(ID, BI_TEMPORAL_ID, KEY, VALUE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(8, &#39;0008&#39;, &#39;Department&#39;, &#39;T567&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO KEY_STORE(ID, BI_TEMPORAL_ID, KEY, VALUE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(9, &#39;0009&#39;, &#39;Level&#39;, &#39;Assoc&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO KEY_STORE(ID, BI_TEMPORAL_ID, KEY, VALUE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(10, &#39;0010&#39;, &#39;Level&#39;, &#39;Contingent&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, 1, 1, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, 1, 3, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, 1, 6, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, 2, 1, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, 2, 3, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(6, &#39;0006&#39;, 2, 5, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(7, &#39;0007&#39;, 3, 2, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(8, &#39;0008&#39;, 3, 4, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(9, &#39;0009&#39;, 3, 5, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(10, &#39;0010&#39;, 4, 7, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(11, &#39;0011&#39;, 4, 8, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(12, &#39;0012&#39;, 4, 9, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(13, &#39;0013&#39;, 5, 7, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(14, &#39;0014&#39;, 5, 8, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(15, &#39;0015&#39;, 5, 6, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(16, &#39;0016&#39;, 6, 5, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROPERTIES(ID, BI_TEMPORAL_ID, PROPERTIES_ID, KEY_STORE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(17, &#39;0017&#39;, 7, 10, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+
+INSERT INTO RULE(ID, BI_TEMPORAL_ID, NAME, TYPE, STATE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, &#39;Refreshments-Rule&#39;, &#39;Allow&#39;, &#39;Draft&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE(ID, BI_TEMPORAL_ID, NAME, TYPE, STATE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, &#39;Transport-Rule&#39;, &#39;Allow&#39;, &#39;Draft&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE(ID, BI_TEMPORAL_ID, NAME, TYPE, STATE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, &#39;Unassigned-Rule&#39;, &#39;Allow&#39;, &#39;Draft&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE(ID, BI_TEMPORAL_ID, NAME, TYPE, STATE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, &#39;BigPerks-Rule&#39;, &#39;Allow&#39;, &#39;Draft&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE(ID, BI_TEMPORAL_ID, NAME, TYPE, STATE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, &#39;Training-Rule&#39;, &#39;Disallow&#39;, &#39;Draft&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+
+INSERT INTO RULE_PROPERTIES_MAP(ID, BI_TEMPORAL_ID, RULE_ID, PROPERTIES_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, 1, 1, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE_PROPERTIES_MAP(ID, BI_TEMPORAL_ID, RULE_ID, PROPERTIES_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, 1, 2, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE_PROPERTIES_MAP(ID, BI_TEMPORAL_ID, RULE_ID, PROPERTIES_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, 2, 3, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE_PROPERTIES_MAP(ID, BI_TEMPORAL_ID, RULE_ID, PROPERTIES_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, 3, 4, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE_PROPERTIES_MAP(ID, BI_TEMPORAL_ID, RULE_ID, PROPERTIES_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, 3, 5, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE_PROPERTIES_MAP(ID, BI_TEMPORAL_ID, RULE_ID, PROPERTIES_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(6, &#39;0006&#39;, 4, 6, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE_PROPERTIES_MAP(ID, BI_TEMPORAL_ID, RULE_ID, PROPERTIES_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(7, &#39;0007&#39;, 5, 7, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+
+
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, &#39;Free coffee&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, &#39;Free milk&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, &#39;Free sugar&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, &#39;Free car&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, &#39;Free gas&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(6, &#39;0006&#39;, &#39;Free tolls&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(7, &#39;0007&#39;, &#39;Fat bonus&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(8, &#39;0008&#39;, &#39;Extended vacation&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(9, &#39;0009&#39;, &#39;Golden parachute&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(10, &#39;0010&#39;, &#39;Online courses&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(11, &#39;0011&#39;, &#39;Pluralsight subscription&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PRIVILEGE(ID, BI_TEMPORAL_ID, PRIVILEGE_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(12, &#39;0012&#39;, &#39;Coursera subscription&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+
+INSERT INTO DUTY(ID, BI_TEMPORAL_ID, DUTY_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, &#39;Refreshments&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, BI_TEMPORAL_ID, DUTY_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, &#39;Transport&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, BI_TEMPORAL_ID, DUTY_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, &#39;Big Perks&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, BI_TEMPORAL_ID, DUTY_NAME, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, &#39;Training&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, 1, 1, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, 1, 2, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, 1, 3, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, 2, 4, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, 2, 5, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(6, &#39;0006&#39;, 2, 6, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(7, &#39;0007&#39;, 3, 7, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(8, &#39;0008&#39;, 3, 8, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(9, &#39;0009&#39;, 3, 9, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(10, &#39;0010&#39;, 4, 10, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(11, &#39;0011&#39;, 4, 11, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(12, &#39;0012&#39;, 4, 12, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+
+INSERT INTO DUTY_RULE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, 1, 1, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_RULE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, 2, 2, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_RULE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, 3, 4, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_RULE_MAP(ID, BI_TEMPORAL_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, 4, 5, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+
+INSERT INTO USER(ID, BI_TEMPORAL_ID, NAME, LOCATION, DEPARTMENT, LEVEL, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, &#39;Nick&#39;, &#39;Singapore&#39;, &#39;T123&#39;, &#39;VP&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER(ID, BI_TEMPORAL_ID, NAME, LOCATION, DEPARTMENT, LEVEL, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, &#39;Alex&#39;, &#39;Singapore&#39;, &#39;T123&#39;, &#39;MD&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER(ID, BI_TEMPORAL_ID, NAME, LOCATION, DEPARTMENT, LEVEL, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, &#39;Ivan&#39;, &#39;Moscow&#39;, &#39;T999&#39;, &#39;MD&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER(ID, BI_TEMPORAL_ID, NAME, LOCATION, DEPARTMENT, LEVEL, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, &#39;Andy&#39;, &#39;New-York&#39;, &#39;T111&#39;, &#39;MD&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER(ID, BI_TEMPORAL_ID, NAME, LOCATION, DEPARTMENT, LEVEL, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, &#39;Joe&#39;, &#39;Jersey City&#39;, &#39;T888&#39;, &#39;Contingent&#39;, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;0001&#39;, 1, 2, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;0002&#39;, 2, 3, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;0003&#39;, 3, 2, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;0004&#39;, 4, 1, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;0005&#39;, 5, 2, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(6, &#39;0006&#39;, 1, 4, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(7, &#39;0007&#39;, 1, 12, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(8, &#39;0008&#39;, 4, 5, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(9, &#39;0009&#39;, 1, 8, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(10, &#39;0010&#39;, 3, 10, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(11, &#39;0011&#39;, 5, 11, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(12, &#39;0012&#39;, 2, 7, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(13, &#39;0013&#39;, 3, 9, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO USER_PRIVILEGE_MAP(ID, BI_TEMPORAL_ID, USER_ID, PRIVILEGE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(14, &#39;0014&#39;, 3, 5, CURRENT_TIMESTAMP - CURRENT_TIMEZONE, TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;) - CURRENT_TIMEZONE, &#39;unknown&#39;, &#39;unknown&#39;)</pre>
+</div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

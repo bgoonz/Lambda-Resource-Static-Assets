@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : SoD Docker Image Deployments</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Docker_1143275557.html">Docker</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : SoD Docker Image Deployments
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Jan 28, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="SoDDockerImageDeployments-InConduitProjectnote:">In Conduit Project note:</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 680.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+template:
+  metadata:
+    labels:
+      app: ${sod.name}
+      gs.com/bdls: ${sod.name}
+  spec:
+    containers:
+      - name: ${sod.name}
+        image: ${sod.imageName}
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            value: ${envName}
+...</pre>
+</div></div></td></tr></tbody></table></div><p>The <code>${envName}</code> comes from realm files, for example:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 680.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+envName: dev
+...</pre>
+</div></div></td></tr></tbody></table></div><h1 id="SoDDockerImageDeployments-InSoDProject">In SoD Project</h1><p>The image is built with following command:</p><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 680.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+- kaniko -c /workspace --dockerfile Dockerfile_SOD -d $CI_REGISTRY_IMAGE:$SOD_TAG --build-arg ci_commit_sha=&quot;${CI_COMMIT_SHA}&quot;
+...</pre>
+</div></div></td></tr></tbody></table></div><p>Note contents of <code>Dockerfile_SOD</code></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 680.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">FROM gitlab.registry.docker.site.gs.com:443/dx/javaeng/java-images/jdk11-rhel7:current
+COPY apps/sod-microservice-*.jar sod-microservice.jar
+ENTRYPOINT [&quot;java&quot;,&quot;-jar&quot;,&quot;/sod-microservice.jar&quot;]
+EXPOSE 8080</pre>
+</div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

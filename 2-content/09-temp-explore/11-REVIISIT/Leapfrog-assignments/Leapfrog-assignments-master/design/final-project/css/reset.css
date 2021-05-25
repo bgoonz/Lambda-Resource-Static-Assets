@@ -1,0 +1,80 @@
+:root {
+  --theme-color: #f0423c;
+  --main-gray: #999999;
+  --black: #131313;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lato', 'sans-serif';
+  color: var(--black);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Exo', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+h4 {
+  font-size: 18px;
+}
+
+img {
+  max-width: 100%;
+}
+
+a:hover,
+a:focus {
+  outline: none;
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+.red-text {
+  color: var(--theme-color);
+}
+
+.clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+}

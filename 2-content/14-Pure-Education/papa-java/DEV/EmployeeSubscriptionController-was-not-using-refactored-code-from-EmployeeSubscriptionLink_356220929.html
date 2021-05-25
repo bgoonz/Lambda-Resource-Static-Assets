@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : EmployeeSubscriptionController was not using refactored code from EmployeeSubscriptionLink</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Project-Profit-Application_315097089.html">Project Profit Application</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unit-and-Integration-Tests-for-Subscription-Tracker_344522760.html">Unit and Integration Tests for Subscription Tracker</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : EmployeeSubscriptionController was not using refactored code from EmployeeSubscriptionLink
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on May 11, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+@GetMapping(&quot;/employees/subscriptions&quot;)
+public ResponseEntity&lt;List&lt;Resource&lt;Employee&gt;&gt;&gt; getEmployeesSubscriptions()
+{
+    List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = employeeSubscriptionMapRepository.findAll();
+    Map&lt;Employee, List&lt;Subscription&gt;&gt; groupedMap = employeeSubscriptionPairs.stream()
+            .collect(Collectors
+                    .groupingBy(EmployeeSubscriptionPair::getEmployee,
+                            Collectors.mapping(EmployeeSubscriptionPair::getSubscription, Collectors.toList())));
+    List&lt;Resource&lt;Employee&gt;&gt; employeeResources = employeeSubscriptionLinks.createEmployeeSubscriptionResources(groupedMap, this);
+    return ResponseEntity.ok(employeeResources);
+}
+...
+@GetMapping(&quot;/employees/{id}/subscriptions&quot;)
+public ResponseEntity&lt;Resource&lt;Employee&gt;&gt; getEmployeesSubscriptions(@PathVariable(&quot;id&quot;) int id)
+{
+    List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = employeeSubscriptionMapRepository.findByEmployeeId(id);
+    if(employeeSubscriptionPairs.isEmpty())
+    {
+        throw new NotFoundException(&quot;employee-&quot; + id);
+    }
+    Optional&lt;Employee&gt; employeeOptional = employeeSubscriptionPairs.stream().map(EmployeeSubscriptionPair::getEmployee).findFirst();
+    List&lt;Subscription&gt; subscriptions = employeeSubscriptionPairs
+            .stream()
+            .map(EmployeeSubscriptionPair::getSubscription)
+            .collect(Collectors.toList());
+    Employee employee = employeeOptional.get();
+    Resource&lt;Employee&gt; employeeResource = createEmployeeSubscriptionResource(employee, subscriptions);
+    employeeResource.add(linkTo(methodOn(getClass()).getEmployeesSubscriptions()).withRel(&quot;all&quot;));
+    return ResponseEntity.ok(employeeResource);
+}
+...
+@GetMapping(&quot;/subscriptions/employees&quot;)
+public ResponseEntity&lt;List&lt;Resource&lt;Subscription&gt;&gt;&gt; getSubscriptionsEmployees()
+{
+    List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = employeeSubscriptionMapRepository.findAll();
+    Map&lt;Subscription, List&lt;Employee&gt;&gt; groupedMap = employeeSubscriptionPairs.stream()
+            .collect(Collectors
+                    .groupingBy(EmployeeSubscriptionPair::getSubscription,
+                            Collectors.mapping(EmployeeSubscriptionPair::getEmployee, Collectors.toList())));
+    List&lt;Resource&lt;Subscription&gt;&gt; subscriptionResources = employeeSubscriptionLinks.createSubscriptionEmployeeResources(groupedMap, this);
+    return ResponseEntity.ok(subscriptionResources);
+}
+...
+@GetMapping(&quot;/subscriptions/{id}/employees&quot;)
+public ResponseEntity&lt;Resource&lt;Subscription&gt;&gt; getSubscriptionsEmployees(@PathVariable(&quot;id&quot;) int id)
+{
+    List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = employeeSubscriptionMapRepository.findBySubscriptionId(id);
+    if(employeeSubscriptionPairs.isEmpty())
+    {
+        throw new NotFoundException(&quot;subscription-&quot; + id);
+    }
+    Optional&lt;Subscription&gt; subscriptionOptional = employeeSubscriptionPairs.stream().map(EmployeeSubscriptionPair::getSubscription).findFirst();
+    List&lt;Employee&gt; employees = employeeSubscriptionPairs
+            .stream()
+            .map(EmployeeSubscriptionPair::getEmployee)
+            .collect(Collectors.toList());
+    Subscription subscription = subscriptionOptional.get();
+    Resource&lt;Subscription&gt; subscriptionResource = createSubscriptionEmployeeResource(subscription, employees);
+    subscriptionResource.add(linkTo(methodOn(getClass()).getSubscriptionsEmployees()).withRel(&quot;all&quot;));
+    return ResponseEntity.ok(subscriptionResource);
+}</pre>
+</div></div></td></tr></tbody></table></div><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

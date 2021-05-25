@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Subscription Tracker Scaffolding Implementation</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Project-Profit-Application_315097089.html">Project Profit Application</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Subscription Tracker Scaffolding Implementation
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 27, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="SubscriptionTrackerScaffoldingImplementation-in-memorydatabase-data.sql">in-memory database - data.sql</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">-- PROJECT
+INSERT INTO PROJECT(ID, PROJECT_NAME, PROJECT_DESCRIPTION) VALUES(1, &#39;P-1&#39;, &#39;Project one&#39;)
+INSERT INTO PROJECT(ID, PROJECT_NAME, PROJECT_DESCRIPTION) VALUES(2, &#39;P-2&#39;, &#39;Project two&#39;)
+INSERT INTO PROJECT(ID, PROJECT_NAME, PROJECT_DESCRIPTION) VALUES(3, &#39;P-3&#39;, &#39;Project three&#39;)
+INSERT INTO PROJECT(ID, PROJECT_NAME, PROJECT_DESCRIPTION) VALUES(4, &#39;P-4&#39;, &#39;Project four&#39;)
+
+-- EMPLOYEE
+INSERT INTO EMPLOYEE(ID, EMPLOYEE_CODE, EMPLOYEE_NAME) VALUES(1, &#39;EC-1&#39;, &#39;One First&#39;)
+INSERT INTO EMPLOYEE(ID, EMPLOYEE_CODE, EMPLOYEE_NAME) VALUES(2, &#39;EC-2&#39;, &#39;Two Second&#39;)
+INSERT INTO EMPLOYEE(ID, EMPLOYEE_CODE, EMPLOYEE_NAME) VALUES(3, &#39;EC-3&#39;, &#39;Three Third&#39;)
+INSERT INTO EMPLOYEE(ID, EMPLOYEE_CODE, EMPLOYEE_NAME) VALUES(4, &#39;EC-4&#39;, &#39;Four Forth&#39;)
+INSERT INTO EMPLOYEE(ID, EMPLOYEE_CODE, EMPLOYEE_NAME) VALUES(5, &#39;EC-5&#39;, &#39;Five Fifth&#39;)
+INSERT INTO EMPLOYEE(ID, EMPLOYEE_CODE, EMPLOYEE_NAME) VALUES(6, &#39;EC-6&#39;, &#39;Six Sixth&#39;)
+
+-- SUBSCRIPTION
+INSERT INTO SUBSCRIPTION(ID, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME) VALUES(1, &#39;SUB-1&#39;, &#39;Subscription 1&#39;)
+INSERT INTO SUBSCRIPTION(ID, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME) VALUES(2, &#39;SUB-2&#39;, &#39;Subscription 2&#39;)
+INSERT INTO SUBSCRIPTION(ID, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME) VALUES(3, &#39;SUB-3&#39;, &#39;Subscription 3&#39;)
+INSERT INTO SUBSCRIPTION(ID, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME) VALUES(4, &#39;SUB-4&#39;, &#39;Subscription 4&#39;)
+INSERT INTO SUBSCRIPTION(ID, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME) VALUES(5, &#39;SUB-5&#39;, &#39;Subscription 5&#39;)
+INSERT INTO SUBSCRIPTION(ID, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME) VALUES(6, &#39;SUB-6&#39;, &#39;Subscription 6&#39;)
+INSERT INTO SUBSCRIPTION(ID, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME) VALUES(7, &#39;SUB-7&#39;, &#39;Subscription 7&#39;)
+
+
+-- PROJECT-EMPLOYEE-MAP
+--  PROJECT 1
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, PROJECT_ID, EMPLOYEE_ID) VALUES(1, 1, 1)
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, PROJECT_ID, EMPLOYEE_ID) VALUES(2, 1, 3)
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, PROJECT_ID, EMPLOYEE_ID) VALUES(3, 1, 5)
+--  PROJECT 2
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, PROJECT_ID, EMPLOYEE_ID) VALUES(4, 2, 2)
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, PROJECT_ID, EMPLOYEE_ID) VALUES(5, 2, 4)
+-- PROJECT 3
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, PROJECT_ID, EMPLOYEE_ID) VALUES(6, 3, 1)
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, PROJECT_ID, EMPLOYEE_ID) VALUES(7, 3, 2)
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, PROJECT_ID, EMPLOYEE_ID) VALUES(8, 3, 3)
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, PROJECT_ID, EMPLOYEE_ID) VALUES(9, 3, 4)
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, PROJECT_ID, EMPLOYEE_ID) VALUES(10, 3, 5)
+
+-- EMPLOYEE-SUBSCRIPTION-MAP
+--  EMPLOYEE-1
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(1, 1, 1)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(2, 1, 2)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(3, 1, 3)
+--  EMPLOYEE-2
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(4, 2, 1)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(5, 2, 2)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(6, 2, 3)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(7, 2, 4)
+--  EMPLOYEE-3
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(8, 3, 1)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(9, 3, 3)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(10, 3, 5)
+--  EMPLOYEE-4
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(11, 4, 2)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(12, 4, 4)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, EMPLOYEE_ID, SUBSCRIPTION_ID) VALUES(13, 4, 6)
+
+</pre>
+</div></div></td></tr></tbody></table></div><h3 id="SubscriptionTrackerScaffoldingImplementation-Notes:">Notes:</h3><p>We have projects without associated employees, employees without associated projects, employees without associate subscriptions and subscriptions without associated employees.</p><h1 id="SubscriptionTrackerScaffoldingImplementation-application.properties">application.properties</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">spring.jpa.show-sql=true
+spring.h2.console.enabled=true
+spring.datasource.url=jdbc:h2:mem:db</pre>
+</div></div></td></tr></tbody></table></div><h3 id="SubscriptionTrackerScaffoldingImplementation-Notes:.1">Notes:</h3><p>Minimal configurations for H2 database</p><h1 id="SubscriptionTrackerScaffoldingImplementation-EntityObjects">Entity Objects</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+public class Employee
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String employeeCode;
+    private String employeeName;
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getEmployeeCode()
+    {
+        return employeeCode;
+    }
+
+    public void setEmployeeCode(String employeeCode)
+    {
+        this.employeeCode = employeeCode;
+    }
+
+    public String getEmployeeName()
+    {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName)
+    {
+        this.employeeName = employeeName;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+public class Project
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String projectName;
+    private String projectDescription;
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getProjectName()
+    {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName)
+    {
+        this.projectName = projectName;
+    }
+
+    public String getProjectDescription()
+    {
+        return projectDescription;
+    }
+
+    public void setProjectDescription(String projectDescription)
+    {
+        this.projectDescription = projectDescription;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+public class Subscription
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String subscriptionCode;
+    private String subscriptionName;
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getSubscriptionCode()
+    {
+        return subscriptionCode;
+    }
+
+    public void setSubscriptionCode(String subscriptionCode)
+    {
+        this.subscriptionCode = subscriptionCode;
+    }
+
+    public String getSubscriptionName()
+    {
+        return subscriptionName;
+    }
+
+    public void setSubscriptionName(String subscriptionName)
+    {
+        this.subscriptionName = subscriptionName;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(name = &quot;PROJECT_EMPLOYEE_MAP&quot;)
+public class ProjectEmployeePair
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    @ManyToOne
+    @JoinColumn(name = &quot;project_id&quot;)
+    private Project project;
+    @ManyToOne
+    @JoinColumn(name = &quot;employee_id&quot;)
+    private Employee employee;
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public Project getProject()
+    {
+        return project;
+    }
+
+    public void setProject(Project project)
+    {
+        this.project = project;
+    }
+
+    public Employee getEmployee()
+    {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee)
+    {
+        this.employee = employee;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(name = &quot;EMPLOYEE_SUBSCRIPTION_MAP&quot;)
+public class EmployeeSubscriptionPair
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    @ManyToOne
+    @JoinColumn(name = &quot;employee_id&quot;)
+    private Employee employee;
+
+    @ManyToOne
+    @JoinColumn(name = &quot;subscription_id&quot;)
+    private Subscription subscription;
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public Employee getEmployee()
+    {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee)
+    {
+        this.employee = employee;
+    }
+
+    public Subscription getSubscription()
+    {
+        return subscription;
+    }
+
+    public void setSubscription(Subscription subscription)
+    {
+        this.subscription = subscription;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="SubscriptionTrackerScaffoldingImplementation-Notes:.2">Notes:</h3><p>After adding members, hit Alt-Insert to generate getters and setters</p><p>No need to toString method</p><p>Add @Table annotation to Pair classes since tables are named differently</p><h1 id="SubscriptionTrackerScaffoldingImplementation-Repositoryclasses">Repository classes</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public interface EmployeeRepository extends JpaRepository&lt;Employee, Integer&gt;
+{
+}
+
+public interface ProjectRepository extends JpaRepository&lt;Project, Integer&gt;
+{
+}
+
+
+public interface SubscriptionRepository extends JpaRepository&lt;Subscription, Integer&gt;
+{
+}
+
+
+public interface ProjectEmployeeMapRepository extends JpaRepository&lt;ProjectEmployeePair, Integer&gt;
+{
+}
+
+
+public interface EmployeeSubscriptionMapRepository extends JpaRepository&lt;EmployeeSubscriptionPair, Integer&gt;
+{
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="SubscriptionTrackerScaffoldingImplementation-ControllerClasses">Controller Classes</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+public class ProjectController
+{
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @GetMapping(&quot;/projects&quot;)
+    public ResponseEntity&lt;List&lt;Project&gt;&gt; getProjects()
+    {
+        List&lt;Project&gt; projects = projectRepository.findAll();
+        return ResponseEntity.ok(projects);
+    }
+
+    @GetMapping(&quot;/projects/{id}&quot;)
+    public ResponseEntity&lt;Project&gt; getProjects(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Project&gt; projectOptional = projectRepository.findById(id);
+        return ResponseEntity.ok(projectOptional.get());
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+public class EmployeeController
+{
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @GetMapping(&quot;/employees&quot;)
+    public ResponseEntity&lt;List&lt;Employee&gt;&gt; getEmployees()
+    {
+        List&lt;Employee&gt; employees = employeeRepository.findAll();
+        return ResponseEntity.ok(employees);
+    }
+
+    @GetMapping(&quot;/employees/{id}&quot;)
+    public ResponseEntity&lt;Employee&gt; getEmployees(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Employee&gt; employeeOptional = employeeRepository.findById(id);
+        return ResponseEntity.ok(employeeOptional.get());
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+public class SubscriptionController
+{
+    @Autowired
+    private SubscriptionRepository subscriptionRepository;
+
+    @GetMapping(&quot;/subscriptions&quot;)
+    public ResponseEntity&lt;List&lt;Subscription&gt;&gt; getSubscriptions()
+    {
+        List&lt;Subscription&gt; subscriptions = subscriptionRepository.findAll();
+        return ResponseEntity.ok(subscriptions);
+    }
+
+    @GetMapping(&quot;/subscriptions/{id}&quot;)
+    public ResponseEntity&lt;Subscription&gt; getSubscriptions(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Subscription&gt; subscriptionOptional = subscriptionRepository.findById(id);
+        return ResponseEntity.ok(subscriptionOptional.get());
+    }
+
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+public class ProjectEmployeeMapController
+{
+    @Autowired
+    private ProjectEmployeeMapRepository projectEmployeeMapRepository;
+
+    @GetMapping(&quot;/projects/employees&quot;)
+    public ResponseEntity&lt;List&lt;Project&gt;&gt; getProjectsEmployees()
+    {
+        List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findAll();
+        Map&lt;Project, List&lt;Employee&gt;&gt; groupedMap = projectEmployeePairs.stream()
+                .collect(Collectors
+                        .groupingBy(ProjectEmployeePair::getProject,
+                                Collectors.mapping(ProjectEmployeePair::getEmployee, Collectors.toList())));
+
+        List&lt;Project&gt; result = new ArrayList&lt;&gt;();
+        for(Map.Entry&lt;Project,List&lt;Employee&gt;&gt; e : groupedMap.entrySet())
+        {
+            result.add(e.getKey());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping(&quot;/employees/projects&quot;)
+    public ResponseEntity&lt;List&lt;Employee&gt;&gt; getEmployeesProjects()
+    {
+        List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findAll();
+        Map&lt;Employee, List&lt;Project&gt;&gt; groupedMap = projectEmployeePairs.stream()
+                .collect(Collectors
+                        .groupingBy(ProjectEmployeePair::getEmployee,
+                                Collectors.mapping(ProjectEmployeePair::getProject, Collectors.toList())));
+
+        List&lt;Employee&gt; result = new ArrayList&lt;&gt;();
+        for(Map.Entry&lt;Employee,List&lt;Project&gt;&gt; e : groupedMap.entrySet())
+        {
+            result.add(e.getKey());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+public class EmployeeSubscriptionMapController
+{
+    @Autowired
+    private EmployeeSubscriptionMapRepository employeeSubscriptionMapRepository;
+
+    @GetMapping(&quot;/employees/subscriptions&quot;)
+    public ResponseEntity&lt;List&lt;Employee&gt;&gt; getProjectsEmployees()
+    {
+        List&lt;EmployeeSubscriptionPair&gt; projectEmployeePairs = employeeSubscriptionMapRepository.findAll();
+        Map&lt;Employee, List&lt;Subscription&gt;&gt; groupedMap = projectEmployeePairs.stream()
+                .collect(Collectors
+                        .groupingBy(EmployeeSubscriptionPair::getEmployee,
+                                Collectors.mapping(EmployeeSubscriptionPair::getSubscription, Collectors.toList())));
+
+        List&lt;Employee&gt; result = new ArrayList&lt;&gt;();
+        for(Map.Entry&lt;Employee,List&lt;Subscription&gt;&gt; e : groupedMap.entrySet())
+        {
+            result.add(e.getKey());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping(&quot;/subscriptions/employees&quot;)
+    public ResponseEntity&lt;List&lt;Subscription&gt;&gt; getEmployeesProjects()
+    {
+        List&lt;EmployeeSubscriptionPair&gt; projectEmployeePairs = employeeSubscriptionMapRepository.findAll();
+        Map&lt;Subscription, List&lt;Employee&gt;&gt; groupedMap = projectEmployeePairs.stream()
+                .collect(Collectors
+                        .groupingBy(EmployeeSubscriptionPair::getSubscription,
+                                Collectors.mapping(EmployeeSubscriptionPair::getEmployee, Collectors.toList())));
+
+        List&lt;Subscription&gt; result = new ArrayList&lt;&gt;();
+        for(Map.Entry&lt;Subscription,List&lt;Employee&gt;&gt; e : groupedMap.entrySet())
+        {
+            result.add(e.getKey());
+        }
+
+        return ResponseEntity.ok(result);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="SubscriptionTrackerScaffoldingImplementation-Notes:.3">Notes:</h3><p>Implement GET-ALL and GET-ONE only.</p><p>Mapping controllers display projects that have employees, employees who are assigned to projects, etc.</p><p>Code inside mapping controllers is more complex than it needs to be but will be used later.</p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

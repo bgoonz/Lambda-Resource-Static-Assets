@@ -1,0 +1,110 @@
+.header-nav {
+  background-color: #f5f7f9;
+  border-bottom: 2px solid #e5e9ed;
+  font-size: 12px;
+
+  @include e(contact) {
+    li:first-child {
+      margin-right: 15px;
+    }
+
+    li {
+      float: left;
+    }
+
+    i {
+      margin-right: 8px;
+    }
+
+    @include mq(sm) {
+      float: left;
+
+      li:first-child {
+        margin-bottom: 0px;
+        margin-right: 24px;
+      }
+    }
+  }
+
+  @include e(links) {
+    margin-top: 10px;
+
+    li {
+      float: left;
+      margin-right: 20px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    @include mq(sm) {
+      float: right;
+      margin-top: 0px;
+    }
+  }
+}
+
+.nav {
+  font-size: 15px;
+  text-transform: uppercase;
+
+  @include e(logo) {
+    display: block;
+    float: left;
+  }
+
+  button {
+    cursor: pointer;
+    color: $blue-bayoux;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  @include e(links) {
+    display: none;
+    float: right;
+  }
+
+  @include e(bars) {
+    float: right;
+    font-size: 24px;
+    padding: 5px 0;
+  }
+
+  @include mq(lg) {
+    padding: 21px 0px;
+
+    @include e(bars) {
+      display: none;
+    }
+
+    @include e(links) {
+      width: 900px/1191px * 100%;
+      display: block;
+      font-weight: bold;
+      padding: 15px 0;
+
+      li {
+        float: left;
+      }
+    }
+  }
+
+  @include e(list) {
+    float: left;
+
+    li {
+      margin-right: 44px;
+
+      &:last-child {
+        margin-right: 0px;
+      }
+    }
+  }
+
+  @include e(search) {
+    float: right;
+  }
+}

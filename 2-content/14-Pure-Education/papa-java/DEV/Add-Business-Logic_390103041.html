@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Add Business Logic</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Project-Profit-Application_315097089.html">Project Profit Application</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Add Business Logic
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on May 24, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Ultimately, we would like to compute profitability of all our projects.</p><p>To each project we added a revenue field. Similarly, we added compensation field to Employee, divisor to Subscription and appropriation to ProjectEmployeePair.</p><p>To compute project's profitability, we subtract Employee's compensation and Employee Subscription fees from project revenue. However, this would produce a wrong result due to double counting.</p><p>One employee may work on multiple projects. Similarly, when one employee has a subscription for one of the projects, he does not need same subscription to work on the second project, assuming the second project also needs this same subscription.</p><h1 id="AddBusinessLogic-Changestothein-memorydatabasetoaddrevenue,divisor,andappropriationfields">Changes to the in-memory database to add revenue, divisor, and appropriation fields</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">-- PROJECT
+INSERT INTO PROJECT(ID, AUDIT_ID, IN_UTC, OUT_UTC, PROJECT_NAME, PROJECT_DESCRIPTION, REVENUE, CREATED_BY, LAST_MODIFIED_BY) VALUES(1, &#39;00000000-0000-0000-0000-000000000001&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;P-1&#39;, &#39;Project one&#39;, 1200000.00, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROJECT(ID, AUDIT_ID, IN_UTC, OUT_UTC, PROJECT_NAME, PROJECT_DESCRIPTION, REVENUE, CREATED_BY, LAST_MODIFIED_BY) VALUES(2, &#39;00000000-0000-0000-0000-000000000002&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;P-2&#39;, &#39;Project two&#39;, 700000.00, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROJECT(ID, AUDIT_ID, IN_UTC, OUT_UTC, PROJECT_NAME, PROJECT_DESCRIPTION, REVENUE, CREATED_BY, LAST_MODIFIED_BY) VALUES(3, &#39;00000000-0000-0000-0000-000000000003&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;P-3&#39;, &#39;Project three&#39;, 2300000.00, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROJECT(ID, AUDIT_ID, IN_UTC, OUT_UTC, PROJECT_NAME, PROJECT_DESCRIPTION, REVENUE, CREATED_BY, LAST_MODIFIED_BY) VALUES(4, &#39;00000000-0000-0000-0000-000000000004&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;P-4&#39;, &#39;Project four&#39;, 0.0, &#39;unknown&#39;, &#39;unknown&#39;)
+
+-- EMPLOYEE
+INSERT INTO EMPLOYEE(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_CODE, EMPLOYEE_NAME, COMPENSATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(1, &#39;00000000-0000-0000-0000-000000000001&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;EC-1&#39;, &#39;One First&#39;, 120000.00, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_CODE, EMPLOYEE_NAME, COMPENSATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(2, &#39;00000000-0000-0000-0000-000000000002&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;EC-2&#39;, &#39;Two Second&#39;, 240000.00, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_CODE, EMPLOYEE_NAME, COMPENSATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(3, &#39;00000000-0000-0000-0000-000000000003&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;EC-3&#39;, &#39;Three Third&#39;, 190000.00, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_CODE, EMPLOYEE_NAME, COMPENSATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(4, &#39;00000000-0000-0000-0000-000000000004&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;EC-4&#39;, &#39;Four Forth&#39;, 185000.00, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_CODE, EMPLOYEE_NAME, COMPENSATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(5, &#39;00000000-0000-0000-0000-000000000005&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;EC-5&#39;, &#39;Five Fifth&#39;, 45000.00, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_CODE, EMPLOYEE_NAME, COMPENSATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(6, &#39;00000000-0000-0000-0000-000000000006&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;EC-6&#39;, &#39;Six Sixth&#39;, 40000.00, &#39;unknown&#39;, &#39;unknown&#39;)
+
+-- SUBSCRIPTION
+INSERT INTO SUBSCRIPTION(ID, AUDIT_ID, IN_UTC, OUT_UTC, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME, FEES, DIVISOR, CREATED_BY, LAST_MODIFIED_BY) VALUES(1, &#39;00000000-0000-0000-0000-000000000001&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;SUB-1&#39;, &#39;Subscription 1&#39;, 8000.00, 4, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO SUBSCRIPTION(ID, AUDIT_ID, IN_UTC, OUT_UTC, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME, FEES, DIVISOR, CREATED_BY, LAST_MODIFIED_BY) VALUES(2, &#39;00000000-0000-0000-0000-000000000002&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;SUB-2&#39;, &#39;Subscription 2&#39;, 24000.00, 2, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO SUBSCRIPTION(ID, AUDIT_ID, IN_UTC, OUT_UTC, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME, FEES, DIVISOR, CREATED_BY, LAST_MODIFIED_BY) VALUES(3, &#39;00000000-0000-0000-0000-000000000003&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;SUB-3&#39;, &#39;Subscription 3&#39;, 3600.00, 3, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO SUBSCRIPTION(ID, AUDIT_ID, IN_UTC, OUT_UTC, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME, FEES, DIVISOR, CREATED_BY, LAST_MODIFIED_BY) VALUES(4, &#39;00000000-0000-0000-0000-000000000004&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;SUB-4&#39;, &#39;Subscription 4&#39;, 30200.00, 4, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO SUBSCRIPTION(ID, AUDIT_ID, IN_UTC, OUT_UTC, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME, FEES, DIVISOR, CREATED_BY, LAST_MODIFIED_BY) VALUES(5, &#39;00000000-0000-0000-0000-000000000005&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;SUB-5&#39;, &#39;Subscription 5&#39;, 850.00, 1, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO SUBSCRIPTION(ID, AUDIT_ID, IN_UTC, OUT_UTC, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME, FEES, DIVISOR, CREATED_BY, LAST_MODIFIED_BY) VALUES(6, &#39;00000000-0000-0000-0000-000000000006&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;SUB-6&#39;, &#39;Subscription 6&#39;, 1400.00, 1, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO SUBSCRIPTION(ID, AUDIT_ID, IN_UTC, OUT_UTC, SUBSCRIPTION_CODE, SUBSCRIPTION_NAME, FEES, DIVISOR, CREATED_BY, LAST_MODIFIED_BY) VALUES(7, &#39;00000000-0000-0000-0000-000000000007&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;SUB-7&#39;, &#39;Subscription 7&#39;, 2200.00, 1, &#39;unknown&#39;, &#39;unknown&#39;)
+
+
+-- PROJECT-EMPLOYEE-MAP
+--  PROJECT 1
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, PROJECT_ID, EMPLOYEE_ID, APPROPRIATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(1, &#39;00000000-0000-0000-0000-000000000001&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 1, 1, 0.8, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, PROJECT_ID, EMPLOYEE_ID, APPROPRIATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(2, &#39;00000000-0000-0000-0000-000000000002&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 1, 3, 0.9, &#39;unknown&#39;, &#39;unknown&#39;)
+--  PROJECT 2
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, PROJECT_ID, EMPLOYEE_ID, APPROPRIATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(3, &#39;00000000-0000-0000-0000-000000000003&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 2, 2, 0.6, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, PROJECT_ID, EMPLOYEE_ID, APPROPRIATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(4, &#39;00000000-0000-0000-0000-000000000004&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 2, 4, 0.3, &#39;unknown&#39;, &#39;unknown&#39;)
+-- PROJECT 3
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, PROJECT_ID, EMPLOYEE_ID, APPROPRIATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(5, &#39;00000000-0000-0000-0000-000000000005&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 3, 1, 0.2, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, PROJECT_ID, EMPLOYEE_ID, APPROPRIATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(6, &#39;00000000-0000-0000-0000-000000000006&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 3, 2, 0.4, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, PROJECT_ID, EMPLOYEE_ID, APPROPRIATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(7, &#39;00000000-0000-0000-0000-000000000007&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 3, 3, 0.1, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO PROJECT_EMPLOYEE_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, PROJECT_ID, EMPLOYEE_ID, APPROPRIATION, CREATED_BY, LAST_MODIFIED_BY) VALUES(8, &#39;00000000-0000-0000-0000-000000000008&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 3, 4, 0.7, &#39;unknown&#39;, &#39;unknown&#39;)
+
+-- EMPLOYEE-SUBSCRIPTION-MAP
+--  EMPLOYEE-1
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(1, &#39;00000000-0000-0000-0000-000000000001&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 1, 1, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(2, &#39;00000000-0000-0000-0000-000000000002&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 1, 2, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(3, &#39;00000000-0000-0000-0000-000000000003&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 1, 3, &#39;unknown&#39;, &#39;unknown&#39;)
+--  EMPLOYEE-2
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(4, &#39;00000000-0000-0000-0000-000000000004&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 2, 1, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(5, &#39;00000000-0000-0000-0000-000000000005&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 2, 2, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(6, &#39;00000000-0000-0000-0000-000000000006&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 2, 3, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(7, &#39;00000000-0000-0000-0000-000000000007&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 2, 4, &#39;unknown&#39;, &#39;unknown&#39;)
+--  EMPLOYEE-3
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(8, &#39;00000000-0000-0000-0000-000000000008&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 3, 1, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(9, &#39;00000000-0000-0000-0000-000000000009&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 3, 3, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(10, &#39;00000000-0000-0000-0000-000000000010&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 3, 5, &#39;unknown&#39;, &#39;unknown&#39;)
+--  EMPLOYEE-4
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(11, &#39;00000000-0000-0000-0000-000000000011&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 4, 2, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(12, &#39;00000000-0000-0000-0000-000000000012&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 4, 4, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(13, &#39;00000000-0000-0000-0000-000000000013&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 4, 6, &#39;unknown&#39;, &#39;unknown&#39;)
+--  EMPLOYEE-5
+INSERT INTO EMPLOYEE_SUBSCRIPTION_MAP(ID, AUDIT_ID, IN_UTC, OUT_UTC, EMPLOYEE_ID, SUBSCRIPTION_ID, CREATED_BY, LAST_MODIFIED_BY) VALUES(14, &#39;00000000-0000-0000-0000-000000000014&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, 5, 1, &#39;unknown&#39;, &#39;unknown&#39;)
+
+--SEQUENCE
+alter sequence HIBERNATE_SEQUENCE restart with 101</pre>
+</div></div></td></tr></tbody></table></div><h1 id="AddBusinessLogic-ChangestoEntityObjects">Changes to Entity Objects</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {&quot;auditId&quot;, &quot;out_utc&quot;})
+})
+public class Project extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    @JsonProperty
+    private int ID;
+    private String auditId = UUID.randomUUID().toString();
+    private String projectName;
+    private String projectDescription;
+    private double revenue;
+    @JsonIgnore
+    @OneToMany(mappedBy = &quot;project&quot;)
+    private List&lt;ProjectEmployeePair&gt; projectEmployeePairs = new ArrayList&lt;&gt;();
+    @Transient
+    private List&lt;Employee&gt; employees;
+
+    //  Constructor for the audit record
+    public Project(Project other)
+    {
+        super();
+        this.auditId = other.auditId;
+        this.projectName = other.projectName;
+        this.projectDescription = other.projectDescription;
+        this.setOutUtc(ZonedDateTime.now());
+        this.setInUtc(other.getInUtc());
+    }
+
+    public Project(int id, String projectName, String projectDescription, double revenue)
+    {
+        this.ID = id;
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
+        this.revenue = revenue;
+    }
+
+
+    public Project()
+    {
+        super();
+    }
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getProjectName()
+    {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName)
+    {
+        this.projectName = projectName;
+    }
+
+    public String getProjectDescription()
+    {
+        return projectDescription;
+    }
+
+    public void setProjectDescription(String projectDescription)
+    {
+        this.projectDescription = projectDescription;
+    }
+
+    public double getRevenue()
+    {
+        return revenue;
+    }
+
+    public void setRevenue(double revenue)
+    {
+        this.revenue = revenue;
+    }
+
+    public List&lt;ProjectEmployeePair&gt; getProjectEmployeePairs()
+    {
+        return projectEmployeePairs;
+    }
+
+    public void setProjectEmployeePairs(List&lt;ProjectEmployeePair&gt; projectEmployeePairs)
+    {
+        this.projectEmployeePairs = projectEmployeePairs;
+    }
+
+    public String getAuditId()
+    {
+        return auditId;
+    }
+
+    public void setAuditId(String auditId)
+    {
+        this.auditId = auditId;
+    }
+
+    public List&lt;Employee&gt; getEmployees()
+    {
+        return employees;
+    }
+
+    public void setEmployees(List&lt;Employee&gt; employees)
+    {
+        this.employees = employees;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Project project = (Project) o;
+        return ID == project.ID &amp;&amp;
+                Objects.equals(projectName, project.projectName) &amp;&amp;
+                Objects.equals(projectDescription, project.projectDescription);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), ID, projectName, projectDescription);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(uniqueConstraints={
+                @UniqueConstraint(columnNames = {&quot;auditId&quot;, &quot;out_utc&quot;})
+        })
+public class Subscription extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    @JsonProperty
+    private int ID;
+    private String auditId = UUID.randomUUID().toString();
+    private String subscriptionCode;
+    private String subscriptionName;
+    private double fees;
+    private int divisor;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = &quot;subscription&quot;)
+    private List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = new ArrayList&lt;&gt;();
+    @Transient
+    private List&lt;Employee&gt; employees;
+
+    //  Constructor for the audit record
+    public Subscription(Subscription other)
+    {
+        super();
+        this.auditId = other.auditId;
+        this.subscriptionCode = other.subscriptionCode;
+        this.subscriptionName = other.subscriptionName;
+        this.fees = other.fees;
+        this.divisor = other.divisor;
+        this.setOutUtc(ZonedDateTime.now());
+        this.setInUtc(other.getInUtc());
+    }
+
+    public Subscription()
+    {
+        super();
+    }
+
+    public Subscription(int id, String subscriptionCode, String subscriptionName, double fees, int divisor)
+    {
+        this.ID = id;
+        this.subscriptionCode = subscriptionCode;
+        this.subscriptionName = subscriptionName;
+        this.fees = fees;
+        this.divisor = divisor;
+    }
+
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getSubscriptionCode()
+    {
+        return subscriptionCode;
+    }
+
+    public void setSubscriptionCode(String subscriptionCode)
+    {
+        this.subscriptionCode = subscriptionCode;
+    }
+
+    public String getSubscriptionName()
+    {
+        return subscriptionName;
+    }
+
+    public void setSubscriptionName(String subscriptionName)
+    {
+        this.subscriptionName = subscriptionName;
+    }
+
+    public double getFees()
+    {
+        return fees;
+    }
+
+    public void setFees(double fees)
+    {
+        this.fees = fees;
+    }
+
+    public int getDivisor()
+    {
+        return divisor;
+    }
+
+    public void setDivisor(int divisor)
+    {
+        this.divisor = divisor;
+    }
+
+    public List&lt;EmployeeSubscriptionPair&gt; getEmployeeSubscriptionPairs()
+    {
+        return employeeSubscriptionPairs;
+    }
+
+    public void setEmployeeSubscriptionPairs(List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs)
+    {
+        this.employeeSubscriptionPairs = employeeSubscriptionPairs;
+    }
+
+    public String getAuditId()
+    {
+        return auditId;
+    }
+
+    public void setAuditId(String auditId)
+    {
+        this.auditId = auditId;
+    }
+
+    public List&lt;Employee&gt; getEmployees()
+    {
+        return employees;
+    }
+
+    public void setEmployees(List&lt;Employee&gt; employees)
+    {
+        this.employees = employees;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Subscription that = (Subscription) o;
+        return ID == that.ID &amp;&amp;
+                Objects.equals(subscriptionCode, that.subscriptionCode) &amp;&amp;
+                Objects.equals(subscriptionName, that.subscriptionName);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), ID, subscriptionCode, subscriptionName);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(name = &quot;PROJECT_EMPLOYEE_MAP&quot;,
+        uniqueConstraints={
+        @UniqueConstraint(columnNames = {&quot;auditId&quot;, &quot;out_utc&quot;})
+})
+public class ProjectEmployeePair extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String auditId = UUID.randomUUID().toString();
+    private double appropriation;
+    @ManyToOne
+    @JoinColumn(name = &quot;project_id&quot;)
+    private Project project;
+    @ManyToOne
+    @JoinColumn(name = &quot;employee_id&quot;)
+    private Employee employee;
+
+    public ProjectEmployeePair(Project project, Employee employee, double appropriation)
+    {
+        this.project = project;
+        this.employee = employee;
+    }
+
+    public ProjectEmployeePair()
+    {
+    }
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public Project getProject()
+    {
+        return project;
+    }
+
+    public void setProject(Project project)
+    {
+        this.project = project;
+    }
+
+    public Employee getEmployee()
+    {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee)
+    {
+        this.employee = employee;
+    }
+
+    public String getAuditId()
+    {
+        return auditId;
+    }
+
+    public void setAuditId(String auditId)
+    {
+        this.auditId = auditId;
+    }
+
+    public double getAppropriation()
+    {
+        return appropriation;
+    }
+
+    public void setAppropriation(double appropriation)
+    {
+        this.appropriation = appropriation;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="AddBusinessLogic-ChangestoDTOObjects">Changes to DTO Objects</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class ProjectDTO
+{
+    private int projectID;
+    private String projectName;
+    private String projectDescription;
+    private double revenue;
+
+    public ProjectDTO(Project project)
+    {
+        this.projectID = project.getID();
+        this.projectName = project.getProjectName();
+        this.projectDescription = project.getProjectDescription();
+        this.revenue = project.getRevenue();
+    }
+
+    public ProjectDTO()
+    {
+
+    }
+
+    public int getProjectID()
+    {
+        return projectID;
+    }
+
+    public void setProjectID(int projectID)
+    {
+        this.projectID = projectID;
+    }
+
+    public String getProjectName()
+    {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName)
+    {
+        this.projectName = projectName;
+    }
+
+    public String getProjectDescription()
+    {
+        return projectDescription;
+    }
+
+    public void setProjectDescription(String projectDescription)
+    {
+        this.projectDescription = projectDescription;
+    }
+
+    public double getRevenue()
+    {
+        return revenue;
+    }
+
+    public void setRevenue(double revenue)
+    {
+        this.revenue = revenue;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class SubscriptionDTO extends ResourceSupport
+{
+    private int subscriptionID;
+    private String subscriptionCode;
+    private String subscriptionName;
+    private double fees;
+    private int divisor;
+
+    public SubscriptionDTO(Subscription subscription)
+    {
+        this.subscriptionID = subscription.getID();
+        this.subscriptionCode = subscription.getSubscriptionCode();
+        this.subscriptionName = subscription.getSubscriptionName();
+        this.fees = subscription.getFees();
+        this.divisor = subscription.getDivisor();
+    }
+
+    public SubscriptionDTO()
+    {}
+
+    public int getSubscriptionID()
+    {
+        return subscriptionID;
+    }
+
+    public void setSubscriptionID(int subscriptionID)
+    {
+        this.subscriptionID = subscriptionID;
+    }
+
+    public String getSubscriptionCode()
+    {
+        return subscriptionCode;
+    }
+
+    public void setSubscriptionCode(String subscriptionCode)
+    {
+        this.subscriptionCode = subscriptionCode;
+    }
+
+    public String getSubscriptionName()
+    {
+        return subscriptionName;
+    }
+
+    public void setSubscriptionName(String subscriptionName)
+    {
+        this.subscriptionName = subscriptionName;
+    }
+
+    public double getFees()
+    {
+        return fees;
+    }
+
+    public void setFees(double fees)
+    {
+        this.fees = fees;
+    }
+
+    public int getDivisor()
+    {
+        return divisor;
+    }
+
+    public void setDivisor(int divisor)
+    {
+        this.divisor = divisor;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="AddBusinessLogic-ChangestoProjectEmployeeControllerandProjectEmployeeLinksfor/employees/projects">Changes to ProjectEmployeeController and ProjectEmployeeLinks for /employees/projects</h1><p>For <code>ProjectEmployeeController</code>, we need to make changes to <code>getEmployeesProjects()</code> and <code>getProjectsEmployees()</code> methods where will will pass <code>ProjectEmployeePair</code> list directly to <code>ProjectEmployeeLinks</code></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@GetMapping(&quot;/employees/projects&quot;)
+public ResponseEntity&lt;List&lt;Resource&lt;Employee&gt;&gt;&gt; getEmployeesProjects()
+{
+    List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findAll();
+    List&lt;Resource&lt;Employee&gt;&gt; employeeResources = projectEmployeeLinks.createEmployeeProjectResources(projectEmployeePairs, this);
+    return ResponseEntity.ok(employeeResources);
+}</pre>
+</div></div></td></tr></tbody></table></div><p><code>ProjectEmployeeLinks.createEmployeeProjectResources</code> method will save <code>ProjectEmployeePair</code> list to be used later</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+private List&lt;ProjectEmployeePair&gt; projectEmployeePairs;
+...
+public List&lt;Resource&lt;Employee&gt;&gt; createEmployeeProjectResources(List&lt;ProjectEmployeePair&gt; projectEmployeePairs,
+                                                               ProjectEmployeeBaseController baseController)
+{
+    this.projectEmployeePairs = projectEmployeePairs;
+    Map&lt;Employee, List&lt;Project&gt;&gt; employeeProjectsMap = projectEmployeePairs.stream()
+            .collect(Collectors
+                    .groupingBy(ProjectEmployeePair::getEmployee,
+                            Collectors.mapping(ProjectEmployeePair::getProject, Collectors.toList())));
+    List&lt;Resource&lt;Employee&gt;&gt; employeeResources = new ArrayList&lt;&gt;();
+    for(Map.Entry&lt;Employee, List&lt;Project&gt;&gt; e : employeeProjectsMap.entrySet())
+    {
+        Employee employee = e.getKey();
+        List&lt;Project&gt; projects = e.getValue();
+        Resource&lt;Employee&gt; employeeResource = baseController.createEmployeeProjectResource(employee, projects);
+        employeeResources.add(employeeResource);
+    }
+    return employeeResources;
+}</pre>
+</div></div></td></tr></tbody></table></div><p><code>ProjectEmployeeLinks.addLinks(Employee employee, Resource&lt;Employee&gt; employeeResource, List&lt;Project&gt; projects, Link link)</code> will be modified to extract appropriation</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public void addLinks(Employee employee, Resource&lt;Employee&gt; employeeResource, List&lt;Project&gt; projects, Link link)
+{
+    NumberFormat percentageFormat = NumberFormat.getPercentInstance();
+    percentageFormat.setMinimumFractionDigits(2);
+    employeeResource.add(link);
+    for(Project project : projects)
+    {
+        double appropriation = 1.0;
+        Optional&lt;ProjectEmployeePair&gt; projectEmployeePairOptional = projectEmployeePairs.stream()
+                .filter(p -&gt; p.getProject().equals(project))
+                .filter(p -&gt; p.getEmployee().equals(employee))
+                .findAny();
+        if(projectEmployeePairOptional.isPresent())
+        {
+            ProjectEmployeePair projectEmployeePair = projectEmployeePairOptional.get();
+            appropriation = projectEmployeePair.getAppropriation();
+        }
+        String appropriationPercent = percentageFormat.format(appropriation);
+        Link projectLink = linkTo(methodOn(ProjectController.class)
+                .getProjects(project.getID()))
+                .withRel(&quot;project &#39;&quot; + project.getProjectName() + &quot;&#39; @ &quot; + appropriationPercent);
+        employeeResource.add(projectLink);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="AddBusinessLogic-ChangestoProjectEmployeeControllerandProjectEmployeeLinksfor/employees/{id}/projects">Changes to ProjectEmployeeController and ProjectEmployeeLinks for /employees/{id}/projects</h1><p>Modify ProjectEmployeeController.getEmployeesProjects(@PathVariable(&quot;id&quot;) int id)</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@GetMapping(&quot;/employees/{id}/projects&quot;)
+public ResponseEntity&lt;Resource&lt;Employee&gt;&gt; getEmployeesProjects(@PathVariable(&quot;id&quot;) int id)
+{
+    List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findByEmployeeId(id);
+    if(projectEmployeePairs.isEmpty())
+    {
+        throw new NotFoundException(&quot;employee-&quot; + id);
+    }
+    Resource&lt;Employee&gt; employeeResource = projectEmployeeLinks.createEmployeeProjectResource(projectEmployeePairs, this);
+    employeeResource.add(linkTo(methodOn(getClass()).getEmployeesProjects()).withRel(&quot;all&quot;));
+    return ResponseEntity.ok(employeeResource);
+}</pre>
+</div></div></td></tr></tbody></table></div><p>Add new function to ProjectEmployeeLinks</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public Resource&lt;Employee&gt; createEmployeeProjectResource(List&lt;ProjectEmployeePair&gt; projectEmployeePairs,
+                                                               ProjectEmployeeBaseController baseController)
+{
+    this.projectEmployeePairs = projectEmployeePairs;
+    Optional&lt;Employee&gt; employeeOptional = projectEmployeePairs.stream().map(ProjectEmployeePair::getEmployee).findFirst()
+    List&lt;Project&gt; projects = projectEmployeePairs
+            .stream()
+            .map(ProjectEmployeePair::getProject)
+            .collect(Collectors.toList());
+    Employee employee = employeeOptional.get();
+    return baseController.createEmployeeProjectResource(employee, projects);
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><p>The output will display appropriation in the project link</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>GET Request</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p>localhost:8081/employees/projects</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">[
+  {
+    &quot;createdBy&quot;: &quot;unknown&quot;,
+    &quot;lastModifiedBy&quot;: &quot;unknown&quot;,
+    &quot;inUtc&quot;: &quot;2020-05-15T18:19:52.434+0000&quot;,
+    &quot;outUtc&quot;: &quot;9999-12-31T00:00:00Z&quot;,
+    &quot;ID&quot;: 1,
+    &quot;auditId&quot;: &quot;00000000-0000-0000-0000-000000000001&quot;,
+    &quot;employeeCode&quot;: &quot;EC-1&quot;,
+    &quot;employeeName&quot;: &quot;One First&quot;,
+    &quot;compensation&quot;: 120000,
+    &quot;links&quot;: [
+      {
+        &quot;rel&quot;: &quot;self&quot;,
+        &quot;href&quot;: &quot;http://localhost:8081/employees/1/projects&quot;
+      },
+      {
+        &quot;rel&quot;: &quot;project &#39;P-1&#39; @ 90.00%&quot;,
+        &quot;href&quot;: &quot;http://localhost:8081/projects/1&quot;
+      },
+      {
+        &quot;rel&quot;: &quot;project &#39;P-3&#39; @ 10.00%&quot;,
+        &quot;href&quot;: &quot;http://localhost:8081/projects/3&quot;
+      }
+    ]
+  },
+  ...</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>localhost:8081/employees/1/projects</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;createdBy&quot;: &quot;unknown&quot;,
+  &quot;lastModifiedBy&quot;: &quot;unknown&quot;,
+  &quot;inUtc&quot;: &quot;2020-05-15T18:19:52.434+0000&quot;,
+  &quot;outUtc&quot;: &quot;9999-12-31T00:00:00Z&quot;,
+  &quot;auditId&quot;: &quot;00000000-0000-0000-0000-000000000001&quot;,
+  &quot;employeeCode&quot;: &quot;EC-1&quot;,
+  &quot;employeeName&quot;: &quot;One First&quot;,
+  &quot;compensation&quot;: 120000,
+  &quot;_links&quot;: {
+    &quot;self&quot;: {
+      &quot;href&quot;: &quot;http://localhost:8081/employees/1/projects&quot;
+    },
+    &quot;project &#39;P-1&#39; @ 90.00%&quot;: {
+      &quot;href&quot;: &quot;http://localhost:8081/projects/1&quot;
+    },
+    &quot;project &#39;P-3&#39; @ 10.00%&quot;: {
+      &quot;href&quot;: &quot;http://localhost:8081/projects/3&quot;
+    },
+    &quot;all&quot;: {
+      &quot;href&quot;: &quot;http://localhost:8081/employees/projects&quot;
+    }
+  }
+}</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>localhost:8081/projects/employees</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">[
+  {
+    &quot;createdBy&quot;: &quot;unknown&quot;,
+    &quot;lastModifiedBy&quot;: &quot;unknown&quot;,
+    &quot;inUtc&quot;: &quot;2020-05-15T18:19:52.429+0000&quot;,
+    &quot;outUtc&quot;: &quot;9999-12-31T00:00:00Z&quot;,
+    &quot;ID&quot;: 2,
+    &quot;auditId&quot;: &quot;00000000-0000-0000-0000-000000000002&quot;,
+    &quot;projectName&quot;: &quot;P-2&quot;,
+    &quot;projectDescription&quot;: &quot;Project two&quot;,
+    &quot;revenue&quot;: 700000,
+    &quot;links&quot;: [
+      {
+        &quot;rel&quot;: &quot;self&quot;,
+        &quot;href&quot;: &quot;http://localhost:8081/projects/2/employees&quot;
+      },
+      {
+        &quot;rel&quot;: &quot;employee &#39;Two Second&#39; @ 90.00%&quot;,
+        &quot;href&quot;: &quot;http://localhost:8081/employees/2&quot;
+      },
+      {
+        &quot;rel&quot;: &quot;employee &#39;Four Forth&#39; @ 30.00%&quot;,
+        &quot;href&quot;: &quot;http://localhost:8081/employees/4&quot;
+      }
+    ]
+  },</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>localhost:8081/projects/1/employees</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;createdBy&quot;: &quot;unknown&quot;,
+  &quot;lastModifiedBy&quot;: &quot;unknown&quot;,
+  &quot;inUtc&quot;: &quot;2020-05-15T18:19:52.424+0000&quot;,
+  &quot;outUtc&quot;: &quot;9999-12-31T00:00:00Z&quot;,
+  &quot;auditId&quot;: &quot;00000000-0000-0000-0000-000000000001&quot;,
+  &quot;projectName&quot;: &quot;P-1&quot;,
+  &quot;projectDescription&quot;: &quot;Project one&quot;,
+  &quot;revenue&quot;: 1200000,
+  &quot;_links&quot;: {
+    &quot;self&quot;: {
+      &quot;href&quot;: &quot;http://localhost:8081/projects/1/employees&quot;
+    },
+    &quot;employee &#39;One First&#39; @ 90.00%&quot;: {
+      &quot;href&quot;: &quot;http://localhost:8081/employees/1&quot;
+    },
+    &quot;employee &#39;Three Third&#39; @ 90.00%&quot;: {
+      &quot;href&quot;: &quot;http://localhost:8081/employees/3&quot;
+    },
+    &quot;all&quot;: {
+      &quot;href&quot;: &quot;http://localhost:8081/projects/employees&quot;
+    }
+  }
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h1 id="AddBusinessLogic-Createnewclass-ProfitDTO">Create new class - ProfitDTO</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class ProfitDTO extends ResourceSupport
+{
+    @JsonIgnore
+    private int projectID;
+    private String projectName;
+    private double revenue;
+    private double profit;
+    private double profitability = 1.0;
+
+
+    public ProfitDTO(Project project)
+    {
+        this.projectName = project.getProjectName();
+        this.revenue = project.getRevenue();
+        this.profit = project.getRevenue();
+        this.projectID = project.getID();
+    }
+
+    public String getProjectName()
+    {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName)
+    {
+        this.projectName = projectName;
+    }
+
+    public double getRevenue()
+    {
+        return revenue;
+    }
+
+    public void setRevenue(double revenue)
+    {
+        this.revenue = revenue;
+    }
+
+    public double getProfit()
+    {
+         return profit;
+    }
+
+    public void setProfit(double profit)
+    {
+        this.profit = profit;
+    }
+
+    public String getProfitability()
+    {
+        NumberFormat percentageFormat = NumberFormat.getPercentInstance();
+        percentageFormat.setMinimumFractionDigits(2);
+        return percentageFormat.format(profitability);
+    }
+
+    public void setProfitability(double profitability)
+    {
+        this.profitability = profitability;
+    }
+
+    public int getProjectID()
+    {
+        return projectID;
+    }
+
+    public void setProjectID(int projectID)
+    {
+        this.projectID = projectID;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProfitDTO profitDTO = (ProfitDTO) o;
+        return Objects.equals(projectName, profitDTO.projectName);
+    }
+
+    @Override
+    public int hashCode()
+    {
+
+        return Objects.hash(projectName);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="AddBusinessLogic-ProfitControllertoaccountforEmployeeCostsonly,i.e.NoSubscriptioncosttakenintoaccount">Profit Controller to account for Employee Costs only, i.e. No Subscription cost taken into account</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/*
+    Representation of data from data.sql
+    ====================================
+    Project Revenue:
+    ----------------
+    P1  -   1,200,000
+    P2  -   700,000
+    P3  -   2,300,000
+
+    Employee Salaries
+    -----------------
+    Employee    Salary
+    ------------------
+    1           120000
+    2           240000
+    3           190000
+    4           185000
+
+    Project Employee Appropriation
+    ------------------------------
+    Project Revenue Employee Appropriation          Calculation
+    --------------------------------------------------------------------------------------------------
+    1       1200000 1(.8) + 3(.9)                   1200000 - .8 * 120000 - .9 * 190000 = 933000
+    2       700000  2(.6) + 4(.3)                   700000 - .6 * 240000 - .3 * 185000  = 500500
+    3       2300000 1(.2) + 2(.4) + 3(.1) + 4(.7)   2300000 - .2 * 120000 - .4 * 240000 - .1 * 190000 - .7 * 185000 = 2031500
+*/
+@RestController
+public class ProfitController
+{
+    // TODO:
+    //  Employees not assigned to any projects
+    //  When employee is added to project or project added to employee, need to modify appropriation for other projects
+    //  Add validation for appropriation
+    @Autowired
+    private EmployeeSubscriptionMapRepository employeeSubscriptionMapRepository;
+    @Autowired
+    private ProjectEmployeeMapRepository projectEmployeeMapRepository;
+    @Autowired
+    private ProjectRepository projectRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @GetMapping(&quot;/profits&quot;)
+    public ResponseEntity&lt;List&lt;ProfitDTO&gt;&gt; getProfits()
+    {
+        List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findAll();
+
+        //  Collection of live projects with their original revenue
+        List&lt;ProfitDTO&gt; profitDTOs = projectEmployeeMapRepository
+                .findAll()
+                .stream()
+                .map(ProjectEmployeePair::getProject)
+                .distinct()
+                .map(ProfitDTO::new)
+                .map(p -&gt; { p.add(linkTo(methodOn(ProjectController.class).getProjects(p.getProjectID())).withRel(&quot;project&quot;)); return p;})
+                .collect(Collectors.toList());
+
+        //  Employee to project appropriation map
+        Map&lt;Employee, List&lt;Double&gt;&gt; employeeProjectsAppropriationMap = projectEmployeePairs
+                .stream()
+                .collect(Collectors.groupingBy(ProjectEmployeePair::getEmployee,
+                        Collectors.mapping(ProjectEmployeePair::getAppropriation, Collectors.toList())));
+
+        //  Find assigned employees
+         Map&lt;Employee, List&lt;Project&gt;&gt; employeeProjectsMap = projectEmployeePairs
+                .stream()
+                .collect(Collectors.groupingBy(ProjectEmployeePair::getEmployee,
+                        Collectors.mapping(ProjectEmployeePair::getProject, Collectors.toList())));
+
+        for(Map.Entry&lt;Employee, List&lt;Project&gt;&gt; entry : employeeProjectsMap.entrySet())
+        {
+            Employee employee = entry.getKey();
+            List&lt;Project&gt; projects = entry.getValue();
+
+            List&lt;Double&gt; projectAppropriations = employeeProjectsAppropriationMap.get(employee);
+            for(int i = 0; i &lt; projects.size(); ++i)
+            {
+                Project project = projects.get(i);
+                ProfitDTO profitDTO = new ProfitDTO(project);
+                double appropriation = projectAppropriations.get(i);
+                double employeeCompensation = employee.getCompensation();
+                Optional&lt;ProfitDTO&gt; profitDTOOptional = profitDTOs.stream().filter(profitDTO::equals).findAny();
+                if(profitDTOOptional.isPresent())
+                {
+                    profitDTO = profitDTOOptional.get();
+                    double newProfit = profitDTO.getProfit() - (appropriation * employeeCompensation);
+                    profitDTO.setProfit(newProfit);
+                    profitDTO.setProfitability(newProfit / profitDTO.getRevenue());
+                }
+            }
+        }
+
+
+
+        return ResponseEntity.ok(profitDTOs);
+    }
+
+
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="AddBusinessLogic-Test">Test</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>GET Request</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p>localhost:8081/profits</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">[
+  {
+    &quot;projectName&quot;: &quot;P-1&quot;,
+    &quot;revenue&quot;: 1200000,
+    &quot;profit&quot;: 933000,
+    &quot;profitability&quot;: &quot;77.75%&quot;,
+    &quot;links&quot;: [
+      {
+        &quot;rel&quot;: &quot;project&quot;,
+        &quot;href&quot;: &quot;http://localhost:8081/projects/1&quot;
+      }
+    ]
+  },
+  {
+    &quot;projectName&quot;: &quot;P-2&quot;,
+    &quot;revenue&quot;: 700000,
+    &quot;profit&quot;: 500500,
+    &quot;profitability&quot;: &quot;71.50%&quot;,
+    &quot;links&quot;: [
+      {
+        &quot;rel&quot;: &quot;project&quot;,
+        &quot;href&quot;: &quot;http://localhost:8081/projects/2&quot;
+      }
+    ]
+  },
+  {
+    &quot;projectName&quot;: &quot;P-3&quot;,
+    &quot;revenue&quot;: 2300000,
+    &quot;profit&quot;: 2031500,
+    &quot;profitability&quot;: &quot;88.33%&quot;,
+    &quot;links&quot;: [
+      {
+        &quot;rel&quot;: &quot;project&quot;,
+        &quot;href&quot;: &quot;http://localhost:8081/projects/3&quot;
+      }
+    ]
+  }
+]</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h1 id="AddBusinessLogic-FinalProfitControllerwithSubscriptionCosts">Final Profit Controller with Subscription Costs</h1><h2 id="AddBusinessLogic-ModifiedProfitDTO">Modified ProfitDTO</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class ProfitDTO extends ResourceSupport
+{
+    @JsonIgnore
+    private int projectID;
+    private String projectName;
+    private double revenue;
+    @JsonIgnore
+    private double profit;
+    private double compensationCost;
+    private double subscriptionCost;
+    private double profitability = 1.0;
+
+
+    public ProfitDTO(Project project)
+    {
+        this.projectName = project.getProjectName();
+        this.revenue = project.getRevenue();
+        this.profit = project.getRevenue();
+        this.projectID = project.getID();
+    }
+
+    public String getProjectName()
+    {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName)
+    {
+        this.projectName = projectName;
+    }
+
+    public double getRevenue()
+    {
+        return revenue;
+    }
+
+    public void setRevenue(double revenue)
+    {
+        this.revenue = revenue;
+    }
+
+    public double getProfit()
+    {
+         return profit;
+    }
+
+    public void setProfit(double profit)
+    {
+        this.profit = profit;
+    }
+
+    public String getProfitability()
+    {
+        NumberFormat percentageFormat = NumberFormat.getPercentInstance();
+        percentageFormat.setMinimumFractionDigits(2);
+        return percentageFormat.format(profitability);
+    }
+
+    public void setProfitability(double profitability)
+    {
+        this.profitability = profitability;
+    }
+
+    public int getProjectID()
+    {
+        return projectID;
+    }
+
+    public void setProjectID(int projectID)
+    {
+        this.projectID = projectID;
+    }
+
+    public double getCompensationCost()
+    {
+        return compensationCost;
+    }
+
+    public void setCompensationCost(double compensationCost)
+    {
+        this.compensationCost = compensationCost;
+    }
+
+    public double getSubscriptionCost()
+    {
+        return subscriptionCost;
+    }
+
+    public void setSubscriptionCost(double subscriptionCost)
+    {
+        this.subscriptionCost = subscriptionCost;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProfitDTO profitDTO = (ProfitDTO) o;
+        return Objects.equals(projectName, profitDTO.projectName);
+    }
+
+    @Override
+    public int hashCode()
+    {
+
+        return Objects.hash(projectName);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="AddBusinessLogic-ModifiedProfitController">Modified ProfitController</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">/*
+    Representation of data from data.sql
+    ====================================
+    Project Revenue:
+    ----------------
+    P1  -   1,200,000
+    P2  -   700,000
+    P3  -   2,300,000
+
+    Employee Salaries
+    -----------------
+    Employee    Salary
+    ------------------
+    1           120000
+    2           240000
+    3           190000
+    4           185000
+
+    Project Employee Appropriation
+    ------------------------------
+    Project Revenue Employee Appropriation          Calculation
+    --------------------------------------------------------------------------------------------------
+    1       1200000 1(.8) + 3(.9)                   1200000 - .8 * 120000 - .9 * 190000 = 933000
+    2       700000  2(.6) + 4(.3)                   700000 - .6 * 240000 - .3 * 185000  = 500500
+    3       2300000 1(.2) + 2(.4) + 3(.1) + 4(.7)   2300000 - .2 * 120000 - .4 * 240000 - .1 * 190000 - .7 * 185000 = 2031500
+*/
+@RestController
+public class ProfitController
+{
+    // TODO:
+    //  Employees not assigned to any projects
+    //  When employee is added to project or project added to employee, need to modify appropriation for other projects
+    //  Add validation for appropriation
+    @Autowired
+    private EmployeeSubscriptionMapRepository employeeSubscriptionMapRepository;
+    @Autowired
+    private ProjectEmployeeMapRepository projectEmployeeMapRepository;
+    @Autowired
+    private ProjectRepository projectRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @GetMapping(&quot;/profits&quot;)
+    public ResponseEntity&lt;List&lt;ProfitDTO&gt;&gt; getProfits()
+    {
+        List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findAll();
+
+        //  Collection of live projects with their original revenue
+        List&lt;ProfitDTO&gt; profitDTOs = projectEmployeeMapRepository
+                .findAll()
+                .stream()
+                .map(ProjectEmployeePair::getProject)
+                .distinct()
+                .map(ProfitDTO::new)
+                .map(p -&gt; { p.add(linkTo(methodOn(ProjectController.class).getProjects(p.getProjectID())).withRel(&quot;project&quot;)); return p;})
+                .collect(Collectors.toList());
+
+        //  Employee to project appropriation map
+        Map&lt;Employee, List&lt;Double&gt;&gt; employeeProjectsAppropriationMap = projectEmployeePairs
+                .stream()
+                .collect(Collectors.groupingBy(ProjectEmployeePair::getEmployee,
+                        Collectors.mapping(ProjectEmployeePair::getAppropriation, Collectors.toList())));
+
+        //  Find assigned employees
+        Map&lt;Employee, List&lt;Project&gt;&gt; employeeProjectsMap = projectEmployeePairs
+                .stream()
+                .collect(Collectors.groupingBy(ProjectEmployeePair::getEmployee,
+                        Collectors.mapping(ProjectEmployeePair::getProject, Collectors.toList())));
+
+        for(Map.Entry&lt;Employee, List&lt;Project&gt;&gt; entry : employeeProjectsMap.entrySet())
+        {
+            Employee employee = entry.getKey();
+            List&lt;Project&gt; projects = entry.getValue();
+
+            List&lt;Double&gt; projectAppropriations = employeeProjectsAppropriationMap.get(employee);
+            for(int i = 0; i &lt; projects.size(); ++i)
+            {
+                Project project = projects.get(i);
+                ProfitDTO profitDTO = new ProfitDTO(project);
+                double appropriation = projectAppropriations.get(i);
+                double employeeCompensation = employee.getCompensation();
+                Optional&lt;ProfitDTO&gt; profitDTOOptional = profitDTOs.stream().filter(profitDTO::equals).findAny();
+                if(profitDTOOptional.isPresent())
+                {
+                    profitDTO = profitDTOOptional.get();
+                    double compensationCost = appropriation * employeeCompensation;
+                    double subscriptionCost = appropriation * getEmployeeSubscriptionCosts(employee);
+                    double adjustedProfit = profitDTO.getProfit() - compensationCost - subscriptionCost;
+                    profitDTO.setProfit(adjustedProfit);
+                    profitDTO.setProfitability(adjustedProfit / profitDTO.getRevenue());
+                    profitDTO.setCompensationCost(profitDTO.getCompensationCost() + compensationCost);
+                    profitDTO.setSubscriptionCost(profitDTO.getSubscriptionCost() + subscriptionCost);
+                }
+            }
+        }
+
+        return ResponseEntity.ok(profitDTOs);
+    }
+
+    private double getEmployeeSubscriptionCosts(Employee employee)
+    {
+        List&lt;Subscription&gt; subscriptions = employeeSubscriptionMapRepository
+                .findByEmployeeId(employee.getID())
+                .stream()
+                .map(EmployeeSubscriptionPair::getSubscription)
+                .collect(Collectors.toList());
+
+        double sum = subscriptions.stream().collect(Collectors.summingDouble(x -&gt; x.getFees() / x.getDivisor()));
+        return sum;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p>Test</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Request</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p>localhost:8081/profits<br/></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">[
+  {
+    &quot;projectName&quot;: &quot;P-1&quot;,
+    &quot;revenue&quot;: 1200000,
+    &quot;compensationCost&quot;: 267000,
+    &quot;subscriptionCost&quot;: 15805,
+    &quot;profitability&quot;: &quot;76.43%&quot;,
+    &quot;links&quot;: [
+      {
+        &quot;rel&quot;: &quot;project&quot;,
+        &quot;href&quot;: &quot;http://localhost:8081/projects/1&quot;
+      }
+    ]
+  },
+  {
+    &quot;projectName&quot;: &quot;P-2&quot;,
+    &quot;revenue&quot;: 700000,
+    &quot;compensationCost&quot;: 199500,
+    &quot;subscriptionCost&quot;: 19935,
+    &quot;profitability&quot;: &quot;68.65%&quot;,
+    &quot;links&quot;: [
+      {
+        &quot;rel&quot;: &quot;project&quot;,
+        &quot;href&quot;: &quot;http://localhost:8081/projects/2&quot;
+      }
+    ]
+  },
+  {
+    &quot;projectName&quot;: &quot;P-3&quot;,
+    &quot;revenue&quot;: 2300000,
+    &quot;compensationCost&quot;: 268500,
+    &quot;subscriptionCost&quot;: 27210,
+    &quot;profitability&quot;: &quot;87.14%&quot;,
+    &quot;links&quot;: [
+      {
+        &quot;rel&quot;: &quot;project&quot;,
+        &quot;href&quot;: &quot;http://localhost:8081/projects/3&quot;
+      }
+    ]
+  }
+]</pre>
+</div></div></td></tr></tbody></table></div><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

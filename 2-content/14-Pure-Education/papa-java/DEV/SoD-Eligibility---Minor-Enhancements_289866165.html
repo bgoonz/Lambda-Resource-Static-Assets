@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : SoD Eligibility - Minor Enhancements</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Eligibility_289898573.html">Eligibility</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : SoD Eligibility - Minor Enhancements
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 19, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="SoDEligibility-MinorEnhancements-Donotneed@ResponseBodyfor@RestController">Do not need <code>@ResponseBody</code> for <code>@RestController</code></h1><h1 id="SoDEligibility-MinorEnhancements-IDFieldshouldappearbeforeallHATEOASLinks">ID Field should appear before all HATEOAS Links</h1><p>Currently, ID field appears last, after all HATEOAS links:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;ruleName&quot;: &quot;Refreshments-Rule&quot;,
+  &quot;ruleType&quot;: &quot;Allow&quot;,
+  &quot;ruleState&quot;: &quot;Draft&quot;,
+  &quot;propertiesPresentation&quot;: [
+    {
+      &quot;propertiesId&quot;: 1,
+      &quot;keyStore&quot;: {
+        &quot;Department&quot;: &quot;T123&quot;,
+        &quot;Level&quot;: &quot;VP&quot;,
+        &quot;Location&quot;: &quot;Singapore&quot;
+      }
+    },
+    {
+      &quot;propertiesId&quot;: 2,
+      &quot;keyStore&quot;: {
+        &quot;Department&quot;: &quot;T123&quot;,
+        &quot;Level&quot;: &quot;MD&quot;,
+        &quot;Location&quot;: &quot;Singapore&quot;
+      }
+    }
+  ],
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;self&quot;,
+      &quot;href&quot;: &quot;http://localhost.gs.com:8081/rules/1&quot;
+    }
+  ],
+  &quot;ID&quot;: 1
+},</pre>
+</div></div></td></tr></tbody></table></div><p>We would like for this field to appear first, as in:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;ID&quot;: 1,
+  &quot;dutyName&quot;: &quot;Refreshments&quot;,
+  &quot;privilegePresentations&quot;: [
+    {
+      &quot;privilegeName&quot;: &quot;Free coffee&quot;,
+      &quot;ID&quot;: 1
+    },
+    {
+      &quot;privilegeName&quot;: &quot;Free milk&quot;,
+      &quot;ID&quot;: 2
+    },
+    {
+      &quot;privilegeName&quot;: &quot;Free sugar&quot;,
+      &quot;ID&quot;: 3
+    }
+  ],
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;self&quot;,
+      &quot;href&quot;: &quot;http://localhost.gs.com:8081/duties/1&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;rule&quot;,
+      &quot;href&quot;: &quot;http://localhost.gs.com:8081/rules/1&quot;,
+      &quot;title&quot;: &quot;Refreshments-Rule&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;privilege&quot;,
+      &quot;href&quot;: &quot;http://localhost.gs.com:8081/privileges/1&quot;,
+      &quot;title&quot;: &quot;Free coffee&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;privilege&quot;,
+      &quot;href&quot;: &quot;http://localhost.gs.com:8081/privileges/2&quot;,
+      &quot;title&quot;: &quot;Free milk&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;privilege&quot;,
+      &quot;href&quot;: &quot;http://localhost.gs.com:8081/privileges/3&quot;,
+      &quot;title&quot;: &quot;Free sugar&quot;
+    }
+  ]
+},</pre>
+</div></div></td></tr></tbody></table></div><h3 id="SoDEligibility-MinorEnhancements-Use@JsonPropertyAnnotation">Use @JsonProperty Annotation</h3><p>Remove @JsonGetter(&quot;ID&quot;) and @JsonSetter(&quot;ID&quot;) and use @JsonProperty instead:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class DutyPresentation extends ResourceSupport
+{
+    @JsonProperty
+    private int ID;
+    ....
+}</pre>
+</div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

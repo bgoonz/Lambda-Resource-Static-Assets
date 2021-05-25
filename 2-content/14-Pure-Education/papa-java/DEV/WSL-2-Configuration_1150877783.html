@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : WSL 2 Configuration</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : WSL 2 Configuration
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Jan 29, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>See <a href="https://nickguner.atlassian.net/wiki/spaces/DEV/pages/1150484529/WSL+2+Installation+Instructions#Install-WSL-2" data-card-appearance="inline" rel="nofollow">https://nickguner.atlassian.net/wiki/spaces/DEV/pages/1150484529/WSL+2+Installation+Instructions#Install-WSL-2</a> </p><h1 id="WSL2Configuration-BashtoWindowsDirectories">Bash to Windows Directories</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 340.0px;"/><col style="width: 340.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Bash</strong></p></th><td class="confluenceTd"><p><code>/mnt/c/Users/nick</code></p></td></tr><tr><th class="confluenceTh"><p><strong>Windows</strong></p></th><td class="confluenceTd"><p><code>%userprofile% </code>(C:\Users\nick)</p></td></tr></tbody></table></div><h1 id="WSL2Configuration-SharefilesbetweenWindowsandLinux">Share files between Windows and Linux</h1><p>Create a “shared” directory in Windows, for example, <code>%userprofile%\WslFiles</code></p><p>In Ubuntu, create a soft link:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 114.0px;"/><col style="width: 644.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Command:</p></td><td class="confluenceTd"><p><code>ln -s /mnt/c/Users/nick/WslFiles work</code></p></td></tr></tbody></table></div><p>Note:</p><p><code>/mnt/c/Users/nick/WslFiles</code> is the same location as <code>/home/nick</code></p><h3 id="WSL2Configuration-Test">Test</h3><p>In Ubuntu:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 114.0px;"/><col style="width: 644.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Commands:</p></td><td class="confluenceTd"><p><code>cd work</code></p><p><code>touch nick.xyz</code></p></td></tr></tbody></table></div><p>In Windows, note the <code>nick.xyz</code> file in <code>%userprofile%\WslFiles</code> directory:</p><h1 id="WSL2Configuration-Createa.profileforUbuntu">Create a <code>.profile</code> for Ubuntu</h1><p>Change to the home directory (command: <code>cd</code>)</p><p>Rename existing .profile file:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 114.0px;"/><col style="width: 644.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Command:</p></td><td class="confluenceTd"><p><code>mv .profile .profile.original</code></p></td></tr></tbody></table></div><p>Create a new <code>.profile</code> file with <code>vi</code>. Note: you may need to execute<code> :set paste</code> for the text to paste without indents. Use <code>shift+ins</code> to insert text:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">export ENV_OS=$(uname)
+export HOSTNAME=`hostname -s`
+
+PS1=$&#39;\[\e[31m\]&#39;`whoami`$&#39;\[\e[0m\]@&#39;$&#39;\[\e[0;36m\]&#39;$HOSTNAME$&#39;\[\e[0m\]:&#39;$&#39;\[\e[32m\]&#39;`pwd`$&#39;\[\e[0m\]&gt; &#39;
+
+mycd()
+{
+  unalias cd
+  cd $1
+  PS1=$&#39;\[\e[31m\]&#39;`whoami`$&#39;\[\e[0m\]@&#39;$&#39;\[\e[0;36m\]&#39;$HOSTNAME$&#39;\[\e[0m\]:&#39;$&#39;\[\e[32m\]&#39;`pwd`$&#39;\[\e[0m\]&gt; &#39;
+  alias cd=mycd
+}
+
+set -o vi
+
+alias cd=mycd</pre>
+</div></div><h2 id="WSL2Configuration-Setupvieditorasdefault">Set up vi editor as default</h2><h3 id="WSL2Configuration-ForGit">For Git</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 114.0px;"/><col style="width: 644.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Command:</p></td><td class="confluenceTd"><p><code>git config --global core.editor &quot;vim&quot;</code></p></td></tr></tbody></table></div><h3 id="WSL2Configuration-Forvcommandfromless">For <code>v</code> command from <code>less</code></h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 133.0px;"/><col style="width: 625.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Command:</p></td><td class="confluenceTd"><p><code>sudo update-alternatives --config editor</code></p></td></tr><tr><td class="confluenceTd"><p>Expected Response:</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">  Selection    Path                Priority   Status
+------------------------------------------------------------
+  0            /bin/nano            40        auto mode
+  1            /bin/ed             -100       manual mode
+  2            /bin/nano            40        manual mode
+* 3            /usr/bin/vim.basic   30        manual mode
+  4            /usr/bin/vim.tiny    10        manual mode</pre>
+</div></div></td></tr></tbody></table></div><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

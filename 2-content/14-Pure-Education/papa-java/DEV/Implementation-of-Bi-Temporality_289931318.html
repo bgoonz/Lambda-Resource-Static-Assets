@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Implementation of Bi-Temporality</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Bi-Temporal-Design_289865729.html">Bi-Temporal Design</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Implementation of Bi-Temporality
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Apr 18, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="ImplementationofBi-Temporality-EntityClasses">Entity Classes</h2><p>We will create three Entity objects: <code>Rule</code>, <code>Duty</code>, and <code>DutyRulePair</code>. All will derive from the <code>BaseEntity</code> class.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public class BaseEntity extends ResourceSupport
+{
+
+    public static ZonedDateTime DATE_INFINITY = ZonedDateTime.parse(&quot;9999-12-31T00:00:00-05:00&quot;);
+
+    @Column(name = &quot;in_utc&quot;, nullable = false, updatable = false)
+    @CreatedDate
+    //@JsonIgnore
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date inUtc;
+
+    @Column(name = &quot;out_utc&quot;)
+    private ZonedDateTime outUtc = DATE_INFINITY;
+
+    @CreatedBy
+    //@JsonIgnore
+    @Column(name = &quot;created_by&quot;)
+    private String createdBy;
+
+    @LastModifiedBy
+    //@JsonIgnore
+    @Column(name = &quot;last_modified_by&quot;)
+    private String lastModifiedBy;
+
+
+    public Date getInUtc()
+    {
+        return inUtc;
+    }
+
+    public void setInUtc(Date inUtc)
+    {
+        this.inUtc = inUtc;
+    }
+
+    public ZonedDateTime getOutUtc()
+    {
+        return outUtc;
+    }
+
+    public void setOutUtc(ZonedDateTime outUtc)
+    {
+        this.outUtc = outUtc;
+    }
+
+    public String getCreatedBy()
+    {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy)
+    {
+        this.createdBy = createdBy;
+    }
+
+    public String getLastModifiedBy()
+    {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy)
+    {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = &quot;RULE&quot;,
+        uniqueConstraints={
+                @UniqueConstraint(columnNames = {&quot;ruleId&quot;, &quot;out_utc&quot;})
+        })
+public class Rule extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String ruleId = UUID.randomUUID().toString();
+    private String ruleName;
+    private String ruleType;
+
+    public Rule(Rule other)
+    {
+        super();
+        this.ruleId = other.ruleId;
+        this.ruleName = other.ruleName;
+        this.ruleType = other.ruleType;
+        this.setOutUtc(ZonedDateTime.now());
+    }
+
+    protected Rule()
+    {
+        super();
+    }
+
+
+    //@OneToMany(cascade = { CascadeType.ALL }, mappedBy = &quot;rule&quot;)
+    @OneToMany(mappedBy = &quot;rule&quot;)
+    private List&lt;DutyRulePair&gt; dutyRulePair = new ArrayList&lt;&gt;();
+
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getRuleId()
+    {
+        return ruleId;
+    }
+
+    public void setRuleId(String ruleId)
+    {
+        this.ruleId = ruleId;
+    }
+
+    public String getRuleName()
+    {
+        return ruleName;
+    }
+
+    public void setRuleName(String ruleName)
+    {
+        this.ruleName = ruleName;
+    }
+
+    public String getRuleType()
+    {
+        return ruleType;
+    }
+
+    public void setRuleType(String ruleType)
+    {
+        this.ruleType = ruleType;
+    }
+
+
+    public List&lt;DutyRulePair&gt; getDutyRulePair()
+    {
+        return dutyRulePair;
+    }
+
+    public void setDutyRulePair(List&lt;DutyRulePair&gt; dutyRulePair)
+    {
+        this.dutyRulePair = dutyRulePair;
+    }
+
+    public void addDutyRuleMap(DutyRulePair dutyRulePair)
+    {
+        this.dutyRulePair.add(dutyRulePair);
+    }
+
+    public void removeDutyRuleMap(DutyRulePair dutyRulePai)
+    {
+        this.dutyRulePair.remove(dutyRulePair);
+    }
+
+    @Override
+    public String toString()
+    {
+        return &quot;Rule{&quot; +
+                &quot;ID=&quot; + ID +
+                &quot;, ruleId=&quot; + ruleId +
+                &quot;, ruleName=&#39;&quot; + ruleName + &#39;\&#39;&#39; +
+                &quot;, ruleType=&#39;&quot; + ruleType + &#39;\&#39;&#39; +
+                &#39;}&#39;;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Rule rule = (Rule) o;
+        return ID == rule.ID &amp;&amp;
+                ruleId == rule.ruleId &amp;&amp;
+                Objects.equals(ruleName, rule.ruleName) &amp;&amp;
+                Objects.equals(ruleType, rule.ruleType);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), ID, ruleId, ruleName, ruleType);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = &quot;DUTY&quot;,
+        uniqueConstraints={
+                @UniqueConstraint(columnNames = {&quot;dutyId&quot;, &quot;out_utc&quot;})
+        })
+public class Duty extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String dutyId = UUID.randomUUID().toString();
+    private String dutyName;
+    private String dutyType;
+
+
+    //@OneToMany(cascade = { CascadeType.REMOVE }, mappedBy = &quot;duty&quot;)
+    @OneToMany(mappedBy = &quot;duty&quot;)
+    private List&lt;DutyRulePair&gt; dutyRulePair = new ArrayList&lt;&gt;();
+
+
+    public Duty(int id, String dutyName, String dutyType)
+    {
+        this.ID = id;
+        this.dutyName = dutyName;
+        this.dutyType = dutyType;
+    }
+    
+    //  Copy constructor to create Audit Trail
+    public Duty(Duty other)
+    {
+        super();
+        this.dutyId = other.dutyId;
+        this.dutyName = other.dutyName;
+        this.dutyType = other.dutyType;
+        this.setOutUtc(ZonedDateTime.now());
+    }
+
+    public Duty()
+    {
+        super();
+    }
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getDutyId()
+    {
+        return dutyId;
+    }
+
+    public void setDutyId(String dutyId)
+    {
+        this.dutyId = dutyId;
+    }
+
+    public String getDutyName()
+    {
+        return dutyName;
+    }
+
+    public void setDutyName(String dutyName)
+    {
+        this.dutyName = dutyName;
+    }
+
+    public String getDutyType()
+    {
+        return dutyType;
+    }
+
+    public void setDutyType(String dutyType)
+    {
+        this.dutyType = dutyType;
+    }
+
+    public List&lt;DutyRulePair&gt; getDutyRulePair()
+    {
+        return dutyRulePair;
+    }
+
+    public void setDutyRulePair(List&lt;DutyRulePair&gt; dutyRulePair)
+    {
+        this.dutyRulePair = dutyRulePair;
+    }
+
+    public void addDutyRuleMap(DutyRulePair dutyRulePair)
+    {
+        this.dutyRulePair.add(dutyRulePair);
+    }
+
+    public void removeDutyRuleMap(DutyRulePair dutyRulePair)
+    {
+        this.dutyRulePair.remove(dutyRulePair);
+    }
+
+    @Override
+    public String toString()
+    {
+        return &quot;Duty{&quot; +
+                &quot;ID=&quot; + ID +
+                &quot;, dutyId=&quot; + dutyId +
+                &quot;, dutyName=&#39;&quot; + dutyName + &#39;\&#39;&#39; +
+                &quot;, dutyType=&#39;&quot; + dutyType + &#39;\&#39;&#39; +
+                &#39;}&#39;;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Duty duty = (Duty) o;
+        return ID == duty.ID &amp;&amp;
+                dutyId == duty.dutyId &amp;&amp;
+                Objects.equals(dutyName, duty.dutyName) &amp;&amp;
+                Objects.equals(dutyType, duty.dutyType);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), ID, dutyId, dutyName, dutyType);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@Table(name = &quot;DUTY_RULE_MAP&quot;,
+        uniqueConstraints={
+                @UniqueConstraint(columnNames = {&quot;dutyRuleMapId&quot;, &quot;out_utc&quot;})
+        })
+public class DutyRulePair extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int ID;
+    private String dutyRuleMapId = UUID.randomUUID().toString();
+
+    public DutyRulePair(Duty duty, Rule rule)
+    {
+        this.duty = duty;
+        this.rule = rule;
+    }
+
+    protected DutyRulePair()
+    {}
+
+    @ManyToOne
+    @JoinColumn(name = &quot;duty_id&quot;)
+    private Duty duty;
+
+    @ManyToOne
+    @JoinColumn(name = &quot;rule_id&quot;)
+    private Rule rule;
+
+    public int getID()
+    {
+        return ID;
+    }
+
+    public void setID(int ID)
+    {
+        this.ID = ID;
+    }
+
+    public String getDutyRuleMapId()
+    {
+        return dutyRuleMapId;
+    }
+
+    public void setDutyRuleMapId(String dutyRuleMapId)
+    {
+        this.dutyRuleMapId = dutyRuleMapId;
+    }
+
+    public Duty getDuty()
+    {
+        return duty;
+    }
+
+    public void setDuty(Duty duty)
+    {
+        this.duty = duty;
+    }
+
+    public Rule getRule()
+    {
+        return rule;
+    }
+
+    public void setRule(Rule rule)
+    {
+        this.rule = rule;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        DutyRulePair that = (DutyRulePair) o;
+        return Objects.equals(duty, that.duty) &amp;&amp;
+                Objects.equals(rule, that.rule);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), duty, rule);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h2 id="ImplementationofBi-Temporality-RepositoryClasses">Repository Classes</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RepositoryRestResource
+public interface RuleRepository  extends JpaRepository&lt;Rule, Integer&gt;
+{
+    @Query(&quot;select r from Rule r where r.id = :id and out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    Optional&lt;Rule&gt; findById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select r from Rule r where out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Rule&gt; findAll();
+
+    @Query(&quot;select r from Rule r where r.ruleName = :name and out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Rule&gt; findByName(@Param(&quot;name&quot;) String name);
+
+    @Query(&quot;select r from Rule r where r.ruleType = :type and out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Rule&gt; findByType(@Param(&quot;type&quot;) String type);
+
+    @Query(&quot;select r from Rule r&quot;)
+    List&lt;Rule&gt; findAllWithAudit();
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RepositoryRestResource
+public interface DutyRepository extends JpaRepository&lt;Duty, Integer&gt;
+{
+    @Query(&quot;select d from Duty d where d.ID = :id and out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    Optional&lt;Duty&gt; findById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select d from Duty d where d.ID = :id&quot;)
+    Optional&lt;Duty&gt; findAuditById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select d from Duty d where d.outUtc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Duty&gt; findAll();
+
+    @Query(&quot;select d from Duty d where out_utc &lt; TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Duty&gt; findAuditAll();
+
+    @Query(&quot;select d from Duty d where d.dutyName = :dutyName and out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Duty&gt; findByName(@Param(&quot;dutyName&quot;) String dutyName);
+
+    @Query(&quot;select d from Duty d where d.dutyType = :dutyType and out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;Duty&gt; findByType(@Param(&quot;dutyType&quot;) String dutyType);
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RepositoryRestResource
+public interface DutyRuleMapRepository  extends JpaRepository&lt;DutyRulePair, Integer&gt;
+{
+    @Query(&quot;select m from DutyRulePair m where DUTY_ID = :id and out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;DutyRulePair&gt; findByDutyId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select m from DutyRulePair m where RULE_ID = :id and out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;DutyRulePair&gt; findByRuleId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select m from DutyRulePair m where DUTY_ID = :id and out_utc &lt; TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;DutyRulePair&gt; findByAuditDutyId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select m from DutyRulePair m where RULE_ID = :id and out_utc &lt; TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;DutyRulePair&gt; findByAuditRuleId(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select m from DutyRulePair m where RULE_ID = :ruleId and DUTY_ID = :dutyId and out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    Optional&lt;DutyRulePair&gt; findByRuleDutyId(@Param(&quot;ruleId&quot;) int ruleId, @Param(&quot;dutyId&quot;) int dutyId);
+
+    @Query(&quot;select m from DutyRulePair m where RULE_ID = :ruleId and DUTY_ID = :dutyId and out_utc &lt; TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;DutyRulePair&gt; findHistoryByRuleDutyId(@Param(&quot;ruleId&quot;) int ruleId, @Param(&quot;dutyId&quot;) int dutyId);
+
+    @Query(&quot;select m from DutyRulePair m where out_utc = TO_DATE(&#39;9999-12-31&#39;, &#39;YYYY-MM-DD&#39;)&quot;)
+    List&lt;DutyRulePair&gt; findAll();
+
+    @Query(&quot;select m from DutyRulePair m&quot;)
+    List&lt;DutyRulePair&gt; findAllWithAudit();
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ImplementationofBi-Temporality-Setupin-memoryDatabase">Setup in-memory Database</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">--  DUTY
+INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;1&#39;, &#39;duty name 1&#39;, &#39;duty type 1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;2&#39;, &#39;duty name 2&#39;, &#39;duty type 2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;3&#39;, &#39;duty name 3&#39;, &#39;duty type 3&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;4&#39;, &#39;duty name 4&#39;, &#39;duty type 4&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, &#39;5&#39;, &#39;duty name 5&#39;, &#39;duty type 5&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+
+--  RULE
+INSERT INTO RULE(ID, RULE_ID, RULE_NAME, RULE_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;1&#39;, &#39;rule name 1&#39;, &#39;rule type 1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE(ID, RULE_ID, RULE_NAME, RULE_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;2&#39;, &#39;rule name 2&#39;, &#39;rule type 2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO RULE(ID, RULE_ID, RULE_NAME, RULE_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;3&#39;, &#39;rule name 3&#39;, &#39;rule type 3&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+
+-- DUTY_RULE_MAP
+INSERT INTO DUTY_RULE_MAP(ID, DUTY_RULE_MAP_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(1, &#39;1&#39;, &#39;1&#39;, &#39;1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_RULE_MAP(ID, DUTY_RULE_MAP_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(2, &#39;2&#39;, &#39;2&#39;, &#39;1&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_RULE_MAP(ID, DUTY_RULE_MAP_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(3, &#39;3&#39;, &#39;3&#39;, &#39;2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY_RULE_MAP(ID, DUTY_RULE_MAP_ID, DUTY_ID, RULE_ID, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, &#39;4&#39;, &#39;4&#39;, &#39;2&#39;, CURRENT_TIMESTAMP, &#39;9999-12-31&#39;, &#39;unknown&#39;, &#39;unknown&#39;)
+--
+-- --SEQUENCE
+alter sequence HIBERNATE_SEQUENCE restart with 100</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h3 id="ImplementationofBi-Temporality-GenerateDDLStatements">Generate DDL Statements</h3><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">spring.jpa.show-sql=true
+spring.h2.console.enabled=true
+spring.datasource.url=jdbc:h2:mem:db
+
+spring.data.rest.defaultMediaType=application/json
+spring.jackson.default-property-inclusion=NON_NULL
+
+spring.jpa.properties.hibernate.jdbc.time_zone=UTC
+
+# Enable following 4 lines to generate DDL statements (dialect may not be required)
+#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.DB2Dialect
+#spring.jpa.properties.javax.persistence.schema-generation.create-source=metadata
+#spring.jpa.properties.javax.persistence.schema-generation.scripts.action=create
+#spring.jpa.properties.javax.persistence.schema-generation.scripts.create-target=create.sql
+
+
+
+#logging.level.org.springframework=debug
+
+
+</pre>
+</div></div></td></tr></tbody></table></div><p>Run application and note a new file being created:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">create sequence hibernate_sequence start with 1 increment by 1
+create table duty (id integer not null, created_by varchar(255), in_utc timestamp not null, last_modified_by varchar(255), out_utc timestamp, duty_id integer not null, duty_name varchar(255), duty_type varchar(255), primary key (id))
+create table duty_rule_map (id integer not null, created_by varchar(255), in_utc timestamp not null, last_modified_by varchar(255), out_utc timestamp, duty_rule_map_id integer not null, duty_id integer, rule_id integer, primary key (id))
+create table rule (id integer not null, created_by varchar(255), in_utc timestamp not null, last_modified_by varchar(255), out_utc timestamp, rule_id integer not null, rule_name varchar(255), rule_type varchar(255), primary key (id))
+create unique index UKg46mke8n39w346gu085s7hrim on duty (duty_id, out_utc)
+create unique index UKgvwwj22pc2icm30qhpf84ibq on duty_rule_map (duty_rule_map_id, out_utc)
+create unique index UKb2k05d1e3vk8hs3yk5v0ilrms on rule (rule_id, out_utc)
+alter table duty_rule_map add constraint FK83e7jgdixgieibo5fnm0lqud6 foreign key (duty_id) references duty
+alter table duty_rule_map add constraint FKpxf2mco4rf45x9qe7g1atf5bd foreign key (rule_id) references rule</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ImplementationofBi-Temporality-AddSecurity">Add Security</h2><p>For the time being, we will add security to set values for <code>@CreatedBy</code> and <code>@LastModifiedBy</code> fields. However, we will not use the GS Security pom dependency since it will preclude the H2 Console from operating and we would like to be able to use the H2 Console while we develop and test our application.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-security-core&lt;/artifactId&gt;
+   &lt;version&gt;5.2.0.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Configuration
+@EnableJpaAuditing(auditorAwareRef = &quot;auditorAware&quot;)
+public class JpaConfig
+{
+    @Bean
+    public AuditorAware&lt;String&gt; auditorAware()
+    {
+        return new AuditorAwareImpl();
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class AuditorAwareImpl implements AuditorAware&lt;String&gt;
+{
+    @Override
+    public Optional&lt;String&gt; getCurrentAuditor()
+    {
+        return Optional.of(System.getProperty(&quot;user.name&quot;));
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h1 id="ImplementationofBi-Temporality-Exceptions">Exceptions</h1><p>When users attempt to perform invalid actions, such as asking for non existing Duty, Rule, of Duty-to-Rule mapping, or try to delete a Duty/Rule which has not been unmapped, we need to display an error message to the user to indicate the nature of the error. We will use custom exceptions of this purpose. For time being, we will create two custom exception classes: <code>NotFoundException</code> and <code>RuleViolationException</code>.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@ResponseStatus(HttpStatus.NOT_FOUND)
+public class NotFoundException extends RuntimeException
+{
+    public NotFoundException(String message)
+    {
+        super(message);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@ResponseStatus(HttpStatus.FAILED_DEPENDENCY)
+public class RuleViolationException extends RuntimeException
+{
+    public RuleViolationException(String message)
+    {
+        super(message);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p>We will also create a class to describe how the exception response should be formatted:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class ExceptionResponse
+{
+    private Date timestamp;
+    private String message;
+    private String details;
+
+    public ExceptionResponse(Date timestamp, String message, String details) {
+        this.timestamp = timestamp;
+        this.message = message;
+        this.details = details;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p>Finally, we provide out custom response exception handler.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@ControllerAdvice
+@RestController
+public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler
+{
+
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity&lt;Object&gt; handleAllExceptions(Exception ex, WebRequest request)
+    {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(RuleViolationException.class)
+    public final ResponseEntity&lt;Object&gt; handleRuleViolationException(RuleViolationException ex, WebRequest request)
+    {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity(exceptionResponse, HttpStatus.FAILED_DEPENDENCY);
+    }
+
+
+    @ExceptionHandler(NotFoundException.class)
+    public final ResponseEntity&lt;Object&gt; handleReaderNotFoundException(NotFoundException ex, WebRequest request)
+    {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    protected ResponseEntity&lt;Object&gt; handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                  HttpHeaders headers, HttpStatus status, WebRequest request)
+    {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), &quot;Validation Failed&quot;,
+                ex.getBindingResult().toString());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h1 id="ImplementationofBi-Temporality-ControllerClasses">Controller Classes</h1><h3 id="ImplementationofBi-Temporality-DutyController">Duty Controller</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Transactional
+@RestController
+@RepositoryRestController
+public class DutyController
+{
+    @Autowired
+    private DutyRuleMapRepository dutyRuleMapRepository;
+    @Autowired
+    private DutyRepository dutyRepository;
+
+    @GetMapping(&quot;/test/duties&quot;)
+    public @ResponseBody
+    ResponseEntity&lt;Resource&lt;Duty[]&gt;&gt; getTestDuties()
+    {
+        //  When we return Resources&lt;Duty&gt;, Integration tests need to with with collections of LinkedHashMap, which is very painful.
+        //  We would like to be able to return an Array of objects as a Resource.
+        //  This is an attempt at such functionality.
+        //  See DutyControllerIntegrationTest.test_getDuties to process this response with JSONObject
+        List&lt;Duty&gt; duties = dutyRepository.findAll();
+
+        Duty[] linkedDuties = duties.stream()
+                .map(d -&gt; {d.add(linkTo(methodOn(getClass()).getDuties()).slash( &quot;/&quot; + d.getID()).withRel(&quot;id&quot;)); return d;})
+                .toArray(Duty[]::new);
+
+        Resource&lt;Duty[]&gt; resource = new Resource&lt;&gt;(linkedDuties);
+        resource.add(linkTo(methodOn(getClass()).getDuties()).withSelfRel());
+        return ResponseEntity.ok(resource);
+    }
+
+
+    @GetMapping(&quot;/duties&quot;)
+    public @ResponseBody
+    ResponseEntity&lt;Resources&lt;Duty&gt;&gt; getDuties()
+    {
+        List&lt;Duty&gt; duties = dutyRepository.findAll();
+
+        List&lt;Duty&gt; linkedDuties = duties.stream()
+                .map(d -&gt; {d.add(linkTo(methodOn(getClass()).getDuties()).slash( &quot;/&quot; + d.getID()).withRel(&quot;id&quot;)); return d;})
+                .collect(Collectors.toList());
+
+        Resources&lt;Duty&gt; resources = new Resources&lt;&gt;(linkedDuties);
+        resources.add(linkTo(methodOn(getClass()).getDuties()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+
+    @GetMapping(&quot;/duties/{id}&quot;)
+    public  ResponseEntity&lt;Resource&lt;Duty&gt;&gt;  getDuty(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Duty&gt; dutyOptional = dutyRepository.findById(id);
+
+        if(!dutyOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;id-&quot; + id);
+        }
+        Duty duty = dutyOptional.get();
+        Resource&lt;Duty&gt; resource = new Resource&lt;&gt;(duty);
+        ControllerLinkBuilder linkTo = linkTo(methodOn(getClass()).getDuties());
+        resource.add(linkTo.withRel(&quot;all-duties&quot;));
+        return ResponseEntity.ok(resource);
+    }
+
+    @PostMapping(&quot;/duties&quot;)
+    public ResponseEntity&lt;?&gt; createDuty(@RequestBody Duty duty)
+    {
+        dutyRepository.save(duty);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path(&quot;/{id}&quot;)
+                .buildAndExpand(duty.getID()).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @PutMapping(&quot;/duties/{id}&quot;)
+    public ResponseEntity&lt;?&gt; updateDuty(@PathVariable(&quot;id&quot;) int id, @RequestBody Duty duty)
+    {
+        Optional&lt;Duty&gt; existingDutyOptional = dutyRepository.findById(id);
+        if(!existingDutyOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;duty-&quot; + duty.getID());
+        }
+
+        Duty existingDuty = existingDutyOptional.get();
+        //  Create data for audit record
+        Duty auditDuty = new Duty(existingDuty);
+
+        //  Modify existing record with new values
+        if(StringUtils.hasText(duty.getDutyName()))
+        {
+            existingDuty.setDutyName(duty.getDutyName());
+        }
+        if(StringUtils.hasText(duty.getDutyType()))
+        {
+            existingDuty.setDutyType(duty.getDutyType());
+        }
+        dutyRepository.save(existingDuty);
+
+
+        //  Create Audit record
+        dutyRepository.save(auditDuty);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(existingDuty).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping(&quot;/duties/{id}&quot;)
+    public ResponseEntity&lt;?&gt; deleteDuty(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;DutyRulePair&gt; dutyRulePairs = dutyRuleMapRepository.findByDutyId(id);
+        if(!dutyRulePairs.isEmpty())
+        {
+            throw new RuleViolationException(&quot;mapping to rules exists for dutyId-&quot; + id);
+        }
+
+        Optional&lt;Duty&gt; existingDutyOptional = dutyRepository.findById(id);
+        if(!existingDutyOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;id-&quot; + id);
+        }
+
+        Duty duty = existingDutyOptional.get();
+        duty.setOutUtc(ZonedDateTime.now());
+        dutyRepository.save(duty);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand().toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="ImplementationofBi-Temporality-DutyAuditController">Duty Audit Controller</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Transactional
+@RestController
+@RepositoryRestController
+public class AuditDutyController
+{
+    @Autowired
+    private DutyRepository dutyRepository;
+
+
+    @GetMapping(&quot;/audit/duties&quot;)
+    public @ResponseBody
+    ResponseEntity&lt;Resources&lt;Duty&gt;&gt; getDuties()
+    {
+        List&lt;Duty&gt; duties = dutyRepository.findAuditAll();
+
+        List&lt;Duty&gt; linkedDuties = duties.stream()
+                .map(d -&gt; {d.add(linkTo(methodOn(getClass()).getDuties()).slash( &quot;/&quot; + d.getID()).withRel(&quot;id&quot;)); return d;})
+                .collect(Collectors.toList());
+
+        Resources&lt;Duty&gt; resources = new Resources&lt;&gt;(linkedDuties);
+        resources.add(linkTo(methodOn(getClass()).getDuties()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+    @GetMapping(&quot;/audit/duties/{id}&quot;)
+    public ResponseEntity&lt;Resource&lt;Duty&gt;&gt; getDuty(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Duty&gt; dutyOptional = dutyRepository.findAuditById(id);
+
+        if(!dutyOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;id-&quot; + id);
+        }
+        Duty duty = dutyOptional.get();
+        Resource&lt;Duty&gt; resource = new Resource&lt;&gt;(duty);
+        ControllerLinkBuilder linkTo = linkTo(methodOn(getClass()).getDuties());
+        resource.add(linkTo.withRel(&quot;all-duties&quot;));
+        return ResponseEntity.ok(resource);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="ImplementationofBi-Temporality-RuleController">Rule Controller</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Transactional
+@RestController
+@RepositoryRestController
+public class RuleController
+{
+    @Autowired
+    private DutyRuleMapRepository dutyRuleMapRepository;
+    @Autowired
+    private RuleRepository ruleRepository;
+
+    @GetMapping(&quot;/rules&quot;)
+    public @ResponseBody
+    ResponseEntity&lt;?&gt; getRules()
+    {
+        List&lt;Rule&gt; rules = ruleRepository.findAll();
+
+        List&lt;Rule&gt; linkedRules = rules.stream()
+                .map(r -&gt; {r.add(linkTo(methodOn(getClass()).getRules()).slash( &quot;/&quot; + r.getID()).withRel(&quot;id&quot;)); return r;})
+                .collect(Collectors.toList());
+
+        Resources&lt;Rule&gt; resources = new Resources&lt;&gt;(linkedRules);
+        resources.add(linkTo(methodOn(getClass()).getRules()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+    @GetMapping(&quot;/rules/{id}&quot;)
+    public  ResponseEntity&lt;Resource&lt;Rule&gt;&gt;  getRule(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Rule&gt; ruleOptional = ruleRepository.findById(id);
+
+        if(!ruleOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;id-&quot; + id);
+        }
+        Rule rule = ruleOptional.get();
+        Resource&lt;Rule&gt; resource = new Resource&lt;&gt;(rule);
+        ControllerLinkBuilder linkTo = linkTo(methodOn(getClass()).getRules());
+        resource.add(linkTo.withRel(&quot;all-rules&quot;));
+        return ResponseEntity.ok(resource);
+    }
+
+    @PostMapping(&quot;/rules&quot;)
+    public ResponseEntity&lt;?&gt; createRule(@RequestBody Rule rule)
+    {
+        ruleRepository.save(rule);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path(&quot;/{id}&quot;)
+                .buildAndExpand(rule.getID()).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @PutMapping(&quot;/rules/{id}&quot;)
+    public ResponseEntity&lt;?&gt; updateRule(@PathVariable(&quot;id&quot;) int id, @RequestBody Rule rule)
+    {
+        Optional&lt;Rule&gt; existingRuleOptional = ruleRepository.findById(id);
+        if(!existingRuleOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;rule-&quot; + rule.getID());
+        }
+
+        Rule existingRule = existingRuleOptional.get();
+        //  Create data for audit record
+        Rule auditRule = new Rule(existingRule);
+
+        //  Modify existing record with new values
+        if(StringUtils.hasText(rule.getRuleName()))
+        {
+            existingRule.setRuleName(rule.getRuleName());
+        }
+        if(StringUtils.hasText(rule.getRuleType()))
+        {
+            existingRule.setRuleType(rule.getRuleType());
+        }
+        ruleRepository.save(existingRule);
+
+
+        //  Create Audit record
+        ruleRepository.save(auditRule);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(existingRule).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping(&quot;/rules/{id}&quot;)
+    public ResponseEntity&lt;?&gt; deleteRule(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;DutyRulePair&gt; dutyRulePairs = dutyRuleMapRepository.findByRuleId(id);
+        if(!dutyRulePairs.isEmpty())
+        {
+            throw new RuleViolationException(&quot;mapping to duties exists for ruleId-&quot; + id);
+        }
+
+        Optional&lt;Rule&gt; existingRuleOptional = ruleRepository.findById(id);
+        if(!existingRuleOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;id-&quot; + id);
+        }
+
+        Rule rule = existingRuleOptional.get();
+        rule.setOutUtc(ZonedDateTime.now());
+        ruleRepository.save(rule);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand().toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="ImplementationofBi-Temporality-DutyRuleMapController">DutyRuleMapController</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Transactional
+@RestController
+@RepositoryRestController
+public class DutyRuleMapController
+{
+    @Autowired
+    private DutyRuleMapRepository dutyRuleMapRepository;
+    @Autowired
+    private RuleRepository ruleRepository;
+    @Autowired
+    private DutyRepository dutyRepository;
+
+
+    //  -------------------------------------------
+    //  ------------ Duties With Rules ------------
+    //  -------------------------------------------
+    @TrackTime
+    @GetMapping(&quot;/duties/rules&quot;)
+    public @ResponseBody
+    ResponseEntity&lt;Resources&lt;Resource&lt;Duty&gt;&gt;&gt; getDutiesRules()
+    {
+        List&lt;Resource&lt;Duty&gt;&gt; resourceResult = new ArrayList&lt;&gt;();
+
+        List&lt;DutyRulePair&gt; dutyRulePairList = dutyRuleMapRepository.findAll();
+        Map&lt;Duty, List&lt;Rule&gt;&gt; groupedDuties = dutyRulePairList.stream()
+                .collect(Collectors
+                        .groupingBy(d -&gt; d.getDuty(), Collectors.mapping(DutyRulePair::getRule, Collectors.toList())));
+
+
+        for(Map.Entry&lt;Duty, List&lt;Rule&gt;&gt; e : groupedDuties.entrySet())
+        {
+            Duty duty = e.getKey();
+            Resource&lt;Duty&gt; dutyResource = new Resource&lt;&gt;(duty, createDutyLink(duty.getID()));
+            dutyResource.add(createRulesForDutyLink(duty.getID()));
+            for(Rule rule : e.getValue())
+            {
+                dutyResource.add(createRuleLink(rule.getID()));
+            }
+            resourceResult.add(dutyResource);
+        }
+
+        Resources&lt;Resource&lt;Duty&gt;&gt; resources = new Resources&lt;&gt;(resourceResult, linkTo(methodOn(getClass()).getDutiesRules()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+
+    @LogInputOutput
+    @GetMapping(&quot;/duties/{id}/rules&quot;)
+    public  @ResponseBody ResponseEntity&lt;Resource&lt;Duty&gt;&gt;  getRulesForDuty(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;DutyRulePair&gt; dutyRulePairList = dutyRuleMapRepository.findByDutyId(id);
+
+        if(dutyRulePairList.isEmpty())
+        {
+            throw new NotFoundException(&quot;dutyId-&quot; + id);
+        }
+
+        Duty duty = dutyRulePairList.get(0).getDuty();
+        List&lt;Rule&gt; rules = dutyRulePairList.stream().map(e -&gt; e.getRule()).collect(Collectors.toList());
+
+
+        Resource&lt;Duty&gt; dutyResource = new Resource&lt;&gt;(duty, createDutyLink(duty.getID()));
+
+        for(Rule rule : rules)
+        {
+            dutyResource.add(createRuleLink(rule.getID()));
+        }
+        dutyResource.add(linkTo(methodOn(getClass()).getRulesForDuty(id)).withSelfRel());
+        return ResponseEntity.ok(dutyResource);
+    }
+
+
+    @PostMapping(&quot;/duties/{dutyId}/rules/{ruleId}&quot;)
+    public ResponseEntity&lt;?&gt; addRuleToDuty(@PathVariable(&quot;dutyId&quot;) int dutyId, @PathVariable(&quot;ruleId&quot;) int ruleId)
+    {
+        //  Check if the association was previously deleted
+        List&lt;DutyRulePair&gt; dutyRulePairList = dutyRuleMapRepository.findHistoryByRuleDutyId(ruleId, dutyId);
+        if(!dutyRulePairList.isEmpty())
+        {
+            Optional&lt;DutyRulePair&gt; dutyRulePairOptional = dutyRulePairList.stream()
+                    .sorted((m1, m2) -&gt; Long.compare(m2.getOutUtc().toInstant().toEpochMilli(), m1.getOutUtc().toInstant().toEpochMilli()))
+                    .findFirst();
+
+            if(dutyRulePairOptional.isPresent())
+            {
+                DutyRulePair dutyRulePairHistorical = dutyRulePairOptional.get();
+
+                DutyRulePair dutyRulePair = new DutyRulePair(dutyRulePairHistorical.getDuty(), dutyRulePairHistorical.getRule());
+                dutyRulePair.setDutyRuleMapId(dutyRulePairHistorical.getDutyRuleMapId());
+
+                dutyRuleMapRepository.save(dutyRulePair);
+
+                URI location = ServletUriComponentsBuilder
+                        .fromCurrentRequest()
+                        .buildAndExpand(dutyRulePair.getDuty().getDutyId(), dutyRulePair.getRule().getRuleId())
+                        .toUri();
+                return ResponseEntity.created(location).build();
+            }
+            return ResponseEntity.unprocessableEntity().build();
+        }
+        else
+        {
+            Optional&lt;Rule&gt; ruleOptional = ruleRepository.findById(ruleId);
+            if (!ruleOptional.isPresent())
+            {
+                throw new NotFoundException(&quot;rule-&quot; + ruleId);
+            }
+            Optional&lt;Duty&gt; dutyOptional = dutyRepository.findById(dutyId);
+            if (!dutyOptional.isPresent())
+            {
+                throw new NotFoundException(&quot;duty-&quot; + dutyId);
+            }
+
+            Duty duty = dutyOptional.get();
+            Rule rule = ruleOptional.get();
+
+            List&lt;Rule&gt; rules = duty.getDutyRulePair().stream().map(e -&gt; e.getRule()).collect(Collectors.toList());
+            if (!rules.contains(rule))
+            {
+                DutyRulePair dutyRulePair = new DutyRulePair(duty, rule);
+                duty.addDutyRuleMap(dutyRulePair);
+
+                dutyRuleMapRepository.save(dutyRulePair);
+
+                URI location = ServletUriComponentsBuilder
+                        .fromCurrentRequest()
+                        .buildAndExpand(duty.getDutyId(), rule.getRuleId())
+                        .toUri();
+                return ResponseEntity.created(location).build();
+            }
+            return ResponseEntity.unprocessableEntity().build();
+        }
+    }
+
+    @DeleteMapping(&quot;/duties/{dutyId}/rules/{ruleId}&quot;)
+    public ResponseEntity&lt;?&gt; deleteRuleFromDuty(@PathVariable(&quot;dutyId&quot;) int dutyId, @PathVariable(&quot;ruleId&quot;) int ruleId)
+    {
+        Optional&lt;DutyRulePair&gt; dutyRulePairOptional = dutyRuleMapRepository.findByRuleDutyId(ruleId, dutyId);
+        if(!dutyRulePairOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;ruleId-&quot; + ruleId + &quot;, dutyId-&quot; + dutyId);
+        }
+
+        Optional&lt;Rule&gt; ruleOptional = ruleRepository.findById(ruleId);
+        Optional&lt;Duty&gt; dutyOptional = dutyRepository.findById(dutyId);
+
+        if(!ruleOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;ruleId-&quot; + ruleId);
+        }
+        if(!dutyOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;dutyId-&quot; + dutyId);
+        }
+
+        Duty duty = dutyOptional.get();
+        DutyRulePair dutyRulePair = dutyRulePairOptional.get();
+        duty.removeDutyRuleMap(dutyRulePair);
+
+        dutyRulePair.setOutUtc(ZonedDateTime.now());
+        dutyRuleMapRepository.save(dutyRulePair);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(dutyRulePair).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+
+    //  -------------------------------------------
+    //  ------------ Rules With Duties ------------
+    //  -------------------------------------------
+    @TrackTime
+    @GetMapping(&quot;/rules/duties&quot;)
+    public @ResponseBody
+    ResponseEntity&lt;Resources&lt;Resource&lt;Rule&gt;&gt;&gt; getRulesDuties()
+    {
+        List&lt;Resource&lt;Rule&gt;&gt; resourceResult = new ArrayList&lt;&gt;();
+
+        List&lt;DutyRulePair&gt; dutyRulePairList = dutyRuleMapRepository.findAll();
+        Map&lt;Rule, List&lt;Duty&gt;&gt; groupedRules = dutyRulePairList.stream()
+                .collect(Collectors
+                        .groupingBy(d -&gt; d.getRule(), Collectors.mapping(DutyRulePair::getDuty, Collectors.toList())));
+
+
+        for(Map.Entry&lt;Rule, List&lt;Duty&gt;&gt; e : groupedRules.entrySet())
+        {
+            Rule rule = e.getKey();
+            Resource&lt;Rule&gt; ruleResource = new Resource&lt;&gt;(rule, createRuleLink(rule.getID()));
+            ruleResource.add(createDutiesForRuleLink(rule.getID()));
+            for(Duty duty : e.getValue())
+            {
+                ruleResource.add(createDutyLink(duty.getID()));
+            }
+            resourceResult.add(ruleResource);
+        }
+
+        Resources&lt;Resource&lt;Rule&gt;&gt; resources = new Resources&lt;&gt;(resourceResult, linkTo(methodOn(getClass()).getRulesDuties()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+    @LogInputOutput
+    @GetMapping(&quot;/rules/{id}/duties&quot;)
+    public  @ResponseBody ResponseEntity&lt;Resource&lt;Rule&gt;&gt;  getDutiesForRule(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;DutyRulePair&gt; dutyRulePairList = dutyRuleMapRepository.findByRuleId(id);
+
+        if(dutyRulePairList.isEmpty())
+        {
+            throw new NotFoundException(&quot;ruleId-&quot; + id);
+        }
+
+        Rule rule = dutyRulePairList.get(0).getRule();
+        List&lt;Duty&gt; duties = dutyRulePairList.stream().map(e -&gt; e.getDuty()).collect(Collectors.toList());
+
+        Resource&lt;Rule&gt; ruleResource = new Resource&lt;&gt;(rule, createRuleLink(rule.getID()));
+
+        for(Duty duty : duties)
+        {
+            ruleResource.add(createDutyLink(duty.getID()));
+        }
+        ruleResource.add(linkTo(methodOn(getClass()).getDutiesForRule(id)).withSelfRel());
+        return ResponseEntity.ok(ruleResource);
+    }
+
+    @PostMapping(&quot;/rules/{ruleId}/duties/{dutyId}&quot;)
+    public ResponseEntity&lt;?&gt; addDutyToRule(@PathVariable(&quot;ruleId&quot;) int ruleId, @PathVariable(&quot;dutyId&quot;) int dutyId)
+    {
+        //  Check if the association was previously deleted
+        List&lt;DutyRulePair&gt; dutyRulePairList = dutyRuleMapRepository.findHistoryByRuleDutyId(ruleId, dutyId);
+        if(!dutyRulePairList.isEmpty())
+        {
+             Optional&lt;DutyRulePair&gt; dutyRulePairOptional = dutyRulePairList.stream()
+                     .sorted((m1, m2) -&gt; Long.compare(m2.getOutUtc().toInstant().toEpochMilli(),m1.getOutUtc().toInstant().toEpochMilli()))
+                     .findFirst();
+
+             if(dutyRulePairOptional.isPresent())
+             {
+                 DutyRulePair dutyRulePairHistorical = dutyRulePairOptional.get();
+
+                 DutyRulePair dutyRulePair = new DutyRulePair(dutyRulePairHistorical.getDuty(), dutyRulePairHistorical.getRule());
+                 dutyRulePair.setDutyRuleMapId(dutyRulePairHistorical.getDutyRuleMapId());
+
+                 dutyRuleMapRepository.save(dutyRulePair);
+
+                 URI location = ServletUriComponentsBuilder
+                         .fromCurrentRequest()
+                         .buildAndExpand(dutyRulePair.getRule().getRuleId(), dutyRulePair.getDuty().getDutyId())
+                         .toUri();
+                 return ResponseEntity.created(location).build();
+             }
+            return ResponseEntity.unprocessableEntity().build();
+        }
+        else
+        {
+            Optional&lt;Rule&gt; ruleOptional = ruleRepository.findById(ruleId);
+            if(!ruleOptional.isPresent())
+            {
+                throw new NotFoundException(&quot;rule-&quot; + ruleId);
+            }
+            Optional&lt;Duty&gt; dutyOptional = dutyRepository.findById(dutyId);
+            if(!dutyOptional.isPresent())
+            {
+                throw new NotFoundException(&quot;duty-&quot; + dutyId);
+            }
+
+            Duty duty = dutyOptional.get();
+            Rule rule = ruleOptional.get();
+
+            List&lt;Duty&gt; duties = rule.getDutyRulePair().stream().map(e -&gt; e.getDuty()).collect(Collectors.toList());
+            if(!duties.contains(duty))
+            {
+                DutyRulePair dutyRulePair = new DutyRulePair(duty, rule);
+                rule.addDutyRuleMap(dutyRulePair);
+
+                dutyRuleMapRepository.save(dutyRulePair);
+
+                URI location = ServletUriComponentsBuilder
+                        .fromCurrentRequest()
+                        .buildAndExpand(rule.getRuleId(), duty.getDutyId())
+                        .toUri();
+                return ResponseEntity.created(location).build();
+            }
+
+            return ResponseEntity.unprocessableEntity().build();
+        }
+    }
+
+    @DeleteMapping(&quot;/rules/{ruleId}/duties/{dutyId}&quot;)
+    public ResponseEntity&lt;?&gt; deleteDutyFromRule(@PathVariable(&quot;ruleId&quot;) int ruleId, @PathVariable(&quot;dutyId&quot;) int dutyId)
+    {
+        Optional&lt;DutyRulePair&gt; dutyRulePairOptional = dutyRuleMapRepository.findByRuleDutyId(ruleId, dutyId);
+        if(!dutyRulePairOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;ruleId-&quot; + ruleId + &quot;, dutyId-&quot; + dutyId);
+        }
+
+        Optional&lt;Rule&gt; ruleOptional = ruleRepository.findById(ruleId);
+        Optional&lt;Duty&gt; dutyOptional = dutyRepository.findById(dutyId);
+
+        if(!ruleOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;ruleId-&quot; + ruleId);
+        }
+        if(!dutyOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;dutyId-&quot; + dutyId);
+        }
+
+        Rule rule = ruleOptional.get();
+        DutyRulePair dutyRulePair = dutyRulePairOptional.get();
+        rule.removeDutyRuleMap(dutyRulePair);
+
+        dutyRulePair.setOutUtc(ZonedDateTime.now());
+        dutyRuleMapRepository.save(dutyRulePair);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand().toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    //  Helper methods
+    private Link createDutyLink(int dutyId)
+    {
+        return linkTo(methodOn(DutyController.class).getDuty(dutyId)).withRel(&quot;duty&quot;);
+    }
+
+    private Link createRuleLink(int ruleId)
+    {
+        return linkTo(methodOn(RuleController.class).getRule(ruleId)).withRel(&quot;rule&quot;);
+    }
+
+    private Link createRulesForDutyLink(int dutyId)
+    {
+        return linkTo(methodOn(getClass()).getRulesForDuty(dutyId)).withRel(&quot;rules&quot;);
+    }
+
+    private Link createDutiesForRuleLink(int ruleId)
+    {
+        return linkTo(methodOn(getClass()).getDutiesForRule(ruleId)).withRel(&quot;duties&quot;);
+    }
+}
+
+</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Transactional
+@RestController
+@RepositoryRestController
+public class AuditDutyRuleMapController
+{
+    @Autowired
+    private DutyRuleMapRepository dutyRuleMapRepository;
+
+    @GetMapping(&quot;/audit/rules/{id}/duties&quot;)
+    public  @ResponseBody
+    ResponseEntity&lt;Resource&lt;Rule&gt;&gt; getDutiesForRule(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;DutyRulePair&gt; dutyRulePairList = dutyRuleMapRepository.findByAuditRuleId(id);
+
+        if(dutyRulePairList.isEmpty())
+        {
+            throw new NotFoundException(&quot;ruleId-&quot; + id);
+        }
+
+        Rule rule = dutyRulePairList.get(0).getRule();
+        List&lt;Duty&gt; duties = dutyRulePairList.stream().map(e -&gt; e.getDuty()).collect(Collectors.toList());
+
+        Resource&lt;Rule&gt; ruleResource = new Resource&lt;&gt;(rule, createRuleLink(rule.getID()));
+
+        for(Duty duty : duties)
+        {
+            ruleResource.add(createDutyLink(duty.getID()));
+        }
+        ruleResource.add(linkTo(methodOn(getClass()).getDutiesForRule(id)).withSelfRel());
+        return ResponseEntity.ok(ruleResource);
+    }
+
+    @GetMapping(&quot;/audit/duties/{id}/rules&quot;)
+    public  @ResponseBody ResponseEntity&lt;Resource&lt;Duty&gt;&gt;  getRulesForDuty(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;DutyRulePair&gt; dutyRulePairList = dutyRuleMapRepository.findByAuditDutyId(id);
+
+        if(dutyRulePairList.isEmpty())
+        {
+            throw new NotFoundException(&quot;dutyId-&quot; + id);
+        }
+
+        Duty duty = dutyRulePairList.get(0).getDuty();
+        List&lt;Rule&gt; rules = dutyRulePairList.stream().map(e -&gt; e.getRule()).collect(Collectors.toList());
+
+
+        Resource&lt;Duty&gt; dutyResource = new Resource&lt;&gt;(duty, createDutyLink(duty.getID()));
+
+        for(Rule rule : rules)
+        {
+            dutyResource.add(createRuleLink(rule.getID()));
+        }
+        dutyResource.add(linkTo(methodOn(getClass()).getRulesForDuty(id)).withSelfRel());
+        return ResponseEntity.ok(dutyResource);
+    }
+
+    //  Helper methods
+    private Link createDutyLink(int dutyId)
+    {
+        return linkTo(methodOn(DutyController.class).getDuty(dutyId)).withRel(&quot;duty&quot;);
+    }
+
+    private Link createRuleLink(int ruleId)
+    {
+        return linkTo(methodOn(RuleController.class).getRule(ruleId)).withRel(&quot;rule&quot;);
+    }
+
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><p /><h2 id="ImplementationofBi-Temporality-EstablishUniqueConstraintBetweenDUTY_ID/RULE_ID/DUTY_RULE_MAP_IDandOUT_UTCFields">Establish Unique Constraint Between DUTY_ID/RULE_ID/DUTY_RULE_MAP_ID and OUT_UTC Fields</h2><p>Currently, it is possible to create multiple records with same values for the DUTY_ID and OUT_UTC fields combination.</p><p>For example, we can modify our in memory database for the DUTY table:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(4, 4, &#39;duty name 4&#39;, &#39;duty type 4&#39;, CURRENT_TIMESTAMP, PARSEDATETIME(&#39;12-31-9999&#39;, &#39;MM-dd-yyyy&#39;), &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, 4, &#39;duty name 5&#39;, &#39;duty type 5&#39;, CURRENT_TIMESTAMP, PARSEDATETIME(&#39;12-31-9999&#39;, &#39;MM-dd-yyyy&#39;), &#39;unknown&#39;, &#39;unknown&#39;)</pre>
+</div></div></td></tr></tbody></table></div><p>When we check the state of our in-memory database, we can observe two records with same DUTY_ID and OUT_UTC combination.</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/613233575/image2019-10-17_8-58-44.png?version=1&amp;modificationDate=1571317125039&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/613233575/image2019-10-17_8-58-44.png?version=1&amp;modificationDate=1571317125039&amp;api=v2" loading="lazy"></span><p>To prevent this from happening we need to add Unique Constraints to our Entity classes. For example:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Entity
+@EntityListeners(AuditingEntityListener.class)
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {&quot;dutyId&quot;, &quot;out_utc&quot;})
+})
+public class Duty extends BaseEntity
+{
+...
+}</pre>
+</div></div></td></tr></tbody></table></div><p>When we try to run application after making this change, we will observe the following error:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 72.0px;"/><col style="width: 686.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Error:</p></td><td class="confluenceTd"><p><code>Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: &quot;PUBLIC.UKG46MKE8N39W346GU085S7HRIM_INDEX_2 ON PUBLIC.DUTY(DUTY_ID, OUT_UTC) VALUES 4&quot;; SQL statement:</code><br/><code>INSERT INTO DUTY(ID, DUTY_ID, DUTY_NAME, DUTY_TYPE, IN_UTC, OUT_UTC, created_by, last_modified_by) VALUES(5, 4, 'duty name 5', 'duty type 5', CURRENT_TIMESTAMP, PARSEDATETIME('12-31-9999', 'MM-dd-yyyy'), 'unknown', 'unknown')</code></p></td></tr></tbody></table></div><h2 id="ImplementationofBi-Temporality-Aspects">Aspects</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Aspect
+@Configuration
+public class AspectLogger
+{
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Around(&quot;@annotation(com.springboot.milestone.bitemporal.aspect.annotations.TrackTime)&quot;)
+    public Object trackTime(ProceedingJoinPoint joinPoint) throws Throwable
+    {
+        long startTime = System.currentTimeMillis();
+        Object returnValue = joinPoint.proceed();
+        long endTime = System.currentTimeMillis();
+        logger.info(&quot;Time taken by {} is {} ms&quot;, joinPoint, endTime - startTime);
+        return returnValue;
+    }
+
+    @Around(&quot;@annotation(com.springboot.milestone.bitemporal.aspect.annotations.LogInputOutput)&quot;)
+    public Object logInputOutput(ProceedingJoinPoint joinPoint) throws Throwable
+    {
+        Signature signature = joinPoint.getSignature();
+        logger.info(signature.getName() + &quot; Arguments: &quot; + Arrays.toString(joinPoint.getArgs()));
+        Object returnValue = joinPoint.proceed();
+        logger.info(signature.getName() + &quot; Return value: &quot; + returnValue);
+        return returnValue;
+    }
+
+    @Around(&quot;@annotation(com.springboot.milestone.bitemporal.aspect.annotations.LogExceptionHandler)&quot;)
+    public Object logExceptionHandler(ProceedingJoinPoint joinPoint) throws Throwable
+    {
+        Object returnValue = joinPoint.proceed();
+        logger.error(&quot;Return value: &quot; + returnValue);
+        return returnValue;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LogExceptionHandler
+{
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LogInputOutput
+{
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface TrackTime
+{
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="ImplementationofBi-Temporality-pom.xml">pom.xml</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;parent&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+      &lt;version&gt;2.1.9.RELEASE&lt;/version&gt;
+      &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+   &lt;/parent&gt;
+   &lt;groupId&gt;com.springboot.milestone&lt;/groupId&gt;
+   &lt;artifactId&gt;bi-temporal&lt;/artifactId&gt;
+   &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+   &lt;name&gt;bi-temporal&lt;/name&gt;
+   &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+
+   &lt;properties&gt;
+      &lt;java.version&gt;1.8&lt;/java.version&gt;
+   &lt;/properties&gt;
+
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+         &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+         &lt;artifactId&gt;spring-boot-starter-data-rest&lt;/artifactId&gt;
+      &lt;/dependency&gt;
+
+      &lt;dependency&gt;
+         &lt;groupId&gt;com.h2database&lt;/groupId&gt;
+         &lt;artifactId&gt;h2&lt;/artifactId&gt;
+         &lt;scope&gt;runtime&lt;/scope&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+         &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+         &lt;scope&gt;test&lt;/scope&gt;
+      &lt;/dependency&gt;
+      &lt;!--&lt;dependency&gt;
+         &lt;groupId&gt;com.gs.spring&lt;/groupId&gt;
+         &lt;artifactId&gt;gs-spring-boot-security&lt;/artifactId&gt;
+         &lt;version&gt;2.1.7&lt;/version&gt;
+      &lt;/dependency&gt;--&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
+         &lt;artifactId&gt;spring-security-core&lt;/artifactId&gt;
+         &lt;version&gt;5.2.0.RELEASE&lt;/version&gt;
+      &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.vaadin.external.google&lt;/groupId&gt;
+            &lt;artifactId&gt;android-json&lt;/artifactId&gt;
+            &lt;version&gt;RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+   &lt;build&gt;
+      &lt;plugins&gt;
+         &lt;plugin&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+         &lt;/plugin&gt;
+      &lt;/plugins&gt;
+   &lt;/build&gt;
+
+&lt;/project&gt;</pre>
+</div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

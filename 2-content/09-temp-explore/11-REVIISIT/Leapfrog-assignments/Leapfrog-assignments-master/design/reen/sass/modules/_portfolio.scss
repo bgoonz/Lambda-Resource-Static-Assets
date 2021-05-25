@@ -1,0 +1,147 @@
+.portfolio {
+  background-color: #f1f5f7;
+  padding: 30px 0px;
+  text-align: center;
+
+  h2 {
+    text-align: center;
+  }
+
+  @include e(header) {
+    p {
+      margin-top: 40px;
+      font-size: 22px;
+    }
+  }
+
+  @include e(products) {
+    margin-top: 30px;
+
+    @include mq(sm) {
+      margin-top: 50px;
+    }
+
+    @include mq(lg) {
+      margin-top: 78px;
+    }
+  }
+
+  @include e(featured-section) {
+    margin-top: 50px;
+
+    @include mq(lg) {
+      margin-top: 80px;
+    }
+  }
+
+  @include e(featured-product) {
+    width: 100%;
+
+    @include mq(md) {
+      width: calc(50% - 20px);
+    }
+
+    &:first-child {
+      @include mq(md) {
+        float: left;
+      }
+    }
+
+    &:last-child {
+      @include mq(md) {
+        float: right;
+      }
+    }
+  }
+
+  @include e(featured-text) {
+    padding: 20px 0px;
+    background-color: $white;
+    box-shadow: 1px 1px 2px #f1f5f7;
+
+    p {
+      margin-top: 12px;
+    }
+
+    @include mq(lg) {
+      padding: 33px;
+    }
+  }
+
+  @include e(featured-product) {
+    &:first-child {
+      margin-bottom: 20px;
+    }
+  }
+
+  @include e(product-images) {
+    margin-top: 40px;
+
+    li {
+      margin-bottom: 20px;
+      width: 100%;
+
+      img {
+        width: 100%;
+
+        @include mq(sm) {
+          max-height: 186px;
+        }
+      }
+
+      @include mq(sm) {
+        width: calc(25% - 10px);
+        margin-bottom: 0;
+        float: left;
+        margin-right: 10px;
+
+        &:last-child {
+          width: 25%;
+          margin-right: 0;
+        }
+      }
+
+      @include mq(md) {
+        width: calc(25% - 30px);
+        margin-right: 30px;
+
+        &:last-child {
+          width: 25%;
+          margin-right: 0;
+        }
+      }
+    }
+
+    @include mq(lg) {
+      margin-top: 80px;
+    }
+  }
+
+  @include e(carousel-indicators) {
+    margin-top: 30px;
+    span {
+      display: inline-block;
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      background-color: $blue-bayoux;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $caribbean-green;
+      }
+    }
+
+    .selected {
+      background-color: $caribbean-green;
+    }
+
+    @include mq(sm) {
+      margin-top: 45px;
+    }
+  }
+
+  @include mq(lg) {
+    padding: 115px 0px;
+  }
+}

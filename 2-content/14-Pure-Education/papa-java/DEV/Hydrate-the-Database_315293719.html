@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Hydrate the Database</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="RMS_315097111.html">RMS</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Hydrate the Database
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 27, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="HydratetheDatabase-CreateDatabaseTablesinschemaSOD_TEST">Create Database Tables in schema SOD_TEST</h1><h2 id="HydratetheDatabase-CreateDDLStatements">Create DDL Statements</h2><p>Add following to application.properties and execute the project:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.DB2Dialect
+spring.jpa.properties.javax.persistence.schema-generation.create-source=metadata
+spring.jpa.properties.javax.persistence.schema-generation.scripts.action=create
+spring.jpa.properties.javax.persistence.schema-generation.scripts.create-target=create.sql</pre>
+</div></div></td></tr></tbody></table></div><p>This will create a file - <code>create.sql</code></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">create sequence hibernate_sequence start with 1 increment by 1
+create table employee (id integer not null, created_by varchar(255), in_utc timestamp not null, last_modified_by varchar(255), out_utc timestamp, audit_id varchar(255), department varchar(255), employee_number varchar(255), guid varchar(255), kerberos varchar(255), location varchar(255), name varchar(255), phone varchar(255), title varchar(255), team_id integer not null, primary key (id))
+create table rms_node (id integer not null, created_by varchar(255), in_utc timestamp not null, last_modified_by varchar(255), out_utc timestamp, audit_id varchar(255), code varchar(255), name varchar(255), node_type varchar(255), team_id integer, primary key (id))
+create table rms_node_map (id integer not null, created_by varchar(255), in_utc timestamp not null, last_modified_by varchar(255), out_utc timestamp, audit_id varchar(255), child_id integer, parent_id integer, primary key (id))
+create table team (id integer not null, created_by varchar(255), in_utc timestamp not null, last_modified_by varchar(255), out_utc timestamp, audit_id varchar(255), primary key (id))
+create unique index UKcbw6ome5i54khsmaeaax2y36o on employee (audit_id, out_utc)
+create unique index UKqy9bi7sv21otr18x3ankrag2 on rms_node (audit_id, out_utc)
+create unique index UKm1h091sd0inao94jknd11xann on rms_node_map (audit_id, out_utc)
+create unique index UK1xc53ip1ma678dfmgd4kgl462 on team (audit_id, out_utc)
+alter table employee add constraint FK8d7lrsr6kwirr93rx0tafnoqa foreign key (team_id) references team
+alter table rms_node add constraint FKokpop159panffjsm9ewp8ui52 foreign key (team_id) references team
+alter table rms_node_map add constraint FK1p70wjxpb6lroark7mftumc4u foreign key (child_id) references rms_node
+alter table rms_node_map add constraint FKnmejcil40cmp27chidn12ys70 foreign key (parent_id) references rms_node</pre>
+</div></div></td></tr></tbody></table></div><h2 id="HydratetheDatabase-CreateDatabaseTablesfromSQLClient">Create Database Tables from SQL Client</h2><ol><li><p>Log in with <code>probporxy</code> account.</p></li><li><p>Set schema</p><p><code>set schema SOD_TEST</code></p><p><br/></p></li><li><p>Execute statements from create.sql file</p></li><li><p>Alter sequence</p><p><code>alter sequence HIBERNATE_SEQUENCE restart with 101</code></p><p><br/></p></li><li><p>execute statements to grant access:</p><p><code>GRANT ALL on TEAM to public;</code><br/><code>GRANT ALL on EMPLOYEE to public;</code><br/><code>GRANT ALL on RMS_NODE to public;</code><br/><code>GRANT ALL on RMS_NODE_MAP to public;</code></p><p><br/></p></li></ol><h2 id="HydratetheDatabase-Addnewclassestoconfigpackageforthedatasource">Add new classes to config package for the datasource</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Configuration
+@Profile({&quot;db&quot;})
+public class DataSourceConfig
+{
+    @Value(&quot;${datasource.driver-class-name}&quot;)
+    String dataSourceDriverClass;
+
+    @Value(&quot;${datasource.url}&quot;)
+    String dataSourceUrl;
+
+    @Value(&quot;${datasource.system.account.credref}&quot;)
+    String credRef;
+
+    @Bean
+    public DataSource getDataSource()
+    {
+        CredentialLookUp&lt;SystemAccount&gt; credentialLookUp = new CredentialLookUp&lt;&gt;();
+        SystemAccount systemAccount = credentialLookUp.getCredentialObject(credRef);
+        String systemAccountPassword = systemAccount.getPassword();
+        String systemAccountName = systemAccount.getAccountName();
+        String[] systemAccountParts = systemAccountName.split(&quot;\\\\&quot;);
+        return DataSourceBuilder
+                .create()
+                .username(systemAccountParts[1])
+                .password(systemAccountPassword)
+                .url(dataSourceUrl)
+                .driverClassName(dataSourceDriverClass)
+                .build();
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Configuration
+@EnableJpaAuditing(auditorAwareRef = &quot;auditorAware&quot;)
+public class JpaConfig
+{
+    @Bean
+    public AuditorAware&lt;String&gt; auditorAware()
+    {
+        return new AuditorAwareImpl();
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h2 id="HydratetheDatabase-Adddb2driver,Security,andCredentialVaulttopom.xml">Add db2 driver, Security, and Credential Vault to<code> pom.xml</code></h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+&lt;dependency&gt;
+    &lt;groupId&gt;com.ibm.db2&lt;/groupId&gt;
+    &lt;artifactId&gt;db2jcc4&lt;/artifactId&gt;
+    &lt;version&gt;10.5.7.3.69.49&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+   &lt;groupId&gt;com.gs.spring&lt;/groupId&gt;
+   &lt;artifactId&gt;gs-spring-boot-credential-vault&lt;/artifactId&gt;
+   &lt;version&gt;2.1.7&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.security&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-security-core&lt;/artifactId&gt;
+   &lt;version&gt;5.2.0.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+...</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h2 id="HydratetheDatabase-Populatethedatabase">Populate the database</h2><h2 id="HydratetheDatabase-Createnewapplication-db.propertiesfile">Create new <code>application-db.properties</code> file</h2><p>Add properties to connect to the database and the Credential Vault System account</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">spring.jpa.properties.hibernate.default_schema=SOD_TEST
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.DB2Dialect
+
+datasource.url=jdbc:db2://nyg13qi8-vip.ny.fw.gs.com:56834/ntrkdi02
+datasource.driver-class-name=com.ibm.db2.jcc.DB2Driver
+# Credential vault system account
+datasource.system.account.credref=a1c1bb4924d84c319a0142085fbbf840</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h3 id="HydratetheDatabase-Createnewrunconfiguration">Create new run configuration</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p>Name</p></td><td class="confluenceTd"><p><code>db</code></p></td></tr><tr><td class="confluenceTd"><p>Program Arguments</p></td><td class="confluenceTd"><ul><li><p>-spring.profiles.active=db</p></li></ul></td></tr></tbody></table></div><p><br/></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : WSL 2 Installation Instructions</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="WSL-2-Configuration_1150877783.html">WSL 2 Configuration</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : WSL 2 Installation Instructions
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Feb 02, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 101.0px;"/><col style="width: 657.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Install:</strong></p></th><td class="confluenceTd"><p><a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" class="external-link" rel="nofollow">https://docs.microsoft.com/en-us/windows/wsl/install-win10</a></p></td></tr><tr><th class="confluenceTh"><p><strong>Uninstall:</strong></p></th><td class="confluenceTd"><p><a href="https://petri.com/how-to-uninstall-and-reset-windows-subsystem-for-linux-distributions" class="external-link" rel="nofollow">https://petri.com/how-to-uninstall-and-reset-windows-subsystem-for-linux-distributions</a></p></td></tr><tr><th class="confluenceTh"><p><strong>YouTube</strong></p></th><td class="confluenceTd"><p><a href="https://www.youtube.com/watch?v=_fntjriRe48&amp;ab_channel=DavidBombal" class="external-link" rel="nofollow">https://www.youtube.com/watch?v=_fntjriRe48&amp;ab_channel=DavidBombal</a></p></td></tr></tbody></table></div><h1 id="WSL2InstallationInstructions-InstallWSL2">Install WSL 2</h1><h2 id="WSL2InstallationInstructions-EnableWSL">Enable WSL</h2><p>From PowerShell with Admin Mode, </p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 142.0px;"/><col style="width: 818.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Command:</p></td><td class="confluenceTd"><p><code>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</code></p></td></tr></tbody></table></div><p>Check to make sure your Windows 10 version is 18362, or higher (<code>WinVer</code>):</p><h2 id="WSL2InstallationInstructions-EnableVirtualMachineFeature">Enable Virtual Machine Feature</h2><p>From PowerShell with Admin Mode, </p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 142.0px;"/><col style="width: 818.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Command:</p></td><td class="confluenceTd"><p><code>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart</code></p></td></tr></tbody></table></div><p>Restart the machine.</p><h2 id="WSL2InstallationInstructions-DownloadtheLinuxkernelupdatepackage">Download the Linux kernel update package</h2><p><a href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi" class="external-link" rel="nofollow">https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi</a></p><h2 id="WSL2InstallationInstructions-SetWSL2asyourdefaultversion(fromPowerShell)">Set WSL 2 as your default version (from PowerShell)</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 113.0px;"/><col style="width: 647.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Command:</p></td><td class="confluenceTd"><p><code>wsl --set-default-version 2</code></p></td></tr></tbody></table></div><h2 id="WSL2InstallationInstructions-CheckWSLVersion(fromPowerShell)">Check WSL Version (from PowerShell)</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 113.0px;"/><col style="width: 647.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Command:</p></td><td class="confluenceTd"><p><code>wsl -l -v</code></p></td></tr><tr><td class="confluenceTd"><p>Response</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">  NAME                   STATE           VERSION
+* Ubuntu                 Running         2
+  docker-desktop-data    Running         2
+  docker-desktop         Running         2</pre>
+</div></div></td></tr></tbody></table></div><h2 id="WSL2InstallationInstructions-InstallyouLinuxdistroofchoice">Install you Linux distro of choice</h2><p>From Microsoft store, Choose Linux and Ubuntu. Launch after install and specify UNIX user name and password:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 168.0px;"/><col style="width: 590.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>User Name:</strong></p></th><td class="confluenceTd"><p><code>nick</code></p></td></tr><tr><th class="confluenceTh"><p><strong>PWD:</strong></p></th><td class="confluenceTd"><p><code>zaika code</code></p></td></tr></tbody></table></div><h3 id="WSL2InstallationInstructions-Checkubuntuversion">Check ubuntu version</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 119.0px;"/><col style="width: 639.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Command:</strong></p></th><td class="confluenceTd"><p><code>lsb_release -a</code></p></td></tr><tr><th class="confluenceTh"><p><strong>Response:</strong></p></th><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">No LSB modules are available.
+Distributor ID: Ubuntu
+Description:    Ubuntu 20.04.1 LTS
+Release:        20.04
+Codename:       focal</pre>
+</div></div></td></tr><tr><th class="confluenceTh"><p><strong>Command</strong></p></th><td class="confluenceTd"><p><code>uname -a</code></p></td></tr><tr><th class="confluenceTh"><p><strong>Response</strong></p></th><td class="confluenceTd"><p><code>Linux LAPTOP-VDL6ORQP 5.4.72-microsoft-standard-WSL2 #1 SMP Wed Oct 28 23:40:43 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux</code></p></td></tr></tbody></table></div><h2 id="WSL2InstallationInstructions-InstallWindowsTerminal">Install Windows Terminal</h2><p>From Microsoft store.</p><h3 id="WSL2InstallationInstructions-UseWindowsTerminal">Use Windows Terminal</h3><p>See <a href="https://docs.microsoft.com/en-us/windows/terminal/panes" class="external-link" rel="nofollow">https://docs.microsoft.com/en-us/windows/terminal/panes</a></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 340.0px;"/><col style="width: 340.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Action</strong></p></th><th class="confluenceTh"><p><strong>Command</strong></p></th></tr><tr><td class="confluenceTd"><p>Side-by-side panes</p></td><td class="confluenceTd"><p><code>alt+shift+plus, alt+shift+minus</code></p></td></tr><tr><td class="confluenceTd"><p>Close pand</p></td><td class="confluenceTd"><p><code>ctrl+shift+w</code></p></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

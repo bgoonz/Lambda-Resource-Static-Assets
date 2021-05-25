@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Replace GS SSO Token with GS Authenticator Properties</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Overrides_290029797.html">Overrides</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Replace GS SSO Token with GS Authenticator Properties
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 19, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="ReplaceGSSSOTokenwithGSAuthenticatorProperties-AddGSAuthenticatorProperties">Add GS Authenticator Properties</h1><p>application.properties will use <code>gs.authenticator.type=current-user</code>. Environment files will use <code>gs.authenticator.type=key-tab</code>.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">#AUTHENTICATOR
+gs.authenticator.enabled=true
+gs.authenticator.type=current-user
+gs.authenticator.app-name=EntitlementCatalog
+gs.authenticator.client.enabled=true
+gs.security.sso.enabled=true 
+...</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+#Sytem Accounts
+gs.authenticator.type=key-tab
+gs.authenticator.key-tab.path=file:///var/cv/dutysepdev/creds/dutysepdev.kt
+gs.authenticator.key-tab.principal=dutysepdev@GS.com
+...</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">#System Accounts
+gs.authenticator.type=key-tab
+gs.authenticator.key-tab.path=file:///var/cv/dutysepuat/creds/dutysepuat.kt
+gs.authenticator.key-tab.principal=dutysepuat@GS.com
+...</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">#SystemAccounts
+gs.authenticator.type=key-tab
+gs.authenticator.key-tab.path=file:///var/cv/dutysepprod/creds/dutysepprod.kt
+gs.authenticator.key-tab.principal=dutysepprod@GS.com
+...</pre>
+</div></div></td></tr></tbody></table></div><h1 id="ReplaceGSSSOTokenwithGSAuthenticatorProperties-Addnewconfigurationclass">Add new configuration class</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Configuration
+public class RestTemplateConfig {
+    @Bean
+    public RestTemplate authenticatedRestTemplate(RestTemplateBuilder restTemplateBuilder) {
+        return restTemplateBuilder.build();
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="ReplaceGSSSOTokenwithGSAuthenticatorProperties-RemoveGSSSOTokenUtilabstractclassandallimplementationclasses">Remove GSSSOTokenUtil abstract class and all implementation classes</h1><h1 id="ReplaceGSSSOTokenwithGSAuthenticatorProperties-ChangestoExternalControllerstoreplacerestTemplate.exchangewhereHttpEntityisspecified">Changes to External Controllers to replace restTemplate.exchange where HttpEntity is specified</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Transactional
+@RestController
+@RepositoryRestController
+public class CampController
+{
+    @Autowired
+    private PeopleSearchController peopleSearchController;
+
+    @Value(&quot;${camp-entitlements.url}&quot;)
+    private String campEntitlementsUrl;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @GetMapping(&quot;/camp/guid/{guid}/privileges&quot;)
+    public ResponseEntity&lt;List&lt;String&gt;&gt; getCampPrivilegesByGuid(@PathVariable(&quot;guid&quot;) String guid) throws JSONException
+    {
+        List&lt;String&gt; response = getCampPrivileges(guid);
+        return ResponseEntity.ok(response);
+    }
+
+
+    @GetMapping(&quot;/camp/kerberos/{kerberos}/privileges&quot;)
+    public ResponseEntity&lt;List&lt;String&gt;&gt; getCampPrivilegesByKerberos(@PathVariable(&quot;kerberos&quot;) String kerberos) throws JSONException
+    {
+        ResponseEntity&lt;Map&lt;String,String&gt;&gt; peopleControllerResponse = peopleSearchController.findByKerberos(kerberos);
+
+        String guid = peopleControllerResponse.getBody().get(&quot;gsguid&quot;);
+
+        List&lt;String&gt; response = getCampPrivileges(guid);
+
+        return response.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(response);
+    }
+
+    private List&lt;String&gt; getCampPrivileges(String guid) throws JSONException
+    {
+        ResponseEntity&lt;String&gt; campResponse;
+        try
+        {
+            campResponse = restTemplate.getForEntity(String.format(campEntitlementsUrl, guid), String.class);
+        }
+        catch(Exception e)
+        {
+            throw new InternalServerErrorException(&quot;CAMP service internal error&quot;);
+        }
+
+        List&lt;String&gt; response = new ArrayList&lt;&gt;();
+        if(campResponse != null &amp;&amp; campResponse.getStatusCode() == HttpStatus.OK)
+        {
+            JSONArray content = new JSONArray(campResponse.getBody());
+            if(content.length() == 0)
+            {
+                throw new ResourceNotFoundException(&quot;Guid: &quot; + guid);
+            }
+
+            for(int i = 0; i &lt; content.length(); ++i)
+            {
+                JSONObject jsonItem = (JSONObject)content.get(i);
+                Object privilegeId = jsonItem.get(&quot;privilegeId&quot;);
+                if(privilegeId != null &amp;&amp; privilegeId instanceof String)
+                {
+                    response.add((String) privilegeId);
+                }
+            }
+        }
+
+        return response;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Transactional
+@RestController
+@RepositoryRestController
+public class ComController
+{
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Autowired
+    private PeopleSearchController peopleSearchController;
+
+    @Autowired
+    private RmsController rmsController;
+
+    @Value(&quot;${kerberos.asset.type.id}&quot;)
+    private String kerberosAssetTypeId;
+    @Value(&quot;${rmsnode.asset.type.id}&quot;)
+    private String rmsNodeAssetTypeId;
+
+    @Autowired
+    private RuleRepository ruleRepository;
+    @Autowired
+    private DutyAssignableMapRepository dutyAssignableMapRepository;
+    @Autowired
+    private RuleDutyMapRepository ruleDutyMapRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Value(&quot;${comSetBulkOverride.url}&quot;)
+    private String comSetBulkOverrideUrl;
+    @Value(&quot;${comGetRmsNodeOverride.url}&quot;)
+    private String comGetRmsNodeOverrideUrl;
+    @Value(&quot;${comGetKerberosOverride.url}&quot;)
+    private String comGetKerberosOverrideUrl;
+    @Value(&quot;${comDeleteOverride.url}&quot;)
+    private String comDeleteOverrideUrl;
+    @Value(&quot;${control.url}&quot;)
+    private String controlUrl;
+
+    @PostMapping(&quot;/com/rmsnode/{approverKerberos}/{value}&quot;)
+    public ResponseEntity&lt;?&gt; setComRmsNodeBulkOverride(@RequestBody ComOverrideRmsNodeInput comOverrideRmsNodeInput,
+                                                       @PathVariable(&quot;approverKerberos&quot;) String approverKerberos,
+                                                       @PathVariable(&quot;value&quot;) String value) throws JSONException
+    {
+        List&lt;String&gt; users = comOverrideRmsNodeInput.getRmsNodes();
+        return createComBulkOverride(users, rmsNodeAssetTypeId, &quot;RmsNode&quot;, approverKerberos, value);
+    }
+
+    @PostMapping(&quot;/com/kerberos/{approverKerberos}/{value}&quot;)
+    public ResponseEntity&lt;?&gt; setComKerberosBulkOverride(@RequestBody ComOverrideKerberosInput comOverrideKerberosInput,
+                                                        @PathVariable(&quot;approverKerberos&quot;) String approverKerberos,
+                                                        @PathVariable(&quot;value&quot;) String value) throws JSONException
+    {
+        List&lt;String&gt; users = comOverrideKerberosInput.getUsers();
+        return createComBulkOverride(users, kerberosAssetTypeId, &quot;Kerberos&quot;, approverKerberos, value);
+    }
+
+
+    @GetMapping(&quot;/com/{kerberos}&quot;)
+    public ResponseEntity&lt;Map&lt;String,List&lt;Map&lt;String,String&gt;&gt;&gt;&gt; getComOverrides(@PathVariable(&quot;kerberos&quot;) String kerberos) throws JSONException
+    {
+        List&lt;String&gt; input = new ArrayList&lt;&gt;();
+        input.add(kerberos);
+
+        ResponseEntity&lt;String&gt; comResponse = null;
+        try
+        {
+            comResponse = restTemplate.postForEntity(comGetKerberosOverrideUrl, input, String.class);
+        }
+        catch(Exception e)
+        {
+            logger.info(&quot;No overrides for Kerberos &#39;{}&#39;&quot;, kerberos);
+        }
+
+        Map&lt;String,List&lt;Map&lt;String,String&gt;&gt;&gt; response = new HashMap&lt;&gt;();
+        if(comResponse != null &amp;&amp; comResponse.getStatusCode() == HttpStatus.OK)
+        {
+            List&lt;Map&lt;String, String&gt;&gt; data = new ArrayList&lt;&gt;();
+
+            JSONArray jsonArray = new JSONArray(comResponse.getBody());
+            for (int i = 0; i &lt; jsonArray.length(); ++i)
+            {
+                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+
+                Map&lt;String, String&gt; map = new HashMap&lt;&gt;();
+                map.put(&quot;override&quot;, (String) jsonObject.get(&quot;patchScope&quot;));
+                map.put(&quot;expiryDate&quot;, (String) jsonObject.get(&quot;expiryDate&quot;));
+                map.put(&quot;state&quot;, (String) jsonObject.get(&quot;state&quot;));
+                map.put(&quot;id&quot;, String.valueOf(jsonObject.get(&quot;id&quot;)));
+
+                data.add(map);
+            }
+
+
+            if (!data.isEmpty())
+            {
+                response.put(&quot;kerberos overrides&quot;, data);
+            }
+        }
+
+        ResponseEntity&lt;LinkedHashMap&lt;String, Map&lt;String,String&gt;&gt;&gt; rmsHierarchyResponse = rmsController.getRmsHierarchyByKerberos(kerberos);
+        LinkedHashMap&lt;String, Map&lt;String,String&gt;&gt; rmsHierarchyMap = rmsHierarchyResponse.getBody();
+
+        for(Map.Entry&lt;String, Map&lt;String,String&gt;&gt; e : rmsHierarchyMap.entrySet())
+        {
+            String code = e.getKey();
+            List&lt;Map&lt;String,String&gt;&gt; rmsNodeOverrides = getComRmsNodeOverridesForRmsNodeCode(code);
+            if(!rmsNodeOverrides.isEmpty())
+            {
+                Map&lt;String,String&gt; value = e.getValue();
+                String name = value.get(&quot;name&quot;);
+                String type = value.get(&quot;nodeType&quot;);
+
+                response.put(String.format(&quot;%s (%s-%s) override&quot;, type, name, code), rmsNodeOverrides);
+            }
+        }
+
+        return response.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping(&quot;/com/{id}&quot;)
+    public ResponseEntity&lt;?&gt; deleteComOverride(@PathVariable(&quot;id&quot;) int id) throws JSONException
+    {
+        ResponseEntity&lt;String&gt; comResponse;
+        try
+        {
+            comResponse = restTemplate.exchange(String.format(comDeleteOverrideUrl, id), HttpMethod.DELETE, null, String.class);
+        }
+        catch(Exception e)
+        {
+            throw new ResourceNotFoundException(&quot;No overrides for id: &quot; + id);
+        }
+
+        return ResponseEntity.ok(comResponse);
+    }
+
+
+    List&lt;Map&lt;String,String&gt;&gt; getComRmsNodeOverridesForRmsNodeCode(String code) throws JSONException
+    {
+        List&lt;String&gt; input = new ArrayList&lt;&gt;();
+        input.add(code);
+
+        ResponseEntity&lt;String&gt; comResponse = null;
+        try
+        {
+            comResponse = restTemplate.postForEntity(comGetRmsNodeOverrideUrl, input, String.class);
+        }
+        catch(Exception e)
+        {
+            // COM throws exception when value is not found
+            logger.info(&quot;Code &#39;{}&#39; not found in COM&quot;, code);
+        }
+
+        List&lt;Map&lt;String,String&gt;&gt; result = new ArrayList&lt;&gt;();
+        if(comResponse != null &amp;&amp; comResponse.getStatusCode() == HttpStatus.OK)
+        {
+            JSONArray jsonArray = new JSONArray(comResponse.getBody());
+            for(int i = 0; i &lt; jsonArray.length(); ++i)
+            {
+                JSONObject jsonObject = (JSONObject)jsonArray.get(i);
+
+                Map&lt;String,String&gt; map = new HashMap&lt;&gt;();
+                map.put(&quot;override&quot;, (String)jsonObject.get(&quot;patchScope&quot;));
+                map.put(&quot;expiryDate&quot;, (String)jsonObject.get(&quot;expiryDate&quot;));
+                map.put(&quot;state&quot;, (String)jsonObject.get(&quot;state&quot;));
+                map.put(&quot;id&quot;, String.valueOf(jsonObject.get(&quot;id&quot;)));
+
+                result.add(map);
+            }
+        }
+
+        return result;
+    }
+
+    private ResponseEntity&lt;?&gt; createComBulkOverride(List&lt;String&gt; users, String assetTypeId, String assetTypeName, String approverKerberos, String override) throws JSONException
+    {
+        List&lt;Integer&gt; controlIds = getControlIdFromOverrideValue(override);
+
+        String approverFullName = getFullNameForKerberos(approverKerberos);
+
+        List&lt;Map&lt;String,Object&gt;&gt; assetScopes = new ArrayList&lt;&gt;();
+        for(String user : users)
+        {
+            final String fullName;
+            if(assetTypeId.equals(kerberosAssetTypeId))
+            {
+                fullName = getFullNameForKerberos(user);
+            }
+            else
+            {
+                fullName = &quot;Tech Risk Engineering&quot;;
+            }
+
+            Map&lt;String,Object&gt; assetScopeMap = new HashMap&lt;&gt;() {{
+                put(&quot;assetId&quot;, user);
+                put(&quot;assetName&quot;, fullName);
+                put(&quot;assetTypeName&quot;, assetTypeId);
+                put(&quot;divisionName&quot;, &quot;&quot;);
+                put(&quot;businessUnitName&quot;, &quot;&quot;);
+            }};
+            assetScopes.add(assetScopeMap);
+        }
+
+        URI location = null;
+        for(int controlId : controlIds)
+        {
+            List&lt;Map&lt;String,Object&gt;&gt; exemptionOwners = new ArrayList&lt;&gt;();
+
+            List&lt;String&gt; controlOwners = getExemptionOwners(controlId);
+            for(String controlOwner : controlOwners)
+            {
+                Map&lt;String,Object&gt; exemptionOwnersMap = new HashMap&lt;&gt;() {{
+                    put(&quot;kerberos&quot;, controlOwner);
+                    put(&quot;reason&quot;, &quot;Added by Requestor&quot;);
+                    put(&quot;lastUpdatedBy&quot;, controlOwner);
+                    put(&quot;lastModifiedBy&quot;, controlOwner);
+                }};
+                exemptionOwners.add(exemptionOwnersMap);
+            }
+
+            Map&lt;String, Object&gt; bodyMap = new HashMap&lt;&gt;();
+
+            bodyMap.put(&quot;parentExemptionId&quot;, 0);
+            bodyMap.put(&quot;control&quot;, controlId);
+            bodyMap.put(&quot;controlName&quot;, &quot;SoD &quot; + assetTypeName + &quot; Override&quot;);
+            bodyMap.put(&quot;assetTypeId&quot;, assetTypeId);
+            bodyMap.put(&quot;assetTypeName&quot;, assetTypeName);
+            bodyMap.put(&quot;metricName&quot;, &quot;&quot;);
+            bodyMap.put(&quot;assetScopes&quot;, assetScopes);
+            bodyMap.put(&quot;approvalMD&quot;, approverKerberos);
+            bodyMap.put(&quot;approvalMDName&quot;, approverFullName);
+            bodyMap.put(&quot;compensatingControls&quot;, new ArrayList&lt;&gt;());
+            bodyMap.put(&quot;risks&quot;, new ArrayList&lt;&gt;());
+            bodyMap.put(&quot;autoCloseStatus&quot;, &quot;&quot;);
+            bodyMap.put(&quot;requestor&quot;, &quot;&quot;);
+            bodyMap.put(&quot;requestorName&quot;, &quot;&quot;);
+            bodyMap.put(&quot;requestSource&quot;, &quot;&quot;);
+            bodyMap.put(&quot;requestDate&quot;, Instant.now().toString());
+            bodyMap.put(&quot;expiryDate&quot;, Instant.now().plus(365, ChronoUnit.DAYS).toString());
+            bodyMap.put(&quot;treatment&quot;, &quot;UNABLE_TO_ADOPT_CONTROL&quot;);
+            bodyMap.put(&quot;patchScope&quot;, override);
+            bodyMap.put(&quot;exemptionDescription&quot;, &quot;SoD &quot; + assetTypeName + &quot; Override&quot;);
+            bodyMap.put(&quot;state&quot;, &quot;APPROVED&quot;);
+            bodyMap.put(&quot;exemptionProcessState&quot;, &quot;ACTIVE&quot;);
+            bodyMap.put(&quot;exemptionOwners&quot;, exemptionOwners);
+            bodyMap.put(&quot;exemptionComments&quot;, new ArrayList&lt;&gt;());
+            bodyMap.put(&quot;exemptionClosure&quot;, new ArrayList&lt;&gt;());
+
+
+            //  Uncomment below for logging purposes
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            String json;
+//            try
+//            {
+//                json = objectMapper.writeValueAsString(bodyMap);
+//                logger.info(&quot;json = {}&quot; + json);
+//            }
+//            catch (JsonProcessingException e)
+//            {
+//                e.printStackTrace();
+//            }
+
+            List&lt;Map&lt;String, Object&gt;&gt; requestBody = new ArrayList&lt;&gt;();
+            requestBody.add(bodyMap);
+
+            ResponseEntity&lt;String&gt; comResponse;
+
+            try
+            {
+                comResponse = restTemplate.postForEntity(comSetBulkOverrideUrl, requestBody, String.class);
+            }
+            catch(Exception e)
+            {
+                throw new InternalServerErrorException(&quot;COM Bulk POST request failed&quot;);
+            }
+
+            if(comResponse != null &amp;&amp; comResponse.getStatusCode() == HttpStatus.OK)
+            {
+                //  Uncomment to see response
+                //JSONObject jsonObject = new JSONObject(comResponse.getBody());
+                location = ServletUriComponentsBuilder
+                        .fromCurrentRequest()
+                        .buildAndExpand().toUri();
+            }
+
+        }
+
+        return ResponseEntity.created(location).build();
+    }
+
+    private String getFullNameForKerberos(String kerberos) throws JSONException
+    {
+        ResponseEntity&lt;Map&lt;String,String&gt;&gt; userMapResponse = peopleSearchController.findByKerberos(kerberos);
+        if(userMapResponse.getStatusCode() != HttpStatus.OK)
+        {
+            throw new ResourceNotFoundException(&quot;user-&quot; + kerberos);
+        }
+
+        return userMapResponse.getBody().get(&quot;cn&quot;);
+    }
+
+    public List&lt;String&gt; getExemptionOwners(int controlId)
+    {
+        ResponseEntity&lt;?&gt; responseEntity;
+
+        try
+        {
+            responseEntity = restTemplate.getForEntity(String.format(controlUrl, controlId), Map.class);
+        }
+        catch(Exception e)
+        {
+            throw new ResourceNotFoundException(&quot;ControlId: &quot; + controlId);
+        }
+
+        List&lt;String&gt; response = new ArrayList&lt;&gt;();
+        if(responseEntity != null &amp;&amp; responseEntity.getStatusCode() == HttpStatus.OK)
+        {
+            ResponseEntity&lt;Map&lt;String,Object&gt;&gt; rmsResponse = (ResponseEntity&lt;Map&lt;String,Object&gt;&gt;)responseEntity;
+            Map&lt;String,Object&gt; valueMap = rmsResponse.getBody();
+            List&lt;LinkedHashMap&lt;String,Object&gt;&gt; dataMapList = (ArrayList&lt;LinkedHashMap&lt;String, Object&gt;&gt;) valueMap.get(&quot;data&quot;);
+            LinkedHashMap&lt;String,Object&gt; dataMap = dataMapList.get(0);
+            List&lt;LinkedHashMap&lt;String,Object&gt;&gt; tagsList = (List&lt;LinkedHashMap&lt;String,Object&gt;&gt;)dataMap.get(&quot;tags&quot;);
+
+            for(LinkedHashMap&lt;String,Object&gt; entry : tagsList)
+            {
+                if(entry.get(&quot;tagType&quot;).equals(&quot;ControlAssessorIndividual&quot;))
+                {
+                    String tag = (String)entry.get(&quot;tag&quot;);
+                    if(StringUtils.hasText(tag))
+                    {
+                        response.add(tag);
+                    }
+                }
+            }
+        }
+
+        return response;
+    }
+
+    private List&lt;Integer&gt; getControlIdFromOverrideValue(String overrideSpec)
+    {
+        String[] overrideParts = overrideSpec.split(&quot;\\|&quot;);
+        if(overrideParts.length == 2)
+        {
+            if(overrideParts[0].equals(&quot;RULE_OVERRIDE&quot;))
+            {
+                Optional&lt;Rule&gt; ruleOptional = ruleRepository.findById(Integer.valueOf(overrideParts[1]));
+                if(ruleOptional.isPresent())
+                {
+                    return Arrays.asList(ruleOptional.get().getControlId());
+                }
+            }
+            else if(overrideParts[0].equals(&quot;PRIVILEGE_OVERRIDE&quot;))
+            {
+                String[] privilegeOverrideParts = overrideParts[1].split(&quot;:&quot;);
+                if (privilegeOverrideParts.length == 2)
+                {
+                    String leftAssignables = privilegeOverrideParts[0];
+                    String rightAssignables = privilegeOverrideParts[1];
+                    if (StringUtils.hasText(leftAssignables) &amp;&amp; StringUtils.hasText(rightAssignables))
+                    {
+                        List&lt;Long&gt; leftAssignablesIdList = Arrays.stream(leftAssignables.split(&quot;,&quot;)).map(Long::valueOf).collect(Collectors.toList());
+                        List&lt;Long&gt; rightAssignablesIdList = Arrays.stream(rightAssignables.split(&quot;,&quot;)).map(Long::valueOf).collect(Collectors.toList());
+
+                        List&lt;DutyAssignablePair&gt; leftDutyAssignablePairs = dutyAssignableMapRepository.findByPrivilegeIdList(leftAssignablesIdList);
+                        List&lt;DutyAssignablePair&gt; rightDutyAssignablePairs = dutyAssignableMapRepository.findByPrivilegeIdList(rightAssignablesIdList);
+
+                        if(!leftDutyAssignablePairs.isEmpty() &amp;&amp; !rightDutyAssignablePairs.isEmpty())
+                        {
+                            List&lt;Long&gt; leftDutyIDs = leftDutyAssignablePairs.stream().map(DutyAssignablePair::getDuty).map(Duty::getID).distinct().collect(Collectors.toList());
+                            List&lt;Long&gt; rightDutyIDs = rightDutyAssignablePairs.stream().map(DutyAssignablePair::getDuty).map(Duty::getID).distinct().collect(Collectors.toList());
+
+                            if(!leftDutyIDs.isEmpty() &amp;&amp; !rightDutyIDs.isEmpty())
+                            {
+                                List&lt;RuleDutyPair&gt; leftDutyRulePairs = ruleDutyMapRepository.findByDutyIdList(leftDutyIDs);
+                                List&lt;RuleDutyPair&gt; rightDutyRulePairs = ruleDutyMapRepository.findByDutyIdList(rightDutyIDs);
+
+                                if(!leftDutyRulePairs.isEmpty() &amp;&amp; !rightDutyRulePairs.isEmpty())
+                                {
+                                    List&lt;Rule&gt; leftRules = leftDutyRulePairs.stream().map(RuleDutyPair::getRule).collect(Collectors.toList());
+                                    List&lt;Rule&gt; rightRules = rightDutyRulePairs.stream().map(RuleDutyPair::getRule).collect(Collectors.toList());
+
+                                    if(!leftRules.isEmpty() &amp;&amp; !rightRules.isEmpty())
+                                    {
+                                        List&lt;Rule&gt; intersectionRule = new ArrayList&lt;&gt;(leftRules);
+                                        intersectionRule.retainAll(rightRules);
+
+                                        if(!intersectionRule.isEmpty())
+                                        {
+                                            return intersectionRule.stream().map(Rule::getControlId).distinct().collect(Collectors.toList());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        throw new OverrideSpecificationException(overrideSpec);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+public class RmsController
+{
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private CredrefAuthentication credrefAuthentication;
+
+    @Value(&quot;${rmsOrgMemberships.url}&quot;)
+    private String rmsOrgMembershipsUrl;
+
+    @Value(&quot;${rmsTeamMembers.url}&quot;)
+    private String rmsTeamMembersUrl;
+
+    @Value(&quot;${rmsHierarchy.url}&quot;)
+    private String rmsHierarchyUrl;
+
+    @Autowired
+    private PeopleSearchController peopleSearchController;
+
+    private HttpHeaders headers;
+
+
+    @GetMapping(&quot;/rms/hierarchy/guid/{guid}&quot;)
+    public ResponseEntity&lt;LinkedHashMap&lt;String, Map&lt;String,String&gt;&gt;&gt; getRmsHierarchyByGuid(@PathVariable(&quot;guid&quot;) String guid)
+    {
+        ResponseEntity&lt;?&gt; responseEntity;
+
+        try
+        {
+            responseEntity = restTemplate.getForEntity(String.format(rmsOrgMembershipsUrl, guid), Map.class);
+        }
+        catch(Exception e)
+        {
+            throw new ResourceNotFoundException(&quot;Guid: &quot; + guid);
+        }
+
+        LinkedHashMap&lt;String, Map&lt;String,String&gt;&gt; result = new LinkedHashMap&lt;&gt;();
+        if(responseEntity != null &amp;&amp; responseEntity.getStatusCode() == HttpStatus.OK)
+        {
+            ResponseEntity&lt;Map&lt;String,Object&gt;&gt; rmsResponse = (ResponseEntity&lt;Map&lt;String,Object&gt;&gt;)responseEntity;
+            Map&lt;String,Object&gt; valueMap = rmsResponse.getBody();
+            List&lt;LinkedHashMap&lt;String,Object&gt;&gt; dataMapList = (ArrayList&lt;LinkedHashMap&lt;String, Object&gt;&gt;) valueMap.get(&quot;data&quot;);
+            Map&lt;String,Object&gt; dataMap = dataMapList.get(0);
+            Map&lt;String,Map&lt;String,String&gt;&gt; linksMap = (Map&lt;String,Map&lt;String,String&gt;&gt;)dataMap.get(&quot;links&quot;);
+            Map&lt;String,String&gt; parentNodeLinkMap = linksMap.get(&quot;parent-node&quot;);
+            String parentLink = parentNodeLinkMap.get(&quot;href&quot;);
+
+            while(true)
+            {
+                responseEntity = restTemplate.getForEntity(parentLink, Map.class);
+                rmsResponse = (ResponseEntity&lt;Map&lt;String,Object&gt;&gt;)responseEntity;
+                valueMap = rmsResponse.getBody();
+                dataMap = (LinkedHashMap&lt;String, Object&gt;) valueMap.get(&quot;data&quot;);
+                linksMap = (Map&lt;String,Map&lt;String,String&gt;&gt;)dataMap.get(&quot;links&quot;);
+                parentNodeLinkMap = linksMap.get(&quot;parent-node&quot;);
+                parentLink = parentNodeLinkMap.get(&quot;href&quot;);
+
+                Object parentNodeCode = dataMap.get(&quot;parentNodeCode&quot;);
+
+                if(parentNodeCode == null)
+                {
+                    break;
+                }
+
+                String code = (String)dataMap.get(&quot;code&quot;);
+                String nodeType = (String)dataMap.get(&quot;nodeType&quot;);
+                String name = (String)dataMap.get(&quot;name&quot;);
+
+                result.put(code, new HashMap&lt;String,String&gt;() {{
+                    put(&quot;nodeType&quot;, nodeType);
+                    put(&quot;name&quot;, name);
+                }});
+            }
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(&quot;/rms/hierarchy/kerberos/{kerberos}&quot;)
+    public ResponseEntity&lt;LinkedHashMap&lt;String, Map&lt;String,String&gt;&gt;&gt; getRmsHierarchyByKerberos(@PathVariable(&quot;kerberos&quot;) String kerberos) throws JSONException
+    {
+        ResponseEntity&lt;Map&lt;String,String&gt;&gt; peopleResponse = peopleSearchController.findByKerberos(kerberos);
+        Map&lt;String,String&gt; peopleMap = peopleResponse.getBody();
+        String guid = peopleMap.get(&quot;gsguid&quot;);
+        return getRmsHierarchyByGuid(guid);
+    }
+
+    @GetMapping(&quot;/rms/{code}/team-members&quot;)
+    public ResponseEntity&lt;List&lt;LinkedHashMap&lt;String,String&gt;&gt;&gt; getRmsTeamMembers(@PathVariable(&quot;code&quot;) String code,
+                                                                                @RequestParam(defaultValue = &quot;true&quot;) boolean usePeopleSearch)
+            throws UnsupportedEncodingException
+    {
+        code = URLDecoder.decode(code, StandardCharsets.UTF_8.name());
+
+        ResponseEntity&lt;?&gt; responseEntity = null;
+
+        try
+        {
+            responseEntity = restTemplate.getForEntity(String.format(rmsTeamMembersUrl, code), Map.class);
+        }
+        catch (Exception e)
+        {
+            if(e instanceof HttpClientErrorException)
+            {
+                HttpClientErrorException httpClientErrorException = (HttpClientErrorException)e;
+                if(httpClientErrorException.getStatusCode() == HttpStatus.FORBIDDEN)
+                {
+                    throw new InternalServerErrorException(&quot;RMS code must correspond to Team node type. Code: &quot; + code);
+                }
+            }
+            throw new ResourceNotFoundException(&quot;Code: &quot; + code);
+        }
+
+
+        List&lt;LinkedHashMap&lt;String,String&gt;&gt; result = new ArrayList&lt;&gt;();
+        if(responseEntity != null &amp;&amp; responseEntity.getStatusCode() == HttpStatus.OK)
+        {
+            ResponseEntity&lt;Map&lt;String,Object&gt;&gt; rmsResponse = (ResponseEntity&lt;Map&lt;String,Object&gt;&gt;)responseEntity;
+            Map&lt;String,Object&gt; valueMap = rmsResponse.getBody();
+            List&lt;LinkedHashMap&lt;String,String&gt;&gt; dataMapList = (ArrayList&lt;LinkedHashMap&lt;String, String&gt;&gt;) valueMap.get(&quot;data&quot;);
+
+            for(LinkedHashMap&lt;String,String&gt; entry : dataMapList)
+            {
+                LinkedHashMap&lt;String,String&gt; memberMap = new LinkedHashMap&lt;&gt;();
+
+                String kerberos = entry.get(&quot;kerberos&quot;);
+
+                memberMap.put(&quot;name&quot;, entry.get(&quot;name&quot;));
+                memberMap.put(&quot;guid&quot;, entry.get(&quot;guid&quot;));
+                memberMap.put(&quot;kerberos&quot;, kerberos);
+                memberMap.put(&quot;employeeNumber&quot;, entry.get(&quot;employeeNumber&quot;));
+                memberMap.put(&quot;title&quot;, entry.get(&quot;title&quot;));
+
+                if(usePeopleSearch)
+                {
+                    ResponseEntity&lt;Map&lt;String, String&gt;&gt; peopleResponse = null;
+                    try
+                    {
+                        peopleResponse = peopleSearchController.findByKerberos(kerberos);
+                        if (peopleResponse != null &amp;&amp; peopleResponse.getStatusCode() == HttpStatus.OK)
+                        {
+                            Map&lt;String, String&gt; peopleSearchMap = peopleResponse.getBody();
+
+                            memberMap.put(&quot;phone&quot;, peopleSearchMap.get(&quot;telephonenumber&quot;));
+                            memberMap.put(&quot;location&quot;, peopleSearchMap.get(&quot;l&quot;));
+                            memberMap.put(&quot;department&quot;, peopleSearchMap.get(&quot;gsdeptcode&quot;));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        logger.error(&quot;PeopleSearch request failed for kerberos: {}&quot;, kerberos);
+                    }
+                }
+
+                result.add(memberMap);
+            }
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(&quot;/rms/{code}/hierarchy-links&quot;)
+    public ResponseEntity&lt;List&lt;List&lt;String&gt;&gt;&gt; getRmsHierarchyLinks(@PathVariable(&quot;code&quot;) String code) throws UnsupportedEncodingException
+    {
+         ResponseEntity&lt;?&gt; responseEntity = restTemplate.getForEntity(String.format(rmsHierarchyUrl, code), Map.class);
+
+        if(responseEntity.getStatusCode() != HttpStatus.OK)
+        {
+            logger.error(&quot;Code: {}&quot;, code);
+            throw new InternalServerErrorException(&quot;RMS request for hierarch links failed. Code: &quot; + code);
+        }
+
+        ResponseEntity&lt;Map&lt;String,Object&gt;&gt; rmsResponse = (ResponseEntity&lt;Map&lt;String,Object&gt;&gt;)responseEntity;
+        Map&lt;String,Object&gt; valueMap = rmsResponse.getBody();
+        LinkedHashMap&lt;String,Object&gt; dataMap = (LinkedHashMap&lt;String, Object&gt;) valueMap.get(&quot;data&quot;);
+
+
+        Map&lt;String,Map&lt;String,String&gt;&gt; linksMap = (Map&lt;String,Map&lt;String,String&gt;&gt;)dataMap.get(&quot;links&quot;);
+        Map&lt;String,String&gt; selfLinkMap = linksMap.get(&quot;self&quot;);
+        String selfLink = selfLinkMap.get(&quot;href&quot;);
+
+        List&lt;List&lt;String&gt;&gt; result = new ArrayList&lt;&gt;();
+        result.add(Arrays.asList(selfLink));
+
+
+        List&lt;String&gt; currentChildLinks = new ArrayList&lt;&gt;();
+
+        Map&lt;String,String&gt; childLinkMap = linksMap.get(&quot;child-nodes&quot;);
+        String childLink = childLinkMap.get(&quot;href&quot;);
+
+        currentChildLinks.add(childLink);
+
+        while(!currentChildLinks.isEmpty())
+        {
+            List&lt;String&gt; currentSelfLinks = new ArrayList&lt;&gt;();
+
+            List&lt;String&gt; parentChildLinks = currentChildLinks;
+            currentChildLinks = new ArrayList&lt;&gt;();
+
+            for (String parent : parentChildLinks)
+            {
+                logger.info(&quot;Before encode = {}&quot;, parent);
+                parent = URLEncoder.encode(parent, StandardCharsets.UTF_8.name());
+                logger.info(&quot;After encode = {}&quot;, parent);
+                parent = URLDecoder.decode(parent, StandardCharsets.UTF_8.name());
+                logger.info(&quot;After decode 1 = {}&quot;, parent);
+                parent = URLDecoder.decode(parent, StandardCharsets.UTF_8.name());
+                logger.info(&quot;After decode 2 = {}&quot;, parent);
+
+                try
+                {
+                    responseEntity = restTemplate.getForEntity(parent, Map.class);
+                }
+                catch(Exception e)
+                {
+                    logger.error(&quot;Error: &quot;, e);
+                    continue;
+                }
+
+                if(responseEntity.getStatusCode() == HttpStatus.OK)
+                {
+                    rmsResponse = (ResponseEntity&lt;Map&lt;String, Object&gt;&gt;) responseEntity;
+                    valueMap = rmsResponse.getBody();
+                    List&lt;LinkedHashMap&lt;String, Object&gt;&gt; dataMapList = (ArrayList&lt;LinkedHashMap&lt;String, Object&gt;&gt;) valueMap.get(&quot;data&quot;);
+
+
+                    for (LinkedHashMap&lt;String, Object&gt; map : dataMapList)
+                    {
+                        linksMap = (Map&lt;String, Map&lt;String, String&gt;&gt;) map.get(&quot;links&quot;);
+                        if (linksMap != null)
+                        {
+                            Map&lt;String, String&gt; selfNodesMap = linksMap.get(&quot;self&quot;);
+                            if(selfNodesMap != null)
+                            {
+                                currentSelfLinks.add(selfNodesMap.get(&quot;href&quot;));
+                            }
+
+                            String nodeType = (String)map.get(&quot;nodeType&quot;);
+                            if(!nodeType.equals(&quot;Team&quot;))
+                            {
+                                Map&lt;String, String&gt; childNodesMap = linksMap.get(&quot;child-nodes&quot;);
+                                if (childNodesMap != null)
+                                {
+                                    currentChildLinks.add(childNodesMap.get(&quot;href&quot;));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            result.add(currentSelfLinks);
+        }
+
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping(&quot;/rms/{code}/hierarchy&quot;)
+    public ResponseEntity&lt;Map&lt;String,Object&gt;&gt; getRmsHierarchy(@PathVariable(&quot;code&quot;) String code,
+                                                              @RequestParam(defaultValue = &quot;true&quot;) boolean includePeople)
+            throws UnsupportedEncodingException, JSONException
+    {
+        ResponseEntity&lt;?&gt; responseEntity;
+
+        try
+        {
+            responseEntity = restTemplate.getForEntity(String.format(rmsHierarchyUrl, code), Map.class);
+        }
+        catch(Exception e)
+        {
+            if(e instanceof HttpClientErrorException)
+            {
+                HttpClientErrorException httpClientErrorException = (HttpClientErrorException)e;
+                if(httpClientErrorException.getStatusCode() == HttpStatus.FORBIDDEN)
+                {
+                    throw new InternalServerErrorException(&quot;RMS forbid this operation. Code: &quot; + code);
+                }
+            }
+            throw new ResourceNotFoundException(&quot;Code: &quot; + code);
+        }
+
+        Map&lt;String,Object&gt; result = new LinkedHashMap&lt;&gt;();
+        if(responseEntity != null &amp;&amp; responseEntity.getStatusCode() == HttpStatus.OK)
+        {
+            ResponseEntity&lt;Map&lt;String,Object&gt;&gt; rmsResponse = (ResponseEntity&lt;Map&lt;String,Object&gt;&gt;)responseEntity;
+            Map&lt;String,Object&gt; valueMap = rmsResponse.getBody();
+            LinkedHashMap&lt;String,Object&gt; dataMap = (LinkedHashMap&lt;String, Object&gt;) valueMap.get(&quot;data&quot;);
+
+            GraphNode parentNode = new GraphNode(dataMap);
+            addChildren(parentNode, includePeople);
+
+            //  handle case when the supplied code corresponds to a Team, i.e. no children
+            if(includePeople &amp;&amp; parentNode.getChildren().isEmpty())
+            {
+                addTeamMembers(parentNode);
+            }
+
+            GraphNode.toMap(parentNode, result);
+
+            return ResponseEntity.ok(result);
+        }
+
+        return ResponseEntity.noContent().build();
+    }
+
+    private void addChildren(GraphNode parent, boolean includePeople) throws UnsupportedEncodingException, JSONException
+    {
+        String link = parent.getChildLink();
+        logger.info(&quot;Before encode = {}&quot;, link);
+        link = URLEncoder.encode(link, StandardCharsets.UTF_8.name());
+        logger.info(&quot;After encode = {}&quot;, link);
+        link = URLDecoder.decode(link, StandardCharsets.UTF_8.name());
+        logger.info(&quot;After decode 1 = {}&quot;, link);
+        link = URLDecoder.decode(link, StandardCharsets.UTF_8.name());
+        logger.info(&quot;After decode 2 = {}&quot;, link);
+
+        ResponseEntity&lt;?&gt; responseEntity = null;
+        try
+        {
+            responseEntity = restTemplate.getForEntity(link, Map.class);
+        }
+        catch(Exception e)
+        {
+            logger.error(&quot;Link: {}&quot;, link);
+        }
+
+        if(responseEntity != null &amp;&amp; responseEntity.getStatusCode() == HttpStatus.OK)
+        {
+            ResponseEntity&lt;Map&lt;String,Object&gt;&gt; rmsResponse = (ResponseEntity&lt;Map&lt;String, Object&gt;&gt;) responseEntity;
+            Map&lt;String,Object&gt; valueMap = rmsResponse.getBody();
+            List&lt;LinkedHashMap&lt;String, Object&gt;&gt; dataMapList = (ArrayList&lt;LinkedHashMap&lt;String, Object&gt;&gt;) valueMap.get(&quot;data&quot;);
+
+
+            List&lt;GraphNode&gt; childNodes = new ArrayList&lt;&gt;();
+            for (LinkedHashMap&lt;String, Object&gt; map : dataMapList)
+            {
+                GraphNode childNode = new GraphNode(map);
+                childNodes.add(childNode);
+                if(!childNode.getNodeType().equals(&quot;Team&quot;))
+                {
+                    addChildren(childNode, includePeople);
+                }
+                else
+                {
+                    if(includePeople)
+                    {
+                        addTeamMembers(childNode);
+                    }
+                }
+            }
+
+            parent.addChildren(childNodes);
+        }
+    }
+
+    private void addTeamMembers(GraphNode node) throws UnsupportedEncodingException
+    {
+        String code = node.getCode();
+        if (code.indexOf(&#39;/&#39;) == -1 &amp;&amp; code.indexOf(&#39;#&#39;) == -1)
+        {
+            code = URLEncoder.encode(code, StandardCharsets.UTF_8.name());
+            ResponseEntity&lt;List&lt;LinkedHashMap&lt;String, String&gt;&gt;&gt; teamMembersResponse = getRmsTeamMembers(code, true);
+
+            if (teamMembersResponse.getStatusCode() == HttpStatus.OK)
+            {
+                List&lt;LinkedHashMap&lt;String, String&gt;&gt; teamMembers = teamMembersResponse.getBody();
+                if (!teamMembers.isEmpty())
+                {
+                    node.addTeamMembers(teamMembers);
+                }
+            }
+        }
+    }
+
+    private static class GraphNode
+    {
+        String name;
+        String nodeType;
+        String code;
+        String childLink;
+        List&lt;GraphNode&gt; children = new ArrayList&lt;&gt;();
+        List&lt;LinkedHashMap&lt;String,String&gt;&gt; teamMembers;
+
+        GraphNode(LinkedHashMap&lt;String,Object&gt; map)
+        {
+            name = (String)map.get(&quot;name&quot;);
+            nodeType = (String)map.get(&quot;nodeType&quot;);
+            code = (String)map.get(&quot;code&quot;);
+
+            Map&lt;String,Map&lt;String,String&gt;&gt; linksMap = (Map&lt;String,Map&lt;String,String&gt;&gt;)map.get(&quot;links&quot;);
+            Map&lt;String,String&gt; childLinkMap = linksMap.get(&quot;child-nodes&quot;);
+            childLink = childLinkMap.get(&quot;href&quot;);
+        }
+
+        String getChildLink()
+        {
+            return childLink;
+        }
+
+        String getNodeType()
+        {
+            return nodeType;
+        }
+
+        String getCode()
+        {
+            return code;
+        }
+
+        void addChildren(List&lt;GraphNode&gt; children)
+        {
+            this.children.addAll(children);
+        }
+
+        List&lt;GraphNode&gt; getChildren()
+        {
+            return this.children;
+        }
+
+        void addTeamMembers(List&lt;LinkedHashMap&lt;String,String&gt;&gt; teamMembers)
+        {
+            this.teamMembers = teamMembers;
+        }
+
+        List&lt;LinkedHashMap&lt;String,String&gt;&gt; getTeamMembers()
+        {
+            return teamMembers;
+        }
+
+        static void toMap(GraphNode node, Map&lt;String,Object&gt; result)
+        {
+            result.put(&quot;name&quot;, node.name);
+            result.put(&quot;nodeType&quot;, node.nodeType);
+            result.put(&quot;code&quot;, node.code);
+
+            List&lt;LinkedHashMap&lt;String,String&gt;&gt; team = node.getTeamMembers();
+            if(team != null)
+            {
+                result.put(&quot;team&quot;, team);
+            }
+
+            List&lt;Map&lt;String,Object&gt;&gt; childList = new ArrayList&lt;&gt;();
+            for(GraphNode childNode : node.children)
+            {
+                Map&lt;String,Object&gt; map = new LinkedHashMap&lt;&gt;();
+                toMap(childNode, map);
+                childList.add(map);
+            }
+
+            if(!childList.isEmpty())
+            {
+                result.put(&quot;children&quot;, childList);
+            }
+        }
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+public class PeopleSearchController
+{
+    @Value(&quot;${peoplesearchByKerberos.url}&quot;)
+    private String peopleSearchByKerberosUrl;
+
+    @Value(&quot;${peoplesearchByGuid.url}&quot;)
+    private String peopleSearchByGuidUrl;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @GetMapping(&quot;/peoplesearch/kerberos/{kerberos}&quot;)
+    public ResponseEntity&lt;Map&lt;String,String&gt;&gt; findByKerberos(@PathVariable(&quot;kerberos&quot;) String kerberos) throws JSONException
+    {
+        ResponseEntity&lt;String&gt; response = restTemplate.getForEntity(String.format(peopleSearchByKerberosUrl, kerberos), String.class);
+
+        Map&lt;String,String&gt; resultMap = getResultMap(response, kerberos);
+
+        return ResponseEntity.ok(resultMap);
+    }
+
+    @GetMapping(&quot;/peoplesearch/guid/{guid}&quot;)
+    public ResponseEntity&lt;Map&lt;String,String&gt;&gt; findByGuid(@PathVariable(&quot;guid&quot;) String guid) throws JSONException
+    {
+        ResponseEntity&lt;String&gt; response = restTemplate.getForEntity(String.format(peopleSearchByGuidUrl, guid), String.class);
+
+        Map&lt;String,String&gt; resultMap = getResultMap(response, guid);
+
+        return ResponseEntity.ok(resultMap);
+    }
+
+    public String kerberosFromGuid(String guid) throws JSONException
+    {
+        Map&lt;String,String&gt; result = getResultMapForGuid(guid);
+        return result.get(&quot;gskerberosid&quot;);
+    }
+
+    private Map&lt;String,String&gt; getResultMapForGuid(String guid) throws JSONException
+    {
+        ResponseEntity&lt;String&gt; response = restTemplate.getForEntity(String.format(peopleSearchByGuidUrl, guid), String.class);
+        return getResultMap(response, guid);
+    }
+
+
+    private Map&lt;String,String&gt; getResultMap(ResponseEntity&lt;String&gt; response, String searchByValue) throws JSONException
+    {
+        Map&lt;String,String&gt; resultMap = new HashMap&lt;&gt;();
+
+        JSONObject jsonObject = new JSONObject(response.getBody());
+        JSONArray content = (JSONArray) jsonObject.get(&quot;people&quot;);
+
+        if(content.length() == 0)
+        {
+            throw new ResourceNotFoundException(&quot;PeopleSearch Not Found, Search by: &quot; + searchByValue);
+        }
+
+        JSONArray names = ((JSONObject) content.get(0)).names();
+        for(int i = 0; i &lt; names.length(); ++i)
+        {
+            String name = (String)names.get(i);
+            String value = ((JSONObject)content.get(0)).getString(name);
+            if(StringUtils.isNotBlank(value))
+            {
+                resultMap.put(name, value);
+            }
+        }
+
+        return resultMap;
+    }
+
+}</pre>
+</div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

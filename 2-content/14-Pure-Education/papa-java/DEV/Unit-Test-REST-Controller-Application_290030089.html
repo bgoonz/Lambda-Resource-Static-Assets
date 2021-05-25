@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Unit Test REST Controller Application</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Basic_289898911.html">Basic</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Unit Test REST Controller Application
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 20, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="UnitTestRESTControllerApplication-References">References</h2><p>Refer to following links:</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 215.0px;"/><col style="width: 745.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Lesson URL:</p></td><td class="confluenceTd"><p><a href="https://www.springboottutorial.com/unit-testing-for-spring-boot-rest-services" class="external-link" rel="nofollow">https://www.springboottutorial.com/unit-testing-for-spring-boot-rest-services</a></p></td></tr><tr><td class="confluenceTd"><p>Lesson Git Repo:</p></td><td class="confluenceTd"><p><a href="https://github.com/in28minutes/getting-started-in-5-steps/tree/master/spring-unit-testing-with-mockito" data-card-appearance="inline" class="external-link" rel="nofollow">https://github.com/in28minutes/getting-started-in-5-steps/tree/master/spring-unit-testing-with-mockito</a> </p></td></tr><tr><td class="confluenceTd"><p>GS Git Repo:</p></td><td class="confluenceTd"><p><a href="https://gitlab-uat.gs.com/gunern/springboot-unittests.git" class="external-link" rel="nofollow">https://gitlab-uat.gs.com/gunern/springboot-unittests.git</a></p></td></tr></tbody></table></div><h2 id="UnitTestRESTControllerApplication-CreateSpringBootStarterApplication"><a href="https://confluence.apg.services.gs.com/display/~gunern/Spring+Boot#SpringBoot-INITIALIZR" class="external-link" rel="nofollow">Create Spring Boot Starter Application</a></h2><h2 id="UnitTestRESTControllerApplication-ExamineFilesintheStarterApplication">Examine Files in the Starter Application</h2><h3 id="UnitTestRESTControllerApplication-EntryPoint">Entry Point</h3><p>Check the class that was created with the SPRING INITIALIZR with the main method:</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@SpringBootApplication
+public class SpringbootUnittestsApplication
+{
+   public static void main(String[] args)
+   {
+     SpringApplication.run(SpringbootUnittestsApplication.class, args);
+   }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h3 id="UnitTestRESTControllerApplication-pom.xml">pom.xml</h3><p>Note the <code>&lt;parent&gt;</code> section that is responsible for Spring Boot</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p><code>&lt;parent&gt;</code></p><p><code>&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</code></p><p><code>&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</code></p><p><code>&lt;version&gt;2.1.8.RELEASE&lt;/version&gt;</code></p><p><code>&lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</code></p><p><code>&lt;/parent&gt;</code></p></td></tr></tbody></table></div><h3 id="UnitTestRESTControllerApplication-NoteWebdependency">Note Web dependency</h3><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><tbody><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+   &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</pre>
+</div></div></td></tr></tbody></table></div><h2 id="UnitTestRESTControllerApplication-CreateModel,Server,andControllerClasses"><a href="https://confluence.apg.services.gs.com/display/~gunern/Create+Model%2C+Server%2C+and+Controller+Classes" class="external-link" rel="nofollow">Create Model, Server, and Controller Classes</a></h2><h2 id="UnitTestRESTControllerApplication-RunApplicationandUsePostmantoTestRESTEndpoints"><br/>Run Application and Use Postman to Test REST Endpoints</h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 161.0px;"/><col style="width: 799.0px;"/></colgroup><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>GET Request:</strong></p></th><td class="confluenceTd"><p><a href="http://localhost:8080/students/Student1/courses" class="external-link" rel="nofollow">http://localhost:8080/students/Student1/courses</a></p></td></tr><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response:</strong></p></th><td class="confluenceTd"><p><code>[</code></p><p><code>  {</code></p><p><code>    &quot;id&quot;: &quot;Course1&quot;,</code></p><p><code>    &quot;name&quot;: &quot;Spring&quot;,</code></p><p><code>    &quot;description&quot;: &quot;10 Steps&quot;,</code></p><p><code>    &quot;steps&quot;: [</code></p><p><code>      &quot;Learn Maven&quot;,</code></p><p><code>      &quot;Import Project&quot;,</code></p><p><code>      &quot;First Example&quot;,</code></p><p><code>      &quot;Second Example&quot;</code></p><p><code>    ]</code></p><p><code>  },</code></p><p><code>  {</code></p><p><code>    &quot;id&quot;: &quot;Course2&quot;,</code></p><p><code>    &quot;name&quot;: &quot;Spring MVC&quot;,</code></p><p><code>    &quot;description&quot;: &quot;10 Examples&quot;,</code></p><p><code>    &quot;steps&quot;: [</code></p><p><code>      &quot;Learn Maven&quot;,</code></p><p><code>      &quot;Import Project&quot;,</code></p><p><code>      &quot;First Example&quot;,</code></p><p><code>      &quot;Second Example&quot;</code></p><p><code>    ]</code></p><p><code>  },</code></p><p><code>  {</code></p><p><code>    &quot;id&quot;: &quot;Course3&quot;,</code></p><p><code>    &quot;name&quot;: &quot;Spring Boot&quot;,</code></p><p><code>    &quot;description&quot;: &quot;6K Students&quot;,</code></p><p><code>    &quot;steps&quot;: [</code></p><p><code>      &quot;Learn Maven&quot;,</code></p><p><code>      &quot;Learn Spring&quot;,</code></p><p><code>      &quot;Learn Spring MVC&quot;,</code></p><p><code>      &quot;First Example&quot;,</code></p><p><code>      &quot;Second Example&quot;</code></p><p><code>    ]</code></p><p><code>  },</code></p><p><code>  {</code></p><p><code>    &quot;id&quot;: &quot;Course4&quot;,</code></p><p><code>    &quot;name&quot;: &quot;Maven&quot;,</code></p><p><code>    &quot;description&quot;: &quot;Most popular maven course on internet!&quot;,</code></p><p><code>    &quot;steps&quot;: [</code></p><p><code>      &quot;Pom.xml&quot;,</code></p><p><code>      &quot;Build Life Cycle&quot;,</code></p><p><code>      &quot;Parent POM&quot;,</code></p><p><code>      &quot;Importing into Eclipse&quot;</code></p><p><code>    ]</code></p><p><code>  }</code></p><p><code>]</code></p></td></tr><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>GET Request:</strong></p></th><td class="confluenceTd"><p><a href="http://localhost:8080/students/Student1/courses/Course1" class="external-link" rel="nofollow">http://localhost:8080/students/Student1/courses/Course1</a></p></td></tr><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response:</strong></p></th><td class="confluenceTd"><p><code>{</code></p><p><code>  &quot;id&quot;: &quot;Course1&quot;,</code></p><p><code>  &quot;name&quot;: &quot;Spring&quot;,</code></p><p><code>  &quot;description&quot;: &quot;10 Steps&quot;,</code></p><p><code>  &quot;steps&quot;: [</code></p><p><code>    &quot;Learn Maven&quot;,</code></p><p><code>    &quot;Import Project&quot;,</code></p><p><code>    &quot;First Example&quot;,</code></p><p><code>    &quot;Second Example&quot;</code></p><p><code>  ]</code></p><p><code>}</code></p></td></tr><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>POST Request</strong></p></th><td class="confluenceTd"><p><br/></p><p>Request:<a href="http://localhost:8080/students/Student1/courses" class="external-link" rel="nofollow">http://localhost:8080/students/Student1/courses</a>Body:</p><p><code>{</code></p><p><code>  &quot;name&quot;: &quot;Microservices&quot;,</code></p><p><code>  &quot;description&quot;: &quot;10 Steps&quot;,</code></p><p><code>  &quot;steps&quot;: [</code></p><p><code>    &quot;Learn How to Break Things Up&quot;,</code></p><p><code>    &quot;Automate the hell out of everything&quot;,</code></p><p><code>    &quot;Have fun&quot;</code></p><p><code>  ]</code></p><p><code>}</code></p><p><br/></p></td></tr><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response:</strong></p></th><td class="confluenceTd"><p>Status = 201</p></td></tr></tbody></table></div><h2 id="UnitTestRESTControllerApplication-UnitTestsforGETandPOSTRESTRequests">Unit Tests for GET and POST REST Requests</h2><ol><li><p>Class annotations</p><p><code>@RunWith(SpringRunner.class)</code></p><p><code>@WebMvcTest(value = StudentController.class, secure = false)</code></p><p><code>public class StudentControllerTest</code></p><p><br/></p></li><li><p>Add MockMvc to execute requests against the test context</p><p><code>@Autowired</code></p><p><code>private MockMvc mockMvc;</code></p><p /></li><li><p>Create a mock of StudentService and autowire it to the Controller</p><p><code>@MockBean</code></p><p><code>private StudentService studentService;</code></p><p><br/></p></li></ol><h3 id="UnitTestRESTControllerApplication-UnitTestGETRequest">Unit Test GET Request</h3><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p><code>@Test</code></p><p><code>public void retrieveDetailsForCourse() throws Exception</code></p><p><code>{</code></p><p><code>    Course mockCourse = new Course(&quot;Course1&quot;, &quot;Spring&quot;, &quot;10 Steps&quot;,</code></p><p><code>            Arrays.asList(&quot;Learn Maven&quot;, &quot;Import Project&quot;, &quot;First Example&quot;,</code></p><p><code>                    &quot;Second Example&quot;));</code></p><p><code>    Mockito.when(studentService.retrieveCourse(Mockito.anyString(), Mockito.anyString())).thenReturn(mockCourse);</code></p><p><code>    RequestBuilder requestBuilder = MockMvcRequestBuilders.get(&quot;/students/Student1/courses/Course1&quot;)</code></p><p><code>            .accept(MediaType.APPLICATION_JSON);</code></p><p><code>    MvcResult result = mockMvc.perform(requestBuilder).andReturn();</code></p><p><code>    System.out.println(result.getResponse());</code></p><p><code>    String expected = &quot;{id:\&quot;Course1\&quot;,name:\&quot;Spring\&quot;,description:\&quot;10 Steps\&quot;}&quot;;</code></p><p><code>    JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);</code></p><p><code>}</code></p></td></tr></tbody></table></div><h3 id="UnitTestRESTControllerApplication-UnitTestPOSTRequest">Unit Test POST Request</h3><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p><code>@Test</code></p><p><code>public void createStudentCourse() throws Exception</code></p><p><code>{</code></p><p><code>    Course mockCourse = new Course(&quot;1&quot;, &quot;Smallest Number&quot;, &quot;1&quot;, Arrays.asList(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;));</code></p><p><code>    Mockito.when(studentService.addCourse(Mockito.anyString(),</code></p><p><code>                    Mockito.any(Course.class))).thenReturn(mockCourse);</code></p><p><code>    String exampleCourseJson = &quot;{\&quot;name\&quot;:\&quot;Spring\&quot;,\&quot;description\&quot;:\&quot;10 Steps\&quot;,\&quot;steps\&quot;:[\</code></p><p><code>&quot;Learn Maven\&quot;,\&quot;Import Project\&quot;,\&quot;First Example\&quot;,\&quot;Second Example\&quot;]}&quot;;</code></p><p><code>    RequestBuilder requestBuilder = MockMvcRequestBuilders</code></p><p><code>            .post(&quot;/students/Student1/courses&quot;)</code></p><p><code>            .accept(MediaType.APPLICATION_JSON)</code></p><p><code>            .content(exampleCourseJson)</code></p><p><code>            .contentType(MediaType.APPLICATION_JSON);</code></p><p><code>    MvcResult result = mockMvc.perform(requestBuilder).andReturn();</code></p><p><code>    MockHttpServletResponse response = result.getResponse();</code></p><p><code>    assertEquals(HttpStatus.CREATED.value(), response.getStatus());</code></p><p><code>    assertEquals(&quot;http://localhost/students/Student1/courses/1&quot;, response.getHeader(HttpHeaders.LOCATION));</code></p><p><code>}</code></p></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

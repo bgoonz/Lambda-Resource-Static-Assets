@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : All Presentation Code</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Project-Profit-Application_315097089.html">Project Profit Application</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Add-Presentation-Objects_336068609.html">Add Presentation Objects</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : All Presentation Code
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on May 04, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="AllPresentationCode-DTOs">DTOs</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class ProjectDTO
+{
+    private int projectID;
+    private String projectName;
+    private String projectDescription;
+
+    public ProjectDTO(Project project)
+    {
+        this.projectID = project.getID();
+        this.projectName = project.getProjectName();
+        this.projectDescription = project.getProjectDescription();
+    }
+
+    public int getProjectID()
+    {
+        return projectID;
+    }
+
+    public void setProjectID(int projectID)
+    {
+        this.projectID = projectID;
+    }
+
+    public String getProjectName()
+    {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName)
+    {
+        this.projectName = projectName;
+    }
+
+    public String getProjectDescription()
+    {
+        return projectDescription;
+    }
+
+    public void setProjectDescription(String projectDescription)
+    {
+        this.projectDescription = projectDescription;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class EmployeeDTO
+{
+    private int employeeID;
+    private String employeeCode;
+    private String employeeName;
+
+    public EmployeeDTO(Employee employee)
+    {
+        this.employeeID = employee.getID();
+        this.employeeCode = employee.getEmployeeCode();
+        this.employeeName = employee.getEmployeeName();
+    }
+
+    public int getEmployeeID()
+    {
+        return employeeID;
+    }
+
+    public void setEmployeeID(int employeeID)
+    {
+        this.employeeID = employeeID;
+    }
+
+    public String getEmployeeCode()
+    {
+        return employeeCode;
+    }
+
+    public void setEmployeeCode(String employeeCode)
+    {
+        this.employeeCode = employeeCode;
+    }
+
+    public String getEmployeeName()
+    {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName)
+    {
+        this.employeeName = employeeName;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class SubscriptionDTO extends ResourceSupport
+{
+    private int subscriptionID;
+    private String subscriptionCode;
+    private String subscriptionName;
+
+    public SubscriptionDTO(Subscription subscription)
+    {
+        this.subscriptionID = subscription.getID();
+        this.subscriptionCode = subscription.getSubscriptionCode();
+        this.subscriptionName = subscription.getSubscriptionName();
+    }
+
+    public int getSubscriptionID()
+    {
+        return subscriptionID;
+    }
+
+    public void setSubscriptionID(int subscriptionID)
+    {
+        this.subscriptionID = subscriptionID;
+    }
+
+    public String getSubscriptionCode()
+    {
+        return subscriptionCode;
+    }
+
+    public void setSubscriptionCode(String subscriptionCode)
+    {
+        this.subscriptionCode = subscriptionCode;
+    }
+
+    public String getSubscriptionName()
+    {
+        return subscriptionName;
+    }
+
+    public void setSubscriptionName(String subscriptionName)
+    {
+        this.subscriptionName = subscriptionName;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h1 id="AllPresentationCode-ChangestoLinks">Changes to Links</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Component
+public class ProjectLinks
+{
+    @Autowired
+    private ProjectEmployeeMapRepository projectEmployeeMapRepository;
+
+    public void addLinks(Project project, Resource&lt;Project&gt; projectResource, Link link)
+    {
+        projectResource.add(link);
+        addEmployeeLinks(projectResource, project.getID());
+    }
+
+    public void addLinks(ProjectDTO projectDTO, Resource&lt;ProjectDTO&gt; projectDTOResource, Link link)
+    {
+        projectDTOResource.add(link);
+        addEmployeeLinks(projectDTOResource, projectDTO.getProjectID());
+    }
+
+    private void addEmployeeLinks(Resource&lt;?&gt; projectResource, int id)
+    {
+        List&lt;Employee&gt; employees = projectEmployeeMapRepository.findByProjectId(id)
+                .stream()
+                .map(ProjectEmployeePair::getEmployee)
+                .collect(Collectors.toList());
+
+        for(Employee employee : employees)
+        {
+            Link employeeLink = linkTo(methodOn(EmployeeController.class)
+                    .getEmployees(employee.getID()))
+                    .withRel(&quot;employee&quot;)
+                    .withTitle(employee.getEmployeeName());
+            projectResource.add(employeeLink);
+        }
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Component
+public class EmployeeLinks
+{
+    @Autowired
+    private EmployeeSubscriptionMapRepository employeeSubscriptionMapRepository;
+    @Autowired
+    private ProjectEmployeeMapRepository projectEmployeeMapRepository;
+
+    public void addLinks(Employee employee, Resource&lt;Employee&gt; employeeResource, Link link)
+    {
+        employeeResource.add(link);
+        addProjectSubscriptionLinks(employeeResource, employee.getID());
+    }
+
+    public void addLinks(EmployeeDTO employeeDTO, Resource&lt;EmployeeDTO&gt; employeeDTOResource, Link link)
+    {
+        employeeDTOResource.add(link);
+        addProjectSubscriptionLinks(employeeDTOResource, employeeDTO.getEmployeeID());
+    }
+
+    private void addProjectSubscriptionLinks(Resource&lt;?&gt; employeeResource, int id)
+    {
+        List&lt;Subscription&gt; subscriptions = employeeSubscriptionMapRepository.findByEmployeeId(id)
+                .stream()
+                .map(EmployeeSubscriptionPair::getSubscription)
+                .collect(Collectors.toList());
+
+        for(Subscription subscription : subscriptions)
+        {
+            Link subscriptionLink = linkTo(methodOn(SubscriptionController.class)
+                    .getSubscriptions(subscription.getID()))
+                    .withRel(&quot;subscription&quot;)
+                    .withTitle(subscription.getSubscriptionCode());
+            employeeResource.add(subscriptionLink);
+        }
+
+        List&lt;Project&gt; projects = projectEmployeeMapRepository.findByEmployeeId(id)
+                .stream()
+                .map(ProjectEmployeePair::getProject)
+                .collect(Collectors.toList());
+
+        for(Project project : projects)
+        {
+            Link projectLink = linkTo(methodOn(ProjectController.class)
+                    .getProjects(project.getID()))
+                    .withRel(&quot;project&quot;)
+                    .withTitle(project.getProjectName());
+            employeeResource.add(projectLink);
+        }
+    }
+
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Component
+public class SubscriptionLinks
+{
+    @Autowired
+    private EmployeeSubscriptionMapRepository employeeSubscriptionMapRepository;
+
+    public void addLinks(Subscription subscription, Resource&lt;Subscription&gt; subscriptionResource, Link link)
+    {
+        subscriptionResource.add(link);
+        addEmployeeLinks(subscriptionResource, subscription.getID());
+    }
+
+    public void addLinks(SubscriptionDTO subscriptionDTO, Resource&lt;SubscriptionDTO&gt; subscriptionDTOResource, Link link)
+    {
+        subscriptionDTOResource.add(link);
+        addEmployeeLinks(subscriptionDTOResource, subscriptionDTO.getSubscriptionID());
+    }
+
+    private void addEmployeeLinks(Resource&lt;?&gt; subscriptionResource, int id)
+    {
+        List&lt;Employee&gt; employees = employeeSubscriptionMapRepository.findBySubscriptionId(id)
+                .stream()
+                .map(EmployeeSubscriptionPair::getEmployee)
+                .collect(Collectors.toList());
+
+        for(Employee employee : employees)
+        {
+            Link employeeLink = linkTo(methodOn(EmployeeController.class)
+                    .getEmployees(employee.getID()))
+                    .withRel(&quot;employee&quot;)
+                    .withTitle(employee.getEmployeeName());
+            subscriptionResource.add(employeeLink);
+        }
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h1 id="AllPresentationCode-ChangestoControllers">Changes to Controllers</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+public class ProjectController
+{
+    @Autowired
+    private ProjectRepository projectRepository;
+    @Autowired
+    private ProjectEmployeeMapRepository projectEmployeeMapRepository;
+    @Autowired
+    private ProjectLinks projectLinks;
+
+    @GetMapping(&quot;/projects&quot;)
+    public ResponseEntity&lt;List&lt;Resource&lt;ProjectDTO&gt;&gt;&gt; getProjects()
+    {
+        List&lt;Project&gt; projects = projectRepository.findAll();
+
+        List&lt;Resource&lt;ProjectDTO&gt;&gt; projectResources = createProjectResources(projects);
+
+        return ResponseEntity.ok(projectResources);
+    }
+
+    @GetMapping(&quot;/projects/{id}&quot;)
+    public ResponseEntity&lt;Resource&lt;ProjectDTO&gt;&gt; getProjects(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Project&gt; projectOptional = projectRepository.findById(id);
+        if(!projectOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;project-&quot; + id);
+        }
+        Project project = projectOptional.get();
+
+        Resource&lt;ProjectDTO&gt; projectResource = createProjectResource(new ProjectDTO(project));
+        projectResource.add(linkTo(methodOn(getClass()).getProjects()).withRel(&quot;all&quot;));
+        return ResponseEntity.ok(projectResource);
+    }
+
+    @PostMapping(&quot;/projects&quot;)
+    public ResponseEntity&lt;?&gt; createProject(@RequestBody Project project)
+    {
+        projectRepository.save(project);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path(&quot;/{id}&quot;)
+                .buildAndExpand(project.getID()).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @Transactional
+    @PutMapping(&quot;/projects/{id}&quot;)
+    public ResponseEntity&lt;?&gt; updateProject(@PathVariable(&quot;id&quot;) int id, @RequestBody Project project)
+    {
+        Optional&lt;Project&gt; existingProjectOptional = projectRepository.findById(id);
+        if(!existingProjectOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;project-&quot; + id);
+        }
+
+        Project existingProject = existingProjectOptional.get();
+        Project autitProject = new Project(existingProject);
+        existingProject.setInUtc(new Date());
+
+        if(StringUtils.hasText(project.getProjectName()))
+        {
+            existingProject.setProjectName(project.getProjectName());
+        }
+        if(StringUtils.hasText(project.getProjectDescription()))
+        {
+            existingProject.setProjectDescription(project.getProjectDescription());
+        }
+
+        projectRepository.save(existingProject);
+        projectRepository.save(autitProject);
+
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(existingProject).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping(&quot;/projects/{id}&quot;)
+    public ResponseEntity&lt;?&gt; deleteProject(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findByProjectId(id);
+        if(!projectEmployeePairs.isEmpty())
+        {
+            throw new ProjectViolationException(&quot;employee exist for project-&quot; + id);
+        }
+
+        Optional&lt;Project&gt; existingProjectOptional = projectRepository.findById(id);
+        if(!existingProjectOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;project-&quot; + id);
+        }
+
+        Project project = existingProjectOptional.get();
+        project.setOutUtc(ZonedDateTime.now());
+        projectRepository.save(project);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand().toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+
+    private List&lt;Resource&lt;ProjectDTO&gt;&gt; createProjectResources(List&lt;Project&gt; projects)
+    {
+        List&lt;Resource&lt;ProjectDTO&gt;&gt; projectResources = new ArrayList&lt;&gt;();
+
+        for(Project project : projects)
+        {
+            Resource&lt;ProjectDTO&gt; projectResource = createProjectResource(new ProjectDTO(project));
+
+            projectResources.add(projectResource);
+        }
+        return projectResources;
+    }
+
+    private Resource&lt;ProjectDTO&gt; createProjectResource(ProjectDTO projectDTO)
+    {
+        Resource&lt;ProjectDTO&gt; projectResource = new Resource&lt;&gt;(projectDTO);
+        Link link = linkTo(methodOn(getClass()).getProjects(projectDTO.getProjectID())).withSelfRel();
+        projectLinks.addLinks(projectDTO, projectResource, link);
+        return projectResource;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+public class EmployeeController
+{
+    @Autowired
+    private EmployeeRepository employeeRepository;
+    @Autowired
+    private EmployeeSubscriptionMapRepository employeeSubscriptionMapRepository;
+    @Autowired
+    private ProjectEmployeeMapRepository projectEmployeeMapRepository;
+    @Autowired
+    private EmployeeLinks employeeLinks;
+
+    @GetMapping(&quot;/employees&quot;)
+    public ResponseEntity&lt;List&lt;Resource&lt;EmployeeDTO&gt;&gt;&gt; getEmployees()
+    {
+        List&lt;Employee&gt; employees = employeeRepository.findAll();
+
+        List&lt;Resource&lt;EmployeeDTO&gt;&gt; employeeResources = createEmployeeResources(employees);
+
+        return ResponseEntity.ok(employeeResources);
+    }
+
+    @GetMapping(&quot;/employees/{id}&quot;)
+    public ResponseEntity&lt;Resource&lt;EmployeeDTO&gt;&gt; getEmployees(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Employee&gt; employeeOptional = employeeRepository.findById(id);
+        if(!employeeOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;employee-&quot; + id);
+        }
+        Employee employee = employeeOptional.get();
+
+        Resource&lt;EmployeeDTO&gt; employeeResource = createEmployeeResource(new EmployeeDTO(employee));
+        employeeResource.add(linkTo(methodOn(getClass()).getEmployees()).withRel(&quot;all&quot;));
+
+        return ResponseEntity.ok(employeeResource);
+    }
+
+    @PostMapping(&quot;/employees&quot;)
+    public ResponseEntity&lt;?&gt; createEmployee(@RequestBody Employee employee)
+    {
+        employeeRepository.save(employee);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path(&quot;/{id}&quot;)
+                .buildAndExpand(employee.getID()).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @Transactional
+    @PutMapping(&quot;/employees/{id}&quot;)
+    public ResponseEntity&lt;?&gt; updateEmployee(@PathVariable(&quot;id&quot;) int id, @RequestBody Employee employee)
+    {
+        Optional&lt;Employee&gt; existingEmployeeOptional = employeeRepository.findById(id);
+        if(!existingEmployeeOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;employee-&quot; + id);
+        }
+
+        Employee existingEmployee = existingEmployeeOptional.get();
+        Employee autitEmployee = new Employee(existingEmployee);
+        existingEmployee.setInUtc(new Date());
+
+        if(StringUtils.hasText(employee.getEmployeeCode()))
+        {
+            existingEmployee.setEmployeeCode(employee.getEmployeeCode());
+        }
+        if(StringUtils.hasText(employee.getEmployeeName()))
+        {
+            existingEmployee.setEmployeeName(employee.getEmployeeName());
+        }
+
+        employeeRepository.save(existingEmployee);
+        employeeRepository.save(autitEmployee);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(existingEmployee).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping(&quot;/employees/{id}&quot;)
+    public ResponseEntity&lt;?&gt; deleteEmployee(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;ProjectEmployeePair&gt; projectEmployeePairs = projectEmployeeMapRepository.findByEmployeeId(id);
+        if(!projectEmployeePairs.isEmpty())
+        {
+            throw new ProjectViolationException(&quot;projects exist for employee-&quot; + id);
+        }
+
+        List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = employeeSubscriptionMapRepository.findByEmployeeId(id);
+        if(!employeeSubscriptionPairs.isEmpty())
+        {
+            throw new SubscriptionViolationException(&quot;subscription exist for employee-&quot; + id);
+        }
+
+        Optional&lt;Employee&gt; existingEmployeeOptional = employeeRepository.findById(id);
+        if(!existingEmployeeOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;employee-&quot; + id);
+        }
+
+        Employee employee = existingEmployeeOptional.get();
+        employee.setOutUtc(ZonedDateTime.now());
+        employeeRepository.save(employee);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand().toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    private List&lt;Resource&lt;EmployeeDTO&gt;&gt; createEmployeeResources(List&lt;Employee&gt; employees)
+    {
+        List&lt;Resource&lt;EmployeeDTO&gt;&gt; employeeResources = new ArrayList&lt;&gt;();
+
+        for(Employee employee : employees)
+        {
+            Resource&lt;EmployeeDTO&gt; employeeResource = createEmployeeResource(new EmployeeDTO(employee));
+            employeeResources.add(employeeResource);
+        }
+        return employeeResources;
+    }
+
+    private Resource&lt;EmployeeDTO&gt; createEmployeeResource(EmployeeDTO employeeDTO)
+    {
+        Resource&lt;EmployeeDTO&gt; employeeResource = new Resource&lt;&gt;(employeeDTO);
+        Link link = linkTo(methodOn(getClass()).getEmployees(employeeDTO.getEmployeeID())).withSelfRel();
+        employeeLinks.addLinks(employeeDTO, employeeResource, link);
+        return employeeResource;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+public class SubscriptionController
+{
+    @Autowired
+    private SubscriptionRepository subscriptionRepository;
+    @Autowired
+    private EmployeeSubscriptionMapRepository employeeSubscriptionMapRepository;
+    @Autowired
+    private SubscriptionLinks subscriptionLinks;
+
+    @GetMapping(&quot;/subscriptions&quot;)
+    public ResponseEntity&lt;List&lt;Resource&lt;SubscriptionDTO&gt;&gt;&gt; getSubscriptions()
+    {
+        List&lt;Subscription&gt; subscriptions = subscriptionRepository.findAll();
+
+        List&lt;Resource&lt;SubscriptionDTO&gt;&gt; subscriptionDTOResources = createSubscriptionResources(subscriptions);
+
+        return ResponseEntity.ok(subscriptionDTOResources);
+    }
+
+    @GetMapping(&quot;/subscriptions/{id}&quot;)
+    public ResponseEntity&lt;Resource&lt;SubscriptionDTO&gt;&gt; getSubscriptions(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Subscription&gt; subscriptionOptional = subscriptionRepository.findById(id);
+        if(!subscriptionOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;subscription-&quot; + id);
+        }
+        Subscription subscription = subscriptionOptional.get();
+
+        Resource&lt;SubscriptionDTO&gt; subscriptionDTOResource = createSubscriptionResource(new SubscriptionDTO(subscription));
+
+        subscriptionDTOResource.add(linkTo(methodOn(getClass()).getSubscriptions()).withRel(&quot;all&quot;));
+        return ResponseEntity.ok(subscriptionDTOResource);
+    }
+
+    @PostMapping(&quot;/subscriptions&quot;)
+    public ResponseEntity&lt;?&gt; createSubscription(@RequestBody Subscription subscription)
+    {
+        subscriptionRepository.save(subscription);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path(&quot;/{id}&quot;)
+                .buildAndExpand(subscription.getID()).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @Transactional
+    @PutMapping(&quot;/subscriptions/{id}&quot;)
+    public ResponseEntity&lt;?&gt; updateSubscription(@PathVariable(&quot;id&quot;) int id, @RequestBody Subscription subscription)
+    {
+        Optional&lt;Subscription&gt; existingSubscriptionOptional = subscriptionRepository.findById(id);
+        if(!existingSubscriptionOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;subscription-&quot; + id);
+        }
+
+        Subscription existingSubscription = existingSubscriptionOptional.get();
+        Subscription autitSubscription = new Subscription(existingSubscription);
+        existingSubscription.setInUtc(new Date());
+
+        if(StringUtils.hasText(subscription.getSubscriptionCode()))
+        {
+            existingSubscription.setSubscriptionCode(subscription.getSubscriptionCode());
+        }
+        if(StringUtils.hasText(subscription.getSubscriptionName()))
+        {
+            existingSubscription.setSubscriptionName(subscription.getSubscriptionName());
+        }
+
+        subscriptionRepository.save(existingSubscription);
+        subscriptionRepository.save(autitSubscription);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand(existingSubscription).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping(&quot;/subscriptions/{id}&quot;)
+    public ResponseEntity&lt;?&gt; deleteSubscription(@PathVariable(&quot;id&quot;) int id)
+    {
+        List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = employeeSubscriptionMapRepository.findBySubscriptionId(id);
+        if(!employeeSubscriptionPairs.isEmpty())
+        {
+            throw new ProjectViolationException(&quot;subscription exist for employee-&quot; + id);
+        }
+
+        Optional&lt;Subscription&gt; existingSubscriptionOptional = subscriptionRepository.findById(id);
+        if(!existingSubscriptionOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;subscription-&quot; + id);
+        }
+
+        Subscription subscription = existingSubscriptionOptional.get();
+        subscription.setOutUtc(ZonedDateTime.now());
+        subscriptionRepository.save(subscription);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .buildAndExpand().toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    private List&lt;Resource&lt;SubscriptionDTO&gt;&gt; createSubscriptionResources(List&lt;Subscription&gt; subscriptions)
+    {
+        List&lt;Resource&lt;SubscriptionDTO&gt;&gt; subscriptionDTOResources = new ArrayList&lt;&gt;();
+
+        for(Subscription subscription : subscriptions)
+        {
+            SubscriptionDTO subscriptionDTO = new SubscriptionDTO(subscription);
+            Resource&lt;SubscriptionDTO&gt; subscriptionDTOResource = createSubscriptionResource(subscriptionDTO);
+
+            subscriptionDTOResources.add(subscriptionDTOResource);
+        }
+        return subscriptionDTOResources;
+    }
+
+    private Resource&lt;SubscriptionDTO&gt; createSubscriptionResource(SubscriptionDTO subscriptionDTO)
+    {
+        Resource&lt;SubscriptionDTO&gt; subscriptionDTOResource = new Resource&lt;&gt;(subscriptionDTO);
+        Link link = linkTo(methodOn(getClass()).getSubscriptions(subscriptionDTO.getSubscriptionID())).withSelfRel();
+        subscriptionLinks.addLinks(subscriptionDTO, subscriptionDTOResource, link);
+        return subscriptionDTOResource;
+    }
+
+}</pre>
+</div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

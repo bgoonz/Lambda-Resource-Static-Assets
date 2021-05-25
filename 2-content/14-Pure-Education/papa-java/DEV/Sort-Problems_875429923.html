@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Sort Problems</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Java-Problems_858619905.html">Java Problems</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Sort Problems
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Jan 15, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1613190976774 {padding: 0px;}
+div.rbtoc1613190976774 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1613190976774 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1613190976774'>
+<ul class='toc-indentation'>
+<li><a href='#SortProblems-DistinctTriangles'>DistinctTriangles</a></li>
+<li><a href='#SortProblems-RadixSort'>RadixSort</a></li>
+<li><a href='#SortProblems-Sort'>Sort</a>
+<ul class='toc-indentation'>
+<li><a href='#SortProblems-bubbleSort'>bubbleSort</a></li>
+<li><a href='#SortProblems-quickSort'>quickSort</a></li>
+<li><a href='#SortProblems-mergeSort'>mergeSort</a></li>
+<li><a href='#SortProblems-insertionSort'>insertionSort</a></li>
+</ul>
+</li>
+</ul>
+</div><h2 id="SortProblems-DistinctTriangles">DistinctTriangles</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 340.0px;"/><col style="width: 340.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><code>DistinctTriangles</code></p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int countDistinctTriangles(int[][] triangles)
+{
+    for(int i = 0; i &lt; triangles.length; ++i)
+    {
+        Arrays.sort(triangles[i]);
+    }
+    int count = 1;
+    for(int i = 1; i &lt; triangles.length; ++i)
+    {
+        int[] current = triangles[i];
+        int[] prior = triangles[i - 1];
+        if(current[0] != prior[0] || current[1] != prior[1] || current[2] != prior[2])
+        {
+            count++;
+        }
+    }
+    return count;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[][] firstSet = new int[][] {
+            {2, 2, 3},
+            {3, 2, 2},
+            {2, 5, 6}
+    };
+    int[][] secondSet = new int[][] {
+            {8, 4, 6},
+            {100, 101, 102},
+            {84, 93, 173}
+    };
+    int[][] thirdSet = new int[][] {
+            {5, 8, 9},
+            {5, 9, 8},
+            {9, 5, 8},
+            {9, 8, 5},
+            {8, 9, 5},
+            {8, 5, 9}
+    };
+    boolean check = countDistinctTriangles(firstSet) == 2;
+    if(!check)
+    {
+        return false;
+    }
+    check = countDistinctTriangles(secondSet) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    check = countDistinctTriangles(thirdSet) == 1;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="SortProblems-RadixSort">RadixSort</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 931.0px;"/><col style="width: 686.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>RadixSort</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Use LSD (least significant digit) method by repeatedly sorting digits by single digit from right to left
+Given: { 170, 45, 75, 90, 802, 2, 66 }
+Treat all values as having same number of digits:
+Given: { 170, 045, 075, 090, 802, 002, 066 }
+1st Pass: { 170, 090, 802, 002, 045, 075, 066 }
+2nd Pass: { 802, 002, 045, 066, 170, 075, 090 }
+3rd Pass: { 002, 045, 066, 075, 090, 170, 802 }</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">a[]:    170 45  75  90  802 2   66
+Count:
+Index:  0   1   2   3   4   5   6   7   8   9
+for #1: 2   0   2   0   0   2   1   0   0   0
+for #2: 2   2   4   4   4   6   7   7   7   7
+for #1 counts how many digits end on number, i.e. 2 end on 0, 2 end on 2, 1 ends on 6, ...
+for #2 sums from left to right
+Result rearranges array based on last digit</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class RadixSort
+{
+    static void sort(int [] a)
+    {
+        //  Determine number of digits
+        int max = Arrays.stream(a).max().getAsInt();
+        int digits = (int)Math.log10(max) + 1;
+        for(int exp = 0; exp &lt; digits; ++exp)
+        {
+            countSort(a, (int)Math.pow(10, exp));
+        }
+    }
+
+    private static void countSort(int[] a, int exp)
+    {
+       int[] count = new int[10];
+
+        for(int i = 0; i &lt; a.length; ++i)
+        {
+            count[(a[i] / exp) % 10]++;
+        }
+
+        for(int i = 1; i &lt; 10; ++i)
+        {
+            count[i] += count[i - 1];
+        }
+        
+        int[] result = new int[a.length];
+        for(int i = a.length - 1; i &gt;= 0; --i)
+        {
+            result[count[a[i] / exp % 10] - 1] = a[i];
+            count[a[i] / exp % 10]--;
+        }
+        
+        System.arraycopy(result, 0, a, 0, a.length);
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] data = { 170, 45, 75, 90, 802, 2, 66 };
+    sort(data);
+    boolean check = Arrays.equals(new int[] {2, 45, 66, 75, 90, 170, 802}, data);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="SortProblems-Sort"><br/>Sort</h2><h3 id="SortProblems-bubbleSort"><code>bubbleSort</code></h3><h3 id="SortProblems-quickSort"><code>quickSort</code></h3><h3 id="SortProblems-mergeSort"><code>mergeSort</code></h3><h3 id="SortProblems-insertionSort"><code>insertionSort</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 809.0px;"/><col style="width: 808.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Sort</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void bubbleSort(int[] a)
+{
+    boolean swapped;
+    do
+    {
+        swapped = false;
+        for(int i = 1; i &lt; a.length; ++i)
+        {
+            if(a[i - 1] &gt; a[i])
+            {
+                swapped = true;
+                swap(a, i, i - 1);
+            }
+        }
+    } while(swapped);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">private static int partition(int[] a, int left, int right)
+{
+    int pivot = a[(left + right) / 2];
+    while(left &lt;= right)
+    {
+        while(a[left] &lt; pivot) left++;
+        while(a[right] &gt; pivot) right--;
+        if(left &lt;= right)
+        {
+            swap(a, left++, right--);
+        }
+    }
+    return left;
+}
+
+
+private static void quickSort(int[] a, int left, int right)
+{
+    int idx = partition(a, left, right);
+    if(left &lt; idx - 1)
+    {
+        quickSort(a, left, idx - 1);
+    }
+    if(idx &lt; right)
+    {
+        quickSort(a, idx, right);
+    }
+}
+
+
+static void quickSort(int[] a)
+{
+    quickSort(a, 0, a.length - 1);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void mergeSort(int[] a)
+{
+    if(a.length &lt; 2)
+    {
+        return;
+    }
+    int mid = a.length / 2;
+    int[] left = new int[mid];
+    int[] right = new int[a.length - mid];
+    System.arraycopy(a, 0, left, 0, left.length);
+    System.arraycopy(a, mid, right, 0, right.length);
+    mergeSort(left);
+    mergeSort(right);
+    merge(a, left, right);
+}
+
+
+private static void merge(int[] dst, int[] left, int[] right)
+{
+    int dstPos = 0, leftPos = 0, rightPos = 0;
+    while(leftPos &lt; left.length &amp;&amp; rightPos &lt; right.length)
+    {
+        if(left[leftPos] &lt; right[rightPos])
+        {
+            dst[dstPos++] = left[leftPos++];
+        }
+        else
+        {
+            dst[dstPos++] = right[rightPos++];
+        }
+    }
+    while(leftPos &lt; left.length)
+    {
+        dst[dstPos++] = left[leftPos++];
+    }
+    while(rightPos &lt; right.length)
+    {
+        dst[dstPos++] = right[rightPos++];
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void insertionSort(int[] a)
+{
+    for(int i = 1; i &lt; a.length; ++i)
+    {
+        for(int j = i; j &gt; 0; --j)
+        {
+            if(a[j] &lt; a[j - 1])
+            {
+                swap(a, j, j - 1);
+            }
+        }
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] data = {5, 1, 4, 9, 6, 2, 7, 3, 8};
+    bubbleSort(data);
+    boolean check = Arrays.equals(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9}, data);
+    if(!check)
+    {
+        return false;
+    }
+    data = new int[]{5, 1, 4, 9, 6, 2, 7, 3, 8};
+    quickSort(data);
+    check = Arrays.equals(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9}, data);
+    if(!check)
+    {
+        return false;
+    }
+    data = new int[]{5, 1, 4, 9, 6, 2, 7, 3, 8};
+    mergeSort(data);
+    check = Arrays.equals(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9}, data);
+    if(!check)
+    {
+        return false;
+    }
+    data = new int[]{5, 1, 4, 9, 6, 2, 7, 3, 8};
+    insertionSort(data);
+    check = Arrays.equals(new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9}, data);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p><br/></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

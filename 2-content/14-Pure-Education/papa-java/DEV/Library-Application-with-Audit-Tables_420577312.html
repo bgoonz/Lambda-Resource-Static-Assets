@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Library Application with Audit Tables</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Project-Profit-Application_315097089.html">Project Profit Application</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Add-Audit-Controller_323944464.html">Add Audit Controller</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Library Application with Audit Tables
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Jun 06, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="LibraryApplicationwithAuditTables-in-memorydatabase-data.sql">in-memory database - data.sql</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">-- READER
+INSERT INTO READER(ID, name, type, created_date, modified_date, created_by, last_modified_by) VALUES(1, &#39;nick&#39;, &#39;employee&#39;, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO READER(ID, name, type, created_date, modified_date, created_by, last_modified_by) VALUES(2, &#39;paul&#39;, &#39;student&#39;, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO READER(ID, name, type, created_date, modified_date, created_by, last_modified_by) VALUES(3, &#39;sam&#39;, &#39;retired&#39;, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO READER(ID, name, type, created_date, modified_date, created_by, last_modified_by) VALUES(4, &#39;mary&#39;, &#39;employee&#39;, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO READER(ID, name, type, created_date, modified_date, created_by, last_modified_by) VALUES(5, &#39;jim&#39;, &#39;contractor&#39;, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, &#39;unknown&#39;, &#39;unknown&#39;)
+
+--BOOK
+INSERT INTO BOOK(ID, title, author, created_date, modified_date, created_by, last_modified_by) VALUES(1, &#39;Tom Sawyer&#39;, &#39;Mark Twain&#39;, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO BOOK(ID, title, author, created_date, modified_date, created_by, last_modified_by) VALUES(2, &#39;Catch 22&#39;, &#39;Joseph Heller&#39;, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, &#39;unknown&#39;, &#39;unknown&#39;)
+INSERT INTO BOOK(ID, title, author, created_date, modified_date, created_by, last_modified_by) VALUES(3, &#39;War and Peace&#39;, &#39;Lev Tolstoy&#39;, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, &#39;unknown&#39;, &#39;unknown&#39;)
+
+--READER-BOOK-MAP
+INSERT INTO READER_BOOK_MAP(READER_ID, BOOK_ID) VALUES(1, 1)
+INSERT INTO READER_BOOK_MAP(READER_ID, BOOK_ID) VALUES(1, 2)
+INSERT INTO READER_BOOK_MAP(READER_ID, BOOK_ID) VALUES(2, 2)
+INSERT INTO READER_BOOK_MAP(READER_ID, BOOK_ID) VALUES(2, 3)
+INSERT INTO READER_BOOK_MAP(READER_ID, BOOK_ID) VALUES(3, 2)
+INSERT INTO READER_BOOK_MAP(READER_ID, BOOK_ID) VALUES(4, 3)
+
+--SEQUENCE
+alter sequence HIBERNATE_SEQUENCE restart with 100</pre>
+</div></div></td></tr></tbody></table></div><h1 id="LibraryApplicationwithAuditTables-application.properties">application.properties</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">spring.jpa.show-sql=true
+spring.h2.console.enabled=true
+spring.datasource.url=jdbc:h2:mem:db
+
+spring.data.rest.defaultMediaType=application/json
+spring.jackson.default-property-inclusion=NON_NULL
+
+spring.jpa.properties.org.hibernate.envers.audit_table_suffix=_AUDIT_LOG
+
+#logging.level.org.springframework=debug</pre>
+</div></div></td></tr></tbody></table></div><h1 id="LibraryApplicationwithAuditTables-pom.xml">pom.xml</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;parent&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+      &lt;version&gt;2.1.9.RELEASE&lt;/version&gt;
+      &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+   &lt;/parent&gt;
+   &lt;groupId&gt;com.springboot.library&lt;/groupId&gt;
+   &lt;artifactId&gt;audit-library&lt;/artifactId&gt;
+   &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+   &lt;name&gt;audit-library&lt;/name&gt;
+   &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+
+   &lt;properties&gt;
+      &lt;java.version&gt;1.8&lt;/java.version&gt;
+   &lt;/properties&gt;
+
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+         &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;/artifactId&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+         &lt;artifactId&gt;spring-boot-starter-data-rest&lt;/artifactId&gt;
+      &lt;/dependency&gt;
+
+      &lt;dependency&gt;
+         &lt;groupId&gt;com.h2database&lt;/groupId&gt;
+         &lt;artifactId&gt;h2&lt;/artifactId&gt;
+         &lt;scope&gt;runtime&lt;/scope&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+         &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+         &lt;scope&gt;test&lt;/scope&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+         &lt;artifactId&gt;hibernate-envers&lt;/artifactId&gt;
+         &lt;version&gt;${hibernate.version}&lt;/version&gt;
+      &lt;/dependency&gt;
+&lt;!--
+      &lt;dependency&gt;
+         &lt;groupId&gt;com.gs.spring&lt;/groupId&gt;
+         &lt;artifactId&gt;gs-spring-boot-security&lt;/artifactId&gt;
+         &lt;version&gt;2.1.7&lt;/version&gt;
+      &lt;/dependency&gt;
+--&gt;
+   &lt;/dependencies&gt;
+
+   &lt;build&gt;
+      &lt;plugins&gt;
+         &lt;plugin&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+         &lt;/plugin&gt;
+      &lt;/plugins&gt;
+   &lt;/build&gt;
+
+&lt;/project&gt;
+
+
+</pre>
+</div></div></td></tr></tbody></table></div><h1 id="LibraryApplicationwithAuditTables-configpackage">config package</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class AuditorAwareImpl implements AuditorAware&lt;String&gt;
+{
+    @Override
+    public Optional&lt;String&gt; getCurrentAuditor()
+    {
+        return Optional.of(System.getProperty(&quot;user.name&quot;));
+    }
+}
+
+
+@Configuration
+@EnableJpaAuditing(auditorAwareRef = &quot;auditorAware&quot;)
+public class JpaConfig {
+
+    @Bean
+    public AuditorAware&lt;String&gt; auditorAware()
+    {
+        return new AuditorAwareImpl();
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="LibraryApplicationwithAuditTables-entities">entities</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public class BaseEntity  extends ResourceSupport
+{
+    @Column(name = &quot;created_date&quot;, nullable = false, updatable = false)
+    @CreatedDate
+    @JsonIgnore
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
+    @Column(name = &quot;modified_date&quot;)
+    @LastModifiedDate
+    @JsonIgnore
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modifiedDate;
+
+    @CreatedBy
+    //@JsonIgnore
+    @Column(name = &quot;created_by&quot;)
+    private String createdBy;
+
+    @LastModifiedBy
+    //@JsonIgnore
+    @Column(name = &quot;last_modified_by&quot;)
+    private String lastModifiedBy;
+
+
+    public Date getCreatedDate()
+    {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate)
+    {
+        this.createdDate = createdDate;
+    }
+
+    public Date getModifiedDate()
+    {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(Date modifiedDate)
+    {
+        this.modifiedDate = modifiedDate;
+    }
+
+    public String getCreatedBy()
+    {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy)
+    {
+        this.createdBy = createdBy;
+    }
+
+    public String getLastModifiedBy()
+    {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy)
+    {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+}
+
+
+@Entity
+@Audited
+@EntityListeners(AuditingEntityListener.class)
+public class Book extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int bookId;
+    private String title;
+    private String author;
+    @Transient
+    private int key;
+
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = &quot;READER_BOOK_MAP&quot;,
+            joinColumns = {@JoinColumn(name = &quot;BOOK_ID&quot;)},
+            inverseJoinColumns = {@JoinColumn(name = &quot;READER_ID&quot;)})
+    private List&lt;Reader&gt; readers = new ArrayList&lt;&gt;();
+
+    public int getBookId()
+    {
+        return bookId;
+    }
+
+    public void setBookId(int bookId)
+    {
+        this.bookId = bookId;
+    }
+
+    public int getKey()
+    {
+        return bookId;
+    }
+
+    public void setKey(int key)
+    {
+        this.key = bookId;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
+
+    public String getAuthor()
+    {
+        return author;
+    }
+
+    public void setAuthor(String author)
+    {
+        this.author = author;
+    }
+
+    public void addReader(Reader r)
+    {
+        readers.add(r);
+        r.getBooks().add(this);
+    }
+
+    public void removeReader(Reader r)
+    {
+        readers.remove(r);
+        r.getBooks().remove(this);
+    }
+
+    public List&lt;Reader&gt; getReaders()
+    {
+        return readers;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Book book = (Book) o;
+        return bookId == book.bookId &amp;&amp;
+                Objects.equals(title, book.title) &amp;&amp;
+                Objects.equals(author, book.author);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), bookId, title, author);
+    }
+
+    @Override
+    public String toString()
+    {
+        return &quot;Book{&quot; +
+                &quot;bookId=&quot; + bookId +
+                &quot;, title=&#39;&quot; + title + &#39;\&#39;&#39; +
+                &quot;, author=&#39;&quot; + author + &#39;\&#39;&#39; +
+                &#39;}&#39;;
+    }
+}
+
+
+@Entity
+@Audited
+@EntityListeners(AuditingEntityListener.class)
+public class Reader extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    private int readerId;
+    private String name;
+    private String type;
+    @Transient
+    private int key;
+
+
+    @ManyToMany(mappedBy = &quot;readers&quot;)
+    private List&lt;Book&gt; books = new ArrayList&lt;&gt;();
+
+    public int getReaderId()
+    {
+        return readerId;
+    }
+
+    public void setReaderId(int id)
+    {
+        this.readerId = id;
+    }
+
+    public int getKey()
+    {
+        return readerId;
+    }
+
+    public void setKey(int key)
+    {
+        this.key = readerId;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public String getType()
+    {
+        return type;
+    }
+
+    public void setType(String type)
+    {
+        this.type = type;
+    }
+
+    public List&lt;Book&gt; getBooks()
+    {
+        return books;
+    }
+
+    public void addBook(Book b)
+    {
+        books.add(b);
+        b.getReaders().add(this);
+    }
+
+    public void removeBook(Book b)
+    {
+        books.remove(b);
+        b.getReaders().remove(this);
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Reader reader = (Reader) o;
+        return readerId == reader.readerId &amp;&amp;
+                Objects.equals(name, reader.name) &amp;&amp;
+                Objects.equals(type, reader.type);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(super.hashCode(), readerId, name, type);
+    }
+
+    @Override
+    public String toString()
+    {
+        return &quot;Reader{&quot; +
+                &quot;readerId=&quot; + readerId +
+                &quot;, name=&#39;&quot; + name + &#39;\&#39;&#39; +
+                &quot;, type=&#39;&quot; + type + &#39;\&#39;&#39; +
+                &#39;}&#39;;
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="LibraryApplicationwithAuditTables-exceptions">exceptions</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@ControllerAdvice
+@RestController
+public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler
+{
+
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity&lt;Object&gt; handleAllExceptions(Exception ex, WebRequest request)
+    {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public final ResponseEntity&lt;Object&gt; handleReaderNotFoundException(NotFoundException ex, WebRequest request)
+    {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
+                request.getDescription(false));
+        return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    protected ResponseEntity&lt;Object&gt; handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                  HttpHeaders headers, HttpStatus status, WebRequest request)
+    {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), &quot;Validation Failed&quot;,
+                ex.getBindingResult().toString());
+        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+}
+
+
+public class ExceptionResponse
+{
+    private Date timestamp;
+    private String message;
+    private String details;
+
+    public ExceptionResponse(Date timestamp, String message, String details) {
+        this.timestamp = timestamp;
+        this.message = message;
+        this.details = details;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+}
+
+
+
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class NotFoundException extends RuntimeException
+{
+    public NotFoundException(String message)
+    {
+        super(message);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="LibraryApplicationwithAuditTables-repo">repo</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RepositoryRestResource
+public interface BookRepository  extends JpaRepository&lt;Book, Integer&gt;
+{
+    @Query(&quot;select b from Book b where b.id = :id&quot;)
+    Optional&lt;Book&gt; findById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select b from Book b where b.author = :author&quot;)
+    List&lt;Book&gt; findByAuthor(@Param(&quot;author&quot;) String bookAuthor);
+
+    @Query(&quot;select b from Book b where b.title = :title&quot;)
+    List&lt;Book&gt; findByTitle(@Param(&quot;title&quot;) String title);
+}
+
+
+@RepositoryRestResource
+public interface ReaderRepository  extends JpaRepository&lt;Reader, Integer&gt;
+{
+    @Query(&quot;select r from Reader r where r.id = :id&quot;)
+    Optional&lt;Reader&gt; findById(@Param(&quot;id&quot;) int id);
+
+    @Query(&quot;select r from Reader r where r.name = :name&quot;)
+    List&lt;Reader&gt; findByName(@Param(&quot;name&quot;) String name);
+
+    @Query(&quot;select r from Reader r where r.type = :type&quot;)
+    List&lt;Reader&gt; findByType(@Param(&quot;type&quot;) String type);
+}
+
+
+</pre>
+</div></div></td></tr></tbody></table></div><h1 id="LibraryApplicationwithAuditTables-controller">controller</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+public class LibraryController
+{
+    @Autowired
+    private BookRepository bookRepository;
+    @Autowired
+    private ReaderRepository readerRepository;
+
+    @GetMapping(&quot;/books&quot;)
+    public @ResponseBody
+    ResponseEntity&lt;?&gt; getBooks()
+    {
+        List&lt;Book&gt; books = bookRepository.findAll();
+
+        List&lt;Book&gt; linkedBooks = books.stream()
+                .map(b -&gt; {b.add(linkTo(methodOn(getClass()).getBooks()).slash( &quot;/&quot; + b.getBookId()).withRel(&quot;id&quot;)); return b;})
+                .map(b -&gt; {b.add(linkTo(methodOn(getClass()).getBooksByTitle(b.getTitle())).withRel(&quot;title&quot;)); return b;})
+                .map(b -&gt; {b.add(linkTo(methodOn(getClass()).getBooksByAuthor(b.getAuthor())).withRel(&quot;author&quot;)); return b;})
+                .collect(Collectors.toList());
+
+        Resources&lt;Book&gt; resources = new Resources&lt;&gt;(linkedBooks);
+        resources.add(linkTo(methodOn(getClass()).getBooks()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+    //  --------------------------------
+    //  --------- GET Books ------------
+    //  --------------------------------
+    @GetMapping(&quot;/books/{id}&quot;)
+    public  ResponseEntity&lt;Resource&lt;Book&gt;&gt;  getBook(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Book&gt; bookOptional = bookRepository.findById(id);
+
+        if(!bookOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;id-&quot; + id);
+        }
+        Book book = bookOptional.get();
+        Resource&lt;Book&gt; resource = new Resource&lt;&gt;(book);
+        ControllerLinkBuilder linkTo = linkTo(methodOn(getClass()).getBooks());
+        resource.add(linkTo.withRel(&quot;all-books&quot;));
+        return ResponseEntity.ok(resource);
+    }
+
+    @GetMapping(&quot;/books/title/{title}&quot;)
+    public  @ResponseBody ResponseEntity&lt;?&gt;  getBooksByTitle(@PathVariable(&quot;title&quot;) String title)
+    {
+        List&lt;Book&gt; books = bookRepository.findByTitle(title);
+
+        if(books.isEmpty())
+        {
+            throw new NotFoundException(&quot;title-&quot; + title);
+        }
+        List&lt;Book&gt; linkedBooks = books.stream()
+                .map(b -&gt; {b.add(linkTo(methodOn(getClass()).getBooks()).slash( &quot;/&quot; + b.getBookId()).withRel(&quot;id&quot;)); return b;})
+                .map(b -&gt; {b.add(linkTo(methodOn(getClass()).getBooksByTitle(b.getTitle())).withRel(&quot;title&quot;)); return b;})
+                .map(b -&gt; {b.add(linkTo(methodOn(getClass()).getBooksByAuthor(b.getAuthor())).withRel(&quot;author&quot;)); return b;})
+                .collect(Collectors.toList());
+
+        Resources&lt;Book&gt; resources = new Resources&lt;&gt;(linkedBooks);
+        resources.add(linkTo(methodOn(getClass()).getBooks()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+    @GetMapping(&quot;/books/author/{author}&quot;)
+    public  @ResponseBody ResponseEntity&lt;?&gt;  getBooksByAuthor(@PathVariable(&quot;author&quot;) String author)
+    {
+        List&lt;Book&gt; books = bookRepository.findByAuthor(author);
+
+        if(books.isEmpty())
+        {
+            throw new NotFoundException(&quot;author-&quot; + author);
+        }
+        List&lt;Book&gt; linkedBooks = books.stream()
+                .map(b -&gt; {b.add(linkTo(methodOn(getClass()).getBooks()).slash( &quot;/&quot; + b.getBookId()).withRel(&quot;id&quot;)); return b;})
+                .map(b -&gt; {b.add(linkTo(methodOn(getClass()).getBooksByTitle(b.getTitle())).withRel(&quot;title&quot;)); return b;})
+                .map(b -&gt; {b.add(linkTo(methodOn(getClass()).getBooksByAuthor(b.getAuthor())).withRel(&quot;author&quot;)); return b;})
+                .collect(Collectors.toList());
+
+        Resources&lt;Book&gt; resources = new Resources&lt;&gt;(linkedBooks);
+        resources.add(linkTo(methodOn(getClass()).getBooks()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+
+    //  --------------------------------
+    //  --------- GET Readers ----------
+    //  --------------------------------
+    @GetMapping(&quot;/readers&quot;)
+    public @ResponseBody
+    ResponseEntity&lt;?&gt; getReaders()
+    {
+        List&lt;Reader&gt; readers = readerRepository.findAll();
+
+        List&lt;Reader&gt; linkedReaders = readers.stream()
+                .map(r -&gt; {r.add(linkTo(methodOn(getClass()).getReaders()).slash( &quot;/&quot; + r.getReaderId()).withRel(&quot;id&quot;)); return r;})
+                .map(r -&gt; {r.add(linkTo(methodOn(getClass()).getReadersByName(r.getName())).withRel(&quot;name&quot;)); return r;})
+                .map(r -&gt; {r.add(linkTo(methodOn(getClass()).getReadersByType(r.getType())).withRel(&quot;type&quot;)); return r;})
+                .collect(Collectors.toList());
+
+        Resources&lt;Reader&gt; resources = new Resources&lt;&gt;(linkedReaders);
+        resources.add(linkTo(methodOn(getClass()).getReaders()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+    @GetMapping(&quot;/readers/{id}&quot;)
+    public  ResponseEntity&lt;Resource&lt;Reader&gt;&gt;  getReader(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Reader&gt; readerOptional = readerRepository.findById(id);
+
+        if(!readerOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;id-&quot; + id);
+        }
+        Reader reader = readerOptional.get();
+        Resource&lt;Reader&gt; resource = new Resource&lt;&gt;(reader);
+        ControllerLinkBuilder linkTo = linkTo(methodOn(getClass()).getReaders());
+        resource.add(linkTo.withRel(&quot;all-readers&quot;));
+        return ResponseEntity.ok(resource);
+    }
+
+
+    @GetMapping(&quot;/readers/name/{name}&quot;)
+    public  @ResponseBody ResponseEntity&lt;?&gt;  getReadersByName(@PathVariable(&quot;name&quot;) String name)
+    {
+        List&lt;Reader&gt; readers = readerRepository.findByName(name);
+
+        if(readers.isEmpty())
+        {
+            throw new NotFoundException(&quot;reader-&quot; + name);
+        }
+
+        List&lt;Reader&gt; linkedReaders = readers.stream()
+                .map(r -&gt; {r.add(linkTo(methodOn(getClass()).getReaders()).slash( &quot;/&quot; + r.getReaderId()).withRel(&quot;id&quot;)); return r;})
+                .map(r -&gt; {r.add(linkTo(methodOn(getClass()).getReadersByName(r.getName())).withRel(&quot;name&quot;)); return r;})
+                .map(r -&gt; {r.add(linkTo(methodOn(getClass()).getReadersByType(r.getType())).withRel(&quot;type&quot;)); return r;})
+                .collect(Collectors.toList());
+
+        Resources&lt;Reader&gt; resources = new Resources&lt;&gt;(linkedReaders);
+        resources.add(linkTo(methodOn(getClass()).getReaders()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+    @GetMapping(&quot;/readers/type/{type}&quot;)
+    public  @ResponseBody ResponseEntity&lt;?&gt;  getReadersByType(@PathVariable(&quot;type&quot;) String type)
+    {
+        List&lt;Reader&gt; readers = readerRepository.findByType(type);
+
+        if(readers.isEmpty())
+        {
+            throw new NotFoundException(&quot;reader-&quot; + type);
+        }
+
+        List&lt;Reader&gt; linkedReaders = readers.stream()
+                .map(r -&gt; {r.add(linkTo(methodOn(getClass()).getReaders()).slash( &quot;/&quot; + r.getReaderId()).withRel(&quot;id&quot;)); return r;})
+                .map(r -&gt; {r.add(linkTo(methodOn(getClass()).getReadersByName(r.getName())).withRel(&quot;name&quot;)); return r;})
+                .map(r -&gt; {r.add(linkTo(methodOn(getClass()).getReadersByType(r.getType())).withRel(&quot;type&quot;)); return r;})
+                .collect(Collectors.toList());
+
+        Resources&lt;Reader&gt; resources = new Resources&lt;&gt;(linkedReaders);
+        resources.add(linkTo(methodOn(getClass()).getReaders()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+    //  -------------------------------------------
+    //  --------- GET Books With Readers ----------
+    //  -------------------------------------------
+    @GetMapping(&quot;/books/readers&quot;)
+    public @ResponseBody ResponseEntity&lt;?&gt; getBooksReaders()
+    {
+        List&lt;Resource&lt;?&gt;&gt; resourceResult = new ArrayList&lt;&gt;();
+
+        List&lt;Book&gt; books = bookRepository.findAll();
+        for(Book book : books)
+        {
+            if(!book.getReaders().isEmpty())
+            {
+                Resource&lt;Book&gt; bookResource = new Resource&lt;&gt;(book, createBookLink(book.getBookId()));
+
+                bookResource.add(createReadersForBookLink(book.getBookId()));
+                for(Reader reader : book.getReaders())
+                {
+                     bookResource.add(createReaderLink(reader.getReaderId()));
+                }
+                resourceResult.add(bookResource);
+            }
+        }
+        Resources&lt;Resource&lt;?&gt;&gt; resources = new Resources&lt;&gt;(resourceResult, linkTo(methodOn(getClass()).getBooksReaders()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+    @GetMapping(&quot;/books/{id}/readers&quot;)
+    public  @ResponseBody ResponseEntity&lt;?&gt;  getBooksForReader(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Book&gt; bookOptional = bookRepository.findById(id);
+
+        if(!bookOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;id-&quot; + id);
+        }
+
+        Book book = bookOptional.get();
+        if(book.getReaders().isEmpty())
+        {
+            throw new NotFoundException(&quot;Readers for id-&quot; + id);
+        }
+
+        List&lt;Resource&lt;?&gt;&gt; resourceResult = new ArrayList&lt;&gt;();
+        Resource&lt;Book&gt; bookResource = new Resource&lt;&gt;(book, createBookLink(book.getBookId()));
+
+        for(Reader reader : book.getReaders())
+        {
+            bookResource.add(createReaderLink(reader.getReaderId()));
+        }
+        resourceResult.add(bookResource);
+        Resources&lt;Resource&lt;?&gt;&gt; resources = new Resources&lt;&gt;(resourceResult, linkTo(methodOn(getClass()).getBooksForReader(id)).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+    //  -------------------------------------------
+    //  --------- GET Readers With Books ----------
+    //  -------------------------------------------
+    @GetMapping(&quot;/readers/books&quot;)
+    public @ResponseBody ResponseEntity&lt;?&gt; getReadersBooks()
+    {
+        List&lt;Resource&lt;?&gt;&gt; resourceResult = new ArrayList&lt;&gt;();
+
+        List&lt;Reader&gt; readers = readerRepository.findAll();
+        for(Reader reader : readers)
+        {
+            if(!reader.getBooks().isEmpty())
+            {
+                Resource&lt;Reader&gt; readerResource = new Resource&lt;&gt;(reader, createReaderLink(reader.getReaderId()));
+
+                readerResource.add(createBooksForReaderLink(reader.getReaderId()));
+                for(Book book : reader.getBooks())
+                {
+                    readerResource.add(createBookLink(book.getBookId()));
+                }
+                resourceResult.add(readerResource);
+            }
+        }
+        Resources&lt;Resource&lt;?&gt;&gt; resources = new Resources&lt;&gt;(resourceResult, linkTo(methodOn(getClass()).getReadersBooks()).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+    @GetMapping(&quot;/readers/{id}/books&quot;)
+    public  @ResponseBody ResponseEntity&lt;?&gt;  getReadersForBook(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Reader&gt; readerOptional = readerRepository.findById(id);
+
+        if(!readerOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;id-&quot; + id);
+        }
+
+        Reader reader = readerOptional.get();
+        if(reader.getBooks().isEmpty())
+        {
+            throw new NotFoundException(&quot;Books for id-&quot; + id);
+        }
+
+        List&lt;Resource&lt;?&gt;&gt; resourceResult = new ArrayList&lt;&gt;();
+        Resource&lt;Reader&gt; readerResource = new Resource&lt;&gt;(reader, createReaderLink(reader.getReaderId()));
+
+        for(Book book : reader.getBooks())
+        {
+            readerResource.add(createBookLink(book.getBookId()));
+        }
+        resourceResult.add(readerResource);
+        Resources&lt;Resource&lt;?&gt;&gt; resources = new Resources&lt;&gt;(resourceResult, linkTo(methodOn(getClass()).getReadersForBook(id)).withSelfRel());
+        return ResponseEntity.ok(resources);
+    }
+
+
+    //  -----------------------------------------------
+    //  --------- POST, UPDATE, DELETE Books ----------
+    //  -----------------------------------------------
+    @PostMapping(&quot;/books&quot;)
+    public ResponseEntity&lt;?&gt; createBook(@RequestBody Book book)
+    {
+        Book savedBook = bookRepository.save(book);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path(&quot;/{id}&quot;)
+                .buildAndExpand(savedBook.getBookId()).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping(&quot;/books/{id}&quot;)
+    public void deleteBook(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Book&gt; bookOptional = bookRepository.findById(id);
+        if(!bookOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;id-&quot; + id);
+        }
+        bookRepository.deleteById(id);
+    }
+
+    @PutMapping(&quot;/books&quot;)
+    public ResponseEntity&lt;?&gt; updateBook(@RequestBody Book book)
+    {
+        Optional&lt;Book&gt; existingBookOptional = bookRepository.findById(book.getBookId());
+        if(!existingBookOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;book-&quot; + book.getBookId());
+        }
+
+        Book existingBook = existingBookOptional.get();
+        if(StringUtils.hasText(book.getTitle()))
+        {
+            existingBook.setTitle(book.getTitle());
+        }
+        if(StringUtils.hasText(book.getAuthor()))
+        {
+            existingBook.setAuthor(book.getAuthor());
+        }
+
+        bookRepository.save(existingBook);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path(&quot;/{id}&quot;)
+                .buildAndExpand(existingBook.getBookId()).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+
+    //  -----------------------------------------------
+    //  -------- POST, UPDATE, DELETE Readers ---------
+    //  -----------------------------------------------
+    @PostMapping(&quot;/readers&quot;)
+    public ResponseEntity&lt;?&gt; createReader(@RequestBody Reader reader)
+    {
+        Reader savedReader = readerRepository.save(reader);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path(&quot;/{id}&quot;)
+                .buildAndExpand(savedReader.getReaderId()).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping(&quot;/readers/{id}&quot;)
+    public void deleteReader(@PathVariable(&quot;id&quot;) int id)
+    {
+        Optional&lt;Reader&gt; readerOptional = readerRepository.findById(id);
+        if(!readerOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;id-&quot; + id);
+        }
+        readerRepository.deleteById(id);
+    }
+
+    @PutMapping(&quot;/readers&quot;)
+    public ResponseEntity&lt;?&gt; updateReader(@RequestBody Reader reader)
+    {
+        Optional&lt;Reader&gt; existingReaderOptional = readerRepository.findById(reader.getReaderId());
+        if(!existingReaderOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;reader-&quot; + reader.getReaderId());
+        }
+
+        Reader existingReader = existingReaderOptional.get();
+        if(StringUtils.hasText(reader.getName()))
+        {
+            existingReader.setName(reader.getName());
+        }
+        if(StringUtils.hasText(reader.getType()))
+        {
+            existingReader.setType(reader.getType());
+        }
+
+        readerRepository.save(existingReader);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path(&quot;/{id}&quot;)
+                .buildAndExpand(existingReader.getReaderId()).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+    //  -----------------------------------------------
+    //  --------- POST, DELETE Books/Readers ----------
+    //  -----------------------------------------------
+    @PostMapping(&quot;/books/{bookId}/readers/{readerId}&quot;)
+    public ResponseEntity&lt;?&gt; addReaderToBook(@PathVariable(&quot;bookId&quot;) int bookId, @PathVariable(&quot;readerId&quot;) int readerId)
+    {
+        Optional&lt;Reader&gt; readerOptional = readerRepository.findById(readerId);
+        if(!readerOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;reader-&quot; + readerId);
+        }
+        Optional&lt;Book&gt; bookOptional = bookRepository.findById(bookId);
+        if(!bookOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;book-&quot; + bookId);
+        }
+
+        Book book = bookOptional.get();
+        Reader reader = readerOptional.get();
+
+        if(!book.getReaders().contains(reader))
+        {
+            book.addReader(reader);
+            bookRepository.save(book);
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .buildAndExpand(book.getBookId(), reader.getReaderId())
+                    .toUri();
+            return ResponseEntity.created(location).build();
+        }
+        return null;
+    }
+
+    @DeleteMapping(&quot;/books/{bookId}/readers/{readerId}&quot;)
+    public void deleteReaderFromBook(@PathVariable(&quot;bookId&quot;) int bookId, @PathVariable(&quot;readerId&quot;) int readerId)
+    {
+        Optional&lt;Reader&gt; readerOptional = readerRepository.findById(readerId);
+        if(!readerOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;reader-&quot; + readerId);
+        }
+        Optional&lt;Book&gt; bookOptional = bookRepository.findById(bookId);
+        if(!bookOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;book-&quot; + bookId);
+        }
+
+        Book book = bookOptional.get();
+        Reader reader = readerOptional.get();
+        if(!book.getReaders().contains(reader))
+        {
+            throw new NotFoundException(&quot;reader-&quot; + readerId + &quot; in book-&quot; + bookId);
+        }
+        book.removeReader(reader);
+        bookRepository.save(book);
+    }
+    //  -----------------------------------------------
+    //  --------- POST, DELETE Readers/Books ----------
+    //  -----------------------------------------------
+    @PostMapping(&quot;/readers/{readerId}/books/{bookId}&quot;)
+    public ResponseEntity&lt;?&gt; addNewBookToReader(@PathVariable(&quot;readerId&quot;) int readerId, @PathVariable(&quot;bookId&quot;) int bookId)
+    {
+        Optional&lt;Reader&gt; readerOptional = readerRepository.findById(readerId);
+        if(!readerOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;reader-&quot; + readerId);
+        }
+        Optional&lt;Book&gt; bookOptional = bookRepository.findById(bookId);
+        if(!bookOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;book-&quot; + bookId);
+        }
+
+        Book book = bookOptional.get();
+        Reader reader = readerOptional.get();
+
+        if(!reader.getBooks().contains(book))
+        {
+            reader.addBook(book);
+            readerRepository.save(reader);
+            URI location = ServletUriComponentsBuilder
+                    .fromCurrentRequest()
+                    .buildAndExpand(reader.getReaderId(), book.getBookId())
+                    .toUri();
+            return ResponseEntity.created(location).build();
+        }
+        return null;
+    }
+
+    @DeleteMapping(&quot;/readers/{readerId}/books/{bookId}&quot;)
+    public void deleteBookFromReader(@PathVariable(&quot;readerId&quot;) int readerId, @PathVariable(&quot;bookId&quot;) int bookId)
+    {
+        Optional&lt;Reader&gt; readerOptional = readerRepository.findById(readerId);
+        if(!readerOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;reader-&quot; + readerId);
+        }
+        Optional&lt;Book&gt; bookOptional = bookRepository.findById(bookId);
+        if(!bookOptional.isPresent())
+        {
+            throw new NotFoundException(&quot;book-&quot; + bookId);
+        }
+
+        Book book = bookOptional.get();
+        Reader reader = readerOptional.get();
+        if(!reader.getBooks().contains(book))
+        {
+            throw new NotFoundException(&quot;book-&quot; + bookId + &quot; in reader-&quot; + readerId);
+        }
+        reader.removeBook(book);
+        readerRepository.save(reader);
+    }
+
+
+    //  -------------------------------------------
+    //   ----------- Helper Methods  --------------
+    //  -------------------------------------------
+    private Link createReaderLink(int readerId)
+    {
+        return linkTo(methodOn(getClass()).getReader(readerId)).withRel(&quot;reader&quot;);
+    }
+
+    private Link createReadersForBookLink(int bookId)
+    {
+        return linkTo(methodOn(getClass()).getBooksForReader(bookId)).withRel(&quot;readers&quot;);
+    }
+
+
+    private Link createBookLink(int bookId)
+    {
+        return linkTo(methodOn(getClass()).getBook(bookId)).withRel(&quot;book&quot;);
+    }
+
+    private Link createBooksForReaderLink(int readerId)
+    {
+        return linkTo(methodOn(getClass()).getReadersForBook(readerId)).withRel(&quot;books&quot;);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

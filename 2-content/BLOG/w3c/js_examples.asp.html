@@ -1,0 +1,1527 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!-- Mirrored from www.staroceans.org/w3c/js_examples.asp.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 May 2021 11:15:48 GMT -->
+<head><script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- MyFirstUnitAd -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:970px;height:250px"
+     data-ad-client="ca-pub-5778386704669218"
+     data-ad-slot="1503492166"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+<title>JavaScript Examples</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="Keywords" content="HTML,CSS,JavaScript,SQL,PHP,jQuery,XML,DOM,Bootstrap,Web development,W3C,tutorials,programming,training,learning,quiz,primer,lessons,references,examples,source code,colors,demos,tips">
+<meta name="Description" content="Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, PHP, and XML.">
+<link rel="icon" href="http://www.staroceans.org/w3c/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="http://www.staroceans.org/w3c/w3.css">
+<style>
+a:hover,a:active{color:#4CAF50}
+table.w3-table-all{margin:20px 0}
+/*OPPSETT AV TOP, TOPNAV, SIDENAV, MAIN, RIGHT OG FOOTER:*/
+.top {
+position:relative;
+background-color:#ffffff;
+height:68px;
+padding-top:20px;
+line-height:50px;
+overflow:hidden;
+z-index:2;
+}
+.w3schools-logo {
+font-family:fontawesome;
+text-decoration:none;
+line-height:1;
+-webkit-font-smoothing:antialiased;
+-moz-osx-font-smoothing:grayscale;
+font-size:37px;
+letter-spacing:3px;
+color:#555555;
+display:block;
+position:absolute;
+top:17px;
+}
+.w3schools-logo .dotcom {color:#4CAF50}
+.topnav {
+position:relative;
+z-index:2;
+font-size:17px;
+background-color:#5f5f5f;
+color:#f1f1f1;
+width:100%;
+padding:0;
+letter-spacing:1px;
+font-family:"Segoe UI",Arial,sans-serif;
+}
+.topnav a{
+padding:10px 15px 9px 15px !important;
+}
+.topnav .w3-bar a:hover,.topnav .w3-bar a:focus{
+background-color:#000000 !important;
+color:#ffffff !important;
+}
+.topnav .w3-bar a.active {
+background-color:#4CAF50;
+color:#ffffff;
+}
+a.topnav-icons {
+width:52px !important;
+font-size:20px !important;
+padding-top:11px !important;
+padding-bottom:13px !important;
+}
+a.topnav-icons.fa-home {font-size:22px !important}
+a.topnav-icons.fa-menu {font-size:22px !important}
+a.topnav-localicons {
+font-size:20px !important;
+padding-top:6px !important;
+padding-bottom:12px !important;
+}
+i.fa-caret-down,i.fa-caret-up{width:10px}
+#sidenav h2 {
+font-size:21px;
+padding-left:16px;
+margin:-4px 0 4px 0;
+width:204px;
+}
+#sidenav a {font-family:"Segoe UI",Arial,sans-serif;text-decoration:none;display:block;padding:2px 1px 1px 16px}
+#sidenav a:hover,#sidenav a:focus {color:#000000;background-color:#cccccc;}
+#sidenav a.active {background-color:#4CAF50;color:#ffffff}
+#leftmenuinner {
+position:fixed;
+top:0;
+padding-top:112px;
+padding-bottom:0;    
+height:100%;
+width:220px;
+background-color:transparent;
+}
+#leftmenuinnerinner {
+height:100%;
+width:100%;
+overflow-y:scroll;
+overflow-x:hidden;
+padding-top:20px;
+}
+#main {padding:16px}
+#mainLeaderboard {height:90px}
+#right {text-align:center;padding:16px 16px 0 0}
+#right a {text-decoration:none}
+#right a:hover {text-decoration:underline}
+#skyscraper {min-height:600px}
+.sidesection {margin-bottom:32px;}
+.bottomad {padding:0 16px 16px 0;float:left;width:auto;}
+.footer a {text-decoration:none;}
+.footer a:hover{text-decoration:underline;}
+#nav_tutorials,#nav_references,#nav_examples{-webkit-overflow-scrolling:touch;overflow:auto;}
+#nav_tutorials::-webkit-scrollbar,#nav_references::-webkit-scrollbar,#nav_examples::-webkit-scrollbar {width: 12px;}
+#nav_tutorials::-webkit-scrollbar-track,#nav_references::-webkit-scrollbar-track,#nav_examples::-webkit-scrollbar-track {background:#555555;}
+#nav_tutorials::-webkit-scrollbar-thumb,#nav_references::-webkit-scrollbar-thumb,#nav_examples::-webkit-scrollbar-thumb {background: #999999;}
+#nav_tutorials,#nav_references,#nav_examples {
+display:none;
+letter-spacing:0;
+margin-top:44px;
+}
+#nav_tutorials a,#nav_references a,#nav_examples a{
+padding:2px 0 2px 6px!important;
+}
+#nav_tutorials a:focus,#nav_references a:focus,#nav_examples a:focus{
+color: #000;
+background-color: #ccc;
+}
+#nav_tutorials h3,#nav_references h3,#nav_examples h3{
+padding-left:6px;
+}
+.w3-example{background-color:#f1f1f1;padding:0.01em 16px;margin:20px 0;box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important}
+.nextprev a {font-size:17px;border:1px solid #cccccc;}
+.nextprev a:link,.nextprev a:visited {background-color:#ffffff;color:#000000;}
+.w3-example a:focus,.nextprev a:focus{box-shadow:0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);}
+.nextprev a.w3-right {background-color:#4CAF50;color:#ffffff;border-color:#4CAF50}
+.w3-theme {color:#fff !important;background-color:#73AD21 !important;background-color:#4CAF50 !important}
+.w3-theme-border {border-color:#4CAF50 !important}
+.sharethis a:hover {color:inherit;}
+.fa-facebook-square,.fa-twitter-square,.fa-google-plus-square {padding:0 8px;}
+.fa-facebook-square:hover, .fa-thumbs-o-up:hover {color:#3B5998;}
+.fa-twitter-square:hover {color:#55acee;}
+.fa-google-plus-square:hover {color:#dd4b39;}
+#google_translate_element img {margin-bottom:-1px;}
+#googleSearch {color:#000000;}
+#googleSearch a {padding:0 !important;}
+.searchdiv {max-width:400px;margin:auto;text-align:left;font-size:16px}
+div.cse .gsc-control-cse, div.gsc-control-cse {background-color:transparent;border:none;padding:6px;margin:0px}
+td.gsc-search-button input.gsc-search-button {background-color:#4CAF50;border-color:#4CAF50}
+td.gsc-search-button input.gsc-search-button:hover {background-color:#46a049;}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus, .gsc-search-button {
+box-sizing:content-box; line-height:normal;}
+.gsc-tabsArea div {overflow:visible;}
+/*"nullstille" w3css:*/
+.w3-main{transition:margin-left 0s;}
+/*"nullstilling" slutt*/
+@media (min-width:1675px) {
+#main {width:79%}
+#right {width:21%}
+}
+@media (max-width:992px) {
+.top {height:100px}
+.top img {display:block;margin:auto;}
+.top .w3schools-logo {position:relative;top:0;width:100%;text-align:center;margin:auto}
+.toptext {width:100%;text-align:center}
+#sidenav {width:260px;}
+#sidenav h2 {font-size:26px;width:100%;}
+#sidenav a {padding:3px 2px 3px 24px;font-size:17px}
+#leftmenuinner {  
+box-shadow:0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+overflow:auto;
+-webkit-overflow-scrolling:touch;
+height:100%;
+position:relative;
+width:auto;
+padding-top:0;
+background-color:#f1f1f1;
+}
+#leftmenuinnerinner {overflow-y:scroll}
+.bottomad {float:none;text-align:center}
+#skyscraper {min-height:60px}
+}
+@media screen and (max-width:600px) {
+.top {height:68px}
+.toptext {display:none}
+}
+@font-face {
+font-family:'fontawesome';
+src: url('http://www.staroceans.org/w3c/fontawesome.eot');
+src:url('http://www.staroceans.org/w3c/fontawesome.eot') format('embedded-opentype'),
+url('http://www.staroceans.org/w3c/fontawesome.woff') format('woff'),
+url('http://www.staroceans.org/w3c/fontawesome.ttf') format('truetype'),
+url('http://www.staroceans.org/w3c/fontawesome.svg') format('svg');
+font-weight:normal;
+font-style:normal;
+}
+.fa {
+display:inline-block;
+font:normal normal normal 14px/1 FontAwesome;
+font-size:inherit;
+text-rendering:auto;
+-webkit-font-smoothing:antialiased;
+-moz-osx-font-smoothing:grayscale;
+transform:translate(0, 0);
+}
+.fa-2x {
+ font-size:2em;
+}
+.fa-home:before {content:'\e800';}
+.fa-menu:before {content: '\f0c9';}
+.fa-globe:before {content:'\e801';}
+.fa-search:before {content:'\e802'; }
+.fa-thumbs-o-up:before {content:'\e803';}
+.fa-left-open:before {content:'\e804';}
+.fa-right-open:before {content:'\e805';}
+.fa-facebook-square:before {content:'\e806';}
+.fa-google-plus-square:before {content:'\e807';}
+.fa-twitter-square:before {content:'\e808';}
+.fa-caret-down:before {content:'\e809';}
+.fa-caret-up:before {content:'\e80a';}
+span.marked, span.deprecated {
+ color:#e80000;
+ background-color:transparent;
+}
+.intro {font-size:16px}
+.w3-btn, .w3-btn:link, .w3-btn:visited {color:#FFFFFF;background-color:#4CAF50}
+a.w3-btn[href*="exercise.asp"] {margin:10px 5px 0 0}
+a.btnplayit,a.btnplayit:link,a.btnplayit:visited {background-color:#FFAD33;padding:1px 10px 2px 10px}
+a.btnplayit:hover,a.btnplayit:active {background-color:#ffffff;color:#FFAD33}
+a.btnplayit:hover {box-shadow:0 4px 8px 0 rgba(0,0,0,0.2);}
+a.btnsmall:link,a.btnsmall:visited,a.btnsmall:active,a.btnsmall:hover {
+float:right;padding:1px 10px 2px 10px;font:15px Verdana, sans-serif;}
+a.btnsmall:hover {box-shadow:0 4px 8px 0 rgba(0,0,0,0.2);}
+a.btnsmall:active,a.btnsmall:hover {color:#4CAF50;background-color:#ffffff}
+@media screen and (max-width:700px) {
+#mainLeaderboard {height:60px}
+#div-gpt-ad-1422003450156-0 {float:none;margin-left:auto;margin-right:auto}
+#div-gpt-ad-1422003450156-3 {float:none;margin-left:auto;margin-right:auto}
+}
+@media (max-width:1700px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(17){display:none;}}
+@media (max-width:1600px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(13){display:none;}}
+@media (max-width:1510px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(12){display:none;}}
+@media (max-width:1450px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(11){display:none;}}
+@media (max-width:1330px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(10){display:none;}}
+@media (max-width:1200px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(9){display:none;}}
+@media (max-width:1100px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(8){display:none;}}
+@media (max-width:1000px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(7){display:none;}}
+@media (max-width:992px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(6){display:none;}}
+@media (max-width:930px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(18){display:none;}}
+@media (max-width:800px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(19){display:none;}}
+@media (max-width:650px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(5){display:none;} #topnav .w3-bar:nth-of-type(1) a:nth-of-type(16){display:none;}}
+@media (max-width:460px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(4){display:none;}}
+@media (max-width:400px) {#topnav .w3-bar:nth-of-type(1) a:nth-of-type(3){display:none;}}
+.w3-note{background-color:#ffffcc;border-left:6px solid #ffeb3b}
+.w3-warning{background-color:#ffdddd;border-left:6px solid #f44336}
+.w3-info{background-color:#ddffdd;border-left:6px solid #4CAF50}
+hr[id^="ez-insert-after-placeholder"] {margin-top: 0;}
+</style>
+
+
+
+<script type='text/javascript'>
+var stickyadstatus = "";
+function fix_stickyad() {
+  document.getElementById("stickypos").style.position = "sticky";
+  var elem = document.getElementById("stickyadcontainer");
+  if (!elem) {return false;}
+  if (document.getElementById("skyscraper")) {
+    var skyWidth = Number(w3_getStyleValue(document.getElementById("skyscraper"), "width").replace("px", ""));  
+    }
+  else {
+    var skyWidth = Number(w3_getStyleValue(document.getElementById("right"), "width").replace("px", ""));  
+  }
+  elem.style.width = skyWidth + "px";
+  if (window.innerWidth <= 992) {
+    elem.style.position = "";
+    elem.style.top = stickypos + "px";
+    return false;
+  }
+  var stickypos = document.getElementById("stickypos").offsetTop;
+  var docTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+  var adHeight = Number(w3_getStyleValue(elem, "height").replace("px", ""));
+  if (stickyadstatus == "") {
+    if ((stickypos - docTop) < 60) {
+      elem.style.position = "fixed";
+      elem.style.top = "60px";
+      stickyadstatus = "sticky";
+      document.getElementById("stickypos").style.position = "sticky";
+
+    }
+  } else {
+    if ((docTop + 60) - stickypos < 0) {  
+      elem.style.position = "";
+      elem.style.top = stickypos + "px";
+      stickyadstatus = "";
+      document.getElementById("stickypos").style.position = "static";
+    }
+  }
+  if (stickyadstatus == "sticky") {
+    if ((docTop + adHeight + 60) > document.getElementById("footer").offsetTop) {
+      elem.style.position = "absolute";
+      elem.style.top = (document.getElementById("footer").offsetTop - adHeight) + "px";
+      document.getElementById("stickypos").style.position = "static";
+    } else {
+        elem.style.position = "fixed";
+        elem.style.top = "60px";
+        stickyadstatus = "sticky";
+        document.getElementById("stickypos").style.position = "sticky";
+    }
+  }
+}
+function w3_getStyleValue(elmnt,style) {
+  if (window.getComputedStyle) {
+    return window.getComputedStyle(elmnt,null).getPropertyValue(style);
+  } else {
+    return elmnt.currentStyle[style];
+  }
+}
+</script>
+
+</head><body>
+<div class='w3-container top'>
+  <a class='w3schools-logo' href='http://www.staroceans.org/w3c/index.html'>w3schools<span class='dotcom'>.com</span></a>
+  <div class='w3-right w3-hide-small w3-wide toptext' style="font-family:'Segoe UI',Arial,sans-serif">THE WORLD'S LARGEST WEB DEVELOPER SITE</div>
+</div>
+
+<div style='display:none;position:absolute;z-index:4;right:52px;height:44px;background-color:#5f5f5f;letter-spacing:normal;' id='googleSearch'>
+  <div class='gcse-search'></div>
+</div>
+<div style='display:none;position:absolute;z-index:3;right:111px;height:44px;background-color:#5f5f5f;text-align:right;padding-top:9px;' id='google_translate_element'></div>
+
+<div class='w3-card-2 topnav' id='topnav'>
+  <div style="overflow:auto;">
+    <div class="w3-bar w3-left" style="width:100%;overflow:hidden;height:44px">
+      <a href='javascript:void(0);' class='topnav-icons fa fa-menu w3-hide-large w3-left w3-bar-item w3-button' onclick='open_menu()' title='Menu'></a>
+      <a href='http://www.staroceans.org/w3c/att_style_scoped.asp.html' class='topnav-icons fa fa-home w3-left w3-bar-item w3-button' title='Home'></a>
+      <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/html5_app_cache.asp.html' title='HTML Tutorial'>HTML</a>
+      <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.1.html' title='CSS Tutorial'>CSS</a>
+      <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.9.html' title='JavaScript Tutorial'>JAVASCRIPT</a>
+      <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.12.html' title='SQL Tutorial'>SQL</a>
+      <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.13.html' title='PHP Tutorial'>PHP</a>
+      <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.4.html' title='Bootstrap Tutorial'>BOOTSTRAP</a>
+      <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.8.html' title='How To'>HOW TO</a>
+      <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.10.html' title='jQuery Tutorial'>JQUERY</a>
+      <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.2.html' title='W3.CSS Tutorial'>W3.CSS</a>
+      <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.11.html' title='Angular Tutorial'>ANGULAR</a>
+      <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.19.html' title='XML Tutorial'>XML</a>
+      <a class="w3-bar-item w3-button" id='topnavbtn_tutorials' href='javascript:void(0);' onclick='w3_open_nav("tutorials")' title='Tutorials'>MORE <i class='fa fa-caret-down'></i><i class='fa fa-caret-up' style='display:none'></i></a>
+      <a href='javascript:void(0);' class='topnav-icons fa w3-right w3-bar-item w3-button' onclick='open_search(this)' title='Search W3Schools'>&#xe802;</a>
+      <a href='javascript:void(0);' class='topnav-icons fa w3-right w3-bar-item w3-button' onclick='open_translate(this)' title='Translate W3Schools'>&#xe801;</a>
+      <a class="w3-bar-item w3-button w3-right" href='http://www.staroceans.org/w3c/default.asp.24.html'>FORUM</a>
+      <a class="w3-bar-item w3-button w3-right" id='topnavbtn_examples' href='javascript:void(0);' onclick='w3_open_nav("examples")' title='Examples'>EXAMPLES <i class='fa fa-caret-down'></i><i class='fa fa-caret-up' style='display:none'></i></a>
+      <a class="w3-bar-item w3-button w3-right" id='topnavbtn_references' href='javascript:void(0);' onclick='w3_open_nav("references")' title='References'>REFERENCES <i class='fa fa-caret-down'></i><i class='fa fa-caret-up' style='display:none'></i></a>
+    </div>
+    <div id='nav_tutorials' class='w3-bar-block w3-card-2' style="display:none;">
+      <span onclick='w3_close_nav("tutorials")' class='w3-button w3-xlarge w3-right' style="position:absolute;right:0;font-weight:bold;">&times;</span>
+      <div class='w3-row-padding' style="padding:24px 48px">
+        <div class='w3-col l3 m4'>
+          <h3>HTML and CSS</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/html5_app_cache.asp.html'>Learn HTML</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.1.html'>Learn CSS</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.2.html'>Learn W3.CSS</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.3.html'>Learn Colors</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.4.html'>Learn Bootstrap 3</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.5.html'>Learn Bootstrap 4</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.7.html'>Learn Graphics</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.6.html'>Learn Icons</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.8.html'>Learn How To</a>
+        </div>
+        <div class='w3-col l3 m4'>  
+          <h3>JavaScript</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.9.html'>Learn JavaScript</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.10.html'>Learn jQuery</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.11.html'>Learn AngularJS</a>
+          <a class="w3-bar-item w3-button" href="http://www.staroceans.org/w3c/js_json_intro.asp.html">Learn JSON</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/js_ajax_intro.asp.html'>Learn AJAX</a>
+          <div class="w3-hide-small"><br><br></div>
+        </div>
+        <div class='w3-col l3 m4'>
+          <h3>Server Side</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.12.html'>Learn SQL</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.13.html'>Learn PHP</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.14.html'>Learn ASP</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.15.html'>Learn Node.js</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/nodejs_raspberrypi.asp.html'>Learn Raspberry Pi</a>          
+          <h3>Web Building</h3>
+          <a class="w3-bar-item w3-button" href="http://www.staroceans.org/w3c/w3css_templates.asp.html">Web Templates</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.16.html'>Web Statistics</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.17.html'>Web Certificates</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.18.html'>Web Editor</a>
+        </div>
+        <div class='w3-col l3 m4'>
+          <h3>XML</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.19.html'>Learn XML</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/ajax_intro.asp.html'>Learn XML AJAX</a>
+          <a class="w3-bar-item w3-button" href="http://www.staroceans.org/w3c/dom_intro.asp.html">Learn XML DOM</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/xml_dtd_intro.asp.html'>Learn XML DTD</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/schema_intro.asp.html'>Learn XML Schema</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/xsl_intro.asp.html'>Learn XSLT</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/xpath_intro.asp.html'>Learn XPath</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/xquery_intro.asp.html'>Learn XQuery</a>
+        </div>
+      </div>
+      <br>
+    </div>
+    <div id='nav_references' class='w3-bar-block w3-card-2'>
+      <span onclick='w3_close_nav("references")' class='w3-button w3-xlarge w3-right' style="position:absolute;right:0;font-weight:bold;">&times;</span>
+      <div class='w3-row-padding' style="padding:24px 48px">
+        <div class='w3-col m4'>
+          <h3>HTML</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.20.html'>HTML Tag Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/ref_eventattributes.asp.html'>HTML Event Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.3.html'>HTML Color Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/ref_attributes.asp.html'>HTML Attribute Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/ref_canvas.asp.html'>HTML Canvas Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/svg_reference.asp.html'>HTML SVG Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/google_maps_reference.asp.html'>Google Maps Reference</a>
+          <h3>Charsets</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.23.html'>HTML Character Sets</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/ref_html_ascii.asp.html'>HTML ASCII</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/ref_html_ansi.asp.html'>HTML ANSI</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/ref_html_ansi.asp.html'>HTML Windows-1252</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/ref_html_8859.asp.html'>HTML ISO-8859-1</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/ref_html_symbols.asp.html'>HTML Symbols</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/ref_html_utf8.asp.html'>HTML UTF-8</a>
+        </div>
+        <div class='w3-col m4'>
+          <h3>CSS</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.21.html'>CSS Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/css3_browsersupport.asp.html'>CSS Browser Support</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/css_selectors.asp.html'>CSS Selector Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/w3css_references.asp.html'>W3.CSS Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/bootstrap_ref_all_classes.asp.html'>Bootstrap Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/icons_reference.asp.html'>Icon Reference</a>
+          <h3>XML</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/dom_nodetype.asp.html'>XML Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/dom_http.asp.html'>XML Http Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/xsl_elementref.asp.html'>XSLT Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/schema_elements_ref.asp.html'>XML Schema Reference</a>
+        </div>
+        <div class='w3-col m4'>
+          <h3>JavaScript</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.22.html'>JavaScript Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.22.html'>HTML DOM Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/jquery_ref_selectors.asp.html'>jQuery Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/angular_ref_directives.asp.html'>AngularJS Reference</a>
+          <h3>Server Side</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/php_ref_array.asp.html'>PHP Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/sql_quickref.asp.html'>SQL Reference</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/asp_ref_response.asp.html'>ASP Reference</a>
+        </div>
+      </div>
+      <br>
+    </div>
+    <div id='nav_examples' class='w3-bar-block w3-card-2'>
+      <span onclick='w3_close_nav("examples")' class='w3-button w3-xlarge w3-right' style="position:absolute;right:0;font-weight:bold;">&times;</span>
+      <div class='w3-row-padding' style="padding:24px 48px">
+        <div class='w3-col l3 m6'>
+          <h3>HTML/CSS</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/html_examples.asp.html'>HTML Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/css_examples.asp.html'>CSS Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/w3css_examples.asp.html'>W3.CSS Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/w3css_templates.asp.html'>W3.CSS Templates</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/bootstrap_examples.asp.html'>Bootstrap Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/default.asp.8.html'>How To Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/svg_examples.asp.html'>SVG Examples</a>
+        </div>
+        <div class='w3-col l3 m6'>
+          <h3>JavaScript</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/js_examples.asp.html' target='_top'>JavaScript Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/js_dom_examples.asp.html' target='_top'>HTML DOM Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/jquery_examples.asp.html' target='_top'>jQuery Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/angular_examples.asp.html' target='_top'>AngularJS Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/js_ajax_examples.asp.html' target='_top'>AJAX Examples</a>
+        </div>
+        <div class='w3-col l3 m6'>
+          <h3>Server Side</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/php_examples.asp.html' target='_top'>PHP Examples</a>
+          <a class="w3-bar-item w3-button" href="http://www.staroceans.org/w3c/asp_examples.asp.html" target="_top">ASP Examples</a>
+          <h3>XML</h3>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/xml_examples.asp.html' target='_top'>XML Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/xsl_examples.asp.html' target='_top'>XSLT Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/xpath_examples.asp.html' target='_top'>XPath Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/schema_example.asp.html' target='_top'>XML Schema Examples</a>
+          <a class="w3-bar-item w3-button" href='http://www.staroceans.org/w3c/svg_examples.asp.html' target='_top'>SVG Examples</a>
+        </div>
+        <div class='w3-col l3 m6'>
+          <h3>Quizzes</h3>
+          <a class="w3-bar-item w3-button" href='https://www.w3schools.com/quiztest/quiztest.asp?Qtest=HTML' target='_top'>HTML Quiz</a>
+          <a class="w3-bar-item w3-button" href='https://www.w3schools.com/quiztest/quiztest.asp?Qtest=CSS' target='_top'>CSS Quiz</a>
+          <a class="w3-bar-item w3-button" href='https://www.w3schools.com/quiztest/quiztest.asp?Qtest=JavaScript' target='_top'>JavaScript Quiz</a>
+          <a class="w3-bar-item w3-button" href='https://www.w3schools.com/quiztest/quiztest.asp?Qtest=Bootstrap' target='_top'>Bootstrap Quiz</a>
+          <a class="w3-bar-item w3-button" href='https://www.w3schools.com/quiztest/quiztest.asp?Qtest=jQuery' target='_top'>jQuery Quiz</a>
+          <a class="w3-bar-item w3-button" href='https://www.w3schools.com/quiztest/quiztest.asp?Qtest=PHP' target='_top'>PHP Quiz</a>
+          <a class="w3-bar-item w3-button" href="https://www.w3schools.com/quiztest/quiztest.asp?Qtest=SQL" target="_top">SQL Quiz</a>
+          <a class="w3-bar-item w3-button" href='https://www.w3schools.com/quiztest/quiztest.asp?Qtest=XML' target='_top'>XML Quiz</a>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
+
+<div class='w3-sidebar w3-collapse' id='sidenav'>
+  <div id='leftmenuinner'>
+    <div class='w3-light-grey' id='leftmenuinnerinner'>
+      <a href='javascript:void(0)' onclick='close_menu()' class='w3-button w3-hide-large w3-large w3-display-topright' style='right:16px;padding:3px 12px;font-weight:bold;'>&times;</a>
+<h2 class="left"><span class="left_h2">JS</span> Tutorial</h2>
+<a target="_top" href="http://www.staroceans.org/w3c/default.asp.9.html">JS HOME</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_intro.asp.html">JS Introduction</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_whereto.asp.html">JS Where To</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_output.asp.html">JS Output</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_statements.asp.html">JS Statements</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_syntax.asp.html">JS Syntax</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_comments.asp.html">JS Comments</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_variables.asp.html">JS Variables</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_operators.asp.html">JS Operators</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_arithmetic.asp.html">JS Arithmetic</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_assignment.asp.html">JS Assignment</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_datatypes.asp.html">JS Data Types</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_functions.asp.html">JS Functions</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_objects.asp.html">JS Objects</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_scope.asp.html">JS Scope</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_events.asp.html">JS Events</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_strings.asp.html">JS Strings</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_string_methods.asp.html">JS String Methods</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_numbers.asp.html">JS Numbers</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_number_methods.asp.html">JS Number Methods</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_arrays.asp.html">JS Arrays</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_array_methods.asp.html">JS Array Methods</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_array_sort.asp.html">JS Array Sort</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_dates.asp.html">JS Dates</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_date_formats.asp.html">JS Date Formats</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_date_methods.asp.html">JS Date Get Methods</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_date_methods_set.asp.html">JS Date Set Methods</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_math.asp.html">JS Math</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_random.asp.html">JS Random</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_booleans.asp.html">JS Booleans</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_comparisons.asp.html">JS Comparisons</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_if_else.asp.html">JS Conditions</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_switch.asp.html">JS Switch</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_loop_for.asp.html">JS Loop For</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_loop_while.asp.html">JS Loop While</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_break.asp.html">JS Break</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_type_conversion.asp.html">JS Type Conversion</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_bitwise.asp.html">JS Bitwise</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_regexp.asp.html">JS RegExp</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_errors.asp.html">JS Errors</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_debugging.asp.html">JS Debugging</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_hoisting.asp.html">JS Hoisting</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_strict.asp.html">JS Strict Mode</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_conventions.asp.html">JS Style Guide</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_best_practices.asp.html">JS Best Practices</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_mistakes.asp.html">JS Mistakes</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_performance.asp.html">JS Performance</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_reserved.asp.html">JS Reserved Words</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_versions.asp.html">JS Versions</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_json.asp.html">JS JSON</a>
+<br>
+<h2 class="left"><span class="left_h2">JS</span> Forms</h2>
+<a target="_top" href="http://www.staroceans.org/w3c/js_validation.asp.html">JS Forms</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_validation_api.asp.html">Forms API</a>
+<br>
+<h2 class="left"><span class="left_h2">JS</span> Objects</h2>
+<a target="_top" href="http://www.staroceans.org/w3c/js_object_definition.asp.html">Object Definitions</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_properties.asp.html">Object Properties</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_object_methods.asp.html">Object Methods</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_object_constructors.asp.html">Object Constructors</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_object_prototypes.asp.html">Object Prototypes</a>
+<br>
+<h2 class="left"><span class="left_h2">JS</span> Functions</h2>
+<a target="_top" href="http://www.staroceans.org/w3c/js_function_definition.asp.html">Function Definitions</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_function_parameters.asp.html">Function Parameters</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_function_invocation.asp.html">Function Invocation</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_function_call.asp.html">Function Call</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_function_apply.asp.html">Function Apply</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_function_closures.asp.html">Function Closures</a>
+<br>
+<h2 class="left"><span class="left_h2">JS</span> HTML DOM</h2>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom.asp.html">DOM Intro</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom_methods.asp.html">DOM Methods</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom_document.asp.html">DOM Document</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom_elements.asp.html">DOM Elements</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom_html.asp.html">DOM HTML</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom_css.asp.html">DOM CSS</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom_animate.asp.html">DOM Animations</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom_events.asp.html">DOM Events</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom_eventlistener.asp.html">DOM Event Listener</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom_navigation.asp.html">DOM Navigation</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom_nodes.asp.html">DOM Nodes</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom_collections.asp.html">DOM Collections</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_htmldom_nodelist.asp.html">DOM Node Lists</a>
+<br>
+<h2 class="left"><span class="left_h2">JS</span> Browser BOM</h2>
+<a target="_top" href="http://www.staroceans.org/w3c/js_window.asp.html">JS Window</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_window_screen.asp.html">JS Screen</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_window_location.asp.html">JS Location</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_window_history.asp.html">JS History</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_window_navigator.asp.html">JS Navigator</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_popup.asp.html">JS Popup Alert</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_timing.asp.html">JS Timing</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_cookies.asp.html">JS Cookies</a>
+<br>
+<h2 class="left"><span class="left_h2">JS</span> AJAX</h2>
+<a target="_top" href="http://www.staroceans.org/w3c/js_ajax_intro.asp.html">AJAX Intro</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_ajax_http.asp.html">AJAX XMLHttp</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_ajax_http_send.asp.html">AJAX Request</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_ajax_http_response.asp.html">AJAX Response</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_ajax_xmlfile.asp.html">AJAX XML File</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_ajax_php.asp.html">AJAX PHP</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_ajax_asp.asp.html">AJAX ASP</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_ajax_database.asp.html">AJAX Database</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_ajax_applications.asp.html">AJAX Applications</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_ajax_examples.asp.html">AJAX Examples</a>
+
+<br>
+<h2 class="left"><span class="left_h2">JS</span> JSON</h2>
+<a target="_top" href="http://www.staroceans.org/w3c/js_json_intro.asp.html">JSON Intro</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_json_syntax.asp.html">JSON Syntax</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_json_xml.asp.html">JSON vs XML</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_json_datatypes.asp.html">JSON Data Types</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_json_objects.asp.html">JSON Objects</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_json_arrays.asp.html">JSON Arrays</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_json_parse.asp.html">JSON Parse</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_json_stringify.asp.html">JSON Stringify</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_json_php.asp.html">JSON PHP</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_json_html.asp.html">JSON HTML</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_json_jsonp.asp.html">JSON JSONP</a>
+<br>
+<h2 class="left"><span class="left_h2">JS</span> Examples</h2>
+<a target="_top" href="http://www.staroceans.org/w3c/js_examples.asp.html">JS Examples</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_dom_examples.asp.html">JS HTML DOM</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_input_examples.asp.html">JS HTML Input</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_ex_dom.asp.html">JS HTML Objects</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_events_examples.asp.html">JS HTML Events</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_ex_browser.asp.html">JS Browser</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_quiz.asp.html">JS Quiz</a>
+<a target="_top" href="http://www.staroceans.org/w3c/js_exam.asp.html">JS Certificate</a>
+<br>
+<h2 class="left"><span class="left_h2">JS</span> References</h2>
+<a target="_top" href="http://www.staroceans.org/w3c/default.asp.22.html">JavaScript Objects</a>
+<a target="_top" href="http://www.staroceans.org/w3c/default.asp.22.html">HTML DOM Objects</a>
+<br>
+      <br><br>
+    </div>
+  </div>
+</div>
+<div class='w3-main w3-light-grey' id='belowtopnav' style='margin-left:220px;'>
+  <div class='w3-row w3-white'>
+    <div class='w3-col l10 m12' id='main'>
+      <div id='mainLeaderboard' style='overflow:hidden;'>
+        <!-- MainLeaderboard-->
+        <div id='div-gpt-ad-1422003450156-2'>
+          
+        </div>
+      </div>
+<h1>JavaScript <span class="color_h1">Examples</span></h1>
+<div class="w3-clear nextprev">
+ <a class="w3-left w3-btn" href="http://www.staroceans.org/w3c/js_json_jsonp.asp.html">&#10094; Previous</a>
+<a class="w3-right w3-btn" href="http://www.staroceans.org/w3c/js_dom_examples.asp.html">Next &#10095;</a>
+</div>
+<hr>
+
+<h2>What can JavaScript do?</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3447.html">
+JavaScript can change HTML content</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3448.html">
+JavaScript can change HTML attributes</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3449.html">
+JavaScript can change CSS style</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3450.html" target="_blank">
+JavaScript can hide HTML elements</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3451.html" target="_blank">
+JavaScript can show hidden HTML elements</a></p>
+<p><a href="http://www.staroceans.org/w3c/js_intro.asp.html" class="w3-btn w3-margin-top">Examples explained</a></p>
+<hr>
+
+<h2>Where to Insert JavaScript</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3452.html">
+JavaScript in &lt;head&gt;</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3453.html">
+JavaScript in &lt;body&gt;</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3454.html">
+JavaScript in an external file</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3455.html">
+JavaScript in an external url </a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3456.html">
+JavaScript in an external folder</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_whereto.asp.html" class="w3-btn w3-margin-top">Where to explained</a></p>
+<hr>
+
+<h2>JavaScript Output</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3457.html">
+Writing into the HTML output</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3458.html">
+Writing into an HTML element</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3459.html">
+Writing into an window alert box</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3460.html">
+Writing into the browser console</a></p>
+<p><a href="http://www.staroceans.org/w3c/js_output.asp.html" class="w3-btn w3-margin-top">Output explained</a></p>
+<hr>
+
+<h2>JavaScript Syntax</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3461.html">
+JavaScript statements</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3462.html">
+JavaScript numbers</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3463.html">
+JavaScript strings</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3464.html">
+JavaScript variables</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3465.html">
+JavaScript operators</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3466.html">
+JavaScript assignment</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3467.html">
+JavaScript expressions (using constants)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3468.html">
+JavaScript expressions (using strings)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3469.html">
+JavaScript expressions (using variables)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3470.html">
+JavaScript keywords</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3471.html">
+JavaScript comments</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3472.html">
+JavaScript is case sensitive</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_syntax.asp.html" class="w3-btn w3-margin-top">Syntax explained</a></p>
+
+<hr>
+<div style="overflow:auto;text-align:center">
+<!-- MidContent -->
+  <div id='div-gpt-ad-1493883843099-0' style="display: inline-block">
+    
+  </div>  
+</div>
+<hr>
+<h2>JavaScript Statements</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3473.html">
+JavaScript statements are commands to the browser</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3474.html">
+JavaScript code is a sequence of statements</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3475.html">
+JavaScript statements are separated with semicolon</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3476.html">
+Multiple statement on one line is allowed</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3477.html">
+JavaScript statements can be grouped together in code blocks</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3478.html">
+You can break a code line after an operator or a comma.</a>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_statements.asp.html" class="w3-btn w3-margin-top">Statements explained</a></p>
+
+<hr>
+<h2>JavaScript Comments</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3479.html">
+Single line comments</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3480.html">
+Single line comments at the end of a line</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3481.html">
+Multiple lines comments</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3482.html">
+Single line comment to prevent execution</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3483.html">
+Multiple lines comment to prevent execution</a>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_comments.asp.html" class="w3-btn w3-margin-top">Comments explained</a></p>
+
+<hr>
+<h2>JavaScript Variables</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3484.html">
+JavaScript variables</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3485.html">
+JavaScript variables as algebra</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3486.html">
+JavaScript numbers and strings</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3487.html">
+JavaScript var keyword.</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3488.html">
+Declaring many variables in one statement</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3489.html">
+Declaring many variables multiline</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3490.html">
+A variable without a value returns the value undefined</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3491.html">
+Re-declaring a variable will not destroy the value</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3492.html">
+Adding JavaScript numbers</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3493.html">
+Adding JavaScript strings</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3494.html">
+Adding strings and numbers</a>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_variables.asp.html" class="w3-btn w3-margin-top">Variables explained</a></p>
+<hr>
+
+<h2>JavaScript Arithmetic </h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3495.html">
+The addition (+) operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3496.html">
+The subtraction (-) operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3497.html">
+The multiplication (*) operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3498.html">
+The division (/) operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3499.html">
+The modulus (%) operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3500.html">
+The increment (++) operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3501.html">
+The decrement (--) operator</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_operators.asp.html" class="w3-btn w3-margin-top">Arithmetic explained</a></p>
+<hr>
+
+<h2>JavaScript Assignment </h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3502.html">
+The = assignment operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3503.html">
+The += assignment operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3504.html">
+The -= assignment operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3505.html">
+The *= assignment operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3506.html">
+The /= assignment operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3507.html">
+The %= assignment operator</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_operators.asp.html" class="w3-btn w3-margin-top">Assignment explained</a></p>
+<hr>
+
+<h2>JavaScript String Concatenation </h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3508.html">
+Adding two strings together using the concatenating (+) operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3509.html">
+Adding two strings together with a space in the first string</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3510.html">
+Adding two strings together with a space in between</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3511.html">
+Adding two strings together using using the += operator</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3512.html">
+Adding strings and numbers</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_operators.asp.html" class="w3-btn w3-margin-top">Concatenation explained</a></p>
+<hr>
+
+<h2>JavaScript Data Types</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3513.html">
+Declare (create) strings</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3514.html">
+Declare (create) numbers</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3515.html">
+Declare (create) an array</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3516.html">
+Declare (create) an object</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3517.html">
+Find the type of a variable</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3518.html">
+Adding two numbers and a string</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3519.html">
+Adding a string and two numbers</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3520.html">
+An undefined variable</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3521.html">
+An empty variable</a></p>
+<p>
+<a href="http://www.staroceans.org/w3c/js_datatypes.asp.html" class="w3-btn w3-margin-top">Data types explained</a></p>
+<hr>
+
+<h2>JavaScript Objects</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3522.html">
+Create a JavaScript variable</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3523.html">
+Create a JavaScript object</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3524.html">
+Create a person object (single line)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3525.html">
+Create a person object (multiple lines)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3526.html">
+Access object properties using .property</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3527.html">
+Access object properties using [property]</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3528.html">
+Access a function property as a method</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3529.html">
+Access a function property as a property</a><br>
+</p>
+<p>
+<a href="http://www.staroceans.org/w3c/js_objects.asp.html" class="w3-btn w3-margin-top">Objects explained</a></p>
+<hr>
+
+<h2>JavaScript Functions</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3530.html">A simple function</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3531.html">A function with an argument</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3532.html">A function with an argument 2</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3533.html">A function that returns a value</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3534.html">A function that converts Fahrenheit to Celsius</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3535.html">A function call without ()</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_functions.asp.html" class="w3-btn w3-margin-top">Functions explained</a></p>
+<hr>
+
+<h2>JavaScript Events</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3536.html">An onclick event changes an HTML element</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3537.html">An onclick event changes its own element</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3538.html">An onclick event calls a function</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_events.asp.html" class="w3-btn w3-margin-top">Events explained</a></p>
+<hr>
+
+<h2>JavaScript Strings</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3539.html">
+Strings can be written with single or double quotes.</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3513.html">Show some string examples</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3540.html">
+Backslash before quotes accepts quotes as quotes.</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3541.html">Find the length of a string</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3542.html">
+You can break text string with a backslash.</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3543.html">
+You cannot break code with a backslash.</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3544.html">Find the position of the first occurrence of a text
+in a string - indexOf()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3545.html">Search for a text in a string and return the text if found
+- match()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3546.html">Replace characters in a string - replace()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3547.html">Convert string to upper case - toUpperCase()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3548.html">Convert string to lower case - toLowerCase()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3549.html">Split a string into an array - split()</a>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_strings.asp.html" class="w3-btn w3-margin-top">Strings explained</a></p>
+<hr>
+
+<h2>JavaScript Numbers</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3550.html">Numbers can be written with or without decimals</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3551.html">Extra large or extra small numbers can be written with exponent notation</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3552.html">Number are considered accurate only up to 15 digits</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3553.html">Floating point arithmetic is not always 100% accurate</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3554.html">But it helps to multiply and divide by 10</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3555.html">Constants, preceded by 0x, are interpreted as hexadecimal</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3556.html">A number divided by a string is not a number</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3557.html">JavaScript will generate Infinity if you calculate a too large number</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3558.html">Division by zero generates Infinity</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3559.html">The toString() method can output numbers as hex, octal, and binary</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_numbers.asp.html" class="w3-btn w3-margin-top">Numbers explained</a></p>
+<hr>
+
+<h2>JavaScript Maths</h2>
+<p>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3560.html" target="_blank">
+Math.PI returns the value of PI</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3561.html">
+Math.round(x) returns the rounded value of x</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3562.html">
+Math.pow(x, y) returns the value of x to the power of y</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3563.html">
+Math.sqrt(x) returns the square root of x</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3564.html">
+Math.abs(x) returns the absolute (positive) value of x</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3565.html">
+Math.ceil(x) returns the value of x rounded up</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3566.html">
+Math.floor(x) returns the value of x rounded down</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3567.html">
+Math.sin(x) returns the sin of the angle x (given in radians)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3568.html">
+Math.cos(x) returns the cosin of the angle x (given in radians)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3569.html">
+Math.max() return the number with the highest value from a list of arguments</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3570.html">
+Math.min() to return the number with the lowest value from a list of arguments</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3571.html">
+Converting Celsius to Fahrenheit</a></p>
+<p><a href="http://www.staroceans.org/w3c/js_math.asp.html" class="w3-btn w3-margin-top">Maths explained</a></p>
+<hr>
+
+<h2>JavaScript Random</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3572.html">
+Math.random() returns a random number between 0 (included) and 1 (excluded)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3573.html">
+How to return a random integer between 0 and 9 (both included)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3574.html">
+How to return a random integer between 0 and 10 (both included)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3575.html">
+How to return a random integer between 0 and 99 (both included)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3576.html">
+How to return a random integer between 0 and 100 (both included)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3577.html">
+How to return a random integer between 1 and 10 (both included)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3578.html">
+How to return a random integer between 1 and 100 (both included)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3579.html">
+How to return a random integer between x (included) and y (excluded)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3580.html">
+How to return a random integer between x and y (both included)</a><br>
+</p>
+<p>
+<a href="http://www.staroceans.org/w3c/js_random.asp.html" class="w3-btn w3-margin-top">Random explained</a></p>
+<hr>
+
+<h2>JavaScript Dates</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3581.html">Use Date() to display today's date and time</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3582.html">Use getFullYear() display the year</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3583.html">Use getTime() to calculate the number of milliseconds since 1970</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3584.html">Use setFullYear() to set a specific date</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3585.html">Use toUTCString() to convert today's date (according to UTC) to a string</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3586.html">Use getDay() to display the weekday as a number</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3587.html">Use getDay() and an array to display the weekday as a name</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3588.html">Display a clock</a>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_dates.asp.html" class="w3-btn w3-margin-top">Dates explained</a></p>
+<hr>
+
+<h2>JavaScript Arrays</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3589.html">Create an array</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3590.html">Join two arrays - concat()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3591.html">Join three arrays - concat()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3592.html">Join all elements of an array into a string - join()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3593.html">Remove the last element of an array - pop()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3594.html">Add new elements to the end of an array - push()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3595.html">Reverse the order of the elements in an array - reverse()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3596.html">Remove the first element of an array - shift()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3597.html">Select elements from an array - slice()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3598.html">Sort an array (alphabetically and ascending) - sort()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3599.html">Sort numbers (numerically and ascending) - sort()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3600.html">Sort numbers (numerically and descending) - sort()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3601.html">Sort numbers (alphabetically and numerically) - sort()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3602.html">Sort numbers in random order - sort()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3603.html">Sort objects by numeric properties - sort()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3604.html">Sort objects by string properties - sort()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3605.html">Add an element to position 2 in an array - splice()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3606.html">Convert an array to a string - toString()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3607.html">Add new elements to the beginning of an array - unshift()</a>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_arrays.asp.html" class="w3-btn w3-margin-top">Arrays explained</a></p>
+<hr>
+
+<h2>JavaScript Type Conversion</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3608.html">Display the typeof all variable types</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3609.html">Display the constructor of all variable types</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3610.html">Convert a number to a string using String()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3611.html">Convert a number to a string using toString()</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3612.html">Find out if a variable is an array</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3613.html">Find out if a variable is a date</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_type_conversion.asp.html" class="w3-btn w3-margin-top">Type Conversion Explained</a></p>
+<hr>
+
+<h2>JavaScript Booleans</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3614.html">Display the value of Boolean(10 &gt; 9)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3615.html">Display the value of 10 &gt; 9</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3616.html">Everything with a real value is true</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3617.html">The Boolean value of zero is false</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3618.html">The Boolean value of minus zero is false</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3619.html">The Boolean value of an empty string is false</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3620.html">The Boolean value of undefined is false</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3621.html">The Boolean value of null is false</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3622.html">The Boolean value of false is false</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3623.html">The Boolean value of NaN is false</a>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_booleans.asp.html" class="w3-btn w3-margin-top">Booleans explained</a></p>
+<hr>
+
+<h2>JavaScript Comparisons</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3624.html">Assign 5 to x, and display the value of (x == 8)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3625.html">Assign 5 to x, and display the value of (x == 5)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3626.html">Assign 5 to x, and display the value of (x === 5)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3627.html">Assign 5 to x, and display the value of (x === "5")</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3628.html">Assign 5 to x, and display the value of (x != 8)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3629.html">Assign 5 to x, and display the value of (x !== 5)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3630.html">Assign 5 to x, and display the value of (x !== "5")</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3631.html">Assign 5 to x, and display the value of (x &gt; 8)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3632.html">Assign 5 to x, and display the value of (x &lt; 8)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3633.html">Assign 5 to x, and display the value of (x &gt;= 8)</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3634.html">Assign 5 to x, and display the value of (x &lt;= 8)</a>
+<p><a href="http://www.staroceans.org/w3c/js_comparisons.asp.html" class="w3-btn w3-margin-top">Comparisons explained</a></p>
+<hr>
+
+<h2>JavaScript Conditionals</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3635.html">The if statement</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3636.html">The else statement</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3637.html">The else if statement</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3638.html">Random link</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3639.html">Switch statement</a></p>
+<p><a href="http://www.staroceans.org/w3c/js_if_else.asp.html" class="w3-btn w3-margin-top">Conditionals explained</a></p>
+<hr>
+
+<h2>JavaScript Loops</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3640.html">For loop</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3641.html">Looping through HTML headers</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3642.html">While loop</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3643.html">Do While loop</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3644.html">Break a loop</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3645.html">Break and continue a loop</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3646.html">Use a for...in statement to loop through the elements of an 
+object</a></p>
+<p><a href="http://www.staroceans.org/w3c/js_loop_for.asp.html" class="w3-btn w3-margin-top">Loops explained</a></p>
+<hr>
+
+<h2>JavaScript Error Handling</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3647.html">The try...catch statement</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3648.html">The try...catch statement with a confirm box</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3649.html">The onerror event</a></p>
+<p><a href="http://www.staroceans.org/w3c/js_errors.asp.html" class="w3-btn w3-margin-top">Errors explained</a></p>
+<hr>
+
+<h2>JavaScript Regular Expressions</h2>
+<p>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3650.html">Search for an expression in a string</a><br>
+<a target="_blank" href="http://www.staroceans.org/w3c/tryit.asp.3651.html">Search for an expression and replace it</a><br>
+<p><a href="http://www.staroceans.org/w3c/js_regexp.asp.html" class="w3-btn w3-margin-top">Regular Expressions Explained</a></p>
+<hr>
+
+<h2>JavaScript Objects</h2>
+<p>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3652.html" target="_blank">
+Creating a JavaScript variable</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3653.html" target="_blank">
+Creating a JavaScript object</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3654.html" target="_blank">
+Creating a JavaScript object (single line)</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3655.html" target="_blank">
+Creating a JavaScript object (multiple lines)</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3656.html" target="_blank">
+Creating a JavaScript object using new</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3657.html" target="_blank">
+Creating JavaScript objects using a constructor</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3658.html" target="_blank">
+Creating built-in JavaScript objects</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3659.html" target="_blank">
+The best way to create JavaScript variables</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3660.html" target="_blank">
+JavaScript objects are mutable</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_object_definition.asp.html" class="w3-btn w3-margin-top">Objects explained</a></p>
+<hr>
+<h2>JavaScript Object Properties</h2>
+<p>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3661.html" target="_blank">
+Accessing properties using .property</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3662.html" target="_blank">
+Accessing properties using [property]</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3663.html" target="_blank">
+Accessing properties using for in</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3664.html" target="_blank">
+Adding new properties to existing objects</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3665.html" target="_blank">
+Deleting properties from objects</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_properties.asp.html" class="w3-btn w3-margin-top">Object Properties explained</a></p>
+<h2>JSON Objects</h2>
+<p>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3666.html" target="_blank">
+Accessing properties using .property</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3667.html" target="_blank">
+Accessing properties using [property]</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3668.html" target="_blank">
+Looping through properties</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3669.html" target="_blank">
+Looping through property values</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3670.html" target="_blank">
+Access nested JSON objects</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3671.html" target="_blank">
+Modify values using the dot notation</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3672.html" target="_blank">
+Modify values using the bracket notation</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3673.html" target="_blank">
+Delete object properties</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_json_objects.asp.html" class="w3-btn w3-margin-top">JSON Object Properties explained</a></p>
+<h2>JSON Arrays</h2>
+<p>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3674.html" target="_blank">
+Accessing array values</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3675.html" target="_blank">
+Looping through an array using for-in</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3676.html" target="_blank">
+Looping through an array using for</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3677.html" target="_blank">
+Access nested JSON arrays</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3678.html" target="_blank">
+Modify array values</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3679.html" target="_blank">
+Delete array items</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_json_arrays.asp.html" class="w3-btn w3-margin-top">JSON Arrays explained</a></p>
+<h2>JSON Parse</h2>
+<p>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3680.html" target="_blank">
+Use JSON parse</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3681.html" target="_blank">
+Using JSON parse in an AJAX example</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3682.html" target="_blank">
+Using JSON parse on an array</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3683.html" target="_blank">
+Parsing dates</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3684.html" target="_blank">
+Parsing dates using the reviver function</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3685.html" target="_blank">
+Parsing functions</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_json_parse.asp.html" class="w3-btn w3-margin-top">JSON Parse explained</a></p>
+<h2>JSON Stringify</h2>
+<p>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3686.html" target="_blank">
+Use JSON stringify</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3687.html" target="_blank">
+Using JSON stringify on an array</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3688.html" target="_blank">
+Stringify dates</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3689.html" target="_blank">
+Stringify functions</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3690.html" target="_blank">
+Stringify functions using the toString() method</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_json_stringify.asp.html" class="w3-btn w3-margin-top">JSON Stringify explained</a></p>
+<h2>JSON PHP</h2>
+<p>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3691.html" target="_blank">
+Get JSON from a php file</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3692.html" target="_blank">
+Get JSON array from php</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3693.html" target="_blank">
+Get JSON from a database</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3694.html" target="_blank">
+Loop through the result from a database</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3695.html" target="_blank">
+Send JSON using POST method</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_json_php.asp.html" class="w3-btn w3-margin-top">JSON PHP explained</a></p>
+<h2>JSON HTML</h2>
+<p>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3696.html" target="_blank">
+Make an HTML table based on JSON data</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3697.html" target="_blank">
+Make a dynamic HTML Table</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3698.html" target="_blank">
+Make an HTML drop down list based on JSON data</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_json_html.asp.html" class="w3-btn w3-margin-top">JSON HTML explained</a></p>
+<h2>JSON JSONP</h2>
+<p>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3699.html" target="_blank">
+Simple JSONP example</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3700.html" target="_blank">
+Create a dynamic script tag</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3701.html" target="_blank">
+JSONP example with dynamic result</a><br>
+<a href="http://www.staroceans.org/w3c/tryit.asp.3702.html" target="_blank">
+JSONP example with a callback function</a><br>
+</p>
+<p><a href="http://www.staroceans.org/w3c/js_json_jsonp.asp.html" class="w3-btn w3-margin-top">JSON JSONP explained</a></p>
+
+<br>
+<div class="w3-clear nextprev">
+ <a class="w3-left w3-btn" href="http://www.staroceans.org/w3c/js_json_jsonp.asp.html">&#10094; Previous</a>
+<a class="w3-right w3-btn" href="http://www.staroceans.org/w3c/js_dom_examples.asp.html">Next &#10095;</a>
+</div>
+</div>
+<div class="w3-col l2 m12" id="right">
+
+<div class="sidesection">
+  <div id="skyscraper">
+    <div id="div-gpt-ad-1422003450156-5">
+       
+    </div>
+  </div>
+</div>
+
+<div class="sidesection">
+<h4><a href="http://www.staroceans.org/w3c/colors_picker.asp.html">COLOR PICKER</a></h4>
+<a href="http://www.staroceans.org/w3c/colors_picker.asp.html">
+<img src="https://www.w3schools.com/images/colorpicker.gif" alt="colorpicker"></a>
+</div>
+
+<div class="sidesection" id="moreAboutSubject">
+</div>
+
+<div class="sidesection">
+<h4><a href="http://www.staroceans.org/w3c/default.asp.8.html">HOW TO</a></h4>
+<p>
+<a href="http://www.staroceans.org/w3c/howto_js_tabs.asp.html">Tabs</a><br>
+<a href="http://www.staroceans.org/w3c/howto_css_dropdown.asp.html">Dropdowns</a><br>
+<a href="http://www.staroceans.org/w3c/howto_js_accordion.asp.html">Accordions</a><br>
+<a href="http://www.staroceans.org/w3c/howto_js_weight_converter.asp.html">Convert Weights</a><br>
+<a href="http://www.staroceans.org/w3c/howto_css_animate_buttons.asp.html">Animated Buttons</a><br>
+<a href="http://www.staroceans.org/w3c/howto_js_sidenav.asp.html">Side Navigation</a><br>
+<a href="http://www.staroceans.org/w3c/howto_js_topnav.asp.html">Top Navigation</a><br>
+<a href="http://www.staroceans.org/w3c/howto_css_modals.asp.html">Modal Boxes</a><br>
+<a href="http://www.staroceans.org/w3c/howto_js_progressbar.asp.html">Progress Bars</a><br>
+<a href="http://www.staroceans.org/w3c/howto_css_parallax.asp.html">Parallax</a><br>
+<a href="http://www.staroceans.org/w3c/howto_css_login_form.asp.html">Login Form</a><br>
+<a href="http://www.staroceans.org/w3c/howto_html_include.asp.html">HTML Includes</a><br>
+<a href="http://www.staroceans.org/w3c/howto_google_maps.asp.html">Google Maps</a><br>
+<a href="http://www.staroceans.org/w3c/howto_js_rangeslider.asp.html">Range Sliders</a><br>
+<a href="http://www.staroceans.org/w3c/howto_css_tooltip.asp.html">Tooltips</a><br>
+<a href="http://www.staroceans.org/w3c/howto_js_slideshow.asp.html">Slideshow</a><br>
+<a href="http://www.staroceans.org/w3c/howto_js_filter_lists.asp.html">Filter List</a><br>
+<a href="http://www.staroceans.org/w3c/howto_js_sort_list.asp.html">Sort List</a><br>
+</p>
+</div>
+
+<div class="sidesection">
+<h4>SHARE</h4>
+<div class="w3-text-grey sharethis">
+
+<br><br>
+<a href="javascript:void(0);" onclick="clickFBLike()" title="Like W3Schools on Facebook">
+<span class="fa fa-thumbs-o-up fa-2x"></span></a>
+<div id="fblikeframe" class="w3-modal">
+<div class="w3-modal-content w3-padding-64 w3-animate-zoom" id="popupDIV"></div>
+</div>
+</div>
+</div>
+
+<div class="sidesection">
+<h4><a target="_blank" href="http://www.staroceans.org/w3c/default.asp.17.html">CERTIFICATES</a></h4>
+<p>
+<a href="http://www.staroceans.org/w3c/cert_html.asp.html">HTML</a>,
+<a href="http://www.staroceans.org/w3c/cert_css.asp.html">CSS</a>,
+<a href="http://www.staroceans.org/w3c/cert_javascript.asp.html">JavaScript</a>,
+<a href="http://www.staroceans.org/w3c/cert_php.asp.html">PHP</a>,
+<a href="http://www.staroceans.org/w3c/cert_jquery.asp.html">jQuery</a>,
+<a href="http://www.staroceans.org/w3c/cert_bootstrap.asp.html">Bootstrap</a> and
+<a href="http://www.staroceans.org/w3c/cert_xml.asp.html">XML</a>.</p>
+<a target="_blank" href="http://www.staroceans.org/w3c/default.asp.17.html" class="w3-button w3-dark-grey" style="text-decoration:none">
+Read More &raquo;</a>
+</div>
+
+<div id="stickypos" class="sidesection" style="text-align:center;position:sticky;top:50px;">
+  <div id="stickyadcontainer">
+    <div style="position:relative;margin:auto;">
+      <div id='div-gpt-ad-1472547360578-0'>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.addEventListener("scroll", fix_stickyad);
+  window.addEventListener("resize", fix_stickyad);
+</script>
+
+</div>
+</div>
+<div id="footer" class="footer w3-container w3-white">
+
+<hr>
+<div style="overflow:auto">
+  <!-- BottomMediumRectangle -->
+  <div class="bottomad" id='div-gpt-ad-1422003450156-0'>
+    
+  </div>
+  <!-- RightBottomMediumRectangle -->
+  <div class="bottomad" id='div-gpt-ad-1422003450156-3'>
+    
+  </div>
+</div>
+<hr>
+<div class="w3-row w3-center w3-small">
+<div class="w3-col l3 m3 s12">
+<a href="javascript:void(0);" onclick="displayError();return false" style="white-space:nowrap;">REPORT ERROR</a>
+</div>
+<div class="w3-col l3 m3 s12">
+<a href="javascript:void(0);" target="_blank" onclick="printPage();return false;">PRINT PAGE</a>
+</div>
+<div class="w3-col l3 m3 s12">
+<a href="http://www.staroceans.org/w3c/default.asp.24.html" target="_blank">FORUM</a>
+</div>
+<div class="w3-col l3 m3 s12">
+<a href="http://www.staroceans.org/w3c/default.asp.25.html" target="_top">ABOUT</a>
+</div>
+</div>
+<hr>
+<div class="w3-light-grey w3-padding w3-center" id="err_form" style="display:none;position:relative">
+<span onclick="this.parentElement.style.display='none'" class="w3-button w3-display-topright">&times;</span>     
+<h2>Your Suggestion:</h2>
+<form>
+<div class="w3-section">      
+<label for="err_email">Your E-mail:</label>
+<input class="w3-input" type="text" style="width:100%" id="err_email" name="err_email">
+</div>
+<div class="w3-section">      
+<label for="err_email">Page address:</label>
+<input class="w3-input" type="text" style="width:100%" id="err_url" name="err_url" disabled="disabled">
+</div>
+<div class="w3-section">
+<label for="err_email">Description:</label>
+<textarea rows="10" class="w3-input" id="err_desc" name="err_desc" style="width:100%;"></textarea>
+</div>
+<div class="form-group">        
+<button type="button" onclick="sendErr()">Submit</button>
+</div>
+<br>
+</form>
+</div>
+<div class="w3-container w3-light-grey w3-padding" id="err_sent" style="display:none;position:relative">
+<span onclick="this.parentElement.style.display='none'" class="w3-button w3-display-topright">&times;</span>     
+<h2>Thank You For Helping Us!</h2>
+<p>Your message has been sent to W3Schools.</p>
+</div>
+
+<div class="w3-row w3-center w3-small">
+<div class="w3-col l3 m6 s12">
+<div class="top10">
+<h4>Top 10 Tutorials</h4>
+<a href="http://www.staroceans.org/w3c/html5_app_cache.asp.html">HTML Tutorial</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.1.html">CSS Tutorial</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.9.html">JavaScript Tutorial</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.2.html">W3.CSS Tutorial</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.4.html">Bootstrap Tutorial</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.12.html">SQL Tutorial</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.13.html">PHP Tutorial</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.10.html">jQuery Tutorial</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.11.html">Angular Tutorial</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.8.html">How To Tutorial</a><br>
+</div>
+</div>
+<div class="w3-col l3 m6 s12">
+<div class="top10">
+<h4>Top 10 References</h4>
+<a href="http://www.staroceans.org/w3c/default.asp.20.html">HTML Reference</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.21.html">CSS Reference</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.22.html">JavaScript Reference</a><br>
+<a href="http://www.staroceans.org/w3c/w3css_references.asp.html">W3.CSS Reference</a><br>
+<a href="http://www.staroceans.org/w3c/bootstrap_ref_all_classes.asp.html">Bootstrap Reference</a><br>
+<a href="http://www.staroceans.org/w3c/sql_ref_mysql.asp.html">SQL Reference</a><br>
+<a href="http://www.staroceans.org/w3c/php_ref_array.asp.html">PHP Reference</a><br>
+<a href="http://www.staroceans.org/w3c/colors_names.asp.html">HTML Colors</a><br>
+<a href="http://www.staroceans.org/w3c/jquery_ref_selectors.asp.html">jQuery Reference</a><br>
+<a href="http://www.staroceans.org/w3c/angular_ref_directives.asp.html">AngularJS Reference</a><br>
+</div>
+</div>
+<div class="w3-col l3 m6 s12">
+<div class="top10">
+<h4>Top 10 Examples</h4>
+<a href="http://www.staroceans.org/w3c/html_examples.asp.html">HTML Examples</a><br>
+<a href="http://www.staroceans.org/w3c/css_examples.asp.html">CSS Examples</a><br>
+<a href="http://www.staroceans.org/w3c/js_examples.asp.html">JavaScript Examples</a><br>
+<a href="http://www.staroceans.org/w3c/w3css_examples.asp.html">W3.CSS Examples</a><br>
+<a href="http://www.staroceans.org/w3c/bootstrap_examples.asp.html">Bootstrap Examples</a><br>
+<a href="http://www.staroceans.org/w3c/js_dom_examples.asp.html">HTML DOM Examples</a><br>
+<a href="http://www.staroceans.org/w3c/php_examples.asp.html">PHP Examples</a><br>
+<a href="http://www.staroceans.org/w3c/jquery_examples.asp.html">jQuery Examples</a><br>
+<a href="http://www.staroceans.org/w3c/angular_examples.asp.html">Angular Examples</a><br>
+<a href="http://www.staroceans.org/w3c/xml_examples.asp.html">XML Examples</a><br>
+</div>
+</div>
+<div class="w3-col l3 m6 s12">
+<div class="top10">
+<h4>Web Certificates</h4>
+<a href="http://www.staroceans.org/w3c/default.asp.17.html">HTML Certificate</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.17.html">CSS Certificate</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.17.html">JavaScript Certificate</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.17.html">jQuery Certificate</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.17.html">PHP Certificate</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.17.html">Bootstrap Certificate</a><br>
+<a href="http://www.staroceans.org/w3c/default.asp.17.html">XML Certificate</a><br>
+</div>
+</div>        
+</div>        
+
+<hr>
+<div class="w3-center w3-small w3-opacity">
+W3Schools is optimized for learning, testing, and training. Examples might be simplified to improve reading and basic understanding.
+Tutorials, references, and examples are constantly reviewed to avoid errors, but we cannot warrant full correctness of all content.
+While using this site, you agree to have read and accepted our <a href="http://www.staroceans.org/w3c/about_copyright.asp.html">terms of use</a>,
+<a href="http://www.staroceans.org/w3c/about_privacy.asp.html">cookie and privacy policy</a>.
+<a href="http://www.staroceans.org/w3c/about_copyright.asp.html">Copyright 1999-2018</a> by Refsnes Data. All Rights Reserved.<br>
+ <a href="http://www.staroceans.org/w3c/index1.html">Powered by W3.CSS</a>.<br><br>
+<a href="http://www.staroceans.org/w3c/index.html">
+<img style="width:150px;height:28px;border:0" src="https://www.w3schools.com/images/w3schoolscom_gray.gif" alt="W3Schools.com"></a>
+</div>
+<br><br>
+</div>
+
+</div>
+
+<script src="http://www.staroceans.org/w3c/w3schools_footer.js"></script>
+
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>  
+<![endif]-->
+</body>
+
+<!-- Mirrored from www.staroceans.org/w3c/js_examples.asp.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 May 2021 11:15:48 GMT -->
+</html>

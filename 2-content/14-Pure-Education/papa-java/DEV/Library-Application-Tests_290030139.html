@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Library Application Tests</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Basic_289898911.html">Basic</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Library-Application-Example_289866546.html">Library Application Example</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Library Application Tests
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 20, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>This page demonstrates usage or Library Application REST API.  We've made a few changes to the Library Application so the test cases presented here may not correspond to prior tests which were documented earlier. One of our main changes is replacement of User Entity (and corresponding tables) with Reader entity.</p><h2 id="LibraryApplicationTests-TestingGETRequests">Testing GET Requests</h2><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Task</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Command</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p>List all readers</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/users" class="external-link" rel="nofollow">http://localhost:8080/r</a>eaders</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+{
+  &quot;readerId&quot;: 1,
+  &quot;name&quot;: &quot;nick&quot;,
+  &quot;type&quot;: &quot;employee&quot;,
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;self&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/readers/1&quot;
+    }
+  ]
+},
+{
+  &quot;readerId&quot;: 2,
+  &quot;name&quot;: &quot;paul&quot;,
+  &quot;type&quot;: &quot;student&quot;,
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;self&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/readers/2&quot;
+    }
+  ]
+},
+{
+  &quot;readerId&quot;: 3,
+  &quot;name&quot;: &quot;sam&quot;,
+  &quot;type&quot;: &quot;retired&quot;,
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;self&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/readers/3&quot;
+    }
+  ]
+},
+...</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>List one reader</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/users/2" class="external-link" rel="nofollow">http://localhost:8080/readers/2</a></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;readerId&quot;: 2,
+  &quot;name&quot;: &quot;paul&quot;,
+  &quot;type&quot;: &quot;student&quot;,
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;all-readers&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/readers&quot;
+    }
+  ]
+}</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>List all books</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/books" class="external-link" rel="nofollow">http://localhost:8080/books</a></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+{
+  &quot;bookId&quot;: 1,
+  &quot;title&quot;: &quot;Tom Sawyer&quot;,
+  &quot;author&quot;: &quot;Mark Twain&quot;,
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;id&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/1&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;title&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/title/Tom%20Sawyer&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;author&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/author/Mark%20Twain&quot;
+    }
+  ]
+},
+{
+  &quot;bookId&quot;: 2,
+  &quot;title&quot;: &quot;Catch 22&quot;,
+  &quot;author&quot;: &quot;Joseph Heller&quot;,
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;id&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/2&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;title&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/title/Catch%2022&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;author&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/author/Joseph%20Heller&quot;
+    }
+  ]
+},
+...</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>List one book</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/books/3" class="external-link" rel="nofollow">http://localhost:8080/books/</a>2</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;bookId&quot;: 2,
+  &quot;title&quot;: &quot;Catch 22&quot;,
+  &quot;author&quot;: &quot;Joseph Heller&quot;,
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;all-books&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books&quot;
+    }
+  ]
+}</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>List all books with readers</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/books/users" class="external-link" rel="nofollow">http://localhost:8080/books/r</a>eaders</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+{
+  &quot;bookId&quot;: 1,
+  &quot;title&quot;: &quot;Tom Sawyer&quot;,
+  &quot;author&quot;: &quot;Mark Twain&quot;,
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;book&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/1&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;reader&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/readers/1&quot;,
+      &quot;title&quot;: &quot;nick&quot;
+    }
+  ]
+},
+{
+  &quot;bookId&quot;: 2,
+  &quot;title&quot;: &quot;Catch 22&quot;,
+  &quot;author&quot;: &quot;Joseph Heller&quot;,
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;book&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/2&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;reader&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/readers/1&quot;,
+      &quot;title&quot;: &quot;nick&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;reader&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/readers/2&quot;,
+      &quot;title&quot;: &quot;paul&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;reader&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/readers/3&quot;,
+      &quot;title&quot;: &quot;sam&quot;
+    }
+  ]
+},
+...</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>List all readers with books</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/users/books" class="external-link" rel="nofollow">http://localhost:8080/readers/books</a></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+{
+  &quot;readerId&quot;: 1,
+  &quot;name&quot;: &quot;nick&quot;,
+  &quot;type&quot;: &quot;employee&quot;,
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;reader&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/readers/1&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;book&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/1&quot;,
+      &quot;title&quot;: &quot;Tom Sawyer&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;book&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/2&quot;,
+      &quot;title&quot;: &quot;Catch 22&quot;
+    }
+  ]
+},
+{
+  &quot;readerId&quot;: 2,
+  &quot;name&quot;: &quot;paul&quot;,
+  &quot;type&quot;: &quot;student&quot;,
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;reader&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/readers/2&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;book&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/2&quot;,
+      &quot;title&quot;: &quot;Catch 22&quot;
+    },
+    {
+      &quot;rel&quot;: &quot;book&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/3&quot;,
+      &quot;title&quot;: &quot;War and Peace&quot;
+    }
+  ]
+},
+...</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>List all books for one reader</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/users/1/books" class="external-link" rel="nofollow">http://localhost:8080/readers/1/books</a></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence"> {
+   &quot;readerId&quot;: 1,
+   &quot;name&quot;: &quot;nick&quot;,
+   &quot;type&quot;: &quot;employee&quot;,
+   &quot;links&quot;: [
+     {
+       &quot;rel&quot;: &quot;reader&quot;,
+       &quot;href&quot;: &quot;http://localhost:8080/readers/1&quot;
+     }
+   ]
+ },
+ {
+   &quot;bookId&quot;: 1,
+   &quot;title&quot;: &quot;Tom Sawyer&quot;,
+   &quot;author&quot;: &quot;Mark Twain&quot;,
+   &quot;links&quot;: [
+     {
+       &quot;rel&quot;: &quot;book&quot;,
+       &quot;href&quot;: &quot;http://localhost:8080/books/1&quot;
+     }
+   ]
+ },
+ {
+   &quot;bookId&quot;: 2,
+   &quot;title&quot;: &quot;Catch 22&quot;,
+   &quot;author&quot;: &quot;Joseph Heller&quot;,
+   &quot;links&quot;: [
+     {
+       &quot;rel&quot;: &quot;book&quot;,
+       &quot;href&quot;: &quot;http://localhost:8080/books/2&quot;
+     }
+   ]
+ }</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>List all readers for one book</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/books/2/users" class="external-link" rel="nofollow">http://localhost:8080/books/2/</a>readers</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;self&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/books/2/readers&quot;
+    }
+  ],
+  &quot;content&quot;: [
+    {
+      &quot;bookId&quot;: 2,
+      &quot;title&quot;: &quot;Catch 22&quot;,
+      &quot;author&quot;: &quot;Joseph Heller&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;book&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/books/2&quot;
+        }
+      ]
+    },
+    {
+      &quot;readerId&quot;: 1,
+      &quot;name&quot;: &quot;nick&quot;,
+      &quot;type&quot;: &quot;employee&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;reader&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/readers/1&quot;
+        }
+      ]
+    },
+    {
+      &quot;readerId&quot;: 2,
+      &quot;name&quot;: &quot;paul&quot;,
+      &quot;type&quot;: &quot;student&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;reader&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/readers/2&quot;
+        }
+      ]
+    },
+    {
+      &quot;readerId&quot;: 3,
+      &quot;name&quot;: &quot;sam&quot;,
+      &quot;type&quot;: &quot;retired&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;reader&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/readers/3&quot;
+        }
+      ]
+    }
+  ]
+}</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>List phones for one reader</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/users/1/phones" class="external-link" rel="nofollow">http://localhost:8080/readers/1/phones</a></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;reader-1&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/readers/1&quot;
+    }
+  ],
+  &quot;content&quot;: [
+    {
+      &quot;phoneId&quot;: 1,
+      &quot;number&quot;: &quot;212-456-9876&quot;,
+      &quot;type&quot;: &quot;home&quot;,
+      &quot;links&quot;: []
+    },
+    {
+      &quot;phoneId&quot;: 2,
+      &quot;number&quot;: &quot;201-444-9888&quot;,
+      &quot;type&quot;: &quot;mobile&quot;,
+      &quot;links&quot;: []
+    }
+  ]
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="LibraryApplicationTests-TestPOSTRequests(Body:raw,JSON(application/json))">Test POST Requests (Body: <code>raw, JSON (application/json)</code> )</h2><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/290030139/289899085.png" data-image-src="attachments/290030139/289899085.png" data-height="503" data-width="842" data-unresolved-comment-count="0" data-linked-resource-id="289899085" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200420-115213.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="290030139" data-linked-resource-container-version="1" data-media-id="62deea68-d402-49e8-a135-769bdf45fcd3" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/290030139/289899092.png" data-image-src="attachments/290030139/289899092.png" data-height="300" data-width="844" data-unresolved-comment-count="0" data-linked-resource-id="289899092" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200420-115237.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="290030139" data-linked-resource-container-version="1" data-media-id="0cb48ced-3453-4852-bdb1-c5c36fd48ca4" data-media-type="file"></span><h2 id="LibraryApplicationTests-TestPUTCommands(Body:raw,JSON(application/json))">Test PUT Commands  (Body: <code>raw, JSON (application/json)</code> )</h2><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/290030139/290030151.png" data-image-src="attachments/290030139/290030151.png" data-height="374" data-width="729" data-unresolved-comment-count="0" data-linked-resource-id="290030151" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200420-115303.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="290030139" data-linked-resource-container-version="1" data-media-id="6711c5c4-8c35-4ff7-866b-200b57897250" data-media-type="file"></span><p /><h2 id="LibraryApplicationTests-TestDELETECommands">Test DELETE Commands</h2><span class="confluence-embedded-file-wrapper image-center-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-center" width="680" loading="lazy" src="attachments/290030139/289899100.png?width=680" data-image-src="attachments/290030139/289899100.png" data-height="253" data-width="1554" data-unresolved-comment-count="0" data-linked-resource-id="289899100" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200420-115334.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="290030139" data-linked-resource-container-version="1" data-media-id="4aca9915-ef91-45d6-b672-40d7e79f1938" data-media-type="file"></span><p>Note that Phone objects are associated with Readers. To delete the reader, we must first delete all his phones</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 226.0px;"/><col style="width: 532.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Delete Phone from Reader 5</p></td><td class="confluenceTd"><p><code>localhost:8080/readers/5/phones/7</code></p></td></tr><tr><td class="confluenceTd"><p>Delete Reader 5</p></td><td class="confluenceTd"><p><code>localhost:8080/readers/5</code></p></td></tr></tbody></table></div><h2 id="LibraryApplicationTests-TestErrorsConditions">Test Errors Conditions</h2><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/290030139/289866598.png" data-image-src="attachments/290030139/289866598.png" data-height="383" data-width="839" data-unresolved-comment-count="0" data-linked-resource-id="289866598" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200420-115448.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="290030139" data-linked-resource-container-version="1" data-media-id="045176c5-35e7-46a4-a01b-c2b16cc3845f" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/290030139/289931643.png" data-image-src="attachments/290030139/289931643.png" data-height="486" data-width="844" data-unresolved-comment-count="0" data-linked-resource-id="289931643" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200420-115509.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="290030139" data-linked-resource-container-version="1" data-media-id="0066b135-4f0c-4829-b096-50e33aee9fb4" data-media-type="file"></span><h2 id="LibraryApplicationTests-"><br/></h2><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/290030139/289899085.png">image-20200420-115213.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/290030139/289899092.png">image-20200420-115237.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/290030139/290030151.png">image-20200420-115303.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/290030139/289899100.png">image-20200420-115334.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/290030139/289866598.png">image-20200420-115448.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/290030139/289931643.png">image-20200420-115509.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

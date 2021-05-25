@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Functional Java</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Learn_522715137.html">Learn</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Functional Java
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Aug 09, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="FunctionalJava-Arrays">Arrays</h1><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 318.0px;"/><col style="width: 1222.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Operation</strong></p></th><th class="confluenceTh"><p><strong>Method</strong></p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">int[] to List&lt;Integer&gt;</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">int[] to Set&lt;Integer&gt;</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">int[] to PriorotyQueue&lt;Integer&gt;</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">List&lt;Integer&gt; list = Arrays.stream(a).boxed().collect(Collectors.toList());</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Set&lt;Integer&gt; set = Arrays.stream(a).boxed().collect(Collectors.toSet()));</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">PriorityQueue&lt;Integer&gt; pq = new PriorityQueue&lt;&gt;(Arrays.stream(ar).boxed().collect(Collectors.toList()));</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>int[][] to int[]</code></p></td><td class="confluenceTd"><p><code>int[] ar = Arrays.stream(data).flatMapToInt(Arrays::stream).toArray();</code></p></td></tr><tr><td class="confluenceTd"><p><code>int[] to Integer[]</code></p></td><td class="confluenceTd"><p><code>Integer[] result = IntStream.of(ar).boxed().toArray(Integer[]::new);</code></p></td></tr><tr><td class="confluenceTd"><p><code>Integer[] to int[]</code></p></td><td class="confluenceTd"><p><code>int[] result = Arrays.stream(ar).mapToInt(i -&gt; i).toArray();</code></p></td></tr><tr><td class="confluenceTd"><p><code>List&lt;Integer&gt; to int[]</code></p></td><td class="confluenceTd"><p><code>int[] result = list.stream().mapToInt(i -&gt; i).toArray();</code></p></td></tr><tr><td class="confluenceTd"><p><code>List&lt;MyType&gt; to MyType[]</code></p></td><td class="confluenceTd"><p><code>MyType[] result = list.stream().toArray(MyType[]::new);</code></p></td></tr><tr><td class="confluenceTd"><p><code>String[] to int[]</code></p></td><td class="confluenceTd"><p><code>int[] a = Arrays.stream(vals).mapToInt(Integer::valueOf).toArray();</code></p></td></tr><tr><td class="confluenceTd"><p><code>int[] to String[]</code></p></td><td class="confluenceTd"><p><code>String[] result = Arrays.stream(a).mapToObj(String::valueOf).toArray(String[]::new);</code></p></td></tr><tr><td class="confluenceTd"><p><code>Consecutive int[]</code></p></td><td class="confluenceTd"><p><code>int[] arr = IntStream.rangeClosed(0, 1000).toArray();</code></p></td></tr><tr><td class="confluenceTd"><p><code>Consecutive int[] reversed</code></p></td><td class="confluenceTd"><p><code>int[] arr = IntStream.rangeClosed(from, to).map(i -&gt; to - i + from).toArray();</code></p></td></tr><tr><td class="confluenceTd"><p><code>random []</code></p></td><td class="confluenceTd"><p><code>int[] random = new Random().ints(size, from, to).toArray();</code></p></td></tr><tr><td class="confluenceTd"><p><code>2D Array dimensions</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">String[] ar1 = Arrays.stream(input).map(i -&gt; i[0]).toArray(String[]::new);</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">String[] ar2 = Arrays.stream(input).map(i -&gt; i[1]).toArray(String[]::new);      </pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>Sort 2D Arrays by some dimension</code></p></td><td class="confluenceTd"><p><code>Arrays.sort(arr, Comparator.comparingInt((int [] a) -&gt; a[0]));</code></p></td></tr><tr><td class="confluenceTd"><p><code>Count occurrences of 0</code></p></td><td class="confluenceTd"><p><code>Arrays.stream(a).filter(i -&gt; i == 0).count();</code></p></td></tr><tr><td class="confluenceTd"><p><code>max/min of int[]</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">int max = Arrays.stream(ar).max().getAsInt();</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">int max = Arrays.stream(ar).reduce(Integer::max).getAsInt();</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>sum of int[]</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Arrays.stream(a).sum();</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Arrays.stream(a).reduce(0, Integer::sum);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>product int[]</code></p></td><td class="confluenceTd"><p><code>Arrays.stream(a).reduce(1, (a, b) -&gt; a * b);</code></p></td></tr><tr><td class="confluenceTd"><p><code>remove dups</code></p></td><td class="confluenceTd"><p><code>Arrays.stream(a).distinct().toArray();</code></p></td></tr><tr><td class="confluenceTd"><p><code>int[] into negative and positive</code></p></td><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Boolean, List&lt;Integer&gt;&gt; map = Arrays.stream(a).boxed().collect(Collectors.partitioningBy(x -&gt; x &gt; 0));
+int[] pos = map.get(true).stream().mapToInt(i -&gt; i).toArray();
+int[] neg = map.get(false).stream().mapToInt(i -&gt; i).toArray(); </pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>remove from int[]</code></p></td><td data-highlight-colour="#ffffff" class="confluenceTd"><p><code>int[] result = Arrays.stream(a).filter(x -&gt; x != val).toArray();</code></p></td></tr><tr><td class="confluenceTd"><p><code>nth largest/smallest value in int[]</code></p></td><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Arrays.stream(a).boxed().sorted(Comparator.reverseOrder()).mapToInt(x -&gt; x).limit(n).toArray()[n - 1];</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Arrays.stream(a).boxed().sorted(Comparator.naturalOrder()).mapToInt(x -&gt; x).limit(n).toArray()[n - 1];</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>range of ints to char[]</code></p></td><td data-highlight-colour="#ffffff" class="confluenceTd"><p><code>IntStream.range(0, 3).mapToObj(c -&gt; Character.toString((char) (c + 'a'))).collect(Collectors.joining()).toCharArray();</code></p></td></tr><tr><td class="confluenceTd"><p><code>int[][] To Map&lt;Integer,Set&lt;Integer&gt;&gt;</code></p></td><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Integer,Set&lt;Integer&gt;&gt; result = Arrays.stream(data).collect(HashMap::new,
+    (map, item) -&gt; map.computeIfAbsent(item[0], e -&gt; new HashSet&lt;&gt;()).add(item[1]),
+    HashMap::putAll);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>add two int[]</code></p></td><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">int [] left = ...
+int [] right = ...
+int[] sumArray = new int[left.length];
+Arrays.setAll(sumArray, i -&gt; left[i] + right[i]);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>5 to ['a', 'b', 'c', 'd', 'e']</code></p></td><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">IntStream.range(0, m).mapToObj(c -&gt; Character.toString((char) (c + &#39;a&#39;))).collect(Collectors.joining()).toCharArray();</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>char[] to List&lt;Character&gt;</code></p></td><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">String colorStr = new String(colors);
+List&lt;Character&gt; allColors = colorStr.chars().mapToObj(c -&gt; (char) c).collect(Collectors.toList());</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>sort int[] descending</code></p></td><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Integer[] ints = IntStream.of(ar).boxed().toArray(Integer[]::new);
+Arrays.sort(ints, Collections.reverseOrder());
+int[] sortedDesc = Arrays.stream(ints).mapToInt(i -&gt; i).toArray();</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>pairs of numbers</p><p>[1, 2] &amp; [3, 4] ==&gt; [(1, 3), (1, 4), (2, 3), (2, 4)]</p></td><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">List&lt;Integer&gt; nums1 = Arrays.asList(1,2);
+List&lt;Integer&gt; nums2 = Arrays.asList(3,4);
+List&lt;int[]&gt;pairs = nums1.stream().flatMap(i -&gt; nums2.stream().map(j -&gt; new int[]{ i,j })).collect(toList());</pre>
+</div></div></td></tr></tbody></table></div><h1 id="FunctionalJava-Strings">Strings</h1><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 371.0px;"/><col style="width: 1167.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Operation</strong></p></th><th class="confluenceTh"><p><strong>Method</strong></p></th></tr><tr><td class="confluenceTd"><p><code>String to List&lt;Character&gt;</code></p></td><td class="confluenceTd"><p><code>str.chars().mapToObj(c -&gt; (char) c).collect(Collectors.toList());</code></p></td></tr><tr><td class="confluenceTd"><p><code>String to Character[]</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Character[] ar = str.chars().mapToObj(c -&gt; (char)c).toArray(Character[]::new);</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">IntStream.range(0, s.length()).mapToObj(s::charAt).toArray(Character[]::new);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>Character[] to String</code></p></td><td class="confluenceTd"><p><code>Arrays.stream(ar).map(Object::toString).collect(Collectors.joining());</code></p></td></tr><tr><td class="confluenceTd"><p><code>String[] to String</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Arrays.stream(words).collect(Collectors.joining(&quot; &quot;));</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Arrays.stream(words).collect(Collectors.joining());</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>remove dups</code></p></td><td class="confluenceTd"><p><code>str.chars().mapToObj(c -&gt; (char)c).distinct().map(String::valueOf).collect(Collectors.joining());</code></p></td></tr><tr><td class="confluenceTd"><p><code>String to Stream&lt;Character&gt;</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">s.chars().mapToObj(e -&gt; (char)e);</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">IntStream.range(0, s.length()).mapToObj(s::charAt);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>Stream&lt;Character&gt; to String</code></p></td><td class="confluenceTd"><p><code>stream.map(String::valueOf).collect(Collectors.joining());</code></p></td></tr><tr><td class="confluenceTd"><p><code>longest string in list</code></p></td><td class="confluenceTd"><h1 id="FunctionalJava-list.stream().max(Comparator.comparingInt(String::length)).get();"><code>list.stream().max(Comparator.comparingInt(String::length)).get();</code></h1></td></tr><tr><td class="confluenceTd"><p>unique characters for a list of words</p><p>[&quot;Hello&quot;, &quot;World&quot;] -&gt;  [&quot;H&quot;, &quot;e&quot;, &quot;l&quot;, &quot;o&quot;,&quot;W&quot;, &quot;r&quot;, &quot;d&quot;]</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">List&lt;String&gt; uniqueChars = words.stream().map(w -&gt; w.split(&quot;&quot;)
+                                .flatMap(Arrays::stream)
+                                .distinct()
+                                .collect(toList());</pre>
+</div></div></td></tr></tbody></table></div><h1 id="FunctionalJava-Maps">Maps</h1><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 303.0px;"/><col style="width: 1235.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><code>Track number of occurrences</code><strong>Operation</strong></p></th><th class="confluenceTh"><p><strong>Method</strong></p></th></tr><tr><td class="confluenceTd"><p><code>int[][] To Map&lt;Integer,Set&lt;Integer&gt;&gt;</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Integer,Set&lt;Integer&gt;&gt; result = Arrays.stream(data).collect(HashMap::new,
+    (map, item) -&gt; map.computeIfAbsent(item[0], e -&gt; new HashSet&lt;&gt;()).add(item[1]),
+    HashMap::putAll);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>Track number of occurrences</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Integer,Integer&gt; map = new HashMap&lt;&gt;();</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">map.merge(a[i], 1, Integer::sum);</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">map.merge(a[i], 1, (count, incr) -&gt; count + incr);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>String[][] to Map&lt;String,Set&lt;String&gt;&gt;</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;String, Set&lt;String&gt;&gt; pathMap = Arrays.stream(paths).collect(HashMap::new,
+    (map, item) -&gt; map.computeIfAbsent(item[0], e -&gt; new HashSet&lt;&gt;()).add(item[1]),
+    HashMap::putAll);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>String[] to Map of word counts</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;String,Long&gt; countMap = Arrays.stream(names).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>int[] to Map of word counts</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Integer,Long&gt; countMap = Arrays.stream(ar).boxed().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>Reverse keys and values</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">input.entrySet().stream().collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey);</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">input.entrySet().stream().collect(HashMap&lt;Integer,String&gt;::new,
+   (map, e) -&gt; map.put(e.getValue(), e.getKey()),
+   HashMap&lt;Integer,String&gt;::putAll);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>filter values of map</p></td><td class="confluenceTd"><p><code>map.entrySet().stream().filter(e -&gt; e.getValue().size() &gt; 1).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));</code></p></td></tr></tbody></table></div><h1 id="FunctionalJava-Collections">Collections</h1><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 306.0px;"/><col style="width: 1232.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Operation</strong></p></th><th class="confluenceTh"><p><strong>Method</strong></p></th></tr><tr><td class="confluenceTd"><p><code>List&lt;List&lt;X&gt;&gt; to List&lt;X&gt;</code></p></td><td class="confluenceTd"><p><code>list.stream().flatMap(List::stream).collect(Collectors.toList());</code></p></td></tr></tbody></table></div><h1 id="FunctionalJava-Streams">Streams</h1><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 310.0px;"/><col style="width: 1228.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Operation</strong></p></th><th class="confluenceTh"><p><strong>Method</strong></p></th></tr><tr><td class="confluenceTd"><p><code>Create stream of values</code></p></td><td class="confluenceTd"><p><code>Stream&lt;String&gt; stream = Stream.of(&quot;Java8&quot;, &quot;Lambdas&quot;, &quot;In&quot;, &quot;Action&quot;);</code></p></td></tr><tr><td class="confluenceTd"><p>Empty stream</p></td><td class="confluenceTd"><p><code>Stream&lt;String&gt; emptyStream = Stream.empty();</code></p></td></tr><tr><td class="confluenceTd"><p><code>Stream&lt;E&gt; to Iterable&lt;E&gt;</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static &lt;E&gt; Iterable&lt;E&gt; iterableOf(Stream&lt;E&gt; stream)
+{
+    return stream::iterator;
+}</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>Iterable&lt;E&gt; to Stream&lt;E&gt;</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static &lt;E&gt; Stream&lt;E&gt; streamOf(Iterable&lt;E&gt; iterable)
+{
+    return StreamSupport.stream(iterable.spliterator(), false);
+}</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>numeric to object stream</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">IntStream intStream = menu.stream().mapToInt(Dish::getCalories);
+Stream&lt;Integer&gt; stream = intStream.boxed(); </pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>stream from files</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">long uniqueWords = 0;
+try(Stream&lt;String&gt; lines = Files.lines(Paths.get(&quot;data.txt&quot;), Charset.defaultCharset()))
+{
+    uniqueWords = lines.flatMap(line -&gt; Arrays.stream(line.split(&quot; &quot;))).distinct().count();
+}
+catch(IOException e)
+{
+}</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Infinite streams</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Stream.iterate(0, n -&gt; n + 2).limit(10).forEach(System.out::println);</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Stream.generate(Math::random).limit(5).forEach(System.out::println);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Fibonacci tuples with <code>iterate</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Stream.iterate(new int[]{0, 1}, t -&gt; new int[]{ t[1], t[0] + t[1] })
+                    .limit(20)
+                    .forEach(t -&gt; System.out.println(&quot;(&quot; + t[0] + &quot;,&quot; + t[1] +&quot;)&quot;));</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Stream.iterate(new int[]{0, 1}, t -&gt; new int[]{ t[1], t[0] + t[1] })
+       .limit(10).map(t -&gt; t[0])
+       .forEach(System.out::println);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Fibonacci tuples with generate</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">IntSupplier fib = new IntSupplier()
+{
+    private int previous = 0;
+    private int current = 1;
+    public int getAsInt()
+    {
+        int oldPrevious = this.previous;
+        int nextValue = this.previous + this.current;
+        this.previous = this.current;
+        this.current = nextValue;
+        return oldPrevious;
+    }
+};</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">IntStream.generate(fib).limit(10).forEach(System.out::println);</pre>
+</div></div></td></tr></tbody></table></div><h1 id="FunctionalJava-Matching,Finding,andReducingOperations">Matching, Finding, and Reducing Operations</h1><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 154.0px;"/><col style="width: 1384.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Operation</strong></p></th><th class="confluenceTh"><p><strong>Method</strong></p></th></tr><tr><td class="confluenceTd"><p>Matching</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">menu.stream().anyMatch(Dish::isVegetarian);</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">menu.stream().allMatch(d -&gt; d.getCalories() &gt;= 1000);</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">menu.stream().noneMatch(d -&gt; d.getCalories() &gt;= 1000);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Finding</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Optional&lt;Dish&gt; dish = menu.stream().filter(Dish::isVegetarian).findAny();
+dish.ifPresent(d -&gt; System.out.println(d.getName());</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">List&lt;Integer&gt; nos = Arrays.asList(1, 2, 3, 4, 5);
+Optional&lt;Integer&gt; firstDivBy3 = nos.stream().map(x -&gt; x * x).filter(x -&gt; x % 3 == 0).findFirst();</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Reducing sum</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Optional&lt;Integer&gt; sum = numbers.stream().reduce((a, b) -&gt; (a + b));</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">int sum = numbers.stream().reduce(0, (a, b) -&gt; a + b);</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">int sum = numbers.stream().reduce(0, Integer::sum);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Reducing product</p></td><td class="confluenceTd"><p><code>int product = numbers.stream().reduce(1, (a, b) -&gt; a * b);</code></p></td></tr><tr><td class="confluenceTd"><p>Reducing max/min</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Optional&lt;Integer&gt; max = numbers.stream().reduce(Integer::max);</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Optional&lt;Integer&gt; min = numbers.stream().reduce(Integer::min);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Reducing count</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">int count = menu.stream().map(d -&gt; 1).reduce(0, (a, b) -&gt; a + b);</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">long count = menu.stream().count();</pre>
+</div></div></td></tr></tbody></table></div><h1 id="FunctionalJava-Collectors">Collectors</h1><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 160.0px;"/><col style="width: 1411.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Operation</strong></p></th><th class="confluenceTh"><p><strong>Method</strong></p></th></tr><tr><td class="confluenceTd"><p>Counting</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">long howManyDishes = menu.stream().collect(Collectors.counting());</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">long howManyDishes = menu.stream().count();</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>MaxBy/MinBy</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Optional&lt;Dish&gt; mostCalorieDish = menu.stream().collect(maxBy(comparingInt(Dish::getCalories)));</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">OptionalInt maxCalories = menu.stream().mapToInt(Dish::getCalories).max();</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Optional&lt;Integer&gt; max = menu.stream().mapToInt(Dish::getCalories).reduce(Integer::max);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Summarization</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">int totalCalories = menu.stream().collect(summingInt(Dish::getCalories));</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">double avgCalories = menu.stream().collect(averagingInt(Dish::getCalories));</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">IntSummaryStatistics menuStatistics = menu.stream().collect(summarizingInt(Dish::getCalories));</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Joining</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">String shortMenu = menu.stream().map(Dish::getName).collect(joining());</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">String shortMenu = menu.stream().map(Dish::getName).collect(joining(&quot;, &quot;));</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Reducing sum</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">int totalCalories = menu.stream().collect(reducing(0, Dish::getCalories, (i, j) -&gt; i + j));</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">int totalCalories = menu.stream().collect(reducing(0, Dish::getCalories, Integer:sum);</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Reducing max/min</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Optional&lt;Dish&gt; mostCalorieDish = menu.stream().collect(reducing((d1, d2) -&gt; d1.getCalories() &gt; d2.getCalories() ? d1 : d2));</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Optional&lt;Dish&gt; mostCalorieDish = menu.stream().collect(maxBy(comparingInt(Dish::getCalories)));</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Reducing count</p></td><td class="confluenceTd"><p><code>int count = menu.stream().collect(reducing(0L, e -&gt; 1L, Long::sum);</code></p></td></tr><tr><td class="confluenceTd"><p>Grouping</p></td><td class="confluenceTd"><p>Classify the dishes in the menu according to their type:</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Dish.Type, List&lt;Dish&gt;&gt; dishesByType = menu.stream().collect(groupingBy(Dish::getType));</pre>
+</div></div><p>Create a set instead of a list</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Dish.Type, Set&lt;Dish&gt;&gt; dishesByType = menu.stream().collect(groupingBy(Dish::getType, toSet()));</pre>
+</div></div><p>Group by other characteristic (no method reference)</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public enum CaloricLevel { DIET, NORMAL, FAT }</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;CaloricLevel, List&lt;Dish&gt;&gt; dishesByCaloricLevel = menu.stream()
+                      .collect(groupingBy(dish -&gt; {
+                           if (dish.getCalories() &lt;= 400) return CaloricLevel.DIET;
+                           else if (dish.getCalories() &lt;= 700) return CaloricLevel.NORMAL;
+                           else return CaloricLevel.FAT;
+                       }));</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Dish.Type, Set&lt;CaloricLevel&gt;&gt; caloricLevelsByType = menu.stream().collect(
+   groupingBy(Dish::getType, mapping(dish -&gt;
+        { 
+          if (dish.getCalories() &lt;= 400) return CaloricLevel.DIET;
+          else if (dish.getCalories() &lt;= 700) return CaloricLevel.NORMAL;
+          else return CaloricLevel.FAT;
+        }, toSet() )));  // Controlling type of set use: toCollection(HashSet::new))));</pre>
+</div></div><p>Count number of dishes in each subgroup</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Dish.Type, Long&gt; typesCount = menu.stream().collect(groupingBy(Dish::getType, counting()));</pre>
+</div></div><p>Sum calories of dishes in each subgroup</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Dish.Type, Integer&gt; totalCaloriesByType = menu.stream().collect(groupingBy(Dish::getType, summingInt(Dish::getCalories)));</pre>
+</div></div><p>Most caloric dish in each subgroup</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Dish.Type, Optional&lt;Dish&gt;&gt; mostCaloricByType = menu.stream().collect(groupingBy(Dish::getType, maxBy(comparingInt(Dish::getCalories))));</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Dish.Type, Dish&gt; mostCaloricByType = menu.stream().collect(groupingBy(Dish::getType, collectingAndThen(maxBy(comparingInt(Dish::getCalories)), Optional::get)));</pre>
+</div></div><p>Multilevel Grouping</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Dish.Type, Map&lt;CaloricLevel, List&lt;Dish&gt;&gt;&gt; dishesByCaloricLevel = menu.stream().collect(groupingBy(Dish::getType,
+                               groupingBy(dish -&gt; {
+                                   if (dish.getCalories() &lt;= 400) return CaloricLevel.DIET;
+                                   else if (dish.getCalories() &lt;= 700) return CaloricLevel.NORMAL;
+                                   else return CaloricLevel.FAT;
+                               })));</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Partitioning</p></td><td class="confluenceTd"><p>Vegetarian and non-vegetarian dishes</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Boolean,List&lt;Dish&gt;&gt; partitionedMenu = menu.stream().collect(partitionBy(Dish::isVegetarian));</pre>
+</div></div><p>Partitioning and grouping</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Boolean,Map&lt;Dish.Type,List&lt;Dish&gt;&gt;&gt; partitionedMenu = menu.stream().collect(partitionBy(Dish::isVegetarian, groupingBy(Dish::getType)));</pre>
+</div></div><p>Most caloric dish among both vegetarian and non-vegetarian dishes</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Map&lt;Boolean, Dish&gt; map = menu.stream().collect(partitioningBy(Dish::isVegetarian, collectingAndThen(maxBy(comparingInt(Dish::getCalories)), Optional::get)));</pre>
+</div></div><p>Partitioning numbers into prime and non-prime</p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public boolean isPrime(int candidate)
+{
+    int candidateRoot = (int) Math.sqrt((double) candidate);  
+    return IntStream.range(2, candidateRoot).noneMatch(i -&gt; candidate % i == 0);  
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public Map&lt;Boolean, List&lt;Integer&gt;&gt; partitionPrimes(int n)
+{
+    return IntStream.rangeClosed(2, n).boxed().collect(partitioningBy(candidate -&gt; isPrime(candidate)));
+}</pre>
+</div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

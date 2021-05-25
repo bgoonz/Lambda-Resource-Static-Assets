@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Trees Problems</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Java-Problems_858619905.html">Java Problems</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Trees Problems
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Jan 31, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1613190977042 {padding: 0px;}
+div.rbtoc1613190977042 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1613190977042 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1613190977042'>
+<ul class='toc-indentation'>
+<li><a href='#TreesProblems-BinaryTreeDiameter'>BinaryTreeDiameter</a></li>
+<li><a href='#TreesProblems-BreadthFirst'>BreadthFirst</a></li>
+<li><a href='#TreesProblems-BSTFromArray'>BSTFromArray</a></li>
+<li><a href='#TreesProblems-CommonParent'>CommonParent</a></li>
+<li><a href='#TreesProblems-DepthFirst'>DepthFirst</a>
+<ul class='toc-indentation'>
+<li><a href='#TreesProblems-depthFirst'>depthFirst</a></li>
+<li><a href='#TreesProblems-depthFirstReverse'>depthFirstReverse</a></li>
+<li><a href='#TreesProblems-depthFirstIterative'>depthFirstIterative</a></li>
+<li><a href='#TreesProblems-kthSmallest'>kthSmallest</a></li>
+<li><a href='#TreesProblems-kthLargest'>kthLargest</a></li>
+</ul>
+</li>
+<li><a href='#TreesProblems-FindMedian'>FindMedian</a></li>
+<li><a href='#TreesProblems-InvertTree'>InvertTree</a>
+<ul class='toc-indentation'>
+<li><a href='#TreesProblems-invertRecursive'>invertRecursive</a></li>
+<li><a href='#TreesProblems-invertIterative'>invertIterative</a></li>
+</ul>
+</li>
+<li><a href='#TreesProblems-IsBalanced'>IsBalanced</a></li>
+<li><a href='#TreesProblems-IsBST'>IsBST</a>
+<ul class='toc-indentation'>
+<li><a href='#TreesProblems-isBSTUsingRecursion'>isBSTUsingRecursion</a></li>
+<li><a href='#TreesProblems-isBSTUsingArray'>isBSTUsingArray</a></li>
+</ul>
+</li>
+<li><a href='#TreesProblems-MaximumPathSum'>MaximumPathSum</a></li>
+<li><a href='#TreesProblems-RootToLeafSum'>RootToLeafSum</a>
+<ul class='toc-indentation'>
+<li><a href='#TreesProblems-treePathSum'>treePathSum</a></li>
+<li><a href='#TreesProblems-maxPathSum'>maxPathSum</a></li>
+</ul>
+</li>
+<li><a href='#TreesProblems-SubTree'>SubTree</a></li>
+<li><a href='#TreesProblems-Tree'>Tree</a></li>
+</ul>
+</div><p /><h2 id="TreesProblems-BinaryTreeDiameter">BinaryTreeDiameter</h2><p /><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 917.0px;"/><col style="width: 631.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>BinaryTreeDiameter</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">The diameter of a binary tree is the length of the longest path between any two nodes in a tree.
+This path may or may not pass through the root.
+Example:
+      4
+     / \
+    2   5
+   / \
+  1   3
+Return 3, which is the length of the path [1,2,4,5] or [3,2,4,5].</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T &gt;&gt; int diameter(Tree.Node&lt;T&gt; root)
+{
+    if(root == null)
+    {
+        return 0;
+    }
+    int leftHeight = getHeight(root.left);
+    int rightHeight = getHeight(root.right);
+    int leftDia = diameter(root.left);
+    int rightDia = diameter(root.right);
+    return max3(leftHeight + rightHeight, leftDia, rightDia);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Tree&lt;Integer&gt; tree1 = new Tree&lt;&gt;(4, 2, 5, 1, 3);
+    boolean check = diameter(tree1.root) == 3;
+    if(!check)
+    {
+        return  false;
+    }
+    Tree&lt;Integer&gt; tree2 = new Tree&lt;&gt;(4, 2, 6, 1, 5, 3);
+    check = diameter(tree2.root) == 4;
+    if(!check)
+    {
+        return  false;
+    }
+    //  This should not include the root
+    Tree&lt;Integer&gt; tree3 = new Tree&lt;&gt;(8, 4, 2, 6, 1, 5, 3);
+    check = diameter(tree3.root) == 4;
+    if(!check)
+    {
+        return  false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="TreesProblems-BreadthFirst">BreadthFirst<br/></h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 775.0px;"/><col style="width: 773.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>BreadthFirst</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; List&lt;List&lt;Tree.Node&lt;T&gt;&gt;&gt; breadthFirst(Tree.Node&lt;T&gt; node)
+{
+    if(node == null)
+    {
+        return null;
+    }
+    List&lt;List&lt;Tree.Node&lt;T&gt;&gt;&gt; result = new ArrayList&lt;&gt;();
+    List&lt;Tree.Node&lt;T&gt;&gt; currentList = new ArrayList&lt;&gt;();
+    currentList.add(node);
+    while(!currentList.isEmpty())
+    {
+        result.add(currentList);
+        List&lt;Tree.Node&lt;T&gt;&gt; parentList = currentList;
+        currentList = new ArrayList&lt;&gt;();
+        for(Tree.Node&lt;T&gt; parent : parentList)
+        {
+            if(parent.left != null)
+            {
+                currentList.add(parent.left);
+            }
+            if(parent.right != null)
+            {
+                currentList.add(parent.right);
+            }
+        }
+    }
+    return result;
+}</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Tree&lt;Integer&gt; tree = new Tree&lt;&gt;(4, 2, 6, 1, 5, 3, 7);
+    List&lt;List&lt;Tree.Node&lt;Integer&gt;&gt;&gt; list = breadthFirst(tree.root);
+    List&lt;Tree.Node&lt;Integer&gt;&gt; l1 = list.get(0);
+    boolean check = l1.get(0).data == 4;
+    if(!check)
+    {
+        return false;
+    }
+    List&lt;Tree.Node&lt;Integer&gt;&gt; l2 = list.get(1);
+    check = l2.get(0).data == 2 &amp;&amp; l2.get(1).data == 6;
+    if(!check)
+    {
+        return false;
+    }
+    List&lt;Tree.Node&lt;Integer&gt;&gt; l3 = list.get(2);
+    check = l3.get(0).data == 1 &amp;&amp;
+            l3.get(1).data == 3 &amp;&amp;
+            l3.get(2).data == 5 &amp;&amp; l3.get(3).data == 7;
+    if(!check)
+    {
+        return false;
+    }
+    List&lt;Tree.Node&lt;Integer&gt;&gt; flatList = list.stream()
+            .flatMap(List::stream).collect(Collectors.toList());
+    int[] a = flatList.stream().mapToInt(x -&gt; x.data).toArray();
+    check = Arrays.equals(new int[] {4, 2, 6, 1, 3, 5, 7}, a);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="TreesProblems-BSTFromArray">BSTFromArray<br/></h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 775.0px;"/><col style="width: 773.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>BSTFromArray</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; Tree.Node&lt;T&gt; bstFromArray(T[] a)
+{
+    Arrays.sort(a);
+    return createBST(a, 0, a.length - 1);
+}
+
+private static&lt;T extends Comparable&lt;T&gt;&gt; Tree.Node&lt;T&gt; createBST(T[] a, int start, int end)
+{
+    if(end &lt; start)
+    {
+        return null;
+    }
+    int mid = (start + end) / 2;
+    Tree.Node&lt;T&gt; root = new Tree.Node(a[mid]);
+    root.left = createBST(a, start, mid - 1);
+    root.right = createBST(a, mid + 1, end);
+    return root;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Integer[] a = {4, 2, 6, 1, 5, 3, 7};
+    Tree.Node&lt;Integer&gt; root = bstFromArray(a);
+    boolean check = isBSTUsingRecursion(root);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="TreesProblems-CommonParent"><br/>CommonParent</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 859.0px;"/><col style="width: 689.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>CommonParent</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; Tree.Node&lt;T&gt; commonParent(Tree.Node&lt;T&gt; parent, 
+                                                          Tree.Node&lt;T&gt; first, Tree.Node&lt;T&gt; second)
+{
+    if(parent == null)
+    {
+        return null;
+    }
+    if(parent == first || parent == second)
+    {
+        return parent;
+    }
+    boolean isFirstOnLeft = parentCovers(parent.left, first);
+    boolean isSecondOnLeft = parentCovers(parent.left, second);
+    if(isFirstOnLeft != isSecondOnLeft)
+    {
+        return parent;
+    }
+    Tree.Node&lt;T&gt; childNode = isFirstOnLeft ? parent.left : parent.right;
+    return commonParent(childNode, first, second);
+}
+
+private static&lt;T extends Comparable&lt;T&gt;&gt; boolean parentCovers(Tree.Node&lt;T&gt; parent, Tree.Node&lt;T&gt; node)
+{
+    if(parent == null)
+    {
+        return false;
+    }
+    if(parent == node)
+    {
+        return true;
+    }
+    return parentCovers(parent.left, node) || parentCovers(parent.right, node);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Tree&lt;Integer&gt; tree = new Tree&lt;&gt;(4, 2, 6, 1, 5, 3, 7);
+    Tree.Node&lt;Integer&gt;[] a = toArray(tree.root);
+    boolean check = a[0].data == 4 &amp;&amp;
+                    a[1].data == 2 &amp;&amp;
+                    a[2].data == 6 &amp;&amp;
+                    a[3].data == 1 &amp;&amp;
+                    a[4].data == 3 &amp;&amp;
+                    a[5].data == 5 &amp;&amp;
+                    a[6].data == 7;
+    if(!check)
+    {
+        return false;
+    }
+    check = a[1] == commonParent(a[0], a[4], a[3]);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="TreesProblems-DepthFirst"><br/>DepthFirst</h2><h3 id="TreesProblems-depthFirst"><code>depthFirst</code></h3><h3 id="TreesProblems-depthFirstReverse"><code>depthFirstReverse</code></h3><h3 id="TreesProblems-depthFirstIterative"><code>depthFirstIterative</code></h3><h3 id="TreesProblems-kthSmallest"><code>kthSmallest</code></h3><h3 id="TreesProblems-kthLargest"><code>kthLargest</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 854.0px;"/><col style="width: 694.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>DepthFirst</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; void depthFirst(Tree.Node&lt;T&gt; node, List&lt;Tree.Node&lt;T&gt;&gt; result)
+{
+    if(node == null)
+    {
+        return;
+    }
+    depthFirst(node.left, result);
+    result.add(node);
+    depthFirst(node.right, result);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; void depthFirstReverse(Tree.Node&lt;T&gt; node, List&lt;Tree.Node&lt;T&gt;&gt; result)
+{
+    if(node == null)
+    {
+        return;
+    }
+    depthFirstReverse(node.right, result);
+    result.add(node);
+    depthFirstReverse(node.left, result);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; List&lt;Tree.Node&lt;T&gt;&gt; depthFirstIterative(Tree.Node&lt;T&gt; node)
+{
+    List&lt;Tree.Node&lt;T&gt;&gt; result = new ArrayList&lt;&gt;();
+    if(node == null)
+    {
+        return result;
+    }
+    Stack&lt;Tree.Node&lt;T&gt;&gt; stack = new Stack&lt;&gt;();
+    Tree.Node&lt;T&gt; p = node;
+    while(!stack.empty() || p != null)
+    {
+        if(p != null)
+        {
+            stack.push(p);
+            p = p.left;
+        }
+        else
+        {
+            Tree.Node&lt;T&gt; t = stack.pop();
+            result.add(t);
+            p = t.right;
+        }
+    }
+    return result;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; Tree.Node&lt;T&gt; kthSmallest(Tree.Node&lt;T&gt; node, int k)
+{
+    if(node == null)
+    {
+        return null;
+    }
+    Stack&lt;Tree.Node&lt;T&gt;&gt; stack = new Stack&lt;&gt;();
+    Tree.Node&lt;T&gt; p = node;
+    while(!stack.empty() || p != null)
+    {
+        if(p != null)
+        {
+            stack.push(p);
+            p = p.left;
+        }
+        else
+        {
+            Tree.Node&lt;T&gt; t = stack.pop();
+            k--;
+            if(k == 0)
+            {
+                return t;
+            }
+            p = t.right;
+        }
+    }
+    return null;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; Tree.Node&lt;T&gt; kthLargest(Tree.Node&lt;T&gt; node, int k)
+{
+    if(node == null)
+    {
+        return null;
+    }
+    Stack&lt;Tree.Node&lt;T&gt;&gt; stack = new Stack&lt;&gt;();
+    Tree.Node&lt;T&gt; p = node;
+    while(!stack.empty() || p != null)
+    {
+        if(p != null)
+        {
+            stack.push(p);
+            p = p.right;
+        }
+        else
+        {
+            Tree.Node&lt;T&gt; t = stack.pop();
+            k--;
+            if(k == 0)
+            {
+                return t;
+            }
+            p = t.left;
+        }
+    }
+    return null;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    List&lt;Tree.Node&lt;Integer&gt;&gt; result = new ArrayList&lt;&gt;();
+    Tree&lt;Integer&gt; tree = new Tree&lt;&gt;(4, 2, 6, 1, 5, 3, 7);
+    depthFirst(tree.root, result);
+    int[] a = result.stream().mapToInt(x -&gt; x.data).toArray();
+    boolean check = Arrays.equals(new int[] {1, 2, 3, 4, 5, 6, 7}, a);
+    if(!check)
+    {
+        return false;
+    }
+    result = new ArrayList&lt;&gt;();
+    depthFirstReverse(tree.root, result);
+    a = result.stream().mapToInt(x -&gt; x.data).toArray();
+    check = Arrays.equals(new int[] {7, 6, 5, 4, 3, 2, 1}, a);
+    if(!check)
+    {
+        return false;
+    }
+    result = depthFirstIterative(tree.root);
+    a = result.stream().mapToInt(x -&gt; x.data).toArray();
+    check = Arrays.equals(new int[] {1, 2, 3, 4, 5, 6, 7}, a);
+    if(!check)
+    {
+        return false;
+    }
+    Tree.Node&lt;Integer&gt; kth = kthSmallest(tree.root, 4);
+    check = kth.data == 4;
+    if(!check)
+    {
+        return false;
+    }
+    kth = kthLargest(tree.root, 2);
+    check = kth.data == 6;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="TreesProblems-FindMedian"><br/>FindMedian</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 751.0px;"/><col style="width: 797.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>FindMedian</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">If number of nodes is:
+Odd:
+  Median = Tree.Node[(count + 1) / 2]
+Even:
+  Median = Tree.Node[(count / 2)], Tree.Node[(count / 2) + 1]</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; Tree.Node&lt;T&gt;[] findMedian(Tree.Node&lt;T&gt; root)
+{
+    int count = getSizeBreadthFirst(root);
+    if(count % 2 == 1)
+    {
+        Tree.Node&lt;T&gt; n1 = kthSmallest(root, (count + 1) / 2);
+        Tree.Node&lt;T&gt;[] a = (Tree.Node&lt;T&gt;[]) Array.newInstance(root.getClass(), 1);
+        a[0] = n1;
+        return a;
+    }
+    else
+    {
+        Tree.Node&lt;T&gt; n1 = kthSmallest(root, count / 2);
+        Tree.Node&lt;T&gt; n2 = kthSmallest(root, count / 2 + 1);
+        Tree.Node&lt;T&gt;[] a = (Tree.Node&lt;T&gt;[]) Array.newInstance(root.getClass(), 2);
+        a[0] = n1;
+        a[1] = n2;
+        return a;
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Tree&lt;Integer&gt; tree1 = new Tree&lt;&gt;(4, 2, 6, 1, 5, 3, 7);
+    Tree.Node&lt;Integer&gt;[] a1 = findMedian(tree1.root);
+    boolean check = a1[0].data == 4;
+    if(!check)
+    {
+        return false;
+    }
+    Tree&lt;Integer&gt; tree2 = new Tree&lt;&gt;(4, 2, 6, 1, 5, 3);
+    Tree.Node&lt;Integer&gt;[] a2 = findMedian(tree2.root);
+    check = a2[0].data == 3 &amp;&amp; a2[1].data == 4;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="TreesProblems-InvertTree">InvertTree</h2><h3 id="TreesProblems-invertRecursive"><code>invertRecursive</code></h3><h3 id="TreesProblems-invertIterative"><code>invertIterative</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 775.0px;"/><col style="width: 773.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>InvertTree</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; void invertRecursive(Tree.Node&lt;T&gt; root)
+{
+    //  Swaps left and right nodes - same as Mirror
+    if(root == null)
+    {
+        return;
+    }
+    invertRecursive(root.left);
+    invertRecursive(root.right);
+    Tree.Node&lt;T&gt; temp = root.left;
+    root.left = root.right;
+    root.right = temp;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; void invertIterative(Tree.Node&lt;T&gt; root)
+{
+    Queue&lt;Tree.Node&lt;T&gt;&gt; queue = new LinkedList&lt;&gt;();
+    queue.offer(root);
+    while(!queue.isEmpty())
+    {
+        Tree.Node&lt;T&gt; node = queue.poll();
+        if(node.left != null)
+        {
+            queue.offer(node.left);
+        }
+        if(node.right != null)
+        {
+            queue.offer(node.right);
+        }
+        Tree.Node&lt;T&gt; temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+    }
+}</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Tree&lt;Integer&gt; tree = new Tree&lt;&gt;(4, 2, 6, 1, 5, 3, 7);
+    Tree.Node&lt;Integer&gt;[] a = toArray(tree.root);
+    boolean check = a[0].data == 4 &amp;&amp;
+                    a[1].data == 2 &amp;&amp;
+                    a[2].data == 6 &amp;&amp;
+                    a[3].data == 1 &amp;&amp;
+                    a[4].data == 3 &amp;&amp;
+                    a[5].data == 5 &amp;&amp;
+                    a[6].data == 7;
+    if(!check)
+    {
+        return false;
+    }
+    invertRecursive(tree.root);
+    a = toArray(tree.root);
+    check = a[0].data == 4 &amp;&amp;
+            a[1].data == 6 &amp;&amp;
+            a[2].data == 2 &amp;&amp;
+            a[3].data == 7 &amp;&amp;
+            a[4].data == 5 &amp;&amp;
+            a[5].data == 3 &amp;&amp;
+            a[6].data == 1;
+    if(!check)
+    {
+        return false;
+    }
+    tree = new Tree&lt;&gt;(4, 2, 6, 1, 5, 3, 7);
+    invertIterative(tree.root);
+    check = a[0].data == 4 &amp;&amp;
+            a[1].data == 6 &amp;&amp;
+            a[2].data == 2 &amp;&amp;
+            a[3].data == 7 &amp;&amp;
+            a[4].data == 5 &amp;&amp;
+            a[5].data == 3 &amp;&amp;
+            a[6].data == 1;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="TreesProblems-IsBalanced"><br/>IsBalanced</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 775.0px;"/><col style="width: 773.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>IsBalanced</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; boolean isBalanced(Tree.Node&lt;T&gt; node)
+{
+    if(node == null)
+    {
+        return true;
+    }
+    int diff = getHeight(node.right) - getHeight(node.left);
+    if(Math.abs(diff) &gt; 1)
+    {
+        return false;
+    }
+    return isBalanced(node.left) &amp;&amp; isBalanced(node.right);
+}</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Tree&lt;Integer&gt; tree1 = new Tree(4, 2, 6, 1, 5, 3, 7);
+    boolean check = isBalanced(tree1.root);
+    if(!check)
+    {
+        return false;
+    }
+    Tree&lt;Integer&gt; tree2 = new Tree(1, 2, 4, 7, 6, 5, 4);
+    check = isBalanced(tree2.root);
+    if(check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="TreesProblems-IsBST">IsBST</h2><h3 id="TreesProblems-isBSTUsingRecursion"><code>isBSTUsingRecursion</code></h3><h3 id="TreesProblems-isBSTUsingArray"><code>isBSTUsingArray</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 775.0px;"/><col style="width: 773.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>IsBST</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; boolean isBSTUsingRecursion(Tree.Node&lt;T&gt; node)
+{
+    if(node == null)
+    {
+        return true;
+    }
+    if(node.left != null &amp;&amp; node.left.data.compareTo(node.data) != -1 ||
+            node.right != null &amp;&amp; node.right.data.compareTo(node.data) == -1)
+    {
+        return false;
+    }
+    return isBSTUsingRecursion(node.left) &amp;&amp; isBSTUsingRecursion(node.right);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static&lt;T extends Comparable&lt;T&gt;&gt; boolean isBSTUsingArray(Tree.Node&lt;T&gt; node)
+{
+    List&lt;T&gt; result = new ArrayList&lt;&gt;();
+    copyToList(node, result);
+    for(int i = 1; i &lt; result.size(); ++i)
+    {
+        if(result.get(i).compareTo(result.get(i - 1)) == -1)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+private static&lt;T extends Comparable&lt;T&gt;&gt; void copyToList(Tree.Node&lt;T&gt; node, List&lt;T&gt; result)
+{
+    if(node == null)
+    {
+        return;
+    }
+    copyToList(node.left, result);
+    result.add(node.data);
+    copyToList(node.right, result);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Tree&lt;Integer&gt; tree = new Tree&lt;&gt;(4, 1, 5, 3, 2, 6);
+    boolean check = isBSTUsingRecursion(tree.root) == true;
+    if(!check)
+    {
+        return false;
+    }
+    check = isBSTUsingArray(tree.root) == true;
+    if(!check)
+    {
+        return false;
+    }
+    Tree.Node&lt;Integer&gt; n1 = new Tree.Node(5);
+    Tree.Node&lt;Integer&gt; n2 = new Tree.Node(3);
+    Tree.Node&lt;Integer&gt; n3 = new Tree.Node(8);
+    n1.left = n3; n1.right = n2;
+    check = isBSTUsingRecursion(n1) == false;
+    if(!check)
+    {
+        return false;
+    }
+    check = isBSTUsingArray(n1) == false;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="TreesProblems-MaximumPathSum">MaximumPathSum</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 774.0px;"/><col style="width: 774.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MinPathSum</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Must consider 3 cases
+1.  Node is in the left path of MaxSum and includes the root
+2.  Node is in the right path of MaxSum and does not include the root
+3.  Root is included along with left and right paths</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int maxPathSum(Tree.Node&lt;Integer&gt; root)
+{
+    AtomicInteger h = new AtomicInteger(Integer.MIN_VALUE);
+    return maxPathSum(root, h);
+}
+private static int maxPathSum(Tree.Node&lt;Integer&gt; root, AtomicInteger result)
+{
+    if(root == null)
+    {
+        return Integer.MIN_VALUE;
+    }
+    AtomicInteger h1 = new AtomicInteger(Integer.MIN_VALUE);
+    AtomicInteger h2 = new AtomicInteger(Integer.MIN_VALUE);
+    int s1 = maxPathSum(root.left, h1);
+    int s2 = maxPathSum(root.right, h2);
+    result.set(max3(h1.get(), h2.get(), 0) + root.data);
+    h1.set(Math.max(h1.get(), 0));
+    h2.set(Math.max(h2.get(), 0));
+    return max3(s1, s2, h1.get() + h2.get() + root.data);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Tree.Node&lt;Integer&gt; root = new Tree.Node&lt;&gt;(-10);
+    Tree.Node&lt;Integer&gt; node9 = new Tree.Node&lt;&gt;(9);
+    Tree.Node&lt;Integer&gt; node20 = new Tree.Node&lt;&gt;(20);
+    Tree.Node&lt;Integer&gt; node15 = new Tree.Node&lt;&gt;(15);
+    Tree.Node&lt;Integer&gt; node7 = new Tree.Node&lt;&gt;(7);
+    root.left = node9;
+    root.right = node20;
+    node20.left = node15;
+    node20.right = node7;
+    boolean check = maxPathSum(root) == 42;
+    if(!check)
+    {
+        return false;
+    }
+    root = new Tree.Node&lt;&gt;(10);
+    root.left = node9;
+    root.right = node20;
+    check = maxPathSum(root) == 54;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="TreesProblems-RootToLeafSum">RootToLeafSum</h2><h3 id="TreesProblems-treePathSum"><code>treePathSum</code></h3><h3 id="TreesProblems-maxPathSum"><code>maxPathSum</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 775.0px;"/><col style="width: 773.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>RootToLeafSum</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">       4
+    /    \
+  2        6
+ /  \     / \
+1    3   5   7
+Path                    Number
+4-&gt;2-&gt;1                   421
+4-&gt;2-&gt;3                   423
+4-&gt;6-&gt;5                   465
+4-&gt;6-&gt;7                   467
+Answer = 421 + 423 + 465 + 467 = 1776</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int treePathSum(Tree.Node&lt;Integer&gt; root)
+{
+    return treePathSum(root, 0);
+}
+
+
+private static int treePathSum(Tree.Node&lt;Integer&gt; node, int val)
+{
+    if(node == null)
+    {
+        return 0;
+    }
+    val = val * 10 + node.data;
+    if(node.left == null &amp;&amp; node.right == null)
+    {
+        return val;
+    }
+    return treePathSum(node.left, val) + treePathSum(node.right, val);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int maxPathSum(Tree.Node&lt;Integer&gt; root)
+{
+    return maxPathSum(root, 0);
+}
+private static int maxPathSum(Tree.Node&lt;Integer&gt; node, int val)
+{
+    if(node == null)
+    {
+        return val;
+    }
+    val += node.data;
+    return Math.max(maxPathSum(node.left, val), maxPathSum(node.right, val));
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Tree&lt;Integer&gt; tree = new Tree&lt;&gt;(4, 2, 6, 1, 5, 3, 7);
+    boolean check = treePathSum(tree.root) == 1776;
+    if(!check)
+    {
+        return false;
+    }
+    check = maxPathSum(tree.root) == 17;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="TreesProblems-SubTree"><br/>SubTree</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 775.0px;"/><col style="width: 773.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>SubTree</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static &lt;T extends Comparable&lt;T&gt;&gt; boolean subtree(Tree.Node&lt;T&gt; parent, Tree.Node&lt;T&gt; child)
+{
+    if(parent == null)
+    {
+        return false;
+    }
+    if(parent.data.compareTo(child.data) == 0)
+    {
+        if(matches(parent, child))
+        {
+            return true;
+        }
+    }
+    return subtree(parent.left, child) || subtree(parent.right, child);
+}
+
+
+private static&lt;T extends Comparable&lt;T&gt;&gt; boolean matches(Tree.Node&lt;T&gt; n1, Tree.Node&lt;T&gt; n2)
+{
+    if(n1 == null &amp;&amp; n2 == null)
+    {
+        return true;
+    }
+    if(n1 == null || n2 == null)
+    {
+        return false;
+    }
+    if(n1.data.compareTo(n2.data) != 0)
+    {
+        return false;
+    }
+    return matches(n1.left, n2.left) &amp;&amp; matches(n1.right, n2.right);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Tree&lt;Integer&gt; parent = new Tree&lt;&gt;(4, 2, 6, 1, 5, 3, 7);
+    Tree&lt;Integer&gt; child = new Tree&lt;&gt;(2, 1, 3);
+    boolean check = subtree(parent.root, child.root);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="TreesProblems-Tree">Tree</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 867.0px;"/><col style="width: 681.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Tree</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class Tree&lt;T extends Comparable&lt;T&gt;&gt;
+{
+    public static class Node&lt;T&gt;
+    {
+        public T data;
+        public Node&lt;T&gt; left;
+        public Node&lt;T&gt; right;
+
+        public Node(T data)
+        {
+            this.data = data;
+        }
+    }
+
+    public Node&lt;T&gt; root;
+
+    public Tree(T... values)
+    {
+        for(T value : values)
+        {
+            add(value);
+        }
+    }
+
+
+    void add(T value)
+    {
+        if(root == null)
+        {
+            root = new Node(value);
+        }
+        else
+        {
+            add(root, value);
+        }
+    }
+
+    private void add(Node&lt;T&gt; node, T value)
+    {
+        if(value.compareTo(node.data) == -1)
+        {
+            if(node.left == null)
+            {
+                node.left = new Node(value);
+            }
+            else
+            {
+                add(node.left, value);
+            }
+        }
+        else
+        {
+            if(node.right == null)
+            {
+                node.right = new Node(value);
+            }
+            else
+            {
+                add(node.right, value);
+            }
+        }
+    }
+
+    static&lt;T extends Comparable&lt;T&gt;&gt; int getHeight(Node&lt;T&gt; node)
+    {
+        if(node == null)
+        {
+            return 0;
+        }
+
+        return 1 + Math.max(getHeight(node.left), getHeight(node.right));
+    }
+
+    static&lt;T extends Comparable&lt;T&gt;&gt; Node&lt;T&gt;[] toArray(Node&lt;T&gt; root)
+    {
+        List&lt;List&lt;Node&lt;T&gt;&gt;&gt; list = breadthFirst(root);
+        List&lt;Node&lt;T&gt;&gt; flatList = list.stream().flatMap(List::stream).collect(Collectors.toList());
+        Node&lt;T&gt;[] a = (Node&lt;T&gt;[])Array.newInstance(root.getClass(), flatList.size());
+        for(int i = 0; i &lt; flatList.size(); ++i)
+        {
+            a[i] = flatList.get(i);
+        }
+        return a;
+    }
+
+
+    static&lt;T extends Comparable&lt;T&gt;&gt; int getSizeBreadthFirst(Node&lt;T&gt; root)
+    {
+        if(root == null)
+        {
+            return 0;
+        }
+
+        int count = 0;
+        Queue&lt;Node&lt;T&gt;&gt; queue = new LinkedList&lt;&gt;();
+        queue.offer(root);
+        while (!queue.isEmpty())
+        {
+            count++;
+            Node&lt;T&gt; node = queue.poll();
+            if(node.left != null)
+            {
+                queue.add(node.left);
+            }
+            if(node.right != null)
+            {
+                queue.add(node.right);
+            }
+        }
+        return count;
+    }
+
+    static&lt;T extends Comparable&lt;T&gt;&gt; int getSizeDepthFirst(Node&lt;T&gt; root)
+    {
+        class Helper
+        {
+            int count;
+
+            void getSize(Node&lt;T&gt; root)
+            {
+                if(root == null)
+                {
+                    return;
+                }
+
+                count++;
+                getSize(root.left);
+                getSize(root.right);
+            }
+        }
+        Helper helper = new Helper();
+        helper.getSize(root);
+        return helper.count;
+    }
+
+    Iterator&lt;T&gt; iterator()
+    {
+        return new Iterator(root);
+    }
+
+    private static class Iterator&lt;T&gt;
+    {
+        Stack&lt;Node&lt;T&gt;&gt; stack = new Stack&lt;&gt;();
+
+        Iterator(Node&lt;T&gt; node)
+        {
+            while(node != null)
+            {
+                stack.push(node);
+                node = node.left;
+            }
+        }
+
+        boolean hasNext()
+        {
+            return stack.empty();
+        }
+
+        Node&lt;T&gt; next()
+        {
+            Node&lt;T&gt; node = stack.pop();
+
+            if(node.right != null)
+            {
+                Node temp = node.right;
+                while(temp != null)
+                {
+                    stack.push(temp);
+                    temp = temp.left;
+                }
+            }
+            return node;
+        }
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    Tree&lt;Integer&gt; tree = new Tree&lt;&gt;(4, 2, 6, 1, 5, 3, 7);
+    Iterator&lt;Integer&gt; iter = tree.iterator();
+    boolean check = iter.next().data == 1;
+    if(!check)
+    {
+        return false;
+    }
+    check = iter.next().data == 2;
+    if(!check)
+    {
+        return false;
+    }
+    check = iter.next().data == 3;
+    if(!check)
+    {
+        return false;
+    }
+    check = iter.next().data == 4;
+    if(!check)
+    {
+        return false;
+    }
+    check = iter.next().data == 5;
+    if(!check)
+    {
+        return false;
+    }
+    check = iter.next().data == 6;
+    if(!check)
+    {
+        return false;
+    }
+    check = iter.next().data == 7;
+    if(!check)
+    {
+        return false;
+    }
+    check = getSizeBreadthFirst(tree.root) == 7;
+    if(!check)
+    {
+        return false;
+    }
+    check = getSizeDepthFirst(tree.root) == 7;
+    if(!check)
+    {
+        return false;
+    }
+    Node&lt;Integer&gt;[] nodes = toArray(tree.root);
+    int[] a = Arrays.stream(nodes).mapToInt(x -&gt; x.data).toArray();
+    check = Arrays.equals(new int[] {4, 2, 6, 1, 3, 5, 7}, a);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p><br/></p>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

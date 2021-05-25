@@ -1,0 +1,2182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Arrays Problems</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Java-Problems_858619905.html">Java Problems</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Arrays Problems
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Feb 10, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <style type='text/css'>/*<![CDATA[*/
+div.rbtoc1613190961881 {padding: 0px;}
+div.rbtoc1613190961881 ul {list-style: disc;margin-left: 0px;}
+div.rbtoc1613190961881 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style><div class='toc-macro rbtoc1613190961881'>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-AllUnique'>AllUnique</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-allUniqueWithSet'>allUniqueWithSet</a></li>
+<li><a href='#ArraysProblems-allUniqueWithArray'>allUniqueWithArray</a></li>
+<li><a href='#ArraysProblems-allUniqueWithStreams'>allUniqueWithStreams</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-AnswerQueries'>AnswerQueries</a></li>
+<li><a href='#ArraysProblems-BinarySearch'>BinarySearch</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-binarySearch'>binarySearch</a></li>
+<li><a href='#ArraysProblems-binarySearchWithStreams'>binarySearchWithStreams</a></li>
+<li><a href='#ArraysProblems-binarySearchWithInsertPos'>binarySearchWithInsertPos</a></li>
+<li><a href='#ArraysProblems-findMinInRotatedArray'>findMinInRotatedArray</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-SeealsoRecursion-BinarySearrch'>See also Recursion - BinarySearrch</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-CountSum'>CountSum</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-countTwoSum'>countTwoSum</a></li>
+<li><a href='#ArraysProblems-countTwoSumWithSet'>countTwoSumWithSet</a></li>
+<li><a href='#ArraysProblems-countFourSum'>countFourSum</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-DuplicatesAndMissing'>DuplicatesAndMissing</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-missingNumberInSortedConsecutiveArray'>missingNumberInSortedConsecutiveArray</a></li>
+<li><a href='#ArraysProblems-duplicateInRange_1_to_N_1'>duplicateInRange_1_to_N_1</a></li>
+<li><a href='#ArraysProblems-duplicateInRange_0_to_N_2'>duplicateInRange_0_to_N_2</a></li>
+<li><a href='#ArraysProblems-removeAllDuplicates'>removeAllDuplicates</a></li>
+<li><a href='#ArraysProblems-removeAllDuplicatesWithStreams'>removeAllDuplicatesWithStreams</a></li>
+<li><a href='#ArraysProblems-findLonelyNumber'>findLonelyNumber</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-EquilibriumPoint'>EquilibriumPoint</a></li>
+<li><a href='#ArraysProblems-Fibonacci'>Fibonacci</a></li>
+<li><a href='#ArraysProblems-FirstMissingPositive'>FirstMissingPositive</a></li>
+<li><a href='#ArraysProblems-InversionCount'>InversionCount</a></li>
+<li><a href='#ArraysProblems-KthElement'>KthElement</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-getSecondMax'>getSecondMax</a></li>
+<li><a href='#ArraysProblems-getSecondMaxWithStreams'>getSecondMaxWithStreams</a></li>
+<li><a href='#ArraysProblems-getKthLargestWithSort'>getKthLargestWithSort</a></li>
+<li><a href='#ArraysProblems-getKthLargestWithStreamsUsingSkip'>getKthLargestWithStreamsUsingSkip</a></li>
+<li><a href='#ArraysProblems-getKthLargestWithStreamsUsingLimit'>getKthLargestWithStreamsUsingLimit</a></li>
+<li><a href='#ArraysProblems-getKthSmallestWithStreamsUsingSkip'>getKthSmallestWithStreamsUsingSkip</a></li>
+<li><a href='#ArraysProblems-getKthSmallestWithStreamsUsingLimit'>getKthSmallestWithStreamsUsingLimit</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-Leaders'>Leaders</a></li>
+<li><a href='#ArraysProblems-MaxDifference'>MaxDifference</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-maxDifference'>maxDifference</a></li>
+<li><a href='#ArraysProblems-maxDifferenceWithStreams'>maxDifferenceWithStreams</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-MaximumIndex'>MaximumIndex</a></li>
+<li><a href='#ArraysProblems-MaximumScore'>MaximumScore</a></li>
+<li><a href='#ArraysProblems-MaxSumInArray'>MaxSumInArray</a></li>
+<li><a href='#ArraysProblems-MedianTwoSortedArrays'>MedianTwoSortedArrays</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-medianWithoutCreatingArrays'>medianWithoutCreatingArrays</a></li>
+<li><a href='#ArraysProblems-medianWithCreatingArrays'>medianWithCreatingArrays</a></li>
+<li><a href='#ArraysProblems-mergeSortedArrays'>mergeSortedArrays</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-MergeSorted'>MergeSorted</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-mergeSorted'>mergeSorted</a></li>
+<li><a href='#ArraysProblems-mergeSortedIntoA'>mergeSortedIntoA</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-MinimumPlatforms'>MinimumPlatforms</a></li>
+<li><a href='#ArraysProblems-RearrangeAlternatively'>RearrangeAlternatively</a></li>
+<li><a href='#ArraysProblems-RearrangeToMakePalindrome'>RearrangeToMakePalindrome</a></li>
+<li><a href='#ArraysProblems-RectangleArea'>RectangleArea</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-minRectangleArea'>minRectangleArea</a></li>
+<li><a href='#ArraysProblems-areaOfOverlappingRectangle'>areaOfOverlappingRectangle</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-RemoveSubarrayToMakeSorted'>RemoveSubarrayToMakeSorted</a></li>
+<li><a href='#ArraysProblems-Partition'>Partition</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-negativeBeforePositive'>negativeBeforePositive</a></li>
+<li><a href='#ArraysProblems-negativeBeforePositiveWithStreams'>negativeBeforePositiveWithStreams</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-PushZeros'>PushZeros</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-pushToBack'>pushToBack</a></li>
+<li><a href='#ArraysProblems-pushToBackWithStreams'>pushToBackWithStreams</a></li>
+<li><a href='#ArraysProblems-pushToFront'>pushToFront</a></li>
+<li><a href='#ArraysProblems-pushToFrontWithStreams'>pushToFrontWithStreams</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-RandomInts'>RandomInts</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-generateArrayRandomInts'>generateArrayRandomInts</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-RandomSubset'>RandomSubset</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-generateRandomSubset'>generateRandomSubset</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-RemoveValue'>RemoveValue</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-removeValue'>removeValue</a></li>
+<li><a href='#ArraysProblems-removeValueWithStreams'>removeValueWithStreams</a></li>
+<li><a href='#ArraysProblems-removeValueWithIterator'>removeValueWithIterator</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-ReverseAndRotate'>ReverseAndRotate</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-reverseInPlace'>reverseInPlace</a></li>
+<li><a href='#ArraysProblems-reverseWithStreams'>reverseWithStreams</a></li>
+<li><a href='#ArraysProblems-reverseWithArraysSetAll'>reverseWithArraysSetAll</a></li>
+<li><a href='#ArraysProblems-rotate'>rotate</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-ReverseToMakeEqual'>ReverseToMakeEqual</a></li>
+<li><a href='#ArraysProblems-SeatingArrangement'>SeatingArrangement</a></li>
+<li><a href='#ArraysProblems-ShuffleCards'>ShuffleCards</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-shuffle'>shuffle</a></li>
+<li><a href='#ArraysProblems-shuffleWithStreams'>shuffleWithStreams</a></li>
+</ul>
+</li>
+<li><a href='#ArraysProblems-SlowSums'>SlowSums</a></li>
+<li><a href='#ArraysProblems-SubArrays'>SubArrays</a>
+<ul class='toc-indentation'>
+<li><a href='#ArraysProblems-numberOfConsecutiveSubarraySums'>numberOfConsecutiveSubarraySums</a></li>
+<li><a href='#ArraysProblems-lengthShortestSubarrayExceedingTarget'>lengthShortestSubarrayExceedingTarget</a></li>
+</ul>
+</li>
+</ul>
+</div><h2 id="ArraysProblems-AllUnique">AllUnique</h2><h3 id="ArraysProblems-allUniqueWithSet"><code>allUniqueWithSet</code></h3><h3 id="ArraysProblems-allUniqueWithArray"><code>allUniqueWithArray</code></h3><h3 id="ArraysProblems-allUniqueWithStreams"><code>allUniqueWithStreams</code></h3><p /><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 480.0px;"/><col style="width: 480.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>AllUnique</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean allUniqueWithSet(int[] a)
+{
+    Set&lt;Integer&gt; checkSet = new HashSet&lt;&gt;();
+    for(int v : a)
+    {
+        if(checkSet.contains(v))
+        {
+            return false;
+        }
+        checkSet.add(v);
+    }
+    return true;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean allUniqueWithArray(int[] a)
+{
+    boolean[] check = new boolean[256];
+    for(int v : a)
+    {
+        if(check[v])
+        {
+            return false;
+        }
+        check[v] = true;
+    }
+    return true;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean allUniqueWithStreams(int[] a)
+{
+    Set&lt;Integer&gt; set = Arrays.stream(a)
+                            .boxed()
+                            .collect(Collectors.toSet());
+    return set.size() == a.length;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int[] a2 = {1, 2, 3, 4, 5, 1, 2, 8, 9};
+    boolean b1 = allUniqueWithSet(a1);
+    boolean b2 = allUniqueWithSet(a2);
+    boolean b3 = allUniqueWithStreams(a1);
+    boolean b4 = allUniqueWithStreams(a2);
+    boolean b5 = allUniqueWithArray(a1);
+    boolean b6 = allUniqueWithArray(a2);
+    return b1 &amp;&amp; b3 &amp;&amp; b5 &amp;&amp; !b2 &amp;&amp; !b4 &amp;&amp; !b6;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-AnswerQueries">AnswerQueries</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 1045.0px;"/><col style="width: 696.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>AnswerQueries</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Length-N array of booleans, initially all false.
+You will receive Q Set/GET queries.
+When you receive a SET query, the value of the query denotes an index in the array that is set to true.
+When you receive a GET query, you must return the smallest index that contains a true value that is
+greater than or equal to the given index, or -1 if no such index exists.
+Example:
+    Input: Size = 5, Querues: [[GET, 2], [SET, 1], [GET, 0], [GET, 2], [GET, 1]]
+    Output: [-1, 1, -1, 1]</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static class Query
+{
+    enum Type {GET, SET};
+    int index;
+    Type type;
+    Query(Type type, int index)
+    {
+        this.type = type;
+        this.index = index;
+    }
+}
+
+static int [] answerQueries(List&lt;Query&gt; queries, int size)
+{
+    boolean[] data = new boolean[size];
+    int resultLen = (int)queries.stream().filter(q -&gt; q.type == Query.Type.GET).count();
+    int[] result = new int[resultLen];
+    int pos = 0;
+    for(Query query : queries)
+    {
+        int queryIndex = query.index;
+        switch(query.type)
+        {
+            case GET:
+                if(data[queryIndex] == true)
+                {
+                    result[pos++] = queryIndex;
+                }
+                else
+                {
+                    int i;
+                    for(i = queryIndex + 1; i &lt; size; ++i)
+                    {
+                        if(data[i] == true)
+                        {
+                            break;
+                        }
+                    }
+                    if(i &lt; size)
+                    {
+                        result[pos++] = i;
+                    }
+                    else
+                    {
+                        result[pos++] = -1;
+                    }
+                }
+                break;
+            case SET:
+                data[queryIndex] = true;
+                break;
+        }
+    }
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    List&lt;Query&gt; queries = Arrays.asList(
+            new Query(Query.Type.GET, 2),
+            new Query(Query.Type.SET, 1),
+            new Query(Query.Type.GET, 0),
+            new Query(Query.Type.GET, 2),
+            new Query(Query.Type.GET, 1));
+    int[] result = answerQueries(queries, 5);
+    boolean check = Arrays.equals(new int[] {-1, 1, -1, 1}, result);
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-BinarySearch">BinarySearch</h2><h3 id="ArraysProblems-binarySearch"><code>binarySearch</code></h3><h3 id="ArraysProblems-binarySearchWithStreams"><code>binarySearchWithStreams</code></h3><h3 id="ArraysProblems-binarySearchWithInsertPos"><code>binarySearchWithInsertPos</code></h3><h3 id="ArraysProblems-findMinInRotatedArray"><code>findMinInRotatedArray</code></h3><h4 id="ArraysProblems-SeealsoRecursion-BinarySearrch">See also <a href="https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875528233/Recursion+Problems#BinarySearch" rel="nofollow">Recursion - BinarySearrch</a><br/></h4><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 877.0px;"/><col style="width: 864.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>BinarySearch</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int binarySearch(int[] a, int val)
+{
+    int left = 0, right = a.length - 1;
+    while(left &lt;= right)
+    {
+        int mid = (left + right) / 2;
+        if(a[mid] == val)
+        {
+            return mid;
+        }
+        else if(a[mid] &gt; val)
+        {
+            right = mid - 1;
+        }
+        else
+        {
+            left = mid + 1;
+        }
+    }
+    return -1;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int binarySearchWithStreams(int[] a, int val)
+{
+    List&lt;Integer&gt; list = Arrays.stream(a)
+                              .boxed()
+                              .collect(Collectors.toList());
+    return Collections.binarySearch(list, val);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int binarySearchWithInsertPos(int[] a, int val)
+{
+    int left = 0, right = a.length - 1;
+    while(left &lt;= right)
+    {
+        int mid = (left + right) / 2;
+        if(a[mid] == val)
+        {
+            return mid;
+        }
+        else if(a[mid] &gt; val)
+        {
+            right = mid - 1;
+        }
+        else
+        {
+            left = mid + 1;
+        }
+    }
+    return -left;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int findMinInRotatedArray(int... a)
+{
+    //  If the previously sorted array is rotated, a[0] &gt; a[a.length - 1]
+    //  If a[0] &lt; a[a.length - 1], the array is not rotated and a[0] is the min
+    int start = 0, end = a.length - 1;
+    while(start &lt;= end)
+    {
+        if(a[start] &lt;= a[end])
+        {
+            return a[start];
+        }
+        int mid = (start + end) / 2;
+        if(a[mid] &gt;= a[start])
+        {
+            start = mid + 1;
+        }
+        else
+        {
+            end = mid;
+        }
+    }
+    return -1;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+            // 0  1  2  3  4   5   6   7   8   9
+    int[] a = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19};
+    boolean check = binarySearch(a, 1) == 0 &amp;&amp;
+                    binarySearch(a, 15) == 7 &amp;&amp;
+                    binarySearch(a, 10) == -1;
+    if(!check)
+    {
+        return false;
+    }
+    check = binarySearchWithInsertPos(a, 10) == -5;
+    if(!check)
+    {
+        return false;
+    }
+    check = binarySearchWithStreams(a, 1) == 0 &amp;&amp;
+            binarySearchWithStreams(a, 15) == 7 &amp;&amp;
+            binarySearchWithStreams(a, 10) &lt; 0;
+    if(!check)
+    {
+        return false;
+    }
+    check = findMinInRotatedArray(3,4,5,6,1,2) == 1
+            &amp;&amp; findMinInRotatedArray(new int[]{4,1,2,3}) == 1
+            &amp;&amp; findMinInRotatedArray(new int[]{1,2,3,4,5,6}) == 1;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p>Notes:</p><ol><li><p>Use <code>left &lt;= right</code></p></li><li><p>Use <code>right = mid - 1;</code> and <code>left = mid + 1;</code></p></li></ol><h2 id="ArraysProblems-CountSum">CountSum</h2><h3 id="ArraysProblems-countTwoSum"><code>countTwoSum</code></h3><h3 id="ArraysProblems-countTwoSumWithSet"><code>countTwoSumWithSet</code></h3><h3 id="ArraysProblems-countFourSum"><code>countFourSum</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 877.0px;"/><col style="width: 864.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>CountSum</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int countTwoSum(int[] a, int target)
+{
+    Arrays.sort(a);
+    int count = 0;
+    int left = 0, right = a.length - 1;
+    while(left &lt; right)
+    {
+        int sum = a[left] + a[right];
+        if(sum == target)
+        {
+            count++;
+            left++;
+            right--;
+        }
+        else if(sum &lt; target)
+        {
+            left++;
+        }
+        else
+        {
+            right--;
+        }
+    }
+    return count;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int countTwoSumWithSet(int[] a, int target)
+{
+    // Note: Does not require sort
+    Set&lt;Integer&gt; set = new HashSet&lt;&gt;();
+    set.add(a[0]);
+    int sumCount = 0;
+    for(int i = 1; i &lt; a.length; ++i)
+    {
+        int val = target - a[i];
+        if(set.contains(val))
+        {
+            sumCount++;
+        }
+        set.add(a[i]);
+    }
+    return sumCount;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static Set&lt;List&lt;Integer&gt;&gt; countFourSum(int[] a, int target)
+{
+    Set&lt;List&lt;Integer&gt;&gt; result = new HashSet&lt;&gt;();
+    Arrays.sort(a);
+    for(int i = 0; i &lt; a.length - 2; ++i)
+    {
+        for(int j = i + 1; j &lt; a.length - 1; ++j)
+        {
+            int k = j + 1;
+            int l = a.length - 1;
+            while(k &lt; l)
+            {
+                int sum = a[i] + a[j] + a[k] + a[l];
+                if(sum == target)
+                {
+                    result.add(Arrays.asList(a[i], a[j], a[k],a[l]));
+                    k++;
+                    l--;
+                }
+                else if(sum &lt; target)
+                {
+                    k++;
+                }
+                else
+                {
+                    l--;
+                }
+            }
+        }
+    }
+    return result;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static List&lt;Integer&gt; threeSumClosestButLess(int[] a, int target)
+{
+    List&lt;Integer&gt; result = new ArrayList&lt;&gt;();
+    Arrays.sort(a);
+    int min = Integer.MAX_VALUE;
+    for(int i = 0; i &lt; a.length; ++i)
+    {
+        int j = i + 1;
+        int k = a.length - 1;
+        while (j &lt; k)
+        {
+            int sum = a[i] + a[j] + a[k];
+            int diff = target - sum;
+            if(diff == 0)
+            {
+                result = Arrays.asList(a[i], a[j], a[k]);
+                return result;
+            }
+            if(diff &gt; 0)
+            {
+                if(diff &lt; min)
+                {
+                    min = diff;
+                    result = Arrays.asList(a[i], a[j], a[k]);
+                }
+            }
+            if(sum &lt; target)
+            {
+                j++;
+            }
+            else
+            {
+                k--;
+            }
+        }
+    }
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] a1 = {9, 1, 8, 2, 7, 3, 6, 4, 5};
+    boolean check = countTwoSum(a1, 10) == 4;
+    if(!check)
+    {
+        return  false;
+    }
+    check = countTwoSumWithSet(a1, 10) == 4;
+    if(!check)
+    {
+        return  false;
+    }
+    int[] a2 = {1, 2, 3, 4, 3, 4, 5, -2};
+    Set&lt;List&lt;Integer&gt;&gt; result = countFourSum(a2, 10);
+    check = result.size() == 2 &amp;&amp; result.contains(Arrays.asList(-2, 3, 4, 5)) &amp;&amp;
+            result.contains(Arrays.asList(1, 2, 3, 4));
+    if(!check)
+    {
+        return  false;
+    }
+    check = Arrays.equals(new int[] {2, 6, 9},
+            threeSumClosestButLess(new int[] {4, 1, 8, 3, 6, 2, 9}, 17));
+    if(!check)
+    {
+        return  false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-DuplicatesAndMissing">DuplicatesAndMissing</h2><h3 id="ArraysProblems-missingNumberInSortedConsecutiveArray"><code>missingNumberInSortedConsecutiveArray</code></h3><h3 id="ArraysProblems-duplicateInRange_1_to_N_1"><code>duplicateInRange_1_to_N_1</code></h3><h3 id="ArraysProblems-duplicateInRange_0_to_N_2"><code>duplicateInRange_0_to_N_2</code></h3><h3 id="ArraysProblems-removeAllDuplicates"><code>removeAllDuplicates</code></h3><h3 id="ArraysProblems-removeAllDuplicatesWithStreams"><code>removeAllDuplicatesWithStreams</code></h3><h3 id="ArraysProblems-findLonelyNumber"><code>findLonelyNumber</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 877.0px;"/><col style="width: 864.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>DuplicatesAndMissing</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int missingNumberInSortedConsecutiveArray(int[] a)
+{
+    int startVal = a[0], endVal = a[a.length - 1];
+    int expectedSum = endVal * (endVal + 1) / 2 - startVal * (startVal - 1) / 2;
+    int actualSum = Arrays.stream(a).sum();
+    return expectedSum - actualSum;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int duplicateInRange_1_to_N_1(int[] a)
+{
+    // {4, 2, 1, 3, 2};
+    int n = a.length - 1;
+    int expectedSum = n * (n + 1) / 2;
+    int actualSum = Arrays.stream(a).sum();
+    return actualSum - expectedSum;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int duplicateInRange_0_to_N_2(int[] a)
+{
+    // {0, 2, 1, 3, 2}
+    int n = a.length - 2;
+    int expectedSum = n * (n + 1) / 2;
+    int actualSum = Arrays.stream(a).sum();
+    return actualSum - expectedSum;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] removeAllDuplicates(int[] a)
+{
+    if(a == null || a.length &lt; 2)
+    {
+        return a;
+    }
+    int pos = 1;
+    for(int i = 1; i &lt; a.length; ++i)
+    {
+        int j;
+        for(j = 0; j &lt; pos; ++j)
+        {
+            if(a[i] == a[j])
+            {
+                break;
+            }
+        }
+        if(j == pos)
+        {
+            a[pos++] = a[i];
+        }
+    }
+    return Arrays.copyOf(a, pos);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] removeAllDuplicatesWithStreams(int[] a)
+{
+    return Arrays.stream(a).distinct().toArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int findLonelyNumber(int[] a)
+{
+    int v = a[0];
+    for(int i = 1; i &lt; a.length; ++i)
+    {
+        v ^= a[i];
+    }
+    return v;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = missingNumberInSortedConsecutiveArray(new int[] {4, 5, 6, 8, 9, 10, 11, 12, 13, 14}) == 7;
+    if(!check)
+    {
+        return false;
+    }
+    check = duplicateInRange_1_to_N_1(new int[] {4, 2, 1, 3, 2}) == 2;
+    if(!check)
+    {
+        return false;
+    }
+    check = duplicateInRange_0_to_N_2(new int[] {0, 2, 1, 3, 2}) == 2;
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {0, 1, 2}, removeAllDuplicates(new int[] {0, 1, 0, 0, 0, 1, 1, 2, 0, 1}));
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(new int[] {0, 1, 2}, removeAllDuplicatesWithStreams(new int[] {0, 1, 0, 0, 0, 1, 1, 2, 0, 1}));
+    if(!check)
+    {
+        return false;
+    }
+    check = findLonelyNumber(new int[] {0, 1, 2, 3, 0, 1, 3}) == 2;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-EquilibriumPoint">EquilibriumPoint</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 872.0px;"/><col style="width: 869.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>EquilibriumPoint</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Equilibrium Point in an array is a position such that the
+sum of elements before it is equal to the sum of elements after it.
+Example:
+    Input:  {1,3,5,2,2}
+    Output: 2, (1+3) = (2+2)</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int equilibriumIndex(int[] a)
+{
+    if(a == null || a.length &lt; 3)
+    {
+        return -1;
+    }
+    int sum = Arrays.stream(a).sum();
+    int leftSum = a[0];
+    for(int i = 1; i &lt; a.length; ++i)
+    {
+        if((sum - a[i]) / 2 == leftSum)
+        {
+            return i;
+        }
+        leftSum += a[i];
+    }
+    return -1;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = equilibriumIndex(new int[] {1, 3, 5, 2, 2}) == 2;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-Fibonacci">Fibonacci</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 877.0px;"/><col style="width: 864.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Fibonacci</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int fibonacci(int n)
+{
+    // n: 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14
+    //f(n): 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
+    if(n &lt; 0)
+    {
+        return -1;
+    }
+    if(n &lt; 2)
+    {
+        return n;
+    }
+    int[] a = new int[n + 1];
+    a[0] = 0;
+    a[1] = 1;
+    for(int i = 2; i &lt;= n; ++i)
+    {
+        a[i] = a[i - 1] + a[i - 2];
+    }
+    return a[n];
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = fibonacci(14) == 377;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-FirstMissingPositive">FirstMissingPositive</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 858.0px;"/><col style="width: 883.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>FirstMissingPositive</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int firstSmallestMissingPositive(int[] a)
+{
+    int firstMin = 1;
+    Set&lt;Integer&gt; set = new HashSet&lt;&gt;();
+    for(int v : a)
+    {
+        set.add(v);
+        if(v == firstMin)
+        {
+            while(set.contains(firstMin))
+            {
+                firstMin++;
+            }
+        }
+    }
+    return firstMin;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = firstMissingPositive(new int[] {1, 3, 4, 2}) == 5;
+    if(!check)
+    {
+        return false;
+    }
+    check = firstMissingPositive(new int[] {4, 1, 3}) == 2;
+    if(!check)
+    {
+        return false;
+    }
+    check = firstMissingPositive(new int[] {7, 8, 9, 11, 12}) == 1;
+    if(!check)
+    {
+        return false;
+    }
+    check = firstMissingPositive(new int[] {2, 3, 1}) == 4;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-InversionCount">InversionCount</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 777.0px;"/><col style="width: 964.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>InversionCount</p></th><th class="confluenceTh"><p>Test</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Inversion count indicates how far (or close) the array is from being sorted.
+If array is already sorted then the inversion count is 0.
+If an array is sorted in the reverse order then the inversion count is the maximum
+Example:
+    Input:  {8, 4, 2, 1}
+    Output: 6, (8, 4), (4, 2), (8, 2), (8, 1), (4, 1), (2, 1)</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int inversionCount(int[] a)
+{
+    int count = 0;
+    for(int i = 0; i &lt; a.length - 1; ++i)
+    {
+        for(int j = i + 1; j &lt; a.length; ++j)
+        {
+            if(a[i] &gt; a[j])
+            {
+                count++;
+            }
+        }
+    }
+    return count;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = inversionCount(new int[] {8, 4, 2, 1}) == 6;
+    if(!check)
+    {
+        return false;
+    }
+    check = inversionCount(new int[] {3, 1, 2}) == 2;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-KthElement">KthElement</h2><h3 id="ArraysProblems-getSecondMax"><code>getSecondMax</code></h3><h3 id="ArraysProblems-getSecondMaxWithStreams"><code>getSecondMaxWithStreams</code></h3><h3 id="ArraysProblems-getKthLargestWithSort"><code>getKthLargestWithSort</code></h3><h3 id="ArraysProblems-getKthLargestWithStreamsUsingSkip"><code>getKthLargestWithStreamsUsingSkip</code></h3><h3 id="ArraysProblems-getKthLargestWithStreamsUsingLimit"><code>getKthLargestWithStreamsUsingLimit</code></h3><h3 id="ArraysProblems-getKthSmallestWithStreamsUsingSkip"><code>getKthSmallestWithStreamsUsingSkip</code></h3><h3 id="ArraysProblems-getKthSmallestWithStreamsUsingLimit"><code>getKthSmallestWithStreamsUsingLimit</code></h3><p /><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 877.0px;"/><col style="width: 864.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>KthElement</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int getSecondMax(int [] a)
+{
+    int max = Integer.MIN_VALUE, secondMax = Integer.MIN_VALUE;
+    for(int v : a)
+    {
+        if(v &gt; max)
+        {
+            secondMax = max;
+            max = v;
+        }
+        else if(v &gt; secondMax)
+        {
+            secondMax = v;
+        }
+    }
+    return secondMax;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int getSecondMaxWithStreams(int [] a)
+{
+    return Arrays.stream(a)
+            .boxed()
+            .sorted(Comparator.reverseOrder())
+            .mapToInt(x -&gt; x)
+            .limit(2)
+            .toArray()[1];
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int getKthLargestWithSort(int[] a, int k)
+{
+    Arrays.sort(a);
+    return a[a.length - k];
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int getKthLargestWithStreamsUsingSkip(int[] a, int k)
+{
+    return Arrays.stream(a).sorted().skip(a.length - k).toArray()[0];
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int getKthLargestWithStreamsUsingLimit(int[] a, int k)
+{
+    return Arrays.stream(a)
+            .boxed()
+            .sorted(Comparator.reverseOrder())
+            .mapToInt(x -&gt; x)
+            .limit(k)
+            .toArray()[k - 1];
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int getKthSmallestWithStreamsUsingSkip(int[] a, int k)
+{
+    return Arrays.stream(a).sorted().skip(k - 1).toArray()[0];
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int getKthSmallestWithStreamsUsingLimit(int[] a, int k)
+{
+    return Arrays.stream(a).sorted().limit(k).toArray()[k - 1];
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = getKthLargestWithSort(new int[] {9, 3, 2, 7, 5, 8, 1, 6, 4}, 1) == 9;
+    if(!check)
+    {
+        return false;
+    }
+    check = getKthLargestWithSort(new int[] {9, 3, 2, 7, 5, 8, 1, 6, 4}, 4) == 6;
+    if(!check)
+    {
+        return false;
+    }
+    check = getKthLargestWithStreamsUsingSkip(new int[] {9, 3, 2, 7, 5, 8, 1, 6, 4}, 1) == 9;
+    if(!check)
+    {
+        return false;
+    }
+    check = getKthLargestWithStreamsUsingSkip(new int[] {9, 3, 2, 7, 5, 8, 1, 6, 4}, 4) == 6;
+    if(!check)
+    {
+        return false;
+    }
+    check = getKthLargestWithStreamsUsingLimit(new int[] {9, 3, 2, 7, 5, 8, 1, 6, 4}, 4) == 6;
+    if(!check)
+    {
+        return false;
+    }
+    check = getKthSmallestWithStreamsUsingLimit(new int[] {9, 3, 2, 7, 5, 8, 1, 6, 4}, 4) == 4;
+    if(!check)
+    {
+        return false;
+    }
+    check = getKthSmallestWithStreamsUsingSkip(new int[] {9, 3, 2, 7, 5, 8, 1, 6, 4}, 4) == 4;
+    if(!check)
+    {
+        return false;
+    }
+    check = getSecondMax(new int[] {9, 8, 7, 6, 5, 4, 3, 2, 1}) == 8;
+    if(!check)
+    {
+        return false;
+    }
+    check = getSecondMaxWithStreams(new int[] {9, 8, 7, 6, 5, 4, 3, 2, 1}) == 8;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-Leaders">Leaders</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 872.0px;"/><col style="width: 869.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Leaders</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Given an array A of positive integers.
+Find the leaders in the array.
+An element of array is leader if it is greater than or equal
+to all the elements to its right side.
+The rightmost element is always a leader.
+Example:
+    Input: [16,17,4,3,5,2]
+    Output: 17 5 2</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] arrayLeaders(int[] a)
+{
+    if(a.length &lt; 2)
+    {
+        return new int[] {a[0]};
+    }
+    List&lt;Integer&gt; result = new ArrayList&lt;&gt;();
+    result.add(a[a.length - 1]);
+    int max = a[a.length - 1];
+    for(int i = a.length - 2; i &gt;= 0; --i)
+    {
+        if(a[i] &gt; max)
+        {
+            max = a[i];
+            result.add(max);
+        }
+    }
+    Collections.reverse(result);
+    return result.stream().mapToInt(x -&gt; x).toArray();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = Arrays.equals(
+            arrayLeaders(new int[] {6, 17, 4, 3, 5, 2}), new int[] {17, 5, 2});
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-MaxDifference">MaxDifference</h2><h3 id="ArraysProblems-maxDifference"><code>maxDifference</code></h3><h3 id="ArraysProblems-maxDifferenceWithStreams"><code>maxDifferenceWithStreams</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 918.0px;"/><col style="width: 823.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MaxDifference</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int maxDifference(int[] a)
+{
+    if (a == null || a.length == 0)
+    {
+        return -1;
+    }
+    int min = a[0], max = a[0];
+    for (int i = 1; i &lt; a.length; ++i)
+    {
+        min = Math.min(min, a[i]);
+        max = Math.max(max, a[i]);
+    }
+    return max - min;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int maxDifferenceWithStreams(int[] a)
+{
+    return Arrays.stream(a).max().getAsInt() - Arrays.stream(a).min().getAsInt();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] a = {6, -5, 0, 7, 25, 14, -4, 18};
+    return maxDifference(a) == 30 &amp;&amp; 
+           maxDifferenceWithStreams(a) == 30;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-MaximumIndex">MaximumIndex</h2><p>See <a href="https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875724810/DP+Problems#MaximumIndex" data-card-appearance="inline" rel="nofollow">https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875724810/DP+Problems#MaximumIndex</a> </p><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 872.0px;"/><col style="width: 869.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MaximumIndex</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Given an array A[] of N positive integers.
+The task is to find the maximum of j - i subjected
+to the constraint of A[i] &lt;= A[j].
+Example:
+    Input: {34, 8, 10, 3, 2, 80, 30, 33, 1}
+                 8      33
+    Output: 6, A[1] &lt; A[7]</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static int maxIndexDiff(int[] a)
+{
+    int len = a.length;
+    int diff = 0, maxDiff = len - 1;
+    for(int i = 0; i &lt; len; ++i)
+    {
+        for(int j = len - 1; j &gt; i; --j)
+        {
+            if(a[j] &gt; a[i])
+            {
+                diff = Math.max(diff, j - i);
+                if(diff &gt;= maxDiff)
+                {
+                    return diff;
+                }
+            }
+        }
+        maxDiff--;
+    }
+    return -1;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = maxIndexDiff(new int[] {34, 8, 10, 3, 2, 80, 30, 33, 1}) == 6;
+    if(!check)
+    {
+        return false;
+    }
+    check = maxIndexDiffDP(new int[] {34, 8, 10, 3, 2, 80, 30, 33, 1}) == 6;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-MaximumScore">MaximumScore</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 871.0px;"/><col style="width: 870.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MaximumScore</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">You are given two sorted arrays of distinct integers nums1 and nums2.
+A valid path is defined as follows:
+Choose array nums1 or nums2 to traverse (from index-0).
+Traverse the current array from left to right.
+If you are reading any value that is present in nums1 and nums2 you are allowed
+to change your path to the other array. 
+Score is defined as the sum of uniques values in a valid path.
+Example1:
+    Input: nums1 = [2,4,5,8,10], nums2 = [4,6,8,9]
+    Output: 30
+    [2,4,5,8,10], [2,4,5,8,9], [2,4,6,8,9], [2,4,6,8,10],  (starting from nums1)
+    [4,6,8,9], [4,5,8,10], [4,5,8,9], [4,6,8,10]    (starting from nums2)
+    The maximum is obtained with the path in green [2,4,6,8,10]
+Example1:
+    Input: nums1 = [1,3,5,7,9], nums2 = [3,5,100]
+    Output: 109
+    Maximum sum is obtained with the path [1,3,5,100].</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int maximumScore(int[] a, int [] b)
+{
+    int len1 = a.length, len2 = b.length;
+    int sum1 = 0, sum2 = 0, result = 0;
+    int i = 0, j = 0;
+    while(i &lt; len1 &amp;&amp; j &lt; len2)
+    {
+        if (a[i] &lt; b[j])
+        {
+            sum1 += a[i++];
+        }
+        else if (b[j] &lt; a[i])
+        {
+            sum2 += b[j++];
+        }
+        else
+        {
+            result += Math.max(sum1, sum2) + a[i];
+            i++;
+            j++;
+            sum1 = 0;
+            sum2 = 0;
+        }
+    }
+    while(i &lt; len1)
+    {
+        sum1 += a[i++];
+    }
+    while(j &lt; len2)
+    {
+        sum2 += b[j++];
+    }
+    return Math.max(sum1, sum2) + result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] a1 = {2, 4, 5, 8, 10};
+    int[] a2 = {4, 6, 8, 9};
+    boolean check = maximumScore(a1, a2) == 30;
+    if(!check)
+    {
+        return false;
+    }
+    a1 = new int[] {1, 3, 5, 7, 9};
+    a2 = new int[] {1,3,5,100};
+    check = maximumScore(a1, a2) == 109;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-MaxSumInArray">MaxSumInArray</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 808.0px;"/><col style="width: 933.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MaxSumInArray</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int maxSumInArray(int[] a)
+{
+    int sum = 0, maxSum = 0;
+    for(int v : a)
+    {
+        sum += v;
+        maxSum = Math.max(maxSum, sum);
+        if(sum &lt; 0)
+        {
+            sum = 0;
+        }
+    }
+    return maxSum;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] a = {-4, 3, 2, 7, -8, 11, 1, -3};
+    boolean check = maxSumInArray(a) == 16;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-MedianTwoSortedArrays">MedianTwoSortedArrays</h2><h3 id="ArraysProblems-medianWithoutCreatingArrays"><code>medianWithoutCreatingArrays</code></h3><h3 id="ArraysProblems-medianWithCreatingArrays"><code>medianWithCreatingArrays</code></h3><h3 id="ArraysProblems-mergeSortedArrays"><code>mergeSortedArrays</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 1054.0px;"/><col style="width: 687.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MedianTwoSortedArrays</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static double medianWithoutCreatingArrays(int [] a, int [] b)
+{
+    int len = a.length + b.length;
+    int mid = len / 2;
+    int aPos = 0, bPos = 0;
+    int val1 = 0, val2 = 0;
+    while(aPos + bPos &lt;= mid)
+    {
+        val1 = val2;
+        if(aPos &lt; a.length &amp;&amp; bPos &lt; b.length)
+        {
+            if(a[aPos] &lt; b[bPos])
+            {
+                val2 = a[aPos++];
+            }
+            else
+            {
+                val2 = b[bPos++];
+            }
+        }
+        else if(aPos &lt; a.length)
+        {
+            val2 = a[aPos++];
+        }
+        else
+        {
+            val2 = b[bPos++];
+        }
+    }
+    if(len % 2 == 1)
+    {
+        return val2;
+    }
+    else
+    {
+        return (val1 + val2) / 2.0;
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static double medianWithCreatingArrays(int [] a, int [] b)
+{
+    int[] c = MergeSortedArrays.mergeSortedArrays(a, b);
+    if(c.length % 2 == 1)
+    {
+        return c[c.length / 2];
+    }
+    else
+    {
+        int first = c[c.length / 2 - 1];
+        int second = c[c.length / 2];
+        return (first + second) / 2.0;
+    }
+}
+
+private static int[] mergeSortedArrays(int[] a, int[] b)
+{
+    int[] c = new int[a.length + b.length];
+    int aPos = 0, bPos = 0, cPos = 0;
+    while(aPos &lt; a.length &amp;&amp; bPos &lt; b.length)
+    {
+        if(a[aPos] &lt; b[bPos])
+        {
+            c[cPos++] = a[aPos++];
+        }
+        else
+        {
+            c[cPos++] = b[bPos++];
+        }
+    }
+    while(aPos &lt; a.length)
+    {
+        c[cPos++] = a[aPos++];
+    }
+    while(bPos &lt; b.length)
+    {
+        c[cPos++] = b[bPos++];
+    }
+    return c;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] a = {1, 3, 5, 7, 9};
+    int[] b = {2, 4, 6, 8};
+    int[] c = {1, 3, 5, 7};
+    boolean check = medianWithCreatingArrays(a, b) == 5.0;
+    if(!check)
+    {
+        return false;
+    }
+    check = medianWithoutCreatingArrays(a, b) == 5.0;
+    if(!check)
+    {
+        return false;
+    }
+    check = medianWithoutCreatingArrays(b, c) == 4.5;
+    if(!check)
+    {
+        return false;
+    }
+    check = medianWithoutCreatingArrays(c, b) == 4.5;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-MergeSorted">MergeSorted</h2><p>See also <a href="https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875429907/Heap+Problems#%5BhardBreak%5DMergeSortedArrays" data-card-appearance="inline" rel="nofollow">https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875429907/Heap+Problems#%5BhardBreak%5DMergeSortedArrays</a> </p><h3 id="ArraysProblems-mergeSorted"><code>mergeSorted</code></h3><h3 id="ArraysProblems-mergeSortedIntoA"><code>mergeSortedIntoA</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 874.0px;"/><col style="width: 867.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MergeSorted</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] mergeSorted(int[] a, int[] b)
+{
+    int[] result = new int[a.length + b.length];
+    mergeSorted(result, a, b);
+    return result;
+}
+private static void mergeSorted(int[] dst, int[] left, int[] right)
+{
+    int dstPos = 0, leftPos = 0, rightPos = 0;
+    while(leftPos &lt; left.length &amp;&amp; rightPos &lt; right.length)
+    {
+        if(left[leftPos] &lt; right[rightPos])
+        {
+            dst[dstPos++] = left[leftPos++];
+        }
+        else
+        {
+            dst[dstPos++] = right[rightPos++];
+        }
+    }
+    while(leftPos &lt; left.length)
+    {
+        dst[dstPos++] = left[leftPos++];
+    }
+    while(rightPos &lt; right.length)
+    {
+        dst[dstPos++] = right[rightPos++];
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void mergeSortedIntoA(int[] A, int a, int[] B, int b)
+{
+    int aPos = a - 1, bPos = b - 1;
+    for(int i = A.length - 1; i &gt;= 0; --i)
+    {
+        if(aPos &gt;= 0 &amp;&amp; (A[aPos] &gt; B[bPos] || bPos &lt; 0))
+        {
+            A[i] = A[aPos--];
+        }
+        else
+        {
+            A[i] = B[bPos--];
+        }
+    }
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int [] a = {2, 4, 6, 8};
+    int [] b = {1, 3, 5, 7, 9};
+    boolean check = Arrays.equals(mergeSorted(a, b), 
+            new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9});
+    if(!check)
+    {
+        return false;
+    }
+    int[] A = new int[] {2, 4, 6, 8, 0, 0, 0};
+    int[] B = new int[] {1, 3, 5};
+    mergeSortedIntoA(A, 4, B, 3);
+    check = Arrays.equals(A, new int[] {1, 2, 3, 4, 5, 6, 8});
+    if(!check)
+    {
+        return false;
+    }
+    A = new int[] {2, 0, 0, 0};
+    B = new int[] {1, 3, 5};
+    mergeSortedIntoA(A, 1, B, 3);
+    check = Arrays.equals(A, new int[] {1, 2, 3, 5});
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-MinimumPlatforms">MinimumPlatforms</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 872.0px;"/><col style="width: 869.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MinimumPlatforms</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Given arrival and departure times of all trains that reach a railway station.
+Find the minimum number of platforms required for the railway station
+so that no train is kept waiting.
+Input:
+    arr[] = [0900 0940 0950 1100 1500 1800]
+    dep[] = [0910 1200 1120 1130 1900 2000]
+Output: 3
+Time      Event Type     Total Platforms Needed
+9:00       Arrival                  1
+9:10       Departure                0
+9:40       Arrival                  1
+9:50       Arrival                  2
+11:00      Arrival                  3
+11:20      Departure                2
+11:30      Departure                1
+12:00      Departure                0
+15:00      Arrival                  1
+18:00      Arrival                  2
+19:00      Departure                1
+20:00      Departure                0</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int countMinimumPlatforms(int[] arr, int [] dep)
+{
+    if(arr.length != dep.length)
+    {
+        return -1;
+    }
+    int len = arr.length;
+    Arrays.sort(arr);
+    Arrays.sort(dep);
+    int arrPos = 1, depPos = 0, platsNeeded = 1, result = 1;
+    while(arrPos &lt; len &amp;&amp; depPos &lt; len)
+    {
+        if(arr[arrPos] &lt;= dep[depPos])
+        {
+            platsNeeded++;
+            arrPos++;
+        }
+        else if(arr[arrPos] &gt; dep[depPos])
+        {
+            platsNeeded--;
+            depPos++;
+        }
+        if(platsNeeded &gt; result)
+        {
+            result = platsNeeded;
+        }
+    }
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] arrivals =   {900, 940,  950,  1100, 1500, 1800};
+    int[] departures = {910, 1200, 1120, 1130, 1900, 2000};
+    boolean check = countMinimumPlatforms(arrivals, departures) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-RearrangeAlternatively">RearrangeAlternatively</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 872.0px;"/><col style="width: 869.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>RearrangeAlternatively</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Given a sorted array of positive integers.
+Rearrange the array elements alternatively
+i.e first element should be max value, second should be min value,
+third should be second max, fourth should be second min and so on.
+Example:
+    Input:  {1,2,3,4,5,6}
+    Output: {6,1,5,2,4,3}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] rearrangeAlternatively(int[] a)
+{
+    int len = a.length;
+    int[] result = new int[len];
+    int left = 0, right = len - 1;
+    for(int i = 0; i &lt; len - 1; i += 2)
+    {
+        result[i] = a[right];
+        result[i + 1] = a[left];
+        right--; left++;
+    }
+    if(len % 2 == 1)
+    {
+        result[len - 1] = a[len / 2];
+    }
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = Arrays.equals(rearrangeAlternatively(new int [] {1, 2, 3, 4, 5, 6}),
+            new int[] {6, 1, 5, 2, 4, 3});
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(rearrangeAlternatively(new int [] {1, 2, 3, 4, 5, 6, 7}),
+            new int[] {7, 1, 6, 2, 5, 3, 4});
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-RearrangeToMakePalindrome">RearrangeToMakePalindrome</h2><p><a href="https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875560984/Strings+Problems#LongestAwesomeString" data-card-appearance="inline" rel="nofollow">https://nickguner.atlassian.net/wiki/spaces/DEV/pages/875560984/Strings+Problems#LongestAwesomeString</a> </p><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 1003.0px;"/><col style="width: 738.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>RearrangeToMakePalindrome</p></th><th class="confluenceTh"><p>Test</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean canRearrangeToMakePalindrome(char[] a)
+{
+    String s = new String(a);
+    Map&lt;Character, Long&gt; map = s.chars()
+            .mapToObj(c -&gt; (char)c)
+            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    if(a.length % 2 == 1)   // odd case is more difficult
+    {
+        //  Consider &quot;abcba&quot; and &quot;abbba&quot; and &quot;bbbbb&quot;
+        if (map.size() == 1) // all same chars
+        {
+            return true;
+        }
+        //  Partition map into even and odd counts
+        Map&lt;Boolean, List&lt;Map.Entry&lt;Character, Long&gt;&gt;&gt; partitionedMap =
+                map.entrySet().stream().collect(Collectors.partitioningBy(x -&gt; x.getValue() % 2 == 0));
+        List&lt;Map.Entry&lt;Character, Long&gt;&gt; oddList = partitionedMap.get(false);
+        if (oddList.size() == 1)
+        {
+            char key = oddList.get(0).getKey();
+            map.remove(key);
+        }
+    }
+    return map.entrySet().stream().allMatch(e -&gt; e.getValue() % 2 == 0);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+     boolean check = canRearrangeToMakePalindrome(new char[] {&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;}) == false &amp;&amp;
+             canRearrangeToMakePalindrome(new char[] {&#39;a&#39;, &#39;a&#39;, &#39;b&#39;, &#39;b&#39;}) == true &amp;&amp;
+             canRearrangeToMakePalindrome(new char[] {&#39;a&#39;, &#39;a&#39;, &#39;b&#39;, &#39;b&#39;, &#39;c&#39;}) == true &amp;&amp;
+             canRearrangeToMakePalindrome(new char[] {&#39;a&#39;, &#39;a&#39;, &#39;b&#39;, &#39;b&#39;, &#39;b&#39;}) == true &amp;&amp;
+             canRearrangeToMakePalindrome(new char[] {&#39;a&#39;, &#39;c&#39;, &#39;b&#39;, &#39;a&#39;, &#39;c&#39;}) == true;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-RectangleArea">RectangleArea</h2><h3 id="ArraysProblems-minRectangleArea"><code>minRectangleArea</code></h3><h3 id="ArraysProblems-areaOfOverlappingRectangle"><code>areaOfOverlappingRectangle</code></h3><p /><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 1069.0px;"/><col style="width: 672.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>MinAreaRectangle</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Given a set of points in the x and y axes,
+determine the minimum area of a rectangle formed from these points,
+with sides parallel to the x and y axes.
+If there is a rectangle, there should be 2 points for the diagonal (x1, y1) and (x2, y2).
+There should also be two other points corresponding to the two diagonal points: (x1, y2) and (x2, y1).
+Filter out entries that do not have at least 2 y coordinates</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int minRectangleArea(int[][] points)
+{
+    Map&lt;Integer, Set&lt;Integer&gt;&gt; map = Arrays.stream(points).collect(
+            HashMap::new,
+            (m, item) -&gt; m.computeIfAbsent(item[0], a -&gt; new HashSet&lt;&gt;()).add(item[1]),
+            HashMap::putAll);
+    map = map.entrySet().stream()
+            .filter(e -&gt; e.getValue().size() &gt; 1)
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    int minArea = Integer.MAX_VALUE;
+    for(int i = 0; i &lt; points.length - 1; ++i)
+    {
+        for(int j = i + 1; j &lt; points.length; j++)
+        {
+            int x1 = points[i][0];
+            int y1 = points[i][1];
+            int x2 = points[j][0];
+            int y2 = points[j][1];
+            if(x1 != x2 &amp;&amp; y1 != y2 &amp;&amp; map.containsKey(x1) &amp;&amp; map.containsKey(x2))
+            {
+                if(map.get(x1).contains(y1) &amp;&amp; map.get(x1).contains(y2) &amp;&amp;
+                        map.get(x2).contains(y1) &amp;&amp; map.get(x2).contains(y2))
+                {
+                    int area = Math.abs((x1 - x2) * (y1 - y2));
+                    minArea = Math.min(minArea, area);
+                }
+            }
+        }
+    }
+    return minArea;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int areaOfOverlappingRectangle(int[][] r1, int[][] r2)
+{
+    int[] xInterval1 = new int[] {r1[0][0], r1[1][0]};
+    int[] yInterval1 = new int[] {r1[0][1], r1[1][1]};
+    int[] xInterval2 = new int[] {r2[0][0], r2[1][0]};
+    int[] yInterval2 = new int[] {r2[0][1], r2[1][1]};
+    int w = xInterval2[0] &gt; xInterval1[0] ? xInterval1[1] - xInterval2[0] : xInterval2[1] - xInterval1[0];
+    int h = yInterval2[1] &gt; yInterval1[0] ? yInterval1[1] - yInterval2[0] : yInterval2[1] - yInterval1[0];
+    if(w &gt; 0 &amp;&amp; h &gt; 0)
+    {
+        return w * h;
+    }
+    return 0;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[][] points = {
+            {2, 1},
+            {2, 3},
+            {3, 5},
+            {5, 1},
+            {5, 3},
+            {7, 2},
+            {8, 5},
+            {2, 4},
+            {2, 5},
+            {5, 4},
+            {5, 5},
+    };
+    boolean check = minRectangleArea(points) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    int[][] r1 = {
+            {1, 1},
+            {4, 4},
+    };
+    int [][] r2 = {
+            {3, 3},
+            {6, 5},
+    };
+    check = areaOfOverlappingRectangle(r1, r2) == 1;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-RemoveSubarrayToMakeSorted">RemoveSubarrayToMakeSorted</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 917.0px;"/><col style="width: 824.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>RemoveSubarrayToMakeSorted</p></th><th class="confluenceTh"><p>Test</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Given an integer array arr, remove a subarray  such that the remaining elements are non-decreasing.
+Return the length of the shortest subarray to remove.
+Example 1:
+    Input: [1,2,3,10,4,2,3,5]
+    Output: 3
+    The shortest subarray we can remove is [10,4,2] of length 3. 
+    The remaining elements after that will be [1,2,3,3,5] which are sorted.
+Example 2:
+    Input: arr = [5,4,3,2,1]
+    Output: 4
+    Since the array is strictly decreasing, we can only keep a single element.
+    Therefore we need to remove a subarray of length 4, either [5,4,3,2] or [4,3,2,1]
+Example 3:
+    Input: [1,2,3]
+    Output: 0
+    The array is already non-decreasing. We do not need to remove any elements.</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int lengthOfSubArray(int[] a)
+{
+    if(a.length == 1)
+    {
+        return 0;
+    }
+    int len = a.length;
+    int left = 0, right = len - 1;
+    while(left &lt; right &amp;&amp; a[left + 1] &gt;= a[left])
+    {
+        left++;
+    }
+    while(right &gt;= left &amp;&amp; a[right - 1] &lt;= a[right])
+    {
+        right--;
+    }
+    if(left &gt; right)
+    {
+        return 0;
+    }
+    int result = Math.min(len - left - 1, right);
+    int i = 0;
+    while(i &lt;= left &amp;&amp; right &lt; len)
+    {
+        if(a[right] &gt;= a[i])
+        {
+            result = Math.min(result, right - i - 1);
+            i++;
+        }
+        else
+        {
+            right++;
+        }
+    }
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check =
+            lengthOfSubArray(new int[] {1, 2, 3, 10, 4, 2, 3, 5}) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    check =
+            lengthOfSubArray(new int[] {1, 2, 3, 4, 1, 2, 3, 3}) == 3;
+    if(!check)
+    {
+        return false;
+    }
+    check =
+            lengthOfSubArray(new int[] {1, 1, 1, 2, 2, 1, 1, 1}) == 2;
+    if(!check)
+    {
+        return false;
+    }
+    check = lengthOfSubArray(new int[] {5, 4, 3, 2, 1}) == 4;
+    if(!check)
+    {
+        return false;
+    }
+    check = lengthOfSubArray(new int[] {1, 2, 3}) == 0;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-Partition">Partition</h2><h3 id="ArraysProblems-negativeBeforePositive"><code>negativeBeforePositive</code></h3><h3 id="ArraysProblems-negativeBeforePositiveWithStreams"><code>negativeBeforePositiveWithStreams</code></h3><p /><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 877.0px;"/><col style="width: 864.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Partition</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void negativeBeforePositive(int[] a)
+{
+    int start = 0, end = a.length - 1;
+    while(start &lt; end)
+    {
+        while(a[start] &lt; 0) start++;
+        while(a[end] &gt; 0) end--;
+        if(start &lt; end)
+        {
+            int temp = a[start];
+            a[start++] = a[end];
+            a[end--] = temp;
+        }
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] negativeBeforePositiveWithStreams(int[] a)
+{
+    Map&lt;Boolean, List&lt;Integer&gt;&gt; map = Arrays.stream(a)
+                                      .boxed()
+                                      .collect(Collectors.partitioningBy(x -&gt; x &gt; 0));
+    int[] pos = map.get(true).stream().mapToInt(i -&gt; i).toArray();
+    int[] neg = map.get(false).stream().mapToInt(i -&gt; i).toArray();
+    int[] result = new int[a.length];
+    System.arraycopy(neg, 0, result, 0, neg.length);
+    System.arraycopy(pos, 0, result, neg.length, pos.length);
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] a = {4, 5, -1, -2, 7, -5, -9};
+    negativeBeforePositive(a);
+    int[] b = negativeBeforePositiveWithStreams(new int[] {4, 5, -1, -2, 7, -5, -9});
+    return Arrays.equals(a, new int[] {-9, -5, -1, -2, 7, 5, 4}) &amp;&amp;
+            Arrays.equals(b, new int[] {-1, -2, -5, -9, 4, 5, 7});
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-PushZeros">PushZeros</h2><h3 id="ArraysProblems-pushToBack"><code>pushToBack</code></h3><h3 id="ArraysProblems-pushToBackWithStreams"><code>pushToBackWithStreams</code></h3><h3 id="ArraysProblems-pushToFront"><code>pushToFront</code></h3><h3 id="ArraysProblems-pushToFrontWithStreams"><code>pushToFrontWithStreams</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 877.0px;"/><col style="width: 864.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>PushZeros</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void pushToBack(int[] a)
+{
+    int pos = 0;
+    for(int v : a)
+    {
+        if(v != 0)
+        {
+            a[pos++] = v;
+        }
+    }
+    if(pos &lt; a.length)
+    {
+        Arrays.fill(a, pos, a.length, 0);
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] pushToBackWithStreams(int[] a)
+{
+    int[] nonZeros = Arrays.stream(a).filter(x -&gt; x != 0).toArray();
+    int[] result = new int[a.length];
+    System.arraycopy(nonZeros, 0, result, 0, nonZeros.length);
+    return result;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void pushToFront(int[] a)
+{
+    int pos = a.length - 1;
+    for(int i = a.length - 1; i &gt;= 0; --i)
+    {
+        if(a[i] != 0)
+        {
+            a[pos--] = a[i];
+        }
+    }
+    while(pos &gt;= 0)
+    {
+        a[pos--] = 0;
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] pushToFrontWithStreams(int[] a)
+{
+    int [] nonZeros = Arrays.stream(a).filter(i -&gt; i != 0).toArray();
+    int numZeros = (int)Arrays.stream(a).filter(i -&gt; i == 0).count();
+    int[] result = new int[a.length];
+    Arrays.fill(result, 0, numZeros, 0);
+    System.arraycopy(nonZeros, 0, result, numZeros, nonZeros.length);
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] a = {1, 2, 0, 3, 0, 4, 5, 0, 6};
+    pushToBack(a);
+    boolean check = Arrays.equals(a, new int[] {1, 2, 3, 4, 5, 6, 0, 0, 0});
+    if(!check)
+    {
+        return false;
+    }
+    a = new int[]{1, 2, 0, 3, 0, 4, 5, 0, 6};
+    pushToFront(a);
+    check = Arrays.equals(a, new int[] {0, 0, 0, 1, 2, 3, 4, 5, 6});
+    if(!check)
+    {
+        return false;
+    }
+    a = new int[]{1, 2, 0, 3, 0, 4, 5, 0, 6};
+    a = pushToBackWithStreams(a);
+    check = Arrays.equals(a, new int[] {1, 2, 3, 4, 5, 6, 0, 0, 0});
+    if(!check)
+    {
+        return false;
+    }
+    a = new int[]{1, 2, 0, 3, 0, 4, 5, 0, 6};
+    a = pushToFrontWithStreams(a);
+    return Arrays.equals(a, new int[] {0, 0, 0, 1, 2, 3, 4, 5, 6});
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-RandomInts">RandomInts</h2><h3 id="ArraysProblems-generateArrayRandomInts"><code>generateArrayRandomInts</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 877.0px;"/><col style="width: 864.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>RandomInts</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] generateArrayRandomInts(int size, int from, int to)
+{
+    return new Random().ints(size, from, to).toArray();
+}</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] random = generateRandomInts(5, 3, 9);
+    boolean check = random.length == 5;
+    if(!check)
+    {
+        return false;
+    }
+    check = random[0] &gt;= 3 &amp;&amp; random[0] &lt;= 9 &amp;&amp; random[1] &gt;= 3 &amp;&amp; 
+            random[1] &lt;= 9 &amp;&amp; random[2] &gt;= 3 &amp;&amp; random[2] &lt;= 9;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-RandomSubset">RandomSubset</h2><h3 id="ArraysProblems-generateRandomSubset"><code>generateRandomSubset</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 877.0px;"/><col style="width: 864.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>RandomSubset</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] generateRandomSubset(int[] a, int m)
+{
+    int [] result = new int[m];
+    for(int i = 0; i &lt; m; ++i)
+    {
+        int randomIdx = randomRange(i, a.length);
+        result[i] = a[randomIdx];
+        a[randomIdx] = a[i];
+    }
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void main(String... args)
+{
+    int[] cards = IntStream.rangeClosed(1, 52).toArray();
+    cards = RandomSubset.generateRandomSubset(cards, 6);
+    System.out.println(Arrays.toString(cards));
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-RemoveValue">RemoveValue</h2><h3 id="ArraysProblems-removeValue"><code>removeValue</code></h3><h3 id="ArraysProblems-removeValueWithStreams"><code>removeValueWithStreams</code></h3><h3 id="ArraysProblems-removeValueWithIterator"><code>removeValueWithIterator</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 877.0px;"/><col style="width: 864.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>RemoveValue</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] removeValue(int[] a, int val)
+{
+    int pos = 0;
+    for(int v : a)
+    {
+        if(v != val)
+        {
+            a[pos++] = v;
+        }
+    }
+    return Arrays.copyOf(a, pos);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] removeValueWithStreams(int[] a, int val)
+{
+    return Arrays.stream(a).filter(x -&gt; x != val).toArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] removeValueWithIterator(int[] a, int val)
+{
+    List&lt;Integer&gt; list = Arrays.stream(a).boxed().collect(Collectors.toList());
+    Iterator&lt;Integer&gt; iter = list.iterator();
+    while(iter.hasNext())
+    {
+        if(iter.next() == val)
+        {
+            iter.remove();
+        }
+    }
+    return list.stream().mapToInt(i -&gt; i).toArray();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] a = removeValue(new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1}, 5);
+    int[] b = removeValueWithStreams(new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1}, 5);
+    int[] c = removeValueWithIterator(new int[]{9, 8, 7, 6, 5, 4, 3, 2, 1}, 5);
+    return Arrays.equals(a, new int[] {9, 8, 7, 6, 4, 3, 2, 1}) &amp;&amp;
+            Arrays.equals(b, new int[] {9, 8, 7, 6, 4, 3, 2, 1}) &amp;&amp;
+            Arrays.equals(c, new int[] {9, 8, 7, 6, 4, 3, 2, 1});
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-ReverseAndRotate">ReverseAndRotate</h2><h3 id="ArraysProblems-reverseInPlace"><code>reverseInPlace</code></h3><h3 id="ArraysProblems-reverseWithStreams"><code>reverseWithStreams</code></h3><h3 id="ArraysProblems-reverseWithArraysSetAll"><code>reverseWithArraysSetAll</code></h3><h3 id="ArraysProblems-rotate"><code>rotate</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 877.0px;"/><col style="width: 864.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Reverse</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">private static void reverse(int[] a, int start, int end)
+{
+    while(start &lt; end)
+    {
+        int temp = a[start];
+        a[start++] = a[end];
+        a[end--] = temp;
+    }
+}
+static void reverseInPlace(int[] a)
+{
+    reverse(a, 0, a.length - 1);
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] reverseWithStreams(int... a)
+{
+    List&lt;Integer&gt; list = Arrays.stream(a).boxed().collect(Collectors.toList());
+    Collections.reverse(list);
+    return list.stream().mapToInt(x -&gt; x).toArray();
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] reverseWithArraysSetAll(int... a)
+{
+    int[] reversed = new int[a.length];
+    Arrays.setAll(reversed, i -&gt; a[a.length - 1 - i]);
+    return reversed;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void rotate(int[] a, int m)
+{
+    if(a == null || a.length &lt; m)
+    {
+        return;
+    }
+    reverse(a, 0, m - 1);
+    reverse(a, m, a.length - 1);
+    reverse(a, 0, a.length - 1);
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    int[] a = {1, 2, 3, 4, 5, 6};
+    reverseInPlace(a);
+    boolean check = Arrays.equals(new int[] {6, 5, 4, 3, 2, 1}, a);
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(reverseWithStreams(1, 2, 3, 4, 5, 6),
+            new int[] {6, 5, 4, 3 , 2, 1});
+    if(!check)
+    {
+        return false;
+    }
+    check = Arrays.equals(reverseWithArraysSetAll(1, 2, 3, 4, 5, 6),
+            new int[] {6, 5, 4, 3 , 2, 1});
+    if(!check)
+    {
+        return false;
+    }
+    int[] a1 = {1, 2, 3, 4, 5, 6, 7};
+    rotate(a1, 3);
+    check = Arrays.equals(a1, new int[] {4, 5, 6, 7, 1, 2, 3});
+    if(!check)
+    {
+        return false;
+    }
+    
+    return true;
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-ReverseToMakeEqual">ReverseToMakeEqual</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 982.0px;"/><col style="width: 759.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ReverseToMakeEqual</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Given two arrays A and B of length N, determine if there is a way to make A equal to B by reversing any subarrays
+from array B any number of times.
+    A = [1, 2, 3, 4]
+    B = [1, 4, 3, 2]
+    output = true
+After reversing the subarray of B from indices 1 to 3, array B will equal array A.</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean areTheyEqual(int[] a1, int[] a2)
+{
+    if(a1.length != a2.length)
+    {
+        return false;
+    }
+    for(int i = 0; i &lt; a1.length - 1; ++i)
+    {
+        for(int j = i + 1; j &lt; a1.length; ++j)
+        {
+            int[] temp = reverse(a1, i, j);
+            if(Arrays.equals(a2, temp))
+            {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+private static int[] reverse(int[] a, int from, int to)
+{
+    int[] result = new int[a.length];
+    System.arraycopy(a, 0, result, 0, result.length);
+    while(from &lt; to)
+    {
+        int temp = result[from];
+        result[from++] = result[to];
+        result[to--] = temp;
+    }
+    return result;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = areTheyEqual(new int[] {1, 2, 3, 4}, new int[] {1, 4, 3, 2});
+    if(!check)
+    {
+        return false;
+    }
+    check = areTheyEqual(new int[] {1, 2, 3, 4}, new int[] {4, 1, 3, 2});
+    if(check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-SeatingArrangement">SeatingArrangement</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 785.0px;"/><col style="width: 956.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>SeatingArrangement</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><p /><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">There are n guests attending a dinner party, numbered from 1 to n. 
+The ith guest has a height of arr[i-1] inches.
+The guests will sit down at a circular table which has n seats,
+numbered from 1 to n in clockwise order around the table.
+As the host, you will choose how to arrange the guests, one per seat.
+Note that there are n! possible permutations of seat assignments.
+Once the guests have sat down, the awkwardness between a pair of guests sitting in adjacent seats is defined
+as the absolute difference between their two heights. Note that, because the table is circular,
+seats 1 and n are considered to be adjacent to one another, and that there are therefore n pairs of adjacent guests.
+The overall awkwardness of the seating arrangement is then defined as the maximum awkwardness of any pair of adjacent guests.
+Determine the minimum possible overall awkwardness of any seating arrangement.
+Example:
+  n = 4
+  arr = [5, 10, 6, 8]
+  output = 4
+If the guests sit down in the permutation [3, 1, 4, 2] in clockwise order around the table
+(having heights [6, 5, 8, 10], in that order), then the four awkwardnesses between pairs of adjacent guests will be
+|6-5| = 1, |5-8| = 3, |8-10| = 2, and |10-6| = 4, yielding an overall awkwardness of 4.
+It&#39;s impossible to achieve a smaller overall awkwardness.</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int minOverallAwkwardness(int[] a)
+{
+    Arrays.sort(a);
+    int[] table = new int[a.length];
+    int left = 0, right = a.length - 1;
+    for(int i = a.length - 1; i &gt;= 0; --i)
+    {
+        if(i % 2 == 0)
+        {
+            table[left++] = a[i];
+        }
+        else
+        {
+            table[right--] = a[i];
+        }
+    }
+    return maxAwkwardness(table);
+}
+private static int maxAwkwardness(int[] a)
+{
+    int max = Integer.MIN_VALUE;
+    for(int i = 1; i &lt; a.length; ++i)
+    {
+        max = Math.max(max, Math.abs(a[i] - a[i - 1]));
+    }
+    max = Math.max(max, Math.abs(a[0] - a[a.length - 1]));
+    return max;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = minOverallAwkwardness(new int[] {5, 10, 6, 8}) == 4;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-ShuffleCards">ShuffleCards</h2><h3 id="ArraysProblems-shuffle"><code>shuffle</code></h3><h3 id="ArraysProblems-shuffleWithStreams"><code>shuffleWithStreams</code></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 877.0px;"/><col style="width: 864.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>ShuffleCards</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static void shuffle(int[] cards)
+{
+    int len = cards.length;
+    for(int i = 0; i &lt; len; ++i)
+    {
+        int randomIdx = randomRange(i, len);
+        int temp = cards[i];
+        cards[i] = cards[randomIdx];
+        cards[randomIdx] = temp;
+    }
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int[] shuffleWithStreams(int[] cards)
+{
+    List&lt;Integer&gt; list = Arrays.stream(cards)
+                           .boxed()
+                           .collect(Collectors.toList());
+    Collections.shuffle(list);
+    return list.stream().mapToInt(a -&gt; a).toArray();
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public static void main(String... args)
+{
+    int[] cards = IntStream.rangeClosed(1, 10).toArray();
+    ShuffleCards.shuffle(cards);
+    System.out.println(Arrays.toString(cards));
+    cards = IntStream.rangeClosed(1, 10).toArray();
+    ShuffleCards.shuffleWithStreams(cards);
+    System.out.println(Arrays.toString(cards));
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h2 id="ArraysProblems-SlowSums">SlowSums</h2><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 886.0px;"/><col style="width: 855.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>SlowSums</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><p /><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Repeat the following operation until we&#39;re left with only a single number:
+Choose any two numbers and replace them with their sum.
+The penalty with each operation is equal to the value of the new number.
+For example, given the list [1, 2, 3, 4, 5], we could choose 2 and 3 for the first operation,
+which would transform the list into [1, 5, 4, 5] and incur a penalty of 5.
+The goal in this problem is to find the worst possible penalty for a given input.
+    Example:
+      arr = [4, 2, 1, 3]
+      output = 26
+First, add 4 + 3 for a penalty of 7. Now the array is [7, 2, 1]
+Add 7 + 2 for a penalty of 9. Now the array is [9, 1]
+Add 9 + 1 for a penalty of 10. The penalties sum to 26.</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int getTotalTime(int[] a)
+{
+    Arrays.sort(a);
+    int sum = a[a.length - 1], penalty = 0;
+    for(int i = a.length - 2; i &gt;= 0; --i)
+    {
+        sum += a[i];
+        penalty += sum;
+    }
+    return penalty;
+}</pre>
+</div></div></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = getTotalTime(new int[] {4, 2, 1, 3}) == 26;
+    if(!check)
+    {
+        return false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div><h2 id="ArraysProblems-SubArrays">SubArrays</h2><h3 id="ArraysProblems-numberOfConsecutiveSubarraySums"><code>numberOfConsecutiveSubarraySums</code></h3><h3 id="ArraysProblems-lengthShortestSubarrayExceedingTarget"><code>lengthShortestSubarrayExceedingTarget</code><br/></h3><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 742.0px;"/><col style="width: 999.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>SubArrays</p></th><th class="confluenceTh"><p>Tests</p></th></tr><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Count number of sub-arrays that add to a given sum
+Input Array = {33, 9, 4, 20, 3, 10, 5}, target = 33
+3 subarrays [33], [9, 4, 20], [20, 3, 10] add up to 33</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int numberOfConsecutiveSubarraySums(int[] a, int target)
+{
+    int count = 0;
+    for(int i = 0; i &lt; a.length; ++i)
+    {
+        int sum = a[i];
+        for(int j = i + 1; j &lt; a.length; ++j)
+        {
+            if(sum &gt;= target)
+            {
+                if(sum == target)
+                {
+                    count++;
+                }
+                break;
+            }
+            sum += a[j];
+        }
+    }
+    return count;
+}</pre>
+</div></div><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static int lengthShortestSubarrayExceedingTarget(int[] a, int target)
+{
+    //  {1, 4, 45, 6, 0, 19}, 51 -&gt; Shortest subarray size = 3 {4, 45, 6}
+    int min = Integer.MAX_VALUE;
+    for(int i = 0; i &lt; a.length; ++i)
+    {
+        int sum = a[i];
+        for(int j = i + 1; j &lt; a.length; ++j)
+        {
+            if(sum &gt; target)
+            {
+                min = Math.min(min, j - i);
+                break;
+            }
+            sum += a[j];
+        }
+    }
+    return min == Integer.MAX_VALUE ? -1 : min;
+}</pre>
+</div></div></td><td class="confluenceTd"><p /><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">static boolean testsPass()
+{
+    boolean check = numberOfConsecutiveSubarraySums(new int[] {33, 9, 4, 20, 3, 10, 5}, 33) == 3;
+    if(!check)
+    {
+        return  false;
+    }
+    check = lengthShortestSubarrayExceedingTarget(new int[] {1, 4, 45, 6, 0, 19}, 51) == 3 &amp;&amp;
+            lengthShortestSubarrayExceedingTarget(new int[] {1, 11, 100, 1, 0, 200, 3, 2, 1, 250}, 299) == 4 &amp;&amp;
+            lengthShortestSubarrayExceedingTarget(new int[] {1, 4, 45, 6, 52, 19}, 51) == 1;
+    if(!check)
+    {
+        return  false;
+    }
+    return true;
+}</pre>
+</div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Gafata&family=Quicksand&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+:root {
+  --text-color: #000000;
+  --dark-text-color: #ffffff;
+  --dark-theme-bg: #000000;
+  --light-theme-bg: #ffffff;
+  --font: 'Quicksand', sans-serif;
+  --heading-font: 'Gafata', sans-serif;
+}
+
+html {
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.swift {
+  position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font: var(--heading-font);
+}
+
+.slides-container h1,
+.slides-container h2 {
+  margin-bottom: 20px;
+}
+
+.slides-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  transition: 0.5s all ease-in-out;
+  font-size: 2rem;
+  font-family: var(--font);
+  color: var(--text-color);
+}
+
+.slides-container a,
+.zoom-out-view a {
+  text-decoration: none;
+  color: cadetblue;
+  transition: 0.3s;
+}
+
+.slides-container a:hover,
+.zoom-out-view a:hover {
+  border-bottom: 1px solid cadetblue;
+}
+
+.slides-container li {
+  list-style-type: '→ ';
+  margin-bottom: 10px;
+}
+
+.slides-container p {
+  margin: 20px 0px;
+  width: 75%;
+  text-align: center;
+}
+
+.slides-container > section {
+  float: left;
+}
+
+.slides-container h1 {
+  font-size: 3rem;
+  font-weight: normal;
+}
+
+.slides-container h2 {
+  font-size: 2.5rem;
+}
+
+.slides-container .slide {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.slide-number {
+  position: absolute;
+  z-index: 3;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+}
+
+.slide video,
+.slide img {
+  max-width: 75%;
+}
+
+.indicator-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 3;
+}
+
+.indicators {
+  position: relative;
+  height: 146px;
+  width: 130px;
+  margin: 0;
+  padding: 0;
+  opacity: 0.5;
+}
+
+.indicators button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  padding: 0px;
+  color: var(--text-color);
+}
+
+.indicators .left,
+.indicators .right,
+.indicators .up,
+.indicators .down {
+  display: none;
+}
+
+.indicators button {
+  position: absolute;
+}
+
+.indicators .up {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.indicators .down {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+.indicators .left {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.indicators .right {
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+#switch-theme {
+  position: absolute;
+  z-index: 3;
+  right: 15px;
+  top: 15px;
+}
+
+#switch-theme button {
+  padding: 5px;
+  font-size: 1.5rem;
+  background: none;
+  color: var(--text-color);
+  border: 2px solid var(--text-color);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#switch-theme button:hover {
+  background: var(--text-color);
+  color: var(--dark-text-color);
+}
+
+.dark {
+  background: var(--dark-theme-bg);
+}
+
+.dark .slides-container {
+  color: var(--dark-text-color);
+}
+
+.dark #switch-theme button {
+  color: var(--dark-text-color);
+  border: 2px solid var(--dark-text-color);
+}
+
+.dark #switch-theme button:hover {
+  background: var(--dark-text-color);
+  color: var(--text-color);
+}
+
+.dark .slide-number {
+  color: var(--dark-text-color);
+  font-family: var(--font);
+}
+
+.dark .indicators button {
+  color: var(--dark-text-color);
+}
+
+.zoom-out-view {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  background: var(--light-theme-bg);
+  z-index: 5;
+  display: none;
+  font-family: var(--font);
+}
+
+.zoom-out-view > section {
+  box-shadow: 2px 2px 15px gray;
+  padding: 15px;
+}
+
+.zoom-out-view section section:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+
+.zoom-out-view section {
+  margin: 10px;
+  float: left;
+  width: 400px;
+  min-height: 400px;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.zoom-out-view p,
+.zoom-out-view h1,
+.zoom-out-view ul {
+  width: 75%;
+  margin: 10px 0px;
+}
+
+.zoom-out-view p {
+  text-align: center;
+}
+
+.zoom-out-view h1 {
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
+  font-family: var(--heading-font);
+}
+
+.zoom-out-view video,
+.zoom-out-view img {
+  max-width: 60%;
+  margin: 10px 0px;
+}
+
+.dark .zoom-out-view {
+  background: var(--dark-theme-bg);
+  color: var(--dark-text-color);
+}
+
+.dark .zoom-out-view > section {
+  /* box-shadow: 1px 1px 12px #e0e5f3; */
+  padding: 15px;
+}
+
+.dark .zoom-out-view section section:not(:last-child) {
+  border-bottom: 1px solid #5a5555;
+}
+
+@media (max-width: 768px) {
+  .indicators {
+    display: none;
+  }
+
+  .slides-container {
+    font-size: 1.2rem;
+  }
+
+  .slides-container h1 {
+    font-size: 2rem;
+  }
+
+  .slides-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .slides-container ul {
+    width: 75%;
+  }
+}

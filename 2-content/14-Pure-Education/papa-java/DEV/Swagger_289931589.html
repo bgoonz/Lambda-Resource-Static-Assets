@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Swagger</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Basic_289898911.html">Basic</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Swagger
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Apr 20, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="Swagger-References">References</h2><p>Refer to following links:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 120.0px;"/><col style="width: 638.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>GS Git Repo:</p></td><td class="confluenceTd"><p><a href="https://gitlab-uat.gs.com/gunern/springboot-swagger.git" class="external-link" rel="nofollow">https://gitlab-uat.gs.com/gunern/springboot-swagger.git</a></p></td></tr></tbody></table></div><h2 id="Swagger-ForGeneralInstructions">For General Instructions</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 110.0px;"/><col style="width: 648.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL</p></td><td class="confluenceTd"><p><a href="https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api" class="external-link" rel="nofollow">https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api</a></p></td></tr></tbody></table></div><p><br/></p><p><a href="https://confluence.apg.services.gs.com/display/~gunern/Spring+Boot#SpringBoot-INITIALIZR" class="external-link" rel="nofollow">Create Spring Boot Starter Application</a></p><h2 id="Swagger-ExamineFilesintheStarterApplication">Examine Files in the Starter Application</h2><h3 id="Swagger-EntryPoint">Entry Point</h3><p>Check the class that was created with the SPRING INITIALIZR with the main method:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p><code>@SpringBootApplication</code><br/><code>public class SpringbootSwaggerpplication</code><br/><code>{</code><br/><code> public static void main(String[] args)</code><br/><code> {</code><br/><code> SpringApplication.run(SpringbootSwaggerApplication.class, args);</code><br/><code> }</code><br/><code>}</code></p></td></tr></tbody></table></div><h3 id="Swagger-pom.xml">pom.xml</h3><p>Note the <code>&lt;parent&gt;</code> section that is responsible for Spring Boot</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p><code>&lt;parent&gt;</code></p><p><code>&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</code></p><p><code>&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</code></p><p><code>&lt;version&gt;2.1.8.RELEASE&lt;/version&gt;</code></p><p><code>&lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</code></p><p><code>&lt;/parent&gt;</code></p></td></tr></tbody></table></div><h3 id="Swagger-NoteWebdependency">Note Web dependency</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+   &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+   &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;</pre>
+</div></div></td></tr></tbody></table></div><h2 id="Swagger-CreateModel,Server,andControllerClasses"><a href="https://confluence.apg.services.gs.com/display/~gunern/Create+Model%2C+Server%2C+and+Controller+Classes" class="external-link" rel="nofollow">Create Model, Server, and Controller Classes</a></h2><h2 id="Swagger-Modifypom.xmltoaddSwaggerDependencies">Modify <code>pom.xml</code> to add Swagger Dependencies</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p><code>&lt;dependency&gt;</code><br/><code> &lt;groupId&gt;io.springfox&lt;/groupId&gt;</code><br/><code> &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;</code><br/><code> &lt;version&gt;2.9.2&lt;/version&gt;</code><br/><code>&lt;/dependency&gt;</code></p></td></tr></tbody></table></div><h2 id="Swagger-AddConfigurationforSwaggerDocketBean">Add Configuration for Swagger Docket Bean</h2><p>Create a new package under root:</p><h3 id="Swagger-Package">Package</h3><ul><li><p><code>config</code></p></li></ul><h3 id="Swagger-AddDocketbeanforSwaggerinsidetheconfigpackage">Add Docket bean for Swagger inside the config package</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+ @Bean
+ public Docket api() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build();
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><h3 id="Swagger-VerifythatSpringFoxisworking">Verify that SpringFox is working</h3><p>Launch the application and point your browser to:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 95.0px;"/><col style="width: 663.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/v2/api-docs" class="external-link" rel="nofollow">http://localhost:8080/v2/api-docs</a></p></td></tr></tbody></table></div><p>You should see some text being displayed, for example:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 98.0px;"/><col style="width: 660.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>Output:</p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{&quot;swagger&quot;:&quot;2.0&quot;,&quot;info&quot;:{&quot;description&quot;:&quot;Api Documentation&quot;,&quot;version&quot;:&quot;1.0&quot;,&quot;title&quot;:&quot;Api Documentation&quot; ...</pre>
+</div></div></td></tr></tbody></table></div><h2 id="Swagger-AddSwaggerUI">Add Swagger UI</h2><p>Modify <code>pom.xml</code> to add. Note that later version, such as 2.9.2 may not produce desired output.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p><code>&lt;dependency&gt;</code><br/><code> &lt;groupId&gt;io.springfox&lt;/groupId&gt;</code><br/><code> &lt;artifactId&gt;springfox-swagger-ui&lt;/artifactId&gt;</code><br/><code> &lt;version&gt;2.6.1&lt;/version&gt;</code><br/><code>&lt;/dependency&gt;</code></p></td></tr></tbody></table></div><p>Restart application and point your browser to:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 113.0px;"/><col style="width: 645.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p>URL:</p></td><td class="confluenceTd"><p><a href="http://localhost:8080/swagger-ui.html" class="external-link" rel="nofollow">http://localhost:8080/swagger-ui.html</a></p></td></tr></tbody></table></div><h2 id="Swagger-Test">Test</h2><p>Select &quot;Student Controller&quot;</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/599525278/image2019-9-16_11-56-49.png?version=1&amp;modificationDate=1568649409600&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/599525278/image2019-9-16_11-56-49.png?version=1&amp;modificationDate=1568649409600&amp;api=v2" loading="lazy"></span><p>which will expose all REST APIs from the Controller</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/599525278/image2019-9-16_11-57-42.png?version=1&amp;modificationDate=1568649462194&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/599525278/image2019-9-16_11-57-42.png?version=1&amp;modificationDate=1568649462194&amp;api=v2" loading="lazy"></span>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

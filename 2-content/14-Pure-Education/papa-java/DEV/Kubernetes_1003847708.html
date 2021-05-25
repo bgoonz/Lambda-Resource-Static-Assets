@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Kubernetes</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Kubernetes
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Dec 15, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="Kubernetes-TroubleShoot">Trouble Shoot</h1><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 241.0px;"/><col style="width: 288.0px;"/><col style="width: 971.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Action</p></th><th class="confluenceTh"><p>Command</p></th><th class="confluenceTh"><p>Response</p></th></tr><tr><td class="confluenceTd"><p><code>kinit</code> with your kerberos</p></td><td class="confluenceTd"><p><code>kinit &lt;kerberos&gt;</code></p></td><td class="confluenceTd"><p><br/></p></td></tr><tr><td class="confluenceTd"><p>Check current environment</p></td><td class="confluenceTd"><p><code>kubectl config get-contexts</code></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">CURRENT   NAME      CLUSTER                     AUTHINFO          NAMESPACE
+*         d101401   prod-americas-gsinet-a      tr_filescan_dev   d101401
+          d102280   preprod-americas-gsinet-a   tr_filescan_dev   d102280
+          d102283   preprod-americas-gsinet-a   tr_filescan_dev   d102283
+          d98152    preprod-americas-gsinet-a   tr_filescan_dev   d98152
+
+
+</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>Set current environment</p></td><td class="confluenceTd"><p><code>kubectl config use-context d102280</code></p></td><td class="confluenceTd"><p><code>Switched to context &quot;d102280&quot;</code></p></td></tr><tr><td class="confluenceTd"><p>Display running pods</p></td><td class="confluenceTd"><p><code>kubectl get pods</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">NAME                               READY   STATUS    RESTARTS   AGE
+sod-microservice-6bcdbf687-zmt9x   1/1     Running   0          22m</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Tail logs</p></td><td class="confluenceTd"><p><code>kubectl logs -f sod-microservice-6bcdbf687-zmt9x</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+2019-11-19 16:25:15.505  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8443 (https) with context path &#39;&#39;
+2019-11-19 16:25:15.508  INFO 1 --- [           main] com.gs.ep.SodMicroService                : Started SodMicroService in 25.1 seconds (JVM running for 26.187)</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Restart pods</p></td><td class="confluenceTd"><p><code>kubectl delete pod sod-microservice-6bcdbf687-zmt9x</code></p></td><td class="confluenceTd"><p /></td></tr><tr><td class="confluenceTd"><p>Check events</p></td><td class="confluenceTd"><p><code>kubectl get events</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+47m         Normal    Pulling                  pod/sod-microservice-787fcb554-jtznx     Pulling image &quot;gitlab.registry.docker.site.gs.com:443/derun/entitlements-platform/entitlement-catalog:sod_release-1.1.1.0&quot;
+...</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Check jar version</p></td><td class="confluenceTd"><p><code>kubectl describe deployment</code><br/></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Image:      gitlab.registry.docker.site.gs.com:443/derun/entitlements-platform/entitlement-catalog:sod_release-1.1.1.0-SOD</pre>
+</div></div></td></tr></tbody></table></div><h1 id="Kubernetes-Context">Context</h1><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 169.0px;"/><col style="width: 289.0px;"/><col style="width: 1040.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Action</p></th><th class="confluenceTh"><p>Command</p></th><th class="confluenceTh"><p>Response</p></th></tr><tr><td class="confluenceTd"><p>List of contexts</p></td><td class="confluenceTd"><p><code>kubectl config get-contexts</code></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">CURRENT   NAME       CLUSTER                     AUTHINFO          NAMESPACE
+*         d101401    prod-americas-gsinet-a      tr_filescan_dev   d101401
+          d101401]
+          d102280    preprod-americas-gsinet-a   tr_filescan_dev   d102280
+          d102283    preprod-americas-gsinet-a   tr_filescan_dev   d102283</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>Set current context</p></td><td class="confluenceTd"><p><code>kubectl config use-context d102280</code></p></td><td class="confluenceTd"><p>Switched to context &quot;d102280&quot;</p></td></tr></tbody></table></div><h1 id="Kubernetes-Pods">Pods</h1><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 214.0px;"/><col style="width: 318.0px;"/><col style="width: 966.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Action</p></th><th class="confluenceTh"><p>Command</p></th><th class="confluenceTh"><p>Response</p></th></tr><tr><td class="confluenceTd"><p>Display running pods</p><p><br/></p></td><td class="confluenceTd"><p>kubectl get podskubectl describe pods</p><p><br/></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">NAME                                READY   STATUS    RESTARTS   AGE
+sod-microservice-6788db5657-5h5x2   1/1     Running   0          92m
+sod-microservice-6788db5657-kfzvd   1/1     Running   0          92m
+sod-microservice-6788db5657-ldtpd   1/1     Running   0          92m
+sod-microservice-6788db5657-pmrz2   1/1     Running   0          92m</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>Display running pods WIDE</p></td><td class="confluenceTd"><p>kubectl get pods -o wide</p><p><br/></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">NAME                                READY   STATUS    RESTARTS   AGE   IP               NODE                             NOMINATED NODE   READINESS GATES
+sod-microservice-6788db5657-5h5x2   1/1     Running   0          90m   10.244.147.163   d51208-007-e5.dc.gs.com          &lt;none&gt;           &lt;none&gt;
+sod-microservice-6788db5657-kfzvd   1/1     Running   0          90m   10.244.43.201    d51208-007-e12.dc.gs.com         &lt;none&gt;           &lt;none&gt;
+sod-microservice-6788db5657-ldtpd   1/1     Running   0          90m   10.245.53.177    kubernetes-51208-089.dc.gs.com   &lt;none&gt;           &lt;none&gt;
+sod-microservice-6788db5657-pmrz2   1/1     Running   0          91m   10.244.18.129    d51208-099-e11.dc.gs.com         &lt;none&gt;           &lt;none&gt;</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>Restart pod</p></td><td class="confluenceTd"><p>kubectl delete pod sod-microservice-6788db5657-5h5x2</p></td><td class="confluenceTd"><p><br/></p></td></tr><tr><td class="confluenceTd"><p>Tail logs</p></td><td class="confluenceTd"><p>kubectl logs -f sod-microservice-6788db5657-5h5x2</p></td><td class="confluenceTd"><p><br/></p></td></tr></tbody></table></div><h1 id="Kubernetes-Services,Ingresses,Deployments">Services, Ingresses, Deployments</h1><div class="table-wrap"><table data-layout="full-width" class="confluenceTable"><colgroup><col style="width: 226.67px;"/><col style="width: 226.67px;"/><col style="width: 226.67px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Action</p></th><th class="confluenceTh"><p>Command</p></th><th class="confluenceTh"><p>Response</p></th></tr><tr><td class="confluenceTd"><p>List services</p></td><td class="confluenceTd"><p><br/></p><p><code>kubectl get svc</code></p><p><code>kubectl describe svc</code></p><p><br/></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+sod-microservice   ClusterIP   10.110.65.199   &lt;none&gt;        8443/TCP   73d</pre>
+</div></div><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Name:              sod-microservice
+Namespace:         d101401
+Labels:            app=sod-microservice
+Annotations:       kubectl.kubernetes.io/last-applied-configuration:
+                     {&quot;apiVersion&quot;:&quot;v1&quot;,&quot;kind&quot;:&quot;Service&quot;,&quot;metadata&quot;:{&quot;annotations&quot;:{},&quot;labels&quot;:{&quot;app&quot;:&quot;sod-microservice&quot;},&quot;name&quot;:&quot;sod-microservice&quot;,&quot;namespace&quot;...
+Selector:          app=sod-microservice
+Type:              ClusterIP
+IP:                10.110.65.199
+Port:              sod-microservice  8443/TCP
+TargetPort:        8443/TCP
+Endpoints:         10.244.147.163:8443,10.244.18.129:8443,10.244.43.201:8443 + 1 more...
+Session Affinity:  None
+Events:            &lt;none&gt;</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>List ingresses</p></td><td class="confluenceTd"><p>kubectl get ingressRoutes</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">NAME                     FQDN                                                                        TLS SECRET   FIRST ROUTE   STATUS   STATUS DESCRIPTION
+sod-microservice         sod-microservice.d101401.ext.prod-americas-gsinet-a.container.site.gs.com                /             valid    valid IngressRoute
+sod-microservice-alias   prod.sod.site.gs.com                                                                     /             valid    valid IngressRoute</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>List deployments</p></td><td class="confluenceTd"><p><code>kubectl get deploy</code></p><p><br/></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+sod-microservice   4/4     4            4           73d
+
+
+</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p>Describe deployments</p></td><td class="confluenceTd"><p><code>kubectl describe deploy</code></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Name:                   sod-microservice
+Namespace:              d101401
+CreationTimestamp:      Fri, 13 Sep 2019 08:38:35 -0400
+Labels:                 &lt;none&gt;
+Annotations:            deployment.kubernetes.io/revision: 7
+                        kubectl.kubernetes.io/last-applied-configuration:
+                          {&quot;apiVersion&quot;:&quot;apps/v1&quot;,&quot;kind&quot;:&quot;Deployment&quot;,&quot;metadata&quot;:{&quot;annotations&quot;:{},&quot;name&quot;:&quot;sod-microservice&quot;,&quot;namespace&quot;:&quot;d101401&quot;},&quot;spec&quot;:{&quot;replica...
+Selector:               app=sod-microservice
+Replicas:               4 desired | 4 updated | 4 total | 4 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=sod-microservice
+           gs.com/bdls=sod-microservice
+  Containers:
+   sod-microservice:
+    Image:      gitlab.registry.docker.site.gs.com:443/derun/entitlements-platform/entitlement-catalog:sod-2.0.2-SOD
+    Port:       8443/TCP
+    Host Port:  0/TCP
+    Limits:
+      cpu:     3
+      memory:  11Gi
+    Requests:
+      cpu:     2
+      memory:  6Gi
+    Environment:
+      SPRING_PROFILES_ACTIVE:  prod
+    Mounts:
+      /var/cv/dutysepcertprod/creds from sslpass (ro)
+      /var/cv/dutysepcertprod/ssl from ssl (ro)
+      /var/cv/dutysepdbprod/creds from credref (ro)
+      /var/cv/dutysepprod/creds from keytab (ro)
+  Volumes:
+   credref:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  dutysepprod-db-credref
+    Optional:    false
+   keytab:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  dutysepprod-keytab
+    Optional:    false
+   ssl:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  dutysepcertprod-ssl-cert
+    Optional:    false
+   sslpass:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  dutysepcertprod-credref
+    Optional:    false
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  sod-microservice-6788db5657 (4/4 replicas created)
+NewReplicaSet:   &lt;none&gt;
+Events:          &lt;none&gt;</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h1 id="Kubernetes-Procedures">Procedures</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 226.67px;"/><col style="width: 226.67px;"/><col style="width: 226.67px;"/></colgroup><tbody><tr><th class="confluenceTh"><p>Action</p></th><th class="confluenceTh"><p>Command</p></th><th class="confluenceTh"><p>Response</p></th></tr><tr><td class="confluenceTd"><p>Stop Everything</p></td><td class="confluenceTd"><p><code>kubectl delete po,svc,rs,deployment --all</code></p></td><td class="confluenceTd"><p><br/></p></td></tr><tr><td class="confluenceTd"><p>Resolve authorization issues</p></td><td class="confluenceTd"><p><br/></p><p><code>kinit &lt;kerberos&gt;</code></p><p><code>kubectl config set-credentials $LOGNAME --token=</code></p><p><br/></p></td><td class="confluenceTd"><p><br/></p></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Tests for the ClearanceController</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Project-Profit-Application_315097089.html">Project Profit Application</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unit-and-Integration-Tests-for-Subscription-Tracker_344522760.html">Unit and Integration Tests for Subscription Tracker</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Tests for the ClearanceController
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on May 27, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>For this test, we assume that multiple in-memory databases have been merged into a single database, see <a href="https://confluence.apg.services.gs.com/pages/createpage.action?spaceKey=~gunern&amp;title=Merge+in-memory+databases&amp;linkCreation=true&amp;fromPageId=769566995" class="external-link" rel="nofollow"><u>Merge in-memory databases</u></a>.</p><p>We would like to rely on Spring TestRestTemplate to execute various integration tests. Unfortunately, we can't use Spring integration test out-of-the-box. ClearanceController relies on data which is provided by external API like COM, RMS, CAMP, and PeopleSearch. We can't call code from external API because it may not be available from the build machine or may be down for maintenance and thus would cause our build to fail.</p><p>Therefore, we would like to continue using Spring integration tests via TestRestTemplate but mock data which would be returned from external APIs.</p><h1 id="TestsfortheClearanceController-ModifyClearanceControllertoenablepassinginmockedexternalcontrollers">Modify ClearanceController to enable passing in mocked external controllers</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RestController
+@RepositoryRestController
+public class ClearanceController
+{
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    @Autowired
+    private AssignableController assignableController;
+    @Autowired
+    private DutyAssignableMapRepository dutyAssignableMapRepository;
+    @Autowired
+    private RuleDutyMapRepository ruleDutyMapRepository;
+    @Autowired
+    private AssignableRepository assignableRepository;
+    @Autowired
+    private RuleRepository ruleRepository;
+    @Autowired
+    private CampController campController;
+    @Autowired
+    private ComController comController;
+    @Autowired
+    private AuditTrailRepository auditTrailRepository;
+    @Autowired
+    private PeopleSearchController peopleSearchController;
+
+    ...
+    public void setComController(ComController comController)
+    {
+        this.comController = comController;
+    }
+    public void setPeopleSearchController(PeopleSearchController peopleSearchController)
+    {
+        this.peopleSearchController = peopleSearchController;
+    }
+    public void setCampController(CampController campController)
+    {
+        this.campController = campController;
+    }
+    ...
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="TestsfortheClearanceController-IntegrationTestswithMockedExternalControllers">Integration Tests with Mocked External Controllers</h1><p>We will identify three users from our in-memory database (<a href="https://confluence.apg.services.gs.com/pages/createpage.action?spaceKey=~gunern&amp;title=Merge+in-memory+databases&amp;linkCreation=true&amp;fromPageId=769566995" class="external-link" rel="nofollow"><u>Merge in-memory databases</u></a>).</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>User</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Holds Assignables</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Attempt Assignable</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Notes</strong></p></th></tr><tr><td class="confluenceTd"><p><code>vellde</code></p></td><td class="confluenceTd"><p><code>PA-1, PA-2, PA-3</code></p><p><code>PC-1, PC-2, PC-3,</code></p><p><code>PX-1, PX-2, PX-3</code></p></td><td class="confluenceTd"><p><br/></p><p><code>PC-10PB-10PY-10</code></p><p><br/></p></td><td class="confluenceTd"><p><br/></p><p>passes since <code>PC-10</code> is not toxicfails without override for violation of<code> Rule-AB</code>fails without override for violation of <code>Rule-XY</code></p><p><br/></p></td></tr><tr><td class="confluenceTd"><p><code>lingj</code></p></td><td class="confluenceTd"><p><code>PA-4, PB-4, PX-4, PY-4</code></p></td><td class="confluenceTd"><p><code>PAX-10</code></p></td><td class="confluenceTd"><p><br/></p><p>fails without overrides due to violation of <code>Rule-AB</code> and <code>Rule-XY</code>fails without override for <code>Rule-XY</code>passes with overrides for <code>Rule-AB</code> and <code>Rule-XY</code></p><p><br/></p></td></tr><tr><td class="confluenceTd"><p><code>bergna</code></p></td><td class="confluenceTd"><p><code>PAX-1, PBY-1</code></p></td><td class="confluenceTd"><p><code>PBY-10</code></p></td><td class="confluenceTd"><p><br/></p><p>fails without overrides due to violation of <code>Rule-AB</code> and <code>Rule-XY</code>fails without privilege override for both <code>PAX-1:PBY-10</code> for <code>Rule-AB</code> control IDfails without privilege override for both <code>PAX-1:PBY-10</code> for <code>Rule-XY</code> control IDpasses with both overrides are in place</p><p><br/></p></td></tr></tbody></table></div><h2 id="TestsfortheClearanceController-RequiredCodingChanges">Required Coding Changes</h2><p>We need to modify all Entity objects with @OneToMany relationships to enable Eager fetching.</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+@OneToMany(mappedBy = &quot;rule&quot;, fetch = FetchType.EAGER)
+@JsonIgnore
+private Set&lt;RuleDutyPair&gt; ruleDutyMappings = new HashSet&lt;&gt;();
+...</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+@OneToMany(mappedBy = &quot;duty&quot;, fetch = FetchType.EAGER)
+@JsonIgnore
+private Set&lt;RuleDutyPair&gt; ruleDutyMappings;
+...</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+@OneToMany(mappedBy = &quot;assignable&quot;, fetch = FetchType.EAGER)
+@JsonIgnore
+private Set&lt;DutyAssignablePair&gt; dutyAssignableMappings;
+...</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><h2 id="TestsfortheClearanceController-IntegrationTests">Integration Tests</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource(locations=&quot;classpath:application-integrated.properties&quot;)
+public class ClearanceControllerIntegrationMockExternalTest
+{
+    @Mock
+    private PeopleSearchController peopleSearchController;
+    @Mock
+    private CampController campController;
+    @Mock
+    private ComController comController;
+    @Autowired
+    private ClearanceController clearanceController;
+
+    @Before
+    public void setUp() throws Exception
+    {
+        clearanceController.setCampController(campController);
+        clearanceController.setComController(comController);
+        clearanceController.setPeopleSearchController(peopleSearchController);
+    }
+
+    @Test
+    public void assign_to_vellde_with_no_overrides() throws Exception
+    {
+        //  In this test we will attempt to assign privileges from Duty-C, Duty-B, and Duty-Y to user vellde
+        //  User vellde currently holds privileges from Duty-A, Duty-C, and Duty-X which are all non-toxic to each other.
+        //  We will try assigning:
+        //      non-toxic privilege PC-10 (from Duty-C)
+        //      toxic privilege PB-10 (from Duty-B)
+        //      toxic privilege PY-10 (from Duty-Y)
+        //  Thus,
+        //  Request Expected Result
+        //  ======= ===============
+        //  PC-10   pass
+        //  PB-10   fail (violation of Rule-AB)
+        //  PY-10   fail (violation of Rule-XY)
+
+        List&lt;String&gt; velldePrivileges = Arrays.asList(
+                &quot;9fb49ead-06fe-36a4-b31b-8e5982603e01&quot;,
+                &quot;e6ccff9d-690a-3ab9-97c8-66a0ab0b0552&quot;,
+                &quot;ed6e7618-12ca-38f2-aaca-2b6c6cd6af7a&quot;,
+                &quot;56d5fd3c-1c0e-3f80-86dc-24dbba67eb18&quot;,
+                &quot;eac4de19-59ee-3f08-ab27-2312db133307&quot;,
+                &quot;ac4914d8-b601-3195-87c0-ce4b4d431932&quot;,
+                &quot;d9874fd9-c1b7-30a5-a74a-316d07e21099&quot;,
+                &quot;7426b9a4-68da-3397-96d0-55850693025d&quot;,
+                &quot;23640e5c-b209-38ec-acb9-77c4800a41f4&quot;
+        );
+        ResponseEntity privilegeResponseEntity = ResponseEntity.ok(velldePrivileges);
+
+        Mockito.when(peopleSearchController.guidFromKerberos(Mockito.anyString())).thenReturn(&quot;800202936&quot;);
+        Mockito.when(campController.getCampPrivilegesByKerberos(Mockito.anyString())).thenReturn(privilegeResponseEntity);
+        Mockito.when(comController.getComOverrides(Mockito.anyString())).thenReturn(ResponseEntity.ok(Collections.emptyMap()));
+
+        //  PC-10
+        ResponseEntity&lt;Resource&lt;?&gt;&gt; response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000022&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Map&lt;String, String&gt; data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        String status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+
+        //  PB-10
+        response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000019&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;fail&quot;, status);
+
+        //  PY-10
+        response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000028&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;fail&quot;, status);
+    }
+
+    @Test
+    public void assign_to_vellde_with_kerberos_level_override_for_PB_10() throws Exception
+    {
+        //  In this test we will attempt to assign privileges from Duty-C, Duty-B, and Duty-Y to user vellde
+        //  User vellde currently holds privileges from Duty-A, Duty-C, and Duty-X which are all non-toxic to each other.
+        //  We will try assigning:
+        //      non-toxic privilege PC-10 (from Duty-C)
+        //      toxic privilege PB-10 (from Duty-B) - vellde has kerberos level override for this privilege
+        //      toxic privilege PY-10 (from Duty-Y)
+        //  Thus,
+        //  Request Expected Result
+        //  ======= ===============
+        //  PC-10   pass
+        //  PB-10   pass (violation of Rule-AB due to privilege level override)
+        //  PY-10   fail (violation of Rule-XY)
+
+        List&lt;String&gt; velldePrivileges = Arrays.asList(
+                &quot;9fb49ead-06fe-36a4-b31b-8e5982603e01&quot;,
+                &quot;e6ccff9d-690a-3ab9-97c8-66a0ab0b0552&quot;,
+                &quot;ed6e7618-12ca-38f2-aaca-2b6c6cd6af7a&quot;,
+                &quot;56d5fd3c-1c0e-3f80-86dc-24dbba67eb18&quot;,
+                &quot;eac4de19-59ee-3f08-ab27-2312db133307&quot;,
+                &quot;ac4914d8-b601-3195-87c0-ce4b4d431932&quot;,
+                &quot;d9874fd9-c1b7-30a5-a74a-316d07e21099&quot;,
+                &quot;7426b9a4-68da-3397-96d0-55850693025d&quot;,
+                &quot;23640e5c-b209-38ec-acb9-77c4800a41f4&quot;
+        );
+        ResponseEntity privilegeResponseEntity = ResponseEntity.ok(velldePrivileges);
+
+        Map&lt;String, List&lt;Map&lt;String, String&gt;&gt;&gt; overrideForPB_10 = new HashMap&lt;&gt;()
+        {{
+            put(&quot;kerberos overrides&quot;, Arrays.asList(new HashMap&lt;&gt;()
+                                                    {{
+                                                        put(&quot;expiryDate&quot;, &quot;2020-06-13T19:52:44.500Z&quot;);
+                                                        put(&quot;control id&quot;, &quot;2097&quot;);
+                                                        put(&quot;name&quot;, &quot;AC-5.103 Detect Toxic Combination of Access&quot;);
+                                                        put(&quot;comment&quot;, &quot;first comment&quot;);
+                                                        put(&quot;override&quot;, &quot;PRIVILEGE_OVERRIDE@~1~2~3~:~19~&quot;);
+                                                        put(&quot;state&quot;, &quot;APPROVED&quot;);
+                                                        put(&quot;id&quot;, &quot;5014&quot;);
+                                                    }}
+            ));
+        }};
+
+
+        Mockito.when(peopleSearchController.guidFromKerberos(Mockito.anyString())).thenReturn(&quot;800202936&quot;);
+        Mockito.when(campController.getCampPrivilegesByKerberos(Mockito.anyString())).thenReturn(privilegeResponseEntity);
+        Mockito.when(comController.getComOverrides(Mockito.anyString())).thenReturn(ResponseEntity.ok(overrideForPB_10));
+
+        //  PC-10
+        ResponseEntity&lt;Resource&lt;?&gt;&gt; response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000022&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Map&lt;String, String&gt; data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        String status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+
+        //  PB-10
+        response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000019&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+
+        //  PY-10
+        response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000028&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;fail&quot;, status);
+    }
+
+    @Test
+    public void assign_to_vellde_with_kerberos_level_override_for_PB_10_rms_level_override_for_PY_10() throws Exception
+    {
+        //  In this test we will attempt to assign privileges from Duty-C, Duty-B, and Duty-Y to user vellde
+        //  User vellde currently holds privileges from Duty-A, Duty-C, and Duty-X which are all non-toxic to each other.
+        //  We will try assigning:
+        //      non-toxic privilege PC-10 (from Duty-C)
+        //      toxic privilege PB-10 (from Duty-B) - vellde has kerberos level override for this privilege
+        //      toxic privilege PY-10 (from Duty-Y) - vellde has RmsNode level override for this privilege
+        //  Thus,
+        //  Request Expected Result
+        //  ======= ===============
+        //  PC-10   pass
+        //  PB-10   pass (violation of Rule-AB due to privilege level override)
+        //  PY-10   pass (violation of Rule-XY due to RmsNode level override)
+
+        List&lt;String&gt; velldePrivileges = Arrays.asList(
+                &quot;9fb49ead-06fe-36a4-b31b-8e5982603e01&quot;,
+                &quot;e6ccff9d-690a-3ab9-97c8-66a0ab0b0552&quot;,
+                &quot;ed6e7618-12ca-38f2-aaca-2b6c6cd6af7a&quot;,
+                &quot;56d5fd3c-1c0e-3f80-86dc-24dbba67eb18&quot;,
+                &quot;eac4de19-59ee-3f08-ab27-2312db133307&quot;,
+                &quot;ac4914d8-b601-3195-87c0-ce4b4d431932&quot;,
+                &quot;d9874fd9-c1b7-30a5-a74a-316d07e21099&quot;,
+                &quot;7426b9a4-68da-3397-96d0-55850693025d&quot;,
+                &quot;23640e5c-b209-38ec-acb9-77c4800a41f4&quot;
+        );
+        ResponseEntity privilegeResponseEntity = ResponseEntity.ok(velldePrivileges);
+
+        Map&lt;String, List&lt;Map&lt;String, String&gt;&gt;&gt; overrideForPB_10_PY_10 = new HashMap&lt;&gt;()
+        {{
+            put(&quot;kerberos overrides&quot;, Arrays.asList(new HashMap&lt;&gt;()
+            {{
+                put(&quot;expiryDate&quot;, &quot;2020-06-13T19:52:44.500Z&quot;);
+                put(&quot;control id&quot;, &quot;2097&quot;);
+                put(&quot;name&quot;, &quot;AC-5.103 Detect Toxic Combination of Access&quot;);
+                put(&quot;comment&quot;, &quot;first comment&quot;);
+                put(&quot;override&quot;, &quot;PRIVILEGE_OVERRIDE@~1~2~3~:~19~&quot;);
+                put(&quot;state&quot;, &quot;APPROVED&quot;);
+                put(&quot;id&quot;, &quot;5014&quot;);
+            }}));
+            put(&quot;Team (Core Engineering-OC_TEA12323) override&quot;, Arrays.asList(new HashMap&lt;&gt;()
+            {{
+                put(&quot;expiryDate&quot;, &quot;2020-06-13T19:52:44.500Z&quot;);
+                put(&quot;control id&quot;, &quot;14570&quot;);
+                put(&quot;name&quot;, &quot;AC-5.103 Detect Toxic Combination of Access&quot;);
+                put(&quot;comment&quot;, &quot;second comment&quot;);
+                put(&quot;override&quot;, &quot;PRIVILEGE_OVERRIDE@~7~8~9~:~28~&quot;);
+                put(&quot;state&quot;, &quot;APPROVED&quot;);
+                put(&quot;id&quot;, &quot;5015&quot;);
+            }}));
+        }};
+
+
+        Mockito.when(peopleSearchController.guidFromKerberos(Mockito.anyString())).thenReturn(&quot;800202936&quot;);
+        Mockito.when(campController.getCampPrivilegesByKerberos(Mockito.anyString())).thenReturn(privilegeResponseEntity);
+        Mockito.when(comController.getComOverrides(Mockito.anyString())).thenReturn(ResponseEntity.ok(overrideForPB_10_PY_10));
+
+        //  PC-10
+        ResponseEntity&lt;Resource&lt;?&gt;&gt; response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000022&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Map&lt;String, String&gt; data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        String status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+
+        //  PB-10
+        response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000019&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+
+        //  PY-10
+        response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;vellde&quot;, &quot;99999999-0000-9999-0000-000000000028&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+    }
+
+    @Test
+    public void assign_to_bergna_with_no_overrides() throws Exception
+    {
+        //  In this test we will attempt to assign a multi-duty assignable PBY-10 to user bergna.
+        //  Assignable PBY-10 belongs to two duties: Duty-B and Duty-Y
+        //  User bergna currently holds assignables: PAX-1 (belonging to Duty-A and Duty-X) and PBY-1 (belonging to Duty-B and Duty-Y)
+        //  Attempting to assign PBY-10 to user bergna would violate two rules: Rule-AB and Rule-XY.
+        //
+        //  Mock SoD data for user bergna
+        List&lt;String&gt; bergnaPrivileges = Arrays.asList(
+                &quot;0d212b03-84a2-323d-812a-01371c9c9671&quot;,
+                &quot;8ce781d7-7a28-3678-b32f-64c5f1217652&quot;
+        );
+        ResponseEntity privilegeResponseEntity = ResponseEntity.ok(bergnaPrivileges);
+
+        Mockito.when(peopleSearchController.guidFromKerberos(Mockito.anyString())).thenReturn(&quot;12345678&quot;);
+        Mockito.when(campController.getCampPrivilegesByKerberos(Mockito.anyString())).thenReturn(privilegeResponseEntity);
+        Mockito.when(comController.getComOverrides(Mockito.anyString())).thenReturn(ResponseEntity.ok(Collections.emptyMap()));
+
+        //  PBY-10
+        ResponseEntity&lt;Resource&lt;?&gt;&gt; response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;bergna&quot;, &quot;99999999-0000-9999-0000-000000000032&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Map&lt;String, String&gt; data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        String status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;fail&quot;, status);
+    }
+
+    @Test
+    public void assign_to_bergna_with_overrides_for_one_rule() throws Exception
+    {
+        //  In this test we will attempt to assign a multi-duty assignable PBY-10 to user bergna.
+        //  Assignable PBY-10 belongs to two duties: Duty-B and Duty-Y
+        //  User bergna currently holds assignables: PAX-1 (belonging to Duty-A and Duty-X) and PBY-1 (belonging to Duty-B and Duty-Y)
+        //  Attempting to assign PBY-10 to user bergna would violate two rules: Rule-AB and Rule-XY.
+        //
+        //  Mock SoD data for user bergna
+        List&lt;String&gt; bergnaPrivileges = Arrays.asList(
+                &quot;0d212b03-84a2-323d-812a-01371c9c9671&quot;,
+                &quot;8ce781d7-7a28-3678-b32f-64c5f1217652&quot;
+        );
+        ResponseEntity privilegeResponseEntity = ResponseEntity.ok(bergnaPrivileges);
+
+        Map&lt;String, List&lt;Map&lt;String, String&gt;&gt;&gt; overrideForPBY_10 = new HashMap&lt;&gt;()
+        {{
+            put(&quot;kerberos overrides&quot;, Arrays.asList(new HashMap&lt;&gt;()
+                                                    {{
+                                                        put(&quot;expiryDate&quot;, &quot;2020-06-13T19:52:44.500Z&quot;);
+                                                        put(&quot;control id&quot;, &quot;2097&quot;);
+                                                        put(&quot;name&quot;, &quot;AC-5.103 Detect Toxic Combination of Access&quot;);
+                                                        put(&quot;comment&quot;, &quot;first comment&quot;);
+                                                        put(&quot;override&quot;, &quot;PRIVILEGE_OVERRIDE@~14~:~32~&quot;);
+                                                        put(&quot;state&quot;, &quot;APPROVED&quot;);
+                                                        put(&quot;id&quot;, &quot;5014&quot;);
+                                                    }}
+            ));
+        }};
+        Mockito.when(peopleSearchController.guidFromKerberos(Mockito.anyString())).thenReturn(&quot;12345678&quot;);
+        Mockito.when(campController.getCampPrivilegesByKerberos(Mockito.anyString())).thenReturn(privilegeResponseEntity);
+        Mockito.when(comController.getComOverrides(Mockito.anyString())).thenReturn(ResponseEntity.ok(overrideForPBY_10));
+
+        //  PBY-10
+        ResponseEntity&lt;Resource&lt;?&gt;&gt; response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;bergna&quot;, &quot;99999999-0000-9999-0000-000000000032&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Map&lt;String, String&gt; data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        String status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;fail&quot;, status);
+    }
+
+    @Test
+    public void assign_to_bergna_with_overrides_for_two_rules() throws Exception
+    {
+        //  In this test we will attempt to assign a multi-duty assignable PBY-10 to user bergna.
+        //  Assignable PBY-10 belongs to two duties: Duty-B and Duty-Y
+        //  User bergna currently holds assignables: PAX-1 (belonging to Duty-A and Duty-X) and PBY-1 (belonging to Duty-B and Duty-Y)
+        //  Attempting to assign PBY-10 to user bergna would violate two rules: Rule-AB and Rule-XY.
+        //
+        //  Mock SoD data for user bergna
+        List&lt;String&gt; bergnaPrivileges = Arrays.asList(
+                &quot;0d212b03-84a2-323d-812a-01371c9c9671&quot;,
+                &quot;8ce781d7-7a28-3678-b32f-64c5f1217652&quot;
+        );
+        ResponseEntity privilegeResponseEntity = ResponseEntity.ok(bergnaPrivileges);
+
+        Map&lt;String, List&lt;Map&lt;String, String&gt;&gt;&gt; overrideForPBY_10 = new HashMap&lt;&gt;()
+        {{
+            put(&quot;kerberos overrides&quot;, Arrays.asList(new HashMap&lt;&gt;()
+            {{
+                put(&quot;expiryDate&quot;, &quot;2020-06-13T19:52:44.500Z&quot;);
+                put(&quot;control id&quot;, &quot;2097&quot;);
+                put(&quot;name&quot;, &quot;AC-5.103 Detect Toxic Combination of Access&quot;);
+                put(&quot;comment&quot;, &quot;first comment&quot;);
+                put(&quot;override&quot;, &quot;PRIVILEGE_OVERRIDE@~14~:~32~&quot;);
+                put(&quot;state&quot;, &quot;APPROVED&quot;);
+                put(&quot;id&quot;, &quot;5014&quot;);
+            }}));
+            put(&quot;Team (Core Engineering-OC_TEA12323) override&quot;, Arrays.asList(new HashMap&lt;&gt;()
+            {{
+                put(&quot;expiryDate&quot;, &quot;2020-06-13T19:52:44.500Z&quot;);
+                put(&quot;control id&quot;, &quot;14570&quot;);
+                put(&quot;name&quot;, &quot;AC-5.103 Detect Toxic Combination of Access&quot;);
+                put(&quot;comment&quot;, &quot;second comment&quot;);
+                put(&quot;override&quot;, &quot;PRIVILEGE_OVERRIDE@~14~:~32~&quot;);
+                put(&quot;state&quot;, &quot;APPROVED&quot;);
+                put(&quot;id&quot;, &quot;5015&quot;);
+            }}));
+        }};
+
+        Mockito.when(peopleSearchController.guidFromKerberos(Mockito.anyString())).thenReturn(&quot;12345678&quot;);
+        Mockito.when(campController.getCampPrivilegesByKerberos(Mockito.anyString())).thenReturn(privilegeResponseEntity);
+        Mockito.when(comController.getComOverrides(Mockito.anyString())).thenReturn(ResponseEntity.ok(overrideForPBY_10));
+
+        //  PBY-10
+        ResponseEntity&lt;Resource&lt;?&gt;&gt; response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;bergna&quot;, &quot;99999999-0000-9999-0000-000000000032&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Map&lt;String, String&gt; data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        String status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+    }
+
+    @Test
+    public void assign_to_lindgj_with_no_overrides() throws Exception
+    {
+        //  In this test we will attempt to assign a multi-duty assignable PAX-10 to user lindgj.
+        //  Assignable PAX-10 belongs to two duties: Duty-A and Duty-X
+        //  User lindgj currently holds assignables: PA-4, PB-4, PX-4, and PY-4
+        //  Attempting to assign PAX-10 to user lingj would violate two rules: Rule-AB and Rule-XY.
+        //
+        //  Mock SoD data for user lindgj
+        List&lt;String&gt; lindgjPrivileges = Arrays.asList(
+                &quot;f63baded-efd2-319d-8de4-41c8a4c6339a&quot;,
+                &quot;16e898df-5b1c-3f0c-b97a-c8ad4241d2aa&quot;,
+                &quot;e382f8ca-d4c4-3f3e-9a0b-0cd1fe05835c&quot;,
+                &quot;476bd432-7d74-333a-9e5a-4e62f99fb691&quot;
+        );
+        ResponseEntity privilegeResponseEntity = ResponseEntity.ok(lindgjPrivileges);
+
+        Mockito.when(peopleSearchController.guidFromKerberos(Mockito.anyString())).thenReturn(&quot;12345678&quot;);
+        Mockito.when(campController.getCampPrivilegesByKerberos(Mockito.anyString())).thenReturn(privilegeResponseEntity);
+        Mockito.when(comController.getComOverrides(Mockito.anyString())).thenReturn(ResponseEntity.ok(Collections.emptyMap()));
+
+        //  PAX-10
+        ResponseEntity&lt;Resource&lt;?&gt;&gt; response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;lindgj&quot;, &quot;99999999-0000-9999-0000-000000000031&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Map&lt;String, String&gt; data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        String status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;fail&quot;, status);
+    }
+
+    @Test
+    public void assign_to_lindgj_with_overrides_for_one_rule() throws Exception
+    {
+        //  In this test we will attempt to assign a multi-duty assignable PAX-10 to user lindgj.
+        //  Assignable PAX-10 belongs to two duties: Duty-A and Duty-X
+        //  User lindgj currently holds assignables: PA-4, PB-4, PX-4, and PY-4
+        //  Attempting to assign PAX-10 to user lingj would violate two rules: Rule-AB and Rule-XY.
+        //
+        //  Mock SoD data for user lindgj
+        List&lt;String&gt; lindgjPrivileges = Arrays.asList(
+                &quot;f63baded-efd2-319d-8de4-41c8a4c6339a&quot;,
+                &quot;16e898df-5b1c-3f0c-b97a-c8ad4241d2aa&quot;,
+                &quot;e382f8ca-d4c4-3f3e-9a0b-0cd1fe05835c&quot;,
+                &quot;476bd432-7d74-333a-9e5a-4e62f99fb691&quot;
+        );
+        ResponseEntity privilegeResponseEntity = ResponseEntity.ok(lindgjPrivileges);
+
+        Map&lt;String, List&lt;Map&lt;String, String&gt;&gt;&gt; overrideForPAX_10 = new HashMap&lt;&gt;()
+        {{
+            put(&quot;kerberos overrides&quot;, Arrays.asList(new HashMap&lt;&gt;()
+                                                    {{
+                                                        put(&quot;expiryDate&quot;, &quot;2020-06-13T19:52:44.500Z&quot;);
+                                                        put(&quot;control id&quot;, &quot;2097&quot;);
+                                                        put(&quot;name&quot;, &quot;AC-5.103 Detect Toxic Combination of Access&quot;);
+                                                        put(&quot;comment&quot;, &quot;first comment&quot;);
+                                                        put(&quot;override&quot;, &quot;PRIVILEGE_OVERRIDE@~11~:~31~&quot;);
+                                                        put(&quot;state&quot;, &quot;APPROVED&quot;);
+                                                        put(&quot;id&quot;, &quot;5014&quot;);
+                                                    }}
+            ));
+        }};
+        Mockito.when(peopleSearchController.guidFromKerberos(Mockito.anyString())).thenReturn(&quot;12345678&quot;);
+        Mockito.when(campController.getCampPrivilegesByKerberos(Mockito.anyString())).thenReturn(privilegeResponseEntity);
+        Mockito.when(comController.getComOverrides(Mockito.anyString())).thenReturn(ResponseEntity.ok(overrideForPAX_10));
+
+        //  PAX-10
+        ResponseEntity&lt;Resource&lt;?&gt;&gt; response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;lindgj&quot;, &quot;99999999-0000-9999-0000-000000000031&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Map&lt;String, String&gt; data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        String status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;fail&quot;, status);
+    }
+
+    @Test
+    public void assign_to_lindgj_with_overrides_for_two_rules() throws Exception
+    {
+        //  In this test we will attempt to assign a multi-duty assignable PAX-10 to user lindgj.
+        //  Assignable PAX-10 belongs to two duties: Duty-A and Duty-X
+        //  User lindgj currently holds assignables: PA-4, PB-4, PX-4, and PY-4
+        //  Attempting to assign PAX-10 to user lingj would violate two rules: Rule-AB and Rule-XY.
+        //
+        //  Mock SoD data for user lindgj
+        List&lt;String&gt; lindgjPrivileges = Arrays.asList(
+                &quot;f63baded-efd2-319d-8de4-41c8a4c6339a&quot;,
+                &quot;16e898df-5b1c-3f0c-b97a-c8ad4241d2aa&quot;,
+                &quot;e382f8ca-d4c4-3f3e-9a0b-0cd1fe05835c&quot;,
+                &quot;476bd432-7d74-333a-9e5a-4e62f99fb691&quot;
+        );
+        ResponseEntity privilegeResponseEntity = ResponseEntity.ok(lindgjPrivileges);
+
+        Map&lt;String, List&lt;Map&lt;String, String&gt;&gt;&gt; overrideForPAX_10 = new HashMap&lt;&gt;()
+        {{
+            put(&quot;kerberos overrides&quot;, Arrays.asList(new HashMap&lt;&gt;()
+            {{
+                put(&quot;expiryDate&quot;, &quot;2020-06-13T19:52:44.500Z&quot;);
+                put(&quot;control id&quot;, &quot;2097&quot;);
+                put(&quot;name&quot;, &quot;AC-5.103 Detect Toxic Combination of Access&quot;);
+                put(&quot;comment&quot;, &quot;first comment&quot;);
+                put(&quot;override&quot;, &quot;PRIVILEGE_OVERRIDE@~11~:~31~&quot;);
+                put(&quot;state&quot;, &quot;APPROVED&quot;);
+                put(&quot;id&quot;, &quot;5014&quot;);
+            }}));
+            put(&quot;Team (Core Engineering-OC_TEA12323) override&quot;, Arrays.asList(new HashMap&lt;&gt;()
+            {{
+                put(&quot;expiryDate&quot;, &quot;2020-06-13T19:52:44.500Z&quot;);
+                put(&quot;control id&quot;, &quot;14570&quot;);
+                put(&quot;name&quot;, &quot;AC-5.103 Detect Toxic Combination of Access&quot;);
+                put(&quot;comment&quot;, &quot;second comment&quot;);
+                put(&quot;override&quot;, &quot;PRIVILEGE_OVERRIDE@~31~:~13~&quot;);
+                put(&quot;state&quot;, &quot;APPROVED&quot;);
+                put(&quot;id&quot;, &quot;5015&quot;);
+            }}));
+        }};
+        Mockito.when(peopleSearchController.guidFromKerberos(Mockito.anyString())).thenReturn(&quot;12345678&quot;);
+        Mockito.when(campController.getCampPrivilegesByKerberos(Mockito.anyString())).thenReturn(privilegeResponseEntity);
+        Mockito.when(comController.getComOverrides(Mockito.anyString())).thenReturn(ResponseEntity.ok(overrideForPAX_10));
+
+        //  PAX-10
+        ResponseEntity&lt;Resource&lt;?&gt;&gt; response = clearanceController.checkPrivilegeAssignmentToKerberos(&quot;lindgj&quot;, &quot;99999999-0000-9999-0000-000000000031&quot;, false);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        Map&lt;String, String&gt; data = (Map&lt;String, String&gt;) response.getBody().getContent();
+        String status = data.get(&quot;Response&quot;);
+        assertEquals(&quot;pass&quot;, status);
+    }
+}</pre>
+</div></div></td></tr></tbody></table></div><p />
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Notes on Integration Tests</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Project-Profit-Application_315097089.html">Project Profit Application</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Unit-and-Integration-Tests-for-Subscription-Tracker_344522760.html">Unit and Integration Tests for Subscription Tracker</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Integration-Tests_355991569.html">Integration Tests</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Notes on Integration Tests
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on May 11, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="NotesonIntegrationTests-ProcessResponsewithJSONArray">Process Response with JSONArray</h1><p>Both the variable and the function call must specify String as in:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ResponseEntity&lt;String&gt; response = testRestTemplate.getForEntity(createUrlWithPort(&quot;/employees/subscriptions&quot;), String.class);</pre>
+</div></div></td></tr></tbody></table></div><p>Note what would happen if we used following syntax:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ResponseEntity&lt;?&gt; response = testRestTemplate.getForEntity(createUrlWithPort(&quot;/employees/subscriptions&quot;), String.class);</pre>
+</div></div></td></tr></tbody></table></div><p>When we use:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">JSONArray jsonArray = new JSONArray(response.getBody());</pre>
+</div></div></td></tr></tbody></table></div><p>we will get following error:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">org.json.JSONException: Not a primitive array: class java.lang.String</pre>
+</div></div></td></tr></tbody></table></div><h1 id="NotesonIntegrationTests-One-To-ManyRelationsareLost">One-To-Many Relations are Lost</h1><p>Let's look at EmployeeSubscriptionController.getEmployeesSubscriptions method:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@GetMapping(&quot;/employees/{id}/subscriptions&quot;)
+public ResponseEntity&lt;Resource&lt;Employee&gt;&gt; getEmployeesSubscriptions(@PathVariable(&quot;id&quot;) int id)
+{
+    List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = employeeSubscriptionMapRepository.findByEmployeeId(id);
+    if(employeeSubscriptionPairs.isEmpty())
+    {
+        throw new NotFoundException(&quot;employee-&quot; + id);
+    }
+    Optional&lt;Employee&gt; employeeOptional = employeeSubscriptionPairs.stream().map(EmployeeSubscriptionPair::getEmployee).findFirst();
+    List&lt;Subscription&gt; subscriptions = employeeSubscriptionPairs
+            .stream()
+            .map(EmployeeSubscriptionPair::getSubscription)
+            .collect(Collectors.toList());
+    Employee employee = employeeOptional.get();
+    Resource&lt;Employee&gt; employeeResource = createEmployeeSubscriptionResource(employee, subscriptions);
+    employeeResource.add(linkTo(methodOn(getClass()).getEmployeesSubscriptions()).withRel(&quot;all&quot;));
+    return ResponseEntity.ok(employeeResource);
+}</pre>
+</div></div></td></tr></tbody></table></div><p>If we were to step into this method, we would discover that Employee has mapping to its associated Projects and Subscription collections:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">employee = {Employee@10377} &quot;links: []&quot;
+ ID = 1
+ auditId = &quot;00000000-0000-0000-0000-000000000001&quot;
+ employeeCode = &quot;EC-1&quot;
+ employeeName = &quot;One First&quot;
+ projectEmployeePairs = {PersistentBag@10388}  size = 2
+ employeeSubscriptionPairs = {PersistentBag@10398}  size = 3
+ createdBy = &quot;unknown&quot;
+ lastModifiedBy = &quot;unknown&quot;
+ inUtc = {Timestamp@10400} &quot;2020-05-08 15:30:50.795&quot;
+ outUtc = {ZonedDateTime@10401} &quot;9999-12-31T00:00Z[UTC]&quot;
+ links = {ArrayList@10402}  size = 0</pre>
+</div></div></td></tr></tbody></table></div><p>However, this information is lost when we invoke this API externally, as from integration test:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Code</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Employee</strong></p></th></tr><tr><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@Test
+public void testB_getEmployeesSubscription()
+{
+    ResponseEntity&lt;Employee&gt; response = testRestTemplate.getForEntity(createUrlWithPort(&quot;/employees/1/subscriptions&quot;), 
+            Employee.class);
+    assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+    Employee employee = response.getBody();
+...</pre>
+</div></div><p><br/></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">employee = {Employee@10846} &quot;links: [&lt;http://localhost:49164/employees/1/subscriptions&gt;;rel=&quot;self&quot;, &lt;http://localhost:49164/subscriptions/1&gt;;rel=&quot;subscription&quot;, &lt;http://localhost:49164/subscriptions/2&gt;;rel=&quot;subscription&quot;, &lt;http://localhost:49164/subscriptions/3&gt;;rel=&quot;subscription&quot;, &lt;http://localhost:49164/employees/subscriptions&gt;;rel=&quot;all&quot;]&quot;
+ ID = 0
+ auditId = &quot;00000000-0000-0000-0000-000000000001&quot;
+ employeeCode = &quot;EC-1&quot;
+ employeeName = &quot;One First&quot;
+ projectEmployeePairs = {ArrayList@10858}  size = 0
+ employeeSubscriptionPairs = {ArrayList@10859}  size = 0
+ createdBy = &quot;unknown&quot;
+ lastModifiedBy = &quot;unknown&quot;
+ inUtc = {Date@10862} &quot;Fri May 08 07:33:43 EDT 2020&quot;
+ outUtc = {ZonedDateTime@10863} &quot;9999-12-31T00:00Z[UTC]&quot;
+ links = {ArrayList@10864}  size = 5</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><p>We can fix this problem by adding @Transient collections to Project, Employee, and Subscription Entities, for example:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">..
+@Transient
+private List&lt;Subscription&gt; subscriptions;
+public List&lt;Subscription&gt; getSubscriptions()
+{
+    return subscriptions;
+}
+public void setSubscriptions(List&lt;Subscription&gt; subscriptions)
+{
+    this.subscriptions = subscriptions;
+}</pre>
+</div></div></td></tr></tbody></table></div><p>and set in Mapping controllers, for example:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@GetMapping(&quot;/subscriptions/{id}/employees&quot;)
+public ResponseEntity&lt;Resource&lt;Subscription&gt;&gt; getSubscriptionsEmp
+{
+    List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = em
+    if(employeeSubscriptionPairs.isEmpty())
+    {
+        throw new NotFoundException(&quot;subscription-&quot; + id);
+    }
+    Optional&lt;Subscription&gt; subscriptionOptional = employeeSubscri
+    List&lt;Employee&gt; employees = employeeSubscriptionPairs
+            .stream()
+            .map(EmployeeSubscriptionPair::getEmployee)
+            .collect(Collectors.toList());
+    Subscription subscription = subscriptionOptional.get();
+    subscription.setEmployees(employees);
+....</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><p><br/></p><h1 id="NotesonIntegrationTests-@JsonIgnoremaynotberequiredinEntityobjectsbefore@OneToManyfields-Wrong">@JsonIgnore may not be required in Entity objects before @OneToMany fields - Wrong</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public class Employee extends BaseEntity
+{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name=&quot;ID&quot;, updatable = false, nullable = false)
+    @JsonProperty
+    private int ID;
+    private String auditId = UUID.randomUUID().toString();
+    private String employeeCode;
+    private String employeeName;
+    //@JsonIgnore
+    @OneToMany(mappedBy = &quot;employee&quot;)
+    private List&lt;ProjectEmployeePair&gt; projectEmployeePairs = new ArrayList&lt;&gt;();
+    //@JsonIgnore
+    @OneToMany(mappedBy = &quot;employee&quot;)
+    private List&lt;EmployeeSubscriptionPair&gt; employeeSubscriptionPairs = new ArrayList&lt;&gt;();</pre>
+</div></div></td></tr></tbody></table></div><p>This annotation is required. If we remove it, we get problem with Mapping Controller</p><h3 id="NotesonIntegrationTests-Without@JsonIgnore">Without @JsonIgnore</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Request</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p>localhost:8080/employees/subscriptions</p></td><td class="confluenceTd"><p>Unexpected ''</p></td></tr></tbody></table></div><p><br/></p><h3 id="NotesonIntegrationTests-With@JsonIgnore">With @JsonIgnore</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Request</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p>localhost:8080/employees/subscriptions</p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">[
+  {
+    &quot;createdBy&quot;: &quot;unknown&quot;,
+    &quot;lastModifiedBy&quot;: &quot;unknown&quot;,
+    &quot;inUtc&quot;: &quot;2020-05-10T22:56:14.508+0000&quot;,
+    &quot;outUtc&quot;: &quot;9999-12-31T00:00:00Z&quot;,
+    &quot;ID&quot;: 1,
+    &quot;auditId&quot;: &quot;00000000-0000-0000-0000-000000000001&quot;,
+    &quot;employeeCode&quot;: &quot;EC-1&quot;,
+    &quot;employeeName&quot;: &quot;One First&quot;,
+    &quot;links&quot;: [
+      {
+        &quot;rel&quot;: &quot;self&quot;,
+        &quot;href&quot;: &quot;http://localhost:8080/employees/1/subscriptions&quot;
+      },
+      {
+        &quot;rel&quot;: &quot;subscription&quot;,
+        &quot;href&quot;: &quot;http://localhost:8080/subscriptions/1&quot;,
+        &quot;title&quot;: &quot;Subscription 1&quot;
+      },
+      {
+        &quot;rel&quot;: &quot;subscription&quot;,
+        &quot;href&quot;: &quot;http://localhost:8080/subscriptions/2&quot;,
+        &quot;title&quot;: &quot;Subscription 2&quot;
+      },
+      {
+        &quot;rel&quot;: &quot;subscription&quot;,
+        &quot;href&quot;: &quot;http://localhost:8080/subscriptions/3&quot;,
+        &quot;title&quot;: &quot;Subscription 3&quot;
+      }
+    ]
+  },
+  ...</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h1 id="NotesonIntegrationTests-Allobjectsusedinsideintegrationtestsmustimplementdefaultconstructors">All objects used inside integration tests must implement default constructors</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">ResponseEntity&lt;ProjectDTO&gt; response = testRestTemplate.getForEntity(createUrlWithPort( &quot;/projects/1&quot;), ProjectDTO.class);</pre>
+</div></div></td></tr></tbody></table></div><p><br/></p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">public ProjectDTO()
+{
+    
+}</pre>
+</div></div></td></tr></tbody></table></div><h1 id="NotesonIntegrationTests-EachsetofIntegrationTestsrunssuccessfully.But,whenalltestsareexecutedsomeofthemfail.">Each set of Integration Tests runs successfully. But, when all tests are executed some of them fail.</h1><p>This must be related to dependency. We need to find a way to reset the in-memory database at the beginning of each test.</p><p>Add following annotation to the beginning of each integration test:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td data-highlight-colour="#ffffff" class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)</pre>
+</div></div></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

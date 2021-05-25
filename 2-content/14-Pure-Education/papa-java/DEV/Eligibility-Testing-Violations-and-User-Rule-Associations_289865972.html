@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Eligibility Testing Violations and User-Rule Associations</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Eligibility_289898573.html">Eligibility</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Eligibility Testing Violations and User-Rule Associations
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 19, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h1 id="EligibilityTestingViolationsandUser-RuleAssociations-AssociationbetweenRulesandDuties">Association between Rules and Duties</h1><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/289865972/289865984.png" data-image-src="attachments/289865972/289865984.png" data-height="526" data-width="904" data-unresolved-comment-count="0" data-linked-resource-id="289865984" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200419-120358.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="289865972" data-linked-resource-container-version="1" data-media-id="81f4db9f-4d0f-4de7-9a18-408f81384485" data-media-type="file"></span><h1 id="EligibilityTestingViolationsandUser-RuleAssociations-Primein-memorydatabasewithusersandassignedprivileges">Prime in-memory database with users and assigned privileges</h1><p>To test violations, we will prime our in-memory database with Users who have been assigned certain privileges that violate Eligibility rules</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/289865972/290029740.png" data-image-src="attachments/289865972/290029740.png" data-height="684" data-width="469" data-unresolved-comment-count="0" data-linked-resource-id="290029740" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200419-120439.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="289865972" data-linked-resource-container-version="1" data-media-id="5d74374b-d0fe-42aa-8349-13d4169a7e9e" data-media-type="file"></span><h1 id="EligibilityTestingViolationsandUser-RuleAssociations-PostmanTestforViolations">Postman Test for Violations</h1><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p /></td><td class="confluenceTd"><p /></td></tr><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Request</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p><a href="http://localhost:8080/users/violations" class="external-link" rel="nofollow">http://localhost:8080/users/violations</a></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;self&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/users/violations&quot;
+    }
+  ],
+  &quot;content&quot;: [
+    {
+      &quot;privilegeName&quot;: &quot;Free milk&quot;,
+      &quot;privilegeId&quot;: 2,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;self&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/3/violations&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/3&quot;,
+          &quot;title&quot;: &quot;Ivan&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/1&quot;,
+          &quot;title&quot;: &quot;Refreshments-Rule&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;duty&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/duties/1&quot;,
+          &quot;title&quot;: &quot;Refreshments&quot;
+        }
+      ]
+    },
+    {
+      &quot;privilegeName&quot;: &quot;Free coffee&quot;,
+      &quot;privilegeId&quot;: 1,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;self&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/4/violations&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/4&quot;,
+          &quot;title&quot;: &quot;Andy&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/1&quot;,
+          &quot;title&quot;: &quot;Refreshments-Rule&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;duty&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/duties/1&quot;,
+          &quot;title&quot;: &quot;Refreshments&quot;
+        }
+      ]
+    },
+    {
+      &quot;privilegeName&quot;: &quot;Free milk&quot;,
+      &quot;privilegeId&quot;: 2,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;self&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/5/violations&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/5&quot;,
+          &quot;title&quot;: &quot;Joe&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/1&quot;,
+          &quot;title&quot;: &quot;Refreshments-Rule&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;duty&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/duties/1&quot;,
+          &quot;title&quot;: &quot;Refreshments&quot;
+        }
+      ]
+    },
+    {
+      &quot;privilegeName&quot;: &quot;Free car&quot;,
+      &quot;privilegeId&quot;: 4,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;self&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/1/violations&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/1&quot;,
+          &quot;title&quot;: &quot;Nick&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/2&quot;,
+          &quot;title&quot;: &quot;Transport-Rule&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;duty&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/duties/2&quot;,
+          &quot;title&quot;: &quot;Transport&quot;
+        }
+      ]
+    },
+    {
+      &quot;privilegeName&quot;: &quot;Free gas&quot;,
+      &quot;privilegeId&quot;: 5,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;self&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/4/violations&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/4&quot;,
+          &quot;title&quot;: &quot;Andy&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/2&quot;,
+          &quot;title&quot;: &quot;Transport-Rule&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;duty&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/duties/2&quot;,
+          &quot;title&quot;: &quot;Transport&quot;
+        }
+      ]
+    },
+    {
+      &quot;privilegeName&quot;: &quot;Extended vacation&quot;,
+      &quot;privilegeId&quot;: 8,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;self&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/1/violations&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/1&quot;,
+          &quot;title&quot;: &quot;Nick&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/4&quot;,
+          &quot;title&quot;: &quot;BigPerks-Rule&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;duty&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/duties/3&quot;,
+          &quot;title&quot;: &quot;Big Perks&quot;
+        }
+      ]
+    },
+    {
+      &quot;privilegeName&quot;: &quot;Pluralsight subscription&quot;,
+      &quot;privilegeId&quot;: 11,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;self&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/5/violations&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/5&quot;,
+          &quot;title&quot;: &quot;Joe&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/5&quot;,
+          &quot;title&quot;: &quot;Training-Rule&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;duty&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/duties/4&quot;,
+          &quot;title&quot;: &quot;Training&quot;
+        }
+      ]
+    }
+  ]
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div><h3 id="EligibilityTestingViolationsandUser-RuleAssociations-PostmanTestsforUsersandRulesAssociations">Postman Tests for Users and Rules Associations</h3><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p /></td></tr><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Request</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p><a href="http://localhost:8080/rules/users" class="external-link" rel="nofollow">http://localhost:8080/rules/users</a></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;self&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/rules/users&quot;
+    }
+  ],
+  &quot;content&quot;: [
+    {
+      &quot;ruleName&quot;: &quot;Refreshments-Rule&quot;,
+      &quot;ruleType&quot;: &quot;Allow&quot;,
+      &quot;ruleState&quot;: &quot;Draft&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/1&quot;,
+          &quot;title&quot;: &quot;Nick&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/2&quot;,
+          &quot;title&quot;: &quot;Alex&quot;
+        }
+      ]
+    },
+    {
+      &quot;ruleName&quot;: &quot;Transport-Rule&quot;,
+      &quot;ruleType&quot;: &quot;Allow&quot;,
+      &quot;ruleState&quot;: &quot;Draft&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/3&quot;,
+          &quot;title&quot;: &quot;Ivan&quot;
+        }
+      ]
+    },
+    {
+      &quot;ruleName&quot;: &quot;BigPerks-Rule&quot;,
+      &quot;ruleType&quot;: &quot;Allow&quot;,
+      &quot;ruleState&quot;: &quot;Draft&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/2&quot;,
+          &quot;title&quot;: &quot;Alex&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/3&quot;,
+          &quot;title&quot;: &quot;Ivan&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/4&quot;,
+          &quot;title&quot;: &quot;Andy&quot;
+        }
+      ]
+    },
+    {
+      &quot;ruleName&quot;: &quot;Training-Rule&quot;,
+      &quot;ruleType&quot;: &quot;Disallow&quot;,
+      &quot;ruleState&quot;: &quot;Draft&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;user&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/users/5&quot;,
+          &quot;title&quot;: &quot;Joe&quot;
+        }
+      ]
+    }
+  ]
+}</pre>
+</div></div><p><br/></p></td></tr><tr><td class="confluenceTd"><p><a href="http://localhost:8080/users/rules" class="external-link" rel="nofollow">http://localhost:8080/users/rules</a></p></td><td class="confluenceTd"><p><br/></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">{
+  &quot;links&quot;: [
+    {
+      &quot;rel&quot;: &quot;self&quot;,
+      &quot;href&quot;: &quot;http://localhost:8080/users/rules&quot;
+    }
+  ],
+  &quot;content&quot;: [
+    {
+      &quot;userName&quot;: &quot;Nick&quot;,
+      &quot;userLocation&quot;: &quot;VP&quot;,
+      &quot;userDepartment&quot;: &quot;T123&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/1&quot;,
+          &quot;title&quot;: &quot;Refreshments-Rule&quot;
+        }
+      ]
+    },
+    {
+      &quot;userName&quot;: &quot;Alex&quot;,
+      &quot;userLocation&quot;: &quot;MD&quot;,
+      &quot;userDepartment&quot;: &quot;T123&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/1&quot;,
+          &quot;title&quot;: &quot;Refreshments-Rule&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/4&quot;,
+          &quot;title&quot;: &quot;BigPerks-Rule&quot;
+        }
+      ]
+    },
+    {
+      &quot;userName&quot;: &quot;Ivan&quot;,
+      &quot;userLocation&quot;: &quot;MD&quot;,
+      &quot;userDepartment&quot;: &quot;T999&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/2&quot;,
+          &quot;title&quot;: &quot;Transport-Rule&quot;
+        },
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/4&quot;,
+          &quot;title&quot;: &quot;BigPerks-Rule&quot;
+        }
+      ]
+    },
+    {
+      &quot;userName&quot;: &quot;Andy&quot;,
+      &quot;userLocation&quot;: &quot;MD&quot;,
+      &quot;userDepartment&quot;: &quot;T111&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/4&quot;,
+          &quot;title&quot;: &quot;BigPerks-Rule&quot;
+        }
+      ]
+    },
+    {
+      &quot;userName&quot;: &quot;Joe&quot;,
+      &quot;userLocation&quot;: &quot;Contingent&quot;,
+      &quot;userDepartment&quot;: &quot;T888&quot;,
+      &quot;links&quot;: [
+        {
+          &quot;rel&quot;: &quot;rule&quot;,
+          &quot;href&quot;: &quot;http://localhost:8080/rules/5&quot;,
+          &quot;title&quot;: &quot;Training-Rule&quot;
+        }
+      ]
+    }
+  ]
+}</pre>
+</div></div><p><br/></p></td></tr></tbody></table></div>
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/289865972/289865984.png">image-20200419-120358.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/289865972/290029740.png">image-20200419-120439.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

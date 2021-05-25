@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Inheritance (with HATEOAS Links)</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Basic_289898911.html">Basic</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Inheritance (with HATEOAS Links)
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span> on Apr 20, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="Inheritance(withHATEOASLinks)-MappedSuperclass">Mapped Superclass</h2><p>Mapped SuperClass is not an &quot;inheritance strategy&quot; but rather a way to factor out common functionality of various Entity objects into a common base class. The common base class is decorated with @MappedSuperclass and may not be an Entity. A database table will be created for each Entity class that inherits from the base superclass.</p><p><br/></p><h2 id="Inheritance(withHATEOASLinks)-TypesofEntityInheritance">Types of Entity Inheritance</h2><p><a href="https://confluence.apg.services.gs.com/display/~gunern/Mapped+Superclass+and+Table+Per+Class" class="external-link" rel="nofollow">Mapped Superclass and Table Per Class</a> - factor out common functionality to the base class. One table will be created for each derived entity object</p><p><a href="https://confluence.apg.services.gs.com/display/~gunern/Single+Table" class="external-link" rel="nofollow">Single Table</a> – the entities from different classes with a common ancestor are placed in a single table</p><p><a href="https://confluence.apg.services.gs.com/display/~gunern/Joined+Table" class="external-link" rel="nofollow">Joined Table</a> – each class has its table and querying a subclass entity requires joining the tables</p><p><a href="https://confluence.apg.services.gs.com/display/~gunern/Table+Per+Class" class="external-link" rel="nofollow">Table Per Class</a> – In contrast to the MappedSuperclass approach, the superclass is now also an entity which gets mapped to a database table and can be used in queries and associations.</p><h2 id="Inheritance(withHATEOASLinks)-Comparison">Comparison</h2><div class="table-wrap"><table data-layout="default" class="confluenceTable"><tbody><tr><td class="confluenceTd"><p /></td></tr><tr><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Single Table</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Table Per Class</strong></p></th><th data-highlight-colour="#f0f0f0" class="confluenceTh"><p><strong>Joined Table</strong></p></th></tr><tr><td class="confluenceTd"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/606027935/image2019-10-4_16-35-17.png?version=1&amp;modificationDate=1570221317673&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/606027935/image2019-10-4_16-35-17.png?version=1&amp;modificationDate=1570221317673&amp;api=v2" loading="lazy"></span></td><td class="confluenceTd"><p><br/></p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/609786234/image2019-10-8_9-19-50.png?version=1&amp;modificationDate=1570540790573&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/609786234/image2019-10-8_9-19-50.png?version=1&amp;modificationDate=1570540790573&amp;api=v2" loading="lazy"></span><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/609786234/image2019-10-8_9-20-26.png?version=1&amp;modificationDate=1570540826566&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/609786234/image2019-10-8_9-20-26.png?version=1&amp;modificationDate=1570540826566&amp;api=v2" loading="lazy"></span><p><br/></p></td><td class="confluenceTd"><p><br/></p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/606027940/image2019-10-8_12-59-51.png?version=1&amp;modificationDate=1570553991970&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/606027940/image2019-10-8_12-59-51.png?version=1&amp;modificationDate=1570553991970&amp;api=v2" loading="lazy"></span><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/606027940/image2019-10-8_12-59-22.png?version=1&amp;modificationDate=1570553962369&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/606027940/image2019-10-8_12-59-22.png?version=1&amp;modificationDate=1570553962369&amp;api=v2" loading="lazy"></span><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image confluence-external-resource image-center" src="https://confluence.apg.services.gs.com/download/attachments/606027940/image2019-10-8_13-0-24.png?version=1&amp;modificationDate=1570554024144&amp;api=v2" data-image-src="https://confluence.apg.services.gs.com/download/attachments/606027940/image2019-10-8_13-0-24.png?version=1&amp;modificationDate=1570554024144&amp;api=v2" loading="lazy"></span><p><br/></p></td></tr></tbody></table></div>
+                    </div>
+
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

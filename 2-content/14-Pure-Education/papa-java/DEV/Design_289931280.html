@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Design</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Tutorials_278921431.html">Tutorials</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Spring-Boot_278888737.html">Spring Boot</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Bi-Temporal-Design_289865729.html">Bi-Temporal Design</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Design
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Apr 18, 2020
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <h2 id="Design-Bi-TemporalMileStoningDesign">Bi-Temporal Mile Stoning Design</h2><p>Let use consider the following example:</p><p>We will explore this design using Rule and Duty objects that have a many-to-many relationship.</p><p>Both Rule and Duty Entity objects will have some attributes along with<code> in_utc</code> and <code>out_utc</code> fields. We can envision <code>Rule</code> and <code>Duty</code> objects and their corresponding tables to look as follows:</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/289931280/289931289.png" data-image-src="attachments/289931280/289931289.png" data-height="249" data-width="469" data-unresolved-comment-count="0" data-linked-resource-id="289931289" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200418-193455.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="289931280" data-linked-resource-container-version="2" data-media-id="50805cfa-34b9-472e-a366-751570413f14" data-media-type="file"></span><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/289931280/289865748.png" data-image-src="attachments/289931280/289865748.png" data-height="187" data-width="466" data-unresolved-comment-count="0" data-linked-resource-id="289865748" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200418-193514.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="289931280" data-linked-resource-container-version="2" data-media-id="b17f0d0a-daa3-4704-aeef-ac6e3fe043ca" data-media-type="file"></span><p>Note that the ID field is the auto-generated Primary key on both DUTY and RULE tables.</p><h1 id="Design-MappingofRulestoDuties">Mapping of Rules to Duties</h1><p>Since we need to maintain the audit information for Rule-to-Duty mappings, we can not use the <code>@ManyToMany</code> annotation since this annotation creates a &quot;phantom&quot; table with only DUTY_ID and RULE_ID fields. To save the audit information for Rule-to-Duty mappings we will create an Entity object to represent this table and set up a <code>@ManyToOne</code> relationships between Duties, Rules, and Duty-to-Rule mappings.</p><p>Our Duty-to-Rule Map table may be viewed as follows</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/289931280/289865758.png" data-image-src="attachments/289931280/289865758.png" data-height="220" data-width="470" data-unresolved-comment-count="0" data-linked-resource-id="289865758" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200418-193603.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="289931280" data-linked-resource-container-version="2" data-media-id="64d52f9b-ceb8-43c0-ae0d-210bf99aaa8e" data-media-type="file"></span><p>This tables shows that we have Duty 1 and Duty 2 mapped to Rule 1, Duty 3 and Duty 4 mapped to Rule 2, and Duty 5 and Rule 3 currently unmapped.</p><p>It is also important to note that when we create a new Duty or Rule, we set the DUTY_ID/RULE_ID column to the same value as the the auto-generated ID field.</p><h3 id="Design-CreatinganAuditTrailRecord">Creating an Audit Trail Record</h3><p>In the current setup, we have Duty (id=3) mapped to Rule (id=2). In the DUTY table we have the following record for Duty id=3</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/289931280/289931295.png" data-image-src="attachments/289931280/289931295.png" data-height="182" data-width="469" data-unresolved-comment-count="0" data-linked-resource-id="289931295" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200418-193658.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="289931280" data-linked-resource-container-version="2" data-media-id="a45a57d3-8b87-4eec-b45c-2f134d9b814c" data-media-type="file"></span><p>Let's say we decide to alter Duty (id=3) and set it to following values (note use of caps):</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/289931280/289865768.png" data-image-src="attachments/289931280/289865768.png" data-height="121" data-width="211" data-unresolved-comment-count="0" data-linked-resource-id="289865768" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200418-193726.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="289931280" data-linked-resource-container-version="2" data-media-id="eb44f602-692e-4c7e-a4f2-f71fdb966c1d" data-media-type="file"></span><p>After this change, we expect to find following records in the DUTY table for Duty (id=3)</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/289931280/290029584.png" data-image-src="attachments/289931280/290029584.png" data-height="213" data-width="479" data-unresolved-comment-count="0" data-linked-resource-id="290029584" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20200418-193753.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="289931280" data-linked-resource-container-version="2" data-media-id="767a13ad-e397-4f4c-a2ba-025e3628d93a" data-media-type="file"></span><p>Let's analyze this output.</p><ol><li><p>We UPDATED existing record (id=3) to set updated values to &quot;DUTY NAME&quot;, &quot;DUTY TYPE&quot;, and &quot;Oct 14, 2019&quot; field (for IN_UTC field).</p></li><li><p>We INSERTED a new record (id=4) which contained old values of the original record and set its OUT_UTC value to a date in the past.</p></li><li><p>The mapping of Duty to Rule remains intact since we had not changed the ID of the original record.</p></li></ol><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/289931280/289931289.png">image-20200418-193455.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/289931280/289865748.png">image-20200418-193514.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/289931280/289865758.png">image-20200418-193603.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/289931280/289931295.png">image-20200418-193658.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/289931280/289865768.png">image-20200418-193726.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/289931280/290029584.png">image-20200418-193753.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:35</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DevOps : Docker Windows Install and Uninstall Procedures</title>
+        <link rel="stylesheet" href="styles/site.css" type="text/css" />
+        <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+
+    <body class="theme-default aui-theme-default">
+        <div id="page">
+            <div id="main" class="aui-page-panel">
+                <div id="main-header">
+                    <div id="breadcrumb-section">
+                        <ol id="breadcrumbs">
+                            <li class="first">
+                                <span><a href="index.html">DevOps</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="DevOps-Home_603226548.html">DevOps Home</a></span>
+                            </li>
+                                                    <li>
+                                <span><a href="Setup_925368321.html">Setup</a></span>
+                            </li>
+                                                </ol>
+                    </div>
+                    <h1 id="title-heading" class="pagetitle">
+                                                <span id="title-text">
+                            DevOps : Docker Windows Install and Uninstall Procedures
+                        </span>
+                    </h1>
+                </div>
+
+                <div id="content" class="view">
+                    <div class="page-metadata">
+                        
+        
+    
+        
+    
+        
+        
+            Created by <span class='author'> Nicholas Guner</span>, last modified on Jan 29, 2021
+                        </div>
+                    <div id="main-content" class="wiki-content group">
+                    <p>Note: If uninstalling becomes necessary, it may involve multiple steps that are described here.</p><h1 id="DockerWindowsInstallandUninstallProcedures-Install">Install</h1><p>Make sure the Firewall is turned on</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 122.0px;"/><col style="width: 636.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Check:</strong></p></th><td class="confluenceTd"><p><code>netsh advfirewall show allprofiles</code></p></td></tr><tr><th class="confluenceTh"><p><strong>Turn On:</strong></p></th><td class="confluenceTd"><p><code>netsh advfirewall set allprofiles state on</code></p></td></tr></tbody></table></div><p>Check Network Adapters</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 151.0px;"/><col style="width: 809.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Command:</strong></p></th><td class="confluenceTd"><p><code>ncpa.cpl</code></p></td></tr><tr><th class="confluenceTh"><p><strong>Response:</strong></p></th><td class="confluenceTd"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1143013377/1143209985.png" data-image-src="attachments/1143013377/1143209985.png" data-height="70" data-width="1131" data-unresolved-comment-count="0" data-linked-resource-id="1143209985" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210127-183936.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1143013377" data-linked-resource-container-version="6" data-media-id="711b7fee-e689-49c9-a382-aaeca121d47c" data-media-type="file"></span><p /></td></tr></tbody></table></div><p>If installation was attempted previously, delete &quot;<code>myswitch</code>&quot; from Hyper-V manager's Virtual Switch Manager</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1143013377/1143144457.png" data-image-src="attachments/1143013377/1143144457.png" data-height="296" data-width="804" data-unresolved-comment-count="0" data-linked-resource-id="1143144457" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210127-184119.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1143013377" data-linked-resource-container-version="6" data-media-id="298f5342-e581-4746-b7d0-c6b338992710" data-media-type="file"></span><p>Run <code>Docker Desktop Installer.exe</code>  to install. Make sure to uninstall from Control Panel prior to this step if was installed previously. Restart Windows when prompted.</p><p>Check Network Adapters for presence of DockerNAT:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 119.0px;"/><col style="width: 641.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Command:</strong></p></th><td class="confluenceTd"><p><code>ncpa.cpl</code></p></td></tr><tr><th class="confluenceTh"><p><strong>Response:</strong></p></th><td class="confluenceTd"><span class="confluence-embedded-file-wrapper image-left-wrapper confluence-embedded-manual-size"><img class="confluence-embedded-image image-left" width="340" loading="lazy" src="attachments/1143013377/1143406599.png?width=340" data-image-src="attachments/1143013377/1143406599.png" data-height="83" data-width="572" data-unresolved-comment-count="0" data-linked-resource-id="1143406599" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210127-185806.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1143013377" data-linked-resource-container-version="6" data-media-id="9284eafa-dced-4eb3-bf42-f89d4b42a3e7" data-media-type="file"></span><p /></td></tr></tbody></table></div><p>Check docker users</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 340.0px;"/><col style="width: 340.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Command:</strong></p></th><td class="confluenceTd"><p><code>lusrmgr.msc</code></p></td></tr><tr><th class="confluenceTh"><p><strong>docker-users Group</strong></p></th><td class="confluenceTd"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1143013377/1143242758.png" data-image-src="attachments/1143013377/1143242758.png" data-height="248" data-width="445" data-unresolved-comment-count="0" data-linked-resource-id="1143242758" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210127-190039.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1143013377" data-linked-resource-container-version="6" data-media-id="187b8344-6725-4ba7-8f63-6a3dea88800d" data-media-type="file"></span><p /></td></tr></tbody></table></div><p>Check Docker Setting</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1143013377/1143341059.png" data-image-src="attachments/1143013377/1143341059.png" data-height="317" data-width="825" data-unresolved-comment-count="0" data-linked-resource-id="1143341059" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210127-190225.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1143013377" data-linked-resource-container-version="6" data-media-id="d790d8b9-c189-442e-88a9-89250b4cc491" data-media-type="file"></span><p>Check Docker Installation (from CMD)</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 143.0px;"/><col style="width: 615.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Command</strong></p></th><th class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p><code>docker --version</code></p></td><td class="confluenceTd"><p><code>Docker version 20.10.2, build 2291f61</code></p></td></tr><tr><td class="confluenceTd"><p><code>docker version</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Client: Docker Engine - Community
+ Cloud integration: 1.0.7
+ Version:           20.10.2
+ API version:       1.41
+ Go version:        go1.13.15
+ Git commit:        2291f61
+ Built:             Mon Dec 28 16:14:16 2020
+ OS/Arch:           windows/amd64
+ Context:           default
+ Experimental:      true
+
+Server: Docker Engine - Community
+ Engine:
+  Version:          20.10.2
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.13.15
+  Git commit:       8891c58
+  Built:            Mon Dec 28 16:15:28 2020
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.4.3
+  GitCommit:        269548fa27e0089a8b8278fc4fc781d7f65a939b
+ runc:
+  Version:          1.0.0-rc92
+  GitCommit:        ff819c7e9184c13b7c2607fe6c30ae19403a7aff
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        de40ad0</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p><code>docker info</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">Client:
+ Context:    default
+ Debug Mode: false
+ Plugins:
+  app: Docker App (Docker Inc., v0.9.1-beta3)
+  buildx: Build with BuildKit (Docker Inc., v0.5.1-docker)
+  scan: Docker Scan (Docker Inc., v0.5.0)
+
+Server:
+ Containers: 1
+  Running: 0
+  Paused: 0
+  Stopped: 1
+ Images: 1
+ Server Version: 20.10.2
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Native Overlay Diff: true
+ Logging Driver: json-file
+ Cgroup Driver: cgroupfs
+ Cgroup Version: 1
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 269548fa27e0089a8b8278fc4fc781d7f65a939b
+ runc version: ff819c7e9184c13b7c2607fe6c30ae19403a7aff
+ init version: de40ad0
+ Security Options:
+  seccomp
+   Profile: default
+ Kernel Version: 5.4.72-microsoft-standard-WSL2
+ Operating System: Docker Desktop
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 8
+ Total Memory: 24.96GiB
+ Name: docker-desktop
+ ID: N3HZ:DAI4:BGR3:J2SX:QT7A:KEKQ:S3XJ:T5ES:OTCA:3VXR:FDQ6:6JQL
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Registry: https://index.docker.io/v1/
+ Labels:
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: false</pre>
+</div></div></td></tr></tbody></table></div><p>Run &quot;Hello World&quot; Docker container</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 173.0px;"/><col style="width: 787.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Command:</strong></p></th><td class="confluenceTd"><p><code>docker run hello-world</code></p></td></tr><tr><th class="confluenceTh"><p><strong>Response:</strong></p></th><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">latest: Pulling from library/hello-world
+0e03bdcc26d7: Pull complete
+Digest: sha256:31b9c7d48790f0d8c50ab433d9c3b7e17666d6993084c002c2ff1ca09b96391d
+Status: Downloaded newer image for hello-world:latest
+...
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+...</pre>
+</div></div></td></tr><tr><th class="confluenceTh"><p><strong>Command:</strong></p></th><td class="confluenceTd"><p><code>docker image ls</code></p></td></tr><tr><th class="confluenceTh"><p><strong>Response</strong></p></th><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+alpine/git    latest    04dbb58d2cea   7 days ago      25.1MB
+hello-world   latest    bf756fb1ae65   13 months ago   13.3kB</pre>
+</div></div></td></tr></tbody></table></div><h1 id="DockerWindowsInstallandUninstallProcedures-Uninstall">Uninstall</h1><p>Modify PowerShell execution policy</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 145.0px;"/><col style="width: 496.0px;"/><col style="width: 319.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Command</strong></p></th><th class="confluenceTh"><p><strong>Execute</strong></p></th><th class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p>Check</p></td><td class="confluenceTd"><p><code>Get-ExecutionPolicy</code></p></td><td class="confluenceTd"><p>Restricted</p></td></tr><tr><td class="confluenceTd"><p>Get All</p></td><td class="confluenceTd"><p><code>Get-ExecutionPolicy -List</code></p></td><td class="confluenceTd"><p /><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">        Scope ExecutionPolicy
+        ----- ---------------
+MachinePolicy       Undefined
+   UserPolicy       Undefined
+      Process       Undefined
+  CurrentUser       Undefined
+ LocalMachine       Undefined
+</pre>
+</div></div></td></tr><tr><td class="confluenceTd"><p>Change</p></td><td class="confluenceTd"><p><code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned</code></p></td><td class="confluenceTd"><p /></td></tr></tbody></table></div><p>If virtual machines are running make sure to turn them off from <code>Hyper-V Manager</code>.</p><p>Create a script, for example: <code>C:\users\nick\Docker\remove-docker.ps1</code></p><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">$ErrorActionPreference = &quot;SilentlyContinue&quot;
+
+kill -force -processname &#39;Docker for Windows&#39;, com.docker.db, vpnkit, com.docker.proxy, com.docker.9pdb, moby-diag-dl, dockerd
+
+try {
+    ./MobyLinux.ps1 -Destroy
+} Catch {}
+
+$service = Get-WmiObject -Class Win32_Service -Filter &quot;Name=&#39;com.docker.service&#39;&quot;
+if ($service) { $service.StopService() }
+if ($service) { $service.Delete() }
+Start-Sleep -s 5
+Remove-Item -Recurse -Force &quot;~/AppData/Local/Docker&quot;
+Remove-Item -Recurse -Force &quot;~/AppData/Roaming/Docker&quot;
+if (Test-Path &quot;C:\ProgramData\Docker&quot;) { takeown.exe /F &quot;C:\ProgramData\Docker&quot; /R /A /D Y }
+if (Test-Path &quot;C:\ProgramData\Docker&quot;) { icacls &quot;C:\ProgramData\Docker\&quot; /T /C /grant Administrators:F }
+Remove-Item -Recurse -Force &quot;C:\ProgramData\Docker&quot;
+Remove-Item -Recurse -Force &quot;C:\Program Files\Docker&quot;
+Remove-Item -Recurse -Force &quot;C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Docker&quot;
+Remove-Item -Force &quot;C:\Users\Public\Desktop\Docker for Windows.lnk&quot;
+Get-ChildItem HKLM:\software\microsoft\windows\currentversion\uninstall | % {Get-ItemProperty $_.PSPath}  | ? { $_.DisplayName -eq &quot;Docker&quot; } | Remove-Item -Recurse -Force
+Get-ChildItem HKLM:\software\classes\installer\products | % {Get-ItemProperty $_.pspath} | ? { $_.ProductName -eq &quot;Docker&quot; } | Remove-Item -Recurse -Force
+Get-Item &#39;HKLM:\software\Docker Inc.&#39; | Remove-Item -Recurse -Force
+Get-ItemProperty HKCU:\software\microsoft\windows\currentversion\Run -name &quot;Docker for Windows&quot; | Remove-Item -Recurse -Force
+#Get-ItemProperty HKCU:\software\microsoft\windows\currentversion\UFH\SHC | ForEach-Object {Get-ItemProperty $_.PSPath} | Where-Object { $_.ToString().Contains(&quot;Docker for Windows.exe&quot;) } | Remove-Item -Recurse -Force $_.PSPath
+#Get-ItemProperty HKCU:\software\microsoft\windows\currentversion\UFH\SHC | Where-Object { $(Get-ItemPropertyValue $_) -Contains &quot;Docker&quot; }
+
+.\remove-docker
+
+docker service is gone from services</pre>
+</div></div><p>and execute from PowerShell with Admin Rights</p><div class="table-wrap"><table data-layout="wide" class="confluenceTable"><colgroup><col style="width: 411.0px;"/><col style="width: 549.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Command</strong></p></th><th class="confluenceTh"><p><strong>Response</strong></p></th></tr><tr><td class="confluenceTd"><p><code>C:\users\nick\Docker\remove-docker.ps1</code></p></td><td class="confluenceTd"><div class="code panel pdl" style="border-width: 1px;"><div class="codeContent panelContent pdl">
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: java; gutter: false; theme: Confluence" data-theme="Confluence">...
+Successfully processed 5 files; Failed processing 0 files
+...</pre>
+</div></div></td></tr></tbody></table></div><p>Uninstall Docker from the Control Panel</p><p>Remove docker-users group</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 340.0px;"/><col style="width: 340.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Command:</strong></p></th><td class="confluenceTd"><p><code>lusrmgr.msc</code></p></td></tr><tr><th class="confluenceTh"><p><strong>docker-users Group</strong></p></th><td class="confluenceTd"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1143013377/1143013396.png" data-image-src="attachments/1143013377/1143013396.png" data-height="109" data-width="457" data-unresolved-comment-count="0" data-linked-resource-id="1143013396" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210127-203429.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1143013377" data-linked-resource-container-version="6" data-media-id="335cdf2f-996c-4536-a1f2-a9eea6043e13" data-media-type="file"></span><p /></td></tr></tbody></table></div><p>Remove Broken and Live Network Connections (<code>ncpa.cpl</code>)</p><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1143013377/1143373839.png" data-image-src="attachments/1143013377/1143373839.png" data-height="171" data-width="860" data-unresolved-comment-count="0" data-linked-resource-id="1143373839" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210127-203702.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1143013377" data-linked-resource-container-version="6" data-media-id="28db3c30-f748-44be-b2f6-b8935c37bfc1" data-media-type="file"></span><p>Uninstall Hyper-V adapters (from CMD with Admin rights)</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 680.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Commands</strong></p></th></tr><tr><td class="confluenceTd"><p><code>set devmgr_show_nonpresent_devices=1</code></p></td></tr><tr><td class="confluenceTd"><p><code>devmgmt.msc</code></p></td></tr></tbody></table></div><span class="confluence-embedded-file-wrapper image-left-wrapper"><img class="confluence-embedded-image image-left" loading="lazy" src="attachments/1143013377/1143210021.png" data-image-src="attachments/1143013377/1143210021.png" data-height="83" data-width="368" data-unresolved-comment-count="0" data-linked-resource-id="1143210021" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210127-204024.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1143013377" data-linked-resource-container-version="6" data-media-id="b84f0c80-a057-4a2c-830f-1ebb1a030b7f" data-media-type="file"></span><p>Note that Broken adapters and Hyper-V adapter should be gone</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 155.0px;"/><col style="width: 603.0px;"/></colgroup><tbody><tr><th class="confluenceTh"><p><strong>Command:</strong></p></th><td class="confluenceTd"><p><code>ncpa.cpl</code></p></td></tr><tr><th class="confluenceTh"><p><strong>Response</strong></p></th><td class="confluenceTd"><span class="confluence-embedded-file-wrapper image-center-wrapper"><img class="confluence-embedded-image image-center" loading="lazy" src="attachments/1143013377/1143341089.png" data-image-src="attachments/1143013377/1143341089.png" data-height="83" data-width="871" data-unresolved-comment-count="0" data-linked-resource-id="1143341089" data-linked-resource-version="1" data-linked-resource-type="attachment" data-linked-resource-default-alias="image-20210127-204236.png" data-base-url="https://nickguner.atlassian.net/wiki" data-linked-resource-content-type="image/png" data-linked-resource-container-id="1143013377" data-linked-resource-container-version="6" data-media-id="cf5095dc-6973-4be0-b56a-f2df57d26c62" data-media-type="file"></span><p /></td></tr></tbody></table></div><p>Restart computer and delete directories from Explorer with Admin rights</p><p>Directories to delete:</p><div class="table-wrap"><table data-layout="default" class="confluenceTable"><colgroup><col style="width: 680.0px;"/></colgroup><tbody><tr><td class="confluenceTd"><p><code>C:\Program Files\Docker</code></p></td></tr><tr><td class="confluenceTd"><p><code>C:\Users\nick.docker</code></p></td></tr></tbody></table></div><p />
+                    </div>
+
+                                        <div class="pageSection group">
+                        <div class="pageSectionHeader">
+                            <h2 id="attachments" class="pageSectionTitle">Attachments:</h2>
+                        </div>
+
+                        <div class="greybox" align="left">
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1143013377/1143209985.png">image-20210127-183936.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1143013377/1143144457.png">image-20210127-184119.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1143013377/1143406599.png">image-20210127-185806.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1143013377/1143242758.png">image-20210127-190039.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1143013377/1143341059.png">image-20210127-190225.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1143013377/1143013396.png">image-20210127-203429.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1143013377/1143373839.png">image-20210127-203702.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1143013377/1143210021.png">image-20210127-204024.png</a> (image/png)
+                                <br/>
+                                                            <img src="images/icons/bullet_blue.gif" height="8" width="8" alt=""/>
+                                <a href="attachments/1143013377/1143341089.png">image-20210127-204236.png</a> (image/png)
+                                <br/>
+                                                    </div>
+                    </div>
+                    
+                                                      
+                </div>             </div> 
+            <div id="footer" role="contentinfo">
+                <section class="footer-body">
+                    <p>Document generated by Confluence on Feb 12, 2021 23:36</p>
+                    <div id="footer-logo"><a href="http://www.atlassian.com/">Atlassian</a></div>
+                </section>
+            </div>
+        </div>     </body>
+</html>
