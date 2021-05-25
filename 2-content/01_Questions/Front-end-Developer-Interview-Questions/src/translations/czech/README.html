@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Front-end vývojář – otázky k pohovoru</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Front-end vývojář – otázky k pohovoru</h1>
+</header>
+<h1 id="front-end-vývojář-otázky-k-pohovoru">Front-end vývojář – otázky k pohovoru</h1>
+<p>Tento repozitář obsahuje řadu otázek, které můžete směle položit u pohovoru kandidátovi na pozici front-end vývojář a ověřit si tak jeho znalosti v tomto oboru. Není zamýšleno položit všechny tyto otázky (jejich korektní zodpovězení by trvalo hodiny), leč pouze určitou část vyhovující vašim potřebám.</p>
+<p>Za přečtení stojí také:</p>
+<ul>
+<li><a href="http://rmurphey.com/blog/2012/04/12/a-baseline-for-front-end-developers/">Baseline For Front-End Developers</a>(Anglicky) od <a href="http://rmurphey.com/">Rebecca Murphey</a></li>
+<li><a href="http://css-tricks.com/interview-questions-css/">Interview Questions and Exercises About CSS</a>(Anglicky) od <a href="http://chriscoyier.net/">Chris Coyier</a></li>
+</ul>
+<p><strong>Poznámka:</strong> Mějte na paměti, že tyto otázky mají vést spíše k diskusi na dané téma a prozradit tak něco více o schopnostech daného vývojáře než aby byly zodpovězeny jedním slovem nebo větou.</p>
+<h2 id="obsah"><a name='toc'>Obsah</a></h2>
+<ol type="1">
+<li><a href="#contributors">Původní přispěvovatelé</a></li>
+<li><a href="#general">Obecné otázky</a></li>
+<li><a href="#html">HTML otázky</a></li>
+<li><a href="#css">CSS otázky</a></li>
+<li><a href="#js">JS otázky</a></li>
+<li><a href="#jquery">jQuery otázky</a></li>
+<li><a href="#jscode">Otázky z kódu</a></li>
+<li><a href="#fun">Zábavné otázky</a></li>
+</ol>
+<h4 id="původní-přispěvovatelé"><a name='contributors'>Původní přispěvovatelé:</a></h4>
+<p>Většina otázek byla převzata z <a href="http://oksoclap.com/">oksoclap</a> původně vytvořeného <a href="http://paulirish.com">Paulem Irishem</a> (<span class="citation" data-cites="paul_irish">[@paul_irish]</span>(http://twitter.com/paul_irish)) a následně doplněna těmito osobami:</p>
+<ul>
+<li><span class="citation" data-cites="bentruyman">[@bentruyman]</span>(http://twitter.com/bentruyman) – http://bentruyman.com</li>
+<li><span class="citation" data-cites="cowboy">[@cowboy]</span>(http://twitter.com/cowboy) – http://benalman.com</li>
+<li><span class="citation" data-cites="ajpiano">[@ajpiano]</span>(http://ajpiano) – http://ajpiano.com</li>
+<li><span class="citation" data-cites="SlexAxton">[@SlexAxton]</span>(http://twitter.com/slexaxton) – http://alexsexton.com</li>
+<li><span class="citation" data-cites="boazsender">[@boazsender]</span>(http://twitter.com/boazsender) – http://boazsender.com</li>
+<li><span class="citation" data-cites="miketaylr">[@miketaylr]</span>(http://twitter.com/miketaylr) – http://miketaylr.com</li>
+<li><span class="citation" data-cites="vladikoff">[@vladikoff]</span>(http://twitter.com/vladikoff) – http://vladfilippov.com</li>
+<li><span class="citation" data-cites="gf3">[@gf3]</span>(http://twitter.com/gf3) – http://gf3.ca</li>
+<li><span class="citation" data-cites="jon_neal">[@jon_neal]</span>(http://twitter.com/jon_neal) – http://twitter.com/jon_neal</li>
+<li><span class="citation" data-cites="wookiehangover">[@wookiehangover]</span>(http://twitter.com/wookiehangover) – http://wookiehangover.com</li>
+<li><span class="citation" data-cites="iansym">[@iansym]</span>(http://twitter.com/iansym) – http://twitter.com/iansym</li>
+</ul>
+<p><strong><a href="#toc">[⬆]</a></strong></p>
+<h4 id="obecné-otázky"><a name='general'>Obecné otázky:</a></h4>
+<ul>
+<li>Co jste se naučili včera/minulý týden nového?</li>
+<li>Co Vás vzrušuje nebo zajímá na kódování?</li>
+<li>Povězte něco o Vašem oblíbeném vývojovém prostředí (operační systém, editor, prohlížeč, nástroje, atd.).</li>
+<li>Popište jak postupujete při vytváření nové webové stránky.</li>
+<li>Dokážete vysvětlit rozdíl mezi pozvolným degradováním (graceful degradation) a postupným vylepšováním(progressive enhancement)?
+<ul>
+<li>Body navíc za popsání detekce pokročilé funkcionality</li>
+</ul></li>
+<li>Vysvětlete pojem “sémantické HTML”.</li>
+<li>Jak byste optimalizovali zdroje (obrázky, JS, CSS, atd.) webové stránky?
+<ul>
+<li>K dispozici je celá řada optimalizací např.:
+<ul>
+<li>Spojování souborů</li>
+<li>Minifikace souborů</li>
+<li>CDN hostování</li>
+<li>Caching</li>
+<li>atd.</li>
+</ul></li>
+</ul></li>
+<li>Proč je lepší posílat zdroje webové stránky z více domén?
+<ul>
+<li>Kolik souborů může z dané domény stahovat prohlížeš najednou?</li>
+</ul></li>
+<li>Vyjmenujte tři způsoby jak snížit dobu nahrávání webové stránky (vnímanou nebo skutečnou dobu nahrávání)</li>
+<li>Pokud naskočíte do projektu, kde se místo odsazování tabulátory používají mezery, co uděláte?
+<ul>
+<li>Navrhnutí, že projekt by mohl využívat něco jako EditorConfig (http://editorconfig.org)</li>
+<li>Přízpůsobení se konvenci (ale zústat konzistentní).</li>
+<li><code>issue :retab! command</code></li>
+</ul></li>
+<li>Napište jednoduchou stránku se slideshow.
+<ul>
+<li>Body navíc pokud nepoužívá JS.</li>
+</ul></li>
+<li>Jaké nástroje používáte pro testování rychlosti Vašeho kódu?
+<ul>
+<li>Profiler, JSPerf, Dromaeo</li>
+</ul></li>
+<li>Pokud byste se chtěl/chtěla letos naučit jednu novou technologii, která by to byla?</li>
+<li>Vysvětlete důležitost standardů a standardizačních orgánů</li>
+<li>Co to je FOUC? Jak je možné se vyhnout FOUC?</li>
+</ul>
+<p><strong><a href="#toc">[⬆]</a></strong></p>
+<h4 id="html-otázky"><a name='html'>HTML otázky:</a></h4>
+<ul>
+<li>Co dělá <code>doctype</code> ?</li>
+<li>Jaký je rozdíl mezi standardním módem a quirks módem?</li>
+<li>Jaká jsou omezení při poskytování XHTML stránek?
+<ul>
+<li>Existuje nějaký problém při poskytování stránek jako <code>application/xhtml+xml</code>?</li>
+</ul></li>
+<li>Jak poskytujete stránku s vícejazyčným obsahem?
+<ul>
+<li>Na co všechno si musíte dát pozor při vytváření vícejazyčné stránky?</li>
+</ul></li>
+<li>K čemu je dobrý atribut <code>data-</code>?</li>
+<li>Uvažujte o HTML5 jako o otevření platormě. Jaké jsou základní stavební kameny HTML5?</li>
+<li>Popište rozdíl mezi cookies, sessionStorage a localStorage.</li>
+</ul>
+<p><strong><a href="#toc">[⬆]</a></strong></p>
+<h4 id="css-otázky"><a name='css'>CSS otázky:</a></h4>
+<ul>
+<li>Popište co děla a k čemu je dobrý “reset” CSS soubor.</li>
+<li>Popište obtékání (floats) a jak funguje.</li>
+<li>Popiště různé techniky pro zastavení obtékání (clear fixing) a řekněte, které se hodí v kterém kontextu.</li>
+<li>Vysvětlete, co to jsou CSS sprites a jak byste je implementovali.</li>
+<li>Jaká je Vaše oblíbená technika pro nahrazování obrázků a kterou a kdy používáte?</li>
+<li>CSS property hacks, kondicionální vkládání .css souborů nebo něco dalšího?</li>
+<li>Jak poskytujete stránky pro funkcionálně/vlastnostmi omezený prohlížeč?
+<ul>
+<li>Jakou techniku/proces používáte?</li>
+</ul></li>
+<li>Jaké jsou způsoby pro zneviditelní obsahu (a zachování jeho dostupnosti pro čtečky)?</li>
+<li>Použili jste někdy grid system a pokud ano, který upřednostňujete?</li>
+<li>Použili jset někdy mediální selektor (media query) nebo specifický layout/CSS pro mobilní zařízení?</li>
+<li>Máte nějaké zkušenosti s vytvářením SVG?</li>
+<li>Jak optimalizujete stránky pro tisk?</li>
+<li>Jaké jsou zásady pro psaní efektnivního CSS?</li>
+<li>Jaké jsou výhody/nevýhody použítí CSS preprocesorů (SASS, Compass, Stylus, LESS)?
+<ul>
+<li>Popiště, co se Vám na CSS preprocesorech, které jste použili, líbí/nelíbí.</li>
+</ul></li>
+<li>Jak byste implementovali návrh webové stránky, která používá nestandardní řezy písma?
+<ul>
+<li>Webfonts (služby typu: Google Webfonts, Typekit etc.)</li>
+</ul></li>
+<li>Vysvětlete jak prohlížeč určuje, který element odpovída CSS selektoru.</li>
+<li>Vysvětlete Vaše chápání box modelu a jak řeknete pomocí CSS prohlížeči, aby Váš layout vykreslil v odlišném box modelu</li>
+</ul>
+<p><strong><a href="#toc">[⬆]</a></strong></p>
+<h4 id="js-otázky"><a name='js'>JS otázky:</a></h4>
+<ul>
+<li>Vysvětlete delegaci událostí.</li>
+<li>Vysvětlete jak funguje <code>this</code> v JavaScriptu.</li>
+<li>Vysvětlete jak funguje funguje prototypová dědičnost.</li>
+<li>Jak testujete JavaScript?</li>
+<li>AMD vs. CommonJS?</li>
+<li>Co je hashovací tabulka?</li>
+<li>Vysvětlete proč následující volání nebude fungovat jako IIFE: <code>function foo(){ }();</code>.
+<ul>
+<li>Co musíte změnit, aby volání zafungovalo jako IIFE?</li>
+</ul></li>
+<li>Vysvětlete rozdíl mezi proměnou, která je <code>null</code>, <code>nedefinovaná</code> nebo <code>nedeklarovaná</code>?
+<ul>
+<li>Jakým způsobem ověříte jednotlivé stavy proměnné?</li>
+</ul></li>
+<li>Co to je closure a jak/proč bychom je měli používat?<br />
+</li>
+<li>Jaké je typické využití pro anonymní funkce?</li>
+<li>Vysvětlete “JavaScript module pattern” a kdybyste ho měli použít.
+<ul>
+<li>Body navíc za zmínku o čistých jmených prostorech.</li>
+<li>Co když moduly nemají jmené prostory?</li>
+</ul></li>
+<li>Jak organizujete Váš kód? Module pattern, klasická dědičn5ost?</li>
+<li>Jaký je rozdíl mezi nativními a hostitelskými objekty?</li>
+<li>Rozdíl mezi:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">function</span> <span class="at">Person</span>()<span class="op">{}</span> <span class="kw">var</span> person <span class="op">=</span> <span class="at">Person</span>() <span class="kw">var</span> person <span class="op">=</span> <span class="kw">new</span> <span class="at">Person</span>()</a></code></pre></div>
+<ul>
+<li>Jaký je rozdíl mezi <code>.call</code> a <code>.apply</code>?</li>
+<li>Jaký je rozdíl mezi <code>undefined</code> and <code>null</code>?</li>
+<li>Vysvětlete <code>Function.prototype.bind</code>.</li>
+<li>Kdy optimalizujete Váš kód?</li>
+<li>Vysvětlete jak funguje dědičnost v JavaScriptu.</li>
+<li>Kdy byste použili <code>document.write()</code>?
+<ul>
+<li>Většina generovaných reklam stále používá tento přístup i přesto, že je to dlouhodobě odsuzováno.</li>
+</ul></li>
+<li>Jaký je rozdíl mezi detekcí vlastností, odvození vlastností a použití UA řetězce?</li>
+<li>Vysvětlete AJAX co nejpodrobněji to jde.</li>
+<li>Vysvětlete jak funguje JSONP (a proč to není opravdový AJAX).</li>
+<li>Použili jste někdy JavaScriptové šablony?
+<ul>
+<li>Pokud ano, které knihovny jste použili (Mustache.js, Handlebars etc.)?</li>
+</ul></li>
+<li>Vysvětlete “hoisting”.</li>
+<li>Vysvětlete probublávání událostí.</li>
+<li>Jaký je rozdíl mezi atributem (attribute) a vlastností (property)?</li>
+<li>Proč není dobrý nápad rozšiřovat nativní JavaScriptové objekty?</li>
+<li>Proč je dobrý nápad rozšiřovat nativní JavaScriptové objekty?</li>
+<li>Jaký je rozdíl mezi událostmi document load a document ready?</li>
+<li>Jaký je rozdíl mezi <code>==</code> a <code>===</code>?</li>
+<li>Vysvětlete jakým způsobem získáte parametr z URL zadaného v okně prohlížeče.</li>
+<li>Vysvětlete JavaScriptové pravidlo stejného původu (same-origin policy).</li>
+<li>Popište přístupy k dědění v JavaScriptu.</li>
+<li>Následující kód upravte tak, aby fungoval:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1">[<span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">,</span><span class="dv">4</span><span class="op">,</span><span class="dv">5</span>].<span class="at">duplicate</span>()<span class="op">;</span> <span class="co">// [1,2,3,4,5,1,2,3,4,5]</span></a></code></pre></div>
+<ul>
+<li>Popište strategie pro memorizaci (odstranění opakovaných výpočtů) v JavaScriptu.</li>
+<li>Proč se říká ternární operátor, co označuje slovo ternární?</li>
+<li>Co je označováné jako “arity” funkce?</li>
+<li>Co znamená <code>"use strict";</code>? Jaké jsou výhody a nevýhody použití?</li>
+</ul>
+<p><strong><a href="#toc">[⬆]</a></strong></p>
+<h4 id="jquery-otázky"><a name='jquery'>jQuery otázky:</a></h4>
+<ul>
+<li>Vysvětlete řetězení (chaining).</li>
+<li>Vysvětlete odkládání (deferreds).</li>
+<li>Jaké znáte a umíte implementovat optimalizace speciálně pro jQuery?</li>
+<li>Co dělá <code>.end()</code>?</li>
+<li>Jak a proč byste váš event handler opatřili jmeným prostorem?</li>
+<li>Jmenujte čtyři různé typy hodnot, které můžete předat jako vstupní parametr metod v jQuery.
+<ul>
+<li>Selektor (řetězec), HTML (řetězec), Callback (funkce), HTMLElement, object, pole, pole elementu, jQuery Object, atd.</li>
+</ul></li>
+<li>Co to je fronta efektů (nebo fx fronta)?</li>
+<li>Jaký je rozdíl mezi <code>.get()</code>, <code>[]</code> a <code>.eq()</code>?</li>
+<li>Jaký je rozdíl mezi <code>.bind()</code>, <code>.live()</code> a <code>.delegate()</code>?</li>
+<li>Jaký je rozdíl mezi <code>$</code> a <code>$.fn</code>? Nebo jenom, co je <code>$.fn</code>?</li>
+<li>Zoptimalizujte tento selektor:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="at">$</span>(<span class="st">&quot;.foo div#bar:eq(0)&quot;</span>)</a></code></pre></div>
+<ul>
+<li>Jaký je rozdíl mezi ‘delegate()’ a ‘live()’?</li>
+</ul>
+<p><strong><a href="#toc">[⬆]</a></strong></p>
+<h4 id="otázky-z-kódu"><a name='jscode'>Otázky z kódu:</a></h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="op">~~</span><span class="fl">3.14</span></a></code></pre></div>
+<p>Otázka: Jakou hodnotu vrátí uvedený výraz? <strong>Odpověď: 3</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="st">&quot;i&#39;m a lasagna hog&quot;</span>.<span class="at">split</span>(<span class="st">&quot;&quot;</span>).<span class="at">reverse</span>().<span class="at">join</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<p>Otázka: Jakou hodnotu vrátí uvedený výraz? <strong>Odpověď: “goh angasal a m’i”</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1">( <span class="va">window</span>.<span class="at">foo</span> <span class="op">||</span> ( <span class="va">window</span>.<span class="at">foo</span> <span class="op">=</span> <span class="st">&quot;bar&quot;</span> ) )<span class="op">;</span></a></code></pre></div>
+<p>Otázka: Jakou hodnotu má window.foo? <strong>Odpověď: “bar”</strong> pouze pokud window.foo bylo false, jinak vrátí svojí hodnotu.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> <span class="st">&quot;Hello&quot;</span><span class="op">;</span> (<span class="kw">function</span>() <span class="op">{</span> <span class="kw">var</span> bar <span class="op">=</span> <span class="st">&quot; World&quot;</span><span class="op">;</span> <span class="at">alert</span>(foo <span class="op">+</span> bar)<span class="op">;</span> <span class="op">}</span>)()<span class="op">;</span> <span class="at">alert</span>(foo <span class="op">+</span> bar)<span class="op">;</span></a></code></pre></div>
+<p>Otázka: Co zobrazí uvedené dva alerty? <strong>Odpověď: “Hello World” a ReferenceError: bar is not defined</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="va">foo</span>.<span class="at">push</span>(<span class="dv">1</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="va">foo</span>.<span class="at">push</span>(<span class="dv">2</span>)<span class="op">;</span></a></code></pre></div>
+<p>Otázka: Jaká je hodnota foo.length? <strong>Odpověď: <code>2</code></strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="va">foo</span>.<span class="at">bar</span> <span class="op">=</span> <span class="st">&#39;hello&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>Otázka: Jaká je hodnota foo.length? <strong>Odpověď: <code>undefined</code></strong></p>
+<p><strong><a href="#toc">[⬆]</a></strong></p>
+<h4 id="zábavné-otázky"><a name='fun'>Zábavné otázky:</a></h4>
+<ul>
+<li>Jaká je nejúžasnější věc, kterou jste kdy nakódovali, nebo na kterou jste nejvíce pyšní?</li>
+<li>Jaké jsou Vaše oblíbené části vývojářských nástrojů, které používáte?</li>
+<li>Máte nějaký vlastní hobby projekt?</li>
+<li>Jaká je Vaše oblíbená vlastnost Internet Exploreru?</li>
+</ul>
+<p><strong><a href="#toc">[⬆]</a></strong></p>
+</body>
+</html>

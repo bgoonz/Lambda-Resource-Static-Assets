@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="pytorch-benchmarks">PyTorch Benchmarks</h1>
+<p>NOTE: This folder is currently work in progress.</p>
+<p>This folder contains scripts that produce reproducible timings of various PyTorch features.</p>
+<p>It also provides mechanisms to compare PyTorch with other frameworks.</p>
+<h2 id="setup-environment">Setup environment</h2>
+<p>Make sure you’re on a machine with CUDA, torchvision, and pytorch installed. Install in the following order:</p>
+<pre><code># Install torchvision. It comes with the pytorch stable release binary
+conda install pytorch torchvision -c pytorch
+
+# Install the latest pytorch master from source.
+# It should supersede the installation from the release binary.
+cd $PYTORCH_HOME
+python setup.py build develop
+
+# Check the pytorch installation version
+python -c &quot;import torch; print(torch.__version__)&quot;</code></pre>
+<h2 id="benchmark-list">Benchmark List</h2>
+<p>Please refer to each subfolder to discover each benchmark suite</p>
+<ul>
+<li><a href="fastrnns/README.md">Fast RNNs benchmarks</a></li>
+</ul>
+</body>
+</html>

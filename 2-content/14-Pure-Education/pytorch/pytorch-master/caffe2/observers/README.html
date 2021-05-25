@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="observers">Observers</h1>
+<h2 id="usage">Usage</h2>
+<p>Observers are a small framework that allow users to attach code to the execution of SimpleNets and Operators.</p>
+<p>An example of an Observer is the <code>TimeObserver</code>, used as follows:</p>
+<h3 id="c">C++</h3>
+<pre><code>unique_ptr&lt;TimeObserver&lt;NetBase&gt;&gt; net_ob =
+    make_unique&lt;TimeObserver&lt;NetBase&gt;&gt;(net.get());
+auto* ob = net-&gt;AttachObserver(std::move(net_ob));
+net-&gt;Run();
+LOG(INFO) &lt;&lt; &quot;av time children: &quot; &lt;&lt; ob-&gt;average_time_children();
+LOG(INFO) &lt;&lt; &quot;av time: &quot; &lt;&lt; ob-&gt;average_time();</code></pre>
+<h3 id="python">Python</h3>
+<pre><code>model.net.AttachObserver(&quot;TimeObserver&quot;)
+ws.RunNet(model.net)
+ob = model.net.GetObserver(&quot;TimeObserver&quot;)
+
+print(&quot;av time children:&quot;, ob.average_time_children())
+print(&quot;av time:&quot;, ob.average_time())</code></pre>
+<h3 id="histogram-observer">Histogram Observer</h3>
+<p>Creates a histogram for the values of weights and activations</p>
+<pre><code>model.net.AddObserver(&quot;HistogramObserver&quot;,
+                      &quot;histogram.txt&quot;, # filename
+                      2014, # number of bins in histogram
+                      32 # Dumping frequency
+                      )
+ws.RunNet(model.net)</code></pre>
+<p>This will generate a histogram for the activations and store it in histogram.txt</p>
+<h2 id="implementing-an-observer">Implementing An Observer</h2>
+<p>To implement an observer you must inherit from <code>ObserverBase</code> and implement the <code>Start</code> and <code>Stop</code> functions.</p>
+<p>Observers are instantiated with a <code>subject</code> of a generic type, such as a <code>Net</code> or <code>Operator</code>. The observer framework is built to be generic enough to “observe” various other types, however.</p>
+</body>
+</html>

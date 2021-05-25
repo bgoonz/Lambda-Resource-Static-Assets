@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>tensorboard</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="using-tensorboard-in-ifbpy">Using TensorBoard in ifbpy</h1>
+<h2 id="simple-example">Simple Example</h2>
+<pre class="lang=py"><code>
+import caffe2.contrib.tensorboard.tensorboard as tb
+import caffe2.contrib.tensorboard.tensorboard_exporter as tb_exporter
+from caffe2.python import brew, core, model_helper
+
+model = model_helper.ModelHelper(name=&quot;overfeat&quot;)
+data, label = brew.image_input(
+    model, [&quot;db&quot;], [&quot;data&quot;, &quot;label&quot;], is_test=0
+)
+with core.NameScope(&quot;conv1&quot;):
+    conv1 = brew.conv(model, data, &quot;conv1&quot;, 3, 96, 11, stride=4)
+    relu1 = brew.relu(model, conv1, conv1)
+    pool1 = brew.max_pool(model, relu1, &quot;pool1&quot;, kernel=2, stride=2)
+with core.NameScope(&quot;conv2&quot;):
+    conv2 = brew.conv(model, pool1, &quot;conv2&quot;, 96, 256, 5)
+    relu2 = brew.relu(model, conv2, conv2)
+    pool2 = brew.max_pool(model, relu2, &quot;pool2&quot;, kernel=2, stride=2)
+with core.NameScope(&quot;conv3&quot;):
+    conv3 = brew.conv(model, pool2, &quot;conv3&quot;, 256, 512, 3, pad=1)
+    relu3 = brew.relu(model, conv3, conv3)
+with core.NameScope(&quot;conv4&quot;):
+    conv4 = brew.conv(model, relu3, &quot;conv4&quot;, 512, 1024, 3, pad=1)
+    relu4 = brew.relu(model, conv4, conv4)
+with core.NameScope(&quot;conv5&quot;):
+    conv5 = brew.conv(model, relu4, &quot;conv5&quot;, 1024, 1024, 3, pad=1)
+    relu5 = brew.relu(model, conv5, conv5)
+    pool5 = brew.max_pool(model, relu5, &quot;pool5&quot;, kernel=2, stride=2)
+with core.NameScope(&quot;fc6&quot;):
+    fc6 = brew.fc(model, pool5, &quot;fc6&quot;, 1024*6*6, 3072)
+    relu6 = brew.relu(model, fc6, &quot;fc6&quot;)
+with core.NameScope(&quot;fc7&quot;):
+    fc7 = brew.fc(model, relu6, &quot;fc7&quot;, 3072, 4096)
+    relu7 = brew.relu(model, fc7, &quot;fc7&quot;)
+with core.NameScope(&quot;classifier&quot;):
+    fc8 = brew.fc(model, relu7, &quot;fc8&quot;, 4096, 1000)
+    pred = brew.softmax(model, fc8, &quot;pred&quot;)
+    xent = model.LabelCrossEntropy([pred, label], &quot;xent&quot;)
+    loss = model.AveragedLoss(xent, &quot;loss&quot;)
+model.net.RunAllOnGPU()
+model.param_init_net.RunAllOnGPU()
+model.AddGradientOperators([loss], skip=1)
+
+tb.Config.HEIGHT = 700
+tb.visualize_cnn(model)</code></pre>
+</body>
+</html>

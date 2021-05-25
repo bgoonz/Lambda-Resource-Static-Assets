@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Frames</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="frames">Frames</h1>
+<blockquote>
+<p>Frames tutorial and complete description of HTML tags for frames. Includes examples of different frames techniques.</p>
+</blockquote>
+<p><strong>Disclosure:</strong> Your support helps keep the site running! We earn a referral fee for some of the services we recommend on this page. <a href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/disclosure/">Learn more</a></p>
+<p>Lots of modern websites have sticky navigation menus that are visible either in the page sidebar or at the top of the page as you scroll up and down the page. However, the CSS features that make sticky navigation possible haven’t always been supported by web browsers. Before this effect could be created with CSS, the HTML <a href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/tags/frameset/"><code>frameset</code></a> and <a href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/tags/frame/"><code>frame</code></a> elements were used to create page layouts in which certain content remained visible while other content was scrollable.</p>
+<h2 id="the-difference-between-frames-and-iframes">The Difference Between Frames and Iframes</h2>
+<p>When you use <code>frameset</code> you split the visual real estate of a browser window into multiple frames. Each <code>frame</code> has it’s own contents and the content in one don’t spill into the next.</p>
+<p>An <a href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/tags/iframe/"><code>iframe</code></a>, on the other hand, embeds a frame directly inline with the other elements of a webpage.</p>
+<p>While both frames and iframes perform a similar function – embedding a resource into a webpage – they are fundamentally different.</p>
+<ul>
+<li>Frames are layout-defining elements.</li>
+<li>Iframes are a content-adding elements.</li>
+</ul>
+<h2 id="the-history-and-future-of-frames">The History and Future of Frames</h2>
+<p>Frames <a href="https://www.w3.org/TR/html5-diff/#obsolete-elements">have been deemed obsolete by the W3C</a> in HTML5. The reasoning given for this is that frames create usability and accessibility issues. Let’s consider each of these charges.</p>
+<h3 id="the-problem-with-frames">The Problem with Frames</h3>
+<ul>
+<li>Usability challenges: With the rise in popularity of mobile devices and tablets with small displays it’s more important than ever that websites offer multiple views which change based on the size of the device viewport. While frames can be manipulated to provide a certain degree of responsiveness, they are simply not well-suited to creating responsive websites.</li>
+<li>Accessibility challenges: Screen readers and other assistive technologies have a very hard time understanding and communicating websites that use frames.</li>
+</ul>
+<p>In addition to the accessibility and usability issues created by frames, the trend within web design is to separate the content of a webpage from its presentation.</p>
+<ul>
+<li><strong>Content</strong> should be added and defined by markup such as HTML.</li>
+<li><strong>Presentation</strong> should be manipulated with languages like CSS and JavaScript.</li>
+</ul>
+<p>Using frames is primarily about creating a specific look and layout, a presentation task that should really be handled with CSS.</p>
+<h3 id="the-future-of-frames">The Future of Frames</h3>
+<p>While all modern browser offer support for frames today, <a href="https://www.w3.org/TR/html5-diff/#obsolete-elements">the W3C has unequivocally stated</a> that frames “are not to be used by Web developers” and that support for frames in web browsers is offered for historical purposes only.</p>
+<p>If you have a website that makes use of frames you should start planning a website migration away from frames. At some point in the future support for frames will be dropped by modern web browsers, and when that happens websites build with frames will become unusable.</p>
+<h2 id="how-to-create-frames">How to Create Frames</h2>
+<p>While frames should not be used for new websites, learning how to use frames can be beneficial for webmasters who are managing older websites.</p>
+<h3 id="the-basic-idea-behind-frames">The Basic Idea Behind Frames</h3>
+<p>The basic concept behind frames is pretty simple:</p>
+<ul>
+<li>Use the <code>frameset</code> element in place of the <code>body</code> element in an HTML document.</li>
+<li>Use the <code>frame</code> element to create frames for the content of the web page.</li>
+<li>Use the <code>src</code> attribute to identify the resource that should be loaded inside each <code>frame</code>.</li>
+<li>Create a different file with the contents for each <code>frame</code>.</li>
+</ul>
+<p>Let’s look at a few examples of how this works. First we need a few HTML documents to work with. Let’s create four different HTML documents. Here’s what the first will contain:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Frame 1&lt;/h1&gt;
+        &lt;p&gt;Contents of Frame 1&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>The first document we’ll save as <em>frame_1.html</em>. The other three documents will have similar contents and follow the same naming sequence.</p>
+<h3 id="creating-vertical-columns">Creating Vertical Columns</h3>
+<p>To create a set of four vertical columns, we need to use the <code>frameset</code> element with the <code>cols</code> attribute.</p>
+<p>The <code>cols</code> attribute is used to define the number and size of columns the <code>frameset</code> will contain. In our case, we have four files to display, so we need four frames. To create four frames we need to assign four comma-separated values to the <code>cols</code> attribute.</p>
+<p>To make things simple we’re going to assign the value <code>*</code> to each of the frames, this will cause them to be automatically sized to fill the available space.</p>
+<p>Here’s what our HTML markup looks like.</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;frameset cols=&quot;*,*,*,*&quot;&gt;
+    &lt;frame src=&quot;../file_path/frame_1.html&quot;&gt;
+    &lt;frame src=&quot;frame_2.html&quot;&gt;
+    &lt;frame src=&quot;frame_3.html&quot;&gt;
+    &lt;frame src=&quot;frame_4.html&quot;&gt;
+&lt;/frameset&gt;
+&lt;/html&gt;</code></pre>
+<p>And here’s how that HTML will render.</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/columns.jpg" alt="Frames arranged into columns" /><figcaption>Frames arranged into columns</figcaption>
+</figure>
+<h3 id="creating-horizontal-rows">Creating Horizontal Rows</h3>
+<p>Rows of frames can be created by using the <code>rows</code> attribute rather than the <code>cols</code> attribute as shown in the HTML below.</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;frameset rows=&quot;*,*,*,*&quot;&gt;
+    &lt;frame src=&quot;frame_1.html&quot;&gt;
+    &lt;frame src=&quot;frame_2.html&quot;&gt;
+    &lt;frame src=&quot;frame_3.html&quot;&gt;
+    &lt;frame src=&quot;frame_4.html&quot;&gt;
+&lt;/frameset&gt;
+&lt;/html&gt;</code></pre>
+<p>By making that one change, the frames now load as four rows stacked up on top of eachother.</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/rows.jpg" alt="Frames arranged into rows" /><figcaption>Frames arranged into rows</figcaption>
+</figure>
+<h3 id="mixing-columns-and-rows">Mixing Columns and Rows</h3>
+<p>Columns and rows of frames can both appear on the same webpage by nesting one <code>frameset</code> inside of another. To do this, we first create a <code>frameset</code> and then nest a child <code>frameset</code> within the parent element. Here’s an example of how we could nest two rows within a set of three columns.</p>
+<pre><code>&lt;frameset cols=&quot;*,*,*&quot;&gt;
+    &lt;frameset rows=&quot;*,*&quot;&gt;
+        &lt;frame src=&quot;frame_1.html&quot;&gt;
+        &lt;frame src=&quot;frame_2.html&quot;&gt;
+    &lt;/frameset&gt;
+    &lt;frame src=&quot;frame_3.html&quot;&gt;
+    &lt;frame src=&quot;frame_4.html&quot;&gt;
+&lt;/frameset&gt;</code></pre>
+<p>Here’s the result of that code:</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/mixed_frames.jpg" alt="First column split vertically into two rows followed by two full-height columns" /><figcaption>First column split vertically into two rows followed by two full-height columns</figcaption>
+</figure>
+<p>The nested <code>frameset</code> takes the place of the first frame within the parent element. The nested element can be placed in any position. For example, if we wanted the nested element to appear in the center position we would just rearrange the elements like this.</p>
+<pre><code>&lt;frameset cols=&quot;*,*,*&quot;&gt;
+    &lt;frame src=&quot;frame_1.html&quot;&gt;
+    &lt;frameset rows=&quot;*,*&quot;&gt;
+        &lt;frame src=&quot;frame_2.html&quot;&gt;
+        &lt;frame src=&quot;frame_3.html&quot;&gt;
+    &lt;/frameset&gt;
+    &lt;frame src=&quot;frame_4.html&quot;&gt;
+&lt;/frameset&gt;</code></pre>
+<p>Here’s how the rearranged frames would render.</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/mixed_middle_frames.jpg" alt="Middle column split vertically into two rows. First and third columns are full height." /><figcaption>Middle column split vertically into two rows. First and third columns are full height.</figcaption>
+</figure>
+<p>Of course, we can also create additional nested frames if we want to.</p>
+<pre><code>&lt;frameset cols=&quot;*,*&quot;&gt;
+    &lt;frame src=&quot;frame_1.html&quot;&gt;
+    &lt;frameset rows=&quot;*,*&quot;&gt;
+        &lt;frame src=&quot;frame_2.html&quot;&gt;
+        &lt;frameset cols=&quot;*,*&quot;&gt;
+            &lt;frame src=&quot;frame_3.html&quot;&gt;
+            &lt;frame src=&quot;frame_4.html&quot;&gt;
+        &lt;/frameset&gt;
+    &lt;/frameset&gt;
+&lt;/frameset&gt;</code></pre>
+<p>That code creates a set of two equally sized columns. We then split the second column into two rows. Finally, we split the second row into two columns. Here’s what that actually looks like.</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/three_layers_frames.jpg" alt="A set of two columns with the second column split vertically into two rows, the bottom row is split horizontally into two columns." /><figcaption>A set of two columns with the second column split vertically into two rows, the bottom row is split horizontally into two columns.</figcaption>
+</figure>
+<p>One more way to create a combination of rows and columns is to define a grid of columns and rows in a single <code>frameset</code>. For example, if you wanted a grid of four equally sized frames, you could use the following code.</p>
+<pre><code>&lt;frameset rows=&quot;*,*&quot; cols=&quot;*,*&quot;&gt;
+    &lt;frame src=&quot;frame_1.html&quot;&gt;
+    &lt;frame src=&quot;frame_2.html&quot;&gt;
+    &lt;frame src=&quot;frame_3.html&quot;&gt;
+    &lt;frame src=&quot;frame_4.html&quot;&gt;
+&lt;/frameset&gt;</code></pre>
+<p>The resulting grid of columns and rows looks like this.</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/frame_grid.jpg" alt="A grid of four equally sized frames" /><figcaption>A grid of four equally sized frames</figcaption>
+</figure>
+<h2 id="how-to-style-frames">How to Style Frames</h2>
+<p>When styling the presentation of a webpage that uses frames, there are two different types of styling to consider:</p>
+<ul>
+<li>Styling within each <code>frame</code>.</li>
+<li>Styling the <code>frameset</code></li>
+</ul>
+<p>The presentation of each <code>frame</code> must be defined within the source document. The presentation of the <code>frameset</code> must be defined within the parent document containing the <code>frameset</code>.</p>
+<p>In other words, <em>frame_1.html</em> must be styled by CSS rules contained within <em>frame_1.html</em> or within a stylesheet linked to <em>frame_1.html</em>.</p>
+<h3 id="styling-frame-source-documents">Styling Frame Source Documents</h3>
+<p>Just as with any webpage, the contents of each frame can be styled with <a href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/css/">CSS</a>. In order to style the contents of each frame, the styles must be added to the source document itself either by linking to an external stylesheet within the source document or by adding internal or inline styles to the source document.</p>
+<p>Considering our four source documents, CSS styles have to be applied to each document individually. Applying CSS styles to the webpage that contains the <code>frameset</code> will not cause those styles to apply to each individual document.</p>
+<p>If we want to style <em>frame_1.html</em> we need to add styles directly to the document itself either by linking to an external style sheet or by typing them directly into the document. Here’s an example of how we might do that:</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;style&gt;
+            body {background: gray;}
+            h1 {color: blue;}
+            p {margin: 20px;}
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Frame 1&lt;/h1&gt;
+        &lt;p&gt;Contents of Frame 1&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>If we go back to our original example with four equally-sized columns and load the <code>frameset</code> after making these changes to <em>frame_1.html</em>, we get this:</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/styles_on_frame_1.jpg" alt="Four columns with styles applied to the first frame" /><figcaption>Four columns with styles applied to the first frame</figcaption>
+</figure>
+<h3 id="styling-formatting-the-frameset">Styling &amp; Formatting the Frameset</h3>
+<p>There are a few things you can do to affect the presentation of a <code>frameset</code> beyond styling the documents themselves.</p>
+<ul>
+<li>The size of each frame can be specified and locked.</li>
+<li>The margin between frames can be changed.</li>
+<li>The border around frames can be formatted.</li>
+</ul>
+<p>These changes aren’t made with CSS. Instead, they are made by adding attributes and values to the <code>frame</code> elements.</p>
+<h4 id="sizing-frames">Sizing Frames</h4>
+<p>Frames can be sized either in pixels or percentages, or they can be set to automatically adjust in size based on the available space. To specify the size of a frame, insert the desired value in the <code>cols</code> or <code>rows</code> attribute.</p>
+<p>By default, unless the attribute <code>noresize</code> is added to a frame, website visitors can use their mouse to drag the border between two frames to resize the frames. If this is undesirable, the attribute <code>noresize</code> can be applied to a frame element to prevent resizing.</p>
+<p>Let’s put both of these ideas into practice.</p>
+<p>Let’s create the following layout:</p>
+<ul>
+<li>One full-width row along the top of the webpage.</li>
+<li>Three columns below the top row.</li>
+<li>The first and third columns sizes to create left and right sidebars.</li>
+<li>The middle column sized to create a larger content area.</li>
+</ul>
+<p>We can create this layout with the following code.</p>
+<pre><code>&lt;frameset rows=&quot;150px,*&quot;&gt;
+    &lt;frame noresize src=&quot;frame_1.html&quot;&gt;
+    &lt;frameset cols=&quot;20%,*,20%&quot;&gt;
+        &lt;frame src=&quot;frame_2.html&quot;&gt;
+        &lt;frame src=&quot;frame_3.html&quot;&gt;
+        &lt;frame src=&quot;frame_4.html&quot;&gt;
+    &lt;/frameset&gt;
+&lt;/frameset&gt;</code></pre>
+<p>What that code creates is a <code>frameset</code> of two rows.</p>
+<ul>
+<li>The first row is 150px tall. The <code>noresize</code> attribute appearing on the first<code>frame</code> means that it cannot be resized.</li>
+<li>The styles we applied earlier to <em>frame_1.html</em> are preserved, but only affect the contents of that frame.</li>
+<li>The second row expands to fill the remaining space.</li>
+<li>A second <code>frameset</code> is nested in the second row and includes three columns.
+<ul>
+<li>The first and third columns will each cover 20% of the available browser window.</li>
+<li>The second column will resize to fill the space remaining between the first and third columns.</li>
+<li>Since the we did not use the <code>noresize</code> attribute on the columns, they will initially render based on the sizes included in the code, but a website visitor will be able to manually resize them.</li>
+</ul></li>
+</ul>
+<p>That code would create a webpage that rendered like this.</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/sized_frames.jpg" alt="Frames with styling and specific sizing rules applied." /><figcaption>Frames with styling and specific sizing rules applied.</figcaption>
+</figure>
+<h4 id="formatting-frame-margins-borders">Formatting Frame Margins &amp; Borders</h4>
+<p>Now that we have our layout defined, we can increase or decrease the margin between the frames and also remove the border between the frames if we wish to do so. Using the layout we created in the previous step, let’s remove the borders between the three columns, but leave the border between the upper and lower rows. Let’s also add some margin around the contents of the first <code>frame</code>.</p>
+<pre><code>&lt;frameset rows=&quot;150px,*&quot;&gt;
+    &lt;frame noresize src=&quot;frame_1.html&quot; marginheight=&quot;15&quot;&gt;
+    &lt;frameset cols=&quot;20%,*,20%&quot;&gt;
+        &lt;frame src=&quot;frame_2.html&quot; frameborder=&quot;0&quot;&gt;
+        &lt;frame src=&quot;frame_3.html&quot; frameborder=&quot;0&quot;&gt;
+        &lt;frame src=&quot;frame_4.html&quot; frameborder=&quot;0&quot;&gt;
+    &lt;/frameset&gt;
+&lt;/frameset&gt;</code></pre>
+<p>The <code>marginheight</code> attribute applied to the first frame will add 15px of margin above and below the content loaded in the first frame. The <code>frameborder</code> value of <code>0</code> removes the borders from around the three bottom frames.</p>
+<p>If we pull up this code in a browser, here’s what it looks like.</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/borders_and_margins.jpg" alt="Frames with a margin applied to the top frame and the borders removed from the remaining three frames" /><figcaption>Frames with a margin applied to the top frame and the borders removed from the remaining three frames</figcaption>
+</figure>
+<h2 id="targeting-frames-with-links">Targeting Frames with Links</h2>
+<p>One of the most common uses of frames is to build sticky navigation into a frame that is always visible regardless of the position of the contents of the other frames. When properly implemented, navigation links will cause new resources to load in one <code>frame</code> while the other frames remain static.</p>
+<p>Anchors can be formatted to target specific frames by assigning a <code>name</code> attribute to a targeted <code>frame</code> element, and using the <code>target</code> attributed within the <code>a</code> element to load the <code>href</code> in the targeted frame.</p>
+<p>If all of that is a little confusing, let’s take it step-by-step.</p>
+<p>The first step in making this happen is to assign a <code>name</code> to the <code>frame</code> where we want links to open. Using the layout we created just a minute ago, we would probably want to use the left-hand column for our navigation and the center column as our targeted <code>frame</code>. In order to do this, we need to assign a name to our target.</p>
+<pre><code>&lt;frameset rows=&quot;150px,*&quot;&gt;
+    &lt;frame noresize src=&quot;frame_1.html&quot; marginheight=&quot;15&quot;&gt;
+    &lt;frameset cols=&quot;20%,*,20%&quot;&gt;
+        &lt;frame src=&quot;frame_2.html&quot; frameborder=&quot;0&quot;&gt;
+        &lt;frame src=&quot;frame_3.html&quot; name=&quot;mid_col&quot; frameborder=&quot;0&quot;&gt;
+        &lt;frame src=&quot;frame_4.html&quot; frameborder=&quot;0&quot;&gt;
+    &lt;/frameset&gt;
+&lt;/frameset&gt;</code></pre>
+<p>Now that we’ve named the center column <code>name="mid_col"</code> we can create a couple of links in our left-hand column source document <em>frame_2.html</em> and target the center column.</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;h1&gt;Frame 2&lt;/h1&gt;
+    &lt;p&gt;Contents of Frame 2&lt;/p&gt;
+    &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&quot;frame_1.html&quot; target=&quot;mid_col&quot;&gt;Load frame_1.html&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;frame_2.html&quot; target=&quot;mid_col&quot;&gt;Load frame_2.html&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;frame_3.html&quot; target=&quot;mid_col&quot;&gt;Load frame_3.html&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;frame_4.html&quot; target=&quot;mid_col&quot;&gt;Load frame_4.html&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Now when we load our webpage we have four navigation links in the left sidebar, and when we click a link the contents of that file are loaded in the middle column <code>frame</code> with the attribute <code>name="mid_col"</code>.</p>
+<p>When we load our page here’s what we initially see.</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/links.jpg" alt="A frameset with links displayed in a column on the left-hand side of the page" /><figcaption>A frameset with links displayed in a column on the left-hand side of the page</figcaption>
+</figure>
+<p>If we click the link <em>Load frame_1.html</em> the contents of that file are loaded in the center column and we get this.</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/links_frame_1.jpg" alt="A frameset with a navigation column on the left-hand side and a link opened in the middle frame" /><figcaption>A frameset with a navigation column on the left-hand side and a link opened in the middle frame</figcaption>
+</figure>
+<p>If we click the link <em>Load frame_2.html</em> we see the navigation contents both in the left sidebar and the middle column.</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/links_frame_2.jpg" alt="A frameset with a navigation column on the left-hand side and a link opened in the middle frame" /><figcaption>A frameset with a navigation column on the left-hand side and a link opened in the middle frame</figcaption>
+</figure>
+<p>Clicking the links <em>Load frame_3.html</em> and <em>Load frame_4.html</em> would behave exactly as you’d expect, loading the contents of those files in the middle column.</p>
+<p>If we forgot to add the <code>target="mid_col"</code> attribute to one of the links, when we clicked the link the resource will load in the same frame that contained the link. If we want to reload the entire page, such as when linking to an external website, we need to add the <code>target="_blank"</code> or <code>target="_top"</code> attribute to the anchor element.</p>
+<h2 id="providing-a-noframes-fallback">Providing a <code>noframes</code> Fallback</h2>
+<p>In the past, the <code>noframes</code> element was used to create a fallback for browsers that did not support the use of frames. However, all modern browsers do support frames for the time being, and support for <code>noframes</code> is virtually nonexistent. As a result, it is no longer necessary to have a <code>noframes</code> fallback when working with frames.</p>
+<h2 id="how-to-make-frames-responsive">How to Make Frames Responsive</h2>
+<p>One of the problems with frames is that they tend to create usability issues for website visitors using smartphones and small tablets. Since frames have been removed from HTML5 entirely and deemed obsolete, it’s important that the owners of websites built with frames begin planning a redesign that does not include frames. However, until a full redesign can be completed, there are a few things webmasters can do to improve the usability of framed designs.</p>
+<h3 id="use-rows-rather-than-columns">Use Rows Rather than Columns</h3>
+<p>If possible, organize frames into rows rather than columns. It is much easier to navigate through content vertically than horizontally on a small screen and frames that are arranged into rows are much easier to view on a small screen than those arranged into columns.</p>
+<p>If we compress our column and row layouts onto a simulation of an Apple iPhone 6 screen we can see how rows are easier to view than columns.</p>
+<figure>
+<img src="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/wp-content/uploads/small_columns_and_rows_compared.jpg" alt="Comparison of how rows and columns render on a small screen" /><figcaption>Comparison of how rows and columns render on a small screen</figcaption>
+</figure>
+<p>If you had to look at these two sites and try to read them which would you rather look at?</p>
+<h3 id="use-percentages-for-column-widths">Use Percentages For Column Widths</h3>
+<p>When columns are sized using percentages rather than pixels they will automatically resize based on the size of the device being used to view the site. While this may create some issues if certain frames become too small, a visitor’s experience will be better overall when column widths are assigned based on percentages rather than pixels.</p>
+<h2 id="how-to-migrate-away-from-frames">How to Migrate Away from Frames</h2>
+<p>Both the <code>frameset</code> and <code>frame</code> elements have been removed from the latest HTML specification, HTML5. Owners of websites built with frames should complete a redesign of their website to remove frames from the design of the site.</p>
+<p>At some point, web browsers will drop support for frames. When that happens, websites that still rely on frames will become unusable. As a result, transitioning away from frames isn’t just a good idea, it’s mandatory.</p>
+<h3 id="evaluate-framed-content">Evaluate Framed Content</h3>
+<p>The first step to redesigning a website that uses frames is to think through the reasons why frames were used in the first place.</p>
+<ul>
+<li>Were frames used to create a specific layout? If so, CSS can be used to create a similar layout.</li>
+<li>Are frames used to create a specifically sized ad container? There are many ways to duplicate that effect using CSS or a widget designed to work with a content management system.</li>
+<li>Was a frame used to create a sticky navigation menu? Once again, CSS can duplicate this same effect.</li>
+<li>Were frames used to load a resource from an external website? If so, the <code>iframe</code> element, which is part of HTML5, can be used to embed content from an external website.</li>
+</ul>
+<p>In virtually every case CSS can be used to duplicate the layout created with frames, and iframes can be used to embed external resources.</p>
+<h3 id="have-a-strategy-for-your-new-website">Have a Strategy for Your New Website</h3>
+<p>If your website is built with frames there’s a very good chance that it’s pretty badly out of date. Rather than simply dropping all of your website content into a single HTML file and styling it with some CSS, now is the time to think about modernizing by switching to a content management system.</p>
+<p>Switching to a content management system will take more work in the short-term, but the long-term benefits of running a modern website far outweigh the short-term challenges.</p>
+<p>To help you get started looking at content management systems, here are the three most popular content management systems:</p>
+<ul>
+<li><a href="https://wordpress.org/">WordPress</a></li>
+<li><a href="https://joomla.org/">Joomla!</a></li>
+<li><a href="https://drupal.org/">Drupal</a></li>
+</ul>
+<h2 id="additional-resources">Additional Resources</h2>
+<p>If you’d like to learn more about frames, the best source for additional information is the World Wide Web Consortium (W3C). Here are a few of their pages with information about frames:</p>
+<ul>
+<li><a href="https://www.w3.org/TR/html401/present/frames.html">HTML4 Frames Documentation</a></li>
+<li><a href="https://www.w3.org/TR/html5/obsolete.html">HTML5 Obsolete Features</a></li>
+</ul>
+<p><img src="chrome-extension://html.com/wp-content/plugins/a3-lazy-load/assets/images/lazy_placeholder.gif" /></p>
+<p>Jon is a freelance writer, travel enthusiast, husband and father. He writes about web technologies such as WordPress, HTML, and CSS.</p>
+<p><a href="https://html.com/frames/">Source</a></p>
+</body>
+</html>

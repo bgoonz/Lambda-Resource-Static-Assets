@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>api_reference</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="api-docs">API docs</h1>
+<p>This document describes the conventions behind the THCUNN API.</p>
+<h3 id="the-api">The API</h3>
+<p>All functions provided by THCUNN are stored in <code>aten/src/THCUNN/generic/THCUNN.h</code>. Look at this file.</p>
+<h3 id="note-on-function-names">Note on function names</h3>
+<p>Please remember, that because C doesn’t support function overloading, functions taking different tensor types have different names. So e.g. for an Abs module, there are actually two updateOutput functions:</p>
+<ul>
+<li><code>void THNN_FloatAbs_updateOutput(...)</code></li>
+<li><code>void THNN_DoubleAbs_updateOutput(...)</code></li>
+</ul>
+<p>In these docs such function will be referred to as <code>void THCUNN_Abs_updateOutput(...)</code>, and it’s up to developer to add a type prefix. <code>real</code> is an alias for that type.</p>
+<h3 id="argument-types">Argument types</h3>
+<p>Some arguments have additional tags placed in square brackets in their header declarations:</p>
+<ul>
+<li><strong>[OUT]</strong> - This is the output argument. It will be reshaped if needed.</li>
+<li><strong>[OPTIONAL]</strong> - This argument is optional and can be safely set to NULL</li>
+<li><strong>[BUFFER]</strong> - A buffer. <code>updateGradInput</code> and <code>accGradParameters</code> should get the same buffers that were used in <code>updateOutput</code> call.</li>
+<li><strong>[MODIFIED]</strong> - Some functions accept an <code>inplace</code> flag. If set to true, this argument might be modified (in addition to the output).</li>
+</ul>
+</body>
+</html>

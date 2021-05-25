@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>前端工作面试问题</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">前端工作面试问题</h1>
+</header>
+<h1 id="前端工作面试问题">前端工作面试问题</h1>
+<p>本文包含了一些用于考查候选者的前端面试问题。不建议对单个候选者问及每个问题 (那需要好几个小时)。只要从列表里挑选一些，就能帮助你考查候选者是否具备所需要的技能。</p>
+<p><strong>备注：</strong> 这些问题中很多都是开放性的，可以引发有趣的讨论。这比直接的答案更能体现此人的能力。</p>
+<h2 id="目录"><a name='toc'>目录</a></h2>
+<ol type="1">
+<li><a href="#general-questions">常见问题</a></li>
+<li><a href="#html-questions">HTML 相关问题</a></li>
+<li><a href="#css-questions">CSS 相关问题</a></li>
+<li><a href="#js-questions">JS 相关问题</a></li>
+<li><a href="#testing-questions">测试相关问题</a></li>
+<li><a href="#performance-questions">效能相关问题</a></li>
+<li><a href="#network-questions">网络相关问题</a></li>
+<li><a href="#coding-questions">代码相关问题</a></li>
+<li><a href="#fun-questions">趣味问题</a></li>
+</ol>
+<h2 id="参与协作">参与协作</h2>
+<ol type="1">
+<li><a href="#contributors">贡献者</a></li>
+<li><a href="https://github.com/h5bp/Front-end-Developer-Interview-Questions/blob/master/CONTRIBUTING.md">如何参与贡献</a></li>
+<li><a href="https://github.com/h5bp/Front-end-Developer-Interview-Questions/blob/master/LICENSE.md">许可协议</a></li>
+</ol>
+<h4 id="常见问题"><a name='general-questions'>常见问题：</a></h4>
+<ul>
+<li>你在昨天/本周学到了什么？</li>
+<li>编写代码的哪些方面能够使你兴奋或感兴趣？</li>
+<li>你最近遇到过什么技术挑战？你是如何解决的？</li>
+<li>在制作一个网页应用或网站的过程中，你是如何考虑其 UI、安全性、高性能、SEO、可维护性以及技术因素的？</li>
+<li>请谈谈你喜欢的开发环境。</li>
+<li>你最熟悉哪一套版本控制系统？</li>
+<li>你能描述当你制作一个网页的工作流程吗？</li>
+<li>假若你有 5 个不同的样式文件 (stylesheets), 整合进网站的最好方式是?</li>
+<li>你能描述渐进增强 (progressive enhancement) 和优雅降级 (graceful degradation) 之间的不同吗?</li>
+<li>你如何对网站的文件和资源进行优化？</li>
+<li>浏览器同一时间可以从一个域名下载多少资源？
+<ul>
+<li>有什么例外吗？</li>
+</ul></li>
+<li>请说出三种减少页面加载时间的方法。(加载时间指感知的时间或者实际加载时间)</li>
+<li>如果你参与到一个项目中，发现他们使用 Tab 来缩进代码，但是你喜欢空格，你会怎么做？</li>
+<li>请写一个简单的幻灯效果页面。</li>
+<li>如果今年你打算熟练掌握一项新技术，那会是什么？</li>
+<li>请谈谈你对网页标准和标准制定机构重要性的理解。</li>
+<li>什么是 FOUC (无样式内容闪烁)？你如何来避免 FOUC？</li>
+<li>请解释什么是 ARIA 和屏幕阅读器 (screenreaders)，以及如何使网站实现无障碍访问 (accessible)。</li>
+<li>请解释 CSS 动画和 JavaScript 动画的优缺点。</li>
+<li>什么是跨域资源共享 (CORS)？它用于解决什么问题？</li>
+</ul>
+<h4 id="html-相关问题"><a name='html-questions'>HTML 相关问题：</a></h4>
+<ul>
+<li><code>doctype</code>(文档类型) 的作用是什么？</li>
+<li>浏览器标准模式 (standards mode) 、几乎标准模式（almost standards mode）和怪异模式 (quirks mode) 之间的区别是什么？</li>
+<li>HTML 和 XHTML 有什么区别？</li>
+<li>如果页面使用 ‘application/xhtml+xml’ 会有什么问题吗？</li>
+<li>如果网页内容需要支持多语言，你会怎么做？</li>
+<li>在设计和开发多语言网站时，有哪些问题你必须要考虑？</li>
+<li>使用 <code>data-</code> 属性的好处是什么？</li>
+<li>如果把 HTML5 看作做一个开放平台，那它的构建模块有哪些？</li>
+<li>请描述 <code>cookies</code>、<code>sessionStorage</code> 和 <code>localStorage</code> 的区别。</li>
+<li>请解释 <code>&lt;script&gt;</code>、<code>&lt;script async&gt;</code> 和 <code>&lt;script defer&gt;</code> 的区别。</li>
+<li>为什么通常推荐将 CSS <code>&lt;link&gt;</code> 放置在 <code>&lt;head&gt;&lt;/head&gt;</code> 之间，而将 JS <code>&lt;script&gt;</code> 放置在 <code>&lt;/body&gt;</code> 之前？你知道有哪些例外吗？</li>
+<li>什么是渐进式渲染 (progressive rendering)？</li>
+<li>你用过哪些不同的 HTML 模板语言？</li>
+</ul>
+<h4 id="css-相关问题"><a name='css-questions'>CSS 相关问题：</a></h4>
+<ul>
+<li>CSS 中类 (classes) 和 ID 的区别。</li>
+<li>请问 “resetting” 和 “normalizing” CSS 之间的区别？你会如何选择，为什么？</li>
+<li>请解释浮动 (Floats) 及其工作原理。</li>
+<li>描述<code>z-index</code>和叠加上下文是如何形成的。</li>
+<li>请描述 BFC(Block Formatting Context) 及其如何工作。</li>
+<li>列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。</li>
+<li>请解释 CSS sprites，以及你要如何在页面或网站中实现它。</li>
+<li>你最喜欢的图片替换方法是什么，你如何选择使用。</li>
+<li>你会如何解决特定浏览器的样式问题？</li>
+<li>如何为有功能限制的浏览器提供网页？
+<ul>
+<li>你会使用哪些技术和处理方法？</li>
+</ul></li>
+<li>有哪些的隐藏内容的方法 (如果同时还要保证屏幕阅读器可用呢)？</li>
+<li>你用过栅格系统 (grid system) 吗？如果使用过，你最喜欢哪种？</li>
+<li>你用过媒体查询，或针对移动端的布局/CSS 吗？</li>
+<li>你熟悉 SVG 样式的书写吗？</li>
+<li>如何优化网页的打印样式？</li>
+<li>在书写高效 CSS 时会有哪些问题需要考虑？</li>
+<li>使用 CSS 预处理器的优缺点有哪些？
+<ul>
+<li>请描述你曾经使用过的 CSS 预处理器的优缺点。</li>
+</ul></li>
+<li>如果设计中使用了非标准的字体，你该如何去实现？</li>
+<li>请解释浏览器是如何判断元素是否匹配某个 CSS 选择器？</li>
+<li>请描述伪元素 (pseudo-elements) 及其用途。</li>
+<li>请解释你对盒模型的理解，以及如何在 CSS 中告诉浏览器使用不同的盒模型来渲染你的布局。</li>
+<li>请解释 <code>* { box-sizing: border-box; }</code> 的作用, 并且说明使用它有什么好处？</li>
+<li>请罗列出你所知道的 display 属性的全部值</li>
+<li>请解释 inline 和 inline-block 的区别？</li>
+<li>请解释 relative、fixed、absolute 和 static 元素的区别</li>
+<li>CSS 中字母 ‘C’ 的意思是叠层 (Cascading)。请问在确定样式的过程中优先级是如何决定的 (请举例)？如何有效使用此系统？</li>
+<li>你在开发或生产环境中使用过哪些 CSS 框架？你觉得应该如何改善他们？</li>
+<li>请问你有尝试过 CSS Flexbox 或者 Grid 标准规格吗？</li>
+<li>为什么响应式设计 (responsive design) 和自适应设计 (adaptive design) 不同？</li>
+<li>你有兼容 retina 屏幕的经历吗？如果有，在什么地方使用了何种技术？</li>
+<li>请问为何要使用 <code>translate()</code> 而非 <em>absolute positioning</em>，或反之的理由？为什么？</li>
+</ul>
+<h4 id="js-相关问题"><a name='js-questions'>JS 相关问题：</a></h4>
+<ul>
+<li>请解释事件代理 (event delegation)。</li>
+<li>请解释 JavaScript 中 <code>this</code> 是如何工作的。</li>
+<li>请解释原型继承 (prototypal inheritance) 的原理。</li>
+<li>你怎么看 AMD vs. CommonJS？</li>
+<li>请解释为什么接下来这段代码不是 IIFE (立即调用的函数表达式)：<code>function foo(){ }();</code>.
+<ul>
+<li>要做哪些改动使它变成 IIFE?</li>
+</ul></li>
+<li>描述以下变量的区别：<code>null</code>，<code>undefined</code> 或 <code>undeclared</code>？
+<ul>
+<li>该如何检测它们？</li>
+</ul></li>
+<li>什么是闭包 (closure)，如何使用它，为什么要使用它？</li>
+<li>请举出一个匿名函数的典型用例？</li>
+<li>你是如何组织自己的代码？是使用模块模式，还是使用经典继承的方法？</li>
+<li>请指出 JavaScript 宿主对象 (host objects) 和原生对象 (native objects) 的区别？</li>
+<li>请指出以下代码的区别：<code>function Person(){}</code>、<code>var person = Person()</code>、<code>var person = new Person()</code>？</li>
+<li><code>.call</code> 和 <code>.apply</code> 的区别是什么？</li>
+<li>请解释 <code>Function.prototype.bind</code>？</li>
+<li>在什么时候你会使用 <code>document.write()</code>？</li>
+<li>请指出浏览器特性检测，特性推断和浏览器 UA 字符串嗅探的区别？</li>
+<li>请尽可能详尽的解释 Ajax 的工作原理。</li>
+<li>使用 Ajax 都有哪些优劣？</li>
+<li>请解释 JSONP 的工作原理，以及它为什么不是真正的 Ajax。</li>
+<li>你使用过 JavaScript 模板系统吗？
+<ul>
+<li>如有使用过，请谈谈你都使用过哪些库？</li>
+</ul></li>
+<li>请解释变量声明提升 (hoisting)。</li>
+<li>请描述事件冒泡机制 (event bubbling)。</li>
+<li>“attribute” 和 “property” 的区别是什么？</li>
+<li>为什么扩展 JavaScript 内置对象不是好的做法？</li>
+<li>请指出 document load 和 document DOMContentLoaded 两个事件的区别。</li>
+<li><code>==</code> 和 <code>===</code> 有什么不同？</li>
+<li>请解释 JavaScript 的同源策略 (same-origin policy)。</li>
+<li>如何实现下列代码：</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1">[<span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">,</span><span class="dv">4</span><span class="op">,</span><span class="dv">5</span>].<span class="at">duplicator</span>()<span class="op">;</span> <span class="co">// [1,2,3,4,5,1,2,3,4,5]</span></a></code></pre></div>
+<ul>
+<li>什么是三元表达式 (Ternary expression)？“三元 (Ternary)” 表示什么意思？</li>
+<li>什么是 <code>"use strict";</code> ? 使用它的好处和坏处分别是什么？</li>
+<li>请实现一个遍历至 <code>100</code> 的 for loop 循环，在能被 <code>3</code> 整除时输出 <strong>“fizz”</strong>，在能被 <code>5</code> 整除时输出 <strong>“buzz”</strong>，在能同时被 <code>3</code> 和 <code>5</code> 整除时输出 <strong>“fizzbuzz”</strong>。</li>
+<li>为何通常会认为保留网站现有的全局作用域 (global scope) 不去改变它，是较好的选择？</li>
+<li>为何你会使用 <code>load</code> 之类的事件 (event)？此事件有缺点吗？你是否知道其他替代品，以及为何使用它们？</li>
+<li>请解释什么是单页应用 (single page app), 以及如何使其对搜索引擎友好 (SEO-friendly)。</li>
+<li>你使用过 Promises 及其 polyfills 吗? 请写出 Promise 的基本用法（ES6）。</li>
+<li>使用 Promises 而非回调 (callbacks) 优缺点是什么？</li>
+<li>使用一种可以编译成 JavaScript 的语言来写 JavaScript 代码有哪些优缺点？</li>
+<li>你使用哪些工具和技术来调试 JavaScript 代码？</li>
+<li>你会使用怎样的语言结构来遍历对象属性 (object properties) 和数组内容？</li>
+<li>请解释可变 (mutable) 和不变 (immutable) 对象的区别。
+<ul>
+<li>请举出 JavaScript 中一个不变性对象 (immutable object) 的例子？</li>
+<li>不变性 (immutability) 有哪些优缺点？</li>
+<li>如何用你自己的代码来实现不变性 (immutability)？</li>
+</ul></li>
+<li>请解释同步 (synchronous) 和异步 (asynchronous) 函数的区别。</li>
+<li>什么是事件循环 (event loop)？
+<ul>
+<li>请问调用栈 (call stack) 和任务队列 (task queue) 的区别是什么？</li>
+</ul></li>
+<li>解释 <code>function foo() {}</code> 与 <code>var foo = function() {}</code> 用法的区别</li>
+</ul>
+<h4 id="测试相关问题"><a name='testing-questions'>测试相关问题：</a></h4>
+<ul>
+<li>对代码进行测试的有什么优缺点？</li>
+<li>你会用什么工具测试你的代码功能？</li>
+<li>单元测试与功能/集成测试的区别是什么？</li>
+<li>代码风格 linting 工具的作用是什么？</li>
+</ul>
+<h4 id="效能相关问题"><a name='performance-questions'>效能相关问题：</a></h4>
+<ul>
+<li>你会用什么工具来查找代码中的性能问题？</li>
+<li>你会用什么方式来增强网站的页面滚动效能？</li>
+<li>请解释 layout、painting 和 compositing 的区别。</li>
+</ul>
+<h4 id="网络相关问题"><a name='network-questions'>网络相关问题：</a></h4>
+<ul>
+<li>为什么传统上利用多个域名来提供网站资源会更有效？</li>
+<li>请尽可能完整得描述从输入 URL 到整个网页加载完毕及显示在屏幕上的整个流程。</li>
+<li>Long-Polling、Websockets 和 Server-Sent Event 之间有什么区别？</li>
+<li>请描述以下 request 和 response headers：
+<ul>
+<li>Diff. between Expires, Date, Age and If-Modified-…</li>
+<li>Do Not Track</li>
+<li>Cache-Control</li>
+<li>Transfer-Encoding</li>
+<li>ETag</li>
+<li>X-Frame-Options</li>
+</ul></li>
+<li>什么是 HTTP method？请罗列出你所知道的所有 HTTP method，并给出解释。</li>
+<li>请解释 HTTP status 301 与 302 的区别？</li>
+</ul>
+<h4 id="代码相关的问题"><a name='coding-questions'>代码相关的问题：</a></h4>
+<p><em>问题：<code>foo</code>的值是什么？</em></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> <span class="dv">10</span> <span class="op">+</span> <span class="st">&#39;20&#39;</span><span class="op">;</span></a></code></pre></div>
+<p><em>问题：如何实现以下函数？</em></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="at">add</span>(<span class="dv">2</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span> <span class="co">// 7</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="at">add</span>(<span class="dv">2</span>)(<span class="dv">5</span>)<span class="op">;</span> <span class="co">// 7</span></a></code></pre></div>
+<p><em>问题：下面的语句的返回值是什么？</em></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="st">&quot;i&#39;m a lasagna hog&quot;</span>.<span class="at">split</span>(<span class="st">&quot;&quot;</span>).<span class="at">reverse</span>().<span class="at">join</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<p><em>问题：<code>window.foo</code>的值是什么？</em></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1">( <span class="va">window</span>.<span class="at">foo</span> <span class="op">||</span> ( <span class="va">window</span>.<span class="at">foo</span> <span class="op">=</span> <span class="st">&quot;bar&quot;</span> ) )<span class="op">;</span></a></code></pre></div>
+<p><em>问题：下面两个 alert 的结果是什么？</em></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> <span class="st">&quot;Hello&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2">(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">var</span> bar <span class="op">=</span> <span class="st">&quot; World&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="at">alert</span>(foo <span class="op">+</span> bar)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="op">}</span>)()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="at">alert</span>(foo <span class="op">+</span> bar)<span class="op">;</span></a></code></pre></div>
+<p><em>问题：<code>foo.length</code>的值是什么？</em></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="va">foo</span>.<span class="at">push</span>(<span class="dv">1</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="va">foo</span>.<span class="at">push</span>(<span class="dv">2</span>)<span class="op">;</span></a></code></pre></div>
+<p><em>问题：<code>foo.x</code>的值是什么？</em></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> <span class="op">{</span><span class="dt">n</span><span class="op">:</span> <span class="dv">1</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">var</span> bar <span class="op">=</span> foo<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="va">foo</span>.<span class="at">x</span> <span class="op">=</span> foo <span class="op">=</span> <span class="op">{</span><span class="dt">n</span><span class="op">:</span> <span class="dv">2</span><span class="op">};</span></a></code></pre></div>
+<p><em>问题：下面代码的输出是什么？</em></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;one&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="at">setTimeout</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;two&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="op">},</span> <span class="dv">0</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;three&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<h4 id="趣味问题"><a name='fun-questions'>趣味问题：</a></h4>
+<ul>
+<li>你最近写过什么的很酷的项目吗？</li>
+<li>在你使用的开发工具中，最喜欢哪些方面？</li>
+<li>谁使你踏足了前端开发领域？</li>
+<li>你有什么业余项目吗？是哪种类型的？</li>
+<li>你最爱的 IE 特性是什么？</li>
+<li>你对咖啡有没有什么喜好？</li>
+</ul>
+<h4 id="贡献者"><a name='contributors'>贡献者：</a></h4>
+<p>本文档始于 2009 年，是以下作者的合作成果：<span class="citation" data-cites="paul_irish">[@paul_irish]</span>(https://twitter.com/paul_irish) <span class="citation" data-cites="bentruyman">[@bentruyman]</span>(https://twitter.com/bentruyman) <span class="citation" data-cites="cowboy">[@cowboy]</span>(https://twitter.com/cowboy) <span class="citation" data-cites="ajpiano">[@ajpiano]</span>(https://twitter.com/ajpiano) <span class="citation" data-cites="SlexAxton">[@SlexAxton]</span>(https://twitter.com/slexaxton) <span class="citation" data-cites="boazsender">[@boazsender]</span>(https://twitter.com/boazsender) <span class="citation" data-cites="miketaylr">[@miketaylr]</span>(https://twitter.com/miketaylr) <span class="citation" data-cites="vladikoff">[@vladikoff]</span>(https://twitter.com/vladikoff) <span class="citation" data-cites="gf3">[@gf3]</span>(https://twitter.com/gf3) <span class="citation" data-cites="jon_neal">[@jon_neal]</span>(https://twitter.com/jon_neal) <span class="citation" data-cites="sambreed">[@sambreed]</span>(https://twitter.com/sambreed) 和 <span class="citation" data-cites="iansym">[@iansym]</span>(https://twitter.com/iansym)。</p>
+<p>时至今日，文档已经融入超过 <a href="https://github.com/h5bp/Front-end-Developer-Interview-Questions/graphs/contributors">100 位开发者</a>的贡献。</p>
+</body>
+</html>

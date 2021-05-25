@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="nomnigraph">nomnigraph</h1>
+<p>nomnigraph is caffe2’s graph transformation subsystem</p>
+<h2 id="usage">Usage</h2>
+<p>The output of <code>caffe2::convertToNNModule(caffe2::NetDef)</code> (found in <code>caffe2/opt</code>) is an <code>NNModule</code>. The output of <code>caffe2::convertToCaffe2Proto(nom::repr::NNModule*, caffe2::NetDef)</code> is a <code>NetDef</code>. <code>convertToCaffe2Proto(convertToNNModule(n), n)</code> should basically return an unchanged network.</p>
+<p>An <code>NNModule</code> is composed of both <code>dataFlow</code> and <code>controlFlow</code> graphs.</p>
+<p>Creating a new operator is straightforward.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">auto</span> reluNode = nn.dataFlow.createNode(make_unique&lt;nom::repr::Relu&gt;());</a></code></pre></div>
+<p>The line above does a few things worth talking about.</p>
+<ol type="1">
+<li>It creates a new node using the graph API (both dataFlow and controlFlow are <code>Graph</code>s).</li>
+<li>It instantiates the node with data, specifically a <code>unique_ptr</code> to a neural network operator.</li>
+<li>This <code>unique_ptr</code> contains a type that inherits from <code>NeuralNetOperator</code> and forms the fundamental representation described in the IR section below.</li>
+</ol>
+<p>Inserting this operator into the graph would look something like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">auto</span> edge = nn.dataFlow.createEdge(convOutputTensorNode, reluNode);</a></code></pre></div>
+<p>Some notes here: 1) Again the graph API is used to insert the node into the graph with an edge. 2) Operators are strictly connected to Tensors, not other operators.</p>
+<h2 id="ir">IR</h2>
+<p>nomnigraph has a <em>parallel</em> representation that can contain annotations with caffe2’s OperatorDef.</p>
+<p>If you call <code>caffe2::convertToNNModule(caffe2::NetDef)</code>, every operator in the <code>NNModule</code> will be annotated with a reference to the original operator in the net.</p>
+<p>This means you should not delete the original protobuf.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">auto</span> conv = repr::nn::get&lt;repr::Conv&gt;(convNode);</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="cf">if</span> (conv-&gt;getAnnotation()) {</a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">auto</span> annotation = dyn_cast&lt;caffe2::Caffe2Annotation&gt;(conv-&gt;getMutableAnnotation());</a>
+<a class="sourceLine" id="cb3-4" title="4">  OperatorDef* op = annotation-&gt;getMutableOperatorDef();</a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="co">// Do stuff with the caffe2 protobuf</span></a>
+<a class="sourceLine" id="cb3-6" title="6">}</a></code></pre></div>
+<p>If you create a new op, as shown in the example above and copied here:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">auto</span> reluNode = nn.dataFlow.createNode(make_unique&lt;nom::repr::Relu&gt;());</a></code></pre></div>
+<p>it will not have a caffe2 annotation.</p>
+<p>How does <code>caffe2::convertToCaffe2Proto(nom::repr::NNModule*, caffe2::NetDef)</code> deal with this?</p>
+<p>Operators are either generated manually (see the implementation in <code>caffe2/opt/converter.cc</code>) or automatically. The automatic generation is done by simply setting the operator <code>type</code> to the name of the operator. If you’d like to add your own operator to a net and need it to be generated (i.e. are writing a transform that inserts new nodes which have attributes likes args) you will need to add your own code to <code>caffe2/opt/converter.cc</code>.</p>
+<p>Do not create <code>OperatorDef</code>s in the transformation itself! This is an anti-pattern as the logic becomes less portable.</p>
+<h2 id="api">API</h2>
+<p>Below is a subset of selected API calls that are quite useful. Lower level manipulation calls are omitted.</p>
+<h3 id="graph-transformation-api">Graph transformation API</h3>
+<p>Nomnigraph provides a ReplaceSubgraph API to perform graph transformation operations without having to write custom subgraph matching logic. The main header file is <a href="include/nomnigraph/Transformations/SubgraphMatcher.h">SubgraphMatcher.h</a>.</p>
+<p>ReplaceSubgraph API takes in - A subgraph pattern to be matched - A graph to be scanned for matching patterns - A ReplaceGraph lambda function that takes in a matched subgraph; callers should implement specific graph transformation operation in the lambda.</p>
+<p>The ReplaceSubgraph implementation takes care of the pattern matching part and also provides tools for callers to implement graph transformation logic with less effort.</p>
+<p>Example usage of the API can be found in <a href="tests/subgraph_matcher_test.cc">subgraph_matcher_test.cc</a></p>
+<p>Example usage of the API for NNGraph can be found in <a href="tests/neural_net_test.cc">neural_net_test.cc</a></p>
+<h3 id="graph-api">Graph API</h3>
+<p>Nomnigraph’s core graph APIs provide a generic graph data structure and basic graph manipulation abilities. The main header file is <a href="include/nomnigraph/Graph/Graph.h">Graph.h</a>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">auto</span> g = Graph&lt;T&gt;(); <span class="co">// Constructor</span></a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3">Graph&lt;T&gt;::NodeRef n = g.createNode(T t); <span class="co">// Returns reference to the node</span></a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5">Graph&lt;T&gt;::EdgeRef e = g.createEdge(n1, n2); <span class="co">// Returns reference to the edge</span></a>
+<a class="sourceLine" id="cb5-6" title="6"></a>
+<a class="sourceLine" id="cb5-7" title="7">g.deleteNode(n); <span class="co">// Deletes the node and all of its in/out edges from the graph</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co">// Use g.deleteNode(n, false); to keep the edges around.</span></a>
+<a class="sourceLine" id="cb5-9" title="9"></a>
+<a class="sourceLine" id="cb5-10" title="10">g.deleteEdge(e); <span class="co">// Deletes the edge between two nodes.</span></a>
+<a class="sourceLine" id="cb5-11" title="11"></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="kw">auto</span> e = g.getEdge(n1, n2); <span class="co">// Gets the first edge that has n1 as a tail and n2 as the head.</span></a>
+<a class="sourceLine" id="cb5-13" title="13"></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="kw">auto</span> ns = g.getMutableNodes(); <span class="co">// Returns a vector of Graph&lt;T&gt;::NodeRef</span></a>
+<a class="sourceLine" id="cb5-15" title="15"></a>
+<a class="sourceLine" id="cb5-16" title="16"><span class="kw">auto</span> es = g.getMutableEdges(); <span class="co">// Returns a vector of Graph&lt;T&gt;::EdgeRef</span></a>
+<a class="sourceLine" id="cb5-17" title="17"></a>
+<a class="sourceLine" id="cb5-18" title="18">T d = n-&gt;data(); <span class="co">// Get the data stored at the node</span></a></code></pre></div>
+<h3 id="nn-api">NN API</h3>
+<p>NN (NeuralNet) extends core Graph with functionalities specific to neural network computation graph. The main header file is <a href="include/nomnigraph/Representations/NeuralNet.h">NeuralNet.h</a>.</p>
+<p>Type checking &amp; data accessing</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb6-1" title="1">repr::NNModule nn = ...;</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">using</span> <span class="kw">namespace</span> nom;</a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4">repr::NNGraph::NodeRef n;  <span class="co">// Canonical node of the neural network</span></a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="dt">bool</span> b = repr::nn::is&lt;repr::Tensor&gt;(n); <span class="co">// Checks the type stored on the node.  (Works with parent types.)</span></a>
+<a class="sourceLine" id="cb6-7" title="7"></a>
+<a class="sourceLine" id="cb6-8" title="8">repr::Conv* c = repr::nn::get&lt;repr::Conv&gt;(n); <span class="co">// Returns a pointer to the NeuralNetOperator or NeuralNetData in the node</span></a></code></pre></div>
+<p>Iterate through nodes in a NNGraph.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">auto</span> pairs = dataIterator(nn); <span class="co">// A useful paradigm for iterating through nodes and corresponding data in no particular order.</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">auto</span> nodeRefs = nodeIterator(nn); <span class="co">// Iterate through nodes in no particular order.</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="co">// See https://github.com/pytorch/pytorch/blob/master/caffe2/opt/mobile.cc#L106-L109</span></a></code></pre></div>
+<p>These functions make it easy to check attributes on nodes.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb8-1" title="1"><span class="co">// -- Tensor node functions --</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="dt">bool</span> b = hasProducer(tensorNode);  <span class="co">// Checks for producers.</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="kw">auto</span> n = getProducer(tensorNode); <span class="co">// Returns the producer of the tensor</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="dt">bool</span> b = hasConsumer(tensorNode); <span class="co">// Checks for consumers.</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="bu">std::</span>vector&lt;NNGraph::NodeRef&gt; consumers = getConsumers(tensorNode); <span class="co">// Returns a vector of all consumers of the tensor.</span></a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">// -- Operator node functions --</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="dt">bool</span> b = hasInputs(n); <span class="co">// Checks if there are any input tensors.</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="bu">std::</span>vector&lt;NNGraph::NodeRef&gt; getInputs(n); <span class="co">// Returns a vector of all the input tensor nodes.</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="bu">std::</span>vector&lt;NNGraph::NodeRef&gt; getOutputs(n); <span class="co">// Returns a vector of all the output tensor nodes.</span></a></code></pre></div>
+<p>These functions are less commonly useful</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb9-1" title="1">coalesceInsertedDataDependencies(&amp;nn); <span class="co">// Fixes up all the inserted dependencies in the dataflow graph.</span></a>
+<a class="sourceLine" id="cb9-2" title="2"></a>
+<a class="sourceLine" id="cb9-3" title="3">insertOp&lt;repr::Relu&gt;(nn.dataFlow, n1, n2); <span class="co">// Inserts an operator into the dataflow graph and creates a new blob to do so.</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="co">// n1 or n2 must be a tensor and the inserted blob inherits the name from that, appending an underscore.</span></a>
+<a class="sourceLine" id="cb9-5" title="5"></a>
+<a class="sourceLine" id="cb9-6" title="6">convertNode&lt;repr::ConvRelu&gt;(nn.dataFlow, n);  <span class="co">// Converts the data at the node to a new node by calling the passed in type with the old node&#39;s data as the constructor argument.</span></a></code></pre></div>
+</body>
+</html>

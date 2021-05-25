@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>object</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="object">object</h1>
+<p>Object utilities.</p>
+<h2 id="bindallobj-methodnamesvoid">bindAll(obj, […methodNames]):void</h2>
+<p>Bind methods of the target object to always execute on its own context (ovewritting the original function).</p>
+<p>See: <a href="./function.html#bind">function/bind</a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">var</span> view <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Lorem Ipsum&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">logNameOnClick</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">        <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">name</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="op">};</span></a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">// binds all methods by default</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="at">bindAll</span>(view)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="at">jQuery</span>(<span class="st">&#39;#docs&#39;</span>).<span class="at">on</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="va">view</span>.<span class="at">logNameOnClick</span>)<span class="op">;</span></a></code></pre></div>
+<p>You can also specify the list of methods that you want to bind (in case you just want to bind a few of them).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">// only the listed methods will be bound to `obj` context</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="at">bindAll</span>(obj<span class="op">,</span> <span class="st">&#39;logNameOnClick&#39;</span><span class="op">,</span> <span class="st">&#39;doAwesomeStuffOnDrag&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="containsobj-valueboolean">contains(obj, value):Boolean</h2>
+<p>Similar to <a href="array.html#contains">Array/contains</a>. Checks if Object contains value.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="dt">b</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="dt">c</span><span class="op">:</span> <span class="st">&#39;bar&#39;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="op">};</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="at">contains</span>(obj<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>      <span class="co">// true</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="at">contains</span>(obj<span class="op">,</span> <span class="st">&#39;foo&#39;</span>)<span class="op">;</span>  <span class="co">// false</span></a></code></pre></div>
+<h2 id="deepfillintarget-objectsobject">deepFillIn(target, …objects):Object</h2>
+<p>Fill missing properties recursively.</p>
+<p>It’s different from <code>deepMixIn</code> since it won’t override any existing property. It’s also different from <code>merge</code> since it won’t clone child objects during the process.</p>
+<p>It returns the target object and mutates it in place.</p>
+<p>See: <a href="#fillIn"><code>fillIn()</code></a>, <a href="#deepMixIn"><code>deepMixIn()</code></a>, <a href="#merge"><code>merge()</code></a></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">var</span> base <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="dt">foo </span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">        <span class="dt">bar </span><span class="op">:</span> <span class="dv">123</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="dt">lorem </span><span class="op">:</span> <span class="st">&#39;ipsum&#39;</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="op">};</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="kw">var</span> options <span class="op">=</span> <span class="at">deepFillIn</span>(<span class="op">{</span><span class="dt">foo </span><span class="op">:</span> <span class="op">{</span> <span class="dt">baz </span><span class="op">:</span> <span class="dv">45</span> <span class="op">},</span> <span class="dt">lorem </span><span class="op">:</span> <span class="st">&#39;amet&#39;</span><span class="op">},</span> base)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co">// &gt; {foo: {bar:123, baz : 45}, lorem : &#39;amet&#39;}</span></a></code></pre></div>
+<h2 id="deepmatchestarget-patternboolean">deepMatches(target, pattern):Boolean</h2>
+<p>Recursively checks if object contains all properties/value pairs. When both the target and pattern values are arrays, it checks that the target value contain matches for all the items in the pattern array (independent of order).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">var</span> john <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">    <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;John&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="dt">age</span><span class="op">:</span> <span class="dv">22</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="dt">pets</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb5-5" title="5">        <span class="op">{</span> <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;cat&#39;</span><span class="op">,</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Grumpy Cat&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb5-6" title="6">        <span class="op">{</span> <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;dog&#39;</span><span class="op">,</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Hawk&#39;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-7" title="7">    ]</a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="op">};</span></a>
+<a class="sourceLine" id="cb5-9" title="9"></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="at">deepMatches</span>(john<span class="op">,</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;John&#39;</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="at">deepMatches</span>(john<span class="op">,</span> <span class="op">{</span> <span class="dt">age</span><span class="op">:</span> <span class="dv">21</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="at">deepMatches</span>(john<span class="op">,</span> <span class="op">{</span> <span class="dt">pets</span><span class="op">:</span> [ <span class="op">{</span> <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;cat&#39;</span> <span class="op">}</span> ] <span class="op">}</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="at">deepMatches</span>(john<span class="op">,</span> <span class="op">{</span> <span class="dt">pets</span><span class="op">:</span> [ <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Hawk&#39;</span> <span class="op">}</span> ] <span class="op">}</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="at">deepMatches</span>(john<span class="op">,</span> <span class="op">{</span> <span class="dt">pets</span><span class="op">:</span> [ <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Hairball&#39;</span> <span class="op">}</span> ] <span class="op">}</span>)<span class="op">;</span> <span class="co">// false</span></a></code></pre></div>
+<p>See <a href="#matches"><code>matches()</code></a></p>
+<h2 id="deepmixintarget-objectsobject">deepMixIn(target, …objects):Object</h2>
+<p>Mixes objects into the target object, recursively mixing existing child objects as well.</p>
+<p>It will only recursively mix objects if both (existing and new) values are plain objects.</p>
+<p>Returns the target object. Like <a href="#merge"><code>merge()</code></a>, but mutates the target object, and does not clone child objects.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">var</span> target <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">    <span class="dt">foo</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">        <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;foo&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-4" title="4">        <span class="dt">id</span><span class="op">:</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-5" title="5">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="op">};</span></a>
+<a class="sourceLine" id="cb6-7" title="7"></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="at">deepMixIn</span>(target<span class="op">,</span> <span class="op">{</span> <span class="dt">foo</span><span class="op">:</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> <span class="dv">2</span> <span class="op">}</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="va">console</span>.<span class="at">log</span>(target)<span class="op">;</span> <span class="co">// { foo: { name: &quot;foo&quot;, id: 2 } }</span></a></code></pre></div>
+<p>See: <a href="#mixIn"><code>mixIn()</code></a>, <a href="#merge"><code>merge()</code></a>, <a href="#deepFillIn"><code>deepFillIn()</code></a></p>
+<h2 id="equalsa-b-callbackboolean">equals(a, b, [callback]):Boolean</h2>
+<p>Tests whether two objects contain the same keys and values.</p>
+<p><code>callback</code> specifies the equality comparison function used to compare the values. It defaults to using <a href="lang.html#is">lang/is</a>.</p>
+<p>It will only check the keys and values contained by the objects; it will not check the objects’ prototypes. If either of the values are not objects, they will be compared using the <code>callback</code> function.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="at">equals</span>(<span class="op">{},</span> <span class="op">{}</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="at">equals</span>(<span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="at">equals</span>(<span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">2</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="at">equals</span>(<span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="dv">2</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="at">equals</span>(<span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="dv">2</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="at">equals</span>(<span class="kw">null</span><span class="op">,</span> <span class="kw">null</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="at">equals</span>(<span class="kw">null</span><span class="op">,</span> <span class="op">{}</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="at">equals</span>(<span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="st">&#39;1&#39;</span> <span class="op">},</span> <span class="kw">function</span>(a<span class="op">,</span> b) <span class="op">{</span> <span class="cf">return</span> a <span class="op">==</span> b<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<p>See: <a href="array.html#equals">array/equals</a>, <a href="lang.html#deepEquals">lang/deepEquals</a></p>
+<h2 id="everyobj-callback-thisobjboolean">every(obj, callback, [thisObj]):Boolean</h2>
+<p>Similar to <a href="array.html#every">Array/every</a>. Tests whether all properties in the object pass the test implemented by the provided callback.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="dt">b</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="dt">c</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="dt">d</span><span class="op">:</span> <span class="st">&#39;string&#39;</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="op">};</span></a>
+<a class="sourceLine" id="cb8-7" title="7"></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="at">every</span>(obj<span class="op">,</span> isNumber)<span class="op">;</span> <span class="co">// false</span></a></code></pre></div>
+<h2 id="fillinobj-defaultobject">fillIn(obj, …default):Object</h2>
+<p>Fill in missing properties in object with values from the <em>defaults</em> objects.</p>
+<pre><code>var base = {
+    foo : &#39;bar&#39;,
+    num : 123
+};
+
+fillIn({foo:&#39;ipsum&#39;}, base); // {foo:&#39;ipsum&#39;, num:123}</code></pre>
+<p>PS: it allows merging multiple objects at once, the first ones will take precedence.</p>
+<p>See: <a href="#mixIn"><code>mixIn()</code></a>, <a href="#merge"><code>merge()</code></a>, <a href="#deepFillIn"><code>deepFillIn()</code></a></p>
+<h2 id="filterobj-callback-thisobj">filter(obj, callback, [thisObj])</h2>
+<p>Returns a new object containing all properties where <code>callback</code> returns true, similar to Array/filter. It does not use properties from the object’s prototype.</p>
+<p>Callback receives the same arguments as <code>forOwn()</code>.</p>
+<p>See: <a href="#forOwn"><code>forOwn()</code></a>, <a href="#forIn"><code>forIn()</code></a>, <a href="#pick"><code>pick()</code></a></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">    <span class="dt">foo</span><span class="op">:</span> <span class="st">&#39;value&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="dt">bar</span><span class="op">:</span> <span class="st">&#39;bar value&#39;</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="op">};</span></a>
+<a class="sourceLine" id="cb10-5" title="5"></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co">// returns { bar: &#39;bar value&#39; }</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="at">filter</span>(obj<span class="op">,</span> <span class="kw">function</span>(v) <span class="op">{</span> <span class="cf">return</span> <span class="va">v</span>.<span class="at">length</span> <span class="op">&gt;</span> <span class="dv">5</span><span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-8" title="8"></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="co">// returns { foo: &#39;value&#39; }</span></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="at">filter</span>(obj<span class="op">,</span> <span class="kw">function</span>(v<span class="op">,</span> k) <span class="op">{</span> <span class="cf">return</span> k <span class="op">===</span> <span class="st">&#39;foo&#39;</span><span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="findobj-callback-thisobj">find(obj, callback, [thisObj])</h2>
+<p>Loops through all the properties in the Object and returns the first one that passes a truth test (callback), similar to <a href="array.html#find">Array/find</a>. Unlike Array/find, order of iteration is not guaranteed.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">    <span class="dt">a</span><span class="op">:</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb11-3" title="3">    <span class="dt">b</span><span class="op">:</span> <span class="dv">12</span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="op">};</span></a>
+<a class="sourceLine" id="cb11-5" title="5"></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="at">find</span>(obj<span class="op">,</span> isString)<span class="op">;</span> <span class="co">// &#39;foo&#39;</span></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="at">find</span>(obj<span class="op">,</span> isNumber)<span class="op">;</span> <span class="co">// 12</span></a></code></pre></div>
+<h2 id="flattenobject-levelobject">flatten(object, [level]):Object</h2>
+<p>Recursively flattens an object. A new object containing all the values is returned. If <code>level</code> is specified, it will only flatten up to that level. Note that objects within arrays will not be flattened.</p>
+<h3 id="example">Example</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="at">flatten</span>(<span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="op">{</span> <span class="dt">c</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">d</span><span class="op">:</span> <span class="op">{</span> <span class="dt">e</span><span class="op">:</span> <span class="dv">3</span> <span class="op">}</span> <span class="op">}</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="co">// &gt; { a: 1, &#39;b.c&#39;: 2, &#39;b.d.e&#39;: 3 }</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="at">flatten</span>(<span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="op">{</span> <span class="dt">c</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">d</span><span class="op">:</span> <span class="op">{</span> <span class="dt">e</span><span class="op">:</span> <span class="dv">3</span> <span class="op">}</span> <span class="op">}</span> <span class="op">},</span> <span class="dv">1</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="co">// &gt; { a: 1, &#39;b.c&#39;: 2, &#39;b.d&#39;: { e: 3 } }</span></a></code></pre></div>
+<p>See: <a href="./array.html#flatten"><code>array/flatten()</code></a></p>
+<h2 id="forinobj-callback-thisobj">forIn(obj, callback[, thisObj])</h2>
+<p>Iterate over all properties of an Object, similar to <a href="array.html#forEach">Array/forEach</a>.</p>
+<p>It <a href="https://developer.mozilla.org/en/ECMAScript_DontEnum_attribute#JScript_DontEnum_Bug">avoids don’t enum bug on IE</a>. It <strong>will</strong> iterate over inherited (enumerable) properties from the prototype.</p>
+<p>It allows exiting the iteration early by returning <code>false</code> on the callback.</p>
+<p>See: <a href="#forOwn"><code>forOwn()</code></a>, <a href="#keys"><code>keys()</code></a>, <a href="#values"><code>values()</code></a></p>
+<h3 id="callback-arguments">Callback arguments</h3>
+<p>Callback will receive the following arguments:</p>
+<ol type="1">
+<li>Property Value (*)</li>
+<li>Key name (String)</li>
+<li>Target object (Object)</li>
+</ol>
+<h3 id="example-1">Example</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">function</span> <span class="at">Foo</span>()<span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">    <span class="kw">this</span>.<span class="at">foo</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3">    <span class="kw">this</span>.<span class="at">bar</span> <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb13-5" title="5"></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="va">Foo</span>.<span class="va">prototype</span>.<span class="at">lorem</span> <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-7" title="7"></a>
+<a class="sourceLine" id="cb13-8" title="8"><span class="kw">var</span> obj <span class="op">=</span> <span class="kw">new</span> <span class="at">Foo</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-9" title="9"></a>
+<a class="sourceLine" id="cb13-10" title="10"><span class="kw">var</span> result <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-11" title="11"><span class="kw">var</span> keys <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-12" title="12"></a>
+<a class="sourceLine" id="cb13-13" title="13"><span class="at">forIn</span>(obj<span class="op">,</span> <span class="kw">function</span>(val<span class="op">,</span> key<span class="op">,</span> o)<span class="op">{</span></a>
+<a class="sourceLine" id="cb13-14" title="14">    result <span class="op">+=</span> val<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-15" title="15">    <span class="va">keys</span>.<span class="at">push</span>(key)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-16" title="16"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-17" title="17"></a>
+<a class="sourceLine" id="cb13-18" title="18"><span class="va">console</span>.<span class="at">log</span>(result)<span class="op">;</span> <span class="co">// 7</span></a>
+<a class="sourceLine" id="cb13-19" title="19"><span class="va">console</span>.<span class="at">log</span>(keys)<span class="op">;</span>   <span class="co">// [&#39;foo&#39;, &#39;bar&#39;, &#39;lorem&#39;]</span></a></code></pre></div>
+<h2 id="forownobj-callback-thisobj">forOwn(obj, callback[, thisObj])</h2>
+<p>Iterate over all own properties from an Object, similar to <a href="array.html#forEach">Array/forEach</a>.</p>
+<p>It <a href="https://developer.mozilla.org/en/ECMAScript_DontEnum_attribute#JScript_DontEnum_Bug">avoids don’t enum bug on IE</a>. Notice that it <strong>won’t</strong> iterate over properties from the prototype.</p>
+<p>It allows exiting the iteration early by returning <code>false</code> on the callback.</p>
+<p>See: <a href="#forIn"><code>forIn()</code></a>, <a href="#keys"><code>keys()</code></a>, <a href="#values"><code>values()</code></a></p>
+<h3 id="callback-arguments-1">Callback arguments</h3>
+<p>Callback will receive the following arguments:</p>
+<ol type="1">
+<li>Property Value (*)</li>
+<li>Key name (String)</li>
+<li>Target object (Object)</li>
+</ol>
+<h3 id="example-2">Example</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">function</span> <span class="at">Foo</span>()<span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">    <span class="kw">this</span>.<span class="at">foo</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3">    <span class="kw">this</span>.<span class="at">bar</span> <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb14-5" title="5"></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="co">// will be ignored</span></a>
+<a class="sourceLine" id="cb14-7" title="7"><span class="va">Foo</span>.<span class="va">prototype</span>.<span class="at">lorem</span> <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-8" title="8"></a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="kw">var</span> obj <span class="op">=</span> <span class="kw">new</span> <span class="at">Foo</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-10" title="10"></a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="kw">var</span> result <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="kw">var</span> keys <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-13" title="13"></a>
+<a class="sourceLine" id="cb14-14" title="14"><span class="at">forOwn</span>(obj<span class="op">,</span> <span class="kw">function</span>(val<span class="op">,</span> key<span class="op">,</span> o)<span class="op">{</span></a>
+<a class="sourceLine" id="cb14-15" title="15">    result <span class="op">+=</span> val<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-16" title="16">    <span class="va">keys</span>.<span class="at">push</span>(key)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-17" title="17"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-18" title="18"></a>
+<a class="sourceLine" id="cb14-19" title="19"><span class="va">console</span>.<span class="at">log</span>(result)<span class="op">;</span> <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb14-20" title="20"><span class="va">console</span>.<span class="at">log</span>(keys)<span class="op">;</span>   <span class="co">// [&#39;foo&#39;, &#39;bar&#39;]</span></a></code></pre></div>
+<h2 id="functionsobjarray">functions(obj):Array</h2>
+<p>Returns a sorted list of all enumerable properties that have function values (including inherited properties).</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">    <span class="dt">foo </span><span class="op">:</span> <span class="kw">function</span>()<span class="op">{},</span></a>
+<a class="sourceLine" id="cb15-3" title="3">    <span class="dt">bar </span><span class="op">:</span> <span class="st">&#39;baz&#39;</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="op">};</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="at">functions</span>(obj)<span class="op">;</span> <span class="co">// [&#39;foo&#39;]</span></a></code></pre></div>
+<h2 id="getobj-propname">get(obj, propName):*</h2>
+<p>Returns nested property value. Will return <code>undefined</code> if property doesn’t exist or if the object is null or undefined.</p>
+<p>See: <a href="#set"><code>set()</code></a>, <a href="#namespace"><code>namespace()</code></a>, <a href="#has"><code>has()</code></a></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">var</span> lorem <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2">        <span class="dt">ipsum </span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-3" title="3">            <span class="dt">dolor </span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-4" title="4">                <span class="dt">sit </span><span class="op">:</span> <span class="st">&#39;amet&#39;</span></a>
+<a class="sourceLine" id="cb16-5" title="5">            <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-6" title="6">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-7" title="7">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb16-8" title="8"></a>
+<a class="sourceLine" id="cb16-9" title="9"><span class="at">get</span>(lorem<span class="op">,</span> <span class="st">&#39;ipsum.dolor.sit&#39;</span>)<span class="op">;</span> <span class="co">// &quot;amet&quot;</span></a>
+<a class="sourceLine" id="cb16-10" title="10"><span class="at">get</span>(lorem<span class="op">,</span> <span class="st">&#39;foo.bar&#39;</span>)<span class="op">;</span>         <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="at">get</span>(<span class="kw">undefined</span><span class="op">,</span> <span class="st">&#39;foo.bar&#39;</span>)<span class="op">;</span>     <span class="co">// undefined</span></a></code></pre></div>
+<h2 id="hasobj-propnameboolean">has(obj, propName):Boolean</h2>
+<p>Checks if object contains a child property. Useful for cases where you need to check if an object contain a <em>nested</em> property. It will get properties inherited by the prototype.</p>
+<p>see: <a href="#hasOwn"><code>hasOwn()</code></a>, <a href="#get"><code>get()</code></a></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">var</span> a <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-2" title="2">        <span class="dt">b </span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-3" title="3">            <span class="dt">c </span><span class="op">:</span> <span class="dv">123</span></a>
+<a class="sourceLine" id="cb17-4" title="4">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb17-5" title="5">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb17-6" title="6"></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="at">has</span>(a<span class="op">,</span> <span class="st">&#39;b.c&#39;</span>)<span class="op">;</span>   <span class="co">// true</span></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="at">has</span>(a<span class="op">,</span> <span class="st">&#39;foo.c&#39;</span>)<span class="op">;</span> <span class="co">// false</span></a></code></pre></div>
+<h3 id="common-use-case">Common use case</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="cf">if</span>( <span class="at">has</span>(a<span class="op">,</span> <span class="st">&#39;foo.c&#39;</span>) )<span class="op">{</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb18-2" title="2">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb18-4" title="4"></a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="cf">if</span>( <span class="va">a</span>.<span class="va">foo</span>.<span class="at">c</span> )<span class="op">{</span> <span class="co">// ReferenceError: `foo` is not defined</span></a>
+<a class="sourceLine" id="cb18-6" title="6">    <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb18-7" title="7"><span class="op">}</span></a></code></pre></div>
+<h2 id="hasownobj-propnameboolean">hasOwn(obj, propName):Boolean</h2>
+<p>Safer <code>Object.hasOwnProperty</code>. Returns a boolean indicating whether the object has the specified property.</p>
+<p>see: <a href="#has"><code>has()</code></a></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-2" title="2">    <span class="dt">foo</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb19-3" title="3">    <span class="dt">hasOwnProperty </span><span class="op">:</span> <span class="st">&#39;bar&#39;</span></a>
+<a class="sourceLine" id="cb19-4" title="4"><span class="op">};</span></a>
+<a class="sourceLine" id="cb19-5" title="5"></a>
+<a class="sourceLine" id="cb19-6" title="6"><span class="va">obj</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;foo&#39;</span>)<span class="op">;</span> <span class="co">// ERROR! hasOwnProperty is not a function</span></a>
+<a class="sourceLine" id="cb19-7" title="7"></a>
+<a class="sourceLine" id="cb19-8" title="8"><span class="at">hasOwn</span>(obj<span class="op">,</span> <span class="st">&#39;foo&#39;</span>)<span class="op">;</span>            <span class="co">// true</span></a>
+<a class="sourceLine" id="cb19-9" title="9"><span class="at">hasOwn</span>(obj<span class="op">,</span> <span class="st">&#39;hasOwnProperty&#39;</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb19-10" title="10"><span class="at">hasOwn</span>(obj<span class="op">,</span> <span class="st">&#39;toString&#39;</span>)<span class="op">;</span>       <span class="co">// false</span></a></code></pre></div>
+<h2 id="keysobjarray">keys(obj):Array</h2>
+<p>Returns an array of all own enumerable properties found upon a given object. It will use the native <code>Object.keys</code> if present.</p>
+<p>PS: it won’t return properties from the prototype.</p>
+<p>See: <a href="#forOwn"><code>forOwn()</code></a>, <a href="#values"><code>values()</code></a></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb20-2" title="2">    <span class="dt">foo </span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb20-3" title="3">    <span class="dt">bar </span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb20-4" title="4">    <span class="dt">lorem </span><span class="op">:</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb20-5" title="5"><span class="op">};</span></a>
+<a class="sourceLine" id="cb20-6" title="6"><span class="at">keys</span>(obj)<span class="op">;</span> <span class="co">// [&#39;foo&#39;, &#39;bar&#39;, &#39;lorem&#39;]</span></a></code></pre></div>
+<h2 id="mapobj-callback-thisobjobject">map(obj, callback, [thisObj]):Object</h2>
+<p>Returns a new object where the property values are the result of calling the callback for each property in the original object, similar to Array/map.</p>
+<p>The callback function receives the same arguments as in <code>forOwn()</code>.</p>
+<p>See: <a href="#forOwn"><code>forOwn()</code></a></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span> <span class="dt">foo</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">bar</span><span class="op">:</span> <span class="dv">2</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb21-2" title="2">    data <span class="op">=</span> <span class="op">{</span> <span class="dt">foo</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">bar</span><span class="op">:</span> <span class="dv">1</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb21-3" title="3"></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="at">map</span>(obj<span class="op">,</span> <span class="kw">function</span>(v) <span class="op">{</span> <span class="cf">return</span> v <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// { foo: 2, bar: 3 }</span></a>
+<a class="sourceLine" id="cb21-5" title="5"><span class="at">map</span>(obj<span class="op">,</span> <span class="kw">function</span>(v<span class="op">,</span> k) <span class="op">{</span> <span class="cf">return</span> k<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// { foo: &quot;foo&quot;, bar: &quot;bar&quot; }</span></a>
+<a class="sourceLine" id="cb21-6" title="6"><span class="at">map</span>(obj<span class="op">,</span> <span class="kw">function</span>(v<span class="op">,</span> k) <span class="op">{</span> <span class="cf">return</span> <span class="kw">this</span>[k]<span class="op">;</span> <span class="op">},</span> data)<span class="op">;</span> <span class="co">// { foo: 0, bar: 1 }</span></a></code></pre></div>
+<h2 id="matchesobj-propsboolean">matches(obj, props):Boolean</h2>
+<p>Checks if object contains all properties/values pairs. Useful for validation and filtering.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">var</span> john <span class="op">=</span> <span class="op">{</span><span class="dt">age</span><span class="op">:</span><span class="dv">25</span><span class="op">,</span> <span class="dt">hair</span><span class="op">:</span><span class="st">&#39;long&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">true</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw">var</span> mark <span class="op">=</span> <span class="op">{</span><span class="dt">age</span><span class="op">:</span><span class="dv">27</span><span class="op">,</span> <span class="dt">hair</span><span class="op">:</span><span class="st">&#39;short&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">false</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="kw">var</span> hippie <span class="op">=</span> <span class="op">{</span><span class="dt">hair</span><span class="op">:</span><span class="st">&#39;long&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">true</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="at">matches</span>(john<span class="op">,</span> hippie)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb22-5" title="5"><span class="at">matches</span>(mark<span class="op">,</span> hippie)<span class="op">;</span> <span class="co">// false</span></a></code></pre></div>
+<p>See <a href="#deepMatches"><code>deepMatches()</code></a></p>
+<h2 id="mergeobjectsobject">merge(…objects):Object</h2>
+<p>Deep merges objects. Note that objects and properties will be cloned during the process to avoid undesired side effects. It return a new object and won’t affect source objects.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">var</span> obj1 <span class="op">=</span> <span class="op">{</span><span class="dt">a</span><span class="op">:</span> <span class="op">{</span><span class="dt">b</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">c</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">d</span><span class="op">:</span> <span class="op">{</span><span class="dt">e</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">f</span><span class="op">:</span> <span class="dv">1</span><span class="op">}}};</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw">var</span> obj2 <span class="op">=</span> <span class="op">{</span><span class="dt">a</span><span class="op">:</span> <span class="op">{</span><span class="dt">b</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">d </span><span class="op">:</span> <span class="op">{</span><span class="dt">f </span><span class="op">:</span> <span class="st">&#39;yeah&#39;</span><span class="op">}</span> <span class="op">}};</span></a>
+<a class="sourceLine" id="cb23-3" title="3"></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="at">merge</span>(obj1<span class="op">,</span> obj2)<span class="op">;</span> <span class="co">// {a: {b : 2, c : 1, d : {e : 1, f : &#39;yeah&#39;</span><span class="re">}}}</span></a></code></pre></div>
+<p>See: <a href="#deepMixIn"><code>deepMixIn()</code></a>, <a href="#deepFillIn"><code>deepFillIn()</code></a></p>
+<h2 id="maxobj-iterator">max(obj[, iterator]):*</h2>
+<p>Returns maximum value inside object or use a custom iterator to define how items should be compared. Similar to <a href="array.html#max">Array/max</a>.</p>
+<p>See: <a href="#min"><code>min()</code></a></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb24-1" title="1"><span class="at">max</span>(<span class="op">{</span><span class="dt">a</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">c</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">d</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">e</span><span class="op">:</span> <span class="dv">200</span><span class="op">}</span>)<span class="op">;</span> <span class="co">// 200</span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="at">max</span>(<span class="op">{</span><span class="dt">a</span><span class="op">:</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="st">&#39;lorem&#39;</span><span class="op">,</span> <span class="dt">c</span><span class="op">:</span> <span class="st">&#39;amet&#39;</span><span class="op">},</span> <span class="kw">function</span>(val)<span class="op">{</span></a>
+<a class="sourceLine" id="cb24-3" title="3">    <span class="cf">return</span> <span class="va">val</span>.<span class="at">length</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb24-4" title="4"><span class="op">}</span>)<span class="op">;</span> <span class="co">// &#39;lorem&#39;</span></a></code></pre></div>
+<h2 id="minobj-iterator">min(obj[, iterator]):*</h2>
+<p>Returns minimum value inside object or use a custom iterator to define how items should be compared. Similar to <a href="array.html#min">Array/min</a>.</p>
+<p>See: <a href="#max"><code>max()</code></a></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb25-1" title="1"><span class="at">min</span>(<span class="op">{</span><span class="dt">a</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">c</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">d</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">e</span><span class="op">:</span> <span class="dv">200</span><span class="op">}</span>)<span class="op">;</span> <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="at">min</span>(<span class="op">{</span><span class="dt">a</span><span class="op">:</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="st">&#39;lorem&#39;</span><span class="op">,</span> <span class="dt">c</span><span class="op">:</span> <span class="st">&#39;amet&#39;</span><span class="op">},</span> <span class="kw">function</span>(val)<span class="op">{</span></a>
+<a class="sourceLine" id="cb25-3" title="3">    <span class="cf">return</span> <span class="va">val</span>.<span class="at">length</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-4" title="4"><span class="op">}</span>)<span class="op">;</span> <span class="co">// &#39;foo&#39;</span></a></code></pre></div>
+<h2 id="mixintarget-objectsobject">mixIn(target, …objects):Object</h2>
+<p>Combine properties from all the objects into first one.</p>
+<p>This method affects target object in place, if you want to create a new Object pass an empty object as first parameter.</p>
+<h3 id="arguments">Arguments</h3>
+<ol type="1">
+<li><code>target</code> (Object) : Target Object.</li>
+<li><code>...objects</code> (…Object) : Objects to be combined (0…n objects).</li>
+</ol>
+<h3 id="example-3">Example</h3>
+<div class="sourceCode" id="cb26"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">var</span> a <span class="op">=</span> <span class="op">{</span><span class="dt">foo</span><span class="op">:</span> <span class="st">&quot;bar&quot;</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="kw">var</span> b <span class="op">=</span> <span class="op">{</span><span class="dt">lorem</span><span class="op">:</span> <span class="dv">123</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb26-3" title="3"></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="at">mixIn</span>(<span class="op">{},</span> a<span class="op">,</span> b)<span class="op">;</span> <span class="co">// {foo: &quot;bar&quot;, lorem: 123}</span></a>
+<a class="sourceLine" id="cb26-5" title="5"><span class="va">console</span>.<span class="at">log</span>(a)<span class="op">;</span>  <span class="co">// {foo: &quot;bar&quot;}</span></a>
+<a class="sourceLine" id="cb26-6" title="6"></a>
+<a class="sourceLine" id="cb26-7" title="7"><span class="at">mixIn</span>(a<span class="op">,</span> b)<span class="op">;</span>     <span class="co">// {foo: &quot;bar&quot;, lorem: 123}</span></a>
+<a class="sourceLine" id="cb26-8" title="8"><span class="va">console</span>.<span class="at">log</span>(a)<span class="op">;</span>  <span class="co">// {foo: &quot;bar&quot;, lorem: 123}</span></a></code></pre></div>
+<p>See: <a href="#fillIn"><code>fillIn()</code></a>, <a href="#merge"><code>merge()</code></a></p>
+<h2 id="namespaceobj-propnameobject">namespace(obj, propName):Object</h2>
+<p>Creates an empty object inside namespace if not existent. Will return created object or existing object.</p>
+<p>See: <a href="#get"><code>get()</code></a>, <a href="#set"><code>set()</code></a></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="at">namespace</span>(obj<span class="op">,</span> <span class="st">&#39;foo.bar&#39;</span>)<span class="op">;</span> <span class="co">// {}</span></a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="va">console</span>.<span class="at">log</span>(obj)<span class="op">;</span>          <span class="co">// {foo:{bar:{</span><span class="re">}}}</span></a></code></pre></div>
+<h2 id="omitobj-keysobject">omit(obj, …keys):Object</h2>
+<p>Return a copy of the object without the blacklisted keys.</p>
+<p>See: <a href="#filter"><code>filter()</code></a></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">var</span> user <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb28-2" title="2">    <span class="dt">firstName </span><span class="op">:</span> <span class="st">&#39;John&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb28-3" title="3">    <span class="dt">lastName </span><span class="op">:</span> <span class="st">&#39;Doe&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb28-4" title="4">    <span class="dt">dob </span><span class="op">:</span> <span class="st">&#39;1985/07/23&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb28-5" title="5">    <span class="dt">gender </span><span class="op">:</span> <span class="st">&#39;male&#39;</span></a>
+<a class="sourceLine" id="cb28-6" title="6"><span class="op">};</span></a>
+<a class="sourceLine" id="cb28-7" title="7"></a>
+<a class="sourceLine" id="cb28-8" title="8"><span class="co">// can pass an array of keys as second argument</span></a>
+<a class="sourceLine" id="cb28-9" title="9"><span class="kw">var</span> keys <span class="op">=</span> [<span class="st">&#39;firstName&#39;</span><span class="op">,</span> <span class="st">&#39;dob&#39;</span>]</a>
+<a class="sourceLine" id="cb28-10" title="10"><span class="at">omit</span>(user<span class="op">,</span> keys)<span class="op">;</span> <span class="co">// {lastName : &#39;Doe&#39;, gender : &#39;male&#39;}</span></a>
+<a class="sourceLine" id="cb28-11" title="11"></a>
+<a class="sourceLine" id="cb28-12" title="12"><span class="co">// or multiple arguments</span></a>
+<a class="sourceLine" id="cb28-13" title="13"><span class="at">omit</span>(user<span class="op">,</span> <span class="st">&#39;firstName&#39;</span><span class="op">,</span> <span class="st">&#39;lastName&#39;</span>)<span class="op">;</span> <span class="co">// {dob : &#39;1985/07/23&#39;, gender : &#39;male&#39;}</span></a></code></pre></div>
+<h2 id="pickobj-keysobject">pick(obj, …keys):Object</h2>
+<p>Return a copy of the object that contains only the whitelisted keys.</p>
+<p>See: <a href="#filter"><code>filter()</code></a></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">var</span> user <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb29-2" title="2">    <span class="dt">firstName </span><span class="op">:</span> <span class="st">&#39;John&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb29-3" title="3">    <span class="dt">lastName </span><span class="op">:</span> <span class="st">&#39;Doe&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb29-4" title="4">    <span class="dt">dob </span><span class="op">:</span> <span class="st">&#39;1985/07/23&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb29-5" title="5">    <span class="dt">gender </span><span class="op">:</span> <span class="st">&#39;male&#39;</span></a>
+<a class="sourceLine" id="cb29-6" title="6"><span class="op">};</span></a>
+<a class="sourceLine" id="cb29-7" title="7"></a>
+<a class="sourceLine" id="cb29-8" title="8"><span class="co">// can pass an array of keys as second argument</span></a>
+<a class="sourceLine" id="cb29-9" title="9"><span class="kw">var</span> keys <span class="op">=</span> [<span class="st">&#39;firstName&#39;</span><span class="op">,</span> <span class="st">&#39;dob&#39;</span>]</a>
+<a class="sourceLine" id="cb29-10" title="10"><span class="at">pick</span>(user<span class="op">,</span> keys)<span class="op">;</span> <span class="co">// {firstName:&quot;John&quot;, dob: &quot;1985/07/23&quot;}</span></a>
+<a class="sourceLine" id="cb29-11" title="11"></a>
+<a class="sourceLine" id="cb29-12" title="12"><span class="co">// or multiple arguments</span></a>
+<a class="sourceLine" id="cb29-13" title="13"><span class="at">pick</span>(user<span class="op">,</span> <span class="st">&#39;firstName&#39;</span><span class="op">,</span> <span class="st">&#39;lastName&#39;</span>)<span class="op">;</span> <span class="co">// {firstName:&quot;John&quot;, lastName: &quot;Doe&quot;}</span></a></code></pre></div>
+<h2 id="pluckobj-propnameobject">pluck(obj, propName):Object</h2>
+<p>Extract an object containing property values with keys as they appear in the passed object.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">var</span> users <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb30-2" title="2">    <span class="dt">first</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb30-3" title="3">        <span class="dt">name </span><span class="op">:</span> <span class="st">&#39;John&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb30-4" title="4">        <span class="dt">age </span><span class="op">:</span> <span class="dv">21</span></a>
+<a class="sourceLine" id="cb30-5" title="5">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb30-6" title="6">    <span class="dt">second</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb30-7" title="7">        <span class="dt">name </span><span class="op">:</span> <span class="st">&#39;Mary&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb30-8" title="8">        <span class="dt">age </span><span class="op">:</span> <span class="dv">25</span></a>
+<a class="sourceLine" id="cb30-9" title="9">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb30-10" title="10"><span class="op">};</span></a>
+<a class="sourceLine" id="cb30-11" title="11"></a>
+<a class="sourceLine" id="cb30-12" title="12"><span class="at">pluck</span>(users<span class="op">,</span> <span class="st">&#39;name&#39;</span>)<span class="op">;</span> <span class="co">// {first: &#39;John&#39;, second: &#39;Mary&#39;} );</span></a>
+<a class="sourceLine" id="cb30-13" title="13"><span class="at">pluck</span>(users<span class="op">,</span> <span class="st">&#39;age&#39;</span>)<span class="op">;</span>  <span class="co">// {first: 21, second: 25} );</span></a></code></pre></div>
+<h2 id="reduceobj-callback-initial-thisobj">reduce(obj, callback, initial, [thisObj]):*</h2>
+<p>Similar to <a href="array.html#reduce">Array/reduce</a>.</p>
+<p>Apply a function against an accumulator and each property of the object (order is undefined) as to reduce it to a single value.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span><span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">c</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">d</span><span class="op">:</span> <span class="dv">4</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb31-2" title="2"></a>
+<a class="sourceLine" id="cb31-3" title="3"><span class="kw">function</span> <span class="at">sum</span>(prev<span class="op">,</span> cur<span class="op">,</span> key<span class="op">,</span> list) <span class="op">{</span></a>
+<a class="sourceLine" id="cb31-4" title="4">    <span class="va">compare1</span>.<span class="at">push</span>(prev)<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-5" title="5">    <span class="cf">return</span> prev <span class="op">+</span> cur<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-6" title="6"><span class="op">}</span></a>
+<a class="sourceLine" id="cb31-7" title="7"></a>
+<a class="sourceLine" id="cb31-8" title="8"><span class="at">reduce</span>(obj<span class="op">,</span> sum)<span class="op">;</span> <span class="co">// 10</span></a></code></pre></div>
+<h2 id="rejectobj-callback-thisobjobject">reject(obj, callback, thisObj):Object</h2>
+<p>Returns a new object containing all properties where <code>callback</code> returns true, similar to <a href="array.html#reject">Array/reject</a>. It does not use properties from the object’s prototype. Opposite of <a href="#filter"><code>filter()</code></a>.</p>
+<p>See <a href="#filter"><code>filter()</code></a></p>
+<h3 id="example-4">Example</h3>
+<div class="sourceCode" id="cb32"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span><span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">c</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">d</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span> <span class="dt">e</span><span class="op">:</span> <span class="dv">5</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="at">reject</span>(obj<span class="op">,</span> <span class="kw">function</span>(x) <span class="op">{</span> <span class="cf">return</span> (x <span class="op">%</span> <span class="dv">2</span>) <span class="op">!==</span> <span class="dv">0</span><span class="op">;</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// {b: 2, d: 4}</span></a></code></pre></div>
+<h2 id="valuesobjarray">values(obj):Array</h2>
+<p>Returns an array of all own enumerable properties values found upon a given object.</p>
+<p>PS: it won’t return properties from the prototype.</p>
+<p>See: <a href="#forOwn"><code>forOwn()</code></a>, <a href="#keys"><code>keys()</code></a></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb33-2" title="2">    <span class="dt">foo </span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb33-3" title="3">    <span class="dt">bar </span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb33-4" title="4">    <span class="dt">lorem </span><span class="op">:</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb33-5" title="5"><span class="op">};</span></a>
+<a class="sourceLine" id="cb33-6" title="6"><span class="at">values</span>(obj)<span class="op">;</span> <span class="co">// [1, 2, 3]</span></a></code></pre></div>
+<h2 id="setobj-propname-value">set(obj, propName, value)</h2>
+<p>Sets a nested property value.</p>
+<p>See: <a href="#get"><code>get()</code></a>, <a href="#namespace"><code>namespace()</code></a></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="at">set</span>(obj<span class="op">,</span> <span class="st">&#39;foo.bar&#39;</span><span class="op">,</span> <span class="dv">123</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="va">console</span>.<span class="at">log</span>(<span class="va">obj</span>.<span class="va">foo</span>.<span class="at">bar</span>)<span class="op">;</span> <span class="co">// 123</span></a>
+<a class="sourceLine" id="cb34-4" title="4"><span class="va">console</span>.<span class="at">log</span>(obj)<span class="op">;</span>         <span class="co">// {foo:{bar:123}}</span></a></code></pre></div>
+<h2 id="sizeobjnumber">size(obj):Number</h2>
+<p>Returns the count of own enumerable properties found upon a given object.</p>
+<p>PS: it won’t return properties from the prototype.</p>
+<p>See: <a href="#forOwn"><code>forOwn()</code></a>, <a href="#keys"><code>keys()</code></a></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-2" title="2">    <span class="dt">foo </span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb35-3" title="3">    <span class="dt">bar </span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb35-4" title="4">    <span class="dt">lorem </span><span class="op">:</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="op">};</span></a>
+<a class="sourceLine" id="cb35-6" title="6"><span class="at">size</span>(obj)<span class="op">;</span> <span class="co">// 3</span></a></code></pre></div>
+<h2 id="someobj-callback-thisobjboolean">some(obj, callback, [thisObj]):Boolean</h2>
+<p>Similar to <a href="array.html#some">Array/some</a>. Tests whether any properties in the object pass the test implemented by the provided callback.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb36-2" title="2">    <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb36-3" title="3">    <span class="dt">b</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb36-4" title="4">    <span class="dt">c</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb36-5" title="5">    <span class="dt">d</span><span class="op">:</span> <span class="st">&#39;string&#39;</span></a>
+<a class="sourceLine" id="cb36-6" title="6"><span class="op">};</span></a>
+<a class="sourceLine" id="cb36-7" title="7"></a>
+<a class="sourceLine" id="cb36-8" title="8"><span class="at">some</span>(obj<span class="op">,</span> isNumber)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<h2 id="unsetobj-propnameboolean">unset(obj, propName):Boolean</h2>
+<p>Delete object property if existent and returns a boolean indicating succes. It will also return <code>true</code> if property doesn’t exist.</p>
+<p>Some properties can’t be deleted, to understand why <a href="http://perfectionkills.com/understanding-delete/">check this article</a>.</p>
+<p>See: <a href="#set"><code>set()</code></a></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">var</span> lorem <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb37-2" title="2">        <span class="dt">ipsum </span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb37-3" title="3">            <span class="dt">dolor </span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb37-4" title="4">                <span class="dt">sit </span><span class="op">:</span> <span class="st">&#39;amet&#39;</span></a>
+<a class="sourceLine" id="cb37-5" title="5">            <span class="op">}</span></a>
+<a class="sourceLine" id="cb37-6" title="6">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb37-7" title="7">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb37-8" title="8"></a>
+<a class="sourceLine" id="cb37-9" title="9"><span class="at">unset</span>(lorem<span class="op">,</span> <span class="st">&#39;ipsum.dolor.sit&#39;</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb37-10" title="10"><span class="va">console</span>.<span class="at">log</span>(<span class="va">lorem</span>.<span class="va">ipsum</span>.<span class="at">dolor</span>)<span class="op">;</span>  <span class="co">// {}</span></a>
+<a class="sourceLine" id="cb37-11" title="11"><span class="at">unset</span>(lorem<span class="op">,</span> <span class="st">&#39;foo.bar&#39;</span>)<span class="op">;</span>         <span class="co">// true</span></a></code></pre></div>
+<h2 id="resultobject-propertymixed">result(object, property):Mixed</h2>
+<p>Evaluates an objects property and returns result.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">var</span> person <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb38-2" title="2">    <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;john&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb38-3" title="3"></a>
+<a class="sourceLine" id="cb38-4" title="4">    <span class="dt">mood</span><span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb38-5" title="5">        <span class="co">// some dynamic calculated property.</span></a>
+<a class="sourceLine" id="cb38-6" title="6">        <span class="cf">return</span> <span class="st">&#39;happy&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb38-7" title="7">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb38-8" title="8"><span class="op">};</span></a>
+<a class="sourceLine" id="cb38-9" title="9"></a>
+<a class="sourceLine" id="cb38-10" title="10"><span class="kw">var</span> name <span class="op">=</span> <span class="at">result</span>(person<span class="op">,</span> <span class="st">&#39;name&#39;</span>)<span class="op">,</span> <span class="co">// john</span></a>
+<a class="sourceLine" id="cb38-11" title="11">    mood <span class="op">=</span> <span class="at">result</span>(person<span class="op">,</span> <span class="st">&#39;mood&#39;</span>)<span class="op">;</span> <span class="co">// happy</span></a></code></pre></div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="caffe2-implementation-of-open-neural-network-exchange-onnx">Caffe2 implementation of Open Neural Network Exchange (ONNX)</h1>
+<h1 id="usage">Usage</h1>
+<ul>
+<li><a href="https://github.com/onnx/tutorials/blob/master/tutorials/OnnxCaffe2Import.ipynb">ONNX to Caffe2</a></li>
+<li><a href="https://github.com/onnx/tutorials/blob/master/tutorials/Caffe2OnnxExport.ipynb">Caffe2 to ONNX</a></li>
+<li><a href="https://github.com/onnx/tutorials">other end-to-end tutorials</a></li>
+</ul>
+<h1 id="installation">Installation</h1>
+<p>onnx-caffe2 is installed as a part of Caffe2. Please follow the <a href="https://caffe2.ai/docs/getting-started.html">instructions</a> to install Caffe2.</p>
+<h1 id="folder-structure">Folder Structure</h1>
+<ul>
+<li>./: the main folder that all code lies under
+<ul>
+<li>frontend.py: translate from caffe2 model to onnx model</li>
+<li>backend.py: execution engine that runs onnx on caffe2</li>
+</ul></li>
+<li>tests/: test files</li>
+</ul>
+<h1 id="testing">Testing</h1>
+<p>onnx-caffe2 uses <a href="https://docs.pytest.org">pytest</a> as test driver. In order to run tests, first you need to install pytest:</p>
+<pre><code>pip install pytest-cov</code></pre>
+<p>After installing pytest, do</p>
+<pre><code>pytest</code></pre>
+<p>to run tests.</p>
+<p>Testing coverage issues/status: https://github.com/caffe2/caffe2/blob/master/caffe2/python/onnx/ONNXOpCoverage.md</p>
+<h1 id="development">Development</h1>
+<p>During development it’s convenient to install caffe2 in development mode:</p>
+<pre><code>cd /path/to/caffe2
+pip install -e caffe2/</code></pre>
+<h1 id="license">License</h1>
+<p><a href="LICENSE">MIT License</a></p>
+</body>
+</html>

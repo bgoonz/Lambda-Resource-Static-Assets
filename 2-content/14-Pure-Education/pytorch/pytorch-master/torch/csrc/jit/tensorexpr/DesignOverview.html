@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>DesignOverview</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="ir-specification-updated-22621">IR Specification (Updated 2/26/21)</h1>
+<p>Stmt = Block(stmts_ = [Stmt]) | Store(buf_ = Buf, indices = <a href="#expr">Expr</a>, value_ = Expr, mask_ = Expr) | Allocate(buf_ = Buf) | Free(buf_ = Buf) | Let(var_ = Var, val_ = Expr) | Cond(condition_ = Expr, true_stmt_ = Block, false_stmt_ = Block) | For(var_ = Var, start_ = Expr, stop_ = Expr, body_ = Block, loopOptions = LoopOptions) | AtomicAdd(buf_ = Buf, indices = <a href="#expr">Expr</a>, value_ = Expr) | SyncThreads() | ExternalCall(buf_ = Buf, buf_args_ = [Buf], args_ = <a href="#expr">Expr</a>)</p>
+<p>Expr = Var() | Buf(base_handle_ = Var, dims = <a href="#expr">Expr</a>) | Term(variables_ = <a href="#expr">Expr</a>, scalar_ = Expr) | Polynomial(variables_ = [Term], scalar_ = Expr) | MaxTerm(variables_ = [Term], scalar_ = Expr) | MinTerm(variables_ = [Term], scalar_ = Expr) | Cast(src_value_ = Expr) | BitCast(src_value_ = Expr) | BinaryOpNode(lhs_ = Expr, rhs_ = Expr) | ImmInt/ImmFloat/etc.() | Ramp(base_ = Expr, stride_ = Expr) | Load(buf_ = Buf, indices = <a href="#expr">Expr</a>, mask_ = Expr) | Broadcast(value_ = Expr, lanes_ = int) | IfThenElse(condition_ = Expr, true_ = Expr, false_ = Expr) | CallNode(call_type_ = {kIntrinsics, kFunctionCall}, params_ = <a href="#expr">Expr</a>) | CompareSelect(lhs_ = Expr, rhs_ = Expr, ret_val1_ = Expr, ret_val2_ = Expr, compare_op_ = {kEQ, kGT, kGE, …}, bias_ = {kUnbiased, kLikely, kUnlikely}) | ReduceOp(body_ = Expr, reduce_args_ = [Var], reducer = Reducer) # Current workflow</p>
+<h2 id="step-1-input-from-the-user.">Step 1: input from the user.</h2>
+<p>User construct a kernel from tensor expressions, like:</p>
+<pre><code>    Buffer a_buf(&quot;a&quot;, kFloat32, {M, N});
+    Buffer b_buf(&quot;b&quot;, kFloat32, {N, K});
+    Buffer c_buf(&quot;c&quot;, kFloat32, {M, N});
+    Buffer d_buf(&quot;d&quot;, kFloat32, {M, K});
+
+    Tensor* x = Compute(
+        &quot;x&quot;,
+        {{M, &quot;m1&quot;}, {N, &quot;n1&quot;}, {K, &quot;k1&quot;}},
+        [&amp;](const VarHandle&amp; m, const VarHandle&amp; n, const VarHandle&amp; k) {
+          return a_buf(m, n) * b_buf(n, k);
+        });
+    Tensor* y = ...;
+    Tensor* z = ...;
+    std::vector&lt;Tensor*&gt; tensors_to_compute = {x, z}; // Tensor y might be used in x or z - in this case it will also be computed.</code></pre>
+<h2 id="step-2-lower-to-a-loopnest">Step 2: Lower to a LoopNest:</h2>
+<pre><code>   LoopNest l(tensors_to_compute);</code></pre>
+<p>LoopNest consists of a root statement (<code>Stmt</code>) and some metadata. The root statement of a loop nest is a block statement containing other statements.</p>
+<p>A statement can be one of the following: - <code>Store</code> statement: such statements represent access to tensor elements. They specify the base variable (<code>Var</code>), an expression for the index, an expression for the stored value, and the mask. - <code>LetStmt</code> statement: ‘let’ statements are used for binding variables to given expressions. Such statements consist of the variable to bind (<code>Var</code>), the expression to bind to, and the body statement in which the binding should be performed. - <code>For</code> statement: these statements represent a loop. They specify the index variable (<code>Var</code>), expressions for the beginning and the end of the iteration space, a <code>Block</code> statement for the body, and some metadata. - <code>Cond</code> statement: these statements represent if-s: they consist of a condition expression and two <code>Block</code> statements for true and false branches (both are allowed to be null). - <code>Block</code> statement: these statements represent a linear sequence of other statements.</p>
+<p>An example of a root statement:</p>
+<pre><code>for (int m = 0; m &lt; 100; m++) {
+  for (int n = 0; n &lt; 200; n++) {
+    c[m * 200 + n] = a[m * 200 + n + 1] + a[m * 200 + n];
+  }
+}
+for (int i = 0; i &lt; W; i++) {
+  q[i] = i + 1
+}</code></pre>
+<h2 id="step-3-apply-loop-transformations">Step 3: Apply loop transformations</h2>
+<p>One can apply various loop transformations on a loop nest. The transformations mutate statements in the loop nest and loop nest can record the history of the transformations.</p>
+<h2 id="step-4-prepare-loop-nest-for-codegen">Step 4: Prepare loop nest for codegen</h2>
+<p>After all desired loop transformations are applied, a final transformation is carried out on the loop nest’s root statement. A result of this transformation is also a statement, but it now can include lower-level statements like <code>Allocate</code> and <code>Free</code>, which are not allowed to exist during the loop transformation phase.</p>
+<h2 id="step-5-pass-the-final-statement-for-codegen-llvmcudaireval">Step 5: Pass the final statement for codegen (LLVM/CUDA/IREval)</h2>
+<p>Codegen is implemented as an IR visitor over the statements produced in the previous step.</p>
+<h1 id="tensor-expressions-language">Tensor Expressions Language</h1>
+<p>There are several core concepts in the Tensor Expression engine, this section defines them and shows how they connect to each other.</p>
+<h2 id="expr">Expr</h2>
+<p>Expr represents a node in the abstract syntax tree of a tensor expression. Leaf nodes in such tree are either a symbolic variable (<code>Var</code>), a constant (<code>IntImm</code> or <code>FloatImm</code>), <code>Buffer</code>, or a <code>Tensor</code>. Non-leaf nodes refer to other expressions and represent various operations. E.g. <code>Add</code> has two operands: <code>lhs</code> and <code>rhs</code>, both of which are also <code>Expr</code>.</p>
+<h2 id="tensor">Tensor</h2>
+<p><code>Tensor</code> is a bundle of 1) a variable <code>Var</code> defining which tensor this <code>Tensor</code> expression is describing 2) a list of indices <code>args</code> (each of them is <code>Var</code>) 3) a list of expressions for dimensions <code>dims</code> (each of them is <code>Expr</code>) 4) a computational expression <code>body</code> (of <code>Expr</code> type)</p>
+<h2 id="buffer">Buffer</h2>
+<p><code>Buffer</code>s are essentially <code>Tensor</code>s without a <code>body</code> - they represent an indexed access to “tensors” that is outside of the tensor-expression system. <code>Buffer</code> is a bundle of 1) a <code>Var</code> defining which buffer this <code>Buffer</code> expression is defining 2) a list of indices <code>args</code> (each of them is <code>Var</code>) 3) a list of expressions for dimensions <code>dims</code> (each of them is <code>Expr</code>)</p>
+<h2 id="example">Example</h2>
+<p>Suppose we’d like to represent the following expression:</p>
+<pre><code>A[i,j] = B[i,j] + 7</code></pre>
+<p>where both <code>A</code> and <code>B</code> are 100x100 tensors. On the top level we would have a single <code>Tensor</code> expression with: 1) a variable referring to “A” 2) list of two indices referring to “i” and “j” 3) list of two <code>IntImm</code> constants describing sizes (both of them would carry the value of 100) 4) a body expression which is an <code>Add</code> with two operands: <code>Buffer</code> describing <code>B[i,j]</code> access and an <code>IntImm</code> constant <code>7</code>.</p>
+<p>The buffer expression describing <code>B[i,j]</code> would have similar properties: 1) a variable referring to “B” 2) list of two indices referring to “i” and “j” 3) list of two <code>IntImm</code> constants describing sizes (both of them would carry the value of 100)</p>
+<p>In contrast to the tensor expression, the buffer expression would not have a body - it represents a symbolic access.</p>
+<p>The code for constructing such an expression could look like this:</p>
+<pre><code>    Buffer B(&quot;B&quot;, kFloat32, {100, 100});
+    Tensor* A = Compute(
+        &quot;A&quot;,
+        {{100, &quot;i&quot;}, {100, &quot;j&quot;}},
+        [&amp;](const VarHandle&amp; i, const VarHandle&amp; j) {
+          return B(i, j) + 7;
+        });</code></pre>
+<h2 id="function">Function</h2>
+<p><code>Function</code> represents several tensor computations bundled together. In fact, <code>Tensor</code>s are implemented via <code>Function</code>s. A function allows us to specify that several different tensor expressions operate over the same set of indices and dimensions.</p>
+<h1 id="memory-model">Memory model</h1>
+<p>TBD</p>
+<h1 id="integration-with-pytorch-jit">Integration with PyTorch JIT</h1>
+<p>TBD</p>
+</body>
+</html>

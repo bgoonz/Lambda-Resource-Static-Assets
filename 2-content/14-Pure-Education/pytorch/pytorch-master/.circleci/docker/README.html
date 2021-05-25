@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="docker-images-for-jenkins">Docker images for Jenkins</h1>
+<p>This directory contains everything needed to build the Docker images that are used in our CI</p>
+<p>The Dockerfiles located in subdirectories are parameterized to conditionally run build stages depending on build arguments passed to <code>docker build</code>. This lets us use only a few Dockerfiles for many images. The different configurations are identified by a freeform string that we call a <em>build environment</em>. This string is persisted in each image as the <code>BUILD_ENVIRONMENT</code> environment variable.</p>
+<p>See <code>build.sh</code> for valid build environments (it’s the giant switch).</p>
+<p>Docker builds are now defined with <code>.circleci/cimodel/data/simple/docker_definitions.py</code></p>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><code>build.sh</code> – dispatch script to launch all builds</li>
+<li><code>common</code> – scripts used to execute individual Docker build stages</li>
+<li><code>ubuntu-cuda</code> – Dockerfile for Ubuntu image with CUDA support for nvidia-docker</li>
+</ul>
+</body>
+</html>

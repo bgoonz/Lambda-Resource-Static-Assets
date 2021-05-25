@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p>This folder contains a number of scripts which are used as part of the PyTorch build process. This directory also doubles as a Python module hierarchy (thus the <code>__init__.py</code>).</p>
+<h2 id="overview">Overview</h2>
+<p>Modern infrastructure:</p>
+<ul>
+<li><a href="autograd">autograd</a> - Code generation for autograd. This includes definitions of all our derivatives.</li>
+<li><a href="jit">jit</a> - Code generation for JIT</li>
+<li><a href="shared">shared</a> - Generic infrastructure that scripts in tools may find useful.
+<ul>
+<li><a href="shared/module_loader.py">module_loader.py</a> - Makes it easier to import arbitrary Python files in a script, without having to add them to the PYTHONPATH first.</li>
+</ul></li>
+</ul>
+<p>Legacy infrastructure (we should kill this): * <a href="cwrap">cwrap</a> - Implementation of legacy code generation for THNN/THCUNN. This is used by nnwrap.</p>
+<p>Build system pieces:</p>
+<ul>
+<li><a href="setup_helpers">setup_helpers</a> - Helper code for searching for third-party dependencies on the user system.</li>
+<li><a href="build_pytorch_libs.py">build_pytorch_libs.py</a> - cross-platform script that builds all of the constituent libraries of PyTorch, but not the PyTorch Python extension itself.</li>
+<li><a href="build_libtorch.py">build_libtorch.py</a> - Script for building libtorch, a standalone C++ library without Python support. This build script is tested in CI.</li>
+<li><a href="fast_nvcc">fast_nvcc</a> - Mostly-transparent wrapper over nvcc that parallelizes compilation when used to build CUDA files for multiple architectures at once.
+<ul>
+<li><a href="fast_nvcc/fast_nvcc.py">fast_nvcc.py</a> - Python script, entrypoint to the fast nvcc wrapper.</li>
+</ul></li>
+</ul>
+<p>Developer tools which you might find useful:</p>
+<ul>
+<li><a href="clang_tidy.py">clang_tidy.py</a> - Script for running clang-tidy on lines of your script which you changed.</li>
+<li><a href="git_add_generated_dirs.sh">git_add_generated_dirs.sh</a> and <a href="git_reset_generated_dirs.sh">git_reset_generated_dirs.sh</a> - Use this to force add generated files to your Git index, so that you can conveniently run diffs on them when working on code-generation. (See also <a href="generated_dirs.txt">generated_dirs.txt</a> which specifies the list of directories with generated files.)</li>
+<li><a href="mypy_wrapper.py">mypy_wrapper.py</a> - Run <code>mypy</code> on a single file using the appropriate subset of our <code>mypy*.ini</code> configs.</li>
+<li><a href="test_history.py">test_history.py</a> - Query S3 to display history of a single test across multiple jobs over time.</li>
+</ul>
+<p>Important if you want to run on AMD GPU:</p>
+<ul>
+<li><a href="amd_build">amd_build</a> - HIPify scripts, for transpiling CUDA into AMD HIP. Right now, PyTorch and Caffe2 share logic for how to do this transpilation, but have separate entry-points for transpiling either PyTorch or Caffe2 code.
+<ul>
+<li><a href="amd_build/build_amd.py">build_amd.py</a> - Top-level entry point for HIPifying our codebase.</li>
+</ul></li>
+</ul>
+<p>Tools which are only situationally useful:</p>
+<ul>
+<li><a href="docker">docker</a> - Dockerfile for running (but not developing) PyTorch, using the official conda binary distribution. Context: https://github.com/pytorch/pytorch/issues/1619</li>
+<li><a href="download_mnist.py">download_mnist.py</a> - Download the MNIST dataset; this is necessary if you want to run the C++ API tests.</li>
+<li><a href="run-clang-tidy-in-ci.sh">run-clang-tidy-in-ci.sh</a> - Responsible for checking that C++ code is clang-tidy clean in CI on Travis</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Interjú kérdések front-end fejlesztőknek</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Interjú kérdések front-end fejlesztőknek</h1>
+</header>
+<h1 id="interjú-kérdések-front-end-fejlesztőknek">Interjú kérdések front-end fejlesztőknek</h1>
+<p>Ebben a gyűjteményben összeválogattuk a legjobb front-end fejlesztő interjú kérdéseket. Ellenben nem tanácsoljuk az összes kérdés egyidejű feltevését, hiszen ez órákat venne igénybe de egy válogatott kérdéssorral megkönnyíthetjük a potenciális jelentkezők szelektálását.</p>
+<p><a href="http://rmurphey.com/">Rebecca Murphey</a>, <a href="http://rmurphey.com/blog/2012/04/12/a-baseline-for-front-end-developers/">Baseline For Front-End Developers</a> cikke is hasznos alapja lehet egy interjúnak.</p>
+<p><strong>Megjegyzés:</strong> Ne feledd, hogy a kérdések többsége érdekes beszélgetésé alakulhat, ami többet elárulhat az emberről mintha csak egyszerű válaszokat adna.</p>
+<h2 id="tartalom"><a name='toc'>Tartalom</a></h2>
+<ol type="1">
+<li><a href="#contributors">Eredeti közreműködők</a></li>
+<li><a href="#general">Általános kérdések</a></li>
+<li><a href="#html">HTML kérdések:</a></li>
+<li><a href="#css">CSS kérdések</a></li>
+<li><a href="#js">JS kérdések</a></li>
+<li><a href="#jquery">jQuery kérdések</a></li>
+<li><a href="#jscode">Példakódok</a></li>
+<li><a href="#fun">Választható és vicces kérdések</a></li>
+<li><a href="#references">További referenciák</a></li>
+</ol>
+<h4 id="eredeti-közreműködők"><a href="#toc">[⬆]</a> <a name='contributors'>Eredeti közreműködők:</a></h4>
+<p>A kérdések többsége egy <a href="http://oksoclap.com/">oksoclap</a> beszélgetés alapján készült, amit <a href="http://paulirish.com">Paul Irish</a> (<span class="citation" data-cites="paul_irish">[@paul_irish]</span>(http://twitter.com/paul_irish)) kezdeményezett az alábbi közreműködőkkel:</p>
+<ul>
+<li><span class="citation" data-cites="bentruyman">[@bentruyman]</span>(http://twitter.com/bentruyman) - <a href="http://bentruyman.com">http://bentruyman.com</a></li>
+<li><span class="citation" data-cites="cowboy">[@cowboy]</span>(http://twitter.com/cowboy) - <a href="http://benalman.com">http://benalman.com</a></li>
+<li><span class="citation" data-cites="ajpiano">[@ajpiano]</span>(http://ajpiano) - <a href="http://ajpiano.com">http://ajpiano.com</a></li>
+<li><span class="citation" data-cites="SlexAxton">[@SlexAxton]</span>(http://twitter.com/slexaxton) - <a href="http://alexsexton.com">http://alexsexton.com</a></li>
+<li><span class="citation" data-cites="boazsender">[@boazsender]</span>(http://twitter.com/boazsender) - <a href="http://boazsender.com">http://boazsender.com</a></li>
+<li><span class="citation" data-cites="miketaylr">[@miketaylr]</span>(http://twitter.com/miketaylr) - <a href="http://miketaylr.com">http://miketaylr.com</a></li>
+<li><span class="citation" data-cites="vladikoff">[@vladikoff]</span>(http://twitter.com/vladikoff) - <a href="http://vladfilippov.com">http://vladfilippov.com</a></li>
+<li><span class="citation" data-cites="gf3">[@gf3]</span>(http://twitter.com/gf3) - <a href="http://gf3.ca">http://gf3.ca</a></li>
+<li><span class="citation" data-cites="jon_neal">[@jon_neal]</span>(http://twitter.com/jon_neal) - <a href="http://twitter.com/jon_neal">http://twitter.com/jon_neal</a></li>
+<li><span class="citation" data-cites="wookiehangover">[@wookiehangover]</span>(http://twitter.com/wookiehangover) - <a href="http://wookiehangover.com">http://wookiehangover.com</a></li>
+<li><span class="citation" data-cites="iansym">[@iansym]</span>(http://twitter.com)</li>
+</ul>
+<h4 id="általános-kérdések"><a href="#toc">[⬆]</a> <a name='general'>Általános kérdések:</a></h4>
+<ul>
+<li>Tanultál valami újat a héten/tegnap és ha igen, mit?</li>
+<li>Mi számodra a legérdekesebb és izgalmasabb a kódolás során?</li>
+<li>Milyen UI, biztonsági, teljesítménybeli, SEO, karbantarthatósági és technológiai szempontokat tartasz szem elött fejlesztés közben?</li>
+<li>Mi a számodra legelőnyösebb fejlesztői környezet? (operációs rendszer, szerkesztő, böngésző, fejlesztői eszközök, stb.)</li>
+<li>Részletezd a munkafolyamatot, hogyan készítesz el egy weboldalt.</li>
+<li>Mi a különbség a fokozatos javítása és a között, hogy a weboldalt folyamatosan optimalizálod régebbi és egyszerűbb felületekre is?
+<ul>
+<li>Bónusz pont a funkció működésének tesztelése adott eszközön.</li>
+</ul></li>
+<li>Magyarázd el mit jelent a “szemantikus HTML”.</li>
+<li>Milyen böngészőt és milyen eszközöket használsz a fejlesztéshez?</li>
+<li>Hogyan optimalizálod egy weboldal forrásait/eszközeit?
+<ul>
+<li>Keress több megoldást, amik tartalmazzák az alábbiakat:
+<ul>
+<li>Fájl egyesítés</li>
+<li>Fájl minimalizálás</li>
+<li>CDN hoszting</li>
+<li>Cachelés</li>
+<li>stb.</li>
+</ul></li>
+</ul></li>
+<li>Miert jobb az eszközöket egyszerre több domainnek is kiszolgálni?
+<ul>
+<li>Hány lekérdezés futhat a böngészőben egyidejűleg az adott domain irányába?</li>
+</ul></li>
+<li>Nevezz meg 3 lehetőséget az oldalletöltés időtartámanak csökkentésére. (előtöltött vagy aktuális töltési idő)</li>
+<li>Ha beszállsz egy projektbe, és ők tabot használnak te pedig szókozt a kód rendezésénél, mit teszel?
+<ul>
+<li>Tanácsolod, hogy használjatok valami technológiát, pl. <a href="http://editorconfig.org">EditorConfig</a></li>
+<li>Elfogadod (vagy tartózkodsz)</li>
+<li><code>issue :retab! command</code></li>
+</ul></li>
+<li>Készíts egy egyszerű slideshow oldalt.
+<ul>
+<li>Bónusz pont ha nem szükséges hozzá JavaScript.</li>
+</ul></li>
+<li>Milyen eszközökkel teszteled a kódod teljesítményét? ()
+<ul>
+<li>Profiler</li>
+<li><a href="http://jsperf.com/">JSPerf</a></li>
+<li><a href="http://dromaeo.com/">Dromaeo</a></li>
+</ul></li>
+<li>Ha idén elsajátíthatnál egy technológiát, mi lenne az?</li>
+<li>Ismertesd a sztandardok fontosságát.</li>
+<li>Mi a FOUC? Hogyan kerulöd el a FOUC-et?</li>
+<li>Magyarázt el legjobb tudásod szerint mi történik a böngészőben attól kezdve hogy beírod az oldal url-jét, addig hogy az betöltődött a képernyőn.</li>
+<li>Magyarázd el mi az ARIA és a képernyőolvasók, és hogy tudsz egy weboldalt hozzáférhetővé tenni hátrányos helyzetben élők számára.</li>
+</ul>
+<h4 id="html-kérdések"><a href="#toc">[⬆]</a> <a name='html'>HTML kérdések:</a></h4>
+<ul>
+<li>Mi a <code>doctype</code> feladata és hány fajtáját tudod megnevezni?</li>
+<li>Mi a különbség a <code>standard</code> és a <code>quirks</code> módok között?</li>
+<li>Nevezd meg az XHTML oldalak korlátait?
+<ul>
+<li>Van bármi akadálya annak, hogy egy oldalt <code>application/xhtml+xml</code>-ként szolgáljon ki?</li>
+</ul></li>
+<li>Hogyan készítesz fel egy weboldalt többnyelvű tartalom megjelenítésére?
+<ul>
+<li>Mikre kell figyelni egy többnyelvű oldal tervezése és fejlesztése során?</li>
+</ul></li>
+<li>Mire valók a <code>data-</code> attribútumok?</li>
+<li>Tegyük fel, hogy a HTML5 egy nyílt webes felület. Mik az építőelemei?</li>
+<li>Mi a különbség a <code>cookie</code> a <code>sessionStorage</code> és a <code>localStorage</code> között.</li>
+<li>El tudod mondani mi a különbség a <code>GET</code> és a <code>POST</code> között?</li>
+<li>Mi a különbség a <code>&lt;script&gt;</code>, <code>&lt;script async&gt;</code> és <code>&lt;script defer&gt;</code> között.</li>
+</ul>
+<h4 id="css-kérdések"><a href="#toc">[⬆]</a> <a name='css'>CSS kérdések:</a></h4>
+<ul>
+<li>Mire való a “reset” CSS fájl és mennyire hasznos?</li>
+<li>Hogyan működik a CSS <code>float</code>?</li>
+<li>Milyen <code>clear</code> technikákat ismersz és melyik milyen környezetben a megfelelő?</li>
+<li>Magyarázd el a CSS sprites működését és, hogy hogyan alkalmazod egy weboldalon?</li>
+<li>Mi a kedvenc képpel helyettesítő (image replacement) technikád és mit használsz mire?</li>
+<li>CSS hackek, böngésző függő CSS fájlok, vagy…. valami más?</li>
+<li>Hogyan jelenítesz meg oldalakat korlátozott böngészőkben?
+<ul>
+<li>Milyen technológiákat/folyamatokat használsz?</li>
+</ul></li>
+<li>Milyen módon tudsz tartalmakat vizuálisan elrejteni (és csak screen olvasók számára elérhetővé tenni)?</li>
+<li>Használtál már “grid system”-et? Ha igen nevezz meg párat.</li>
+<li>Használtál már “media query”-ket vagy mobil specifikus layoutokat/CSS-eket?</li>
+<li>Jártas vagy az SVG használatában?</li>
+<li>Hogyan alakítasz egy weboldalt nyomtatóbaráttá?</li>
+<li>Mik a legjobb “ötletek” a hatékony CSS kód írásához?</li>
+<li>Használsz CSS előfeldolgozó technilógiát? (<a href="http://sass-lang.com/">SASS</a>, <a href="http://compass-style.org/">Compass</a>, <a href="http://learnboost.github.io/stylus/">Stylus</a>, <a href="http://lesscss.org/">LESS</a>)
+<ul>
+<li>Ha igen mit szeretsz és mit nem szeretsz bennük?</li>
+</ul></li>
+<li>Hogyan valósítasz meg egy olyan dizájn kompozíciót, ami nem a szabványos betűtípusokat tartalmazza?
+<ul>
+<li>Webfontok (<a href="https://www.google.com/fonts/">Google Webfonts</a>, <a href="https://typekit.com/">Typekit</a>, stb.)</li>
+</ul></li>
+<li>Miként határozza meg a böngésző a megfelelő CSS szelektort?</li>
+<li>Hogyan értelmezed a “box model”-t és hogyan alkalmazod a böngészőkben?</li>
+<li>Mit csinál a <code>* { box-sizing: border-box; }</code>? Mik az előnyei?</li>
+<li>Sorold fel a display tulajdonság annyi értékét amennyit tudsz.</li>
+<li>Mi a különbség az <code>inline</code> és az <code>inline-block</code> között?</li>
+<li>Mi a különbség a <code>relative</code> , <code>fixed</code>, <code>absolute</code> és statikusan pozicionált elemek között?</li>
+<li>A ‘C’ feloldása a CSS-ben a cascading (lépcsőzetes). Hogy van a prioritás meghatározva a stílusok közt (néhány példával)? Hogy használhatod ezt a rendszert a saját előnyödre?</li>
+<li>Használtál már CSS keretrendszert? (Bootstrap, PureCSS, Foundation stb.)</li>
+<li>Ha igen, melyiket? Ha tehetnéd, hogy változtatnád/fejlesztenéd tovább?</li>
+<li>Foglalkoztál már az új CSS Flexbox és Grid specifikációkkal?</li>
+<li>Miben más a reszponzív design és az adaptív design?</li>
+<li>Dolgoztál már retina grafikával? Ha igen, milyen teknikákat használtál?</li>
+</ul>
+<h4 id="js-kérdések"><a href="#toc">[⬆]</a> <a name='js'>JS kérdések:</a></h4>
+<ul>
+<li>Mit jelent az <code>event delegation</code>?</li>
+<li>Magyarázd el hogyan működik a <code>this</code> a JavaScript-ben.</li>
+<li>Hogyan működik a protokol öröklés (prototypal inheritance)?</li>
+<li>Hogyan teszteled a JavaScript kódodat?</li>
+<li>AMD vs. CommonJS?</li>
+<li>Mi a hashtábla?</li>
+<li>Miért nem működik a következő kód IIFE-ként? <code>function foo(){ }();</code>
+<ul>
+<li>Mit kell megváltoztatni, hogy működjön?</li>
+</ul></li>
+<li>Mit jelent az <code>undefined</code> és az <code>undeclared</code> változó?
+<ul>
+<li>Miként ellenőrzöd ezeket?</li>
+</ul></li>
+<li>Mi a “closure”, milyen formáit ismered és hogyan használod azokat?</li>
+<li>Hogyan néz ki egy anoním funkció?</li>
+<li>Magyarázd el a JavaScript modul sablont és, hogy mikor használjuk.
+<ul>
+<li>Bónusz pont, ha említi a tiszta “namespace”-ket.</li>
+<li>Mi történik akkor, ha a modul “namespace” mentes?</li>
+</ul></li>
+<li>Miként rendszerezed a kódodat? (module pattern, classical inheritance)</li>
+<li>Mi a különbség hoszt objektum és natív objektum között?</li>
+<li>Mi a különbség az következő kódok között: <code>function Person(){}</code>, <code>var person = Person()</code> és <code>var person = new Person()</code></li>
+<li>Mi a különbség a <code>.call</code> és az <code>.apply</code> között?</li>
+<li>Magyarázd el mire jó a <code>Function.prototype.bind</code>?</li>
+<li>Mikor szoktad optimalizálni a kódodat?</li>
+<li>Magyarázd el hogyan működik az öröklődés szabálya a JavaScript-ben?</li>
+<li>Mikor használod a <code>document.write()</code> funkciót?
+<ul>
+<li>A legtöbb generált hírdetésben még mindig használják annak ellenére, hogy nem ajánlatos.</li>
+</ul></li>
+<li>Mi a különbség a “feature” észlelés (detection), “feature” következtetés (inference) és az UA sztring használata között?</li>
+<li>Magyarázd meg az AJAX működését a lehető legrészletesebben.</li>
+<li>Magyarázd el, hogyan működik a JSONP (és miért nem AJAX valójában).</li>
+<li>Használtál már JavaScript template rendszert?
+<ul>
+<li>Ha igen mit? (Mustache.js, Handlebars, stb.)</li>
+</ul></li>
+<li>Mit jelent a “hoisting”?</li>
+<li>Mit jelent az <code>event bubbling</code>?</li>
+<li>Mi a különbség az “attribute” és a “property” között?</li>
+<li>Miért nem jó ötlet kiegészíteni a beépített JavaScript objektumokat?</li>
+<li>Miért jó ötlet kiegészíteni a bepített funkciókat?</li>
+<li>Mi a különbség a “document load” és a “document ready” között?</li>
+<li>Mi a különbség <code>==</code> és <code>===</code> között?</li>
+<li>Hogyan olvasol be egy paramétert a böngésző ablak URL-ből?</li>
+<li>Mit jelent a “same-origin” szabály a JavaScript-bet?</li>
+<li>Ismertesd a JavaScript öröklési mintáját.</li>
+<li>Javítsd ki az alábbi példát:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1">[<span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">,</span><span class="dv">4</span><span class="op">,</span><span class="dv">5</span>].<span class="at">duplicate</span>()<span class="op">;</span> <span class="co">// [1,2,3,4,5,1,2,3,4,5]</span></a></code></pre></div>
+<ul>
+<li>írj le egy memorizáló stratégiát (ismétlődő kalkulációk nélkül) JavaScriptben.</li>
+<li>Mit nevezünk “Ternary” kifejezésnek? Mire utal a “Ternary” szó?</li>
+<li>Mennyi attribútumot lehet átadni egy funkciónak?</li>
+<li>Mi a <code>"use strict";</code>, mik az előnyei és a hátrányai?</li>
+<li>Készíts egy ciklust ami 100-ig számol, minden 3-al osztható számnál kiírja hogy “fizz”, minden 5-el osztható számnál kiírja hogy “buzz”, és minden 3-al és 5-el is osztható számnál kiírja hogy “fizzbuzz”</li>
+<li>Általánosságban miért jó ötlet a weboldal global scope-ját érintetlenül hagyni?</li>
+</ul>
+<h4 id="jquery-kérdések"><a href="#toc">[⬆]</a> <a name='jquery'>jQuery kérdések:</a></h4>
+<ul>
+<li>Mit jelent a <code>chaining</code>?</li>
+<li>Mit jelent a <code>deferreds</code>?</li>
+<li>Milyen jQuery specifikus optimalizálást ismersz?</li>
+<li>Mire használhatjuk az <code>.end()</code> funkciót?</li>
+<li>Hogyan neveznél el egy kapcsolt esemény kezelőt (bound event handler) és miért?</li>
+<li>Nevezz meg 4 különböző értéket, ami átadható egy jQuery folyamatnak.
+<ul>
+<li>Szelektor (sztring), HTML (sztring), Callback (funkció), HTMLElement, objektum, tömb, elemb tömb, jQuery objektum, stb.</li>
+</ul></li>
+<li>Mit jelent az effektek (vagy fx) sorba állítas?</li>
+<li>Mi a különbség <code>.get()</code>, <code>[]</code>, és <code>.eq()</code> között?</li>
+<li>Mi a különbség <code>.bind()</code>, <code>.live()</code>, és <code>.delegate()</code> között?</li>
+<li>Mi a különbség <code>$</code> és <code>$.fn</code> között? Vagy mit jelent a <code>$.fn</code>?</li>
+<li>Optimalizáld a alábbi szelektort:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="at">$</span>(<span class="st">&quot;.foo div#bar:eq(0)&quot;</span>)</a></code></pre></div>
+<h4 id="példakódok"><a href="#toc">[⬆]</a> <a name='jscode'>Példakódok:</a></h4>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="at">modulo</span>(<span class="dv">12</span><span class="op">,</span> <span class="dv">5</span>) <span class="co">// 2</span></a></code></pre></div>
+<p><em>Kérdés: Készítsd el a modulo funkció, hogy a fenti példa eredménye 2 legyen.</em></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="st">&quot;i&#39;m a lasagna hog&quot;</span>.<span class="at">split</span>(<span class="st">&quot;&quot;</span>).<span class="at">reverse</span>().<span class="at">join</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<p><em>Kérdés: Milyen értékkel tér vissza a fenti állítás?</em></p>
+<p><strong>Válasz: “goh angasal a m’i”</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1">( <span class="va">window</span>.<span class="at">foo</span> <span class="op">||</span> ( <span class="va">window</span>.<span class="at">foo</span> <span class="op">=</span> <span class="st">&quot;bar&quot;</span> ) )<span class="op">;</span></a></code></pre></div>
+<p><em>Kérdés: Mi az értéke a <code>window.foo</code>-nak?</em></p>
+<p><strong>Válasz: “bar”</strong> <em>(de csak ha a <code>window.foo</code> hamis egyébként megtartja az értékét.)</em></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> <span class="st">&quot;Hello&quot;</span><span class="op">;</span> (<span class="kw">function</span>() <span class="op">{</span> <span class="kw">var</span> bar <span class="op">=</span> <span class="st">&quot; World&quot;</span><span class="op">;</span> <span class="at">alert</span>(foo <span class="op">+</span> bar)<span class="op">;</span> <span class="op">}</span>)()<span class="op">;</span> <span class="at">alert</span>(foo <span class="op">+</span> bar)<span class="op">;</span></a></code></pre></div>
+<p><em>Kérdés: Mi a fenti két alert-nek a kimenete?</em></p>
+<p><strong>Válasz: “Hello World” és ReferenceError: bar is not defined</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="va">foo</span>.<span class="at">push</span>(<span class="dv">1</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="va">foo</span>.<span class="at">push</span>(<span class="dv">2</span>)<span class="op">;</span></a></code></pre></div>
+<p><em>Kérdés: Mi a <code>foo.length</code> értéke?</em></p>
+<p><strong>Válasz: <code>2</code></strong></p>
+<h4 id="választható-és-vicces-kérdések"><a href="#toc">[⬆]</a> <a name='fun'>Választható és vicces kérdések:</a></h4>
+<ul>
+<li>Mi a legjobb dolog, amit eddig kódoltál? Mire vagy a legbüszkébb?</li>
+<li>Mi a kedvenced az általad használt fejlesztői eszközökben?</li>
+<li>Van dédelgetett projekted? Ha igen, milyen?</li>
+<li>Mit szeretsz a legjobban az Internet Explorerben?</li>
+</ul>
+<h4 id="további-referenciák"><a href="#toc">[⬆]</a> <a name='references'>További referenciák:</a></h4>
+<ul>
+<li>http://programmers.stackexchange.com/questions/46716/what-technical-details-should-a-programmer-of-a-web-application-consider-before</li>
+<li>http://www.nczonline.net/blog/2010/01/05/interviewing-the-front-end-engineer/</li>
+<li>http://css-tricks.com/interview-questions-css/</li>
+</ul>
+</body>
+</html>

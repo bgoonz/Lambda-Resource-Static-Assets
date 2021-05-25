@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="thcunn">THCUNN</h1>
+<p>THCUNN is a library that gathers nn’s C implementations of neural network modules. It’s entirely free of Lua dependency and therefore can be used in any application that has a C FFI. Please note that it only contains quite low level functions; most users will want to use ATen, which provides a C++ wrapper around these functions.</p>
+<p>Looking to add an implementation? Consider writing an ATen native function instead! See <a href="../ATen/native">../ATen/native</a>.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li><a href="doc/api_reference.md">API reference</a></li>
+<li><a href="doc/style_guidelines.md">Style guidelines</a></li>
+</ul>
+<h2 id="api">API</h2>
+<p>THCUNN is a purely functional library. It provides 2-3 functions for each module, that perform the most important operations:</p>
+<ul>
+<li><strong>updateOutput</strong> - applies the module to an input</li>
+<li><strong>updateGradInput</strong> - accepts gradient w.r.t. output and previous module input, and computes a gradient w.r.t. that input</li>
+<li><strong>accGradParameters</strong> - <em>(optional, only modules with parameters)</em> accepts gradient w.r.t. output and previous module input, and computes gradient w.r.t. the parameters</li>
+</ul>
+<p>For information on argument types please check the <a href="doc/api_reference.md">API reference</a>.</p>
+<h2 id="developer-docs">Developer docs</h2>
+<ul>
+<li><a href="doc/style_guidelines.md">Style guidelines</a></li>
+</ul>
+</body>
+</html>

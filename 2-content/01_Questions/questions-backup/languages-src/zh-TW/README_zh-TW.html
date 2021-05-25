@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README_zh-TW</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<div data-align="center">
+<img height="60" src="https://img.icons8.com/color/344/javascript.png">
+<h1>
+JavaScript 進階題目列表
+</h1>
+<hr />
+<p><span>我會在我的 <a href="https://www.instagram.com/theavocoder">Instagram</a> 上發布關於 JavaScript 的複選題，同時也會更新到這個 Repo 當中。更新日期： <a href=#20191224><b>2019 年 12 月 24 日</b></a></p>
+<p>從基礎到進階程度，測試你有多了解 JavaScript，不僅更新你的知識，更能幫助你的 coding 面試！ :muscle: :rocket: 我每週都會在這個 Repo 中更新新的題目。</p>
+<p>答案在題目下方的摺疊區塊，點擊即可展開答案。祝你好運 :heart:</span></p>
+<p>歡迎和我聯繫！😊 <br /> <a href="https://www.instagram.com/theavocoder">Instagram</a> || <a href="https://www.twitter.com/lydiahallie">Twitter</a> || <a href="https:/www.linkedin.com/in/lydia-hallie">LinkedIn</a> || <a href="www.lydiahallie.dev">Blog</a></p>
+</div>
+<hr />
+<h6 id="將會輸出什麽內容">1. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">function</span> <span class="at">sayHi</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(name)</a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(age)</a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="kw">var</span> name <span class="op">=</span> <span class="st">&#39;Lydia&#39;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="kw">let</span> age <span class="op">=</span> <span class="dv">21</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="at">sayHi</span>()</a></code></pre></div>
+<ul>
+<li>A: <code>Lydia</code> 和 <code>undefined</code></li>
+<li>B: <code>Lydia</code> 和 <code>ReferenceError</code></li>
+<li>C: <code>ReferenceError</code> 和 <code>21</code></li>
+<li>D: <code>undefined</code> 和 <code>ReferenceError</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案d">答案：D</h4>
+<p>在函式內部，我們首先透過 <code>var</code> 關鍵字宣告了 <code>name</code> 變數。這表示變數被提升了（記憶體位置在創建時期就被設置好了），直到程式執行到定義變數的那行之前，預設值都是 <code>undefined</code>。因為當我們印出 <code>name</code> 變數時，還沒有執行到定義變數的那一行程式碼，因此變數的值保持為 <code>undefined</code>。</p>
+<p>透過 <code>let</code> 和 <code>const</code> 關鍵字宣告的變數也會提升，但是和 <code>var</code> 不同，它們不會被<i>初始化</i>，在我們初始化之前是不能訪問它們的，這個行為被稱之為暫時性死區。當我們嘗試在初始化之前訪問它們時，JavaScript 將會抛出一個 <code>ReferenceError</code> 錯誤。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-1">2. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">3</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="at">setTimeout</span>(() <span class="kw">=&gt;</span> <span class="va">console</span>.<span class="at">log</span>(i)<span class="op">,</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">3</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="at">setTimeout</span>(() <span class="kw">=&gt;</span> <span class="va">console</span>.<span class="at">log</span>(i)<span class="op">,</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="op">}</span></a></code></pre></div>
+<ul>
+<li>A: <code>0 1 2</code> 和 <code>0 1 2</code></li>
+<li>B: <code>0 1 2</code> 和 <code>3 3 3</code></li>
+<li>C: <code>3 3 3</code> 和 <code>0 1 2</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案c">答案：C</h4>
+<p>由於 JavaScript 的事件佇列（Event Queue），<code>setTimeout</code> 的 <code>callback</code> 會在<em>遍歷結束後</em>才執行。因為在第一個迴圈中，遍歷 <code>i</code> 是透過 <code>var</code> 關鍵字宣告的，<code>var</code> 屬於 Function scope（需要用 <code>function() {}</code> 才能將值鎖在作用域裡面） ，所以 <code>for</code> 迴圈會造成變數外流，變成全域變數。在遍歷過程中，我們透過一元運算子 <code>++</code> 來遞增 <code>i</code> 的值。當 <code>setTimeout</code> 的 <code>callback</code> 執行的時候，<code>i</code> 的值等於 3。</p>
+<p>在第二個迴圈中，遍歷 <code>i</code> 是透過 <code>let</code> 關鍵字宣告的：透過 <code>let</code> 和 <code>const</code> 關鍵字的變數擁有塊級作用域（指的是任何在 <code>{}</code> 中的内容）。在每次的遍歷過程中，<code>i</code> 都有一個新值，每次遍歷時 <code>i</code> 值的作用域都在迴圈内。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-2">3. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> shape <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">radius</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="at">diameter</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">radius</span> <span class="op">*</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="dt">perimeter</span><span class="op">:</span> () <span class="kw">=&gt;</span> <span class="dv">2</span> <span class="op">*</span> <span class="va">Math</span>.<span class="at">PI</span> <span class="op">*</span> <span class="kw">this</span>.<span class="at">radius</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-8" title="8"></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="va">shape</span>.<span class="at">diameter</span>()</a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="va">shape</span>.<span class="at">perimeter</span>()</a></code></pre></div>
+<ul>
+<li>A: <code>20</code> and <code>62.83185307179586</code></li>
+<li>B: <code>20</code> and <code>NaN</code></li>
+<li>C: <code>20</code> and <code>63</code></li>
+<li>D: <code>NaN</code> and <code>63</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案-b">答案 B</h4>
+<p>注意 <code>diameter</code> 的值是一個一般的函式，但是 <code>perimeter</code> 的值是一個箭頭函式。</p>
+<p>對於箭頭函式，<code>this</code> 關鍵字指向的是它當前周圍作用域，這個行為和一般函式不同。這表示當我們呼叫 <code>perimeter</code> 時，<code>this</code> 不是指向 <code>shape</code> 物件，而是它的周圍作用域（在範例中是 <code>window</code>）。</p>
+<p>在 <code>window</code> 中沒有 <code>radius</code> 這個屬性，因此回傳 <code>undefined</code>。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-3">4. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="op">+</span><span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="op">!</span><span class="st">&quot;Lydia&quot;</span><span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>1</code> and <code>false</code></li>
+<li>B: <code>false</code> and <code>NaN</code></li>
+<li>C: <code>false</code> and <code>false</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案a">答案：A</h4>
+<p>一元運算子加號 <code>+</code>，嘗試將 boolean 布林值型別轉為 number 數字型別。<code>true</code> 轉為 number 數字型別的話為 <code>1</code>，<code>false</code> 爲 <code>0</code>。</p>
+<p>字串型別 <code>'Lydia'</code> 是一個真值，我們實際上問的題目是：「這個真值的相反會是什麼？」，真值的相反，將得到 <code>false</code>。</p>
+</p>
+</details>
+<hr />
+<h6 id="哪一個是正確的描述">5. 哪一個是正確的描述？</h6>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">const</span> bird <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="dt">size</span><span class="op">:</span> <span class="st">&#39;small&#39;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="kw">const</span> mouse <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-6" title="6">  <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Mickey&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="dt">small</span><span class="op">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="op">}</span></a></code></pre></div>
+<ul>
+<li>A: <code>mouse.bird.size</code>是無效的</li>
+<li>B: <code>mouse[bird.size]</code>是無效的</li>
+<li>C: <code>mouse[bird["size"]]</code>是無效的</li>
+<li>D: 以上三個選項都是有效的</li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案a-1">答案：A</h4>
+<p>在 JavaScript 中，所有物件的 keys 都是字串型別（除非是 Symbol 物件）。儘管我們或許不會定義它們為字串，但它們在底層總會被轉換爲字串。</p>
+<p>當我們使用中括號時（[]），JavaScript 會解譯語句。它首先看到中括號的第一個開始處 <code>[</code> 並繼續往下直到找到結束的中括號 <code>]</code>。只有這樣，它才能計算語句的值。</p>
+<p><code>mouse[bird.size]</code>：首先計算 <code>bird.size</code>，這會得到 <code>small</code>。<code>mouse["small"]</code> 得到 <code>true</code>。</p>
+<p>使用點的語法的時候，上面這一切都不會發生。<code>mouse</code> 沒有 <code>bird</code> 這個 key，這就表示 <code>mouse.bird</code> 是 <code>undefined</code>。然後當我們使用點語法 <code>mouse.bird.size</code> 時，因為 <code>mouse.bird</code> 是 <code>undefined</code>，這也就變成了我們實際的語句是 <code>undefined.size</code>，而此行為是無效的，並會抛出一個錯誤 <code>Cannot read property "size" of undefined</code>。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-4">6. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">let</span> c <span class="op">=</span> <span class="op">{</span> <span class="dt">greeting</span><span class="op">:</span> <span class="st">&#39;Hey!&#39;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">let</span> d</a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4">d <span class="op">=</span> c</a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="va">c</span>.<span class="at">greeting</span> <span class="op">=</span> <span class="st">&#39;Hello&#39;</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="va">console</span>.<span class="at">log</span>(<span class="va">d</span>.<span class="at">greeting</span>)</a></code></pre></div>
+<ul>
+<li>A: <code>Hello</code></li>
+<li>B: <code>undefined</code></li>
+<li>C: <code>ReferenceError</code></li>
+<li>D: <code>TypeError</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案a-2">答案：A</h4>
+<p>在 JavaScript 中，當設定兩個物件彼此相等時，它們會經由<em>引用（reference）</em>進行互動。</p>
+<p>首先，變數 <code>c</code> 的值是一個物件。接下来，我們將 <code>d</code> 分配了一個和 <code>c</code> 物件相同的引用。</p>
+<p><img src="https://i.imgur.com/ko5k0fs.png" width="200"></p>
+<p>因此當我們改變其中一個物件時，其實是改變了所有的物件的同一個引用的內容。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-5">7. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">let</span> a <span class="op">=</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">let</span> b <span class="op">=</span> <span class="kw">new</span> <span class="at">Number</span>(<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">let</span> c <span class="op">=</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="va">console</span>.<span class="at">log</span>(a <span class="op">==</span> b)</a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="va">console</span>.<span class="at">log</span>(a <span class="op">===</span> b)</a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="va">console</span>.<span class="at">log</span>(b <span class="op">===</span> c)</a></code></pre></div>
+<ul>
+<li>A: <code>true</code> <code>false</code> <code>true</code></li>
+<li>B: <code>false</code> <code>false</code> <code>true</code></li>
+<li>C: <code>true</code> <code>false</code> <code>false</code></li>
+<li>D: <code>false</code> <code>true</code> <code>true</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案c-1">答案：C</h4>
+<p><code>new Number()</code> 是一個内建的函式建構子。它雖然看起來像是個 number，但它實際上並非真正的 number：它有一堆額外的功能，而且它是一個物件。</p>
+<p>當我們使用 <code>==</code> 運算子的時候，它只會檢查兩者是否擁有有相同的<em>值</em>。因為它們的值都是 <code>3</code>，因此回傳 <code>true</code>。</p>
+<p>然後，當我們使用 <code>===</code> 運算子時，兩者的值以及<em>型別</em>都必須是相同的。<code>new Number()</code> 是一個物件型別而不是 number（一般型別），因此回傳 <code>false</code>。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-6">8. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">class</span> Chameleon <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="kw">static</span> <span class="at">colorChange</span>(newColor) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="kw">this</span>.<span class="at">newColor</span> <span class="op">=</span> newColor</a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">newColor</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7">  <span class="at">constructor</span>(<span class="op">{</span> newColor <span class="op">=</span> <span class="st">&#39;green&#39;</span> <span class="op">}</span> <span class="op">=</span> <span class="op">{}</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-8" title="8">    <span class="kw">this</span>.<span class="at">newColor</span> <span class="op">=</span> newColor</a>
+<a class="sourceLine" id="cb8-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="op">}</span></a>
+<a class="sourceLine" id="cb8-11" title="11"></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="kw">const</span> freddie <span class="op">=</span> <span class="kw">new</span> <span class="at">Chameleon</span>(<span class="op">{</span> <span class="dt">newColor</span><span class="op">:</span> <span class="st">&#39;purple&#39;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="va">freddie</span>.<span class="at">colorChange</span>(<span class="st">&#39;orange&#39;</span>)</a></code></pre></div>
+<ul>
+<li>A: <code>orange</code></li>
+<li>B: <code>purple</code></li>
+<li>C: <code>green</code></li>
+<li>D: <code>TypeError</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案d-1">答案：D</h4>
+<p><code>colorChange</code> 是一個靜態方法。靜態方法被設計爲只能被創造它們的建構子使用（也就是 <code>Chameleon</code> 中的 <code>constructor</code> ），並且不能傳遞給實例。因為 <code>freddie</code> 是一個實例，而靜態方法不能被實例使用，因此會抛出 <code>TypeError</code> 錯誤。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-7">9. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">let</span> greeting</a>
+<a class="sourceLine" id="cb9-2" title="2">greetign <span class="op">=</span> <span class="op">{}</span> <span class="co">// 手殘打錯變數名稱!</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="va">console</span>.<span class="at">log</span>(greetign)</a></code></pre></div>
+<ul>
+<li>A: <code>{}</code></li>
+<li>B: <code>ReferenceError: greetign is not defined</code></li>
+<li>C: <code>undefined</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案a-3">答案：A</h4>
+<p>程式碼印出了一個物件，這是因為我們在全域物件上創建了一個空物件！當我們將 <code>greeting</code> 寫錯成 <code>greetign</code> 時，JS 解譯器實際上將它視爲 <code>global.greetign = {}</code> （或者在瀏覽器中視為 <code>window.greetign = {}</code>）。</p>
+<p>為了避免這個狀況，我們可以使用 <code>"use strict"</code>，來確保當你宣告變數時，必須賦值。</p>
+</p>
+</details>
+<hr />
+<h6 id="當我們這麼做時會發生什麼事">10. 當我們這麼做時，會發生什麼事？</h6>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">function</span> <span class="at">bark</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Woof!&#39;</span>)</a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb10-4" title="4"></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="va">bark</span>.<span class="at">animal</span> <span class="op">=</span> <span class="st">&#39;dog&#39;</span></a></code></pre></div>
+<ul>
+<li>A: 正常運作！</li>
+<li>B: <code>SyntaxError</code>. 你不能透過這種方式在函式中新增屬性。</li>
+<li>C: <code>undefined</code></li>
+<li>D: <code>ReferenceError</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案a-4">答案：A</h4>
+<p>這在 JavaScript 中是可以的，因爲函式是物件！（除了基本型別之外其他都是物件）</p>
+<p>函式是一個特殊的物件，函式是一個擁有屬性的物件，屬性也可被使用、呼叫的。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-8">11. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">function</span> <span class="at">Person</span>(firstName<span class="op">,</span> lastName) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="kw">this</span>.<span class="at">firstName</span> <span class="op">=</span> firstName<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="kw">this</span>.<span class="at">lastName</span> <span class="op">=</span> lastName<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb11-5" title="5"></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="kw">const</span> member <span class="op">=</span> <span class="kw">new</span> <span class="at">Person</span>(<span class="st">&quot;Lydia&quot;</span><span class="op">,</span> <span class="st">&quot;Hallie&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="va">Person</span>.<span class="at">getFullName</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-8" title="8">  <span class="cf">return</span> <span class="vs">`</span><span class="sc">${</span><span class="kw">this</span>.<span class="at">firstName</span><span class="sc">}</span><span class="vs"> </span><span class="sc">${</span><span class="kw">this</span>.<span class="at">lastName</span><span class="sc">}</span><span class="vs">`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="op">}</span></a>
+<a class="sourceLine" id="cb11-10" title="10"></a>
+<a class="sourceLine" id="cb11-11" title="11"><span class="va">console</span>.<span class="at">log</span>(<span class="va">member</span>.<span class="at">getFullName</span>())<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>TypeError</code></li>
+<li>B: <code>SyntaxError</code></li>
+<li>C: <code>Lydia Hallie</code></li>
+<li>D: <code>undefined</code> <code>undefined</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案a-5">答案：A</h4>
+<p>你可以為一般物件新增屬性，但建構函式（constructor）無法透過上面的方式來新增屬性。若你想一次性在所有實例上都新增某個屬性，要使用原型的方式。因此本例中，使用以下的方式：</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="va">Person</span>.<span class="va">prototype</span>.<span class="at">getFullName</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="cf">return</span> <span class="vs">`</span><span class="sc">${</span><span class="kw">this</span>.<span class="at">firstName</span><span class="sc">}</span><span class="vs"> </span><span class="sc">${</span><span class="kw">this</span>.<span class="at">lastName</span><span class="sc">}</span><span class="vs">`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>這樣一來， <code>member.getFullName()</code> 就能有效。這樣做有什麼好處？假設我們真的能如題將這個方法新增到建構函式本身，並不是每個 <code>Person</code> 實例都需要這個方法，但每個實例卻仍然擁有該属性，代表著這將佔據每個實例的記憶體，造成大量的記憶體空間因此浪費掉了。相反，如果我們只將它新增在原型中，那麼它只存在記憶體中的一個位置，而所有實例都可以使用它！</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-9">12. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">function</span> <span class="at">Person</span>(firstName<span class="op">,</span> lastName) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="kw">this</span>.<span class="at">firstName</span> <span class="op">=</span> firstName</a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="kw">this</span>.<span class="at">lastName</span> <span class="op">=</span> lastName</a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb13-5" title="5"></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="kw">const</span> lydia <span class="op">=</span> <span class="kw">new</span> <span class="at">Person</span>(<span class="st">&#39;Lydia&#39;</span><span class="op">,</span> <span class="st">&#39;Hallie&#39;</span>)</a>
+<a class="sourceLine" id="cb13-7" title="7"><span class="kw">const</span> sarah <span class="op">=</span> <span class="at">Person</span>(<span class="st">&#39;Sarah&#39;</span><span class="op">,</span> <span class="st">&#39;Smith&#39;</span>)</a>
+<a class="sourceLine" id="cb13-8" title="8"></a>
+<a class="sourceLine" id="cb13-9" title="9"><span class="va">console</span>.<span class="at">log</span>(lydia)</a>
+<a class="sourceLine" id="cb13-10" title="10"><span class="va">console</span>.<span class="at">log</span>(sarah)</a></code></pre></div>
+<ul>
+<li>A: <code>Person {firstName: "Lydia", lastName: "Hallie"}</code> and <code>undefined</code></li>
+<li>B: <code>Person {firstName: "Lydia", lastName: "Hallie"}</code> and <code>Person {firstName: "Sarah", lastName: "Smith"}</code></li>
+<li>C: <code>Person {firstName: "Lydia", lastName: "Hallie"}</code> and <code>{}</code></li>
+<li>D:<code>Person {firstName: "Lydia", lastName: "Hallie"}</code> and <code>ReferenceError</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案a-6">答案：A</h4>
+<p>對 <code>sarah</code> 而言，我們沒有使用 <code>new</code> 關鍵字。當使用 <code>new</code> 時，<code>this</code> 引用我們建立的空物件。沒有使用 <code>new</code> 的時候，<code>this</code> 引用的是<strong>全域物件</strong>（global object）。</p>
+<p>我們會說 <code>this.firstName</code> 等於 <code>"Sarah"</code>，而 <code>this.lastName</code> 等於 <code>"Smith"</code>。實際上我們做的是，定義了 <code>global.firstName = 'Sarah'</code> 和 <code>global.lastName = 'Smith'</code>。而 <code>sarah</code> 本身是 <code>undefined</code>，因為 <code>Person</code> 這個函式本身並沒有回傳值。</p>
+</p>
+</details>
+<hr />
+<h6 id="事件傳播的三個階段分別是">13. 事件傳播的三個階段分別是？</h6>
+<ul>
+<li>A: Target &gt; Capturing &gt; Bubbling</li>
+<li>B: Bubbling &gt; Target &gt; Capturing</li>
+<li>C: Target &gt; Bubbling &gt; Capturing</li>
+<li>D: Capturing &gt; Target &gt; Bubbling</li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案d-2">答案：D</h4>
+<p>先捕獲，再冒泡！在<strong>捕獲</strong>（capturing）階段中，事件從祖先元素向下傳播到目標元素。當事件到達<strong>目標</strong>（target）元素後，<strong>冒泡</strong>（bubbling）才開始。</p>
+<p><img src="https://i.imgur.com/N18oRgd.png" width="200"></p>
+</p>
+</details>
+<hr />
+<h6 id="所有物件都有原型">14. 所有物件都有原型。</h6>
+<ul>
+<li>A: true</li>
+<li>B: false</li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案b">答案：B</h4>
+<p>除了<strong>基本物件</strong>（base object，使用 <code>new</code> 關鍵字建立的物件）以外，所有物件都有原型。基本物件可以使用一些方法和属性，比如 <code>.toString</code>，這就是為什麼你可以使用內建的 JavaScript 方法！所有這類在原型上的方法都是可被使用的。雖然 JavaScript 不能直接在物件上找到這些方法，但 JavaScript 會沿著原型鍊找到它們，以便使用。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-10">15. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">function</span> <span class="at">sum</span>(a<span class="op">,</span> b) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="cf">return</span> a <span class="op">+</span> b</a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb14-4" title="4"></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="at">sum</span>(<span class="dv">1</span><span class="op">,</span> <span class="st">&#39;2&#39;</span>)</a></code></pre></div>
+<ul>
+<li>A: <code>NaN</code></li>
+<li>B: <code>TypeError</code></li>
+<li>C: <code>"12"</code></li>
+<li>D: <code>3</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案c-2">答案：C</h4>
+<p>JavaScript 是一個<strong>動態型別語言</strong>：我們不指定變數的型別。值可以在你不知道的情况下自動轉換成另一種型別，稱為<strong>隱含式轉型</strong>（implicit type coercion）。<strong>Coercion</strong> 是指將一種型別轉換成另一種型別。</p>
+<p>在此範例中，JavaScript 將數字型別 <code>1</code> 轉換為字串型別，以便函式能回傳一個有意義的值。數字型別（<code>1</code>）和字串型別（<code>'2'</code>）相加的時候，該數字會被視為字串。我們也能連接不同的字串，比如 <code>"Hello" + "World"</code>，而此例是 <code>"1" + "2"</code>，它將回傳 <code>"12"</code>。</p>
+</p>
+</details>
+<h6 id="將會輸出什麽內容-11">16. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">let</span> number <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="va">console</span>.<span class="at">log</span>(number<span class="op">++</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="va">console</span>.<span class="at">log</span>(<span class="op">++</span>number)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="va">console</span>.<span class="at">log</span>(number)<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>1</code> <code>1</code> <code>2</code></li>
+<li>B: <code>1</code> <code>2</code> <code>2</code></li>
+<li>C: <code>0</code> <code>2</code> <code>2</code></li>
+<li>D: <code>0</code> <code>1</code> <code>2</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案c-3">答案：C</h4>
+<p>一元運算子 <code>++</code> 加在變數後方:</p>
+<ol type="1">
+<li>回傳值 (這個值是 <code>0</code>)</li>
+<li>新增值 (變數 <code>number</code> 的值現在是 <code>1</code>)</li>
+</ol>
+<p>一元運算子 <code>++</code> 加在變數前方:</p>
+<ol type="1">
+<li>新增值 (變數 <code>number</code> 的值現在是 <code>2</code>)</li>
+<li>回傳值 (這個值是 <code>2</code>)</li>
+</ol>
+<p>因此答案是 <code>0 2 2</code>.</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-12">17. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb16"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">function</span> <span class="at">getPersonInfo</span>(one<span class="op">,</span> two<span class="op">,</span> three) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(one)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(two)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-4" title="4">  <span class="va">console</span>.<span class="at">log</span>(three)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb16-6" title="6"></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="kw">const</span> person <span class="op">=</span> <span class="st">&#39;Lydia&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="kw">const</span> age <span class="op">=</span> <span class="dv">21</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-9" title="9"></a>
+<a class="sourceLine" id="cb16-10" title="10">getPersonInfo<span class="vs">`</span><span class="sc">${</span>person<span class="sc">}</span><span class="vs"> is </span><span class="sc">${</span>age<span class="sc">}</span><span class="vs"> years old`</span><span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>"Lydia"</code> <code>21</code> <code>["", " is ", " years old"]</code></li>
+<li>B: <code>["", " is ", " years old"]</code> <code>"Lydia"</code> <code>21</code></li>
+<li>C: <code>"Lydia"</code> <code>["", " is ", " years old"]</code> <code>21</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案b-1">答案：B</h4>
+<p>若你使用標籤樣板字面值（Tagged template literals），第一個參數的值永遠會是一個裝載字串的陣列，函式中的剩下的參數會取得表達式中傳進的變數（<code>person</code>、<code>age</code>）的值（<code>'Lydia'</code>、<code>21</code>）！</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-13">18. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb17"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">function</span> <span class="at">checkAge</span>(data) <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-2" title="2">  <span class="cf">if</span> (data <span class="op">===</span> <span class="op">{</span> <span class="dt">age</span><span class="op">:</span> <span class="dv">18</span> <span class="op">}</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;You are an adult!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-4" title="4">  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (data <span class="op">==</span> <span class="op">{</span> <span class="dt">age</span><span class="op">:</span> <span class="dv">18</span> <span class="op">}</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-5" title="5">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;You are still an adult.&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-6" title="6">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-7" title="7">    <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`Hmm.. You don&#39;t have an age I guess`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb17-9" title="9"><span class="op">}</span></a>
+<a class="sourceLine" id="cb17-10" title="10"></a>
+<a class="sourceLine" id="cb17-11" title="11"><span class="at">checkAge</span>(<span class="op">{</span> <span class="dt">age</span><span class="op">:</span> <span class="dv">18</span> <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>You are an adult!</code></li>
+<li>B: <code>You are still an adult.</code></li>
+<li>C: <code>Hmm.. You don't have an age I guess</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案c-4">答案：C</h4>
+<p>驗證相等，一般型別只比較「值」，物件型別則是比較他們的「參考」。JavaScript 會確認不同物件的參考是否指向同一個記憶體位置。</p>
+<p>題目中，我們比較的兩個物件擁有不同的記憶體位置：一個物件是作為參數傳遞的物件，它的記憶體位置與另一個拿來判斷是否相等的物件並不相同。</p>
+<p>這就是 <code>{ age: 18 } === { age: 18 }</code> 與 <code>{ age: 18 } == { age: 18 }</code> 會回傳 <code>false</code> 的原因.</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-14">19. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb18"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">function</span> <span class="at">getAge</span>(...<span class="at">args</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="kw">typeof</span> args)<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb18-4" title="4"></a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="at">getAge</span>(<span class="dv">21</span>)<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>"number"</code></li>
+<li>B: <code>"array"</code></li>
+<li>C: <code>"object"</code></li>
+<li>D: <code>"NaN"</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案c-5">答案：C</h4>
+<p>其餘參數（<code>...args</code>） 會蒐集傳進來剩下來未使用的參數，成為一個「陣列」。 陣列的型別是「物件」，所以透過 <code>typeof args</code> 將會回傳該值的型別，將是 <code>"object"</code>。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-15">20. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb19"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">function</span> <span class="at">getAge</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-2" title="2">  <span class="st">&#39;use strict&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-3" title="3">  age <span class="op">=</span> <span class="dv">21</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb19-4" title="4">  <span class="va">console</span>.<span class="at">log</span>(age)<span class="op">;</span></a>
+<a class="sourceLine" id="cb19-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb19-6" title="6"></a>
+<a class="sourceLine" id="cb19-7" title="7"><span class="at">getAge</span>()<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>21</code></li>
+<li>B: <code>undefined</code></li>
+<li>C: <code>ReferenceError</code></li>
+<li>D: <code>TypeError</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案c-6">答案：C</h4>
+<p><code>"use strict"</code> 可以避免妳意外地宣告全區域變數。使用 <code>"use strict"</code> 時，我們若沒有宣告 <code>age</code> 這個變數，就直接賦值的話，會拋出 <code>ReferenceError</code>，若沒有使用 <code>"use strict"</code>，屬性 <code>age</code> 就會新增到全域物件上（瀏覽器上的全域物件是 <code>window</code>）。</p>
+</p>
+</details>
+<hr />
+<h6 id="sum-的值會是">21. <code>sum</code> 的值會是？</h6>
+<div class="sourceCode" id="cb20"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">const</span> sum <span class="op">=</span> <span class="at">eval</span>(<span class="st">&#39;10*10+5&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>105</code></li>
+<li>B: <code>"105"</code></li>
+<li>C: <code>TypeError</code></li>
+<li>D: <code>"10*10+5"</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案a-7">答案：A</h4>
+<p><code>eval</code> 會去執行傳進去的「字串」。如果該字串是一個表達式，如題目中的程式碼，那麼 <code>eval</code> 會自動執行該表達式 <code>10 * 10 + 5</code>，所以答案會是 <code>105</code>。</p>
+</p>
+</details>
+<hr />
+<h6 id="cool_secret-這個資料儲存在瀏覽器存活時間有多久">22. cool_secret 這個資料儲存在瀏覽器，存活時間有多久？</h6>
+<div class="sourceCode" id="cb21"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1"><span class="va">sessionStorage</span>.<span class="at">setItem</span>(<span class="st">&#39;cool_secret&#39;</span><span class="op">,</span> <span class="dv">123</span>)<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: 永遠都可以，資料不會不見。</li>
+<li>B: 使用者關閉頁籤後，資料才會失效。</li>
+<li>C: 使用者要關閉一整個瀏覽器，資料才會失效，單純關閉資料不會造成資料消失。</li>
+<li>D: 使用者關閉電腦後。</li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案b-2">答案：B</h4>
+<p>儲存在 <code>sessionStorage</code> 的資料會在使用者「關閉頁籤」後消失。</p>
+<p>若是使用 <code>localStorage</code> 來儲存資料的話，資料則會永遠存在瀏覽器端，直到觸發了 <code>localStorage.clear()</code> 才可以清除資料。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-16">23. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb22"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">var</span> num <span class="op">=</span> <span class="dv">8</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw">var</span> num <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb22-3" title="3"></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="va">console</span>.<span class="at">log</span>(num)<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>8</code></li>
+<li>B: <code>10</code></li>
+<li>C: <code>SyntaxError</code></li>
+<li>D: <code>ReferenceError</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案b-3">答案：B</h4>
+<p>使用 <code>var</code> 關鍵字重複宣告的變數，該值會以最新賦予的值作為它的「值」。這件事情在 <code>let</code> or <code>const</code> 不會發生，因為這兩個關鍵字所宣告的變數作用域是塊級作用域（block-scoped）。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-17">24. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb23"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">const</span> obj <span class="op">=</span> <span class="op">{</span> <span class="dv">1</span><span class="op">:</span> <span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="dv">2</span><span class="op">:</span> <span class="st">&#39;b&#39;</span><span class="op">,</span> <span class="dv">3</span><span class="op">:</span> <span class="st">&#39;c&#39;</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw">const</span> set <span class="op">=</span> <span class="kw">new</span> <span class="at">Set</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>])<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-3" title="3"></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="va">obj</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;1&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="va">obj</span>.<span class="at">hasOwnProperty</span>(<span class="dv">1</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="va">set</span>.<span class="at">has</span>(<span class="st">&#39;1&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="va">set</span>.<span class="at">has</span>(<span class="dv">1</span>)<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>false</code> <code>true</code> <code>false</code> <code>true</code></li>
+<li>B: <code>false</code> <code>true</code> <code>true</code> <code>true</code></li>
+<li>C: <code>true</code> <code>true</code> <code>false</code> <code>true</code></li>
+<li>D: <code>true</code> <code>true</code> <code>true</code> <code>true</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案c-7">答案：C</h4>
+<p>除了 <code>Symbol</code> 以外的物件的 <code>key</code> 在底層都是字串類別，即使你建立該物件屬性時，並不是以字串來建立的，所以 <code>obj.hasOwnProperty('1')</code> 會回傳 <code>true</code>。不過 <code>set</code> 不是這樣的規則，在題目中的 <code>set</code> 並沒有字串 <code>'1'</code> 這個屬性名稱，所以 <code>set.has('1')</code> 會回傳 <code>false</code>，不過是有數字類別 <code>1</code> 的屬性值，<code>set.has(1)</code> 將會回傳 <code>true</code>。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-18">25. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb24"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">const</span> obj <span class="op">=</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="st">&#39;one&#39;</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="st">&#39;two&#39;</span><span class="op">,</span> <span class="dt">a</span><span class="op">:</span> <span class="st">&#39;three&#39;</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="va">console</span>.<span class="at">log</span>(obj)<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>{ a: "one", b: "two" }</code></li>
+<li>B: <code>{ b: "two", a: "three" }</code></li>
+<li>C: <code>{ a: "three", b: "two" }</code></li>
+<li>D: <code>SyntaxError</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案c-8">答案：C</h4>
+<p>若物件中的屬性有重複名稱者，第一個屬性會保持它的位置，但值會被最後一個重複屬性名稱的值給取代。</p>
+</p>
+</details>
+<hr />
+<h6 id="javascript-在全域執行環境為你做了兩件事全域物件和-this-關鍵字">26. JavaScript 在全域執行環境為你做了兩件事：全域物件和 this 關鍵字。</h6>
+<ul>
+<li>A: true</li>
+<li>B: false</li>
+<li>C: it depends</li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案-a">答案: A</h4>
+<p>基本执行上下文是全局执行上下文：它是代码中随处可访问的内容。 基底的執行環境是全域的：代表它在程式碼中，可被隨處使用。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-19">27. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb25"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb25-1" title="1"><span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb25-2" title="2">  <span class="cf">if</span> (i <span class="op">===</span> <span class="dv">3</span>) <span class="cf">continue</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb25-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(i)<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-4" title="4"><span class="op">}</span></a></code></pre></div>
+<ul>
+<li>A: <code>1</code> <code>2</code></li>
+<li>B: <code>1</code> <code>2</code> <code>3</code></li>
+<li>C: <code>1</code> <code>2</code> <code>4</code></li>
+<li>D: <code>1</code> <code>3</code> <code>4</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案-c">答案: C</h4>
+<p>當 <code>if</code> 條件成立時會回傳 <code>true</code>，執行 <code>continue</code> 語句，代表忽略本次迭代（<code>console.log(i)</code>）。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-20">28. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb26"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb26-1" title="1"><span class="va">String</span>.<span class="va">prototype</span>.<span class="at">giveLydiaPizza</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb26-2" title="2">  <span class="cf">return</span> <span class="st">&#39;Just give Lydia pizza already!&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="op">};</span></a>
+<a class="sourceLine" id="cb26-4" title="4"></a>
+<a class="sourceLine" id="cb26-5" title="5"><span class="kw">const</span> name <span class="op">=</span> <span class="st">&#39;Lydia&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-6" title="6"></a>
+<a class="sourceLine" id="cb26-7" title="7"><span class="va">name</span>.<span class="at">giveLydiaPizza</span>()<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>"Just give Lydia pizza already!"</code></li>
+<li>B: <code>TypeError: not a function</code></li>
+<li>C: <code>SyntaxError</code></li>
+<li>D: <code>undefined</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案-a-1">答案: A</h4>
+<p><code>String</code> 是內建的建構函式，我們可以向它新增属性。我只是在它的原型中加上一個方法。基本型別字串被自動轉換成字串物件，由字串原型函式生成。因此，所有 string（string 物件）都可以使用 <code>giveLydiaPizza</code> 方法！</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-21">29. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb27"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">const</span> a <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="kw">const</span> b <span class="op">=</span> <span class="op">{</span> <span class="dt">key</span><span class="op">:</span> <span class="st">&#39;b&#39;</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="kw">const</span> c <span class="op">=</span> <span class="op">{</span> <span class="dt">key</span><span class="op">:</span> <span class="st">&#39;c&#39;</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb27-4" title="4"></a>
+<a class="sourceLine" id="cb27-5" title="5">a[b] <span class="op">=</span> <span class="dv">123</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-6" title="6">a[c] <span class="op">=</span> <span class="dv">456</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb27-7" title="7"></a>
+<a class="sourceLine" id="cb27-8" title="8"><span class="va">console</span>.<span class="at">log</span>(a[b])<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>123</code></li>
+<li>B: <code>456</code></li>
+<li>C: <code>undefined</code></li>
+<li>D: <code>ReferenceError</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案-b-1">答案: B</h4>
+<p>物件的 key 自動轉為字串型別。我們正嘗試將物件 <code>b</code> 的 key 設為物件 <code>a</code> 的 key，其值爲 <code>123</code>。</p>
+<p>然而，當物件「字串化」，它會變成 <code>"[object Object]"</code>。所以這裡的意思是，<code>a["[object Object]"] = 123</code>。然後，我們又再做了一次一樣的事情，<code>c</code> 也是隱式的物件字串化，所以，<code>a["[object Object]"] = 456</code>。</p>
+<p>最後，我們輸出 <code>a[b]</code>，也就是 <code>a["[object Object]"]</code>。之前剛賦值爲 <code>456</code>，將回傳 <code>456</code>。</p>
+</p>
+</details>
+<hr />
+<h6 id="將會輸出什麽內容-22">30. 將會輸出什麽內容？</h6>
+<div class="sourceCode" id="cb28"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">const</span> foo <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;First&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="kw">const</span> bar <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="at">setTimeout</span>(() <span class="kw">=&gt;</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Second&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="kw">const</span> baz <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Third&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb28-4" title="4"></a>
+<a class="sourceLine" id="cb28-5" title="5"><span class="at">bar</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb28-6" title="6"><span class="at">foo</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb28-7" title="7"><span class="at">baz</span>()<span class="op">;</span></a></code></pre></div>
+<ul>
+<li>A: <code>First</code> <code>Second</code> <code>Third</code></li>
+<li>B: <code>First</code> <code>Third</code> <code>Second</code></li>
+<li>C: <code>Second</code> <code>First</code> <code>Third</code></li>
+<li>D: <code>Second</code> <code>Third</code> <code>First</code></li>
+</ul>
+<details>
+<summary><b>答案</b></summary>
+<p>
+<h4 id="答案-b-2">答案: B</h4>
+<p>我們有一個 <code>setTimeout</code> 函式，首先呼叫它。然而，它的執行順序是最後執行的。</p>
+<p>因為在瀏覽器中，我們除了有執行引擎，還有一個 <code>WebAPI</code>。<code>WebAPI</code> 提供了 <code>setTimeout</code> 函式，也包含其他的，例如 DOM。</p>
+<p>在『callback』推送到 <code>WebAPI</code> 後，<code>setTimeout</code> 函式本身（不是回呼函式）將從堆疊（<code>stack</code>）中彈出。</p>
+<p><img src="https://i.imgur.com/X5wsHOg.png" width="200"></p>
+<p>現在，<code>foo</code> 被呼叫，印出 <code>"First"</code>。</p>
+<p><img src="https://i.imgur.com/Pvc0dGq.png" width="200"></p>
+<p><code>foo</code> 從堆疊中彈出，<code>baz</code> 被呼叫，印出 <code>"Third"</code>。</p>
+<p><img src="https://i.imgur.com/WhA2bCP.png" width="200"></p>
+<p>WebAPI 不能隨時向堆疊内新增内容。相反，它會將回呼函式彈到名爲『<code>queue</code>』的地方。</p>
+<p><img src="https://i.imgur.com/NSnDZmU.png" width="200"></p>
+<p>這就是事件迴圈（<code>Event Loop</code>）的流程，了解<strong>事件迴圈</strong>堆疊與任務佇列的運作模式。如果堆疊是空的，它接受任務佇列上的第一个元素，推入堆疊中。</p>
+<p><img src="https://i.imgur.com/uyiScAI.png" width="200"></p>
+<p><code>bar</code> 被呼叫，印出 <code>"Second"</code>，然後它被彈出堆疊。</p>
+</p>
+</details>
+<hr />
+</body>
+</html>

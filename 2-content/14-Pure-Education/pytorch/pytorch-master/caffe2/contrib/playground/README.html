@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="playground-for-caffe2-models">Playground for Caffe2 Models</h1>
+<p>Playground is created to allow modelers to reuse the components of their models. It is based on data parallel model of Caffe2. Playground provide a framework that takes care of regular trainer iteration procedures and abstracting out APIs that allows user to apply customized model components of their own. User can swap / exchange /reuse these components without rewriting the whole training script. Once the components are in place, user can use parameterized launch command to drive their experiments. This will be convenient for creating large amount of experiments with different components defined for each of them. It may be used as a tool to explore different model architect / algorithms like optimizer / momentum / learning rate / batch normalization parameters.</p>
+<p>Playground project highlight: 1. parameter driven: no need to create py script for each experiment, just swap components using parameters. Very customizable, add your own component and add your opts in the command as you want. 2. All models follows a typical way of train/testing epoch iteration. Many aspects can be customized, example: run epoch by loss instead of predetermined iteration 3. customizable components, trained metrics, also specified with parameters 4. gpu or cpu training supported 5. parallel training on multiple host supported 6. checkpoint, pre-trained model helps with recover interrupted / failed experiment</p>
+<h3 id="example-usage">Example Usage</h3>
+<p>Playground comes with a resnet example, located in resnetdemo folder. To see how playground works, do the following:</p>
+<ol type="1">
+<li><p>make sure your caffe2 build successful with openCV and lmdb dependencies supported.</p></li>
+<li><p>make sure you have training/testing datasets ready in folders that can be accessible to trainer / distributed trainers</p></li>
+<li><p>specify a folder that you would like to store your checkpoint model files.</p></li>
+<li><p>use this command to launch a training, verify epochs are running with metrics reported in log and model file store in your checkpoint folder</p></li>
+</ol>
+<p>$ python caffe2/contrib/playground/AnyExpOnTerm.py –parameters-json ’{ “opts”:{</p>
+<pre><code>&quot;input&quot;:{
+    &quot;input_name_py&quot;:&quot;gfs_IN1k&quot;,
+    &quot;train_input_path&quot;:&quot;/path/to/your/training/data_lmdb/&quot;,
+    &quot;test_input_path&quot;:&quot;/path/to/your/testing/data_lmdb/&quot;,
+    &quot;scale_jitter_type&quot;: 1, &quot;color_jitter&quot;: true,      &quot;color_lighting&quot;: true,
+    &quot;namespace&quot;: &quot;aml&quot;,  &quot;table&quot;: &quot;imagenet_data&quot;,  &quot;column_handle&quot;: &quot;everstore_handle&quot;,
+    &quot;column_label&quot;: &quot;label&quot;, &quot;column_id&quot;: &quot;image_id&quot;,  &quot;label_type&quot;: 0,
+    &quot;train_partition&quot;: {&quot;ds&quot;: &quot;2017-07-31&quot;, &quot;config&quot;: &quot;imagenet1k&quot;, &quot;is_train&quot;: &quot;1&quot;},
+    &quot;test_partition&quot;: {&quot;ds&quot;: &quot;2017-07-31&quot;, &quot;config&quot;: &quot;imagenet1k&quot;, &quot;is_train&quot;: &quot;0&quot;},
+    &quot;num_classes&quot;:1000, &quot;loadsize&quot; : 256, &quot;imsize&quot;: 224, &quot;decode_threads&quot;: 8, &quot;datasets&quot;:[]},
+
+&quot;model&quot;:{
+    &quot;model_name_py&quot;:&quot;IN1k_resnet&quot;,
+    &quot;forward_pass_py&quot;:&quot;caffe2_resnet50_default_forward&quot;,
+    &quot;parameter_update_py&quot;:&quot;explicit_resnet_param_update&quot;,
+    &quot;optimizer_py&quot;:&quot;&quot;,
+    &quot;rendezvous_py&quot;:&quot;rendezvous_filestore&quot;,
+    &quot;additional_override_py&quot;:&quot;&quot;},
+
+&quot;model_param&quot;:{
+    &quot;pretrained_model&quot;:&quot;&quot;, &quot;reset_epoch&quot;:true, &quot;memonger&quot; : true, &quot;cuda_nccl&quot;: true,
+    &quot;combine_spatial_bn&quot;:true, &quot;max_concurrent_distributed_ops&quot; : 16,
+    &quot;base_learning_rate&quot;:0.05, &quot;bn_epsilon&quot;:0.00001, &quot;bn_momentum&quot;:0.9, &quot;custom_bn_init&quot;: true,
+    &quot;bn_init_gamma&quot;:1e-323, &quot;weight_decay&quot;:1e-4, &quot;weight_decay_bn&quot;:1e-323, &quot;engine&quot;:&quot;CUDNN&quot;},
+
+&quot;epoch_iter&quot;:{
+    &quot;num_train_sample_per_epoch&quot;:10240,
+    &quot;num_test_sample&quot;: 5000,
+    &quot;num_epochs&quot;:10,
+    &quot;num_epochs_per_flow_schedule&quot;:5,
+    &quot;num_train_iteration_per_test&quot;: 10,
+    &quot;batch_per_device&quot;:32,
+    &quot;num_test_iter&quot;:2},
+
+&quot;distributed&quot;:{
+    &quot;num_shards&quot;:1,
+    &quot;num_gpus&quot;:2,
+    &quot;first_gpu_id&quot;:0,
+    &quot;num_cpus&quot;:4,
+    &quot;first_cpu_id&quot;:0},
+
+&quot;output&quot;:{
+    &quot;gen_output_py&quot;:&quot;output_generator&quot;,
+    &quot;gen_checkpoint_path_py&quot;:&quot;gen_checkpoint_path&quot;,
+    &quot;checkpoint_folder&quot;:&quot;/home/your_user_name/model_checkpoint/&quot;,
+    &quot;metrics&quot;:[
+        {&quot;name&quot;:&quot;train_loss&quot;,
+         &quot;meter_py&quot;:&quot;ComputeLoss&quot;,
+         &quot;meter_kargs&quot;:{&quot;blob_name&quot;:&quot;loss&quot;},
+         &quot;is_train&quot;:true},
+        {&quot;name&quot;:&quot;test_loss&quot;,
+         &quot;meter_py&quot;:&quot;ComputeLoss&quot;,
+         &quot;meter_kargs&quot;:{&quot;blob_name&quot;:&quot;loss&quot;},
+         &quot;is_train&quot;:false},
+        {&quot;name&quot;:&quot;train_accuracy_top1&quot;,
+         &quot;meter_py&quot;:&quot;ComputeTopKAccuracy&quot;,
+         &quot;meter_kargs&quot;:{&quot;blob_name&quot;:[&quot;softmax&quot;, &quot;label&quot;], &quot;topk&quot;:1},
+         &quot;is_train&quot;:true},
+        {&quot;name&quot;:&quot;train_accuracy_top5&quot;,
+         &quot;meter_py&quot;:&quot;ComputeTopKAccuracy&quot;,
+         &quot;meter_kargs&quot;:{&quot;blob_name&quot;:[&quot;softmax&quot;, &quot;label&quot;], &quot;topk&quot;:5},
+         &quot;is_train&quot;:true},
+        {&quot;name&quot;:&quot;test_accuracy_top1&quot;,
+         &quot;meter_py&quot;:&quot;ComputeTopKAccuracy&quot;,
+         &quot;meter_kargs&quot;:{&quot;blob_name&quot;:[&quot;softmax&quot;, &quot;label&quot;], &quot;topk&quot;:1},
+         &quot;is_train&quot;:false},
+        {&quot;name&quot;:&quot;test_accuracy_top5&quot;,
+         &quot;meter_py&quot;:&quot;ComputeTopKAccuracy&quot;,
+         &quot;meter_kargs&quot;:{&quot;blob_name&quot;:[&quot;softmax&quot;, &quot;label&quot;], &quot;topk&quot;:5},
+         &quot;is_train&quot;:false}],
+    &quot;plots&quot;:[
+        {&quot;x&quot;:&quot;&quot;, &quot;x_title&quot;:&quot;&quot;, &quot;ys&quot;:[&quot;train_loss&quot;, &quot;test_loss&quot;],
+         &quot;y_title&quot;:&quot;train and test loss&quot;},
+        {&quot;x&quot;:&quot;epochs&quot;, &quot;x_title&quot;:&quot;epochs&quot;,
+         &quot;ys&quot;:[&quot;train_accuracy_top1&quot;,&quot;test_accuracy_top1&quot;,
+               &quot;train_accuracy_top5&quot;,&quot;test_accuracy_top5&quot;],
+         &quot;y_title&quot;:&quot;Accuracy: Train top1, Test top1, Train top5, Test top5&quot;}]}}</code></pre>
+<p>}’</p>
+<ol start="5" type="1">
+<li><p>now you can switch to different components that supplied in resnetdemo folder like so:</p>
+<p>“forward_pass_py”:“caffe2_resnet50_default_forward”, –&gt; “explicit_resnet_forward” (which is a resnet model that allow you specify layers with “model_param”.“num_layer”)</p>
+<p>and/or</p>
+<p>“parameter_update_py”:“caffe2_resnet50_default_param_update”, –&gt; “explicit_resnet_param_update”</p>
+<p>playground should be able to launch training epochs and give you results</p></li>
+</ol>
+<h3 id="general-usage-guideline">General Usage Guideline</h3>
+<ol type="1">
+<li><p>mandatory non empty opts: input_name_py, datasets, model_name_py, forward_pass_py, (parameter_update_py or optimizer_py), rendezvous_py, memonger, all epoch_iter opts, all distributed opts, gen_output_py</p></li>
+<li><p>mandatory nullable opts: pretrained_model, max_concurrent_distributed_ops, combine_spatial_bn</p></li>
+<li><p>other module dependent opts can be changed or removed: the rest of the opts.</p></li>
+<li><p>specify any additional opts depends on your modules’ need, directly add them into the command line opts dictionary and no need to change any py code. You should create your module to make sure they knows how to handle these new opts. You access your own opts in such a manner: self.opt[‘your_own_arg’][‘your_own_sub_arg’]</p></li>
+<li><p>checkpoint is performed at the end of each epoch by default and generated model file can be find in log. Each checkpoint can be used as pre-trained model to start new experiment. Make sure new experiment is compatible with pre-trained model if you specified it. For example, gpu experiment and cpu experiment can not share checkpoint, because the blob names are different. Any experiments with different blob names can not share checkpoint.</p></li>
+<li><p>The metric and plots are reported when experiment finish running. Intermediate results are reported in the log of the CreateTrainerAndRunManyEpochs operator as iteration goes on.</p></li>
+<li><p>if num_gpus is specified, the trainer will try to use gpu. if num_gpus = 0, the trainer will use cpu to train. For gpu training, batch_per_device are typically 32, for cpu training, batch_per_device is normally set to 2 with num_cpus higher like 8 or 16 depends on your machines’ configuration.</p></li>
+<li><p>if train on single host, let “num_shards” = 1, if multiple hosts, specify your “num_shards” and start parallelized training from each shards similarly to the resnet50_trainer.py example in caffe2/python/examples/ folder.</p></li>
+</ol>
+<h3 id="develop-your-own-components">Develop Your Own Components</h3>
+<ol type="1">
+<li><p>Create a folder for your own experiment under caffe2/contrib/playground/ and go to this folder.</p></li>
+<li><p>Create a base model file, for example IN1kResnet.py. In this script you need to implement init function and in it, instantiate your train/test model and give them to self.train_model and self.test_model. In this base model class, you can also chose to override other functions you’d like to customize, for example if you want to iterate according to accuracy instead of fixed number of loops, override list_of_epochs(), and list_of_epoch_iters()</p></li>
+<li><p>Create component py scripts implementing the generators arguments of data_parallel_model.Parallelize(). Total four of them: input_builder_fun, forward_pass_builder_fun, one of param_update_builder_fun or optimizer_builder_fun, and rendezvous. This is where you can switch between different components. Examples: for the demo IN1k_resnet experiments, I created two different forward function: explicit_resnet_forward.py and caffe2_resnet50_default_forward.py. Both implemented the API “gen_param_update_builder_fun”, which is abstract method in the framework class AnyExp.py</p></li>
+<li><p>Next import the module components you created into module_map.py. This import is needed to include these packages during building. Give imported module a module name, normally if module is just a simple file contains some functions, just use the py script file name. If the module contains class and the class is needed for module input, name it with the class name, examples are the meter classes like compute_loss. When launching your experiment, in opts for the term “xxx_py” fill in the name you chose in module_map.py. Playground will find your module and load it.</p></li>
+<li><p>Create as many modules as you need. Then when you perform your experiment, specify the module you want in opts correspondingly and you can run your experiment with ease.</p></li>
+<li><p>In the demo, the opts item “gen_output_py” uses output_generator.py , which provides a minimum way to generating final experimental result, stored in the form of a dict. It will allow user to do whatever visualization with these data after the training is finished.</p></li>
+<li><p>Customize your experimental result. A meter interface is provided to implement your own metrics calculators. Example compute_loss.py and compute_topk_accuracy.py. For training metrics, results are calculated right away in each iteration. For testing metrics, results are accumulated for the whole loop and finally calculated after test iteration finishes. Once your have your meter class defined, you can start defining what metrics to report in your opts[‘output’][‘metrics’] list. The name you give to your metrics can later be used when you define your plots. The Playground will always record throughput metrics secs_per_train and samples_per_sec.</p></li>
+<li><p>an additional_override_py option is provided for the modules to allow user override any existing methods defined in the main framework AnyExp.py. This make it easy to shut down part of the model to focus on remaining modules for experimenting or debugging. An example is given as override_no_test_model_no_checkpoint.py, which turns off checkpointing and does neither prepare nor run test model.</p></li>
+</ol>
+</body>
+</html>

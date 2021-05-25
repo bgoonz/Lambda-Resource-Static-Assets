@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h2 id="testapp">TestApp</h2>
+<p>The TestApp is being used for different purposes as described below</p>
+<h3 id="cocoapods">Cocoapods</h3>
+<p>To quickly test our framework in Cocoapods, simply run</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode ruby"><code class="sourceCode ruby"><a class="sourceLine" id="cb1-1" title="1">pod install</a></code></pre></div>
+<p>This will pull the latest version of <code>LibTorch</code> from Cocoapods. To run the app, you need to have your model copied to the project as well as a <code>config.json</code> file, which can be found in the benchmark folder.</p>
+<h3 id="circle-ci-and-fastlane">Circle CI and Fastlane</h3>
+<p>The TestApp is currently being used as a dummy app by Circle CI for nightly jobs. The challenge comes when testing the arm64 build as we don’t have a way to code-sign our TestApp. This is where Fastlane came to rescue. <a href="https://fastlane.tools/">Fastlane</a> is a trendy automation tool for building and managing iOS applications. It also works seamlessly with Circle CI. We are going to leverage the <code>import_certificate</code> action, which can install developer certificates on CI machines. See <code>Fastfile</code> for more details.</p>
+<p>For simulator build, we run unit tests as the last step of our CI workflow. Those unit tests can also be run manually via the <code>fastlane scan</code> command.</p>
+<h3 id="benchmark">Benchmark</h3>
+<p>The benchmark folder contains two scripts that help you setup the benchmark project. The <code>setup.rb</code> does the heavy-lifting jobs of setting up the XCode project, whereas the <code>trace_model.py</code> is a Python script that you can tweak to generate your model for benchmarking. Simply follow the steps below to setup the project</p>
+<ol type="1">
+<li>In the PyTorch root directory, run <code>IOS_ARCH=arm64 ./scripts/build_ios.sh</code> to generate the custom build from <strong>Master</strong> branch</li>
+<li>Navigate to the <code>benchmark</code> folder, run <code>python trace_model.py</code> to generate your model.</li>
+<li>In the same directory, open <code>config.json</code>. Those are the input parameters you can tweak.</li>
+<li>Again, in the same directory, run <code>ruby setup.rb</code> to setup the XCode project.</li>
+<li>Open the <code>TestApp.xcodeproj</code>, you’re ready to go.</li>
+</ol>
+<p>The benchmark code is written in C++, you can use <code>UI_LOG</code> to visualize the log. See <code>benchmark.mm</code> for more details.</p>
+<h3 id="bootstrap.sh"><code>bootstrap.sh</code></h3>
+<p>For those who want to do perf testing but don’t want to touch XCode, <code>bootstrap.sh</code> is the right tool for you. It’ll automatically build and install the app on your device. That being said, it does require you to have</p>
+<ol type="1">
+<li>A valid iOS dev certificate installed on your local machine.</li>
+<li>A valid provisioning profile for code signing</li>
+<li>A valid team identifier</li>
+</ol>
+<p>To run the script, simply type the command below and make sure your phone is connected via USB.</p>
+<pre class="shell"><code>./bootstrap</code></pre>
+<p>Open the app on your device, the benchmark result will be displayed on the screen.</p>
+<blockquote>
+<p>Note This requires ios-deploy to be installed. Please have a look at <a href="https://github.com/ios-control/ios-deploy">ios-deploy</a>. To quickly install it, use <code>npm -g i ios-deploy</code></p>
+</blockquote>
+</body>
+</html>

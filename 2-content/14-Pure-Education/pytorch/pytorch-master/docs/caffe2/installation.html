@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>installation</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h2 id="building-caffe2">Building Caffe2</h2>
+<p>This guide builds from source. For alternatives, refer to https://caffe2.ai/docs/getting-started.html</p>
+<p>Get latest source from GitHub.</p>
+<pre><code>git clone --recursive https://github.com/caffe2/caffe2.git
+cd caffe2</code></pre>
+<p>Note that you might need to uninstall existing Eigen and pybind11 packages due to compile-time dependencies when building from source. For this reason, Caffe2 uses git submodules to reference external packages in the third_party folder. These are downloaded with the –recursive option.</p>
+<h4 id="macos-x">MacOS X</h4>
+<pre><code>brew install openblas glog gtest automake protobuf leveled lmdb
+mkdir build &amp;&amp; cd build
+cmake .. -DBLAS=OpenBLAS -DUSE_OPENCV=off
+make</code></pre>
+<h4 id="ubuntu">Ubuntu</h4>
+<h6 id="ubuntu-14.04-lts">Ubuntu 14.04 LTS</h6>
+<pre><code>sudo apt-get install libprotobuf-dev protobuf-compiler libatlas-base-dev libgoogle-glog-dev libgtest-dev liblmdb-dev libleveldb-dev libsnappy-dev python-dev python-pip libiomp-dev libopencv-dev libpthread-stubs0-dev cmake
+sudo pip install numpy
+wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_8.0.44-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu1404_8.0.44-1_amd64.deb
+sudo apt-get update
+sudo apt-get install cuda
+sudo apt-get install git
+
+CUDNN_URL=&quot;http://developer.download.nvidia.com/compute/redist/cudnn/v5.1/cudnn-8.0-linux-x64-v5.1.tgz&quot; &amp;&amp;
+curl -fsSL ${CUDNN_URL} -O &amp;&amp;
+sudo tar -xzf cudnn-8.0-linux-x64-v5.1.tgz -C /usr/local &amp;&amp;
+rm cudnn-8.0-linux-x64-v5.1.tgz &amp;&amp;
+sudo ldconfig
+
+mkdir build &amp;&amp; cd build
+cmake ..
+make</code></pre>
+<h6 id="ubuntu-16.04-lts">Ubuntu 16.04 LTS</h6>
+<pre><code>sudo apt-get install libprotobuf-dev protobuf-compiler libatlas-base-dev libgoogle-glog-dev libgtest-dev liblmdb-dev libleveldb-dev libsnappy-dev python-dev python-pip libiomp-dev libopencv-dev libpthread-stubs0-dev cmake
+sudo pip install numpy
+wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu1604_8.0.61-1_amd64.deb
+sudo apt-get update
+sudo apt-get install cuda
+sudo apt-get install git
+
+CUDNN_URL=&quot;http://developer.download.nvidia.com/compute/redist/cudnn/v5.1/cudnn-8.0-linux-x64-v5.1.tgz&quot; &amp;&amp;
+curl -fsSL ${CUDNN_URL} -O &amp;&amp;
+sudo tar -xzf cudnn-8.0-linux-x64-v5.1.tgz -C /usr/local &amp;&amp;
+rm cudnn-8.0-linux-x64-v5.1.tgz &amp;&amp;
+sudo ldconfig
+
+mkdir build &amp;&amp; cd build
+cmake ..
+make</code></pre>
+<h2 id="python-support">Python support</h2>
+<p>To use Caffe2 in Python, you need two libraries, future and six.</p>
+<pre><code>pip install future six</code></pre>
+<p>To run the tutorials, download additional source from GitHub.</p>
+<pre><code>git clone --recursive https://github.com/caffe2/tutorials.git caffe2_tutorials
+cd caffe2_tutorials</code></pre>
+<p>You’ll also need jupyter (formerly ipython) notebooks and matplotlib, which can be installed on MacOS X with</p>
+<pre><code>brew install matplotlib --with-python3
+pip install jupyter</code></pre>
+</body>
+</html>

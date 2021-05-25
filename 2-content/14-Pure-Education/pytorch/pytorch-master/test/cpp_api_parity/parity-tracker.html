@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>parity-tracker</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="c-python-api-parity-tracker">C++ / Python API parity tracker</h1>
+<h2 id="torchnn">torch::nn</h2>
+<table>
+<thead>
+<tr class="header">
+<th>API</th>
+<th>Implementation Parity</th>
+<th>Doc Parity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>torch::nn::Sequential</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::ModuleList</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::ModuleDict</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::ParameterList</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::ParameterDict</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Conv1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::Conv2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Conv3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::ConvTranspose1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::ConvTranspose2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::ConvTranspose3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Unfold</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::Fold</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::MaxPool1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::MaxPool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::MaxPool3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::MaxUnpool1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::MaxUnpool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::MaxUnpool3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::AvgPool1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::AvgPool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::AvgPool3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::FractionalMaxPool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::FractionalMaxPool3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::LPPool1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::LPPool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::AdaptiveMaxPool1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::AdaptiveMaxPool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::AdaptiveMaxPool3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::AdaptiveAvgPool1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::AdaptiveAvgPool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::AdaptiveAvgPool3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::ReflectionPad1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::ReflectionPad2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::ReplicationPad1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::ReplicationPad2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::ReplicationPad3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::ZeroPad2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::ConstantPad1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::ConstantPad2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::ConstantPad3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::ELU</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::Hardshrink</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Hardtanh</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::LeakyReLU</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::LogSigmoid</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::MultiheadAttention</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::PReLU</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::ReLU</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::ReLU6</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::RReLU</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::SELU</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::CELU</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::GELU</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::SiLU</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Sigmoid</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::Softplus</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Softshrink</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::Softsign</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Tanh</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::Tanhshrink</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Threshold</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::GLU</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Softmin</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::Softmax</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Softmax2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::LogSoftmax</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::AdaptiveLogSoftmaxWithLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::BatchNorm1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::BatchNorm2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::BatchNorm3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::GroupNorm</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::SyncBatchNorm</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::InstanceNorm1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::InstanceNorm2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::InstanceNorm3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::LayerNorm</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::LocalResponseNorm</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::CrossMapLRN2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::RNN</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::LSTM</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::GRU</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::RNNCell</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::LSTMCell</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::GRUCell</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Transformer</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::TransformerEncoder</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::TransformerDecoder</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::TransformerEncoderLayer</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::TransformerDecoderLayer</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::Identity</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Linear</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::Bilinear</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Flatten</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::Dropout</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Dropout2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::Dropout3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::AlphaDropout</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::FeatureAlphaDropout</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::Embedding</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::EmbeddingBag</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::CosineSimilarity</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::PairwiseDistance</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::L1Loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::MSELoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::CrossEntropyLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::CTCLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::NLLLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::PoissonNLLLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::KLDivLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::BCELoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::BCEWithLogitsLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::MarginRankingLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::HingeEmbeddingLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::MultiLabelMarginLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::SmoothL1Loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::HuberLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::SoftMarginLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::MultiLabelSoftMarginLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::CosineEmbeddingLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::MultiMarginLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::TripletMarginLoss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::PixelShuffle</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::PixelUnshuffle</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::Upsample</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::DataParallel</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::parallel::DistributedDataParallel</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::utils::clip_grad_norm_</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::utils::clip_grad_value_</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::utils::parameters_to_vector</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::utils::vector_to_parameters</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::utils::weight_norm</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::utils::remove_weight_norm</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::utils::spectral_norm</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::utils::remove_spectral_norm</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::utils::rnn::PackedSequence</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::utils::rnn::pack_padded_sequence</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::utils::rnn::pad_packed_sequence</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::utils::rnn::pad_sequence</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>torch::nn::utils::rnn::pack_sequence</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>torch::nn::SampleModule</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="torchnnfunctional">torch::nn::functional</h2>
+<table>
+<thead>
+<tr class="header">
+<th>API</th>
+<th>Implementation Parity</th>
+<th>Doc Parity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>F::conv1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::conv2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::conv3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::conv_transpose1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::conv_transpose2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::conv_transpose3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::unfold</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::fold</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::avg_pool1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::avg_pool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::avg_pool3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::max_pool1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::max_pool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::max_pool3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::max_unpool1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::max_unpool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::max_unpool3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::lp_pool1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::lp_pool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::adaptive_max_pool1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::adaptive_max_pool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::adaptive_max_pool3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::adaptive_avg_pool1d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::adaptive_avg_pool2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::adaptive_avg_pool3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::threshold</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::relu</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::hardtanh</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::relu6</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::elu</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::selu</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::celu</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::leaky_relu</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::prelu</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::rrelu</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::glu</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::gelu</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::silu</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::logsigmoid</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::hardshrink</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::tanhshrink</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::softsign</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::softplus</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::softmin</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::softmax</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::softshrink</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::gumbel_softmax</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::log_softmax</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::batch_norm</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::instance_norm</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::layer_norm</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::local_response_norm</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::normalize</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::linear</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::bilinear</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::dropout</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::alpha_dropout</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::dropout2d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::dropout3d</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::embedding</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::embedding_bag</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::one_hot</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::pairwise_distance</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::cosine_similarity</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::pdist</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::binary_cross_entropy</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::binary_cross_entropy_with_logits</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::poisson_nll_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::cosine_embedding_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::cross_entropy</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::ctc_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::hinge_embedding_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::kl_div</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::l1_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::mse_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::margin_ranking_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::multilabel_margin_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::multilabel_soft_margin_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::multi_margin_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::nll_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::smooth_l1_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::huber_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::soft_margin_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::triplet_margin_loss</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::pixel_shuffle</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::pad</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::interpolate</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::grid_sample</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="odd">
+<td>F::affine_grid</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr class="even">
+<td>F::sample_functional</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

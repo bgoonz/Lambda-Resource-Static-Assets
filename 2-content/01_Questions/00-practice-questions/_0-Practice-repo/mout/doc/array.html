@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>array</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="array">array</h1>
+<p>Array utilities.</p>
+<h2 id="appendarr1-arr2array">append(arr1, arr2):Array</h2>
+<p>Appends an array to the end of the other. The first array will be modified and will contain the appended items.</p>
+<p>See: <a href="#union"><code>union()</code></a>, <a href="#combine"><code>combine()</code></a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> [<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb1-2" title="2">    bar <span class="op">=</span> [<span class="st">&#39;b&#39;</span><span class="op">,</span> <span class="st">&#39;d&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="at">append</span>(foo<span class="op">,</span> bar)<span class="op">;</span> <span class="co">// [&#39;a&#39;, &#39;b&#39;, &#39;b&#39;, &#39;d&#39;]</span></a></code></pre></div>
+<h2 id="collectarr-callback-thisobjarray">collect(arr, callback, [thisObj]):Array</h2>
+<p>Maps the items in <code>arr</code> and concatenates the resulting arrays.</p>
+<p>See: <a href="#map"><code>map()</code></a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="at">collect</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">,</span> <span class="kw">function</span>(val) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="cf">return</span> [val<span class="op">,</span> val <span class="op">%</span> <span class="dv">2</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">}</span>)<span class="op">;</span> <span class="co">// [1, 1, 2, 0, 3, 1];</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="at">collect</span>([<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;bb&#39;</span><span class="op">,</span> <span class="st">&#39;&#39;</span>]<span class="op">,</span> <span class="kw">function</span>(val) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="cf">return</span> <span class="va">val</span>.<span class="at">split</span>(<span class="st">&#39;&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="op">}</span>)<span class="op">;</span> <span class="co">// [&#39;a&#39;, &#39;b&#39;, &#39;b&#39;]</span></a></code></pre></div>
+<p>It also supports a shorthand syntax:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">var</span> items <span class="op">=</span> [<span class="op">{</span> <span class="dt">a</span><span class="op">:</span> [<span class="dv">1</span>] <span class="op">},</span> <span class="op">{</span> <span class="dt">b</span><span class="op">:</span> <span class="st">&#39;foo&#39;</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> [<span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>] <span class="op">}</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="at">collect</span>(items<span class="op">,</span> <span class="st">&#39;a&#39;</span>)<span class="op">;</span> <span class="co">// [1, 2, 3];</span></a></code></pre></div>
+<h2 id="combinearr1-arr2array">combine(arr1, arr2):Array</h2>
+<p>Combines an array with all the items of another. The first array will be modified and will contain the combined items. Does not allow duplicates and is case and type sensitive.</p>
+<p>See: <a href="#union"><code>union()</code></a>, <a href="#append"><code>append()</code></a></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> [<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-2" title="2">    bar <span class="op">=</span> [<span class="st">&#39;b&#39;</span><span class="op">,</span> <span class="st">&#39;d&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="at">combine</span>(foo<span class="op">,</span> bar)<span class="op">;</span> <span class="co">// [&#39;a&#39;, &#39;b&#39;, &#39;d&#39;]</span></a></code></pre></div>
+<h2 id="compactarrarray">compact(arr):Array</h2>
+<p>Returns a new Array without any <code>null</code> or <code>undefined</code> values. Note that it will keep empty strings and other falsy values (simillar to Ruby Array#compact).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">var</span> arr <span class="op">=</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="kw">false</span><span class="op">,</span> <span class="st">&#39;&#39;</span><span class="op">,</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="kw">undefined</span><span class="op">,</span> <span class="st">&#39;bar&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="at">compact</span>(arr)<span class="op">;</span> <span class="co">// [0, 1, false, &#39;&#39;, &#39;foo&#39;, &#39;bar&#39;];</span></a></code></pre></div>
+<h2 id="containsarr-valueboolean">contains(arr, value):Boolean</h2>
+<p>Checks if Array contains value. Alias to <code>indexOf(arr, val) !== -1</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">var</span> arr <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="at">contains</span>(arr<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>      <span class="co">// true</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="at">contains</span>(arr<span class="op">,</span> <span class="st">&#39;foo&#39;</span>)<span class="op">;</span>  <span class="co">// false</span></a></code></pre></div>
+<h2 id="differencearrsarray">difference(…arrs):Array</h2>
+<p>Return a new Array with elements that aren’t present in the other Arrays besides the first one.</p>
+<p>Works like <a href="http://docs.python.org/library/stdtypes.html#set.difference">Python set#difference</a>.</p>
+<p>It will remove duplicates.</p>
+<p>See: <a href="#xor"><code>xor()</code></a>, <a href="#intersection"><code>intersection()</code></a></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">var</span> a <span class="op">=</span> [<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">var</span> b <span class="op">=</span> [<span class="st">&#39;c&#39;</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="at">difference</span>(a<span class="op">,</span> b)<span class="op">;</span> <span class="co">// [&#39;a&#39;, &#39;b&#39;]</span></a></code></pre></div>
+<h2 id="equalsa-b-compareboolean">equals(a, b, [compare]):Boolean</h2>
+<p>Checks if both arrays are equal.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">equals</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>])<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="at">equals</span>([<span class="dv">2</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">,</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>])<span class="op">;</span> <span class="co">// false</span></a></code></pre></div>
+<p>By default it uses the <a href="lang.html#is">lang/is</a> as the <code>compare</code> function but you can pass a custom function to change the behavior.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">function</span> <span class="at">loose</span>(a<span class="op">,</span> b) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">    <span class="cf">return</span> a <span class="op">==</span> b<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="at">equals</span>([<span class="st">&#39;1&#39;</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> loose)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<p>See: <a href="object.html#equals">object/equals</a>, <a href="lang.html#deepEquals">lang/deepEquals</a></p>
+<h2 id="everyarr-callback-thisobjarray">every(arr, callback, [thisObj]):Array</h2>
+<p>Crossbrowser <code>Array.every()</code>.</p>
+<p>Tests whether all elements in the array pass the test implemented by the provided function.</p>
+<p>It differs from ES5 since it will also loop over sparse items in the array to normalize the behavior across browsers (avoid inconsistencies).</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">var</span> items <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;bar&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="at">every</span>(items<span class="op">,</span> isString)<span class="op">;</span>   <span class="co">// false</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="at">every</span>(items<span class="op">,</span> isFunction)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="at">every</span>(items<span class="op">,</span> <span class="kw">function</span>(val<span class="op">,</span> key<span class="op">,</span> arr)<span class="op">{</span></a>
+<a class="sourceLine" id="cb10-5" title="5">    <span class="cf">return</span> val <span class="op">!=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="op">}</span>)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<p>more info at <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/every">MDN Array#every</a></p>
+<p>It also supports a shorthand syntax:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">var</span> items <span class="op">=</span> [<span class="op">{</span><span class="dt">id</span><span class="op">:</span><span class="dv">1</span><span class="op">,</span> <span class="dt">active</span><span class="op">:</span><span class="kw">true</span><span class="op">},</span> <span class="op">{</span><span class="dt">id</span><span class="op">:</span><span class="dv">3</span><span class="op">,</span> <span class="dt">active</span><span class="op">:</span><span class="kw">true</span><span class="op">},</span> <span class="op">{</span><span class="dt">id</span><span class="op">:</span><span class="dv">8</span><span class="op">,</span> <span class="dt">active</span><span class="op">:</span><span class="kw">true</span><span class="op">}</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="co">// all items with `id === 8`</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="at">every</span>(items<span class="op">,</span> <span class="op">{</span><span class="dt">id</span><span class="op">:</span><span class="dv">8</span><span class="op">}</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="co">// `active` is truthy on all items</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="at">every</span>(items<span class="op">,</span> <span class="st">&#39;active&#39;</span>)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<h2 id="filterarr-callback-thisobjarray">filter(arr, callback, [thisObj]):Array</h2>
+<p>Crossbrowser <code>Array.filter()</code>.</p>
+<p>Creates a new array with all elements that pass the callback test.</p>
+<p>It differs from ES5 since it will also loop over sparse items in the array to normalize the behavior across browsers (avoid inconsistencies).</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">var</span> nums <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">var</span> oddNumbers <span class="op">=</span> <span class="at">filter</span>(nums<span class="op">,</span> <span class="kw">function</span>(val<span class="op">,</span> key<span class="op">,</span> arr)<span class="op">{</span></a>
+<a class="sourceLine" id="cb12-3" title="3">    <span class="cf">return</span> (val <span class="op">%</span> <span class="dv">2</span>) <span class="op">!==</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="co">// &gt; [1, 3, 5]</span></a></code></pre></div>
+<p>more info at <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/filter">MDN Array#filter</a></p>
+<p>Filter also supports shorthand notation:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">var</span> users <span class="op">=</span> [</a>
+<a class="sourceLine" id="cb13-2" title="2">    <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;john&#39;</span><span class="op">,</span> <span class="dt">surname</span><span class="op">:</span><span class="st">&#39;connor&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">false</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb13-3" title="3">    <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;john&#39;</span><span class="op">,</span> <span class="dt">surname</span><span class="op">:</span><span class="st">&#39;doe&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">true</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb13-4" title="4">    <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;jane&#39;</span><span class="op">,</span> <span class="dt">surname</span><span class="op">:</span><span class="st">&#39;doe&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">false</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb13-5" title="5">]<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="co">// filter item that matches all properties/values pairs</span></a>
+<a class="sourceLine" id="cb13-7" title="7"><span class="at">filter</span>(users<span class="op">,</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;john&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">false</span><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-8" title="8"><span class="co">// &gt; [{name:&#39;john&#39;, surnname:&#39;connor&#39;, beard:false}]</span></a>
+<a class="sourceLine" id="cb13-9" title="9"><span class="co">// items where &#39;beard&#39; is a truthy value</span></a>
+<a class="sourceLine" id="cb13-10" title="10"><span class="at">filter</span>(users<span class="op">,</span> <span class="st">&#39;beard&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-11" title="11"><span class="co">// &gt; [{name:&#39;john&#39;, surnname:&#39;doe&#39;, beard:true}]</span></a></code></pre></div>
+<p>See <a href="#reject"><code>reject()</code></a></p>
+<h2 id="findarr-callback-thisobj">find(arr, callback, [thisObj]):*</h2>
+<p>Loops through all the items in the Array and returns the first one that passes a truth test (callback).</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">var</span> arr <span class="op">=</span> [<span class="dv">123</span><span class="op">,</span> <span class="op">{</span><span class="dt">a</span><span class="op">:</span><span class="st">&#39;b&#39;</span><span class="op">},</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;bar&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="at">find</span>(arr<span class="op">,</span> isString)<span class="op">;</span> <span class="co">// &quot;foo&quot;</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="at">find</span>(arr<span class="op">,</span> isNumber)<span class="op">;</span> <span class="co">// 123</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="at">find</span>(arr<span class="op">,</span> isObject)<span class="op">;</span> <span class="co">// {a:&#39;b&#39;}</span></a></code></pre></div>
+<p>Find also supports shorthand notation:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">var</span> users <span class="op">=</span> [</a>
+<a class="sourceLine" id="cb15-2" title="2">    <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;john&#39;</span><span class="op">,</span> <span class="dt">surname</span><span class="op">:</span><span class="st">&#39;connor&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">false</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb15-3" title="3">    <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;john&#39;</span><span class="op">,</span> <span class="dt">surname</span><span class="op">:</span><span class="st">&#39;doe&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">true</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb15-4" title="4">]<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="co">// first item that matches all properties/values pairs</span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="at">find</span>(users<span class="op">,</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;john&#39;</span><span class="op">}</span>)<span class="op">;</span> <span class="co">// {name:&#39;john&#39;, surnname:&#39;connor&#39;, beard:false}</span></a>
+<a class="sourceLine" id="cb15-7" title="7"><span class="co">// first item where &#39;beard&#39; is a truthy value</span></a>
+<a class="sourceLine" id="cb15-8" title="8"><span class="at">find</span>(users<span class="op">,</span> <span class="st">&#39;beard&#39;</span>)<span class="op">;</span> <span class="co">// {name:&#39;john&#39;, surnname:&#39;doe&#39;, beard:true}</span></a></code></pre></div>
+<p>See: <a href="#findIndex">findIndex()</a>, <a href="#findLast">findLast()</a>, <a href="#findLastIndex">findLastIndex()</a></p>
+<h2 id="findlastarr-callback-thisobj">findLast(arr, callback, [thisObj]):*</h2>
+<p>Loops through all the items in the Array (starting from last item) and returns the first one that passes a truth test (callback).</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">var</span> arr <span class="op">=</span> [<span class="dv">123</span><span class="op">,</span> <span class="op">{</span><span class="dt">a</span><span class="op">:</span><span class="st">&#39;b&#39;</span><span class="op">},</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;bar&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="at">findLast</span>(arr<span class="op">,</span> isString)<span class="op">;</span> <span class="co">// &quot;bar&quot;</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="at">findLast</span>(arr<span class="op">,</span> isNumber)<span class="op">;</span> <span class="co">// 123</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="at">findLast</span>(arr<span class="op">,</span> isObject)<span class="op">;</span> <span class="co">// {a:&#39;b&#39;}</span></a></code></pre></div>
+<p><code>findLast</code> also supports shorthand notation:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">var</span> users <span class="op">=</span> [</a>
+<a class="sourceLine" id="cb17-2" title="2">    <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;john&#39;</span><span class="op">,</span> <span class="dt">surname</span><span class="op">:</span><span class="st">&#39;connor&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">false</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb17-3" title="3">    <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;john&#39;</span><span class="op">,</span> <span class="dt">surname</span><span class="op">:</span><span class="st">&#39;doe&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">true</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb17-4" title="4">]<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="co">// last item that matches all properties/values pairs</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="at">findLast</span>(users<span class="op">,</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;john&#39;</span><span class="op">}</span>)<span class="op">;</span> <span class="co">// {name:&#39;john&#39;, surnname:&#39;doe&#39;, beard:true}</span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="co">// last item where &#39;beard&#39; is a truthy value</span></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="at">findLast</span>(users<span class="op">,</span> <span class="st">&#39;beard&#39;</span>)<span class="op">;</span> <span class="co">// {name:&#39;john&#39;, surnname:&#39;doe&#39;, beard:true}</span></a></code></pre></div>
+<p>See: <a href="#find">find()</a>, <a href="#findIndex">findIndex()</a>, <a href="#findLastIndex">findLastIndex()</a></p>
+<h2 id="findindexarr-iterator-thisobjnumber">findIndex(arr, iterator, [thisObj]):Number</h2>
+<p>Loops through the items in the Array and returns the index of the first one that passes a truth test (callback).</p>
+<p>Returns <code>-1</code> if no item was found that passes the truth test.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">var</span> arr <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">},</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;bar&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="at">findIndex</span>(arr<span class="op">,</span> isString)<span class="op">;</span> <span class="co">// 2</span></a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="at">findIndex</span>(arr<span class="op">,</span> isNumber)<span class="op">;</span> <span class="co">// 0</span></a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="at">findIndex</span>(arr<span class="op">,</span> isObject)<span class="op">;</span> <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="at">findIndex</span>(arr<span class="op">,</span> isRegExp)<span class="op">;</span> <span class="co">// -1</span></a></code></pre></div>
+<p><code>findIndex</code> also supports shorthand notation:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">var</span> pets <span class="op">=</span> [</a>
+<a class="sourceLine" id="cb19-2" title="2">    <span class="op">{</span> <span class="dt">pet</span><span class="op">:</span> <span class="st">&#39;dog&#39;</span><span class="op">,</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Sam&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb19-3" title="3">    <span class="op">{</span> <span class="dt">pet</span><span class="op">:</span> <span class="st">&#39;dog&#39;</span><span class="op">,</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Maggie&#39;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb19-4" title="4">]<span class="op">;</span></a>
+<a class="sourceLine" id="cb19-5" title="5"></a>
+<a class="sourceLine" id="cb19-6" title="6"><span class="at">findIndex</span>(pets<span class="op">,</span> <span class="op">{</span> <span class="dt">pet</span><span class="op">:</span> <span class="st">&#39;dog&#39;</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// 0</span></a>
+<a class="sourceLine" id="cb19-7" title="7"><span class="at">findIndex</span>(pets<span class="op">,</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Maggie&#39;</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// 1</span></a></code></pre></div>
+<p>See: <a href="#find">find()</a>, <a href="#findLastIndex">findLastIndex()</a></p>
+<h2 id="findlastindexarr-iterator-thisobjnumber">findLastIndex(arr, iterator, [thisObj]):Number</h2>
+<p>Loops through the items in the Array on the reverse order and returns the index of the first one that passes a truth test (callback).</p>
+<p>Returns <code>-1</code> if no item was found that passes the truth test.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">var</span> arr <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">},</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;bar&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="at">findLastIndex</span>(arr<span class="op">,</span> isString)<span class="op">;</span> <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="at">findLastIndex</span>(arr<span class="op">,</span> isNumber)<span class="op">;</span> <span class="co">// 0</span></a>
+<a class="sourceLine" id="cb20-4" title="4"><span class="at">findLastIndex</span>(arr<span class="op">,</span> isObject)<span class="op">;</span> <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb20-5" title="5"><span class="at">findLastIndex</span>(arr<span class="op">,</span> isRegExp)<span class="op">;</span> <span class="co">// -1</span></a></code></pre></div>
+<p><code>findLastndex</code> also supports shorthand notation:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">var</span> pets <span class="op">=</span> [</a>
+<a class="sourceLine" id="cb21-2" title="2">    <span class="op">{</span> <span class="dt">pet</span><span class="op">:</span> <span class="st">&#39;dog&#39;</span><span class="op">,</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Sam&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb21-3" title="3">    <span class="op">{</span> <span class="dt">pet</span><span class="op">:</span> <span class="st">&#39;dog&#39;</span><span class="op">,</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Maggie&#39;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb21-4" title="4">]<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-5" title="5"></a>
+<a class="sourceLine" id="cb21-6" title="6"><span class="at">findLastIndex</span>(pets<span class="op">,</span> <span class="op">{</span> <span class="dt">pet</span><span class="op">:</span> <span class="st">&#39;dog&#39;</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb21-7" title="7"><span class="at">findLastIndex</span>(pets<span class="op">,</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Sam&#39;</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// 0</span></a></code></pre></div>
+<p>See: <a href="#find">find()</a>, <a href="#findIndex">findIndex()</a></p>
+<h2 id="flattenarr-levelarray">flatten(arr, [level]):Array</h2>
+<p>Recursively flattens an array. A new array containing all the elements is returned. If <code>level</code> is specified, it will only flatten up to that level. Note that arrays within objects will not be flattened.</p>
+<h3 id="example">Example</h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1"><span class="at">flatten</span>([<span class="dv">1</span><span class="op">,</span> [<span class="dv">2</span>]<span class="op">,</span> [<span class="dv">3</span><span class="op">,</span> [<span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>]]])<span class="op">;</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="co">// &gt; [1, 2, 3, 4, 5]</span></a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="at">flatten</span>([<span class="dv">1</span><span class="op">,</span> [<span class="dv">2</span>]<span class="op">,</span> [<span class="dv">3</span><span class="op">,</span> [<span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>]]]<span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="co">// &gt; [1, 2, 3, [4, 5]]</span></a></code></pre></div>
+<p>See: <a href="./object.html#flatten"><code>object/flatten()</code></a></p>
+<h2 id="foreacharr-callback-thisobjvoid">forEach(arr, callback, [thisObj]):void</h2>
+<p>Crossbrowser <code>Array.forEach()</code>.</p>
+<p>It allows exiting the iteration early by returning <code>false</code> on the callback.</p>
+<p>It differs from ES5 since it will also loop over sparse items in the array to normalize the behavior across browsers (avoid inconsistencies).</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">var</span> items <span class="op">=</span> [<span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;bar&#39;</span><span class="op">,</span> <span class="st">&#39;lorem&#39;</span><span class="op">,</span> <span class="st">&#39;ipsum&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="at">forEach</span>(items<span class="op">,</span> <span class="kw">function</span>(val<span class="op">,</span> key<span class="op">,</span> arr)<span class="op">{</span></a>
+<a class="sourceLine" id="cb23-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(key <span class="op">+</span><span class="st">&#39; : &#39;</span><span class="op">+</span> val)<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-4" title="4">    <span class="cf">if</span> (val <span class="op">===</span> <span class="st">&#39;lorem&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb23-5" title="5">        <span class="co">// stop iteration (break)</span></a>
+<a class="sourceLine" id="cb23-6" title="6">        <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb23-7" title="7">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb23-8" title="8"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>more info at <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/forEach">MDN Array#forEach</a></p>
+<h2 id="groupbyarr-categorizeidentity-thisobjobject">groupBy(arr, [categorize=identity], [thisObj]):Object</h2>
+<p>Groups array elements by the <code>key</code> returned from the <code>categorize</code> function.</p>
+<p>It will use the <a href="function.html#identity">function/identity</a> as the default <code>categorize</code> function.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">var</span> items <span class="op">=</span> [<span class="st">&#39;lorem&#39;</span><span class="op">,</span> <span class="st">&#39;ipsum&#39;</span><span class="op">,</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;bar&#39;</span><span class="op">,</span> <span class="st">&#39;baz&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="at">groupBy</span>(items<span class="op">,</span> <span class="kw">function</span>(val) <span class="op">{</span> <span class="cf">return</span> <span class="va">val</span>.<span class="at">length</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="co">// &gt; {&#39;3&#39;: [&#39;foo&#39;, &#39;bar&#39;, &#39;baz&#39;], &#39;5&#39;: [&#39;lorem&#39;, &#39;ipsum&#39;]}</span></a></code></pre></div>
+<h2 id="indexofarr-item-fromindexnumber">indexOf(arr, item, [fromIndex]):Number</h2>
+<p>Crossbrowser <code>Array.indexOf()</code>.</p>
+<p>It differs from ES5 since it will also loop over sparse items in the array to normalize the behavior across browsers (avoid inconsistencies).</p>
+<p>more info at <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/indexOf">MDN Array#indexOf</a></p>
+<h2 id="indicesofarr-item-fromindexnumber">indicesOf(arr, item, [fromIndex]):Number</h2>
+<p>Returns an array of indices where <code>item</code> is found in the array.</p>
+<p>Like <code>array/indexOf</code> it does loop over sparse items in the array. The optional <code>fromIndex</code> parameter can limit the scope, the same way as it does in indexOf.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">var</span> items <span class="op">=</span> [<span class="st">&#39;lorem&#39;</span><span class="op">,</span> <span class="st">&#39;ipsum&#39;</span><span class="op">,</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;ipsum&#39;</span><span class="op">,</span> <span class="st">&#39;ipsum&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-2" title="2"></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="at">indicesOf</span>(items<span class="op">,</span> <span class="st">&#39;ipsum&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-4" title="4"><span class="co">// &gt; [1, 3, 4]</span></a>
+<a class="sourceLine" id="cb25-5" title="5"></a>
+<a class="sourceLine" id="cb25-6" title="6"><span class="at">indicesOf</span>(items<span class="op">,</span> <span class="st">&#39;ipsum&#39;</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-7" title="7"><span class="co">// &gt; [3, 4]</span></a></code></pre></div>
+<h2 id="insertarr-itemsnumber">insert(arr, …items):Number</h2>
+<p>Push items into array only if they aren’t contained by it. Returns the new <code>length</code> of the array.</p>
+<p>See: <a href="#remove"><code>remove()</code></a>, <a href="#removeAll"><code>removeAll()</code></a>, <a href="#contains"><code>contains()</code></a></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">var</span> arr <span class="op">=</span> [<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="at">insert</span>(arr<span class="op">,</span> <span class="st">&#39;a&#39;</span>)<span class="op">;</span>       <span class="co">// 2 : [&#39;a&#39;, &#39;b&#39;]</span></a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="at">insert</span>(arr<span class="op">,</span> <span class="st">&#39;c&#39;</span>)<span class="op">;</span>       <span class="co">// 3 : [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="at">insert</span>(arr<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="st">&#39;b&#39;</span>)<span class="op">;</span> <span class="co">// 5 : [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, 1, 2]</span></a></code></pre></div>
+<h2 id="intersectionarrsarray">intersection(…arrs):Array</h2>
+<p>Return a new Array with elements common to all Arrays.</p>
+<p>Similar to Python set#intersection and underscore.js intersection.</p>
+<p>It will remove duplicates.</p>
+<p>See: <a href="#difference"><code>difference()</code></a>, <a href="#xor"><code>xor()</code></a></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">var</span> a <span class="op">=</span> [<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb27-2" title="2">    b <span class="op">=</span> [<span class="st">&#39;c&#39;</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb27-3" title="3">    c <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="at">intersection</span>(a<span class="op">,</span> b<span class="op">,</span> c)<span class="op">;</span> <span class="co">// [1]</span></a></code></pre></div>
+<h2 id="invokearr-methodname-argsarray">invoke(arr, methodName[, …args]):Array</h2>
+<p>Call <code>methodName</code> on each item of the array passing custom arguments if needed.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb28-1" title="1"><span class="at">invoke</span>([[<span class="dv">3</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">1</span>]<span class="op">,</span> [<span class="dv">9</span><span class="op">,</span><span class="dv">5</span><span class="op">,</span><span class="dv">2</span>]]<span class="op">,</span> <span class="st">&#39;sort&#39;</span>)<span class="op">;</span> <span class="co">// [[1,2,3], [2,5,9]]</span></a></code></pre></div>
+<h2 id="joinarr-separatorstring">join(arr, [separator]):String</h2>
+<p>Joins the strings in <code>arr</code>, inserting <code>separator</code> between each value.</p>
+<p>This ignores null values and empty strings that are in the array. <code>separator</code> defaults to an empty string. This will convert all non-string objects in the array to a string.</p>
+<h3 id="example-1">Example</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb29-1" title="1"><span class="at">join</span>([<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span><span class="op">,</span> <span class="st">&#39;c&#39;</span>])<span class="op">;</span> <span class="co">// &#39;abc&#39;</span></a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="at">join</span>([<span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;bar&#39;</span>]<span class="op">,</span> <span class="st">&#39;, &#39;</span>)<span class="op">;</span> <span class="co">// &#39;foo, bar&#39;</span></a>
+<a class="sourceLine" id="cb29-3" title="3"><span class="at">join</span>([<span class="kw">null</span><span class="op">,</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;&#39;</span><span class="op">,</span> <span class="st">&#39;bar&#39;</span><span class="op">,</span> <span class="kw">undefined</span>]<span class="op">,</span> <span class="st">&#39;:&#39;</span>)<span class="op">;</span> <span class="co">// &#39;foo:bar&#39;</span></a></code></pre></div>
+<h2 id="lastarr">last(arr):*</h2>
+<p>Returns the last element of an array without modifying the array.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb30-1" title="1"><span class="at">last</span>( [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>] ) <span class="co">// &gt; 4</span></a>
+<a class="sourceLine" id="cb30-2" title="2"><span class="at">last</span>( [<span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;bar&#39;</span>] ) <span class="co">// &gt; &#39;bar&#39;</span></a></code></pre></div>
+<h2 id="lastindexofarr-item-fromindexnumber">lastIndexOf(arr, item, [fromIndex]):Number</h2>
+<p>Crossbrowser <code>Array.lastIndexOf()</code>.</p>
+<p>It differs from ES5 since it will also loop over sparse items in the array to normalize the behavior across browsers (avoid inconsistencies).</p>
+<p>more info at <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/lastIndexOf">MDN Array#lastIndexOf</a></p>
+<h2 id="maparr-callback-thisobjarray">map(arr, callback, [thisObj]]):Array</h2>
+<p>Crossbrowser <code>Array.map()</code>.</p>
+<p>Creates a new array with the results of calling a provided function on every element in this array.</p>
+<p>It differs from ES5 since it will also loop over sparse items in the array to normalize the behavior across browsers (avoid inconsistencies).</p>
+<p>See: <a href="#collect"><code>collect()</code></a></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">var</span> nums <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span><span class="op">,</span><span class="dv">4</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="kw">var</span> double <span class="op">=</span> <span class="at">map</span>(nums<span class="op">,</span> <span class="kw">function</span>(val<span class="op">,</span> key<span class="op">,</span> arr)<span class="op">{</span></a>
+<a class="sourceLine" id="cb31-3" title="3">    <span class="cf">return</span> val <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb31-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-5" title="5"><span class="co">// &gt; [2, 4, 6, 8]</span></a></code></pre></div>
+<p>more info at <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/map">MDN Array#map</a></p>
+<p>It also supports a shorthand notation which can be used to achieve same result as <a href="#pluck"><code>array/pluck</code></a>:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">var</span> src <span class="op">=</span> [<span class="st">&#39;lorem&#39;</span><span class="op">,</span> <span class="st">&#39;ipsum&#39;</span><span class="op">,</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;amet&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="co">// grab the &quot;length&quot; property of all items</span></a>
+<a class="sourceLine" id="cb32-3" title="3"><span class="kw">var</span> lengths <span class="op">=</span> <span class="at">map</span>(src<span class="op">,</span> <span class="st">&#39;length&#39;</span>)<span class="op">;</span> <span class="co">// [5, 5, 3, 4]</span></a></code></pre></div>
+<h2 id="maxarr-iterator-thisobj">max(arr, [iterator], [thisObj]):*</h2>
+<p>Returns maximum value inside array or use a custom iterator to define how items should be compared.</p>
+<p>See: <a href="#min"><code>min()</code></a></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb33-1" title="1"><span class="at">max</span>([<span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">7</span>])<span class="op">;</span> <span class="co">// 10</span></a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="at">max</span>([<span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;lorem&#39;</span><span class="op">,</span> <span class="st">&#39;amet&#39;</span>]<span class="op">,</span> <span class="kw">function</span>(val)<span class="op">{</span></a>
+<a class="sourceLine" id="cb33-3" title="3">    <span class="cf">return</span> <span class="va">val</span>.<span class="at">length</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="op">}</span>)<span class="op">;</span> <span class="co">// &#39;lorem&#39;</span></a></code></pre></div>
+<p>It also supports a shorthand notation:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb34-1" title="1"><span class="at">max</span>([<span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;lorem&#39;</span><span class="op">,</span> <span class="st">&#39;amet&#39;</span>]<span class="op">,</span> <span class="st">&#39;length&#39;</span>)<span class="op">;</span> <span class="co">// &quot;lorem&quot;</span></a></code></pre></div>
+<h2 id="minarr-iterator-thisobj">min(arr, [iterator], [thisObj]):*</h2>
+<p>Returns minimum value inside array or use a custom iterator to define how items should be compared.</p>
+<p>See: <a href="#max"><code>max()</code></a></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb35-1" title="1"><span class="at">min</span>([<span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">7</span>])<span class="op">;</span> <span class="co">// 2</span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="at">min</span>([<span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;lorem&#39;</span><span class="op">,</span> <span class="st">&#39;amet&#39;</span>]<span class="op">,</span> <span class="kw">function</span>(val)<span class="op">{</span></a>
+<a class="sourceLine" id="cb35-3" title="3">    <span class="cf">return</span> <span class="va">val</span>.<span class="at">length</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb35-4" title="4"><span class="op">}</span>)<span class="op">;</span> <span class="co">// &#39;foo&#39;</span></a></code></pre></div>
+<p>It also supports a shorthand notation:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb36-1" title="1"><span class="at">min</span>([<span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;lorem&#39;</span><span class="op">,</span> <span class="st">&#39;amet&#39;</span>]<span class="op">,</span> <span class="st">&#39;length&#39;</span>)<span class="op">;</span> <span class="co">// &quot;foo&quot;</span></a></code></pre></div>
+<h2 id="pickarr-nitems">pick(arr, [nItems]):*</h2>
+<p>Gets random item(s) and removes it from the original array.</p>
+<p>If <code>nItems</code> is specified it will return a new Array contained the <em>picked</em> items otherwise it returns a single item.</p>
+<p>See: <a href="./random.html#choice"><code>random/choice()</code></a></p>
+<h3 id="example-2">Example:</h3>
+<div class="sourceCode" id="cb37"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">var</span> arr <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="kw">var</span> item1 <span class="op">=</span> <span class="at">pick</span>(arr)<span class="op">;</span> <span class="co">// 4</span></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="kw">var</span> item2 <span class="op">=</span> <span class="at">pick</span>(arr)<span class="op">;</span> <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="kw">var</span> items <span class="op">=</span> <span class="at">pick</span>(arr<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span> <span class="co">// [5, 2]</span></a>
+<a class="sourceLine" id="cb37-5" title="5"><span class="va">console</span>.<span class="at">log</span>(arr)<span class="op">;</span> <span class="co">// [3, 6]</span></a></code></pre></div>
+<h2 id="pluckarr-propnamearray">pluck(arr, propName):Array</h2>
+<p>Extract a list of property values.</p>
+<p>See: <a href="function.html#prop"><code>function/prop()</code></a></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">var</span> users <span class="op">=</span> [<span class="op">{</span><span class="dt">name </span><span class="op">:</span> <span class="st">&#39;John&#39;</span><span class="op">,</span> <span class="dt">age</span><span class="op">:</span> <span class="dv">21</span><span class="op">},</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Jane&#39;</span><span class="op">,</span> <span class="dt">age </span><span class="op">:</span> <span class="dv">27</span><span class="op">}</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="kw">var</span> names <span class="op">=</span> <span class="at">pluck</span>(users<span class="op">,</span> <span class="st">&#39;name&#39;</span>)<span class="op">;</span> <span class="co">// [&quot;John&quot;, &quot;Jane&quot;]</span></a>
+<a class="sourceLine" id="cb38-3" title="3"><span class="kw">var</span> ages <span class="op">=</span> <span class="at">pluck</span>(users<span class="op">,</span> <span class="st">&#39;age&#39;</span>)<span class="op">;</span> <span class="co">// [21, 27]</span></a></code></pre></div>
+<h2 id="rangestart-stop-steparray">range([start], stop[, step]):Array</h2>
+<p>Creates a new Array with all the values inside the range. Works similarly to Python#range or PHP#range.</p>
+<h3 id="arguments">Arguments</h3>
+<ol type="1">
+<li><code>[start]</code> (Number) : Range start. Default is <code>0</code>.</li>
+<li><code>stop</code> (Number) : Range limit.</li>
+<li><code>[step]</code> (Number) : Step size. Default is <code>1</code>.</li>
+</ol>
+<h3 id="example-3">Example</h3>
+<div class="sourceCode" id="cb39"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb39-1" title="1"><span class="at">range</span>(<span class="dv">5</span>)<span class="op">;</span>         <span class="co">// [0, 1, 2, 3, 4, 5]</span></a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="at">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span>      <span class="co">// [0, 1, 2, 3, 4, 5]</span></a>
+<a class="sourceLine" id="cb39-3" title="3"><span class="at">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>   <span class="co">// [0, 2, 4]</span></a>
+<a class="sourceLine" id="cb39-4" title="4"><span class="at">range</span>(<span class="dv">20</span><span class="op">,</span> <span class="dv">40</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span> <span class="co">// [20, 25, 30, 35, 40]</span></a></code></pre></div>
+<h2 id="reducearr-fn">reduce(arr, fn):*</h2>
+<p>Crossbrowser <code>Array.reduce()</code>.</p>
+<p>Apply a function against an accumulator and each value of the array (from left-to-right) as to reduce it to a single value.</p>
+<p>It differs from ES5 since it will also loop over sparse items in the array to normalize the behavior across browsers (avoid inconsistencies).</p>
+<p>more info at <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/reduce">MDN Array#reduce</a></p>
+<h2 id="reducerightarr-fn">reduceRight(arr, fn):*</h2>
+<p>Crossbrowser <code>Array.reduceRight()</code>.</p>
+<p>Apply a function simultaneously against two values of the array (from right-to-left) as to reduce it to a single value.</p>
+<p>It differs from ES5 since it will also loop over sparse items in the array to normalize the behavior across browsers (avoid inconsistencies).</p>
+<p>more info at <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/reduceRight">MDN Array#reduceRight</a></p>
+<h2 id="rejectarr-fn-thisobjarray">reject(arr, fn, thisObj):Array</h2>
+<p>Creates a new array with all the elements that do <strong>not</strong> pass the truth test. Opposite of <a href="#filter"><code>filter()</code></a>.</p>
+<p>See <a href="#filter"><code>filter()</code></a></p>
+<h3 id="example-4">Example</h3>
+<div class="sourceCode" id="cb40"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">var</span> numbers <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb40-2" title="2"><span class="at">reject</span>(numbers<span class="op">,</span> <span class="kw">function</span>(x) <span class="op">{</span> <span class="cf">return</span> (x <span class="op">%</span> <span class="dv">2</span>) <span class="op">!==</span> <span class="dv">0</span><span class="op">;</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// [2, 4, 6]</span></a></code></pre></div>
+<p>It also supports a shorthand syntax:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">var</span> users <span class="op">=</span> [</a>
+<a class="sourceLine" id="cb41-2" title="2">    <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;john&#39;</span><span class="op">,</span> <span class="dt">surname</span><span class="op">:</span><span class="st">&#39;connor&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">false</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb41-3" title="3">    <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;john&#39;</span><span class="op">,</span> <span class="dt">surname</span><span class="op">:</span><span class="st">&#39;doe&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">true</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb41-4" title="4">    <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;jane&#39;</span><span class="op">,</span> <span class="dt">surname</span><span class="op">:</span><span class="st">&#39;doe&#39;</span><span class="op">,</span> <span class="dt">beard</span><span class="op">:</span><span class="kw">false</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb41-5" title="5">]<span class="op">;</span></a>
+<a class="sourceLine" id="cb41-6" title="6"><span class="co">// reject items that matches all properties/values pairs</span></a>
+<a class="sourceLine" id="cb41-7" title="7"><span class="at">reject</span>(arr<span class="op">,</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span><span class="st">&#39;john&#39;</span><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb41-8" title="8"><span class="co">// &gt; [{name:&#39;jane&#39;, surnname:&#39;doe&#39;, beard:false}]</span></a>
+<a class="sourceLine" id="cb41-9" title="9"><span class="co">// reject items where &#39;beard&#39; is a truthy value</span></a>
+<a class="sourceLine" id="cb41-10" title="10"><span class="at">filter</span>(arr<span class="op">,</span> <span class="st">&#39;beard&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb41-11" title="11"><span class="co">// &gt; [{name:&#39;john&#39;, surnname:&#39;connor&#39;, beard:false},</span></a>
+<a class="sourceLine" id="cb41-12" title="12"><span class="co">//    {name:&#39;jane&#39;, surname:&#39;doe&#39;, beard:false}]</span></a></code></pre></div>
+<h2 id="removearr-itemvoid">remove(arr, item):void</h2>
+<p>Remove a single item from the array.</p>
+<p>IMPORTANT: it won’t remove duplicates, just a single item.</p>
+<h3 id="example-5">Example</h3>
+<div class="sourceCode" id="cb42"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb42-2" title="2"><span class="at">remove</span>(foo<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb42-3" title="3"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// [1, 3, 4]</span></a></code></pre></div>
+<h2 id="removeallarr-itemvoid">removeAll(arr, item):void</h2>
+<p>Remove all instances of an item from the array.</p>
+<h3 id="example-6">Example</h3>
+<div class="sourceCode" id="cb43"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="at">removeAll</span>(foo<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// [1, 3, 4];</span></a></code></pre></div>
+<h2 id="reversearrvoid">reverse(arr):void</h2>
+<p>Returns a copy of the array with all elements in reversed order.</p>
+<h3 id="example-7">Example</h3>
+<div class="sourceCode" id="cb44"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="kw">var</span> bar <span class="op">=</span> <span class="at">reverse</span>(foo)<span class="op">;</span></a>
+<a class="sourceLine" id="cb44-3" title="3"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// [5, 4, 3, 2, 1];</span></a>
+<a class="sourceLine" id="cb44-4" title="4"></a>
+<a class="sourceLine" id="cb44-5" title="5"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// [1, 2, 3, 4, 5];</span></a></code></pre></div>
+<h2 id="shufflearrarray">shuffle(arr):Array</h2>
+<p>Returns a new Array with items randomly sorted (shuffled). Similar to Ruby Array#shuffle.</p>
+<h3 id="example-8">Example</h3>
+<div class="sourceCode" id="cb45"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">var</span> arr <span class="op">=</span> [<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span><span class="op">,</span> <span class="st">&#39;c&#39;</span><span class="op">,</span> <span class="st">&#39;d&#39;</span><span class="op">,</span> <span class="st">&#39;e&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb45-2" title="2"><span class="at">shuffle</span>(arr)<span class="op">;</span> <span class="co">// [&#39;b&#39;, &#39;d&#39;, &#39;e&#39;, &#39;c&#39;, &#39;a&#39;]</span></a></code></pre></div>
+<h2 id="slicearr-start-endarray">slice(arr, [start], [end]):Array</h2>
+<p>Returns a new array containing the items from <code>arr</code> from the start index to the end index.</p>
+<p>If <code>start</code> is omitted, it will start at <code>0</code>. If <code>end</code> is omitted, it will used the last index of the array. If <code>start</code> or <code>end</code> is negative, it is used as an offset from the end of the array.</p>
+<p>It will also convert array-like objects to arrays.</p>
+<h3 id="example-9">Example</h3>
+<div class="sourceCode" id="cb46"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb46-1" title="1"><span class="at">slice</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span> <span class="co">// [2, 3]</span></a>
+<a class="sourceLine" id="cb46-2" title="2"><span class="at">slice</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span> <span class="co">// [2, 3]</span></a>
+<a class="sourceLine" id="cb46-3" title="3"><span class="at">slice</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>])<span class="op">;</span> <span class="co">// [1, 2, 3]</span></a>
+<a class="sourceLine" id="cb46-4" title="4"><span class="at">slice</span>(<span class="op">{</span> <span class="dt">length</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">0</span><span class="op">:</span> <span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="dv">1</span><span class="op">:</span> <span class="st">&#39;b&#39;</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// [&#39;a&#39;, &#39;b&#39;]</span></a>
+<a class="sourceLine" id="cb46-5" title="5"><span class="at">slice</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">-1</span>)<span class="op">;</span> <span class="co">// [1, 2]</span></a>
+<a class="sourceLine" id="cb46-6" title="6"><span class="at">slice</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">,</span> <span class="dv">-2</span>)<span class="op">;</span> <span class="co">// [2, 3]</span></a></code></pre></div>
+<h2 id="somearr-callback-thisobjarray">some(arr, callback, [thisObj]):Array</h2>
+<p>Crossbrowser <code>Array.some()</code>.</p>
+<p>Tests whether some element in the array passes the test implemented by the provided function.</p>
+<p>It differs from ES5 since it will also loop over sparse items in the array to normalize the behavior across browsers (avoid inconsistencies).</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">var</span> items <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="st">&#39;bar&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb47-2" title="2"><span class="at">some</span>(items<span class="op">,</span> isString)<span class="op">;</span>   <span class="co">// true</span></a>
+<a class="sourceLine" id="cb47-3" title="3"><span class="at">some</span>(items<span class="op">,</span> isFunction)<span class="op">;</span> <span class="co">// false</span></a></code></pre></div>
+<p>more info at <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array/some">MDN Array#some</a></p>
+<p>It also supports a shorthand syntax:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">var</span> items <span class="op">=</span> [<span class="op">{</span><span class="dt">id</span><span class="op">:</span><span class="dv">1</span><span class="op">,</span> <span class="dt">active</span><span class="op">:</span><span class="kw">true</span><span class="op">},</span> <span class="op">{</span><span class="dt">id</span><span class="op">:</span><span class="dv">3</span><span class="op">,</span> <span class="dt">active</span><span class="op">:</span><span class="kw">false</span><span class="op">},</span> <span class="op">{</span><span class="dt">id</span><span class="op">:</span><span class="dv">8</span><span class="op">,</span> <span class="dt">active</span><span class="op">:</span><span class="kw">false</span><span class="op">}</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="co">// at least one item with `id === 8`</span></a>
+<a class="sourceLine" id="cb48-3" title="3"><span class="at">some</span>(items<span class="op">,</span> <span class="op">{</span><span class="dt">id</span><span class="op">:</span><span class="dv">8</span><span class="op">}</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb48-4" title="4"><span class="co">// `active` is truthy on at least one item</span></a>
+<a class="sourceLine" id="cb48-5" title="5"><span class="at">some</span>(items<span class="op">,</span> <span class="st">&#39;active&#39;</span>)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<p>see also: <a href="object.html#matches"><code>object/matches</code></a></p>
+<h2 id="sortarr-comparefnarray">sort(arr, <a href="#comparefn">compareFn</a>):Array</h2>
+<p>Returns a sorted Array using the <a href="http://en.wikipedia.org/wiki/Merge_sort">Merge Sort</a> algorithm (stable sort).</p>
+<p>The <code>Array.prototype.sort</code> browser implementations differ since the sorting algorithm isn’t described in the ES spec - <a href="http://code.google.com/p/v8/issues/detail?id=90">in V8 it isn’t stable</a> and <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=224128">on Firefox it is stable</a> - so this function doesn’t use the browser native implementation and is recommended in cases where a stable sort is required (items should preserve same order if already sorted).</p>
+<p><strong>Important:</strong> It does logical comparisson by default (greater/less than) and not a string comparisson like the native <code>Array#sort</code>.</p>
+<h3 id="comparefn">compareFn</h3>
+<p>If <code>compareFn</code> is supplied elements are sorted based on the value returned by the <code>compareFn</code>.</p>
+<ul>
+<li>If <code>compareFn(a, b)</code> is less than <code>0</code>, sort <code>a</code> to a lower index than <code>b</code>.</li>
+<li>If <code>compareFn(a, b)</code> returns <code>0</code>, leave <code>a</code> and <code>b</code> unchanged with respect to each other, but sorted with respect to all different elements.</li>
+<li>If <code>compareFn(a, b)</code> is greater than <code>0</code>, sort <code>b</code> to a lower index than <code>a</code>.</li>
+</ul>
+<p>See: <a href="#sortBy"><code>sortBy</code></a></p>
+<h3 id="example-10">Example</h3>
+<div class="sourceCode" id="cb49"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb49-1" title="1"><span class="at">sort</span>([<span class="dv">187</span><span class="op">,</span> <span class="dv">23</span><span class="op">,</span> <span class="dv">47</span><span class="op">,</span> <span class="dv">987</span><span class="op">,</span> <span class="dv">12</span><span class="op">,</span> <span class="dv">59</span><span class="op">,</span> <span class="dv">0</span>])<span class="op">;</span> <span class="co">// [0, 12, 23, 47, 59, 187, 987]</span></a>
+<a class="sourceLine" id="cb49-2" title="2"><span class="at">sort</span>([<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;z&#39;</span><span class="op">,</span> <span class="st">&#39;c&#39;</span><span class="op">,</span> <span class="st">&#39;beta&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span>])<span class="op">;</span> <span class="co">// [&#39;a&#39;, &#39;b&#39;, &#39;beta&#39;, &#39;c&#39;, &#39;z&#39;]</span></a>
+<a class="sourceLine" id="cb49-3" title="3"></a>
+<a class="sourceLine" id="cb49-4" title="4"><span class="co">// [&#39;sit&#39;, &#39;amet&#39;, &#39;lorem&#39;, &#39;ipsum&#39;]</span></a>
+<a class="sourceLine" id="cb49-5" title="5"><span class="at">sort</span>([<span class="st">&#39;lorem&#39;</span><span class="op">,</span> <span class="st">&#39;ipsum&#39;</span><span class="op">,</span> <span class="st">&#39;sit&#39;</span><span class="op">,</span> <span class="st">&#39;amet&#39;</span>]<span class="op">,</span> <span class="kw">function</span>(a<span class="op">,</span> b)<span class="op">{</span></a>
+<a class="sourceLine" id="cb49-6" title="6">    <span class="co">// sort by length, items with same length</span></a>
+<a class="sourceLine" id="cb49-7" title="7">    <span class="co">// will keep the relative order (stable)</span></a>
+<a class="sourceLine" id="cb49-8" title="8">    <span class="cf">return</span> <span class="va">a</span>.<span class="at">length</span> <span class="op">-</span> <span class="va">b</span>.<span class="at">length</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb49-9" title="9"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb49-10" title="10"></a>
+<a class="sourceLine" id="cb49-11" title="11"><span class="co">// [4, 3, 2, 1]</span></a>
+<a class="sourceLine" id="cb49-12" title="12"><span class="at">sort</span>([<span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">,</span> <span class="kw">function</span>(a<span class="op">,</span> b)<span class="op">{</span></a>
+<a class="sourceLine" id="cb49-13" title="13">    <span class="co">// reverse sort</span></a>
+<a class="sourceLine" id="cb49-14" title="14">    <span class="cf">return</span> b <span class="op">-</span> a<span class="op">;</span></a>
+<a class="sourceLine" id="cb49-15" title="15"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="sortbyarr-callback-contextarray">sortBy(arr, callback, [context]):Array</h2>
+<p>Returns an array sorted by the result of the callback.</p>
+<p>The callback is called for each item that is to be sorted, and the results of the callback are used to sort the array. The callback is called with the item as the first parameter, optionally with the provided context.</p>
+<p>It also supports a shorthand notation which can be used to sort by a property name.</p>
+<p>See: <a href="#sort"><code>sort</code></a></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb50-1" title="1"><span class="co">// Returns [{ a: 1 }, { a: 2 }, { a: 3 }]</span></a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="at">sortBy</span>([<span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">3</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">2</span> <span class="op">}</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb50-3" title="3">    <span class="kw">function</span>(item) <span class="op">{</span> <span class="cf">return</span> <span class="va">item</span>.<span class="at">a</span><span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb50-4" title="4"></a>
+<a class="sourceLine" id="cb50-5" title="5"><span class="co">// Same as above, using shorthand notation</span></a>
+<a class="sourceLine" id="cb50-6" title="6"><span class="at">sortBy</span>([<span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">3</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">2</span> <span class="op">}</span>]<span class="op">,</span> <span class="st">&#39;a&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="splitarr-segmentsarray">split(arr, [segments]):Array</h2>
+<p>Splits an array into a fixed number of segments.</p>
+<p>The number of segments is specified by <code>segments</code> and defaults to 2. If the array cannot be evenly split, the first segments will contain the extra items. If <code>arr</code> is empty, an empty array is returned. If <code>arr.length</code> is less than <code>segments</code>, then the resulting array will have <code>arr.length</code> number of single-element arrays.</p>
+<h3 id="example-11">Example</h3>
+<div class="sourceCode" id="cb51"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb51-1" title="1"><span class="at">split</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">,</span> <span class="dv">3</span>) <span class="co">// [ [1, 2], [3, 4], [5] ]</span></a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="at">split</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>]) <span class="co">// [ [1, 2, 3], [4, 5] ]</span></a>
+<a class="sourceLine" id="cb51-3" title="3"><span class="at">split</span>([]) <span class="co">// []</span></a>
+<a class="sourceLine" id="cb51-4" title="4"><span class="at">split</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]<span class="op">,</span> <span class="dv">3</span>) <span class="co">// [ [1], [2] ]</span></a></code></pre></div>
+<h2 id="taketimes-callback-thisobjarray">take(times, callback, [thisObj]):Array</h2>
+<p>Builds a new array based on the returned values from the given <code>callback</code>.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb52-1" title="1"><span class="at">take</span>(<span class="dv">4</span><span class="op">,</span> <span class="kw">function</span>(i<span class="op">,</span> total) <span class="op">{</span></a>
+<a class="sourceLine" id="cb52-2" title="2">    <span class="cf">return</span> i / total<span class="op">;</span></a>
+<a class="sourceLine" id="cb52-3" title="3"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb52-4" title="4"><span class="co">// &gt; [0, 0.25, 0.5, 0.75]</span></a></code></pre></div>
+<p>see: <a href="../function.html#times">function/times</a></p>
+<h2 id="tolookuparr-keyobject">toLookup(arr, key):Object</h2>
+<p>Create an object that indexes the items in the array by a key. If <code>key</code> is a function, the key for each value in the resulting object will be the result of calling the function with the value as an argument. Otherwise <code>key</code> specifies the property on each value to use as the key.</p>
+<h3 id="example-12">Example</h3>
+<div class="sourceCode" id="cb53"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> [<span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="dt">thing</span><span class="op">:</span> <span class="dv">1</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;b&#39;</span><span class="op">,</span> <span class="dt">thing</span><span class="op">:</span> <span class="dv">2</span> <span class="op">}</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb53-2" title="2"><span class="co">// { a: { name: &#39;a&#39;, thing: 1 }, b: { name: &#39;b&#39;, thing: 2 } }</span></a>
+<a class="sourceLine" id="cb53-3" title="3"><span class="at">toLookup</span>(foo<span class="op">,</span> <span class="st">&#39;name&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb53-4" title="4"><span class="co">// same as above</span></a>
+<a class="sourceLine" id="cb53-5" title="5"><span class="at">toLookup</span>(foo<span class="op">,</span> <span class="kw">function</span> (value) <span class="op">{</span> <span class="cf">return</span> <span class="va">value</span>.<span class="at">name</span><span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="unionarrsarray">union(…arrs):Array</h2>
+<p>Concat multiple arrays removing duplicates.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">var</span> a <span class="op">=</span> [<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb54-2" title="2">    b <span class="op">=</span> [<span class="st">&#39;c&#39;</span><span class="op">,</span> <span class="st">&#39;a&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb54-3" title="3">    c <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="st">&#39;b&#39;</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="st">&#39;a&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb54-4" title="4"></a>
+<a class="sourceLine" id="cb54-5" title="5"><span class="co">//note that unique remove from begin to end</span></a>
+<a class="sourceLine" id="cb54-6" title="6"><span class="at">union</span>(a<span class="op">,</span> b<span class="op">,</span> c)<span class="op">;</span> <span class="co">// [&#39;c&#39;, 1, &#39;b&#39;, 2, 3, &#39;a&#39;]</span></a></code></pre></div>
+<h2 id="uniquearr-comparearray">unique(arr, [compare]):Array</h2>
+<p>Return a new Array of unique items.</p>
+<p><strong>IMPORTANT:</strong> duplicates are removed starting from begining of array.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">var</span> arr <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb55-2" title="2"><span class="kw">var</span> foo <span class="op">=</span> <span class="at">unique</span>(arr)<span class="op">;</span></a>
+<a class="sourceLine" id="cb55-3" title="3"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span></a>
+<a class="sourceLine" id="cb55-4" title="4"><span class="co">// &gt; [1, 3, 2, 4];</span></a>
+<a class="sourceLine" id="cb55-5" title="5"></a>
+<a class="sourceLine" id="cb55-6" title="6"><span class="co">// you also have the option to set a custom compare function</span></a>
+<a class="sourceLine" id="cb55-7" title="7"><span class="kw">var</span> users <span class="op">=</span> [<span class="op">{</span><span class="dt">name</span><span class="op">:</span> <span class="st">&#39;john&#39;</span><span class="op">},</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span> <span class="st">&#39;paul&#39;</span><span class="op">},</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span> <span class="st">&#39;john&#39;</span><span class="op">}</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb55-8" title="8"><span class="kw">var</span> uniqueNames <span class="op">=</span> <span class="at">unique</span>(arr<span class="op">,</span> <span class="kw">function</span>(a<span class="op">,</span> b)<span class="op">{</span></a>
+<a class="sourceLine" id="cb55-9" title="9">    <span class="cf">return</span> <span class="va">a</span>.<span class="at">name</span> <span class="op">===</span> <span class="va">b</span>.<span class="at">name</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb55-10" title="10"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb55-11" title="11"><span class="va">console</span>.<span class="at">log</span>(uniqueNames)<span class="op">;</span></a>
+<a class="sourceLine" id="cb55-12" title="12"><span class="co">// &gt; [{name: &#39;paul&#39;}, {name: &#39;john&#39;}]</span></a></code></pre></div>
+<h2 id="xorarr1-arr2array">xor(arr1, arr2):Array</h2>
+<p>Exclusive OR. Returns items that are present in a single array.</p>
+<p>Works like <a href="http://docs.python.org/library/stdtypes.html#set.symmetric_difference">Python set#symmetric_difference</a> renamed for brevity.</p>
+<p>It will remove duplicates.</p>
+<p>See: <a href="#difference"><code>difference()</code></a>, <a href="#intersection"><code>intersection()</code></a></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">var</span> a <span class="op">=</span> [<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb56-2" title="2"><span class="kw">var</span> b <span class="op">=</span> [<span class="st">&#39;c&#39;</span><span class="op">,</span> <span class="dv">1</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb56-3" title="3"><span class="at">xor</span>(a<span class="op">,</span> b)<span class="op">;</span> <span class="co">// [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span></a></code></pre></div>
+<h2 id="ziparrsarray">zip(…arrs):Array</h2>
+<p>Groups the elements of each array at their corresponding indexes.</p>
+<p>Useful for separate data sources that are coordinated through matching array indexes. For a matrix of nested arrays, <code>zip.apply(...)</code> can transpose the matrix in a similar fashion.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb57-1" title="1"><span class="co">// [[&#39;moe&#39;, 30, true], [&#39;larry&#39;, 40, false], [&#39;curly&#39;, 50, false]]</span></a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="at">zip</span>([<span class="st">&#39;moe&#39;</span><span class="op">,</span> <span class="st">&#39;larry&#39;</span><span class="op">,</span> <span class="st">&#39;curly&#39;</span>]<span class="op">,</span> [<span class="dv">30</span><span class="op">,</span> <span class="dv">40</span><span class="op">,</span> <span class="dv">50</span>]<span class="op">,</span> [<span class="kw">true</span><span class="op">,</span> <span class="kw">false</span><span class="op">,</span> <span class="kw">false</span>])<span class="op">;</span></a></code></pre></div>
+<hr />
+<p>For more usage examples check specs inside <code>/tests</code> folder. Unit tests are the best documentation you can get…</p>
+</body>
+</html>

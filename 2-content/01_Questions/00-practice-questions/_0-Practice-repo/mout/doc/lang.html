@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>lang</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="lang">lang</h1>
+<p>Language Utilities. Easier inheritance, scope handling, type checks.</p>
+<h2 id="cloneval">clone(val):*</h2>
+<p>Clone native types like Object, Array, RegExp, Date and primitives.</p>
+<p>This method will not clone values that are referenced within <code>val</code>. It will only copy the value reference to the new value. If the value is not a plain object but is an object, it will return the value unchanged.</p>
+<h3 id="example">Example</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">var</span> a <span class="op">=</span> <span class="op">{</span> <span class="dt">foo</span><span class="op">:</span> <span class="st">&#39;bar&#39;</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">var</span> b <span class="op">=</span> <span class="at">clone</span>(a)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="va">console</span>.<span class="at">log</span>(a <span class="op">===</span> b)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="va">console</span>.<span class="at">log</span>(<span class="va">a</span>.<span class="at">foo</span> <span class="op">===</span> <span class="va">b</span>.<span class="at">foo</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="kw">var</span> c <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="kw">var</span> d <span class="op">=</span> <span class="at">clone</span>(b)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="va">console</span>.<span class="at">log</span>(c <span class="op">===</span> d)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="va">console</span>.<span class="at">log</span>(c)<span class="op">;</span> <span class="co">// [1, 2, 3]</span></a></code></pre></div>
+<p>See: <a href="#deepClone"><code>deepClone()</code></a></p>
+<h2 id="createobjectparent-propsobject">createObject(parent, [props]):Object</h2>
+<p>Create Object using prototypal inheritance and setting custom properties.</p>
+<p>Mix between <a href="http://javascript.crockford.com/prototypal.html">Douglas Crockford Prototypal Inheritance</a> and <a href="./object.html#mixIn"><code>object/mixIn</code></a>.</p>
+<h3 id="arguments">Arguments</h3>
+<ol type="1">
+<li><code>parent</code> (Object) : Parent Object</li>
+<li><code>[props]</code> (Object) : Object properties</li>
+</ol>
+<h3 id="example-1">Example</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">var</span> base <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="dt">trace </span><span class="op">:</span> <span class="kw">function</span>()<span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">        <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">name</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="op">};</span></a>
+<a class="sourceLine" id="cb2-6" title="6"></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="kw">var</span> myObject <span class="op">=</span> <span class="at">createObject</span>(base<span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="dt">name </span><span class="op">:</span> <span class="st">&#39;Lorem Ipsum&#39;</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-10" title="10"></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="va">myObject</span>.<span class="at">trace</span>()<span class="op">;</span> <span class="co">// &quot;Lorem Ipsum&quot;</span></a></code></pre></div>
+<h2 id="ctorapplyconstructor-argsobject">ctorApply(constructor, args):Object</h2>
+<p>Do <code>Function.prototype.apply()</code> on a constructor while maintaining prototype chain.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">Person</span>(name<span class="op">,</span> surname) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> name<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="kw">this</span>.<span class="at">surname</span> <span class="op">=</span> surname<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="va">Person</span>.<span class="va">prototype</span>.<span class="at">walk</span> <span class="op">=</span> <span class="kw">function</span>()<span class="op">{</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">name</span> <span class="op">+</span><span class="st">&#39; is walking&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="op">};</span></a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="kw">var</span> args <span class="op">=</span> [<span class="st">&#39;John&#39;</span><span class="op">,</span> <span class="st">&#39;Doe&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-11" title="11"></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="co">// &quot;similar&quot; effect as calling `new Person(&quot;John&quot;, &quot;Doe&quot;)`</span></a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="kw">var</span> john <span class="op">=</span> <span class="at">ctorApply</span>(Person<span class="op">,</span> args)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="va">john</span>.<span class="at">walk</span>()<span class="op">;</span> <span class="co">// &quot;John is walking&quot;</span></a></code></pre></div>
+<h2 id="deepcloneval-instanceclone">deepClone(val, [instanceClone]):*</h2>
+<p>Deep clone native types like Object, Array, RegExp, Date and primitives.</p>
+<p>The <code>instanceClone</code> function will be invoked to clone objects that are not “plain” objects (as defined by <a href="#isPlainObject"><code>isPlainObject</code></a>) if it is provided. If <code>instanceClone</code> is not specified, it will not attempt to clone non-plain objects, and will copy the object reference.</p>
+<h3 id="example-2">Example</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">var</span> a <span class="op">=</span> <span class="op">{</span><span class="dt">foo</span><span class="op">:</span><span class="st">&#39;bar&#39;</span><span class="op">,</span> <span class="dt">obj</span><span class="op">:</span> <span class="op">{</span><span class="dt">a</span><span class="op">:</span><span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span><span class="dv">2</span><span class="op">}};</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">var</span> b <span class="op">=</span> <span class="at">deepClone</span>(a)<span class="op">;</span> <span class="co">// {foo:&#39;bar&#39;, obj: {a:1, b:2}}</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="va">console</span>.<span class="at">log</span>( a <span class="op">===</span> b )<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="va">console</span>.<span class="at">log</span>( <span class="va">a</span>.<span class="at">obj</span> <span class="op">===</span> <span class="va">b</span>.<span class="at">obj</span> )<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="kw">var</span> c <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> [<span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]]<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="kw">var</span> d <span class="op">=</span> <span class="at">deepClone</span>(c)<span class="op">;</span> <span class="co">// [1, 2, [3, 4]]</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="kw">var</span> e <span class="op">=</span> <span class="va">c</span>.<span class="at">concat</span>()<span class="op">;</span> <span class="co">// [1, 2, [3, 4]]</span></a>
+<a class="sourceLine" id="cb4-9" title="9"></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="va">console</span>.<span class="at">log</span>( c[<span class="dv">2</span>] <span class="op">===</span> d[<span class="dv">2</span>] )<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">// concat doesn&#39;t do a deep clone, arrays are passed by reference</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="va">console</span>.<span class="at">log</span>( e[<span class="dv">2</span>] <span class="op">===</span> d[<span class="dv">2</span>] )<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb4-13" title="13"></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="kw">function</span> <span class="at">Custom</span>() <span class="op">{</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="kw">function</span> <span class="at">cloneCustom</span>(x) <span class="op">{</span> <span class="cf">return</span> <span class="kw">new</span> <span class="at">Custom</span>()<span class="op">;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="kw">var</span> f <span class="op">=</span> <span class="op">{</span> <span class="dt">test</span><span class="op">:</span> <span class="kw">new</span> <span class="at">Custom</span>() <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="kw">var</span> g <span class="op">=</span> <span class="at">deepClone</span>(f<span class="op">,</span> cloneCustom)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="va">g</span>.<span class="at">test</span> <span class="op">===</span> <span class="va">f</span>.<span class="at">test</span> <span class="co">// false, since new Custom instance will be created</span></a></code></pre></div>
+<p>See: <a href="#clone"><code>clone()</code></a></p>
+<h2 id="deepequalsa-b-callbackboolean">deepEquals(a, b, [callback]):Boolean</h2>
+<p>Recursively tests whether two values contains the same keys and values.</p>
+<p><code>callback</code> specifies the equality comparison function used to compare non-object values. It defaults to using the <a href="#is"><code>is()</code></a> function.</p>
+<p>If the values are both an object or array, it will recurse into both values, checking if their keys/values are equal. It will only check the keys and values contained by the objects; it will not check the objects’ prototypes. If either of the values are not objects, they will be checked using the <code>callback</code> function.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="at">deepEquals</span>(<span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="at">deepEquals</span>(<span class="op">{</span> <span class="dt">value</span><span class="op">:</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">}</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">value</span><span class="op">:</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">}</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="at">deepEquals</span>(<span class="op">{</span> <span class="dt">value</span><span class="op">:</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">}</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">value</span><span class="op">:</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">2</span> <span class="op">}</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="at">deepEquals</span>(<span class="op">{</span> <span class="dt">value</span><span class="op">:</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span> <span class="op">}</span> <span class="op">},</span> <span class="op">{</span> <span class="dt">value</span><span class="op">:</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="dv">2</span> <span class="op">}</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="at">deepEquals</span>(<span class="op">{},</span> <span class="kw">null</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="at">deepEquals</span>(<span class="kw">null</span><span class="op">,</span> <span class="kw">null</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="at">deepEquals</span>(</a>
+<a class="sourceLine" id="cb5-8" title="8">    <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="op">{</span> <span class="dt">b</span><span class="op">:</span> <span class="dv">1</span> <span class="op">}</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb5-9" title="9">    <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="op">{</span> <span class="dt">b</span><span class="op">:</span> <span class="st">&#39;1&#39;</span> <span class="op">}</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb5-10" title="10">    <span class="kw">function</span>(a<span class="op">,</span> b) <span class="op">{</span> <span class="cf">return</span> a <span class="op">==</span> b<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<p>See: <a href="object.html#equals">object/equals</a>, <a href="array.html#equals">array/equals</a></p>
+<h2 id="defaultsval-defaultsvoid">defaults(val, …defaults):void</h2>
+<p>Return first value that isn’t <code>null</code> or <code>undefined</code>.</p>
+<pre><code>function doSomethingAwesome(foo, bar) {
+    // default arguments
+    foo = defaults(foo, &#39;lorem&#39;);
+    bar = defaults(bar, 123);
+    // ...
+}</code></pre>
+<h2 id="globalobject">GLOBAL:Object</h2>
+<p>Reference to the global context (<code>window</code> inside a browser, <code>global</code> on node.js). Works on ES3 and ES5 strict-mode.</p>
+<h2 id="inheritprototypechildctor-parentctorobject">inheritPrototype(childCtor, parentCtor):Object</h2>
+<p>Inherit the prototype methods from one constructor into another.</p>
+<p>Similar to <a href="http://nodejs.org/docs/latest/api/util.html#util_util_inherits_constructor_superconstructor">node.js util/inherits</a>.</p>
+<p>It returns the the <code>childCtor.prototype</code> for convenience.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">Foo</span>(name)<span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">    <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> name<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="va">Foo</span>.<span class="at">prototype</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-5" title="5">    <span class="dt">getName </span><span class="op">:</span> <span class="kw">function</span>()<span class="op">{</span></a>
+<a class="sourceLine" id="cb7-6" title="6">        <span class="cf">return</span> <span class="kw">this</span>.<span class="at">name</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="op">};</span></a>
+<a class="sourceLine" id="cb7-9" title="9"></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="kw">function</span> <span class="at">Bar</span>(name)<span class="op">{</span></a>
+<a class="sourceLine" id="cb7-11" title="11">    <span class="va">Foo</span>.<span class="at">call</span>(<span class="kw">this</span><span class="op">,</span> name)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-12" title="12"><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="co">//should be called before calling constructor</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="kw">var</span> proto <span class="op">=</span> <span class="at">inheritPrototype</span>(Bar<span class="op">,</span> Foo)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-15" title="15"></a>
+<a class="sourceLine" id="cb7-16" title="16"><span class="co">// for convenience we return the new prototype object</span></a>
+<a class="sourceLine" id="cb7-17" title="17"><span class="va">console</span>.<span class="at">log</span>(proto <span class="op">===</span> <span class="va">Bar</span>.<span class="at">prototype</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb7-18" title="18"></a>
+<a class="sourceLine" id="cb7-19" title="19"><span class="kw">var</span> myObj <span class="op">=</span> <span class="kw">new</span> <span class="at">Bar</span>(<span class="st">&#39;lorem ipsum&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-20" title="20"><span class="va">myObj</span>.<span class="at">getName</span>()<span class="op">;</span> <span class="co">// &quot;lorem ipsum&quot;</span></a>
+<a class="sourceLine" id="cb7-21" title="21"></a>
+<a class="sourceLine" id="cb7-22" title="22"><span class="va">console</span>.<span class="at">log</span>(myObj <span class="kw">instanceof</span> Foo)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb7-23" title="23"></a>
+<a class="sourceLine" id="cb7-24" title="24"><span class="co">// you also have access to the &quot;super&quot; constructor</span></a>
+<a class="sourceLine" id="cb7-25" title="25"><span class="va">console</span>.<span class="at">log</span>(<span class="va">Bar</span>.<span class="at">super_</span> <span class="op">===</span> Foo)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<h2 id="isx-yboolean">is(x, y):Boolean</h2>
+<p>Check if both values are identical/egal.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="co">// wtfjs</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">NaN</span> <span class="op">===</span> <span class="kw">NaN</span><span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="dv">-0</span> <span class="op">===</span> <span class="op">+</span><span class="dv">0</span><span class="op">;</span>   <span class="co">// true</span></a>
+<a class="sourceLine" id="cb8-4" title="4"></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="at">is</span>(<span class="kw">NaN</span><span class="op">,</span> <span class="kw">NaN</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="at">is</span>(<span class="op">-</span><span class="dv">0</span><span class="op">,</span> <span class="op">+</span><span class="dv">0</span>)<span class="op">;</span>   <span class="co">// false</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="at">is</span>(<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span>)<span class="op">;</span> <span class="co">// false</span></a></code></pre></div>
+<p>See: <a href="#isnt"><code>isnt()</code></a></p>
+<h2 id="isntx-yboolean">isnt(x, y):Boolean</h2>
+<p>Check if both values are not identical/egal.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="co">// wtfjs</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">NaN</span> <span class="op">===</span> <span class="kw">NaN</span><span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="dv">-0</span> <span class="op">===</span> <span class="op">+</span><span class="dv">0</span><span class="op">;</span>   <span class="co">// true</span></a>
+<a class="sourceLine" id="cb9-4" title="4"></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="at">isnt</span>(<span class="kw">NaN</span><span class="op">,</span> <span class="kw">NaN</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="at">isnt</span>(<span class="op">-</span><span class="dv">0</span><span class="op">,</span> <span class="op">+</span><span class="dv">0</span>)<span class="op">;</span>   <span class="co">// true</span></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="at">isnt</span>(<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span>)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<p>See: <a href="#is"><code>is()</code></a></p>
+<h2 id="isargumentsvalboolean">isArguments(val):Boolean</h2>
+<p>If value is an “Arguments” object.</p>
+<h2 id="isarrayvalboolean">isArray(val):Boolean</h2>
+<p>If value is an Array. Uses native ES5 <code>Array.isArray()</code> if available.</p>
+<h2 id="isbooleanvalboolean">isBoolean(val):Boolean</h2>
+<p>If value is a Boolean.</p>
+<h2 id="isdatevalboolean">isDate(val):Boolean</h2>
+<p>If value is a Date.</p>
+<h2 id="isemptyvalboolean">isEmpty(val):Boolean</h2>
+<p>Checks if Array/Object/String is empty.</p>
+<p>Will return <code>true</code> for any object that doesn’t contain enumerable properties and also to any type of value that isn’t considered a collection (boolean, null, undefined, function, etc).</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="at">isEmpty</span>(<span class="st">&#39;&#39;</span>)<span class="op">;</span>         <span class="co">// true</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="at">isEmpty</span>(<span class="st">&#39;bar&#39;</span>)<span class="op">;</span>      <span class="co">// false</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="at">isEmpty</span>([])<span class="op">;</span>         <span class="co">// true</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="at">isEmpty</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>])<span class="op">;</span>     <span class="co">// false</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="at">isEmpty</span>(<span class="op">{}</span>)<span class="op">;</span>         <span class="co">// true</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="at">isEmpty</span>(<span class="op">{</span><span class="dt">a</span><span class="op">:</span><span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span><span class="dv">2</span><span class="op">}</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co">// null, undefined, booleans, numbers are considered as &quot;empty&quot; values</span></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="at">isEmpty</span>(<span class="kw">null</span>)<span class="op">;</span>       <span class="co">// true</span></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="at">isEmpty</span>(<span class="kw">undefined</span>)<span class="op">;</span>  <span class="co">// true</span></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="at">isEmpty</span>(<span class="dv">123</span>)<span class="op">;</span>        <span class="co">// true</span></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="at">isEmpty</span>(<span class="kw">true</span>)<span class="op">;</span>       <span class="co">// true</span></a></code></pre></div>
+<h2 id="isfinitevalboolean">isFinite(val):Boolean</h2>
+<p>Checks if value is Finite.</p>
+<p><strong>IMPORTANT:</strong> This is not the same as native <code>isFinite</code>, which will return <code>true</code> for values that can be coerced into finite numbers. See http://es5.github.com/#x15.1.2.5.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="at">isFinite</span>(<span class="dv">123</span>)<span class="op">;</span>      <span class="co">// true</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="at">isFinite</span>(<span class="kw">Infinity</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb11-3" title="3"></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="co">// this is different than native behavior</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="at">isFinite</span>(<span class="st">&#39;&#39;</span>)<span class="op">;</span>   <span class="co">// false</span></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="at">isFinite</span>(<span class="kw">true</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="at">isFinite</span>([])<span class="op">;</span>   <span class="co">// false</span></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="at">isFinite</span>(<span class="kw">null</span>)<span class="op">;</span> <span class="co">// false</span></a></code></pre></div>
+<h2 id="isfunctionvalboolean">isFunction(val):Boolean</h2>
+<p>If value is a Function.</p>
+<h2 id="iskindval-kindboolean">isKind(val, kind):Boolean</h2>
+<p>If value is of “kind”. (used internally by some of the <em>isSomething</em> checks).</p>
+<p>Favor the other methods since strings are commonly mistyped and also because some “kinds” can only be accurately checked by using other methods (e.g. <code>Arguments</code>), some of the other checks are also faster.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="at">isKind</span>([<span class="dv">1</span><span class="op">,</span><span class="dv">2</span>]<span class="op">,</span> <span class="st">&#39;Array&#39;</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="at">isKind</span>(<span class="dv">3</span><span class="op">,</span> <span class="st">&#39;Array&#39;</span>)<span class="op">;</span>     <span class="co">// false</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="at">isKind</span>(<span class="dv">3</span><span class="op">,</span> <span class="st">&#39;Number&#39;</span>)<span class="op">;</span>    <span class="co">// true</span></a></code></pre></div>
+<p>See: <a href="#kindOf"><code>kindOf()</code></a></p>
+<h2 id="isintegervalboolean">isInteger(val):Boolean</h2>
+<p>Check if value is an integer.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="at">isInteger</span>(<span class="dv">123</span>)<span class="op">;</span>    <span class="co">// true</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="at">isInteger</span>(<span class="fl">123.45</span>)<span class="op">;</span> <span class="co">// false</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="at">isInteger</span>(<span class="op">{}</span>)<span class="op">;</span>     <span class="co">// false</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="at">isInteger</span>(<span class="st">&#39;foo&#39;</span>)<span class="op">;</span>  <span class="co">// false</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="at">isInteger</span>(<span class="st">&#39;123&#39;</span>)<span class="op">;</span>  <span class="co">// false</span></a></code></pre></div>
+<h2 id="isnanvalboolean">isNaN(val):Boolean</h2>
+<p>Check if value is not a number.</p>
+<p>It doesn’t coerce value into number before doing the check, giving better results than native <code>isNaN</code>. Returns <code>true</code> for everything besides numeric values.</p>
+<p><strong>IMPORTANT:</strong> behavior is very different than the native <code>isNaN</code> and way more useful!!! See: http://es5.github.io/#x15.1.2.4</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="at">isNaN</span>(<span class="dv">123</span>)<span class="op">;</span>       <span class="co">// false</span></a>
+<a class="sourceLine" id="cb14-2" title="2"></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="at">isNaN</span>(<span class="kw">NaN</span>)<span class="op">;</span>       <span class="co">// true</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="at">isNaN</span>(<span class="op">{}</span>)<span class="op">;</span>        <span class="co">// true</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="at">isNaN</span>(<span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="at">isNaN</span>([<span class="dv">4</span><span class="op">,</span><span class="dv">5</span>])<span class="op">;</span>     <span class="co">// true</span></a>
+<a class="sourceLine" id="cb14-7" title="7"></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="co">// these are all &quot;false&quot; on native isNaN and main reason why this module exists</span></a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="at">isNaN</span>(<span class="st">&#39;&#39;</span>)<span class="op">;</span>    <span class="co">// true</span></a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="at">isNaN</span>(<span class="kw">null</span>)<span class="op">;</span>  <span class="co">// true</span></a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="at">isNaN</span>(<span class="kw">true</span>)<span class="op">;</span>  <span class="co">// true</span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="at">isNaN</span>(<span class="kw">false</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb14-13" title="13"><span class="at">isNaN</span>(<span class="st">&quot;123&quot;</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb14-14" title="14"><span class="at">isNaN</span>([])<span class="op">;</span>    <span class="co">// true</span></a>
+<a class="sourceLine" id="cb14-15" title="15"><span class="at">isNaN</span>([<span class="dv">5</span>])<span class="op">;</span>   <span class="co">// true</span></a></code></pre></div>
+<h2 id="isnullvalboolean">isNull(val):Boolean</h2>
+<p>If value is <code>null</code>.</p>
+<h2 id="isnumbervalboolean">isNumber(val):Boolean</h2>
+<p>If value is a Number.</p>
+<h2 id="isobjectvalboolean">isObject(val):Boolean</h2>
+<p>If value is an Object.</p>
+<h2 id="isplainobjectvalboolean">isPlainObject(val):Boolean</h2>
+<p>If the value is an Object created by the Object constructor.</p>
+<h2 id="isregexpvalboolean">isRegExp(val):Boolean</h2>
+<p>If value is a RegExp.</p>
+<h2 id="isstringvalboolean">isString(val):Boolean</h2>
+<p>If value is a String.</p>
+<h2 id="isundefinedvalboolean">isUndefined(val):Boolean</h2>
+<p>If value is <code>undefined</code>.</p>
+<h2 id="kindofvalstring">kindOf(val):String</h2>
+<p>Gets kind of value (e.g. “String”, “Number”, “RegExp”, “Null”, “Date”). Used internally by <code>isKind()</code> and most of the other <em>isSomething</em> checks.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="at">kindOf</span>([<span class="dv">1</span><span class="op">,</span><span class="dv">2</span>])<span class="op">;</span> <span class="co">// &quot;Array&quot;</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="at">kindOf</span>(<span class="st">&#39;foo&#39;</span>)<span class="op">;</span> <span class="co">// &quot;String&quot;</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="at">kindOf</span>(<span class="dv">3</span>)<span class="op">;</span>     <span class="co">// &quot;Number&quot;</span></a></code></pre></div>
+<p>See: <a href="#isKind"><code>isKind()</code></a></p>
+<h2 id="toarrayvalarray">toArray(val):Array</h2>
+<p>Convert array-like object into Array or wrap value into Array.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="at">toArray</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2">    <span class="st">&quot;0&quot;</span> <span class="op">:</span> <span class="st">&quot;foo&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb16-3" title="3">    <span class="st">&quot;1&quot;</span> <span class="op">:</span> <span class="st">&quot;bar&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb16-4" title="4">    <span class="st">&quot;length&quot;</span> <span class="op">:</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="op">}</span>)<span class="op">;</span>                              <span class="co">// [&quot;foo&quot;, &quot;bar&quot;]</span></a>
+<a class="sourceLine" id="cb16-6" title="6"></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="kw">function</span> <span class="at">foo</span>()<span class="op">{</span></a>
+<a class="sourceLine" id="cb16-8" title="8">    <span class="cf">return</span> <span class="at">toArray</span>(<span class="kw">arguments</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-9" title="9"><span class="op">}</span></a>
+<a class="sourceLine" id="cb16-10" title="10"><span class="at">foo</span>(<span class="st">&quot;lorem&quot;</span><span class="op">,</span> <span class="dv">123</span>)<span class="op">;</span>               <span class="co">// [&quot;lorem&quot;, 123]</span></a>
+<a class="sourceLine" id="cb16-11" title="11"></a>
+<a class="sourceLine" id="cb16-12" title="12"><span class="at">toArray</span>(<span class="st">&quot;lorem ipsum&quot;</span>)<span class="op">;</span>          <span class="co">// [&quot;lorem ipsum&quot;]</span></a>
+<a class="sourceLine" id="cb16-13" title="13"><span class="at">toArray</span>(window)<span class="op">;</span>                 <span class="co">// [window]</span></a>
+<a class="sourceLine" id="cb16-14" title="14"><span class="at">toArray</span>(<span class="op">{</span><span class="dt">foo</span><span class="op">:</span><span class="st">&quot;bar&quot;</span><span class="op">,</span> <span class="dt">lorem</span><span class="op">:</span><span class="dv">123</span><span class="op">}</span>)<span class="op">;</span> <span class="co">// [{foo:&quot;bar&quot;, lorem:123}]</span></a></code></pre></div>
+<p>See: object/values()</p>
+<h2 id="tonumbervalnumber">toNumber(val):Number</h2>
+<p>Convert value into number.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="co">// numeric values are typecasted as Number</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="at">toNumber</span>(<span class="st">&#39;123&#39;</span>)<span class="op">;</span>     <span class="co">// 123</span></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="at">toNumber</span>(<span class="op">-</span><span class="dv">567</span>)<span class="op">;</span>      <span class="co">// -567</span></a>
+<a class="sourceLine" id="cb17-4" title="4"></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="co">// falsy values returns zero</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="at">toNumber</span>(<span class="st">&#39;&#39;</span>)<span class="op">;</span>        <span class="co">// 0</span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="at">toNumber</span>(<span class="kw">null</span>)<span class="op">;</span>      <span class="co">// 0</span></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="at">toNumber</span>(<span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// 0</span></a>
+<a class="sourceLine" id="cb17-9" title="9"><span class="at">toNumber</span>(<span class="kw">false</span>)<span class="op">;</span>     <span class="co">// 0</span></a>
+<a class="sourceLine" id="cb17-10" title="10"></a>
+<a class="sourceLine" id="cb17-11" title="11"><span class="co">// non-numeric values returns NaN</span></a>
+<a class="sourceLine" id="cb17-12" title="12"><span class="at">toNumber</span>(<span class="st">&#39;asd&#39;</span>)<span class="op">;</span>     <span class="co">// NaN</span></a>
+<a class="sourceLine" id="cb17-13" title="13"><span class="at">toNumber</span>(<span class="op">{}</span>)<span class="op">;</span>        <span class="co">// NaN</span></a>
+<a class="sourceLine" id="cb17-14" title="14"><span class="at">toNumber</span>([])<span class="op">;</span>        <span class="co">// NaN</span></a>
+<a class="sourceLine" id="cb17-15" title="15"></a>
+<a class="sourceLine" id="cb17-16" title="16"><span class="co">// Date objects return milliseconds since epoch</span></a>
+<a class="sourceLine" id="cb17-17" title="17"><span class="at">toNumber</span>(<span class="kw">new</span> <span class="at">Date</span>(<span class="dv">1985</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">23</span>))<span class="op">;</span> <span class="co">// 490935600000</span></a></code></pre></div>
+<h2 id="tostringvalstring">toString(val):String</h2>
+<p>Convert any value to its string representation.</p>
+<p>Will return an empty string for <code>undefined</code> or <code>null</code>, otherwise will convert the value to its string representation.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="co">// null and undefined are converted into empty strings</span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="at">toString</span>(<span class="kw">null</span>)<span class="op">;</span>      <span class="co">// &quot;&quot;</span></a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="at">toString</span>(<span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// &quot;&quot;</span></a>
+<a class="sourceLine" id="cb18-4" title="4"></a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="at">toString</span>(<span class="dv">1</span>)<span class="op">;</span>       <span class="co">// &quot;1&quot;</span></a>
+<a class="sourceLine" id="cb18-6" title="6"><span class="at">toString</span>([<span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span>])<span class="op">;</span> <span class="co">// &quot;1,2,3&quot;</span></a>
+<a class="sourceLine" id="cb18-7" title="7"><span class="at">toString</span>(<span class="kw">false</span>)<span class="op">;</span>   <span class="co">// &quot;false&quot;</span></a>
+<a class="sourceLine" id="cb18-8" title="8"></a>
+<a class="sourceLine" id="cb18-9" title="9"><span class="co">// uses `val.toString()` to convert value</span></a>
+<a class="sourceLine" id="cb18-10" title="10"><span class="at">toString</span>(<span class="op">{</span><span class="dt">toString</span><span class="op">:</span><span class="at">funtion</span>()<span class="op">{</span> <span class="cf">return</span> <span class="st">&#39;foo&#39;</span><span class="op">;</span> <span class="op">}}</span>)<span class="op">;</span> <span class="co">// &quot;foo&quot;</span></a></code></pre></div>
+<hr />
+<p>For more usage examples check specs inside <code>/tests</code> folder. Unit tests are the best documentation you can get…</p>
+</body>
+</html>
