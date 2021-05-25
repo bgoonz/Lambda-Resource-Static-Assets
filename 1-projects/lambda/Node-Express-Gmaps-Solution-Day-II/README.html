@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="node-express-gmaps">Node-Express-Gmaps</h1>
+<p>Topics: * APIs * API Documentation * Rate Limits * Multiple requests</p>
+<h2 id="objectives">Objectives</h2>
+<ul>
+<li>Create endpoints</li>
+<li>Make multpile requests to third-party API</li>
+<li>Return result</li>
+</ul>
+<h2 id="beginning-project">Beginning Project</h2>
+<ul>
+<li>You will notice there is a config file that is ignored in the .gitignore, which you will be using to store your API key. You will need to import that key into your server file. DO NOT store it anywhere that will get pushed up to your repo.</li>
+<li>Everything else you will start from scratch.</li>
+</ul>
+<h1 id="day-i">Day I</h1>
+<h2 id="project-description">Project Description</h2>
+<ul>
+<li>You will be using the Google Maps Place API to get details about any place provided by the user of your API. When the user provides you a query (example: <code>coffee+shops+in+Austin</code>) you will use that query to make a request to the <code>Place Search</code> service, and will specifically be doing a <code>Text Search Request</code>. You will use the necessary information from the data returned from that first request, and then do a request to <code>Place Details</code> service, returning the detailed information to the user of your API.</li>
+</ul>
+<h2 id="project-requirements">Project Requirements</h2>
+<ul>
+<li>Create an endpoint <code>/place</code> that, provided a query, returns the detailed information about the first place that is in the array of places returned to you from <code>Place Search</code>.</li>
+<li>You will be using the <code>node-fetch</code> library to make your requests to the <code>Place Search</code> API. You can use its example code in its github repo as guidance for its use.</li>
+</ul>
+<h2 id="stretch-problem">Stretch Problem</h2>
+<ul>
+<li>Create an endpoint <code>/places</code> that, provided a query returns the detailed information about ALL places returned to you from <code>Place Search</code>.</li>
+</ul>
+<h2 id="resources">Resources</h2>
+<ul>
+<li>Places API: https://developers.google.com/places/web-service/</li>
+<li>Place Search: https://developers.google.com/places/web-service/search</li>
+<li>Place Details: https://developers.google.com/places/web-service/details</li>
+<li>Request Library: https://github.com/bitinn/node-fetch</li>
+</ul>
+<h1 id="day-ii">Day II</h1>
+<h2 id="project-requirements-1">Project Requirements</h2>
+<ul>
+<li>Create an enpoint called <code>/travel/mode</code> that returns the quickest method of travel given two locations, as well as the travel time. It should account for driving, walking, bicycling, and transit.</li>
+</ul>
+<h2 id="project-notes">Project Notes</h2>
+<ul>
+<li>You will need a separate key than what you’ve used for the Places API since it is actually a different API.</li>
+<li>For best results, try to pick locations that should indeed have transit available.</li>
+</ul>
+<h2 id="stretch-problem-1">Stretch Problem</h2>
+<ul>
+<li>Include this comparison information in the information your return from <code>/place</code>.</li>
+</ul>
+<h2 id="resources-1">Resources</h2>
+<ul>
+<li>Distance Matrix API: https://developers.google.com/places/web-service/</li>
+<li>Travel Mode Section: https://developers.google.com/maps/documentation/distance-matrix/intro#travel_modes</li>
+</ul>
+</body>
+</html>
