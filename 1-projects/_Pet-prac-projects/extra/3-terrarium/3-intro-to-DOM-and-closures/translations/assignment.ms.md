@@ -6,6 +6,6 @@ Mengkaji DOM sedikit dengan 'menerapkan' elemen DOM. Lawati laman MSDN [senarai 
 
 ## Rubrik
 
-| Kriteria | Contoh                                     | Mencukupi                                         | Usaha Lagi       |
-| -------- | --------------------------------------------- | ------------------------------------------------ | ----------------------- |
+| Kriteria | Contoh                                          | Mencukupi                                      | Usaha Lagi                             |
+| -------- | ----------------------------------------------- | ---------------------------------------------- | -------------------------------------- |
 |          | Penulisan perenggan dibentangkan, dengan contoh | Penulisan perenggan dibentangkan, tanpa contoh | Tiada penulisan perenggan dibentangkan |

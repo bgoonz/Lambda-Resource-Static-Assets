@@ -1,9 +1,11 @@
 # 创造无障碍网页
 
 ![All About Accessibility](/sketchnotes/webdev101-a11y.png)
+
 > 涂鸦笔记作者：[Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 课前小测
+
 [课前小测](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/5?loc=zh_cn)
 
 > 互联网的力量存在于其普适性中，让包括残障人士在内的每个人都能访问互联网，是其中不可或缺的一方面。
@@ -116,12 +118,12 @@ CSS 让你可以完全随意地控制页面中任何元素的外观。你可以�
 
 想象一个下面这样的网页：
 
-| 产品         | 详情                | 预订         |
-| ------------ | ------------------ | ------------ |
-| 小玩意       | [详情]('#')         | [预订]('#')  |
-| 超棒的小玩意  | [详情]('#')        | [预订]('#')  |
+| 产品         | 详情        | 预订        |
+| ------------ | ----------- | ----------- |
+| 小玩意       | [详情]('#') | [预订]('#') |
+| 超棒的小玩意 | [详情]('#') | [预订]('#') |
 
-在这个例子中，复制“详情”和“预订”这两个文本对于使用浏览器的用户来说是没有理解障碍的。然而，使用屏幕阅读器的用户则只会听到对 *详情* 和 *预订* 这两个词的两次毫无上下文的复读。
+在这个例子中，复制“详情”和“预订”这两个文本对于使用浏览器的用户来说是没有理解障碍的。然而，使用屏幕阅读器的用户则只会听到对 _详情_ 和 _预订_ 这两个词的两次毫无上下文的复读。
 
 为了处理这类情况，HTML 支持一些被称为 [Accessible Rich Internet Applications (ARIA)](https://developer.mozilla.org/zh-CN/docs/Web/Accessibility/ARIA) 的属性。这些属性让你可以为屏幕阅读提供一些额外的信息。
 
@@ -129,7 +131,7 @@ CSS 让你可以完全随意地控制页面中任何元素的外观。你可以�
 
 当页面格式不允许你直接用文本描述链接时，你可以使用 `aria-label` 属性来对链接进行描述。对于一个小玩意的详情描述可以被设置为：
 
-``` html
+```html
 <a href="#" aria-label="小玩意的详情">详情</a>
 ```
 
@@ -188,7 +190,7 @@ CSS 让你可以完全随意地控制页面中任何元素的外观。你可以�
     </div>
     <div class="main-content">
       <div>
-        <p class="page-title">Welcome to Turtle Ipsum. 
+        <p class="page-title">Welcome to Turtle Ipsum.
             <a href="">Click here</a> to learn more.
         </p>
         <p class="article-text">
@@ -215,6 +217,7 @@ CSS 让你可以完全随意地控制页面中任何元素的外观。你可以�
 ```
 
 ## 课后小测
+
 [课后小测](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/6?loc=zh_cn)
 
 ## 复习 & 自学
@@ -222,7 +225,7 @@ CSS 让你可以完全随意地控制页面中任何元素的外观。你可以�
 许多政府有关于无障碍要求的法律，阅读一下你的国家与无障碍相关的法律。它涉及了哪些方面，又有哪些方面没有涉及？[这个政府网站](https://accessibility.blog.gov.uk/)是一个例子。
 
 ## 作业
- 
+
 [分析一个非无障碍网站](assignment.zh-cn.md)
 
 参考：[Turtle Ipsum](https://github.com/Instrument/semantic-html-sample)，作者：Instrument

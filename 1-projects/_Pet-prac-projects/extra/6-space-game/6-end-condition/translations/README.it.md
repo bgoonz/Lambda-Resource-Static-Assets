@@ -4,18 +4,18 @@
 
 [Quiz Pre-Lezione](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/39?loc=it)
 
-Esistono diversi modi per esprimere una *condizione di fine gioco*. Spetta al creatore del gioco dire perché il gioco è finito. Ecco alcuni motivi, si supponga di parlare del gioco spaziale costruito finora:
+Esistono diversi modi per esprimere una _condizione di fine gioco_. Spetta al creatore del gioco dire perché il gioco è finito. Ecco alcuni motivi, si supponga di parlare del gioco spaziale costruito finora:
 
-- Un  **numero `N` di astronavi nemiche sono state distrutte**: è abbastanza comune se il gioco viene diviso in diversi livelli che si debba distruggere `N` astronavi nemiche per completare un livello
+- Un **numero `N` di astronavi nemiche sono state distrutte**: è abbastanza comune se il gioco viene diviso in diversi livelli che si debba distruggere `N` astronavi nemiche per completare un livello
 - **La propria nave è stata distrutta**: ci sono sicuramente giochi in si perde la partita se la propria astronave viene distrutta. Un altro approccio comune è il concetto di vite. Ogni volta che una propria astronave viene distrutta, sottrae una vita. Una volta perse tutte le vite, si perde la partita.
-- **Sono stati raccolti `N` punti**: un'altra condizione finale comune è che il giocatore raccolga punti. Il modo in cui ottenere punti dipende dallo sviluppatore, ma è abbastanza comune assegnare punti a varie attività come distruggere una astronave nemica o forse raccogliere elementi che vengono *rilasciati* quando gli oggetti vengono distrutti.
+- **Sono stati raccolti `N` punti**: un'altra condizione finale comune è che il giocatore raccolga punti. Il modo in cui ottenere punti dipende dallo sviluppatore, ma è abbastanza comune assegnare punti a varie attività come distruggere una astronave nemica o forse raccogliere elementi che vengono _rilasciati_ quando gli oggetti vengono distrutti.
 - **Completare un livello**: questo potrebbe coinvolgere diverse condizioni come `X` astronavi nemiche distrutte, `Y` punti raccolti o forse che è stato raccolto un oggetto specifico.
 
 ## Riavvio
 
-Se le persone apprezzano il  gioco, è probabile che vogliano rigiocarlo. Una volta che il gioco finisce per qualsiasi motivo, si dovrebbe offrire un'alternativa per il riavvio.
+Se le persone apprezzano il gioco, è probabile che vogliano rigiocarlo. Una volta che il gioco finisce per qualsiasi motivo, si dovrebbe offrire un'alternativa per il riavvio.
 
-✅ Si pensi alle condizioni per le quali si ritiene che un gioco finisca e poi a come  viene chiesto di riavviare
+✅ Si pensi alle condizioni per le quali si ritiene che un gioco finisca e poi a come viene chiesto di riavviare
 
 ## Cosa costruire
 
@@ -60,7 +60,9 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
    }
 
    function isEnemiesDead() {
-     const enemies = gameObjects.filter((go) => go.type === "Enemy" && !go.dead);
+     const enemies = gameObjects.filter(
+       (go) => go.type === "Enemy" && !go.dead
+     );
      return enemies.length === 0;
    }
    ```
@@ -69,29 +71,29 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
 
    ```javascript
    eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-       first.dead = true;
-       second.dead = true;
-       hero.incrementPoints();
+     first.dead = true;
+     second.dead = true;
+     hero.incrementPoints();
 
-       if (isEnemiesDead()) {
-         eventEmitter.emit(Messages.GAME_END_WIN);
-       }
+     if (isEnemiesDead()) {
+       eventEmitter.emit(Messages.GAME_END_WIN);
+     }
    });
 
    eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
-       enemy.dead = true;
-       hero.decrementLife();
-       if (isHeroDead())  {
-         eventEmitter.emit(Messages.GAME_END_LOSS);
-         return; // loss before victory
-       }
-       if (isEnemiesDead()) {
-         eventEmitter.emit(Messages.GAME_END_WIN);
-       }
+     enemy.dead = true;
+     hero.decrementLife();
+     if (isHeroDead()) {
+       eventEmitter.emit(Messages.GAME_END_LOSS);
+       return; // loss before victory
+     }
+     if (isEnemiesDead()) {
+       eventEmitter.emit(Messages.GAME_END_WIN);
+     }
    });
 
    eventEmitter.on(Messages.GAME_END_WIN, () => {
-       endGame(true);
+     endGame(true);
    });
 
    eventEmitter.on(Messages.GAME_END_LOSS, () => {
@@ -106,7 +108,7 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
    GAME_END_WIN: "GAME_END_WIN",
    ```
 
-2. **Aggiungere il codice di riavvio** che fa ripartire il gioco con la semplice pressione di un pulsante selezionato.
+1. **Aggiungere il codice di riavvio** che fa ripartire il gioco con la semplice pressione di un pulsante selezionato.
 
    1. **Mettersi in ascolto per la pressione del tasto `Invio`**. Modificare l'eventListener di window per ascoltare questa pressione
 
@@ -158,11 +160,11 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
               "You died !!! Press [Enter] to start a new game Captain Pew Pew"
             );
           }
-        }, 200)  
+        }, 200);
       }
       ```
 
-   1. **Logica di riavvio**. Quando tutte le vite sono perse o il giocatore ha vinto la partita, mostrare che il gioco può essere riavviato. Inoltre, riavviare il gioco quando viene premuto il tasto di *riavvio* (si può decidere quale tasto deve essere mappato per il riavvio).
+   1. **Logica di riavvio**. Quando tutte le vite sono perse o il giocatore ha vinto la partita, mostrare che il gioco può essere riavviato. Inoltre, riavviare il gioco quando viene premuto il tasto di _riavvio_ (si può decidere quale tasto deve essere mappato per il riavvio).
 
       1. Creare la funzione `resetGame()` :
 

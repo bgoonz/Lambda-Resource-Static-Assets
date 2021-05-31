@@ -1,9 +1,11 @@
 # Nozioni di base su JavaScript: tipi di dato
 
 ![Nozioni di base su JavaScript: tipi di dati](/sketchnotes/webdev101-js-datatypes.png)
+
 > Sketchnote di [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Quiz pre-lezione
+
 [Quiz pre-lezione](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/7?loc=it)
 
 Questa lezione copre le basi di JavaScript, il linguaggio che fornisce l'interattività sul web.
@@ -20,7 +22,8 @@ La creazione e la **dichiarazione** di una variabile hanno la seguente sintassi 
 
 - **Parola chiave**. Le parole chiave possono essere `let` o `var`.
 
-   > Nota, la parola chiave `let` è stata introdotta in ES6 e assegna alla variabile un cosiddetto _ambito di blocco_. Si consiglia di preferire `let` a `var`. Si trattereranno i blocchi di ambito in modo più approfondito nelle parti future.
+  > Nota, la parola chiave `let` è stata introdotta in ES6 e assegna alla variabile un cosiddetto _ambito di blocco_. Si consiglia di preferire `let` a `var`. Si trattereranno i blocchi di ambito in modo più approfondito nelle parti future.
+
 - **Il nome della variabile**, questo è un nome che sceglie lo sviluppatore
 
 ### Compito - Lavorare con le variabili
@@ -41,7 +44,7 @@ La creazione e la **dichiarazione** di una variabile hanno la seguente sintassi 
 
    > Nota: l'uso di `=` in questa lezione significa che si utilizza un "operatore di assegnazione", utilizzato per assegnare un valore a una variabile. Non denota uguaglianza.
 
-   `myVariable` è stata ora *inizializzata* con il valore 123.
+   `myVariable` è stata ora _inizializzata_ con il valore 123.
 
 1. **Esecuzione del refactoring**. Sostituire il proprio codice con la seguente dichiarazione.
 
@@ -73,30 +76,31 @@ Le costanti sono simili alle variabili, con due eccezioni:
 
 - **Devono avere un valore**. Le costanti devono essere inizializzate o si verificherà un errore durante l'esecuzione del codice.
 - **Il riferimento non può essere modificato**. Il riferimento di una costante non può essere modificato una volta inizializzato o si verificherà un errore durante l'esecuzione del codice. Si considerino due esempi:
+
   - **Valore semplice**. Quanto segue NON è consentito:
 
-      ```javascript
-      const PI = 3;
-      PI = 4; // non consentito
-      ```
+    ```javascript
+    const PI = 3;
+    PI = 4; // non consentito
+    ```
 
   - **Il riferimento all'oggetto è protetto**. Quanto segue NON è consentito:
 
-      ```javascript
-      const obj = { a: 3 };
-      obj = { b: 5 } // non consentito
-      ```
+    ```javascript
+    const obj = { a: 3 };
+    obj = { b: 5 }; // non consentito
+    ```
 
   - **Il valore dell'oggetto NON è protetto**. Quanto segue E' consentito:
 
-      ```javascript
-      const obj = { a: 3 };
-      obj.a = 5;  // consentito
-      ```
+    ```javascript
+    const obj = { a: 3 };
+    obj.a = 5; // consentito
+    ```
 
-      Sopra si sta modificando il valore dell'oggetto ma non il riferimento stesso, il che lo rende consentito.
+    Sopra si sta modificando il valore dell'oggetto ma non il riferimento stesso, il che lo rende consentito.
 
-   > Nota, `const` indica che il riferimento è protetto dalla riassegnazione. Il valore però non è _immutabile_ e può cambiare, soprattutto se si tratta di un costrutto complesso come un oggetto.
+  > Nota, `const` indica che il riferimento è protetto dalla riassegnazione. Il valore però non è _immutabile_ e può cambiare, soprattutto se si tratta di un costrutto complesso come un oggetto.
 
 ## Tipi di Dato
 
@@ -149,7 +153,6 @@ let myString2 = "World";
 myString1 + myString2 + "!"; //HelloWorld!
 myString1 + " " + myString2 + "!"; //Hello World!
 myString1 + ", " + myString2 + "!"; //Hello, World!
-
 ```
 
 ✅ Perchè `1 + 1 = 2 in` JavaScript, ma `'1' + '1' = 11?` Ci si rifletta. Che dire di `"1" + 1`?
@@ -161,7 +164,7 @@ let myString1 = "Hello";
 let myString2 = "World";
 
 `${myString1} ${myString2}!` //Hello World!
-`${myString1}, ${myString2}!` //Hello, World!
+`${myString1}, ${myString2}!`; //Hello, World!
 ```
 
 Si possono raggiungere i propri obiettivi di formattazione con entrambi i metodi, ma i template literal rispetteranno eventuali spazi e interruzioni di riga.
@@ -170,7 +173,7 @@ Si possono raggiungere i propri obiettivi di formattazione con entrambi i metodi
 
 ### Booleani
 
-I  booleani possono avere solo due valori: vero (`true`) o falso (`false`). I booleani possono aiutare a prendere decisioni su quali righe di codice devono essere eseguite quando vengono soddisfatte determinate condizioni. In molti casi, [gli operatori](#operators) assistono nell'impostazione del valore di un Booleano e spesso si noteranno e scriveranno variabili inizializzate o i loro valori aggiornati con un operatore.
+I booleani possono avere solo due valori: vero (`true`) o falso (`false`). I booleani possono aiutare a prendere decisioni su quali righe di codice devono essere eseguite quando vengono soddisfatte determinate condizioni. In molti casi, [gli operatori](#operators) assistono nell'impostazione del valore di un Booleano e spesso si noteranno e scriveranno variabili inizializzate o i loro valori aggiornati con un operatore.
 
 - `let myTrueBool = true`
 - `let myFalseBool = false`
@@ -184,6 +187,7 @@ I  booleani possono avere solo due valori: vero (`true`) o falso (`false`). I bo
 JavaScript è noto per i suoi modi sorprendenti di gestire talvolta i tipi di dato. Effettuare un po' di ricerca su questi "trabocchetti". Ad esempio: la distinzione tra maiuscole e minuscole può mordere! Provare questo nella propria console: `let age = 1; let Age = 2; age == Age` (risulta `false` - perché?). Quali altri trabocchetti si riescono a trovare?
 
 ## quiz post-lezione
+
 [Quiz post-lezione](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/8?loc=it)
 
 ## Revisione e auto apprendimento

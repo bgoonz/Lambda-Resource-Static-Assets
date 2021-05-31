@@ -8,6 +8,6 @@ Kijk of u een functie kunt maken met een combinatie van parameters en parameters
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                                                                              | Voldoende                                                         | Moet worden verbeterd |
-| -------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------- |
-|          | Oplossing wordt geboden met twee of meer goed presterende functies met diverse parameters | Werkoplossing wordt aangeboden met één functie en enkele parameters | Oplossing heeft bugs |
+| Criteria | Voorbeeldig                                                                               | Voldoende                                                           | Moet worden verbeterd |
+| -------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | --------------------- |
+|          | Oplossing wordt geboden met twee of meer goed presterende functies met diverse parameters | Werkoplossing wordt aangeboden met één functie en enkele parameters | Oplossing heeft bugs  |

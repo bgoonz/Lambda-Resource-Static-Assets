@@ -21,20 +21,13 @@ Gegeven de volgende array `allStudents` die alle studenten en hun cijfers verteg
 > TIP, gebruik een for-loop, if...else en vergelijkingsoperatoren:
 
 ```javascript
-let allStudents = [
-  'A',
-  'B-',
-  1,
-  4,
-  5,
-  2
-]
+let allStudents = ["A", "B-", 1, 4, 5, 2];
 
 let studentsWhoPass = [];
 ```
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                      | Voldoende                      | Moet worden verbeterd               |
-| -------- | ------------------------------ | ----------------------------- | ------------------------------- |
+| Criteria | Voorbeeldig                               | Voldoende                                   | Moet worden verbeterd                  |
+| -------- | ----------------------------------------- | ------------------------------------------- | -------------------------------------- |
 |          | De complete oplossing wordt gepresenteerd | Gedeeltelijke oplossing wordt gepresenteerd | Oplossing met bugs wordt gepresenteerd |

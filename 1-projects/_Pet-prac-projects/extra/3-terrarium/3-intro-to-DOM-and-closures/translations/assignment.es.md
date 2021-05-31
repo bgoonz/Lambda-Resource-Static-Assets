@@ -6,6 +6,6 @@ Investigue el DOM un poco más 'adoptando' un elemento DOM. Visite la [lista de 
 
 ## Rúbrica
 
-| Criterios | Ejemplar | Adecuado | Necesita mejorar |
-| -------- | --------------------------------------------- | ------------------------------------------------ | ----------------------- |
-| | Se presenta la redacción del párrafo, con ejemplo | Se presenta la redacción del párrafo, sin ejemplo | No se presenta ninguna reseña |
+| Criterios | Ejemplar                                          | Adecuado                                          | Necesita mejorar              |
+| --------- | ------------------------------------------------- | ------------------------------------------------- | ----------------------------- |
+|           | Se presenta la redacción del párrafo, con ejemplo | Se presenta la redacción del párrafo, sin ejemplo | No se presenta ninguna reseña |

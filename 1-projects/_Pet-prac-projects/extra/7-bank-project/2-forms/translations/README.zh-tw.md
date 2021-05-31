@@ -18,7 +18,7 @@
 
 ```sh
 curl http://localhost:5000/api
-# -> 會回傳結果 "Bank API v1.0.0" 
+# -> 會回傳結果 "Bank API v1.0.0"
 ```
 
 ---
@@ -30,7 +30,7 @@ curl http://localhost:5000/api
 有許多種 `<input>` 的[種類](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)，舉例來說，若要建立使用者輸入使用者名稱的地方，你可以：
 
 ```html
-<input id="username" name="username" type="text">
+<input id="username" name="username" type="text" />
 ```
 
 `name` 屬性同時亦是表單傳輸資料的名稱。`id` 屬性是用來與 `<label>` 做表單控制(form control)的連接。
@@ -47,7 +47,7 @@ curl http://localhost:5000/api
 
 ### 課題
 
-在 `login` 模板內加入表單。我們需要*使用者名稱(username)*的輸入框與*登入(Login)*的按鈕。 
+在 `login` 模板內加入表單。我們需要*使用者名稱(username)*的輸入框與*登入(Login)*的按鈕。
 
 ```html
 <template id="login">
@@ -56,7 +56,7 @@ curl http://localhost:5000/api
     <h2>Login</h2>
     <form id="loginForm">
       <label for="username">Username</label>
-      <input id="username" name="user" type="text">
+      <input id="username" name="user" type="text" />
       <button>Login</button>
     </form>
   </section>
@@ -73,17 +73,17 @@ curl http://localhost:5000/api
 現在，我們加入第二張表單給用戶註冊使用，就像前一張一樣：
 
 ```html
-<hr/>
+<hr />
 <h2>Register</h2>
 <form id="registerForm">
   <label for="user">Username</label>
-  <input id="user" name="user" type="text">
+  <input id="user" name="user" type="text" />
   <label for="currency">Currency</label>
-  <input id="currency" name="currency" type="text" value="$">
+  <input id="currency" name="currency" type="text" value="$" />
   <label for="description">Description</label>
-  <input id="description" name="description" type="text">
+  <input id="description" name="description" type="text" />
   <label for="balance">Current balance</label>
-  <input id="balance" name="balance" type="number" value="0">
+  <input id="balance" name="balance" type="number" value="0" />
   <button>Register</button>
 </form>
 ```
@@ -95,7 +95,7 @@ curl http://localhost:5000/api
 
 ## 提交資料給伺服器
 
-現在我們有可以使用的 UI 了，下一個步驟要將資料送給我們的伺服器。讓我們來快速地測試一下程式：在點擊 *Login* 或 *Register* 按鈕後，發生了什麼事？
+現在我們有可以使用的 UI 了，下一個步驟要將資料送給我們的伺服器。讓我們來快速地測試一下程式：在點擊 _Login_ 或 _Register_ 按鈕後，發生了什麼事？
 
 你有注意到瀏覽器的網址列改變了嗎？
 
@@ -116,10 +116,14 @@ curl http://localhost:5000/api
 加入 `action` 與 `method` 屬性到註冊表單之中：
 
 ```html
-<form id="registerForm" action="//localhost:5000/api/accounts" method="POST">
+<form
+  id="registerForm"
+  action="//localhost:5000/api/accounts"
+  method="POST"
+></form>
 ```
 
-現在，試著以你的名字申請新的帳戶。在點擊 *Register* 按鈕後，你應該能看到像這樣的畫面：
+現在，試著以你的名字申請新的帳戶。在點擊 _Register_ 按鈕後，你應該能看到像這樣的畫面：
 
 ![瀏覽器網址為 localhost:5000/api/accounts，並顯示 JSON 的資料字串。](../images/form-post.png)
 
@@ -131,7 +135,7 @@ curl http://localhost:5000/api
 
 你可能會注意到，這些行動間出現了一個小問題：在提交表單時，我們離開了網頁應用，瀏覽器又重新導回到伺服器的網址。我們試著避免網頁應用重新載入所有的頁面，做出[單一頁面應用程式 (SPA)](https://zh.wikipedia.org/zh-tw/%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8)。
 
-為了讓傳遞資料給伺服器時，不發生頁面重新載入的情況，我們需要使用 JavaScript。 
+為了讓傳遞資料給伺服器時，不發生頁面重新載入的情況，我們需要使用 JavaScript。
 
 比起直接在 `<form>` 元素的 `action` 屬性加入網址，你可以使用 `javascript:` 字串接在程式語句前頭來執行自訂的行為。使用這方法也意味著你需要額外修改一些原本瀏覽器會做的行為。
 
@@ -144,14 +148,14 @@ curl http://localhost:5000/api
 將註冊表單的 `action` 替換為：
 
 ```html
-<form id="registerForm" action="javascript:register()">
+<form id="registerForm" action="javascript:register()"></form>
 ```
 
 開啟 `app.js`，加入新的函式 `register`：
 
 ```js
 function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const data = Object.fromEntries(formData);
   const jsonData = JSON.stringify(data);
@@ -166,14 +170,14 @@ function register() {
 ```js
 async function createAccount(account) {
   try {
-    const response = await fetch('//localhost:5000/api/accounts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: account
+    const response = await fetch("//localhost:5000/api/accounts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: account,
     });
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    return { error: error.message || "Unknown error" };
   }
 }
 ```
@@ -209,16 +213,16 @@ async function register() {
 
 ```js
 async function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const jsonData = JSON.stringify(Object.fromEntries(formData));
   const result = await createAccount(jsonData);
 
   if (result.error) {
-    return console.log('An error occured:', result.error);
+    return console.log("An error occured:", result.error);
   }
 
-  console.log('Account created!', result);
+  console.log("Account created!", result);
 }
 ```
 
@@ -230,7 +234,7 @@ async function register() {
 
 ## 資料驗證
 
-試著在註冊新帳戶時，不輸入你的使用者名稱，你會發現伺服器回傳了錯誤狀態訊息：[400 (Bad Request)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).)。
+試著在註冊新帳戶時，不輸入你的使用者名稱，你會發現伺服器回傳了錯誤狀態訊息：[400 (Bad Request)](<https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).>)。
 
 在傳輸資料給伺服器之前，最好先[驗證表單資料](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)，以確保我們傳送合法的網頁請求。 HTML5 表單控制內建包含了驗證方法，使用了多樣的屬性： controls provides built-in validation using various attributes:
 
@@ -248,10 +252,10 @@ async function register() {
 
 ```html
 <label for="user">Username (required)</label>
-<input id="user" name="user" type="text" required>
+<input id="user" name="user" type="text" required />
 ...
 <label for="currency">Currency (required)</label>
-<input id="currency" name="currency" type="text" value="$" required>
+<input id="currency" name="currency" type="text" value="$" required />
 ```
 
 伺服器並沒設定輸入框的文字上限，定義合理的文字輸入上限是必要的。
@@ -259,14 +263,21 @@ async function register() {
 在文字框內加入 `maxlength` 屬性：
 
 ```html
-<input id="user" name="user" type="text" maxlength="20" required>
+<input id="user" name="user" type="text" maxlength="20" required />
 ...
-<input id="currency" name="currency" type="text" value="$" maxlength="5" required>
+<input
+  id="currency"
+  name="currency"
+  type="text"
+  value="$"
+  maxlength="5"
+  required
+/>
 ...
-<input id="description" name="description" type="text" maxlength="100">
+<input id="description" name="description" type="text" maxlength="100" />
 ```
 
-現在，如果文字框並沒有滿足我們所定義的規則時，在點擊了 *Register* 按鈕後，你會看到：
+現在，如果文字框並沒有滿足我們所定義的規則時，在點擊了 _Register_ 按鈕後，你會看到：
 
 ![傳輸錯誤表單而出現驗證失敗的截圖](../images/validation-error.png)
 

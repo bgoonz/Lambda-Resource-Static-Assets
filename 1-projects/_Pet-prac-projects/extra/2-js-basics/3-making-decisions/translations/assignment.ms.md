@@ -18,23 +18,16 @@ Sistem gred lain mempunyai gred berikut `A, A-, B, B-, C, C-` di mana `A` adalah
 
 Memandangkan susunan berikut `allStudents` yang mewakili semua pelajar dan gred mereka, bina array baru` studentsWhoPass` yang mengandungi semua pelajar yang lulus.
 
-> TIP, gunakan (for-loop) dan  (if...else) dan perbandingan pengendali:
+> TIP, gunakan (for-loop) dan (if...else) dan perbandingan pengendali:
 
 ```javascript
-let allStudents = [
-  'A',
-  'B-',
-  1,
-  4,
-  5,
-  2
-]
+let allStudents = ["A", "B-", 1, 4, 5, 2];
 
 let studentsWhoPass = [];
 ```
 
 ## Rubrik
 
-| Kriteria | Contoh                      | Mencukupi                      | Usaha Lagi              |
-| -------- | ------------------------------ | ----------------------------- | ------------------------------- |
+| Kriteria | Contoh                           | Mencukupi                        | Usaha Lagi                              |
+| -------- | -------------------------------- | -------------------------------- | --------------------------------------- |
 |          | Penyelesaian lengkap dikemukakan | Penyelesaian separuh dikemukakan | Penyelesaian dengan pepijat dikemukakan |

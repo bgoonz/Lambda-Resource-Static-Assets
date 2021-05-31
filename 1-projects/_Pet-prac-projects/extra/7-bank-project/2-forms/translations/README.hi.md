@@ -6,7 +6,7 @@
 
 ### परिचय
 
-लगभग सभी आधुनिक वेब ऐप्स में, आप अपना निजी स्थान रखने के लिए एक खाता बना सकते हैं। चूंकि एक ही समय में कई उपयोगकर्ता वेब ऐप तक पहुंच सकते हैं, इसलिए आपको प्रत्येक उपयोगकर्ता के व्यक्तिगत डेटा को अलग से संग्रहीत करने के लिए एक तंत्र की आवश्यकता होती है और जानकारी प्रदर्शित करने के लिए कौन सी जानकारी का चयन करना चाहिए। हम [उपयोगकर्ता पहचान को सुरक्षित](https://en.wikipedia.org/wiki/Authentication) रूप से प्रबंधित करने के लिए को कवर नहीं करेंगे  क्योंकि यह अपने आप में एक व्यापक विषय है, लेकिन हम सुनिश्चित करेंगे कि प्रत्येक उपयोगकर्ता एक बनाने में सक्षम है (या अधिक) हमारे ऐप पर बैंक खाता।
+लगभग सभी आधुनिक वेब ऐप्स में, आप अपना निजी स्थान रखने के लिए एक खाता बना सकते हैं। चूंकि एक ही समय में कई उपयोगकर्ता वेब ऐप तक पहुंच सकते हैं, इसलिए आपको प्रत्येक उपयोगकर्ता के व्यक्तिगत डेटा को अलग से संग्रहीत करने के लिए एक तंत्र की आवश्यकता होती है और जानकारी प्रदर्शित करने के लिए कौन सी जानकारी का चयन करना चाहिए। हम [उपयोगकर्ता पहचान को सुरक्षित](https://en.wikipedia.org/wiki/Authentication) रूप से प्रबंधित करने के लिए को कवर नहीं करेंगे क्योंकि यह अपने आप में एक व्यापक विषय है, लेकिन हम सुनिश्चित करेंगे कि प्रत्येक उपयोगकर्ता एक बनाने में सक्षम है (या अधिक) हमारे ऐप पर बैंक खाता।
 
 इस भाग में हम अपने वेब ऐप में लॉगिन और पंजीकरण को जोड़ने के लिए HTML रूपों का उपयोग करेंगे। हम देखेंगे कि डेटा को सर्वर एपीआई को प्रोग्रामेटिक रूप से कैसे भेजा जाए, और अंततः उपयोगकर्ता इनपुट के लिए बुनियादी सत्यापन नियमों को कैसे परिभाषित किया जाए।
 
@@ -30,13 +30,12 @@ curl http://localhost:5000/api
 `<input>` के विभिन्न [प्रकार](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) के कई उदाहरण हैं, उदाहरण के लिए एक फ़ील्ड बनाने के लिए जहां उपयोगकर्ता आप उपयोग कर सकते हैं इसके उपयोगकर्ता नाम दर्ज कर सकते हैं:
 
 ```html
-<input id="username" name="username" type="text">
+<input id="username" name="username" type="text" />
 ```
 
 जब फॉर्म डेटा को भेज दिया जाएगा तो `name` विशेषता को संपत्ति के नाम के रूप में उपयोग किया जाएगा। `id` विशेषता का उपयोग फॉर्म नियंत्रण के साथ एक `label` को जोड़ने के लिए किया जाता है।
 
-> 
-एक विचार पाने के लिए [`<input>` प्रकार](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) और [अन्य फोरम कोन्टरोल्स](https://developer.mozilla.org/en-US/docs/Learn/Forms/Other_form_controls) की संपूर्ण सूची पर एक नज़र डालें अपने UI का निर्माण करते समय आप उपयोग कर सकते हैं सभी देशी UI तत्व।
+> एक विचार पाने के लिए [`<input>` प्रकार](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) और [अन्य फोरम कोन्टरोल्स](https://developer.mozilla.org/en-US/docs/Learn/Forms/Other_form_controls) की संपूर्ण सूची पर एक नज़र डालें अपने UI का निर्माण करते समय आप उपयोग कर सकते हैं सभी देशी UI तत्व।
 
 ✅ ध्यान दें कि `<input>` एक [खाली एलेमेन्ट](https://developer.mozilla.org/en-US/docs/Glossary/Empty_element) है, जिस पर आपको एक मिलान समापन टैग नहीं जोड़ना चाहिए। हालाँकि आप स्व-समापन `<input/>` संकेतन का उपयोग कर सकते हैं, लेकिन इसकी आवश्यकता नहीं है।
 
@@ -48,7 +47,7 @@ curl http://localhost:5000/api
 
 ### टास्क
 
-आइए `login` टेम्प्लेट में एक फ़ॉर्म जोड़कर शुरू करें। हमें एक *उपयोगकर्ता नाम* फ़ील्ड और एक *लॉगिन* बटन की आवश्यकता होगी।
+आइए `login` टेम्प्लेट में एक फ़ॉर्म जोड़कर शुरू करें। हमें एक _उपयोगकर्ता नाम_ फ़ील्ड और एक _लॉगिन_ बटन की आवश्यकता होगी।
 
 ```html
 <template id="login">
@@ -57,7 +56,7 @@ curl http://localhost:5000/api
     <h2>Login</h2>
     <form id="loginForm">
       <label for="username">Username</label>
-      <input id="username" name="user" type="text">
+      <input id="username" name="user" type="text" />
       <button>Login</button>
     </form>
   </section>
@@ -74,17 +73,17 @@ curl http://localhost:5000/api
 अब हम पंजीकरण के लिए दूसरा रूप जोड़ेंगे, पिछले एक के नीचे:
 
 ```html
-<hr/>
+<hr />
 <h2>Register</h2>
 <form id="registerForm">
   <label for="user">Username</label>
-  <input id="user" name="user" type="text">
+  <input id="user" name="user" type="text" />
   <label for="currency">Currency</label>
-  <input id="currency" name="currency" type="text" value="$">
+  <input id="currency" name="currency" type="text" value="$" />
   <label for="description">Description</label>
-  <input id="description" name="description" type="text">
+  <input id="description" name="description" type="text" />
   <label for="balance">Current balance</label>
-  <input id="balance" name="balance" type="number" value="0">
+  <input id="balance" name="balance" type="number" value="0" />
   <button>Register</button>
 </form>
 ```
@@ -96,7 +95,7 @@ curl http://localhost:5000/api
 
 ## सर्वर पर डेटा जमा करना
 
-अब जब हमारे पास एक कार्यात्मक UI है, तो अगला चरण हमारे सर्वर पर डेटा भेजने के लिए है। चलो हमारे वर्तमान कोड का उपयोग करके एक त्वरित परीक्षण करें: यदि आप *लॉगिन* या *रजिस्टर* बटन पर क्लिक करते हैं तो क्या होता है?
+अब जब हमारे पास एक कार्यात्मक UI है, तो अगला चरण हमारे सर्वर पर डेटा भेजने के लिए है। चलो हमारे वर्तमान कोड का उपयोग करके एक त्वरित परीक्षण करें: यदि आप _लॉगिन_ या _रजिस्टर_ बटन पर क्लिक करते हैं तो क्या होता है?
 
 क्या आपने अपने ब्राउज़र के URL अनुभाग में परिवर्तन को देखा है?
 
@@ -117,10 +116,14 @@ curl http://localhost:5000/api
 पंजीकरण फॉर्म में `action` और `method` गुण जोड़ें:
 
 ```html
-<form id="registerForm" action="//localhost:5000/api/accounts" method="POST">
+<form
+  id="registerForm"
+  action="//localhost:5000/api/accounts"
+  method="POST"
+></form>
 ```
 
-अब अपने नाम के साथ एक नया खाता पंजीकृत करने का प्रयास करें। * रजिस्टर * बटन पर क्लिक करने के बाद आपको कुछ इस तरह से देखना चाहिए:
+अब अपने नाम के साथ एक नया खाता पंजीकृत करने का प्रयास करें। _ रजिस्टर _ बटन पर क्लिक करने के बाद आपको कुछ इस तरह से देखना चाहिए:
 
 ![उपयोगकर्ता के डेटा के साथ एक JSON स्ट्रिंग दिखाते हुए, पता localhost:5000/api/accounts पर एक ब्राउज़र विंडो](../images/form-post.png)
 
@@ -143,14 +146,14 @@ curl http://localhost:5000/api
 पंजीकरण फॉर्म को `action` से बदलें:
 
 ```html
-<form id="registerForm" action="javascript:register()">
+<form id="registerForm" action="javascript:register()"></form>
 ```
 
 `app.js` खोलें `register` नामक एक नया फ़ंक्शन जोड़ें:
 
 ```js
 function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const data = Object.fromEntries(formData);
   const jsonData = JSON.stringify(data);
@@ -164,14 +167,14 @@ function register() {
 ```js
 async function createAccount(account) {
   try {
-    const response = await fetch('//localhost:5000/api/accounts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: account
+    const response = await fetch("//localhost:5000/api/accounts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: account,
     });
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    return { error: error.message || "Unknown error" };
   }
 }
 ```
@@ -207,16 +210,16 @@ async function register() {
 
 ```js
 async function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const jsonData = JSON.stringify(Object.fromEntries(formData));
   const result = await createAccount(jsonData);
 
   if (result.error) {
-    return console.log('An error occured:', result.error);
+    return console.log("An error occured:", result.error);
   }
 
-  console.log('Account created!', result);
+  console.log("Account created!", result);
 }
 ```
 
@@ -228,7 +231,7 @@ async function register() {
 
 ## डेटा मान्य
 
-यदि आप पहले उपयोगकर्ता नाम सेट किए बिना एक नया खाता पंजीकृत करने का प्रयास करते हैं, तो आप देख सकते हैं कि सर्वर स्थिति कोड [400 (खराब अनुरोध)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).) के साथ एक त्रुटि देता है
+यदि आप पहले उपयोगकर्ता नाम सेट किए बिना एक नया खाता पंजीकृत करने का प्रयास करते हैं, तो आप देख सकते हैं कि सर्वर स्थिति कोड [400 (खराब अनुरोध)](<https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).>) के साथ एक त्रुटि देता है
 
 किसी सर्वर पर डेटा भेजने से पहले, जब संभव हो, एक वैध अनुरोध भेजना सुनिश्चित करने के लिए पहले से [फॉर्म डेटा को मान्य करें](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation) यह एक अच्छा अभ्यास है। HTML5 फॉर्म नियंत्रण विभिन्न विशेषताओं का उपयोग करके अंतर्निहित मान्यता प्रदान करता है:
 
@@ -246,10 +249,10 @@ async function register() {
 
 ```html
 <label for="user">Username (required)</label>
-<input id="user" name="user" type="text" required>
+<input id="user" name="user" type="text" required />
 ...
 <label for="currency">Currency (required)</label>
-<input id="currency" name="currency" type="text" value="$" required>
+<input id="currency" name="currency" type="text" value="$" required />
 ```
 
 हालांकि यह विशेष सर्वर कार्यान्वयन अधिकतम लंबाई वाले क्षेत्रों पर विशिष्ट सीमाएँ लागू नहीं करता है, यह किसी भी उपयोगकर्ता पाठ प्रविष्टि के लिए उचित सीमा को परिभाषित करने के लिए हमेशा एक अच्छा अभ्यास है।
@@ -257,18 +260,25 @@ async function register() {
 टेक्स्ट फ़ील्ड में एक `maxlength` विशेषता जोड़ें:
 
 ```html
-<input id="user" name="user" type="text" maxlength="20" required>
+<input id="user" name="user" type="text" maxlength="20" required />
 ...
-<input id="currency" name="currency" type="text" value="$" maxlength="5" required>
+<input
+  id="currency"
+  name="currency"
+  type="text"
+  value="$"
+  maxlength="5"
+  required
+/>
 ...
-<input id="description" name="description" type="text" maxlength="100">
+<input id="description" name="description" type="text" maxlength="100" />
 ```
 
-अब यदि आप *रजिस्टर* बटन दबाते हैं और एक फ़ील्ड हमारे द्वारा परिभाषित सत्यापन नियम का सम्मान नहीं करता है, तो आपको कुछ इस तरह से देखना चाहिए:
+अब यदि आप _रजिस्टर_ बटन दबाते हैं और एक फ़ील्ड हमारे द्वारा परिभाषित सत्यापन नियम का सम्मान नहीं करता है, तो आपको कुछ इस तरह से देखना चाहिए:
 
 ![फॉर्म जमा करने का प्रयास करते समय सत्यापन त्रुटि दिखाते हुए स्क्रीनशॉट](../images/validation-error.png)
 
-इस तरह के सत्यापन *से पहले* किसी भी डेटा को सर्वर पर भेजने के लिए **क्लाइंट-साइड** सत्यापन कहा जाता है। लेकिन ध्यान दें कि डेटा भेजे बिना हमेशा सभी जांचों को बेहतर बनाना संभव नहीं है। उदाहरण के लिए, यदि सर्वर पर रिक्वेस्ट भेजे बिना एक ही यूज़रनेम के साथ कोई खाता पहले से मौजूद है तो हम यहाँ जाँच नहीं कर सकते। सर्वर पर निष्पादित अतिरिक्त सत्यापन को **सर्वर-साइड** सत्यापन कहा जाता है।
+इस तरह के सत्यापन _से पहले_ किसी भी डेटा को सर्वर पर भेजने के लिए **क्लाइंट-साइड** सत्यापन कहा जाता है। लेकिन ध्यान दें कि डेटा भेजे बिना हमेशा सभी जांचों को बेहतर बनाना संभव नहीं है। उदाहरण के लिए, यदि सर्वर पर रिक्वेस्ट भेजे बिना एक ही यूज़रनेम के साथ कोई खाता पहले से मौजूद है तो हम यहाँ जाँच नहीं कर सकते। सर्वर पर निष्पादित अतिरिक्त सत्यापन को **सर्वर-साइड** सत्यापन कहा जाता है।
 
 आमतौर पर दोनों को लागू करने की आवश्यकता होती है, और क्लाइंट-साइड सत्यापन का उपयोग करते समय उपयोगकर्ता को त्वरित प्रतिक्रिया प्रदान करके उपयोगकर्ता के अनुभव को बेहतर बनाता है, यह सुनिश्चित करने के लिए सर्वर-साइड सत्यापन महत्वपूर्ण है कि जिस उपयोगकर्ता डेटा में आप हेरफेर करते हैं वह ध्वनि और सुरक्षित है।
 

@@ -55,116 +55,116 @@ npm start
 
 ### 加入程式碼
 
-1. 從資料夾 `solution/assets/` **複製你需要的檔案** 到資料夾 `your-work` 中。你會加入檔案 `life.png`。在函式 window.onload 中加入 lifeImg ： 
+1. 從資料夾 `solution/assets/` **複製你需要的檔案** 到資料夾 `your-work` 中。你會加入檔案 `life.png`。在函式 window.onload 中加入 lifeImg ：
 
-    ```javascript
-    lifeImg = await loadTexture("assets/life.png");
-    ```
+   ```javascript
+   lifeImg = await loadTexture("assets/life.png");
+   ```
 
 1. 在檔案清單中加入 `lifeImg`：
 
-    ```javascript
-    let heroImg,
-    ...
-    lifeImg,
-    ...
-    eventEmitter = new EventEmitter();
-    ```
-  
-2. **新增變數**。 加入程式碼表達你的遊戲總分(0)和剩餘性命(3)，並顯示在畫面上。
+   ```javascript
+   let heroImg,
+   ...
+   lifeImg,
+   ...
+   eventEmitter = new EventEmitter();
+   ```
 
-3. **擴增函式 `updateGameObjects()`**。 擴增函式 `updateGameObjects()` 來處理敵軍碰撞：
+1. **新增變數**。 加入程式碼表達你的遊戲總分(0)和剩餘性命(3)，並顯示在畫面上。
 
-    ```javascript
-    enemies.forEach(enemy => {
-        const heroRect = hero.rectFromGameObject();
-        if (intersectRect(heroRect, enemy.rectFromGameObject())) {
-          eventEmitter.emit(Messages.COLLISION_ENEMY_HERO, { enemy });
-        }
-      })
-    ```
+1. **擴增函式 `updateGameObjects()`**。 擴增函式 `updateGameObjects()` 來處理敵軍碰撞：
 
-4. **加入 `life` 與 `points`**. 
+   ```javascript
+   enemies.forEach((enemy) => {
+     const heroRect = hero.rectFromGameObject();
+     if (intersectRect(heroRect, enemy.rectFromGameObject())) {
+       eventEmitter.emit(Messages.COLLISION_ENEMY_HERO, { enemy });
+     }
+   });
+   ```
+
+1. **加入 `life` 與 `points`**.
+
    1. **初始化變數**。 在 `Hero` class 的 `this.cooldown = 0` 下方，設定性命與分數：
 
-        ```javascript
-        this.life = 3;
-        this.points = 0;
-        ```
+      ```javascript
+      this.life = 3;
+      this.points = 0;
+      ```
 
    1. **在畫面上顯示變數內容**。 在畫面上繪製這些數值：
 
-        ```javascript
-        function drawLife() {
-          // TODO, 35, 27
-          const START_POS = canvas.width - 180;
-          for(let i=0; i < hero.life; i++ ) {
-            ctx.drawImage(
-              lifeImg, 
-              START_POS + (45 * (i+1) ), 
-              canvas.height - 37);
-          }
+      ```javascript
+      function drawLife() {
+        // TODO, 35, 27
+        const START_POS = canvas.width - 180;
+        for (let i = 0; i < hero.life; i++) {
+          ctx.drawImage(lifeImg, START_POS + 45 * (i + 1), canvas.height - 37);
         }
-        
-        function drawPoints() {
-          ctx.font = "30px Arial";
-          ctx.fillStyle = "red";
-          ctx.textAlign = "left";
-          drawText("Points: " + hero.points, 10, canvas.height-20);
-        }
-        
-        function drawText(message, x, y) {
-          ctx.fillText(message, x, y);
-        }
+      }
 
-        ```
+      function drawPoints() {
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "red";
+        ctx.textAlign = "left";
+        drawText("Points: " + hero.points, 10, canvas.height - 20);
+      }
+
+      function drawText(message, x, y) {
+        ctx.fillText(message, x, y);
+      }
+      ```
 
    1. **在遊戲迴圈中加入呼叫**。 請確保你加入這些函式到 `updateGameObjects()` 下方的 window.onload 內：
 
-        ```javascript
-        drawPoints();
-        drawLife();
-        ```
+      ```javascript
+      drawPoints();
+      drawLife();
+      ```
 
 1. **制定遊戲規則**。 制定下列的遊戲規則：
 
    1. **在英雄與敵人發生碰撞時**，扣除一條生命。
-   
+
       擴增 `Hero` class 來執行這段減法：
 
-        ```javascript
-        decrementLife() {
-          this.life--;
-          if (this.life === 0) {
-            this.dead = true;
-          }
+      ```javascript
+      decrementLife() {
+        this.life--;
+        if (this.life === 0) {
+          this.dead = true;
         }
-        ```
+      }
+      ```
 
    2. **當雷射擊中敵人時**，增加遊戲總分一百分。
 
       擴增 Hero class 來執行這段加法：
-    
-        ```javascript
-          incrementPoints() {
-            this.points += 100;
-          }
-        ```
 
-        加入這些函式到碰撞事件發送器中：
+      ```javascript
+        incrementPoints() {
+          this.points += 100;
+        }
+      ```
 
-        ```javascript
-        eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-           first.dead = true;
-           second.dead = true;
-           hero.incrementPoints();
-        })
+      加入這些函式到碰撞事件發送器中：
 
-        eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
-           enemy.dead = true;
-           hero.decrementLife();
-        });
-        ```
+      ```javascript
+      eventEmitter.on(
+        Messages.COLLISION_ENEMY_LASER,
+        (_, { first, second }) => {
+          first.dead = true;
+          second.dead = true;
+          hero.incrementPoints();
+        }
+      );
+
+      eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
+        enemy.dead = true;
+        hero.decrementLife();
+      });
+      ```
 
 ✅ 做點研究，探索其他使用到 JavaScript 與 Canvas 的遊戲。他們有什麼共同特徵？
 

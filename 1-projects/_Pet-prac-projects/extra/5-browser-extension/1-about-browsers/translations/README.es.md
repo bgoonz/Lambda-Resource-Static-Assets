@@ -1,6 +1,7 @@
 # Proyecto de extensión del navegador Parte 1: Todo sobre los navegadores
 
 ![Browser sketchnote](/sketchnotes/browser.jpg)
+
 > Sketchnote de [Wassim Chegham](https://dev.to/wassimchegham/ever-wondered-what-happens-when-you-type-in-a-url-in-an-address-bar-in-a-browser-3dob)
 
 ## [Pre-lecture prueba](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/23)
@@ -18,6 +19,7 @@ Pero, ¿qué es exactamente un navegador? Es una aplicación de software que per
 ✅ Un poco de historia: el primer navegador se llamó 'WorldWideWeb' y fue creado por Sir Tim Berners-Lee en 1990.
 
 ! [navegadores iniciales](images / earlybrowsers.jpg)
+
 > Algunos de los primeros navegadores, a través de [Karen McGrane](https://www.slideshare.net/KMcGrane/week-4-ixd-history-personal-computing)
 
 Cuando un usuario se conecta a Internet usando una dirección URL (Localizador uniforme de recursos), generalmente usando el Protocolo de transferencia de hipertexto a través de una dirección `http` o` https`, el navegador se comunica con un servidor web y busca una página web.
@@ -55,7 +57,6 @@ En esencia, el proceso será:
 
 ✅ Estas instrucciones pertenecen a extensiones que usted mismo construye; para instalar extensiones que se han lanzado a la tienda de extensiones del navegador asociada a cada navegador, debe navegar a esas [tiendas](https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home) e instalar la extensión de tu elección.
 
-
 ### Empezar
 
 Vas a crear una extensión de navegador que muestre la huella de carbono de tu región, mostrando el uso de energía de tu región y la fuente de energía. La extensión tendrá un formulario que recopila una clave API para que pueda acceder
@@ -72,13 +73,8 @@ API de CO2 Signal.
 
 Tómate un minuto para revisar el código base:
 
-dist
-     - | manifest.json (los valores predeterminados se establecen aquí)
-     - | index.html (marcado HTML de front-end aquí)
-     - | background.js (JS de fondo aquí)
-     - | main.js (JS construido)
-src
-     - | index.js (su código JS va aquí)
+dist - | manifest.json (los valores predeterminados se establecen aquí) - | index.html (marcado HTML de front-end aquí) - | background.js (JS de fondo aquí) - | main.js (JS construido)
+src - | index.js (su código JS va aquí)
 
 ✅ Una vez que tenga a mano su clave API y el código de región, guárdelos en algún lugar en una nota para uso futuro.
 
@@ -96,7 +92,6 @@ Comencemos por construir el HTML para el formulario y darle estilo con CSS.
 
 En la carpeta `/dist`, creará un formulario y un área de resultados. En el archivo `index.html`, complete el área delineada del formulario:
 
-
 ```HTML
 <form class="form-data" autocomplete="on">
 	<div>
@@ -111,8 +106,9 @@ En la carpeta `/dist`, creará un formulario y un área de resultados. En el arc
 		<input type="text" required class="api-key" />
 	</div>
 	<button class="search-btn">Enviar</button>
-</form>	
+</form>
 ```
+
 Este es el formulario donde se ingresará la información guardada y se guardará en el almacenamiento local.
 
 A continuación, cree el área de resultados; debajo de la etiqueta de formulario final, agregue algunos divs:
@@ -130,6 +126,7 @@ A continuación, cree el área de resultados; debajo de la etiqueta de formulari
 	<button class="clear-btn">Cambia región</button>
 </div>
 ```
+
 En este punto, puede probar una compilación. Asegúrese de instalar las dependencias del paquete de esta extensión:
 
 ```
@@ -144,7 +141,6 @@ Felicitaciones, ha dado los primeros pasos para crear una extensión de navegado
 
 🚀Challenge: Eche un vistazo a una tienda de extensiones de navegador e instale una en su navegador. Puede examinar sus archivos de formas interesantes. ¿Qué descubres?
 
-
 ## [Post-lecture prueba](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/24)
 
 ## Revisión y autoestudio
@@ -158,4 +154,3 @@ En esta lección aprendió un poco sobre la historia del navegador web; Aprovech
 [Una entrevista con Tim Berners-Lee](https://www.theguardian.com/technology/2019/mar/12/tim-berners-lee-on-30-years-of-the-web-if-we-sueñe-un-poco-podemos-conseguir-la-web-que-queremos)
 
 **Tarea**: [Cambia el estilo de tu extensión](assignment.md)
-

@@ -1,9 +1,11 @@
 # Creare Pagine Web Accessibili
 
 ![Tutto quanto riguarda l'Accessibilità](/sketchnotes/webdev101-a11y.png)
+
 > Sketchnote di [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Quiz Pre-Lezione
+
 [Quiz Pre-Lezione](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/5?loc=it)
 
 > La forza del Web è nella usa universalità. L'accesso garantito a tutti a prescindere dalla disabilità è us aspetto essenziale.
@@ -22,7 +24,7 @@ I [lettori di schermo](https://www.wikiwand.com/it/Screen_reader) sono strumenti
 
 Nella sua forma più elementare, uno screen reader leggerà una pagina dall'alto verso il basso in modo udibile. Se una pagina è tutta testo, il lettore trasmetterà le informazioni in modo simile a un browser. Naturalmente, le pagine web sono raramente puramente testuali; contengono collegamenti, grafica, colore e altri componenti visivi. È necessario prestare attenzione per garantire che queste informazioni vengano lette correttamente da uno screen reader.
 
-Ogni sviluppatore web dovrebbe acquisire familiarità con uno screen reader. Come evidenziato sopra, è il client che gli utenti dello sviluppatore  utilizzeranno. Allo stesso modo in cui si ha familiarità con il funzionamento di un browser, si dovrebbe imparare come funziona uno screen reader. Fortunatamente, gli screen reader sono integrati nella maggior parte dei sistemi operativi.
+Ogni sviluppatore web dovrebbe acquisire familiarità con uno screen reader. Come evidenziato sopra, è il client che gli utenti dello sviluppatore utilizzeranno. Allo stesso modo in cui si ha familiarità con il funzionamento di un browser, si dovrebbe imparare come funziona uno screen reader. Fortunatamente, gli screen reader sono integrati nella maggior parte dei sistemi operativi.
 
 Alcuni browser hanno anche strumenti incorporati ed estensioni che possono leggere il testo ad alta voce o persino fornire alcune funzionalità di navigazione di base, come [questi strumenti orientati all'accessibilità del browser Edge](https://support.microsoft.com/help/4000734/microsoft-edge-accessibility-features) . Anche questi sono importanti strumenti di accessibilità, ma funzionano in modo molto diverso dagli screen reader e non dovrebbero essere scambiati per strumenti di test per uno screen reader.
 
@@ -32,13 +34,13 @@ Alcuni browser hanno anche strumenti incorporati ed estensioni che possono legge
 
 Un altro strumento comunemente utilizzato dalle persone con problemi di vista è lo zoom. Il tipo più semplice di zoom è lo zoom statico, controllato tramite `Control + segno più (+)` o diminuendo la risoluzione dello schermo. Questo tipo di zoom provoca il ridimensionamento dell'intera pagina, quindi l'utilizzo [di una progettazione responsive](https://developer.mozilla.org/docs/Learn/CSS/CSS_layout/Responsive_Design) della pagina è importante per fornire una buona esperienza utente a livelli di zoom aumentati.
 
-Un altro tipo di zoom si basa su un software specializzato per ingrandire un'area dello schermo e fare una panoramica, proprio come usare una vera lente di ingrandimento. Su Windows, [Magnifier](https://support.microsoft.com/windows/use-magnifier-to-make-things-on-the-screen-easier-to-see-414948ba-8b1c-d3bd-8615-0e5e32204198) è integrato e   [ZoomText](https://www.freedomscientific.com/training/zoomtext/getting-started/) è un software di ingrandimento di terze parti con più funzionalità e una base di utenti più ampia. Sia macOS che iOS hanno un software di ingrandimento integrato chiamato [Zoom](https://www.apple.com/accessibility/mac/vision/).
+Un altro tipo di zoom si basa su un software specializzato per ingrandire un'area dello schermo e fare una panoramica, proprio come usare una vera lente di ingrandimento. Su Windows, [Magnifier](https://support.microsoft.com/windows/use-magnifier-to-make-things-on-the-screen-easier-to-see-414948ba-8b1c-d3bd-8615-0e5e32204198) è integrato e [ZoomText](https://www.freedomscientific.com/training/zoomtext/getting-started/) è un software di ingrandimento di terze parti con più funzionalità e una base di utenti più ampia. Sia macOS che iOS hanno un software di ingrandimento integrato chiamato [Zoom](https://www.apple.com/accessibility/mac/vision/).
 
 ### Verificatori di contrasto
 
 I colori sui siti web devono essere scelti con cura per rispondere alle esigenze degli utenti daltonici o delle persone che hanno difficoltà a vedere i colori a basso contrasto.
 
-✅ Provare un sito web che  piace usare per l'utilizzo del colore con un'estensione del browser come [il controllo del colore WCAG](https://microsoftedge.microsoft.com/addons/detail/wcag-color-contrast-check/idahaggnlnekelhgplklhfpchbfdmkjp?hl=en-US). Cosa si è appreso?
+✅ Provare un sito web che piace usare per l'utilizzo del colore con un'estensione del browser come [il controllo del colore WCAG](https://microsoftedge.microsoft.com/addons/detail/wcag-color-contrast-check/idahaggnlnekelhgplklhfpchbfdmkjp?hl=en-US). Cosa si è appreso?
 
 ### Lo strumento Faro (Lighthouse)
 
@@ -52,7 +54,7 @@ L'accessibilità è un argomento relativamente ampio. A supporto, sono disponibi
 
 - [Accessibile U - Università del Minnesota](https://accessibility.umn.edu/your-role/web-developers)
 
-Sebbene non si sarà in grado di coprire ogni aspetto della creazione di siti accessibili, di seguito sono riportati alcuni dei principi fondamentali che si vorranno 	implementare. Progettare una pagina accessibile dall'inizio è **sempre** più facile che tornare a una pagina esistente per renderla accessibile.
+Sebbene non si sarà in grado di coprire ogni aspetto della creazione di siti accessibili, di seguito sono riportati alcuni dei principi fondamentali che si vorranno implementare. Progettare una pagina accessibile dall'inizio è **sempre** più facile che tornare a una pagina esistente per renderla accessibile.
 
 ## Buoni principi di visualizzazione
 
@@ -64,7 +66,7 @@ Le persone vedono il mondo in modi diversi, e questo include i colori. Quando si
 
 ### Usa l'HTML corretto
 
-Con CSS e JavaScript è possibile far sembrare qualunque elemento come un qualsiasi tipo di controllo. `<span>` potrebbe essere usato per creare un  `<button>`, e `<b>` potrebbe diventare un collegamento ipertestuale. Sebbene questo possa essere considerato più facile da definire, non trasmette nulla a uno screen reader. Occorre usare l'HTML appropriato quando si creano i controlli su una pagina. Se si vuole un collegamento ipertestuale usare `<a>`. L'utilizzo dell'HTML corretto per il controllo corretto è chiamato fare uso dell'HTML semantico.
+Con CSS e JavaScript è possibile far sembrare qualunque elemento come un qualsiasi tipo di controllo. `<span>` potrebbe essere usato per creare un `<button>`, e `<b>` potrebbe diventare un collegamento ipertestuale. Sebbene questo possa essere considerato più facile da definire, non trasmette nulla a uno screen reader. Occorre usare l'HTML appropriato quando si creano i controlli su una pagina. Se si vuole un collegamento ipertestuale usare `<a>`. L'utilizzo dell'HTML corretto per il controllo corretto è chiamato fare uso dell'HTML semantico.
 
 ✅ Portarsi su qualsiasi sito web e controllare se i progettisti e gli sviluppatori stanno usando l'HTML correttamente. Si riesce a trovare un pulsante che dovrebbe essere un collegamento? Suggerimento: fare clic con il tasto destro e scegliere "Visualizza sorgente pagina" nel browser per esaminare il codice relativo.
 
@@ -102,7 +104,7 @@ I lettori di schermo hanno anche la capacità di leggere solo i collegamenti ipe
 
 ### Buon testo del collegamento
 
-Un buon testo del collegamento descrive brevemente cosa c'è dall'altra parte del collegamento. Nell'esempio sopra che parla di piccoli pinguini, il collegamento è alla pagina di Wikipedia sulla specie. La frase *piccoli pinguini* renderebbe il testo del collegamento perfetto in quanto chiarisce ciò che qualcuno imparerà se fa clic sul collegamento: piccoli pinguini.
+Un buon testo del collegamento descrive brevemente cosa c'è dall'altra parte del collegamento. Nell'esempio sopra che parla di piccoli pinguini, il collegamento è alla pagina di Wikipedia sulla specie. La frase _piccoli pinguini_ renderebbe il testo del collegamento perfetto in quanto chiarisce ciò che qualcuno imparerà se fa clic sul collegamento: piccoli pinguini.
 
 > Il [pinguino minore](https://www.wikiwand.com/it/Eudyptula_minor), a volte noto come il pinguino delle fate, è il più piccolo pinguino del mondo.
 
@@ -121,7 +123,7 @@ Si Immagini la pagina seguente:
 | Widget           | [Descrizione]('#') | [Ordine]('#') |
 | DMX Super Widget | [Descrizione]('#') | [Ordine]('#') |
 
-In questo esempio, la duplicazione del testo della descrizione e dell'ordine ha senso per qualcuno che utilizza un browser. Tuttavia, qualcuno che utilizza uno screen reader ascolterebbe solo le parole *descrizione* e *ordine* ripetute senza contesto.
+In questo esempio, la duplicazione del testo della descrizione e dell'ordine ha senso per qualcuno che utilizza un browser. Tuttavia, qualcuno che utilizza uno screen reader ascolterebbe solo le parole _descrizione_ e _ordine_ ripetute senza contesto.
 
 Per supportare questi tipi di scenari, HTML supporta una serie di attributi noti come [ARIA (Accessible Rich Internet Applications)](https://developer.mozilla.org/docs/Web/Accessibility/ARIA). Questi attributi consentono di fornire informazioni aggiuntive agli screen reader.
 
@@ -133,7 +135,7 @@ E' possibile utilizzare `aria-label` per descrivere il collegamento quando il fo
 <a href="#" aria-label="Widget description">description</a>
 ```
 
-✅ In generale, l'uso del markup semantico come descritto sopra sostituisce l'uso di ARIA, ma a volte non esiste un equivalente semantico per diversi widget HTML. Un buon esempio è una struttura ad albero. Non esiste un equivalente HTML per una struttura ad albero, quindi si identifica il generico  `<div>` per questo elemento con un ruolo e valori aria appropriati. La [documentazione MDN su ARIA](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) contiene ulteriori utili informazioni.
+✅ In generale, l'uso del markup semantico come descritto sopra sostituisce l'uso di ARIA, ma a volte non esiste un equivalente semantico per diversi widget HTML. Un buon esempio è una struttura ad albero. Non esiste un equivalente HTML per una struttura ad albero, quindi si identifica il generico `<div>` per questo elemento con un ruolo e valori aria appropriati. La [documentazione MDN su ARIA](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) contiene ulteriori utili informazioni.
 
 ```html
 <h2 id="tree-label">File Viewer</h2>
@@ -156,7 +158,7 @@ Alcuni utenti non sono in grado di utilizzare un mouse o un trackpad, affidandos
 
 ## Riepilogo
 
-Un Web accessibile ad alcuni non è un vero "world-wide web". Il modo migliore per garantire che i siti che si creano siano accessibili è incorporare le migliori pratiche di accessibilità sin dall'inizio. Sebbene siano necessari passaggi aggiuntivi, incorporare queste abilità nel flusso di lavoro ora significa che tutte le pagine che si creeranno  saranno accessibili.
+Un Web accessibile ad alcuni non è un vero "world-wide web". Il modo migliore per garantire che i siti che si creano siano accessibili è incorporare le migliori pratiche di accessibilità sin dall'inizio. Sebbene siano necessari passaggi aggiuntivi, incorporare queste abilità nel flusso di lavoro ora significa che tutte le pagine che si creeranno saranno accessibili.
 
 ---
 
@@ -215,6 +217,7 @@ Prendere questo HTML e riscriverlo per essere il più accessibile possibile, dat
 ```
 
 ## Quiz post-lezione
+
 [Quiz post-lezione](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/6?loc=it)
 
 ## Revisione e auto apprendimento

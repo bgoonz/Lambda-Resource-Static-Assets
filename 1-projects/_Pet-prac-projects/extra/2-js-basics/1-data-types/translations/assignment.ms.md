@@ -6,6 +6,6 @@ Bayangkan anda sedang membina keranjang belanja. Tulis beberapa dokumentasi meng
 
 ## Rubrik
 
-Kriteria | Contoh | Mencukupi | Usaha Lagi
---- | --- | --- | -- |
-||Enam jenis data disenaraikan dan diterokai secara terperinci, mendokumentasikan penggunaannya|Empat jenis data diterokai|Duo jenis data diterokai|
+| Kriteria | Contoh                                                                                        | Mencukupi                  | Usaha Lagi               |
+| -------- | --------------------------------------------------------------------------------------------- | -------------------------- | ------------------------ |
+|          | Enam jenis data disenaraikan dan diterokai secara terperinci, mendokumentasikan penggunaannya | Empat jenis data diterokai | Duo jenis data diterokai |

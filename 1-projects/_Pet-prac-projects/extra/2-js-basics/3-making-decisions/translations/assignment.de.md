@@ -35,6 +35,6 @@ let studentsWhoPass = [];
 
 ## Rubrik
 
-| Kriterien | Vorbildlich | Angemessen | Verbesserungsbedarf |
-| -------- | ------------------------------ | ----------------------------- | ------------------------------- |
-| | Komplettlösung wird vorgestellt | Teillösung wird vorgestellt Lösung mit Fehlern wird vorgestellt |
+| Kriterien | Vorbildlich                     | Angemessen                                                      | Verbesserungsbedarf |
+| --------- | ------------------------------- | --------------------------------------------------------------- | ------------------- |
+|           | Komplettlösung wird vorgestellt | Teillösung wird vorgestellt Lösung mit Fehlern wird vorgestellt |

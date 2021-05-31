@@ -25,4 +25,3 @@ Edge、Chrome、Firefox で動作するブラウザ拡張機能を構築しま�
 「ドット」アイコンシステムのコンセプトは、カリフォルニア州の排出量のためのブラウザ拡張機能 [Energy Lollipop](https://energylollipop.com/) のアイコン構造によって提案されました。
 
 These lessons were written with ♥️ by [Jen Looper](https://www.twitter.com/jenlooper)
-

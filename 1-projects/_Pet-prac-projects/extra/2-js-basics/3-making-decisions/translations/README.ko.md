@@ -1,9 +1,11 @@
 # JavaScript 기초: 결정하기
 
 ![JavaScript Basics - Making decisions](/sketchnotes/webdev101-js-decisions.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 강의 전 퀴즈
+
 [Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/11?loc=ko)
 
 결정을 내리고 코드가 실행되는 순서를 제어하면 코드를 재사용하며 강력하게 만들 수 있습니다. 이 강의에서는 JavaScript에서 데이터 흐름을 제어하기 위한 구문과 논리 자료형 데이터 타입을 함께 사용하는 중요성을 다룹니다.
@@ -41,8 +43,8 @@
 조건이 참이면 if 문은 블록 사이에서 코드를 실행합니다.
 
 ```javascript
-if (condition){
-    //Condition was true. Code in this block will run.
+if (condition) {
+  //Condition was true. Code in this block will run.
 }
 ```
 
@@ -52,9 +54,9 @@ if (condition){
 let currentMoney;
 let laptopPrice;
 
-if (currentMoney >= laptopPrice){
-    //Condition was true. Code in this block will run.
-    console.log("Getting a new laptop!");
+if (currentMoney >= laptopPrice) {
+  //Condition was true. Code in this block will run.
+  console.log("Getting a new laptop!");
 }
 ```
 
@@ -66,13 +68,12 @@ if (currentMoney >= laptopPrice){
 let currentMoney;
 let laptopPrice;
 
-if (currentMoney >= laptopPrice){
-    //Condition was true. Code in this block will run.
-    console.log("Getting a new laptop!");
-}
-else{
-    //Condition was true. Code in this block will run.
-    console.log("Can't afford a new laptop, yet!");
+if (currentMoney >= laptopPrice) {
+  //Condition was true. Code in this block will run.
+  console.log("Getting a new laptop!");
+} else {
+  //Condition was true. Code in this block will run.
+  console.log("Can't afford a new laptop, yet!");
 }
 ```
 
@@ -83,9 +84,9 @@ else{
 결정에는 두개 이상의 비교문이 필요할 수 있으며, 논리 연산자과 합쳐서 논리 자료형 값을 생성할 수 있습니다.
 
 | Symbol | Description                                                                                     | Example                                                                 |
-| ------ | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| ------ | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | -------- | --- | --------------------------------------------------------- |
 | `&&`   | **Logical AND**: Compares two Boolean expressions. Returns true **only** if both sides are true | `(5 > 6) && (5 < 6 ) //One side is false, other is true. Returns false` |
-| `||`   | **Logical OR**: Compares two Boolean expressions. Returns true if at least one side is true     | `(5 > 6) || (5 < 6) //One side is false, other is true. Returns true`   |
+| `      |                                                                                                 | `                                                                       | **Logical OR**: Compares two Boolean expressions. Returns true if at least one side is true | `(5 > 6) |     | (5 < 6) //One side is false, other is true. Returns true` |
 | `!`    | **Logical NOT**: Returns the opposite value of a Boolean expression                             | `!(5 > 6) // 5 is not greater than 6, but "!" will return true`         |
 
 ## 논리 연산자의 조건 및 결정
@@ -95,15 +96,14 @@ else{
 ```javascript
 let currentMoney;
 let laptopPrice;
-let laptopDiscountPrice = laptopPrice - (laptopPrice * .20) //Laptop price at 20 percent off
+let laptopDiscountPrice = laptopPrice - laptopPrice * 0.2; //Laptop price at 20 percent off
 
-if (currentMoney >= laptopPrice || currentMoney >= laptopDiscountPrice){
-    //Condition was true. Code in this block will run.
-    console.log("Getting a new laptop!");
-}
-else {
-    //Condition was true. Code in this block will run.
-    console.log("Can't afford a new laptop, yet!");
+if (currentMoney >= laptopPrice || currentMoney >= laptopDiscountPrice) {
+  //Condition was true. Code in this block will run.
+  console.log("Getting a new laptop!");
+} else {
+  //Condition was true. Code in this block will run.
+  console.log("Can't afford a new laptop, yet!");
 }
 ```
 
@@ -131,17 +131,18 @@ let variable = condition ? <return this if true> : <return this if false>`
 
 ```javascript
 let firstNumber = 20;
-let secondNumber = 10
-let biggestNumber = firstNumber > secondNumber ? firstNumber: secondNumber;
+let secondNumber = 10;
+let biggestNumber = firstNumber > secondNumber ? firstNumber : secondNumber;
 ```
 
 ✅ 잠시 시간을 내서 코드를 몇 번 읽으시기 바랍니다. 연산자가 어떻게 작동하는지 이해하나요?
 
 위의 내용은
+
 - `firstNumber`가 `secondNumber`보다 큰 경우
 - `biggestNumber`에 `firstNumber`를 할당하고
 - 그렇지 않으면 `secondNumber`를 할당한다는 내용입니다.
-  
+
 삼항 표현식은 아래 코드를 간단히 작성했습니다.
 
 ```javascript
@@ -160,6 +161,7 @@ if (firstNumber > secondNumber) {
 논리 연산자로 프로그램을 먼저 만든 뒤, 삼항 표현식을 사용하여 다시 작성하십시오. 어떤 구문을 선호합니까?
 
 ## 강의 후 퀴즈
+
 [Post-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/12?loc=ko)
 
 ## 리뷰 & 자기주도 학습

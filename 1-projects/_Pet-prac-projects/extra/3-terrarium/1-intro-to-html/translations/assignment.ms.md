@@ -6,6 +6,6 @@ Bayangkan anda merancang, atau merancang semula, laman web peribadi anda. Buat m
 
 ## Rubrik
 
-| Kriteria | Contoh                                                                           | Mencukupi                                                                         | Usaha Lagi                                                                 |
-| -------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Kriteria | Contoh                                                                                          | Mencukupi                                                                            | Usaha Lagi                                                                                |
+| -------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
 |          | Susun atur blog ditunjukkan secara visual dengan sekurang-kurangnya 10 elemen markup dipaparkan | Susun atur blog ditunjukkan secara visual dengan sekitar 5 elemen markup ditampilkan | Susun atur blog ditunjukkan secara visual dengan paling banyak 3 elemen markup dipaparkan |

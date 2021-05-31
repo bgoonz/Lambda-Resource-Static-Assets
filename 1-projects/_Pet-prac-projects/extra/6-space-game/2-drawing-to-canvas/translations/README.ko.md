@@ -27,6 +27,7 @@ canvas는 내용이 없는 게 기본인 HTML 요소입니다; 빈 상태입니�
 캔버스는 데카르트 좌표계로 사물을 그립니다. 따라서 x-축과 y-축을 이용하여 무언가의 위치를 나타냅니다. 위치 `0,0`은 죄측 상단이며 우측 하단은 캔버스의 너비와 높이라고 말한 위치입니다.
 
 ![the canvas's grid](../canvas_grid.png)
+
 > Image from [MDN](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes)
 
 캔버스 요소에 그리려면 다음 단계를 거쳐야 합니다:
@@ -46,10 +47,10 @@ canvas = document.getElementById("myCanvas");
 ctx = canvas.getContext("2d");
 
 //3. fill it with the color red
-ctx.fillStyle = 'red';
+ctx.fillStyle = "red";
 
 //4. and draw a rectangle with these parameters, setting location and size
-ctx.fillRect(0,0, 200, 200) // x,y,width, height
+ctx.fillRect(0, 0, 200, 200); // x,y,width, height
 ```
 
 ✅ Canvas API는 2D 모양에 가장 초점이 맞추어져 있습니다, 그러나 웹사이트에서 3D 요소를 그려야 된다면, [WebGL API](https://developer.mozilla.org/docs/Web/API/WebGL_API)를 사용해야 할 수도 있습니다.
@@ -70,10 +71,10 @@ Canvas API를 사용하면 다음과 같은 모든 종류를 그릴 수 있습�
 
 ```javascript
 const img = new Image();
-img.src = 'path/to/my/image.png';
+img.src = "path/to/my/image.png";
 img.onload = () => {
   // image loaded and ready to be used
-}
+};
 ```
 
 ### Load asset 패턴
@@ -87,31 +88,30 @@ async function loadAsset(path) {
     img.src = path;
     img.onload = () => {
       // image loaded and ready to be used
-    }
+    };
     resolve(img);
-  })
+  });
 }
 
 // use like so
 
 async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
+  const heroImg = await loadAsset("hero.png");
+  const monsterImg = await loadAsset("monster.png");
 }
-
 ```
 
 게임 어셋을 화면에 그리려면, 코드는 다음과 같습니다:
 
 ```javascript
 async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
+  const heroImg = await loadAsset("hero.png");
+  const monsterImg = await loadAsset("monster.png");
 
   canvas = document.getElementById("myCanvas");
   ctx = canvas.getContext("2d");
-  ctx.drawImage(heroImg, canvas.width/2,canvas.height/2);
-  ctx.drawImage(monsterImg, 0,0);
+  ctx.drawImage(heroImg, canvas.width / 2, canvas.height / 2);
+  ctx.drawImage(monsterImg, 0, 0);
 }
 ```
 
@@ -123,11 +123,11 @@ Canvas 요소가 있는 웹 페이지를 만듭니다. 검은 화면 `1024 * 768
 
 - Hero ship
 
-   ![Hero ship](../solution/assets/player.png)
+  ![Hero ship](../solution/assets/player.png)
 
-- 5*5 monster
+- 5\*5 monster
 
-   ![Monster ship](../solution/assets/enemyShip.png)
+  ![Monster ship](../solution/assets/enemyShip.png)
 
 ### 개발 시작하기 위한 권장 단계
 
@@ -142,7 +142,7 @@ Canvas 요소가 있는 웹 페이지를 만듭니다. 검은 화면 `1024 * 768
 -| package.json
 ```
 
-Visual Studio Code에서 폴더의 복사본을 엽니다. 로컬 개발 환경을 설정해야 합니다, NPM과  Node가 설치되어있는 Visual Studio Code를 사용하는 것이 좋습니다. 컴퓨터에 `npm`이 설정되어 있지 않은 경우에, [방법은 다음과 같습니다](https://www.npmjs.com/get-npm).
+Visual Studio Code에서 폴더의 복사본을 엽니다. 로컬 개발 환경을 설정해야 합니다, NPM과 Node가 설치되어있는 Visual Studio Code를 사용하는 것이 좋습니다. 컴퓨터에 `npm`이 설정되어 있지 않은 경우에, [방법은 다음과 같습니다](https://www.npmjs.com/get-npm).
 
 `your_work` 폴더로 이동하여 프로젝트를 시작합니다:
 
@@ -165,27 +165,28 @@ npm start
    > tip: `await loadTexture`를 사용하여 플레이어와 적 이미지를 추가하고 이미지 경로를 전달합니다. 아직 화면에서 볼 수 없습니다!
 3. 화면 중앙 하단의 중간에 영웅 **그리기**
    > tip: `drawImage` API 를 사용하여 화면에 heroImg를 그립니다, `canvas.width / 2 - 45`와 `canvas.height - canvas.height / 4)`로 설정합니다.
-4. 5*5 몬스터를 **그리기**
+4. 5\*5 몬스터를 **그리기**
+
    > tip: 이제 주석을 풀고 화면에 적을 그립니다. 그런 다음, `createEnemies` 함수로 가서 작성합니다.
 
    먼저, 약간의 constants를 설정합니다:
 
-    ```javascript
-    const MONSTER_TOTAL = 5;
-    const MONSTER_WIDTH = MONSTER_TOTAL * 98;
-    const START_X = (canvas.width - MONSTER_WIDTH) / 2;
-    const STOP_X = START_X + MONSTER_WIDTH;
-    ```
+   ```javascript
+   const MONSTER_TOTAL = 5;
+   const MONSTER_WIDTH = MONSTER_TOTAL * 98;
+   const START_X = (canvas.width - MONSTER_WIDTH) / 2;
+   const STOP_X = START_X + MONSTER_WIDTH;
+   ```
 
-    그런 다음, 화면에 몬스터 배열을 그리는 반복문을 만듭니다:
+   그런 다음, 화면에 몬스터 배열을 그리는 반복문을 만듭니다:
 
-    ```javascript
-    for (let x = START_X; x < STOP_X; x += 98) {
-        for (let y = 0; y < 50 * 5; y += 50) {
-          ctx.drawImage(enemyImg, x, y);
-        }
-      }
-    ```
+   ```javascript
+   for (let x = START_X; x < STOP_X; x += 98) {
+     for (let y = 0; y < 50 * 5; y += 50) {
+       ctx.drawImage(enemyImg, x, y);
+     }
+   }
+   ```
 
 ## 결과
 

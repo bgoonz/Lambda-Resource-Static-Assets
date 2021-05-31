@@ -22,12 +22,11 @@
 
 ## API 項目
 
-路由                                         | 描述
----------------------------------------------|------------------------------------
-GET    /api/                                 | 取得伺服器資訊
-POST   /api/accounts/                        | 建立新的帳戶，範例： `{ user: 'Yohan', description: 'My budget', currency: 'EUR', balance: 100 }`
-GET    /api/accounts/:user                   | 取得特定帳戶的所有資料
-DELETE /api/accounts/:user                   | 移除特定帳戶
-POST   /api/accounts/:user/transactions      | 建立新的交易明細，範例： `{ date: '2020-07-23T18:25:43.511Z', object: 'Bought a book', amount: -20 }`
-DELETE  /api/accounts/:user/transactions/:id | 移除特定交易明細
-
+| 路由                                        | 描述                                                                                                  |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| GET /api/                                   | 取得伺服器資訊                                                                                        |
+| POST /api/accounts/                         | 建立新的帳戶，範例： `{ user: 'Yohan', description: 'My budget', currency: 'EUR', balance: 100 }`     |
+| GET /api/accounts/:user                     | 取得特定帳戶的所有資料                                                                                |
+| DELETE /api/accounts/:user                  | 移除特定帳戶                                                                                          |
+| POST /api/accounts/:user/transactions       | 建立新的交易明細，範例： `{ date: '2020-07-23T18:25:43.511Z', object: 'Bought a book', amount: -20 }` |
+| DELETE /api/accounts/:user/transactions/:id | 移除特定交易明細                                                                                      |

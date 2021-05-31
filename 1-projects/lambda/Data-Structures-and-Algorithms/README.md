@@ -4,6 +4,7 @@
 <br>
 
 ## Contents
+
 - [Data Structures](#data-structures)
   - [Tree](src/data-structures)
 - [Algorithms](#algorithms) 🚧
@@ -21,34 +22,34 @@
   - [Asymptotic Notation](src/analysis-of-algorithms/asymptotic-notation/README.md)
   - Comparing complexities
   - NP-completeness theory
-<br>
+    <br>
 
 🚧 _denotes section is WIP_
 
 ## Data Structures
 
-> In computer science, a __data structure__ is a data organization, management and storage format that enables efficient access and modification. More precisely, a __data structure__ is a collection of data values, the relationships among them, and the functions or operations that can be applied to the data. _— [Wikipedia](https://en.wikipedia.org/wiki/Data_structure)_
+> In computer science, a **data structure** is a data organization, management and storage format that enables efficient access and modification. More precisely, a **data structure** is a collection of data values, the relationships among them, and the functions or operations that can be applied to the data. _— [Wikipedia](https://en.wikipedia.org/wiki/Data_structure)_
 
-|Name|Description|
-|----|-----------|
-|[Tree](src/data-structures/tree)|non-linear data structure that simulates a hierarchical tree structure|
+| Name                             | Description                                                            |
+| -------------------------------- | ---------------------------------------------------------------------- |
+| [Tree](src/data-structures/tree) | non-linear data structure that simulates a hierarchical tree structure |
 
 ## Algorithms
 
-> In mathematics and computer science, an __algorithm__ is an unambiguous specification of how to solve a class of problems. "A set of rules that precisely defines a sequence of operations." — _[Wikipedia](https://en.wikipedia.org/wiki/Algorithm)_
+> In mathematics and computer science, an **algorithm** is an unambiguous specification of how to solve a class of problems. "A set of rules that precisely defines a sequence of operations." — _[Wikipedia](https://en.wikipedia.org/wiki/Algorithm)_
 
 ### Tree Traversal
 
-|Name|Description|
-|----|-----------|
-|[Depth-First Search (DFS)](src/algorithms/tree/depth-first-search)|algorithm for searching or traversing tree or graph data structures|
-|[Breadth-First Search (BFS)](src/algorithms/tree/breadth-first-search)|algorithm for searching or traversing tree or graph data structures|
+| Name                                                                   | Description                                                         |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| [Depth-First Search (DFS)](src/algorithms/tree/depth-first-search)     | algorithm for searching or traversing tree or graph data structures |
+| [Breadth-First Search (BFS)](src/algorithms/tree/breadth-first-search) | algorithm for searching or traversing tree or graph data structures |
 
 ### Strings
 
-|Name|Description|
-|----|-----------|
-|[Knuth-Morris-Pratt (KMP)](src/algorithms/strings/knuth-morris-pratt)|string-searching algorithm|
+| Name                                                                  | Description                |
+| --------------------------------------------------------------------- | -------------------------- |
+| [Knuth-Morris-Pratt (KMP)](src/algorithms/strings/knuth-morris-pratt) | string-searching algorithm |
 
 ## Algorithm Designs and Techniques
 

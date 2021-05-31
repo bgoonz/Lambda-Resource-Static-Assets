@@ -17,15 +17,15 @@
 ## 總覽
 
 - 理論
-   - [利用 JavaScript 設計遊戲](../1-introduction/translations/README.zh-tw.md)
+  - [利用 JavaScript 設計遊戲](../1-introduction/translations/README.zh-tw.md)
 - 實作
-   - [在畫布上繪製](../2-drawing-to-canvas/translations/README.zh-tw.md)
-   - [移動畫面上之物件](../3-moving-elements-around/translations/README.zh-tw.md)
-   - [碰撞偵測](../4-collision-detection/translations/README.zh-tw.md)
-   - [持續得分](../5-keeping-score/translations/README.zh-tw.md)
-   - [結束與重新遊戲](../6-end-condition/translations/README.zh-tw.md)
+  - [在畫布上繪製](../2-drawing-to-canvas/translations/README.zh-tw.md)
+  - [移動畫面上之物件](../3-moving-elements-around/translations/README.zh-tw.md)
+  - [碰撞偵測](../4-collision-detection/translations/README.zh-tw.md)
+  - [持續得分](../5-keeping-score/translations/README.zh-tw.md)
+  - [結束與重新遊戲](../6-end-condition/translations/README.zh-tw.md)
 
 ## 參與人員
 
-遊戲資源皆來自於 https://www.kenney.nl/。 
+遊戲資源皆來自於 https://www.kenney.nl/。
 如果你熱愛設計遊戲，這邊有許多實用的資源，許多資源是免費的，有些則是付費內容。

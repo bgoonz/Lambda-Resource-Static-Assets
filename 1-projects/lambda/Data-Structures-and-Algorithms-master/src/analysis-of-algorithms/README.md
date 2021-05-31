@@ -1,9 +1,11 @@
 # Analysis of Algorithms
 
 Analysis of the running time of various code snippets with respect to the input size of `n`.
+
 <hr>
 
 ## a.
+
 ```py
 a = 0
 while a < n * n * n:
@@ -15,9 +17,11 @@ while a < n * n * n:
 It takes `n` iterations for `a += n²` to reach `n³`
 
 ##### Example:
+
 If given `n = 5`, then `n³ = 125`.
 
 Each iteration of the while loop is adding `n * n` to `a`.
+
 ```py
 25
 50
@@ -41,6 +45,7 @@ i = len(array) - 1
 while array[i] > x and i >= 0:
   i = i // 2
 ```
+
 ### Logarithmic time — O(log n)
 
 The value of `i` is halved on each iteration of the loop.
@@ -50,11 +55,9 @@ The value of `i` is halved on each iteration of the loop.
 ## c.
 
 ```js
-sum = 0
+sum = 0;
 for (i = 0; i < sqrt(n) / 2; i++)
-  for (j = i; j < 8 + i; j++)
-    for (k = j; k < 8 + j; k++)
-      sum++
+  for (j = i; j < 8 + i; j++) for (k = j; k < 8 + j; k++) sum++;
 ```
 
 ### Square root — `O(√n)` / `O(sqrt(n))`
@@ -66,10 +69,8 @@ The outer for loop grows with the size of `√n`. The `√n / 2` is a constant o
 ## d.
 
 ```js
-sum = 0
-for (i = 1; i < n; i *= 2)
-  for (j = 0; j < n; j++)
-    sum++
+sum = 0;
+for (i = 1; i < n; i *= 2) for (j = 0; j < n; j++) sum++;
 ```
 
 ### Linearithmic — O(n log n)
@@ -81,12 +82,10 @@ Both for loops will grow as `n` grows, but the inner for loop is linear, and the
 ## e.
 
 ```js
-sum = 0
+sum = 0;
 for (i = 0; i < n; i++)
   for (j = i + 1; j < n; j++)
-    for (k = j + 1; k < n; k++)
-      for (l = k + 1; l < 10 + k; l++)
-        sum++
+    for (k = j + 1; k < n; k++) for (l = k + 1; l < 10 + k; l++) sum++;
 ```
 
 ### Cubic — O(n³)
@@ -100,9 +99,9 @@ The inner-most for loop is considered constant (it only _ever_ iterates up to 10
 ```js
 // bunnies === n
 const bunnyEars = (bunnies) => {
-  if (bunnies === 0) return 0
-  return 2 + bunnyEars(bunnies - 1)
-}
+  if (bunnies === 0) return 0;
+  return 2 + bunnyEars(bunnies - 1);
+};
 ```
 
 ### Linear — O(n)
@@ -133,11 +132,11 @@ bunnyEars(4)
 // arraySize === n
 const search = (array, arraySize, target) => {
   if (arraySize > 0) {
-    if (array[arraySize - 1] === target) return true
-    else return search(array, arraySize - 1, target)
+    if (array[arraySize - 1] === target) return true;
+    else return search(array, arraySize - 1, target);
   }
-  return false
-}
+  return false;
+};
 ```
 
 ### Linear — O(n)

@@ -1,9 +1,11 @@
 # JavaScript 入門 - 矩陣與迴圈
 
 ![JavaScript 入門 - 矩陣](/sketchnotes/webdev101-js-arrays.png)
+
 > 由 [Tomomi Imura](https://twitter.com/girlie_mac) 繪製
 
 ## 課前測驗
+
 [課前測驗](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/13?loc=zh_tw)
 
 這堂課會包含程式語言 JavaScript，建立互動式網頁的基礎。課程中，你會學到用來操作資料的矩陣與迴圈。
@@ -31,7 +33,13 @@
 ✅ 索引從 0 開始有超出你的預料之外嗎？在部分程式語言中，索引會從 1 開始。這有一段有趣的歷史，你可以[閱讀維基百科](https://zh.wikipedia.org/wiki/%E5%BE%9E%E9%9B%B6%E9%96%8B%E5%A7%8B%E7%9A%84%E7%B7%A8%E8%99%9F)來了解它。
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors[2]; //"Vanilla"
 ```
 
@@ -52,7 +60,13 @@ iceCreamFlavors[5] = "Cookie Dough"; //Added "Cookie Dough"
 要得知矩陣內有多少元素，可以使用矩陣屬性 `length`。
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors.length; //5
 ```
 
@@ -64,16 +78,13 @@ iceCreamFlavors.length; //5
 
 ### For 迴圈(For Loop)
 
-`for` 迴圈有三個條件：
-    - `計數器(counter)` 一個初始化變數決定目前迭代的次數。
-    - `條件式(condition)` 一個以比較運算子表示的陳述式，當結果為 `true` 時終止迴圈。
-    - `迭代陳述式(iteration-expression)` 在每一次迭代完後，改變計數器的數值。
-  
+`for` 迴圈有三個條件： - `計數器(counter)` 一個初始化變數決定目前迭代的次數。 - `條件式(condition)` 一個以比較運算子表示的陳述式，當結果為 `true` 時終止迴圈。 - `迭代陳述式(iteration-expression)` 在每一次迭代完後，改變計數器的數值。
+
 ```javascript
-    // 從 0 加到 10
-    for (let i = 0; i < 10; i++) {
-        console.log(i);
-    }
+// 從 0 加到 10
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
 ```
 
 ✅ 在瀏覽器命令欄中運行這段迴圈。在改變計數器、條件式與迭代陳述式後有什麼改變？你能讓它變成從 10 減到 0 嗎？
@@ -86,8 +97,8 @@ iceCreamFlavors.length; //5
 // 從 0 加到 10
 let i = 0;
 while (i < 10) {
- console.log(i);
- i++;
+  console.log(i);
+  i++;
 }
 ```
 
@@ -98,7 +109,13 @@ while (i < 10) {
 矩陣通常會與迴圈一起出現，大多數的條件式需要矩陣的長度來決定迴圈次數，矩陣的索引值也與計數器的數值相同。
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 
 for (let i = 0; i < iceCreamFlavors.length; i++) {
   console.log(iceCreamFlavors[i]);
@@ -114,12 +131,13 @@ for (let i = 0; i < iceCreamFlavors.length; i++) {
 除了 for 迴圈與 while 迴圈外，仍有許多使用矩陣與迴圈的方法：[forEach](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)、[for-of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)與[map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)。 用上列其中一種語法改寫你的迴圈。
 
 ## 課後測驗
+
 [課後測驗](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/14?loc=zh_tw)
 
 ## 複習與自學
 
 在 JavaScript 中，矩陣有許多控制的方法，它們在處理資料上有很大的幫助。
-[學習這些方法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)，如 push、pop、slice 和 splice，試著套用在你所創造的矩陣上。 
+[學習這些方法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)，如 push、pop、slice 和 splice，試著套用在你所創造的矩陣上。
 
 ## 作業
 

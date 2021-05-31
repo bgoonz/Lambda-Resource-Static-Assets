@@ -27,6 +27,7 @@ Arriba estamos configurando el `id`, `width` y `alto`.
 Canvas utiliza un sistema de coordenadas cartesiano para dibujar cosas. Por lo tanto, usa un eje xy un eje y para expresar dónde se encuentra algo. La ubicación `0,0` es la posición superior izquierda y la inferior derecha es lo que dijiste que era el ANCHO y ALTO del lienzo.
 
 ! [cuadrícula del lienzo](canvas_grid.png)
+
 > Imagen de [MDN](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes)
 
 Para dibujar en el elemento de lienzo, deberá seguir los siguientes pasos:
@@ -46,10 +47,10 @@ canvas = document.getElementById("myCanvas");
 ctx = canvas.getContext("2d");
 
 // 3. rellénalo con el color rojo
-ctx.fillStyle = 'red';
+ctx.fillStyle = "red";
 
 // 4. y dibuja un rectángulo con estos parámetros, configurando la ubicación y el tamaño
-ctx.fillRect(0,0, 200, 200) // x, y, ancho, alto
+ctx.fillRect(0, 0, 200, 200); // x, y, ancho, alto
 ```
 
 ✅ La API de Canvas se enfoca principalmente en formas 2D, pero también puede dibujar elementos 3D en un sitio web; para esto, puede usar la [API WebGL](https://developer.mozilla.org/docs/Web/API/WebGL_API).
@@ -70,16 +71,15 @@ Usted carga un activo de imagen creando un objeto `Image` y estableciendo su pro
 
 ```javascript
 const img = new Image();
-img.src = 'path/to/my/image.png';
+img.src = "path/to/my/image.png";
 img.onload = () => {
   // image loaded and ready to be used
-}
+};
 ```
 
 ### Cargar patrón de activos
 
 Se recomienda envolver lo anterior en una construcción así, para que sea más fácil de usar y solo intente manipularlo cuando esté completamente cargado:
-
 
 ```javascript
 async function loadAsset(path) {
@@ -88,31 +88,30 @@ async function loadAsset(path) {
     img.src = path;
     img.onload = () => {
       // imagen cargada y lista para ser utilizada
-    }
+    };
     resolve(img);
-  })
+  });
 }
 
 // usar así
 
 async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
+  const heroImg = await loadAsset("hero.png");
+  const monsterImg = await loadAsset("monster.png");
 }
-
 ```
 
 Para dibujar activos del juego en una pantalla, su código se vería así:
 
 ```javascript
 async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
+  const heroImg = await loadAsset("hero.png");
+  const monsterImg = await loadAsset("monster.png");
 
   canvas = document.getElementById("myCanvas");
   ctx = canvas.getContext("2d");
-  ctx.drawImage(heroImg, canvas.width/2,canvas.height/2);
-  ctx.drawImage(monsterImg, 0,0);
+  ctx.drawImage(heroImg, canvas.width / 2, canvas.height / 2);
+  ctx.drawImage(monsterImg, 0, 0);
 }
 ```
 
@@ -122,18 +121,15 @@ Construirá una página web con un elemento Canvas. Debería representar una pan
 
 - Barco héroe
 
-   ![Barco héroe](../solution/assets/player.png)
+  ![Barco héroe](../solution/assets/player.png)
 
-- Monstruo 5*5
+- Monstruo 5\*5
 
-   ![Monster ship](../solution/assets/enemyShip.png)
-
+  ![Monster ship](../solution/assets/enemyShip.png)
 
 ### Pasos recomendados para iniciar el desarrollo
 
 Busque los archivos que se han creado para usted en la subcarpeta `your-work`. Debe contener lo siguiente:
-
-
 
 ```bash
 -| assets
@@ -167,28 +163,28 @@ Agregue el código necesario a `your-work/app.js` para resolver lo siguiente
    > consejo: agregue las imágenes del jugador y del enemigo usando `await loadTexture` y pasando la ruta de la imagen. ¡Todavía no los verá en la pantalla!
 3. **Dibuja** héroe en el centro de la pantalla en la mitad inferior
    > consejo: use la API `drawImage` para dibujar heroImg en la pantalla, configurando `canvas.width / 2 - 45` y `canvas.height - canvas.height / 4)`;
-4. **Dibujar** 5 * 5 monstruos
+4. **Dibujar** 5 \* 5 monstruos
+
    > consejo: ahora puedes descomentar el código para dibujar enemigos en la pantalla. A continuación, vaya a la función `createEnemies` y constrúyala.
 
    Primero, configure algunas constantes:
 
+   ```javascript
+   const MONSTER_TOTAL = 5;
+   const MONSTER_WIDTH = MONSTER_TOTAL * 98;
+   const START_X = (canvas.width - MONSTER_WIDTH) / 2;
+   const STOP_X = START_X + MONSTER_WIDTH;
+   ```
 
-    ```javascript
-    const MONSTER_TOTAL = 5;
-    const MONSTER_WIDTH = MONSTER_TOTAL * 98;
-    const START_X = (canvas.width - MONSTER_WIDTH) / 2;
-    const STOP_X = START_X + MONSTER_WIDTH;
-    ```
+   luego, crea un bucle para dibujar la matriz de monstruos en la pantalla:
 
-    luego, crea un bucle para dibujar la matriz de monstruos en la pantalla:
-
-    ```javascript
-    for (let x = START_X; x < STOP_X; x += 98) {
-        for (let y = 0; y < 50 * 5; y += 50) {
-          ctx.drawImage(enemyImg, x, y);
-        }
-      }
-    ```
+   ```javascript
+   for (let x = START_X; x < STOP_X; x += 98) {
+     for (let y = 0; y < 50 * 5; y += 50) {
+       ctx.drawImage(enemyImg, x, y);
+     }
+   }
+   ```
 
 ## Resultado
 
@@ -201,7 +197,6 @@ El resultado final debería verse así:
 Intente resolverlo usted mismo primero, pero si se atasca, eche un vistazo a una [solución](solution/app.js)
 
 🚀 Desafío: ha aprendido a dibujar con la API Canvas enfocada en 2D; eche un vistazo a la [API WebGL](https://developer.mozilla.org/docs/Web/API/WebGL_API) e intente dibujar un objeto 3D.
-
 
 ## [Post-lecture prueba](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/32)
 

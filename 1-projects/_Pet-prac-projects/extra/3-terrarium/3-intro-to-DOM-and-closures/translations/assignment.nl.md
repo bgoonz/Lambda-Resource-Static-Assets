@@ -6,6 +6,6 @@ Onderzoek de DOM een beetje meer door een DOM-element te 'adopteren'. Bezoek de 
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                                     | Voldoende                                         | Moet worden verbeterd       |
-| -------- | --------------------------------------------- | ------------------------------------------------ | ----------------------- |
+| Criteria | Voorbeeldig                                              | Voldoende                                             | Moet worden verbeterd                    |
+| -------- | -------------------------------------------------------- | ----------------------------------------------------- | ---------------------------------------- |
 |          | Er wordt een alinea-opsomming gegeven, met een voorbeeld | Paragraafopmaak wordt gepresenteerd, zonder voorbeeld | Er wordt geen beschrijving gepresenteerd |

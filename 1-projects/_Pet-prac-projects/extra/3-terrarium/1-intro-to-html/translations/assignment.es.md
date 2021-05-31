@@ -6,6 +6,6 @@ Imagínese que está diseñando o rediseñando su sitio web personal. Cree un ma
 
 ## Rúbrica
 
-| Criterios | Ejemplar | Adecuado | Necesita mejorar |
-| -------- | -------------------------------------------------- --------------------------------- | -------------------------------------------------- ------------------------------ | -------------------------------------------------- ------------------------------- |
-| | El diseño de un blog se representa visualmente con al menos 10 elementos de marcado mostrados | Un diseño de blog se representa visualmente con alrededor de 5 elementos de marcado mostrados | El diseño de un blog se representa visualmente con un máximo de 3 elementos de marcado mostrados |
+| Criterios | Ejemplar                                                                                      | Adecuado                                                                                      | Necesita mejorar                                                                                 |
+| --------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+|           | El diseño de un blog se representa visualmente con al menos 10 elementos de marcado mostrados | Un diseño de blog se representa visualmente con alrededor de 5 elementos de marcado mostrados | El diseño de un blog se representa visualmente con un máximo de 3 elementos de marcado mostrados |

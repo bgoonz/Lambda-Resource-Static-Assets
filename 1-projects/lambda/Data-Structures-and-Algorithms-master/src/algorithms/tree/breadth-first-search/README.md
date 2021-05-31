@@ -1,4 +1,5 @@
 ## Breadth-first search
+
 Trees can also be traversed in _level-order_, where we visit every node on a level before going to a lower level.
 
 <p align="center">

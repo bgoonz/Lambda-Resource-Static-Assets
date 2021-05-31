@@ -101,6 +101,7 @@ chrome.runtime.sendMessage({
 		},
 });
 ```
+
 ### 呼叫函式、執行呼叫
 
 接下來，在 C02Signal API 回傳的 promise 物件下方呼叫函式：
@@ -109,6 +110,7 @@ chrome.runtime.sendMessage({
 //let CO2...
 calculateColor(CO2);
 ```
+
 最後，在檔案 `/dist/background.js` 中，新增事件監聽者給這些背景行為的呼叫：
 
 ```JavaScript
@@ -130,6 +132,7 @@ function drawIcon(value) {
 	return context.getImageData(50, 50, 100, 100);
 }
 ```
+
 在此程式中，你建立了事件監聽者給任何前到背景工作管理者的訊息。若 'updateIcon' 被呼叫，則接下來的程式會被執行，利用 Canvas API 繪製出對應顏色的圖示。
 
 ✅ 你會學習更多關於 Canvas API 在往後的[太空遊戲課程](../../6-space-game/2-drawing-to-canvas/translations/README.zh-tw.md)。
@@ -157,4 +160,3 @@ function drawIcon(value) {
 ## 作業
 
 [分析網頁效能](assignment.zh-tw.md)
-

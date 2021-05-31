@@ -14,6 +14,6 @@ Gioco> ****Non ci sono più mostri, la fortezza del male è stata conquistata***
 
 ## Rubrica
 
-| Criteri | Ottimo | Adeguato | Necessita miglioramento |
-| -------- | ---------------------- | --------------------------- | -------------------------- |
-|          | Viene presentato un gioco completo | Il gioco è presentato parzialmente | il gioco parziale contiene bug |
+| Criteri | Ottimo                             | Adeguato                           | Necessita miglioramento        |
+| ------- | ---------------------------------- | ---------------------------------- | ------------------------------ |
+|         | Viene presentato un gioco completo | Il gioco è presentato parzialmente | il gioco parziale contiene bug |

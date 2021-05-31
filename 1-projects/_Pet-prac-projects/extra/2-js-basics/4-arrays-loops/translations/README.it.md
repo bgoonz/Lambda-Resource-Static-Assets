@@ -1,9 +1,11 @@
 # Nozioni di base di JavaScript: Array e Cicli
 
 ![Nozioni di base su JavaScript - Array](/sketchnotes/webdev101-js-arrays.png)
+
 > Sketchnote di [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Quiz Pre-Lezione
+
 [Quiz Pre-Lezione](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/13?loc=it)
 
 Questa lezione tratta le basi di javascript, il linguaggio che fornisce interattività sul web. In questa lezione, si conosceranno gli array e i cicli, usati per manipolare i dati.
@@ -29,7 +31,13 @@ Ai valori dell'array viene assegnato un valore univoco chiamato **indice**, un n
 ✅ Sorprende che gli array inizino con l'indice zero? In alcuni linguaggi di programmazione, gli indici iniziano da 1. C'è una storia interessante a questo proposito, che si può [leggere su Wikipedia](https://en.wikipedia.org/wiki/Zero-based_numbering).
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors[2]; //"Vanilla"
 ```
 
@@ -50,7 +58,13 @@ iceCreamFlavors[5] = "Cookie Dough"; //Aggiunto "Cookie Dough"
 Per scoprire quanti elementi ci sono in un array, si usa la proprietà `length` .
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors.length; //5
 ```
 
@@ -69,10 +83,10 @@ Il ciclo `for` richiede 3 parti per iterare:
 - `espressione-di-iterazione`: Viene eseguita alla fine di ogni iterazione, tipicamente utilizzata per modificare il valore del contatore
 
 ```javascript
-    //Conta fino a 10
-    for (let i = 0; i < 10; i++) {
-        console.log(i);
-    }
+//Conta fino a 10
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
 ```
 
 ✅ Si esegua questo codice in una console del browser. Cosa succede quando si apportano piccole modifiche al contatore, alla condizione o all'espressione di iterazione? E' possibile farlo funzionare all'indietro, creando un conto alla rovescia?
@@ -85,8 +99,8 @@ A differenza della sintassi per il ciclo `for` , i cicli `while` richiedono solo
 //Conta fino a 10
 let i = 0;
 while (i < 10) {
- console.log(i);
- i++;
+  console.log(i);
+  i++;
 }
 ```
 
@@ -97,7 +111,13 @@ while (i < 10) {
 Gli array vengono spesso utilizzati con i cicli perché la maggior parte delle condizioni verifica la lunghezza dell'array per interrompere il ciclo e l'indice può anche essere il valore del contatore.
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 
 for (let i = 0; i < iceCreamFlavors.length; i++) {
   console.log(iceCreamFlavors[i]);
@@ -113,8 +133,8 @@ for (let i = 0; i < iceCreamFlavors.length; i++) {
 Esistono altri modi per eseguire un ciclo sugli array. diversi dai cicli for e while. Ci sono [forEach](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach), [for-of](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Statements/for...of) e [map](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Array/map). Riscrivere il ciclo sull'array usando una di queste tecniche.
 
 ## Quiz Post-Lezione
-[Quiz Post-Lezione](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/14?loc=it)
 
+[Quiz Post-Lezione](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/14?loc=it)
 
 ## Revisione e Auto Apprendimento
 

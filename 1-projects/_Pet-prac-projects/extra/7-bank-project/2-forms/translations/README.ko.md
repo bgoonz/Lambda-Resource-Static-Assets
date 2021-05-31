@@ -30,14 +30,14 @@ curl http://localhost:5000/api
 `<input>`에는 다양한 [types](https://developer.mozilla.org/docs/Web/HTML/Element/input)이 많이 있습니다, 예를 들어 사용자 이름으로 입력 가능한 필드를 만들려면 다음과 같이 사용할 수 있습니다:
 
 ```html
-<input name="username" type="text">
+<input name="username" type="text" />
 ```
 
 `name` 속성은 컨트롤을 식별하는 데 사용되고 폼 데이터를 전송할 때 속성 이름으로 사용됩니다.
 
 > UI를 작성할 때 쓸 수 있는 모든 네이티브 UI 요소에 대한 아이디어를 얻으려면 [`<input>` types](https://developer.mozilla.org/docs/Web/HTML/Element/input)과 [other form controls](https://developer.mozilla.org/docs/Learn/Forms/Other_form_controls)의 전체 목록을 찾아봅시다.
 
-✅ `<input>`은 닫는 태그를 맞추지 *않는* [empty element](https://developer.mozilla.org/docs/Glossary/Empty_element)입니다. 자동으로-닫는 `<input/>` 표기법을 사용할 수 있지만, 필수는 아닙니다.
+✅ `<input>`은 닫는 태그를 맞추지 _않는_ [empty element](https://developer.mozilla.org/docs/Glossary/Empty_element)입니다. 자동으로-닫는 `<input/>` 표기법을 사용할 수 있지만, 필수는 아닙니다.
 
 폼 내의 `<button>` 요소는 약간 특별합니다. `type` 속성을 지정하지 않으면, 눌렀을 때 폼 데이터가 자동으로 서버에 제출됩니다. 가능한 `type` 값은 다음과 같습니다:
 
@@ -47,7 +47,7 @@ curl http://localhost:5000/api
 
 ### 작업
 
-`login` 템플릿에 폼을 추가하는 것으로 시작하겠습니다. *username* 필드와 *Login* 버튼이 필요합니다.
+`login` 템플릿에 폼을 추가하는 것으로 시작하겠습니다. _username_ 필드와 _Login_ 버튼이 필요합니다.
 
 ```html
 <template id="login">
@@ -56,7 +56,7 @@ curl http://localhost:5000/api
     <h2>Login</h2>
     <form id="loginForm">
       <label for="user">Username</label>
-      <input name="user" type="text">
+      <input name="user" type="text" />
       <button>Login</button>
     </form>
   </section>
@@ -73,17 +73,17 @@ curl http://localhost:5000/api
 이제 이전 항목의 바로 아래에, 가입을 위한 두번째 폼을 추가합니다:
 
 ```html
-<hr/>
+<hr />
 <h2>Register</h2>
 <form id="registerForm">
   <label for="user">Username</label>
-  <input name="user" type="text">
+  <input name="user" type="text" />
   <label for="currency">Currency</label>
-  <input name="currency" type="text" value="$">
+  <input name="currency" type="text" value="$" />
   <label for="description">Description</label>
-  <input name="description" type="text">
+  <input name="description" type="text" />
   <label for="balance">Current balance</label>
-  <input name="balance" type="number" value="0">
+  <input name="balance" type="number" value="0" />
   <button>Register</button>
 </form>
 ```
@@ -95,7 +95,7 @@ curl http://localhost:5000/api
 
 ## 서버에 데이터 제출하기
 
-이제 기능 UI가 있으므로, 다음 단계는 데이터를 서버로 보내는 것입니다. 현재 코드를 사용하여 간단한 테스트를 해봅시다. *Login* 혹은 *Register* 버튼을 클릭하면 어떻게 되나요?
+이제 기능 UI가 있으므로, 다음 단계는 데이터를 서버로 보내는 것입니다. 현재 코드를 사용하여 간단한 테스트를 해봅시다. _Login_ 혹은 _Register_ 버튼을 클릭하면 어떻게 되나요?
 
 브라우저의 URL 섹션에서 변경된 것을 알고 있나요?
 
@@ -116,10 +116,14 @@ curl http://localhost:5000/api
 가입 폼에 `action`과 `method` 속성을 추가합니다:
 
 ```html
-<form id="registerForm" action="//localhost:5000/api/accounts" method="POST">
+<form
+  id="registerForm"
+  action="//localhost:5000/api/accounts"
+  method="POST"
+></form>
 ```
 
-이제 이름으로 새로운 계정을 가입합니다. *Register* 버튼을 클릭하면 다음과 같은 내용이 표시됩니다:
+이제 이름으로 새로운 계정을 가입합니다. _Register_ 버튼을 클릭하면 다음과 같은 내용이 표시됩니다:
 
 ![](.././images/form-post.png)
 
@@ -142,14 +146,14 @@ curl http://localhost:5000/api
 가입 폼 `action`을 다음으로 바꿉니다:
 
 ```html
-<form id="registerForm" action="javascript:register()">
+<form id="registerForm" action="javascript:register()"></form>
 ```
 
 `app.js` 열어서 `register`라고 지어진 새로운 함수를 추가합니다:
 
 ```js
 function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const data = Object.fromEntries(formData);
   const jsonData = JSON.stringify(data);
@@ -163,14 +167,14 @@ function register() {
 ```js
 async function createAccount(account) {
   try {
-    const response = await fetch('//localhost:5000/api/accounts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: account
+    const response = await fetch("//localhost:5000/api/accounts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: account,
     });
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    return { error: error.message || "Unknown error" };
   }
 }
 ```
@@ -204,16 +208,16 @@ async function register() {
 
 ```js
 async function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const jsonData = JSON.stringify(Object.fromEntries(formData));
   const result = await createAccount(jsonData);
 
   if (result.error) {
-    return console.log('An error occured:', result.error);
+    return console.log("An error occured:", result.error);
   }
 
-  console.log('Account created!', result);
+  console.log("Account created!", result);
 }
 ```
 
@@ -225,7 +229,7 @@ async function register() {
 
 ## Data 검증하기
 
-사용자 이름을 먼저 설정하지 않고 새 계정을 가입하려하면, 서버에서 상태 코드 [400 (Bad Request)](https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).) 오류를 반환하는 것으로 볼 수 있습니다.
+사용자 이름을 먼저 설정하지 않고 새 계정을 가입하려하면, 서버에서 상태 코드 [400 (Bad Request)](<https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).>) 오류를 반환하는 것으로 볼 수 있습니다.
 
 데이터를 서버로 보내기 전에 할 수 있다면, 유요한 요청을 보낼 수 있도록, 미리 [validate the form data](https://developer.mozilla.org/docs/Learn/Forms/Form_validation)를 실습하는 것이 좋습니다. HTML5 포맷 컨트롤은 다양한 속성을 사용하여 빌트인 유효성 검사를 제공합니다:
 
@@ -242,9 +246,9 @@ async function register() {
 유효한 새로운 계정을 만들 때에 username과 currency라는 2개의 필수 필드가 필요하며, 다른 필드는 옵션입니다. HTML에서 폼을 갱신하여 다음 사항을 반영합니다:
 
 ```html
-<input name="user" type="text" required>
+<input name="user" type="text" required />
 ...
-<input name="currency" type="text" value="$" required>
+<input name="currency" type="text" value="$" required />
 ```
 
 이 특정 서버을 구현하는 것은 필드의 최대 길이에 제한을 걸진 않지만, 항상 사용자 텍스트 항목에 대하여 적당한 제한을 두는 것이 좋습니다.
@@ -252,18 +256,18 @@ async function register() {
 `maxlength` 속성을 이 텍스트 필드에 추가합니다:
 
 ```html
-<input name="user" type="text" maxlength="20" required>
+<input name="user" type="text" maxlength="20" required />
 ...
-<input name="currency" type="text" value="$" maxlength="5" required>
+<input name="currency" type="text" value="$" maxlength="5" required />
 ...
-<input name="description" type="text" maxlength="100">
+<input name="description" type="text" maxlength="100" />
 ```
 
-이제 *Register* 버튼을 누르고 정의한 유효성 검사 규칙을 필드가 따르지 않는 경우에는, 다음과 같이 보입니다:
+이제 _Register_ 버튼을 누르고 정의한 유효성 검사 규칙을 필드가 따르지 않는 경우에는, 다음과 같이 보입니다:
 
 ![Screenshot showing the validation error when trying to submit the form](./images/validation-error.png)
 
-서버에 데이터를 보내기 *전에 하는* 유효성 검사를 **client-side** 유효성 검사라고 합니다. 그러나 데이터를 보내지 않고 모든 검사를 하는 것은 항상 가능하지 않습니다. 예를 들면, 서버에 요청을 보내지 않고 동일한 사용자 이름을 가진 계정이 이미 존재하는지 확인할 수 있는 방식은 없습니다. 서버에서 수행되는 추가적인 유효성 검사를 **server-side** 유효성 검사라고합니다.
+서버에 데이터를 보내기 _전에 하는_ 유효성 검사를 **client-side** 유효성 검사라고 합니다. 그러나 데이터를 보내지 않고 모든 검사를 하는 것은 항상 가능하지 않습니다. 예를 들면, 서버에 요청을 보내지 않고 동일한 사용자 이름을 가진 계정이 이미 존재하는지 확인할 수 있는 방식은 없습니다. 서버에서 수행되는 추가적인 유효성 검사를 **server-side** 유효성 검사라고합니다.
 
 일반적으로 모두 구현해야하며, 클라이언트-측 유효성 검사를 사용하면 사용자에게 즉시 피드백을 주고 사용자 경험도 향상되지만, 서버-측 유효성 검사도 바뀌는 사용자 데이터가 건전하고 안전한지 확인하려면 중요합니다.
 

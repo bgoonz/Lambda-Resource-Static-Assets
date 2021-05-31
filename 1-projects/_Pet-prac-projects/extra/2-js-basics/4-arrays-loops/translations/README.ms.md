@@ -1,9 +1,11 @@
 # Asas JavaScript: Array dan Loop
 
 ![Asas JavaScript - Array](/sketchnotes/webdev101-js-arrays.png)
+
 > Sketchnote karya [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Kuiz Pra Kuliah
+
 [Kuiz Pra Kuliah](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/13)
 
 Pelajaran ini merangkumi asas-asas JavaScript, bahasa yang menyediakan interaktiviti di web. Dalam pelajaran ini, anda akan belajar tentang array dan loop, yang digunakan untuk memanipulasi data.
@@ -11,6 +13,7 @@ Pelajaran ini merangkumi asas-asas JavaScript, bahasa yang menyediakan interakti
 [![Array dan Loop](https://img.youtube.com/vi/Q_CRM2lXXBg/0.jpg)](https://youtube.com/watch?v=Q_CRM2lXXBg "Array dan Loop")
 
 > Klik gambar di atas untuk video mengenai tatasusunan dan gelung.
+
 ## Array
 
 Bekerja dengan data adalah tugas biasa untuk bahasa apa pun, dan ini adalah tugas yang lebih mudah apabila data disusun dalam format struktur, seperti array. Dengan array, data disimpan dalam struktur yang serupa dengan senarai. Satu faedah utama array ialah anda dapat menyimpan pelbagai jenis data dalam satu array.
@@ -30,7 +33,13 @@ Nilai array diberikan nilai unik yang disebut **indeks**, nombor bulat yang dibe
 ✅ Adakah mengejutkan anda bahawa tatasusunan bermula dari indeks sifar? Dalam beberapa bahasa pengaturcaraan, indeks bermula pada 1. Ada sejarah menarik di sekitar ini, yang boleh anda [baca di Wikipedia](https://en.wikipedia.org/wiki/Zero-based_numbering).
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors[2]; //"Vanilla"
 ```
 
@@ -51,7 +60,13 @@ iceCreamFlavors[5] = "Cookie Dough"; //Tambah "Cookie Dough"
 Untuk mengetahui berapa banyak item dalam array, gunakan sifat `length`.
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors.length; //5
 ```
 
@@ -63,16 +78,13 @@ Loop membolehkan tugas berulang atau tugasan **interaktif**, dan dapat menjimatk
 
 ### For Loop
 
-Gelung `for` memerlukan 3 bahagian untuk berulang:
-    - `counter` Pemboleh ubah yang biasanya diinisialisasi dengan nombor yang mengira bilangan lelaran.
-    - Ungkapan `condition` yang menggunakan operator perbandingan untuk menyebabkan gelung berhenti ketika` true`
-    - `iterasi-ekspresi` Berjalan pada akhir setiap lelaran, biasanya digunakan untuk mengubah nilai pembilang
+Gelung `for` memerlukan 3 bahagian untuk berulang: - `counter` Pemboleh ubah yang biasanya diinisialisasi dengan nombor yang mengira bilangan lelaran. - Ungkapan `condition` yang menggunakan operator perbandingan untuk menyebabkan gelung berhenti ketika` true` - `iterasi-ekspresi` Berjalan pada akhir setiap lelaran, biasanya digunakan untuk mengubah nilai pembilang
 
 ```javascript
-    //Menggira hingga 10
-    for (let i = 0; i < 10; i++) {
-        console.log(i);
-    }
+//Menggira hingga 10
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
 ```
 
 ✅ Jalankan kod ini di konsol penyemak imbas. Apa yang berlaku apabila anda membuat perubahan kecil pada ungkapan pembilang, keadaan, atau lelaran? Bolehkah anda membuatnya berjalan ke belakang, membuat undur?
@@ -85,8 +97,8 @@ Tidak seperti sintaks untuk `for` loop, `while` loop hanya memerlukan keadaan ya
 //Menggira hingga 10
 let i = 0;
 while (i < 10) {
- console.log(i);
- i++;
+  console.log(i);
+  i++;
 }
 ```
 
@@ -97,7 +109,13 @@ while (i < 10) {
 Array sering digunakan dengan loop kerana kebanyakan keadaan memerlukan panjang larik untuk menghentikan loop, dan indeks juga boleh menjadi nilai pembilang.
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 
 for (let i = 0; i < iceCreamFlavors.length; i++) {
   console.log(iceCreamFlavors[i]);
@@ -113,9 +131,10 @@ for (let i = 0; i < iceCreamFlavors.length; i++) {
 Terdapat cara lain untuk mengulangi tatasusunan selain untuk dan semasa gelung. Terdapat [forEach](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach), [for-of](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for...of), dan [map](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/map). Tulis semula array loop anda menggunakan salah satu teknik ini.
 
 ## Kuiz Pasca Kuliah
+
 [Kuiz Pasca Kuliah](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/14)
 
-## Mengkaji and Belajar Sendiri 
+## Mengkaji and Belajar Sendiri
 
 Array dalam JavaScript mempunyai banyak kaedah yang melekat padanya, sangat berguna untuk manipulasi data. [Baca kaedah ini](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array) dan cuba beberapa di antaranya (seperti push, pop, slice dan splice) pada pelbagai ciptaan anda.
 

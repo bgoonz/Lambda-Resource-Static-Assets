@@ -6,13 +6,13 @@
 
 ### 大綱
 
-隨著網頁應用越來越龐大，追蹤資料流的動向也是一種挑戰。程式取得了何種資料、網頁如何處理它、何時何處被更新上去……這些很容易地導致程式碼凌亂而難以維護。尤其是當你需要在不同頁面上做資料共享時，好比說使用者的資料。*狀態控管(state management)* 的觀念已經存在於所有程式中，我們也開始需要在開發複雜的網頁應用程式時，注意這個關鍵點。
+隨著網頁應用越來越龐大，追蹤資料流的動向也是一種挑戰。程式取得了何種資料、網頁如何處理它、何時何處被更新上去……這些很容易地導致程式碼凌亂而難以維護。尤其是當你需要在不同頁面上做資料共享時，好比說使用者的資料。_狀態控管(state management)_ 的觀念已經存在於所有程式中，我們也開始需要在開發複雜的網頁應用程式時，注意這個關鍵點。
 
 在這個最終章內，我們會總覽整個程式並重新思考該如何管理程式狀態，讓瀏覽器能在任何時刻做重新整理，在不同的使用者階段維持資料的狀態。
 
 ### 開始之前
 
-你需要先完成[取得資料](../../3-data/translations/README.zh-tw.md)的網頁開發章節。你還需要安裝 [Node.js](https://nodejs.org) 並於本地端[執行伺服器 API](../../api/translations/README.zh-tw.md)以管理使用者資料。 
+你需要先完成[取得資料](../../3-data/translations/README.zh-tw.md)的網頁開發章節。你還需要安裝 [Node.js](https://nodejs.org) 並於本地端[執行伺服器 API](../../api/translations/README.zh-tw.md)以管理使用者資料。
 
 你可以測試伺服器是否運作正常，在終端機中輸入指令：
 
@@ -62,7 +62,7 @@ let account = null;
 
 ```js
 let state = {
-  account: null
+  account: null,
 };
 ```
 
@@ -83,8 +83,8 @@ This refactoring by itself did not bring much improvements, but the idea was to 
 
 現在我們有 `state` 物件儲存資料了，接下來要來中心化這些更新。目標是能輕易地追蹤任何被觸發的改變。
 
-為了避免改動 `state` 物件，我們考慮使它[*不可變*](https://zh.wikipedia.org/wiki/%E4%B8%8D%E5%8F%AF%E8%AE%8A%E7%89%A9%E4%BB%B6)，意味著它不能被做任何的修改。
-這也代表你必須建立新的狀態物件來替換它。藉由這個方式，你就有一套保護措施阻絕潛在非預期[風險](https://zh.wikipedia.org/wiki/%E5%89%AF%E4%BD%9C%E7%94%A8_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6))，也開創出應用程式內還原與重做的功能，讓程式偵錯更加的容易。舉例來說，你可以紀錄狀態的改變，儲存狀態的歷史紀錄來了解錯誤的來源。
+為了避免改動 `state` 物件，我們考慮使它[_不可變_](https://zh.wikipedia.org/wiki/%E4%B8%8D%E5%8F%AF%E8%AE%8A%E7%89%A9%E4%BB%B6)，意味著它不能被做任何的修改。
+這也代表你必須建立新的狀態物件來替換它。藉由這個方式，你就有一套保護措施阻絕潛在非預期[風險](<https://zh.wikipedia.org/wiki/%E5%89%AF%E4%BD%9C%E7%94%A8_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6)>)，也開創出應用程式內還原與重做的功能，讓程式偵錯更加的容易。舉例來說，你可以紀錄狀態的改變，儲存狀態的歷史紀錄來了解錯誤的來源。
 
 在 JavaScript 中，你可以使用 [`Object.freeze()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) 來建立不可變物件。若你想在不可變物件上做更動，例外處理(exception)就會發生。
 
@@ -98,31 +98,31 @@ This refactoring by itself did not bring much improvements, but the idea was to 
 function updateState(property, newData) {
   state = Object.freeze({
     ...state,
-    [property]: newData
+    [property]: newData,
   });
 }
 ```
 
-在這個函式中，我們會建立新的狀態物件，並利用[*展開運算子(`...`)(Spread Operator)*](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals)複製前一個資料狀態。接著，我們使用[括弧記法(Bracket Notation)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects#Objects_and_properties) `[property]` 賦予並覆蓋特定的狀態物件。最後，我們為物件上鎖，`Object.freeze()` 避免任何的改動。目前我們只有 `account` 資料存在狀態中，利用此方法可以讓你新增任何你想要的資料。
+在這個函式中，我們會建立新的狀態物件，並利用[_展開運算子(`...`)(Spread Operator)_](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals)複製前一個資料狀態。接著，我們使用[括弧記法(Bracket Notation)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects#Objects_and_properties) `[property]` 賦予並覆蓋特定的狀態物件。最後，我們為物件上鎖，`Object.freeze()` 避免任何的改動。目前我們只有 `account` 資料存在狀態中，利用此方法可以讓你新增任何你想要的資料。
 
 我們會更新 `state` 初始化設定，確保初始狀態也被上鎖：
 
 ```js
 let state = Object.freeze({
-  account: null
+  account: null,
 });
 ```
 
 接著，更新函式 `register`，將 `state.account = result;` 替換為：
 
 ```js
-updateState('account', result);
+updateState("account", result);
 ```
 
 在函式 `login` 上做一樣的事，將 `state.account = data;` 替換為：
 
 ```js
-updateState('account', data);
+updateState("account", data);
 ```
 
 藉由這個機會，我們能解決帳戶資料在*登出*時，不會被清除的問題。
@@ -131,8 +131,8 @@ updateState('account', data);
 
 ```js
 function logout() {
-  updateState('account', null);
-  navigate('/login');
+  updateState("account", null);
+  navigate("/login");
 }
 ```
 
@@ -148,8 +148,8 @@ function logout() {
 
 當你想在瀏覽器內儲存資料，你必須思考幾項重要的問題：
 
-- *這項資料很危險嗎？* 你應該要避免在用戶端儲存敏感的資料，例如帳戶密碼。
-- *你需要儲存資料多久？* 你打算短時間內做存取，還是永久地保存？
+- _這項資料很危險嗎？_ 你應該要避免在用戶端儲存敏感的資料，例如帳戶密碼。
+- _你需要儲存資料多久？_ 你打算短時間內做存取，還是永久地保存？
 
 網頁應用程式中有許多儲存資訊的方法，一切都取決於你想達成的目標。舉例來說，你可以利用網址來儲存搜尋資訊，讓使用者間能共享資訊。若資料需要與伺服器共享，好比說[認證](https://zh.wikipedia.org/wiki/%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81)資訊，你可以使用 [HTTP cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)。
 
@@ -168,7 +168,7 @@ function logout() {
 我們想讓使用者在登出之前，保持登入狀態。所以我們使用 `localStorage` 來儲存帳戶資料。首先，定義一組 key 來紀錄我們的資料內容。
 
 ```js
-const storageKey = 'savedAccount';
+const storageKey = "savedAccount";
 ```
 
 在函式 `updateState()` 末端加入此行：
@@ -185,7 +185,7 @@ localStorage.setItem(storageKey, JSON.stringify(state.account));
 function init() {
   const savedAccount = localStorage.getItem(storageKey);
   if (savedAccount) {
-    updateState('account', JSON.parse(savedAccount));
+    updateState("account", JSON.parse(savedAccount));
   }
 
   // 之前的初始化程式
@@ -237,7 +237,7 @@ async function updateAccountData() {
     return logout();
   }
 
-  updateState('account', data);
+  updateState("account", data);
 }
 ```
 
@@ -256,8 +256,8 @@ async function refresh() {
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard', init: refresh }
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard", init: refresh },
 };
 ```
 

@@ -1,6 +1,7 @@
 # Terrarium 프로젝트 파트 1: HTML 소개
 
 ![Introduction to HTML](/sketchnotes/webdev101-html.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 강의 전 퀴즈
@@ -22,10 +23,11 @@ HTML, HyperText Markup Language는 웹의 '뼈대' 입니다. CSS가 HTML과 Jav
 또는
 
 git bash에서 아래 명령어를 수행합니다:
-* `mkdir terrarium`
-* `cd terrarium`
-* `touch index.html`
-* `code index.html` 또는 `nano index.html`
+
+- `mkdir terrarium`
+- `cd terrarium`
+- `touch index.html`
+- `code index.html` 또는 `nano index.html`
 
 > index.html 파일은 브라우저에 폴더의 기본 파일임을 나타냅니다; `https://anysite.com/test`와 같은 URL은 `index.html`이 내부에 있는 `test`라는 폴더에 포함되어 있는 폴더 구조를 사용하여 제작될 수 있습니다; `index.html`은 URL에 표시할 필요가 없습니다.
 
@@ -56,11 +58,11 @@ HTML 파일의 첫 번째 줄은 doctype입니다. 파일 최상단에 줄이 �
 
 HTML 문서의 'head' 영역에는 [metadata](https://developer.mozilla.org/docs/Web/HTML/Element/meta)라고 하는 웹 페이지의 중요한 정보가 포함되어 있습니다. 우리의 경우에는, 이 페이지가 렌더링될 웹 서버에 다음 4가지를 알립니다.
 
--   페이지의 제목
--   페이지 메타데이터 포함:
-	- 페이지에서 사용되는 문자 인코딩을 알려주는, 'character set'
-    - IE=edge 브라우저가 지원됨을 나타내는 `x-ua-compatible`을 포함한, 브라우저 정보
-    - viewport가 볼러질 때 어떻게 동작해야되는 지에 대한 정보. viewport를 초기 배율 1로 설정하며 처음 불러올 때 줌 수준이 제어됩니다.
+- 페이지의 제목
+- 페이지 메타데이터 포함:
+  - 페이지에서 사용되는 문자 인코딩을 알려주는, 'character set'
+  - IE=edge 브라우저가 지원됨을 나타내는 `x-ua-compatible`을 포함한, 브라우저 정보
+  - viewport가 볼러질 때 어떻게 동작해야되는 지에 대한 정보. viewport를 초기 배율 1로 설정하며 처음 불러올 때 줌 수준이 제어됩니다.
 
 ### 작업
 
@@ -68,10 +70,10 @@ HTML 문서의 'head' 영역에는 [metadata](https://developer.mozilla.org/docs
 
 ```html
 <head>
-	<title>Welcome to my Virtual Terrarium</title>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome to my Virtual Terrarium</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 ```
 
@@ -90,13 +92,13 @@ HTML에서는, .html 파일에 태그를 추가하여 웹 페이지의 요소를
 ```html
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Welcome to my Virtual Terrarium</title>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-	</head>
-	<body></body>
+  <head>
+    <title>Welcome to my Virtual Terrarium</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body></body>
 </html>
 ```
 
@@ -114,52 +116,52 @@ HTML에서는, .html 파일에 태그를 추가하여 웹 페이지의 요소를
 
 ```html
 <div id="page">
-	<div id="left-container" class="container">
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
-		</div>
-	</div>
-	<div id="right-container" class="container">
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
-		</div>
-	</div>
+  <div id="left-container" class="container">
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
+    </div>
+  </div>
+  <div id="right-container" class="container">
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
+    </div>
+  </div>
 </div>
 ```
 
@@ -197,13 +199,13 @@ HTML에서는, .html 파일에 태그를 추가하여 웹 페이지의 요소를
 
 ```html
 <div id="terrarium">
-	<div class="jar-top"></div>
-	<div class="jar-walls">
-		<div class="jar-glossy-long"></div>
-		<div class="jar-glossy-short"></div>
-	</div>
-	<div class="dirt"></div>
-	<div class="jar-bottom"></div>
+  <div class="jar-top"></div>
+  <div class="jar-walls">
+    <div class="jar-glossy-long"></div>
+    <div class="jar-glossy-short"></div>
+  </div>
+  <div class="dirt"></div>
+  <div class="jar-bottom"></div>
 </div>
 ```
 
@@ -224,7 +226,6 @@ HTML에는 여전히 재미있고 '오래된' 태그가 있지만, 마크업에�
 HTML은 웹을 오늘 날의 웹으로 구축하는 데 도움이 준 'tried and true' 빌딩 블록 시스템입니다. 오래된 태그와 새로운 태그를 연구하여 그 역사에 대해 조금 배우십시오. 일부는 더 이상 안 쓰고 일부는 새로 만들어진 이유를 알 수 있습니까? 앞으로 어떤 태그가 도입될까요?
 
 [Microsoft Learn](https://docs.microsoft.com/learn/modules/build-simple-website/?WT.mc_id=academic-13441-cxa)에서 웹과 모바일용 사이트 제작에 대해 자세히 알아보세요.
-
 
 ## 과제
 

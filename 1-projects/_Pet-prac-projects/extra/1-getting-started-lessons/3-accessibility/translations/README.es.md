@@ -1,6 +1,7 @@
 # Creación de páginas web accesibles
 
 ![Todo sobre accesibilidad](/sketchnotes/webdev101-a11y.png)
+
 > Sketchnote por [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## [Pre-lecture prueba](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/5)
@@ -9,7 +10,7 @@
 >
 > \- Sir Timothy Berners-Lee, director del W3C e inventor de la World Wide Web
 
-Esta cita destaca perfectamente la importancia de crear sitios web accesibles. Una aplicación a la que no pueden acceder todos es, por definición, excluyente. Como desarrolladores web, siempre debemos tener en cuenta la accesibilidad. Al tener este enfoque desde el principio, estará bien encaminado para garantizar que todos puedan acceder a las páginas que crea. En esta lección, aprenderás sobre las herramientas que pueden ayudarlo a asegurarse de que sus activos web sean accesibles y cómo construir teniendo en cuenta la accesibilidad. 
+Esta cita destaca perfectamente la importancia de crear sitios web accesibles. Una aplicación a la que no pueden acceder todos es, por definición, excluyente. Como desarrolladores web, siempre debemos tener en cuenta la accesibilidad. Al tener este enfoque desde el principio, estará bien encaminado para garantizar que todos puedan acceder a las páginas que crea. En esta lección, aprenderás sobre las herramientas que pueden ayudarlo a asegurarse de que sus activos web sean accesibles y cómo construir teniendo en cuenta la accesibilidad.
 
 ## Herramientas para usar
 
@@ -30,7 +31,7 @@ Todo desarrollador web debería familiarizarse con un lector de pantalla. Como s
 Los colores en los sitios web deben elegirse cuidadosamente para responder a las necesidades de los usuarios daltónicos o de las personas que tienen dificultades para ver colores de bajo contraste.
 
 ✅ Prueba un sitio web que te guste usar para el uso del color con una extensión de navegador como
- [WCAG's color checker](https://microsoftedge.microsoft.com/addons/detail/wcag-color-contrast-check/idahaggnlnekelhgplklhfpchbfdmkjp?hl=en-US). ¿Qué aprendiste?
+[WCAG's color checker](https://microsoftedge.microsoft.com/addons/detail/wcag-color-contrast-check/idahaggnlnekelhgplklhfpchbfdmkjp?hl=en-US). ¿Qué aprendiste?
 
 ### Lighthouse
 
@@ -96,7 +97,7 @@ Los lectores de pantalla también tienen la capacidad de leer solo los enlaces e
 
 ### Buen texto de enlace
 
-Un buen texto de enlace describe brevemente lo que está al otro lado del enlace. En el ejemplo anterior, hablando de pequeños pingüinos, el enlace es a la página de Wikipedia sobre la especie. La frase *pequeños pingüinos* sería un texto de enlace perfecto, ya que deja en claro lo que alguien aprenderá si hace clic en el enlace: pequeños pingüinos.
+Un buen texto de enlace describe brevemente lo que está al otro lado del enlace. En el ejemplo anterior, hablando de pequeños pingüinos, el enlace es a la página de Wikipedia sobre la especie. La frase _pequeños pingüinos_ sería un texto de enlace perfecto, ya que deja en claro lo que alguien aprenderá si hace clic en el enlace: pequeños pingüinos.
 
 > El [pingüino pequeño](https://en.wikipedia.org/wiki/Little_penguin), a veces conocido como el pingüino de hadas, es el pingüino más pequeño del mundo.
 
@@ -115,7 +116,7 @@ Imagina la siguiente página:
 | Widget       | [Descripción]('#') | [Orden]('#') |
 | Super widget | [Descripción]('#') | [Orden]('#') |
 
-En este ejemplo, duplicar el texto de descripción y orden tiene sentido para alguien que usa un navegador. Sin embargo, alguien que use un lector de pantalla solo escuchará las palabras *descripción* y *orden* repetidas sin contexto.
+En este ejemplo, duplicar el texto de descripción y orden tiene sentido para alguien que usa un navegador. Sin embargo, alguien que use un lector de pantalla solo escuchará las palabras _descripción_ y _orden_ repetidas sin contexto.
 
 Para apoyar este tipo de escenarios, HTML apoya un conjunto de atributos conocidos como [Aplicaciones de Internet enriquecidas accesibles (ARIA)](https://developer.mozilla.org/docs/Web/Accessibility/ARIA). Estos atributos te permiten proporcionar información adicional a los lectores de pantalla.
 
@@ -123,15 +124,20 @@ Para apoyar este tipo de escenarios, HTML apoya un conjunto de atributos conocid
 
 Puedes usar `aria-label` para describir el enlace cuando el formato de la página no te lo permite. La descripción del widget podría establecerse como
 
-``` html
+```html
 <a href="#" aria-label="Widget description">descripción</a>
 ```
 
 ✅ En general, el uso de HTML semántico como se describe arriba reemplaza el uso de ARIA, pero a veces no existe un equivalente semántico para varios widgets HTML. Un buen ejemplo es una barra de progreso. No hay un equivalente HTML para una barra de progreso, por lo que identifica el `<div>` genérico para este elemento con un rol y valores de aria adecuados. La [documentación de MDN sobre ARIA](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) contiene más información útil.
 
 ```html
-<div id="percent-loaded" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-</div>
+<div
+  id="percent-loaded"
+  role="progressbar"
+  aria-valuenow="75"
+  aria-valuemin="0"
+  aria-valuemax="100"
+></div>
 ```
 
 ## Imágenes
@@ -176,7 +182,7 @@ Una web accesible para algunos no es una verdadera "red mundial". La mejor maner
     </div>
     <div class="main-content">
       <div>
-        <p class="page-title">Bienvenida a la Tortuga Ipsum. 
+        <p class="page-title">Bienvenida a la Tortuga Ipsum.
             <a href="">Haz clic aquí</a> para aprender más.
         </p>
         <p class="article-text">

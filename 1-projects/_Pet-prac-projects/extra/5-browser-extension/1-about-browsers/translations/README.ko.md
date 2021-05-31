@@ -1,11 +1,12 @@
 # 브라우저 확장 프로젝트 파트 1: 브라우저에 대한 모든 것
 
 ![Browser sketchnote](/sketchnotes/browser.jpg)
+
 > Sketchnote by [Wassim Chegham](https://dev.to/wassimchegham/ever-wondered-what-happens-when-you-type-in-a-url-in-an-address-bar-in-a-browser-3dob)
 
 ## 강의 전 퀴즈
 
-[Pre-lecture quiz][Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/23?loc=ko)
+[Pre-lecture quiz][pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/23?loc=ko)
 
 ### 소개
 
@@ -20,6 +21,7 @@
 ✅ 약간의 역사: 첫번째 브라우저는 'WorldWideWeb'라고 불렸으며 Sir Timothy Berners-Lee가 1990년에 만들었습니다.
 
 ![early browsers](../images/earlybrowsers.jpg)
+
 > Some early browsers, via [Karen McGrane](https://www.slideshare.net/KMcGrane/week-4-ixd-history-personal-computing)
 
 사용자가 URL(Uniform Resource Locator) 주소를 사용하여 인터넷에 연결하고, `http` 혹은 `https` 주소를 통해 Hypertext Transfer Protocol을 사용하면, 브라우저가 웹 서버와 통신하여 웹 페이지를 가져옵니다.
@@ -73,12 +75,12 @@
 잠시 시간을 내어 코드베이스를 보세요:
 
 dist
-    -|manifest.json (defaults set here)
-    -|index.html (front-end HTML markup here)
-    -|background.js (background JS here)
-    -|main.js (built JS)
+-|manifest.json (defaults set here)
+-|index.html (front-end HTML markup here)
+-|background.js (background JS here)
+-|main.js (built JS)
 src
-    -|index.js (your JS code goes here)
+-|index.js (your JS code goes here)
 
 ✅ API 키와 지역 코드를 가지고 있다면, 나중에 다시 사용할 수 있도록 메모하세요.
 
@@ -110,8 +112,9 @@ src
 		<input type="text" required class="api-key" />
 	</div>
 	<button class="search-btn">Submit</button>
-</form>	
+</form>
 ```
+
 저장된 정보를 입력하고 로컬 저장소에 저장하는 양식입니다.
 
 다음, 결과 영역을 만듭니다; 마지막 폼 태그 아래에 약간의 div를 추가합니다:
@@ -129,6 +132,7 @@ src
 	<button class="clear-btn">Change region</button>
 </div>
 ```
+
 이 시점에서 다시 빌드할 수 있습니다. 이 확장의 패키지 의존성을 설치해야 합니다:
 
 ```
@@ -161,7 +165,6 @@ npm install
 
 [An interview with Tim Berners-Lee](https://www.theguardian.com/technology/2019/mar/12/tim-berners-lee-on-30-years-of-the-web-if-we-dream-a-little-we-can-get-the-web-we-want)
 
-## 과제 
+## 과제
 
 [Restyle your extension](../assignment.md)
-

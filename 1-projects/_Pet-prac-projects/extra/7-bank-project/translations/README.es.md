@@ -3,7 +3,7 @@
 En este proyecto, aprenderá a construir un banco ficticio. Estas lecciones incluyen instrucciones sobre cómo diseñar un sitio web y proporcionar rutas, crear formularios, administrar el estado y obtener datos de una API desde la cual puede obtener los datos del banco.
 
 | ![Screen1](../images/screen1.png) | ![Screen2](../images/screen2.png) |
-|-----------------------------------|-----------------------------------|
+| --------------------------------- | --------------------------------- |
 
 ## Lecciones
 

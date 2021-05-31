@@ -55,13 +55,13 @@ Perkara di atas akan memulakan Pelayan HTTP pada alamat `http://localhost:5000`.
 
 ### Tambahkan Kod
 
-1. **Salin atas aset yang diperlukan** dari folder `solution/aset/` ke folder `your-work`; anda akan menambah aset `life.png`. Tambahkan lifeImg ke fungsi window.onload:
+1.  **Salin atas aset yang diperlukan** dari folder `solution/aset/` ke folder `your-work`; anda akan menambah aset `life.png`. Tambahkan lifeImg ke fungsi window.onload:
 
     ```javascript
     lifeImg = await loadTexture("assets/life.png");
     ```
 
-1. Tambahkan `lifeImg` ke senarai aset:
+1.  Tambahkan `lifeImg` ke senarai aset:
 
     ```javascript
     let heroImg,
@@ -71,100 +71,101 @@ Perkara di atas akan memulakan Pelayan HTTP pada alamat `http://localhost:5000`.
     eventEmitter = new EventEmitter();
     ```
 
-2. **Tambah pemboleh ubah**. Tambahkan kod yang mewakili jumlah skor anda (0) dan tinggal (3), paparkan skor ini di skrin.
+1.  **Tambah pemboleh ubah**. Tambahkan kod yang mewakili jumlah skor anda (0) dan tinggal (3), paparkan skor ini di skrin.
 
-3. **Panjangkan fungsi `updateGameObjects ()`**. Panjangkan fungsi `updateGameObjects ()` untuk menangani perlanggaran musuh:
+1.  **Panjangkan fungsi `updateGameObjects ()`**. Panjangkan fungsi `updateGameObjects ()` untuk menangani perlanggaran musuh:
 
     ```javascript
-    enemies.forEach(enemy => {
-        const heroRect = hero.rectFromGameObject();
-        if (intersectRect(heroRect, enemy.rectFromGameObject())) {
-          eventEmitter.emit(Messages.COLLISION_ENEMY_HERO, { enemy });
-        }
-      })
+    enemies.forEach((enemy) => {
+      const heroRect = hero.rectFromGameObject();
+      if (intersectRect(heroRect, enemy.rectFromGameObject())) {
+        eventEmitter.emit(Messages.COLLISION_ENEMY_HERO, { enemy });
+      }
+    });
     ```
 
-4. **Tambahkan `life` dan` point`**.
-   1. **Memulakan pemboleh ubah**. Di bawah `this.cooldown = 0` di kelas `Hero`, tetapkan hidup dan mata:
+1.  **Tambahkan `life` dan` point`**.
+
+    1.  **Memulakan pemboleh ubah**. Di bawah `this.cooldown = 0` di kelas `Hero`, tetapkan hidup dan mata:
 
         ```javascript
         this.life = 3;
         this.points = 0;
         ```
 
-    1. **Lukis pemboleh ubah pada skrin**. Lukiskan nilai-nilai ini ke skrin:
+    1.  **Lukis pemboleh ubah pada skrin**. Lukiskan nilai-nilai ini ke skrin:
 
         ```javascript
         function drawLife() {
           // TODO, 35, 27
           const START_POS = canvas.width - 180;
-          for(let i=0; i < hero.life; i++ ) {
+          for (let i = 0; i < hero.life; i++) {
             ctx.drawImage(
-              lifeImg, 
-              START_POS + (45 * (i+1) ), 
-              canvas.height - 37);
+              lifeImg,
+              START_POS + 45 * (i + 1),
+              canvas.height - 37
+            );
           }
         }
-        
+
         function drawPoints() {
           ctx.font = "30px Arial";
           ctx.fillStyle = "red";
           ctx.textAlign = "left";
-          drawText("Points: " + hero.points, 10, canvas.height-20);
+          drawText("Points: " + hero.points, 10, canvas.height - 20);
         }
-        
+
         function drawText(message, x, y) {
           ctx.fillText(message, x, y);
         }
-
         ```
 
-        1. ** Tambahkan kaedah ke gelung Permainan **. Pastikan anda menambahkan fungsi ini ke fungsi window.onload anda di bawah `updateGameObjects()`:
+        1.  ** Tambahkan kaedah ke gelung Permainan **. Pastikan anda menambahkan fungsi ini ke fungsi window.onload anda di bawah `updateGameObjects()`:
 
-               ```javascript
-               drawPoints();
-               drawLife();
-               ``` 
+                ```javascript
+                drawPoints();
+                drawLife();
+                ```
 
-1. **Melaksanakan peraturan permainan**. Laksanakan peraturan permainan berikut:
+1.  **Melaksanakan peraturan permainan**. Laksanakan peraturan permainan berikut:
 
-   1. **Untuk setiap pertembungan pahlawan dan musuh**, tolaklah nyawa.
+    1. **Untuk setiap pertembungan pahlawan dan musuh**, tolaklah nyawa.
 
     Lanjutkan kelas `Hero` untuk melakukan pemotongan ini:
 
-        ```javascript
-        decrementLife() {
-          this.life--;
-          if (this.life === 0) {
-            this.dead = true;
-          }
-        }
-        ```
+         ```javascript
+         decrementLife() {
+           this.life--;
+           if (this.life === 0) {
+             this.dead = true;
+           }
+         }
+         ```
 
     2. **Untuk setiap laser yang menyerang musu**, tingkatkan skor permainan dengan 100 mata.
 
     Panjangkan kelas Wira untuk melakukan kenaikan ini:
 
-        ```javascript
-         incrementPoints() {
-            this.points += 100;
-          }
-        ```
+         ```javascript
+          incrementPoints() {
+             this.points += 100;
+           }
+         ```
 
-        Tambahkan fungsi ini ke Collision Event Emitter anda:
+         Tambahkan fungsi ini ke Collision Event Emitter anda:
 
-        ```javascript
-        eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-           first.dead = true;
-           second.dead = true;
-           hero.incrementPoints();
-        })
+         ```javascript
+         eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
+            first.dead = true;
+            second.dead = true;
+            hero.incrementPoints();
+         })
 
-        eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
-           enemy.dead = true;
-           hero.decrementLife();
-        });
-        ```
+         eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
+            enemy.dead = true;
+            hero.decrementLife();
+         });
+         ```
 
 ✅ Lakukan sedikit penyelidikan untuk mengetahui permainan lain yang dibuat menggunakan JavaScript/Canvas. Apakah sifat umum mereka?
 

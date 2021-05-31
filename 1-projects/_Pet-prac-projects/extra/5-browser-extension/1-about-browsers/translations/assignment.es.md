@@ -6,6 +6,6 @@ El código base para esta extensión viene completo con estilos, pero no es nece
 
 ## Rúbrica
 
-| Criterios | Ejemplar | Adecuado | Necesita mejorar |
-| -------- | -------------------------------------------- | --------------------- | ----------------- |
-| | El código se envía con nuevos estilos funcionales | El estilo está incompleto | Los estilos tienen errores |
+| Criterios | Ejemplar                                          | Adecuado                  | Necesita mejorar           |
+| --------- | ------------------------------------------------- | ------------------------- | -------------------------- |
+|           | El código se envía con nuevos estilos funcionales | El estilo está incompleto | Los estilos tienen errores |

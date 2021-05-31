@@ -83,6 +83,7 @@ function reset(e) {
 }
 
 ```
+
 在函式中，有一些有趣的邏輯。閱讀它們，你看出發生什麼事嗎？
 
 - 兩個 `const` 被設定為檢查用戶是否有儲存 APIKey 與國家區域代碼在 local storage 中。
@@ -118,6 +119,7 @@ function handleSubmit(e) {
 	setUpUser(apiKey.value, region.value);
 }
 ```
+
 ✅ 刷新你的記憶 ── 上堂課中的 HTML 檔案開頭有兩個輸入區域，它們的 `values` 被存到 `const` 中，並且被定為 `required`，表示瀏覽器禁止使用者輸入空值。
 
 ### 設定使用者
@@ -135,6 +137,7 @@ function setUpUser(apiKey, regionName) {
 	displayCarbonUsage(apiKey, regionName);
 }
 ```
+
 這個函式設定當 API 被呼叫時，顯示讀取訊息。到這裡，你即將建立這個擴充功能專案最重要的函式！
 
 ### 顯示碳排放量
@@ -195,7 +198,7 @@ async function displayCarbonUsage(apiKey, region) {
 
 這是一個挺大的函式，發生了什麼事？
 
-- 遵循程式實踐過程，你使用關鍵字 `async` 讓函式非同步地作行為。函式內的 `try/catch` 區塊會在 API 回傳資料時回傳 promise 物件。因為我們無法控制 API 會多快地回應訊息(甚至無法回應訊息！)，你需要處理這種不確定性的時序關係。 
+- 遵循程式實踐過程，你使用關鍵字 `async` 讓函式非同步地作行為。函式內的 `try/catch` 區塊會在 API 回傳資料時回傳 promise 物件。因為我們無法控制 API 會多快地回應訊息(甚至無法回應訊息！)，你需要處理這種不確定性的時序關係。
 - 藉由提供 API Key 訪問 co2signal API 以取得你的地區資料。要使用這把鑰匙，你必須在網頁標頭中新增認證參數。
 - 當 API 回應時，你將各種物件填入回傳的數值，並輸出到畫面上中。
 - 如果發生錯誤，或沒有結果產生，輸出錯誤訊息。
@@ -221,4 +224,3 @@ async function displayCarbonUsage(apiKey, region) {
 ## 作業
 
 [認領一項 API](assignment.zh-tw.md)
-

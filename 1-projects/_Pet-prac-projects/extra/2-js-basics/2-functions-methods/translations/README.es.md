@@ -1,5 +1,5 @@
-
 ![JavaScript Basics - Functions](/sketchnotes/webdev101-js-functions.png)
+
 > Sketchnote por [Tomomi Imura](https://twitter.com/girlie_mac)
 
 # Conceptos básicos de JavaScript: funcións y funciones
@@ -15,8 +15,9 @@ Cuando necesite su código para realizar una tarea, utilizará un función o una
 Una función es un bloque de código destinado a realizar una tarea. Usted crea una función usando la palabra clave `function`, un nombre, un conjunto de parámetros y la definición de la función también conocida como funciones _body_. La sintaxis de una función se parece a la siguiente:
 
 ```javascript
-function name(param, param2, param3) { // definición de función
- // definición de función/body
+function name(param, param2, param3) {
+  // definición de función
+  // definición de función/body
 }
 ```
 
@@ -31,8 +32,9 @@ Igual de importante es la capacidad de nombrar una función. Si bien esto puede 
 La sintaxis de una función se parece a la siguiente:
 
 ```javascript
-function nameOfFunction() { // function definition
- // function definition/body
+function nameOfFunction() {
+  // function definition
+  // function definition/body
 }
 ```
 
@@ -40,7 +42,7 @@ Si quisiera crear una función para mostrar un saludo, podría verse así:
 
 ```javascript
 function displayGreeting() {
-  console.log('¡Hola, mundo!');
+  console.log("¡Hola, mundo!");
 }
 ```
 
@@ -68,9 +70,7 @@ Para que una función sea más reutilizable, a menudo querrá pasarle informaci�
 Los parámetros se enumeran en la parte de definición entre paréntesis y están separados por comas así:
 
 ```javascript
-function name(param, param2, param3) {
-
-}
+function name(param, param2, param3) {}
 ```
 
 Podemos actualizar nuestro `displayGreeting` para aceptar un nombre y mostrarlo.
@@ -85,8 +85,8 @@ function displayGreeting(name) {
 Cuando queremos llamar a nuestra función y pasar el parámetro, lo especificamos entre paréntesis.
 
 ```javascript
-displayGreeting('Paco');
-// dice "¡Hola, Paco!" cuando ejecutas el comando 
+displayGreeting("Paco");
+// dice "¡Hola, Paco!" cuando ejecutas el comando
 ```
 
 ## Valores predeterminados
@@ -94,7 +94,7 @@ displayGreeting('Paco');
 Podemos hacer que nuestra función sea aún más flexible agregando más parámetros. Pero, ¿y si no queremos que se especifiquen todos los valores? Siguiendo con nuestro ejemplo de saludo, podríamos dejar el nombre según sea necesario (necesitamos saber a quién saludamos), pero queremos permitir que el saludo en sí se personalice como desee. Si alguien no quiere personalizarlo, proporcionamos un valor predeterminado en su lugar. Para proporcionar un valor predeterminado a un parámetro, lo configuramos de la misma manera que configuramos un valor para una variable: `parameterName = 'defaultValue'`. Para ver un ejemplo completo:
 
 ```javascript
-function displayGreeting(name, salutation='Hola') {
+function displayGreeting(name, salutation = "Hola") {
   console.log(`${salutation}, ${name}`);
 }
 ```
@@ -102,18 +102,19 @@ function displayGreeting(name, salutation='Hola') {
 Cuando llamamos a la función, podemos decidir si queremos establecer un valor para el "saludo".
 
 ```javascript
-displayGreeting('Paco');
+displayGreeting("Paco");
 // dice "Hola, Paco"
 
-displayGreeting('Paco', 'Hola');
+displayGreeting("Paco", "Hola");
 // dice "Hola, Paco"
 ```
+
 ### Parámetro
 
 Los parámetros se enumeran en la parte de definición entre paréntesis y están separados por comas así:
 
 ```javascript
-(param, param2, param3)
+param, param2, param3;
 ```
 
 ### Parámetro
@@ -124,10 +125,9 @@ Podemos hacer esto usando un **valor de retorno**. La función devuelve un valor
 
 Aquí define qué tarea debe realizar la función. Una función puede devolver algo o no. Si una función devuelve algo, entonces se usa la palabra clave `return`. La palabra clave `return` espera un valor o referencia de lo que se devuelve así:
 
-
 ```javascript
 return myVariable;
-```  
+```
 
 Un ejemplo más completo puede verse así:
 
@@ -144,7 +144,6 @@ En el código anterior, se devuelve la variable `sum`.
 
 Cuando _invocas_ una función, la llamas con 0...N conjuntos de argumentos. Los valores de los argumentos se vinculan a los parámetros correspondientes a su posición. El función `add()` introducido se puede invocar de la siguiente manera:
 
-
 ```javascript
 let result = add(1, 3);
 console.log(result); // imprime 4
@@ -160,7 +159,6 @@ JavaScript es bastante flexible cuando se trata de invocaciones. No está obliga
 
 También existe el concepto de _ valores predeterminados_ en los parámetros. Esto significa que si no se pasa un argumento a un parámetro durante la invocación, el parámetro asumirá el valor predeterminado. Considere el siguiente código usando un valor predeterminado:
 
-
 ```javascript
 function add5(firstValue, secondValue = 5) {
   return firstValue + secondValue;
@@ -170,14 +168,13 @@ function add5(firstValue, secondValue = 5) {
 La invocación de la función anterior podría verse así:
 
 ```javascript
-add5 (4) // devuelve 9
-add5 (4,2) // devuelve 6
+add5(4); // devuelve 9
+add5(4, 2); // devuelve 6
 ```
 
 Cualquier parámetro con valores predeterminados debe estar al final de la lista de parámetros. La razón es que JavaScript intenta hacer coincidir argumentos con parámetros y los parámetros con valores predeterminados pueden omitirse en la invocación.
 
 🚀 Desafío:
-
 
 ## [Post-lecture prueba](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/10)
 
@@ -186,4 +183,3 @@ Cualquier parámetro con valores predeterminados debe estar al final de la lista
 Vale la pena [leer un poco más sobre las funciones de flecha](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), ya que se utilizan cada vez más en bases de código. Practique escribir una función y luego reescribirla con esta sintaxis.
 
 **Tarea**: [Práctica de tipos de datos](assignment.es.md)
-

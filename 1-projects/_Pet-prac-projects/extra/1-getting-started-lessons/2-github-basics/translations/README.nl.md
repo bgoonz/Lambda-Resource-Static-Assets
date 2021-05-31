@@ -3,9 +3,11 @@
 Deze les behandelt de basisprincipes van GitHub, een platform voor het hosten en beheren van wijzigingen in uw code.
 
 ![Intro to GitHub](/sketchnotes/webdev101-github.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Quiz voorafgaand aan de lezing
+
 [Quiz voorafgaand aan de lezing](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/3)
 
 ## Inleiding
@@ -22,8 +24,9 @@ Voordat u begint, moet u controleren of Git is geïnstalleerd. In het terminal t
 `git --version`
 
 Als Git niet is geïnstalleerd, [download Git](https://git-scm.com/downloads). Stel vervolgens uw lokale Git-profiel in de terminal in:
-* `git config --global user.name "uw-naam"`
-* `git config --global user.email "uw-email"`
+
+- `git config --global user.name "uw-naam"`
+- `git config --global user.email "uw-email"`
 
 Om te controleren of Git al is geconfigureerd, kunt u het volgende typen:
 `git config --list`
@@ -36,7 +39,7 @@ Navigeer naar [github.com](https://github.com/) en maak een account aan als u da
 
 ### Voorbereiding
 
-U heeft zowel een map met een codeproject op uw lokale computer (laptop of pc) als een openbare repository op GitHub nodig, die als voorbeeld zal dienen voor hoe u kunt bijdragen aan de projecten van anderen.  
+U heeft zowel een map met een codeproject op uw lokale computer (laptop of pc) als een openbare repository op GitHub nodig, die als voorbeeld zal dienen voor hoe u kunt bijdragen aan de projecten van anderen.
 
 ---
 
@@ -89,7 +92,7 @@ Laten we zeggen dat u lokaal een map hebt met een of ander codeproject en u wilt
    git add .
    ```
 
-   Het `git add` plus `.` argument geeft aan dat al uw bestanden en wijzigingen voor tracking geselecteerd zijn. 
+   Het `git add` plus `.` argument geeft aan dat al uw bestanden en wijzigingen voor tracking geselecteerd zijn.
 
 1. **Voeg geselecteerde bestanden toe voor tracking**
 
@@ -169,13 +172,13 @@ De belangrijkste reden om dingen op GitHub te zetten, was om het mogelijk te mak
 
 Navigeer in uw repository naar `Insights > Community` om te zien hoe uw project zich verhoudt tot aanbevolen communitystandaarden.
 
-   Hier zijn enkele dingen die uw GitHub-repo kunnen verbeteren:
-   - **Omschrijving**. Heeft u een beschrijving voor uw project toegevoegd?
-   - **README**. Heeft u een README toegevoegd? GitHub biedt richtlijnen voor het schrijven van een [README](https://docs.github.com/articles/about-readmes/).
-   - **Richtlijn voor bijdragen**. Heeft uw project [richtlijnen voor bijdragen](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/), 
-   - **Gedragscode**. Een [Gedragscode](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/), 
-   - **Licentie**. Misschien nog belangrijker, een [licentie](https://docs.github.com/articles/adding-a-license-to-a-repository/)?
+Hier zijn enkele dingen die uw GitHub-repo kunnen verbeteren:
 
+- **Omschrijving**. Heeft u een beschrijving voor uw project toegevoegd?
+- **README**. Heeft u een README toegevoegd? GitHub biedt richtlijnen voor het schrijven van een [README](https://docs.github.com/articles/about-readmes/).
+- **Richtlijn voor bijdragen**. Heeft uw project [richtlijnen voor bijdragen](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/),
+- **Gedragscode**. Een [Gedragscode](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/),
+- **Licentie**. Misschien nog belangrijker, een [licentie](https://docs.github.com/articles/adding-a-license-to-a-repository/)?
 
 Al deze middelen zullen nieuwe teamleden helpen. En dat zijn typisch het soort dingen waar nieuwe bijdragers naar kijken voordat ze zelfs maar naar uw code kijken, om erachter te komen of uw project de juiste plek is om hun tijd door te brengen.
 
@@ -185,10 +188,9 @@ Al deze middelen zullen nieuwe teamleden helpen. En dat zijn typisch het soort d
 
 Documenten voor bijdragen helpen mensen bij te dragen aan het project. Het legt uit wat voor soort bijdragen u zoekt en hoe het proces werkt. Bijdragers moeten een reeks stappen doorlopen om bij te dragen aan uw repo op GitHub:
 
-
 1. **Uw repo forken** Waarschijnlijk wilt u dat mensen uw project _forken_. Forken betekent het maken van een replica van uw repository op hun GitHub-profiel.
-1. **Kloon**. Van daaruit zullen ze het project naar hun lokale computer klonen (clone). 
-1. **Maak een tak**. U zult ze willen vragen om een _tak_ voor hun werk te creëren (branch). 
+1. **Kloon**. Van daaruit zullen ze het project naar hun lokale computer klonen (clone).
+1. **Maak een tak**. U zult ze willen vragen om een _tak_ voor hun werk te creëren (branch).
 1. **Richt hun verandering op één gebied**. Vraag bijdragers om hun bijdragen op één ding tegelijk te concentreren - op die manier is de kans groter dat u hun werk kan _samenvoegen_ (merge). Stelt u voor dat ze een bugfix schrijven, een nieuwe functie toevoegen en verschillende tests bijwerken - wat als u slechts 2 van de 3 of 1 van de 3 wijzigingen wilt of kunt implementeren?
 
 ✅ Stelt u een situatie voor waarin takken bijzonder cruciaal zijn voor het schrijven en verzenden van goede code. Welke use-cases kunt u bedenken?
@@ -244,7 +246,7 @@ Laten we een workflow voor bijdragers doorlopen. Veronderstel dat de bijdrager d
 
 1. **Open een PR**. Vervolgens wilt u een PR openen. U doet dat door naar de geforkte repo op GitHub te navigeren. U ziet een indicatie op GitHub waar het vraagt of u een nieuwe PR wilt maken, u klikt erop en u wordt naar een interface geleid waar u de titel van het commitbericht kunt wijzigen, geef het een meer geschikte beschrijving. Nu zal de beheerder van de repo die u heeft geforkt deze PR zien en, _vingers gekruist_, zullen ze uw PR waarderen en _samenvoegen_. U bent nu een bijdrager, yay :)
 
-1. **Opruimen**. Het wordt als een goede gewoonte beschouwd om _op te ruimen_ nadat u met succes een PR hebt samengevoegd. U wilt zowel uw lokale tak opruimen als de tak die u naar GitHub hebt gepusht. Laten we het eerst lokaal verwijderen met het volgende commando: 
+1. **Opruimen**. Het wordt als een goede gewoonte beschouwd om _op te ruimen_ nadat u met succes een PR hebt samengevoegd. U wilt zowel uw lokale tak opruimen als de tak die u naar GitHub hebt gepusht. Laten we het eerst lokaal verwijderen met het volgende commando:
 
    ```bash
    git branch -d [taknaam]
@@ -252,7 +254,7 @@ Laten we een workflow voor bijdragers doorlopen. Veronderstel dat de bijdrager d
 
    Zorg ervoor dat u naar de GitHub-pagina gaat voor de geforkte repo en verwijder de externe tak die u er zojuist naartoe hebt gepusht.
 
-`Pull request` lijkt een gekke term, omdat u uw wijzigingen echt in het project wilt pushen. Maar de onderhouder (projecteigenaar) of het kernteam moet rekening houden met uw wijzigingen voordat u deze samenvoegt met de "main" tak van het project, dus u vraagt echt om een wijzigingsbesluit van een onderhouder.  
+`Pull request` lijkt een gekke term, omdat u uw wijzigingen echt in het project wilt pushen. Maar de onderhouder (projecteigenaar) of het kernteam moet rekening houden met uw wijzigingen voordat u deze samenvoegt met de "main" tak van het project, dus u vraagt echt om een wijzigingsbesluit van een onderhouder.
 
 Een pull request is de plek om de verschillen die op een tak zijn geïntroduceerd te vergelijken en te bespreken met recensies, opmerkingen, geïntegreerde tests en meer. Een goed pull request volgt ongeveer dezelfde regels als een commitbericht. U kunt een verwijzing naar een probleem (issue) toevoegen in de issue tracker, bijvoorbeeld wanneer uw werk een probleem oplost. Dit doet u met een `#` gevolgd door het nummer van uw probleem. Bijvoorbeeld `# 97`.
 
@@ -270,7 +272,7 @@ Laten we eerst een repository - of: repo - op GitHub zoeken die voor u interessa
 
 ![Kopieer lokaal een repo](../images/clone_repo.png)
 
-Er zijn verschillende manieren om code te kopiëren. Een manier is om de inhoud van de repository te "klonen" door HTTPS, SSH of de GitHub CLI (Command Line Interface) te gebruiken. 
+Er zijn verschillende manieren om code te kopiëren. Een manier is om de inhoud van de repository te "klonen" door HTTPS, SSH of de GitHub CLI (Command Line Interface) te gebruiken.
 
 Open uw terminal en kloon de repository op deze manier:
 `git clone https://github.com/ProjectURL`
@@ -278,13 +280,13 @@ Open uw terminal en kloon de repository op deze manier:
 Schakel naar de juiste map om aan het project te werken:
 `cd ProjectURL`
 
-U kunt ook het hele project openen met [Codespaces](https://github.com/features/codespaces), GitHub's ingesloten code-editor  /cloud-ontwikkelomgeving of [GitHub Desktop](https://desktop.github.com/).
+U kunt ook het hele project openen met [Codespaces](https://github.com/features/codespaces), GitHub's ingesloten code-editor /cloud-ontwikkelomgeving of [GitHub Desktop](https://desktop.github.com/).
 
-Ten slotte kunt u de code downloaden in een gecomprimeerde map. 
+Ten slotte kunt u de code downloaden in een gecomprimeerde map.
 
 ### Nog een paar interessante dingen over GitHub
 
-U kunt elke openbare repository op GitHub een ster geven, bekijken en/of "forken". U kunt uw repositories met ster vinden in het vervolgkeuzemenu rechtsboven. Het is net als bladwijzers, maar dan voor code. 
+U kunt elke openbare repository op GitHub een ster geven, bekijken en/of "forken". U kunt uw repositories met ster vinden in het vervolgkeuzemenu rechtsboven. Het is net als bladwijzers, maar dan voor code.
 
 Projecten hebben een issue tracker, meestal op GitHub in de "Issues" tab, tenzij anders aangegeven, waar mensen problemen bespreken die verband houden met het project. En op het tabblad Pull Requests bespreken en beoordelen mensen lopende wijzigingen.
 
@@ -294,16 +296,17 @@ Projecten kunnen ook worden besproken in forums, mailinglijsten of chatkanalen z
 
 ---
 
-## 🚀 Uitdaging 
+## 🚀 Uitdaging
 
 Koppel met een vriend om aan elkaars code te werken. Creëer gezamenlijk een project, fork code, maak takken en voeg wijzigingen samen.
 
 ## Quiz na de lezing
+
 [Quiz na de lezing](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/4)
 
 ## Beoordeling en zelfstudie
 
-Lees meer over [bijdragen aan open source software](https://opensource.guide/how-to-contribute/#how-to-submit-a-contribution). 
+Lees meer over [bijdragen aan open source software](https://opensource.guide/how-to-contribute/#how-to-submit-a-contribution).
 
 [Git-cheatsheet](https://training.github.com/downloads/github-git-cheat-sheet/).
 
@@ -311,8 +314,8 @@ Oefenen, oefenen, oefenen. GitHub heeft geweldige leertrajecten beschikbaar via 
 
 - [Eerste week op GitHub](https://lab.github.com/githubtraining/first-week-on-github)
 
-U zult ook meer geavanceerde labs vinden. 
+U zult ook meer geavanceerde labs vinden.
 
-## Toewijzing 
+## Toewijzing
 
 Voltooi [de eerste week op GitHub-trainingslaboratorium](https://lab.github.com/githubtraining/first-week-on-github)

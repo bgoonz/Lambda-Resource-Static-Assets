@@ -25,7 +25,7 @@ hero.x += 5;
 // 利用矩形清除英雄
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 // 重新繪製背景與英雄
-ctx.fillRect(0, 0, canvas.width, canvas.height)
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 ctx.fillStyle = "black";
 ctx.drawImage(heroImg, hero.x, hero.y);
 ```
@@ -41,12 +41,12 @@ ctx.drawImage(heroImg, hero.x, hero.y);
 下列是一種例子：
 
 ```javascript
-window.addEventListener('keyup', (evt) => {
+window.addEventListener("keyup", (evt) => {
   // `evt.key` = 按鍵字串
-  if (evt.key === 'ArrowUp') {
+  if (evt.key === "ArrowUp") {
     // 做某事
   }
-})
+});
 ```
 
 鍵盤事件有兩個屬性來判別被按壓的按鍵：
@@ -76,7 +76,7 @@ let onKeyDown = function (e) {
   }
 };
 
-window.addEventListener('keydown', onKeyDown);
+window.addEventListener("keydown", onKeyDown);
 ```
 
 上述的程式碼能確保方向鍵與空白鍵關閉*預設*的行為。這個*關閉*機制會在我們呼叫 `e.preventDefault()` 時觸發。
@@ -89,7 +89,7 @@ window.addEventListener('keydown', onKeyDown);
 let id = setInterval(() => {
   // 在 y 軸上移動敵人
   enemy.y += 10;
-})
+});
 ```
 
 ## 遊戲迴圈
@@ -99,15 +99,18 @@ let id = setInterval(() => {
 這是一個遊戲迴圈的基本格式，以程式碼表達如下：
 
 ```javascript
-let gameLoopId = setInterval(() =>
-  function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    drawHero();
-    drawEnemies();
-    drawStaticObjects();
-}, 200);
+let gameLoopId = setInterval(
+  () =>
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      drawHero();
+      drawEnemies();
+      drawStaticObjects();
+    },
+  200
+);
 ```
 
 上述的迴圈會每 `200` 毫秒重新繪製 Canvas。你能自由地判斷哪種時長更適合套用在你的遊戲中。
@@ -143,64 +146,63 @@ npm start
 
 ### 加入程式碼
 
-1. **加入特定物件** `hero`、`enemy` 和 `game object`，它們皆有 `x` 與 `y` 位置屬性。(記得課程[繼承與組合](../../README.zh-tw.md)中的片段)。 
+1. **加入特定物件** `hero`、`enemy` 和 `game object`，它們皆有 `x` 與 `y` 位置屬性。(記得課程[繼承與組合](../../README.zh-tw.md)中的片段)。
 
-   *提示* `game object` 要有 `x` 和 `y`，以及繪製到畫布上的能力。
+   _提示_ `game object` 要有 `x` 和 `y`，以及繪製到畫布上的能力。
 
-   >要點：開始建立 GameObject class ，結構如下所示，再繪製到畫布上：
-  
-    ```javascript
-        
-    class GameObject {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.dead = false;
-        this.type = "";
-        this.width = 0;
-        this.height = 0;
-        this.img = undefined;
-      }
-    
-      draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-      }
-    }
-    ```
+   > 要點：開始建立 GameObject class ，結構如下所示，再繪製到畫布上：
 
-    現在，延伸 GameObject 來建立英雄與敵人。
-    
-    ```javascript
-    class Hero extends GameObject {
-      constructor(x, y) {
-        ...it needs an x, y, type, and speed
-      }
-    }
-    ```
+   ```javascript
+   class GameObject {
+     constructor(x, y) {
+       this.x = x;
+       this.y = y;
+       this.dead = false;
+       this.type = "";
+       this.width = 0;
+       this.height = 0;
+       this.img = undefined;
+     }
 
-    ```javascript
-    class Enemy extends GameObject {
-      constructor(x, y) {
-        super(x, y);
-        (this.width = 98), (this.height = 50);
-        this.type = "Enemy";
-        let id = setInterval(() => {
-          if (this.y < canvas.height - this.height) {
-            this.y += 5;
-          } else {
-            console.log('Stopped at', this.y)
-            clearInterval(id);
-          }
-        }, 300)
-      }
-    }
-    ```
+     draw(ctx) {
+       ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+     }
+   }
+   ```
+
+   現在，延伸 GameObject 來建立英雄與敵人。
+
+   ```javascript
+   class Hero extends GameObject {
+     constructor(x, y) {
+       ...it needs an x, y, type, and speed
+     }
+   }
+   ```
+
+   ```javascript
+   class Enemy extends GameObject {
+     constructor(x, y) {
+       super(x, y);
+       (this.width = 98), (this.height = 50);
+       this.type = "Enemy";
+       let id = setInterval(() => {
+         if (this.y < canvas.height - this.height) {
+           this.y += 5;
+         } else {
+           console.log("Stopped at", this.y);
+           clearInterval(id);
+         }
+       }, 300);
+     }
+   }
+   ```
 
 2. **加入鍵盤事件處理器**以處理鍵盤輸入(移動英雄的上下左右)
 
-   *記住* 這是笛卡爾座標系，左上方為 `0,0`。也請記得關閉鍵盤的*預設行為*
+   _記住_ 這是笛卡爾座標系，左上方為 `0,0`。也請記得關閉鍵盤的*預設行為*
 
-   >要點：建立函式 onKeyDown 並連接到視窗中：
+   > 要點：建立函式 onKeyDown 並連接到視窗中：
 
    ```javascript
     let onKeyDown = function (e) {
@@ -211,7 +213,7 @@ npm start
 
     window.addEventListener("keydown", onKeyDown);
    ```
-    
+
    這時候檢查你的瀏覽器命令欄，看看是否能偵測到鍵盤輸入。
 
 3. **建立**[發布訂閱模式](../../README.zh-tw.md)，這能讓剩下的程式段落保持乾淨。
@@ -220,154 +222,151 @@ npm start
 
    1. **建立視窗的事件監聽者**：
 
-       ```javascript
-        window.addEventListener("keyup", (evt) => {
-          if (evt.key === "ArrowUp") {
-            eventEmitter.emit(Messages.KEY_EVENT_UP);
-          } else if (evt.key === "ArrowDown") {
-            eventEmitter.emit(Messages.KEY_EVENT_DOWN);
-          } else if (evt.key === "ArrowLeft") {
-            eventEmitter.emit(Messages.KEY_EVENT_LEFT);
-          } else if (evt.key === "ArrowRight") {
-            eventEmitter.emit(Messages.KEY_EVENT_RIGHT);
-          }
-        });
-        ```
+      ```javascript
+      window.addEventListener("keyup", (evt) => {
+        if (evt.key === "ArrowUp") {
+          eventEmitter.emit(Messages.KEY_EVENT_UP);
+        } else if (evt.key === "ArrowDown") {
+          eventEmitter.emit(Messages.KEY_EVENT_DOWN);
+        } else if (evt.key === "ArrowLeft") {
+          eventEmitter.emit(Messages.KEY_EVENT_LEFT);
+        } else if (evt.key === "ArrowRight") {
+          eventEmitter.emit(Messages.KEY_EVENT_RIGHT);
+        }
+      });
+      ```
 
-    1. **建立 EventEmitter class** 以發布及訂閱訊息：
+   1. **建立 EventEmitter class** 以發布及訂閱訊息：
 
-        ```javascript
-        class EventEmitter {
-          constructor() {
-            this.listeners = {};
+      ```javascript
+      class EventEmitter {
+        constructor() {
+          this.listeners = {};
+        }
+
+        on(message, listener) {
+          if (!this.listeners[message]) {
+            this.listeners[message] = [];
           }
-        
-          on(message, listener) {
-            if (!this.listeners[message]) {
-              this.listeners[message] = [];
-            }
-            this.listeners[message].push(listener);
-          }
-        
-          emit(message, payload = null) {
-            if (this.listeners[message]) {
-              this.listeners[message].forEach((l) => l(message, payload));
-            }
+          this.listeners[message].push(listener);
+        }
+
+        emit(message, payload = null) {
+          if (this.listeners[message]) {
+            this.listeners[message].forEach((l) => l(message, payload));
           }
         }
-        ```
+      }
+      ```
 
-    1. **建立常數**並設定 EventEmitter：
+   1. **建立常數**並設定 EventEmitter：
 
-        ```javascript
-        const Messages = {
-          KEY_EVENT_UP: "KEY_EVENT_UP",
-          KEY_EVENT_DOWN: "KEY_EVENT_DOWN",
-          KEY_EVENT_LEFT: "KEY_EVENT_LEFT",
-          KEY_EVENT_RIGHT: "KEY_EVENT_RIGHT",
-        };
-        
-        let heroImg, 
-            enemyImg, 
-            laserImg,
-            canvas, ctx, 
-            gameObjects = [], 
-            hero, 
-            eventEmitter = new EventEmitter();
-        ```
+      ```javascript
+      const Messages = {
+        KEY_EVENT_UP: "KEY_EVENT_UP",
+        KEY_EVENT_DOWN: "KEY_EVENT_DOWN",
+        KEY_EVENT_LEFT: "KEY_EVENT_LEFT",
+        KEY_EVENT_RIGHT: "KEY_EVENT_RIGHT",
+      };
 
-    1. **初始化遊戲**
+      let heroImg,
+        enemyImg,
+        laserImg,
+        canvas,
+        ctx,
+        gameObjects = [],
+        hero,
+        eventEmitter = new EventEmitter();
+      ```
 
-    ```javascript
-    function initGame() {
-      gameObjects = [];
-      createEnemies();
-      createHero();
-    
-      eventEmitter.on(Messages.KEY_EVENT_UP, () => {
-        hero.y -=5 ;
-      })
-    
-      eventEmitter.on(Messages.KEY_EVENT_DOWN, () => {
-        hero.y += 5;
-      });
-    
-      eventEmitter.on(Messages.KEY_EVENT_LEFT, () => {
-        hero.x -= 5;
-      });
-    
-      eventEmitter.on(Messages.KEY_EVENT_RIGHT, () => {
-        hero.x += 5;
-      });
-    }
-    ```
+   1. **初始化遊戲**
 
-1. **設定遊戲迴圈**
+   ```javascript
+   function initGame() {
+     gameObjects = [];
+     createEnemies();
+     createHero();
+
+     eventEmitter.on(Messages.KEY_EVENT_UP, () => {
+       hero.y -= 5;
+     });
+
+     eventEmitter.on(Messages.KEY_EVENT_DOWN, () => {
+       hero.y += 5;
+     });
+
+     eventEmitter.on(Messages.KEY_EVENT_LEFT, () => {
+       hero.x -= 5;
+     });
+
+     eventEmitter.on(Messages.KEY_EVENT_RIGHT, () => {
+       hero.x += 5;
+     });
+   }
+   ```
+
+4. **設定遊戲迴圈**
 
    重構函式 window.onload 來初始化遊戲，設定遊戲迴圈的定時間隔。你還需要加入雷射光：
 
-    ```javascript
-    window.onload = async () => {
-      canvas = document.getElementById("canvas");
-      ctx = canvas.getContext("2d");
-      heroImg = await loadTexture("assets/player.png");
-      enemyImg = await loadTexture("assets/enemyShip.png");
-      laserImg = await loadTexture("assets/laserRed.png");
-    
-      initGame();
-      let gameLoopId = setInterval(() => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        drawGameObjects(ctx);
-      }, 100)
-      
-    };
-    ```
+   ```javascript
+   window.onload = async () => {
+     canvas = document.getElementById("canvas");
+     ctx = canvas.getContext("2d");
+     heroImg = await loadTexture("assets/player.png");
+     enemyImg = await loadTexture("assets/enemyShip.png");
+     laserImg = await loadTexture("assets/laserRed.png");
+
+     initGame();
+     let gameLoopId = setInterval(() => {
+       ctx.clearRect(0, 0, canvas.width, canvas.height);
+       ctx.fillStyle = "black";
+       ctx.fillRect(0, 0, canvas.width, canvas.height);
+       drawGameObjects(ctx);
+     }, 100);
+   };
+   ```
 
 5. **加入程式**來定期地移動敵人
 
-    重構函式 `createEnemies()` 以建立敵人們，接到 gameObjects 中：
+   重構函式 `createEnemies()` 以建立敵人們，接到 gameObjects 中：
 
-    ```javascript
-    function createEnemies() {
-      const MONSTER_TOTAL = 5;
-      const MONSTER_WIDTH = MONSTER_TOTAL * 98;
-      const START_X = (canvas.width - MONSTER_WIDTH) / 2;
-      const STOP_X = START_X + MONSTER_WIDTH;
-    
-      for (let x = START_X; x < STOP_X; x += 98) {
-        for (let y = 0; y < 50 * 5; y += 50) {
-          const enemy = new Enemy(x, y);
-          enemy.img = enemyImg;
-          gameObjects.push(enemy);
-        }
-      }
-    }
-    ```
-    
-    新增函式 `createHero()` 來為英雄做相同的事情。
-    
-    ```javascript
-    function createHero() {
-      hero = new Hero(
-        canvas.width / 2 - 45,
-        canvas.height - canvas.height / 4
-      );
-      hero.img = heroImg;
-      gameObjects.push(hero);
-    }
-    ```
+   ```javascript
+   function createEnemies() {
+     const MONSTER_TOTAL = 5;
+     const MONSTER_WIDTH = MONSTER_TOTAL * 98;
+     const START_X = (canvas.width - MONSTER_WIDTH) / 2;
+     const STOP_X = START_X + MONSTER_WIDTH;
 
-    最後，建立函式 `drawGameObjects()` 以開始繪製：
+     for (let x = START_X; x < STOP_X; x += 98) {
+       for (let y = 0; y < 50 * 5; y += 50) {
+         const enemy = new Enemy(x, y);
+         enemy.img = enemyImg;
+         gameObjects.push(enemy);
+       }
+     }
+   }
+   ```
 
-    ```javascript
-    function drawGameObjects(ctx) {
-      gameObjects.forEach(go => go.draw(ctx));
-    }
-    ```
+   新增函式 `createHero()` 來為英雄做相同的事情。
 
-    你的敵人開始會朝你的英雄艦艇前進！
+   ```javascript
+   function createHero() {
+     hero = new Hero(canvas.width / 2 - 45, canvas.height - canvas.height / 4);
+     hero.img = heroImg;
+     gameObjects.push(hero);
+   }
+   ```
+
+   最後，建立函式 `drawGameObjects()` 以開始繪製：
+
+   ```javascript
+   function drawGameObjects(ctx) {
+     gameObjects.forEach((go) => go.draw(ctx));
+   }
+   ```
+
+   你的敵人開始會朝你的英雄艦艇前進！
 
 ---
 

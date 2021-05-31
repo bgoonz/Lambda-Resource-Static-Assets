@@ -1,16 +1,18 @@
 # Toegankelijke webpagina's maken
 
 ![Alles over toegankelijkheid](/sketchnotes/webdev101-a11y.png)
+
 > Sketchnote door [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Quiz voorafgaand aan de lezing
+
 [Quiz voorafgaand aan de lezing](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/5)
 
 > De kracht van het web zit in zijn universaliteit. Toegang voor iedereen, ongeacht hun handicap, is een essentieel aspect.
 >
 > \- Sir Timothy Berners-Lee, W3C-directeur en uitvinder van het World Wide Web
 
-Deze quote benadrukt perfect het belang van het creëren van toegankelijke websites. Een applicatie die niet voor iedereen toegankelijk is, is per definitie uitsluiting. Als webontwikkelaars moeten we altijd rekening houden met toegankelijkheid. Door deze focus vanaf het begin te hebben, bent u goed op weg om ervoor te zorgen dat iedereen toegang heeft tot de pagina's die u maakt. In deze les leert u over de tools die u kunnen helpen ervoor te zorgen dat uw webitems toegankelijk zijn en hoe u kunt bouwen met toegankelijkheid in gedachten. 
+Deze quote benadrukt perfect het belang van het creëren van toegankelijke websites. Een applicatie die niet voor iedereen toegankelijk is, is per definitie uitsluiting. Als webontwikkelaars moeten we altijd rekening houden met toegankelijkheid. Door deze focus vanaf het begin te hebben, bent u goed op weg om ervoor te zorgen dat iedereen toegang heeft tot de pagina's die u maakt. In deze les leert u over de tools die u kunnen helpen ervoor te zorgen dat uw webitems toegankelijk zijn en hoe u kunt bouwen met toegankelijkheid in gedachten.
 
 ## Tools om te gebruiken
 
@@ -102,7 +104,7 @@ Schermlezers hebben ook de mogelijkheid om alleen de hyperlinks op een pagina te
 
 ### Goede linktekst
 
-Een goede linktekst beschrijft in het kort wat er aan de andere kant van de link staat. In het bovenstaande voorbeeld over Dwergpinguïns, is de link naar de Wikipedia-pagina over de soort. De zin *Dwergpinguïns* zou zorgen voor perfecte linktekst, omdat het duidelijk maakt wat iemand zal leren als ze op de link klikken - Dwergpinguïns.
+Een goede linktekst beschrijft in het kort wat er aan de andere kant van de link staat. In het bovenstaande voorbeeld over Dwergpinguïns, is de link naar de Wikipedia-pagina over de soort. De zin _Dwergpinguïns_ zou zorgen voor perfecte linktekst, omdat het duidelijk maakt wat iemand zal leren als ze op de link klikken - Dwergpinguïns.
 
 > De [Dwergpinguïn](https://nl.wikipedia.org/wiki/Dwergpingu%C3%AFn), ook wel bekend als de sprookjespinguïn, is de kleinste pinguïn ter wereld.
 
@@ -117,11 +119,11 @@ Als extra bonus om ervoor te zorgen dat uw site voor iedereen toegankelijk is, h
 Stelt u de volgende pagina voor:
 
 | Product      | beschrijving        | Volgorde        |
-| ------------ | ------------------ | ------------ |
+| ------------ | ------------------- | --------------- |
 | Widget       | [beschrijving]('#') | [Volgorde]('#') |
 | Super widget | [beschrijving]('#') | [Volgorde]('#') |
 
-In dit voorbeeld is het zinvol om de tekst van de beschrijving en volgorde te dupliceren voor iemand die een browser gebruikt. Iemand die een schermlezer gebruikt, hoort echter alleen de woorden *beschrijving* en *volgorde* herhaald zonder context.
+In dit voorbeeld is het zinvol om de tekst van de beschrijving en volgorde te dupliceren voor iemand die een browser gebruikt. Iemand die een schermlezer gebruikt, hoort echter alleen de woorden _beschrijving_ en _volgorde_ herhaald zonder context.
 
 Om dit soort scenario's te ondersteunen, ondersteunt HTML een set attributen die bekend staan als [Accessible Rich Internet Applications (ARIA)](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA). Met deze attributen kunt u aanvullende informatie verstrekken aan schermlezers.
 
@@ -129,7 +131,7 @@ Om dit soort scenario's te ondersteunen, ondersteunt HTML een set attributen die
 
 U kunt `aria-label` gebruiken om de link te beschrijven als het formaat van de pagina dat niet toestaat. De beschrijving voor widget kan worden ingesteld als
 
-``` html
+```html
 <a href="#" aria-label="Widget description">beschrijving</a>
 ```
 
@@ -189,7 +191,7 @@ Neem deze HTML en herschrijf deze zodat deze zo toegankelijk mogelijk is, gezien
     </div>
     <div class="main-content">
       <div>
-        <p class="page-title">Welcome to Turtle Ipsum. 
+        <p class="page-title">Welcome to Turtle Ipsum.
             <a href="">Click here</a> to learn more.
         </p>
         <p class="article-text">
@@ -216,6 +218,7 @@ Neem deze HTML en herschrijf deze zodat deze zo toegankelijk mogelijk is, gezien
 ```
 
 ## Quiz na de lezing
+
 [Quiz na de lezing](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/6)
 
 ## Beoordeling en zelfstudie
@@ -223,7 +226,7 @@ Neem deze HTML en herschrijf deze zodat deze zo toegankelijk mogelijk is, gezien
 Veel regeringen hebben wetten met betrekking tot toegankelijkheidseisen. Lees de toegankelijkheidswetten van uw thuisland. Wat wordt er gedekt en wat niet? Een voorbeeld is [deze overheidswebsite](https://accessibility.blog.gov.uk/).
 
 ## Toewijzing
- 
+
 [Analyseer een niet-toegankelijke website](assignment.nl.md)
 
 Credits: [Turtle Ipsum](https://github.com/Instrument/semantic-html-sample) door instrument

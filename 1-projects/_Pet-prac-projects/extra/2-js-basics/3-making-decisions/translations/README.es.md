@@ -1,7 +1,7 @@
 # Conceptos básicos de JavaScript: tomar decisiones
 
-
 ![JavaScript Basics - Making decisions](/sketchnotes/webdev101-js-decisions.png)
+
 > Sketchnote por [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## [Pre-lecture prueba](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/11)
@@ -13,7 +13,6 @@ Tomar decisiones y controlar el orden en que se ejecuta su código hace que su c
 Los booleanos pueden tener solo dos valores: `true` o` false`. Los booleanos ayudan a tomar decisiones sobre qué líneas de código deben ejecutarse cuando se cumplen ciertas condiciones.
 
 Establezca su booleano en verdadero o falso de esta manera:
-
 
 `let myTrueBool = true`
 `let myFalseBool = false`
@@ -40,8 +39,8 @@ Los operadores se utilizan para evaluar las condiciones haciendo comparaciones q
 La sentencia if ejecutará código entre sus bloques si la condición es verdadera.
 
 ```javascript
-if (condition){
-    //La condición era verdadera. Se ejecutará el código de este bloque.
+if (condition) {
+  //La condición era verdadera. Se ejecutará el código de este bloque.
 }
 ```
 
@@ -51,9 +50,9 @@ Los operadores lógicos se utilizan a menudo para formar la condición.
 let currentMoney;
 let laptopPrice;
 
-if (currentMoney >= laptopPrice){
-    //La condición era verdadera. Se ejecutará el código de este bloque.
-    console.log("Getting a new laptop!");
+if (currentMoney >= laptopPrice) {
+  //La condición era verdadera. Se ejecutará el código de este bloque.
+  console.log("Getting a new laptop!");
 }
 ```
 
@@ -61,18 +60,16 @@ if (currentMoney >= laptopPrice){
 
 La declaración `else` ejecutará el código entre sus bloques cuando la condición sea falsa. Es opcional con una declaración `if`.
 
-
 ```javascript
 let currentMoney;
 let laptopPrice;
 
-if (currentMoney >= laptopPrice){
-    //La condición era verdadera. Se ejecutará el código de este bloque.
-    console.log("Getting a new laptop!");
-}
-else{
-    //La condición era verdadera. Se ejecutará el código de este bloque.
-    console.log("Can't afford a new laptop, yet!");
+if (currentMoney >= laptopPrice) {
+  //La condición era verdadera. Se ejecutará el código de este bloque.
+  console.log("Getting a new laptop!");
+} else {
+  //La condición era verdadera. Se ejecutará el código de este bloque.
+  console.log("Can't afford a new laptop, yet!");
 }
 ```
 
@@ -82,11 +79,11 @@ else{
 
 Las decisiones pueden requerir más de una comparación y se pueden unir con operadores lógicos para producir un valor booleano.
 
-| Símbolo | Descripción                                                                                                  | Ejemplo                                                                           |
-| ------- | ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- |
-| `&&`    | **AND lógico**: compara dos expresiones booleanas. Devuelve verdadero **solo** si ambos lados son verdaderos | `(5 > 6) && (5 < 6 ) //Un lado es falso, el otro es verdadero. Devuelve falso`    |
-| `||`    | **OR lógico**: compara dos expresiones booleanas. Devuelve verdadero si al menos un lado es verdadero        | `(5 > 6) || (5 < 6) //Un lado es falso, el otro es verdadero. Devuelve verdadero` |
-| `!`     | **NOT lógico**: Devuelve el valor opuesto de una expresión booleana                                          | `!(5 > 6) // 5 no es mayor que 6, pero "!" devolverá verdadero`                   |
+| Símbolo | Descripción                                                                                                  | Ejemplo                                                                        |
+| ------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- | -------- | --- | --------------------------------------------------------------------- |
+| `&&`    | **AND lógico**: compara dos expresiones booleanas. Devuelve verdadero **solo** si ambos lados son verdaderos | `(5 > 6) && (5 < 6 ) //Un lado es falso, el otro es verdadero. Devuelve falso` |
+| `       |                                                                                                              | `                                                                              | **OR lógico**: compara dos expresiones booleanas. Devuelve verdadero si al menos un lado es verdadero | `(5 > 6) |     | (5 < 6) //Un lado es falso, el otro es verdadero. Devuelve verdadero` |
+| `!`     | **NOT lógico**: Devuelve el valor opuesto de una expresión booleana                                          | `!(5 > 6) // 5 no es mayor que 6, pero "!" devolverá verdadero`                |
 
 ## Condiciones y decisiones con operadores lógicos
 
@@ -95,22 +92,20 @@ Los operadores lógicos se pueden utilizar para formar condiciones en sentencias
 ```javascript
 let currentMoney;
 let laptopPrice;
-let laptopDiscountPrice = laptopPrice - (laptopPrice * .20) //Precio del portátil al 20% de descuento
+let laptopDiscountPrice = laptopPrice - laptopPrice * 0.2; //Precio del portátil al 20% de descuento
 
-if (currentMoney >= laptopPrice || currentMoney >= laptopDiscountPrice){
-    //La condición era verdadera. Se ejecutará el código de este bloque.
-    console.log("Getting a new laptop!");
-}
-else {
-    //La condición era verdadera. Se ejecutará el código de este bloque.
-    console.log("Can't afford a new laptop, yet!");
+if (currentMoney >= laptopPrice || currentMoney >= laptopDiscountPrice) {
+  //La condición era verdadera. Se ejecutará el código de este bloque.
+  console.log("Getting a new laptop!");
+} else {
+  //La condición era verdadera. Se ejecutará el código de este bloque.
+  console.log("Can't afford a new laptop, yet!");
 }
 ```
 
 ### Operador de negación
 
 Hasta ahora has visto cómo si puedes usar una instrucción `if...else` para crear lógica condicional. Cualquier cosa que entre en un `if` debe evaluarse como verdadero / falso. Utilizando el operador `!` Puede _negar_ la expresión. Se vería así:
-
 
 ```javascript
 if (!condition) {
@@ -132,17 +127,18 @@ A continuación se muestra un ejemplo más tangible:
 
 ```javascript
 let firstNumber = 20;
-let secondNumber = 10
-let biggestNumber = firstNumber > secondNumber ? firstNumber: secondNumber;
+let secondNumber = 10;
+let biggestNumber = firstNumber > secondNumber ? firstNumber : secondNumber;
 ```
 
 ✅ Tómese un minuto para leer este código varias veces. ¿Entiende cómo trabajan estos operadores?
 
 Lo anterior establece que
+
 - si `firstNumber` es mayor que `secondNumber`
 - luego asigne `firstNumber` a `biggestNumber`
 - de lo contrario, asigne `secondNumber`.
-  
+
 La expresión ternaria es solo una forma compacta de escribir el siguiente código:
 
 ```javascript
@@ -163,4 +159,3 @@ if (firstNumber > secondNumber) {
 Más información sobre los muchos operadores disponibles para el usuario [en MDN](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators).
 
 **Asignación**: [Operadores](assignment.es.md)
-

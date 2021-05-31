@@ -34,7 +34,6 @@
 以程式碼來表達的話，一個遊戲物件通常會呈現這種形式：
 
 ```javascript
-
 //設定 class GameObject
 class GameObject {
   constructor(x, y, type) {
@@ -46,11 +45,11 @@ class GameObject {
 
 //這個 class 會繼承 GameObject 中 class 內容
 class Movable extends GameObject {
-  constructor(x,y, type) {
-    super(x,y, type)
+  constructor(x, y, type) {
+    super(x, y, type);
   }
 
-//這個可移動物件可以在畫面上移動
+  //這個可移動物件可以在畫面上移動
   moveTo(x, y) {
     this.x = x;
     this.y = y;
@@ -59,21 +58,21 @@ class Movable extends GameObject {
 
 //這是特定的 class 繼承 Movable class，它能使用所有繼承到的屬性內容
 class Hero extends Movable {
-  constructor(x,y) {
-    super(x,y, 'Hero')
+  constructor(x, y) {
+    super(x, y, "Hero");
   }
 }
 
 //另一方面，這個 class 只繼承到 GameObject 的內容
 class Tree extends GameObject {
-  constructor(x,y) {
-    super(x,y, 'Tree')
+  constructor(x, y) {
+    super(x, y, "Tree");
   }
 }
 
 //英雄可以移動......
 const hero = new Hero();
-hero.moveTo(5,5);
+hero.moveTo(5, 5);
 
 //但樹木卻不能
 const tree = new Tree();
@@ -125,7 +124,7 @@ function createStatic(x, y, type) {
 const hero = createHero(10,10);
 hero.moveTo(5,5);
 //和建立只能佇立於此的樹木
-const tree = createStatic(0,0, 'Tree'); 
+const tree = createStatic(0,0, 'Tree');
 ```
 
 **我該使用哪一種設計模式？**
@@ -154,21 +153,20 @@ class EventEmitter {
   constructor() {
     this.listeners = {};
   }
-//當訊息接收時，讓監聽者處理它的負載
+  //當訊息接收時，讓監聽者處理它的負載
   on(message, listener) {
     if (!this.listeners[message]) {
       this.listeners[message] = [];
     }
     this.listeners[message].push(listener);
   }
-//當訊息發出時，附上負載發給監聽者
+  //當訊息發出時，附上負載發給監聽者
   emit(message, payload = null) {
     if (this.listeners[message]) {
-      this.listeners[message].forEach(l => l(message, payload))
+      this.listeners[message].forEach((l) => l(message, payload));
     }
   }
 }
-
 ```
 
 利用上述程式我們建立一套小型實作內容：
@@ -176,21 +174,21 @@ class EventEmitter {
 ```javascript
 //設定訊息種類
 const Messages = {
-  HERO_MOVE_LEFT: 'HERO_MOVE_LEFT'
+  HERO_MOVE_LEFT: "HERO_MOVE_LEFT",
 };
 //調用你設定的 eventEmitter
 const eventEmitter = new EventEmitter();
 //設定英雄
-const hero = createHero(0,0);
+const hero = createHero(0, 0);
 //讓 eventEmitter 監聽有關英雄往左移的訊息，並執行動作
 eventEmitter.on(Messages.HERO_MOVE_LEFT, () => {
-  hero.move(5,0);
+  hero.move(5, 0);
 });
 
 //設定遊戲視窗來監聽鍵盤事件，當左方向鍵按壓時，發出英雄往左移的訊息
-window.addEventListener('keyup', (evt) => {
-  if (evt.key === 'ArrowLeft') {
-    eventEmitter.emit(Messages.HERO_MOVE_LEFT)
+window.addEventListener("keyup", (evt) => {
+  if (evt.key === "ArrowLeft") {
+    eventEmitter.emit(Messages.HERO_MOVE_LEFT);
   }
 });
 ```
@@ -199,7 +197,7 @@ window.addEventListener('keyup', (evt) => {
 
 ```javascript
 eventEmitter.on(Messages.HERO_MOVE_LEFT, () => {
-  hero.move(5,0);
+  hero.move(5, 0);
 });
 ```
 

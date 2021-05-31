@@ -7,5 +7,5 @@ Bayangkan Anda sedang membuat keranjang belanja. Tulislah beberapa dokumentasi t
 ## Rubrik
 
 | Kriteria | Contoh                                                                                 | Memenuhi Syarat              | Perlu Perbaikan            |
-|----------|----------------------------------------------------------------------------------------|------------------------------|----------------------------|
+| -------- | -------------------------------------------------------------------------------------- | ---------------------------- | -------------------------- |
 |          | Enam tipe data didaftar dan dieksplorasi secara rinci, mendokumentasikan penggunaannya | Empat tipe data dieksplorasi | Dua tipe data dieksplorasi |

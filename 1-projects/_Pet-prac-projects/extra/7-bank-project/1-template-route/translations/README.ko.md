@@ -22,8 +22,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bank App</title>
   </head>
   <body>
@@ -78,9 +78,7 @@
     <h1>Bank App</h1>
     <button>Logout</button>
   </header>
-  <section>
-    Balance: 100$
-  </section>
+  <section>Balance: 100$</section>
   <section>
     <h2>Transactions</h2>
     <table>
@@ -121,14 +119,14 @@
 <script src="app.js" defer></script>
 ```
 
-이제 `app.js`에서, 새로운 함수인 `updateRoute`를 만듭니다: 
+이제 `app.js`에서, 새로운 함수인 `updateRoute`를 만듭니다:
 
 ```js
 function updateRoute(templateId) {
   const template = document.getElementById(templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -138,7 +136,7 @@ function updateRoute(templateId) {
 이제 템플릿 중 하나를 사용하여 이 함수를 호출하고 결과를 봅니다.
 
 ```js
-updateRoute('login');
+updateRoute("login");
 ```
 
 ✅ 이 `app.innerHTML = '';` 코드의 목적은 무엇인가요? 없다면 어떻게 될까요?
@@ -169,8 +167,8 @@ https://site.com/admin/     --> mywebsite/admin/index.html
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard' },
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard" },
 };
 ```
 
@@ -183,8 +181,8 @@ function updateRoute() {
 
   const template = document.getElementById(route.templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -197,8 +195,8 @@ function updateRoute() {
 
 앱의 다음 단계는 URL을 수동으로 안 바꾸고 페이지 사이를 이동할 수 있도록 추가하는 것입니다. 이는 두 가지를 의미합니다:
 
-  1. 현재 URL로 갱신하기
-  2. 새로운 URL를 기반으로 출력된 템플릿 갱신하기
+1. 현재 URL로 갱신하기
+2. 새로운 URL를 기반으로 출력된 템플릿 갱신하기
 
 두 번째 부분은 `updateRoute` 함수로 이미 처리했으므로, 현재 URL로 갱신하는 방법을 알아냅니다.
 
@@ -235,7 +233,7 @@ function updateRoute() {
 
 만약 라우터를 찾지 못한다면, `login` 페이지로 리다이렉트됩니다.
 
-HTML의 *Login*과 *Logout* 버튼에 바인딩을 추가하여 내비게이션 시스템을 완성해봅니다.
+HTML의 *Login*과 _Logout_ 버튼에 바인딩을 추가하여 내비게이션 시스템을 완성해봅니다.
 
 ```html
 <button onclick="navigate('/dashboard')">Login</button>

@@ -1,6 +1,7 @@
 # Projek Terrarium Bahagian 1: Pengenalan Kepada HTML
 
 ![Pengenalan Kepada HTML](/sketchnotes/webdev101-html.png)
+
 > Sketchnote karya [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Kuiz Pra Kuliah
@@ -22,10 +23,11 @@ Pada komputer anda, buat folder bernama 'terrarium' dan di dalamnya, fail yang b
 Atau
 
 Gunakan arahan ini dalam git bash anda:
-* `mkdir terrarium`
-* `cd terrarium`
-* `touch index.html`
-* `code index.html` atau `nano index.html`
+
+- `mkdir terrarium`
+- `cd terrarium`
+- `touch index.html`
+- `code index.html` atau `nano index.html`
 
 > index.html fail menunjukkan kepada penyemak imbas bahawa ia adalah fail lalai dalam folder; URL seperti `https: // anysite.com / test` mungkin dibina menggunakan struktur folder termasuk folder yang disebut `test` dengan `index.html` di dalamnya; `index.html` tidak perlu dipaparkan dalam URL.
 
@@ -58,9 +60,9 @@ Kawasan 'head' dokumen HTML merangkumi maklumat penting mengenai laman web anda,
 
 - tajuk halaman
 - metadata halaman termasuk:
-    - 'set watak', menceritakan tentang pengekodan watak apa yang digunakan di halaman
-    - maklumat penyemak imbas, termasuk `x-ua-compatible` yang menunjukkan bahawa penyemak imbas tepi IE = disokong
-    - maklumat tentang bagaimana tingkah laku pandangan harus berkelakuan ketika dimuat. Menetapkan viewport untuk mempunyai skala awal 1 mengawal tahap zoom ketika halaman pertama kali dimuat.
+  - 'set watak', menceritakan tentang pengekodan watak apa yang digunakan di halaman
+  - maklumat penyemak imbas, termasuk `x-ua-compatible` yang menunjukkan bahawa penyemak imbas tepi IE = disokong
+  - maklumat tentang bagaimana tingkah laku pandangan harus berkelakuan ketika dimuat. Menetapkan viewport untuk mempunyai skala awal 1 mengawal tahap zoom ketika halaman pertama kali dimuat.
 
 ### Tugas
 
@@ -68,10 +70,10 @@ Tambahkan blok 'head' ke dokumen anda di antara tag pembuka dan penutup `<html>`
 
 ```html
 <head>
-	<title>Welcome to my Virtual Terrarium</title>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome to my Virtual Terrarium</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 ```
 
@@ -90,13 +92,13 @@ Dalam HTML, anda menambahkan tag ke fail .html anda untuk membuat elemen halaman
 ```html
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Welcome to my Virtual Terrarium</title>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-	</head>
-	<body></body>
+  <head>
+    <title>Welcome to my Virtual Terrarium</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body></body>
 </html>
 ```
 
@@ -114,52 +116,52 @@ Tambahkan gambar tanaman tersebut ke dalam dua lajur di antara tag `<body></body
 
 ```html
 <div id="page">
-	<div id="left-container" class="container">
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
-		</div>
-	</div>
-	<div id="right-container" class="container">
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
-		</div>
-	</div>
+  <div id="left-container" class="container">
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
+    </div>
+  </div>
+  <div id="right-container" class="container">
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
+    </div>
+  </div>
 </div>
 ```
 
@@ -197,13 +199,13 @@ Tambahkan markup ini di atas tag `</div>` terakhir:
 
 ```html
 <div id="terrarium">
-	<div class="jar-top"></div>
-	<div class="jar-walls">
-		<div class="jar-glossy-long"></div>
-		<div class="jar-glossy-short"></div>
-	</div>
-	<div class="dirt"></div>
-	<div class="jar-bottom"></div>
+  <div class="jar-top"></div>
+  <div class="jar-walls">
+    <div class="jar-glossy-long"></div>
+    <div class="jar-glossy-short"></div>
+  </div>
+  <div class="dirt"></div>
+  <div class="jar-bottom"></div>
 </div>
 ```
 

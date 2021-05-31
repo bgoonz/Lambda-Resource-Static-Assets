@@ -6,6 +6,6 @@ Cambie el estilo del terrario usando Flexbox o CSS Grid, y tome capturas de pant
 
 ## Rúbrica
 
-| Criterios | Ejemplar                                                         | Adecuada                      | Necesita mejorar                    |
-| -------- | ----------------------------------------------------------------- | ----------------------------- | ------------------------------------ |
-|          | Presenta un terrario completamente rediseñado usando Flexbox o CSS Grid | Modifique algunos de los elementos | No cambiar el estilo del terrario en absoluto |
+| Criterios | Ejemplar                                                                | Adecuada                           | Necesita mejorar                              |
+| --------- | ----------------------------------------------------------------------- | ---------------------------------- | --------------------------------------------- |
+|           | Presenta un terrario completamente rediseñado usando Flexbox o CSS Grid | Modifique algunos de los elementos | No cambiar el estilo del terrario en absoluto |

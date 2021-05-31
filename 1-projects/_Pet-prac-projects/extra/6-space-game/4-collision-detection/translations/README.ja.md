@@ -4,16 +4,16 @@
 
 [レッスン前の小テスト](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/35?loc=ja)
 
-このレッスンでは、JavaScript でレーザーを撃つ方法を学びます! 私たちはゲームに2つのものを追加します。
+このレッスンでは、JavaScript でレーザーを撃つ方法を学びます! 私たちはゲームに 2 つのものを追加します。
 
 - **レーザー**: このレーザーはあなたのヒーローの宇宙船から垂直に上向きに撃たれます
 - **衝突検出**、発射する能力を実装する一環として、我々はまたいくつかの素敵なゲームのルールを追加します
-   - **レーザーが敵に当たる**: レーザーが当たると敵が破壊される
-   - **レーザーがトップ画面に当たる**: 画面上部に当たるとレーザーが破壊されます
-   - **敵とヒーローの衝突**: 敵とヒーローがぶつかると破壊されます
-   - **敵が画面の下に当たる**: 敵が画面下に当たると敵とヒーローが破壊されます
+  - **レーザーが敵に当たる**: レーザーが当たると敵が破壊される
+  - **レーザーがトップ画面に当たる**: 画面上部に当たるとレーザーが破壊されます
+  - **敵とヒーローの衝突**: 敵とヒーローがぶつかると破壊されます
+  - **敵が画面の下に当たる**: 敵が画面下に当たると敵とヒーローが破壊されます
 
-要するに、あなた - *ヒーロー* - は画面の下部に移動するために管理する前に、レーザーですべての敵をヒットする必要があります。
+要するに、あなた - _ヒーロー_ - は画面の下部に移動するために管理する前に、レーザーですべての敵をヒットする必要があります。
 
 ✅ これまでに書かれた最初のコンピュータゲームについて少し調べてみてください。その機能は何だったのでしょうか?
 
@@ -42,26 +42,28 @@
 
    ```javascript
    function intersectRect(r1, r2) {
-     return !(r2.left > r1.right ||
+     return !(
+       r2.left > r1.right ||
        r2.right < r1.left ||
        r2.top > r1.bottom ||
-       r2.bottom < r1.top);
+       r2.bottom < r1.top
+     );
    }
    ```
 
 ## オブジェクトをどうやって破壊するか
 
-ゲーム内のオブジェクトを破壊するには、一定の間隔で発生するゲームループの中で、このアイテムをペイントしないようにゲームに知らせる必要があります。これを行うには、以下のように、何かが起こったときにゲームオブジェクトを *dead* としてマークする方法があります。
+ゲーム内のオブジェクトを破壊するには、一定の間隔で発生するゲームループの中で、このアイテムをペイントしないようにゲームに知らせる必要があります。これを行うには、以下のように、何かが起こったときにゲームオブジェクトを _dead_ としてマークする方法があります。
 
 ```javascript
 // 衝突が発生します
-enemy.dead = true
+enemy.dead = true;
 ```
 
-その後、画面を再描画する前に、このように、*dead* オブジェクトをソートしていきます。
+その後、画面を再描画する前に、このように、_dead_ オブジェクトをソートしていきます。
 
 ```javascript
-gameObjects = gameObject.filter(go => !go.dead);
+gameObjects = gameObject.filter((go) => !go.dead);
 ```
 
 ## レーザーの撃ち方
@@ -74,7 +76,7 @@ gameObjects = gameObject.filter(go => !go.dead);
 
 ## レーザーのクールダウン
 
-レーザーは、例えば*スペース*のように、キーを押すたびに発射する必要があります。短時間で多くのレーザーが発射されるのを防ぐために、この問題を解決する必要があります。これを修正するには、いわゆる *クールダウン*、タイマーを実装することで、レーザーはそれほど頻繁にしか発射することができないことを保証します。以下の方法で実装できます。
+レーザーは、例えば*スペース*のように、キーを押すたびに発射する必要があります。短時間で多くのレーザーが発射されるのを防ぐために、この問題を解決する必要があります。これを修正するには、いわゆる _クールダウン_、タイマーを実装することで、レーザーはそれほど頻繁にしか発射することができないことを保証します。以下の方法で実装できます。
 
 ```javascript
 class Cooldown {
@@ -100,20 +102,20 @@ class Weapon {
 }
 ```
 
-✅ スペースゲームシリーズのレッスン1を参照して、*クールダウン*について思い出してください。
+✅ スペースゲームシリーズのレッスン 1 を参照して、*クールダウン*について思い出してください。
 
 ## 何を構築するか
 
 前回のレッスンで使用した既存のコード (クリーンアップしてリファクタリングしたはずのコード) を使用して、それを拡張します。
-パート II のコードから始めるか、[パートIII - スターター](../../your-work)のコードを使用してください。
+パート II のコードから始めるか、[パート III - スターター](../../your-work)のコードを使用してください。
 
 > ヒント: 作業に使用するレーザーはすでにアセットフォルダにあり、コードで参照されています。
 
 - **衝突検出を追加します**、レーザーが何かに衝突するときは、次のルールを適用する必要があります
-   1. **レーザーが敵に当たる**: レーザーが当たると敵が破壊される
-   2. **レーザーが画面上部に当たる**: レーザーが画面の上部に当たると破壊される
-   3. **敵とヒーローの衝突**: 敵とヒーローがぶつかると破壊される
-   4. **画面下に敵が当たる**: 敵が画面下部に当たると敵とヒーローが破壊される
+  1.  **レーザーが敵に当たる**: レーザーが当たると敵が破壊される
+  2.  **レーザーが画面上部に当たる**: レーザーが画面の上部に当たると破壊される
+  3.  **敵とヒーローの衝突**: 敵とヒーローがぶつかると破壊される
+  4.  **画面下に敵が当たる**: 敵が画面下部に当たると敵とヒーローが破壊される
 
 ## 推奨される手順
 
@@ -142,38 +144,39 @@ npm start
 
 1. **衝突を処理するためにゲームオブジェクトの矩形表現を設定する** 以下のコードでは、`GameObject` の矩形表現を取得することができます。GameObject クラスを編集して拡張します
 
-    ```javascript
-    rectFromGameObject() {
-        return {
-          top: this.y,
-          left: this.x,
-          bottom: this.y + this.height,
-          right: this.x + this.width,
-        };
-      }
-    ```
+   ```javascript
+   rectFromGameObject() {
+       return {
+         top: this.y,
+         left: this.x,
+         bottom: this.y + this.height,
+         right: this.x + this.width,
+       };
+     }
+   ```
 
 2. **衝突をチェックするコードの追加** これは、2 つの矩形が交差するかどうかをテストする新しい関数になります
 
-    ```javascript
-    function intersectRect(r1, r2) {
-      return !(
-        r2.left > r1.right ||
-        r2.right < r1.left ||
-        r2.top > r1.bottom ||
-        r2.bottom < r1.top
-      );
-    }
-    ```
+   ```javascript
+   function intersectRect(r1, r2) {
+     return !(
+       r2.left > r1.right ||
+       r2.right < r1.left ||
+       r2.top > r1.bottom ||
+       r2.bottom < r1.top
+     );
+   }
+   ```
 
 3. **レーザー発射機能の追加**
-   1. **キーイベントメッセージを追加します**。*スペース*キーはヒーローの宇宙船の真上にレーザーを作成する必要があります。Messages オブジェクトに3つの定数を追加します
 
-       ```javascript
-        KEY_EVENT_SPACE: "KEY_EVENT_SPACE",
-        COLLISION_ENEMY_LASER: "COLLISION_ENEMY_LASER",
-        COLLISION_ENEMY_HERO: "COLLISION_ENEMY_HERO",
-       ```
+   1. **キーイベントメッセージを追加します**。*スペース*キーはヒーローの宇宙船の真上にレーザーを作成する必要があります。Messages オブジェクトに 3 つの定数を追加します
+
+      ```javascript
+       KEY_EVENT_SPACE: "KEY_EVENT_SPACE",
+       COLLISION_ENEMY_LASER: "COLLISION_ENEMY_LASER",
+       COLLISION_ENEMY_HERO: "COLLISION_ENEMY_HERO",
+      ```
 
    1. **スペースキーを処理します**。スペースを扱うために、`window.addEventListener` のキーアップ関数を編集します
 
@@ -183,32 +186,35 @@ npm start
         }
       ```
 
-    1. **リスナーを追加します**。スペースバーがヒットした時にヒーローが発射できるように `initGame()` 関数を編集します
+   1. **リスナーを追加します**。スペースバーがヒットした時にヒーローが発射できるように `initGame()` 関数を編集します
 
-       ```javascript
-       eventEmitter.on(Messages.KEY_EVENT_SPACE, () => {
-        if (hero.canFire()) {
-          hero.fire();
+      ```javascript
+      eventEmitter.on(Messages.KEY_EVENT_SPACE, () => {
+       if (hero.canFire()) {
+         hero.fire();
+       }
+      ```
+
+      そして、敵がレーザーに衝突したときの動作を保証するために、新しい `eventEmitter.on()` 関数を追加します
+
+      ```javascript
+      eventEmitter.on(
+        Messages.COLLISION_ENEMY_LASER,
+        (_, { first, second }) => {
+          first.dead = true;
+          second.dead = true;
         }
-       ```
-
-       そして、敵がレーザーに衝突したときの動作を保証するために、新しい `eventEmitter.on()` 関数を追加します
-
-          ```javascript
-          eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-            first.dead = true;
-            second.dead = true;
-          })
-          ```
+      );
+      ```
 
    1. **オブジェクトを移動させ**、レーザーが徐々に画面上部に移動するようにします。先ほどと同じように `GameObject`を継承した Laser クラスを新たに作成します
-   
+
       ```javascript
-        class Laser extends GameObject {
+      class Laser extends GameObject {
         constructor(x, y) {
-          super(x,y);
+          super(x, y);
           (this.width = 9), (this.height = 33);
-          this.type = 'Laser';
+          this.type = "Laser";
           this.img = laserImg;
           let id = setInterval(() => {
             if (this.y > 0) {
@@ -217,7 +223,7 @@ npm start
               this.dead = true;
               clearInterval(id);
             }
-          }, 100)
+          }, 100);
         }
       }
       ```
@@ -226,31 +232,31 @@ npm start
 
       ```javascript
       function updateGameObjects() {
-        const enemies = gameObjects.filter(go => go.type === 'Enemy');
+        const enemies = gameObjects.filter((go) => go.type === "Enemy");
         const lasers = gameObjects.filter((go) => go.type === "Laser");
-      // レーザーが当たる
+        // レーザーが当たる
         lasers.forEach((l) => {
           enemies.forEach((m) => {
             if (intersectRect(l.rectFromGameObject(), m.rectFromGameObject())) {
-            eventEmitter.emit(Messages.COLLISION_ENEMY_LASER, {
-              first: l,
-              second: m,
-            });
-          }
-         });
-      });
+              eventEmitter.emit(Messages.COLLISION_ENEMY_LASER, {
+                first: l,
+                second: m,
+              });
+            }
+          });
+        });
 
-        gameObjects = gameObjects.filter(go => !go.dead);
-      }  
+        gameObjects = gameObjects.filter((go) => !go.dead);
+      }
       ```
 
       必ず `window.onload` のゲームループに `updateGameObjects()` を追加してください。
 
-   4. レーザーに**クールダウンを実装**して、それがそんなに頻繁にしか発射できないようにします
+   1. レーザーに**クールダウンを実装**して、それがそんなに頻繁にしか発射できないようにします
 
       最後に、Hero クラスをクールダウンできるように編集します
 
-       ```javascript
+      ```javascript
       class Hero extends GameObject {
         constructor(x, y) {
           super(x, y);
@@ -262,7 +268,7 @@ npm start
         fire() {
           gameObjects.push(new Laser(this.x + 45, this.y - 10));
           this.cooldown = 500;
-    
+
           let id = setInterval(() => {
             if (this.cooldown > 0) {
               this.cooldown -= 100;

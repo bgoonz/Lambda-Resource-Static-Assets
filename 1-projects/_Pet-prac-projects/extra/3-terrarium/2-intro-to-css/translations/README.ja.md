@@ -1,6 +1,7 @@
-# テラリウムプロジェクト その2: CSS 入門
+# テラリウムプロジェクト その 2: CSS 入門
 
 ![Introduction to CSS](/sketchnotes/webdev101-css.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## レッスン前の小テスト
@@ -45,7 +46,7 @@ CSS (カスケードスタイルシート) は、Web 開発の重要な問題で
 
 ```css
 h1 {
- color: blue;
+  color: blue;
 }
 ```
 
@@ -63,7 +64,7 @@ body のフォントを指定されたフォントに設定し、入れ子にな
 
 ```css
 body {
-	font-family: helvetica, arial, sans-serif;
+  font-family: helvetica, arial, sans-serif;
 }
 ```
 
@@ -83,12 +84,12 @@ body {
 
 ```css
 body {
-	font-family: helvetica, arial, sans-serif;
+  font-family: helvetica, arial, sans-serif;
 }
 
 h1 {
-	color: #3a241d;
-	text-align: center;
+  color: #3a241d;
+  text-align: center;
 }
 ```
 
@@ -96,27 +97,27 @@ h1 {
 
 ### id
 
-左と右のコンテナをレイアウトするためのスタイルを追加します。左のコンテナと右のコンテナは1つしかないので、マークアップでは id が与えられます。スタイルを設定するには、`#` を使用します。
+左と右のコンテナをレイアウトするためのスタイルを追加します。左のコンテナと右のコンテナは 1 つしかないので、マークアップでは id が与えられます。スタイルを設定するには、`#` を使用します。
 
 ```css
 #left-container {
-	background-color: #eee;
-	width: 15%;
-	left: 0px;
-	top: 0px;
-	position: absolute;
-	height: 100%;
-	padding: 10px;
+  background-color: #eee;
+  width: 15%;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  height: 100%;
+  padding: 10px;
 }
 
 #right-container {
-	background-color: #eee;
-	width: 15%;
-	right: 0px;
-	top: 0px;
-	position: absolute;
-	height: 100%;
-	padding: 10px;
+  background-color: #eee;
+  width: 15%;
+  right: 0px;
+  top: 0px;
+  position: absolute;
+  height: 100%;
+  padding: 10px;
 }
 ```
 
@@ -130,13 +131,13 @@ h1 {
 
 ### クラス
 
-上の例では、画面上の2つのユニークな要素にスタイルを設定しました。画面上の多くの要素にスタイルを適用したい場合は、CSS クラスを使用することができます。これを実行して、左右のコンテナに植物をレイアウトします。
+上の例では、画面上の 2 つのユニークな要素にスタイルを設定しました。画面上の多くの要素にスタイルを適用したい場合は、CSS クラスを使用することができます。これを実行して、左右のコンテナに植物をレイアウトします。
 
 HTML マークアップの各植物には、id とクラスの組み合わせがあることに注目してください。ここでの id は、テラリウムの植物の配置を操作するために後で追加する JavaScript によって使用されます。クラスはすべての植物にスタイルを与えています。
 
 ```html
 <div class="plant-holder">
-	<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+  <img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
 </div>
 ```
 
@@ -144,16 +145,16 @@ HTML マークアップの各植物には、id とクラスの組み合わせが
 
 ```css
 .plant-holder {
-	position: relative;
-	height: 13%;
-	left: -10px;
+  position: relative;
+  height: 13%;
+  left: -10px;
 }
 
 .plant {
-	position: absolute;
-	max-width: 150%;
-	max-height: 150%;
-	z-index: 2;
+  position: absolute;
+  max-width: 150%;
+  max-height: 150%;
+  z-index: 2;
 }
 ```
 
@@ -191,48 +192,48 @@ HTML マークアップの各植物には、id とクラスの組み合わせが
 
 ```css
 .jar-walls {
-	height: 80%;
-	width: 60%;
-	background: #d1e1df;
-	border-radius: 1rem;
-	position: absolute;
-	bottom: 0.5%;
-	left: 20%;
-	opacity: 0.5;
-	z-index: 1;
+  height: 80%;
+  width: 60%;
+  background: #d1e1df;
+  border-radius: 1rem;
+  position: absolute;
+  bottom: 0.5%;
+  left: 20%;
+  opacity: 0.5;
+  z-index: 1;
 }
 
 .jar-top {
-	width: 50%;
-	height: 5%;
-	background: #d1e1df;
-	position: absolute;
-	bottom: 80.5%;
-	left: 25%;
-	opacity: 0.7;
-	z-index: 1;
+  width: 50%;
+  height: 5%;
+  background: #d1e1df;
+  position: absolute;
+  bottom: 80.5%;
+  left: 25%;
+  opacity: 0.7;
+  z-index: 1;
 }
 
 .jar-bottom {
-	width: 50%;
-	height: 1%;
-	background: #d1e1df;
-	position: absolute;
-	bottom: 0%;
-	left: 25%;
-	opacity: 0.7;
+  width: 50%;
+  height: 1%;
+  background: #d1e1df;
+  position: absolute;
+  bottom: 0%;
+  left: 25%;
+  opacity: 0.7;
 }
 
 .dirt {
-	width: 60%;
-	height: 5%;
-	background: #3a241d;
-	position: absolute;
-	border-radius: 0 0 1rem 1rem;
-	bottom: 1%;
-	left: 20%;
-	opacity: 0.7;
-	z-index: -1;
+  width: 60%;
+  height: 5%;
+  background: #3a241d;
+  position: absolute;
+  border-radius: 0 0 1rem 1rem;
+  bottom: 1%;
+  left: 20%;
+  opacity: 0.7;
+  z-index: -1;
 }
 ```
 
@@ -242,7 +243,7 @@ HTML マークアップの各植物には、id とクラスの組み合わせが
 
 ---
 
-## 🚀チャレンジ
+## 🚀 チャレンジ
 
 瓶の左下の部分に「泡」のような輝きを加えて、よりガラスのように見えるようにします。`.jar-glossy-long` と `.jar-glossy-short` は反射光のように見えるようにスタイリングします。このようになります。
 

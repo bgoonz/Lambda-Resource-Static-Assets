@@ -1,15 +1,16 @@
 # Asas JavaScript: Jenis Data
 
 ![Asas JavaScript: Jenis Data](/sketchnotes/webdev101-js-datatypes.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Kuiz Pra Kuliah
+
 [Kuiz Pra Kuliah](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/7)
 
 Pelajaran ini merangkumi asas-asas JavaScript, bahasa yang menyediakan interaktiviti di web.
 
 [![Jenis Data Dalam JavaScript](https://img.youtube.com/vi/JNIXfGiDWM8/0.jpg)](https://youtube.com/watch?v=JNIXfGiDWM8 "Data types in JavaScript")
-
 
 Marilah kita mulakan dengan pemboleh ubah dan jenis data yang mengisinya!
 
@@ -21,35 +22,37 @@ Membuat dan **menyatakan** pemboleh ubah mempunyai sintaks berikut **[kata kunci
 
 - **Kata Kunci**. Kata kunci seperti `let` atau `var`.
 
-   > Perhatikan, kata kunci seperti `let` diperkenalkan dalam ES6 dan memberikan pemboleh ubah anda apa yang disebut _block lingkup_. Sebaiknya gunakan `let` over` var`. Kami akan merangkumi skop blok dengan lebih mendalam di bahagian-bahagian masa depan.
+  > Perhatikan, kata kunci seperti `let` diperkenalkan dalam ES6 dan memberikan pemboleh ubah anda apa yang disebut _block lingkup_. Sebaiknya gunakan `let` over` var`. Kami akan merangkumi skop blok dengan lebih mendalam di bahagian-bahagian masa depan.
+
 - **Nama pemboleh ubah**, ini adalah nama yang anda pilih sendiri.
 
 ### Tugasan - bekerja dengan pemboleh ubah
 
 1. **Menyatakan pemboleh ubah**. Marilah nyatakan pemboleh ubah menggunakan kata kunci `let`:
 
-    ```javascript
-    let myVariable;
-    ```
+   ```javascript
+   let myVariable;
+   ```
 
-    `myVariable` kini telah dinyatakan menggunakan kata kunci` let`. Pada masa ini tidak mempunyai nilai.
+   `myVariable` kini telah dinyatakan menggunakan kata kunci` let`. Pada masa ini tidak mempunyai nilai.
 
 1. **Berikan nilai**. Simpan nilai dalam pemboleh ubah dengan pengendali `=`, diikuti dengan nilai yang diharapkan.
 
-    ```javascript
-    myVariable = 123;
-    ```
+   ```javascript
+   myVariable = 123;
+   ```
 
-    > Catatan: penggunaan `=` dalam pelajaran ini berarti kita menggunakan "pengendali tugasan", yang digunakan untuk menetapkan nilai ke pemboleh ubah. Itu tidak menunjukkan persamaan.
+   > Catatan: penggunaan `=` dalam pelajaran ini berarti kita menggunakan "pengendali tugasan", yang digunakan untuk menetapkan nilai ke pemboleh ubah. Itu tidak menunjukkan persamaan.
 
-    `myVariable` kini telah *diinisialisasi* dengan nilai 123.
+   `myVariable` kini telah _diinisialisasi_ dengan nilai 123.
 
 1. **Pemfaktor**. Gantikan kod anda dengan pernyataan berikut.
 
-    ```javascript
-    let myVariable = 123;
-    ```
-    Perkara di atas dipanggil _inisialisasi eksplisit_ apabila pemboleh ubah diisytiharkan dan diberikan nilai pada masa yang sama.
+   ```javascript
+   let myVariable = 123;
+   ```
+
+   Perkara di atas dipanggil _inisialisasi eksplisit_ apabila pemboleh ubah diisytiharkan dan diberikan nilai pada masa yang sama.
 
 1. **Tukar nilai pemboleh ubah**. Tukar nilai pemboleh ubah dengan cara berikut:
 
@@ -73,31 +76,31 @@ Pemalar serupa dengan pemboleh ubah, dengan dua pengecualian:
 
 - **Mesti ada nilai**. Pemalar mesti diinisialisasi, atau kesalahan akan berlaku semasa menjalankan kod.
 - **Rujukan tidak boleh diubah**. Rujukan pemalar tidak dapat diubah setelah diinisialisasi, atau kesalahan akan terjadi ketika menjalankan kod. Marilah kita lihat dua contoh:
-    - **Menyimpan nilai**. Perkara berikut TIDAK dibenarkan:
 
-      ```javascript
-      const PI = 3;
-      PI = 4; // tidak dibenarkan
-      ```
+  - **Menyimpan nilai**. Perkara berikut TIDAK dibenarkan:
 
-    - **Rujukan objek dilindungi**. Perkara berikut TIDAK dibenarkan:
+    ```javascript
+    const PI = 3;
+    PI = 4; // tidak dibenarkan
+    ```
 
-      ```javascript
-      const obj = { a: 3 };
-      obj = { b: 5 } // tidak dibenarkan
-      ```
+  - **Rujukan objek dilindungi**. Perkara berikut TIDAK dibenarkan:
 
+    ```javascript
+    const obj = { a: 3 };
+    obj = { b: 5 }; // tidak dibenarkan
+    ```
 
-    - **Rujukan objek tidak dilindungi**. Perkara berikut dibenakan: 
+  - **Rujukan objek tidak dilindungi**. Perkara berikut dibenakan:
 
-      ```javascript
-      const obj = { a: 3 };
-      obj.a = 5;  // allowed
-      ```
+    ```javascript
+    const obj = { a: 3 };
+    obj.a = 5; // allowed
+    ```
 
-      Di atas anda mengubah nilai objek tetapi bukan rujukan itu sendiri, yang membuatnya dibenarkan.
+    Di atas anda mengubah nilai objek tetapi bukan rujukan itu sendiri, yang membuatnya dibenarkan.
 
-    > Perhatikan, `const` bermaksud rujukan dilindungi dari penugasan semula. Nilainya tidak _tidak berubah_ dan ia juga boleh berubah, terutamanya jika konstruk kompleks seperti objek.
+  > Perhatikan, `const` bermaksud rujukan dilindungi dari penugasan semula. Nilainya tidak _tidak berubah_ dan ia juga boleh berubah, terutamanya jika konstruk kompleks seperti objek.
 
 ## Jenis Data
 
@@ -117,12 +120,12 @@ Pemboleh ubah boleh menyimpan semua jenis nombor, termasuk nombor perpuluhan ata
 
 Terdapat beberapa jenis operator yang boleh digunakan semasa menjalankan fungsi aritmetik, dan ada yang disenaraikan di sini:
 
-| Simbol | Penerangan                                                              | Contoh                          |
-| ------ | ------------------------------------------------------------------------ | -------------------------------- |
-| `+`    | **Penambahan**: Mengira jumlah dua nombor                          | `1 + 2 // jawapan ialah 3`   |
-| `-`    | **Penolakan**: Mengira perbezaan dua nombor                | `1 - 2 // jawapan ialah -1`  |
-| `*`    | **Pendaraban**: Mengira hasil dua nombor                | `1 * 2 // jawapan ialah 2`   |
-| `/`    | **Pembahagian**: Mengira hasil bagi dua nombor                     | `1 / 2 //jawapan ialah 0.5` |
+| Simbol | Penerangan                                         | Contoh                      |
+| ------ | -------------------------------------------------- | --------------------------- |
+| `+`    | **Penambahan**: Mengira jumlah dua nombor          | `1 + 2 // jawapan ialah 3`  |
+| `-`    | **Penolakan**: Mengira perbezaan dua nombor        | `1 - 2 // jawapan ialah -1` |
+| `*`    | **Pendaraban**: Mengira hasil dua nombor           | `1 * 2 // jawapan ialah 2`  |
+| `/`    | **Pembahagian**: Mengira hasil bagi dua nombor     | `1 / 2 //jawapan ialah 0.5` |
 | `%`    | **Baki**: Mengira baki dari pembahagian dua nombor | `1 % 2 //jawapan ialah 1`   |
 
 ✅ Cubalah! Cuba operasi aritmetik di konsol penyemak imbas anda. Adakah hasilnya mengejutkan anda?
@@ -150,7 +153,6 @@ let myString2 = "World";
 myString1 + myString2 + "!"; //HelloWorld!
 myString1 + " " + myString2 + "!"; //Hello World!
 myString1 + ", " + myString2 + "!"; //Hello, World!
-
 ```
 
 ✅ Mengapakah `1 + 1 = 2` dalam JavaScript, tetapi `'1' + '1' = 11?` Cuba fikirkan. Bagaimanakah dengan `'1' + 1`?
@@ -162,7 +164,7 @@ let myString1 = "Hello";
 let myString2 = "World";
 
 `${myString1} ${myString2}!` //Hello World!
-`${myString1}, ${myString2}!` //Hello, World!
+`${myString1}, ${myString2}!`; //Hello, World!
 ```
 
 Anda boleh mencapai matlamat pemformatan anda dengan mana-mana kaedah, tetapi templat literal akan menghormati ruang dan jeda baris.
@@ -178,13 +180,14 @@ Booleans boleh hanya dua nilai: `benar` atau `salah`. Booleans dapat membantu me
 
 ✅ Pemboleh ubah boleh dianggap 'benar' jika dinilai menjadi `benar` boolean. Menariknya, dalam JavaScript, [semua nilai adalah benar kecuali ditakrifkan sebagai palsu](https://developer.mozilla.org/docs/Glossary/Truthy).
 
---- 
+---
 
 ## 🚀 Cabaran
 
 JavaScript terkenal kerana kaedahnya yang mengagumkan dalam mengendalikan jenis data sesekali. Lakukan sedikit kajian mengenai 'gotchas' ini. Contohnya: kepekaan kes boleh menggigit! Cubalah ini di konsol anda: `let age = 1; biarkan Umur = 2; age == Age` (menyelesaikan `false` - mengapa?). Apa lagi gotchas yang anda dapati?
 
 ## Kuiz Pasca Kuliah
+
 [Kuiz Pasca Kuliah](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/8)
 
 ## Mengkaji dan belajar sendiri

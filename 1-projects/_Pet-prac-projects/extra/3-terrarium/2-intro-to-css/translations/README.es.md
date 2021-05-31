@@ -1,6 +1,7 @@
 # Terrarium Project Parte 2: Introducción a CSS
 
 ![Introducción a CSS](/sketchnotes/webdev101-css.png)
+
 > Sketchnote por [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## [Pre-lecture prueba](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/17)
@@ -134,7 +135,7 @@ Observe que cada planta en el marcado HTML tiene una combinación de identificad
 
 ```html
 <div class="plant-holder">
-	<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+  <img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
 </div>
 ```
 
@@ -142,16 +143,16 @@ Agrega lo siguiente a tu archivo `style.css`:
 
 ```css
 .plant-holder {
-	position: relative;
-	height: 13%;
-	left: -10px;
+  position: relative;
+  height: 13%;
+  left: -10px;
 }
 
 .plant {
-	position: absolute;
-	max-width: 150%;
-	max-height: 150%;
-	z-index: 2;
+  position: absolute;
+  max-width: 150%;
+  max-height: 150%;
+  z-index: 2;
 }
 ```
 
@@ -189,48 +190,48 @@ Primero, diseñe los elementos secundarios `.terrarium` div como un rectángulo 
 
 ```css
 .jar-walls {
-	height: 80%;
-	width: 60%;
-	background: #d1e1df;
-	border-radius: 1rem;
-	position: absolute;
-	bottom: 0.5%;
-	left: 20%;
-	opacity: 0.5;
-	z-index: 1;
+  height: 80%;
+  width: 60%;
+  background: #d1e1df;
+  border-radius: 1rem;
+  position: absolute;
+  bottom: 0.5%;
+  left: 20%;
+  opacity: 0.5;
+  z-index: 1;
 }
 
 .jar-top {
-	width: 50%;
-	height: 5%;
-	background: #d1e1df;
-	position: absolute;
-	bottom: 80.5%;
-	left: 25%;
-	opacity: 0.7;
-	z-index: 1;
+  width: 50%;
+  height: 5%;
+  background: #d1e1df;
+  position: absolute;
+  bottom: 80.5%;
+  left: 25%;
+  opacity: 0.7;
+  z-index: 1;
 }
 
 .jar-bottom {
-	width: 50%;
-	height: 1%;
-	background: #d1e1df;
-	position: absolute;
-	bottom: 0%;
-	left: 25%;
-	opacity: 0.7;
+  width: 50%;
+  height: 1%;
+  background: #d1e1df;
+  position: absolute;
+  bottom: 0%;
+  left: 25%;
+  opacity: 0.7;
 }
 
 .dirt {
-	width: 60%;
-	height: 5%;
-	background: #3a241d;
-	position: absolute;
-	border-radius: 0 0 1rem 1rem;
-	bottom: 1%;
-	left: 20%;
-	opacity: 0.7;
-	z-index: -1;
+  width: 60%;
+  height: 5%;
+  background: #3a241d;
+  position: absolute;
+  border-radius: 0 0 1rem 1rem;
+  bottom: 1%;
+  left: 20%;
+  opacity: 0.7;
+  z-index: -1;
 }
 ```
 

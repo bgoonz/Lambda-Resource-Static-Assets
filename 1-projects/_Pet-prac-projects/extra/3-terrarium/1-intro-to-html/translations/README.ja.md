@@ -1,6 +1,7 @@
-# テラリウムプロジェクト その1: HTML 入門
+# テラリウムプロジェクト その 1: HTML 入門
 
 ![Introduction to HTML](/sketchnotes/webdev101-html.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## レッスン前の小テスト
@@ -11,7 +12,7 @@
 
 HTML (HyperText Markup Language) は、Web の「骨格」です。CSS が HTML を「ドレスアップ」し、JavaScript が HTML に命を吹き込むとすれば、HTML は Web アプリケーションの本体となります。HTML の構文は、「head」、「body」、「footer」タグを含むため、この考えを反映しています。
 
-このレッスンでは、HTML を使ってバーチャルテラリウムのインターフェースの「骨格」をレイアウトします。タイトルと3つのカラムがあります。右と左のカラムにはドラッグ可能な植物を配置し、中央のエリアには実際のガラス張りのテラリウムを配置します。このレッスンが終わる頃には、列の中に植物が見えるようになると思いますが、インターフェースが少し変な感じになっているかもしれません。
+このレッスンでは、HTML を使ってバーチャルテラリウムのインターフェースの「骨格」をレイアウトします。タイトルと 3 つのカラムがあります。右と左のカラムにはドラッグ可能な植物を配置し、中央のエリアには実際のガラス張りのテラリウムを配置します。このレッスンが終わる頃には、列の中に植物が見えるようになると思いますが、インターフェースが少し変な感じになっているかもしれません。
 
 ### タスク
 
@@ -22,10 +23,11 @@ HTML (HyperText Markup Language) は、Web の「骨格」です。CSS が HTML 
 もしくは
 
 git bash 上でこれらのコマンドを使用します。
-* `mkdir terrarium`
-* `cd terrarium`
-* `touch index.html`
-* `code index.html` または `nano index.html`
+
+- `mkdir terrarium`
+- `cd terrarium`
+- `touch index.html`
+- `code index.html` または `nano index.html`
 
 > index.html ファイルはブラウザに対して、それがフォルダ内のデフォルトファイルであることを示します。`https://anysite.com/test` のような URL は、`test` というフォルダを含むフォルダ構造を用いて構築され、その中に `index.html` が含まれているかもしれません。
 
@@ -37,7 +39,7 @@ HTML ファイルの最初の行は、その doctype です。ファイルの一
 
 > ヒント: VS Code では、タグの上にカーソルを置くと MDN リファレンスガイドからタグの使用に関する情報を得ることができます。
 
-2行目は `<html>` タグのオープニングタグであり、それに続くのがクロージングタグ `</html>` です。これらのタグはインターフェイスのルート要素です。
+2 行目は `<html>` タグのオープニングタグであり、それに続くのがクロージングタグ `</html>` です。これらのタグはインターフェイスのルート要素です。
 
 ### タスク
 
@@ -54,13 +56,13 @@ HTML ファイルの最初の行は、その doctype です。ファイルの一
 
 ## ドキュメントの 'head'
 
-HTML ドキュメントの 'head' 領域には、Web ページに関する重要な情報が含まれており、[メタデータ](https://developer.mozilla.org/ja/docs/Web/HTML/Element/meta)としても知られています。私たちの場合、このページがレンダリングされるために送信される Web サーバーに、以下の4つのことを伝えます。
+HTML ドキュメントの 'head' 領域には、Web ページに関する重要な情報が含まれており、[メタデータ](https://developer.mozilla.org/ja/docs/Web/HTML/Element/meta)としても知られています。私たちの場合、このページがレンダリングされるために送信される Web サーバーに、以下の 4 つのことを伝えます。
 
--   ページタイトル
--   次を含むページのメタデータ:
-    -   'character set' で、ページで使われている文字エンコーディングを表します
-    -   IE=edge ブラウザがサポートされていることを示す `x-ua-compatible` などのブラウザ情報
-    -   viewport が読み込まれたときにどのように振る舞うかについての情報を提供します。viewport の初期スケールを 1 に設定すると、ページが最初に読み込まれたときのズームレベルを制御します
+- ページタイトル
+- 次を含むページのメタデータ:
+  - 'character set' で、ページで使われている文字エンコーディングを表します
+  - IE=edge ブラウザがサポートされていることを示す `x-ua-compatible` などのブラウザ情報
+  - viewport が読み込まれたときにどのように振る舞うかについての情報を提供します。viewport の初期スケールを 1 に設定すると、ページが最初に読み込まれたときのズームレベルを制御します
 
 ### タスク
 
@@ -68,10 +70,10 @@ HTML ドキュメントの 'head' 領域には、Web ページに関する重要
 
 ```html
 <head>
-	<title>Welcome to my Virtual Terrarium</title>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome to my Virtual Terrarium</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 ```
 
@@ -90,13 +92,13 @@ HTML では、.html ファイルにタグを追加して Web ページの要素�
 ```html
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Welcome to my Virtual Terrarium</title>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-	</head>
-	<body></body>
+  <head>
+    <title>Welcome to my Virtual Terrarium</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body></body>
 </html>
 ```
 
@@ -106,60 +108,60 @@ HTML では、.html ファイルにタグを追加して Web ページの要素�
 
 閉じタグを必要としない html タグの一つに `<img>` タグがあります。なぜなら、ページがアイテムをレンダリングするために必要なすべての情報を含む `src` 要素を持っているからです。
 
-アプリ内に `images` というフォルダを作成し、その中に[ソースコードフォルダ](../solution/images)内のすべての画像を追加します (植物の画像が14枚あります)。
+アプリ内に `images` というフォルダを作成し、その中に[ソースコードフォルダ](../solution/images)内のすべての画像を追加します (植物の画像が 14 枚あります)。
 
 ### タスク
 
-これらの植物の画像を `<body></body>` タグの間の2つのカラムに追加します。
+これらの植物の画像を `<body></body>` タグの間の 2 つのカラムに追加します。
 
 ```html
 <div id="page">
-	<div id="left-container" class="container">
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
-		</div>
-	</div>
-	<div id="right-container" class="container">
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
-		</div>
-	</div>
+  <div id="left-container" class="container">
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
+    </div>
+  </div>
+  <div id="right-container" class="container">
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
+    </div>
+  </div>
 </div>
 ```
 
@@ -197,13 +199,13 @@ HTML では、.html ファイルにタグを追加して Web ページの要素�
 
 ```html
 <div id="terrarium">
-	<div class="jar-top"></div>
-	<div class="jar-walls">
-		<div class="jar-glossy-long"></div>
-		<div class="jar-glossy-short"></div>
-	</div>
-	<div class="dirt"></div>
-	<div class="jar-bottom"></div>
+  <div class="jar-top"></div>
+  <div class="jar-walls">
+    <div class="jar-glossy-long"></div>
+    <div class="jar-glossy-short"></div>
+  </div>
+  <div class="dirt"></div>
+  <div class="jar-bottom"></div>
 </div>
 ```
 
@@ -213,7 +215,7 @@ HTML では、.html ファイルにタグを追加して Web ページの要素�
 
 ## チャレンジ
 
-HTMLに はまだ遊んで楽しいワイルドな「古い」タグがいくつかありますが、[これらのタグ](https://developer.mozilla.org/ja/docs/Web/HTML/Element#Obsolete_and_deprecated_elements)のような非推奨のタグをマークアップに使うべきではありません。それでも、古い `<marquee>` タグを使って h1 タイトルを水平方向にスクロールさせることはできますか？(もしそうする場合は、後から削除することを忘れないでください)
+HTML に はまだ遊んで楽しいワイルドな「古い」タグがいくつかありますが、[これらのタグ](https://developer.mozilla.org/ja/docs/Web/HTML/Element#Obsolete_and_deprecated_elements)のような非推奨のタグをマークアップに使うべきではありません。それでも、古い `<marquee>` タグを使って h1 タイトルを水平方向にスクロールさせることはできますか？(もしそうする場合は、後から削除することを忘れないでください)
 
 ## レッスン後の小テスト
 
@@ -224,7 +226,6 @@ HTMLに はまだ遊んで楽しいワイルドな「古い」タグがいくつ
 HTML は、今日のウェブを構築するのに役立ってきた「試行錯誤された」ビルディングブロックシステムです。古いタグと新しいタグを研究することで、その歴史について少し学びましょう。あるタグが非推奨になり、あるタグが追加された理由がわかりますか？将来的にはどのようなタグが導入されるかもしれませんか？
 
 Web やモバイル向けのサイト構築については、[Microsoft Learn](https://docs.microsoft.com/learn/modules/build-simple-website/?WT.mc_id=academic-13441-cxa) で詳しく解説しています。
-
 
 ## 課題
 

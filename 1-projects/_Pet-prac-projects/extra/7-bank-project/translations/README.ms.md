@@ -3,7 +3,7 @@
 Dalam projek ini, anda akan belajar membina bank fiksyen. Pelajaran ini merangkumi petunjuk bagaimana mengatur aplikasi web dan menyediakan laluan, membina borang, mengurus keadaan, dan mengambil data dari API dari mana anda dapat mengambil data bank.
 
 | ![Screen1](../images/screen1.png) | ![Screen2](../images/screen2.png) |
-|--------------------------------|--------------------------------|
+| --------------------------------- | --------------------------------- |
 
 ## Pembelajaran
 
@@ -18,4 +18,4 @@ Pelajaran ini ditulis dengan :hearts: oleh [Yohan Lasorsa](https://twitter.com/s
 
 Sekiranya anda berminat untuk mempelajari cara membina [server API](./api/README) yang digunakan dalam pelajaran ini, anda boleh mengikuti [rangkaian video ini](https://aka.ms/NodeBeginner) (khususnya video 17 hingga 21).
 
-Anda juga boleh melihat [tutorial Belajar interaktif ini](https://aka.ms/learn/express-api). 
+Anda juga boleh melihat [tutorial Belajar interaktif ini](https://aka.ms/learn/express-api).

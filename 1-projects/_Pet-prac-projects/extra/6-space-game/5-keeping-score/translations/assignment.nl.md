@@ -6,6 +6,6 @@ Creëer een spel waarin u leven en punten op een creatieve manier weergeeft. Een
 
 # Rubriek
 
-| Criteria | Voorbeeldig              | Voldoende                    | Moet worden verbeterd          |
-| -------- | ---------------------- | --------------------------- | -------------------------- |
+| Criteria | Voorbeeldig                        | Voldoende                             | Moet worden verbeterd         |
+| -------- | ---------------------------------- | ------------------------------------- | ----------------------------- |
 |          | volledige game wordt gepresenteerd | game wordt gedeeltelijk gepresenteerd | gedeeltelijke game bevat bugs |

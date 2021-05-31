@@ -3,9 +3,11 @@
 这节课涵盖了编程语言的基础知识，涉及到的内容适用于如今大多数现代编程语言。在“工具介绍”部分，你会了解到一些对开发者很有用的软件。
 
 ![Intro Programming](/sketchnotes/webdev101-programming.png)
+
 > 涂鸦笔记作者：[Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 课前小测
+
 [课前小测](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/1?loc=zh_cn)
 
 ## 大纲
@@ -19,7 +21,7 @@
 
 ## 什么是编程？
 
-编程（programming） ，俗称写代码（coding），是向诸如计算机或移动设备之类的设备写入指令的过程。我们使用编程语言来编写这些指令，然后交由设备去解释（interpret）。这些指令的集合有许多叫法，常见的有*程序（program）*、*计算机程序（computer program）*、*应用程序（application / app）*和*可执行文件（executable）*。
+编程（programming） ，俗称写代码（coding），是向诸如计算机或移动设备之类的设备写入指令的过程。我们使用编程语言来编写这些指令，然后交由设备去解释（interpret）。这些指令的集合有许多叫法，常见的有*程序（program）*、_计算机程序（computer program）_、*应用程序（application / app）*和*可执行文件（executable）*。
 
 *程序*可以是任何由代码编写的东西，比如网站、游戏和手机应用。尽管的确有办法不编写任何代码就创建一个程序，但是设备还是会去解析其底层逻辑，这个逻辑大概率是由代码编写的。所谓*正在运行*或是*执行代码*的程序所做的其实都是执行指令。你现在用来阅读这段文字的设备，也正在运行一个将文字输出到你的屏幕上的程序。
 
@@ -36,14 +38,16 @@
 下面的代码展示了高级语言（以 JavaScript 为例）和低级语言（以 ARM 汇编代码为例）的区别：
 
 ```javascript
-let number = 10
-let n1 = 0, n2 = 1, nextTerm;
+let number = 10;
+let n1 = 0,
+  n2 = 1,
+  nextTerm;
 
 for (let i = 1; i <= number; i++) {
-    console.log(n1);
-    nextTerm = n1 + n2;
-    n1 = n2;
-    n2 = nextTerm;
+  console.log(n1);
+  nextTerm = n1 + n2;
+  n1 = n2;
+  n2 = nextTerm;
 }
 ```
 
@@ -72,7 +76,7 @@ back add r0,r1
  end
 ```
 
-不管你信不信，*它们做的事完全相同*：打印斐波那契数列的前 10 位。
+不管你信不信，_它们做的事完全相同_：打印斐波那契数列的前 10 位。
 
 ✅ [斐波那契数列](https://zh.wikipedia.org/wiki/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97)是一个由 0 和 1 开头，每个数字都是它之前两个数字之和的数列。
 
@@ -100,10 +104,10 @@ back add r0,r1
 
 开发者选用编辑器还有这些原因：
 
-- *调试（Debugging）* 通过逐步或逐行地运行代码来发现漏洞和错误。一些编辑器自身带有调试功能，或者可以被自定义添加对特定编程语言的调试功能。
-- *语法高亮（Syntax highlighting）* 为代码添加颜色和文本格式以便阅读。多数编辑器都可以对语法高亮进行自定义。
-- *插件和集成（Extensions and Integrations）* 开发者可以根据自身需要为编辑器添加其原生本不包含的功能。比如，许多开发者需要为代码撰写文档来解释其工作原理，就会安装一个拼写检查插件来检查有没有拼写错误。多数插件都只支持特定的编辑器，多数编辑器也会提供搜索可用插件的方法。
-- *自定义（Customization）* 多数编辑器都是高度可自定义的，每一位开发者都能根据自身需要来自定义自己的开发环境。许多开发者还会编写自己的插件。
+- _调试（Debugging）_ 通过逐步或逐行地运行代码来发现漏洞和错误。一些编辑器自身带有调试功能，或者可以被自定义添加对特定编程语言的调试功能。
+- _语法高亮（Syntax highlighting）_ 为代码添加颜色和文本格式以便阅读。多数编辑器都可以对语法高亮进行自定义。
+- _插件和集成（Extensions and Integrations）_ 开发者可以根据自身需要为编辑器添加其原生本不包含的功能。比如，许多开发者需要为代码撰写文档来解释其工作原理，就会安装一个拼写检查插件来检查有没有拼写错误。多数插件都只支持特定的编辑器，多数编辑器也会提供搜索可用插件的方法。
+- _自定义（Customization）_ 多数编辑器都是高度可自定义的，每一位开发者都能根据自身需要来自定义自己的开发环境。许多开发者还会编写自己的插件。
 
 #### 主流编辑器和 Web 开发插件
 
@@ -136,7 +140,7 @@ back add r0,r1
 
 命令行选择基于你使用的操作系统会有所不同。
 
-*💻 表示会预装在对应操作系统上*
+_💻 表示会预装在对应操作系统上_
 
 #### Windows
 
@@ -144,7 +148,7 @@ back add r0,r1
 - [Command Line](https://docs.microsoft.com/windows-server/administration/windows-commands/windows-commands?WT.mc_id=academic-13441-cxa) (即 CMD) 💻
 - [Windows Terminal](https://docs.microsoft.com/windows/terminal/?WT.mc_id=academic-13441-cxa)
 - [mintty](https://mintty.github.io/)
-  
+
 #### MacOS
 
 - [Terminal](https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac) 💻
@@ -181,6 +185,7 @@ back add r0,r1
 比较一些编程语言。JavaScript 和 Java 相互之间有什么独特的特征？COBOL 和 Go 之间呢？
 
 ## 课后小测
+
 [课后小测](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/2?loc=zh_cn)
 
 ## 复习 & 自学

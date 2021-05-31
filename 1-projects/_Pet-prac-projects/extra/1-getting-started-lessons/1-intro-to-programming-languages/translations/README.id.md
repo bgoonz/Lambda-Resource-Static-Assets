@@ -3,6 +3,7 @@
 Pelajaran ini mencakup dasar-dasar bahasa pemrograman. Topik yang dibahas di sini berlaku untuk sebagian besar bahasa pemrograman modern saat ini. Di bagian 'Alat Keterampilan', Anda akan belajar tentang perangkat lunak yang berguna yang membantu Anda sebagai pengembang.
 
 ![Pemrograman Intro](/sketchnotes/webdev101-programming.png)
+
 > Catatan sketsa oleh [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Kuis Pra-Kuliah
@@ -20,31 +21,33 @@ Dalam pelajaran ini, kami akan membahas:
 
 ## Apa itu Pemrograman?
 
-Pemrograman (juga dikenal sebagai koding) adalah proses penulisan instruksi ke perangkat, seperti komputer atau perangkat seluler. Kami menulis instruksi ini dengan bahasa pemrograman, yang kemudian diinterpretasikan oleh perangkat. Kumpulan instruksi ini dapat dirujuk dengan berbagai nama, tetapi *program*, *program komputer*, *aplikasi (app)*, dan *dapat dijalankan (executable)* adalah beberapa nama populer.
+Pemrograman (juga dikenal sebagai koding) adalah proses penulisan instruksi ke perangkat, seperti komputer atau perangkat seluler. Kami menulis instruksi ini dengan bahasa pemrograman, yang kemudian diinterpretasikan oleh perangkat. Kumpulan instruksi ini dapat dirujuk dengan berbagai nama, tetapi _program_, _program komputer_, _aplikasi (app)_, dan _dapat dijalankan (executable)_ adalah beberapa nama populer.
 
-Sebuah *program* dapat berupa apapun yang ditulis dengan kode; situs web, permainan, dan aplikasi telepon adalah program. Meskipun memungkinkan untuk membuat program tanpa menulis kode, logika dasarnya diinterpretasikan ke perangkat dan logika itu kemungkinan besar ditulis dengan kode. Sebuah program yang *berjalan (running)* atau *menjalankan kode (executing code)* sedang menjalankan instruksi. Perangkat yang saat ini Anda gunakan untuk membaca pelajaran ini menjalankan program untuk mencetaknya ke layar Anda.
+Sebuah _program_ dapat berupa apapun yang ditulis dengan kode; situs web, permainan, dan aplikasi telepon adalah program. Meskipun memungkinkan untuk membuat program tanpa menulis kode, logika dasarnya diinterpretasikan ke perangkat dan logika itu kemungkinan besar ditulis dengan kode. Sebuah program yang _berjalan (running)_ atau _menjalankan kode (executing code)_ sedang menjalankan instruksi. Perangkat yang saat ini Anda gunakan untuk membaca pelajaran ini menjalankan program untuk mencetaknya ke layar Anda.
 
 ✅ Lakukan sedikit riset: siapa yang dianggap pemrogram komputer pertama di dunia?
 
 ## Bahasa pemrograman
 
-Bahasa pemrograman memiliki tujuan utama: bagi pengembang untuk membuat instruksi untuk dikirim ke perangkat. Perangkat hanya dapat memahami biner (1 dan 0), dan untuk *sebagian besar* pengembang itu bukan cara yang sangat efisien untuk berkomunikasi. Bahasa pemrograman adalah wahana komunikasi antara manusia dan komputer.
+Bahasa pemrograman memiliki tujuan utama: bagi pengembang untuk membuat instruksi untuk dikirim ke perangkat. Perangkat hanya dapat memahami biner (1 dan 0), dan untuk _sebagian besar_ pengembang itu bukan cara yang sangat efisien untuk berkomunikasi. Bahasa pemrograman adalah wahana komunikasi antara manusia dan komputer.
 
 Bahasa pemrograman memiliki format yang berbeda dan mungkin memiliki tujuan yang berbeda. Misalnya, JavaScript terutama digunakan untuk aplikasi web, sedangkan Bash terutama digunakan untuk sistem operasi.
 
-*Bahasa tingkat rendah (Low level languages)* biasanya membutuhkan lebih sedikit langkah daripada *bahasa tingkat tinggi (high level languages)* agar perangkat dapat menafsirkan instruksi. Namun, yang membuat bahasa tingkat tinggi lebih populer adalah keterbacaan dan dukungannya. JavaScript dianggap sebagai bahasa tingkat tinggi.
+_Bahasa tingkat rendah (Low level languages)_ biasanya membutuhkan lebih sedikit langkah daripada _bahasa tingkat tinggi (high level languages)_ agar perangkat dapat menafsirkan instruksi. Namun, yang membuat bahasa tingkat tinggi lebih populer adalah keterbacaan dan dukungannya. JavaScript dianggap sebagai bahasa tingkat tinggi.
 
 Kode berikut menggambarkan perbedaan antara bahasa tingkat tinggi dengan JavaScript dan bahasa tingkat rendah dengan kode rakitan ARM (ARM assembly code).
 
 ```javascript
-let number = 10
-let n1 = 0, n2 = 1, nextTerm;
+let number = 10;
+let n1 = 0,
+  n2 = 1,
+  nextTerm;
 
 for (let i = 1; i <= number; i++) {
-    console.log(n1);
-    nextTerm = n1 + n2;
-    n1 = n2;
-    n2 = nextTerm;
+  console.log(n1);
+  nextTerm = n1 + n2;
+  n1 = n2;
+  n2 = nextTerm;
 }
 ```
 
@@ -73,15 +76,15 @@ back add r0,r1
  end
 ```
 
-Percaya atau tidak, *mereka berdua melakukan hal yang sama*: mencetak urutan Fibonacci hingga 10.
+Percaya atau tidak, _mereka berdua melakukan hal yang sama_: mencetak urutan Fibonacci hingga 10.
 
 ✅ Urutan Fibonacci [didefinisikan](https://en.wikipedia.org/wiki/Fibonacci_number) sebagai sekumpulan angka sedemikian rupa sehingga setiap angka adalah jumlah dari dua angka sebelumnya, mulai dari 0 dan 1.
 
 ## Elemen program
 
-Satu instruksi dalam program disebut *statement* dan biasanya akan memiliki karakter atau penspasian baris yang menandai di mana instruksi berakhir, atau *mengakhiri (terminates)*. Bagaimana sebuah program berakhir bervariasi menurut setiap bahasa.
+Satu instruksi dalam program disebut _statement_ dan biasanya akan memiliki karakter atau penspasian baris yang menandai di mana instruksi berakhir, atau _mengakhiri (terminates)_. Bagaimana sebuah program berakhir bervariasi menurut setiap bahasa.
 
-Sebagian besar program mengandalkan penggunaan data dari pengguna atau di tempat lain, di mana pernyataan dapat mengandalkan data untuk melakukan instruksi. Data dapat mengubah bagaimana sebuah program berperilaku, sehingga bahasa pemrograman datang dengan cara untuk menyimpan data sementara yang dapat digunakan nanti. Data ini disebut *variabel*. Variabel adalah pernyataan yang menginstruksikan perangkat untuk menyimpan data dalam memorinya. Variabel dalam program mirip dengan yang ada di aljabar, di mana mereka memiliki nama yang unik dan nilainya dapat berubah dari waktu ke waktu.
+Sebagian besar program mengandalkan penggunaan data dari pengguna atau di tempat lain, di mana pernyataan dapat mengandalkan data untuk melakukan instruksi. Data dapat mengubah bagaimana sebuah program berperilaku, sehingga bahasa pemrograman datang dengan cara untuk menyimpan data sementara yang dapat digunakan nanti. Data ini disebut _variabel_. Variabel adalah pernyataan yang menginstruksikan perangkat untuk menyimpan data dalam memorinya. Variabel dalam program mirip dengan yang ada di aljabar, di mana mereka memiliki nama yang unik dan nilainya dapat berubah dari waktu ke waktu.
 
 Ada kemungkinan bahwa beberapa pernyataan tidak akan dijalankan oleh perangkat. Ini biasanya oleh desain ketika ditulis oleh pengembang atau secara tidak sengaja ketika kesalahan yang tidak terduga terjadi. Jenis kontrol aplikasi ini membuatnya lebih kuat dan dapat dipertahankan. Biasanya perubahan kontrol ini terjadi ketika keputusan tertentu terpenuhi. Pernyataan umum dalam bahasa pemrograman modern untuk mengontrol bagaimana program dijalankan adalah pernyataan `if..else`.
 
@@ -93,7 +96,7 @@ Ada kemungkinan bahwa beberapa pernyataan tidak akan dijalankan oleh perangkat. 
 
 Di bagian ini, Anda akan mempelajari beberapa perangkat lunak yang mungkin berguna saat memulai perjalanan pengembangan profesional.
 
-***Lingkungan pengembangan (development environment)*** adalah seperangkat alat dan fitur unik yang sering digunakan pengembang saat menulis perangkat lunak. Beberapa alat ini telah disesuaikan untuk kebutuhan khusus pengembang, dan dapat berubah seiring waktu jika pengembang mengubah prioritas dalam proyek kerja atau pribadi, atau ketika mereka menggunakan bahasa pemrograman yang berbeda. Lingkungan pengembangan sama uniknya dengan pengembang yang menggunakannya.
+**_Lingkungan pengembangan (development environment)_** adalah seperangkat alat dan fitur unik yang sering digunakan pengembang saat menulis perangkat lunak. Beberapa alat ini telah disesuaikan untuk kebutuhan khusus pengembang, dan dapat berubah seiring waktu jika pengembang mengubah prioritas dalam proyek kerja atau pribadi, atau ketika mereka menggunakan bahasa pemrograman yang berbeda. Lingkungan pengembangan sama uniknya dengan pengembang yang menggunakannya.
 
 ### Editor
 
@@ -101,10 +104,10 @@ Salah satu alat yang paling penting untuk pengembangan perangkat lunak adalah ed
 
 Pengembang mengandalkan editor karena beberapa alasan tambahan:
 
-- *Debugging* Menemukan bug dan kesalahan dengan melangkah melalui kode, baris demi baris. Beberapa editor memiliki kemampuan debugging, atau dapat disesuaikan dan ditambahkan untuk bahasa pemrograman tertentu.  
-- *Penyorotan sintaks* Menambahkan warna dan pemformatan teks ke kode, membuatnya lebih mudah dibaca. Sebagian besar editor memungkinkan penyorotan sintaks yang disesuaikan.
-- *Ekstensi dan Integrasi* Penambahan yang khusus untuk pengembang, oleh pengembang, untuk akses ke alat tambahan yang tidak dibangun ke dalam editor dasar. Misalnya, banyak pengembang juga membutuhkan cara untuk mendokumentasikan kode mereka dan menjelaskan cara kerjanya dan akan menginstal ekstensi pemeriksaan ejaan untuk memeriksa kesalahan ketik. Sebagian besar penambahan ini dimaksudkan untuk digunakan dalam editor tertentu, dan sebagian besar editor datang dengan cara untuk mencari ekstensi yang tersedia.
-- *Kustomisasi* Sebagian besar editor sangat dapat disesuaikan, dan setiap pengembang akan memiliki lingkungan pengembangan unik mereka sendiri yang sesuai dengan kebutuhan mereka. Banyak juga yang memungkinkan pengembang untuk membuat ekstensi mereka sendiri.
+- _Debugging_ Menemukan bug dan kesalahan dengan melangkah melalui kode, baris demi baris. Beberapa editor memiliki kemampuan debugging, atau dapat disesuaikan dan ditambahkan untuk bahasa pemrograman tertentu.
+- _Penyorotan sintaks_ Menambahkan warna dan pemformatan teks ke kode, membuatnya lebih mudah dibaca. Sebagian besar editor memungkinkan penyorotan sintaks yang disesuaikan.
+- _Ekstensi dan Integrasi_ Penambahan yang khusus untuk pengembang, oleh pengembang, untuk akses ke alat tambahan yang tidak dibangun ke dalam editor dasar. Misalnya, banyak pengembang juga membutuhkan cara untuk mendokumentasikan kode mereka dan menjelaskan cara kerjanya dan akan menginstal ekstensi pemeriksaan ejaan untuk memeriksa kesalahan ketik. Sebagian besar penambahan ini dimaksudkan untuk digunakan dalam editor tertentu, dan sebagian besar editor datang dengan cara untuk mencari ekstensi yang tersedia.
+- _Kustomisasi_ Sebagian besar editor sangat dapat disesuaikan, dan setiap pengembang akan memiliki lingkungan pengembangan unik mereka sendiri yang sesuai dengan kebutuhan mereka. Banyak juga yang memungkinkan pengembang untuk membuat ekstensi mereka sendiri.
 
 #### Editor dan Ekstensi Pengembangan Web Populer
 
@@ -121,7 +124,7 @@ Pengembang mengandalkan editor karena beberapa alasan tambahan:
 
 Alat penting lainnya adalah browser. Pengembang web mengandalkan browser untuk mengamati bagaimana kode mereka berjalan di web, itu juga digunakan untuk melihat elemen visual dari halaman web yang ditulis di editor, seperti HTML.
 
-Banyak browser datang dengan *alat pengembang* (DevTools) yang berisi serangkaian fitur dan informasi bermanfaat untuk membantu pengembang mengumpulkan dan menangkap wawasan penting tentang aplikasi mereka. Misalnya: Jika halaman web memiliki kesalahan, terkadang berguna untuk mengetahui kapan halaman web tersebut terjadi. DevTools di browser dapat dikonfigurasi untuk mengambil informasi ini.
+Banyak browser datang dengan _alat pengembang_ (DevTools) yang berisi serangkaian fitur dan informasi bermanfaat untuk membantu pengembang mengumpulkan dan menangkap wawasan penting tentang aplikasi mereka. Misalnya: Jika halaman web memiliki kesalahan, terkadang berguna untuk mengetahui kapan halaman web tersebut terjadi. DevTools di browser dapat dikonfigurasi untuk mengambil informasi ini.
 
 #### Browser dan DevTools Populer
 
@@ -137,7 +140,7 @@ Beberapa pengembang lebih suka tampilan grafis yang kurang untuk tugas sehari-ha
 
 Pilihan untuk command line akan berbeda berdasarkan sistem operasi yang Anda gunakan.
 
-*💻 = sudah terinstall dengan sistem operasi.*
+_💻 = sudah terinstall dengan sistem operasi._
 
 #### Windows
 
@@ -145,7 +148,7 @@ Pilihan untuk command line akan berbeda berdasarkan sistem operasi yang Anda gun
 - [Command Line](https://docs.microsoft.com/windows-server/administration/windows-commands/windows-commands?WT.mc_id=academic-13441-cxa) (also known as CMD) 💻
 - [Windows Terminal](https://docs.microsoft.com/windows/terminal/?WT.mc_id=academic-13441-cxa)
 - [mintty](https://mintty.github.io/)
-  
+
 #### MacOS
 
 - [Terminal](https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac) 💻
@@ -172,7 +175,7 @@ Ketika pengembang ingin mempelajari sesuatu yang baru, mereka kemungkinan besar 
 
 - [Mozilla Developer Network](https://developer.mozilla.org/docs/Web)
 - [Frontend Masters](https://frontendmasters.com/learn/)
-✅ Lakukan riset: Sekarang Anda tahu dasar-dasar lingkungan pengembang web, bandingkan dan kontras dengan lingkungan desainer web.
+  ✅ Lakukan riset: Sekarang Anda tahu dasar-dasar lingkungan pengembang web, bandingkan dan kontras dengan lingkungan desainer web.
 
 ---
 

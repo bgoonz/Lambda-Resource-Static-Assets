@@ -16,38 +16,37 @@ Das Erstellen und **Deklarieren** einer Variablen hat die folgende Syntax **[key
 
 - **Keyword**. Schlüsselwörter können `let` oder `var` sein.
 
-    > Hinweis: Das Schlüsselwort `let` wurde in ES6 eingeführt und gibt Ihrer Variablen einen sogenannten "Block Scope". Es wird empfohlen, `let` over` var` zu verwenden. Wir werden uns in zukünftigen Teilen eingehender mit Blockbereichen befassen.
+  > Hinweis: Das Schlüsselwort `let` wurde in ES6 eingeführt und gibt Ihrer Variablen einen sogenannten "Block Scope". Es wird empfohlen, `let` over` var` zu verwenden. Wir werden uns in zukünftigen Teilen eingehender mit Blockbereichen befassen.
+
 - **Der Variablenname**, dies ist ein Name, den Sie selbst wählen.
 
 ### Aufgabe - Arbeiten mit Variablen
 
 1. **Deklariere eine Variable**. Deklarieren wir eine Variable mit dem Schlüsselwort `let`:
 
-
-    ```javascript
-    let myVariable;
-    ```
+   ```javascript
+   let myVariable;
+   ```
 
    `myVariable` wurde jetzt mit dem Schlüsselwort `let` deklariert. Es hat derzeit keinen Wert.
 
 1. **Weisen Sie einen Wert zu**. Speichern Sie einen Wert in einer Variablen mit dem Operator `=`, gefolgt vom erwarteten Wert.
 
-    ```javascript
-    myVariable = 123;
-    ```
+   ```javascript
+   myVariable = 123;
+   ```
 
    > Hinweis: Die Verwendung von `=` in dieser Lektion bedeutet, dass wir einen "Zuweisungsoperator" verwenden, mit dem ein Wert auf eine Variable gesetzt wird. Es bedeutet nicht Gleichheit.
 
-    `myVariable` wurde jetzt mit dem Wert 123 *initialisiert*.
-
+   `myVariable` wurde jetzt mit dem Wert 123 _initialisiert_.
 
 1. **Refactor**. Ersetzen Sie Ihren Code durch die folgende Anweisung.
 
-    ```javascript
-    let myVariable = 123;
-    ```
+   ```javascript
+   let myVariable = 123;
+   ```
 
-    Das Obige wird als _explizite Initialisierung_ bezeichnet, wenn eine Variable deklariert und gleichzeitig ein Wert zugewiesen wird.
+   Das Obige wird als _explizite Initialisierung_ bezeichnet, wenn eine Variable deklariert und gleichzeitig ein Wert zugewiesen wird.
 
 1. **Ändern Sie den Variablenwert**. Ändern Sie den Variablenwert folgendermaßen:
 
@@ -57,12 +56,11 @@ Das Erstellen und **Deklarieren** einer Variablen hat die folgende Syntax **[key
 
    Sobald eine Variable deklariert ist, können Sie ihren Wert an jeder Stelle in Ihrem Code mit dem Operator `=` und dem neuen Wert ändern.
 
-    ✅ Probieren Sie es aus! Sie können JavaScript direkt in Ihren Browser schreiben. Öffnen Sie ein Browserfenster und navigieren Sie zu Developer Tools. In der Konsole finden Sie eine Eingabeaufforderung. Geben Sie `let myVariable = 123` ein, drücken Sie die Eingabetaste und geben Sie `myVariable` ein. Was geschieht? Beachten Sie, dass Sie in den folgenden Lektionen mehr über diese Konzepte erfahren werden.
+   ✅ Probieren Sie es aus! Sie können JavaScript direkt in Ihren Browser schreiben. Öffnen Sie ein Browserfenster und navigieren Sie zu Developer Tools. In der Konsole finden Sie eine Eingabeaufforderung. Geben Sie `let myVariable = 123` ein, drücken Sie die Eingabetaste und geben Sie `myVariable` ein. Was geschieht? Beachten Sie, dass Sie in den folgenden Lektionen mehr über diese Konzepte erfahren werden.
 
 ## Konstanten
 
 Die Deklaration und Initialisierung einer Konstante folgt denselben Konzepten wie eine Variable, mit Ausnahme des Schlüsselworts `const`. Konstanten werden normalerweise mit allen Großbuchstaben deklariert.
-
 
 ```javascript
 const MY_VARIABLE = 123;
@@ -74,31 +72,28 @@ Konstanten ähneln Variablen mit zwei Ausnahmen:
 - **Referenz kann nicht geändert werden**. Die Referenz einer Konstante kann nach der Initialisierung nicht mehr geändert werden. Andernfalls tritt beim Ausführen von Code ein Fehler auf. Schauen wir uns zwei Beispiele an:
 - **Einfacher Wert**. Folgendes ist NICHT erlaubt:
 
-   
       ```javascript
       const PI = 3;
       PI = 4; // not allowed
       ```
- 
-   - **Objektreferenz ist geschützt**. Folgendes ist NICHT erlaubt.
 
-   
-      ```javascript
-      const obj = { a: 3 };
-      obj = { b: 5 } // not allowed
-      ```
+  - **Objektreferenz ist geschützt**. Folgendes ist NICHT erlaubt.
 
-    - **Objektwert ist nicht geschützt**. Folgendes ist erlaubt:
+    ```javascript
+    const obj = { a: 3 };
+    obj = { b: 5 }; // not allowed
+    ```
 
-    
-      ```javascript
-      const obj = { a: 3 };
-      obj.a = 5;  // allowed
-      ```
+  - **Objektwert ist nicht geschützt**. Folgendes ist erlaubt:
 
-      Oben ändern Sie den Wert des Objekts, aber nicht die Referenz selbst, wodurch es zulässig wird.
+    ```javascript
+    const obj = { a: 3 };
+    obj.a = 5; // allowed
+    ```
 
-   > Beachten Sie, dass ein `const` bedeutet, dass die Referenz vor einer Neuzuweisung geschützt ist. Der Wert ist jedoch nicht änderbar und kann sich ändern, insbesondere wenn es sich um ein komplexes Konstrukt wie ein Objekt handelt.
+    Oben ändern Sie den Wert des Objekts, aber nicht die Referenz selbst, wodurch es zulässig wird.
+
+  > Beachten Sie, dass ein `const` bedeutet, dass die Referenz vor einer Neuzuweisung geschützt ist. Der Wert ist jedoch nicht änderbar und kann sich ändern, insbesondere wenn es sich um ein komplexes Konstrukt wie ein Objekt handelt.
 
 ## Datentypen
 
@@ -118,14 +113,13 @@ Variablen können alle Arten von Zahlen speichern, einschließlich Dezimalstelle
 
 Es gibt verschiedene Arten von Operatoren, die beim Ausführen von arithmetischen Funktionen verwendet werden können. Einige sind hier aufgeführt:
 
-| Symbol | Beschreibung | Beispiel |
-| ------ | ------------ |---------------------- | -------------------------------- |
-| `+` | **Addition**: Berechnet die Summe zweier Zahlen | `1 + 2 // erwartete Antwort ist 3` |
-| `-` | **Subtraktion**: Berechnet die Differenz zweier Zahlen | `1 - 2 // erwartete Antwort ist -1` |
-| `*` | **Multiplikation**: Berechnet das Produkt zweier Zahlen | `1 * 2 // erwartete Antwort ist 2` |
-| `/` | **Division**: Berechnet den Quotienten aus zwei Zahlen | `1/2 // erwartete Antwort ist 0.5` |
-| %% | **Rest**: Berechnet den Rest aus der Division zweier Zahlen | `1 % 2 // erwartete Antwort ist 1` |
-
+| Symbol | Beschreibung                                                | Beispiel                            |
+| ------ | ----------------------------------------------------------- | ----------------------------------- |
+| `+`    | **Addition**: Berechnet die Summe zweier Zahlen             | `1 + 2 // erwartete Antwort ist 3`  |
+| `-`    | **Subtraktion**: Berechnet die Differenz zweier Zahlen      | `1 - 2 // erwartete Antwort ist -1` |
+| `*`    | **Multiplikation**: Berechnet das Produkt zweier Zahlen     | `1 * 2 // erwartete Antwort ist 2`  |
+| `/`    | **Division**: Berechnet den Quotienten aus zwei Zahlen      | `1/2 // erwartete Antwort ist 0.5`  |
+| %%     | **Rest**: Berechnet den Rest aus der Division zweier Zahlen | `1 % 2 // erwartete Antwort ist 1`  |
 
 ✅ Probieren Sie es aus! Versuchen Sie eine arithmetische Operation in der Konsole Ihres Browsers. Überraschen Sie die Ergebnisse?
 
@@ -152,8 +146,8 @@ let myString2 = "World";
 myString1 + myString2 + "!"; //HelloWorld!
 myString1 + " " + myString2 + "!"; //Hello World!
 myString1 + ", " + myString2 + "!"; //Hello, World!
-
 ```
+
 .
 ✅ Warum ist in JavaScript `1 + 1 = 2`, aber `'1' + '1' = 11?` Denken Sie darüber nach. Was ist mit `'1' + 1`?
 
@@ -164,7 +158,7 @@ let myString1 = "Hello";
 let myString2 = "World";
 
 `${myString1} ${myString2}!` //Hello World!
-`${myString1}, ${myString2}!` //Hello, World!
+`${myString1}, ${myString2}!`; //Hello, World!
 ```
 
 Sie können Ihre Formatierungsziele mit beiden Methoden erreichen, aber Vorlagenliterale berücksichtigen alle Leerzeichen und Zeilenumbrüche.

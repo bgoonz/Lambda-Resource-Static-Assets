@@ -6,6 +6,6 @@ Restyle het terrarium met Flexbox of CSS Grid en maak screenshots om te laten zi
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                                                         | Voldoende                      | Moet worden verbeterd                    |
-| -------- | ----------------------------------------------------------------- | ----------------------------- | ------------------------------------ |
+| Criteria | Voorbeeldig                                                          | Voldoende                         | Moet worden verbeterd                |
+| -------- | -------------------------------------------------------------------- | --------------------------------- | ------------------------------------ |
 |          | Presenteer een volledig gerestyled terrarium met Flexbox of CSS Grid | Restyle een paar van de elementen | Het terrarium helemaal niet restylen |

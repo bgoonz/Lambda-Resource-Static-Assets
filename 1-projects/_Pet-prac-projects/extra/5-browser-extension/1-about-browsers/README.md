@@ -1,6 +1,7 @@
 # Browser Extension Project Part 1: All about Browsers
 
 ![Browser sketchnote](/sketchnotes/browser.jpg)
+
 > Sketchnote by [Wassim Chegham](https://dev.to/wassimchegham/ever-wondered-what-happens-when-you-type-in-a-url-in-an-address-bar-in-a-browser-3dob)
 
 ## Pre-Lecture Quiz
@@ -20,13 +21,14 @@ But what is a browser exactly? It is a software application that allows an end u
 ✅ A little history: the first browser was called 'WorldWideWeb' and was created by Sir Timothy Berners-Lee in 1990.
 
 ![early browsers](images/earlybrowsers.jpg)
+
 > Some early browsers, via [Karen McGrane](https://www.slideshare.net/KMcGrane/week-4-ixd-history-personal-computing)
 
 When a user connected to the internet using a URL (Uniform Resource Locator) address, usually using Hypertext Transfer Protocol via an `http` or `https` address, the browser communicates with a web server and fetches a web page.
 
 At this point, the browser's rendering engine displays it on the user's device, which might be a mobile phone, desktop, or laptop.
 
-Browsers also have the ability to cache content so that it doesn't have to be retrieved from the server every time. They can record the history of a user's browsing activity, store 'cookies', which are small bits of data that contain information used to store a user's activity, and more. 
+Browsers also have the ability to cache content so that it doesn't have to be retrieved from the server every time. They can record the history of a user's browsing activity, store 'cookies', which are small bits of data that contain information used to store a user's activity, and more.
 
 A really important thing to remember about browsers is that they are not all the same! Each browser has its strengths and weaknesses, and a professional web developer needs to understand how to make web pages perform well cross-browser. This includes handling small viewports such as a mobile phone's, as well as a user who is offline.
 
@@ -36,7 +38,7 @@ A really useful website that you probably should bookmark in whatever browser yo
 
 ## Browser extensions
 
-Why would you want to build a browser extension? It's a handy thing to attach to your browser when you need quick access to tasks that you tend to repeat. For example, if you find yourself needing to check colors on the various web pages that you interact with, you might install a color-picker browser extension. If you have trouble remembering passwords, you might use a password-management browser extension. 
+Why would you want to build a browser extension? It's a handy thing to attach to your browser when you need quick access to tasks that you tend to repeat. For example, if you find yourself needing to check colors on the various web pages that you interact with, you might install a color-picker browser extension. If you have trouble remembering passwords, you might use a password-management browser extension.
 
 Browser extensions are fun to develop, too. They tend to manage a finite number of tasks that they perform well.
 
@@ -50,9 +52,9 @@ Before you start building, take a look at the process of building and deploying 
 
 In essence, the process will be:
 
-- build your extension using `npm run build` 
+- build your extension using `npm run build`
 - navigate in the browser to the extensions pane using the "Settings and more" button (the `...` icon) on the top right
-- if it's a new installation, choose `load unpacked` to upload a fresh extension from its build folder (in our case it is `/dist`) 
+- if it's a new installation, choose `load unpacked` to upload a fresh extension from its build folder (in our case it is `/dist`)
 - or, click `reload` if you are reloading the already-installed extension
 
 ✅ These instructions pertain to extensions you build yourself; to install extensions that have been released to the browser extension store associated to each browser, you should navigate to those [stores](https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home) and install the extension of your choice.
@@ -74,12 +76,12 @@ CO2 Signal's API.
 Take a minute to look through the codebase:
 
 dist
-    -|manifest.json (defaults set here)
-    -|index.html (front-end HTML markup here)
-    -|background.js (background JS here)
-    -|main.js (built JS)
+-|manifest.json (defaults set here)
+-|index.html (front-end HTML markup here)
+-|background.js (background JS here)
+-|main.js (built JS)
 src
-    -|index.js (your JS code goes here)
+-|index.js (your JS code goes here)
 
 ✅ Once you have your API key and Region code handy, store those somewhere in a note for future use.
 
@@ -111,8 +113,9 @@ In the `/dist` folder, you will build a form and a result area. In the `index.ht
 		<input type="text" id="api" required class="api-key" />
 	</div>
 	<button class="search-btn">Submit</button>
-</form>	
+</form>
 ```
+
 This is the form where your saved information will be input and saved to local storage.
 
 Next, create the results area; under the final form tag, add some divs:
@@ -130,6 +133,7 @@ Next, create the results area; under the final form tag, add some divs:
 	<button class="clear-btn">Change region</button>
 </div>
 ```
+
 At this point, you can try a build. Make sure to install the package dependencies of this extension:
 
 ```
@@ -162,7 +166,6 @@ In this lesson you learned a little about the history of the web browser; take t
 
 [An interview with Tim Berners-Lee](https://www.theguardian.com/technology/2019/mar/12/tim-berners-lee-on-30-years-of-the-web-if-we-dream-a-little-we-can-get-the-web-we-want)
 
-## Assignment 
+## Assignment
 
 [Restyle your extension](assignment.md)
-

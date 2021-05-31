@@ -8,10 +8,10 @@
 
 - **雷射光**：這束雷射會從英雄艦艇垂直往上移動
 - **碰撞偵測**，除了完成*射擊*這項能力，我們還會新增幾項遊戲規則：
-   - **雷射擊中敵人**：被雷射擊中的敵人會死亡
-   - **雷射擊中畫面最上方**：雷射擊中到畫面最上方會消失
-   - **敵人碰觸到英雄**：敵人與英雄在互相碰觸時皆會被摧毀
-   - **敵人碰觸到畫面最下方**：敵人碰觸到畫面最下方時，該敵人與英雄會被摧毀
+  - **雷射擊中敵人**：被雷射擊中的敵人會死亡
+  - **雷射擊中畫面最上方**：雷射擊中到畫面最上方會消失
+  - **敵人碰觸到英雄**：敵人與英雄在互相碰觸時皆會被摧毀
+  - **敵人碰觸到畫面最下方**：敵人碰觸到畫面最下方時，該敵人與英雄會被摧毀
 
 簡單來說，你這位*英雄*需要在敵人到達畫面最下方之前，使用雷射擊毀它們。
 
@@ -42,10 +42,12 @@
 
    ```javascript
    function intersectRect(r1, r2) {
-     return !(r2.left > r1.right ||
+     return !(
+       r2.left > r1.right ||
        r2.right < r1.left ||
        r2.top > r1.bottom ||
-       r2.bottom < r1.top);
+       r2.bottom < r1.top
+     );
    }
    ```
 
@@ -55,13 +57,13 @@
 
 ```javascript
 // 碰撞發生
-enemy.dead = true
+enemy.dead = true;
 ```
 
 接著，你在重新繪製畫面前，排除掉這些*死亡*的物件，例如：
 
 ```javascript
-gameObjects = gameObject.filter(go => !go.dead);
+gameObjects = gameObject.filter((go) => !go.dead);
 ```
 
 ## 我們該如何發射雷射
@@ -109,11 +111,11 @@ class Weapon {
 > 要點：你需要使用的雷射光已經在資料夾中，並已匯入到程式碼中。
 
 - **加入碰撞偵測**，建立下列規則給各個雷射碰觸到東西的情況：
-   1. **雷射擊中敵人**：被雷射擊中的敵人會死亡
-   2. **雷射擊中畫面最上方**：雷射擊中到畫面最上方會消失
-   3. **敵人碰觸到英雄**：敵人與英雄在互相碰觸時皆會被摧毀
-   4. **敵人碰觸到畫面最下方**：敵人碰觸到畫面最下方時，該敵人與英雄會被摧毀
-   
+  1.  **雷射擊中敵人**：被雷射擊中的敵人會死亡
+  2.  **雷射擊中畫面最上方**：雷射擊中到畫面最上方會消失
+  3.  **敵人碰觸到英雄**：敵人與英雄在互相碰觸時皆會被摧毀
+  4.  **敵人碰觸到畫面最下方**：敵人碰觸到畫面最下方時，該敵人與英雄會被摧毀
+
 ## 建議步驟
 
 在你的 `your-work` 子資料夾中，確認檔案是否建立完成。它應該包括：
@@ -141,38 +143,39 @@ npm start
 
 1. **設定表達遊戲物件為矩形的方法，以處理碰撞狀況** 下列的程式表達 `GameObject` 的矩形呈現方式。編輯你的 GameObject class：
 
-    ```javascript
-    rectFromGameObject() {
-        return {
-          top: this.y,
-          left: this.x,
-          bottom: this.y + this.height,
-          right: this.x + this.width,
-        };
-      }
-    ```
+   ```javascript
+   rectFromGameObject() {
+       return {
+         top: this.y,
+         left: this.x,
+         bottom: this.y + this.height,
+         right: this.x + this.width,
+       };
+     }
+   ```
 
 2. **加入程式碼來檢查碰撞** 這會是新函式來測試兩矩形是否相交：
 
-    ```javascript
-    function intersectRect(r1, r2) {
-      return !(
-        r2.left > r1.right ||
-        r2.right < r1.left ||
-        r2.top > r1.bottom ||
-        r2.bottom < r1.top
-      );
-    }
-    ```
+   ```javascript
+   function intersectRect(r1, r2) {
+     return !(
+       r2.left > r1.right ||
+       r2.right < r1.left ||
+       r2.top > r1.bottom ||
+       r2.bottom < r1.top
+     );
+   }
+   ```
 
 3. **加入雷射發射功能**
+
    1. **加入鍵盤事件訊息**。 *空白鍵*要能在英雄艦艇上方建立雷射光。加入三個常數到 Messages 物件中：
 
-       ```javascript
-        KEY_EVENT_SPACE: "KEY_EVENT_SPACE",
-        COLLISION_ENEMY_LASER: "COLLISION_ENEMY_LASER",
-        COLLISION_ENEMY_HERO: "COLLISION_ENEMY_HERO",
-       ```
+      ```javascript
+       KEY_EVENT_SPACE: "KEY_EVENT_SPACE",
+       COLLISION_ENEMY_LASER: "COLLISION_ENEMY_LASER",
+       COLLISION_ENEMY_HERO: "COLLISION_ENEMY_HERO",
+      ```
 
    1. **處理空白鍵**。 編輯 `window.addEventListener` 的 keyup 函式來處理空白鍵：
 
@@ -182,32 +185,35 @@ npm start
         }
       ```
 
-    1. **加入監聽者**。 編輯函式 `initGame()` 來確保英雄可以在空白鍵按壓時，發射雷射光：
+   1. **加入監聽者**。 編輯函式 `initGame()` 來確保英雄可以在空白鍵按壓時，發射雷射光：
 
-       ```javascript
-       eventEmitter.on(Messages.KEY_EVENT_SPACE, () => {
-        if (hero.canFire()) {
-          hero.fire();
+      ```javascript
+      eventEmitter.on(Messages.KEY_EVENT_SPACE, () => {
+       if (hero.canFire()) {
+         hero.fire();
+       }
+      ```
+
+      建立新的函式 `eventEmitter.on()` 確保敵人碰觸到雷射光時，能更新死亡狀態：
+
+      ```javascript
+      eventEmitter.on(
+        Messages.COLLISION_ENEMY_LASER,
+        (_, { first, second }) => {
+          first.dead = true;
+          second.dead = true;
         }
-       ```
-
-       建立新的函式 `eventEmitter.on()` 確保敵人碰觸到雷射光時，能更新死亡狀態：
-
-          ```javascript
-          eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-            first.dead = true;
-            second.dead = true;
-          })
-          ```
+      );
+      ```
 
    1. **移動物件**。 確保雷射逐步地向畫面上方移動。建立新的 class Laser 延伸自 `GameObject`，你應該有做過：
-   
+
       ```javascript
-        class Laser extends GameObject {
+      class Laser extends GameObject {
         constructor(x, y) {
-          super(x,y);
+          super(x, y);
           (this.width = 9), (this.height = 33);
-          this.type = 'Laser';
+          this.type = "Laser";
           this.img = laserImg;
           let id = setInterval(() => {
             if (this.y > 0) {
@@ -216,7 +222,7 @@ npm start
               this.dead = true;
               clearInterval(id);
             }
-          }, 100)
+          }, 100);
         }
       }
       ```
@@ -225,31 +231,31 @@ npm start
 
       ```javascript
       function updateGameObjects() {
-        const enemies = gameObjects.filter(go => go.type === 'Enemy');
+        const enemies = gameObjects.filter((go) => go.type === "Enemy");
         const lasers = gameObjects.filter((go) => go.type === "Laser");
-      // 雷射擊中某物
+        // 雷射擊中某物
         lasers.forEach((l) => {
           enemies.forEach((m) => {
             if (intersectRect(l.rectFromGameObject(), m.rectFromGameObject())) {
-            eventEmitter.emit(Messages.COLLISION_ENEMY_LASER, {
-              first: l,
-              second: m,
-            });
-          }
-         });
-      });
+              eventEmitter.emit(Messages.COLLISION_ENEMY_LASER, {
+                first: l,
+                second: m,
+              });
+            }
+          });
+        });
 
-        gameObjects = gameObjects.filter(go => !go.dead);
-      }  
+        gameObjects = gameObjects.filter((go) => !go.dead);
+      }
       ```
 
       記得在 `window.onload` 裡的遊戲迴圈中加入 `updateGameObjects()`。
 
-   4. **設定雷射的冷卻時間**，它只能在定期內發射一次。
+   1. **設定雷射的冷卻時間**，它只能在定期內發射一次。
 
       最後，編輯 Hero class 來允許冷卻：
 
-       ```javascript
+      ```javascript
       class Hero extends GameObject {
         constructor(x, y) {
           super(x, y);
@@ -261,7 +267,7 @@ npm start
         fire() {
           gameObjects.push(new Laser(this.x + 45, this.y - 10));
           this.cooldown = 500;
-    
+
           let id = setInterval(() => {
             if (this.cooldown > 0) {
               this.cooldown -= 100;

@@ -6,7 +6,7 @@ Creare un piccolo gioco che utilizzi gli eventi della tastiera per svolgere le a
 
 ## Rubrica
 
-| Criteri | Ottimo | Adeguato | Necessita miglioramento |
-| -------- | ------------------------ | ------------------------ | ----------------- |
-|          | Viene presentato un gioco completo | Il gioco è molto minimale | Il gioco ha dei bug |
-|          |
+| Criteri | Ottimo                             | Adeguato                  | Necessita miglioramento |
+| ------- | ---------------------------------- | ------------------------- | ----------------------- |
+|         | Viene presentato un gioco completo | Il gioco è molto minimale | Il gioco ha dei bug     |
+|         |

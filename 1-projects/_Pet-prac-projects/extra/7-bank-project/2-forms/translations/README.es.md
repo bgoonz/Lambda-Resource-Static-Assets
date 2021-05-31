@@ -27,27 +27,25 @@ El elemento `<form>` encapsula una sección de un documento HTML donde el usuari
 
 Hay muchos [types diferentes](https://developer.mozilla.org/docs/Web/HTML/Element/input) de `<input>`, por ejemplo, para crear un campo donde el usuario puede ingresar su nombre de usuario que puede usar:
 
-
 ```html
-<input name="username" type="text">
+<input name="username" type="text" />
 ```
 
 El atributo `name` se usa para identificar el control y se usará como el nombre de la propiedad cuando se envíen los datos del formulario.
 
 > Eche un vistazo a la lista completa de [`<input>` tipos](https://developer.mozilla.org/docs/Web/HTML/Element/input) y [otros controles de formulario](https://developer.mozilla.org/docs/Learn/Forms/Other_form_controls) para tener una idea de todos los elementos nativos de la interfaz de usuario que puede utilizar al crear su interfaz de usuario.
 
-✅ Tenga en cuenta que `<input>` es un [elemento vacío](https://developer.mozilla.org/docs/Glossary/Empty_element) en el que *no* debe agregar una etiqueta de cierre coincidente. Sin embargo, puede usar la notación de cierre automático `<input/>`, pero no es necesaria.
+✅ Tenga en cuenta que `<input>` es un [elemento vacío](https://developer.mozilla.org/docs/Glossary/Empty_element) en el que _no_ debe agregar una etiqueta de cierre coincidente. Sin embargo, puede usar la notación de cierre automático `<input/>`, pero no es necesaria.
 
 El elemento `<button>` dentro de un formulario es un poco especial. Si no especifica su atributo `type`, automáticamente enviará los datos del formulario al servidor cuando se presione. Estos son los posibles valores de tipo:
 
-- `enviar`: el valor predeterminado dentro de un` <formulario> `, el botón activa la acción de envío del formulario.
+- `enviar`: el valor predeterminado dentro de un`<formulario>`, el botón activa la acción de envío del formulario.
 - `reset`: El botón restablece todos los controles de formulario a sus valores iniciales.
 - `button`: No asigna un comportamiento predeterminado cuando se presiona el botón. A continuación, puede asignarle acciones personalizadas mediante JavaScript.
 
 ### Tarea:
 
-Comencemos agregando un formulario a la plantilla de inicio de sesión. Necesitaremos un campo *nombre de usuario* y un botón *Iniciar sesión*.
-
+Comencemos agregando un formulario a la plantilla de inicio de sesión. Necesitaremos un campo _nombre de usuario_ y un botón _Iniciar sesión_.
 
 ```html
 <template id="login">
@@ -56,7 +54,7 @@ Comencemos agregando un formulario a la plantilla de inicio de sesión. Necesita
     <h2>Login</h2>
     <form id="loginForm">
       <label for="user">Username</label>
-      <input name="user" type="text">
+      <input name="user" type="text" />
       <button>Login</button>
     </form>
   </section>
@@ -72,19 +70,18 @@ Si observa más de cerca, puede notar que también agregamos un elemento `<label
 
 Ahora agregaremos un segundo formulario para el registro, justo debajo del anterior:
 
-
 ```html
-<hr/>
+<hr />
 <h2>Register</h2>
 <form id="registerForm">
   <label for="user">Username</label>
-  <input name="user" type="text">
+  <input name="user" type="text" />
   <label for="currency">Currency</label>
-  <input name="currency" type="text" value="$">
+  <input name="currency" type="text" value="$" />
   <label for="description">Description</label>
-  <input name="description" type="text">
+  <input name="description" type="text" />
   <label for="balance">Current balance</label>
-  <input name="balance" type="number" value="0">
+  <input name="balance" type="number" value="0" />
   <button>Register</button>
 </form>
 ```
@@ -96,13 +93,13 @@ Observe también que la entrada para `balance` tiene el tipo `number`. ¿Se ve d
 
 ## Envío de datos al servidor
 
-Ahora que tenemos una interfaz de usuario funcional, el siguiente paso es enviar los datos a nuestro servidor. Hagamos una prueba rápida con nuestro código actual: ¿qué sucede si hace clic en el botón *Iniciar sesión* o *Registrarse*?
+Ahora que tenemos una interfaz de usuario funcional, el siguiente paso es enviar los datos a nuestro servidor. Hagamos una prueba rápida con nuestro código actual: ¿qué sucede si hace clic en el botón _Iniciar sesión_ o _Registrarse_?
 
 ¿Notó el cambio en la sección de URL de su navegador?
 
 ! [Captura de pantalla del cambio de URL del navegador después de hacer clic en el botón Registrar](./images/click-register.png)
 
-La acción predeterminada para un `<form>` es enviar el formulario a la URL del servidor actual utilizando el [método GET](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.3 ), agregando los datos del formulario directamente a la URL. Sin embargo, este método tiene algunas deficiencias:
+La acción predeterminada para un `<form>` es enviar el formulario a la URL del servidor actual utilizando el [método GET](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.3), agregando los datos del formulario directamente a la URL. Sin embargo, este método tiene algunas deficiencias:
 
 - Los datos enviados son de tamaño muy limitado (unos 2000 caracteres)
 - Los datos son directamente visibles en la URL (no es ideal para contraseñas)
@@ -117,10 +114,14 @@ Es por eso que puede cambiarlo para usar el [método POST](https://www.w3.org/Pr
 Agregue las propiedades `action` y `method` al formulario de registro:
 
 ```html
-<form id="registerForm" action="//localhost:5000/api/accounts" method="POST">
+<form
+  id="registerForm"
+  action="//localhost:5000/api/accounts"
+  method="POST"
+></form>
 ```
 
-Ahora intente registrar una nueva cuenta con su nombre. Después de hacer clic en el botón * Registrarse *, debería ver algo como esto:
+Ahora intente registrar una nueva cuenta con su nombre. Después de hacer clic en el botón _ Registrarse _, debería ver algo como esto:
 
 ![](./images/form-post.png)
 
@@ -143,14 +144,14 @@ Para enviar los datos del formulario al servidor sin forzar la recarga de una p�
 Reemplace el formulario de registro `acción` con:
 
 ```html
-<form id="registerForm" action="javascript:register()">
+<form id="registerForm" action="javascript:register()"></form>
 ```
 
 Abra `app.js` agregue una nueva función llamada `registro`:
 
 ```js
 function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const data = Object.fromEntries(formData);
   const jsonData = JSON.stringify(data);
@@ -161,18 +162,17 @@ Aquí recuperamos el elemento del formulario usando `getElementById()` y usamos 
 
 Los datos ahora están listos para enviarse al servidor. Cree una nueva función llamada `createAccount`:
 
-
 ```js
 async function createAccount(account) {
   try {
-    const response = await fetch('//localhost:5000/api/accounts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: account
+    const response = await fetch("//localhost:5000/api/accounts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: account,
     });
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    return { error: error.message || "Unknown error" };
   }
 }
 ```
@@ -206,16 +206,16 @@ Finalmente, agreguemos algunos registros para verificar el resultado. La funció
 
 ```js
 async function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const jsonData = JSON.stringify(Object.fromEntries(formData));
   const result = await createAccount(jsonData);
 
   if (result.error) {
-    return console.log('An error occured:', result.error);
+    return console.log("An error occured:", result.error);
   }
 
-  console.log('Account created!', result);
+  console.log("Account created!", result);
 }
 ```
 
@@ -227,7 +227,7 @@ async function register() {
 
 ## Validación de datos
 
-Si intenta registrar una nueva cuenta sin establecer un nombre de usuario primero, puede ver que el servidor devuelve un error con el código de estado [400 (Solicitud incorrecta)](https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).).
+Si intenta registrar una nueva cuenta sin establecer un nombre de usuario primero, puede ver que el servidor devuelve un error con el código de estado [400 (Solicitud incorrecta)](<https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).>).
 
 Antes de enviar datos a un servidor, es una buena práctica [validar los datos del formulario](https://developer.mozilla.org/docs/Learn/Forms/Form_validation) de antemano cuando sea posible, para asegurarse de enviar un solicitud válida. Los controles de formularios HTML5 proporcionan una validación incorporada utilizando varios atributos:
 
@@ -239,15 +239,14 @@ Antes de enviar datos a un servidor, es una buena práctica [validar los datos d
 
 > Consejo: puedes personalizar el aspecto de los controles de tu formulario dependiendo de si son válidos o no usando las pseudoclases CSS `:valid` y `:invalid`.
 
-
 ### Tarea
 
 Hay 2 campos obligatorios para crear una nueva cuenta válida, el nombre de usuario y la moneda, los otros campos son opcionales. Actualice el formulario en HTML para reflejar que:
 
 ```html
-<input name="user" type="text" required>
+<input name="user" type="text" required />
 ...
-<input name="currency" type="text" value="$" required>
+<input name="currency" type="text" value="$" required />
 ```
 
 Si bien esta implementación de servidor en particular no impone límites específicos en la longitud máxima de los campos, siempre es una buena práctica definir límites razonables para cualquier entrada de texto del usuario.
@@ -255,18 +254,18 @@ Si bien esta implementación de servidor en particular no impone límites espec�
 Agrega un atributo `maxlength` a los campos de texto:
 
 ```html
-<input name="user" type="text" maxlength="20" required>
+<input name="user" type="text" maxlength="20" required />
 ...
-<input name="currency" type="text" value="$" maxlength="5" required>
+<input name="currency" type="text" value="$" maxlength="5" required />
 ...
-<input name="description" type="text" maxlength="100">
+<input name="description" type="text" maxlength="100" />
 ```
 
-Ahora, si presiona el botón *Registrar* y un campo no respeta una regla de validación que definimos, debería ver algo como esto:
+Ahora, si presiona el botón _Registrar_ y un campo no respeta una regla de validación que definimos, debería ver algo como esto:
 
 ![Captura de pantalla que muestra el error de validación al intentar enviar el formulario](./images/validation-error.png)
 
-Una validación como esta realizada *antes* de enviar cualquier dato al servidor se llama validación **del lado del cliente**. Pero tenga en cuenta que no siempre es posible realizar todas las comprobaciones sin enviar los datos. Por ejemplo, no podemos comprobar aquí si ya existe una cuenta con el mismo nombre de usuario sin enviar una solicitud al servidor. La validación adicional realizada en el servidor se denomina validación **del lado del servidor**.
+Una validación como esta realizada _antes_ de enviar cualquier dato al servidor se llama validación **del lado del cliente**. Pero tenga en cuenta que no siempre es posible realizar todas las comprobaciones sin enviar los datos. Por ejemplo, no podemos comprobar aquí si ya existe una cuenta con el mismo nombre de usuario sin enviar una solicitud al servidor. La validación adicional realizada en el servidor se denomina validación **del lado del servidor**.
 
 Por lo general, ambos deben implementarse y, si bien el uso de la validación del lado del cliente mejora la experiencia del usuario al proporcionar comentarios instantáneos al usuario, la validación del lado del servidor es crucial para garantizar que los datos del usuario que manipula sean sólidos y seguros.
 

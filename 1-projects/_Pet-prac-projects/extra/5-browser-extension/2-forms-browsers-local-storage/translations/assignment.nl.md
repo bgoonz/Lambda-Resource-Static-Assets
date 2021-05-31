@@ -6,6 +6,6 @@ API's kunnen erg leuk zijn om mee te spelen. Hier is een [lijst met vele gratis]
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                                                                  | Voldoende                                 | Moet worden verbeterd       |
-| -------- | -------------------------------------------------------------------------- | ---------------------------------------- | ----------------------- |
+| Criteria | Voorbeeldig                                                                                    | Voldoende                                         | Moet worden verbeterd   |
+| -------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------- | ----------------------- |
 |          | Een volledige browserextensie wordt ingediend met behulp van een API uit de bovenstaande lijst | Er is een gedeeltelijke browserextensie ingediend | De inzending bevat bugs |

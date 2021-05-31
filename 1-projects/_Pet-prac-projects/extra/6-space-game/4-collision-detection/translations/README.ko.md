@@ -7,13 +7,13 @@
 이 강의에서는 JavaScript로 레이저를 쏘는 방법을 배웁니다! 게임에 다음 두 가지를 추가합니다:
 
 - **레이저**: 이 레이저는 영웅 우주선에서 수직 위쪽으로 발사되며
-- **충돌 감지**, *쏘는* 기능 구현의 부분으로 몇 가지 멋진 게임 규칙을 추가할 예정입니다:
-   - **레이저로 적 때리기**: 레이저에 맞으면 적은 사망합니다
-   - **레이저로 화면 상단 도달하기**: 화면의 상단 부분을 맞으면 레이저는 파괴됩니다
-   - **적과 영웅 충돌하기**: 적과 영웅이 부딪히면 파괴됩니다
-   - **적이 화면 하단 도달하기**: 적이 화면 하단에 부딪히면 적과 영웅이 파괴됩니다
+- **충돌 감지**, _쏘는_ 기능 구현의 부분으로 몇 가지 멋진 게임 규칙을 추가할 예정입니다:
+  - **레이저로 적 때리기**: 레이저에 맞으면 적은 사망합니다
+  - **레이저로 화면 상단 도달하기**: 화면의 상단 부분을 맞으면 레이저는 파괴됩니다
+  - **적과 영웅 충돌하기**: 적과 영웅이 부딪히면 파괴됩니다
+  - **적이 화면 하단 도달하기**: 적이 화면 하단에 부딪히면 적과 영웅이 파괴됩니다
 
-짧게 요약해보면, 여러분은 -- *영웅* -- 모든 적들이 화면 아래로 내려오기 전에 레이저로 모든 적을 때려야 합니다.
+짧게 요약해보면, 여러분은 -- _영웅_ -- 모든 적들이 화면 아래로 내려오기 전에 레이저로 모든 적을 때려야 합니다.
 
 ✅ 지금까지 작성된 최초의 컴퓨터 게임에 대해 약간 알아보새요. 어떻게 작동하나요?
 
@@ -42,10 +42,12 @@
 
    ```javascript
    function intersectRect(r1, r2) {
-     return !(r2.left > r1.right ||
+     return !(
+       r2.left > r1.right ||
        r2.right < r1.left ||
        r2.top > r1.bottom ||
-       r2.bottom < r1.top);
+       r2.bottom < r1.top
+     );
    }
    ```
 
@@ -55,13 +57,13 @@
 
 ```javascript
 // collision happened
-enemy.dead = true
+enemy.dead = true;
 ```
 
-그러고 다음과 같이, 화면을 다시 그리기 전에 *dead* 객체를 정렬합니다:
+그러고 다음과 같이, 화면을 다시 그리기 전에 _dead_ 객체를 정렬합니다:
 
 ```javascript
-gameObjects = gameObject.filter(go => !go.dead);
+gameObjects = gameObject.filter((go) => !go.dead);
 ```
 
 ## 어떻게 레이저를 발사할까요
@@ -109,10 +111,10 @@ class Weapon {
 > tip: 작업할 레이저는 이미 어셋 폴더에 있으므로 코드에서 참조합니다
 
 - **충돌 감지를 추가합니다**, 레이저가 무언가 부딪칠 때 다음 규칙이 적용되어야 합니다:
-   1. **레이저가 적 때리기**: 레이저에 맞으면 적은 사망합니다
-   2. **레이저로 화면 상단 도달하기**: 화면의 상단 부분을 맞으면 레이저는 부서집니다
-   3. **적과 영웅 충돌하기**: 적과 영웅이 부딪히면 파괴됩니다
-   4. **적이 화면 하단 도달하기**: 적이 화면 하단에 부딪히면 적과 영웅이 파괴됩니다
+  1.  **레이저가 적 때리기**: 레이저에 맞으면 적은 사망합니다
+  2.  **레이저로 화면 상단 도달하기**: 화면의 상단 부분을 맞으면 레이저는 부서집니다
+  3.  **적과 영웅 충돌하기**: 적과 영웅이 부딪히면 파괴됩니다
+  4.  **적이 화면 하단 도달하기**: 적이 화면 하단에 부딪히면 적과 영웅이 파괴됩니다
 
 ## 권장 단계
 
@@ -139,40 +141,41 @@ npm start
 
 ### 코드 추가하기
 
-1. ***충돌을 처리하기 위해 게임 객체의 사각형 표현을 설정합니다** 아래 코드를 쓰면 `GameObject`의 사각형 표현을 얻을 수 있습니다. GameObject 클래스를 편집하여 확장합니다:
+1. **\*충돌을 처리하기 위해 게임 객체의 사각형 표현을 설정합니다** 아래 코드를 쓰면 `GameObject`의 사각형 표현을 얻을 수 있습니다. GameObject 클래스를 편집하여 확장합니다:
 
-    ```javascript
-    rectFromGameObject() {
-        return {
-          top: this.y,
-          left: this.x,
-          bottom: this.y + this.height,
-          right: this.x + this.width,
-        };
-      }
-    ```
+   ```javascript
+   rectFromGameObject() {
+       return {
+         top: this.y,
+         left: this.x,
+         bottom: this.y + this.height,
+         right: this.x + this.width,
+       };
+     }
+   ```
 
 2. **충돌을 확인하는 코드를 추가합니다** 이것은 두 개의 직사각형이 교차되는가에 대한 여부를 테스트하는 새로운 함수입니다:
 
-    ```javascript
-    function intersectRect(r1, r2) {
-      return !(
-        r2.left > r1.right ||
-        r2.right < r1.left ||
-        r2.top > r1.bottom ||
-        r2.bottom < r1.top
-      );
-    }
-    ```
+   ```javascript
+   function intersectRect(r1, r2) {
+     return !(
+       r2.left > r1.right ||
+       r2.right < r1.left ||
+       r2.top > r1.bottom ||
+       r2.bottom < r1.top
+     );
+   }
+   ```
 
 3. **레이저 발사 기능 추가**
-   1. **키-이벤트 메시지 추가하기**. *space* 키는 영웅 함선 바로 위에 레이저를 만들어줘야 합니다. Messages 객체에 세 개의 상수를 추가합니다:
 
-       ```javascript
-        KEY_EVENT_SPACE: "KEY_EVENT_SPACE",
-        COLLISION_ENEMY_LASER: "COLLISION_ENEMY_LASER",
-        COLLISION_ENEMY_HERO: "COLLISION_ENEMY_HERO",
-       ```
+   1. **키-이벤트 메시지 추가하기**. _space_ 키는 영웅 함선 바로 위에 레이저를 만들어줘야 합니다. Messages 객체에 세 개의 상수를 추가합니다:
+
+      ```javascript
+       KEY_EVENT_SPACE: "KEY_EVENT_SPACE",
+       COLLISION_ENEMY_LASER: "COLLISION_ENEMY_LASER",
+       COLLISION_ENEMY_HERO: "COLLISION_ENEMY_HERO",
+      ```
 
    1. **space 키 제어하기**. `window.addEventListener` 키업 함수로 spaces를 제어합니다:
 
@@ -182,32 +185,35 @@ npm start
         }
       ```
 
-    1. **리스너 추가하기**. `initGame()` 함수를 편집해서 space 바를 눌렀을 때 hero가 발사할 수 있도록 합니다:
+   1. **리스너 추가하기**. `initGame()` 함수를 편집해서 space 바를 눌렀을 때 hero가 발사할 수 있도록 합니다:
 
-       ```javascript
-       eventEmitter.on(Messages.KEY_EVENT_SPACE, () => {
-        if (hero.canFire()) {
-          hero.fire();
+      ```javascript
+      eventEmitter.on(Messages.KEY_EVENT_SPACE, () => {
+       if (hero.canFire()) {
+         hero.fire();
+       }
+      ```
+
+      새로운 `eventEmitter.on ()` 함수를 추가해서 적이 레이저와 부딪칠 때 동작하도록 합니다:
+
+      ```javascript
+      eventEmitter.on(
+        Messages.COLLISION_ENEMY_LASER,
+        (_, { first, second }) => {
+          first.dead = true;
+          second.dead = true;
         }
-       ```
-
-       새로운 `eventEmitter.on ()` 함수를 추가해서 적이 레이저와 부딪칠 때 동작하도록 합니다:
-
-          ```javascript
-          eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-            first.dead = true;
-            second.dead = true;
-          })
-          ```
+      );
+      ```
 
    1. **객체 움직이기**, 레이저가 화면 상단으로 조금씩 이동하고 있는지 확인합니다. 저번처럼, `GameObject`를 확장하는 새로운 Laser 클래스를 만듭니다:
-   
+
       ```javascript
-        class Laser extends GameObject {
+      class Laser extends GameObject {
         constructor(x, y) {
-          super(x,y);
+          super(x, y);
           (this.width = 9), (this.height = 33);
-          this.type = 'Laser';
+          this.type = "Laser";
           this.img = laserImg;
           let id = setInterval(() => {
             if (this.y > 0) {
@@ -216,7 +222,7 @@ npm start
               this.dead = true;
               clearInterval(id);
             }
-          }, 100)
+          }, 100);
         }
       }
       ```
@@ -225,31 +231,31 @@ npm start
 
       ```javascript
       function updateGameObjects() {
-        const enemies = gameObjects.filter(go => go.type === 'Enemy');
+        const enemies = gameObjects.filter((go) => go.type === "Enemy");
         const lasers = gameObjects.filter((go) => go.type === "Laser");
-      // laser hit something
+        // laser hit something
         lasers.forEach((l) => {
           enemies.forEach((m) => {
             if (intersectRect(l.rectFromGameObject(), m.rectFromGameObject())) {
-            eventEmitter.emit(Messages.COLLISION_ENEMY_LASER, {
-              first: l,
-              second: m,
-            });
-          }
-         });
-      });
+              eventEmitter.emit(Messages.COLLISION_ENEMY_LASER, {
+                first: l,
+                second: m,
+              });
+            }
+          });
+        });
 
-        gameObjects = gameObjects.filter(go => !go.dead);
-      }  
+        gameObjects = gameObjects.filter((go) => !go.dead);
+      }
       ```
 
       `window.onload`의 게임 루프에 `updateGameObjects()`를 추가해야 합니다.
 
-   4. 레이저의 **cooldown을 구현합니다**, 그래서 자주 발사할 수 있습니다.
+   1. 레이저의 **cooldown을 구현합니다**, 그래서 자주 발사할 수 있습니다.
 
       마지막으로, cooldown을 할 수 있도록 Hero 클래스를 편집합니다:
 
-       ```javascript
+      ```javascript
       class Hero extends GameObject {
         constructor(x, y) {
           super(x, y);
@@ -261,7 +267,7 @@ npm start
         fire() {
           gameObjects.push(new Laser(this.x + 45, this.y - 10));
           this.cooldown = 500;
-    
+
           let id = setInterval(() => {
             if (this.cooldown > 0) {
               this.cooldown -= 100;

@@ -1,9 +1,11 @@
 # JavaScript の基本: メソッドと関数
 
 ![JavaScript Basics - Functions](/sketchnotes/webdev101-js-functions.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## レッスン前の小テスト
+
 [レッスン前の小テスト](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/9?loc=ja)
 
 コードを書くことを考えるとき、私たちは常にコードが読みやすいようにしたいと考えています。直感的ではないように聞こえるかもしれませんが、コードは書かれた回数よりも何度も読まれます。コードを確実にメンテナンスできるようにするための開発者のツールボックスの中心的なツールの一つが **関数** です。
@@ -12,7 +14,7 @@
 
 ## 関数
 
-コアとなるのは、関数は必要に応じて実行できるコードのブロックです。これは、同じタスクを何度も実行する必要がある場合に最適です。ロジックを複数の場所に複製するのではなく (時間が来たときに更新するのが困難になります)、1つの場所に集中させ、実行する操作が必要なときにいつでも呼び出すことができます - 他の関数から関数を呼び出すこともできます!
+コアとなるのは、関数は必要に応じて実行できるコードのブロックです。これは、同じタスクを何度も実行する必要がある場合に最適です。ロジックを複数の場所に複製するのではなく (時間が来たときに更新するのが困難になります)、1 つの場所に集中させ、実行する操作が必要なときにいつでも呼び出すことができます - 他の関数から関数を呼び出すこともできます!
 
 他の関数から関数を呼び出すこともできます！同じくらい重要なのは、関数に名前を付ける機能です。これは些細なことのように思われるかもしれませんが、名前をつけることでコードのセクションを簡単に文書化することができます。これはボタンのラベルのようなものと考えることができます。もし "Cancel timer" と書かれたボタンをクリックすると、それが時計の動作を止めようとしていることがわかります。
 
@@ -21,8 +23,9 @@
 関数の構文は次のようになります:
 
 ```javascript
-function nameOfFunction() { // 関数の定義
- // 関数の定義/中身
+function nameOfFunction() {
+  // 関数の定義
+  // 関数の定義/中身
 }
 ```
 
@@ -30,7 +33,7 @@ function nameOfFunction() { // 関数の定義
 
 ```javascript
 function displayGreeting() {
-  console.log('Hello, world!');
+  console.log("Hello, world!");
 }
 ```
 
@@ -58,9 +61,7 @@ displayGreeting();
 パラメータは定義部分に括弧内に記載されており、以下のようにカンマで区切られています:
 
 ```javascript
-function name(param, param2, param3) {
-
-}
+function name(param, param2, param3) {}
 ```
 
 名前を受け付けてそれを表示するように `displayGreeting` を更新することができます。
@@ -75,7 +76,7 @@ function displayGreeting(name) {
 関数を呼び出してパラメータを渡すときは、括弧内で指定します。
 
 ```javascript
-displayGreeting('Christopher');
+displayGreeting("Christopher");
 // 実行時に "Hello, Christopher!" と表示される
 ```
 
@@ -84,7 +85,7 @@ displayGreeting('Christopher');
 より多くのパラメータを追加することで、関数をさらに柔軟にすることができます。しかし、すべての値を指定する必要がない場合はどうでしょうか？挨拶の例に倣って、名前は必須のままにしておくこともできますが (誰に挨拶しているのかを知る必要があります)、挨拶自体は必要に応じてカスタマイズできるようにしたいと考えています。誰かがカスタマイズしたくない場合は、代わりにデフォルト値を指定します。パラメータにデフォルト値を設定するには、変数に値を設定するのと同じ方法 - `parameterName = 'defaultValue'` でパラメータを設定します。完全な例を見るには、以下を参照してください。
 
 ```javascript
-function displayGreeting(name, salutation='Hello') {
+function displayGreeting(name, salutation = "Hello") {
   console.log(`${salutation}, ${name}`);
 }
 ```
@@ -92,10 +93,10 @@ function displayGreeting(name, salutation='Hello') {
 関数を呼び出すときに、`salutation` に値を設定するかどうかを決めることができます。
 
 ```javascript
-displayGreeting('Christopher');
+displayGreeting("Christopher");
 // "Hello, Christopher" と表示されます。
 
-displayGreeting('Christopher', 'Hi');
+displayGreeting("Christopher", "Hi");
 // "Hi, Christopher" と表示されます。
 ```
 
@@ -109,7 +110,7 @@ displayGreeting('Christopher', 'Hi');
 
 ```javascript
 return myVariable;
-```  
+```
 
 挨拶メッセージを作成して、その値を呼び出し元に返す関数を作成することができます。
 
@@ -123,7 +124,7 @@ function createGreetingMessage(name) {
 この関数を呼び出すときには、変数に値を格納します。これは、(`const name = 'Christopher'` のように) 変数に静的な値を設定するのと同じ方法です。
 
 ```javascript
-const greetingMessage = createGreetingMessage('Christopher');
+const greetingMessage = createGreetingMessage("Christopher");
 ```
 
 ## 関数のパラメータとしての関数
@@ -132,11 +133,11 @@ const greetingMessage = createGreetingMessage('Christopher');
 
 例として、タイマーを開始し、タイマーが完了したらコードを実行する [setTimeout](https://developer.mozilla.org/ja/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) を考えてみましょう。どのようなコードを実行したいかを伝える必要があります。関数としては完璧な仕事のように聞こえます。
 
-以下のコードを実行すると、3秒後に **3秒が経過しました** というメッセージが表示されます。
+以下のコードを実行すると、3 秒後に **3 秒が経過しました** というメッセージが表示されます。
 
 ```javascript
 function displayDone() {
-  console.log('3秒が経過しました');
+  console.log("3秒が経過しました");
 }
 // タイマーの値はミリ秒単位
 setTimeout(displayDone, 3000);
@@ -151,8 +152,8 @@ setTimeout(displayDone, 3000);
 上のコードを書き換えて、匿名の関数を使用してみましょう。
 
 ```javascript
-setTimeout(function() {
-  console.log('3秒が経過しました');
+setTimeout(function () {
+  console.log("3秒が経過しました");
 }, 3000);
 ```
 
@@ -166,13 +167,13 @@ setTimeout(function() {
 
 ```javascript
 setTimeout(() => {
-  console.log('3 seconds has elapsed');
+  console.log("3 seconds has elapsed");
 }, 3000);
 ```
 
 ### それぞれの戦略を使うとき
 
-関数をパラメータとして渡すには3つの方法があることがわかりましたが、それぞれをいつ使うか迷っているかもしれません。関数を複数回使用することがわかっているのであれば、通常通りに作成してください。1 つの場所だけで使用する場合は、一般的には匿名関数を使用するのがベストです。太いアロー関数を使うか、より伝統的な `function` 構文を使うかはあなた次第ですが、最近の開発者の多くは `=>` を好んでいることに気づくでしょう。
+関数をパラメータとして渡すには 3 つの方法があることがわかりましたが、それぞれをいつ使うか迷っているかもしれません。関数を複数回使用することがわかっているのであれば、通常通りに作成してください。1 つの場所だけで使用する場合は、一般的には匿名関数を使用するのがベストです。太いアロー関数を使うか、より伝統的な `function` 構文を使うかはあなた次第ですが、最近の開発者の多くは `=>` を好んでいることに気づくでしょう。
 
 ---
 
@@ -181,6 +182,7 @@ setTimeout(() => {
 関数とメソッドの違いを一文で表現できますか？試してみてください。
 
 ## レッスン後の小テスト
+
 [レッスン後の小テスト](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/10?loc=ja)
 
 ## 復習と自己学習

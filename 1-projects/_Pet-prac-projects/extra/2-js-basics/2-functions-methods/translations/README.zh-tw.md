@@ -1,9 +1,11 @@
 # JavaScript 入門 - 函式與方法
 
 ![JavaScript 入門 - 函式](/sketchnotes/webdev101-js-functions.png)
+
 > 由 [Tomomi Imura](https://twitter.com/girlie_mac) 繪製
 
 ## 課前測驗
+
 [課前測驗](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/9?loc=zh_tw)
 
 撰寫程式碼時，我們必須確保程式碼的閱讀性。聽來不太直覺，理解程式碼的時間遠比撰寫時間來的久。裡面最需要被管理的程式項目就是**函式**。
@@ -11,7 +13,6 @@
 [![函式與方法](https://img.youtube.com/vi/XgKsD6Zwvlc/0.jpg)](https://youtube.com/watch?v=XgKsD6Zwvlc "函式與方法")
 
 > 點擊上方圖片觀看關於函式的影片。
-
 
 ## 函式 (Function)
 
@@ -24,8 +25,9 @@
 函式的語法格式如下：
 
 ```javascript
-function nameOfFunction() { // 函式的定義
- // 函式的說明與內容
+function nameOfFunction() {
+  // 函式的定義
+  // 函式的說明與內容
 }
 ```
 
@@ -33,7 +35,7 @@ function nameOfFunction() { // 函式的定義
 
 ```javascript
 function displayGreeting() {
-  console.log('Hello, world!');
+  console.log("Hello, world!");
 }
 ```
 
@@ -61,9 +63,7 @@ displayGreeting();
 參數會寫在定義函式的地方，以括號與逗號標記與分隔：
 
 ```javascript
-function name(param, param2, param3) {
-
-}
+function name(param, param2, param3) {}
 ```
 
 現在我們更新函式 `displayGreeting`，讓它支援打招呼的對象：
@@ -78,8 +78,8 @@ function displayGreeting(name) {
 當我們要呼叫函式時，輸入需要的參數在括號中：
 
 ```javascript
-displayGreeting('Christopher');
-// 呼叫完，印出字串 "Hello, Christopher!" 
+displayGreeting("Christopher");
+// 呼叫完，印出字串 "Hello, Christopher!"
 ```
 
 ## 預設值(Default values)
@@ -87,7 +87,7 @@ displayGreeting('Christopher');
 我們利用參數增加了函式的彈性。但如果我們不想每次都要指定參數給函式使用呢? 繼續之前的例子，保留對象的名稱外，我們增加招呼語的種類。我們可以定義招呼語的預設值，若使用者沒有指定哪一種招呼語時，就使用預設值。它的方法就與賦予變數數值一樣 ── `parameterName = 'defaultValue'`。例如：
 
 ```javascript
-function displayGreeting(name, salutation='Hello') {
+function displayGreeting(name, salutation = "Hello") {
   console.log(`${salutation}, ${name}`);
 }
 ```
@@ -95,10 +95,10 @@ function displayGreeting(name, salutation='Hello') {
 當我們呼叫函式時，我們可以選擇是否要指定招呼語到 `salutation` 中。
 
 ```javascript
-displayGreeting('Christopher');
+displayGreeting("Christopher");
 // 輸出字串 "Hello, Christopher"
 
-displayGreeting('Christopher', 'Hi');
+displayGreeting("Christopher", "Hi");
 // 輸出字串 "Hi, Christopher"
 ```
 
@@ -112,7 +112,7 @@ displayGreeting('Christopher', 'Hi');
 
 ```javascript
 return myVariable;
-```  
+```
 
 我們建立一個函式專門建立招呼訊息並回傳給呼叫者：
 
@@ -126,7 +126,7 @@ function createGreetingMessage(name) {
 當函式被呼叫時，變數會儲存函式回傳的數值。這就像我們給變數定值一樣： `const name = 'Christopher'`。
 
 ```javascript
-const greetingMessage = createGreetingMessage('Christopher');
+const greetingMessage = createGreetingMessage("Christopher");
 ```
 
 ## 將函式作為函式參數使用
@@ -139,7 +139,7 @@ const greetingMessage = createGreetingMessage('Christopher');
 
 ```javascript
 function displayDone() {
-  console.log('已經過三秒鐘');
+  console.log("已經過三秒鐘");
 }
 // 計時單位為毫秒。
 setTimeout(displayDone, 3000);
@@ -154,8 +154,8 @@ setTimeout(displayDone, 3000);
 試著以不記名函式的方式改寫程式碼：
 
 ```javascript
-setTimeout(function() {
-  console.log('3 seconds has elapsed');
+setTimeout(function () {
+  console.log("3 seconds has elapsed");
 }, 3000);
 ```
 
@@ -169,7 +169,7 @@ setTimeout(function() {
 
 ```javascript
 setTimeout(() => {
-  console.log('3 seconds has elapsed');
+  console.log("3 seconds has elapsed");
 }, 3000);
 ```
 
@@ -184,6 +184,7 @@ setTimeout(() => {
 你能用一句話清楚地說明這些函式與方法的差別嗎? 試試看吧！
 
 ## 課後測驗
+
 [課後測驗](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/10?loc=zh_tw)
 
 ## 複習與自學

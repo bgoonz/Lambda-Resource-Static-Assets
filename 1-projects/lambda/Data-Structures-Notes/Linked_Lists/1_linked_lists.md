@@ -1,4 +1,4 @@
-# Lecture 1: Linked Lists  
+# Lecture 1: Linked Lists
 
 a. [Additional Resources](#Additional-Resources)  
 b. [Arrays](#Arrays)  
@@ -8,79 +8,77 @@ e. [Linked Lists](#Linked-Lists)
 f. [What are the advantages?](#What-are-the-advantages-of-each-data-structure?)  
 g. [Implementing Linked Lists](#Implementing-Linked-Lists)  
 h. [Edge Cases](#Edge-Cases)  
-i. [Iterating Through a Linked List](#Iterating-Through-a-Linked-List)  
+i. [Iterating Through a Linked List](#Iterating-Through-a-Linked-List)
 
 <br>
 
-[CS18 Sean Chen Lecture](https://youtu.be/wjeheracQ6U)  
+[CS18 Sean Chen Lecture](https://youtu.be/wjeheracQ6U)
 
-[CS19 Brian Doyle Lecture](https://youtu.be/CyrHCJnFqLA) 
+[CS19 Brian Doyle Lecture](https://youtu.be/CyrHCJnFqLA)
 
 <br>
 <br>
 
 ## Additional Resources
 
-[Pre-Class: The Queue Data Structure](https://youtu.be/j-fBJpSQ19g)  
+[Pre-Class: The Queue Data Structure](https://youtu.be/j-fBJpSQ19g)
 
-[Pre-Class: The Linked List Data Structure](https://youtu.be/7sk4jG83q80)  
-
+[Pre-Class: The Linked List Data Structure](https://youtu.be/7sk4jG83q80)
 
 <br>
 <br>
-
 
 ## Arrays
 
-What is an array and how do they work?  
+What is an array and how do they work?
 
-- They have a fixed length/size  
-- A sequence of contiguous objects of the same type, storing data  
-- Index based with a value  
-- Time and Space efficient  
-- Fast at inserting to the end, slow at inserting to the beginning (because all objects in the array are shifted one space to the right if there is available space OR a new copy of the array is made if there is no available space) 
+- They have a fixed length/size
+- A sequence of contiguous objects of the same type, storing data
+- Index based with a value
+- Time and Space efficient
+- Fast at inserting to the end, slow at inserting to the beginning (because all objects in the array are shifted one space to the right if there is available space OR a new copy of the array is made if there is no available space)
 
 <br>
 
 > 01 01 was a race horse  
 > 10 10 was one too  
 > 01 01 won one race  
-> 10 10 01 01 10  
+> 10 10 01 01 10
 
 <br>
-An array allocates a certain amount of memory when they are created.  
+An array allocates a certain amount of memory when they are created.
 
-Array lookup begins at `[0]` because it's zero pointer sizes away from the pointer at the beginning of the sequence. While it's harder for people, it's easier for computers to do the math.   
+Array lookup begins at `[0]` because it's zero pointer sizes away from the pointer at the beginning of the sequence. While it's harder for people, it's easier for computers to do the math.
 
-> Index * size of type = array[index]  
+> Index \* size of type = array[index]
 
-So, 0 * 4 bits = 0. If we started with 1 instead of 0, that would require an additional operation to find the starting point beause 1 * 4 = 4, not 0.  
+So, 0 _ 4 bits = 0. If we started with 1 instead of 0, that would require an additional operation to find the starting point beause 1 _ 4 = 4, not 0.
 
-array[5] would point to the 20th bit because 5 * 4 = 20.  
+array[5] would point to the 20th bit because 5 \* 4 = 20.
 
-If we know that we want an array of 3, 12 bits of memory will be set aside for this array (3 * 4 = 12).  
+If we know that we want an array of 3, 12 bits of memory will be set aside for this array (3 \* 4 = 12).
 
-If we want to decrease the size of that array, we can easily indicate that the memory for that array is _less_ than 12 bits.  
+If we want to decrease the size of that array, we can easily indicate that the memory for that array is _less_ than 12 bits.
 
-But if we want to _add_ to the array, we have to first check _if_ the memory next to the end of the current array is already allocated.  
+But if we want to _add_ to the array, we have to first check _if_ the memory next to the end of the current array is already allocated.
 
 <br>
 
-If that memory is not already allocated, we can use it to expand the array. But if it is taken, how do we expand the array?  
+If that memory is not already allocated, we can use it to expand the array. But if it is taken, how do we expand the array?
 
 Because arrays must be contiguous (unlike linked lists), we can't just allocate the next closest available bits of memory.
 
-Depending on if the language manages memory for us (like Python), we may have to do this manually.  
+Depending on if the language manages memory for us (like Python), we may have to do this manually.
 
-We first would need to find a larger memory block that fits the new array length, then copy the original array data into that new memory block. Afterwards, we release the original block of memory by marking it as free (or able to be collected by the garbage collector).  
+We first would need to find a larger memory block that fits the new array length, then copy the original array data into that new memory block. Afterwards, we release the original block of memory by marking it as free (or able to be collected by the garbage collector).
 
 <br>
 
-Typically that data is not actually cleared. It's just marked as free to re-use. When we get rid of old hard drives or other memory storage devices, it's best to fully destroy anything that contained sensitive data because it may still be written to memory if it was not memory that was cleared to re-use. De-allocation is not the same as erasing, despite being "deleted" according to the computer.  
+Typically that data is not actually cleared. It's just marked as free to re-use. When we get rid of old hard drives or other memory storage devices, it's best to fully destroy anything that contained sensitive data because it may still be written to memory if it was not memory that was cleared to re-use. De-allocation is not the same as erasing, despite being "deleted" according to the computer.
 
-Not all languages de-allocate automatically. In Python it does, but in C, you have to do it manually (or risk a memory leak).  
+Not all languages de-allocate automatically. In Python it does, but in C, you have to do it manually (or risk a memory leak).
 
-For more in-depth information about how arrays work, [read here](https://github.com/juliejonak/Hash-Tables-Notes#Arrays).  
+For more in-depth information about how arrays work, [read here](https://github.com/juliejonak/Hash-Tables-Notes#Arrays).
 
 <br>
 <br>
@@ -88,20 +86,20 @@ For more in-depth information about how arrays work, [read here](https://github.
 ## LIFO/FILO
 
 > LIFO = Last In First Out  
-> FILO = First In Last Out  
+> FILO = First In Last Out
 
 We can think of stacks like vertical stacks of paper on a desk. We add to the top of the stack, placing newer papers on top. As we process through the papers, we're dealing with the newer papers first, instead of the oldest.
 
-You can also think of LIFO/FILO with your email inbox. Most people work through their email inbox from the top down (newest to oldest). Or, a social medai feed. The most recent thing would be considered the most important. 
+You can also think of LIFO/FILO with your email inbox. Most people work through their email inbox from the top down (newest to oldest). Or, a social medai feed. The most recent thing would be considered the most important.
 
 <br>
 <br>
 
 ## Queue
 
-[TK: Queues](https://learn.lambdaschool.com/cs/module/recMcvOrFw5BWUku3)  
+[TK: Queues](https://learn.lambdaschool.com/cs/module/recMcvOrFw5BWUku3)
 
-> FIFO = First In First Out  
+> FIFO = First In First Out
 
 Most stores work with a first in, first served method to ensure that customers are happy and served quickly. Similarly, a bakery wants to sell the older baked good sooner than the brand new ones. First made, first sold. If you add the new ones to the front, then the old ones might go bad (expire).
 
@@ -109,15 +107,14 @@ If a customer service line handled new inqueries first, the first customers to r
 
 Queues function the same way where they handle the oldest items first.
 
-Learn more about [LIFO v FIFO](https://www.geeksforgeeks.org/fifo-vs-lifo-approach-in-programming/).  
+Learn more about [LIFO v FIFO](https://www.geeksforgeeks.org/fifo-vs-lifo-approach-in-programming/).
 
 <br>
 <br>
-
 
 ## Linked Lists
 
-[TK: Linked Lists](https://learn.lambdaschool.com/cs/module/rec3MaMAY78iDm7ax)  
+[TK: Linked Lists](https://learn.lambdaschool.com/cs/module/rec3MaMAY78iDm7ax)
 
 Lists are used for remembering things and checking them off in order, like a grocery list.
 
@@ -143,7 +140,7 @@ If we have a grocery list like so:
 > Taco Shells  
 > Lettuce  
 > Eggs  
-> Salsa  
+> Salsa
 
 <br>
 
@@ -162,7 +159,7 @@ With a linked list, each item points to the next item. If we re-wrote our list l
 > Taco Shells  
 > Hot Sauce  
 > Salsa  
-> Lettuce  
+> Lettuce
 
 <br>
 
@@ -183,9 +180,9 @@ If our memory is already being used up by other applications - there are availab
 
 That said, this con of linked lists is more conceptual than applicable. Typically, arrays are still considered to be more memory efficient and this would not be a factor in choosing a linked list over an array.
 
-> A good reason to decide which one to use is considering the run time of removing or inserting an item from the linked list v array.  
+> A good reason to decide which one to use is considering the run time of removing or inserting an item from the linked list v array.
 
-If we wanted to remove the first item in an array, there would be a hole in the first spot of the array. Arrays are unhappy if the hole is anywhere other than the end of the array - so the remaining elements are shifted one to the left. The runtime of that change is `O(n)`. A very large array would have a significant shift run time. 
+If we wanted to remove the first item in an array, there would be a hole in the first spot of the array. Arrays are unhappy if the hole is anywhere other than the end of the array - so the remaining elements are shifted one to the left. The runtime of that change is `O(n)`. A very large array would have a significant shift run time.
 
 Removing any elements from the front or middle of an array is a linear operation in the worst case (the exception is removing from the end).
 
@@ -207,7 +204,7 @@ To remove an item from the start of the linked list, we would need to shift the 
 H -> x -> x -> x -> T
 ```
 
-Nothing is shifted. The pointers to the next item in the list are simply being moved around. 
+Nothing is shifted. The pointers to the next item in the list are simply being moved around.
 
 If we wanted to add a new element into the middle of the list, we would simply add a new node, that holds a reference to the previous and next node in the list. Nothing is being shifted, just the pointers are being re-drawn.
 
@@ -220,7 +217,7 @@ Adding or removing from the end of the linked list retains the same run time as 
 
 ## Implementing Linked Lists
 
-Typically with linked list implementations, there's a node class and a linked list class (which builds on top of the node class). Let's start building one in our [linked list python file](linked_list.py).  
+Typically with linked list implementations, there's a node class and a linked list class (which builds on top of the node class). Let's start building one in our [linked list python file](linked_list.py).
 
 <br>
 
@@ -233,7 +230,6 @@ class Node:
 ```
 
 <br>
-
 
 Our Node class starts with a value that defaults to none and a next_node that also defaults to None. We'll also add some methods:
 
@@ -244,13 +240,13 @@ class Node:
     def __init__(self, value=None, next_node=None):
         self.value = value
         self.next_node = next_node
-    
+
     def get_value(self):
         return self.value
 
     def get_next(self):
         return self.next_node
-    
+
     def set_next(self, new_next):
         self.next_node = new_next
 
@@ -259,7 +255,6 @@ class Node:
 ```
 
 <br>
-
 
 This gives our Node some methods that will return the current value, the pointer to the next node and allows us to re-assign the next node pointer.
 
@@ -272,7 +267,6 @@ To traverse a linked list, you have to start at the head node and keep moving th
 This is one of the major reasons arrays are more commonly used because indexing is useful.
 
 We'll also adds a method to add a tail to the end of our linked list. Thinking about the way that adding a new item to the linked list is by creating a new node, the re-write the previous next_node reference to the new node, and then re-write the Tail Reference to this new node.
-
 
 <br>
 
@@ -294,7 +288,6 @@ class LinkedList:
 
 <br>
 
-
 Does the order of those last two operations matter? Why would this work (or not)?
 
 <br>
@@ -311,20 +304,18 @@ Does the order of those last two operations matter? Why would this work (or not)
 
 <br>
 
-
-If, instead, we made the new node and then moved the Tail Reference to the end prior to setting self.tail.set_next() would mean that it would just be the new node referencing itself, instead of the _previous_ node referencing the new node as the tail.
+If, instead, we made the new node and then moved the Tail Reference to the end prior to setting self.tail.set*next() would mean that it would just be the new node referencing itself, instead of the \_previous* node referencing the new node as the tail.
 
 Order matters for this.
 
 <br>
 <br>
 
-
 ##### Edge Cases
 
 What are some assumptions we're making currently that don't account for possible edge cases?
 
-> The list was not empty, elements already existed  
+> The list was not empty, elements already existed
 
 What does an empty Linked List look like?
 
@@ -335,7 +326,6 @@ If we add a new node, it will be the only node in the linked list and will be re
 To adjust our constructor for handling this, we can keep our current setup but we need to also set the head:
 
 <br>
-
 
 ```
         # check if we're in an empty list state
@@ -349,7 +339,6 @@ To adjust our constructor for handling this, we can keep our current setup but w
 ```
 
 <br>
-
 
 Now our Linked List class will look like this with the If/Else setup handling this edge case:
 
@@ -376,7 +365,6 @@ class LinkedList:
 
 <br>
 
-
 Now let's add a remove head method. We need to take the old_head's value, and update it to the next_node, then remove that node.
 
 <br>
@@ -393,31 +381,27 @@ Now let's add a remove head method. We need to take the old_head's value, and up
 
 <br>
 
-
 A double linked list would imply that the flow of pointers goes in both directions. Currently, they only go one way, with each node pointing to the next one, but not the previous one.
 
-> H -> x -> x -> x -> T  
+> H -> x -> x -> x -> T
 
 A linked list where the nodes point to both the previous _and_ next node, then that is a doubly linked list, like so:
 
-> H <-> x <-> x <-> x <-> T  
+> H <-> x <-> x <-> x <-> T
 
 Hash Tables and Caches are times where linked lists might be preferred over arrays...but that comes later.
 
-> What if our list is empty? We need to return non to show we can't remove the head.  
+> What if our list is empty? We need to return non to show we can't remove the head.
 
 We'll check and return `None` if that is the case.
 
-
-> What if our list has only one Node?  
+> What if our list has only one Node?
 
 Then the `self.head` will equal s`elf.tail`, because the head reference and tail reference will be to the same node.
 
 We'll set our reference to the old_head and then update the current head and tail to None, since removing this single Node would mean there is no node left (empty list)
 
-
 <br>
-
 
 ```
             # what if our list is empty?
@@ -442,7 +426,6 @@ First, let's check if our list is empty. There's no reason to search through our
 
 <br>
 
-
 ```
     def contains(self, target):
         # what if our list is empty?
@@ -464,10 +447,9 @@ First, let's check if our list is empty. There's no reason to search through our
 
 <br>
 
-
 If our list is like this:
 
-> 1 --> 2 --> 3 --> 4 --> N  
+> 1 --> 2 --> 3 --> 4 --> N
 
 We have to start at the head because with a single Linked List, we can only traverse it in one direction.
 
@@ -479,8 +461,7 @@ When it checks Node 1, and 1 != 3, `Current` become Node 2. It continues to iter
 
 If we were looking for 5, this would iterate through the entire linked list until the final Node is `None` (end of the list) and no target matched, so it returns `False`.
 
-
 <br>
 <br>
 
-If you found these notes helpful and want to show appreciation to the author, [coffee donations](https://www.buymeacoffee.com/G1stPBuYU) are much loved. 
+If you found these notes helpful and want to show appreciation to the author, [coffee donations](https://www.buymeacoffee.com/G1stPBuYU) are much loved.

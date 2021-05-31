@@ -83,6 +83,7 @@ function reset(e) {
 }
 
 ```
+
 Dalam fungsi ini, terdapat beberapa logik yang menarik. Bacalah, anda dapat melihat apa yang berlaku?
 
 - dua `const` disiapkan untuk memeriksa sama ada pengguna telah menyimpan kod APIKey dan wilayah di storan tempatan.
@@ -118,6 +119,7 @@ function handleSubmit(e) {
 	setUpUser(apiKey.value, region.value);
 }
 ```
+
 ✅ Refresh memori anda - HTML yang anda tetapkan dalam pelajaran terakhir mempunyai dua medan input yang `value` nya ditangkap melalui `const` yang anda tetapkan di bahagian atas fail, dan keduanya `required` sehingga penyemak imbas berhenti pengguna daripada memasukkan nilai nol.
 
 ### Sediakan pengguna
@@ -135,6 +137,7 @@ function setUpUser(apiKey, regionName) {
 	displayCarbonUsage(apiKey, regionName);
 }
 ```
+
 Fungsi ini menetapkan mesej memuat untuk ditunjukkan semasa API dipanggil. Pada ketika ini, anda telah berjaya membuat fungsi terpenting pelanjutan penyemak imbas ini!
 
 ### Paparkan Penggunaan Karbon
@@ -211,7 +214,6 @@ Kami telah membincangkan beberapa jenis API setakat ini dalam pelajaran ini. Pil
 ## Kuiz Pasca Kuliah
 
 [Kuiz Pasca Kuliah](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/26)
-
 
 ## Mengkaji & Belajar Sendiri
 

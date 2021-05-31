@@ -4,7 +4,7 @@ Souhaitez-vous utiliser ce programme dans votre classe? N'hésitez pas!
 
 En fait, vous pouvez l'utiliser dans GitHub lui-même en utilisant GitHub Classroom.
 
-Pour ce faire, forkez ce repo. Vous allez devoir créer un référentiel pour chaque leçon, vous devrez donc extraire chaque dossier dans un référentiel distinct. De cette façon, [Classe GitHub](https://classroom.github.com/classrooms) peut prendre chaque leçon séparément. 
+Pour ce faire, forkez ce repo. Vous allez devoir créer un référentiel pour chaque leçon, vous devrez donc extraire chaque dossier dans un référentiel distinct. De cette façon, [Classe GitHub](https://classroom.github.com/classrooms) peut prendre chaque leçon séparément.
 
 Ceux-ci [instructions complètes](https://github.blog/2020-03-18-set-up-your-digital-classroom-with-github-classroom/) vous donnera une idée de la configuration de votre classe.
 

@@ -7,5 +7,5 @@ Ada banyak alat yang mungkin diperlukan pengembang web yang ada di [dokumentasi 
 ## Rubrik
 
 | Teladan                                                  | Memenuhi Syarat                                                             | Perlu Perbaikan                                                                  |
-|----------------------------------------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| -------------------------------------------------------- | --------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | Menjelaskan mengapa pengembang web akan menggunakan alat | Dijelaskan bagaimana, tetapi tidak mengapa pengembang akan menggunakan alat | Tidak disebutkan bagaimana atau mengapa seorang pengembang akan menggunakan alat |

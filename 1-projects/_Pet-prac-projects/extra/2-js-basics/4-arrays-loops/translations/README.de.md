@@ -24,9 +24,14 @@ Den Array-Werten wird ein eindeutiger Wert zugewiesen, der als **Index** bezeich
 
 ✅ Überrascht es Sie, dass Arrays am Nullindex beginnen? In einigen Programmiersprachen beginnen die Indizes bei 1. Es gibt eine interessante Geschichte, die Sie [auf Wikipedia lesen](https://en.wikipedia.org/wiki/Zero-based_numbering) können.
 
-
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors[2]; //"Vanilla"
 ```
 
@@ -42,13 +47,18 @@ And you can insert a new value at a given index like this:
 iceCreamFlavors[5] = "Cookie Dough"; //"Cookie Dough" hinzugefügt
 ```
 
-
 ✅ Eine häufigere Methode zum Übertragen von Werten in ein Array ist die Verwendung von Array-Operatoren wie array.push()
 
 Verwenden Sie die Eigenschaft `length`, um herauszufinden, wie viele Elemente sich in einem Array befinden.
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors.length; //5
 ```
 
@@ -60,16 +70,13 @@ Schleifen ermöglichen sich wiederholende oder **iterative** Aufgaben und könne
 
 ### For Loop
 
-Die `for`-Schleife benötigt 3 Teile, um zu iterieren:
-     - `counter` Eine Variable, die normalerweise mit einer Zahl initialisiert wird, die die Anzahl der Iterationen zählt.
-     - `condition` Ausdruck, der Vergleichsoperatoren verwendet, um zu bewirken, dass die Schleife stoppt, wenn `true`
-     - `iteration-expression` Wird am Ende jeder Iteration ausgeführt und normalerweise zum Ändern des Zählerwerts verwendet
-  
+Die `for`-Schleife benötigt 3 Teile, um zu iterieren: - `counter` Eine Variable, die normalerweise mit einer Zahl initialisiert wird, die die Anzahl der Iterationen zählt. - `condition` Ausdruck, der Vergleichsoperatoren verwendet, um zu bewirken, dass die Schleife stoppt, wenn `true` - `iteration-expression` Wird am Ende jeder Iteration ausgeführt und normalerweise zum Ändern des Zählerwerts verwendet
+
 ```javascript
-    //Counting up to 10
-    for (let i = 0; i < 10; i++) {
-        console.log(i);
-    }
+//Counting up to 10
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
 ```
 
 ✅ Führen Sie diesen Code in einer Browserkonsole aus. Was passiert, wenn Sie kleine Änderungen am Zähler, der Bedingung oder dem Iterationsausdruck vornehmen? Können Sie es rückwärts laufen lassen und einen Countdown erstellen?
@@ -78,13 +85,12 @@ Die `for`-Schleife benötigt 3 Teile, um zu iterieren:
 
 Im Gegensatz zur Syntax für die `for` -Schleife erfordern `while`-Schleifen nur eine Bedingung, die die Schleife stoppt, wenn `true`. Bedingungen in Schleifen hängen normalerweise von anderen Werten wie Zählern ab und müssen während der Schleife verwaltet werden. Startwerte für Zähler müssen außerhalb der Schleife erstellt werden, und alle Ausdrücke, die eine Bedingung erfüllen, einschließlich des Änderns des Zählers, müssen innerhalb der Schleife beibehalten werden.
 
-
 ```javascript
 //Counting up to 10
 let i = 0;
 while (i < 10) {
- console.log(i);
- i++;
+  console.log(i);
+  i++;
 }
 ```
 
@@ -94,9 +100,14 @@ while (i < 10) {
 
 Arrays werden häufig mit Schleifen verwendet, da die meisten Bedingungen die Länge des Arrays erfordern, um die Schleife zu stoppen, und der Index auch der Zählerwert sein kann.
 
-
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 
 for (let i = 0; i < iceCreamFlavors.length; i++) {
   console.log(iceCreamFlavors[i]);

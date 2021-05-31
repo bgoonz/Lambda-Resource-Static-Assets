@@ -6,6 +6,6 @@ Periksa fail /app.js semasa anda di folder permainan anda, dan cari cara untuk m
 
 ## Rubrik
 
-| Kriteria | Contoh                                                          | Mencukupi                              | Usaha Lagi                                             |
-| -------- | ------------------------------------------------------------------ | ------------------------------------- | -------------------------------------------------------------- |
+| Kriteria | Contoh                                                             | Mencukupi                                | Usaha Lagi                                                          |
+| -------- | ------------------------------------------------------------------ | ---------------------------------------- | ------------------------------------------------------------------- |
 |          | Kod `app.js` dikomentari sepenuhnya dan disusun menjadi blok logik | Kod `app.js` diberi komen yang mencukupi | Kod `app.js` agak tidak teratur dan tidak mempunyai komen yang baik |

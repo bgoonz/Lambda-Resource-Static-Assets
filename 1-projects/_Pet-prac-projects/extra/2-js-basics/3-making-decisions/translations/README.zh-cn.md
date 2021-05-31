@@ -1,9 +1,11 @@
 # JavaScript 基础：做出决定
 
 ![JavaScript Basics - Making decisions](/sketchnotes/webdev101-js-decisions.png)
+
 > 涂鸦笔记作者：[Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 课前小测
+
 [课前小测](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/11?loc=zh_cn)
 
 对你的代码运行方式做出决定并且控制它们的顺序可以让你的代码更加可复用和稳定。这节课会介绍 JavaScript 中控制数据流的语法以及其与布尔数据类型搭配使用时的重要性。
@@ -27,14 +29,14 @@
 
 一些运算符可用于表示比较的结果（会以布尔值返回）。下面是一些常用的运算符：
 
-| 符号 | 描述 | 示例 |
-| --- | --- | --- |
-| `<` | **小于**：比较两个值，如果左边的值小于右边的值则返回 `true` | `5 < 6 // true` |
-| `<=` | **小于或等于**：比较两个值，如果左边的值小于或等于右边的值则返回 `true` | `5 <= 6 // true` |
-| `>` | **大于**：比较两个值，如果左边的值大于右边的值则返回 `true` | `5 > 6 // false` |
-| `>=` | **大于或等于**：比较两个值，如果左边的值大于或等于右边的值则返回 `true` | `5 >= 6 // false`  |
+| 符号  | 描述                                                                              | 示例               |
+| ----- | --------------------------------------------------------------------------------- | ------------------ |
+| `<`   | **小于**：比较两个值，如果左边的值小于右边的值则返回 `true`                       | `5 < 6 // true`    |
+| `<=`  | **小于或等于**：比较两个值，如果左边的值小于或等于右边的值则返回 `true`           | `5 <= 6 // true`   |
+| `>`   | **大于**：比较两个值，如果左边的值大于右边的值则返回 `true`                       | `5 > 6 // false`   |
+| `>=`  | **大于或等于**：比较两个值，如果左边的值大于或等于右边的值则返回 `true`           | `5 >= 6 // false`  |
 | `===` | **严格等于**：比较两个值，如果左边的值等于右边的值**且**数据类型相同则返回 `true` | `5 === 6 // false` |
-| `!==` | **不等于**：比较两个值，返回与“严格等于”运算结果相反的布尔值 | `5 !== 6 // true`  |
+| `!==` | **不等于**：比较两个值，返回与“严格等于”运算结果相反的布尔值                      | `5 !== 6 // true`  |
 
 ✅ 在你的浏览器控制台中亲手写一些比较来验证你的知识。有任何让你感到意外的返回结果吗？
 
@@ -43,8 +45,8 @@
 If 语句会在条件为真的情况下运行它的块中的代码。
 
 ```javascript
-if (condition){
-    // 如果 condition 为 true，这个块中的代码将会运行。
+if (condition) {
+  // 如果 condition 为 true，这个块中的代码将会运行。
 }
 ```
 
@@ -54,9 +56,9 @@ if (condition){
 let currentMoney;
 let laptopPrice;
 
-if (currentMoney >= laptopPrice){
-    // 如果条件为 true，这个块中的代码将会运行。
-    console.log("Getting a new laptop!");
+if (currentMoney >= laptopPrice) {
+  // 如果条件为 true，这个块中的代码将会运行。
+  console.log("Getting a new laptop!");
 }
 ```
 
@@ -68,13 +70,12 @@ if (currentMoney >= laptopPrice){
 let currentMoney;
 let laptopPrice;
 
-if (currentMoney >= laptopPrice){
-    // 如果条件为 true，这个块中的代码将会运行。
-    console.log("Getting a new laptop!");
-}
-else{
-    // 如果条件为 false，这个块中的代码将会运行。
-    console.log("Can't afford a new laptop, yet!");
+if (currentMoney >= laptopPrice) {
+  // 如果条件为 true，这个块中的代码将会运行。
+  console.log("Getting a new laptop!");
+} else {
+  // 如果条件为 false，这个块中的代码将会运行。
+  console.log("Can't afford a new laptop, yet!");
 }
 ```
 
@@ -84,11 +85,11 @@ else{
 
 做出决定可能需要不止一次比较，可以用逻辑运算符将比较结果串在一起来产生一个布尔值。
 
-| 符号 | 描述 | 示例 |
-| --- | --- | --- |
-| `&&` | **逻辑与（AND）**：比较两个布尔表达式，只有在两边**都是真**时返回真 | `(5 > 6) && (5 < 6 ) // 一边为假，另一边为真，返回假` |
-| `\|\|` | **逻辑或（OR）**：比较两个布尔表达式，在至少一边为真时返回真 | `(5 > 6) \|\| (5 < 6) // 一边为假，另一边为真，返回真` |
-| `!` | **逻辑非（NOT）**：返回与一个布尔表达式相反的布尔值 | `!(5 > 6) // 5 并不比 6 大，但 "!" 会返回真` |
+| 符号   | 描述                                                                | 示例                                                   |
+| ------ | ------------------------------------------------------------------- | ------------------------------------------------------ |
+| `&&`   | **逻辑与（AND）**：比较两个布尔表达式，只有在两边**都是真**时返回真 | `(5 > 6) && (5 < 6 ) // 一边为假，另一边为真，返回假`  |
+| `\|\|` | **逻辑或（OR）**：比较两个布尔表达式，在至少一边为真时返回真        | `(5 > 6) \|\| (5 < 6) // 一边为假，另一边为真，返回真` |
+| `!`    | **逻辑非（NOT）**：返回与一个布尔表达式相反的布尔值                 | `!(5 > 6) // 5 并不比 6 大，但 "!" 会返回真`           |
 
 ## 用逻辑运算符来构造条件和决定
 
@@ -97,15 +98,14 @@ If...else 语句中，逻辑运算符可以用来构造条件。
 ```javascript
 let currentMoney;
 let laptopPrice;
-let laptopDiscountPrice = laptopPrice - (laptopPrice * .20) // 打八折后的笔记本电脑价格
+let laptopDiscountPrice = laptopPrice - laptopPrice * 0.2; // 打八折后的笔记本电脑价格
 
-if (currentMoney >= laptopPrice || currentMoney >= laptopDiscountPrice){
-    // 如果条件为 true，这个块中的代码将会运行。
-    console.log("Getting a new laptop!");
-}
-else {
-    // 如果条件为 false，这个块中的代码将会运行。
-    console.log("Can't afford a new laptop, yet!");
+if (currentMoney >= laptopPrice || currentMoney >= laptopDiscountPrice) {
+  // 如果条件为 true，这个块中的代码将会运行。
+  console.log("Getting a new laptop!");
+} else {
+  // 如果条件为 false，这个块中的代码将会运行。
+  console.log("Can't afford a new laptop, yet!");
 }
 ```
 
@@ -133,8 +133,8 @@ let variable = condition ? <若为 true 则返回这个> : <若为 false 则返�
 
 ```javascript
 let firstNumber = 20;
-let secondNumber = 10
-let biggestNumber = firstNumber > secondNumber ? firstNumber: secondNumber;
+let secondNumber = 10;
+let biggestNumber = firstNumber > secondNumber ? firstNumber : secondNumber;
 ```
 
 ✅ 花一分钟多看几遍上方代码，你能想明白这些运算符是什么意思吗？
@@ -163,7 +163,9 @@ if (firstNumber > secondNumber) {
 用逻辑运算符写一个程序，然后用三元表达式重写它。你更喜欢哪种语法？
 
 ---
+
 ## 课后小测
+
 [Post-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/12?loc=zh_cn)
 
 ## 复习 & 自学

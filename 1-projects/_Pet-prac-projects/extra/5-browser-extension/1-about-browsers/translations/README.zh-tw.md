@@ -1,6 +1,7 @@
 # 瀏覽器擴充功能專案 Part 1：關於瀏覽器
 
 ![瀏覽器繪圖筆記](/sketchnotes/browser.jpg)
+
 > 由 [Wassim Chegham](https://dev.to/wassimchegham/ever-wondered-what-happens-when-you-type-in-a-url-in-an-address-bar-in-a-browser-3dob) 繪製
 
 ## 課前測驗
@@ -20,6 +21,7 @@
 ✅ 小歷史：第一個網頁瀏覽器為 'WorldWideWeb'，由 Timothy Berners-Lee 爵士於 1990 年建立。
 
 ![早期的瀏覽器](../images/earlybrowsers.jpg)
+
 > 這邊有一些早期的瀏覽器，請參考[Karen McGrane](https://www.slideshare.net/KMcGrane/week-4-ixd-history-personal-computing)
 
 用戶使用網址 URL (Uniform Resource Locator) 位置連上網路，通常以 `http` 或 `https` 位置開頭使用超文本傳輸協定(Hypertext Transfer Protocol)，瀏覽器便能與該伺服器溝通並抓取網頁的資料。
@@ -44,7 +46,7 @@
 
 ### 安裝擴充功能
 
-在你建立擴充功能以前，先看看建制與安裝瀏覽器擴充功能的流程。每一種瀏覽器在管理套件上可能有些不同，Edge上的管理過程就與 Chrome 與 Firefox 相似：
+在你建立擴充功能以前，先看看建制與安裝瀏覽器擴充功能的流程。每一種瀏覽器在管理套件上可能有些不同，Edge 上的管理過程就與 Chrome 與 Firefox 相似：
 
 ![Edge 瀏覽器開啟 edge://extensions 中的設定選單截圖](../images/install-on-edge.png)
 
@@ -52,7 +54,7 @@
 
 - 指令 `npm run build` 建制你的管理套件
 - 在瀏覽器中的延伸模組區點擊右上方的「更多設定」按鈕
-- 如果這是新的套件，選擇 `load unpacked` 從資料夾上傳新的擴充套件(在我們的例子中， `/dist` ) 
+- 如果這是新的套件，選擇 `load unpacked` 從資料夾上傳新的擴充套件(在我們的例子中， `/dist` )
 - 如果這是已安裝的套件，點擊 `reload` 按鈕
 
 ✅ 上述教學步驟讓你導入自己建立的擴充功能；若要安裝已公開的套件，你可以前往瀏覽器擴充功能商店，逛逛這些[商店](https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home)並安裝你選擇的套件。
@@ -73,12 +75,12 @@
 花點時間看一下程式檔案結構
 
 dist
-    -|manifest.json (defaults set)
-    -|index.html (前端 HTML)
-    -|background.js (background JS)
-    -|main.js (built JS)
+-|manifest.json (defaults set)
+-|index.html (前端 HTML)
+-|background.js (background JS)
+-|main.js (built JS)
 src
-    -|index.js (你的 JS 程式碼)
+-|index.js (你的 JS 程式碼)
 
 ✅ 當你取得你的 API Key 與國家區域代碼後，紀錄在筆記中給之後的課程使用。
 
@@ -110,8 +112,9 @@ src
 		<input type="text" id="api" required class="api-key" />
 	</div>
 	<button class="search-btn">Submit</button>
-</form>	
+</form>
 ```
+
 這個表單儲存你的輸入資訊並儲存到 Local Storage 中。
 
 接下來，建立結果輸出區。在 form tag 後面新增一些 divs：
@@ -129,6 +132,7 @@ src
 	<button class="clear-btn">Change region</button>
 </div>
 ```
+
 這時，你可以試著建制這個專案。請確保安裝擴充套建的軟體依賴套件，輸入：
 
 ```
@@ -164,4 +168,3 @@ npm install
 ## 作業
 
 [重新造型你的套件](assignment.zh-tw.md)
-

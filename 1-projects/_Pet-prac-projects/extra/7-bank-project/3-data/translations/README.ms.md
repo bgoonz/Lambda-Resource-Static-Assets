@@ -6,7 +6,7 @@
 
 ### Pengenalan
 
-Inti setiap aplikasi web ada *data*. Data boleh dilakukan dalam pelbagai bentuk, tetapi tujuan utamanya adalah untuk menunjukkan maklumat kepada pengguna. Dengan aplikasi web menjadi semakin interaktif dan kompleks, bagaimana pengguna mengakses dan berinteraksi dengan maklumat kini menjadi bahagian penting dalam pembangunan web.
+Inti setiap aplikasi web ada _data_. Data boleh dilakukan dalam pelbagai bentuk, tetapi tujuan utamanya adalah untuk menunjukkan maklumat kepada pengguna. Dengan aplikasi web menjadi semakin interaktif dan kompleks, bagaimana pengguna mengakses dan berinteraksi dengan maklumat kini menjadi bahagian penting dalam pembangunan web.
 
 Dalam pelajaran ini, kita akan melihat cara mengambil data dari pelayan secara asinkron, dan menggunakan data ini untuk memaparkan maklumat di laman web tanpa memuatkan semula HTML.
 
@@ -25,11 +25,11 @@ curl http://localhost:5000/api
 
 ## AJAX dan pengambilan data
 
-Laman web tradisional mengemas kini kandungan yang dipaparkan ketika pengguna memilih pautan atau mengirimkan data menggunakan borang, dengan memuatkan semula halaman HTML penuh. Setiap kali data baru dimuat, pelayan web mengembalikan halaman HTML baru yang perlu diproses oleh penyemak imbas, mengganggu tindakan pengguna semasa dan membatasi interaksi semasa muat semula. Alur kerja ini juga disebut *Aplikasi Multi-Halaman* atau *MPA*.
+Laman web tradisional mengemas kini kandungan yang dipaparkan ketika pengguna memilih pautan atau mengirimkan data menggunakan borang, dengan memuatkan semula halaman HTML penuh. Setiap kali data baru dimuat, pelayan web mengembalikan halaman HTML baru yang perlu diproses oleh penyemak imbas, mengganggu tindakan pengguna semasa dan membatasi interaksi semasa muat semula. Alur kerja ini juga disebut _Aplikasi Multi-Halaman_ atau _MPA_.
 
 ![Kemas kini aliran kerja dalam aplikasi berbilang halaman](./images/mpa.png)
 
-Ketika aplikasi web mula menjadi lebih kompleks dan interaktif, teknik baru yang disebut [AJAX (Asynchronous JavaScript and XML)](https://en.wikipedia.org/wiki/Ajax_(programming)) muncul. Teknik ini membolehkan aplikasi web mengirim dan mengambil data dari pelayan secara asinkron menggunakan JavaScript, tanpa harus memuat semula halaman HTML, menghasilkan kemas kini yang lebih cepat dan interaksi pengguna yang lebih lancar. Apabila data baru diterima dari pelayan, halaman HTML semasa juga dapat diperbarui dengan JavaScript menggunakan API [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model). Dari masa ke masa, pendekatan ini telah berkembang menjadi apa yang sekarang disebut [*Aplikasi Halaman Tunggal* atau *SPA*](https://en.wikipedia.org/wiki/Single-page_application).
+Ketika aplikasi web mula menjadi lebih kompleks dan interaktif, teknik baru yang disebut [AJAX (Asynchronous JavaScript and XML)](<https://en.wikipedia.org/wiki/Ajax_(programming)>) muncul. Teknik ini membolehkan aplikasi web mengirim dan mengambil data dari pelayan secara asinkron menggunakan JavaScript, tanpa harus memuat semula halaman HTML, menghasilkan kemas kini yang lebih cepat dan interaksi pengguna yang lebih lancar. Apabila data baru diterima dari pelayan, halaman HTML semasa juga dapat diperbarui dengan JavaScript menggunakan API [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model). Dari masa ke masa, pendekatan ini telah berkembang menjadi apa yang sekarang disebut [_Aplikasi Halaman Tunggal_ atau _SPA_](https://en.wikipedia.org/wiki/Single-page_application).
 
 ![Kemas kini alur kerja dalam aplikasi satu halaman](./images/spa.png)
 
@@ -43,7 +43,7 @@ Dalam [pelajaran sebelumnya](../2-form/README.md) kami melaksanakan borang penda
 
 ```js
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById("loginForm");
   const user = loginForm.user.value;
 }
 ```
@@ -55,10 +55,12 @@ Dengan cara yang serupa dengan apa yang kami lakukan untuk pendaftaran, kami aka
 ```js
 async function getAccount(user) {
   try {
-    const response = await fetch('//localhost:5000/api/accounts/' + encodeURIComponent(user));
+    const response = await fetch(
+      "//localhost:5000/api/accounts/" + encodeURIComponent(user)
+    );
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    return { error: error.message || "Unknown error" };
   }
 }
 ```
@@ -71,16 +73,16 @@ Sekarang mari kita kemas kini fungsi `login` kami untuk menggunakan `getAccount`
 
 ```js
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById("loginForm");
   const user = loginForm.user.value;
   const data = await getAccount(user);
 
   if (data.error) {
-    return console.log('loginError', data.error);
+    return console.log("loginError", data.error);
   }
 
   account = data;
-  navigate('/dashboard');
+  navigate("/dashboard");
 }
 ```
 
@@ -92,12 +94,12 @@ Kemudian kita harus menyimpan data di suatu tempat sehingga nanti kita dapat men
 let account = null;
 ```
 
-Setelah data pengguna disimpan ke dalam variabel kita dapat menavigasi dari halaman *login* ke papan pemuka * menggunakan fungsi `navigate()` yang sudah kita miliki.
+Setelah data pengguna disimpan ke dalam variabel kita dapat menavigasi dari halaman _login_ ke papan pemuka \* menggunakan fungsi `navigate()` yang sudah kita miliki.
 
 Akhirnya, kita perlu memanggil fungsi `login` kita semasa borang log masuk dihantar, dengan mengubah HTML:
 
 ```html
-<form id="loginForm" action="javascript:login()">
+<form id="loginForm" action="javascript:login()"></form>
 ```
 
 Uji bahawa semuanya berfungsi dengan betul dengan mendaftarkan akaun baru dan cuba log masuk menggunakan akaun yang sama.
@@ -106,10 +108,10 @@ Sebelum beralih ke bahagian seterusnya, kita juga dapat menyelesaikan fungsi `re
 
 ```js
 account = result;
-navigate('/dashboard');
+navigate("/dashboard");
 ```
 
-✅ Tahukah anda bahawa secara lalai, anda hanya dapat memanggil API pelayan dari *domain dan port yang sama* daripada halaman web yang anda lihat? Ini adalah mekanisme keselamatan yang dikuatkuasakan oleh penyemak imbas. Tetapi tunggu, aplikasi web kami berjalan di `localhost: 3000` sedangkan API pelayan berjalan di `localhost: 5000`, mengapa ia berfungsi? Dengan menggunakan teknik yang disebut [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS), adalah mungkin untuk melakukan permintaan HTTP bersilang asal jika pelayan menambah tajuk khas untuk respons, yang memungkinkan pengecualian untuk domain tertentu.
+✅ Tahukah anda bahawa secara lalai, anda hanya dapat memanggil API pelayan dari _domain dan port yang sama_ daripada halaman web yang anda lihat? Ini adalah mekanisme keselamatan yang dikuatkuasakan oleh penyemak imbas. Tetapi tunggu, aplikasi web kami berjalan di `localhost: 3000` sedangkan API pelayan berjalan di `localhost: 5000`, mengapa ia berfungsi? Dengan menggunakan teknik yang disebut [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS), adalah mungkin untuk melakukan permintaan HTTP bersilang asal jika pelayan menambah tajuk khas untuk respons, yang memungkinkan pengecualian untuk domain tertentu.
 
 > Ketahui lebih lanjut mengenai API dengan mengambil [pelajaran](https://docs.microsoft.com/learn/modules/use-apis-discover-museum-art?WT.mc_id=academic-13441-cxa)
 
@@ -125,7 +127,7 @@ Sekarang kita mempunyai data pengguna, kita harus mengemas kini HTML yang ada un
 
 ### Tugas
 
-Sebelum beralih ke skrin papan pemuka, ada satu perkara lagi yang harus kita lakukan di halaman *log masuk*. Pada masa ini, jika anda cuba log masuk dengan nama pengguna yang tidak ada, mesej ditunjukkan di konsol tetapi untuk pengguna biasa tidak ada yang berubah dan anda tidak tahu apa yang berlaku.
+Sebelum beralih ke skrin papan pemuka, ada satu perkara lagi yang harus kita lakukan di halaman _log masuk_. Pada masa ini, jika anda cuba log masuk dengan nama pengguna yang tidak ada, mesej ditunjukkan di konsol tetapi untuk pengguna biasa tidak ada yang berubah dan anda tidak tahu apa yang berlaku.
 
 Mari tambahkan elemen placeholder dalam borang log masuk di mana kita dapat memaparkan mesej ralat jika diperlukan. Tempat yang bagus adalah tepat sebelum log masuk `<button>`:
 
@@ -147,11 +149,11 @@ function updateElement(id, text) {
 }
 ```
 
-Yang ini cukup mudah: diberi elemen *id* dan *teks*, ia akan mengemas kini kandungan teks elemen DOM dengan `id` yang sepadan. Mari gunakan kaedah ini sebagai ganti mesej ralat sebelumnya dalam fungsi `login`:
+Yang ini cukup mudah: diberi elemen _id_ dan _teks_, ia akan mengemas kini kandungan teks elemen DOM dengan `id` yang sepadan. Mari gunakan kaedah ini sebagai ganti mesej ralat sebelumnya dalam fungsi `login`:
 
 ```js
 if (data.error) {
-  return updateElement('loginError', data.error);
+  return updateElement("loginError", data.error);
 }
 ```
 
@@ -183,7 +185,7 @@ Seperti inilah objek akaun yang diterima dari pelayan:
     { "id": "1", "date": "2020-10-01", "object": "Pocket money", "amount": 50 },
     { "id": "2", "date": "2020-10-03", "object": "Book", "amount": -10 },
     { "id": "3", "date": "2020-10-04", "object": "Sandwich", "amount": -5 }
-  ],
+  ]
 }
 ```
 
@@ -212,12 +214,12 @@ Seterusnya, kami akan membuat fungsi baru di `app.js` untuk mengisi ruang letak:
 ```js
 function updateDashboard() {
   if (!account) {
-    return navigate('/login');
+    return navigate("/login");
   }
 
-  updateElement('description', account.description);
-  updateElement('balance', account.balance.toFixed(2));
-  updateElement('currency', account.currency);
+  updateElement("description", account.description);
+  updateElement("balance", account.balance.toFixed(2));
+  updateElement("currency", account.currency);
 }
 ```
 
@@ -230,7 +232,7 @@ Sekarang kita perlu memanggil fungsi `updateDashboard()` setiap kali papan pemuk
 Tambahkan kod ini ke akhir fungsi `updateRoute()`:
 
 ```js
-if (typeof route.init === 'function') {
+if (typeof route.init === "function") {
   route.init();
 }
 ```
@@ -239,8 +241,8 @@ And update the routes definition with:
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard', init: updateDashboard }
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard", init: updateDashboard },
 };
 ```
 
@@ -252,7 +254,7 @@ Dalam [first lesson](../1-template-route/README.md) kami menggunakan templat HTM
 
 Kami akan menggunakan pendekatan yang serupa untuk memaparkan senarai transaksi dalam jadual HTML.
 
-### Tugas 
+### Tugas
 
 Tambahkan templat baru dalam HTML `<body>`:
 
@@ -266,9 +268,9 @@ Tambahkan templat baru dalam HTML `<body>`:
 </template>
 ```
 
-Templat ini mewakili satu baris jadual, dengan 3 lajur yang ingin kita isi: *tarikh*, *objek* dan *jumlah* transaksi.
+Templat ini mewakili satu baris jadual, dengan 3 lajur yang ingin kita isi: _tarikh_, _objek_ dan _jumlah_ transaksi.
 
-Kemudian, tambahkan sifat `id` ini ke elemen` <tbody> `di dalam templat papan pemuka untuk memudahkan pencarian menggunakan JavaScript:
+Kemudian, tambahkan sifat `id` ini ke elemen`<tbody>`di dalam templat papan pemuka untuk memudahkan pencarian menggunakan JavaScript:
 
 ```html
 <tbody id="transactions"></tbody>
@@ -278,9 +280,9 @@ HTML kami sudah siap, mari beralih ke kod JavaScript dan buat fungsi baru `creat
 
 ```js
 function createTransactionRow(transaction) {
-  const template = document.getElementById('transaction');
+  const template = document.getElementById("transaction");
   const transactionRow = template.content.cloneNode(true);
-  const tr = transactionRow.querySelector('tr');
+  const tr = transactionRow.querySelector("tr");
   tr.children[0].textContent = transaction.date;
   tr.children[1].textContent = transaction.object;
   tr.children[2].textContent = transaction.amount.toFixed(2);
@@ -296,7 +298,7 @@ for (const transaction of account.transactions) {
   const transactionRow = createTransactionRow(transaction);
   transactionsRows.appendChild(transactionRow);
 }
-updateElement('transactions', transactionsRows);
+updateElement("transactions", transactionsRows);
 ```
 
 Di sini kita menggunakan kaedah [`document.createDocumentFragment()`](https://developer.mozilla.org/docs/Web/API/Document/createDocumentFragment) yang membuat serpihan DOM baru yang boleh kita gunakan , sebelum akhirnya melampirkannya ke jadual HTML kami.
@@ -306,7 +308,7 @@ Masih ada satu perkara lagi yang harus kita lakukan sebelum kod ini dapat berfun
 ```js
 function updateElement(id, textOrNode) {
   const element = document.getElementById(id);
-  element.textContent = ''; // Removes all children
+  element.textContent = ""; // Removes all children
   element.append(textOrNode);
 }
 ```

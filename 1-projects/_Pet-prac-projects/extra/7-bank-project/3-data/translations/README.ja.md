@@ -25,11 +25,11 @@ curl http://localhost:5000/api
 
 ## AJAX とデータ取得
 
-従来の Web サイトでは、ユーザーがリンクをクリックしたり、フォームを使用してデータを送信したりした際に、HTML ページ全体をリロードすることで表示されるコンテンツを更新しています。新しいデータの読み込みが必要になるたびに、Web サーバはブラウザで処理する必要のある新しい HTML ページを返し、現在のユーザのアクションを中断し、リロード中のインタラクションを制限します。このワークフローは、*マルチページアプリケーション* または *MPA* とも呼ばれます。
+従来の Web サイトでは、ユーザーがリンクをクリックしたり、フォームを使用してデータを送信したりした際に、HTML ページ全体をリロードすることで表示されるコンテンツを更新しています。新しいデータの読み込みが必要になるたびに、Web サーバはブラウザで処理する必要のある新しい HTML ページを返し、現在のユーザのアクションを中断し、リロード中のインタラクションを制限します。このワークフローは、_マルチページアプリケーション_ または _MPA_ とも呼ばれます。
 
 ![複数ページのアプリケーションでワークフローを更新する](../images/mpa.png)
 
-Web アプリケーションがより複雑でインタラクティブになり始めた頃、[AJAX (Asynchronous JavaScript and XML)](https://en.wikipedia.org/wiki/Ajax_(programming))と呼ばれる新しい技術が登場しました。この技術は、Web アプリケーションが HTML ページをリロードすることなく、JavaScript を使ってサーバーから非同期にデータを送受信することを可能にし、結果として、より高速な更新とよりスムーズなユーザーのインタラクションを実現します。サーバーから新しいデータを受信すると、[DOM](https://developer.mozilla.org/ja/docs/Web/API/Document_Object_Model) API を使用して現在の HTML ページを JavaScript で更新することもできます。時間の経過とともに、このアプローチは現在では [*シングルページアプリケーション* または *SPA*](https://en.wikipedia.org/wiki/Single-page_application) と呼ばれているものへと発展してきました。
+Web アプリケーションがより複雑でインタラクティブになり始めた頃、[AJAX (Asynchronous JavaScript and XML)](<https://en.wikipedia.org/wiki/Ajax_(programming)>)と呼ばれる新しい技術が登場しました。この技術は、Web アプリケーションが HTML ページをリロードすることなく、JavaScript を使ってサーバーから非同期にデータを送受信することを可能にし、結果として、より高速な更新とよりスムーズなユーザーのインタラクションを実現します。サーバーから新しいデータを受信すると、[DOM](https://developer.mozilla.org/ja/docs/Web/API/Document_Object_Model) API を使用して現在の HTML ページを JavaScript で更新することもできます。時間の経過とともに、このアプローチは現在では [_シングルページアプリケーション_ または _SPA_](https://en.wikipedia.org/wiki/Single-page_application) と呼ばれているものへと発展してきました。
 
 ![シングルページアプリケーションでワークフローを更新](../images/spa.png)
 
@@ -43,7 +43,7 @@ AJAX が最初に導入されたとき、データを非同期で取得できる
 
 ```js
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById("loginForm");
   const user = loginForm.user.value;
 }
 ```
@@ -55,10 +55,12 @@ async function login() {
 ```js
 async function getAccount(user) {
   try {
-    const response = await fetch('//localhost:5000/api/accounts/' + encodeURIComponent(user));
+    const response = await fetch(
+      "//localhost:5000/api/accounts/" + encodeURIComponent(user)
+    );
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    return { error: error.message || "Unknown error" };
   }
 }
 ```
@@ -71,16 +73,16 @@ async function getAccount(user) {
 
 ```js
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById("loginForm");
   const user = loginForm.user.value;
   const data = await getAccount(user);
 
   if (data.error) {
-    return console.log('loginError', data.error);
+    return console.log("loginError", data.error);
   }
 
   account = data;
-  navigate('/dashboard');
+  navigate("/dashboard");
 }
 ```
 
@@ -92,12 +94,12 @@ async function login() {
 let account = null;
 ```
 
-ユーザデータが変数に保存された後、既に持っている `navigate()` 関数を使って *ログイン* ページから *ダッシュボード* に移動することができます。
+ユーザデータが変数に保存された後、既に持っている `navigate()` 関数を使って _ログイン_ ページから _ダッシュボード_ に移動することができます。
 
 最後に、HTML を修正してログインフォームが送信されたときに `login` 関数を呼び出す必要があります。
 
 ```html
-<form id="loginForm" action="javascript:login()">
+<form id="loginForm" action="javascript:login()"></form>
 ```
 
 すべてが正しく動作していることをテストします。新しいアカウントを登録して、同じアカウントを使ってログインしようとすることで、`register` 関数を完成させることができます。
@@ -106,24 +108,24 @@ let account = null;
 
 ```js
 account = result;
-navigate('/dashboard');
+navigate("/dashboard");
 ```
 
 ✅ デフォルトでは、閲覧している Web ページよりも*同じドメインとポート*からしかサーバー API を呼び出すことができないことをご存知でしょうか? これはブラウザによって強制されたセキュリティメカニズムです。しかし待ってください、私たちの Web アプリは `localhost:3000` で動作していますが、サーバー API は `localhost:5000` で動作しています。[Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/ja/docs/Web/HTTP/CORS)と呼ばれる技術を使用することで、サーバーがレスポンスに特殊なヘッダを追加し、特定のドメインの例外を許可することで、クロスオリジンの HTTP リクエストを実行することが可能になります。
 
 ## データを表示するために HTML を更新する
 
-ユーザーデータが手に入ったので、それを表示するために既存の HTML を更新しなければなりません。DOM から要素を取得する方法は既に知っていますが、例として `document.getElementById()` を使用します。ベースとなる要素ができたら、それを修正したり、子要素を追加したりするために使えるAPIをいくつか紹介します。
+ユーザーデータが手に入ったので、それを表示するために既存の HTML を更新しなければなりません。DOM から要素を取得する方法は既に知っていますが、例として `document.getElementById()` を使用します。ベースとなる要素ができたら、それを修正したり、子要素を追加したりするために使える API をいくつか紹介します。
 
 - 要素のテキストを変更するには、[`textContent`](https://developer.mozilla.org/ja/docs/Web/API/Node/textContent)プロパティを使用します。この値を変更すると、(あれば) すべての要素の子要素が削除され、提供されたテキストに置き換えられることに注意してください。このように、与えられた要素に空の文字列 `''` を代入することで、与えられた要素のすべての子を削除する効率的な方法でもあります。
 
-- [`document.createElement()`](https://developer.mozilla.org/ja/docs/Web/API/Document/createElement) と [`append()`](https://developer.mozilla.org/ja/docs/Web/API/ParentNode/append) メソッドを使用すると、1つ以上の新しい子要素を作成して添付することができます
+- [`document.createElement()`](https://developer.mozilla.org/ja/docs/Web/API/Document/createElement) と [`append()`](https://developer.mozilla.org/ja/docs/Web/API/ParentNode/append) メソッドを使用すると、1 つ以上の新しい子要素を作成して添付することができます
 
 ✅ 要素の [`innerHTML`](https://developer.mozilla.org/ja/docs/Web/API/Element/innerHTML) プロパティを使用して HTML の内容を変更することも可能ですが、これは [クロスサイトスクリプティング (XSS)](https://developer.mozilla.org/ja/docs/Glossary/Cross-site_scripting) 攻撃に対して脆弱なので避けるべきです。
 
 ### タスク
 
-ダッシュボード画面に移る前に、*ログイン* ページでもう一つやるべきことがあります。現在、存在しないユーザ名でログインしようとすると、コンソールにメッセージが表示されますが、通常のユーザの場合は何も変わらず、何が起こっているのかわかりません。
+ダッシュボード画面に移る前に、_ログイン_ ページでもう一つやるべきことがあります。現在、存在しないユーザ名でログインしようとすると、コンソールにメッセージが表示されますが、通常のユーザの場合は何も変わらず、何が起こっているのかわかりません。
 
 必要に応じてエラーメッセージを表示できるように、ログインフォームにプレースホルダ要素を追加してみましょう。良い場所はログインの直前の `<button>` です。
 
@@ -145,11 +147,11 @@ function updateElement(id, text) {
 }
 ```
 
-これは非常に簡単で、要素 *id* と *text* が与えられると、一致する `id` で DOM 要素のテキスト内容を更新します。このメソッドを `login` 関数の先ほどのエラーメッセージの代わりに使ってみましょう。
+これは非常に簡単で、要素 _id_ と _text_ が与えられると、一致する `id` で DOM 要素のテキスト内容を更新します。このメソッドを `login` 関数の先ほどのエラーメッセージの代わりに使ってみましょう。
 
 ```js
 if (data.error) {
-  return updateElement('loginError', data.error);
+  return updateElement("loginError", data.error);
 }
 ```
 
@@ -181,7 +183,7 @@ if (data.error) {
     { "id": "1", "date": "2020-10-01", "object": "Pocket money", "amount": 50 },
     { "id": "2", "date": "2020-10-03", "object": "Book", "amount": -10 },
     { "id": "3", "date": "2020-10-04", "object": "Sandwich", "amount": -5 }
-  ],
+  ]
 }
 ```
 
@@ -210,25 +212,25 @@ if (data.error) {
 ```js
 function updateDashboard() {
   if (!account) {
-    return navigate('/login');
+    return navigate("/login");
   }
 
-  updateElement('description', account.description);
-  updateElement('balance', account.balance.toFixed(2));
-  updateElement('currency', account.currency);
+  updateElement("description", account.description);
+  updateElement("balance", account.balance.toFixed(2));
+  updateElement("currency", account.currency);
 }
 ```
 
 まず、先に進む前に必要なアカウントデータがあることを確認します。次に、先ほど作成した `updateElement()` 関数を使って HTML を更新します。
 
-> 残高表示をよりきれいにするために、メソッド [`toFixed(2)`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) を使用して、小数点以下2桁の値を強制的に表示します。
+> 残高表示をよりきれいにするために、メソッド [`toFixed(2)`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed) を使用して、小数点以下 2 桁の値を強制的に表示します。
 
-これで、ダッシュボードがロードされるたびに `updateDashboard()` 関数を呼び出す必要があります。既に [レッスン1の課題] (../../1-template-route/translations/README.ja.md) を終了している場合は簡単ですが、そうでない場合は以下の実装を使用することができます。
+これで、ダッシュボードがロードされるたびに `updateDashboard()` 関数を呼び出す必要があります。既に [レッスン 1 の課題] (../../1-template-route/translations/README.ja.md) を終了している場合は簡単ですが、そうでない場合は以下の実装を使用することができます。
 
 このコードを `updateRoute()` 関数の最後に追加します。
 
 ```js
-if (typeof route.init === 'function') {
+if (typeof route.init === "function") {
   route.init();
 }
 ```
@@ -237,8 +239,8 @@ if (typeof route.init === 'function') {
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard', init: updateDashboard }
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard", init: updateDashboard },
 };
 ```
 
@@ -264,7 +266,7 @@ HTML `<body>` に新しいテンプレートを追加します。
 </template>
 ```
 
-このテンプレートは1つのテーブル行を表し、3つのカラムを入力します。*日付*、*オブジェクト*、トランザクションの*金額*です。
+このテンプレートは 1 つのテーブル行を表し、3 つのカラムを入力します。_日付_、_オブジェクト_、トランザクションの*金額*です。
 
 次に、この `id` プロパティをダッシュボードテンプレート内のテーブルの `<tbody>` 要素に追加すると、JavaScript を使って見つけやすくなります。
 
@@ -276,9 +278,9 @@ HTML の準備ができたので、JavaScript のコードに切り替えて新�
 
 ```js
 function createTransactionRow(transaction) {
-  const template = document.getElementById('transaction');
+  const template = document.getElementById("transaction");
   const transactionRow = template.content.cloneNode(true);
-  const tr = transactionRow.querySelector('tr');
+  const tr = transactionRow.querySelector("tr");
   tr.children[0].textContent = transaction.date;
   tr.children[1].textContent = transaction.object;
   tr.children[2].textContent = transaction.amount.toFixed(2);
@@ -294,7 +296,7 @@ for (const transaction of account.transactions) {
   const transactionRow = createTransactionRow(transaction);
   transactionsRows.appendChild(transactionRow);
 }
-updateElement('transactions', transactionsRows);
+updateElement("transactions", transactionsRows);
 ```
 
 ここでは [`document.createDocumentFragment()`](https://developer.mozilla.org/ja/docs/Web/API/Document/createDocumentFragment) というメソッドを使用しています。これは新しい DOM フラグメントを作成し、その上で作業を行い、最終的にそれを HTML テーブルにアタッチする前のものです。
@@ -304,7 +306,7 @@ updateElement('transactions', transactionsRows);
 ```js
 function updateElement(id, textOrNode) {
   const element = document.getElementById(id);
-  element.textContent = ''; // Removes all children
+  element.textContent = ""; // Removes all children
   element.append(textOrNode);
 }
 ```

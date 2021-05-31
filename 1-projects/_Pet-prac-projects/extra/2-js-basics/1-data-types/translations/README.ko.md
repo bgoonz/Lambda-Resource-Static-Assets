@@ -1,15 +1,16 @@
 # JavaScript 기초: 데이터 타입
 
 ![JavaScript Basics - Data types](/sketchnotes/webdev101-js-datatypes.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 강의 전 퀴즈
+
 [Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/7?loc=ko)
 
-해당 강의에서는 웹에서 상호작용을 제공하는 언어인 JavaScript의 기초를 다룹니다. 
+해당 강의에서는 웹에서 상호작용을 제공하는 언어인 JavaScript의 기초를 다룹니다.
 
 [![Data types in JavaScript](https://img.youtube.com/vi/JNIXfGiDWM8/0.jpg)](https://youtube.com/watch?v=JNIXfGiDWM8 "Data types in JavaScript")
-
 
 변수와 변수를 채워주는 데이터 타입부터 시작합니다!
 
@@ -19,38 +20,39 @@
 
 변수를 만들고 **선언** 하는 구문은 **[keyword] [name]** 입니다. 두 부분으로 이루어집니다:
 
-- **키워드**. 키워드는 `let` 또는 `var`로 지정할 수 있습니다.  
+- **키워드**. 키워드는 `let` 또는 `var`로 지정할 수 있습니다.
 
-   > Note, 키워드 `let`은 ES6에서 도입되었으며 변수에 _block scope_ 를 제공합니다. `var`보다` let`을 사용하는 것이 좋습니다. 향후 부분에서 블록 범위를 더 자세히 다룰 것입니다.
+  > Note, 키워드 `let`은 ES6에서 도입되었으며 변수에 _block scope_ 를 제공합니다. `var`보다` let`을 사용하는 것이 좋습니다. 향후 부분에서 블록 범위를 더 자세히 다룰 것입니다.
+
 - **변수 이름**, 스스로 선택한 이름입니다.
 
 ### 작업 - 변수와 작업하기
 
 1. **변수 선언하기**. `let` 키워드를 사용하여 변수를 선언해봅시다:
 
-    ```javascript
-    let myVariable;
-    ```
+   ```javascript
+   let myVariable;
+   ```
 
    이제 `myVariable`이 `let` 키워드를 사용하여 선언되었습니다. 현재는 값을 가지고 있지 않습니다.
 
 1. **값 할당하기**. `=` 연산자로 변수에 값을 저장합니다, 예상 값이 따릅니다.
 
-    ```javascript
-    myVariable = 123;
-    ```
+   ```javascript
+   myVariable = 123;
+   ```
 
    > Note: 이 강의에서 `=`을 사용한다는 것은 변수에 값을 지정하는 데 사용되는 "할당 연산자" 로 사용되는 것을 의미합니다. 같다는 의미가 아닙니다.
 
-   `myVariable`는 이제 123 값으로 *초기화* 되었습니다.
+   `myVariable`는 이제 123 값으로 _초기화_ 되었습니다.
 
 1. **리펙토링**. 코드를 다음 구문으로 바꿉니다.
 
-    ```javascript
-    let myVariable = 123;
-    ```
+   ```javascript
+   let myVariable = 123;
+   ```
 
-    위는 변수가 선언되면서 동시에 값이 할당되는 순간을 _명시적 초기화_ 라고 합니다.
+   위는 변수가 선언되면서 동시에 값이 할당되는 순간을 _명시적 초기화_ 라고 합니다.
 
 1. **변수 값 변경하기**. 다음과 같이 변수 값을 변경합니다:
 
@@ -74,30 +76,31 @@ const MY_VARIABLE = 123;
 
 - **반드시 값이 있어야 합니다**. 상수는 초기화를 하지 않는다면, 코드 실행 중에 오류가 발생합니다.
 - **참조는 변경 불가합니다**. 상수 참조는 초기화된 후에는 변경할 수 없으며, 코드 실행 중에 오류가 발생합니다. 두 가지 예를 살펴 보겠습니다:
-   - **Simple value**. 허용하지 않습니다:
-   
-      ```javascript
-      const PI = 3;
-      PI = 4; // not allowed
-      ```
- 
-   - **객체 참고는 보호됩니다**. 허용하지 않습니다:
-   
-      ```javascript
-      const obj = { a: 3 };
-      obj = { b: 5 } // not allowed
-      ```
 
-    - **객체 값은 보호되지 않습니다**. 허용합니다:
-    
-      ```javascript
-      const obj = { a: 3 };
-      obj.a = 5;  // allowed
-      ```
+  - **Simple value**. 허용하지 않습니다:
 
-      위는 객체의 값을 변경하지만 참조 자체는 변경하지 않으므로, 허용됩니다.
+    ```javascript
+    const PI = 3;
+    PI = 4; // not allowed
+    ```
 
-   > Note, `const`는 참조가 다시 할당되지 않도록 보호한다는 점을 의미합니다. 값은 _immutable_ 이 아니며 객체와 같은 복잡한 구조인 경우, 변경될 수 있습니다.
+  - **객체 참고는 보호됩니다**. 허용하지 않습니다:
+
+    ```javascript
+    const obj = { a: 3 };
+    obj = { b: 5 }; // not allowed
+    ```
+
+  - **객체 값은 보호되지 않습니다**. 허용합니다:
+
+    ```javascript
+    const obj = { a: 3 };
+    obj.a = 5; // allowed
+    ```
+
+    위는 객체의 값을 변경하지만 참조 자체는 변경하지 않으므로, 허용됩니다.
+
+  > Note, `const`는 참조가 다시 할당되지 않도록 보호한다는 점을 의미합니다. 값은 _immutable_ 이 아니며 객체와 같은 복잡한 구조인 경우, 변경될 수 있습니다.
 
 ## 데이터 타입
 
@@ -150,10 +153,9 @@ let myString2 = "World";
 myString1 + myString2 + "!"; //HelloWorld!
 myString1 + " " + myString2 + "!"; //Hello World!
 myString1 + ", " + myString2 + "!"; //Hello, World!
-
 ```
 
-✅ 왜 JavaScript에서 `1 + 1 = 2`이지만, `'1'+ '1'= 11` 일까요?  `'1' + 1`은 어떻습니까?
+✅ 왜 JavaScript에서 `1 + 1 = 2`이지만, `'1'+ '1'= 11` 일까요? `'1' + 1`은 어떻습니까?
 
 **템플릿 리터럴** 따옴표 대신 backtick이 사용된다는 점을 제외하면, 문자열을 형식화하는 또 다른 방법입니다. 일반 텍스트가 아닌 모든 것은 placeholders `${ }`안에 배치해야합니다. 여기에는 문자열일 수도 있는 모든 변수가 포함됩니다.
 
@@ -162,7 +164,7 @@ let myString1 = "Hello";
 let myString2 = "World";
 
 `${myString1} ${myString2}!` //Hello World!
-`${myString1}, ${myString2}!` //Hello World!
+`${myString1}, ${myString2}!`; //Hello World!
 ```
 
 어느 방법이든지 포맷팅 목표를 달성할 수 있지만, 템플릿 리터럴은 모든 공백과 줄 바꿈을 고려합니다.
@@ -185,6 +187,7 @@ let myString2 = "World";
 JavaScript는 때때로 놀라운 방법으로 데이터 타입을 처리하는 것으로 유명합니다. 'gotchas'에 대해 약간 알아보세요. 예시: 대소문자 구분은 물릴 수 있습니다! 콘솔에서 다음을 시도하십시오: `let age = 1; let Age = 2; age == Age` (resolves `false` -- why?). 다른 문제를 찾을 수 있습니까?
 
 ## 강의 후 퀴즈
+
 [Post-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/8?loc=ko)
 
 ## 리뷰 & 자기주도 학습

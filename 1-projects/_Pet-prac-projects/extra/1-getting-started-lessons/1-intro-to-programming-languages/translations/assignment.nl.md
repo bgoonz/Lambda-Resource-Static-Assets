@@ -6,6 +6,6 @@ Er zijn veel tools die een webontwikkelaar nodig heeft en die staan in de [MDN-d
 
 ## Rubriek
 
-Voorbeeldig | Voldoende | Moet Worden Verbeterd
---- | --- | -- |
-|Uitgelegd waarom webontwikkelaar een tool zou gebruiken| Uitgelegd hoe, maar niet waarom de ontwikkelaar de tool zou gebruiken| Niet vermeld hoe of waarom een ontwikkelaar een tool zou gebruiken  |
+| Voorbeeldig                                             | Voldoende                                                             | Moet Worden Verbeterd                                              |
+| ------------------------------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Uitgelegd waarom webontwikkelaar een tool zou gebruiken | Uitgelegd hoe, maar niet waarom de ontwikkelaar de tool zou gebruiken | Niet vermeld hoe of waarom een ontwikkelaar een tool zou gebruiken |

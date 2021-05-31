@@ -16,13 +16,12 @@ Necesita un servidor web local para probar la aplicación web que crearemos en e
 
 En su computadora, cree una carpeta llamada `bank` con un archivo llamado `index.html` dentro. Comenzaremos desde este HTML [boilerplate](https://en.wikipedia.org/wiki/Boilerplate_code):
 
-
 ```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bank App</title>
   </head>
   <body>
@@ -66,6 +65,7 @@ A continuación, agreguemos debajo la plantilla HTML para la página de inicio d
 ```
 
 Luego agregaremos otra plantilla HTML para la página del tablero. Esta página contendrá diferentes secciones:
+
 - Un encabezado con un título y un botón para cerrar sesión
 - El saldo actual de la cuenta bancaria
 - Una lista de transacciones, que se muestra en una tabla.
@@ -76,9 +76,7 @@ Luego agregaremos otra plantilla HTML para la página del tablero. Esta página 
     <h1>Bank App</h1>
     <button>Logout</button>
   </header>
-  <section>
-    Balance: 100$
-  </section>
+  <section>Balance: 100$</section>
   <section>
     <h2>Transactions</h2>
     <table>
@@ -115,7 +113,6 @@ La instanciación de una plantilla se suele realizar en 3 pasos:
 
 Cree un nuevo archivo llamado `app.js` en la carpeta de su proyecto e importe ese archivo en la sección `<head>` de su HTML:
 
-
 ```html
 <script src="app.js" defer></script>
 ```
@@ -126,8 +123,8 @@ Ahora en `app.js`, crearemos una nueva función `updateRoute`:
 function updateRoute(templateId) {
   const template = document.getElementById(templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -137,14 +134,14 @@ Lo que hacemos aquí son exactamente los 3 pasos descritos anteriormente. Instal
 Ahora llame a esta función con una de las plantillas y observe el resultado.
 
 ```js
-updateRoute('login');
+updateRoute("login");
 ```
 
 ✅ ¿Cuál es el propósito de este código `app.innerHTML = '';`? ¿Qué pasa sin él?
 
 ## Creando rutas
 
-Cuando hablamos de una aplicación web, llamamos *Enrutamiento* la intención de asignar **URL** a pantallas específicas que deben mostrarse. En un sitio web con varios archivos HTML, esto se hace automáticamente ya que las rutas de los archivos se reflejan en la URL. Por ejemplo, con estos archivos en la carpeta de su proyecto:
+Cuando hablamos de una aplicación web, llamamos _Enrutamiento_ la intención de asignar **URL** a pantallas específicas que deben mostrarse. En un sitio web con varios archivos HTML, esto se hace automáticamente ya que las rutas de los archivos se reflejan en la URL. Por ejemplo, con estos archivos en la carpeta de su proyecto:
 
 ```
 mywebsite/index.html
@@ -153,6 +150,7 @@ mywebsite/admin/index.html
 ```
 
 Si crea un servidor web con `mywebsite` como raíz, la asignación de URL será:
+
 ```
 https://site.com            --> mywebsite/index.html
 https://site.com/login.html --> mywebsite/login.html
@@ -167,8 +165,8 @@ Usaremos un objeto simple para implementar un [mapa](https://en.wikipedia.org/wi
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard' },
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard" },
 };
 ```
 
@@ -181,8 +179,8 @@ function updateRoute() {
 
   const template = document.getElementById(route.templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -194,8 +192,9 @@ Aquí mapeamos las rutas que declaramos a la plantilla correspondiente. Puede pr
 ## Añadiendo navegación
 
 El siguiente paso para nuestra aplicación es agregar la posibilidad de navegar entre páginas sin tener que cambiar la URL manualmente. Esto implica dos cosas:
-  1. Actualización de la URL actual
-  2. Actualización de la plantilla mostrada en función de la nueva URL
+
+1. Actualización de la URL actual
+2. Actualización de la plantilla mostrada en función de la nueva URL
 
 Ya nos ocupamos de la segunda parte con la función `updateRoute`, así que tenemos que averiguar cómo actualizar la URL actual.
 
@@ -206,7 +205,6 @@ En su lugar, tendremos que usar JavaScript y más específicamente el [`history.
 ### Tarea
 
 Creemos una nueva función que podamos usar para navegar en nuestra aplicación:
-
 
 ```js
 function navigate(path) {
@@ -233,7 +231,7 @@ function updateRoute() {
 
 Si no se puede encontrar una ruta, ahora lo redireccionaremos a la página de `login`.
 
-Completemos el sistema de navegación agregando enlaces a nuestros botones *login* y *logout* en el HTML.
+Completemos el sistema de navegación agregando enlaces a nuestros botones _login_ y _logout_ en el HTML.
 
 ```html
 <button onclick="navigate('/dashboard')">Login</button>
@@ -249,7 +247,7 @@ Intente hacer clic en estos botones, ahora debería poder navegar entre las dife
 
 ## Manejo de los botones de avance y retroceso del navegador
 
-El uso de `history.pushState` crea nuevas entradas en el historial de navegación del navegador. Puede verificar que manteniendo presionado el *botón de retroceso* de su navegador, debería mostrar algo como esto:
+El uso de `history.pushState` crea nuevas entradas en el historial de navegación del navegador. Puede verificar que manteniendo presionado el _botón de retroceso_ de su navegador, debería mostrar algo como esto:
 
 ![Captura de pantalla del historial de navegación](./history.png)
 
@@ -260,7 +258,6 @@ Eso es porque no sabemos que necesitamos llamar a `updateRoute()` cada vez que c
 ### Tarea
 
 Para asegurarnos de que la plantilla mostrada se actualice cuando cambie el historial del navegador, adjuntaremos una nueva función que llama a `updateRoute()`. Lo haremos en la parte inferior de nuestro archivo `app.js`:
-
 
 ```js
 window.onpopstate = () => updateRoute();

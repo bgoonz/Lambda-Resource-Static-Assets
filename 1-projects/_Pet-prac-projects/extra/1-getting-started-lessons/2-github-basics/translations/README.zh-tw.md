@@ -1,11 +1,13 @@
 # GitHub 簡介
 
-這堂課程講述一個提供加設與管理程式碼的平台 ── Github的基本功能。
+這堂課程講述一個提供加設與管理程式碼的平台 ── Github 的基本功能。
 
 ![GitHub 簡介](/sketchnotes/webdev101-github.png)
+
 > 由[Tomomi Imura](https://twitter.com/girlie_mac) 繪製
 
 ## 課前測驗
+
 [課前測驗](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/3?loc=zh_tw)
 
 ## 大綱
@@ -22,15 +24,16 @@
 `git --version`
 
 若你的裝置上沒有安裝 Git，[請下載並安裝 Git](https://git-scm.com/downloads)。 安裝完之後，請設定裝置本地 Git 的使用者設定。
-* `git config --global user.name "your-name"`
-* `git config --global user.email "your-email"`
+
+- `git config --global user.name "your-name"`
+- `git config --global user.email "your-email"`
 
 要確認 Git 使用者設定是否完成，你可以輸入：
 `git config --list`
 
 此外，你需要一組 GitHub 的帳戶、一款文字編輯器 (如：Visual Studio Code) 與你的終端機 (或 command prompt)。
 
-若你缺少 GitHub 帳戶，請前往 [github.com](https://github.com/)建立並登入一組帳戶，遵循指示完成資料的填寫。 
+若你缺少 GitHub 帳戶，請前往 [github.com](https://github.com/)建立並登入一組帳戶，遵循指示完成資料的填寫。
 
 ✅ GitHub 不是唯一的程式碼數據庫，但 GitHub 是家喻戶曉的。
 
@@ -89,7 +92,7 @@
    git add .
    ```
 
-   `git add` 加上路徑 `.` 表示追蹤該路徑下所有的檔案。 
+   `git add` 加上路徑 `.` 表示追蹤該路徑下所有的檔案。
 
 1. **只追蹤選擇的檔案**
 
@@ -123,7 +126,7 @@
 
    這會提交暫存區內的檔案，"first commit"即提交紀錄。提交紀錄最好能識別出這次的提交主要做了那些更動。
 
-1. **連接本地數據庫到 GitHub 遠端數據庫** 現在 Git 數據庫已經成功運行在你的本地裝置上，但有時候你希望能將檔案備份到其他地方，或是邀請他人參與這項程式專案。 GitHub 便是一個好地方。先前我們已經建立遠端數據庫在 GitHub 上，現在我們只要連接本地數據庫到 GitHub上。指令 `git remote add` 能完成這項課題：
+1. **連接本地數據庫到 GitHub 遠端數據庫** 現在 Git 數據庫已經成功運行在你的本地裝置上，但有時候你希望能將檔案備份到其他地方，或是邀請他人參與這項程式專案。 GitHub 便是一個好地方。先前我們已經建立遠端數據庫在 GitHub 上，現在我們只要連接本地數據庫到 GitHub 上。指令 `git remote add` 能完成這項課題：
 
    > 注意，在輸入指令前，你需要取得 GitHub 遠端數據庫的 URL 位置。請將下列的 `repository_name` 替換為你的遠端數據庫路徑。
 
@@ -133,7 +136,7 @@
 
    這會在 GitHub 遠端數據庫上建立一個名叫 "origin" 的 _遠端位置(remote)_ ，或稱 _連接(connection)_。
 
-1. **上傳本地檔案到 GitHub** 現在已經建好了遠端與本地的 _連接_。 利用指令 `git push` 可以將本地檔案上傳到遠端數據庫當中： 
+1. **上傳本地檔案到 GitHub** 現在已經建好了遠端與本地的 _連接_。 利用指令 `git push` 可以將本地檔案上傳到遠端數據庫當中：
 
    ```bash
    git push -u origin main
@@ -169,13 +172,13 @@
 
 在你的遠端資料庫中，前往 `Insights > Community` 來對比你的專案與其他推薦社群專案。
 
-   以下是一些你的 GitHub 數據庫需要精進的地方：
-   - **專案描述(Description)** 你有為你的專案新增描述嗎?
-   - **README** 你有新增 README 嗎? GitHub 提供編寫 README 的指引與參考： [README](https://docs.github.com/articles/about-readmes/)
-   - **開發指引(Contributing guideline)** 你的專案內有[開發指引](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/)嗎?
-   - **行為準則(Code of Conduct)** [行為準則](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/)
-   - **授權條款License** 這或許是最重要的：[授權條款](https://docs.github.com/articles/adding-a-license-to-a-repository/)
+以下是一些你的 GitHub 數據庫需要精進的地方：
 
+- **專案描述(Description)** 你有為你的專案新增描述嗎?
+- **README** 你有新增 README 嗎? GitHub 提供編寫 README 的指引與參考： [README](https://docs.github.com/articles/about-readmes/)
+- **開發指引(Contributing guideline)** 你的專案內有[開發指引](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/)嗎?
+- **行為準則(Code of Conduct)** [行為準則](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/)
+- **授權條款 License** 這或許是最重要的：[授權條款](https://docs.github.com/articles/adding-a-license-to-a-repository/)
 
 這些資源對剛加入到專案的新成員有所幫助。這些是新的合作夥伴比看程式碼還優先查詢的地方。完善它們能有效縮減他人消化的時間。
 
@@ -187,8 +190,8 @@
 
 1. **分叉(Fork)專案** 你或許希望別人能 _分叉(fork)_ 你的專案。 分叉代表別人建立一份你的專案副本到他人的 GitHub 數據庫中。
 1. **複製(Clone)** 複製專案到他人的本地裝置中。
-1. **建立分支(branch)** 依照工作需求建立 _分支(branch)_。 
-1. **專注在他人投入的工作範圍** 要求他人只專注在單一課題上，這樣能提升他們工作 _合併(merge)_ 的機會。想像他們在修正錯誤，同時又新增新功能、更新測試機制......這時如果你只想合併其中的一個、或者是兩個功能呢? 
+1. **建立分支(branch)** 依照工作需求建立 _分支(branch)_。
+1. **專注在他人投入的工作範圍** 要求他人只專注在單一課題上，這樣能提升他們工作 _合併(merge)_ 的機會。想像他們在修正錯誤，同時又新增新功能、更新測試機制......這時如果你只想合併其中的一個、或者是兩個功能呢?
 
 ✅ 想像一個情況：一個重要的分支是編輯與分享的主軸，它能被如何應用?
 
@@ -231,7 +234,7 @@
    git merge main
    ```
 
-   這會將所有 `main` 分支的改動加入到你的本地目錄中。若出現狀況，VS Code會告訴你 Git 會對衝突的檔案感到 _困惑(confused)_， 你需要判斷哪一項檔案或程式碼才是最適當的選擇。
+   這會將所有 `main` 分支的改動加入到你的本地目錄中。若出現狀況，VS Code 會告訴你 Git 會對衝突的檔案感到 _困惑(confused)_， 你需要判斷哪一項檔案或程式碼才是最適當的選擇。
 
 1. **將你的成果上傳到 GitHub** 這代表著兩件事：將分支推到你的遠端數據庫以及準備建立 Pull Request(PR)。
 
@@ -243,7 +246,7 @@
 
 1. **建立 PR** 藉由造訪分叉的數據庫中建立 PR，GitHub 會指示你是否要建立 PR，之後要填寫提交紀錄以及編寫詳細的說明。讓管理者了解你做了哪些更動並進行 _交叉比對(fingers crossed)_。 他們會感激你的貢獻並 _合併(merge)_ 你的 PR。完成這步後，你就成為了專案貢獻者，恭喜！
 
-1. **清理專案** 在 PR 被成功合併後， _清除專案(clean up)_ 會是一個好習慣。 你需要清除你的本地分支以及你的遠端數據庫分支。首先，你可以利用下列的指令清除本地分支： 
+1. **清理專案** 在 PR 被成功合併後， _清除專案(clean up)_ 會是一個好習慣。 你需要清除你的本地分支以及你的遠端數據庫分支。首先，你可以利用下列的指令清除本地分支：
 
    ```bash
    git branch -d [分支名稱]
@@ -269,7 +272,7 @@
 
 ![複製數據庫到本地](../images/clone_repo.png)
 
-有許多方式來複製數據庫。 一種是利用 "clone" 整個數據庫的內容。可以使用 HTTPS、SSH 或是 GitHub CLI (Command Line Interface)。 
+有許多方式來複製數據庫。 一種是利用 "clone" 整個數據庫的內容。可以使用 HTTPS、SSH 或是 GitHub CLI (Command Line Interface)。
 
 打開終端機並輸入下列指令來複製數據庫：
 `git clone https://github.com/ProjectURL`
@@ -285,7 +288,7 @@
 
 你可以為別人打星星(star)、追蹤(watch)或分叉(fork)任何一個 GitHub 上的共享數據庫。打上星星的數據庫會出現在右上方的導航欄中。就像是書籤，但是是給程式碼用的。
 
-專案內會有 issue 追蹤器。大多數的 issue 會在 GitHub "Issue" 的標籤內(有些Issue會由作者另外說明)，供大家進行討論。 Pull Requests 標籤內會有正在討論與審核的程式更動。
+專案內會有 issue 追蹤器。大多數的 issue 會在 GitHub "Issue" 的標籤內(有些 Issue 會由作者另外說明)，供大家進行討論。 Pull Requests 標籤內會有正在討論與審核的程式更動。
 
 專案也會有討論區、寄信功能以及聊天室如 Slack、Discord 或 IRC。
 
@@ -298,6 +301,7 @@
 找朋友一起編輯彼此的程式。共同建立一項專案、分叉程式、建立分支、合併更動。
 
 ## 課後測驗
+
 [課後測驗](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/4?loc=zh_tw)
 
 ## 複習與自學
@@ -312,7 +316,7 @@
 
 - [第一週在 GitHub 上](https://lab.github.com/githubtraining/first-week-on-github)
 
-你能找到更資深的實驗內容。 
+你能找到更資深的實驗內容。
 
 ## 作業
 

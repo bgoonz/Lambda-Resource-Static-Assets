@@ -1,9 +1,9 @@
 # :dollar: Costruire una Banca
 
-In questo progetto si imparerà come costruire una banca immaginaria. Queste lezioni includono istruzioni su come disporre un'app web e fornire rotte, creare form, gestire lo stato e recuperare  dati da un'API da cui è possibile ottenere i dati della banca.
+In questo progetto si imparerà come costruire una banca immaginaria. Queste lezioni includono istruzioni su come disporre un'app web e fornire rotte, creare form, gestire lo stato e recuperare dati da un'API da cui è possibile ottenere i dati della banca.
 
 | ![Videata1](../images/screen1.png) | ![Videata2](../images/screen2.png) |
-|--------------------------------|--------------------------------|
+| ---------------------------------- | ---------------------------------- |
 
 ## Lezioni
 

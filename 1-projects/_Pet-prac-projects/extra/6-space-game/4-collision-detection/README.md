@@ -7,13 +7,13 @@
 In this lesson you will learn how to shoot lasers with JavaScript! We will add two things to our game:
 
 - **A laser**: this laser is shot from your heroes ship and vertically upwards
-- **Collision detection**, as part of implementing the ability to *shoot* we will also add some nice game rules:
-   - **Laser hits enemy**: Enemy dies if hit by a laser
-   - **Laser hits top screen**: A laser is destroyed if hitting the top part of the screen
-   - **Enemy and hero collision**: An enemy and the hero are destroyed if hitting each other
-   - **Enemy hits bottom of the screen**: An enemy and a hero are destroyed if the enemy hits the bottom of the screen
+- **Collision detection**, as part of implementing the ability to _shoot_ we will also add some nice game rules:
+  - **Laser hits enemy**: Enemy dies if hit by a laser
+  - **Laser hits top screen**: A laser is destroyed if hitting the top part of the screen
+  - **Enemy and hero collision**: An enemy and the hero are destroyed if hitting each other
+  - **Enemy hits bottom of the screen**: An enemy and a hero are destroyed if the enemy hits the bottom of the screen
 
-In short, you -- *the hero* -- need to hit all enemies with a laser before they manage to move to the bottom of the screen.
+In short, you -- _the hero_ -- need to hit all enemies with a laser before they manage to move to the bottom of the screen.
 
 ✅ Do a little research on the very first computer game ever written. What was its functionality?
 
@@ -23,7 +23,7 @@ Let's be heroic together!
 
 How do we do collision detection? We need to think of our game objects as rectangles moving about. Why is that you might ask? Well, the image used to draw a game object is a rectangle: it has an `x`, `y`, `width` and `height`.
 
-If two rectangles, i.e a hero and enemy *intersect*, you have a collision. What should happen then is up to the rules of the game. To implement collision detection you therefore need the following:
+If two rectangles, i.e a hero and enemy _intersect_, you have a collision. What should happen then is up to the rules of the game. To implement collision detection you therefore need the following:
 
 1. A way to get a rectangle representation of a game object, something like this:
 
@@ -42,26 +42,28 @@ If two rectangles, i.e a hero and enemy *intersect*, you have a collision. What 
 
    ```javascript
    function intersectRect(r1, r2) {
-     return !(r2.left > r1.right ||
+     return !(
+       r2.left > r1.right ||
        r2.right < r1.left ||
        r2.top > r1.bottom ||
-       r2.bottom < r1.top);
+       r2.bottom < r1.top
+     );
    }
    ```
 
 ## How do we destroy things
 
-To destroy things in a game you need to let the game know it should no longer paint this item in the game loop that triggers on a certain interval. A way to do this is to mark a game object as *dead* when something happens, like so:
+To destroy things in a game you need to let the game know it should no longer paint this item in the game loop that triggers on a certain interval. A way to do this is to mark a game object as _dead_ when something happens, like so:
 
 ```javascript
 // collision happened
-enemy.dead = true
+enemy.dead = true;
 ```
 
-Then you an proceed to sort out *dead* objects before repainting the screen, like so:
+Then you an proceed to sort out _dead_ objects before repainting the screen, like so:
 
 ```javascript
-gameObjects = gameObject.filter(go => !go.dead);
+gameObjects = gameObject.filter((go) => !go.dead);
 ```
 
 ## How do we fire a laser
@@ -74,7 +76,7 @@ Firing a laser translates to responding to a key-event and creating an object th
 
 ## Cooldown on our laser
 
-The laser needs to fire every time you press a key, like *space* for example. To prevent the game producing way too many lasers in a short time we need to fix this. The fix is by implementing a so called *cooldown*, a timer, that ensures that a laser can only be fired so often. You can implement that in the following way:
+The laser needs to fire every time you press a key, like _space_ for example. To prevent the game producing way too many lasers in a short time we need to fix this. The fix is by implementing a so called _cooldown_, a timer, that ensures that a laser can only be fired so often. You can implement that in the following way:
 
 ```javascript
 class Cooldown {
@@ -100,7 +102,7 @@ class Weapon {
 }
 ```
 
-✅ Refer to lesson 1 in the space game series to remind yourself about *cooldowns*.
+✅ Refer to lesson 1 in the space game series to remind yourself about _cooldowns_.
 
 ## What to build
 
@@ -109,10 +111,10 @@ You will take the existing code (which you should have cleaned up and refactored
 > tip: the laser that you'll work with is already in your assets folder and referenced by your code
 
 - **Add collision detection**, when a laser collides with something the following rules should apply:
-   1. **Laser hits enemy**: enemy dies if hit by a laser
-   2. **Laser hits top screen**: A laser is destroyed if it hits the top part of our screen
-   3. **Enemy and hero collision**: an enemy and the hero is destroyed if hitting each other
-   4. **Enemy hits bottom of the screen**: An enemy and a hero is destroyed if the enemy hits the bottom of the screen
+  1.  **Laser hits enemy**: enemy dies if hit by a laser
+  2.  **Laser hits top screen**: A laser is destroyed if it hits the top part of our screen
+  3.  **Enemy and hero collision**: an enemy and the hero is destroyed if hitting each other
+  4.  **Enemy hits bottom of the screen**: An enemy and a hero is destroyed if the enemy hits the bottom of the screen
 
 ## Recommended steps
 
@@ -139,40 +141,41 @@ The above will start a HTTP Server on address `http://localhost:5000`. Open up a
 
 ### Add code
 
-1. **Setup a  rectangle representation of your game object, to handle collision** The below code allows you to get a rectangle representation of a `GameObject`. Edit your GameObject class to extend it:
+1. **Setup a rectangle representation of your game object, to handle collision** The below code allows you to get a rectangle representation of a `GameObject`. Edit your GameObject class to extend it:
 
-    ```javascript
-    rectFromGameObject() {
-        return {
-          top: this.y,
-          left: this.x,
-          bottom: this.y + this.height,
-          right: this.x + this.width,
-        };
-      }
-    ```
+   ```javascript
+   rectFromGameObject() {
+       return {
+         top: this.y,
+         left: this.x,
+         bottom: this.y + this.height,
+         right: this.x + this.width,
+       };
+     }
+   ```
 
-2. **Add code that checks collision** This will be a new function  that tests whether two rectangles intersect:
+2. **Add code that checks collision** This will be a new function that tests whether two rectangles intersect:
 
-    ```javascript
-    function intersectRect(r1, r2) {
-      return !(
-        r2.left > r1.right ||
-        r2.right < r1.left ||
-        r2.top > r1.bottom ||
-        r2.bottom < r1.top
-      );
-    }
-    ```
+   ```javascript
+   function intersectRect(r1, r2) {
+     return !(
+       r2.left > r1.right ||
+       r2.right < r1.left ||
+       r2.top > r1.bottom ||
+       r2.bottom < r1.top
+     );
+   }
+   ```
 
 3. **Add laser firing capability**
-   1. **Add key-event message**. The *space* key should create a laser just above the hero ship. Add three constants in the Messages object:
 
-       ```javascript
-        KEY_EVENT_SPACE: "KEY_EVENT_SPACE",
-        COLLISION_ENEMY_LASER: "COLLISION_ENEMY_LASER",
-        COLLISION_ENEMY_HERO: "COLLISION_ENEMY_HERO",
-       ```
+   1. **Add key-event message**. The _space_ key should create a laser just above the hero ship. Add three constants in the Messages object:
+
+      ```javascript
+       KEY_EVENT_SPACE: "KEY_EVENT_SPACE",
+       COLLISION_ENEMY_LASER: "COLLISION_ENEMY_LASER",
+       COLLISION_ENEMY_HERO: "COLLISION_ENEMY_HERO",
+      ```
 
    1. **Handle space key**. Edit the `window.addEventListener` keyup function to handle spaces:
 
@@ -182,32 +185,35 @@ The above will start a HTTP Server on address `http://localhost:5000`. Open up a
         }
       ```
 
-    1. **Add listeners**. Edit the `initGame()` function to ensure that hero can fire when the space bar is hit:
+   1. **Add listeners**. Edit the `initGame()` function to ensure that hero can fire when the space bar is hit:
 
-       ```javascript
-       eventEmitter.on(Messages.KEY_EVENT_SPACE, () => {
-        if (hero.canFire()) {
-          hero.fire();
-        }
-       ```
-
-       and add a new `eventEmitter.on()` function to ensure behavior when an enemy collides with a laser:
-
-          ```javascript
-          eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-            first.dead = true;
-            second.dead = true;
-          })
-          ```
-
-   1. **Move object**, Ensure the laser moves to the top of the screen gradually. You'll create a new Laser class that extends `GameObject`, as you've done before: 
-   
       ```javascript
-        class Laser extends GameObject {
+      eventEmitter.on(Messages.KEY_EVENT_SPACE, () => {
+       if (hero.canFire()) {
+         hero.fire();
+       }
+      ```
+
+      and add a new `eventEmitter.on()` function to ensure behavior when an enemy collides with a laser:
+
+      ```javascript
+      eventEmitter.on(
+        Messages.COLLISION_ENEMY_LASER,
+        (_, { first, second }) => {
+          first.dead = true;
+          second.dead = true;
+        }
+      );
+      ```
+
+   1. **Move object**, Ensure the laser moves to the top of the screen gradually. You'll create a new Laser class that extends `GameObject`, as you've done before:
+
+      ```javascript
+      class Laser extends GameObject {
         constructor(x, y) {
-          super(x,y);
+          super(x, y);
           (this.width = 9), (this.height = 33);
-          this.type = 'Laser';
+          this.type = "Laser";
           this.img = laserImg;
           let id = setInterval(() => {
             if (this.y > 0) {
@@ -216,7 +222,7 @@ The above will start a HTTP Server on address `http://localhost:5000`. Open up a
               this.dead = true;
               clearInterval(id);
             }
-          }, 100)
+          }, 100);
         }
       }
       ```
@@ -225,31 +231,31 @@ The above will start a HTTP Server on address `http://localhost:5000`. Open up a
 
       ```javascript
       function updateGameObjects() {
-        const enemies = gameObjects.filter(go => go.type === 'Enemy');
+        const enemies = gameObjects.filter((go) => go.type === "Enemy");
         const lasers = gameObjects.filter((go) => go.type === "Laser");
-      // laser hit something
+        // laser hit something
         lasers.forEach((l) => {
           enemies.forEach((m) => {
             if (intersectRect(l.rectFromGameObject(), m.rectFromGameObject())) {
-            eventEmitter.emit(Messages.COLLISION_ENEMY_LASER, {
-              first: l,
-              second: m,
-            });
-          }
-         });
-      });
+              eventEmitter.emit(Messages.COLLISION_ENEMY_LASER, {
+                first: l,
+                second: m,
+              });
+            }
+          });
+        });
 
-        gameObjects = gameObjects.filter(go => !go.dead);
-      }  
+        gameObjects = gameObjects.filter((go) => !go.dead);
+      }
       ```
 
       Make sure to add `updateGameObjects()` into your game loop in `window.onload`.
 
-   4. **Implement cooldown** on the laser, so it can only be fired so often.
+   1. **Implement cooldown** on the laser, so it can only be fired so often.
 
       Finally, edit the Hero class so that it can cooldown:
 
-       ```javascript
+      ```javascript
       class Hero extends GameObject {
         constructor(x, y) {
           super(x, y);
@@ -261,7 +267,7 @@ The above will start a HTTP Server on address `http://localhost:5000`. Open up a
         fire() {
           gameObjects.push(new Laser(this.x + 45, this.y - 10));
           this.cooldown = 500;
-    
+
           let id = setInterval(() => {
             if (this.cooldown > 0) {
               this.cooldown -= 100;

@@ -6,6 +6,6 @@ Stellen Sie sich vor, Sie bauen einen Einkaufswagen. Schreiben Sie eine Dokument
 
 ## Rubrik
 
-Kriterien | Vorbildlich | Angemessen | Muss verbessert werden
---- | --- | --- | - |
-|| Die sechs Datentypen werden aufgelistet und detailliert untersucht, wobei ihre Verwendung dokumentiert wird. | Vier Datentypen werden untersucht. | Zwei Datentypen werden untersucht. |
+| Kriterien | Vorbildlich                                                                                                  | Angemessen                         | Muss verbessert werden             |
+| --------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------------- | ---------------------------------- |
+|           | Die sechs Datentypen werden aufgelistet und detailliert untersucht, wobei ihre Verwendung dokumentiert wird. | Vier Datentypen werden untersucht. | Zwei Datentypen werden untersucht. |

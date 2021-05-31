@@ -1,6 +1,7 @@
 # Progetto di Estensione del Browser Parte 1: Tutto sui Browser
 
 ![schizzo di un browser](/sketchnotes/browser.jpg)
+
 > Sketchnote di [Wassim Chegham](https://dev.to/wassimchegham/ever-wondered-what-happens-when-you-type-in-a-url-in-an-address-bar-in-a-browser-3dob)
 
 ## Quiz Pre-Lezione
@@ -20,6 +21,7 @@ Ma cos'è esattamente un browser? È un'applicazione software che consente a un 
 ✅ Un po' di storia: il primo browser si chiamava "WorldWideWeb" ed fu creato da Sir Timothy Berners-Lee nel 1990.
 
 ![primi browser](../images/earlybrowsers.jpg)
+
 > Alcuni dei primi browser, tramite [Karen McGrane](https://www.slideshare.net/KMcGrane/week-4-ixd-history-personal-computing)
 
 Quando un utente si connette a Internet utilizzando un indirizzo URL (Uniform Resource Locator), solitamente utilizzando Hypertext Transfer Protocol tramite un indirizzo `http` o `https` , il browser comunica con un server web e recupera una pagina web.
@@ -36,7 +38,7 @@ Un sito web davvero utile che probabilmente si dovrebbe aggiungere ai preferiti 
 
 ## Estensioni del browser
 
-Perché si vorrebbe creare un'estensione per il browser? È una cosa utile da collegare al  browser quando si ha bisogno di un rapido accesso ad attività che si tende a ripetere. Ad esempio, se ci si ritrova a dover controllare i colori nelle varie pagine Web con cui si interagisce, si potrebbe installare un'estensione del browser per la selezione dei colori. Se si hanno problemi a ricordare le password, si potrebbe utilizzare un'estensione del browser per la gestione delle password.
+Perché si vorrebbe creare un'estensione per il browser? È una cosa utile da collegare al browser quando si ha bisogno di un rapido accesso ad attività che si tende a ripetere. Ad esempio, se ci si ritrova a dover controllare i colori nelle varie pagine Web con cui si interagisce, si potrebbe installare un'estensione del browser per la selezione dei colori. Se si hanno problemi a ricordare le password, si potrebbe utilizzare un'estensione del browser per la gestione delle password.
 
 Anche le estensioni del browser sono divertenti da sviluppare. Tendono a gestire un numero finito di compiti che svolgono bene.
 
@@ -59,7 +61,7 @@ In sostanza, il processo sarà:
 
 ### Si comincia
 
-Verrè costruita un'estensione del browser che mostra l'impronta di carbonio della propria regione,  mostrando l'utilizzo e la fonte di energia. L'estensione avrà un form che raccoglie una chiave API in modo che ai possa accedere all'API di CO2 Signal.
+Verrè costruita un'estensione del browser che mostra l'impronta di carbonio della propria regione, mostrando l'utilizzo e la fonte di energia. L'estensione avrà un form che raccoglie una chiave API in modo che ai possa accedere all'API di CO2 Signal.
 
 **Occorrente:**
 
@@ -113,8 +115,9 @@ Nella cartella `/dist` si creerà un form e un'area dei risultati. Nel file `ind
 		<input type="text" id="api" required class="api-key" />
 	</div>
 	<button class="search-btn">Invia</button>
-</form>	
+</form>
 ```
+
 Questo è il form in cui le proprie informazioni recuperate verranno inserite e salvate nella memoria locale del browser (local storage)
 
 Successivamente, creare l'area dei risultati; sotto il tag di chiusura del form, dopo '<!-- result area --> aggiungere alcuni div:
@@ -132,13 +135,14 @@ Successivamente, creare l'area dei risultati; sotto il tag di chiusura del form,
 	<button class="clear-btn">Cambia regione</button>
 </div>
 ```
+
 A questo punto, si può provare una compilazione. Assicurarsi di installare le dipendenze del pacchetto di questa estensione:
 
 ```
 npm install
 ```
 
-Questo comando utilizzerà npm, il Node Package Manager, per installare webpack per il processo di compilazione dell'estensione. Webpack è un *bundler* che gestisce la compilazione del codice (un *bundler* è uno strumento che prande pezzi di codice javascript e dipendenze e li raggruppa in un unico file che verrà in genere usato nel browser - n.d.t.). Si può vedere l'output di questo processo guardando in `/dist/main.js -` si vede che il codice è stato raggruppato.
+Questo comando utilizzerà npm, il Node Package Manager, per installare webpack per il processo di compilazione dell'estensione. Webpack è un _bundler_ che gestisce la compilazione del codice (un _bundler_ è uno strumento che prande pezzi di codice javascript e dipendenze e li raggruppa in un unico file che verrà in genere usato nel browser - n.d.t.). Si può vedere l'output di questo processo guardando in `/dist/main.js -` si vede che il codice è stato raggruppato.
 
 Per ora, l'estensione dovrebbe essere compilata e, se la si distribuisce in Edge come estensione, si vedrebbe un form ben disposto.
 
@@ -167,4 +171,3 @@ In questa lezione si è imparato qualcosa sulla storia del browser web; si colga
 ## Compito
 
 [Restyling dell'estensione](assignment.it.md)
-

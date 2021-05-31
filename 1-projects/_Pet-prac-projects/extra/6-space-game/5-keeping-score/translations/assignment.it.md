@@ -6,6 +6,6 @@ Creare un gioco in cui si mostrano vite e punti in modo creativo. Un suggeriment
 
 # Rubrica
 
-| Criteri | Ottimo | Adeguato | Necessita miglioramento |
-| -------- | ---------------------- | --------------------------- | -------------------------- |
-|          | Viene presentato un gioco completo | Il gioco è presentato parzialmente  | il gioco parziale contiene bug |
+| Criteri | Ottimo                             | Adeguato                           | Necessita miglioramento        |
+| ------- | ---------------------------------- | ---------------------------------- | ------------------------------ |
+|         | Viene presentato un gioco completo | Il gioco è presentato parzialmente | il gioco parziale contiene bug |

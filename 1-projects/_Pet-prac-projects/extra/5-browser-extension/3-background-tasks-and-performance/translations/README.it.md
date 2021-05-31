@@ -18,7 +18,7 @@ L'argomento su come rendere i propri siti web incredibilmente veloci su tutti i 
 
 La prima cosa da fare per assicurarsi che il proprio sito funzioni in modo efficiente è raccogliere dati sulle sue prestazioni. Il primo posto per farlo è negli strumenti di sviluppo del proprio browser web. In Edge, selezionare il pulsante "Impostazioni e altro ancora" (l'icona dei tre punti in alto a destra nel browser), quindi accedere a Altri strumenti > Strumenti di sviluppo e aprire la scheda Prestazioni. Si può anche utilizzare la scorciatoia da tastiera `Ctrl` + `Maiusc` + `I` su Windows o `Opzione` + `Comando` + `I` su Mac per aprire gli strumenti di sviluppo.
 
-La scheda Prestazioni contiene uno strumento di profilazione. Aprire un sito web (provare, ad esempio, https://www.microsoft.com) e fare clic sul pulsante "Registra", quindi aggiornare il sito. Interrompendo la registrazione in qualsiasi momento si sarà in grado di vedere le routine generate per "Esecuzione script",  "Rendering" e "Disegno" per il sito:
+La scheda Prestazioni contiene uno strumento di profilazione. Aprire un sito web (provare, ad esempio, https://www.microsoft.com) e fare clic sul pulsante "Registra", quindi aggiornare il sito. Interrompendo la registrazione in qualsiasi momento si sarà in grado di vedere le routine generate per "Esecuzione script", "Rendering" e "Disegno" per il sito:
 
 ![Edge profiler](../images/profiler.png)
 
@@ -101,6 +101,7 @@ chrome.runtime.sendMessage({
 		},
 });
 ```
+
 ### Chiamare la funzione, eseguire la chiamata
 
 Successivamente chiamare la funzione appena creata aggiungendola alla promessa restituita dall'API C02Signal:
@@ -131,6 +132,7 @@ function drawIcon(value) {
 	return context.getImageData(50, 50, 100, 100);
 }
 ```
+
 In questo codice, si sta aggiungendo un listener per tutti i messaggi che arrivano al gestore di attività di backend. Se questo messaggio si chiama 'updateIcon', viene eseguito il codice successivo per disegnare un'icona del colore corretto utilizzando l'API Canvas.
 
 ✅ Si Imparerà di più sull'API Canvas nelle [lezioni di Gioco Spaziale](../../../6-space-game/2-drawing-to-canvas/translations/README.it.md).
@@ -158,4 +160,3 @@ Analizzare alcuni dei modi in cui i browser misurano le prestazioni web esaminan
 ## Compito
 
 [Analizzare un sito per le prestazioni](assignment.it.md)
-

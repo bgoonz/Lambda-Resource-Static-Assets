@@ -12,7 +12,7 @@ Meditasi kod seret dan lepas kecil. Dengan sedikit HTML, JS dan CSS, anda boleh 
 
 ## Kredit
 
-Ditulis dengan ♥️  oleh [Jen Looper](https://www.twitter.com/jenlooper)
+Ditulis dengan ♥️ oleh [Jen Looper](https://www.twitter.com/jenlooper)
 
 Terarium yang dibuat melalui CSS diilhamkan oleh balang kaca Jakub Mandra [codepen](https://codepen.io/Rotarepmi/pen/rjpNZY).
 

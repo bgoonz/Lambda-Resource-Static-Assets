@@ -1,9 +1,11 @@
 # Asas JavaScript: Kaedah dan Fungsi
 
 ![Asas JavaScript - Fungsi](/sketchnotes/webdev101-js-functions.png)
+
 > Sketchnote karya [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Kuiz Pra Kuliah
+
 [Kuiz Pra Kuliah](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/9)
 
 Apabila kita berfikir tentang menulis kod, kita selalu ingin memastikan kod kita dapat dibaca. Walaupun ini terdengar berlawanan dengan intuisi, kod dibaca lebih banyak kali daripada yang ditulis. Satu alat inti dalam kotak alat pemaju untuk memastikan kod yang dapat dikendalikan adalah **fungsi**.
@@ -23,8 +25,9 @@ Sama pentingnya ialah kemampuan menamakan fungsi. Walaupun ini kelihatan remeh, 
 Sintaks untuk fungsi kelihatan seperti berikut:
 
 ```javascript
-function nameOfFunction() { // definisi fungsi
- // definisi fungsi dan badannya
+function nameOfFunction() {
+  // definisi fungsi
+  // definisi fungsi dan badannya
 }
 ```
 
@@ -32,7 +35,7 @@ Sekiranya saya ingin membuat fungsi untuk memaparkan ucapan, mungkin seperti ini
 
 ```javascript
 function displayGreeting() {
-  console.log('Hello, world!');
+  console.log("Hello, world!");
 }
 ```
 
@@ -44,7 +47,7 @@ displayGreeting();
 ```
 
 > **CATATAN:** Terdapat jenis fungsi khas yang dikenali sebagai
-**kaedah**, yang sudah anda gunakan! Sebenarnya, kami melihat ini dalam demo kami di atas semasa kami menggunakan `console.log`. Apa yang membuat kaedah berbeza dari fungsi adalah metode yang dilampirkan ke objek (`console` dalam contoh kami), sementara fungsi bebas mengambang. Anda akan mendengar banyak pembangun menggunakan istilah ini secara bergantian.
+> **kaedah**, yang sudah anda gunakan! Sebenarnya, kami melihat ini dalam demo kami di atas semasa kami menggunakan `console.log`. Apa yang membuat kaedah berbeza dari fungsi adalah metode yang dilampirkan ke objek (`console` dalam contoh kami), sementara fungsi bebas mengambang. Anda akan mendengar banyak pembangun menggunakan istilah ini secara bergantian.
 
 ### Amalan terbaik untuk fungsi
 
@@ -61,9 +64,7 @@ Untuk menjadikan fungsi lebih boleh digunakan semula, anda selalunya ingin menya
 Parameter disenaraikan di bahagian definisi dalam kurungan dan dipisahkan koma seperti:
 
 ```javascript
-function name(param, param2, param3) {
-
-}
+function name(param, param2, param3) {}
 ```
 
 Kami boleh mengemas kini `displayGreeting` kami untuk menerima nama dan memaparkannya.
@@ -78,7 +79,7 @@ function displayGreeting(name) {
 Apabila kita mahu memanggil fungsi kita dan meneruskan parameter, kita menentukannya dalam kurungan.
 
 ```javascript
-displayGreeting('Christopher');
+displayGreeting("Christopher");
 // memapar "Hello, Christopher!" apabila memproseskannya
 ```
 
@@ -87,7 +88,7 @@ displayGreeting('Christopher');
 Kita dapat menjadikan fungsi kita lebih fleksibel dengan menambahkan lebih banyak parameter. Tetapi bagaimana jika kita tidak mahu setiap nilai ditentukan? Sesuai dengan contoh ucapan kami, kami dapat meninggalkan nama seperti yang diperlukan (kami harus tahu siapa yang kami sapa), tetapi kami ingin membiarkan ucapan itu disesuaikan sesuai keinginan. Sekiranya seseorang tidak mahu menyesuaikannya, kami memberikan nilai lalai. Untuk memberikan nilai lalai ke parameter, kami menetapkannya dengan cara yang sama dengan menetapkan nilai untuk pemboleh ubah - `parameterName = 'defaultValue' `. Untuk melihat contoh penuh:
 
 ```javascript
-function displayGreeting(name, salutation='Hello') {
+function displayGreeting(name, salutation = "Hello") {
   console.log(`${salutation}, ${name}`);
 }
 ```
@@ -95,10 +96,10 @@ function displayGreeting(name, salutation='Hello') {
 Apabila kita memanggil fungsi tersebut, kita kemudian dapat memutuskan apakah kita ingin menetapkan nilai untuk `salam `.
 
 ```javascript
-displayGreeting('Christopher');
+displayGreeting("Christopher");
 // memapar "Hello, Christopher"
 
-displayGreeting('Christopher', 'Hi');
+displayGreeting("Christopher", "Hi");
 // memapar "Hi, Christopher"
 ```
 
@@ -112,7 +113,7 @@ Sekiranya fungsi mengembalikan sesuatu maka kata kunci `return` digunakan. Kata 
 
 ```javascript
 return myVariable;
-```  
+```
 
 Kami dapat membuat fungsi untuk membuat pesan ucapan dan mengembalikan nilainya kembali ke pemanggil
 
@@ -126,10 +127,10 @@ function createGreetingMessage(name) {
 Apabila memanggil fungsi ini, kita akan menyimpan nilainya dalam pemboleh ubah. Ini sama dengan cara kita menetapkan pemboleh ubah ke nilai statik (seperti `const name = 'Christopher' `).
 
 ```javascript
-const greetingMessage = createGreetingMessage('Christopher');
+const greetingMessage = createGreetingMessage("Christopher");
 ```
 
-## Berfungsi sebagai parameter untuk fungsi 
+## Berfungsi sebagai parameter untuk fungsi
 
 Semasa anda maju dalam kerjaya pengaturcaraan anda, anda akan menemui fungsi yang menerima fungsi sebagai parameter. Trik rapi ini biasanya digunakan ketika kita tidak tahu kapan sesuatu akan terjadi atau selesai, tetapi kita tahu kita perlu melakukan operasi sebagai tindak balas.
 
@@ -139,7 +140,7 @@ Sekiranya anda menjalankan kod di bawah ini, setelah 3 saat anda akan melihat me
 
 ```javascript
 function displayDone() {
-  console.log('3 seconds has elapsed');
+  console.log("3 seconds has elapsed");
 }
 // timer value is in milliseconds
 setTimeout(displayDone, 3000);
@@ -154,8 +155,8 @@ Ketika kita meneruskan fungsi sebagai parameter, kita dapat memotong membuatnya 
 Marilah tulis semula kod di atas untuk menggunakan fungsi tanpa nama:
 
 ```javascript
-setTimeout(function() {
-  console.log('3 seconds has elapsed');
+setTimeout(function () {
+  console.log("3 seconds has elapsed");
 }, 3000);
 ```
 
@@ -169,7 +170,7 @@ Mari tulis semula kod kami sekali lagi untuk menggunakan fungsi anak panah lemak
 
 ```javascript
 setTimeout(() => {
-  console.log('3 saat telah berlalu');
+  console.log("3 saat telah berlalu");
 }, 3000);
 ```
 
@@ -177,16 +178,17 @@ setTimeout(() => {
 
 Anda sekarang telah melihat kita mempunyai tiga cara untuk meneruskan fungsi sebagai parameter dan mungkin tertanya-tanya kapan menggunakannya. Sekiranya anda tahu anda akan menggunakan fungsi lebih dari sekali, buat seperti biasa. Sekiranya anda menggunakannya hanya untuk satu lokasi, biasanya lebih baik menggunakan fungsi tanpa nama. Sama ada anda menggunakan fungsi anak panah lemak atau sintaks `function` yang lebih tradisional bergantung kepada anda, tetapi anda akan perhatikan bahawa kebanyakan pembangun moden lebih suka `=>`.
 
---- 
+---
 
 ## 🚀 Cabaran
 
 Bolehkah anda menyatakan dalam satu ayat perbezaan antara fungsi dan kaedah? Mencubanya!
 
 ## Kuiz Pasca Kuliah
+
 [Kuiz Pasca Kuliah](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/10)
 
-## Mengkaji & Belajar Sendiri 
+## Mengkaji & Belajar Sendiri
 
 Perlu [membaca sedikit lebih banyak mengenai fungsi anak panah](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions), kerana ia semakin banyak digunakan dalam pangkalan kod. Berlatih menulis fungsi, dan kemudian menulis semula dengan sintaks ini.
 

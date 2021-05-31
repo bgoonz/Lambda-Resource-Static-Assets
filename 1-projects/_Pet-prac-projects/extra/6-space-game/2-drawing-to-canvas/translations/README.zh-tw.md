@@ -27,6 +27,7 @@ Canvas 是 HTML 中的元素，預設上不帶有任何內容，就如一塊白�
 Canvas 使用了笛卡爾座標系繪製圖案。因此有 x 軸與 y 軸來表達物件的所在地點。座標點 `0,0` 位在畫布的左上方；而右下方則是我們定義畫布的寬度與高度。
 
 ![畫布網格](../canvas_grid.png)
+
 > 圖片出自於 [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes)
 
 要在 Canvas 物件上繪製圖案，你需要執行下列步驟：
@@ -46,10 +47,10 @@ canvas = document.getElementById("myCanvas");
 ctx = canvas.getContext("2d");
 
 //3. 填入色彩紅色
-ctx.fillStyle = 'red';
+ctx.fillStyle = "red";
 
 //4. 利用這些參數決定位置與大小，繪製矩形
-ctx.fillRect(0,0, 200, 200) // x,y,width, height
+ctx.fillRect(0, 0, 200, 200); // x,y,width, height
 ```
 
 ✅ Canvas API 主要是處理 2D 圖形，但你也可以在網頁中繪製 3D 圖形。要完成這個需求，你可以使用 [WebGL API](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API)。
@@ -70,10 +71,10 @@ ctx.fillRect(0,0, 200, 200) // x,y,width, height
 
 ```javascript
 const img = new Image();
-img.src = 'path/to/my/image.png';
+img.src = "path/to/my/image.png";
 img.onload = () => {
   // 圖片載入完成，準備使用
-}
+};
 ```
 
 ### 讀取檔案之模式
@@ -88,30 +89,29 @@ function loadAsset(path) {
     img.onload = () => {
       // 圖片載入完成，準備使用
       resolve(img);
-    }
-  })
+    };
+  });
 }
 
 // 實際用法
 
 async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
+  const heroImg = await loadAsset("hero.png");
+  const monsterImg = await loadAsset("monster.png");
 }
-
 ```
 
 要在畫面上繪製遊戲物件，你的程式碼會如下所示：
 
 ```javascript
 async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
+  const heroImg = await loadAsset("hero.png");
+  const monsterImg = await loadAsset("monster.png");
 
   canvas = document.getElementById("myCanvas");
   ctx = canvas.getContext("2d");
-  ctx.drawImage(heroImg, canvas.width/2,canvas.height/2);
-  ctx.drawImage(monsterImg, 0,0);
+  ctx.drawImage(heroImg, canvas.width / 2, canvas.height / 2);
+  ctx.drawImage(monsterImg, 0, 0);
 }
 ```
 
@@ -123,11 +123,11 @@ async function run() {
 
 - 英雄艦艇
 
-   ![英雄艦艇](../solution/assets/player.png)
+  ![英雄艦艇](../solution/assets/player.png)
 
-- 5*5 隻怪物
+- 5\*5 隻怪物
 
-   ![敵軍艦艇](../solution/assets/enemyShip.png)
+  ![敵軍艦艇](../solution/assets/enemyShip.png)
 
 ### 開始開發的建議步驟
 
@@ -164,28 +164,29 @@ npm start
 2. **讀取**材質
    > 要點：使用 `await loadTexture` 導入圖片位置以新增玩家與敵軍圖片。你還沒辦法在畫面上看到它們！
 3. 在畫面的正下方**繪製**英雄
-   > 要點：使用 `drawImage` API 來繪製 heroImg 到畫面上，設定位置為  `canvas.width / 2 - 45` 與 `canvas.height - canvas.height / 4)`。
-4. **繪製** 5*5 隻怪物
+   > 要點：使用 `drawImage` API 來繪製 heroImg 到畫面上，設定位置為 `canvas.width / 2 - 45` 與 `canvas.height - canvas.height / 4)`。
+4. **繪製** 5\*5 隻怪物
+
    > 要點：現在移除註解，在畫面上繪製敵人。接著編輯函式 `createEnemies`。
 
-    首先，設定幾個常數：
+   首先，設定幾個常數：
 
-    ```javascript
-    const MONSTER_TOTAL = 5;
-    const MONSTER_WIDTH = MONSTER_TOTAL * 98;
-    const START_X = (canvas.width - MONSTER_WIDTH) / 2;
-    const STOP_X = START_X + MONSTER_WIDTH;
-    ```
+   ```javascript
+   const MONSTER_TOTAL = 5;
+   const MONSTER_WIDTH = MONSTER_TOTAL * 98;
+   const START_X = (canvas.width - MONSTER_WIDTH) / 2;
+   const STOP_X = START_X + MONSTER_WIDTH;
+   ```
 
-    接著，利用迴圈在畫面上繪製矩陣型態的怪物：
+   接著，利用迴圈在畫面上繪製矩陣型態的怪物：
 
-    ```javascript
-    for (let x = START_X; x < STOP_X; x += 98) {
-        for (let y = 0; y < 50 * 5; y += 50) {
-          ctx.drawImage(enemyImg, x, y);
-        }
-      }
-    ```
+   ```javascript
+   for (let x = START_X; x < STOP_X; x += 98) {
+     for (let y = 0; y < 50 * 5; y += 50) {
+       ctx.drawImage(enemyImg, x, y);
+     }
+   }
+   ```
 
 ## 結果
 

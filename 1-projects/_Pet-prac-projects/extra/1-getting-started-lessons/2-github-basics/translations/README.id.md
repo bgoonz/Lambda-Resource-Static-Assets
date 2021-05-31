@@ -3,6 +3,7 @@
 Pelajaran ini mencakup dasar-dasar GitHub, platform untuk menghosting dan mengelola perubahan pada kode Anda.
 
 ![Dasar-dasar GitHub](/sketchnotes/webdev101-github.png)
+
 > Catatan sketsa oleh [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Kuis Pra-Kuliah
@@ -132,7 +133,7 @@ Katakanlah Anda memiliki folder secara lokal dengan beberapa proyek kode dan And
 Baris subjek Git commit yang bagus melengkapi kalimat berikut:
 Jika diterapkan, komit ini akan <baris subjek Anda di sini>
 
-Untuk subjek gunakan imperatif, bentuk waktu sekarang (present tense): "merubah" bukan "perubahan" atau "mengubah". 
+Untuk subjek gunakan imperatif, bentuk waktu sekarang (present tense): "merubah" bukan "perubahan" atau "mengubah".
 Seperti pada subjek, dalam tubuh (opsional) juga gunakan imperatif, bentuk waktu sekarang. Tubuh harus memasukkan motivasi untuk perubahan dan membandingkannya dengan perilaku sebelumnya. Anda menjelaskan `mengapa`, bukan `bagaimana`.
 
 ✅ Luangkan beberapa menit untuk menjelajahi GitHub. Dapatkah Anda menemukan pesan commit yang sangat bagus? Dapatkah Anda menemukan yang sangat minim? Informasi apa yang menurut Anda paling penting dan berguna untuk disampaikan dalam pesan commit?
@@ -145,12 +146,13 @@ Alasan utama menempatkan sesuatu di GitHub adalah untuk memungkinkan kolaborasi 
 
 Di repositori Anda, buka `Insights > Community` untuk melihat bagaimana proyek Anda dibandingkan dengan standar komunitas yang direkomendasikan.
 
-   Berikut beberapa hal yang dapat meningkatkan repo GitHub Anda:
-   - **Deskripsi**. Apakah Anda menambahkan deskripsi untuk proyek Anda?
-   - **README**. Apakah Anda menambahkan README? GitHub memberikan panduan untuk menulis [README](https://docs.github.com/articles/about-readmes/).
-   - **Panduan berkontribusi**. Apakah project Anda memiliki [pedoman kontribusi](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/), 
-   - **Kode etik**. sebuah [Kode etik](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/), 
-   - **Lisensi**. Mungkin yang paling penting, sebuah [lisensi](https://docs.github.com/articles/adding-a-license-to-a-repository/)?
+Berikut beberapa hal yang dapat meningkatkan repo GitHub Anda:
+
+- **Deskripsi**. Apakah Anda menambahkan deskripsi untuk proyek Anda?
+- **README**. Apakah Anda menambahkan README? GitHub memberikan panduan untuk menulis [README](https://docs.github.com/articles/about-readmes/).
+- **Panduan berkontribusi**. Apakah project Anda memiliki [pedoman kontribusi](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/),
+- **Kode etik**. sebuah [Kode etik](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/),
+- **Lisensi**. Mungkin yang paling penting, sebuah [lisensi](https://docs.github.com/articles/adding-a-license-to-a-repository/)?
 
 Semua sumber daya ini akan bermanfaat bagi anggota tim baru. Dan biasanya itu adalah jenis hal yang dilihat oleh kontributor baru bahkan sebelum melihat kode Anda, untuk mengetahui apakah proyek Anda adalah tempat yang tepat bagi mereka untuk menghabiskan waktu mereka..
 
@@ -161,8 +163,8 @@ Semua sumber daya ini akan bermanfaat bagi anggota tim baru. Dan biasanya itu ad
 Dokumen kontribusi membantu orang berkontribusi pada proyek. Itu menjelaskan jenis kontribusi yang Anda cari dan bagaimana prosesnya bekerja. Kontributor harus melalui serangkaian langkah untuk dapat berkontribusi ke repo Anda di GitHub:
 
 1. **Membagi (Forking) repo Anda** Anda mungkin ingin orang _fork_ proyek Anda. Forking berarti membuat replika repositori Anda di profil GitHub mereka.
-1. **Clone**. Dari sana mereka akan mengkloning proyek tersebut ke mesin lokal mereka. 
-1. **Buat cabang**. Anda akan ingin meminta mereka untuk membuat _branch_ (cabang) untuk pekerjaan mereka. 
+1. **Clone**. Dari sana mereka akan mengkloning proyek tersebut ke mesin lokal mereka.
+1. **Buat cabang**. Anda akan ingin meminta mereka untuk membuat _branch_ (cabang) untuk pekerjaan mereka.
 1. **Fokuskan perubahan mereka pada satu area**. Minta kontributor untuk memusatkan kontribusinya pada satu hal pada satu waktu - dengan begitu, peluang Anda untuk _menggabungkan_ dalam pekerjaan mereka lebih tinggi. Bayangkan mereka menulis perbaikan bug, menambahkan fitur baru, dan memperbarui beberapa pengujian - bagaimana jika Anda ingin, atau hanya dapat mengimplementasikan 2 dari 3, atau 1 dari 3 perubahan?
 
 ✅ Bayangkan situasi di mana cabang sangat penting untuk menulis dan mengirimkan kode yang baik. Kasus penggunaan apa yang dapat Anda pikirkan?
@@ -216,7 +218,7 @@ Mari kita melalui alur kerja kontributor. Asumsikan kontributor sudah _forked (m
 
    Perintah di atas membuat cabang di repo bercabang Anda.
 
-1. ****. Selanjutnya, Anda ingin membuka PR. Anda melakukannya dengan menavigasi ke repo bercabang di GitHub. Anda akan melihat indikasi di GitHub yang menanyakan apakah Anda ingin membuat PR baru, Anda mengkliknya dan Anda akan dibawa ke antarmuka di mana Anda dapat mengubah judul pesan commit, berikan deskripsi yang lebih sesuai. Sekarang pengelola repo Anda bercabang akan melihat PR ini dan _semoga_ mereka akan menghargai dan _merge (menggabungkan)_ PR Anda. Anda sekarang menjadi kontributor, hore :)
+1. \*\*\*\*. Selanjutnya, Anda ingin membuka PR. Anda melakukannya dengan menavigasi ke repo bercabang di GitHub. Anda akan melihat indikasi di GitHub yang menanyakan apakah Anda ingin membuat PR baru, Anda mengkliknya dan Anda akan dibawa ke antarmuka di mana Anda dapat mengubah judul pesan commit, berikan deskripsi yang lebih sesuai. Sekarang pengelola repo Anda bercabang akan melihat PR ini dan _semoga_ mereka akan menghargai dan _merge (menggabungkan)_ PR Anda. Anda sekarang menjadi kontributor, hore :)
 
 1. **Membersihkan**. Ini dianggap praktik yang baik untuk _membersihkan_ setelah Anda. Anda ingin membersihkan cabang lokal dan cabang yang Anda dorong ke GitHub. Pertama mari kita hapus secara lokal dengan perintah berikut:
 
@@ -226,7 +228,7 @@ Mari kita melalui alur kerja kontributor. Asumsikan kontributor sudah _forked (m
 
    Pastikan Anda membuka halaman GitHub untuk repo bercabang berikutnya dan hapus cabang jarak jauh yang baru saja Anda dorong ke sana.
 
-`Pull request` sepertinya istilah yang konyol karena Anda benar-benar ingin mendorong perubahan Anda ke proyek. Namun pengelola (pemilik proyek) atau tim inti perlu mempertimbangkan perubahan Anda sebelum menggabungkannya dengan cabang "main" proyek, jadi Anda benar-benar meminta keputusan perubahan dari pengelola.  
+`Pull request` sepertinya istilah yang konyol karena Anda benar-benar ingin mendorong perubahan Anda ke proyek. Namun pengelola (pemilik proyek) atau tim inti perlu mempertimbangkan perubahan Anda sebelum menggabungkannya dengan cabang "main" proyek, jadi Anda benar-benar meminta keputusan perubahan dari pengelola.
 
 Pull request adalah tempat untuk membandingkan dan mendiskusikan perbedaan yang diperkenalkan pada cabang dengan ulasan, komentar, pengujian terintegrasi, dan banyak lagi. Pull request yang baik mengikuti aturan yang kira-kira sama dengan pesan komit. Anda dapat menambahkan referensi ke masalah di pelacak masalah, ketika pekerjaan Anda, misalnya, memperbaiki masalah (issue). Ini dilakukan dengan menggunakan `#` diikuti dengan nomor masalah (issue) Anda. Misalnya `#97`.
 
@@ -252,7 +254,7 @@ Buka terminal Anda dan kloning repositori seperti ini:
 Untuk mengerjakan proyek, alihkan ke folder yang benar:
 `cd ProjectURL`
 
-Anda juga dapat membuka seluruh proyek menggunakan [Codespaces](https://github.com/features/codespaces), editor kode / lingkungan pengembangan cloud GitHub yang disematkan, atau [GitHub Desktop](https://desktop.github.com/ ).
+Anda juga dapat membuka seluruh proyek menggunakan [Codespaces](https://github.com/features/codespaces), editor kode / lingkungan pengembangan cloud GitHub yang disematkan, atau [GitHub Desktop](https://desktop.github.com/).
 
 Terakhir, Anda dapat mengunduh kode dalam folder zip.
 

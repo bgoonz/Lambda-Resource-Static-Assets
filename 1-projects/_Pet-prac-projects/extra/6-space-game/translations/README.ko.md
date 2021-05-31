@@ -17,15 +17,15 @@
 ## 개요
 
 - 이론
-   - [JavaScript를 사용한 게임 빌드 소개](../1-introduction/translations/README.ko.md)
+  - [JavaScript를 사용한 게임 빌드 소개](../1-introduction/translations/README.ko.md)
 - 실습
-   - [canvas로 그리기](../2-drawing-to-canvas/translations/README.ko.md)
-   - [화면에 요소 이동](../3-moving-elements-around/translations/README.ko.md)
-   - [충돌 감지](../4-collision-detection/translations/README.ko.md)
-   - [점수 유지](../5-keeping-score/translations/README.ko.md)
-   - [게임 종료 및 재시작](../6-end-condition/translations/README.ko.md)
+  - [canvas로 그리기](../2-drawing-to-canvas/translations/README.ko.md)
+  - [화면에 요소 이동](../3-moving-elements-around/translations/README.ko.md)
+  - [충돌 감지](../4-collision-detection/translations/README.ko.md)
+  - [점수 유지](../5-keeping-score/translations/README.ko.md)
+  - [게임 종료 및 재시작](../6-end-condition/translations/README.ko.md)
 
 ## Credits
 
-The assets used for this came from https://www.kenney.nl/. 
-If you are into building games, these are some seriously good assets, a lot is free and some are paid. 
+The assets used for this came from https://www.kenney.nl/.
+If you are into building games, these are some seriously good assets, a lot is free and some are paid.

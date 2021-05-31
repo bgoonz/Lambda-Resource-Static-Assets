@@ -22,8 +22,8 @@ On your computer, create a folder named `bank` with a file named `index.html` in
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bank App</title>
   </head>
   <body>
@@ -78,9 +78,7 @@ Then we'll add another HTML template for the dashboard page. This page will cont
     <h1>Bank App</h1>
     <a href="/login">Logout</a>
   </header>
-  <section>
-    Balance: 100$
-  </section>
+  <section>Balance: 100$</section>
   <section>
     <h2>Transactions</h2>
     <table>
@@ -127,8 +125,8 @@ Now in `app.js`, we'll create a new function `updateRoute`:
 function updateRoute(templateId) {
   const template = document.getElementById(templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -138,14 +136,14 @@ What we do here is exactly the 3 steps described above. We instantiate the templ
 Now call this function with one of the template and look at the result.
 
 ```js
-updateRoute('login');
+updateRoute("login");
 ```
 
 ✅ What's the purpose of this code `app.innerHTML = '';`? What happens without it?
 
 ## Creating routes
 
-When talking about a web app, we call *Routing* the intent to map **URLs** to specific screens that should be displayed. On a web site with multiple HTML files, this is done automatically as the file paths are reflected on the URL. For example, with these files in your project folder:
+When talking about a web app, we call _Routing_ the intent to map **URLs** to specific screens that should be displayed. On a web site with multiple HTML files, this is done automatically as the file paths are reflected on the URL. For example, with these files in your project folder:
 
 ```
 mywebsite/index.html
@@ -169,8 +167,8 @@ We'll use a simple object to implement a [map](https://en.wikipedia.org/wiki/Ass
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard' },
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard" },
 };
 ```
 
@@ -183,8 +181,8 @@ function updateRoute() {
 
   const template = document.getElementById(route.templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -197,8 +195,8 @@ Here we mapped the routes we declared to the corresponding template. You can try
 
 The next step for our app is to add the possibility to navigate between pages without having to change the URL manually. This implies two things:
 
-  1. Updating the current URL
-  2. Updating the displayed template based on the new URL
+1. Updating the current URL
+2. Updating the displayed template based on the new URL
 
 We already took care of the second part with the `updateRoute` function, so we have to figure out how to update the current URL.
 
@@ -244,7 +242,7 @@ function onLinkClick(event) {
 }
 ```
 
-Let's complete the navigation system by adding bindings to our *Login* and *Logout* links in the HTML.
+Let's complete the navigation system by adding bindings to our _Login_ and _Logout_ links in the HTML.
 
 ```html
 <a href="/dashboard" onclick="onLinkClick()">Login</a>
@@ -260,7 +258,7 @@ Try clicking on these links, you should be now able to navigate between the diff
 
 ## Handling the browser's back and forward buttons
 
-Using the `history.pushState` creates new entries in the browser's navigation history. You can check that by holding the *back button* of your browser, it should display something like this:
+Using the `history.pushState` creates new entries in the browser's navigation history. You can check that by holding the _back button_ of your browser, it should display something like this:
 
 ![Screenshot of navigation history](./history.png)
 

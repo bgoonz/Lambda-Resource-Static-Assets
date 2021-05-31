@@ -6,7 +6,6 @@ Fare ulteriore ricerca sul DOM "adottando" un elemento DOM. Visitare l' [elenco 
 
 ## Rubrica
 
-| Criteri | Ottimo | Adeguato | Necessita miglioramento |
-| -------- | --------------------------------------------- | ------------------------------------------------ | ----------------------- |
-|          | Viene presentata la redazione del paragrafo, con un esempio | Viene presentata la redazione del paragrafo, senza esempio | Non viene presentato alcun resoconto |
-  
+| Criteri | Ottimo                                                      | Adeguato                                                   | Necessita miglioramento              |
+| ------- | ----------------------------------------------------------- | ---------------------------------------------------------- | ------------------------------------ |
+|         | Viene presentata la redazione del paragrafo, con un esempio | Viene presentata la redazione del paragrafo, senza esempio | Non viene presentato alcun resoconto |

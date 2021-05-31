@@ -14,4 +14,4 @@
 
 文章「GitHub 簡介」是由 [Floor Drees](https://twitter.com/floordrees) 用滿滿的 ♥️ 來編寫。
 
-文章「建立無障礙網頁」是由  [Jasmine Greenaway](https://twitter.com/paladique) 用滿滿的 ♥️ 來編寫。
+文章「建立無障礙網頁」是由 [Jasmine Greenaway](https://twitter.com/paladique) 用滿滿的 ♥️ 來編寫。

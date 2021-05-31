@@ -6,6 +6,6 @@ Pilih satu elemen API Canvas dan buat sesuatu yang menarik di sekitarnya. Bolehk
 
 ## Rubrik
 
-| Kriteria | Contoh                                                 | Mencukupi                            | Usaha Lagi     |
-| -------- | --------------------------------------------------------- | ----------------------------------- | --------------------- |
+| Kriteria | Contoh                                                    | Mencukupi                             | Usaha Lagi         |
+| -------- | --------------------------------------------------------- | ------------------------------------- | ------------------ |
 |          | Kod dihantar menunjukkan tekstur atau bentuk yang menarik | Kod dihantar, tetapi tidak dijalankan | Kod tidak dihantar |

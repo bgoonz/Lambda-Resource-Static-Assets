@@ -6,7 +6,7 @@
 
 ### Introduction
 
-In the last two lessons of this module, you learned how to build a form and display area for data fetched from an API. It's a very standard way of creating web presences on the web. You even learned how to handle fetching data asyncronously. Your browser extension is very nearly complete. 
+In the last two lessons of this module, you learned how to build a form and display area for data fetched from an API. It's a very standard way of creating web presences on the web. You even learned how to handle fetching data asyncronously. Your browser extension is very nearly complete.
 
 It remains to manage some background tasks, including refreshing the color of the extension's icon, so this is a great time to talk about how the browser manages this kind of task. Let's think about these browser tasks in the context of the performance of your web assets as you build them.
 
@@ -85,7 +85,7 @@ The chrome.runtime has [an API](https://developer.chrome.com/extensions/runtime)
 
 > "Use the chrome.runtime API to retrieve the background page, return details about the manifest, and listen for and respond to events in the app or extension lifecycle. You can also use this API to convert the relative path of URLs to fully-qualified URLs."
 
-✅ If you're developing this browser extension for Edge, it might surprise you that you're using a chrome API. The newer Edge  browser versions run on the Chromium browser engine, so you can leverage these tools.
+✅ If you're developing this browser extension for Edge, it might surprise you that you're using a chrome API. The newer Edge browser versions run on the Chromium browser engine, so you can leverage these tools.
 
 > Note, if you want to profile a browser extension, launch the dev tools from within the extension itself, as it is its own separate browser instance.
 
@@ -101,6 +101,7 @@ chrome.runtime.sendMessage({
 		},
 });
 ```
+
 ### Call the function, execute the call
 
 Next, call that function you just created by adding it to the promise returned by the C02Signal API:
@@ -131,6 +132,7 @@ function drawIcon(value) {
 	return context.getImageData(50, 50, 100, 100);
 }
 ```
+
 In this code, you are adding a listener for any messages coming to the backend task manager. If it's called 'updateIcon', then the next code is run, to draw an icon of the proper color using the Canvas API.
 
 ✅ You'll learn more about the Canvas API in the [Space Game lessons](../6-space-game/2-drawing-to-canvas/README.md/drawing-to-canvas/README.md).
@@ -143,7 +145,7 @@ Congratulations, you've built a useful browser extension and learned more about 
 
 ## 🚀 Challenge
 
-Investigate some open source web sites have been around a long time ago, and, based on their GitHub history, see  if you can determine how they were optimized over the years for performance, if at all. What is the most common pain point?
+Investigate some open source web sites have been around a long time ago, and, based on their GitHub history, see if you can determine how they were optimized over the years for performance, if at all. What is the most common pain point?
 
 ## Post-Lecture Quiz
 
@@ -158,4 +160,3 @@ Investigate some of the ways that browsers gauge web performance by looking thro
 ## Assignment
 
 [Analyze a site for performance](assignment.md)
-

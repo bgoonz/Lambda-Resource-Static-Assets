@@ -22,8 +22,8 @@ Di komputer anda, buat folder bernama `bank` dengan fail bernama `index.html` di
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bank App</title>
   </head>
   <body>
@@ -78,9 +78,7 @@ Kemudian kami akan menambahkan templat HTML lain untuk halaman papan pemuka. Hal
     <h1>Bank App</h1>
     <a href="/login">Logout</a>
   </header>
-  <section>
-    Balance: 100$
-  </section>
+  <section>Balance: 100$</section>
   <section>
     <h2>Transactions</h2>
     <table>
@@ -127,8 +125,8 @@ Sekarang di `app.js`, kami akan membuat fungsi baru `updateRoute`:
 function updateRoute(templateId) {
   const template = document.getElementById(templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -138,14 +136,14 @@ Apa yang kami lakukan di sini adalah tepat 3 langkah yang dinyatakan di atas. Ka
 Sekarang panggil fungsi ini dengan salah satu templat dan lihat hasilnya.
 
 ```js
-updateRoute('login');
+updateRoute("login");
 ```
 
 ✅ Apa tujuan kod ini `app.innerHTML = '';`? Apa yang berlaku tanpanya?
 
 ## Membuat laluan
 
-Ketika berbicara tentang aplikasi web, kami memanggil *Routing* niat untuk memetakan **URL** ke layar tertentu yang harus ditampilkan. Di laman web dengan banyak fail HTML, ini dilakukan secara automatik kerana jalur fail ditunjukkan pada URL. Contohnya, dengan fail ini dalam folder projek anda:
+Ketika berbicara tentang aplikasi web, kami memanggil _Routing_ niat untuk memetakan **URL** ke layar tertentu yang harus ditampilkan. Di laman web dengan banyak fail HTML, ini dilakukan secara automatik kerana jalur fail ditunjukkan pada URL. Contohnya, dengan fail ini dalam folder projek anda:
 
 ```
 mywebsite/index.html
@@ -169,8 +167,8 @@ Kami akan menggunakan objek sederhana untuk melaksanakan [peta](https://en.wikip
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard' },
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard" },
 };
 ```
 
@@ -183,8 +181,8 @@ function updateRoute() {
 
   const template = document.getElementById(route.templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -197,8 +195,8 @@ Di sini kami memetakan laluan yang kami nyatakan ke templat yang sesuai. Anda bo
 
 Langkah seterusnya untuk aplikasi kita adalah menambahkan kemungkinan untuk menavigasi antara halaman tanpa perlu mengubah URL secara manual. Ini menunjukkan dua perkara:
 
-  1. Mengemas kini URL semasa
-  2. Mengemas kini templat yang dipaparkan berdasarkan URL baru
+1. Mengemas kini URL semasa
+2. Mengemas kini templat yang dipaparkan berdasarkan URL baru
 
 Kami sudah mengurus bahagian kedua dengan fungsi `updateRoute`, jadi kami harus memikirkan cara mengemas kini URL semasa.
 
@@ -244,7 +242,7 @@ function onLinkClick(event) {
 }
 ```
 
-Mari lengkapkan sistem navigasi dengan menambahkan pengikatan pada pautan *Login* dan *Logout* kami dalam HTML.
+Mari lengkapkan sistem navigasi dengan menambahkan pengikatan pada pautan _Login_ dan _Logout_ kami dalam HTML.
 
 ```html
 <a href="/dashboard" onclick="onLinkClick()">Login</a>
@@ -260,7 +258,7 @@ Cuba klik pada pautan-pautan ini, kini anda seharusnya dapat menavigasi antara p
 
 ## Mengendalikan butang belakang dan hadapan penyemak imbas
 
-Menggunakan `history.pushState` membuat entri baru dalam sejarah navigasi penyemak imbas. Anda boleh memastikan bahawa dengan menahan * butang belakang * penyemak imbas anda, ia akan memaparkan sesuatu seperti ini:
+Menggunakan `history.pushState` membuat entri baru dalam sejarah navigasi penyemak imbas. Anda boleh memastikan bahawa dengan menahan _ butang belakang _ penyemak imbas anda, ia akan memaparkan sesuatu seperti ini:
 
 ![Tangkapan skrin sejarah navigasi](../history.png)
 

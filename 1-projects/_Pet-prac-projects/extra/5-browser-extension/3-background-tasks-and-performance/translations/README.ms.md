@@ -101,6 +101,7 @@ chrome.runtime.sendMessage({
 		},
 });
 ```
+
 ### Panggil fungsi, laksanakan panggilan
 
 Seterusnya, panggil fungsi yang baru anda buat dengan menambahkannya pada janji yang dikembalikan oleh C02Signal API:
@@ -131,6 +132,7 @@ function drawIcon(value) {
 	return context.getImageData(50, 50, 100, 100);
 }
 ```
+
 Dalam kod ini, anda menambahkan pendengar untuk sebarang mesej yang datang ke pengurus tugas backend. Sekiranya disebut 'updateIcon', maka kod seterusnya dijalankan, untuk menggambar ikon warna yang tepat menggunakan Canvas API.
 
 ✅ Anda akan mengetahui lebih lanjut mengenai Canvas API dalam [pelajaran Space Game](../../space-game/drawing-to-canvas/README.md).

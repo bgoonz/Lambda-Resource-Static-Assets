@@ -6,6 +6,6 @@ Identificare un sito web che si ritiene NON accessibile e creare un piano d'azio
 
 ## Rubrica
 
-| Criteri | Ottimo | Adeguato | Necessita miglioramento |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- | --------------------------- |
+| Criteri                 | Ottimo                                                                                                                                                            | Adeguato                   | Necessita miglioramento    |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- | -------------------------- |
 | rapporto dello studente | include paragrafi su come il sito è inadeguato, il report Lighthouse catturato come pdf, un elenco di dieci punti da migliorare, con dettagli su come migliorarlo | manca il 20% del richiesto | manca il 50% del richiesto |

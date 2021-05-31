@@ -20,6 +20,6 @@ Hier is een voorbeeldresultaat na het voltooien van de opdracht:
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                                                                                        | Voldoende                                                                                                                | Moet worden verbeterd                           |
-| -------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------|
+| Criteria | Voorbeeldig                                                                                                | Voldoende                                                                                                                            | Moet worden verbeterd                                 |
+| -------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------- |
 |          | Het toevoegen van een transactie wordt volledig geïmplementeerd volgens alle best practices uit de lessen. | Het toevoegen van een transactie is geïmplementeerd, maar volgt niet de best practices uit de lessen, of werkt slechts gedeeltelijk. | Het toevoegen van een transactie werkt helemaal niet. |

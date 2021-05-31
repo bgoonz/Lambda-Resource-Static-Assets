@@ -11,4 +11,4 @@ JavaScript è il linguaggio del web. In queste quattro lezioni, si impareranno l
 
 ### Crediti
 
-Queste lezioni sono state scritte con il  ♥️ da [Jasmine Greenaway](https://twitter.com/paladique), [Christopher Harrison](https://twitter.com/geektrainer) e [Chris Noring](https://twitter.com/chris_noring)
+Queste lezioni sono state scritte con il ♥️ da [Jasmine Greenaway](https://twitter.com/paladique), [Christopher Harrison](https://twitter.com/geektrainer) e [Chris Noring](https://twitter.com/chris_noring)

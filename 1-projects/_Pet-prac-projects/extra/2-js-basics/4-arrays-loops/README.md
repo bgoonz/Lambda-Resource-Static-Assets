@@ -1,9 +1,11 @@
 # JavaScript Basics: Arrays and Loops
 
 ![JavaScript Basics - Arrays](/sketchnotes/webdev101-js-arrays.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Pre-Lecture Quiz
+
 [Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/13)
 
 This lesson covers the basics of JavaScript, the language that provides interactivity on the web. In this lesson, you'll learn about arrays and loops, which are used to manipulate data.
@@ -11,6 +13,7 @@ This lesson covers the basics of JavaScript, the language that provides interact
 [![Arrays and Loops](https://img.youtube.com/vi/Q_CRM2lXXBg/0.jpg)](https://youtube.com/watch?v=Q_CRM2lXXBg "Arrays and Loops")
 
 > Click the image above for a video about arrays and loops.
+
 ## Arrays
 
 Working with data is a common task for any language, and it's a much easier task when data is organized in a structural format, such as arrays. With arrays, data is stored in a structure similar to a list. One major benefit of arrays is that you can store different types of data in one array.
@@ -30,7 +33,13 @@ The array values are assigned a unique value called the **index**, a whole numbe
 ✅ Does it surprise you that arrays start at the zero index? In some programming languages, indexes start at 1. There's an interesting history around this, which you can [read on Wikipedia](https://en.wikipedia.org/wiki/Zero-based_numbering).
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors[2]; //"Vanilla"
 ```
 
@@ -51,7 +60,13 @@ iceCreamFlavors[5] = "Cookie Dough"; //Added "Cookie Dough"
 To find out how many items are in an array, use the `length` property.
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors.length; //5
 ```
 
@@ -63,16 +78,13 @@ Loops allow for repetitive or **iterative** tasks, and can save a lot of time an
 
 ### For Loop
 
-The `for` loop requires 3 parts to iterate:
-    - `counter` A variable that is typically initialized with a number that counts the number of iterations.
-    - `condition` Expression that uses comparison operators to cause the loop to stop when `true`
-    - `iteration-expression` Runs at the end of each iteration, typically used to change the counter value
-  
+The `for` loop requires 3 parts to iterate: - `counter` A variable that is typically initialized with a number that counts the number of iterations. - `condition` Expression that uses comparison operators to cause the loop to stop when `true` - `iteration-expression` Runs at the end of each iteration, typically used to change the counter value
+
 ```javascript
-    //Counting up to 10
-    for (let i = 0; i < 10; i++) {
-        console.log(i);
-    }
+//Counting up to 10
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
 ```
 
 ✅ Run this code in a browser console. What happens when you make small changes to the counter, condition, or iteration expression? Can you make it run backwards, creating a countdown?
@@ -85,8 +97,8 @@ Unlike the syntax for the `for` loop, `while` loops only require a condition tha
 //Counting up to 10
 let i = 0;
 while (i < 10) {
- console.log(i);
- i++;
+  console.log(i);
+  i++;
 }
 ```
 
@@ -97,14 +109,20 @@ while (i < 10) {
 Arrays are often used with loops because most conditions require the length of the array to stop the loop, and the index can also be the counter value.
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 
 for (let i = 0; i < iceCreamFlavors.length; i++) {
   console.log(iceCreamFlavors[i]);
 } //Ends when all flavors are printed
 ```
 
-✅ Experiment with looping over an array of your own making in your browser's console. 
+✅ Experiment with looping over an array of your own making in your browser's console.
 
 ---
 
@@ -113,8 +131,8 @@ for (let i = 0; i < iceCreamFlavors.length; i++) {
 There are other ways of looping over arrays other than for and while loops. There are [forEach](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach), [for-of](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/for...of), and [map](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/map). Rewrite your array loop using one of these techniques.
 
 ## Post-Lecture Quiz
-[Post-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/14)
 
+[Post-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/14)
 
 ## Review & Self Study
 

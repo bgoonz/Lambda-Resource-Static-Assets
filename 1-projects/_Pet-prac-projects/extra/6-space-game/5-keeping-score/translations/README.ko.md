@@ -57,114 +57,114 @@ npm start
 
 1. `solution/assets/` 폴더에서 `your-work` 폴더로 **필요한 어셋을 복사합니다**; `life.png` 어셋을 추가합니다. window.onload 함수에 lifeImg를 추가합니다:
 
-    ```javascript
-    lifeImg = await loadTexture("assets/life.png");
-    ```
+   ```javascript
+   lifeImg = await loadTexture("assets/life.png");
+   ```
 
 1. 어셋의 배열에 `lifeImg`를 추가합니다:
 
-    ```javascript
-    let heroImg,
-    ...
-    lifeImg,
-    ...
-    eventEmitter = new EventEmitter();
-    ```
-  
-2. **변수를 추가합니다**. 총 점수(0)과 남은 생명(3)을 나타내는 코드를 추가하고, 이 점수를 화면에 출력합니다.
+   ```javascript
+   let heroImg,
+   ...
+   lifeImg,
+   ...
+   eventEmitter = new EventEmitter();
+   ```
 
-3. **`updateGameObjects()` 함수를 확장합니다**. `updateGameObjects()` 함수를 확장하여 적 충돌을 제어합니다:
+1. **변수를 추가합니다**. 총 점수(0)과 남은 생명(3)을 나타내는 코드를 추가하고, 이 점수를 화면에 출력합니다.
 
-    ```javascript
-    enemies.forEach(enemy => {
-        const heroRect = hero.rectFromGameObject();
-        if (intersectRect(heroRect, enemy.rectFromGameObject())) {
-          eventEmitter.emit(Messages.COLLISION_ENEMY_HERO, { enemy });
-        }
-      })
-    ```
+1. **`updateGameObjects()` 함수를 확장합니다**. `updateGameObjects()` 함수를 확장하여 적 충돌을 제어합니다:
 
-4. **`life`과 `points`를 추가하기**. 
+   ```javascript
+   enemies.forEach((enemy) => {
+     const heroRect = hero.rectFromGameObject();
+     if (intersectRect(heroRect, enemy.rectFromGameObject())) {
+       eventEmitter.emit(Messages.COLLISION_ENEMY_HERO, { enemy });
+     }
+   });
+   ```
+
+1. **`life`과 `points`를 추가하기**.
+
    1. **변수를 초기화합니다**. `Hero` 클래스의 `this.cooldown = 0` 아래에 생명과 점수를 설정합니다:
 
-        ```javascript
-        this.life = 3;
-        this.points = 0;
-        ```
+      ```javascript
+      this.life = 3;
+      this.points = 0;
+      ```
 
    1. **화면에 점수를 그립니다**. 이 값을 화면에 그립니다:
 
-        ```javascript
-        function drawLife() {
-          // TODO, 35, 27
-          const START_POS = canvas.width - 180;
-          for(let i=0; i < hero.life; i++ ) {
-            ctx.drawImage(
-              lifeImg, 
-              START_POS + (45 * (i+1) ), 
-              canvas.height - 37);
-          }
+      ```javascript
+      function drawLife() {
+        // TODO, 35, 27
+        const START_POS = canvas.width - 180;
+        for (let i = 0; i < hero.life; i++) {
+          ctx.drawImage(lifeImg, START_POS + 45 * (i + 1), canvas.height - 37);
         }
-        
-        function drawPoints() {
-          ctx.font = "30px Arial";
-          ctx.fillStyle = "red";
-          ctx.textAlign = "left";
-          drawText("Points: " + hero.points, 10, canvas.height-20);
-        }
-        
-        function drawText(message, x, y) {
-          ctx.fillText(message, x, y);
-        }
+      }
 
-        ```
+      function drawPoints() {
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "red";
+        ctx.textAlign = "left";
+        drawText("Points: " + hero.points, 10, canvas.height - 20);
+      }
+
+      function drawText(message, x, y) {
+        ctx.fillText(message, x, y);
+      }
+      ```
 
    1. **게임 루프에 메소드를 추가합니다**. `updateGameObjects()` 아래의 window.onload 함수에 다음 함수를 추가해야 합니다:
 
-        ```javascript
-        drawPoints();
-        drawLife();
-        ```
+      ```javascript
+      drawPoints();
+      drawLife();
+      ```
 
 1. **게임 규칙을 구현합니다**. 다음 게임 규칙을 구현합니다:
 
    1. **모든 영웅과 적의 충돌**에 대해 생명을 깍습니다.
-   
+
       깍기 위해서 `Hero` 클래스를 확장합니다:
 
-        ```javascript
-        decrementLife() {
-          this.life--;
-          if (this.life === 0) {
-            this.dead = true;
-          }
+      ```javascript
+      decrementLife() {
+        this.life--;
+        if (this.life === 0) {
+          this.dead = true;
         }
-        ```
+      }
+      ```
 
    2. **적을 공격하는 모든 레이저는**, 게임 점수 100점을 올립니다.
 
       올리기 위해서 `Hero` 클래스를 확장합니다:
-    
-        ```javascript
-          incrementPoints() {
-            this.points += 100;
-          }
-        ```
 
-        Collision Event Emitter에 다음 함수를 추가합니다:
+      ```javascript
+        incrementPoints() {
+          this.points += 100;
+        }
+      ```
 
-        ```javascript
-        eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-           first.dead = true;
-           second.dead = true;
-           hero.incrementPoints();
-        })
+      Collision Event Emitter에 다음 함수를 추가합니다:
 
-        eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
-           enemy.dead = true;
-           hero.decrementLife();
-        });
-        ```
+      ```javascript
+      eventEmitter.on(
+        Messages.COLLISION_ENEMY_LASER,
+        (_, { first, second }) => {
+          first.dead = true;
+          second.dead = true;
+          hero.incrementPoints();
+        }
+      );
+
+      eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
+        enemy.dead = true;
+        hero.decrementLife();
+      });
+      ```
 
 ✅ JavaScript/Canvas를 사용하여 만든 다른 게임을 찾으려면 약간 알아보세요. 공통된 특징은 무엇일까요?
 

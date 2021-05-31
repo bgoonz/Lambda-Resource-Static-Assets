@@ -6,6 +6,6 @@ De codebase voor deze extensie wordt compleet geleverd met stijlen, maar u hoeft
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                                    | Voldoende              | Moet worden verbeterd |
-| -------- | -------------------------------------------- | --------------------- | ----------------- |
-|          | Code wordt ingediend met functionele nieuwe stijlen | Styling is niet compleet | Stijlen zijn buggy  |
+| Criteria | Voorbeeldig                                         | Voldoende                | Moet worden verbeterd |
+| -------- | --------------------------------------------------- | ------------------------ | --------------------- |
+|          | Code wordt ingediend met functionele nieuwe stijlen | Styling is niet compleet | Stijlen zijn buggy    |

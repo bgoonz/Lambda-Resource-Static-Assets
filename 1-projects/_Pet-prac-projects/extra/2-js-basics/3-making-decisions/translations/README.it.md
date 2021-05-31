@@ -1,9 +1,11 @@
 # Nozioni di base su JavaScript: Prendere Decisioni
 
 ![Nozioni di base su JavaScript - Prendere decisioni](/sketchnotes/webdev101-js-decisions.png)
+
 > Sketchnote di [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Quiz Pre-Lezione
+
 [Quiz Pre-Lezione](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/11?loc=it)
 
 Prendere decisioni e controllare l'ordine in cui il proprio codice viene eseguito lo rende riutilizzabile e robusto. Questa sezione descrive la sintassi per il controllo del flusso di dati in JavaScript e il suo significato quando viene utilizzato con tipi di dato Booleani
@@ -17,7 +19,7 @@ I Booleani possono avere solo due valori: `true` (vero) o `false` (falso). I boo
 Si impostano i booleani come vero o falso in questo modo:
 
 `let myTrueBool = true`
-`let myFalseBool = false` 
+`let myFalseBool = false`
 
 ✅ I Booleani prendono il nome dal matematico, filosofo e logico inglese George Boole (1815–1864).
 
@@ -25,14 +27,14 @@ Si impostano i booleani come vero o falso in questo modo:
 
 Gli operatori vengono utilizzati per valutare condizioni effettuando confronti che creeranno un valore Booleano. Di seguito è riportato un elenco di operatori utilizzati di frequente.
 
-| Simbolo | Descrizione                                                                                                                                                                 | Esempio            |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
-| `<`     | **Minore di**: Confronta due valori e restituisce il tipo di dato booleano `true` se il valore sul lato sinistro è minore di quello del lato di destra                      | `5 < 6 // true`    |
-| `<=`    | **Minore di o uguale a**: Confronta due valori e restituisce il tipo di dato Booleano `true` se il valore sul lato sinistro è minore o uguale a quello di destra            | `5 <= 6 // true`   |
-| `>`     | **Maggiore di**: Confronta due valori e restituisce il tipo di dato Booleano `true` se il valore sul lato sinistro è maggiore di quello del lato destro                     | `5 > 6 // false`   |
-| `>=`    | **Maggiore di o uguale a**: Confronta due valori e restituisce il tipo di dato Booleano `true` se il valore sul lato sinistro è maggiore o uguale a quello del  lato destro | `5 >= 6 // false`  |
-| `===`   | **Uguaglianza rigorosa**: Confronta due valori e restituisce il tipo di dato Booleano `true` se i valori a destra e a sinistra sono uguali E sono lo stesso tipo di dato.   | `5 === 6 // false` |
-| `!==`   | **Disuguaglianza**: Confronta due valori e restituisce il valore Booleano opposto di quello che restituirebbe un operatore di uguaglianza rigorosa                          | `5! == 6 // true`  |
+| Simbolo | Descrizione                                                                                                                                                                | Esempio            |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `<`     | **Minore di**: Confronta due valori e restituisce il tipo di dato booleano `true` se il valore sul lato sinistro è minore di quello del lato di destra                     | `5 < 6 // true`    |
+| `<=`    | **Minore di o uguale a**: Confronta due valori e restituisce il tipo di dato Booleano `true` se il valore sul lato sinistro è minore o uguale a quello di destra           | `5 <= 6 // true`   |
+| `>`     | **Maggiore di**: Confronta due valori e restituisce il tipo di dato Booleano `true` se il valore sul lato sinistro è maggiore di quello del lato destro                    | `5 > 6 // false`   |
+| `>=`    | **Maggiore di o uguale a**: Confronta due valori e restituisce il tipo di dato Booleano `true` se il valore sul lato sinistro è maggiore o uguale a quello del lato destro | `5 >= 6 // false`  |
+| `===`   | **Uguaglianza rigorosa**: Confronta due valori e restituisce il tipo di dato Booleano `true` se i valori a destra e a sinistra sono uguali E sono lo stesso tipo di dato.  | `5 === 6 // false` |
+| `!==`   | **Disuguaglianza**: Confronta due valori e restituisce il valore Booleano opposto di quello che restituirebbe un operatore di uguaglianza rigorosa                         | `5! == 6 // true`  |
 
 ✅ Verificare le proprie conoscenze scrivendo alcuni confronti nella console del browser. I dati restituiti sorprendono?
 
@@ -41,8 +43,8 @@ Gli operatori vengono utilizzati per valutare condizioni effettuando confronti c
 L'istruzione if eseguirà il codice tra i suoi blocchi se la condizione è vera.
 
 ```javascript
-if (condition){
-    //Condition era vero. Verra eseguito il codice in questo blocco.
+if (condition) {
+  //Condition era vero. Verra eseguito il codice in questo blocco.
 }
 ```
 
@@ -52,9 +54,9 @@ Gli operatori logici vengono spesso utilizzati per formare la condizione.
 let currentMoney;
 let laptopPrice;
 
-if (currentMoney >= laptopPrice){
-    //Condition era vero. Verra eseguito il codice in questo blocco.
-    console.log("Getting a new laptop!");
+if (currentMoney >= laptopPrice) {
+  //Condition era vero. Verra eseguito il codice in questo blocco.
+  console.log("Getting a new laptop!");
 }
 ```
 
@@ -66,13 +68,12 @@ L 'istruzione `else` eseguirà il codice tra i suoi blocchi quando la condizione
 let currentMoney;
 let laptopPrice;
 
-if (currentMoney >= laptopPrice){
-    //Condizione era vero. Verra eseguito il codice in questo blocco.
-    console.log("Getting a new laptop!");
-}
-else{
-    //Condizione era falsa. Verra eseguito il codice in questo blocco.
-    console.log("Can't afford a new laptop, yet!");
+if (currentMoney >= laptopPrice) {
+  //Condizione era vero. Verra eseguito il codice in questo blocco.
+  console.log("Getting a new laptop!");
+} else {
+  //Condizione era falsa. Verra eseguito il codice in questo blocco.
+  console.log("Can't afford a new laptop, yet!");
 }
 ```
 
@@ -83,9 +84,9 @@ else{
 Le decisioni potrebbero richiedere più di un confronto e possono essere combinate con operatori logici per produrre un valore Booleano.
 
 | Simbolo | Descrizione                                                                                                  | Esempio                                                                    |
-| ------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| ------- | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | --- | ------------------------------------------------------------- |
 | `&&`    | **AND logico**: Confronta due espressioni Booleane. Restituisce vero **solo** se entrambe le parti sono vere | `(5 > 6) && (5 < 6) // Un lato è falso, l'altro è vero. Restituisce false` |
-| `\|\|`  | **OR logico**: Confronta due espressioni Booleane. Restituisce vero se almeno una parte è vera               | `(5 > 6) || (5 < 6) // Un lato è falso, l'altro è vero. Restituisce true`  |
+| `\|\|`  | **OR logico**: Confronta due espressioni Booleane. Restituisce vero se almeno una parte è vera               | `(5 > 6)                                                                   |     | (5 < 6) // Un lato è falso, l'altro è vero. Restituisce true` |
 | `!`     | **NOT logico**: Restituisce il valore opposto di un'espressione Booleana                                     | `!(5 > 6) // 5 non è maggiore di 6, ma "!" restituirà true`                |
 
 ## Condizioni e Decisioni con Operatori Logici
@@ -95,15 +96,14 @@ Gli operatori logici possono essere utilizzati per formare condizioni nelle istr
 ```javascript
 let currentMoney;
 let laptopPrice;
-let laptopDiscountPrice = laptopPrice - (laptopPrice * .20) //Laptop price at 20 percent off
+let laptopDiscountPrice = laptopPrice - laptopPrice * 0.2; //Laptop price at 20 percent off
 
-if (currentMoney >= laptopPrice || currentMoney >= laptopDiscountPrice){
-    //Condizione era vero. Verra eseguito il codice in questo blocco.
-    console.log("Getting a new laptop!");
-}
-else {
-    //Condizion era falsa. Verra eseguito il codice in questo blocco.
-    console.log("Can't afford a new laptop, yet!");
+if (currentMoney >= laptopPrice || currentMoney >= laptopDiscountPrice) {
+  //Condizione era vero. Verra eseguito il codice in questo blocco.
+  console.log("Getting a new laptop!");
+} else {
+  //Condizion era falsa. Verra eseguito il codice in questo blocco.
+  console.log("Can't afford a new laptop, yet!");
 }
 ```
 
@@ -131,16 +131,16 @@ Di seguito è riportato un esempio più tangibile:
 
 ```javascript
 let firstNumber = 20;
-let secondNumber = 10
-let biggestNumber = firstNumber > secondNumber ? firstNumber: secondNumber;
+let secondNumber = 10;
+let biggestNumber = firstNumber > secondNumber ? firstNumber : secondNumber;
 ```
 
 ✅ Ci si prenda un minuto per leggere questo codice alcune volte. Si capisce come lavorano questi operatori?
 
 Quanto sopra afferma che
 
-- se `firstNumber` è maggiore di `secondNumber` 
-- allora assegna `firstNumber` a `biggestNumber` 
+- se `firstNumber` è maggiore di `secondNumber`
+- allora assegna `firstNumber` a `biggestNumber`
 - altrimenti assegna `secondNumber`.
 
 L'espressione ternaria è solo un modo compatto per scrivere il codice seguente:
@@ -161,7 +161,9 @@ if (firstNumber > secondNumber) {
 Creare un programma che viene scritto prima con operatori logici, quindi riscriverlo utilizzando un'espressione ternaria. Qual è la propria sintassi preferita?
 
 ---
+
 ## Quiz Post-Lezione
+
 [Quiz post-lezione](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/12?loc=it)
 
 ## Revisione e Auto Apprendimento

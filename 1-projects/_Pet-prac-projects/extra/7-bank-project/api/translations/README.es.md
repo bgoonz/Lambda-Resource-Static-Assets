@@ -22,11 +22,11 @@ El servidor debería comenzar a escuchar en el puerto `5000`.
 
 ## API
 
-Ruta                                         | Descripción
----------------------------------------------|------------------------------------
-GET    /api/                                 | Obtener información del servidor
-POST   /api/accounts/                        | Cree una cuenta, por ejemplo: `{ user: 'Yohan', description: 'My budget', currency: 'EUR', balance: 100 }`
-GET    /api/accounts/:user                   | Obtener todos los datos de la cuenta especificada
-DELETE /api/accounts/:user                   | Eliminar cuenta especificada
-POST   /api/accounts/:user/transactions      | Agregar una transacción, por ejemplo: `{ date: '2020-07-23T18:25:43.511Z', object: 'Bought a book', amount: -20 }`
-DELETE  /api/accounts/:user/transactions/:id | Eliminar transacción especificada
+| Ruta                                        | Descripción                                                                                                        |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| GET /api/                                   | Obtener información del servidor                                                                                   |
+| POST /api/accounts/                         | Cree una cuenta, por ejemplo: `{ user: 'Yohan', description: 'My budget', currency: 'EUR', balance: 100 }`         |
+| GET /api/accounts/:user                     | Obtener todos los datos de la cuenta especificada                                                                  |
+| DELETE /api/accounts/:user                  | Eliminar cuenta especificada                                                                                       |
+| POST /api/accounts/:user/transactions       | Agregar una transacción, por ejemplo: `{ date: '2020-07-23T18:25:43.511Z', object: 'Bought a book', amount: -20 }` |
+| DELETE /api/accounts/:user/transactions/:id | Eliminar transacción especificada                                                                                  |

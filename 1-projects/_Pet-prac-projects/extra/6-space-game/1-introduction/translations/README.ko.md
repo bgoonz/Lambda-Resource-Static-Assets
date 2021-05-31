@@ -8,7 +8,7 @@
 
 ### 게임 개발의 상속과 구성
 
-이전 강의에서는, 프로젝트의 범위가 매우 작았으므로, 만든 앱의 디자인 아키텍처에 대해 걱정할 필요가 없었습니다. 그러나, 애플리케이션의 크기와 범위가 커지면, 아키텍처 결정이 더 힘듭니다. JavaScript에서 더 큰 응용 프로그램을 만드는 데는 두 가지 주요 방식이 있습니다: *composition* 또는 *inheritance*. 둘 다 장점과 단점이 존재하지만 게임의 맥락에서 설명할 것 입니다.
+이전 강의에서는, 프로젝트의 범위가 매우 작았으므로, 만든 앱의 디자인 아키텍처에 대해 걱정할 필요가 없었습니다. 그러나, 애플리케이션의 크기와 범위가 커지면, 아키텍처 결정이 더 힘듭니다. JavaScript에서 더 큰 응용 프로그램을 만드는 데는 두 가지 주요 방식이 있습니다: _composition_ 또는 _inheritance_. 둘 다 장점과 단점이 존재하지만 게임의 맥락에서 설명할 것 입니다.
 
 ✅ 가장 유명한 프로그래밍 책 중에는 [design patterns](https://en.wikipedia.org/wiki/Design_Patterns)과 관련이 있습니다.
 
@@ -34,7 +34,6 @@
 코드를 통해 표현되는, 게임 객체는 일반적으로 다음과 같습니다:
 
 ```javascript
-
 //set up the class GameObject
 class GameObject {
   constructor(x, y, type) {
@@ -46,11 +45,11 @@ class GameObject {
 
 //this class will extend the GameObject's inherent class properties
 class Movable extends GameObject {
-  constructor(x,y, type) {
-    super(x,y, type)
+  constructor(x, y, type) {
+    super(x, y, type);
   }
 
-//this movable object can be moved on the screen
+  //this movable object can be moved on the screen
   moveTo(x, y) {
     this.x = x;
     this.y = y;
@@ -59,21 +58,21 @@ class Movable extends GameObject {
 
 //this is a specific class that extends the Movable class, so it can take advantage of all the properties that it inherits
 class Hero extends Movable {
-  constructor(x,y) {
-    super(x,y, 'Hero')
+  constructor(x, y) {
+    super(x, y, "Hero");
   }
 }
 
 //this class, on the other hand, only inherits the GameObject properties
 class Tree extends GameObject {
-  constructor(x,y) {
-    super(x,y, 'Tree')
+  constructor(x, y) {
+    super(x, y, "Tree");
   }
 }
 
 //a hero can move...
 const hero = new Hero();
-hero.moveTo(5,5);
+hero.moveTo(5, 5);
 
 //but a tree cannot
 const tree = new Tree();
@@ -83,7 +82,7 @@ const tree = new Tree();
 
 **Composition**
 
-객체 상속을 처리하는 다른 방법으로는 *Composition* 을 사용하는 것입니다. 그러면, 객체는 다음과 같이 동작을 표현합니다:
+객체 상속을 처리하는 다른 방법으로는 _Composition_ 을 사용하는 것입니다. 그러면, 객체는 다음과 같이 동작을 표현합니다:
 
 ```javascript
 //create a constant gameObject
@@ -125,7 +124,7 @@ function createStatic(x, y, type) {
 const hero = createHero(10,10);
 hero.moveTo(5,5);
 //and create a static tree which only stands around
-const tree = createStatic(0,0, 'Tree'); 
+const tree = createStatic(0,0, 'Tree');
 ```
 
 **어떤 패턴을 사용해야 하나요?**
@@ -144,7 +143,7 @@ const tree = createStatic(0,0, 'Tree');
 
 - **message**: 메시지는 일반적으로 선택적 payload (명확한 메시지 내용 데이터 조각)와 함께 제공되는 텍스트 문자열입니다. 게임의 일반적인 메시지는 `KEY_PRESSED_ENTER` 일 수 있습니다.
 - **publisher**: 이 요소는 메시지를 *publishes*하고 모든 구독자에게 보냅니다.
-- **subscriber**: 이 요소는 특정 메시지를 *listens* 하고 메시지를 수신한 결과로 레이저 발사와 같은 일부 작업을 수행합니다.
+- **subscriber**: 이 요소는 특정 메시지를 _listens_ 하고 메시지를 수신한 결과로 레이저 발사와 같은 일부 작업을 수행합니다.
 
 implementation은 크기가 매우 작지만 매우 강한 패턴입니다. 구현 방법은 다음과 같습니다:
 
@@ -154,21 +153,20 @@ class EventEmitter {
   constructor() {
     this.listeners = {};
   }
-//when a message is received, let the listener to handle its payload
+  //when a message is received, let the listener to handle its payload
   on(message, listener) {
     if (!this.listeners[message]) {
       this.listeners[message] = [];
     }
     this.listeners[message].push(listener);
   }
-//when a message is sent, send it to a listener with some payload
+  //when a message is sent, send it to a listener with some payload
   emit(message, payload = null) {
     if (this.listeners[message]) {
-      this.listeners[message].forEach(l => l(message, payload))
+      this.listeners[message].forEach((l) => l(message, payload));
     }
   }
 }
-
 ```
 
 위의 코드를 사용하기 위해서 매우 작은 implementation을 만들 수 있습니다:
@@ -176,21 +174,21 @@ class EventEmitter {
 ```javascript
 //set up a message structure
 const Messages = {
-  HERO_MOVE_LEFT: 'HERO_MOVE_LEFT'
+  HERO_MOVE_LEFT: "HERO_MOVE_LEFT",
 };
 //invoke the eventEmitter you set up above
 const eventEmitter = new EventEmitter();
 //set up a hero
-const hero = createHero(0,0);
+const hero = createHero(0, 0);
 //let the eventEmitter know to watch for messages pertaining to the hero moving left, and act on it
 eventEmitter.on(Messages.HERO_MOVE_LEFT, () => {
-  hero.move(5,0);
+  hero.move(5, 0);
 });
 
 //set up the window to listen for the keyup event, specifically if the left arrow is hit, emit a message to move the hero left
-window.addEventListener('keyup', (evt) => {
-  if (evt.key === 'ArrowLeft') {
-    eventEmitter.emit(Messages.HERO_MOVE_LEFT)
+window.addEventListener("keyup", (evt) => {
+  if (evt.key === "ArrowLeft") {
+    eventEmitter.emit(Messages.HERO_MOVE_LEFT);
   }
 });
 ```
@@ -199,7 +197,7 @@ window.addEventListener('keyup', (evt) => {
 
 ```javascript
 eventEmitter.on(Messages.HERO_MOVE_LEFT, () => {
-  hero.move(5,0);
+  hero.move(5, 0);
 });
 ```
 

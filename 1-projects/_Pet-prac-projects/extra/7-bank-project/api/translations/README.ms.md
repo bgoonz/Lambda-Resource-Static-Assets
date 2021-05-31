@@ -22,11 +22,11 @@ Pelayan harus mula mendengar di port `5000`.
 
 ## Perincian API
 
-Route                                        | Description
----------------------------------------------|------------------------------------
-GET    /api/                                 | Dapat server info
-POST   /api/accounts/                        | Daftar akaun, ex: `{ user: 'Yohan', description: 'My budget', currency: 'EUR', balance: 100 }`
-GET    /api/accounts/:user                   | Dapatkan semua data untuk akaun yang ditentukan
-DELETE /api/accounts/:user                   | Keluarkan akaun yang ditentukan
-POST   /api/accounts/:user/transactions      | Tambahkan transaksi, ex: `{ date: '2020-07-23T18:25:43.511Z', object: 'Bought a book', amount: -20 }`
-DELETE  /api/accounts/:user/transactions/:id | Keluarkan transaksi yang ditentukan
+| Route                                       | Description                                                                                           |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| GET /api/                                   | Dapat server info                                                                                     |
+| POST /api/accounts/                         | Daftar akaun, ex: `{ user: 'Yohan', description: 'My budget', currency: 'EUR', balance: 100 }`        |
+| GET /api/accounts/:user                     | Dapatkan semua data untuk akaun yang ditentukan                                                       |
+| DELETE /api/accounts/:user                  | Keluarkan akaun yang ditentukan                                                                       |
+| POST /api/accounts/:user/transactions       | Tambahkan transaksi, ex: `{ date: '2020-07-23T18:25:43.511Z', object: 'Bought a book', amount: -20 }` |
+| DELETE /api/accounts/:user/transactions/:id | Keluarkan transaksi yang ditentukan                                                                   |

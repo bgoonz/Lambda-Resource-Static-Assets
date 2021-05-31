@@ -14,7 +14,6 @@ En este momento, ha creado el HTML para el formulario y los resultados `<div>` p
 
 Trabajando en su archivo `index.js`, comience creando algunas variables `const` para contener los valores asociados con varios campos:
 
-
 ```JavaScript
 // form fields
 const form = document.querySelector('.form-data');
@@ -82,6 +81,7 @@ function reset(e) {
 }
 
 ```
+
 En esta función, hay una lógica interesante. Al leerlo, ¿puedes ver lo que sucede?
 
 - Se configuran dos `const` para verificar si el usuario ha almacenado una clave API y un código de región en el almacenamiento local.
@@ -117,6 +117,7 @@ function handleSubmit(e) {
 	setUpUser(apiKey.value, region.value);
 }
 ```
+
 ✅ Refresque su memoria: el HTML que configuró en la última lección tiene dos campos de entrada cuyos `values` se capturan mediante la `const` que configuró en la parte superior del archivo, y ambos son `required` para que el navegador detenga a los usuarios de ingresar valores nulos.
 
 ### 5. Configurar el usuario
@@ -134,6 +135,7 @@ function setUpUser(apiKey, regionName) {
 	displayCarbonUsage(apiKey, regionName);
 }
 ```
+
 Esta función establece un mensaje de carga para mostrar mientras se llama a la API. ¡En este punto, ha llegado a crear la función más importante de esta extensión de navegador!
 
 ### 6. Visualización del uso de carbono
@@ -201,7 +203,6 @@ Esta es una gran función. ¿Que está pasando aqui?
 
 🚀 Desafío: hemos discutido varios tipos de API hasta ahora en estas lecciones. Elija una API web e investigue en profundidad lo que ofrece. Por ejemplo, eche un vistazo a las API disponibles en los navegadores, como la [API HTML de arrastrar y soltar](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API). En tu opinión, ¿qué hace que una API sea excelente?
 
-
 ## [Post-lecture prueba](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/26)
 
 ## Revisión y autoestudio
@@ -209,4 +210,3 @@ Esta es una gran función. ¿Que está pasando aqui?
 Aprendió sobre LocalStorage y las API en esta lección, ambos muy útiles para el desarrollador web profesional. ¿Puedes pensar en cómo funcionan estas dos cosas juntas? Piense en cómo diseñaría un sitio web que almacenaría elementos para ser utilizados por una API.
 
 **Tarea**: [Adopte una API](assignment.md)
-

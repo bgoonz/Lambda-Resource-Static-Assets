@@ -6,6 +6,6 @@ Pangkalan kode untuk peluasan ini dilengkapi dengan gaya, tetapi anda tidak perl
 
 ## Rubrik
 
-| Kriteria | Contoh                                    | Mencukupi              | Usaha Lagi |
-| -------- | -------------------------------------------- | --------------------- | ----------------- |
-|          | Kod dihantar dengan gaya baharu yang berfungsi | Gaya tidak lengkap | Gaya mempunyai pepijat  |
+| Kriteria | Contoh                                         | Mencukupi          | Usaha Lagi             |
+| -------- | ---------------------------------------------- | ------------------ | ---------------------- |
+|          | Kod dihantar dengan gaya baharu yang berfungsi | Gaya tidak lengkap | Gaya mempunyai pepijat |

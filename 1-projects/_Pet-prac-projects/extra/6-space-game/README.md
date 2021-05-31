@@ -17,15 +17,15 @@ In these six lessons you will learn the following:
 ## Overview
 
 - Theory
-   - [Introduction to building games with JavaScript](1-introduction/README.md)
+  - [Introduction to building games with JavaScript](1-introduction/README.md)
 - Practice
-   - [Drawing to canvas](2-drawing-to-canvas/README.md)
-   - [Moving elements around the screen](3-moving-elements-around/README.md)
-   - [Collision detection](4-collision-detection/README.md)
-   - [Keeping score](5-keeping-score/README.md)
-   - [Ending and restarting the game](6-end-condition/README.md)
+  - [Drawing to canvas](2-drawing-to-canvas/README.md)
+  - [Moving elements around the screen](3-moving-elements-around/README.md)
+  - [Collision detection](4-collision-detection/README.md)
+  - [Keeping score](5-keeping-score/README.md)
+  - [Ending and restarting the game](6-end-condition/README.md)
 
 ## Credits
 
-The assets used for this came from https://www.kenney.nl/. 
-If you are into building games, these are some seriously good assets, a lot is free and some are paid. 
+The assets used for this came from https://www.kenney.nl/.
+If you are into building games, these are some seriously good assets, a lot is free and some are paid.

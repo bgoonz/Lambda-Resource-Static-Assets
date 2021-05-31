@@ -1,6 +1,7 @@
 # Projek Pelanjutan Penyemak Imbas Bahagian 1: Semua mengenai Penyemak Imbas
 
 ![Sketchnote penyemak imbas](/sketchnotes/browser.jpg)
+
 > Sketchnote karya [Wassim Chegham](https://dev.to/wassimchegham/ever-wondered-what-happens-when-you-type-in-a-url-in-an-address-bar-in-a-browser-3dob)
 
 ## Kuiz Pra Kuliah
@@ -20,6 +21,7 @@ Tetapi apakah sebenarnya penyemak imbas itu? Ini adalah aplikasi perisian yang m
 ✅ Sejarah sedikit: penyemak imbas pertama dipanggil 'WorldWideWeb' dan dicipta oleh Sir Timothy Berners-Lee pada tahun 1990.
 
 ![penyemak imbas awal](../images/earlybrowsers.jpg)
+
 > Beberapa penyemak imbas awal, melalui [Karen McGrane](https://www.slideshare.net/KMcGrane/week-4-ixd-history-personal-computing)
 
 Apabila pengguna tersambung ke internet menggunakan alamat URL (Uniform Resource Locator), biasanya menggunakan Hypertext Transfer Protocol melalui alamat `http` atau `https`, penyemak imbas berkomunikasi dengan pelayan web dan mengambil halaman web.
@@ -74,12 +76,12 @@ CO2 Signal's API.
 Luangkan masa sebentar untuk melihat pangkalan kode:
 
 dist
-    -|manifest.json (lalai ditetapkan di sini)
-    -|index.html (front-end HTML markup di sini)
-    -|background.js (latar belakang JS di sini)
-    -|main.js (membina JS)
+-|manifest.json (lalai ditetapkan di sini)
+-|index.html (front-end HTML markup di sini)
+-|background.js (latar belakang JS di sini)
+-|main.js (membina JS)
 src
-    -|index.js (kod JS anda ada di sini)
+-|index.js (kod JS anda ada di sini)
 
 ✅ Setelah anda mempunyai kunci API dan kod Wilayah yang berguna, simpan di suatu tempat dalam nota untuk penggunaan masa depan.
 
@@ -111,8 +113,9 @@ Dalam folder `/ dist`, anda akan membina borang dan kawasan hasil. Dalam fail `i
 		<input type="text" id="api" required class="api-key" />
 	</div>
 	<button class="search-btn">Hantar</button>
-</form>	
+</form>
 ```
+
 Ini adalah bentuk di mana maklumat yang anda simpan akan dimasukkan dan disimpan ke simpanan tempatan.
 
 Seterusnya, buat kawasan hasil; di bawah tag borang akhir, tambahkan beberapa divs:
@@ -130,6 +133,7 @@ Seterusnya, buat kawasan hasil; di bawah tag borang akhir, tambahkan beberapa di
 	<button class="clear-btn">Tukar wilayah</button>
 </div>
 ```
+
 Pada ketika ini, anda boleh mencuba binaan. Pastikan memasang pergantungan pakej pelanjutan ini:
 
 ```
@@ -165,4 +169,3 @@ Dalam pelajaran ini anda belajar sedikit mengenai sejarah penyemak imbas web; am
 ## Tugasan
 
 [Mengayakan semula penlanjut penyemak imbas](assignment.ms.md)
-

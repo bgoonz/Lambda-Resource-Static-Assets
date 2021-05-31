@@ -11,13 +11,13 @@ Games aren't much fun until you have aliens running around on screen! In this ga
 
 So how do we move things on a screen? It's all about cartesian coordinates: we change the location (x,y) of the object and then redraw the screen.
 
-Typically you need the following steps to accomplish *movement* on a screen:
+Typically you need the following steps to accomplish _movement_ on a screen:
 
 1. **Set a new location** for an object; this is needed to perceive the object as having moved.
 2. **Clear the screen**, the screen needs to be cleared in between draws. We can clear it by drawing a rectangle that we fill with a background color.
 3. **Redraw object** at new location. By doing this we finally accomplish moving the object from one location to the other.
 
- Here's what it can look like in code:
+Here's what it can look like in code:
 
 ```javascript
 //set the hero's location
@@ -25,7 +25,7 @@ hero.x += 5;
 // clear the rectangle that hosts the hero
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 // redraw the game background and hero
-ctx.fillRect(0, 0, canvas.width, canvas.height)
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 ctx.fillStyle = "black";
 ctx.drawImage(heroImg, hero.x, hero.y);
 ```
@@ -34,19 +34,19 @@ ctx.drawImage(heroImg, hero.x, hero.y);
 
 ## Handle keyboard events
 
-You handle events by attaching specific events to code. Keyboard events are triggered on the whole window whereas mouse events like a `click` can be connected to clicking a specific element. We will use keyboard events throughout this project. 
+You handle events by attaching specific events to code. Keyboard events are triggered on the whole window whereas mouse events like a `click` can be connected to clicking a specific element. We will use keyboard events throughout this project.
 
-To handle an event you need to use the window's `addEventListener()` method and provide it with two input parameters. The first parameter is the name of the event, for example `keyup`. The second parameter is the function that should be invoked as a result of the event taking place.  
+To handle an event you need to use the window's `addEventListener()` method and provide it with two input parameters. The first parameter is the name of the event, for example `keyup`. The second parameter is the function that should be invoked as a result of the event taking place.
 
 Here's an example:
 
 ```javascript
-window.addEventListener('keyup', (evt) => {
+window.addEventListener("keyup", (evt) => {
   // `evt.key` = string representation of the key
-  if (evt.key === 'ArrowUp') {
+  if (evt.key === "ArrowUp") {
     // do something
   }
-})
+});
 ```
 
 For key events there are two properties on the event you can use to see what key was pressed:
@@ -58,7 +58,7 @@ For key events there are two properties on the event you can use to see what key
 
 ### Special keys: a caveat
 
-There are some *special* keys that affect the window. That means that if you are listening to a `keyup` event and you use these special keys to move your hero it will also perform horizontal scrolling. For that reason you might want to *shut-off* this built-in browser behavior as you build out your game. You need code like this:
+There are some _special_ keys that affect the window. That means that if you are listening to a `keyup` event and you use these special keys to move your hero it will also perform horizontal scrolling. For that reason you might want to _shut-off_ this built-in browser behavior as you build out your game. You need code like this:
 
 ```javascript
 let onKeyDown = function (e) {
@@ -76,10 +76,10 @@ let onKeyDown = function (e) {
   }
 };
 
-window.addEventListener('keydown', onKeyDown);
+window.addEventListener("keydown", onKeyDown);
 ```
 
-The above code will ensure that arrow-keys and the space key have their *default* behavior shut off. The *shut-off* mechanism happens when we call `e.preventDefault()`.
+The above code will ensure that arrow-keys and the space key have their _default_ behavior shut off. The _shut-off_ mechanism happens when we call `e.preventDefault()`.
 
 ## Game induced movement
 
@@ -89,7 +89,7 @@ We can make things move by themselves by using timers such as the `setTimeout()`
 let id = setInterval(() => {
   //move the enemy on the y axis
   enemy.y += 10;
-})
+});
 ```
 
 ## The game loop
@@ -99,22 +99,25 @@ The game loop is a concept that is essentially a function that is invoked at reg
 Here's what a game loop can typically look like, expressed in code:
 
 ```javascript
-let gameLoopId = setInterval(() =>
-  function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    drawHero();
-    drawEnemies();
-    drawStaticObjects();
-}, 200);
+let gameLoopId = setInterval(
+  () =>
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      drawHero();
+      drawEnemies();
+      drawStaticObjects();
+    },
+  200
+);
 ```
 
 The above loop is invoked every `200` milliseconds to redraw the canvas. You have the ability to choose the best interval that makes sense for your game.
 
 ## Continuing the Space Game
 
-You will take the existing code and extend it. Either start with the code that you completed during part I or use the code in [Part II- starter](your-work). 
+You will take the existing code and extend it. Either start with the code that you completed during part I or use the code in [Part II- starter](your-work).
 
 - **Moving the hero**: you will add code to ensure you can move the hero using the arrow keys.
 - **Move enemies**: you will also need to add code to ensure the enemies move from top to bottom at a given rate.
@@ -143,76 +146,75 @@ The above will start a HTTP Server on address `http://localhost:5000`. Open up a
 
 ### Add code
 
-1. **Add dedicated objects** for `hero` and `enemy` and `game object`, they should have `x` and `y` properties. (Remember the portion on [Inheritance or composition](../README.md) ). 
+1. **Add dedicated objects** for `hero` and `enemy` and `game object`, they should have `x` and `y` properties. (Remember the portion on [Inheritance or composition](../README.md) ).
 
-   *HINT* `game object` should be the one with `x` and `y` and the ability to draw itself to a canvas.
+   _HINT_ `game object` should be the one with `x` and `y` and the ability to draw itself to a canvas.
 
-   >tip: start by adding a new GameObject class with its constructor delineated as below, and then draw it to the canvas:
-  
-    ```javascript
-        
-    class GameObject {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.dead = false;
-        this.type = "";
-        this.width = 0;
-        this.height = 0;
-        this.img = undefined;
-      }
-    
-      draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-      }
-    }
-    ```
+   > tip: start by adding a new GameObject class with its constructor delineated as below, and then draw it to the canvas:
 
-    Now, extend this GameObject to create the Hero and Enemy.
-    
-    ```javascript
-    class Hero extends GameObject {
-      constructor(x, y) {
-        ...it needs an x, y, type, and speed
-      }
-    }
-    ```
+   ```javascript
+   class GameObject {
+     constructor(x, y) {
+       this.x = x;
+       this.y = y;
+       this.dead = false;
+       this.type = "";
+       this.width = 0;
+       this.height = 0;
+       this.img = undefined;
+     }
 
-    ```javascript
-    class Enemy extends GameObject {
-      constructor(x, y) {
-        super(x, y);
-        (this.width = 98), (this.height = 50);
-        this.type = "Enemy";
-        let id = setInterval(() => {
-          if (this.y < canvas.height - this.height) {
-            this.y += 5;
-          } else {
-            console.log('Stopped at', this.y)
-            clearInterval(id);
-          }
-        }, 300)
-      }
-    }
-    ```
+     draw(ctx) {
+       ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+     }
+   }
+   ```
+
+   Now, extend this GameObject to create the Hero and Enemy.
+
+   ```javascript
+   class Hero extends GameObject {
+     constructor(x, y) {
+       ...it needs an x, y, type, and speed
+     }
+   }
+   ```
+
+   ```javascript
+   class Enemy extends GameObject {
+     constructor(x, y) {
+       super(x, y);
+       (this.width = 98), (this.height = 50);
+       this.type = "Enemy";
+       let id = setInterval(() => {
+         if (this.y < canvas.height - this.height) {
+           this.y += 5;
+         } else {
+           console.log("Stopped at", this.y);
+           clearInterval(id);
+         }
+       }, 300);
+     }
+   }
+   ```
 
 2. **Add key-event handlers** to handle key navigation (move hero up/down left/right)
 
-   *REMEMBER* it's a cartesian system, top-left is `0,0`. Also remember to add code to stop *default behavior*
+   _REMEMBER_ it's a cartesian system, top-left is `0,0`. Also remember to add code to stop _default behavior_
 
-   >tip: create your onKeyDown function and attach it to the window:
+   > tip: create your onKeyDown function and attach it to the window:
 
    ```javascript
     let onKeyDown = function (e) {
-	      console.log(e.keyCode);
-	        ...add the code from the lesson above to stop default behavior
-	      }
+         console.log(e.keyCode);
+           ...add the code from the lesson above to stop default behavior
+         }
     };
 
     window.addEventListener("keydown", onKeyDown);
    ```
-    
-   Check your browser console at this point, and watch the keystrokes being logged. 
+
+   Check your browser console at this point, and watch the keystrokes being logged.
 
 3. **Implement** the [Pub sub pattern](../README.md), this will keep your code clean as you follow the remaining parts.
 
@@ -220,154 +222,151 @@ The above will start a HTTP Server on address `http://localhost:5000`. Open up a
 
    1. **Add an event listener** on the window:
 
-       ```javascript
-        window.addEventListener("keyup", (evt) => {
-          if (evt.key === "ArrowUp") {
-            eventEmitter.emit(Messages.KEY_EVENT_UP);
-          } else if (evt.key === "ArrowDown") {
-            eventEmitter.emit(Messages.KEY_EVENT_DOWN);
-          } else if (evt.key === "ArrowLeft") {
-            eventEmitter.emit(Messages.KEY_EVENT_LEFT);
-          } else if (evt.key === "ArrowRight") {
-            eventEmitter.emit(Messages.KEY_EVENT_RIGHT);
-          }
-        });
-        ```
+      ```javascript
+      window.addEventListener("keyup", (evt) => {
+        if (evt.key === "ArrowUp") {
+          eventEmitter.emit(Messages.KEY_EVENT_UP);
+        } else if (evt.key === "ArrowDown") {
+          eventEmitter.emit(Messages.KEY_EVENT_DOWN);
+        } else if (evt.key === "ArrowLeft") {
+          eventEmitter.emit(Messages.KEY_EVENT_LEFT);
+        } else if (evt.key === "ArrowRight") {
+          eventEmitter.emit(Messages.KEY_EVENT_RIGHT);
+        }
+      });
+      ```
 
-    1. **Create an EventEmitter class** to publish and subscribe to messages:
+   1. **Create an EventEmitter class** to publish and subscribe to messages:
 
-        ```javascript
-        class EventEmitter {
-          constructor() {
-            this.listeners = {};
+      ```javascript
+      class EventEmitter {
+        constructor() {
+          this.listeners = {};
+        }
+
+        on(message, listener) {
+          if (!this.listeners[message]) {
+            this.listeners[message] = [];
           }
-        
-          on(message, listener) {
-            if (!this.listeners[message]) {
-              this.listeners[message] = [];
-            }
-            this.listeners[message].push(listener);
-          }
-        
-          emit(message, payload = null) {
-            if (this.listeners[message]) {
-              this.listeners[message].forEach((l) => l(message, payload));
-            }
+          this.listeners[message].push(listener);
+        }
+
+        emit(message, payload = null) {
+          if (this.listeners[message]) {
+            this.listeners[message].forEach((l) => l(message, payload));
           }
         }
-        ```
+      }
+      ```
 
-    1. **Add constants** and set up the EventEmitter:
+   1. **Add constants** and set up the EventEmitter:
 
-        ```javascript
-        const Messages = {
-          KEY_EVENT_UP: "KEY_EVENT_UP",
-          KEY_EVENT_DOWN: "KEY_EVENT_DOWN",
-          KEY_EVENT_LEFT: "KEY_EVENT_LEFT",
-          KEY_EVENT_RIGHT: "KEY_EVENT_RIGHT",
-        };
-        
-        let heroImg, 
-            enemyImg, 
-            laserImg,
-            canvas, ctx, 
-            gameObjects = [], 
-            hero, 
-            eventEmitter = new EventEmitter();
-        ```
+      ```javascript
+      const Messages = {
+        KEY_EVENT_UP: "KEY_EVENT_UP",
+        KEY_EVENT_DOWN: "KEY_EVENT_DOWN",
+        KEY_EVENT_LEFT: "KEY_EVENT_LEFT",
+        KEY_EVENT_RIGHT: "KEY_EVENT_RIGHT",
+      };
 
-    1. **Initialize the game**
+      let heroImg,
+        enemyImg,
+        laserImg,
+        canvas,
+        ctx,
+        gameObjects = [],
+        hero,
+        eventEmitter = new EventEmitter();
+      ```
 
-    ```javascript
-    function initGame() {
-      gameObjects = [];
-      createEnemies();
-      createHero();
-    
-      eventEmitter.on(Messages.KEY_EVENT_UP, () => {
-        hero.y -=5 ;
-      })
-    
-      eventEmitter.on(Messages.KEY_EVENT_DOWN, () => {
-        hero.y += 5;
-      });
-    
-      eventEmitter.on(Messages.KEY_EVENT_LEFT, () => {
-        hero.x -= 5;
-      });
-    
-      eventEmitter.on(Messages.KEY_EVENT_RIGHT, () => {
-        hero.x += 5;
-      });
-    }
-    ```
+   1. **Initialize the game**
 
-1. **Setup the game loop**
+   ```javascript
+   function initGame() {
+     gameObjects = [];
+     createEnemies();
+     createHero();
+
+     eventEmitter.on(Messages.KEY_EVENT_UP, () => {
+       hero.y -= 5;
+     });
+
+     eventEmitter.on(Messages.KEY_EVENT_DOWN, () => {
+       hero.y += 5;
+     });
+
+     eventEmitter.on(Messages.KEY_EVENT_LEFT, () => {
+       hero.x -= 5;
+     });
+
+     eventEmitter.on(Messages.KEY_EVENT_RIGHT, () => {
+       hero.x += 5;
+     });
+   }
+   ```
+
+4. **Setup the game loop**
 
    Refactor the window.onload function to initialize the game and set up a game loop on a good interval. You'll also add a laser beam:
 
-    ```javascript
-    window.onload = async () => {
-      canvas = document.getElementById("canvas");
-      ctx = canvas.getContext("2d");
-      heroImg = await loadTexture("assets/player.png");
-      enemyImg = await loadTexture("assets/enemyShip.png");
-      laserImg = await loadTexture("assets/laserRed.png");
-    
-      initGame();
-      let gameLoopId = setInterval(() => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        drawGameObjects(ctx);
-      }, 100)
-      
-    };
-    ```
+   ```javascript
+   window.onload = async () => {
+     canvas = document.getElementById("canvas");
+     ctx = canvas.getContext("2d");
+     heroImg = await loadTexture("assets/player.png");
+     enemyImg = await loadTexture("assets/enemyShip.png");
+     laserImg = await loadTexture("assets/laserRed.png");
+
+     initGame();
+     let gameLoopId = setInterval(() => {
+       ctx.clearRect(0, 0, canvas.width, canvas.height);
+       ctx.fillStyle = "black";
+       ctx.fillRect(0, 0, canvas.width, canvas.height);
+       drawGameObjects(ctx);
+     }, 100);
+   };
+   ```
 
 5. **Add code** to move enemies at a certain interval
 
-    Refactor the `createEnemies()` function to create the enemies and push them into the new gameObjects class:
+   Refactor the `createEnemies()` function to create the enemies and push them into the new gameObjects class:
 
-    ```javascript
-    function createEnemies() {
-      const MONSTER_TOTAL = 5;
-      const MONSTER_WIDTH = MONSTER_TOTAL * 98;
-      const START_X = (canvas.width - MONSTER_WIDTH) / 2;
-      const STOP_X = START_X + MONSTER_WIDTH;
-    
-      for (let x = START_X; x < STOP_X; x += 98) {
-        for (let y = 0; y < 50 * 5; y += 50) {
-          const enemy = new Enemy(x, y);
-          enemy.img = enemyImg;
-          gameObjects.push(enemy);
-        }
-      }
-    }
-    ```
-    
-    and add a `createHero()` function to do a similar process for the hero.
-    
-    ```javascript
-    function createHero() {
-      hero = new Hero(
-        canvas.width / 2 - 45,
-        canvas.height - canvas.height / 4
-      );
-      hero.img = heroImg;
-      gameObjects.push(hero);
-    }
-    ```
+   ```javascript
+   function createEnemies() {
+     const MONSTER_TOTAL = 5;
+     const MONSTER_WIDTH = MONSTER_TOTAL * 98;
+     const START_X = (canvas.width - MONSTER_WIDTH) / 2;
+     const STOP_X = START_X + MONSTER_WIDTH;
 
-    and finally, add a `drawGameObjects()` function to start the drawing:
+     for (let x = START_X; x < STOP_X; x += 98) {
+       for (let y = 0; y < 50 * 5; y += 50) {
+         const enemy = new Enemy(x, y);
+         enemy.img = enemyImg;
+         gameObjects.push(enemy);
+       }
+     }
+   }
+   ```
 
-    ```javascript
-    function drawGameObjects(ctx) {
-      gameObjects.forEach(go => go.draw(ctx));
-    }
-    ```
+   and add a `createHero()` function to do a similar process for the hero.
 
-    Your enemies should start advancing on your hero spaceship!
+   ```javascript
+   function createHero() {
+     hero = new Hero(canvas.width / 2 - 45, canvas.height - canvas.height / 4);
+     hero.img = heroImg;
+     gameObjects.push(hero);
+   }
+   ```
+
+   and finally, add a `drawGameObjects()` function to start the drawing:
+
+   ```javascript
+   function drawGameObjects(ctx) {
+     gameObjects.forEach((go) => go.draw(ctx));
+   }
+   ```
+
+   Your enemies should start advancing on your hero spaceship!
 
 ---
 

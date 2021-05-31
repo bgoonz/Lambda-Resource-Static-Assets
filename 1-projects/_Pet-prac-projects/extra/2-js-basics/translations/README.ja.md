@@ -1,6 +1,6 @@
 # JavaScript 入門
 
-JavaScript は Web の言語です。この4つのレッスンでは、その基本を学びます。
+JavaScript は Web の言語です。この 4 つのレッスンでは、その基本を学びます。
 
 ### トピック
 

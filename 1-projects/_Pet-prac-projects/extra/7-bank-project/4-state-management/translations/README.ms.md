@@ -6,7 +6,7 @@
 
 ### Pengenalan
 
-Apabila aplikasi web berkembang, menjadi cabaran untuk mengawasi semua aliran data. Kod mana yang mendapat data, halaman mana yang menggunakannya, di mana dan kapan ia perlu dikemas kini ... mudah untuk berakhir dengan kod tidak kemas yang sukar dijaga. Ini benar terutamanya apabila anda perlu berkongsi data di antara halaman aplikasi anda yang berbeza, misalnya data pengguna. Konsep *state management* selalu ada dalam semua jenis program, tetapi ketika aplikasi web terus berkembang dalam kerumitan, kini menjadi titik penting untuk dipikirkan semasa pembangunan.
+Apabila aplikasi web berkembang, menjadi cabaran untuk mengawasi semua aliran data. Kod mana yang mendapat data, halaman mana yang menggunakannya, di mana dan kapan ia perlu dikemas kini ... mudah untuk berakhir dengan kod tidak kemas yang sukar dijaga. Ini benar terutamanya apabila anda perlu berkongsi data di antara halaman aplikasi anda yang berbeza, misalnya data pengguna. Konsep _state management_ selalu ada dalam semua jenis program, tetapi ketika aplikasi web terus berkembang dalam kerumitan, kini menjadi titik penting untuk dipikirkan semasa pembangunan.
 
 Pada bahagian akhir ini, kita akan melihat aplikasi yang kita buat untuk memikirkan kembali bagaimana keadaan dikendalikan, yang membolehkan sokongan penyegaran penyemak imbas pada bila-bila masa, dan data yang berterusan sepanjang sesi pengguna.
 
@@ -31,7 +31,7 @@ Terdapat 3 masalah dengan kod semasa:
 
 - Keadaan tidak berterusan, kerana penyegaran penyemak imbas membawa anda kembali ke halaman log masuk.
 - Terdapat pelbagai fungsi yang mengubah keadaan. Apabila aplikasinya berkembang, ini akan menyukarkan untuk mengesan perubahan dan mudah untuk melupakan pembaharuan.
-- Keadaan tidak dibersihkan, apabila anda mengklik *Logout* data akaun masih ada walaupun anda berada di halaman log masuk.
+- Keadaan tidak dibersihkan, apabila anda mengklik _Logout_ data akaun masih ada walaupun anda berada di halaman log masuk.
 
 Kami dapat mengemas kini kod kami untuk mengatasi masalah ini satu demi satu, tetapi ini akan membuat lebih banyak pendua kod dan menjadikan aplikasi lebih rumit dan sukar untuk dijaga. Atau kita boleh berhenti sebentar dan memikirkan semula strategi kita.
 
@@ -62,11 +62,11 @@ With:
 
 ```js
 let state = {
-  account: null
+  account: null,
 };
 ```
 
-Ideanya adalah untuk *memusatkan* semua data aplikasi kami dalam satu objek keadaan. Kami hanya mempunyai `akaun` untuk saat ini di negeri ini sehingga tidak banyak berubah, tetapi ini menciptakan jalan untuk evolusi.
+Ideanya adalah untuk _memusatkan_ semua data aplikasi kami dalam satu objek keadaan. Kami hanya mempunyai `akaun` untuk saat ini di negeri ini sehingga tidak banyak berubah, tetapi ini menciptakan jalan untuk evolusi.
 
 Kita juga harus mengemas kini fungsi menggunakannya. Dalam fungsi `register()` dan `login()`, ganti `account = ...` dengan `state.account = ...`;
 
@@ -82,11 +82,11 @@ Pemfaktoran semula ini dengan sendirinya tidak membawa banyak peningkatan, tetap
 
 Sekarang kita telah meletakkan objek `state` untuk menyimpan data kita, langkah seterusnya adalah memusatkan kemas kini. Tujuannya adalah untuk menjadikannya lebih mudah untuk mengikuti setiap perubahan dan kapan ia berlaku.
 
-Untuk mengelakkan berlakunya perubahan pada objek `state`, adalah praktik yang baik untuk mempertimbangkannya [*tidak berubah*](https://en.wikipedia.org/wiki/Immutable_object), yang bermaksud bahawa ia tidak dapat diubah sama sekali. Ini juga bermaksud bahawa anda harus membuat objek keadaan baru jika anda ingin mengubah apa-apa di dalamnya. Dengan melakukan ini, anda membina perlindungan mengenai [kesan sampingan](https://en.wikipedia.org/wiki/Side_effect_ (computer_science)), dan membuka kemungkinan untuk ciri baru dalam aplikasi anda seperti melaksanakan undo / redo, sambil mempermudah debug. Sebagai contoh, anda boleh mencatat setiap perubahan yang dibuat ke negeri dan menyimpan sejarah perubahan untuk memahami sumber pepijat.
+Untuk mengelakkan berlakunya perubahan pada objek `state`, adalah praktik yang baik untuk mempertimbangkannya [_tidak berubah_](https://en.wikipedia.org/wiki/Immutable_object), yang bermaksud bahawa ia tidak dapat diubah sama sekali. Ini juga bermaksud bahawa anda harus membuat objek keadaan baru jika anda ingin mengubah apa-apa di dalamnya. Dengan melakukan ini, anda membina perlindungan mengenai [kesan sampingan](https://en.wikipedia.org/wiki/Side_effect_ "computer_science"), dan membuka kemungkinan untuk ciri baru dalam aplikasi anda seperti melaksanakan undo / redo, sambil mempermudah debug. Sebagai contoh, anda boleh mencatat setiap perubahan yang dibuat ke negeri dan menyimpan sejarah perubahan untuk memahami sumber pepijat.
 
 Dalam JavaScript, anda boleh menggunakan [`Object.freeze()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) untuk membuat versi yang tidak berubah dari sebuah objek. Sekiranya anda cuba membuat perubahan pada objek yang tidak dapat diubah, pengecualian akan ditimbulkan.
 
-✅ Adakah anda tahu perbezaan antara objek *cetek* dan *dalam* tidak berubah? Anda boleh membacanya [di sini](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze#What_is_shallow_freeze).
+✅ Adakah anda tahu perbezaan antara objek _cetek_ dan _dalam_ tidak berubah? Anda boleh membacanya [di sini](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze#What_is_shallow_freeze).
 
 ### Tugas
 
@@ -96,41 +96,41 @@ Mari buat fungsi `updateState()` baru:
 function updateState(property, newData) {
   state = Object.freeze({
     ...state,
-    [property]: newData
+    [property]: newData,
   });
 }
 ```
 
-Dalam fungsi ini, kami membuat objek keadaan baru dan menyalin data dari keadaan sebelumnya menggunakan operator [*spread (`...`) operator*](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals). Kemudian kami menimpa harta benda objek tertentu dengan data baru menggunakan [notasi kurungan](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Working_with_Objects#Objects_and_properties) `[property]` untuk tugasan. Akhirnya, kita mengunci objek untuk mengelakkan pengubahsuaian menggunakan `Object.freeze()`. Kami hanya menyimpan harta `akaun` di negeri ini buat masa ini, tetapi dengan pendekatan ini anda dapat menambahkan seberapa banyak harta tanah yang anda perlukan di negeri ini.
+Dalam fungsi ini, kami membuat objek keadaan baru dan menyalin data dari keadaan sebelumnya menggunakan operator [_spread (`...`) operator_](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals). Kemudian kami menimpa harta benda objek tertentu dengan data baru menggunakan [notasi kurungan](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Working_with_Objects#Objects_and_properties) `[property]` untuk tugasan. Akhirnya, kita mengunci objek untuk mengelakkan pengubahsuaian menggunakan `Object.freeze()`. Kami hanya menyimpan harta `akaun` di negeri ini buat masa ini, tetapi dengan pendekatan ini anda dapat menambahkan seberapa banyak harta tanah yang anda perlukan di negeri ini.
 
 Kami juga akan mengemas kini inisialisasi `state` untuk memastikan keadaan awal juga dibekukan:
 
 ```js
 let state = Object.freeze({
-  account: null
+  account: null,
 });
 ```
 
 After that, update the `register` function by replacing the `state.account = result;` assignment with:
 
 ```js
-updateState('account', result);
+updateState("account", result);
 ```
 
 Do the same with the `login` function, replacing `state.account = data;` with:
 
 ```js
-updateState('account', data);
+updateState("account", data);
 ```
 
-Kami sekarang akan mengambil kesempatan untuk memperbaiki masalah data akaun yang tidak dihapus ketika pengguna mengklik *Logout*.
+Kami sekarang akan mengambil kesempatan untuk memperbaiki masalah data akaun yang tidak dihapus ketika pengguna mengklik _Logout_.
 
 Buat fungsi baru `logout()`:
 
 ```js
 function logout() {
-  updateState('account', null);
-  navigate('/login');
+  updateState("account", null);
+  navigate("/login");
 }
 ```
 
@@ -146,8 +146,8 @@ Sebilangan besar aplikasi web perlu mengekalkan data agar dapat berfungsi dengan
 
 Apabila anda ingin menyimpan data dalam penyemak imbas anda, terdapat beberapa soalan penting yang harus anda tanyakan kepada diri sendiri:
 
-- *Adakah data sensitif?* Anda harus mengelakkan menyimpan data sensitif pada pelanggan, seperti kata laluan pengguna.
-- *Berapa lama anda perlu menyimpan data ini?* Adakah anda merancang untuk mengakses data ini hanya untuk sesi semasa atau adakah anda ingin menyimpannya selamanya?
+- _Adakah data sensitif?_ Anda harus mengelakkan menyimpan data sensitif pada pelanggan, seperti kata laluan pengguna.
+- _Berapa lama anda perlu menyimpan data ini?_ Adakah anda merancang untuk mengakses data ini hanya untuk sesi semasa atau adakah anda ingin menyimpannya selamanya?
 
 Terdapat banyak cara untuk menyimpan maklumat di dalam aplikasi web, bergantung pada apa yang ingin anda capai. Sebagai contoh, anda boleh menggunakan URL untuk menyimpan pertanyaan carian, dan menjadikannya boleh dibagikan antara pengguna. Anda juga boleh menggunakan [kuki HTTP](https://developer.mozilla.org/docs/Web/HTTP/Cookies) jika data perlu dikongsi dengan pelayan, seperti [pengesahan](https://en.wikipedia.org/wiki/Authentication) maklumat.
 
@@ -162,10 +162,10 @@ Perhatikan bahawa kedua-dua API ini hanya membenarkan menyimpan [string](https:/
 
 ### Tugas
 
-Kami mahu pengguna kami terus masuk sehingga mereka mengklik butang *Logout* secara eksplisit, jadi kami akan menggunakan `localStorage` untuk menyimpan data akaun. Pertama, mari tentukan kunci yang akan kami gunakan untuk menyimpan data kami.
+Kami mahu pengguna kami terus masuk sehingga mereka mengklik butang _Logout_ secara eksplisit, jadi kami akan menggunakan `localStorage` untuk menyimpan data akaun. Pertama, mari tentukan kunci yang akan kami gunakan untuk menyimpan data kami.
 
 ```js
-const storageKey = 'savedAccount';
+const storageKey = "savedAccount";
 ```
 
 Kemudian tambahkan baris ini pada akhir fungsi `updateState()`:
@@ -182,7 +182,7 @@ Semasa data disimpan, kita juga harus menjaga memulihkannya ketika aplikasi dimu
 function init() {
   const savedAccount = localStorage.getItem(storageKey);
   if (savedAccount) {
-    updateState('account', JSON.parse(savedAccount));
+    updateState("account", JSON.parse(savedAccount));
   }
 
   // Kod permulaan kami sebelumnya
@@ -193,9 +193,9 @@ function init() {
 init();
 ```
 
-Di sini kami mengambil data yang disimpan, dan jika ada, kami akan mengemas kini keadaan dengan sewajarnya. Penting untuk melakukan ini *sebelum* mengemas kini laluan, kerana mungkin ada kod yang bergantung pada keadaan semasa kemas kini halaman.
+Di sini kami mengambil data yang disimpan, dan jika ada, kami akan mengemas kini keadaan dengan sewajarnya. Penting untuk melakukan ini _sebelum_ mengemas kini laluan, kerana mungkin ada kod yang bergantung pada keadaan semasa kemas kini halaman.
 
-Kami juga dapat menjadikan halaman *Dashboard* sebagai halaman lalai aplikasi kami, karena kami sekarang masih menyimpan data akun. Sekiranya tidak ada data, dashboard akan mengalihkan ke halaman *Login*. Dalam `updateRoute()`, ganti fallback `return navigate ('/login');` dengan `return navigate('dashboard');`.
+Kami juga dapat menjadikan halaman _Dashboard_ sebagai halaman lalai aplikasi kami, karena kami sekarang masih menyimpan data akun. Sekiranya tidak ada data, dashboard akan mengalihkan ke halaman _Login_. Dalam `updateRoute()`, ganti fallback `return navigate ('/login');` dengan `return navigate('dashboard');`.
 
 Sekarang log masuk dalam aplikasi dan cuba memuat semula halaman, anda harus terus berada di papan pemuka. Dengan kemas kini itu, kami telah menangani semua masalah awal kami ...
 
@@ -234,7 +234,7 @@ async function updateAccountData() {
     return logout();
   }
 
-  updateState('account', data);
+  updateState("account", data);
 }
 ```
 
@@ -253,8 +253,8 @@ Yang ini mengemas kini data akaun, kemudian mengurus mengemas kini HTML halaman 
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard', init: refresh }
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard", init: refresh },
 };
 ```
 
@@ -264,7 +264,7 @@ Cuba muatkan semula papan pemuka sekarang, ia akan memaparkan data akaun yang di
 
 ## 🚀 Cabaran
 
-Setelah kita memuatkan semula data akaun setiap kali papan pemuka dimuat, adakah anda fikir kita masih perlu meneruskan *semua data* akaun?
+Setelah kita memuatkan semula data akaun setiap kali papan pemuka dimuat, adakah anda fikir kita masih perlu meneruskan _semua data_ akaun?
 
 Cuba bekerjasama untuk mengubah apa yang disimpan dan dimuat dari `localStorage` untuk hanya memasukkan perkara yang benar-benar diperlukan agar aplikasi berfungsi.
 

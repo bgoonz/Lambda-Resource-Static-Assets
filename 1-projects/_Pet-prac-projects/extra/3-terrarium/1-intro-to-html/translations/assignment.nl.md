@@ -6,6 +6,6 @@ Stel u voor dat u uw persoonlijke website ontwerpt of herontwerpt. Maak een graf
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                                                                           | Voldoende                                                                         | Moet worden verbeterd                                                                 |
-| -------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Criteria | Voorbeeldig                                                                                  | Voldoende                                                                                 | Moet worden verbeterd                                                                     |
+| -------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 |          | Een blog lay-out wordt visueel weergegeven met ten minste 10 weergegeven markeringselementen | Een blog lay-out wordt visueel weergegeven met ongeveer 5 weergegeven markeringselementen | Een blog lay-out wordt visueel weergegeven met maximaal 3 weergegeven markeringselementen |

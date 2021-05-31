@@ -9,11 +9,11 @@ Hero> Golpea con espada ancha: el orco recibe 3p de daño
 Orc> Golpes con garrote: el héroe recibe 2p de daño
 Hero> Patadas: el orco recibe 1p de daño
 Game> Orc es derrotado - Hero recoge 2 monedas
-Game> ****No más monstruos, has conquistado la fortaleza del mal****
+Game> \***\*No más monstruos, has conquistado la fortaleza del mal\*\***
 ''
 
 ## Rúbrica
 
-| Criterios | Ejemplar | Adecuado | Necesita mejorar |
-| -------- | ---------------------- | --------------------------- | -------------------------- |
-| | se presenta el juego completo | se presenta parcialmente el juego | juego parcial contiene errores |
+| Criterios | Ejemplar                      | Adecuado                          | Necesita mejorar               |
+| --------- | ----------------------------- | --------------------------------- | ------------------------------ |
+|           | se presenta el juego completo | se presenta parcialmente el juego | juego parcial contiene errores |

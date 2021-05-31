@@ -6,6 +6,6 @@ Restyling del terrario utilizzando Flexbox o CSS Grid, acquisire schermate per m
 
 ## Rubrica
 
-| Criteri | Ottimo | Adeguato | Necessita miglioramento |
-| -------- | ----------------------------------------------------------------- | ----------------------------- | ------------------------------------ |
-|          | Presenta un terrario completamente rinnovato utilizzando Flexbox o CSS Grid | Restyling di alcuni elementi | Il restyling del terrario è completamente fallito |
+| Criteri | Ottimo                                                                      | Adeguato                     | Necessita miglioramento                           |
+| ------- | --------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------------- |
+|         | Presenta un terrario completamente rinnovato utilizzando Flexbox o CSS Grid | Restyling di alcuni elementi | Il restyling del terrario è completamente fallito |

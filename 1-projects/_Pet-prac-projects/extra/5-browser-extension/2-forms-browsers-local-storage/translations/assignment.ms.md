@@ -6,6 +6,6 @@ API sangat menyeronokkan untuk dimainkan. Berikut adalah [senarai banyak percuma
 
 ## Rubrik
 
-| Kriteria | Contoh                                                                  | Mencukupi                                 | Usaha Lagi       |
-| -------- | -------------------------------------------------------------------------- | ---------------------------------------- | ----------------------- |
+| Kriteria | Contoh                                                                               | Mencukupi                                  | Usaha Lagi                   |
+| -------- | ------------------------------------------------------------------------------------ | ------------------------------------------ | ---------------------------- |
 |          | Pelanjutan penyemak imbas yang lengkap dihantar menggunakan API dari senarai di atas | Pelanjutan penyemak imbas separuh dihantar | Penyerahan mempunyai pepijat |

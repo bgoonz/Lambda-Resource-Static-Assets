@@ -71,20 +71,21 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
    eventEmitter = new EventEmitter();
    ```
 
-2. **Aggiungere variabili**. Aggiungere il codice che rappresenta il punteggio totale (0) e le vite rimaste (3), visualizzare questi punteggi sullo schermo.
+1. **Aggiungere variabili**. Aggiungere il codice che rappresenta il punteggio totale (0) e le vite rimaste (3), visualizzare questi punteggi sullo schermo.
 
-3. **Estendere la funzione `updateGameObjects()`** . Estendere la funzione `updateGameObjects()` per gestire le collisioni con il nemico:
+1. **Estendere la funzione `updateGameObjects()`** . Estendere la funzione `updateGameObjects()` per gestire le collisioni con il nemico:
 
    ```javascript
-   enemies.forEach(enemy => {
-       const heroRect = hero.rectFromGameObject();
-       if (intersectRect(heroRect, enemy.rectFromGameObject())) {
-         eventEmitter.emit(Messages.COLLISION_ENEMY_HERO, { enemy });
-       }
-     })
+   enemies.forEach((enemy) => {
+     const heroRect = hero.rectFromGameObject();
+     if (intersectRect(heroRect, enemy.rectFromGameObject())) {
+       eventEmitter.emit(Messages.COLLISION_ENEMY_HERO, { enemy });
+     }
+   });
    ```
 
-4. **Aggiungere vita (`life`) e punti (`points`)**.
+1. **Aggiungere vita (`life`) e punti (`points`)**.
+
    1. **Inizializzare le variabili**. Sotto `this.cooldown = 0` nella classe `Hero`, impostare la vita e i punti:
 
       ```javascript
@@ -98,11 +99,8 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
       function drawLife() {
         // TODO, 35, 27
         const START_POS = canvas.width - 180;
-        for(let i=0; i < hero.life; i++ ) {
-          ctx.drawImage(
-            lifeImg,
-            START_POS + (45 * (i+1) ),
-            canvas.height - 37);
+        for (let i = 0; i < hero.life; i++) {
+          ctx.drawImage(lifeImg, START_POS + 45 * (i + 1), canvas.height - 37);
         }
       }
 
@@ -110,13 +108,12 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
         ctx.font = "30px Arial";
         ctx.fillStyle = "red";
         ctx.textAlign = "left";
-        drawText("Points: " + hero.points, 10, canvas.height-20);
+        drawText("Points: " + hero.points, 10, canvas.height - 20);
       }
 
       function drawText(message, x, y) {
         ctx.fillText(message, x, y);
       }
-
       ```
 
    1. **Aggiungere metodi al ciclo di gioco**. Assicurarsi di aggiungere queste funzioni alla funzione window.onload sotto `updateGameObjects()`:
@@ -154,15 +151,18 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
       Aggiungere queste funzioni agli event listener di Collision:
 
       ```javascript
-      eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-         first.dead = true;
-         second.dead = true;
-         hero.incrementPoints();
-      })
+      eventEmitter.on(
+        Messages.COLLISION_ENEMY_LASER,
+        (_, { first, second }) => {
+          first.dead = true;
+          second.dead = true;
+          hero.incrementPoints();
+        }
+      );
 
       eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
-         enemy.dead = true;
-         hero.decrementLife();
+        enemy.dead = true;
+        hero.decrementLife();
       });
       ```
 

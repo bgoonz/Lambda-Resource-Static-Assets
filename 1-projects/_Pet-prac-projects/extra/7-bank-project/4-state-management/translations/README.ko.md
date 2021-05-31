@@ -62,11 +62,11 @@ With:
 
 ```js
 let state = {
-  account: null
+  account: null,
 };
 ```
 
-이 아이디어는 모든 앱 데이터를 단일 상태 개체에서 *중앙에 모으는* 것 입니다. 현재 상태에서는 `account`만 가지고 있으므로 많이 변하지 않지만, 발전을 위한 길을 닦아둡니다.
+이 아이디어는 모든 앱 데이터를 단일 상태 개체에서 _중앙에 모으는_ 것 입니다. 현재 상태에서는 `account`만 가지고 있으므로 많이 변하지 않지만, 발전을 위한 길을 닦아둡니다.
 
 또한 그것을 사용하여 함수를 갱신해야 합니다. `register()`와 `login()` 함수에서, `account = ...`를 `state.account = ...`로 바꿉니다.
 
@@ -82,11 +82,11 @@ const account = state.account;
 
 데이터로 저장할 `state` 객체를 두었으므로, 다음 단계는 갱신 작업을 중앙 집중화하는 것입니다. 목표는 모든 변경점과 발생 시점을 쉽게 ​​추적하는 것입니다.
 
-`state` 객체가 변경되지 않으려면, [*immutable*](https://en.wikipedia.org/wiki/Immutable_object)한 것으로 간주하는 것이 좋습니다. 즉, 전혀 수정할 수 없다는 점을 의미합니다. 또한 변경하려는 경우에는 새로운 상태 객체를 만들어야 된다는 점을 의미합니다. 이렇게 하면, 잠재적으로 원하지 않는 [side effects](https://en.wikipedia.org/wiki/Side_effect_(computer_science))에 보호하도록 만들고, undo/redo를 구현하는 것 처럼 앱의 새로운 기능에 대한 가능성을 열어 디버깅을 더 쉽게 만듭니다. 예를 들자면, 상태에 대한 모든 변경점을 남기고 유지하여 버그의 원인을 파악할 수 있습니다.
+`state` 객체가 변경되지 않으려면, [_immutable_](https://en.wikipedia.org/wiki/Immutable_object)한 것으로 간주하는 것이 좋습니다. 즉, 전혀 수정할 수 없다는 점을 의미합니다. 또한 변경하려는 경우에는 새로운 상태 객체를 만들어야 된다는 점을 의미합니다. 이렇게 하면, 잠재적으로 원하지 않는 [side effects](<https://en.wikipedia.org/wiki/Side_effect_(computer_science)>)에 보호하도록 만들고, undo/redo를 구현하는 것 처럼 앱의 새로운 기능에 대한 가능성을 열어 디버깅을 더 쉽게 만듭니다. 예를 들자면, 상태에 대한 모든 변경점을 남기고 유지하여 버그의 원인을 파악할 수 있습니다.
 
 JavaScript에서, [`Object.freeze()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)를 사용하여 변경할 수 없는 버전의 객체를 만들 수 있습니다. 변경 불가능한 객체를 바꾸려고 하면 예외가 발생합니다.
 
-✅ *shallow*와 *deep* 불변 객체의 차이점을 알고 계시나요? [here](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze#What_is_shallow_freeze)에서 읽을 수 있습니다.
+✅ *shallow*와 _deep_ 불변 객체의 차이점을 알고 계시나요? [here](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze#What_is_shallow_freeze)에서 읽을 수 있습니다.
 
 ### 작업
 
@@ -96,31 +96,31 @@ JavaScript에서, [`Object.freeze()`](https://developer.mozilla.org/docs/Web/Jav
 function updateState(property, newData) {
   state = Object.freeze({
     ...state,
-    [property]: newData
+    [property]: newData,
   });
 }
 ```
 
-이 함수에서는, 새로운 상태 객체를 만들고 [*spread (`...`) operator*](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals)로 이전 상태의 데이터를 복사합니다. 그러고  할당을 위해 [bracket notation](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Working_with_Objects#Objects_and_properties) `[property]`를 사용하여 상태 객체의 특정한 속성을 새로운 데이터로 다시 정의합니다. 최종적으로, 변경되는 것을 막기 위해 `Object.freeze()`를 사용하여 객체를 잠급니다. 지금 상태에는 `account` 속성만 저장되어 있지만, 이 접근 방식으로 상태에 필요한 순간마다 많은 속성들을 추가할 수 있습니다.
+이 함수에서는, 새로운 상태 객체를 만들고 [_spread (`...`) operator_](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals)로 이전 상태의 데이터를 복사합니다. 그러고 할당을 위해 [bracket notation](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Working_with_Objects#Objects_and_properties) `[property]`를 사용하여 상태 객체의 특정한 속성을 새로운 데이터로 다시 정의합니다. 최종적으로, 변경되는 것을 막기 위해 `Object.freeze()`를 사용하여 객체를 잠급니다. 지금 상태에는 `account` 속성만 저장되어 있지만, 이 접근 방식으로 상태에 필요한 순간마다 많은 속성들을 추가할 수 있습니다.
 
 또한 초기 상태가 동결되도록 `state` 초기화 작업도 갱신합니다:
 
 ```js
 let state = Object.freeze({
-  account: null
+  account: null,
 });
 ```
 
 그런 다음, `state.account = result;` 할당을 이 것으로 대체하여 `register` 함수를 갱신합니다:
 
 ```js
-updateState('account', result);
+updateState("account", result);
 ```
 
 `login` 함수에서도 동일하게 진행하고, `state.account = data;`도 이 것으로 바꿉니다:
 
 ```js
-updateState('account', data);
+updateState("account", data);
 ```
 
 이제 사용자가 *Logout*을 클릭 할 때 계정 데이터가 지워지지 않는 이슈를 해결할 수 있습니다.
@@ -129,8 +129,8 @@ updateState('account', data);
 
 ```js
 function logout() {
-  updateState('account', null);
-  navigate('/login');
+  updateState("account", null);
+  navigate("/login");
 }
 ```
 
@@ -146,8 +146,8 @@ function logout() {
 
 브라우저에서 데이터를 유지하려면, 스스로에게 몇 중요한 질문을 해야합니다:
 
-- *민감한 데이터인가요?* 사용자 암호와 같은, 민감한 데이터는 클라이언트에 저장하지 않아야 합니다.
-- *데이터를 얼마나 오래 보관해야 하나요?* 현재 세션에서만 데이터에 접근하거나 계속 저장할 계획인가요?
+- _민감한 데이터인가요?_ 사용자 암호와 같은, 민감한 데이터는 클라이언트에 저장하지 않아야 합니다.
+- _데이터를 얼마나 오래 보관해야 하나요?_ 현재 세션에서만 데이터에 접근하거나 계속 저장할 계획인가요?
 
 달성하려는 목표에 따라, 웹 앱 안에서 정보를 저장하는 방법에는 여러 가지가 있습니다. 예를 들면, URL을 사용하여 검색 쿼리를 저장하고, 사용자끼리 공유할 수 있습니다. [authentication](https://en.wikipedia.org/wiki/Authentication) 정보처럼, 데이터를 서버와 공유해야하는 경우에도 [HTTP cookies](https://developer.mozilla.org/docs/Web/HTTP/Cookies)를 사용할 수 있습니다.
 
@@ -162,10 +162,10 @@ function logout() {
 
 ### 작업
 
-*Logout* 버튼을 명시적으로 클릭할 때까지 로그인 상태가 유지되기를 원하므로, `localStorage`로 계정 데이터를 저장합니다. 먼저, 데이터를 저장하는 데 사용할 키를 정의하겠습니다.
+_Logout_ 버튼을 명시적으로 클릭할 때까지 로그인 상태가 유지되기를 원하므로, `localStorage`로 계정 데이터를 저장합니다. 먼저, 데이터를 저장하는 데 사용할 키를 정의하겠습니다.
 
 ```js
-const storageKey = 'savedAccount';
+const storageKey = "savedAccount";
 ```
 
 그러고 `updateState()` 함수의 하단에 이 줄을 추가합니다:
@@ -182,7 +182,7 @@ localStorage.setItem(storageKey, JSON.stringify(state.account));
 function init() {
   const savedAccount = localStorage.getItem(storageKey);
   if (savedAccount) {
-    updateState('account', JSON.parse(savedAccount));
+    updateState("account", JSON.parse(savedAccount));
   }
 
   // Our previous initialization code
@@ -193,9 +193,9 @@ function init() {
 init();
 ```
 
-여기에서 저장된 데이터를 검색하고, 그에 따라서 상태를 갱신합니다. 페이지를 갱신하다가 상태에 의존하는 코드가 있을 수 있으므로, 라우터를 갱신하기 *전에* 하는 것이 중요합니다.
+여기에서 저장된 데이터를 검색하고, 그에 따라서 상태를 갱신합니다. 페이지를 갱신하다가 상태에 의존하는 코드가 있을 수 있으므로, 라우터를 갱신하기 _전에_ 하는 것이 중요합니다.
 
-이제 계정 데이터를 유지하고 있으므로, *대시보드* 페이지를 애플리케이션 기본 페이지로 만들 수도 있습니다. 데이터가 없다면, 대시보드는 언제나 *로그인* 페이지로 리다이렉팅합니다. `updateRoute ()`에서, `return navigate('/login');`을 `return navigate('dashboard');`로 바꿉니다.
+이제 계정 데이터를 유지하고 있으므로, _대시보드_ 페이지를 애플리케이션 기본 페이지로 만들 수도 있습니다. 데이터가 없다면, 대시보드는 언제나 _로그인_ 페이지로 리다이렉팅합니다. `updateRoute ()`에서, `return navigate('/login');`을 `return navigate('dashboard');`로 바꿉니다.
 
 이제 앱에 로그인하고 페이지를 새로 고쳐보면, 대시보드에 남아있어야 합니다. 이 업데이트로 모든 초기 이슈를 처리했습니다...
 
@@ -234,7 +234,7 @@ async function updateAccountData() {
     return logout();
   }
 
-  updateState('account', data);
+  updateState("account", data);
 }
 ```
 
@@ -253,8 +253,8 @@ async function refresh() {
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard', init: refresh }
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard", init: refresh },
 };
 ```
 
@@ -264,7 +264,7 @@ const routes = {
 
 ## 🚀 도전
 
-이제 대시보드를 불러올 때마다 계정 데이터가 다시 불러와지는데, 여전히 *모든 계정* 데이터를 유지해야 된다고 생각하나요?
+이제 대시보드를 불러올 때마다 계정 데이터가 다시 불러와지는데, 여전히 _모든 계정_ 데이터를 유지해야 된다고 생각하나요?
 
 앱이 동작하는 데 꼭 필요한 것만 있도록 `localStorage` 에 저장하고 불러온 항목을 함께 바꿔봅니다.
 

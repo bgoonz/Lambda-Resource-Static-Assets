@@ -1,9 +1,11 @@
 # JavaScript 入門 - 做出決定
 
 ![JavaScript 入門 - 做出決定](/sketchnotes/webdev101-js-decisions.png)
+
 > 由 [Tomomi Imura](https://twitter.com/girlie_mac) 繪製
 
 ## 課前測驗
+
 [課前測驗](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/11?loc=zh_tw)
 
 為程式碼做決定與控制順序以提高其重複利用性與豐富性。這堂課程提供 JavaScript 的資料流控制語法與布林資料型的重點。
@@ -43,8 +45,8 @@
 當條件成立時，If 條件式會執行區塊內的程式碼。
 
 ```javascript
-if (condition){
-    //Condition was true. Code in this block will run.
+if (condition) {
+  //Condition was true. Code in this block will run.
 }
 ```
 
@@ -54,9 +56,9 @@ if (condition){
 let currentMoney;
 let laptopPrice;
 
-if (currentMoney >= laptopPrice){
-    //Condition was true. Code in this block will run.
-    console.log("Getting a new laptop!");
+if (currentMoney >= laptopPrice) {
+  //Condition was true. Code in this block will run.
+  console.log("Getting a new laptop!");
 }
 ```
 
@@ -68,13 +70,12 @@ if (currentMoney >= laptopPrice){
 let currentMoney;
 let laptopPrice;
 
-if (currentMoney >= laptopPrice){
-    // if 條件成立時，這段程式碼會被執行。
-    console.log("Getting a new laptop!");
-}
-else{
-    // else 條件成立時，這段程式碼會被執行。
-    console.log("Can't afford a new laptop, yet!");
+if (currentMoney >= laptopPrice) {
+  // if 條件成立時，這段程式碼會被執行。
+  console.log("Getting a new laptop!");
+} else {
+  // else 條件成立時，這段程式碼會被執行。
+  console.log("Can't afford a new laptop, yet!");
 }
 ```
 
@@ -97,15 +98,14 @@ else{
 ```javascript
 let currentMoney;
 let laptopPrice;
-let laptopDiscountPrice = laptopPrice - (laptopPrice * .20) //Laptop price at 20 percent off
+let laptopDiscountPrice = laptopPrice - laptopPrice * 0.2; //Laptop price at 20 percent off
 
-if (currentMoney >= laptopPrice || currentMoney >= laptopDiscountPrice){
-    // if 條件成立時，這段程式碼會被執行。
-    console.log("Getting a new laptop!");
-}
-else {
-    // else 條件成立時，這段程式碼會被執行。
-    console.log("Can't afford a new laptop, yet!");
+if (currentMoney >= laptopPrice || currentMoney >= laptopDiscountPrice) {
+  // if 條件成立時，這段程式碼會被執行。
+  console.log("Getting a new laptop!");
+} else {
+  // else 條件成立時，這段程式碼會被執行。
+  console.log("Can't afford a new laptop, yet!");
 }
 ```
 
@@ -133,17 +133,18 @@ let variable = condition ? <條件成立時回傳 A> : <條件否定時回傳 B>
 
 ```javascript
 let firstNumber = 20;
-let secondNumber = 10
-let biggestNumber = firstNumber > secondNumber ? firstNumber: secondNumber;
+let secondNumber = 10;
+let biggestNumber = firstNumber > secondNumber ? firstNumber : secondNumber;
 ```
 
 ✅ 花點時間閱讀這段程式碼。你能了解這些運算子的運作方式嗎?
 
 上述的狀態為：
+
 - 若 `firstNumber` 大於 `secondNumber` 時
-- 則賦予 `firstNumber` 數值 `biggestNumber` 
-- 否則賦予為數值 `secondNumber`。 
-  
+- 則賦予 `firstNumber` 數值 `biggestNumber`
+- 否則賦予為數值 `secondNumber`。
+
 條件運算子的另一種表達方式為：
 
 ```javascript
@@ -162,7 +163,9 @@ if (firstNumber > secondNumber) {
 建立一個程式，使用邏輯運算式來做判斷，再將程式碼改寫成條件運算子。你喜歡用哪一種語法?
 
 ---
+
 ## 課後測驗
+
 [課後測驗](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/12?loc=zh_tw)
 
 ## 複習與自學

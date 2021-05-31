@@ -19,6 +19,6 @@ Aquí hay un ejemplo de resultado después de completar la tarea:
 
 ## Rúbrica
 
-| Criterios | Ejemplar | Adecuado | Necesita mejorar |
-| -------- | -------------------------------------------------- ---------------------------------------------- | -------------------------------------------------- -------------------------------------------------- ------------------- | -------------------------------------------- |
-| | La adición de una transacción se implementa completamente siguiendo todas las mejores prácticas que se ven en las lecciones. | Agregar una transacción está implementado, pero no siguiendo las mejores prácticas que se ven en las lecciones, o trabajando solo parcialmente. | Agregar una transacción no funciona en absoluto. |
+| Criterios | Ejemplar                                                                                                                     | Adecuado                                                                                                                                        | Necesita mejorar                                 |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ |
+|           | La adición de una transacción se implementa completamente siguiendo todas las mejores prácticas que se ven en las lecciones. | Agregar una transacción está implementado, pero no siguiendo las mejores prácticas que se ven en las lecciones, o trabajando solo parcialmente. | Agregar una transacción no funciona en absoluto. |

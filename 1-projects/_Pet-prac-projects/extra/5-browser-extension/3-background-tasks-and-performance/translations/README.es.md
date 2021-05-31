@@ -36,7 +36,6 @@ Compruebe el panel Registro de eventos para ver si algún evento tardó más de 
 
 ✅ ¡Conoce a tu perfilador! Abra las herramientas de desarrollo en este sitio y vea si hay cuellos de botella. ¿Cuál es el activo de carga más lenta? ¿El más rápido?
 
-
 ## Comprobaciones de perfiles
 
 En general, hay algunas "áreas problemáticas" que todo desarrollador web debe tener en cuenta al crear un sitio, para evitar sorpresas desagradables cuando llegue el momento de implementarlo en producción.
@@ -57,7 +56,7 @@ Ahora que tiene una idea de cómo el navegador representa los recursos que le en
 
 ### Crea una función para calcular el color
 
-Trabajando en `/ src / index.js`, agregue una función llamada` calculateColor () `después de la serie de variables` const` que estableció para obtener acceso al DOM:
+Trabajando en `/ src / index.js`, agregue una función llamada`calculateColor ()`después de la serie de variables` const` que estableció para obtener acceso al DOM:
 
 ```JavaScript
 function calculateColor(value) {
@@ -92,7 +91,6 @@ Chrome.runtime tiene [una API](https://developer.chrome.com/extensions/runtime) 
 
 Ahora, en la función `init ()`, configure el ícono en verde genérico para comenzar nuevamente llamando a la acción `updateIcon` de Chrome:
 
-
 ```JavaScript
 chrome.runtime.sendMessage({
 	action: 'updateIcon',
@@ -101,6 +99,7 @@ chrome.runtime.sendMessage({
 		},
 });
 ```
+
 ### Llame a la función, ejecute la llamada
 
 A continuación, llame a la función que acaba de crear agregándola a la promesa devuelta por la API C02Signal:
@@ -131,6 +130,7 @@ function drawIcon(value) {
 	return context.getImageData(50, 50, 100, 100);
 }
 ```
+
 En este código, está agregando un oyente para cualquier mensaje que llegue al administrador de tareas de backend. Si se llama 'updateIcon', entonces se ejecuta el siguiente código para dibujar un icono del color adecuado usando la API de Canvas.
 
 ✅ Aprenderá más sobre la API Canvas en las [lecciones del juego espacial](../../space-game/drawing-to-canvas/README.md).
@@ -150,4 +150,3 @@ Considere suscribirse a un [boletín informativo de rendimiento](https://perf.em
 Investigue algunas de las formas en que los navegadores miden el rendimiento web consultando las pestañas de rendimiento de sus herramientas web. ¿Encuentra diferencias importantes?
 
 **Tarea**: [Analizar el rendimiento de un sitio](assignment.md)
-

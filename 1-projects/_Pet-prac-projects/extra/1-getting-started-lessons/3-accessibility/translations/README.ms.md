@@ -1,9 +1,11 @@
 # Membuat Halaman Web yang Boleh Diakses
 
 ![Semua Tentang Kebolehcapaian](/sketchnotes/webdev101-a11y.png)
+
 > Sketchnote karya [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Kuiz Pra Kuliah
+
 [Kuiz Pra Kuliah](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/5)
 
 > Kekuatan Web berada dalam kesejagatannya. Akses oleh semua orang tanpa mengira kecacatan adalah aspek penting.
@@ -96,7 +98,7 @@ Pembaca skrin juga mempunyai kemampuan untuk membaca hanya pautan hiper pada hal
 
 ### Teks pautan yang baik
 
-Teks pautan yang baik menerangkan secara ringkas apa yang terdapat di seberang pautan. Dalam contoh di atas yang membicarakan penguin kecil, pautan adalah ke halaman Wikipedia mengenai spesies tersebut. Frasa *penguin kecil* akan menghasilkan teks pautan yang sempurna kerana ia menjelaskan apa yang akan dipelajari oleh seseorang jika mereka mengklik pautan itu - penguin kecil.
+Teks pautan yang baik menerangkan secara ringkas apa yang terdapat di seberang pautan. Dalam contoh di atas yang membicarakan penguin kecil, pautan adalah ke halaman Wikipedia mengenai spesies tersebut. Frasa _penguin kecil_ akan menghasilkan teks pautan yang sempurna kerana ia menjelaskan apa yang akan dipelajari oleh seseorang jika mereka mengklik pautan itu - penguin kecil.
 
 > [penguin kecil](https://en.wikipedia.org/wiki/Little_penguin), kadang-kadang dikenali sebagai penguin peri, adalah penguin terkecil di dunia.
 
@@ -111,11 +113,11 @@ Sebagai bonus tambahan untuk memastikan laman web anda dapat diakses oleh semua 
 Bayangkan halaman berikut:
 
 | Produk       | Penerangan        | Pesanan        |
-| ------------ | ----------------  | ------------   |
+| ------------ | ----------------- | -------------- |
 | Widget       | [Penerangan]('#') | [Pesanan]('#') |
 | Super widget | [Penerangan]('#') | [Pesanan]('#') |
 
-Dalam contoh ini, mendua teks keterangan dan urutan masuk akal bagi seseorang yang menggunakan penyemak imbas. Walau bagaimanapun, seseorang yang menggunakan pembaca skrin hanya akan mendengar kata-kata *Penerangan* dan *Pesanan* diulang tanpa konteks.
+Dalam contoh ini, mendua teks keterangan dan urutan masuk akal bagi seseorang yang menggunakan penyemak imbas. Walau bagaimanapun, seseorang yang menggunakan pembaca skrin hanya akan mendengar kata-kata _Penerangan_ dan _Pesanan_ diulang tanpa konteks.
 
 Untuk menyokong jenis senario ini, HTML menyokong sekumpulan atribut yang dikenali sebagai [Accessible Rich Internet Applications (ARIA)](https://developer.mozilla.org/docs/Web/Accessibility/ARIA). Atribut ini membolehkan anda memberikan maklumat tambahan kepada pembaca skrin.
 
@@ -123,15 +125,20 @@ Untuk menyokong jenis senario ini, HTML menyokong sekumpulan atribut yang dikena
 
 Anda boleh menggunakan `aria-label` untuk menerangkan pautan apabila format halaman tidak membenarkan anda. Keterangan untuk widget dapat ditetapkan sebagai
 
-``` html
+```html
 <a href="#" aria-label="Widget description">description</a>
 ```
 
 ✅ Secara umum, menggunakan markup Semantik seperti yang dijelaskan di atas menggantikan penggunaan ARIA, tetapi kadang-kadang tidak ada yang setara dengan semantik untuk pelbagai widget HTML. Contoh yang baik ialah Progressbar. Tidak ada setara HTML untuk bar kemajuan, jadi anda mengenal pasti generik `<div>` untuk elemen ini dengan peranan dan nilai aria yang betul. [MDN documentation on ARIA](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) mengandungi maklumat yang lebih berguna.
 
 ```html
-<div id="percent-loaded" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-</div>
+<div
+  id="percent-loaded"
+  role="progressbar"
+  aria-valuenow="75"
+  aria-valuemin="0"
+  aria-valuemax="100"
+></div>
 ```
 
 ## Gambar
@@ -180,7 +187,7 @@ Ambil HTML ini dan tulis semula agar dapat diakses semaksimum mungkin, mengingat
     </div>
     <div class="main-content">
       <div>
-        <p class="page-title">Welcome to Turtle Ipsum. 
+        <p class="page-title">Welcome to Turtle Ipsum.
             <a href="">Click here</a> to learn more.
         </p>
         <p class="article-text">
@@ -207,6 +214,7 @@ Ambil HTML ini dan tulis semula agar dapat diakses semaksimum mungkin, mengingat
 ```
 
 ## Kuiz Pasca Kuliah
+
 [Kuiz Pasca Kuliah](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/6)
 
 ## Mengkaji dan belajar sendiri

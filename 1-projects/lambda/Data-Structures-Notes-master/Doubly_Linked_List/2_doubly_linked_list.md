@@ -1,18 +1,18 @@
-# Lecture II: Linked Lists  
+# Lecture II: Linked Lists
 
 a. [Nodes](#Nodes)  
-b. [Doubly Linked List](#Doubly-Linked-List)   
-c. [Build a Doubly Linked List](#Build-a-Doubly-Linked-List)   
-d. [Add and Remove Tail](#Add-and-Remove-Tail)   
-e. [Move to Head or Tail](#Move-to-Head-or-Tail)   
-f. [Delete a Node](#Delete-a-Node)   
-g. [Get Max](#Get-Max)     
+b. [Doubly Linked List](#Doubly-Linked-List)  
+c. [Build a Doubly Linked List](#Build-a-Doubly-Linked-List)  
+d. [Add and Remove Tail](#Add-and-Remove-Tail)  
+e. [Move to Head or Tail](#Move-to-Head-or-Tail)  
+f. [Delete a Node](#Delete-a-Node)  
+g. [Get Max](#Get-Max)
 
 <br>
 
-[CS18 Sean Chen Lecture](https://youtu.be/l5jfEmBnAqg)  
+[CS18 Sean Chen Lecture](https://youtu.be/l5jfEmBnAqg)
 
-[CS19 Brian Doyle Lecture](https://youtu.be/YV8H5vevKGU)   
+[CS19 Brian Doyle Lecture](https://youtu.be/YV8H5vevKGU)
 
 <br>
 <br>
@@ -24,7 +24,7 @@ A node is a bucket structure with two components (or three in a doubly linked li
 We could imagine it like this:
 
 ```
-|          |          |          |          
+|          |          |          |
 | Previous |   DATA   |   Next   |
 |__________|__________|__________|
 ```
@@ -33,7 +33,6 @@ The benefit of nodes is that it allows us to dynamically utilize memory.
 
 <br>
 <br>
-
 
 ## Doubly Linked List
 
@@ -94,19 +93,18 @@ To make it a little easier to see what's happening under the hood when we call a
 
 <br>
 
-If we run: 
+If we run:
 
-> print(ListNode(5))  
+> print(ListNode(5))
 
-We'll receive in the terminal: 
+We'll receive in the terminal:
 
-> Value: 5, Prev: None, Next: None  
+> Value: 5, Prev: None, Next: None
 
 This shows that an initialized ListNode without a specified previous or next reference will point to `None`.
 
 <br>
 <br>
-
 
 ## Build a Doubly Linked List
 
@@ -122,7 +120,7 @@ class DoublyLinkedList:
     self.head = node
     self.tail = node
     self.length = 1 if node is not None else 0
-  
+
   def __repr__(self):
     return f"Head: {self.head} \n Tail: {self.tail} \n Length: {self.length}"
 
@@ -142,7 +140,6 @@ We should define an `add_to_head` method:
 ```
 
 <br>
-
 
 We know that we need to create a new node and increase the length of the list:
 
@@ -280,10 +277,10 @@ This should return the final print statement as:
 <br>
 
 ```
-ll: Head: Value: 5, Prev: None, Next: 2 
- 
-Tail: Value: 9, Prev: 2, Next: None 
- 
+ll: Head: Value: 5, Prev: None, Next: 2
+
+Tail: Value: 9, Prev: 2, Next: None
+
 Length: 3
 ```
 
@@ -395,7 +392,6 @@ This allows us to handle the edge cases of if it's the head or tail node.
 
 We could handle if there's only one node in the list like so:
 
-
 <br>
 
 ```
@@ -421,7 +417,7 @@ But we also already wrote that edge case into our `remove_from_head` function so
         self.remove_from_tail()
     else:
         node.delete()
-        return node.value    
+        return node.value
 ```
 
 <br>
@@ -444,7 +440,7 @@ Next we'll iterate through the values of the linked list, starting at the head, 
     # if there is no head, we know the list is empty
     if not self.head:
         return None
-    
+
     # we'll set our starting max value as the first value we'll begin looping through in the list, the head
     max_value = self.head.value
     # we'll set a current value to check against

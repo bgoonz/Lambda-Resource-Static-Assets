@@ -27,6 +27,7 @@ Canvas は HTML 要素で、デフォルトでは何のコンテンツもあり�
 キャンバスは、直交座標系を使って物を描いています。したがって、何かがどこにあるかを表現するために x 軸と y 軸を使用しています。`0,0` の位置が左上の位置で、右下の位置がキャンバスの幅と高さと言ったところです。
 
 ![the canvas's grid](../canvas_grid.png)
+
 > 画像は [MDN](https://developer.mozilla.org/ja/docs/Web/Guide/HTML/Canvas_tutorial/Drawing_shapes) より
 
 キャンバス要素に描画するには、以下の手順を踏む必要があります。
@@ -46,10 +47,10 @@ canvas = document.getElementById("myCanvas");
 ctx = canvas.getContext("2d");
 
 //3. 赤で塗りつぶします。
-ctx.fillStyle = 'red';
+ctx.fillStyle = "red";
 
 //4. そして、これらのパラメータで矩形を描画し、位置とサイズを設定します。
-ctx.fillRect(0,0, 200, 200) // x, y, width, height
+ctx.fillRect(0, 0, 200, 200); // x, y, width, height
 ```
 
 ✅ Canvas API は主に 2D の図形に焦点を当てていますが、Web サイトに 3D の要素を描画することもできます。そのためには、[WebGL API](https://developer.mozilla.org/ja/docs/Web/API/WebGL_API) を使用するとよいでしょう。
@@ -70,10 +71,10 @@ Canvas API を使っていろいろなものを描くことができます。
 
 ```javascript
 const img = new Image();
-img.src = 'path/to/my/image.png';
+img.src = "path/to/my/image.png";
 img.onload = () => {
   // イメージが読み込まれて使用可能な状態になっています
-}
+};
 ```
 
 ### アセットの読み込みパターン
@@ -88,29 +89,28 @@ function loadAsset(path) {
     img.onload = () => {
       // イメージが読み込まれて使用可能な状態になっています
       resolve(img);
-    }
-  })
+    };
+  });
 }
 
 // 使いまわします
 
 async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
+  const heroImg = await loadAsset("hero.png");
+  const monsterImg = await loadAsset("monster.png");
 }
-
 ```
 
 ゲームアセットを画面に描画するには、以下のようなコードになります。
 
 ```javascript
 async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
+  const heroImg = await loadAsset("hero.png");
+  const monsterImg = await loadAsset("monster.png");
 
   canvas = document.getElementById("myCanvas");
   ctx = canvas.getContext("2d");
-  ctx.drawImage(heroImg, canvas.width/2, canvas.height/2);
+  ctx.drawImage(heroImg, canvas.width / 2, canvas.height / 2);
   ctx.drawImage(monsterImg, 0, 0);
 }
 ```
@@ -119,15 +119,15 @@ async function run() {
 
 ### 何を構築するか
 
-Canvas 要素を使って Web ページを作成します。これは黒い画面 `1024 * 768` をレンダリングする必要があります。画像は2枚用意しました。
+Canvas 要素を使って Web ページを作成します。これは黒い画面 `1024 * 768` をレンダリングする必要があります。画像は 2 枚用意しました。
 
 - Hero の宇宙船
 
-   ![Hero の宇宙船](../solution/assets/player.png)
+  ![Hero の宇宙船](../solution/assets/player.png)
 
-- 5*5 monster
+- 5\*5 monster
 
-   ![Monster の宇宙船](../solution/assets/enemyShip.png)
+  ![Monster の宇宙船](../solution/assets/enemyShip.png)
 
 ### 開発を始めるための推奨ステップ
 
@@ -165,27 +165,28 @@ npm start
    > tip: プレイヤーと敵の画像を追加するには `await loadTexture` を使用し、画像パスを渡してください。まだ画面には表示されていません!
 3. 下半分の画面中央にヒーローを**描画します**
    > tip: heroImg を画面に描画するには `drawImage` API を使用し、`canvas.width / 2 - 45` と `canvas.height - canvas.height / 4)` を設定します。
-4. 5*5 のモンスターを**描画します**
+4. 5\*5 のモンスターを**描画します**
+
    > tip: これで、画面上に敵を描画するコードのコメントを解除することができるようになりました。次に、`createEnemies` 関数に移動して、それを構築する。
 
    まず、いくつかの定数を設定します。
 
-    ```javascript
-    const MONSTER_TOTAL = 5;
-    const MONSTER_WIDTH = MONSTER_TOTAL * 98;
-    const START_X = (canvas.width - MONSTER_WIDTH) / 2;
-    const STOP_X = START_X + MONSTER_WIDTH;
-    ```
+   ```javascript
+   const MONSTER_TOTAL = 5;
+   const MONSTER_WIDTH = MONSTER_TOTAL * 98;
+   const START_X = (canvas.width - MONSTER_WIDTH) / 2;
+   const STOP_X = START_X + MONSTER_WIDTH;
+   ```
 
-    そして、モンスターの配列を画面上に描画するループを作成します。
+   そして、モンスターの配列を画面上に描画するループを作成します。
 
-    ```javascript
-    for (let x = START_X; x < STOP_X; x += 98) {
-        for (let y = 0; y < 50 * 5; y += 50) {
-          ctx.drawImage(enemyImg, x, y);
-        }
-      }
-    ```
+   ```javascript
+   for (let x = START_X; x < STOP_X; x += 98) {
+     for (let y = 0; y < 50 * 5; y += 50) {
+       ctx.drawImage(enemyImg, x, y);
+     }
+   }
+   ```
 
 ## 結果
 

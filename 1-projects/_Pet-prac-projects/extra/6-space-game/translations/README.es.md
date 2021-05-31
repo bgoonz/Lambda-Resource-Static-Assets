@@ -17,10 +17,10 @@ En estas seis lecciones aprenderá lo siguiente:
 ## Visión de conjunto
 
 - teoría
-   - [Introducción a la creación de juegos con JavaScript](introduction/README.md)
+  - [Introducción a la creación de juegos con JavaScript](introduction/README.md)
 - practica
-   - [Dibujo a lienzo](drawing-to-canvas/README.md)
-   - [Mover elementos por la pantalla](moving-elements-around/README.md)
-   - [Detección de colisiones](collision-detection/README.md)
-   - [Manteniendo la puntuación](keeping-score/README.md)
-   - [Finalizar y reiniciar el juego](end-condition/README.md)
+  - [Dibujo a lienzo](drawing-to-canvas/README.md)
+  - [Mover elementos por la pantalla](moving-elements-around/README.md)
+  - [Detección de colisiones](collision-detection/README.md)
+  - [Manteniendo la puntuación](keeping-score/README.md)
+  - [Finalizar y reiniciar el juego](end-condition/README.md)

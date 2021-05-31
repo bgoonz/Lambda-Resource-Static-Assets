@@ -101,6 +101,7 @@ chrome.runtime.sendMessage({
 		},
 });
 ```
+
 ### 함수 호출하고, call 실행하기
 
 다음, 방금 전에 만든 함수를 C02Signal API가 반환한 promise에 추가하여 호출합니다:
@@ -131,6 +132,7 @@ function drawIcon(value) {
 	return context.getImageData(50, 50, 100, 100);
 }
 ```
+
 코드에서, 백엔드 작업 매니저로 들어오는 모든 메시지 리스너를 추가합니다. 'updateIcon' 이라고 불리면, 다음 코드가 수행되고, Canvas API를 사용해서 적절한 색상의 아이콘을 그립니다.
 
 ✅ [Space Game lessons](../../../6-space-game/2-drawing-to-canvas/translations/README.ko.md)에서 Canvas API에 대해 더 배울 것 입니다.
@@ -158,4 +160,3 @@ function drawIcon(value) {
 ## 과제
 
 [Analyze a site for performance](../assignment.md)
-

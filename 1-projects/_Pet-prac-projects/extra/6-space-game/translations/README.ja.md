@@ -6,7 +6,7 @@
 
 ![Finished game](../images/pewpew.gif)
 
-この6つのレッスンでは、次のことを学びます。
+この 6 つのレッスンでは、次のことを学びます。
 
 - Canvas 要素と**相互にやりとりして**画面上に物を描く
 - 直交座標系を**理解する**
@@ -17,13 +17,13 @@
 ## 概要
 
 - 理論
-   - [JavaScript を使ったゲーム構築入門](../1-introduction/translations/README.ja.md)
+  - [JavaScript を使ったゲーム構築入門](../1-introduction/translations/README.ja.md)
 - 実践
-   - [Canvas への描画](../2-drawing-to-canvas/translations/README.ja.md)
-   - [画面の周りの要素の移動](../3-moving-elements-around/translations/README.ja.md)
-   - [衝突の検出](../4-collision-detection/translations/README.ja.md)
-   - [スコアの保持](../5-keeping-score/translations/README.ja.md)
-   - [ゲームの終了と再起動](../6-end-condition/translations/README.ja.md)
+  - [Canvas への描画](../2-drawing-to-canvas/translations/README.ja.md)
+  - [画面の周りの要素の移動](../3-moving-elements-around/translations/README.ja.md)
+  - [衝突の検出](../4-collision-detection/translations/README.ja.md)
+  - [スコアの保持](../5-keeping-score/translations/README.ja.md)
+  - [ゲームの終了と再起動](../6-end-condition/translations/README.ja.md)
 
 ## クレジット
 

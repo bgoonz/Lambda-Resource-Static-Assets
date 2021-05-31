@@ -21,20 +21,13 @@ Dato l'array seguente `allStudents` rappresentare tutti gli studenti e le loro v
 > SUGGERIMENTO, usare un ciclo for, if...else e gli operatori di confronto:
 
 ```javascript
-let allStudents = [
-  'A',
-  'B-',
-  1,
-  4,
-  5,
-  2
-]
+let allStudents = ["A", "B-", 1, 4, 5, 2];
 
 let studentsWhoPass = [];
 ```
 
 ## Rubrica
 
-| Criterio | Eccellente                      | Sufficiente                      | Necessita Miglioramenti               |
-| -------- | ------------------------------ | ----------------------------- | ------------------------------- |
+| Criterio | Eccellente                             | Sufficiente                            | Necessita Miglioramenti        |
+| -------- | -------------------------------------- | -------------------------------------- | ------------------------------ |
 |          | Viene presentata la soluzione completa | Viene presentata la soluzione parziale | La soluzione presentata ha bug |

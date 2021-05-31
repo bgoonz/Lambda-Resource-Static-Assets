@@ -22,8 +22,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bank App</title>
   </head>
   <body>
@@ -36,7 +36,7 @@
 
 ## HTML テンプレート
 
-Web ページに複数の画面を作成したい場合、表示したい画面ごとに1つの HTML ファイルを作成するのが1つの解決策です。しかし、この方法にはいくつかの不都合があります。
+Web ページに複数の画面を作成したい場合、表示したい画面ごとに 1 つの HTML ファイルを作成するのが 1 つの解決策です。しかし、この方法にはいくつかの不都合があります。
 
 - 画面切り替えの際に HTML 全体を再読み込みしなければならず、時間がかかることがあります
 - 画面間でデータを共有するのは難しいです
@@ -78,9 +78,7 @@ JavaScript での検索が容易になるように、`id` を付与していま�
     <h1>Bank App</h1>
     <a href="/login">Logout</a>
   </header>
-  <section>
-    Balance: 100$
-  </section>
+  <section>Balance: 100$</section>
   <section>
     <h2>Transactions</h2>
     <table>
@@ -105,7 +103,7 @@ JavaScript での検索が容易になるように、`id` を付与していま�
 
 現在の HTML ファイルをブラウザで試してみると、`Loading...` と表示されて動かなくなるのがわかるでしょう。これは、HTML テンプレートをインスタンス化して表示するために JavaScript コードを追加する必要があるためです。
 
-テンプレートのインスタンス化は通常3つのステップで行われます。
+テンプレートのインスタンス化は通常 3 つのステップで行われます。
 
 1. 例えば、[`document.getElementById`](https://developer.mozilla.org/ja/docs/Web/API/Document/getElementById) を使用して、DOM 内のテンプレート要素を取得します
 2. [`cloneNode`](https://developer.mozilla.org/ja/docs/Web/API/Node/cloneNode) を使用して、テンプレート要素のクローンを作成します
@@ -127,25 +125,25 @@ JavaScript での検索が容易になるように、`id` を付与していま�
 function updateRoute(templateId) {
   const template = document.getElementById(templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
 
-ここで行うことは、上記の3つのステップとまったく同じです。テンプレートを `templateId` という名前でインスタンス化し、そのクローンされたコンテンツをアプリのプレースホルダ内に配置します。テンプレートのサブツリー全体をコピーするには、`cloneNode(true)` を使用する必要があることに注意してください。
+ここで行うことは、上記の 3 つのステップとまったく同じです。テンプレートを `templateId` という名前でインスタンス化し、そのクローンされたコンテンツをアプリのプレースホルダ内に配置します。テンプレートのサブツリー全体をコピーするには、`cloneNode(true)` を使用する必要があることに注意してください。
 
 テンプレートのサブツリー全体をコピーするには、`cloneNode(true)` を使用する必要があることに注意してください。
 
 ```js
-updateRoute('login');
+updateRoute("login");
 ```
 
 ✅ このコード `app.innerHTML = '';` の目的は何ですか？これがないとどうなるのでしょうか?
 
 ## ルートの作成
 
-Web アプリの話をするときに、**URL** を表示すべき特定の画面にマッピングする意図を *ルーティング* と呼んでいます。複数の HTML ファイルを持つ Web サイトでは、ファイルパスが URL に反映されるため、これは自動的に行われます。たとえば、プロジェクトフォルダにこれらのファイルがあるとします。
+Web アプリの話をするときに、**URL** を表示すべき特定の画面にマッピングする意図を _ルーティング_ と呼んでいます。複数の HTML ファイルを持つ Web サイトでは、ファイルパスが URL に反映されるため、これは自動的に行われます。たとえば、プロジェクトフォルダにこれらのファイルがあるとします。
 
 ```
 mywebsite/index.html
@@ -169,8 +167,8 @@ URL パスとテンプレート間の [map](https://en.wikipedia.org/wiki/Associ
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard' },
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard" },
 };
 ```
 
@@ -183,8 +181,8 @@ function updateRoute() {
 
   const template = document.getElementById(route.templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -195,12 +193,12 @@ function updateRoute() {
 
 ## ナビゲーションの追加
 
-私たちのアプリの次のステップは、URL を手動で変更することなく、ページ間を移動する可能性を追加することです。これは2つのことを意味します。
+私たちのアプリの次のステップは、URL を手動で変更することなく、ページ間を移動する可能性を追加することです。これは 2 つのことを意味します。
 
-  1. 現在の URL を更新する
-  2. 新しい URL に基づいて表示されるテンプレートを更新する
+1. 現在の URL を更新する
+2. 新しい URL に基づいて表示されるテンプレートを更新する
 
-2番目の部分はすでに `updateRoute` 関数で処理したので、現在の URL を更新する方法を見つけなければなりません。
+2 番目の部分はすでに `updateRoute` 関数で処理したので、現在の URL を更新する方法を見つけなければなりません。
 
 JavaScript、特に [`history.pushState`](https://developer.mozilla.org/ja/docs/Web/API/History/pushState) を使う必要があります。これは HTML をリロードせずに URL を更新して閲覧履歴に新しいエントリを作成することができます。
 
@@ -244,7 +242,7 @@ function onLinkClick(event) {
 }
 ```
 
-HTML の *Login* と *Logout* リンクにバインディングを追加してナビゲーションシステムを完成させましょう。
+HTML の _Login_ と _Logout_ リンクにバインディングを追加してナビゲーションシステムを完成させましょう。
 
 ```html
 <a href="/dashboard" onclick="onLinkClick()">Login</a>
@@ -260,7 +258,7 @@ HTML の *Login* と *Logout* リンクにバインディングを追加して�
 
 ## ブラウザの戻るボタンと進むボタンの扱い
 
-`history.pushState` を使うと、ブラウザのナビゲーション履歴に新しいエントリが作成されます。ブラウザの *戻るボタン* を押すと、以下のように表示されることを確認することができます。
+`history.pushState` を使うと、ブラウザのナビゲーション履歴に新しいエントリが作成されます。ブラウザの _戻るボタン_ を押すと、以下のように表示されることを確認することができます。
 
 ![ナビゲーション履歴のスクリーンショット](../history.png)
 
@@ -289,7 +287,7 @@ updateRoute();
 
 ## 🚀 チャレンジ
 
-このアプリのクレジットを表示する3ページ目のテンプレートとルートを追加します。
+このアプリのクレジットを表示する 3 ページ目のテンプレートとルートを追加します。
 
 ## レッスン後の小テスト
 
@@ -297,7 +295,7 @@ updateRoute();
 
 ## 復習と自己学習
 
-ルーティングは Web 開発の驚くほどトリッキーな部分の1つで、特に Web がページ更新の動作からシングルページアプリケーションのページ更新へと移行するにつれ、そのような部分が増えてきています。[Azure Static Web Apps プレビューでのルート](https://docs.microsoft.com/ja-jp/azure/static-web-apps/routes?WT.mc_id=academic-13441-cxa)がルーティングを扱うことについて少し読んでみてください。そのドキュメントに記載されているいくつかの決定が必要な理由を説明できますか？
+ルーティングは Web 開発の驚くほどトリッキーな部分の 1 つで、特に Web がページ更新の動作からシングルページアプリケーションのページ更新へと移行するにつれ、そのような部分が増えてきています。[Azure Static Web Apps プレビューでのルート](https://docs.microsoft.com/ja-jp/azure/static-web-apps/routes?WT.mc_id=academic-13441-cxa)がルーティングを扱うことについて少し読んでみてください。そのドキュメントに記載されているいくつかの決定が必要な理由を説明できますか？
 
 ## 課題
 

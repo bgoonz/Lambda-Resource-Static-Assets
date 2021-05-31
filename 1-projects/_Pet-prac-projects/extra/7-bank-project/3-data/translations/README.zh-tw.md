@@ -25,13 +25,13 @@ curl http://localhost:5000/api
 
 ## AJAX 和取得資料
 
-傳統的網頁在使用者點擊連結，或是提交表單資料時，重新載入全部的 HTML 頁面來更新網頁內容。每當資料要被更新時，伺服器就需要回傳全新的 HTML 頁面給瀏覽器處理，同時也干涉到使用者正在進行的動作，重新載入的機制也限制了許多互動功能。這種工作流程被稱為*多頁面應用程式(Multi-Page Application)*，簡稱 *MPA*。
+傳統的網頁在使用者點擊連結，或是提交表單資料時，重新載入全部的 HTML 頁面來更新網頁內容。每當資料要被更新時，伺服器就需要回傳全新的 HTML 頁面給瀏覽器處理，同時也干涉到使用者正在進行的動作，重新載入的機制也限制了許多互動功能。這種工作流程被稱為*多頁面應用程式(Multi-Page Application)*，簡稱 _MPA_。
 
 ![多頁面應用程式的更新流程](../images/mpa.png)
 
 網頁應用程式變得更加複雜，促使新的技術問世：[AJAX (Asynchronous JavaScript and XML)](https://zh.wikipedia.org/wiki/AJAX)。
 
-這個技巧允許網頁應用程式使用 JavaScript 非同步地傳遞與接收伺服器的資料，不需要重新載入 HTML 頁面，也反映在更快速的更新速率與更流暢的使用者體驗。在接收伺服器的新資料時，目前的 HTML 頁面可以被 JavaScript 利用 [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) API 更新。自此之後，這種流程演變成現今的[*單一頁面應用程式(Single-Page Application)*，*SPA*](https://zh.wikipedia.org/wiki/%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8)。
+這個技巧允許網頁應用程式使用 JavaScript 非同步地傳遞與接收伺服器的資料，不需要重新載入 HTML 頁面，也反映在更快速的更新速率與更流暢的使用者體驗。在接收伺服器的新資料時，目前的 HTML 頁面可以被 JavaScript 利用 [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) API 更新。自此之後，這種流程演變成現今的[_單一頁面應用程式(Single-Page Application)_，_SPA_](https://zh.wikipedia.org/wiki/%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8)。
 
 ![單一頁面應用程式的更新流程](../images/spa.png)
 
@@ -45,7 +45,7 @@ curl http://localhost:5000/api
 
 ```js
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById("loginForm");
   const user = loginForm.user.value;
 }
 ```
@@ -57,10 +57,12 @@ async function login() {
 ```js
 async function getAccount(user) {
   try {
-    const response = await fetch('//localhost:5000/api/accounts/' + encodeURIComponent(user));
+    const response = await fetch(
+      "//localhost:5000/api/accounts/" + encodeURIComponent(user)
+    );
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    return { error: error.message || "Unknown error" };
   }
 }
 ```
@@ -73,16 +75,16 @@ async function getAccount(user) {
 
 ```js
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById("loginForm");
   const user = loginForm.user.value;
   const data = await getAccount(user);
 
   if (data.error) {
-    return console.log('loginError', data.error);
+    return console.log("loginError", data.error);
   }
 
   account = data;
-  navigate('/dashboard');
+  navigate("/dashboard");
 }
 ```
 
@@ -99,7 +101,7 @@ let account = null;
 最後，在登入表單提交時，呼叫函式 `login`。修改 HTML 語法：
 
 ```html
-<form id="loginForm" action="javascript:login()">
+<form id="loginForm" action="javascript:login()"></form>
 ```
 
 測試註冊功能，以及新註冊的帳戶的登入行為是否運作正常。
@@ -108,10 +110,10 @@ let account = null;
 
 ```js
 account = result;
-navigate('/dashboard');
+navigate("/dashboard");
 ```
 
-✅ 你知道在預設上，你只能從*同一個網域(domain)與連接埠(port)*的網頁呼叫伺服器 APIs嗎？這是瀏覽器強制性的安全機制。但我們的網頁應用程式在 `localhost:3000` 上執行，而伺服器 API 則在 `localhost:5000` 上執行。為什麼這樣能正常運作？利用[跨來源資源共用 (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)，只要伺服器添加特殊的標頭檔到網頁回應中，我們就可以處理跨資源的 HTTP 請求，允許特殊的網域進行呼叫。
+✅ 你知道在預設上，你只能從*同一個網域(domain)與連接埠(port)*的網頁呼叫伺服器 APIs 嗎？這是瀏覽器強制性的安全機制。但我們的網頁應用程式在 `localhost:3000` 上執行，而伺服器 API 則在 `localhost:5000` 上執行。為什麼這樣能正常運作？利用[跨來源資源共用 (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)，只要伺服器添加特殊的標頭檔到網頁回應中，我們就可以處理跨資源的 HTTP 請求，允許特殊的網域進行呼叫。
 
 > 藉由前往[此課程](https://docs.microsoft.com/en-us/learn/modules/use-apis-discover-museum-art?WT.mc_id=academic-13441-cxa)學習更多有關 API 的資訊。
 
@@ -149,11 +151,11 @@ function updateElement(id, text) {
 }
 ```
 
-這條就很直觀：給定元素的 *id* 與 *text*，它會更新 DOM 元素內符合 `id` 條件的文字內容。我們也使用這個方法到前面 `login` 函式的錯誤訊息中：
+這條就很直觀：給定元素的 _id_ 與 _text_，它會更新 DOM 元素內符合 `id` 條件的文字內容。我們也使用這個方法到前面 `login` 函式的錯誤訊息中：
 
 ```js
 if (data.error) {
-  return updateElement('loginError', data.error);
+  return updateElement("loginError", data.error);
 }
 ```
 
@@ -185,7 +187,7 @@ if (data.error) {
     { "id": "1", "date": "2020-10-01", "object": "Pocket money", "amount": 50 },
     { "id": "2", "date": "2020-10-03", "object": "Book", "amount": -10 },
     { "id": "3", "date": "2020-10-04", "object": "Sandwich", "amount": -5 }
-  ],
+  ]
 }
 ```
 
@@ -214,12 +216,12 @@ if (data.error) {
 ```js
 function updateDashboard() {
   if (!account) {
-    return navigate('/login');
+    return navigate("/login");
   }
 
-  updateElement('description', account.description);
-  updateElement('balance', account.balance.toFixed(2));
-  updateElement('currency', account.currency);
+  updateElement("description", account.description);
+  updateElement("balance", account.balance.toFixed(2));
+  updateElement("currency", account.currency);
 }
 ```
 
@@ -232,7 +234,7 @@ function updateDashboard() {
 加入這段程式碼到函式 `updateRoute()` 的下方：
 
 ```js
-if (typeof route.init === 'function') {
+if (typeof route.init === "function") {
   route.init();
 }
 ```
@@ -241,8 +243,8 @@ if (typeof route.init === 'function') {
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard', init: updateDashboard }
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard", init: updateDashboard },
 };
 ```
 
@@ -268,7 +270,7 @@ const routes = {
 </template>
 ```
 
-這個模板表示單一條的表格列，其中包含了三格欄位：交易的*日期*、*物件* 與 *金額*。
+這個模板表示單一條的表格列，其中包含了三格欄位：交易的*日期*、_物件_ 與 _金額_。
 
 接著，加入 `id` 屬性到模板的表格 `<tbody>` 元素中，讓 JavaScript 能更容易地取得：
 
@@ -280,9 +282,9 @@ const routes = {
 
 ```js
 function createTransactionRow(transaction) {
-  const template = document.getElementById('transaction');
+  const template = document.getElementById("transaction");
   const transactionRow = template.content.cloneNode(true);
-  const tr = transactionRow.querySelector('tr');
+  const tr = transactionRow.querySelector("tr");
   tr.children[0].textContent = transaction.date;
   tr.children[1].textContent = transaction.object;
   tr.children[2].textContent = transaction.amount.toFixed(2);
@@ -298,7 +300,7 @@ for (const transaction of account.transactions) {
   const transactionRow = createTransactionRow(transaction);
   transactionsRows.appendChild(transactionRow);
 }
-updateElement('transactions', transactionsRows);
+updateElement("transactions", transactionsRows);
 ```
 
 這裡我們使用了方法 [`document.createDocumentFragment()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment)，建立新的 DOM 分段，再接到我們的 HTML 表格中。
@@ -308,7 +310,7 @@ updateElement('transactions', transactionsRows);
 ```js
 function updateElement(id, textOrNode) {
   const element = document.getElementById(id);
-  element.textContent = ''; // Removes all children
+  element.textContent = ""; // Removes all children
   element.append(textOrNode);
 }
 ```

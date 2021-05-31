@@ -3,9 +3,11 @@
 Cette leçon couvre les bases des langages de programmation. Les sujets abordés ici s'appliquent à la plupart des langages de programmation modernes d'aujourd'hui. Dans la section «Outils du métier», vous découvrirez des logiciels utiles qui vous aideront en tant que développeur.
 
 ![Intro Programming](/sketchnotes/webdev101-programming.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Pre-Lecture Quiz
+
 [Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/1)
 
 ## introduction
@@ -19,31 +21,33 @@ Dans cette leçon, nous aborderons:
 
 ## Qu'est-ce que la programmation?
 
-Pla programmation (également appelée codage) est le processus d'écriture d'instructions sur un appareil, tel qu'un ordinateur ou un appareil mobile. Nous écrivons ces instructions avec un langage de programmation, qui est ensuite interprété par l'appareil. Ces ensembles d'instructions peuvent être désignés sous différents noms, mais *programme*, *programme informatique*, *application (application)* et *exécutable* sont quelques noms courants.
+Pla programmation (également appelée codage) est le processus d'écriture d'instructions sur un appareil, tel qu'un ordinateur ou un appareil mobile. Nous écrivons ces instructions avec un langage de programmation, qui est ensuite interprété par l'appareil. Ces ensembles d'instructions peuvent être désignés sous différents noms, mais _programme_, _programme informatique_, _application (application)_ et _exécutable_ sont quelques noms courants.
 
-Un *programme* peut être tout ce qui est écrit avec du code; les sites Web, les jeux et les applications téléphoniques sont des programmes. Bien qu'il soit possible de créer un programme sans écrire de code, la logique sous-jacente est interprétée sur le périphérique et cette logique a probablement été écrite avec du code. Un programme qui *exécute* ou *exécute du code* exécute des instructions. L'appareil avec lequel vous lisez actuellement cette leçon exécute un programme pour l'imprimer sur votre écran.
+Un _programme_ peut être tout ce qui est écrit avec du code; les sites Web, les jeux et les applications téléphoniques sont des programmes. Bien qu'il soit possible de créer un programme sans écrire de code, la logique sous-jacente est interprétée sur le périphérique et cette logique a probablement été écrite avec du code. Un programme qui _exécute_ ou _exécute du code_ exécute des instructions. L'appareil avec lequel vous lisez actuellement cette leçon exécute un programme pour l'imprimer sur votre écran.
 
 ✅ Faites une petite recherche: qui est considéré comme le premier programmeur informatique au monde?
 
 ## Langages de programmation
 
-Les langages de programmation ont un objectif principal: permettre aux développeurs de créer des instructions à envoyer à un appareil. Les appareils ne peuvent comprendre que le binaire (1 et 0), et pour *la plupart* les développeurs, ce n'est pas un moyen très efficace de communiquer. Les langages de programmation sont un vecteur de communication entre les humains et les ordinateurs.
+Les langages de programmation ont un objectif principal: permettre aux développeurs de créer des instructions à envoyer à un appareil. Les appareils ne peuvent comprendre que le binaire (1 et 0), et pour _la plupart_ les développeurs, ce n'est pas un moyen très efficace de communiquer. Les langages de programmation sont un vecteur de communication entre les humains et les ordinateurs.
 
 Les langages de programmation se présentent sous différents formats et peuvent servir à des fins différentes. Par exemple, JavaScript est principalement utilisé pour les applications Web, tandis que Bash est principalement utilisé pour les systèmes d'exploitation.
 
-*Les langues de bas niveau* nécessitent généralement moins d'étapes que les *langues de haut niveau* pour qu'un appareil interprète les instructions. Cependant, ce qui rend les langages de haut niveau populaires, c'est leur lisibilité et leur support. JavaScript est considéré comme un langage de haut niveau.
+_Les langues de bas niveau_ nécessitent généralement moins d'étapes que les _langues de haut niveau_ pour qu'un appareil interprète les instructions. Cependant, ce qui rend les langages de haut niveau populaires, c'est leur lisibilité et leur support. JavaScript est considéré comme un langage de haut niveau.
 
 Le code suivant illustre la différence entre un langage de haut niveau avec JavaScript et un langage de bas niveau avec le code d'assembly ARM.
 
 ```javascript
-let number = 10
-let n1 = 0, n2 = 1, nextTerm;
+let number = 10;
+let n1 = 0,
+  n2 = 1,
+  nextTerm;
 
 for (let i = 1; i <= number; i++) {
-    console.log(n1);
-    nextTerm = n1 + n2;
-    n1 = n2;
-    n2 = nextTerm;
+  console.log(n1);
+  nextTerm = n1 + n2;
+  n1 = n2;
+  n2 = nextTerm;
 }
 ```
 
@@ -72,15 +76,15 @@ back add r0,r1
  end
 ```
 
-Croyez-le ou non, *they're both doing the same thing*: impression d'une séquence de Fibonacci jusqu'à 10.
+Croyez-le ou non, _they're both doing the same thing_: impression d'une séquence de Fibonacci jusqu'à 10.
 
 ✅ Une séquence de Fibonacci est [defined](https://en.wikipedia.org/wiki/Fibonacci_number) comme un ensemble de nombres tels que chaque nombre est la somme des deux précédents, à partir de 0 et 1.
 
 ## Éléments d'un programme
 
-Une seule instruction dans un programme est appelée une *instruction* et aura généralement un caractère ou un interligne qui marque où l'instruction se termine, ou *se termine*. La façon dont un programme se termine varie avec chaque langue.
+Une seule instruction dans un programme est appelée une _instruction_ et aura généralement un caractère ou un interligne qui marque où l'instruction se termine, ou _se termine_. La façon dont un programme se termine varie avec chaque langue.
 
-La plupart des programmes reposent sur l'utilisation des données d'un utilisateur ou d'ailleurs, où les déclarations peuvent s'appuyer sur des données pour exécuter des instructions. Les données peuvent modifier le comportement d'un programme, de sorte que les langages de programmation proposent un moyen de stocker temporairement des données pouvant être utilisées ultérieurement. Ces données sont appelées *variables*. Les variables sont des instructions qui demandent à un appareil d'enregistrer des données dans sa mémoire. Les variables des programmes sont similaires à celles de l'algèbre, où elles ont un nom unique et leur valeur peut changer avec le temps.
+La plupart des programmes reposent sur l'utilisation des données d'un utilisateur ou d'ailleurs, où les déclarations peuvent s'appuyer sur des données pour exécuter des instructions. Les données peuvent modifier le comportement d'un programme, de sorte que les langages de programmation proposent un moyen de stocker temporairement des données pouvant être utilisées ultérieurement. Ces données sont appelées _variables_. Les variables sont des instructions qui demandent à un appareil d'enregistrer des données dans sa mémoire. Les variables des programmes sont similaires à celles de l'algèbre, où elles ont un nom unique et leur valeur peut changer avec le temps.
 
 Il est possible que certaines instructions ne soient pas exécutées par un périphérique. C'est généralement par conception lors de l'écriture par le développeur ou par accident lorsqu'une erreur inattendue se produit. Ce type de contrôle d'une application la rend plus robuste et maintenable. Généralement, ces changements de contrôle se produisent lorsque certaines décisions sont respectées. Une instruction courante dans les langages de programmation modernes pour contrôler la manière dont un programme est exécuté est l'instruction `if..else`.
 
@@ -100,10 +104,10 @@ L'éditeur est l'un des outils les plus cruciaux pour le développement logiciel
 
 Les développeurs comptent sur les éditeurs pour quelques raisons supplémentaires:
 
-- *Débogage* Découverte des bogues et des erreurs en parcourant le code, ligne par ligne. Certains éditeurs ont des capacités de débogage ou peuvent être personnalisés et ajoutés pour des langages de programmation spécifiques.
-- *Mise en évidence de la syntaxe* Ajoute des couleurs et la mise en forme du texte au code, le rend plus facile à lire. La plupart des éditeurs permettent une coloration syntaxique personnalisée.
-- *Extensions et intégrations* Ajouts spécialisés pour les développeurs, par les développeurs, pour accéder à des outils supplémentaires qui ne sont pas intégrés à l'éditeur de base. Par exemple, de nombreux développeurs ont également besoin d'un moyen de documenter leur code et d'expliquer comment il fonctionne et installeront une extension de vérification orthographique pour vérifier les fautes de frappe. La plupart de ces ajouts sont destinés à être utilisés dans un éditeur spécifique, et la plupart des éditeurs proposent un moyen de rechercher les extensions disponibles.
-- *Personnalisation* La plupart des éditeurs sont extrêmement personnalisables, et chaque développeur aura son propre environnement de développement unique qui répond à ses besoins. Beaucoup permettent également aux développeurs de créer leur propre extension.
+- _Débogage_ Découverte des bogues et des erreurs en parcourant le code, ligne par ligne. Certains éditeurs ont des capacités de débogage ou peuvent être personnalisés et ajoutés pour des langages de programmation spécifiques.
+- _Mise en évidence de la syntaxe_ Ajoute des couleurs et la mise en forme du texte au code, le rend plus facile à lire. La plupart des éditeurs permettent une coloration syntaxique personnalisée.
+- _Extensions et intégrations_ Ajouts spécialisés pour les développeurs, par les développeurs, pour accéder à des outils supplémentaires qui ne sont pas intégrés à l'éditeur de base. Par exemple, de nombreux développeurs ont également besoin d'un moyen de documenter leur code et d'expliquer comment il fonctionne et installeront une extension de vérification orthographique pour vérifier les fautes de frappe. La plupart de ces ajouts sont destinés à être utilisés dans un éditeur spécifique, et la plupart des éditeurs proposent un moyen de rechercher les extensions disponibles.
+- _Personnalisation_ La plupart des éditeurs sont extrêmement personnalisables, et chaque développeur aura son propre environnement de développement unique qui répond à ses besoins. Beaucoup permettent également aux développeurs de créer leur propre extension.
 
 #### Éditeurs et extensions de développement Web populaires
 
@@ -120,7 +124,8 @@ Les développeurs comptent sur les éditeurs pour quelques raisons supplémentai
 
 Un autre outil crucial est le navigateur. Les développeurs Web comptent sur le navigateur pour observer comment leur code s'exécute sur le Web, il est également utilisé pour afficher les éléments visuels d'une page Web qui sont écrits dans l'éditeur, comme le HTML.
 
-De nombreux navigateurs sont livrés avec des *outils de développement* (DevTools) qui contiennent un ensemble de fonctionnalités et d'informations utiles pour aider les développeurs à collecter et capturer des informations importantes sur leur application. Par exemple: si une page Web contient des erreurs, il est parfois utile de savoir quand elles se sont produites. DevTools dans un navigateur peut être configuré pour capturer ces informations.
+De nombreux navigateurs sont livrés avec des _outils de développement_ (DevTools) qui contiennent un ensemble de fonctionnalités et d'informations utiles pour aider les développeurs à collecter et capturer des informations importantes sur leur application. Par exemple: si une page Web contient des erreurs, il est parfois utile de savoir quand elles se sont produites. DevTools dans un navigateur peut être configuré pour capturer ces informations.
+
 #### Navigateurs et outils de développement populaires
 
 - [Edge](https://docs.microsoft.com/microsoft-edge/devtools-guide-chromium?WT.mc_id=academic-13441-cxa)
@@ -135,7 +140,7 @@ Certains développeurs préfèrent une vue moins graphique pour leurs tâches qu
 
 Les options de la ligne de commande varient en fonction du système d'exploitation que vous utilisez.
 
-*💻 = est préinstallé sur le système d'exploitation.*
+_💻 = est préinstallé sur le système d'exploitation._
 
 #### Windows
 
@@ -143,7 +148,7 @@ Les options de la ligne de commande varient en fonction du système d'exploitati
 - [Command Line](https://docs.microsoft.com/windows-server/administration/windows-commands/windows-commands?WT.mc_id=academic-13441-cxa) (also known as CMD) 💻
 - [Windows Terminal](https://docs.microsoft.com/windows/terminal/?WT.mc_id=academic-13441-cxa)
 - [mintty](https://mintty.github.io/)
-  
+
 #### MacOS
 
 - [Terminal](https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac) 💻
@@ -180,6 +185,7 @@ Lorsqu'un développeur souhaite apprendre quelque chose de nouveau, il se tourne
 Comparez quelques langages de programmation. Quelles sont certaines des caractéristiques uniques de JavaScript par rapport à Java? Et COBOL vs Go?
 
 ## Quiz post-conférence
+
 [Quiz post-conférence](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/2)
 
 ## Révision et auto-étude

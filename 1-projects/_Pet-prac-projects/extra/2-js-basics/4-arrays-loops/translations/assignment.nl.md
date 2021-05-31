@@ -8,6 +8,6 @@ Maak een programma dat elk 3de nummer tussen 1 en 20 opsomt en het afdrukt naar 
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                               | Voldoende                 | Moet worden verbeterd              |
-| -------- | --------------------------------------- | ------------------------ | ------------------------------ |
+| Criteria | Voorbeeldig                                       | Voldoende                             | Moet worden verbeterd                   |
+| -------- | ------------------------------------------------- | ------------------------------------- | --------------------------------------- |
 |          | Programma loopt correct en wordt becommentarieerd | Programma wordt niet becommentarieerd | Programma is onvolledig of bevat fouten |

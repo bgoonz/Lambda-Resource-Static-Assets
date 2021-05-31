@@ -3,9 +3,11 @@
 这节课涵盖了 GitHub 的基础知识，这是一个可以用来存放代码和管理代码变更的平台。
 
 ![Intro to GitHub](/sketchnotes/webdev101-github.png)
+
 > 涂鸦笔记作者：[Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 课前小测
+
 [课前小测](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/3?loc=zh_cn)
 
 ## 大纲
@@ -22,8 +24,9 @@
 `git --version`
 
 如果没有安装 Git，请先[下载并安装 Git](https://git-scm.com/downloads)。然后用如下命令设置你的本地 Git 使用者配置文件：
-* `git config --global user.name "your-name"`
-* `git config --global user.email "your-email"`
+
+- `git config --global user.name "your-name"`
+- `git config --global user.email "your-email"`
 
 要检查 Git 使用者是否配置完成，可以输入：
 `git config --list`
@@ -156,7 +159,7 @@
 一条好的 Git 提交信息标题（subject line）可以理解为下方句子的填空：
 如果生效，这次提交将会 <你的提交信息标题>
 
-在标题内，使用祈使语气和现在时态，即使用 “change” 而非 “changed” 或 “changes”。 
+在标题内，使用祈使语气和现在时态，即使用 “change” 而非 “changed” 或 “changes”。
 同理，在正文（body，可选）中也要用祈使语气和现在时态。正文中需要包括更改的动机，并对比与更改前后行为的变化。确保你说明的是`为什么`，而不是`怎么做`。
 
 ✅ 花几分钟逛逛 GitHub。你能找到感觉非常棒的提交信息吗？你可以找到非常简洁的提交信息吗？你认为在一条提交信息中，传达什么信息是最重要和有用的？
@@ -169,13 +172,13 @@
 
 在你的仓库中，前往 `Insights > Community` 来查看你的项目和推荐的社区规范的对比。
 
-   这里有一些你可以改进你的项目仓库的点：
-   - **项目描述（Description）**。你为你的项目添加了描述吗？
-   - **README**。你有添加 README 吗？GitHub 提供了撰写 [README](https://docs.github.com/articles/about-readmes/) 的指南。
-   - **贡献指南（Contributing guideline）**。你的项目是否有[贡献指南](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/)？
-   - **行为准则（Code of Conduct）**。添加一份 [行为准则](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/)
-   - **开源协议（License）**。或许是最重要的，添加一个[开源协议](https://docs.github.com/articles/adding-a-license-to-a-repository/)
+这里有一些你可以改进你的项目仓库的点：
 
+- **项目描述（Description）**。你为你的项目添加了描述吗？
+- **README**。你有添加 README 吗？GitHub 提供了撰写 [README](https://docs.github.com/articles/about-readmes/) 的指南。
+- **贡献指南（Contributing guideline）**。你的项目是否有[贡献指南](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/)？
+- **行为准则（Code of Conduct）**。添加一份 [行为准则](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/)
+- **开源协议（License）**。或许是最重要的，添加一个[开源协议](https://docs.github.com/articles/adding-a-license-to-a-repository/)
 
 所有这些资源对于新加入的团队成员都是很有好处的，这些一般是新的贡献者在看你的代码前会更先去看的东西，以确认你的项目是否值得他们在这上面花费时间。
 
@@ -184,7 +187,6 @@
 ### 任务：合并（Merge）一些代码
 
 贡献文档帮助人们对项目做贡献，其中说明了你正需要什么样的贡献以及贡献的过程该是怎样的。贡献者需要完成一系列步骤才能在 GitHub 上参与你项目的贡献：
-
 
 1. **复刻（Fork）你的仓库**。你可能希望人们 _复刻_ 你的项目。复刻意味着在他们自己的 GitHub 账户下创建你的项目的一份副本。
 1. **克隆（Clone）**。在这里他们将会将项目克隆到他们的本地机器上。
@@ -256,7 +258,7 @@
 
 Pull Request 是一个可以用来比较和讨论一个分支引入的改动的地方，并有代码审查、评论、集成测试等功能。优质的 Pull Request 严格遵照与提交信息相同的规则。如果你的工作是为了修复一个 Issues 面板中的事项，你可以在 PR 中提及这个事项。具体做法是写一个 `#` 加上事项的编号，比如 `#97`。
 
-🤞如果一切顺利，所有的检查都通过后项目拥有者就会将你的变更合入项目🤞
+🤞 如果一切顺利，所有的检查都通过后项目拥有者就会将你的变更合入项目 🤞
 
 使用这个命令即可将 GitHub 上对应远程分支的所有新提交更新到当前本地的工作分支上：
 
@@ -299,6 +301,7 @@ Pull Request 是一个可以用来比较和讨论一个分支引入的改动的�
 找朋友一起编辑彼此的代码。协作创建一个项目、复刻代码、创建分支，然后合并变更。
 
 ## 课后小测
+
 [课后小测](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/4?loc=zh_cn)
 
 ## 复习 & 自学
@@ -313,6 +316,6 @@ Pull Request 是一个可以用来比较和讨论一个分支引入的改动的�
 
 你还可以在上面找到更多高阶的实验内容。
 
-## 作业 
+## 作业
 
 完成 [在 GitHub 的第一周](https://lab.github.com/githubtraining/first-week-on-github)

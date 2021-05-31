@@ -1,6 +1,7 @@
 # 盆栽盒專案 Part 3 - DOM 元素控制與閉包
 
 ![DOM 元素與閉包](/sketchnotes/webdev101-js.png)
+
 > 由 [Tomomi Imura](https://twitter.com/girlie_mac) 繪製
 
 ## 課前測驗
@@ -34,10 +35,11 @@
 在專案資料夾中，新增檔案 `script.js`。 匯入該檔案在 HTML 檔 `<head>` 的部分：
 
 ```html
-	<script src="./script.js" defer></script>
+<script src="./script.js" defer></script>
 ```
 
 > 筆記：匯入外部 JavaScript 檔案到 HTML 檔案須使用 `defer`，讓 JavaScript 檔案只有在 HTML 被完全載入時才被執行。你也可以使用 `async` 的屬性，允許 JavaScript 在解析 HTML 檔時就被執行。這項專案中，我們必須確保 HTML 的元件被完整建立後才允許使用拖曳功能。
+
 ---
 
 ## DOM 元素
@@ -71,23 +73,23 @@ dragElement(document.getElementById('plant14'));
 
 ## 閉包(Closure)
 
-現在，你已經準備好要建立 dragElement 閉包，建立包在外部函式內的內部函式組，在我們的例子中，會用上三個函式。 
+現在，你已經準備好要建立 dragElement 閉包，建立包在外部函式內的內部函式組，在我們的例子中，會用上三個函式。
 
 閉包在一或多個以上函式要存取外部函式時非常好用。看看下面的例子：
 
 ```javascript
-function displayCandy(){
-	let candy = ['jellybeans'];
-	function addCandy(candyType) {
-		candy.push(candyType)
-	}
-	addCandy('gumdrops');
+function displayCandy() {
+  let candy = ["jellybeans"];
+  function addCandy(candyType) {
+    candy.push(candyType);
+  }
+  addCandy("gumdrops");
 }
 displayCandy();
-console.log(candy)
+console.log(candy);
 ```
 
-這項例子中，函式 displayCandy 包住另一個函式 addCandy，新增新的糖果樣式到已存在的矩陣當中。當執行這段程式時，矩陣 `candy` 會被認作是未定義，因為它是函式的本地變數。 
+這項例子中，函式 displayCandy 包住另一個函式 addCandy，新增新的糖果樣式到已存在的矩陣當中。當執行這段程式時，矩陣 `candy` 會被認作是未定義，因為它是函式的本地變數。
 
 ✅ 你能讓矩陣 `candy` 被存取嗎？試著將它移到閉包外面。這時，矩陣會變成全域變數，取消閉包內的存取限制。
 
@@ -97,12 +99,12 @@ console.log(candy)
 
 ```javascript
 function dragElement(terrariumElement) {
-	//set 4 positions for positioning on the screen
-	let pos1 = 0,
-		pos2 = 0,
-		pos3 = 0,
-		pos4 = 0;
-	terrariumElement.onpointerdown = pointerDrag;
+  //set 4 positions for positioning on the screen
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  terrariumElement.onpointerdown = pointerDrag;
 }
 ```
 
@@ -122,10 +124,10 @@ terrariumElement 已經準備好被拖曳了。當觸發 `onpointerdown` 事件�
 
 ```javascript
 function pointerDrag(e) {
-	e.preventDefault();
-	console.log(e);
-	pos3 = e.clientX;
-	pos4 = e.clientY;
+  e.preventDefault();
+  console.log(e);
+  pos3 = e.clientX;
+  pos4 = e.clientY;
 }
 ```
 
@@ -133,7 +135,7 @@ function pointerDrag(e) {
 
 > 回到你建立的程式碼中，試著刪除 `e.preventDefault()` 並執行看看，發生了什麼事？
 
-第二，用瀏覽器打開 `index.html` 並調查我們的介面。當你點擊植物時，你可以發現 'e' 事件被觸發了。專研一下，一個 pointerdown 事件會產生多少資訊！  
+第二，用瀏覽器打開 `index.html` 並調查我們的介面。當你點擊植物時，你可以發現 'e' 事件被觸發了。專研一下，一個 pointerdown 事件會產生多少資訊！
 
 接下來，紀錄本地變數 `pos3` 和 `pos4` 被設定為 e.clientX 和 e.clientY。你可以在觀察面板中，會發現 `e` 的數值。這項數值取得按下植物瞬間的 x 與 y 座標資訊。為了全面的控制植物行為，在拖曳植物時，我們會持續更新座標資訊。
 
@@ -142,8 +144,7 @@ function pointerDrag(e) {
 增加初始化函式，在程式碼 `pos4 = e.clientY` 下方加上下列兩行事件處理：
 
 ```html
-document.onpointermove = elementDrag;
-document.onpointerup = stopElementDrag;
+document.onpointermove = elementDrag; document.onpointerup = stopElementDrag;
 ```
 
 現在，在游標拖曳時，你的植物能跟著你的游標走，而在你取消點擊時停下來。`onpointermove` 和 `onpointerup` 也是 `onpointerdown` 類型相同的 API。然而，現在介面會出現錯誤訊息，因為我們還沒建立函式 `elementDrag` 與 `stopElementDrag`。
@@ -158,13 +159,13 @@ document.onpointerup = stopElementDrag;
 
 ```javascript
 function elementDrag(e) {
-	pos1 = pos3 - e.clientX;
-	pos2 = pos4 - e.clientY;
-	pos3 = e.clientX;
-	pos4 = e.clientY;
-	console.log(pos1, pos2, pos3, pos4);
-	terrariumElement.style.top = terrariumElement.offsetTop - pos2 + 'px';
-	terrariumElement.style.left = terrariumElement.offsetLeft - pos1 + 'px';
+  pos1 = pos3 - e.clientX;
+  pos2 = pos4 - e.clientY;
+  pos3 = e.clientX;
+  pos4 = e.clientY;
+  console.log(pos1, pos2, pos3, pos4);
+  terrariumElement.style.top = terrariumElement.offsetTop - pos2 + "px";
+  terrariumElement.style.left = terrariumElement.offsetLeft - pos1 + "px";
 }
 ```
 
@@ -182,8 +183,8 @@ function elementDrag(e) {
 
 ```javascript
 function stopElementDrag() {
-	document.onpointerup = null;
-	document.onpointermove = null;
+  document.onpointerup = null;
+  document.onpointermove = null;
 }
 ```
 
@@ -216,4 +217,3 @@ function stopElementDrag() {
 ## 作業
 
 [用 DOM 做更多事](assignment.zh-tw.md)
-

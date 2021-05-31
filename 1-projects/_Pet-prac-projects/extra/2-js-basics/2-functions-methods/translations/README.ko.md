@@ -1,9 +1,11 @@
 # JavaScript 기초: 메소드와 함수
 
 ![JavaScript Basics - Functions](/sketchnotes/webdev101-js-functions.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 강의 전 퀴즈
+
 [Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/9?loc=ko)
 
 코드 작성에 대해 생각할 때 항상 코드를 읽을 수 있도록 해야합니다. 직설적이지 않지만, 코드는 작성된 것보다 더 많이 읽힙니다. 개발자의 툴 박스에서 유지관리 가능한 코드를 보장하는 핵심 도구는 **함수**입니다.
@@ -21,8 +23,9 @@
 함수 구문은 다음과 같습니다:
 
 ```javascript
-function nameOfFunction() { // function definition
- // function definition/body
+function nameOfFunction() {
+  // function definition
+  // function definition/body
 }
 ```
 
@@ -30,7 +33,7 @@ function nameOfFunction() { // function definition
 
 ```javascript
 function displayGreeting() {
-  console.log('Hello, world!');
+  console.log("Hello, world!");
 }
 ```
 
@@ -58,9 +61,7 @@ displayGreeting();
 매개 변수는 괄호 안에 나열되며 쉼표로 구분됩니다.
 
 ```javascript
-function name(param, param2, param3) {
-
-}
+function name(param, param2, param3) {}
 ```
 
 `displayGreeting` 함수를 업데이트해서 이름을 받아 출력할 수 있습니다.
@@ -75,7 +76,7 @@ function displayGreeting(name) {
 함수를 호출하고 매개 변수를 전달하려면, 괄호 안에 지정합니다.
 
 ```javascript
-displayGreeting('Christopher');
+displayGreeting("Christopher");
 // displays "Hello, Christopher!" when run
 ```
 
@@ -84,7 +85,7 @@ displayGreeting('Christopher');
 더 많은 매개 변수를 추가하여 힘수를 유연하게 만들 수 있습니다. 그러나 모든 값을 지정하지 않으려면 어떻게 해야할까요? 인사 예시를 유지하면서 필요하면 이름을 남길 수 있지만 (인사말하는 사람을 알아야 합니다), 원하는대로 인사를 커스터마이징할 수 있습니다. 누군가 커스터마이징을 원하지 않는 경우에는 대신 기본값을 제공합니다. 매개 변수에 기본값을 제공하기 위해서는 변수에 대한 값을 지정하는 것과 같은 방식으로 설정합니다 - `parameterName = 'defaultValue'`. 전체 예시를 보십시오:
 
 ```javascript
-function displayGreeting(name, salutation='Hello') {
+function displayGreeting(name, salutation = "Hello") {
   console.log(`${salutation}, ${name}`);
 }
 ```
@@ -92,10 +93,10 @@ function displayGreeting(name, salutation='Hello') {
 함수를 호출할 때, `salutation`에 대한 값을 설정할 것인지 결정할 수 있습니다.
 
 ```javascript
-displayGreeting('Christopher');
+displayGreeting("Christopher");
 // displays "Hello, Christopher"
 
-displayGreeting('Christopher', 'Hi');
+displayGreeting("Christopher", "Hi");
 // displays "Hi, Christopher"
 ```
 
@@ -109,7 +110,7 @@ displayGreeting('Christopher', 'Hi');
 
 ```javascript
 return myVariable;
-```  
+```
 
 인사 메시지를 만들고 호출하는 곳에 값을 반환해주는 함수를 만들 수 있습니다.
 
@@ -123,7 +124,7 @@ function createGreetingMessage(name) {
 이 함수를 호출하면 값을 변수에 저장합니다. 변수를 정적 값(`const name = 'Christopher'`)으로 지정하는 것과 거의 동일합니다.
 
 ```javascript
-const greetingMessage = createGreetingMessage('Christopher');
+const greetingMessage = createGreetingMessage("Christopher");
 ```
 
 ## 함수의 파라미터에서 함수
@@ -136,7 +137,7 @@ const greetingMessage = createGreetingMessage('Christopher');
 
 ```javascript
 function displayDone() {
-  console.log('3 seconds has elapsed');
+  console.log("3 seconds has elapsed");
 }
 // timer value is in milliseconds
 setTimeout(3000, displayDone);
@@ -151,8 +152,8 @@ setTimeout(3000, displayDone);
 익명 함수를 사용하도록 위 코드를 다시 작성해 보겠습니다:
 
 ```javascript
-setTimeout(3000, function() {
-  console.log('3 seconds has elapsed');
+setTimeout(3000, function () {
+  console.log("3 seconds has elapsed");
 });
 ```
 
@@ -166,7 +167,7 @@ setTimeout(3000, function() {
 
 ```javascript
 setTimeout(3000, () => {
-  console.log('3 seconds has elapsed');
+  console.log("3 seconds has elapsed");
 });
 ```
 
@@ -181,6 +182,7 @@ setTimeout(3000, () => {
 함수와 메소드의 차이점을 한 문장으로 표현할 수 있나요? 시도해보세요!
 
 ## 강의 후 퀴즈
+
 [Post-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/10?loc=ko)
 
 ## 리뷰 & 자기주도 학습

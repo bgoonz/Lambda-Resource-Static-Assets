@@ -8,7 +8,7 @@
 
 ### Warisan dan Komposisi dalam pembangunan permainan
 
-Dalam pelajaran sebelumnya, tidak banyak yang perlu dikhawatirkan mengenai reka bentuk reka bentuk aplikasi yang anda buat, kerana skop projeknya sangat kecil. Namun, apabila aplikasi anda bertambah besar dan luas, keputusan seni bina menjadi perhatian yang lebih besar. Terdapat dua pendekatan utama untuk membuat aplikasi yang lebih besar dalam JavaScript: *komposisi* atau *pewarisan*. Terdapat kebaikan dan keburukan untuk kedua-duanya tetapi mari kita jelaskan dari dalam konteks permainan.
+Dalam pelajaran sebelumnya, tidak banyak yang perlu dikhawatirkan mengenai reka bentuk reka bentuk aplikasi yang anda buat, kerana skop projeknya sangat kecil. Namun, apabila aplikasi anda bertambah besar dan luas, keputusan seni bina menjadi perhatian yang lebih besar. Terdapat dua pendekatan utama untuk membuat aplikasi yang lebih besar dalam JavaScript: _komposisi_ atau _pewarisan_. Terdapat kebaikan dan keburukan untuk kedua-duanya tetapi mari kita jelaskan dari dalam konteks permainan.
 
 ✅ Salah satu buku pengaturcaraan paling terkenal yang pernah ditulis ada kaitannya dengan [corak reka bentuk](https://en.wikipedia.org/wiki/Design_Patterns).
 
@@ -34,7 +34,6 @@ Ideanya adalah untuk menggunakan `kelas` bersama dengan `pewarisan` untuk menyel
 Diekspresikan melalui kod, objek permainan biasanya dapat terlihat seperti ini:
 
 ```javascript
-
 //menubuhkan kelas GameObject
 class GameObject {
   constructor(x, y, type) {
@@ -46,11 +45,11 @@ class GameObject {
 
 //kelas ini akan memperluaskan sifat kelas yang ada pada GameObject
 class Movable extends GameObject {
-  constructor(x,y, type) {
-    super(x,y, type)
+  constructor(x, y, type) {
+    super(x, y, type);
   }
 
-//objek bergerak ini dapat dipindahkan di skrin
+  //objek bergerak ini dapat dipindahkan di skrin
   moveTo(x, y) {
     this.x = x;
     this.y = y;
@@ -59,21 +58,21 @@ class Movable extends GameObject {
 
 //ini adalah kelas khusus yang meluaskan kelas Bergerak, sehingga dapat memanfaatkan semua sifat yang diwarisi
 class Hero extends Movable {
-  constructor(x,y) {
-    super(x,y, 'Hero')
+  constructor(x, y) {
+    super(x, y, "Hero");
   }
 }
 
 //kelas ini, sebaliknya, hanya mewarisi sifat GameObject
 class Tree extends GameObject {
-  constructor(x,y) {
-    super(x,y, 'Tree')
+  constructor(x, y) {
+    super(x, y, "Tree");
   }
 }
 
 //hero dapat bergerak...
 const hero = new Hero();
-hero.moveTo(5,5);
+hero.moveTo(5, 5);
 
 //tetapi pokok tidak boleh
 const tree = new Tree();
@@ -83,7 +82,7 @@ const tree = new Tree();
 
 **Komposisi**
 
-Cara yang berbeza untuk menangani pewarisan objek adalah dengan menggunakan *Komposisi*. Kemudian, objek menyatakan tingkah laku mereka seperti ini:
+Cara yang berbeza untuk menangani pewarisan objek adalah dengan menggunakan _Komposisi_. Kemudian, objek menyatakan tingkah laku mereka seperti ini:
 
 ```javascript
 //buat pemalar untuk gameObject
@@ -125,7 +124,7 @@ function createStatic(x, y, type) {
 const hero = createHero(10,10);
 hero.moveTo(5,5);
 //dan buat pokok statik yang hanya berdiri
-const tree = createStatic(0,0, 'Tree'); 
+const tree = createStatic(0,0, 'Tree');
 ```
 
 **Corak mana yang harus saya gunakan?**
@@ -143,8 +142,8 @@ Pola lain yang biasa dalam pengembangan permainan menangani masalah menangani pe
 Corak ini mengemukakan idea bahawa bahagian aplikasi anda yang berbeza tidak boleh saling mengenali. Kenapa begitu? Ini menjadikannya lebih mudah untuk melihat apa yang berlaku secara umum jika pelbagai bahagian dipisahkan. Ini juga menjadikannya lebih mudah untuk mengubah tingkah laku secara tiba-tiba jika anda perlu Bagaimana kita mencapainya? Kami melakukan ini dengan mewujudkan beberapa konsep:
 
 - **mesej**: Mesej biasanya merupakan rentetan teks yang disertai dengan muatan pilihan (sekeping data yang menjelaskan tentang mesej itu) Mesej biasa dalam permainan boleh menjadi `KEY_PRESSED_ENTER`.
-- **publish**: Elemen ini *menerbitkan* mesej dan mengirimkannya kepada semua pelanggan.
-- **subscriber**: Elemen ini *mendengar* mesej tertentu dan menjalankan beberapa tugas sebagai hasil daripada menerima mesej ini, seperti menembakkan laser.
+- **publish**: Elemen ini _menerbitkan_ mesej dan mengirimkannya kepada semua pelanggan.
+- **subscriber**: Elemen ini _mendengar_ mesej tertentu dan menjalankan beberapa tugas sebagai hasil daripada menerima mesej ini, seperti menembakkan laser.
 
 Pelaksanaannya cukup kecil tetapi coraknya sangat kuat. Inilah cara ia dapat dilaksanakan:
 
@@ -154,21 +153,20 @@ class EventEmitter {
   constructor() {
     this.listeners = {};
   }
-//apabila mesej diterima, biarkan pendengar menangani muatannya
+  //apabila mesej diterima, biarkan pendengar menangani muatannya
   on(message, listener) {
     if (!this.listeners[message]) {
       this.listeners[message] = [];
     }
     this.listeners[message].push(listener);
   }
-//semasa mesej dihantar, hantarkannya kepada pendengar dengan muatan
+  //semasa mesej dihantar, hantarkannya kepada pendengar dengan muatan
   emit(message, payload = null) {
     if (this.listeners[message]) {
-      this.listeners[message].forEach(l => l(message, payload))
+      this.listeners[message].forEach((l) => l(message, payload));
     }
   }
 }
-
 ```
 
 Untuk menggunakan kod di atas, kita dapat membuat implementasi yang sangat kecil:
@@ -176,21 +174,21 @@ Untuk menggunakan kod di atas, kita dapat membuat implementasi yang sangat kecil
 ```javascript
 //sediakan struktur mesej
 const Messages = {
-  HERO_MOVE_LEFT: 'HERO_MOVE_LEFT'
+  HERO_MOVE_LEFT: "HERO_MOVE_LEFT",
 };
 //memanggil eventEmitter yang anda tetapkan di atas
 const eventEmitter = new EventEmitter();
 //sediakan hero
-const hero = createHero(0,0);
+const hero = createHero(0, 0);
 //biarkan eventEmitter tahu untuk menonton mesej yang berkaitan dengan pahlawan yang bergerak ke kiri, dan bertindak di atasnya
 eventEmitter.on(Messages.HERO_MOVE_LEFT, () => {
-  hero.move(5,0);
+  hero.move(5, 0);
 });
 
 //sediakan tetingkap untuk mendengarkan acara keyup, khususnya jika anak panah kiri dipukul, mengirimkan pesan untuk menggerakkan pahlawan ke kiri
-window.addEventListener('keyup', (evt) => {
-  if (evt.key === 'ArrowLeft') {
-    eventEmitter.emit(Messages.HERO_MOVE_LEFT)
+window.addEventListener("keyup", (evt) => {
+  if (evt.key === "ArrowLeft") {
+    eventEmitter.emit(Messages.HERO_MOVE_LEFT);
   }
 });
 ```
@@ -199,7 +197,7 @@ Di atas kami menyambungkan acara papan kekunci, `ArrowLeft` dan menghantar mesej
 
 ```javascript
 eventEmitter.on(Messages.HERO_MOVE_LEFT, () => {
-  hero.move(5,0);
+  hero.move(5, 0);
 });
 ```
 

@@ -4,6 +4,6 @@ Proporcione un informe detallado de un sitio web, que muestre las áreas donde e
 
 ## Rúbrica
 
-| Criterios | Ejemplar | Adecuado | Necesita mejorar |
-| -------- | -------------------------------------------------- -------------------------------------------------- ------ | --------------------------- | ----------------------------- |
-| | Se presenta un informe con detalles extraídos no solo de las herramientas del navegador, sino también de herramientas de terceros, si están disponibles | Se presenta un informe básico | Se presenta un informe mínimo |
+| Criterios | Ejemplar                                                                                                                                                | Adecuado                      | Necesita mejorar              |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ----------------------------- |
+|           | Se presenta un informe con detalles extraídos no solo de las herramientas del navegador, sino también de herramientas de terceros, si están disponibles | Se presenta un informe básico | Se presenta un informe mínimo |

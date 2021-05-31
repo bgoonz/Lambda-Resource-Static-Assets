@@ -8,6 +8,6 @@ Erstellen Sie ein Programm, das jede dritte Zahl zwischen 1 und 20 auflistet und
 
 ## Rubrik
 
-| Kriterien | Vorbildlich | Angemessen | Verbesserungsbedarf |
-| -------- | --------------------------------------- | ------------------------ | ------------------------------ |
-| | Programm läuft korrekt und ist kommentiert | Programm ist nicht kommentiert | Programm ist unvollständig oder fehlerhaft
+| Kriterien | Vorbildlich                                | Angemessen                     | Verbesserungsbedarf                        |
+| --------- | ------------------------------------------ | ------------------------------ | ------------------------------------------ |
+|           | Programm läuft korrekt und ist kommentiert | Programm ist nicht kommentiert | Programm ist unvollständig oder fehlerhaft |

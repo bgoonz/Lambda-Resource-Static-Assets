@@ -18,18 +18,18 @@
 
 ```javascript
 // フォームフィールド
-const form = document.querySelector('.form-data');
-const region = document.querySelector('.region-name');
-const apiKey = document.querySelector('.api-key');
+const form = document.querySelector(".form-data");
+const region = document.querySelector(".region-name");
+const apiKey = document.querySelector(".api-key");
 
 // 結果
-const errors = document.querySelector('.errors');
-const loading = document.querySelector('.loading');
-const results = document.querySelector('.result-container');
-const usage = document.querySelector('.carbon-usage');
-const fossilfuel = document.querySelector('.fossil-fuel');
-const myregion = document.querySelector('.my-region');
-const clearBtn = document.querySelector('.clear-btn');
+const errors = document.querySelector(".errors");
+const loading = document.querySelector(".loading");
+const results = document.querySelector(".result-container");
+const usage = document.querySelector(".carbon-usage");
+const fossilfuel = document.querySelector(".fossil-fuel");
+const myregion = document.querySelector(".my-region");
+const clearBtn = document.querySelector(".clear-btn");
 ```
 
 前のレッスンで HTML で設定したように、これらのフィールドはすべてその CSS クラスによって参照されます。
@@ -39,8 +39,8 @@ const clearBtn = document.querySelector('.clear-btn');
 次に、フォームにイベントリスナーを追加し、フォームをリセットするクリアボタンを追加します。ユーザーがフォームを送信したり、リセットボタンをクリックしたりした場合に、そのリセットボタンをクリックするようにします。何かが起こるときのため、ファイルの一番下にアプリを初期化するための呼び出しを追加します。
 
 ```javascript
-form.addEventListener('submit', (e) => handleSubmit(e));
-clearBtn.addEventListener('click', (e) => reset(e));
+form.addEventListener("submit", (e) => handleSubmit(e));
+clearBtn.addEventListener("click", (e) => reset(e));
 init();
 ```
 
@@ -52,40 +52,40 @@ init();
 
 ```javascript
 function init() {
-	//何かがローカルストレージにある場合は、それをピックアップします。
-	const storedApiKey = localStorage.getItem('apiKey');
-	const storedRegion = localStorage.getItem('regionName');
+  //何かがローカルストレージにある場合は、それをピックアップします。
+  const storedApiKey = localStorage.getItem("apiKey");
+  const storedRegion = localStorage.getItem("regionName");
 
-	//アイコンを一般的な緑色に設定
-	//todo
+  //アイコンを一般的な緑色に設定
+  //todo
 
-	if (storedApiKey === null || storedRegion === null) {
-		//キーを持っていない場合は、フォームを表示します。
-		form.style.display = 'block';
-		results.style.display = 'none';
-		loading.style.display = 'none';
-		clearBtn.style.display = 'none';
-		errors.textContent = '';
-	} else {
-        //ローカルストレージにキー/領域を保存している場合、そのキー/領域がロードされたときに結果を表示します。
-        displayCarbonUsage(storedApiKey, storedRegion);
-		results.style.display = 'none';
-		form.style.display = 'none';
-		clearBtn.style.display = 'block';
-	}
-};
-
-function reset(e) {
-	e.preventDefault();
-	//リージョン専用のローカルストレージをクリアします。
-	localStorage.removeItem('regionName');
-	init();
+  if (storedApiKey === null || storedRegion === null) {
+    //キーを持っていない場合は、フォームを表示します。
+    form.style.display = "block";
+    results.style.display = "none";
+    loading.style.display = "none";
+    clearBtn.style.display = "none";
+    errors.textContent = "";
+  } else {
+    //ローカルストレージにキー/領域を保存している場合、そのキー/領域がロードされたときに結果を表示します。
+    displayCarbonUsage(storedApiKey, storedRegion);
+    results.style.display = "none";
+    form.style.display = "none";
+    clearBtn.style.display = "block";
+  }
 }
 
+function reset(e) {
+  e.preventDefault();
+  //リージョン専用のローカルストレージをクリアします。
+  localStorage.removeItem("regionName");
+  init();
+}
 ```
+
 この関数には、面白いロジックがあります。これを読み進めていくと、何が起こるかわかりますか?
 
-- 2つの `const` は、ユーザが API キーとリージョンコードをローカルストレージに保存しているかどうかをチェックするために設定されます
+- 2 つの `const` は、ユーザが API キーとリージョンコードをローカルストレージに保存しているかどうかをチェックするために設定されます
 - どちらかが null の場合、フォームのスタイルを 'block' として表示するように変更してフォームを表示します
 - 結果、読み込み、および clearBtn を非表示にし、エラーテキストを空の文字列に設定します
 - キーとリージョンが存在する場合は、そのためのルーチンを開始します
@@ -110,15 +110,16 @@ API キーに文字列の値を設定して、例えば Edge では Web ペー�
 
 ### フォーム送信の処理
 
-イベント引数 `(e)` を受け取る関数 `handleSubmit` を作成します。イベントの伝播を停止し (この場合、ブラウザの更新を停止したい)、新しい関数 `setUpUser` を呼び出し、引数 `apiKey.value` と `region.value` を渡します。このようにして、適切なフィールドが入力されたときに初期フォームから取得される2つの値を利用します。
+イベント引数 `(e)` を受け取る関数 `handleSubmit` を作成します。イベントの伝播を停止し (この場合、ブラウザの更新を停止したい)、新しい関数 `setUpUser` を呼び出し、引数 `apiKey.value` と `region.value` を渡します。このようにして、適切なフィールドが入力されたときに初期フォームから取得される 2 つの値を利用します。
 
 ```javascript
 function handleSubmit(e) {
-	e.preventDefault();
-	setUpUser(apiKey.value, region.value);
+  e.preventDefault();
+  setUpUser(apiKey.value, region.value);
 }
 ```
-✅ 記憶をリフレッシュしてください - 前回のレッスンで設定した HTML には、ファイルの先頭に設定した `const` で `values` が取得される2つの入力フィールドがあり、両方とも `required` であるため、ブラウザはユーザが null 値を入力しないようにします。
+
+✅ 記憶をリフレッシュしてください - 前回のレッスンで設定した HTML には、ファイルの先頭に設定した `const` で `values` が取得される 2 つの入力フィールドがあり、両方とも `required` であるため、ブラウザはユーザが null 値を入力しないようにします。
 
 ### ユーザーの設定
 
@@ -126,15 +127,16 @@ function handleSubmit(e) {
 
 ```javascript
 function setUpUser(apiKey, regionName) {
-	localStorage.setItem('apiKey', apiKey);
-	localStorage.setItem('regionName', regionName);
-	loading.style.display = 'block';
-	errors.textContent = '';
-	clearBtn.style.display = 'block';
-	//初期化の呼び出し
-	displayCarbonUsage(apiKey, regionName);
+  localStorage.setItem("apiKey", apiKey);
+  localStorage.setItem("regionName", regionName);
+  loading.style.display = "block";
+  errors.textContent = "";
+  clearBtn.style.display = "block";
+  //初期化の呼び出し
+  displayCarbonUsage(apiKey, regionName);
 }
 ```
+
 この関数は、API が呼び出されている間に表示するローディングメッセージを設定します。この時点で、このブラウザ拡張機能の最も重要な機能の作成に到達しました!
 
 ### 炭素使用量の表示
@@ -154,40 +156,42 @@ function setUpUser(apiKey, regionName) {
 C02Signal API に問い合わせを行うための新しい関数を作成します:
 
 ```javascript
-import axios from '../node_modules/axios';
+import axios from "../node_modules/axios";
 
 async function displayCarbonUsage(apiKey, region) {
-	try {
-		await axios
-			.get('https://api.co2signal.com/v1/latest', {
-				params: {
-					countryCode: region,
-				},
-				headers: {
-					'auth-token': apiKey,
-				},
-			})
-			.then((response) => {
-				let CO2 = Math.floor(response.data.data.carbonIntensity);
+  try {
+    await axios
+      .get("https://api.co2signal.com/v1/latest", {
+        params: {
+          countryCode: region,
+        },
+        headers: {
+          "auth-token": apiKey,
+        },
+      })
+      .then((response) => {
+        let CO2 = Math.floor(response.data.data.carbonIntensity);
 
-				//calculateColor(CO2);
+        //calculateColor(CO2);
 
-				loading.style.display = 'none';
-				form.style.display = 'none';
-				myregion.textContent = region;
-				usage.textContent =
-					Math.round(response.data.data.carbonIntensity) + ' grams (grams C02 emitted per kilowatt hour)';
-				fossilfuel.textContent =
-					response.data.data.fossilFuelPercentage.toFixed(2) +
-					'% (percentage of fossil fuels used to generate electricity)';
-				results.style.display = 'block';
-			});
-	} catch (error) {
-		console.log(error);
-		loading.style.display = 'none';
-		results.style.display = 'none';
-		errors.textContent = 'Sorry, we have no data for the region you have requested.';
-	}
+        loading.style.display = "none";
+        form.style.display = "none";
+        myregion.textContent = region;
+        usage.textContent =
+          Math.round(response.data.data.carbonIntensity) +
+          " grams (grams C02 emitted per kilowatt hour)";
+        fossilfuel.textContent =
+          response.data.data.fossilFuelPercentage.toFixed(2) +
+          "% (percentage of fossil fuels used to generate electricity)";
+        results.style.display = "block";
+      });
+  } catch (error) {
+    console.log(error);
+    loading.style.display = "none";
+    results.style.display = "none";
+    errors.textContent =
+      "Sorry, we have no data for the region you have requested.";
+  }
 }
 ```
 
@@ -214,9 +218,8 @@ async function displayCarbonUsage(apiKey, region) {
 
 ## 復習と自己学習
 
-このレッスンではローカルストレージと API について学びましたが、どちらもプロの Web 開発者にとって非常に有用なものです。この2つがどのように連携しているか考えてみましたか? API で使用するアイテムを保存する Web サイトをどのように構築するか考えてみてください。
+このレッスンではローカルストレージと API について学びましたが、どちらもプロの Web 開発者にとって非常に有用なものです。この 2 つがどのように連携しているか考えてみましたか? API で使用するアイテムを保存する Web サイトをどのように構築するか考えてみてください。
 
 ## 課題
 
 [API を採用する](assignment.ja.md)
-

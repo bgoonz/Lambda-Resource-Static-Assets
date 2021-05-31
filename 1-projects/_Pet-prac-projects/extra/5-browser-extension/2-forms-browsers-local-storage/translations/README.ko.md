@@ -2,7 +2,7 @@
 
 ## 강의 전 퀴즈
 
-[Pre-lecture quiz][Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/25?loc=ko)
+[Pre-lecture quiz][pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/25?loc=ko)
 
 ### 소개
 
@@ -83,6 +83,7 @@ function reset(e) {
 }
 
 ```
+
 함수에는, 약간의 흥미로운 로직이 있습니다. 이것을 읽어보면, 어떤 것이 보이나요?
 
 - 사용자가 로컬 저장소에 APIKey 및 지역 코드를 저장했는지 확인하기 위해 두 'const'가 설정됩니다.
@@ -118,6 +119,7 @@ function handleSubmit(e) {
 	setUpUser(apiKey.value, region.value);
 }
 ```
+
 ✅ 메모리를 초기화합니다 - 지난 강의에서 설정한 HTML에는 파일 상단에 지정한 `const`를 통해 `values`이 잡히는 두 입력 필드가 있으며, 둘 다 `required`이므로 브라우저에서 사용자가 null 값을 입력하지 못하도록 합니다.
 
 ### 사용자 설정하기
@@ -135,6 +137,7 @@ function setUpUser(apiKey, regionName) {
 	displayCarbonUsage(apiKey, regionName);
 }
 ```
+
 이 함수는 API가 호출되는 동안 로딩 메시지를 설정하게 합니다. 핵심으로, 이 브라우저 확장의 가장 중요한 함수를 만드는 데 도달했습니다!
 
 ### 탄소 사용량 출력하기
@@ -210,7 +213,7 @@ async function displayCarbonUsage(apiKey, region) {
 
 ## 강의 후 퀴즈
 
-[Post-lecture quiz][Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/26?loc=ko)
+[Post-lecture quiz][pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/26?loc=ko)
 
 ## 리뷰 & 자기주도 학습
 
@@ -219,4 +222,3 @@ async function displayCarbonUsage(apiKey, region) {
 ## 과제
 
 [Adopt an API](../assignment.md)
-

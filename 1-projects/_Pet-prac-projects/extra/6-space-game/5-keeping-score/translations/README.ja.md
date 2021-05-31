@@ -19,7 +19,6 @@ ctx.fillText("show this on the screen", 0, 0);
 
 ✅ [canvas にテキストを追加する方法](https://developer.mozilla.org/ja/docs/Drawing_text_using_a_canvas)について詳しくはこちらをご覧ください。そうすれば自由にファンシーな外観を作ることができます。
 
-
 ## ゲームの概念としてのライフ
 
 ゲームにおけるライフの概念は数字でしかありません。スペースゲームの文脈では、自分の宇宙船がダメージを受けたときに一つずつ差し引かれるライフを割り当てるのが一般的です。これを数字ではなく、ミニシップやハートのようにグラフィカルに表現できるといいですね。
@@ -28,8 +27,8 @@ ctx.fillText("show this on the screen", 0, 0);
 
 以下のようなものをゲームに追加してみましょう。
 
-- **ゲームのスコア**: 敵艦が破壊されるごとに、ヒーローにはいくつかのポイントが与えられるはずですが、私たちは1隻につき100ポイントをお勧めします。ゲームスコアは左下に表示されます
-- **ライフ**: あなたの宇宙船には3つのライフがあります。敵の船が衝突するたびにライフを失います。ライフスコアは右下に表示され、次のグラフィックで作成されます。![life image](../solution/assets/life.png)
+- **ゲームのスコア**: 敵艦が破壊されるごとに、ヒーローにはいくつかのポイントが与えられるはずですが、私たちは 1 隻につき 100 ポイントをお勧めします。ゲームスコアは左下に表示されます
+- **ライフ**: あなたの宇宙船には 3 つのライフがあります。敵の船が衝突するたびにライフを失います。ライフスコアは右下に表示され、次のグラフィックで作成されます。![life image](../solution/assets/life.png)
 
 ## 推奨される手順
 
@@ -58,114 +57,114 @@ npm start
 
 1. `solution/assets/` フォルダから `your-work` フォルダに**必要なアセットをコピー**して、`life.png` アセットを追加します。lifeImg を window.onload 関数に追加します
 
-    ```javascript
-    lifeImg = await loadTexture("assets/life.png");
-    ```
+   ```javascript
+   lifeImg = await loadTexture("assets/life.png");
+   ```
 
 1. アセットのリストに `lifeImg` を追加します
 
-    ```javascript
-    let heroImg,
-    ...
-    lifeImg,
-    ...
-    eventEmitter = new EventEmitter();
-    ```
-  
-2. **変数を追加します**。あなたの合計スコア (0) とその左に (3) のライフを表すコードを追加し、画面上にこれらのスコアを表示します
+   ```javascript
+   let heroImg,
+   ...
+   lifeImg,
+   ...
+   eventEmitter = new EventEmitter();
+   ```
 
-3. **`updateGameObjects()` 関数を拡張します**。`updateGameObjects()` 関数を拡張し、敵の衝突に対応するようにします
+1. **変数を追加します**。あなたの合計スコア (0) とその左に (3) のライフを表すコードを追加し、画面上にこれらのスコアを表示します
 
-    ```javascript
-    enemies.forEach(enemy => {
-        const heroRect = hero.rectFromGameObject();
-        if (intersectRect(heroRect, enemy.rectFromGameObject())) {
-          eventEmitter.emit(Messages.COLLISION_ENEMY_HERO, { enemy });
-        }
-      })
-    ```
+1. **`updateGameObjects()` 関数を拡張します**。`updateGameObjects()` 関数を拡張し、敵の衝突に対応するようにします
 
-4. **`life` と `points` を追加します**
+   ```javascript
+   enemies.forEach((enemy) => {
+     const heroRect = hero.rectFromGameObject();
+     if (intersectRect(heroRect, enemy.rectFromGameObject())) {
+       eventEmitter.emit(Messages.COLLISION_ENEMY_HERO, { enemy });
+     }
+   });
+   ```
+
+1. **`life` と `points` を追加します**
+
    1. **変数を初期化します**。`Hero` クラスの `this.cooldown = 0` の下で、ライフとポイントを設定します
 
-        ```javascript
-        this.life = 3;
-        this.points = 0;
-        ```
+      ```javascript
+      this.life = 3;
+      this.points = 0;
+      ```
 
    1. **画面上に変数を描画します**。これらの値を画面に描画します
 
-        ```javascript
-        function drawLife() {
-          // TODO, 35, 27
-          const START_POS = canvas.width - 180;
-          for(let i=0; i < hero.life; i++ ) {
-            ctx.drawImage(
-              lifeImg, 
-              START_POS + (45 * (i+1) ), 
-              canvas.height - 37);
-          }
+      ```javascript
+      function drawLife() {
+        // TODO, 35, 27
+        const START_POS = canvas.width - 180;
+        for (let i = 0; i < hero.life; i++) {
+          ctx.drawImage(lifeImg, START_POS + 45 * (i + 1), canvas.height - 37);
         }
-        
-        function drawPoints() {
-          ctx.font = "30px Arial";
-          ctx.fillStyle = "red";
-          ctx.textAlign = "left";
-          drawText("Points: " + hero.points, 10, canvas.height-20);
-        }
-        
-        function drawText(message, x, y) {
-          ctx.fillText(message, x, y);
-        }
+      }
 
-        ```
+      function drawPoints() {
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "red";
+        ctx.textAlign = "left";
+        drawText("Points: " + hero.points, 10, canvas.height - 20);
+      }
+
+      function drawText(message, x, y) {
+        ctx.fillText(message, x, y);
+      }
+      ```
 
    1. **Game ループにメソッドを追加します**。`updateGameObjects()` の下の window.onload 関数にこれらの関数を追加します
 
-        ```javascript
-        drawPoints();
-        drawLife();
-        ```
+      ```javascript
+      drawPoints();
+      drawLife();
+      ```
 
 1. **ゲームのルールを実装します**。以下のゲームルールを実装します
 
    1. **ヒーローと敵の衝突ごとに**、ライフを差し引きます
-   
+
       `Hero` クラスを拡張してこの差し引きを行います
 
-        ```javascript
-        decrementLife() {
-          this.life--;
-          if (this.life === 0) {
-            this.dead = true;
-          }
+      ```javascript
+      decrementLife() {
+        this.life--;
+        if (this.life === 0) {
+          this.dead = true;
         }
-        ```
+      }
+      ```
 
-   2. **レーザーが敵に当たるたびに**、ゲームスコアを100点アップさせます
+   2. **レーザーが敵に当たるたびに**、ゲームスコアを 100 点アップさせます
 
       このインクリメントを行うために Hero クラスを拡張します
-    
-        ```javascript
-          incrementPoints() {
-            this.points += 100;
-          }
-        ```
 
-        これらの機能を衝突イベントエミッタに追加します
+      ```javascript
+        incrementPoints() {
+          this.points += 100;
+        }
+      ```
 
-        ```javascript
-        eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-           first.dead = true;
-           second.dead = true;
-           hero.incrementPoints();
-        })
+      これらの機能を衝突イベントエミッタに追加します
 
-        eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
-           enemy.dead = true;
-           hero.decrementLife();
-        });
-        ```
+      ```javascript
+      eventEmitter.on(
+        Messages.COLLISION_ENEMY_LASER,
+        (_, { first, second }) => {
+          first.dead = true;
+          second.dead = true;
+          hero.incrementPoints();
+        }
+      );
+
+      eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
+        enemy.dead = true;
+        hero.decrementLife();
+      });
+      ```
 
 ✅ JavaScript/Canvas を使用して作成された他のゲームを少し調べてみてください。これらのゲームに共通する特徴は何ですか?
 

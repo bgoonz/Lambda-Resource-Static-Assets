@@ -1,6 +1,7 @@
 # Terrarium Project Part 2: Introduction to CSS
 
 ![Introduction to CSS](/sketchnotes/webdev101-css.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Pre-Lecture Quiz
@@ -136,7 +137,7 @@ Notice that each plant in the HTML markup has a combination of ids and classes. 
 
 ```html
 <div class="plant-holder">
-	<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+  <img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
 </div>
 ```
 

@@ -6,6 +6,6 @@ Puede ser muy divertido jugar con las API. Aquí hay una [lista de muchos gratui
 
 ## Rúbrica
 
-| Criterios | Ejemplar | Adecuado | Necesita mejorar |
-| -------- | -------------------------------------------------- ------------------------ | ---------------------------------------- | ----------------------- |
-| | Se envía una extensión de navegador completa utilizando una API de la lista anterior | Se envía una extensión de navegador parcial | La presentación tiene errores |
+| Criterios | Ejemplar                                                                             | Adecuado                                    | Necesita mejorar              |
+| --------- | ------------------------------------------------------------------------------------ | ------------------------------------------- | ----------------------------- |
+|           | Se envía una extensión de navegador completa utilizando una API de la lista anterior | Se envía una extensión de navegador parcial | La presentación tiene errores |

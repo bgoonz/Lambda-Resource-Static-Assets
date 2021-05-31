@@ -6,7 +6,7 @@ Buat permainan kecil yang menggunakan acara papan kekunci untuk melakukan tugas.
 
 ## Rubrik
 
-| Kriteria | Contoh                | Mencukupi                 | Usaha Lagi |
-| -------- | ------------------------ | ------------------------ | ----------------- |
+| Kriteria | Contoh                         | Mencukupi                    | Usaha Lagi                      |
+| -------- | ------------------------------ | ---------------------------- | ------------------------------- |
 |          | Permainan penuh dipersembahkan | Permainan ini sangat minimum | Permainan ini mempunyai pepijat |
 |          |

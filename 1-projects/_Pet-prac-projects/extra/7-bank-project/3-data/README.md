@@ -6,7 +6,7 @@
 
 ### Introduction
 
-At the core of every web application there's *data*. Data can take many forms, but its main purpose is always to display information to the user. With web apps becoming increasingly interactive and complex, how the user accesses and interacts with information is now a key part of web development.
+At the core of every web application there's _data_. Data can take many forms, but its main purpose is always to display information to the user. With web apps becoming increasingly interactive and complex, how the user accesses and interacts with information is now a key part of web development.
 
 In this lesson, we'll see how to fetch data from a server asynchronously, and use this data to display information on a web page without reloading the HTML.
 
@@ -25,11 +25,11 @@ curl http://localhost:5000/api
 
 ## AJAX and data fetching
 
-Traditional web sites update the content displayed when the user selects a link or submits data using a form, by reloading the full HTML page. Every time new data needs to be loaded, the web server returns a brand new HTML page that needs to be processed by the browser, interrupting the current user action and limiting interactions during the reload. This workflow is also called a *Multi-Page Application* or *MPA*.
+Traditional web sites update the content displayed when the user selects a link or submits data using a form, by reloading the full HTML page. Every time new data needs to be loaded, the web server returns a brand new HTML page that needs to be processed by the browser, interrupting the current user action and limiting interactions during the reload. This workflow is also called a _Multi-Page Application_ or _MPA_.
 
 ![Update workflow in a multi-page application](./images/mpa.png)
 
-When web applications started to become more complex and interactive, a new technique called [AJAX (Asynchronous JavaScript and XML)](https://en.wikipedia.org/wiki/Ajax_(programming)) emerged. This technique allows web apps to send and retrieve data from a server asynchronously using JavaScript, without having to reload the HTML page, resulting in faster updates and smoother user interactions. When new data is received from the server, the current HTML page can also be updated with JavaScript using the [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model) API. Over time, this approach has evolved into what is now called a [*Single-Page Application* or *SPA*](https://en.wikipedia.org/wiki/Single-page_application).
+When web applications started to become more complex and interactive, a new technique called [AJAX (Asynchronous JavaScript and XML)](<https://en.wikipedia.org/wiki/Ajax_(programming)>) emerged. This technique allows web apps to send and retrieve data from a server asynchronously using JavaScript, without having to reload the HTML page, resulting in faster updates and smoother user interactions. When new data is received from the server, the current HTML page can also be updated with JavaScript using the [DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model) API. Over time, this approach has evolved into what is now called a [_Single-Page Application_ or _SPA_](https://en.wikipedia.org/wiki/Single-page_application).
 
 ![Update workflow in a single-page application](./images/spa.png)
 
@@ -43,7 +43,7 @@ In [the previous lesson](../2-forms/README.md) we implemented the registration f
 
 ```js
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById("loginForm");
   const user = loginForm.user.value;
 }
 ```
@@ -55,10 +55,12 @@ In a similar fashion to what we did for the registration, we'll create another f
 ```js
 async function getAccount(user) {
   try {
-    const response = await fetch('//localhost:5000/api/accounts/' + encodeURIComponent(user));
+    const response = await fetch(
+      "//localhost:5000/api/accounts/" + encodeURIComponent(user)
+    );
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    return { error: error.message || "Unknown error" };
   }
 }
 ```
@@ -71,16 +73,16 @@ Let's now update our `login` function to use `getAccount`:
 
 ```js
 async function login() {
-  const loginForm = document.getElementById('loginForm')
+  const loginForm = document.getElementById("loginForm");
   const user = loginForm.user.value;
   const data = await getAccount(user);
 
   if (data.error) {
-    return console.log('loginError', data.error);
+    return console.log("loginError", data.error);
   }
 
   account = data;
-  navigate('/dashboard');
+  navigate("/dashboard");
 }
 ```
 
@@ -92,12 +94,12 @@ Then we have to store the data somewhere so we can later use it to display the d
 let account = null;
 ```
 
-After the user data is saved into a variable we can navigate from the *login* page to the *dashboard* using the `navigate()` function we already have.
+After the user data is saved into a variable we can navigate from the _login_ page to the _dashboard_ using the `navigate()` function we already have.
 
 Finally, we need to call our `login` function when the login form is submitted, by modifying the HTML:
 
 ```html
-<form id="loginForm" action="javascript:login()">
+<form id="loginForm" action="javascript:login()"></form>
 ```
 
 Test that everything is working correctly by registering a new account and trying to login using the same account.
@@ -106,10 +108,10 @@ Before moving on to the next part, we can also complete the `register` function 
 
 ```js
 account = result;
-navigate('/dashboard');
+navigate("/dashboard");
 ```
 
-✅ Did you know that by default, you can only call server APIs from the *same domain and port* than the web page you are viewing? This is security mechanism enforced by browsers. But wait, our web app is running on `localhost:3000` whereas the server API is running on ` localhost:5000`, why does it work? By using a technique called [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS), it is possible to perform cross-origin HTTP requests if the server adds special headers to the response, allowing exceptions for specific domains.
+✅ Did you know that by default, you can only call server APIs from the _same domain and port_ than the web page you are viewing? This is security mechanism enforced by browsers. But wait, our web app is running on `localhost:3000` whereas the server API is running on ` localhost:5000`, why does it work? By using a technique called [Cross-Origin Resource Sharing (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS), it is possible to perform cross-origin HTTP requests if the server adds special headers to the response, allowing exceptions for specific domains.
 
 > Learn more about APIs by taking this [lesson](https://docs.microsoft.com/learn/modules/use-apis-discover-museum-art?WT.mc_id=academic-13441-cxa)
 
@@ -125,7 +127,7 @@ Now that we have the user data, we have to update the existing HTML to display i
 
 ### Task
 
-Before moving on to the dashboard screen, there's one more thing we should do on the *login* page. Currently, if you try to login with a username that does not exist, a message is shown in the console but for a normal user nothing changes and you don't know what's going on.
+Before moving on to the dashboard screen, there's one more thing we should do on the _login_ page. Currently, if you try to login with a username that does not exist, a message is shown in the console but for a normal user nothing changes and you don't know what's going on.
 
 Let's add a placeholder element in the login form where we can display an error message if needed. A good place would be just before the login `<button>`:
 
@@ -147,11 +149,11 @@ function updateElement(id, text) {
 }
 ```
 
-This one is quite straightforward: given an element *id* and *text*, it will update the text content of the DOM element with the matching `id`. Let's use this method in place of the previous error message in the `login` function:
+This one is quite straightforward: given an element _id_ and _text_, it will update the text content of the DOM element with the matching `id`. Let's use this method in place of the previous error message in the `login` function:
 
 ```js
 if (data.error) {
-  return updateElement('loginError', data.error);
+  return updateElement("loginError", data.error);
 }
 ```
 
@@ -183,7 +185,7 @@ This is what an account object received from the server looks like:
     { "id": "1", "date": "2020-10-01", "object": "Pocket money", "amount": 50 },
     { "id": "2", "date": "2020-10-03", "object": "Book", "amount": -10 },
     { "id": "3", "date": "2020-10-04", "object": "Sandwich", "amount": -5 }
-  ],
+  ]
 }
 ```
 
@@ -212,12 +214,12 @@ Next, we'll create a new function in `app.js` to fill in the placeholder:
 ```js
 function updateDashboard() {
   if (!account) {
-    return navigate('/login');
+    return navigate("/login");
   }
 
-  updateElement('description', account.description);
-  updateElement('balance', account.balance.toFixed(2));
-  updateElement('currency', account.currency);
+  updateElement("description", account.description);
+  updateElement("balance", account.balance.toFixed(2));
+  updateElement("currency", account.currency);
 }
 ```
 
@@ -230,7 +232,7 @@ Now we need to call our `updateDashboard()` function everytime the dashboard is 
 Add this code to the end of the `updateRoute()` function:
 
 ```js
-if (typeof route.init === 'function') {
+if (typeof route.init === "function") {
   route.init();
 }
 ```
@@ -239,8 +241,8 @@ And update the routes definition with:
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard', init: updateDashboard }
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard", init: updateDashboard },
 };
 ```
 
@@ -266,7 +268,7 @@ Add a new template in the HTML `<body>`:
 </template>
 ```
 
-This template represents a single table row, with the 3 columns we want to populate: *date*, *object* and *amount* of a transaction.
+This template represents a single table row, with the 3 columns we want to populate: _date_, _object_ and _amount_ of a transaction.
 
 Then, add this `id` property to the `<tbody>` element of the table within the dashboard template to make it easier to find using JavaScript:
 
@@ -278,9 +280,9 @@ Our HTML is ready, let's switch to JavaScript code and create a new function `cr
 
 ```js
 function createTransactionRow(transaction) {
-  const template = document.getElementById('transaction');
+  const template = document.getElementById("transaction");
   const transactionRow = template.content.cloneNode(true);
-  const tr = transactionRow.querySelector('tr');
+  const tr = transactionRow.querySelector("tr");
   tr.children[0].textContent = transaction.date;
   tr.children[1].textContent = transaction.object;
   tr.children[2].textContent = transaction.amount.toFixed(2);
@@ -296,7 +298,7 @@ for (const transaction of account.transactions) {
   const transactionRow = createTransactionRow(transaction);
   transactionsRows.appendChild(transactionRow);
 }
-updateElement('transactions', transactionsRows);
+updateElement("transactions", transactionsRows);
 ```
 
 Here we use the method [`document.createDocumentFragment()`](https://developer.mozilla.org/docs/Web/API/Document/createDocumentFragment) that creates a new DOM fragment on which we can work, before finally attaching it to our HTML table.
@@ -306,7 +308,7 @@ There's still one more thing we have to do before this code can work, as our `up
 ```js
 function updateElement(id, textOrNode) {
   const element = document.getElementById(id);
-  element.textContent = ''; // Removes all children
+  element.textContent = ""; // Removes all children
   element.append(textOrNode);
 }
 ```

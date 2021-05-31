@@ -11,7 +11,7 @@ I giochi non sono molto divertenti finché non si hanno alieni che scorazzano pe
 
 Quindi come si spostano le cose su uno schermo? Dipende tutto dalle coordinate cartesiane: si cambia la posizione (x, y) di un oggetto, poi si ridisegna lo schermo.
 
-In genere sono necessari i seguenti passaggi per eseguire il *movimento* su uno schermo:
+In genere sono necessari i seguenti passaggi per eseguire il _movimento_ su uno schermo:
 
 1. **Impostare una nuova posizione** per un oggetto; questo è necessario per percepire l'oggetto come se si fosse spostato.
 2. **Cancellare lo schermo, lo** schermo deve essere cancellato tra un disegno e un altro. Si può cancellarlo disegnando un rettangolo che viene riempito con un colore di sfondo.
@@ -25,7 +25,7 @@ hero.x += 5;
 // pulisce il rettangolo che ospita l'eroe
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 // ridisegna lo sfondo del gioco e l'eroe
-ctx.fillRect(0, 0, canvas.width, canvas.height)
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 ctx.fillStyle = "black";
 ctx.drawImage(heroImg, hero.x, hero.y);
 ```
@@ -41,12 +41,12 @@ Per gestire un evento è necessario utilizzare il metodo `addEventListener()` de
 Ecco un esempio:
 
 ```javascript
-window.addEventListener('keyup', (evt) => {
+window.addEventListener("keyup", (evt) => {
   // `evt.key` = rappresentazione stringa del tasto
-  if (evt.key === 'ArrowUp') {
+  if (evt.key === "ArrowUp") {
     // fa qualcosa
   }
-})
+});
 ```
 
 Per gli eventi da tastiera ci sono due proprietà sull'evento che si possono usare usare per vedere quale tasto è stato premuto:
@@ -58,7 +58,7 @@ Per gli eventi da tastiera ci sono due proprietà sull'evento che si possono usa
 
 ### Tasti speciali: un avvertimento
 
-Ci sono alcuni tasti *speciali* che influenzano la finestra. Ciò significa che se si sta ascoltando un evento `keyup` e si usano questi tasti speciali per muovere l'eroe, verrà eseguito anche lo scorrimento orizzontale. Per questo motivo si potrebbe  voler *disattivare* questo comportamento del browser integrato mentre si sviluppa il gioco. Serve un codice come questo:
+Ci sono alcuni tasti _speciali_ che influenzano la finestra. Ciò significa che se si sta ascoltando un evento `keyup` e si usano questi tasti speciali per muovere l'eroe, verrà eseguito anche lo scorrimento orizzontale. Per questo motivo si potrebbe voler _disattivare_ questo comportamento del browser integrato mentre si sviluppa il gioco. Serve un codice come questo:
 
 ```javascript
 let onKeyDown = function (e) {
@@ -76,10 +76,10 @@ let onKeyDown = function (e) {
   }
 };
 
-window.addEventListener('keydown', onKeyDown);
+window.addEventListener("keydown", onKeyDown);
 ```
 
-Il codice precedente assicurerà che i tasti freccia e la barra spaziatrice abbiano il loro comportamento *predefinito* disattivato. Il meccanismo *di disattivazione* si verifica quando si chiama `e.preventDefault()`.
+Il codice precedente assicurerà che i tasti freccia e la barra spaziatrice abbiano il loro comportamento _predefinito_ disattivato. Il meccanismo _di disattivazione_ si verifica quando si chiama `e.preventDefault()`.
 
 ## Movimento indotto dal gioco
 
@@ -89,7 +89,7 @@ E' possibile far muovere le cose da sole utilizzando timer come la funzione `set
 let id = setInterval(() => {
   //sposta il nemico sull'asse y
   enemy.y += 10;
-})
+});
 ```
 
 ## Il ciclo di gioco
@@ -99,15 +99,18 @@ Il ciclo di gioco è un concetto che è essenzialmente una funzione che viene in
 Ecco come può apparire tipicamente un ciclo di gioco, espresso in codice:
 
 ```javascript
-let gameLoopId = setInterval(() =>
-  function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    drawHero();
-    drawEnemies();
-    drawStaticObjects();
-}, 200);
+let gameLoopId = setInterval(
+  () =>
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      drawHero();
+      drawEnemies();
+      drawStaticObjects();
+    },
+  200
+);
 ```
 
 Il ciclo precedente viene richiamato ogni `200` millisecondi per ridisegnare il canvas. Si ha la possibilità di scegliere l'intervallo migliore che abbia senso per il proprio gioco.
@@ -145,12 +148,11 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
 
 1. **Aggiungere oggetti dedicati** per `eroe`, `nemico` e `oggetto di gioco`, dovrebbero avere proprietà `x` e `y` . (Ricorda la parte su [ereditarietà o composizione](../../1-introduction/translations/README.it.md).
 
-   *SUGGERIMENTO* l'`oggetto di gioco` (GameObject) dovrebbe essere quello con `x` e `y` e la capacità di disegnare se stesso sul canvas.
+   _SUGGERIMENTO_ l'`oggetto di gioco` (GameObject) dovrebbe essere quello con `x` e `y` e la capacità di disegnare se stesso sul canvas.
 
    > suggerimento: iniziare aggiungendo una nuova classe GameObject con il suo costruttore delineato come di seguito, quindi disegnarlo sul canvas:
 
    ```javascript
-
    class GameObject {
      constructor(x, y) {
        this.x = x;
@@ -188,17 +190,17 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
          if (this.y < canvas.height - this.height) {
            this.y += 5;
          } else {
-           console.log('Stopped at', this.y)
+           console.log("Stopped at", this.y);
            clearInterval(id);
          }
-       }, 300)
+       }, 300);
      }
    }
    ```
 
 2. **Aggiungere gestori di eventi di tastiera** per gestire la navigazione con i tasti (spostare l'eroe su/giù, sinistra/destra)
 
-   *RICORDARE* che è un sistema cartesiano, la posizione in alto a sinistra è `0,0`. Ricordare anche di aggiungere il codice per interrompere *il comportamento predefinito*
+   _RICORDARE_ che è un sistema cartesiano, la posizione in alto a sinistra è `0,0`. Ricordare anche di aggiungere il codice per interrompere _il comportamento predefinito_
 
    > suggerimento: creare la funzione onKeyDown e attaccarla all'oggetto window:
 
@@ -221,17 +223,17 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
    1. **Aggiungere un event listener** all'oggetto window:
 
       ```javascript
-       window.addEventListener("keyup", (evt) => {
-         if (evt.key === "ArrowUp") {
-           eventEmitter.emit(Messages.KEY_EVENT_UP);
-         } else if (evt.key === "ArrowDown") {
-           eventEmitter.emit(Messages.KEY_EVENT_DOWN);
-         } else if (evt.key === "ArrowLeft") {
-           eventEmitter.emit(Messages.KEY_EVENT_LEFT);
-         } else if (evt.key === "ArrowRight") {
-           eventEmitter.emit(Messages.KEY_EVENT_RIGHT);
-         }
-       });
+      window.addEventListener("keyup", (evt) => {
+        if (evt.key === "ArrowUp") {
+          eventEmitter.emit(Messages.KEY_EVENT_UP);
+        } else if (evt.key === "ArrowDown") {
+          eventEmitter.emit(Messages.KEY_EVENT_DOWN);
+        } else if (evt.key === "ArrowLeft") {
+          eventEmitter.emit(Messages.KEY_EVENT_LEFT);
+        } else if (evt.key === "ArrowRight") {
+          eventEmitter.emit(Messages.KEY_EVENT_RIGHT);
+        }
+      });
       ```
 
    1. **Creare una classe EventEmitter** per pubblicare e sottoscrivere i messaggi:
@@ -268,12 +270,13 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
       };
 
       let heroImg,
-          enemyImg,
-          laserImg,
-          canvas, ctx,
-          gameObjects = [],
-          hero,
-          eventEmitter = new EventEmitter();
+        enemyImg,
+        laserImg,
+        canvas,
+        ctx,
+        gameObjects = [],
+        hero,
+        eventEmitter = new EventEmitter();
       ```
 
    1. **Inizializzare il gioco**
@@ -285,8 +288,8 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
      createHero();
 
      eventEmitter.on(Messages.KEY_EVENT_UP, () => {
-       hero.y -=5 ;
-     })
+       hero.y -= 5;
+     });
 
      eventEmitter.on(Messages.KEY_EVENT_DOWN, () => {
        hero.y += 5;
@@ -302,7 +305,7 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
    }
    ```
 
-1. **Impostare il ciclo di gioco**
+4. **Impostare il ciclo di gioco**
 
    Rifattorizzare la funzione window.onload per inizializzare il gioco e impostare un ciclo di gioco su un buon intervallo. Aggiungere anche un raggio laser:
 
@@ -320,8 +323,7 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
        ctx.fillStyle = "black";
        ctx.fillRect(0, 0, canvas.width, canvas.height);
        drawGameObjects(ctx);
-     }, 100)
-
+     }, 100);
    };
    ```
 
@@ -350,10 +352,7 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
 
    ```javascript
    function createHero() {
-     hero = new Hero(
-       canvas.width / 2 - 45,
-       canvas.height - canvas.height / 4
-     );
+     hero = new Hero(canvas.width / 2 - 45, canvas.height - canvas.height / 4);
      hero.img = heroImg;
      gameObjects.push(hero);
    }
@@ -363,7 +362,7 @@ Quanto sopra avvierà un server HTTP all'indirizzo `http://localhost:5000`. Apri
 
    ```javascript
    function drawGameObjects(ctx) {
-     gameObjects.forEach(go => go.draw(ctx));
+     gameObjects.forEach((go) => go.draw(ctx));
    }
    ```
 

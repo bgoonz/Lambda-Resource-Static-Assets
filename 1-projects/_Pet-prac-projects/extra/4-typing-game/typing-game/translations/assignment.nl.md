@@ -6,7 +6,7 @@ Maak een klein spel dat toetsenbordgebeurtenissen gebruikt om taken uit te voere
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                | Voldoende                 | Moet worden verbeterd |
-| -------- | ------------------------ | ------------------------ | ----------------- |
-|          | Er wordt een volledig spel gepresenteerd | De game is erg minimaal | De game bevat bugs |
+| Criteria | Voorbeeldig                              | Voldoende               | Moet worden verbeterd |
+| -------- | ---------------------------------------- | ----------------------- | --------------------- |
+|          | Er wordt een volledig spel gepresenteerd | De game is erg minimaal | De game bevat bugs    |
 |          |

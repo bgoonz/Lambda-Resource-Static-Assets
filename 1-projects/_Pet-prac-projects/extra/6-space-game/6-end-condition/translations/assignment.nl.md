@@ -14,6 +14,6 @@ Game> ****Geen monsters meer, u heeft het kwaadaardige fort veroverd****
 
 ## Rubriek
 
-| Criteria | Voorbeeldig              | Voldoende                    | Moet worden verbeterd          |
-| -------- | ---------------------- | --------------------------- | -------------------------- |
+| Criteria | Voorbeeldig                        | Voldoende                             | Moet worden verbeterd         |
+| -------- | ---------------------------------- | ------------------------------------- | ----------------------------- |
 |          | volledige game wordt gepresenteerd | game wordt gedeeltelijk gepresenteerd | gedeeltelijke game bevat bugs |

@@ -1,6 +1,7 @@
 # Progetto Terrario Parte 2: Introduzione a CSS
 
 ![Introduzione a CSS](/sketchnotes/webdev101-css.png)
+
 > Sketchnote di [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Quiz Pre-Lezione
@@ -130,13 +131,13 @@ Qui, i contenitori sono stati posizionati con posizionamento assoluto all'estrem
 
 ### Classi
 
-Nell'esempio sopra, è stato applicato uno stile a due elementi unici sullo schermo. Se si vuole applicare gli stili a molti elementi sullo schermo, si possono  usare le classi CSS. Si fa questo per disporre le piante nei contenitori sinistro e destro.
+Nell'esempio sopra, è stato applicato uno stile a due elementi unici sullo schermo. Se si vuole applicare gli stili a molti elementi sullo schermo, si possono usare le classi CSS. Si fa questo per disporre le piante nei contenitori sinistro e destro.
 
 Si noti che ogni pianta nel markup HTML ha una combinazione di id e classi. Gli id qui sono usati da JavaScript che verrà aggiunto in seguito per manipolare il posizionamento della pianta nel terrario. Le classi, tuttavia, danno a tutte le piante un determinato stile.
 
 ```html
 <div class="plant-holder">
-	<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+  <img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
 </div>
 ```
 
@@ -144,16 +145,16 @@ Aggiungere il seguente codice al proprio file `style.css` :
 
 ```css
 .plant-holder {
-	position: relative;
-	height: 13%;
-	left: -10px;
+  position: relative;
+  height: 13%;
+  left: -10px;
 }
 
 .plant {
-	position: absolute;
-	max-width: 150%;
-	max-height: 150%;
-	z-index: 2;
+  position: absolute;
+  max-width: 150%;
+  max-height: 150%;
+  z-index: 2;
 }
 ```
 
@@ -191,48 +192,48 @@ Innanzitutto, si applica lo stile al div figlio `.terrarium` in modo che sia un 
 
 ```css
 .jar-walls {
-	height: 80%;
-	width: 60%;
-	background: #d1e1df;
-	border-radius: 1rem;
-	position: absolute;
-	bottom: 0.5%;
-	left: 20%;
-	opacity: 0.5;
-	z-index: 1;
+  height: 80%;
+  width: 60%;
+  background: #d1e1df;
+  border-radius: 1rem;
+  position: absolute;
+  bottom: 0.5%;
+  left: 20%;
+  opacity: 0.5;
+  z-index: 1;
 }
 
 .jar-top {
-	width: 50%;
-	height: 5%;
-	background: #d1e1df;
-	position: absolute;
-	bottom: 80.5%;
-	left: 25%;
-	opacity: 0.7;
-	z-index: 1;
+  width: 50%;
+  height: 5%;
+  background: #d1e1df;
+  position: absolute;
+  bottom: 80.5%;
+  left: 25%;
+  opacity: 0.7;
+  z-index: 1;
 }
 
 .jar-bottom {
-	width: 50%;
-	height: 1%;
-	background: #d1e1df;
-	position: absolute;
-	bottom: 0%;
-	left: 25%;
-	opacity: 0.7;
+  width: 50%;
+  height: 1%;
+  background: #d1e1df;
+  position: absolute;
+  bottom: 0%;
+  left: 25%;
+  opacity: 0.7;
 }
 
 .dirt {
-	width: 60%;
-	height: 5%;
-	background: #3a241d;
-	position: absolute;
-	border-radius: 0 0 1rem 1rem;
-	bottom: 1%;
-	left: 20%;
-	opacity: 0.7;
-	z-index: -1;
+  width: 60%;
+  height: 5%;
+  background: #3a241d;
+  position: absolute;
+  border-radius: 0 0 1rem 1rem;
+  bottom: 1%;
+  left: 20%;
+  opacity: 0.7;
+  z-index: -1;
 }
 ```
 
@@ -244,7 +245,7 @@ Notare l'uso delle percentuali qui. Se si riduce la finestra del browser, si pu�
 
 ## 🚀 Sfida
 
-Aggiungere una lucentezza a forma di bolla nell'area inferiore sinistra del barattolo per farlo sembrare più simile al vetro. Si parte applicando lo stile `.jar-glossy-long` e  `.jar-glossy-short` per ottenere la senzazione di una lucentezza riflessa. Ecco come dovrebbe apparire:
+Aggiungere una lucentezza a forma di bolla nell'area inferiore sinistra del barattolo per farlo sembrare più simile al vetro. Si parte applicando lo stile `.jar-glossy-long` e `.jar-glossy-short` per ottenere la senzazione di una lucentezza riflessa. Ecco come dovrebbe apparire:
 
 ![terrario finito](../images/terrarium-final.png)
 

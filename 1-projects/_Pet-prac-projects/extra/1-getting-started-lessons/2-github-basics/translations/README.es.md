@@ -3,6 +3,7 @@
 Esta lección cubre los conceptos básicos de GitHub, una plataforma para alojar y administrar cambios en tu código.
 
 ![Intro to GitHub](/sketchnotes/webdev101-github.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## [Pre-lecture prueba](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/3)
@@ -47,8 +48,8 @@ Digamos que tienes una directorio local con algún proyecto de código y deseas 
 
 1. **Crear repositorio en GitHub**. En GitHub.com, en la pestaña de repositorios, o en la barra de navegación superior derecha, busca el botón **nuevo repositorio**.
 
-    1. Dale un nombre a tu repositorio (directorio)
-    1. Selecciona **crear repositorio**.
+   1. Dale un nombre a tu repositorio (directorio)
+   1. Selecciona **crear repositorio**.
 
 1. **Navegue a su directorio de trabajo**. En tu terminal, cambia a la directorio (también conocida como directorio) que deseas comenzar a rastrear. Escribe:
 
@@ -108,7 +109,6 @@ Digamos que tienes una directorio local con algún proyecto de código y deseas 
    Esto crea un _remote_, o conexión, llamado "origin" que apunta al repositorio de GitHub que creaste anteriormente.
 
 1. **Envía archivos locales a GitHub**. Hasta ahora ha creado una _conexión_ entre el repositorio local y el repositorio de GitHub. Enviemos estos archivos a GitHub con el siguiente comando `git push`, así:
- 
 
    ```bash
    git push -u origin main
@@ -126,7 +126,6 @@ Digamos que tienes una directorio local con algún proyecto de código y deseas 
 
    > Sugerencia: es posible que también desees adoptar un archivo `.gitignore` para evitar que los archivos que no deseas rastrear aparezcan en GitHub. Puedes encontrar plantillas para archivos `.gitignore` en [.gitignore templates](github.com/github/gitignore).
 
-
 #### Confirmar mensajes
 
 Una buena línea de asunto (subject line) de confirmación de Git completa la siguiente oración:
@@ -139,24 +138,23 @@ Como en el sujeto, en el cuerpo (opcional) también use el imperativo, presente.
 
 ### Tarea: Colaborar
 
-
 La razón principal para poner cosas en GitHub fue hacer posible la colaboración con otros desarrolladores.
 
 ## Trabajando en proyectos con otros
 
 En tu repositorio, ve a `Insights > Community` para ver cómo se compara tu proyecto con los estándares comunitarios recomendados.
 
-   Aquí hay algunas cosas que pueden mejorar tu repositorio de GitHub:
-   - **Descripción**. ¿Agregaste una descripción para tu proyecto?
-   - **README**. ¿Agregaste un archivo README? GitHub proporciona una guía para escribir un [README](https://docs.github.com/articles/about-readmes/).
-   - **Guía de contribución**. ¿Tiene [guías de contribución](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/) tu proyecto?
-   - **Código de Conducta**. Crea un [Código de conducta](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/).
-   - **Licencia**. Quizás lo más importante, una [licencia](https://docs.github.com/articles/adding-a-license-to-a-repository/).
+Aquí hay algunas cosas que pueden mejorar tu repositorio de GitHub:
+
+- **Descripción**. ¿Agregaste una descripción para tu proyecto?
+- **README**. ¿Agregaste un archivo README? GitHub proporciona una guía para escribir un [README](https://docs.github.com/articles/about-readmes/).
+- **Guía de contribución**. ¿Tiene [guías de contribución](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/) tu proyecto?
+- **Código de Conducta**. Crea un [Código de conducta](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/).
+- **Licencia**. Quizás lo más importante, una [licencia](https://docs.github.com/articles/adding-a-license-to-a-repository/).
 
 Todos estos recursos beneficiarán la incorporación de nuevos miembros del equipo. Y esos son típicamente el tipo de cosas que los nuevos colaboradores miran antes incluso de mirar tu código, para descubrir si tu proyecto es el lugar adecuado para que ellos pasen su tiempo.
 
 ✅ Los archivos README, aunque requieren tiempo para prepararse, a menudo son descuidados por los mantenedores. ¿Puedes encontrar un ejemplo de uno particularmente descriptivo? Nota: aquí hay algunas [herramientas para ayudar a crear buenos archivos READMEs](https://www.makeareadme.com/) que te puedes probar.
-
 
 ### Tarea: Fusionar (merging) código
 
@@ -169,7 +167,7 @@ Los documentos que contribuyes ayudan a las personas a contribuir al proyecto. E
 
 ✅ Imagínate una situación en la que las ramas (branches) de git son particularmente críticas para escribir y enviar buen código. ¿Qué casos de uso se te ocurren?
 
-> Se el cambio que deseas ver en el mundo y crea también ramas  para tu propio trabajo. Todas las confirmaciones que realices se realizarán en la rama en la que estás actualmente "registrado". Usa `git status` para ver qué rama es.
+> Se el cambio que deseas ver en el mundo y crea también ramas para tu propio trabajo. Todas las confirmaciones que realices se realizarán en la rama en la que estás actualmente "registrado". Usa `git status` para ver qué rama es.
 
 Repasemos el flujo de trabajo de un colaborador. Supon que el colaborador ya ha _bifurcado_ y _clonado_ el repositorio para que tenga un repositorio de Git listo para trabajar en su máquina local:
 

@@ -14,4 +14,4 @@ Concetti Base di Accessibilità è stato scritto con il ♥️ da [Christopher H
 
 Introduzione a GitHub è stato scritto con il ♥️ da [Floor Drees](https://twitter.com/floordrees)
 
-Introduzione ai Linguaggi di Programmazione e agli Strumenti Necessari sono stati scritti con il  ♥️ da [Jasmine Greenaway](https://twitter.com/paladique)
+Introduzione ai Linguaggi di Programmazione e agli Strumenti Necessari sono stati scritti con il ♥️ da [Jasmine Greenaway](https://twitter.com/paladique)

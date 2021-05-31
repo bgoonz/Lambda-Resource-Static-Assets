@@ -7,13 +7,13 @@
 In questa lezione si imparererà come fare fuoco con i laser con JavaScript! Verranno aggiunte due cose al gioco:
 
 - **Un laser**: questo laser viene sparato dall'astronave del proprio eroe e verticalmente verso l'alto
-- **Rilevamento delle collisioni**, come parte dell'implementazione della capacità di *sparare* , si aggiungeranno anche alcune simpatiche regole di gioco:
-   - Il **laser colpisce il nemico**: il nemico muore se colpito da un laser
-   - Il **laser raggiunge lo schermo superiore**: un laser viene distrutto se raggiunge la parte superiore dello schermo
-   - **Collisione tra nemico ed eroe**: un nemico e l'eroe vengono distrutti se entrano in collisione
-   - Il **nemico raggiunge la parte inferiore dello schermo**: un nemico e un eroe vengono distrutti se il nemico raggiunge la parte inferiore dello schermo
+- **Rilevamento delle collisioni**, come parte dell'implementazione della capacità di _sparare_ , si aggiungeranno anche alcune simpatiche regole di gioco:
+  - Il **laser colpisce il nemico**: il nemico muore se colpito da un laser
+  - Il **laser raggiunge lo schermo superiore**: un laser viene distrutto se raggiunge la parte superiore dello schermo
+  - **Collisione tra nemico ed eroe**: un nemico e l'eroe vengono distrutti se entrano in collisione
+  - Il **nemico raggiunge la parte inferiore dello schermo**: un nemico e un eroe vengono distrutti se il nemico raggiunge la parte inferiore dello schermo
 
-In breve, il giocatore - *l'eroe* - deve colpire tutti i nemici con un laser prima che riescano a raggiungere la parte inferiore dello schermo.
+In breve, il giocatore - _l'eroe_ - deve colpire tutti i nemici con un laser prima che riescano a raggiungere la parte inferiore dello schermo.
 
 ✅ Fare una piccola ricerca sul primissimo gioco per computer mai scritto. Qual era la sua funzionalità?
 
@@ -23,7 +23,7 @@ Diventiamo eroici insieme!
 
 Come si rilevano le collisioni? Occorre pensare agli oggetti di gioco come rettangoli che si muovono. Perché, ci si potrebbe chiedere? Bene, l'immagine usata per disegnare un oggetto di gioco è un rettangolo: ha una `x`, una `y`, una larghezza (`width`) e un'altezza (`height`).
 
-Se due rettangoli, cioè un eroe e un nemico *si intersecano*, si verifica una collisione. Ciò che dovrebbe accadere dipende dalle regole del gioco. Per implementare il rilevamento delle collisioni è quindi necessario quanto segue:
+Se due rettangoli, cioè un eroe e un nemico _si intersecano_, si verifica una collisione. Ciò che dovrebbe accadere dipende dalle regole del gioco. Per implementare il rilevamento delle collisioni è quindi necessario quanto segue:
 
 1. Un modo per ottenere una rappresentazione rettangolare di un oggetto di gioco, qualcosa del genere:
 
@@ -42,26 +42,28 @@ Se due rettangoli, cioè un eroe e un nemico *si intersecano*, si verifica una c
 
    ```javascript
    function intersectRect(r1, r2) {
-     return !(r2.left > r1.right ||
+     return !(
+       r2.left > r1.right ||
        r2.right < r1.left ||
        r2.top > r1.bottom ||
-       r2.bottom < r1.top);
+       r2.bottom < r1.top
+     );
    }
    ```
 
 ## Come si distruggono le cose
 
-Per distruggere le cose in un gioco si deve far sapere al gioco stesso che non dovrebbe più disegnare un certo oggetto nel ciclo di gioco che si attiva in un certo intervallo. Un modo per farlo è contrassegnare un oggetto del gioco come *morto* quando succede qualcosa, in questo modo:
+Per distruggere le cose in un gioco si deve far sapere al gioco stesso che non dovrebbe più disegnare un certo oggetto nel ciclo di gioco che si attiva in un certo intervallo. Un modo per farlo è contrassegnare un oggetto del gioco come _morto_ quando succede qualcosa, in questo modo:
 
 ```javascript
 // si è verificata una collisione
-enemy.dead = true
+enemy.dead = true;
 ```
 
-Quindi si procede a filtrare gli oggetti *morti* prima di ridipingere lo schermo, in questo modo:
+Quindi si procede a filtrare gli oggetti _morti_ prima di ridipingere lo schermo, in questo modo:
 
 ```javascript
-gameObjects = gameObject.filter(go => !go.dead);
+gameObjects = gameObject.filter((go) => !go.dead);
 ```
 
 ## Come si spara un laser
@@ -74,7 +76,7 @@ Sparare un laser si traduce nel rispondere a un evento da tastiera e creare un o
 
 ## Raffreddamento del laser
 
-Il laser deve attivarsi ogni volta che si preme un tasto, come ad esempio la *barra spazio*. Per evitare che il gioco produca troppi laser in breve tempo, si deve risolvere questo problema. La soluzione è implementando un cosiddetto raffreddamento (*cooldown*), un timer, che garantisce che un laser possa essere sparato solo a intervallo determinato. Su può implementare nel modo seguente:
+Il laser deve attivarsi ogni volta che si preme un tasto, come ad esempio la _barra spazio_. Per evitare che il gioco produca troppi laser in breve tempo, si deve risolvere questo problema. La soluzione è implementando un cosiddetto raffreddamento (_cooldown_), un timer, che garantisce che un laser possa essere sparato solo a intervallo determinato. Su può implementare nel modo seguente:
 
 ```javascript
 class Cooldown {
@@ -100,7 +102,7 @@ class Weapon {
 }
 ```
 
-✅ Fare riferimento alla lezione 1 della serie gioco spaziale per quanto riguarda i tempi di *cooldown* (raffreddamento).
+✅ Fare riferimento alla lezione 1 della serie gioco spaziale per quanto riguarda i tempi di _cooldown_ (raffreddamento).
 
 ## Cosa costruire
 
@@ -109,10 +111,10 @@ Si prende il codice esistente (che dovrebbe essere stato ripulito e rifattorizza
 > suggerimento: il laser con cui lavorare è già nella cartella asset ed è referenziato nel proprio codice
 
 - **Aggiungere il rilevamento delle collisioni**, quando un laser entra in collisione con qualcosa dovrebbero essere applicate le seguenti regole:
-   1. Il **laser colpisce il nemico**: il nemico muore se colpito da un laser
-   2. Il **laser raggiunge lo schermo superiore**: un laser viene distrutto se raggiunge la parte superiore dello schermo
-   3. **Collisione tra nemico ed eroe**: un nemico e l'eroe vengono distrutti se entrano in collisione
-   4. Il **nemico colpisce la parte inferiore dello schermo**: un nemico e un eroe vengono distrutti se il nemico raggiunge la parte inferiore dello schermo
+  1.  Il **laser colpisce il nemico**: il nemico muore se colpito da un laser
+  2.  Il **laser raggiunge lo schermo superiore**: un laser viene distrutto se raggiunge la parte superiore dello schermo
+  3.  **Collisione tra nemico ed eroe**: un nemico e l'eroe vengono distrutti se entrano in collisione
+  4.  Il **nemico colpisce la parte inferiore dello schermo**: un nemico e un eroe vengono distrutti se il nemico raggiunge la parte inferiore dello schermo
 
 ## Passaggi consigliati
 
@@ -166,7 +168,8 @@ Quanto sopra avvierà un server HTTP sull'indirizzo `http://localhost:5000`. Apr
    ```
 
 3. **Aggiungere capacità di fuoco laser**
-   1. **Aggiungere messaggio per un evento da tastiera**. Il tasto spazio (*space*) dovrebbe creare un laser appena sopra la astronave dell'eroe. Aggiungere tre costanti nell'oggetto Messages:
+
+   1. **Aggiungere messaggio per un evento da tastiera**. Il tasto spazio (_space_) dovrebbe creare un laser appena sopra la astronave dell'eroe. Aggiungere tre costanti nell'oggetto Messages:
 
       ```javascript
        KEY_EVENT_SPACE: "KEY_EVENT_SPACE",
@@ -194,20 +197,23 @@ Quanto sopra avvierà un server HTTP sull'indirizzo `http://localhost:5000`. Apr
       e aggiungere una nuova funzione `eventEmitter.on()` per garantire il comportamento quando un nemico si scontra con un laser:
 
       ```javascript
-      eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-        first.dead = true;
-        second.dead = true;
-      })
+      eventEmitter.on(
+        Messages.COLLISION_ENEMY_LASER,
+        (_, { first, second }) => {
+          first.dead = true;
+          second.dead = true;
+        }
+      );
       ```
 
    1. **Spostare l'oggetto**, assicurarsi che il laser si muova gradualmente verso parte superiore dello schermo. Creare una nuova classe Laser che estende `GameObject`, come fatto precedentemente:
 
       ```javascript
-        class Laser extends GameObject {
+      class Laser extends GameObject {
         constructor(x, y) {
-          super(x,y);
+          super(x, y);
           (this.width = 9), (this.height = 33);
-          this.type = 'Laser';
+          this.type = "Laser";
           this.img = laserImg;
           let id = setInterval(() => {
             if (this.y > 0) {
@@ -216,7 +222,7 @@ Quanto sopra avvierà un server HTTP sull'indirizzo `http://localhost:5000`. Apr
               this.dead = true;
               clearInterval(id);
             }
-          }, 100)
+          }, 100);
         }
       }
       ```
@@ -225,54 +231,54 @@ Quanto sopra avvierà un server HTTP sull'indirizzo `http://localhost:5000`. Apr
 
       ```javascript
       function updateGameObjects() {
-        const enemies = gameObjects.filter(go => go.type === 'Enemy');
+        const enemies = gameObjects.filter((go) => go.type === "Enemy");
         const lasers = gameObjects.filter((go) => go.type === "Laser");
-      // il laser ha colpito qualcosa
+        // il laser ha colpito qualcosa
         lasers.forEach((l) => {
           enemies.forEach((m) => {
             if (intersectRect(l.rectFromGameObject(), m.rectFromGameObject())) {
-            eventEmitter.emit(Messages.COLLISION_ENEMY_LASER, {
-              first: l,
-              second: m,
-            });
-          }
-         });
-      });
+              eventEmitter.emit(Messages.COLLISION_ENEMY_LASER, {
+                first: l,
+                second: m,
+              });
+            }
+          });
+        });
 
-        gameObjects = gameObjects.filter(go => !go.dead);
-      }  
+        gameObjects = gameObjects.filter((go) => !go.dead);
+      }
       ```
 
       Assicurarsi di aggiungere `updateGameObjects()` nel ciclo di gioco in `window.onload`.
 
-   4. **Implementare il** raffreddamento sul laser, in modo che possa essere sparato solo a determinati intervalli.
+   1. **Implementare il** raffreddamento sul laser, in modo che possa essere sparato solo a determinati intervalli.
 
       Infine, modificare la classe Hero in modo che possa eseguire il raffreddamento:
 
       ```javascript
       class Hero extends GameObject {
-       constructor(x, y) {
-         super(x, y);
-         (this.width = 99), (this.height = 75);
-         this.type = "Hero";
-         this.speed = { x: 0, y: 0 };
-         this.cooldown = 0;
-       }
-       fire() {
-         gameObjects.push(new Laser(this.x + 45, this.y - 10));
-         this.cooldown = 500;
+        constructor(x, y) {
+          super(x, y);
+          (this.width = 99), (this.height = 75);
+          this.type = "Hero";
+          this.speed = { x: 0, y: 0 };
+          this.cooldown = 0;
+        }
+        fire() {
+          gameObjects.push(new Laser(this.x + 45, this.y - 10));
+          this.cooldown = 500;
 
-         let id = setInterval(() => {
-           if (this.cooldown > 0) {
-             this.cooldown -= 100;
-           } else {
-             clearInterval(id);
-           }
-         }, 200);
-       }
-       canFire() {
-         return this.cooldown === 0;
-       }
+          let id = setInterval(() => {
+            if (this.cooldown > 0) {
+              this.cooldown -= 100;
+            } else {
+              clearInterval(id);
+            }
+          }, 200);
+        }
+        canFire() {
+          return this.cooldown === 0;
+        }
       }
       ```
 

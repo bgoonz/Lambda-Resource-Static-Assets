@@ -3,9 +3,11 @@
 This lesson covers the basics of programming languages. The topics covered here apply to most modern programming languages today. In the 'Tools of the Trade' section, you'll learn about useful software that helps you as a developer.
 
 ![Intro Programming](/sketchnotes/webdev101-programming.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Pre-Lecture Quiz
+
 [Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/1)
 
 ## Introduction
@@ -19,31 +21,33 @@ In this lesson, we'll cover:
 
 ## What is Programming?
 
-Programming (also known as coding) is the process of writing instructions to a device, such as a computer or mobile device. We write these instructions with a programming language, which is then interpreted by the device. These sets of instructions may be referred to by various names, but *program*, *computer program*, *application (app)*, and *executable* are a few popular names.
+Programming (also known as coding) is the process of writing instructions to a device, such as a computer or mobile device. We write these instructions with a programming language, which is then interpreted by the device. These sets of instructions may be referred to by various names, but _program_, _computer program_, _application (app)_, and _executable_ are a few popular names.
 
-A *program* can be anything that is written with code; websites, games, and phone apps are programs. While it's possible to create a program without writing code, the underlying logic is interpreted to the device and that logic was most likely written with code. A program that is *running* or *executing code* is carrying out instructions. The device that you're currently reading this lesson with is running a program to print it to your screen.
+A _program_ can be anything that is written with code; websites, games, and phone apps are programs. While it's possible to create a program without writing code, the underlying logic is interpreted to the device and that logic was most likely written with code. A program that is _running_ or _executing code_ is carrying out instructions. The device that you're currently reading this lesson with is running a program to print it to your screen.
 
 ✅ Do a little research: who is considered to have been the world's first computer programmer?
 
 ## Programming Languages
 
-Programming languages serve a main purpose: for developers to build instructions to send to a device. Devices only can understand binary (1s and 0s), and for *most* developers that's not a very efficient way to communicate. Programming languages are a vehicle for communication between humans and computers.
+Programming languages serve a main purpose: for developers to build instructions to send to a device. Devices only can understand binary (1s and 0s), and for _most_ developers that's not a very efficient way to communicate. Programming languages are a vehicle for communication between humans and computers.
 
 Programming languages come in different formats and may serve different purposes. For example, JavaScript is primarily used for web applications, while Bash is primarily used for operating systems.
 
-*Low level languages* typically require fewer steps than *high level languages* for a device to interpret instructions. However, what makes high level languages popular is its readability and support. JavaScript is considered a high level language.
+_Low level languages_ typically require fewer steps than _high level languages_ for a device to interpret instructions. However, what makes high level languages popular is its readability and support. JavaScript is considered a high level language.
 
 The following code illustrates the difference between a high level language with JavaScript and low level language with ARM assembly code.
 
 ```javascript
-let number = 10
-let n1 = 0, n2 = 1, nextTerm;
+let number = 10;
+let n1 = 0,
+  n2 = 1,
+  nextTerm;
 
 for (let i = 1; i <= number; i++) {
-    console.log(n1);
-    nextTerm = n1 + n2;
-    n1 = n2;
-    n2 = nextTerm;
+  console.log(n1);
+  nextTerm = n1 + n2;
+  n1 = n2;
+  n2 = nextTerm;
 }
 ```
 
@@ -72,15 +76,15 @@ back add r0,r1
  end
 ```
 
-Believe it or not, *they're both doing the same thing*: printing a Fibonacci sequence up to 10.
+Believe it or not, _they're both doing the same thing_: printing a Fibonacci sequence up to 10.
 
 ✅ A Fibonacci sequence is [defined](https://en.wikipedia.org/wiki/Fibonacci_number) as a set of numbers such that each number is the sum of the two preceding ones, starting from 0 and 1.
 
 ## Elements of a program
 
-A single instruction in a program is called a *statement* and will usually have a character or line spacing that marks where the instruction ends, or *terminates*. How a program terminates varies with each language.
+A single instruction in a program is called a _statement_ and will usually have a character or line spacing that marks where the instruction ends, or _terminates_. How a program terminates varies with each language.
 
-Most programs rely on using data from a user or elsewhere, where statements may rely on data to carry out instructions. Data can change how a program behaves, so programming languages come with a way to temporarily store data that can be used later. This data is called *variables*. Variables are statements that instruct a device to save data in its memory. Variables in programs are similar to ones in algebra, where they have a unique name and their value may change over time.
+Most programs rely on using data from a user or elsewhere, where statements may rely on data to carry out instructions. Data can change how a program behaves, so programming languages come with a way to temporarily store data that can be used later. This data is called _variables_. Variables are statements that instruct a device to save data in its memory. Variables in programs are similar to ones in algebra, where they have a unique name and their value may change over time.
 
 There's a chance that some statements will not be executed by a device. This is usually by design when written by the developer or by accident when an unexpected error occurs. This type of control of an application makes it more robust and maintainable. Typically these changes in control happen when certain decisions are met. A common statement in modern programming languages to control how a program is run is the `if..else` statement.
 
@@ -100,10 +104,10 @@ One of the most crucial tools for software development is the editor. Editors ar
 
 Developers rely on editors for a few additional reasons:
 
-- *Debugging* Discovering bugs and errors by stepping through code, line by line. Some editors have debugging capabilities, or can be customized and added for specific programming languages.  
-- *Syntax highlighting* Adds colors and text formatting to code, makes it easier to read. Most editors allow customized syntax highlighting.
-- *Extensions and Integrations* Additions that are specialized for developers, by developers, for access to additional tools that aren't built into the base editor. For example, many developers also need a way to document their code and explain how it works and will install a spell check extension to check for typos. Most of these additions are intended for use within a specific editor, and most editors come with a way to search for available extensions.
-- *Customization* Most editors are extremely customizable, and each developer will have their own unique development environment that suits their needs. Many also allow developers to create their own extension.
+- _Debugging_ Discovering bugs and errors by stepping through code, line by line. Some editors have debugging capabilities, or can be customized and added for specific programming languages.
+- _Syntax highlighting_ Adds colors and text formatting to code, makes it easier to read. Most editors allow customized syntax highlighting.
+- _Extensions and Integrations_ Additions that are specialized for developers, by developers, for access to additional tools that aren't built into the base editor. For example, many developers also need a way to document their code and explain how it works and will install a spell check extension to check for typos. Most of these additions are intended for use within a specific editor, and most editors come with a way to search for available extensions.
+- _Customization_ Most editors are extremely customizable, and each developer will have their own unique development environment that suits their needs. Many also allow developers to create their own extension.
 
 #### Popular Editors and Web Development Extensions
 
@@ -120,7 +124,7 @@ Developers rely on editors for a few additional reasons:
 
 Another crucial tool is the browser. Web developers rely on the browser to observe how their code runs on the web, it's also used to view visual elements of a web page that are written in the editor, like HTML.
 
-Many browsers come with *developer tools* (DevTools) that contain a set of helpful features and information to assist developers to collect and capture important insights about their application. For example: If a web page has errors, it's sometimes helpful to know when they occurred. DevTools in a browser can be configured to capture this information.
+Many browsers come with _developer tools_ (DevTools) that contain a set of helpful features and information to assist developers to collect and capture important insights about their application. For example: If a web page has errors, it's sometimes helpful to know when they occurred. DevTools in a browser can be configured to capture this information.
 
 #### Popular Browsers and DevTools
 
@@ -136,7 +140,7 @@ Some developers prefer a less graphical view for their daily tasks and rely on t
 
 Options for the command line will differ based on the operating system you use.
 
-*💻 = comes preinstalled on the operating system.*
+_💻 = comes preinstalled on the operating system._
 
 #### Windows
 
@@ -144,7 +148,7 @@ Options for the command line will differ based on the operating system you use.
 - [Command Line](https://docs.microsoft.com/windows-server/administration/windows-commands/windows-commands?WT.mc_id=academic-13441-cxa) (also known as CMD) 💻
 - [Windows Terminal](https://docs.microsoft.com/windows/terminal/?WT.mc_id=academic-13441-cxa)
 - [mintty](https://mintty.github.io/)
-  
+
 #### MacOS
 
 - [Terminal](https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac) 💻
@@ -181,6 +185,7 @@ When a developer wants to learn something new, they'll most likely turn to docum
 Compare some programming languages. What are some of the unique traits of JavaScript vs. Java? How about COBOL vs. Go?
 
 ## Post-Lecture Quiz
+
 [Post-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/2)
 
 ## Review & Self Study

@@ -54,73 +54,75 @@ npm start
 
 1. **追蹤結束狀態**。 新增程式碼來追蹤敵人的數量，利用下列函式判斷英雄艦艇是否被擊毀：
 
-    ```javascript
-    function isHeroDead() {
-      return hero.life <= 0;
-    }
+   ```javascript
+   function isHeroDead() {
+     return hero.life <= 0;
+   }
 
-    function isEnemiesDead() {
-      const enemies = gameObjects.filter((go) => go.type === "Enemy" && !go.dead);
-      return enemies.length === 0;
-    }
-    ```
+   function isEnemiesDead() {
+     const enemies = gameObjects.filter(
+       (go) => go.type === "Enemy" && !go.dead
+     );
+     return enemies.length === 0;
+   }
+   ```
 
 1. **加入訊息處理器**。 編輯 `eventEmitter` 以處理這些狀態：
 
-    ```javascript
-    eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-        first.dead = true;
-        second.dead = true;
-        hero.incrementPoints();
+   ```javascript
+   eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
+     first.dead = true;
+     second.dead = true;
+     hero.incrementPoints();
 
-        if (isEnemiesDead()) {
-          eventEmitter.emit(Messages.GAME_END_WIN);
-        }
-    });
+     if (isEnemiesDead()) {
+       eventEmitter.emit(Messages.GAME_END_WIN);
+     }
+   });
 
-    eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
-        enemy.dead = true;
-        hero.decrementLife();
-        if (isHeroDead())  {
-          eventEmitter.emit(Messages.GAME_END_LOSS);
-          return; // 遊戲失敗，提前結束
-        }
-        if (isEnemiesDead()) {
-          eventEmitter.emit(Messages.GAME_END_WIN);
-        }
-    });
-    
-    eventEmitter.on(Messages.GAME_END_WIN, () => {
-        endGame(true);
-    });
-      
-    eventEmitter.on(Messages.GAME_END_LOSS, () => {
-      endGame(false);
-    });
-    ```
+   eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
+     enemy.dead = true;
+     hero.decrementLife();
+     if (isHeroDead()) {
+       eventEmitter.emit(Messages.GAME_END_LOSS);
+       return; // 遊戲失敗，提前結束
+     }
+     if (isEnemiesDead()) {
+       eventEmitter.emit(Messages.GAME_END_WIN);
+     }
+   });
+
+   eventEmitter.on(Messages.GAME_END_WIN, () => {
+     endGame(true);
+   });
+
+   eventEmitter.on(Messages.GAME_END_LOSS, () => {
+     endGame(false);
+   });
+   ```
 
 1. **加入新的訊息**。 新增這些訊息到 Messages 常數中：
 
-    ```javascript
-    GAME_END_LOSS: "GAME_END_LOSS",
-    GAME_END_WIN: "GAME_END_WIN",
-    ```
+   ```javascript
+   GAME_END_LOSS: "GAME_END_LOSS",
+   GAME_END_WIN: "GAME_END_WIN",
+   ```
 
-2. **加入重新開始的功能** 在按下特定按鈕後，程式會重新開始遊戲。
+1. **加入重新開始的功能** 在按下特定按鈕後，程式會重新開始遊戲。
 
    1. **監聽 `Enter` 按鈕之按壓**。 編輯視窗的 eventListener ，監聽按鍵的按壓：
 
-    ```javascript
-     else if(evt.key === "Enter") {
-        eventEmitter.emit(Messages.KEY_EVENT_ENTER);
-      }
-    ```
+   ```javascript
+    else if(evt.key === "Enter") {
+       eventEmitter.emit(Messages.KEY_EVENT_ENTER);
+     }
+   ```
 
    1. **加入重新遊戲的訊息**。 加入這段訊息到 Messages 常數中：
 
-        ```javascript
-        KEY_EVENT_ENTER: "KEY_EVENT_ENTER",
-        ```
+      ```javascript
+      KEY_EVENT_ENTER: "KEY_EVENT_ENTER",
+      ```
 
 1. **制定遊戲規則**。 編制下列的遊戲規則：
 
@@ -128,78 +130,78 @@ npm start
 
       1. 首先，建立函式 `displayMessage()`：
 
-        ```javascript
-        function displayMessage(message, color = "red") {
-          ctx.font = "30px Arial";
-          ctx.fillStyle = color;
-          ctx.textAlign = "center";
-          ctx.fillText(message, canvas.width / 2, canvas.height / 2);
-        }
-        ```
+      ```javascript
+      function displayMessage(message, color = "red") {
+        ctx.font = "30px Arial";
+        ctx.fillStyle = color;
+        ctx.textAlign = "center";
+        ctx.fillText(message, canvas.width / 2, canvas.height / 2);
+      }
+      ```
 
       1. 建立函式 `endGame()`：
 
-        ```javascript
-        function endGame(win) {
-          clearInterval(gameLoopId);
-        
-          // 設定延遲以確保所有圖像皆繪製完成
-          setTimeout(() => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "black";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            if (win) {
-              displayMessage(
-                "Victory!!! Pew Pew... - Press [Enter] to start a new game Captain Pew Pew",
-                "green"
-              );
-            } else {
-              displayMessage(
-                "You died !!! Press [Enter] to start a new game Captain Pew Pew"
-              );
-            }
-          }, 200)  
-        }
-        ```
+      ```javascript
+      function endGame(win) {
+        clearInterval(gameLoopId);
+
+        // 設定延遲以確保所有圖像皆繪製完成
+        setTimeout(() => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = "black";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          if (win) {
+            displayMessage(
+              "Victory!!! Pew Pew... - Press [Enter] to start a new game Captain Pew Pew",
+              "green"
+            );
+          } else {
+            displayMessage(
+              "You died !!! Press [Enter] to start a new game Captain Pew Pew"
+            );
+          }
+        }, 200);
+      }
+      ```
 
    1. **重新遊戲的邏輯**。 當玩家損失所有的性命，或是贏下這場遊戲，顯示遊戲重來的提示。此外，在*重新遊玩*按鍵被按壓時，重新遊戲(你可以自己決定任一個鍵盤按鍵)。
 
       1. 建立函式 `resetGame()`：
 
-        ```javascript
-        function resetGame() {
-          if (gameLoopId) {
-            clearInterval(gameLoopId);
-            eventEmitter.clear();
-            initGame();
-            gameLoopId = setInterval(() => {
-              ctx.clearRect(0, 0, canvas.width, canvas.height);
-              ctx.fillStyle = "black";
-              ctx.fillRect(0, 0, canvas.width, canvas.height);
-              drawPoints();
-              drawLife();
-              updateGameObjects();
-              drawGameObjects(ctx);
-            }, 100);
-          }
+      ```javascript
+      function resetGame() {
+        if (gameLoopId) {
+          clearInterval(gameLoopId);
+          eventEmitter.clear();
+          initGame();
+          gameLoopId = setInterval(() => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            drawPoints();
+            drawLife();
+            updateGameObjects();
+            drawGameObjects(ctx);
+          }, 100);
         }
-        ```
+      }
+      ```
 
-     1. 在 `initGame()` 內呼叫 `eventEmitter` 來重新設定遊戲：
+   1. 在 `initGame()` 內呼叫 `eventEmitter` 來重新設定遊戲：
 
-        ```javascript
-        eventEmitter.on(Messages.KEY_EVENT_ENTER, () => {
-          resetGame();
-        });
-        ```
+      ```javascript
+      eventEmitter.on(Messages.KEY_EVENT_ENTER, () => {
+        resetGame();
+      });
+      ```
 
-     1. 在 EventEmitter 加入函式 `clear()`：
+   1. 在 EventEmitter 加入函式 `clear()`：
 
-        ```javascript
-        clear() {
-          this.listeners = {};
-        }
-        ```
+      ```javascript
+      clear() {
+        this.listeners = {};
+      }
+      ```
 
 👽 💥 🚀 恭喜你，艦長！你的遊戲已經完成了！幹得好！ 🚀 💥 👽
 

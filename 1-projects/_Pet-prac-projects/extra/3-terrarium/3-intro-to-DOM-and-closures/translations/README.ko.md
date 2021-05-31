@@ -1,6 +1,7 @@
 # Terrarium 프로젝트 파트 3: DOM 조작과 클로저
 
 ![DOM and a closure](/sketchnotes/webdev101-js.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 강의 전 퀴즈
@@ -32,10 +33,11 @@ terrarium에 대한 HTML과 CSS를 작성해두어야 합니다. 이 강의가 �
 terrarium 폴더에서, `script.js`라고 불리는 파일을 만듭니다. 파일의 `<head>` 부분에 넣습니다:
 
 ```html
-	<script src="./script.js" defer></script>
+<script src="./script.js" defer></script>
 ```
 
 > Note: 외부 JavaScript 파일을 html 파일로 가져올 때 `defer` 를 사용하여 HTML 파일이 완전히 불러질 때만 JavaScript가 실행되도록 합니다. HTML 파일이 파싱되는 동안 스크립트를 실행할 수 있는 `async` 속성을 사용할 수 있지만, 우리는 드래그 스크립트를 실행하기 전에 HTML 요소를 완전히 드래그할 수 있어야 한다는 점이 중요합니다.
+
 ---
 
 ## DOM 요소
@@ -74,15 +76,15 @@ dragElement(document.getElementById('plant14'));
 클로저는 하나 이상의 함수가 외부 함수의 범위로 접근하는 순간 유용합니다. 예시는 다음과 같습니다:
 
 ```javascript
-function displayCandy(){
-	let candy = ['jellybeans'];
-	function addCandy(candyType) {
-		candy.push(candyType)
-	}
-	addCandy('gumdrops');
+function displayCandy() {
+  let candy = ["jellybeans"];
+  function addCandy(candyType) {
+    candy.push(candyType);
+  }
+  addCandy("gumdrops");
 }
 displayCandy();
-console.log(candy)
+console.log(candy);
 ```
 
 이 예제에서, displayCandy 함수는 새 캔디 타입을 이미 존재하는 배열로 푸시하는 함수를 감쌉니다. 이 코드를 실행한다면, `candy` 배열은 지역 변수(클로저 로컬)이므로 정의되지 않습니다.
@@ -95,12 +97,12 @@ console.log(candy)
 
 ```javascript
 function dragElement(terrariumElement) {
-	//set 4 positions for positioning on the screen
-	let pos1 = 0,
-		pos2 = 0,
-		pos3 = 0,
-		pos4 = 0;
-	terrariumElement.onpointerdown = pointerDrag;
+  //set 4 positions for positioning on the screen
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  terrariumElement.onpointerdown = pointerDrag;
 }
 ```
 
@@ -116,14 +118,14 @@ function dragElement(terrariumElement) {
 
 terrariumElement를 드래그할 준비가 되었습니다; `onpointerdown` 이벤트가 시작되면, pointerDrag 함수가 호출됩니다. 줄 바로 아래에 해당 함수를 추가하시기 바랍니다: `terrariumElement.onpointerdown = pointerDrag;`:
 
-### 작업 
+### 작업
 
 ```javascript
 function pointerDrag(e) {
-	e.preventDefault();
-	console.log(e);
-	pos3 = e.clientX;
-	pos4 = e.clientY;
+  e.preventDefault();
+  console.log(e);
+  pos3 = e.clientX;
+  pos4 = e.clientY;
 }
 ```
 
@@ -140,9 +142,9 @@ function pointerDrag(e) {
 `pos4 = e.clientY` 아래에 포인터 이벤트 조작을 2개 더 추가하여 함수 초기화를 완료합니다:
 
 ```html
-document.onpointermove = elementDrag;
-document.onpointerup = stopElementDrag;
+document.onpointermove = elementDrag; document.onpointerup = stopElementDrag;
 ```
+
 제 식물을 이동할 때 포인터와 함께 식물을 끌고, 식물 선택을 취소할 때 드래그 제스처를 중지하도록 지정합니다. `onpointermove` 와 `onpointerup`은 모두 `onpointerdown`과 동일한 API의 일부입니다. 아직 `elementDrag` 및 `stopElementDrag` 함수를 정의하지 않아 인터페이스에서 오류가 발생하므로, 다음에 작성하십시오.
 
 ## elementDrag와 stopElementDrag 함수
@@ -155,31 +157,32 @@ document.onpointerup = stopElementDrag;
 
 ```javascript
 function elementDrag(e) {
-	pos1 = pos3 - e.clientX;
-	pos2 = pos4 - e.clientY;
-	pos3 = e.clientX;
-	pos4 = e.clientY;
-	console.log(pos1, pos2, pos3, pos4);
-	terrariumElement.style.top = terrariumElement.offsetTop - pos2 + 'px';
-	terrariumElement.style.left = terrariumElement.offsetLeft - pos1 + 'px';
+  pos1 = pos3 - e.clientX;
+  pos2 = pos4 - e.clientY;
+  pos3 = e.clientX;
+  pos4 = e.clientY;
+  console.log(pos1, pos2, pos3, pos4);
+  terrariumElement.style.top = terrariumElement.offsetTop - pos2 + "px";
+  terrariumElement.style.left = terrariumElement.offsetLeft - pos1 + "px";
 }
 ```
+
 이 함수에서는, 외부 함수에서 로컬 변수로 설정한 초기 위치 1-4를 많이 편집합니다. 여기서 어떤 일이 일어나고 있습니까?
 
 드래그할 때, `pos1`을 현재 `e.clientX` 값을 뺀 `pos3`(이전에`e.clientX`로 설정)과 동일하게 만들어 `pos1`을 다시 할당합니다. `pos2`와 유사한 작업을 수행합니다. 그런 뒤에, `pos3`과 `pos4`를 요소의 새로운 X 와 Y 좌표로 다시 설정합니다. 드래그하면 콘솔에서 변경 사항을 볼 수 있습니다. 그런 뒤에, 식물의 css 스타일을 조작하여 `pos1`과 `pos2`의 새로운 위치를 기반으로 위치를 설정하고, 오프셋을 이러한 새 위치와 비교하여 식물의 위쪽과 왼쪽 XY 좌표를 계산합니다.
 
-> `offsetTop`과 `offsetLeft`는 상위 위치를 기준으로 요소의 위치를 설정하는 CSS 속성입니다. 상위는 `static`으로 두지 않은 모든 요소가 될 수 있습니다. 
+> `offsetTop`과 `offsetLeft`는 상위 위치를 기준으로 요소의 위치를 설정하는 CSS 속성입니다. 상위는 `static`으로 두지 않은 모든 요소가 될 수 있습니다.
 
 모든 위치 다시 계산하며 terrarium과 그 식물의 움직임을 미세하세 조정할 수 있습니다.
 
-### 작업 
+### 작업
 
 인터페이스를 완성하기 위한 마지막 작업은 `elementDrag`의 닫는 중괄호 뒤에 `closeElementDrag` 함수를 추가하는 것입니다:
 
 ```javascript
 function stopElementDrag() {
-	document.onpointerup = null;
-	document.onpointermove = null;
+  document.onpointerup = null;
+  document.onpointermove = null;
 }
 ```
 
@@ -212,4 +215,3 @@ function stopElementDrag() {
 ## 과제
 
 [Work a bit more with the DOM](../assignment.md)
-

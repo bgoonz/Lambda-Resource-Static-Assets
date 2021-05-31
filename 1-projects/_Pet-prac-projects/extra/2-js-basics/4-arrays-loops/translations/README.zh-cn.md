@@ -1,9 +1,11 @@
 # JavaScript 基础：数组和循环
 
 ![JavaScript Basics - Arrays](/sketchnotes/webdev101-js-arrays.png)
+
 > 涂鸦笔记作者：[Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 课前小测
+
 [课前小测](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/13?loc=zh_cn)
 
 这节课将会介绍 JavaScript 的基础知识，正是它为网页提供了可交互性。这节课中，你将学习数组和循环，它们会被用于操控数据。
@@ -31,7 +33,13 @@
 ✅ 数组索引从 0 开始计起是否让你感觉奇怪？在有的编程语言中，索引会从 1 开始。关于这事有一段有趣的历史，你可以[在维基百科了解它](https://zh.wikipedia.org/zh-cn/%E5%BE%9E%E9%9B%B6%E9%96%8B%E5%A7%8B%E7%9A%84%E7%B7%A8%E8%99%9F)。
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors[2]; // "Vanilla"
 ```
 
@@ -52,7 +60,13 @@ iceCreamFlavors[5] = "Cookie Dough"; // 加了一项 "Cookie Dough"
 为了获知数组中有多少元素，可以用 `length` 属性。
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors.length; // 5
 ```
 
@@ -64,16 +78,13 @@ iceCreamFlavors.length; // 5
 
 ### For 循环
 
-`for` 循环需要三个部分来进行迭代：
-    - `计数器（counter）` 一个通常用数字来初始化的变量，用于记录迭代的次数
-    - `条件式（condition）` 一个使用了比较运算符的表达式，用于在其值为 `true` 时终止循环
-    - `迭代式（iteration-expression）` 在每一次迭代的模为执行，一般用于更新计数器的值
-  
+`for` 循环需要三个部分来进行迭代： - `计数器（counter）` 一个通常用数字来初始化的变量，用于记录迭代的次数 - `条件式（condition）` 一个使用了比较运算符的表达式，用于在其值为 `true` 时终止循环 - `迭代式（iteration-expression）` 在每一次迭代的模为执行，一般用于更新计数器的值
+
 ```javascript
-    // 从 0 数到 9
-    for (let i = 0; i < 10; i++) {
-        console.log(i);
-    }
+// 从 0 数到 9
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
 ```
 
 ✅ 在浏览器控制台中运行这段代码。试试调整计数器、条件式或迭代式时会发生什么。你能让它反过来运行，倒着计数吗？
@@ -86,8 +97,8 @@ iceCreamFlavors.length; // 5
 // 从 0 数到 9
 let i = 0;
 while (i < 10) {
- console.log(i);
- i++;
+  console.log(i);
+  i++;
 }
 ```
 
@@ -98,7 +109,13 @@ while (i < 10) {
 循环和数组经常结合使用，因为很多情况下都会利用数组长度来作为条件式，而索引可以作为计数器值。
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 
 for (let i = 0; i < iceCreamFlavors.length; i++) {
   console.log(iceCreamFlavors[i]);
@@ -114,6 +131,7 @@ for (let i = 0; i < iceCreamFlavors.length; i++) {
 除了 for 和 while 循环，还有一些用于遍历数组的办法。比如 [forEach](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)、[for-of](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/for...of) 和 [map](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map)。用这些办法重写一下你的数组遍历代码。
 
 ## 课后小测
+
 [Post-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/14?loc=zh_cn)
 
 ## 复习 & 自学

@@ -3,9 +3,11 @@
 Pelajaran ini merangkumi pengetahuan asas tentang GitHub, dan adalah salah satu platform untuk menjadi tuan rumah dan menguruskan perubahan pada kod anda.
 
 ![Intro to GitHub](/sketchnotes/webdev101-github.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Kuiz Pra-Kuliah
+
 [Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/3)
 
 ## Pengenalan
@@ -22,8 +24,9 @@ Sebelum bermula, anda perlu memeriksa sama ada Git dipasang dalam komputer anda.
 `git --version`
 
 Sekiranya Git tidak dipasang, [memuat turun Git](https://git-scm.com/downloads). Kemudian, siapkan profil Git anda di terminal:
-* `git config --global user.name "your-name"`
-* `git config --global user.email "your-email"`
+
+- `git config --global user.name "your-name"`
+- `git config --global user.email "your-email"`
 
 Untuk memeriksa sama ada Git sudah dikonfigurasi, anda boleh menaip:
 `git config --list`
@@ -46,7 +49,7 @@ Katakan anda mempunyai folder secara tempatan dengan beberapa projek kod dan and
 
 ### Tugasan: Buat repositori dan kod komit
 
-1. **Buat satu repository di GitHub**. Di GitHub.com, pada tab repositori, atau dari bar navigasi di sebelah kanan atas, cari butang   **repo baru (new repo)**.
+1. **Buat satu repository di GitHub**. Di GitHub.com, pada tab repositori, atau dari bar navigasi di sebelah kanan atas, cari butang **repo baru (new repo)**.
 
    1. Beri nama repositori (folder) anda
    1. Pilih **repositori kreat (create repository)**.
@@ -80,7 +83,7 @@ Katakan anda mempunyai folder secara tempatan dengan beberapa projek kod dan and
         modified:   file2.txt
    ```
 
-   Biasanya perintah `git status` memberitahu anda perkara seperti fail apa yang siap disimpan_ ke repo atau mempunyai perubahan di atasnya yang mungkin anda mahu berterusan.
+   Biasanya perintah `git status` memberitahu anda perkara seperti fail apa yang siap disimpan\_ ke repo atau mempunyai perubahan di atasnya yang mungkin anda mahu berterusan.
 
 1. **Tambahkan semua fail untuk penjejakan**
    Ini juga disebut sebagai fail pementasan / menambahkan fail ke kawasan pementasan (staging area).
@@ -107,15 +110,15 @@ Katakan anda mempunyai folder secara tempatan dengan beberapa projek kod dan and
 
    Perintah ini membantu kita untuk melepaskan semua fail sekaligus.
 
-1.  **Lepaskan fail yang tertentu**
+1. **Lepaskan fail yang tertentu**
 
-   ```bash
-   git reset [file or folder name]
-   ```
+```bash
+git reset [file or folder name]
+```
 
-   Perintah ini membantu kita untuk melepaskan hanya fail yang tertentu sekaligus yang tidak ingin kita sertakan untuk komit berikutnya.
+Perintah ini membantu kita untuk melepaskan hanya fail yang tertentu sekaligus yang tidak ingin kita sertakan untuk komit berikutnya.
 
-1. **Meneruskan kerja anda**. Pada masa ini anda telah menambahkan fail ke yang disebut _staging area_. Salah satu tempat di mana Git mengesan fail anda. Untuk melakukan perubahan itu kekal, anda perlu _commit_ fail itu. Untuk melakukannya anda perlu membuat _commit_ dengan perintah `git commit`. _commit_ mewakili titik simpanan dalam sejarah repo anda. Menaip perintah tersebut untuk membuat _commit_: 
+1. **Meneruskan kerja anda**. Pada masa ini anda telah menambahkan fail ke yang disebut _staging area_. Salah satu tempat di mana Git mengesan fail anda. Untuk melakukan perubahan itu kekal, anda perlu _commit_ fail itu. Untuk melakukannya anda perlu membuat _commit_ dengan perintah `git commit`. _commit_ mewakili titik simpanan dalam sejarah repo anda. Menaip perintah tersebut untuk membuat _commit_:
 
    ```bash
    git commit -m "first commit"
@@ -123,7 +126,7 @@ Katakan anda mempunyai folder secara tempatan dengan beberapa projek kod dan and
 
    Untuk komit semua fail anda, menaip mesej "komit pertama (first commit)". Untuk mesej komit pada masa kelak, anda ingin lebih terperinci dalam penerangan anda untuk menyampaikan jenis perubahan yang telah anda buat.
 
-1. **Sambungkan repo Git tempatan anda dengan GitHub**. Repo Git adalah bagus dalam mesin anda tetapi pada satu ketika anda ingin mempunyai sandaran fail anda di suatu tempat dan juga mengundang orang lain untuk bekerja dengan anda di repo anda. Salah satu tempat yang bagus untuk melakukannya adalah di GitHub. Ingatlah bahawa kita sudah membuat repo di GitHub jadi satu-satunya perkara yang perlu kita lakukan ialah menghubungkan repo Git tempatan kita dengan GitHub. Perintah ini `git remote add` akan membuat tugasan tersebut. Menaip perintah tersebut: 
+1. **Sambungkan repo Git tempatan anda dengan GitHub**. Repo Git adalah bagus dalam mesin anda tetapi pada satu ketika anda ingin mempunyai sandaran fail anda di suatu tempat dan juga mengundang orang lain untuk bekerja dengan anda di repo anda. Salah satu tempat yang bagus untuk melakukannya adalah di GitHub. Ingatlah bahawa kita sudah membuat repo di GitHub jadi satu-satunya perkara yang perlu kita lakukan ialah menghubungkan repo Git tempatan kita dengan GitHub. Perintah ini `git remote add` akan membuat tugasan tersebut. Menaip perintah tersebut:
 
    > Perhatikan, sebelum anda mengetik perintah, pergi ke halaman repo GitHub anda untuk mencari URL repositori. Anda akan menggunakannya dalam arahan di bawah. Gantikan `repository_name` degan GitHub URL.
 
@@ -149,7 +152,7 @@ Katakan anda mempunyai folder secara tempatan dengan beberapa projek kod dan and
    git push
    ```
 
-   >Tip, Anda mungkin juga mahu mengadopsi fail `.gitignore` untuk mengelakkan fail yang tidak ingin anda lacak muncul di GitHub - seperti fail nota yang anda simpan di folder yang sama tetapi tidak mempunyai tempat di repositori awam. Anda boleh mencari templat untuk `.gitignore` fail pada [.gitignore templates](github.com/github/gitignore).
+   > Tip, Anda mungkin juga mahu mengadopsi fail `.gitignore` untuk mengelakkan fail yang tidak ingin anda lacak muncul di GitHub - seperti fail nota yang anda simpan di folder yang sama tetapi tidak mempunyai tempat di repositori awam. Anda boleh mencari templat untuk `.gitignore` fail pada [.gitignore templates](github.com/github/gitignore).
 
 #### Mesej Komit
 
@@ -169,13 +172,13 @@ Sebab utama meletakkan perkara di GitHub adalah untuk memungkinkan untuk berkola
 
 Dalam repositori anda, arahkan ke `Insights> Community` untuk melihat bagaimana projek anda dibandingkan dengan standard komuniti yang disyorkan.
 
-   Berikut adalah beberapa perkara yang dapat meningkatkan repo GitHub anda:
-   - **Penerangan**. Adakah anda menambah keterangan untuk projek anda?
-   - **README**. Adakah anda menambah README? GitHub memberikan panduan untuk menulis [README](https://docs.github.com/articles/about-readmes/).
-   - **Garis panduan penyumbang**. Adakah projek anda mempunyai [cGaris panduan penyumbang](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/), 
-   - **Tatakelakuan**. a [Tatakelakuan](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/), 
-   - **Lesen**. Yang paling penting, ialah [lesen](https://docs.github.com/articles/adding-a-license-to-a-repository/)?
+Berikut adalah beberapa perkara yang dapat meningkatkan repo GitHub anda:
 
+- **Penerangan**. Adakah anda menambah keterangan untuk projek anda?
+- **README**. Adakah anda menambah README? GitHub memberikan panduan untuk menulis [README](https://docs.github.com/articles/about-readmes/).
+- **Garis panduan penyumbang**. Adakah projek anda mempunyai [cGaris panduan penyumbang](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/),
+- **Tatakelakuan**. a [Tatakelakuan](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/),
+- **Lesen**. Yang paling penting, ialah [lesen](https://docs.github.com/articles/adding-a-license-to-a-repository/)?
 
 Semua sumber ini akan memberi manfaat kepada ahli pasukan baru. Dan ini biasanya merupakan jenis perkara yang dilihat oleh penyumbang baru bahkan sebelum melihat kod anda, untuk mengetahui sama ada projek anda adalah tempat yang tepat untuk mereka menghabiskan masa.
 
@@ -184,7 +187,6 @@ Semua sumber ini akan memberi manfaat kepada ahli pasukan baru. Dan ini biasanya
 ### Tugas: Gabungkan beberapa kod
 
 Menyumbang kepada dokumen membantu orang menyumbang dalam projek tersebut. Ini menerangkan jenis sumbangan yang anda cari dan bagaimana prosesnya berjalan. Penyumbang perlu melalui beberapa langkah untuk dapat menyumbang kepada repo anda di GitHub:
-
 
 1. **Memalsukan repo anda** Anda mungkin mahu orang membuat projek anda. Memalsukan (_fork_) bermaksud membuat replika repositori anda di profil GitHub mereka.
 1. **Klon**. Dari sana mereka akan mengklonkan projek ke mesin tempatan mereka.
@@ -197,7 +199,7 @@ Menyumbang kepada dokumen membantu orang menyumbang dalam projek tersebut. Ini m
 
 Mari melalui aliran kerja penyumbang. Anggaplah penyumbang telah _forked_ dan _cloned_ repo sehingga mereka mempunyai repo Git yang siap diusahakan, di mesin tempatan mereka:
 
-1. **Membuat branch**. Guna perintah `git branch` untuk membuat branch baharu seperti berikut: 
+1. **Membuat branch**. Guna perintah `git branch` untuk membuat branch baharu seperti berikut:
 
    ```bash
    git branch [branch-name]
@@ -252,7 +254,7 @@ Mari melalui aliran kerja penyumbang. Anggaplah penyumbang telah _forked_ dan _c
 
    Pastikan anda pergi ke halaman GitHub untuk forked repo seterusnya dan keluarkan branch terpencil yang baru anda tolak.
 
-`Tarik Permintaan (Pull request)` nampaknya istilah yang tidak bermoral kerana anda benar-benar mahu mendorong perubahan anda ke projek. Tetapi penyelenggara (pemilik projek) atau pasukan inti perlu mempertimbangkan perubahan anda sebelum menggabungkannya dengan  "main" branch projek, jadi anda benar-benar meminta keputusan perubahan dari penyelenggara.
+`Tarik Permintaan (Pull request)` nampaknya istilah yang tidak bermoral kerana anda benar-benar mahu mendorong perubahan anda ke projek. Tetapi penyelenggara (pemilik projek) atau pasukan inti perlu mempertimbangkan perubahan anda sebelum menggabungkannya dengan "main" branch projek, jadi anda benar-benar meminta keputusan perubahan dari penyelenggara.
 
 Tarik permintaan (Pull Request) adalah tempat untuk membandingkan dan membincangkan perbezaan yang diperkenalkan di cabang dengan ulasan, komen, ujian bersepadu, dan banyak lagi. Tarik permintaan (Pull Request) yang baik mengikuti kira-kira peraturan yang sama dengan pesanan pesanan. Anda dapat menambahkan rujukan ke masalah dalam pelacak masalah, ketika pekerjaan Anda misalnya menyelesaikan masalah. Ini dilakukan dengan menggunakan `#` diikuti dengan jumlah masalah (issue) anda. Contohnya `# 97`.
 
@@ -272,7 +274,7 @@ Pertama, marilah kita cari repositori - atau: repo - di GitHub yang menarik bagi
 
 Terdapat beberapa cara menyalin kod. Salah satu cara adalah dengan "mengklon" kandungan repositori, menggunakan HTTPS, SSH, atau menggunakan GitHub CLI (Command Line Interface).
 
-Buka terminal dan klon repo seperti di bawah: 
+Buka terminal dan klon repo seperti di bawah:
 `git clone https://github.com/ProjectURL`
 
 Untuk kerja dengan projek tersebut, tukar the fail kanan:
@@ -299,11 +301,12 @@ Projek mungkin juga ada perbincangan di forum, senarai surat, atau saluran semba
 Berpasangan dengan rakan untuk mengerjakan kod masing-masing. Buat projek secara kolaboratif, fork kod, buat branch dan gabungkan perubahan.
 
 ## Kuiz Pasca Kuliah
+
 [Kuiz Pasca Kuliah](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/4)
 
 ## Mengkaji dan belajar sendiri
 
-Membaca tentang [menyumbang kepada sumber terbuka](https://opensource.guide/how-to-contribute/#how-to-submit-a-contribution). 
+Membaca tentang [menyumbang kepada sumber terbuka](https://opensource.guide/how-to-contribute/#how-to-submit-a-contribution).
 
 [Git nota](https://training.github.com/downloads/github-git-cheat-sheet/).
 

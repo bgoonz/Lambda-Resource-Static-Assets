@@ -3,7 +3,7 @@
 このプロジェクトでは、架空の銀行を構築する方法を学びます。これらのレッスンでは、Web アプリのレイアウト方法やルートの提供、フォームの構築、状態の管理、銀行のデータを API からフェッチする方法などを説明します。
 
 | ![Screen1](../images/screen1.png) | ![Screen2](../images/screen2.png) |
-|--------------------------------|--------------------------------|
+| --------------------------------- | --------------------------------- |
 
 ## レッスン
 
@@ -16,6 +16,6 @@
 
 These lessons were written with :hearts: by [Yohan Lasorsa](https://twitter.com/sinedied).
 
-これらのレッスンで使用した [server API](../api/translations/README.ja) の構築方法を学びたい方は、[このシリーズの動画](https://aka.ms/NodeBeginner) をご覧ください (特に動画17～21)。
+これらのレッスンで使用した [server API](../api/translations/README.ja) の構築方法を学びたい方は、[このシリーズの動画](https://aka.ms/NodeBeginner) をご覧ください (特に動画 17 ～ 21)。
 
 また、[このインタラクティブな学習チュートリアル](https://aka.ms/learn/express-api) もご覧ください。

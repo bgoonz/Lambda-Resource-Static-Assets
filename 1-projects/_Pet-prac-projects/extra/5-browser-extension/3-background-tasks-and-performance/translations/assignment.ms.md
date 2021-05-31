@@ -4,6 +4,6 @@ Berikan laporan terperinci dari laman web, menunjukkan kawasan di mana prestasi 
 
 ## Rubrik
 
-| Kriteria | Contoh                                                                                                  | Mencukupi                    | Usaha Lagi             |
-| -------- | ---------------------------------------------------------------------------------------------------------- | --------------------------- | ----------------------------- |
+| Kriteria | Contoh                                                                                                                      | Mencukupi                 | Usaha Lagi                   |
+| -------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ---------------------------- |
 |          | Laporan disajikan dengan perincian yang diambil bukan hanya dari alat penyemak imbas tetapi dari alat pihak ketiga jika ada | Laporan asas dibentangkan | Laporan minimum dibentangkan |

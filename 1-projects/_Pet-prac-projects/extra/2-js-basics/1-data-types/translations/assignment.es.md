@@ -6,6 +6,6 @@ Imagina que estás construyendo un carrito de compras. Escriba documentación so
 
 ## Rúbrica
 
-Criterios | Ejemplar | Adecuado | Necesita mejorar
---- | --- | --- | - |
-|| Los seis tipos de datos se enumeran y exploran en detalle, documentando su uso | Se exploran cuatro tipos de datos | Se exploran dos tipos de datos |
+| Criterios | Ejemplar                                                                       | Adecuado                          | Necesita mejorar               |
+| --------- | ------------------------------------------------------------------------------ | --------------------------------- | ------------------------------ |
+|           | Los seis tipos de datos se enumeran y exploran en detalle, documentando su uso | Se exploran cuatro tipos de datos | Se exploran dos tipos de datos |

@@ -16,7 +16,7 @@ Ecco come viene tipicamente dichiarato, come parte dell'elemento body della pagi
 <canvas id="myCanvas" width="200" height="100"></canvas>
 ```
 
-Sopra si è  impostato l'`id`entificativo, la larghezza `(width)` e l'altezza (`height`).
+Sopra si è impostato l'`id`entificativo, la larghezza `(width)` e l'altezza (`height`).
 
 - `id`: va impostato in modo da poter ottenere un riferimento quando si deve interagire con l'elemento.
 - `width`: questa è la larghezza dell'elemento.
@@ -27,6 +27,7 @@ Sopra si è  impostato l'`id`entificativo, la larghezza `(width)` e l'altezza (`
 Canvas utilizza un sistema di coordinate cartesiane per disegnare le cose. Quindi utilizza un asse x e un asse y per esprimere dove si trova qualcosa. La posizione `0,0` è la posizione in alto a sinistra e quella in basso a destra è ciò che si è determinato come larghezza (WIDTH) e altezza (HEIGHT) del canvas
 
 ![la griglia del canvas](../canvas_grid.png)
+
 > Immagine da [MDN](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes)
 
 Per disegnare sull'elemento canvas si dovranno eseguire i seguenti passaggi:
@@ -46,10 +47,10 @@ canvas = document.getElementById("myCanvas");
 ctx = canvas.getContext("2d");
 
 //3. lo riempie con il colore rosso
-ctx.fillStyle = 'red';
+ctx.fillStyle = "red";
 
 //4. e disegna un rettangolo con questi parametri, impostando posizione e dimensione
-ctx.fillRect(0,0, 200, 200) // x,y,larghezza, altezza
+ctx.fillRect(0, 0, 200, 200); // x,y,larghezza, altezza
 ```
 
 ✅ L'API Canvas si concentra principalmente su forme 2D, ma si possono anche disegnare elementi 3D su un sito web; per questo, si potrebbe utilizzare l' [API WebGL](https://developer.mozilla.org/docs/Web/API/WebGL_API).
@@ -70,10 +71,10 @@ Si carica una risorsa immagine creando un oggetto `Image` e impostando la sua pr
 
 ```javascript
 const img = new Image();
-img.src = 'path/to/my/image.png';
+img.src = "path/to/my/image.png";
 img.onload = () => {
   // immagine caricata e pronta all'uso
-}
+};
 ```
 
 ### Modello di Caricamento Risorsa
@@ -88,46 +89,45 @@ function loadAsset(path) {
     img.onload = () => {
       // immagine caricata e pronta all'uso
       resolve(img);
-    }
-  })
+    };
+  });
 }
 
 // usarlo in questo modo
 
 async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
+  const heroImg = await loadAsset("hero.png");
+  const monsterImg = await loadAsset("monster.png");
 }
-
 ```
 
 Per disegnare risorse di gioco su uno schermo, il codice sarà simile a questo:
 
 ```javascript
 async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
+  const heroImg = await loadAsset("hero.png");
+  const monsterImg = await loadAsset("monster.png");
 
   canvas = document.getElementById("myCanvas");
   ctx = canvas.getContext("2d");
-  ctx.drawImage(heroImg, canvas.width/2,canvas.height/2);
-  ctx.drawImage(monsterImg, 0,0);
+  ctx.drawImage(heroImg, canvas.width / 2, canvas.height / 2);
+  ctx.drawImage(monsterImg, 0, 0);
 }
 ```
 
-## Ora è il momento di iniziare a costruire il  gioco
+## Ora è il momento di iniziare a costruire il gioco
 
 ### Cosa costruire
 
-Si costruirà una pagina web con un elemento Canvas. Si dovrebbe rendere uno schermo nero `1024 * 768`. Sono state fornite  due immagini:
+Si costruirà una pagina web con un elemento Canvas. Si dovrebbe rendere uno schermo nero `1024 * 768`. Sono state fornite due immagini:
 
 - Astronave dell'eroe
 
-   ![Nave dell'eroe](../solution/assets/player.png)
+  ![Nave dell'eroe](../solution/assets/player.png)
 
-- Mostro 5*5
+- Mostro 5\*5
 
-   ![Nave del  mostro](../solution/assets/enemyShip.png)
+  ![Nave del  mostro](../solution/assets/enemyShip.png)
 
 ### Passaggi consigliati per iniziare lo sviluppo
 
@@ -165,7 +165,8 @@ Aggiungi il codice necessario al file `your-work/app.js` per risolvere quanto se
    > suggerimento: aggiungere le immagini del giocatore e del nemico usando `await loadTexture`, passando il percorso dell'immagine. Non saranno ancora visibili sullo schermo!
 3. **Disegnare** l'eroe al centro dello schermo nella metà inferiore
    > suggerimento: usare l'API `drawImage` per disegnare `heroImg` sullo schermo, impostando `canvas.width / 2 - 45` e `canvas.height - canvas.height / 4` come valori di coordinate x, y
-4. **Disegnare** mostri 5*5
+4. **Disegnare** mostri 5\*5
+
    > suggerimento: ora si può rimuovere il commento dal codice per disegnare i nemici sullo schermo. Successivamente, passare alla funzione `createEnemies` e crearla.
 
    Per prima cosa, impostare alcune costanti:
@@ -181,10 +182,10 @@ Aggiungi il codice necessario al file `your-work/app.js` per risolvere quanto se
 
    ```javascript
    for (let x = START_X; x < STOP_X; x += 98) {
-       for (let y = 0; y < 50 * 5; y += 50) {
-         ctx.drawImage(enemyImg, x, y);
-       }
+     for (let y = 0; y < 50 * 5; y += 50) {
+       ctx.drawImage(enemyImg, x, y);
      }
+   }
    ```
 
 ## Risultato

@@ -9,5 +9,5 @@ Lihat apakah Anda dapat membuat fungsi yang memiliki campuran parameter dan para
 ## Rubrik
 
 | Kriteria | Contoh                                                                                            | Memenuhi Syarat                                                   | Perlu Perbaikan     |
-|----------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------|---------------------|
+| -------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------------------- |
 |          | Solusi ditawarkan dengan dua atau lebih fungsi yang berkinerja baik dengan parameter yang beragam | Solusi kerja ditawarkan dengan satu fungsi dan beberapa parameter | Solusi memiliki bug |

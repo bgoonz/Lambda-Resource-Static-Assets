@@ -6,6 +6,6 @@ Nyalakan semula terarium menggunakan Flexbox atau CSS Grid, dan ambil tangkapan 
 
 ## Rubrik
 
-| Kriteria | Contoh                                                         | Mencukupi                      | Usaha Lagi                    |
-| -------- | ----------------------------------------------------------------- | ----------------------------- | ------------------------------------ |
+| Kriteria | Contoh                                                                           | Mencukupi                    | Usaha Lagi                                 |
+| -------- | -------------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------ |
 |          | Bentangkan terarium yang diperbaiki sepenuhnya menggunakan Flexbox atau CSS Grid | Susun semula beberapa elemen | Gagal menyusun semula terarium sama sekali |

@@ -3,9 +3,11 @@
 Questa lezione tratta delle basi di GitHub, una piattaforma per ospitare e gestire modifiche al proprio codice.
 
 ![Intro to GitHub](/sketchnotes/webdev101-github.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Quiz Pre-lezione
+
 [Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/3?loc=it)
 
 ## Introduzione
@@ -22,21 +24,22 @@ Prima di iniziare, si dovrebbe verificare se Git è installato. Dal terminale di
 `git --version`
 
 Se Git non è installato, [scaricare Git](https://git-scm.com/downloads). Poi impostare il proprio profilo locale Git dal terminale:
-* `git config --global user.name "il-proprio-nominativo"`
-* `git config --global user.email "la-propria-email"`
+
+- `git config --global user.name "il-proprio-nominativo"`
+- `git config --global user.email "la-propria-email"`
 
 Per verificare se Git è già configurato si può digitare:
 `git config --list`
 
 E' anche necessario un account GitHub, un editor di codice (tipo Visual Studio Code), e sarà necessario aprire il proprio terminale (o prompt di comando).
 
-Navigare su [github.com](https://github.com/) e creare un account se non se ne dispone già di uno, oppure accedere e compilare il proprio profilo. 
+Navigare su [github.com](https://github.com/) e creare un account se non se ne dispone già di uno, oppure accedere e compilare il proprio profilo.
 
 ✅ GitHub non è il solo deposito di codice nel mondo, ce ne sono altri, ma GitHub è il più conosciuto.
 
 ### Preparazione
 
-Servirà sia una cartella con il codice di un progetto sulla propria macchina locale (laptop o PC), e un repository pubblico su GitHub, che servirà come esempio su come contribuire a progetti di altri.  
+Servirà sia una cartella con il codice di un progetto sulla propria macchina locale (laptop o PC), e un repository pubblico su GitHub, che servirà come esempio su come contribuire a progetti di altri.
 
 ---
 
@@ -80,7 +83,7 @@ Diciamo che si ha una cartella in locale con del codice di un progetto e che si 
         modified:   file2.txt
    ```
 
-   In genere un comando `git status` informa circa quali file sono pronti per essere  _salvati_ nel repository o quali modifiche sono state effettuate che si vogliono persistere.
+   In genere un comando `git status` informa circa quali file sono pronti per essere _salvati_ nel repository o quali modifiche sono state effettuate che si vogliono persistere.
 
 1. **Aggiungere tutti i file per la tracciatura**
    Fase nota anche come aggiungere file nell'area di staging.
@@ -89,7 +92,7 @@ Diciamo che si ha una cartella in locale con del codice di un progetto e che si 
    git add .
    ```
 
-   Gli argomenti `git add` più `.` indicano che tutti i propri file e modifiche sono selezionati per la tracciatura. 
+   Gli argomenti `git add` più `.` indicano che tutti i propri file e modifiche sono selezionati per la tracciatura.
 
 1. **Aggiungere file selezionati per la tracciatura**
 
@@ -131,15 +134,15 @@ Diciamo che si ha una cartella in locale con del codice di un progetto e che si 
    git remote add origin https://github.com/username/repository_name.git
    ```
 
-   Questo crea un  _remote_, o connessione, chiamata "origin" che punta al repository GitHub precedentemente creato.
+   Questo crea un _remote_, o connessione, chiamata "origin" che punta al repository GitHub precedentemente creato.
 
-1. **Inviare file locali a GitHub**. Fino ad ora è stata creata una _connessione_ tra il repository locale e quello GitHub. Ora si inviano i file locali a GitHub usando il comando `git push`, in questo modo: 
+1. **Inviare file locali a GitHub**. Fino ad ora è stata creata una _connessione_ tra il repository locale e quello GitHub. Ora si inviano i file locali a GitHub usando il comando `git push`, in questo modo:
 
    ```bash
    git push -u origin main
    ```
 
-   Questo invia i propri commit nel ramo  "main" di GitHub.
+   Questo invia i propri commit nel ramo "main" di GitHub.
 
 1. **Aggiungere ulteriori modifiche**. Se si vuole continuare a fare modifiche e inviarle a GitHub occorre usare uno dei tre comandi seguenti:
 
@@ -168,29 +171,30 @@ La ragione principale per inserire cose in GitHub è di fare in modo che si poss
 
 Nel proprio repository, portarsi a `Insights > Community` per vedere come il proprio progetto si confronta con gli standard della comunità.
 
-   Ecco alcune cose che possono migliorare il proprio repository GitHub:
-   - **Descrizione**. E' stata aggiunta una descrizione per il proprio progetto?
-   - **README**. E' stato aggiunto un README (leggimi)? GitHub fornisce una traccia per scrivere un [README](https://docs.github.com/articles/about-readmes/).
-   - **Linee guida per contribuire**. Il proprio progetto fornisce [linne guida per contribuire](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/), 
-   - **Codice di Condotta**. un [Codice di Condotta](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/), 
-   - **Licenza**. Forse la più imporatante, una [licenza](https://docs.github.com/articles/adding-a-license-to-a-repository/)?
+Ecco alcune cose che possono migliorare il proprio repository GitHub:
+
+- **Descrizione**. E' stata aggiunta una descrizione per il proprio progetto?
+- **README**. E' stato aggiunto un README (leggimi)? GitHub fornisce una traccia per scrivere un [README](https://docs.github.com/articles/about-readmes/).
+- **Linee guida per contribuire**. Il proprio progetto fornisce [linne guida per contribuire](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/),
+- **Codice di Condotta**. un [Codice di Condotta](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/),
+- **Licenza**. Forse la più imporatante, una [licenza](https://docs.github.com/articles/adding-a-license-to-a-repository/)?
 
 Tutte queste risorse favoriranno la salita a bordo di nuovi elementi nella squadra. Queste sono in genere il tipo di cose che i nuovi contributori cercano anche prima di dare un'occhiata al codice, per scoprire se il progetto è il posto giusto per spendere il loro tempo.
 
-✅ I file README, sebbene richiedono tempo per prepararli, sono spesso trascurati da manutentori troppo occupati. E' possibile trovare un esempio di uno particolarmente descrittivo? Nota: ci sono alcuni [strumenti per aiutare la creazione di buoni  README](https://www.makeareadme.com/) che si potrebbero provare.
+✅ I file README, sebbene richiedono tempo per prepararli, sono spesso trascurati da manutentori troppo occupati. E' possibile trovare un esempio di uno particolarmente descrittivo? Nota: ci sono alcuni [strumenti per aiutare la creazione di buoni README](https://www.makeareadme.com/) che si potrebbero provare.
 
 ### Compito: Fondere del codice
 
 La documentazione per la collaborazione aiuta a fare sì che la gente contribuisca al progetto. Spiega che tipo di collaborazione ci si deve attendere e come funziona il processo. I contributori dovranno compiere una serie di passi per poter contribuire a un repository su GitHub:
 
-1. **Biforcare il repository** Probabilmente si vorrà che la gente possa  _biforcare_ il proprio progetto (forking). Questa azione crea una replica di un repository al quale si vuole contribuire sul profilo del contributore su GitHub.
-1. **Clonare**. Da qui verrà eseguita una azione di clonazione del progetto sulla  macchina locale del contributore. 
-1. **Creare un ramo**. Sarà richiesto al contributore di creare un _ramo_ (branch) per il suo lavoro. 
+1. **Biforcare il repository** Probabilmente si vorrà che la gente possa _biforcare_ il proprio progetto (forking). Questa azione crea una replica di un repository al quale si vuole contribuire sul profilo del contributore su GitHub.
+1. **Clonare**. Da qui verrà eseguita una azione di clonazione del progetto sulla macchina locale del contributore.
+1. **Creare un ramo**. Sarà richiesto al contributore di creare un _ramo_ (branch) per il suo lavoro.
 1. **Concentrare le modifiche del contributore su una area**. Richiedere ai contributori di concentrarsi su una cosa sola alla volta - in questo modo le possibilità che si possa _fondere_ (merge) il lavoro del contributore sono più alte. Se viene scritta la risoluzione di un bug, o viene aggiunta una nuova funzionalità o vengono aggiornati parecchi test - cosa succede se si vuole o si può, solo implementarne 2 su 3 o 1 su 3 di queste modifiche?
 
 ✅ Si immagini una situazione dove i rami sono particolarmente critici per la scrittura e lo sviluppo di buon codice. A quali casi d'uso sono stati individuati?
 
-> Nota, siate il cambiamento che volete vedere nel mondo, e si creino rami anche per il proprio lavoro. Qualsiasi commit che verrà fatto sarà su rami che si sta attualmente *verificando* (check out). Usare  `git status` per vedere su quale ramo ci si trova attualmente.
+> Nota, siate il cambiamento che volete vedere nel mondo, e si creino rami anche per il proprio lavoro. Qualsiasi commit che verrà fatto sarà su rami che si sta attualmente _verificando_ (check out). Usare `git status` per vedere su quale ramo ci si trova attualmente.
 
 Si analizza il flusso di lavoro di un contributore. Si assume che egli abbia già eseguito il _fork_ e _clonato_ il repository in modo che lo stesso sia pronto per lavorarci, sulla sua macchina locale:
 
@@ -241,7 +245,7 @@ Si analizza il flusso di lavoro di un contributore. Si assume che egli abbia gi�
 
 1. **Aprire una PR**. Successivamente, si vorrà aprire una Pull Request. Si fa portandosi nel repository biforcato su GitHub. Si vedrà una indicazione su GitHub dove viene chiesto se si vuol creare una nuova PR, cliccando su questa si verrà portati su una interfaccia dove si potrà cambiare il titolo del messaggio di commit e fornire una descrizione più adatta. Ora il manutentore del repository che è stato biforcato vedrà questa PR e _incrociando le dita_ apprezzerà e _fonderà_ (merge) la PR. Ora si avrà contribuito, yay :)
 
-1. **Pulire**. E' considerata buona pratica effettuare una _pulizia_ dopo il lavoro compiuto. Si vorrà pulire sia il ramo locale che quello spinto su GitHub. Per prima cosa cancellarlo localmente con il comando: 
+1. **Pulire**. E' considerata buona pratica effettuare una _pulizia_ dopo il lavoro compiuto. Si vorrà pulire sia il ramo locale che quello spinto su GitHub. Per prima cosa cancellarlo localmente con il comando:
 
    ```bash
    git branch -d [nome-ramo]
@@ -249,7 +253,7 @@ Si analizza il flusso di lavoro di un contributore. Si assume che egli abbia gi�
 
    Successivamente assicurarsi di andare nella pagina GitHub per del repository biforcato per eliminare il ramo remoto che è stato appena spinto.
 
-`Pull request` sembra un termine sciocco in quanto in realtà si vogliono portare le proprie modifiche al progetto. Ma il manutentore (proprietario del progetto) o la squadra base deve valutare i cambiamenti dei contributori prima di fonderli con il ramo principale del progetto, quindi in realtà il contributore sta chiedendo una decisione sulle modifiche al manutentore.  
+`Pull request` sembra un termine sciocco in quanto in realtà si vogliono portare le proprie modifiche al progetto. Ma il manutentore (proprietario del progetto) o la squadra base deve valutare i cambiamenti dei contributori prima di fonderli con il ramo principale del progetto, quindi in realtà il contributore sta chiedendo una decisione sulle modifiche al manutentore.
 
 Una pull request è il posto dove confrontare e discutere le differenze introdotte su un ramo con valutazioni, commenti, verifiche integrate e altro. Una buona pull request segue grossolanmente le stesse regole di un messaggio di commit. Si può aggiungere un riferimento al problema nel tracciatore di problemi (issue tracker), quando il proprio lavoro risolve ad esempio un problema. Questo viene fatto usando un `#` seguito dal numero del vostro problema. Ad esempio `#97`.
 
@@ -267,7 +271,7 @@ Per prima cosa, trovare un repository - o repo - che interessi su GitHub e per i
 
 ![Copiare un repository localmente](../images/clone_repo.png)
 
-Ci sono parecchi modi di copiare il codice. Un modo è "clonare" il contenuto del repository, usando HTTPS, SSH, o usando l'interfaccia da riga di comando GitHub CLI. 
+Ci sono parecchi modi di copiare il codice. Un modo è "clonare" il contenuto del repository, usando HTTPS, SSH, o usando l'interfaccia da riga di comando GitHub CLI.
 
 Aprire il proprio terminale e clonare il repository così:
 `git clone https://github.com/URLdelProgetto`
@@ -277,11 +281,11 @@ Per lavorare su un progetto, passare alla corretta cartella:
 
 Si può anche aprire l'intero progetto usando [Codespaces](https://github.com/features/codespaces), l'editor di codice incorporato di GitHub, oppure un ambiente di sviluppo nel cloud, oppure [GitHub Desktop](https://desktop.github.com/).
 
-Infine si può scaricare il codice in una cartella compressa. 
+Infine si può scaricare il codice in una cartella compressa.
 
 ### Qualche altra cosa interessante riguardo a GitHub
 
-E' possibile attribuire una stella, osservare, e/o "biforcare" un qualsiasi progetto pubblico su GitHub. Si possono trovare i propri repository che hanno stelle nel menù a tendina in alto a destra. E' come mettere un segnalibro, ma per il codice. 
+E' possibile attribuire una stella, osservare, e/o "biforcare" un qualsiasi progetto pubblico su GitHub. Si possono trovare i propri repository che hanno stelle nel menù a tendina in alto a destra. E' come mettere un segnalibro, ma per il codice.
 
 I progetti che hanno un tracciatore di problemi, per la maggior parte nella scheda "Issues" di GitHub a meno di indicazioni diverse, è dove la gente discute dei problemi relativi al progetto. E la scheda Pull Requests è dove la gente discute e verifica le modifiche in corso d'opera.
 
@@ -296,11 +300,12 @@ I progetti potrebbero anche essere discussi nei forum, liste di distribuzione, o
 Fare coppia con un amico per lavorare al codice dei progetti l'uno dell'altro. Creare un progetto in modo collaborativo, biforcare il codice, craare rami e fondere modifiche.
 
 ## Quiz Post-lezione
+
 [Post-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/4?loc=it)
 
 ## Revisione e Auto Apprendimento
 
-Leggene di più al riguardo: [contribuire a software open source](https://opensource.guide/how-to-contribute/#how-to-submit-a-contribution). 
+Leggene di più al riguardo: [contribuire a software open source](https://opensource.guide/how-to-contribute/#how-to-submit-a-contribution).
 
 [Git cheatsheet](https://training.github.com/downloads/github-git-cheat-sheet/).
 
@@ -308,8 +313,8 @@ Esercizio, esercizio, esercizio. GitHub ha ottimi percorsi di apprendimento disp
 
 - [Prima settimana su GitHub](https://lab.github.com/githubtraining/first-week-on-github)
 
-Si potranno trovare anche altri laboratori più avanzati. 
+Si potranno trovare anche altri laboratori più avanzati.
 
-## Compito 
+## Compito
 
 Completare [la prima settimana nel laboratorio di apprendimento di GitHub](https://lab.github.com/githubtraining/first-week-on-github)

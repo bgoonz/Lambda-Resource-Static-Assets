@@ -17,9 +17,9 @@ Questa lezione presume che si abbia familiarità con i seguenti concetti:
 - Creazione di controlli per input di testo e pulsanti
 - CSS e impostazione degli stili utilizzando le classi
 - Nozioni di base su JavaScript
-   - Creare un array
-   - Creare un numero casuale
-   - Ottenere l'orario corrente
+  - Creare un array
+  - Creare un numero casuale
+  - Ottenere l'orario corrente
 
 ## Lezione
 

@@ -1,6 +1,7 @@
 # Progetto Terrario Parte 3: Manipolazione del DOM e Closure
 
 ![Manipolazione DOM e closure](/sketchnotes/webdev101-js.png)
+
 > Sketchnote di [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Quiz Pre-Lezione
@@ -31,13 +32,14 @@ Si dovrebbe avere il codice HTML e CSS per il proprio terrario costruito. Alla f
 
 ### Attività
 
-Nella cartella terrarium, creare un nuovo file chiamato `script.js`. Importare quel file nella sezione  `<head>`:
+Nella cartella terrarium, creare un nuovo file chiamato `script.js`. Importare quel file nella sezione `<head>`:
 
 ```html
-	<script src="./script.js" defer></script>
+<script src="./script.js" defer></script>
 ```
 
 > Nota: utilizzare `defer` quando si importa un file JavaScript esterno nel file html in modo da consentire l'esecuzione di JavaScript solo dopo che il file HTML è stato completamente caricato. È anche possibile utilizzare l'attributo `async`, che consente l'esecuzione dello script durante l'analisi del file HTML, ma in questo caso, è importante avere gli elementi HTML completamente disponibili per il trascinamento prima di consentire l'esecuzione dello script di trascinamento.
+
 ---
 
 ## Gli elementi DOM
@@ -47,20 +49,20 @@ La prima cosa da fare è creare i riferimenti agli elementi che si vogliono mani
 ### Attività
 
 ```javascript
-dragElement(document.getElementById('plant1'));
-dragElement(document.getElementById('plant2'));
-dragElement(document.getElementById('plant3'));
-dragElement(document.getElementById('plant4'));
-dragElement(document.getElementById('plant5'));
-dragElement(document.getElementById('plant6'));
-dragElement(document.getElementById('plant7'));
-dragElement(document.getElementById('plant8'));
-dragElement(document.getElementById('plant9'));
-dragElement(document.getElementById('plant10'));
-dragElement(document.getElementById('plant11'));
-dragElement(document.getElementById('plant12'));
-dragElement(document.getElementById('plant13'));
-dragElement(document.getElementById('plant14'));
+dragElement(document.getElementById("plant1"));
+dragElement(document.getElementById("plant2"));
+dragElement(document.getElementById("plant3"));
+dragElement(document.getElementById("plant4"));
+dragElement(document.getElementById("plant5"));
+dragElement(document.getElementById("plant6"));
+dragElement(document.getElementById("plant7"));
+dragElement(document.getElementById("plant8"));
+dragElement(document.getElementById("plant9"));
+dragElement(document.getElementById("plant10"));
+dragElement(document.getElementById("plant11"));
+dragElement(document.getElementById("plant12"));
+dragElement(document.getElementById("plant13"));
+dragElement(document.getElementById("plant14"));
 ```
 
 Cosa sta succedendo qui? Si sta referenziando il documento e guardando attraverso il suo DOM per trovare un elemento con un ID particolare. Si ricorda nella prima lezione sull'HTML che sono stati forniti ID individuali a ciascuna immagine della pianta (`id = "plant1"`)? Ora si farà uso di quello sforzo. Dopo aver identificato ogni elemento, lo si passi a una funzione chiamata `dragElement` che verrà creata a breve. Quindi l'elemento nell'HTML è ora abilitato al trascinamento, o lo sarà a breve.
@@ -76,15 +78,15 @@ Ora si è pronti per creare la closure dragElement, che è una funzione esterna 
 Le closure sono utili quando una o più funzioni devono accedere all'ambito di una funzione più esterna. Ecco un esempio:
 
 ```javascript
-function displayCandy(){
-	let candy = ['jellybeans'];
-	function addCandy(candyType) {
-		candy.push(candyType)
-	}
-	addCandy('gumdrops');
+function displayCandy() {
+  let candy = ["jellybeans"];
+  function addCandy(candyType) {
+    candy.push(candyType);
+  }
+  addCandy("gumdrops");
 }
 displayCandy();
-console.log(candy)
+console.log(candy);
 ```
 
 In questo esempio, la funzione displayCandy circonda una funzione che inserisce un nuovo tipo di caramella in una matrice già esistente nella funzione. Se si dovesse eseguire questo codice, l'array `candy` non sarebbe definito, poiché è una variabile locale (locale alla closure).
@@ -97,18 +99,18 @@ Sotto le dichiarazioni degli elementi in `script.js`, creare una funzione:
 
 ```javascript
 function dragElement(terrariumElement) {
-	//imposta 4 posizioni per il posizionamento sullo schermo
-	let pos1 = 0,
-		pos2 = 0,
-		pos3 = 0,
-		pos4 = 0;
-	terrariumElement.onpointerdown = pointerDrag;
+  //imposta 4 posizioni per il posizionamento sullo schermo
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  terrariumElement.onpointerdown = pointerDrag;
 }
 ```
 
 `dragElement` ottiene il suo oggetto `terrariumElement` dalle dichiarazioni nella parte superiore dello script. Quindi, si impostano alcune posizioni locali su `0` per l'oggetto passato alla funzione. Queste sono le variabili locali che verranno manipolate per ogni elemento quando si aggiunge la funzionalità di trascinamento all'interno della closure a ciascun elemento. Il terrario sarà popolato da questi elementi trascinati, quindi l'applicazione deve tenere traccia di dove sono posizionati.
 
-Inoltre, al terrariumElement passato a questa funzione viene assegnato un  evento di riconoscimento pressione pulsante (`pointerdown`), che fa parte delle [API web](https://developer.mozilla.org/it/docs/Web/API) progettate per aiutare con la gestione del DOM. `onpointerdown` si attiva quando viene premuto un pulsante o, in questo caso, viene toccato un elemento trascinabile. Questo gestore di evento funziona sia su browser [web che su browser di dispositivi mobili](https://caniuse.com/?search=onpointerdown), con poche eccezioni.
+Inoltre, al terrariumElement passato a questa funzione viene assegnato un evento di riconoscimento pressione pulsante (`pointerdown`), che fa parte delle [API web](https://developer.mozilla.org/it/docs/Web/API) progettate per aiutare con la gestione del DOM. `onpointerdown` si attiva quando viene premuto un pulsante o, in questo caso, viene toccato un elemento trascinabile. Questo gestore di evento funziona sia su browser [web che su browser di dispositivi mobili](https://caniuse.com/?search=onpointerdown), con poche eccezioni.
 
 ✅ Il [gestore di evento `onclick`](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onclick) ha molto più supporto intra-browser; perché non viene usato qui? Si pensi al tipo esatto di interazione con lo schermo che si sta cercando di creare qui.
 
@@ -122,10 +124,10 @@ Il terrariumElement è pronto per essere trascinato in giro; quando viene genera
 
 ```javascript
 function pointerDrag(e) {
-	e.preventDefault();
-	console.log(e);
-	pos3 = e.clientX;
-	pos4 = e.clientY;
+  e.preventDefault();
+  console.log(e);
+  pos3 = e.clientX;
+  pos4 = e.clientY;
 }
 ```
 
@@ -142,9 +144,9 @@ Successivamente, notare come le variabili locali `pos3` e `pos4` sono impostate 
 Completare la funzione iniziale aggiungendo altre due manipolazioni di eventi del puntatore sotto `pos4 = e.clientY`:
 
 ```html
-document.onpointermove = elementDrag;
-document.onpointerup = stopElementDrag;
+document.onpointermove = elementDrag; document.onpointerup = stopElementDrag;
 ```
+
 Ora si sta indicando che si vuole che la pianta venga trascinata insieme al puntatore mentre lo si muove e che il gesto di trascinamento si interrompa quando si deseleziona la pianta. `onpointermove` e `onpointerup` sono tutte parti della stessa API come `onpointerdown`. L'interfaccia genererà errori ora poiché non si sono ancora definite le funzioni `elementDrag` e `stopElementDrag`, quindi verranno create successivamente.
 
 ## Le funzioni elementDrag e stopElementDrag
@@ -157,15 +159,16 @@ Aggiungere la funzione `elementDrag` subito dopo la parentesi graffa di chiusura
 
 ```javascript
 function elementDrag(e) {
-	pos1 = pos3 - e.clientX;
-	pos2 = pos4 - e.clientY;
-	pos3 = e.clientX;
-	pos4 = e.clientY;
-	console.log(pos1, pos2, pos3, pos4);
-	terrariumElement.style.top = terrariumElement.offsetTop - pos2 + 'px';
-	terrariumElement.style.left = terrariumElement.offsetLeft - pos1 + 'px';
+  pos1 = pos3 - e.clientX;
+  pos2 = pos4 - e.clientY;
+  pos3 = e.clientX;
+  pos4 = e.clientY;
+  console.log(pos1, pos2, pos3, pos4);
+  terrariumElement.style.top = terrariumElement.offsetTop - pos2 + "px";
+  terrariumElement.style.left = terrariumElement.offsetLeft - pos1 + "px";
 }
 ```
+
 In questa funzione, si faranno molte modifiche alle posizioni iniziali 1-4 che verranno impostate come variabili locali nella funzione esterna. Cosa sta succedendo qui?
 
 Mentre si trascina, `pos1` viene riassegnato rendendolo uguale a `pos3` (che precedenza si è impostato come `e.clientX`) meno il valore corrente di `e.clientX`. Eseguire un'operazione simile per `pos2`. Quindi, reimpostare `pos3` e `pos4` sulle nuove coordinate X e Y dell'elemento. E' possibile monitorare questi cambiamenti nella console mentre si trascina. Quindi, è stato manipolato lo stile css della pianta per impostare la sua nuova posizione in base alle nuove posizioni di `pos1` e `pos2`, calcolando le coordinate X e Y superiore e sinistra della pianta in base al confronto del suo scostamento con queste nuove posizioni.
@@ -180,8 +183,8 @@ Il compito finale per completare l'interfaccia è aggiungere la funzione `stopEl
 
 ```javascript
 function stopElementDrag() {
-	document.onpointerup = null;
-	document.onpointermove = null;
+  document.onpointerup = null;
+  document.onpointermove = null;
 }
 ```
 
@@ -214,4 +217,3 @@ Controllare sempre le funzionalità del browser utilizzando [CanIUse.com](https:
 ## Compito
 
 [Lavorare un po' di più con il DOM](assignment.it.md)
-

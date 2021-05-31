@@ -6,7 +6,7 @@
 
 ### イントロダクション
 
-最近のほとんどの Web アプリでは、アカウントを作成して自分だけのプライベート空間を持つことができます。複数のユーザーが同時に Web アプリにアクセスすることができるため、各ユーザーの個人情報を個別に保存し、どの情報を表示するかを選択する仕組みが必要になります。ここでは、[ユーザー ID を安全に管理する方法](https://en.wikipedia.org/wiki/Authentication)については、それ自体が広範なトピックなので取り上げませんが、各ユーザーがアプリ上で1つ(または複数)の銀行口座を作成できるようにしておきます。
+最近のほとんどの Web アプリでは、アカウントを作成して自分だけのプライベート空間を持つことができます。複数のユーザーが同時に Web アプリにアクセスすることができるため、各ユーザーの個人情報を個別に保存し、どの情報を表示するかを選択する仕組みが必要になります。ここでは、[ユーザー ID を安全に管理する方法](https://en.wikipedia.org/wiki/Authentication)については、それ自体が広範なトピックなので取り上げませんが、各ユーザーがアプリ上で 1 つ(または複数)の銀行口座を作成できるようにしておきます。
 
 このパートでは、HTML フォームを使用して、Web アプリにログインと登録を追加します。プログラムでサーバー API にデータを送信する方法、最終的にユーザー入力の基本的な検証ルールを定義する方法を見ていきます。
 
@@ -30,7 +30,7 @@ curl http://localhost:5000/api
 例えば、ユーザがユーザ名を入力できるフィールドを作成するには、`<input>` 要素を使用することができます。
 
 ```html
-<input id="username" name="username" type="text">
+<input id="username" name="username" type="text" />
 ```
 
 `name` 属性はフォームデータを送信する際のプロパティ名として使われます。`id` 属性は `<label>` をフォームコントロールに関連付けるために使われます。
@@ -56,7 +56,7 @@ curl http://localhost:5000/api
     <h2>Login</h2>
     <form id="loginForm">
       <label for="username">Username</label>
-      <input id="username" name="user" type="text">
+      <input id="username" name="user" type="text" />
       <button>Login</button>
     </form>
   </section>
@@ -73,17 +73,17 @@ curl http://localhost:5000/api
 あとは、前のもののすぐ下に登録用の第二形態を追加します。
 
 ```html
-<hr/>
+<hr />
 <h2>Register</h2>
 <form id="registerForm">
   <label for="user">Username</label>
-  <input id="user" name="user" type="text">
+  <input id="user" name="user" type="text" />
   <label for="currency">Currency</label>
-  <input id="currency" name="currency" type="text" value="$">
+  <input id="currency" name="currency" type="text" value="$" />
   <label for="description">Description</label>
-  <input id="description" name="description" type="text">
+  <input id="description" name="description" type="text" />
   <label for="balance">Current balance</label>
-  <input id="balance" name="balance" type="number" value="0">
+  <input id="balance" name="balance" type="number" value="0" />
   <button>Register</button>
 </form>
 ```
@@ -116,7 +116,11 @@ curl http://localhost:5000/api
 登録フォームに `action` と `method` プロパティを追加します。
 
 ```html
-<form id="registerForm" action="//localhost:5000/api/accounts" method="POST">
+<form
+  id="registerForm"
+  action="//localhost:5000/api/accounts"
+  method="POST"
+></form>
 ```
 
 ここで、あなたの名前で新しいアカウントを登録してみてください。*登録*ボタンをクリックすると、このような画面が表示されるはずです。
@@ -135,21 +139,21 @@ curl http://localhost:5000/api
 
 - フォームデータを取得する
 - フォームデータを適切なフォーマットに変換してエンコードする
-- HTTPリクエストを作成してサーバーに送信する
+- HTTP リクエストを作成してサーバーに送信する
 
 ### タスク
 
 登録フォームの `action` は、次のように置き換えてください。
 
 ```html
-<form id="registerForm" action="javascript:register()">
+<form id="registerForm" action="javascript:register()"></form>
 ```
 
 `app.js`を開いて `register` という名前の関数を追加します。
 
 ```js
 function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const data = Object.fromEntries(formData);
   const jsonData = JSON.stringify(data);
@@ -163,14 +167,14 @@ function register() {
 ```js
 async function createAccount(account) {
   try {
-    const response = await fetch('//localhost:5000/api/accounts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: account
+    const response = await fetch("//localhost:5000/api/accounts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: account,
     });
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    return { error: error.message || "Unknown error" };
   }
 }
 ```
@@ -181,7 +185,7 @@ async function createAccount(account) {
 
 [![Async and Await for managing promises](https://img.youtube.com/vi/YwmlRkrxvkk/0.jpg)](https://youtube.com/watch?v=YwmlRkrxvkk "Async and Await for managing promises")
 
-JSON データをサーバに送信するには、`fetch()` API を使用します。このメソッドは2つのパラメータを受け取ります。
+JSON データをサーバに送信するには、`fetch()` API を使用します。このメソッドは 2 つのパラメータを受け取ります。
 
 - サーバの URL なので、ここに `/localhost:5000/api/accounts` を返します
 - リクエストの設定。ここでメソッドを `POST` に設定し、リクエストのための `body` を提供します。JSON データをサーバに送るので、`Content-Type` ヘッダを `application/json` に設定する必要があります
@@ -204,16 +208,16 @@ async function register() {
 
 ```js
 async function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const jsonData = JSON.stringify(Object.fromEntries(formData));
   const result = await createAccount(jsonData);
 
   if (result.error) {
-    return console.log('An error occured:', result.error);
+    return console.log("An error occured:", result.error);
   }
 
-  console.log('Account created!', result);
+  console.log("Account created!", result);
 }
 ```
 
@@ -239,14 +243,14 @@ async function register() {
 
 ### タスク
 
-有効な新規アカウントを作成するためには、ユーザー名と通貨の2つの必須フィールドがあり、その他のフィールドは任意です。フォームの HTML を更新し、`required` 属性とフィールドのラベルのテキストの両方を使用してください。
+有効な新規アカウントを作成するためには、ユーザー名と通貨の 2 つの必須フィールドがあり、その他のフィールドは任意です。フォームの HTML を更新し、`required` 属性とフィールドのラベルのテキストの両方を使用してください。
 
 ```html
 <label for="user">Username (required)</label>
-<input id="user" name="user" type="text" required>
+<input id="user" name="user" type="text" required />
 ...
 <label for="currency">Currency (required)</label>
-<input id="currency" name="currency" type="text" value="$" required>
+<input id="currency" name="currency" type="text" value="$" required />
 ```
 
 このサーバの実装ではフィールドの最大長に特定の制限はありませんが、ユーザのテキスト入力に対して合理的な制限を定義することは常に良い習慣です。
@@ -254,14 +258,21 @@ async function register() {
 テキストフィールドに `maxlength` 属性を追加します。
 
 ```html
-<input id="user" name="user" type="text" maxlength="20" required>
+<input id="user" name="user" type="text" maxlength="20" required />
 ...
-<input id="currency" name="currency" type="text" value="$" maxlength="5" required>
+<input
+  id="currency"
+  name="currency"
+  type="text"
+  value="$"
+  maxlength="5"
+  required
+/>
 ...
-<input id="description" name="description" type="text" maxlength="100">
+<input id="description" name="description" type="text" maxlength="100" />
 ```
 
-これで、*Register* ボタンを押したときに、フィールドが定義したバリデーションルールに準拠していない場合は、次のように表示されるはずです。
+これで、_Register_ ボタンを押したときに、フィールドが定義したバリデーションルールに準拠していない場合は、次のように表示されるはずです。
 
 ![フォームを送信しようとしたときの検証エラーを示すスクリーンショット](../images/validation-error.png)
 

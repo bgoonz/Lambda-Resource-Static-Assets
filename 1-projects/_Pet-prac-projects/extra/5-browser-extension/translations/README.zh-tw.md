@@ -25,4 +25,3 @@
 「點」圖示系統的概念參考[Energy Lollipop](https://energylollipop.com/)的加州排放擴充功能。
 
 這些課程由 [Jen Looper](https://www.twitter.com/jenlooper) 用滿滿的 ♥️ 來編寫。
-

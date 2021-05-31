@@ -8,6 +8,6 @@ Erstellen Sie verschiedene Funktionen, sowohl Funktionen, die etwas zurückgeben
 
 ## Rubrik
 
-| Kriterien | Vorbildlich | Angemessen | Verbesserungsbedarf |
-| -------- | -------------------------------------------------- ------------------------------------ | -------------------------------------------------- -------------- | ----------------- |
-| | Die Lösung wird mit zwei oder mehr leistungsfähigen Funktionen mit verschiedenen Parametern angeboten Arbeitslösung wird mit einer Funktion und wenigen Parametern angeboten Lösung hat Fehler |
+| Kriterien | Vorbildlich                                                                                                                                                                                    | Angemessen | Verbesserungsbedarf |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------------------- |
+|           | Die Lösung wird mit zwei oder mehr leistungsfähigen Funktionen mit verschiedenen Parametern angeboten Arbeitslösung wird mit einer Funktion und wenigen Parametern angeboten Lösung hat Fehler |

@@ -25,4 +25,3 @@ To install on Edge, use the 'three dot' menu on the top right corner of the brow
 ![installing](../install-on-edge.png)
 
 Once the API key and region is input into the extension interface, the colored dot in the browser extension bar should change to reflect your region's energy usage and give you a pointer on what energy-heavy activities would be appropriate for you to perform. The concept behind this 'dot' system was given to me by the [Energy Lollipop extension](https://energylollipop.com/) for California emissions.
-

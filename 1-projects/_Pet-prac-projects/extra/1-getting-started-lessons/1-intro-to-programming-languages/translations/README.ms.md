@@ -3,9 +3,11 @@
 Pelajaran ini merangkumi asas bahasa pengaturcaraan. Topik yang anda akan belajar di sini dapat mengaplikasikan untuk kebanyakan bahasa pengaturcaraan moden hari ini. Pada bahagian 'Alat Perdagangan', anda akan belajar bagaimana mengenai perisian berguna yang membantu anda sebagai pembangun.
 
 ![Intro Programming](/sketchnotes/webdev101-programming.png)
+
 > Sketchnote karya [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Kuiz Pra-Kuliah
+
 [Kuiz Pra-Kuliah](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/1)
 
 ## Pengenalan
@@ -19,31 +21,33 @@ Dalam bab ini, kita akan belajar:
 
 ## Apa itu pengaturcaraan?
 
-Pengaturcaraan (juga dikenali sebagai pengekodan) adalah proses menulis arahan ke peranti, seperti komputer atau peranti mudah alih. Kami menulis arahan ini dengan bahasa pengaturcaraan, yang kemudian ditafsirkan oleh peranti. Set arahan ini dapat disebut dengan pelbagai nama, tetapi *program*, *program komputer*, *aplikasi (app)*, dan *boleh dilaksanakan* ialah beberapa nama yang popular.
+Pengaturcaraan (juga dikenali sebagai pengekodan) adalah proses menulis arahan ke peranti, seperti komputer atau peranti mudah alih. Kami menulis arahan ini dengan bahasa pengaturcaraan, yang kemudian ditafsirkan oleh peranti. Set arahan ini dapat disebut dengan pelbagai nama, tetapi _program_, _program komputer_, _aplikasi (app)_, dan _boleh dilaksanakan_ ialah beberapa nama yang popular.
 
-*Program* boleh menjadi apa-apa sahaja yang ditulis dengan kod; laman web, permainan, dan aplikasi telefon adalah program. Walaupun mungkin kita boleh membuat program tanpa menulis kod, logik yang mendasari ditafsirkan ke peranti dan logik itu kemungkinan besar ditulis dengan kod. Program yang *melaksanakan kod* ialah dedefinisikan sebagai program yang sedang menjalankan arahan. Peranti yang anda sedang gunakan untuk membaca pelajaran ini sedang menjalankan program sendiri untuk mencetakkan pada skrin anda.
+_Program_ boleh menjadi apa-apa sahaja yang ditulis dengan kod; laman web, permainan, dan aplikasi telefon adalah program. Walaupun mungkin kita boleh membuat program tanpa menulis kod, logik yang mendasari ditafsirkan ke peranti dan logik itu kemungkinan besar ditulis dengan kod. Program yang _melaksanakan kod_ ialah dedefinisikan sebagai program yang sedang menjalankan arahan. Peranti yang anda sedang gunakan untuk membaca pelajaran ini sedang menjalankan program sendiri untuk mencetakkan pada skrin anda.
 
 ✅ Lakukan sedikit pengajian: siapakah yang dianggap sebagai pengaturcara komputer pertama di dunia?
 
 ## Bahasa Pengaturcaraan
 
-Bahasa pengaturcaraan berfungsi untuk tujuan utama: bagi pembangun untuk membina arahan untuk menghantar ke peranti. Peranti hanya dapat memahami binari (1s dan 0s), dan *untuk  kebanyakan* pembangun itu bukan kaedah yang sangat efisien untuk berkomunikasi. Bahasa pengaturcaraan adalah wahana berkomunikasi antara manusia dan komputer.
+Bahasa pengaturcaraan berfungsi untuk tujuan utama: bagi pembangun untuk membina arahan untuk menghantar ke peranti. Peranti hanya dapat memahami binari (1s dan 0s), dan _untuk kebanyakan_ pembangun itu bukan kaedah yang sangat efisien untuk berkomunikasi. Bahasa pengaturcaraan adalah wahana berkomunikasi antara manusia dan komputer.
 
 Bahasa pengaturcaraan terdapat dalam format-format yang berbeza dan mungkin mempunyai tujuan yang berbeza. Sebagai contoh, ('JavaScript') digunakan terutamanya untuk aplikasi web dan ('Bash') digunakan terutamanya untuk sistem operasi.
 
-*Bahasa tahap rendah* biasanya memerlukan langkah yang lebih sedikit berbanding daripada *bahasa tahap tinggi* agar peranti dapat menafsirkan arahan. Walau bagaimanapun, apa yang menjadikan bahasa peringkat tinggi menjadi popular adalah kebolehbacaan dan sokongannya. ('JavaScript') dianggap bahasa tahap tinggi.
+_Bahasa tahap rendah_ biasanya memerlukan langkah yang lebih sedikit berbanding daripada _bahasa tahap tinggi_ agar peranti dapat menafsirkan arahan. Walau bagaimanapun, apa yang menjadikan bahasa peringkat tinggi menjadi popular adalah kebolehbacaan dan sokongannya. ('JavaScript') dianggap bahasa tahap tinggi.
 
 Kod berikut akan menggambarkan perbezaan antara bahasa tahap tinggi dengan ('JavaScript') dan bahasa tahap rendah dengan kod pemasangan ARM.
 
 ```javascript
-let number = 10
-let n1 = 0, n2 = 1, nextTerm;
+let number = 10;
+let n1 = 0,
+  n2 = 1,
+  nextTerm;
 
 for (let i = 1; i <= number; i++) {
-    console.log(n1);
-    nextTerm = n1 + n2;
-    n1 = n2;
-    n2 = nextTerm;
+  console.log(n1);
+  nextTerm = n1 + n2;
+  n1 = n2;
+  n2 = nextTerm;
 }
 ```
 
@@ -72,15 +76,15 @@ back add r0,r1
  end
 ```
 
-Percaya atau tidak, *mereka berdua melakukan perkara yang sama*: mencetak urutan Fibonacci hingga 10.
+Percaya atau tidak, _mereka berdua melakukan perkara yang sama_: mencetak urutan Fibonacci hingga 10.
 
 ✅ Urutan Fibonacci [didefinisikan] (https://en.wikipedia.org/wiki/Fibonacci_number) sebagai satu set nombor sehingga setiap nombor adalah jumlah dari dua nombor sebelumnya, bermula dari 0 dan 1.
 
 ## Elemen Asas Program
 
-Satu arahan dalam program dipanggil *pernyataan* dan biasanya akan mempunyai watak atau jarak baris yang menandakan di mana arahan itu berakhir, atau *diterminasikan*. Bagaimanakah program ditamatkan berbeza-beza dengan setiap bahasa.
+Satu arahan dalam program dipanggil _pernyataan_ dan biasanya akan mempunyai watak atau jarak baris yang menandakan di mana arahan itu berakhir, atau _diterminasikan_. Bagaimanakah program ditamatkan berbeza-beza dengan setiap bahasa.
 
-Sebilangan besar program bergantung pada penggunaan data dari pengguna atau di tempat lain, di mana pernyataan mungkin bergantung pada data untuk melaksanakan arahan. Data dapat mengubah bagaimana program berperilaku, sehingga bahasa pengaturcaraan dilengkapi dengan cara untuk menyimpan data sementara yang dapat digunakan kemudian. Data ini dipanggil *pemboleh ubah* (*Variable*). Pemboleh ubah ialah pernyataan yang memerintahkan peranti menyimpan data dalam ingatannya. Pemboleh ubah dalam program serupa dengan ('algebra'), di mana mereka mempunyai nama yang unik dan nilainya mungkin berubah dari semasa ke semasa.
+Sebilangan besar program bergantung pada penggunaan data dari pengguna atau di tempat lain, di mana pernyataan mungkin bergantung pada data untuk melaksanakan arahan. Data dapat mengubah bagaimana program berperilaku, sehingga bahasa pengaturcaraan dilengkapi dengan cara untuk menyimpan data sementara yang dapat digunakan kemudian. Data ini dipanggil _pemboleh ubah_ (_Variable_). Pemboleh ubah ialah pernyataan yang memerintahkan peranti menyimpan data dalam ingatannya. Pemboleh ubah dalam program serupa dengan ('algebra'), di mana mereka mempunyai nama yang unik dan nilainya mungkin berubah dari semasa ke semasa.
 
 Ada kemungkinan beberapa penyataan tidak akan dilaksanakan oleh peranti. Ini biasanya berdasarkan reka bentuk apabila ditulis oleh pembangun atau secara tidak sengaja apabila berlaku kesalahan yang tidak dijangka. Jenis kawalan aplikasi ini menjadikannya lebih mantap dan dapat dikendalikan. Biasanya perubahan kawalan ini berlaku apabila keputusan tertentu dipenuhi. Pernyataan umum dalam bahasa pengaturcaraan moden untuk mengawal bagaimana program dijalankan adalah pernyataan `if..else`.
 
@@ -100,10 +104,10 @@ Salah satu alat yang paling penting untuk pembangunan perisian adalah ('editor')
 
 Pembangun bergantung pada editor untuk beberapa sebab tambahan:
 
-- *Debugging* Mencari bug dan kesilapan dengan melangkah ke kod, baris demi baris. Beberapa editor mempunyai kemampuan debug, atau dapat disesuaikan dan ditambahkan untuk bahasa pengaturcaraan tertentu.
-- *Penyorotan sintaks* Menambah warna dan format teks ke kod, menjadikannya lebih mudah dibaca. Sebilangan besar editor membenarkan penyorotan sintaks yang disesuaikan.
-- *Sambungan dan Integrasi* Penambahan yang dikhususkan untuk pembangun, oleh pemaju, untuk akses ke alat tambahan yang tidak terdapat dalam penyunting asas. Sebagai contoh, banyak pembangun juga memerlukan cara untuk mendokumentasikan kod mereka dan menerangkan cara kerjanya dan akan memasang pelanjutan pemeriksaan ejaan untuk memeriksa kesalahan ketik. Sebilangan besar penambahan ini dimaksudkan untuk digunakan dalam editor tertentu, dan kebanyakan editor datang dengan cara untuk mencari sambungan yang tersedia.
-- *Penyesuaian* Sebilangan besar editor sangat disesuaikan, dan setiap pembangun akan mempunyai persekitaran pembangunan unik mereka sendiri yang sesuai dengan keperluan mereka. Banyak juga yang membenarkan pembangun membuat peluasan mereka sendiri.
+- _Debugging_ Mencari bug dan kesilapan dengan melangkah ke kod, baris demi baris. Beberapa editor mempunyai kemampuan debug, atau dapat disesuaikan dan ditambahkan untuk bahasa pengaturcaraan tertentu.
+- _Penyorotan sintaks_ Menambah warna dan format teks ke kod, menjadikannya lebih mudah dibaca. Sebilangan besar editor membenarkan penyorotan sintaks yang disesuaikan.
+- _Sambungan dan Integrasi_ Penambahan yang dikhususkan untuk pembangun, oleh pemaju, untuk akses ke alat tambahan yang tidak terdapat dalam penyunting asas. Sebagai contoh, banyak pembangun juga memerlukan cara untuk mendokumentasikan kod mereka dan menerangkan cara kerjanya dan akan memasang pelanjutan pemeriksaan ejaan untuk memeriksa kesalahan ketik. Sebilangan besar penambahan ini dimaksudkan untuk digunakan dalam editor tertentu, dan kebanyakan editor datang dengan cara untuk mencari sambungan yang tersedia.
+- _Penyesuaian_ Sebilangan besar editor sangat disesuaikan, dan setiap pembangun akan mempunyai persekitaran pembangunan unik mereka sendiri yang sesuai dengan keperluan mereka. Banyak juga yang membenarkan pembangun membuat peluasan mereka sendiri.
 
 - [Visual Studio Code](https://code.visualstudio.com/)
   - [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
@@ -116,9 +120,9 @@ Pembangun bergantung pada editor untuk beberapa sebab tambahan:
 
 ### Penyemak Imbas
 
- Alat penting lain ialah penyemak imbas. Pembangun web bergantung pada penyemak imbas untuk melihat bagaimana kod mereka berjalan di web, ia juga digunakan untuk melihat elemen visual dari laman web yang ditulis dalam editor, seperti HTML.
+Alat penting lain ialah penyemak imbas. Pembangun web bergantung pada penyemak imbas untuk melihat bagaimana kod mereka berjalan di web, ia juga digunakan untuk melihat elemen visual dari laman web yang ditulis dalam editor, seperti HTML.
 
- Banyak penyemak imbas dilengkapi dengan *developer tools* (DevTools) yang mengandungi sekumpulan ciri dan maklumat berguna untuk membantu pembangun mengumpulkan dan menangkap pandangan penting mengenai aplikasinya. Contohnya: Sekiranya halaman web mempunyai kesilapan, kadang-kadang bermanfaat untuk mengetahui kapan halaman tersebut berlaku. DevTools dalam penyemak imbas boleh dikonfigurasi untuk menangkap maklumat ini.
+Banyak penyemak imbas dilengkapi dengan _developer tools_ (DevTools) yang mengandungi sekumpulan ciri dan maklumat berguna untuk membantu pembangun mengumpulkan dan menangkap pandangan penting mengenai aplikasinya. Contohnya: Sekiranya halaman web mempunyai kesilapan, kadang-kadang bermanfaat untuk mengetahui kapan halaman tersebut berlaku. DevTools dalam penyemak imbas boleh dikonfigurasi untuk menangkap maklumat ini.
 
 ### Penyemak Imbas Popular dan DevTools
 
@@ -134,7 +138,7 @@ Sebahagian pembangun lebih suka paparan yang kurang grafik untuk tugas harian me
 
 Pilihan untuk ('command line') akan berbeza berdasarkan sistem operasi yang anda mengguna.
 
-*💻 = sudah dimuat turun dalam sistem operasi.*
+_💻 = sudah dimuat turun dalam sistem operasi._
 
 #### Windows
 
@@ -142,7 +146,7 @@ Pilihan untuk ('command line') akan berbeza berdasarkan sistem operasi yang anda
 - [Command Line](https://docs.microsoft.com/windows-server/administration/windows-commands/windows-commands) (Juga dikenali sebagai CMD) 💻
 - [Windows Terminal](https://docs.microsoft.com/windows/terminal/)
 - [mintty](https://mintty.github.io/)
-  
+
 #### MacOS
 
 - [Terminal](https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac) 💻
@@ -179,6 +183,7 @@ Apabila pembangun ingin mempelajari sesuatu yang baru, kemungkinan besar mereka 
 Bandingkan beberapa bahasa pengaturcaraan. Apa ciri unik JavaScript berbanding dengan Java? Bagaimanakah dengan COBOL vs. Go?
 
 ## Kuiz Pasca Kuliah
+
 [Kuiz Pasca Kuliah](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/2)
 
 ## Mengkaji sendiri & Belajar sendiri

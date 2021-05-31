@@ -1,6 +1,7 @@
 # Progetto Terrario Parte 1: Introduzione all'HTML
 
 ![Introduzione all'HTML](/sketchnotes/webdev101-html.png)
+
 > Sketchnote di [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Quiz Pre-Lezione
@@ -23,10 +24,10 @@ Oppure
 
 Usare questi comandi sul proprio git bash:
 
-* `mkdir terrarium`
-* `cd terrarium`
-* `touch index.html`
-* `code index.html` oppure `nano index.html`
+- `mkdir terrarium`
+- `cd terrarium`
+- `touch index.html`
+- `code index.html` oppure `nano index.html`
 
 > I file index.html indicano a un browser che è il file predefinito in una cartella; URL come `https://anysite.com/test` potrebbero essere creati utilizzando una struttura di cartelle che includa una cartella chiamata `test` con `index.html` al suo interno; `index.html` non deve essere visualizzato in un URL.
 
@@ -59,9 +60,9 @@ L'area "head" del documento HTML include informazioni cruciali sulla propria pag
 
 - il titolo della pagina
 - metadati della pagina tra cui:
-	- l'"insieme di caratteri", che indica quale codifica dei caratteri viene utilizzata nella pagina
+  - l'"insieme di caratteri", che indica quale codifica dei caratteri viene utilizzata nella pagina
   - informazioni sul browser, incluso `x-ua-compatibile` che indica che il browser IE=edge è supportato
-   - informazioni su come dovrebbe comportarsi il viewport quando viene caricato. L'impostazione della visualizzazione (viewport) in modo che abbia una scala iniziale di 1 controlla il livello di zoom quando la pagina viene caricata per la prima volta.
+  - informazioni su come dovrebbe comportarsi il viewport quando viene caricato. L'impostazione della visualizzazione (viewport) in modo che abbia una scala iniziale di 1 controlla il livello di zoom quando la pagina viene caricata per la prima volta.
 
 ### Attività
 
@@ -69,10 +70,10 @@ Aggiungere un blocco "head" al proprio documento tra i tag di apertura e di chiu
 
 ```html
 <head>
-	<title>Benvenuti al mio Terrario Virtuale</title>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Benvenuti al mio Terrario Virtuale</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 ```
 
@@ -84,20 +85,20 @@ Aggiungere un blocco "head" al proprio documento tra i tag di apertura e di chiu
 
 ### Etichette HTML
 
-In HTML, si aggiungono tag al proprio file .html per creare elementi di una pagina web. Ogni tag di solito ha un tag di apertura e chiusura, come questo: `<p>ciao</p>` per indicare un paragrafo. Il corpo dell'interfaccia si crea aggiungendo una coppia di  tag `<body>` all'interno della coppia di tag `<html>`; il markup (marcatura) ora ha questo aspetto:
+In HTML, si aggiungono tag al proprio file .html per creare elementi di una pagina web. Ogni tag di solito ha un tag di apertura e chiusura, come questo: `<p>ciao</p>` per indicare un paragrafo. Il corpo dell'interfaccia si crea aggiungendo una coppia di tag `<body>` all'interno della coppia di tag `<html>`; il markup (marcatura) ora ha questo aspetto:
 
 ### Attività
 
 ```html
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Benvenuti al mio Terrario Virtuale</title>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-	</head>
-	<body></body>
+  <head>
+    <title>Benvenuti al mio Terrario Virtuale</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body></body>
 </html>
 ```
 
@@ -115,52 +116,52 @@ Aggiungere quelle immagini di piante nelle due colonne tra i tag `<body></body>`
 
 ```html
 <div id="page">
-	<div id="left-container" class="container">
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
-		</div>
-	</div>
-	<div id="right-container" class="container">
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
-		</div>
-	</div>
+  <div id="left-container" class="container">
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
+    </div>
+  </div>
+  <div id="right-container" class="container">
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
+    </div>
+  </div>
 </div>
 ```
 
@@ -178,13 +179,13 @@ Ogni immagine ha un testo alternativo che apparirà anche se non è possibile ve
 
 In generale, è preferibile utilizzare una "semantica" significativa quando si scrive HTML. Cosa significa? Significa che si utilizzano i tag HTML per rappresentare il tipo di dati o interazione per cui sono stati progettati. Ad esempio, il testo del titolo principale di una pagina dovrebbe utilizzare un tag `<h1>`.
 
-Aggiungere la seguente riga proprio sotto il tag di apertura ` <body> `:
+Aggiungere la seguente riga proprio sotto il tag di apertura `<body>`:
 
 ```html
 <h1>My Terrarium</h1>
 ```
 
-L'utilizzo di markup semantico tipo avere delle intestazioni come `<h1>` e il rendering di elenchi non ordinati come `<ul>` aiuta i lettori di schermo a navigare in una pagina. In generale, i pulsanti dovrebbero essere scritti come  `<button>` e gli elenchi come `<li>`. Sebbene sia _possibile_ utilizzare elementi con uno stile speciale  `<span>` con gestori di clic per simulare i pulsanti, è meglio per gli utenti disabili utilizzare le tecnologie per determinare dove risiede un pulsante in una pagina e interagire con esso, se l'elemento appare come un pulsante. Per questo motivo, si dovebbe cercare di utilizzare il più possibile il markup semantico.
+L'utilizzo di markup semantico tipo avere delle intestazioni come `<h1>` e il rendering di elenchi non ordinati come `<ul>` aiuta i lettori di schermo a navigare in una pagina. In generale, i pulsanti dovrebbero essere scritti come `<button>` e gli elenchi come `<li>`. Sebbene sia _possibile_ utilizzare elementi con uno stile speciale `<span>` con gestori di clic per simulare i pulsanti, è meglio per gli utenti disabili utilizzare le tecnologie per determinare dove risiede un pulsante in una pagina e interagire con esso, se l'elemento appare come un pulsante. Per questo motivo, si dovebbe cercare di utilizzare il più possibile il markup semantico.
 
 ✅ Si dia un'occhiata a un lettore di schermo e a [come interagisce con una pagina web](https://www.youtube.com/watch?v=OUDV1gqs9GA). Si riusce a capire perché avere un markup non semantico potrebbe frustrare l'utente?
 
@@ -198,13 +199,13 @@ Aggiungere questo markup sopra l'ultimo tag `</div>`:
 
 ```html
 <div id="terrarium">
-	<div class="jar-top"></div>
-	<div class="jar-walls">
-		<div class="jar-glossy-long"></div>
-		<div class="jar-glossy-short"></div>
-	</div>
-	<div class="dirt"></div>
-	<div class="jar-bottom"></div>
+  <div class="jar-top"></div>
+  <div class="jar-walls">
+    <div class="jar-glossy-long"></div>
+    <div class="jar-glossy-short"></div>
+  </div>
+  <div class="dirt"></div>
+  <div class="jar-bottom"></div>
 </div>
 ```
 
@@ -225,7 +226,6 @@ Ci sono alcuni "vecchi" selvaggi tag in HTML con cui è ancora divertente giocar
 L'HTML è il sistema di blocchi costitutivi "collaudato e vero" che ha contribuito a trasformare il Web in quello che è oggi. Imparare un po' sulla sua storia studiando alcuni tag vecchi e nuovi. Si riusce a capire perché alcuni tag sono stati deprecati e altri aggiunti? Quali tag potrebbero essere introdotti in futuro?
 
 Ulteriori informazioni sulla creazione di siti per il Web e i dispositivi mobili in [Microsoft Learn](https://docs.microsoft.com/learn/modules/build-simple-website/?WT.mc_id=academic-13441-cxa).
-
 
 ## Compito
 

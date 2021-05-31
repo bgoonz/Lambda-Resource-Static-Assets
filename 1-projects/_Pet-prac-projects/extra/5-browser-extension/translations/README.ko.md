@@ -25,4 +25,3 @@ The structure of the browser extension was influenced by [Adebola Adeniran's COV
 The concept behind the 'dot' icon system was suggested by the icon structure of the [Energy Lollipop](https://energylollipop.com/) browser extension for California emissions.
 
 These lessons were written with ♥️ by [Jen Looper](https://www.twitter.com/jenlooper)
-

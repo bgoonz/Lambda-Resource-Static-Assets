@@ -6,6 +6,6 @@ Un développeur Web peut avoir besoin de nombreux outils qui se trouvent sur le 
 
 ## Rubrique
 
-Exemplaire | Adéquat | A besoin d'amélioration
---- | --- | -- |
+| Exemplaire                                               | Adéquat                                                                | A besoin d'amélioration                                                  |
+| -------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | Expliqué pourquoi le développeur Web utiliserait l'outil | Expliqué comment, mais pas pourquoi le développeur utiliserait l'outil | N'a pas mentionné comment ou pourquoi un développeur utiliserait l'outil |

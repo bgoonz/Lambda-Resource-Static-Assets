@@ -16,10 +16,10 @@ Ebenso wichtig ist die Fähigkeit, eine Funktion zu benennen. Obwohl dies trivia
 
 Die Syntax für eine Funktion sieht folgendermaßen aus:
 
-
 ```javascript
-function nameOfFunction() { // function definition
- // function definition/body
+function nameOfFunction() {
+  // function definition
+  // function definition/body
 }
 ```
 
@@ -27,12 +27,11 @@ Wenn ich eine Funktion zum Anzeigen einer Begrüßung erstellen wollte, könnte 
 
 ```javascript
 function displayGreeting() {
-  console.log('Hello, world!');
+  console.log("Hello, world!");
 }
 ```
 
 Wann immer wir unsere Funktion aufrufen (oder aufrufen) möchten, verwenden wir den Namen der Funktion, gefolgt von `()`. Es ist erwähnenswert, dass unsere Funktion definiert werden kann, bevor oder nachdem wir uns entscheiden, sie aufzurufen. Der JavaScript-Compiler findet es für Sie.
-
 
 ```javascript
 // calling our function
@@ -56,13 +55,10 @@ Um eine Funktion wiederverwendbarer zu machen, möchten Sie häufig Informatione
 Die Parameter sind im Definitionsteil in Klammern aufgeführt und werden wie folgt durch Kommas getrennt:
 
 ```javascript
-function name(param, param2, param3) {
-
-}
+function name(param, param2, param3) {}
 ```
 
 Wir können unser `displayGreeting` aktualisieren, um einen Namen zu akzeptieren und diesen anzeigen zu lassen.
-
 
 ```javascript
 function displayGreeting(name) {
@@ -74,7 +70,7 @@ function displayGreeting(name) {
 Wenn wir unsere Funktion aufrufen und den Parameter übergeben möchten, geben wir ihn in Klammern an.
 
 ```javascript
-displayGreeting('Christopher');
+displayGreeting("Christopher");
 // zeigt "Hallo Christopher!" wenn ausgeführt
 ```
 
@@ -82,9 +78,8 @@ displayGreeting('Christopher');
 
 Wir können unsere Funktion noch flexibler gestalten, indem wir weitere Parameter hinzufügen. Aber was ist, wenn nicht jeder Wert angegeben werden soll? In Übereinstimmung mit unserem Begrüßungsbeispiel könnten wir den Namen nach Bedarf belassen (wir müssen wissen, wen wir begrüßen), aber wir möchten, dass die Begrüßung selbst nach Wunsch angepasst wird. Wenn jemand es nicht anpassen möchte, geben wir stattdessen einen Standardwert an. Um einem Parameter einen Standardwert zuzuweisen, setzen wir ihn ähnlich wie einen Wert für eine Variable - `parameterName = 'defaultValue'`. Um ein vollständiges Beispiel zu sehen:
 
-
 ```javascript
-function displayGreeting(name, salutation='Hello') {
+function displayGreeting(name, salutation = "Hello") {
   console.log(`${salutation}, ${name}`);
 }
 ```
@@ -92,10 +87,10 @@ function displayGreeting(name, salutation='Hello') {
 When we call the function, we can then decide if we want to set a value for `salutation`.
 
 ```javascript
-displayGreeting('Christopher');
+displayGreeting("Christopher");
 // zeigt "Hallo Christopher!"
 
-displayGreeting('Christopher', 'Hi');
+displayGreeting("Christopher", "Hi");
 // zeigt "Hi Christopher!"
 ```
 
@@ -107,10 +102,9 @@ Wir können dies tun, indem wir einen **Rückgabewert** verwenden. Ein Rückgabe
 
 Wenn eine Funktion etwas zurückgibt, wird das Schlüsselwort `return` verwendet. Das Schlüsselwort `return` erwartet einen Wert oder eine Referenz dessen, was wie folgt zurückgegeben wird:
 
-
 ```javascript
 return myVariable;
-```  
+```
 
 Wir könnten eine Funktion erstellen, um eine Begrüßungsnachricht zu erstellen und den Wert an den Anrufer zurückzugeben:
 
@@ -124,7 +118,7 @@ function createGreetingMessage(name) {
 Beim Aufruf dieser Funktion speichern wir den Wert in einer Variablen. Dies ist fast die gleiche Art und Weise, wie wir eine Variable auf einen statischen Wert setzen würden (wie `const name = 'Christopher'`).
 
 ```javascript
-const greetingMessage = createGreetingMessage('Christopher');
+const greetingMessage = createGreetingMessage("Christopher");
 ```
 
 ## Funktionen als Parameter für Funktionen
@@ -135,10 +129,9 @@ Betrachten Sie als Beispiel [setTimeout](https://developer.mozilla.org/docs/Web/
 
 Wenn Sie den folgenden Code ausführen, wird nach 3 Sekunden die Meldung **3 Sekunden sind verstrichen** angezeigt.
 
-
 ```javascript
 function displayDone() {
-  console.log('3 seconds has elapsed');
+  console.log("3 seconds has elapsed");
 }
 // Der Timer-Wert wird in Millisekunden angegeben
 setTimeout(3000, displayDone);
@@ -153,8 +146,8 @@ Wenn wir eine Funktion als Parameter übergeben, können wir die Erstellung eine
 Schreiben wir den obigen Code neu, um eine anonyme Funktion zu verwenden:
 
 ```javascript
-setTimeout(3000, function() {
-  console.log('3 seconds has elapsed');
+setTimeout(3000, function () {
+  console.log("3 seconds has elapsed");
 });
 ```
 
@@ -166,17 +159,15 @@ Eine in vielen Programmiersprachen (einschließlich JavaScript) übliche Abkürz
 
 Lassen Sie uns unseren Code noch einmal umschreiben, um eine Fettpfeilfunktion zu verwenden:
 
-
 ```javascript
 setTimeout(3000, () => {
-  console.log('3 seconds has elapsed');
+  console.log("3 seconds has elapsed");
 });
 ```
 
 ### Wann wird jede Strategie angewendet?
 
 Sie haben jetzt gesehen, dass wir drei Möglichkeiten haben, eine Funktion als Parameter zu übergeben, und fragen sich möglicherweise, wann sie jeweils verwendet werden sollen. Wenn Sie wissen, dass Sie die Funktion mehrmals verwenden, erstellen Sie sie wie gewohnt. Wenn Sie es nur für einen Ort verwenden, ist es im Allgemeinen am besten, eine anonyme Funktion zu verwenden. Ob Sie eine Fat-Arrow-Funktion oder die traditionellere `function` Syntax verwenden, liegt bei Ihnen, aber Sie werden feststellen, dass die meisten modernen Entwickler `=>` bevorzugen.
-
 
 ---
 

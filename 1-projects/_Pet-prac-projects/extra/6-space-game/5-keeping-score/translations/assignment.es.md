@@ -6,6 +6,6 @@ Crea un juego en el que muestres la vida y los puntos de forma creativa. Una sug
 
 # Rúbrica
 
-| Criterios | Ejemplar | Adecuado | Necesita mejorar |
-| -------- | ---------------------- | --------------------------- | -------------------------- |
-| | se presenta el juego completo | se presenta parcialmente el juego | juego parcial contiene errores |
+| Criterios | Ejemplar                      | Adecuado                          | Necesita mejorar               |
+| --------- | ----------------------------- | --------------------------------- | ------------------------------ |
+|           | se presenta el juego completo | se presenta parcialmente el juego | juego parcial contiene errores |

@@ -8,7 +8,7 @@
 
 ブラウザベースのアプリケーションを作成するとき、私たちは、構築したものと対話するときに使用するグラフィカル・ユーザー・インターフェース (GUI) を提供します。ブラウザと対話する最も一般的な方法は、様々な要素をクリックしたり入力したりすることです。開発者として直面する課題は、ユーザーがこれらの操作をいつ実行するかわからないことです。
 
-[イベント駆動型プログラミング](https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E9%A7%86%E5%8B%95%E5%9E%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0)は、GUIを作成するために必要なプログラミングの種類の名前です。このフレーズを少し分解すると、ここでの核となる単語は **イベント** です。[イベント](https://www.merriam-webster.com/dictionary/event)は、Merriam-Webster によると、「何かが起こる」と定義されています。これは私たちの状況を完璧に説明しています。何かが起こりそうで、それに対応してコードを実行したいのですが、それがいつ行われるかはわかりません。
+[イベント駆動型プログラミング](https://ja.wikipedia.org/wiki/%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E9%A7%86%E5%8B%95%E5%9E%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0)は、GUI を作成するために必要なプログラミングの種類の名前です。このフレーズを少し分解すると、ここでの核となる単語は **イベント** です。[イベント](https://www.merriam-webster.com/dictionary/event)は、Merriam-Webster によると、「何かが起こる」と定義されています。これは私たちの状況を完璧に説明しています。何かが起こりそうで、それに対応してコードを実行したいのですが、それがいつ行われるかはわかりません。
 
 実行したいコードの節をマークする方法は、関数を作成することです。[手続き型プログラミング](https://ja.wikipedia.org/wiki/%E6%89%8B%E7%B6%9A%E3%81%8D%E5%9E%8B%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0)を考えると、関数は決まった順番で呼び出されます。これはイベント駆動型プログラミングでも同じことが言えそうです。違いは、関数が**どのように**呼ばれるかということです。
 
@@ -57,7 +57,7 @@ md typing-game && cd typing game
 code .
 ```
 
-- Visual Studio Code のフォルダに以下の名前で3つのファイルを追加します
+- Visual Studio Code のフォルダに以下の名前で 3 つのファイルを追加します
   - index.html
   - script.js
   - style.css
@@ -78,21 +78,28 @@ code .
 ```html
 <!-- index.html の中身 -->
 <html>
-<head>
-  <title>タイピングゲーム</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>タイピングゲーム!</h1>
-  <p>シャーロック・ホームズの名言を使ってタイピングの練習をしましょう。**スタート** をクリックしてください。</p>
-  <p id="quote"></p> <!-- これで名言が表示されます。 -->
-  <p id="message"></p> <!-- これは、すべてのステータスメッセージを表示します。 -->
-  <div>
-    <input type="text" aria-label="current word" id="typed-value" /> <!-- 入力用のテキストボックス -->
-    <button type="button" id="start">スタート</button> <!-- ゲームを開始します -->
-  </div>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <title>タイピングゲーム</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>タイピングゲーム!</h1>
+    <p>
+      シャーロック・ホームズの名言を使ってタイピングの練習をしましょう。**スタート**
+      をクリックしてください。
+    </p>
+    <p id="quote"></p>
+    <!-- これで名言が表示されます。 -->
+    <p id="message"></p>
+    <!-- これは、すべてのステータスメッセージを表示します。 -->
+    <div>
+      <input type="text" aria-label="current word" id="typed-value" />
+      <!-- 入力用のテキストボックス -->
+      <button type="button" id="start">スタート</button>
+      <!-- ゲームを開始します -->
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
 ```
 
@@ -101,7 +108,7 @@ code .
 物事がどのように見えるかを確認するためには、常に反復的に開発するのがベストです。アプリケーションを起動してみましょう。Visual Studio Code には [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) と呼ばれる素晴らしい拡張機能があり、アプリケーションをローカルにホストし、保存するたびにブラウザを更新します。
 
 - リンクを辿り、**Install** をクリックして、[Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) をインストールします
-  - ブラウザで Visual Studio Code を開き、Visual Studioコードでインストールを実行するように促されます
+  - ブラウザで Visual Studio Code を開き、Visual Studio コードでインストールを実行するように促されます
   - プロンプトが表示されたら Visual Studio Code を再起動します
 - インストールしたら、Visual Studio Code で Ctl-Shift-P (または Cmd-Shift-P) をクリックして、コマンドパレットを開きます
 - **Live Server: Open with Live Server** と入力します
@@ -164,13 +171,13 @@ UI 要素への参照も欲しいところです。
 // script.js の中身
 // すべての名言
 const quotes = [
-    'When you have eliminated the impossible, whatever remains, however improbable, must be the truth.',
-    'There is nothing more deceptive than an obvious fact.',
-    'I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.',
-    'I never make exceptions. An exception disproves the rule.',
-    'What one man can invent another can discover.',
-    'Nothing clears up a case so much as stating it to another person.',
-    'Education never ends, Watson. It is a series of lessons, with the greatest for the last.',
+  "When you have eliminated the impossible, whatever remains, however improbable, must be the truth.",
+  "There is nothing more deceptive than an obvious fact.",
+  "I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.",
+  "I never make exceptions. An exception disproves the rule.",
+  "What one man can invent another can discover.",
+  "Nothing clears up a case so much as stating it to another person.",
+  "Education never ends, Watson. It is a series of lessons, with the greatest for the last.",
 ];
 // 単語のリストと、プレイヤーが現在入力している単語のインデックスを格納します。
 let words = [];
@@ -178,16 +185,16 @@ let wordIndex = 0;
 // 開始時刻
 let startTime = Date.now();
 // ページ構成要素
-const quoteElement = document.getElementById('quote');
-const messageElement = document.getElementById('message');
-const typedValueElement = document.getElementById('typed-value');
+const quoteElement = document.getElementById("quote");
+const messageElement = document.getElementById("message");
+const typedValueElement = document.getElementById("typed-value");
 ```
 
 ✅ 先に行き、あなたのゲームに多くの名言を追加します。
 
 > **注:** `document.getElementById`を使用することで、コード内で必要なときにいつでも要素を取得することができます。これらの要素を定期的に参照することになるので、定数を使用して文字列リテラルのタイプミスを回避します。[Vue.js](https://jp.vuejs.org/) や [React](https://ja.reactjs.org/) などのフレームワークは、コードを集中管理するのに役立ちます。
 
-1分ほどかけて、`const`, `let`, `var` の使い方のビデオを見てみましょう。
+1 分ほどかけて、`const`, `let`, `var` の使い方のビデオを見てみましょう。
 
 [![Types of variables](https://img.youtube.com/vi/JNIXfGiDWM8/0.jpg)](https://youtube.com/watch?v=JNIXfGiDWM8 "Types of variables")
 
@@ -199,28 +206,30 @@ const typedValueElement = document.getElementById('typed-value');
 
 ```javascript
 // script.js の最後の方に
-document.getElementById('start').addEventListener('click', () => {
+document.getElementById("start").addEventListener("click", () => {
   // 名言の取得
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
   // 名言を言葉の配列に入れる
-  words = quote.split(' ');
+  words = quote.split(" ");
   // トラッキング用の単語インデックスをリセットする
   wordIndex = 0;
 
   // UI の更新
   // span 要素の配列を作成し、クラスを設定できるようにします。
-  const spanWords = words.map(function(word) { return `<span>${word} </span>`});
+  const spanWords = words.map(function (word) {
+    return `<span>${word} </span>`;
+  });
   // 文字列に変換して、名言を表示する innerHTML として設定します。
-  quoteElement.innerHTML = spanWords.join('');
+  quoteElement.innerHTML = spanWords.join("");
   // 最初の単語を強調表示します。
-  quoteElement.childNodes[0].className = 'highlight';
+  quoteElement.childNodes[0].className = "highlight";
   // 前のメッセージをクリアします。
-  messageElement.innerText = '';
+  messageElement.innerText = "";
 
   // テキストボックスの設定
   // テキストボックスをクリアします。
-  typedValueElement.value = '';
+  typedValueElement.value = "";
   // フォーカスを合わせます。
   typedValueElement.focus();
   // イベントハンドラを設定します。
@@ -254,7 +263,7 @@ document.getElementById('start').addEventListener('click', () => {
 
 ```javascript
 // script.js の最後の方に
-typedValueElement.addEventListener('input', () => {
+typedValueElement.addEventListener("input", () => {
   // 現在の単語を取得します
   const currentWord = words[wordIndex];
   // 現在の値を取得します
@@ -264,27 +273,29 @@ typedValueElement.addEventListener('input', () => {
     // 文の終了
     // 成功を表示します
     const elapsedTime = new Date().getTime() - startTime;
-    const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
+    const message = `CONGRATULATIONS! You finished in ${
+      elapsedTime / 1000
+    } seconds.`;
     messageElement.innerText = message;
-  } else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
+  } else if (typedValue.endsWith(" ") && typedValue.trim() === currentWord) {
     // 単語の終了
     // 新しい単語用に 'typedValueElement' をクリアします
-    typedValueElement.value = '';
+    typedValueElement.value = "";
     // 次の単語に移ります
     wordIndex++;
     // 名言内のすべての要素のクラス名をリセットします
     for (const wordElement of quoteElement.childNodes) {
-      wordElement.className = '';
+      wordElement.className = "";
     }
     // 新しい単語を強調表示します
-    quoteElement.childNodes[wordIndex].className = 'highlight';
+    quoteElement.childNodes[wordIndex].className = "highlight";
   } else if (currentWord.startsWith(typedValue)) {
     // 現在正しく入力されている状態
     // 次の単語を強調表示します
-    typedValueElement.className = '';
+    typedValueElement.className = "";
   } else {
     // エラー状態
-    typedValueElement.className = 'error';
+    typedValueElement.className = "error";
   }
 });
 ```

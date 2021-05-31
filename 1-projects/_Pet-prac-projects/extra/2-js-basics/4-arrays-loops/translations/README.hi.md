@@ -1,9 +1,11 @@
 # जावास्क्रिप्ट मूल बातें: ऐरे और लूप्स
 
 ![जावास्क्रिप्ट मूल बातें - एरेस ](/sketchnotes/webdev101-js-arrays.png)
+
 > [टोमोमी इमुरा](https://twitter.com/girlie_mac) द्वारा स्केचनेट
 
 ## पूर्व व्याख्यान प्रश्नोत्तरी
+
 [पूर्व व्याख्यान प्रश्नोत्तरी](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/13?loc=hi)
 
 इस पाठ में जावास्क्रिप्ट की मूल बातें शामिल हैं, वह भाषा जो वेब पर अन्तरक्रियाशीलता प्रदान करती है। इस पाठ में, आप ऐरे और लूप्स के बारे में जानेंगे, जिनका उपयोग डेटा में हेरफेर करने के लिए किया जाता है।
@@ -11,6 +13,7 @@
 [![ऐरे और लूप्स](https://img.youtube.com/vi/Q_CRM2lXXBg/0.jpg)](https://youtube.com/watch?v=Q_CRM2lXXBg "ऐरे और लूप्स")
 
 > ऐरे और लूप्स के बारे में वीडियो के लिए ऊपर दी गई छवि पर क्लिक करें।
+
 ## एरेस
 
 डेटा के साथ काम करना किसी भी भाषा के लिए एक सामान्य कार्य है, और यह एक बहुत आसान काम है जब डेटा को एक संरचनात्मक प्रारूप में व्यवस्थित किया जाता है, जैसे कि सरणियाँ। एरेस के साथ, डेटा को एक सूची के समान संरचना में संग्रहीत किया जाता है। सरणियों का एक प्रमुख लाभ यह है कि आप विभिन्न प्रकार के डेटा को एक सरणी में संग्रहीत कर सकते हैं।
@@ -30,7 +33,13 @@
 ✅ क्या यह आपको आश्चर्यचकित करता है कि एरेस शून्य सूचकांक पर शुरू होती हैं? कुछ प्रोग्रामिंग भाषाओं में, अनुक्रमित 1 से शुरू होते हैं। इसके आसपास एक दिलचस्प इतिहास है, जिसे आप [विकिपीडिया पर पढ़ सकते हैं] (https://en.wikipedia.org/wiki/Zero-based_numbering)।
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors[2]; //"Vanilla"
 ```
 
@@ -51,7 +60,13 @@ iceCreamFlavors[5] = "Cookie Dough"; //Added "Cookie Dough"
 एक एरे में कितने आइटम हैं, यह जानने के लिए `length` संपत्ति का उपयोग करें।
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors.length; //5
 ```
 
@@ -63,16 +78,13 @@ iceCreamFlavors.length; //5
 
 ### फॉर लूप
 
-`For` लूप को पुनरावृति के लिए 3 भागों की आवश्यकता होती है:
-    - `counter` एक वैरिएबल है जिसे आमतौर पर एक संख्या के साथ आरंभीकृत किया जाता है जो पुनरावृत्तियों की संख्या को गिनता है।
-    - `condition` अभिव्यक्ति कि तुलना ऑपरेटरों का उपयोग करता है जब लूप को रोकने का कारण होता है `true`
-    - `iteration-expression` प्रत्येक पुनरावृत्ति के अंत में चलता है, आमतौर पर काउंटर मान को बदलने के लिए उपयोग किया जाता है
-  
+`For` लूप को पुनरावृति के लिए 3 भागों की आवश्यकता होती है: - `counter` एक वैरिएबल है जिसे आमतौर पर एक संख्या के साथ आरंभीकृत किया जाता है जो पुनरावृत्तियों की संख्या को गिनता है। - `condition` अभिव्यक्ति कि तुलना ऑपरेटरों का उपयोग करता है जब लूप को रोकने का कारण होता है `true` - `iteration-expression` प्रत्येक पुनरावृत्ति के अंत में चलता है, आमतौर पर काउंटर मान को बदलने के लिए उपयोग किया जाता है
+
 ```javascript
-    //Counting up to 10
-    for (let i = 0; i < 10; i++) {
-        console.log(i);
-    }
+//Counting up to 10
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
 ```
 
 ✅ इस कोड को ब्राउज़र कंसोल में चलाएं। जब आप काउंटर, स्थिति या पुनरावृत्ति अभिव्यक्ति में छोटे बदलाव करते हैं तो क्या होता है? क्या आप उल्टी गिनती बनाकर इसे पीछे की ओर चला सकते हैं?
@@ -85,8 +97,8 @@ iceCreamFlavors.length; //5
 //Counting up to 10
 let i = 0;
 while (i < 10) {
- console.log(i);
- i++;
+  console.log(i);
+  i++;
 }
 ```
 
@@ -97,7 +109,13 @@ while (i < 10) {
 अररेस अक्सर लूपस के साथ उपयोग किया जाता है क्योंकि अधिकांश स्थितियों में लूप को रोकने के लिए अरै की लंबाई की आवश्यकता होती है, और सूचकांक भी काउंटर मूल्य हो सकता है।
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 
 for (let i = 0; i < iceCreamFlavors.length; i++) {
   console.log(iceCreamFlavors[i]);
@@ -113,8 +131,8 @@ for (let i = 0; i < iceCreamFlavors.length; i++) {
 लूप के अलावा और अन्य अररेस पर लूपिंग के अन्य तरीके हैं। [ForEach](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach), [for-of](https://developer.mozilla.org/docs/Web) हैं /JavaScript/Reference/Statements/for...of), और [map](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Anray/map)। इन तकनीकों में से किसी एक का उपयोग करके अपने ऐरे लूप को फिर से लिखें।
 
 ## व्याख्यान उपरांत प्रश्नोत्तरी
-[व्याख्यान उपरांत प्रश्नोत्तरी](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/14?loc=hi)
 
+[व्याख्यान उपरांत प्रश्नोत्तरी](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/14?loc=hi)
 
 ## समीक्षा और स्व अध्ययन
 

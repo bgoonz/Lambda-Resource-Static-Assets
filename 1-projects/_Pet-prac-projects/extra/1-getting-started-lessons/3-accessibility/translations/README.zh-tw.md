@@ -1,9 +1,11 @@
 # 建立無障礙網頁
 
 ![關於網頁親和力](/sketchnotes/webdev101-a11y.png)
+
 > 由 [Tomomi Imura](https://twitter.com/girlie_mac) 繪製
 
 ## 課前測驗
+
 [課前測驗](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/5?loc=zh_tw)
 
 > 網路的強大在於它的普遍性。無論用戶是否有殘疾，讓大家無差別地使用網路是必要的。
@@ -118,10 +120,10 @@ CSS 提供完整的網頁造型控制，你可以讓文字框框線隱藏或是�
 
 想像下方的網頁：
 
-| 產品         | 描述        | 數量        |
-| ------------ | ----------- | ----------- |
-| 物品         | [描述]('#') | [數量]('#') |
-| 超優物品     | [描述]('#') | [數量]('#') |
+| 產品     | 描述        | 數量        |
+| -------- | ----------- | ----------- |
+| 物品     | [描述]('#') | [數量]('#') |
+| 超優物品 | [描述]('#') | [數量]('#') |
 
 在這項舉例中，瀏覽器用戶可以清楚地辨別重複性的「描述」與「數量」；但對於螢幕報讀器用戶而言，他們只能重複地聽取*「描述」與「數量」*這兩個單詞。
 
@@ -131,7 +133,7 @@ CSS 提供完整的網頁造型控制，你可以讓文字框框線隱藏或是�
 
 若網頁不支援部分格式語法，你可以使用 `aria-label` 來描述連結。就如下方物件被標註上 "Widget description" 的標籤。
 
-``` html
+```html
 <a href="#" aria-label="Widget description">description</a>
 ```
 
@@ -153,7 +155,7 @@ CSS 提供完整的網頁造型控制，你可以讓文字框框線隱藏或是�
 
 ## 鍵盤輸入
 
-有些用戶無法使用滑鼠或觸控板，他們需要使用鍵盤中的 "tab" 鍵來切換網頁元素，讓網頁物件能順序性地排列與互動就很重要。如果網頁有語義化標籤並以CSS造型化視覺畫面，網頁基本上就能以鍵盤來切換，當然手動測試還是必要的。了解更多關於[鍵盤調查的策略](https://webaim.org/techniques/keyboard/)。
+有些用戶無法使用滑鼠或觸控板，他們需要使用鍵盤中的 "tab" 鍵來切換網頁元素，讓網頁物件能順序性地排列與互動就很重要。如果網頁有語義化標籤並以 CSS 造型化視覺畫面，網頁基本上就能以鍵盤來切換，當然手動測試還是必要的。了解更多關於[鍵盤調查的策略](https://webaim.org/techniques/keyboard/)。
 
 ✅ 前往任何一個網頁，試著只以鍵盤瀏覽網頁。哪些能成功運作，你又遭遇了哪些困難? 你有辦法解釋嗎?
 
@@ -191,7 +193,7 @@ CSS 提供完整的網頁造型控制，你可以讓文字框框線隱藏或是�
     </div>
     <div class="main-content">
       <div>
-        <p class="page-title">Welcome to Turtle Ipsum. 
+        <p class="page-title">Welcome to Turtle Ipsum.
             <a href="">Click here</a> to learn more.
         </p>
         <p class="article-text">
@@ -218,6 +220,7 @@ CSS 提供完整的網頁造型控制，你可以讓文字框框線隱藏或是�
 ```
 
 ## 課後測驗
+
 [課後測驗](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/6?loc=zh_tw)
 
 ## 複習與自學
@@ -225,7 +228,7 @@ CSS 提供完整的網頁造型控制，你可以讓文字框框線隱藏或是�
 許多政府機關立法要求無障礙需求。查詢你的國家是否有這些法規。它們涉及了那些，那些又沒包含在其中? 看看[英國政府機關網頁](https://accessibility.blog.gov.uk/)的例子。
 
 ## 作業
- 
+
 [分析一個非無障礙網頁](assignment.zh-tw.md)
 
 參考出處： [Turtle Ipsum](https://github.com/Instrument/semantic-html-sample)

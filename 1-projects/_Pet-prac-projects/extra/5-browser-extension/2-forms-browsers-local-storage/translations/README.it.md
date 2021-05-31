@@ -12,7 +12,7 @@ In questa lezione, si chiamerà un'API inviando il form dell'estensione del brow
 
 ### Impostare gli elementi da manipolare nell'estensione:
 
-A questo punto è stato creato l'HTML per il form e i risultati  `<div>` per l'estensione del browser. D'ora in poi, si dovrà lavorare nel file `/src/index.js` e costruire la propria estensione un po 'alla volta. Si faccia riferimento alla [lezione precedente](../../1-about-browsers/translations/README.it.md) su come impostare il progetto e sul processo di compilazione.
+A questo punto è stato creato l'HTML per il form e i risultati `<div>` per l'estensione del browser. D'ora in poi, si dovrà lavorare nel file `/src/index.js` e costruire la propria estensione un po 'alla volta. Si faccia riferimento alla [lezione precedente](../../1-about-browsers/translations/README.it.md) su come impostare il progetto e sul processo di compilazione.
 
 Lavorando nel file `index.js` , si inizia creando alcune variabili `const` per contenere i valori associati ai vari campi:
 
@@ -83,16 +83,17 @@ function reset(e) {
 }
 
 ```
+
 In questa funzione c'è una logica interessante. Leggendola, si riesce a vedere cosa succede?
 
 - due `const` vengono impostate per verificare se l'utente ha memorizzato una chiave APIKey e il codice regionale nella memoria del browser.
 - se uno di queste è nullo, si mostra il form cambiando il suo stile in modo che venga visualizzato come blocco
 - nascondere i div che mostrano risultati, caricamento e il pulsante clearBtn e impostare qualsiasi testo di errore su una stringa vuota
 - se esiste una chiave e una regione, avviare una routine per:
-   - chiamare l'API per ottenere i dati sull'utilizzo del carbonio
-   - nascondere l'area dei risultati
-   - nascondere il form
-   - mostrare il pulsante di reset
+  - chiamare l'API per ottenere i dati sull'utilizzo del carbonio
+  - nascondere l'area dei risultati
+  - nascondere il form
+  - mostrare il pulsante di reset
 
 Prima di proseguire, è utile conoscere un concetto molto importante disponibile nei browser: [LocalStorage](https://developer.mozilla.org/it/docs/Web/API/Window/localStorage). LocalStorage è un modo utile per memorizzare le stringhe nel browser come coppia `chiave-valore` . Questo tipo di archiviazione web può essere manipolato da JavaScript per gestire i dati nel browser. LocalStorage non scade, mentre il contenuto di SessionStorage, un altro tipo di archiviazione web, viene cancellato alla chiusura del browser. I vari tipi di archiviazione hanno vantaggi e svantaggi per il loro utilizzo.
 
@@ -118,6 +119,7 @@ function handleSubmit(e) {
 	setUpUser(apiKey.value, region.value);
 }
 ```
+
 ✅ Per rinfrescarsi la memoria: l'HTML impostato nell'ultima lezione ha due campi di input i cui attributi `value` vengono catturati tramite `const` che si è impostata all'inizio del file e sono entrambi obbligatori (`required`) in modo che il browser impedisca agli utenti di inserire valori nulli.
 
 ### Configurare l'utente
@@ -135,6 +137,7 @@ function setUpUser(apiKey, regionName) {
 	displayCarbonUsage(apiKey, regionName);
 }
 ```
+
 Questa funzione imposta un messaggio di caricamento da mostrare mentre viene chiamata l'API. A questo punto si è arrivati a creare la funzione più importante di questa estensione per browser!
 
 ### Visualizzare il consumo di carbonio
@@ -221,5 +224,3 @@ In questa lezione si è imparato a conoscere LocalStorage e le API, entrambi mol
 ## Compito
 
 [Adottare un'API](assignment.it.md)
-
-

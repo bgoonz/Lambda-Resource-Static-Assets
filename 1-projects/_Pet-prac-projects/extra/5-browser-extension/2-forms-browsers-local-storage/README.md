@@ -83,6 +83,7 @@ function reset(e) {
 }
 
 ```
+
 In this function, there is some interesting logic. Reading through it, can you see what happens?
 
 - two `const` are set up to check if the user has stored an APIKey and region code in local storage.
@@ -118,6 +119,7 @@ function handleSubmit(e) {
 	setUpUser(apiKey.value, region.value);
 }
 ```
+
 ✅ Refresh your memory - the HTML you set up in the last lesson has two input fields whose `values` are captured via the `const` you set up at the top of the file, and they are both `required` so the browser stops users from inputting null values.
 
 ### Set up the user
@@ -135,6 +137,7 @@ function setUpUser(apiKey, regionName) {
 	displayCarbonUsage(apiKey, regionName);
 }
 ```
+
 This function sets a loading message to show while the API is called. At this point, you have arrived at creating the most important function of this browser extension!
 
 ### Display Carbon Usage
@@ -195,7 +198,7 @@ async function displayCarbonUsage(apiKey, region) {
 
 This is a big function. What's going on here?
 
-- following best practices, you use an `async` keyword to make this function behave asyncronously. The function contains a `try/catch` block as it will return a promise when the API returns data. Because you don't have control over the speed that the API will respond (it may not respond at all!), you need to handle this uncertainty by call it asyncronously. 
+- following best practices, you use an `async` keyword to make this function behave asyncronously. The function contains a `try/catch` block as it will return a promise when the API returns data. Because you don't have control over the speed that the API will respond (it may not respond at all!), you need to handle this uncertainty by call it asyncronously.
 - you're querying the co2signal API to get your region's data, using your API Key. To use that key, you have to use a type of authentication in your header parameters.
 - once the API responds, you assign various elements of its response data to the parts of your screen you set up to show this data.
 - if there's an error, or if there is no result, you show an error message.
@@ -221,4 +224,3 @@ You learned about LocalStorage and APIs in this lesson, both very useful for the
 ## Assignment
 
 [Adopt an API](assignment.md)
-

@@ -25,4 +25,3 @@ Para instalar en Edge, use el menú de 'tres puntos' en la esquina superior dere
 ![installing](../start/install-on-edge.png)
 
 Una vez que se ingresa la clave API y la región en la interfaz de extensión, el punto de color en la barra de extensión del navegador debe cambiar para reflejar el uso de energía de su región y darle un indicador sobre las actividades de alto consumo de energía que serían apropiadas para usted. El concepto detrás de este sistema de "puntos" me lo dio la [extensión Energy Lollipop](https://energylollipop.com/) para las emisiones de California.
-

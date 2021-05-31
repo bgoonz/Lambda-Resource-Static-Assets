@@ -17,13 +17,13 @@ Dalam enam pelajaran ini anda akan mempelajari perkara berikut:
 ## Gambaran keseluruhan
 
 - Theori
-   - [Pengenalan membina permainan dengan JavaScript](../1-introduction/README.md)
+  - [Pengenalan membina permainan dengan JavaScript](../1-introduction/README.md)
 - Practice
-   - [Melukis ke kanvas](../2-drawing-to-canvas/README.md)
-   - [Menggerakkan elemen di sekitar skrin](../3-moving-elements-around/README.md)
-   - [Pengesanan perlanggaran](../4-collision-detection/README.md)
-   - [Menjaga skor](../5-keeping-score/README.md)
-   - [Menamatkan dan memulakan semula permainan](../6-end-condition/README.md)
+  - [Melukis ke kanvas](../2-drawing-to-canvas/README.md)
+  - [Menggerakkan elemen di sekitar skrin](../3-moving-elements-around/README.md)
+  - [Pengesanan perlanggaran](../4-collision-detection/README.md)
+  - [Menjaga skor](../5-keeping-score/README.md)
+  - [Menamatkan dan memulakan semula permainan](../6-end-condition/README.md)
 
 ## Kredit
 

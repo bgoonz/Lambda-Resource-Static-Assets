@@ -4,6 +4,6 @@ Geef een gedetailleerd rapport van een website, met de gebieden waar de prestati
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                                                                                                  | Voldoende                    | Moet worden verbeterd             |
-| -------- | ---------------------------------------------------------------------------------------------------------- | --------------------------- | ----------------------------- |
+| Criteria | Voorbeeldig                                                                                                                                     | Voldoende                               | Moet worden verbeterd                       |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- | ------------------------------------------- |
 |          | Er wordt een rapport gepresenteerd met details die niet alleen uit browsertools zijn gehaald, maar ook uit tools van derden, indien beschikbaar | Er wordt een basisrapport gepresenteerd | Er wordt een minimaal rapport gepresenteerd |

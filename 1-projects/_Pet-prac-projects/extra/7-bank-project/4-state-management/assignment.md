@@ -21,5 +21,5 @@ Here's an example result after completing the assignment:
 ## Rubric
 
 | Criteria | Exemplary                                                                                        | Adequate                                                                                                                | Needs Improvement                           |
-| -------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------|
+| -------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
 |          | Adding a transaction is implemented completely following all best practices seen in the lessons. | Adding a transaction is implement, but not following the best practices seen in the lessons, or working only partially. | Adding a transaction is not working at all. |

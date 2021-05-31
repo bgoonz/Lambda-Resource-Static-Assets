@@ -3,9 +3,11 @@
 이 강의에서는 코드 변경점을 호스팅하고 관리하는 플랫폼인 GitHub의 기본 사항을 다룹니다.
 
 ![Intro to GitHub](/sketchnotes/webdev101-github.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 강의 전 퀴즈
+
 [Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/3?loc=ko)
 
 ## 소개
@@ -22,8 +24,9 @@
 `git --version`
 
 만약 Git이 설치되어 있지 않다면, [Git 내려받습니다](https://git-scm.com/downloads). 그리고, 터미널에서 로컬 Git 프로필을 설정합니다:
-* `git config --global user.name "your-name"`
-* `git config --global user.email "your-email"`
+
+- `git config --global user.name "your-name"`
+- `git config --global user.email "your-email"`
 
 Git이 이미 구성되어 있는지 확인하려면 다음을 입력합니다:
 `git config --list`
@@ -91,14 +94,14 @@ GitHub 계정, (Visual Studio Code와 같은) 코드 에디터가 필요하며, 
    `git add`와 같이 있는 `.` 인수는 모든 파일 및 변경점을 나타냅니다.
 
 1. **작업 지속하기**. Git이 파일을 추적하는 곳에 _staging area_ 라는 파일을 추가했습니다. 영구적으로 변경하려면 파일을 _commit_ 해야합니다. 그렇게 하려면`git commit` 명령으로 _commit_ 을 생성합니다. _commit_ 은 저장소 기록의 저장 시점을 나타냅니다. 다음을 입력하여 _commit_ 을 생성합니다:
- 
+
    ```bash
    git commit -m "first commit"
    ```
 
    이렇게하면 모든 파일이 커밋되고, "first commit" 메시지가 추가됩니다. 향후 커밋 메시지의 경우 변경점을 전달하기 위해 설명을 구체적으로 작성해야합니다.
 
-1. **GitHub와 로컬 Git 저장소 연결하기**. Git 저장소는 장치에 존재하기에 좋지만, 어느 시점에서 파일을 어딘가에 백업하고 다른 사람이 저장소에서 함께 작업하도록 초대하고 싶습니다. 그렇게 하기에 좋은 곳 중 하나는 GitHub입니다. 이미 GitHub에 저장소를 만들었으므로 로컬 Git 저장소를 GitHub에 연결할 뿐입니다. `git remote add`  명령을 수행합니다. 다음 명령을 입력합니다:
+1. **GitHub와 로컬 Git 저장소 연결하기**. Git 저장소는 장치에 존재하기에 좋지만, 어느 시점에서 파일을 어딘가에 백업하고 다른 사람이 저장소에서 함께 작업하도록 초대하고 싶습니다. 그렇게 하기에 좋은 곳 중 하나는 GitHub입니다. 이미 GitHub에 저장소를 만들었으므로 로컬 Git 저장소를 GitHub에 연결할 뿐입니다. `git remote add` 명령을 수행합니다. 다음 명령을 입력합니다:
 
    > Note, 명령을 입력하기 전에 GitHub 저장소 페이지로 이동하여 저장소 URL을 찾아두십시오. 아래 명령에서 사용됩니다. `repository_name`을 GitHub URL로 바꿉니다.
 
@@ -148,13 +151,14 @@ GitHub에 코드를 올리는 주 이유는 다른 개발자와 협력할 수 �
 저장소에서, `Insights> Community`로 이동하여 프로젝트에 권장되는 커뮤니티 표준과 어떻게 비교되는지 확인합니다.
 
 다음은 GitHub 저장소를 개선 할 수있는 몇 가지 사항입니다:
-   - **설명**. 프로젝트에 설명을 추가했습니까?
-   - **README**. README를 추가했습니까? GitHub는 [README](https://docs.github.com/articles/about-readmes/) 작성에 대한 지침을 제공합니다.
-   - **기여 가이드**. [기여 가이드](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/), 
-   - **Code of Conduct**. [Code of Conduct](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/), 
-   - **라이선스**. 아마도, 가장 중요한 [라이선스](https://docs.github.com/articles/adding-a-license-to-a-repository/)도 가지고 있습니까?
 
-이러한 모든 리소스는 새로운 팀원을 온보딩하는 데 도움이 됩니다. 그리고 일반적으로 새로운 기여자들이 여러분의 프로젝트가 시간을 보내기에 적합한 장소인지 확인하기 위해  코드를 보기 전 살펴 보는 것입니다.
+- **설명**. 프로젝트에 설명을 추가했습니까?
+- **README**. README를 추가했습니까? GitHub는 [README](https://docs.github.com/articles/about-readmes/) 작성에 대한 지침을 제공합니다.
+- **기여 가이드**. [기여 가이드](https://docs.github.com/articles/setting-guidelines-for-repository-contributors/),
+- **Code of Conduct**. [Code of Conduct](https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/),
+- **라이선스**. 아마도, 가장 중요한 [라이선스](https://docs.github.com/articles/adding-a-license-to-a-repository/)도 가지고 있습니까?
+
+이러한 모든 리소스는 새로운 팀원을 온보딩하는 데 도움이 됩니다. 그리고 일반적으로 새로운 기여자들이 여러분의 프로젝트가 시간을 보내기에 적합한 장소인지 확인하기 위해 코드를 보기 전 살펴 보는 것입니다.
 
 ✅ README 파일은 준비하는 데 시간이 걸리지만 바쁜 관리자들은 종종 무시합니다. 특히 설명적인 예를 찾을 수 있습니까? Note: 몇 가지 [tools to help create good READMEs](https://www.makeareadme.com/)를 시도해 볼 수 있습니다.
 
@@ -270,16 +274,17 @@ GitHub의 모든 공개 저장소에 스타 표시, 워치 및/또는 "포크" �
 
 ---
 
-## 🚀 도전 
+## 🚀 도전
 
 친구와 페어링하여 서로의 코드를 작업하세요. 공동으로 프로젝트를 만들고, 코드를 포크하고, 브랜치를 만들고, 변경 사항을 병합합니다.
 
 ## 강의 후 퀴즈
+
 [Post-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/4?loc=ko)
 
 ## 리뷰 & 자기주도 학습
 
-[contributing to open source software](https://opensource.guide/how-to-contribute/#how-to-submit-a-contribution)에 대해 읽습니다. 
+[contributing to open source software](https://opensource.guide/how-to-contribute/#how-to-submit-a-contribution)에 대해 읽습니다.
 
 [Git cheatsheet](https://training.github.com/downloads/github-git-cheat-sheet/).
 
@@ -289,6 +294,6 @@ Practice, practice, practice. GitHub에는 [lab.github.com](https://lab.github.c
 
 더 많은 고급 실습도 찾을 수 있습니다.
 
-## 과제 
+## 과제
 
 [the First Week on GitHub training lab](https://lab.github.com/githubtraining/first-week-on-github) 완료하기

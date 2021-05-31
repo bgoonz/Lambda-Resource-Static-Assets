@@ -6,6 +6,6 @@ Il base di odice per questa estensione è completa di stili, ma non è necessari
 
 ## Rubrica
 
-| Criteri | Ottimo | Adeguato | Necessita miglioramento |
-| -------- | -------------------------------------------- | --------------------- | ----------------- |
-|          | Il codice viene presentato con nuovi stili funzionali | Lo stile è incompleto | Gli stili sono difettosi |
+| Criteri | Ottimo                                                | Adeguato              | Necessita miglioramento  |
+| ------- | ----------------------------------------------------- | --------------------- | ------------------------ |
+|         | Il codice viene presentato con nuovi stili funzionali | Lo stile è incompleto | Gli stili sono difettosi |

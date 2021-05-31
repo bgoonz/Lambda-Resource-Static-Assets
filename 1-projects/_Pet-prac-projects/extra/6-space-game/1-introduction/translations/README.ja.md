@@ -8,9 +8,9 @@
 
 ### ゲーム開発における継承とコンポジション
 
-以前のレッスンでは、プロジェクトの規模が非常に小さかったため、構築したアプリの設計アーキテクチャを気にする必要はあまりありませんでした。しかし、アプリケーションの規模や範囲が大きくなると、アーキテクチャの決定がより大きな関心事になります。JavaScript で大規模なアプリケーションを作成するには、大きく分けて2つのアプローチがあります。*コンポジション* と *継承* です。どちらにも長所と短所がありますが、ゲームの文脈から説明してみましょう。
+以前のレッスンでは、プロジェクトの規模が非常に小さかったため、構築したアプリの設計アーキテクチャを気にする必要はあまりありませんでした。しかし、アプリケーションの規模や範囲が大きくなると、アーキテクチャの決定がより大きな関心事になります。JavaScript で大規模なアプリケーションを作成するには、大きく分けて 2 つのアプローチがあります。_コンポジション_ と _継承_ です。どちらにも長所と短所がありますが、ゲームの文脈から説明してみましょう。
 
-✅ これまでに書かれたプログラミング本の中で最も有名なものの一つは、[デザインパターン](https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2))と関係があります。
+✅ これまでに書かれたプログラミング本の中で最も有名なものの一つは、[デザインパターン](<https://ja.wikipedia.org/wiki/%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3_(%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2)>)と関係があります。
 
 ゲームには `ゲームオブジェクト` があり、これは画面上に存在するオブジェクトです。つまり、それらは直交座標系上に位置しており、`x` と `y` の座標を持つことが特徴です。ゲームを開発していくうちに、すべてのゲームオブジェクトには、すべてのゲームに共通する標準的な特性があることに気づくでしょう。
 
@@ -19,7 +19,7 @@
 - **self-destructing** これらのオブジェクトは、削除のために自分自身を設定する前に、一定期間だけ存在します。通常、これは `dead` または `destroyed` ブール値で表され、このオブジェクトがレンダリングされなくなることをゲームエンジンに通知します
 - **cool-down** 「クールダウン」は、短命なオブジェクトの典型的なプロパティです。典型的な例としては、数ミリ秒しか見られない爆発のようなテキストやグラフィック効果があります。
 
-✅ パックマンのようなゲームについて考えてみましょう。このゲームでは、上に挙げた4つのオブジェクトの種類を特定できますか?
+✅ パックマンのようなゲームについて考えてみましょう。このゲームでは、上に挙げた 4 つのオブジェクトの種類を特定できますか?
 
 ### 行動の表現
 
@@ -34,7 +34,6 @@
 コードで表現すると、ゲームオブジェクトは通常このようになります。
 
 ```javascript
-
 //GameObject クラスを設定します。
 class GameObject {
   constructor(x, y, type) {
@@ -46,11 +45,11 @@ class GameObject {
 
 //このクラスは GameObject の固有のクラスプロパティを拡張します。
 class Movable extends GameObject {
-  constructor(x,y, type) {
-    super(x,y, type)
+  constructor(x, y, type) {
+    super(x, y, type);
   }
 
-//この移動可能なオブジェクトは、画面上で移動することができます。
+  //この移動可能なオブジェクトは、画面上で移動することができます。
   moveTo(x, y) {
     this.x = x;
     this.y = y;
@@ -59,21 +58,21 @@ class Movable extends GameObject {
 
 //これは Movable クラスを拡張した特定のクラスで、継承しているすべてのプロパティを利用することができます。
 class Hero extends Movable {
-  constructor(x,y) {
-    super(x,y, 'Hero')
+  constructor(x, y) {
+    super(x, y, "Hero");
   }
 }
 
 //一方、このクラスは GameObject のプロパティのみを継承しています。
 class Tree extends GameObject {
-  constructor(x,y) {
-    super(x,y, 'Tree')
+  constructor(x, y) {
+    super(x, y, "Tree");
   }
 }
 
 //hero は動くことができます
 const hero = new Hero();
-hero.moveTo(5,5);
+hero.moveTo(5, 5);
 
 //しかし木にはできません
 const tree = new Tree();
@@ -83,7 +82,7 @@ const tree = new Tree();
 
 **コンポジション**
 
-オブジェクトの継承を処理する別の方法として、*コンポジション* を使用する方法があります。すると、オブジェクトは次のように動作を表現します。
+オブジェクトの継承を処理する別の方法として、_コンポジション_ を使用する方法があります。すると、オブジェクトは次のように動作を表現します。
 
 ```javascript
 //定数の gameObject を作成する
@@ -125,7 +124,7 @@ function createStatic(x, y, type) {
 const hero = createHero(10,10);
 hero.moveTo(5,5);
 //そして、周りに立つだけの木を作ります
-const tree = createStatic(0,0, 'Tree'); 
+const tree = createStatic(0,0, 'Tree');
 ```
 
 **どのパターンを使えばいいのか？**
@@ -144,7 +143,7 @@ const tree = createStatic(0,0, 'Tree');
 
 - **message**: メッセージは通常、オプションのペイロード (メッセージの内容を明確にするデータ) を伴ったテキスト文字列です。ゲームにおける典型的なメッセージは `KEY_PRESSED_ENTER` です
 - **publisher**: この要素はメッセージを**発行し**、すべての購読者に送信します
-- **subscriber**: この要素は、特定のメッセージを *待ち受け*、このメッセージを受信した結果として、レーザーを発射するなどのタスクを実行します
+- **subscriber**: この要素は、特定のメッセージを _待ち受け_、このメッセージを受信した結果として、レーザーを発射するなどのタスクを実行します
 
 実装されているのはかなり小さいですが、かなり強力なパターンです。以下に実装方法を紹介します。
 
@@ -154,21 +153,20 @@ class EventEmitter {
   constructor() {
     this.listeners = {};
   }
-//メッセージを受信したときに、リスナーにそのペイロードを処理させます。
+  //メッセージを受信したときに、リスナーにそのペイロードを処理させます。
   on(message, listener) {
     if (!this.listeners[message]) {
       this.listeners[message] = [];
     }
     this.listeners[message].push(listener);
   }
-//メッセージを受信したときに、リスナーにそのペイロードを処理させます。
+  //メッセージを受信したときに、リスナーにそのペイロードを処理させます。
   emit(message, payload = null) {
     if (this.listeners[message]) {
-      this.listeners[message].forEach(l => l(message, payload))
+      this.listeners[message].forEach((l) => l(message, payload));
     }
   }
 }
-
 ```
 
 上記のコードを使用するために、非常に小さな実装を作成することができます。
@@ -176,21 +174,21 @@ class EventEmitter {
 ```javascript
 //メッセージ構造を設定します
 const Messages = {
-  HERO_MOVE_LEFT: 'HERO_MOVE_LEFT'
+  HERO_MOVE_LEFT: "HERO_MOVE_LEFT",
 };
 //上記で設定した EventEmitter を呼び出します。
 const eventEmitter = new EventEmitter();
 //hero を設定します。
-const hero = createHero(0,0);
+const hero = createHero(0, 0);
 //イベント送信者に hero が左に移動するメッセージを監視することを知らせ、それに基づいて行動するようにします。
 eventEmitter.on(Messages.HERO_MOVE_LEFT, () => {
-  hero.move(5,0);
+  hero.move(5, 0);
 });
 
 //keyup イベントをリッスンするためにウィンドウを設定し、具体的には左矢印がヒットした場合、hero を左に移動するためのメッセージを発します。
-window.addEventListener('keyup', (evt) => {
-  if (evt.key === 'ArrowLeft') {
-    eventEmitter.emit(Messages.HERO_MOVE_LEFT)
+window.addEventListener("keyup", (evt) => {
+  if (evt.key === "ArrowLeft") {
+    eventEmitter.emit(Messages.HERO_MOVE_LEFT);
   }
 });
 ```
@@ -199,7 +197,7 @@ window.addEventListener('keyup', (evt) => {
 
 ```javascript
 eventEmitter.on(Messages.HERO_MOVE_LEFT, () => {
-  hero.move(5,0);
+  hero.move(5, 0);
 });
 ```
 

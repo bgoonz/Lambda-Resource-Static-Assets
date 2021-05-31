@@ -6,6 +6,6 @@ Para comprender mejor cómo funcionan las colisiones, cree un juego muy pequeño
 
 ## Rúbrica
 
-| Criterios | Ejemplar | Adecuado | Necesita mejorar |
-| -------- | -------------------------------------------------- -------------------------------------------------- -------------------- | ------------------------------ | ----------------- |
-| | Se produce una muestra de código de trabajo completa, con elementos dibujados en el lienzo, ocurriendo una colisión básica y ocurriendo reacciones | El código está incompleto de alguna manera | Fallos del código |
+| Criterios | Ejemplar                                                                                                                                           | Adecuado                                   | Necesita mejorar  |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | ----------------- |
+|           | Se produce una muestra de código de trabajo completa, con elementos dibujados en el lienzo, ocurriendo una colisión básica y ocurriendo reacciones | El código está incompleto de alguna manera | Fallos del código |

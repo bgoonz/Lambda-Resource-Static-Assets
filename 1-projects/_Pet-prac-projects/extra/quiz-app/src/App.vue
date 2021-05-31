@@ -15,7 +15,6 @@
         <option>nl</option>
         <option>zh_cn</option>
         <option>zh_tw</option>
-
       </select>
     </nav>
     <div id="app">

@@ -1,12 +1,12 @@
 # Lecture IV: Heaps and Interview Questions
 
 a. [Binary Search Tree Solution](#Binary-Search-Tree)  
-b. [Review Heaps](#Review-Heaps)   
-c. [Practice Interview Questions](#Practice-Interview-Questions)     
+b. [Review Heaps](#Review-Heaps)  
+c. [Practice Interview Questions](#Practice-Interview-Questions)
 
 <br>
 
-[CS19 Lecture with Brian Doyle](https://youtu.be/qtB7wpLG84c)  
+[CS19 Lecture with Brian Doyle](https://youtu.be/qtB7wpLG84c)
 
 [Add on that gives VSCode windows unique color themes](https://marketplace.visualstudio.com/items?itemName=stuart.unique-window-colors)
 
@@ -77,8 +77,7 @@ else:
 
 <br>
 
-
-Next, let's work through `get_max`. 
+Next, let's work through `get_max`.
 
 We want to search the tree, holding onto a max value and updating it if a greater one is found. Our base case is an empty tree. We also know that the max value will be found down the right hand side, not the left, based on the greater than conventional architecture.
 
@@ -102,8 +101,7 @@ Otherwise, we keep searching down the right by calling get_max on the next right
 
 Our last function to write is the `for_each` method which should visit each node in the tree and run a callback function on it.
 
-We can continue writing this with recursion. 
-
+We can continue writing this with recursion.
 
 <br>
 
@@ -138,8 +136,7 @@ Visually, it makes more sense to "view" this as a tree (because of the parent-ch
 
 <br>
 
-[Here](https://www.cs.usfca.edu/~galles/visualization/Heap.html) and [here](http://btv.melezinek.cz/binary-heap.html) are heap visualiation websites.  
-
+[Here](https://www.cs.usfca.edu/~galles/visualization/Heap.html) and [here](http://btv.melezinek.cz/binary-heap.html) are heap visualiation websites.
 
 <br>
 
@@ -147,27 +144,27 @@ Inserting in a min heap means adding a node, then bubbling up through the array 
 
 In the array, the new node is being added to the end of the array, then it's finding the parent using [these equations](http://geeksquiz.com/binary-heap/).
 
-
 _Brian goes into depth about this around 40 minutes into the CS19 lecture._
 
 <br>
 
 Q: Why it is advantageous to replace the lowest leaf when popping off the root and then sift that child down. Why not swap the next largest child of that root after removing the root?
 
-A: Less comparisons to make by sifting the lowest down.  If we just move the 2nd largest up, then we have to check all of the children of each child to make sure the heap property is maintained.
+A: Less comparisons to make by sifting the lowest down. If we just move the 2nd largest up, then we have to check all of the children of each child to make sure the heap property is maintained.
 
 Heap Insert:
- - Add Item to end of tree
- -  Bubble it up to the right spot
+
+- Add Item to end of tree
+- Bubble it up to the right spot
 
 Heap delete:
- - Swap priority element with least priorty
- - Remove the last element (previously the root)
- -  Sift down new top to the correct spot
+
+- Swap priority element with least priorty
+- Remove the last element (previously the root)
+- Sift down new top to the correct spot
 
 <br>
 <br>
-
 
 ## Practice Interview Questions
 
@@ -179,12 +176,11 @@ Given a sorted array of distinct, non-negative integers, find the smallest missi
 
 Examples
 
-> Input: A = [0, 1, 2, 6, 9, 11, 15] Output: The smallest missing element is 3  
->  
-> Input: A = [1, 2, 3, 4, 6, 9, 11, 15] Output: The smallest missing element is 0  
->  
-> Input: A = [0, 1, 2, 3, 4, 5, 6] Output: The smallest missing element is 7  
-
+> Input: A = [0, 1, 2, 6, 9, 11, 15] Output: The smallest missing element is 3
+>
+> Input: A = [1, 2, 3, 4, 6, 9, 11, 15] Output: The smallest missing element is 0
+>
+> Input: A = [0, 1, 2, 3, 4, 5, 6] Output: The smallest missing element is 7
 
 <br>
 
@@ -205,7 +201,6 @@ for i in range(0, len(arr)):
 
 <br>
 
-
 Another method would be to use a version of binary search to find the earliest number where the index of the array does not match arr[i]. For example, if arr[0] is not 0, we know 0 is the earliest missing integer.
 
 This is optimized because it allows us to search through the array more quickly. If all of the checks pass, then we know that the earliest missing number is at the end of the array.
@@ -214,10 +209,9 @@ In an array like this:
 
 > [0, 1, 2, 3, 5, 6, 9]
 
-We know that the earliest missing is at arr[4] because arr[4] == 5 not 4. 
+We know that the earliest missing is at arr[4] because arr[4] == 5 not 4.
 
 <br>
-
 
 Our next problem is...
 
@@ -225,16 +219,15 @@ Our next problem is...
 
 Examples
 
-> Input: Four sorted lists of variable length  
->  
-> [10, 20, 30, 40], [15, 25, 35], [27, 29, 37, 48, 93], [32, 33]  
->  
-> Output: 10, 15, 20, 25, 27, 29, 30, 32, 33, 35, 37, 40, 48, 93 
+> Input: Four sorted lists of variable length
+>
+> [10, 20, 30, 40], [15, 25, 35], [27, 29, 37, 48, 93], [32, 33]
+>
+> Output: 10, 15, 20, 25, 27, 29, 30, 32, 33, 35, 37, 40, 48, 93
 
 <br>
 
 A way to handle this might be to use merge sort to iterate through the given arguments, and merge the arrays together, then print a final merged array.
-
 
 <br>
 
@@ -249,7 +242,7 @@ def merge(arrA, arrB):
         if len(arrA) == 0:
             merged_arr[i] = min(arrB)
             arrB.remove(min(arrB))
-        
+
         # If arrB is empty, use arrA to fill
         elif len(arrB) == 0:
             merged_arr[i] = min(arrA)
@@ -262,7 +255,7 @@ def merge(arrA, arrB):
         elif min(arrA) >= min(arrB):
             merged_arr[i] = min(arrB)
             arrB.remove(min(arrB))
-    
+
     return merged_arr
 
 def merge_arrays(*args):

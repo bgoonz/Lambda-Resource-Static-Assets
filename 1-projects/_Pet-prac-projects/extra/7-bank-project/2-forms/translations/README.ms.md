@@ -30,24 +30,24 @@ Elemen `<form>` merangkumi bahagian dokumen HTML di mana pengguna dapat memasukk
 Terdapat banyak [jenis yang berbeza](https://developer.mozilla.org/docs/Web/HTML/Element/input) dari `<input>`, misalnya untuk membuat bidang di mana pengguna boleh memasukkan nama penggunanya yang boleh anda gunakan:
 
 ```html
-<input id="username" name="username" type="text">
+<input id="username" name="username" type="text" />
 ```
 
 Atribut `name` akan digunakan sebagai nama harta ketika data borang akan dihantar. Atribut `id` digunakan untuk mengaitkan` <label>` dengan kawalan bentuk.
 
 > Lihat keseluruhan senarai [`<input>` types](https://developer.mozilla.org/docs/Web/HTML/Element/input) dan [kawalan bentuk lain](https://developer.mozilla.org/docs/Learn/Forms/Other_form_controls) untuk mendapatkan idea tentang semua elemen UI asli yang boleh anda gunakan semasa membina UI anda.
 
-✅ Perhatikan bahawa `<input>` adalah [elemen kosong](https://developer.mozilla.org/docs/Glossary/Empty_element) di mana anda seharusnya *tidak* menambahkan tag penutup yang sepadan. Anda bagaimanapun boleh menggunakan notasi `<input/>` tutup sendiri, tetapi tidak diperlukan.
+✅ Perhatikan bahawa `<input>` adalah [elemen kosong](https://developer.mozilla.org/docs/Glossary/Empty_element) di mana anda seharusnya _tidak_ menambahkan tag penutup yang sepadan. Anda bagaimanapun boleh menggunakan notasi `<input/>` tutup sendiri, tetapi tidak diperlukan.
 
 Elemen `<button>` dalam bentuk agak istimewa. Sekiranya anda tidak menentukan atribut `type`, ia akan secara automatik mengirimkan data borang ke pelayan ketika ditekan. Berikut adalah nilai `type` yang mungkin:
 
 - `submit`: Lalai dalam `<form>`, butang memicu tindakan pengiriman borang.
 - `reset`: Butang menetapkan semula semua kawalan bentuk ke nilai awalnya.
--  `button`: Jangan berikan tingkah laku lalai semasa butang ditekan. Anda kemudian dapat menetapkan tindakan khusus untuknya menggunakan JavaScript.
+- `button`: Jangan berikan tingkah laku lalai semasa butang ditekan. Anda kemudian dapat menetapkan tindakan khusus untuknya menggunakan JavaScript.
 
 ### Tugas
 
-Mari mulakan dengan menambahkan borang ke templat `login`. Kami memerlukan medan *nama pengguna* dan butang *Log masuk*.
+Mari mulakan dengan menambahkan borang ke templat `login`. Kami memerlukan medan _nama pengguna_ dan butang _Log masuk_.
 
 ```html
 <template id="login">
@@ -56,7 +56,7 @@ Mari mulakan dengan menambahkan borang ke templat `login`. Kami memerlukan medan
     <h2>Login</h2>
     <form id="loginForm">
       <label for="username">Username</label>
-      <input id="username" name="user" type="text">
+      <input id="username" name="user" type="text" />
       <button>Login</button>
     </form>
   </section>
@@ -73,17 +73,17 @@ Sekiranya anda melihat lebih dekat, anda dapat melihat bahawa kami juga menambah
 Sekarang kita akan menambah borang kedua untuk pendaftaran, tepat di bawah yang sebelumnya:
 
 ```html
-<hr/>
+<hr />
 <h2>Register</h2>
 <form id="registerForm">
   <label for="user">Username</label>
-  <input id="user" name="user" type="text">
+  <input id="user" name="user" type="text" />
   <label for="currency">Currency</label>
-  <input id="currency" name="currency" type="text" value="$">
+  <input id="currency" name="currency" type="text" value="$" />
   <label for="description">Description</label>
-  <input id="description" name="description" type="text">
+  <input id="description" name="description" type="text" />
   <label for="balance">Current balance</label>
-  <input id="balance" name="balance" type="number" value="0">
+  <input id="balance" name="balance" type="number" value="0" />
   <button>Register</button>
 </form>
 ```
@@ -95,13 +95,13 @@ Perhatikan juga bahawa input untuk `balance` mempunyai jenis `number`. Adakah ia
 
 ## Menyerahkan data ke pelayan
 
-Sekarang kita mempunyai UI yang berfungsi, langkah seterusnya adalah mengirim data ke pelayan kita. Mari buat ujian cepat menggunakan kod kami sekarang: apa yang berlaku jika anda mengklik butang *Login* atau *Register*?
+Sekarang kita mempunyai UI yang berfungsi, langkah seterusnya adalah mengirim data ke pelayan kita. Mari buat ujian cepat menggunakan kod kami sekarang: apa yang berlaku jika anda mengklik butang _Login_ atau _Register_?
 
 Adakah anda melihat perubahan pada bahagian URL penyemak imbas anda?
 
 ![Tangkapan skrin perubahan URL penyemak imbas setelah mengklik butang Daftar](../images/click-register.png)
 
-Tindakan lalai untuk `<form>` adalah menyerahkan borang ke URL pelayan semasa menggunakan [kaedah GET](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.3 ), menambahkan data borang terus ke URL. Kaedah ini mempunyai beberapa kekurangan walaupun:
+Tindakan lalai untuk `<form>` adalah menyerahkan borang ke URL pelayan semasa menggunakan [kaedah GET](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.3), menambahkan data borang terus ke URL. Kaedah ini mempunyai beberapa kekurangan walaupun:
 
 - Ukuran data yang dikirim sangat terhad (sekitar 2000 aksara)
 - Data dapat dilihat secara langsung di URL (tidak bagus untuk kata laluan)
@@ -116,10 +116,14 @@ Itulah sebabnya anda boleh mengubahnya untuk menggunakan [kaedah POST](https://w
 Tambahkan sifat `action` dan `method` ke borang pendaftaran:
 
 ```html
-<form id="registerForm" action="//localhost:5000/api/accounts" method="POST">
+<form
+  id="registerForm"
+  action="//localhost:5000/api/accounts"
+  method="POST"
+></form>
 ```
 
-Sekarang cuba daftarkan akaun baru dengan nama anda. Setelah mengklik butang * Daftar * anda akan melihat sesuatu seperti ini:
+Sekarang cuba daftarkan akaun baru dengan nama anda. Setelah mengklik butang _ Daftar _ anda akan melihat sesuatu seperti ini:
 
 ![Tetingkap penyemak imbas di alamat localhost:5000/api/akaun, menunjukkan rentetan JSON dengan data pengguna](../images/form-post.png)
 
@@ -142,14 +146,14 @@ Untuk mengirim data formulir ke pelayan tanpa memaksa muat ulang halaman, kita h
 Ganti borang tindakan `action` dengan:
 
 ```html
-<form id="registerForm" action="javascript:register()">
+<form id="registerForm" action="javascript:register()"></form>
 ```
 
 Buka `app.js` tambahkan fungsi baru bernama `register`:
 
 ```js
 function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const data = Object.fromEntries(formData);
   const jsonData = JSON.stringify(data);
@@ -163,14 +167,14 @@ Data kini siap dihantar ke pelayan. Buat fungsi baru bernama `createAccount`:
 ```js
 async function createAccount(account) {
   try {
-    const response = await fetch('//localhost:5000/api/accounts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: account
+    const response = await fetch("//localhost:5000/api/accounts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: account,
     });
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    return { error: error.message || "Unknown error" };
   }
 }
 ```
@@ -206,16 +210,16 @@ Akhirnya, mari kita tambahkan beberapa log untuk memeriksa hasilnya. Fungsi tera
 
 ```js
 async function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const jsonData = JSON.stringify(Object.fromEntries(formData));
   const result = await createAccount(jsonData);
 
   if (result.error) {
-    return console.log('An error occured:', result.error);
+    return console.log("An error occured:", result.error);
   }
 
-  console.log('Account created!', result);
+  console.log("Account created!", result);
 }
 ```
 
@@ -227,7 +231,7 @@ Itu agak lama tetapi kami sampai di sana! Sekiranya anda membuka [alat pembangun
 
 ## Pengesahan data
 
-Sekiranya anda cuba mendaftarkan akaun baru tanpa menetapkan nama pengguna terlebih dahulu, anda dapat melihat bahawa pelayan mengembalikan ralat dengan kod status [400 (Bad Request)](https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).).
+Sekiranya anda cuba mendaftarkan akaun baru tanpa menetapkan nama pengguna terlebih dahulu, anda dapat melihat bahawa pelayan mengembalikan ralat dengan kod status [400 (Bad Request)](<https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).>).
 
 Sebelum menghantar data ke pelayan, adalah amalan yang baik untuk [mengesahkan data borang](https://developer.mozilla.org/docs/Learn/Forms/Form_validation) terlebih dahulu apabila mungkin, untuk memastikan anda menghantar permintaan yang sah. Kawalan borang HTML5 memberikan pengesahan terbina dalam menggunakan pelbagai atribut:
 
@@ -245,10 +249,10 @@ Terdapat 2 medan yang diperlukan untuk membuat akaun baru yang sah, nama penggun
 
 ```html
 <label for="user">Username (required)</label>
-<input id="user" name="user" type="text" required>
+<input id="user" name="user" type="text" required />
 ...
 <label for="currency">Currency (required)</label>
-<input id="currency" name="currency" type="text" value="$" required>
+<input id="currency" name="currency" type="text" value="$" required />
 ```
 
 Walaupun pelaksanaan pelayan tertentu ini tidak memaksakan had khusus pada panjang maksimum medan, selalu menjadi amalan yang baik untuk menentukan had yang munasabah untuk setiap entri teks pengguna.
@@ -256,18 +260,25 @@ Walaupun pelaksanaan pelayan tertentu ini tidak memaksakan had khusus pada panja
 Tambahkan atribut `maxlength` ke medan teks:
 
 ```html
-<input id="user" name="user" type="text" maxlength="20" required>
+<input id="user" name="user" type="text" maxlength="20" required />
 ...
-<input id="currency" name="currency" type="text" value="$" maxlength="5" required>
+<input
+  id="currency"
+  name="currency"
+  type="text"
+  value="$"
+  maxlength="5"
+  required
+/>
 ...
-<input id="description" name="description" type="text" maxlength="100">
+<input id="description" name="description" type="text" maxlength="100" />
 ```
 
-Sekarang jika anda menekan butang *Daftar* dan medan tidak mematuhi peraturan pengesahan yang kami tetapkan, anda akan melihat sesuatu seperti ini:
+Sekarang jika anda menekan butang _Daftar_ dan medan tidak mematuhi peraturan pengesahan yang kami tetapkan, anda akan melihat sesuatu seperti ini:
 
 ![Tangkapan skrin menunjukkan ralat pengesahan semasa cuba menghantar borang](../images/validation-error.png)
 
-Pengesahan seperti ini dilakukan *sebelum* menghantar sebarang data ke pelayan dipanggil pengesahan **client-side**. Tetapi perhatikan bahawa tidak semestinya melakukan semua pemeriksaan tanpa menghantar data. Sebagai contoh, kami tidak dapat memeriksa di sini jika akaun sudah ada dengan nama pengguna yang sama tanpa menghantar permintaan ke pelayan. Pengesahan tambahan yang dilakukan di pelayan dipanggil pengesahan **server-side**.
+Pengesahan seperti ini dilakukan _sebelum_ menghantar sebarang data ke pelayan dipanggil pengesahan **client-side**. Tetapi perhatikan bahawa tidak semestinya melakukan semua pemeriksaan tanpa menghantar data. Sebagai contoh, kami tidak dapat memeriksa di sini jika akaun sudah ada dengan nama pengguna yang sama tanpa menghantar permintaan ke pelayan. Pengesahan tambahan yang dilakukan di pelayan dipanggil pengesahan **server-side**.
 
 Biasanya kedua-duanya perlu dilaksanakan, dan semasa menggunakan pengesahan sisi klien meningkatkan pengalaman pengguna dengan memberikan maklum balas segera kepada pengguna, pengesahan sisi pelayan sangat penting untuk memastikan data pengguna yang anda manipulasi adalah baik dan selamat.
 

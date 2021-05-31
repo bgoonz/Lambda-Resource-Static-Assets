@@ -4,7 +4,7 @@ Would you like to use this curriculum in your classroom? Please feel free!
 
 In fact, you can use it within GitHub itself by using GitHub Classroom.
 
-To do that, fork this repo. You are going to need to create a repo for each lesson, so you're going to need to extract each folder into a separate repo. That way, [GitHub Classroom](https://classroom.github.com/classrooms) can pick up each lesson separately. 
+To do that, fork this repo. You are going to need to create a repo for each lesson, so you're going to need to extract each folder into a separate repo. That way, [GitHub Classroom](https://classroom.github.com/classrooms) can pick up each lesson separately.
 
 These [full instructions](https://github.blog/2020-03-18-set-up-your-digital-classroom-with-github-classroom/) will give you an idea how to set up your classroom.
 

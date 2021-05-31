@@ -6,7 +6,7 @@
 
 ### Herencia y composición en el desarrollo de juegos
 
-En lecciones anteriores, no había mucha necesidad de preocuparse por la arquitectura de diseño de las aplicaciones que creó, ya que los proyectos tenían un alcance muy pequeño. Sin embargo, cuando sus aplicaciones crecen en tamaño y alcance, las decisiones de arquitectura se vuelven una preocupación mayor. Hay dos enfoques principales para crear aplicaciones más grandes en JavaScript: *composición* o *herencia*. Ambos tienen pros y contras, pero vamos a explicarlos desde el contexto de un juego.
+En lecciones anteriores, no había mucha necesidad de preocuparse por la arquitectura de diseño de las aplicaciones que creó, ya que los proyectos tenían un alcance muy pequeño. Sin embargo, cuando sus aplicaciones crecen en tamaño y alcance, las decisiones de arquitectura se vuelven una preocupación mayor. Hay dos enfoques principales para crear aplicaciones más grandes en JavaScript: _composición_ o _herencia_. Ambos tienen pros y contras, pero vamos a explicarlos desde el contexto de un juego.
 
 ✅ Uno de los libros de programación más famosos jamás escrito tiene que ver con [patrones de diseño](https://en.wikipedia.org/wiki/Design_Patterns).
 
@@ -32,7 +32,6 @@ La idea es usar `classes` junto con `inheritance` para lograr agregar un cierto 
 Expresado a través de código, un objeto de juego normalmente puede verse así:
 
 ```javascript
-
 //configurar la clase GameObject
 class GameObject {
   constructor(x, y, type) {
@@ -44,11 +43,11 @@ class GameObject {
 
 //esta clase extenderá las propiedades de clase inherentes del GameObject
 class Movable extends GameObject {
-  constructor(x,y, type) {
-    super(x,y, type)
+  constructor(x, y, type) {
+    super(x, y, type);
   }
 
-//este objeto móvil se puede mover en la pantalla
+  //este objeto móvil se puede mover en la pantalla
   moveTo(x, y) {
     this.x = x;
     this.y = y;
@@ -57,21 +56,21 @@ class Movable extends GameObject {
 
 //esta es una clase específica que extiende la clase Movable, por lo que puede aprovechar todas las propiedades que hereda
 class Hero extends Movable {
-  constructor(x,y) {
-    super(x,y, 'Hero')
+  constructor(x, y) {
+    super(x, y, "Hero");
   }
 }
 
 //esta clase, por otro lado, solo hereda las propiedades GameObject
 class Tree extends GameObject {
-  constructor(x,y) {
-    super(x,y, 'Tree')
+  constructor(x, y) {
+    super(x, y, "Tree");
   }
 }
 
 // un héroe puede moverse...
 const hero = new Hero();
-hero.moveTo(5,5);
+hero.moveTo(5, 5);
 
 //pero un árbol no puede
 const tree = new Tree();
@@ -81,8 +80,7 @@ const tree = new Tree();
 
 **Composición**
 
-Una forma diferente de manejar la herencia de objetos es usando *Composición*. Entonces, los objetos expresan su comportamiento así:
-
+Una forma diferente de manejar la herencia de objetos es usando _Composición_. Entonces, los objetos expresan su comportamiento así:
 
 ```javascript
 //crear un gameObject constante
@@ -124,7 +122,7 @@ function createStatic(x, y, type) {
 const hero = createHero(10,10);
 hero.moveTo(5,5);
 //y crea un árbol estático que solo se para alrededor
-const tree = createStatic(0,0, 'Tree'); 
+const tree = createStatic(0,0, 'Tree');
 ```
 
 **¿Qué patrón debo usar?**
@@ -142,11 +140,10 @@ Otro patrón común en el desarrollo de juegos aborda el problema de manejar la 
 Este patrón aborda la idea de que las distintas partes de su aplicación no deben conocerse entre sí. ¿Porqué es eso? Hace que sea mucho más fácil ver lo que sucede en general si se separan varias partes. También facilita el cambio repentino de comportamiento si es necesario. ¿Cómo logramos esto? Hacemos esto estableciendo algunos conceptos:
 
 - **message** (mensaje: un mensaje suele ser una cadena de texto acompañada de una carga útil opcional (un dato que aclara de qué se trata el mensaje). Un mensaje típico en un juego puede ser `KEY_PRESSED_ENTER`.
-- **publisher** (editor): este elemento *publica* un mensaje y lo envía a todos los suscriptores.
-- **subscriber** (suscriptor): Este elemento *escucha* mensajes específicos y realiza alguna tarea como resultado de recibir este mensaje, como disparar un láser.
+- **publisher** (editor): este elemento _publica_ un mensaje y lo envía a todos los suscriptores.
+- **subscriber** (suscriptor): Este elemento _escucha_ mensajes específicos y realiza alguna tarea como resultado de recibir este mensaje, como disparar un láser.
 
 La implementación es bastante pequeña pero es un patrón muy poderoso. Así es como se puede implementar:
-
 
 ```javascript
 //configurar una clase EventEmitter que contenga oyentes
@@ -154,21 +151,20 @@ class EventEmitter {
   constructor() {
     this.listeners = {};
   }
-//cuando se recibe un mensaje, deje que el oyente maneje su carga útil
+  //cuando se recibe un mensaje, deje que el oyente maneje su carga útil
   on(message, listener) {
     if (!this.listeners[message]) {
       this.listeners[message] = [];
     }
     this.listeners[message].push(listener);
   }
-//cuando se envía un mensaje, envíelo a un oyente con alguna carga útil
+  //cuando se envía un mensaje, envíelo a un oyente con alguna carga útil
   emit(message, payload = null) {
     if (this.listeners[message]) {
-      this.listeners[message].forEach(l => l(message, payload))
+      this.listeners[message].forEach((l) => l(message, payload));
     }
   }
 }
-
 ```
 
 Para usar el código anterior, podemos crear una implementación muy pequeña:
@@ -176,21 +172,21 @@ Para usar el código anterior, podemos crear una implementación muy pequeña:
 ```javascript
 //configurar una estructura de mensaje
 const Messages = {
-  HERO_MOVE_LEFT: 'HERO_MOVE_LEFT'
+  HERO_MOVE_LEFT: "HERO_MOVE_LEFT",
 };
 //invocar el eventEmitter que configuró anteriormente
 const eventEmitter = new EventEmitter();
 //configurar un héroe
-const hero = createHero(0,0);
+const hero = createHero(0, 0);
 //Informe al emisor de eventos que esté atento a los mensajes relacionados con el héroe que se mueve hacia la izquierda y actúe en consecuencia
 eventEmitter.on(Messages.HERO_MOVE_LEFT, () => {
-  hero.move(5,0);
+  hero.move(5, 0);
 });
 
 //configurar la ventana para escuchar el evento keyup, específicamente si se golpea la flecha izquierda, emite un mensaje para mover al héroe a la izquierda
-window.addEventListener('keyup', (evt) => {
-  if (evt.key === 'ArrowLeft') {
-    eventEmitter.emit(Messages.HERO_MOVE_LEFT)
+window.addEventListener("keyup", (evt) => {
+  if (evt.key === "ArrowLeft") {
+    eventEmitter.emit(Messages.HERO_MOVE_LEFT);
   }
 });
 ```
@@ -199,7 +195,7 @@ Arriba conectamos un evento de teclado, `ArrowLeft` y enviamos el mensaje `HERO_
 
 ```javascript
 eventEmitter.on(Messages.HERO_MOVE_LEFT, () => {
-  hero.move(5,0);
+  hero.move(5, 0);
 });
 ```
 

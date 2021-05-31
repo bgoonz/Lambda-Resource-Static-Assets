@@ -25,4 +25,3 @@ De structuur van de browserextensie werd beïnvloed door [de COVID-extensie van 
 Het concept achter het 'punt'-pictogramsysteem werd gesuggereerd door de pictogramstructuur van de [Energy Lollipop](https://energylollipop.com/) browserextensie voor Californische emissies.
 
 Deze lessen zijn geschreven met ♥ door [Jen Looper](https://www.twitter.com/jenlooper)
-

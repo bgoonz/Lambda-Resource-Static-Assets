@@ -1,6 +1,7 @@
 # Terrarium Project Part 3: DOM Manipulación y cierre
 
 ! [DOM y un cierre](/sketchnotes/webdev101-js.png)
+
 > Boceto de [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## [Pre-lecture prueba](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/19)
@@ -14,7 +15,6 @@ Además, esta lección presentará la idea de un [cierre de JavaScript](https://
 Usaremos un cierre para manipular el DOM.
 
 > Piense en el DOM como un árbol, que representa todas las formas en que se puede manipular un documento de página web. Se han escrito varias API (interfaces de programas de aplicación) para que los programadores, utilizando el lenguaje de programación de su elección, puedan acceder al DOM y editarlo, cambiarlo, reorganizarlo y administrarlo de otro modo.
-
 
 ![DOM tree representation](../images/dom-tree.png)
 
@@ -30,18 +30,17 @@ Debería tener el HTML y CSS para su terrario construido. Al final de esta lecci
 
 En su carpeta de terrario, cree un nuevo archivo llamado `script.js`. Importe ese archivo en la sección `<head>`:
 
-
 ```html
-	<script src="./script.js" defer></script>
+<script src="./script.js" defer></script>
 ```
 
 > Nota: use `defer` cuando importe un archivo JavaScript externo en el archivo html para permitir que JavaScript se ejecute solo después de que el archivo HTML se haya cargado por completo. También podría usar el atributo `async`, que permite que el script se ejecute mientras se analiza el archivo HTML, pero en nuestro caso, es importante tener los elementos HTML completamente disponibles para arrastrar antes de permitir que se ejecute el script de arrastre.
+
 ---
 
 ## 1. Los elementos DOM
 
 Lo primero que debe hacer es crear referencias a los elementos que desea manipular en el DOM. En nuestro caso, son las 14 plantas que esperan actualmente en las barras laterales.
-
 
 ### Tarea:
 
@@ -94,15 +93,14 @@ En este ejemplo, la función displayCandy rodea una función que inserta un nuev
 
 Debajo de las declaraciones de elementos en `script.js`, crea una función:
 
-
 ```javascript
 function dragElement(terrariumElement) {
-	//establecer 4 posiciones para posicionar en la pantalla
-	let pos1 = 0,
-		pos2 = 0,
-		pos3 = 0,
-		pos4 = 0;
-	terrariumElement.onpointerdown = pointerDrag;
+  //establecer 4 posiciones para posicionar en la pantalla
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  terrariumElement.onpointerdown = pointerDrag;
 }
 ```
 
@@ -118,14 +116,14 @@ Además, al terrariumElement que se pasa a esta función se le asigna un evento 
 
 El terrariumElement está listo para ser arrastrado; cuando se dispara el evento `onpointerdown`, se invoca la función `pointerDrag`. Agrega esa función justo debajo de esta línea: `terrariumElement.onpointerdown = pointerDrag;`:
 
-### Tarea: 
+### Tarea:
 
 ```javascript
 function pointerDrag(e) {
-	e.preventDefault();
-	console.log(e);
-	pos3 = e.clientX;
-	pos4 = e.clientY;
+  e.preventDefault();
+  console.log(e);
+  pos3 = e.clientX;
+  pos4 = e.clientY;
 }
 ```
 
@@ -142,9 +140,9 @@ A continuación, observe cómo las variables locales `pos3` y` pos4` se establec
 Complete la función inicial agregando dos manipulaciones de eventos de puntero más en `pos4 = e.clientY`:
 
 ```html
-document.onpointermove = elementDrag;
-document.onpointerup = stopElementDrag;
+document.onpointermove = elementDrag; document.onpointerup = stopElementDrag;
 ```
+
 Ahora está indicando que desea que la planta se arrastre junto con el puntero mientras la mueve, y que el gesto de arrastre se detenga cuando anule la selección de la planta. `Onpointermove` y `onpointerup` son partes de la misma API que `onpointerdown`. La interfaz arrojará errores ahora ya que aún no ha definido las funciones `elementDrag` y `stopElementDrag`, así que compárelas a continuación.
 
 ## 4. Las funciones elementDrag y stopElementDrag
@@ -157,15 +155,16 @@ Agrega la función `elementDrag` justo después del corchete de cierre de `point
 
 ```javascript
 function elementDrag(e) {
-	pos1 = pos3 - e.clientX;
-	pos2 = pos4 - e.clientY;
-	pos3 = e.clientX;
-	pos4 = e.clientY;
-	console.log(pos1, pos2, pos3, pos4);
-	terrariumElement.style.top = terrariumElement.offsetTop - pos2 + 'px';
-	terrariumElement.style.left = terrariumElement.offsetLeft - pos1 + 'px';
+  pos1 = pos3 - e.clientX;
+  pos2 = pos4 - e.clientY;
+  pos3 = e.clientX;
+  pos4 = e.clientY;
+  console.log(pos1, pos2, pos3, pos4);
+  terrariumElement.style.top = terrariumElement.offsetTop - pos2 + "px";
+  terrariumElement.style.left = terrariumElement.offsetLeft - pos1 + "px";
 }
 ```
+
 En esta función, usted edita mucho las posiciones iniciales 1-4 que establece como variables locales en la función externa. ¿Que está pasando aqui?
 
 A medida que arrastra, reasigna `pos1` haciéndolo igual a `pos3` (que configuró anteriormente como `e.clientX`) menos el valor actual de `e.clientX`. Realiza una operación similar a `pos2`. Luego, restablece `pos3` y `pos4` a las nuevas coordenadas X e Y del elemento. Puede ver estos cambios en la consola mientras arrastra. Luego, manipula el estilo CSS de la planta para establecer su nueva posición en función de las nuevas posiciones de `pos1` y` pos2`, calculando las coordenadas X e Y superior e izquierda de la planta en función de la comparación de su desplazamiento con estas nuevas posiciones.
@@ -180,8 +179,8 @@ La tarea final para completar la interfaz es agregar la función `closeElementDr
 
 ```javascript
 function stopElementDrag() {
-	document.onpointerup = null;
-	document.onpointermove = null;
+  document.onpointerup = null;
+  document.onpointermove = null;
 }
 ```
 
@@ -203,5 +202,4 @@ Esta pequeña función restablece los eventos `onpointerup` y `onpointermove` pa
 
 Si bien arrastrar elementos por la pantalla parece trivial, hay muchas formas de hacerlo y muchas trampas, según el efecto que busque. De hecho, hay una [API de arrastrar y soltar](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API) completa que puedes probar. No lo usamos en este módulo porque el efecto que queríamos era algo diferente, pero pruebe esta API en su propio proyecto y vea lo que puede lograr.
 
-** Tarea: [Trabajar un poco más con el DOM](assignment.es.md)
-
+\*\* Tarea: [Trabajar un poco más con el DOM](assignment.es.md)

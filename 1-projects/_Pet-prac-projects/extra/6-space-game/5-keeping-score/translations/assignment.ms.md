@@ -6,6 +6,6 @@ Buat permainan di mana anda menampilkan kehidupan dan mata dengan cara yang krea
 
 # Rubrik
 
-| Kriteria | Contoh              | Mencukupi                    | Usaha Lagi          |
-| -------- | ---------------------- | --------------------------- | -------------------------- |
+| Kriteria | Contoh                         | Mencukupi                              | Usaha Lagi                           |
+| -------- | ------------------------------ | -------------------------------------- | ------------------------------------ |
 |          | permainan penuh dipersembahkan | permainan dipersembahkan sebahagiannya | permainan separa mengandungi pepijat |

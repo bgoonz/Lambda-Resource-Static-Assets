@@ -1,6 +1,7 @@
 # 盆栽盒專案 Part 2： CSS 簡介
 
 ![CSS 簡介](/sketchnotes/webdev101-css.png)
+
 > 由 [Tomomi Imura](https://twitter.com/girlie_mac) 繪製
 
 ## 課前測驗
@@ -136,7 +137,7 @@ h1 {
 
 ```html
 <div class="plant-holder">
-	<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+  <img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
 </div>
 ```
 

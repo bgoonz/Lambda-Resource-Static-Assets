@@ -1,6 +1,7 @@
 # Projek Terrarium Bahagian 3: Memanipulasi DOM dan Penutupan
 
 ![DOM dan penutupan](/sketchnotes/webdev101-js.png)
+
 > Sketchnote karya [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Kuiz Pra Kuliah
@@ -34,10 +35,11 @@ Anda harus mempunyai HTML dan CSS untuk terarium anda. Pada akhir pelajaran ini,
 Dalam folder terarium anda, buat fail baru yang disebut `script.js`. Import fail itu di bahagian `<head>`:
 
 ```html
-	<script src="./script.js" defer></script>
+<script src="./script.js" defer></script>
 ```
 
 > Catatan: gunakan `defer` ketika mengimpor file JavaScript eksternal ke dalam file html sehingga memungkinkan JavaScript dijalankan hanya setelah file HTML dimuat sepenuhnya. Anda juga boleh menggunakan atribut `async`, yang membolehkan skrip dijalankan semasa fail HTML dihuraikan, tetapi dalam kes kami, penting untuk memiliki elemen HTML sepenuhnya tersedia untuk menyeret sebelum kami membiarkan skrip seret dijalankan.
+
 ---
 
 ## Elemen DOM
@@ -76,15 +78,15 @@ Sekarang anda sudah bersedia untuk membuat penutupan dragElement, yang merupakan
 Penutupan berguna apabila satu atau lebih fungsi perlu memasuki ruang lingkup fungsi luar. Inilah contohnya:
 
 ```javascript
-function displayCandy(){
-	let candy = ['jellybeans'];
-	function addCandy(candyType) {
-		candy.push(candyType)
-	}
-	addCandy('gumdrops');
+function displayCandy() {
+  let candy = ["jellybeans"];
+  function addCandy(candyType) {
+    candy.push(candyType);
+  }
+  addCandy("gumdrops");
 }
 displayCandy();
-console.log(candy)
+console.log(candy);
 ```
 
 Dalam contoh ini, fungsi displayCandy mengelilingi fungsi yang mendorong jenis permen baru ke dalam array yang sudah ada dalam fungsi tersebut. Sekiranya anda menjalankan kod ini, array `candy` tidak akan ditentukan, kerana ini adalah pemboleh ubah tempatan (tempatan hingga penutupan).
@@ -97,12 +99,12 @@ Di bawah deklarasi elemen dalam `script.js`, buat fungsi:
 
 ```javascript
 function dragElement(terrariumElement) {
-	//tetapkan 4 kedudukan untuk penentuan kedudukan di skrin
-	let pos1 = 0,
-		pos2 = 0,
-		pos3 = 0,
-		pos4 = 0;
-	terrariumElement.onpointerdown = pointerDrag;
+  //tetapkan 4 kedudukan untuk penentuan kedudukan di skrin
+  let pos1 = 0,
+    pos2 = 0,
+    pos3 = 0,
+    pos4 = 0;
+  terrariumElement.onpointerdown = pointerDrag;
 }
 ```
 
@@ -122,10 +124,10 @@ TerariumElement siap diseret; apabila peristiwa `onpointerdown` dipecat, fungsi 
 
 ```javascript
 function pointerDrag(e) {
-	e.preventDefault();
-	console.log(e);
-	pos3 = e.clientX;
-	pos4 = e.clientY;
+  e.preventDefault();
+  console.log(e);
+  pos3 = e.clientX;
+  pos4 = e.clientY;
 }
 ```
 
@@ -142,9 +144,9 @@ Seterusnya, perhatikan bagaimana pemboleh ubah tempatan `pos3` dan` pos4` diteta
 Selesaikan fungsi awal dengan menambahkan dua lagi manipulasi peristiwa penunjuk di bawah `pos4 = e.clientY`:
 
 ```html
-document.onpointermove = elementDrag;
-document.onpointerup = stopElementDrag;
+document.onpointermove = elementDrag; document.onpointerup = stopElementDrag;
 ```
+
 Sekarang anda menunjukkan bahawa anda mahu kilang diseret bersama-sama dengan penunjuk semasa anda menggerakkannya, dan agar gerakan seret berhenti ketika anda membatalkan pilihan kilang. `onpointermove` dan` onpointerup` adalah semua bahagian dari API yang sama dengan `onpointerdown`. Antaramuka akan membuang ralat sekarang kerana anda belum menentukan fungsi `elementDrag` dan` stopElementDrag`, jadi bina yang seterusnya.
 
 ## Fungsi elementDrag dan stopElementDrag
@@ -157,15 +159,16 @@ Tambahkan fungsi `elementDrag` tepat setelah pendakap keriting penutup` pointerD
 
 ```javascript
 function elementDrag(e) {
-	pos1 = pos3 - e.clientX;
-	pos2 = pos4 - e.clientY;
-	pos3 = e.clientX;
-	pos4 = e.clientY;
-	console.log(pos1, pos2, pos3, pos4);
-	terrariumElement.style.top = terrariumElement.offsetTop - pos2 + 'px';
-	terrariumElement.style.left = terrariumElement.offsetLeft - pos1 + 'px';
+  pos1 = pos3 - e.clientX;
+  pos2 = pos4 - e.clientY;
+  pos3 = e.clientX;
+  pos4 = e.clientY;
+  console.log(pos1, pos2, pos3, pos4);
+  terrariumElement.style.top = terrariumElement.offsetTop - pos2 + "px";
+  terrariumElement.style.left = terrariumElement.offsetLeft - pos1 + "px";
 }
 ```
+
 Dalam fungsi ini, anda melakukan banyak pengeditan pada posisi awal 1-4 yang anda tetapkan sebagai pemboleh ubah tempatan dalam fungsi luar. Apa yang berlaku di sini?
 
 Semasa anda menyeret, anda menetapkan semula `pos1` dengan menjadikannya sama dengan` pos3` (yang anda tetapkan lebih awal sebagai `e.clientX`) tolak nilai `e.clientX` semasa. Anda melakukan operasi yang serupa dengan `pos2`. Kemudian, anda menetapkan semula `pos3` dan `pos4` ke koordinat X dan Y elemen yang baru. Anda boleh melihat perubahan ini di konsol semasa anda menyeret. Kemudian, anda memanipulasi gaya css kilang untuk menetapkan kedudukan barunya berdasarkan kedudukan baru `pos1` dan` pos2`, mengira koordinat X dan Y bahagian atas dan kiri kilang berdasarkan membandingkan ofsetnya dengan kedudukan baru ini.
@@ -180,8 +183,8 @@ Tugas terakhir untuk melengkapkan antara muka adalah dengan menambahkan fungsi `
 
 ```javascript
 function stopElementDrag() {
-	document.onpointerup = null;
-	document.onpointermove = null;
+  document.onpointerup = null;
+  document.onpointermove = null;
 }
 ```
 

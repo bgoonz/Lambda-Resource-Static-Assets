@@ -6,6 +6,6 @@ Bekijk uw huidige /app.js-bestand in uw gamemap en zoek manieren om er commentaa
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                                                          | Voldoende                              | Moet worden verbeterd                                              |
-| -------- | ------------------------------------------------------------------ | ------------------------------------- | -------------------------------------------------------------- |
+| Criteria | Voorbeeldig                                                                     | Voldoende                                   | Moet worden verbeterd                                                           |
+| -------- | ------------------------------------------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------------------------- |
 |          | `app.js` code is volledig becommentarieerd en georganiseerd in logische blokken | `app.js` code is voldoende becommentarieerd | De code `app.js` is enigszins ongeorganiseerd en er ontbreken goede commentaren |

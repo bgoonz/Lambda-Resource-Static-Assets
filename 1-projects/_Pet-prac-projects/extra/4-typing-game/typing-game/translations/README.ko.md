@@ -31,9 +31,9 @@ JavaScript에서 이벤트가 작동하는 게임을 만들 것입니다. 이 �
 
 - 플레이어가 시작 버튼을 누르면 입력할 인용문이 표시됩니다
 - 플레이어는 텍스트박스에 빨리 인용문을 입력합니다
-   - 각 단어가 완성되면, 다음 단어가 강조됩니다
-   - 플레이어가 오타를 낸 경우에는, 텍스트박스가 빨간색으로 갱신됩니다
-   - 플레이어가 인용문을 완료하면, 경과된 시간과 함께 성공 메시지가 출력됩니다
+  - 각 단어가 완성되면, 다음 단어가 강조됩니다
+  - 플레이어가 오타를 낸 경우에는, 텍스트박스가 빨간색으로 갱신됩니다
+  - 플레이어가 인용문을 완료하면, 경과된 시간과 함께 성공 메시지가 출력됩니다
 
 게임을 제작하고, 이벤트에 대하여 배우겠습니다!
 
@@ -78,21 +78,28 @@ code .
 ```html
 <!-- inside index.html -->
 <html>
-<head>
-  <title>Typing game</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Typing game!</h1>
-  <p>Practice your typing skills with a quote from Sherlock Holmes. Click **start** to begin!</p>
-  <p id="quote"></p> <!-- This will display our quote -->
-  <p id="message"></p> <!-- This will display any status messages -->
-  <div>
-    <input type="text" aria-label="current word" id="typed-value" /> <!-- The textbox for typing -->
-    <button type="button" id="start">Start</button> <!-- To start the game -->
-  </div>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <title>Typing game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Typing game!</h1>
+    <p>
+      Practice your typing skills with a quote from Sherlock Holmes. Click
+      **start** to begin!
+    </p>
+    <p id="quote"></p>
+    <!-- This will display our quote -->
+    <p id="message"></p>
+    <!-- This will display any status messages -->
+    <div>
+      <input type="text" aria-label="current word" id="typed-value" />
+      <!-- The textbox for typing -->
+      <button type="button" id="start">Start</button>
+      <!-- To start the game -->
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
 ```
 
@@ -101,11 +108,11 @@ code .
 어떻게 될 지 자주 보면서 개발하는 것이 가장 좋습니다. 애플리케이션을 시작합니다. 로컬로 애플리케이션을 호스팅하고 저장할 때마다 브라우저를 새로 고칠 [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)라는 멋진 Visual Studio Code 확장이 있습니다.
 
 - 링크 따라 **Install** 클릭하여 [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)를 설치합니다
-   - 브라우저에서 Visual Studio Code를 열면, Visual Studio Code에서 설치를 수행하라는 메시지가 출력됩니다
-   - 메시지가 출력되면 Visual Studio Code를 다시 시작합니다
+  - 브라우저에서 Visual Studio Code를 열면, Visual Studio Code에서 설치를 수행하라는 메시지가 출력됩니다
+  - 메시지가 출력되면 Visual Studio Code를 다시 시작합니다
 - 설치되면, Visual Studio Code에서, Ctl-Shift-P (혹은 Cmd-Shift-P)를 클릭하여 command pallate을 엽니다
 - **Live Server: Open with Live Server**를 입력합니다
-   - Live Server가 애플리케이션 호스팅을 시작합니다
+  - Live Server가 애플리케이션 호스팅을 시작합니다
 - 브라우저를 열고 **https://localhost:5500**으로 이동합니다
 - 이제 만들었던 페이지를 볼 수 있습니다!
 
@@ -164,13 +171,13 @@ UI 요소에 대한 참조도 필요합니다:
 // inside script.js
 // all of our quotes
 const quotes = [
-    'When you have eliminated the impossible, whatever remains, however improbable, must be the truth.',
-    'There is nothing more deceptive than an obvious fact.',
-    'I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.',
-    'I never make exceptions. An exception disproves the rule.',
-    'What one man can invent another can discover.',
-    'Nothing clears up a case so much as stating it to another person.',
-    'Education never ends, Watson. It is a series of lessons, with the greatest for the last.',
+  "When you have eliminated the impossible, whatever remains, however improbable, must be the truth.",
+  "There is nothing more deceptive than an obvious fact.",
+  "I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.",
+  "I never make exceptions. An exception disproves the rule.",
+  "What one man can invent another can discover.",
+  "Nothing clears up a case so much as stating it to another person.",
+  "Education never ends, Watson. It is a series of lessons, with the greatest for the last.",
 ];
 // store the list of words and the index of the word the player is currently typing
 let words = [];
@@ -178,9 +185,9 @@ let wordIndex = 0;
 // the starting time
 let startTime = Date.now();
 // page elements
-const quoteElement = document.getElementById('quote');
-const messageElement = document.getElementById('message');
-const typedValueElement = document.getElementById('typed-value');
+const quoteElement = document.getElementById("quote");
+const messageElement = document.getElementById("message");
+const typedValueElement = document.getElementById("typed-value");
 ```
 
 ✅ 계속 게임에 더 많은 인용문을 추가합니다
@@ -201,28 +208,30 @@ const typedValueElement = document.getElementById('typed-value');
 
 ```javascript
 // at the end of script.js
-document.getElementById('start').addEventListener('click', () => {
+document.getElementById("start").addEventListener("click", () => {
   // get a quote
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
   // Put the quote into an array of words
-  words = quote.split(' ');
+  words = quote.split(" ");
   // reset the word index for tracking
   wordIndex = 0;
 
   // UI updates
   // Create an array of span elements so we can set a class
-  const spanWords = words.map(function(word) { return `<span>${word} </span>`});
+  const spanWords = words.map(function (word) {
+    return `<span>${word} </span>`;
+  });
   // Convert into string and set as innerHTML on quote display
-  quoteElement.innerHTML = spanWords.join('');
+  quoteElement.innerHTML = spanWords.join("");
   // Highlight the first word
-  quoteElement.childNodes[0].className = 'highlight';
+  quoteElement.childNodes[0].className = "highlight";
   // Clear any prior messages
-  messageElement.innerText = '';
+  messageElement.innerText = "";
 
   // Setup the textbox
   // Clear the textbox
-  typedValueElement.value = '';
+  typedValueElement.value = "";
   // set focus
   typedValueElement.focus();
   // set the event handler
@@ -256,7 +265,7 @@ document.getElementById('start').addEventListener('click', () => {
 
 ```javascript
 // at the end of script.js
-typedValueElement.addEventListener('input', () => {
+typedValueElement.addEventListener("input", () => {
   // Get the current word
   const currentWord = words[wordIndex];
   // get the current value
@@ -266,27 +275,29 @@ typedValueElement.addEventListener('input', () => {
     // end of sentence
     // Display success
     const elapsedTime = new Date().getTime() - startTime;
-    const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
+    const message = `CONGRATULATIONS! You finished in ${
+      elapsedTime / 1000
+    } seconds.`;
     messageElement.innerText = message;
-  } else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
+  } else if (typedValue.endsWith(" ") && typedValue.trim() === currentWord) {
     // end of word
     // clear the typedValueElement for the new word
-    typedValueElement.value = '';
+    typedValueElement.value = "";
     // move to the next word
     wordIndex++;
     // reset the class name for all elements in quote
     for (const wordElement of quoteElement.childNodes) {
-      wordElement.className = '';
+      wordElement.className = "";
     }
     // highlight the new word
-    quoteElement.childNodes[wordIndex].className = 'highlight';
+    quoteElement.childNodes[wordIndex].className = "highlight";
   } else if (currentWord.startsWith(typedValue)) {
     // currently correct
     // highlight the next word
-    typedValueElement.className = '';
+    typedValueElement.className = "";
   } else {
     // error state
-    typedValueElement.className = 'error';
+    typedValueElement.className = "error";
   }
 });
 ```
@@ -331,7 +342,7 @@ typedValueElement.addEventListener('input', () => {
 
 ## 리뷰 & 자기주도 학습
 
-웹 브라우저를 통해 [all the events available]((https://developer.mozilla.org/docs/Web/Events)) to the developer를 읽고, 각 이벤트를 사용할 시나리오를 고려합니다.
+웹 브라우저를 통해 [all the events available](<(https://developer.mozilla.org/docs/Web/Events)>) to the developer를 읽고, 각 이벤트를 사용할 시나리오를 고려합니다.
 
 ## 과제
 

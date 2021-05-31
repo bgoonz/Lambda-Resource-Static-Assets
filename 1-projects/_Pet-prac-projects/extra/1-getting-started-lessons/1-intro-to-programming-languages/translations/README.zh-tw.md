@@ -3,9 +3,11 @@
 這堂課程解釋程式語言的基礎。這項主題能應用到當代多數的程式語言。關於必備工具的部分，你會學到許多實用的開發者軟體。
 
 ![關於程式語言](/sketchnotes/webdev101-programming.png)
+
 > 由[Tomomi Imura](https://twitter.com/girlie_mac) 繪製。
 
 ## 課前測驗
+
 [課前測驗](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/1?loc=zh_tw)
 
 ## 大綱
@@ -19,7 +21,7 @@
 
 ## 什麼是程式設計?
 
-程式設計，又稱作Coding，是編寫電腦或手機裝置的指令過程。我們以裝置看得懂的程式語言來編寫這些指令，這些指令集涉及到常見的*程式*、*電腦程式*、*應用程式(App)*或*執行檔*。
+程式設計，又稱作 Coding，是編寫電腦或手機裝置的指令過程。我們以裝置看得懂的程式語言來編寫這些指令，這些指令集涉及到常見的*程式*、_電腦程式_、*應用程式(App)*或*執行檔*。
 
 一個*程式*以程式碼任意創作出來，網頁、遊戲、手機應用都是程式的一種。雖然我們可以在不編寫程式碼的情況下建出程式，但裝置底下的邏輯概念還是以程式碼為主。一個*執行中*、*執行編碼*的程式都是仰賴著指令。你眼前正閱讀的文字就是由程式輸出到螢幕。
 
@@ -31,19 +33,21 @@
 
 程式語言有不同的格式與滿足的目的。舉例來說，JavaScript 常被用在網頁應用上，而 Bash 主要是用在作業系統上。
 
-*低階語言(Low level languages)* 通常比 *高階語言(high level languages)* 要求更少的裝置指示步數。然而，高階語言的閱讀性與支援性讓它成為最普及的程式語言。JavaScript 即是一種高階語言。
+_低階語言(Low level languages)_ 通常比 _高階語言(high level languages)_ 要求更少的裝置指示步數。然而，高階語言的閱讀性與支援性讓它成為最普及的程式語言。JavaScript 即是一種高階語言。
 
 下列程式碼說明高階語言(JavaScript)與低階語言(ARM assembly code)的差異：
 
 ```javascript
-let number = 10
-let n1 = 0, n2 = 1, nextTerm;
+let number = 10;
+let n1 = 0,
+  n2 = 1,
+  nextTerm;
 
 for (let i = 1; i <= number; i++) {
-    console.log(n1);
-    nextTerm = n1 + n2;
-    n1 = n2;
-    n2 = nextTerm;
+  console.log(n1);
+  nextTerm = n1 + n2;
+  n1 = n2;
+  n2 = nextTerm;
 }
 ```
 
@@ -72,7 +76,7 @@ back add r0,r1
  end
 ```
 
-事實上，*他們都做一樣的事情* ── 印出前十項費氏數列。
+事實上，_他們都做一樣的事情_ ── 印出前十項費氏數列。
 
 ✅ 費氏數列的[定義](https://zh.wikipedia.org/zh-tw/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97)為該數是由之前的兩數相加而得出。初始值為 0 與 1。
 
@@ -100,10 +104,10 @@ back add r0,r1
 
 還有許多原因讓開發者選擇文字編輯器：
 
-- *偵錯(Debugging)* 在程式碼中一行一行地找尋錯誤。有些文字編輯器有偵錯的功能，可以依照不同的程式語言而調整。
-- *語法突顯(Syntax highlighting)* 將程式碼加上顏色並自動排版，方便開發者閱讀。文字編輯器也支援語法突顯的客製化。
-- *整合擴充插件(Extensions and Integrations)* 擴充插件不包含在預設的文字編輯器當中，開發者依照自己的需求建立並新增到文字編輯器當中。舉例來說，許多開發者需要統整程式文檔並註解這些檔案，他們就會加裝檢查拼字的插件。有些插件功能只支援特定的文字編輯器，文字編輯器也提供搜尋擴充插件的功能。
-- *客製化(Customization)* 大多數的文字編輯器都允許開發者做客製化，開發者依照自己的習慣，建立自己順手的開發環境。其中也包含建立自己的擴充插件。
+- _偵錯(Debugging)_ 在程式碼中一行一行地找尋錯誤。有些文字編輯器有偵錯的功能，可以依照不同的程式語言而調整。
+- _語法突顯(Syntax highlighting)_ 將程式碼加上顏色並自動排版，方便開發者閱讀。文字編輯器也支援語法突顯的客製化。
+- _整合擴充插件(Extensions and Integrations)_ 擴充插件不包含在預設的文字編輯器當中，開發者依照自己的需求建立並新增到文字編輯器當中。舉例來說，許多開發者需要統整程式文檔並註解這些檔案，他們就會加裝檢查拼字的插件。有些插件功能只支援特定的文字編輯器，文字編輯器也提供搜尋擴充插件的功能。
+- _客製化(Customization)_ 大多數的文字編輯器都允許開發者做客製化，開發者依照自己的習慣，建立自己順手的開發環境。其中也包含建立自己的擴充插件。
 
 #### 常見文字編輯器與網頁開發插件
 
@@ -136,7 +140,7 @@ back add r0,r1
 
 指令選項(Command Line Options)會依不同的作業系統而有所不同。
 
-*💻 表示預設已安裝在作業系統上。*
+_💻 表示預設已安裝在作業系統上。_
 
 #### Windows
 
@@ -144,7 +148,7 @@ back add r0,r1
 - [Command Line](https://docs.microsoft.com/windows-server/administration/windows-commands/windows-commands?WT.mc_id=academic-13441-cxa) (又稱作 CMD) 💻
 - [Windows Terminal](https://docs.microsoft.com/windows/terminal/?WT.mc_id=academic-13441-cxa)
 - [mintty](https://mintty.github.io/)
-  
+
 #### MacOS
 
 - [Terminal](https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac) 💻
@@ -181,6 +185,7 @@ back add r0,r1
 比較不同的程式語言： JavaScript 與 Java 間有什麼獨特的特徵? 那 COBOL 與 Go 呢?
 
 ## 課後測驗
+
 [課後測驗](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/2?loc=zh_tw)
 
 ## 複習與自學
@@ -190,4 +195,3 @@ back add r0,r1
 ## 作業
 
 [閱讀技術文件](assignment.zh-tw.md)
-

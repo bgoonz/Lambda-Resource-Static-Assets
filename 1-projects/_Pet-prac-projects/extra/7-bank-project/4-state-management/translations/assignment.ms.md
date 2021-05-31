@@ -20,6 +20,6 @@ Inilah hasil contoh setelah menyelesaikan tugasan:
 
 ## Rubrik
 
-| Kriteria | Contoh                                                                                        | Mencukupi                                                                                                                | Usaha Lagi                          |
-| -------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- | --------------------------------------------|
+| Kriteria | Contoh                                                                                                  | Mencukupi                                                                                                                                  | Usaha Lagi                                       |
+| -------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------ |
 |          | Menambah transaksi dilaksanakan sepenuhnya mengikuti semua amalan terbaik yang dilihat dalam pelajaran. | Menambah urus niaga dilaksanakan, tetapi tidak mengikuti amalan terbaik yang dapat dilihat dalam pelajaran, atau hanya bekerja sebahagian. | Menambah urus niaga tidak berfungsi sama sekali. |

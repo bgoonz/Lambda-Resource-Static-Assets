@@ -1,6 +1,7 @@
 # ブラウザ拡張機能プロジェクト その 1: ブラウザのすべて
 
 ![Browser sketchnote](/sketchnotes/browser.jpg)
+
 > Sketchnote by [Wassim Chegham](https://dev.to/wassimchegham/ever-wondered-what-happens-when-you-type-in-a-url-in-an-address-bar-in-a-browser-3dob)
 
 ## レッスン前の小テスト
@@ -17,9 +18,10 @@
 
 しかし、ブラウザとは正確には何でしょうか? それは、エンドユーザーがサーバーからコンテンツにアクセスして Web ページに表示することを可能にするソフトウェアアプリケーションです。
 
-✅ 少し歴史を紹介します: 最初のブラウザは 'WorldWideWeb' と呼ばれ、1990年にティモシー・バーナーズ・リー卿によって作成されました。
+✅ 少し歴史を紹介します: 最初のブラウザは 'WorldWideWeb' と呼ばれ、1990 年にティモシー・バーナーズ・リー卿によって作成されました。
 
 ![early browsers](../images/earlybrowsers.jpg)
+
 > いくつかの初期のブラウザは、[Karen McGrane](https://www.slideshare.net/KMcGrane/week-4-ixd-history-personal-computing) を経由しています。
 
 ユーザーが URL (Uniform Resource Locator) アドレスを使用してインターネットに接続すると、通常は Hypertext Transfer Protocol を使用して `http` または `https` アドレスを経由して、ブラウザが Web サーバと通信して Web ページを取得します。
@@ -73,22 +75,22 @@
 コードベースに目を通してみてください。
 
 dist
-    -|manifest.json (ここに設定されているデフォルト)
-    -|index.html (フロントエンド HTML マークアップはこちら)
-    -|background.js (バックグラウンド JS はこちら)
-    -|main.js (ビルド JS)
+-|manifest.json (ここに設定されているデフォルト)
+-|index.html (フロントエンド HTML マークアップはこちら)
+-|background.js (バックグラウンド JS はこちら)
+-|main.js (ビルド JS)
 src
-    -|index.js (あなたのJSコードはここにあります)
+-|index.js (あなたの JS コードはここにあります)
 
 ✅ API キーとリージョンコードが手元にあれば、後で使うときのためにノートのどこかに保存しておきましょう。
 
 ### 拡張機能の HTML を構築する
 
-この拡張機能には2つのビューがあります。1つは API キーとリージョンコードを収集するためのものです。
+この拡張機能には 2 つのビューがあります。1 つは API キーとリージョンコードを収集するためのものです。
 
 ![完成した拡張機能をブラウザで開いて、リージョン名と API キーを入力したフォームを表示したときのスクリーンショットです。](../images/1.png)
 
-そして2つ目は、地域の炭素使用量を表示するためのものです。
+そして 2 つ目は、地域の炭素使用量を表示するためのものです。
 
 ![完成した拡張機能のスクリーンショットは、US-NEISO 地域の炭素使用量と化石燃料の割合の値を表示しています。](../images/2.png)
 
@@ -110,8 +112,9 @@ src
 		<input type="text" id="api" required class="api-key" />
 	</div>
 	<button class="search-btn">Submit</button>
-</form>	
+</form>
 ```
+
 これは、保存した情報を入力し、ローカルストレージに保存するフォームです。
 
 次に、結果領域を作成します。最終的なフォームタグの下に、いくつかの div を追加します。
@@ -129,6 +132,7 @@ src
 	<button class="clear-btn">Change region</button>
 </div>
 ```
+
 この時点で、ビルドを試してみましょう。この拡張モジュールのパッケージの依存関係を必ずインストールしてください。
 
 ```
@@ -161,7 +165,6 @@ npm install
 
 [ティム・バーナーズ・リーのインタビュー](https://www.theguardian.com/technology/2019/mar/12/tim-berners-lee-on-30-years-of-the-web-if-we-dream-a-little-we-can-get-the-web-we-want)
 
-## 課題 
+## 課題
 
 [拡張機能のスタイル変更](assignment.ja.md)
-

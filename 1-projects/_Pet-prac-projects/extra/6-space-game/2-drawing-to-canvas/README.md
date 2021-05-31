@@ -27,6 +27,7 @@ Above we are setting the `id`, `width` and `height`.
 The Canvas is using a cartesian coordinate system to draw things. Thus it uses an x-axis and y-axis to express where something is located. The location `0,0` is the top left position and the bottom right is what you said to be the WIDTH and HEIGHT of the canvas.
 
 ![the canvas's grid](canvas_grid.png)
+
 > Image from [MDN](https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes)
 
 To draw on the canvas element you will need to go through the following steps:
@@ -46,10 +47,10 @@ canvas = document.getElementById("myCanvas");
 ctx = canvas.getContext("2d");
 
 //3. fill it with the color red
-ctx.fillStyle = 'red';
+ctx.fillStyle = "red";
 
 //4. and draw a rectangle with these parameters, setting location and size
-ctx.fillRect(0,0, 200, 200) // x,y,width, height
+ctx.fillRect(0, 0, 200, 200); // x,y,width, height
 ```
 
 ✅ The Canvas API mostly focuses on 2D shapes, but you can also draw 3D elements to a web site; for this, you might use the [WebGL API](https://developer.mozilla.org/docs/Web/API/WebGL_API).
@@ -70,10 +71,10 @@ You load an image asset by creating an `Image` object and set its `src` property
 
 ```javascript
 const img = new Image();
-img.src = 'path/to/my/image.png';
+img.src = "path/to/my/image.png";
 img.onload = () => {
   // image loaded and ready to be used
-}
+};
 ```
 
 ### Load asset pattern
@@ -88,30 +89,29 @@ function loadAsset(path) {
     img.onload = () => {
       // image loaded and ready to be used
       resolve(img);
-    }
-  })
+    };
+  });
 }
 
 // use like so
 
 async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
+  const heroImg = await loadAsset("hero.png");
+  const monsterImg = await loadAsset("monster.png");
 }
-
 ```
 
 To draw game assets to a screen, your code would look like this:
 
 ```javascript
 async function run() {
-  const heroImg = await loadAsset('hero.png')
-  const monsterImg = await loadAsset('monster.png')
+  const heroImg = await loadAsset("hero.png");
+  const monsterImg = await loadAsset("monster.png");
 
   canvas = document.getElementById("myCanvas");
   ctx = canvas.getContext("2d");
-  ctx.drawImage(heroImg, canvas.width/2,canvas.height/2);
-  ctx.drawImage(monsterImg, 0,0);
+  ctx.drawImage(heroImg, canvas.width / 2, canvas.height / 2);
+  ctx.drawImage(monsterImg, 0, 0);
 }
 ```
 
@@ -123,11 +123,11 @@ You will build a web page with a Canvas element. It should render a black screen
 
 - Hero ship
 
-   ![Hero ship](solution/assets/player.png)
+  ![Hero ship](solution/assets/player.png)
 
-- 5*5 monster
+- 5\*5 monster
 
-   ![Monster ship](solution/assets/enemyShip.png)
+  ![Monster ship](solution/assets/enemyShip.png)
 
 ### Recommended steps to start development
 
@@ -164,28 +164,29 @@ Add the needed code to `your-work/app.js` to solve the below
 2. **Load** textures
    > tip: add the player and enemy images using `await loadTexture` and passing in the image path. You won't see them on the screen yet!
 3. **Draw** hero in the center of the screen in the bottom half
-   > tip: use the `drawImage` API to draw heroImg to the screen, setting  `canvas.width / 2 - 45` and `canvas.height - canvas.height / 4)`;
-4. **Draw** 5*5 monsters
+   > tip: use the `drawImage` API to draw heroImg to the screen, setting `canvas.width / 2 - 45` and `canvas.height - canvas.height / 4)`;
+4. **Draw** 5\*5 monsters
+
    > tip: Now you can uncomment the code to draw enemies on the screen. Next, go to the `createEnemies` function and build it out.
 
    First, set up some constants:
 
-    ```javascript
-    const MONSTER_TOTAL = 5;
-    const MONSTER_WIDTH = MONSTER_TOTAL * 98;
-    const START_X = (canvas.width - MONSTER_WIDTH) / 2;
-    const STOP_X = START_X + MONSTER_WIDTH;
-    ```
+   ```javascript
+   const MONSTER_TOTAL = 5;
+   const MONSTER_WIDTH = MONSTER_TOTAL * 98;
+   const START_X = (canvas.width - MONSTER_WIDTH) / 2;
+   const STOP_X = START_X + MONSTER_WIDTH;
+   ```
 
-    then, create a loop to draw the array of monsters onto the screen:
+   then, create a loop to draw the array of monsters onto the screen:
 
-    ```javascript
-    for (let x = START_X; x < STOP_X; x += 98) {
-        for (let y = 0; y < 50 * 5; y += 50) {
-          ctx.drawImage(enemyImg, x, y);
-        }
-      }
-    ```
+   ```javascript
+   for (let x = START_X; x < STOP_X; x += 98) {
+     for (let y = 0; y < 50 * 5; y += 50) {
+       ctx.drawImage(enemyImg, x, y);
+     }
+   }
+   ```
 
 ## Result
 

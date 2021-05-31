@@ -6,13 +6,13 @@
 
 ### Introduzione
 
-In quasi tutte le moderne app web, si può  creare un account per avere il proprio spazio privato. Poiché più utenti possono accedere a un'app web contemporaneamente, è necessario un meccanismo per archiviare i dati personali di ciascun utente separatamente e selezionare le informazioni da visualizzare. Non verrà trattato come gestire [l'identità dell'utente in modo sicuro](https://it.wikipedia.org/wiki/Autenticazione) poiché si tratta di un argomento ampio di per sé, ma ci si assicurerà che ogni utente sia in grado di creare uno (o più) conto bancario nella app.
+In quasi tutte le moderne app web, si può creare un account per avere il proprio spazio privato. Poiché più utenti possono accedere a un'app web contemporaneamente, è necessario un meccanismo per archiviare i dati personali di ciascun utente separatamente e selezionare le informazioni da visualizzare. Non verrà trattato come gestire [l'identità dell'utente in modo sicuro](https://it.wikipedia.org/wiki/Autenticazione) poiché si tratta di un argomento ampio di per sé, ma ci si assicurerà che ogni utente sia in grado di creare uno (o più) conto bancario nella app.
 
 In questa parte si utilizzeranno form HTML per aggiungere login e registrazione all'app. Si vedrà come inviare i dati a un'API del server a livello di programmazione e, infine, come definire le regole di convalida di base per gli input dell'utente.
 
 ### Prerequisito
 
-È necessario aver completato i [modelli HTML e il routing](../../1-template-route/translations/README.it.md) dell'app web per questa lezione. È inoltre necessario installare [Node.js](https://nodejs.org) ed  [eseguirel'API del server](../../api/README.md) in locale in modo da poter inviare dati per creare account.
+È necessario aver completato i [modelli HTML e il routing](../../1-template-route/translations/README.it.md) dell'app web per questa lezione. È inoltre necessario installare [Node.js](https://nodejs.org) ed [eseguirel'API del server](../../api/README.md) in locale in modo da poter inviare dati per creare account.
 
 Si può verificare che il server funzioni correttamente eseguendo questo comando in un terminale:
 
@@ -25,19 +25,19 @@ curl http://localhost:5000/api
 
 ## Form e controlli
 
-L'elemento  `<form>` incapsula una sezione di un documento HTML in cui l'utente può inserire e inviare dati con controlli interattivi. Esistono tutti i tipi di controlli dell'interfaccia utente (UI) che possono essere utilizzati all'interno di un form, i più comuni sono gli elementi `<input>` e `<button>`.
+L'elemento `<form>` incapsula una sezione di un documento HTML in cui l'utente può inserire e inviare dati con controlli interattivi. Esistono tutti i tipi di controlli dell'interfaccia utente (UI) che possono essere utilizzati all'interno di un form, i più comuni sono gli elementi `<input>` e `<button>`.
 
-Esistono molti [tipi](https://developer.mozilla.org/docs/Web/HTML/Element/input) diversi di `<input>`, ad esempio per creare un campo in cui l'utente può inserire il proprio nome utente si può  utilizzare:
+Esistono molti [tipi](https://developer.mozilla.org/docs/Web/HTML/Element/input) diversi di `<input>`, ad esempio per creare un campo in cui l'utente può inserire il proprio nome utente si può utilizzare:
 
 ```html
-<input id="username" name="username" type="text">
+<input id="username" name="username" type="text" />
 ```
 
 L'attributo `name` verrà utilizzato come nome della proprietà quando verranno inviati i dati del form. L'attributo `id` viene utilizzato per associare un'etichetta (`<label>`) al relativo controllo nel form.
 
-> Si dia un'occhiata all'intero elenco di  [tipi di `<input>`](https://developer.mozilla.org/docs/Web/HTML/Element/input) e [altri controlli del form](https://developer.mozilla.org/docs/Learn/Forms/Other_form_controls) per avere un'idea di tutti gli elementi nativi dell'interfaccia utente che si possono utilizzare durante la creazione della propria interfaccia utente.
+> Si dia un'occhiata all'intero elenco di [tipi di `<input>`](https://developer.mozilla.org/docs/Web/HTML/Element/input) e [altri controlli del form](https://developer.mozilla.org/docs/Learn/Forms/Other_form_controls) per avere un'idea di tutti gli elementi nativi dell'interfaccia utente che si possono utilizzare durante la creazione della propria interfaccia utente.
 
-✅ Si noti che  `<input>` è un [elemento vuoto](https://developer.mozilla.org/docs/Glossary/Empty_element) su cui *non* si dovrebbe aggiungere un tag di chiusura corrispondente. È comunque possibile utilizzare la notazione a chiusura automatica  `<input/>` , ma non è richiesta.
+✅ Si noti che `<input>` è un [elemento vuoto](https://developer.mozilla.org/docs/Glossary/Empty_element) su cui _non_ si dovrebbe aggiungere un tag di chiusura corrispondente. È comunque possibile utilizzare la notazione a chiusura automatica `<input/>` , ma non è richiesta.
 
 L'elemento `<button>` all'interno di un form è un po' speciale. Se non si specifica il suo attributo di tipo (`type`) , invierà automaticamente i dati del form al server quando viene premuto. Ecco i possibili valori di `type` :
 
@@ -47,7 +47,7 @@ L'elemento `<button>` all'interno di un form è un po' speciale. Se non si speci
 
 ### Attività
 
-Si comincia aggiungendo un form al modello di accesso `login` . Servirà di un campo *username* per il nome utente e di un pulsante *Login* .
+Si comincia aggiungendo un form al modello di accesso `login` . Servirà di un campo _username_ per il nome utente e di un pulsante _Login_ .
 
 ```html
 <template id="login">
@@ -56,7 +56,7 @@ Si comincia aggiungendo un form al modello di accesso `login` . Servirà di un c
     <h2>Login</h2>
     <form id="loginForm">
       <label for="username">Username</label>
-      <input id="username" name="user" type="text">
+      <input id="username" name="user" type="text" />
       <button>Login</button>
     </form>
   </section>
@@ -73,28 +73,28 @@ Se si guarda più attentamente, si può notare che è stato aggiunto anche un el
 Ora si aggiungerà un secondo modulo per la registrazione, appena sotto il precedente:
 
 ```html
-<hr/>
+<hr />
 <h2>Register</h2>
 <form id="registerForm">
   <label for="user">Username</label>
-  <input id="user" name="user" type="text">
+  <input id="user" name="user" type="text" />
   <label for="currency">Currency</label>
-  <input id="currency" name="currency" type="text" value="$">
+  <input id="currency" name="currency" type="text" value="$" />
   <label for="description">Description</label>
-  <input id="description" name="description" type="text">
+  <input id="description" name="description" type="text" />
   <label for="balance">Current balance</label>
-  <input id="balance" name="balance" type="number" value="0">
+  <input id="balance" name="balance" type="number" value="0" />
   <button>Register</button>
 </form>
 ```
 
 Utilizzando l'attributo `value` si può impostare un valore predefinito per un dato input. Si noti inoltre che l'input per il saldo(`balance`) ha il tipo `number` (numero). Sembra diverso dagli altri input? Provare a interagire con esso.
 
-✅ Si può  navigare e interagire con i form utilizzando solo una tastiera? E come si pensa di fare?
+✅ Si può navigare e interagire con i form utilizzando solo una tastiera? E come si pensa di fare?
 
 ## Invio dei dati al server
 
-Ora che si ha un'interfaccia utente funzionale, il passaggio successivo è inviare i dati al server. Fare un rapido test utilizzando il codice attuale: cosa succede se si fa clic sul pulsante *Login* o *Register* ?
+Ora che si ha un'interfaccia utente funzionale, il passaggio successivo è inviare i dati al server. Fare un rapido test utilizzando il codice attuale: cosa succede se si fa clic sul pulsante _Login_ o _Register_ ?
 
 Si è notato il cambiamento nella sezione URL del proprio browser?
 
@@ -115,10 +115,14 @@ Ecco perché si può cambiare e utilizzare il [metodo POST](https://www.w3.org/P
 Aggiungere le proprietà `action` e `method` al form di registrazione:
 
 ```html
-<form id="registerForm" action="//localhost:5000/api/accounts" method="POST">
+<form
+  id="registerForm"
+  action="//localhost:5000/api/accounts"
+  method="POST"
+></form>
 ```
 
-Provare ora a registrare un nuovo account con il proprio nome. Dopo aver fatto clic sul pulsante *Register* si dovrebbe vedere qualcosa del genere:
+Provare ora a registrare un nuovo account con il proprio nome. Dopo aver fatto clic sul pulsante _Register_ si dovrebbe vedere qualcosa del genere:
 
 ![Una finestra del browser all'indirizzo localhost:5000/api/ accounts, che mostra una stringa JSON con i dati dell'utente](../images/form-post.png)
 
@@ -130,7 +134,7 @@ Se tutto va bene, il server dovrebbe rispondere alla richiesta con una risposta 
 
 Come probabilmente si è notato, c'è un piccolo problema con l'approccio appena usato: quando si invia il modulo, si esce dalla propria app e il browser reindirizza all'URL del server. Si sta cercando qui di evitare tutti i ricaricamenti delle pagine con quest app web, poiché si sta creando un'[applicazione a pagina singola (SPA)](https://en.wikipedia.org/wiki/Single-page_application).
 
-Per inviare i dati del modulo al server senza forzare il ricaricamento di una pagina, si deve utilizzare il codice JavaScript. Invece di inserire un URL nella proprietà `action` di un  `<form>`, si può  utilizzare qualsiasi codice JavaScript anteposto dalla stringa `javascript:` per eseguire un'azione personalizzata. Usarlo significa anche che si dovranno implementare alcune attività che erano state precedentemente eseguite automaticamente dal browser:
+Per inviare i dati del modulo al server senza forzare il ricaricamento di una pagina, si deve utilizzare il codice JavaScript. Invece di inserire un URL nella proprietà `action` di un `<form>`, si può utilizzare qualsiasi codice JavaScript anteposto dalla stringa `javascript:` per eseguire un'azione personalizzata. Usarlo significa anche che si dovranno implementare alcune attività che erano state precedentemente eseguite automaticamente dal browser:
 
 - Recuperare i dati del form
 - Convertire e codificare i dati del form in un formato adatto
@@ -141,40 +145,40 @@ Per inviare i dati del modulo al server senza forzare il ricaricamento di una pa
 Sostituire `action` nel form di registrazione con:
 
 ```html
-<form id="registerForm" action="javascript:register()">
+<form id="registerForm" action="javascript:register()"></form>
 ```
 
 Aprire `app.js` aggiungere una nuova funzione denominata `register`:
 
 ```js
 function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const data = Object.fromEntries(formData);
   const jsonData = JSON.stringify(data);
 }
 ```
 
-Qui si recupera l'elemento form utilizzando `getElementById()` e si utilizza il [metodo di supporto FormData](https://developer.mozilla.org/docs/Web/API/FormData)  per estrarre i valori dai controlli del forma come un insieme di coppie chiave/valore. Quindi si convertono i dati in un oggetto normale utilizzando [`Object.fromEntries()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries) e infine si serializzano i dati in [JSON](https://www.json.org/json-en.html), un formato comunemente utilizzato per lo scambio di dati sul web.
+Qui si recupera l'elemento form utilizzando `getElementById()` e si utilizza il [metodo di supporto FormData](https://developer.mozilla.org/docs/Web/API/FormData) per estrarre i valori dai controlli del forma come un insieme di coppie chiave/valore. Quindi si convertono i dati in un oggetto normale utilizzando [`Object.fromEntries()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries) e infine si serializzano i dati in [JSON](https://www.json.org/json-en.html), un formato comunemente utilizzato per lo scambio di dati sul web.
 
 I dati sono ora pronti per essere inviati al server. Creare una nuova funzione denominata `createAccount`:
 
 ```js
 async function createAccount(account) {
   try {
-    const response = await fetch('//localhost:5000/api/accounts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: account
+    const response = await fetch("//localhost:5000/api/accounts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: account,
     });
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    return { error: error.message || "Unknown error" };
   }
 }
 ```
 
-Cosa fa questa funzione? Per prima cosa notare la  parola chiave `async`. Ciò significa che la funzione contiene codice che verrà eseguito [**in modo asincrono**](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function). Quando viene utilizzato insieme alla parola chiave `await`, consente di attendere l'esecuzione del codice asincrono, come l'attesa della risposta del server qui, prima di continuare.
+Cosa fa questa funzione? Per prima cosa notare la parola chiave `async`. Ciò significa che la funzione contiene codice che verrà eseguito [**in modo asincrono**](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function). Quando viene utilizzato insieme alla parola chiave `await`, consente di attendere l'esecuzione del codice asincrono, come l'attesa della risposta del server qui, prima di continuare.
 
 Ecco un breve video sull'utilizzo di `async/await`:
 
@@ -187,7 +191,7 @@ Si usa l'API `fetch()` per inviare dati JSON al server. Questo metodo richiede 2
 - L'URL del server, quindi rimettere `//localhost:5000/api/accounts` qui.
 - Le impostazioni della richiesta. È qui che si imposta il metodo su `POST` e si fornisce il corpo (`body`) della richiesta. Dato che si inviano dati JSON al server, si deve anche impostare l'intestazione `Content-Type` su `application/json` in modo che il server sappia come interpretare il contenuto.
 
-Poiché il server risponderà alla richiesta con JSON, si può  utilizzare `await response.json()` per analizzare il contenuto JSON e restituire l'oggetto risultante. Notare che questo metodo è asincrono, quindi si usa la parola chiave `await` qui prima di tornare per assicurarsi che vengano rilevati anche eventuali errori durante l'analisi.
+Poiché il server risponderà alla richiesta con JSON, si può utilizzare `await response.json()` per analizzare il contenuto JSON e restituire l'oggetto risultante. Notare che questo metodo è asincrono, quindi si usa la parola chiave `await` qui prima di tornare per assicurarsi che vengano rilevati anche eventuali errori durante l'analisi.
 
 Ora aggiungere del codice alla funzione di `register` per chiamare `createAccount()`:
 
@@ -205,20 +209,20 @@ Infine, aggiungere alcuni log per verificare il risultato. La funzione finale do
 
 ```js
 async function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const jsonData = JSON.stringify(Object.fromEntries(formData));
   const result = await createAccount(jsonData);
 
   if (result.error) {
-    return console.log('An error occured:', result.error);
+    return console.log("An error occured:", result.error);
   }
 
-  console.log('Account created!', result);
+  console.log("Account created!", result);
 }
 ```
 
-È stato un po' lungo ma si è arrivati! Se si apre [strumenti di sviluppo del browser](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) e si prava a registrare un nuovo account, non si dovrebbe  vedere alcun cambiamento nella pagina web ma apparirà un messaggio nella console che conferma che tutto funziona.
+È stato un po' lungo ma si è arrivati! Se si apre [strumenti di sviluppo del browser](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) e si prava a registrare un nuovo account, non si dovrebbe vedere alcun cambiamento nella pagina web ma apparirà un messaggio nella console che conferma che tutto funziona.
 
 ![Videata che mostra il messaggio di registro nella console del browser](../images/browser-console.png)
 
@@ -226,7 +230,7 @@ async function register() {
 
 ## Convalida dati
 
-Se si prova a registrare un nuovo account senza prima impostare un nome utente, si può  vedere che il server restituisce un errore con codice di stato [400 Bad Request](https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).), (richiesta non valida)
+Se si prova a registrare un nuovo account senza prima impostare un nome utente, si può vedere che il server restituisce un errore con codice di stato [400 Bad Request](<https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).>), (richiesta non valida)
 
 Prima di inviare i dati a un server è buona norma [convalidare i dati del modulo](https://developer.mozilla.org/docs/Learn/Forms/Form_validation) in anticipo quando possibile, per assicurarsi di inviare una richiesta valida. I controlli dei form HTML5 forniscono la convalida incorporata utilizzando vari attributi:
 
@@ -236,18 +240,18 @@ Prima di inviare i dati a un server è buona norma [convalidare i dati del modul
 - `type`: definisce il tipo di dati attesi, come `number`, `email`, `file` o [altri tipi incorporati](https://developer.mozilla.org/docs/Web/HTML/Element/input). Questo attributo può anche modificare il rendering visivo del form.
 - `pattern`: permette di definire un modello di [espressione regolare](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions) per verificare se i dati inseriti sono validi o meno.
 
-> Suggerimento: si può  personalizzare l'aspetto dei controlli del form a seconda che siano validi o meno utilizzando le pseudo-classi CSS `:valid` e `:invalid` .
+> Suggerimento: si può personalizzare l'aspetto dei controlli del form a seconda che siano validi o meno utilizzando le pseudo-classi CSS `:valid` e `:invalid` .
 
 ### Attività
 
-Ci sono 2 campi obbligatori per creare un nuovo account valido,  nome utente (username) e la valuta (currency), gli altri campi sono opzionali. Aggiornare l'HTML del form, utilizzando sia l'attributo `required` che il testo nell'etichetta del campo in questo modo:
+Ci sono 2 campi obbligatori per creare un nuovo account valido, nome utente (username) e la valuta (currency), gli altri campi sono opzionali. Aggiornare l'HTML del form, utilizzando sia l'attributo `required` che il testo nell'etichetta del campo in questo modo:
 
 ```html
 <label for="user">Username (required)</label>
-<input id="user" name="user" type="text" required>
+<input id="user" name="user" type="text" required />
 ...
 <label for="currency">Currency (required)</label>
-<input id="currency" name="currency" type="text" value="$" required>
+<input id="currency" name="currency" type="text" value="$" required />
 ```
 
 Sebbene questa particolare implementazione del server non imponga limiti specifici sulla lunghezza massima dei campi, è sempre buona norma definire limiti ragionevoli per qualsiasi voce di testo inserita dell'utente.
@@ -255,18 +259,25 @@ Sebbene questa particolare implementazione del server non imponga limiti specifi
 Aggiungere un attributo `maxlength` ai campi di testo:
 
 ```html
-<input id="user" name="user" type="text" maxlength="20" required>
+<input id="user" name="user" type="text" maxlength="20" required />
 ...
-<input id="currency" name="currency" type="text" value="$" maxlength="5" required>
+<input
+  id="currency"
+  name="currency"
+  type="text"
+  value="$"
+  maxlength="5"
+  required
+/>
 ...
-<input id="description" name="description" type="text" maxlength="100">
+<input id="description" name="description" type="text" maxlength="100" />
 ```
 
-Ora se si preme il pulsante *Register* e un campo non rispetta una regola di convalida che è stata definita, si dovrebbe vedere qualcosa del genere:
+Ora se si preme il pulsante _Register_ e un campo non rispetta una regola di convalida che è stata definita, si dovrebbe vedere qualcosa del genere:
 
 ![Videata che mostra l'errore di convalida durante il tentativo di inviare il form](../images/validation-error.png)
 
-La convalida come questa eseguita *prima* di inviare qualsiasi dato al server è chiamata convalida **lato client** . Tenere presente che non è sempre possibile eseguire tutti i controlli senza inviare i dati. Ad esempio, non si può  verificare qui se esiste già un account con lo stesso nome utente senza inviare una richiesta al server. La convalida aggiuntiva eseguita sul server è denominata convalida **lato server** .
+La convalida come questa eseguita _prima_ di inviare qualsiasi dato al server è chiamata convalida **lato client** . Tenere presente che non è sempre possibile eseguire tutti i controlli senza inviare i dati. Ad esempio, non si può verificare qui se esiste già un account con lo stesso nome utente senza inviare una richiesta al server. La convalida aggiuntiva eseguita sul server è denominata convalida **lato server** .
 
 Di solito devono essere implementate entrambe; mentre l'utilizzo della convalida lato client migliora l'esperienza dell'utente fornendo un feedback immediato all'utente, la convalida lato server è fondamentale per assicurarsi che i dati utente da manipolare siano validi e sicuri.
 

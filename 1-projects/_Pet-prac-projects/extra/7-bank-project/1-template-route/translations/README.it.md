@@ -22,8 +22,8 @@ Sul proprio computer, creare una cartella denominata `bank` con un file denomina
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bank App</title>
   </head>
   <body>
@@ -53,7 +53,7 @@ Verrà creata un'app bancaria con due schermate: la pagina di accesso e il crusc
 
 Viene fornito un `ID` all'elemento per renderlo più facilmente individuabile con JavaScript in seguito.
 
-> Suggerimento: poiché il contenuto di questo elemento verrà sostituito, si può  inserire un messaggio di caricamento o un indicatore che verrà mostrato durante il caricamento dell'app.
+> Suggerimento: poiché il contenuto di questo elemento verrà sostituito, si può inserire un messaggio di caricamento o un indicatore che verrà mostrato durante il caricamento dell'app.
 
 Successivamente, si aggiunge il modello HTML seguente per la pagina di accesso. Per ora si inserirà solo un titolo e una sezione contenente un collegamento che si utilizzerà per eseguire la navigazione.
 
@@ -78,9 +78,7 @@ Quindi si aggiungerà un altro modello HTML per la pagina del cruscotto. Questa 
     <h1>Bank App</h1>
     <a href="/login">Logout</a>
   </header>
-  <section>
-    Balance: 100$
-  </section>
+  <section>Balance: 100$</section>
   <section>
     <h2>Transactions</h2>
     <table>
@@ -115,7 +113,7 @@ L'istanza di un modello viene solitamente eseguita in 3 passaggi:
 
 ### Attività
 
-Creare un nuovo file denominato `app.js` nella cartella del progetto e importare quel file nella sezione  `<head>` del proprio HTML:
+Creare un nuovo file denominato `app.js` nella cartella del progetto e importare quel file nella sezione `<head>` del proprio HTML:
 
 ```html
 <script src="app.js" defer></script>
@@ -127,8 +125,8 @@ Ora in `app.js`, verrà creata una nuova funzione `updateRoute`:
 function updateRoute(templateId) {
   const template = document.getElementById(templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -138,14 +136,14 @@ Quello che si fa qui sono esattamente i 3 passaggi descritti sopra. Si istanza i
 Ora chiamare questa funzione con uno dei template e guardare il risultato.
 
 ```js
-updateRoute('login');
+updateRoute("login");
 ```
 
 ✅ Qual è lo scopo di questo codice `app.innerHTML = '';`? Cosa succede senza di essa?
 
 ## Creazione di rotte
 
-Quando si parla di un'app web, si definisce *Routing* (instradamento) l'intento di mappare gli **URL** a schermate specifiche che dovrebbero essere visualizzate. Su un sito web con più file HTML, questa operazione viene eseguita automaticamente poiché i percorsi dei file si riflettono sull'URL. Ad esempio, con questi file nella cartella del progetto:
+Quando si parla di un'app web, si definisce _Routing_ (instradamento) l'intento di mappare gli **URL** a schermate specifiche che dovrebbero essere visualizzate. Su un sito web con più file HTML, questa operazione viene eseguita automaticamente poiché i percorsi dei file si riflettono sull'URL. Ad esempio, con questi file nella cartella del progetto:
 
 ```
 mywebsite/index.html
@@ -169,12 +167,12 @@ Si userà un semplice oggetto per implementare una [mappa](https://it.wikipedia.
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard' },
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard" },
 };
 ```
 
-Ora modificare un po' la funzione `updateRoute`. Invece di passare direttamente il `templateId` come argomento, lo si vuole recuperare guardando prima l'URL corrente, quindi utilizzndo la mappa per ottenere il valore dell'ID del modello corrispondente. Si può  usare [`window.location.pathname`](https://developer.mozilla.org/docs/Web/API/Location/pathname) per ottenere solo la sezione del percorso dall'URL.
+Ora modificare un po' la funzione `updateRoute`. Invece di passare direttamente il `templateId` come argomento, lo si vuole recuperare guardando prima l'URL corrente, quindi utilizzndo la mappa per ottenere il valore dell'ID del modello corrispondente. Si può usare [`window.location.pathname`](https://developer.mozilla.org/docs/Web/API/Location/pathname) per ottenere solo la sezione del percorso dall'URL.
 
 ```js
 function updateRoute() {
@@ -183,8 +181,8 @@ function updateRoute() {
 
   const template = document.getElementById(route.templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -244,7 +242,7 @@ function onLinkClick(event) {
 }
 ```
 
-Si completa il sistema di navigazione aggiungendo collegamenti ai link di accesso (*Login*) e di disconnessione (*Logout*) nell'HTML.
+Si completa il sistema di navigazione aggiungendo collegamenti ai link di accesso (_Login_) e di disconnessione (_Logout_) nell'HTML.
 
 ```html
 <a href="/dashboard" onclick="onLinkClick()">Login</a>
@@ -260,7 +258,7 @@ Provare a fare clic su questi collegamenti, ora si dovrebbe essere in grado di n
 
 ## Gestione dei pulsanti Avanti e Indietro del browser
 
-L'utilizzo di `history.pushState` crea nuove voci nella cronologia di navigazione del browser. Si può verificare tenendo premuto il *pulsante Indietro* del proprio browser, dovrebbe visualizzare qualcosa del genere:
+L'utilizzo di `history.pushState` crea nuove voci nella cronologia di navigazione del browser. Si può verificare tenendo premuto il _pulsante Indietro_ del proprio browser, dovrebbe visualizzare qualcosa del genere:
 
 ![Videata della cronologia di navigazione](../history.png)
 
@@ -281,7 +279,7 @@ updateRoute();
 
 Ecco un video di aggiornamento sulle funzioni freccia:
 
-[![Funzionifreccia](https://img.youtube.com/vi/OP6eEbOj2sc/0.jpg)](https://youtube.com/watch?v=OP6eEbOj2sc "")
+[![Funzionifreccia](https://img.youtube.com/vi/OP6eEbOj2sc/0.jpg)](https://youtube.com/watch?v=OP6eEbOj2sc)
 
 > Fare clic sull'immagine sopra per un video sulle funzioni freccia
 

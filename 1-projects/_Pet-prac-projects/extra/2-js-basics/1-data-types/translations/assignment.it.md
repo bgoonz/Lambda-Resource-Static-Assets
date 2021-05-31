@@ -6,6 +6,6 @@ Si immagini di costruire un carrello della spesa. Si scriva della documentazione
 
 ## Rubrica
 
-Criteri | Ottimo | Adeguato | Necessari miglioramenti
- --- | --- | --- | - |
- || I sei tipi di dato sono elencati ed esplorati in dettaglio, documentando il loro utilizzo | Vengono esplorati quattro tipi di dati | Vengono esplorati due tipi di dati |
+| Criteri | Ottimo                                                                                    | Adeguato                               | Necessari miglioramenti            |
+| ------- | ----------------------------------------------------------------------------------------- | -------------------------------------- | ---------------------------------- |
+|         | I sei tipi di dato sono elencati ed esplorati in dettaglio, documentando il loro utilizzo | Vengono esplorati quattro tipi di dati | Vengono esplorati due tipi di dati |

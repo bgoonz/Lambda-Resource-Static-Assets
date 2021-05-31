@@ -1,6 +1,7 @@
 # Membuat Halaman Web yang Dapat Diakses (oleh Semua Orang)
 
 ![Semua Tentang Aksesibilitas](/sketchnotes/webdev101-a11y.png)
+
 > Catatan sketsa oleh [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Kuis Pra-Kuliah
@@ -98,7 +99,7 @@ Pembaca layar juga memiliki kemampuan untuk membaca hanya hyperlink pada halaman
 
 ### Teks tautan yang bagus
 
-Teks tautan yang bagus menjelaskan secara singkat apa yang ada di sisi lain tautan. Dalam contoh di atas yang berbicara tentang penguin kecil, tautannya menuju ke halaman Wikipedia tentang spesies tersebut. Frasa *penguin kecil* akan menjadi teks tautan yang sempurna karena menjelaskan apa yang akan dipelajari seseorang jika mereka mengeklik tautan - penguin kecil.
+Teks tautan yang bagus menjelaskan secara singkat apa yang ada di sisi lain tautan. Dalam contoh di atas yang berbicara tentang penguin kecil, tautannya menuju ke halaman Wikipedia tentang spesies tersebut. Frasa _penguin kecil_ akan menjadi teks tautan yang sempurna karena menjelaskan apa yang akan dipelajari seseorang jika mereka mengeklik tautan - penguin kecil.
 
 > [Penguin kecil](https://en.wikipedia.org/wiki/Little_penguin), kadang dikenal sebagai penguin peri, adalah penguin terkecil di dunia.
 
@@ -117,7 +118,7 @@ Bayangkan halaman berikut:
 | Widget       | [Deskripsi]('#') | [Pesan]('#') |
 | Widget super | [Deskripsi]('#') | [Pesan]('#') |
 
-Dalam contoh ini, menduplikasi teks deskripsi dan urutan masuk akal bagi seseorang yang menggunakan browser. Namun, seseorang yang menggunakan pembaca layar hanya akan mendengar kata *deskripsi* dan *pesan* diulang tanpa konteks.
+Dalam contoh ini, menduplikasi teks deskripsi dan urutan masuk akal bagi seseorang yang menggunakan browser. Namun, seseorang yang menggunakan pembaca layar hanya akan mendengar kata _deskripsi_ dan _pesan_ diulang tanpa konteks.
 
 Untuk mendukung jenis skenario ini, HTML mendukung sekumpulan atribut yang dikenal sebagai [Accessible Rich Internet Applications (ARIA)](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) (Aplikasi Internet Kaya yang Dapat Diakses). Atribut ini memungkinkan Anda memberikan informasi tambahan kepada pembaca layar.
 
@@ -125,15 +126,20 @@ Untuk mendukung jenis skenario ini, HTML mendukung sekumpulan atribut yang diken
 
 Anda dapat menggunakan `aria-label` untuk mendeskripsikan link jika format halaman tidak mengizinkan Anda. Deskripsi untuk widget dapat disetel sebagai
 
-``` html
+```html
 <a href="#" aria-label="Deskripsi widget">deskripsi</a>
 ```
 
 ✅ Secara umum, menggunakan markup Semantik seperti yang dijelaskan di atas menggantikan penggunaan ARIA, tetapi terkadang tidak ada padanan semantik untuk berbagai widget HTML. Contoh yang bagus adalah Progressbar. Tidak ada HTML yang setara untuk bilah kemajuan, jadi Anda mengidentifikasi `<div>` generik untuk elemen ini dengan peran yang tepat dan nilai aria. [Dokumentasi MDN tentang ARIA](https://developer.mozilla.org/docs/Web/Accessibility/ARIA) berisi informasi yang lebih berguna.
 
 ```html
-<div id="percent-loaded" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-</div>
+<div
+  id="percent-loaded"
+  role="progressbar"
+  aria-valuenow="75"
+  aria-valuemin="0"
+  aria-valuemax="100"
+></div>
 ```
 
 ## Gambar-gambar
@@ -182,7 +188,7 @@ Ambil HTML ini dan tulis ulang agar dapat diakses semaksimal mungkin, dengan str
     </div>
     <div class="main-content">
       <div>
-        <p class="page-title">Welcome to Turtle Ipsum. 
+        <p class="page-title">Welcome to Turtle Ipsum.
             <a href="">Click here</a> to learn more.
         </p>
         <p class="article-text">

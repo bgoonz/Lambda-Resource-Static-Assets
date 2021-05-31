@@ -22,12 +22,11 @@ Il server dovrebbe mettersi in ascolto sulla porta `5000`.
 
 ## Dettagli API
 
-| Rotta | Descrizione |
----------------------------------------------|------------------------------------
-| GET /api/ | Ottiene informazioni sul server |
-| POST /api/accounts/ | Crea un account, ad es.: `{user: "Giovanni", description: "Il mio budget", currency: "EUR", balance: 100}` |
-| GET /api/accounts/:user | Ottiene tutti i dati per l'account specificato |
-| DELETE /api/accounts/: user | Rimuove l'account specificato |
-| POST /api/account/:user/transactions | Aggiunge una transazione, ad es .: `{date: '2020-07-23T18:25:43.511Z', object: "Acquistato un libro", amount: -20}` |
-| DELETE  /api/accounts/:user/transactions/:id | Rimuove la transazione specificata |
-
+| Rotta                                       | Descrizione                                                                                                         |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| GET /api/                                   | Ottiene informazioni sul server                                                                                     |
+| POST /api/accounts/                         | Crea un account, ad es.: `{user: "Giovanni", description: "Il mio budget", currency: "EUR", balance: 100}`          |
+| GET /api/accounts/:user                     | Ottiene tutti i dati per l'account specificato                                                                      |
+| DELETE /api/accounts/: user                 | Rimuove l'account specificato                                                                                       |
+| POST /api/account/:user/transactions        | Aggiunge una transazione, ad es .: `{date: '2020-07-23T18:25:43.511Z', object: "Acquistato un libro", amount: -20}` |
+| DELETE /api/accounts/:user/transactions/:id | Rimuove la transazione specificata                                                                                  |

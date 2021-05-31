@@ -6,6 +6,6 @@ Gebruik de codevoorbeelden in de les om een weergave te maken van een spel dat u
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                                               | Voldoende                                              | Moet worden verbeterd                                   |
-| -------- | ------------------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------- |
+| Criteria | Voorbeeldig                                                    | Voldoende                                                      | Moet worden verbeterd                                      |
+| -------- | -------------------------------------------------------------- | -------------------------------------------------------------- | ---------------------------------------------------------- |
 |          | Drie elementen worden op het scherm geplaatst en gemanipuleerd | Twee elementen worden op het scherm geplaatst en gemanipuleerd | Een element wordt op het scherm geplaatst en gemanipuleerd |

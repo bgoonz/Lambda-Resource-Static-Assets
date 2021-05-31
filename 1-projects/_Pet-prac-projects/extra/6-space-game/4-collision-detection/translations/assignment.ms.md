@@ -6,6 +6,6 @@ Untuk lebih memahami bagaimana perlanggaran berfungsi, bina permainan yang sanga
 
 ## Rubrik
 
-| Kriteria | Contoh                                                                                                                | Mencukupi                       | Usaha Lagi |
-| -------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------ | ----------------- |
+| Kriteria | Contoh                                                                                                            | Mencukupi                             | Usaha Lagi          |
+| -------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------- | ------------------- |
 |          | Sampel kod kerja lengkap dihasilkan, dengan item dilukis ke kanvas, perlanggaran asas berlaku, dan reaksi berlaku | Kod tidak lengkap dalam beberapa cara | Kod Tidak Berfungsi |

@@ -6,6 +6,6 @@ Ci sono molti strumenti dei quali uno sviluppatore web potrebbe avere bisogno ch
 
 ## Rubrica
 
-Ottimo | Adeguato | Necessari miglioramenti
---- | --- | -- |
-|Spiega perchè uno sviluppatore web dovrebbe usare lo strumento| Spiega come, ma non perchè uno sviluppatore web dovrebbe usare lo strumento| Non menziona come o perchè uno sviluppatore web dovrebbe usare lo strumento  |
+| Ottimo                                                         | Adeguato                                                                    | Necessari miglioramenti                                                     |
+| -------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Spiega perchè uno sviluppatore web dovrebbe usare lo strumento | Spiega come, ma non perchè uno sviluppatore web dovrebbe usare lo strumento | Non menziona come o perchè uno sviluppatore web dovrebbe usare lo strumento |

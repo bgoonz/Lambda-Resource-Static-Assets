@@ -27,17 +27,17 @@ curl http://localhost:5000/api
 
 [前回のレッスン](../../3-data/translations/README.ja.md)では、現在ログインしているユーザーの銀行データを含むグローバル変数 `account` を使って、アプリの基本的な状態の概念を紹介しました。しかし、現在の実装にはいくつかの欠陥があります。ダッシュボード上でページをリフレッシュしてみてください。何が起こるのでしょうか？
 
-現在のコードには3つの問題があります。
+現在のコードには 3 つの問題があります。
 
 - ブラウザをリフレッシュするとログインページに戻るため、状態は保持されません
-- 状態を変更する関数が複数あります。アプリが大きくなると、変更を追跡するのが難しくなり、1つの更新を忘れがちになります
-- 状態が片付かず、*Logout* をクリックしてもログインページになってもアカウントデータが残っています
+- 状態を変更する関数が複数あります。アプリが大きくなると、変更を追跡するのが難しくなり、1 つの更新を忘れがちになります
+- 状態が片付かず、_Logout_ をクリックしてもログインページになってもアカウントデータが残っています
 
 これらの問題に一つずつ対処するためにコードを更新することもできますが、コードの重複が多くなり、アプリがより複雑になり、メンテナンスが難しくなります。あるいは、数分間小休止して、戦略を再考することもできます。
 
 > ここで本当に解決しようとしている問題は何か?
 
-[状態管理](https://en.wikipedia.org/wiki/State_management)は、この2つの特定の問題を解決するための良いアプローチを見つけることがすべてです。
+[状態管理](https://en.wikipedia.org/wiki/State_management)は、この 2 つの特定の問題を解決するための良いアプローチを見つけることがすべてです。
 
 - アプリ内のデータフローをわかりやすく保つには?
 - アプリ内のデータフローを理解しやすい状態に保つには?
@@ -62,11 +62,11 @@ let account = null;
 
 ```js
 let state = {
-  account: null
+  account: null,
 };
 ```
 
-このアイデアは、単一のステートオブジェクトにすべてのアプリデータを*中央集権化することです。今のところは `account` があるだけなので、あまり変化はありませんが、進化のためのパスを作成します。
+このアイデアは、単一のステートオブジェクトにすべてのアプリデータを\*中央集権化することです。今のところは `account` があるだけなので、あまり変化はありませんが、進化のためのパスを作成します。
 
 また、これを使って関数を更新しなければなりません。関数 `register()` と `login()` において、`account = ...` を `state.account = ...` に置き換えてください。
 
@@ -82,7 +82,7 @@ const account = state.account;
 
 データを保存するために `state` オブジェクトを配置したので、次のステップは更新を一元化することです。目的は、いつ変更があったのか、いつ変更が発生したのかを簡単に把握できるようにすることです。
 
-`state` オブジェクトに変更が加えられないようにするためには、`state` オブジェクトを [*immutable*](https://en.wikipedia.org/wiki/Immutable_object) と考えるのも良い方法です。これはまた、何かを変更したい場合には新しいステートオブジェクトを作成しなければならないことを意味します。このようにすることで、潜在的に望ましくない[副作用](https://ja.wikipedia.org/wiki/%E5%89%AF%E4%BD%9C%E7%94%A8_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0))についての保護を構築し、アンドゥ/リドゥの実装のようなアプリの新機能の可能性を開くと同時に、デバッグを容易にします。例えば、ステートに加えられたすべての変更をログに記録し、バグの原因を理解するために変更の履歴を保持することができます。
+`state` オブジェクトに変更が加えられないようにするためには、`state` オブジェクトを [_immutable_](https://en.wikipedia.org/wiki/Immutable_object) と考えるのも良い方法です。これはまた、何かを変更したい場合には新しいステートオブジェクトを作成しなければならないことを意味します。このようにすることで、潜在的に望ましくない[副作用](<https://ja.wikipedia.org/wiki/%E5%89%AF%E4%BD%9C%E7%94%A8_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0)>)についての保護を構築し、アンドゥ/リドゥの実装のようなアプリの新機能の可能性を開くと同時に、デバッグを容易にします。例えば、ステートに加えられたすべての変更をログに記録し、バグの原因を理解するために変更の履歴を保持することができます。
 
 JavaScript では、[`Object.freeze()`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) を使って、オブジェクトの不変バージョンを作成することができます。不変オブジェクトに変更を加えようとすると例外が発生します。
 
@@ -96,41 +96,41 @@ JavaScript では、[`Object.freeze()`](https://developer.mozilla.org/ja/docs/We
 function updateState(property, newData) {
   state = Object.freeze({
     ...state,
-    [property]: newData
+    [property]: newData,
   });
 }
 ```
 
-この関数では、新しいステートオブジェクトを作成し、[*spread (`...`) operator*](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_object_literals) を使用して前のステートからデータをコピーしています。次に、[ブラケット表記](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Working_with_Objects#objects_and_properties) `[property]` を使用して、ステートオブジェクトの特定のプロパティを新しいデータでオーバーライドします。最後に、`Object.freeze()`を使ってオブジェクトをロックし、変更を防ぎます。今のところ、`account` プロパティだけがステートに保存されていますが、この方法では必要なだけのプロパティをステートに追加することができます。
+この関数では、新しいステートオブジェクトを作成し、[_spread (`...`) operator_](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Spread_syntax#spread_in_object_literals) を使用して前のステートからデータをコピーしています。次に、[ブラケット表記](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Working_with_Objects#objects_and_properties) `[property]` を使用して、ステートオブジェクトの特定のプロパティを新しいデータでオーバーライドします。最後に、`Object.freeze()`を使ってオブジェクトをロックし、変更を防ぎます。今のところ、`account` プロパティだけがステートに保存されていますが、この方法では必要なだけのプロパティをステートに追加することができます。
 
 また、`state` の初期化を更新して初期状態も凍結されるようにします。
 
 ```js
 let state = Object.freeze({
-  account: null
+  account: null,
 });
 ```
 
 その後、`state.account = result;` の代入を `state.account = result;` に置き換えて `register` 関数を更新します。
 
 ```js
-updateState('account', result);
+updateState("account", result);
 ```
 
 同じことを `login` 関数で行い、`state.account = data;` に置き換えます。
 
 ```js
-updateState('account', data);
+updateState("account", data);
 ```
 
-ここで、ユーザーが *Logout* をクリックしたときにアカウントデータがクリアされない問題を修正します。
+ここで、ユーザーが _Logout_ をクリックしたときにアカウントデータがクリアされない問題を修正します。
 
 新しい関数 `logout()` を作成します。
 
 ```js
 function logout() {
-  updateState('account', null);
-  navigate('/login');
+  updateState("account", null);
+  navigate("/login");
 }
 ```
 
@@ -146,12 +146,12 @@ function logout() {
 
 ブラウザにデータを永続化する場合、いくつかの重要な質問があります。
 
-- *データは機密性の高いものでしょうか?* ユーザーパスワードなどの機密性の高いデータをクライアントに保存することは避けるべきです
-- *このデータをどのくらいの期間保存する必要がありますか?* このデータにアクセスするのは現在のセッションのためだけですか、それとも永遠に保存したいですか?
+- _データは機密性の高いものでしょうか?_ ユーザーパスワードなどの機密性の高いデータをクライアントに保存することは避けるべきです
+- _このデータをどのくらいの期間保存する必要がありますか?_ このデータにアクセスするのは現在のセッションのためだけですか、それとも永遠に保存したいですか?
 
 Web アプリ内の情報を保存する方法は、目的に応じて複数あります。例えば、URL を使用して検索クエリを保存し、ユーザー間で共有できるようにすることができます。また、[認証](https://en.wikipedia.org/wiki/Authentication)情報のように、データをサーバーと共有する必要がある場合は、[HTTP クッキー](https://developer.mozilla.org/ja/docs/Web/HTTP/Cookies)を使用することもできます。
 
-もう一つの選択肢は、データを保存するための多くのブラウザ API のうちの一つを使用することです。その中でも特に興味深いものが2つあります。
+もう一つの選択肢は、データを保存するための多くのブラウザ API のうちの一つを使用することです。その中でも特に興味深いものが 2 つあります。
 
 - [`localStorage`](https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage): [Key/Value ストア](https://en.wikipedia.org/wiki/Key%E2%80%93value_database)は、異なるセッションにまたがって現在の Web サイトに固有のデータを永続化することができます。保存されたデータは期限切れになることはありません
 - [`sessionStorage`](https://developer.mozilla.org/ja/docs/Web/API/Window/sessionStorage): これは `localStorage` と同じように動作しますが、保存されたデータはセッションの終了時(ブラウザが閉じられた時)に消去されます
@@ -162,10 +162,10 @@ Web アプリ内の情報を保存する方法は、目的に応じて複数あ�
 
 ### タスク
 
-ユーザーが明示的に *Logout* ボタンをクリックするまでログインしたままにしたいので、`localStorage` を使ってアカウントデータを保存します。まず、データを保存するためのキーを定義しましょう。
+ユーザーが明示的に _Logout_ ボタンをクリックするまでログインしたままにしたいので、`localStorage` を使ってアカウントデータを保存します。まず、データを保存するためのキーを定義しましょう。
 
 ```js
-const storageKey = 'savedAccount';
+const storageKey = "savedAccount";
 ```
 
 そして、この行を `updateState()` 関数の最後に追加します。
@@ -182,7 +182,7 @@ localStorage.setItem(storageKey, JSON.stringify(state.account));
 function init() {
   const savedAccount = localStorage.getItem(storageKey);
   if (savedAccount) {
-    updateState('account', JSON.parse(savedAccount));
+    updateState("account", JSON.parse(savedAccount));
   }
 
   // 前回の初期化コード
@@ -195,7 +195,7 @@ init();
 
 ここでは保存されたデータを取得し、もしあればそれに応じて状態を更新します。ページの更新中に状態に依存するコードがあるかもしれないので、ルートを更新する前にこれを行うことが重要です。
 
-アカウントデータを保持しているので、*ダッシュボード* ページをアプリケーションのデフォルトページにすることもできます。データが見つからない場合は、ダッシュボードが *ログイン* ページにリダイレクトします。`updateRoute()` で、フォールバックの `return navigate('/login');` を `return navigate('dashboard');` に置き換えます。
+アカウントデータを保持しているので、_ダッシュボード_ ページをアプリケーションのデフォルトページにすることもできます。データが見つからない場合は、ダッシュボードが _ログイン_ ページにリダイレクトします。`updateRoute()` で、フォールバックの `return navigate('/login');` を `return navigate('dashboard');` に置き換えます。
 
 アプリでログインしてページを更新してみてください。このアップデートで初期の問題はすべて解決しました。
 
@@ -216,7 +216,7 @@ curl --request POST \
 
 この状態は `localStorage` のおかげで無期限に保持されますが、アプリからログアウトして再度ログインするまで更新されません。
 
-これを修正するために考えられる戦略の1つは、ダッシュボードがロードされるたびにアカウントデータをリロードして、データのストールを回避することです。
+これを修正するために考えられる戦略の 1 つは、ダッシュボードがロードされるたびにアカウントデータをリロードして、データのストールを回避することです。
 
 ### タスク
 
@@ -234,7 +234,7 @@ async function updateAccountData() {
     return logout();
   }
 
-  updateState('account', data);
+  updateState("account", data);
 }
 ```
 
@@ -253,8 +253,8 @@ async function refresh() {
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard', init: refresh }
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard", init: refresh },
 };
 ```
 

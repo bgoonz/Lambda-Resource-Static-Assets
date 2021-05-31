@@ -6,7 +6,7 @@
 
 ### Introduction
 
-As a web application grows, it becomes a challenge to keep track of all data flows. Which code gets the data, what page consumes it, where and when does it need to be updated...it's easy to end up with messy code that's difficult to maintain. This is especially true when you need to share data among different pages of your app, for example user data. The concept of *state management* has always existed in all kinds of programs, but as web apps keep growing in complexity it's now a key point to think about during development.
+As a web application grows, it becomes a challenge to keep track of all data flows. Which code gets the data, what page consumes it, where and when does it need to be updated...it's easy to end up with messy code that's difficult to maintain. This is especially true when you need to share data among different pages of your app, for example user data. The concept of _state management_ has always existed in all kinds of programs, but as web apps keep growing in complexity it's now a key point to think about during development.
 
 In this final part, we'll look over the app we built to rethink how the state is managed, allowing support for browser refresh at any point, and persisting data across user sessions.
 
@@ -31,7 +31,7 @@ There's 3 issues with the current code:
 
 - The state is not persisted, as a browser refresh takes you back to the login page.
 - There are multiple functions that modify the state. As the app grows, it can make it difficult to track the changes and it's easy to forget updating one.
-- The state is not cleaned up, so when you click on *Logout* the account data is still there even though you're on the login page.
+- The state is not cleaned up, so when you click on _Logout_ the account data is still there even though you're on the login page.
 
 We could update our code to tackle these issues one by one, but it would create more code duplication and make the app more complex and difficult to maintain. Or we could pause for a few minutes and rethink our strategy.
 
@@ -62,11 +62,11 @@ With:
 
 ```js
 let state = {
-  account: null
+  account: null,
 };
 ```
 
-The idea is to *centralize* all our app data in a single state object. We only have `account` for now in the state so it doesn't change much, but it creates a path for evolutions.
+The idea is to _centralize_ all our app data in a single state object. We only have `account` for now in the state so it doesn't change much, but it creates a path for evolutions.
 
 We also have to update the functions using it. In the `register()` and `login()` functions, replace `account = ...` with `state.account = ...`;
 
@@ -82,11 +82,11 @@ This refactoring by itself did not bring much improvements, but the idea was to 
 
 Now that we have put in place the `state` object to store our data, the next step is centralize the updates. The goal is to make it easier to keep track of any changes and when they happen.
 
-To avoid having changes made to the `state` object, it's also a good practice to consider it [*immutable*](https://en.wikipedia.org/wiki/Immutable_object), meaning that it cannot be modified at all. It also means that you have to create a new state object if you want to change anything in it. By doing this, you build a protection about potentially unwanted [side effects](https://en.wikipedia.org/wiki/Side_effect_(computer_science)), and open up possibilities for new features in your app like implementing undo/redo, while also making it easier to debug. For example, you could log every change made to the state and keep a history of the changes to understand the source of a bug.
+To avoid having changes made to the `state` object, it's also a good practice to consider it [_immutable_](https://en.wikipedia.org/wiki/Immutable_object), meaning that it cannot be modified at all. It also means that you have to create a new state object if you want to change anything in it. By doing this, you build a protection about potentially unwanted [side effects](<https://en.wikipedia.org/wiki/Side_effect_(computer_science)>), and open up possibilities for new features in your app like implementing undo/redo, while also making it easier to debug. For example, you could log every change made to the state and keep a history of the changes to understand the source of a bug.
 
 In JavaScript, you can use [`Object.freeze()`](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze) to create an immutable version of an object. If you try to make changes to an immutable object, an exception will be raised.
 
-✅ Do you know the difference between a *shallow* and a *deep* immutable object? You can read about it [here](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze#What_is_shallow_freeze).
+✅ Do you know the difference between a _shallow_ and a _deep_ immutable object? You can read about it [here](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze#What_is_shallow_freeze).
 
 ### Task
 
@@ -96,41 +96,41 @@ Let's create a new `updateState()` function:
 function updateState(property, newData) {
   state = Object.freeze({
     ...state,
-    [property]: newData
+    [property]: newData,
   });
 }
 ```
 
-In this function, we're creating a new state object and copy data from the previous state using the [*spread (`...`) operator*](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals). Then we override a particular property of the state object with the new data using the [bracket notation](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Working_with_Objects#Objects_and_properties) `[property]` for assignment. Finally, we lock the object to prevent modifications using `Object.freeze()`. We only have the `account` property stored in the state for now, but with this approach you can add as many properties as you need in the state.
+In this function, we're creating a new state object and copy data from the previous state using the [_spread (`...`) operator_](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals). Then we override a particular property of the state object with the new data using the [bracket notation](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Working_with_Objects#Objects_and_properties) `[property]` for assignment. Finally, we lock the object to prevent modifications using `Object.freeze()`. We only have the `account` property stored in the state for now, but with this approach you can add as many properties as you need in the state.
 
 We'll also update the `state` initialization to make sure the initial state is frozen too:
 
 ```js
 let state = Object.freeze({
-  account: null
+  account: null,
 });
 ```
 
 After that, update the `register` function by replacing the `state.account = result;` assignment with:
 
 ```js
-updateState('account', result);
+updateState("account", result);
 ```
 
 Do the same with the `login` function, replacing `state.account = data;` with:
 
 ```js
-updateState('account', data);
+updateState("account", data);
 ```
 
-We'll now take the chance to fix the issue of account data not being cleared when the user clicks on *Logout*.
+We'll now take the chance to fix the issue of account data not being cleared when the user clicks on _Logout_.
 
 Create a new function `logout()`:
 
 ```js
 function logout() {
-  updateState('account', null);
-  navigate('/login');
+  updateState("account", null);
+  navigate("/login");
 }
 ```
 
@@ -146,8 +146,8 @@ Most web apps needs to persist data to be able to work correctly. All the critic
 
 When you want to persist data in your browser, there are a few important questions you should ask yourself:
 
-- *Is the data sensitive?* You should avoid storing any sensitive data on client, such as user passwords.
-- *For how long do you need to keep this data?* Do you plan to access this data only for the current session or do you want it to be stored forever?
+- _Is the data sensitive?_ You should avoid storing any sensitive data on client, such as user passwords.
+- _For how long do you need to keep this data?_ Do you plan to access this data only for the current session or do you want it to be stored forever?
 
 There are multiple ways of storing information inside a web app, depending on what you want to achieve. For example, you can use the URLs to store a search query, and make it shareable between users. You can also use [HTTP cookies](https://developer.mozilla.org/docs/Web/HTTP/Cookies) if the data needs to be shared with the server, like [authentication](https://en.wikipedia.org/wiki/Authentication) information.
 
@@ -162,10 +162,10 @@ Note that both these APIs only allow to store [strings](https://developer.mozill
 
 ### Task
 
-We want our users stay logged in until they explicitly click on the *Logout* button, so we'll use `localStorage` to store the account data. First, let's define a key that we'll use to store our data.
+We want our users stay logged in until they explicitly click on the _Logout_ button, so we'll use `localStorage` to store the account data. First, let's define a key that we'll use to store our data.
 
 ```js
-const storageKey = 'savedAccount';
+const storageKey = "savedAccount";
 ```
 
 Then add this line at the end of the `updateState()` function:
@@ -182,7 +182,7 @@ As the data is saved, we also have to take care of restoring it when the app is 
 function init() {
   const savedAccount = localStorage.getItem(storageKey);
   if (savedAccount) {
-    updateState('account', JSON.parse(savedAccount));
+    updateState("account", JSON.parse(savedAccount));
   }
 
   // Our previous initialization code
@@ -193,9 +193,9 @@ function init() {
 init();
 ```
 
-Here we retrieve the saved data, and if there's any we update the state accordingly. It's important to do this *before* updating the route, as there might be code relying on the state during the page update.
+Here we retrieve the saved data, and if there's any we update the state accordingly. It's important to do this _before_ updating the route, as there might be code relying on the state during the page update.
 
-We can also make the *Dashboard* page our application default page, as we are now persisting the account data. If no data is found, the dashboard takes care of redirecting to the *Login* page anyways. In `updateRoute()`, replace the fallback `return navigate('/login');` with `return navigate('/dashboard');`.
+We can also make the _Dashboard_ page our application default page, as we are now persisting the account data. If no data is found, the dashboard takes care of redirecting to the _Login_ page anyways. In `updateRoute()`, replace the fallback `return navigate('/login');` with `return navigate('/dashboard');`.
 
 Now login in the app and try refreshing the page. You should stay on the dashboard. With that update we've taken care of all our initial issues...
 
@@ -234,7 +234,7 @@ async function updateAccountData() {
     return logout();
   }
 
-  updateState('account', data);
+  updateState("account", data);
 }
 ```
 
@@ -253,8 +253,8 @@ This one updates the account data, then takes care of updating the HTML of the d
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard', init: refresh }
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard", init: refresh },
 };
 ```
 
@@ -264,7 +264,7 @@ Try reloading the dashboard now, it should display the updated account data.
 
 ## 🚀 Challenge
 
-Now that we reload the account data every time the dashboard is loaded, do you think we still need to persist *all the account* data?
+Now that we reload the account data every time the dashboard is loaded, do you think we still need to persist _all the account_ data?
 
 Try working together to change what is saved and loaded from `localStorage` to only include what is absolutely required for the app to work.
 

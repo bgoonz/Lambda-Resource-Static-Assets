@@ -30,14 +30,14 @@ The `<form>` element encapsulates a section of an HTML document where the user c
 There are a lot of different [types](https://developer.mozilla.org/docs/Web/HTML/Element/input) of `<input>`, for example to create a field where the user can enter its username you can use:
 
 ```html
-<input id="username" name="username" type="text">
+<input id="username" name="username" type="text" />
 ```
 
 The `name` attribute will be used as the property name when the form data will be sent over. The `id` attribute is used to associate a `<label>` with the form control.
 
 > Take a look at the whole list of [`<input>` types](https://developer.mozilla.org/docs/Web/HTML/Element/input) and [other form controls](https://developer.mozilla.org/docs/Learn/Forms/Other_form_controls) to get an idea of all the native UI elements you can use when building your UI.
 
-✅ Note that `<input>` is an [empty element](https://developer.mozilla.org/docs/Glossary/Empty_element) on which you should *not* add a matching closing tag. You can however use the self-closing `<input/>` notation, but it's not required.
+✅ Note that `<input>` is an [empty element](https://developer.mozilla.org/docs/Glossary/Empty_element) on which you should _not_ add a matching closing tag. You can however use the self-closing `<input/>` notation, but it's not required.
 
 The `<button>` element within a form is a bit special. If you do not specify its `type` attribute, it will automatically submit the form data to the server when pressed. Here are the possible `type` values:
 
@@ -47,7 +47,7 @@ The `<button>` element within a form is a bit special. If you do not specify its
 
 ### Task
 
-Let's start by adding a form to the `login` template. We'll need a *username* field and a *Login* button.
+Let's start by adding a form to the `login` template. We'll need a _username_ field and a _Login_ button.
 
 ```html
 <template id="login">
@@ -56,7 +56,7 @@ Let's start by adding a form to the `login` template. We'll need a *username* fi
     <h2>Login</h2>
     <form id="loginForm">
       <label for="username">Username</label>
-      <input id="username" name="user" type="text">
+      <input id="username" name="user" type="text" />
       <button>Login</button>
     </form>
   </section>
@@ -73,17 +73,17 @@ If you take a closer look, you can notice that we also added a `<label>` element
 Now we'll add a second form for the registration, just below the previous one:
 
 ```html
-<hr/>
+<hr />
 <h2>Register</h2>
 <form id="registerForm">
   <label for="user">Username</label>
-  <input id="user" name="user" type="text">
+  <input id="user" name="user" type="text" />
   <label for="currency">Currency</label>
-  <input id="currency" name="currency" type="text" value="$">
+  <input id="currency" name="currency" type="text" value="$" />
   <label for="description">Description</label>
-  <input id="description" name="description" type="text">
+  <input id="description" name="description" type="text" />
   <label for="balance">Current balance</label>
-  <input id="balance" name="balance" type="number" value="0">
+  <input id="balance" name="balance" type="number" value="0" />
   <button>Register</button>
 </form>
 ```
@@ -95,7 +95,7 @@ Notice also that the input for `balance` has the `number` type. Does it look dif
 
 ## Submitting data to the server
 
-Now that we have a functional UI, the next step is to send the data over to our server. Let's make a quick test using our current code: what happens if you click on the *Login* or *Register* button?
+Now that we have a functional UI, the next step is to send the data over to our server. Let's make a quick test using our current code: what happens if you click on the _Login_ or _Register_ button?
 
 Did you notice the change in your browser's URL section?
 
@@ -116,10 +116,14 @@ That's why you can change it to use the [POST method](https://www.w3.org/Protoco
 Add `action` and `method` properties to the registration form:
 
 ```html
-<form id="registerForm" action="//localhost:5000/api/accounts" method="POST">
+<form
+  id="registerForm"
+  action="//localhost:5000/api/accounts"
+  method="POST"
+></form>
 ```
 
-Now try to register a new account with your name. After clicking on the *Register* button you should see something like this:
+Now try to register a new account with your name. After clicking on the _Register_ button you should see something like this:
 
 ![A browser window at the address localhost:5000/api/accounts, showing a JSON string with user data](./images/form-post.png)
 
@@ -142,14 +146,14 @@ To send the form data to the server without forcing a page reload, we have to us
 Replace the registration form `action` with:
 
 ```html
-<form id="registerForm" action="javascript:register()">
+<form id="registerForm" action="javascript:register()"></form>
 ```
 
 Open `app.js` add a new function named `register`:
 
 ```js
 function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const data = Object.fromEntries(formData);
   const jsonData = JSON.stringify(data);
@@ -163,14 +167,14 @@ The data is now ready to be sent to the server. Create a new function named `cre
 ```js
 async function createAccount(account) {
   try {
-    const response = await fetch('//localhost:5000/api/accounts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: account
+    const response = await fetch("//localhost:5000/api/accounts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: account,
     });
     return await response.json();
   } catch (error) {
-    return { error: error.message || 'Unknown error' };
+    return { error: error.message || "Unknown error" };
   }
 }
 ```
@@ -206,16 +210,16 @@ Finally, let's add some logs to check the result. The final function should look
 
 ```js
 async function register() {
-  const registerForm = document.getElementById('registerForm');
+  const registerForm = document.getElementById("registerForm");
   const formData = new FormData(registerForm);
   const jsonData = JSON.stringify(Object.fromEntries(formData));
   const result = await createAccount(jsonData);
 
   if (result.error) {
-    return console.log('An error occured:', result.error);
+    return console.log("An error occured:", result.error);
   }
 
-  console.log('Account created!', result);
+  console.log("Account created!", result);
 }
 ```
 
@@ -227,7 +231,7 @@ That was a bit long but we got there! If you open your [browser developer tools]
 
 ## Data validation
 
-If you try to register a new account without setting an username first, you can see that the server returns an error with status code [400 (Bad Request)](https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).).
+If you try to register a new account without setting an username first, you can see that the server returns an error with status code [400 (Bad Request)](<https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).>).
 
 Before sending data to a server it's a good practice to [validate the form data](https://developer.mozilla.org/docs/Learn/Forms/Form_validation) beforehand when possible, to make sure you send a valid request. HTML5 forms controls provides built-in validation using various attributes:
 
@@ -245,10 +249,10 @@ There are 2 required fields to create a valid new account, the username and curr
 
 ```html
 <label for="user">Username (required)</label>
-<input id="user" name="user" type="text" required>
+<input id="user" name="user" type="text" required />
 ...
 <label for="currency">Currency (required)</label>
-<input id="currency" name="currency" type="text" value="$" required>
+<input id="currency" name="currency" type="text" value="$" required />
 ```
 
 While this particular server implementation does not enforce specific limits on the fields maximum length, it's always a good practice to define reasonable limits for any user text entry.
@@ -256,18 +260,25 @@ While this particular server implementation does not enforce specific limits on 
 Add a `maxlength` attribute to the text fields:
 
 ```html
-<input id="user" name="user" type="text" maxlength="20" required>
+<input id="user" name="user" type="text" maxlength="20" required />
 ...
-<input id="currency" name="currency" type="text" value="$" maxlength="5" required>
+<input
+  id="currency"
+  name="currency"
+  type="text"
+  value="$"
+  maxlength="5"
+  required
+/>
 ...
-<input id="description" name="description" type="text" maxlength="100">
+<input id="description" name="description" type="text" maxlength="100" />
 ```
 
-Now if you press the *Register* button and a field does not respect a validation rule we defined, you should see something like this:
+Now if you press the _Register_ button and a field does not respect a validation rule we defined, you should see something like this:
 
 ![Screenshot showing the validation error when trying to submit the form](./images/validation-error.png)
 
-Validation like this performed *before* sending any data to the server is called **client-side** validation. But note that's it's not always possible to peform all checks without sending the data. For example, we cannot check here if an account already exists with the same username without sending a request to the server. Additional validation performed on the server is called **server-side** validation.
+Validation like this performed _before_ sending any data to the server is called **client-side** validation. But note that's it's not always possible to peform all checks without sending the data. For example, we cannot check here if an account already exists with the same username without sending a request to the server. Additional validation performed on the server is called **server-side** validation.
 
 Usually both need to be implemented, and while using client-side validation improves the user experience by providing instant feedback to the user, server-side validation is crucial to make sure the user data you manipulate is sound and safe.
 

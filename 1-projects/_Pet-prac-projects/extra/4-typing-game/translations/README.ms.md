@@ -25,6 +25,6 @@ Pelajaran ini menganggap anda sudah biasa dengan konsep berikut:
 
 [Membuat permainan menaip dengan menggunakan pengaturcaraan berdasarkan acara](../typing-game/README.ms.md)
 
-## Kredit 
+## Kredit
 
 Ditulisa dengan ♥️ oleh [Christopher Harrison](http://www.twitter.com/geektrainer)

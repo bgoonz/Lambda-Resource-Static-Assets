@@ -1,28 +1,28 @@
 # Lecture III: Binary Search Trees and Heaps
 
 a. [Additional Resources](#Additional-Resources)  
-b. [Text Buffer](#Text-Buffer)   
-c. [Append and Prepend](#Append-and-Prepend)   
-d. [Delete From Head or Tail](#Delete-From-Head-or-Tail)   
-e. [Binary Search Trees](#Binary-Search-Trees)   
-f. [Insert into BST](#Insert-into-BST)   
-g. [Heaps](#Heaps)   
-h. [Building a Heap](#Building-a-Heap)        
+b. [Text Buffer](#Text-Buffer)  
+c. [Append and Prepend](#Append-and-Prepend)  
+d. [Delete From Head or Tail](#Delete-From-Head-or-Tail)  
+e. [Binary Search Trees](#Binary-Search-Trees)  
+f. [Insert into BST](#Insert-into-BST)  
+g. [Heaps](#Heaps)  
+h. [Building a Heap](#Building-a-Heap)
 
 <br>
 
-[CS18 Sean Chen Lecture](https://youtu.be/QYddRpvTaFk)  
+[CS18 Sean Chen Lecture](https://youtu.be/QYddRpvTaFk)
 
-[CS19 Brian Doyle Lecture](https://www.youtube.com/watch?v=B4ijhReCRHw&feature=youtu.be)   
+[CS19 Brian Doyle Lecture](https://www.youtube.com/watch?v=B4ijhReCRHw&feature=youtu.be)
 
 <br>
 <br>
 
 ## Additional Resources
 
-[Binary Search Trees - 15min](https://youtu.be/SsRVdvRsNG0)  
+[Binary Search Trees - 15min](https://youtu.be/SsRVdvRsNG0)
 
-[Heaps - 30min](https://youtu.be/LYWPsV2YQBA)  
+[Heaps - 30min](https://youtu.be/LYWPsV2YQBA)
 
 <br>
 
@@ -31,7 +31,6 @@ h. [Building a Heap](#Building-a-Heap)
 Taking a look at our project repo's [text buffer file](bst_heaps.py), let's start working through what it might be expecting and how to build a text buffer.
 
 The first thing we'll notice is that it imports the `DoublyLinkedList` file to use that data structure.
-
 
 Our `init` function shows us that we can optionally pass the string to `self.contents` if there is a string parameter passed in -- but there doesn't need to be. How should we add to this function so it passes that string to the content?
 
@@ -47,7 +46,6 @@ def __init__(self, init=None):
 ```
 
 <br>
-
 
 We'll want to add this data to the tail of the linked list, but we don't know _what_ a Text Buffer is, so _how_ isn't certain.
 
@@ -68,7 +66,6 @@ def __init__(self, init=None):
 ```
 
 <br>
-
 
 We can use the pre-built `add_to_tail` function from our Doubly Linked List file.
 
@@ -95,7 +92,6 @@ We could also test the contents' length or tail to see if it matches the expecte
 <br>
 
 ## Append and Prepend
-
 
 Next, let's work on append and prepend. Append starts out like so:
 
@@ -131,7 +127,6 @@ if init:
 
 <br>
 
-
 Prepend means we will add the string to the front of the text buffer, or the head of the list. Which means we need to reverse the character order so that the string is being prepending to read in the correct order.
 
 We could visualize it like so. If we wanted to add `HELLO` to the existing list that says `WORLD`:
@@ -144,18 +139,17 @@ If we tried to add it in order, it would go like this:
 > EH WORLD  
 > LEH WORLD  
 > LLEH WORLD  
-> OLLEH WORLD  
+> OLLEH WORLD
 
 Since this wouldnt read correctly, we need to reverse the string so it instead is added like this:
 
 > O WORLD  
 > LO WORLD  
 > LLO WORLD  
-> ELLO WORLD   
-> HELLO WORLD  
+> ELLO WORLD  
+> HELLO WORLD
 
-
-We can reverse a string in two ways in Python. 
+We can reverse a string in two ways in Python.
 
 The first option is to use slicing with `[::-1]`, but this is considered an arcane or difficult to read way of writing:
 
@@ -163,14 +157,13 @@ The first option is to use slicing with `[::-1]`, but this is considered an arca
 
 ```
 def prepend(self, string_to_add):
-    # reverse the incoming string to maintain correct 
-    # order when adding to the front of the text buffer 
+    # reverse the incoming string to maintain correct
+    # order when adding to the front of the text buffer
     for character in string_to_add[::-1]:
         self.contents.add_to_head(character)
 ```
 
 <br>
-
 
 Another method is to use the built in `reversed` function like so:
 
@@ -178,8 +171,8 @@ Another method is to use the built in `reversed` function like so:
 
 ```
 def prepend(self, string_to_add):
-    # reverse the incoming string to maintain correct 
-    # order when adding to the front of the text buffer 
+    # reverse the incoming string to maintain correct
+    # order when adding to the front of the text buffer
     for character in reversed(string_to_add):
         self.contents.add_to_head(character)
 ```
@@ -187,7 +180,6 @@ def prepend(self, string_to_add):
 <br>
 
 You can read more about the pros and cons of each method [here](https://dbader.org/blog/python-reverse-string).
-
 
 <br>
 <br>
@@ -197,7 +189,6 @@ You can read more about the pros and cons of each method [here](https://dbader.o
 Next we want to delete some number of characters from either the head or the tail. Both of these functions will work really similarly.
 
 Since we know exactly how _many_ characters to remove, we can call our doubly linked list functions that many times using a loop:
-
 
 <br>
 
@@ -227,16 +218,16 @@ The starting functions gives us some hints about how to approach this problem:
 ```
 """
 Join other_buffer to self
-The input buffer gets concatenated to the end of this buffer 
-The tail of the concatenated buffer will be the tail of the other buffer 
-The head of the concatenated buffer will be the head of this buffer 
+The input buffer gets concatenated to the end of this buffer
+The tail of the concatenated buffer will be the tail of the other buffer
+The head of the concatenated buffer will be the head of this buffer
 """
 def join(self, other_buffer):
-    # we might want to check that other_buffer is indeed a text buffer 
-    # set self list tail's next node to be the head of the other buffer 
-    
+    # we might want to check that other_buffer is indeed a text buffer
+    # set self list tail's next node to be the head of the other buffer
+
     # set other_buffer head's prev node to be the tail of this buffer
-    
+
     pass
 ```
 
@@ -249,8 +240,7 @@ First, we need to make sure that the passing in `other_buffer` is actually a tex
 We can use Python's `isInstance` to check if both are an instance of the same class. Per the docs:
 
 > def isinstance(obj, class_or_tuple)  
-> Return whether an object is an instance of a class or of a subclass thereof.  
-
+> Return whether an object is an instance of a class or of a subclass thereof.
 
 So we'll keep going if it is a TextBuffer or print an error if there it isn't:
 
@@ -258,9 +248,9 @@ So we'll keep going if it is a TextBuffer or print an error if there it isn't:
 
 ```
         if isinstance(other_buffer, TextBuffer):
-            # set self list tail's next node to be the head of the other buffer 
+            # set self list tail's next node to be the head of the other buffer
             # set other_buffer head's prev node to be the tail of this buffer
-            
+
         else:
             print("ERROR: Argument is not a TextBuffer")
             return
@@ -268,14 +258,13 @@ So we'll keep going if it is a TextBuffer or print an error if there it isn't:
 
 <br>
 
-
 We'll set the tail of the current TextBuffer pointing to the head of the other_buffer:
 
 <br>
 
 ```
 if isinstance(other_buffer, TextBuffer):
-    # set self list tail's next node to be the head of the other buffer 
+    # set self list tail's next node to be the head of the other buffer
     self.contents.tail.next = other_buffer.contents.head
     # set other_buffer head's prev node to be the tail of this buffer
     other_buffer.contents.head.prev = self.contents.tail
@@ -287,20 +276,19 @@ if isinstance(other_buffer, TextBuffer):
 
 <br>
 
-We should also check that the `other_buffer` being passed in does in fact have contents. 
+We should also check that the `other_buffer` being passed in does in fact have contents.
 
 <br>
 
 ```
 if(other_buffer.contents.length == 0):
     print("ERROR: Other buffer is empty!")
-    return        
+    return
 ```
 
 <br>
 
 We have to nest that in _after_ checking that `other_buffer` is a buffer, or else there will be no `.length` to check.
-
 
 Lastly we need to handle joining a string by turning it into text buffer first.
 
@@ -310,15 +298,14 @@ This function starts out like so:
 
 ```
 # if we get fed a string instead of a text buffer instance,
-# initialize a new text buffer with this string and then 
-# call the join method 
+# initialize a new text buffer with this string and then
+# call the join method
 
 def join_string(self, string_to_join):
     pass
 ```
 
 <br>
-
 
 This can be done very simply with our pre-written functions. We'll turn that string into a TextBuffer instance and then use our join method to combine the new text buffer with the current one.
 
@@ -349,7 +336,7 @@ Read more [here](https://www.geeksforgeeks.org/binary-search/) or see this helpf
 
 <br>
 
-A tree is a node tree that contains "branches" and "leaves". 
+A tree is a node tree that contains "branches" and "leaves".
 
 ![Valid Binary Trees](Binary_Trees.pny "Valid Binary Trees")
 
@@ -371,12 +358,11 @@ By having 77 and 92 underneath 22 on the left side of the tree, it's invalid bec
 
 `d)` is also invalid because 21 is larger than 17 but on the left side.
 
-
 <br>
 
-What would we do if we have 2 identical values in the Binary Tree? 
+What would we do if we have 2 identical values in the Binary Tree?
 
-In a simple BST, we could place that either on the left or right hand side, depending on how we want to define which is _equal to and_. 
+In a simple BST, we could place that either on the left or right hand side, depending on how we want to define which is _equal to and_.
 
 But in an ideal solution, we would not have duplicates. Instead, we would store the value _and_ the count of nodes with that value in one spot.
 
@@ -402,14 +388,13 @@ This indicates that we have two nodes with the value of 12, but prevents any con
 
 A detailed explanation is [here](https://www.geeksforgeeks.org/how-to-handle-duplicates-in-binary-search-tree/).
 
-Some Binary Search Trees also require it to be balanced by having the same number of nodes on the right and left sides. Learn more about [converting to a balanced BST](https://www.geeksforgeeks.org/convert-normal-bst-balanced-bst/). 
+Some Binary Search Trees also require it to be balanced by having the same number of nodes on the right and left sides. Learn more about [converting to a balanced BST](https://www.geeksforgeeks.org/convert-normal-bst-balanced-bst/).
 
 <br>
 
-
 A Binary Tree _could_ work if we swapped convention and put all greater than values down the left side, and lesser than values on the right side. It would still funciton. But because it breaks convention, it would be poorly written code that confuses other devs that work with that code.
 
-There could be an exception with good reasoning for doing it that way -- in which case, we should document it clearly. 
+There could be an exception with good reasoning for doing it that way -- in which case, we should document it clearly.
 
 On the whole though, it's best to follow convention.
 
@@ -420,7 +405,6 @@ Visualize your Binary Tree by creating it [on this website](https://www.cs.usfca
 See visualization of many BST aspects [here](https://visualgo.net/bn/bst).
 
 <br>
-
 
 ## Insert into BST
 
@@ -448,7 +432,7 @@ class BinarySearchTreeNode:
         self.value = value
         self.left = None
         self.right = None
-    
+
     def insert(self, value):
         if value < self.value:
             # go down the left side
@@ -479,19 +463,17 @@ It's a tree that is held inside of an array. Unlike the typical array that is ar
 
 Read more [here](https://www.geeksforgeeks.org/binary-heap/).
 
-
 There are two types of heaps: [min heap and max heap](https://www.educative.io/edpresso/min-heap-vs-max-heap).
 
 A min heap means that the key value at the root of the tree must be the minimum of all the values in the Binary Heap.
 
 A max heaps means that the key value at the root of the tree must be the _maximum_ value of the complete binary tree.
 
-
 If we have two numbers, 42 and 10, how would it look in a tree?
 
 It'll start out with 42:
 
-> [ -inf, 42]  
+> [ -inf, 42]
 
 Which in the tree is just:
 
@@ -501,7 +483,7 @@ Which in the tree is just:
 
 When we add 10, it will be added in at the bottom of the tree:
 
-> [ -inf, 42, 10 ]  
+> [ -inf, 42, 10 ]
 
 ```
     42
@@ -511,12 +493,12 @@ When we add 10, it will be added in at the bottom of the tree:
 
 BUT then it adjusts by switching 10 to the appropriate place in the tree for a min heap (remember, the key value at the root is the lowest).
 
-> [ -inf, 10, 42 ]  
+> [ -inf, 10, 42 ]
 
 ```
     10
    /
-  42     
+  42
 ```
 
 <br>
@@ -623,7 +605,7 @@ Let's build the bubble up method and assume this is a min heap. We have the _ind
 
 If we're looking at the index, when do we know we've hit our base case? If our index is 0.
 
-How do we compare this index to the parent's value? Although we're mentally envisioning this as a binary tree, it's actually stored as a flat array. 
+How do we compare this index to the parent's value? Although we're mentally envisioning this as a binary tree, it's actually stored as a flat array.
 
 We'll use [the algorithm](https://www.geeksforgeeks.org/binary-heap/) that returns the parent node: i-1//2
 
@@ -653,7 +635,6 @@ The `//` divisor means that it drops any decimal points and returns a floored nu
 This compares the parent value to the index value. If the parent is larger, then we'll swap them, and update the index to that value of the parent.
 
 If the parent value is not larger, then we can break out of the loop because the index is in the right place.
-
 
 _Note: the ReadMe actually indicates that the generic heap should be able to be a max or min heap_
 

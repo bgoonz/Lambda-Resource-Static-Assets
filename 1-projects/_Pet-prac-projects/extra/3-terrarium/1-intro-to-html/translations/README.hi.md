@@ -1,6 +1,7 @@
 # टेरारियम प्रोजेक्ट पार्ट 1: HTML का परिचय
 
 ![HTML का परिचय](/sketchnotes/webdev101-html.png)
+
 > [टोमोमी इमुरा](https://twitter.com/girlie_mac) द्वारा स्केचनेट
 
 ## पूर्व व्याख्यान प्रश्नोत्तरी
@@ -22,10 +23,11 @@ HTML, या HyperText Markup Language, वेब का 'कंकाल' ह�
 या
 
 अपने git bash पर इन कमांड का उपयोग करें:
-* `mkdir terrarium`
-* `cd terrarium`
-* `touch index.html`
-* `code index.html` या `nano index.html`
+
+- `mkdir terrarium`
+- `cd terrarium`
+- `touch index.html`
+- `code index.html` या `nano index.html`
 
 > index.html फ़ाइलें एक ब्राउज़र को इंगित करती हैं कि यह एक फ़ोल्डर में डिफ़ॉल्ट फ़ाइल है; URL जैसे `https://anysite.com/test` को एक फ़ोल्डर संरचना का उपयोग करके बनाया जा सकता है, जिसमें इसके अंदर` index` नाम के साथ `test` नामक एक फ़ोल्डर शामिल है; `index.html` को URL में नहीं दिखाना है।
 
@@ -58,9 +60,9 @@ HTML दस्तावेज़ के 'हेड' क्षेत्र मे
 
 - पेज का शीर्षक
 - पृष्ठ मेटाडेटा सहित:
-    - 'वर्ण सेट', पृष्ठ में किस वर्ण एन्कोडिंग का उपयोग किया जाता है, इस बारे में बताना
-    - `x-ua-compatible` सहित ब्राउज़र जानकारी, जो इंगित करता है कि IE = एज ब्राउज़र समर्थित है
-    - लोड होने पर व्यूपोर्ट कैसे व्यवहार करना चाहिए, इसके बारे में जानकारी। जब पृष्ठ पहली बार लोड होता है तो व्यूपोर्ट के शुरुआती स्तर को नियंत्रित करने के लिए व्यूपोर्ट सेट करना 1 को नियंत्रित करता है।
+  - 'वर्ण सेट', पृष्ठ में किस वर्ण एन्कोडिंग का उपयोग किया जाता है, इस बारे में बताना
+  - `x-ua-compatible` सहित ब्राउज़र जानकारी, जो इंगित करता है कि IE = एज ब्राउज़र समर्थित है
+  - लोड होने पर व्यूपोर्ट कैसे व्यवहार करना चाहिए, इसके बारे में जानकारी। जब पृष्ठ पहली बार लोड होता है तो व्यूपोर्ट के शुरुआती स्तर को नियंत्रित करने के लिए व्यूपोर्ट सेट करना 1 को नियंत्रित करता है।
 
 ### टास्क
 
@@ -68,15 +70,14 @@ HTML दस्तावेज़ के 'हेड' क्षेत्र मे
 
 ```html
 <head>
-	<title>Welcome to my Virtual Terrarium</title>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome to my Virtual Terrarium</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 ```
 
-✅ यदि आप व्यूपोर्ट मेटा टैग इस तरह सेट करते हैं तो क्या होगा: `<meta name="viewport" content="width=600">`? [Viewport](https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag) के बारे में और पढ़ें।
----
+## ✅ यदि आप व्यूपोर्ट मेटा टैग इस तरह सेट करते हैं तो क्या होगा: `<meta name="viewport" content="width=600">`? [Viewport](https://developer.mozilla.org/en-US/docs/Mozilla/Mobile/Viewport_meta_tag) के बारे में और पढ़ें।
 
 ## दस्तावेज़ की `body`
 
@@ -89,13 +90,13 @@ HTML में, आप वेब पेज के तत्वों को ब�
 ```html
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Welcome to my Virtual Terrarium</title>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-	</head>
-	<body></body>
+  <head>
+    <title>Welcome to my Virtual Terrarium</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body></body>
 </html>
 ```
 
@@ -113,52 +114,52 @@ HTML में, आप वेब पेज के तत्वों को ब�
 
 ```html
 <div id="page">
-	<div id="left-container" class="container">
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
-		</div>
-	</div>
-	<div id="right-container" class="container">
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
-		</div>
-		<div class="plant-holder">
-			<img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
-		</div>
-	</div>
+  <div id="left-container" class="container">
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant1" src="./images/plant1.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant2" src="./images/plant2.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant3" src="./images/plant3.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant4" src="./images/plant4.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant5" src="./images/plant5.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant6" src="./images/plant6.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant7" src="./images/plant7.png" />
+    </div>
+  </div>
+  <div id="right-container" class="container">
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant8" src="./images/plant8.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant9" src="./images/plant9.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant10" src="./images/plant10.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant11" src="./images/plant11.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant12" src="./images/plant12.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant13" src="./images/plant13.png" />
+    </div>
+    <div class="plant-holder">
+      <img class="plant" alt="plant" id="plant14" src="./images/plant14.png" />
+    </div>
+  </div>
 </div>
 ```
 
@@ -196,13 +197,13 @@ HTML में, आप वेब पेज के तत्वों को ब�
 
 ```html
 <div id="terrarium">
-	<div class="jar-top"></div>
-	<div class="jar-walls">
-		<div class="jar-glossy-long"></div>
-		<div class="jar-glossy-short"></div>
-	</div>
-	<div class="dirt"></div>
-	<div class="jar-bottom"></div>
+  <div class="jar-top"></div>
+  <div class="jar-walls">
+    <div class="jar-glossy-long"></div>
+    <div class="jar-glossy-short"></div>
+  </div>
+  <div class="dirt"></div>
+  <div class="jar-bottom"></div>
 </div>
 ```
 

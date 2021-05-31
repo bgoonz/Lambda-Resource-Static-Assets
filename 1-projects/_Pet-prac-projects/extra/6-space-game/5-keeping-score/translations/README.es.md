@@ -27,7 +27,7 @@ El concepto de tener una vida en un juego es solo un número. En el contexto de 
 
 Agreguemos lo siguiente a tu juego:
 
-- **Game score**** (Puntuación del juego): por cada barco enemigo que sea destruido, el héroe debería recibir algunos puntos, sugerimos 100 puntos por barco. La puntuación del juego debe mostrarse en la parte inferior izquierda.
+- **Game score\*\*** (Puntuación del juego): por cada barco enemigo que sea destruido, el héroe debería recibir algunos puntos, sugerimos 100 puntos por barco. La puntuación del juego debe mostrarse en la parte inferior izquierda.
 - **Life** (Vida): Tu nave tiene tres vidas. Pierdes una vida cada vez que un barco enemigo choca contigo. Se debe mostrar un puntaje de vida en la parte inferior derecha y estar compuesto por el siguiente gráfico: [life image](solution/assets/life.png)..
 
 ## Pasos recomendados
@@ -57,115 +57,114 @@ Lo anterior iniciará un servidor HTTP en la dirección `http://localhost:5000`.
 
 1. **Copie los recursos necesarios** de la carpeta `solution/ assets/` a la carpeta `your-work`; agregará un activo `life.png`. Agregue el lifeImg a la función window.onload:
 
-
-    ```javascript
-    lifeImg = await loadTexture("assets/life.png");
-    ```
+   ```javascript
+   lifeImg = await loadTexture("assets/life.png");
+   ```
 
 1. Agregue el `lifeImg` a la lista de activos:
 
-    ```javascript
-    let heroImg,
-    ...
-    lifeImg,
-    ...
-    eventEmitter = new EventEmitter();
-    ```
-  
+   ```javascript
+   let heroImg,
+   ...
+   lifeImg,
+   ...
+   eventEmitter = new EventEmitter();
+   ```
+
 2.**Agregar variables**. Agregue un código que represente su puntaje total (0) y las vidas restantes (3), muestre estos puntajes en una pantalla.
 
 3. **Amplíe la función `updateGameObjects()`**. Amplíe la función `updateGameObjects()` para manejar las colisiones enemigas:
 
-    ```javascript
-    enemies.forEach(enemy => {
-        const heroRect = hero.rectFromGameObject();
-        if (intersectRect(heroRect, enemy.rectFromGameObject())) {
-          eventEmitter.emit(Messages.COLLISION_ENEMY_HERO, { enemy });
-        }
-      })
-    ```
+   ```javascript
+   enemies.forEach((enemy) => {
+     const heroRect = hero.rectFromGameObject();
+     if (intersectRect(heroRect, enemy.rectFromGameObject())) {
+       eventEmitter.emit(Messages.COLLISION_ENEMY_HERO, { enemy });
+     }
+   });
+   ```
 
 4. **Agrega `life` y `points`**.
-    1. **Inicializar variables**. En `this.cooldown = 0` en la clase `Hero`, establece la vida y los puntos:
 
-        ```javascript
-        this.life = 3;
-        this.points = 0;
-        ```
+   1. **Inicializar variables**. En `this.cooldown = 0` en la clase `Hero`, establece la vida y los puntos:
+
+      ```javascript
+      this.life = 3;
+      this.points = 0;
+      ```
 
    1. **Dibujar variables en pantalla**. Dibuja estos valores en la pantalla:
 
-        ```javascript
-        function drawLife() {
-          // TODO, 35, 27
-          const START_POS = canvas.width - 180;
-          for(let i=0; i < hero.life; i++ ) {
-            ctx.drawImage(
-              lifeImg, 
-              START_POS + (45 * (i+1) ), 
-              canvas.height - 37);
-          }
+      ```javascript
+      function drawLife() {
+        // TODO, 35, 27
+        const START_POS = canvas.width - 180;
+        for (let i = 0; i < hero.life; i++) {
+          ctx.drawImage(lifeImg, START_POS + 45 * (i + 1), canvas.height - 37);
         }
-        
-        function drawPoints() {
-          ctx.font = "30px Arial";
-          ctx.fillStyle = "red";
-          ctx.textAlign = "left";
-          drawText("Points: " + hero.points, 10, canvas.height-20);
-        }
-        
-        function drawText(message, x, y) {
-          ctx.fillText(message, x, y);
-        }
+      }
 
-        ```
+      function drawPoints() {
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "red";
+        ctx.textAlign = "left";
+        drawText("Points: " + hero.points, 10, canvas.height - 20);
+      }
+
+      function drawText(message, x, y) {
+        ctx.fillText(message, x, y);
+      }
+      ```
 
    1. **Agregar métodos al bucle del juego**. Asegúrese de agregar estas funciones a su función window.onload en `updateGameObjects ()`:
 
-        ```javascript
-        drawPoints();
-        drawLife();
-        ```
+      ```javascript
+      drawPoints();
+      drawLife();
+      ```
 
-1. **Implementa las reglas del juego**. Implementa las siguientes reglas del juego:
+5. **Implementa las reglas del juego**. Implementa las siguientes reglas del juego:
 
-    1. **Por cada colisión entre héroes y enemigos**, resta una vida.
-   
-       Extiende la clase `Hero` para hacer esta deducción:
+   1. **Por cada colisión entre héroes y enemigos**, resta una vida.
 
-        ```javascript
-        decrementLife() {
-          this.life--;
-          if (this.life === 0) {
-            this.dead = true;
-          }
+      Extiende la clase `Hero` para hacer esta deducción:
+
+      ```javascript
+      decrementLife() {
+        this.life--;
+        if (this.life === 0) {
+          this.dead = true;
         }
-        ```
+      }
+      ```
 
    2. **Por cada láser que golpea a un enemigo**, aumenta la puntuación del juego con 100 puntos.
 
-       Extiende la clase Hero para hacer este incremento:
-    
-        ```javascript
-          incrementPoints() {
-            this.points += 100;
-          }
-        ```
+      Extiende la clase Hero para hacer este incremento:
 
-        Agregue estas funciones a sus Collision Event Emitters:
+      ```javascript
+        incrementPoints() {
+          this.points += 100;
+        }
+      ```
 
-        ```javascript
-        eventEmitter.on(Messages.COLLISION_ENEMY_LASER, (_, { first, second }) => {
-           first.dead = true;
-           second.dead = true;
-           hero.incrementPoints();
-        })
+      Agregue estas funciones a sus Collision Event Emitters:
 
-        eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
-           enemy.dead = true;
-           hero.decrementLife();
-        });
-        ```
+      ```javascript
+      eventEmitter.on(
+        Messages.COLLISION_ENEMY_LASER,
+        (_, { first, second }) => {
+          first.dead = true;
+          second.dead = true;
+          hero.incrementPoints();
+        }
+      );
+
+      eventEmitter.on(Messages.COLLISION_ENEMY_HERO, (_, { enemy }) => {
+        enemy.dead = true;
+        hero.decrementLife();
+      });
+      ```
 
 ✅ Investigue un poco para descubrir otros juegos creados con JavaScript / Canvas. ¿Cuáles son sus rasgos comunes?
 

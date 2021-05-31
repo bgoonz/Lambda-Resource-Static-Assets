@@ -8,6 +8,6 @@ Lihat apakah anda dapat membuat fungsi yang memiliki gabungan parameter dan para
 
 ## Rubrik
 
-| Kriteria | Contoh                                                                             | Mencukupi                                                         | Usaha Lagi |
-| -------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------- | ----------------- |
+| Kriteria | Contoh                                                                                                    | Mencukupi                                                               | Usaha Lagi                     |
+| -------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------ |
 |          | Penyelesaian ditawarkan dengan dua atau lebih fungsi yang berfungsi dengan baik dengan pelbagai parameter | Penyelesaian kerja ditawarkan dengan satu fungsi dan beberapa parameter | Penyelesaian mempunyai pepijat |

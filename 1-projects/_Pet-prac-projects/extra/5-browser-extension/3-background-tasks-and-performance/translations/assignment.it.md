@@ -4,6 +4,6 @@ Fornire un rapporto dettagliato di un sito Web, mostrando le aree in cui le pres
 
 ## Rubrica
 
-| Criteri | Ottimo | Adeguato | Necessita miglioramento |
-| -------- | ---------------------------------------------------------------------------------------------------------- | --------------------------- | ----------------------------- |
-|          | Viene presentato un rapporto con i dettagli tratti non solo dagli strumenti del browser ma anche da strumenti di terze parti, se disponibili | Viene presentato un rapporto di base | Viene presentato un rapporto minimo |
+| Criteri | Ottimo                                                                                                                                       | Adeguato                             | Necessita miglioramento             |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ----------------------------------- |
+|         | Viene presentato un rapporto con i dettagli tratti non solo dagli strumenti del browser ma anche da strumenti di terze parti, se disponibili | Viene presentato un rapporto di base | Viene presentato un rapporto minimo |

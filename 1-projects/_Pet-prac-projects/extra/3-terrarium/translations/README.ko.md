@@ -12,7 +12,7 @@
 
 ## 크레딧
 
-Written with ♥️  by [Jen Looper](https://www.twitter.com/jenlooper)
+Written with ♥️ by [Jen Looper](https://www.twitter.com/jenlooper)
 
 The terrarium created via CSS was inspired by Jakub Mandra's glass jar [codepen](https://codepen.io/Rotarepmi/pen/rjpNZY).
 

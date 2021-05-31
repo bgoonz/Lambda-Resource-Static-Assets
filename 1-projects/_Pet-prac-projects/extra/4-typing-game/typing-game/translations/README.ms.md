@@ -78,21 +78,28 @@ Buat fail baru bernama **index.html**. Tambahkan HTML berikut:
 ```html
 <!-- inside index.html -->
 <html>
-<head>
-  <title>Typing game</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Typing game!</h1>
-  <p>Practice your typing skills with a quote from Sherlock Holmes. Click **start** to begin!</p>
-  <p id="quote"></p> <!-- This will display our quote -->
-  <p id="message"></p> <!-- This will display any status messages -->
-  <div>
-    <input type="text" aria-label="current word" id="typed-value" /> <!-- The textbox for typing -->
-    <button type="button" id="start">Start</button> <!-- To start the game -->
-  </div>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <title>Typing game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Typing game!</h1>
+    <p>
+      Practice your typing skills with a quote from Sherlock Holmes. Click
+      **start** to begin!
+    </p>
+    <p id="quote"></p>
+    <!-- This will display our quote -->
+    <p id="message"></p>
+    <!-- This will display any status messages -->
+    <div>
+      <input type="text" aria-label="current word" id="typed-value" />
+      <!-- The textbox for typing -->
+      <button type="button" id="start">Start</button>
+      <!-- To start the game -->
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
 ```
 
@@ -164,13 +171,13 @@ Kami juga mahu rujukan ke elemen UI:
 // dalam script.js
 // semua quotes
 const quotes = [
-    'When you have eliminated the impossible, whatever remains, however improbable, must be the truth.',
-    'There is nothing more deceptive than an obvious fact.',
-    'I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.',
-    'I never make exceptions. An exception disproves the rule.',
-    'What one man can invent another can discover.',
-    'Nothing clears up a case so much as stating it to another person.',
-    'Education never ends, Watson. It is a series of lessons, with the greatest for the last.',
+  "When you have eliminated the impossible, whatever remains, however improbable, must be the truth.",
+  "There is nothing more deceptive than an obvious fact.",
+  "I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.",
+  "I never make exceptions. An exception disproves the rule.",
+  "What one man can invent another can discover.",
+  "Nothing clears up a case so much as stating it to another person.",
+  "Education never ends, Watson. It is a series of lessons, with the greatest for the last.",
 ];
 // simpan senarai perkataan dan indeks perkataan yang sedang ditaip pemain
 let words = [];
@@ -178,9 +185,9 @@ let wordIndex = 0;
 // masa permulaan
 let startTime = Date.now();
 // elemen halaman
-const quoteElement = document.getElementById('quote');
-const messageElement = document.getElementById('message');
-const typedValueElement = document.getElementById('typed-value');
+const quoteElement = document.getElementById("quote");
+const messageElement = document.getElementById("message");
+const typedValueElement = document.getElementById("typed-value");
 ```
 
 ✅ Teruskan dan tambahkan lebih banyak petikan ke permainan anda
@@ -201,28 +208,30 @@ Apabila pengguna mengklik **start**, kita harus memilih sebut harga, menyiapkan 
 
 ```javascript
 // pada akhir script.js
-document.getElementById('start').addEventListener('click', () => {
+document.getElementById("start").addEventListener("click", () => {
   // dapatkan quote
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
   // Masukkan petikan ke dalam susunan kata
-  words = quote.split(' ');
+  words = quote.split(" ");
   // tetapkan semula indeks kata untuk penjejakan
   wordIndex = 0;
 
   // Kemas kini UI
   // Buat susunan elemen span supaya kita dapat mengatur kelas
-  const spanWords = words.map(function(word) { return `<span>${word} </span>`});
+  const spanWords = words.map(function (word) {
+    return `<span>${word} </span>`;
+  });
   // Tukar menjadi rentetan dan tetapkan sebagai innerHTML pada paparan petikan
-  quoteElement.innerHTML = spanWords.join('');
+  quoteElement.innerHTML = spanWords.join("");
   // Serlahkan perkataan pertama
-  quoteElement.childNodes[0].className = 'highlight';
+  quoteElement.childNodes[0].className = "highlight";
   // Kosongkan sebarang mesej sebelumnya
-  messageElement.innerText = '';
+  messageElement.innerText = "";
 
   // Sediakan kotak teks
   // Kosongkan kotak teks
-  typedValueElement.value = '';
+  typedValueElement.value = "";
   // Sediakan fokus
   typedValueElement.focus();
   // tetapkan pengendali acara
@@ -243,7 +252,7 @@ Mari pecahkan kodnya!
     - Ini akan membolehkan kita menonjolkan perkataan di paparan
   - `join` array untuk membuat rentetan yang dapat kita gunakan untuk mengemas kini` innerHTML` pada `quoteElement`
     - Ini akan memaparkan petikan kepada pemain
-  - Tetapkan `className` elemen` span` pertama ke  highlight untuk menyerlahkannya sebagai kuning
+  - Tetapkan `className` elemen` span` pertama ke highlight untuk menyerlahkannya sebagai kuning
   - Bersihkan `messageElement` dengan menetapkan "innerText" ke `''`
 - Sediakan kotak teks
   - Kosongkan `nilai` semasa di` typedValueElement`
@@ -256,7 +265,7 @@ Semasa pemain menaip, acara `input` akan dinaikkan. Pendengar acara ini akan mem
 
 ```javascript
 // pada akhir skrip.js
-typedValueElement.addEventListener('input', () => {
+typedValueElement.addEventListener("input", () => {
   // Dapatkan perkataan semasa
   const currentWord = words[wordIndex];
   // dapatkan nilai semasa
@@ -266,34 +275,36 @@ typedValueElement.addEventListener('input', () => {
     // akhir ayat
     // Paparkan kejayaan
     const elapsedTime = new Date().getTime() - startTime;
-    const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
+    const message = `CONGRATULATIONS! You finished in ${
+      elapsedTime / 1000
+    } seconds.`;
     messageElement.innerText = message;
-  } else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
+  } else if (typedValue.endsWith(" ") && typedValue.trim() === currentWord) {
     // akhir kata
     // kosongkan typedValueElement untuk perkataan baru
-    typedValueElement.value = '';
+    typedValueElement.value = "";
     // beralih ke perkataan seterusnya
     wordIndex++;
     // tetapkan semula nama kelas untuk semua elemen dalam petikan
     for (const wordElement of quoteElement.childNodes) {
-      wordElement.className = '';
+      wordElement.className = "";
     }
     // serlahkan perkataan baru
-    quoteElement.childNodes[wordIndex].className = 'highlight';
+    quoteElement.childNodes[wordIndex].className = "highlight";
   } else if (currentWord.startsWith(typedValue)) {
     // betul sekarang
     // serlahkan perkataan seterusnya
-    typedValueElement.className = '';
+    typedValueElement.className = "";
   } else {
     // keadaan ralat
-    typedValueElement.className = 'error';
+    typedValueElement.className = "error";
   }
 });
 ```
 
 Mari pecahkan kodnya! Kami mulakan dengan merebut perkataan semasa dan nilai yang ditaip pemain sejauh ini. Kemudian kita mempunyai logik air terjun, di mana kita memeriksa apakah petikannya lengkap, kata itu lengkap, kata itu betul, atau (akhirnya), jika ada kesalahan.
 
-- Kutipan selesai, ditunjukkan oleh `typedValue` sama dengan` currentWord`, dan `wordIndex` sama dengan satu yang kurang dari` panjang 'kata-kata `
+- Kutipan selesai, ditunjukkan oleh `typedValue` sama dengan` currentWord`, dan `wordIndex` sama dengan satu yang kurang dari`panjang 'kata-kata`
   - Hitung `elapsedTime` dengan mengurangkan` startTime` dari waktu semasa
   - Bahagikan `elapsedTime` dengan 1,000 untuk menukar dari milisaat hingga saat
   - Paparkan mesej kejayaan

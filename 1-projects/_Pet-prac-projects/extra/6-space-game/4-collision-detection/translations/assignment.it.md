@@ -6,6 +6,6 @@ Per una migliore comprensione del funzionamento delle collisioni, costruire un g
 
 ## Rubrica
 
-| Criteri | Ottimo | Adeguato | Necessita miglioramento |
-| -------- | ------------------------------------------------------------------ | ------------------------------------- | -------------------------------------------------------------- |
-|          | Viene prodotto un campione di codice completo e funzionante con elementi disegnati sul canvas, verificarsi di collisioni basiche e reazioni| Il codice è incompleto in qualche modo | Malfunzionamenti del codice  |
+| Criteri | Ottimo                                                                                                                                      | Adeguato                               | Necessita miglioramento     |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- | --------------------------- |
+|         | Viene prodotto un campione di codice completo e funzionante con elementi disegnati sul canvas, verificarsi di collisioni basiche e reazioni | Il codice è incompleto in qualche modo | Malfunzionamenti del codice |

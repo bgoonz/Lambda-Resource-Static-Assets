@@ -6,6 +6,6 @@ Om beter te begrijpen hoe botsingen werken, bouwt u een heel klein spel met een 
 
 ## Rubriek
 
-| Criteria | Voorbeeldig                                                                                                                | Voldoende                       | Moet worden vebeterd |
-| -------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------ | ----------------- |
-|          | Er wordt een volledig werkend codevoorbeeld geproduceerd, met items op het canvas getekend, er vindt een fundamentele botsing plaats en er vinden reacties plaats | Code is op de een of andere manier onvolledig | Code storingen |
+| Criteria | Voorbeeldig                                                                                                                                                       | Voldoende                                     | Moet worden vebeterd |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | -------------------- |
+|          | Er wordt een volledig werkend codevoorbeeld geproduceerd, met items op het canvas getekend, er vindt een fundamentele botsing plaats en er vinden reacties plaats | Code is op de een of andere manier onvolledig | Code storingen       |

@@ -11,21 +11,21 @@ Permainan tidak begitu menyeronokkan sehingga anda mempunyai makhluk asing di la
 
 Jadi bagaimana kita memindahkan sesuatu di skrin? Ini semua mengenai koordinat kartesian: kami menukar lokasi (x, y) objek dan kemudian melukis semula skrin.
 
-Biasanya anda memerlukan langkah-langkah berikut untuk menyelesaikan *pergerakan* di skrin:
+Biasanya anda memerlukan langkah-langkah berikut untuk menyelesaikan _pergerakan_ di skrin:
 
 1. **Tetapkan lokasi baru** untuk objek; ini diperlukan untuk melihat objek sebagai bergerak.
 2. **Kosongkan skrin**, skrin perlu dibersihkan di antara undian. Kita dapat membersihkannya dengan melukis sebuah segi empat tepat yang kita isi dengan warna latar belakang.
 3. **Lukis semula objek** di lokasi baru. Dengan melakukan ini kita akhirnya dapat memindahkan objek dari satu lokasi ke lokasi lain.
 
- Inilah rupa bentuknya dalam kod:
+Inilah rupa bentuknya dalam kod:
 
- ```javascript
+```javascript
 //set the hero's location
 hero.x += 5;
 // clear the rectangle that hosts the hero
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 // redraw the game background and hero
-ctx.fillRect(0, 0, canvas.width, canvas.height)
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 ctx.fillStyle = "black";
 ctx.drawImage(heroImg, hero.x, hero.y);
 ```
@@ -41,12 +41,12 @@ Untuk menangani suatu peristiwa, anda perlu menggunakan kaedah ``addEventListene
 Inilah contohnya:
 
 ```javascript
-window.addEventListener('keyup', (evt) => {
+window.addEventListener("keyup", (evt) => {
   // `evt.key` = string representation of the key
-  if (evt.key === 'ArrowUp') {
+  if (evt.key === "ArrowUp") {
     // do something
   }
-})
+});
 ```
 
 Untuk acara utama terdapat dua sifat pada acara yang boleh anda gunakan untuk melihat kunci apa yang ditekan:
@@ -58,7 +58,7 @@ Untuk acara utama terdapat dua sifat pada acara yang boleh anda gunakan untuk me
 
 ### Kekunci khas: peringatan
 
-Terdapat beberapa *kunci* khas yang mempengaruhi tetingkap. Ini bermaksud bahawa jika anda sedang mendengar acara `keyup` dan anda menggunakan kekunci khas ini untuk menggerakkan wira anda, ia juga akan melakukan tatal mendatar. Untuk itu anda mungkin mahu *mematikan* tingkah laku penyemak imbas terbina dalam ini semasa anda membina permainan anda. Anda memerlukan kod seperti ini:
+Terdapat beberapa _kunci_ khas yang mempengaruhi tetingkap. Ini bermaksud bahawa jika anda sedang mendengar acara `keyup` dan anda menggunakan kekunci khas ini untuk menggerakkan wira anda, ia juga akan melakukan tatal mendatar. Untuk itu anda mungkin mahu _mematikan_ tingkah laku penyemak imbas terbina dalam ini semasa anda membina permainan anda. Anda memerlukan kod seperti ini:
 
 ```javascript
 let onKeyDown = function (e) {
@@ -76,10 +76,10 @@ let onKeyDown = function (e) {
   }
 };
 
-window.addEventListener('keydown', onKeyDown);
+window.addEventListener("keydown", onKeyDown);
 ```
 
-Kod di atas akan memastikan bahawa anak panah dan kekunci spasi mempunyai tingkah laku *lalai* mereka. Mekanisme *shut-off* berlaku apabila kita memanggil `e.preventDefault()`.
+Kod di atas akan memastikan bahawa anak panah dan kekunci spasi mempunyai tingkah laku _lalai_ mereka. Mekanisme _shut-off_ berlaku apabila kita memanggil `e.preventDefault()`.
 
 ## Pergerakan yang disebabkan oleh permainan
 
@@ -89,7 +89,7 @@ Kita dapat membuat sesuatu bergerak dengan menggunakan pemasa seperti fungsi `se
 let id = setInterval(() => {
   //move the enemy on the y axis
   enemy.y += 10;
-})
+});
 ```
 
 ## Gelung permainan
@@ -99,15 +99,18 @@ Gelung permainan adalah konsep yang pada dasarnya adalah fungsi yang dipanggil p
 Inilah rupa gelung permainan, yang dinyatakan dalam kod:
 
 ```javascript
-let gameLoopId = setInterval(() =>
-  function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    drawHero();
-    drawEnemies();
-    drawStaticObjects();
-}, 200);
+let gameLoopId = setInterval(
+  () =>
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      drawHero();
+      drawEnemies();
+      drawStaticObjects();
+    },
+  200
+);
 ```
 
 Gelung di atas dipanggil setiap `200` milisaat untuk menggambar semula kanvas. Anda mempunyai kemampuan untuk memilih selang terbaik yang sesuai untuk permainan anda.
@@ -143,30 +146,32 @@ Perkara di atas akan memulakan Pelayan HTTP pada alamat `http: // localhost: 500
 
 ### Tambah kod
 
-1. **Tambahkan objek khusus** untuk `hero` dan `musuh` dan `objek permainan`, mereka harus mempunyai sifat `x` dan `y`. ( Ingat bahagian pada [Warisan atau komposisi](../../translations/README.ms.md) ).
+1.  **Tambahkan objek khusus** untuk `hero` dan `musuh` dan `objek permainan`, mereka harus mempunyai sifat `x` dan `y`. ( Ingat bahagian pada [Warisan atau komposisi](../../translations/README.ms.md) ).
 
-   *HINT* `objek permainan` harus menjadi objek dengan `x` dan `y` dan kemampuan untuk menarik dirinya ke kanvas.
+    _HINT_ `objek permainan` harus menjadi objek dengan `x` dan `y` dan kemampuan untuk menarik dirinya ke kanvas.
 
-   > tip: mulakan dengan menambahkan kelas GameObject baru dengan konstruktornya digambarkan seperti di bawah, dan kemudian lukiskannya ke kanvas:
+    > tip: mulakan dengan menambahkan kelas GameObject baru dengan konstruktornya digambarkan seperti di bawah, dan kemudian lukiskannya ke kanvas:
 
-       ```javascript
-        
+        ```javascript
+
+
     class GameObject {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.dead = false;
-        this.type = "";
-        this.width = 0;
-        this.height = 0;
-        this.img = undefined;
-      }
-    
-      draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-      }
+    constructor(x, y) {
+    this.x = x;
+    this.y = y;
+    this.dead = false;
+    this.type = "";
+    this.width = 0;
+    this.height = 0;
+    this.img = undefined;
     }
-    ```
+
+    draw(ctx) {
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+    }
+
+    ````
 
     Sekarang, panjangkan GameObject ini untuk membuat Wira dan Musuh.
 
@@ -176,7 +181,7 @@ Perkara di atas akan memulakan Pelayan HTTP pada alamat `http: // localhost: 500
         ...it needs an x, y, type, and speed
       }
     }
-    ```
+    ````
 
     ```javascript
     class Enemy extends GameObject {
@@ -188,123 +193,124 @@ Perkara di atas akan memulakan Pelayan HTTP pada alamat `http: // localhost: 500
           if (this.y < canvas.height - this.height) {
             this.y += 5;
           } else {
-            console.log('Stopped at', this.y)
+            console.log("Stopped at", this.y);
             clearInterval(id);
           }
-        }, 300)
+        }, 300);
       }
     }
     ```
 
-2. **Tambahkan pengendali acara utama** untuk mengendalikan navigasi utama (pusing pahlawan ke atas / bawah kiri / kanan)
+2.  **Tambahkan pengendali acara utama** untuk mengendalikan navigasi utama (pusing pahlawan ke atas / bawah kiri / kanan)
 
-   *INGAT* ini adalah sistem kartesian, kiri atas adalah `0,0`. Juga ingat untuk menambah kod untuk menghentikan *tingkah laku lalai*
+    _INGAT_ ini adalah sistem kartesian, kiri atas adalah `0,0`. Juga ingat untuk menambah kod untuk menghentikan _tingkah laku lalai_
 
-   > tip: buat fungsi onKeyDown anda dan pasangkannya ke tetingkap:
+    > tip: buat fungsi onKeyDown anda dan pasangkannya ke tetingkap:
 
-      ```javascript
+    ```javascript
     let onKeyDown = function (e) {
-	      console.log(e.keyCode);
-	        ...add the code from the lesson above to stop default behavior
-	      }
+       console.log(e.keyCode);
+         ...add the code from the lesson above to stop default behavior
+       }
     };
 
     window.addEventListener("keydown", onKeyDown);
-   ```
+    ```
 
-   Periksa konsol penyemak imbas anda pada ketika ini, dan perhatikan penekanan kekunci dicatat.
+    Periksa konsol penyemak imbas anda pada ketika ini, dan perhatikan penekanan kekunci dicatat.
 
-3. **Terapkan** the [Pub sub pattern](../../translations/README.ms.md), ini akan memastikan kod anda tetap bersih semasa anda mengikuti bahagian yang tinggal.
+3.  **Terapkan** the [Pub sub pattern](../../translations/README.ms.md), ini akan memastikan kod anda tetap bersih semasa anda mengikuti bahagian yang tinggal.
 
-   Untuk melakukan bahagian terakhir ini, anda boleh:
+    Untuk melakukan bahagian terakhir ini, anda boleh:
 
-   1. **Tambahkan pendengar acara** di tetingkap:
+    1. **Tambahkan pendengar acara** di tetingkap:
 
-          ```javascript
-        window.addEventListener("keyup", (evt) => {
-          if (evt.key === "ArrowUp") {
-            eventEmitter.emit(Messages.KEY_EVENT_UP);
-          } else if (evt.key === "ArrowDown") {
-            eventEmitter.emit(Messages.KEY_EVENT_DOWN);
-          } else if (evt.key === "ArrowLeft") {
-            eventEmitter.emit(Messages.KEY_EVENT_LEFT);
-          } else if (evt.key === "ArrowRight") {
-            eventEmitter.emit(Messages.KEY_EVENT_RIGHT);
-          }
-        });
-        ```
+       ```javascript
+       window.addEventListener("keyup", (evt) => {
+         if (evt.key === "ArrowUp") {
+           eventEmitter.emit(Messages.KEY_EVENT_UP);
+         } else if (evt.key === "ArrowDown") {
+           eventEmitter.emit(Messages.KEY_EVENT_DOWN);
+         } else if (evt.key === "ArrowLeft") {
+           eventEmitter.emit(Messages.KEY_EVENT_LEFT);
+         } else if (evt.key === "ArrowRight") {
+           eventEmitter.emit(Messages.KEY_EVENT_RIGHT);
+         }
+       });
+       ```
 
-        1. **Buat kelas EventEmitter** untuk menerbitkan dan melanggan mesej:
+       1. **Buat kelas EventEmitter** untuk menerbitkan dan melanggan mesej:
 
-        ```javascript
-        class EventEmitter {
-          constructor() {
-            this.listeners = {};
-          }
-        
-          on(message, listener) {
-            if (!this.listeners[message]) {
-              this.listeners[message] = [];
-            }
-            this.listeners[message].push(listener);
-          }
-        
-          emit(message, payload = null) {
-            if (this.listeners[message]) {
-              this.listeners[message].forEach((l) => l(message, payload));
-            }
-          }
-        }
-        ```
+       ```javascript
+       class EventEmitter {
+         constructor() {
+           this.listeners = {};
+         }
 
-        1. **Tambah pemalar** dan sediakan EventEmitter:
+         on(message, listener) {
+           if (!this.listeners[message]) {
+             this.listeners[message] = [];
+           }
+           this.listeners[message].push(listener);
+         }
 
-        ```javascript
-        const Messages = {
-          KEY_EVENT_UP: "KEY_EVENT_UP",
-          KEY_EVENT_DOWN: "KEY_EVENT_DOWN",
-          KEY_EVENT_LEFT: "KEY_EVENT_LEFT",
-          KEY_EVENT_RIGHT: "KEY_EVENT_RIGHT",
-        };
-        
-        let heroImg, 
-            enemyImg, 
-            laserImg,
-            canvas, ctx, 
-            gameObjects = [], 
-            hero, 
-            eventEmitter = new EventEmitter();
-        ```
+         emit(message, payload = null) {
+           if (this.listeners[message]) {
+             this.listeners[message].forEach((l) => l(message, payload));
+           }
+         }
+       }
+       ```
 
-        1. **Memulakan permainan**
+       1. **Tambah pemalar** dan sediakan EventEmitter:
+
+       ```javascript
+       const Messages = {
+         KEY_EVENT_UP: "KEY_EVENT_UP",
+         KEY_EVENT_DOWN: "KEY_EVENT_DOWN",
+         KEY_EVENT_LEFT: "KEY_EVENT_LEFT",
+         KEY_EVENT_RIGHT: "KEY_EVENT_RIGHT",
+       };
+
+       let heroImg,
+         enemyImg,
+         laserImg,
+         canvas,
+         ctx,
+         gameObjects = [],
+         hero,
+         eventEmitter = new EventEmitter();
+       ```
+
+       1. **Memulakan permainan**
 
     ```javascript
     function initGame() {
       gameObjects = [];
       createEnemies();
       createHero();
-    
+
       eventEmitter.on(Messages.KEY_EVENT_UP, () => {
-        hero.y -=5 ;
-      })
-    
+        hero.y -= 5;
+      });
+
       eventEmitter.on(Messages.KEY_EVENT_DOWN, () => {
         hero.y += 5;
       });
-    
+
       eventEmitter.on(Messages.KEY_EVENT_LEFT, () => {
         hero.x -= 5;
       });
-    
+
       eventEmitter.on(Messages.KEY_EVENT_RIGHT, () => {
         hero.x += 5;
       });
     }
     ```
 
-1. **Siapkan gelung permainan**
+4.  **Siapkan gelung permainan**
 
-   Memfaktorkan semula fungsi window.onload untuk memulakan permainan dan mengatur gelung permainan pada selang waktu yang baik. Anda juga akan menambah sinar laser:
+    Memfaktorkan semula fungsi window.onload untuk memulakan permainan dan mengatur gelung permainan pada selang waktu yang baik. Anda juga akan menambah sinar laser:
 
     ```javascript
     window.onload = async () => {
@@ -313,19 +319,18 @@ Perkara di atas akan memulakan Pelayan HTTP pada alamat `http: // localhost: 500
       heroImg = await loadTexture("assets/player.png");
       enemyImg = await loadTexture("assets/enemyShip.png");
       laserImg = await loadTexture("assets/laserRed.png");
-    
+
       initGame();
       let gameLoopId = setInterval(() => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "black";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         drawGameObjects(ctx);
-      }, 100)
-      
+      }, 100);
     };
     ```
 
-5. **Tambahkan kod** untuk memindahkan musuh pada selang waktu tertentu
+5.  **Tambahkan kod** untuk memindahkan musuh pada selang waktu tertentu
 
     Refactor fungsi `createEnemies()` untuk membuat musuh dan mendorong mereka ke kelas gameObjects yang baru:
 
@@ -335,7 +340,7 @@ Perkara di atas akan memulakan Pelayan HTTP pada alamat `http: // localhost: 500
       const MONSTER_WIDTH = MONSTER_TOTAL * 98;
       const START_X = (canvas.width - MONSTER_WIDTH) / 2;
       const STOP_X = START_X + MONSTER_WIDTH;
-    
+
       for (let x = START_X; x < STOP_X; x += 98) {
         for (let y = 0; y < 50 * 5; y += 50) {
           const enemy = new Enemy(x, y);
@@ -350,10 +355,7 @@ Perkara di atas akan memulakan Pelayan HTTP pada alamat `http: // localhost: 500
 
     ```javascript
     function createHero() {
-      hero = new Hero(
-        canvas.width / 2 - 45,
-        canvas.height - canvas.height / 4
-      );
+      hero = new Hero(canvas.width / 2 - 45, canvas.height - canvas.height / 4);
       hero.img = heroImg;
       gameObjects.push(hero);
     }
@@ -363,7 +365,7 @@ Perkara di atas akan memulakan Pelayan HTTP pada alamat `http: // localhost: 500
 
     ```javascript
     function drawGameObjects(ctx) {
-      gameObjects.forEach(go => go.draw(ctx));
+      gameObjects.forEach((go) => go.draw(ctx));
     }
     ```
 

@@ -6,6 +6,6 @@ Identificeer een website waarvan u denkt dat deze NIET toegankelijk is, en maak 
 
 ## Rubriek
 
-| Criteria       | Voorbeeldig                                                                                                                                                      | Voldoende                    | Moet worden verbeterd           |
-| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- | --------------------------- |
+| Criteria         | Voorbeeldig                                                                                                                                                                                  | Voldoende                     | Moet worden verbeterd         |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ----------------------------- |
 | studentenrapport | bevat paragrafen over hoe de site ontoereikend is, het Lighthouse-rapport vastgelegd als pdf, een lijst met tien punten die verbeterd kunnen worden, met details over hoe deze te verbeteren | ontbreekt 20% van de vereiste | ontbreekt 50% van de vereiste |

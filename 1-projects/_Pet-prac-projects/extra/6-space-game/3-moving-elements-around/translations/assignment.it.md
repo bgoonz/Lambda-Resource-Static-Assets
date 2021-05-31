@@ -6,6 +6,6 @@ Eseminare il file /app.js corrente nella cartella del gioco e trovare i modi per
 
 ## Rubrica
 
-| Criteri | Ottimo | Adeguato | Necessita miglioramento |
-| -------- | ------------------------------------------------------------------ | ------------------------------------- | -------------------------------------------------------------- |
-|          | Il codice in `app.js` è completamente commentato e organizzato in blocchi logici | Il codice in `app.js` è adeguatamente commentato | Il codice in `app.js` è in qualche modo disorganizzato e manca di buoni commenti |
+| Criteri | Ottimo                                                                           | Adeguato                                         | Necessita miglioramento                                                          |
+| ------- | -------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------- |
+|         | Il codice in `app.js` è completamente commentato e organizzato in blocchi logici | Il codice in `app.js` è adeguatamente commentato | Il codice in `app.js` è in qualche modo disorganizzato e manca di buoni commenti |

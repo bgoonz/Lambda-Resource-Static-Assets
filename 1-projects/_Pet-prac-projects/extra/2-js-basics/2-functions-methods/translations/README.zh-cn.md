@@ -1,9 +1,11 @@
 # JavaScript 基础：方法和函数
 
 ![JavaScript Basics - Functions](/sketchnotes/webdev101-js-functions.png)
+
 > 涂鸦笔记作者：[Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 课前小测
+
 [课前小测](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/9?loc=zh_cn)
 
 当我们思考如何去写代码的时候，我们总是希望确保自己的代码是可读的。尽管听起来有些违反直觉，代码被阅读的次数会远多于它被写下的次数。**函数（function）** 正是开发者的工具箱里用于确保代码可维护的一件利器。
@@ -11,7 +13,6 @@
 [![Methods and Functions](https://img.youtube.com/vi/XgKsD6Zwvlc/0.jpg)](https://youtube.com/watch?v=XgKsD6Zwvlc "方法和函数")
 
 > 点击上方图片来观看一个有方法和函数的视频。
-
 
 ## 函数（Functions）
 
@@ -24,8 +25,9 @@
 函数的语法一般长这样：
 
 ```javascript
-function nameOfFunction() { // 函数定义
- // 函数定义 / 函数体
+function nameOfFunction() {
+  // 函数定义
+  // 函数定义 / 函数体
 }
 ```
 
@@ -33,7 +35,7 @@ function nameOfFunction() { // 函数定义
 
 ```javascript
 function displayGreeting() {
-  console.log('Hello, world!');
+  console.log("Hello, world!");
 }
 ```
 
@@ -61,9 +63,7 @@ displayGreeting();
 参数会列在函数定义这一部分，用括号括起来并且用逗号分隔，比如：
 
 ```javascript
-function name(param, param2, param3) {
-
-}
+function name(param, param2, param3) {}
 ```
 
 我们可以更新以下我们的 `displayGreeting` 来接收一个名字并将其显示出来。
@@ -78,7 +78,7 @@ function displayGreeting(name) {
 当我们想要在调用函数时指定参数，将其放在括号中即可。
 
 ```javascript
-displayGreeting('Christopher');
+displayGreeting("Christopher");
 // 在运行时会显示 “Hello, Christopher!”
 ```
 
@@ -87,7 +87,7 @@ displayGreeting('Christopher');
 我们可以通过为函数添加更多参数来使它更加灵活，但是如果我们并不希望每次调用都需要指定所有参数该怎么办？继续用我们的打招呼示例，我们可以让名字是必选的（我们需要知道该向谁打招呼），但打招呼的语句本身可以随意定制。如果有人不想自定义打招呼的语句，我们就会提供一个默认值（又称缺省值）。为了给参数提供一个默认值，写法和给变量赋值很像 —— `parameterName = 'defaultValue'`。完整例子如下：
 
 ```javascript
-function displayGreeting(name, salutation='Hello') {
+function displayGreeting(name, salutation = "Hello") {
   console.log(`${salutation}, ${name}`);
 }
 ```
@@ -95,10 +95,10 @@ function displayGreeting(name, salutation='Hello') {
 当我们调用函数时，可以自由决定是否要指定 `salutation` 的值。
 
 ```javascript
-displayGreeting('Christopher');
+displayGreeting("Christopher");
 // 显示 “Hello, Christopher”
 
-displayGreeting('Christopher', 'Hi');
+displayGreeting("Christopher", "Hi");
 // 显示 “Hi, Christopher”
 ```
 
@@ -112,7 +112,7 @@ displayGreeting('Christopher', 'Hi');
 
 ```javascript
 return myVariable;
-```  
+```
 
 我们可以创建一个函数来构造一个打招呼的消息，然后将这个消息的值返回给调用者
 
@@ -126,7 +126,7 @@ function createGreetingMessage(name) {
 调用函数时可以将返回值存在变量里，和将一个静态值存入变量的办法一样（如 `const name = 'Christopher'`）。
 
 ```javascript
-const greetingMessage = createGreetingMessage('Christopher');
+const greetingMessage = createGreetingMessage("Christopher");
 ```
 
 ## 将函数作为函数参数
@@ -139,7 +139,7 @@ const greetingMessage = createGreetingMessage('Christopher');
 
 ```javascript
 function displayDone() {
-  console.log('3 秒过去了');
+  console.log("3 秒过去了");
 }
 // 计时器的时间单位是毫秒
 setTimeout(displayDone, 3000);
@@ -154,8 +154,8 @@ setTimeout(displayDone, 3000);
 让我们将上面的代码用匿名函数重写一次：
 
 ```javascript
-setTimeout(function() {
-  console.log('3 秒过去了');
+setTimeout(function () {
+  console.log("3 秒过去了");
 }, 3000);
 ```
 
@@ -169,7 +169,7 @@ setTimeout(function() {
 
 ```javascript
 setTimeout(() => {
-  console.log('3 秒过去了');
+  console.log("3 秒过去了");
 }, 3000);
 ```
 
@@ -184,6 +184,7 @@ setTimeout(() => {
 你能用一句话清楚说明函数和方法的区别吗？试一试！
 
 ## 课后小测
+
 [课后小测](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/10?loc=zh_cn)
 
 ## 复习 & 自学

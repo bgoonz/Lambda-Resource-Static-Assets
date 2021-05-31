@@ -78,21 +78,28 @@ code .
 ```html
 <!-- inside index.html -->
 <html>
-<head>
-  <title>Typing game</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Typing game!</h1>
-  <p>Practice your typing skills with a quote from Sherlock Holmes. Click **start** to begin!</p>
-  <p id="quote"></p> <!-- This will display our quote -->
-  <p id="message"></p> <!-- This will display any status messages -->
-  <div>
-    <input type="text" aria-label="current word" id="typed-value" /> <!-- The textbox for typing -->
-    <button type="button" id="start">Start</button> <!-- To start the game -->
-  </div>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <title>Typing game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Typing game!</h1>
+    <p>
+      Practice your typing skills with a quote from Sherlock Holmes. Click
+      **start** to begin!
+    </p>
+    <p id="quote"></p>
+    <!-- This will display our quote -->
+    <p id="message"></p>
+    <!-- This will display any status messages -->
+    <div>
+      <input type="text" aria-label="current word" id="typed-value" />
+      <!-- The textbox for typing -->
+      <button type="button" id="start">Start</button>
+      <!-- To start the game -->
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
 ```
 
@@ -164,13 +171,13 @@ code .
 // inside script.js
 // all of our quotes
 const quotes = [
-    'When you have eliminated the impossible, whatever remains, however improbable, must be the truth.',
-    'There is nothing more deceptive than an obvious fact.',
-    'I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.',
-    'I never make exceptions. An exception disproves the rule.',
-    'What one man can invent another can discover.',
-    'Nothing clears up a case so much as stating it to another person.',
-    'Education never ends, Watson. It is a series of lessons, with the greatest for the last.',
+  "When you have eliminated the impossible, whatever remains, however improbable, must be the truth.",
+  "There is nothing more deceptive than an obvious fact.",
+  "I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.",
+  "I never make exceptions. An exception disproves the rule.",
+  "What one man can invent another can discover.",
+  "Nothing clears up a case so much as stating it to another person.",
+  "Education never ends, Watson. It is a series of lessons, with the greatest for the last.",
 ];
 // store the list of words and the index of the word the player is currently typing
 let words = [];
@@ -178,9 +185,9 @@ let wordIndex = 0;
 // the starting time
 let startTime = Date.now();
 // page elements
-const quoteElement = document.getElementById('quote');
-const messageElement = document.getElementById('message');
-const typedValueElement = document.getElementById('typed-value');
+const quoteElement = document.getElementById("quote");
+const messageElement = document.getElementById("message");
+const typedValueElement = document.getElementById("typed-value");
 ```
 
 ✅ आगे बढ़ो और अपने खेल के लिए अधिक उद्धरण जोड़ें
@@ -201,28 +208,30 @@ const typedValueElement = document.getElementById('typed-value');
 
 ```javascript
 // at the end of script.js
-document.getElementById('start').addEventListener('click', () => {
+document.getElementById("start").addEventListener("click", () => {
   // get a quote
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
   // Put the quote into an array of words
-  words = quote.split(' ');
+  words = quote.split(" ");
   // reset the word index for tracking
   wordIndex = 0;
 
   // UI updates
   // Create an array of span elements so we can set a class
-  const spanWords = words.map(function(word) { return `<span>${word} </span>`});
+  const spanWords = words.map(function (word) {
+    return `<span>${word} </span>`;
+  });
   // Convert into string and set as innerHTML on quote display
-  quoteElement.innerHTML = spanWords.join('');
+  quoteElement.innerHTML = spanWords.join("");
   // Highlight the first word
-  quoteElement.childNodes[0].className = 'highlight';
+  quoteElement.childNodes[0].className = "highlight";
   // Clear any prior messages
-  messageElement.innerText = '';
+  messageElement.innerText = "";
 
   // Setup the textbox
   // Clear the textbox
-  typedValueElement.value = '';
+  typedValueElement.value = "";
   // set focus
   typedValueElement.focus();
   // set the event handler
@@ -256,7 +265,7 @@ document.getElementById('start').addEventListener('click', () => {
 
 ```javascript
 // at the end of script.js
-typedValueElement.addEventListener('input', () => {
+typedValueElement.addEventListener("input", () => {
   // Get the current word
   const currentWord = words[wordIndex];
   // get the current value
@@ -266,34 +275,36 @@ typedValueElement.addEventListener('input', () => {
     // end of sentence
     // Display success
     const elapsedTime = new Date().getTime() - startTime;
-    const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
+    const message = `CONGRATULATIONS! You finished in ${
+      elapsedTime / 1000
+    } seconds.`;
     messageElement.innerText = message;
-  } else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
+  } else if (typedValue.endsWith(" ") && typedValue.trim() === currentWord) {
     // end of word
     // clear the typedValueElement for the new word
-    typedValueElement.value = '';
+    typedValueElement.value = "";
     // move to the next word
     wordIndex++;
     // reset the class name for all elements in quote
     for (const wordElement of quoteElement.childNodes) {
-      wordElement.className = '';
+      wordElement.className = "";
     }
     // highlight the new word
-    quoteElement.childNodes[wordIndex].className = 'highlight';
+    quoteElement.childNodes[wordIndex].className = "highlight";
   } else if (currentWord.startsWith(typedValue)) {
     // currently correct
     // highlight the next word
-    typedValueElement.className = '';
+    typedValueElement.className = "";
   } else {
     // error state
-    typedValueElement.className = 'error';
+    typedValueElement.className = "error";
   }
 });
 ```
 
 कोड को तोड़ दो! हम वर्तमान शब्द को पकड़कर शुरू करते हैं और खिलाड़ी ने इस प्रकार अब तक टाइप किया है। फिर हमारे पास झरना तर्क है, जहां हम जांचते हैं कि क्या उद्धरण पूरा है, शब्द पूरा है, शब्द सही है, या (अंत में), अगर कोई त्रुटि है।
 
-- उद्धरण पूर्ण है, `typedValue` द्वारा `currentWord` के बराबर होने का संकेत दिया गया है, और `wordIndex` को  `words` की `length` से कम के बराबर किया जा रहा है
+- उद्धरण पूर्ण है, `typedValue` द्वारा `currentWord` के बराबर होने का संकेत दिया गया है, और `wordIndex` को `words` की `length` से कम के बराबर किया जा रहा है
   - वर्तमान समय से `startTime` घटाकर` elapsedTime` की गणना करें
   - मिलीसेकंड से सेकंड में परिवर्तित करने के लिए `elapsedTime` को 1,000 से विभाजित करें
   - एक सफलता संदेश प्रदर्शित करें
@@ -305,7 +316,7 @@ typedValueElement.addEventListener('input', () => {
 - वर्तमान में शब्द सही ढंग से टाइप किया गया है (लेकिन पूरा नहीं), `currentWord` द्वारा इंगित `typedValue` से शुरू हुआ
   - सुनिश्चित करें कि `typeNalueElement` को `className` को क्लीयर करके डिफ़ॉल्ट के रूप में प्रदर्शित किया गया है
 - यदि हमने इसे दूर किया है, तो हमारे पास एक त्रुटि है
-  - `className` पर  `typedValueElement` से `error` सेट करे
+  - `className` पर `typedValueElement` से `error` सेट करे
 
 ## अपने ऐप्लकैशनको टेसेट करे
 

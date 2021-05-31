@@ -1,10 +1,10 @@
 # Conceptos básicos de JavaScript: matrices y bucles
 
 ![JavaScript Basics - Arrays](/sketchnotes/webdev101-js-arrays.png)
+
 > Sketchnote por [Tomomi Imura](https://twitter.com/girlie_mac)
 
 [![Matrices y bucles](https://img.youtube.com/vi/Q_CRM2lXXBg/0.jpg)](https://youtube.com/watch?v=Q_CRM2lXXBg "Matrices y bucles")
-
 
 ## [Pre-lecture prueba](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/13)
 
@@ -29,7 +29,13 @@ A los valores de la matriz se les asigna un valor único llamado **índice**, un
 ✅ ¿Le sorprende que las matrices comiencen en el índice cero? En algunos lenguajes de programación, los índices comienzan en 1. Hay una historia interesante en torno a esto, que puedes [leer en Wikipedia](https://en.wikipedia.org/wiki/Zero-based_numbering).
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors[2]; //"Vanilla"
 ```
 
@@ -50,7 +56,13 @@ iceCreamFlavors[5] = "Cookie Dough"; //Añadida "Cookie Dough"
 Para saber cuántos elementos hay en una matriz, use la propiedad `length`.
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 iceCreamFlavors.length; //5
 ```
 
@@ -62,17 +74,13 @@ Los bucles permiten tareas repetitivas o **iterativas** y pueden ahorrar mucho t
 
 ### En bucle
 
-El ciclo `for` requiere 3 partes para iterar:
-     - `counter` Una variable que normalmente se inicializa con un número que cuenta el número de iteraciones.
-     - `condition` Expresión que usa operadores de comparación para hacer que el bucle se detenga cuando `true`
-     - `iteration-expression` Se ejecuta al final de cada iteración, generalmente se usa para cambiar el valor del contador
+El ciclo `for` requiere 3 partes para iterar: - `counter` Una variable que normalmente se inicializa con un número que cuenta el número de iteraciones. - `condition` Expresión que usa operadores de comparación para hacer que el bucle se detenga cuando `true` - `iteration-expression` Se ejecuta al final de cada iteración, generalmente se usa para cambiar el valor del contador
 
-  
 ```javascript
-    //Contando hasta 10
-    for (let i = 0; i < 10; i++) {
-        console.log(i);
-    }
+//Contando hasta 10
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
 ```
 
 ✅ Ejecute este código en una consola de navegador. ¿Qué sucede cuando realiza pequeños cambios en el contador, la condición o la expresión de iteración? ¿Puedes hacer que corra al revés, creando una cuenta regresiva?
@@ -85,8 +93,8 @@ A diferencia de la sintaxis para el ciclo `for`, los ciclos `while` solo requier
 //Contando hasta 10
 let i = 0;
 while (i < 10) {
- console.log(i);
- i++;
+  console.log(i);
+  i++;
 }
 ```
 
@@ -97,7 +105,13 @@ while (i < 10) {
 Las matrices se utilizan a menudo con bucles porque la mayoría de las condiciones requieren la longitud de la matriz para detener el bucle, y el índice también puede ser el valor del contador.
 
 ```javascript
-let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];
+let iceCreamFlavors = [
+  "Chocolate",
+  "Strawberry",
+  "Vanilla",
+  "Pistachio",
+  "Rocky Road",
+];
 
 for (let i = 0; i < iceCreamFlavors.length; i++) {
   console.log(iceCreamFlavors[i]);

@@ -8,7 +8,7 @@
 
 當我們建立專為瀏覽器設計的應用程式時，我們會提供 Graphical User Interface (GUI) 給用戶使用，在我們建立的格式上進行互動。最常見的互動方式是透過點擊或輸入在多樣的物件。開發者面臨的問題是，我們不了解用戶會何時對這些物件產生互動！
 
-[事件驅動程式設計](https://zh.wikipedia.org/zh-tw/%E4%BA%8B%E4%BB%B6%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)是一種程式設計的方式，以建立我們的 GUI。若拆解該名詞的話，我們知道主軸關鍵會是**事件(Event)**。根據 Merriam-Webster，[事件](https://www.merriam-webster.com/dictionary/event)according定義為「將發生的事」。它能有效地解決我們面臨的問題。我們知道當用戶產生互動時，什麼程式必須回應其要求，只差在我們不知道用戶會何時產生互動。
+[事件驅動程式設計](https://zh.wikipedia.org/zh-tw/%E4%BA%8B%E4%BB%B6%E9%A9%85%E5%8B%95%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88)是一種程式設計的方式，以建立我們的 GUI。若拆解該名詞的話，我們知道主軸關鍵會是**事件(Event)**。根據 Merriam-Webster，[事件](https://www.merriam-webster.com/dictionary/event)according 定義為「將發生的事」。它能有效地解決我們面臨的問題。我們知道當用戶產生互動時，什麼程式必須回應其要求，只差在我們不知道用戶會何時產生互動。
 
 藉由建立新的函式，我們可以標記這段將被運行的程式碼。我們回顧一下[程序式程式設計](https://zh.wikipedia.org/wiki/%E8%BF%87%E7%A8%8B%E5%BC%8F%E7%BC%96%E7%A8%8B)，函式會依照順序一行一行的被運行。這同樣也會被實踐在事件驅動程式設計上，差別在於**如何**去呼叫這些函式。
 
@@ -78,21 +78,28 @@ code .
 ```html
 <!-- inside index.html -->
 <html>
-<head>
-  <title>Typing game</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Typing game!</h1>
-  <p>Practice your typing skills with a quote from Sherlock Holmes. Click **start** to begin!</p>
-  <p id="quote"></p> <!-- This will display our quote -->
-  <p id="message"></p> <!-- This will display any status messages -->
-  <div>
-    <input type="text" aria-label="current word" id="typed-value" /> <!-- The textbox for typing -->
-    <button type="button" id="start">Start</button> <!-- To start the game -->
-  </div>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <title>Typing game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Typing game!</h1>
+    <p>
+      Practice your typing skills with a quote from Sherlock Holmes. Click
+      **start** to begin!
+    </p>
+    <p id="quote"></p>
+    <!-- This will display our quote -->
+    <p id="message"></p>
+    <!-- This will display any status messages -->
+    <div>
+      <input type="text" aria-label="current word" id="typed-value" />
+      <!-- The textbox for typing -->
+      <button type="button" id="start">Start</button>
+      <!-- To start the game -->
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
 ```
 
@@ -164,13 +171,13 @@ code .
 // 在檔案 script.js 中
 // 所有的引文內容
 const quotes = [
-    'When you have eliminated the impossible, whatever remains, however improbable, must be the truth.',
-    'There is nothing more deceptive than an obvious fact.',
-    'I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.',
-    'I never make exceptions. An exception disproves the rule.',
-    'What one man can invent another can discover.',
-    'Nothing clears up a case so much as stating it to another person.',
-    'Education never ends, Watson. It is a series of lessons, with the greatest for the last.',
+  "When you have eliminated the impossible, whatever remains, however improbable, must be the truth.",
+  "There is nothing more deceptive than an obvious fact.",
+  "I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.",
+  "I never make exceptions. An exception disproves the rule.",
+  "What one man can invent another can discover.",
+  "Nothing clears up a case so much as stating it to another person.",
+  "Education never ends, Watson. It is a series of lessons, with the greatest for the last.",
 ];
 // 儲存單字列表及目前要輸入的單字索引
 let words = [];
@@ -178,9 +185,9 @@ let wordIndex = 0;
 // 開始時間
 let startTime = Date.now();
 // 網頁物件連結
-const quoteElement = document.getElementById('quote');
-const messageElement = document.getElementById('message');
-const typedValueElement = document.getElementById('typed-value');
+const quoteElement = document.getElementById("quote");
+const messageElement = document.getElementById("message");
+const typedValueElement = document.getElementById("typed-value");
 ```
 
 ✅ 試著加入更多的引文到你的遊戲中。
@@ -201,28 +208,30 @@ const typedValueElement = document.getElementById('typed-value');
 
 ```javascript
 // 在 script.js 末端
-document.getElementById('start').addEventListener('click', () => {
+document.getElementById("start").addEventListener("click", () => {
   // 取得一行引文
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
   // 將引文分成許多單字，存在矩陣中。
-  words = quote.split(' ');
+  words = quote.split(" ");
   // 重制單字索引來做追蹤
   wordIndex = 0;
 
   // 更新使用者介面
   // 建立 span 元素的矩陣，設定 class 用。
-  const spanWords = words.map(function(word) { return `<span>${word} </span>`});
+  const spanWords = words.map(function (word) {
+    return `<span>${word} </span>`;
+  });
   // 轉換成字串並以 innerHTML 顯示引文
-  quoteElement.innerHTML = spanWords.join('');
+  quoteElement.innerHTML = spanWords.join("");
   // 標記第一個單字
-  quoteElement.childNodes[0].className = 'highlight';
+  quoteElement.childNodes[0].className = "highlight";
   // 清除訊息欄之前的訊息
-  messageElement.innerText = '';
+  messageElement.innerText = "";
 
   // 設定文字框
   // 清除文字框
-  typedValueElement.value = '';
+  typedValueElement.value = "";
   // 設定 focus
   typedValueElement.focus();
   // 設定事件驅動程式
@@ -246,8 +255,8 @@ document.getElementById('start').addEventListener('click', () => {
   - 設定第一個 `span` 元素的 `className` 成 `highlight`，來標記單字呈黃色
   - 修改 `messageElement`的 `innerText` 成 `''`，這會清除訊息欄的內容
 - 設定文字框
-  - 清除目前 `typedValueElement` 的 `value` 
-  - 設定 `typedValueElement` 成 `focus` 
+  - 清除目前 `typedValueElement` 的 `value`
+  - 設定 `typedValueElement` 成 `focus`
 - 呼叫 `getTime` 來啟始計時器
 
 ### 加入打字邏輯
@@ -256,7 +265,7 @@ document.getElementById('start').addEventListener('click', () => {
 
 ```javascript
 // script.js 最末端
-typedValueElement.addEventListener('input', () => {
+typedValueElement.addEventListener("input", () => {
   // 取得目前的單字
   const currentWord = words[wordIndex];
   // 取得目前輸入的數值
@@ -266,27 +275,29 @@ typedValueElement.addEventListener('input', () => {
     // 句子最末端
     // 顯示成功
     const elapsedTime = new Date().getTime() - startTime;
-    const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
+    const message = `CONGRATULATIONS! You finished in ${
+      elapsedTime / 1000
+    } seconds.`;
     messageElement.innerText = message;
-  } else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
+  } else if (typedValue.endsWith(" ") && typedValue.trim() === currentWord) {
     // 單字最末端
     // 清除輸入的數值，準備給新的單字使用
-    typedValueElement.value = '';
+    typedValueElement.value = "";
     // 移動到下一個單字
     wordIndex++;
     // 重設所有引文子元素的 class 名稱
     for (const wordElement of quoteElement.childNodes) {
-      wordElement.className = '';
+      wordElement.className = "";
     }
     // 標記新單字
-    quoteElement.childNodes[wordIndex].className = 'highlight';
+    quoteElement.childNodes[wordIndex].className = "highlight";
   } else if (currentWord.startsWith(typedValue)) {
     // 單字目前輸入正確
     // 標記下一個單字
-    typedValueElement.className = '';
+    typedValueElement.className = "";
   } else {
     // 單字輸入錯誤
-    typedValueElement.className = 'error';
+    typedValueElement.className = "error";
   }
 });
 ```
@@ -302,7 +313,7 @@ typedValueElement.addEventListener('input', () => {
   - 增加 `wordIndex` 到下一個單字
   - 進迴圈，每一個 `quoteElement` 的 `childNodes` ，它們的 `className` 都被設為 `''` ，代表預設的單字呈現規則
   - 設定單字的 `className` 成 `highlight` 來標記為下一個被輸入的單字
-- 單字目前輸入正確但未完成，從 `typedValue` 開始檢查 `currentWord` 
+- 單字目前輸入正確但未完成，從 `typedValue` 開始檢查 `currentWord`
   - 確保清除 `typedValueElement` 的 `className`，顯示預設的呈現方式。
 - 若此時輸入錯誤，我們加上錯誤規則
   - 設定 `typedValueElement` 的 `className` 成 `error`

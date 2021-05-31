@@ -31,9 +31,9 @@ Verrà creato un gioco per esplorare come funzionano gli eventi in JavaScript. I
 
 - Il giocatore fa clic sul pulsante di avvio e gli viene visualizzata una citazione da digitare
 - Il giocatore digita la citazione il più velocemente possibile in una casella di testo
-   - Quando ogni parola è completata, viene evidenziata quella successiva
-   - Se il giocatore ha un errore di battitura, la casella di testo viene aggiornata in rosso
-   - Quando il giocatore completa la citazione, viene visualizzato un messaggio di successo con il tempo trascorso
+  - Quando ogni parola è completata, viene evidenziata quella successiva
+  - Se il giocatore ha un errore di battitura, la casella di testo viene aggiornata in rosso
+  - Quando il giocatore completa la citazione, viene visualizzato un messaggio di successo con il tempo trascorso
 
 Ora si costruirà il gioco e si imparierà a conoscere gli eventi!
 
@@ -58,9 +58,9 @@ code .
 ```
 
 - Aggiungere tre file alla cartella in Visual Studio Code con i seguenti nomi:
-   - index.html
-   - script.js
-   - Style.css
+  - index.html
+  - script.js
+  - Style.css
 
 ## Creare l'interfaccia utente
 
@@ -78,21 +78,28 @@ Creare un nuovo file denominato **index.html**. Inserire il segunte testo HTML:
 ```html
 <!-- inside index.html -->
 <html>
-<head>
-  <title>Gioco di Digitazione</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>Gioco di Digitazione</h1>
-  <p>Esercita la tua abilità nella digitazione con una citazione da Sherlock Holmes. Fai click su <strong>start</strong> per iniziare!</p>
-  <p id="quote"></p> <!-- Qui si visualizza la citazione -->
-  <p id="message"></p> <!-- Qui si visualizza un qualsiasi messaggio di stato -->
-  <div>
-    <input type="text" aria-label="current word" id="typed-value" /> <!-- La casella di testo per digitare -->
-    <button type="button" id="start">Start</button> <!-- Per far partire il gioco -->
-  </div>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <title>Gioco di Digitazione</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Gioco di Digitazione</h1>
+    <p>
+      Esercita la tua abilità nella digitazione con una citazione da Sherlock
+      Holmes. Fai click su <strong>start</strong> per iniziare!
+    </p>
+    <p id="quote"></p>
+    <!-- Qui si visualizza la citazione -->
+    <p id="message"></p>
+    <!-- Qui si visualizza un qualsiasi messaggio di stato -->
+    <div>
+      <input type="text" aria-label="current word" id="typed-value" />
+      <!-- La casella di testo per digitare -->
+      <button type="button" id="start">Start</button>
+      <!-- Per far partire il gioco -->
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
 ```
 
@@ -101,11 +108,11 @@ Creare un nuovo file denominato **index.html**. Inserire il segunte testo HTML:
 È sempre meglio sviluppare in modo iterativo per vedere come appaiono le cose. Lanciare l'applicazione. Una meravigliosa estensione per Visual Studio Code chiamata [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) ospiterà la propria applicazione localmente e aggiornerà il browser ogni volta che viene effettuata una operazione di salvataggio nel codice.
 
 - Installare [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) seguendo il collegamento e facendo clic su **Install**
-   - Verrà richiesto dal browser di aprire Visual Studio Code e quindi da Visual Studio Code di eseguire l'installazione
-   - Riavviare Visual Studio Code se richiesto
+  - Verrà richiesto dal browser di aprire Visual Studio Code e quindi da Visual Studio Code di eseguire l'installazione
+  - Riavviare Visual Studio Code se richiesto
 - Una volta installato, in Visual Studio Code, fare clic su Ctrl-Shift-P (o Cmd-Shift-P se su MAC) per aprire il riquadro dei comandi
 - Digitare **Live Server: Open with Live Server**
-   - Live Server inizierà a servire la propria applicazione
+  - Live Server inizierà a servire la propria applicazione
 - Aprire un browser e andare a **https://localhost:5500**
 - Ora si dovrebbe vedere la pagina che si è creato!
 
@@ -164,13 +171,13 @@ Verranno anche referenziati gli elementi dell'interfaccia utente:
 // all'interno di script.js
 // tutte le citazioni
 const quotes = [
-    'Eliminato l’impossibile, ciò che resta, per improbabile che sia, deve essere la verità.',
-    'Non vi è nulla di così ingannevole come un fatto ovvio.',
-    'Spesso, il delitto più banale è il più incomprensibile proprio perché non presenta aspetti insoliti o particolari, da cui si possano trarre delle deduzioni.',
-    'Non faccio mai eccezioni. Un’eccezione contraddice la regola.',
-    'Ciò che un uomo può inventare, un altro può scoprire.',
-    'Il miglior modo per chiarire le idee è quello di spiegarle ad un’altra persona.',
-    "L'istruzione non finisce mai, Watson. Si tratta di una serie di lezioni, con la più grande per l'ultima."
+  "Eliminato l’impossibile, ciò che resta, per improbabile che sia, deve essere la verità.",
+  "Non vi è nulla di così ingannevole come un fatto ovvio.",
+  "Spesso, il delitto più banale è il più incomprensibile proprio perché non presenta aspetti insoliti o particolari, da cui si possano trarre delle deduzioni.",
+  "Non faccio mai eccezioni. Un’eccezione contraddice la regola.",
+  "Ciò che un uomo può inventare, un altro può scoprire.",
+  "Il miglior modo per chiarire le idee è quello di spiegarle ad un’altra persona.",
+  "L'istruzione non finisce mai, Watson. Si tratta di una serie di lezioni, con la più grande per l'ultima.",
 ];
 // memorizza l'elenco di parole e l'indice della parola che il giocatore sta attualmente digitando
 let words = [];
@@ -178,9 +185,9 @@ let wordIndex = 0;
 // l'orario di partenza
 let startTime = Date.now();
 // elementi nella pagina
-const quoteElement = document.getElementById('quote');
-const messageElement = document.getElementById('message');
-const typedValueElement = document.getElementById('typed-value');
+const quoteElement = document.getElementById("quote");
+const messageElement = document.getElementById("message");
+const typedValueElement = document.getElementById("typed-value");
 ```
 
 ✅ Proseguire aggiungendo altre citazioni al proprio gioco
@@ -201,28 +208,30 @@ Quando l'utente fa clic su **Start**, occorre selezionare una citazione , config
 
 ```javascript
 // alla fine in script.js
-document.getElementById('start').addEventListener('click', () => {
+document.getElementById("start").addEventListener("click", () => {
   // si ottiene una citazione
   const quoteIndex = Math.floor(Math.random() * quotes.length);
   const quote = quotes[quoteIndex];
   // Si inserisce la citazione in un array di parole
-  words = quote.split(' ');
+  words = quote.split(" ");
   // si reimposta l'indice della parola da monitorare
   wordIndex = 0;
 
-  // Aggiornamenti interfaccia utente 
+  // Aggiornamenti interfaccia utente
   // Si crea un array di elementi span in modo da impostare una classe
-  const spanWords = words.map(function(word) { return `<span>${word} </span>`});
+  const spanWords = words.map(function (word) {
+    return `<span>${word} </span>`;
+  });
   // Converzione in stringa e impostazione come innerHTML alla visualizzazione della citazione
-  quoteElement.innerHTML = spanWords.join('');
+  quoteElement.innerHTML = spanWords.join("");
   // Evidenzia la prima parola
-  quoteElement.childNodes[0].className = 'highlight';
+  quoteElement.childNodes[0].className = "highlight";
   // Pulisce qualsiasi precedente messaggio
-  messageElement.innerText = '';
+  messageElement.innerText = "";
 
   // Impostazione della casella di testo
   // Pulisce la casella di testo
-  typedValueElement.value = '';
+  typedValueElement.value = "";
   // imposta il focus
   typedValueElement.focus();
   // imposta il gestore di evento
@@ -235,19 +244,19 @@ document.getElementById('start').addEventListener('click', () => {
 Verrà analizzato il codice!
 
 - Impostazione del monitoraggio delle parole
-   - L'utilizzo  di [Math.floor](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/floor) e [Math.random](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/random) consente di selezionare in modo casuale una citazione dall'array `quotes`
-   - Si converte la citazione (`quote`) in un array di parole (`words`) in modo da poter tracciare la parola che il giocatore sta attualmente digitando
-   - Si imposta `wordIndex`  a 0, poiché il giocatore inizierà dalla prima parola
+  - L'utilizzo di [Math.floor](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/floor) e [Math.random](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/random) consente di selezionare in modo casuale una citazione dall'array `quotes`
+  - Si converte la citazione (`quote`) in un array di parole (`words`) in modo da poter tracciare la parola che il giocatore sta attualmente digitando
+  - Si imposta `wordIndex` a 0, poiché il giocatore inizierà dalla prima parola
 - Impostazione dell'interfaccia utente
-   - Si crea un array  `spanWords`, che contiene ogni parola all'interno di un elemento `span`
-      - Questo permetterà di evidenziare la parola sul display
-   - Si unisce (`join`) l'array per creare una stringa che si può usare per aggiornare `innerHTML` su `quoteElement`
-      - Questo mostrerà la citazione al giocatore
-   - Si imposta `className` del primo elemento `span` a `highlight` per evidenziarlo in giallo
-   - Si pulisce `messageElement` impostando `innerText` a `''`
+  - Si crea un array `spanWords`, che contiene ogni parola all'interno di un elemento `span`
+    - Questo permetterà di evidenziare la parola sul display
+  - Si unisce (`join`) l'array per creare una stringa che si può usare per aggiornare `innerHTML` su `quoteElement`
+    - Questo mostrerà la citazione al giocatore
+  - Si imposta `className` del primo elemento `span` a `highlight` per evidenziarlo in giallo
+  - Si pulisce `messageElement` impostando `innerText` a `''`
 - Impostazione della casella di testo
-   - Si cancella il valore (`value`) corrente su `typedValueElement`
-   - Si imposta l'elemento (`focus`) su `typedValueElement`
+  - Si cancella il valore (`value`) corrente su `typedValueElement`
+  - Si imposta l'elemento (`focus`) su `typedValueElement`
 - Su avvia il timer chiamando `getTime`
 
 ### Aggiungere la logica di digitazione
@@ -256,7 +265,7 @@ Man mano che il giocatore digita, verrà generato un evento di `input` . Questo 
 
 ```javascript
 // in fondo a script.js
-typedValueElement.addEventListener('input', () => {
+typedValueElement.addEventListener("input", () => {
   // Ottiene la parola corrente
   const currentWord = words[wordIndex];
   // Ottiene il valore corrente
@@ -266,27 +275,29 @@ typedValueElement.addEventListener('input', () => {
     // fine della frase
     // Visualizza messaggio di successo
     const elapsedTime = new Date().getTime() - startTime;
-    const message = `CONGRATULAZIONI! Hai finito in ${elapsedTime / 1000} secondi.`;
+    const message = `CONGRATULAZIONI! Hai finito in ${
+      elapsedTime / 1000
+    } secondi.`;
     messageElement.innerText = message;
-  } else if (typedValue.endsWith(' ') && typedValue.trim() === currentWord) {
+  } else if (typedValue.endsWith(" ") && typedValue.trim() === currentWord) {
     // fine della parola
     // pulisce typedValueElement per la nuova parola
-    typedValueElement.value = '';
+    typedValueElement.value = "";
     // si sposta alla parola successiva
     wordIndex++;
     // reimposta il nome della classe per tutti gli elementi in quote
     for (const wordElement of quoteElement.childNodes) {
-      wordElement.className = '';
+      wordElement.className = "";
     }
     // evidenzia la nuova parola
-    quoteElement.childNodes[wordIndex].className = 'highlight';
+    quoteElement.childNodes[wordIndex].className = "highlight";
   } else if (currentWord.startsWith(typedValue)) {
     // attualmente corretto
     // evidenzia la parola successiva
-    typedValueElement.className = '';
+    typedValueElement.className = "";
   } else {
     // stato di errore
-    typedValueElement.className = 'error';
+    typedValueElement.className = "error";
   }
 });
 ```
@@ -294,18 +305,18 @@ typedValueElement.addEventListener('input', () => {
 Ora si analizzerà il codice! Si inizia catturando la parola corrente e il valore che il giocatore ha digitato finora. Quindi si ha una logica a cascata, dove si controlla se la citazione è completa, la parola è completa, la parola è corretta o (finalmente), se c'è un errore.
 
 - La citazione è completa, indicata da `typedValue` che è uguale a `currentWord` e `wordIndex` è uguale a uno meno la lunghezza `length` delle parole (`words`)
-   - Si calcola `elapsedTime` sottraendo `startTime` dall'orario corrente
-   - Si divide `elapsedTime` per 1.000 per convertire da millisecondi a secondi
-   - Si visualizza un messaggio di successo
+  - Si calcola `elapsedTime` sottraendo `startTime` dall'orario corrente
+  - Si divide `elapsedTime` per 1.000 per convertire da millisecondi a secondi
+  - Si visualizza un messaggio di successo
 - La parola è completa, indicata da `typedValue` che termina con uno spazio (la fine di una parola) e `typedValue` è uguale a `currentWord`
-   - imposta il valore (`value`) di `typedElement` a `" "` per consentire la digitazione della parola successiva
-   - Si incrementa `wordIndex` per passare alla parola successiva
-   - Si itera su tutti i nodi figli `childNode` di `quoteElement` per impostare `className` a `""` per tornare alla visualizzazione predefinita
-   - Si imposta `className` della parola corrente per evidenziarla a `highlight` per contrassegnarla come parola successiva da digitare
+  - imposta il valore (`value`) di `typedElement` a `" "` per consentire la digitazione della parola successiva
+  - Si incrementa `wordIndex` per passare alla parola successiva
+  - Si itera su tutti i nodi figli `childNode` di `quoteElement` per impostare `className` a `""` per tornare alla visualizzazione predefinita
+  - Si imposta `className` della parola corrente per evidenziarla a `highlight` per contrassegnarla come parola successiva da digitare
 - La parola (`word`) è attualmente digitata correttamente (ma non è completa), indicato da `currentWord` che deve iniziare con il contenuto di `typedValue`
-   - Ci si assicura che `typedValueElement` sia visualizzato nel modo predefinito cancellando `className`
+  - Ci si assicura che `typedValueElement` sia visualizzato nel modo predefinito cancellando `className`
 - Se si è arrivati fin qui, si ha un errore
-   - Si imposta `className` per `typedValueElement` su `error`
+  - Si imposta `className` per `typedValueElement` su `error`
 
 ## Verificare l'applicazione
 

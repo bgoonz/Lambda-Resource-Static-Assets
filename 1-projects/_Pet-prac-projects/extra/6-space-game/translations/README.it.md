@@ -1,6 +1,6 @@
 # Costruire un Gioco Spaziale
 
-Un gioco spaziale per insegnare  fondamenti di JavaScript più avanzati
+Un gioco spaziale per insegnare fondamenti di JavaScript più avanzati
 
 In questa lezione si imparerà come costruire un gioco spaziale. Se mai si è giocato a "Space Invaders", questo gioco ha la stessa idea: guidare un'astronave e sparare sui mostri che scendono dall'alto. Ecco come apparirà il gioco finito:
 
@@ -17,13 +17,13 @@ In queste sei lezioni si imparerà quanto segue:
 ## Panoramica
 
 - Teoria
-   - [Introduzione alla creazione di giochi con JavaScript](1-introduction/translations/README.it.md)
+  - [Introduzione alla creazione di giochi con JavaScript](1-introduction/translations/README.it.md)
 - Esercitazione
-   - [Disegnare sull'elemento canvas](2-drawing-to-canvas/translations/README.it.md)
-   - [Spostamento di elementi sullo schermo](3-moving-elements-around/translations/README.it.md)
-   - [Rilevamento della collisione.](4-collision-detection/translations/README.it.md)
-   - [Tenere il punteggio](5-keeping-score/translations/README.it.md)
-   - [Terminare e riavviare il gioco](6-end-condition/translations/README.it.md)
+  - [Disegnare sull'elemento canvas](2-drawing-to-canvas/translations/README.it.md)
+  - [Spostamento di elementi sullo schermo](3-moving-elements-around/translations/README.it.md)
+  - [Rilevamento della collisione.](4-collision-detection/translations/README.it.md)
+  - [Tenere il punteggio](5-keeping-score/translations/README.it.md)
+  - [Terminare e riavviare il gioco](6-end-condition/translations/README.it.md)
 
 ## Crediti
 

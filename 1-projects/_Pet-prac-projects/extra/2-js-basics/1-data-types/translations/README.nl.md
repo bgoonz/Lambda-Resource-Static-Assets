@@ -1,15 +1,16 @@
 # JavaScript Basics: Gegevenstypen
 
 ![JavaScript Basics - Data types](/sketchnotes/webdev101-js-datatypes.png)
+
 > Sketchnote door [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## Quiz voorafgaand aan de lezing
+
 [Quiz voorafgaand aan de lezing](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/7)
 
 Deze les behandelt de basisprincipes van JavaScript, de taal die voor interactiviteit op internet zorgt.
 
 [![Gegevenstypen in JavaScript](https://img.youtube.com/vi/JNIXfGiDWM8/0.jpg)](https://youtube.com/watch?v=JNIXfGiDWM8 "Gegevenstypen in JavaScript")
-
 
 Laten we beginnen met variabelen en de gegevenstypen waarmee ze worden gevuld!
 
@@ -19,38 +20,39 @@ Variabelen slaan waarden op die in uw code kunnen worden gebruikt en gewijzigd.
 
 Het creëren en **declareren** van een variabele heeft de volgende syntaxis **[sleutelwoord] [naam]**. Het bestaat uit twee delen:
 
-- **Sleutelwoord**. Sleutelwoorden kunnen `let` of `var` zijn.  
+- **Sleutelwoord**. Sleutelwoorden kunnen `let` of `var` zijn.
 
-   > Let op, het sleutelwoord `let` is geïntroduceerd in ES6 en geeft uw variabele een zogenaamde _block scope_. Het wordt aanbevolen om `let` over `var` te gebruiken. In toekomstige delen gaan we dieper in op block scopes.
+  > Let op, het sleutelwoord `let` is geïntroduceerd in ES6 en geeft uw variabele een zogenaamde _block scope_. Het wordt aanbevolen om `let` over `var` te gebruiken. In toekomstige delen gaan we dieper in op block scopes.
+
 - **De variabelenaam**, dit is een naam die u zelf kiest.
 
 ### Taak - werken met variabelen
 
 1. **Declareer een variabele**. Laten we een variabele declareren met het sleutelwoord `let`:
 
-    ```javascript
-    let myVariable;
-    ```
+   ```javascript
+   let myVariable;
+   ```
 
    `myVariable` is nu gedeclareerd met het `let` sleutelwoord. Het heeft momenteel geen waarde.
 
 1. **Wijs een waarde toe**. Sla een waarde op in een variabele met de operator `=`, gevolgd door de verwachte waarde.
 
-    ```javascript
-    myVariable = 123;
-    ```
+   ```javascript
+   myVariable = 123;
+   ```
 
    > Let op: het gebruik van `=` in deze les betekent dat we gebruik maken van een "toewijzingsoperator", die wordt gebruikt om een waarde aan een variabele te geven. Het duidt niet op gelijkheid.
 
-   `myVariable` is nu *geïnitialiseerd* met de waarde 123.
+   `myVariable` is nu _geïnitialiseerd_ met de waarde 123.
 
 1. **Refactor**. Vervang uw code door de volgende verklaring.
 
-    ```javascript
-    let myVariable = 123;
-    ```
+   ```javascript
+   let myVariable = 123;
+   ```
 
-    Het bovenstaande wordt een _expliciete initialisatie_ genoemd wanneer een variabele wordt gedeclareerd en tegelijkertijd een waarde krijgt toegewezen.
+   Het bovenstaande wordt een _expliciete initialisatie_ genoemd wanneer een variabele wordt gedeclareerd en tegelijkertijd een waarde krijgt toegewezen.
 
 1. **Wijzig de variabele waarde**. Wijzig de waarde van de variabele op de volgende manier:
 
@@ -74,30 +76,31 @@ Constanten zijn vergelijkbaar met variabelen, met twee uitzonderingen:
 
 - **Moet waarde hebben**. Constanten moeten worden geïnitialiseerd, anders treedt er een fout op bij het uitvoeren van code.
 - **Referentie kan niet worden gewijzigd**. De referentie van een constante kan niet worden gewijzigd nadat deze is geïnitialiseerd, anders treedt er een fout op bij het uitvoeren van code. Laten we naar twee voorbeelden kijken:
-   - **Eenvoudige waarde**. Het volgende is NIET toegestaan:
-   
-      ```javascript
-      const PI = 3;
-      PI = 4; // niet toegestaan
-      ```
- 
-   - **Objectreferentie is beveiligd**. Het volgende is NIET toegestaan.
-   
-      ```javascript
-      const obj = { a: 3 };
-      obj = { b: 5 } // niet toegestaan
-      ```
 
-    - **Objectwaarde is niet beschermd**. Het volgende is toegestaan:
-    
-      ```javascript
-      const obj = { a: 3 };
-      obj.a = 5;  // toegestaan
-      ```
+  - **Eenvoudige waarde**. Het volgende is NIET toegestaan:
 
-      Hierboven verandert u de waarde van het object maar niet de referentie zelf, waardoor het toegestaan is.
+    ```javascript
+    const PI = 3;
+    PI = 4; // niet toegestaan
+    ```
 
-   > Let op: een 'const' betekent dat de referentie is beschermd tegen opnieuw toewijzen. De waarde is echter niet _onveranderlijk_ en kan veranderen, vooral als het een complexe constructie is, zoals een object.
+  - **Objectreferentie is beveiligd**. Het volgende is NIET toegestaan.
+
+    ```javascript
+    const obj = { a: 3 };
+    obj = { b: 5 }; // niet toegestaan
+    ```
+
+  - **Objectwaarde is niet beschermd**. Het volgende is toegestaan:
+
+    ```javascript
+    const obj = { a: 3 };
+    obj.a = 5; // toegestaan
+    ```
+
+    Hierboven verandert u de waarde van het object maar niet de referentie zelf, waardoor het toegestaan is.
+
+  > Let op: een 'const' betekent dat de referentie is beschermd tegen opnieuw toewijzen. De waarde is echter niet _onveranderlijk_ en kan veranderen, vooral als het een complexe constructie is, zoals een object.
 
 ## Gegevenstypen
 
@@ -150,7 +153,6 @@ let myString2 = "World";
 myString1 + myString2 + "!"; //HelloWorld!
 myString1 + " " + myString2 + "!"; //Hello World!
 myString1 + ", " + myString2 + "!"; //Hello, World!
-
 ```
 
 ✅ Waarom is `1 + 1 = 2` in JavaScript, maar `'1' + '1' = 11?` Denk er eens over na. Hoe zit het met `'1' + 1`?
@@ -162,7 +164,7 @@ let myString1 = "Hello";
 let myString2 = "World";
 
 `${myString1} ${myString2}!` //Hello World!
-`${myString1}, ${myString2}!` //Hello, World!
+`${myString1}, ${myString2}!`; //Hello, World!
 ```
 
 U kunt uw opmaakdoelen met beide methoden bereiken, maar template literals respecteren alle spaties en regeleinden.
@@ -185,6 +187,7 @@ Booleans kunnen slechts twee waarden zijn: `true` of `false`. Booleans kunnen he
 JavaScript is berucht om zijn verrassende manieren om af en toe met gegevenstypen om te gaan. Doe een beetje onderzoek naar deze 'valstrikken'. Bijvoorbeeld: hoofdlettergevoeligheid kan bijten! Probeer dit in uw console: `let age = 1; let Age = 2; age == Age` (lost `false` op - waarom?). Welke andere valstrikken kunt u vinden?
 
 ## Quiz na de lezing
+
 [Quiz na de lezing](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/8)
 
 ## Beoordeling en zelfstudie

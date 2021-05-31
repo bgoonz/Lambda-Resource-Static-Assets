@@ -22,8 +22,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bank App</title>
   </head>
   <body>
@@ -79,9 +79,7 @@
     <h1>Bank App</h1>
     <a href="/login">Logout</a>
   </header>
-  <section>
-    Balance: 100$
-  </section>
+  <section>Balance: 100$</section>
   <section>
     <h2>Transactions</h2>
     <table>
@@ -128,8 +126,8 @@
 function updateRoute(templateId) {
   const template = document.getElementById(templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -139,14 +137,14 @@ function updateRoute(templateId) {
 現在我們呼叫這個函式，指定特定的模板並觀察結果。
 
 ```js
-updateRoute('login');
+updateRoute("login");
 ```
 
 ✅ 程式碼中 `app.innerHTML = '';` 的目的為何？如果刪去它會發生什麼事？
 
 ## 建立網頁路由(Routing)
 
-當提及網頁應用程式時，我們稱呼 *路由(Routing)* 來連接**網址(URLs)**到特定的畫面上，呈現相關內容。一個含有多個 HTML 檔的網頁，網址又象徵著檔案路徑，這能自動地完成網址與檔案的轉換。舉例來說，專案資料夾內有這些檔案：
+當提及網頁應用程式時，我們稱呼 _路由(Routing)_ 來連接**網址(URLs)**到特定的畫面上，呈現相關內容。一個含有多個 HTML 檔的網頁，網址又象徵著檔案路徑，這能自動地完成網址與檔案的轉換。舉例來說，專案資料夾內有這些檔案：
 
 ```
 mywebsite/index.html
@@ -170,8 +168,8 @@ https://site.com/admin/     --> mywebsite/admin/index.html
 
 ```js
 const routes = {
-  '/login': { templateId: 'login' },
-  '/dashboard': { templateId: 'dashboard' },
+  "/login": { templateId: "login" },
+  "/dashboard": { templateId: "dashboard" },
 };
 ```
 
@@ -184,8 +182,8 @@ function updateRoute() {
 
   const template = document.getElementById(route.templateId);
   const view = template.content.cloneNode(true);
-  const app = document.getElementById('app');
-  app.innerHTML = '';
+  const app = document.getElementById("app");
+  app.innerHTML = "";
   app.appendChild(view);
 }
 ```
@@ -198,8 +196,8 @@ function updateRoute() {
 
 下一個步驟為在不更改網址的情況下，新增網頁訪問的途徑。這會做出兩件事情：
 
-  1. 更新現在的網址
-  2. 更新要被顯示的模板到新的網址中
+1. 更新現在的網址
+2. 更新要被顯示的模板到新的網址中
 
 我們已經完成了第二點，藉由使用函式 `updateRoute` 來完成，所以我們需要釐清該如何更新現在的網址。
 
@@ -245,7 +243,7 @@ function onLinkClick(event) {
 }
 ```
 
-現在我們完成應用程式的網頁訪問系統，在 HTML 檔的 *Login* 與 *Logout* 連結加入此函式。
+現在我們完成應用程式的網頁訪問系統，在 HTML 檔的 _Login_ 與 _Logout_ 連結加入此函式。
 
 ```html
 <a href="/dashboard" onclick="onLinkClick()">Login</a>

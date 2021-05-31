@@ -1,9 +1,11 @@
 # 접근 가능한 웹 페이지 생성하기
 
 ![All About Accessibility](/sketchnotes/webdev101-a11y.png)
+
 > Sketchnote by [Tomomi Imura](https://twitter.com/girlie_mac)
 
 ## 강의 전 퀴즈
+
 [Pre-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/5?loc=ko)
 
 > 웹의 힘은 보편성에 있습니다. 장애에 관계없이 모든 사람이 접근하는 것은 필수 요소입니다.
@@ -96,7 +98,7 @@ CSS는 페이지에 있는 모든 요소의 형태를 완벽하게 제어합니�
 
 ### 좋은 링크 텍스트
 
-좋은 링크 텍스트는 링크의 다른 측면에 있는 내용을 간략하게 설명합니다. 작은 펭귄에 대해 이야기하는 예시에서 링크는 종에 대한 Wikipedia 페이지로 연결됩니다. *little penguins* 라는 문구는 누군가가 링크를 클릭하면 무엇을 배울 수 있는지를 명확하게 해주기 때문에 완벽한 링크 텍스트가 됩니다.-little penguins.
+좋은 링크 텍스트는 링크의 다른 측면에 있는 내용을 간략하게 설명합니다. 작은 펭귄에 대해 이야기하는 예시에서 링크는 종에 대한 Wikipedia 페이지로 연결됩니다. _little penguins_ 라는 문구는 누군가가 링크를 클릭하면 무엇을 배울 수 있는지를 명확하게 해주기 때문에 완벽한 링크 텍스트가 됩니다.-little penguins.
 
 > The [little penguin](https://en.wikipedia.org/wiki/Little_penguin), sometimes known as the fairy penguin, is the smallest penguin in the world.
 
@@ -115,7 +117,7 @@ CSS는 페이지에 있는 모든 요소의 형태를 완벽하게 제어합니�
 | Widget       | [Description]('#') | [Order]('#') |
 | Super widget | [Description]('#') | [Order]('#') |
 
-이 예시에서는 설명 텍스트와 순서를 복사하는 것이 브라우저를 사용하는 사람에게 의미가 있습니다. 그러나 스크린 리더를 사용하는 사람은 문맥없이 반복되는 *설명* 및 *순서* 라는 단어만 듣게됩니다.
+이 예시에서는 설명 텍스트와 순서를 복사하는 것이 브라우저를 사용하는 사람에게 의미가 있습니다. 그러나 스크린 리더를 사용하는 사람은 문맥없이 반복되는 _설명_ 및 _순서_ 라는 단어만 듣게됩니다.
 
 이러한 유형의 시나리오를 지원하기 위해 HTML은 [Accessible Rich Internet Applications (ARIA)](https://developer.mozilla.org/docs/Web/Accessibility/ARIA)라는 속성 집합을 지원합니다. 이러한 속성을 사용하면 스크린 리더에 추가 정보를 제공할 수 있습니다.
 
@@ -123,15 +125,20 @@ CSS는 페이지에 있는 모든 요소의 형태를 완벽하게 제어합니�
 
 페이지 형식이 허용하지 않는 경우에는 `aria-label`을 사용하여 링크에 설명할 수 있습니다. 위젯에 대한 설명은 다음과 같이 설정할 수 있습니다
 
-``` html
+```html
 <a href="#" aria-label="Widget description">description</a>
 ```
 
 ✅ 일반적으로, 위에서 설명한 시맨틱 마크업을 사용하는 것은 ARIA의 사용을 대체하지만, 때때로 다양한 HTML 위젯에 해당하는 시맨틱이 없습니다. 좋은 예는 Progressbar입니다. 진행률 표시줄에 해당하는 HTML이 없으므로 적절한 역할 및 aria 값을 사용하여 일반 `<div>`를 식별합니다. [AMDN documentation on ARIA](https://developer.mozilla.org/docs/Web/Accessibility/ARIA)에 더 유용한 정보가 포함되어 있습니다.
 
 ```html
-<div id="percent-loaded" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-</div>
+<div
+  id="percent-loaded"
+  role="progressbar"
+  aria-valuenow="75"
+  aria-valuemin="0"
+  aria-valuemax="100"
+></div>
 ```
 
 ## 이미지
@@ -180,7 +187,7 @@ CSS는 페이지에 있는 모든 요소의 형태를 완벽하게 제어합니�
     </div>
     <div class="main-content">
       <div>
-        <p class="page-title">Welcome to Turtle Ipsum. 
+        <p class="page-title">Welcome to Turtle Ipsum.
             <a href="">Click here</a> to learn more.
         </p>
         <p class="article-text">
@@ -207,6 +214,7 @@ CSS는 페이지에 있는 모든 요소의 형태를 완벽하게 제어합니�
 ```
 
 ## 강의 후 퀴즈
+
 [Post-lecture quiz](https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/6?loc=ko)
 
 ## 리뷰 & 자기주도 학습
@@ -214,7 +222,7 @@ CSS는 페이지에 있는 모든 요소의 형태를 완벽하게 제어합니�
 많은 정부 기관에는 접근성 요구사항에 관한 법률이 있습니다. 자신의 나라에 해당하는 접근성 법률을 읽어보십시오. 보장되거나 안되는 항목은 무엇입니까? [this government web site](https://accessibility.blog.gov.uk/) 예시 입니다.
 
 ## 과제
- 
+
 [Analyze a non-accessible web site](../assignment.md)
 
 크레딧: [Turtle Ipsum](https://github.com/Instrument/semantic-html-sample) by Instrument

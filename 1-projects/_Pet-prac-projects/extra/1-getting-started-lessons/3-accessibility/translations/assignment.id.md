@@ -7,5 +7,5 @@ Identifikasi situs web yang Anda yakini TIDAK dapat diakses, dan buat rencana ti
 ## Rubrik
 
 | Kriteria      | Teladan                                                                                                                                                                                    | Memenuhi Syarat                 | Perlu Perbaikan                 |
-|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|---------------------------------|
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- | ------------------------------- |
 | laporan siswa | termasuk paragraf tentang bagaimana situs tersebut tidak memadai, laporan Lighthouse diambil sebagai pdf, daftar sepuluh poin untuk diperbaiki, dengan rincian tentang cara memperbaikinya | kurang 20% dari yang dibutuhkan | kurang 50% dari yang dibutuhkan |

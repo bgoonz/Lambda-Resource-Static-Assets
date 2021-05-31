@@ -1,6 +1,7 @@
 # ब्राउज़र एक्सटेंशन प्रोजेक्ट पार्ट 1: ब्राउज़रों के बारे में सभी
 
 ![ब्राउजर ब्राउज़र स्केचनोट  ](/sketchnotes/browser.jpg)
+
 > स्केचनोट [वसीम चैघाम](https://dev.to/wassimchegham/ever-wondered-what-happens-when-you-type-in-a-url-in-an-address-bar-in-a-browser-3dob) द्वारा
 
 ## पूर्व व्याख्यान प्रश्नोत्तरी
@@ -20,6 +21,7 @@
 ✅ थोड़ा इतिहास: पहला ब्राउज़र 'वर्ल्डवाइडवेब' कहलाता था और 1990 में सर टिमोथी बर्नर्स-ली द्वारा बनाया गया था।
 
 ![शुरुआती ब्राउज़र](../images/earlybrowsers.jpg)
+
 > थोड़ी शुरुआती ब्राउजर , [Karen McGrane](https://www.slideshare.net/KMcGrane/week-4-ixd-history-personal-computing) द्वारा
 
 जब कोई उपयोगकर्ता URL (यूनिफ़ॉर्म रिसोर्स लोकेटर) पते का उपयोग करके इंटरनेट से जुड़ा होता है, तो आमतौर पर एक `http` या `https` पते के माध्यम से हाइपरटेक्स्ट ट्रांसफर प्रोटोकॉल का उपयोग करते हुए, ब्राउज़र एक वेब सर्वर के साथ संचार करता है और एक वेब पेज प्राप्त करता है।
@@ -74,12 +76,12 @@ CO2 सिग्नल की एपीआई।
 कोडबेस के माध्यम से देखने के लिए एक मिनट लें:
 
 dist
-    -|manifest.json (डिफ़ॉल्ट यहा सेट करे)
-    -|index.html (फ्रंट-एंड HTML मार्कअप यहाँ)
-    -|background.js (पृष्ठभूमि JS यहाँ)
-    -|main.js (बिलट JS)
+-|manifest.json (डिफ़ॉल्ट यहा सेट करे)
+-|index.html (फ्रंट-एंड HTML मार्कअप यहाँ)
+-|background.js (पृष्ठभूमि JS यहाँ)
+-|main.js (बिलट JS)
 src
-    -|index.js (आपका JS कोड यहा जाता है)
+-|index.js (आपका JS कोड यहा जाता है)
 
 ✅ एक बार जब आपके पास आपकी एपीआई की और क्षेत्र कोड काम आ जाए, तो भविष्य में उपयोग के लिए उन्हें किसी नोट में स्टोर करें।
 
@@ -111,8 +113,9 @@ src
 		<input type="text" id="api" required class="api-key" />
 	</div>
 	<button class="search-btn">Submit</button>
-</form>	
+</form>
 ```
+
 यह वह रूप है जहां आपकी सहेजी गई जानकारी इनपुट होगी और स्थानीय संग्रहण में सहेजी जाएगी।
 
 अगला, परिणाम क्षेत्र बनाएं; अंतिम फॉर्म टैग के तहत, कुछ divs जोड़ें:
@@ -130,6 +133,7 @@ src
 	<button class="clear-btn">Change region</button>
 </div>
 ```
+
 इस बिंदु पर, आप एक निर्माण की कोशिश कर सकते हैं। इस एक्सटेंशन के पैकेज निर्भरता को स्थापित करना सुनिश्चित करें:
 
 ```
@@ -162,7 +166,6 @@ npm install
 
 [टिम बर्नर्स-ली के साथ एक इंटरव्यू](https://www.theguardian.com/technology/2019/mar/12/tim-berners-lee-on-30-years-of-the-web-if-we-dream-a-little-we-can-get-the-web-we-want)
 
-## असाइनमेंट 
+## असाइनमेंट
 
 [अपने इक्स्टेन्शन को रीस्टाइल करें](assignment.hi.md)
-

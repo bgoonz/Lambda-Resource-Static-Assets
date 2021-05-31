@@ -6,6 +6,6 @@ Immaginare di progettare o riprogettare il proprio sito web personale. Creare un
 
 ## Rubrica
 
-| Criteri | Ottimo | Adeguato | Necessita miglioramento |
-| -------- | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-|          | La disposizione del blog è rappresentata visivamente con almeno 10 elementi di markup visualizzati | La disposizione del blog è rappresentata visivamente con circa 5 elementi di markup visualizzati | La disposizione del blog è rappresentata visivamente con almeno 3 elementi di markup visualizzati |
+| Criteri | Ottimo                                                                                             | Adeguato                                                                                         | Necessita miglioramento                                                                           |
+| ------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+|         | La disposizione del blog è rappresentata visivamente con almeno 10 elementi di markup visualizzati | La disposizione del blog è rappresentata visivamente con circa 5 elementi di markup visualizzati | La disposizione del blog è rappresentata visivamente con almeno 3 elementi di markup visualizzati |

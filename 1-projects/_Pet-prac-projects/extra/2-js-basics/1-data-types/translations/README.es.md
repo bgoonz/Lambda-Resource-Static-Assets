@@ -1,6 +1,7 @@
 # Conceptos básicos de JavaScript: tipos de datos
 
 ![JavaScript Basics - Data types](/sketchnotes/webdev101-js-datatypes.png)
+
 > Sketchnote por [Tomomi Imura](https://twitter.com/girlie_mac)
 
 [![Tipos de datos en JavaScript](https://img.youtube.com/vi/rEHV3fFMfn0/0.jpg)](https://youtube.com/watch?v=rEHV3fFMfn0 "Tipos de datos en JavaScript")
@@ -19,39 +20,39 @@ Crear y **declarar** una variable tiene la siguiente sintaxis **[keyword] [name]
 
 - **Keyword**. Las palabras clave pueden ser `let` o `var`.
 
-    > Tenga en cuenta que la palabra clave `let` se introdujo en ES6 y le da a su variable un llamado _alcance de bloque_ (block scope). Se recomienda utilizar `let` sobre `var`. Cubriremos los alcances de bloque con más profundidad en partes futuras.
+  > Tenga en cuenta que la palabra clave `let` se introdujo en ES6 y le da a su variable un llamado _alcance de bloque_ (block scope). Se recomienda utilizar `let` sobre `var`. Cubriremos los alcances de bloque con más profundidad en partes futuras.
+
 - **El nombre de la variable**, este es un nombre que elige usted mismo.
 
 ### Tarea - trabajar con variables
 
 1. **Declara una variable**. Declaremos una variable usando la palabra clave `let`:
 
-    ```javascript
-    let myVariable;
-    ```
+   ```javascript
+   let myVariable;
+   ```
 
    `myVariable` ahora se ha declarado usando la palabra clave `let`. Actualmente no tiene ningún valor.
 
 1. **Asignar un valor**. Almacene un valor en una variable con el operador `=`, seguido del valor esperado.
 
-    ```javascript
-    myVariable = 123;
-    ```
+   ```javascript
+   myVariable = 123;
+   ```
 
    > Nota: el uso de `=` en esta lección significa que hacemos uso de un "operador de asignación", que se utiliza para establecer un valor en una variable. No denota igualdad.
 
-    `myVariable` ahora se ha *inicializado* con el valor 123.
+   `myVariable` ahora se ha _inicializado_ con el valor 123.
 
 1. **Refactorizar código**. Reemplace su código con la siguiente declaración.
 
-    ```javascript
-    let myVariable = 123;
-    ```
+   ```javascript
+   let myVariable = 123;
+   ```
 
-    Lo anterior se denomina _inicialización explícita_ cuando se declara una variable y se le asigna un valor al mismo tiempo.
+   Lo anterior se denomina _inicialización explícita_ cuando se declara una variable y se le asigna un valor al mismo tiempo.
 
 1. **Cambiar el valor de la variable**. Cambie el valor de la variable de la siguiente manera:
-
 
    ```javascript
    myVariable = 321;
@@ -59,7 +60,7 @@ Crear y **declarar** una variable tiene la siguiente sintaxis **[keyword] [name]
 
    Una vez que se declara una variable, puede cambiar su valor en cualquier punto de su código con el operador `=` y el nuevo valor.
 
-    ✅ ¡Pruébalo! Puede escribir JavaScript directamente en su navegador. Abra una ventana del navegador y navegue hasta Herramientas de desarrollo. En la consola, encontrará un mensaje; escriba `let myVariable = 123`, presione retorno, luego escriba `myVariable`. ¿Lo que pasa? Tenga en cuenta que aprenderá más sobre estos conceptos en lecciones posteriores.
+   ✅ ¡Pruébalo! Puede escribir JavaScript directamente en su navegador. Abra una ventana del navegador y navegue hasta Herramientas de desarrollo. En la consola, encontrará un mensaje; escriba `let myVariable = 123`, presione retorno, luego escriba `myVariable`. ¿Lo que pasa? Tenga en cuenta que aprenderá más sobre estos conceptos en lecciones posteriores.
 
 ## Constantes
 
@@ -73,31 +74,31 @@ Las constantes son similares a las variables, con dos excepciones:
 
 - **Deben tener un valor**. Las constantes deben inicializarse o se producirá un error al ejecutar el código.
 - **La referencia no se puede cambiar**. La referencia de una constante no se puede cambiar una vez inicializada, o se producirá un error al ejecutar el código. Veamos dos ejemplos:
-    - **Valor simple**. NO se permite lo siguiente:
 
-   
-      ```javascript
-      const PI = 3;
-      PI = 4; // no permitido
-      ```
- 
-   - **La referencia del objeto está protegida**. NO se permite lo siguiente.
-   
-      ```javascript
-      const obj = { a: 3 };
-      obj = { b: 5 } // no permitido
-      ```
+  - **Valor simple**. NO se permite lo siguiente:
 
-    - **El valor del objeto no está protegido**. Se permite lo siguiente:
-    
-      ```javascript
-      const obj = { a: 3 };
-      obj.a = 5;  // permitido
-      ```
+    ```javascript
+    const PI = 3;
+    PI = 4; // no permitido
+    ```
 
-      Arriba está cambiando el valor del objeto pero no la referencia en sí, lo que lo permite.
+  - **La referencia del objeto está protegida**. NO se permite lo siguiente.
 
-   > Tenga en cuenta que `const` significa que la referencia está protegida contra la reasignación. Sin embargo, el valor no es _immutable_ y puede cambiar, especialmente si es una construcción compleja como un objeto.
+    ```javascript
+    const obj = { a: 3 };
+    obj = { b: 5 }; // no permitido
+    ```
+
+  - **El valor del objeto no está protegido**. Se permite lo siguiente:
+
+    ```javascript
+    const obj = { a: 3 };
+    obj.a = 5; // permitido
+    ```
+
+    Arriba está cambiando el valor del objeto pero no la referencia en sí, lo que lo permite.
+
+  > Tenga en cuenta que `const` significa que la referencia está protegida contra la reasignación. Sin embargo, el valor no es _immutable_ y puede cambiar, especialmente si es una construcción compleja como un objeto.
 
 ## Tipos de datos
 
@@ -117,12 +118,12 @@ Las variables pueden almacenar todo tipo de números, incluidos decimales o núm
 
 Hay varios tipos de operadores que se pueden utilizar al realizar funciones aritméticas, y algunos se enumeran aquí:
 
-| Símbolo | Descripción                                                        | Ejemplo                                |
-| ------- | ------------------------------------------------------------------ | -------------------------------------- |
-| `+`     | **Suma**: Calcula la suma de dos números                           | `1 + 2 //la respuesta esperada es 3`   |
-| `-`     | **Resta**: Calcula la diferencia de dos números                    | `1 - 2 //la respuesta esperada es -1`  |
-| `*`     | **Multiplicación**: Calcula el producto de dos números             | `1 * 2 //la respuesta esperada es 2`   |
-| `/`     | **División**: Calcula el cociente de dos números                   | `1 / 2 //la respuesta esperada es 0.5` |
+| Símbolo | Descripción                                                           | Ejemplo                                |
+| ------- | --------------------------------------------------------------------- | -------------------------------------- |
+| `+`     | **Suma**: Calcula la suma de dos números                              | `1 + 2 //la respuesta esperada es 3`   |
+| `-`     | **Resta**: Calcula la diferencia de dos números                       | `1 - 2 //la respuesta esperada es -1`  |
+| `*`     | **Multiplicación**: Calcula el producto de dos números                | `1 * 2 //la respuesta esperada es 2`   |
+| `/`     | **División**: Calcula el cociente de dos números                      | `1 / 2 //la respuesta esperada es 0.5` |
 | `%`     | **Restante**: Calcula el resto a partir de la división de dos números | `1 % 2 //la respuesta esperada es 1`   |
 
 ✅ ¡Pruébalo! Pruebe una operación aritmética en la consola de su navegador. ¿Te sorprenden los resultados?
@@ -150,20 +151,18 @@ let myString2 = "Mundo";
 myString1 + myString2 + "!"; //¡Hola, mundo!
 myString1 + " " + myString2 + "!"; //¡Hola, mundo!
 myString1 + ", " + myString2 + "!"; //¡Hola, mundo!
-
 ```
 
 ✅ ¿Por qué `1 + 1 = 2` en JavaScript, pero `'1' + '1' = 11?` Piense en ello. ¿Qué pasa con `'1' + 1`?
 
 **Los literales de plantilla** son otra forma de formatear Strings, excepto que en lugar de comillas, se usa la comilla invertida. Todo lo que no sea texto sin formato debe colocarse dentro de los marcadores de posición `${ }`. Esto incluye cualquier variable que pueda ser Strings.
 
-
 ```javascript
 let myString1 = "Hola";
 let myString2 = "Mundo";
 
 `${myString1} ${myString2}!` //¡Hola, mundo!
-`${myString1}, ${myString2}!` //¡Hola, mundo!
+`${myString1}, ${myString2}!`; //¡Hola, mundo!
 ```
 
 Puede lograr sus objetivos de formato con cualquier método, pero los literales de plantilla respetarán los espacios y saltos de línea.
