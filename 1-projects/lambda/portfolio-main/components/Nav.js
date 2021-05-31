@@ -45,12 +45,12 @@ const Nav = () => {
         mx="auto"
       >
         <NextLink href="/" passHref>
-            <IconButton
+          <IconButton
             aria-label="jj-logo"
             href="/"
             icon={"jj_circle_logo"}
             className="nav-logo"
-            />
+          />
         </NextLink>
         <Box>
           <NextLink href="/music" passHref>

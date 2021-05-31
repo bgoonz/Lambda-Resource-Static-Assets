@@ -24,10 +24,12 @@
   <p><b>!EASTER EGGS: Click on the ▶︎ black ▶︎ triangles ▶︎ to reveal EASTER EGGS!</b></p>
 </div>
 
-***
+---
 
 # SRS BSNS
+
 ### OVERVIEW
+
 #### [LS CSA Syllabus on GitHub](https://github.com/LambdaSchool/LambdaCSA-Syllabus)
 
 <details><summary>Lambda School Sprint Structure</summary><p>
@@ -46,10 +48,12 @@
 
 </p></details>
 
-***
+---
 
 # Project Managers
+
 #### Top Priority: `If you’re clocked in, code review is the top priority.`
+
 - [Project Manager Pull Request Review Demo](https://youtu.be/B8okm2R9rOI) w/Patrick Kennedy
 
 <details><summary>Priorities</summary><p>
@@ -61,11 +65,15 @@
 > Then the queue of questions should be covered in the afternoon.
 
 ##### Also, as for the queue, I have been doing this:
+
 1. if there are questions I can address quickly, then I do so in writing.
-  - Am trying to fight the urge to jump into a chat (even though it is often easier to verbally explain things).
+
+- Am trying to fight the urge to jump into a chat (even though it is often easier to verbally explain things).
+
 2. When given questions in DM’s, I’m in the habit of asking that the question be posted in help channels prior to answering. Also, good to confirm that the student with the question is _PAIR PROGRAMMING_ and that their _PULL REQUEST_ reflects the current state of their project.
 
 ##### `Code reviews are literally the most important part of your job.`
+
 > The afternoon questions are great, but in-depth code reviews have more impact.
 
 </p></details>
@@ -76,150 +84,161 @@
 
 ## Monday through Thursday: Projects & Code Challenges
 
-| # | Time (PST) | Activity |
-|:---|:---|:---|
-| 1.  | 8         | `/jibble in` |
-| 2.  | 805 - 820 | CS7 PM standup meeting |
-| 3.  | 820 - 9   | 1) GitHub PR code reviews, 2) Code challenge help, 3) SOLUTION LECTURE @845-9 |
-| 5.  | 9   - 11  | 1) GitHub PR code reviews, 2) #cs7_help, 3) AM Lecture 4) Attendance |
-| 6.  | 11        | `/jibble out` |
-| 7.  | 11  - 12  | LUNCH |
-| 8.  | 12        | `/jibble in` |
-| 9.  | 12  - 345 | 1) GitHub PR code reviews, 2) #cs7_help, 3) Zoom <a href="https://zoom.us/j/931925949">Breakout</a> rooms |
-| 10. | 345 - 415 | Daily Standup Form review |
-| 11. | 415 - 430 | PM Team Meeting Standup Reports |
-| 12. | 430 - 5   | PM Team Meeting Group Discussion |
-| 13. | 5         | `/jibble out` |
+| #   | Time (PST) | Activity                                                                                                  |
+| :-- | :--------- | :-------------------------------------------------------------------------------------------------------- |
+| 1.  | 8          | `/jibble in`                                                                                              |
+| 2.  | 805 - 820  | CS7 PM standup meeting                                                                                    |
+| 3.  | 820 - 9    | 1) GitHub PR code reviews, 2) Code challenge help, 3) SOLUTION LECTURE @845-9                             |
+| 5.  | 9 - 11     | 1) GitHub PR code reviews, 2) #cs7_help, 3) AM Lecture 4) Attendance                                      |
+| 6.  | 11         | `/jibble out`                                                                                             |
+| 7.  | 11 - 12    | LUNCH                                                                                                     |
+| 8.  | 12         | `/jibble in`                                                                                              |
+| 9.  | 12 - 345   | 1) GitHub PR code reviews, 2) #cs7_help, 3) Zoom <a href="https://zoom.us/j/931925949">Breakout</a> rooms |
+| 10. | 345 - 415  | Daily Standup Form review                                                                                 |
+| 11. | 415 - 430  | PM Team Meeting Standup Reports                                                                           |
+| 12. | 430 - 5    | PM Team Meeting Group Discussion                                                                          |
+| 13. | 5          | `/jibble out`                                                                                             |
 
 ## Friday: Sprint Challenges
 
-| # | Time (PST) | Activity |
-|:---|:---|:---|
-| 1.  | 8         | `/jibble in` |
-| 2.  | 805 - 9   | CS7 PM standup meeting |
-| 3.  | 9   - 10  | CS7 PM Open Q&A with Instructor |
-| 4.  | 10  - 11  | 1) GitHub PR code reviews, 2) #cs7_help |
-| 5.  | 11        | `/jibble out` |
-| 6.  | 11  - 12  | LUNCH |
-| 7.  | 12        | `/jibble in` |
-| 8.  | 12  - 5   | Sprint Challenge: 12-1 Instructor Review, Attendance, Assessments, PR reviews, 1-on-1 meetings |
-| 9.  | 5         | `/jibble out` |
+| #   | Time (PST) | Activity                                                                                       |
+| :-- | :--------- | :--------------------------------------------------------------------------------------------- |
+| 1.  | 8          | `/jibble in`                                                                                   |
+| 2.  | 805 - 9    | CS7 PM standup meeting                                                                         |
+| 3.  | 9 - 10     | CS7 PM Open Q&A with Instructor                                                                |
+| 4.  | 10 - 11    | 1) GitHub PR code reviews, 2) #cs7_help                                                        |
+| 5.  | 11         | `/jibble out`                                                                                  |
+| 6.  | 11 - 12    | LUNCH                                                                                          |
+| 7.  | 12         | `/jibble in`                                                                                   |
+| 8.  | 12 - 5     | Sprint Challenge: 12-1 Instructor Review, Attendance, Assessments, PR reviews, 1-on-1 meetings |
+| 9.  | 5          | `/jibble out`                                                                                  |
 
-***
+---
 
 ## Afternoon Part-time PM assistance M - Th
 
-| # | Time (PST) | Activity |
-|:---|:---|:---|
-| 1.  | 12        | `/jibble in` |
-| 2.  | 12  - 345 | 1) GitHub PR code reviews, 2) #cs7_help, 3) Zoom <a href="https://zoom.us/j/931925949">Breakout</a> rooms |
-| 3.  | 345 - 415 | Daily Standup Form review |
-| 4.  | 415 - 430 | PM Team Meeting Standup Reports |
-| 5.  | 430 - 5   | PM Team Meeting Group Discussion |
-| 6.  | 5         | `/jibble out` |
+| #   | Time (PST) | Activity                                                                                                  |
+| :-- | :--------- | :-------------------------------------------------------------------------------------------------------- |
+| 1.  | 12         | `/jibble in`                                                                                              |
+| 2.  | 12 - 345   | 1) GitHub PR code reviews, 2) #cs7_help, 3) Zoom <a href="https://zoom.us/j/931925949">Breakout</a> rooms |
+| 3.  | 345 - 415  | Daily Standup Form review                                                                                 |
+| 4.  | 415 - 430  | PM Team Meeting Standup Reports                                                                           |
+| 5.  | 430 - 5    | PM Team Meeting Group Discussion                                                                          |
+| 6.  | 5          | `/jibble out`                                                                                             |
 
 ## Afternoon Part-time PM assistance Friday: Sprint Challenges
 
-| # | Time (PST) | Activity |
-|:---|:---|:---|
-| 1.  | 12      | `/jibble in` |
-| 2.  | 12  - 5 | Sprint Challenge: 12-1 Instructor Review, Attendance, Assessments, PR reviews, 1-on-1 meetings |
-| 3.  | 5       | `/jibble out` |
-
+| #   | Time (PST) | Activity                                                                                       |
+| :-- | :--------- | :--------------------------------------------------------------------------------------------- |
+| 1.  | 12         | `/jibble in`                                                                                   |
+| 2.  | 12 - 5     | Sprint Challenge: 12-1 Instructor Review, Attendance, Assessments, PR reviews, 1-on-1 meetings |
+| 3.  | 5          | `/jibble out`                                                                                  |
 
 </p></details>
 
 <details><summary>Section Lead Daily Schedule (PST)</summary><p>
 
 #### DAILY@9:15am PST CS7 PM Stand Up Meeting (5 - 10 minutes)
+
 ##### In alphabetical order, ask all the PM's
+
 1. What did you work on yesterday?
 2. What are you working on today?
 3. What is causing you to get stuck?
 
-#### DAILY@9:05am PST  [Section Lead Stand Up Meeting](https://zoom.us/j/4558930151)
+#### DAILY@9:05am PST [Section Lead Stand Up Meeting](https://zoom.us/j/4558930151)
 
 ## Monday through Thursday: Projects & Code Challenges
 
-| # | Time (PST) | Activity |
-|:---|:---|:---|
-| 1.  | 450p day before or 750a | Schedule Code Challenge |
-| 2.  | 8         | `/jibble in` |
-| 3.  | 805 - 820 | CS7 PM standup |
-| 4.  | 820 - 845 | 1) GitHub PR code reviews, 2) Code challenge help |
-| 5.  | 845 - 9   | LECTURE: code challenge review |
-| 6.  | 905 - ... | WEDNESDAY Section Leads mtg: https://zoom.us/j/4558930151 or #staff_section_leads report |
-| 7.  | ... - 11  | 1) GitHub PR code reviews 2) #cs7_help 3) Attendance 4) Watchlist 5) AM Lecture |
-| 8.  | 11        | `/jibble out` |
-| 9.  | 11  - 12  | LUNCH |
-| 10. | 12        | `/jibble in` |
-| 11. | 12  - 345 | 1) GitHub PR code reviews, 2) #cs7_help, 3) Zoom <a href="https://zoom.us/j/931925949">Breakout</a> rooms |
-| 12. | 345 - 415 | Daily Standup Form review |
-| 13. | 415 - 430 | PM Team Meeting Standup Reports |
-| 14. | 430 - 5   | PM Team Meeting Group Discussion |
-| 15. | 5         | `/jibble out` |
+| #   | Time (PST)              | Activity                                                                                                  |
+| :-- | :---------------------- | :-------------------------------------------------------------------------------------------------------- |
+| 1.  | 450p day before or 750a | Schedule Code Challenge                                                                                   |
+| 2.  | 8                       | `/jibble in`                                                                                              |
+| 3.  | 805 - 820               | CS7 PM standup                                                                                            |
+| 4.  | 820 - 845               | 1) GitHub PR code reviews, 2) Code challenge help                                                         |
+| 5.  | 845 - 9                 | LECTURE: code challenge review                                                                            |
+| 6.  | 905 - ...               | WEDNESDAY Section Leads mtg: https://zoom.us/j/4558930151 or #staff_section_leads report                  |
+| 7.  | ... - 11                | 1) GitHub PR code reviews 2) #cs7_help 3) Attendance 4) Watchlist 5) AM Lecture                           |
+| 8.  | 11                      | `/jibble out`                                                                                             |
+| 9.  | 11 - 12                 | LUNCH                                                                                                     |
+| 10. | 12                      | `/jibble in`                                                                                              |
+| 11. | 12 - 345                | 1) GitHub PR code reviews, 2) #cs7_help, 3) Zoom <a href="https://zoom.us/j/931925949">Breakout</a> rooms |
+| 12. | 345 - 415               | Daily Standup Form review                                                                                 |
+| 13. | 415 - 430               | PM Team Meeting Standup Reports                                                                           |
+| 14. | 430 - 5                 | PM Team Meeting Group Discussion                                                                          |
+| 15. | 5                       | `/jibble out`                                                                                             |
 
 ## Friday: Sprint Challenges
 
-| # | Time (PST) | Activity |
-|:---|:---|:---|
-| 1.  | 8         | `/jibble in` |
-| 2.  | 805 - 9   | CS7 PM standup meeting |
-| 3.  | 9   - 10  | CS7 PM Open Q&A with Instructor |
-| 4.  | 10  - 11  | 1) GitHub PR code reviews 2) #cs7_help 3) Attendance 4) Watchlist |
-| 5.  | 11        | `/jibble out` |
-| 6.  | 11  - 12  | LUNCH |
-| 7.  | 12        | `/jibble in` |
-| 8.  | 12  - 5   | Sprint Challenge: 12-1 Instructor Review, Attendance, Assessments, PR reviews, 1-on-1 meetings |
-| 9.  | 5         | `/jibble out` |
+| #   | Time (PST) | Activity                                                                                       |
+| :-- | :--------- | :--------------------------------------------------------------------------------------------- |
+| 1.  | 8          | `/jibble in`                                                                                   |
+| 2.  | 805 - 9    | CS7 PM standup meeting                                                                         |
+| 3.  | 9 - 10     | CS7 PM Open Q&A with Instructor                                                                |
+| 4.  | 10 - 11    | 1) GitHub PR code reviews 2) #cs7_help 3) Attendance 4) Watchlist                              |
+| 5.  | 11         | `/jibble out`                                                                                  |
+| 6.  | 11 - 12    | LUNCH                                                                                          |
+| 7.  | 12         | `/jibble in`                                                                                   |
+| 8.  | 12 - 5     | Sprint Challenge: 12-1 Instructor Review, Attendance, Assessments, PR reviews, 1-on-1 meetings |
+| 9.  | 5          | `/jibble out`                                                                                  |
 
 </p></details>
 
 <details><summary>CS7 Project Managers</summary><p>
 
 ### CS7 PM's
-| # | Name | Location | TimeZone | OS | Text Editor | Console |
-|---|:---|:---|:---|:---|:---|---|
-| 1. | Matt Jackson              | (Oakland, CA) | PST | macOS | VSC, VIM | |
-| 2. | Aaron Wilder              |  | PST | macOS | VSC, Atom | Iterm |
-| 3. | Tyge Johnson              | (Salt Lake City, UT) | MST | macOS | Atom | |
-| 4. | Manisha LaL               | (Chicago, IL) | CST | macOS | VSC | |
-| 5. | Satish Vattikuti          | (Toledo, OH) | EST | win10 | VSC | |
-| 6. | Andy Lavor                | (PA) | EST | Linux: Kubuntu, Ubunutu, Fedora, CentOS | VSC | Terminator, bash, zsh |
-| 7. | Patrick Kennedy           | (Madison, NH) | EST | macOS, win10, Ubuntu | Atom, VSC, Vim, Sublime, Notepad++ | Terminal.app/Bash, GitBash, CMD, PowerShell |
+
+| #   | Name             | Location             | TimeZone | OS                                      | Text Editor                        | Console                                     |
+| --- | :--------------- | :------------------- | :------- | :-------------------------------------- | :--------------------------------- | ------------------------------------------- |
+| 1.  | Matt Jackson     | (Oakland, CA)        | PST      | macOS                                   | VSC, VIM                           |                                             |
+| 2.  | Aaron Wilder     |                      | PST      | macOS                                   | VSC, Atom                          | Iterm                                       |
+| 3.  | Tyge Johnson     | (Salt Lake City, UT) | MST      | macOS                                   | Atom                               |                                             |
+| 4.  | Manisha LaL      | (Chicago, IL)        | CST      | macOS                                   | VSC                                |                                             |
+| 5.  | Satish Vattikuti | (Toledo, OH)         | EST      | win10                                   | VSC                                |                                             |
+| 6.  | Andy Lavor       | (PA)                 | EST      | Linux: Kubuntu, Ubunutu, Fedora, CentOS | VSC                                | Terminator, bash, zsh                       |
+| 7.  | Patrick Kennedy  | (Madison, NH)        | EST      | macOS, win10, Ubuntu                    | Atom, VSC, Vim, Sublime, Notepad++ | Terminal.app/Bash, GitBash, CMD, PowerShell |
 
 <img src="https://raw.githubusercontent.com/mixelpixel/LambdaSchoolTA/master/art/PMbyTimezones.jpeg" alt="PM Time Zones" width="300">
 
 ### CS7 PM Schedules (PST)
+
 #### FT 40
+
 1. Manisha M-F 8-11 LUNCH 12-5
 2. Tyge Johnson: M-F 8-11 LUNCH 12-5
 3. Patrick: M-F 8-11 LUNCH 12-5
+
 #### PT 32-35
+
 4. Matt Jackson: M-F 8-11 LUNCH 1-5
 5. Aaron Wilder: M-F 8-11 LUNCH 1-5
 6. Andy Lavor: M-F 8-11 LUNCH 1-5
+
 #### PT
+
 7. Satish is Part Time: 20hrs total
-  - M    W    F: 8AM  - 9AM
-  - M    W    F: NOON - 5PM
-  -   Tu   Th  : 4PM  - 5PM
+
+- M W F: 8AM - 9AM
+- M W F: NOON - 5PM
+- Tu Th : 4PM - 5PM
 
 </p></details>
 
 <details><summary>Set Up Notes</summary><p>
 
 ### Setting up new Section Leads
-1) CS# on Piazza - Tai >>> Kevin
-2) CS# on Repl.it - Kevin
-3) Zoom logins (one for lead, one for CS# PM’s) - Tai >>> Kevin
-4) YouTube: Lambda School account access - Caleb
-5) Airtable access for Attendance, Watchlist, etc - Caleb
-6) CS# Google calendar - Jocelyn
-7) `jibble`
-8) `/question` & `/queue`
+
+1. CS# on Piazza - Tai >>> Kevin
+2. CS# on Repl.it - Kevin
+3. Zoom logins (one for lead, one for CS# PM’s) - Tai >>> Kevin
+4. YouTube: Lambda School account access - Caleb
+5. Airtable access for Attendance, Watchlist, etc - Caleb
+6. CS# Google calendar - Jocelyn
+7. `jibble`
+8. `/question` & `/queue`
 
 ### Posting Links on Piazza
+
 - `Manage Class` tab to add students and instructors
 - `New Post` - add week# tag for letures; & the code challenges week# & coding_challenge tags for code challenges
 - NOTE: Just pasting the YouTube link WON'T necessarily result in an HTML link - it'll just be text. Piazza will make the URL hypertext, but only if you add a space after it (so their text editor evluates the link).
@@ -249,18 +268,21 @@
 
 #### [So, yeah, for all the work, embedding the content is easier and more effective!](#posting-links-on-piazza)
 
-***
+---
 
 </p></details>
 
 ### Repl.it review
+
 - use it to monitor students progress with CC's.
 - If they aren't completing them, check in.
 - If they aren't even submitting them, show them how and remind them to submit them.
 - Export CSV to analyze performance
 
 ### Setting up [repl.it](https://repl.it/teacher) code challenges
+
 Per Emily:
+
 1. Log into repl.it - you should see the classrooms
 2. When you click on CS7's classroom there should be 3 tabs: published, scheduled, and drafts.
 3. Under drafts, find the code challenge and click on it.
@@ -269,24 +291,29 @@ Per Emily:
 6. You can always go back to the scheduled version, click to open it up and you'll have options to edit the tests etc. If you scroll all the way to the bottom, there's a link to the model solution. That's the one the students will see after submission, and the one you can share if you don't want to write one
 
 ### Set up a recurring Zoom meeting
+
 1. Log in to the section lead Zoom account
 2. Go to "My Profile"
 3. Select the "Meetings" tab on the sidebar
 4. Set up a recurring meeting.
 
 ### Slack `/jibble` timeclock
+
 - In the jibble App channel, use `in` and `out`, see also: `help`
 - https://app.jibble.io/ to access your time sheet and edit times if need be.
 - http://help.jibble.io/timesheets/how-can-i-add-or-edit-time-manually
 
 ### Attendance on Airtable
+
 - if a student hasn't been noted as being in attendance for 2 days, send a DM:
+
 ```
 Hi {student},
 Just checking in. {introduction if need be}. We may have simply missed you while we were taking attendance, but I’m writing to check in to make sure you have what you need for the course and are able to stay current with the coursework. Please let me know if you’re here and if there’s anything I can do to help.
 ```
 
 ### 1099
+
 - https://www.irs.gov/businesses/small-businesses-self-employed/independent-contractor-self-employed-or-employee
 
 </p></details>
@@ -296,6 +323,7 @@ Just checking in. {introduction if need be}. We may have simply missed you while
 ### HOW TO get updates from Lambda School’s repositories with `git pull upstream master`:
 
 To display your remote aliases and the associated URL:
+
 ```bash
 $ git remote -v
 ```
@@ -309,11 +337,13 @@ $ git remote add upstream https://github.com/LambdaSchool/Responsive-Web-Design.
 ```
 
 ...then confirm that the alias is set with:
+
 ```bash
 $ git remote -v
 ```
 
 ...then you can:
+
 ```bash
 $ git pull upstream master
 ```
@@ -323,12 +353,13 @@ $ git pull upstream master
 Also, when you pull in new stuff from Lambda School’s GitHub repo, your local Git repository will want a commit message to log the update. The VIM or NANO text editors may pop up at you expecting you to know how to use them.
 
 VIM is a “mode based” text editor. When you encounter it in git
-1) press `i` to enter “Insert” mode (may launch in Insert mode - look to the bottom left of the console display, does it say`— INSERT --`?
-2) type your commit message
-3) press `ESC` to enter the “command mode”
-4) type `:wq: to “W”rite and “Q”uit
-5) you should be back in your regular console.
-6) type `git log` to confirm the commit message (press `q` to get back to your regular console)
+
+1. press `i` to enter “Insert” mode (may launch in Insert mode - look to the bottom left of the console display, does it say`— INSERT --`?
+2. type your commit message
+3. press `ESC` to enter the “command mode”
+4. type `:wq: to “W”rite and “Q”uit
+5. you should be back in your regular console.
+6. type `git log` to confirm the commit message (press `q` to get back to your regular console)
 
 If you are set up with the NANO text editor, `ctrl-o` is the save command. Type your commit msg, the use `ctrl-o`. At the bottom of the NANO text editor, you should see a list of command options.
 
@@ -339,11 +370,13 @@ $ git config --global core.editor vim
 ```
 
 ...maybe you might need quotes around “vim”:
+
 ```bash
 $ git config --global core.editor "vim"
 ```
 
 or
+
 ```bash
 $ git config --global core.editor "nano"
 ```
@@ -351,63 +384,79 @@ $ git config --global core.editor "nano"
 and there are ways to associate a text editor (Atom, Sublime) with Git: https://help.github.com/articles/associating-text-editors-with-git/
 
 I have not tried this, but I am told that to set VSC as the default text editor, this command _should_ do it with GitBash:
+
 ```bash
 git config --global core.editor "/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
 ```
 
 Othherwise for folks using CMD/PShell:
+
 ```cmd
 git config --global core.editor "C:\\Program files\path...to\Visual\ Studio\ Code.app/Contents/Resources/app/bin/code.exe"
 ```
 
 ### Remove committed content that's been pushed to GitHub
+
 So, you say you’ve _*already*_ pushed your ENTIRE `node_modules` folder up to GitHub, eh?
-1) add ‘node_modules’ to .gitignore file
-2) `$ git rm -r --cached node_modules`
-3) `$ git commit -m 'Remove the now ignored directory node_modules'`
-4) `$ git push origin master`
+
+1. add ‘node_modules’ to .gitignore file
+2. `$ git rm -r --cached node_modules`
+3. `$ git commit -m 'Remove the now ignored directory node_modules'`
+4. `$ git push origin master`
 
 ### git TIME TRAVEL
+
 If you want to go “back in time” to a previous commit, copy something, return to your current commit and use the old code: https://stackoverflow.com/a/4114122/5225057
+
 > If you want to temporarily go back to it, fool around, then come back to where you are, all you have to do is check out the desired commit:
+
 ```
 git checkout <first 7 or 10 letters in the git commit ID>
 ```
+
 > To go back to where you were, just check out the branch you were on again.
-i.e. `git checkout master`
+> i.e. `git checkout master`
 
 For example, use `git log` to see your commit history, find the commit you want to make current, copy it’s commit ID, then use `git checkout <commit ID>` to make a temporary branch from the commit. Use `git branch -a` to list the branch and note the star next to the “current” branch. In your text editor, you should see the changes have reverted to the old commit. Copy what you need. Then switch back to the master branch with `git checkout master`. In your text editor, you should see that the files are back to where you left off. `git branch -a` will report that you are on “master again” and the temp branch is gone. `git log` will also confirm that your latest commit is the current one. You can now paste the code you copied out of the old commit into your current work :slightly_smiling_face:
 
 ### Slack
+
 #### `/polly` polls
+
 - oh, it's a thing now with [a web interface](https://app.polly.ai/authoring)... templates... all that.
+
 #### `/remind`ers
+
 - `/remind` e.g. `/remind #cs7_staff @channel 805aPST - CS7 PMs Stand Up mtg: https://zoom.us/j/931925949 every weekday at 11:05am`
   - (see Zoom prefs to make a regular meeting URL)
 - `/remind #cs7 @channel Before you go to lunch, update your Sprint Challenge PR by saving your work locally, committing all your changes and pushing them up to GitHub. You did submit a PR, right? Once you've done that, please fill out the Sprint Challenge Submission form: https://airtable.com/shrZZKYVu5SITs2R8 every friday at 1:55pm`
 
 ### Chat
+
 1. Slack chat supports mouse sharing and screen drawing
 2. Zoom
 
 ### Screen recording
+
 1. Zoom
 2. Linux: http://www.maartenbaert.be/simplescreenrecorder/ (pic and sound)
 3. macOS: QuickTime Player does screen captures. To record sound, I installed [SoundFlower](https://rogueamoeba.com/freebies/soundflower/) (Got to the GitHub link)
 4. Windows: ???
 5. Ever need to quickly concatenate two Zoom meeting mp4's? …Like in _30_ seconds?? Can haz FFMPEG???
+
 ```console
 $ ffmpeg -i PART1.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts temp1.ts
 $ ffmpeg -i PART2.mp4 -c copy -bsf:v h264_mp4toannexb -f mpegts temp2.ts
 $ ffmpeg -i "concat:temp1.ts|temp2.ts" -c copy -bsf:a aac_adtstoasc OUTPUT.mp4
 ```
 
-  - you'll need this on macOS: `brew install ffmpeg`
-  - for other OS's: https://trac.ffmpeg.org/wiki/CompilationGuide
-  - or just start here: https://ffmpeg.org/
+- you'll need this on macOS: `brew install ffmpeg`
+- for other OS's: https://trac.ffmpeg.org/wiki/CompilationGuide
+- or just start here: https://ffmpeg.org/
 
 6. ScreenFlow - Caleb has paid version to render w/o watermark
-  - an example using Cursor enlargement, click radar, and displaying modifier keystrokes (e.g. `⌘ + v` for `paste`):
+
+- an example using Cursor enlargement, click radar, and displaying modifier keystrokes (e.g. `⌘ + v` for `paste`):
 
 ![How to upload an embedded YouTube link](art/piazza/piazzaEmbedYouTube.gif)
 
@@ -415,43 +464,47 @@ $ ffmpeg -i "concat:temp1.ts|temp2.ts" -c copy -bsf:a aac_adtstoasc OUTPUT.mp4
 8. https://gifox.io
 
 ### Markdown Preview
+
 #### GitHub Flavored Markdown (GFM)
+
 - Manual: https://github.github.com/gfm/
 - CheatSheet: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 #### How to get Markdown previews in text editors (for example in ANSWER.md or ReadMe.md files):
+
 - Markdown Preview in Atom: https://flight-manual.atom.io/using-atom/sections/writing-in-atom/#previews
 - Markdown Preview in VSC: https://code.visualstudio.com/docs/languages/markdown#_markdown-preview
 - You can also edit the markdown text file, commit the changes, push it to GitHub and view the file online in the browser
 
 #### Wanna know how to make these expandable sections in markdown?
+
 1. Click on this [README.md file](README.md), then
 2. click the `edit` icon:
 
 ![Look, a pencil!](art/look-a-pencil.png)
 
 3. wrap a section in this HTML:
+
 ```html
-<details><summary>Displayed Text</summary><p>
-
-Nested text/markdown
-
-</p></details>
+<details>
+  <summary>Displayed Text</summary>
+  <p>Nested text/markdown</p>
+</details>
 ```
 
 4. make it like this if you want the html collapsable in your text editor:
+
 ```html
 <details>
-  <summary>Displayed Text</summary><p>
-
-  Nested text/markdown
-
-  </p>
+  <summary>Displayed Text</summary>
+  <p>Nested text/markdown</p>
 </details>
 ```
 
 # Useful stuff
+
 ## Mongo
+
 ```
 $  mongo        <---- invoke the MongoDB
    MongoDB shell version v3.6.3
@@ -483,13 +536,15 @@ $
 ```
 
 ## cURL
+
 For folks like working in the console, there are `cURL` equivalents for Postman commands. You can access these through the `Code` snippets link in the Postman app:
 https://www.getpostman.com/docs/v6/postman/sending_api_requests/generate_code_snippets
 
 The Postman snippets are a little more verbose, but as an example, instead of using Postman for the Authentication Sprint routes and HTTP methods, these are the `cURL` equivalents:
 
-*/api/users/*
+_/api/users/_
 i.e. `curl -x HTTP_METHOD {URL} -H {CONTENT:TYPE} -d '{"JSON":"DATA"}`
+
 ```
 $ curl -X POST http://localhost:5000/api/users -H 'Content-Type: application/json' -d '{"username":"cool_name","password":"reallydifficult"}'
     {
@@ -500,8 +555,9 @@ $ curl -X POST http://localhost:5000/api/users -H 'Content-Type: application/jso
     }
 ```
 
-*/api/login/*
+_/api/login/_
 i.e. `curl -x HTTP_METHOD {URL} -H {CONTENT:TYPE} -d '{"JSON":"DATA"}`
+
 ```
 $ curl -X POST http://localhost:5000/api/login -H 'Content-Type: application/json' -d '{"username":"cool_name","password":"reallydifficult"}'
     {
@@ -509,8 +565,9 @@ $ curl -X POST http://localhost:5000/api/login -H 'Content-Type: application/jso
     }
 ```
 
-*/api/jokes:*
+_/api/jokes:_
 i.e. `curl {URL} -H "Authorization:{TOKEN}"`
+
 ```
 $ curl http://localhost:5000/api/jokes -H "Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNvb2xfbmFtZSIsImlhdCI6MTUyMTkyODA5Mn0.8aSKqHzQkprobO5w4oo-SuC03M4YIYFyPCD9EVNXu_s"
     [
@@ -525,11 +582,12 @@ $ curl http://localhost:5000/api/jokes -H "Authorization:eyJhbGciOiJIUzI1NiIsInR
 
 </p></details>
 
-***
+---
 
 # Students
 
 #### Copied From Repl.it Student List
+
 - Strip out percentages
 - use: http://sortmylist.com/ to sort (by first or last name) and make csv if need be
 
@@ -634,14 +692,17 @@ Igor Yermak
 </p></details>
 
 ### [LS Syllabus Training Kit](http://ls-training-kit.netlify.com/cs-master)
+
 ### [Code Review Checklist](https://github.com/LambdaSchool/Code-Review-Checklist)
 
 <details><summary>Pull Request Reviews</summary><p>
 
 ### DOM-JavaScript-mini
+
 - [Steve's Student Success Tracker](https://docs.google.com/spreadsheets/d/1OCF6om9bFTAbM_pWshCbV5KoOldfhxiaVjESO06oFGk/edit#gid=854893660)
 
 - [Example early comments - examine web page, encourage good git and GitHub practice](https://github.com/LambdaSchool/DOM-JavaScript-mini/pull/60)
+
 ```
 Looks great - buttons work, layout's on point.
 I opened the page in Chrome, Firefox, Safari & Opera and the buttons all worked.
@@ -690,18 +751,21 @@ https://github.com/LambdaSchool/pair-programming-checklist
 
 </p></details>
 
-***
+---
 
 # Errata, Addenda & Miscellany
 
 <details><summary>Errata</summary><p>
 
 1. [LS CSA Syllabus on GitHub](https://github.com/LambdaSchool/LambdaCSA-Syllabus)
-  - out of sync with cs7
+
+- out of sync with cs7
+
 2. List of students accuracy? Currently gleaned from the repl.it list of students who've completed assignments.
 3. List of Labs/Sprints released to students?
-  - For operational understanding of their knowledge base.
-  - And for Pull Request code reviews
+
+- For operational understanding of their knowledge base.
+- And for Pull Request code reviews
 
 </p></details>
 
@@ -710,6 +774,7 @@ https://github.com/LambdaSchool/pair-programming-checklist
 1. Complete list of relevant LINKS released to class as supplemental/prepatory material.
 2. Deploy [arc_hive](https://youtu.be/uxIYIhiGMcE) to LS?
 3. Deploy Hackathon2018 Docker env project/sprint set up:
+
 ```
 Hey Dan, did you watch any of the Hackathon 2018 demos?
 
@@ -726,22 +791,29 @@ I’m thinking this could be useful in Precourse as well? Curious to know what y
 
 1. Helping Dan Frehner with https://github.com/mixelpixel/Getting-Started
 2. 1/2 hour demo video on GitHub.
-  - Watch [Pre-Course - Git Fu](https://youtu.be/ZihgMcrHOF4).
-  - Review https://github.com/LambdaSchool/Precourse/tree/master/Lesson1-Git
+
+- Watch [Pre-Course - Git Fu](https://youtu.be/ZihgMcrHOF4).
+- Review https://github.com/LambdaSchool/Precourse/tree/master/Lesson1-Git
+
 3. Implement Arc Hive into LS?
 4. Hackathon2018 Docker project?
 5. vidpresso???
 
 </p></details>
 
-***
+---
+
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 ### "We all float down here"
+
 ![We all float down here](/art/pennywise.jpeg)
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 ### Balloon?
+
 ![Balloon?](/art/balloon.jpg)

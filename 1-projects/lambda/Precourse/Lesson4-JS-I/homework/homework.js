@@ -1,10 +1,9 @@
-
-let newString = 'string';
+let newString = "string";
 let newNum = 8;
 let newBool = true;
 let newSubtract = 10 - 5 === 5;
-let newMultiply = 10 * 4 === 40 ;
-let newModulo = 21 % 5 === 1 ;
+let newMultiply = 10 * 4 === 40;
+let newModulo = 21 % 5 === 1;
 
 const returnString = (str) => str;
 const add = (x, y) => x + y;
@@ -60,5 +59,5 @@ module.exports = {
   combineNames: combineNames,
   getGreeting: getGreeting,
   getRectangleArea: getRectangleArea,
-  getTriangleArea: getTriangleArea
+  getTriangleArea: getTriangleArea,
 };

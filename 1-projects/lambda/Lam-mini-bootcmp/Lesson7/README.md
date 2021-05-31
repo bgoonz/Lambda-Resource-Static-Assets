@@ -1,6 +1,9 @@
 # Lecture 7 Notes - Arrays, Objects, & Methods
+
 ## [@4m38s](https://youtu.be/WmFRlpd1GTM?t=?m?s) LECTURE STARTS
+
 ### Objects
+
 - 2 types of properties
   - Raw values
   - functions (aka METHODS)
@@ -9,11 +12,11 @@
 - KEY: VALUE pairs
 
 ```js
-  var person = {
-    firstName: "Bobby",
-    age: 52,
-    shoeSize: 9
-  }
+var person = {
+  firstName: "Bobby",
+  age: 52,
+  shoeSize: 9,
+};
 ```
 
 - DOT SYNTAX to access properties on an object
@@ -31,6 +34,7 @@
 - VALUE TYPES: Strings, Integers, Booleans, etc.
 
 ### Methods
+
 - FUNCTIONS CAN ALSO BE PROPERTIES
 
 ```js
@@ -44,14 +48,17 @@
 ```
 
 ### Arrays
+
 - Just a list of stuff, numbers, strings, objects, etc.
 - Flexible data type
 - a collection you iterate over and/or store values.
+
 ```js
 var anArray = [0, 1, 2, "Bob", 4, 5, 6, 7];
 ```
 
 - INDEX of ELEMENTS: starts at 0
+
   - anArray[0] = 0
   - anArray[3] = "Bob"
   - anArray[99] = undefined
@@ -59,17 +66,17 @@ var anArray = [0, 1, 2, "Bob", 4, 5, 6, 7];
 - Functional programming approach: map
 
 ```js
-anArray.map( function(item) {
-  return(item * 10);
+anArray.map(function (item) {
+  return item * 10;
 });
 ```
 
 - For Loop over array (Iterative approach)
-```js
 
+```js
 for (i = 0; i < anArray.length; i++) {
   // do something
-  anArray[i]
+  anArray[i];
 }
 ```
 
@@ -77,10 +84,12 @@ for (i = 0; i < anArray.length; i++) {
 - Remove Elements in an array .pop
 
 ### Repl.it
+
 - like a scratchpad for code examples
 - like CodePen or JSFiddle, etc.
 
 ### Programming styles
+
 - Object Oriented Programming
   - Objects store everything
   - Methods called on object

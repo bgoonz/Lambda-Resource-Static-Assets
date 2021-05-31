@@ -1,14 +1,14 @@
-const fs = require('fs');
+const fs = require("fs");
 
-const globby = require('globby');
-const prettier = require('prettier');
+const globby = require("globby");
+const prettier = require("prettier");
 
 (async () => {
-  const prettierConfig = await prettier.resolveConfig('./.prettierrc.js');
+  const prettierConfig = await prettier.resolveConfig("./.prettierrc.js");
   const pages = await globby([
-    'pages/**/*{.js,.mdx}',
-    '!pages/_*.js',
-    '!pages/api'
+    "pages/**/*{.js,.mdx}",
+    "!pages/_*.js",
+    "!pages/api",
   ]);
   const sitemap = `
         <?xml version="1.0" encoding="UTF-8"?>
@@ -16,10 +16,10 @@ const prettier = require('prettier');
             ${pages
               .map((page) => {
                 const path = page
-                  .replace('pages', '')
-                  .replace('.js', '')
-                  .replace('.mdx', '');
-                const route = path === '/index' ? '' : path;
+                  .replace("pages", "")
+                  .replace(".js", "")
+                  .replace(".mdx", "");
+                const route = path === "/index" ? "" : path;
 
                 return `
                         <url>
@@ -27,15 +27,15 @@ const prettier = require('prettier');
                         </url>
                     `;
               })
-              .join('')}
+              .join("")}
         </urlset>
     `;
 
   const formatted = prettier.format(sitemap, {
     ...prettierConfig,
-    parser: 'html'
+    parser: "html",
   });
 
   // eslint-disable-next-line no-sync
-  fs.writeFileSync('public/sitemap.xml', formatted);
+  fs.writeFileSync("public/sitemap.xml", formatted);
 })();

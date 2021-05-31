@@ -8,17 +8,17 @@
 
 // Student solution
 function toBinaryString(number) {
-  let r = '';
+  let r = "";
   while (number > 0) {
     console.log(`number starts: ${number}`);
-    const bit = (Math.floor(number % 2) !== 0) ? '1' : '0';
+    const bit = Math.floor(number % 2) !== 0 ? "1" : "0";
     console.log(`bit          : ${bit}`);
     r = bit + r;
     console.log(`the return is: ${r} <--- it's GROWING`);
     number = Math.floor(number / 2);
     console.log(`number is now: ${number}\n`);
-    }
-  console.log('COUNTING IN BINARY IS SO MUCH FUN!!!!!');
+  }
+  console.log("COUNTING IN BINARY IS SO MUCH FUN!!!!!");
   return r;
 }
 

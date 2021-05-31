@@ -30,7 +30,8 @@ const Index = () => {
             Hi, I’m Josh.
           </Heading>
           <Text color={secondaryTextColor[colorMode]}>
-            I compose music and tell stories with harmony, melody, and soundscapes.
+            I compose music and tell stories with harmony, melody, and
+            soundscapes.
           </Text>
         </Flex>
         <Flex
@@ -44,18 +45,26 @@ const Index = () => {
             About
           </Heading>
           <Text color={secondaryTextColor[colorMode]} mb={4}>
-            I grew up in Ithaca, NY as part of a musical family, starting piano lessons at five and learning several instruments before moving into composition and electronic production. I'm now based in Los Angeles, but the sound and feeling of upstate NY, the quiet forests, serene gorges and lakes, still resonate distinctly through all of my music.
+            I grew up in Ithaca, NY as part of a musical family, starting piano
+            lessons at five and learning several instruments before moving into
+            composition and electronic production. I'm now based in Los Angeles,
+            but the sound and feeling of upstate NY, the quiet forests, serene
+            gorges and lakes, still resonate distinctly through all of my music.
           </Text>
           <Text color={secondaryTextColor[colorMode]} mb={4}>
-            My favorite color is blue. I love being outside and can usually be found skiing, surfing, or hugging a tree somewhere when I'm not in the studio.
+            My favorite color is blue. I love being outside and can usually be
+            found skiing, surfing, or hugging a tree somewhere when I'm not in
+            the studio.
           </Text>
           <Text color={secondaryTextColor[colorMode]} mb={4}>
-            In a scoring context, I endeavor to bring an intuitive feel and thoughtful minimalism to every project, collaborating closely with the director to bring their vision to life. Having worked extensively as a session player, producer, songwriter, music director and touring keyboardist, I'm now increasingly focused on scoring original films and series. If you have a project coming up and think my music could be a good fit, I'd love to hear from you.
+            In a scoring context, I endeavor to bring an intuitive feel and
+            thoughtful minimalism to every project, collaborating closely with
+            the director to bring their vision to life. Having worked
+            extensively as a session player, producer, songwriter, music
+            director and touring keyboardist, I'm now increasingly focused on
+            scoring original films and series. If you have a project coming up
+            and think my music could be a good fit, I'd love to hear from you.
           </Text>
-
-
-
-
         </Flex>
         <Flex
           flexDirection="column"
@@ -90,7 +99,6 @@ const Index = () => {
             href="http://www.tyslist-themovie.com/"
             image="/tys_list_200.jpg"
           />
-
         </Flex>
       </Stack>
     </Container>

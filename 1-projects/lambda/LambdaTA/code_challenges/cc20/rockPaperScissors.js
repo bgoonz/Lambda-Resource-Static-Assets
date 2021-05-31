@@ -12,19 +12,19 @@
 
 function rockPaperScissors(n) {
   const outcomes = [];
-  const plays = ['rock', 'paper', 'scissors'];
+  const plays = ["rock", "paper", "scissors"];
 
   // inner function
   const findOutcome = (roundsLeft, resultArr) => {
     // BASE CASE
     if (roundsLeft === 0) {
-     outcomes.push(resultArr);
-     return;
+      outcomes.push(resultArr);
+      return;
     }
     plays.forEach((play) => {
       findOutcome(roundsLeft - 1, resultArr.concat(play));
     });
-  }
+  };
 
   // invoke inner function with n and an empty array
   findOutcome(n, []);
@@ -41,7 +41,7 @@ console.log(`The y array: ${y}`);
 console.log(`The z array: ${z}`);
 
 // forEach()
-const arr = ['a', 'b', 'c'];
+const arr = ["a", "b", "c"];
 arr.forEach((element, i) => {
   console.log(`Array index's ${i} value is: "${element}"`);
 });

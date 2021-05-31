@@ -76,14 +76,15 @@ const Music = () => {
 
             <Text color={secondaryTextColor[colorMode]} mb={4}>
               Featured on tastemaker channels and press outlets including
-              Huffington Post, KCRW, Rinse FM London, Nest HQ, Indie Shuffle, Nylon, and Earmilk.
+              Huffington Post, KCRW, Rinse FM London, Nest HQ, Indie Shuffle,
+              Nylon, and Earmilk.
             </Text>
             <Heading size="md" as="h3" mb={2} fontWeight="medium">
               In-store play
             </Heading>
             <Text color={secondaryTextColor[colorMode]} mb={4}>
-              Starbucks Reserve, MAC, Abercrombie & Fitch, Hollister, Joe &
-              the Juice and other stores
+              Starbucks Reserve, MAC, Abercrombie & Fitch, Hollister, Joe & the
+              Juice and other stores
             </Text>
             <Heading size="md" as="h3" mb={2} fontWeight="medium">
               Playlist features
@@ -91,7 +92,8 @@ const Music = () => {
             <Text color={secondaryTextColor[colorMode]} mb={4}>
               Chill Vibes, Young & Free, Chill Tracks, Classical New Releases,
               New Music Friday UK and many others. Also featured in playlists by
-              independent curators including ChilledCow, Nike, Chillhop and Pickup Music.
+              independent curators including ChilledCow, Nike, Chillhop and
+              Pickup Music.
             </Text>
           </Flex>
           <Flex
@@ -105,17 +107,17 @@ const Music = () => {
               Instrumental side projects:
             </Heading>
             <ProjectCard
-            title="Treman"
-            description="Modern classical piano"
-            href="https://open.spotify.com/artist/7MnTSJ0nl9IdMRSq3vLdGP?si=qdHsyw8qRRu1OSZ_NQhlHQ"
-            image="/juniper_200.jpg"
-          />
-          <ProjectCard
-            title="azula"
-            description="Lofi hip hop & instrumental collaborations"
-            href="https://open.spotify.com/artist/1ExCrobB2mqThavegHEHeS?si=z3XhuKqMRvSCYO2EomMe8A"
-            image="/beginnings_200.jpeg"
-          />
+              title="Treman"
+              description="Modern classical piano"
+              href="https://open.spotify.com/artist/7MnTSJ0nl9IdMRSq3vLdGP?si=qdHsyw8qRRu1OSZ_NQhlHQ"
+              image="/juniper_200.jpg"
+            />
+            <ProjectCard
+              title="azula"
+              description="Lofi hip hop & instrumental collaborations"
+              href="https://open.spotify.com/artist/1ExCrobB2mqThavegHEHeS?si=z3XhuKqMRvSCYO2EomMe8A"
+              image="/beginnings_200.jpeg"
+            />
           </Flex>
         </Stack>
       </Container>

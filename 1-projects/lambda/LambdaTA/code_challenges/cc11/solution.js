@@ -4,14 +4,14 @@
 function longestConsecutive(arr, k) {
   // n being the length of the string array, if n = 0 or k > n or k <= 0 return "".
   // n = arr.length
-  if (arr.length === 0 || arr.length < k || k <= 0) return '';
+  if (arr.length === 0 || arr.length < k || k <= 0) return "";
 
   // return the longest string consisting of k consecutive strings from the array.
   return arr
-    .map((value, index) => (
-      arr.slice(index, index + k).join('')
-      ))
-    .reduce((longest, current) => (current.length > longest.length) ? current : longest);
+    .map((value, index) => arr.slice(index, index + k).join(""))
+    .reduce((longest, current) =>
+      current.length > longest.length ? current : longest
+    );
 }
 
 // TEST SUITE - swEEt!
@@ -26,7 +26,35 @@ function longestConsecutive(arr, k) {
 // console.log(array.map((value, index) => (array.slice(index, index + 2).join('')))); // <--- ugly
 // console.log(array.reduce((longest, current) => current.length > longest.length ? current : longest)); // <--- six sixes
 
-
-console.log(longestConsecutive(["zone", "abigail", "theta", "form", "libe", "zas"], 2)) // <--- "abigailtheta"
-console.log(longestConsecutive(["zone", "abigail", "theta", "antidisestablishmentarianism", "form", "libe", "zas"], 3)) // <--- ""
-console.log(longestConsecutive(["zone", "abigail", "theta", "antidisestablishmentarianism", "capybara", "form", "libe", "zas"], 3)) // <--- ""
+console.log(
+  longestConsecutive(["zone", "abigail", "theta", "form", "libe", "zas"], 2)
+); // <--- "abigailtheta"
+console.log(
+  longestConsecutive(
+    [
+      "zone",
+      "abigail",
+      "theta",
+      "antidisestablishmentarianism",
+      "form",
+      "libe",
+      "zas",
+    ],
+    3
+  )
+); // <--- ""
+console.log(
+  longestConsecutive(
+    [
+      "zone",
+      "abigail",
+      "theta",
+      "antidisestablishmentarianism",
+      "capybara",
+      "form",
+      "libe",
+      "zas",
+    ],
+    3
+  )
+); // <--- ""

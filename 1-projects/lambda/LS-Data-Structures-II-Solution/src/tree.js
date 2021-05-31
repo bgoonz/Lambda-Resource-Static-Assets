@@ -9,10 +9,10 @@ class Tree {
   }
   contains(value) {
     let containsValue = false;
-    if (this.value === value) return containsValue = true;
+    if (this.value === value) return (containsValue = true);
     const search = (children) => {
       children.forEach((child) => {
-        if (value === child.value) return containsValue = true;
+        if (value === child.value) return (containsValue = true);
         if (child.children.length) {
           search(child.children);
         }

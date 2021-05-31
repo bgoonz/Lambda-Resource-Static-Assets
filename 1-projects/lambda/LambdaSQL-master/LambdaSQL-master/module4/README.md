@@ -61,7 +61,7 @@ SQLite). With PostgreSQL, answer the following:
 
 ## Resources and Stretch Goals
 
-The assignment drilled core SQL, but *didn't* review joins - revisit the RPG
+The assignment drilled core SQL, but _didn't_ review joins - revisit the RPG
 data, and do more joins (explicit or implicit) to make sure you understand how
 to connect data across tables.
 

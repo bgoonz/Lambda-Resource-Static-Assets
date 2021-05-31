@@ -1,5 +1,5 @@
 # Building an API using a Node.js and Express
- 
+
 ## Topics
 
 - Building RESTful APIs.
@@ -62,8 +62,6 @@ Now that we have a way to add, update, remove and retrieve data from the provide
   - perform CRUD operations on _users_ and _posts_.
   - retrieve the list of posts for a user.
 - **Use _Postman_ to test the API as you work through the exercises.**
-
-
 
 ## Stretch Goal
 

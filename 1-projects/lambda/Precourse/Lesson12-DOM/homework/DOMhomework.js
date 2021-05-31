@@ -1,6 +1,6 @@
 const toDoItems = [];
 
-document.querySelector('#createdBy').innerHTML += ' Frank';
+document.querySelector("#createdBy").innerHTML += " Frank";
 
 class ToDo {
   constructor(description) {
@@ -13,34 +13,34 @@ class ToDo {
 }
 
 const buildToDo = (todo, index) => {
-  const toDoShell = document.createElement('div');
-  toDoShell.className = 'toDoShell';
-  const toDoText = document.createElement('span');
+  const toDoShell = document.createElement("div");
+  toDoShell.className = "toDoShell";
+  const toDoText = document.createElement("span");
   toDoText.innerHTML = todo.description;
   toDoText.id = index;
-  toDoText.addEventListener('click', completeToDo);
-  if (todo.complete) toDoText.class = 'completeText';
+  toDoText.addEventListener("click", completeToDo);
+  if (todo.complete) toDoText.class = "completeText";
   toDoShell.appendChild(toDoText);
   return toDoShell;
 };
 
-const buildToDos = toDos => toDos.map((toDo, i) => buildToDo(toDo, i));
+const buildToDos = (toDos) => toDos.map((toDo, i) => buildToDo(toDo, i));
 
 const displayToDos = () => {
-  const toDoContainer = document.getElementById('toDoContainer');
-  toDoContainer.innerHTML = '';
+  const toDoContainer = document.getElementById("toDoContainer");
+  toDoContainer.innerHTML = "";
   const result = buildToDos(toDoItems);
-  result.forEach(item => toDoContainer.appendChild(item));
+  result.forEach((item) => toDoContainer.appendChild(item));
 };
 
 const addToDo = () => {
-  const newToDo = new ToDo(document.querySelector('#toDoInput').value);
+  const newToDo = new ToDo(document.querySelector("#toDoInput").value);
   toDoItems.push(newToDo);
-  document.querySelector('#toDoInput').value = '';
+  document.querySelector("#toDoInput").value = "";
   displayToDos();
 };
 
-document.querySelector('#addButton').addEventListener('click', addToDo);
+document.querySelector("#addButton").addEventListener("click", addToDo);
 
 const completeToDo = (event) => {
   const index = event.target.id;
@@ -61,9 +61,8 @@ displayToDos();
 */
 // ********************************************** ----------- ********************************************** //
 
-
 // ---------------------------- DO NOT CHANGE ANY CODE BELOW THIS LINE ----------------------------- //
-if (typeof module !== 'undefined') {
+if (typeof module !== "undefined") {
   module.exports = {
     toDoItems: toDoItems,
     ToDo: ToDo,
@@ -71,6 +70,6 @@ if (typeof module !== 'undefined') {
     buildToDo: buildToDo,
     completeToDo: completeToDo,
     displayToDos: displayToDos,
-    addToDo: addToDo
+    addToDo: addToDo,
   };
 }

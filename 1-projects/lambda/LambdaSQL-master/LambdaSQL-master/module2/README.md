@@ -51,7 +51,7 @@ your repo. Then start writing PostgreSQL queries to explore the data!
 PostgreSQL is a real true powerful production database - explore the [official
 documentation](https://www.postgresql.org/docs/) as well as larger hosted
 offerings such as [Amazon RDS](https://aws.amazon.com/rds/postgresql/).
- 
+
 Try to install and use the actual [psycopg2](https://pypi.org/project/psycopg2/)
 package (as opposed to `psycop2-binary`) - this builds from source, so there are
 [prerequisites](http://initd.org/psycopg/docs/install.html#install-from-source)

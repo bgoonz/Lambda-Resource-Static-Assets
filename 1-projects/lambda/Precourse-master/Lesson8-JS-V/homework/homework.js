@@ -7,7 +7,7 @@ function createUserClass() {
     this.email = email;
     this.password = password;
   }
-  User.sayHi = function() {
+  User.sayHi = function () {
     return `Hello, my name is ${this.name}`;
   };
   return User;
@@ -20,16 +20,16 @@ function createUserClass() {
 // return the constructor
 
 function addPrototypeMethod(Constructor) {
-  Constructor.prototype.sayHi = function() {
-    return 'Hello World!';
+  Constructor.prototype.sayHi = function () {
+    return "Hello World!";
   };
 }
 // add a method to the constructor's prototype
 // the method should be called 'sayHi' and should return the string 'Hello World!'
 
 function addReverseString() {
-  String.prototype.reverse = function() {
-    return this.split('').reverse().join('');
+  String.prototype.reverse = function () {
+    return this.split("").reverse().join("");
   };
 }
 // function addReverseString() {

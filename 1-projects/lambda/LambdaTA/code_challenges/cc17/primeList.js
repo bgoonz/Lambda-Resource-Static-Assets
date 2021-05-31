@@ -82,9 +82,9 @@ function primeList(start, end) {
 // console.log(primeList(2,66758))
 
 // TEST SUITE
-console.log(primeList(-9, 10));  // doesn't handle negatives!
-console.log(primeList(1, 10));   // [ 2, 3, 5, 7 ]
-console.log(primeList(1, 50));   // [ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47 ]
+console.log(primeList(-9, 10)); // doesn't handle negatives!
+console.log(primeList(1, 10)); // [ 2, 3, 5, 7 ]
+console.log(primeList(1, 50)); // [ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47 ]
 console.log(primeList(50, 100)); // [ 53, 59, 61, 67, 71, 73, 79, 83, 89, 97 ]
 
 // INVOKE THE VOODOO

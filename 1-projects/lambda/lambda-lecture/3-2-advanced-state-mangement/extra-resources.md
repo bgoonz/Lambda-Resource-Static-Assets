@@ -11,6 +11,7 @@ Article - https://www.codementor.io/@vkarpov/beginner-s-guide-to-redux-middlewar
 Video - https://www.youtube.com/watch?v=AgO7YcJeBh4&ab_channel=Academind
 
 ## Redux Thunk
+
 Article - https://www.digitalocean.com/community/tutorials/redux-redux-thunk
 
 Video - https://www.youtube.com/watch?v=z2XCUu2wIl0&ab_channel=Codevolution

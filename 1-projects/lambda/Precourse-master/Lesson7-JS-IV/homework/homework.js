@@ -1,7 +1,7 @@
 // Do not change any of the function names
 
 const makeCat = (name, age) => {
-  return { name, age, meow: () => 'Meow!' };
+  return { name, age, meow: () => "Meow!" };
 };
 // create a new object with a name property with the value set to the name argument
 // add an age property to the object with the value set to the age argument
@@ -21,7 +21,8 @@ const invokeMethod = (object, method) => object[method]();
 // invoke this method
 // nothing needs to be returned
 
-const multiplyMysteryNumberByFive = mysteryNumberObject => mysteryNumberObject.mysteryNumber * 5;
+const multiplyMysteryNumberByFive = (mysteryNumberObject) =>
+  mysteryNumberObject.mysteryNumber * 5;
 // mysteryNumberObject has a property called mysteryNumber
 // multiply the mysteryNumber property by 5 and return the product
 
@@ -38,7 +39,7 @@ const newUser = (name, email, password) => {
 // create a new object with properties matching the arguments passed in.
 // return the new object
 
-const hasEmail = user => user.email ? true : false;
+const hasEmail = (user) => (user.email ? true : false);
 // return true if the user has a value for the property 'email'
 // otherwise return false
 
@@ -67,29 +68,30 @@ const addFriend = (user, newFriend) => {
 // add newFriend to the end of the friends array
 // return the user object
 
-const setUsersToPremium = users => users.map(obj => {
-  return { isPremium: !obj.isPremium };
-});
-  // for (let user of users) {
-  //   user.isPremium = true;
-  // }
-  // return users;
+const setUsersToPremium = (users) =>
+  users.map((obj) => {
+    return { isPremium: !obj.isPremium };
+  });
+// for (let user of users) {
+//   user.isPremium = true;
+// }
+// return users;
 // };
 // users is an array of user objects.
 // each user object has the property 'isPremium'
 // set each user's isPremium property to true
 // return the users array
 
-const sumUserPostLikes = user => user.posts.reduce((a, b) => a + b.likes, 0);
+const sumUserPostLikes = (user) => user.posts.reduce((a, b) => a + b.likes, 0);
 // user has an array property called 'posts'
 // posts is an array of post objects
 // each post object has an integer property called 'likes'
 // sum together the likes from all the post objects
 // return the sum
 
-const addCalculateDiscountPriceMethod = storeItem => {
+const addCalculateDiscountPriceMethod = (storeItem) => {
   storeItem.calculateDiscountPrice = () => {
-    return storeItem.price - (storeItem.price * storeItem.discountPercentage);
+    return storeItem.price - storeItem.price * storeItem.discountPercentage;
   };
   return storeItem;
 };

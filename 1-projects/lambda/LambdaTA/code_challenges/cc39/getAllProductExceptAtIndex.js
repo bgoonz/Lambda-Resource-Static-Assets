@@ -1,20 +1,20 @@
 function getProduct(arr) {
- const ans = [];
- let soFar = 1;
- for (let i = 0; i < arr.length; i++) {
-   ans[i] = soFar;
-   soFar *= arr[i];
-   // console.log(ans, soFar);
- }
- // console.log(ans, soFar);
- soFar = 1;
- // console.log(ans, soFar);
- for (let i = arr.length - 1; i >= 0; i--) {
-   ans[i] *= soFar;
-   soFar *= arr[i];
-   // console.log(ans, soFar);
- }
-return ans;
+  const ans = [];
+  let soFar = 1;
+  for (let i = 0; i < arr.length; i++) {
+    ans[i] = soFar;
+    soFar *= arr[i];
+    // console.log(ans, soFar);
+  }
+  // console.log(ans, soFar);
+  soFar = 1;
+  // console.log(ans, soFar);
+  for (let i = arr.length - 1; i >= 0; i--) {
+    ans[i] *= soFar;
+    soFar *= arr[i];
+    // console.log(ans, soFar);
+  }
+  return ans;
 }
 
 // TEST SUITE

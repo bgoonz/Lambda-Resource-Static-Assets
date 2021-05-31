@@ -1,6 +1,6 @@
-import Document, { Head, Main, NextScript } from 'next/document';
-import React from 'react';
-import GoogleFonts from 'next-google-fonts';
+import Document, { Head, Main, NextScript } from "next/document";
+import React from "react";
+import GoogleFonts from "next-google-fonts";
 
 class MyDocument extends Document {
   render() {

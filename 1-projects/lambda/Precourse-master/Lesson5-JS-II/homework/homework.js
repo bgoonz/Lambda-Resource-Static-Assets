@@ -21,12 +21,12 @@ const getBiggest = (x, y) => Math.max(x, y);
 
 const greeting = (language) => {
   switch (language) {
-    case 'German':
-      return 'Guten Tag!';
-    case 'Spanish':
-      return 'Hola!';
+    case "German":
+      return "Guten Tag!";
+    case "Spanish":
+      return "Hola!";
     default:
-      return 'Hello!';
+      return "Hello!";
   }
 };
 // return a greeting for three different languages:
@@ -54,13 +54,13 @@ const isInteger = (num) => Number.isInteger(num);
 
 const fizzBuzz = (num) => {
   return num % 3 === 0 && num % 5 === 0
-    ? 'fizzbuzz'
+    ? "fizzbuzz"
     : num % 3 === 0
-    ? 'fizz'
+    ? "fizz"
     : num % 5 === 0
-    ? 'buzz'
+    ? "buzz"
     : num;
-  };
+};
 // if num is divisible by 3 return 'fizz'
 // if num is divisible by 5 return 'buzz'
 // if num is divisible by 3 & 5 return 'fizzbuzz'
@@ -77,7 +77,6 @@ const isPrime = (num) => {
 // hint: a prime number is only evenly divisible by itself and 1
 // hint2: you can solve this using a for loop
 // note: 0 and 1 are NOT considered prime numbers
-
 
 // Do not modify code below this line.
 // --------------------------------

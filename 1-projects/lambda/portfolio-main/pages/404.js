@@ -1,21 +1,21 @@
-import React from 'react';
-import NextLink from 'next/link';
+import React from "react";
+import NextLink from "next/link";
 import {
   useColorMode,
   Heading,
   Text,
   Flex,
   Stack,
-  Button
-} from '@chakra-ui/core';
+  Button,
+} from "@chakra-ui/core";
 
-import Container from '../components/Container';
+import Container from "../components/Container";
 
 const Error = () => {
   const { colorMode } = useColorMode();
   const secondaryTextColor = {
-    light: 'gray.700',
-    dark: 'gray.400'
+    light: "gray.700",
+    dark: "gray.400",
   };
 
   return (
@@ -38,8 +38,8 @@ const Error = () => {
             451 – Unavailable For Legal Reasons
           </Heading>
           <Text color={secondaryTextColor[colorMode]} my={4}>
-            I'm guessing you spelled something wrong. Can you double
-            check that URL?
+            I'm guessing you spelled something wrong. Can you double check that
+            URL?
           </Text>
           <NextLink href="/" passHref>
             <Button

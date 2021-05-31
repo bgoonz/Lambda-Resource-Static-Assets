@@ -9,20 +9,22 @@ This repo is based on the last official csstidy C++ version 1.3 as of 2007-07-10
 ## Changes to original code
 
 List of example fixes:
-   * update to CSS3
-   * do not remove tokens after media selector
-   * remaining comments in selector are also removed
-   * do not remove quotes on font-face subvalue format; chrome/iron ignores it but firefox needs the quotes
+
+- update to CSS3
+- do not remove tokens after media selector
+- remaining comments in selector are also removed
+- do not remove quotes on font-face subvalue format; chrome/iron ignores it but firefox needs the quotes
 
 Improvements:
-   * added man page by Kevin Coyner
-   * added option strip_all_comments
-   * Unnecessary dependency SCons was removed
+
+- added man page by Kevin Coyner
+- added option strip_all_comments
+- Unnecessary dependency SCons was removed
 
 ## Requirements
 
-   * make (no SCons anymore)
-   * C++ compiler – g++ or MinGW
+- make (no SCons anymore)
+- C++ compiler – g++ or MinGW
 
 ## Install
 
@@ -66,7 +68,6 @@ To change settings, you have to add "--thesettingyouwanttochange=true or false" 
 
     csstidy mycssfile.css --remove_last_semicolon=true myoutputfile.css
 
-
 ## Original Description
 
 ### Introduction
@@ -76,18 +77,18 @@ In opposite to most other CSS parsers, no regular expressions are used and thus 
 
 Features ("a" stands for all selectors, "margin" stands for all properties):
 
-   * colours like "black" or rgb(0,0,0) are converted to #000000 or rather #000 if possible. Some hex-codes are replaced by their colour names if they are shorter.
-   * a{property:x;property:y;} becomes a{property:y;} (all duplicate properties are merged)
-   * margin:1px 1px 1px 1px; becomes margin:1px;
-   * margin:0px; becomes margin:0;
-   * a{margin-top:10px; margin-bottom:10px; margin-left:10px; margin-right:10px;} becomes a{margin:10px;}
-   * margin:010.0px; becomes margin:10px;
-   * all unnecessary whitespace is removed, depending on the compression-level
-   * all background-properties are merged
-   * all comments are removed
-   * the last semicolon in every block can be removed
-   * missing semicolons are added, incorrect newlines in strings are fixed, missing units are added, bad colors (and color names) are fixed
-   * property:value ! important; becomes property:value !important;
+- colours like "black" or rgb(0,0,0) are converted to #000000 or rather #000 if possible. Some hex-codes are replaced by their colour names if they are shorter.
+- a{property:x;property:y;} becomes a{property:y;} (all duplicate properties are merged)
+- margin:1px 1px 1px 1px; becomes margin:1px;
+- margin:0px; becomes margin:0;
+- a{margin-top:10px; margin-bottom:10px; margin-left:10px; margin-right:10px;} becomes a{margin:10px;}
+- margin:010.0px; becomes margin:10px;
+- all unnecessary whitespace is removed, depending on the compression-level
+- all background-properties are merged
+- all comments are removed
+- the last semicolon in every block can be removed
+- missing semicolons are added, incorrect newlines in strings are fixed, missing units are added, bad colors (and color names) are fixed
+- property:value ! important; becomes property:value !important;
 
 ### Why optimise?
 
@@ -100,4 +101,3 @@ The compression ratio mostly depends on the level of whitespace-removal. Using s
 ### Apart from compression
 
 If a high compression is not important for you, you can also use CSSTidy to format or fix CSS code for a higher browser compatibility. Apart from the 4 default templates you can specify custom templates so that you can easily format a lot of CSS code using your own coding style. Other features are sorting and changing the case of selectors and properties.
-

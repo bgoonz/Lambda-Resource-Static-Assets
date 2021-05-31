@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-const BinarySearchTree = require('../src/binary-search-tree');
+const BinarySearchTree = require("../src/binary-search-tree");
 
-describe('BinarySearchTree', () => {
+describe("BinarySearchTree", () => {
   let binarySearchTree;
 
   beforeEach(() => {
@@ -9,13 +9,13 @@ describe('BinarySearchTree', () => {
   });
 
   it('should have methods named "insert", "contains", "depthFirstForEach", and "breadthFirstForEach"', () => {
-    expect(typeof binarySearchTree.insert).toBe('function');
-    expect(typeof binarySearchTree.contains).toBe('function');
-    expect(typeof binarySearchTree.depthFirstForEach).toBe('function');
-    expect(typeof binarySearchTree.breadthFirstForEach).toBe('function');
+    expect(typeof binarySearchTree.insert).toBe("function");
+    expect(typeof binarySearchTree.contains).toBe("function");
+    expect(typeof binarySearchTree.depthFirstForEach).toBe("function");
+    expect(typeof binarySearchTree.breadthFirstForEach).toBe("function");
   });
 
-  it('should insert values at the correct location in the tree', () => {
+  it("should insert values at the correct location in the tree", () => {
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
     binarySearchTree.insert(7);
@@ -34,7 +34,7 @@ describe('BinarySearchTree', () => {
 
   it('should execute a callback on every value in a tree using "depthFirstForEach" in the correct order', () => {
     const array = [];
-    const foo = value => ((array.push(value)));
+    const foo = (value) => array.push(value);
     binarySearchTree.insert(2);
     binarySearchTree.insert(3);
     binarySearchTree.insert(7);
@@ -45,7 +45,7 @@ describe('BinarySearchTree', () => {
 
   it('should execute a callback on every value in the tree using "breadthFirstForEach" in the correct order', () => {
     const array = [];
-    const foo = value => ((array.push(value)));
+    const foo = (value) => array.push(value);
     binarySearchTree.insert(3);
     binarySearchTree.insert(4);
     binarySearchTree.insert(10);

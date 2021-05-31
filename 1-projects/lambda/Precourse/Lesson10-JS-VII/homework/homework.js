@@ -7,7 +7,7 @@ const cacheFunction = (cb) => {
   const cache = {};
   return (arg) => {
     if (arg in cache) return cache[arg];
-    return cache[arg] = cb(arg);
+    return (cache[arg] = cb(arg));
   };
 };
 
