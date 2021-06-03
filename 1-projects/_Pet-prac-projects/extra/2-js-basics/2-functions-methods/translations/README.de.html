@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.de</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="javascript-grundlagen-methoden-und-funktionen">JavaScript-Grundlagen: Methoden und Funktionen</h1>
+<p><a href="https://youtube.com/watch?v=XgKsD6Zwvlc" title="Methoden und Funktionen"><img src="https://img.youtube.com/vi/XgKsD6Zwvlc/0.jpg" alt="Methoden und Funktionen" /></a></p>
+<h2 id="pre-lecture-quiz"><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/9">Pre-Lecture Quiz</a></h2>
+<p>Wenn wir darüber nachdenken, Code zu schreiben, möchten wir immer sicherstellen, dass unser Code lesbar ist. Während dies nicht intuitiv klingt, wird Code viel öfter gelesen als geschrieben. Ein Kernwerkzeug in der Toolbox eines Entwicklers, um wartbaren Code sicherzustellen, ist die <strong>Funktion</strong>.</p>
+<h2 id="funktionen">Funktionen</h2>
+<p>Eine Funktion ist im Kern ein Codeblock, den wir bei Bedarf ausführen können. Dies ist perfekt für Szenarien, in denen wir dieselbe Aufgabe mehrmals ausführen müssen. Anstatt die Logik an mehreren Orten zu duplizieren (was eine Aktualisierung zu gegebener Zeit erschweren würde), können wir sie an einem Ort zentralisieren und jederzeit aufrufen, wenn die Operation ausgeführt werden muss - Sie können sogar Funktionen von anderen Funktionen aus aufrufen!.</p>
+<p>Ebenso wichtig ist die Fähigkeit, eine Funktion zu benennen. Obwohl dies trivial erscheinen mag, bietet der Name eine schnelle Möglichkeit, einen Codeabschnitt zu dokumentieren. Sie können sich dies als Beschriftung auf einer Schaltfläche vorstellen. Wenn ich auf eine Schaltfläche mit der Aufschrift “Timer abbrechen” klicke, weiß ich, dass die Uhr nicht mehr läuft.</p>
+<h2 id="eine-funktion-erstellen-und-aufrufen">Eine Funktion erstellen und aufrufen</h2>
+<p>Die Syntax für eine Funktion sieht folgendermaßen aus:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">function</span> <span class="at">nameOfFunction</span>() <span class="op">{</span> <span class="co">// function definition</span></a>
+<a class="sourceLine" id="cb1-2" title="2"> <span class="co">// function definition/body</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Wenn ich eine Funktion zum Anzeigen einer Begrüßung erstellen wollte, könnte dies folgendermaßen aussehen:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">function</span> <span class="at">displayGreeting</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Hello, world!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Wann immer wir unsere Funktion aufrufen (oder aufrufen) möchten, verwenden wir den Namen der Funktion, gefolgt von <code>()</code>. Es ist erwähnenswert, dass unsere Funktion definiert werden kann, bevor oder nachdem wir uns entscheiden, sie aufzurufen. Der JavaScript-Compiler findet es für Sie.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">// calling our function</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="at">displayGreeting</span>()<span class="op">;</span></a></code></pre></div>
+<blockquote>
+<p><strong>HINWEIS:</strong> Es gibt eine spezielle Art von Funktion, die als <strong>Methode</strong> bekannt ist und die Sie bereits verwendet haben! Tatsächlich haben wir dies in unserer obigen Demo gesehen, als wir <code>console.log</code> verwendet haben. Was eine Methode von einer Funktion unterscheidet, ist, dass eine Methode an ein Objekt angehängt ist (in unserem Beispiel <code>console</code>), während eine Funktion frei schwebend ist. Sie werden hören, dass viele Entwickler diese Begriffe synonym verwenden.</p>
+</blockquote>
+<h3 id="best-practices-für-funktionen">Best Practices für Funktionen</h3>
+<p>Es gibt eine Handvoll Best Practices, die beim Erstellen von Funktionen berücksichtigt werden müssen</p>
+<ul>
+<li>Verwenden Sie wie immer beschreibende Namen, damit Sie wissen, was die Funktion tun wird</li>
+<li>Verwenden Sie <strong>camelCasing</strong>, um Wörter zu kombinieren</li>
+<li>Konzentrieren Sie Ihre Funktionen auf eine bestimmte Aufgabe</li>
+</ul>
+<h2 id="informationen-an-eine-funktion-übergeben">Informationen an eine Funktion übergeben</h2>
+<p>Um eine Funktion wiederverwendbarer zu machen, möchten Sie häufig Informationen an sie weitergeben. Wenn wir unser Beispiel <code>displayGreeting</code> oben betrachten, wird nur <strong>Hallo, Welt!</strong> angezeigt. Nicht die nützlichste Funktion, die man erstellen könnte. Wenn wir es etwas flexibler gestalten möchten, z. B. jemandem erlauben, den Namen der zu begrüßenden Person anzugeben, können wir einen <strong>Parameter</strong> hinzufügen. Ein Parameter (manchmal auch als <strong>Argument</strong> bezeichnet) sind zusätzliche Informationen, die an eine Funktion gesendet werden.</p>
+<p>Die Parameter sind im Definitionsteil in Klammern aufgeführt und werden wie folgt durch Kommas getrennt:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">function</span> <span class="at">name</span>(param<span class="op">,</span> param2<span class="op">,</span> param3) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Wir können unser <code>displayGreeting</code> aktualisieren, um einen Namen zu akzeptieren und diesen anzeigen zu lassen.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">function</span> <span class="at">displayGreeting</span>(name) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">const</span> message <span class="op">=</span> <span class="vs">`Hello, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">!`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(message)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Wenn wir unsere Funktion aufrufen und den Parameter übergeben möchten, geben wir ihn in Klammern an.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="at">displayGreeting</span>(<span class="st">&#39;Christopher&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">// zeigt &quot;Hallo Christopher!&quot; wenn ausgeführt</span></a></code></pre></div>
+<h2 id="standardwerte">Standardwerte</h2>
+<p>Wir können unsere Funktion noch flexibler gestalten, indem wir weitere Parameter hinzufügen. Aber was ist, wenn nicht jeder Wert angegeben werden soll? In Übereinstimmung mit unserem Begrüßungsbeispiel könnten wir den Namen nach Bedarf belassen (wir müssen wissen, wen wir begrüßen), aber wir möchten, dass die Begrüßung selbst nach Wunsch angepasst wird. Wenn jemand es nicht anpassen möchte, geben wir stattdessen einen Standardwert an. Um einem Parameter einen Standardwert zuzuweisen, setzen wir ihn ähnlich wie einen Wert für eine Variable - <code>parameterName = 'defaultValue'</code>. Um ein vollständiges Beispiel zu sehen:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">displayGreeting</span>(name<span class="op">,</span> salutation<span class="op">=</span><span class="st">&#39;Hello&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`</span><span class="sc">${</span>salutation<span class="sc">}</span><span class="vs">, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>When we call the function, we can then decide if we want to set a value for <code>salutation</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">displayGreeting</span>(<span class="st">&#39;Christopher&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co">// zeigt &quot;Hallo Christopher!&quot;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="at">displayGreeting</span>(<span class="st">&#39;Christopher&#39;</span><span class="op">,</span> <span class="st">&#39;Hi&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">// zeigt &quot;Hi Christopher!&quot;</span></a></code></pre></div>
+<h2 id="rückgabewerte">Rückgabewerte</h2>
+<p>Bisher wurde die von uns erstellte Funktion immer an die <a href="https://developer.mozilla.org/docs/Web/API/console">Konsole</a> ausgegeben. Manchmal kann dies genau das sein, wonach wir suchen, insbesondere wenn wir Funktionen erstellen, die andere Dienste aufrufen. Was aber, wenn ich eine Hilfsfunktion erstellen möchte, um eine Berechnung durchzuführen und den Wert zurückzugeben, damit ich ihn an anderer Stelle verwenden kann?</p>
+<p>Wir können dies tun, indem wir einen <strong>Rückgabewert</strong> verwenden. Ein Rückgabewert wird von der Funktion zurückgegeben und kann in einer Variablen genauso gespeichert werden, wie wir einen Literalwert wie eine Zeichenfolge oder eine Zahl speichern könnten.</p>
+<p>Wenn eine Funktion etwas zurückgibt, wird das Schlüsselwort <code>return</code> verwendet. Das Schlüsselwort <code>return</code> erwartet einen Wert oder eine Referenz dessen, was wie folgt zurückgegeben wird:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="cf">return</span> myVariable<span class="op">;</span></a></code></pre></div>
+<p>Wir könnten eine Funktion erstellen, um eine Begrüßungsnachricht zu erstellen und den Wert an den Anrufer zurückzugeben:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">function</span> <span class="at">createGreetingMessage</span>(name) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="kw">const</span> message <span class="op">=</span> <span class="vs">`Hello, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="cf">return</span> message<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Beim Aufruf dieser Funktion speichern wir den Wert in einer Variablen. Dies ist fast die gleiche Art und Weise, wie wir eine Variable auf einen statischen Wert setzen würden (wie <code>const name = 'Christopher'</code>).</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">const</span> greetingMessage <span class="op">=</span> <span class="at">createGreetingMessage</span>(<span class="st">&#39;Christopher&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="funktionen-als-parameter-für-funktionen">Funktionen als Parameter für Funktionen</h2>
+<p>Im Laufe Ihrer Programmierkarriere werden Sie auf Funktionen stoßen, die Funktionen als Parameter akzeptieren. Dieser nette Trick wird häufig verwendet, wenn wir nicht wissen, wann etwas eintreten oder abgeschlossen sein wird, aber wir wissen, dass wir als Reaktion darauf eine Operation ausführen müssen.</p>
+<p>Betrachten Sie als Beispiel <a href="https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout">setTimeout</a>, das einen Timer startet und nach dessen Ausführung Code ausführt. Wir müssen ihm sagen, welchen Code wir ausführen wollen. Klingt nach einem perfekten Job für eine Veranstaltung!</p>
+<p>Wenn Sie den folgenden Code ausführen, wird nach 3 Sekunden die Meldung <strong>3 Sekunden sind verstrichen</strong> angezeigt.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">displayDone</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;3 seconds has elapsed&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="co">// Der Timer-Wert wird in Millisekunden angegeben</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="at">setTimeout</span>(<span class="dv">3000</span><span class="op">,</span> displayDone)<span class="op">;</span></a></code></pre></div>
+<h3 id="anonyme-funktionen">Anonyme Funktionen</h3>
+<p>Schauen wir uns noch einmal an, was wir gebaut haben. Wir erstellen eine Funktion mit einem Namen, der einmal verwendet wird. Wenn unsere Anwendung komplexer wird, können wir uns vorstellen, viele Funktionen zu erstellen, die nur einmal aufgerufen werden. Das ist nicht ideal. Wie sich herausstellt, müssen wir nicht immer einen Namen angeben!</p>
+<p>Wenn wir eine Funktion als Parameter übergeben, können wir die Erstellung einer Funktion im Voraus umgehen und stattdessen eine als Teil des Parameters erstellen. Wir verwenden das gleiche Schlüsselwort <code>function</code>, aber stattdessen erstellen wir es als Parameter.</p>
+<p>Schreiben wir den obigen Code neu, um eine anonyme Funktion zu verwenden:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="at">setTimeout</span>(<span class="dv">3000</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;3 seconds has elapsed&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Wenn Sie unseren neuen Code ausführen, werden Sie feststellen, dass wir die gleichen Ergebnisse erhalten. Wir haben eine Funktion erstellt, mussten ihr aber keinen Namen geben!</p>
+<h3 id="fettpfeilfunktionen">Fettpfeilfunktionen</h3>
+<p>Eine in vielen Programmiersprachen (einschließlich JavaScript) übliche Abkürzung ist die Möglichkeit, eine sogenannte <strong>arrow</strong> - oder <strong>fat arrow</strong> -Funktion zu verwenden. Es wird ein spezieller Indikator für <code>=&gt;</code> verwendet, der wie ein Pfeil aussieht - daher der Name! Mit <code>=&gt;</code> können wir das Schlüsselwort <code>function</code> überspringen.</p>
+<p>Lassen Sie uns unseren Code noch einmal umschreiben, um eine Fettpfeilfunktion zu verwenden:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="at">setTimeout</span>(<span class="dv">3000</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;3 seconds has elapsed&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="wann-wird-jede-strategie-angewendet">Wann wird jede Strategie angewendet?</h3>
+<p>Sie haben jetzt gesehen, dass wir drei Möglichkeiten haben, eine Funktion als Parameter zu übergeben, und fragen sich möglicherweise, wann sie jeweils verwendet werden sollen. Wenn Sie wissen, dass Sie die Funktion mehrmals verwenden, erstellen Sie sie wie gewohnt. Wenn Sie es nur für einen Ort verwenden, ist es im Allgemeinen am besten, eine anonyme Funktion zu verwenden. Ob Sie eine Fat-Arrow-Funktion oder die traditionellere <code>function</code> Syntax verwenden, liegt bei Ihnen, aber Sie werden feststellen, dass die meisten modernen Entwickler <code>=&gt;</code> bevorzugen.</p>
+<hr />
+<h2 id="herausforderung">🚀 Herausforderung</h2>
+<p>Können Sie den Unterschied zwischen Funktionen und Methoden in einem Satz artikulieren? Versuche es!</p>
+<h2 id="quiz-nach-der-vorlesung"><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/10">Quiz nach der Vorlesung</a></h2>
+<h2 id="review-selbststudium">Review &amp; Selbststudium</h2>
+<p>Es lohnt sich, <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions">etwas mehr über Pfeilfunktionen zu lesen</a>, da diese zunehmend in Codebasen verwendet werden. Üben Sie, eine Funktion zu schreiben und sie dann mit dieser Syntax neu zu schreiben.</p>
+<h2 id="zuordnung">Zuordnung</h2>
+<p><a href="assignment.de.md">Spaß mit Funktionen</a></p>
+</body>
+</html>

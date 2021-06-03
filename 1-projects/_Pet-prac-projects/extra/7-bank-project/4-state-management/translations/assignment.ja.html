@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>assignment.ja</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="トランザクションの追加ダイアログの実装">「トランザクションの追加」ダイアログの実装</h1>
+<h2 id="説明書">説明書</h2>
+<p>私たちの銀行アプリには、1つの重要な機能がまだありません。 前の4つのレッスンで学んだことをすべて使って、「トランザクションの追加」ダイアログを実装します。</p>
+<ul>
+<li>ダッシュボードページに「トランザクションの追加」ボタンを追加します</li>
+<li>HTML テンプレートで新しいページを作成するか、JavaScript を使用してダッシュボード・ページを離れることなくダイアログの HTML を表示/非表示にするかのいずれかを選択します (そのためには <a href="https://developer.mozilla.org/ja/docs/Web/HTML/Global_attributes/hidden"><code>hidden</code></a> プロパティを使用するか、CSS クラスを使用することができます)</li>
+<li>ダイアログの [キーボードとスクリーンリーダーのアクセシビリティ] (https://developer.paciellogroup.com/blog/2018/06/the-current-state-of-modal-dialog-accessibility/) が処理されていることを確認します</li>
+<li>入力データを受け取るための HTML フォームを実装する</li>
+<li>フォームデータから JSON データを作成して API に送る</li>
+<li>ダッシュボードページを新しいデータで更新する</li>
+</ul>
+<p><a href="./.../.../api/translations/README.ja.md">サーバー API の仕様</a>を見て、どの API を呼び出す必要があるか、期待される JSON 形式は何かを確認してください。</p>
+<p>以下は、課題を完了した後の結果の例です。</p>
+<figure>
+<img src="../images/dialog.png" alt="「トランジションの追加」ダイアログの例を示すスクリーンショット" /><figcaption>「トランジションの追加」ダイアログの例を示すスクリーンショット</figcaption>
+</figure>
+<h2 id="ルーブリック">ルーブリック</h2>
+<table>
+<colgroup>
+<col style="width: 2%" />
+<col style="width: 35%" />
+<col style="width: 44%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>基準</th>
+<th>模範的な例</th>
+<th>適切な</th>
+<th>改善が必要</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>トランザクションの追加は、レッスンで見たすべてのベストプラクティスに従って完全に実装されています。</td>
+<td>トランザクションを追加することは実装されていますが、レッスンで見たベストプラクティスに従っていなかったり、部分的にしか動作しなかったりします。</td>
+<td>トランザクションを追加しても全く機能しません。</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

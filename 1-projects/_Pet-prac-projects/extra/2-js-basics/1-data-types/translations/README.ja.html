@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.ja</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="javascript-の基本-データ型">JavaScript の基本: データ型</h1>
+<p><img src="/sketchnotes/webdev101-js-datatypes.png" alt="JavaScript Basics - Data types" /> &gt; Sketchnote by <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="レッスン前の小テスト">レッスン前の小テスト</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/7?loc=ja">レッスン前の小テスト</a></p>
+<p>このレッスンでは、Web 上でインタラクティブな機能を提供する言語である JavaScript の基礎を学びます。</p>
+<p><a href="https://youtube.com/watch?v=JNIXfGiDWM8" title="Data types in JavaScript"><img src="https://img.youtube.com/vi/JNIXfGiDWM8/0.jpg" alt="Data types in JavaScript" /></a></p>
+<p>まず、変数とそれを埋めるデータ型について説明しましょう!</p>
+<h2 id="変数">変数</h2>
+<p>変数には、コード全体で使用したり変更したりできる値が格納されています。</p>
+<p>変数の作成と <strong>宣言</strong> には、次のような構文 <strong>[キーワード] [名前]</strong> があります。の2つの部分で構成されています。</p>
+<ul>
+<li><p><strong>キーワード</strong>。キーワードは <code>let</code> または <code>var</code> です。</p>
+<blockquote>
+<p>注: <code>let</code> というキーワードは ES6 で導入されたもので、変数に <em>ブロックスコープ</em> と呼ばれるものを与えます。<code>var</code> よりも <code>let</code> を使うことをお勧めします。ブロックスコープについては、今後のパートで詳しく説明します。</p>
+</blockquote></li>
+<li><p><strong>変数名</strong>、これは自分で選んだ名前です。</p></li>
+</ul>
+<h3 id="タスク---変数を使って作業する">タスク - 変数を使って作業する</h3>
+<ol type="1">
+<li><p><strong>変数の宣言</strong>. <code>let</code> キーワードを使って変数を宣言してみましょう。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">let</span> myVariable<span class="op">;</span></a></code></pre></div>
+<p><code>myVariable</code> は <code>let</code> キーワードを使用して宣言されました。これは現在のところ値を持っていません。</p></li>
+<li><p><strong>値を代入します</strong>。値を <code>=</code> 演算子で変数に格納し、その後に期待される値を指定します。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1">myVariable <span class="op">=</span> <span class="dv">123</span><span class="op">;</span></a></code></pre></div>
+<blockquote>
+<p>注: このレッスンで <code>=</code> を使うということは、変数に値を設定するために使われる「代入演算子」を使うことを意味します。これは平等を示すものではありません。</p>
+</blockquote>
+<p><code>myVariable</code> は値 123 で <em>初期化</em> されました。</p></li>
+<li><p><strong>リファクタ</strong>。コードを以下の文に置き換えてください。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">let</span> myVariable <span class="op">=</span> <span class="dv">123</span><span class="op">;</span></a></code></pre></div>
+<p>上記のように変数が宣言され、同時に値が代入されることを <em>明示的初期化</em> といいます。</p></li>
+<li><p><strong>変数の値を変更します</strong>。以下の方法で変数値を変更します。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1">myVariable <span class="op">=</span> <span class="dv">321</span><span class="op">;</span></a></code></pre></div>
+<p>一度変数が宣言されると、<code>=</code> 演算子と新しい値を使って、コードのどの時点でもその値を変更することができます。</p>
+<p>✅ お試しください ブラウザで JavaScript を書くことができます。ブラウザのウィンドウを開き、開発者ツールに移動します。コンソールにプロンプトが表示されるので、<code>let myVariable = 123</code> と入力して return を押し、<code>myVariable</code> と入力します。どうなりますか？これらの概念については、後のレッスンで詳しく説明します。</p></li>
+</ol>
+<h2 id="定数">定数</h2>
+<p>定数の宣言と初期化は、<code>const</code> キーワードを除いて、変数と同じ概念に従います。定数は通常、すべて大文字で宣言されます。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">const</span> MY_VARIABLE <span class="op">=</span> <span class="dv">123</span><span class="op">;</span></a></code></pre></div>
+<p>定数は変数と似ていますが、2つの例外があります。</p>
+<ul>
+<li><strong>値を持つ必要があります</strong>。定数を初期化しておかないと、コード実行時にエラーが発生します。</li>
+<li><strong>参照は変更できません</strong>。定数の参照は、一度初期化すると変更できません。そうしないと、コードを実行するときにエラーが発生します。2つの例を見てみましょう。
+<ul>
+<li><p><strong>単純な値</strong>です。以下は許可されていません。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">const</span> PI <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2">PI <span class="op">=</span> <span class="dv">4</span><span class="op">;</span> <span class="co">// 不許可</span></a></code></pre></div></li>
+<li><p><strong>オブジェクト参照は保護されています</strong>。以下は許可されていません。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">const</span> obj <span class="op">=</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">3</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb7-2" title="2">obj <span class="op">=</span> <span class="op">{</span> <span class="dt">b</span><span class="op">:</span> <span class="dv">5</span> <span class="op">}</span> <span class="co">// 不許可</span></a></code></pre></div></li>
+<li><p><strong>オブジェクトの値は保護されていません</strong>。以下は許可されています。</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">const</span> obj <span class="op">=</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">3</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="va">obj</span>.<span class="at">a</span> <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>  <span class="co">// 許可</span></a></code></pre></div>
+<p>上記ではオブジェクトの値を変更していますが、参照自体は変更できません。</p></li>
+</ul>
+<blockquote>
+<p>注: <code>const</code> は参照が再割り当てから保護されていることを意味します。しかし、値は <em>不変</em> ではなく、特にオブジェクトのような複雑な構造体であれば、変更される可能性があります。</p>
+</blockquote></li>
+</ul>
+<h2 id="データ型">データ型</h2>
+<p>変数は、数値やテキストなど、多くの異なるタイプの値を格納することができます。これらのさまざまなタイプの値は、<strong>データ型</strong>として知られています。データ型は、開発者がコードをどのように書くべきか、ソフトウェアをどのように実行するべきかを決定するのに役立つため、ソフトウェア開発において重要な役割を果たします。さらに、データ型の中には、値の中の付加的な情報を変換したり抽出したりするのに役立つ独自の機能を持つものもあります。</p>
+<p>✅ データ型は、言語によって提供される最低レベルのデータ型であるため、JavaScript のデータプリミティブとも呼ばれています。プリミティブデータ型には、string、number、bigint、boolean、undefined、symbol の6つのデータ型があります。これらのプリミティブのそれぞれが何を表しているかを可視化してみましょう。<code>zebra</code> は何でしょうか？ <code>0</code> はどうでしょうか？ <code>true</code> はどうでしょうか?</p>
+<h3 id="数値">数値</h3>
+<p>前のセクションでは、<code>myVariable</code> の値は数値データ型でした。</p>
+<p><code>let myVariable = 123;</code></p>
+<p>変数は、小数や負の数を含むあらゆるタイプの数値を格納することができます。数値は、<a href="#算術演算子">次のセクション</a>で説明する算術演算子と一緒に使用することもできます。</p>
+<h3 id="算術演算子">算術演算子</h3>
+<p>算術関数を実行する際に使用する演算子にはいくつかの種類があり、ここではいくつかを紹介します。</p>
+<table>
+<thead>
+<tr class="header">
+<th>シンボル</th>
+<th>説明</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+</code></td>
+<td><strong>加算</strong>: 2つの数値の和を計算します。</td>
+<td><code>1 + 2 //期待される答えは 3 です。</code></td>
+</tr>
+<tr class="even">
+<td><code>-</code></td>
+<td><strong>減算</strong>: 2つの数値の差を計算します。</td>
+<td><code>1 - 2 //期待される答えは -1 です。</code></td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td><strong>乗算</strong>: 2つの数値の積を計算します。</td>
+<td><code>1 * 2 //期待される答えは 2 です。</code></td>
+</tr>
+<tr class="even">
+<td><code>/</code></td>
+<td><strong>除算</strong>: 2つの数値の商を計算します。</td>
+<td><code>1 / 2 //期待される答えは 0.5 です。</code></td>
+</tr>
+<tr class="odd">
+<td><code>%</code></td>
+<td><strong>余り</strong>: 2つの数値の割り算から余りを計算します</td>
+<td><code>1 % 2 //期待される答えは 1 です。</code></td>
+</tr>
+</tbody>
+</table>
+<p>✅ 試してみましょう! ブラウザのコンソールで算術を試してみてください。驚きの結果が出ましたか？</p>
+<h3 id="文字列">文字列</h3>
+<p>文字列は、一重引用符または二重引用符の間に存在する文字の集合です。</p>
+<ul>
+<li><code>'This is a string'</code></li>
+<li><code>"This is also a string"</code></li>
+<li><code>let myString = 'This is a string value stored in a variable';</code></li>
+</ul>
+<p>文字列を書くときには引用符を使うことを忘れないでください。そうしないと、JavaScript はそれを変数名とみなします。</p>
+<h3 id="文字列のフォーマット">文字列のフォーマット</h3>
+<p>文字列はテキストであり、時々フォーマットが必要になります。</p>
+<p>2 つ以上の文字列を <strong>連結</strong> したり、結合したりするには、<code>+</code> 演算子を使用します。</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">let</span> myString1 <span class="op">=</span> <span class="st">&quot;Hello&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">let</span> myString2 <span class="op">=</span> <span class="st">&quot;World&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"></a>
+<a class="sourceLine" id="cb9-4" title="4">myString1 <span class="op">+</span> myString2 <span class="op">+</span> <span class="st">&quot;!&quot;</span><span class="op">;</span> <span class="co">//HelloWorld!</span></a>
+<a class="sourceLine" id="cb9-5" title="5">myString1 <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> myString2 <span class="op">+</span> <span class="st">&quot;!&quot;</span><span class="op">;</span> <span class="co">//Hello World!</span></a>
+<a class="sourceLine" id="cb9-6" title="6">myString1 <span class="op">+</span> <span class="st">&quot;, &quot;</span> <span class="op">+</span> myString2 <span class="op">+</span> <span class="st">&quot;!&quot;</span><span class="op">;</span> <span class="co">//Hello, World!</span></a></code></pre></div>
+<p>✅ JavaScript では <code>1 + 1 = 2</code> なのに、<code>'1' + '1' = 11</code> なのはなぜでしょうか? <code>'1' + 1</code> はどうでしょうか？</p>
+<p><strong>テンプレートリテラル</strong> は文字列をフォーマットするもう一つの方法ですが、引用符の代わりにバックスティックを使用します。プレーンテキストではないものはすべてプレースホルダー <code>${ }</code> の中に入れなければなりません。これには、文字列である可能性のある変数も含まれます。</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">let</span> myString1 <span class="op">=</span> <span class="st">&quot;Hello&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw">let</span> myString2 <span class="op">=</span> <span class="st">&quot;World&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-3" title="3"></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="vs">`</span><span class="sc">${</span>myString1<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>myString2<span class="sc">}</span><span class="vs">!`</span> <span class="co">//Hello World!</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="vs">`</span><span class="sc">${</span>myString1<span class="sc">}</span><span class="vs">, </span><span class="sc">${</span>myString2<span class="sc">}</span><span class="vs">!`</span> <span class="co">//Hello, World!</span></a></code></pre></div>
+<p>どちらの方法でも書式設定の目標を達成することができますが、テンプレートリテラルはスペースや改行を尊重します。</p>
+<p>✅ テンプレートリテラルとプレーンな文字列を使用するのはいつですか？</p>
+<h3 id="ブール値">ブール値</h3>
+<p>ブール値は2つの値だけを持つことができます。<code>true</code> か <code>false</code> です。ブール値は、特定の条件が満たされたときにどの行のコードを実行するかを決定するのに役立ちます。多くの場合、<a href="#算術演算子">演算子</a> がブール値の設定を支援し、変数が初期化されたり、演算子で値が更新されたりしていることに気付いたり、書いたりすることが多いでしょう。</p>
+<ul>
+<li><code>let myTrueBool = true</code></li>
+<li><code>let myFalseBool = false</code></li>
+</ul>
+<p>✅ 変数の評価値がブール値 <code>true</code> であれば、変数は ‘truthy’ とみなされます。興味深いことに、JavaScript では、<a href="https://developer.mozilla.org/ja/docs/Glossary/Truthy">falsy として定義されていない限り、すべての値は truthy です</a>。</p>
+<hr />
+<h2 id="チャレンジ">🚀 チャレンジ</h2>
+<p>JavaScript は、たまにデータ型を扱う際の意外な方法で悪名高いです。これらの ‘gotchas’ について少し調べてみてください。例えば: 大文字小文字の区別でつまずくことがあります! コンソールで以下のようにしてみてください。<code>let age = 1; let Age = 2; age == Age</code> (解決は <code>false</code> – なぜ?) 他にどのような gotchas があるでしょうか?</p>
+<h2 id="レッスン後の小テスト">レッスン後の小テスト</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/8?loc=ja">レッスン後の小テスト</a></p>
+<h2 id="復習と自己学習">復習と自己学習</h2>
+<p>この <a href="https://css-tricks.com/snippets/javascript/">JavaScript の練習問題リスト</a>を見て、1つ試してみてください。何を学びましたか？</p>
+<h2 id="課題">課題</h2>
+<p><a href="assignment.ja.md">データ型の練習</a></p>
+</body>
+</html>

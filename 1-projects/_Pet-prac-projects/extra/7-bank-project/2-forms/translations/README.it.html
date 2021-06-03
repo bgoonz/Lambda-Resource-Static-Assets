@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.it</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="creazione-di-unapp-bancaria-parte-2-creazione-di-un-form-di-accesso-e-registrazione">Creazione di un’App Bancaria Parte 2: Creazione di un form di accesso e registrazione</h1>
+<h2 id="quiz-pre-lezione">Quiz Pre-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/43?loc=it">Quiz Pre-Lezione</a></p>
+<h3 id="introduzione">Introduzione</h3>
+<p>In quasi tutte le moderne app web, si può creare un account per avere il proprio spazio privato. Poiché più utenti possono accedere a un’app web contemporaneamente, è necessario un meccanismo per archiviare i dati personali di ciascun utente separatamente e selezionare le informazioni da visualizzare. Non verrà trattato come gestire <a href="https://it.wikipedia.org/wiki/Autenticazione">l’identità dell’utente in modo sicuro</a> poiché si tratta di un argomento ampio di per sé, ma ci si assicurerà che ogni utente sia in grado di creare uno (o più) conto bancario nella app.</p>
+<p>In questa parte si utilizzeranno form HTML per aggiungere login e registrazione all’app. Si vedrà come inviare i dati a un’API del server a livello di programmazione e, infine, come definire le regole di convalida di base per gli input dell’utente.</p>
+<h3 id="prerequisito">Prerequisito</h3>
+<p>È necessario aver completato i <a href="../../1-template-route/translations/README.it.md">modelli HTML e il routing</a> dell’app web per questa lezione. È inoltre necessario installare <a href="https://nodejs.org">Node.js</a> ed <a href="../../api/README.md">eseguirel’API del server</a> in locale in modo da poter inviare dati per creare account.</p>
+<p>Si può verificare che il server funzioni correttamente eseguendo questo comando in un terminale:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">curl</span> http://localhost:5000/api</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co"># -&gt; dovrebbe restituire &quot;Bank API v1.0.0&quot; come risultato</span></a></code></pre></div>
+<hr />
+<h2 id="form-e-controlli">Form e controlli</h2>
+<p>L’elemento <code>&lt;form&gt;</code> incapsula una sezione di un documento HTML in cui l’utente può inserire e inviare dati con controlli interattivi. Esistono tutti i tipi di controlli dell’interfaccia utente (UI) che possono essere utilizzati all’interno di un form, i più comuni sono gli elementi <code>&lt;input&gt;</code> e <code>&lt;button&gt;</code>.</p>
+<p>Esistono molti <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input">tipi</a> diversi di <code>&lt;input&gt;</code>, ad esempio per creare un campo in cui l’utente può inserire il proprio nome utente si può utilizzare:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;username&quot;</span><span class="ot"> name=</span><span class="st">&quot;username&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<p>L’attributo <code>name</code> verrà utilizzato come nome della proprietà quando verranno inviati i dati del form. L’attributo <code>id</code> viene utilizzato per associare un’etichetta (<code>&lt;label&gt;</code>) al relativo controllo nel form.</p>
+<blockquote>
+<p>Si dia un’occhiata all’intero elenco di <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input">tipi di <code>&lt;input&gt;</code></a> e <a href="https://developer.mozilla.org/docs/Learn/Forms/Other_form_controls">altri controlli del form</a> per avere un’idea di tutti gli elementi nativi dell’interfaccia utente che si possono utilizzare durante la creazione della propria interfaccia utente.</p>
+</blockquote>
+<p>✅ Si noti che <code>&lt;input&gt;</code> è un <a href="https://developer.mozilla.org/docs/Glossary/Empty_element">elemento vuoto</a> su cui <em>non</em> si dovrebbe aggiungere un tag di chiusura corrispondente. È comunque possibile utilizzare la notazione a chiusura automatica <code>&lt;input/&gt;</code> , ma non è richiesta.</p>
+<p>L’elemento <code>&lt;button&gt;</code> all’interno di un form è un po’ speciale. Se non si specifica il suo attributo di tipo (<code>type</code>) , invierà automaticamente i dati del form al server quando viene premuto. Ecco i possibili valori di <code>type</code> :</p>
+<ul>
+<li><code>submit</code>: l’impostazione predefinita all’interno di un <code>&lt;form&gt;</code>, il pulsante attiva l’azione di invio del form.</li>
+<li><code>reset</code>: il pulsante ripristina tutti i controlli del form ai valori iniziali.</li>
+<li><code>button</code>: non assegna un comportamento predefinito quando viene premuto il pulsante. È quindi possibile assegnargli azioni personalizzate utilizzando JavaScript.</li>
+</ul>
+<h3 id="attività">Attività</h3>
+<p>Si comincia aggiungendo un form al modello di accesso <code>login</code> . Servirà di un campo <em>username</em> per il nome utente e di un pulsante <em>Login</em> .</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;template</span><span class="ot"> id=</span><span class="st">&quot;login&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">&lt;h1&gt;</span>Bank App<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">&lt;section&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">&lt;h2&gt;</span>Login<span class="kw">&lt;/h2&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="kw">&lt;form</span><span class="ot"> id=</span><span class="st">&quot;loginForm&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">      <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;username&quot;</span><span class="kw">&gt;</span>Username<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">      <span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;username&quot;</span><span class="ot"> name=</span><span class="st">&quot;user&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">      <span class="kw">&lt;button&gt;</span>Login<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="kw">&lt;/form&gt;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="kw">&lt;/section&gt;</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="kw">&lt;/template&gt;</span></a></code></pre></div>
+<p>Se si guarda più attentamente, si può notare che è stato aggiunto anche un elemento <code>&lt;label&gt;</code> (etichetta). Gli elementi <code>&lt;label&gt;</code> vengono utilizzati per aggiungere un nome ai controlli dell’interfaccia utente, come il campo username. Le etichette sono importanti per la leggibilità dei form, ma offrono anche vantaggi aggiuntivi:</p>
+<ul>
+<li>Associaer un’etichetta a un controllo in un form, aiuta gli utenti che utilizzano tecnologie assistite (come unlettore di schremo) a capire quali dati dovrebbero fornire.</li>
+<li>È possibile fare clic sull’etichetta per portare direttamente il focus sull’input associato, rendendolo più facile da raggiungere su dispositivi basati su touch screen.</li>
+</ul>
+<blockquote>
+<p><a href="https://developer.mozilla.org/docs/Learn/Accessibility/What_is_accessibility">L’accessibilità</a> sul Web è un argomento molto importante che spesso viene trascurato. Grazie agli <a href="https://developer.mozilla.org/docs/Learn/Accessibility/HTML">elementi HTML semantici</a> non è difficile creare contenuti accessibili se usati correttamente. Si può <a href="https://developer.mozilla.org/docs/Web/Accessibility">leggere di più sull’accessibilità</a> per evitare errori comuni e diventare uno sviluppatore responsabile.</p>
+</blockquote>
+<p>Ora si aggiungerà un secondo modulo per la registrazione, appena sotto il precedente:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">&lt;hr/&gt;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">&lt;h2&gt;</span>Register<span class="kw">&lt;/h2&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">&lt;form</span><span class="ot"> id=</span><span class="st">&quot;registerForm&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;user&quot;</span><span class="kw">&gt;</span>Username<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;user&quot;</span><span class="ot"> name=</span><span class="st">&quot;user&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;currency&quot;</span><span class="kw">&gt;</span>Currency<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;currency&quot;</span><span class="ot"> name=</span><span class="st">&quot;currency&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> value=</span><span class="st">&quot;$&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;description&quot;</span><span class="kw">&gt;</span>Description<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;description&quot;</span><span class="ot"> name=</span><span class="st">&quot;description&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">  <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;balance&quot;</span><span class="kw">&gt;</span>Current balance<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">  <span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;balance&quot;</span><span class="ot"> name=</span><span class="st">&quot;balance&quot;</span><span class="ot"> type=</span><span class="st">&quot;number&quot;</span><span class="ot"> value=</span><span class="st">&quot;0&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">  <span class="kw">&lt;button&gt;</span>Register<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="kw">&lt;/form&gt;</span></a></code></pre></div>
+<p>Utilizzando l’attributo <code>value</code> si può impostare un valore predefinito per un dato input. Si noti inoltre che l’input per il saldo(<code>balance</code>) ha il tipo <code>number</code> (numero). Sembra diverso dagli altri input? Provare a interagire con esso.</p>
+<p>✅ Si può navigare e interagire con i form utilizzando solo una tastiera? E come si pensa di fare?</p>
+<h2 id="invio-dei-dati-al-server">Invio dei dati al server</h2>
+<p>Ora che si ha un’interfaccia utente funzionale, il passaggio successivo è inviare i dati al server. Fare un rapido test utilizzando il codice attuale: cosa succede se si fa clic sul pulsante <em>Login</em> o <em>Register</em> ?</p>
+<p>Si è notato il cambiamento nella sezione URL del proprio browser?</p>
+<figure>
+<img src="../images/click-register.png" alt="Videata della modifica dell’URL del browser dopo aver fatto clic sul pulsante Registra" /><figcaption>Videata della modifica dell’URL del browser dopo aver fatto clic sul pulsante Registra</figcaption>
+</figure>
+<p>L’azione predefinita per un <code>&lt;form&gt;</code> consiste nell’inviare il form all’URL del server corrente utilizzando il <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.3">metodo GET</a>, aggiungendo i dati del modulo direttamente all’URL. Questo metodo presenta però alcuni difetti:</p>
+<ul>
+<li>I dati inviati sono di dimensioni molto limitate (circa 2000 caratteri)</li>
+<li>I dati sono direttamente visibili nell’URL (non eccezionale per le password)</li>
+<li>Non funziona con i caricamenti di file</li>
+</ul>
+<p>Ecco perché si può cambiare e utilizzare il <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5">metodo POST</a> che invia i dati del modulo al server nel corpo della richiesta HTTP, senza nessuna delle limitazioni precedenti.</p>
+<blockquote>
+<p>Sebbene POST sia il metodo più comunemente utilizzato per inviare i dati, <a href="https://www.w3.org/2001/tag/doc/whenToUseGet.html">in alcuni scenari specifici</a> è preferibile utilizzare il metodo GET, ad esempio quando si implementa un campo di ricerca.</p>
+</blockquote>
+<h3 id="attività-1">Attività</h3>
+<p>Aggiungere le proprietà <code>action</code> e <code>method</code> al form di registrazione:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;form</span><span class="ot"> id=</span><span class="st">&quot;registerForm&quot;</span><span class="ot"> action=</span><span class="st">&quot;//localhost:5000/api/accounts&quot;</span><span class="ot"> method=</span><span class="st">&quot;POST&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<p>Provare ora a registrare un nuovo account con il proprio nome. Dopo aver fatto clic sul pulsante <em>Register</em> si dovrebbe vedere qualcosa del genere:</p>
+<figure>
+<img src="../images/form-post.png" alt="Una finestra del browser all’indirizzo localhost:5000/api/ accounts, che mostra una stringa JSON con i dati dell’utente" /><figcaption>Una finestra del browser all’indirizzo localhost:5000/api/ accounts, che mostra una stringa JSON con i dati dell’utente</figcaption>
+</figure>
+<p>Se tutto va bene, il server dovrebbe rispondere alla richiesta con una risposta <a href="https://www.json.org/json-en.html">JSON</a> contenente i dati dell’account che è stato creato.</p>
+<p>✅ Provare una nuova registrazione con lo stesso nome. Che cosa accade?</p>
+<h2 id="invio-di-dati-senza-ricaricare-la-pagina">Invio di dati senza ricaricare la pagina</h2>
+<p>Come probabilmente si è notato, c’è un piccolo problema con l’approccio appena usato: quando si invia il modulo, si esce dalla propria app e il browser reindirizza all’URL del server. Si sta cercando qui di evitare tutti i ricaricamenti delle pagine con quest app web, poiché si sta creando un’<a href="https://en.wikipedia.org/wiki/Single-page_application">applicazione a pagina singola (SPA)</a>.</p>
+<p>Per inviare i dati del modulo al server senza forzare il ricaricamento di una pagina, si deve utilizzare il codice JavaScript. Invece di inserire un URL nella proprietà <code>action</code> di un <code>&lt;form&gt;</code>, si può utilizzare qualsiasi codice JavaScript anteposto dalla stringa <code>javascript:</code> per eseguire un’azione personalizzata. Usarlo significa anche che si dovranno implementare alcune attività che erano state precedentemente eseguite automaticamente dal browser:</p>
+<ul>
+<li>Recuperare i dati del form</li>
+<li>Convertire e codificare i dati del form in un formato adatto</li>
+<li>Creare la richiesta HTTP e inviarla al server</li>
+</ul>
+<h3 id="attività-2">Attività</h3>
+<p>Sostituire <code>action</code> nel form di registrazione con:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">&lt;form</span><span class="ot"> id=</span><span class="st">&quot;registerForm&quot;</span><span class="ot"> action=</span><span class="st">&quot;javascript:register()&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<p>Aprire <code>app.js</code> aggiungere una nuova funzione denominata <code>register</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">register</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">const</span> registerForm <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;registerForm&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="kw">const</span> formData <span class="op">=</span> <span class="kw">new</span> <span class="at">FormData</span>(registerForm)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="kw">const</span> data <span class="op">=</span> <span class="va">Object</span>.<span class="at">fromEntries</span>(formData)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="kw">const</span> jsonData <span class="op">=</span> <span class="va">JSON</span>.<span class="at">stringify</span>(data)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>Qui si recupera l’elemento form utilizzando <code>getElementById()</code> e si utilizza il <a href="https://developer.mozilla.org/docs/Web/API/FormData">metodo di supporto FormData</a> per estrarre i valori dai controlli del forma come un insieme di coppie chiave/valore. Quindi si convertono i dati in un oggetto normale utilizzando <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries"><code>Object.fromEntries()</code></a> e infine si serializzano i dati in <a href="https://www.json.org/json-en.html">JSON</a>, un formato comunemente utilizzato per lo scambio di dati sul web.</p>
+<p>I dati sono ora pronti per essere inviati al server. Creare una nuova funzione denominata <code>createAccount</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">createAccount</span>(account) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="cf">try</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="at">fetch</span>(<span class="st">&#39;//localhost:5000/api/accounts&#39;</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-4" title="4">      <span class="dt">method</span><span class="op">:</span> <span class="st">&#39;POST&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-5" title="5">      <span class="dt">headers</span><span class="op">:</span> <span class="op">{</span> <span class="st">&#39;Content-Type&#39;</span><span class="op">:</span> <span class="st">&#39;application/json&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb8-6" title="6">      <span class="dt">body</span><span class="op">:</span> account</a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-8" title="8">    <span class="cf">return</span> <span class="cf">await</span> <span class="va">response</span>.<span class="at">json</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-9" title="9">  <span class="op">}</span> <span class="cf">catch</span> (error) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-10" title="10">    <span class="cf">return</span> <span class="op">{</span> <span class="dt">error</span><span class="op">:</span> <span class="va">error</span>.<span class="at">message</span> <span class="op">||</span> <span class="st">&#39;Unknown error&#39;</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb8-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="op">}</span></a></code></pre></div>
+<p>Cosa fa questa funzione? Per prima cosa notare la parola chiave <code>async</code>. Ciò significa che la funzione contiene codice che verrà eseguito <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function"><strong>in modo asincrono</strong></a>. Quando viene utilizzato insieme alla parola chiave <code>await</code>, consente di attendere l’esecuzione del codice asincrono, come l’attesa della risposta del server qui, prima di continuare.</p>
+<p>Ecco un breve video sull’utilizzo di <code>async/await</code>:</p>
+<p>[<img src="https://img.youtube.com/vi/YwmlRkrxvkk/0.jpg" alt="Async e Await per la" />](https://youtube.com/watch?v=YwmlRkrxvkk " gestione di promesse")</p>
+<blockquote>
+<p>Fare clic sull’immagine sopra per un video su async/await.</p>
+</blockquote>
+<p>Si usa l’API <code>fetch()</code> per inviare dati JSON al server. Questo metodo richiede 2 parametri:</p>
+<ul>
+<li>L’URL del server, quindi rimettere <code>//localhost:5000/api/accounts</code> qui.</li>
+<li>Le impostazioni della richiesta. È qui che si imposta il metodo su <code>POST</code> e si fornisce il corpo (<code>body</code>) della richiesta. Dato che si inviano dati JSON al server, si deve anche impostare l’intestazione <code>Content-Type</code> su <code>application/json</code> in modo che il server sappia come interpretare il contenuto.</li>
+</ul>
+<p>Poiché il server risponderà alla richiesta con JSON, si può utilizzare <code>await response.json()</code> per analizzare il contenuto JSON e restituire l’oggetto risultante. Notare che questo metodo è asincrono, quindi si usa la parola chiave <code>await</code> qui prima di tornare per assicurarsi che vengano rilevati anche eventuali errori durante l’analisi.</p>
+<p>Ora aggiungere del codice alla funzione di <code>register</code> per chiamare <code>createAccount()</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> <span class="at">createAccount</span>(jsonData)<span class="op">;</span></a></code></pre></div>
+<p>Poiché qui si usa la parola chiave <code>await</code>, si deve aggiungere la parola chiave <code>async</code> prima della funzione di registrazione</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">register</span>() <span class="op">{</span></a></code></pre></div>
+<p>Infine, aggiungere alcuni log per verificare il risultato. La funzione finale dovrebbe essere simile a questa:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">register</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="kw">const</span> registerForm <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;registerForm&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="kw">const</span> formData <span class="op">=</span> <span class="kw">new</span> <span class="at">FormData</span>(registerForm)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4">  <span class="kw">const</span> jsonData <span class="op">=</span> <span class="va">JSON</span>.<span class="at">stringify</span>(<span class="va">Object</span>.<span class="at">fromEntries</span>(formData))<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-5" title="5">  <span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> <span class="at">createAccount</span>(jsonData)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-6" title="6"></a>
+<a class="sourceLine" id="cb11-7" title="7">  <span class="cf">if</span> (<span class="va">result</span>.<span class="at">error</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-8" title="8">    <span class="cf">return</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;An error occured:&#39;</span><span class="op">,</span> <span class="va">result</span>.<span class="at">error</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-10" title="10"></a>
+<a class="sourceLine" id="cb11-11" title="11">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Account created!&#39;</span><span class="op">,</span> result)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-12" title="12"><span class="op">}</span></a></code></pre></div>
+<p>È stato un po’ lungo ma si è arrivati! Se si apre <a href="https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools">strumenti di sviluppo del browser</a> e si prava a registrare un nuovo account, non si dovrebbe vedere alcun cambiamento nella pagina web ma apparirà un messaggio nella console che conferma che tutto funziona.</p>
+<figure>
+<img src="../images/browser-console.png" alt="Videata che mostra il messaggio di registro nella console del browser" /><figcaption>Videata che mostra il messaggio di registro nella console del browser</figcaption>
+</figure>
+<p>✅ Si pensa che i dati vengano inviati al server in modo sicuro? E se qualcuno fosse in grado di intercettare la richiesta? Si possono leggere informazioni su <a href="https://en.wikipedia.org/wiki/HTTPS">HTTPS</a> per saperne di più sulla comunicazione sicura dei dati.</p>
+<h2 id="convalida-dati">Convalida dati</h2>
+<p>Se si prova a registrare un nuovo account senza prima impostare un nome utente, si può vedere che il server restituisce un errore con codice di stato <a href="https://developer.mozilla.org/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).">400 Bad Request</a>, (richiesta non valida)</p>
+<p>Prima di inviare i dati a un server è buona norma <a href="https://developer.mozilla.org/docs/Learn/Forms/Form_validation">convalidare i dati del modulo</a> in anticipo quando possibile, per assicurarsi di inviare una richiesta valida. I controlli dei form HTML5 forniscono la convalida incorporata utilizzando vari attributi:</p>
+<ul>
+<li><code>requested</code>: il campo deve essere compilato altrimenti il modulo non può essere inviato.</li>
+<li><code>minlength</code> e <code>maxlength</code>: definisce il numero minimo e massimo di caratteri nei campi di testo.</li>
+<li><code>min</code> e <code>max</code>: definisce il valore minimo e massimo di un campo numerico.</li>
+<li><code>type</code>: definisce il tipo di dati attesi, come <code>number</code>, <code>email</code>, <code>file</code> o <a href="https://developer.mozilla.org/docs/Web/HTML/Element/input">altri tipi incorporati</a>. Questo attributo può anche modificare il rendering visivo del form.</li>
+<li><code>pattern</code>: permette di definire un modello di <a href="https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions">espressione regolare</a> per verificare se i dati inseriti sono validi o meno.</li>
+</ul>
+<blockquote>
+<p>Suggerimento: si può personalizzare l’aspetto dei controlli del form a seconda che siano validi o meno utilizzando le pseudo-classi CSS <code>:valid</code> e <code>:invalid</code> .</p>
+</blockquote>
+<h3 id="attività-3">Attività</h3>
+<p>Ci sono 2 campi obbligatori per creare un nuovo account valido, nome utente (username) e la valuta (currency), gli altri campi sono opzionali. Aggiornare l’HTML del form, utilizzando sia l’attributo <code>required</code> che il testo nell’etichetta del campo in questo modo:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;user&quot;</span><span class="kw">&gt;</span>Username (required)<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;user&quot;</span><span class="ot"> name=</span><span class="st">&quot;user&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> required</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">...</a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;currency&quot;</span><span class="kw">&gt;</span>Currency (required)<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;currency&quot;</span><span class="ot"> name=</span><span class="st">&quot;currency&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> value=</span><span class="st">&quot;$&quot;</span><span class="ot"> required</span><span class="kw">&gt;</span></a></code></pre></div>
+<p>Sebbene questa particolare implementazione del server non imponga limiti specifici sulla lunghezza massima dei campi, è sempre buona norma definire limiti ragionevoli per qualsiasi voce di testo inserita dell’utente.</p>
+<p>Aggiungere un attributo <code>maxlength</code> ai campi di testo:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;user&quot;</span><span class="ot"> name=</span><span class="st">&quot;user&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> maxlength=</span><span class="st">&quot;20&quot;</span><span class="ot"> required</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb13-2" title="2">...</a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;currency&quot;</span><span class="ot"> name=</span><span class="st">&quot;currency&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> value=</span><span class="st">&quot;$&quot;</span><span class="ot"> maxlength=</span><span class="st">&quot;5&quot;</span><span class="ot"> required</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb13-4" title="4">...</a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;description&quot;</span><span class="ot"> name=</span><span class="st">&quot;description&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> maxlength=</span><span class="st">&quot;100&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<p>Ora se si preme il pulsante <em>Register</em> e un campo non rispetta una regola di convalida che è stata definita, si dovrebbe vedere qualcosa del genere:</p>
+<figure>
+<img src="../images/validation-error.png" alt="Videata che mostra l’errore di convalida durante il tentativo di inviare il form" /><figcaption>Videata che mostra l’errore di convalida durante il tentativo di inviare il form</figcaption>
+</figure>
+<p>La convalida come questa eseguita <em>prima</em> di inviare qualsiasi dato al server è chiamata convalida <strong>lato client</strong> . Tenere presente che non è sempre possibile eseguire tutti i controlli senza inviare i dati. Ad esempio, non si può verificare qui se esiste già un account con lo stesso nome utente senza inviare una richiesta al server. La convalida aggiuntiva eseguita sul server è denominata convalida <strong>lato server</strong> .</p>
+<p>Di solito devono essere implementate entrambe; mentre l’utilizzo della convalida lato client migliora l’esperienza dell’utente fornendo un feedback immediato all’utente, la convalida lato server è fondamentale per assicurarsi che i dati utente da manipolare siano validi e sicuri.</p>
+<hr />
+<h2 id="sfida">🚀 Sfida</h2>
+<p>Mostrare un messaggio di errore nell’HTML se l’utente esiste già.</p>
+<p>Ecco un esempio di come può apparire la pagina di accesso finale dopo l’applicazione di un po’ di stile:</p>
+<figure>
+<img src="../images/result.png" alt="Videata della pagina di accesso dopo l’aggiunta di stili CSS" /><figcaption>Videata della pagina di accesso dopo l’aggiunta di stili CSS</figcaption>
+</figure>
+<h2 id="quiz-post-lezione">Quiz Post-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/44?loc=it">Quiz post-lezione</a></p>
+<h2 id="revisione-e-auto-apprendimento">Revisione e Auto Apprendimento</h2>
+<p>Gli sviluppatori sono diventati molto creativi nei loro sforzi di costruzione di form, in particolare per quanto riguarda le strategie di convalida. Scoprire i diversi flussi di form cercando su <a href="https://codepen.com">CodePen</a>; si riescono a trovare dei form interessanti e stimolanti?</p>
+<h2 id="compito">Compito</h2>
+<p><a href="assignment.it.md">Dare uno stile alla propria app bancaria</a></p>
+</body>
+</html>

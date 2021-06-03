@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.ms</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="bina-aplikasi-perbankan-bahagian-1-templat-dan-laluan-html-dalam-aplikasi-web">Bina Aplikasi Perbankan Bahagian 1: Templat dan Laluan HTML dalam Aplikasi Web</h1>
+<h2 id="kuiz-pra-kuliah">Kuiz Pra Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/41">Kuiz Pra Kuliah</a></p>
+<h3 id="arahan">Arahan</h3>
+<p>Sejak munculnya JavaScript di penyemak imbas, laman web menjadi lebih interaktif dan kompleks daripada sebelumnya. Teknologi web kini biasa digunakan untuk membuat aplikasi berfungsi sepenuhnya yang langsung masuk ke penyemak imbas yang kita panggil <a href="https://en.wikipedia.org/wiki/Web_application">aplikasi web</a>. Oleh kerana aplikasi Web sangat interaktif, pengguna tidak mahu menunggu muat semula halaman penuh setiap kali tindakan dilakukan. Itulah sebabnya JavaScript digunakan untuk mengemas kini HTML secara langsung menggunakan DOM, untuk memberikan pengalaman pengguna yang lebih lancar.</p>
+<p>Dalam pelajaran ini, kita akan meletakkan dasar untuk membuat aplikasi web bank, menggunakan templat HTML untuk membuat banyak layar yang dapat ditampilkan dan diperbarui tanpa harus memuat ulang seluruh halaman HTML.</p>
+<h3 id="prasyarat">Prasyarat</h3>
+<p>Anda memerlukan pelayan web tempatan untuk menguji aplikasi web yang akan kami bina dalam pelajaran ini. Sekiranya tidak memilikinya, anda boleh memasang <a href="https://nodejs.org">Node.js</a> dan menggunakan arahan <code>npx lite-server</code> dari folder projek anda. Ini akan membuat pelayan web tempatan dan membuka aplikasi anda di penyemak imbas.</p>
+<h3 id="penyediaan">Penyediaan</h3>
+<p>Di komputer anda, buat folder bernama <code>bank</code> dengan fail bernama <code>index.html</code> di dalamnya. Kami akan bermula dari HTML <a href="https://en.wikipedia.org/wiki/Boilerplate_code">boilerplate</a>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">&lt;html</span><span class="ot"> lang=</span><span class="st">&quot;en&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content=</span><span class="st">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="kw">&lt;title&gt;</span>Bank App<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="co">&lt;!-- This is where you&#39;ll work --&gt;</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<hr />
+<h2 id="templat-html">Templat HTML</h2>
+<p>Jika anda ingin membuat beberapa layar untuk halaman web, satu penyelesaiannya adalah dengan membuat satu file HTML untuk setiap layar yang ingin anda tampilkan. Walau bagaimanapun, penyelesaian ini disertakan dengan beberapa kesulitan:</p>
+<ul>
+<li>Anda harus memuat semula keseluruhan HTML ketika menukar skrin, yang boleh menjadi lambat.</li>
+<li>Sukar untuk berkongsi data antara skrin yang berbeza.</li>
+</ul>
+<p>Pendekatan lain hanya mempunyai satu fail HTML, dan menentukan beberapa <a href="https://developer.mozilla.org/docs/Web/HTML/Element/template">templat HTML</a> menggunakan elemen <code>&lt;template&gt;</code>. Templat adalah blok HTML yang dapat digunakan kembali yang tidak ditampilkan oleh penyemak imbas, dan perlu dibuat pada waktu berjalan menggunakan JavaScript.</p>
+<h3 id="tugas">Tugas</h3>
+<p>Kami akan membuat aplikasi bank dengan dua skrin: halaman log masuk dan papan pemuka. Pertama, mari kita tambahkan elemen penanda tempat pada badan HTML yang akan kita gunakan untuk menunjukkan pelbagai skrin aplikasi kita:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;app&quot;</span><span class="kw">&gt;</span>Loading...<span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<p>Kami memberikannya <code>id</code> untuk memudahkan pencarian dengan JavaScript kemudian.</p>
+<blockquote>
+<p>Petua: kerana kandungan elemen ini akan diganti, kita dapat memasukkan pesan pemuatan atau penunjuk yang akan ditunjukkan semasa aplikasi dimuat.</p>
+</blockquote>
+<p>Seterusnya, mari kita tambahkan di bawah templat HTML untuk halaman log masuk. Buat masa ini kami hanya akan memasukkan tajuk dan bahagian yang mengandungi pautan yang akan kami gunakan untuk melakukan navigasi.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;template</span><span class="ot"> id=</span><span class="st">&quot;login&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">&lt;h1&gt;</span>Bank App<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">&lt;section&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/dashboard&quot;</span><span class="kw">&gt;</span>Login<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="kw">&lt;/section&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">&lt;/template&gt;</span></a></code></pre></div>
+<p>Kemudian kami akan menambahkan templat HTML lain untuk halaman papan pemuka. Halaman ini akan mengandungi bahagian yang berbeza:</p>
+<ul>
+<li>Tajuk dengan tajuk dan pautan log keluar</li>
+<li>Baki semasa akaun bank</li>
+<li>Senarai urus niaga, ditunjukkan dalam jadual</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">&lt;template</span><span class="ot"> id=</span><span class="st">&quot;dashboard&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">&lt;header&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="kw">&lt;h1&gt;</span>Bank App<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/login&quot;</span><span class="kw">&gt;</span>Logout<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="kw">&lt;/header&gt;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="kw">&lt;section&gt;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    Balance: 100$</a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="kw">&lt;/section&gt;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="kw">&lt;section&gt;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">    <span class="kw">&lt;h2&gt;</span>Transactions<span class="kw">&lt;/h2&gt;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="kw">&lt;table&gt;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">      <span class="kw">&lt;thead&gt;</span></a>
+<a class="sourceLine" id="cb4-13" title="13">        <span class="kw">&lt;tr&gt;</span></a>
+<a class="sourceLine" id="cb4-14" title="14">          <span class="kw">&lt;th&gt;</span>Date<span class="kw">&lt;/th&gt;</span></a>
+<a class="sourceLine" id="cb4-15" title="15">          <span class="kw">&lt;th&gt;</span>Object<span class="kw">&lt;/th&gt;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">          <span class="kw">&lt;th&gt;</span>Amount<span class="kw">&lt;/th&gt;</span></a>
+<a class="sourceLine" id="cb4-17" title="17">        <span class="kw">&lt;/tr&gt;</span></a>
+<a class="sourceLine" id="cb4-18" title="18">      <span class="kw">&lt;/thead&gt;</span></a>
+<a class="sourceLine" id="cb4-19" title="19">      <span class="kw">&lt;tbody&gt;&lt;/tbody&gt;</span></a>
+<a class="sourceLine" id="cb4-20" title="20">    <span class="kw">&lt;/table&gt;</span></a>
+<a class="sourceLine" id="cb4-21" title="21">  <span class="kw">&lt;/section&gt;</span></a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="kw">&lt;/template&gt;</span></a></code></pre></div>
+<blockquote>
+<p>Petua: semasa membuat templat HTML, jika anda ingin melihat seperti apa, anda boleh memberi komen baris <code>&lt;template&gt;</code> <code>dan</code> <code>&lt;/template&gt;</code> dengan melampirkannya dengan <code>&lt;! - -&gt;</code> .</p>
+</blockquote>
+<p>✅ Menurut anda mengapa kami menggunakan atribut <code>id</code> pada templat? Bolehkah kita menggunakan sesuatu yang lain seperti kelas?</p>
+<h2 id="memaparkan-templat-dengan-javascript">Memaparkan templat dengan JavaScript</h2>
+<p>Sekiranya anda mencuba fail HTML semasa anda dalam penyemak imbas, anda akan melihat fail tersebut macet memaparkan `Memuat … ’. Itu kerana kita perlu menambahkan beberapa kod JavaScript untuk memberi contoh dan memaparkan templat HTML.</p>
+<p>Membuat templat biasanya dilakukan dalam 3 langkah:</p>
+<ol type="1">
+<li>Dapatkan semula elemen templat di DOM, misalnya menggunakan <a href="https://developer.mozilla.org/docs/Web/API/Document/getElementById"><code>document.getElementById</code></a>.</li>
+<li>Klon elemen templat, menggunakan <a href="https://developer.mozilla.org/docs/Web/API/Node/cloneNode"><code>cloneNode</code></a>.</li>
+<li>Lampirkan ke DOM di bawah elemen yang kelihatan, misalnya menggunakan <a href="https://developer.mozilla.org/docs/Web/API/Node/appendChild"><code>appendChild</code></a>.</li>
+</ol>
+<p>✅ Mengapa kita perlu mengklon templat sebelum melampirkannya ke DOM? Apa yang anda fikir akan berlaku sekiranya kita melangkau langkah ini?</p>
+<h3 id="tugas-1">Tugas</h3>
+<p>Buat fail baru bernama <code>app.js</code> di folder projek anda dan import fail itu di bahagian <code>&lt;head&gt;</code> HTML anda:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;app.js&quot;</span><span class="ot"> defer</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<p>Sekarang di <code>app.js</code>, kami akan membuat fungsi baru <code>updateRoute</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">function</span> <span class="at">updateRoute</span>(templateId) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">const</span> template <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(templateId)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">const</span> view <span class="op">=</span> <span class="va">template</span>.<span class="va">content</span>.<span class="at">cloneNode</span>(<span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="kw">const</span> app <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;app&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="va">app</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="va">app</span>.<span class="at">appendChild</span>(view)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>Apa yang kami lakukan di sini adalah tepat 3 langkah yang dinyatakan di atas. Kami membuat templat dengan id <code>templateId</code>, dan memasukkan kandungan klonnya ke dalam ruang letak aplikasi kami. Perhatikan bahawa kita perlu menggunakan <code>cloneNode(true)</code> untuk menyalin keseluruhan subtree templat.</p>
+<p>Sekarang panggil fungsi ini dengan salah satu templat dan lihat hasilnya.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="at">updateRoute</span>(<span class="st">&#39;login&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<p>✅ Apa tujuan kod ini <code>app.innerHTML = '';</code>? Apa yang berlaku tanpanya?</p>
+<h2 id="membuat-laluan">Membuat laluan</h2>
+<p>Ketika berbicara tentang aplikasi web, kami memanggil <em>Routing</em> niat untuk memetakan <strong>URL</strong> ke layar tertentu yang harus ditampilkan. Di laman web dengan banyak fail HTML, ini dilakukan secara automatik kerana jalur fail ditunjukkan pada URL. Contohnya, dengan fail ini dalam folder projek anda:</p>
+<pre><code>mywebsite/index.html
+mywebsite/login.html
+mywebsite/admin/index.html</code></pre>
+<p>Sekiranya anda membuat pelayan web dengan <code>mywebsite</code> sebagai root, pemetaan URL akan:</p>
+<pre><code>https://site.com            --&gt; mywebsite/index.html
+https://site.com/login.html --&gt; mywebsite/login.html
+https://site.com/admin/     --&gt; mywebsite/admin/index.html</code></pre>
+<p>Walau bagaimanapun, untuk aplikasi web kami menggunakan satu fail HTML yang mengandungi semua skrin sehingga tingkah laku lalai ini tidak akan membantu kami. Kita harus membuat peta ini secara manual dan melakukan kemas kini templat yang dipaparkan menggunakan JavaScript.</p>
+<h3 id="tugas-2">Tugas</h3>
+<p>Kami akan menggunakan objek sederhana untuk melaksanakan <a href="https://en.wikipedia.org/wiki/Associative_array">peta</a> antara jalur URL dan templat kami. Tambahkan objek ini di bahagian atas fail <code>app.js</code> anda.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">const</span> routes <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="st">&#39;/login&#39;</span><span class="op">:</span> <span class="op">{</span> <span class="dt">templateId</span><span class="op">:</span> <span class="st">&#39;login&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="st">&#39;/dashboard&#39;</span><span class="op">:</span> <span class="op">{</span> <span class="dt">templateId</span><span class="op">:</span> <span class="st">&#39;dashboard&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="op">};</span></a></code></pre></div>
+<p>Sekarang mari kita ubah sedikit fungsi <code>updateRoute</code>. Daripada meneruskan secara langsung <code>templateId</code> sebagai argumen, kami ingin mendapatkannya dengan terlebih dahulu melihat URL semasa, dan kemudian menggunakan peta kami untuk mendapatkan nilai ID templat yang sesuai. Kita boleh menggunakan <a href="https://developer.mozilla.org/docs/Web/API/Location/pathname"><code>window.location.pathname</code></a> untuk mendapatkan hanya bahagian jalan dari URL.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">function</span> <span class="at">updateRoute</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="kw">const</span> path <span class="op">=</span> <span class="va">window</span>.<span class="va">location</span>.<span class="at">pathname</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="kw">const</span> route <span class="op">=</span> routes[path]<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5">  <span class="kw">const</span> template <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="va">route</span>.<span class="at">templateId</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-6" title="6">  <span class="kw">const</span> view <span class="op">=</span> <span class="va">template</span>.<span class="va">content</span>.<span class="at">cloneNode</span>(<span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-7" title="7">  <span class="kw">const</span> app <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;app&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-8" title="8">  <span class="va">app</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-9" title="9">  <span class="va">app</span>.<span class="at">appendChild</span>(view)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="op">}</span></a></code></pre></div>
+<p>Di sini kami memetakan laluan yang kami nyatakan ke templat yang sesuai. Anda boleh mencubanya agar berfungsi dengan betul dengan menukar URL secara manual di penyemak imbas anda.</p>
+<p>✅ Apa yang berlaku jika anda memasukkan jalan yang tidak diketahui dalam URL? Bagaimana kita dapat menyelesaikannya?</p>
+<h2 id="tambahkan-navigasi">Tambahkan navigasi</h2>
+<p>Langkah seterusnya untuk aplikasi kita adalah menambahkan kemungkinan untuk menavigasi antara halaman tanpa perlu mengubah URL secara manual. Ini menunjukkan dua perkara:</p>
+<ol type="1">
+<li>Mengemas kini URL semasa</li>
+<li>Mengemas kini templat yang dipaparkan berdasarkan URL baru</li>
+</ol>
+<p>Kami sudah mengurus bahagian kedua dengan fungsi <code>updateRoute</code>, jadi kami harus memikirkan cara mengemas kini URL semasa.</p>
+<p>Kita mesti menggunakan JavaScript dan lebih khusus lagi <a href="https://developer.mozilla.org/docs/Web/API/History/pushState"><code>history.pushState</code></a> yang memungkinkan untuk mengemas kini URL dan buat entri baru dalam sejarah penyemakan imbas, tanpa memuatkan semula HTML.</p>
+<blockquote>
+<p>Catatan: Walaupun elemen anchor HTML <a href="https://developer.mozilla.org/docs/Web/HTML/Element/a"><code>&lt;a href&gt;</code></a> dapat digunakan sendiri untuk membuat hyperlink ke URL yang berbeza, ini akan menjadikan penyemak imbas memuat semula HTML secara lalai. Adalah perlu untuk mencegah tingkah laku ini ketika menangani routing dengan javascript khusus, menggunakan fungsi preventDefault () pada peristiwa klik.</p>
+</blockquote>
+<h3 id="tugas-3">Tugas</h3>
+<p>Mari buat fungsi baru yang dapat kita gunakan untuk menavigasi di aplikasi kita:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">navigate</span>(path) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="va">window</span>.<span class="va">history</span>.<span class="at">pushState</span>(<span class="op">{},</span> path<span class="op">,</span> <span class="va">window</span>.<span class="va">location</span>.<span class="at">origin</span> <span class="op">+</span> path)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="at">updateRoute</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Kaedah ini terlebih dahulu mengemas kini URL semasa berdasarkan jalan yang diberikan, kemudian mengemas kini templat. Properti <code>window.location.origin</code> mengembalikan akar URL, yang membolehkan kami membina semula URL lengkap dari jalan yang ditentukan.</p>
+<p>Sekarang kita mempunyai fungsi ini, kita dapat mengatasi masalah yang kita ada jika jalan tidak sesuai dengan rute yang ditentukan. Kami akan mengubah fungsi <code>updateRoute</code> dengan menambahkan fallback ke salah satu laluan yang ada jika kami tidak dapat mencari yang sesuai.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">function</span> <span class="at">updateRoute</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="kw">const</span> path <span class="op">=</span> <span class="va">window</span>.<span class="va">location</span>.<span class="at">pathname</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="kw">const</span> route <span class="op">=</span> routes[path]<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-4" title="4"></a>
+<a class="sourceLine" id="cb13-5" title="5">  <span class="cf">if</span> (<span class="op">!</span>route) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-6" title="6">    <span class="cf">return</span> <span class="at">navigate</span>(<span class="st">&#39;/login&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-8" title="8"></a>
+<a class="sourceLine" id="cb13-9" title="9">  ...</a></code></pre></div>
+<p>Sekiranya laluan tidak dapat dijumpai, kami sekarang akan mengalihkan ke halaman <code>login</code>.</p>
+<p>Sekarang mari kita buat fungsi untuk mendapatkan URL apabila pautan diklik, dan untuk mengelakkan tingkah laku pautan lalai penyemak imbas:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">function</span> <span class="at">onLinkClick</span>(event) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="va">event</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="at">navigate</span>(<span class="va">event</span>.<span class="va">target</span>.<span class="at">href</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Mari lengkapkan sistem navigasi dengan menambahkan pengikatan pada pautan <em>Login</em> dan <em>Logout</em> kami dalam HTML.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/dashboard&quot;</span><span class="ot"> onclick=</span><span class="st">&quot;onLinkClick()&quot;</span><span class="kw">&gt;</span>Login<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb15-2" title="2">...</a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/login&quot;</span><span class="ot"> onclick=</span><span class="st">&quot;onLinkClick()&quot;</span><span class="kw">&gt;</span>Logout<span class="kw">&lt;/a&gt;</span></a></code></pre></div>
+<p>Menggunakan atribut <a href="https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onclick"><code>onclick</code></a> mengikat peristiwa<code>klik</code> ke kod JavaScript, di sini panggilan ke <code>navigasi()</code>fungsi.</p>
+<p>Cuba klik pada pautan-pautan ini, kini anda seharusnya dapat menavigasi antara pelbagai skrin aplikasi anda.</p>
+<p>✅ Kaedah <code>history.pushState</code> adalah sebahagian daripada standard HTML5 dan dilaksanakan di <a href="https://caniuse.com/?search=pushState">semua penyemak imbas moden</a>. Sekiranya anda membuat aplikasi web untuk penyemak imbas yang lebih lama, ada helah yang dapat Anda gunakan sebagai ganti API ini: menggunakan <a href="https://en.wikipedia.org/wiki/URI_fragment">hash (<code>#</code>)</a> sebelum jalan yang dapat anda laksanakan perutean yang berfungsi dengan navigasi jangkar biasa dan tidak memuat semula halaman, kerana tujuannya adalah untuk membuat pautan dalaman dalam halaman.</p>
+<h2 id="mengendalikan-butang-belakang-dan-hadapan-penyemak-imbas">Mengendalikan butang belakang dan hadapan penyemak imbas</h2>
+<p>Menggunakan <code>history.pushState</code> membuat entri baru dalam sejarah navigasi penyemak imbas. Anda boleh memastikan bahawa dengan menahan * butang belakang * penyemak imbas anda, ia akan memaparkan sesuatu seperti ini:</p>
+<figure>
+<img src="../history.png" alt="Tangkapan skrin sejarah navigasi" /><figcaption>Tangkapan skrin sejarah navigasi</figcaption>
+</figure>
+<p>Sekiranya anda cuba mengklik butang kembali beberapa kali, anda akan melihat bahawa URL semasa berubah dan sejarahnya dikemas kini, tetapi templat yang sama terus dipaparkan.</p>
+<p>Ini kerana tidak tahu bahawa kita perlu memanggil <code>updateRoute()</code> setiap kali sejarah berubah. Sekiranya anda melihat dokumentasi <a href="https://developer.mozilla.org/docs/Web/API/History/pushState"><code>history.pushState</code></a>, anda dapat melihat bahawa jika keadaan berubah - yang bermaksud bahawa kami berpindah ke URL yang berbeza - peristiwa <a href="https://developer.mozilla.org/docs/Web/API/Window/popstate_event"><code>popstate</code></a> dicetuskan. Kami akan menggunakannya untuk menyelesaikan masalah itu.</p>
+<h3 id="tugas-4">Tugas</h3>
+<p>Untuk memastikan templat yang ditampilkan diperbaharui ketika sejarah penyemak imbas berubah, kami akan melampirkan fungsi baru yang memanggil <code>updateRoute ()</code>. Kami akan melakukannya di bahagian bawah fail <code>app.js</code> kami:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="va">window</span>.<span class="at">onpopstate</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="at">updateRoute</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="at">updateRoute</span>()<span class="op">;</span></a></code></pre></div>
+<blockquote>
+<p>Catatan: kami menggunakan <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions">fungsi panah</a> di sini untuk menyatakan pengendali acara <code>popstate</code> kami untuk kesimpulan, fungsi biasa akan berfungsi sama.</p>
+</blockquote>
+<p>Berikut adalah video penyegaran mengenai fungsi anak panah:</p>
+<p><a href="https://youtube.com/watch?v=OP6eEbOj2sc" title="Fungsi Anak Panah"><img src="https://img.youtube.com/vi/OP6eEbOj2sc/0.jpg" alt="Fungsi Anak Panah" /></a></p>
+<blockquote>
+<p>Klik gambar di atas untuk video mengenai fungsi anak panah.</p>
+</blockquote>
+<p>Sekarang cuba gunakan butang belakang dan depan penyemak imbas anda, dan periksa bahawa laluan yang dipaparkan dikemas kini dengan betul kali ini.</p>
+<hr />
+<h2 id="cabaran">🚀 Cabaran</h2>
+<p>Tambahkan templat dan laluan baru untuk halaman ketiga yang menunjukkan kredit untuk aplikasi ini.</p>
+<h2 id="kuiz-pasca-kuliah">Kuiz Pasca Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/42">Kuiz Pasca Kuliah</a></p>
+<h2 id="mengkaji-belajar-sendiri">Mengkaji &amp; Belajar Sendiri</h2>
+<p>Perutean adalah salah satu bahagian pengembangan web yang sangat mengejutkan, terutama ketika web beralih dari tingkah laku penyegaran halaman ke penyegaran halaman Aplikasi Halaman Tunggal. Baca sedikit mengenai <a href="https://docs.microsoft.com/azure/static-web-apps/routes?WT.mc_id=academic-13441-cxa">bagaimana perkhidmatan Aplikasi Web Statik Azure</a> menangani penghalaan . Bolehkah anda menjelaskan mengapa beberapa keputusan yang dijelaskan pada dokumen itu diperlukan?</p>
+<h2 id="tugasan">Tugasan</h2>
+<p><a href="assignment.ms.md">Tingkatkan penghalaan</a></p>
+</body>
+</html>

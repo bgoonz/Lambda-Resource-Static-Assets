@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.it</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="progetto-terrario-parte-1-introduzione-allhtml">Progetto Terrario Parte 1: Introduzione all’HTML</h1>
+<p><img src="/sketchnotes/webdev101-html.png" alt="Introduzione all’HTML" /> &gt; Sketchnote di <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="quiz-pre-lezione">Quiz Pre-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/15?loc=it">Quiz Pre-Lezione</a></p>
+<h3 id="introduzione">Introduzione</h3>
+<p>HTML, o HyperText Markup Language, è lo “scheletro” del web. Se CSS “veste” il proprio HTML e JavaScript lo porta in vita, HTML è il corpo della propria applicazione web. Anche La sintassi dell’HTML riflette questa idea, poiché include i tag “head” (testa), “body” (corpo) e “footer” (piè di pagina).</p>
+<p>In questa lezione si userà l’HTML per impaginare lo “scheletro” dell’interfaccia del terrario virtuale. Avrà un titolo e tre colonne: una destra e una sinistra dove vivono le piante trascinabili e un’area centrale che sarà il vero terrario dall’aspetto di un vaso di vetro. Alla fine di questa lezione, si sarà in grado di vedere le piante nelle colonne, ma l’interfaccia apparirà un po’ strana; non deve preoccupare, nella prossima sezione si aggiungeranno stili CSS all’interfaccia per renderla migliore.</p>
+<h3 id="attività">Attività</h3>
+<p>Sul proprio computer, creare una cartella chiamata “terrarium” e al suo interno un file chiamato “index.html”. Puoi farlo in Visual Studio Code dopo aver creato la cartella del terrario aprendo una nuova finestra di VS Code, facendo clic su “apri cartella” e accedendo alla nuova cartella. Fare clic sul piccolo pulsante “file” nel riquadro Explorer e creare il nuovo file:</p>
+<figure>
+<img src="../images/vs-code-index.png" alt="explorer in VS Code" /><figcaption>explorer in VS Code</figcaption>
+</figure>
+<p>Oppure</p>
+<p>Usare questi comandi sul proprio git bash:</p>
+<ul>
+<li><code>mkdir terrarium</code></li>
+<li><code>cd terrarium</code></li>
+<li><code>touch index.html</code></li>
+<li><code>code index.html</code> oppure <code>nano index.html</code></li>
+</ul>
+<blockquote>
+<p>I file index.html indicano a un browser che è il file predefinito in una cartella; URL come <code>https://anysite.com/test</code> potrebbero essere creati utilizzando una struttura di cartelle che includa una cartella chiamata <code>test</code> con <code>index.html</code> al suo interno; <code>index.html</code> non deve essere visualizzato in un URL.</p>
+</blockquote>
+<hr />
+<h2 id="i-tag-doctype-e-html">I tag DocType e html</h2>
+<p>La prima riga di un file HTML è il suo doctype. È un po’ sorprendente che sia necessario avere questa riga all’inizio del file, ma indica ai browser meno recenti che il browser deve eseguire il rendering della pagina in una modalità standard, seguendo le specifiche html correnti.</p>
+<blockquote>
+<p>Suggerimento: in VS Code, si può passare il mouse su un tag e ottenere informazioni sul suo utilizzo dalle guide di riferimento MDN.</p>
+</blockquote>
+<p>La seconda riga dovrebbe essere il tag di apertura del tag <code>&lt;html&gt;</code>, seguito subito dal suo tag di chiusura <code>&lt;/html&gt;</code>. Questi tag sono gli elementi radice dell’interfaccia.</p>
+<h3 id="attività-1">Attività</h3>
+<p>Aggiungere queste righe all’inizio del file <code>index.html</code> :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">&lt;html&gt;&lt;/html&gt;</span></a></code></pre></div>
+<p>✅ Ci sono alcune modalità differenti che possono essere determinate impostando DocType con una stringa di query: <a href="https://developer.mozilla.org/docs/Web/HTML/Quirks_Mode_and_Standards_Mode">Quirks Mode e Standards Mode</a>. Queste modalità supportano browser molto vecchi che non vengono normalmente utilizzati al giorno d’oggi (Netscape Navigator 4 e Internet Explorer 5). Ci si può attenere alla dichiarazione doctype standard.</p>
+<hr />
+<h2 id="la-testa-del-documento-tag-head">La “testa” del documento (tag head)</h2>
+<p>L’area “head” del documento HTML include informazioni cruciali sulla propria pagina web, note anche come <a href="https://developer.mozilla.org/docs/Web/HTML/Element/meta">metadati</a>. In questo caso, si dice al server web a cui verrà inviata questa pagina per essere renderizzata, queste quattro cose:</p>
+<ul>
+<li>il titolo della pagina</li>
+<li>metadati della pagina tra cui:
+<ul>
+<li>l’“insieme di caratteri”, che indica quale codifica dei caratteri viene utilizzata nella pagina</li>
+<li>informazioni sul browser, incluso <code>x-ua-compatibile</code> che indica che il browser IE=edge è supportato</li>
+<li>informazioni su come dovrebbe comportarsi il viewport quando viene caricato. L’impostazione della visualizzazione (viewport) in modo che abbia una scala iniziale di 1 controlla il livello di zoom quando la pagina viene caricata per la prima volta.</li>
+</ul></li>
+</ul>
+<h3 id="attività-2">Attività</h3>
+<p>Aggiungere un blocco “head” al proprio documento tra i tag di apertura e di chiusura <code>&lt;html&gt;</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="kw">&lt;title&gt;</span>Benvenuti al mio Terrario Virtuale<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;X-UA-Compatible&quot;</span><span class="ot"> content=</span><span class="st">&quot;IE=edge&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content=</span><span class="st">&quot;width=device-width, initial-scale=1&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">&lt;/head&gt;</span></a></code></pre></div>
+<p>✅ Cosa accadrebbe se il meta tag viewport viene impostato come questo: <code>&lt;meta name="viewport" content="width=600"&gt;</code>? Ulteriori informazioni sul <a href="https://developer.mozilla.org/docs/Mozilla/Mobile/Viewport_meta_tag">viewport</a>.</p>
+<hr />
+<h2 id="il-corpo-body-del-documento">Il corpo (<code>body</code>) del documento</h2>
+<h3 id="etichette-html">Etichette HTML</h3>
+<p>In HTML, si aggiungono tag al proprio file .html per creare elementi di una pagina web. Ogni tag di solito ha un tag di apertura e chiusura, come questo: <code>&lt;p&gt;ciao&lt;/p&gt;</code> per indicare un paragrafo. Il corpo dell’interfaccia si crea aggiungendo una coppia di tag <code>&lt;body&gt;</code> all’interno della coppia di tag <code>&lt;html&gt;</code>; il markup (marcatura) ora ha questo aspetto:</p>
+<h3 id="attività-3">Attività</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">        <span class="kw">&lt;title&gt;</span>Benvenuti al mio Terrario Virtuale<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">        <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">        <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;X-UA-Compatible&quot;</span><span class="ot"> content=</span><span class="st">&quot;IE=edge&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">        <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content=</span><span class="st">&quot;width=device-width, initial-scale=1&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">    <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="kw">&lt;body&gt;&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>Ora è possibile iniziare a costruire la propria pagina. Normalmente, si usano i tag <code>&lt;div&gt;</code> per creare elementi separati in una pagina. Verranno creati una serie di elementi <code>&lt;div&gt;</code> che conterranno immagini.</p>
+<h3 id="immagini">Immagini</h3>
+<p>Un tag html che non necessita di un tag di chiusura è il tag <code>&lt;img&gt;</code>, perché ha un elemento <code>src</code> che contiene tutte le informazioni di cui la pagina ha bisogno per eseguire il rendering dell’elemento.</p>
+<p>Creare una cartella nella propria app chiamata <code>images</code> e in quella aggiungere tutte le immagini nella <a href="../../solution/images">cartella del codice sorgente</a>; (ci sono 14 immagini di piante).</p>
+<h3 id="attività-4">Attività</h3>
+<p>Aggiungere quelle immagini di piante nelle due colonne tra i tag <code>&lt;body&gt;&lt;/body&gt;</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;page&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;left-container&quot;</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant1&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant1.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant2&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant2.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant3&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant3.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-13" title="13">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant4&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant4.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-14" title="14">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-15" title="15">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant5&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant5.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-17" title="17">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-18" title="18">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-19" title="19">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant6&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant6.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-20" title="20">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-21" title="21">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-22" title="22">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant7&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant7.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-23" title="23">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-24" title="24">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-25" title="25">    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;right-container&quot;</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-26" title="26">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-27" title="27">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant8&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant8.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-28" title="28">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-29" title="29">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-30" title="30">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant9&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant9.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-31" title="31">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-32" title="32">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-33" title="33">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant10&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant10.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-34" title="34">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-35" title="35">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-36" title="36">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant11&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant11.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-37" title="37">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-38" title="38">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-39" title="39">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant12&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant12.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-40" title="40">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-41" title="41">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-42" title="42">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant13&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant13.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-43" title="43">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-44" title="44">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-45" title="45">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant14&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant14.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-46" title="46">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-47" title="47">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-48" title="48"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<blockquote>
+<p>Nota: Span contro Div. I div sono considerati elementi “blocco” e gli span sono “in linea”. Cosa succederebbe se si trasformassero questi div in span?</p>
+</blockquote>
+<p>Con questo markup, le piante ora vengono visualizzate sullo schermo. Sembra piuttosto brutto, perché non hanno ancora lo stile utilizzando CSS e verrà fatto nella prossima lezione.</p>
+<p>Ogni immagine ha un testo alternativo che apparirà anche se non è possibile vedere o renderizzare un’immagine. Questo è un attributo importante da includere per l’accessibilità. Ulteriori informazioni sull’accessibilità nelle lezioni future; per ora, occorre ricordare che l’attributo alt fornisce informazioni alternative per un’immagine se un utente per qualche motivo non può visualizzarla (a causa di una connessione lenta, un errore nell’attributo src o se l’utente utilizza un lettore di schermo).</p>
+<p>✅ Si è notato che ogni immagine ha lo stesso tag alt? È una buona pratica? Se sì, perché? Se no, perché? Si può migliorare questo codice?</p>
+<hr />
+<h2 id="markup-semantico">Markup semantico</h2>
+<p>In generale, è preferibile utilizzare una “semantica” significativa quando si scrive HTML. Cosa significa? Significa che si utilizzano i tag HTML per rappresentare il tipo di dati o interazione per cui sono stati progettati. Ad esempio, il testo del titolo principale di una pagina dovrebbe utilizzare un tag <code>&lt;h1&gt;</code>.</p>
+<p>Aggiungere la seguente riga proprio sotto il tag di apertura <code>&lt;body&gt;</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;h1&gt;</span>My Terrarium<span class="kw">&lt;/h1&gt;</span></a></code></pre></div>
+<p>L’utilizzo di markup semantico tipo avere delle intestazioni come <code>&lt;h1&gt;</code> e il rendering di elenchi non ordinati come <code>&lt;ul&gt;</code> aiuta i lettori di schermo a navigare in una pagina. In generale, i pulsanti dovrebbero essere scritti come <code>&lt;button&gt;</code> e gli elenchi come <code>&lt;li&gt;</code>. Sebbene sia <em>possibile</em> utilizzare elementi con uno stile speciale <code>&lt;span&gt;</code> con gestori di clic per simulare i pulsanti, è meglio per gli utenti disabili utilizzare le tecnologie per determinare dove risiede un pulsante in una pagina e interagire con esso, se l’elemento appare come un pulsante. Per questo motivo, si dovebbe cercare di utilizzare il più possibile il markup semantico.</p>
+<p>✅ Si dia un’occhiata a un lettore di schermo e a <a href="https://www.youtube.com/watch?v=OUDV1gqs9GA">come interagisce con una pagina web</a>. Si riusce a capire perché avere un markup non semantico potrebbe frustrare l’utente?</p>
+<h2 id="il-terrario">Il terrario</h2>
+<p>L’ultima parte di questa interfaccia prevede la creazione di markup che verrà disegnato per creare un terrario.</p>
+<h3 id="attività-5">Attività:</h3>
+<p>Aggiungere questo markup sopra l’ultimo tag <code>&lt;/div&gt;</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;terrarium&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb6-2" title="2">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jar-top&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jar-walls&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jar-glossy-long&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jar-glossy-short&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb6-7" title="7">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;dirt&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jar-bottom&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<p>✅ Anche se questo markup è stato aggiunto allo schermo, non si assolutamente nulla di renderizzato. Perché?</p>
+<hr />
+<h2 id="sfida">🚀 Sfida</h2>
+<p>Ci sono alcuni “vecchi” selvaggi tag in HTML con cui è ancora divertente giocare, anche se non si dovrebero usare tag deprecati come <a href="https://developer.mozilla.org/docs/Web/HTML/Element#Obsolete_and_deprecated_elements">questi tag</a> nel proprio markup. Tuttavia, si può usare il vecchio tag <code>&lt;marquee&gt;</code> per far scorrere orizzontalmente il titolo h1? (se viene fatto, non dimenticarsi di rimuoverlo dopo)</p>
+<h2 id="quiz-post-lezione">Quiz Post-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/16?loc=it">Quiz post-lezione</a></p>
+<h2 id="revisione-e-auto-apprendimento">Revisione e Auto Apprendimento</h2>
+<p>L’HTML è il sistema di blocchi costitutivi “collaudato e vero” che ha contribuito a trasformare il Web in quello che è oggi. Imparare un po’ sulla sua storia studiando alcuni tag vecchi e nuovi. Si riusce a capire perché alcuni tag sono stati deprecati e altri aggiunti? Quali tag potrebbero essere introdotti in futuro?</p>
+<p>Ulteriori informazioni sulla creazione di siti per il Web e i dispositivi mobili in <a href="https://docs.microsoft.com/learn/modules/build-simple-website/?WT.mc_id=academic-13441-cxa">Microsoft Learn</a>.</p>
+<h2 id="compito">Compito</h2>
+<p><a href="assignment.it.md">Fare pratica con il proprio HTML: creare un modello di blog</a></p>
+</body>
+</html>

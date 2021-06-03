@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.it</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="creare-unapp-bancaria-parte-4-concetti-di-gestione-dello-stato">Creare un’App Bancaria Parte 4: Concetti di Gestione dello Stato</h1>
+<h2 id="quiz-pre-lezione">Quiz Pre-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/47?loc=it">Quiz Pre-Lezione</a></p>
+<h3 id="introduzione">Introduzione</h3>
+<p>Man mano che un’applicazione web cresce, diventa una sfida tenere traccia di tutti i flussi di dati. Quale codice riceve i dati, quale pagina li consuma, dove e quando deve essere aggiornata … è facile ritrovarsi con codice disordinato e difficile da mantenere. Ciò è particolarmente vero quando è necessario condividere dati tra diverse pagine della propria app, ad esempio i dati dell’utente. Il concetto di <em>gestione dello stato</em> è sempre esistito in tutti i tipi di programmi, ma poiché le app web continuano a crescere in complessità, ora è un punto chiave su cui riflettere durante lo sviluppo.</p>
+<p>In questa parte finale, si esaminerà l’app creata per ripensare a come viene gestito lo stato, consentendo il supporto per l’aggiornamento del browser in qualsiasi momento e persistendo i dati tra le sessioni utente.</p>
+<h3 id="prerequisito">Prerequisito</h3>
+<p>È necessario aver completato la parte di <a href="../../3-data/translations/README.it.md">recupero dei dati</a> dell’app web per questa lezione. È inoltre necessario installare <a href="https://nodejs.org">Node.js</a> ed <a href="../../api/translations/README.it.md">eseguire l’API del server</a> in locale in modo da ottenere i dati dell’account.</p>
+<p>Si può verificare che il server funzioni correttamente eseguendo questo comando in un terminale:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">curl</span> http://localhost:5000/api</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co"># -&gt; dovrebbe restituire &quot;Bank API v1.0.0&quot; come risultato</span></a></code></pre></div>
+<hr />
+<h2 id="ripensare-la-gestione-dello-stato">Ripensare la gestione dello stato</h2>
+<p>Nella <a href="../../3-data/translations/README.it.md">lezione precedente</a>, è stato introdotto un concetto basico di stato nell’app con la variabile globale <code>account</code> che contiene i dati bancari per l’utente attualmente connesso. Tuttavia, l’attuale implementazione presenta alcuni difetti. Si provi ad aggiornare la pagina quando ci si trova nella pagina del cruscotto. Che cosa accade?</p>
+<p>Ci sono 3 problemi con il codice corrente:</p>
+<ul>
+<li>Lo stato non è persistente, poiché un aggiornamento del browser riporta alla pagina di accesso.</li>
+<li>Esistono più funzioni che modificano lo stato. Man mano che l’app cresce, può essere difficile tenere traccia delle modifiche ed è facile dimenticare di aggiornarne una.</li>
+<li>Lo stato non viene cancellato, quando si fa clic su <em>Logout</em> i dati dell’account sono ancora lì anche se si è nella pagina di accesso.</li>
+</ul>
+<p>Si potrebbe aggiornare il codice per affrontare questi problemi uno per uno, ma creerebbe più duplicazioni del codice e renderebbe l’app più complessa e difficile da mantenere. Oppure ci si potrebbe fermare per qualche minuto e ripensare alla strategia.</p>
+<blockquote>
+<p>Quali problemi si stanno davvero cercando di risolvere qui?</p>
+</blockquote>
+<p>La <a href="https://en.wikipedia.org/wiki/State_management">gestione dello stato</a> consiste nel trovare un buon approccio per risolvere questi due problemi particolari:</p>
+<ul>
+<li>Come mantenere comprensibile il flusso di dati in un’app?</li>
+<li>Come mantenere i dati di stato sempre sincronizzati con l’interfaccia utente (e viceversa)?</li>
+</ul>
+<p>Una volta che ci si è preso cura di questi, qualsiasi altro problema che si potrebbe avere potrebbe essere già stato risolto o essere diventato più facile da sistemare. Ci sono molti possibili approcci per risolvere questi problemi, ma si andrà con una soluzione comune che consiste nel <strong>centralizzare i dati e le modalità per cambiarli</strong>. Il flusso di dati andrebbe così:</p>
+<figure>
+<img src="../images/data-flow.png" alt="Schema che mostra i flussi di dati tra HTML, azioni dell’utente e stato" /><figcaption>Schema che mostra i flussi di dati tra HTML, azioni dell’utente e stato</figcaption>
+</figure>
+<blockquote>
+<p>Non verrà trattata qui la parte in cui i dati attivano automaticamente l’aggiornamento della vista, poiché è legato a concetti più avanzati di <a href="https://en.wikipedia.org/wiki/Reactive_programming">programmazione reattiva</a>. È un buon argomento da sviluppare successivamente se si è pronti per un’immersione profonda.</p>
+</blockquote>
+<p>✅ Esistono molte librerie con approcci diversi alla gestione dello stato, <a href="https://redux.js.org">Redux</a> è un’opzione popolare. Dare un’occhiata ai concetti e ai modelli utilizzati spesso è un buon modo per apprendere quali potenziali problemi si potrebbe dover affrontare nelle grandi app web e come risolverli.</p>
+<h3 id="attività">Attività</h3>
+<p>Si inizierà con un po’ di refattorizzazione. Sostituire la dichiarazione di <code>account</code> :</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">let</span> account <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a></code></pre></div>
+<p>Con:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">let</span> state <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">account</span><span class="op">:</span> <span class="kw">null</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="op">};</span></a></code></pre></div>
+<p>L’idea è <em>centralizzare</em> tutti i dati dell’app in un unico oggetto di stato. Per ora c’è solo <code>account</code> nello stato, quindi non cambia molto, ma crea un percorso per le evoluzioni.</p>
+<p>Si devono anche aggiornare le funzioni che lo utilizzano. Nelle funzioni <code>register()</code> e <code>login()</code> , sostituire <code>account = ...</code> con <code>state.account = ...</code>;</p>
+<p>Nella parte superiore della funzione <code>updateDashboard()</code>, aggiungere questa riga:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> account <span class="op">=</span> <span class="va">state</span>.<span class="at">account</span><span class="op">;</span></a></code></pre></div>
+<p>Questa refattorizzazione di per sé non ha portato molti miglioramenti, ma l’idea era di gettare le basi per i prossimi cambiamenti.</p>
+<h2 id="tenere-traccia-delle-modifiche-ai-dati">Tenere traccia delle modifiche ai dati</h2>
+<p>Ora che si è impostato l’oggetto <code>state</code> per memorizzare i dati, il passaggio successivo è centralizzare gli aggiornamenti. L’obiettivo è rendere più facile tenere traccia di eventuali modifiche e quando si verificano.</p>
+<p>Per evitare che vengano apportate modifiche all’oggetto <code>state</code> è anche una buona pratica considerarlo <a href="https://en.wikipedia.org/wiki/Immutable_object"><em>immutabile</em></a>, nel senso che non può essere modificato affatto. Significa anche che si deve creare un nuovo oggetto di stato se si vuole cambiare qualcosa in esso. In questo modo, si crea una protezione <a href="https://it.wikipedia.org/wiki/Effetto_collaterale_(informatica)">dagli effetti collaterali</a> potenzialmente indesiderati e si aprono possibilità per nuove funzionalità nella propria app come l’implementazione di funzioni di annulla/ripristina, semplificando anche il debug. Ad esempio, è possibile registrare tutte le modifiche apportate allo stato e conservare una cronologia delle modifiche per comprendere l’origine di un bug.</p>
+<p>In JavaScript, si può utilizzare <a href="https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze"><code>Object.freeze()</code></a> per creare una versione immutabile di un oggetto. Se si prova ad apportare modifiche a un oggetto immutabile, verrà sollevata un’eccezione.</p>
+<p>✅ Si conosce la differenza tra un oggetto <em>shallow</em> e uno <em>deep</em> immutabile? Si può leggere <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze#What_is_shallow_freeze">qui</a> per saperne di più.</p>
+<h3 id="attività-1">Attività</h3>
+<p>Creare una nuova funzione <code>updateState()</code> :</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">function</span> <span class="at">updateState</span>(property<span class="op">,</span> newData) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  state <span class="op">=</span> <span class="va">Object</span>.<span class="at">freeze</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    ...<span class="at">state</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    [property]<span class="op">:</span> newData</a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>In questa funzione, si crea un nuovo oggetto di stato e si copiano i dati dallo stato precedente utilizzando l’ <a href="https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Operators/Spread_syntax"><em>operatore spread (<code>...</code>)</em></a>. Quindi si sovrascrive una particolare proprietà dell’oggetto state con i nuovi dati usando la <a href="https://developer.mozilla.org/docs/Web/JavaScript/Guide/Working_with_Objects#Objects_and_properties">notazione tra parentesi quadre</a> <code>[property]</code> per l’assegnazione. Infine, si blocca l’oggetto per impedire modifiche utilizzando <code>Object.freeze()</code>. Per ora si ha solo la proprietà <code>account</code> memorizzata nello stato, ma con questo approccio si possono aggiungere tutte le proprietà che servono nello stato.</p>
+<p>Si aggiornerà anche l’inizializzazione di <code>state</code> per assicurarsi che anche lo stato iniziale sia congelato:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">let</span> state <span class="op">=</span> <span class="va">Object</span>.<span class="at">freeze</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="dt">account</span><span class="op">:</span> <span class="kw">null</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Successivamente, aggiornare la funzione <code>register</code> sostituendo l’istruzione <code>state.account = result;</code> con:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="at">updateState</span>(<span class="st">&#39;account&#39;</span><span class="op">,</span> result)<span class="op">;</span></a></code></pre></div>
+<p>Fare lo stesso con la funzione <code>login</code> , sostituendo <code>state.account = data;</code> con:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">updateState</span>(<span class="st">&#39;account&#39;</span><span class="op">,</span> data)<span class="op">;</span></a></code></pre></div>
+<p>Si coglie ora l’occasione per risolvere il problema della mancata cancellazione dei dati dell’account quando l’utente fa clic su <em>Logout</em>.</p>
+<p>Creare una nuova funzione <code>logout ()</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">function</span> <span class="at">logout</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="at">updateState</span>(<span class="st">&#39;account&#39;</span><span class="op">,</span> <span class="kw">null</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="at">navigate</span>(<span class="st">&#39;/login&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>In <code>updateDashboard()</code>, sostituire il reindirizzamento <code>return navigate('/ login');</code> con <code>return logout()</code>;</p>
+<p>Provare a registrare un nuovo account, a disconnettersi e ad accedere nuovamente per verificare che tutto funzioni ancora correttamente.</p>
+<blockquote>
+<p>Suggerimento: si può dare un’occhiata a tutti i cambiamenti di stato aggiungendo <code>console.log (state)</code> nella parte inferiore di <code>updateState()</code> e aprendo la console negli strumenti di sviluppo del browser.</p>
+</blockquote>
+<h2 id="persistere-lo-stato">Persistere lo stato</h2>
+<p>La maggior parte delle app web deve conservare i dati per poter funzionare correttamente. Tutti i dati critici vengono solitamente archiviati su un database e accessibili tramite un’API del server, come nel nostro caso i dati dell’account utente. Ma a volte è anche interessante mantenere alcuni dati sulla parte client dell’app in esecuzione nel browser, per una migliore esperienza utente o per migliorare le prestazioni di caricamento.</p>
+<p>Quando si vuole mantenere i dati nel browser, ci sono alcune domande importanti da porsi:</p>
+<ul>
+<li><em>I dati sono sensibili?</em> Si dovrebbe evitare di memorizzare dati sensibili sul client, come le password degli utenti.</li>
+<li><em>Per quanto tempo si ha bisogno di conservare questi dati?</em> Si prevede di accedere a questi dati solo per la sessione corrente o si desidera che vengano memorizzati per sempre?</li>
+</ul>
+<p>Esistono diversi modi per archiviare le informazioni all’interno di un’app web, a seconda di ciò che si desidera ottenere. Ad esempio, si possono utilizzare gli URL per memorizzare una interrogazione di ricerca e renderla condivisibile tra gli utenti. Si possono anche utilizzare i <a href="https://developer.mozilla.org/it/docs/Web/HTTP/Cookies">cookie HTTP</a> se i dati devono essere condivisi con il server, come le informazioni di <a href="https://it.wikipedia.org/wiki/Autenticazione">autenticazione</a> .</p>
+<p>Un’altra opzione è utilizzare una delle tante API del browser per la memorizzazione dei dati. Due di loro sono particolarmente interessanti:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/it/docs/Web/API/Window/localStorage"><code>localStorage</code></a>: un <a href="https://en.wikipedia.org/wiki/Key%E2%80%93value_database">archivio chiave/valore</a> che consente di persistere i dati specifici del sito Web corrente in diverse sessioni. I dati salvati in esso non scadono mai.</li>
+<li><a href="https://developer.mozilla.org/it/docs/Web/API/Window/sessionStorage"><code>sessionStorage</code></a>: funziona come <code>localStorage</code> tranne per il fatto che i dati in esso memorizzati vengono cancellati al termine della sessione (alla chiusura del browser).</li>
+</ul>
+<p>Notare che entrambe queste API consentono solo di memorizzare <a href="https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/String">stringhe</a>. Se si desidera archiviare oggetti complessi, si dovranno serializzare nel formato <a href="https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/JSON">JSON</a> utilizzando <a href="https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"><code>JSON.stringify()</code></a>.</p>
+<p>✅ Se si desidera creare un’app web che non funziona con un server, è anche possibile creare un database sul client utilizzando l’ <a href="https://developer.mozilla.org/it/docs/Web/API/IndexedDB_API"><code>API</code> IndexedDB</a>. Questo è riservato a casi d’uso avanzati o se è necessario archiviare una quantità significativa di dati, poiché è più complesso da usare.</p>
+<h3 id="attività-2">Attività</h3>
+<p>Si vuole che gli utenti rimangano collegati fino a quando non fanno clic esplicitamente sul pulsante <em>Logout</em> , quindi si utilizzerà <code>localStorage</code> per memorizzare i dati dell’account. Per prima cosa, si definisce una chiave che verrà usata per memorizzare i dati.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">const</span> storageKey <span class="op">=</span> <span class="st">&#39;savedAccount&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>Aggiungere quindi questa riga alla fine della funzione <code>updateState()</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="va">localStorage</span>.<span class="at">setItem</span>(storageKey<span class="op">,</span> <span class="va">JSON</span>.<span class="at">stringify</span>(<span class="va">state</span>.<span class="at">account</span>))<span class="op">;</span></a></code></pre></div>
+<p>Con questo, i dati dell’account utente verranno mantenuti e sempre aggiornati poiché si sono centralizzati in precedenza tutti gli aggiornamenti di stato. È qui che si inizia a trarre vantaggio da tutte le rifattorizzazioni precedenti 🙂.</p>
+<p>Poiché i dati vengono salvati, ci si deve anche occupare di ripristinarli quando l’app viene caricata. Dato che si inizierà ad avere più codice di inizializzazione, potrebbe essere una buona idea creare una nuova funzione di inizializzazione <code>init</code> , che includa anche il codice precedente nella parte inferiore di <code>app.js</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">init</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="kw">const</span> savedAccount <span class="op">=</span> <span class="va">localStorage</span>.<span class="at">getItem</span>(storageKey)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="cf">if</span> (savedAccount) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-4" title="4">    <span class="at">updateState</span>(<span class="st">&#39;account&#39;</span><span class="op">,</span> <span class="va">JSON</span>.<span class="at">parse</span>(savedAccount))<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-6" title="6"></a>
+<a class="sourceLine" id="cb12-7" title="7">  <span class="co">// Il codice di inizializzazione precedente</span></a>
+<a class="sourceLine" id="cb12-8" title="8">  <span class="va">window</span>.<span class="at">onpopstate</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="at">updateRoute</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-9" title="9">  <span class="at">updateRoute</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-10" title="10"><span class="op">}</span></a>
+<a class="sourceLine" id="cb12-11" title="11"></a>
+<a class="sourceLine" id="cb12-12" title="12"><span class="at">init</span>()<span class="op">;</span></a></code></pre></div>
+<p>Qui si recuperano i dati salvati e, se ce ne sono, si aggiorna lo stato di conseguenza. È importante farlo <em>prima</em> di aggiornare la rotta, poiché potrebbe esserci del codice che si basa sullo stato durante l’aggiornamento della pagina.</p>
+<p>Si può anche rendere la pagina del <em>cruscotto</em> la pagina predefinita dell’applicazione, poiché ora si sta persistendo i dati dell’account. Se non vengono trovati dati, il cruscotto si occupa comunque di reindirizzare alla pagina di <em>Login</em> . In <code>updateRoute()</code>, sostituire le istruzioni di contingenza <code>return navigate ('/login');</code> con <code>return navigate ('/dashboard') ;</code>.</p>
+<p>Ora accedere all’app e provare ad aggiornare la pagina, si dovrebbe rimanere sul cruscotto. Con quell’aggiornamento ci si è presi cura di tutti i problemi iniziali…</p>
+<h2 id="aggiornare-i-dati">Aggiornare i dati</h2>
+<p>…Si potrebbe uttavia anche averne creato uno nuovo. Oops!</p>
+<p>Andare al cruscotto utilizzando l’account <code>test</code>, quindi eseguire questo comando su un terminale per creare una nuova transazione:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1"><span class="ex">curl</span> --request POST \</a>
+<a class="sourceLine" id="cb13-2" title="2">     --header <span class="st">&quot;Content-Type: application/json&quot;</span> \</a>
+<a class="sourceLine" id="cb13-3" title="3">     --data <span class="st">&quot;{ </span><span class="dt">\&quot;</span><span class="st">date</span><span class="dt">\&quot;</span><span class="st">: </span><span class="dt">\&quot;</span><span class="st">2020-07-24</span><span class="dt">\&quot;</span><span class="st">, </span><span class="dt">\&quot;</span><span class="st">object</span><span class="dt">\&quot;</span><span class="st">: </span><span class="dt">\&quot;</span><span class="st">Bought book</span><span class="dt">\&quot;</span><span class="st">, </span><span class="dt">\&quot;</span><span class="st">amount</span><span class="dt">\&quot;</span><span class="st">: -20 }&quot;</span> \</a>
+<a class="sourceLine" id="cb13-4" title="4">     http://localhost:5000/api/accounts/test/transactions</a></code></pre></div>
+<p>Provare subito ad aggiornare la pagina del cruscotto nel browser. Che cosa accade? Si vede la nuova transazione?</p>
+<p>Lo stato viene mantenuto indefinitamente grazie a <code>localStorage</code>, ma ciò significa anche che non viene aggiornato fino a quando non si esce dall’app e si accede di nuovo!</p>
+<p>Una possibile strategia per risolvere questo problema è ricaricare i dati dell’account ogni volta che viene caricato il cruscotto, per evitare lo stallo dei dati.</p>
+<h3 id="attività-3">Attività</h3>
+<p>Creare una nuova funzione <code>updateAccountData</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">updateAccountData</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="kw">const</span> account <span class="op">=</span> <span class="va">state</span>.<span class="at">account</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="cf">if</span> (<span class="op">!</span>account) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-4" title="4">    <span class="cf">return</span> <span class="at">logout</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb14-6" title="6"></a>
+<a class="sourceLine" id="cb14-7" title="7">  <span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> <span class="at">getAccount</span>(<span class="va">account</span>.<span class="at">user</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-8" title="8">  <span class="cf">if</span> (<span class="va">data</span>.<span class="at">error</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-9" title="9">    <span class="cf">return</span> <span class="at">logout</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb14-11" title="11"></a>
+<a class="sourceLine" id="cb14-12" title="12">  <span class="at">updateState</span>(<span class="st">&#39;account&#39;</span><span class="op">,</span> data)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-13" title="13"><span class="op">}</span></a></code></pre></div>
+<p>Questo metodo controlla che si sia attualmente collegati, quindi ricarica i dati dell’account dal server.</p>
+<p>Creare un’altra funzione chiamata <code>refresh</code>:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">refresh</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="cf">await</span> <span class="at">updateAccountData</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="at">updateDashboard</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Questa aggiorna i dati dell’account, quindi si occupa dell’aggiornamento dell’HTML della pagina del cruscotto. È ciò che si deve chiamare quando viene caricata la rotta del cruscotto (dashboard). Aggiornare la definizione del percorso con:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">const</span> routes <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="st">&#39;/login&#39;</span><span class="op">:</span> <span class="op">{</span> <span class="dt">templateId</span><span class="op">:</span> <span class="st">&#39;login&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb16-3" title="3">  <span class="st">&#39;/dashboard&#39;</span><span class="op">:</span> <span class="op">{</span> <span class="dt">templateId</span><span class="op">:</span> <span class="st">&#39;dashboard&#39;</span><span class="op">,</span> <span class="dt">init</span><span class="op">:</span> refresh <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="op">};</span></a></code></pre></div>
+<p>Provare a ricaricare il cruscotto ora, dovrebbe visualizzare i dati dell’account aggiornati.</p>
+<hr />
+<h2 id="sfida">🚀 Sfida</h2>
+<p>Ora che i dati dell’account vengono ricaricati ogni volta che viene caricato il cruscotto, si pensa che sia ancora necessario persistere <em>tutti i dati dell’account</em> ?</p>
+<p>Provare a lavorare insieme per cambiare ciò che viene salvato e caricato da <code>localStorage</code> per includere solo ciò che è assolutamente necessario per il funzionamento dell’app.</p>
+<h2 id="quiz-post-lezione">Quiz Post-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/48?loc=it">Quiz post-lezione</a></p>
+<h2 id="compito">Compito</h2>
+<p><a href="assignment.it.md">Implementare la finestra di dialogo “Aggiungi transazione”</a></p>
+<p>Ecco un esempio di risultato dopo aver completato il compito:</p>
+<figure>
+<img src="../images/dialog.png" alt="Videata che mostra un esempio di dialogo “Aggiungi transazione”" /><figcaption>Videata che mostra un esempio di dialogo “Aggiungi transazione”</figcaption>
+</figure>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.es</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p><img src="/sketchnotes/webdev101-js-functions.png" alt="JavaScript Basics - Functions" /> &gt; Sketchnote por <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h1 id="conceptos-básicos-de-javascript-funcións-y-funciones">Conceptos básicos de JavaScript: funcións y funciones</h1>
+<p><a href="https://youtube.com/watch?v=XgKsD6Zwvlc" title="funcións y funciones"><img src="https://img.youtube.com/vi/XgKsD6Zwvlc/0.jpg" alt="funcións y funciones" /></a></p>
+<h2 id="pre-lectura-prueba"><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/9">Pre-lectura prueba</a></h2>
+<p>Cuando necesite su código para realizar una tarea, utilizará un función o una función. Analicemos las diferencias.</p>
+<h2 id="funciones">Funciones</h2>
+<p>Una función es un bloque de código destinado a realizar una tarea. Usted crea una función usando la palabra clave <code>function</code>, un nombre, un conjunto de parámetros y la definición de la función también conocida como funciones <em>body</em>. La sintaxis de una función se parece a la siguiente:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">function</span> <span class="at">name</span>(param<span class="op">,</span> param2<span class="op">,</span> param3) <span class="op">{</span> <span class="co">// definición de función</span></a>
+<a class="sourceLine" id="cb1-2" title="2"> <span class="co">// definición de función/body</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="op">}</span></a></code></pre></div>
+<h2 id="funciónes-functions">Funciónes (Functions)</h2>
+<p>En esencia, una función es un bloque de código que podemos ejecutar bajo demanda. Esto es perfecto para escenarios en los que necesitamos realizar la misma tarea varias veces; en lugar de duplicar la lógica en varias ubicaciones (lo que dificultaría la actualización cuando llegue el momento), podemos centralizarla en una ubicación y llamarla cuando necesitemos que se realice la operación; ¡incluso puede llamar a funciones desde otras funciones!</p>
+<p>Igual de importante es la capacidad de nombrar una función. Si bien esto puede parecer trivial, el nombre proporciona una forma rápida de documentar una sección de código. Podría pensar en esto como una etiqueta en un botón. Si hago clic en un botón que dice “Cancelar temporizador”, sé que dejará de correr el reloj.</p>
+<h2 id="creating-and-calling-a-function">Creating and calling a function</h2>
+<p>La sintaxis de una función se parece a la siguiente:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">function</span> <span class="at">nameOfFunction</span>() <span class="op">{</span> <span class="co">// function definition</span></a>
+<a class="sourceLine" id="cb2-2" title="2"> <span class="co">// function definition/body</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Si quisiera crear una función para mostrar un saludo, podría verse así:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">displayGreeting</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;¡Hola, mundo!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Siempre que queremos llamar (o invocar) nuestra función, usamos el nombre de la función seguido de <code>()</code>. Vale la pena señalar el hecho de que nuestra función se puede definir antes o después de que decidamos llamarla; el compilador de JavaScript lo encontrará por usted.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">// calling our function</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="at">displayGreeting</span>()<span class="op">;</span></a></code></pre></div>
+<blockquote>
+<p><strong>NOTA:</strong> Existe un tipo especial de función conocida como <strong>método</strong>, que ya ha estado utilizando. De hecho, vimos esto en nuestra demostración anterior cuando usamos <code>console.log</code>. Lo que hace que un método sea diferente de una función es que un método está adjunto a un objeto (<code>consola</code> en nuestro ejemplo), mientras que una función es flotante libre. Escuchará que muchos desarrolladores usan estos términos indistintamente.</p>
+</blockquote>
+<h3 id="mejores-prácticas-de-función">Mejores prácticas de función</h3>
+<p>Hay algunas prácticas recomendadas que se deben tener en cuenta al crear funciones:</p>
+<ul>
+<li>Como siempre, use nombres descriptivos para que sepa lo que hará la función</li>
+<li>Usa <strong>camelCasing</strong> para combinar palabras</li>
+<li>Mantenga sus funciones enfocadas en una tarea específica</li>
+</ul>
+<h2 id="pasar-información-a-una-función">Pasar información a una función</h2>
+<p>Para que una función sea más reutilizable, a menudo querrá pasarle información. Si consideramos nuestro ejemplo de <code>displayGreeting</code> anterior, solo mostrará <strong>¡Hola, mundo!</strong>. No es la función más útil que uno podría crear. Si queremos hacerlo un poco más flexible, como permitir que alguien especifique el nombre de la persona a saludar, podemos agregar un <strong>parámetro</strong>. Un parámetro (también llamado a veces <strong>argumento</strong>), es información adicional enviada a una función.</p>
+<p>Los parámetros se enumeran en la parte de definición entre paréntesis y están separados por comas así:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">function</span> <span class="at">name</span>(param<span class="op">,</span> param2<span class="op">,</span> param3) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Podemos actualizar nuestro <code>displayGreeting</code> para aceptar un nombre y mostrarlo.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">function</span> <span class="at">displayGreeting</span>(name) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">const</span> message <span class="op">=</span> <span class="vs">`¡Hola, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">!`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(message)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Cuando queremos llamar a nuestra función y pasar el parámetro, lo especificamos entre paréntesis.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="at">displayGreeting</span>(<span class="st">&#39;Paco&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co">// dice &quot;¡Hola, Paco!&quot; cuando ejecutas el comando </span></a></code></pre></div>
+<h2 id="valores-predeterminados">Valores predeterminados</h2>
+<p>Podemos hacer que nuestra función sea aún más flexible agregando más parámetros. Pero, ¿y si no queremos que se especifiquen todos los valores? Siguiendo con nuestro ejemplo de saludo, podríamos dejar el nombre según sea necesario (necesitamos saber a quién saludamos), pero queremos permitir que el saludo en sí se personalice como desee. Si alguien no quiere personalizarlo, proporcionamos un valor predeterminado en su lugar. Para proporcionar un valor predeterminado a un parámetro, lo configuramos de la misma manera que configuramos un valor para una variable: <code>parameterName = 'defaultValue'</code>. Para ver un ejemplo completo:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">function</span> <span class="at">displayGreeting</span>(name<span class="op">,</span> salutation<span class="op">=</span><span class="st">&#39;Hola&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`</span><span class="sc">${</span>salutation<span class="sc">}</span><span class="vs">, </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Cuando llamamos a la función, podemos decidir si queremos establecer un valor para el “saludo”.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="at">displayGreeting</span>(<span class="st">&#39;Paco&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="co">// dice &quot;Hola, Paco&quot;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="at">displayGreeting</span>(<span class="st">&#39;Paco&#39;</span><span class="op">,</span> <span class="st">&#39;Hola&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co">// dice &quot;Hola, Paco&quot;</span></a></code></pre></div>
+<h3 id="parámetro">Parámetro</h3>
+<p>Los parámetros se enumeran en la parte de definición entre paréntesis y están separados por comas así:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1">(param<span class="op">,</span> param2<span class="op">,</span> param3)</a></code></pre></div>
+<h3 id="parámetro-1">Parámetro</h3>
+<p>Hasta ahora, la función que construimos siempre saldrá a la <a href="https://developer.mozilla.org/en-US/docs/Web/API/console">consola</a>. A veces, esto puede ser exactamente lo que estamos buscando, especialmente cuando creamos funciones que llamarán a otros servicios. Pero, ¿qué pasa si quiero crear una función auxiliar para realizar un cálculo y devolver el valor para poder usarlo en otro lugar?</p>
+<p>Podemos hacer esto usando un <strong>valor de retorno</strong>. La función devuelve un valor de retorno y se puede almacenar en una variable de la misma manera que podríamos almacenar un valor literal como una cadena o un número.</p>
+<p>Aquí define qué tarea debe realizar la función. Una función puede devolver algo o no. Si una función devuelve algo, entonces se usa la palabra clave <code>return</code>. La palabra clave <code>return</code> espera un valor o referencia de lo que se devuelve así:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="cf">return</span> myVariable<span class="op">;</span></a></code></pre></div>
+<p>Un ejemplo más completo puede verse así:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">add</span>(firstValue<span class="op">,</span> secondValue) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="kw">let</span> sum <span class="op">=</span> firstValue <span class="op">+</span> secondValue<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="cf">return</span> sum<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>En el código anterior, se devuelve la variable <code>sum</code>.</p>
+<h3 id="invocación">Invocación</h3>
+<p>Cuando <em>invocas</em> una función, la llamas con 0…N conjuntos de argumentos. Los valores de los argumentos se vinculan a los parámetros correspondientes a su posición. El función <code>add()</code> introducido se puede invocar de la siguiente manera:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">let</span> result <span class="op">=</span> <span class="at">add</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">3</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="va">console</span>.<span class="at">log</span>(result)<span class="op">;</span> <span class="co">// imprime 4</span></a></code></pre></div>
+<p>Los argumentos <code>1</code> y <code>3</code> están vinculados a los parámetros <code>firstValue</code> y <code>secondValue</code> debido al orden en el que se definen los parámetros.</p>
+<p>JavaScript es bastante flexible cuando se trata de invocaciones. No está obligado a proporcionar argumentos para todos los parámetros, el código se ejecutará de todos modos. Sin embargo, dependiendo de lo que le pase, es posible que el código no se comporte como se esperaba.</p>
+<blockquote>
+<p>Desafío, intente llamar al función <code>add()</code> así <code>add(1)</code> y vea qué sucede</p>
+</blockquote>
+<h3 id="valores-predeterminados-1">Valores predeterminados</h3>
+<p>También existe el concepto de _ valores predeterminados_ en los parámetros. Esto significa que si no se pasa un argumento a un parámetro durante la invocación, el parámetro asumirá el valor predeterminado. Considere el siguiente código usando un valor predeterminado:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">function</span> <span class="at">add5</span>(firstValue<span class="op">,</span> secondValue <span class="op">=</span> <span class="dv">5</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="cf">return</span> firstValue <span class="op">+</span> secondValue<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>La invocación de la función anterior podría verse así:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="at">add5</span> (<span class="dv">4</span>) <span class="co">// devuelve 9</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="at">add5</span> (<span class="dv">4</span><span class="op">,</span><span class="dv">2</span>) <span class="co">// devuelve 6</span></a></code></pre></div>
+<p>Cualquier parámetro con valores predeterminados debe estar al final de la lista de parámetros. La razón es que JavaScript intenta hacer coincidir argumentos con parámetros y los parámetros con valores predeterminados pueden omitirse en la invocación.</p>
+<p>🚀 Desafío:</p>
+<h2 id="post-lecture-prueba"><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/10">Post-lecture prueba</a></h2>
+<h2 id="revisión-y-autoestudio">Revisión y autoestudio</h2>
+<p>Vale la pena <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">leer un poco más sobre las funciones de flecha</a>, ya que se utilizan cada vez más en bases de código. Practique escribir una función y luego reescribirla con esta sintaxis.</p>
+<p><strong>Tarea</strong>: <a href="assignment.es.md">Práctica de tipos de datos</a></p>
+</body>
+</html>

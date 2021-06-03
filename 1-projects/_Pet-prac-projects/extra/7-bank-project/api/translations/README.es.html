@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.es</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="api-bancaria">API bancaria</h1>
+<blockquote>
+<p>API bancaria construida con <a href="https://nodejs.org">Node.js</a> + <a href="https://expressjs.com/">Express</a>.</p>
+</blockquote>
+<p>La API ya está creada para usted y no forma parte del ejercicio.</p>
+<p>Sin embargo, si está interesado en aprender cómo construir una API como esta, puede seguir esta serie de videos: https://aka.ms/NodeBeginner (los videos 17 a 21 cubren esta API exacta).</p>
+<p>También puede echar un vistazo a este tutorial interactivo: https://aka.ms/learn/express-api</p>
+<h2 id="ejecutando-el-servidor">Ejecutando el servidor</h2>
+<p>Asegúrese de tener <a href="https://nodejs.org">Node.js</a> instalado.</p>
+<ol type="1">
+<li>Git clone este repositorio.</li>
+<li>Abra una terminal en la carpeta <code>api</code>, luego ejecute <code>npm install</code>.</li>
+<li>Ejecute <code>npm start</code>.</li>
+</ol>
+<p>El servidor debería comenzar a escuchar en el puerto <code>5000</code>.</p>
+<blockquote>
+<p>Nota: todas las entradas se almacenan en la memoria y no se conservan, por lo que cuando se detiene el servidor, se pierden todos los datos.</p>
+</blockquote>
+<h2 id="api">API</h2>
+<table>
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ruta</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GET /api/</td>
+<td>Obtener información del servidor</td>
+</tr>
+<tr class="even">
+<td>POST /api/accounts/</td>
+<td>Cree una cuenta, por ejemplo: <code>{ user: 'Yohan', description: 'My budget', currency: 'EUR', balance: 100 }</code></td>
+</tr>
+<tr class="odd">
+<td>GET /api/accounts/:user</td>
+<td>Obtener todos los datos de la cuenta especificada</td>
+</tr>
+<tr class="even">
+<td>DELETE /api/accounts/:user</td>
+<td>Eliminar cuenta especificada</td>
+</tr>
+<tr class="odd">
+<td>POST /api/accounts/:user/transactions</td>
+<td>Agregar una transacción, por ejemplo: <code>{ date: '2020-07-23T18:25:43.511Z', object: 'Bought a book', amount: -20 }</code></td>
+</tr>
+<tr class="even">
+<td>DELETE /api/accounts/:user/transactions/:id</td>
+<td>Eliminar transacción especificada</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

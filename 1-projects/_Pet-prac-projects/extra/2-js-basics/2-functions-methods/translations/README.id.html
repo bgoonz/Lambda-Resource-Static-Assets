@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.id</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="dasar-dasar-javascript-metode-dan-fungsi">Dasar-dasar JavaScript: Metode dan Fungsi</h1>
+<figure>
+<img src="/sketchnotes/webdev101-js-functions.png" alt="Dasar-dasar JavaScript - Fungsi" /><figcaption>Dasar-dasar JavaScript - Fungsi</figcaption>
+</figure>
+<blockquote>
+<p>Catatan sketsa oleh <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+</blockquote>
+<h2 id="kuis-pra-kuliah">Kuis Pra-Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/9?loc=id">Kuis pra-Kuliah</a></p>
+<p>Ketika kita berpikir tentang menulis kode, kita selalu ingin memastikan kode kita dapat dibaca. Meskipun ini terdengar berlawanan dengan intuisi, kode dibaca lebih banyak kali daripada yang tertulis. Salah satu alat inti dalam kotak alat pengembang untuk memastikan kode yang dapat dipelihara adalah <strong>function (fungsi)</strong>.</p>
+<p><a href="https://youtube.com/watch?v=XgKsD6Zwvlc" title="Metode dan Fungsi"><img src="https://img.youtube.com/vi/XgKsD6Zwvlc/0.jpg" alt="Metode dan Fungsi" /></a></p>
+<h2 id="fungsi">Fungsi</h2>
+<p>Pada intinya, fungsi adalah sekumpulan kode yang dapat kita jalankan sesuai permintaan. Ini sempurna untuk skenario di mana kita perlu melakukan tugas yang sama beberapa kali; daripada menduplikasi logika di beberapa lokasi (yang akan menyulitkan pembaruan saat waktunya tiba), kita dapat memusatkannya di satu lokasi, dan memanggilnya kapan pun kita membutuhkan operasi dilakukan - Anda bahkan dapat memanggil fungsi dari fungsi lain!.</p>
+<p>Sama pentingnya adalah kemampuan untuk menamai suatu fungsi. Meskipun ini mungkin tampak sepele, nama tersebut memberikan cara cepat untuk mendokumentasikan bagian kode. Anda bisa menganggap ini sebagai label pada sebuah tombol. Jika saya mengklik tombol yang bertuliskan “Batalkan pengatur waktu”, saya tahu itu akan berhenti menjalankan jam.</p>
+<h2 id="membuat-dan-memanggil-suatu-fungsi">Membuat dan memanggil suatu fungsi</h2>
+<p>Sintaks untuk suatu fungsi terlihat seperti berikut:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">function</span> <span class="at">nameOfFunction</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="co">// definisi fungsi</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="co">// definisi fungsi/tubuh</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Jika saya ingin membuat fungsi untuk menampilkan salam, mungkin akan terlihat seperti ini:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">function</span> <span class="at">tampilkanSapaan</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Hello, world!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Kapanpun kita ingin memanggil (atau memanggil) fungsi kita, kita menggunakan nama fungsi yang diikuti dengan <code>()</code>. Perlu diperhatikan fakta bahwa fungsi kita dapat didefinisikan sebelum atau sesudah kita memutuskan untuk memanggilnya; kompilator JavaScript (JavaScript compiler) akan menemukannya untuk Anda.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">// memanggil fungsi kita</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="at">tampilkanSapaan</span>()<span class="op">;</span></a></code></pre></div>
+<blockquote>
+<p><strong>CATATAN:</strong> Ada jenis fungsi khusus yang dikenal sebagai <strong>method</strong>, yang telah Anda gunakan! Faktanya, kita melihat ini di demo kita di atas ketika kita menggunakan <code>console.log</code>. Apa yang membuat metode berbeda dari fungsi adalah metode dilampirkan ke objek (<code>konsol</code> dalam contoh kita), sementara fungsi mengambang bebas. Anda akan mendengar banyak pengembang menggunakan istilah ini secara bergantian.</p>
+</blockquote>
+<h3 id="praktik-terbaik-fungsi">Praktik terbaik fungsi</h3>
+<p>Ada beberapa praktik terbaik yang perlu diperhatikan saat membuat fungsi</p>
+<ul>
+<li>Seperti biasa, gunakan nama deskriptif agar Anda tahu fungsinya</li>
+<li>Gunakan <strong>camelCasing</strong> untuk menggabungkan kata-kata</li>
+<li>Jaga agar fungsi Anda tetap fokus pada tugas tertentu</li>
+</ul>
+<h2 id="memasukkan-informasi-ke-suatu-fungsi">Memasukkan informasi ke suatu fungsi</h2>
+<p>Agar suatu fungsi lebih dapat digunakan kembali, Anda sering kali ingin menyampaikan informasi ke dalamnya. Jika kita mempertimbangkan contoh <code>tampilkanSapaan</code> di atas, itu hanya akan menampilkan <strong>Halo, dunia!</strong>. Bukan fungsi paling berguna yang bisa dibuat seseorang. Jika kita ingin membuatnya sedikit lebih fleksibel, seperti mengizinkan seseorang untuk menentukan nama orang yang akan disapa, kita dapat menambahkan <strong>parameter</strong>. Parameter (juga terkadang disebut <strong>argumen</strong>), adalah informasi tambahan yang dikirim ke suatu fungsi.</p>
+<p>Parameter dicantumkan di bagian definisi dalam tanda kurung dan dipisahkan dengan koma seperti ini:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">function</span> <span class="at">nama</span>(param<span class="op">,</span> param2<span class="op">,</span> param3) <span class="op">{}</span></a></code></pre></div>
+<p>Kita dapat memperbarui <code>tampilkanSapaan</code> kita untuk menerima sebuah nama dan menampilkannya.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">function</span> <span class="at">tampilkanSapaan</span>(nama) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">const</span> pesan <span class="op">=</span> <span class="vs">`Hello, </span><span class="sc">${</span>nama<span class="sc">}</span><span class="vs">!`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(pesan)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Ketika kita ingin memanggil fungsi kita dan memasukkan parameternya, kita tentukan di dalam tanda kurung.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="at">tampilkanSapaan</span>(<span class="st">&quot;Christopher&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">// Menampilkan &quot;Hello, Christopher!&quot; ketika dijalankan</span></a></code></pre></div>
+<h2 id="nilai-dasar-nilai-default">Nilai dasar (Nilai Default)</h2>
+<p>Kita dapat membuat fungsi kita lebih fleksibel dengan menambahkan lebih banyak parameter. Tetapi bagaimana jika kita tidak ingin setiap nilai ditentukan? Sesuai dengan contoh sapaan kita, kita bisa membiarkan nama sesuai kebutuhan (kita perlu tahu siapa yang kita sapa), tapi kita ingin membiarkan sapaan itu sendiri disesuaikan sesuai keinginan. Jika seseorang tidak ingin menyesuaikannya, kita memberikan nilai default sebagai gantinya. Untuk memberikan nilai default ke parameter, kita menyetelnya dengan cara yang sama seperti kita menyetel nilai untuk variabel - <code>namaParameter = 'nilaiDefault'</code>. Berikut contoh lengkapnya:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">tampilkanSapaan</span>(nama<span class="op">,</span> salam <span class="op">=</span> <span class="st">&quot;Hello&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`</span><span class="sc">${</span>salam<span class="sc">}</span><span class="vs">, </span><span class="sc">${</span>nama<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Ketika kita memanggil fungsi tersebut, kita kemudian dapat memutuskan apakah kita ingin menetapkan nilai dari <code>salam</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">tampilkanSapaan</span>(<span class="st">&quot;Christopher&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co">// menampilkan &quot;Hello, Christopher&quot;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="at">tampilkanSapaan</span>(<span class="st">&quot;Christopher&quot;</span><span class="op">,</span> <span class="st">&quot;Hi&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">// menampilkan &quot;Hi, Christopher&quot;</span></a></code></pre></div>
+<h2 id="nilai-kembali-return-values">Nilai Kembali (Return values)</h2>
+<p>Hingga saat ini fungsi yang kita buat akan selalu menghasilkan <a href="https://developer.mozilla.org/docs/Web/API/console">konsol</a>. Terkadang ini persis seperti yang kita cari, terutama saat kita membuat fungsi yang akan memanggil layanan lain. Tetapi bagaimana jika saya ingin membuat fungsi pembantu untuk melakukan kalkulasi dan memberikan nilai kembali sehingga saya dapat menggunakannya di tempat lain?</p>
+<p>Kita bisa melakukan ini dengan menggunakan <strong>nilai kembali (return value)</strong>. Nilai kembali dikembalikan oleh fungsi, dan dapat disimpan dalam variabel sama seperti kita dapat menyimpan nilai literal seperti string atau angka.</p>
+<p>Jika suatu fungsi mengembalikan sesuatu maka kata kunci <code>return</code> digunakan. Kata kunci <code>return</code> mengharapkan nilai atau referensi dari apa yang dikembalikan seperti:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="cf">return</span> variabelSaya<span class="op">;</span></a></code></pre></div>
+<p>Kita bisa membuat fungsi untuk membuat pesan ucapan dan mengembalikan nilainya ke pemanggil</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">function</span> <span class="at">buatPesanSapaan</span>(nama) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="kw">const</span> pesan <span class="op">=</span> <span class="vs">`Hello, </span><span class="sc">${</span>nama<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="cf">return</span> pesan<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Saat memanggil fungsi ini, kita akan menyimpan nilai dalam variabel. Ini hampir sama dengan cara kita menetapkan variabel ke nilai statis (seperti <code>const nama = 'Christopher'</code>).</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">const</span> pesanSapaan <span class="op">=</span> <span class="at">buatPesanSapaan</span>(<span class="st">&quot;Christopher&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="fungsi-sebagai-parameter-untuk-fungsi">Fungsi sebagai parameter untuk fungsi</h2>
+<p>Saat Anda maju dalam karir pemrograman Anda, Anda akan menemukan fungsi yang menerima fungsi sebagai parameter. Trik rapi ini biasanya digunakan ketika kita tidak tahu kapan sesuatu akan terjadi atau selesai, tetapi kita tahu kita perlu melakukan operasi sebagai tanggapan.</p>
+<p>Sebagai contoh, pertimbangkan <a href="https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout">setTimeout</a>, yang memulai timer dan akan mengeksekusi kode setelah selesai. Kita perlu memberi tahu kode apa yang ingin kita jalankan. Kedengarannya seperti pekerjaan yang sempurna untuk suatu fungsi!</p>
+<p>Jika Anda menjalankan kode di bawah ini, setelah 3 detik Anda akan melihat pesan <strong>3 detik telah berlalu</strong>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">tampilkanSelesai</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;3 detik telah berlalu&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="co">// nilai timer dalam milidetik</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="at">setTimeout</span>(<span class="dv">3000</span><span class="op">,</span> tampilkanSelesai)<span class="op">;</span></a></code></pre></div>
+<h3 id="fungsi-anonim">Fungsi anonim</h3>
+<p>Mari kita lihat lagi apa yang telah kita bangun. Kita membuat fungsi dengan nama yang akan digunakan satu kali. Saat aplikasi kita menjadi lebih kompleks, kita dapat melihat diri kita sendiri membuat banyak fungsi yang hanya akan dipanggil sekali. Ini tidak ideal. Ternyata, kita tidak selalu perlu memberi nama!</p>
+<p>Saat kita mengirimkan fungsi sebagai parameter, kita dapat mengabaikan pembuatannya terlebih dahulu dan sebagai gantinya membuatnya sebagai bagian dari parameter. Kita menggunakan kata kunci <code>function</code> yang sama, tetapi kita membuatnya sebagai parameter.</p>
+<p>Mari tulis ulang kode di atas untuk menggunakan fungsi anonim:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="at">setTimeout</span>(<span class="dv">3000</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;3 detik telah berlalu&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Jika Anda menjalankan kode baru kita, Anda akan melihat kita mendapatkan hasil yang sama. Kita telah membuat fungsi, tetapi tidak harus memberinya nama!</p>
+<h3 id="fungsi-panah-gemuk">Fungsi panah gemuk</h3>
+<p>Satu pintasan yang umum di banyak bahasa pemrograman (termasuk JavaScript) adalah kemampuan untuk menggunakan apa yang disebut fungsi <strong>panah (arrow)</strong> atau <strong>panah gemuk (fat arrow)</strong>. Ini menggunakan indikator khusus <code>=&gt;</code>, yang terlihat seperti panah - demikian namanya! Dengan menggunakan <code>=&gt;</code>, kita dapat melewati kata kunci <code>function</code>.</p>
+<p>Mari kita tulis ulang kode kita sekali lagi untuk menggunakan fungsi panah gemuk:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="at">setTimeout</span>(<span class="dv">3000</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;3 detik telah berlalu&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="kapan-menggunakan-setiap-strategi">Kapan menggunakan setiap strategi</h3>
+<p>Anda sekarang telah melihat bahwa kita memiliki tiga cara untuk meneruskan fungsi sebagai parameter dan mungkin bertanya-tanya kapan harus menggunakannya. Jika Anda tahu Anda akan menggunakan fungsi tersebut lebih dari sekali, buatlah seperti biasa. Jika Anda akan menggunakannya hanya untuk satu lokasi, biasanya yang terbaik adalah menggunakan fungsi anonim. Apakah Anda menggunakan fungsi panah gemuk atau tidak atau sintaks <code>function</code> yang lebih tradisional terserah Anda, tetapi Anda akan melihat sebagian besar pengembang modern lebih memilih<code>=&gt;</code>.</p>
+<hr />
+<h2 id="tantangan">🚀 Tantangan</h2>
+<p>Bisakah Anda mengartikulasikan dalam satu kalimat perbedaan antara fungsi dan metode? Cobalah!</p>
+<h2 id="kuis-pasca-kuliah">Kuis Pasca-Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/10?loc=id">Kuis pasca-kuliah</a></p>
+<h2 id="review-belajar-mandiri">Review &amp; Belajar Mandiri</h2>
+<p>Layak <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions">membaca lebih banyak tentang fungsi panah</a>, karena semakin sering digunakan dalam basis kode. Berlatihlah menulis fungsi, lalu menulis ulang dengan sintaks ini.</p>
+<h2 id="tugas">Tugas</h2>
+<p><a href="./assignment.id.md">Bersenang-senang dengan Fungsi</a></p>
+</body>
+</html>

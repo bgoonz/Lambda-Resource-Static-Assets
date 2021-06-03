@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.id</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="dasar-dasar-github">Dasar-dasar GitHub</h1>
+<p>Pelajaran ini mencakup dasar-dasar GitHub, platform untuk menghosting dan mengelola perubahan pada kode Anda.</p>
+<p><img src="/sketchnotes/webdev101-github.png" alt="Dasar-dasar GitHub" /> &gt; Catatan sketsa oleh <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="kuis-pra-kuliah">Kuis Pra-Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/3?loc=id">Kuis pra-kuliah</a></p>
+<h2 id="pengantar">Pengantar</h2>
+<p>Dalam pelajaran ini, kami akan membahas:</p>
+<ul>
+<li>melacak pekerjaan yang Anda lakukan di mesin Anda</li>
+<li>mengerjakan proyek dengan orang lain</li>
+<li>bagaimana berkontribusi pada perangkat lunak sumber terbuka</li>
+</ul>
+<h3 id="prasyarat">Prasyarat</h3>
+<p>Sebelum memulai, Anda harus memeriksa apakah Git sudah diinstal. Di terminal ketik: <code>git --version</code></p>
+<p>Jika Git tidak diinstal, <a href="https://git-scm.com/downloads">unduh Git</a>. Kemudian, atur profil Git lokal Anda di terminal: <code>git config --global user.name "nama-anda"</code> <code>git config --global user.email "email-anda"</code></p>
+<p>Untuk memeriksa apakah Git sudah dikonfigurasi, Anda dapat mengetik: <code>git config --list</code></p>
+<p>Anda juga memerlukan akun GitHub, editor kode (seperti Visual Studio Code), dan Anda harus membuka terminal (atau: command prompt).</p>
+<p>Buka <a href="https://github.com/">github.com</a> dan buat akun jika Anda belum melakukannya, atau masuk dan isi profil Anda.</p>
+<p>✅ GitHub bukan satu-satunya repositori kode di dunia; ada yang lain, tapi GitHub adalah yang paling terkenal</p>
+<h3 id="persiapan">Persiapan</h3>
+<p>Anda akan memerlukan folder dengan proyek kode di komputer lokal Anda (laptop atau PC), dan repositori publik di GitHub, yang akan berfungsi sebagai contoh cara berkontribusi pada proyek orang lain.</p>
+<hr />
+<h2 id="manajemen-kode">Manajemen kode</h2>
+<p>Katakanlah Anda memiliki folder secara lokal dengan beberapa proyek kode dan Anda ingin mulai melacak kemajuan Anda menggunakan git - sistem kontrol versi. Beberapa orang membandingkan penggunaan git dengan menulis surat cinta untuk diri Anda di masa depan. Membaca pesan commit Anda beberapa hari atau minggu atau bulan kemudian, Anda akan dapat mengingat mengapa Anda membuat keputusan, atau “membatalkan” perubahan - yaitu, saat Anda menulis “pesan commit” yang baik.</p>
+<h3 id="tugas-membuat-repositori-dan-menyerahkan-kode">Tugas: Membuat repositori dan menyerahkan kode</h3>
+<ol type="1">
+<li><p><strong>Buat repositori di GitHub</strong>. Di GitHub.com, di tab repositories, atau dari kanan atas bilah navigasi, temukan tombol <strong>repo baru (new repo)</strong>.</p>
+<ol type="1">
+<li>Beri nama repositori (folder) Anda</li>
+<li>Pilih <strong>create repository</strong>.</li>
+</ol></li>
+<li><p><strong>Arahkan ke folder kerja Anda</strong>. Di terminal Anda, beralihlah ke folder (juga dikenal sebagai direktori) yang ingin Anda mulai lacak. Ketik:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="bu">cd</span> [nama folder anda]</a></code></pre></div></li>
+<li><p><strong>Inisialisasi repositori git</strong>. Dalam proyek Anda ketik:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">git</span> init</a></code></pre></div></li>
+<li><p><strong>Periksa status</strong>. Untuk memeriksa status repositori Anda ketik:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">git</span> status</a></code></pre></div>
+<p>hasilnya akan terlihat seperti ini:</p>
+<pre class="output"><code>Changes not staged for commit:
+(use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+(use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+     modified:   file.txt
+     modified:   file2.txt</code></pre>
+<p>Pada umunya perintah <code>git status</code> memberi tahu Anda hal-hal seperti file apa yang siap untuk <em>simpan</em> ke repo atau ada perubahan di dalamnya yang mungkin ingin Anda pertahankan.</p></li>
+<li><p><strong>Tambahkan file ke pelacakan</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">git</span> add .</a></code></pre></div>
+<p><code>git add</code> ditambah argumen <code>.</code> menunjukkan bahwa semua file dan perubahan Anda untuk pelacakan.</p></li>
+<li><p><strong>Mempertahankan pekerjaan Anda</strong>. Pada titik ini Anda telah menambahkan file ke apa yang disebut <em>staging area</em> (area pementasan). Tempat di mana Git melacak file Anda. Untuk membuat perubahan permanen Anda perlu <em>commit</em> (menyerahkan) file. Untuk melakukannya, Anda membuat <em>commit</em> dengan perintah <code>git commit</code>. Sebuah <em>commit</em> mewakili titik penyimpanan dalam riwayat repo Anda. Ketik berikut ini untuk membuat <em>commit</em>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">git</span> commit -m <span class="st">&quot;first commit&quot;</span></a></code></pre></div>
+<p>Ini menyerahkan (commit) semua file Anda, menambahkan pesan “first commit”. Untuk pesan commit di masa mendatang, Anda akan ingin lebih deskriptif dalam deskripsi Anda untuk menyampaikan jenis perubahan apa yang telah Anda buat.</p></li>
+<li><p><strong>Hubungkan repo Git lokal Anda dengan GitHub</strong>. Sebuah Repo Git bagus di mesin Anda tetapi pada titik tertentu Anda ingin memiliki cadangan file Anda di suatu tempat dan juga mengundang orang lain untuk bekerja dengan Anda di repo Anda. Salah satu tempat yang bagus untuk melakukannya adalah GitHub. Ingat kita sudah membuat repo di GitHub jadi satu-satunya hal yang perlu kita lakukan adalah menghubungkan repo Git lokal kita dengan GitHub. Perintah <code>git remote add</code> akan melakukan hal itu. Ketik perintah berikut:</p>
+<blockquote>
+<p>Catatan, sebelum Anda mengetik perintah, buka halaman repo GitHub Anda untuk menemukan URL repositori. Anda akan menggunakannya di perintah di bawah ini. Ganti <code>nama_repository</code> dengan URL GitHub Anda.</p>
+</blockquote>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">git</span> remote add origin https://github.com/username/nama_repository.git</a></code></pre></div>
+<p>Ini membuat <em>remote</em>, atau koneksi, bernama “origin” yang menunjuk ke repositori GitHub yang Anda buat sebelumnya.</p></li>
+<li><p><strong>Kirim file lokal ke GitHub</strong>. Sejauh ini Anda telah membuat <em>connection</em> (koneksi) antara repo lokal dan repo GitHub. Ayo kirim file-file ini ke GitHub dengan perintah berikut <code>git push</code>, seperti itu:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">git</span> push -u origin main</a></code></pre></div>
+<p>Ini mengirimkan komit Anda di cabang “main” Anda ke GitHub.</p></li>
+<li><p><strong>Untuk menambahkan lebih banyak perubahan</strong>. Jika Anda ingin terus membuat perubahan dan menerapkannya ke GitHub, Anda hanya perlu menggunakan tiga perintah berikut:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">git</span> add .</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="fu">git</span> commit -m <span class="st">&quot;ketik pesan komit Anda di sini&quot;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="fu">git</span> push</a></code></pre></div>
+<blockquote>
+<p>Tip, Anda mungkin juga ingin mengadopsi file <code>.gitignore</code> untuk mencegah file yang tidak ingin Anda lacak muncul di GitHub - seperti file catatan yang Anda simpan di folder yang sama tetapi tidak memiliki tempat di repositori publik. Anda dapat menemukan template untuk file <code>.gitignore</code> di <a href="github.com/github/gitignore">.gitignore templates</a>.</p>
+</blockquote></li>
+</ol>
+<h4 id="pesan-commit">Pesan commit</h4>
+<p>Baris subjek Git commit yang bagus melengkapi kalimat berikut: Jika diterapkan, komit ini akan <baris subjek Anda di sini></p>
+<p>Untuk subjek gunakan imperatif, bentuk waktu sekarang (present tense): “merubah” bukan “perubahan” atau “mengubah”. Seperti pada subjek, dalam tubuh (opsional) juga gunakan imperatif, bentuk waktu sekarang. Tubuh harus memasukkan motivasi untuk perubahan dan membandingkannya dengan perilaku sebelumnya. Anda menjelaskan <code>mengapa</code>, bukan <code>bagaimana</code>.</p>
+<p>✅ Luangkan beberapa menit untuk menjelajahi GitHub. Dapatkah Anda menemukan pesan commit yang sangat bagus? Dapatkah Anda menemukan yang sangat minim? Informasi apa yang menurut Anda paling penting dan berguna untuk disampaikan dalam pesan commit?</p>
+<h3 id="tugas-berkolaborasi">Tugas: Berkolaborasi</h3>
+<p>Alasan utama menempatkan sesuatu di GitHub adalah untuk memungkinkan kolaborasi dengan pengembang lain.</p>
+<h2 id="mengerjakan-proyek-dengan-orang-lain">Mengerjakan proyek dengan orang lain</h2>
+<p>Di repositori Anda, buka <code>Insights &gt; Community</code> untuk melihat bagaimana proyek Anda dibandingkan dengan standar komunitas yang direkomendasikan.</p>
+<p>Berikut beberapa hal yang dapat meningkatkan repo GitHub Anda: - <strong>Deskripsi</strong>. Apakah Anda menambahkan deskripsi untuk proyek Anda? - <strong>README</strong>. Apakah Anda menambahkan README? GitHub memberikan panduan untuk menulis <a href="https://docs.github.com/articles/about-readmes/">README</a>. - <strong>Panduan berkontribusi</strong>. Apakah project Anda memiliki <a href="https://docs.github.com/articles/setting-guidelines-for-repository-contributors/">pedoman kontribusi</a>, - <strong>Kode etik</strong>. sebuah <a href="https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/">Kode etik</a>, - <strong>Lisensi</strong>. Mungkin yang paling penting, sebuah <a href="https://docs.github.com/articles/adding-a-license-to-a-repository/">lisensi</a>?</p>
+<p>Semua sumber daya ini akan bermanfaat bagi anggota tim baru. Dan biasanya itu adalah jenis hal yang dilihat oleh kontributor baru bahkan sebelum melihat kode Anda, untuk mengetahui apakah proyek Anda adalah tempat yang tepat bagi mereka untuk menghabiskan waktu mereka..</p>
+<p>✅ File README, meskipun membutuhkan waktu untuk mempersiapkannya, sering kali diabaikan oleh pengelola yang sibuk. Dapatkah Anda menemukan contoh yang sangat deskriptif? Catatan: ada beberapa <a href="https://www.makeareadme.com/">alat untuk membantu membuat README yang baik</a> yang mungkin ingin Anda coba.</p>
+<h3 id="tugas-menggabungkan-beberapa-kode">Tugas: Menggabungkan beberapa kode</h3>
+<p>Dokumen kontribusi membantu orang berkontribusi pada proyek. Itu menjelaskan jenis kontribusi yang Anda cari dan bagaimana prosesnya bekerja. Kontributor harus melalui serangkaian langkah untuk dapat berkontribusi ke repo Anda di GitHub:</p>
+<ol type="1">
+<li><strong>Membagi (Forking) repo Anda</strong> Anda mungkin ingin orang <em>fork</em> proyek Anda. Forking berarti membuat replika repositori Anda di profil GitHub mereka.</li>
+<li><strong>Clone</strong>. Dari sana mereka akan mengkloning proyek tersebut ke mesin lokal mereka.</li>
+<li><strong>Buat cabang</strong>. Anda akan ingin meminta mereka untuk membuat <em>branch</em> (cabang) untuk pekerjaan mereka.</li>
+<li><strong>Fokuskan perubahan mereka pada satu area</strong>. Minta kontributor untuk memusatkan kontribusinya pada satu hal pada satu waktu - dengan begitu, peluang Anda untuk <em>menggabungkan</em> dalam pekerjaan mereka lebih tinggi. Bayangkan mereka menulis perbaikan bug, menambahkan fitur baru, dan memperbarui beberapa pengujian - bagaimana jika Anda ingin, atau hanya dapat mengimplementasikan 2 dari 3, atau 1 dari 3 perubahan?</li>
+</ol>
+<p>✅ Bayangkan situasi di mana cabang sangat penting untuk menulis dan mengirimkan kode yang baik. Kasus penggunaan apa yang dapat Anda pikirkan?</p>
+<blockquote>
+<p>Perhatikan, jadilah perubahan yang ingin Anda lihat di dunia, dan buat cabang untuk pekerjaan Anda juga. Komit apa pun yang Anda buat akan dilakukan di cabang tempat Anda “check out” saat ini. Gunakan <code>git status</code> untuk melihat cabang mana itu.</p>
+</blockquote>
+<p>Mari kita melalui alur kerja kontributor. Asumsikan kontributor sudah <em>forked (membagi)</em> dan <em>cloned (mengkloning)</em> repo sehingga mereka memiliki repo Git yang siap untuk dikerjakan, di mesin lokal mereka:</p>
+<ol type="1">
+<li><p><strong>Buat cabang</strong>. Gunakan perintah <code>git branch</code> untuk membuat cabang yang akan berisi perubahan yang dimaksudkan untuk dikontribusikan:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="fu">git</span> branch [nama-cabang]</a></code></pre></div></li>
+<li><p><strong>Beralih ke cabang kerja</strong>. Beralih ke cabang yang ditentukan dan perbarui direktori kerja dengan <code>git checkout</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"><span class="fu">git</span> checkout [nama-cabang]</a></code></pre></div></li>
+<li><p><strong>Bekerja</strong>. Pada titik ini Anda ingin menambahkan perubahan Anda. Jangan lupa untuk memberi tahu Git tentangnya dengan perintah berikut:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"><span class="fu">git</span> add .</a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="fu">git</span> commit -m <span class="st">&quot;perubahan saya&quot;</span></a></code></pre></div>
+<p>Pastikan Anda memberikan nama yang baik pada komitmen Anda, demi Anda dan juga pemelihara repo yang Anda bantu.</p></li>
+<li><p><strong>Gabungkan pekerjaan Anda dengan cabang <code>main</code></strong>. Pada titik tertentu Anda telah selesai bekerja dan Anda ingin menggabungkan pekerjaan Anda dengan pekerjaan yang ada di cabang <code>main</code>. Cabang <code>main</code> mungkin telah berubah sementara itu jadi pastikan Anda terlebih dahulu memperbaruinya ke yang terbaru dengan perintah berikut:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1"><span class="fu">git</span> checkout main</a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="fu">git</span> pull</a></code></pre></div>
+<p>Pada titik ini Anda ingin memastikan bahwa setiap <em>conflicts (konflik)</em>, situasi di mana Git tidak dapat dengan mudah <em>combine (menggabugkan)</em> perubahan terjadi di cabang kerja Anda. Oleh karena itu jalankan perintah berikut:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1"><span class="fu">git</span> checkout [nama-cabang]</a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="fu">git</span> merge main</a></code></pre></div>
+<p>Ini akan membawa semua perubahan dari <code>main</code> ke cabang Anda dan mudah-mudahan Anda bisa langsung melanjutkan. Jika tidak, VS Code akan memberi tahu Anda di mana Git <em>confused (bingung)</em> dan Anda hanya mengubah file yang terpengaruh untuk mengatakan konten mana yang paling akurat.</p></li>
+<li><p><strong>Kirim pekerjaan Anda ke GitHub</strong>. Mengirim pekerjaan Anda ke GitHub berarti dua hal. Mendorong cabang Anda ke repo Anda dan kemudian membuka PR, Pull Request (Permintaan Tarik).</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1"><span class="fu">git</span> push --set-upstream origin [nama-cabang]</a></code></pre></div>
+<p>Perintah di atas membuat cabang di repo bercabang Anda.</p></li>
+<li><p>****. Selanjutnya, Anda ingin membuka PR. Anda melakukannya dengan menavigasi ke repo bercabang di GitHub. Anda akan melihat indikasi di GitHub yang menanyakan apakah Anda ingin membuat PR baru, Anda mengkliknya dan Anda akan dibawa ke antarmuka di mana Anda dapat mengubah judul pesan commit, berikan deskripsi yang lebih sesuai. Sekarang pengelola repo Anda bercabang akan melihat PR ini dan <em>semoga</em> mereka akan menghargai dan <em>merge (menggabungkan)</em> PR Anda. Anda sekarang menjadi kontributor, hore :)</p></li>
+<li><p><strong>Membersihkan</strong>. Ini dianggap praktik yang baik untuk <em>membersihkan</em> setelah Anda. Anda ingin membersihkan cabang lokal dan cabang yang Anda dorong ke GitHub. Pertama mari kita hapus secara lokal dengan perintah berikut:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" title="1"><span class="fu">git</span> branch -d [nama-cabang]</a></code></pre></div>
+<p>Pastikan Anda membuka halaman GitHub untuk repo bercabang berikutnya dan hapus cabang jarak jauh yang baru saja Anda dorong ke sana.</p></li>
+</ol>
+<p><code>Pull request</code> sepertinya istilah yang konyol karena Anda benar-benar ingin mendorong perubahan Anda ke proyek. Namun pengelola (pemilik proyek) atau tim inti perlu mempertimbangkan perubahan Anda sebelum menggabungkannya dengan cabang “main” proyek, jadi Anda benar-benar meminta keputusan perubahan dari pengelola.</p>
+<p>Pull request adalah tempat untuk membandingkan dan mendiskusikan perbedaan yang diperkenalkan pada cabang dengan ulasan, komentar, pengujian terintegrasi, dan banyak lagi. Pull request yang baik mengikuti aturan yang kira-kira sama dengan pesan komit. Anda dapat menambahkan referensi ke masalah di pelacak masalah, ketika pekerjaan Anda, misalnya, memperbaiki masalah (issue). Ini dilakukan dengan menggunakan <code>#</code> diikuti dengan nomor masalah (issue) Anda. Misalnya <code>#97</code>.</p>
+<p>🤞Semoga semua pemeriksaan lulus dan pemilik proyek menggabungkan perubahan Anda ke dalam proyek🤞</p>
+<p>Perbarui cabang lokal Anda saat ini dengan semua komit baru dari cabang jarak jauh yang sesuai di GitHub:</p>
+<p><code>git pull</code></p>
+<h2 id="bagaimana-berkontribusi-pada-open-source">Bagaimana berkontribusi pada open source</h2>
+<p>Pertama, mari temukan repositori - atau: repo - di GitHub yang Anda minati dan yang ingin Anda beri kontribusi perubahan. Anda akan ingin menyalin konten ke mesin kami.</p>
+<p>✅ Cara yang baik untuk menemukan repositori ‘ramah-pemula’ adalah <a href="https://github.blog/2020-01-22-browse-good-first-issues-to-mulai-berkontribusi-ke-open-source/">menelusuri dengan tag ‘good-first-issue’</a>.</p>
+<figure>
+<img src="../images/clone_repo.png" alt="Salin repo secara lokal" /><figcaption>Salin repo secara lokal</figcaption>
+</figure>
+<p>Ada beberapa cara untuk menyalin kode. Salah satu caranya adalah dengan “menggandakan” konten repositori, menggunakan HTTPS, SSH, atau menggunakan GitHub CLI (Command Line Interface).</p>
+<p>Buka terminal Anda dan kloning repositori seperti ini: <code>git clone https://github.com/ProjectURL</code></p>
+<p>Untuk mengerjakan proyek, alihkan ke folder yang benar: <code>cd ProjectURL</code></p>
+<p>Anda juga dapat membuka seluruh proyek menggunakan <a href="https://github.com/features/codespaces">Codespaces</a>, editor kode / lingkungan pengembangan cloud GitHub yang disematkan, atau <a href="https://desktop.github.com/">GitHub Desktop</a>.</p>
+<p>Terakhir, Anda dapat mengunduh kode dalam folder zip.</p>
+<h3 id="beberapa-hal-menarik-lainnya-tentang-github">Beberapa hal menarik lainnya tentang GitHub</h3>
+<p>Anda dapat membintangi, menonton, dan / atau “fork (membagi)” repositori publik apa pun di GitHub. Anda dapat menemukan repositori berbintang di menu tarik-turun kanan atas. Ini seperti mem-bookmark, tetapi untuk kode.</p>
+<p>Proyek memiliki pelacak masalah, sebagian besar di GitHub di tab “Issues (Masalah)” kecuali dinyatakan lain, tempat orang-orang mendiskusikan masalah yang terkait dengan proyek. Dan tab Pull Requests (Permintaan Tarik) adalah tempat orang mendiskusikan dan meninjau perubahan yang sedang berlangsung.</p>
+<p>Proyek mungkin juga memiliki diskusi di forum, milis, atau saluran obrolan seperti Slack, Discord atau IRC.</p>
+<p>✅ Lihatlah repo GitHub baru Anda dan coba beberapa hal, seperti mengedit pengaturan, menambahkan informasi ke repo Anda, dan membuat proyek (seperti papan Kanban). Banyak yang bisa Anda lakukan!</p>
+<hr />
+<h2 id="tantangan">🚀 Tantangan</h2>
+<p>Sandingkan dengan seorang teman untuk mengerjakan kode satu sama lain. Buat proyek secara kolaboratif, buat kode, buat cabang, dan gabungkan perubahan.</p>
+<h2 id="kuis-pasca-kuliah">Kuis Pasca Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/4?loc=id">Kuis pasca kuliah</a></p>
+<h2 id="review-belajar-mandiri">Review &amp; Belajar Mandiri</h2>
+<p>Baca lebih lanjut tentang <a href="https://opensource.guide/how-to-contribute/#how-to-submit-a-contribution">berkontribusi pada software open source</a>.</p>
+<p><a href="https://training.github.com/downloads/github-git-cheat-sheet/">Git cheatsheet</a>.</p>
+<p>Latihan, latihan, latihan. GitHub memiliki jalur pembelajaran yang bagus yang tersedia melalui <a href="https://lab.github.com/">lab.github.com</a>:</p>
+<ul>
+<li><a href="https://lab.github.com/githubtraining/first-week-on-github">Minggu Pertama di GitHub</a></li>
+</ul>
+<p>Anda juga akan menemukan lab yang lebih canggih.</p>
+<h2 id="tugas">Tugas</h2>
+<p>Selesaikan <a href="https://lab.github.com/githubtraining/first-week-on-github">Minggu Pertama di lab pelatihan GitHub</a></p>
+</body>
+</html>

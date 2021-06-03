@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.zh-tw</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="建立太空遊戲-part-4加入雷射與碰撞偵測">建立太空遊戲 Part 4：加入雷射與碰撞偵測</h1>
+<h2 id="課前測驗">課前測驗</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/35?loc=zh_tw">課前測驗</a></p>
+<p>這堂課中，你會學會如何在 JavaScript 上發射雷射光！我們需要在遊戲中新增兩項東西：</p>
+<ul>
+<li><strong>雷射光</strong>：這束雷射會從英雄艦艇垂直往上移動</li>
+<li><strong>碰撞偵測</strong>，除了完成<em>射擊</em>這項能力，我們還會新增幾項遊戲規則：
+<ul>
+<li><strong>雷射擊中敵人</strong>：被雷射擊中的敵人會死亡</li>
+<li><strong>雷射擊中畫面最上方</strong>：雷射擊中到畫面最上方會消失</li>
+<li><strong>敵人碰觸到英雄</strong>：敵人與英雄在互相碰觸時皆會被摧毀</li>
+<li><strong>敵人碰觸到畫面最下方</strong>：敵人碰觸到畫面最下方時，該敵人與英雄會被摧毀</li>
+</ul></li>
+</ul>
+<p>簡單來說，你這位<em>英雄</em>需要在敵人到達畫面最下方之前，使用雷射擊毀它們。</p>
+<p>✅ 做點關於第一款電腦遊戲的研究。它有哪些功能？</p>
+<p>讓我們成為英雄吧！</p>
+<h2 id="碰撞偵測">碰撞偵測</h2>
+<p>我們該如何進行碰撞偵測呢？我們需要將遊戲物件視為移動中的矩形。你或許會問為什麼？這是因為，繪製遊戲物件的圖片皆為矩形：它有一組 <code>x</code> 與 <code>y</code>、<code>width</code> 與 <code>height</code>。</p>
+<p>若兩個矩形，舉例來說：英雄與敵人<em>相交</em>了，這就是一次碰撞。至於會發生什麼事取決於遊戲規則。要製作碰撞偵測，你需要這些步驟：</p>
+<ol type="1">
+<li><p>取得表達遊戲物件為矩形的方法，好比是：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="at">rectFromGameObject</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">top</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">y</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="dt">left</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">x</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="dt">bottom</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">y</span> <span class="op">+</span> <span class="kw">this</span>.<span class="at">height</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="dt">right</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">x</span> <span class="op">+</span> <span class="kw">this</span>.<span class="at">width</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="op">}</span></a></code></pre></div></li>
+<li><p>一個比較函式，這個函式可以如下：</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">function</span> <span class="at">intersectRect</span>(r1<span class="op">,</span> r2) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="cf">return</span> <span class="op">!</span>(<span class="va">r2</span>.<span class="at">left</span> <span class="op">&gt;</span> <span class="va">r1</span>.<span class="at">right</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="va">r2</span>.<span class="at">right</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">left</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="va">r2</span>.<span class="at">top</span> <span class="op">&gt;</span> <span class="va">r1</span>.<span class="at">bottom</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="va">r2</span>.<span class="at">bottom</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">top</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="op">}</span></a></code></pre></div></li>
+</ol>
+<h2 id="我們該如何摧毀物件">我們該如何摧毀物件</h2>
+<p>要摧毀遊戲物件，你需要讓遊戲知道，它不再需要在定期的遊戲迴圈中繪製該物件。一種方法是在情況發生時，我們可以標記遊戲物件為<em>死亡</em>，例如：</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">// 碰撞發生</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="va">enemy</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span></a></code></pre></div>
+<p>接著，你在重新繪製畫面前，排除掉這些<em>死亡</em>的物件，例如：</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1">gameObjects <span class="op">=</span> <span class="va">gameObject</span>.<span class="at">filter</span>(go <span class="kw">=&gt;</span> <span class="op">!</span><span class="va">go</span>.<span class="at">dead</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="我們該如何發射雷射">我們該如何發射雷射</h2>
+<p>發射雷射可以被視作回應一件鍵盤事件，並建立往特定方向移動的物件。因此我們需要列出下列步驟：</p>
+<ol type="1">
+<li><strong>建立雷射物件</strong>：從英雄艦艇的正上方，建立往畫面上方移動的物件。</li>
+<li><strong>連接該程式到鍵盤事件</strong>：我們需要在鍵盤中挑選一個按鍵，表達玩家發射雷射光。</li>
+<li>在按鍵按壓時，<strong>建立看起來像雷射光的遊戲物件</strong>。</li>
+</ol>
+<h2 id="雷射的冷卻時間">雷射的冷卻時間</h2>
+<p>在每次按壓按鍵時，好比說<em>空白鍵</em>，雷射光都需要被發射出來。為了讓遊戲不要在短時間內發射太多組雷射光，我們需要修正它。修法為建立<em>冷卻時間</em> ── 一個計時器確保雷射在一定期間內只能被發射一次。你可以藉由下列方式建立：</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">class</span> Cooldown <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="at">constructor</span>(time) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="kw">this</span>.<span class="at">cool</span> <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="at">setTimeout</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-5" title="5">      <span class="kw">this</span>.<span class="at">cool</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="op">},</span> time)</a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-9" title="9"></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="kw">class</span> Weapon <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-11" title="11">  constructor <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-12" title="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-13" title="13">  <span class="at">fire</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-14" title="14">    <span class="cf">if</span> (<span class="op">!</span><span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">||</span> <span class="kw">this</span>.<span class="va">cooldown</span>.<span class="at">cool</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-15" title="15">      <span class="co">// 產生雷射光</span></a>
+<a class="sourceLine" id="cb5-16" title="16">      <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">=</span> <span class="kw">new</span> <span class="at">Cooldown</span>(<span class="dv">500</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-17" title="17">    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-18" title="18">      <span class="co">// 什麼事都不做，冷卻中。</span></a>
+<a class="sourceLine" id="cb5-19" title="19">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-20" title="20">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-21" title="21"><span class="op">}</span></a></code></pre></div>
+<p>✅ 根據太空遊戲系列課程的第一章，回想關於<em>冷卻時間</em>。</p>
+<h2 id="建立目標">建立目標</h2>
+<p>你會利用上一堂課中現成的程式碼(你應該有整理並重構過)做延伸。使用來自 Part II 的檔案或是使用 <a href="../your-work">Part III - Starter</a>。</p>
+<blockquote>
+<p>要點：你需要使用的雷射光已經在資料夾中，並已匯入到程式碼中。</p>
+</blockquote>
+<ul>
+<li><strong>加入碰撞偵測</strong>，建立下列規則給各個雷射碰觸到東西的情況：
+<ol type="1">
+<li><strong>雷射擊中敵人</strong>：被雷射擊中的敵人會死亡</li>
+<li><strong>雷射擊中畫面最上方</strong>：雷射擊中到畫面最上方會消失</li>
+<li><strong>敵人碰觸到英雄</strong>：敵人與英雄在互相碰觸時皆會被摧毀</li>
+<li><strong>敵人碰觸到畫面最下方</strong>：敵人碰觸到畫面最下方時，該敵人與英雄會被摧毀</li>
+</ol></li>
+</ul>
+<h2 id="建議步驟">建議步驟</h2>
+<p>在你的 <code>your-work</code> 子資料夾中，確認檔案是否建立完成。它應該包括：</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="ex">-</span><span class="kw">|</span> <span class="ex">assets</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">enemyShip.png</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">player.png</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">laserRed.png</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="ex">-</span><span class="kw">|</span> <span class="ex">index.html</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="ex">-</span><span class="kw">|</span> <span class="ex">app.js</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="ex">-</span><span class="kw">|</span> <span class="ex">package.json</span></a></code></pre></div>
+<p>開始 <code>your_work</code> 資料夾中的專案，輸入：</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="bu">cd</span> your-work</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="ex">npm</span> start</a></code></pre></div>
+<p>這會啟動 HTTP 伺服器並發布網址 <code>http://localhost:5000</code>。開啟瀏覽器並輸入該網址，現在它能呈現英雄以及所有的敵人，但它們還沒辦法移動！</p>
+<h3 id="建立程式碼">建立程式碼</h3>
+<ol type="1">
+<li><p><strong>設定表達遊戲物件為矩形的方法，以處理碰撞狀況</strong> 下列的程式表達 <code>GameObject</code> 的矩形呈現方式。編輯你的 GameObject class：</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">rectFromGameObject</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">      <span class="dt">top</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">y</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-4" title="4">      <span class="dt">left</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">x</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-5" title="5">      <span class="dt">bottom</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">y</span> <span class="op">+</span> <span class="kw">this</span>.<span class="at">height</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6">      <span class="dt">right</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">x</span> <span class="op">+</span> <span class="kw">this</span>.<span class="at">width</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb8-8" title="8">  <span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>加入程式碼來檢查碰撞</strong> 這會是新函式來測試兩矩形是否相交：</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">function</span> <span class="at">intersectRect</span>(r1<span class="op">,</span> r2) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="cf">return</span> <span class="op">!</span>(</a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="va">r2</span>.<span class="at">left</span> <span class="op">&gt;</span> <span class="va">r1</span>.<span class="at">right</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="va">r2</span>.<span class="at">right</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">left</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb9-5" title="5">    <span class="va">r2</span>.<span class="at">top</span> <span class="op">&gt;</span> <span class="va">r1</span>.<span class="at">bottom</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="va">r2</span>.<span class="at">bottom</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">top</span></a>
+<a class="sourceLine" id="cb9-7" title="7">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="op">}</span></a></code></pre></div></li>
+<li><strong>加入雷射發射功能</strong>
+<ol type="1">
+<li><p><strong>加入鍵盤事件訊息</strong>。 <em>空白鍵</em>要能在英雄艦艇上方建立雷射光。加入三個常數到 Messages 物件中：</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"> KEY_EVENT_SPACE<span class="op">:</span> <span class="st">&quot;KEY_EVENT_SPACE&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-2" title="2"> COLLISION_ENEMY_LASER<span class="op">:</span> <span class="st">&quot;COLLISION_ENEMY_LASER&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-3" title="3"> COLLISION_ENEMY_HERO<span class="op">:</span> <span class="st">&quot;COLLISION_ENEMY_HERO&quot;</span><span class="op">,</span></a></code></pre></div></li>
+<li><p><strong>處理空白鍵</strong>。 編輯 <code>window.addEventListener</code> 的 keyup 函式來處理空白鍵：</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1">  } <span class="cf">else</span> <span class="cf">if</span>(<span class="va">evt</span>.<span class="at">keyCode</span> <span class="op">===</span> <span class="dv">32</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">    <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_SPACE</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>加入監聽者</strong>。 編輯函式 <code>initGame()</code> 來確保英雄可以在空白鍵按壓時，發射雷射光：</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_SPACE</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2"> <span class="cf">if</span> (<span class="va">hero</span>.<span class="at">canFire</span>()) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-3" title="3">   <span class="va">hero</span>.<span class="at">fire</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"> <span class="op">}</span></a></code></pre></div>
+<p>建立新的函式 <code>eventEmitter.on()</code> 確保敵人碰觸到雷射光時，能更新死亡狀態：</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> first<span class="op">,</span> second <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="va">first</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="va">second</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="op">}</span>)</a></code></pre></div></li>
+<li><p><strong>移動物件</strong>。 確保雷射逐步地向畫面上方移動。建立新的 class Laser 延伸自 <code>GameObject</code>，你應該有做過：</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1">  <span class="kw">class</span> Laser <span class="kw">extends</span> GameObject <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="at">constructor</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-3" title="3">    <span class="kw">super</span>(x<span class="op">,</span>y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-4" title="4">    (<span class="kw">this</span>.<span class="at">width</span> <span class="op">=</span> <span class="dv">9</span>)<span class="op">,</span> (<span class="kw">this</span>.<span class="at">height</span> <span class="op">=</span> <span class="dv">33</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-5" title="5">    <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> <span class="st">&#39;Laser&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-6" title="6">    <span class="kw">this</span>.<span class="at">img</span> <span class="op">=</span> laserImg<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-7" title="7">    <span class="kw">let</span> id <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-8" title="8">      <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">y</span> <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-9" title="9">        <span class="kw">this</span>.<span class="at">y</span> <span class="op">-=</span> <span class="dv">15</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-10" title="10">      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-11" title="11">        <span class="kw">this</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-12" title="12">        <span class="at">clearInterval</span>(id)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-13" title="13">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb14-14" title="14">    <span class="op">},</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb14-15" title="15">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb14-16" title="16"><span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>處理碰撞</strong>。 建立雷射的碰撞規則。加入函式 <code>updateGameObjects()</code> 來確認被碰撞的物件。</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">function</span> <span class="at">updateGameObjects</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="kw">const</span> enemies <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>(go <span class="kw">=&gt;</span> <span class="va">go</span>.<span class="at">type</span> <span class="op">===</span> <span class="st">&#39;Enemy&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="kw">const</span> lasers <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>((go) <span class="kw">=&gt;</span> <span class="va">go</span>.<span class="at">type</span> <span class="op">===</span> <span class="st">&quot;Laser&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="co">// 雷射擊中某物</span></a>
+<a class="sourceLine" id="cb15-5" title="5">  <span class="va">lasers</span>.<span class="at">forEach</span>((l) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-6" title="6">    <span class="va">enemies</span>.<span class="at">forEach</span>((m) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-7" title="7">      <span class="cf">if</span> (<span class="at">intersectRect</span>(<span class="va">l</span>.<span class="at">rectFromGameObject</span>()<span class="op">,</span> <span class="va">m</span>.<span class="at">rectFromGameObject</span>())) <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-8" title="8">      <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-9" title="9">        <span class="dt">first</span><span class="op">:</span> l<span class="op">,</span></a>
+<a class="sourceLine" id="cb15-10" title="10">        <span class="dt">second</span><span class="op">:</span> m<span class="op">,</span></a>
+<a class="sourceLine" id="cb15-11" title="11">      <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-12" title="12">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb15-13" title="13">   <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-14" title="14"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-15" title="15"></a>
+<a class="sourceLine" id="cb15-16" title="16">  gameObjects <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>(go <span class="kw">=&gt;</span> <span class="op">!</span><span class="va">go</span>.<span class="at">dead</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-17" title="17"><span class="op">}</span>  </a></code></pre></div>
+<p>記得在 <code>window.onload</code> 裡的遊戲迴圈中加入 <code>updateGameObjects()</code>。</p></li>
+<li><p><strong>設定雷射的冷卻時間</strong>，它只能在定期內發射一次。</p>
+<p>最後，編輯 Hero class 來允許冷卻：</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">class</span> Hero <span class="kw">extends</span> GameObject <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2"> <span class="at">constructor</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-3" title="3">   <span class="kw">super</span>(x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-4" title="4">   (<span class="kw">this</span>.<span class="at">width</span> <span class="op">=</span> <span class="dv">99</span>)<span class="op">,</span> (<span class="kw">this</span>.<span class="at">height</span> <span class="op">=</span> <span class="dv">75</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-5" title="5">   <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> <span class="st">&quot;Hero&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-6" title="6">   <span class="kw">this</span>.<span class="at">speed</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">0</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb16-7" title="7">   <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-8" title="8"> <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-9" title="9"> <span class="at">fire</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-10" title="10">   <span class="va">gameObjects</span>.<span class="at">push</span>(<span class="kw">new</span> <span class="at">Laser</span>(<span class="kw">this</span>.<span class="at">x</span> <span class="op">+</span> <span class="dv">45</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">y</span> <span class="op">-</span> <span class="dv">10</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-11" title="11">   <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">=</span> <span class="dv">500</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-12" title="12"></a>
+<a class="sourceLine" id="cb16-13" title="13">   <span class="kw">let</span> id <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-14" title="14">     <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-15" title="15">       <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">-=</span> <span class="dv">100</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-16" title="16">     <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-17" title="17">       <span class="at">clearInterval</span>(id)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-18" title="18">     <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-19" title="19">   <span class="op">},</span> <span class="dv">200</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-20" title="20"> <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-21" title="21"> <span class="at">canFire</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-22" title="22">   <span class="cf">return</span> <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">===</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-23" title="23"> <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-24" title="24"><span class="op">}</span></a></code></pre></div></li>
+</ol></li>
+</ol>
+<p>到這裡，你的遊戲有了些功能！你可以測試方向鍵，使用空白鍵發射雷射。當你擊中敵人時它們會消失。幹得漂亮！</p>
+<hr />
+<h2 id="挑戰">🚀 挑戰</h2>
+<p>加入爆炸特效！ 看看 <a href="../solution/spaceArt/readme.txt">Space Art Repo</a> 中的檔案，試著在雷射擊中外星人時，加入爆炸畫面。</p>
+<h2 id="課後測驗">課後測驗</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/36?loc=zh_tw">課後測驗</a></p>
+<h2 id="複習與自學">複習與自學</h2>
+<p>對遊戲中的迴圈定時做點實驗。當你改變數值時，發生了什麼事？閱讀更多關於 <a href="https://www.freecodecamp.org/news/javascript-timing-events-settimeout-and-setinterval/">JavaScript 計時事件</a>。</p>
+<h2 id="作業">作業</h2>
+<p><a href="assignment.zh-tw.md">探索碰撞</a></p>
+</body>
+</html>

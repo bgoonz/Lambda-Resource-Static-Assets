@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.es</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="conceptos-básicos-de-javascript-tipos-de-datos">Conceptos básicos de JavaScript: tipos de datos</h1>
+<p><img src="/sketchnotes/webdev101-js-datatypes.png" alt="JavaScript Basics - Data types" /> &gt; Sketchnote por <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<p><a href="https://youtube.com/watch?v=rEHV3fFMfn0" title="Tipos de datos en JavaScript"><img src="https://img.youtube.com/vi/rEHV3fFMfn0/0.jpg" alt="Tipos de datos en JavaScript" /></a></p>
+<h2 id="pre-lectura-prueba"><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/7">Pre-lectura prueba</a></h2>
+<p>Esta lección cubre los conceptos básicos de JavaScript, el lenguaje que proporciona interactividad en la web.</p>
+<p>¡Comencemos con las variables y los tipos de datos que las pueblan!</p>
+<h2 id="variables">Variables</h2>
+<p>Las variables almacenan valores que se pueden usar y cambiar a lo largo de su código.</p>
+<p>Crear y <strong>declarar</strong> una variable tiene la siguiente sintaxis <strong>[keyword] [name]</strong>. Está compuesto por dos partes:</p>
+<ul>
+<li><p><strong>Keyword</strong>. Las palabras clave pueden ser <code>let</code> o <code>var</code>.</p>
+<blockquote>
+<p>Tenga en cuenta que la palabra clave <code>let</code> se introdujo en ES6 y le da a su variable un llamado <em>alcance de bloque</em> (block scope). Se recomienda utilizar <code>let</code> sobre <code>var</code>. Cubriremos los alcances de bloque con más profundidad en partes futuras.</p>
+</blockquote></li>
+<li><p><strong>El nombre de la variable</strong>, este es un nombre que elige usted mismo.</p></li>
+</ul>
+<h3 id="tarea---trabajar-con-variables">Tarea - trabajar con variables</h3>
+<ol type="1">
+<li><p><strong>Declara una variable</strong>. Declaremos una variable usando la palabra clave <code>let</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">let</span> myVariable<span class="op">;</span></a></code></pre></div>
+<p><code>myVariable</code> ahora se ha declarado usando la palabra clave <code>let</code>. Actualmente no tiene ningún valor.</p></li>
+<li><p><strong>Asignar un valor</strong>. Almacene un valor en una variable con el operador <code>=</code>, seguido del valor esperado.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1">myVariable <span class="op">=</span> <span class="dv">123</span><span class="op">;</span></a></code></pre></div>
+<blockquote>
+<p>Nota: el uso de <code>=</code> en esta lección significa que hacemos uso de un “operador de asignación”, que se utiliza para establecer un valor en una variable. No denota igualdad.</p>
+</blockquote>
+<p><code>myVariable</code> ahora se ha <em>inicializado</em> con el valor 123.</p></li>
+<li><p><strong>Refactorizar código</strong>. Reemplace su código con la siguiente declaración.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">let</span> myVariable <span class="op">=</span> <span class="dv">123</span><span class="op">;</span></a></code></pre></div>
+<p>Lo anterior se denomina <em>inicialización explícita</em> cuando se declara una variable y se le asigna un valor al mismo tiempo.</p></li>
+<li><p><strong>Cambiar el valor de la variable</strong>. Cambie el valor de la variable de la siguiente manera:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1">myVariable <span class="op">=</span> <span class="dv">321</span><span class="op">;</span></a></code></pre></div>
+<p>Una vez que se declara una variable, puede cambiar su valor en cualquier punto de su código con el operador <code>=</code> y el nuevo valor.</p>
+<p>✅ ¡Pruébalo! Puede escribir JavaScript directamente en su navegador. Abra una ventana del navegador y navegue hasta Herramientas de desarrollo. En la consola, encontrará un mensaje; escriba <code>let myVariable = 123</code>, presione retorno, luego escriba <code>myVariable</code>. ¿Lo que pasa? Tenga en cuenta que aprenderá más sobre estos conceptos en lecciones posteriores.</p></li>
+</ol>
+<h2 id="constantes">Constantes</h2>
+<p>La declaración e inicialización de una constante sigue los mismos conceptos que una variable, con la excepción de la palabra clave <code>const</code>. Las constantes se declaran normalmente con todas las letras mayúsculas.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">const</span> MY_VARIABLE <span class="op">=</span> <span class="dv">123</span><span class="op">;</span></a></code></pre></div>
+<p>Las constantes son similares a las variables, con dos excepciones:</p>
+<ul>
+<li><strong>Deben tener un valor</strong>. Las constantes deben inicializarse o se producirá un error al ejecutar el código.</li>
+<li><strong>La referencia no se puede cambiar</strong>. La referencia de una constante no se puede cambiar una vez inicializada, o se producirá un error al ejecutar el código. Veamos dos ejemplos:
+<ul>
+<li><p><strong>Valor simple</strong>. NO se permite lo siguiente:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">const</span> PI <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2">PI <span class="op">=</span> <span class="dv">4</span><span class="op">;</span> <span class="co">// no permitido</span></a></code></pre></div></li>
+<li><p><strong>La referencia del objeto está protegida</strong>. NO se permite lo siguiente.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">const</span> obj <span class="op">=</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">3</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb7-2" title="2">obj <span class="op">=</span> <span class="op">{</span> <span class="dt">b</span><span class="op">:</span> <span class="dv">5</span> <span class="op">}</span> <span class="co">// no permitido</span></a></code></pre></div></li>
+<li><p><strong>El valor del objeto no está protegido</strong>. Se permite lo siguiente:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">const</span> obj <span class="op">=</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">3</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="va">obj</span>.<span class="at">a</span> <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>  <span class="co">// permitido</span></a></code></pre></div>
+<p>Arriba está cambiando el valor del objeto pero no la referencia en sí, lo que lo permite.</p></li>
+</ul>
+<blockquote>
+<p>Tenga en cuenta que <code>const</code> significa que la referencia está protegida contra la reasignación. Sin embargo, el valor no es <em>immutable</em> y puede cambiar, especialmente si es una construcción compleja como un objeto.</p>
+</blockquote></li>
+</ul>
+<h2 id="tipos-de-datos">Tipos de datos</h2>
+<p>Las variables pueden almacenar muchos tipos diferentes de valores, como números y texto. Estos diversos tipos de valores se conocen como <strong>tipo de datos</strong>. Los tipos de datos son una parte importante del desarrollo de software porque ayudan a los desarrolladores a tomar decisiones sobre cómo se debe escribir el código y cómo se debe ejecutar el software. Además, algunos tipos de datos tienen características únicas que ayudan a transformar o extraer información adicional en un valor.</p>
+<p>✅ Los tipos de datos también se conocen como primitivas de datos de JavaScript, ya que son los tipos de datos de nivel más bajo que proporciona el lenguaje. Hay 6 tipos de datos primitivos: cadena, número, bigint, booleano, indefinido y símbolo. Tómese un minuto para visualizar lo que podría representar cada una de estas primitivas. ¿Qué es una <code>cebra</code>? ¿Qué tal <code>0</code>? ¿<code>true</code>?</p>
+<h3 id="números">Números</h3>
+<p>En la sección anterior, el valor de “myVariable” era un tipo de datos numérico.</p>
+<p><code>let myVariable = 123;</code></p>
+<p>Las variables pueden almacenar todo tipo de números, incluidos decimales o números negativos. Los números también se pueden usar con operadores aritméticos, que se tratan en la <a href="#operadores">siguiente sección</a>.</p>
+<h3 id="operadores-aritméticos">Operadores aritméticos</h3>
+<p>Hay varios tipos de operadores que se pueden utilizar al realizar funciones aritméticas, y algunos se enumeran aquí:</p>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 59%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Símbolo</th>
+<th>Descripción</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+</code></td>
+<td><strong>Suma</strong>: Calcula la suma de dos números</td>
+<td><code>1 + 2 //la respuesta esperada es 3</code></td>
+</tr>
+<tr class="even">
+<td><code>-</code></td>
+<td><strong>Resta</strong>: Calcula la diferencia de dos números</td>
+<td><code>1 - 2 //la respuesta esperada es -1</code></td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td><strong>Multiplicación</strong>: Calcula el producto de dos números</td>
+<td><code>1 * 2 //la respuesta esperada es 2</code></td>
+</tr>
+<tr class="even">
+<td><code>/</code></td>
+<td><strong>División</strong>: Calcula el cociente de dos números</td>
+<td><code>1 / 2 //la respuesta esperada es 0.5</code></td>
+</tr>
+<tr class="odd">
+<td><code>%</code></td>
+<td><strong>Restante</strong>: Calcula el resto a partir de la división de dos números</td>
+<td><code>1 % 2 //la respuesta esperada es 1</code></td>
+</tr>
+</tbody>
+</table>
+<p>✅ ¡Pruébalo! Pruebe una operación aritmética en la consola de su navegador. ¿Te sorprenden los resultados?</p>
+<h3 id="string">String</h3>
+<p>Las cadenas (Strings) son conjuntos de caracteres que residen entre comillas simples o dobles.</p>
+<ul>
+<li><code>'Esto es un String'</code></li>
+<li><code>"Esto también es un String"</code></li>
+<li><code>let myString = 'Este es un valor del String almacenado en una variable';</code></li>
+</ul>
+<p>Recuerde utilizar comillas al escribir un String, de lo contrario JavaScript asumirá que es un nombre de variable.</p>
+<h3 id="formateo-de-strings">Formateo de Strings</h3>
+<p>Los Strings son textuales y requerirán formato de vez en cuando.</p>
+<p>Para <strong>concatenar</strong> dos o más Strings, o unirlas, use el operador <code>+</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">let</span> myString1 <span class="op">=</span> <span class="st">&quot;Hola&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">let</span> myString2 <span class="op">=</span> <span class="st">&quot;Mundo&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"></a>
+<a class="sourceLine" id="cb9-4" title="4">myString1 <span class="op">+</span> myString2 <span class="op">+</span> <span class="st">&quot;!&quot;</span><span class="op">;</span> <span class="co">//¡Hola, mundo!</span></a>
+<a class="sourceLine" id="cb9-5" title="5">myString1 <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> myString2 <span class="op">+</span> <span class="st">&quot;!&quot;</span><span class="op">;</span> <span class="co">//¡Hola, mundo!</span></a>
+<a class="sourceLine" id="cb9-6" title="6">myString1 <span class="op">+</span> <span class="st">&quot;, &quot;</span> <span class="op">+</span> myString2 <span class="op">+</span> <span class="st">&quot;!&quot;</span><span class="op">;</span> <span class="co">//¡Hola, mundo!</span></a></code></pre></div>
+<p>✅ ¿Por qué <code>1 + 1 = 2</code> en JavaScript, pero <code>'1' + '1' = 11?</code> Piense en ello. ¿Qué pasa con <code>'1' + 1</code>?</p>
+<p><strong>Los literales de plantilla</strong> son otra forma de formatear Strings, excepto que en lugar de comillas, se usa la comilla invertida. Todo lo que no sea texto sin formato debe colocarse dentro de los marcadores de posición <code>${ }</code>. Esto incluye cualquier variable que pueda ser Strings.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">let</span> myString1 <span class="op">=</span> <span class="st">&quot;Hola&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw">let</span> myString2 <span class="op">=</span> <span class="st">&quot;Mundo&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-3" title="3"></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="vs">`</span><span class="sc">${</span>myString1<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>myString2<span class="sc">}</span><span class="vs">!`</span> <span class="co">//¡Hola, mundo!</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="vs">`</span><span class="sc">${</span>myString1<span class="sc">}</span><span class="vs">, </span><span class="sc">${</span>myString2<span class="sc">}</span><span class="vs">!`</span> <span class="co">//¡Hola, mundo!</span></a></code></pre></div>
+<p>Puede lograr sus objetivos de formato con cualquier método, pero los literales de plantilla respetarán los espacios y saltos de línea.</p>
+<p>✅ ¿Cuándo usaría una plantilla literal frente a un String simple?</p>
+<h3 id="booleanos">Booleanos</h3>
+<p>Los booleanos pueden tener solo dos valores: <code>true</code> o <code>false</code>. Los valores booleanos pueden ayudar a tomar decisiones sobre qué líneas de código deben ejecutarse cuando se cumplen ciertas condiciones. En muchos casos, <a href="#operadores">operadores</a> ayudan a establecer el valor de un booleano y, a menudo, notará y escribirá variables que se inicializan o que sus valores se actualizan con un operador.</p>
+<ul>
+<li><code>let myTrueBool = true</code></li>
+<li><code>let myFalseBool = false</code></li>
+</ul>
+<p>✅ Una variable se puede considerar ‘verdadera’ si se evalúa como un valor booleano ‘verdadero’. Curiosamente, en JavaScript, <a href="https://developer.mozilla.org/docs/Glossary/Truthy">todos los valores son verdaderos a menos que se definan como falsos</a>.</p>
+<p>🚀 Desafío: JavaScript es conocido por sus sorprendentes formas de manejar tipos de datos en ocasiones. Investiga un poco sobre estos “errores”. Por ejemplo: ¡la sensibilidad a mayúsculas y minúsculas puede morder! Pruebe esto en su consola: <code>let age = 1; let Age = 2; age == Age</code> (resuelve <code>false</code> - ¿por qué?). ¿Qué otras trampas puedes encontrar?</p>
+<h2 id="post-lectura-prueba"><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/8">Post-lectura prueba</a></h2>
+<h2 id="revisión-y-autoestudio">Revisión y autoestudio</h2>
+<p>Eche un vistazo a <a href="https://css-tricks.com/snippets/javascript/">esta lista de ejercicios de JavaScript</a> y pruebe uno. ¿Qué aprendiste?</p>
+<p><strong>Tarea</strong>: <a href="assignment.es.md">Práctica de tipos de datos</a></p>
+</body>
+</html>

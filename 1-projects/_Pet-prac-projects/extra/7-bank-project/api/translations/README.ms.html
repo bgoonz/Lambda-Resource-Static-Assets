@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.ms</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="bank-api">Bank API</h1>
+<blockquote>
+<blockquote>
+<p>API Bank dibina dengan <a href="https://nodejs.org">Node.js</a> + <a href="https://expressjs.com/">Express</a>.</p>
+</blockquote>
+</blockquote>
+<p>API sudah dibina untuk anda dan bukan sebahagian daripada latihan.</p>
+<p>Walau bagaimanapun, jika anda berminat untuk belajar membuat API seperti ini, anda boleh mengikuti siri video ini: https://aka.ms/NodeBeginner (video 17 hingga 21 merangkumi API tepat ini)</p>
+<p>Anda juga boleh melihat tutorial interaktif ini: https://aka.ms/learn/express-api</p>
+<h2 id="menjalankan-pelayan">Menjalankan pelayan</h2>
+<p>Pastikan anda telah memasang <a href="https://nodejs.org">Node.js</a>.</p>
+<ol type="1">
+<li>Git klon repo ini.</li>
+<li>Buka terminal dalam folder <code>api</code>, kemudian jalankan<code>npm install</code>.</li>
+<li>Jalankan <code>npm start</code>.</li>
+</ol>
+<p>Pelayan harus mula mendengar di port <code>5000</code>.</p>
+<blockquote>
+<p>Catatan: semua entri disimpan dalam memori dan tidak berterusan, jadi apabila pelayan dihentikan semua data akan hilang.</p>
+</blockquote>
+<h2 id="perincian-api">Perincian API</h2>
+<table>
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Route</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GET /api/</td>
+<td>Dapat server info</td>
+</tr>
+<tr class="even">
+<td>POST /api/accounts/</td>
+<td>Daftar akaun, ex: <code>{ user: 'Yohan', description: 'My budget', currency: 'EUR', balance: 100 }</code></td>
+</tr>
+<tr class="odd">
+<td>GET /api/accounts/:user</td>
+<td>Dapatkan semua data untuk akaun yang ditentukan</td>
+</tr>
+<tr class="even">
+<td>DELETE /api/accounts/:user</td>
+<td>Keluarkan akaun yang ditentukan</td>
+</tr>
+<tr class="odd">
+<td>POST /api/accounts/:user/transactions</td>
+<td>Tambahkan transaksi, ex: <code>{ date: '2020-07-23T18:25:43.511Z', object: 'Bought a book', amount: -20 }</code></td>
+</tr>
+<tr class="even">
+<td>DELETE /api/accounts/:user/transactions/:id</td>
+<td>Keluarkan transaksi yang ditentukan</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

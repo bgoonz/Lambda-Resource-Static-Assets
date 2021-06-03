@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.zh-tw</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="javascript-入門---矩陣與迴圈">JavaScript 入門 - 矩陣與迴圈</h1>
+<p><img src="/sketchnotes/webdev101-js-arrays.png" alt="JavaScript 入門 - 矩陣" /> &gt; 由 <a href="https://twitter.com/girlie_mac">Tomomi Imura</a> 繪製</p>
+<h2 id="課前測驗">課前測驗</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/13?loc=zh_tw">課前測驗</a></p>
+<p>這堂課會包含程式語言 JavaScript，建立互動式網頁的基礎。課程中，你會學到用來操作資料的矩陣與迴圈。</p>
+<p><a href="https://youtube.com/watch?v=Q_CRM2lXXBg" title="矩陣與迴圈"><img src="https://img.youtube.com/vi/Q_CRM2lXXBg/0.jpg" alt="矩陣與迴圈" /></a></p>
+<blockquote>
+<p>點擊以上的圖片來觀賞關於矩陣與迴圈的影片。</p>
+</blockquote>
+<h2 id="矩陣arrays">矩陣(Arrays)</h2>
+<p>處理資料是任何程式語言中最常見的任務，如果能將程式碼有條理地編排成如矩陣的形式，處理任務來會更加輕鬆。矩陣的資料儲存格式就像串列，其中一項好處是矩陣可以儲存不同的資料型態資料。</p>
+<p>✅ 矩陣其實圍繞在我們身邊！你能想到現實中那些應用是矩陣的形式，例如太陽能板矩陣嗎？</p>
+<p>矩陣的語法需要用到中括號。</p>
+<p><code>let myArray = [];</code></p>
+<p>上述為一個空矩陣，矩陣也能在宣告時設定內容資料，資料會以逗號來做區隔。</p>
+<p><code>let iceCreamFlavors = ["Chocolate", "Strawberry", "Vanilla", "Pistachio", "Rocky Road"];</code></p>
+<p>矩陣數值位置會以<strong>索引(index)</strong>來決定，標記從矩陣的開頭相隔多少元素。在上述例子中，字串 “Chocolate” 的索引為 0，“Rocky Road” 為 4。以中括號帶入索引來接收、修改或加入特定元素數值。</p>
+<p>✅ 索引從 0 開始有超出你的預料之外嗎？在部分程式語言中，索引會從 1 開始。這有一段有趣的歷史，你可以<a href="https://zh.wikipedia.org/wiki/%E5%BE%9E%E9%9B%B6%E9%96%8B%E5%A7%8B%E7%9A%84%E7%B7%A8%E8%99%9F">閱讀維基百科</a>來了解它。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">let</span> iceCreamFlavors <span class="op">=</span> [<span class="st">&quot;Chocolate&quot;</span><span class="op">,</span> <span class="st">&quot;Strawberry&quot;</span><span class="op">,</span> <span class="st">&quot;Vanilla&quot;</span><span class="op">,</span> <span class="st">&quot;Pistachio&quot;</span><span class="op">,</span> <span class="st">&quot;Rocky Road&quot;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2">iceCreamFlavors[<span class="dv">2</span>]<span class="op">;</span> <span class="co">//&quot;Vanilla&quot;</span></a></code></pre></div>
+<p>你可以指定索引改變其中的數值，如：</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1">iceCreamFlavors[<span class="dv">4</span>] <span class="op">=</span> <span class="st">&quot;Butter Pecan&quot;</span><span class="op">;</span> <span class="co">//Changed &quot;Rocky Road&quot; to &quot;Butter Pecan&quot;</span></a></code></pre></div>
+<p>或者是指定索引加入新數值，如：</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1">iceCreamFlavors[<span class="dv">5</span>] <span class="op">=</span> <span class="st">&quot;Cookie Dough&quot;</span><span class="op">;</span> <span class="co">//Added &quot;Cookie Dough&quot;</span></a></code></pre></div>
+<p>✅ 另一個常用加入矩陣元素的方式為使用矩陣運算子如 array.push()。</p>
+<p>要得知矩陣內有多少元素，可以使用矩陣屬性 <code>length</code>。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">let</span> iceCreamFlavors <span class="op">=</span> [<span class="st">&quot;Chocolate&quot;</span><span class="op">,</span> <span class="st">&quot;Strawberry&quot;</span><span class="op">,</span> <span class="st">&quot;Vanilla&quot;</span><span class="op">,</span> <span class="st">&quot;Pistachio&quot;</span><span class="op">,</span> <span class="st">&quot;Rocky Road&quot;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="va">iceCreamFlavors</span>.<span class="at">length</span><span class="op">;</span> <span class="co">//5</span></a></code></pre></div>
+<p>✅ 自己動手試試看！使用瀏覽器命令欄，自由地建立並操控矩陣。</p>
+<h2 id="迴圈loops">迴圈(Loops)</h2>
+<p>迴圈幫助你處理重複性與<strong>迭代(iterative)</strong>任務，這可以省下許多程式碼行數與時間。每一次迭代可以有不同的變數、數值或條件。在 JavaScript 中有許多種迴圈的樣式，彼此都有些微的差異，但主要功能都一樣：對資料做迴圈。</p>
+<h3 id="for-迴圈for-loop">For 迴圈(For Loop)</h3>
+<p><code>for</code> 迴圈有三個條件： - <code>計數器(counter)</code> 一個初始化變數決定目前迭代的次數。 - <code>條件式(condition)</code> 一個以比較運算子表示的陳述式，當結果為 <code>true</code> 時終止迴圈。 - <code>迭代陳述式(iteration-expression)</code> 在每一次迭代完後，改變計數器的數值。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1">    <span class="co">// 從 0 加到 10</span></a>
+<a class="sourceLine" id="cb5-2" title="2">    <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">        <span class="va">console</span>.<span class="at">log</span>(i)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="op">}</span></a></code></pre></div>
+<p>✅ 在瀏覽器命令欄中運行這段迴圈。在改變計數器、條件式與迭代陳述式後有什麼改變？你能讓它變成從 10 減到 0 嗎？</p>
+<h3 id="while-迴圈while-loop">While 迴圈(While Loop)</h3>
+<p>不同於 <code>for</code> 迴圈語法，<code>while</code> 迴圈只要求一個條件式，當條件式回傳 <code>true</code> 時即終止迴圈。迴圈中的條件是通常需要依賴像計數器的變數，這些變數必須被合理的處理。計數器的起始化需要在迴圈外面，之後的條件陳述式與計數器的變化則需要在迴圈當中。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">// 從 0 加到 10</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="cf">while</span> (i <span class="op">&lt;</span> <span class="dv">10</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-4" title="4"> <span class="va">console</span>.<span class="at">log</span>(i)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5"> i<span class="op">++;</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>✅ 你會選擇 for 迴圈還是 while 迴圈呢？ 一萬七千個 StackOverflow 用戶問過相同的問題，有些回應<a href="https://stackoverflow.com/questions/39969145/while-loops-vs-for-loops-in-javascript">可能會勾起你的興趣</a>。</p>
+<h2 id="矩陣與迴圈">矩陣與迴圈</h2>
+<p>矩陣通常會與迴圈一起出現，大多數的條件式需要矩陣的長度來決定迴圈次數，矩陣的索引值也與計數器的數值相同。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">let</span> iceCreamFlavors <span class="op">=</span> [<span class="st">&quot;Chocolate&quot;</span><span class="op">,</span> <span class="st">&quot;Strawberry&quot;</span><span class="op">,</span> <span class="st">&quot;Vanilla&quot;</span><span class="op">,</span> <span class="st">&quot;Pistachio&quot;</span><span class="op">,</span> <span class="st">&quot;Rocky Road&quot;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">iceCreamFlavors</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="va">console</span>.<span class="at">log</span>(iceCreamFlavors[i])<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="op">}</span> <span class="co">// 當所有冰淇淋口味表示完時，結束迴圈。</span></a></code></pre></div>
+<p>✅ 做個實驗，在瀏覽器命令欄中製作一個使用矩陣的迴圈。</p>
+<hr />
+<h2 id="挑戰">🚀 挑戰</h2>
+<p>除了 for 迴圈與 while 迴圈外，仍有許多使用矩陣與迴圈的方法：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach">forEach</a>、<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of">for-of</a>與<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map</a>。 用上列其中一種語法改寫你的迴圈。</p>
+<h2 id="課後測驗">課後測驗</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/14?loc=zh_tw">課後測驗</a></p>
+<h2 id="複習與自學">複習與自學</h2>
+<p>在 JavaScript 中，矩陣有許多控制的方法，它們在處理資料上有很大的幫助。 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">學習這些方法</a>，如 push、pop、slice 和 splice，試著套用在你所創造的矩陣上。</p>
+<h2 id="作業">作業</h2>
+<p><a href="assignment.zh-tw.md">給矩陣的迴圈</a></p>
+</body>
+</html>

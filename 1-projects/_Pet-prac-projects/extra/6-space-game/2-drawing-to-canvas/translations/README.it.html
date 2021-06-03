@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.it</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="costruire-un-gioco-spaziale-parte-2-disegnare-eroi-e-mostri-sullelemento-canvas">Costruire un Gioco Spaziale Parte 2: Disegnare Eroi e Mostri sull’elemento Canvas</h1>
+<h2 id="quiz-pre-lezione">Quiz Pre-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/31?loc=it">Quiz Pre-Lezione</a></p>
+<h2 id="canvas">Canvas</h2>
+<p>Canvas è un elemento HTML che per impostazione predefinita non ha contenuto; è una lavagna vuota. Si può riempirla disegnandoci sopra.</p>
+<p>✅ <a href="https://developer.mozilla.org/docs/Web/API/Canvas_API">Ulteriori informazioni sull’API Canvas</a> su MDN.</p>
+<p>Ecco come viene tipicamente dichiarato, come parte dell’elemento body della pagina:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;canvas</span><span class="ot"> id=</span><span class="st">&quot;myCanvas&quot;</span><span class="ot"> width=</span><span class="st">&quot;200&quot;</span><span class="ot"> height=</span><span class="st">&quot;100&quot;</span><span class="kw">&gt;&lt;/canvas&gt;</span></a></code></pre></div>
+<p>Sopra si è impostato l’<code>id</code>entificativo, la larghezza <code>(width)</code> e l’altezza (<code>height</code>).</p>
+<ul>
+<li><code>id</code>: va impostato in modo da poter ottenere un riferimento quando si deve interagire con l’elemento.</li>
+<li><code>width</code>: questa è la larghezza dell’elemento.</li>
+<li><code>height</code>: questa è l’altezza dell’elemento.</li>
+</ul>
+<h2 id="disegnare-una-geometria-semplice">Disegnare una geometria semplice</h2>
+<p>Canvas utilizza un sistema di coordinate cartesiane per disegnare le cose. Quindi utilizza un asse x e un asse y per esprimere dove si trova qualcosa. La posizione <code>0,0</code> è la posizione in alto a sinistra e quella in basso a destra è ciò che si è determinato come larghezza (WIDTH) e altezza (HEIGHT) del canvas</p>
+<p><img src="../canvas_grid.png" alt="la griglia del canvas" /> &gt; Immagine da <a href="https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes">MDN</a></p>
+<p>Per disegnare sull’elemento canvas si dovranno eseguire i seguenti passaggi:</p>
+<ol type="1">
+<li><strong>Ottenere un riferimento</strong> all’elemento Canvas.</li>
+<li><strong>Ottenere un riferimento</strong> all’elemento Context che si trova sull’elemento canvas.</li>
+<li><strong>Eseguire un’operazione di disegno</strong> utilizzando l’elemento context.</li>
+</ol>
+<p>Il codice per i passaggi precedenti di solito ha questo aspetto:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">// disegna un rettangolo rosso</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co">//1. ottiene il riferimento per il canvas</span></a>
+<a class="sourceLine" id="cb2-3" title="3">canvas <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;myCanvas&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co">//2. ottiene l&#39;oggetto context per disegnare forme basiche in 2D</span></a>
+<a class="sourceLine" id="cb2-6" title="6">ctx <span class="op">=</span> <span class="va">canvas</span>.<span class="at">getContext</span>(<span class="st">&quot;2d&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-7" title="7"></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co">//3. lo riempie con il colore rosso</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&#39;red&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-10" title="10"></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">//4. e disegna un rettangolo con questi parametri, impostando posizione e dimensione</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">,</span> <span class="dv">200</span><span class="op">,</span> <span class="dv">200</span>) <span class="co">// x,y,larghezza, altezza</span></a></code></pre></div>
+<p>✅ L’API Canvas si concentra principalmente su forme 2D, ma si possono anche disegnare elementi 3D su un sito web; per questo, si potrebbe utilizzare l’ <a href="https://developer.mozilla.org/docs/Web/API/WebGL_API">API WebGL</a>.</p>
+<p>Si può disegnare ogni sorta di cose con l’API Canvas come:</p>
+<ul>
+<li><strong>Forme geometriche</strong>, è già stato mostrato come disegnare un rettangolo, ma c’è molto di più che si può disegnare.</li>
+<li><strong>Testo</strong>, si può disegnare un testo con qualsiasi carattere e colore si desideri.</li>
+<li><strong>Immagini</strong>, si puòdisegnare un’immagine basandosi su una risorsa immagine come .jpg o .png, ad esempio.</li>
+</ul>
+<p>Si faccia una prova! Si sa come disegnare un rettangolo, si può disegnare un cerchio su una pagina? Si dia un’occhiata ad alcuni interessanti disegni su canvas su CodePen. Ecco un <a href="https://codepen.io/dissimulate/pen/KrAwx">esempio particolarmente degno di nota</a>.</p>
+<h2 id="caricare-e-disegnare-una-risorsa-immagine">Caricare e disegnare una risorsa immagine</h2>
+<p>Si carica una risorsa immagine creando un oggetto <code>Image</code> e impostando la sua proprietà <code>src</code> . Quindi ci si mette in ascolto per l’evento di caricamento (<code>load</code>) per sapere quando è pronto per essere utilizzato. Il codice si presenta cosí:</p>
+<h3 id="caricamento-risorsa">Caricamento risorsa</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> img <span class="op">=</span> <span class="kw">new</span> <span class="at">Image</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="va">img</span>.<span class="at">src</span> <span class="op">=</span> <span class="st">&#39;path/to/my/image.png&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="va">img</span>.<span class="at">onload</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="co">// immagine caricata e pronta all&#39;uso</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="op">}</span></a></code></pre></div>
+<h3 id="modello-di-caricamento-risorsa">Modello di Caricamento Risorsa</h3>
+<p>Si consiglia di racchiudere quanto sopra in un costrutto come questo, così è più facile da usare e si tenta di manipolarlo solo quando è completamente caricato:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">function</span> <span class="at">loadAsset</span>(path) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="cf">return</span> <span class="kw">new</span> <span class="at">Promise</span>((resolve) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="kw">const</span> img <span class="op">=</span> <span class="kw">new</span> <span class="at">Image</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="va">img</span>.<span class="at">src</span> <span class="op">=</span> path<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="va">img</span>.<span class="at">onload</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" title="6">      <span class="co">// immagine caricata e pronta all&#39;uso</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="at">resolve</span>(img)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-11" title="11"></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">// usarlo in questo modo</span></a>
+<a class="sourceLine" id="cb4-13" title="13"></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="kw">async</span> <span class="kw">function</span> <span class="at">run</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-15" title="15">  <span class="kw">const</span> heroImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&#39;hero.png&#39;</span>)</a>
+<a class="sourceLine" id="cb4-16" title="16">  <span class="kw">const</span> monsterImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&#39;monster.png&#39;</span>)</a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="op">}</span></a></code></pre></div>
+<p>Per disegnare risorse di gioco su uno schermo, il codice sarà simile a questo:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">run</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">const</span> heroImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&#39;hero.png&#39;</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="kw">const</span> monsterImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&#39;monster.png&#39;</span>)</a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5">  canvas <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;myCanvas&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">  ctx <span class="op">=</span> <span class="va">canvas</span>.<span class="at">getContext</span>(<span class="st">&quot;2d&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="va">ctx</span>.<span class="at">drawImage</span>(heroImg<span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span>/<span class="dv">2</span><span class="op">,</span><span class="va">canvas</span>.<span class="at">height</span>/<span class="dv">2</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="va">ctx</span>.<span class="at">drawImage</span>(monsterImg<span class="op">,</span> <span class="dv">0</span><span class="op">,</span><span class="dv">0</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="op">}</span></a></code></pre></div>
+<h2 id="ora-è-il-momento-di-iniziare-a-costruire-il-gioco">Ora è il momento di iniziare a costruire il gioco</h2>
+<h3 id="cosa-costruire">Cosa costruire</h3>
+<p>Si costruirà una pagina web con un elemento Canvas. Si dovrebbe rendere uno schermo nero <code>1024 * 768</code>. Sono state fornite due immagini:</p>
+<ul>
+<li><p>Astronave dell’eroe</p>
+<figure>
+<img src="../solution/assets/player.png" alt="Nave dell’eroe" /><figcaption>Nave dell’eroe</figcaption>
+</figure></li>
+<li><p>Mostro 5*5</p>
+<figure>
+<img src="../solution/assets/enemyShip.png" alt="Nave del mostro" /><figcaption>Nave del mostro</figcaption>
+</figure></li>
+</ul>
+<h3 id="passaggi-consigliati-per-iniziare-lo-sviluppo">Passaggi consigliati per iniziare lo sviluppo</h3>
+<p>Individuare i file che già sono stati creati nella sottocartella <code>your-work</code> della cartella di lavoro Dovrebbe contenere le seguenti informazioni:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="ex">-</span><span class="kw">|</span> <span class="ex">assets</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">enemyShip.png</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">player.png</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="ex">-</span><span class="kw">|</span> <span class="ex">index.html</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="ex">-</span><span class="kw">|</span> <span class="ex">app.js</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="ex">-</span><span class="kw">|</span> <span class="ex">package.json</span></a></code></pre></div>
+<p>Aprire una copia di questa cartella in Visual Studio Code. È necessario disporre di una configurazione di ambiente di sviluppo locale, preferibilmente con Visual Studio Code con NPM e Node installati. Se non si è impostato <code>npm</code> sul proprio computer, <a href="https://www.npmjs.com/get-npm">ecco come farlo</a>.</p>
+<p>Inizializzare il proprio progetto accedendo alla cartella <code>your_work</code> :</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="bu">cd</span> your-work</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="ex">npm</span> start</a></code></pre></div>
+<p>Quanto sopra avvierà un server HTTP sull’indirizzo <code>http://localhost:5000</code>. Aprire un browser e inserire quell’indirizzo. Al momento è una pagina vuota, ma cambierà</p>
+<blockquote>
+<p>Nota: per vedere le modifiche sullo schermo, aggiornare il contenuto del browser.</p>
+</blockquote>
+<h3 id="aggiungere-codice">Aggiungere codice</h3>
+<p>Aggiungi il codice necessario al file <code>your-work/app.js</code> per risolvere quanto segue</p>
+<ol type="1">
+<li><strong>Disegnare</strong> un oggetto canvas con sfondo nero &gt; suggerimento: aggiungere due righe sotto il TODO appropriato in <code>/app.js</code>, impostando l’elemento <code>ctx</code> in modo che sia nero e le coordinate alto/sinistra a 0,0 e l’altezza e la larghezza uguali a quelle del canvas.</li>
+<li><strong>Caricare</strong> le strutture di gioco &gt; suggerimento: aggiungere le immagini del giocatore e del nemico usando <code>await loadTexture</code>, passando il percorso dell’immagine. Non saranno ancora visibili sullo schermo!</li>
+<li><strong>Disegnare</strong> l’eroe al centro dello schermo nella metà inferiore &gt; suggerimento: usare l’API <code>drawImage</code> per disegnare <code>heroImg</code> sullo schermo, impostando <code>canvas.width / 2 - 45</code> e <code>canvas.height - canvas.height / 4</code> come valori di coordinate x, y</li>
+<li><p><strong>Disegnare</strong> mostri 5*5 &gt; suggerimento: ora si può rimuovere il commento dal codice per disegnare i nemici sullo schermo. Successivamente, passare alla funzione <code>createEnemies</code> e crearla.</p>
+<p>Per prima cosa, impostare alcune costanti:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">const</span> MONSTER_TOTAL <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">const</span> MONSTER_WIDTH <span class="op">=</span> MONSTER_TOTAL <span class="op">*</span> <span class="dv">98</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="kw">const</span> START_X <span class="op">=</span> (<span class="va">canvas</span>.<span class="at">width</span> <span class="op">-</span> MONSTER_WIDTH) / <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="kw">const</span> STOP_X <span class="op">=</span> START_X <span class="op">+</span> MONSTER_WIDTH<span class="op">;</span></a></code></pre></div>
+<p>quindi, creare un ciclo per disegnare l’array di mostri sullo schermo:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="cf">for</span> (<span class="kw">let</span> x <span class="op">=</span> START_X<span class="op">;</span> x <span class="op">&lt;</span> STOP_X<span class="op">;</span> x <span class="op">+=</span> <span class="dv">98</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">    <span class="cf">for</span> (<span class="kw">let</span> y <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> y <span class="op">&lt;</span> <span class="dv">50</span> <span class="op">*</span> <span class="dv">5</span><span class="op">;</span> y <span class="op">+=</span> <span class="dv">50</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">      <span class="va">ctx</span>.<span class="at">drawImage</span>(enemyImg<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb9-5" title="5">  <span class="op">}</span></a></code></pre></div></li>
+</ol>
+<h2 id="risultato">Risultato</h2>
+<p>Il risultato finale dovrebbe essere così:</p>
+<figure>
+<img src="../partI-solution.png" alt="Schermo nero con un eroe e mostri 5*5" /><figcaption>Schermo nero con un eroe e mostri 5*5</figcaption>
+</figure>
+<h2 id="soluzione">Soluzione</h2>
+<p>Per favore provare a risolverlo da soli, ma se si rimane bloccati, dare un’occhiata alla <a href="../solution/app.js">soluzione</a></p>
+<hr />
+<h2 id="sfida">🚀 Sfida</h2>
+<p>Si è imparato a disegnare con l’API Canvas incentrata sul 2D; dare un’occhiata all<a href="https://developer.mozilla.org/it/docs/Web/API/WebGL_API">’API WebGL API</a> e provare a disegnare un oggetto 3D.</p>
+<h2 id="quiz-post-lezione">Quiz Post-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/32?loc=it">Quiz post-lezione</a></p>
+<h2 id="revisione-e-auto-apprendimento">Revisione e Auto Apprendimento</h2>
+<p>Scoprire di più sull’API Canvas raccogliendo <a href="https://developer.mozilla.org/docs/Web/API/Canvas_API">informazioni su di essa</a>.</p>
+<h2 id="compito">Compito</h2>
+<p><a href="assignment.it.md">Giocare con l’API Canvas</a></p>
+</body>
+</html>

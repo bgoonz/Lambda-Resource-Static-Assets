@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.ko</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="space-게임-제작하기-파트-5-점수내고-살기">Space 게임 제작하기 파트 5: 점수내고 살기</h1>
+<h2 id="강의-전-퀴즈">강의 전 퀴즈</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/37?loc=ko">Pre-lecture quiz</a></p>
+<p>이 강의에서는 어떻게 게임에서 점수를 내고 생명을 구하는 가에 대하여 배웁니다.</p>
+<h2 id="화면에-텍스트-그리기">화면에 텍스트 그리기</h2>
+<p>화면에 게임 점수를 표시하려면, 화면에 텍스트를 두는 방법을 알아야 합니다. 답변은 canvas 객체에 <code>fillText()</code> 메소드를 사용한다고 할 수 있습니다. 사용할 글꼴, 텍스트 색상과 정렬(왼쪽, 오른쪽, 가운데)처럼 다른 측면으로 제어할 수 있습니다. 다음은 화면에 텍스트를 그리는 코드입니다:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="va">ctx</span>.<span class="at">font</span> <span class="op">=</span> <span class="st">&quot;30px Arial&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;red&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="va">ctx</span>.<span class="at">textAlign</span> <span class="op">=</span> <span class="st">&quot;right&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="va">ctx</span>.<span class="at">fillText</span>(<span class="st">&quot;show this on the screen&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></a></code></pre></div>
+<p>✅ <a href="https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_text">how to add text to a canvas</a>에 대하여 더 읽어보세요, 그리고 더 멋지게 보이도록 자유롭게 느껴보세요!</p>
+<h2 id="게임-컨셉에서-생명">게임 컨셉에서 생명</h2>
+<p>게임에서 생명을 가진다는 개념은 숫자에 불과합니다. space 게임의 맥락에서는 배가 피해를 입었을 때마다 생명을 하나씩 빼는 것이 일반적입니다. 숫자 대신 miniships이나 하트와 같은 그래픽으로 표현할 수 있다면 좋습니다.</p>
+<h2 id="무엇을-만드나요">무엇을 만드나요</h2>
+<p>게임에 다음을 추가하겠습니다:</p>
+<ul>
+<li><strong>게임 점수</strong>: 적의 배가 파괴될 때마다, 영웅은 점수를 받아야하고, 하나의 배마다 100점을 제안합니다. 게임 점수는 좌측 하단에 보여야 합니다.</li>
+<li><strong>생명</strong>: 여러분의 배는 세 생명이 있습니다. 적의 배로 부딪칠 때마다 생명을 잃습니다. 생명 점수는 우측 하단에 보여야되고 <img src="../solution/assets/life.png" alt="life image" />로 만들어야 합니다.</li>
+</ul>
+<h2 id="권장-단계">권장 단계</h2>
+<p><code>your-work</code> 하위 폴더에서 생성된 파일을 찾습니다. 다음을 포함해야 합니다:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">-</span><span class="kw">|</span> <span class="ex">assets</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">enemyShip.png</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">player.png</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">laserRed.png</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="ex">-</span><span class="kw">|</span> <span class="ex">index.html</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="ex">-</span><span class="kw">|</span> <span class="ex">app.js</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="ex">-</span><span class="kw">|</span> <span class="ex">package.json</span></a></code></pre></div>
+<p>타이핑해서 <code>your_work</code> 폴더에 프로젝트를 시작합니다:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="bu">cd</span> your-work</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="ex">npm</span> start</a></code></pre></div>
+<p>위 코드는 <code>http://localhost:5000</code> 주소에서 HTTP 서버를 시작합니다. 브라우저를 열고 해당 주소를 입력하면, 바로 영웅과 모든 적을 렌더링해야하며, 왼쪽과 오른쪽 화살표를 누르면, 영웅이 움직이고 적을 격추할 수 있습니다.</p>
+<h3 id="코드-추가하기">코드 추가하기</h3>
+<ol type="1">
+<li><p><code>solution/assets/</code> 폴더에서 <code>your-work</code> 폴더로 <strong>필요한 어셋을 복사합니다</strong>; <code>life.png</code> 어셋을 추가합니다. window.onload 함수에 lifeImg를 추가합니다:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1">lifeImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadTexture</span>(<span class="st">&quot;assets/life.png&quot;</span>)<span class="op">;</span></a></code></pre></div></li>
+<li><p>어셋의 배열에 <code>lifeImg</code>를 추가합니다:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">let</span> heroImg<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-2" title="2">...</a>
+<a class="sourceLine" id="cb5-3" title="3">lifeImg<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-4" title="4">...</a>
+<a class="sourceLine" id="cb5-5" title="5">eventEmitter <span class="op">=</span> <span class="kw">new</span> <span class="at">EventEmitter</span>()<span class="op">;</span></a></code></pre></div></li>
+<li><p><strong>변수를 추가합니다</strong>. 총 점수(0)과 남은 생명(3)을 나타내는 코드를 추가하고, 이 점수를 화면에 출력합니다.</p></li>
+<li><p><strong><code>updateGameObjects()</code> 함수를 확장합니다</strong>. <code>updateGameObjects()</code> 함수를 확장하여 적 충돌을 제어합니다:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="va">enemies</span>.<span class="at">forEach</span>(enemy <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">    <span class="kw">const</span> heroRect <span class="op">=</span> <span class="va">hero</span>.<span class="at">rectFromGameObject</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="cf">if</span> (<span class="at">intersectRect</span>(heroRect<span class="op">,</span> <span class="va">enemy</span>.<span class="at">rectFromGameObject</span>())) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-4" title="4">      <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_HERO</span><span class="op">,</span> <span class="op">{</span> enemy <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="op">}</span>)</a></code></pre></div></li>
+<li><strong><code>life</code>과 <code>points</code>를 추가하기</strong>.
+<ol type="1">
+<li><p><strong>변수를 초기화합니다</strong>. <code>Hero</code> 클래스의 <code>this.cooldown = 0</code> 아래에 생명과 점수를 설정합니다:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">this</span>.<span class="at">life</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">this</span>.<span class="at">points</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a></code></pre></div></li>
+<li><p><strong>화면에 점수를 그립니다</strong>. 이 값을 화면에 그립니다:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">function</span> <span class="at">drawLife</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="co">// </span><span class="al">TODO</span><span class="co">, 35, 27</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="kw">const</span> START_POS <span class="op">=</span> <span class="va">canvas</span>.<span class="at">width</span> <span class="op">-</span> <span class="dv">180</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="cf">for</span>(<span class="kw">let</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">hero</span>.<span class="at">life</span><span class="op">;</span> i<span class="op">++</span> ) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="va">ctx</span>.<span class="at">drawImage</span>(</a>
+<a class="sourceLine" id="cb8-6" title="6">      lifeImg<span class="op">,</span> </a>
+<a class="sourceLine" id="cb8-7" title="7">      START_POS <span class="op">+</span> (<span class="dv">45</span> <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) )<span class="op">,</span> </a>
+<a class="sourceLine" id="cb8-8" title="8">      <span class="va">canvas</span>.<span class="at">height</span> <span class="op">-</span> <span class="dv">37</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="op">}</span></a>
+<a class="sourceLine" id="cb8-11" title="11"></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="kw">function</span> <span class="at">drawPoints</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-13" title="13">  <span class="va">ctx</span>.<span class="at">font</span> <span class="op">=</span> <span class="st">&quot;30px Arial&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-14" title="14">  <span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;red&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-15" title="15">  <span class="va">ctx</span>.<span class="at">textAlign</span> <span class="op">=</span> <span class="st">&quot;left&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-16" title="16">  <span class="at">drawText</span>(<span class="st">&quot;Points: &quot;</span> <span class="op">+</span> <span class="va">hero</span>.<span class="at">points</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span><span class="dv">-20</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-17" title="17"><span class="op">}</span></a>
+<a class="sourceLine" id="cb8-18" title="18"></a>
+<a class="sourceLine" id="cb8-19" title="19"><span class="kw">function</span> <span class="at">drawText</span>(message<span class="op">,</span> x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-20" title="20">  <span class="va">ctx</span>.<span class="at">fillText</span>(message<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-21" title="21"><span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>게임 루프에 메소드를 추가합니다</strong>. <code>updateGameObjects()</code> 아래의 window.onload 함수에 다음 함수를 추가해야 합니다:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="at">drawPoints</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="at">drawLife</span>()<span class="op">;</span></a></code></pre></div></li>
+</ol></li>
+<li><p><strong>게임 규칙을 구현합니다</strong>. 다음 게임 규칙을 구현합니다:</p>
+<ol type="1">
+<li><p><strong>모든 영웅과 적의 충돌</strong>에 대해 생명을 깍습니다.</p>
+<p>깍기 위해서 <code>Hero</code> 클래스를 확장합니다:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="at">decrementLife</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="kw">this</span>.<span class="at">life</span><span class="op">--;</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">life</span> <span class="op">===</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="kw">this</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>적을 공격하는 모든 레이저는</strong>, 게임 점수 100점을 올립니다.</p>
+<p>올리기 위해서 <code>Hero</code> 클래스를 확장합니다:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1">  <span class="at">incrementPoints</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">    <span class="kw">this</span>.<span class="at">points</span> <span class="op">+=</span> <span class="dv">100</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="op">}</span></a></code></pre></div>
+<p>Collision Event Emitter에 다음 함수를 추가합니다:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> first<span class="op">,</span> second <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">   <span class="va">first</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">   <span class="va">second</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4">   <span class="va">hero</span>.<span class="at">incrementPoints</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="op">}</span>)</a>
+<a class="sourceLine" id="cb12-6" title="6"></a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_HERO</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> enemy <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-8" title="8">   <span class="va">enemy</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-9" title="9">   <span class="va">hero</span>.<span class="at">decrementLife</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-10" title="10"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div></li>
+</ol></li>
+</ol>
+<p>✅ JavaScript/Canvas를 사용하여 만든 다른 게임을 찾으려면 약간 알아보세요. 공통된 특징은 무엇일까요?</p>
+<p>이 작업이 끝날 즈음, 우측 하단에 작은 ‘생명’ 배, 좌측 하단에 점수를 보여줘야 하며, 적과 부딪칠 때마다 생명의 개수가 감소하고 적을 쏠 때마다 점수가 증가하는 것을 볼 수 있습니다. 잘 했습니다! 게임이 거의 완료되었습니다.</p>
+<hr />
+<h2 id="도전">🚀 도전</h2>
+<p>코드는 거의 완성되었습니다. 다음 단계를 상상할 수 있나요?</p>
+<h2 id="강의-후-퀴즈">강의 후 퀴즈</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/38?loc=ko">Post-lecture quiz</a></p>
+<h2 id="리뷰-자기주도-학습">리뷰 &amp; 자기주도 학습</h2>
+<p>게임 점수와 생명을 늘리거나 줄일 수 있는 몇 가지 방법을 조사해보세요. <a href="https://playfab.com">PlayFab</a>처럼 흥미로운 게임 엔진이 있습니다. 이 중 하나를 사용하면 어떻게 게임을 향상시킬 수 있을까요?</p>
+<h2 id="과제">과제</h2>
+<p><a href="../assignment.md">Build a Scoring Game</a></p>
+</body>
+</html>

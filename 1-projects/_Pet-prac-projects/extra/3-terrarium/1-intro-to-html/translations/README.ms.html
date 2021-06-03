@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.ms</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="projek-terrarium-bahagian-1-pengenalan-kepada-html">Projek Terrarium Bahagian 1: Pengenalan Kepada HTML</h1>
+<p><img src="/sketchnotes/webdev101-html.png" alt="Pengenalan Kepada HTML" /> &gt; Sketchnote karya <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="kuiz-pra-kuliah">Kuiz Pra Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/15">Kuiz Pra Kuliah</a></p>
+<h3 id="pengenalan">Pengenalan</h3>
+<p>HTML, atau HyperText Markup Language, adalah ‘kerangka’ web. Sekiranya CSS ‘mendandan’ HTML dan JavaScript anda menghidupkannya, HTML adalah badan aplikasi web anda. Sintaks HTML bahkan menggambarkan idea itu, kerana ia merangkumi tag “kepala”, “badan”, dan “footer”.</p>
+<p>Dalam pelajaran ini, kita akan menggunakan HTML untuk menyusun ‘kerangka’ antara muka terarium maya kita. Ini akan mempunyai tajuk dan tiga lajur: lajur kanan dan kiri di mana tumbuhan yang boleh diseret hidup, dan kawasan tengah yang akan menjadi terarium yang kelihatan kaca. Pada akhir pelajaran ini, anda akan dapat melihat tanaman di lajur, tetapi antara muka akan kelihatan sedikit pelik; jangan risau, di bahagian seterusnya anda akan menambahkan gaya CSS ke antara muka untuk menjadikannya lebih baik.</p>
+<h3 id="tugas">Tugas</h3>
+<p>Pada komputer anda, buat folder bernama ‘terrarium’ dan di dalamnya, fail yang bernama ‘index.html’ Anda boleh melakukannya dalam Visual Studio Code setelah membuat folder terarium anda dengan membuka tetingkap VS Code baru, mengklik ‘buka folder’, dan menavigasi ke folder baru anda. Klik butang ‘fail’ kecil di panel Explorer dan buat fail baru:</p>
+<figure>
+<img src="../images/vs-code-index.png" alt="explorer dalam VS Code" /><figcaption>explorer dalam VS Code</figcaption>
+</figure>
+<p>Atau</p>
+<p>Gunakan arahan ini dalam git bash anda: * <code>mkdir terrarium</code> * <code>cd terrarium</code> * <code>touch index.html</code> * <code>code index.html</code> atau <code>nano index.html</code></p>
+<blockquote>
+<p>index.html fail menunjukkan kepada penyemak imbas bahawa ia adalah fail lalai dalam folder; URL seperti <code>https: // anysite.com / test</code> mungkin dibina menggunakan struktur folder termasuk folder yang disebut <code>test</code> dengan <code>index.html</code> di dalamnya; <code>index.html</code> tidak perlu dipaparkan dalam URL.</p>
+</blockquote>
+<hr />
+<h2 id="tag-doctype-dan-html">Tag DocType dan html</h2>
+<p>Baris pertama fail HTML adalah doctype. Agak mengejutkan bahawa anda perlu mempunyai baris ini di bahagian paling atas fail, tetapi ia memberitahu penyemak imbas lama bahawa penyemak imbas perlu membuat halaman dalam mod standard, mengikuti spesifikasi html semasa.</p>
+<blockquote>
+<p>Tip: dalam Kod VS, anda boleh mengarahkan kursor ke atas teg dan mendapatkan maklumat mengenai penggunaannya dari panduan Rujukan MDN.</p>
+</blockquote>
+<p>Baris kedua harus berupa tag pembuka tag <code>&lt;html&gt;</code>, diikuti sekarang oleh tag penutupnya <code>&lt;/html&gt;</code>. Tag ini adalah elemen asas antara interface anda.</p>
+<h3 id="tugas-1">Tugas</h3>
+<p>Tambahkan baris ini di bahagian atas fail <code>index.html</code> anda:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">&lt;html&gt;&lt;/html&gt;</span></a></code></pre></div>
+<p>✅ Terdapat beberapa mod berbeza yang dapat ditentukan dengan menetapkan Jenis Dokumen dengan rentetan pertanyaan: <a href="https://developer.mozilla.org/docs/Web/HTML/Quirks_Mode_and_Standards_Mode">Mod Quirks dan Mod Piawai</a> . Mod ini digunakan untuk menyokong penyemak imbas lama yang tidak biasa digunakan pada masa ini (Netscape Navigator 4 dan Internet Explorer 5). Anda boleh berpegang pada pernyataan standard documentype.</p>
+<hr />
+<h2 id="dokumen-head">Dokumen ‘head’</h2>
+<p>Kawasan ‘head’ dokumen HTML merangkumi maklumat penting mengenai laman web anda, juga dikenali sebagai <a href="https://developer.mozilla.org/docs/Web/HTML/Element/meta">metadata</a>. Dalam kes kami, kami memberitahu pelayan web tempat halaman ini akan dihantar untuk diberikan, empat perkara berikut:</p>
+<ul>
+<li>tajuk halaman</li>
+<li>metadata halaman termasuk:
+<ul>
+<li>‘set watak’, menceritakan tentang pengekodan watak apa yang digunakan di halaman</li>
+<li>maklumat penyemak imbas, termasuk <code>x-ua-compatible</code> yang menunjukkan bahawa penyemak imbas tepi IE = disokong</li>
+<li>maklumat tentang bagaimana tingkah laku pandangan harus berkelakuan ketika dimuat. Menetapkan viewport untuk mempunyai skala awal 1 mengawal tahap zoom ketika halaman pertama kali dimuat.</li>
+</ul></li>
+</ul>
+<h3 id="tugas-2">Tugas</h3>
+<p>Tambahkan blok ‘head’ ke dokumen anda di antara tag pembuka dan penutup <code>&lt;html&gt;</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="kw">&lt;title&gt;</span>Welcome to my Virtual Terrarium<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;X-UA-Compatible&quot;</span><span class="ot"> content=</span><span class="st">&quot;IE=edge&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content=</span><span class="st">&quot;width=device-width, initial-scale=1&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">&lt;/head&gt;</span></a></code></pre></div>
+<p>✅ Apa yang akan berlaku jika anda menetapkan tag meta viewport seperti ini: <code>&lt;meta name =" viewport "content =" width = 600 "&gt;</code>? Baca lebih lanjut mengenai <a href="https://developer.mozilla.org/docs/Mozilla/Mobile/Viewport_meta_tag">viewport</a>.</p>
+<hr />
+<h2 id="dokumen-body">Dokumen ‘body’</h2>
+<h3 id="tag-html">Tag HTML</h3>
+<p>Dalam HTML, anda menambahkan tag ke fail .html anda untuk membuat elemen halaman web. Setiap tag biasanya memiliki tag pembuka dan penutup, seperti ini: <code>&lt;p&gt;hello&lt;/p&gt;</code> untuk menunjukkan perenggan. Buat badan antara muka anda dengan menambahkan satu set tag <code>&lt;body&gt;</code> di dalam pasangan tag <code>&lt;html&gt;</code>; markup anda sekarang kelihatan seperti ini:</p>
+<h3 id="tugas-3">Tugas</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">        <span class="kw">&lt;title&gt;</span>Welcome to my Virtual Terrarium<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">        <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">        <span class="kw">&lt;meta</span><span class="ot"> http-equiv=</span><span class="st">&quot;X-UA-Compatible&quot;</span><span class="ot"> content=</span><span class="st">&quot;IE=edge&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">        <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content=</span><span class="st">&quot;width=device-width, initial-scale=1&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">    <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="kw">&lt;body&gt;&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>Sekarang, anda boleh mula membina halaman anda. Biasanya, anda menggunakan tag <code>&lt;div&gt;</code> untuk membuat elemen yang terpisah dalam halaman. Kami akan membuat rangkaian elemen <code>&lt;div&gt;</code> yang akan mengandungi gambar.</p>
+<h3 id="gambar">Gambar</h3>
+<p>Satu tag html yang tidak memerlukan tag penutup adalah tag <code>&lt;img&gt;</code>, kerana ia memiliki elemen <code>src</code> yang berisi semua informasi yang diperlukan halaman untuk membuat item.</p>
+<p>Buat folder di aplikasi anda yang disebut <code>gambar</code> dan di dalamnya, tambahkan semua gambar di <a href="../solution/images">folder kod sumber</a>; (terdapat 14 gambar tumbuhan).</p>
+<h3 id="tugas-4">Tugas</h3>
+<p>Tambahkan gambar tanaman tersebut ke dalam dua lajur di antara tag <code>&lt;body&gt;&lt;/body&gt;</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;page&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;left-container&quot;</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant1&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant1.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant2&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant2.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant3&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant3.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-13" title="13">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant4&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant4.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-14" title="14">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-15" title="15">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant5&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant5.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-17" title="17">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-18" title="18">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-19" title="19">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant6&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant6.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-20" title="20">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-21" title="21">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-22" title="22">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant7&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant7.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-23" title="23">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-24" title="24">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-25" title="25">    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;right-container&quot;</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-26" title="26">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-27" title="27">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant8&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant8.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-28" title="28">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-29" title="29">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-30" title="30">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant9&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant9.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-31" title="31">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-32" title="32">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-33" title="33">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant10&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant10.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-34" title="34">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-35" title="35">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-36" title="36">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant11&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant11.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-37" title="37">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-38" title="38">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-39" title="39">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant12&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant12.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-40" title="40">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-41" title="41">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-42" title="42">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant13&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant13.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-43" title="43">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-44" title="44">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-45" title="45">            <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant14&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant14.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb4-46" title="46">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-47" title="47">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-48" title="48"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<blockquote>
+<p>Catatan: Spans vs Divs. Divs dianggap sebagai elemen ‘blok’, dan Spans adalah ‘sebaris’. Apa yang akan berlaku sekiranya anda mengubah div ini menjadi spans?</p>
+</blockquote>
+<p>Dengan penanda ini, tanaman kini muncul di skrin. Ia kelihatan sangat buruk, kerana mereka belum digayakan menggunakan CSS, dan kami akan melakukannya pada pelajaran seterusnya.</p>
+<p>Setiap gambar mempunyai teks alt yang akan muncul walaupun Anda tidak dapat melihat atau membuat gambar. Ini adalah sifat penting untuk disertakan untuk aksesibilitas. Ketahui lebih lanjut mengenai kebolehcapaian dalam pelajaran akan datang; buat masa ini, ingat bahawa atribut alt memberikan maklumat alternatif untuk gambar jika pengguna untuk beberapa sebab tidak dapat melihatnya (kerana sambungan lambat, kesalahan pada atribut src, atau jika pengguna menggunakan pembaca layar).</p>
+<p>✅ Adakah anda perhatikan bahawa setiap gambar mempunyai tag alt yang sama? Adakah ini amalan yang baik? Mengapa atau mengapa tidak? Bolehkah anda memperbaiki kod ini?</p>
+<hr />
+<h2 id="markup-semantik">Markup semantik</h2>
+<p>Secara amnya, lebih baik menggunakan ‘semantik’ yang bermakna semasa menulis HTML. Apa maksudnya? Ini bermaksud bahawa anda menggunakan tag HTML untuk mewakili jenis data atau interaksi yang dirancang untuknya. Sebagai contoh, teks tajuk utama pada halaman harus menggunakan tag <code>&lt;h1&gt;</code>.</p>
+<p>Tambahkan baris berikut tepat di bawah tag <code>&lt;body&gt;</code> pembuka anda:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;h1&gt;</span>My Terrarium<span class="kw">&lt;/h1&gt;</span></a></code></pre></div>
+<p>Menggunakan markup semantik seperti header menjadi <code>&lt;h1&gt;</code> dan senarai yang tidak disusun akan diberikan sebagai <code>&lt;ul&gt;</code> membantu pembaca skrin menavigasi halaman. Secara umum, butang harus ditulis sebagai <code>&lt;button&gt;</code> dan senarai harus <code>&lt;li&gt;</code>. Walaupun <em>mungkin</em> menggunakan elemen <code>&lt;span&gt;</code> yang digayakan khas dengan pengendali klik untuk mengekang butang, lebih baik pengguna kurang upaya menggunakan teknologi untuk menentukan di mana halaman terdapat butang, dan berinteraksi dengannya, jika elemen tersebut muncul sebagai butang. Atas sebab ini, cuba gunakan penanda semantik sebanyak mungkin.</p>
+<p>✅ Lihatlah pembaca skrin dan <a href="https://www.youtube.com/watch?v=OUDV1gqs9GA">bagaimanakah ia berinteraksi dengan laman web</a>. Bolehkah anda melihat mengapa mempunyai penanda bukan semantik boleh membuat pengguna kecewa?</p>
+<h2 id="terrarium">Terrarium</h2>
+<p>Bahagian terakhir antara muka ini melibatkan membuat markup yang akan digayakan untuk membuat terarium.</p>
+<h3 id="tugas-5">Tugas</h3>
+<p>Tambahkan markup ini di atas tag <code>&lt;/div&gt;</code> terakhir:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;terrarium&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb6-2" title="2">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jar-top&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jar-walls&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jar-glossy-long&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jar-glossy-short&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb6-7" title="7">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;dirt&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;jar-bottom&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<p>✅ Walaupun anda menambahkan markup ini ke skrin, anda tidak dapat melihat apa-apa. Kenapa?</p>
+<hr />
+<h2 id="cabaran">🚀Cabaran</h2>
+<p>Terdapat beberapa tag ‘lawas’ liar dalam HTML yang masih menyeronokkan untuk dimainkan, walaupun anda tidak boleh menggunakan tag yang tidak digunakan seperti <a href="https://developer.mozilla.org/docs/Web/HTML/Element#Obsolete_and_deprecated_elements">tag ini</a> dalam markup anda. Masih bolehkah anda menggunakan tag <code>&lt;marquee&gt;</code> lama untuk menjadikan tajuk h1 menatal secara mendatar? (jika anda melakukannya, jangan lupa membuangnya selepas itu)</p>
+<h2 id="kuiz-pasca-kuliah">Kuiz Pasca Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/16">Kuiz Pasca Kuliah</a></p>
+<h2 id="mengkaji-dan-belajar-sendiri">Mengkaji dan Belajar Sendiri</h2>
+<p>HTML adalah sistem blok bangunan ‘cuba dan benar’ yang telah membantu membina web menjadi seperti sekarang. Ketahui sedikit mengenai sejarahnya dengan mempelajari beberapa tanda lama dan baru. Bolehkah anda mengetahui mengapa beberapa teg tidak digunakan lagi dan ada yang ditambahkan? Tag apa yang mungkin diperkenalkan pada masa akan datang?</p>
+<p>Ketahui lebih lanjut mengenai membina laman web dan peranti mudah alih di <a href="https://docs.microsoft.com/learn/modules/build-simple-website/?WT.mc_id=cxaall-4621-cxall">Microsoft Learn</a>.</p>
+<h2 id="tugasan">Tugasan</h2>
+<p><a href="assignment.ms.md">Berlatih HTML anda: Bina mockup blog</a></p>
+</body>
+</html>

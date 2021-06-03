@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.it</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="creazione-di-unapp-bancaria-parte-1-modelli-html-e-rotte-in-unapp-web">Creazione di un’App Bancaria Parte 1: Modelli HTML e Rotte in un’app web</h1>
+<h2 id="quiz-pre-lezione">Quiz Pre-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/41?loc=it">Quiz Pre-Lezione</a></p>
+<h3 id="introduzione">Introduzione</h3>
+<p>Dall’avvento di JavaScript nei browser, i siti web stanno diventando più interattivi e complessi che mai. Le tecnologie web sono ora comunemente utilizzate per creare applicazioni completamente funzionali che vengono eseguite direttamente in un browser che vengono chiamate <a href="https://it.wikipedia.org/wiki/Applicazione_web">applicazioni web</a>. Poiché le app web sono altamente interattive, gli utenti non desiderano attendere il ricaricamento di una pagina intera ogni volta che viene eseguita un’azione. Ecco perché JavaScript viene utilizzato per aggiornare l’HTML direttamente utilizzando il DOM, per fornire un’esperienza utente più fluida.</p>
+<p>In questa lezione, getteremo le basi per creare un’app web bancaria, utilizzando modelli HTML per creare più schermate che possono essere visualizzate e aggiornate senza dover ricaricare l’intera pagina HTML.</p>
+<h3 id="prerequisito">Prerequisito</h3>
+<p>È necessario un server web locale per testare l’app web che verrà creata in questa lezione. Se non ne ha uno, si può installare <a href="https://nodejs.org">Node.js</a> e utilizzare il comando <code>npx lite-server</code> dalla cartella del progetto. Creerà un server web locale e aprirà la propria app in un browser.</p>
+<h3 id="preparazione">Preparazione</h3>
+<p>Sul proprio computer, creare una cartella denominata <code>bank</code> con un file denominato <code>index.html</code> al suo interno. Si inizierà da questo codice <a href="https://en.wikipedia.org/wiki/Boilerplate_code">boilerplate</a> HTML:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">&lt;html</span><span class="ot"> lang=</span><span class="st">&quot;en&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content=</span><span class="st">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="kw">&lt;title&gt;</span>Bank App<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="co">&lt;!-- Qui è dove si lavorerà --&gt;</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<hr />
+<h2 id="modelli-html.">Modelli HTML.</h2>
+<p>Se si desidera creare più schermate per una pagina Web, una soluzione potrebbe essere la creazione di un file HTML per ogni schermata che si desidera visualizzare. Tuttavia, questa soluzione presenta alcuni inconvenienti:</p>
+<ul>
+<li>È necessario ricaricare l’intero HTML quando si cambia schermata, il che può essere lento.</li>
+<li>È difficile condividere i dati tra le diverse schermate.</li>
+</ul>
+<p>Un altro approccio consiste nell’avere un solo file HTML e definire più <a href="https://developer.mozilla.org/docs/Web/HTML/Element/template">modelli HTML</a> utilizzando l’elemento <code>&lt;template&gt;</code>. Un modello è un blocco HTML riutilizzabile che non viene visualizzato dal browser e deve essere istanziato in fase di esecuzione utilizzando JavaScript.</p>
+<h3 id="attività">Attività</h3>
+<p>Verrà creata un’app bancaria con due schermate: la pagina di accesso e il cruscotto. Innanzitutto, si aggiunge nel corpo dell’HTML un elemento segnaposto che si utilizzerà per istanziare le diverse schermate dell’app:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;app&quot;</span><span class="kw">&gt;</span>Loading...<span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<p>Viene fornito un <code>ID</code> all’elemento per renderlo più facilmente individuabile con JavaScript in seguito.</p>
+<blockquote>
+<p>Suggerimento: poiché il contenuto di questo elemento verrà sostituito, si può inserire un messaggio di caricamento o un indicatore che verrà mostrato durante il caricamento dell’app.</p>
+</blockquote>
+<p>Successivamente, si aggiunge il modello HTML seguente per la pagina di accesso. Per ora si inserirà solo un titolo e una sezione contenente un collegamento che si utilizzerà per eseguire la navigazione.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;template</span><span class="ot"> id=</span><span class="st">&quot;login&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">&lt;h1&gt;</span>Bank App<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">&lt;section&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/dashboard&quot;</span><span class="kw">&gt;</span>Login<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="kw">&lt;/section&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">&lt;/template&gt;</span></a></code></pre></div>
+<p>Quindi si aggiungerà un altro modello HTML per la pagina del cruscotto. Questa pagina conterrà diverse sezioni:</p>
+<ul>
+<li>Un’intestazione con un titolo e un collegamento di disconnessione</li>
+<li>Saldo corrente del conto bancario</li>
+<li>Un elenco di transazioni, visualizzato in una tabella</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">&lt;template</span><span class="ot"> id=</span><span class="st">&quot;dashboard&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">&lt;header&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="kw">&lt;h1&gt;</span>Bank App<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/login&quot;</span><span class="kw">&gt;</span>Logout<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="kw">&lt;/header&gt;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="kw">&lt;section&gt;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    Balance: 100$</a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="kw">&lt;/section&gt;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="kw">&lt;section&gt;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">    <span class="kw">&lt;h2&gt;</span>Transactions<span class="kw">&lt;/h2&gt;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="kw">&lt;table&gt;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">      <span class="kw">&lt;thead&gt;</span></a>
+<a class="sourceLine" id="cb4-13" title="13">        <span class="kw">&lt;tr&gt;</span></a>
+<a class="sourceLine" id="cb4-14" title="14">          <span class="kw">&lt;th&gt;</span>Date<span class="kw">&lt;/th&gt;</span></a>
+<a class="sourceLine" id="cb4-15" title="15">          <span class="kw">&lt;th&gt;</span>Object<span class="kw">&lt;/th&gt;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">          <span class="kw">&lt;th&gt;</span>Amount<span class="kw">&lt;/th&gt;</span></a>
+<a class="sourceLine" id="cb4-17" title="17">        <span class="kw">&lt;/tr&gt;</span></a>
+<a class="sourceLine" id="cb4-18" title="18">      <span class="kw">&lt;/thead&gt;</span></a>
+<a class="sourceLine" id="cb4-19" title="19">      <span class="kw">&lt;tbody&gt;&lt;/tbody&gt;</span></a>
+<a class="sourceLine" id="cb4-20" title="20">    <span class="kw">&lt;/table&gt;</span></a>
+<a class="sourceLine" id="cb4-21" title="21">  <span class="kw">&lt;/section&gt;</span></a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="kw">&lt;/template&gt;</span></a></code></pre></div>
+<blockquote>
+<p>Suggerimento: durante la creazione di modelli HTML, se si vuole vedere come apparirà, si possono commentare le righe tra <code>&lt;template&gt;</code> <code>&lt;/template&gt;</code> racchiudendole <code>tra &lt;!- -&gt;--&gt;</code>.</p>
+</blockquote>
+<p>✅ Perché si pensa che vengano utilizzati gli attributi <code>id</code> sui modelli? Si potrebbe usare qualcos’altro come le classi?</p>
+<h2 id="visualizzazione-di-modelli-con-javascript">Visualizzazione di modelli con JavaScript</h2>
+<p>Se si prova il proprio file HTML corrente in un browser, si vedrà che si blocca visualizzando <code>Loading ...</code> Questo perché si deve aggiungere del codice JavaScript per istanziare e visualizzare i modelli HTML.</p>
+<p>L’istanza di un modello viene solitamente eseguita in 3 passaggi:</p>
+<ol type="1">
+<li>Recuperare l’elemento del modello nel DOM, ad esempio utilizzando <a href="https://developer.mozilla.org/it/docs/Web/API/Document/getElementById"><code>document.getElementById</code></a>.</li>
+<li>Clonare l’elemento template, usando <a href="https://developer.mozilla.org/docs/Web/API/Node/cloneNode"><code>cloneNode</code></a>.</li>
+<li>Collegarlo al DOM sotto un elemento visibile, ad esempio utilizzando <a href="https://developer.mozilla.org/it/docs/Web/API/Node/appendChild"><code>appendChild</code></a>.</li>
+</ol>
+<p>✅ Perché è necessario clonare il modello prima di collegarlo al DOM? Cosa si pensa che accadrebbe se venisse saltato questo passaggio?</p>
+<h3 id="attività-1">Attività</h3>
+<p>Creare un nuovo file denominato <code>app.js</code> nella cartella del progetto e importare quel file nella sezione <code>&lt;head&gt;</code> del proprio HTML:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;app.js&quot;</span><span class="ot"> defer</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<p>Ora in <code>app.js</code>, verrà creata una nuova funzione <code>updateRoute</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">function</span> <span class="at">updateRoute</span>(templateId) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">const</span> template <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(templateId)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">const</span> view <span class="op">=</span> <span class="va">template</span>.<span class="va">content</span>.<span class="at">cloneNode</span>(<span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="kw">const</span> app <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;app&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="va">app</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="va">app</span>.<span class="at">appendChild</span>(view)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>Quello che si fa qui sono esattamente i 3 passaggi descritti sopra. Si istanza il modello con l’id <code>templateId</code> e si inserisce il suo contenuto clonato nel segnaposto dell’app. Notare che si deve usare <code>cloneNode (true)</code> per copiare l’intero sottoalbero del modello.</p>
+<p>Ora chiamare questa funzione con uno dei template e guardare il risultato.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="at">updateRoute</span>(<span class="st">&#39;login&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<p>✅ Qual è lo scopo di questo codice <code>app.innerHTML = '';</code>? Cosa succede senza di essa?</p>
+<h2 id="creazione-di-rotte">Creazione di rotte</h2>
+<p>Quando si parla di un’app web, si definisce <em>Routing</em> (instradamento) l’intento di mappare gli <strong>URL</strong> a schermate specifiche che dovrebbero essere visualizzate. Su un sito web con più file HTML, questa operazione viene eseguita automaticamente poiché i percorsi dei file si riflettono sull’URL. Ad esempio, con questi file nella cartella del progetto:</p>
+<pre><code>mywebsite/index.html
+mywebsite/login.html
+mywebsite/admin/index.html</code></pre>
+<p>Se si crea un server web con <code>mywebsite</code> come radice, la mappatura dell’URL sarà:</p>
+<pre><code>https://site.com            --&gt; mywebsite/index.html
+https://site.com/login.html --&gt; mywebsite/login.html
+https://site.com/admin/     --&gt; mywebsite/admin/index.html</code></pre>
+<p>Tuttavia, per l’app web in costruzione si utilizza un singolo file HTML contenente tutte le schermate, quindi questo comportamento predefinito non sarà di aiuto. Si deve creare questa mappa manualmente ed eseguire l’aggiornamento del modello visualizzato utilizzando JavaScript.</p>
+<h3 id="attività-2">Attività</h3>
+<p>Si userà un semplice oggetto per implementare una <a href="https://it.wikipedia.org/wiki/Array_associativo">mappa</a> tra i percorsi degli URL e i propri modelli. Aggiungere questo oggetto all’inizio del file <code>app.js</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">const</span> routes <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="st">&#39;/login&#39;</span><span class="op">:</span> <span class="op">{</span> <span class="dt">templateId</span><span class="op">:</span> <span class="st">&#39;login&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="st">&#39;/dashboard&#39;</span><span class="op">:</span> <span class="op">{</span> <span class="dt">templateId</span><span class="op">:</span> <span class="st">&#39;dashboard&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="op">};</span></a></code></pre></div>
+<p>Ora modificare un po’ la funzione <code>updateRoute</code>. Invece di passare direttamente il <code>templateId</code> come argomento, lo si vuole recuperare guardando prima l’URL corrente, quindi utilizzndo la mappa per ottenere il valore dell’ID del modello corrispondente. Si può usare <a href="https://developer.mozilla.org/docs/Web/API/Location/pathname"><code>window.location.pathname</code></a> per ottenere solo la sezione del percorso dall’URL.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">function</span> <span class="at">updateRoute</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="kw">const</span> path <span class="op">=</span> <span class="va">window</span>.<span class="va">location</span>.<span class="at">pathname</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="kw">const</span> route <span class="op">=</span> routes[path]<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5">  <span class="kw">const</span> template <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="va">route</span>.<span class="at">templateId</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-6" title="6">  <span class="kw">const</span> view <span class="op">=</span> <span class="va">template</span>.<span class="va">content</span>.<span class="at">cloneNode</span>(<span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-7" title="7">  <span class="kw">const</span> app <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;app&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-8" title="8">  <span class="va">app</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-9" title="9">  <span class="va">app</span>.<span class="at">appendChild</span>(view)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="op">}</span></a></code></pre></div>
+<p>Qui sono state mappato le rotte che sono state dichiarate al modello corrispondente. Si può provare se funziona correttamente modificando manualmente l’URL nel proprio browser.</p>
+<p>✅ Cosa succede se si inserisce un percorso sconosciuto nell’URL? Come potrebbe essere risolto questo problema?</p>
+<h2 id="aggiungere-navigazione">Aggiungere navigazione</h2>
+<p>Il prossimo passo per la costruzione dell’app è aggiungere la possibilità di navigare tra le pagine senza dover modificare manualmente l’URL. Questo implica due cose:</p>
+<ol type="1">
+<li>Aggiornamento dell’URL corrente</li>
+<li>Aggiornamento del modello visualizzato in base al nuovo URL</li>
+</ol>
+<p>E’ già stata trattata la seconda parte con la funzione <code>updateRoute</code>, quindi occorre capire come aggiornare l’URL corrente.</p>
+<p>Si dovrà utilizzare JavaScript e più precisamente <a href="https://developer.mozilla.org/docs/Web/API/History/pushState">history.pushState</a> che permette di aggiornare l’URL e creare una nuova voce nella cronologia di navigazione, senza ricaricare l’HTML.</p>
+<blockquote>
+<p>Nota: Sebbene l’elemento HTML ancora <a href="https://developer.mozilla.org/it/docs/Web/HTML/Element/a"><code>&lt;a href&gt;</code></a> possa essere usato da solo per creare collegamenti ipertestuali a diversi URL, è anche in grado di fare ricaricare al browser l’HTML nella modalità predefinita. È necessario prevenire questo comportamento quando si gestisce il routing con javascript personalizzato, utilizzando la funzione preventDefault() sull’evento click.</p>
+</blockquote>
+<h3 id="attività-3">Attività</h3>
+<p>Si crea una nuova funzione da utilizzare per navigare nell’app:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">navigate</span>(path) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="va">window</span>.<span class="va">history</span>.<span class="at">pushState</span>(<span class="op">{},</span> path<span class="op">,</span> <span class="va">window</span>.<span class="va">location</span>.<span class="at">origin</span> <span class="op">+</span> path)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="at">updateRoute</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Questo metodo aggiorna prima l’URL corrente in base al percorso fornito, quindi aggiorna il modello. La proprietà <code>window.location.origin</code> restituisce l’URL radice, permettendo di ricostruire un URL completo da un dato percorso.</p>
+<p>Ora che si ha questa funzione, ci si può occupare del problema che si verifica se un percorso non corrisponde a nessuna rotta definita. Si modificherà la funzione <code>updateRoute</code> aggiungendo una soluzione di contingenza per indirizzare verso una delle rotte esistenti se non viene trovata una corrispondenza.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">function</span> <span class="at">updateRoute</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="kw">const</span> path <span class="op">=</span> <span class="va">window</span>.<span class="va">location</span>.<span class="at">pathname</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="kw">const</span> route <span class="op">=</span> routes[path]<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-4" title="4"></a>
+<a class="sourceLine" id="cb13-5" title="5">  <span class="cf">if</span> (<span class="op">!</span>route) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-6" title="6">    <span class="cf">return</span> <span class="at">navigate</span>(<span class="st">&#39;/login&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-8" title="8"></a>
+<a class="sourceLine" id="cb13-9" title="9">  ...</a></code></pre></div>
+<p>Se non è possibile trovare una rotta, si esegue un reindirizzamento alla pagina <code>login</code>.</p>
+<p>Ora si crea una funzione per ottenere l’URL quando si fa clic su un collegamento e per impedire il comportamento predefinito del browser per un collegamento:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">function</span> <span class="at">onLinkClick</span>(event) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="va">event</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="at">navigate</span>(<span class="va">event</span>.<span class="va">target</span>.<span class="at">href</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Si completa il sistema di navigazione aggiungendo collegamenti ai link di accesso (<em>Login</em>) e di disconnessione (<em>Logout</em>) nell’HTML.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/dashboard&quot;</span><span class="ot"> onclick=</span><span class="st">&quot;onLinkClick()&quot;</span><span class="kw">&gt;</span>Login<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb15-2" title="2">...</a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/login&quot;</span><span class="ot"> onclick=</span><span class="st">&quot;onLinkClick()&quot;</span><span class="kw">&gt;</span>Logout<span class="kw">&lt;/a&gt;</span></a></code></pre></div>
+<p>Utilizzando l ’attributo <a href="https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onclick"><code>onclick</code></a> associare l’evento <code>click</code> al codice JavaScript, in questo caso la chiamata alla funzione <code>navigate()</code> .</p>
+<p>Provare a fare clic su questi collegamenti, ora si dovrebbe essere in grado di navigare tra le diverse schermate dell’app.</p>
+<p>✅ Il metodo <code>history.pushState</code> fa parte dello standard HTML5 e implementato in <a href="https://caniuse.com/?search=pushState">tutti i browser moderni</a>. Se si sta creando un’app web per browser meno recenti, c’è un trucco che si può usare al posto di questa API: usando un <a href="https://en.wikipedia.org/wiki/URI_fragment">hash (<code>#</code>)</a> prima del percorso si può implementare un instradatamento che funziona con la normale navigazione dell’elemento ancora e non ricarica la pagina, poiché il suo scopo era creare collegamenti all’interno di una pagina.</p>
+<h2 id="gestione-dei-pulsanti-avanti-e-indietro-del-browser">Gestione dei pulsanti Avanti e Indietro del browser</h2>
+<p>L’utilizzo di <code>history.pushState</code> crea nuove voci nella cronologia di navigazione del browser. Si può verificare tenendo premuto il <em>pulsante Indietro</em> del proprio browser, dovrebbe visualizzare qualcosa del genere:</p>
+<figure>
+<img src="../history.png" alt="Videata della cronologia di navigazione" /><figcaption>Videata della cronologia di navigazione</figcaption>
+</figure>
+<p>Se si prova a fare clic sul pulsante Indietro alcune volte, si vedrà che l’URL corrente cambia e la cronologia viene aggiornata, ma lo stesso modello continua a essere visualizzato.</p>
+<p>Questo perché il browser non sa che si deve chiamare <code>updateRoute()</code> ogni volta che cambia la cronologia. Se si dà un’occhiata alla documentazione di <a href="https://developer.mozilla.org/docs/Web/API/History/pushState"><code>history.pushState</code></a> si può vedere che se lo stato cambia, vale a dire che si è passati a un URL diverso, viene attivato l’<a href="https://developer.mozilla.org/docs/Web/API/Window/popstate_event">evento</a> <code>popstate</code>. Verrà usato per risolvere quel problema.</p>
+<h3 id="attività-4">Attività</h3>
+<p>Per assicurarsi che il modello visualizzato venga aggiornato quando la cronologia del browser cambia, si aggiungerà una nuova funzione che chiama <code>updateRoute()</code>. Verrà fatto in fondo al file <code>app.js</code>:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="va">window</span>.<span class="at">onpopstate</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="at">updateRoute</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="at">updateRoute</span>()<span class="op">;</span></a></code></pre></div>
+<blockquote>
+<p>Nota: è stata usata una <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Functions/Arrow_functions">funzione freccia</a> qui per dichiarare il gestore di eventi <code>popstate</code> per concisione, ma una funzione normale andrebbe bene allo stesso modo.</p>
+</blockquote>
+<p>Ecco un video di aggiornamento sulle funzioni freccia:</p>
+<p><a href="https://youtube.com/watch?v=OP6eEbOj2sc"><img src="https://img.youtube.com/vi/OP6eEbOj2sc/0.jpg" alt="Funzionifreccia" /></a></p>
+<blockquote>
+<p>Fare clic sull’immagine sopra per un video sulle funzioni freccia</p>
+</blockquote>
+<p>Ora provare a utilizzare i pulsanti Indietro e Avanti del proprio browser e controllare che il percorso visualizzato sia aggiornato correttamente questa volta.</p>
+<hr />
+<h2 id="sfida">🚀 Sfida</h2>
+<p>Aggiungere un nuovo modello e instradare per una terza pagina che mostra i crediti per questa app.</p>
+<h2 id="quiz-post-lezione">Quiz Post-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/42?loc=it">Quiz post-lezione</a></p>
+<h2 id="revisione-e-auto-apprendimento">Revisione e Auto Apprendimento</h2>
+<p>Il routing (instradamento) è una delle parti sorprendentemente complicate dello sviluppo web, soprattutto perché il web passa dai comportamenti di aggiornamento della pagina all’aggiornamento della pagina dell’applicazione a pagina singola. Leggere alcune informazioni su <a href="https://docs.microsoft.com/azure/static-web-apps/routes?WT.mc_id=academic-4621-cxa">come il servizio App Web Static di Azure</a> gestisce il routing. Si può spiegare perché alcune delle decisioni descritte in quel documento sono necessarie?</p>
+<h2 id="compito">Compito</h2>
+<p><a href="assignment.it.md">Migliorare l’instradamento</a></p>
+</body>
+</html>

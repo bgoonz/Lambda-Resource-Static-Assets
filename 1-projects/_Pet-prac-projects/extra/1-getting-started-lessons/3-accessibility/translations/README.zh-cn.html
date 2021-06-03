@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.zh-cn</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="创造无障碍网页">创造无障碍网页</h1>
+<p><img src="/sketchnotes/webdev101-a11y.png" alt="All About Accessibility" /> &gt; 涂鸦笔记作者：<a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="课前小测">课前小测</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/5?loc=zh_cn">课前小测</a></p>
+<blockquote>
+<p>互联网的力量存在于其普适性中，让包括残障人士在内的每个人都能访问互联网，是其中不可或缺的一方面。</p>
+<p>—— Timothy Berners-Lee， W3C（万维网联盟）主席、万维网发明者</p>
+</blockquote>
+<p>这段引言恰当地强调了创造无障碍网页的重要性。一个无法被所有人顺畅访问的应用按照定义来说是排他的，作为 Web 开发者我们应该始终将无障碍性牢记在心中。从一开始就关注到这一点，可以让你在确保每个人都能顺利访问你创造的页面这一方面做得很优秀。这节课中，你会了解到一些能帮助你确保你的网站资源无障碍的工具，也会学到该怎样将无障碍性牢记在心中。</p>
+<h2 id="相关工具">相关工具</h2>
+<h3 id="屏幕阅读器screen-readers">屏幕阅读器（Screen readers）</h3>
+<p>屏幕阅读器可以说是最知名的无障碍工具之一。</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E8%9E%A2%E5%B9%95%E9%96%B1%E8%AE%80%E5%99%A8">屏幕阅读器</a>在视力障碍者中被广泛使用。就像我们会花时间来确保浏览器正确地传达了我们想要分享的信息， 我们也必须要确保屏幕阅读器也可以达到同样的效果。</p>
+<p>一般来说，屏幕阅读器会从上到下用语音阅读一个页面。如果你的页面全是文字，阅读器传达信息的方式和浏览器会是基本相似的。当然，网页几乎不会只有文字，还会包含链接、图像、颜色以及其他视觉组件。我们也必须得确保这些信息可以被屏幕阅读器正确阅读。</p>
+<p>每一位 Web 开发者都需要去熟悉屏幕阅读器。正如上面强调的一样，这是你的用户会用到的一种客户端。就像你很熟悉浏览器的操作一样，你也应该去学习如何操作屏幕阅读器。幸运的是，多数操作系统都内置了屏幕阅读器。</p>
+<p>一些浏览器也有内置的工具和扩展程序，可以读出文字甚至提供一些基本的导航功能，比如<a href="https://support.microsoft.com/zh-cn/microsoft-edge/microsoft-edge-%E4%B8%AD%E7%9A%84%E8%BE%85%E5%8A%A9%E5%8A%9F%E8%83%BD-4c696192-338e-9465-b2cd-bd9b698ad19a">这些以无障碍为目的的 Edge 浏览器工具</a>。这些也是重要的无障碍工具，但是工作方式和屏幕阅读器非常不同，所以不该被错误地用来作为屏幕阅读器的测试工具。</p>
+<p>✅ 试用一下屏幕阅读器和浏览器文本阅读器。在 Windows 系统中默认带有<a href="https://support.microsoft.com/zh-cn/windows/%E8%AE%B2%E8%BF%B0%E4%BA%BA%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97-e4397a0d-ef4f-b386-d8ae-c172f109bdb1">讲述人</a>，也可以安装 <a href="https://webaim.org/articles/jaws/">JAWS</a> 和 <a href="https://www.nvaccess.org/about-nvda/">NVDA</a>。在 macOS 和 iOS 中默认装有<a href="https://support.apple.com/zh-cn/guide/voiceover/welcome/10">旁白</a>。</p>
+<h3 id="缩放zoom">缩放（Zoom）</h3>
+<p>另一个视力障碍者常用的工具是缩放。最基本的缩放功能是静态缩放，通过 <code>Control + 加号（+）</code> 或者降低屏幕分辨率达成。这样的缩放会导致整个页面尺寸被调整，所以使用<a href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Responsive_Design">响应式设计（responsive design）</a>对于提高了缩放级别的情况下的用户体验非常重要。</p>
+<p>另一类缩放需要借助特定的软件来放大屏幕上的部分区域，就像一个真正的放大镜一样。在 Windows 上内置了<a href="https://support.microsoft.com/zh-cn/windows/%E4%BD%BF%E7%94%A8%E6%94%BE%E5%A4%A7%E9%95%9C%E5%8F%AF%E4%BD%BF%E5%B1%8F%E5%B9%95%E4%B8%8A%E7%9A%84%E5%86%85%E5%AE%B9%E6%9B%B4%E6%98%93%E4%BA%8E%E6%9F%A5%E7%9C%8B-414948ba-8b1c-d3bd-8615-0e5e32204198">放大镜</a>，也可以使用 <a href="https://www.freedomscientific.com/training/zoomtext/getting-started/">ZoomText</a> 这样有更多特性和更大用户群体的第三方软件。在 macOS 和 iOS 上则内置了<a href="https://www.apple.com.cn/accessibility/vision/">放大器</a></p>
+<h3 id="对比度检查器contrast-checkers">对比度检查器（Contrast checkers）</h3>
+<p>我们要谨慎地挑选网页上的配色，以照顾到色盲人群和难以区分低对比度颜色的用户的需要。</p>
+<p>✅ 用类似 <a href="https://microsoftedge.microsoft.com/addons/detail/wcag-color-contrast-check/idahaggnlnekelhgplklhfpchbfdmkjp?hl=zh-CN">WCAG’s color checker</a> 这样的浏览器插件来检测一下你喜爱的网站的颜色使用情况。你学到了什么？</p>
+<h3 id="lighthouse">Lighthouse</h3>
+<p>在浏览器开发者工具中，你可以找到 Lighthouse 工具。这个工具可以让你一睹一个网站的无障碍性（以及其他性能分析）。尽管并不建议完全依赖 Lighthouse，但将 100% 满分作为一个基础将会很有用。</p>
+<p>✅ 在你的浏览器开发者工具中找到 Lighthouse 栏，然后用它分析任何一个网站。你发现了什么？</p>
+<h2 id="designing-for-accessibility">Designing for accessibility</h2>
+<p>无障碍性（accessibility）是一个相对比较大的主题，为了帮助你更深入地了解，这里许多你可以参考的资源。</p>
+<ul>
+<li><a href="https://accessibility.umn.edu/your-role/web-developers">Accessible U - 明尼苏达大学</a></li>
+</ul>
+<p>尽管我们没法在这里涵盖创建一个无障碍网站的方方面面，但下面还是提供了一些你会想要去实践的核心信条。从一开始就设计一个无障碍页面<strong>总是</strong>比回过头来让一个已经存在的页面变得无障碍会更容易。</p>
+<h2 id="不错的展示原则">不错的展示原则</h2>
+<h3 id="使用安全色色板">使用安全色色板</h3>
+<p>每个人看待世界的方式都不尽相同，当然也包括颜色。当你为你的站点选择一套配色时，应该确保其对所有人都是无障碍的。这里有一个非常棒的<a href="http://colorsafe.co/">生成安全色色板的工具</a>。</p>
+<p>✅ 举出一个配色非常糟糕的网站的例子。你认为它糟糕在哪？</p>
+<h3 id="正确使用-html">正确使用 HTML</h3>
+<p>使用 CSS 和 JavaScript 有能力让任何元素看起来在控制效果上是任何一种类型的元素。比如 <code>&lt;span&gt;</code> 可以被用来创建出一个 <code>&lt;button&gt;</code>，而 <code>&lt;b&gt;</code> 则可能会被弄成一个超链接。尽管有人可能认为这样会更加容易调整样式，但是它不会传达任何有效信息给屏幕阅读器。请使用合适的 HTML 来建立对于页面的控制效果，比如你想要一个超链接，请使用 <code>&lt;a&gt;</code> 标签。用正确的 HTML 来实现正确的控制效果，这就叫做实践了“语义化 HTML”（Semantic HTML）。</p>
+<p>✅ 去任意一个网站看看设计师和开发者是否合理使用了 HTML。你能不能找出一个本该是链接的按钮？提示：在浏览器中右键点击并且选择“查看网页源代码”来查看底层代码（译注：此处使用“检查”/“审查元素”来观察或许会更加合适）。</p>
+<h3 id="建立描述性的标题层级">建立描述性的标题层级</h3>
+<p>屏幕阅读器使用者为了寻找信息和在页面中导航，会<a href="https://webaim.org/projects/screenreadersurvey8/#finding">非常依赖页面中的标题</a>。使用描述性的标题内容和语义化的标题标签，对于创建一个对屏幕阅读器使用者友好的网站是非常重要的。</p>
+<h3 id="使用良好的视觉线索">使用良好的视觉线索</h3>
+<p>CSS 让你可以完全随意地控制页面中任何元素的外观。你可以创建一个没有轮廓的文本框或者一个没有下划线的超链接。但不幸的是，移除这些视觉线索会让一些习惯依靠这些线索的使用者难以认出它们的控制功能。</p>
+<h2 id="链接文本的重要性">链接文本的重要性</h2>
+<p>对于网页导航来说，超链接非常关键。因此，确保屏幕阅读器可以准确阅读链接才能保证所有用户都可以顺利地在你的网站导航。</p>
+<h3 id="屏幕阅读器与链接">屏幕阅读器与链接</h3>
+<p>可想而知，屏幕阅读器会像阅读页面中其他文本一样阅读链接的文本。将这点牢记在心后，可以看看下面两种看起来似乎还能接受的写法。</p>
+<blockquote>
+<p>小蓝企鹅，有时也被称作仙企鹅，是世界上最小的企鹅。<a href="https://zh.wikipedia.org/wiki/%E5%B0%8F%E8%97%8D%E4%BC%81%E9%B5%9D">点击这里</a>来查看更多信息。</p>
+</blockquote>
+<blockquote>
+<p>小蓝企鹅，有时也被称作仙企鹅，是世界上最小的企鹅。访问 https://zh.wikipedia.org/wiki/%E5%B0%8F%E8%97%8D%E4%BC%81%E9%B5%9D 来查看更多信息。</p>
+</blockquote>
+<blockquote>
+<p><strong>注意</strong> 下文即将提到，你应该 <strong>避免</strong> 使用上面这两种写法。</p>
+</blockquote>
+<p>记住，屏幕阅读器和浏览器功能上有一些差异，是不同的交互媒介。</p>
+<h3 id="使用-url-的问题">使用 URL 的问题</h3>
+<p>屏幕阅读器会阅读文本，如果 URL 出现在了文本里，屏幕阅读器就会直接读出这段 URL。一般来说，URL 直接传递的信息都意义不大，而且听起来会很吵。如果你曾经在手机中将一段包含 URL 的文字用语音播放出来，就可能有类似体会。</p>
+<h3 id="使用点击这里的问题">使用“点击这里”的问题</h3>
+<p>屏幕阅读器也有只阅读页面中超链接的功能，就仿佛一个有视力的人扫视页面来找到所有链接一样。如果所有的链接文本都是“点击这里”，用户听到的就会一直是“点击这里，点击这里，点击这里，点击这里，点击这里……”，完全无法区分各个链接。</p>
+<h3 id="优秀的链接文本">优秀的链接文本</h3>
+<p>优秀的链接文本会简要地描述链接另一侧是什么。在上面谈论小蓝企鹅的例子中，链接到的是关于这个物种的维基百科页面。使用<em>小蓝企鹅</em>作为链接文本将会非常合适，因为它能清楚地告诉人们如果他们点击了这个链接会了解到什么 —— 小蓝企鹅。</p>
+<blockquote>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%B0%8F%E8%97%8D%E4%BC%81%E9%B5%9D">小蓝企鹅</a>，有时也被称作仙企鹅，是世界上最小的企鹅。</p>
+</blockquote>
+<p>✅ 上网随便逛几分钟，找一找使用了难以理解的链接策略的网页。对比一下其他有更好的链接的网站，你有何体会？</p>
+<h4 id="关于搜索引擎">关于搜索引擎</h4>
+<p>保证你的网站对所有人都无障碍还能带来一个额外的好处：可以帮助搜索引擎导航你的网站。搜索引擎会使用链接文本来了解页面的主题，所以使用好的链接文本其实利人利己！</p>
+<h3 id="aria">ARIA</h3>
+<p>想象一个下面这样的网页：</p>
+<table>
+<thead>
+<tr class="header">
+<th>产品</th>
+<th>详情</th>
+<th>预订</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>小玩意</td>
+<td><a href="&#39;#&#39;">详情</a></td>
+<td><a href="&#39;#&#39;">预订</a></td>
+</tr>
+<tr class="even">
+<td>超棒的小玩意</td>
+<td><a href="&#39;#&#39;">详情</a></td>
+<td><a href="&#39;#&#39;">预订</a></td>
+</tr>
+</tbody>
+</table>
+<p>在这个例子中，复制“详情”和“预订”这两个文本对于使用浏览器的用户来说是没有理解障碍的。然而，使用屏幕阅读器的用户则只会听到对 <em>详情</em> 和 <em>预订</em> 这两个词的两次毫无上下文的复读。</p>
+<p>为了处理这类情况，HTML 支持一些被称为 <a href="https://developer.mozilla.org/zh-CN/docs/Web/Accessibility/ARIA">Accessible Rich Internet Applications (ARIA)</a> 的属性。这些属性让你可以为屏幕阅读提供一些额外的信息。</p>
+<blockquote>
+<p><strong>注意</strong>：正如 HTML 的其他方面一样，浏览器和屏幕阅读器对 ARIA 的支持情况可能会不同，但是多数主流客户端都是支持 ARIA 属性的。</p>
+</blockquote>
+<p>当页面格式不允许你直接用文本描述链接时，你可以使用 <code>aria-label</code> 属性来对链接进行描述。对于一个小玩意的详情描述可以被设置为：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;#&quot;</span><span class="ot"> aria-label=</span><span class="st">&quot;小玩意的详情&quot;</span><span class="kw">&gt;</span>详情<span class="kw">&lt;/a&gt;</span></a></code></pre></div>
+<p>✅ 一般来说，使用此前提到的语义化标签会比使用 ARIA 更好，但是有时确实存在没法找到合适的语义标签来描述一些 HTML 元素。比如“树”，没有和“树”语义等价的 HTML 标签，所以你可以给这个元素选用一般的 <code>&lt;div&gt;</code> 标签，然后加上合理的 role 和 aria 属性值。<a href="https://developer.mozilla.org/zh-CN/docs/Web/Accessibility/ARIA">MDN ARIA 文档</a>有更多有用的相关信息。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;h2</span><span class="ot"> id=</span><span class="st">&quot;tree-label&quot;</span><span class="kw">&gt;</span>文件查看器<span class="kw">&lt;/h2&gt;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">&lt;div</span><span class="ot"> role=</span><span class="st">&quot;tree&quot;</span><span class="ot"> aria-labelledby=</span><span class="st">&quot;tree-label&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="kw">&lt;div</span><span class="ot"> role=</span><span class="st">&quot;treeitem&quot;</span><span class="ot"> aria-expanded=</span><span class="st">&quot;false&quot;</span><span class="ot"> tabindex=</span><span class="st">&quot;0&quot;</span><span class="kw">&gt;</span>上传&lt;/div&gt;</a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<h2 id="图像">图像</h2>
+<p>毫无疑问，屏幕阅读器是没法自动阅读图像内容的，但是让图像变得无障碍并不会很麻烦 —— 这正是 <code>alt</code> 属性所做的事。所有有意义的图像都应该有一个 <code>alt</code> 属性来描述它们的内容是什么。纯装饰性的图像应该有一个被设为空字符串的 <code>alt</code> 属性：<code>alt=""</code>，这样可以防止屏幕阅读器画蛇添足地描述这些装饰性图像。</p>
+<p>✅ 没错，搜索引擎也无法理解图片的内容，它们也会使用 alt 属性中的文本。这又一次证明，确保你的页面无障碍可以带来额外的好处！</p>
+<h2 id="键盘">键盘</h2>
+<p>一些用户没法使用鼠标或者触控板，而是只能依赖键盘交互来从一个元素切换到下一个元素。在你的网站上以有逻辑的顺序来展示内容是很重要的，这样一来键盘用户可以在往下浏览页面时访问到每一个可交互元素。如果你用你语义化标签来构建页面并且用 CSS 来控制它们的视觉外观，你的页面就应该会是可用键盘导航的，但是最好还是手动测试一遍。可在<a href="https://webaim.org/techniques/keyboard/">键盘导航策略</a>了解更多关于这方面的内容。</p>
+<p>✅ 前往任意一个网站然后尝试只使用你的键盘来导航。哪些可以正常使用？哪些不可以？为什么？</p>
+<h2 id="总结">总结</h2>
+<p>只有部分人才能顺利访问的网页算不上真正的万维网（world-wide web）。确保你创造的网站无障碍地最好方式就是从一开始就贯彻无障碍的最佳实践。尽管这可能会引入额外的步骤，但现在就将这些技术包含在你的工作流程中将意味着你创造的所有页面都会是无障碍的。</p>
+<hr />
+<h2 id="挑战">🚀 挑战</h2>
+<p>利用你学到的策略，尽可能将下方的 HTML 代码重写为无障碍的。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">&lt;title&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">      Example</a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">&#39;../assets/style.css&#39;</span><span class="ot"> rel=</span><span class="st">&#39;stylesheet&#39;</span><span class="ot"> type=</span><span class="st">&#39;text/css&#39;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;site-header&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-11" title="11">      <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;site-title&quot;</span><span class="kw">&gt;</span>Turtle Ipsum<span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-12" title="12">      <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;site-subtitle&quot;</span><span class="kw">&gt;</span>The World&#39;s Premier Turtle Fan Club<span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-14" title="14">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;main-nav&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-15" title="15">      <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;nav-header&quot;</span><span class="kw">&gt;</span>Resources<span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-16" title="16">      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;nav-list&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-17" title="17">        <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;nav-item nav-item-bull&quot;</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&quot;https://www.youtube.com/watch?v=CMNry4PE93Y&quot;</span><span class="kw">&gt;</span>&quot;I like turtles&quot;<span class="kw">&lt;/a&gt;&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-18" title="18">        <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;nav-item nav-item-bull&quot;</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&quot;https://en.wikipedia.org/wiki/Turtle&quot;</span><span class="kw">&gt;</span>Basic Turtle Info<span class="kw">&lt;/a&gt;&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-19" title="19">        <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;nav-item nav-item-bull&quot;</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&quot;https://en.wikipedia.org/wiki/Turtles_(chocolate)&quot;</span><span class="kw">&gt;</span>Chocolate Turtles<span class="kw">&lt;/a&gt;&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-20" title="20">      <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-21" title="21">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-22" title="22">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;main-content&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-23" title="23">      <span class="kw">&lt;div&gt;</span></a>
+<a class="sourceLine" id="cb3-24" title="24">        <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;page-title&quot;</span><span class="kw">&gt;</span>Welcome to Turtle Ipsum. </a>
+<a class="sourceLine" id="cb3-25" title="25">            <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;&quot;</span><span class="kw">&gt;</span>Click here<span class="kw">&lt;/a&gt;</span> to learn more.</a>
+<a class="sourceLine" id="cb3-26" title="26">        <span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-27" title="27">        <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;article-text&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-28" title="28">          Turtle ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</a>
+<a class="sourceLine" id="cb3-29" title="29">        <span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-30" title="30">      <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-31" title="31">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-32" title="32">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;footer&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-33" title="33">      <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;footer-section&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-34" title="34">        <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;button&quot;</span><span class="kw">&gt;</span>Sign up for turtle news<span class="kw">&lt;/span&gt;</span></a>
+<a class="sourceLine" id="cb3-35" title="35">      <span class="kw">&lt;/div&gt;&lt;div</span><span class="ot"> class=</span><span class="st">&quot;footer-section&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-36" title="36">        <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;nav-header footer-title&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-37" title="37">          Internal Pages</a>
+<a class="sourceLine" id="cb3-38" title="38">        <span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-39" title="39">        <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;nav-list&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-40" title="40">          <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;nav-item nav-item-bull&quot;</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&quot;../&quot;</span><span class="kw">&gt;</span>Index<span class="kw">&lt;/a&gt;&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-41" title="41">          <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;nav-item nav-item-bull&quot;</span><span class="kw">&gt;&lt;a</span><span class="ot"> href=</span><span class="st">&quot;../semantic&quot;</span><span class="kw">&gt;</span>Semantic Example<span class="kw">&lt;/a&gt;&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-42" title="42">        <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-43" title="43">      <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-44" title="44">      <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">&quot;footer-copyright&quot;</span><span class="kw">&gt;</span><span class="dv">&amp;copy;</span> 2016 Instrument<span class="kw">&lt;/span&gt;</span></a>
+<a class="sourceLine" id="cb3-45" title="45">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-46" title="46">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb3-47" title="47"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<h2 id="课后小测">课后小测</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/6?loc=zh_cn">课后小测</a></p>
+<h2 id="复习-自学">复习 &amp; 自学</h2>
+<p>许多政府有关于无障碍要求的法律，阅读一下你的国家与无障碍相关的法律。它涉及了哪些方面，又有哪些方面没有涉及？<a href="https://accessibility.blog.gov.uk/">这个政府网站</a>是一个例子。</p>
+<h2 id="作业">作业</h2>
+<p><a href="assignment.zh-cn.md">分析一个非无障碍网站</a></p>
+<p>参考：<a href="https://github.com/Instrument/semantic-html-sample">Turtle Ipsum</a>，作者：Instrument</p>
+</body>
+</html>
