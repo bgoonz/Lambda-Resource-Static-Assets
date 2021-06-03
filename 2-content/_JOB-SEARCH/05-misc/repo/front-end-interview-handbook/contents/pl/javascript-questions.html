@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Pytania z JavaScript</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Pytania z JavaScript</h1>
+</header>
+<p>Odpowiedzi do <a href="https://github.com/h5bp/Front-end-Developer-Interview-Questions/blob/master/src/questions/javascript-questions.md">Front-end Job Interview Questions - JS Questions</a>. Pull requesty mile widziane, jeśli masz sugestie i poprawki!</p>
+<h2 id="spis-treści">Spis treści</h2>
+<ul>
+<li><a href="#wyjaśnij-delegowanie-zdarzeń">Wyjaśnij delegowanie zdarzeń</a></li>
+<li><a href="#wyjaśnij-jak-this-działa-w-javascript">Wyjaśnij jak <code>this</code> działa w JavaScript</a></li>
+<li><a href="#wyjaśnij-jak-działa-dziedziczenie-prototypowe">Wyjaśnij, jak działa dziedziczenie prototypowe</a></li>
+<li><a href="#co-sądzisz-o-amd-vs-commonjs">Co sądzisz o AMD vs CommonJS?</a></li>
+<li><a href="#wyjaśnij-dlaczego-następujące-elementy-nie-działają-jako-iife-function-foo-co-należy-zmienić-aby-poprawnie-uczynić-to-iife">Wyjaśnij, dlaczego następujące elementy nie działają jako IIFE: <code>function foo(){ }();</code>. Co należy zmienić, aby poprawnie uczynić to IIFE?</a></li>
+<li><a href="#jaka-jest-różnica-między-zmienną-null-undefined-lub-niezadeklarowaną-jak-sprawdziłbyś-którykolwiek-z-tych-stanów">Jaka jest różnica między zmienną: <code>null</code>, <code>undefined</code> lub niezadeklarowaną? Jak sprawdziłbyś którykolwiek z tych stanów?</a></li>
+<li><a href="#czym-jest-domknięcie-i-jakdlaczego-miałbyś-je-zastosować">Czym jest domknięcie i jak/dlaczego miałbyś je zastosować?</a></li>
+<li><a href="#czy-możesz-opisać-główną-różnicę-pomiędzy-pętlą-forEach-a-pętlą-map-i-dlaczego-wybrałbyś-jeden-albo-drugi">Czy możesz opisać główną różnicę pomiędzy pętlą <code>.forEach</code>, a pętlą <code>.map()</code> i dlaczego wybrałbyś jeden albo drugi?</a></li>
+<li><a href="#jaki-jest-typowy-przypadek-użycia-funkcji-anonimowych">Jaki jest typowy przypadek użycia funkcji anonimowych?</a></li>
+<li><a href="#jak-organizujesz-swój-kod-wzorzec-modułu-klasyczne-dziedziczenie">Jak organizujesz swój kod? (wzorzec modułu, klasyczne dziedziczenie?)</a></li>
+<li><a href="#jaka-jest-różnica-między-obiektami-hosta-a-obiektami-macierzystymi">Jaka jest różnica między obiektami hosta a obiektami macierzystymi?</a></li>
+<li><a href="#różnica-pomiędzy-function-person-var-person--person-i-var-person--new-person">Różnica pomiędzy: <code>function Person(){}</code>, <code>var person = Person()</code>, i <code>var person = new Person()</code>?</a></li>
+<li><a href="#jaka-jest-różnica-pomiędzy-call-and-apply">Jaka jest różnica pomiędzy <code>.call</code> i <code>.apply</code>?</a></li>
+<li><a href="#wytłumacz-functionprototypebind">Wytłumacz <code>Function.prototype.bind</code>.</a></li>
+<li><a href="#kiedy-użyłbyś-documentwrite">Kiedy użyłbyś <code>document.write()</code>?</a></li>
+<li><a href="#jaka-jest-różnica-między-wykrywaniem-funkcji-feature-inference-i-używaniem-ua-string">Jaka jest różnica między wykrywaniem funkcji, feature inference i używaniem UA string?</a></li>
+<li><a href="#wyjaśnij-ajax-tak-szczegółowo-jak-to-możliwe">Wyjaśnij Ajax tak szczegółowo, jak to możliwe.</a></li>
+<li><a href="#jakie-są-zalety-i-wady-korzystania-z-ajax">Jakie są zalety i wady korzystania z Ajax?</a></li>
+<li><a href="#wyjaśnij-jak-działa-jsonp-i-jak-to-naprawdę-nie-jest-ajax">Wyjaśnij, jak działa JSONP (i jak to naprawdę nie jest Ajax).</a></li>
+<li><a href="#czy-kiedykolwiek-używałeś-szablonów-javascript-jeśli-tak-z-jakich-bibliotek-korzystałeś">Czy kiedykolwiek używałeś szablonów JavaScript? Jeśli tak, z jakich bibliotek korzystałeś?</a></li>
+<li><a href="#wytłumacz-hoisting">Wytłumacz “hoisting”.</a></li>
+<li><a href="#opisz-event-bubbling">Opisz event bubbling.</a></li>
+<li><a href="#jaka-jest-różnica-pomiędzy-attribute-a-property">Jaka jest różnica pomiędzy “attribute”, a “property”?</a></li>
+<li><a href="#dlaczego-rozszerzenie-wbudowanych-obiektów-javascript-nie-jest-dobrym-pomysłem">Dlaczego rozszerzenie wbudowanych obiektów JavaScript nie jest dobrym pomysłem?</a></li>
+<li><a href="#różnica-między-document-load-event-a-document-domcontentloaded-event">Różnica między document <code>load</code> event, a document <code>DOMContentLoaded</code> event?</a></li>
+<li><a href="#jaka-jest-różnica-pomiędzy--i-">Jaka jest różnica pomiędzy <code>==</code> i <code>===</code>?</a></li>
+<li><a href="#wyjaśnij-same-origin-policy-w-odniesieniu-do-javascript">Wyjaśnij same-origin policy w odniesieniu do JavaScript.</a></li>
+<li><a href="#spraw-aby-działało">Spraw aby działało: <code>duplicate([1,2,3,4,5]); // [1,2,3,4,5,1,2,3,4,5]</code></a></li>
+<li><a href="#dlaczego-nazywa-się-to-wyrażeniem-trójargumentowym-co-oznacza-słowo-trójargumentowe">Dlaczego nazywa się to wyrażeniem trójargumentowym, co oznacza słowo “trójargumentowe”?</a></li>
+<li><a href="#czym-jest-use-strict-jakie-są-zalety-i-wady-korzystania-z-tego">Czym jest <code>"use strict";</code>? Jakie są zalety i wady korzystania z tego?</a></li>
+<li><a href="#utwórz-pętlę-for-która-będzie-się-powtarzać-do-100-podczas-wysyłania-fizz-w-wielokrotnościach-3-buzz-w-wielokrotnościach-5-i-fizzbuzz-w-wielokrotnościach-3-oraz-5">Utwórz pętlę for, która będzie się powtarzać do <code>100</code> podczas wysyłania <strong>“fizz”</strong> w wielokrotnościach <code>3</code>, <strong>“buzz”</strong> w wielokrotnościach <code>5</code> i <strong>“fizzbuzz”</strong> w wielokrotnościach <code>3</code> oraz <code>5</code>.</a></li>
+<li><a href="#dlaczego-generalnie-dobrym-pomysłem-jest-pozostawienie-globalnego-zasięgu-witryny-takim-jakim-jest-i-nigdy-go-nie-dotykać">Dlaczego generalnie dobrym pomysłem jest pozostawienie globalnego zasięgu witryny takim, jakim jest, i nigdy go nie dotykać?</a></li>
+<li><a href="#dlaczego-miałbyś-używać-czegoś-takiego-jak-zdarzenie-load-czy-to-wydarzenie-ma-wady-czy-znasz-jakieś-alternatywy-i-dlaczego-miałbyś-je-wykorzystać">Dlaczego miałbyś używać czegoś takiego jak zdarzenie <code>load</code>? Czy to wydarzenie ma wady? Czy znasz jakieś alternatywy i dlaczego miałbyś je wykorzystać?</a></li>
+<li><a href="#wyjaśnij-czym-jest-sap-i-jak-uczynić-ją-przyjazną-seo">Wyjaśnij, czym jest SAP i jak uczynić ją przyjazną SEO.</a></li>
+<li><a href="#jaki-jest-zakres-twojego-doświadczenia-z-promises-ilub-ich-polyfills">Jaki jest zakres twojego doświadczenia z Promises i/lub ich polyfills?</a></li>
+<li><a href="#jakie-są-zalety-i-wady-korzystania-z-obietnic-zamiast-callbacks">Jakie są zalety i wady korzystania z obietnic zamiast callbacks?</a></li>
+<li><a href="#jakie-są-zaletywady-pisania-kodu-javascript-w-języku-kompilującym-się-w-javascript">Jakie są zalety/wady pisania kodu JavaScript w języku kompilującym się w JavaScript?</a></li>
+<li><a href="#jakich-narzędzi-i-technik-używasz-do-debugowania-kodu-javascript">Jakich narzędzi i technik używasz do debugowania kodu JavaScript?</a></li>
+<li><a href="#jakich-konstrukcji-językowych-używasz-do-iteracji-właściwości-obiektów-i-elementów-tablicy">Jakich konstrukcji językowych używasz do iteracji właściwości obiektów i elementów tablicy?</a></li>
+<li><a href="#wyjaśnij-różnicę-między-obiektami-mutable-a-immutable">Wyjaśnij różnicę między obiektami mutable, a immutable.</a></li>
+<li><a href="#wyjaśnij-różnicę-między-funkcjami-synchronicznymi-i-asynchronicznymi">Wyjaśnij różnicę między funkcjami synchronicznymi i asynchronicznymi.</a></li>
+<li><a href="#co-to-jest-pętla-zdarzeń-jaka-jest-różnica-między-stosem-wywołań-call-stack-a-kolejką-zadań-task-queue">Co to jest pętla zdarzeń? Jaka jest różnica między stosem wywołań (call stack) a kolejką zadań (task queue)?</a></li>
+<li><a href="#wyjaśnij-różnice-w-korzystaniu-z-foo-pomiędzy-function-foo-i-var-foo-function-">Wyjaśnij różnice w korzystaniu z <code>foo</code> pomiędzy <code>function foo() {}</code> i <code>var foo = function() {}</code></a></li>
+<li><a href="#jakie-są-różnice-między-zmiennymi-utworzonymi-za-pomocą-let-var-lub-const">Jakie są różnice między zmiennymi utworzonymi za pomocą <code>let</code>, <code>var</code> lub <code>const</code>?</a></li>
+<li><a href="#jakie-są-różnice-między-konstruktorami-funkcji-es6-i-es5">Jakie są różnice między konstruktorami funkcji ES6 i ES5?</a></li>
+<li><a href="#czy-możesz-podać-przypadek-użycia-nowej-składni-funkcji-arrow-czym-ta-nowa-składnia-różni-się-od-innych-funkcji">Czy możesz podać przypadek użycia nowej składni funkcji arrow =&gt;? Czym ta nowa składnia różni się od innych funkcji?</a></li>
+<li><a href="#jaka-jest-zaleta-korzystania-ze-składni-arrow-syntax-dla-metody-w-konstruktorze">Jaka jest zaleta korzystania ze składni arrow syntax dla metody w konstruktorze?</a></li>
+<li><a href="#jaka-jest-definicja-funkcji-wyższego-rzędu">Jaka jest definicja funkcji wyższego rzędu?</a></li>
+<li><a href="#czy-możesz-podać-przykład-destrukturyzacji-obiektu-lub-tablicy">Czy możesz podać przykład destrukturyzacji obiektu lub tablicy?</a></li>
+<li><a href="#es6-template-literals-oferują-dużą-elastyczność-w-generowaniu-ciągów-czy-możesz-podać-przykład">ES6 Template Literals oferują dużą elastyczność w generowaniu ciągów, czy możesz podać przykład?</a></li>
+<li><a href="#czy-możesz-podać-przykład-curry-function-i-dlaczego-ta-składnia-ma-tę-zaletę">Czy możesz podać przykład curry function i dlaczego ta składnia ma tę zaletę?</a></li>
+<li><a href="#jakie-są-zalety-korzystania-ze-składni-spread-syntax-i-czym-różni-się-od-rest-syntax">Jakie są zalety korzystania ze składni spread syntax i czym różni się od rest syntax?</a></li>
+<li><a href="#jak-współdzielić-kod-między-plikami">Jak współdzielić kod między plikami?</a></li>
+<li><a href="#dlaczego-warto-tworzyć-członków-klasy-statycznej">Dlaczego warto tworzyć członków klasy statycznej?</a></li>
+</ul>
+<h3 id="wyjaśnij-delegowanie-zdarzeń">Wyjaśnij delegowanie zdarzeń</h3>
+<p>Delegowanie zdarzeń to technika polegająca na dodawaniu event listenerów do elementu nadrzędnego zamiast dodawania ich do elementów potomnych. Listener będzie wyzwalany za każdym razem, gdy zdarzenie zostanie wyzwolone na elementach potomnych z powodu wystąpienia zdarzenia propagującego DOM. Korzyści z tej techniki to:</p>
+<ul>
+<li>Memory footprint zmniejsza się, ponieważ do elementu nadrzędnego potrzebny jest tylko jeden moduł obsługi, zamiast konieczności dołączania modułów obsługi zdarzeń do każdego elementu potomnego.</li>
+<li>Nie ma potrzeby odłączania modułu obsługi od usuwanych elementów i wiązania zdarzenia dla nowych elementów.</li>
+</ul>
+<h6 id="bibliografia">Bibliografia</h6>
+<ul>
+<li>https://davidwalsh.name/event-delegate</li>
+<li>https://stackoverflow.com/questions/1687296/what-is-dom-event-delegation</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="wyjaśnij-jak-this-działa-w-javascript">Wyjaśnij jak <code>this</code> działa w JavaScript</h3>
+<p>Nie ma prostego wyjaśnienia dla <code>this</code>; jest to jedna z najbardziej mylących koncepcji w JavaScript. Wytłumaczeniem na szybko jest to, że wartość <code>this</code> zależy od tego, jak wywoływana jest funkcja. Przeczytałem wiele wyjaśnień na temat <code>this</code> w Internecie i znalazłem wytłumaczenie od <a href="https://medium.com/@arnav_aggarwal">Arnav Aggrawal</a>, jako najbardziej klarowne. Stosuje się następujące zasady:</p>
+<ol type="1">
+<li>Jeśli słowo kluczowe <code>new</code> jest używane podczas wywoływania funkcji, <code>this</code> wewnątrz funkcji jest nowym obiektem.</li>
+<li>Jeśli <code>apply</code>, <code>call</code>, lub <code>bind</code> służą do wywoływania/tworzenia funkcji, <code>this</code> wewnątrz funkcji jest obiektem przekazywanym jako argument.</li>
+<li>Jeśli funkcja jest wywoływana jako metoda, na przykład <code>obj.method()</code> — <code>this</code> jest obiektem, którego funkcja jest własnością.</li>
+<li>Jeśli funkcja jest wywoływana jako wywołanie wolnej funkcji, co oznacza, że została wywołana bez żadnego z powyższych warunków, <code>this</code> jest globalnym obiektem. W przeglądarce, jest obiektem <code>window</code>. Jeśli jest w trybie strict mode (<code>'use strict'</code>), <code>this</code> będzie <code>undefined</code> zamiast globalnego obiektu.</li>
+<li>Jeśli stosuje się wiele powyższych zasad, reguła, która jest wyższa, wygrywa i ustawi wartość <code>this</code>.</li>
+<li>Jeśli funkcja jest funkcją strzałkową (arrow function) ES2015, ignoruje wszystkie powyższe reguły i otrzymuje wartość <code>this</code> swojego otaczającego zakresu w momencie jej tworzenia.</li>
+</ol>
+<p>Aby uzyskać szczegółowe wyjaśnienie, sprawdź jego <a href="https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3">artykuł na Medium</a>.</p>
+<h4 id="czy-możesz-podać-przykład-jednego-ze-sposobów-w-jaki-praca-z-tym-zmieniła-się-w-es6">Czy możesz podać przykład jednego ze sposobów, w jaki praca z tym zmieniła się w ES6?</h4>
+<p>ES6 umożliwia korzystanie z <a href="http://2ality.com/2017/12/alternate-this.html#arrow-functions">funkcji strzałkowych (arrow functions)</a> które wykorzystują <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#No_separate_this">enclosing lexical scope</a>. Jest to zwykle wygodne, ale nie zabezpiecza caller przed kontrolowaniem kontekstu przez <code>.call</code> lub <code>.apply</code>— konsekwencją jest to, że biblioteka taka jak <code>jQuery</code> nie będzie poprawnie bindować <code>this</code> w funkcjach obsługi zdarzeń. Dlatego ważne jest, aby o tym pamiętać przy refaktoryzacji dużych aplikacji.</p>
+<h6 id="bibliografia-1">Bibliografia</h6>
+<ul>
+<li>https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3</li>
+<li>https://stackoverflow.com/a/3127440/1751946</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="wyjaśnij-jak-działa-dziedziczenie-prototypowe">Wyjaśnij, jak działa dziedziczenie prototypowe</h3>
+<p>To jest bardzo częste pytanie dotyczące rozmowy rekrutacyjnej w JavaScript. Wszystkie obiekty JavaScript mają właściwość <code>__proto__</code>, jest to odniesienie do innego obiektu, który nazywa się “prototypem” obiektu. Gdy właściwość jest udostępniana na obiekt i jeśli właściwość nie została znaleziona na tym obiekcie, silnik JavaScript sprawdza <code>__proto__</code> obiektu oraz <code>__proto__</code> z <code>__proto__</code> i tak dalej, dopóki nie znajdzie właściwości zdefiniowanej w jednym z <code>__proto__</code> lub dopóki nie osiągnie końca łańcucha prototypów. To zachowanie symuluje klasyczne dziedziczenie, ale tak naprawdę jest bardziej <a href="https://davidwalsh.name/javascript-objects">delegowaniem niż dziedziczeniem</a>.</p>
+<h4 id="przykład-dziedziczenia-prototypowego">Przykład dziedziczenia prototypowego</h4>
+<p>Mamy już wbudowane <code>Object.create</code>, ale gdybyś dostarczył dla niego polyfill, mogłoby to wyglądać:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">if</span> (<span class="kw">typeof</span> <span class="va">Object</span>.<span class="at">create</span> <span class="op">!==</span> <span class="st">&#39;function&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="va">Object</span>.<span class="at">create</span> <span class="op">=</span> <span class="kw">function</span> (parent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="kw">function</span> <span class="at">Tmp</span>() <span class="op">{}</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="va">Tmp</span>.<span class="at">prototype</span> <span class="op">=</span> parent<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="cf">return</span> <span class="kw">new</span> <span class="at">Tmp</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="kw">const</span> Parent <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> <span class="st">&#39;Parent&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="op">};</span></a>
+<a class="sourceLine" id="cb1-12" title="12"></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="va">Parent</span>.<span class="va">prototype</span>.<span class="at">greet</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-14" title="14">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;hello from Parent&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="op">};</span></a>
+<a class="sourceLine" id="cb1-16" title="16"></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="kw">const</span> child <span class="op">=</span> <span class="va">Object</span>.<span class="at">create</span>(<span class="va">Parent</span>.<span class="at">prototype</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-18" title="18"></a>
+<a class="sourceLine" id="cb1-19" title="19"><span class="va">child</span>.<span class="at">cry</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-20" title="20">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;waaaaaahhhh!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="op">};</span></a>
+<a class="sourceLine" id="cb1-22" title="22"></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="va">child</span>.<span class="at">cry</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-24" title="24"><span class="co">// Outputs: waaaaaahhhh!</span></a>
+<a class="sourceLine" id="cb1-25" title="25"></a>
+<a class="sourceLine" id="cb1-26" title="26"><span class="va">child</span>.<span class="at">greet</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-27" title="27"><span class="co">// Outputs: hello from Parent</span></a></code></pre></div>
+<p>Warto zwrócić uwagę na:</p>
+<ul>
+<li><code>.greet</code> nie jest zdefiniowane w <em>child</em>, więc silnik idzie w górę łańcucha prototypów i znajduje <code>.greet</code> odziedziczone z <em>Parent</em>.</li>
+<li>Musimy wywołać <code>Object.create</code> na jeden z następujących sposobów dziedziczenia prototypowych metod:
+<ul>
+<li>Object.create(Parent.prototype);</li>
+<li>Object.create(new Parent(null));</li>
+<li>Object.create(objLiteral);</li>
+<li>W tej chwili, <code>child.constructor</code> wskazuje na <code>Parent</code>:</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">child</span>.<span class="at">constructor</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="at">ƒ</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> <span class="st">&quot;Parent&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="va">child</span>.<span class="va">constructor</span>.<span class="at">name</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="st">&quot;Parent&quot;</span></a></code></pre></div>
+<ul>
+<li>Jeśli chcielibyśmy to naprawić, jedną z opcji byłoby:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">Child</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="va">Parent</span>.<span class="at">call</span>(<span class="kw">this</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> <span class="st">&#39;child&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="va">Child</span>.<span class="at">prototype</span> <span class="op">=</span> <span class="va">Parent</span>.<span class="at">prototype</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="va">Child</span>.<span class="va">prototype</span>.<span class="at">constructor</span> <span class="op">=</span> Child<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-8" title="8"></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="kw">const</span> c <span class="op">=</span> <span class="kw">new</span> <span class="at">Child</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-10" title="10"></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="va">c</span>.<span class="at">cry</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="co">// Outputs: waaaaaahhhh!</span></a>
+<a class="sourceLine" id="cb3-13" title="13"></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="va">c</span>.<span class="at">greet</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="co">// Outputs: hello from Parent</span></a>
+<a class="sourceLine" id="cb3-16" title="16"></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="va">c</span>.<span class="va">constructor</span>.<span class="at">name</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="co">// Outputs: &quot;Child&quot;</span></a></code></pre></div>
+<h6 id="bibliografia-2">Bibliografia</h6>
+<ul>
+<li>http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</li>
+<li>https://www.quora.com/What-is-prototypal-inheritance/answer/Kyle-Simpson</li>
+<li>https://davidwalsh.name/javascript-objects</li>
+<li>https://crockford.com/javascript/prototypal.html</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="co-sądzisz-o-amd-vs-commonjs">Co sądzisz o AMD vs CommonJS?</h3>
+<p>Oba sposoby implementacji systemu modułowego, który nie pojawił się natywnie w JavaScript przed pojawieniem się ES2015. CommonJS jest synchroniczny, podczas gdy AMD (definicja modułu asynchronicznego) jest oczywiście asynchroniczny. CommonJS został zaprojektowany z myślą o rozwoju po stronie serwera, podczas gdy AMD, ze wsparciem dla asynchronicznego ładowania modułów, jest bardziej przeznaczone dla przeglądarek.</p>
+<p>Uważam, że składnia AMD jest dość wymowna, a CommonJS jest bliższy stylowi, w którym pisałbyś instrukcje importu w innych językach. Przez większość czasu uważam, że AMD jest niepotrzebne, ponieważ jeśli podałeś cały JavaScript w jednym połączonym pliku pakietu, nie skorzystałbyś z właściwości ładowania asynchronicznego. Ponadto składnia CommonJS jest bliższa stylowi pisania modułów w Node, a przełączanie między tworzeniem JavaScript po stronie klienta i serwera jest mniejsze.</p>
+<p>Cieszę się, że dzięki modułom ES2015, które obsługują zarówno ładowanie synchroniczne, jak i asynchroniczne, możemy w końcu zastosować jedno podejście. Chociaż nie został w pełni wdrożony w przeglądarkach i w Node, zawsze możemy użyć transpilatorów do konwersji naszego kodu.</p>
+<h6 id="bibliografia-3">Bibliografia</h6>
+<ul>
+<li>https://auth0.com/blog/javascript-module-systems-showdown/</li>
+<li>https://stackoverflow.com/questions/16521471/relation-between-commonjs-amd-and-requirejs</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="wyjaśnij-dlaczego-następujące-elementy-nie-działają-jako-iife-function-foo-.-co-należy-zmienić-aby-poprawnie-uczynić-to-iife">Wyjaśnij, dlaczego następujące elementy nie działają jako IIFE: <code>function foo(){ }();</code>. Co należy zmienić, aby poprawnie uczynić to IIFE?</h3>
+<p>IIFE oznacza Immediately Invoked Function Expressions. Parser JavaScript czyta <code>function foo(){ }();</code> jako <code>function foo(){ }</code> i <code>();</code>, gdzie ten pierwszy to <em>deklaracja funkcji</em> i ten drugi (para nawiasów) jest próbą wywołania funkcji, ale nie ma określonej nazwy, dlatego rzuca <code>Uncaught SyntaxError: Unexpected token )</code>.</p>
+<p>Oto dwa sposoby rozwiązania tego problemu, polegające na dodaniu większej liczby nawiasów: <code>(function foo(){ })()</code> oraz <code>(function foo(){ }())</code>. Deklaracje zaczynające się od <code>function</code> są uważane za <em>deklaracji funkcji</em>; poprzez zawinięcie tej funkcji wewnątrz <code>()</code>, staje się <em>wyrażeniem funkcji</em> które mogą być następnie wykonane z kolejnym <code>()</code>. Funkcje te nie są ujawniane w zakresie globalnym i można nawet pominąć jego nazwę, jeśli nie trzeba odwoływać się do ciała.</p>
+<p>Możesz także użyć operatora <code>void</code>: <code>void function foo(){ }();</code>. Niestety istnieje jeden problem związany z takim podejściem. Ocena danego wyrażenia jest zawsze <code>undefined</code>, więc jeśli funkcja IIFE zwraca cokolwiek, nie możesz jej użyć. Przykład:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> foo <span class="op">=</span> <span class="kw">void</span> (<span class="kw">function</span> <span class="at">bar</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="cf">return</span> <span class="st">&#39;foo&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="op">}</span>)()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// undefined</span></a></code></pre></div>
+<h6 id="bibliografia-4">Bibliografia</h6>
+<ul>
+<li>http://lucybain.com/blog/2014/immediately-invoked-function-expression/</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jaka-jest-różnica-między-zmienną-null-undefined-lub-niezadeklarowaną-jak-sprawdziłbyś-którykolwiek-z-tych-stanów">Jaka jest różnica między zmienną: <code>null</code>, <code>undefined</code> lub niezadeklarowaną? Jak sprawdziłbyś którykolwiek z tych stanów?</h3>
+<p><strong>Niezadeklarowane</strong> zmienne są tworzone, gdy przypisujesz wartość do identyfikatora, który nie był wcześniej tworzony przy użyciu <code>var</code>, <code>let</code> lub <code>const</code>. Niezadeklarowane zmienne zostaną zdefiniowane globalnie, poza bieżącym zakresem. W trybie strict mode, <code>ReferenceError</code> zostanie rzucony, gdy spróbujesz przypisać do niezadeklarowanej zmiennej. Niezadeklarowane zmienne są złe, tak jak zmienne globalne są złe. Unikaj ich za wszelką cenę! Aby je sprawdzić, zawiń jego użycie w bloku <code>try</code>/<code>catch</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">function</span> <span class="at">foo</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  x <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// Throws a ReferenceError in strict mode</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="at">foo</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="va">console</span>.<span class="at">log</span>(x)<span class="op">;</span> <span class="co">// 1</span></a></code></pre></div>
+<p>Zmienna <code>undefined</code> jest zmienną, która została zadeklarowana, ale nie ma przypisanej wartości. Jest to typu <code>undefined</code>. Jeśli funkcja nie zwraca żadnej wartości, ponieważ w wyniku jej wykonania jest przypisana do zmiennej, zmienna ma również wartość <code>undefined</code>. Aby to sprawdzić, porównaj, stosując operatora ścisłej równości (<code>===</code>) lub <code>typeof</code> który da string <code>'undefined'</code>. Zauważ, że nie powinieneś używać operatora abstrakcyjnej równości do sprawdzania, ponieważ zwróci on również wartość <code>true</code>, jeśli wartość wynosi <code>null</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">var</span> foo<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="va">console</span>.<span class="at">log</span>(foo <span class="op">===</span> <span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="va">console</span>.<span class="at">log</span>(<span class="kw">typeof</span> foo <span class="op">===</span> <span class="st">&#39;undefined&#39;</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="va">console</span>.<span class="at">log</span>(foo <span class="op">==</span> <span class="kw">null</span>)<span class="op">;</span> <span class="co">// true. Wrong, don&#39;t use this to check!</span></a>
+<a class="sourceLine" id="cb6-7" title="7"></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="kw">function</span> <span class="at">bar</span>() <span class="op">{}</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="kw">var</span> baz <span class="op">=</span> <span class="at">bar</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="va">console</span>.<span class="at">log</span>(baz)<span class="op">;</span> <span class="co">// undefined</span></a></code></pre></div>
+<p>Zmienna która jest <code>null</code> zostanie wyraźnie przypisana do wartości <code>null</code>. Nie reprezentuje żadnej wartości i różni się od <code>undefined</code> w tym sensie, że zostało to wyraźnie przypisane. Aby sprawdzić <code>null,</code> po prostu porównaj, używając operatora ścisłej równości. Pamiętaj, że podobnie jak powyżej, nie powinieneś używać abstrakcyjnego operatora równości (<code>==</code>) do sprawdzenia, to również zwróci <code>true</code> jeśli wartość jest <code>undefined</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="va">console</span>.<span class="at">log</span>(foo <span class="op">===</span> <span class="kw">null</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="va">console</span>.<span class="at">log</span>(<span class="kw">typeof</span> foo <span class="op">===</span> <span class="st">&#39;object&#39;</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="va">console</span>.<span class="at">log</span>(foo <span class="op">==</span> <span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// true. Wrong, don&#39;t use this to check!</span></a></code></pre></div>
+<p>Jako osobisty nawyk nigdy nie pozostawiam moich zmiennych niezadeklarowanych ani nieprzypisanych. Wyraźnie przypiszę im <code>null</code> po zadeklarowaniu, jeśli nie zamierzam jej jeszcze używać. Jeśli użyjesz lintera w swoim przepływie pracy, zwykle będzie on również w stanie sprawdzić, czy nie odwołujesz się do niezadeklarowanych zmiennych.</p>
+<h6 id="bibliografia-5">Bibliografia</h6>
+<ul>
+<li>https://stackoverflow.com/questions/15985875/effect-of-declared-and-undeclared-variables</li>
+<li>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/undefined</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="czym-jest-domknięcie-i-jakdlaczego-miałbyś-je-zastosować">Czym jest domknięcie i jak/dlaczego miałbyś je zastosować?</h3>
+<p>Domknięcie (closure) jest kombinacją funkcji i środowiska leksykalnego, w którym zadeklarowano tę funkcję. Słowo “leksykalny” odnosi się do faktu, że zakres leksykalny wykorzystuje lokalizację, w której zmienna jest zadeklarowana w kodzie źródłowym, w celu ustalenia, gdzie ta zmienna jest dostępna. Domknięcia to funkcje, które mają dostęp do zmiennych funkcji zewnętrznej (obejmującej) - łańcuch zasięgu nawet po zwróceniu funkcji zewnętrznej.</p>
+<p><strong>Dlaczego miałbyś skorzystać z tego?</strong></p>
+<ul>
+<li>Prywatność danych/emulacja prywatnych metod przy domknięciach. Powszechnie stosowane we <a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript">wzorcu modułu</a>.</li>
+<li><a href="https://medium.com/javascript-scene/curry-or-partial-application-8150044c78b8#.l4b6l1i3x">Partial applications lub currying</a>.</li>
+</ul>
+<h6 id="bibliografia-6">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures</li>
+<li>https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="czy-możesz-opisać-główną-różnicę-pomiędzy-pętlą-.foreach-a-pętlą-.map-i-dlaczego-wybrałbyś-jeden-albo-drugi">Czy możesz opisać główną różnicę pomiędzy pętlą <code>.forEach</code>, a pętlą <code>.map()</code> i dlaczego wybrałbyś jeden albo drugi?</h3>
+<p>Aby zrozumieć różnice między nimi, spójrzmy na to, co robi każda funkcja.</p>
+<p><strong><code>forEach</code></strong></p>
+<ul>
+<li>Iteruje przez elementy w tablicy.</li>
+<li>Wykonuje callback dla każdego elementu.</li>
+<li>Nie zwraca wartości.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">const</span> a <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">const</span> doubled <span class="op">=</span> <span class="va">a</span>.<span class="at">forEach</span>((num<span class="op">,</span> index) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="co">// Do something with num and/or index.</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-5" title="5"></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="co">// doubled = undefined</span></a></code></pre></div>
+<p><strong><code>map</code></strong></p>
+<ul>
+<li>Iteruje przez elementy w tablicy.</li>
+<li>“Mapuje” każdy element do nowego elementu, wywołując funkcję na każdym elemencie, tworząc w rezultacie nową tablicę.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">const</span> a <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">const</span> doubled <span class="op">=</span> <span class="va">a</span>.<span class="at">map</span>((num) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="cf">return</span> num <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-5" title="5"></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="co">// doubled = [2, 4, 6]</span></a></code></pre></div>
+<p>Główna różnica między <code>.forEach</code> i <code>.map()</code> to to, że <code>.map()</code> zwraca nową tablicę. Jeśli potrzebujesz wyniku, ale nie chcesz mutować oryginalnej tablicy, <code>.map()</code> jest jasnym wyborem. Jeśli potrzebujesz po prostu iterować tablicę, <code>forEach</code> jest dobrym wyborem.</p>
+<h6 id="bibliografia-7">Bibliografia</h6>
+<ul>
+<li>https://codeburst.io/javascript-map-vs-foreach-f38111822c0f</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jaki-jest-typowy-przypadek-użycia-funkcji-anonimowych">Jaki jest typowy przypadek użycia funkcji anonimowych?</h3>
+<p>Można ich użyć w IIFE do enkapsulacji części kodu w zakresie lokalnym, tak aby zmienne zadeklarowane w nim nie przenikały do zakresu globalnego.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1">(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="co">// Some code here.</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="op">}</span>)()<span class="op">;</span></a></code></pre></div>
+<p>Jako callback, które jest używane raz i nie musi być używane nigdzie indziej. Kod będzie wydawał się bardziej samodzielny i czytelny, gdy procedury obsługi zostaną zdefiniowane bezpośrednio w kodzie wywołującym je, zamiast konieczności szukania gdzie indziej w celu znalezienia w ciele funkcji.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="at">setTimeout</span>(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Hello world!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="op">},</span> <span class="dv">1000</span>)<span class="op">;</span></a></code></pre></div>
+<p>Argumenty do konstrukcji funkcjonalnego programowania lub Lodasha (podobne do callbacków).</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">const</span> arr <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">const</span> double <span class="op">=</span> <span class="va">arr</span>.<span class="at">map</span>(<span class="kw">function</span> (el) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="cf">return</span> el <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="va">console</span>.<span class="at">log</span>(double)<span class="op">;</span> <span class="co">// [2, 4, 6]</span></a></code></pre></div>
+<h6 id="bibliografia-8">Bibliografia</h6>
+<ul>
+<li>https://www.quora.com/What-is-a-typical-usecase-for-anonymous-functions</li>
+<li>https://stackoverflow.com/questions/10273185/what-are-the-benefits-to-using-anonymous-functions-instead-of-named-functions-fo</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jak-organizujesz-swój-kod-wzorzec-modułu-klasyczne-dziedziczenie">Jak organizujesz swój kod? (wzorzec modułu, klasyczne dziedziczenie?)</h3>
+<p>W przeszłości używałem Backbone do moich modeli, co zachęca do bardziej otwartego podejścia, tworzenia modeli Backbone i dołączania do nich metod.</p>
+<p>Wzorzec modułu jest nadal świetny, ale obecnie używam React/Redux, które wykorzystują jednokierunkowy przepływ danych oparty na architekturze Flux. Reprezentowałbym modele mojej aplikacji przy użyciu prostych obiektów i pisał funkcje czysto użytkowe do manipulowania tymi obiektami. Stan jest manipulowany za pomocą akcji i reduktorów, jak w każdej innej aplikacji Redux.</p>
+<p>W miarę możliwości unikam dziedziczenia klasycznego. Kiedy już i jeśli to zrobię, trzymam się <a href="https://medium.com/@dan_abramov/how-to-use-classes-and-sleep-at-night-9af8de78ccb4">tych reguł</a>.</p>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jaka-jest-różnica-między-obiektami-hosta-a-obiektami-macierzystymi">Jaka jest różnica między obiektami hosta a obiektami macierzystymi?</h3>
+<p>Obiekty macierzyste to obiekty, które są częścią języka JavaScript zdefiniowanego w specyfikacji ECMAScript, takie jak <code>String</code>, <code>Math</code>, <code>RegExp</code>, <code>Object</code>, <code>Function</code>, etc.</p>
+<p>Obiekty hosta są dostarczane przez środowisko wykonawcze (przeglądarkę lub Node), takie jak <code>window</code>, <code>XMLHTTPRequest</code>, etc.</p>
+<h6 id="bibliografia-9">Bibliografia</h6>
+<ul>
+<li>https://stackoverflow.com/questions/7614317/what-is-the-difference-between-native-objects-and-host-objects</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="różnica-pomiędzy-function-person-var-person-person-i-var-person-new-person">Różnica pomiędzy: <code>function Person(){}</code>, <code>var person = Person()</code>, i <code>var person = new Person()</code>?</h3>
+<p>To pytanie jest dość niejasne. Myślę, że jego intencją jest to, że pyta o konstruktory w JavaScript. Z technicznego punktu widzenia, <code>function Person(){}</code> jest zwykłą deklaracją funkcji. Konwencja polega na wykorzystaniu PascalCase do funkcji, które mają być używane jako konstruktory.</p>
+<p><code>var person = Person()</code> wywołuje <code>Person</code> jako funkcję, i nie jako konstruktor. Wywołanie jako takie jest częstym błędem, jeśli funkcja ma być używana jako konstruktor. Zazwyczaj konstruktor niczego nie zwraca, dlatego wywołanie konstruktora jak normalnej funkcji zwróci <code>undefined</code>, a to zostanie przypisane do zmiennej przeznaczonej jako instancja.</p>
+<p><code>var person = new Person()</code> tworzy instancję obiektu <code>Person</code> za pomocą operatora <code>new</code>, który dziedziczy po <code>Person.prototype</code>. Alternatywą byłoby użycie <code>Object.create</code>, tak jak: <code>Object.create(Person.prototype)</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">function</span> <span class="at">Person</span>(name) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> name<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb13-4" title="4"></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="kw">var</span> person <span class="op">=</span> <span class="at">Person</span>(<span class="st">&#39;John&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="va">console</span>.<span class="at">log</span>(person)<span class="op">;</span> <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb13-7" title="7"><span class="va">console</span>.<span class="at">log</span>(<span class="va">person</span>.<span class="at">name</span>)<span class="op">;</span> <span class="co">// Uncaught TypeError: Cannot read property &#39;name&#39; of undefined</span></a>
+<a class="sourceLine" id="cb13-8" title="8"></a>
+<a class="sourceLine" id="cb13-9" title="9"><span class="kw">var</span> person <span class="op">=</span> <span class="kw">new</span> <span class="at">Person</span>(<span class="st">&#39;John&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-10" title="10"><span class="va">console</span>.<span class="at">log</span>(person)<span class="op">;</span> <span class="co">// Person { name: &quot;John&quot; }</span></a>
+<a class="sourceLine" id="cb13-11" title="11"><span class="va">console</span>.<span class="at">log</span>(<span class="va">person</span>.<span class="at">name</span>)<span class="op">;</span> <span class="co">// &quot;john&quot;</span></a></code></pre></div>
+<h6 id="bibliografia-10">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jaka-jest-różnica-pomiędzy-.call-i-.apply">Jaka jest różnica pomiędzy <code>.call</code> i <code>.apply</code>?</h3>
+<p>Zarówno <code>.call</code>, jak i <code>.apply</code> są używane do wywoływania funkcji, a pierwszy parametr zostanie użyty jako wartość <code>this</code> w funkcji. Jednak <code>.call</code> przyjmuje argumenty oddzielone przecinkami jako kolejne argumenty, podczas gdy <code>.apply</code> przyjmuje tablicę argumentów jako następny argument. Łatwym sposobem na zapamiętanie tego jest C dla <code>call</code> i oddzielone przecinkami, i A dla <code>apply</code> oraz tablica argumentów.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">function</span> <span class="at">add</span>(a<span class="op">,</span> b) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb14-4" title="4"></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="va">console</span>.<span class="at">log</span>(<span class="va">add</span>.<span class="at">call</span>(<span class="kw">null</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span> <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="va">console</span>.<span class="at">log</span>(<span class="va">add</span>.<span class="at">apply</span>(<span class="kw">null</span><span class="op">,</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]))<span class="op">;</span> <span class="co">// 3</span></a></code></pre></div>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="wytłumacz-function.prototype.bind.">Wytłumacz <code>Function.prototype.bind</code>.</h3>
+<p>Wzięte słowo w słowo z<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind">MDN</a>:</p>
+<blockquote>
+<p>Metoda <code>bind()</code> tworzy nową funkcję, która po wywołaniu ma ustawione słowo kluczowe <code>this</code> na podaną wartość, z podaną sekwencją argumentów poprzedzającą dowolną podaną podczas wywoływania nowej funkcji.</p>
+</blockquote>
+<p>Z mojego doświadczenia wynika, że jest to najbardziej przydatne do bindowania wartości <code>this</code> w metodach klas, które chcesz przekazać innym funkcjom. Często odbywa się to w komponentach React.</p>
+<h6 id="bibliografia-11">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="kiedy-użyłbyś-document.write">Kiedy użyłbyś <code>document.write()</code>?</h3>
+<p><code>document.write()</code> zapisuje ciąg tekstu do strumienia dokumentów otwartego przez <code>document.open()</code>. Kiedy <code>document.write()</code> jest wykonywane po załadowaniu strony, wywoła <code>document.open</code>, który usuwa cały dokument (<code>&lt;head&gt;</code>i <code>&lt;body&gt;</code> usunięto!) i zamienia zawartość na podaną wartość parametru. Dlatego jest zwykle uważany za niebezpieczny i podatny na niewłaściwe użycie.</p>
+<p>Istnieje kilka odpowiedzi online, które wyjaśniają, że w kodzie analitycznym używany jest <code>document.write()</code> lub <a href="https://www.quirksmode.org/blog/archives/2005/06/three_javascrip_1.html">gdy chcesz dołączyć style, które powinny działać tylko wtedy, gdy JavaScript jest włączony</a>. Jest nawet używany w HTML5 boilerplate do <a href="https://github.com/paulirish/html5-boilerplate/wiki/Script-Loading-Techniques#documentwrite-script-tag">równoległego ładowania skryptów i zachowania kolejności wykonywania</a>! Podejrzewam jednak, że przyczyny te mogą być nieaktualne i we współczesnych czasach można je osiągnąć bez użycia <code>document.write()</code>. Proszę, popraw mnie, jeśli się mylę.</p>
+<h6 id="bibliografia-12">Bibliografia</h6>
+<ul>
+<li>https://www.quirksmode.org/blog/archives/2005/06/three_javascrip_1.html</li>
+<li>https://github.com/h5bp/html5-boilerplate/wiki/Script-Loading-Techniques#documentwrite-script-tag</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jaka-jest-różnica-między-wykrywaniem-funkcji-feature-inference-i-używaniem-ua-string">Jaka jest różnica między wykrywaniem funkcji, feature inference i używaniem UA string?</h3>
+<p><strong>Feature Detection</strong></p>
+<p>Wykrywanie funkcji polega na sprawdzeniu, czy przeglądarka obsługuje określony blok kodu, i uruchomieniu innego kodu w zależności od tego, czy to robi (czy nie), tak aby przeglądarka zawsze zapewniała działanie w przypadku awarii/błędów w niektórych przeglądarkach. Na przykład:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="cf">if</span> (<span class="st">&#39;geolocation&#39;</span> <span class="kw">in</span> navigator) <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="co">// Can use navigator.geolocation</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-4" title="4">  <span class="co">// Handle lack of feature</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p><a href="https://modernizr.com/">Modernizr</a> to świetna biblioteka do obsługi feature detection.</p>
+<p><strong>Feature Inference</strong></p>
+<p>Feature inference sprawdza funkcję podobnie jak wykrywanie funkcji, ale używa innej funkcji, ponieważ zakłada, że ona również będzie istnieć, np .:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="cf">if</span> (<span class="va">document</span>.<span class="at">getElementsByTagName</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  element <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(id)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>To nie jest naprawdę zalecane. Wykrywanie funkcji jest bardziej niezawodne.</p>
+<p><strong>UA String</strong></p>
+<p>Jest to string zgłaszany przez przeglądarkę, który umożliwia elementom protokołu sieciowego identyfikowanie typu aplikacji, systemu operacyjnego, dostawcy oprogramowania lub wersji oprogramowania żądającego agenta użytkownika oprogramowania. Można uzyskać do niego dostęp za pośrednictwem <code>navigator.userAgent</code>. Jednak string jest trudny do przeanalizowania i może zostać sfałszowany. Na przykład Chrome zgłasza zarówno Chrome, jak i Safari. Aby wykryć Safari, musisz sprawdzić string Safari i nieobecność Chrome string. Unikaj tej metody.</p>
+<h6 id="bibliografia-13">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/Feature_detection</li>
+<li>https://stackoverflow.com/questions/20104930/whats-the-difference-between-feature-detection-feature-inference-and-using-th</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="wyjaśnij-ajax-tak-szczegółowo-jak-to-możliwe.">Wyjaśnij Ajax tak szczegółowo, jak to możliwe.</h3>
+<p>Ajax (asynchronous JavaScript and XML - asynchroniczny JavaScript i XML) to zestaw technik tworzenia stron internetowych wykorzystujących wiele technologii sieciowych po stronie klienta do tworzenia asynchronicznych aplikacji internetowych. Dzięki Ajax aplikacje internetowe mogą wysyłać dane i pobierać je z serwera asynchronicznie (w tle) bez ingerencji w wyświetlanie i zachowanie istniejącej strony. Oddzielając warstwę wymiany danych od warstwy prezentacji, Ajax pozwala stronom internetowym, a poprzez rozszerzenia aplikacji internetowych, dynamicznie zmieniać treść bez konieczności ponownego ładowania całej strony. W praktyce nowoczesne implementacje często zastępują użycie JSON zamiast XML, ze względu na zalety natywnej obsługi JSON w JavaScript.</p>
+<p>API <code>XMLHttpRequest</code> jest często używany do komunikacji asynchronicznej lub w dzisiejszych czasach, <code>fetch</code> API.</p>
+<h6 id="bibliografia-14">Bibliografia</h6>
+<ul>
+<li>https://en.wikipedia.org/wiki/Ajax_(programming)</li>
+<li>https://developer.mozilla.org/en-US/docs/AJAX</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jakie-są-zalety-i-wady-korzystania-z-ajax">Jakie są zalety i wady korzystania z Ajax?</h3>
+<p><strong>Zalety</strong></p>
+<ul>
+<li>Lepsza interaktywność. Nowa zawartość z serwera może być zmieniana dynamicznie bez potrzeby przeładowywania całej strony.</li>
+<li>Zmniejsza liczbę połączeń z serwerem, ponieważ skrypty i arkusze stylów muszą być wymagane tylko raz.</li>
+<li>Stan można utrzymać na stronie. Zmienne JavaScript i stan DOM zostaną zachowane, ponieważ główna strona kontenera nie została ponownie załadowana.</li>
+<li>Zasadniczo większość zalet SPA.</li>
+</ul>
+<p><strong>Wady</strong></p>
+<ul>
+<li>Dynamiczne strony internetowe są trudniejsze do dodania do zakładek.</li>
+<li>Nie działa, jeśli JavaScript jest wyłączony w przeglądarce.</li>
+<li>Niektóre przeglądarki internetowe nie wykonują JavaScript i nie widzą treści załadowanych przez JavaScript.</li>
+<li>Strony internetowe wykorzystujące Ajax do pobierania danych prawdopodobnie będą musiały połączyć pobrane dane zdalne z szablonami po stronie klienta, aby zaktualizować DOM. Aby tak się stało, JavaScript musi zostać przeanalizowany i wykonany w przeglądarce, a urządzenia mobilne z niższej półki mogą mieć z tym problem.</li>
+<li>Zasadniczo większość wad SPA.</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="wyjaśnij-jak-działa-jsonp-i-jak-to-naprawdę-nie-jest-ajax.">Wyjaśnij, jak działa JSONP (i jak to naprawdę nie jest Ajax).</h3>
+<p>JSONP (JSON with Padding) jest metodą powszechnie używaną do omijania zasad międzydomenowych w przeglądarkach internetowych, ponieważ żądania Ajax z bieżącej strony do domeny międzydomenowej są niedozwolone.</p>
+<p>JSONP działa poprzez wysłanie żądania do domeny cross-origin za pomocą znacznika <code>&lt;script&gt;</code> i zwykle za pomocą parametru zapytania <code>callback</code>, na przykład: <code>https://example.com?callback=printData</code>. Serwer następnie opakowuje dane w funkcję o nazwie <code>printData</code> i zwraca je klientowi.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb17-1" title="1"><span class="co">&lt;!-- https://mydomain.com --&gt;</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="kw">&lt;script&gt;</span></a>
+<a class="sourceLine" id="cb17-3" title="3">  <span class="kw">function</span> <span class="at">printData</span>(data) <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-4" title="4">    <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`My name is </span><span class="sc">${</span><span class="va">data</span>.<span class="at">name</span><span class="sc">}</span><span class="vs">!`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="kw">&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb17-7" title="7"></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://example.com?callback=printData&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="co">// File loaded from https://example.com?callback=printData</span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="at">printData</span>(<span class="op">{</span><span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Yang Shun&#39;</span><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Klient musi mieć funkcję <code>printData</code> w swoim globalnym zasięgu, a funkcja zostanie wykonana przez klienta po otrzymaniu odpowiedzi z domeny cross-origin.</p>
+<p>JSONP może być niebezpieczny i ma pewne implikacje dla bezpieczeństwa. Ponieważ JSONP to tak naprawdę JavaScript, może robić wszystko, co potrafi JavaScript, więc musisz zaufać dostawcy danych JSONP.</p>
+<p>Obecnie, <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">CORS</a> jest zalecanym podejściem, a JSONP jest postrzegany jako hack.</p>
+<h6 id="bibliografia-15">Bibliografia</h6>
+<ul>
+<li>https://stackoverflow.com/a/2067584/1751946</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="czy-kiedykolwiek-używałeś-szablonów-javascript-jeśli-tak-z-jakich-bibliotek-korzystałeś">Czy kiedykolwiek używałeś szablonów JavaScript? Jeśli tak, z jakich bibliotek korzystałeś?</h3>
+<p>Tak. Handlebars, Underscore, Lodash, AngularJS, i JSX. Nie podobało mi się tworzenie szablonów w AngularJS, ponieważ często używało łańcuchów w dyrektywach, a literówki nie zostały złapane. JSX jest moim nowym ulubionym, ponieważ jest bliżej JavaScript i nie ma prawie żadnej składni do nauki. W dzisiejszych czasach możesz nawet używać literałów ciągów szablonów ES2015 jako szybkiego sposobu tworzenia szablonów bez konieczności korzystania z kodu innej firmy.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">const</span> template <span class="op">=</span> <span class="vs">`&lt;div&gt;My name is: </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">&lt;/div&gt;`</span><span class="op">;</span></a></code></pre></div>
+<p>Należy jednak pamiętać o potencjalnym XSS w powyższym podejściu, ponieważ zawartość nie jest dla ciebie umykająca, w przeciwieństwie do bibliotek szablonów.</p>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="wytłumacz-hoisting.">Wytłumacz “hoisting”.</h3>
+<p>Hoisting to termin używany do wyjaśnienia zachowania deklaracji zmiennych w kodzie. Zmienne zadeklarowane lub zainicjowane słowem kluczowym <code>var</code> będą miały swoją deklarację “przeniesioną” na górę zakresu na poziomie modułu/funkcji, który nazywamy windowaniem. Jednak tylko deklaracja jest windowana, przydział (jeśli taki istnieje) pozostanie tam, gdzie jest.</p>
+<p>Zauważ, że deklaracja nie została faktycznie przeniesiona - silnik JavaScript analizuje deklaracje podczas kompilacji i dowiaduje się o deklaracjach i ich zakresach. Po prostu łatwiej jest zrozumieć to zachowanie, wizualizując deklaracje jako podnoszone na szczyt ich zakresu. Wyjaśnijmy kilka przykładów.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="kw">var</span> foo <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// 1</span></a></code></pre></div>
+<p>W deklaracjach funkcji podnoszone jest ciało, podczas gdy w wyrażeniach funkcji (zapisanych w formie deklaracji zmiennych) windowanana jest tylko deklaracja zmiennej.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1"><span class="co">// Function Declaration</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// [Function: foo]</span></a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="at">foo</span>()<span class="op">;</span> <span class="co">// &#39;FOOOOO&#39;</span></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="kw">function</span> <span class="at">foo</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb21-5" title="5">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;FOOOOO&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-6" title="6"><span class="op">}</span></a>
+<a class="sourceLine" id="cb21-7" title="7"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// [Function: foo]</span></a>
+<a class="sourceLine" id="cb21-8" title="8"></a>
+<a class="sourceLine" id="cb21-9" title="9"><span class="co">// Function Expression</span></a>
+<a class="sourceLine" id="cb21-10" title="10"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb21-11" title="11"><span class="at">bar</span>()<span class="op">;</span> <span class="co">// Uncaught TypeError: bar is not a function</span></a>
+<a class="sourceLine" id="cb21-12" title="12"><span class="kw">var</span> bar <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb21-13" title="13">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;BARRRR&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb21-14" title="14"><span class="op">};</span></a>
+<a class="sourceLine" id="cb21-15" title="15"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// [Function: bar]</span></a></code></pre></div>
+<p>Windowane są również zmienne zadeklarowane za pomocą <code>let</code> i <code>const</code>. Jednak w przeciwieństwie do <code>var</code> i <code>function</code>, nie są one inicjowane i dostęp do nich przed deklaracją spowoduje wyjątek <code>ReferenceError</code>. Zmienna znajduje się w “czasowej martwej strefie” od początku bloku do momentu przetworzenia deklaracji.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1">x<span class="op">;</span> <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb22-2" title="2">y<span class="op">;</span> <span class="co">// Reference error: y is not defined</span></a>
+<a class="sourceLine" id="cb22-3" title="3"></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="kw">var</span> x <span class="op">=</span> <span class="st">&#39;local&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb22-5" title="5"><span class="kw">let</span> y <span class="op">=</span> <span class="st">&#39;local&#39;</span><span class="op">;</span></a></code></pre></div>
+<h6 id="bibliografia-16">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_Types#Variable_hoisting</li>
+<li>https://stackoverflow.com/questions/31219420/are-variables-declared-with-let-or-const-not-hoisted-in-es6/31222689#31222689</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="opisz-event-bubbling.">Opisz event bubbling.</h3>
+<p>Kiedy zdarzenie zostanie wyzwolone na elemencie DOM, spróbuje obsłużyć to zdarzenie, jeśli dołączony jest detektor, a następnie zdarzenie zostanie przekazane do jego obiektu nadrzędnego i nastąpi to samo. To ‘bubbling’ występuje u przodków elementu aż do <code>document</code>. Event bubbling jest mechanizmem delegowania zdarzeń.</p>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jaka-jest-różnica-pomiędzy-attribute-a-property">Jaka jest różnica pomiędzy “attribute”, a “property”?</h3>
+<p>Atrybuty są zdefiniowane w znacznikach HTML, ale właściwości są zdefiniowane w DOM. Aby zilustrować różnicę, wyobraź sobie, że mamy to pole tekstowe w naszym HTML: <code>&lt;input type="text" value="Hello"&gt;</code>.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">const</span> input <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;input&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="va">console</span>.<span class="at">log</span>(<span class="va">input</span>.<span class="at">getAttribute</span>(<span class="st">&#39;value&#39;</span>))<span class="op">;</span> <span class="co">// Hello</span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="va">console</span>.<span class="at">log</span>(<span class="va">input</span>.<span class="at">value</span>)<span class="op">;</span> <span class="co">// Hello</span></a></code></pre></div>
+<p>Ale po zmianie wartości pola tekstowego przez dodanie “World!” staje się to:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb24-1" title="1"><span class="va">console</span>.<span class="at">log</span>(<span class="va">input</span>.<span class="at">getAttribute</span>(<span class="st">&#39;value&#39;</span>))<span class="op">;</span> <span class="co">// Hello</span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="va">console</span>.<span class="at">log</span>(<span class="va">input</span>.<span class="at">value</span>)<span class="op">;</span> <span class="co">// Hello World!</span></a></code></pre></div>
+<h6 id="bibliografia-17">Bibliografia</h6>
+<ul>
+<li>https://stackoverflow.com/questions/6003819/properties-and-attributes-in-html</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="dlaczego-rozszerzenie-wbudowanych-obiektów-javascript-nie-jest-dobrym-pomysłem">Dlaczego rozszerzenie wbudowanych obiektów JavaScript nie jest dobrym pomysłem?</h3>
+<p>Rozszerzenie wbudowanego/natywnego obiektu JavaScript oznacza dodanie właściwości/funkcji do jego <code>prototype</code>. Choć na początku może się to wydawać dobrym pomysłem, w praktyce jest niebezpieczne. Wyobraź sobie, że twój kod używa kilku bibliotek, które rozszerzają <code>Array.prototype</code> poprzez dodanie tej samej metody <code>contains</code>, implementacje się nadpisują, a twój kod się zepsuje, jeśli zachowanie tych dwóch metod nie będzie takie samo.</p>
+<p>Jedynym momentem, w którym możesz chcieć rozszerzyć obiekt macierzysty, jest utworzenie polyfill, zasadniczo zapewniające własną implementację metody, która jest częścią specyfikacji JavaScript, ale może nie istnieć w przeglądarce użytkownika, jeśli jest to starsza przeglądarka.</p>
+<h6 id="bibliografia-18">Bibliografia</h6>
+<ul>
+<li>http://lucybain.com/blog/2014/js-extending-built-in-objects/</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="różnica-między-document-load-event-a-document-domcontentloaded-event">Różnica między document <code>load</code> event, a document <code>DOMContentLoaded</code> event?</h3>
+<p>Zdarzenie <code>DOMContentLoaded</code> jest uruchamiane, gdy początkowy dokument HTML został całkowicie załadowany i przeanalizowany, bez oczekiwania na zakończenie ładowania arkuszy stylów, obrazów i podramek.</p>
+<p><code>window</code>sowe zdarzenie <code>load</code> jest uruchamiane dopiero po załadowaniu DOM i wszystkich zależnych zasobów i assetów.</p>
+<h6 id="bibliografia-19">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/Events/load</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jaka-jest-różnica-pomiędzy-i">Jaka jest różnica pomiędzy <code>==</code> i <code>===</code>?</h3>
+<p><code>==</code> jest abstrakcyjnym operatorem równości, podczas gdy <code>===</code> jest operatorem ścisłej równości. Operator <code>==</code> porówna pod kątem równości po wykonaniu niezbędnych konwersji typu. Operator <code>===</code> nie dokona konwersji typu, więc jeśli dwie wartości nie są tego samego typu, <code>===</code> po prostu zwróci <code>false</code>. Gdy używasz <code>==</code>, mogą się zdarzyć dziwne rzeczy, takie jak:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb25-1" title="1"><span class="dv">1</span> <span class="op">==</span> <span class="st">&#39;1&#39;</span><span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="dv">1</span> <span class="op">==</span> [<span class="dv">1</span>]<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="dv">1</span> <span class="op">==</span> <span class="kw">true</span><span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb25-4" title="4"><span class="dv">0</span> <span class="op">==</span> <span class="st">&#39;&#39;</span><span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb25-5" title="5"><span class="dv">0</span> <span class="op">==</span> <span class="st">&#39;0&#39;</span><span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb25-6" title="6"><span class="dv">0</span> <span class="op">==</span> <span class="kw">false</span><span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<p>Radzę nigdy nie korzystać z operatora <code>==</code>, z wyjątkiem wygody przy porównywaniu z <code>null</code> lub <code>undefined</code>, gdzie <code>a == null</code> zwróci <code>true</code>, jeśli <code>a</code> jest <code>null</code> lub <code>undefined</code>.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">var</span> a <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="va">console</span>.<span class="at">log</span>(a <span class="op">==</span> <span class="kw">null</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="va">console</span>.<span class="at">log</span>(a <span class="op">==</span> <span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<h6 id="bibliografia-20">Bibliografia</h6>
+<ul>
+<li>https://stackoverflow.com/questions/359494/which-equals-operator-vs-should-be-used-in-javascript-comparisons</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="wyjaśnij-same-origin-policy-w-odniesieniu-do-javascript.">Wyjaśnij same-origin policy w odniesieniu do JavaScript.</h3>
+<p>Same-origin policy zapobiega przesyłaniu żądań JavaScript przez granice domen. Źródło jest zdefiniowane jako kombinacja schematu URI, nazwy hosta i numeru portu. Ta zasada uniemożliwia złośliwemu skryptowi na jednej stronie uzyskanie dostępu do poufnych danych na innej stronie internetowej za pomocą modelu obiektowego dokumentu (DOM) tej strony.</p>
+<h6 id="bibliografia-21">Bibliografia</h6>
+<ul>
+<li>https://en.wikipedia.org/wiki/Same-origin_policy</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="spraw-aby-działało">Spraw aby działało:</h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb27-1" title="1"><span class="at">duplicate</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>])<span class="op">;</span> <span class="co">// [1,2,3,4,5,1,2,3,4,5]</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">function</span> <span class="at">duplicate</span>(arr) <span class="op">{</span></a>
+<a class="sourceLine" id="cb28-2" title="2">  <span class="cf">return</span> <span class="va">arr</span>.<span class="at">concat</span>(arr)<span class="op">;</span></a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb28-4" title="4"></a>
+<a class="sourceLine" id="cb28-5" title="5"><span class="at">duplicate</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>])<span class="op">;</span> <span class="co">// [1,2,3,4,5,1,2,3,4,5]</span></a></code></pre></div>
+<p>Lub z ES6:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">const</span> duplicate <span class="op">=</span> (arr) <span class="kw">=&gt;</span> [...<span class="at">arr</span><span class="op">,</span> ...<span class="at">arr</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb29-2" title="2"></a>
+<a class="sourceLine" id="cb29-3" title="3"><span class="at">duplicate</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>])<span class="op">;</span> <span class="co">// [1,2,3,4,5,1,2,3,4,5]</span></a></code></pre></div>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="dlaczego-nazywa-się-to-wyrażeniem-trójargumentowym-co-oznacza-słowo-trójargumentowe">Dlaczego nazywa się to wyrażeniem trójargumentowym, co oznacza słowo “trójargumentowe”?</h3>
+<p>“Ternary” wskazuje trzy, a wyrażenie potrójne akceptuje trzy operandy, warunek testu, wyrażenie “then” i wyrażenie “else”. Wyrażenia trójskładnikowe nie są specyficzne dla JavaScript i nie jestem pewien, dlaczego znajduje się nawet na tej liście.</p>
+<h6 id="bibliografia-22">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="czym-jest-use-strict-jakie-są-zalety-i-wady-korzystania-z-tego">Czym jest <code>"use strict";</code>? Jakie są zalety i wady korzystania z tego?</h3>
+<p>‘use strict’ to instrukcja używana do włączenia trybu strict mode do całych skryptów lub poszczególnych funkcji. Tryb strict mode to sposób na włączenie ograniczonej wersji JavaScript.</p>
+<p>Zalety:</p>
+<ul>
+<li>Uniemożliwia przypadkowe utworzenie zmiennych globalnych.</li>
+<li>Wykonuje zadania, które w przeciwnym razie cicho nie rzucałyby wyjątku.</li>
+<li>Podejmuje próby usunięcia właściwości nieusuwalnych (gdzie przed próbą po prostu nie miałby żadnego efektu).</li>
+<li>Wymaga, aby nazwy parametrów funkcji były unikalne.</li>
+<li><code>this</code> jest niezdefiniowane w kontekście globalnym.</li>
+<li>Łapie niektóre popularne coding bloopers, rzucając wyjątki.</li>
+<li>Wyłącza funkcje, które są mylące lub źle przemyślane.</li>
+</ul>
+<p>Wady:</p>
+<ul>
+<li>Wiele brakujących funkcji, do których niektórzy programiści mogą być przyzwyczajeni.</li>
+<li>Nie ma już dostępu do <code>function.caller</code> i <code>function.arguments</code>.</li>
+<li>Łączenie skryptów napisanych w różnych trybach strict mode może powodować problemy.</li>
+</ul>
+<p>Ogólnie rzecz biorąc, uważam, że korzyści przeważają nad wadami i nigdy nie musiałem polegać na funkcjach blokujących tryb strict mode. Poleciłbym użycie trybu strict mode.</p>
+<h6 id="bibliografia-23">Bibliografia</h6>
+<ul>
+<li>http://2ality.com/2011/10/strict-mode-hatred.html</li>
+<li>http://lucybain.com/blog/2014/js-use-strict/</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="utwórz-pętlę-for-która-będzie-się-powtarzać-do-100-podczas-wysyłania-fizz-w-wielokrotnościach-3-buzz-w-wielokrotnościach-5-i-fizzbuzz-w-wielokrotnościach-3-oraz-5.">Utwórz pętlę for, która będzie się powtarzać do <code>100</code> podczas wysyłania <strong>“fizz”</strong> w wielokrotnościach <code>3</code>, <strong>“buzz”</strong> w wielokrotnościach <code>5</code> i <strong>“fizzbuzz”</strong> w wielokrotnościach <code>3</code> oraz <code>5</code>.</h3>
+<p>Sprawdź tę wersję FizzBuzz od <a href="https://gist.github.com/jaysonrowe/1592432#gistcomment-790724">Paul Irish</a>.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb30-1" title="1"><span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">100</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb30-2" title="2">  <span class="kw">let</span> f <span class="op">=</span> i <span class="op">%</span> <span class="dv">3</span> <span class="op">==</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb30-3" title="3">    b <span class="op">=</span> i <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb30-4" title="4">  <span class="va">console</span>.<span class="at">log</span>(f <span class="op">?</span> (b <span class="op">?</span> <span class="st">&#39;FizzBuzz&#39;</span> : <span class="st">&#39;Fizz&#39;</span>) : b <span class="op">?</span> <span class="st">&#39;Buzz&#39;</span> : i)<span class="op">;</span></a>
+<a class="sourceLine" id="cb30-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>Nie radzę jednak pisać wyżej podczas wywiadów. Trzymaj się długiego, ale wyraźnego podejścia. Aby uzyskać bardziej zwariowane wersje FizzBuzz, sprawdź odnośnik poniżej.</p>
+<h6 id="bibliografia-24">Bibliografia</h6>
+<ul>
+<li>https://gist.github.com/jaysonrowe/1592432</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="dlaczego-generalnie-dobrym-pomysłem-jest-pozostawienie-globalnego-zasięgu-witryny-takim-jakim-jest-i-nigdy-go-nie-dotykać">Dlaczego generalnie dobrym pomysłem jest pozostawienie globalnego zasięgu witryny takim, jakim jest, i nigdy go nie dotykać?</h3>
+<p>Każdy skrypt ma dostęp do zakresu globalnego, a jeśli wszyscy użyją globalnej przestrzeni nazw do zdefiniowania swoich zmiennych, prawdopodobnie dojdzie do kolizji. Wzorzec modułu (IIFE) służy do enkapsulacji zmiennych w lokalnej przestrzeni nazw.</p>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="dlaczego-miałbyś-używać-czegoś-takiego-jak-zdarzenie-load-czy-to-wydarzenie-ma-wady-czy-znasz-jakieś-alternatywy-i-dlaczego-miałbyś-je-wykorzystać">Dlaczego miałbyś używać czegoś takiego jak zdarzenie <code>load</code>? Czy to wydarzenie ma wady? Czy znasz jakieś alternatywy i dlaczego miałbyś je wykorzystać?</h3>
+<p>Zdarzenie <code>load</code> odpala po zakończeniu ładowania dokumentu. W tym momencie wszystkie obiekty w dokumencie znajdują się w DOM, a wszystkie obrazy, skrypty, łącza i podramki zostały załadowane.</p>
+<p>Zdarzenie DOM <code>DOMContentLoaded</code> uruchomi się po zbudowaniu DOM dla strony, ale nie czekaj na zakończenie ładowania innych zasobów. Jest to preferowane w niektórych przypadkach, gdy nie trzeba ładować całej strony przed inicjalizacją.</p>
+<p>TODO.</p>
+<h6 id="bibliografia-25">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="wyjaśnij-czym-jest-sap-i-jak-uczynić-ją-przyjazną-seo.">Wyjaśnij, czym jest SAP i jak uczynić ją przyjazną SEO.</h3>
+<p>Poniżej zaczerpnięto z niesamowitego <a href="https://github.com/grab/front-end-guide">Grab Front End Guide</a>, który przypadkiem jest napisany przeze mnie!</p>
+<p>Obecnie twórcy stron internetowych odnoszą się do produktów, które budują, jako aplikacji internetowych, a nie stron internetowych. Chociaż nie ma ścisłej różnicy między tymi dwoma terminami, aplikacje internetowe wydają się być wysoce interaktywne i dynamiczne, umożliwiając użytkownikowi wykonywanie działań i otrzymywanie odpowiedzi na ich działanie. Tradycyjnie przeglądarka odbiera HTML z serwera i renderuje go. Gdy użytkownik przechodzi do innego adresu URL, wymagane jest odświeżenie całej strony, a serwer wysyła nowy kod HTML na nową stronę. Nazywa się to renderowaniem po stronie serwera.</p>
+<p>Jednak w nowoczesnych SPA stosuje się zamiast tego renderowanie po stronie klienta. Przeglądarka ładuje stronę początkową z serwera wraz ze skryptami (frameworki, biblioteki, kod aplikacji) i arkuszami stylów wymaganymi dla całej aplikacji. Gdy użytkownik przechodzi do innych stron, odświeżanie strony nie jest uruchamiane. Adres URL strony jest aktualizowany za pośrednictwem <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">HTML5 History API</a>. Nowe dane wymagane dla nowej strony, zwykle w formacie JSON, są pobierane przez przeglądarkę za pośrednictwem żądań <a href="https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started">AJAX</a> do serwera. SPA następnie dynamicznie aktualizuje stronę danymi za pomocą JavaScript, który został już pobrany podczas ładowania strony. Ten model jest podobny do działania natywnych aplikacji mobilnych.</p>
+<p>Korzyści:</p>
+<ul>
+<li>Aplikacja jest bardziej responsywna, a użytkownicy nie widzą flashowania między nawigacjami po stronach z powodu odświeżania całej strony.</li>
+<li>Na serwer przesyłanych jest mniej żądań HTTP, ponieważ te same zasoby nie muszą być pobierane ponownie przy każdym ładowaniu strony.</li>
+<li>Jasne rozdzielenie spraw między klientem a serwerem; możesz łatwo budować nowych klientów dla różnych platform (np. mobilnych, chatbotów, inteligentnych zegarków) bez konieczności modyfikowania kodu serwera. Możesz także modyfikować stos technologii na kliencie i serwerze niezależnie, o ile umowa API nie zostanie zerwana.</li>
+</ul>
+<p>Wady:</p>
+<ul>
+<li>Cięższe początkowe ładowanie strony ze względu na ładowanie frameworka, kodu aplikacji i zasobów wymaganych na wielu stronach.</li>
+<li>Na serwerze należy wykonać dodatkowy krok, aby skonfigurować go tak, aby kierował wszystkie żądania do jednego punktu wejścia i pozwalał na przejęcie od niego routingu po stronie klienta.</li>
+<li>Usługi SPA są zależne od JavaScript do renderowania treści, ale nie wszystkie wyszukiwarki wykonują JavaScript podczas przeszukiwania i mogą widzieć pustą treść na twojej stronie. To mimowolnie szkodzi optymalizacji silnika wyszukiwarki (Search Engine Optimization - SEO) twojej aplikacji. Jednak przez większość czasu, gdy tworzysz aplikacje, SEO nie jest najważniejszym czynnikiem, ponieważ nie wszystkie treści muszą być indeksowane przez wyszukiwarki. Aby temu zaradzić, możesz renderować aplikację po stronie serwera lub korzystać z usług takich jak <a href="https://prerender.io/">Prerender</a> aby “wyrenderuj javascript w przeglądarce, zapisz statyczny kod HTML i zwróć go do pliku crawlers”.</li>
+</ul>
+<h6 id="bibliografia-26">Bibliografia</h6>
+<ul>
+<li>https://github.com/grab/front-end-guide#single-page-apps-spas</li>
+<li>http://stackoverflow.com/questions/21862054/single-page-app-advantages-and-disadvantages</li>
+<li>http://blog.isquaredsoftware.com/presentations/2016-10-revolution-of-web-dev/</li>
+<li>https://medium.freecodecamp.com/heres-why-client-side-rendering-won-46a349fadb52</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jaki-jest-zakres-twojego-doświadczenia-z-promises-ilub-ich-polyfills">Jaki jest zakres twojego doświadczenia z Promises i/lub ich polyfills?</h3>
+<p>Posiadanie praktycznej wiedzy na ten temat. Obietnica (promise) to obiekt, który może kiedyś wygenerować jedną wartość: wartość rozwiązaną lub przyczynę, dla której nie została ona rozwiązana (np. wystąpił błąd sieci). Obietnica może być w jednym z 3 możliwych stanów: spełniona, odrzucona lub oczekująca (fulfilled, rejected, pending). Użytkownicy promise mogą dołączać callbacks, aby obsłużyć spełnioną wartość lub przyczynę odrzucenia.</p>
+<p>Niektóre wspólne polyfills są <code>$.deferred</code>, Q oraz Bluebird ale nie wszystkie z nich są zgodne ze specyfikacją. ES2015 obsługuje obietnice od razu po wyjęciu z pudełka, a obecnie polifilly zwykle nie są potrzebne.</p>
+<h6 id="bibliografia-27">Bibliografia</h6>
+<ul>
+<li>https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jakie-są-zalety-i-wady-korzystania-z-obietnic-zamiast-callbacks">Jakie są zalety i wady korzystania z obietnic zamiast callbacks?</h3>
+<p><strong>Zalety</strong></p>
+<ul>
+<li>Unikanie callback hell, które może być nieczytelne.</li>
+<li>Ułatwia pisanie sekwencyjnego kodu asynchronicznego, który można odczytać za pomocą <code>.then()</code>.</li>
+<li>Ułatwia pisanie równoległego kodu asynchronicznego za pomocą <code>Promise.all()</code>.</li>
+<li>W przypadku obietnic te scenariusze występujące w kodowaniu callbacks-only nie wystąpią:
+<ul>
+<li>wywołanie callback za wcześnie</li>
+<li>wywołanie callback za późno (lub nigdy)</li>
+<li>wywołanie callback za mało lub zbyt wiele razy</li>
+<li>nieprzekazanie niezbędnego środowiska/parametrów</li>
+<li>Połknięcie ewentualnych błędów/wyjątków</li>
+</ul></li>
+</ul>
+<p><strong>Wady</strong></p>
+<ul>
+<li>Nieco bardziej złożony kod (dyskusyjny).</li>
+<li>W starszych przeglądarkach, w których ES2015 nie jest obsługiwany, w celu korzystania z niego należy załadować polyfill.</li>
+</ul>
+<h6 id="bibliografia-28">Bibliografia</h6>
+<ul>
+<li>https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch3.md</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jakie-są-zaletywady-pisania-kodu-javascript-w-języku-kompilującym-się-w-javascript">Jakie są zalety/wady pisania kodu JavaScript w języku kompilującym się w JavaScript?</h3>
+<p>Niektóre przykłady języków, które kompilują się do JavaScript włączając CoffeeScript, Elm, ClojureScript, PureScript i TypeScript.</p>
+<p>Zalety:</p>
+<ul>
+<li>Naprawia niektóre długotrwałe problemy z JavaScriptem i odradza antywzorce JavaScript.</li>
+<li>Umożliwia pisanie krótszego kodu, poprzez dodanie cukru syntaktycznego do JavaScript, którego moim zdaniem ES5 brakuje, ale ES2015 jest niesamowity.</li>
+<li>Typy statyczne są niesamowite (w przypadku TypeScript) dla dużych projektów, które muszą być utrzymywane z czasem.</li>
+</ul>
+<p>Wady:</p>
+<ul>
+<li>Wymaga procesu builda/kompilacji, ponieważ przeglądarki obsługują tylko JavaScript, a twój kod będzie musiał zostać skompilowany w JavaScript przed podaniem do przeglądarki.</li>
+<li>Debugowanie może być uciążliwe, jeśli mapy źródłowe nie są ładnie odwzorowane na wstępnie skompilowanym źródle.</li>
+<li>Większość programistów nie zna tych języków i będzie musiała się ich nauczyć. Jeśli używasz go do swoich projektów, wiąże się to z dodatkowymi kosztami.</li>
+<li>Mniejsza społeczność (zależy od języka), co oznacza, że trudniej będzie znaleźć zasoby, samouczki, biblioteki i narzędzia.</li>
+<li>Może brakować obsługi IDE / edytora.</li>
+<li>Te języki zawsze będą w tyle za najnowszym standardem JavaScript.</li>
+<li>Programiści powinni być świadomi, do czego ich kod jest kompilowany - ponieważ tak właśnie by się działało, i to w końcu ma znaczenie.</li>
+</ul>
+<p>W praktyce, ES2015 znacznie poprawił JavaScript i znacznie ułatwił pisanie. Obecnie nie widzę potrzeby używania CoffeeScript.</p>
+<h6 id="bibliografia-29">Bibliografia</h6>
+<ul>
+<li>https://softwareengineering.stackexchange.com/questions/72569/what-are-the-pros-and-cons-of-coffeescript</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jakich-narzędzi-i-technik-używasz-do-debugowania-kodu-javascript">Jakich narzędzi i technik używasz do debugowania kodu JavaScript?</h3>
+<ul>
+<li>React i Redux
+<ul>
+<li><a href="https://github.com/facebook/react-devtools">React Devtools</a></li>
+<li><a href="https://github.com/gaearon/redux-devtools">Redux Devtools</a></li>
+</ul></li>
+<li>Vue
+<ul>
+<li><a href="https://github.com/vuejs/vue-devtools">Vue Devtools</a></li>
+</ul></li>
+<li>JavaScript
+<ul>
+<li><a href="https://hackernoon.com/twelve-fancy-chrome-devtools-tips-dc1e39d10d9d">Chrome Devtools</a></li>
+<li>instrukcja <code>debugger</code></li>
+<li>stary dobry <code>console.log</code> debugging</li>
+</ul></li>
+</ul>
+<h6 id="bibliografia-30">Bibliografia</h6>
+<ul>
+<li>https://hackernoon.com/twelve-fancy-chrome-devtools-tips-dc1e39d10d9d</li>
+<li>https://raygun.com/blog/javascript-debugging/</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jakich-konstrukcji-językowych-używasz-do-iteracji-właściwości-obiektów-i-elementów-tablicy">Jakich konstrukcji językowych używasz do iteracji właściwości obiektów i elementów tablicy?</h3>
+<p>Dla obiektów:</p>
+<ul>
+<li>pętle <code>for-in</code> - <code>for (var property in obj) { console.log(property); }</code>. Spowoduje to jednak również iterację po jej odziedziczonych właściwościach, a przed użyciem dodanie sprawdzenia <code>obj.hasOwnProperty (właściwość)</code>.</li>
+<li><code>Object.keys()</code> - <code>Object.keys(obj).forEach(function (property) { ... })</code>. <code>Object.keys()</code> jest statyczną metodą, która wyświetli wszystkie wyliczalne właściwości obiektu, który przekazujesz.</li>
+<li><code>Object.getOwnPropertyNames()</code> - <code>Object.getOwnPropertyNames(obj).forEach(function (property) { ... })</code>. <code>Object.getOwnPropertyNames()</code> jest statyczną metodą, która wyświetli wszystkie wyliczalne i niepoliczalne właściwości przekazywanego obiektu.</li>
+</ul>
+<p>Dla tablic:</p>
+<ul>
+<li>pętle <code>for</code> - <code>for (var i = 0; i &lt; arr.length; i++)</code>. Częstą pułapką jest to, że <code>var</code> jest w zakresie funkcji, a nie w zakresie bloku, i przez większość czasu chciałbyś mieć zmienną iteratora o zasięgu blokowym. ES2015 wprowadza <code>let</code>, który ma zakres blokowy i zaleca się jego użycie zamiast tego. To staje się: <code>for (let i = 0; i &lt; arr.length; i++)</code>.</li>
+<li><code>forEach</code> - <code>arr.forEach(function (el, index) { ... })</code>. Ta konstrukcja może być czasem wygodniejsza, ponieważ nie musisz używać <code>index</code>, jeśli wszystko, czego potrzebujesz, to elementy tablicy. Istnieją również metody <code>every</code> i <code>some</code>, które pozwalają na wcześniejsze zakończenie iteracji.</li>
+<li>pętle <code>for-of</code> - <code>for (let elem of arr) { ... }</code>. ES6 wprowadza nową pętlę, pętlę <code>for-of</code>, która pozwala zapętlać obiekty zgodne z <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#The_iterable_protocol">iterowalnym protokołem</a> takie jak <code>String</code>, <code>Array</code>, <code>Map</code>, <code>Set</code>, etc. Łączy zalety pętli <code>for</code> i metody <code>forEach()</code>. Zaletą pętli <code>for</code> jest to, że można się od niej oderwać, a zaletą <code>forEach()</code> jest to, że jest ona bardziej zwięzła niż pętla <code>for</code>, ponieważ nie jest potrzebna zmienna licznika. Pętla <code>for-of</code> daje zarówno możliwość zerwania z pętli, jak i bardziej zwięzłą składnię.</li>
+</ul>
+<p>Przez większość czasu wolałbym metodę <code>.forEach</code>, ale tak naprawdę zależy to od tego, co próbujesz zrobić. Przed ES6 używaliśmy pętli <code>for</code>, gdy potrzebowaliśmy przedwcześnie zakończyć pętlę za pomocą <code>break</code>. Ale teraz dzięki ES6 możemy to zrobić za pomocą pętli <code>for-of</code>. Używałbym pętli <code>for</code>, gdy potrzebuję jeszcze większej elastyczności, takiej jak zwiększanie iteratora więcej niż raz na pętlę.</p>
+<p>Ponadto, gdy korzystasz z pętli <code>for-of</code>, jeśli potrzebujesz dostępu zarówno do indeksu, jak i wartości każdego elementu tablicy, możesz to zrobić za pomocą metody ESR Array <code>entry()</code> i destrukcji:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">const</span> arr <span class="op">=</span> [<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span><span class="op">,</span> <span class="st">&#39;c&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-2" title="2"></a>
+<a class="sourceLine" id="cb31-3" title="3"><span class="cf">for</span> (<span class="kw">let</span> [index<span class="op">,</span> elem] <span class="kw">of</span> <span class="va">arr</span>.<span class="at">entries</span>()) <span class="op">{</span></a>
+<a class="sourceLine" id="cb31-4" title="4">  <span class="va">console</span>.<span class="at">log</span>(index<span class="op">,</span> <span class="st">&#39;: &#39;</span><span class="op">,</span> elem)<span class="op">;</span></a>
+<a class="sourceLine" id="cb31-5" title="5"><span class="op">}</span></a></code></pre></div>
+<h6 id="bibliografia-31">Bibliografia</h6>
+<ul>
+<li>http://2ality.com/2015/08/getting-started-es6.html#from-for-to-foreach-to-for-of</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="wyjaśnij-różnicę-między-obiektami-mutable-a-immutable.">Wyjaśnij różnicę między obiektami mutable, a immutable.</h3>
+<p>Niezmienność jest podstawową zasadą programowania funkcjonalnego i ma wiele do zaoferowania także programom obiektowym. Zmienny obiekt to obiekt, którego stan można zmodyfikować po utworzeniu. Niezmienny obiekt to obiekt, którego stanu nie można zmienić po jego utworzeniu.</p>
+<h4 id="jaki-jest-przykład-niezmiennego-obiektu-w-javascript">Jaki jest przykład niezmiennego obiektu w JavaScript?</h4>
+<p>W JavaScript niektóre wbudowane typy (liczby, stringi) są niezmienne, ale obiekty niestandardowe są na ogół modyfikowalne.</p>
+<p>Niektóre wbudowane niezmienne obiekty JavaScript są <code>Math</code>, <code>Date</code>.</p>
+<p>Oto kilka sposobów dodania / symulacji niezmienności prostych obiektów JavaScript.</p>
+<p><strong>Object Constant Properties</strong></p>
+<p>Łącząc <code>writable: false</code> i <code>configurable: false</code>, możesz zasadniczo stworzyć stałą (nie można jej zmienić, przedefiniować ani usunąć) jako właściwość obiektu, na przykład:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">let</span> myObject <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="va">Object</span>.<span class="at">defineProperty</span>(myObject<span class="op">,</span> <span class="st">&#39;number&#39;</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb32-3" title="3">  <span class="dt">value</span><span class="op">:</span> <span class="dv">42</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb32-4" title="4">  <span class="dt">writable</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb32-5" title="5">  <span class="dt">configurable</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb32-6" title="6"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb32-7" title="7"><span class="va">console</span>.<span class="at">log</span>(<span class="va">myObject</span>.<span class="at">number</span>)<span class="op">;</span> <span class="co">// 42</span></a>
+<a class="sourceLine" id="cb32-8" title="8"><span class="va">myObject</span>.<span class="at">number</span> <span class="op">=</span> <span class="dv">43</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb32-9" title="9"><span class="va">console</span>.<span class="at">log</span>(<span class="va">myObject</span>.<span class="at">number</span>)<span class="op">;</span> <span class="co">// 42</span></a></code></pre></div>
+<p><strong>Prevent Extensions</strong></p>
+<p>Jeśli chcesz uniemożliwić dodawanie do obiektu nowych właściwości, ale w przeciwnym razie pozostaw resztę właściwości obiektu w spokoju, wywołaj <code>Object.preventExtensions(...)</code>:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">var</span> myObject <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb33-2" title="2">  <span class="dt">a</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="op">};</span></a>
+<a class="sourceLine" id="cb33-4" title="4"></a>
+<a class="sourceLine" id="cb33-5" title="5"><span class="va">Object</span>.<span class="at">preventExtensions</span>(myObject)<span class="op">;</span></a>
+<a class="sourceLine" id="cb33-6" title="6"></a>
+<a class="sourceLine" id="cb33-7" title="7"><span class="va">myObject</span>.<span class="at">b</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb33-8" title="8"><span class="va">myObject</span>.<span class="at">b</span><span class="op">;</span> <span class="co">// undefined</span></a></code></pre></div>
+<p>W trybie innym niż strict tworzenie <code>b</code> kończy się bezgłośnie. W trybie strict mode rzuca <code>TypeError</code>.</p>
+<p><strong>Seal</strong></p>
+<p><code>Object.seal()</code> tworzy “zapieczętowany” obiekt, co oznacza, że bierze istniejący obiekt i zasadniczo wywołuje <code>Object.preventExtensions()</code> zaznacza na nim wszystkie istniejące właściwości jako <code>configurable: false</code>.</p>
+<p>Dlatego nie tylko nie możesz dodawać żadnych dodatkowych właściwości, ale także nie możesz rekonfigurować ani usuwać żadnych istniejących właściwości (chociaż nadal możesz modyfikować ich wartości).</p>
+<p><strong>Freeze</strong></p>
+<p><code>Object.freeze()</code> tworzy zamrożony obiekt, co oznacza, że pobiera istniejący obiekt i zasadniczo wywołuje na nim <code>Object.seal()</code>, ale oznacza również wszystkie właściwości “data accessor” jako writable:false, dzięki czemu ich wartości nie można zmienić.</p>
+<p>To podejście jest najwyższym poziomem niezmienności, jaki można osiągnąć dla samego obiektu, ponieważ zapobiega wszelkim zmianom w tym obiekcie lub jakichkolwiek jego bezpośrednich właściwościach (chociaż, jak wspomniano powyżej, zawartość jakichkolwiek innych obiektów, do których istnieją odniesienia, pozostaje nienaruszona).</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">var</span> immutable <span class="op">=</span> <span class="va">Object</span>.<span class="at">freeze</span>(<span class="op">{}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Zamrożenie obiektu nie pozwala na dodanie nowych właściwości do obiektu i uniemożliwia usunięcie lub zmianę istniejących właściwości. <code>Object.freeze()</code> zachowuje wyliczalność, konfigurowalność, zapisywalność i prototyp obiektu. Zwraca przekazany obiekt i nie tworzy zamrożonej kopii.</p>
+<h4 id="jakie-są-zalety-i-wady-immutability">Jakie są zalety i wady immutability?</h4>
+<p><strong>Zalety</strong></p>
+<ul>
+<li>Łatwiejsze wykrywanie zmian - Równość obiektów można ustalić w wydajny i łatwy sposób dzięki równości referencyjnej. Jest to przydatne do porównywania różnic obiektów w React i Redux.</li>
+<li>Programy z niezmiennymi obiektami są mniej skomplikowane do przemyślenia, ponieważ nie musisz martwić się o to, jak obiekt może ewoluować w czasie.</li>
+<li>Kopie obronne nie są już potrzebne, gdy niezmienne obiekty wracają z funkcji lub są przekazywane do nich, ponieważ nie ma możliwości, aby niezmienny obiekt został przez nią zmodyfikowany.</li>
+<li>Łatwe udostępnianie za pośrednictwem referencji - Jedna kopia obiektu jest tak samo dobra jak inna, dzięki czemu można buforować obiekty lub wielokrotnie używać tego samego obiektu.</li>
+<li>Bezpieczne dla wątków - Niezmienne obiekty mogą być bezpiecznie używane między wątkami w środowisku wielowątkowym, ponieważ nie ma ryzyka ich modyfikacji w innych równolegle działających wątkach.</li>
+<li>Korzystając z bibliotek takich jak ImmmutableJS, obiekty są modyfikowane przy użyciu współdzielenia strukturalnego i potrzeba mniej pamięci do posiadania wielu obiektów o podobnych strukturach.</li>
+</ul>
+<p><strong>Wady</strong></p>
+<ul>
+<li>Naiwne implementacje niezmiennych struktur danych i ich operacje mogą powodować wyjątkowo niską wydajność, ponieważ za każdym razem tworzone są nowe obiekty. Zaleca się stosowanie bibliotek do wydajnych niezmiennych struktur danych i operacji wykorzystujących współużytkowanie strukturalne.</li>
+<li>Alokacja (i dezalokacja) wielu małych obiektów zamiast modyfikowania istniejących może mieć wpływ na wydajność. Złożoność alokatora lub modułu wyrzucania elementów bezużytecznych zwykle zależy od liczby obiektów na stercie.</li>
+<li>Trudno jest zbudować cykliczne struktury danych, takie jak wykresy. Jeśli masz dwa obiekty, których nie można zmodyfikować po inicjalizacji, w jaki sposób można je skierować na siebie?</li>
+</ul>
+<h6 id="bibliografia-32">Bibliografia</h6>
+<ul>
+<li>https://stackoverflow.com/questions/1863515/pros-cons-of-immutability-vs-mutability</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h4 id="jak-osiągnąć-niezmienność-we-własnym-kodzie">Jak osiągnąć niezmienność we własnym kodzie?</h4>
+<p>Jednym ze sposobów osiągnięcia niezmienności jest użycie bibliotek takich jak <a href="http://facebook.github.io/immutable-js/">immutable.js</a>, <a href="https://github.com/swannodette/mori">mori</a> lub <a href="https://github.com/immerjs/immer">immer</a>.</p>
+<p>Alternatywą jest użycie deklaracji <code>const</code> w połączeniu ze wspomnianymi wyżej technikami tworzenia. Aby “mutować” obiekty, użyj operatora rozkładania, <code>Object.assign</code>, <code>Array.concat()</code> itp., Aby utworzyć nowe obiekty zamiast mutować obiekt oryginalny.</p>
+<p>Przykłady:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb35-1" title="1"><span class="co">// Array Example</span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="kw">const</span> arr <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="kw">const</span> newArr <span class="op">=</span> [...<span class="at">arr</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">;</span> <span class="co">// [1, 2, 3, 4]</span></a>
+<a class="sourceLine" id="cb35-4" title="4"></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="co">// Object Example</span></a>
+<a class="sourceLine" id="cb35-6" title="6"><span class="kw">const</span> human <span class="op">=</span> <span class="va">Object</span>.<span class="at">freeze</span>(<span class="op">{</span><span class="dt">race</span><span class="op">:</span> <span class="st">&#39;human&#39;</span><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb35-7" title="7"><span class="kw">const</span> john <span class="op">=</span> <span class="op">{</span>...<span class="at">human</span><span class="op">,</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;John&#39;</span><span class="op">};</span> <span class="co">// {race: &quot;human&quot;, name: &quot;John&quot;}</span></a>
+<a class="sourceLine" id="cb35-8" title="8"><span class="kw">const</span> alienJohn <span class="op">=</span> <span class="op">{</span>...<span class="at">john</span><span class="op">,</span> <span class="dt">race</span><span class="op">:</span> <span class="st">&#39;alien&#39;</span><span class="op">};</span> <span class="co">// {race: &quot;alien&quot;, name: &quot;John&quot;}</span></a></code></pre></div>
+<h6 id="bibliografia-33">Bibliografia</h6>
+<ul>
+<li>https://stackoverflow.com/questions/1863515/pros-cons-of-immutability-vs-mutability</li>
+<li>https://www.sitepoint.com/immutability-javascript/</li>
+<li>https://wecodetheweb.com/2016/02/12/immutable-javascript-using-es6-and-beyond/</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="wyjaśnij-różnicę-między-funkcjami-synchronicznymi-i-asynchronicznymi.">Wyjaśnij różnicę między funkcjami synchronicznymi i asynchronicznymi.</h3>
+<p>Funkcje synchroniczne blokują, a funkcje asynchroniczne nie. W funkcjach synchronicznych instrukcje kończą się przed uruchomieniem następnej instrukcji. W takim przypadku program jest oceniany dokładnie w kolejności instrukcji, a wykonywanie programu jest wstrzymywane, jeśli jedna z instrukcji zajmuje bardzo dużo czasu.</p>
+<p>Funkcje asynchroniczne zwykle akceptują wywołanie zwrotne (callback) jako parametr i wykonywanie jest kontynuowane w następnym wierszu natychmiast po wywołaniu funkcji asynchronicznej. Wywołanie zwrotne jest wywoływane tylko wtedy, gdy operacja asynchroniczna jest zakończona, a stos wywołań jest pusty. Intensywne operacje, takie jak ładowanie danych z serwera WWW lub wyszukiwanie w bazie danych, powinny być wykonywane asynchronicznie, aby główny wątek mógł kontynuować wykonywanie innych operacji zamiast blokować do czasu zakończenia tej długiej operacji (w przypadku przeglądarek interfejs użytkownika (UI) zawiesza się).</p>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="co-to-jest-pętla-zdarzeń-jaka-jest-różnica-między-stosem-wywołań-call-stack-a-kolejką-zadań-task-queue">Co to jest pętla zdarzeń? Jaka jest różnica między stosem wywołań (call stack) a kolejką zadań (task queue)?</h3>
+<p>Pętla zdarzeń jest pętlą jednowątkową, która monitoruje stos wywołań i sprawdza, czy w kolejce zadań jest jakaś praca do wykonania. Jeśli stos wywołań jest pusty, a w kolejce zadań znajdują się funkcje wywołania zwrotnego, funkcja jest usuwana z kolejki i przekazywana na stos wywołań, który ma zostać wykonany.</p>
+<p>Jeśli jeszcze nie sprawdziłeś Philipa Roberta i jego <a href="https://2014.jsconf.eu/speakers/philip-roberts-what-the-heck-is-the-event-loop-anyway.html">talk odnośnie Event Loop</a>, powinieneś. Jest to jeden z najczęściej oglądanych filmów w JavaScript.</p>
+<h6 id="bibliografia-34">Bibliografia</h6>
+<ul>
+<li>https://2014.jsconf.eu/speakers/philip-roberts-what-the-heck-is-the-event-loop-anyway.html</li>
+<li>http://theproactiveprogrammer.com/javascript/the-javascript-event-loop-a-stack-and-a-queue/</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="wyjaśnij-różnice-w-korzystaniu-z-foo-pomiędzy-function-foo-i-var-foo-function">Wyjaśnij różnice w korzystaniu z <code>foo</code> pomiędzy <code>function foo() {}</code> i <code>var foo = function() {}</code></h3>
+<p>Pierwsza jest deklaracją funkcji, a druga jest wyrażeniem funkcji. Kluczową różnicą jest to, że deklaracje funkcji mają swoje ciała windowane, ale ciała wyrażeń funkcji nie są (mają takie samo zachowanie podczas windowania jak zmienne). Więcej informacji na temat windowania znajduje się w powyższym pytaniu <a href="#wytłumacz-hoisting">na temat windowania</a>. Jeśli spróbujesz wywołać wyrażenie funkcyjne przed jego zdefiniowaniem, otrzymasz błąd <code>Uncaught TypeError: XXX is not a function</code>.</p>
+<p><strong>Deklaracja funkcji</strong></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb36-1" title="1"><span class="at">foo</span>()<span class="op">;</span> <span class="co">// &#39;FOOOOO&#39;</span></a>
+<a class="sourceLine" id="cb36-2" title="2"><span class="kw">function</span> <span class="at">foo</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb36-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;FOOOOO&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb36-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p><strong>Wyrażenie funkcji</strong></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb37-1" title="1"><span class="at">foo</span>()<span class="op">;</span> <span class="co">// Uncaught TypeError: foo is not a function</span></a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="kw">var</span> foo <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb37-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;FOOOOO&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="op">};</span></a></code></pre></div>
+<h6 id="bibliografia-35">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jakie-są-różnice-między-zmiennymi-utworzonymi-za-pomocą-let-var-lub-const">Jakie są różnice między zmiennymi utworzonymi za pomocą <code>let</code>, <code>var</code> lub <code>const</code>?</h3>
+<p>Zmienne zadeklarowane przy użyciu słowa kluczowego <code>var</code> mają zasięg do funkcji, w której zostały utworzone, lub jeśli zostały utworzone poza jakąkolwiek funkcją, do obiektu globalnego. Parametry <code>let</code> i <code>const</code> są <em>block scoped</em>, co oznacza, że są dostępne tylko w najbliższym zestawie nawiasów klamrowych (funkcja, blok if-else lub pętla for).</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">function</span> <span class="at">foo</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb38-2" title="2">  <span class="co">// All variables are accessible within functions.</span></a>
+<a class="sourceLine" id="cb38-3" title="3">  <span class="kw">var</span> bar <span class="op">=</span> <span class="st">&#39;bar&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb38-4" title="4">  <span class="kw">let</span> baz <span class="op">=</span> <span class="st">&#39;baz&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb38-5" title="5">  <span class="kw">const</span> qux <span class="op">=</span> <span class="st">&#39;qux&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb38-6" title="6"></a>
+<a class="sourceLine" id="cb38-7" title="7">  <span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// bar</span></a>
+<a class="sourceLine" id="cb38-8" title="8">  <span class="va">console</span>.<span class="at">log</span>(baz)<span class="op">;</span> <span class="co">// baz</span></a>
+<a class="sourceLine" id="cb38-9" title="9">  <span class="va">console</span>.<span class="at">log</span>(qux)<span class="op">;</span> <span class="co">// qux</span></a>
+<a class="sourceLine" id="cb38-10" title="10"><span class="op">}</span></a>
+<a class="sourceLine" id="cb38-11" title="11"></a>
+<a class="sourceLine" id="cb38-12" title="12"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// ReferenceError: bar is not defined</span></a>
+<a class="sourceLine" id="cb38-13" title="13"><span class="va">console</span>.<span class="at">log</span>(baz)<span class="op">;</span> <span class="co">// ReferenceError: baz is not defined</span></a>
+<a class="sourceLine" id="cb38-14" title="14"><span class="va">console</span>.<span class="at">log</span>(qux)<span class="op">;</span> <span class="co">// ReferenceError: qux is not defined</span></a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb39-1" title="1"><span class="cf">if</span> (<span class="kw">true</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb39-2" title="2">  <span class="kw">var</span> bar <span class="op">=</span> <span class="st">&#39;bar&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb39-3" title="3">  <span class="kw">let</span> baz <span class="op">=</span> <span class="st">&#39;baz&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb39-4" title="4">  <span class="kw">const</span> qux <span class="op">=</span> <span class="st">&#39;qux&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb39-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb39-6" title="6"></a>
+<a class="sourceLine" id="cb39-7" title="7"><span class="co">// var declared variables are accessible anywhere in the function scope.</span></a>
+<a class="sourceLine" id="cb39-8" title="8"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// bar</span></a>
+<a class="sourceLine" id="cb39-9" title="9"><span class="co">// let and const defined variables are not accessible outside of the block they were defined in.</span></a>
+<a class="sourceLine" id="cb39-10" title="10"><span class="va">console</span>.<span class="at">log</span>(baz)<span class="op">;</span> <span class="co">// ReferenceError: baz is not defined</span></a>
+<a class="sourceLine" id="cb39-11" title="11"><span class="va">console</span>.<span class="at">log</span>(qux)<span class="op">;</span> <span class="co">// ReferenceError: qux is not defined</span></a></code></pre></div>
+<p><code>var</code> umożliwia windowanie zmiennych, co oznacza, że można do nich odwoływać się w kodzie przed ich zadeklarowaniem. <code>let</code> oraz <code>const</code> nie pozwolą na to, zamiast tego zgłoszą błąd.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb40-1" title="1"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb40-2" title="2"></a>
+<a class="sourceLine" id="cb40-3" title="3"><span class="kw">var</span> foo <span class="op">=</span> <span class="st">&#39;foo&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb40-4" title="4"></a>
+<a class="sourceLine" id="cb40-5" title="5"><span class="va">console</span>.<span class="at">log</span>(baz)<span class="op">;</span> <span class="co">// ReferenceError: can&#39;t access lexical declaration &#39;baz&#39; before initialization</span></a>
+<a class="sourceLine" id="cb40-6" title="6"></a>
+<a class="sourceLine" id="cb40-7" title="7"><span class="kw">let</span> baz <span class="op">=</span> <span class="st">&#39;baz&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb40-8" title="8"></a>
+<a class="sourceLine" id="cb40-9" title="9"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// ReferenceError: can&#39;t access lexical declaration &#39;bar&#39; before initialization</span></a>
+<a class="sourceLine" id="cb40-10" title="10"></a>
+<a class="sourceLine" id="cb40-11" title="11"><span class="kw">const</span> bar <span class="op">=</span> <span class="st">&#39;bar&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>Ponowne zadeklarowanie zmiennej za pomocą <code>var</code> nie spowoduje błędu, ale ‘let’ oraz ‘const’, tak.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> <span class="st">&#39;foo&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="kw">var</span> foo <span class="op">=</span> <span class="st">&#39;bar&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb41-3" title="3"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// &quot;bar&quot;</span></a>
+<a class="sourceLine" id="cb41-4" title="4"></a>
+<a class="sourceLine" id="cb41-5" title="5"><span class="kw">let</span> baz <span class="op">=</span> <span class="st">&#39;baz&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb41-6" title="6"><span class="kw">let</span> baz <span class="op">=</span> <span class="st">&#39;qux&#39;</span><span class="op">;</span> <span class="co">// Uncaught SyntaxError: Identifier &#39;baz&#39; has already been declared</span></a></code></pre></div>
+<p><code>let</code> i <code>const</code> różnią się tym, że <code>let</code> pozwala na ponowne przypisanie wartości zmiennej, podczas gdy <code>const</code> nie.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb42-1" title="1"><span class="co">// This is fine.</span></a>
+<a class="sourceLine" id="cb42-2" title="2"><span class="kw">let</span> foo <span class="op">=</span> <span class="st">&#39;foo&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb42-3" title="3">foo <span class="op">=</span> <span class="st">&#39;bar&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb42-4" title="4"></a>
+<a class="sourceLine" id="cb42-5" title="5"><span class="co">// This causes an exception.</span></a>
+<a class="sourceLine" id="cb42-6" title="6"><span class="kw">const</span> baz <span class="op">=</span> <span class="st">&#39;baz&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb42-7" title="7">baz <span class="op">=</span> <span class="st">&#39;qux&#39;</span><span class="op">;</span></a></code></pre></div>
+<h6 id="bibliografia-36">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jakie-są-różnice-między-konstruktorami-funkcji-es6-i-es5">Jakie są różnice między konstruktorami funkcji ES6 i ES5?</h3>
+<p>Najpierw spójrzmy na przykład każdego:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb43-1" title="1"><span class="co">// ES5 Function Constructor</span></a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="kw">function</span> <span class="at">Person</span>(name) <span class="op">{</span></a>
+<a class="sourceLine" id="cb43-3" title="3">  <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> name<span class="op">;</span></a>
+<a class="sourceLine" id="cb43-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb43-5" title="5"></a>
+<a class="sourceLine" id="cb43-6" title="6"><span class="co">// ES6 Class</span></a>
+<a class="sourceLine" id="cb43-7" title="7"><span class="kw">class</span> Person <span class="op">{</span></a>
+<a class="sourceLine" id="cb43-8" title="8">  <span class="at">constructor</span>(name) <span class="op">{</span></a>
+<a class="sourceLine" id="cb43-9" title="9">    <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> name<span class="op">;</span></a>
+<a class="sourceLine" id="cb43-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb43-11" title="11"><span class="op">}</span></a></code></pre></div>
+<p>W przypadku prostych konstruktorów wyglądają bardzo podobnie.</p>
+<p>Główna różnica w konstruktorze występuje podczas korzystania z dziedziczenia. Jeśli chcemy stworzyć klasę <code>Student</code>, która jest podklasą <code>Person</code> i dodać pole <code>studentId</code>, musimy to zrobić dodatkowo do powyższego.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb44-1" title="1"><span class="co">// ES5 Function Constructor</span></a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="kw">function</span> <span class="at">Student</span>(name<span class="op">,</span> studentId) <span class="op">{</span></a>
+<a class="sourceLine" id="cb44-3" title="3">  <span class="co">// Call constructor of superclass to initialize superclass-derived members.</span></a>
+<a class="sourceLine" id="cb44-4" title="4">  <span class="va">Person</span>.<span class="at">call</span>(<span class="kw">this</span><span class="op">,</span> name)<span class="op">;</span></a>
+<a class="sourceLine" id="cb44-5" title="5"></a>
+<a class="sourceLine" id="cb44-6" title="6">  <span class="co">// Initialize subclass&#39;s own members.</span></a>
+<a class="sourceLine" id="cb44-7" title="7">  <span class="kw">this</span>.<span class="at">studentId</span> <span class="op">=</span> studentId<span class="op">;</span></a>
+<a class="sourceLine" id="cb44-8" title="8"><span class="op">}</span></a>
+<a class="sourceLine" id="cb44-9" title="9"></a>
+<a class="sourceLine" id="cb44-10" title="10"><span class="va">Student</span>.<span class="at">prototype</span> <span class="op">=</span> <span class="va">Object</span>.<span class="at">create</span>(<span class="va">Person</span>.<span class="at">prototype</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb44-11" title="11"><span class="va">Student</span>.<span class="va">prototype</span>.<span class="at">constructor</span> <span class="op">=</span> Student<span class="op">;</span></a>
+<a class="sourceLine" id="cb44-12" title="12"></a>
+<a class="sourceLine" id="cb44-13" title="13"><span class="co">// ES6 Class</span></a>
+<a class="sourceLine" id="cb44-14" title="14"><span class="kw">class</span> Student <span class="kw">extends</span> Person <span class="op">{</span></a>
+<a class="sourceLine" id="cb44-15" title="15">  <span class="at">constructor</span>(name<span class="op">,</span> studentId) <span class="op">{</span></a>
+<a class="sourceLine" id="cb44-16" title="16">    <span class="kw">super</span>(name)<span class="op">;</span></a>
+<a class="sourceLine" id="cb44-17" title="17">    <span class="kw">this</span>.<span class="at">studentId</span> <span class="op">=</span> studentId<span class="op">;</span></a>
+<a class="sourceLine" id="cb44-18" title="18">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb44-19" title="19"><span class="op">}</span></a></code></pre></div>
+<p>Używanie dziedziczenia w ES5 jest znacznie bardziej szczegółowe, a wersja ES6 jest łatwiejsza do zrozumienia i zapamiętania.</p>
+<h6 id="bibliografia-37">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance</li>
+<li>https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="czy-możesz-podać-przypadek-użycia-nowej-składni-funkcji-arrow-czym-ta-nowa-składnia-różni-się-od-innych-funkcji">Czy możesz podać przypadek użycia nowej składni funkcji arrow =&gt;? Czym ta nowa składnia różni się od innych funkcji?</h3>
+<p>Jedną oczywistą zaletą funkcji strzałek jest uproszczenie składni potrzebnej do tworzenia funkcji, bez potrzeby stosowania słowa kluczowego <code>function</code>. Funkcja <code>this</code> w funkcjach strzałek jest również związana z otaczającym zakresem, który jest inny w porównaniu do zwykłych funkcji, w których <code>this</code> jest określane przez obiekt wywołujący go. Leksykonowalne <code>this</code> jest przydatne, gdy wywołuje się callbacki, szczególnie w komponentach React.</p>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jaka-jest-zaleta-korzystania-ze-składni-arrow-syntax-dla-metody-w-konstruktorze">Jaka jest zaleta korzystania ze składni arrow syntax dla metody w konstruktorze?</h3>
+<p>Główną zaletą używania funkcji strzałkowej jako metody w konstruktorze jest to, że wartość <code>this</code> jest ustawiana w momencie tworzenia funkcji i nie może się później zmienić. Tak więc, gdy konstruktor jest używany do utworzenia nowego obiektu, <code>this</code> zawsze będzie odnosić się do tego obiektu. Na przykład, powiedzmy, że mamy konstruktor <code>Person</code>, który bierze imię jako argument i ma dwie metody <code>console.log</code> o tej nazwie, jedną jako funkcję zwykłą, a drugą jako funkcję strzałkową:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">const</span> Person <span class="op">=</span> <span class="kw">function</span> (firstName) <span class="op">{</span></a>
+<a class="sourceLine" id="cb45-2" title="2">  <span class="kw">this</span>.<span class="at">firstName</span> <span class="op">=</span> firstName<span class="op">;</span></a>
+<a class="sourceLine" id="cb45-3" title="3">  <span class="kw">this</span>.<span class="at">sayName1</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb45-4" title="4">    <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">firstName</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb45-5" title="5">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb45-6" title="6">  <span class="kw">this</span>.<span class="at">sayName2</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb45-7" title="7">    <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">firstName</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb45-8" title="8">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb45-9" title="9"><span class="op">};</span></a>
+<a class="sourceLine" id="cb45-10" title="10"></a>
+<a class="sourceLine" id="cb45-11" title="11"><span class="kw">const</span> john <span class="op">=</span> <span class="kw">new</span> <span class="at">Person</span>(<span class="st">&#39;John&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb45-12" title="12"><span class="kw">const</span> dave <span class="op">=</span> <span class="kw">new</span> <span class="at">Person</span>(<span class="st">&#39;Dave&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb45-13" title="13"></a>
+<a class="sourceLine" id="cb45-14" title="14"><span class="va">john</span>.<span class="at">sayName1</span>()<span class="op">;</span> <span class="co">// John</span></a>
+<a class="sourceLine" id="cb45-15" title="15"><span class="va">john</span>.<span class="at">sayName2</span>()<span class="op">;</span> <span class="co">// John</span></a>
+<a class="sourceLine" id="cb45-16" title="16"></a>
+<a class="sourceLine" id="cb45-17" title="17"><span class="co">// The regular function can have its &#39;this&#39; value changed, but the arrow function cannot</span></a>
+<a class="sourceLine" id="cb45-18" title="18"><span class="va">john</span>.<span class="va">sayName1</span>.<span class="at">call</span>(dave)<span class="op">;</span> <span class="co">// Dave (because &quot;this&quot; is now the dave object)</span></a>
+<a class="sourceLine" id="cb45-19" title="19"><span class="va">john</span>.<span class="va">sayName2</span>.<span class="at">call</span>(dave)<span class="op">;</span> <span class="co">// John</span></a>
+<a class="sourceLine" id="cb45-20" title="20"></a>
+<a class="sourceLine" id="cb45-21" title="21"><span class="va">john</span>.<span class="va">sayName1</span>.<span class="at">apply</span>(dave)<span class="op">;</span> <span class="co">// Dave (because &#39;this&#39; is now the dave object)</span></a>
+<a class="sourceLine" id="cb45-22" title="22"><span class="va">john</span>.<span class="va">sayName2</span>.<span class="at">apply</span>(dave)<span class="op">;</span> <span class="co">// John</span></a>
+<a class="sourceLine" id="cb45-23" title="23"></a>
+<a class="sourceLine" id="cb45-24" title="24"><span class="va">john</span>.<span class="va">sayName1</span>.<span class="at">bind</span>(dave)()<span class="op">;</span> <span class="co">// Dave (because &#39;this&#39; is now the dave object)</span></a>
+<a class="sourceLine" id="cb45-25" title="25"><span class="va">john</span>.<span class="va">sayName2</span>.<span class="at">bind</span>(dave)()<span class="op">;</span> <span class="co">// John</span></a>
+<a class="sourceLine" id="cb45-26" title="26"></a>
+<a class="sourceLine" id="cb45-27" title="27"><span class="kw">var</span> sayNameFromWindow1 <span class="op">=</span> <span class="va">john</span>.<span class="at">sayName1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-28" title="28"><span class="at">sayNameFromWindow1</span>()<span class="op">;</span> <span class="co">// undefined (because &#39;this&#39; is now the window object)</span></a>
+<a class="sourceLine" id="cb45-29" title="29"></a>
+<a class="sourceLine" id="cb45-30" title="30"><span class="kw">var</span> sayNameFromWindow2 <span class="op">=</span> <span class="va">john</span>.<span class="at">sayName2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-31" title="31"><span class="at">sayNameFromWindow2</span>()<span class="op">;</span> <span class="co">// John</span></a></code></pre></div>
+<p>Najważniejsze jest to, że <code>this</code> można zmienić dla normalnej funkcji, ale kontekst zawsze pozostaje taki sam dla funkcji strzałkowej. Więc nawet jeśli przekazujesz funkcję strzałkową do różnych części aplikacji, nie musisz się martwić o zmianę kontekstu.</p>
+<p>Może to być szczególnie pomocne w komponentach klasy React. Jeśli zdefiniujesz metodę klasy dla czegoś takiego jak moduł obsługi kliknięć za pomocą normalnej funkcji, a następnie przekażesz ten moduł obsługi kliknięć w dół do komponentu podrzędnego jako rekwizytu, musisz również powiązać <code>this</code> w konstruktorze komponentu nadrzędnego. Jeśli zamiast tego użyjesz funkcji strzałkowej, nie ma również potrzeby wiązania “this”, ponieważ metoda automatycznie uzyska wartość “this” z otaczającego kontekstu leksykalnego. (Zobacz ten artykuł dla doskonałej demonstracji i przykładowego kodu: https://medium.com/<span class="citation" data-cites="machnicki/handle-events-in-react-with-arrow-functions-ede88184bbb">@machnicki/handle-events-in-react-with-arrow-functions-ede88184bbb</span>)</p>
+<h6 id="bibliografia-38">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions</li>
+<li>https://medium.com/<span class="citation" data-cites="machnicki/handle-events-in-react-with-arrow-functions-ede88184bbb">@machnicki/handle-events-in-react-with-arrow-functions-ede88184bbb</span></li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jaka-jest-definicja-funkcji-wyższego-rzędu">Jaka jest definicja funkcji wyższego rzędu?</h3>
+<p>Funkcja wyższego rzędu to dowolna funkcja, która przyjmuje jedną lub więcej funkcji jako argumenty, których używa do działania na niektórych danych i / lub zwraca w rezultacie funkcję. Funkcje wyższego rzędu mają na celu wyodrębnienie niektórych operacji, które są wykonywane wielokrotnie. Klasycznym przykładem tego jest <code>map</code>, który przyjmuje tablicę i funkcję jako argumenty. <code>map</code> następnie używa tej funkcji do transformacji każdego elementu w tablicy, zwracając nową tablicę z transformowanymi danymi. Inne popularne przykłady w JavaScript to <code>forEach</code>, <code>filter</code> i <code>reduce</code>. Funkcja wyższego rzędu nie musi tylko manipulować tablicami, ponieważ istnieje wiele przypadków użycia do zwrócenia funkcji z innej funkcji. <code>Function.prototype.bind</code> jest jednym z takich przykładów w JavaScript.</p>
+<p><strong>Map</strong></p>
+<p>Powiedzmy, że mamy tablicę nazw, których potrzebujemy do przekształcenia każdego stringa na wielkie litery.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">const</span> names <span class="op">=</span> [<span class="st">&#39;irish&#39;</span><span class="op">,</span> <span class="st">&#39;daisy&#39;</span><span class="op">,</span> <span class="st">&#39;anna&#39;</span>]<span class="op">;</span></a></code></pre></div>
+<p>Imperatywnym sposobem będzie tak:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">const</span> transformNamesToUppercase <span class="op">=</span> <span class="kw">function</span> (names) <span class="op">{</span></a>
+<a class="sourceLine" id="cb47-2" title="2">  <span class="kw">const</span> results <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb47-3" title="3">  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">names</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb47-4" title="4">    <span class="va">results</span>.<span class="at">push</span>(names[i].<span class="at">toUpperCase</span>())<span class="op">;</span></a>
+<a class="sourceLine" id="cb47-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb47-6" title="6">  <span class="cf">return</span> results<span class="op">;</span></a>
+<a class="sourceLine" id="cb47-7" title="7"><span class="op">};</span></a>
+<a class="sourceLine" id="cb47-8" title="8"><span class="at">transformNamesToUppercase</span>(names)<span class="op">;</span> <span class="co">// [&#39;IRISH&#39;, &#39;DAISY&#39;, &#39;ANNA&#39;]</span></a></code></pre></div>
+<p>Użycie <code>.map(transformerFn)</code>sprawia, że kod jest krótszy i bardziej deklaratywny.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">const</span> transformNamesToUppercase <span class="op">=</span> <span class="kw">function</span> (names) <span class="op">{</span></a>
+<a class="sourceLine" id="cb48-2" title="2">  <span class="cf">return</span> <span class="va">names</span>.<span class="at">map</span>((name) <span class="kw">=&gt;</span> <span class="va">name</span>.<span class="at">toUpperCase</span>())<span class="op">;</span></a>
+<a class="sourceLine" id="cb48-3" title="3"><span class="op">};</span></a>
+<a class="sourceLine" id="cb48-4" title="4"><span class="at">transformNamesToUppercase</span>(names)<span class="op">;</span> <span class="co">// [&#39;IRISH&#39;, &#39;DAISY&#39;, &#39;ANNA&#39;]</span></a></code></pre></div>
+<h6 id="bibliografia-39">Bibliografia</h6>
+<ul>
+<li>https://medium.com/javascript-scene/higher-order-functions-composing-software-5365cf2cbe99</li>
+<li>https://hackernoon.com/effective-functional-javascript-first-class-and-higher-order-functions-713fde8df50a</li>
+<li>https://eloquentjavascript.net/05_higher_order.html</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="czy-możesz-podać-przykład-destrukturyzacji-obiektu-lub-tablicy">Czy możesz podać przykład destrukturyzacji obiektu lub tablicy?</h3>
+<p>Destrukturyzacja to wyrażenie dostępne w ES6, które umożliwia zwięzły i wygodny sposób na wydobycie wartości Obiektów (Objects) lub Tablic (Arrays) i umieszczenie ich w odrębnych zmiennych.</p>
+<p><strong>Destrukturyzacja Array</strong></p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb49-1" title="1"><span class="co">// Variable assignment.</span></a>
+<a class="sourceLine" id="cb49-2" title="2"><span class="kw">const</span> foo <span class="op">=</span> [<span class="st">&#39;one&#39;</span><span class="op">,</span> <span class="st">&#39;two&#39;</span><span class="op">,</span> <span class="st">&#39;three&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb49-3" title="3"></a>
+<a class="sourceLine" id="cb49-4" title="4"><span class="kw">const</span> [one<span class="op">,</span> two<span class="op">,</span> three] <span class="op">=</span> foo<span class="op">;</span></a>
+<a class="sourceLine" id="cb49-5" title="5"><span class="va">console</span>.<span class="at">log</span>(one)<span class="op">;</span> <span class="co">// &quot;one&quot;</span></a>
+<a class="sourceLine" id="cb49-6" title="6"><span class="va">console</span>.<span class="at">log</span>(two)<span class="op">;</span> <span class="co">// &quot;two&quot;</span></a>
+<a class="sourceLine" id="cb49-7" title="7"><span class="va">console</span>.<span class="at">log</span>(three)<span class="op">;</span> <span class="co">// &quot;three&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb50-1" title="1"><span class="co">// Swapping variables</span></a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="kw">let</span> a <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb50-3" title="3"><span class="kw">let</span> b <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb50-4" title="4"></a>
+<a class="sourceLine" id="cb50-5" title="5">[a<span class="op">,</span> b] <span class="op">=</span> [b<span class="op">,</span> a]<span class="op">;</span></a>
+<a class="sourceLine" id="cb50-6" title="6"><span class="va">console</span>.<span class="at">log</span>(a)<span class="op">;</span> <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb50-7" title="7"><span class="va">console</span>.<span class="at">log</span>(b)<span class="op">;</span> <span class="co">// 1</span></a></code></pre></div>
+<p><strong>Destrukturyzacja Object</strong></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb51-1" title="1"><span class="co">// Variable assignment.</span></a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="kw">const</span> o <span class="op">=</span> <span class="op">{</span><span class="dt">p</span><span class="op">:</span> <span class="dv">42</span><span class="op">,</span> <span class="dt">q</span><span class="op">:</span> <span class="kw">true</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb51-3" title="3"><span class="kw">const</span> <span class="op">{</span>p<span class="op">,</span> q<span class="op">}</span> <span class="op">=</span> o<span class="op">;</span></a>
+<a class="sourceLine" id="cb51-4" title="4"></a>
+<a class="sourceLine" id="cb51-5" title="5"><span class="va">console</span>.<span class="at">log</span>(p)<span class="op">;</span> <span class="co">// 42</span></a>
+<a class="sourceLine" id="cb51-6" title="6"><span class="va">console</span>.<span class="at">log</span>(q)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<h6 id="bibliografia-40">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment</li>
+<li>https://ponyfoo.com/articles/es6-destructuring-in-depth</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="es6-template-literals-oferują-dużą-elastyczność-w-generowaniu-ciągów-czy-możesz-podać-przykład">ES6 Template Literals oferują dużą elastyczność w generowaniu ciągów, czy możesz podać przykład?</h3>
+<p>Literały szablonów ułatwiają interpolację stringów lub uwzględnianie zmiennych w stringach. Przed ES2015 było coś takiego:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">var</span> person <span class="op">=</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Tyler&#39;</span><span class="op">,</span> <span class="dt">age</span><span class="op">:</span> <span class="dv">28</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="va">console</span>.<span class="at">log</span>(</a>
+<a class="sourceLine" id="cb52-3" title="3">  <span class="st">&#39;Hi, my name is &#39;</span> <span class="op">+</span> <span class="va">person</span>.<span class="at">name</span> <span class="op">+</span> <span class="st">&#39; and I am &#39;</span> <span class="op">+</span> <span class="va">person</span>.<span class="at">age</span> <span class="op">+</span> <span class="st">&#39; years old!&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb52-4" title="4">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb52-5" title="5"><span class="co">// &#39;Hi, my name is Tyler and I am 28 years old!&#39;</span></a></code></pre></div>
+<p>With template literals, you can now create that same output like this instead:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">const</span> person <span class="op">=</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Tyler&#39;</span><span class="op">,</span> <span class="dt">age</span><span class="op">:</span> <span class="dv">28</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb53-2" title="2"><span class="va">console</span>.<span class="at">log</span>(<span class="vs">`Hi, my name is </span><span class="sc">${</span><span class="va">person</span>.<span class="at">name</span><span class="sc">}</span><span class="vs"> and I am </span><span class="sc">${</span><span class="va">person</span>.<span class="at">age</span><span class="sc">}</span><span class="vs"> years old!`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb53-3" title="3"><span class="co">// &#39;Hi, my name is Tyler and I am 28 years old!&#39;</span></a></code></pre></div>
+<p>Zauważ, że używasz odwrotnych znaków, a nie cudzysłowów, aby wskazać, że używasz literału szablonu i że możesz wstawiać wyrażenia wewnątrz symboli zastępczych <code>${}</code>.</p>
+<p>Drugim pomocnym przypadkiem użycia jest tworzenie ciągów wieloliniowych. Przed ES2015 można było utworzyć ciąg wielu wierszy, taki jak ten:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb54-1" title="1"><span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;This is line one.</span><span class="sc">\n</span><span class="st">This is line two.&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="co">// This is line one.</span></a>
+<a class="sourceLine" id="cb54-3" title="3"><span class="co">// This is line two.</span></a></code></pre></div>
+<p>Lub jeśli chcesz podzielić go na wiele wierszy w kodzie, abyś nie musiał przewijać w edytorze tekstu w prawo, aby odczytać długi ciąg, możesz również napisać w następujący sposób:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb55-1" title="1"><span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;This is line one.</span><span class="sc">\n</span><span class="st">&#39;</span> <span class="op">+</span> <span class="st">&#39;This is line two.&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb55-2" title="2"><span class="co">// This is line one.</span></a>
+<a class="sourceLine" id="cb55-3" title="3"><span class="co">// This is line two.</span></a></code></pre></div>
+<p>Literały szablonów zachowują jednak wszelkie dodane do nich odstępy. Na przykład, aby utworzyć to samo wyjście wieloliniowe, które stworzyliśmy powyżej, możesz po prostu zrobić:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb56-1" title="1"><span class="va">console</span>.<span class="at">log</span>(<span class="vs">`This is line one.</span></a>
+<a class="sourceLine" id="cb56-2" title="2"><span class="vs">This is line two.`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb56-3" title="3"><span class="co">// This is line one.</span></a>
+<a class="sourceLine" id="cb56-4" title="4"><span class="co">// This is line two.</span></a></code></pre></div>
+<p>Innym przykładem użycia literałów szablonów byłoby użycie jako zamiennika bibliotek szablonów dla prostych interpolacji zmiennych:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">const</span> person <span class="op">=</span> <span class="op">{</span><span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Tyler&#39;</span><span class="op">,</span> <span class="dt">age</span><span class="op">:</span> <span class="dv">28</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="va">document</span>.<span class="va">body</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="vs">`</span></a>
+<a class="sourceLine" id="cb57-3" title="3"><span class="vs">  &lt;div&gt;</span></a>
+<a class="sourceLine" id="cb57-4" title="4"><span class="vs">    &lt;p&gt;Name: </span><span class="sc">${</span><span class="va">person</span>.<span class="at">name</span><span class="sc">}</span><span class="vs">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb57-5" title="5"><span class="vs">    &lt;p&gt;Name: </span><span class="sc">${</span><span class="va">person</span>.<span class="at">age</span><span class="sc">}</span><span class="vs">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb57-6" title="6"><span class="vs">  &lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb57-7" title="7"><span class="vs">`</span><span class="op">;</span></a></code></pre></div>
+<p><strong>Zauważ, że twój kod może być podatny na XSS przy użyciu <code>.innerHTML</code>. Wyczyść swoje dane przed wyświetleniem, jeśli pochodzą one od użytkownika!</strong></p>
+<h6 id="bibliografia-41">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="czy-możesz-podać-przykład-curry-function-i-dlaczego-ta-składnia-ma-tę-zaletę">Czy możesz podać przykład curry function i dlaczego ta składnia ma tę zaletę?</h3>
+<p>Currying to wzorzec, w którym funkcja z więcej niż jednym parametrem jest podzielona na wiele funkcji, które po wywołaniu szeregowym będą gromadzić wszystkie wymagane parametry pojedynczo. Ta technika może być użyteczna do ułatwienia czytania i komponowania kodu napisanego w funkcjonalnym stylu. Ważne jest, aby pamiętać, że aby funkcja była curry, musi zacząć od jednej funkcji, a następnie podzielić ją na sekwencję funkcji, z których każda akceptuje jeden parametr.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">function</span> <span class="at">curry</span>(fn) <span class="op">{</span></a>
+<a class="sourceLine" id="cb58-2" title="2">  <span class="cf">if</span> (<span class="va">fn</span>.<span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb58-3" title="3">    <span class="cf">return</span> fn<span class="op">;</span></a>
+<a class="sourceLine" id="cb58-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb58-5" title="5"></a>
+<a class="sourceLine" id="cb58-6" title="6">  <span class="kw">function</span> <span class="at">_curried</span>(depth<span class="op">,</span> args) <span class="op">{</span></a>
+<a class="sourceLine" id="cb58-7" title="7">    <span class="cf">return</span> <span class="kw">function</span> (newArgument) <span class="op">{</span></a>
+<a class="sourceLine" id="cb58-8" title="8">      <span class="cf">if</span> (depth <span class="op">-</span> <span class="dv">1</span> <span class="op">===</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb58-9" title="9">        <span class="cf">return</span> <span class="at">fn</span>(...<span class="at">args</span><span class="op">,</span> newArgument)<span class="op">;</span></a>
+<a class="sourceLine" id="cb58-10" title="10">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb58-11" title="11">      <span class="cf">return</span> <span class="at">_curried</span>(depth <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> [...<span class="at">args</span><span class="op">,</span> newArgument])<span class="op">;</span></a>
+<a class="sourceLine" id="cb58-12" title="12">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb58-13" title="13">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb58-14" title="14"></a>
+<a class="sourceLine" id="cb58-15" title="15">  <span class="cf">return</span> <span class="at">_curried</span>(<span class="va">fn</span>.<span class="at">length</span><span class="op">,</span> [])<span class="op">;</span></a>
+<a class="sourceLine" id="cb58-16" title="16"><span class="op">}</span></a>
+<a class="sourceLine" id="cb58-17" title="17"></a>
+<a class="sourceLine" id="cb58-18" title="18"><span class="kw">function</span> <span class="at">add</span>(a<span class="op">,</span> b) <span class="op">{</span></a>
+<a class="sourceLine" id="cb58-19" title="19">  <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></a>
+<a class="sourceLine" id="cb58-20" title="20"><span class="op">}</span></a>
+<a class="sourceLine" id="cb58-21" title="21"></a>
+<a class="sourceLine" id="cb58-22" title="22"><span class="kw">var</span> curriedAdd <span class="op">=</span> <span class="at">curry</span>(add)<span class="op">;</span></a>
+<a class="sourceLine" id="cb58-23" title="23"><span class="kw">var</span> addFive <span class="op">=</span> <span class="at">curriedAdd</span>(<span class="dv">5</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb58-24" title="24"></a>
+<a class="sourceLine" id="cb58-25" title="25"><span class="kw">var</span> result <span class="op">=</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>].<span class="at">map</span>(addFive)<span class="op">;</span> <span class="co">// [5, 6, 7, 8, 9, 10]</span></a></code></pre></div>
+<h6 id="bibliografia-42">Bibliografia</h6>
+<ul>
+<li>https://hackernoon.com/currying-in-js-d9ddc64f162e</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jakie-są-zalety-korzystania-ze-składni-spread-syntax-i-czym-różni-się-od-rest-syntax">Jakie są zalety korzystania ze składni spread syntax i czym różni się od rest syntax?</h3>
+<p>Spread syntax z ES6 jest bardzo przydatna podczas kodowania w funkcjonalnym paradygmacie, ponieważ możemy łatwo tworzyć kopie tablic lub obiektów bez uciekania się do <code>Object.create</code>, <code>slice</code> lub funkcji bibliotecznej. Ta funkcja języka jest często używana w projektach Redux i RxJS.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb59-1" title="1"><span class="kw">function</span> <span class="at">putDookieInAnyArray</span>(arr) <span class="op">{</span></a>
+<a class="sourceLine" id="cb59-2" title="2">  <span class="cf">return</span> [...<span class="at">arr</span><span class="op">,</span> <span class="st">&#39;dookie&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb59-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb59-4" title="4"></a>
+<a class="sourceLine" id="cb59-5" title="5"><span class="kw">const</span> result <span class="op">=</span> <span class="at">putDookieInAnyArray</span>([<span class="st">&#39;I&#39;</span><span class="op">,</span> <span class="st">&#39;really&#39;</span><span class="op">,</span> <span class="st">&quot;don&#39;t&quot;</span><span class="op">,</span> <span class="st">&#39;like&#39;</span>])<span class="op">;</span> <span class="co">// [&quot;I&quot;, &quot;really&quot;, &quot;don&#39;t&quot;, &quot;like&quot;, &quot;dookie&quot;]</span></a>
+<a class="sourceLine" id="cb59-6" title="6"></a>
+<a class="sourceLine" id="cb59-7" title="7"><span class="kw">const</span> person <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb59-8" title="8">  <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Todd&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb59-9" title="9">  <span class="dt">age</span><span class="op">:</span> <span class="dv">29</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb59-10" title="10"><span class="op">};</span></a>
+<a class="sourceLine" id="cb59-11" title="11"></a>
+<a class="sourceLine" id="cb59-12" title="12"><span class="kw">const</span> copyOfTodd <span class="op">=</span> <span class="op">{</span>...<span class="at">person</span><span class="op">};</span></a></code></pre></div>
+<p>Rest syntax z ES6 oferuje skrót do włączenia dowolnej liczby argumentów, które należy przekazać do funkcji. To jest jak odwrotność spread syntax, biorąc dane i upychając je do tablicy, zamiast rozpakowywać tablicę danych, i działa w argumentach funkcyjnych, a także w przypisaniach destrukturyzacji tablicy i obiektów.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">function</span> <span class="at">addFiveToABunchOfNumbers</span>(...<span class="at">numbers</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb60-2" title="2">  <span class="cf">return</span> <span class="va">numbers</span>.<span class="at">map</span>((x) <span class="kw">=&gt;</span> x <span class="op">+</span> <span class="dv">5</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb60-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb60-4" title="4"></a>
+<a class="sourceLine" id="cb60-5" title="5"><span class="kw">const</span> result <span class="op">=</span> <span class="at">addFiveToABunchOfNumbers</span>(<span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span> <span class="co">// [9, 10, 11, 12, 13, 14, 15]</span></a>
+<a class="sourceLine" id="cb60-6" title="6"></a>
+<a class="sourceLine" id="cb60-7" title="7"><span class="kw">const</span> [a<span class="op">,</span> b<span class="op">,</span> ...<span class="at">rest</span>] <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">;</span> <span class="co">// a: 1, b: 2, rest: [3, 4]</span></a>
+<a class="sourceLine" id="cb60-8" title="8"></a>
+<a class="sourceLine" id="cb60-9" title="9"><span class="kw">const</span> <span class="op">{</span>e<span class="op">,</span> f<span class="op">,</span> ...<span class="at">others</span><span class="op">}</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb60-10" title="10">  <span class="dt">e</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb60-11" title="11">  <span class="dt">f</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb60-12" title="12">  <span class="dt">g</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb60-13" title="13">  <span class="dt">h</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb60-14" title="14"><span class="op">};</span> <span class="co">// e: 1, f: 2, others: { g: 3, h: 4 }</span></a></code></pre></div>
+<h6 id="bibliografia-43">Bibliografia</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="jak-współdzielić-kod-między-plikami">Jak współdzielić kod między plikami?</h3>
+<p>To zależy od środowiska JavaScript.</p>
+<p>Na kliencie (środowisko przeglądarki), o ile zmienne / funkcje są zadeklarowane w zasięgu globalnym (<code>window</code>), wszystkie skrypty mogą się do nich odnosić. Ewentualnie zastosuj Asynchronous Module Definition (AMD) za pośrednictwem RequireJS, aby uzyskać bardziej modułowe podejście.</p>
+<p>Na serwerze (Node.js) powszechnym sposobem było użycie CommonJS. Każdy plik jest traktowany jako moduł i może eksportować zmienne i funkcje, dołączając je do obiektu <code>module.exports</code>.</p>
+<p>ES2015 definiuje składnię modułu, która ma zastąpić zarówno AMD, jak i CommonJS. To będzie ostatecznie obsługiwane zarówno w przeglądarce, jak i w środowisku Node.</p>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h6 id="bibliografia-44">Bibliografia</h6>
+<ul>
+<li>http://requirejs.org/docs/whyamd.html</li>
+<li>https://nodejs.org/docs/latest/api/modules.html</li>
+<li>http://2ality.com/2014/09/es6-modules-final.html</li>
+</ul>
+<h3 id="dlaczego-warto-tworzyć-członków-klasy-statycznej">Dlaczego warto tworzyć członków klasy statycznej?</h3>
+<p>Statyczne elementy klasy (właściwości / metody) nie są powiązane z konkretnym wystąpieniem klasy i mają tę samą wartość niezależnie od tego, do którego wystąpienia się odnosi. Właściwości statyczne są zwykle zmiennymi konfiguracyjnymi, a metody statyczne są zwykle czystymi funkcjami narzędziowymi, które nie zależą od stanu instancji.</p>
+<h6 id="bibliografia-45">Bibliografia</h6>
+<ul>
+<li>https://stackoverflow.com/questions/21155438/when-to-use-static-variables-methods-and-when-to-use-instance-variables-methods</li>
+</ul>
+<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+<h3 id="inne-odpowiedzi">Inne odpowiedzi</h3>
+<ul>
+<li>http://flowerszhong.github.io/2013/11/20/javascript-questions.html</li>
+</ul>
+<hr />
+<p>Stworzone przez <span class="citation" data-cites="yangshun">[@yangshun]</span>(https://github.com/yangshun) polska wersja od <span class="citation" data-cites="mbiesiad">[@mbiesiad]</span>(https://github.com/mbiesiad)</p>
+</body>
+</html>

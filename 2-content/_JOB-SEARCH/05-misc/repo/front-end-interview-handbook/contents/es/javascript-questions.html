@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Preguntas de JavaScript</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Preguntas de JavaScript</h1>
+</header>
+<h2 id="tabla-de-contenidos">Tabla de contenidos</h2>
+<ul>
+<li><a href="#tabla-de-contenidos">Tabla de contenidos</a>
+<ul>
+<li><a href="#explique-la-delegación-de-eventos">Explique la delegación de eventos</a>
+<ul>
+<li><a href="#referecias">Referecias</a></li>
+</ul></li>
+<li><a href="#explique-como-funciona-this">Explique como funciona this</a></li>
+<li><a href="#explique-como-funciona-la-herencia-de-prototipos">Explique como funciona la herencia de prototipos</a>
+<ul>
+<li><a href="#ejemplo-de-herencia-de-prototipos">Ejemplo de herencia de prototipos</a>
+<ul>
+<li><a href="#referencias">Referencias</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#explique-la-diferencia-cuando-una-variable-es-null-undefined-o-undeclared-como-chequearia-cada-uno-de-estos-estados">Explique la diferencia cuando una variable es: <code>null</code>, <code>undefined</code> o <code>undeclared</code>. Como chequearia cada uno de estos estados?</a> - <a href="#referencias-1">Referencias</a></li>
+<li><a href="#que-es-una-closure-y-comoporque-se-utilizaria">Que es una closure, y como/porque se utilizaria?</a> - <a href="#referencias-2">Referencias</a></li>
+</ul></li>
+</ul>
+<h3 id="explique-la-delegación-de-eventos">Explique la delegación de eventos</h3>
+<p>La delegación de eventos es una técnica en la cual los escuchas de eventos se setean en el elemento padre en vez de en los elementos hijos. La función de escucha se ejecutara cuando el evento se dispare en los elementos descendientes gracias a la propagación de eventos del DOM. Los beneficios de esta técnica son: - El uso de memoria se reduce dado que solo se requiere un unico escucha de eventos en el elemento parent, en vez de crear un escucha en cada descendiente. - No es necesario quitar el escucha de los elementos que se eliminan y tampoco es necesario agregarlo cuando se crean nuevos elementos.</p>
+<h5 id="referecias">Referecias</h5>
+<ul>
+<li>https://medium.com/<span class="citation" data-cites="osmancea/delegaci%C3%B3n-de-eventos-del-dom-con-javascript-d28131d43686">@osmancea/delegaci%C3%B3n-de-eventos-del-dom-con-javascript-d28131d43686</span></li>
+<li>https://developer.mozilla.org/es/docs/Learn/JavaScript/Building_blocks/Eventos</li>
+<li><a href="#tabla-de-contenidos">[↑] Ir al principio</a></li>
+</ul>
+<h3 id="explique-como-funciona-this">Explique como funciona this</h3>
+<p>Una explicación simple es que en Javascript <code>this</code> depende de como se llama la función. Para entender mejor como funciona se deben seguir las siguientes reglas: 1. Si se utiliza la palabra clave <code>new</code> cuando se llama a la funcion, dentro de la función <code>this</code> será un nuevo objeto vacio. 2. Si se utiliza <code>apply</code>, <code>call</code>, o <code>bind</code> cuando se llama o crea la función, dentro de la función <code>this</code> será el objeto que se pase como argumento. 3. Si la función se llama de la forma <code>obj.method()</code>. <code>this</code> será el objeto que tiene la función como propiedad. 4. Si la función se invoca de forma regular, <code>this</code> será el objeto <code>global</code>. Dentro de un navegador, este objeto es el objeto <code>window</code>. Si se utiliza el modo estricto (<code>strict mode</code>), <code>this</code> sera <code>undefined</code> en lugar del objeto global. 5. Si se aplican multiples reglas, la regla con más prioridad prevalecera. 6. Si la función tiene la sintaxis de ES2015 de funcion flecha, se ignoran todas las reglas anteriores y <code>this</code> tendra el valor que tenga el contexto donde donde se crea la función.</p>
+<p>Para una explicación más detallada, lee <a href="https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3">este articulo</a> (en inglés).</p>
+<h3 id="explique-como-funciona-la-herencia-de-prototipos">Explique como funciona la herencia de prototipos</h3>
+<p>Esta es una pregunta muy común en las entrevistas de Javascript. Todos lo objetos de Javascript tienen una propiedad <code>__proto__</code> que referencia a otro objetos, el cual se llama el prototipo del objeto. Cuando se accede a una propiedad de un objeto, se busca si el objeto tiene esa propiedad, si no la tiene, el engine de Javascript buscara en el objeto referenciado por <code>__proto__</code> y si este no tuviese la propiedad, seguira buscando por la cadena de prototipos hasta encontrar la propiedad o hasta llegar al final de la cadena de prototipo. Esto simula la herencia clasica de objetos, pero es más bien una <a href="https://davidwalsh.name/javascript-objects">delegación que herencia</a>.</p>
+<h4 id="ejemplo-de-herencia-de-prototipos">Ejemplo de herencia de prototipos</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">if</span> (<span class="kw">typeof</span> <span class="va">Object</span>.<span class="at">create</span> <span class="op">!==</span> <span class="st">&#39;function&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="va">Object</span>.<span class="at">create</span> <span class="op">=</span> <span class="kw">function</span> (parent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="kw">function</span> <span class="at">Tmp</span>() <span class="op">{}</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="va">Tmp</span>.<span class="at">prototype</span> <span class="op">=</span> parent<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="cf">return</span> <span class="kw">new</span> <span class="at">Tmp</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-8" title="8"></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="kw">const</span> Padre <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> <span class="st">&#39;Padre&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="op">};</span></a>
+<a class="sourceLine" id="cb1-12" title="12"></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="va">Padre</span>.<span class="va">prototype</span>.<span class="at">saludar</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-14" title="14">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Hola desde el Padre&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="op">};</span></a>
+<a class="sourceLine" id="cb1-16" title="16"></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="kw">const</span> hijo <span class="op">=</span> <span class="va">Object</span>.<span class="at">create</span>(<span class="va">Padre</span>.<span class="at">prototype</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-18" title="18"></a>
+<a class="sourceLine" id="cb1-19" title="19"><span class="va">hijo</span>.<span class="at">llorar</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-20" title="20">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;waaaaaahhhh!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="op">};</span></a>
+<a class="sourceLine" id="cb1-22" title="22"></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="va">hijo</span>.<span class="at">llorar</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-24" title="24"><span class="co">// Salida: waaaaaahhhh!</span></a>
+<a class="sourceLine" id="cb1-25" title="25"></a>
+<a class="sourceLine" id="cb1-26" title="26"><span class="va">hijo</span>.<span class="at">saludar</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-27" title="27"><span class="co">// Salida: Hola desde el Padre</span></a></code></pre></div>
+<p>Algo para destacar:</p>
+<ul>
+<li><code>.saludar</code> no esta definido en el objeto <em>hijo</em>, por eso el engine busca por la cadena de prototipo hasta encontrar <code>.saludar</code> que esta definido en el <em>Padre</em>.</li>
+<li>Es necesario llamar a <code>Object.create</code> de la siguiente manera para que se produzca la herencia:
+<ul>
+<li>Object.create(Padre.prototype);</li>
+<li>Object.create(new Padre(null));</li>
+<li>Object.create(objLiteral);</li>
+<li><code>child.constructor</code> apunta al <code>Padre</code>:</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">hijo</span>.<span class="at">constructor</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="at">ƒ</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="kw">this</span>.<span class="at">nombre</span> <span class="op">=</span> <span class="st">&quot;Padre&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="va">hijo</span>.<span class="va">constructor</span>.<span class="at">nombre</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="st">&quot;Parent&quot;</span></a></code></pre></div>
+<ul>
+<li>If we’d like to correct this, one option would be to do:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">Hijo</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="va">Padre</span>.<span class="at">call</span>(<span class="kw">this</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> <span class="st">&#39;hijo&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="va">Hijo</span>.<span class="at">prototype</span> <span class="op">=</span> <span class="va">Padre</span>.<span class="at">prototype</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="va">Hijo</span>.<span class="va">prototype</span>.<span class="at">constructor</span> <span class="op">=</span> Hijo<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-8" title="8"></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="kw">const</span> c <span class="op">=</span> <span class="kw">new</span> <span class="at">Hijo</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-10" title="10"></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="va">c</span>.<span class="at">llorar</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="co">// Salida: waaaaaahhhh!</span></a>
+<a class="sourceLine" id="cb3-13" title="13"></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="va">c</span>.<span class="at">saludar</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="co">// Salida: Hola desde el padre</span></a>
+<a class="sourceLine" id="cb3-16" title="16"></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="va">c</span>.<span class="va">constructor</span>.<span class="at">name</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="co">// Salida: &quot;Hijo&quot;</span></a></code></pre></div>
+<h6 id="referencias">Referencias</h6>
+<ul>
+<li>http://dmitrysoshnikov.com/ecmascript/javascript-the-core/</li>
+<li>https://www.quora.com/What-is-prototypal-inheritance/answer/Kyle-Simpson</li>
+<li>https://davidwalsh.name/javascript-objects</li>
+<li>https://crockford.com/javascript/prototypal.html</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain <a href="#tabla-de-contenidos">[↑] Ir al principio</a></li>
+</ul>
+<h3 id="explique-la-diferencia-cuando-una-variable-es-null-undefined-o-undeclared.-como-chequearia-cada-uno-de-estos-estados">Explique la diferencia cuando una variable es: <code>null</code>, <code>undefined</code> o <code>undeclared</code>. Como chequearia cada uno de estos estados?</h3>
+<p>Una variable no declarada (<code>undeclared</code>) se crea cuando se asigna un valor a un identificador que no ha sido creado previamente usando <code>var</code>, <code>let</code> o <code>const</code>. Las variables no declaradas se crearan de forma <code>global</code> fuera del contexto actual. En el modo escrito, se creara un <code>ReferenceError</code> cuando se intente asignar un valor a una variable no declarada. Las variables no declaradas son una mala páctica, de la misma forma que las variables globales son una mala práctica.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">function</span> <span class="at">foo</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  x <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// Throws a ReferenceError in strict mode</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="at">foo</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="va">console</span>.<span class="at">log</span>(x)<span class="op">;</span> <span class="co">// 1</span></a></code></pre></div>
+<p>Una variable que es <code>undefined</code> es una variable que ha sido declarada, pero no se le ha asignado un valor. Esta variable es de tipo <code>undefined</code>. Si una función no devuelve un valor especifico, se devolvera por defecto <code>undefined</code>.</p>
+<p>Para chequear si una variable es <code>undefined</code>, se utiliza el operador de igualdad estricta(<code>===</code>) o el operador <code>typeof</code> que devolvera la cadena <code>'undefined'</code>. Es importante recalcar que no se utiliza el operador de igualdad abstracta (<code>==</code>) ya que este devolverá <code>true</code> si el valor es <code>null</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">var</span> foo<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="va">console</span>.<span class="at">log</span>(foo <span class="op">===</span> <span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="va">console</span>.<span class="at">log</span>(<span class="kw">typeof</span> foo <span class="op">===</span> <span class="st">&#39;undefined&#39;</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb5-5" title="5"></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="va">console</span>.<span class="at">log</span>(foo <span class="op">==</span> <span class="kw">null</span>)<span class="op">;</span> <span class="co">// true. Mal, no utilice esto para chequear!</span></a>
+<a class="sourceLine" id="cb5-7" title="7"></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="kw">function</span> <span class="at">bar</span>() <span class="op">{}</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="kw">var</span> baz <span class="op">=</span> <span class="at">bar</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="va">console</span>.<span class="at">log</span>(baz)<span class="op">;</span> <span class="co">// undefined</span></a></code></pre></div>
+<p>Una variable que es <code>null</code> tendra asignado explicitamente el valor <code>null</code> a diferencia de <code>undefined</code> que no se ha asignado ningun valor especifico. Para chequear si una variable es <code>null</code> se utiliza el operador de igualdad estricta ( <code>===</code>). Es importante recalcar, de la misma forma que anteriormente, no se debe utilizar el operador de igualdad (<code>==</code>) que devolverá <code>true</code> si el valor es <code>undefined</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="va">console</span>.<span class="at">log</span>(foo <span class="op">===</span> <span class="kw">null</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="va">console</span>.<span class="at">log</span>(<span class="kw">typeof</span> foo <span class="op">===</span> <span class="st">&#39;object&#39;</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb6-4" title="4"></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="va">console</span>.<span class="at">log</span>(foo <span class="op">==</span> <span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// true. Wrong, don&#39;t use this to check!</span></a></code></pre></div>
+<p>Como recomendación personal, nunca dejar las variables no declaradas o no asignadas, sino que es conveniente asignarle explicitamente el valor <code>null</code> al momento de declarar la variable si no tiene un valor especifico aún. Si se utiliza algún tipo de linter, se pueden crear reglas para verificar que no se haga referencia a variables no declaradas.</p>
+<h6 id="referencias-1">Referencias</h6>
+<ul>
+<li>https://stackoverflow.com/questions/15985875/effect-of-declared-and-undeclared-variables</li>
+<li>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/undefined</li>
+</ul>
+<p><a href="#tabla-de-contenidos">[↑] Ir al principio</a></p>
+<h3 id="que-es-una-closure-y-comoporque-se-utilizaria">Que es una closure, y como/porque se utilizaria?</h3>
+<p>Una <strong>closure</strong> es la combinación de una función con el entorno lexico en el cual se declara dicha función. La palabra <code>lexico</code> hace referencia al hecho de que el contexto lexico referencia donde se declara una variable dentro del código para determinar que parte del código puede acceder a dicha variable. Una closure es una función que tiene acceso a las variables declaradas en el contexto externo aún cuando la función externa ya haya finalizado su ejecución.</p>
+<p><strong>Porque utilizaría una?</strong></p>
+<ul>
+<li>Emular metodos privados con closures. Comunmente usada en el <a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript">patron modulo</a>.</li>
+<li><a href="https://medium.com/javascript-scene/curry-or-partial-application-8150044c78b8#.l4b6l1i3x">Aplicación parcial o</a>.</li>
+</ul>
+<h6 id="referencias-2">Referencias</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures</li>
+<li>https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36</li>
+</ul>
+<p><a href="#tabla-de-contenidos">[↑] Ir al principio</a></p>
+</body>
+</html>

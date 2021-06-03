@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>JavaScript 问题</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">JavaScript 问题</h1>
+</header>
+<p>本章节是<a href="https://github.com/h5bp/Front-end-Developer-Interview-Questions/blob/master/src/questions/javascript-questions.md">前端开发者面试问题 - JS 部分</a>的参考答案。 欢迎提出 PR 进行建议和指正！</p>
+<h2 id="目录">目录</h2>
+<ul>
+<li><a href="#请解释事件委托event-delegation">请解释事件委托（event delegation）。</a></li>
+<li><a href="#请简述javascript中的this">请简述<code>JavaScript</code>中的<code>this</code>。</a></li>
+<li><a href="#请解释原型继承prototypal-inheritance的工作原理">请解释原型继承（prototypal inheritance）的工作原理。</a></li>
+<li><a href="#说说你对-amd-和-commonjs-的了解">说说你对 AMD 和 CommonJS 的了解。</a></li>
+<li><a href="#请解释下面代码为什么不能用作-iifefunction-foo-需要作出哪些修改才能使其成为-iife">请解释下面代码为什么不能用作 IIFE：<code>function foo(){ }();</code>，需要作出哪些修改才能使其成为 IIFE？</a></li>
+<li><a href="#nullundefined和未声明变量之间有什么区别如何检查判断这些状态值"><code>null</code>、<code>undefined</code>和未声明变量之间有什么区别？如何检查判断这些状态值？</a></li>
+<li><a href="#什么是闭包closure为什么使用闭包">什么是闭包（closure），为什么使用闭包？</a></li>
+<li><a href="#请说明foreach循环和map循环的主要区别它们分别在什么情况下使用">请说明<code>.forEach</code>循环和<code>.map()</code>循环的主要区别，它们分别在什么情况下使用？</a></li>
+<li><a href="#匿名函数的典型应用场景是什么">匿名函数的典型应用场景是什么？</a></li>
+<li><a href="#你如何组织自己的代码使用模块模式module-pattern还是经典继承classical-inheritance">你如何组织自己的代码？（使用模块模式（module pattern）还是经典继承（classical inheritance）？）</a></li>
+<li><a href="#宿主对象host-objects和原生对象native-objects的区别是什么">宿主对象（host objects）和原生对象（native objects）的区别是什么？</a></li>
+<li><a href="#下列语句有什么区别function-personvar-person--person和var-person--new-person">下列语句有什么区别：<code>function Person(){}</code>、<code>var person = Person()</code>和<code>var person = new Person()</code>？</a></li>
+<li><a href="#call和apply有什么区别"><code>.call</code>和<code>.apply</code>有什么区别？</a></li>
+<li><a href="#请说明functionprototypebind的用法">请说明<code>Function.prototype.bind</code>的用法。</a></li>
+<li><a href="#什么时候会用到documentwrite">什么时候会用到<code>document.write()</code>？</a></li>
+<li><a href="#功能检测feature-detection功能推断feature-inference和使用-ua-字符串之间有什么区别">功能检测（feature detection）、功能推断（feature inference）和使用 UA 字符串之间有什么区别？</a></li>
+<li><a href="#请尽可能详细地解释-ajax">请尽可能详细地解释 Ajax。</a></li>
+<li><a href="#使用ajax的优缺点分别是什么">使用 Ajax 的优缺点分别是什么？</a></li>
+<li><a href="#请说明-jsonp-的工作原理它为什么不是真正的-ajax">请说明 JSONP 的工作原理，它为什么不是真正的 Ajax？</a></li>
+<li><a href="#你使用过-javascript-模板吗用过什么相关的库">你使用过 JavaScript 模板吗？用过什么相关的库？</a></li>
+<li><a href="#请解释变量提升hoisting">请解释变量提升（hoisting）。</a></li>
+<li><a href="#请描述事件冒泡">请描述事件冒泡。</a></li>
+<li><a href="#attribute-和-property-之间有什么区别">“attribute” 和 “property” 之间有什么区别？</a></li>
+<li><a href="#为什么扩展-javascript-内置对象是不好的做法">为什么扩展 JavaScript 内置对象是不好的做法？</a></li>
+<li><a href="#document-中的load事件和domcontentloaded事件之间的区别是什么">document 中的<code>load</code>事件和<code>DOMContentLoaded</code>事件之间的区别是什么？</a></li>
+<li><a href="#和的区别是什么"><code>==</code>和<code>===</code>的区别是什么？</a></li>
+<li><a href="#请解释关于-javascript-的同源策略">请解释关于 JavaScript 的同源策略。</a></li>
+<li><a href="#请使下面的语句生效">请使下面的语句生效：</a></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="at">duplicate</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>])<span class="op">;</span> <span class="co">// [1,2,3,4,5,1,2,3,4,5]</span></a></code></pre></div>
+<ul>
+<li><a href="#请说明三元表达式中三元这个词代表什么">请说明三元表达式中“三元”这个词代表什么？</a></li>
+<li><a href="#什么是use-strict使用它有什么优缺点">什么是<code>"use strict";</code>？使用它有什么优缺点？</a></li>
+<li><a href="#创建一个循环从1迭代到1003的倍数时输出-fizz5的倍数时输出-buzz同时为3和5的倍数时输出-fizzbuzz">创建一个循环，从 1 迭代到 100，<code>3</code>的倍数时输出 “fizz”，<code>5</code>的倍数时输出 “buzz”，同时为<code>3</code>和<code>5</code>的倍数时输出 “fizzbuzz”。</a></li>
+<li><a href="#为什么不要使用全局作用域">为什么不要使用全局作用域？</a></li>
+<li><a href="#为什么要使用load事件这个事件有什么缺点吗你知道一些代替方案吗为什么使用它们">为什么要使用<code>load</code>事件？这个事件有什么缺点吗？你知道一些代替方案吗，为什么使用它们？</a></li>
+<li><a href="#请解释单页应用是什么如何使其对seo友好">请解释单页应用是什么，如何使其对 SEO 友好。</a></li>
+<li><a href="#你对-promises-及其-polyfill-的掌握程度如何">你对 Promises 及其 polyfill 的掌握程度如何？</a></li>
+<li><a href="#promise代替回调函数有什么优缺点"><code>Promise</code>代替回调函数有什么优缺点？</a></li>
+<li><a href="#用转译成-javascript-的语言写-javascript-有什么优缺点">用转译成 JavaScript 的语言写 JavaScript 有什么优缺点？</a></li>
+<li><a href="#你使用什么工具和技巧调试-javascript-代码">你使用什么工具和技巧调试 JavaScript 代码？</a></li>
+<li><a href="#你使用什么语句遍历对象的属性和数组的元素">你使用什么语句遍历对象的属性和数组的元素？</a></li>
+<li><a href="#请解释可变对象和不可变对象之间的区别">请解释可变对象和不可变对象之间的区别。</a></li>
+<li><a href="#请解释同步和异步函数之间的区别">请解释同步和异步函数之间的区别。</a></li>
+<li><a href="#什么是事件循环调用堆栈和任务队列之间有什么区别">什么是事件循环？调用堆栈和任务队列之间有什么区别？</a></li>
+<li><a href="#请解释function-foo-和var-foo--function-之间foo的用法上的区别">请解释<code>function foo() {}</code>和<code>var foo = function() {}</code>之间<code>foo</code>的用法上的区别。</a></li>
+<li><a href="#使用letvar和const创建变量有什么区别">使用<code>let</code>、<code>var</code>和<code>const</code>创建变量有什么区别？</a></li>
+<li><a href="#es6-的类和-es5-的构造函数有什么区别">ES6 的类和 ES5 的构造函数有什么区别？</a></li>
+<li><a href="#你能给出一个使用箭头函数的例子吗箭头函数与其他函数有什么不同">你能给出一个使用箭头函数的例子吗，箭头函数与其他函数有什么不同？</a></li>
+<li><a href="#在构造函数中使用箭头函数有什么好处">在构造函数中使用箭头函数有什么好处？</a></li>
+<li><a href="#高阶函数higher-order的定义是什么">高阶函数（higher-order）的定义是什么？</a></li>
+<li><a href="#请给出一个解构destructuring对象或数组的例子">请给出一个解构（destructuring）对象或数组的例子。</a></li>
+<li><a href="#es6-的模板字符串为生成字符串提供了很大的灵活性你可以举个例子吗">ES6 的模板字符串为生成字符串提供了很大的灵活性，你可以举个例子吗？</a></li>
+<li><a href="#你能举出一个柯里化函数curry-function的例子吗它有哪些好处">你能举出一个柯里化函数（curry function）的例子吗？它有哪些好处？</a></li>
+<li><a href="#使用扩展运算符spread的好处是什么它与使用剩余参数语句rest有什么区别">使用扩展运算符（spread）的好处是什么，它与使用剩余参数语句（rest）有什么区别？</a></li>
+<li><a href="#如何在文件之间共用代码">如何在文件之间共用代码？</a></li>
+<li><a href="#什么情况下会用到静态类成员">什么情况下会用到静态类成员？</a></li>
+</ul>
+<h3 id="请解释事件委托event-delegation">请解释事件委托（event delegation）。</h3>
+<p>事件委托是将事件监听器添加到父元素，而不是每个子元素单独设置事件监听器。当触发子元素时，事件会冒泡到父元素，监听器就会触发。这种技术的好处是：</p>
+<ul>
+<li>内存占用减少，因为只需要一个父元素的事件处理程序，而不必为每个后代都添加事件处理程序。</li>
+<li>无需从已删除的元素中解绑处理程序，也无需将处理程序绑定到新元素上。</li>
+</ul>
+<h6 id="参考">参考</h6>
+<ul>
+<li>https://davidwalsh.name/event-delegate</li>
+<li>https://stackoverflow.com/questions/1687296/what-is-dom-event-delegation</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请简述javascript中的this">请简述<code>JavaScript</code>中的<code>this</code>。</h3>
+<p>JS 中的<code>this</code>是一个相对复杂的概念，不是简单几句能解释清楚的。粗略地讲，函数的调用方式决定了<code>this</code>的值。我阅读了网上很多关于<code>this</code>的文章，<a href="https://medium.com/@arnav_aggarwal">Arnav Aggrawal</a> 写的比较清楚。<code>this</code>取值符合以下规则：</p>
+<ol type="1">
+<li>在调用函数时使用<code>new</code>关键字，函数内的<code>this</code>是一个全新的对象。</li>
+<li>如果<code>apply</code>、<code>call</code>或<code>bind</code>方法用于调用、创建一个函数，函数内的 this 就是作为参数传入这些方法的对象。</li>
+<li>当函数作为对象里的方法被调用时，函数内的<code>this</code>是调用该函数的对象。比如当<code>obj.method()</code>被调用时，函数内的 this 将绑定到<code>obj</code>对象。</li>
+<li>如果调用函数不符合上述规则，那么<code>this</code>的值指向全局对象（global object）。浏览器环境下<code>this</code>的值指向<code>window</code>对象，但是在严格模式下(<code>'use strict'</code>)，<code>this</code>的值为<code>undefined</code>。</li>
+<li>如果符合上述多个规则，则较高的规则（1 号最高，4 号最低）将决定<code>this</code>的值。</li>
+<li>如果该函数是 ES2015 中的箭头函数，将忽略上面的所有规则，<code>this</code>被设置为它被创建时的上下文。</li>
+</ol>
+<p>想获得更深入的解释，请查看<a href="https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3">他在 Medium 上的文章</a>。</p>
+<h6 id="参考-1">参考</h6>
+<ul>
+<li>https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3</li>
+<li>https://stackoverflow.com/a/3127440/1751946</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请解释原型继承prototypal-inheritance的工作原理">请解释原型继承（prototypal inheritance）的工作原理。</h3>
+<p>这是一个非常常见的 JavaScript 问题。所有 JS 对象都有一个<code>__proto__</code>属性，指向它的原型对象。当试图访问一个对象的属性时，如果没有在该对象上找到，它还会搜寻该对象的原型，以及该对象的原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或到达原型链的末尾。这种行为是在模拟经典的继承，<a href="https://davidwalsh.name/javascript-objects">但是与其说是继承，不如说是委托（delegation）</a>。</p>
+<h6 id="参考-2">参考</h6>
+<ul>
+<li>https://www.quora.com/What-is-prototypal-inheritance/answer/Kyle-Simpson</li>
+<li>https://davidwalsh.name/javascript-objects</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="说说你对-amd-和-commonjs-的了解">说说你对 AMD 和 CommonJS 的了解。</h3>
+<p>它们都是实现模块体系的方式，直到 ES2015 出现之前，JavaScript 一直没有模块体系。CommonJS 是同步的，而 AMD（Asynchronous Module Definition）从全称中可以明显看出是异步的。CommonJS 的设计是为服务器端开发考虑的，而 AMD 支持异步加载模块，更适合浏览器。</p>
+<p>我发现 AMD 的语法非常冗长，CommonJS 更接近其他语言 import 声明语句的用法习惯。大多数情况下，我认为 AMD 没有使用的必要，因为如果把所有 JavaScript 都捆绑进一个文件中，将无法得到异步加载的好处。此外，CommonJS 语法上更接近 Node 编写模块的风格，在前后端都使用 JavaScript 开发之间进行切换时，语境的切换开销较小。</p>
+<p>我很高兴看到 ES2015 的模块加载方案同时支持同步和异步，我们终于可以只使用一种方案了。虽然它尚未在浏览器和 Node 中完全推出，但是我们可以使用代码转换工具进行转换。</p>
+<h6 id="参考-3">参考</h6>
+<ul>
+<li>https://auth0.com/blog/javascript-module-systems-showdown/</li>
+<li>https://stackoverflow.com/questions/16521471/relation-between-commonjs-amd-and-requirejs</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请解释下面代码为什么不能用作-iifefunction-foo-需要作出哪些修改才能使其成为-iife">请解释下面代码为什么不能用作 IIFE：<code>function foo(){ }();</code>，需要作出哪些修改才能使其成为 IIFE？</h3>
+<p>IIFE（Immediately Invoked Function Expressions）代表立即执行函数。 JavaScript 解析器将 <code>function foo(){ }();</code>解析成<code>function foo(){ }</code>和<code>();</code>。其中，前者是函数声明；后者（一对括号）是试图调用一个函数，却没有指定名称，因此它会抛出<code>Uncaught SyntaxError: Unexpected token )</code>的错误。</p>
+<p>修改方法是：再添加一对括号，形式上有两种：<code>(function foo(){ })()</code>和<code>(function foo(){ }())</code>。以上函数不会暴露到全局作用域，如果不需要在函数内部引用自身，可以省略函数的名称。</p>
+<p>你可能会用到 <code>void</code> 操作符：<code>void function foo(){ }();</code>。但是，这种做法是有问题的。表达式的值是<code>undefined</code>，所以如果你的 IIFE 有返回值，不要用这种做法。例如：</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">const</span> foo <span class="op">=</span> <span class="kw">void</span> (<span class="kw">function</span> <span class="at">bar</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="cf">return</span> <span class="st">&#39;foo&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">}</span>)()<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// undefined</span></a></code></pre></div>
+<h6 id="参考-4">参考</h6>
+<ul>
+<li>http://lucybain.com/blog/2014/immediately-invoked-function-expression/</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="nullundefined和未声明变量之间有什么区别如何检查判断这些状态值"><code>null</code>、<code>undefined</code>和未声明变量之间有什么区别？如何检查判断这些状态值？</h3>
+<p>当你没有提前使用<code>var</code>、<code>let</code>或<code>const</code>声明变量，就为一个变量赋值时，该变量是未声明变量（undeclared variables）。未声明变量会脱离当前作用域，成为全局作用域下定义的变量。在严格模式下，给未声明的变量赋值，会抛出<code>ReferenceError</code>错误。和使用全局变量一样，使用未声明变量也是非常不好的做法，应当尽可能避免。要检查判断它们，需要将用到它们的代码放在<code>try</code>/<code>catch</code>语句中。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">foo</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  x <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// 在严格模式下，抛出 ReferenceError 错误</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="at">foo</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="va">console</span>.<span class="at">log</span>(x)<span class="op">;</span> <span class="co">// 1</span></a></code></pre></div>
+<p>当一个变量已经声明，但没有赋值时，该变量的值是<code>undefined</code>。如果一个函数的执行结果被赋值给一个变量，但是这个函数却没有返回任何值，那么该变量的值是<code>undefined</code>。要检查它，需要使用严格相等（<code>===</code>）；或者使用<code>typeof</code>，它会返回<code>'undefined'</code>字符串。请注意，不能使用非严格相等（<code>==</code>）来检查，因为如果变量值为<code>null</code>，使用非严格相等也会返回<code>true</code>。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">var</span> foo<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="va">console</span>.<span class="at">log</span>(foo <span class="op">===</span> <span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="va">console</span>.<span class="at">log</span>(<span class="kw">typeof</span> foo <span class="op">===</span> <span class="st">&#39;undefined&#39;</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="va">console</span>.<span class="at">log</span>(foo <span class="op">==</span> <span class="kw">null</span>)<span class="op">;</span> <span class="co">// true. 错误，不要使用非严格相等！</span></a>
+<a class="sourceLine" id="cb4-7" title="7"></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="kw">function</span> <span class="at">bar</span>() <span class="op">{}</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="kw">var</span> baz <span class="op">=</span> <span class="at">bar</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="va">console</span>.<span class="at">log</span>(baz)<span class="op">;</span> <span class="co">// undefined</span></a></code></pre></div>
+<p><code>null</code>只能被显式赋值给变量。它表示<code>空值</code>，与被显式赋值 <code>undefined</code> 的意义不同。要检查判断<code>null</code>值，需要使用严格相等运算符。请注意，和前面一样，不能使用非严格相等（<code>==</code>）来检查，因为如果变量值为<code>undefined</code>，使用非严格相等也会返回<code>true</code>。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="va">console</span>.<span class="at">log</span>(foo <span class="op">===</span> <span class="kw">null</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="va">console</span>.<span class="at">log</span>(foo <span class="op">==</span> <span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// true. 错误，不要使用非严格相等！</span></a></code></pre></div>
+<p>作为一种个人习惯，我从不使用未声明变量。如果定义了暂时没有用到的变量，我会在声明后明确地给它们赋值为<code>null</code>。</p>
+<h6 id="参考-5">参考</h6>
+<ul>
+<li>https://stackoverflow.com/questions/15985875/effect-of-declared-and-undeclared-variables</li>
+<li>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/undefined</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="什么是闭包closure为什么使用闭包">什么是闭包（closure），为什么使用闭包？</h3>
+<p>闭包是函数和声明该函数的词法环境的组合。词法作用域中使用的域，是变量在代码中声明的位置所决定的。闭包是即使被外部函数返回，依然可以访问到外部（封闭）函数作用域的函数。</p>
+<p><strong>为什么使用闭包？</strong></p>
+<ul>
+<li>利用闭包实现数据私有化或模拟私有方法。这个方式也称为<a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript">模块模式（module pattern）</a>。</li>
+<li><a href="https://medium.com/javascript-scene/curry-or-partial-application-8150044c78b8#.l4b6l1i3x">部分参数函数（partial applications）柯里化（currying）</a>.</li>
+</ul>
+<h6 id="参考-6">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures</li>
+<li>https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-closure-b2f0d2152b36</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请说明.foreach循环和.map循环的主要区别它们分别在什么情况下使用">请说明<code>.forEach</code>循环和<code>.map()</code>循环的主要区别，它们分别在什么情况下使用？</h3>
+<p>为了理解两者的区别，我们看看它们分别是做什么的。</p>
+<p><strong><code>forEach</code></strong></p>
+<ul>
+<li>遍历数组中的元素。</li>
+<li>为每个元素执行回调。</li>
+<li>无返回值。</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">const</span> a <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">const</span> doubled <span class="op">=</span> <span class="va">a</span>.<span class="at">forEach</span>((num<span class="op">,</span> index) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="co">// 执行与 num、index 相关的代码</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">// doubled = undefined</span></a></code></pre></div>
+<p><strong><code>map</code></strong></p>
+<ul>
+<li>遍历数组中的元素</li>
+<li>通过对每个元素调用函数，将每个元素“映射（map）”到一个新元素，从而创建一个新数组。</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">const</span> a <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">const</span> doubled <span class="op">=</span> <span class="va">a</span>.<span class="at">map</span>((num) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="cf">return</span> num <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5"></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">// doubled = [2, 4, 6]</span></a></code></pre></div>
+<p><code>.forEach</code>和<code>.map()</code>的主要区别在于<code>.map()</code>返回一个新的数组。如果你想得到一个结果，但不想改变原始数组，用<code>.map()</code>。如果你只需要在数组上做迭代修改，用<code>forEach</code>。</p>
+<h6 id="参考-7">参考</h6>
+<ul>
+<li>https://codeburst.io/javascript-map-vs-foreach-f38111822c0f</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="匿名函数的典型应用场景是什么">匿名函数的典型应用场景是什么？</h3>
+<p>匿名函数可以在 IIFE 中使用，来封装局部作用域内的代码，以便其声明的变量不会暴露到全局作用域。</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1">(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="co">// 一些代码。</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="op">}</span>)()<span class="op">;</span></a></code></pre></div>
+<p>匿名函数可以作为只用一次，不需要在其他地方使用的回调函数。当处理函数在调用它们的程序内部被定义时，代码具有更好地自闭性和可读性，可以省去寻找该处理函数的函数体位置的麻烦。</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="at">setTimeout</span>(<span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Hello world!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="op">},</span> <span class="dv">1000</span>)<span class="op">;</span></a></code></pre></div>
+<p>匿名函数可以用于函数式编程或 Lodash（类似于回调函数）。</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">const</span> arr <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw">const</span> double <span class="op">=</span> <span class="va">arr</span>.<span class="at">map</span>(<span class="kw">function</span> (el) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="cf">return</span> el <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="va">console</span>.<span class="at">log</span>(double)<span class="op">;</span> <span class="co">// [2, 4, 6]</span></a></code></pre></div>
+<h6 id="参考-8">参考</h6>
+<ul>
+<li>https://www.quora.com/What-is-a-typical-usecase-for-anonymous-functions</li>
+<li>https://stackoverflow.com/questions/10273185/what-are-the-benefits-to-using-anonymous-functions-instead-of-named-functions-fo</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="你如何组织自己的代码使用模块模式module-pattern还是经典继承classical-inheritance">你如何组织自己的代码？（使用模块模式（module pattern）还是经典继承（classical inheritance）？）</h3>
+<p>我以前使用 Backbone 组织我的模型（model），Backbone 鼓励采用面向对象的方法——创建 Backbone 模型，并为其添加方法。</p>
+<p>模块模式仍然是很好的方式，但是现在我使用基于 React/Redux 的 Flux 体系结构，它鼓励使用单向函数编程的方法。我用普通对象（plain object）表示我的 app 模型，编写实用纯函数去操作这些对象。使用动作（actions）和化简器（reducers）来处理状态，就像其他 Redux 应用一样。</p>
+<p>我尽可能避免使用经典继承。如果非要这么做，我会坚持<a href="https://medium.com/@dan_abramov/how-to-use-classes-and-sleep-at-night-9af8de78ccb4">这些原则</a>。</p>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="宿主对象host-objects和原生对象native-objects的区别是什么">宿主对象（host objects）和原生对象（native objects）的区别是什么？</h3>
+<p>原生对象是由 ECMAScript 规范定义的 JavaScript 内置对象，比如<code>String</code>、<code>Math</code>、<code>RegExp</code>、<code>Object</code>、<code>Function</code>等等。</p>
+<p>宿主对象是由运行时环境（浏览器或 Node）提供，比如<code>window</code>、<code>XMLHTTPRequest</code>等等。</p>
+<h6 id="参考-9">参考</h6>
+<ul>
+<li>https://stackoverflow.com/questions/7614317/what-is-the-difference-between-native-objects-and-host-objects</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="下列语句有什么区别function-personvar-person-person和var-person-new-person">下列语句有什么区别：<code>function Person(){}</code>、<code>var person = Person()</code>和<code>var person = new Person()</code>？</h3>
+<p>这个问题问得很含糊。我猜这是在考察 JavaScript 中的构造函数（constructor）。从技术上讲，<code>function Person(){}</code>只是一个普通的函数声明。使用 PascalCase 方式命名函数作为构造函数，是一个惯例。</p>
+<p><code>var person = Person()</code>将<code>Person</code>以普通函数调用，而不是构造函数。如果该函数是用作构造函数的，那么这种调用方式是一种常见错误。通常情况下，构造函数不会返回任何东西，因此，像普通函数一样调用构造函数，只会返回<code>undefined</code>赋给用作实例的变量。</p>
+<p><code>var person = new Person()</code>使用<code>new</code>操作符，创建<code>Person</code>对象的实例，该实例继承自<code>Person.prototype</code>。另外一种方式是使用<code>Object.create</code>，例如：Object.create(Person.prototype)`。</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">function</span> <span class="at">Person</span>(name) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> name<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="kw">var</span> person <span class="op">=</span> <span class="at">Person</span>(<span class="st">&#39;John&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="va">console</span>.<span class="at">log</span>(person)<span class="op">;</span> <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="va">console</span>.<span class="at">log</span>(<span class="va">person</span>.<span class="at">name</span>)<span class="op">;</span> <span class="co">// Uncaught TypeError: Cannot read property &#39;name&#39; of undefined</span></a>
+<a class="sourceLine" id="cb11-8" title="8"></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="kw">var</span> person <span class="op">=</span> <span class="kw">new</span> <span class="at">Person</span>(<span class="st">&#39;John&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="va">console</span>.<span class="at">log</span>(person)<span class="op">;</span> <span class="co">// Person { name: &quot;John&quot; }</span></a>
+<a class="sourceLine" id="cb11-11" title="11"><span class="va">console</span>.<span class="at">log</span>(<span class="va">person</span>.<span class="at">name</span>)<span class="op">;</span> <span class="co">// &quot;john&quot;</span></a></code></pre></div>
+<h6 id="参考-10">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/new</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="call和.apply有什么区别"><code>.call</code>和<code>.apply</code>有什么区别？</h3>
+<p><code>.call</code>和<code>.apply</code>都用于调用函数，第一个参数将用作函数内 this 的值。然而，<code>.call</code>接受逗号分隔的参数作为后面的参数，而<code>.apply</code>接受一个参数数组作为后面的参数。一个简单的记忆方法是，从<code>call</code>中的 C 联想到逗号分隔（comma-separated），从<code>apply</code>中的 A 联想到数组（array）。</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">add</span>(a<span class="op">,</span> b) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb12-4" title="4"></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="va">console</span>.<span class="at">log</span>(<span class="va">add</span>.<span class="at">call</span>(<span class="kw">null</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span> <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="va">console</span>.<span class="at">log</span>(<span class="va">add</span>.<span class="at">apply</span>(<span class="kw">null</span><span class="op">,</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>]))<span class="op">;</span> <span class="co">// 3</span></a></code></pre></div>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请说明function.prototype.bind的用法">请说明<code>Function.prototype.bind</code>的用法。</h3>
+<p>摘自<a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind">MDN</a>：</p>
+<blockquote>
+<p><code>bind()</code>方法创建一个新的函数, 当被调用时，将其 this 关键字设置为提供的值，在调用新函数时，在任何提供之前提供一个给定的参数序列。</p>
+</blockquote>
+<p>根据我的经验，将<code>this</code>的值绑定到想要传递给其他函数的类的方法中是非常有用的。在 React 组件中经常这样做。</p>
+<h6 id="参考-11">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="什么时候会用到document.write">什么时候会用到<code>document.write()</code>？</h3>
+<p><code>document.write()</code>用来将一串文本写入由<code>document.open()</code>打开的文档流中。当页面加载后执行<code>document.write()</code>时，它将调用<code>document.open</code>，会清除整个文档（<code>&lt;head&gt;</code>和<code>&lt;body&gt;</code>会被移除！），并将文档内容替换成给定的字符串参数。因此它通常被认为是危险的并且容易被误用。</p>
+<p>网上有一些答案，解释了<code>document.write()</code>被用于分析代码中，或者<a href="https://www.quirksmode.org/blog/archives/2005/06/three_javascrip_1.html">当你想包含只有在启用了 JavaScript 的情况下才能工作的样式</a>。它甚至在 HTML5 样板代码中用于<a href="https://github.com/paulirish/html5-boilerplate/wiki/Script-Loading-Techniques#documentwrite-script-tag">并行加载脚本并保持执行顺序</a>！但是，我怀疑这些使用原因是过时的，现在可以在不使用<code>document.write()</code>的情况下实现。如果我的观点有错，请纠正我。</p>
+<h6 id="参考-12">参考</h6>
+<ul>
+<li>https://www.quirksmode.org/blog/archives/2005/06/three_javascrip_1.html</li>
+<li>https://github.com/h5bp/html5-boilerplate/wiki/Script-Loading-Techniques#documentwrite-script-tag</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="功能检测feature-detection功能推断feature-inference和使用-ua-字符串之间有什么区别">功能检测（feature detection）、功能推断（feature inference）和使用 UA 字符串之间有什么区别？</h3>
+<p><strong>功能检测（feature detection）</strong></p>
+<p>功能检测包括确定浏览器是否支持某段代码，以及是否运行不同的代码（取决于它是否执行），以便浏览器始终能够正常运行代码功能，而不会在某些浏览器中出现崩溃和错误。例如：</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="cf">if</span> (<span class="st">&#39;geolocation&#39;</span> <span class="kw">in</span> navigator) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="co">// 可以使用 navigator.geolocation</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-4" title="4">  <span class="co">// 处理 navigator.geolocation 功能缺失</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p><a href="https://modernizr.com/">Modernizr</a>是处理功能检测的优秀工具。</p>
+<p><strong>功能推断（feature inference）</strong></p>
+<p>功能推断与功能检测一样，会对功能可用性进行检查，但是在判断通过后，还会使用其他功能，因为它假设其他功能也可用，例如：</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="cf">if</span> (<span class="va">document</span>.<span class="at">getElementsByTagName</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  element <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(id)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>非常不推荐这种方式。功能检测更能保证万无一失。</p>
+<p><strong>UA 字符串</strong></p>
+<p>这是一个浏览器报告的字符串，它允许网络协议对等方（network protocol peers）识别请求用户代理的应用类型、操作系统、应用供应商和应用版本。它可以通过<code>navigator.userAgent</code>访问。 然而，这个字符串很难解析并且很可能存在欺骗性。例如，Chrome 会同时作为 Chrome 和 Safari 进行报告。因此，要检测 Safari，除了检查 Safari 字符串，还要检查是否存在 Chrome 字符串。不要使用这种方式。</p>
+<h6 id="参考-13">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/Feature_detection</li>
+<li>https://stackoverflow.com/questions/20104930/whats-the-difference-between-feature-detection-feature-inference-and-using-th</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请尽可能详细地解释-ajax">请尽可能详细地解释 Ajax。</h3>
+<p>Ajax（asynchronous JavaScript and XML）是使用客户端上的许多 Web 技术，创建异步 Web 应用的一种 Web 开发技术。借助 Ajax，Web 应用可以异步（在后台）向服务器发送数据和从服务器检索数据，而不会干扰现有页面的显示和行为。通过将数据交换层与表示层分离，Ajax 允许网页和扩展 Web 应用程序动态更改内容，而无需重新加载整个页面。实际上，现在通常将 XML 替换为 JSON，因为 JavaScript 对 JSON 有原生支持优势。</p>
+<p><code>XMLHttpRequest</code> API 经常用于异步通信。此外还有最近流行的<code>fetch</code> API。</p>
+<h6 id="参考-14">参考</h6>
+<ul>
+<li>https://en.wikipedia.org/wiki/Ajax_(programming)</li>
+<li>https://developer.mozilla.org/en-US/docs/AJAX</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="使用-ajax-的优缺点分别是什么">使用 Ajax 的优缺点分别是什么？</h3>
+<p><strong>优点</strong></p>
+<ul>
+<li>交互性更好。来自服务器的新内容可以动态更改，无需重新加载整个页面。</li>
+<li>减少与服务器的连接，因为脚本和样式只需要被请求一次。</li>
+<li>状态可以维护在一个页面上。JavaScript 变量和 DOM 状态将得到保持，因为主容器页面未被重新加载。</li>
+<li>基本上包括大部分 SPA 的优点。</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>动态网页很难收藏。</li>
+<li>如果 JavaScript 已在浏览器中被禁用，则不起作用。</li>
+<li>有些网络爬虫不执行 JavaScript，也不会看到 JavaScript 加载的内容。</li>
+<li>基本上包括大部分 SPA 的缺点。</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请说明-jsonp-的工作原理它为什么不是真正的-ajax">请说明 JSONP 的工作原理，它为什么不是真正的 Ajax？</h3>
+<p>JSONP（带填充的 JSON）是一种通常用于绕过 Web 浏览器中的跨域限制的方法，因为 Ajax 不允许跨域请求。</p>
+<p>JSONP 通过<code>&lt;script&gt;</code>标签发送跨域请求，通常使用<code>callback</code>查询参数，例如：<code>https://example.com?callback=printData</code>。 然后服务器将数据包装在一个名为<code>printData</code>的函数中并将其返回给客户端。</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb15-1" title="1"><span class="co">&lt;!-- https://mydomain.com --&gt;</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw">&lt;script&gt;</span></a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="kw">function</span> <span class="at">printData</span>(data) <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-4" title="4">    <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`My name is </span><span class="sc">${</span><span class="va">data</span>.<span class="at">name</span><span class="sc">}</span><span class="vs">!`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="kw">&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb15-7" title="7"></a>
+<a class="sourceLine" id="cb15-8" title="8"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;https://example.com?callback=printData&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="co">// 文件加载自 https://example.com?callback=printData</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="at">printData</span>(<span class="op">{</span><span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Yang Shun&#39;</span><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>客户端必须在其全局范围内具有<code>printData</code>函数，并且在收到来自跨域的响应时，该函数将由客户端执行。</p>
+<p>JSONP 可能具有一些安全隐患。由于 JSONP 是纯 JavaScript 实现，它可以完成 JavaScript 所能做的一切，因此需要信任 JSONP 数据的提供者。</p>
+<p>现如今，<a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">跨来源资源共享（CORS）</a> 是推荐的主流方式，JSONP 已被视为一种比较 hack 的方式。</p>
+<h6 id="参考-15">参考</h6>
+<ul>
+<li>https://stackoverflow.com/a/2067584/1751946</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="你使用过-javascript-模板吗用过什么相关的库">你使用过 JavaScript 模板吗？用过什么相关的库？</h3>
+<p>使用过。Handlebars、Underscore、Lodash、AngularJS 和 JSX。我不喜欢 AngularJS 中的模板，因为它在指令中大量使用了字符串，并且书写错误会被忽略。JSX 是我的新宠，因为它更接近 JavaScript，几乎没有什么学习成本。现在，可以使用 ES2015 模板字符串快速创建模板，而不需依赖第三方代码。</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">const</span> template <span class="op">=</span> <span class="vs">`&lt;div&gt;My name is: </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">&lt;/div&gt;`</span><span class="op">;</span></a></code></pre></div>
+<p>但是，请注意上述方法中可能存在的 XSS，因为内容不会被转义，与模板库不同。</p>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请解释变量提升hoisting">请解释变量提升（hoisting）。</h3>
+<p>变量提升（hoisting）是用于解释代码中变量声明行为的术语。使用<code>var</code>关键字声明或初始化的变量，会将声明语句“提升”到当前作用域的顶部。 但是，只有声明才会触发提升，赋值语句（如果有的话）将保持原样。我们用几个例子来解释一下。</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="co">// 用 var 声明得到提升</span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="kw">var</span> foo <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// 1</span></a>
+<a class="sourceLine" id="cb18-5" title="5"></a>
+<a class="sourceLine" id="cb18-6" title="6"><span class="co">// 用 let/const 声明不会提升</span></a>
+<a class="sourceLine" id="cb18-7" title="7"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// ReferenceError: bar is not defined</span></a>
+<a class="sourceLine" id="cb18-8" title="8"><span class="kw">let</span> bar <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb18-9" title="9"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// 2</span></a></code></pre></div>
+<p>函数声明会使函数体提升，但函数表达式（以声明变量的形式书写）只有变量声明会被提升。</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="co">// 函数声明</span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// [Function: foo]</span></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="at">foo</span>()<span class="op">;</span> <span class="co">// &#39;FOOOOO&#39;</span></a>
+<a class="sourceLine" id="cb19-4" title="4"><span class="kw">function</span> <span class="at">foo</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-5" title="5">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;FOOOOO&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb19-6" title="6"><span class="op">}</span></a>
+<a class="sourceLine" id="cb19-7" title="7"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// [Function: foo]</span></a>
+<a class="sourceLine" id="cb19-8" title="8"></a>
+<a class="sourceLine" id="cb19-9" title="9"><span class="co">// 函数表达式</span></a>
+<a class="sourceLine" id="cb19-10" title="10"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb19-11" title="11"><span class="at">bar</span>()<span class="op">;</span> <span class="co">// Uncaught TypeError: bar is not a function</span></a>
+<a class="sourceLine" id="cb19-12" title="12"><span class="kw">var</span> bar <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-13" title="13">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;BARRRR&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb19-14" title="14"><span class="op">};</span></a>
+<a class="sourceLine" id="cb19-15" title="15"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// [Function: bar]</span></a></code></pre></div>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请描述事件冒泡">请描述事件冒泡。</h3>
+<p>当一个事件在 DOM 元素上触发时，如果有事件监听器，它将尝试处理该事件，然后事件冒泡到其父级元素，并发生同样的事情。最后直到事件到达祖先元素。事件冒泡是实现事件委托的原理（event delegation）。</p>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="attribute-和-property-之间有什么区别">“attribute” 和 “property” 之间有什么区别？</h3>
+<p>“Attribute” 是在 HTML 中定义的，而 “property” 是在 DOM 上定义的。为了说明区别，假设我们在 HTML 中有一个文本框：<code>&lt;input type="text" value="Hello"&gt;</code>。</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">const</span> input <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;input&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="va">console</span>.<span class="at">log</span>(<span class="va">input</span>.<span class="at">getAttribute</span>(<span class="st">&#39;value&#39;</span>))<span class="op">;</span> <span class="co">// Hello</span></a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="va">console</span>.<span class="at">log</span>(<span class="va">input</span>.<span class="at">value</span>)<span class="op">;</span> <span class="co">// Hello</span></a></code></pre></div>
+<p>但是在文本框中键入“ World!”后:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1"><span class="va">console</span>.<span class="at">log</span>(<span class="va">input</span>.<span class="at">getAttribute</span>(<span class="st">&#39;value&#39;</span>))<span class="op">;</span> <span class="co">// Hello</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="va">console</span>.<span class="at">log</span>(<span class="va">input</span>.<span class="at">value</span>)<span class="op">;</span> <span class="co">// Hello World!</span></a></code></pre></div>
+<h6 id="参考-16">参考</h6>
+<ul>
+<li>https://stackoverflow.com/questions/6003819/properties-and-attributes-in-html</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="为什么扩展-javascript-内置对象是不好的做法">为什么扩展 JavaScript 内置对象是不好的做法？</h3>
+<p>扩展 JavaScript 内置（原生）对象意味着将属性或方法添加到其<code>prototype</code>中。虽然听起来很不错，但事实上这样做很危险。想象一下，你的代码使用了一些库，它们通过添加相同的 contains 方法来扩展<code>Array.prototype</code>，如果这两个方法的行为不相同，那么这些实现将会相互覆盖，你的代码将不能正常运行。</p>
+<p>扩展内置对象的唯一使用场景是创建 polyfill，本质上为老版本浏览器缺失的方法提供自己的实现，该方法是由 JavaScript 规范定义的。</p>
+<h6 id="参考-17">参考</h6>
+<ul>
+<li>http://lucybain.com/blog/2014/js-extending-built-in-objects/</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="document-中的load事件和domcontentloaded事件之间的区别是什么">document 中的<code>load</code>事件和<code>DOMContentLoaded</code>事件之间的区别是什么？</h3>
+<p>当初始的 HTML 文档被完全加载和解析完成之后，<code>DOMContentLoaded</code>事件被触发，而无需等待样式表、图像和子框架的完成加载。</p>
+<p><code>window</code>的<code>load</code>事件仅在 DOM 和所有相关资源全部完成加载后才会触发。</p>
+<h6 id="参考-18">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/Events/load</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="和的区别是什么"><code>==</code>和<code>===</code>的区别是什么？</h3>
+<p><code>==</code>是抽象相等运算符，而<code>===</code>是严格相等运算符。<code>==</code>运算符是在进行必要的类型转换后，再比较。<code>===</code>运算符不会进行类型转换，所以如果两个值不是相同的类型，会直接返回<code>false</code>。使用<code>==</code>时，可能发生一些特别的事情，例如：</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1"><span class="dv">1</span> <span class="op">==</span> <span class="st">&#39;1&#39;</span><span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="dv">1</span> <span class="op">==</span> [<span class="dv">1</span>]<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="dv">1</span> <span class="op">==</span> <span class="kw">true</span><span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="dv">0</span> <span class="op">==</span> <span class="st">&#39;&#39;</span><span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb22-5" title="5"><span class="dv">0</span> <span class="op">==</span> <span class="st">&#39;0&#39;</span><span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb22-6" title="6"><span class="dv">0</span> <span class="op">==</span> <span class="kw">false</span><span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<p>我的建议是从不使用<code>==</code>运算符，除了方便与<code>null</code>或<code>undefined</code>比较时，<code>a == null</code>如果<code>a</code>为<code>null</code>或<code>undefined</code>将返回<code>true</code>。</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">var</span> a <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="va">console</span>.<span class="at">log</span>(a <span class="op">==</span> <span class="kw">null</span>)<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="va">console</span>.<span class="at">log</span>(a <span class="op">==</span> <span class="kw">undefined</span>)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<h6 id="参考-19">参考</h6>
+<ul>
+<li>https://stackoverflow.com/questions/359494/which-equals-operator-vs-should-be-used-in-javascript-comparisons</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请解释关于-javascript-的同源策略">请解释关于 JavaScript 的同源策略。</h3>
+<p>同源策略可防止 JavaScript 发起跨域请求。源被定义为 URI、主机名和端口号的组合。此策略可防止页面上的恶意脚本通过该页面的文档对象模型，访问另一个网页上的敏感数据。</p>
+<h6 id="参考-20">参考</h6>
+<ul>
+<li>https://en.wikipedia.org/wiki/Same-origin_policy</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请使下面的语句生效">请使下面的语句生效：</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb24-1" title="1"><span class="at">duplicate</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>])<span class="op">;</span> <span class="co">// [1,2,3,4,5,1,2,3,4,5]</span></a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">function</span> <span class="at">duplicate</span>(arr) <span class="op">{</span></a>
+<a class="sourceLine" id="cb25-2" title="2">  <span class="cf">return</span> <span class="va">arr</span>.<span class="at">concat</span>(arr)<span class="op">;</span></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb25-4" title="4"></a>
+<a class="sourceLine" id="cb25-5" title="5"><span class="at">duplicate</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>])<span class="op">;</span> <span class="co">// [1,2,3,4,5,1,2,3,4,5]</span></a></code></pre></div>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请说明三元表达式中三元这个词代表什么">请说明三元表达式中“三元”这个词代表什么？</h3>
+<p>“三元”表示接受三个操作数：判断条件，<code>then</code>表达式和<code>else</code>表达式。三元表达式不是 JavaScript 特有的，我不知道这个问题为什么会出现在这里。</p>
+<h6 id="参考-21">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Conditional_Operator</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="什么是use-strict使用它有什么优缺点">什么是<code>"use strict";</code>？使用它有什么优缺点？</h3>
+<p>‘use strict’ 是用于对整个脚本或单个函数启用严格模式的语句。严格模式是可选择的一个限制 JavaScript 的变体一种方式 。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>无法再意外创建全局变量。</li>
+<li>会使引起静默失败（silently fail，即：不报错也没有任何效果）的赋值操抛出异常。</li>
+<li>试图删除不可删除的属性时会抛出异常（之前这种操作不会产生任何效果）。</li>
+<li>要求函数的参数名唯一。</li>
+<li>全局作用域下，<code>this</code>的值为<code>undefined</code>。</li>
+<li>捕获了一些常见的编码错误，并抛出异常。</li>
+<li>禁用令人困惑或欠佳的功能。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>缺失许多开发人员已经习惯的功能。</li>
+<li>无法访问<code>function.caller</code>和<code>function.arguments</code>。</li>
+<li>以不同严格模式编写的脚本合并后可能导致问题。</li>
+</ul>
+<p>总的来说，我认为利大于弊，我从来不使用严格模式禁用的功能，因此我推荐使用严格模式。</p>
+<h6 id="参考-22">参考</h6>
+<ul>
+<li>http://2ality.com/2011/10/strict-mode-hatred.html</li>
+<li>http://lucybain.com/blog/2014/js-use-strict/</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="创建一个循环从-1-迭代到-1003的倍数时输出-fizz5的倍数时输出-buzz同时为3和5的倍数时输出-fizzbuzz">创建一个循环，从 1 迭代到 100，<code>3</code>的倍数时输出 “fizz”，<code>5</code>的倍数时输出 “buzz”，同时为<code>3</code>和<code>5</code>的倍数时输出 “fizzbuzz”。</h3>
+<p>来自 <a href="https://gist.github.com/jaysonrowe/1592432#gistcomment-790724">Paul Irish</a>的 FizzBuzz。</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb26-1" title="1"><span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">100</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb26-2" title="2">  <span class="kw">let</span> f <span class="op">=</span> i <span class="op">%</span> <span class="dv">3</span> <span class="op">==</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb26-3" title="3">    b <span class="op">=</span> i <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb26-4" title="4">  <span class="va">console</span>.<span class="at">log</span>(f <span class="op">?</span> (b <span class="op">?</span> <span class="st">&#39;FizzBuzz&#39;</span> : <span class="st">&#39;Fizz&#39;</span>) : b <span class="op">?</span> <span class="st">&#39;Buzz&#39;</span> : i)<span class="op">;</span></a>
+<a class="sourceLine" id="cb26-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>我不建议你在面试时写上面的代码。只要写得清晰即可。关于更多千奇百怪的 FizzBuzz 实现，请查看下面的参考链接。</p>
+<h6 id="参考-23">参考</h6>
+<ul>
+<li>https://gist.github.com/jaysonrowe/1592432</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="为什么不要使用全局作用域">为什么不要使用全局作用域？</h3>
+<p>每个脚本都可以访问全局作用域，如果人人都使用全局命名空间来定义自己的变量，肯定会发生冲突。使用模块模式（IIFE）将变量封装在本地命名空间中。</p>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="为什么要使用load事件这个事件有什么缺点吗你知道一些代替方案吗为什么使用它们">为什么要使用<code>load</code>事件？这个事件有什么缺点吗？你知道一些代替方案吗，为什么使用它们？</h3>
+<p>在文档装载完成后会触发<code>load</code>事件。此时，在文档中的所有对象都在 DOM 中，所有图像、脚本、链接和子框架都完成了加载。</p>
+<p>DOM 事件<code>DOMContentLoaded</code>将在页面的 DOM 构建完成后触发，但不要等待其他资源完成加载。如果在初始化之前不需要装入整个页面，这个事件是使用首选。</p>
+<p>TODO.</p>
+<h6 id="参考-24">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onload</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请解释单页应用是什么如何使其对-seo-友好">请解释单页应用是什么，如何使其对 SEO 友好。</h3>
+<p>以下摘自 <a href="https://github.com/grab/front-end-guide">Grab Front End Guide</a>，碰巧的是，这正是我自己写的！</p>
+<p>现如今，Web 开发人员将他们构建的产品称为 Web 应用，而不是网站。虽然这两个术语之间没有严格的区别，但网络应用往往具有高度的交互性和动态性，允许用户执行操作并接收他们的操作响应。在过去，浏览器从服务器接收 HTML 并渲染。当用户导航到其它 URL 时，需要整页刷新，服务器会为新页面发送新的 HTML。这被称为服务器端渲染。</p>
+<p>然而，在现代的 SPA 中，客户端渲染取而代之。浏览器从服务器加载初始页面、整个应用程序所需的脚本（框架、库、应用代码）和样式表。当用户导航到其他页面时，不会触发页面刷新。该页面的 URL 通过 <a href="https://developer.mozilla.org/en-US/docs/Web/API/History_API">HTML5 History API</a> 进行更新。浏览器通过 <a href="https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started">AJAX</a> 请求向服务器检索新页面所需的数据（通常采用 JSON 格式）。然后，SPA 通过 JavaScript 来动态更新页面，这些 JavaScript 在初始页面加载时已经下载。这种模式类似于原生移动应用的工作方式。</p>
+<p><strong>好处：</strong></p>
+<ul>
+<li>用户感知响应更快，用户切换页面时，不再看到因页面刷新而导致的白屏。</li>
+<li>对服务器进行的 HTTP 请求减少，因为对于每个页面加载，不必再次下载相同的资源。</li>
+<li>客户端和服务器之间的关注点分离。可以为不同平台（例如手机、聊天机器人、智能手表）建立新的客户端，而无需修改服务器代码。只要 API 没有修改，可以单独修改客户端和服务器上的代码。</li>
+</ul>
+<p><strong>坏处：</strong></p>
+<ul>
+<li>由于加载了多个页面所需的框架、应用代码和资源，导致初始页面加载时间较长。</li>
+<li>服务器还需要进行额外的工作，需要将所有请求路由配置到单个入口点，然后由客户端接管路由。</li>
+<li>SPA 依赖于 JavaScript 来呈现内容，但并非所有搜索引擎都在抓取过程中执行 JavaScript，他们可能会在你的页面上看到空的内容。这无意中损害了应用的搜索引擎优化（SEO）。然而，当你构建应用时，大多数情况下，搜索引擎优化并不是最重要的因素，因为并非所有内容都需要通过搜索引擎进行索引。为了解决这个问题，可以在服务器端渲染你的应用，或者使用诸如 <a href="https://prerender.io/">Prerender</a> 的服务来“在浏览器中呈现你的 javascript，保存静态 HTML，并将其返回给爬虫”。</li>
+</ul>
+<h6 id="参考-25">参考</h6>
+<ul>
+<li>https://github.com/grab/front-end-guide#single-page-apps-spas</li>
+<li>http://stackoverflow.com/questions/21862054/single-page-app-advantages-and-disadvantages</li>
+<li>http://blog.isquaredsoftware.com/presentations/2016-10-revolution-of-web-dev/</li>
+<li>https://medium.freecodecamp.com/heres-why-client-side-rendering-won-46a349fadb52</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="你对-promises-及其-polyfill-的掌握程度如何">你对 Promises 及其 polyfill 的掌握程度如何？</h3>
+<p>掌握它的工作原理。<code>Promise</code>是一个可能在未来某个时间产生结果的对象：操作成功的结果或失败的原因（例如发生网络错误）。 <code>Promise</code>可能处于以下三种状态之一：fulfilled、rejected 或 pending。 用户可以对<code>Promise</code>添加回调函数来处理操作成功的结果或失败的原因。</p>
+<p>一些常见的 polyfill 是<code>$.deferred</code>、Q 和 Bluebird，但不是所有的 polyfill 都符合规范。ES2015 支持 Promises，现在通常不需要使用 polyfills。</p>
+<h6 id="参考-26">参考</h6>
+<ul>
+<li>https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="promise代替回调函数有什么优缺点"><code>Promise</code>代替回调函数有什么优缺点？</h3>
+<p><strong>优点：</strong></p>
+<ul>
+<li>避免可读性极差的回调地狱。</li>
+<li>使用<code>.then()</code>编写的顺序异步代码，既简单又易读。</li>
+<li>使用<code>Promise.all()</code>编写并行异步代码变得很容易。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>轻微地增加了代码的复杂度（这点存在争议）。</li>
+<li>在不支持 ES2015 的旧版浏览器中，需要引入 polyfill 才能使用。</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="用转译成-javascript-的语言写-javascript-有什么优缺点">用转译成 JavaScript 的语言写 JavaScript 有什么优缺点？</h3>
+<p>Some examples of languages that compile to JavaScript include CoffeeScript, Elm, ClojureScript, PureScript and TypeScript. 这些是转译成 JavaScript 的语言，包括 CoffeeScript、Elm、ClojureScript、PureScript 和 TypeScript。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>修复了 JavaScript 中的一些长期问题，并摒弃了 JavaScript 不好的做法。</li>
+<li>在 JavaScript 的基础上提供一些语法糖，使我们能够编写更短的代码，我认为 ES5 缺乏语法糖的支持，但 ES2015 非常好。</li>
+<li>对于需要长时间维护的大型项目，静态类型非常好用（针对 TypeScript）。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>由于浏览器只运行 JavaScript，所以需要构建、编译过程，在将代码提供给浏览器之前，需要将代码转译为 JavaScript。</li>
+<li>如果 source map 不能很好地映射到预编译的源代码，调试会很痛苦。</li>
+<li>大多数开发人员不熟悉这些语言，需要学习它。如果将其用于项目，会增加团队成本。</li>
+<li>社区比较小（取决于语言），这意味着资源、教程、图书和工具难以找到。</li>
+<li>可能缺乏 IDE（编辑器）的支持。</li>
+<li>这些语言将始终落后于最新的 JavaScript 标准。</li>
+<li>开发人员应该清楚代码正在被编译到什么地方——因为这是实际运行的内容，是最重要的。</li>
+</ul>
+<p>实际上，ES2015 已经大大改进了 JavaScript，编写体验很好。我现在还没有真正看到对 CoffeeScript 的需求。</p>
+<h6 id="参考-27">参考</h6>
+<ul>
+<li>https://softwareengineering.stackexchange.com/questions/72569/what-are-the-pros-and-cons-of-coffeescript</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="你使用什么工具和技巧调试-javascript-代码">你使用什么工具和技巧调试 JavaScript 代码？</h3>
+<ul>
+<li>React 和 Redux
+<ul>
+<li><a href="https://github.com/facebook/react-devtools">React Devtools</a></li>
+<li><a href="https://github.com/gaearon/redux-devtools">Redux Devtools</a></li>
+</ul></li>
+<li>Vue
+<ul>
+<li><a href="https://github.com/vuejs/vue-devtools">Vue Devtools</a></li>
+</ul></li>
+<li>JavaScript
+<ul>
+<li><a href="https://hackernoon.com/twelve-fancy-chrome-devtools-tips-dc1e39d10d9d">Chrome Devtools</a></li>
+<li><code>debugger</code>声明</li>
+<li>使用万金油<code>console.log</code>进行调试</li>
+</ul></li>
+</ul>
+<h6 id="参考-28">参考</h6>
+<ul>
+<li>https://hackernoon.com/twelve-fancy-chrome-devtools-tips-dc1e39d10d9d</li>
+<li>https://raygun.com/blog/javascript-debugging/</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="你使用什么语句遍历对象的属性和数组的元素">你使用什么语句遍历对象的属性和数组的元素？</h3>
+<p><strong>对象：</strong></p>
+<ul>
+<li><code>for</code>循环：<code>for (var property in obj) { console.log(property); }</code>。但是，这还会遍历到它的继承属性，在使用之前，你需要加入<code>obj.hasOwnProperty(property)</code>检查。</li>
+<li><code>Object.keys()</code>：<code>Object.keys(obj).forEach(function (property) { ... })</code>。<code>Object.keys()</code>方法会返回一个由一个给定对象的自身可枚举属性组成的数组。</li>
+<li><code>Object.getOwnPropertyNames()</code>：<code>Object.getOwnPropertyNames(obj).forEach(function (property) { ... })</code>。<code>Object.getOwnPropertyNames()</code>方法返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括 Symbol 值作为名称的属性）组成的数组。</li>
+</ul>
+<p><strong>数组：</strong></p>
+<ul>
+<li><code>for</code> loops：<code>for (var i = 0; i &lt; arr.length; i++)</code>。这里的常见错误是<code>var</code>是函数作用域而不是块级作用域，大多数时候你想要迭代变量在块级作用域中。ES2015 引入了具有块级作用域的<code>let</code>，建议使用它。所以就变成了：<code>for (let i = 0; i &lt; arr.length; i++)</code>。</li>
+<li><code>forEach</code>：<code>arr.forEach(function (el, index) { ... })</code>。这个语句结构有时会更精简，因为如果你所需要的只是数组元素，你不必使用<code>index</code>。还有<code>every</code>和<code>some</code>方法可以让你提前终止遍历。</li>
+</ul>
+<p>大多数情况下，我更喜欢<code>.forEach</code>方法，但这取决于你想要做什么。<code>for</code>循环有更强的灵活性，比如使用<code>break</code>提前终止循环，或者递增步数大于一。</p>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请解释可变对象和不可变对象之间的区别">请解释可变对象和不可变对象之间的区别。</h3>
+<ul>
+<li>什么是 JavaScript 中的不可变对象的例子？</li>
+<li>不变性有什么优点和缺点？</li>
+<li>你如何在自己的代码中实现不变性？</li>
+</ul>
+<p><strong><em>可变对象</em></strong> 在创建之后是可以被改变的。</p>
+<p><strong><em>不可变对象</em></strong> 在创建之后是不可以被改变的。</p>
+<ol type="1">
+<li>在 <code>JavaScript</code> 中，<code>string</code> 和 <code>number</code> 从设计之初就是不可变(Immutable)。</li>
+<li><strong><em>不可变</em></strong> 其实是保持一个对象状态不变，这样做的好处是使得开发更加简单，可回溯，测试友好，减少了任何可能的副作用。但是，每当你想添加点东西到一个不可变(Immutable)对象里时，它一定是先拷贝已存在的值到新实例里，然后再给新实例添加内容，最后返回新实例。相比可变对象，这势必会有更多内存、计算量消耗。</li>
+<li>比如：构造一个纯函数</li>
+</ol>
+<div class="sourceCode" id="cb27"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">const</span> student1 <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb27-2" title="2">  <span class="dt">school</span><span class="op">:</span> <span class="st">&#39;Baidu&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb27-3" title="3">  <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;HOU Ce&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb27-4" title="4">  <span class="dt">birthdate</span><span class="op">:</span> <span class="st">&#39;1995-12-15&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb27-5" title="5"><span class="op">};</span></a>
+<a class="sourceLine" id="cb27-6" title="6"></a>
+<a class="sourceLine" id="cb27-7" title="7"><span class="kw">const</span> changeStudent <span class="op">=</span> (student<span class="op">,</span> newName<span class="op">,</span> newBday) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb27-8" title="8">  <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb27-9" title="9">    ...<span class="at">student</span><span class="op">,</span> <span class="co">// 使用解构</span></a>
+<a class="sourceLine" id="cb27-10" title="10">    <span class="dt">name</span><span class="op">:</span> newName<span class="op">,</span> <span class="co">// 覆盖name属性</span></a>
+<a class="sourceLine" id="cb27-11" title="11">    <span class="dt">birthdate</span><span class="op">:</span> newBday<span class="op">,</span> <span class="co">// 覆盖birthdate属性</span></a>
+<a class="sourceLine" id="cb27-12" title="12">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb27-13" title="13"><span class="op">};</span></a>
+<a class="sourceLine" id="cb27-14" title="14"></a>
+<a class="sourceLine" id="cb27-15" title="15"><span class="kw">const</span> student2 <span class="op">=</span> <span class="at">changeStudent</span>(student1<span class="op">,</span> <span class="st">&#39;YAN Haijing&#39;</span><span class="op">,</span> <span class="st">&#39;1990-11-10&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb27-16" title="16"></a>
+<a class="sourceLine" id="cb27-17" title="17"><span class="co">// both students will have the name properties</span></a>
+<a class="sourceLine" id="cb27-18" title="18"><span class="va">console</span>.<span class="at">log</span>(student1<span class="op">,</span> student2)<span class="op">;</span></a>
+<a class="sourceLine" id="cb27-19" title="19"><span class="co">// Object {school: &quot;Baidu&quot;, name: &quot;HOU Ce&quot;, birthdate: &quot;1995-12-15&quot;}</span></a>
+<a class="sourceLine" id="cb27-20" title="20"><span class="co">// Object {school: &quot;Baidu&quot;, name: &quot;YAN Haijing&quot;, birthdate: &quot;1990-11-10&quot;}</span></a></code></pre></div>
+<h6 id="参考-29">参考</h6>
+<ul>
+<li>https://juejin.im/post/58d0ff6f1b69e6006b8fd4e9</li>
+<li>https://www.interviewcake.com/concept/java/mutable</li>
+<li>https://www.sitepoint.com/immutability-javascript/</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请解释同步和异步函数之间的区别">请解释同步和异步函数之间的区别。</h3>
+<p>同步函数阻塞，而异步函数不阻塞。在同步函数中，语句完成后，下一句才执行。在这种情况下，程序可以按照语句的顺序进行精确评估，如果其中一个语句需要很长时间，程序的执行会停滞很长时间。</p>
+<p>异步函数通常接受回调作为参数，在调用异步函数后立即继续执行下一行。回调函数仅在异步操作完成且调用堆栈为空时调用。诸如从 Web 服务器加载数据或查询数据库等重负载操作应该异步完成，以便主线程可以继续执行其他操作，而不会出现一直阻塞，直到费时操作完成的情况（在浏览器中，界面会卡住）。</p>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="什么是事件循环调用堆栈和任务队列之间有什么区别">什么是事件循环？调用堆栈和任务队列之间有什么区别？</h3>
+<p>事件循环是一个单线程循环，用于监视调用堆栈并检查是否有工作即将在任务队列中完成。如果调用堆栈为空并且任务队列中有回调函数，则将回调函数出队并推送到调用堆栈中执行。</p>
+<p>如果你没有看过 Philip Robert <a href="https://2014.jsconf.eu/speakers/philip-roberts-what-the-heck-is-the-event-loop-anyway.html">关于事件循环的演讲</a>，你应该看一下。这是观看次数最多的 JavaScript 相关视频之一。</p>
+<h6 id="参考-30">参考</h6>
+<ul>
+<li>https://2014.jsconf.eu/speakers/philip-roberts-what-the-heck-is-the-event-loop-anyway.html</li>
+<li>http://theproactiveprogrammer.com/javascript/the-javascript-event-loop-a-stack-and-a-queue/</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请解释function-foo-和var-foo-function-之间foo的用法上的区别">请解释<code>function foo() {}</code>和<code>var foo = function() {}</code>之间<code>foo</code>的用法上的区别。</h3>
+<p>前者是函数声明，后者是函数表达式。关键的区别在于函数声明会使函数体提升（具有与变量相同的提升行为），但函数表达式的函数体不能。有关变量提升的更多解释，请参阅上面关于变量提升的问题。如果你试图在定义函数表达式之前调用它，你会得到一个<code>Uncaught TypeError: XXX is not a function</code>的错误。</p>
+<p><strong>函数声明</strong></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb28-1" title="1"><span class="at">foo</span>()<span class="op">;</span> <span class="co">// &#39;FOOOOO&#39;</span></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="kw">function</span> <span class="at">foo</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb28-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;FOOOOO&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb28-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p><strong>函数表达式</strong></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb29-1" title="1"><span class="at">foo</span>()<span class="op">;</span> <span class="co">// Uncaught TypeError: foo is not a function</span></a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="kw">var</span> foo <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb29-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;FOOOOO&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb29-4" title="4"><span class="op">};</span></a></code></pre></div>
+<h6 id="参考-31">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="使用letvar和const创建变量有什么区别">使用<code>let</code>、<code>var</code>和<code>const</code>创建变量有什么区别？</h3>
+<p>用<code>var</code>声明的变量的作用域是它当前的执行上下文，它可以是嵌套的函数，也可以是声明在任何函数外的变量。<code>let</code>和<code>const</code>是块级作用域，意味着它们只能在最近的一组花括号（function、if-else 代码块或 for 循环中）中访问。</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">function</span> <span class="at">foo</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb30-2" title="2">  <span class="co">// 所有变量在函数中都可访问</span></a>
+<a class="sourceLine" id="cb30-3" title="3">  <span class="kw">var</span> bar <span class="op">=</span> <span class="st">&#39;bar&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb30-4" title="4">  <span class="kw">let</span> baz <span class="op">=</span> <span class="st">&#39;baz&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb30-5" title="5">  <span class="kw">const</span> qux <span class="op">=</span> <span class="st">&#39;qux&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb30-6" title="6"></a>
+<a class="sourceLine" id="cb30-7" title="7">  <span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// bar</span></a>
+<a class="sourceLine" id="cb30-8" title="8">  <span class="va">console</span>.<span class="at">log</span>(baz)<span class="op">;</span> <span class="co">// baz</span></a>
+<a class="sourceLine" id="cb30-9" title="9">  <span class="va">console</span>.<span class="at">log</span>(qux)<span class="op">;</span> <span class="co">// qux</span></a>
+<a class="sourceLine" id="cb30-10" title="10"><span class="op">}</span></a>
+<a class="sourceLine" id="cb30-11" title="11"></a>
+<a class="sourceLine" id="cb30-12" title="12"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// ReferenceError: bar is not defined</span></a>
+<a class="sourceLine" id="cb30-13" title="13"><span class="va">console</span>.<span class="at">log</span>(baz)<span class="op">;</span> <span class="co">// ReferenceError: baz is not defined</span></a>
+<a class="sourceLine" id="cb30-14" title="14"><span class="va">console</span>.<span class="at">log</span>(qux)<span class="op">;</span> <span class="co">// ReferenceError: qux is not defined</span></a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb31-1" title="1"><span class="cf">if</span> (<span class="kw">true</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb31-2" title="2">  <span class="kw">var</span> bar <span class="op">=</span> <span class="st">&#39;bar&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb31-3" title="3">  <span class="kw">let</span> baz <span class="op">=</span> <span class="st">&#39;baz&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb31-4" title="4">  <span class="kw">const</span> qux <span class="op">=</span> <span class="st">&#39;qux&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb31-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb31-6" title="6"></a>
+<a class="sourceLine" id="cb31-7" title="7"><span class="co">// 用 var 声明的变量在函数作用域上都可访问</span></a>
+<a class="sourceLine" id="cb31-8" title="8"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// bar</span></a>
+<a class="sourceLine" id="cb31-9" title="9"><span class="co">// let 和 const 定义的变量在它们被定义的语句块之外不可访问</span></a>
+<a class="sourceLine" id="cb31-10" title="10"><span class="va">console</span>.<span class="at">log</span>(baz)<span class="op">;</span> <span class="co">// ReferenceError: baz is not defined</span></a>
+<a class="sourceLine" id="cb31-11" title="11"><span class="va">console</span>.<span class="at">log</span>(qux)<span class="op">;</span> <span class="co">// ReferenceError: qux is not defined</span></a></code></pre></div>
+<p><code>var</code>会使变量提升，这意味着变量可以在声明之前使用。<code>let</code>和<code>const</code>不会使变量提升，提前使用会报错。</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb32-1" title="1"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// undefined</span></a>
+<a class="sourceLine" id="cb32-2" title="2"></a>
+<a class="sourceLine" id="cb32-3" title="3"><span class="kw">var</span> foo <span class="op">=</span> <span class="st">&#39;foo&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb32-4" title="4"></a>
+<a class="sourceLine" id="cb32-5" title="5"><span class="va">console</span>.<span class="at">log</span>(baz)<span class="op">;</span> <span class="co">// ReferenceError: can&#39;t access lexical declaration &#39;baz&#39; before initialization</span></a>
+<a class="sourceLine" id="cb32-6" title="6"></a>
+<a class="sourceLine" id="cb32-7" title="7"><span class="kw">let</span> baz <span class="op">=</span> <span class="st">&#39;baz&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb32-8" title="8"></a>
+<a class="sourceLine" id="cb32-9" title="9"><span class="va">console</span>.<span class="at">log</span>(bar)<span class="op">;</span> <span class="co">// ReferenceError: can&#39;t access lexical declaration &#39;bar&#39; before initialization</span></a>
+<a class="sourceLine" id="cb32-10" title="10"></a>
+<a class="sourceLine" id="cb32-11" title="11"><span class="kw">const</span> bar <span class="op">=</span> <span class="st">&#39;bar&#39;</span><span class="op">;</span></a></code></pre></div>
+<p>用<code>var</code>重复声明不会报错，但<code>let</code>和<code>const</code>会。</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">var</span> foo <span class="op">=</span> <span class="st">&#39;foo&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="kw">var</span> foo <span class="op">=</span> <span class="st">&#39;bar&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="va">console</span>.<span class="at">log</span>(foo)<span class="op">;</span> <span class="co">// &quot;bar&quot;</span></a>
+<a class="sourceLine" id="cb33-4" title="4"></a>
+<a class="sourceLine" id="cb33-5" title="5"><span class="kw">let</span> baz <span class="op">=</span> <span class="st">&#39;baz&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb33-6" title="6"><span class="kw">let</span> baz <span class="op">=</span> <span class="st">&#39;qux&#39;</span><span class="op">;</span> <span class="co">// Uncaught SyntaxError: Identifier &#39;baz&#39; has already been declared</span></a></code></pre></div>
+<p><code>let</code>和<code>const</code>的区别在于：<code>let</code>允许多次赋值，而<code>const</code>只允许一次。</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb34-1" title="1"><span class="co">// 这样不会报错。</span></a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="kw">let</span> foo <span class="op">=</span> <span class="st">&#39;foo&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb34-3" title="3">foo <span class="op">=</span> <span class="st">&#39;bar&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb34-4" title="4"></a>
+<a class="sourceLine" id="cb34-5" title="5"><span class="co">// 这样会报错。</span></a>
+<a class="sourceLine" id="cb34-6" title="6"><span class="kw">const</span> baz <span class="op">=</span> <span class="st">&#39;baz&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb34-7" title="7">baz <span class="op">=</span> <span class="st">&#39;qux&#39;</span><span class="op">;</span></a></code></pre></div>
+<h6 id="参考-32">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="es6-的类和-es5-的构造函数有什么区别">ES6 的类和 ES5 的构造函数有什么区别？</h3>
+<p>让我们来看一个例子：</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb35-1" title="1"><span class="co">// ES5 构造函数</span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="kw">function</span> <span class="at">Person</span>(name) <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-3" title="3">  <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> name<span class="op">;</span></a>
+<a class="sourceLine" id="cb35-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb35-5" title="5"></a>
+<a class="sourceLine" id="cb35-6" title="6"><span class="co">// ES6 类</span></a>
+<a class="sourceLine" id="cb35-7" title="7"><span class="kw">class</span> Person <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-8" title="8">  <span class="at">constructor</span>(name) <span class="op">{</span></a>
+<a class="sourceLine" id="cb35-9" title="9">    <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> name<span class="op">;</span></a>
+<a class="sourceLine" id="cb35-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb35-11" title="11"><span class="op">}</span></a></code></pre></div>
+<p>对于简单的构造函数而言，他们看起来很相似。</p>
+<p>他们的主要区别体现在类继承上。如果我们想要创建一个继承于 <code>Person</code> 父类的 <code>Student</code> 子类，并且添加一个 <code>studentId</code> 字段，我们需要做的修改如下：</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb36-1" title="1"><span class="co">// ES5 构造函数</span></a>
+<a class="sourceLine" id="cb36-2" title="2"><span class="kw">function</span> <span class="at">Student</span>(name<span class="op">,</span> studentId) <span class="op">{</span></a>
+<a class="sourceLine" id="cb36-3" title="3">  <span class="co">// 调用父类的构造函数来初始化父类的成员变量</span></a>
+<a class="sourceLine" id="cb36-4" title="4">  <span class="va">Person</span>.<span class="at">call</span>(<span class="kw">this</span><span class="op">,</span> name)<span class="op">;</span></a>
+<a class="sourceLine" id="cb36-5" title="5"></a>
+<a class="sourceLine" id="cb36-6" title="6">  <span class="co">// 初始化子类自己的成员变量</span></a>
+<a class="sourceLine" id="cb36-7" title="7">  <span class="kw">this</span>.<span class="at">studentId</span> <span class="op">=</span> studentId<span class="op">;</span></a>
+<a class="sourceLine" id="cb36-8" title="8"><span class="op">}</span></a>
+<a class="sourceLine" id="cb36-9" title="9"></a>
+<a class="sourceLine" id="cb36-10" title="10"><span class="va">Student</span>.<span class="at">prototype</span> <span class="op">=</span> <span class="va">Object</span>.<span class="at">create</span>(<span class="va">Person</span>.<span class="at">prototype</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb36-11" title="11"><span class="va">Student</span>.<span class="va">prototype</span>.<span class="at">constructor</span> <span class="op">=</span> Student<span class="op">;</span></a>
+<a class="sourceLine" id="cb36-12" title="12"></a>
+<a class="sourceLine" id="cb36-13" title="13"><span class="co">// ES6 类</span></a>
+<a class="sourceLine" id="cb36-14" title="14"><span class="kw">class</span> Student <span class="kw">extends</span> Person <span class="op">{</span></a>
+<a class="sourceLine" id="cb36-15" title="15">  <span class="at">constructor</span>(name<span class="op">,</span> studentId) <span class="op">{</span></a>
+<a class="sourceLine" id="cb36-16" title="16">    <span class="kw">super</span>(name)<span class="op">;</span></a>
+<a class="sourceLine" id="cb36-17" title="17">    <span class="kw">this</span>.<span class="at">studentId</span> <span class="op">=</span> studentId<span class="op">;</span></a>
+<a class="sourceLine" id="cb36-18" title="18">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb36-19" title="19"><span class="op">}</span></a></code></pre></div>
+<p>从上面的例子我们可以看出来，使用 ES5 构造函数来实现继承特别麻烦，而使用 ES6 类的方式来实现就特别容易理解和记忆。</p>
+<h6 id="参考-33">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance</li>
+<li>https://eli.thegreenplace.net/2013/10/22/classical-inheritance-in-javascript-es5</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="你能给出一个使用箭头函数的例子吗箭头函数与其他函数有什么不同">你能给出一个使用箭头函数的例子吗，箭头函数与其他函数有什么不同？</h3>
+<p>一个很明显的优点就是箭头函数可以简化创建函数的语法，我们不需要在箭头函数前面加上 <code>function</code> 关键词。并且箭头函数的 <code>this</code> 会自动绑定到当前作用域的上下文中，这和普通的函数不一样。普通函数的 <code>this</code> 是在执行的时候才能确定的。箭头函数的这个特点对于回调函数来说特别有用，特别对于 React 组件而言。</p>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="在构造函数中使用箭头函数有什么好处">在构造函数中使用箭头函数有什么好处？</h3>
+<p>在构造函数里使用箭头函数的主要优点是它的 <code>this</code> 只与箭头函数创建时的 <code>this</code> 保持一致，并且不会修改。所以，当用构造函数去创建一个新的对象的时候，箭头函数的 <code>this</code> 总是指向新创建的对象。比如，假设我们有一个 <code>Person</code> 构造函数，它接受一个 <code>firstName</code> 参数，并且它有两个方法去调用 <code>console.log</code> 这个 <code>firstName</code>，一个是正常的函数，而另一个则是箭头函数:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">const</span> Person <span class="op">=</span> <span class="kw">function</span> (firstName) <span class="op">{</span></a>
+<a class="sourceLine" id="cb37-2" title="2">  <span class="kw">this</span>.<span class="at">firstName</span> <span class="op">=</span> firstName<span class="op">;</span></a>
+<a class="sourceLine" id="cb37-3" title="3">  <span class="kw">this</span>.<span class="at">sayName1</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb37-4" title="4">    <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">firstName</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb37-5" title="5">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb37-6" title="6">  <span class="kw">this</span>.<span class="at">sayName2</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb37-7" title="7">    <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">firstName</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb37-8" title="8">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb37-9" title="9"><span class="op">};</span></a>
+<a class="sourceLine" id="cb37-10" title="10"></a>
+<a class="sourceLine" id="cb37-11" title="11"><span class="kw">const</span> john <span class="op">=</span> <span class="kw">new</span> <span class="at">Person</span>(<span class="st">&#39;John&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb37-12" title="12"><span class="kw">const</span> dave <span class="op">=</span> <span class="kw">new</span> <span class="at">Person</span>(<span class="st">&#39;Dave&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb37-13" title="13"></a>
+<a class="sourceLine" id="cb37-14" title="14"><span class="va">john</span>.<span class="at">sayName1</span>()<span class="op">;</span> <span class="co">// John</span></a>
+<a class="sourceLine" id="cb37-15" title="15"><span class="va">john</span>.<span class="at">sayName2</span>()<span class="op">;</span> <span class="co">// John</span></a>
+<a class="sourceLine" id="cb37-16" title="16"></a>
+<a class="sourceLine" id="cb37-17" title="17"><span class="co">// 普通函数的 this 可以被修改，而箭头函数则不会</span></a>
+<a class="sourceLine" id="cb37-18" title="18"><span class="va">john</span>.<span class="va">sayName1</span>.<span class="at">call</span>(dave)<span class="op">;</span> <span class="co">// Dave (因为 &quot;this&quot; 现在指向了 dave 对象)</span></a>
+<a class="sourceLine" id="cb37-19" title="19"><span class="va">john</span>.<span class="va">sayName2</span>.<span class="at">call</span>(dave)<span class="op">;</span> <span class="co">// John</span></a>
+<a class="sourceLine" id="cb37-20" title="20"></a>
+<a class="sourceLine" id="cb37-21" title="21"><span class="va">john</span>.<span class="va">sayName1</span>.<span class="at">apply</span>(dave)<span class="op">;</span> <span class="co">// Dave (因为 &quot;this&quot; 现在指向了 dave 对象)</span></a>
+<a class="sourceLine" id="cb37-22" title="22"><span class="va">john</span>.<span class="va">sayName2</span>.<span class="at">apply</span>(dave)<span class="op">;</span> <span class="co">// John</span></a>
+<a class="sourceLine" id="cb37-23" title="23"></a>
+<a class="sourceLine" id="cb37-24" title="24"><span class="va">john</span>.<span class="va">sayName1</span>.<span class="at">bind</span>(dave)()<span class="op">;</span> <span class="co">// Dave (因为 &quot;this&quot; 现在指向了 dave 对象)</span></a>
+<a class="sourceLine" id="cb37-25" title="25"><span class="va">john</span>.<span class="va">sayName2</span>.<span class="at">bind</span>(dave)()<span class="op">;</span> <span class="co">// John</span></a>
+<a class="sourceLine" id="cb37-26" title="26"></a>
+<a class="sourceLine" id="cb37-27" title="27"><span class="kw">var</span> sayNameFromWindow1 <span class="op">=</span> <span class="va">john</span>.<span class="at">sayName1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb37-28" title="28"><span class="at">sayNameFromWindow1</span>()<span class="op">;</span> <span class="co">// undefined (因为 &quot;this&quot; 现在指向了 Window 对象)</span></a>
+<a class="sourceLine" id="cb37-29" title="29"></a>
+<a class="sourceLine" id="cb37-30" title="30"><span class="kw">var</span> sayNameFromWindow2 <span class="op">=</span> <span class="va">john</span>.<span class="at">sayName2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb37-31" title="31"><span class="at">sayNameFromWindow2</span>()<span class="op">;</span> <span class="co">// John</span></a></code></pre></div>
+<p>这里主要的区别是，正常函数的 <code>this</code> 是可以在执行过程中被改变的，而箭头函数的 <code>this</code> 则会一直保持一致。所以在使用箭头函数的时候，你就不需要担心它的上下文被改变了。</p>
+<p>这在 React 的类组件里非常有用。如果你使用普通的函数来定义一个类方法，比如一个点击处理函数，然后你将这个点击处理函数通过 prop 的形式传递给子节点，你将必须在父组件的 <code>constroctor</code> 里使用 <code>fn.bind(this)</code> 的形式来确保该函数能正常工作。但是如果你使用箭头函数的话，你就不需要手动去绑定 <code>this</code> 了，因为箭头函数会自动绑定创建时的 <code>this</code>。</p>
+<p>(想看更好的演示以及示例代码，可以打开这篇文章: https://medium.com/<span class="citation" data-cites="machnicki/handle-events-in-react-with-arrow-functions-ede88184bbb">@machnicki/handle-events-in-react-with-arrow-functions-ede88184bbb</span>)</p>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="高阶函数higher-order的定义是什么">高阶函数（higher-order）的定义是什么？</h3>
+<p>高阶函数是将一个或多个函数作为参数的函数，它用于数据处理，也可能将函数作为返回结果。高阶函数是为了抽象一些重复执行的操作。一个典型的例子是<code>map</code>，它将一个数组和一个函数作为参数。<code>map</code>使用这个函数来转换数组中的每个元素，并返回一个包含转换后元素的新数组。JavaScript 中的其他常见示例是<code>forEach</code>、<code>filter</code>和<code>reduce</code>。高阶函数不仅需要操作数组的时候会用到，还有许多函数返回新函数的用例。<code>Function.prototype.bind</code>就是一个例子。</p>
+<p><strong>Map 示例：</strong></p>
+<p>假设我们有一个由名字组成的数组，我们需要将每个字符转换为大写字母。</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">const</span> names <span class="op">=</span> [<span class="st">&#39;irish&#39;</span><span class="op">,</span> <span class="st">&#39;daisy&#39;</span><span class="op">,</span> <span class="st">&#39;anna&#39;</span>]<span class="op">;</span></a></code></pre></div>
+<p>不使用高阶函数的方法是这样：</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">const</span> transformNamesToUppercase <span class="op">=</span> <span class="kw">function</span> (names) <span class="op">{</span></a>
+<a class="sourceLine" id="cb39-2" title="2">  <span class="kw">const</span> results <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb39-3" title="3">  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">names</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb39-4" title="4">    <span class="va">results</span>.<span class="at">push</span>(names[i].<span class="at">toUpperCase</span>())<span class="op">;</span></a>
+<a class="sourceLine" id="cb39-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb39-6" title="6">  <span class="cf">return</span> results<span class="op">;</span></a>
+<a class="sourceLine" id="cb39-7" title="7"><span class="op">};</span></a>
+<a class="sourceLine" id="cb39-8" title="8"><span class="at">transformNamesToUppercase</span>(names)<span class="op">;</span> <span class="co">// [&#39;IRISH&#39;, &#39;DAISY&#39;, &#39;ANNA&#39;]</span></a></code></pre></div>
+<p>使用<code>.map(transformerFn)</code>使代码更简明</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">const</span> transformNamesToUppercase <span class="op">=</span> <span class="kw">function</span> (names) <span class="op">{</span></a>
+<a class="sourceLine" id="cb40-2" title="2">  <span class="cf">return</span> <span class="va">names</span>.<span class="at">map</span>((name) <span class="kw">=&gt;</span> <span class="va">name</span>.<span class="at">toUpperCase</span>())<span class="op">;</span></a>
+<a class="sourceLine" id="cb40-3" title="3"><span class="op">};</span></a>
+<a class="sourceLine" id="cb40-4" title="4"><span class="at">transformNamesToUppercase</span>(names)<span class="op">;</span> <span class="co">// [&#39;IRISH&#39;, &#39;DAISY&#39;, &#39;ANNA&#39;]</span></a></code></pre></div>
+<h6 id="参考-34">参考</h6>
+<ul>
+<li>https://medium.com/javascript-scene/higher-order-functions-composing-software-5365cf2cbe99</li>
+<li>https://hackernoon.com/effective-functional-javascript-first-class-and-higher-order-functions-713fde8df50a</li>
+<li>https://eloquentjavascript.net/05_higher_order.html</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="请给出一个解构destructuring对象或数组的例子">请给出一个解构（destructuring）对象或数组的例子。</h3>
+<p>解构是 ES6 中新功能，它提供了一种简洁方便的方法来提取对象或数组的值，并将它们放入不同的变量中。</p>
+<p><strong>数组解构</strong></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb41-1" title="1"><span class="co">// 变量赋值</span></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="kw">const</span> foo <span class="op">=</span> [<span class="st">&#39;one&#39;</span><span class="op">,</span> <span class="st">&#39;two&#39;</span><span class="op">,</span> <span class="st">&#39;three&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb41-3" title="3"></a>
+<a class="sourceLine" id="cb41-4" title="4"><span class="kw">const</span> [one<span class="op">,</span> two<span class="op">,</span> three] <span class="op">=</span> foo<span class="op">;</span></a>
+<a class="sourceLine" id="cb41-5" title="5"><span class="va">console</span>.<span class="at">log</span>(one)<span class="op">;</span> <span class="co">// &quot;one&quot;</span></a>
+<a class="sourceLine" id="cb41-6" title="6"><span class="va">console</span>.<span class="at">log</span>(two)<span class="op">;</span> <span class="co">// &quot;two&quot;</span></a>
+<a class="sourceLine" id="cb41-7" title="7"><span class="va">console</span>.<span class="at">log</span>(three)<span class="op">;</span> <span class="co">// &quot;three&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb42-1" title="1"><span class="co">// 变量交换</span></a>
+<a class="sourceLine" id="cb42-2" title="2"><span class="kw">let</span> a <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb42-3" title="3"><span class="kw">let</span> b <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb42-4" title="4"></a>
+<a class="sourceLine" id="cb42-5" title="5">[a<span class="op">,</span> b] <span class="op">=</span> [b<span class="op">,</span> a]<span class="op">;</span></a>
+<a class="sourceLine" id="cb42-6" title="6"><span class="va">console</span>.<span class="at">log</span>(a)<span class="op">;</span> <span class="co">// 3</span></a>
+<a class="sourceLine" id="cb42-7" title="7"><span class="va">console</span>.<span class="at">log</span>(b)<span class="op">;</span> <span class="co">// 1</span></a></code></pre></div>
+<p><strong>对象解构</strong></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb43-1" title="1"><span class="co">// 变量赋值</span></a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="kw">const</span> o <span class="op">=</span> <span class="op">{</span><span class="dt">p</span><span class="op">:</span> <span class="dv">42</span><span class="op">,</span> <span class="dt">q</span><span class="op">:</span> <span class="kw">true</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="kw">const</span> <span class="op">{</span>p<span class="op">,</span> q<span class="op">}</span> <span class="op">=</span> o<span class="op">;</span></a>
+<a class="sourceLine" id="cb43-4" title="4"></a>
+<a class="sourceLine" id="cb43-5" title="5"><span class="va">console</span>.<span class="at">log</span>(p)<span class="op">;</span> <span class="co">// 42</span></a>
+<a class="sourceLine" id="cb43-6" title="6"><span class="va">console</span>.<span class="at">log</span>(q)<span class="op">;</span> <span class="co">// true</span></a></code></pre></div>
+<h6 id="参考-35">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment</li>
+<li>https://ponyfoo.com/articles/es6-destructuring-in-depth</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="es6-的模板字符串为生成字符串提供了很大的灵活性你可以举个例子吗">ES6 的模板字符串为生成字符串提供了很大的灵活性，你可以举个例子吗？</h3>
+<p><strong><em>模板字面量</em></strong>（Template literals） 是允许嵌入表达式的字符串字面量。你可以使用多行字符串和字符串插值功能。</p>
+<p><strong>语法</strong></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb44-1" title="1"><span class="vs">`string text``string text line 1</span></a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="vs"> string text line 2``string text </span><span class="sc">${</span>expression<span class="sc">}</span><span class="vs"> string text`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb44-3" title="3"></a>
+<a class="sourceLine" id="cb44-4" title="4">tag<span class="vs">`string text </span><span class="sc">${</span>expression<span class="sc">}</span><span class="vs"> string text`</span><span class="op">;</span></a></code></pre></div>
+<p><strong>示例</strong></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb45-1" title="1"><span class="va">console</span>.<span class="at">log</span>(<span class="vs">`string text line 1</span></a>
+<a class="sourceLine" id="cb45-2" title="2"><span class="vs">string text line 2`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb45-3" title="3"><span class="co">// &quot;string text line 1</span></a>
+<a class="sourceLine" id="cb45-4" title="4"><span class="co">// string text line 2&quot;</span></a>
+<a class="sourceLine" id="cb45-5" title="5"></a>
+<a class="sourceLine" id="cb45-6" title="6"><span class="kw">var</span> a <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-7" title="7"><span class="kw">var</span> b <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb45-8" title="8"><span class="va">console</span>.<span class="at">log</span>(<span class="vs">`Fifteen is </span><span class="sc">${</span>a <span class="op">+</span> b<span class="sc">}</span><span class="vs"> and</span><span class="sc">\n</span><span class="vs">not </span><span class="sc">${</span><span class="dv">2</span> <span class="op">*</span> a <span class="op">+</span> b<span class="sc">}</span><span class="vs">.`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb45-9" title="9"><span class="co">// &quot;Fifteen is 15 and</span></a>
+<a class="sourceLine" id="cb45-10" title="10"><span class="co">// not 20.&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb46-1" title="1"><span class="co">//show函数采用rest参数的写法如下：</span></a>
+<a class="sourceLine" id="cb46-2" title="2"></a>
+<a class="sourceLine" id="cb46-3" title="3"><span class="kw">let</span> name <span class="op">=</span> <span class="st">&#39;张三&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb46-4" title="4">  age <span class="op">=</span> <span class="dv">20</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb46-5" title="5">  message <span class="op">=</span> show<span class="vs">`我来给大家介绍:</span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">的年龄是</span><span class="sc">${</span>age<span class="sc">}</span><span class="vs">.`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb46-6" title="6"></a>
+<a class="sourceLine" id="cb46-7" title="7"><span class="kw">function</span> <span class="at">show</span>(stringArr<span class="op">,</span> ...<span class="at">values</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb46-8" title="8">  <span class="kw">let</span> output <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb46-9" title="9"></a>
+<a class="sourceLine" id="cb46-10" title="10">  <span class="kw">let</span> index <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb46-11" title="11"></a>
+<a class="sourceLine" id="cb46-12" title="12">  <span class="cf">for</span> (<span class="op">;</span> index <span class="op">&lt;</span> <span class="va">values</span>.<span class="at">length</span><span class="op">;</span> index<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb46-13" title="13">    output <span class="op">+=</span> stringArr[index] <span class="op">+</span> values[index]<span class="op">;</span></a>
+<a class="sourceLine" id="cb46-14" title="14">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb46-15" title="15"></a>
+<a class="sourceLine" id="cb46-16" title="16">  output <span class="op">+=</span> stringArr[index]<span class="op">;</span></a>
+<a class="sourceLine" id="cb46-17" title="17"></a>
+<a class="sourceLine" id="cb46-18" title="18">  <span class="cf">return</span> output<span class="op">;</span></a>
+<a class="sourceLine" id="cb46-19" title="19"><span class="op">}</span></a>
+<a class="sourceLine" id="cb46-20" title="20"></a>
+<a class="sourceLine" id="cb46-21" title="21">message<span class="op">;</span> <span class="co">//&quot;我来给大家介绍:张三的年龄是20.&quot;</span></a></code></pre></div>
+<h6 id="参考-36">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/template_strings</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="你能举出一个柯里化函数curry-function的例子吗它有哪些好处">你能举出一个柯里化函数（curry function）的例子吗？它有哪些好处？</h3>
+<p>柯里化（currying）是一种模式，其中具有多个参数的函数被分解为多个函数，当被串联调用时，将一次一个地累积所有需要的参数。这种技术帮助编写函数式风格的代码，使代码更易读、紧凑。值得注意的是，对于需要被 curry 的函数，它需要从一个函数开始，然后分解成一系列函数，每个函数都需要一个参数。</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">function</span> <span class="at">curry</span>(fn) <span class="op">{</span></a>
+<a class="sourceLine" id="cb47-2" title="2">  <span class="cf">if</span> (<span class="va">fn</span>.<span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb47-3" title="3">    <span class="cf">return</span> fn<span class="op">;</span></a>
+<a class="sourceLine" id="cb47-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb47-5" title="5"></a>
+<a class="sourceLine" id="cb47-6" title="6">  <span class="kw">function</span> <span class="at">_curried</span>(depth<span class="op">,</span> args) <span class="op">{</span></a>
+<a class="sourceLine" id="cb47-7" title="7">    <span class="cf">return</span> <span class="kw">function</span> (newArgument) <span class="op">{</span></a>
+<a class="sourceLine" id="cb47-8" title="8">      <span class="cf">if</span> (depth <span class="op">-</span> <span class="dv">1</span> <span class="op">===</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb47-9" title="9">        <span class="cf">return</span> <span class="at">fn</span>(...<span class="at">args</span><span class="op">,</span> newArgument)<span class="op">;</span></a>
+<a class="sourceLine" id="cb47-10" title="10">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb47-11" title="11">      <span class="cf">return</span> <span class="at">_curried</span>(depth <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> [...<span class="at">args</span><span class="op">,</span> newArgument])<span class="op">;</span></a>
+<a class="sourceLine" id="cb47-12" title="12">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb47-13" title="13">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb47-14" title="14"></a>
+<a class="sourceLine" id="cb47-15" title="15">  <span class="cf">return</span> <span class="at">_curried</span>(<span class="va">fn</span>.<span class="at">length</span><span class="op">,</span> [])<span class="op">;</span></a>
+<a class="sourceLine" id="cb47-16" title="16"><span class="op">}</span></a>
+<a class="sourceLine" id="cb47-17" title="17"></a>
+<a class="sourceLine" id="cb47-18" title="18"><span class="kw">function</span> <span class="at">add</span>(a<span class="op">,</span> b) <span class="op">{</span></a>
+<a class="sourceLine" id="cb47-19" title="19">  <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></a>
+<a class="sourceLine" id="cb47-20" title="20"><span class="op">}</span></a>
+<a class="sourceLine" id="cb47-21" title="21"></a>
+<a class="sourceLine" id="cb47-22" title="22"><span class="kw">var</span> curriedAdd <span class="op">=</span> <span class="at">curry</span>(add)<span class="op">;</span></a>
+<a class="sourceLine" id="cb47-23" title="23"><span class="kw">var</span> addFive <span class="op">=</span> <span class="at">curriedAdd</span>(<span class="dv">5</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb47-24" title="24"></a>
+<a class="sourceLine" id="cb47-25" title="25"><span class="kw">var</span> result <span class="op">=</span> [<span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>].<span class="at">map</span>(addFive)<span class="op">;</span> <span class="co">// [5, 6, 7, 8, 9, 10]</span></a></code></pre></div>
+<h6 id="参考-37">参考</h6>
+<ul>
+<li>https://hackernoon.com/currying-in-js-d9ddc64f162e</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="使用扩展运算符spread的好处是什么它与使用剩余参数语句rest有什么区别">使用扩展运算符（spread）的好处是什么，它与使用剩余参数语句（rest）有什么区别？</h3>
+<p>在函数泛型编码时，ES6 的扩展运算符非常有用，因为我们可以轻松创建数组和对象的拷贝，而无需使用<code>Object.create</code>、<code>slice</code>或其他函数库。这个语言特性在 Redux 和 RxJS 的项目中经常用到。</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">function</span> <span class="at">putDookieInAnyArray</span>(arr) <span class="op">{</span></a>
+<a class="sourceLine" id="cb48-2" title="2">  <span class="cf">return</span> [...<span class="at">arr</span><span class="op">,</span> <span class="st">&#39;dookie&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb48-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb48-4" title="4"></a>
+<a class="sourceLine" id="cb48-5" title="5"><span class="kw">const</span> result <span class="op">=</span> <span class="at">putDookieInAnyArray</span>([<span class="st">&#39;I&#39;</span><span class="op">,</span> <span class="st">&#39;really&#39;</span><span class="op">,</span> <span class="st">&quot;don&#39;t&quot;</span><span class="op">,</span> <span class="st">&#39;like&#39;</span>])<span class="op">;</span> <span class="co">// [&quot;I&quot;, &quot;really&quot;, &quot;don&#39;t&quot;, &quot;like&quot;, &quot;dookie&quot;]</span></a>
+<a class="sourceLine" id="cb48-6" title="6"></a>
+<a class="sourceLine" id="cb48-7" title="7"><span class="kw">const</span> person <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb48-8" title="8">  <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Todd&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb48-9" title="9">  <span class="dt">age</span><span class="op">:</span> <span class="dv">29</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb48-10" title="10"><span class="op">};</span></a>
+<a class="sourceLine" id="cb48-11" title="11"></a>
+<a class="sourceLine" id="cb48-12" title="12"><span class="kw">const</span> copyOfTodd <span class="op">=</span> <span class="op">{</span>...<span class="at">person</span><span class="op">};</span></a></code></pre></div>
+<p>ES6 的剩余参数语句提供了一个简写，允许我们将不定数量的参数表示为一个数组。它就像是扩展运算符语法的反面，将数据收集到数组中，而不是解构数组。剩余参数语句在函数参数、数组和对象的解构赋值中有很大作用。</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">function</span> <span class="at">addFiveToABunchOfNumbers</span>(...<span class="at">numbers</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb49-2" title="2">  <span class="cf">return</span> <span class="va">numbers</span>.<span class="at">map</span>((x) <span class="kw">=&gt;</span> x <span class="op">+</span> <span class="dv">5</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb49-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb49-4" title="4"></a>
+<a class="sourceLine" id="cb49-5" title="5"><span class="kw">const</span> result <span class="op">=</span> <span class="at">addFiveToABunchOfNumbers</span>(<span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span> <span class="co">// [9, 10, 11, 12, 13, 14, 15]</span></a>
+<a class="sourceLine" id="cb49-6" title="6"></a>
+<a class="sourceLine" id="cb49-7" title="7"><span class="kw">const</span> [a<span class="op">,</span> b<span class="op">,</span> ...<span class="at">rest</span>] <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span>]<span class="op">;</span> <span class="co">// a: 1, b: 2, rest: [3, 4]</span></a>
+<a class="sourceLine" id="cb49-8" title="8"></a>
+<a class="sourceLine" id="cb49-9" title="9"><span class="kw">const</span> <span class="op">{</span>e<span class="op">,</span> f<span class="op">,</span> ...<span class="at">others</span><span class="op">}</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb49-10" title="10">  <span class="dt">e</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb49-11" title="11">  <span class="dt">f</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb49-12" title="12">  <span class="dt">g</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb49-13" title="13">  <span class="dt">h</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb49-14" title="14"><span class="op">};</span> <span class="co">// e: 1, f: 2, others: { g: 3, h: 4 }</span></a></code></pre></div>
+<h6 id="参考-38">参考</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="如何在文件之间共用代码">如何在文件之间共用代码？</h3>
+<p>这取决于执行 JavaScript 的环境。</p>
+<p>在客户端（浏览器环境）上，只要变量或函数在全局作用域（<code>window</code>）中声明，所有脚本都可以引用它们。或者，通过 RequireJS 采用异步模块定义（AMD）以获得更多模块化方法。</p>
+<p>在服务器（Node.js）上，常用的方法是使用 CommonJS。每个文件都被视为一个模块，可以通过将它们附加到<code>module.exports</code>对象来导出变量和函数。</p>
+<p>ES2015 定义了一个模块语法，旨在替换 AMD 和 CommonJS。 这最终将在浏览器和 Node 环境中得到支持。</p>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h6 id="参考-39">参考</h6>
+<ul>
+<li>http://requirejs.org/docs/whyamd.html</li>
+<li>https://nodejs.org/docs/latest/api/modules.html</li>
+<li>http://2ality.com/2014/09/es6-modules-final.html</li>
+</ul>
+<h3 id="什么情况下会用到静态类成员">什么情况下会用到静态类成员？</h3>
+<p>静态类成员（属性或方法）不绑定到某个类的特定实例，不管哪个实例引用它，都具有相同的值。静态属性通常是配置变量，而静态方法通常是纯粹的实用函数，不依赖于实例的状态。</p>
+<h6 id="参考-40">参考</h6>
+<ul>
+<li>https://stackoverflow.com/questions/21155438/when-to-use-static-variables-methods-and-when-to-use-instance-variables-methods</li>
+</ul>
+<p><a href="#目录">[↑] 回到顶部</a></p>
+<h3 id="其他答案">其他答案</h3>
+<ul>
+<li>http://flowerszhong.github.io/2013/11/20/javascript-questions.html</li>
+</ul>
+</body>
+</html>

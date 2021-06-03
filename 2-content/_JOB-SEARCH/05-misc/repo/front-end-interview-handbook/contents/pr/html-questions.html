@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Perguntas de HTML</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Perguntas de HTML</h1>
+</header>
+<p>Respostas a <a href="https://github.com/h5bp/Front-end-Developer-Interview-Questions/blob/master/src/questions/Índice.md">Front-end Job Interview Questions - HTML Questions</a>. Os pedidos de sugestões e correções são bem-vindos!</p>
+<h2 id="índice">Índice</h2>
+<ul>
+<li><a href="#what-does-a-doctype-do">O que faz um doctype?</a></li>
+<li><a href="#how-do-you-serve-a-page-with-content-in-multiple-languages">Como é que tu serves uma página com conteúdo em vários idiomas?</a></li>
+<li><a href="#what-kind-of-things-must-you-be-wary-of-when-designing-or-developing-for-multilingual-sites">Que tipo de coisas tu deves desconfiar ao projetar ou desenvolver sites multilíngues?</a></li>
+<li><a href="#what-are-data--attributes-good-for">Quais são os atributos <code>data-</code> bons para?</a></li>
+<li><a href="#consider-html5-as-an-open-web-platform-what-are-the-building-blocks-of-html5">Considera HTML5 como uma plataforma aberta. Quais são os blocos de construção do HTML5?</a></li>
+<li><a href="#describe-the-difference-between-a-cookie-sessionstorage-and-localstorage">Descreve a diferença entre uma <code>cookie</code>, <code>sessionStorage</code> e <code>localStorage</code>.</a></li>
+<li><a href="#describe-the-difference-between-script-script-async-and-script-defer">Descreva a diferença entre <code>&lt;script&gt;</code>, <code>&lt;script async&gt;</code> e <code>&lt;script defer&gt;</code>.</a></li>
+<li><a href="#why-is-it-generally-a-good-idea-to-position-css-links-between-headhead-and-js-scripts-just-before-body-do-you-know-any-exceptions">Why is it generally a good idea to position CSS <code>&lt;link&gt;</code>s between <code>&lt;head&gt;&lt;/head&gt;</code> and JS <code>&lt;script&gt;</code>s just before <code>&lt;/body&gt;</code>? Do you know any exceptions?</a></li>
+<li><a href="#what-is-progressive-rendering">O que é a renderização progressiva?</a></li>
+<li><a href="#why-you-would-use-a-srcset-attribute-in-an-image-tag-explain-the-process-the-browser-uses-when-evaluating-the-content-of-this-attribute">Por que usarias um atributo <code>srcset</code> numa etiqueta de imagem? Explica o processo que o navegador usa ao avaliar o conteúdo deste atributo</a></li>
+<li><a href="#have-you-used-different-html-templating-languages-before">Tu já usaste diferentes linguagens de modelos de HTML antes?</a></li>
+</ul>
+<h3 id="o-que-faz-um-doctype">O que faz um <code>DOCTYPE</code>?</h3>
+<p><code>DOCTYPE</code> é uma abreviatura para “tipo de documento”. É uma declaração usada em HTML para distinguir entre o modo de padrões e <a href="https://quirks.spec.whatwg.org/#history">modo peculiar</a>. A sua presença diz ao navegador para renderizar a página da web no modo padrão.</p>
+<p>Moral da história - apenas adiciona <code>&lt;!DOCTYPE html&gt;</code> no início da sua página.</p>
+<h6 id="referências">Referências</h6>
+<ul>
+<li>https://stackoverflow.com/questions/7695044/what-does-doctype-html-do</li>
+<li>https://www.w3.org/QA/Tips/Doctype</li>
+<li>https://quirks.spec.whatwg.org/#history</li>
+</ul>
+<p><a href="#Índice">[↑] De volta ao topo</a></p>
+<h3 id="como-é-que-tu-serves-uma-página-com-conteúdo-em-vários-idiomas">Como é que tu serves uma página com conteúdo em vários idiomas?</h3>
+<p>A questão é um pouco vaga, eu vou assumir que está a perguntar sobre o caso mais comum, que é como servir uma página com conteúdo disponível em vários idiomas, mas o conteúdo dentro da página deve ser exibido somente num idioma consistente.</p>
+<p>Quando uma solicitação HTTP é feita para um servidor, o agente de utilizador pedido geralmente envia informações sobre as preferências de idioma, como no cabeçalho <code>Aceitar-Idioma</code>. O servidor pode então usar estas informações para retornar uma versão do documento no idioma apropriado, caso tal alternativa esteja disponível. O documento HTML retornado também deve declarar o atributo<code>lang</code>na marca<code>&lt;html&gt;</code>, como<code>&lt;html lang="en"&gt;...&lt;/html&gt;</code>.</p>
+<p>Na parte de trás, a marcação HTML irá conter espaços reservados <code>i18n</code> e conteúdo para o idioma específico armazenado nos formatos YML ou JSON. O servidor, em seguida, gera dinamicamente a página HTML com conteúdo nesse idioma específico, geralmente com a ajuda de uma estrutura de back-end.</p>
+<h6 id="referências-1">Referências</h6>
+<ul>
+<li>https://www.w3.org/International/getting-started/language</li>
+</ul>
+<p><a href="#Índice">[↑] De volta ao topo</a></p>
+<h3 id="que-tipo-de-coisas-tuvocê-deves-desconfiar-ao-projetar-ou-desenvolver-sites-multilíngues">Que tipo de coisas tuvocê deves desconfiar ao projetar ou desenvolver sites multilíngues?</h3>
+<ul>
+<li>Usa atributos <code>lang</code> a tua HTML.</li>
+<li>Direccionando os de utilizadores para o teu idioma nativo - Permite que um utilizador mude facilmente o seu país/idioma sem problemas.</li>
+<li>O texto em imagens não é uma abordagem escalável - Colocar texto numa imagem ainda é uma maneira popular de obter fontes bonitas e sem sistema para serem exibidas em qualquer computador. No entanto, para traduzir o texto da imagem, cada sequência de texto precisará de ter uma imagem separada criada para cada idioma. Qualquer coisa mais do que um punhado de substituições como esta podem rapidamente sair do controle.</li>
+<li>Palavras restritas/comprimento da frase - Alguns conteúdos podem ser mais longos quando escritos num outro idioma. Desconfie de problemas de layout ou transbordamento no design. É melhor evitar projetar onde a quantidade de texto faria ou partisse um projeto. As contagens de personagens entram no jogo com coisas como manchetes, rótulos e botões. Eles são um menor problema com o texto livre, como texto corporativo ou comentários.</li>
+<li>Lembra-te de como as cores são percebidas - As cores são percebidas de maneira diferente em línguas e culturas. O design deve usar a cor adequadamente.</li>
+<li>Formatar datas e moedas - As datas do calendário são por vezes apresentadas de diferentes maneiras. Por exemplo. “31 de maio de 2012” nos EUA versus “31 de maio de 2012” em partes da Europa.</li>
+<li>Não concatene as cordas traduzidas - Não faças nada como <code>"A data hoje é" + data</code>. Ele vai partir em idiomas com diferentes ordens de palavras. Usa uma string de modelo com substituição de parâmetros para cada idioma. Por exemplo, vê as duas frases seguintes em inglês e chinês, respectivamente: <code>I will travel on {% date %}</code> e <code>{% date %} 我会出发</code>. Observa que a posição da variável é diferente devido às regras da gramática do idioma.</li>
+<li>Direção da leitura de idioma - Em inglês, lemos da esquerda para a direita, de cima para baixo, em japonês tradicional, o texto é lido de cima para baixo, da direita para a esquerda.</li>
+</ul>
+<h6 id="referências-2">Referências</h6>
+<ul>
+<li>https://www.quora.com/What-kind-of-things-one-should-be-wary-of-when-designing-or-developing-for-multilingual-sites</li>
+</ul>
+<p><a href="#Índice">[↑] De volta ao topo</a></p>
+<h3 id="para-que-são-bons-os-atributos-data-">Para que são bons os atributos <code>data-</code>?</h3>
+<p>Antes que os frameworks JavaScript se tornassem populares, os desenvolvedores front-end usavam atributos <code>data-</code> para armazenar dados extras dentro do próprio DOM, sem outros hacks, como atributos não-padrão, propriedades extras no DOM. É destinado a armazenar dados personalizados privados para a página ou aplicativo, para os quais não há mais atributos ou elementos apropriados.</p>
+<p>Atualmente, o uso dos atributos <code>data-</code> não é encorajado. Uma das razões é que os utilizadores podem modificar o atributo de dados facilmente usando o elemento de inspeção no navegador. O modelo de dados é melhor armazenado dentro do próprio JavaScript e permaneça atualizado com o DOM via ligação de dados possivelmente através de uma biblioteca ou uma estrutura.</p>
+<h6 id="referências-3">Referências</h6>
+<ul>
+<li>http://html5doctor.com/html5-custom-data-attributes/</li>
+<li>https://www.w3.org/TR/html5/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes</li>
+</ul>
+<p><a href="#Índice">[↑] De volta ao topo</a></p>
+<h3 id="considera-html5-como-uma-plataforma-aberta.-quais-são-os-blocos-de-construção-do-html5">Considera HTML5 como uma plataforma aberta. Quais são os blocos de construção do HTML5?</h3>
+<ul>
+<li>Semântica - Permite que tu descrevas mais precisamente o que é o teu conteúdo.</li>
+<li>Conectividade - Permite que tu comuniques com o servidor de formas novas e inovadoras.</li>
+<li>Offline e armazenamento - Permite que as páginas da Web armazenem dados no lado do cliente localmente e funcionem offline de forma mais eficiente.</li>
+<li>Multimédia - Criar vídeo e áudio de primeira classe cidadãos na Open Web.</li>
+<li>Gráficos e efeitos 2D/3D - Permitir uma gama muito mais diversificada de opções de apresentação.</li>
+<li>Desempenho e integração - Fornecer maior optimização da velocidade e melhor uso do hardware do computador.</li>
+<li>Acesso ao dispositivo - Permitir o uso de vários dispositivos de entrada e saída.</li>
+<li>Styling - Permitir que os autores escrevam temas mais sofisticados.</li>
+</ul>
+<h6 id="referências-4">Referências</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5</li>
+</ul>
+<p><a href="#Índice">[↑] De volta ao topo</a></p>
+<h3 id="descreve-a-diferença-entre-uma-cookiesessionstorage-e-localstorage.">Descreve a diferença entre uma <code>cookie</code>,<code>sessionStorage</code> e <code>localStorage</code>.</h3>
+<p>Todas as tecnologias acima mencionadas são mecanismos de armazenamento de valor-chave do lado do cliente. Eles só conseguem armazenar valores como strings.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><code>cookie</code></th>
+<th><code>localStorage</code></th>
+<th><code>sessionStorage</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Iniciador</td>
+<td>Cliente ou servidor. Pode usar cabeçalho <code>Set-Cookie</code></td>
+<td>Cliente</td>
+<td>Cliente</td>
+</tr>
+<tr class="even">
+<td>Expira</td>
+<td>Definir manualmente</td>
+<td>Para sempre</td>
+<td>Na aba fechar</td>
+</tr>
+<tr class="odd">
+<td>Persiste em todas sessões do navegador</td>
+<td>Depende de se o tempo de validade está configurado</td>
+<td>Sim</td>
+<td>Não</td>
+</tr>
+<tr class="even">
+<td>Tem um domínio associado</td>
+<td>Sim</td>
+<td>Não</td>
+<td>Não</td>
+</tr>
+<tr class="odd">
+<td>Enviado para servidor com cada solicitação HTTP</td>
+<td>Os cookies são automaticamente enviados através do cabeçalho <code>Cookie</code></td>
+<td>Não</td>
+<td>Não</td>
+</tr>
+<tr class="even">
+<td>Capacidade (por domínio)</td>
+<td>4kb</td>
+<td>5MB</td>
+<td>5MB</td>
+</tr>
+<tr class="odd">
+<td>Acessibilidade</td>
+<td>Qualquer janela</td>
+<td>Qualquer janela</td>
+<td>A mesma aba</td>
+</tr>
+</tbody>
+</table>
+<h6 id="referências-5">Referências</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies</li>
+<li>http://tutorial.techaltum.com/local-and-session-storage.html</li>
+</ul>
+<p><a href="#Índice">[↑] De volta ao topo</a></p>
+<h3 id="descreve-a-diferença-entre-script-script-async-e-script-defer.">Descreve a diferença entre <code>&lt;script&gt;</code>, <code>&lt;script async&gt;</code> e <code>&lt;script defer&gt;</code>.</h3>
+<ul>
+<li><code>&lt;script&gt;</code> - A análise HTML é bloqueada, o script é executado e executado imediatamente, a análise HTML é retomada após o script ser executado.</li>
+<li><p><code>&lt;script async&gt;</code> - O script será procurado em paralelo com a análise HTML e executado assim que estiver disponível (potencialmente antes da análise HTML). Usa <code>async</code> quando o script for independente de qualquer outro script na página, por exemplo, analítica.</p></li>
+<li><p><code>&lt;script defer&gt;</code> - O script será procurado em paralelo com a análise de HTML e executado quando a página terminar de analisar. Se houver vários deles, cada script diferido é executado na ordem em que foram encontrados no documento. Se um script depende de um DOM totalmente analisado, o atributo <code>defer</code> será útil para garantir que o HTML seja totalmente analisado antes de o executar. Não há muita diferença em colocar um <code>&lt;script&gt;</code>normal no final de<code>&lt;body&gt;</code>. Um script diferido não deve conter<code>document.write</code>.</p></li>
+</ul>
+<p>Nota: Os atributos <code>async</code> e<code>defer`` são ignorados para scripts que não possuem atributo</code>src`.</p>
+<h6 id="referências-6">Referências</h6>
+<ul>
+<li>http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html</li>
+<li>https://stackoverflow.com/questions/10808109/script-tag-async-defer</li>
+<li>https://bitsofco.de/async-vs-defer/</li>
+</ul>
+<p><a href="#Índice">[↑] De volta ao topo</a></p>
+<h3 id="por-que-é-geralmente-uma-boa-ideia-posicionar-o-css-links-entre-headhead-e-js-scripts-antes-de-body-tu-conheces-alguma-exceção">Por que é geralmente uma boa ideia posicionar o CSS <code>&lt;link&gt;</code>s entre <code>&lt;head&gt;&lt;/head&gt;</code> e JS <code>&lt;script&gt;</code>s antes de <code>&lt;/body&gt;</code>? Tu conheces alguma exceção?</h3>
+<p><strong>Colocar <code>&lt;link&gt;</code>s no <code>&lt;head&gt;</code></strong></p>
+<p>Colocar <code>&lt;link&gt;</code>s na cabeça faz parte da especificação. Além disso, colocar na parte superior permite que a página seja processada progressivamente, o que melhora a experiência do utilizador. O problema com a colocação de folhas de estilo perto da parte inferior do documento é que ele proíbe a renderização progressiva em muitos navegadores, incluindo o Internet Explorer. Alguns navegadores bloqueiam a renderização para evitar ter que pintar elementos da página se os seus estilos mudarem. O utilizador está preso a ver uma página branca em branco. Evita o flash de conteúdo não esmagado.</p>
+<p><strong>Colocar <code>&lt;script&gt;</code>s pouco antes de <code>&lt;/body&gt;</code></strong></p>
+<p><code>&lt;script&gt;</code>s bloqueia a análise HTML enquanto eles estão a ser descarregados e executados. Fazer o download dos scripts na parte inferior permitirá que o HTML seja analisado e mostrado em primeiro ao utilizador.</p>
+<p>Uma exceção para o posicionamento de <code>&lt;script&gt;</code>s na parte inferior é quando o teu script contém <code>document.write ()</code>, mas nos dias de hoje não é uma boa prática usar <code>document.write ()</code>. Além disso, colocar <code>&lt;script&gt;</code>s na parte inferior significa que o navegador não pode começar a descarregar os scripts até que o documento inteiro seja analisado. Uma solução possível é colocar <code>&lt;script&gt;</code> no <code>&lt;head&gt;</code> e usar o atributo `defer``</p>
+<h6 id="referências-7">Referências</h6>
+<ul>
+<li>https://developer.yahoo.com/performance/rules.html#css_top</li>
+</ul>
+<p><a href="#Índice">[↑] De volta ao topo</a></p>
+<h3 id="o-que-é-a-renderização-progressiva">O que é a renderização progressiva?</h3>
+<p>A renderização progressiva é o nome dado às técnicas utilizadas para melhorar o desempenho de uma página web (em particular, melhorar o tempo de carregamento percebido) para renderizar o conteúdo para a sua exibição o mais rápido possível.</p>
+<p>Ele costumava ser muito mais prevalecente nos dias que antecedem a internet de banda larga, mas ainda é útil no desenvolvimento moderno, pois as conexões de dados móveis estão a tornar-se cada vez mais populares (e não confiáveis)!</p>
+<p>Exemplos de tais técnicas:</p>
+<ul>
+<li>O carregamento preguiçoso de imagens - As imagens na página não são carregadas de uma só vez. O JavaScript será usado para carregar uma imagem quando o utilizador rolar para a parte da página que mostra a imagem.</li>
+<li>Priorizando o conteúdo visível (ou a renderização acima da dobra) - Inclua apenas o CSS/conteúdo/scripts mínimos necessários para a quantidade de página que será processada no navegador de primeiros utilizadores para exibir o mais rápido possível, tu podes usar o diferido scripts ou ouve o evento <code>DOMContentLoaded</code>/<code>load</code> para carregar os outros recursos e conteúdo.</li>
+<li>Fragmentos HTML Async - Peças de lavagem do HTML para o navegador à medida que a página é construída na parte traseira. Mais detalhes sobre a técnica podem ser encontrados <a href="http://www.ebaytechblog.com/2014/12/08/async-fragments-rediscovering-progressive-html-rendering-with-marko/">aqui</a>.</li>
+</ul>
+<h6 id="referências-8">Referências</h6>
+<ul>
+<li>https://stackoverflow.com/questions/33651166/what-is-progressive-rendering</li>
+<li>http://www.ebaytechblog.com/2014/12/08/async-fragments-rediscovering-progressive-html-rendering-with-marko/</li>
+</ul>
+<p><a href="#Índice">[↑] De volta ao topo</a></p>
+<h3 id="por-que-usarias-um-atributo-srcset-numa-tag-de-imagem-explica-o-processo-que-o-navegador-usa-ao-avaliar-o-conteúdo-deste-atributo.">Por que usarias um atributo <code>srcset</code> numa tag de imagem? Explica o processo que o navegador usa ao avaliar o conteúdo deste atributo.</h3>
+<p>Tu usarias o atributo <code>srcset</code> quando quiseres exibir imagens diferentes para os utilizadores, dependendo da largura do ecrã do dispositivo - mostrar imagens de qualidade superior para dispositivos com display de retina aumenta a experiência do utilizador enquanto fornece imagens de baixa resolução para dispositivos de baixo custo aumentam o desempenho e diminuem o desperdício de dados (porque servir uma imagem maior não terá nenhuma diferença visível). Por exemplo: <code>&lt;img srcset="small.jpg 500w, medium.jpg 1000w, large.jpg 2000w" src="..." alt=""&gt;</code> diz ao navegador para mostrar o pequeno, médio ou grande <code>.jpg</code> gráfico dependendo da resolução do cliente. O primeiro valor é o nome da imagem e o segundo é a largura da imagem em pixels. Para uma largura de dispositivo de 320px, os seguintes cálculos são feitos:</p>
+<ul>
+<li>500 / 320 = 1.5625</li>
+<li>1000 / 320 = 3.125</li>
+<li>2000 / 320 = 6.25</li>
+</ul>
+<p>Se a resolução do cliente for 1x, 1.5625 é o mais próximo, e <code>500w</code> corresponde a <code>small.jpg</code> será selecionado pelo navegador.</p>
+<p>Se a resolução for retina (2x), o navegador usará a resolução mais próxima acima do mínimo. O que significa que não escolherá o 500w (1.5625) porque é maior que 1 e a imagem pode parecer de má qualidade. O navegador escolheria então a imagem com uma razão resultante mais próxima de 2 que é 1000w (3.125).</p>
+<p><code>srcset</code>s resolve o problema pelo qual tu queres servir arquivos de imagem menores para estreitar dispositivos de ecrã, pois eles não precisam de imagens enormes, como monitores de desktop - e também opcionalmente que tu queres servir imagens de resolução diferentes para ecrãs de alta densidade/baixa densidade.</p>
+<h6 id="referências-9">Referências</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images</li>
+<li>https://css-tricks.com/responsive-images-youre-just-changing-resolutions-use-srcset/</li>
+</ul>
+<p><a href="#Índice">[↑] De volta ao topo</a></p>
+<h3 id="tu-já-usaste-antes-diferentes-linguagens-de-modelos-de-html">Tu já usaste antes diferentes linguagens de modelos de HTML?</h3>
+<p>Sim, Pug (anteriormente Jade), ERB, Slim, Handlebars, Jinja, Liquid, apenas para citar alguns. Na minha opinião, eles são mais ou menos o mesmo e oferecem funcionalidades semelhantes de conteúdo de escape e filtros úteis para manipular os dados a serem exibidos. A maioria dos modelos de modelos também permitirá que injetes teus próprios filtros no caso de precisares de processamento personalizado antes da exibição.</p>
+<p><a href="#Índice">[↑] De volta ao topo</a></p>
+<h3 id="outras-respostas">Outras respostas</h3>
+<ul>
+<li>https://neal.codes/blog/front-end-interview-questions-html/</li>
+<li>http://peterdoes.it/2015/12/03/a-personal-exercise-front-end-job-interview-questions-and-my-answers-all/</li>
+</ul>
+</body>
+</html>

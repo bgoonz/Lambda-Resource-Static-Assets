@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Fragen zu HTML</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Fragen zu HTML</h1>
+</header>
+<p>Antworten auf <a href="https://github.com/h5bp/Front-end-Developer-Interview-Questions/blob/master/src/questions/html-questions.md">Front-end Job Interview Questions - HTML Questions</a>. Pull requests for suggestions and corrections are welcome!</p>
+<h2 id="inhaltsverzeichnis">Inhaltsverzeichnis</h2>
+<!-- Achtung: Übersetzung der Überschriften zum Teil von hier:
+https://github.com/h5bp/Front-end-Developer-Interview-Questions/blob/master/src/questions/html-questions.md
+ -->
+<ul>
+<li><a href="#was-tut-ein-doctype">Was tut ein <code>doctype</code> und wie viele von ihnen kannst du benennen?</a></li>
+<li><a href="#wie-lieferst-du-eine-seite-mit-inhalten-in-verschiedenen-sprachen-aus">Wie lieferst du eine Seite mit Inhalten in verschiedenen Sprachen aus?</a></li>
+<li><a href="#vor-welchen-dingen-solltest-du-dich-hüten-wenn-du-mehrsprachige-websites-designst-oder-entwickelst">Vor welchen Dingen solltest du dich hüten, wenn du mehrsprachige Websites designst oder entwickelst?</a></li>
+<li><a href="#wofür-sind-data--attribute-nützlich">Wofür sind <code>data--Attribute</code> nützlich?</a></li>
+<li><a href="#stelle-dir-html5-als-eine-offene-internetplattform-vor-was-sind-die-basiskomponenten-von-html5">Stelle dir HTML5 als eine offene Internetplattform vor. Was sind die Basiskomponenten von HTML5?</a></li>
+<li><a href="#beschreibe-die-unterschiede-zwischen-cookies-sessionstorage-und-localstorage">Beschreibe die Unterschiede zwischen <code>Cookies</code>, <code>sessionStorage</code> und <code>localStorage</code>.</a></li>
+<li><a href="#beschreibe-die-unterschiede-zwischen-script-script-async-und-script-defer">Beschreibe die Unterschiedie zwischen <code>&lt;script&gt;</code>, <code>&lt;script async&gt;</code> und <code>&lt;script defer&gt;</code>.</a></li>
+<li><a href="#warum-ist-es-eine-gute-idee-die-links-zum-css-stylesheet-inneralb-der-head-head-tags-zu-platzieren-und-die-js-scripts-direkt-vorm-body-einzubinden-würdest-du-ausnwahmen-machen">Warum ist es eine gute Idee, die <code>&lt;link&gt;</code>s zum CSS-Stylesheet inneralb der <code>&lt;head&gt;&lt;/head&gt;</code> Tags zu platzieren und die JS <code>&lt;script&gt;</code>s direkt vorm <code>&lt;/body&gt;</code> einzubinden? Würdest du Ausnahmen machen?</a></li>
+<li><a href="#was-ist-progressives-rendern">Was ist progressives Rendern?</a></li>
+<li><a href="#warum-würdest-du-ein-srcset-attribute-in-ein-image-tag-einsetzen-erkläre-wie-der-browser-bei-der-auswertung-des-inhalts-dieses-attributs-vorgeht">Warum würdest du ein <code>srcset</code> Attribut in ein image tag setzen? Erkläre wie der Browser den Inhalt dieses Attributs auswertet.</a></li>
+<li><a href="#hast-du-erfahrungen-mit-unterschiedlichen-html-templating-languages-gemacht">Hast du Erfahrungen mit unterschiedlichen HTML templating languages gemacht?</a></li>
+</ul>
+<h3 id="was-tut-ein-doctype">Was tut ein doctype?</h3>
+<p><strong>DOCTYPE</strong> ist eine Abkürzung für <strong>DOCument TYPE</strong>. Jeder DOCTYPE ist immer mit einer <strong>DTD</strong> - verbunden, einer <strong>Document Type Definition</strong>.</p>
+<p>Eine DTD legt fest, wie ein Dokument eines bestimmten Typs strukturiert ist (d.h. ein <code>button</code> kann ein <code>span</code> enthalten, aber kein<code>div</code>), ein DOCTYPE hingegen erklärt, welche DTD ein Dokument <em>vermutlich</em> akzeptiert (d.h. dieses Dokument akzeptiert eine HTML DTD).</p>
+<p>Webseiten benötigen die Ausweisung im jeweiligen DOCTYPE. User Agents erkennen so, welche Version der HTML-Spezifikationen das Dokument akzeptiert. Sobald ein User Agent ein korrektes DOCTYPE erkannt hat, löst es den <strong>no-quirks mode</strong> aus, das dem jeweiligen DOCTYPE entspricht. Wenn der User Agent kein korrektes DOCTYPE erkennt, löst er den <strong>quirks mode</strong> aus.</p>
+<!-- DOCTYPE declaration = DOCTYPE Spezifikation? -->
+<p>Die DOCTYPE Spezifikation für den HTML5 Standard ist <code>&lt;!DOCTYPE html&gt;</code>.</p>
+<h6 id="referenzen">Referenzen</h6>
+<ul>
+<li>https://html.spec.whatwg.org/multipage/syntax.html#the-doctype</li>
+<li>https://html.spec.whatwg.org/multipage/xhtml.html</li>
+<li>https://quirks.spec.whatwg.org/</li>
+</ul>
+<p><a href="#inhaltsverzeichnis">[↑] Back to top</a></p>
+<h3 id="wie-lieferst-du-eine-seite-mit-inhalten-in-verschiedenen-sprachen-aus">Wie lieferst du eine Seite mit Inhalten in verschiedenen Sprachen aus?</h3>
+<p>Ich gehe davon aus, dass es sich um den häufigsten Fall handelt: Wie kann eine Seite mit Inhalten bedient werden, die in mehreren Sprachen verfügbar ist. Dabei soll der Inhalt innerhalb der Seite nur in einer konsistenten Sprache angezeigt werden.</p>
+<p>Wenn ein Server eine HTTP-Anforderung erhält, sendet der anfordernde User Agent normalerweise Informationen über Sprachpräferenzen, die z.B. im <code>Accept-Language</code>-Header definiert sind. Der Server kann dann diese Informationen verwenden, um eine Version des Dokuments in der entsprechenden Sprache zurückzugeben, wenn eine solche Alternative verfügbar ist. Das zurückgegebene HTML-Dokument sollte auch das <code>lang</code>-Attribut im <code>&lt;html&gt;</code>-Tag deklarieren, wie z.B. <code>&lt;html lang="en"&gt;...&lt;/html&gt;</code>.</p>
+<!-- Bitte prüfen -->
+<p>Da es keinen Sinn ergibt, eine Suchmaschine wissen zu lassen, dass der gleiche Inhalt in verschiedenen Sprachen erhältlich ist, solltest du das <code>hreflang</code> Attribute im <code>&lt;head&gt;</code> setzen. D.h <code>&lt;link rel="alternate" hreflang="de" href="http://de.example.com/page.html" /&gt;</code></p>
+<p>Im Backend enthält das HTML-Markup `i18n’-Platzhalter und Inhalte für die jeweilige Sprache, die im YML- oder JSON-Format gespeichert sind. Der Server generiert dann dynamisch die HTML-Seite mit Inhalt in dieser speziellen Sprache, normalerweise mit Hilfe eines Backend-Frameworks.</p>
+<h6 id="referenzen-1">Referenzen</h6>
+<ul>
+<li>https://www.w3.org/International/getting-started/language</li>
+<li>https://support.google.com/webmasters/answer/189077</li>
+</ul>
+<p><a href="#inhaltsverzeichnis">[↑] Back to top</a></p>
+<h3 id="vor-welchen-dingen-solltest-du-dich-hüten-wenn-du-mehrsprachige-websites-designst-oder-entwickelst">Vor welchen Dingen solltest du dich hüten, wenn du mehrsprachige Websites designst oder entwickelst?</h3>
+<ul>
+<li>Setze im HTML das <code>lang</code> Attribut.</li>
+<li>Erlauben Sie einem Benutzer, sein Land/seine Sprache einfach und problemlos zu ändern.</li>
+<li>Text in rasterbasierten Bildern (z.B. png, gif, jpg, etc.) auszuliefern, ist kein skalierbarer Ansatz. Dabei ist das Platzieren von Texten in Bildern immer noch eine beliebte Methode, um gut aussehende, nicht systemgebundene Schriftarten auf jedem Computer anzuzeigen. In diesem Fall muss aber für jeder auszuliefernde Sprache ein eigenes mit der entsprechenden Textzeichenfolge erstellt werden. Alles, was über eine Handvoll solcher Ersetzungen hinausgeht, kann schnell außer Kontrolle geraten.</li>
+<li>Restriktive Wort-/Satzlänge - Manche Inhalte können länger sein, wenn sie in einer anderen Sprache geschrieben sind. Sei vorsichtig bei Layout- oder Überlaufproblemen im Design. Besondere Aufemerksamkeit ist prominenten Elementen wie Überschriften, Beschriftungen und Schaltflächen zu widmen, das hier sich ändernde Zeilenlängen schnell Überläufe bilden können. Frei fließender Text wie Fließtext oder Kommentartext ist weniger problematisch.</li>
+<li>Achte darauf, wie Farben wahrgenommen werden - Farben werden je nach Sprache und Kultur unterschiedlich wahrgenommen. Das Design sollte das berücksichtigen.</li>
+<li><p>Formatierung von Daten und Währungen - Kalenderdaten werden unterschiedlich dargestellt. Z.B. “31. Mai 2012” in den USA vs. “31. Mai 2012” in Teilen Europas.</p></li>
+<li>Verketten Sie keine übersetzten Zeichenketten - Machen Sie nichts wie <code>"Das heutige Datum ist " + date</code>. So ein Konstrukt funktioniert in einer Sprache mit einer anderen Wortstellung nicht. Verwende stattdessen Template-Strings mit sprachspezifischen Parameter-Substitution. <!--Paramater Substitutionen? Ist das der gängige Begriff?  --> Dazu ein Beispiel: <code>I will travel on {% date %}</code> sieht auf Chinesisch so aus: <code>{% date %} 我会出发</code>. Beachte, dass die Position der Variable Grammatikbedingt unterschiedlich ist.</li>
+<li><p>Sprachleserichtung - Im Englischen lesen wir von links nach rechts, von oben nach unten, im traditionellen Japanisch wird der Text von oben nach unten, von rechts nach links gelesen.</p></li>
+</ul>
+<h6 id="referenzen-2">Referenzen</h6>
+<ul>
+<li>https://www.quora.com/What-kind-of-things-one-should-be-wary-of-when-designing-or-developing-for-multilingual-sites</li>
+</ul>
+<p><a href="#inhaltsverzeichnis">[↑] Back to top</a></p>
+<h3 id="wofür-sind-data--attribute-nützlich">Wofür sind <code>data-</code> Attribute nützlich?</h3>
+<p>Bevor JavaScript-Frameworks populär wurden, benutzten Front-End-Entwickler <code>data-</code> Attribute, um zusätzliche Daten innerhalb des DOM selbst zu speichern. Sie dienen zum Speichern benutzerdefinierter Daten, für die es keine passenderen Attribute oder Elemente gibt.</p>
+<p>Heute wird die Verwendung von <code>Daten-</code> Attributen nicht empfohlen. Zum Beispiel weil Benutzer das Datenattribut leicht modifizieren können, indem sie das inspect-Element im Browser verwenden. Das Datenmodell ist besser im JavaScript gespeichert und bleibt mit dem DOM durch Datenbindung, bspw. eine Library oder ein Framework, auf dem neuesten Stand.</p>
+<p>Das Hinzufügen eines Hooks für <em>end to end</em> Testframeworks wie Selenium und Capybara ist ein Beispiel für die gültige Verwendung von Datenattributen. Denn so ist es nicht nötig, sinnlose Klassen oder ID-Attribute erstellen zu müssen. Da das Element einen Weg benötigt , um von einer bestimmten Selenium-Spezifikation gefunden zu werden, und etwas wie <code>data-selector='the-thing'</code> ist ein gültiger Weg.</p>
+<h6 id="referenzen-3">Referenzen</h6>
+<ul>
+<li>http://html5doctor.com/html5-custom-data-attributes/</li>
+<li>https://www.w3.org/TR/html5/dom.html#embedding-custom-non-visible-data-with-the-data-*-attributes</li>
+</ul>
+<p><a href="#inhaltsverzeichnis">[↑] Back to top</a></p>
+<h3 id="stelle-dir-html5-als-eine-offene-internetplattform-vor.-was-sind-die-basiskomponenten-von-html5">Stelle dir HTML5 als eine offene Internetplattform vor. Was sind die Basiskomponenten von HTML5?</h3>
+<ul>
+<li>Semantik - Ermöglicht, Inhalte genauer zu beschreiben.</li>
+<li>Konnektivität - Ermöglicht, auf (innovative) neue Weise mit dem Server zu kommunizieren.</li>
+<li>Offline und Speicherung - Ermöglicht Webseiten, Daten auf der Client-Seite lokal zu speichern und offline effizienter zu arbeiten.</li>
+<li>Multimedia - Video und Audio lassen sich besser im Open Web nutzen.</li>
+<li>2D/3D-Grafiken und -Effekte - Ermöglicht eine vielfältigere Palette von Präsentationsmöglichkeiten.</li>
+<li>Leistung und Integration - Geschwindigkeitsoptimierung und bessere Nutzung der Computerhardware.</li>
+<li>Gerätezugriff - Ermöglicht die Verwendung verschiedener Ein- und Ausgabegeräte.</li>
+<li>Styling - Macht anspruchsvollere Themes möglich.</li>
+</ul>
+<h6 id="referenzen-4">Referenzen</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5</li>
+</ul>
+<p><a href="#inhaltsverzeichnis">[↑] Back to top</a></p>
+<h3 id="beschreibe-die-unterschiede-zwischen-cookies-sessionstorage-und-localstorage.">Beschreibe die Unterschiede zwischen <code>Cookies</code>, <code>sessionStorage</code> und <code>localStorage</code>.</h3>
+<p>Alle oben genannten Technologien sind Schlüsselspeichermechanismen auf der Client-Seite. Sie sind nur in der Lage, Werte als Strings zu speichern.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><code>cookie</code></th>
+<th><code>localStorage</code></th>
+<th><code>sessionStorage</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Initiator</td>
+<td>Client bzw. Server. Server nutzt <code>Set-Cookie</code> Header</td>
+<td>Client</td>
+<td>Client</td>
+</tr>
+<tr class="even">
+<td>Ablauf</td>
+<td>Manuell gesetzt</td>
+<td>Für immer</td>
+<td>Wenn Tab geschlossen</td>
+</tr>
+<tr class="odd">
+<td>Persistenz über Browser-Sessions</td>
+<td>Hängt davon ab, welcher Ablauf gesetzt ist</td>
+<td>Ja</td>
+<td>Nein</td>
+</tr>
+<tr class="even">
+<td>Wird mit jeder HTTP-Anfrage an den Server gesendet</td>
+<td>Cookies werden automatisch über den <code>Cookie</code>-Header gesendet</td>
+<td>Nein</td>
+<td>Nein</td>
+</tr>
+<tr class="odd">
+<td>Kapazität (pro Domain)</td>
+<td>4kb</td>
+<td>5MB</td>
+<td>5MB</td>
+</tr>
+<tr class="even">
+<td>Zugänglichkeit</td>
+<td>Jedes Fenster</td>
+<td>Jedes Fenster</td>
+<td>Selbes Tab</td>
+</tr>
+</tbody>
+</table>
+<p><em>Hinweis: Löscht der Nutzer seine Browser-Daten s zu löschen, löscht dies auch jeden gespeicherten <code>Cookie</code>, <code>LocalStorage</code> oder <code>SessionStorage</code>. Es ist wichtig, dies beim Design für lokale Persistenz zu bedenken. Eventuell sollte eine serverseitige Speicherung in einer Datenbank in Erwägung gezogen werden.</em></p>
+<h6 id="referenzen-5">Referenzen</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies</li>
+<li>http://tutorial.techaltum.com/local-and-session-storage.html</li>
+</ul>
+<p><a href="#inhaltsverzeichnis">[↑] Back to top</a></p>
+<h3 id="beschreibe-die-unterschiedie-zwischen-script-script-async-und-script-defer.">Beschreibe die Unterschiedie zwischen <code>&lt;script&gt;</code>, <code>&lt;script async&gt;</code> und <code>&lt;script defer&gt;</code>.</h3>
+<ul>
+<li><code>&lt;script&gt;</code> - Das HTML-Parsing wird blockiert, das Skript wird geholt (gefetcht) und sofort ausgeführt, das HTML-Parsing wird nach Ausführung des Scripts fortgesetzt.</li>
+<li><code>&lt;script async&gt;</code> - Das Skript wird parallel zum HTML-Parsing geholt (gefetcht) und ausgeführt, sobald es verfügbar ist (möglicherweise bevor das HTML-Parsing abgeschlossen ist). Verwende <code>async</code>, wenn das Skript unabhängig von anderen Skripten auf der Seite ist, z.B. bei Analysen. (im Original “Analytics”)</li>
+<li><code>&lt;script defer&gt;</code> - Das Skript wird parallel zum HTML-Parsing geholt (gefetcht) aber erst dann ausgeführt, wenn das Parsen der Seite beendet ist. Sind mehrere Scripts vorhanden, werden sie in der Reihenfolge ausgeführt, in der sie im Dokument angetroffen wurden. Wenn sich ein Script auf ein vollständig geparstes DOM stützt, ist das <code>defer</code>-Attribut nützlich, um sicherzustellen, dass das HTML vor der Ausführung vollständig geparst wird. Es macht keinen großen Unterschied, ein normales <code>&lt;script&gt;</code> an das Ende von <code>&lt;body&gt;</code> zu setzen. Ein verzögertes Skript darf kein <code>document.write</code> enthalten.</li>
+</ul>
+<p>Hinweis: Die Attribute <code>async</code> und <code>defer</code> werden für Skripte ignoriert, die kein `src’-Attribut haben.</p>
+<h6 id="referenzen-6">Referenzen</h6>
+<ul>
+<li>http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html</li>
+<li>https://stackoverflow.com/questions/10808109/script-tag-async-defer</li>
+<li>https://bitsofco.de/async-vs-defer/</li>
+</ul>
+<p><a href="#inhaltsverzeichnis">[↑] Back to top</a></p>
+<h3 id="warum-ist-es-eine-gute-idee-die-links-zum-css-stylesheet-inneralb-der-headhead-tags-zu-platzieren-und-die-js-scripts-direkt-vorm-body-einzubinden-würdest-du-ausnahmen-machen">Warum ist es eine gute Idee, die <code>&lt;link&gt;</code>s zum CSS-Stylesheet inneralb der <code>&lt;head&gt;&lt;/head&gt;</code> Tags zu platzieren und die JS <code>&lt;script&gt;</code>s direkt vorm <code>&lt;/body&gt;</code> einzubinden? Würdest du Ausnahmen machen?</h3>
+<p><strong>Platzieren von <code>&lt;link&gt;</code>s im <code>&lt;head&gt;</code></strong></p>
+<p>Eine optimierten Website setzt voraus, dass das <code>&lt;link&gt;</code> Attribut im <code>&lt;head&gt;</code> platziert ist. Wird eine Seite erstmalig geladen, werden HTML und CSS gleichzeitig geparst; HTML erzeugt das DOM (Document Object Model) und CSS erzeugt das CSSOM (CSS Object Model). Beide sind für die Erstellung einer Website erforderlich. Je schneller geparsed wird, desto besser, denn “first meaningful paint” ist ein wichtiger Performance-Indikator. Die Platzierung von Stylesheets am unteren Rand des Dokuments würde das progressessive Rendering in vielen Browsern verhindern. Einige Browser blockieren das Rendering, um zu vermeiden, dass Elemente der Seite neu gezeichnet werden müssen, wenn sich ihre Stile ändern. Der Benutzer bleibt dann bei der Anzeige einer leeren weißen Seite hängen. Zu anderen Zeiten kann es Flashs mit unstyled content (FOUC) geben, die eine Webseite ohne angewandtes Styling zeigen.</p>
+<p><strong>Platzieren von <code>&lt;script&gt;</code>s direkt vor <code>&lt;/body&gt;</code></strong></p>
+<p><code>&lt;script&gt;</code> Tags blockieren das Parsen von HTML, während sie heruntergeladen und ausgeführt werden. Das kann die Seite verlangsamen. Durch die Platzierung der Skripte am unteren Rand wird das HTML zuerst geparsed und dem Benutzer angezeigt.</p>
+<p>Es gibt eine Ausnahme für die Positionierung von <code>&lt;script&gt;</code>s am unteren Rand: Dein Script enthält <code>document.write()</code>. Das ist aber heutzutage eine schlechte Praxis. Außerdem bedeutet die Platzierung von <code>&lt;script&gt;</code>s am unteren Rand, dass der Browser erst dann mit dem Herunterladen der Skripte beginnen kann, wenn das gesamte Dokument geparst wurde. Dies stellt sicher, dass Code, der DOM-Elemente manipulieren muss, das gesamte Skript nicht verwirft, Fehler macht und anhält. Muss <code>&lt;script&gt;</code> in’s <code>&lt;head&gt;</code> gesetzt werden, sollte man das<code>defer</code>-Attribut nutzen, das den gleichen Effekt erzielt wie das Herunterladen und Ausführen des Skripts nach dem Parsen des HTML-Dokuments.</p>
+<p>Denke daran, dass das Einfügen von Scripten vor dem schließenden <code>&lt;/body&gt;</code>-Tag die Illusion erzeugt, dass die Seite in einem leeren Cache schneller geladen wird (da die Scripte den Download des restlichen Dokuments nicht blockieren). Der Code wird erst dann ausgeführt, wenn die gesamte Seite geladen ist. Sind diese Scripte in das <code>&lt;head&gt;</code>-Tag gesetzt, beginnen sie vorher mit der Ausführung - auf einem vorbereiteten Cache würde die Seite also tatsächlich schneller geladen werden.</p>
+<h6 id="references">References</h6>
+<ul>
+<li>https://developer.yahoo.com/performance/rules.html#css_top</li>
+<li>https://www.techrepublic.com/blog/web-designer/how-to-prevent-flash-of-unstyled-content-on-your-websites/</li>
+<li>https://developers.google.com/web/fundamentals/performance/critical-rendering-path/</li>
+</ul>
+<p><a href="#inhaltsverzeichnis">[↑] Back to top</a></p>
+<h3 id="was-ist-progressives-rendern">Was ist progressives Rendern?</h3>
+<p>“Progressive rendering” (progressive Wiedergabe) bezeichnet Techniken zur Verbesserung der Leistung einer Webseite (insbesondere zur Verbesserung der wahrgenommenen Ladezeit), da Inhalte so schnell wie möglich dargestellt werden können.</p>
+<p>Vor der Einführung des Breitband-Internets war es viel weiter verbreitet, aber es wird in der modernen Web-Entwicklung immer noch verwendet, da mobile Datenverbindungen immer populärer (und unzuverlässiger) werden!</p>
+<p>Beispiele für diese Technologie:</p>
+<ul>
+<li>Langsames Laden von Bildern (Lazy loading of images) - Bilder werden nicht alle auf einmal geladen. JavaScript lädtt Bilder erst, wenn der Benutzer in den Teil der Seite scrollt, der das Bild anzeigt.</li>
+<li>Priorisierung von sichtbarem Inhalt (oder Rendering über dem Falz “above-the-fold rendering” ) - Berücksichtige nur das für das erste Erscheinen der Seite nötige Minimum an CSS/Inhalten/Scripten. Durch verzögerte Scripte bzw. durch <code>DOMContentLoaded</code>/<code>load</code> können andere Ressourcen nachgeladen werden.</li>
+<li>Asynchrone HTML-Fragmente - Flushen von Teilen des HTML in den Browser, während die Seite im Backend aufgebaut wird.Mehr Details findest du <a href="http://www.ebaytechblog.com/2014/12/08/async-fragments-rediscovering-progressive-html-rendering-with-marko/">hier</a>.</li>
+</ul>
+<h6 id="referenzen-7">Referenzen</h6>
+<ul>
+<li>https://stackoverflow.com/questions/33651166/what-is-progressive-rendering</li>
+<li>http://www.ebaytechblog.com/2014/12/08/async-fragments-rediscovering-progressive-html-rendering-with-marko/</li>
+</ul>
+<p><a href="#inhaltsverzeichnis">[↑] Back to top</a></p>
+<h3 id="warum-würdest-du-ein-srcset-attribute-in-ein-image-tag-einsetzen-erkläre-wie-der-browser-bei-der-auswertung-des-inhalts-dieses-attributs-vorgeht.">Warum würdest du ein <code>srcset</code> Attribute in ein image tag einsetzen? Erkläre wie der Browser bei der Auswertung des Inhalts dieses Attributs vorgeht.</h3>
+<p>Das<code>srcset</code>-Attribut wird verwendet, um Benutzern abhängig von der Anzeigebreite ihrer Geräte unterschiedliche Bilder zur Verfügung zu stellen. Die Bereitstellung von Bildern höherer Qualität für Geräte mit Retina-Display verbessert das Nutzererlebnis, während die Bereitstellung von Bildern niedrigerer Auflösung für Geräte des unteren Marktsegments die Leistung erhöht und das Datenvolumen verringert (da die Bereitstellung eines größeren Bildes keinen sichtbaren Unterschied aufweist). Zum Beispiel: <code>&lt;img srcset="small.jpg 500w, medium.jpg 1000w, large.jpg 2000w" src="..." alt=""&gt;</code> weist den Browser an, die kleine, mittlere oder große <code>.jpg</code> Grafik abhängig von der Auflösung des Kunden anzuzeigen. Der erste Wert ist der Bildname und der zweite ist die Breite des Bildes in Pixeln. Für eine Gerätebreite von 320px werden die folgenden Berechnungen durchgeführt:</p>
+<ul>
+<li>500 / 320 = 1.5625</li>
+<li>1000 / 320 = 3.125</li>
+<li>2000 / 320 = 6.25</li>
+</ul>
+<p>Wenn die Auflösung des Clients 1x ist, ist 1.5625 die nächstliegende Auflösung. Damit entspricht <code>500w</code> <code>small.jpg</code> und wird vom Browser ausgewählt.</p>
+<p>Handelt es sich um ein Retina-Display (Auflösung: 2x), verwendet der Browser die nächstliegende Auflösung, die über dem Minimum liegt. Das heißt, er wird nicht die 500w (1,5625) wählen, nur weil sie größer als 1. Der Browser würde stattdessen das Bild mit einem resultierenden Verhältnis wählen, das näher an 2 liegt, d.h. 1000w (3,125). (Dessen Qualität der einer Retina-Auflösung entspricht)</p>
+<p>Durch <code>srcset</code>s lassen sich Bilddateien Geräte- und Auflösungsspezifisch ausliefern: Kleine Bilder an Geräte mit schmalem Bildschirm, große, an Geräte mit großen Monitoren - und optional auch, Bilder unterschiedlicher Auflösung je nach Pixeldichte.</p>
+<h6 id="referenzen-8">Referenzen</h6>
+<ul>
+<li>https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images</li>
+<li>https://css-tricks.com/responsive-images-youre-just-changing-resolutions-use-srcset/</li>
+</ul>
+<p><a href="#inhaltsverzeichnis">[↑] Back to top</a></p>
+<h3 id="hast-du-erfahrungen-mit-unterschiedlichen-html-templating-languages-gemacht">Hast du Erfahrungen mit unterschiedlichen HTML templating languages gemacht?</h3>
+<p>Ja, Pug (früher Jade), ERB, Slim, Handlebars, Jinja, Liquid und EJS, um nur einige zu nennen. Meiner Meinung nach sind sie mehr oder weniger gleich und bieten eine ähnliche Funktionalität: Inhalte zu “escapen” und die anzuzeigenden Daten zu Filter um beispielsweise ihre Darstellung zu manipulieren. Die meisten Template-Engines erlauben es, eigene Filter einzufügen, falls eine benutzerdefinierte Verarbeitung benötigt wird.</p>
+<p><a href="#inhaltsverzeichnis">[↑] Back to top</a></p>
+<h3 id="andere-antworten">Andere Antworten</h3>
+<ul>
+<li>https://neal.codes/blog/front-end-interview-questions-html/</li>
+<li>http://peterdoes.it/2015/12/03/a-personal-exercise-front-end-job-interview-questions-and-my-answers-all/</li>
+</ul>
+</body>
+</html>
