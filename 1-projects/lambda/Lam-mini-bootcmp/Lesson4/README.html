@@ -76,9 +76,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </style>
 </head>
 <body>
-<hr />
-<h4 id="easter-eggs-click-on-the-︎-black-︎-triangles-︎-to-reveal-the-easter-eggs">EASTER EGGS: Click on the ▶︎ black ▶︎ triangles ▶︎ to reveal the EASTER EGGS!</h4>
-<hr />
 <h1 id="lecture-4-notes---javascript-and-the-dom">Lecture 4 Notes - JavaScript and the DOM</h1>
 <h2 id="m30shttpsyoutu.begbntl_51l5at1m30s-lecture-starts"><span class="citation" data-cites="1m30s">[@1m30s]</span>(https://youtu.be/GBNtL_51l5A?t=1m30s) LECTURE STARTS</h2>
 <h3 id="q-what-is-the-d.o.m."><strong>Q: What is the D.O.M.?</strong></h3>
@@ -102,19 +99,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;path_to/script.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
 <ul>
-<li>Editing the page content and what it looks like ONLY using JavaScript! ### <span class="citation" data-cites="8m21s">[@8m21s]</span>(https://youtu.be/GBNtL_51l5A?t=8m21s) Changing an HTML elements text per its ID</li>
+<li>Editing the page content and what it looks like ONLY using JavaScript!</li>
 </ul></li>
+</ul>
+<h3 id="m21shttpsyoutu.begbntl_51l5at8m21s-changing-an-html-elements-text-per-its-id"><span class="citation" data-cites="8m21s">[@8m21s]</span>(https://youtu.be/GBNtL_51l5A?t=8m21s) Changing an HTML elements text per its ID</h3>
+<ul>
 <li>modifying the header tag with the “about header” id, i.e. 
 <h1 id="about_me"></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;about_header&#39;</span>).<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&#39;JavaScript</span><span class="sc">\&#39;</span><span class="st">s About Me&#39;</span><span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;about_header&quot;</span>).<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&quot;JavaScript&#39;s About Me&quot;</span><span class="op">;</span></a></code></pre></div>
 <h3 id="m18shttpsyoutu.begbntl_51l5at15m18s-creating-an-html-element-and-text"><span class="citation" data-cites="15m18s">[@15m18s]</span>(https://youtu.be/GBNtL_51l5A?t=15m18s) Creating an HTML element and text</h3>
 <ul>
 <li>creating a DIV element and some text to go in it:</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">var</span> elem <span class="op">=</span> <span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&#39;div&#39;</span>)<span class="op">;</span>  <span class="co">// &lt;--- declare a variable that gets an element named DIV</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="va">elem</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&#39;&lt;p&gt;Hello World!&lt;/p&gt;&#39;</span>     <span class="co">// &lt;--- any HTML</span></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="va">document</span>.<span class="va">body</span>.<span class="at">appendChild</span>(elem)<span class="op">;</span>           <span class="co">// &lt;--- puts it as the LAST item in the BODY container</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">var</span> elem <span class="op">=</span> <span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&quot;div&quot;</span>)<span class="op">;</span> <span class="co">// &lt;--- declare a variable that gets an element named DIV</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="va">elem</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&quot;&lt;p&gt;Hello World!&lt;/p&gt;&quot;</span><span class="op">;</span> <span class="co">// &lt;--- any HTML</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="va">document</span>.<span class="va">body</span>.<span class="at">appendChild</span>(elem)<span class="op">;</span> <span class="co">// &lt;--- puts it as the LAST item in the BODY container</span></a></code></pre></div>
 <ul>
 <li>This is EQUIVALENT TO:</li>
 </ul>
@@ -122,18 +122,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb4-2" title="2">  <span class="kw">&lt;head&gt;&lt;/head&gt;</span></a>
 <a class="sourceLine" id="cb4-3" title="3">  <span class="kw">&lt;body&gt;</span></a>
 <a class="sourceLine" id="cb4-4" title="4">    <span class="kw">&lt;ul&gt;</span></a>
-<a class="sourceLine" id="cb4-5" title="5">      <span class="kw">&lt;li&gt;</span>Nickname: <span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&quot;nickname&quot;</span><span class="kw">&gt;</span>mixelpix<span class="kw">&lt;/span&gt;</span></a>
-<a class="sourceLine" id="cb4-6" title="6">      <span class="kw">&lt;li&gt;</span>Favorites: <span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&quot;favorites&quot;</span><span class="kw">&gt;&lt;/span&gt;</span></a>
-<a class="sourceLine" id="cb4-7" title="7">      <span class="kw">&lt;li&gt;</span>Hometown: <span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&quot;hometown&quot;</span><span class="kw">&gt;&lt;/span&gt;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">      <span class="kw">&lt;li&gt;</span>Nickname: <span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&quot;nickname&quot;</span><span class="kw">&gt;</span>mixelpix<span class="kw">&lt;/span&gt;&lt;/li&gt;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">      <span class="kw">&lt;li&gt;</span>Favorites: <span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&quot;favorites&quot;</span><span class="kw">&gt;&lt;/span&gt;&lt;/li&gt;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="kw">&lt;li&gt;</span>Hometown: <span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&quot;hometown&quot;</span><span class="kw">&gt;&lt;/span&gt;&lt;/li&gt;</span></a>
 <a class="sourceLine" id="cb4-8" title="8">    <span class="kw">&lt;/ul&gt;</span></a>
 <a class="sourceLine" id="cb4-9" title="9"></a>
-<a class="sourceLine" id="cb4-10" title="10">    <span class="kw">&lt;div&gt;&lt;p&gt;</span>Hello World!<span class="kw">&lt;/p&gt;&lt;/div&gt;</span>         <span class="co">&lt;!--    THIS!!!    --&gt;</span></a>
-<a class="sourceLine" id="cb4-11" title="11"></a>
-<a class="sourceLine" id="cb4-12" title="12">    <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">    <span class="kw">&lt;div&gt;&lt;p&gt;</span>Hello World!<span class="kw">&lt;/p&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="co">&lt;!--    THIS!!!    --&gt;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">  <span class="kw">&lt;/body&gt;</span></a>
 <a class="sourceLine" id="cb4-13" title="13"></a>
-<a class="sourceLine" id="cb4-14" title="14">    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;homework4.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
-<a class="sourceLine" id="cb4-15" title="15"></a>
-<a class="sourceLine" id="cb4-16" title="16"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-14" title="14">  <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;homework4.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
 <h3 id="mhttpsyoutu.begbntl_51l5at20m-qa-homework"><span class="citation" data-cites="20m">[@20m]</span>(https://youtu.be/GBNtL_51l5A?t=20m) Q&amp;A, Homework</h3>
 <ul>
 <li><code>document.ready</code> function?</li>
@@ -142,11 +141,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>“zero’ing out” an element</li>
 <li>targeting a class:</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;.someClass&#39;</span>).<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&quot;abcdef&quot;</span><span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&quot;.someClass&quot;</span>).<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&quot;abcdef&quot;</span><span class="op">;</span></a></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">&lt;ul&gt;</span></a>
-<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">&quot;someClass&quot;</span><span class="kw">&gt;</span>Nickname: <span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&quot;nickname&quot;</span><span class="kw">&gt;</span>mixelpix<span class="kw">&lt;/span&gt;</span></a>
-<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">&lt;li&gt;</span>Favorites: <span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&quot;favorites&quot;</span><span class="kw">&gt;&lt;/span&gt;</span></a>
-<a class="sourceLine" id="cb6-4" title="4">  <span class="kw">&lt;li&gt;</span>Hometown: <span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&quot;hometown&quot;</span><span class="kw">&gt;&lt;/span&gt;</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">&lt;li</span><span class="ot"> class=</span><span class="st">&quot;someClass&quot;</span><span class="kw">&gt;</span>Nickname: <span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&quot;nickname&quot;</span><span class="kw">&gt;</span>mixelpix<span class="kw">&lt;/span&gt;&lt;/li&gt;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">&lt;li&gt;</span>Favorites: <span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&quot;favorites&quot;</span><span class="kw">&gt;&lt;/span&gt;&lt;/li&gt;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="kw">&lt;li&gt;</span>Hometown: <span class="kw">&lt;span</span><span class="ot"> id=</span><span class="st">&quot;hometown&quot;</span><span class="kw">&gt;&lt;/span&gt;&lt;/li&gt;</span></a>
 <a class="sourceLine" id="cb6-5" title="5"><span class="kw">&lt;/ul&gt;</span></a></code></pre></div>
 <ul>
 <li>getElement for IDs, getElements for Classes.</li>

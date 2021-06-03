@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
@@ -29,25 +29,31 @@ const userSchema = new Schema({
   fullName: String,
   city: {
     type: String,
-    default: 'an unspecified location',
+    default: "an unspecified location",
   },
   state: String,
   address: String,
-  books: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Book',
-    required: true,
-  }],
-  receivedRequests: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Request',
-    required: true,
-  }],
-  trades: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Trades',
-    required: true,
-  }],
+  books: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Book",
+      required: true,
+    },
+  ],
+  receivedRequests: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Request",
+      required: true,
+    },
+  ],
+  trades: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Trades",
+      required: true,
+    },
+  ],
 });
 
 // userSchema.methods.getBooks = function getBooks() {
@@ -58,8 +64,8 @@ const userSchema = new Schema({
 // Mocha --watch breaks the require cache and mongoose will throw
 // an error trying to initialize an model twice, so ignore this error
 try {
-  mongoose.model('User', userSchema);
+  mongoose.model("User", userSchema);
   // eslint-disable-next-line no-empty
 } catch (err) {}
 
-module.exports = mongoose.model('User');
+module.exports = mongoose.model("User");

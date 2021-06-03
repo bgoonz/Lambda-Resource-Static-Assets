@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
-import { getAllProduce } from '../../store/produce';
-import ProduceDetails from './ProduceDetails';
-import './ProduceList.css';
+import { useSelector } from "react-redux";
+import { getAllProduce } from "../../store/produce";
+import ProduceDetails from "./ProduceDetails";
+import "./ProduceList.css";
 
 function ProduceList() {
   const produceArr = useSelector(getAllProduce);

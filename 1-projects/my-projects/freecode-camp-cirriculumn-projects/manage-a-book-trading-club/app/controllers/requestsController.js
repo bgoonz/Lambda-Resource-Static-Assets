@@ -1,30 +1,30 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
-const Request = require('../models/Request');
-const Book = require('../models/Book');
-const User = require('../models/User');
-const Trade = require('../models/Trade');
-const booksHelpers = require('../helpers/books');
-const usersHelpers = require('../helpers/users');
+const mongoose = require("mongoose");
+const Request = require("../models/Request");
+const Book = require("../models/Book");
+const User = require("../models/User");
+const Trade = require("../models/Trade");
+const booksHelpers = require("../helpers/books");
+const usersHelpers = require("../helpers/users");
 
 function populateRequest(query) {
   return query
     .populate({
-      path: 'gives',
+      path: "gives",
       populate: {
-        path: 'owner',
-        model: 'User',
+        path: "owner",
+        model: "User",
       },
     })
     .populate({
-      path: 'takes',
+      path: "takes",
       populate: {
-        path: 'owner',
-        model: 'User',
+        path: "owner",
+        model: "User",
       },
     })
-    .populate('requester');
+    .populate("requester");
 }
 
 function findRequest(id) {
@@ -32,18 +32,17 @@ function findRequest(id) {
 }
 
 function findRequests(where) {
-  return populateRequest(Request.find(where))
-    .sort({ _id: -1 });
+  return populateRequest(Request.find(where)).sort({ _id: -1 });
 }
 
 function filterMyBooksRequest(request, userId) {
-  const myBooks = request.takes.filter(book => book.owner.id === userId);
+  const myBooks = request.takes.filter((book) => book.owner.id === userId);
   const { requester, gives, _id } = request;
   return { requester, gives, _id, takes: myBooks };
 }
 
 function filterMyBooksRequests(requests, userId) {
-  return requests.map(request => filterMyBooksRequest(request, userId));
+  return requests.map((request) => filterMyBooksRequest(request, userId));
 }
 
 /*
@@ -52,12 +51,12 @@ function filterMyBooksRequests(requests, userId) {
  * push request to request.takes book.owners User.receivedRequests
  */
 function createRequest(request) {
-  return Request.create(request)
-    .then((created) => {
-      console.log(created);
-      return booksHelpers.handleCreatedRequest(created)
-        .then(() => usersHelpers.handleCreatedRequest(created));
-    });
+  return Request.create(request).then((created) => {
+    console.log(created);
+    return booksHelpers
+      .handleCreatedRequest(created)
+      .then(() => usersHelpers.handleCreatedRequest(created));
+  });
 }
 
 /*
@@ -66,33 +65,47 @@ function createRequest(request) {
  *   - pull request from all receiver's User.receivedRequests
  */
 function deleteRequest(request) {
-  return request.remove()
-    .then(() => Book.update(
+  return request
+    .remove()
+    .then(() =>
+      Book.update(
         { requests: request._id },
         { $pull: { requests: request._id } },
-        { multi: true }))
-    .then(() => User.update(
+        { multi: true }
+      )
+    )
+    .then(() =>
+      User.update(
         { receivedRequests: request._id },
         { $pull: { receivedRequests: request._id } },
-        { multi: true }));
+        { multi: true }
+      )
+    );
 }
 
 function deleteRequests(requests) {
-  const requestsIds = requests.map(request => request._id);
+  const requestsIds = requests.map((request) => request._id);
   return Request.remove({ _id: { $in: requestsIds } })
-    .then(() => Book.update(
-      { requests: { $in: requestsIds } },
-      { $pullAll: { requests: requestsIds } },
-      { multi: true }))
-    .then(() => User.update(
-      { receivedRequests: { $in: requestsIds } },
-      { $pullAll: { receivedRequests: requestsIds } },
-      { multi: true }));
+    .then(() =>
+      Book.update(
+        { requests: { $in: requestsIds } },
+        { $pullAll: { requests: requestsIds } },
+        { multi: true }
+      )
+    )
+    .then(() =>
+      User.update(
+        { receivedRequests: { $in: requestsIds } },
+        { $pullAll: { receivedRequests: requestsIds } },
+        { multi: true }
+      )
+    );
 }
 
 function handleInvalidRequests() {
-  return Request.find({ $or: [{ takes: [] }, { gives: [] }] })
-    .then(deleteRequests);
+  return Request.find({ $or: [{ takes: [] }, { gives: [] }] }).then(
+    deleteRequests
+  );
 }
 /*
  * pull the book from all Request.gives
@@ -101,24 +114,24 @@ function handleInvalidRequests() {
  */
 function handleDeletedBook(bookId) {
   return Request.update(
-      { $or: [{ gives: bookId }, { takes: bookId }] },
-      { $pull: { gives: bookId, takes: bookId } },
-      { multi: true })
-    .then(() => handleInvalidRequests());
+    { $or: [{ gives: bookId }, { takes: bookId }] },
+    { $pull: { gives: bookId, takes: bookId } },
+    { multi: true }
+  ).then(() => handleInvalidRequests());
 }
 
 function index(req, res, next) {
   findRequests({})
-  .then((requests) => {
-    res.render('requests/index', {
-      requests,
-      title: 'All Requests',
-      user: req.user,
-      active: 'requests',
-      messages: req.flash('info'),
-    });
-  })
-  .catch(next);
+    .then((requests) => {
+      res.render("requests/index", {
+        requests,
+        title: "All Requests",
+        user: req.user,
+        active: "requests",
+        messages: req.flash("info"),
+      });
+    })
+    .catch(next);
 }
 
 /* A receivedRequest may be removed if:
@@ -133,18 +146,18 @@ function index(req, res, next) {
  */
 function incomingRequests(req, res, next) {
   findRequests({ _id: { $in: req.user.receivedRequests } })
-  .then((requests) => {
-    const myBooksRequests = filterMyBooksRequests(requests, req.user.id);
-    res.render('requests/index', {
-      requests: myBooksRequests,
-      title: 'Incoming Requests',
-      subtitle: `for ${req.user.username}`,
-      user: req.user,
-      active: 'incoming',
-      messages: req.flash('info'),
-    });
-  })
-  .catch(next);
+    .then((requests) => {
+      const myBooksRequests = filterMyBooksRequests(requests, req.user.id);
+      res.render("requests/index", {
+        requests: myBooksRequests,
+        title: "Incoming Requests",
+        subtitle: `for ${req.user.username}`,
+        user: req.user,
+        active: "incoming",
+        messages: req.flash("info"),
+      });
+    })
+    .catch(next);
 }
 
 function selectBooks(req, res, next) {
@@ -154,11 +167,11 @@ function selectBooks(req, res, next) {
   findRequest(req.params.id)
     .then((request) => {
       const myBooksRequest = filterMyBooksRequest(request, req.user.id);
-      res.render('requests/select-books', {
+      res.render("requests/select-books", {
         request: myBooksRequest,
-        title: 'Select Books to Trade',
+        title: "Select Books to Trade",
         user: req.user,
-        messages: req.flash('info'),
+        messages: req.flash("info"),
         selectedGives,
         selectedTakes,
       });
@@ -168,11 +181,17 @@ function selectBooks(req, res, next) {
 
 function handleRequestsNoLongerForUser(user) {
   return Request.find({ _id: { $in: user.receivedRequests } })
-    .populate('takes')
+    .populate("takes")
     .then((requests) => {
-      const notForUserRequests = requests.filter(request =>
-        !request.takes.map(book => book.owner.toString()).includes(user._id.toString()));
-      return user.update({ $pullAll: { receivedRequests: notForUserRequests } });
+      const notForUserRequests = requests.filter(
+        (request) =>
+          !request.takes
+            .map((book) => book.owner.toString())
+            .includes(user._id.toString())
+      );
+      return user.update({
+        $pullAll: { receivedRequests: notForUserRequests },
+      });
     });
 }
 
@@ -191,44 +210,62 @@ function handleRequestsNoLongerForUser(user) {
 function acceptRequest(req, res, next) {
   const accepter = req.user._id;
   const { gives, takes } = res.locals;
-  return findRequest(req.params.id)
-    .then((request) => {
-      if (!request) {
-        req.flash('info', { warning: 'Could not find that request, perhaps the requester cancelled it' });
-        return res.redirect('/requests/incoming');
-      }
-      const trade = { accepter, requester: request.requester._id };
-      trade.gives = request.gives.filter(book => gives.includes(book._id.toString()))
-        .map(book => ({ name: book.name, description: book.description }));
-      trade.takes = request.takes.filter(book => takes.includes(book._id.toString()))
-        .map(book => ({ name: book.name, description: book.description }));
-      const givesObjectIds = gives.map(string => mongoose.Types.ObjectId(string));
-      const takesObjectIds = takes.map(string => mongoose.Types.ObjectId(string));
-      const tradedBooksIds = givesObjectIds.concat(takesObjectIds);
-      return Trade.create(trade)
-        .then(() => Book.deleteMany({ _id: { $in: gives.concat(takes) } }))
-        .then((result) => {
-          console.log('<<<<<<<<<<<<<< Deleted books: %s >>>>>>>>>>>>', JSON.stringify(result, null, 2));
-          return User.update(
-            { books: { $in: gives.concat(takes) } },
-            { $pullAll: { books: givesObjectIds.concat(takesObjectIds) } },
-            { multi: true });
-        })
-        .then(() => {
-          console.log(givesObjectIds, takesObjectIds);
-          return Request.update(
-            { $or: [{ gives: { $in: tradedBooksIds } }, { takes: { $in: tradedBooksIds } }] },
-            { $pullAll: { gives: tradedBooksIds, takes: tradedBooksIds } },
-            { multi: true });
-        })
-        .then(handleInvalidRequests)
-        .then(() => handleRequestsNoLongerForUser(req.user))
-        .catch(next)
-        .then(() => {
-          req.flash('info', { success: 'Trade successful' });
-          res.redirect('/requests/incoming');
-        });
-    });
+  return findRequest(req.params.id).then((request) => {
+    if (!request) {
+      req.flash("info", {
+        warning:
+          "Could not find that request, perhaps the requester cancelled it",
+      });
+      return res.redirect("/requests/incoming");
+    }
+    const trade = { accepter, requester: request.requester._id };
+    trade.gives = request.gives
+      .filter((book) => gives.includes(book._id.toString()))
+      .map((book) => ({ name: book.name, description: book.description }));
+    trade.takes = request.takes
+      .filter((book) => takes.includes(book._id.toString()))
+      .map((book) => ({ name: book.name, description: book.description }));
+    const givesObjectIds = gives.map((string) =>
+      mongoose.Types.ObjectId(string)
+    );
+    const takesObjectIds = takes.map((string) =>
+      mongoose.Types.ObjectId(string)
+    );
+    const tradedBooksIds = givesObjectIds.concat(takesObjectIds);
+    return Trade.create(trade)
+      .then(() => Book.deleteMany({ _id: { $in: gives.concat(takes) } }))
+      .then((result) => {
+        console.log(
+          "<<<<<<<<<<<<<< Deleted books: %s >>>>>>>>>>>>",
+          JSON.stringify(result, null, 2)
+        );
+        return User.update(
+          { books: { $in: gives.concat(takes) } },
+          { $pullAll: { books: givesObjectIds.concat(takesObjectIds) } },
+          { multi: true }
+        );
+      })
+      .then(() => {
+        console.log(givesObjectIds, takesObjectIds);
+        return Request.update(
+          {
+            $or: [
+              { gives: { $in: tradedBooksIds } },
+              { takes: { $in: tradedBooksIds } },
+            ],
+          },
+          { $pullAll: { gives: tradedBooksIds, takes: tradedBooksIds } },
+          { multi: true }
+        );
+      })
+      .then(handleInvalidRequests)
+      .then(() => handleRequestsNoLongerForUser(req.user))
+      .catch(next)
+      .then(() => {
+        req.flash("info", { success: "Trade successful" });
+        res.redirect("/requests/incoming");
+      });
+  });
 }
 
 /*
@@ -241,26 +278,31 @@ function acceptRequest(req, res, next) {
  */
 function rejectRequest(req, res, next) {
   const requestId = new mongoose.Types.ObjectId(req.params.id);
-  User
-    .findByIdAndUpdate(req.user._id, {
-      $pull: { receivedRequests: requestId },
-    })
-    .then(() => Book.update(
-      { owner: req.user._id, requests: requestId },
-      { $pull: { requests: requestId } },
-      { multi: true }))
-    .then(() => Request.findById(requestId).populate('takes'))
+  User.findByIdAndUpdate(req.user._id, {
+    $pull: { receivedRequests: requestId },
+  })
+    .then(() =>
+      Book.update(
+        { owner: req.user._id, requests: requestId },
+        { $pull: { requests: requestId } },
+        { multi: true }
+      )
+    )
+    .then(() => Request.findById(requestId).populate("takes"))
     .then((request) => {
-      const myBooks = request.takes.filter(book => book.owner.toString() === req.user.id);
+      const myBooks = request.takes.filter(
+        (book) => book.owner.toString() === req.user.id
+      );
       return Request.update(
         { _id: requestId },
-        { $pullAll: { takes: myBooks } });
+        { $pullAll: { takes: myBooks } }
+      );
     })
     .then(() => Request.remove({ takes: [] }))
     .catch(next)
     .then(() => {
-      req.flash('info', { info: 'Trade request rejected' });
-      res.redirect('/requests/incoming');
+      req.flash("info", { info: "Trade request rejected" });
+      res.redirect("/requests/incoming");
     });
 }
 
@@ -272,14 +314,14 @@ function rejectRequest(req, res, next) {
  */
 function newRequest(req, res) {
   // gives and takes are stored in the session
-  const gives = (req.session.gives || []);
+  const gives = req.session.gives || [];
   const takes = req.session.takes || [];
-  res.render('requests/new', {
-    title: 'New Request',
+  res.render("requests/new", {
+    title: "New Request",
     user: req.user,
     gives,
     takes,
-    messages: req.flash('info'),
+    messages: req.flash("info"),
   });
 }
 
@@ -290,13 +332,17 @@ function ensureRequestIsValid(req, res, next) {
 
   if (!res.locals.gives.length) {
     invalid = true;
-    req.flash('info', { warning: 'Request must include at least one book to give' });
+    req.flash("info", {
+      warning: "Request must include at least one book to give",
+    });
   }
   if (!res.locals.takes.length) {
     invalid = true;
-    req.flash('info', { warning: 'Request must include at least one book to take' });
+    req.flash("info", {
+      warning: "Request must include at least one book to take",
+    });
   }
-  if (invalid) return res.redirect('/requests/new');
+  if (invalid) return res.redirect("/requests/new");
   req.session.gives = [];
   req.session.takes = [];
   return next();
@@ -314,33 +360,32 @@ function addRequest(req, res, next) {
   };
   createRequest(request)
     .then(() => {
-      req.flash('info', { success: 'Request successfuly created' });
-      res.redirect('/requests');
+      req.flash("info", { success: "Request successfuly created" });
+      res.redirect("/requests");
     })
     .catch(next);
 }
 
 function ensureOwnRequest(requestId, user) {
-  return Request.findById(requestId)
-    .then((request) => {
-      if (request.requester.toString() !== user) {
-        return Promise.reject({ notOwnRequest: true });
-      }
-      return Promise.resolve(request);
-    });
+  return Request.findById(requestId).then((request) => {
+    if (request.requester.toString() !== user) {
+      return Promise.reject({ notOwnRequest: true });
+    }
+    return Promise.resolve(request);
+  });
 }
 
 function cancelRequest(req, res, next) {
   ensureOwnRequest(req.params.id, req.user.id)
-    .then(request => deleteRequest(request))
+    .then((request) => deleteRequest(request))
     .then(() => {
-      req.flash('info', { success: 'Request cancelled' });
-      return res.redirect('/requests');
+      req.flash("info", { success: "Request cancelled" });
+      return res.redirect("/requests");
     })
     .catch((err) => {
       if (err.notOwnRequest) {
-        req.flash('info', { danger: 'Not authorized to delete that request' });
-        return res.redirect('/requests');
+        req.flash("info", { danger: "Not authorized to delete that request" });
+        return res.redirect("/requests");
       }
       throw err;
     })

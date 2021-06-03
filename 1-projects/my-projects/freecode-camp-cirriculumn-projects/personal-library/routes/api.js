@@ -15,11 +15,15 @@ const Mongoose = require("mongoose");
 const BookModel = require("../db/BookModel").BookModel;
 //Example connection: MongoClient.connect(MONGODB_CONNECTION_STRING, function(err, db) {});
 
-Mongoose.connect(MONGODB_CONNECTION_STRING,  { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
-  if (err) {
-    console.error(err);
+Mongoose.connect(
+  MONGODB_CONNECTION_STRING,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  (err) => {
+    if (err) {
+      console.error(err);
+    }
   }
-});
+);
 
 module.exports = function (app) {
   app

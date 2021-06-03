@@ -1,11 +1,11 @@
-var express = require('express');
-require('dotenv').config();
+var express = require("express");
+require("dotenv").config();
 
 var app = express();
 
-app.use(express.static('public'));
-  
-require('./api.js')(app);
+app.use(express.static("public"));
+
+require("./api.js")(app);
 
 var portNum = process.env.PORT || 3000;
 

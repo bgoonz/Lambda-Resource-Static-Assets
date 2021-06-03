@@ -87,9 +87,7 @@ with an empty object for now.
 ```js
 // ./src/store/index.js
 // ...
-const rootReducer = combineReducers({
-
-});
+const rootReducer = combineReducers({});
 ```
 
 Now, you are going to create a store enhancer that will be set only when your
@@ -170,13 +168,13 @@ Your entry file should look like this:
 
 ```js
 // ./src/index.js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import configureStore from './store';
-import './index.css';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import configureStore from "./store";
+import "./index.css";
+import App from "./App";
 
 const store = configureStore();
 
@@ -194,7 +192,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Root />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 ```
 
@@ -248,7 +246,7 @@ In your store file, `src/store/index.js`, add a key of `produce` to the
 // ./src/store/index.js
 // ...
 const rootReducer = combineReducers({
-  produce: produceReducer
+  produce: produceReducer,
 });
 ```
 
@@ -323,7 +321,7 @@ The `action.produce` array should look something like this:
   { id: 2, name: "Juice - Lagoon Mango", liked: false },
   { id: 3, name: "Lamb - Whole, Frozen", liked: false },
   // ...
-]
+];
 ```
 
 The object created from the array should look something like this:
@@ -341,14 +339,14 @@ Try attempting this before looking below.
 
 ```js
 // ./src/store/produce.js
-import produceData from '../mockData/produce.json';
+import produceData from "../mockData/produce.json";
 
-const POPULATE = 'produce/POPULATE';
+const POPULATE = "produce/POPULATE";
 
 export const populateProduce = () => {
   return {
     type: POPULATE,
-    produce: produceData
+    produce: produceData,
   };
 };
 
@@ -356,7 +354,7 @@ export default function produceReducer(state = {}, action) {
   switch (action.type) {
     case POPULATE:
       const newState = {};
-      action.produce.forEach(produce => {
+      action.produce.forEach((produce) => {
         newState[produce.id] = produce;
       });
       return newState;
@@ -379,7 +377,7 @@ it to the `window` just like you did with the `store`.
 ```js
 // ./src/index.js
 // ...
-import { populateProduce } from './store/produce';
+import { populateProduce } from "./store/produce";
 // ...
 if (process.env.NODE_ENV !== "production") {
   window.store = store;
@@ -440,8 +438,8 @@ Your `App` component should look something like this:
 ```js
 // ./src/App.js
 // ...
-import { useDispatch } from 'react-redux';
-import { populateProduce } from './store/produce';
+import { useDispatch } from "react-redux";
+import { populateProduce } from "./store/produce";
 
 function App() {
   const dispatch = useDispatch();
@@ -477,7 +475,7 @@ and pass in a function that will return the `produce` slice of state from the
 updated state.
 
 ```js
-const produce = useSelector(state => state.produce);
+const produce = useSelector((state) => state.produce);
 ```
 
 The `ProduceList` component will turn the products into an array of
@@ -555,7 +553,7 @@ additional keys:
 ```js
 const newObj = {
   ...oldObj,
-  newKey: { property: "value" }
+  newKey: { property: "value" },
 };
 ```
 
@@ -599,13 +597,12 @@ The `cartItems` array should return an array of produce items with information
 combined from both the cart and the produce slices of state.
 
 ```js
-  const cartItems = Object.values(cart)
-    .map(item => {
-      return {
-        ...item,
-        ...produce[item.id]
-      };
-    });
+const cartItems = Object.values(cart).map((item) => {
+  return {
+    ...item,
+    ...produce[item.id],
+  };
+});
 ```
 
 Now if you refresh the page, you should see the cart items with names!
@@ -663,9 +660,9 @@ Import this function into the `ProduceList` component and remove the
 following lines:
 
 ```js
-  const produce = useSelector(state => state.produce);
-  
-  const produceArr = Object.values(produce);
+const produce = useSelector((state) => state.produce);
+
+const produceArr = Object.values(produce);
 ```
 
 Replace it with this line:

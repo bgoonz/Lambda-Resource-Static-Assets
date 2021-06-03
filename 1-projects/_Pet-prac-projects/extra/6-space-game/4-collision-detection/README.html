@@ -108,18 +108,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-8" title="8"><span class="op">}</span></a></code></pre></div></li>
 <li><p>A comparison function, this function can look like this:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">function</span> <span class="at">intersectRect</span>(r1<span class="op">,</span> r2) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-2" title="2">  <span class="cf">return</span> <span class="op">!</span>(<span class="va">r2</span>.<span class="at">left</span> <span class="op">&gt;</span> <span class="va">r1</span>.<span class="at">right</span> <span class="op">||</span></a>
-<a class="sourceLine" id="cb2-3" title="3">    <span class="va">r2</span>.<span class="at">right</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">left</span> <span class="op">||</span></a>
-<a class="sourceLine" id="cb2-4" title="4">    <span class="va">r2</span>.<span class="at">top</span> <span class="op">&gt;</span> <span class="va">r1</span>.<span class="at">bottom</span> <span class="op">||</span></a>
-<a class="sourceLine" id="cb2-5" title="5">    <span class="va">r2</span>.<span class="at">bottom</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">top</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="op">}</span></a></code></pre></div></li>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="cf">return</span> <span class="op">!</span>(</a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="va">r2</span>.<span class="at">left</span> <span class="op">&gt;</span> <span class="va">r1</span>.<span class="at">right</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="va">r2</span>.<span class="at">right</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">left</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="va">r2</span>.<span class="at">top</span> <span class="op">&gt;</span> <span class="va">r1</span>.<span class="at">bottom</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="va">r2</span>.<span class="at">bottom</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">top</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="op">}</span></a></code></pre></div></li>
 </ol>
 <h2 id="how-do-we-destroy-things">How do we destroy things</h2>
 <p>To destroy things in a game you need to let the game know it should no longer paint this item in the game loop that triggers on a certain interval. A way to do this is to mark a game object as <em>dead</em> when something happens, like so:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">// collision happened</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="va">enemy</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-2" title="2"><span class="va">enemy</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a></code></pre></div>
 <p>Then you an proceed to sort out <em>dead</em> objects before repainting the screen, like so:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1">gameObjects <span class="op">=</span> <span class="va">gameObject</span>.<span class="at">filter</span>(go <span class="kw">=&gt;</span> <span class="op">!</span><span class="va">go</span>.<span class="at">dead</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1">gameObjects <span class="op">=</span> <span class="va">gameObject</span>.<span class="at">filter</span>((go) <span class="kw">=&gt;</span> <span class="op">!</span><span class="va">go</span>.<span class="at">dead</span>)<span class="op">;</span></a></code></pre></div>
 <h2 id="how-do-we-fire-a-laser">How do we fire a laser</h2>
 <p>Firing a laser translates to responding to a key-event and creating an object that moves in a certain direction. We therefore need to carry out the following steps:</p>
 <ol type="1">
@@ -198,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb9-6" title="6">    <span class="va">r2</span>.<span class="at">bottom</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">top</span></a>
 <a class="sourceLine" id="cb9-7" title="7">  )<span class="op">;</span></a>
 <a class="sourceLine" id="cb9-8" title="8"><span class="op">}</span></a></code></pre></div></li>
-<li><strong>Add laser firing capability</strong>
+<li><p><strong>Add laser firing capability</strong></p>
 <ol type="1">
 <li><p><strong>Add key-event message</strong>. The <em>space</em> key should create a laser just above the hero ship. Add three constants in the Messages object:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"> KEY_EVENT_SPACE<span class="op">:</span> <span class="st">&quot;KEY_EVENT_SPACE&quot;</span><span class="op">,</span></a>
@@ -214,16 +216,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb12-3" title="3">   <span class="va">hero</span>.<span class="at">fire</span>()<span class="op">;</span></a>
 <a class="sourceLine" id="cb12-4" title="4"> <span class="op">}</span></a></code></pre></div>
 <p>and add a new <code>eventEmitter.on()</code> function to ensure behavior when an enemy collides with a laser:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> first<span class="op">,</span> second <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb13-2" title="2">  <span class="va">first</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb13-3" title="3">  <span class="va">second</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="op">}</span>)</a></code></pre></div></li>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(</a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  (_<span class="op">,</span> <span class="op">{</span> first<span class="op">,</span> second <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-4" title="4">    <span class="va">first</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-5" title="5">    <span class="va">second</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-6" title="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-7" title="7">)<span class="op">;</span></a></code></pre></div></li>
 <li><p><strong>Move object</strong>, Ensure the laser moves to the top of the screen gradually. You’ll create a new Laser class that extends <code>GameObject</code>, as you’ve done before:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1">  <span class="kw">class</span> Laser <span class="kw">extends</span> GameObject <span class="op">{</span></a>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">class</span> Laser <span class="kw">extends</span> GameObject <span class="op">{</span></a>
 <a class="sourceLine" id="cb14-2" title="2">  <span class="at">constructor</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
-<a class="sourceLine" id="cb14-3" title="3">    <span class="kw">super</span>(x<span class="op">,</span>y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3">    <span class="kw">super</span>(x<span class="op">,</span> y)<span class="op">;</span></a>
 <a class="sourceLine" id="cb14-4" title="4">    (<span class="kw">this</span>.<span class="at">width</span> <span class="op">=</span> <span class="dv">9</span>)<span class="op">,</span> (<span class="kw">this</span>.<span class="at">height</span> <span class="op">=</span> <span class="dv">33</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb14-5" title="5">    <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> <span class="st">&#39;Laser&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-5" title="5">    <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> <span class="st">&quot;Laser&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb14-6" title="6">    <span class="kw">this</span>.<span class="at">img</span> <span class="op">=</span> laserImg<span class="op">;</span></a>
 <a class="sourceLine" id="cb14-7" title="7">    <span class="kw">let</span> id <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb14-8" title="8">      <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">y</span> <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">{</span></a>
@@ -232,53 +237,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb14-11" title="11">        <span class="kw">this</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb14-12" title="12">        <span class="at">clearInterval</span>(id)<span class="op">;</span></a>
 <a class="sourceLine" id="cb14-13" title="13">      <span class="op">}</span></a>
-<a class="sourceLine" id="cb14-14" title="14">    <span class="op">},</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb14-14" title="14">    <span class="op">},</span> <span class="dv">100</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb14-15" title="15">  <span class="op">}</span></a>
 <a class="sourceLine" id="cb14-16" title="16"><span class="op">}</span></a></code></pre></div></li>
 <li><p><strong>Handle collisions</strong>, Implement collision rules for the laser. Add an <code>updateGameObjects()</code> function that tests colliding objects for hits</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">function</span> <span class="at">updateGameObjects</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb15-2" title="2">  <span class="kw">const</span> enemies <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>(go <span class="kw">=&gt;</span> <span class="va">go</span>.<span class="at">type</span> <span class="op">===</span> <span class="st">&#39;Enemy&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="kw">const</span> enemies <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>((go) <span class="kw">=&gt;</span> <span class="va">go</span>.<span class="at">type</span> <span class="op">===</span> <span class="st">&quot;Enemy&quot;</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb15-3" title="3">  <span class="kw">const</span> lasers <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>((go) <span class="kw">=&gt;</span> <span class="va">go</span>.<span class="at">type</span> <span class="op">===</span> <span class="st">&quot;Laser&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="co">// laser hit something</span></a>
+<a class="sourceLine" id="cb15-4" title="4">  <span class="co">// laser hit something</span></a>
 <a class="sourceLine" id="cb15-5" title="5">  <span class="va">lasers</span>.<span class="at">forEach</span>((l) <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb15-6" title="6">    <span class="va">enemies</span>.<span class="at">forEach</span>((m) <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb15-7" title="7">      <span class="cf">if</span> (<span class="at">intersectRect</span>(<span class="va">l</span>.<span class="at">rectFromGameObject</span>()<span class="op">,</span> <span class="va">m</span>.<span class="at">rectFromGameObject</span>())) <span class="op">{</span></a>
-<a class="sourceLine" id="cb15-8" title="8">      <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb15-9" title="9">        <span class="dt">first</span><span class="op">:</span> l<span class="op">,</span></a>
-<a class="sourceLine" id="cb15-10" title="10">        <span class="dt">second</span><span class="op">:</span> m<span class="op">,</span></a>
-<a class="sourceLine" id="cb15-11" title="11">      <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-12" title="12">    <span class="op">}</span></a>
-<a class="sourceLine" id="cb15-13" title="13">   <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-14" title="14"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-8" title="8">        <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-9" title="9">          <span class="dt">first</span><span class="op">:</span> l<span class="op">,</span></a>
+<a class="sourceLine" id="cb15-10" title="10">          <span class="dt">second</span><span class="op">:</span> m<span class="op">,</span></a>
+<a class="sourceLine" id="cb15-11" title="11">        <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-12" title="12">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb15-13" title="13">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-14" title="14">  <span class="op">}</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb15-15" title="15"></a>
-<a class="sourceLine" id="cb15-16" title="16">  gameObjects <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>(go <span class="kw">=&gt;</span> <span class="op">!</span><span class="va">go</span>.<span class="at">dead</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb15-17" title="17"><span class="op">}</span>  </a></code></pre></div>
+<a class="sourceLine" id="cb15-16" title="16">  gameObjects <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>((go) <span class="kw">=&gt;</span> <span class="op">!</span><span class="va">go</span>.<span class="at">dead</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-17" title="17"><span class="op">}</span></a></code></pre></div>
 <p>Make sure to add <code>updateGameObjects()</code> into your game loop in <code>window.onload</code>.</p></li>
 <li><p><strong>Implement cooldown</strong> on the laser, so it can only be fired so often.</p>
 <p>Finally, edit the Hero class so that it can cooldown:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">class</span> Hero <span class="kw">extends</span> GameObject <span class="op">{</span></a>
-<a class="sourceLine" id="cb16-2" title="2"> <span class="at">constructor</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
-<a class="sourceLine" id="cb16-3" title="3">   <span class="kw">super</span>(x<span class="op">,</span> y)<span class="op">;</span></a>
-<a class="sourceLine" id="cb16-4" title="4">   (<span class="kw">this</span>.<span class="at">width</span> <span class="op">=</span> <span class="dv">99</span>)<span class="op">,</span> (<span class="kw">this</span>.<span class="at">height</span> <span class="op">=</span> <span class="dv">75</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb16-5" title="5">   <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> <span class="st">&quot;Hero&quot;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb16-6" title="6">   <span class="kw">this</span>.<span class="at">speed</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">0</span> <span class="op">};</span></a>
-<a class="sourceLine" id="cb16-7" title="7">   <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb16-8" title="8"> <span class="op">}</span></a>
-<a class="sourceLine" id="cb16-9" title="9"> <span class="at">fire</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb16-10" title="10">   <span class="va">gameObjects</span>.<span class="at">push</span>(<span class="kw">new</span> <span class="at">Laser</span>(<span class="kw">this</span>.<span class="at">x</span> <span class="op">+</span> <span class="dv">45</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">y</span> <span class="op">-</span> <span class="dv">10</span>))<span class="op">;</span></a>
-<a class="sourceLine" id="cb16-11" title="11">   <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">=</span> <span class="dv">500</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="at">constructor</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-3" title="3">    <span class="kw">super</span>(x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-4" title="4">    (<span class="kw">this</span>.<span class="at">width</span> <span class="op">=</span> <span class="dv">99</span>)<span class="op">,</span> (<span class="kw">this</span>.<span class="at">height</span> <span class="op">=</span> <span class="dv">75</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-5" title="5">    <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> <span class="st">&quot;Hero&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-6" title="6">    <span class="kw">this</span>.<span class="at">speed</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">0</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb16-7" title="7">    <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-9" title="9">  <span class="at">fire</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-10" title="10">    <span class="va">gameObjects</span>.<span class="at">push</span>(<span class="kw">new</span> <span class="at">Laser</span>(<span class="kw">this</span>.<span class="at">x</span> <span class="op">+</span> <span class="dv">45</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">y</span> <span class="op">-</span> <span class="dv">10</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-11" title="11">    <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">=</span> <span class="dv">500</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb16-12" title="12"></a>
-<a class="sourceLine" id="cb16-13" title="13">   <span class="kw">let</span> id <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb16-14" title="14">     <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">{</span></a>
-<a class="sourceLine" id="cb16-15" title="15">       <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">-=</span> <span class="dv">100</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb16-16" title="16">     <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb16-17" title="17">       <span class="at">clearInterval</span>(id)<span class="op">;</span></a>
-<a class="sourceLine" id="cb16-18" title="18">     <span class="op">}</span></a>
-<a class="sourceLine" id="cb16-19" title="19">   <span class="op">},</span> <span class="dv">200</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb16-20" title="20"> <span class="op">}</span></a>
-<a class="sourceLine" id="cb16-21" title="21"> <span class="at">canFire</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb16-22" title="22">   <span class="cf">return</span> <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">===</span> <span class="dv">0</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb16-23" title="23"> <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-13" title="13">    <span class="kw">let</span> id <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-14" title="14">      <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-15" title="15">        <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">-=</span> <span class="dv">100</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-16" title="16">      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-17" title="17">        <span class="at">clearInterval</span>(id)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-18" title="18">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-19" title="19">    <span class="op">},</span> <span class="dv">200</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-20" title="20">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-21" title="21">  <span class="at">canFire</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-22" title="22">    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">===</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-23" title="23">  <span class="op">}</span></a>
 <a class="sourceLine" id="cb16-24" title="24"><span class="op">}</span></a></code></pre></div></li>
 </ol></li>
 </ol>

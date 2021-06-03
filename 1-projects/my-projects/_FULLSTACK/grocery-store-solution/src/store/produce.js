@@ -1,21 +1,21 @@
-import produceData from '../mockData/produce.json';
+import produceData from "../mockData/produce.json";
 
-const POPULATE = 'produce/POPULATE';
-const TOGGLE_LIKE = 'produce/TOGGLE_LIKE';
+const POPULATE = "produce/POPULATE";
+const TOGGLE_LIKE = "produce/TOGGLE_LIKE";
 
 /* ----- ACTIONS ------ */
 
 export const populateProduce = () => {
   return {
     type: POPULATE,
-    produce: produceData
+    produce: produceData,
   };
 };
 
 export const toggleLike = (produceId) => {
   return {
     type: TOGGLE_LIKE,
-    produceId
+    produceId,
   };
 };
 
@@ -28,7 +28,7 @@ export default function produceReducer(state = {}, action) {
   switch (action.type) {
     case POPULATE:
       const newState = {};
-      action.produce.forEach(produce => {
+      action.produce.forEach((produce) => {
         newState[produce.id] = produce;
       });
       return newState;

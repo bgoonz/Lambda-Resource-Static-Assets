@@ -151,7 +151,7 @@ pre {
  * Set consistent quote types.
  */
 q {
-  quotes: "\201C" "\201D" "\2018" "\2019";
+  quotes: "\201C""\201D""\2018""\2019";
 }
 
 /**
@@ -347,62 +347,71 @@ table {
   border-spacing: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   position: relative;
 }
 
 body {
-  background: url(images/frame.png) no-repeat center center, url(images/planet-one.png) no-repeat left bottom, url(images/planet-two.png) no-repeat right bottom, url(images/bg-stars.png) repeat top left;
+  background: url(images/frame.png) no-repeat center center,
+    url(images/planet-one.png) no-repeat left bottom,
+    url(images/planet-two.png) no-repeat right bottom,
+    url(images/bg-stars.png) repeat top left;
 }
 
 canvas {
-  position:absolute;
-  background: -webkit-linear-gradient(top,#C1F0C7 0%,#F0F9D1 75%,rgba(245,83,81,1) 75%);
+  position: absolute;
+  background: -webkit-linear-gradient(
+    top,
+    #c1f0c7 0%,
+    #f0f9d1 75%,
+    rgba(245, 83, 81, 1) 75%
+  );
 }
 
 #gameFrame {
   position: fixed;
-  width:800px;
-  height:600px;
+  width: 800px;
+  height: 600px;
   top: 50%;
   left: 50%;
   margin-top: -300px;
   margin-left: -400px;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 #gameStats {
   position: absolute;
-  background:#555;
-  padding:5px;
-  border:6px solid #666;
+  background: #555;
+  padding: 5px;
+  border: 6px solid #666;
   font-family: Arial, sans-serif;
   font-size: 14px;
-  color: #FE0;
+  color: #fe0;
   border-radius: 8px;
   visibility: hidden;
-  box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
 }
 
 #gameStats h1 {
-  color:#000;
+  color: #000;
   font-size: 120%;
   text-align: center;
   margin: 5px;
 }
 
 #gameStats td {
-  padding:0.2em;
+  padding: 0.2em;
   text-align: right;
 }
 
 #gameStats .label {
-  color: #DB0;
+  color: #db0;
   padding-right: 1em;
   font-weight: bold;
-  text-align:left;
+  text-align: left;
 }
 
 #gameStats .score {

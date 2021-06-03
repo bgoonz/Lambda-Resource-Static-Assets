@@ -237,7 +237,8 @@ suite("Functional Tests", function () {
               assert.equal(res.status, 200);
               assert.deepEqual(res.body, {
                 result: "successfully updated",
-                "_id": issue_change._id});
+                _id: issue_change._id,
+              });
 
               chai
                 .request(server)
@@ -246,7 +247,7 @@ suite("Functional Tests", function () {
                 .end(function (err, res) {
                   assert.equal(res.status, 200);
                   assert.isArray(res.body);
-                  assert.property(res.body[0], 'created_by')
+                  assert.property(res.body[0], "created_by");
                   assert.equal(res.body[0].created_by, "a new user");
                   done();
                 });
@@ -255,7 +256,7 @@ suite("Functional Tests", function () {
     });
 
     test('Multiple fields to update => {result: "successfully updated", _id: _id}', function (done) {
-            const new_issue = {
+      const new_issue = {
         issue_title: "Title",
         issue_text: "text",
         created_by: "This Will be Changed",
@@ -283,7 +284,8 @@ suite("Functional Tests", function () {
               assert.equal(res.status, 200);
               assert.deepEqual(res.body, {
                 result: "successfully updated",
-                "_id": issue_change._id});
+                _id: issue_change._id,
+              });
 
               chai
                 .request(server)
@@ -292,9 +294,9 @@ suite("Functional Tests", function () {
                 .end(function (err, res) {
                   assert.equal(res.status, 200);
                   assert.isArray(res.body);
-                  assert.property(res.body[0], 'created_by')
+                  assert.property(res.body[0], "created_by");
                   assert.equal(res.body[0].created_by, "a new user");
-                  assert.equal(res.body[0].assigned_to, "SaintPeter")
+                  assert.equal(res.body[0].assigned_to, "SaintPeter");
                   done();
                 });
             });

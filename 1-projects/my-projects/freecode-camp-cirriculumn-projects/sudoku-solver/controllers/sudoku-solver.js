@@ -7,15 +7,17 @@ class SudokuSolver {
   }
 
   static validInput(input) {
-    return typeof (input) === 'string' && input.length === 1 && !!input.match(/[1-9]/);
+    return (
+      typeof input === "string" && input.length === 1 && !!input.match(/[1-9]/)
+    );
   }
 
   validate(puzzleString) {
-    if(puzzleString.length !== 81) {
+    if (puzzleString.length !== 81) {
       return [true, "Expected puzzle to be 81 characters long"];
     }
 
-    if(puzzleString.match(/[^1-9.]/gi)) {
+    if (puzzleString.match(/[^1-9.]/gi)) {
       return [true, "Invalid characters in puzzle"];
     }
 
@@ -35,7 +37,12 @@ class SudokuSolver {
 
   checkRegionPlacement(puzzleString, row, column, value) {
     this.importString(puzzleString);
-    return !this.usedInBox(this._puzzle, row - row % 3, column - column % 3, value)
+    return !this.usedInBox(
+      this._puzzle,
+      row - (row % 3),
+      column - (column % 3),
+      value
+    );
   }
 
   getCoordinate(coord) {
@@ -44,23 +51,23 @@ class SudokuSolver {
     coord = coord.toUpperCase();
 
     // Check that it's a string and exactly 2 character long
-    if(typeof coord != 'string' || coord.length !== 2) {
+    if (typeof coord != "string" || coord.length !== 2) {
       return [true, null, null];
     }
 
     // Row is 'A' minus the row letter's ascii value
     // only if it's A-I
-    if(coord[0].match(/[A-I]/)) {
-      row = coord.charCodeAt(0) - 'A'.charCodeAt(0);
+    if (coord[0].match(/[A-I]/)) {
+      row = coord.charCodeAt(0) - "A".charCodeAt(0);
     } else {
-      return [true, null, null]
+      return [true, null, null];
     }
 
     // Parse number into integer, validate it's 1-9
-    if( parseInt(coord[1]) > 0 && parseInt(coord[1]) < 10) {
+    if (parseInt(coord[1]) > 0 && parseInt(coord[1]) < 10) {
       col = parseInt(coord[1]) - 1;
     } else {
-      return [true, null, null]
+      return [true, null, null];
     }
 
     return [false, row, col];
@@ -91,7 +98,9 @@ class SudokuSolver {
     let output = "";
     for (let row = 0; row < WIDTH; row++) {
       for (let col = 0; col < HEIGHT; col++) {
-        output += this._puzzle[row][col] ? this._puzzle[row][col].toString() : ".";
+        output += this._puzzle[row][col]
+          ? this._puzzle[row][col].toString()
+          : ".";
       }
     }
     return output;
@@ -100,9 +109,9 @@ class SudokuSolver {
   solve(puzzleString) {
     this.importString(puzzleString);
     // Check if the puzzle contains any empty squares
-    if(puzzleString.match(/\./gi)) {
+    if (puzzleString.match(/\./gi)) {
       // If so, use the solver.
-      return this.solveSudoku(this._puzzle)
+      return this.solveSudoku(this._puzzle);
     } else {
       // If no, validate the solution
       return this.solutionCheck();
@@ -153,11 +162,12 @@ class SudokuSolver {
   isSafe(grid, row, col, num) {
     // Check if 'num' is not already placed in current row,
     // current column and current 3x3 box
-    return !this.usedInRow(grid, row, num) &&
+    return (
+      !this.usedInRow(grid, row, num) &&
       !this.usedInCol(grid, col, num) &&
-      !this.usedInBox(grid, row - row % 3, col - col % 3, num);
+      !this.usedInBox(grid, row - (row % 3), col - (col % 3), num)
+    );
   }
-
 
   // Searches the grid to find an entry that is still unassigned. If
   // found, the reference parameters row, col will be set the location
@@ -180,7 +190,7 @@ class SudokuSolver {
       for (let col = 0; col < WIDTH; col++) {
         let num = this._puzzle[row][col];
         this._puzzle[row][col] = 0;
-        if(num === 0 || !this.isSafe(this._puzzle,row, col, num)) {
+        if (num === 0 || !this.isSafe(this._puzzle, row, col, num)) {
           this._puzzle[row][col] = num;
           return false;
         }
@@ -195,7 +205,7 @@ class SudokuSolver {
   // for Sudoku solution (non-duplication across rows, columns, and boxes)
   solveSudoku(grid) {
     // If the sudoku grid has been filled, we are done
-    let [row, col] = this.getUnassignedLocation(grid)
+    let [row, col] = this.getUnassignedLocation(grid);
     if (row === 10 || col === 10) {
       return true;
     }
@@ -231,10 +241,7 @@ class SudokuSolver {
     return false;
   }
 
-  tryToSolve() {
-
-  }
+  tryToSolve() {}
 }
 
 module.exports = SudokuSolver;
-

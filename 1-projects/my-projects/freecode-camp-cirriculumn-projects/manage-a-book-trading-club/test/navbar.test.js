@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const {
   describe,
@@ -8,37 +8,36 @@ const {
   mockApp,
   app,
   testData,
-} = require('./testSetup');
+} = require("./testSetup");
 
 const user = testData.users[0];
 const loggedInNavText = [
-  'Logout',
+  "Logout",
   `>${user.username}</a>`,
   'href="/users/',
-  'My Books',
+  "My Books",
 ];
 
-const notLoggedInNavText = [
-  'Login',
-];
+const notLoggedInNavText = ["Login"];
 
 const alwaysNavText = [
   'href="/books"',
   // 'href="/requests"',
 ];
 
-
-describe('Navbar', () => {
-  describe('Logged in', () => {
+describe("Navbar", () => {
+  describe("Logged in", () => {
     let response;
     before(() =>
-      chai.request(mockApp)
-        .get('/')
-        .then((res) => { response = res; }),
+      chai
+        .request(mockApp)
+        .get("/")
+        .then((res) => {
+          response = res;
+        })
     );
     loggedInNavText.concat(alwaysNavText).forEach((text) => {
-      it(`should contain ${text}`, () =>
-        response.text.should.contain(text));
+      it(`should contain ${text}`, () => response.text.should.contain(text));
     });
     notLoggedInNavText.forEach((text) => {
       it(`should not contain ${text}`, () =>
@@ -46,16 +45,18 @@ describe('Navbar', () => {
     });
   });
 
-  describe('Not Logged in', () => {
+  describe("Not Logged in", () => {
     let response;
     before(() =>
-      chai.request(app)
-        .get('/')
-        .then((res) => { response = res; }),
+      chai
+        .request(app)
+        .get("/")
+        .then((res) => {
+          response = res;
+        })
     );
     notLoggedInNavText.concat(alwaysNavText).forEach((text) => {
-      it(`should contain ${text}`, () =>
-        response.text.should.contain(text));
+      it(`should contain ${text}`, () => response.text.should.contain(text));
     });
     loggedInNavText.forEach((text) => {
       it(`should not contain ${text}`, () =>

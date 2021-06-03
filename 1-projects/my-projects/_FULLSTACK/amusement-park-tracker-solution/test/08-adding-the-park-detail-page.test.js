@@ -1,19 +1,15 @@
+const { describe, it, before } = require("mocha");
+const { expect } = require("chai");
+const request = require("supertest");
+const cheerio = require("cheerio");
 
-const { describe, it, before } = require('mocha');
-const { expect } = require('chai');
-const request = require('supertest');
-const cheerio = require('cheerio');
-
-const { parks: parksData } = require('./data');
+const { parks: parksData } = require("./data");
 const {
   addTestDatabaseConfig,
   loadModule,
   suppressRequestLogging,
-} = require('./utils');
-const {
-  checkHeading,
-  setDomElements,
-} = require('./utils/form');
+} = require("./utils");
+const { checkHeading, setDomElements } = require("./utils/form");
 
 const runSpecs = () => {
   let bail = false;
@@ -22,8 +18,8 @@ const runSpecs = () => {
 
   // Test that the `config/database` module exists.
 
-  describe('`config/database` module', () => {
-    const database = loadModule('../config/database');
+  describe("`config/database` module", () => {
+    const database = loadModule("../config/database");
 
     if (database === null) {
       bail = true;
@@ -39,8 +35,8 @@ const runSpecs = () => {
   // and exports the expected properties
   // (i.e. `Sequelize` and `sequelize`).
 
-  describe('`db/models` module', () => {
-    models = loadModule('../db/models');
+  describe("`db/models` module", () => {
+    models = loadModule("../db/models");
 
     if (models === null) {
       bail = true;
@@ -53,11 +49,11 @@ const runSpecs = () => {
 
   // Test that the Park model exists.
 
-  describe('`Park` model', () => {
+  describe("`Park` model", () => {
     ({ sequelize } = models);
     const { Park } = models;
 
-    it('should exist', () => {
+    it("should exist", () => {
       expect(Park).to.not.be.undefined;
     });
 
@@ -70,8 +66,8 @@ const runSpecs = () => {
 
   // Test that the `app` module exists.
 
-  describe('`app` module', () => {
-    app = loadModule('../app');
+  describe("`app` module", () => {
+    app = loadModule("../app");
 
     if (app === null) {
       bail = true;
@@ -85,15 +81,15 @@ const runSpecs = () => {
 
   // Test that the `routes` module exists.
 
-  describe('`routes` module', () => {
-    const routes = loadModule('../routes');
+  describe("`routes` module", () => {
+    const routes = loadModule("../routes");
 
     if (routes === null) {
       bail = true;
       return;
     }
 
-    describe('`/park/:id(\\\\d+)` route', () => {
+    describe("`/park/:id(\\\\d+)` route", () => {
       let $ = null;
 
       // Use the first park in the test data.
@@ -104,12 +100,12 @@ const runSpecs = () => {
         // and populate the database with data.
         await sequelize.sync({ force: true });
         const queryInterface = sequelize.getQueryInterface();
-        await queryInterface.bulkInsert('Parks', parksData);
+        await queryInterface.bulkInsert("Parks", parksData);
 
         // Make a request to the `/park/:id(\\d+)` route.
         const res = await request(app)
           .get(`/park/${park.id}`)
-          .expect('Content-type', /html/)
+          .expect("Content-type", /html/)
           .expect(200);
 
         $ = setDomElements(res);
@@ -130,54 +126,60 @@ const runSpecs = () => {
       //   a(class='btn btn-danger ml-2' href=`/park/delete/${park.id}` role='button') Delete
       //   a(class='btn btn-warning ml-2' href='/' role='button') Return to List
 
-      checkHeading('Park Detail');
+      checkHeading("Park Detail");
       checkHeading(park.parkName, 3);
 
-      describe('should display the park details (not including the `description`)', () => {
-        it('within an unordered list (`<ul>`)', () => {
-          const unorderedList = $('div.container div ul');
+      describe("should display the park details (not including the `description`)", () => {
+        it("within an unordered list (`<ul>`)", () => {
+          const unorderedList = $("div.container div ul");
           expect(unorderedList.length).to.equal(1);
         });
 
-        describe('with list item', () => {
+        describe("with list item", () => {
           it('"1" containing the interpolated string "`Location: ${park.city}, ${park.provinceState} ${park.country}`"', () => {
-            const listItem = $('div.container div ul li:nth-child(1)');
-            expect(listItem.text()).to.equal(`Location: ${park.city}, ${park.provinceState} ${park.country}`);
+            const listItem = $("div.container div ul li:nth-child(1)");
+            expect(listItem.text()).to.equal(
+              `Location: ${park.city}, ${park.provinceState} ${park.country}`
+            );
           });
 
           it('"2" containing the interpolated string "`Opened: ${park.opened}`"', () => {
-            const listItem = $('div.container div ul li:nth-child(2)');
+            const listItem = $("div.container div ul li:nth-child(2)");
             expect(listItem.text()).to.equal(`Opened: ${park.opened}`);
           });
 
           it('"3" containing the interpolated string "`Size: ${park.size}`"', () => {
-            const listItem = $('div.container div ul li:nth-child(3)');
+            const listItem = $("div.container div ul li:nth-child(3)");
             expect(listItem.text()).to.equal(`Size: ${park.size}`);
           });
         });
       });
 
-      it('should render a paragraph (`<p>` element) containing the `park.description` property value', () => {
-        const paragraph = $('div p');
+      it("should render a paragraph (`<p>` element) containing the `park.description` property value", () => {
+        const paragraph = $("div p");
         expect(paragraph.text()).to.equal(park.description);
       });
 
       it('should render an "Edit" hyperlink (`<a>` element) with an `href` attribute set to "/park/edit/«park.id»"', () => {
-        const editParkHyperlink = $(`div.container a[href="/park/edit/${park.id}"]`);
+        const editParkHyperlink = $(
+          `div.container a[href="/park/edit/${park.id}"]`
+        );
         expect(editParkHyperlink.length).to.equal(1);
-        expect(editParkHyperlink.text()).to.equal('Edit');
+        expect(editParkHyperlink.text()).to.equal("Edit");
       });
 
       it('should render a "Delete" hyperlink (`<a>` element) with an `href` attribute set to "/park/delete/«park.id»"', () => {
-        const deleteParkHyperlink = $(`div.container a[href="/park/delete/${park.id}"]`);
+        const deleteParkHyperlink = $(
+          `div.container a[href="/park/delete/${park.id}"]`
+        );
         expect(deleteParkHyperlink.length).to.equal(1);
-        expect(deleteParkHyperlink.text()).to.equal('Delete');
+        expect(deleteParkHyperlink.text()).to.equal("Delete");
       });
 
       it('should render a "Return to List" hyperlink (`<a>` element) with an `href` attribute set to "/parks"', () => {
         const returnParkHyperlink = $('div.container a[href="/parks"]');
         expect(returnParkHyperlink.length).to.equal(1);
-        expect(returnParkHyperlink.text()).to.equal('Return to List');
+        expect(returnParkHyperlink.text()).to.equal("Return to List");
       });
     });
   });

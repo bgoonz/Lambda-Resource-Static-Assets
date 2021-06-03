@@ -1,20 +1,19 @@
-
-const { describe, it, before } = require('mocha');
-const { expect } = require('chai');
-const request = require('supertest');
+const { describe, it, before } = require("mocha");
+const { expect } = require("chai");
+const request = require("supertest");
 
 const {
   addTestDatabaseConfig,
   loadModule,
   suppressRequestLogging,
-} = require('./utils');
+} = require("./utils");
 const {
   checkHeading,
   checkParkForm,
   checkValidationMessage,
   setDomElements,
   postRequestWithCSRFToken,
-} = require('./utils/form');
+} = require("./utils/form");
 
 // Example Pug template:
 
@@ -57,8 +56,8 @@ const runSpecs = () => {
 
   // Test that the `config/database` module exists.
 
-  describe('`config/database` module', () => {
-    const database = loadModule('../config/database');
+  describe("`config/database` module", () => {
+    const database = loadModule("../config/database");
 
     if (database === null) {
       bail = true;
@@ -72,8 +71,8 @@ const runSpecs = () => {
 
   // Test that the `db/models` module exists.
 
-  describe('`db/models` module', () => {
-    models = loadModule('../db/models');
+  describe("`db/models` module", () => {
+    models = loadModule("../db/models");
 
     if (models === null) {
       bail = true;
@@ -86,11 +85,11 @@ const runSpecs = () => {
 
   // Test that the Park model exists.
 
-  describe('`Park` model', () => {
+  describe("`Park` model", () => {
     ({ sequelize } = models);
     const { Park } = models;
 
-    it('should exist', () => {
+    it("should exist", () => {
       expect(Park).to.not.be.undefined;
     });
 
@@ -103,8 +102,8 @@ const runSpecs = () => {
 
   // Test that the `app` module exists.
 
-  describe('`app` module', () => {
-    app = loadModule('../app');
+  describe("`app` module", () => {
+    app = loadModule("../app");
 
     if (app === null) {
       bail = true;
@@ -118,8 +117,8 @@ const runSpecs = () => {
 
   // Test that the `routes` module exists.
 
-  describe('`routes` module', () => {
-    const routes = loadModule('../routes');
+  describe("`routes` module", () => {
+    const routes = loadModule("../routes");
 
     if (routes === null) {
       bail = true;
@@ -129,7 +128,7 @@ const runSpecs = () => {
     // Test that the `/park/add` `GET` route
     // returns a response containing the expected HTML.
 
-    describe('`/park/add` `GET` route', () => {
+    describe("`/park/add` `GET` route", () => {
       // NOTE: The `db.Park.build({})` method is used to create
       // the `Park` model instance that's passed to the
       // `park-add` view. Passing an empty object to the `build()`
@@ -143,7 +142,7 @@ const runSpecs = () => {
         // country: '',
         // opened: '',
         // size: '',
-        description: '',
+        description: "",
       };
 
       before(async () => {
@@ -152,97 +151,106 @@ const runSpecs = () => {
 
         // Make a request to the `/park/add` route.
         const res = await request(app)
-          .get('/park/add')
-          .expect('Content-type', /html/)
+          .get("/park/add")
+          .expect("Content-type", /html/)
           .expect(200);
 
         setDomElements(res);
       });
 
-      checkHeading('Add Park');
-      checkParkForm('/park/add', 'Add Park', '/', park);
+      checkHeading("Add Park");
+      checkParkForm("/park/add", "Add Park", "/", park);
     });
 
     // Test that the `/park/add` `POST` route...
 
-    describe('`/park/add` `POST` route', () => {
-
+    describe("`/park/add` `POST` route", () => {
       // Returns the expected validation messages
       // when posting incomplete or bad form data.
 
-      describe('with no values', () => {
+      describe("with no values", () => {
         const park = {
-          parkName: '',
-          city: '',
-          provinceState: '',
-          country: '',
-          opened: '',
-          size: '',
-          description: '',
+          parkName: "",
+          city: "",
+          provinceState: "",
+          country: "",
+          opened: "",
+          size: "",
+          description: "",
         };
 
         before(async () => {
           // Force the creation of the database.
           await sequelize.sync({ force: true });
 
-          await postRequestWithCSRFToken('/park/add', app, park);
+          await postRequestWithCSRFToken("/park/add", app, park);
         });
 
-        checkHeading('Add Park');
-        checkParkForm('/park/add', 'Add Park', '/', park);
+        checkHeading("Add Park");
+        checkParkForm("/park/add", "Add Park", "/", park);
 
-        describe('should render a validation messages summary containing', () => {
-          checkValidationMessage('Please provide a value for Park Name');
-          checkValidationMessage('Please provide a value for City');
-          checkValidationMessage('Please provide a value for Province/State');
-          checkValidationMessage('Please provide a value for Country');
-          checkValidationMessage('Please provide a value for Opened');
-          checkValidationMessage('Please provide a valid date for Opened');
-          checkValidationMessage('Please provide a value for Size');
-          checkValidationMessage('Please provide a value for Description');
+        describe("should render a validation messages summary containing", () => {
+          checkValidationMessage("Please provide a value for Park Name");
+          checkValidationMessage("Please provide a value for City");
+          checkValidationMessage("Please provide a value for Province/State");
+          checkValidationMessage("Please provide a value for Country");
+          checkValidationMessage("Please provide a value for Opened");
+          checkValidationMessage("Please provide a valid date for Opened");
+          checkValidationMessage("Please provide a value for Size");
+          checkValidationMessage("Please provide a value for Description");
         });
       });
 
       // Returns the expected validation messages
       // when posting values that are too long.
 
-      describe('with long values', () => {
-        const string256 = 'a'.repeat(256);
-        const string101 = 'a'.repeat(101);
+      describe("with long values", () => {
+        const string256 = "a".repeat(256);
+        const string101 = "a".repeat(101);
 
         const park = {
           parkName: string256,
           city: string101,
           provinceState: string101,
           country: string101,
-          opened: '',
+          opened: "",
           size: string101,
-          description: '',
+          description: "",
         };
 
         before(async () => {
           // Force the creation of the database.
           await sequelize.sync({ force: true });
 
-          await postRequestWithCSRFToken('/park/add', app, park);
+          await postRequestWithCSRFToken("/park/add", app, park);
         });
 
-        checkHeading('Add Park');
-        checkParkForm('/park/add', 'Add Park', '/', park);
+        checkHeading("Add Park");
+        checkParkForm("/park/add", "Add Park", "/", park);
 
-        describe('should render a validation messages summary containing', () => {
-          checkValidationMessage('Park Name must not be more than 255 characters long');
-          checkValidationMessage('City must not be more than 100 characters long');
-          checkValidationMessage('Province/State must not be more than 100 characters long');
-          checkValidationMessage('Country must not be more than 100 characters long');
-          checkValidationMessage('Size must not be more than 100 characters long');
+        describe("should render a validation messages summary containing", () => {
+          checkValidationMessage(
+            "Park Name must not be more than 255 characters long"
+          );
+          checkValidationMessage(
+            "City must not be more than 100 characters long"
+          );
+          checkValidationMessage(
+            "Province/State must not be more than 100 characters long"
+          );
+          checkValidationMessage(
+            "Country must not be more than 100 characters long"
+          );
+          checkValidationMessage(
+            "Size must not be more than 100 characters long"
+          );
         });
       });
 
       // Returns a 403 server error
       // when posting without including a CSRF token.
 
-      describe('with no CSRF token', () => {
+      describe("with no CSRF token", () => {
         before(async () => {
           // Force the creation of the database.
           await sequelize.sync({ force: true });
@@ -251,46 +259,53 @@ const runSpecs = () => {
 
           // Make a `GET` request.
           await agent
-            .get('/park/add')
-            .expect('Content-type', /html/)
+            .get("/park/add")
+            .expect("Content-type", /html/)
             .expect(200);
 
           // Make a `POST` request.
           const postResponse = await agent
-            .post('/park/add')
-            .expect('Content-type', /html/)
+            .post("/park/add")
+            .expect("Content-type", /html/)
             .expect(403);
 
           setDomElements(postResponse);
         });
 
-        checkHeading('Server Error');
+        checkHeading("Server Error");
       });
 
       // Test that the `/park/add` `POST` route
       // persists the park record to the database
       // when all validations pass.
 
-      describe('with values', () => {
+      describe("with values", () => {
         const park = {
-          parkName: 'Test Park',
-          city: 'Portland',
-          provinceState: 'Oregon',
-          country: 'USA',
-          opened: '2000-01-01',
-          size: '100 acres',
-          description: 'This is a very cool park.',
+          parkName: "Test Park",
+          city: "Portland",
+          provinceState: "Oregon",
+          country: "USA",
+          opened: "2000-01-01",
+          size: "100 acres",
+          description: "This is a very cool park.",
         };
 
         before(async () => {
           // Force the creation of the database.
           await sequelize.sync({ force: true });
 
-          await postRequestWithCSRFToken('/park/add', app, park, /text/, '/', 302);
+          await postRequestWithCSRFToken(
+            "/park/add",
+            app,
+            park,
+            /text/,
+            "/",
+            302
+          );
         });
 
-        it('should persist the park to the database', async () => {
-          const result = await sequelize.query('SELECT * FROM Parks;');
+        it("should persist the park to the database", async () => {
+          const result = await sequelize.query("SELECT * FROM Parks;");
           const [parks] = result;
 
           // The database wasn't seeded with data
@@ -304,12 +319,7 @@ const runSpecs = () => {
           expect(newPark.id).to.equal(1);
 
           // Remove the `id`, `createdAt`, and `updatedAt` properties...
-          const {
-            id,
-            createdAt,
-            updatedAt,
-            ...parkWithoutId
-          } = newPark;
+          const { id, createdAt, updatedAt, ...parkWithoutId } = newPark;
 
           // ...and do a deep comparison to the original park object.
           expect(parkWithoutId).to.deep.equal(park);

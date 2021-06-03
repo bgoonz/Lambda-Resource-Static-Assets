@@ -1,18 +1,14 @@
-
-const { describe, it, before } = require('mocha');
-const { expect } = require('chai');
-const request = require('supertest');
-const cheerio = require('cheerio');
+const { describe, it, before } = require("mocha");
+const { expect } = require("chai");
+const request = require("supertest");
+const cheerio = require("cheerio");
 
 const {
   addTestDatabaseConfigIfConfigDatabaseModuleExists,
   loadModule,
   suppressRequestLogging,
-} = require('./utils');
-const {
-  checkHeading,
-  setDomElements,
-} = require('./utils/form');
+} = require("./utils");
+const { checkHeading, setDomElements } = require("./utils/form");
 
 const runSpecs = () => {
   let bail = false;
@@ -22,8 +18,8 @@ const runSpecs = () => {
 
   // Test that the `app` module exists.
 
-  describe('`app` module', () => {
-    app = loadModule('../app');
+  describe("`app` module", () => {
+    app = loadModule("../app");
 
     if (app === null) {
       bail = true;
@@ -37,8 +33,8 @@ const runSpecs = () => {
 
   // Test that the `routes` module exists.
 
-  describe('`routes` module', () => {
-    const routes = loadModule('../routes');
+  describe("`routes` module", () => {
+    const routes = loadModule("../routes");
 
     if (routes === null) {
       bail = true;
@@ -47,12 +43,12 @@ const runSpecs = () => {
 
     // Test that the default route returns the expected response.
 
-    describe('default (`/`) route', () => {
+    describe("default (`/`) route", () => {
       let $ = null;
       before(async () => {
         const res = await request(app)
-          .get('/')
-          .expect('Content-type', /html/)
+          .get("/")
+          .expect("Content-type", /html/)
           .expect(200);
 
         $ = setDomElements(res);
@@ -61,16 +57,16 @@ const runSpecs = () => {
       it('should render an "Amusement Park Tracker" hyperlink (`<a>` element) with an `href` attribute set to "/" in the top navbar', () => {
         const homeHyperlink = $('nav a[href="/"]');
         expect(homeHyperlink.length).to.equal(1);
-        expect(homeHyperlink.text()).to.equal('Amusement Park Tracker');
+        expect(homeHyperlink.text()).to.equal("Amusement Park Tracker");
       });
 
       it('should render a "Parks" hyperlink (`<a>` element) with an `href` attribute set to "/parks" in the top navbar', () => {
         const parksHyperlink = $('ul a[href="/parks"]');
         expect(parksHyperlink.length).to.equal(1);
-        expect(parksHyperlink.text()).to.equal('Parks');
+        expect(parksHyperlink.text()).to.equal("Parks");
       });
 
-      checkHeading('Home');
+      checkHeading("Home");
     });
   });
 

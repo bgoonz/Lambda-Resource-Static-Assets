@@ -141,22 +141,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Create a new file named <strong>index.html</strong>. Add the following HTML:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="co">&lt;!-- inside index.html --&gt;</span></a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="kw">&lt;html&gt;</span></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="kw">&lt;head&gt;</span></a>
-<a class="sourceLine" id="cb3-4" title="4">  <span class="kw">&lt;title&gt;</span>Typing game<span class="kw">&lt;/title&gt;</span></a>
-<a class="sourceLine" id="cb3-5" title="5">  <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;style.css&quot;</span><span class="kw">&gt;</span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="kw">&lt;/head&gt;</span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="kw">&lt;body&gt;</span></a>
-<a class="sourceLine" id="cb3-8" title="8">  <span class="kw">&lt;h1&gt;</span>Typing game!<span class="kw">&lt;/h1&gt;</span></a>
-<a class="sourceLine" id="cb3-9" title="9">  <span class="kw">&lt;p&gt;</span>Practice your typing skills with a quote from Sherlock Holmes. Click **start** to begin!<span class="kw">&lt;/p&gt;</span></a>
-<a class="sourceLine" id="cb3-10" title="10">  <span class="kw">&lt;p</span><span class="ot"> id=</span><span class="st">&quot;quote&quot;</span><span class="kw">&gt;&lt;/p&gt;</span> <span class="co">&lt;!-- This will display our quote --&gt;</span></a>
-<a class="sourceLine" id="cb3-11" title="11">  <span class="kw">&lt;p</span><span class="ot"> id=</span><span class="st">&quot;message&quot;</span><span class="kw">&gt;&lt;/p&gt;</span> <span class="co">&lt;!-- This will display any status messages --&gt;</span></a>
-<a class="sourceLine" id="cb3-12" title="12">  <span class="kw">&lt;div&gt;</span></a>
-<a class="sourceLine" id="cb3-13" title="13">    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> aria-label=</span><span class="st">&quot;current word&quot;</span><span class="ot"> id=</span><span class="st">&quot;typed-value&quot;</span> <span class="kw">/&gt;</span> <span class="co">&lt;!-- The textbox for typing --&gt;</span></a>
-<a class="sourceLine" id="cb3-14" title="14">    <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;button&quot;</span><span class="ot"> id=</span><span class="st">&quot;start&quot;</span><span class="kw">&gt;</span>Start<span class="kw">&lt;/button&gt;</span> <span class="co">&lt;!-- To start the game --&gt;</span></a>
-<a class="sourceLine" id="cb3-15" title="15">  <span class="kw">&lt;/div&gt;</span></a>
-<a class="sourceLine" id="cb3-16" title="16">  <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;script.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
-<a class="sourceLine" id="cb3-17" title="17"><span class="kw">&lt;/body&gt;</span></a>
-<a class="sourceLine" id="cb3-18" title="18"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">&lt;title&gt;</span>Typing game<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;style.css&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">    <span class="kw">&lt;h1&gt;</span>Typing game!<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="kw">&lt;p&gt;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">      Practice your typing skills with a quote from Sherlock Holmes. Click</a>
+<a class="sourceLine" id="cb3-11" title="11">      **start** to begin!</a>
+<a class="sourceLine" id="cb3-12" title="12">    <span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="kw">&lt;p</span><span class="ot"> id=</span><span class="st">&quot;quote&quot;</span><span class="kw">&gt;&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-14" title="14">    <span class="co">&lt;!-- This will display our quote --&gt;</span></a>
+<a class="sourceLine" id="cb3-15" title="15">    <span class="kw">&lt;p</span><span class="ot"> id=</span><span class="st">&quot;message&quot;</span><span class="kw">&gt;&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-16" title="16">    <span class="co">&lt;!-- This will display any status messages --&gt;</span></a>
+<a class="sourceLine" id="cb3-17" title="17">    <span class="kw">&lt;div&gt;</span></a>
+<a class="sourceLine" id="cb3-18" title="18">      <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> aria-label=</span><span class="st">&quot;current word&quot;</span><span class="ot"> id=</span><span class="st">&quot;typed-value&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-19" title="19">      <span class="co">&lt;!-- The textbox for typing --&gt;</span></a>
+<a class="sourceLine" id="cb3-20" title="20">      <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;button&quot;</span><span class="ot"> id=</span><span class="st">&quot;start&quot;</span><span class="kw">&gt;</span>Start<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb3-21" title="21">      <span class="co">&lt;!-- To start the game --&gt;</span></a>
+<a class="sourceLine" id="cb3-22" title="22">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-23" title="23">    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;script.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb3-24" title="24">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb3-25" title="25"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
 <h3 id="launch-the-application">Launch the application</h3>
 <p>It’s always best to develop iteratively to see how things look. Let’s launch our application. There’s a wonderful extension for Visual Studio Code called <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">Live Server</a> which will both host your application locally and refresh the browser each time you save.</p>
 <ul>
@@ -217,13 +224,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="co">// inside script.js</span></a>
 <a class="sourceLine" id="cb5-2" title="2"><span class="co">// all of our quotes</span></a>
 <a class="sourceLine" id="cb5-3" title="3"><span class="kw">const</span> quotes <span class="op">=</span> [</a>
-<a class="sourceLine" id="cb5-4" title="4">    <span class="st">&#39;When you have eliminated the impossible, whatever remains, however improbable, must be the truth.&#39;</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb5-5" title="5">    <span class="st">&#39;There is nothing more deceptive than an obvious fact.&#39;</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb5-6" title="6">    <span class="st">&#39;I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.&#39;</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb5-7" title="7">    <span class="st">&#39;I never make exceptions. An exception disproves the rule.&#39;</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb5-8" title="8">    <span class="st">&#39;What one man can invent another can discover.&#39;</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb5-9" title="9">    <span class="st">&#39;Nothing clears up a case so much as stating it to another person.&#39;</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb5-10" title="10">    <span class="st">&#39;Education never ends, Watson. It is a series of lessons, with the greatest for the last.&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="st">&quot;When you have eliminated the impossible, whatever remains, however improbable, must be the truth.&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="st">&quot;There is nothing more deceptive than an obvious fact.&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-6" title="6">  <span class="st">&quot;I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="st">&quot;I never make exceptions. An exception disproves the rule.&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="st">&quot;What one man can invent another can discover.&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-9" title="9">  <span class="st">&quot;Nothing clears up a case so much as stating it to another person.&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-10" title="10">  <span class="st">&quot;Education never ends, Watson. It is a series of lessons, with the greatest for the last.&quot;</span><span class="op">,</span></a>
 <a class="sourceLine" id="cb5-11" title="11">]<span class="op">;</span></a>
 <a class="sourceLine" id="cb5-12" title="12"><span class="co">// store the list of words and the index of the word the player is currently typing</span></a>
 <a class="sourceLine" id="cb5-13" title="13"><span class="kw">let</span> words <span class="op">=</span> []<span class="op">;</span></a>
@@ -231,9 +238,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb5-15" title="15"><span class="co">// the starting time</span></a>
 <a class="sourceLine" id="cb5-16" title="16"><span class="kw">let</span> startTime <span class="op">=</span> <span class="va">Date</span>.<span class="at">now</span>()<span class="op">;</span></a>
 <a class="sourceLine" id="cb5-17" title="17"><span class="co">// page elements</span></a>
-<a class="sourceLine" id="cb5-18" title="18"><span class="kw">const</span> quoteElement <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;quote&#39;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-19" title="19"><span class="kw">const</span> messageElement <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;message&#39;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-20" title="20"><span class="kw">const</span> typedValueElement <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;typed-value&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-18" title="18"><span class="kw">const</span> quoteElement <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;quote&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-19" title="19"><span class="kw">const</span> messageElement <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;message&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-20" title="20"><span class="kw">const</span> typedValueElement <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;typed-value&quot;</span>)<span class="op">;</span></a></code></pre></div>
 <p>✅ Go ahead and add more quotes to your game</p>
 <blockquote>
 <p><strong>NOTE:</strong> We can retrieve the elements whenever we want in code by using <code>document.getElementById</code>. Because of the fact we’re going to refer to these elements on a regular basis we’re going to avoid typos with string literals by using constants. Frameworks such as <a href="https://vuejs.org/">Vue.js</a> or <a href="https://reactjs.org/">React</a> can help you better manage centralizing your code.</p>
@@ -247,35 +254,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To begin the game, the player will click on start. Of course, we don’t know when they’re going to click start. This is where an <a href="https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener">event listener</a> comes into play. An event listener will allow us to listen for something to occur (an event) and execute code in response. In our case, we want to execute code when the user clicks on start.</p>
 <p>When the user clicks <strong>start</strong>, we need to select a quote, setup the user interface, and setup tracking for the current word and timing. Below is the JavaScript you’ll need to add; we discuss it just after the script block.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">// at the end of script.js</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;start&#39;</span>).<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;start&quot;</span>).<span class="at">addEventListener</span>(<span class="st">&quot;click&quot;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb6-3" title="3">  <span class="co">// get a quote</span></a>
 <a class="sourceLine" id="cb6-4" title="4">  <span class="kw">const</span> quoteIndex <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">Math</span>.<span class="at">random</span>() <span class="op">*</span> <span class="va">quotes</span>.<span class="at">length</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb6-5" title="5">  <span class="kw">const</span> quote <span class="op">=</span> quotes[quoteIndex]<span class="op">;</span></a>
 <a class="sourceLine" id="cb6-6" title="6">  <span class="co">// Put the quote into an array of words</span></a>
-<a class="sourceLine" id="cb6-7" title="7">  words <span class="op">=</span> <span class="va">quote</span>.<span class="at">split</span>(<span class="st">&#39; &#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  words <span class="op">=</span> <span class="va">quote</span>.<span class="at">split</span>(<span class="st">&quot; &quot;</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb6-8" title="8">  <span class="co">// reset the word index for tracking</span></a>
 <a class="sourceLine" id="cb6-9" title="9">  wordIndex <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb6-10" title="10"></a>
 <a class="sourceLine" id="cb6-11" title="11">  <span class="co">// UI updates</span></a>
 <a class="sourceLine" id="cb6-12" title="12">  <span class="co">// Create an array of span elements so we can set a class</span></a>
-<a class="sourceLine" id="cb6-13" title="13">  <span class="kw">const</span> spanWords <span class="op">=</span> <span class="va">words</span>.<span class="at">map</span>(<span class="kw">function</span>(word) <span class="op">{</span> <span class="cf">return</span> <span class="vs">`&lt;span&gt;</span><span class="sc">${</span>word<span class="sc">}</span><span class="vs"> &lt;/span&gt;`</span><span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb6-14" title="14">  <span class="co">// Convert into string and set as innerHTML on quote display</span></a>
-<a class="sourceLine" id="cb6-15" title="15">  <span class="va">quoteElement</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="va">spanWords</span>.<span class="at">join</span>(<span class="st">&#39;&#39;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb6-16" title="16">  <span class="co">// Highlight the first word</span></a>
-<a class="sourceLine" id="cb6-17" title="17">  <span class="va">quoteElement</span>.<span class="at">childNodes</span>[<span class="dv">0</span>].<span class="at">className</span> <span class="op">=</span> <span class="st">&#39;highlight&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-18" title="18">  <span class="co">// Clear any prior messages</span></a>
-<a class="sourceLine" id="cb6-19" title="19">  <span class="va">messageElement</span>.<span class="at">innerText</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-20" title="20"></a>
-<a class="sourceLine" id="cb6-21" title="21">  <span class="co">// Setup the textbox</span></a>
-<a class="sourceLine" id="cb6-22" title="22">  <span class="co">// Clear the textbox</span></a>
-<a class="sourceLine" id="cb6-23" title="23">  <span class="va">typedValueElement</span>.<span class="at">value</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-24" title="24">  <span class="co">// set focus</span></a>
-<a class="sourceLine" id="cb6-25" title="25">  <span class="va">typedValueElement</span>.<span class="at">focus</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb6-26" title="26">  <span class="co">// set the event handler</span></a>
-<a class="sourceLine" id="cb6-27" title="27"></a>
-<a class="sourceLine" id="cb6-28" title="28">  <span class="co">// Start the timer</span></a>
-<a class="sourceLine" id="cb6-29" title="29">  startTime <span class="op">=</span> <span class="kw">new</span> <span class="at">Date</span>().<span class="at">getTime</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb6-30" title="30"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-13" title="13">  <span class="kw">const</span> spanWords <span class="op">=</span> <span class="va">words</span>.<span class="at">map</span>(<span class="kw">function</span> (word) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-14" title="14">    <span class="cf">return</span> <span class="vs">`&lt;span&gt;</span><span class="sc">${</span>word<span class="sc">}</span><span class="vs"> &lt;/span&gt;`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-15" title="15">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-16" title="16">  <span class="co">// Convert into string and set as innerHTML on quote display</span></a>
+<a class="sourceLine" id="cb6-17" title="17">  <span class="va">quoteElement</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="va">spanWords</span>.<span class="at">join</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-18" title="18">  <span class="co">// Highlight the first word</span></a>
+<a class="sourceLine" id="cb6-19" title="19">  <span class="va">quoteElement</span>.<span class="at">childNodes</span>[<span class="dv">0</span>].<span class="at">className</span> <span class="op">=</span> <span class="st">&quot;highlight&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-20" title="20">  <span class="co">// Clear any prior messages</span></a>
+<a class="sourceLine" id="cb6-21" title="21">  <span class="va">messageElement</span>.<span class="at">innerText</span> <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-22" title="22"></a>
+<a class="sourceLine" id="cb6-23" title="23">  <span class="co">// Setup the textbox</span></a>
+<a class="sourceLine" id="cb6-24" title="24">  <span class="co">// Clear the textbox</span></a>
+<a class="sourceLine" id="cb6-25" title="25">  <span class="va">typedValueElement</span>.<span class="at">value</span> <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-26" title="26">  <span class="co">// set focus</span></a>
+<a class="sourceLine" id="cb6-27" title="27">  <span class="va">typedValueElement</span>.<span class="at">focus</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-28" title="28">  <span class="co">// set the event handler</span></a>
+<a class="sourceLine" id="cb6-29" title="29"></a>
+<a class="sourceLine" id="cb6-30" title="30">  <span class="co">// Start the timer</span></a>
+<a class="sourceLine" id="cb6-31" title="31">  startTime <span class="op">=</span> <span class="kw">new</span> <span class="at">Date</span>().<span class="at">getTime</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-32" title="32"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
 <p>Let’s break down the code!</p>
 <ul>
 <li>Setup the word tracking
@@ -307,7 +316,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="add-typing-logic">Add typing logic</h3>
 <p>As the player types, an <code>input</code> event will be raised. This event listener will check to ensure the player is typing the word correctly, and handle the current status of the game. Returning to <strong>script.js</strong>, add the following code to the end. We will break it down afterwards.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="co">// at the end of script.js</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="va">typedValueElement</span>.<span class="at">addEventListener</span>(<span class="st">&#39;input&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="va">typedValueElement</span>.<span class="at">addEventListener</span>(<span class="st">&quot;input&quot;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb7-3" title="3">  <span class="co">// Get the current word</span></a>
 <a class="sourceLine" id="cb7-4" title="4">  <span class="kw">const</span> currentWord <span class="op">=</span> words[wordIndex]<span class="op">;</span></a>
 <a class="sourceLine" id="cb7-5" title="5">  <span class="co">// get the current value</span></a>
@@ -317,29 +326,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb7-9" title="9">    <span class="co">// end of sentence</span></a>
 <a class="sourceLine" id="cb7-10" title="10">    <span class="co">// Display success</span></a>
 <a class="sourceLine" id="cb7-11" title="11">    <span class="kw">const</span> elapsedTime <span class="op">=</span> <span class="kw">new</span> <span class="at">Date</span>().<span class="at">getTime</span>() <span class="op">-</span> startTime<span class="op">;</span></a>
-<a class="sourceLine" id="cb7-12" title="12">    <span class="kw">const</span> message <span class="op">=</span> <span class="vs">`CONGRATULATIONS! You finished in </span><span class="sc">${</span>elapsedTime / <span class="dv">1000</span><span class="sc">}</span><span class="vs"> seconds.`</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-13" title="13">    <span class="va">messageElement</span>.<span class="at">innerText</span> <span class="op">=</span> message<span class="op">;</span></a>
-<a class="sourceLine" id="cb7-14" title="14">  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">typedValue</span>.<span class="at">endsWith</span>(<span class="st">&#39; &#39;</span>) <span class="op">&amp;&amp;</span> <span class="va">typedValue</span>.<span class="at">trim</span>() <span class="op">===</span> currentWord) <span class="op">{</span></a>
-<a class="sourceLine" id="cb7-15" title="15">    <span class="co">// end of word</span></a>
-<a class="sourceLine" id="cb7-16" title="16">    <span class="co">// clear the typedValueElement for the new word</span></a>
-<a class="sourceLine" id="cb7-17" title="17">    <span class="va">typedValueElement</span>.<span class="at">value</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-18" title="18">    <span class="co">// move to the next word</span></a>
-<a class="sourceLine" id="cb7-19" title="19">    wordIndex<span class="op">++;</span></a>
-<a class="sourceLine" id="cb7-20" title="20">    <span class="co">// reset the class name for all elements in quote</span></a>
-<a class="sourceLine" id="cb7-21" title="21">    <span class="cf">for</span> (<span class="kw">const</span> wordElement <span class="kw">of</span> <span class="va">quoteElement</span>.<span class="at">childNodes</span>) <span class="op">{</span></a>
-<a class="sourceLine" id="cb7-22" title="22">      <span class="va">wordElement</span>.<span class="at">className</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-23" title="23">    <span class="op">}</span></a>
-<a class="sourceLine" id="cb7-24" title="24">    <span class="co">// highlight the new word</span></a>
-<a class="sourceLine" id="cb7-25" title="25">    <span class="va">quoteElement</span>.<span class="at">childNodes</span>[wordIndex].<span class="at">className</span> <span class="op">=</span> <span class="st">&#39;highlight&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-26" title="26">  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">currentWord</span>.<span class="at">startsWith</span>(typedValue)) <span class="op">{</span></a>
-<a class="sourceLine" id="cb7-27" title="27">    <span class="co">// currently correct</span></a>
-<a class="sourceLine" id="cb7-28" title="28">    <span class="co">// highlight the next word</span></a>
-<a class="sourceLine" id="cb7-29" title="29">    <span class="va">typedValueElement</span>.<span class="at">className</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-30" title="30">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb7-31" title="31">    <span class="co">// error state</span></a>
-<a class="sourceLine" id="cb7-32" title="32">    <span class="va">typedValueElement</span>.<span class="at">className</span> <span class="op">=</span> <span class="st">&#39;error&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-33" title="33">  <span class="op">}</span></a>
-<a class="sourceLine" id="cb7-34" title="34"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-12" title="12">    <span class="kw">const</span> message <span class="op">=</span> <span class="vs">`CONGRATULATIONS! You finished in </span><span class="sc">${</span></a>
+<a class="sourceLine" id="cb7-13" title="13">      elapsedTime / <span class="dv">1000</span></a>
+<a class="sourceLine" id="cb7-14" title="14">    <span class="sc">}</span><span class="vs"> seconds.`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-15" title="15">    <span class="va">messageElement</span>.<span class="at">innerText</span> <span class="op">=</span> message<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-16" title="16">  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">typedValue</span>.<span class="at">endsWith</span>(<span class="st">&quot; &quot;</span>) <span class="op">&amp;&amp;</span> <span class="va">typedValue</span>.<span class="at">trim</span>() <span class="op">===</span> currentWord) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-17" title="17">    <span class="co">// end of word</span></a>
+<a class="sourceLine" id="cb7-18" title="18">    <span class="co">// clear the typedValueElement for the new word</span></a>
+<a class="sourceLine" id="cb7-19" title="19">    <span class="va">typedValueElement</span>.<span class="at">value</span> <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-20" title="20">    <span class="co">// move to the next word</span></a>
+<a class="sourceLine" id="cb7-21" title="21">    wordIndex<span class="op">++;</span></a>
+<a class="sourceLine" id="cb7-22" title="22">    <span class="co">// reset the class name for all elements in quote</span></a>
+<a class="sourceLine" id="cb7-23" title="23">    <span class="cf">for</span> (<span class="kw">const</span> wordElement <span class="kw">of</span> <span class="va">quoteElement</span>.<span class="at">childNodes</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-24" title="24">      <span class="va">wordElement</span>.<span class="at">className</span> <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-25" title="25">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-26" title="26">    <span class="co">// highlight the new word</span></a>
+<a class="sourceLine" id="cb7-27" title="27">    <span class="va">quoteElement</span>.<span class="at">childNodes</span>[wordIndex].<span class="at">className</span> <span class="op">=</span> <span class="st">&quot;highlight&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-28" title="28">  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">currentWord</span>.<span class="at">startsWith</span>(typedValue)) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-29" title="29">    <span class="co">// currently correct</span></a>
+<a class="sourceLine" id="cb7-30" title="30">    <span class="co">// highlight the next word</span></a>
+<a class="sourceLine" id="cb7-31" title="31">    <span class="va">typedValueElement</span>.<span class="at">className</span> <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-32" title="32">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-33" title="33">    <span class="co">// error state</span></a>
+<a class="sourceLine" id="cb7-34" title="34">    <span class="va">typedValueElement</span>.<span class="at">className</span> <span class="op">=</span> <span class="st">&quot;error&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-35" title="35">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-36" title="36"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
 <p>Let’s break down the code! We start by grabbing the current word and the value the player has typed thus far. Then we have waterfall logic, where we check if the quote is complete, the word is complete, the word is correct, or (finally), if there is an error.</p>
 <ul>
 <li>Quote is complete, indicated by <code>typedValue</code> being equal to <code>currentWord</code>, and <code>wordIndex</code> being equal to one less than the <code>length</code> of <code>words</code>

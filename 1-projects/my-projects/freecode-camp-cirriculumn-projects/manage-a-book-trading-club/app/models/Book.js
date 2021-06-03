@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
@@ -12,14 +12,16 @@ const bookSchema = new Schema({
   description: String,
   owner: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
   },
-  requests: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Request',
-    required: true,
-  }],
+  requests: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Request",
+      required: true,
+    },
+  ],
 });
 
 // bookSchema.methods.getTakeRequests = function getTakeRequests() {
@@ -35,8 +37,8 @@ const bookSchema = new Schema({
 // Mocha --watch breaks the require cache and mongoose will throw
 // an error trying to initialize an model twice, so ignore this error
 try {
-  mongoose.model('Book', bookSchema);
+  mongoose.model("Book", bookSchema);
   // eslint-disable-next-line no-empty
 } catch (err) {}
 
-module.exports = mongoose.model('Book');
+module.exports = mongoose.model("Book");

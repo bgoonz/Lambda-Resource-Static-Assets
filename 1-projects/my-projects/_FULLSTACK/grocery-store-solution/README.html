@@ -1,3 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
 <h1 id="grocery-store-app">Grocery Store App</h1>
 <p>In this project, you’ll connect Redux to a React application. You’’ll configure a Redux store, create Redux reducers and action creators, and use them in a Grocery Store application to add produce to a shopping cart. You’ll also learn how to normalize data in a Redux store.</p>
 <p>When you have finished today’s project, your application should have the following features:</p>
@@ -45,9 +123,7 @@
 <p>Next, define the <code>rootReducer</code> which will be the root reducer for the Redux store. The <code>rootReducer</code> will just be the return of <code>combineReducers</code> invoked with an empty object for now.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">// ./src/store/index.js</span></a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="co">// ...</span></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="kw">const</span> rootReducer <span class="op">=</span> <span class="at">combineReducers</span>(<span class="op">{</span></a>
-<a class="sourceLine" id="cb3-4" title="4"></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw">const</span> rootReducer <span class="op">=</span> <span class="at">combineReducers</span>(<span class="op">{}</span>)<span class="op">;</span></a></code></pre></div>
 <p>Now, you are going to create a store enhancer that will be set only when your application is in development. When in development, you want to add the <code>redux-logger</code> middleware and the Redux dev tools extension store enhancer to your store. For <code>redux-logger</code>, you will use the <code>applyMiddleware</code> which returns a store enhancer. The store enhancer for the Redux dev tools extension is set by the extension to a global property, <code>window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__</code>. This store enhancer combines other store enhancers into one, just like <code>compose</code> from <code>redux</code> does.</p>
 <p>Set the <code>enhancer</code> variable when in development to use these enhancers like so:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">// ./src/store/index.js</span></a>
@@ -79,13 +155,13 @@
 <p>In the <code>Root</code> function component, wrap the <code>BrowserRouter</code> component with the <code>Provider</code> component. Pass the prop of <code>store</code> with the value of <code>store</code> into the <code>Provider</code>.</p>
 <p>Your entry file should look like this:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">// ./src/index.js</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&#39;react&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="im">import</span> ReactDOM <span class="im">from</span> <span class="st">&#39;react-dom&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="im">import</span> <span class="op">{</span> BrowserRouter <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-router-dom&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="im">import</span> <span class="op">{</span> Provider <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-redux&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="im">import</span> configureStore <span class="im">from</span> <span class="st">&#39;./store&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="im">import</span> <span class="st">&#39;./index.css&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="im">import</span> App <span class="im">from</span> <span class="st">&#39;./App&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="im">import</span> React <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="im">import</span> ReactDOM <span class="im">from</span> <span class="st">&quot;react-dom&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="im">import</span> <span class="op">{</span> BrowserRouter <span class="op">}</span> <span class="im">from</span> <span class="st">&quot;react-router-dom&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="im">import</span> <span class="op">{</span> Provider <span class="op">}</span> <span class="im">from</span> <span class="st">&quot;react-redux&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="im">import</span> configureStore <span class="im">from</span> <span class="st">&quot;./store&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="im">import</span> <span class="st">&quot;./index.css&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="im">import</span> App <span class="im">from</span> <span class="st">&quot;./App&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb6-9" title="9"></a>
 <a class="sourceLine" id="cb6-10" title="10"><span class="kw">const</span> store <span class="op">=</span> <span class="at">configureStore</span>()<span class="op">;</span></a>
 <a class="sourceLine" id="cb6-11" title="11"></a>
@@ -103,7 +179,7 @@
 <a class="sourceLine" id="cb6-23" title="23">  <span class="op">&lt;</span><span class="va">React</span>.<span class="at">StrictMode</span><span class="op">&gt;</span></a>
 <a class="sourceLine" id="cb6-24" title="24">    <span class="op">&lt;</span>Root /<span class="op">&gt;</span></a>
 <a class="sourceLine" id="cb6-25" title="25">  &lt;/<span class="va">React</span>.<span class="at">StrictMode</span><span class="op">&gt;,</span></a>
-<a class="sourceLine" id="cb6-26" title="26">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;root&#39;</span>)</a>
+<a class="sourceLine" id="cb6-26" title="26">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;root&quot;</span>)</a>
 <a class="sourceLine" id="cb6-27" title="27">)<span class="op">;</span></a></code></pre></div>
 <h3 id="test-your-setup">Test your setup</h3>
 <p>Let’s test your setup!</p>
@@ -126,7 +202,7 @@
 <div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="co">// ./src/store/index.js</span></a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="co">// ...</span></a>
 <a class="sourceLine" id="cb8-3" title="3"><span class="kw">const</span> rootReducer <span class="op">=</span> <span class="at">combineReducers</span>(<span class="op">{</span></a>
-<a class="sourceLine" id="cb8-4" title="4">  <span class="dt">produce</span><span class="op">:</span> produceReducer</a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="dt">produce</span><span class="op">:</span> produceReducer<span class="op">,</span></a>
 <a class="sourceLine" id="cb8-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
 <p>The <code>produceReducer</code> is responsible for handling the produce information in the store, or the produce slice of state.</p>
 <p>Now, you need to define the <code>produceReducer</code>. Create a file in the <code>store</code> folder called <code>produce.js</code>. Define a function called <code>produceReducer</code> with <code>state</code> and <code>action</code> as parameters. The <code>state</code> should default to an empty object. Add a <code>switch/case</code> statement on <code>action.type</code> inside of the function and return the state as the <code>default</code> case. Export the <code>produceReducer</code> as default.</p>
@@ -154,7 +230,7 @@
 <a class="sourceLine" id="cb10-3" title="3">  <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Juice - Lagoon Mango&quot;</span><span class="op">,</span> <span class="dt">liked</span><span class="op">:</span> <span class="kw">false</span> <span class="op">},</span></a>
 <a class="sourceLine" id="cb10-4" title="4">  <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Lamb - Whole, Frozen&quot;</span><span class="op">,</span> <span class="dt">liked</span><span class="op">:</span> <span class="kw">false</span> <span class="op">},</span></a>
 <a class="sourceLine" id="cb10-5" title="5">  <span class="co">// ...</span></a>
-<a class="sourceLine" id="cb10-6" title="6">]</a></code></pre></div>
+<a class="sourceLine" id="cb10-6" title="6">]<span class="op">;</span></a></code></pre></div>
 <p>The object created from the array should look something like this:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="op">{</span></a>
 <a class="sourceLine" id="cb11-2" title="2">  <span class="dv">1</span><span class="op">:</span> <span class="op">{</span> <span class="dt">id</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;Longos - Greek Salad&quot;</span><span class="op">,</span> <span class="dt">liked</span><span class="op">:</span> <span class="kw">false</span> <span class="op">},</span></a>
@@ -164,14 +240,14 @@
 <a class="sourceLine" id="cb11-6" title="6"><span class="op">}</span></a></code></pre></div>
 <p>Try attempting this before looking below.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="co">// ./src/store/produce.js</span></a>
-<a class="sourceLine" id="cb12-2" title="2"><span class="im">import</span> produceData <span class="im">from</span> <span class="st">&#39;../mockData/produce.json&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="im">import</span> produceData <span class="im">from</span> <span class="st">&quot;../mockData/produce.json&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb12-3" title="3"></a>
-<a class="sourceLine" id="cb12-4" title="4"><span class="kw">const</span> POPULATE <span class="op">=</span> <span class="st">&#39;produce/POPULATE&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="kw">const</span> POPULATE <span class="op">=</span> <span class="st">&quot;produce/POPULATE&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb12-5" title="5"></a>
 <a class="sourceLine" id="cb12-6" title="6"><span class="im">export</span> <span class="kw">const</span> populateProduce <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb12-7" title="7">  <span class="cf">return</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb12-8" title="8">    <span class="dt">type</span><span class="op">:</span> POPULATE<span class="op">,</span></a>
-<a class="sourceLine" id="cb12-9" title="9">    <span class="dt">produce</span><span class="op">:</span> produceData</a>
+<a class="sourceLine" id="cb12-9" title="9">    <span class="dt">produce</span><span class="op">:</span> produceData<span class="op">,</span></a>
 <a class="sourceLine" id="cb12-10" title="10">  <span class="op">};</span></a>
 <a class="sourceLine" id="cb12-11" title="11"><span class="op">};</span></a>
 <a class="sourceLine" id="cb12-12" title="12"></a>
@@ -179,7 +255,7 @@
 <a class="sourceLine" id="cb12-14" title="14">  <span class="cf">switch</span> (<span class="va">action</span>.<span class="at">type</span>) <span class="op">{</span></a>
 <a class="sourceLine" id="cb12-15" title="15">    <span class="cf">case</span> <span class="dt">POPULATE</span><span class="op">:</span></a>
 <a class="sourceLine" id="cb12-16" title="16">      <span class="kw">const</span> newState <span class="op">=</span> <span class="op">{};</span></a>
-<a class="sourceLine" id="cb12-17" title="17">      <span class="va">action</span>.<span class="va">produce</span>.<span class="at">forEach</span>(produce <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-17" title="17">      <span class="va">action</span>.<span class="va">produce</span>.<span class="at">forEach</span>((produce) <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb12-18" title="18">        newState[<span class="va">produce</span>.<span class="at">id</span>] <span class="op">=</span> produce<span class="op">;</span></a>
 <a class="sourceLine" id="cb12-19" title="19">      <span class="op">}</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb12-20" title="20">      <span class="cf">return</span> newState<span class="op">;</span></a>
@@ -192,7 +268,7 @@
 <p>To test the <code>populateProduce</code> action, import it into the entry file and attach it to the <code>window</code> just like you did with the <code>store</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="co">// ./src/index.js</span></a>
 <a class="sourceLine" id="cb13-2" title="2"><span class="co">// ...</span></a>
-<a class="sourceLine" id="cb13-3" title="3"><span class="im">import</span> <span class="op">{</span> populateProduce <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;./store/produce&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="im">import</span> <span class="op">{</span> populateProduce <span class="op">}</span> <span class="im">from</span> <span class="st">&quot;./store/produce&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb13-4" title="4"><span class="co">// ...</span></a>
 <a class="sourceLine" id="cb13-5" title="5"><span class="cf">if</span> (<span class="va">process</span>.<span class="va">env</span>.<span class="at">NODE_ENV</span> <span class="op">!==</span> <span class="st">&quot;production&quot;</span>) <span class="op">{</span></a>
 <a class="sourceLine" id="cb13-6" title="6">  <span class="va">window</span>.<span class="at">store</span> <span class="op">=</span> store<span class="op">;</span></a>
@@ -220,8 +296,8 @@
 <p>Your <code>App</code> component should look something like this:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="co">// ./src/App.js</span></a>
 <a class="sourceLine" id="cb16-2" title="2"><span class="co">// ...</span></a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="im">import</span> <span class="op">{</span> useDispatch <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;react-redux&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb16-4" title="4"><span class="im">import</span> <span class="op">{</span> populateProduce <span class="op">}</span> <span class="im">from</span> <span class="st">&#39;./store/produce&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="im">import</span> <span class="op">{</span> useDispatch <span class="op">}</span> <span class="im">from</span> <span class="st">&quot;react-redux&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="im">import</span> <span class="op">{</span> populateProduce <span class="op">}</span> <span class="im">from</span> <span class="st">&quot;./store/produce&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb16-5" title="5"></a>
 <a class="sourceLine" id="cb16-6" title="6"><span class="kw">function</span> <span class="at">App</span>() <span class="op">{</span></a>
 <a class="sourceLine" id="cb16-7" title="7">  <span class="kw">const</span> dispatch <span class="op">=</span> <span class="at">useDispatch</span>()<span class="op">;</span></a>
@@ -235,7 +311,7 @@
 <h3 id="display-the-produce-in-a-list">Display the produce in a list</h3>
 <p>So far, you added the produce mock data into the Redux store state. But this didn’t change anything on your actual React application. To display the produce, you need the <code>ProduceList</code> component to access the produce slice of state from the Redux store.</p>
 <p>In the <code>ProduceList</code> component file, import <code>useSelector</code> from <code>react-redux</code>. <code>useSelector</code> accepts a function as a parameter. <code>useSelector</code> will pass the updated state into the function whenever the state gets updated. The return value of the function will be the return of the <code>useSelector</code> function. In the component, set the <code>produce</code> variable to the return of <code>useSelector</code> and pass in a function that will return the <code>produce</code> slice of state from the updated state.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">const</span> produce <span class="op">=</span> <span class="at">useSelector</span>(state <span class="kw">=&gt;</span> <span class="va">state</span>.<span class="at">produce</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">const</span> produce <span class="op">=</span> <span class="at">useSelector</span>((state) <span class="kw">=&gt;</span> <span class="va">state</span>.<span class="at">produce</span>)<span class="op">;</span></a></code></pre></div>
 <p>The <code>ProduceList</code> component will turn the products into an array of <code>ProduceDetails</code> components to be rendered.</p>
 <p>If you refresh the <a href="http://localhost:3000">http://localhost:3000</a> now, the produce should be displayed under “All Produce”!</p>
 <p>Commit your code!</p>
@@ -270,7 +346,7 @@
 <p>Hint: To create a new object that includes all the keys of another object with additional keys:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">const</span> newObj <span class="op">=</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb20-2" title="2">  ...<span class="at">oldObj</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb20-3" title="3">  <span class="dt">newKey</span><span class="op">:</span> <span class="op">{</span> <span class="dt">property</span><span class="op">:</span> <span class="st">&quot;value&quot;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb20-3" title="3">  <span class="dt">newKey</span><span class="op">:</span> <span class="op">{</span> <span class="dt">property</span><span class="op">:</span> <span class="st">&quot;value&quot;</span> <span class="op">},</span></a>
 <a class="sourceLine" id="cb20-4" title="4"><span class="op">};</span></a></code></pre></div>
 <p>Test the action creator in the same way that you tested the <code>populateProduce</code> action.</p>
 <h3 id="connect-the-plus-button-to-the-add-to-cart-action">Connect the plus button to the add to cart action</h3>
@@ -283,13 +359,12 @@
 <p>If you refresh <a href="http://localhost:3000">http://localhost:3000</a> and add a produce to the cart, you should see something in the cart now!</p>
 <p>There is something in the cart, but the item can’t be identified. The name of the produce should be displayed next to the count. The <code>name</code> of the produce is stored in the <code>produce</code> slice of state, but the <code>Cart</code> component only has the <code>cart</code> slice of state. Extract the <code>produce</code> from the state and set it to the <code>produce</code> variable.</p>
 <p>The <code>cartItems</code> array should return an array of produce items with information combined from both the cart and the produce slices of state.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1">  <span class="kw">const</span> cartItems <span class="op">=</span> <span class="va">Object</span>.<span class="at">values</span>(cart)</a>
-<a class="sourceLine" id="cb21-2" title="2">    .<span class="at">map</span>(item <span class="kw">=&gt;</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb21-3" title="3">      <span class="cf">return</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb21-4" title="4">        ...<span class="at">item</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb21-5" title="5">        ...<span class="at">produce</span>[<span class="va">item</span>.<span class="at">id</span>]</a>
-<a class="sourceLine" id="cb21-6" title="6">      <span class="op">};</span></a>
-<a class="sourceLine" id="cb21-7" title="7">    <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">const</span> cartItems <span class="op">=</span> <span class="va">Object</span>.<span class="at">values</span>(cart).<span class="at">map</span>((item) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb21-2" title="2">  <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb21-3" title="3">    ...<span class="at">item</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb21-4" title="4">    ...<span class="at">produce</span>[<span class="va">item</span>.<span class="at">id</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb21-5" title="5">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb21-6" title="6"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
 <p>Now if you refresh the page, you should see the cart items with names!</p>
 <p>This is a good time to commit! Every time you finish a phase, or a chunk of working code, commit!</p>
 <h2 id="phase-4-remove-produce-from-the-cart">Phase 4: Remove produce from the cart</h2>
@@ -309,9 +384,9 @@
 <div class="sourceCode" id="cb22"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1"><span class="co">// ./src/store/produce.js</span></a>
 <a class="sourceLine" id="cb22-2" title="2"><span class="im">export</span> <span class="kw">const</span> getAllProduce <span class="op">=</span> (state) <span class="kw">=&gt;</span> <span class="va">Object</span>.<span class="at">values</span>(<span class="va">state</span>.<span class="at">produce</span>)<span class="op">;</span></a></code></pre></div>
 <p>Import this function into the <code>ProduceList</code> component and remove the following lines:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1">  <span class="kw">const</span> produce <span class="op">=</span> <span class="at">useSelector</span>(state <span class="kw">=&gt;</span> <span class="va">state</span>.<span class="at">produce</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb23-2" title="2">  </a>
-<a class="sourceLine" id="cb23-3" title="3">  <span class="kw">const</span> produceArr <span class="op">=</span> <span class="va">Object</span>.<span class="at">values</span>(produce)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">const</span> produce <span class="op">=</span> <span class="at">useSelector</span>((state) <span class="kw">=&gt;</span> <span class="va">state</span>.<span class="at">produce</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-2" title="2"></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="kw">const</span> produceArr <span class="op">=</span> <span class="va">Object</span>.<span class="at">values</span>(produce)<span class="op">;</span></a></code></pre></div>
 <p>Replace it with this line:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">const</span> produceArr <span class="op">=</span> <span class="at">useSelector</span>(getAllProduce)<span class="op">;</span></a></code></pre></div>
 <p>This may seem like it’s much more work than just defining the selector function inside the component, but it will save you the time from having to refactor all your code in all the components if you change the structure of your state. Instead, you can just refactor the one file that holds all your Redux actions, reducer, and selector functions.</p>
@@ -323,3 +398,5 @@
 <p>Hint: Store an object and an array in your cart slice of state. If you did the selector functions correctly, you only need to update the Redux files. No need to change any of the React components.</p>
 <h2 id="bonus-phase-programmatically-open-the-cart-side-bar">Bonus Phase: Programmatically open the cart side bar</h2>
 <p>For an added bonus, try to configure the application to open the cart side bar whenever there is a new item added to the cart.</p>
+</body>
+</html>

@@ -92,7 +92,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <h2 id="drawing-simple-geometry">Drawing simple geometry</h2>
 <p>The Canvas is using a cartesian coordinate system to draw things. Thus it uses an x-axis and y-axis to express where something is located. The location <code>0,0</code> is the top left position and the bottom right is what you said to be the WIDTH and HEIGHT of the canvas.</p>
-<p><img src="canvas_grid.png" alt="the canvas’s grid" /> &gt; Image from <a href="https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes">MDN</a></p>
+<figure>
+<img src="canvas_grid.png" alt="the canvas’s grid" /><figcaption>the canvas’s grid</figcaption>
+</figure>
+<blockquote>
+<p>Image from <a href="https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes">MDN</a></p>
+</blockquote>
 <p>To draw on the canvas element you will need to go through the following steps:</p>
 <ol type="1">
 <li><strong>Get a reference</strong> to the Canvas element.</li>
@@ -108,10 +113,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-6" title="6">ctx <span class="op">=</span> <span class="va">canvas</span>.<span class="at">getContext</span>(<span class="st">&quot;2d&quot;</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb2-7" title="7"></a>
 <a class="sourceLine" id="cb2-8" title="8"><span class="co">//3. fill it with the color red</span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&#39;red&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;red&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb2-10" title="10"></a>
 <a class="sourceLine" id="cb2-11" title="11"><span class="co">//4. and draw a rectangle with these parameters, setting location and size</span></a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">,</span> <span class="dv">200</span><span class="op">,</span> <span class="dv">200</span>) <span class="co">// x,y,width, height</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-12" title="12"><span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">200</span><span class="op">,</span> <span class="dv">200</span>)<span class="op">;</span> <span class="co">// x,y,width, height</span></a></code></pre></div>
 <p>✅ The Canvas API mostly focuses on 2D shapes, but you can also draw 3D elements to a web site; for this, you might use the <a href="https://developer.mozilla.org/docs/Web/API/WebGL_API">WebGL API</a>.</p>
 <p>You can draw all sorts of things with the Canvas API like:</p>
 <ul>
@@ -124,10 +129,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You load an image asset by creating an <code>Image</code> object and set its <code>src</code> property. Then you listen to the <code>load</code> event to know when it’s ready to be used. The code looks like this:</p>
 <h3 id="load-asset">Load asset</h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> img <span class="op">=</span> <span class="kw">new</span> <span class="at">Image</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="va">img</span>.<span class="at">src</span> <span class="op">=</span> <span class="st">&#39;path/to/my/image.png&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="va">img</span>.<span class="at">src</span> <span class="op">=</span> <span class="st">&quot;path/to/my/image.png&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="va">img</span>.<span class="at">onload</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb3-4" title="4">  <span class="co">// image loaded and ready to be used</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="op">}</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-5" title="5"><span class="op">};</span></a></code></pre></div>
 <h3 id="load-asset-pattern">Load asset pattern</h3>
 <p>It’s recommended to wrap the above in a construct like so, so it’s easier to use and you only try to manipulate it when it’s fully loaded:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">function</span> <span class="at">loadAsset</span>(path) <span class="op">{</span></a>
@@ -137,25 +142,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb4-5" title="5">    <span class="va">img</span>.<span class="at">onload</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb4-6" title="6">      <span class="co">// image loaded and ready to be used</span></a>
 <a class="sourceLine" id="cb4-7" title="7">      <span class="at">resolve</span>(img)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-8" title="8">    <span class="op">}</span></a>
-<a class="sourceLine" id="cb4-9" title="9">  <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="op">}</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb4-10" title="10"><span class="op">}</span></a>
 <a class="sourceLine" id="cb4-11" title="11"></a>
 <a class="sourceLine" id="cb4-12" title="12"><span class="co">// use like so</span></a>
 <a class="sourceLine" id="cb4-13" title="13"></a>
 <a class="sourceLine" id="cb4-14" title="14"><span class="kw">async</span> <span class="kw">function</span> <span class="at">run</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-15" title="15">  <span class="kw">const</span> heroImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&#39;hero.png&#39;</span>)</a>
-<a class="sourceLine" id="cb4-16" title="16">  <span class="kw">const</span> monsterImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&#39;monster.png&#39;</span>)</a>
+<a class="sourceLine" id="cb4-15" title="15">  <span class="kw">const</span> heroImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&quot;hero.png&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">  <span class="kw">const</span> monsterImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&quot;monster.png&quot;</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb4-17" title="17"><span class="op">}</span></a></code></pre></div>
 <p>To draw game assets to a screen, your code would look like this:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">run</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">const</span> heroImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&#39;hero.png&#39;</span>)</a>
-<a class="sourceLine" id="cb5-3" title="3">  <span class="kw">const</span> monsterImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&#39;monster.png&#39;</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">const</span> heroImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&quot;hero.png&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="kw">const</span> monsterImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&quot;monster.png&quot;</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb5-4" title="4"></a>
 <a class="sourceLine" id="cb5-5" title="5">  canvas <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;myCanvas&quot;</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb5-6" title="6">  ctx <span class="op">=</span> <span class="va">canvas</span>.<span class="at">getContext</span>(<span class="st">&quot;2d&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-7" title="7">  <span class="va">ctx</span>.<span class="at">drawImage</span>(heroImg<span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span>/<span class="dv">2</span><span class="op">,</span><span class="va">canvas</span>.<span class="at">height</span>/<span class="dv">2</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-8" title="8">  <span class="va">ctx</span>.<span class="at">drawImage</span>(monsterImg<span class="op">,</span> <span class="dv">0</span><span class="op">,</span><span class="dv">0</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="va">ctx</span>.<span class="at">drawImage</span>(heroImg<span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span> / <span class="dv">2</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span> / <span class="dv">2</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="va">ctx</span>.<span class="at">drawImage</span>(monsterImg<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb5-9" title="9"><span class="op">}</span></a></code></pre></div>
 <h2 id="now-its-time-to-start-building-your-game">Now it’s time to start building your game</h2>
 <h3 id="what-to-build">What to build</h3>
@@ -192,7 +197,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><strong>Draw</strong> a canvas with black background &gt; tip: add two lines under the appropriate TODO in <code>/app.js</code>, setting the <code>ctx</code> element to be black and the top/left coordinates to be at 0,0 and the height and width to equal that of the canvas.</li>
 <li><strong>Load</strong> textures &gt; tip: add the player and enemy images using <code>await loadTexture</code> and passing in the image path. You won’t see them on the screen yet!</li>
 <li><strong>Draw</strong> hero in the center of the screen in the bottom half &gt; tip: use the <code>drawImage</code> API to draw heroImg to the screen, setting <code>canvas.width / 2 - 45</code> and <code>canvas.height - canvas.height / 4)</code>;</li>
-<li><p><strong>Draw</strong> 5*5 monsters &gt; tip: Now you can uncomment the code to draw enemies on the screen. Next, go to the <code>createEnemies</code> function and build it out.</p>
+<li><p><strong>Draw</strong> 5*5 monsters</p>
+<blockquote>
+<p>tip: Now you can uncomment the code to draw enemies on the screen. Next, go to the <code>createEnemies</code> function and build it out.</p>
+</blockquote>
 <p>First, set up some constants:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">const</span> MONSTER_TOTAL <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="kw">const</span> MONSTER_WIDTH <span class="op">=</span> MONSTER_TOTAL <span class="op">*</span> <span class="dv">98</span><span class="op">;</span></a>
@@ -200,10 +208,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb8-4" title="4"><span class="kw">const</span> STOP_X <span class="op">=</span> START_X <span class="op">+</span> MONSTER_WIDTH<span class="op">;</span></a></code></pre></div>
 <p>then, create a loop to draw the array of monsters onto the screen:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="cf">for</span> (<span class="kw">let</span> x <span class="op">=</span> START_X<span class="op">;</span> x <span class="op">&lt;</span> STOP_X<span class="op">;</span> x <span class="op">+=</span> <span class="dv">98</span>) <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-2" title="2">    <span class="cf">for</span> (<span class="kw">let</span> y <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> y <span class="op">&lt;</span> <span class="dv">50</span> <span class="op">*</span> <span class="dv">5</span><span class="op">;</span> y <span class="op">+=</span> <span class="dv">50</span>) <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-3" title="3">      <span class="va">ctx</span>.<span class="at">drawImage</span>(enemyImg<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-4" title="4">    <span class="op">}</span></a>
-<a class="sourceLine" id="cb9-5" title="5">  <span class="op">}</span></a></code></pre></div></li>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="cf">for</span> (<span class="kw">let</span> y <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> y <span class="op">&lt;</span> <span class="dv">50</span> <span class="op">*</span> <span class="dv">5</span><span class="op">;</span> y <span class="op">+=</span> <span class="dv">50</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="va">ctx</span>.<span class="at">drawImage</span>(enemyImg<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="op">}</span></a></code></pre></div></li>
 </ol>
 <h2 id="result">Result</h2>
 <p>The finished result should look like so:</p>

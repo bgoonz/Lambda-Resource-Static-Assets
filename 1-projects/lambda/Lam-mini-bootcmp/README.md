@@ -1,7 +1,5 @@
 ---
-
 ##### !EASTER EGGS: Click on the ▶︎ black ▶︎ triangles ▶︎ to reveal the EASTER EGGS!
-
 ---
 
 # Lambda-School-mini-bootcamp-2

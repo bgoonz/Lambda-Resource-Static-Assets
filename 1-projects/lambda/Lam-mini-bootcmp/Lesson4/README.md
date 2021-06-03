@@ -1,7 +1,5 @@
 ---
-
 #### EASTER EGGS: Click on the ▶︎ black ▶︎ triangles ▶︎ to reveal the EASTER EGGS!
-
 ---
 
 # Lecture 4 Notes - JavaScript and the DOM

@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-const GitHubStrategy = require('passport-github').Strategy;
+const GitHubStrategy = require("passport-github").Strategy;
 
-const User = require('../app/models/User.js');
+const User = require("../app/models/User.js");
 
 const githubAuth = {
   clientID: process.env.GITHUB_KEY,
@@ -36,14 +36,13 @@ function findOrCreateUser(profile, done) {
       newUser.providerId = profile.id;
       newUser.fullName = profile.displayName;
       newUser.username = profile.username || profile.displayName;
-      if (profile.provider === 'github') {
+      if (profile.provider === "github") {
         newUser.city = (profile._json || {}).location;
       }
-      if (profile.provider === 'linkedin') {
+      if (profile.provider === "linkedin") {
         newUser.city = ((profile._json || {}).location || {}).name;
       }
-      return newUser.save()
-        .then(() => done(null, newUser));
+      return newUser.save().then(() => done(null, newUser));
     })
     .catch(done);
 }
@@ -59,11 +58,11 @@ function Passport(passport) {
     });
   });
 
-  passport.use(new GitHubStrategy(githubAuth,
-  (token, refreshToken, profile, done) => {
-    process.nextTick(() => findOrCreateUser(profile, done));
-  }));
-
+  passport.use(
+    new GitHubStrategy(githubAuth, (token, refreshToken, profile, done) => {
+      process.nextTick(() => findOrCreateUser(profile, done));
+    })
+  );
 
   /* 
     passport.use(new GoogleStrategy(googleAuth,

@@ -120,34 +120,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb3-3" title="3"><span class="op">}</span></a>
 <a class="sourceLine" id="cb3-4" title="4"></a>
 <a class="sourceLine" id="cb3-5" title="5"><span class="kw">function</span> <span class="at">isEnemiesDead</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-6" title="6">  <span class="kw">const</span> enemies <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>((go) <span class="kw">=&gt;</span> <span class="va">go</span>.<span class="at">type</span> <span class="op">===</span> <span class="st">&quot;Enemy&quot;</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="va">go</span>.<span class="at">dead</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-7" title="7">  <span class="cf">return</span> <span class="va">enemies</span>.<span class="at">length</span> <span class="op">===</span> <span class="dv">0</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="op">}</span></a></code></pre></div></li>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="kw">const</span> enemies <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>(</a>
+<a class="sourceLine" id="cb3-7" title="7">    (go) <span class="kw">=&gt;</span> <span class="va">go</span>.<span class="at">type</span> <span class="op">===</span> <span class="st">&quot;Enemy&quot;</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="va">go</span>.<span class="at">dead</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="cf">return</span> <span class="va">enemies</span>.<span class="at">length</span> <span class="op">===</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="op">}</span></a></code></pre></div></li>
 <li><p><strong>Add logic to message handlers</strong>. Edit the <code>eventEmitter</code> to handle these conditions:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> first<span class="op">,</span> second <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-2" title="2">    <span class="va">first</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb4-3" title="3">    <span class="va">second</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb4-4" title="4">    <span class="va">hero</span>.<span class="at">incrementPoints</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="va">first</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="va">second</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="va">hero</span>.<span class="at">incrementPoints</span>()<span class="op">;</span></a>
 <a class="sourceLine" id="cb4-5" title="5"></a>
-<a class="sourceLine" id="cb4-6" title="6">    <span class="cf">if</span> (<span class="at">isEnemiesDead</span>()) <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-7" title="7">      <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">GAME_END_WIN</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-8" title="8">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="cf">if</span> (<span class="at">isEnemiesDead</span>()) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">GAME_END_WIN</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="op">}</span></a>
 <a class="sourceLine" id="cb4-9" title="9"><span class="op">}</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb4-10" title="10"></a>
 <a class="sourceLine" id="cb4-11" title="11"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_HERO</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> enemy <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-12" title="12">    <span class="va">enemy</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb4-13" title="13">    <span class="va">hero</span>.<span class="at">decrementLife</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-14" title="14">    <span class="cf">if</span> (<span class="at">isHeroDead</span>())  <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-15" title="15">      <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">GAME_END_LOSS</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-16" title="16">      <span class="cf">return</span><span class="op">;</span> <span class="co">// loss before victory</span></a>
-<a class="sourceLine" id="cb4-17" title="17">    <span class="op">}</span></a>
-<a class="sourceLine" id="cb4-18" title="18">    <span class="cf">if</span> (<span class="at">isEnemiesDead</span>()) <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-19" title="19">      <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">GAME_END_WIN</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-20" title="20">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-12" title="12">  <span class="va">enemy</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-13" title="13">  <span class="va">hero</span>.<span class="at">decrementLife</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-14" title="14">  <span class="cf">if</span> (<span class="at">isHeroDead</span>()) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-15" title="15">    <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">GAME_END_LOSS</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">    <span class="cf">return</span><span class="op">;</span> <span class="co">// loss before victory</span></a>
+<a class="sourceLine" id="cb4-17" title="17">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-18" title="18">  <span class="cf">if</span> (<span class="at">isEnemiesDead</span>()) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-19" title="19">    <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">GAME_END_WIN</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-20" title="20">  <span class="op">}</span></a>
 <a class="sourceLine" id="cb4-21" title="21"><span class="op">}</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb4-22" title="22"></a>
 <a class="sourceLine" id="cb4-23" title="23"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">GAME_END_WIN</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-24" title="24">    <span class="at">endGame</span>(<span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-24" title="24">  <span class="at">endGame</span>(<span class="kw">true</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb4-25" title="25"><span class="op">}</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb4-26" title="26"></a>
 <a class="sourceLine" id="cb4-27" title="27"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">GAME_END_LOSS</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
@@ -200,7 +202,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb9-16" title="16">        <span class="st">&quot;You died !!! Press [Enter] to start a new game Captain Pew Pew&quot;</span></a>
 <a class="sourceLine" id="cb9-17" title="17">      )<span class="op">;</span></a>
 <a class="sourceLine" id="cb9-18" title="18">    <span class="op">}</span></a>
-<a class="sourceLine" id="cb9-19" title="19">  <span class="op">},</span> <span class="dv">200</span>)  </a>
+<a class="sourceLine" id="cb9-19" title="19">  <span class="op">},</span> <span class="dv">200</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb9-20" title="20"><span class="op">}</span></a></code></pre></div></li>
 <li><p><strong>Restart logic</strong>. When all lives are lost or the player won the game, display that the game can be restarted. Additionally restart the game when the <em>restart</em> key is hit (you can decide what key should be mapped to restart).</p>
 <ol type="1">

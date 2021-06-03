@@ -1,27 +1,27 @@
-const util = require('util');
-const fs = require('fs');
+const util = require("util");
+const fs = require("fs");
 
-let request = require('request');
+let request = require("request");
 request = util.promisify(request);
 
-const { baseApiUrl, twitchCID } = require('../config');
+const { baseApiUrl, twitchCID } = require("../config");
 
 const _users = [
-  'ESL_SC2',
-  'OgamingSC2',
-  'cretetion',
-  'freecodecamp',
-  'storbeck',
-  'habathcx',
-  'RobotCaleb',
-  'noobs2ninjas',
-  'test_channel',
+  "ESL_SC2",
+  "OgamingSC2",
+  "cretetion",
+  "freecodecamp",
+  "storbeck",
+  "habathcx",
+  "RobotCaleb",
+  "noobs2ninjas",
+  "test_channel",
 ];
 
 const reqOpts = {
-  method: 'GET',
+  method: "GET",
   headers: {
-    'Client-ID': twitchCID,
+    "Client-ID": twitchCID,
   },
 };
 const updateStaticData = async () => {
@@ -33,7 +33,7 @@ const updateStaticData = async () => {
       },
     });
     const users = u.body;
-    const user_id = JSON.parse(users).data.map(u => u.id);
+    const user_id = JSON.parse(users).data.map((u) => u.id);
     const s = await request(`${baseApiUrl}/helix/streams`, {
       ...reqOpts,
       qs: {
@@ -41,7 +41,7 @@ const updateStaticData = async () => {
       },
     });
     const streams = s.body;
-    const game_ids = JSON.parse(streams).data.map(s => s.game_id);
+    const game_ids = JSON.parse(streams).data.map((s) => s.game_id);
     const g = await request(`${baseApiUrl}/helix/games`, {
       ...reqOpts,
       qs: {
@@ -58,13 +58,13 @@ const updateStaticData = async () => {
   }
 };
 
-const getKrakenUserData = async user => {
-  const types = ['users', 'streams', 'channels'];
+const getKrakenUserData = async (user) => {
+  const types = ["users", "streams", "channels"];
   return Promise.all(
-    types.map(type =>
+    types.map((type) =>
       request(`${baseApiUrl}/kraken/${type}/${user}`, { ...reqOpts })
     )
-  ).then(data => {
+  ).then((data) => {
     const out = {};
     data.forEach((d, i) => {
       out[types[i]] = JSON.parse(d.body);

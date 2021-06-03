@@ -1,18 +1,17 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 // Set up mongoose connection
 function connection(dbUrl) {
   mongoose.Promise = global.Promise;
-  mongoose.connect(dbUrl, { 
+  mongoose.connect(dbUrl, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   });
   const db = mongoose.connection;
-  db.on('error', console.error);
+  db.on("error", console.error);
   return db;
 }
 
 module.exports = connection;
-

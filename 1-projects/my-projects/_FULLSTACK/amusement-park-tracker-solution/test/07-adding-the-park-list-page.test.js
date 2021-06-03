@@ -1,20 +1,17 @@
 /* eslint-disable no-loop-func */
 
-const { describe, it, before } = require('mocha');
-const { expect } = require('chai');
-const request = require('supertest');
-const cheerio = require('cheerio');
+const { describe, it, before } = require("mocha");
+const { expect } = require("chai");
+const request = require("supertest");
+const cheerio = require("cheerio");
 
-const { parks: parksData } = require('./data');
+const { parks: parksData } = require("./data");
 const {
   addTestDatabaseConfig,
   loadModule,
   suppressRequestLogging,
-} = require('./utils');
-const {
-  checkHeading,
-  setDomElements,
-} = require('./utils/form');
+} = require("./utils");
+const { checkHeading, setDomElements } = require("./utils/form");
 
 const runSpecs = () => {
   let bail = false;
@@ -23,8 +20,8 @@ const runSpecs = () => {
 
   // Test that the `config/database` module exists.
 
-  describe('`config/database` module', () => {
-    const database = loadModule('../config/database');
+  describe("`config/database` module", () => {
+    const database = loadModule("../config/database");
 
     if (database === null) {
       bail = true;
@@ -40,8 +37,8 @@ const runSpecs = () => {
   // and exports the expected properties
   // (i.e. `Sequelize` and `sequelize`).
 
-  describe('`db/models` module', () => {
-    models = loadModule('../db/models');
+  describe("`db/models` module", () => {
+    models = loadModule("../db/models");
 
     if (models === null) {
       bail = true;
@@ -54,11 +51,11 @@ const runSpecs = () => {
 
   // Test that the Park model exists.
 
-  describe('`Park` model', () => {
+  describe("`Park` model", () => {
     ({ sequelize } = models);
     const { Park } = models;
 
-    it('should exist', () => {
+    it("should exist", () => {
       expect(Park).to.not.be.undefined;
     });
 
@@ -71,8 +68,8 @@ const runSpecs = () => {
 
   // Test that the `app` module exists.
 
-  describe('`app` module', () => {
-    app = loadModule('../app');
+  describe("`app` module", () => {
+    app = loadModule("../app");
 
     if (app === null) {
       bail = true;
@@ -86,15 +83,15 @@ const runSpecs = () => {
 
   // Test that the `routes` module exists.
 
-  describe('`routes` module', () => {
-    const routes = loadModule('../routes');
+  describe("`routes` module", () => {
+    const routes = loadModule("../routes");
 
     if (routes === null) {
       bail = true;
       return;
     }
 
-    describe('`/parks` route', () => {
+    describe("`/parks` route", () => {
       let $ = null;
       let parks = null;
 
@@ -103,17 +100,19 @@ const runSpecs = () => {
         // and populate the database with data.
         await sequelize.sync({ force: true });
         const queryInterface = sequelize.getQueryInterface();
-        await queryInterface.bulkInsert('Parks', parksData);
+        await queryInterface.bulkInsert("Parks", parksData);
 
         // Query the list of parks
         // (used later to test the rendered table).
-        const result = await sequelize.query('SELECT * FROM Parks ORDER BY parkName;');
+        const result = await sequelize.query(
+          "SELECT * FROM Parks ORDER BY parkName;"
+        );
         [parks] = result;
 
         // Make a request to the `/parks` route.
         const res = await request(app)
-          .get('/parks')
-          .expect('Content-type', /html/)
+          .get("/parks")
+          .expect("Content-type", /html/)
           .expect(200);
 
         $ = setDomElements(res);
@@ -139,25 +138,25 @@ const runSpecs = () => {
       //         td= (park.attractions.length || 0)
       //         td: a(class='btn btn-primary' href=`/park/${park.id}` role='button') Details
 
-      checkHeading('Parks');
+      checkHeading("Parks");
 
       it('should render an "Add Park" hyperlink (`<a>` element) with an `href` attribute set to "/park/add"', () => {
         const addParkHyperlink = $('a[href="/park/add"]');
         expect(addParkHyperlink.length).to.equal(1);
-        expect(addParkHyperlink.text()).to.equal('Add Park');
+        expect(addParkHyperlink.text()).to.equal("Add Park");
       });
 
-      describe('should render a table', () => {
-        describe('containing a header row', () => {
+      describe("should render a table", () => {
+        describe("containing a header row", () => {
           let parksTableHeaderRow = null;
           let cells = null;
 
           before(() => {
-            parksTableHeaderRow = $('table thead tr');
-            cells = $('table thead tr th');
+            parksTableHeaderRow = $("table thead tr");
+            cells = $("table thead tr th");
           });
 
-          it('that exists', () => {
+          it("that exists", () => {
             expect(parksTableHeaderRow.length).to.equal(1);
           });
 
@@ -169,30 +168,30 @@ const runSpecs = () => {
           // th(scope='col')
 
           it('cell 1 contains the text "Park Name"', () => {
-            expect(cells.eq(0).text()).to.equal('Park Name');
+            expect(cells.eq(0).text()).to.equal("Park Name");
           });
 
           it('cell 2 contains the text "Location"', () => {
-            expect(cells.eq(1).text()).to.equal('Location');
+            expect(cells.eq(1).text()).to.equal("Location");
           });
 
           it('cell 3 contains the text "Opened"', () => {
-            expect(cells.eq(2).text()).to.equal('Opened');
+            expect(cells.eq(2).text()).to.equal("Opened");
           });
 
           it('cell 4 contains the text ""', () => {
-            expect(cells.eq(3).text()).to.equal('');
+            expect(cells.eq(3).text()).to.equal("");
           });
         });
 
-        describe('containing rows', () => {
+        describe("containing rows", () => {
           let parksTableRows = null;
 
           before(() => {
-            parksTableRows = $('table tbody tr');
+            parksTableRows = $("table tbody tr");
           });
 
-          it('for each of the available parks', () => {
+          it("for each of the available parks", () => {
             expect(parksTableRows.length).to.equal(parksData.length);
           });
 
@@ -214,10 +213,10 @@ const runSpecs = () => {
                 // above `before()` method call that retrieves
                 // the parks data from the database has completed.
                 park = parks[index];
-                cells = $('td', parksTableRows.eq(index));
+                cells = $("td", parksTableRows.eq(index));
               });
 
-              it('should contain 4 table cells', () => {
+              it("should contain 4 table cells", () => {
                 expect(cells.length).to.equal(4);
               });
 
@@ -231,7 +230,9 @@ const runSpecs = () => {
               });
 
               it(`row ${rowNumber} cell 2 contains the interpolated string "\`$\{park.city}, $\{park.provinceState} $\{park.country}\`"`, () => {
-                expect(cells.eq(1).text()).to.equal(`${park.city}, ${park.provinceState} ${park.country}`);
+                expect(cells.eq(1).text()).to.equal(
+                  `${park.city}, ${park.provinceState} ${park.country}`
+                );
               });
 
               it(`row ${rowNumber} cell 3 contains the \`opened\` property value`, () => {
@@ -239,9 +240,12 @@ const runSpecs = () => {
               });
 
               it(`row ${rowNumber} cell 4 contains a "Details" hyperlink (\`<a>\` element) with an \`href\` attribute set to "/park/$\{park.id}"`, () => {
-                const detailsHyperlink = $(`a[href="/park/${park.id}"]`, cells.eq(3));
+                const detailsHyperlink = $(
+                  `a[href="/park/${park.id}"]`,
+                  cells.eq(3)
+                );
                 expect(detailsHyperlink.length).to.equal(1);
-                expect(detailsHyperlink.text()).to.equal('Details');
+                expect(detailsHyperlink.text()).to.equal("Details");
               });
             });
           } // End of the `for` loop.

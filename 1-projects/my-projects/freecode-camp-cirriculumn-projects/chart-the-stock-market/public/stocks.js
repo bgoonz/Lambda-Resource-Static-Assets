@@ -2,13 +2,13 @@ var stockData = {};
 
 /////////// socket connection ////////////
 // const socket = io.connect('http://localhost:50035'); // local
-const socket = io.connect('https://chart-the-stock-market.freecodecamp.rocks/'); // .rocks
+const socket = io.connect("https://chart-the-stock-market.freecodecamp.rocks/"); // .rocks
 
 //////////// query DOM ////////////
-const symbolInput = document.getElementById('symbolInput'),
-  getStockBtn = document.getElementById('getStockBtn'),
-  stockCanvas = document.getElementById('stockCanvas'),
-  allElements = document.getElementsByTagName('*');
+const symbolInput = document.getElementById("symbolInput"),
+  getStockBtn = document.getElementById("getStockBtn"),
+  stockCanvas = document.getElementById("stockCanvas"),
+  allElements = document.getElementsByTagName("*");
 
 let loading = true;
 startLoading();
@@ -17,102 +17,106 @@ startLoading();
 function startLoading() {
   loading = true;
 
-  for(var i=0; i<allElements.length; i++) {
-    allElements[i].classList.add('wait');
+  for (var i = 0; i < allElements.length; i++) {
+    allElements[i].classList.add("wait");
   }
 }
 
 function doneLoading() {
-  for(var i=0; i<allElements.length; i++) {
-    allElements[i].classList.remove('wait');
+  for (var i = 0; i < allElements.length; i++) {
+    allElements[i].classList.remove("wait");
   }
   loading = false;
 }
 
 function emitNewStock() {
-  if(!loading) {
+  if (!loading) {
     startLoading();
 
-    socket.emit('newStock', {
-      symbol: symbolInput.value.toUpperCase()
+    socket.emit("newStock", {
+      symbol: symbolInput.value.toUpperCase(),
     });
   }
 }
 
 function deleteStock(symbol) {
-  if(!loading) {
+  if (!loading) {
     startLoading();
-    socket.emit('deleteStock', {
-      symbol: symbol
+    socket.emit("deleteStock", {
+      symbol: symbol,
     });
   }
 }
 
-getStockBtn.addEventListener('click', emitNewStock);
-symbolInput.addEventListener('keyup', function(e) {
-  if(e.keyCode === 13) {
+getStockBtn.addEventListener("click", emitNewStock);
+symbolInput.addEventListener("keyup", function (e) {
+  if (e.keyCode === 13) {
     emitNewStock();
-   }
+  }
 });
 
 //////////// chart ////////////
 var myChart = new Chart(document.getElementById("stockCanvas"), {
-  type: 'line',
+  type: "line",
   data: {},
-    options: {
-    scales:{
-      xAxes:[{
-        gridLines:{
-          color:'#999' 
+  options: {
+    scales: {
+      xAxes: [
+        {
+          gridLines: {
+            color: "#999",
+          },
+          ticks: {
+            fontColor: "black",
+          },
         },
-        ticks:{
-          fontColor: 'black' 
-        }
-      }],
-      yAxes:[{
-        gridLines:{
-          color: '#999'
+      ],
+      yAxes: [
+        {
+          gridLines: {
+            color: "#999",
+          },
+          ticks: {
+            fontColor: "black",
+          },
+          scaleLabel: {
+            display: true,
+            labelString: "Price (USD)",
+          },
         },
-        ticks:{
-          fontColor:'black'
-        },
-        scaleLabel: {
-          display: true,
-          labelString: 'Price (USD)'
-        }
-      }],
+      ],
     },
     responsive: false,
     legend: {
       display: true,
-        'onClick': function (evt, item) {
+      onClick: function (evt, item) {
         deleteStock(item.text);
       },
-      'onHover': function() {
-        stockCanvas.style.cursor = 'pointer';
+      onHover: function () {
+        stockCanvas.style.cursor = "pointer";
       },
       labels: {
-        fontColor: 'black'
+        fontColor: "black",
       },
     },
     hover: {
-      onHover: function() {
-        stockCanvas.style.cursor = 'default';
-      }
-    }
-  }
+      onHover: function () {
+        stockCanvas.style.cursor = "default";
+      },
+    },
+  },
 });
 
 //////////// from server ////////////
-socket.on('stopLoading', doneLoading);
+socket.on("stopLoading", doneLoading);
 
 //see this link for example response data
 //https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=1min&apikey=demo
-socket.on('updateStockData', function(newStockData) {
+socket.on("updateStockData", function (newStockData) {
   stockData = JSON.parse(newStockData);
   let datasets = [];
   const stockSymbols = Object.keys(stockData);
-  const colors = ['white','black','#666'];
+  const colors = ["white", "black", "#666"];
   let stockDays;
 
   if (Object.keys(stockSymbols).length === 0) {
@@ -126,7 +130,7 @@ socket.on('updateStockData', function(newStockData) {
       let stockValues = [];
 
       // create array of prices
-      stockDays.forEach(day => {
+      stockDays.forEach((day) => {
         stockValues.push(stockData[symbol][day]["4. close"]);
       });
 

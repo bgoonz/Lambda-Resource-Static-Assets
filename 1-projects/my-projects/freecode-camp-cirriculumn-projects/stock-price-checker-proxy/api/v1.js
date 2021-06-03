@@ -7,7 +7,7 @@ const cors = require("cors");
 const Datastore = require("nedb");
 const db = new Datastore({
   filename: "./cache/db",
-  autoload: true
+  autoload: true,
 });
 
 // cleaning cache data on app restart
@@ -34,7 +34,7 @@ const getUID = (n = 8, symbols = _symbols) =>
 const { IEX_API_KEY = "", CACHE_TTL_MINUTES = 10 } = process.env;
 
 const validTickerRegExp = /^[a-z]{1,6}$/;
-const isValidStock = stock => validTickerRegExp.test(stock);
+const isValidStock = (stock) => validTickerRegExp.test(stock);
 
 router.use(cors());
 
@@ -70,7 +70,7 @@ router.get("/stock/:stock/quote", (req, res, next) => {
         res.json(data);
         db.update(
           {
-            _id: stock
+            _id: stock,
           },
           { _id: stock, data, updatedAt: Date.now() },
           { upsert: true },
@@ -81,7 +81,7 @@ router.get("/stock/:stock/quote", (req, res, next) => {
           res.status(e.response.status).json(e.response.data);
           db.update(
             {
-              _id: stock
+              _id: stock,
             },
             { _id: stock, data: e.response.data, updatedAt: Date.now() },
             { upsert: true }

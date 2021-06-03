@@ -77,7 +77,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </head>
 <body>
 <h1 id="terrarium-project-part-3-dom-manipulation-and-a-closure">Terrarium Project Part 3: DOM Manipulation and a Closure</h1>
-<p><img src="/sketchnotes/webdev101-js.png" alt="DOM and a closure" /> &gt; Sketchnote by <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<figure>
+<img src="/sketchnotes/webdev101-js.png" alt="DOM and a closure" /><figcaption>DOM and a closure</figcaption>
+</figure>
+<blockquote>
+<p>Sketchnote by <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+</blockquote>
 <h2 id="pre-lecture-quiz">Pre-Lecture Quiz</h2>
 <p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/19">Pre-lecture quiz</a></p>
 <h3 id="introduction">Introduction</h3>
@@ -99,8 +104,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You should have the HTML and CSS for your terrarium built. By the end of this lesson you will be able to move the plants into and out of the terrarium by dragging them.</p>
 <h3 id="task">Task</h3>
 <p>In your terrarium folder, create a new file called <code>script.js</code>. Import that file in the <code>&lt;head&gt;</code> section:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1">    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;./script.js&quot;</span><span class="ot"> defer</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
-<h2 id="note-use-defer-when-importing-an-external-javascript-file-into-the-html-file-so-as-to-allow-the-javascript-to-execute-only-after-the-html-file-has-been-fully-loaded.-you-could-also-use-the-async-attribute-which-allows-the-script-to-execute-while-the-html-file-is-parsing-but-in-our-case-its-important-to-have-the-html-elements-fully-available-for-dragging-before-we-allow-the-drag-script-to-be-executed.">&gt; Note: use <code>defer</code> when importing an external JavaScript file into the html file so as to allow the JavaScript to execute only after the HTML file has been fully loaded. You could also use the <code>async</code> attribute, which allows the script to execute while the HTML file is parsing, but in our case, it’s important to have the HTML elements fully available for dragging before we allow the drag script to be executed.</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;./script.js&quot;</span><span class="ot"> defer</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<blockquote>
+<p>Note: use <code>defer</code> when importing an external JavaScript file into the html file so as to allow the JavaScript to execute only after the HTML file has been fully loaded. You could also use the <code>async</code> attribute, which allows the script to execute while the HTML file is parsing, but in our case, it’s important to have the HTML elements fully available for dragging before we allow the drag script to be executed.</p>
+</blockquote>
+<hr />
 <h2 id="the-dom-elements">The DOM elements</h2>
 <p>The first thing you need to do is to create references to the elements that you want to manipulate in the DOM. In our case, they are the 14 plants currently waiting in the side bars.</p>
 <h3 id="task-1">Task</h3>
@@ -124,26 +132,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="the-closure">The Closure</h2>
 <p>Now you are ready to create the dragElement closure, which is an outer function that encloses an inner function or functions (in our case, we will have three).</p>
 <p>Closures are useful when one or more functions need to access an outer function’s scope. Here’s an example:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">displayCandy</span>()<span class="op">{</span></a>
-<a class="sourceLine" id="cb3-2" title="2">    <span class="kw">let</span> candy <span class="op">=</span> [<span class="st">&#39;jellybeans&#39;</span>]<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-3" title="3">    <span class="kw">function</span> <span class="at">addCandy</span>(candyType) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-4" title="4">        <span class="va">candy</span>.<span class="at">push</span>(candyType)</a>
-<a class="sourceLine" id="cb3-5" title="5">    <span class="op">}</span></a>
-<a class="sourceLine" id="cb3-6" title="6">    <span class="at">addCandy</span>(<span class="st">&#39;gumdrops&#39;</span>)<span class="op">;</span></a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">displayCandy</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">let</span> candy <span class="op">=</span> [<span class="st">&quot;jellybeans&quot;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">function</span> <span class="at">addCandy</span>(candyType) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="va">candy</span>.<span class="at">push</span>(candyType)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="at">addCandy</span>(<span class="st">&quot;gumdrops&quot;</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb3-7" title="7"><span class="op">}</span></a>
 <a class="sourceLine" id="cb3-8" title="8"><span class="at">displayCandy</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="va">console</span>.<span class="at">log</span>(candy)</a></code></pre></div>
+<a class="sourceLine" id="cb3-9" title="9"><span class="va">console</span>.<span class="at">log</span>(candy)<span class="op">;</span></a></code></pre></div>
 <p>In this example, the displayCandy function surrounds a function that pushes a new candy type into an array that already exists in the function. If you were to run this code, the <code>candy</code> array would be undefined, as it is a local variable (local to the closure).</p>
 <p>✅ How can you make the <code>candy</code> array accessible? Try moving it outside the closure. This way, the array becomes global, rather than remaining only available to the closure’s local scope.</p>
 <h3 id="task-2">Task</h3>
 <p>Under the element declarations in <code>script.js</code>, create a function:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">function</span> <span class="at">dragElement</span>(terrariumElement) <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-2" title="2">    <span class="co">//set 4 positions for positioning on the screen</span></a>
-<a class="sourceLine" id="cb4-3" title="3">    <span class="kw">let</span> pos1 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb4-4" title="4">        pos2 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb4-5" title="5">        pos3 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb4-6" title="6">        pos4 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb4-7" title="7">    <span class="va">terrariumElement</span>.<span class="at">onpointerdown</span> <span class="op">=</span> pointerDrag<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="co">//set 4 positions for positioning on the screen</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="kw">let</span> pos1 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    pos2 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    pos3 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    pos4 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="va">terrariumElement</span>.<span class="at">onpointerdown</span> <span class="op">=</span> pointerDrag<span class="op">;</span></a>
 <a class="sourceLine" id="cb4-8" title="8"><span class="op">}</span></a></code></pre></div>
 <p><code>dragElement</code> get its <code>terrariumElement</code> object from the declarations at the top of the script. Then, you set some local positions at <code>0</code> for the object passed into the function. These are the local variables that will be manipulated for each element as you add drag and drop functionality within the closure to each element. The terrarium will be populated by these dragged elements, so the application needs to keep track of where they are placed.</p>
 <p>In addition, the terrariumElement that is passed to this function is assigned a <code>pointerdown</code> event, which is part of the <a href="https://developer.mozilla.org/docs/Web/API">web APIs</a> designed to help with DOM management. <code>onpointerdown</code> fires when a button is pushed, or in our case, a draggable element is touched. This event handler works on both <a href="https://caniuse.com/?search=onpointerdown">web and mobile browsers</a>, with a few exceptions.</p>
@@ -153,10 +161,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The terrariumElement is ready to be dragged around; when the <code>onpointerdown</code> event is fired, the function pointerDrag is invoked. Add that function right under this line: <code>terrariumElement.onpointerdown = pointerDrag;</code>:</p>
 <h3 id="task-3">Task</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">function</span> <span class="at">pointerDrag</span>(e) <span class="op">{</span></a>
-<a class="sourceLine" id="cb5-2" title="2">    <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(e)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-4" title="4">    pos3 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientX</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb5-5" title="5">    pos4 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientY</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(e)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  pos3 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientX</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  pos4 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientY</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb5-6" title="6"><span class="op">}</span></a></code></pre></div>
 <p>Several things happen. First, you prevent the default events that normally happen on pointerdown from occurring by using <code>e.preventDefault();</code>. This way you have more control over the interface’s behavior.</p>
 <blockquote>
@@ -166,21 +174,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Next, note how the local variables <code>pos3</code> and <code>pos4</code> are set to e.clientX. You can find the <code>e</code> values in the inspection pane. These values capture the x and y coordinates of the plant at the moment you click on it or touch it. You will need fine-grained control over the behavior of the plants as you click and drag them, so you keep track of their coordinates.</p>
 <p>✅ Is it becoming more clear why this entire app is built with one big closure? If it wasn’t, how would you maintain scope for each of the 14 draggable plants?</p>
 <p>Complete the initial function by adding two more pointer event manipulations under <code>pos4 = e.clientY</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb6-1" title="1">document.onpointermove = elementDrag;</a>
-<a class="sourceLine" id="cb6-2" title="2">document.onpointerup = stopElementDrag;</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb6-1" title="1">document.onpointermove = elementDrag; document.onpointerup = stopElementDrag;</a></code></pre></div>
 <p>Now you are indicating that you want the plant to be dragged along with the pointer as you move it, and for the dragging gesture to stop when you deselect the plant. <code>onpointermove</code> and <code>onpointerup</code> are all parts of the same API as <code>onpointerdown</code>. The interface will throw errors now as you have not yet defined the <code>elementDrag</code> and the <code>stopElementDrag</code> functions, so build those out next.</p>
 <h2 id="the-elementdrag-and-stopelementdrag-functions">The elementDrag and stopElementDrag functions</h2>
 <p>You will complete your closure by adding two more internal functions that will handle what happens when you drag a plant and stop dragging it. The behavior you want is that you can drag any plant at any time and place it anywhere on the screen. This interface is quite un-opinionated (there is no drop zone for example) to allow you to design your terrarium exactly as you like it by adding, removing, and repositioning plants.</p>
 <h3 id="task-4">Task</h3>
 <p>Add the <code>elementDrag</code> function right after the closing curly bracket of <code>pointerDrag</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">elementDrag</span>(e) <span class="op">{</span></a>
-<a class="sourceLine" id="cb7-2" title="2">    pos1 <span class="op">=</span> pos3 <span class="op">-</span> <span class="va">e</span>.<span class="at">clientX</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-3" title="3">    pos2 <span class="op">=</span> pos4 <span class="op">-</span> <span class="va">e</span>.<span class="at">clientY</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-4" title="4">    pos3 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientX</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-5" title="5">    pos4 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientY</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-6" title="6">    <span class="va">console</span>.<span class="at">log</span>(pos1<span class="op">,</span> pos2<span class="op">,</span> pos3<span class="op">,</span> pos4)<span class="op">;</span></a>
-<a class="sourceLine" id="cb7-7" title="7">    <span class="va">terrariumElement</span>.<span class="va">style</span>.<span class="at">top</span> <span class="op">=</span> <span class="va">terrariumElement</span>.<span class="at">offsetTop</span> <span class="op">-</span> pos2 <span class="op">+</span> <span class="st">&#39;px&#39;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-8" title="8">    <span class="va">terrariumElement</span>.<span class="va">style</span>.<span class="at">left</span> <span class="op">=</span> <span class="va">terrariumElement</span>.<span class="at">offsetLeft</span> <span class="op">-</span> pos1 <span class="op">+</span> <span class="st">&#39;px&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  pos1 <span class="op">=</span> pos3 <span class="op">-</span> <span class="va">e</span>.<span class="at">clientX</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  pos2 <span class="op">=</span> pos4 <span class="op">-</span> <span class="va">e</span>.<span class="at">clientY</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  pos3 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientX</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  pos4 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientY</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="va">console</span>.<span class="at">log</span>(pos1<span class="op">,</span> pos2<span class="op">,</span> pos3<span class="op">,</span> pos4)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">  <span class="va">terrariumElement</span>.<span class="va">style</span>.<span class="at">top</span> <span class="op">=</span> <span class="va">terrariumElement</span>.<span class="at">offsetTop</span> <span class="op">-</span> pos2 <span class="op">+</span> <span class="st">&quot;px&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-8" title="8">  <span class="va">terrariumElement</span>.<span class="va">style</span>.<span class="at">left</span> <span class="op">=</span> <span class="va">terrariumElement</span>.<span class="at">offsetLeft</span> <span class="op">-</span> pos1 <span class="op">+</span> <span class="st">&quot;px&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb7-9" title="9"><span class="op">}</span></a></code></pre></div>
 <p>In this function, you do a lot of editing of the initial positions 1-4 that you set as local variables in the outer function. What’s going on here?</p>
 <p>As you drag, you reassign <code>pos1</code> by making it equal to <code>pos3</code> (which you set earlier as <code>e.clientX</code>) minus the current <code>e.clientX</code> value. You do a similar operation to <code>pos2</code>. Then, you reset <code>pos3</code> and <code>pos4</code> to the new X and Y coordinates of the element. You can watch these changes in the console as you drag. Then, you manipulate the plant’s css style to set its new position based on the new positions of <code>pos1</code> and <code>pos2</code>, calculating the plant’s top and left X and Y coordinates based on comparing its offset with these new positions.</p>
@@ -191,8 +198,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="task-5">Task</h3>
 <p>The final task to complete the interface is to add the <code>stopElementDrag</code> function after the closing curly bracket of <code>elementDrag</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">function</span> <span class="at">stopElementDrag</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb8-2" title="2">    <span class="va">document</span>.<span class="at">onpointerup</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb8-3" title="3">    <span class="va">document</span>.<span class="at">onpointermove</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="va">document</span>.<span class="at">onpointerup</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="va">document</span>.<span class="at">onpointermove</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb8-4" title="4"><span class="op">}</span></a></code></pre></div>
 <p>This small function resets the <code>onpointerup</code> and <code>onpointermove</code> events so that you can either restart your plant’s progress by starting to drag it again, or start dragging a new plant.</p>
 <p>✅ What happens if you don’t set these events to null?</p>

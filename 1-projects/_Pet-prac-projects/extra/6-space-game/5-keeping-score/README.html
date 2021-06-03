@@ -120,13 +120,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb5-5" title="5">eventEmitter <span class="op">=</span> <span class="kw">new</span> <span class="at">EventEmitter</span>()<span class="op">;</span></a></code></pre></div></li>
 <li><p><strong>Add variables</strong>. Add code that represents your total score (0) and lives left (3), display these scores on a screen.</p></li>
 <li><p><strong>Extend <code>updateGameObjects()</code> function</strong>. Extend the <code>updateGameObjects()</code> function to handle enemy collisions:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="va">enemies</span>.<span class="at">forEach</span>(enemy <span class="kw">=&gt;</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb6-2" title="2">    <span class="kw">const</span> heroRect <span class="op">=</span> <span class="va">hero</span>.<span class="at">rectFromGameObject</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb6-3" title="3">    <span class="cf">if</span> (<span class="at">intersectRect</span>(heroRect<span class="op">,</span> <span class="va">enemy</span>.<span class="at">rectFromGameObject</span>())) <span class="op">{</span></a>
-<a class="sourceLine" id="cb6-4" title="4">      <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_HERO</span><span class="op">,</span> <span class="op">{</span> enemy <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb6-5" title="5">    <span class="op">}</span></a>
-<a class="sourceLine" id="cb6-6" title="6">  <span class="op">}</span>)</a></code></pre></div></li>
-<li><strong>Add <code>life</code> and <code>points</code></strong>.
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="va">enemies</span>.<span class="at">forEach</span>((enemy) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">const</span> heroRect <span class="op">=</span> <span class="va">hero</span>.<span class="at">rectFromGameObject</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="cf">if</span> (<span class="at">intersectRect</span>(heroRect<span class="op">,</span> <span class="va">enemy</span>.<span class="at">rectFromGameObject</span>())) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_HERO</span><span class="op">,</span> <span class="op">{</span> enemy <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div></li>
+<li><p><strong>Add <code>life</code> and <code>points</code></strong>.</p>
 <ol type="1">
 <li><p><strong>Initialize variables</strong>. Under <code>this.cooldown = 0</code> in the <code>Hero</code> class, set life and points:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">this</span>.<span class="at">life</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></a>
@@ -135,24 +135,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">function</span> <span class="at">drawLife</span>() <span class="op">{</span></a>
 <a class="sourceLine" id="cb8-2" title="2">  <span class="co">// </span><span class="al">TODO</span><span class="co">, 35, 27</span></a>
 <a class="sourceLine" id="cb8-3" title="3">  <span class="kw">const</span> START_POS <span class="op">=</span> <span class="va">canvas</span>.<span class="at">width</span> <span class="op">-</span> <span class="dv">180</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb8-4" title="4">  <span class="cf">for</span>(<span class="kw">let</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">hero</span>.<span class="at">life</span><span class="op">;</span> i<span class="op">++</span> ) <span class="op">{</span></a>
-<a class="sourceLine" id="cb8-5" title="5">    <span class="va">ctx</span>.<span class="at">drawImage</span>(</a>
-<a class="sourceLine" id="cb8-6" title="6">      lifeImg<span class="op">,</span> </a>
-<a class="sourceLine" id="cb8-7" title="7">      START_POS <span class="op">+</span> (<span class="dv">45</span> <span class="op">*</span> (i<span class="op">+</span><span class="dv">1</span>) )<span class="op">,</span> </a>
-<a class="sourceLine" id="cb8-8" title="8">      <span class="va">canvas</span>.<span class="at">height</span> <span class="op">-</span> <span class="dv">37</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb8-9" title="9">  <span class="op">}</span></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="op">}</span></a>
-<a class="sourceLine" id="cb8-11" title="11"></a>
-<a class="sourceLine" id="cb8-12" title="12"><span class="kw">function</span> <span class="at">drawPoints</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb8-13" title="13">  <span class="va">ctx</span>.<span class="at">font</span> <span class="op">=</span> <span class="st">&quot;30px Arial&quot;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb8-14" title="14">  <span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;red&quot;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb8-15" title="15">  <span class="va">ctx</span>.<span class="at">textAlign</span> <span class="op">=</span> <span class="st">&quot;left&quot;</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb8-16" title="16">  <span class="at">drawText</span>(<span class="st">&quot;Points: &quot;</span> <span class="op">+</span> <span class="va">hero</span>.<span class="at">points</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span><span class="dv">-20</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb8-17" title="17"><span class="op">}</span></a>
-<a class="sourceLine" id="cb8-18" title="18"></a>
-<a class="sourceLine" id="cb8-19" title="19"><span class="kw">function</span> <span class="at">drawText</span>(message<span class="op">,</span> x<span class="op">,</span> y) <span class="op">{</span></a>
-<a class="sourceLine" id="cb8-20" title="20">  <span class="va">ctx</span>.<span class="at">fillText</span>(message<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></a>
-<a class="sourceLine" id="cb8-21" title="21"><span class="op">}</span></a></code></pre></div></li>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">hero</span>.<span class="at">life</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="va">ctx</span>.<span class="at">drawImage</span>(lifeImg<span class="op">,</span> START_POS <span class="op">+</span> <span class="dv">45</span> <span class="op">*</span> (i <span class="op">+</span> <span class="dv">1</span>)<span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span> <span class="op">-</span> <span class="dv">37</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-6" title="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb8-8" title="8"></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="kw">function</span> <span class="at">drawPoints</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-10" title="10">  <span class="va">ctx</span>.<span class="at">font</span> <span class="op">=</span> <span class="st">&quot;30px Arial&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-11" title="11">  <span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;red&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-12" title="12">  <span class="va">ctx</span>.<span class="at">textAlign</span> <span class="op">=</span> <span class="st">&quot;left&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-13" title="13">  <span class="at">drawText</span>(<span class="st">&quot;Points: &quot;</span> <span class="op">+</span> <span class="va">hero</span>.<span class="at">points</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span> <span class="op">-</span> <span class="dv">20</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="op">}</span></a>
+<a class="sourceLine" id="cb8-15" title="15"></a>
+<a class="sourceLine" id="cb8-16" title="16"><span class="kw">function</span> <span class="at">drawText</span>(message<span class="op">,</span> x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-17" title="17">  <span class="va">ctx</span>.<span class="at">fillText</span>(message<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-18" title="18"><span class="op">}</span></a></code></pre></div></li>
 <li><p><strong>Add methods to Game loop</strong>. Make sure you add these functions to your window.onload function under <code>updateGameObjects()</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="at">drawPoints</span>()<span class="op">;</span></a>
 <a class="sourceLine" id="cb9-2" title="2"><span class="at">drawLife</span>()<span class="op">;</span></a></code></pre></div></li>
@@ -173,16 +170,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb11-2" title="2">    <span class="kw">this</span>.<span class="at">points</span> <span class="op">+=</span> <span class="dv">100</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb11-3" title="3">  <span class="op">}</span></a></code></pre></div>
 <p>Add these functions to your Collision Event Emitters:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> first<span class="op">,</span> second <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb12-2" title="2">   <span class="va">first</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb12-3" title="3">   <span class="va">second</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb12-4" title="4">   <span class="va">hero</span>.<span class="at">incrementPoints</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb12-5" title="5"><span class="op">}</span>)</a>
-<a class="sourceLine" id="cb12-6" title="6"></a>
-<a class="sourceLine" id="cb12-7" title="7"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_HERO</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> enemy <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb12-8" title="8">   <span class="va">enemy</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb12-9" title="9">   <span class="va">hero</span>.<span class="at">decrementLife</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb12-10" title="10"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(</a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  (_<span class="op">,</span> <span class="op">{</span> first<span class="op">,</span> second <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-4" title="4">    <span class="va">first</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-5" title="5">    <span class="va">second</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-6" title="6">    <span class="va">hero</span>.<span class="at">incrementPoints</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-8" title="8">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-9" title="9"></a>
+<a class="sourceLine" id="cb12-10" title="10"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_HERO</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> enemy <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-11" title="11">  <span class="va">enemy</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-12" title="12">  <span class="va">hero</span>.<span class="at">decrementLife</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-13" title="13"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div></li>
 </ol></li>
 </ol>
 <p>✅ Do a little research to discover other games that are created using JavaScript/Canvas. What are their common traits?</p>

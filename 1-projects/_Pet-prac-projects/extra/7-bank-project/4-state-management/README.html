@@ -118,7 +118,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">let</span> account <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a></code></pre></div>
 <p>With:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">let</span> state <span class="op">=</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">account</span><span class="op">:</span> <span class="kw">null</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">account</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="op">};</span></a></code></pre></div>
 <p>The idea is to <em>centralize</em> all our app data in a single state object. We only have <code>account</code> for now in the state so it doesn’t change much, but it creates a path for evolutions.</p>
 <p>We also have to update the functions using it. In the <code>register()</code> and <code>login()</code> functions, replace <code>account = ...</code> with <code>state.account = ...</code>;</p>
@@ -135,23 +135,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">function</span> <span class="at">updateState</span>(property<span class="op">,</span> newData) <span class="op">{</span></a>
 <a class="sourceLine" id="cb5-2" title="2">  state <span class="op">=</span> <span class="va">Object</span>.<span class="at">freeze</span>(<span class="op">{</span></a>
 <a class="sourceLine" id="cb5-3" title="3">    ...<span class="at">state</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb5-4" title="4">    [property]<span class="op">:</span> newData</a>
+<a class="sourceLine" id="cb5-4" title="4">    [property]<span class="op">:</span> newData<span class="op">,</span></a>
 <a class="sourceLine" id="cb5-5" title="5">  <span class="op">}</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb5-6" title="6"><span class="op">}</span></a></code></pre></div>
 <p>In this function, we’re creating a new state object and copy data from the previous state using the <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Spread_syntax#Spread_in_object_literals"><em>spread (<code>...</code>) operator</em></a>. Then we override a particular property of the state object with the new data using the <a href="https://developer.mozilla.org/docs/Web/JavaScript/Guide/Working_with_Objects#Objects_and_properties">bracket notation</a> <code>[property]</code> for assignment. Finally, we lock the object to prevent modifications using <code>Object.freeze()</code>. We only have the <code>account</code> property stored in the state for now, but with this approach you can add as many properties as you need in the state.</p>
 <p>We’ll also update the <code>state</code> initialization to make sure the initial state is frozen too:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">let</span> state <span class="op">=</span> <span class="va">Object</span>.<span class="at">freeze</span>(<span class="op">{</span></a>
-<a class="sourceLine" id="cb6-2" title="2">  <span class="dt">account</span><span class="op">:</span> <span class="kw">null</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="dt">account</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></a>
 <a class="sourceLine" id="cb6-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
 <p>After that, update the <code>register</code> function by replacing the <code>state.account = result;</code> assignment with:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="at">updateState</span>(<span class="st">&#39;account&#39;</span><span class="op">,</span> result)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="at">updateState</span>(<span class="st">&quot;account&quot;</span><span class="op">,</span> result)<span class="op">;</span></a></code></pre></div>
 <p>Do the same with the <code>login</code> function, replacing <code>state.account = data;</code> with:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">updateState</span>(<span class="st">&#39;account&#39;</span><span class="op">,</span> data)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">updateState</span>(<span class="st">&quot;account&quot;</span><span class="op">,</span> data)<span class="op">;</span></a></code></pre></div>
 <p>We’ll now take the chance to fix the issue of account data not being cleared when the user clicks on <em>Logout</em>.</p>
 <p>Create a new function <code>logout()</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">function</span> <span class="at">logout</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-2" title="2">  <span class="at">updateState</span>(<span class="st">&#39;account&#39;</span><span class="op">,</span> <span class="kw">null</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-3" title="3">  <span class="at">navigate</span>(<span class="st">&#39;/login&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="at">updateState</span>(<span class="st">&quot;account&quot;</span><span class="op">,</span> <span class="kw">null</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="at">navigate</span>(<span class="st">&quot;/login&quot;</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb9-4" title="4"><span class="op">}</span></a></code></pre></div>
 <p>In <code>updateDashboard()</code>, replace the redirection <code>return navigate('/login');</code> with <code>return logout()</code>;</p>
 <p>Try registering a new account, logging out and in again to check that everything still works correctly.</p>
@@ -175,7 +175,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>✅ If you want to create a web app that does not work with a server, it’s also possible to create a database on the client using the <a href="https://developer.mozilla.org/docs/Web/API/IndexedDB_API"><code>IndexedDB</code> API</a>. This one is reserved for advanced use cases or if you need to store significant amount of data, as it’s more complex to use.</p>
 <h3 id="task-2">Task</h3>
 <p>We want our users stay logged in until they explicitly click on the <em>Logout</em> button, so we’ll use <code>localStorage</code> to store the account data. First, let’s define a key that we’ll use to store our data.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">const</span> storageKey <span class="op">=</span> <span class="st">&#39;savedAccount&#39;</span><span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">const</span> storageKey <span class="op">=</span> <span class="st">&quot;savedAccount&quot;</span><span class="op">;</span></a></code></pre></div>
 <p>Then add this line at the end of the <code>updateState()</code> function:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="va">localStorage</span>.<span class="at">setItem</span>(storageKey<span class="op">,</span> <span class="va">JSON</span>.<span class="at">stringify</span>(<span class="va">state</span>.<span class="at">account</span>))<span class="op">;</span></a></code></pre></div>
 <p>With this, the user account data will be persisted and always up-to-date as we centralized previously all our state updates. This is where we begin to benefit from all our previous refactors 🙂.</p>
@@ -183,7 +183,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">init</span>() <span class="op">{</span></a>
 <a class="sourceLine" id="cb12-2" title="2">  <span class="kw">const</span> savedAccount <span class="op">=</span> <span class="va">localStorage</span>.<span class="at">getItem</span>(storageKey)<span class="op">;</span></a>
 <a class="sourceLine" id="cb12-3" title="3">  <span class="cf">if</span> (savedAccount) <span class="op">{</span></a>
-<a class="sourceLine" id="cb12-4" title="4">    <span class="at">updateState</span>(<span class="st">&#39;account&#39;</span><span class="op">,</span> <span class="va">JSON</span>.<span class="at">parse</span>(savedAccount))<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4">    <span class="at">updateState</span>(<span class="st">&quot;account&quot;</span><span class="op">,</span> <span class="va">JSON</span>.<span class="at">parse</span>(savedAccount))<span class="op">;</span></a>
 <a class="sourceLine" id="cb12-5" title="5">  <span class="op">}</span></a>
 <a class="sourceLine" id="cb12-6" title="6"></a>
 <a class="sourceLine" id="cb12-7" title="7">  <span class="co">// Our previous initialization code</span></a>
@@ -218,7 +218,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb14-9" title="9">    <span class="cf">return</span> <span class="at">logout</span>()<span class="op">;</span></a>
 <a class="sourceLine" id="cb14-10" title="10">  <span class="op">}</span></a>
 <a class="sourceLine" id="cb14-11" title="11"></a>
-<a class="sourceLine" id="cb14-12" title="12">  <span class="at">updateState</span>(<span class="st">&#39;account&#39;</span><span class="op">,</span> data)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-12" title="12">  <span class="at">updateState</span>(<span class="st">&quot;account&quot;</span><span class="op">,</span> data)<span class="op">;</span></a>
 <a class="sourceLine" id="cb14-13" title="13"><span class="op">}</span></a></code></pre></div>
 <p>This method checks that we are currently logged in then reloads the account data from the server.</p>
 <p>Create another function named <code>refresh</code>:</p>
@@ -228,8 +228,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb15-4" title="4"><span class="op">}</span></a></code></pre></div>
 <p>This one updates the account data, then takes care of updating the HTML of the dashboard page. It’s what we need to call when the dashboard route is loaded. Update the route definition with:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">const</span> routes <span class="op">=</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb16-2" title="2">  <span class="st">&#39;/login&#39;</span><span class="op">:</span> <span class="op">{</span> <span class="dt">templateId</span><span class="op">:</span> <span class="st">&#39;login&#39;</span> <span class="op">},</span></a>
-<a class="sourceLine" id="cb16-3" title="3">  <span class="st">&#39;/dashboard&#39;</span><span class="op">:</span> <span class="op">{</span> <span class="dt">templateId</span><span class="op">:</span> <span class="st">&#39;dashboard&#39;</span><span class="op">,</span> <span class="dt">init</span><span class="op">:</span> refresh <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="st">&quot;/login&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="dt">templateId</span><span class="op">:</span> <span class="st">&quot;login&quot;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb16-3" title="3">  <span class="st">&quot;/dashboard&quot;</span><span class="op">:</span> <span class="op">{</span> <span class="dt">templateId</span><span class="op">:</span> <span class="st">&quot;dashboard&quot;</span><span class="op">,</span> <span class="dt">init</span><span class="op">:</span> refresh <span class="op">},</span></a>
 <a class="sourceLine" id="cb16-4" title="4"><span class="op">};</span></a></code></pre></div>
 <p>Try reloading the dashboard now, it should display the updated account data.</p>
 <hr />

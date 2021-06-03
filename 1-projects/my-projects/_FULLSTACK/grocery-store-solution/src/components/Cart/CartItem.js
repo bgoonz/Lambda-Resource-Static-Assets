@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { updateCount, removeItem } from '../../store/cart';
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { updateCount, removeItem } from "../../store/cart";
 
 function CartItem({ item }) {
   const dispatch = useDispatch();

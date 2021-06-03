@@ -1,65 +1,65 @@
-const User = require('../app/models/User');
-const Book = require('../app/models/Book');
-const Request = require('../app/models/Request');
+const User = require("../app/models/User");
+const Book = require("../app/models/Book");
+const Request = require("../app/models/Request");
 
 // Users
 const alice = {
-  username: 'alice',
+  username: "alice",
   google: {
-    id: '1',
-    username: 'googleAlice',
-    displayName: 'Alice B. Google',
+    id: "1",
+    username: "googleAlice",
+    displayName: "Alice B. Google",
   },
-  city: 'Atlanta',
-  address: '123 Something A',
+  city: "Atlanta",
+  address: "123 Something A",
 };
 
 const bob = {
-  username: 'bob',
+  username: "bob",
   github: {
-    id: '1',
-    username: 'githubBob',
-    displayName: 'Robert J. Github',
+    id: "1",
+    username: "githubBob",
+    displayName: "Robert J. Github",
   },
-  city: 'Boston',
-  address: '123 Something B',
+  city: "Boston",
+  address: "123 Something B",
 };
 
 const charlie = {
-  username: 'charlie',
+  username: "charlie",
   github: {
-    id: '2',
-    username: 'githubChuck',
-    displayName: 'Charles Q. Github',
+    id: "2",
+    username: "githubChuck",
+    displayName: "Charles Q. Github",
   },
-  city: 'Charleston',
-  address: '123 Something C',
+  city: "Charleston",
+  address: "123 Something C",
 };
 
 // Books
 const artichoke = {
-  name: 'Artickoke',
-  description: 'Mary Washingtom heirloom',
+  name: "Artickoke",
+  description: "Mary Washingtom heirloom",
 };
 
 const butternut = {
-  name: 'Butternut',
-  description: '20 books',
+  name: "Butternut",
+  description: "20 books",
 };
 
 const carrot = {
-  name: 'Carrot',
-  description: '100 Danvers half long',
+  name: "Carrot",
+  description: "100 Danvers half long",
 };
 
 const cookies = {
-  name: 'Cookies',
-  description: '24 Chocolate Chip',
+  name: "Cookies",
+  description: "24 Chocolate Chip",
 };
 
 const figJam = {
-  name: 'Fig Jam',
-  description: 'Organic, local, 1 pint',
+  name: "Fig Jam",
+  description: "Organic, local, 1 pint",
 };
 
 const users = [alice, bob, charlie];
@@ -72,13 +72,13 @@ function seedDb() {
     .then(() => Request.remove({}))
     .then(() => User.create(users))
     .then((savedUsers) => {
-      const testBooks0 = books0.map(book => ({
+      const testBooks0 = books0.map((book) => ({
         name: book.name,
         description: book.description,
         // eslint-disable-next-line no-underscore-dangle
         owner: savedUsers[0]._id,
       }));
-      const testBooks1 = books1.map(book => ({
+      const testBooks1 = books1.map((book) => ({
         name: book.name,
         description: book.description,
         // eslint-disable-next-line no-underscore-dangle
@@ -86,13 +86,15 @@ function seedDb() {
       }));
       return Book.create(testBooks0.concat(testBooks1));
     })
-    .then(books => Request.create({
-      requester: books[0].owner,
-      // eslint-disable-next-line no-underscore-dangle
-      gives: [books[0]._id],
-      // eslint-disable-next-line no-underscore-dangle
-      takes: [books[books.length - 1]._id],
-    }))
+    .then((books) =>
+      Request.create({
+        requester: books[0].owner,
+        // eslint-disable-next-line no-underscore-dangle
+        gives: [books[0]._id],
+        // eslint-disable-next-line no-underscore-dangle
+        takes: [books[books.length - 1]._id],
+      })
+    )
     .catch(console.error);
 }
 

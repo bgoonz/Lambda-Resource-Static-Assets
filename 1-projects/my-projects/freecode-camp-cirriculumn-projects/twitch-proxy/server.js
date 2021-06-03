@@ -18,26 +18,26 @@ if (!config.serveStaticData) {
     db.persistence.setAutocompactionInterval(config.db.compactionMillisecs);
   }
 
-  db.ensureIndex({ fieldName: "query" }, function(err) {
+  db.ensureIndex({ fieldName: "query" }, function (err) {
     if (err) log.error(err, "unable to set db index");
   });
 
-  var dbMware = function(db) {
-    return function(req, res, next) {
+  var dbMware = function (db) {
+    return function (req, res, next) {
       req.db = db;
       next();
     };
   };
 
-  var cacheCheck = function() {
+  var cacheCheck = function () {
     var d = Date.now();
     var ets = config.db.dataExpirationSecs;
     log.info("cache expiration check");
     db.remove(
       {
         createdAt: {
-          $lt: d - 1000 * ets
-        }
+          $lt: d - 1000 * ets,
+        },
       },
       { multi: true }
     );
@@ -53,24 +53,24 @@ if (!config.serveStaticData) {
     method: "GET",
     headers: {
       "Client-ID": config.twitchCID,
-      "Authorization": `Bearer ${config.accessTOKEN}`
-    }
+      Authorization: `Bearer ${config.accessTOKEN}`,
+    },
   };
 }
 
 app.enable("trust proxy");
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-app.get("/helix/:route", cors, blacklist, validate, function(req, res, next) {
+app.get("/helix/:route", cors, blacklist, validate, function (req, res, next) {
   if (config.serveStaticData) return next("route");
   var route = req.params.route;
   var qs = req.query;
   const query =
     route + Object.keys(qs).reduce((a, q) => `${a}:${q}=${qs[q]}`, "");
-  req.db.findOne({ query }, function(err, dbCache) {
+  req.db.findOne({ query }, function (err, dbCache) {
     // if data is cached return it
     if (err) return next(err);
     if (dbCache) {
@@ -83,7 +83,7 @@ app.get("/helix/:route", cors, blacklist, validate, function(req, res, next) {
 
       reqOptions.url = `${config.baseApiUrl}/helix/${route}`;
       reqOptions.qs = qs;
-      request(reqOptions, function(err, response, body) {
+      request(reqOptions, function (err, response, body) {
         if (err) return next(err);
         log.info(`${query} - new - "${req.headers.referer}" - ${req.ip}`);
         var cacheItem = {
@@ -91,10 +91,10 @@ app.get("/helix/:route", cors, blacklist, validate, function(req, res, next) {
           data: JSON.parse(body),
           ip: req.ip,
           referer: req.headers.referer,
-          createdAt: Date.now()
+          createdAt: Date.now(),
         };
 
-        req.db.insert(cacheItem, function(err) {
+        req.db.insert(cacheItem, function (err) {
           if (err) return next(err);
           res.json(cacheItem.data);
         });
@@ -104,12 +104,12 @@ app.get("/helix/:route", cors, blacklist, validate, function(req, res, next) {
 });
 
 const staticHandler = require("./utilities/static-data-handler");
-app.get("/helix/:route", cors, blacklist, validate, function(req, res, next) {
+app.get("/helix/:route", cors, blacklist, validate, function (req, res, next) {
   const {
     params: { route },
     query,
     headers: { referer },
-    ip
+    ip,
   } = req;
   const _q =
     route + Object.keys(query).reduce((a, q) => `${a}:${q}=${query[q]}`, "");
@@ -132,32 +132,34 @@ const sendData = (req, res, data, err) => {
   }
 };
 const getLegacyAPIDAta = require("./utilities/legacy-data-handler");
-app.get("/twitch-api/:type/:name", blacklist, cors, validateLegacy, function(
-  req,
-  res,
-  next
-) {
-  const {
-    params: { type, name },
-    headers: { referer },
-    ip
-  } = req;
-  log.info(`${type}/${name} - static (kraken) - "${referer}" - ${ip}`);
+app.get(
+  "/twitch-api/:type/:name",
+  blacklist,
+  cors,
+  validateLegacy,
+  function (req, res, next) {
+    const {
+      params: { type, name },
+      headers: { referer },
+      ip,
+    } = req;
+    log.info(`${type}/${name} - static (kraken) - "${referer}" - ${ip}`);
 
-  var data = getLegacyAPIDAta(req.params.type, req.params.name);
+    var data = getLegacyAPIDAta(req.params.type, req.params.name);
 
-  if (data) {
-    setTimeout(() => sendData(req, res, data), 1000);
-  } else {
-    log.warn(
-      `${type}/${name} - static (kraken) not found - "${referer}" - ${ip}`
-    );
-    next();
+    if (data) {
+      setTimeout(() => sendData(req, res, data), 1000);
+    } else {
+      log.warn(
+        `${type}/${name} - static (kraken) not found - "${referer}" - ${ip}`
+      );
+      next();
+    }
   }
-});
+);
 
 var fs = require("fs");
-app.get("/reset-db", function(req, res, next) {
+app.get("/reset-db", function (req, res, next) {
   if (process.env.ADMIN_PWD && req.query.pwd === process.env.ADMIN_PWD) {
     try {
       fs.unlinkSync(__dirname + "/.data/db");
@@ -166,16 +168,13 @@ app.get("/reset-db", function(req, res, next) {
     }
     res.type("txt").send("OK");
   } else {
-    res
-      .type("txt")
-      .status(401)
-      .send("Unauthorized");
+    res.type("txt").status(401).send("Unauthorized");
   }
 });
 
 const {
   updateStaticData,
-  updateLegacyStaticData
+  updateLegacyStaticData,
 } = require("./static-data/update");
 app.get("/update-static", async (req, res, next) => {
   const { pwd, type } = req.query;
@@ -191,24 +190,21 @@ app.get("/update-static", async (req, res, next) => {
       return next(err);
     }
   } else {
-    res
-      .type("txt")
-      .status(401)
-      .send("Unauthorized");
+    res.type("txt").status(401).send("Unauthorized");
   }
 });
 
-app.use(function(req, res) {
+app.use(function (req, res) {
   sendData(req, res, null, { status: 404, error: "not found" });
 });
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   log.error(`!! ${err.message || err.msg || err.error}`);
   err.status = err.status || 500;
   err.error = err.error || "internal server error";
   sendData(req, res, null, err);
 });
 
-app.listen(config.port, function() {
+app.listen(config.port, function () {
   log.info("fcc twitch proxy listening on port " + config.port);
 });

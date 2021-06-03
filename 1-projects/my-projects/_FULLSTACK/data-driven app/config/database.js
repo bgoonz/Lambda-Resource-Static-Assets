@@ -1,4 +1,4 @@
-const config = require('./index');
+const config = require("./index");
 
 const db = config.db;
 const username = db.username;
@@ -12,6 +12,6 @@ module.exports = {
     password,
     database,
     host,
-    dialect: 'postgres',
+    dialect: "postgres",
   },
 };

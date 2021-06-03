@@ -1,8 +1,7 @@
-
-const { describe, it } = require('mocha');
-const { expect } = require('chai');
-const request = require('supertest');
-const cheerio = require('cheerio');
+const { describe, it } = require("mocha");
+const { expect } = require("chai");
+const request = require("supertest");
+const cheerio = require("cheerio");
 
 let $ = null;
 
@@ -39,12 +38,12 @@ const checkTextField = (park, name, placeholder) => {
   it(assertionMessage, () => {
     const element = $(`form input[name="${name}"]`);
     expect(element.length).to.equal(1);
-    expect(element.attr('type')).to.equal('text');
+    expect(element.attr("type")).to.equal("text");
     if (placeholder !== undefined) {
-      expect(element.attr('placeholder')).to.equal(placeholder);
+      expect(element.attr("placeholder")).to.equal(placeholder);
     }
     if (value !== undefined) {
-      expect(element.attr('value')).to.equal(park[name]);
+      expect(element.attr("value")).to.equal(park[name]);
     }
   });
 };
@@ -56,21 +55,26 @@ const checkTextField = (park, name, placeholder) => {
  * @param {string} cancelHyperlinkHREF - The expected "Cancel" hyperlink `href` attribute value.
  * @param {function} checkFields - The function to check the form fields.
  */
-const checkForm = (formAction, submitButtonText, cancelHyperlinkHREF, checkFields = null) => {
-  describe('should render a form (`<form>` element)', () => {
+const checkForm = (
+  formAction,
+  submitButtonText,
+  cancelHyperlinkHREF,
+  checkFields = null
+) => {
+  describe("should render a form (`<form>` element)", () => {
     it(`with an \`action\` attribute set to "${formAction}" and a \`method\` attribute set to "post"`, () => {
-      const form = $('form');
+      const form = $("form");
       expect(form.length).to.equal(1);
-      expect(form.attr('action')).to.equal(formAction);
-      expect(form.attr('method')).to.equal('post');
+      expect(form.attr("action")).to.equal(formAction);
+      expect(form.attr("method")).to.equal("post");
     });
 
-    describe('containing', () => {
+    describe("containing", () => {
       it('a hidden field (`<input>` element) with a `name` attribute set to "_csrf" and a `value` attribute set to a CSRF token', () => {
         const element = $('form input[name="_csrf"]');
         expect(element.length).to.equal(1);
-        expect(element.attr('type')).to.equal('hidden');
-        expect(element.attr('value')).to.not.be.empty;
+        expect(element.attr("type")).to.equal("hidden");
+        expect(element.attr("value")).to.not.be.empty;
       });
 
       if (checkFields !== null) {
@@ -86,7 +90,7 @@ const checkForm = (formAction, submitButtonText, cancelHyperlinkHREF, checkField
       it(`a "Cancel" hyperlink (\`<a>\` element) with an \`href\` attribute set to "${cancelHyperlinkHREF}"`, () => {
         const element = $(`form a[href="${cancelHyperlinkHREF}"]`);
         expect(element.length).to.equal(1);
-        expect(element.text()).to.equal('Cancel');
+        expect(element.text()).to.equal("Cancel");
       });
     });
   });
@@ -100,14 +104,19 @@ const checkForm = (formAction, submitButtonText, cancelHyperlinkHREF, checkField
  * @param {object} park - An object literal with properties
  * that align with the `Park` Sequelize model properties.
  */
-const checkParkForm = (formAction, submitButtonText, cancelHyperlinkHREF, park) => {
+const checkParkForm = (
+  formAction,
+  submitButtonText,
+  cancelHyperlinkHREF,
+  park
+) => {
   const fields = () => {
-    checkTextField(park, 'parkName');
-    checkTextField(park, 'city');
-    checkTextField(park, 'provinceState');
-    checkTextField(park, 'country');
-    checkTextField(park, 'opened', 'ex: 2000-01-31');
-    checkTextField(park, 'size');
+    checkTextField(park, "parkName");
+    checkTextField(park, "city");
+    checkTextField(park, "provinceState");
+    checkTextField(park, "country");
+    checkTextField(park, "opened", "ex: 2000-01-31");
+    checkTextField(park, "size");
 
     it('a text area field (`<textarea>` element) with a `name` attribute set to "description"', () => {
       const element = $('form textarea[name="description"]');
@@ -127,7 +136,7 @@ const checkParkForm = (formAction, submitButtonText, cancelHyperlinkHREF, park) 
 const checkValidationMessage = (message) => {
   it(`a validation message containing the text "${message}"`, () => {
     let element = null;
-    $('div ul li').each(function() {
+    $("div ul li").each(function () {
       const elementText = $(this).text();
       if (elementText === message) {
         element = this;
@@ -163,25 +172,30 @@ const setDomElements = (response) => {
  * @param {number} responseStatusCode - The expected
  * response status code.
  */
-const postRequestWithCSRFToken = async (path, app, data,
-  responseContentType = /html/, responseLocation = null, responseStatusCode = 200) => {
+const postRequestWithCSRFToken = async (
+  path,
+  app,
+  data,
+  responseContentType = /html/,
+  responseLocation = null,
+  responseStatusCode = 200
+) => {
   const agent = request.agent(app);
 
   // Make a `GET` request.
   const getResponse = await agent
     .get(path)
-    .expect('Content-type', /html/)
+    .expect("Content-type", /html/)
     .expect(200);
 
   // Get the `_csurf` input field value.
   const $1 = cheerio.load(getResponse.text);
-  const csrfToken = $1('form input[name="_csrf"]')
-    .attr('value');
+  const csrfToken = $1('form input[name="_csrf"]').attr("value");
 
   const requestBodyData = { _csrf: csrfToken, ...data };
   const requestBody = Object.keys(requestBodyData)
     .map((key) => `${key}=${encodeURIComponent(requestBodyData[key])}`)
-    .join('&');
+    .join("&");
 
   // Make a `POST` request.
   let postResponse = null;
@@ -190,14 +204,14 @@ const postRequestWithCSRFToken = async (path, app, data,
     postResponse = await agent
       .post(path)
       .send(requestBody)
-      .expect('Content-type', responseContentType)
-      .expect('Location', responseLocation)
+      .expect("Content-type", responseContentType)
+      .expect("Location", responseLocation)
       .expect(responseStatusCode);
   } else {
     postResponse = await agent
       .post(path)
       .send(requestBody)
-      .expect('Content-type', responseContentType)
+      .expect("Content-type", responseContentType)
       .expect(responseStatusCode);
   }
 

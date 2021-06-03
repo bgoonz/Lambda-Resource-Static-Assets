@@ -1,36 +1,38 @@
-require('dotenv').config();
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 const app = express();
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-mongoose.set('useUnifiedTopology', true);
-mongoose.set('useCreateIndex', true);
-mongoose.connect(process.env.DB_URI || 'mongodb://localhost/exercise-track', { useNewUrlParser: true });
+mongoose.set("useUnifiedTopology", true);
+mongoose.set("useCreateIndex", true);
+mongoose.connect(process.env.DB_URI || "mongodb://localhost/exercise-track", {
+  useNewUrlParser: true,
+});
 
 app.use(cors());
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static('public'))
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html')
+app.use(express.static("public"));
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/views/index.html");
 });
 
-const apiRouter = require('./routes/api');
-app.use('/api/exercise', apiRouter);
+const apiRouter = require("./routes/api");
+app.use("/api/exercise", apiRouter);
 
 // Not found middleware
 app.use((req, res, next) => {
-  return next({status: 404, message: 'not found'});
-})
+  return next({ status: 404, message: "not found" });
+});
 
 // Error Handling middleware
 app.use((err, req, res, next) => {
-  let errCode, errMessage
+  let errCode, errMessage;
 
   if (err.errors) {
     // Mongoose validation error
@@ -41,10 +43,9 @@ app.use((err, req, res, next) => {
   } else {
     // Generic or custom error
     errCode = err.status || 500;
-    errMessage = err.message || 'Internal Server Error';
+    errMessage = err.message || "Internal Server Error";
   }
-  res.status(errCode).type('txt')
-    .send(errMessage);
+  res.status(errCode).type("txt").send(errMessage);
 });
 
 const portNum = process.env.PORT || 3000;

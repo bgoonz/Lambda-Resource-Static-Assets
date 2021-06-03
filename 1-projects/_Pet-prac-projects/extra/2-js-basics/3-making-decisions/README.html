@@ -77,14 +77,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </head>
 <body>
 <h1 id="javascript-basics-making-decisions">JavaScript Basics: Making Decisions</h1>
-<p><img src="/sketchnotes/webdev101-js-decisions.png" alt="JavaScript Basics - Making decisions" /> &gt; Sketchnote by <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<figure>
+<img src="/sketchnotes/webdev101-js-decisions.png" alt="JavaScript Basics - Making decisions" /><figcaption>JavaScript Basics - Making decisions</figcaption>
+</figure>
+<blockquote>
+<p>Sketchnote by <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+</blockquote>
 <h2 id="pre-lecture-quiz">Pre-Lecture Quiz</h2>
 <p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/11">Pre-lecture quiz</a></p>
 <p>Making decisions and controlling the order in which your code runs makes your code reusable and robust. This section covers the syntax for controlling data flow in JavaScript and its significance when used with Boolean data types</p>
 <p><a href="https://youtube.com/watch?v=SxTp8j-fMMY" title="Making Decisions"><img src="https://img.youtube.com/vi/SxTp8j-fMMY/0.jpg" alt="Making Decisions" /></a></p>
 <blockquote>
-<p>Click the image above for a video about making decisions. ## A Brief Recap on Booleans</p>
+<p>Click the image above for a video about making decisions.</p>
 </blockquote>
+<h2 id="a-brief-recap-on-booleans">A Brief Recap on Booleans</h2>
 <p>Booleans can be only two values: <code>true</code> or <code>false</code>. Booleans help make decisions on which lines of code should run when certain conditions are met.</p>
 <p>Set your boolean to be true or false like this:</p>
 <p><code>let myTrueBool = true</code> <code>let myFalseBool = false</code></p>
@@ -140,30 +146,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>✅ Check your knowledge by writing some comparisons in your browser’s console. Does any returned data surprise you?</p>
 <h2 id="if-statement">If Statement</h2>
 <p>The if statement will run code in between its blocks if the condition is true.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">if</span> (condition)<span class="op">{</span></a>
-<a class="sourceLine" id="cb1-2" title="2">    <span class="co">//Condition was true. Code in this block will run.</span></a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">if</span> (condition) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="co">//Condition was true. Code in this block will run.</span></a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="op">}</span></a></code></pre></div>
 <p>Logical operators are often used to form the condition.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">let</span> currentMoney<span class="op">;</span></a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="kw">let</span> laptopPrice<span class="op">;</span></a>
 <a class="sourceLine" id="cb2-3" title="3"></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="cf">if</span> (currentMoney <span class="op">&gt;=</span> laptopPrice)<span class="op">{</span></a>
-<a class="sourceLine" id="cb2-5" title="5">    <span class="co">//Condition was true. Code in this block will run.</span></a>
-<a class="sourceLine" id="cb2-6" title="6">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Getting a new laptop!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="cf">if</span> (currentMoney <span class="op">&gt;=</span> laptopPrice) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="co">//Condition was true. Code in this block will run.</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Getting a new laptop!&quot;</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb2-7" title="7"><span class="op">}</span></a></code></pre></div>
 <h2 id="if..else-statement">IF..Else Statement</h2>
 <p>The <code>else</code> statement will run the code in between its blocks when the condition is false. It’s optional with an <code>if</code> statement.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">let</span> currentMoney<span class="op">;</span></a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="kw">let</span> laptopPrice<span class="op">;</span></a>
 <a class="sourceLine" id="cb3-3" title="3"></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="cf">if</span> (currentMoney <span class="op">&gt;=</span> laptopPrice)<span class="op">{</span></a>
-<a class="sourceLine" id="cb3-5" title="5">    <span class="co">//Condition was true. Code in this block will run.</span></a>
-<a class="sourceLine" id="cb3-6" title="6">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Getting a new laptop!&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="op">}</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="cf">else</span><span class="op">{</span></a>
-<a class="sourceLine" id="cb3-9" title="9">    <span class="co">//Condition was true. Code in this block will run.</span></a>
-<a class="sourceLine" id="cb3-10" title="10">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Can&#39;t afford a new laptop, yet!&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-11" title="11"><span class="op">}</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-4" title="4"><span class="cf">if</span> (currentMoney <span class="op">&gt;=</span> laptopPrice) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="co">//Condition was true. Code in this block will run.</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Getting a new laptop!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="co">//Condition was true. Code in this block will run.</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Can&#39;t afford a new laptop, yet!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="op">}</span></a></code></pre></div>
 <p>✅ Test your understanding of this code and the following code by running it in a browser console. Change the values of the currentMoney and laptopPrice variables to change the returned <code>console.log()</code>.</p>
 <h2 id="logical-operators-and-booleans">Logical Operators and Booleans</h2>
 <p>Decisions might require more than one comparison, and can be strung together with logical operators to produce a Boolean value.</p>
@@ -202,16 +207,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Logical operators can be used to form conditions in if..else statements.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">let</span> currentMoney<span class="op">;</span></a>
 <a class="sourceLine" id="cb4-2" title="2"><span class="kw">let</span> laptopPrice<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="kw">let</span> laptopDiscountPrice <span class="op">=</span> laptopPrice <span class="op">-</span> (laptopPrice <span class="op">*</span> <span class="fl">.20</span>) <span class="co">//Laptop price at 20 percent off</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">let</span> laptopDiscountPrice <span class="op">=</span> laptopPrice <span class="op">-</span> laptopPrice <span class="op">*</span> <span class="fl">0.2</span><span class="op">;</span> <span class="co">//Laptop price at 20 percent off</span></a>
 <a class="sourceLine" id="cb4-4" title="4"></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="cf">if</span> (currentMoney <span class="op">&gt;=</span> laptopPrice <span class="op">||</span> currentMoney <span class="op">&gt;=</span> laptopDiscountPrice)<span class="op">{</span></a>
-<a class="sourceLine" id="cb4-6" title="6">    <span class="co">//Condition was true. Code in this block will run.</span></a>
-<a class="sourceLine" id="cb4-7" title="7">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Getting a new laptop!&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="op">}</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb4-10" title="10">    <span class="co">//Condition was true. Code in this block will run.</span></a>
-<a class="sourceLine" id="cb4-11" title="11">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Can&#39;t afford a new laptop, yet!&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="op">}</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-5" title="5"><span class="cf">if</span> (currentMoney <span class="op">&gt;=</span> laptopPrice <span class="op">||</span> currentMoney <span class="op">&gt;=</span> laptopDiscountPrice) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="co">//Condition was true. Code in this block will run.</span></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Getting a new laptop!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="co">//Condition was true. Code in this block will run.</span></a>
+<a class="sourceLine" id="cb4-10" title="10">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Can&#39;t afford a new laptop, yet!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="op">}</span></a></code></pre></div>
 <h3 id="negation-operator">Negation operator</h3>
 <p>You’ve seen so far how if you can use an <code>if...else</code> statement to create conditional logic. Anything that goes into an <code>if</code> needs to evaluate to true/false. By using the <code>!</code> operator you can <em>negate</em> the expression. It would look like so:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="cf">if</span> (<span class="op">!</span>condition) <span class="op">{</span></a>
@@ -224,10 +228,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">let</span> variable <span class="op">=</span> condition <span class="op">?</span> <span class="op">&lt;</span><span class="cf">return</span> <span class="kw">this</span> <span class="cf">if</span> <span class="kw">true</span><span class="op">&gt;</span> : <span class="op">&lt;</span><span class="cf">return</span> <span class="kw">this</span> <span class="cf">if</span> <span class="kw">false</span><span class="op">&gt;</span></a></code></pre></div>
 <p>Below is a more tangible example:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">let</span> firstNumber <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw">let</span> secondNumber <span class="op">=</span> <span class="dv">10</span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="kw">let</span> biggestNumber <span class="op">=</span> firstNumber <span class="op">&gt;</span> secondNumber <span class="op">?</span> firstNumber: secondNumber<span class="op">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">let</span> secondNumber <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">let</span> biggestNumber <span class="op">=</span> firstNumber <span class="op">&gt;</span> secondNumber <span class="op">?</span> firstNumber : secondNumber<span class="op">;</span></a></code></pre></div>
 <p>✅ Take a minute to read this code a few times. Do you understand how these operators are working?</p>
-<p>The above states that - if <code>firstNumber</code> is larger than <code>secondNumber</code> - then assign <code>firstNumber</code> to <code>biggestNumber</code> - else assign <code>secondNumber</code>.</p>
+<p>The above states that</p>
+<ul>
+<li>if <code>firstNumber</code> is larger than <code>secondNumber</code></li>
+<li>then assign <code>firstNumber</code> to <code>biggestNumber</code></li>
+<li>else assign <code>secondNumber</code>.</li>
+</ul>
 <p>The ternary expression is just a compact way of writing the code below:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">let</span> biggestNumber<span class="op">;</span></a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="cf">if</span> (firstNumber <span class="op">&gt;</span> secondNumber) <span class="op">{</span></a>

@@ -1,5 +1,5 @@
-const { host, validRoutes, validLegacyRoutes } = require('../config');
-const log = require('./logger');
+const { host, validRoutes, validLegacyRoutes } = require("../config");
+const log = require("./logger");
 
 const validate = (req, res, next) => {
   delete req.query.callback;
@@ -9,11 +9,11 @@ const validate = (req, res, next) => {
     query,
     ip,
   } = req;
-  if (!route) return next({ status: 404, error: 'not found' });
+  if (!route) return next({ status: 404, error: "not found" });
   if (!validRoutes[route]) {
     log.warn(`>> invalid route ${route} - "${referer}" - ${ip}`);
     return res.status(403).json({
-      error: 'forbidden',
+      error: "forbidden",
       status: 403,
       msg: `unaccepted route: ${route} - see ${host} for infos`,
     });
@@ -25,10 +25,10 @@ const validate = (req, res, next) => {
     false
   );
   if (!isValidQuery) {
-    const _q = _qParams.join('&');
+    const _q = _qParams.join("&");
     log.warn(`>> invalid query ${route}?${_q} - "${referer}" - ${ip}`);
     return res.status(403).json({
-      error: 'forbidden',
+      error: "forbidden",
       status: 403,
       msg: `unaccepted route query: ${route}?${_q} - see ${host} for infos`,
     });
@@ -42,11 +42,11 @@ const validateLegacy = (req, res, next) => {
     headers: { referer },
     ip,
   } = req;
-  if (!type) return next({ status: 404, error: 'not found' });
+  if (!type) return next({ status: 404, error: "not found" });
   if (validLegacyRoutes.indexOf(type) === -1) {
     log.warn(`>> ${type}(kraken) - "${referer}" - ${ip}`);
     return next({
-      error: 'forbidden',
+      error: "forbidden",
       status: 403,
       msg: `unaccepted route: ${type} - see ${host} for infos`,
     });

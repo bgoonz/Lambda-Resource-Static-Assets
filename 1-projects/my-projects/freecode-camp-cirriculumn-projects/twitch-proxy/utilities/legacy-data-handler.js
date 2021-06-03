@@ -1,4 +1,4 @@
-const streamers = require('../static-data/kraken.json');
+const streamers = require("../static-data/kraken.json");
 
 function getStreamersData(type, user) {
   if (!streamers[user]) return undefined;

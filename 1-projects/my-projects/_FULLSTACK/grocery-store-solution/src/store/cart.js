@@ -1,14 +1,14 @@
-const ADD_ITEM = 'cart/ADD_ITEM';
-const REMOVE_ITEM = 'cart/REMOVE_ITEM';
-const UPDATE_COUNT = 'cart/UPDATE_COUNT';
-const RESET = 'cart/RESET';
+const ADD_ITEM = "cart/ADD_ITEM";
+const REMOVE_ITEM = "cart/REMOVE_ITEM";
+const UPDATE_COUNT = "cart/UPDATE_COUNT";
+const RESET = "cart/RESET";
 
 /* ----- ACTIONS ------ */
 
 export const addItem = (itemId) => {
   return {
     type: ADD_ITEM,
-    itemId
+    itemId,
   };
 };
 
@@ -17,7 +17,7 @@ export const updateCount = (itemId, count) => {
   return {
     type: UPDATE_COUNT,
     itemId,
-    count
+    count,
   };
 };
 
@@ -30,7 +30,7 @@ export const removeItem = (itemId) => {
 
 export const reset = () => {
   return {
-    type: RESET
+    type: RESET,
   };
 };
 
@@ -53,7 +53,7 @@ export const getCartOrder = (state) => state.cart.order;
 
 const initialState = {
   items: {},
-  order: []
+  order: [],
 };
 
 export default function cartReducer(state = initialState, action) {
@@ -84,7 +84,7 @@ export default function cartReducer(state = initialState, action) {
     case REMOVE_ITEM:
       const newState = { ...state, items: { ...state.items } };
       delete newState.items[action.itemId];
-      newState.order = newState.order.filter(id => id !== action.itemId);
+      newState.order = newState.order.filter((id) => id !== action.itemId);
       return newState;
     case RESET:
       return initialState;

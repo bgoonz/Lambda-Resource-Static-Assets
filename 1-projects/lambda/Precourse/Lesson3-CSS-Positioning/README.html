@@ -1,497 +1,180 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="generator" content="pandoc" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=yes"
-    />
-    <title>README</title>
-    <style type="text/css">
-      code {
-        white-space: pre-wrap;
-      }
-      span.smallcaps {
-        font-variant: small-caps;
-      }
-      span.underline {
-        text-decoration: underline;
-      }
-      div.column {
-        display: inline-block;
-        vertical-align: top;
-        width: 50%;
-      }
-    </style>
-    <style type="text/css">
-      a.sourceLine {
-        display: inline-block;
-        line-height: 1.25;
-      }
-      a.sourceLine {
-        pointer-events: none;
-        color: inherit;
-        text-decoration: inherit;
-      }
-      a.sourceLine:empty {
-        height: 1.2em;
-      }
-      .sourceCode {
-        overflow: visible;
-      }
-      code.sourceCode {
-        white-space: pre;
-        position: relative;
-      }
-      div.sourceCode {
-        margin: 1em 0;
-      }
-      pre.sourceCode {
-        margin: 0;
-      }
-      @media screen {
-        div.sourceCode {
-          overflow: auto;
-        }
-      }
-      @media print {
-        code.sourceCode {
-          white-space: pre-wrap;
-        }
-        a.sourceLine {
-          text-indent: -1em;
-          padding-left: 1em;
-        }
-      }
-      pre.numberSource a.sourceLine {
-        position: relative;
-        left: -4em;
-      }
-      pre.numberSource a.sourceLine::before {
-        content: attr(title);
-        position: relative;
-        left: -1em;
-        text-align: right;
-        vertical-align: baseline;
-        border: none;
-        pointer-events: all;
-        display: inline-block;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        padding: 0 4px;
-        width: 4em;
-        color: #aaaaaa;
-      }
-      pre.numberSource {
-        margin-left: 3em;
-        border-left: 1px solid #aaaaaa;
-        padding-left: 4px;
-      }
-      div.sourceCode {
-      }
-      @media screen {
-        a.sourceLine::before {
-          text-decoration: underline;
-        }
-      }
-      code span.al {
-        color: #ff0000;
-        font-weight: bold;
-      } /* Alert */
-      code span.an {
-        color: #60a0b0;
-        font-weight: bold;
-        font-style: italic;
-      } /* Annotation */
-      code span.at {
-        color: #7d9029;
-      } /* Attribute */
-      code span.bn {
-        color: #40a070;
-      } /* BaseN */
-      code span.bu {
-      } /* BuiltIn */
-      code span.cf {
-        color: #007020;
-        font-weight: bold;
-      } /* ControlFlow */
-      code span.ch {
-        color: #4070a0;
-      } /* Char */
-      code span.cn {
-        color: #880000;
-      } /* Constant */
-      code span.co {
-        color: #60a0b0;
-        font-style: italic;
-      } /* Comment */
-      code span.cv {
-        color: #60a0b0;
-        font-weight: bold;
-        font-style: italic;
-      } /* CommentVar */
-      code span.do {
-        color: #ba2121;
-        font-style: italic;
-      } /* Documentation */
-      code span.dt {
-        color: #902000;
-      } /* DataType */
-      code span.dv {
-        color: #40a070;
-      } /* DecVal */
-      code span.er {
-        color: #ff0000;
-        font-weight: bold;
-      } /* Error */
-      code span.ex {
-      } /* Extension */
-      code span.fl {
-        color: #40a070;
-      } /* Float */
-      code span.fu {
-        color: #06287e;
-      } /* Function */
-      code span.im {
-      } /* Import */
-      code span.in {
-        color: #60a0b0;
-        font-weight: bold;
-        font-style: italic;
-      } /* Information */
-      code span.kw {
-        color: #007020;
-        font-weight: bold;
-      } /* Keyword */
-      code span.op {
-        color: #666666;
-      } /* Operator */
-      code span.ot {
-        color: #007020;
-      } /* Other */
-      code span.pp {
-        color: #bc7a00;
-      } /* Preprocessor */
-      code span.sc {
-        color: #4070a0;
-      } /* SpecialChar */
-      code span.ss {
-        color: #bb6688;
-      } /* SpecialString */
-      code span.st {
-        color: #4070a0;
-      } /* String */
-      code span.va {
-        color: #19177c;
-      } /* Variable */
-      code span.vs {
-        color: #4070a0;
-      } /* VerbatimString */
-      code span.wa {
-        color: #60a0b0;
-        font-weight: bold;
-        font-style: italic;
-      } /* Warning */
-    </style>
-  </head>
-  <body>
-    <h1 id="lesson-3-intermediate-css">Lesson 3: Intermediate CSS</h1>
-    <p>
-      (Attention: These are the class notes for the
-      <a href="http://www.lambdaschool.com">Lambda School</a> pre-course
-      instruction workshop. This is meant to serve as an accompaniment to the
-      class)
-    </p>
-    <p>In this lesson we will cover:</p>
-    <ul>
-      <li>Introduction to positioning.</li>
-      <li>Display property.</li>
-      <li>Position property.</li>
-      <li>Using the position property to position elements.</li>
-      <li>Introduction to Flexbox.</li>
-    </ul>
-    <h2 id="introduction-to-positioning">Introduction to positioning</h2>
-    <p>
-      Building a layout and making everything look clean is what most people are
-      looking to do when they start learning CSS. Positioning HTML elements on
-      the page with CSS is possibly the most powerful ability CSS has, it can
-      also be the most frustrating. In this lesson we will learn a few different
-      ways to position items on the page.
-    </p>
-    <h2 id="the-display-property">The Display property</h2>
-    <p>
-      The display property is the one of the most important CSS properties for
-      positioning. We can use the display property to control how the elements
-      are displayed in relation to the elements around them, and how they behave
-      on the screen.
-    </p>
-    <div class="sourceCode" id="cb1">
-      <pre
-        class="sourceCode css"
-      ><code class="sourceCode css"><a class="sourceLine" id="cb1-1" title="1">  div {</a>
-<a class="sourceLine" id="cb1-2" title="2">    <span class="kw">display</span>: &lt;display rule&gt;<span class="op">;</span></a>
-<a class="sourceLine" id="cb1-3" title="3">  }</a></code></pre>
-    </div>
-    <p>
-      There are two types of display elements already built into HTML. Block and
-      Inline.
-    </p>
-    <h3 id="block-elements">Block Elements</h3>
-    <p>
-      As a rule of thumb, a block element will always start on a new line, and
-      will always take up the maximum width of the container it is in. Remember
-      how in the last lesson we learned that the &lt;p&gt; element will always
-      start on a new line? It is a block element, as is div and &lt;h1-6&gt;
-    </p>
-    <h3 id="inline-elements">Inline elements</h3>
-    <p>
-      Inline elements are the opposite of Block elements, it will not start on a
-      new line and will only take enough space as is needed to display the data
-      inside of it. span, a, and img elements are all inline elements.
-    </p>
-    <p>
-      We can control how an element behaves by using the display: property. If
-      we want an inline element to act as a block element, we set:
-    </p>
-    <div class="sourceCode" id="cb2">
-      <pre
-        class="sourceCode css"
-      ><code class="sourceCode css"><a class="sourceLine" id="cb2-1" title="1">  div {</a>
-<a class="sourceLine" id="cb2-2" title="2">    <span class="kw">display</span>: <span class="dv">block</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb2-3" title="3">  }</a></code></pre>
-    </div>
-    <p>And vise-versa.</p>
-    <h3
-      id="display-has-a-few-other-rules-that-we-should-be-aware-of-that-can-be-set-on-it"
-    >
-      Display has a few other rules that we should be aware of that can be set
-      on it:
-    </h3>
-    <h3 id="none">none</h3>
-    <p>
-      Setting the display to “none” will make an element disappear completely.
-      This is not to be confused with the “visibility: hidden;” rule which only
-      renders the element invisible, but does not remove it from the page (the
-      space will still look occupied by something). If an item is set to
-      display: none there will be no sign of it on the page.
-    </p>
-    <h3 id="flex">flex</h3>
-    <p>
-      Flex is a new(CSS3) powerful tool that gives us the ability to control
-      where on the page we want our items to be. We will talk about this later
-      in this lesson
-    </p>
-    <h3 id="grid">grid</h3>
-    <p>
-      This is a new feature in CSS3 that will allow you to create a grid system
-      inside of your element.
-    </p>
-    <h2 id="the-position-property">The Position property</h2>
-    <p>
-      The position property will specify the type of positioning method used for
-      an HTML element. There are 5 different methods available (we will go over
-      4 of them).
-    </p>
-    <div class="sourceCode" id="cb3">
-      <pre
-        class="sourceCode css"
-      ><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1">  div {</a>
-<a class="sourceLine" id="cb3-2" title="2">    <span class="kw">position</span>: &lt;positioning method&gt;<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-3" title="3">  }</a></code></pre>
-    </div>
-    <h3 id="static">static</h3>
-    <p>
-      This is the default positioning of an element, setting an item to static
-      will not affect the element’s behavior in any way.
-    </p>
-    <h3 id="relative">relative</h3>
-    <p>
-      Setting a position to relative will keep the element positioned as if it
-      were static, but this method will allow us the ability to set other
-      positioning methods on the element that we will describe very soon.
-    </p>
-    <h3 id="fixed">fixed</h3>
-    <p>
-      Setting an element as fixed will keep the element to a fixed place on the
-      screen no matter how much you scroll or move the screen, it will remain in
-      that place. Think about a header or menu bar on a webpage.
-    </p>
-    <h3 id="absolute">absolute</h3>
-    <p>
-      Absolute is a lot like fixed, except it is anchored relative to its parent
-      element (as long as the parent has any position method on it, except
-      static).
-    </p>
-    <h2 id="using-the-position-property-to-position-elements">
-      Using the position property to position elements
-    </h2>
-    <p>
-      Now that we have set our position method to the style we want to use, we
-      can then start position our element. (Note: this works for every position
-      method other than “static”, which will not affect the element in any way).
-    </p>
-    <h3 id="top-left-right-and-bottom">top, left, right, and bottom</h3>
-    <p>
-      After we set a positioning method we can the use top, bottom, left, and
-      right properties to position our element. The value you give to each of
-      these will determine how far away from the edge we want our element to be.
-      For example, if we want our element to be in the extreme upper left corner
-      (with a fixed position) we would use the following:
-    </p>
-    <div class="sourceCode" id="cb4">
-      <pre
-        class="sourceCode css"
-      ><code class="sourceCode css"><a class="sourceLine" id="cb4-1" title="1">  div {</a>
-<a class="sourceLine" id="cb4-2" title="2">    <span class="kw">position</span>: <span class="dv">fixed</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb4-3" title="3">    <span class="kw">top</span>: <span class="dv">0</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb4-4" title="4">    <span class="kw">left</span>: <span class="dv">0</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb4-5" title="5">  }</a></code></pre>
-    </div>
-    <p>If we wanted it to be 10px below the top and 10px off the right edge:</p>
-    <div class="sourceCode" id="cb5">
-      <pre
-        class="sourceCode css"
-      ><code class="sourceCode css"><a class="sourceLine" id="cb5-1" title="1">  div {</a>
-<a class="sourceLine" id="cb5-2" title="2">    <span class="kw">position</span>: <span class="dv">fixed</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb5-3" title="3">    <span class="kw">top</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb5-4" title="4">    <span class="kw">right</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb5-5" title="5">  }</a></code></pre>
-    </div>
-    <h2 id="introduction-to-flexbox">Introduction to Flexbox</h2>
-    <p>
-      Introduced in CSS3, Flexbox is an exciting new feature. It allows us to
-      position our elements in relation to it’s parent and each other. No longer
-      do we have to apply CSS “hacks” for things like centering. This allows
-      mobile friendly design to really shine; and allows us to spend less time
-      trying to get our positioning just right. Flexbox can quickly get
-      complicated, but we will cover the basics of flexbox positioning here.
-    </p>
-    <h3 id="display-flex-and-inline-flex">display: flex and inline-flex</h3>
-    <p>
-      As we mentioned in the display property section, one of our display types
-      can be “flex” this makes any container a flex block, we can also use
-      “inline-flex” to make it a flex inline element. For the most part, we will
-      just be using “flex”.
-    </p>
-    <h3 id="justify-content-and-align-items">
-      justify-content and align-items
-    </h3>
-    <p>
-      Now that our container(element) is a flex box. We can imagine it as a
-      grid, columns going from left to right and rows going from top to bottom.
-      We can use the justify-contet and align-items properties to tell the flex
-      box where we want our items to be on the grid. Initially “justify-content”
-      will apply to the movement from left to right(row), and “align-items” will
-      apply to the movement from top to bottom (column). We have a number of
-      rules we can place on each of these properties:
-    </p>
-    <ul>
-      <li>
-        center: will center an item (or group of items) along the axis in which
-        you apply this rule.
-      </li>
-      <li>
-        flex-start: This is what each flex box is set to initially, it will
-        display all of the items in a group at the very beginning of the row or
-        column.
-      </li>
-      <li>
-        flex-end: the opposite of flex-start, will display the item(s) at the
-        end of the row/column
-      </li>
-      <li>
-        space-between: This rule will evenly space your item(s) along the
-        row/column. The first item will be at the flex-start, and the last will
-        be at the flex-end
-      </li>
-      <li>
-        space-around: Like space-between, but will put an equal margin between
-        each item, so no item will be directly touching the edge.
-      </li>
-    </ul>
-    <p>
-      example: if we wanted our items to be center in the exact middle of a flex
-      box we would use the following:
-    </p>
-    <div class="sourceCode" id="cb6">
-      <pre
-        class="sourceCode css"
-      ><code class="sourceCode css"><a class="sourceLine" id="cb6-1" title="1">  div {</a>
-<a class="sourceLine" id="cb6-2" title="2">    <span class="kw">display</span>: flex<span class="op">;</span></a>
-<a class="sourceLine" id="cb6-3" title="3">    <span class="kw">justify-content</span>: <span class="dv">center</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-4" title="4">    <span class="kw">align-items</span>: <span class="dv">center</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb6-5" title="5">  }</a></code></pre>
-    </div>
-    <h3 id="flex-direction">flex-direction</h3>
-    <p>
-      This property can change the way our browser interprets
-      justify-content(JC) and align-items(AI). The default is “row”, and this
-      works for us in the majority of cases, but sometimes we want to change the
-      way direction works.
-    </p>
-    <ul>
-      <li>
-        row: this is the default direction. JC applies from left to right, ai
-        applies from top to bottom.
-      </li>
-      <li>
-        column: This will flip which property controls which direction. JC will
-        apply from top to bottom and ai will apply from left to right.
-      </li>
-      <li>
-        row-reverse: Only flips the direction of JC from right to left, does not
-        affect AI
-      </li>
-      <li>
-        column-reverse: Only flips direction of AI from bottom to top, does not
-        affect JC
-      </li>
-    </ul>
-    <h3 id="align-self">align-self</h3>
-    <p>
-      One last, more advanced, property we will cover is called “align-self”.
-      This will be applied to an element within a flex box that we want to break
-      out of the align-items control. If we give it the property align-self we
-      can position it anywhere along the align-items axis we want. (Note: there
-      is NO justify-self, this is a primary reason developers will change the
-      flex direction)
-    </p>
-    <h3 id="now-in-your-browser-window-open-and-complete-homework.html">
-      Now in your browser window, open and complete homework.html
-    </h3>
-    <h2 id="additional-resources">Additional Resources</h2>
-    <ul>
-      <li>
-        <a href="http://flexboxfroggy.com/"
-          >Flexbox Froggy (a great flexbox tutorial)</a
-        >
-      </li>
-      <li>
-        <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
-          >CSS tricks: A Complete Guide to Flexbox</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes"
-          >MDN: Using CSS Flexible Boxes</a
-        >
-      </li>
-      <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display"
-          >MDN: CSS display propery</a
-        >
-      </li>
-      <li>
-        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position"
-          >MDN: CSS position property</a
-        >
-      </li>
-    </ul>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="lesson-3-intermediate-css">Lesson 3: Intermediate CSS</h1>
+<p>(Attention: These are the class notes for the <a href="http://www.lambdaschool.com">Lambda School</a> pre-course instruction workshop. This is meant to serve as an accompaniment to the class)</p>
+<p>In this lesson we will cover:</p>
+<ul>
+<li>Introduction to positioning.</li>
+<li>Display property.</li>
+<li>Position property.</li>
+<li>Using the position property to position elements.</li>
+<li>Introduction to Flexbox.</li>
+</ul>
+<h2 id="introduction-to-positioning">Introduction to positioning</h2>
+<p>Building a layout and making everything look clean is what most people are looking to do when they start learning CSS. Positioning HTML elements on the page with CSS is possibly the most powerful ability CSS has, it can also be the most frustrating. In this lesson we will learn a few different ways to position items on the page.</p>
+<h2 id="the-display-property">The Display property</h2>
+<p>The display property is the one of the most important CSS properties for positioning. We can use the display property to control how the elements are displayed in relation to the elements around them, and how they behave on the screen.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb1-1" title="1">div {</a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="kw">display</span>: &lt;display rule&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">}</a></code></pre></div>
+<p>There are two types of display elements already built into HTML. Block and Inline.</p>
+<h3 id="block-elements">Block Elements</h3>
+<p>As a rule of thumb, a block element will always start on a new line, and will always take up the maximum width of the container it is in. Remember how in the last lesson we learned that the &lt;p&gt; element will always start on a new line? It is a block element, as is div and &lt;h1-6&gt;</p>
+<h3 id="inline-elements">Inline elements</h3>
+<p>Inline elements are the opposite of Block elements, it will not start on a new line and will only take enough space as is needed to display the data inside of it. span, a, and img elements are all inline elements.</p>
+<p>We can control how an element behaves by using the display: property. If we want an inline element to act as a block element, we set:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb2-1" title="1">div {</a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="kw">display</span>: <span class="dv">block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">}</a></code></pre></div>
+<p>And vise-versa.</p>
+<h3 id="display-has-a-few-other-rules-that-we-should-be-aware-of-that-can-be-set-on-it">Display has a few other rules that we should be aware of that can be set on it:</h3>
+<h3 id="none">none</h3>
+<p>Setting the display to “none” will make an element disappear completely. This is not to be confused with the “visibility: hidden;” rule which only renders the element invisible, but does not remove it from the page (the space will still look occupied by something). If an item is set to display: none there will be no sign of it on the page.</p>
+<h3 id="flex">flex</h3>
+<p>Flex is a new(CSS3) powerful tool that gives us the ability to control where on the page we want our items to be. We will talk about this later in this lesson</p>
+<h3 id="grid">grid</h3>
+<p>This is a new feature in CSS3 that will allow you to create a grid system inside of your element.</p>
+<h2 id="the-position-property">The Position property</h2>
+<p>The position property will specify the type of positioning method used for an HTML element. There are 5 different methods available (we will go over 4 of them).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1">div {</a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">position</span>: &lt;positioning method&gt;<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">}</a></code></pre></div>
+<h3 id="static">static</h3>
+<p>This is the default positioning of an element, setting an item to static will not affect the element’s behavior in any way.</p>
+<h3 id="relative">relative</h3>
+<p>Setting a position to relative will keep the element positioned as if it were static, but this method will allow us the ability to set other positioning methods on the element that we will describe very soon.</p>
+<h3 id="fixed">fixed</h3>
+<p>Setting an element as fixed will keep the element to a fixed place on the screen no matter how much you scroll or move the screen, it will remain in that place. Think about a header or menu bar on a webpage.</p>
+<h3 id="absolute">absolute</h3>
+<p>Absolute is a lot like fixed, except it is anchored relative to its parent element (as long as the parent has any position method on it, except static).</p>
+<h2 id="using-the-position-property-to-position-elements">Using the position property to position elements</h2>
+<p>Now that we have set our position method to the style we want to use, we can then start position our element. (Note: this works for every position method other than “static”, which will not affect the element in any way).</p>
+<h3 id="top-left-right-and-bottom">top, left, right, and bottom</h3>
+<p>After we set a positioning method we can the use top, bottom, left, and right properties to position our element. The value you give to each of these will determine how far away from the edge we want our element to be. For example, if we want our element to be in the extreme upper left corner (with a fixed position) we would use the following:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb4-1" title="1">div {</a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">position</span>: <span class="dv">fixed</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="kw">top</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="kw">left</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">}</a></code></pre></div>
+<p>If we wanted it to be 10px below the top and 10px off the right edge:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb5-1" title="1">div {</a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">position</span>: <span class="dv">fixed</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="kw">top</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="kw">right</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">}</a></code></pre></div>
+<h2 id="introduction-to-flexbox">Introduction to Flexbox</h2>
+<p>Introduced in CSS3, Flexbox is an exciting new feature. It allows us to position our elements in relation to it’s parent and each other. No longer do we have to apply CSS “hacks” for things like centering. This allows mobile friendly design to really shine; and allows us to spend less time trying to get our positioning just right. Flexbox can quickly get complicated, but we will cover the basics of flexbox positioning here.</p>
+<h3 id="display-flex-and-inline-flex">display: flex and inline-flex</h3>
+<p>As we mentioned in the display property section, one of our display types can be “flex” this makes any container a flex block, we can also use “inline-flex” to make it a flex inline element. For the most part, we will just be using “flex”.</p>
+<h3 id="justify-content-and-align-items">justify-content and align-items</h3>
+<p>Now that our container(element) is a flex box. We can imagine it as a grid, columns going from left to right and rows going from top to bottom. We can use the justify-contet and align-items properties to tell the flex box where we want our items to be on the grid. Initially “justify-content” will apply to the movement from left to right(row), and “align-items” will apply to the movement from top to bottom (column). We have a number of rules we can place on each of these properties:</p>
+<ul>
+<li>center: will center an item (or group of items) along the axis in which you apply this rule.</li>
+<li>flex-start: This is what each flex box is set to initially, it will display all of the items in a group at the very beginning of the row or column.</li>
+<li>flex-end: the opposite of flex-start, will display the item(s) at the end of the row/column</li>
+<li>space-between: This rule will evenly space your item(s) along the row/column. The first item will be at the flex-start, and the last will be at the flex-end</li>
+<li>space-around: Like space-between, but will put an equal margin between each item, so no item will be directly touching the edge.</li>
+</ul>
+<p>example: if we wanted our items to be center in the exact middle of a flex box we would use the following:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb6-1" title="1">div {</a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">display</span>: flex<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">justify-content</span>: <span class="dv">center</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="kw">align-items</span>: <span class="dv">center</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">}</a></code></pre></div>
+<h3 id="flex-direction">flex-direction</h3>
+<p>This property can change the way our browser interprets justify-content(JC) and align-items(AI). The default is “row”, and this works for us in the majority of cases, but sometimes we want to change the way direction works.</p>
+<ul>
+<li>row: this is the default direction. JC applies from left to right, ai applies from top to bottom.</li>
+<li>column: This will flip which property controls which direction. JC will apply from top to bottom and ai will apply from left to right.</li>
+<li>row-reverse: Only flips the direction of JC from right to left, does not affect AI</li>
+<li>column-reverse: Only flips direction of AI from bottom to top, does not affect JC</li>
+</ul>
+<h3 id="align-self">align-self</h3>
+<p>One last, more advanced, property we will cover is called “align-self”. This will be applied to an element within a flex box that we want to break out of the align-items control. If we give it the property align-self we can position it anywhere along the align-items axis we want. (Note: there is NO justify-self, this is a primary reason developers will change the flex direction)</p>
+<h3 id="now-in-your-browser-window-open-and-complete-homework.html">Now in your browser window, open and complete homework.html</h3>
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li><a href="http://flexboxfroggy.com/">Flexbox Froggy (a great flexbox tutorial)</a></li>
+<li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">CSS tricks: A Complete Guide to Flexbox</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes">MDN: Using CSS Flexible Boxes</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display">MDN: CSS display propery</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/position">MDN: CSS position property</a></li>
+</ul>
+</body>
 </html>

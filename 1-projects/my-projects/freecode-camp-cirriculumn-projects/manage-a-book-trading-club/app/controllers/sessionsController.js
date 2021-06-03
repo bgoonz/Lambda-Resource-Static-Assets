@@ -1,10 +1,12 @@
-'use strict';
+"use strict";
 
-const passport = require('passport');
+const passport = require("passport");
 
 function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
-  return res.redirect('/login');
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  return res.redirect("/login");
 }
 
 function saveSession(req, res, next) {
@@ -21,27 +23,29 @@ function logout(req, res, next) {
 }
 
 function goHome(req, res) {
-  res.redirect('/');
+  res.redirect("/");
 }
 
 function showLogin(req, res) {
-  res.render('login', { title: 'Login', user: req.user, active: 'login' });
+  res.render("login", { title: "Login", user: req.user, active: "login" });
 }
 
 function login(req, res, next) {
   const strategy = req.params.strategy;
   let options;
 
-  if (strategy === 'google') { options = { scope: ['profile'] }; }
+  if (strategy === "google") {
+    options = { scope: ["profile"] };
+  }
   passport.authenticate(strategy, options)(req, res, next);
 }
 
 function loginCallback(req, res, next) {
   const strategy = req.params.strategy;
   const options = {
-    failureRedirect: '/login',
+    failureRedirect: "/login",
     failureFlash: true,
-    successFlash: { info: { success: 'Login successful' } },
+    successFlash: { info: { success: "Login successful" } },
   };
   passport.authenticate(strategy, options)(req, res, next);
 }

@@ -1,4 +1,4 @@
-const db = require('../static-data/helix');
+const db = require("../static-data/helix");
 
 const checkItem = (item, qs) => {
   const keys = Object.keys(qs);
@@ -14,7 +14,7 @@ const checkItem = (item, qs) => {
 function staticHandler(type, qs) {
   const resp = db[type];
   if (!resp) return;
-  const data = resp.data.filter(i => checkItem(i, qs));
+  const data = resp.data.filter((i) => checkItem(i, qs));
   return { data };
 }
 

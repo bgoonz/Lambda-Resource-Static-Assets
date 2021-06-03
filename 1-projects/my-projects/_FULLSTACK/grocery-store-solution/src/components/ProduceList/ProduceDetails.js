@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { addItem, updateCount, getCartItemById } from '../../store/cart';
-import { toggleLike } from '../../store/produce';
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, updateCount, getCartItemById } from "../../store/cart";
+import { toggleLike } from "../../store/produce";
 
 function ProduceDetails({ produce }) {
   const dispatch = useDispatch();

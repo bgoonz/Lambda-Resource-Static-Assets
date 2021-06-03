@@ -1,8 +1,8 @@
-const express = require('express');
-const csrf = require('csurf');
-const { check, validationResult } = require('express-validator');
+const express = require("express");
+const csrf = require("csurf");
+const { check, validationResult } = require("express-validator");
 
-const db = require('./db/models');
+const db = require("./db/models");
 
 const router = express.Router();
 
@@ -16,52 +16,52 @@ function asyncHandler(handler) {
 }
 
 const bookValidators = [
-  check('title')
+  check("title")
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a value for Title')
+    .withMessage("Please provide a value for Title")
     .isLength({ max: 255 })
-    .withMessage('Title must not be more than 255 characters long'),
-  check('author')
+    .withMessage("Title must not be more than 255 characters long"),
+  check("author")
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a value for Author')
+    .withMessage("Please provide a value for Author")
     .isLength({ max: 100 })
-    .withMessage('Author must not be more than 100 characters long'),
-  check('releaseDate')
+    .withMessage("Author must not be more than 100 characters long"),
+  check("releaseDate")
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a value for Release Date')
+    .withMessage("Please provide a value for Release Date")
     .isISO8601()
-    .withMessage('Please provide a valid date for Release Date'),
-  check('pageCount')
+    .withMessage("Please provide a valid date for Release Date"),
+  check("pageCount")
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a value for Page Count')
+    .withMessage("Please provide a value for Page Count")
     .isInt({ min: 0 })
-    .withMessage('Please provide a valid integer for Page Count'),
-  check('publisher')
+    .withMessage("Please provide a valid integer for Page Count"),
+  check("publisher")
     .exists({ checkFalsy: true })
-    .withMessage('Please provide a value for Publisher')
+    .withMessage("Please provide a value for Publisher")
     .isLength({ max: 100 })
-    .withMessage('Publisher must not be more than 100 characters long'),
+    .withMessage("Publisher must not be more than 100 characters long"),
 ];
 
 router.get(
-  '/',
+  "/",
   asyncHandler(async (req, res, next) => {
-    const books = await db.Book.findAll({ order: [['title', 'ASC']] });
-    res.render('book-list', { title: 'Books', books });
+    const books = await db.Book.findAll({ order: [["title", "ASC"]] });
+    res.render("book-list", { title: "Books", books });
   })
 );
 
-router.get('/book/add', csrfProtection, (req, res) => {
+router.get("/book/add", csrfProtection, (req, res) => {
   const book = db.Book.build();
-  res.render('book-add', {
-    title: 'Add Book',
+  res.render("book-add", {
+    title: "Add Book",
     book,
     csrfToken: req.csrfToken(),
   });
 });
 
 router.post(
-  '/book/add',
+  "/book/add",
   csrfProtection,
   bookValidators,
   asyncHandler(async (req, res) => {
@@ -79,11 +79,11 @@ router.post(
 
     if (validatorErrors.isEmpty()) {
       await book.save();
-      res.redirect('/');
+      res.redirect("/");
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render('book-add', {
-        title: 'Add Book',
+      res.render("book-add", {
+        title: "Add Book",
         book,
         errors,
         csrfToken: req.csrfToken(),
@@ -93,13 +93,13 @@ router.post(
 );
 
 router.get(
-  '/book/edit/:id(\\d+)',
+  "/book/edit/:id(\\d+)",
   csrfProtection,
   asyncHandler(async (req, res) => {
     const bookId = parseInt(req.params.id, 10);
     const book = await db.Book.findByPk(bookId);
-    res.render('book-edit', {
-      title: 'Edit Book',
+    res.render("book-edit", {
+      title: "Edit Book",
       book,
       csrfToken: req.csrfToken(),
     });
@@ -107,7 +107,7 @@ router.get(
 );
 
 router.post(
-  '/book/edit/:id(\\d+)',
+  "/book/edit/:id(\\d+)",
   csrfProtection,
   bookValidators,
   asyncHandler(async (req, res) => {
@@ -128,11 +128,11 @@ router.post(
 
     if (validatorErrors.isEmpty()) {
       await bookToUpdate.update(book);
-      res.redirect('/');
+      res.redirect("/");
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render('book-edit', {
-        title: 'Edit Book',
+      res.render("book-edit", {
+        title: "Edit Book",
         book: { ...book, id: bookId },
         errors,
         csrfToken: req.csrfToken(),
@@ -142,13 +142,13 @@ router.post(
 );
 
 router.get(
-  '/book/delete/:id(\\d+)',
+  "/book/delete/:id(\\d+)",
   csrfProtection,
   asyncHandler(async (req, res) => {
     const bookId = parseInt(req.params.id, 10);
     const book = await db.Book.findByPk(bookId);
-    res.render('book-delete', {
-      title: 'Delete Book',
+    res.render("book-delete", {
+      title: "Delete Book",
       book,
       csrfToken: req.csrfToken(),
     });
@@ -156,13 +156,13 @@ router.get(
 );
 
 router.post(
-  '/book/delete/:id(\\d+)',
+  "/book/delete/:id(\\d+)",
   csrfProtection,
   asyncHandler(async (req, res) => {
     const bookId = parseInt(req.params.id, 10);
     const book = await db.Book.findByPk(bookId);
     await book.destroy();
-    res.redirect('/');
+    res.redirect("/");
   })
 );
 

@@ -21,8 +21,7 @@ HTML is a core building block of the internet. Every single webpage on the inter
 HTML is a series of "elements" with information in between them. Each element is contained in <> brackets (we will refer to these as "tags") with information either presented inside of them or in between two bookend brackets. HTML tags MUST close by including a "/" at the beginning of the closing element (\</elementName>), or before the close of the first element (\<elementName />):
 
 ```html
-<span>Information to be displayed</span>
-<img src="http://urlofimage" />
+<span>Information to be displayed</span> <img src="http://urlofimage" />
 ```
 
 ### \<html>

@@ -1,4 +1,3 @@
-
 class SequelizeQueryInterfaceFake {
   constructor() {
     this.insertTableName = null;

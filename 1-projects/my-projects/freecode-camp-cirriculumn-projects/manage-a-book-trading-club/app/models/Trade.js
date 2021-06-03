@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
@@ -8,34 +8,37 @@ const tradeSchema = new Schema({
   description: String,
   accepter: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
   },
   requester: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true,
   },
-  takes: [{
-    name: {
-      type: String,
-      required: true,
+  takes: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      description: String,
     },
-    description: String,
-  }],
-  gives: [{
-    name: {
-      type: String,
-      required: true,
+  ],
+  gives: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      description: String,
     },
-    description: String,
-  }],
+  ],
 });
 
 try {
-  mongoose.model('Trade', tradeSchema);
+  mongoose.model("Trade", tradeSchema);
   // eslint-disable-next-line no-empty
 } catch (err) {}
 
-module.exports = mongoose.model('Trade');
-
+module.exports = mongoose.model("Trade");
