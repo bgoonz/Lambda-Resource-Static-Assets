@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SuperEggDropAdvanced</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="super-egg-dropadvanced">Super Egg Drop（Advanced）</h1>
+<p><strong>Translator: <a href="https://github.com/Jieyixia">Jieyixia</a></strong></p>
+<p><strong>Author: <a href="https://github.com/labuladong">labuladong</a></strong></p>
+<p>The Super Egg Drop problem (Leetcode 887) has been discussed in the last article using the classic dynamic programming method. If you are not very familiar with this problem and the classic method, please read「Super Egg Drop」, which is the basic of following contents.</p>
+<p>In this article, we will optimize this problem with other two more efficient methods. One is adding binary search into the classic dynamic programming method, the other one is redefining state transition equation.</p>
+<h3 id="binary-search-optimization">Binary Search Optimization</h3>
+<p>We want to find the floor <code>F</code> for a building with <code>N</code> floors using <strong>minimum</strong> number of moves (Each move means dropping an egg from a certain floor). Any egg dropped at a floor higher than <code>F</code> will break, and any egg dropped at or below floor <code>F</code> will not break. First, let’s review the classic dynamic programming method:</p>
+<p>1、To know <code>F</code> , we should traverse the situations that we drop an egg from floor <code>i</code> , <code>1 &lt;= i &lt;= N</code> and find the situation that costs minimum number of moves;</p>
+<p>2、Anytime we drop an egg, there are two possible outcomes: the egg is broken or not broken;</p>
+<p>3、If the egg is broken, <code>F</code> &lt;= <code>i</code> ; else, <code>F</code> &gt; <code>i</code> ;</p>
+<ol start="4" type="1">
+<li>Whether the egg is broken or not depends on which outcome causes <strong>more</strong> moves, since the goal is to know with certainty what the value of <code>F</code> is, regardless of its initial value.</li>
+</ol>
+<p>The code for state transition:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># current state: K eggs, N floors</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co"># return the optimal results under current state</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">def</span> dp(K, N):</a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="cf">for</span> <span class="dv">1</span> <span class="op">&lt;=</span> i <span class="op">&lt;=</span> N:</a>
+<a class="sourceLine" id="cb1-5" title="5">        <span class="co"># the mininum moves </span></a>
+<a class="sourceLine" id="cb1-6" title="6">        res <span class="op">=</span> <span class="bu">min</span>(res, </a>
+<a class="sourceLine" id="cb1-7" title="7">                  <span class="bu">max</span>( </a>
+<a class="sourceLine" id="cb1-8" title="8">                        dp(K <span class="op">-</span> <span class="dv">1</span>, i <span class="op">-</span> <span class="dv">1</span>), <span class="co"># the egg is broken</span></a>
+<a class="sourceLine" id="cb1-9" title="9">                        dp(K, N <span class="op">-</span> i)      <span class="co"># the egg is not broken</span></a>
+<a class="sourceLine" id="cb1-10" title="10">                     ) <span class="op">+</span> <span class="dv">1</span> <span class="co"># drop an egg at floor i</span></a>
+<a class="sourceLine" id="cb1-11" title="11">                 )</a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="cf">return</span> res</a></code></pre></div>
+<p>The above code reflects the following state transition equation:</p>
+<p><br /><span class="math display"><em>d</em><em>p</em>(<em>K</em>, <em>N</em>) = min<sub>0 &lt;  = <em>i</em> &lt;  = <em>N</em></sub>{max {<em>d</em><em>p</em>(<em>K</em> − 1, <em>i</em> − 1), <em>d</em><em>p</em>(<em>K</em>, <em>N</em> − <em>i</em>)} + 1}</span><br /></p>
+<p>If you can understand the state transition equation, it is not difficult to understand how to use binary search to optimize the process.</p>
+<p>From the definition of <code>dp(K, N)</code> array (the minimum number of moves with <code>K</code> eggs and <code>N</code> floors), we know that when <code>K</code> is fixed, <code>dp(K, N)</code> will increase monotonically as <code>N</code> increases. In the above state transition equation, <code>dp(K - 1, i - 1)</code> will increase monotonically and <code>dp(K, N - i)</code> will decrease monotonically as <code>i</code> increases from 1 to <code>N</code> .</p>
+<p><img src="../pictures/SuperEggDrop/2.jpg" /></p>
+<p>We need to find the maximum between <code>dp(K - 1, i - 1)</code> and <code>dp(K, N - i)</code> , and then choose the minimum one among those maximum values. This means that we should get the intersection of the two straight lines (the lowest points of the red polyline).</p>
+<p>In other article, we have mentioned that binary search is widely used in many cases, for example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++) {</a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="kw">if</span> (<span class="fu">isOK</span>(i))</a>
+<a class="sourceLine" id="cb2-3" title="3">        <span class="kw">return</span> i;</a>
+<a class="sourceLine" id="cb2-4" title="4">}</a></code></pre></div>
+<p>In the above case, it is likely to use binary search to optimize the complexity of linear search. Review the two <code>dp</code> functions, the lowest point satisfies following condition:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= N; i++) {</a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="kw">if</span> (<span class="fu">dp</span>(K - <span class="dv">1</span>, i - <span class="dv">1</span>) == <span class="fu">dp</span>(K, N - i))</a>
+<a class="sourceLine" id="cb3-3" title="3">        <span class="kw">return</span> <span class="fu">dp</span>(K, N - i);</a>
+<a class="sourceLine" id="cb3-4" title="4">}</a></code></pre></div>
+<p>If you are familiar with binary search, it is easy to know that what we need to search is the valley value. Let’s look at the following code:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">def</span> superEggDrop(<span class="va">self</span>, K: <span class="bu">int</span>, N: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</a>
+<a class="sourceLine" id="cb4-2" title="2">        </a>
+<a class="sourceLine" id="cb4-3" title="3">    memo <span class="op">=</span> <span class="bu">dict</span>()</a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="kw">def</span> dp(K, N):</a>
+<a class="sourceLine" id="cb4-5" title="5">        <span class="cf">if</span> K <span class="op">==</span> <span class="dv">1</span>: <span class="cf">return</span> N</a>
+<a class="sourceLine" id="cb4-6" title="6">        <span class="cf">if</span> N <span class="op">==</span> <span class="dv">0</span>: <span class="cf">return</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb4-7" title="7">        <span class="cf">if</span> (K, N) <span class="kw">in</span> memo:</a>
+<a class="sourceLine" id="cb4-8" title="8">            <span class="cf">return</span> memo[(K, N)]</a>
+<a class="sourceLine" id="cb4-9" title="9">                            </a>
+<a class="sourceLine" id="cb4-10" title="10">        <span class="co"># for 1 &lt;= i &lt;= N:</span></a>
+<a class="sourceLine" id="cb4-11" title="11">        <span class="co">#     res = min(res, </span></a>
+<a class="sourceLine" id="cb4-12" title="12">        <span class="co">#             max( </span></a>
+<a class="sourceLine" id="cb4-13" title="13">        <span class="co">#                 dp(K - 1, i - 1), </span></a>
+<a class="sourceLine" id="cb4-14" title="14">        <span class="co">#                 dp(K, N - i)      </span></a>
+<a class="sourceLine" id="cb4-15" title="15">        <span class="co">#                 ) + 1 </span></a>
+<a class="sourceLine" id="cb4-16" title="16">        <span class="co">#             )</span></a>
+<a class="sourceLine" id="cb4-17" title="17"></a>
+<a class="sourceLine" id="cb4-18" title="18">        res <span class="op">=</span> <span class="bu">float</span>(<span class="st">&#39;INF&#39;</span>)</a>
+<a class="sourceLine" id="cb4-19" title="19">        <span class="co"># use binary search to replace linear search</span></a>
+<a class="sourceLine" id="cb4-20" title="20">        lo, hi <span class="op">=</span> <span class="dv">1</span>, N</a>
+<a class="sourceLine" id="cb4-21" title="21">        <span class="cf">while</span> lo <span class="op">&lt;=</span> hi:</a>
+<a class="sourceLine" id="cb4-22" title="22">            mid <span class="op">=</span> (lo <span class="op">+</span> hi) <span class="op">//</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb4-23" title="23">            broken <span class="op">=</span> dp(K <span class="op">-</span> <span class="dv">1</span>, mid <span class="op">-</span> <span class="dv">1</span>) <span class="co"># the egg is broken</span></a>
+<a class="sourceLine" id="cb4-24" title="24">            not_broken <span class="op">=</span> dp(K, N <span class="op">-</span> mid) <span class="co"># the egg is not broken</span></a>
+<a class="sourceLine" id="cb4-25" title="25">            <span class="co"># res = min(max(broken, not broken) + 1)</span></a>
+<a class="sourceLine" id="cb4-26" title="26">            <span class="cf">if</span> broken <span class="op">&gt;</span> not_broken:</a>
+<a class="sourceLine" id="cb4-27" title="27">                hi <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-28" title="28">                res <span class="op">=</span> <span class="bu">min</span>(res, broken <span class="op">+</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-29" title="29">            <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb4-30" title="30">                lo <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-31" title="31">                res <span class="op">=</span> <span class="bu">min</span>(res, not_broken <span class="op">+</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-32" title="32"></a>
+<a class="sourceLine" id="cb4-33" title="33">        memo[(K, N)] <span class="op">=</span> res</a>
+<a class="sourceLine" id="cb4-34" title="34">        <span class="cf">return</span> res</a>
+<a class="sourceLine" id="cb4-35" title="35">    </a>
+<a class="sourceLine" id="cb4-36" title="36">    <span class="cf">return</span> dp(K, N)</a></code></pre></div>
+<p>The time complexity for dynamic programming problems is <strong>the number of sub-problems × the complexity of function</strong>.</p>
+<p>Regardless of the recursive part, the complexity of <code>dp</code> function is O(logN), since binary search is used.</p>
+<p>The number of sub-problems equals to the number of different states, which is O(KN).</p>
+<p>Therefore, the time complexity of the improved method is O(K*N*logN), which is more efficient than O(KN^2) of the classic dynamic programming method. The space complexity is O(KN).</p>
+<h3 id="redefine-state-transition-equation">Redefine State Transition Equation</h3>
+<p>It has been mentioned in other article that the state transition equation for the same problem is not unique, resulting in different methods with different complexity.</p>
+<p>Review the definition of the <code>dp</code> function:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">def</span> dp(k, n) <span class="op">-&gt;</span> <span class="bu">int</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co"># current state: k eggs, n floors</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co"># return the optimal results under current state</span></a></code></pre></div>
+<p>Or the <code>dp</code> array:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" title="1">dp[k][n] <span class="op">=</span> m</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co"># current state: k eggs, n floors</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co"># return the optimal results under current state</span></a></code></pre></div>
+<p>Based on this definition, the expected answer is <code>dp(K, N)</code> . The method of exhaustion is necessary, we have to compare the results under different situations <code>1&lt;=i&lt;=N</code> to find the minimum. Binary search helps to reduce the search space.</p>
+<p>Now, we make some modifications to the definition of <code>dp</code> array, current states are <code>k</code> eggs and allowed maximum number of moves <code>m</code> . <code>dp[k][m] = n</code> represents that we can accurately determine a floor <code>F</code> for a building with at most <code>n</code> floors. More specifically:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" title="1">dp[k][m] <span class="op">=</span> n</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co"># current state: k eggs, at most m moves </span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="co"># `F` can be determined for a building with at most n floors</span></a>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="co"># For example: dp[1][7] = 7 represents:;</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co"># one egg is given and you can drop an egg at certain floor 7 times;</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co"># you can determine floor `F` for a building with at most 7 floors;</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="co"># any egg dropped at a floor higher than `F` will break;</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="co"># any egg dropped at or below floor `F` will not break.</span></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="co"># (search linearly from the first floor)</span></a></code></pre></div>
+<p>This is actually a reverse version of our original definition. We want to know the number of moves at last. But under this new definition, it is one state of the <code>dp</code> array instead of the result. This is how we deal with this problem:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb8-1" title="1"><span class="dt">int</span> <span class="fu">superEggDrop</span>(<span class="dt">int</span> K, <span class="dt">int</span> N) {</a>
+<a class="sourceLine" id="cb8-2" title="2"></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="dt">int</span> m = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="kw">while</span> (dp[K][m] &lt; N) {</a>
+<a class="sourceLine" id="cb8-5" title="5">        m++;</a>
+<a class="sourceLine" id="cb8-6" title="6">        <span class="co">// state transition...</span></a>
+<a class="sourceLine" id="cb8-7" title="7">    }</a>
+<a class="sourceLine" id="cb8-8" title="8">    <span class="kw">return</span> m;</a>
+<a class="sourceLine" id="cb8-9" title="9">}</a></code></pre></div>
+<p>The <code>while</code> loop ends when <code>dp[K][m] == N</code> , which means that given <code>K</code> eggs and at most <code>m</code> moves, floor <code>F</code> can be accurately determined for a building with <code>N</code> floors. This is exactly the same as before.</p>
+<p>Then how to find the state transition equation? Let’s start from the initial idea:</p>
+<p><img src="../pictures/SuperEggDrop/1.jpg" /></p>
+<p>You have to traverse <code>1&lt;=i&lt;=N</code> to find the minimum. But these are not necessary under the new definition of <code>dp</code> array. This is based on the following two facts:</p>
+<p><strong>1、There are only two possible outcomes when you drop an egg at any floor: the egg is broken or not broken. If the egg is broken, go downstairs. If the egg is not broken, go upstairs</strong>。</p>
+<p><strong>2、No matter which outcome, total number of floors = the number of floors upstairs + the number of floors downstairs + 1（current floor）</strong>。</p>
+<p>Base on the two facts, we can write the following state transition equation:</p>
+<p><code>dp[k][m] = dp[k][m - 1] + dp[k - 1][m - 1] + 1</code></p>
+<p>** <code>dp[k][m - 1]</code> is the number of floors upstairs**. <code>k</code> keeps unchanged since the egg is not broken, <code>m</code> minus one;</p>
+<p>** <code>dp[k - 1][m - 1]</code> is the number of floors downstairs**. <code>k</code> minus one since the egg is broken, <code>m</code> minus one.</p>
+<p>PS: why <code>m</code> minus one instead of plus one? According to the definition, <code>m</code> is the upper bound of the number of moves, instead of the number of moves。</p>
+<p><img src="../pictures/SuperEggDrop/3.jpg" /></p>
+<p>The code is：</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb9-1" title="1"><span class="dt">int</span> <span class="fu">superEggDrop</span>(<span class="dt">int</span> K, <span class="dt">int</span> N) {</a>
+<a class="sourceLine" id="cb9-2" title="2">    <span class="co">// m will not exceed N (linear search)</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="dt">int</span>[][] dp = <span class="kw">new</span> <span class="dt">int</span>[K + <span class="dv">1</span>][N + <span class="dv">1</span>];</a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="co">// base case:</span></a>
+<a class="sourceLine" id="cb9-5" title="5">    <span class="co">// dp[0][..] = 0</span></a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="co">// dp[..][0] = 0</span></a>
+<a class="sourceLine" id="cb9-7" title="7">    <span class="co">// Java intializes the array to be all 0 by default</span></a>
+<a class="sourceLine" id="cb9-8" title="8">    <span class="dt">int</span> m = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb9-9" title="9">    <span class="kw">while</span> (dp[K][m] &lt; N) {</a>
+<a class="sourceLine" id="cb9-10" title="10">        m++;</a>
+<a class="sourceLine" id="cb9-11" title="11">        <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= K; k++)</a>
+<a class="sourceLine" id="cb9-12" title="12">            dp[k][m] = dp[k][m - <span class="dv">1</span>] + dp[k - <span class="dv">1</span>][m - <span class="dv">1</span>] + <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb9-13" title="13">    }</a>
+<a class="sourceLine" id="cb9-14" title="14">    <span class="kw">return</span> m;</a>
+<a class="sourceLine" id="cb9-15" title="15">}</a></code></pre></div>
+<p>which equals to:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">for</span> (<span class="dt">int</span> m = <span class="dv">1</span>; dp[K][m] &lt; N; m++)</a>
+<a class="sourceLine" id="cb10-2" title="2">    <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= K; k++)</a>
+<a class="sourceLine" id="cb10-3" title="3">        dp[k][m] = dp[k][m - <span class="dv">1</span>] + dp[k - <span class="dv">1</span>][m - <span class="dv">1</span>] + <span class="dv">1</span>;</a></code></pre></div>
+<p>It seems more familiar. Since we need to get a certain index <code>m</code> of the <code>dp</code> array, <code>while</code> loop is used.</p>
+<p>The time complexity of this algorithm is apparently O(KN), two nested <code>for</code> loop。</p>
+<p>Moreover, <code>dp[m][k]</code> only relates to the left and left-top states, it is easy to simplify <code>dp</code> array to one dimension.</p>
+<h3 id="more-optimization">More Optimization</h3>
+<p>In this section, we will introduce some mathematical methods without specific details.</p>
+<p>Based on the <code>dp</code> definition in the previous section, ** <code>dp(k, m)</code> increases monotonically when <code>m</code> increases. When <code>k</code> is fixed, a bigger <code>m</code> will cause a bigger <code>N</code> **。</p>
+<p>We can also use binary search to optimize the process, <code>dp[K][m] == N</code> is the stop criterion. Time complexity further decreases to O(KlogN), we can assume <code>g(k, m) =</code> ……</p>
+<p>All right, let’s stop. I think it’s enough to understand the binary search method with O(K*N*logN) time complexity.</p>
+<p>It is certain that we should change the for loop to find <code>m</code> :</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb11-1" title="1"><span class="co">// change the linear search to binary search</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="co">// for (int m = 1; dp[K][m] &lt; N; m++)</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="dt">int</span> lo = <span class="dv">1</span>, hi = N;</a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="kw">while</span> (lo &lt; hi) {</a>
+<a class="sourceLine" id="cb11-5" title="5">    <span class="dt">int</span> mid = (lo + hi) / <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb11-6" title="6">    <span class="kw">if</span> (<span class="kw">... </span>&lt; N) {</a>
+<a class="sourceLine" id="cb11-7" title="7">        lo = ...</a>
+<a class="sourceLine" id="cb11-8" title="8">    } <span class="kw">else</span> {</a>
+<a class="sourceLine" id="cb11-9" title="9">        hi = ...</a>
+<a class="sourceLine" id="cb11-10" title="10">    }</a>
+<a class="sourceLine" id="cb11-11" title="11">    </a>
+<a class="sourceLine" id="cb11-12" title="12">    <span class="kw">for</span> (<span class="dt">int</span> k = <span class="dv">1</span>; k &lt;= K; k++)</a>
+<a class="sourceLine" id="cb11-13" title="13">        <span class="co">// state transition equation</span></a>
+<a class="sourceLine" id="cb11-14" title="14">}</a></code></pre></div>
+<p>In conclusion, the first optimization using binary search is based on the monotonicity of the <code>dp</code> function; the second optimization modifies the state transition function. For most of us, it is easier to understand the idea of binary search instead of different forms of <code>dp</code> array.</p>
+<p>If you have grasped the basic methods well, the methods in the last section are good challenges for you.</p>
+</body>
+</html>

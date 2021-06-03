@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>LongestCommonSubsequence</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p>add# The Longest Common Subsequence</p>
+<p><strong>Translator: <a href="https://github.com/ABCpril">ABCpril</a></strong></p>
+<p><strong>Author: <a href="https://github.com/labuladong">labuladong</a></strong></p>
+<p>Longest Common Subsequence (LCS) is a classic interview question, because its solution indicates typical two-dimensional dynamic programming. Most of the difficult problems related to string are similar to LCS problem, such as Edit distance. Moreover, LCS algorithm is worth mastering because it can be utilized to solve other relative problems effectively.</p>
+<p>Given str1 and str2, find out the length of the longest common subsequence.</p>
+<pre><code>
+Input: str1 = &quot;abcde&quot;, str2 = &quot;ace&quot; 
+Output: 3  
+Explanation: The longest common subsequence is &quot;ace&quot; whose length is 3</code></pre>
+<p>Some readers may wonder why should this problem be solved by dynamic programming. It is difficult to list exhaustively all the possible results when it comes to solving the problem of subsequence types. Thanks to exhausting and pruning, dynamic programming algorithms can be satisfying. In a word, as long as the subsequence is involved, dynamic programming should be considered to solve it.</p>
+<p>Let’s analyze how to solve this problem with dynamic programming skills in detail.</p>
+<h3 id="line-of-thinking-with-dynamic-programming">1、Line of thinking with dynamic programming</h3>
+<p><strong>The first step is to make sure the meaning of the <code>dp</code> array </strong>. For the dynamic programming problem of two strings, the routine is universal.</p>
+<p>For example, for the strings <code>s1</code> and <code>s2</code> , a DP table should be constructed like this:</p>
+<p><img src="../pictures/LCS/dp.png" /></p>
+<p>For the sake of understanding this table, we temporarily consider that the index starts from 1. We only need to make a few adjustments in the code block later. Among them, <code>dp [i] [j]</code> means: For <code>s1 [1..i]</code> and <code>s2 [1..j]</code> , their LCS length is <code>dp [i] [j]</code> .</p>
+<p>In the table above, d [2] [4] means: For <code>" ac "</code> and <code>" babc "</code> , their LCS length is 2. The final answer is hidden in <code>dp [3] [6]</code> .</p>
+<p><strong>The second step is to define the base case.</strong></p>
+<p>What base case needs is that: <code>dp[0][..]</code> and <code>dp[..][0]</code> should be initialized to 0 for representing null strings.</p>
+<p>According to the definition of the dp array above, <code>dp [0] [3] = 0</code> means: For the strings <code>""</code> and <code>"bab"</code> , the length of the LCS is 0. Due to one null string, the length of their longest common subsequence should obviously be zero.</p>
+<p><strong>The third step is to find the state transition equation。</strong></p>
+<p>This is the most difficult step in dynamic programming. Fortunately, the routines for this type of string problem are similar. So let’s take this question as an example to find out ideas for handling such problems.</p>
+<p>Making choices is what state transition exactly does. For example, this problem is to find the longest common subsequence of <code>s1</code> and <code>s2</code> . This subsequence may be called <code>lcs</code> . So what options are there for each character in <code>s1</code> and <code>s2</code> ? Obviously, there are two options, either in <code>lcs</code> or not.</p>
+<p><img src="../pictures/LCS/lcs.png" /></p>
+<p>Both “in” and “absent” are choices. The key is, which should you choose? This requires some brainpower: if a character should be in <code>lcs</code> , then this character must exist in both <code>s1</code> and <code>s2</code> , because <code>lcs</code> is the longest <strong>common </strong>subsequence. So consider this:</p>
+<p>Use two pointers <code>i</code> and <code>j</code> to traverse <code>s1</code> and <code>s2</code> from back to front. If <code>s1 [i] == s2 [j]</code> , then this character <strong>must be in <code>lcs</code> </strong>; Otherwise, <strong>at least one of <code>s1[i] and s2[j]</code> is not in <code>lcs</code> </strong>. And it should be discarded. Have a look at the recursive solution which is easier to understand:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">def</span> longestCommonSubsequence(str1, str2) <span class="op">-&gt;</span> <span class="bu">int</span>:</a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="kw">def</span> dp(i, j):</a>
+<a class="sourceLine" id="cb2-3" title="3">        <span class="co">#  base case</span></a>
+<a class="sourceLine" id="cb2-4" title="4">        <span class="cf">if</span> i <span class="op">==</span> <span class="dv">-1</span> <span class="kw">or</span> j <span class="op">==</span> <span class="dv">-1</span>:</a>
+<a class="sourceLine" id="cb2-5" title="5">            <span class="cf">return</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-6" title="6">        <span class="cf">if</span> str1[i] <span class="op">==</span> str2[j]:</a>
+<a class="sourceLine" id="cb2-7" title="7">            <span class="co"># found a character belongs to lcs, keep finding</span></a>
+<a class="sourceLine" id="cb2-8" title="8">            <span class="cf">return</span> dp(i <span class="op">-</span> <span class="dv">1</span>, j <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-9" title="9">        <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb2-10" title="10">            <span class="co"># it&#39;s up to the character which can make lcs longer</span></a>
+<a class="sourceLine" id="cb2-11" title="11">            <span class="cf">return</span> <span class="bu">max</span>(dp(i<span class="dv">-1</span>, j), dp(i, j<span class="dv">-1</span>))</a>
+<a class="sourceLine" id="cb2-12" title="12">        </a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="co"># i and j became the indexes of the final character in lcs</span></a>
+<a class="sourceLine" id="cb2-14" title="14">    <span class="cf">return</span> dp(<span class="bu">len</span>(str1)<span class="op">-</span><span class="dv">1</span>, <span class="bu">len</span>(str2)<span class="op">-</span><span class="dv">1</span>)</a></code></pre></div>
+<p>For the first case, you have found a character in <code>lcs</code> , <code>i</code> <code>j</code> should move forward by one, and the length of <code>lcs</code> increases by one; for the latter, take greater results from left and up.</p>
+<p>In fact, this code is a brute force solution. We can optimize the time complexity through memos or DP tables, such as the DP table described above:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">def</span> longestCommonSubsequence(str1, str2) <span class="op">-&gt;</span> <span class="bu">int</span>:</a>
+<a class="sourceLine" id="cb3-2" title="2">    m, n <span class="op">=</span> <span class="bu">len</span>(str1), <span class="bu">len</span>(str2)</a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="co"># construct DP table and base case</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    dp <span class="op">=</span> [[<span class="dv">0</span>] <span class="op">*</span> (n <span class="op">+</span> <span class="dv">1</span>) <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(m <span class="op">+</span> <span class="dv">1</span>)]</a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="co"># state transition</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, m <span class="op">+</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb3-7" title="7">        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, n <span class="op">+</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb3-8" title="8">            <span class="cf">if</span> str1[i <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> str2[j <span class="op">-</span> <span class="dv">1</span>]:</a>
+<a class="sourceLine" id="cb3-9" title="9">                <span class="co"># found a character in lcs</span></a>
+<a class="sourceLine" id="cb3-10" title="10">                dp[i][j] <span class="op">=</span> <span class="dv">1</span> <span class="op">+</span> dp[i<span class="dv">-1</span>][j<span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb3-11" title="11">            <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb3-12" title="12">                dp[i][j] <span class="op">=</span> <span class="bu">max</span>(dp[i<span class="dv">-1</span>][j], dp[i][j<span class="dv">-1</span>])</a>
+<a class="sourceLine" id="cb3-13" title="13">        </a>
+<a class="sourceLine" id="cb3-14" title="14">    <span class="cf">return</span> dp[<span class="op">-</span><span class="dv">1</span>][<span class="op">-</span><span class="dv">1</span>]</a></code></pre></div>
+<h3 id="troubleshooting">2、Troubleshooting</h3>
+<p>For the cases where <code>s1 [i]</code> and <code>s2 [j]</code> are not equal, it indicates that <strong>at least one</strong> of the characters are not in <code>lcs</code> . Will both characters be missing? For example:</p>
+<p><img src="../pictures/LCS/1.png" /></p>
+<p>So let’s change the code to this considering the situation above:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" title="1"><span class="cf">if</span> str1[i <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> str2[j <span class="op">-</span> <span class="dv">1</span>]:</a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="co"># ...</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb4-4" title="4">    dp[i][j] <span class="op">=</span> <span class="bu">max</span>(dp[i<span class="dv">-1</span>][j], </a>
+<a class="sourceLine" id="cb4-5" title="5">                   dp[i][j<span class="dv">-1</span>],</a>
+<a class="sourceLine" id="cb4-6" title="6">                   dp[i<span class="dv">-1</span>][j<span class="dv">-1</span>])</a></code></pre></div>
+<p>In fact, you can change it this way and get the correct answer, but it is useless because <code>dp [i-1] [j-1]</code> is always the smallest of the three, and max will not reach it.</p>
+<p>The reason lies in our definition of dp array: for <code>s1 [1..i]</code> and <code>s2 [1..j]</code> , their LCS length is <code>dp [i] [j]</code> .</p>
+<p><img src="../pictures/LCS/2.png" /></p>
+<p>Through this way, it is clear that the length of the <code>lcs</code> corresponding to <code>dp [i-1] [j-1]</code> cannot be larger than the first two cases, so there is no need to add it in the comparison.</p>
+<h3 id="summary">3、Summary</h3>
+<p>For the dynamic programming of two strings, DP tables are generally defined. Because it is easier to write the state transition equation and get the state of <code>dp [i] [j]</code> by analyzing the previous dp values with DP table:</p>
+<p><img src="../pictures/LCS/3.png" /></p>
+<p>The key to find out the state transition equation is to think about the “choices” of each state. As long as we can make the right choice with right logic, the algorithm will take effect as planned.</p>
+</body>
+</html>

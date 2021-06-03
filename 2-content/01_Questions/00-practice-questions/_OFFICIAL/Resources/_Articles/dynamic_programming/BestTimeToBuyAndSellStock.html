@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>BestTimeToBuyAndSellStock</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="best-time-to-buy-and-sell-stock">Best Time to Buy and Sell Stock</h1>
+<p><strong>Translator: <a href="https://github.com/Wonderxie">Wonderxie</a></strong></p>
+<p><strong>Author: <a href="https://github.com/labuladong">labuladong</a></strong></p>
+<p>Many readers complain that there are too many tricks in the stock series problems on LeetCode. But if we really encounter such problems during the interview, we might not be able to think of those clever methods for a while. What should we do then? <strong>Therefore, this article rejects tricky methods, but instead with the steady ones, using only a general method to solve the problems.</strong></p>
+<p>This article uses the techniques of state machines to solve it, and it can be all submitted and accepted. Don’t think that this term is high-dimensional, it’s just a literary vocabulary, actually a DP table, you can understand it at a glance.</p>
+<p>PS: This article is referenced from <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/discuss/39038">one solution on LeetCode</a>。</p>
+<p>Let’s take a look at one of others’ solutions:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb1-1" title="1"><span class="dt">int</span> maxProfit(vector&lt;<span class="dt">int</span>&gt;&amp; prices) {</a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="cf">if</span>(prices.empty()) <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">int</span> s1=-prices[<span class="dv">0</span>],s2=INT_MIN,s3=INT_MIN,s4=INT_MIN;</a>
+<a class="sourceLine" id="cb1-4" title="4">        </a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="cf">for</span>(<span class="dt">int</span> i=<span class="dv">1</span>;i&lt;prices.size();++i) {            </a>
+<a class="sourceLine" id="cb1-6" title="6">        s1 = max(s1, -prices[i]);</a>
+<a class="sourceLine" id="cb1-7" title="7">        s2 = max(s2, s1+prices[i]);</a>
+<a class="sourceLine" id="cb1-8" title="8">        s3 = max(s3, s2-prices[i]);</a>
+<a class="sourceLine" id="cb1-9" title="9">        s4 = max(s4, s3+prices[i]);</a>
+<a class="sourceLine" id="cb1-10" title="10">    }</a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="cf">return</span> max(<span class="dv">0</span>,s4);</a>
+<a class="sourceLine" id="cb1-12" title="12">}</a></code></pre></div>
+<p>Can you get it? Can you do it? Impossible! It’s so normal that you get confused. Even if you barely understand, you can’t solve the next problem. Why can others write such a weird yet efficient solution? Because there is a framework for this kind of problem, but people won’t tell you. Because once they tell you, you learn it in five minutes, and the algorithm problem is no longer mysterious and will be vulnerable.</p>
+<p>This article will tell you this framework, and then take you to solve the problem one by one. This article uses the techniques of state machines to solve it, and it can be all submitted and accepted. Don’t think that this term is high-dimensional, it’s just a literary vocabulary, actually a DP table, you can understand it at a glance.</p>
+<p>These 6 problems are common, so we will concentrate on the fourth problem. Because this problem is one of the most generalized forms. The other problems are simplifications of this form.</p>
+<p>Look at the problem:</p>
+<p><img src="../pictures/stock_problem/stock-problem.png" /></p>
+<p>The first problem is that only one transaction is performed, which is equivalent to k = 1. The second problem is that the number of transactions is unlimited, which is equivalent to k = +infinity (positive infinity). The third problem is that only two transactions are performed, which is equivalent to k = 2. The remaining two are also unlimited, but the additional conditions of the “freezing period” and “handling fee” for the transaction are actually variants of the second problem, which are easy to handle.</p>
+<p>If you are not familiar with the topics, you can go to LeetCode to view the content of these topics. In order to save space, this article does not list the specific content of these topics. Let’s get back to business and start solving the problem.</p>
+<p><strong>I. Exhaustive Framework</strong></p>
+<p>First of all, always the same idea: how to exhaust? The exhaustive thinking here is not the same as the recursive idea of the previous article.</p>
+<p>Recursion is actually in line with the logic of our thinking. It is advanced step by step. When we have something that can’t be solved, we can thrown it to recursion. It usually works and the readability is still good. The disadvantage is that once you make a mistake, you can’t easily find the cause of the error. For example, the recursive solution in the previous article definitely has computational redundancy, but it is not easy to find.</p>
+<p>Here, we do not use recursive thinking for exhaustion, but use “state” for exhaustion. Let’s be specific to each day to see how many possible “states” there are, and then to find the “choice” corresponding to each “state”. We have to exhaust all “states”, and the purpose of exhaustion is to update the “state” according to the corresponding “choice”. It sounds abstract, just remember the words “state” and “choice”. It’s easy to understand by the following example.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="cf">for</span> state1 <span class="kw">in</span> <span class="bu">all</span> values of state1：</a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="cf">for</span> state2 <span class="kw">in</span> <span class="kw">in</span> <span class="bu">all</span> values of state2：</a>
+<a class="sourceLine" id="cb2-3" title="3">        <span class="cf">for</span> ...</a>
+<a class="sourceLine" id="cb2-4" title="4">            dp[state1][state2][...] <span class="op">=</span> best_choice(choice1, choice2 ...)</a></code></pre></div>
+<p>For example, in this problem, <strong>there are three “choices” every day:</strong> buy, sell, and no operation. We use <code>buy</code> , <code>sell</code> , <code>rest</code> to represent these three choices. But the problem is that you can’t do these three choices every day, because <code>sell</code> must be after <code>buy</code> , and <code>buy</code> must be after <code>sell</code> . Then the <code>rest</code> operation should be divided into two states, one is <code>rest</code> after <code>buy</code> (holding the stock), and one is <code>rest</code> after <code>sell</code> (not holding the stock). And don’t forget, we also have a limit on the number of transactions k, which means that we can only operate on the premise that k &gt; 0.</p>
+<p>It’s complicated, but don’t be afraid. Our current purpose is just exhaustive. No matter how many states it has, what we have to do is to list all of them. <strong>There are three “states” of this problem</strong>. The first is the number of days, the second is the maximum number of allowed transactions, and the third is the current holding state (That is, the state of <code>rest</code> mentioned before. We can use 1 means hold, 0 means no hold). Then we can use a three-dimensional array to hold all the combinations of these states:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" title="1">dp[i][k][<span class="dv">0</span> <span class="kw">or</span> <span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;=</span> n<span class="dv">-1</span>, <span class="dv">1</span> <span class="op">&lt;=</span> k <span class="op">&lt;=</span> K</a>
+<a class="sourceLine" id="cb3-3" title="3">(n means the number of days, the uppercase K means the maximum number of allowed transactions)</a>
+<a class="sourceLine" id="cb3-4" title="4">This problem has a total of n × K × <span class="dv">2</span> states, <span class="kw">and</span> we can solve it <span class="bu">all</span> by exhausting them.</a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="cf">for</span> <span class="dv">0</span> <span class="op">&lt;=</span> i <span class="op">&lt;</span> n:</a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="cf">for</span> <span class="dv">1</span> <span class="op">&lt;=</span> k <span class="op">&lt;=</span> K:</a>
+<a class="sourceLine" id="cb3-8" title="8">        <span class="cf">for</span> s <span class="kw">in</span> {<span class="dv">0</span>, <span class="dv">1</span>}:</a>
+<a class="sourceLine" id="cb3-9" title="9">            dp[i][k][s] <span class="op">=</span> <span class="bu">max</span>(buy, sell, rest)</a></code></pre></div>
+<p>And we can use natural language to describe the meaning of each state. For example, <code>dp[3][2][1]</code> means: Today is the third day. I can do 2 transactions so far. And I currently hold stocks. For another example, <code>dp[2][3][0]</code> : Today is the second day. I can do 3 transactions so far. And I don’t have any stocks in my hand. It’s easy to understand, right?</p>
+<p>The final answer we want to find is <code>dp[n-1][K][0]</code> , which is the maximum number of K transactions allowed on the last day and the maximum profit. The reader may ask why is it not <code>dp[n-1][K][1]</code> ? Because “1” means that you still have stocks, “0” means that the stocks you have sold have been sold. Obviously, the latter must get greater profits than the former.</p>
+<p>Remember how to interpret “state”, and once you find it difficult to understand, translate it into natural language.</p>
+<p><strong>II. State Transition Framework</strong></p>
+<p>Now that we have completed the “state” exhaustion. We begin to think about what “choices” are there for each “state”, and how we should update the “state”. If we are just concerned with the “holding state”, we can draw a state transition diagram.</p>
+<p><img src="../pictures/stock_problem/state-transition-diagram.png" /></p>
+<p>It is clear from this diagram how each state (0 and 1) is transferred. Based on this diagram, let’s write the state transition equation:</p>
+<pre><code>
+dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
+              max( choose rest  ,          choose sell      )
+
+Explanation: I don&#39;t hold stocks today. There are two possibilities:
+1) Either I didn&#39;t hold stocks yesterday, and then choose to rest today, so I still don&#39;t hold stocks today.
+2) Either I held stocks yesterday, but today I chose to sell, so I don&#39;t hold stocks today.
+
+dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
+              max( choose rest  ,            choose buy         )
+
+Explanation: Today I hold stocks. There are two possibilities:
+1) Either I held stocks yesterday and chose to rest today, so I still hold stocks today.
+2) Either I didn&#39;t hold stocks yesterday, but today I chose to buy, so today I hold stocks.</code></pre>
+<p>This explanation should be clear. If you buy, you need to subtract <code>prices[i]</code> from the profit, and if you sell, you need to increase <code>prices[i]</code> to the profit. The maximum profit of today is the larger of these two possible choices. And pay attention to the limitation of k. When we choose to buy, we reduce k by 1, which is very easy to understand. Of course, we need also decrease by 1 when we choose to sell.</p>
+<p>Now we have completed the most difficult step in dynamic programming: the state transition equation. <strong>If you can understand the previous content, then you can already deal with all the problems, just use this framework.</strong> But there is one last thing left, which is to define the base case, which is the simplest case.</p>
+<pre><code>
+dp[-1][k][0] = 0
+Explanation: Because i starts at 0, i = -1 means it hasn&#39;t started yet, and the profit at this time is of course 0.
+
+dp[-1][k][1] = -infinity
+Explanation: Before the beginning, it was impossible to hold stocks, which is expressed as negative infinity.
+
+dp[i][0][0] = 0
+Explanation: Because k starts from 1, k = 0 means that trading is not allowed at all, and profit is of course 0 at this time.
+
+dp[i][0][1] = -infinity
+Explanation: It is impossible to hold stocks when trading is not allowed. This possibility is expressed by negative infinity.</code></pre>
+<p>Let’s summarize the above state transition equations:</p>
+<pre><code>
+base case：
+dp[-1][k][0] = dp[i][0][0] = 0
+dp[-1][k][1] = dp[i][0][1] = -infinity
+
+state transition equation：
+dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
+dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])</code></pre>
+<p>The reader may ask, how is this array index “-1” expressed programmatically, and how is negative infinity expressed? This is all a matter of detail, and there are many ways to achieve it. Now that the complete framework has been completed. Let’s start the materialization of the code.</p>
+<p><strong>III. Solve the problem</strong></p>
+<p><strong>First Problem: k = 1</strong></p>
+<p>Set state transition equations directly. According to the base case, some simplifications can be done:</p>
+<pre><code>
+dp[i][1][0] = max(dp[i-1][1][0], dp[i-1][1][1] + prices[i])
+dp[i][1][1] = max(dp[i-1][1][1], dp[i-1][0][0] - prices[i]) 
+            = max(dp[i-1][1][1], -prices[i])
+Explanation：Base case of k = 0，so dp[i-1][0][0] = 0
+
+Now we find that k is 1 and will not change, that is, k has no effect on the state transition. We can further simplify it with removing all k:
+dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+dp[i][1] = max(dp[i-1][1], -prices[i])</code></pre>
+<p>Write the code directly:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb8-1" title="1"><span class="dt">int</span> n = prices.<span class="fu">length</span>;</a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="dt">int</span>[][] dp = <span class="kw">new</span> <span class="dt">int</span>[n][<span class="dv">2</span>];</a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++) {</a>
+<a class="sourceLine" id="cb8-4" title="4">    dp[i][<span class="dv">0</span>] = <span class="bu">Math</span>.<span class="fu">max</span>(dp[i-<span class="dv">1</span>][<span class="dv">0</span>], dp[i-<span class="dv">1</span>][<span class="dv">1</span>] + prices[i]);</a>
+<a class="sourceLine" id="cb8-5" title="5">    dp[i][<span class="dv">1</span>] = <span class="bu">Math</span>.<span class="fu">max</span>(dp[i-<span class="dv">1</span>][<span class="dv">1</span>], -prices[i]);</a>
+<a class="sourceLine" id="cb8-6" title="6">}</a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="kw">return</span> dp[n - <span class="dv">1</span>][<span class="dv">0</span>];</a></code></pre></div>
+<p>Obviously <code>dp[i-1]</code> is illegal when i = 0. This is because we have not processed the base case of i. Can be handled like this:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++) {</a>
+<a class="sourceLine" id="cb9-2" title="2">    <span class="kw">if</span> (i - <span class="dv">1</span> == -<span class="dv">1</span>) {</a>
+<a class="sourceLine" id="cb9-3" title="3">        dp[i][<span class="dv">0</span>] = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb9-4" title="4">        <span class="co">// Explanation：</span></a>
+<a class="sourceLine" id="cb9-5" title="5">        <span class="co">//   dp[i][0] </span></a>
+<a class="sourceLine" id="cb9-6" title="6">        <span class="co">// = max(dp[-1][0], dp[-1][1] + prices[i])</span></a>
+<a class="sourceLine" id="cb9-7" title="7">        <span class="co">// = max(0, -infinity + prices[i]) = 0</span></a>
+<a class="sourceLine" id="cb9-8" title="8">        dp[i][<span class="dv">1</span>] = -prices[i];</a>
+<a class="sourceLine" id="cb9-9" title="9">        <span class="co">// Explanation：</span></a>
+<a class="sourceLine" id="cb9-10" title="10">        <span class="co">//   dp[i][1] </span></a>
+<a class="sourceLine" id="cb9-11" title="11">        <span class="co">// = max(dp[-1][1], dp[-1][0] - prices[i])</span></a>
+<a class="sourceLine" id="cb9-12" title="12">        <span class="co">// = max(-infinity, 0 - prices[i]) </span></a>
+<a class="sourceLine" id="cb9-13" title="13">        <span class="co">// = -prices[i]</span></a>
+<a class="sourceLine" id="cb9-14" title="14">        <span class="kw">continue</span>;</a>
+<a class="sourceLine" id="cb9-15" title="15">    }</a>
+<a class="sourceLine" id="cb9-16" title="16">    dp[i][<span class="dv">0</span>] = <span class="bu">Math</span>.<span class="fu">max</span>(dp[i-<span class="dv">1</span>][<span class="dv">0</span>], dp[i-<span class="dv">1</span>][<span class="dv">1</span>] + prices[i]);</a>
+<a class="sourceLine" id="cb9-17" title="17">    dp[i][<span class="dv">1</span>] = <span class="bu">Math</span>.<span class="fu">max</span>(dp[i-<span class="dv">1</span>][<span class="dv">1</span>], -prices[i]);</a>
+<a class="sourceLine" id="cb9-18" title="18">}</a>
+<a class="sourceLine" id="cb9-19" title="19"><span class="kw">return</span> dp[n - <span class="dv">1</span>][<span class="dv">0</span>];</a></code></pre></div>
+<p>The first problem is solved, but it is troublesome to handle the base case in this way. And pay attention to the state transition equation, the new state is only related to an adjacent state. So in fact, instead of the entire DP array, only one variable is needed to store the adjacent state, which can reduce the space complexity to O(1):</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb10-1" title="1"><span class="co">// k == 1</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="dt">int</span> <span class="fu">maxProfit_k_1</span>(<span class="dt">int</span>[] prices) {</a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="dt">int</span> n = prices.<span class="fu">length</span>;</a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="co">// base case: dp[-1][0] = 0, dp[-1][1] = -infinity</span></a>
+<a class="sourceLine" id="cb10-5" title="5">    <span class="dt">int</span> dp_i_<span class="dv">0</span> = <span class="dv">0</span>, dp_i_<span class="dv">1</span> = <span class="bu">Integer</span>.<span class="fu">MIN_VALUE</span>;</a>
+<a class="sourceLine" id="cb10-6" title="6">    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++) {</a>
+<a class="sourceLine" id="cb10-7" title="7">        <span class="co">// dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])</span></a>
+<a class="sourceLine" id="cb10-8" title="8">        dp_i_<span class="dv">0</span> = <span class="bu">Math</span>.<span class="fu">max</span>(dp_i_<span class="dv">0</span>, dp_i_<span class="dv">1</span> + prices[i]);</a>
+<a class="sourceLine" id="cb10-9" title="9">        <span class="co">// dp[i][1] = max(dp[i-1][1], -prices[i])</span></a>
+<a class="sourceLine" id="cb10-10" title="10">        dp_i_<span class="dv">1</span> = <span class="bu">Math</span>.<span class="fu">max</span>(dp_i_<span class="dv">1</span>, -prices[i]);</a>
+<a class="sourceLine" id="cb10-11" title="11">    }</a>
+<a class="sourceLine" id="cb10-12" title="12">    <span class="kw">return</span> dp_i_<span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb10-13" title="13">}</a></code></pre></div>
+<p>Both methods are the same, but this programming method is much simpler. But without the guidance of the previous state transition equations, it is definitely incomprehensible. Subsequent problems, we mainly write this kind of solution with O(1) space complexity.</p>
+<p><strong>Second Problem: k = +infinity</strong></p>
+<p>If k is positive infinity, then k and k-1 can be considered the same. The framework can be rewritten like this:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" title="1">dp[i][k][<span class="dv">0</span>] <span class="op">=</span> <span class="bu">max</span>(dp[i<span class="dv">-1</span>][k][<span class="dv">0</span>], dp[i<span class="dv">-1</span>][k][<span class="dv">1</span>] <span class="op">+</span> prices[i])</a>
+<a class="sourceLine" id="cb11-2" title="2">dp[i][k][<span class="dv">1</span>] <span class="op">=</span> <span class="bu">max</span>(dp[i<span class="dv">-1</span>][k][<span class="dv">1</span>], dp[i<span class="dv">-1</span>][k<span class="dv">-1</span>][<span class="dv">0</span>] <span class="op">-</span> prices[i])</a>
+<a class="sourceLine" id="cb11-3" title="3">            <span class="op">=</span> <span class="bu">max</span>(dp[i<span class="dv">-1</span>][k][<span class="dv">1</span>], dp[i<span class="dv">-1</span>][k][<span class="dv">0</span>] <span class="op">-</span> prices[i])</a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5">We find that k <span class="kw">in</span> the array has <span class="kw">not</span> changed, which means that we do <span class="kw">not</span> need to record the state of k:</a>
+<a class="sourceLine" id="cb11-6" title="6">dp[i][<span class="dv">0</span>] <span class="op">=</span> <span class="bu">max</span>(dp[i<span class="dv">-1</span>][<span class="dv">0</span>], dp[i<span class="dv">-1</span>][<span class="dv">1</span>] <span class="op">+</span> prices[i])</a>
+<a class="sourceLine" id="cb11-7" title="7">dp[i][<span class="dv">1</span>] <span class="op">=</span> <span class="bu">max</span>(dp[i<span class="dv">-1</span>][<span class="dv">1</span>], dp[i<span class="dv">-1</span>][<span class="dv">0</span>] <span class="op">-</span> prices[i])</a></code></pre></div>
+<p>Translate it directly into code:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb12-1" title="1"><span class="dt">int</span> <span class="fu">maxProfit_k_inf</span>(<span class="dt">int</span>[] prices) {</a>
+<a class="sourceLine" id="cb12-2" title="2">    <span class="dt">int</span> n = prices.<span class="fu">length</span>;</a>
+<a class="sourceLine" id="cb12-3" title="3">    <span class="dt">int</span> dp_i_<span class="dv">0</span> = <span class="dv">0</span>, dp_i_<span class="dv">1</span> = <span class="bu">Integer</span>.<span class="fu">MIN_VALUE</span>;</a>
+<a class="sourceLine" id="cb12-4" title="4">    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++) {</a>
+<a class="sourceLine" id="cb12-5" title="5">        <span class="dt">int</span> temp = dp_i_<span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb12-6" title="6">        dp_i_<span class="dv">0</span> = <span class="bu">Math</span>.<span class="fu">max</span>(dp_i_<span class="dv">0</span>, dp_i_<span class="dv">1</span> + prices[i]);</a>
+<a class="sourceLine" id="cb12-7" title="7">        dp_i_<span class="dv">1</span> = <span class="bu">Math</span>.<span class="fu">max</span>(dp_i_<span class="dv">1</span>, temp - prices[i]);</a>
+<a class="sourceLine" id="cb12-8" title="8">    }</a>
+<a class="sourceLine" id="cb12-9" title="9">    <span class="kw">return</span> dp_i_<span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb12-10" title="10">}</a></code></pre></div>
+<p><strong>Third Problem: k = +infinity with cooldown</strong></p>
+<p>We must wait one day after each sell to continue trading. Just incorporate this feature into the state transition equation of the previous problem:</p>
+<pre><code>
+dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+dp[i][1] = max(dp[i-1][1], dp[i-2][0] - prices[i])
+Explanation: When we choose to buy on day i, the state of i-2 should be transferred instead of i-1.</code></pre>
+<p>Translate it into code:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb14-1" title="1"><span class="dt">int</span> <span class="fu">maxProfit_with_cool</span>(<span class="dt">int</span>[] prices) {</a>
+<a class="sourceLine" id="cb14-2" title="2">    <span class="dt">int</span> n = prices.<span class="fu">length</span>;</a>
+<a class="sourceLine" id="cb14-3" title="3">    <span class="dt">int</span> dp_i_<span class="dv">0</span> = <span class="dv">0</span>, dp_i_<span class="dv">1</span> = <span class="bu">Integer</span>.<span class="fu">MIN_VALUE</span>;</a>
+<a class="sourceLine" id="cb14-4" title="4">    <span class="dt">int</span> dp_pre_<span class="dv">0</span> = <span class="dv">0</span>; <span class="co">// variable representing dp[i-2][0]</span></a>
+<a class="sourceLine" id="cb14-5" title="5">    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++) {</a>
+<a class="sourceLine" id="cb14-6" title="6">        <span class="dt">int</span> temp = dp_i_<span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb14-7" title="7">        dp_i_<span class="dv">0</span> = <span class="bu">Math</span>.<span class="fu">max</span>(dp_i_<span class="dv">0</span>, dp_i_<span class="dv">1</span> + prices[i]);</a>
+<a class="sourceLine" id="cb14-8" title="8">        dp_i_<span class="dv">1</span> = <span class="bu">Math</span>.<span class="fu">max</span>(dp_i_<span class="dv">1</span>, dp_pre_<span class="dv">0</span> - prices[i]);</a>
+<a class="sourceLine" id="cb14-9" title="9">        dp_pre_<span class="dv">0</span> = temp;</a>
+<a class="sourceLine" id="cb14-10" title="10">    }</a>
+<a class="sourceLine" id="cb14-11" title="11">    <span class="kw">return</span> dp_i_<span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb14-12" title="12">}</a></code></pre></div>
+<p><strong>Fourth Problem: k = +infinity with fee</strong></p>
+<p>There is a fee for each transaction, so we need to substract the fee from the profit. Rewrite the equation:</p>
+<pre><code>
+dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i] - fee)
+Explanation: That means that the price of buying stocks has risen.
+It&#39;s the same case that we substract it in the first formula, which is equivalent to reducing the price of the stock sold.</code></pre>
+<p>Translate it directly into code:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb16-1" title="1"><span class="dt">int</span> <span class="fu">maxProfit_with_fee</span>(<span class="dt">int</span>[] prices, <span class="dt">int</span> fee) {</a>
+<a class="sourceLine" id="cb16-2" title="2">    <span class="dt">int</span> n = prices.<span class="fu">length</span>;</a>
+<a class="sourceLine" id="cb16-3" title="3">    <span class="dt">int</span> dp_i_<span class="dv">0</span> = <span class="dv">0</span>, dp_i_<span class="dv">1</span> = <span class="bu">Integer</span>.<span class="fu">MIN_VALUE</span>;</a>
+<a class="sourceLine" id="cb16-4" title="4">    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++) {</a>
+<a class="sourceLine" id="cb16-5" title="5">        <span class="dt">int</span> temp = dp_i_<span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb16-6" title="6">        dp_i_<span class="dv">0</span> = <span class="bu">Math</span>.<span class="fu">max</span>(dp_i_<span class="dv">0</span>, dp_i_<span class="dv">1</span> + prices[i]);</a>
+<a class="sourceLine" id="cb16-7" title="7">        dp_i_<span class="dv">1</span> = <span class="bu">Math</span>.<span class="fu">max</span>(dp_i_<span class="dv">1</span>, temp - prices[i] - fee);</a>
+<a class="sourceLine" id="cb16-8" title="8">    }</a>
+<a class="sourceLine" id="cb16-9" title="9">    <span class="kw">return</span> dp_i_<span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb16-10" title="10">}</a></code></pre></div>
+<p><strong>Fifth Problem: k = 2</strong></p>
+<p>k = 2 is slightly different from the previous problem, because the above conditions are not very related to k. Either k is positive infinity, and the state transition has nothing to do with k. Either k = 1, close to the base case of k = 0, and there is no sense of existence in the end.</p>
+<p>In the case where k = 2 and k to be described later are arbitrary positive integers, the treatment of k is highlighted. We write the code directly and analyze the reason as we write.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb17-1" title="1">The original state transition equation, where there is no simplification</a>
+<a class="sourceLine" id="cb17-2" title="2">dp[i][k][<span class="dv">0</span>] = <span class="fu">max</span>(dp[i-<span class="dv">1</span>][k][<span class="dv">0</span>], dp[i-<span class="dv">1</span>][k][<span class="dv">1</span>] + prices[i])</a>
+<a class="sourceLine" id="cb17-3" title="3">dp[i][k][<span class="dv">1</span>] = <span class="fu">max</span>(dp[i-<span class="dv">1</span>][k][<span class="dv">1</span>], dp[i-<span class="dv">1</span>][k-<span class="dv">1</span>][<span class="dv">0</span>] - prices[i])</a></code></pre></div>
+<p>Following the previous code, we might take the following code for granted (wrong):</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb18-1" title="1"><span class="dt">int</span> k = <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="dt">int</span>[][][] dp = <span class="kw">new</span> <span class="dt">int</span>[n][k + <span class="dv">1</span>][<span class="dv">2</span>];</a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++)</a>
+<a class="sourceLine" id="cb18-4" title="4">    <span class="kw">if</span> (i - <span class="dv">1</span> == -<span class="dv">1</span>) { <span class="co">/* Deal with the base case */</span> }</a>
+<a class="sourceLine" id="cb18-5" title="5">    dp[i][k][<span class="dv">0</span>] = <span class="bu">Math</span>.<span class="fu">max</span>(dp[i-<span class="dv">1</span>][k][<span class="dv">0</span>], dp[i-<span class="dv">1</span>][k][<span class="dv">1</span>] + prices[i]);</a>
+<a class="sourceLine" id="cb18-6" title="6">    dp[i][k][<span class="dv">1</span>] = <span class="bu">Math</span>.<span class="fu">max</span>(dp[i-<span class="dv">1</span>][k][<span class="dv">1</span>], dp[i-<span class="dv">1</span>][k-<span class="dv">1</span>][<span class="dv">0</span>] - prices[i]);</a>
+<a class="sourceLine" id="cb18-7" title="7">}</a>
+<a class="sourceLine" id="cb18-8" title="8"><span class="kw">return</span> dp[n - <span class="dv">1</span>][k][<span class="dv">0</span>];</a></code></pre></div>
+<p>Why is it wrong? Aren’t we writing according to the state transition equation?</p>
+<p>Remember the “exhaustive framework” summarized earlier? This means that we must exhaust all states. In fact, our previous solutions are all considering on exhausting in all states, but k has been simplified in the previous problem. For example, in the first problem when k = 1:</p>
+<p><img src="../pictures/stock_problem/stock-code-k_1.png" /></p>
+<p>Since this problem does not eliminate the effect of k, we need also exhaust k:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb19-1" title="1"><span class="dt">int</span> max_k = <span class="dv">2</span>;</a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="dt">int</span>[][][] dp = <span class="kw">new</span> <span class="dt">int</span>[n][max_k + <span class="dv">1</span>][<span class="dv">2</span>];</a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++) {</a>
+<a class="sourceLine" id="cb19-4" title="4">    <span class="kw">for</span> (<span class="dt">int</span> k = max_k; k &gt;= <span class="dv">1</span>; k--) {</a>
+<a class="sourceLine" id="cb19-5" title="5">        <span class="kw">if</span> (i - <span class="dv">1</span> == -<span class="dv">1</span>) { <span class="co">/* Deal with the base case */</span> }</a>
+<a class="sourceLine" id="cb19-6" title="6">        dp[i][k][<span class="dv">0</span>] = <span class="fu">max</span>(dp[i-<span class="dv">1</span>][k][<span class="dv">0</span>], dp[i-<span class="dv">1</span>][k][<span class="dv">1</span>] + prices[i]);</a>
+<a class="sourceLine" id="cb19-7" title="7">        dp[i][k][<span class="dv">1</span>] = <span class="fu">max</span>(dp[i-<span class="dv">1</span>][k][<span class="dv">1</span>], dp[i-<span class="dv">1</span>][k-<span class="dv">1</span>][<span class="dv">0</span>] - prices[i]);</a>
+<a class="sourceLine" id="cb19-8" title="8">    }</a>
+<a class="sourceLine" id="cb19-9" title="9">}</a>
+<a class="sourceLine" id="cb19-10" title="10"><span class="co">// Exhaust n × max_k × 2 states, correct!</span></a>
+<a class="sourceLine" id="cb19-11" title="11"><span class="kw">return</span> dp[n - <span class="dv">1</span>][max_k][<span class="dv">0</span>];</a></code></pre></div>
+<p>If you don’t understand, you can go back to the first point “Exhaustive Frame” and re-read it.</p>
+<p>Here, the value range of k is relatively small, so we can directly list all the cases of k = 1 and 2 without a for loop:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb20-1" title="1">dp[i][<span class="dv">2</span>][<span class="dv">0</span>] = <span class="fu">max</span>(dp[i-<span class="dv">1</span>][<span class="dv">2</span>][<span class="dv">0</span>], dp[i-<span class="dv">1</span>][<span class="dv">2</span>][<span class="dv">1</span>] + prices[i])</a>
+<a class="sourceLine" id="cb20-2" title="2">dp[i][<span class="dv">2</span>][<span class="dv">1</span>] = <span class="fu">max</span>(dp[i-<span class="dv">1</span>][<span class="dv">2</span>][<span class="dv">1</span>], dp[i-<span class="dv">1</span>][<span class="dv">1</span>][<span class="dv">0</span>] - prices[i])</a>
+<a class="sourceLine" id="cb20-3" title="3">dp[i][<span class="dv">1</span>][<span class="dv">0</span>] = <span class="fu">max</span>(dp[i-<span class="dv">1</span>][<span class="dv">1</span>][<span class="dv">0</span>], dp[i-<span class="dv">1</span>][<span class="dv">1</span>][<span class="dv">1</span>] + prices[i])</a>
+<a class="sourceLine" id="cb20-4" title="4">dp[i][<span class="dv">1</span>][<span class="dv">1</span>] = <span class="fu">max</span>(dp[i-<span class="dv">1</span>][<span class="dv">1</span>][<span class="dv">1</span>], -prices[i])</a>
+<a class="sourceLine" id="cb20-5" title="5"></a>
+<a class="sourceLine" id="cb20-6" title="6"><span class="dt">int</span> <span class="fu">maxProfit_k_2</span>(<span class="dt">int</span>[] prices) {</a>
+<a class="sourceLine" id="cb20-7" title="7">    <span class="dt">int</span> dp_i10 = <span class="dv">0</span>, dp_i11 = <span class="bu">Integer</span>.<span class="fu">MIN_VALUE</span>;</a>
+<a class="sourceLine" id="cb20-8" title="8">    <span class="dt">int</span> dp_i20 = <span class="dv">0</span>, dp_i21 = <span class="bu">Integer</span>.<span class="fu">MIN_VALUE</span>;</a>
+<a class="sourceLine" id="cb20-9" title="9">    <span class="kw">for</span> (<span class="dt">int</span> price : prices) {</a>
+<a class="sourceLine" id="cb20-10" title="10">        dp_i20 = <span class="bu">Math</span>.<span class="fu">max</span>(dp_i20, dp_i21 + price);</a>
+<a class="sourceLine" id="cb20-11" title="11">        dp_i21 = <span class="bu">Math</span>.<span class="fu">max</span>(dp_i21, dp_i10 - price);</a>
+<a class="sourceLine" id="cb20-12" title="12">        dp_i10 = <span class="bu">Math</span>.<span class="fu">max</span>(dp_i10, dp_i11 + price);</a>
+<a class="sourceLine" id="cb20-13" title="13">        dp_i11 = <span class="bu">Math</span>.<span class="fu">max</span>(dp_i11, -price);</a>
+<a class="sourceLine" id="cb20-14" title="14">    }</a>
+<a class="sourceLine" id="cb20-15" title="15">    <span class="kw">return</span> dp_i20;</a>
+<a class="sourceLine" id="cb20-16" title="16">}</a></code></pre></div>
+<p>Guided by state transition equations and well-defined variable names, we believe you can easily understand them. In fact, we can make this more mystery and replace the above four variables with a, b, c, and d. This way, when someone sees your code, they will be frightened and respect you.</p>
+<p><strong>Sixth Problem: k = any integer</strong></p>
+<p>With the pavement of the previous problem k = 2, this problem should be no different from the first solution of the previous problem. However, a memory overflow error occurred. It turned out that the value of k passed in was very large, and the DP array was too large. Now think about, what is the maximum number of transactions k?</p>
+<p>A transaction consists of buying and selling, which takes at least two days. Therefore, the effective limit k should not exceed n / 2. If it is exceeded, there is no constraint effect, which is equivalent to k = +infinity. This situation has been resolved before.</p>
+<p>Reuse the previous code directly:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb21-1" title="1"><span class="dt">int</span> <span class="fu">maxProfit_k_any</span>(<span class="dt">int</span> max_k, <span class="dt">int</span>[] prices) {</a>
+<a class="sourceLine" id="cb21-2" title="2">    <span class="dt">int</span> n = prices.<span class="fu">length</span>;</a>
+<a class="sourceLine" id="cb21-3" title="3">    <span class="kw">if</span> (max_k &gt; n / <span class="dv">2</span>) </a>
+<a class="sourceLine" id="cb21-4" title="4">        <span class="kw">return</span> <span class="fu">maxProfit_k_inf</span>(prices);</a>
+<a class="sourceLine" id="cb21-5" title="5"></a>
+<a class="sourceLine" id="cb21-6" title="6">    <span class="dt">int</span>[][][] dp = <span class="kw">new</span> <span class="dt">int</span>[n][max_k + <span class="dv">1</span>][<span class="dv">2</span>];</a>
+<a class="sourceLine" id="cb21-7" title="7">    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; i++) </a>
+<a class="sourceLine" id="cb21-8" title="8">        <span class="kw">for</span> (<span class="dt">int</span> k = max_k; k &gt;= <span class="dv">1</span>; k--) {</a>
+<a class="sourceLine" id="cb21-9" title="9">            <span class="kw">if</span> (i - <span class="dv">1</span> == -<span class="dv">1</span>) { <span class="co">/* Deal with the base case */</span> }</a>
+<a class="sourceLine" id="cb21-10" title="10">            dp[i][k][<span class="dv">0</span>] = <span class="fu">max</span>(dp[i-<span class="dv">1</span>][k][<span class="dv">0</span>], dp[i-<span class="dv">1</span>][k][<span class="dv">1</span>] + prices[i]);</a>
+<a class="sourceLine" id="cb21-11" title="11">            dp[i][k][<span class="dv">1</span>] = <span class="fu">max</span>(dp[i-<span class="dv">1</span>][k][<span class="dv">1</span>], dp[i-<span class="dv">1</span>][k-<span class="dv">1</span>][<span class="dv">0</span>] - prices[i]);     </a>
+<a class="sourceLine" id="cb21-12" title="12">        }</a>
+<a class="sourceLine" id="cb21-13" title="13">    <span class="kw">return</span> dp[n - <span class="dv">1</span>][max_k][<span class="dv">0</span>];</a>
+<a class="sourceLine" id="cb21-14" title="14">}</a></code></pre></div>
+<p>So far, all 6 problems are solved by one state transition equation.</p>
+<p><strong>IV. Final Summarize</strong></p>
+<p>This article tells everyone how to solve complex problems through the state transition method. Using a state transition equation to kill 6 stock trading problems. Now think about it, it is not so difficult, right? But this kind of problems is already more difficult issue in dynamic programming.</p>
+<p>The key is to enumerate all possible “states” and then think about how to exhaustively update these “states”. Generally, a multidimensional DP array is used to store these states, starting from the base case and moving backwards to the final state, which is the answer we want. Thinking about this process, do you understand the meaning of the term “dynamic programming”?</p>
+<p>Specific to the problem of stock trading, we found three states, using a three-dimensional array, nothing more than exhaust and update. But we can say a bit more advanced, this is called “three-dimensional DP”. As soon as this term is said, it immediately appears that you are superior to others.</p>
+</body>
+</html>

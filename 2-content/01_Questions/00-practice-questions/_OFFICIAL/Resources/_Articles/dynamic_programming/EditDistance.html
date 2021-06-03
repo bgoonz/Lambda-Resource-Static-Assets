@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>EditDistance</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="editing-distance">Editing Distance</h1>
+<p><strong>Translator: <a href="https://github.com/Master-cai">Master-cai</a></strong></p>
+<p><strong>Author: <a href="https://github.com/labuladong">labuladong</a></strong></p>
+<p>few days ago, I saw an interview paper of Tencent. In this paper, most of the algorithm problems are Dynamic programming. The last question is that writing a function to calculate the shortest editing Distance. Today I wrote an article specifically to discuss this problem.</p>
+<p>I personally like this problem because it looks very hard, the solution is Surprisingly simple and beautiful and it`s a rare algorithm which is not very useful.(yech, I recognized that many algorithm problems are not very useful.)Following is the problem:</p>
+<p><img src="../pictures/editDistance/title.png" /></p>
+<p>Why I say this problem is hard? Obviously, it`s just hard, making people Helpless and frightened.</p>
+<p>And why I say this problem is useful? Because days ago I used the algorithm in my daily life. I had a article in my ‎Wechat Official Account and I wrote some words out of place by mistake. So I decided to modify this part to make the logic suitable. However, the Wechat Official Account article can only be modified 20 words at most, and it only supports addition, deletion and replacement(exactly same as the editing distance problem.) So I used the algorithm to find a best way to solve the problem in just 16 steps.</p>
+<p>Another advanced example is that the edit distance can be used to measure the similarity of two DNA sequences. The DNA sequence is a sequence included of A, G, C and T, which is similar to a string. The less editing distance is, The more similar the two DNA are. Maybe the owner of these DNAs were ancient relatives.</p>
+<p>Let’s get to the point, I will explain you how to edit the distance in detail, and I hope you could obtain something fruitful.</p>
+<h3 id="train-of-thought">1. train of thought</h3>
+<p>The editing distance is a problem that give us two strings <code>s1</code> and <code>s2</code> with only three operations and let <code>s change</code> s1 <code>to</code> s2 <code>in least steps. The first thing to be sure of is that the result of</code> s1 <code>to</code> s2 <code>and</code> s2 <code>to</code> s1 <code>is the same. So we will use</code> s1 <code>to</code> s2` as an example.</p>
+<p>Mentioned in the early paper “The longest common subsequence”, <strong>I said that to solve the dynamic programming problem of two strings, We normally use two pointers <code>i</code> , <code>j</code> to point to the end of the two strings, and then go forward step by step to reduce the size of the problem.</strong></p>
+<p>Assuming that the two strings are “rad” and “apple”, in order to change <code>s1</code> to <code>s2</code> , the algorithm works like this:</p>
+<p><img src="../pictures/editDistance/edit.gif" /> <img src="../pictures/editDistance/1.jpg" /></p>
+<p>Remember this gif in order to solve the editing distance problem. The key is how to make</p>
+<p>the right operation which I will discuss later.</p>
+<p>According to the above gif, we can figure out that there are not only three operations, in fact there is the fourth operation which is skip. For example:</p>
+<p><img src="../pictures/editDistance/2.jpg" /></p>
+<p>As the two strings are same, obviously there should be no operation to minimize the distance. Just move <code>i</code> , <code>j</code> .</p>
+<p>Another simple situation is when <code>j</code> has finished <code>s2</code> , if <code>i</code> has not finished <code>s1</code> , then you can only delete <code>s1</code> to make them the same. For example:</p>
+<p><img src="../pictures/editDistance/3.jpg" /></p>
+<p>Similarly, if <code>i</code> finished <code>s1</code> and <code>j</code> has not finished <code>s2</code> , you can only insert all the remaining characters of <code>s2</code> into <code>s1</code> by inserting. As you see, the two cases are the <strong>base case</strong> of the algorithm.</p>
+<p>Let`s look at how to change your ideas into code. Sit tight, it’s time to go.</p>
+<h3 id="code-in-detail">2. code in detail</h3>
+<p>First we sort out our ideas:</p>
+<p>The base case is when <code>i</code> finished <code>s1</code> or <code>j</code> finished <code>s2</code> , we can return the remaining length of another string directly.</p>
+<p>For each pair characters, <code>s1[i]</code> and <code>s2[j]</code> , there are four operations:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">if</span> s1[i] <span class="op">==</span> s2[j]:</a>
+<a class="sourceLine" id="cb1-2" title="2">    skip</a>
+<a class="sourceLine" id="cb1-3" title="3">    i, j move forward</a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb1-5" title="5">    chose：</a>
+<a class="sourceLine" id="cb1-6" title="6">        insert</a>
+<a class="sourceLine" id="cb1-7" title="7">        delete</a>
+<a class="sourceLine" id="cb1-8" title="8">        replace</a></code></pre></div>
+<p>With this framework, the problem has been solved. Maybe you will ask, how to chose the “three choices”? It`s very simple, try it all, and chose the smallest one. we need some recursive skills here. Look at the code:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">def</span> minDistance(s1, s2) <span class="op">-&gt;</span> <span class="bu">int</span>:</a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="kw">def</span> dp(i, j):</a>
+<a class="sourceLine" id="cb2-4" title="4">        <span class="co"># base case</span></a>
+<a class="sourceLine" id="cb2-5" title="5">        <span class="cf">if</span> i <span class="op">==</span> <span class="dv">-1</span>: <span class="cf">return</span> j <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-6" title="6">        <span class="cf">if</span> j <span class="op">==</span> <span class="dv">-1</span>: <span class="cf">return</span> i <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-7" title="7">        </a>
+<a class="sourceLine" id="cb2-8" title="8">        <span class="cf">if</span> s1[i] <span class="op">==</span> s2[j]:</a>
+<a class="sourceLine" id="cb2-9" title="9">            <span class="cf">return</span> dp(i <span class="op">-</span> <span class="dv">1</span>, j <span class="op">-</span> <span class="dv">1</span>)  <span class="co"># skip</span></a>
+<a class="sourceLine" id="cb2-10" title="10">        <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb2-11" title="11">            <span class="cf">return</span> <span class="bu">min</span>(</a>
+<a class="sourceLine" id="cb2-12" title="12">                dp(i, j <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span>,    <span class="co"># insert</span></a>
+<a class="sourceLine" id="cb2-13" title="13">                dp(i <span class="op">-</span> <span class="dv">1</span>, j) <span class="op">+</span> <span class="dv">1</span>,    <span class="co"># delete</span></a>
+<a class="sourceLine" id="cb2-14" title="14">                dp(i <span class="op">-</span> <span class="dv">1</span>, j <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span> <span class="co"># replace</span></a>
+<a class="sourceLine" id="cb2-15" title="15">            )</a>
+<a class="sourceLine" id="cb2-16" title="16">    </a>
+<a class="sourceLine" id="cb2-17" title="17">    <span class="co"># i，j initialize to the last index</span></a>
+<a class="sourceLine" id="cb2-18" title="18">    <span class="cf">return</span> dp(<span class="bu">len</span>(s1) <span class="op">-</span> <span class="dv">1</span>, <span class="bu">len</span>(s2) <span class="op">-</span> <span class="dv">1</span>)</a></code></pre></div>
+<p>Let`s explain this recursive code in detail. There is no need to explain the base case, so I mainly explain the recursive part.</p>
+<p>It is said that recursive code is very interpretable. It does make sense. As long as you understand the definition of a function, you can clearly understand the logic of the algorithm. The function dp(i, j) is defined like this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">def</span> dp(i, j) <span class="op">-&gt;</span> <span class="bu">int</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co"># return the least editing distance s1[0..i] and s2[0..j]</span></a></code></pre></div>
+<p><strong>Remember this definition</strong>, let`s look at the code:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" title="1"><span class="cf">if</span> s1[i] <span class="op">==</span> s2[j]:</a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="cf">return</span> dp(i <span class="op">-</span> <span class="dv">1</span>, j <span class="op">-</span> <span class="dv">1</span>)  <span class="co"># skip</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co"># explain：</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co"># already the same, no need any operation</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co"># the least editing distance of s1[0..i] and s2[0..j] equals</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co"># the least distance of s1[0..i-1] 和 s2[0..j-1]</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co"># It means that dp(i, j) equals dp(i-1, j-1)</span></a></code></pre></div>
+<p>if <code>s1[i]！=s2[j]</code> , we should recurse the three operations which needs a bit of thing:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" title="1">dp(i, j <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span>,    <span class="co"># insert</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co"># explain：</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co"># I Directly insert a character same as s2[j] at s1[i]</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co"># then s2[j] are matched，move forward j，and continue compareed with i</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co"># Don`t forget to add one to the operation number</span></a></code></pre></div>
+<p><img src="../pictures/editDistance/insert.gif" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" title="1">dp(i <span class="op">-</span> <span class="dv">1</span>, j) <span class="op">+</span> <span class="dv">1</span>,    <span class="co"># delete</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co"># explain：</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co"># I directly delete s[i]</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co"># move forward i，continue to compared with j</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co"># add one to the operation number</span></a></code></pre></div>
+<p><img src="../pictures/editDistance/delete.gif" /></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" title="1">dp(i <span class="op">-</span> <span class="dv">1</span>, j <span class="op">-</span> <span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span> <span class="co"># replace</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co"># explain：</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="co"># I directly replace s1[i] with s2[j], then they are matched</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co"># move forward i，j and continue to compare</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="co"># add one to operation number</span></a></code></pre></div>
+<p><img src="../pictures/editDistance/replace.gif" /></p>
+<p>Now, you should fully understand this short and clever code. Another small problem is that this is a violent solution. There are many overlapping subproblems, which should to be optimized by dynamic programming techniques.</p>
+<p><strong>How can we see the overlapping subproblems at a glance?</strong> As mentioned in the previous article “Regular Expressions for Dynamic Programming”, we need to abstract the recursive framework of the algorithm in this article:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">def</span> dp(i, j):</a>
+<a class="sourceLine" id="cb8-2" title="2">    dp(i <span class="op">-</span> <span class="dv">1</span>, j <span class="op">-</span> <span class="dv">1</span>) <span class="co">#1</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    dp(i, j <span class="op">-</span> <span class="dv">1</span>)     <span class="co">#2</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    dp(i <span class="op">-</span> <span class="dv">1</span>, j)     <span class="co">#3</span></a></code></pre></div>
+<p>For the subproblem <code>dp(i-1, j-1)</code> , how can we get it from the original question <code>dp(i, j)</code> ? Once we found a repetitive path, it means that there is a huge number of repetitive paths, which is the overlapping subproblem. For example: <code>dp(i, j)-&gt; #1</code> and <code>dp(i, j)-&gt;#2-&gt;#3</code> .</p>
+<h3 id="optimized-by-dynamic-programming">3. Optimized by Dynamic programming</h3>
+<p>For the overlapping subproblems, we introduced in the previous article “Detailed Explanation of Dynamic Programming” in detailed. The optimization is nothing more than a memo or a DP table.</p>
+<p>The memo is easy to append, just modified the original code slightly.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">def</span> minDistance(s1, s2) <span class="op">-&gt;</span> <span class="bu">int</span>:</a>
+<a class="sourceLine" id="cb9-2" title="2"></a>
+<a class="sourceLine" id="cb9-3" title="3">    memo <span class="op">=</span> <span class="bu">dict</span>() <span class="co"># memo</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="kw">def</span> dp(i, j):</a>
+<a class="sourceLine" id="cb9-5" title="5">        <span class="cf">if</span> (i, j) <span class="kw">in</span> memo: </a>
+<a class="sourceLine" id="cb9-6" title="6">            <span class="cf">return</span> memo[(i, j)]</a>
+<a class="sourceLine" id="cb9-7" title="7">        ...</a>
+<a class="sourceLine" id="cb9-8" title="8">        </a>
+<a class="sourceLine" id="cb9-9" title="9">        <span class="cf">if</span> s1[i] <span class="op">==</span> s2[j]:</a>
+<a class="sourceLine" id="cb9-10" title="10">            memo[(i, j)] <span class="op">=</span> ...  </a>
+<a class="sourceLine" id="cb9-11" title="11">        <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb9-12" title="12">            memo[(i, j)] <span class="op">=</span> ...</a>
+<a class="sourceLine" id="cb9-13" title="13">        <span class="cf">return</span> memo[(i, j)]</a>
+<a class="sourceLine" id="cb9-14" title="14">    </a>
+<a class="sourceLine" id="cb9-15" title="15">    <span class="cf">return</span> dp(<span class="bu">len</span>(s1) <span class="op">-</span> <span class="dv">1</span>, <span class="bu">len</span>(s2) <span class="op">-</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><strong>We mainly explain the DP table solution.</strong></p>
+<p>First, we declare the meaning of the dp array. The dp array is a two-dimensional array, which looks like this:</p>
+<p><img src="../pictures/editDistance/dp.jpg" /></p>
+<p>With the foundation of the previous recursive solution, it <code>s easy to understand.</code> dp [..][0] <code>and</code> dp [0][..] <code>correspond to the base case. The meaning of</code> dp [i][j]` is similar to the previous dp function:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">def</span> dp(i, j) <span class="op">-&gt;</span> <span class="bu">int</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="co"># return the least editing distance of s1[0..i] and s2[0..j]</span></a>
+<a class="sourceLine" id="cb10-3" title="3"></a>
+<a class="sourceLine" id="cb10-4" title="4">dp[i<span class="dv">-1</span>][j<span class="dv">-1</span>]</a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co"># storage the least editing distance of s1[0..i] and s2[0..j]</span></a></code></pre></div>
+<p>The base case of the dp function is that <code>i, j</code> is equal to -1. However the array index is at least 0, the dp array is offset by one position.</p>
+<p>Since the dp array has the same meaning as the recursive dp function, you can directly apply the previous ideas to write code. <strong>The only difference is that the DP table is solved from the bottom to up, and the recursive solution is solved from the top to down</strong>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb11-1" title="1"><span class="dt">int</span> <span class="fu">minDistance</span>(<span class="bu">String</span> s1, <span class="bu">String</span> s2) {</a>
+<a class="sourceLine" id="cb11-2" title="2">    <span class="dt">int</span> m = s1.<span class="fu">length</span>(), n = s2.<span class="fu">length</span>();</a>
+<a class="sourceLine" id="cb11-3" title="3">    <span class="dt">int</span>[][] dp = <span class="kw">new</span> <span class="dt">int</span>[m + <span class="dv">1</span>][n + <span class="dv">1</span>];</a>
+<a class="sourceLine" id="cb11-4" title="4">    <span class="co">// base case </span></a>
+<a class="sourceLine" id="cb11-5" title="5">    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)</a>
+<a class="sourceLine" id="cb11-6" title="6">        dp[i][<span class="dv">0</span>] = i;</a>
+<a class="sourceLine" id="cb11-7" title="7">    <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)</a>
+<a class="sourceLine" id="cb11-8" title="8">        dp[<span class="dv">0</span>][j] = j;</a>
+<a class="sourceLine" id="cb11-9" title="9">    <span class="co">// from the bottom to up</span></a>
+<a class="sourceLine" id="cb11-10" title="10">    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i &lt;= m; i++)</a>
+<a class="sourceLine" id="cb11-11" title="11">        <span class="kw">for</span> (<span class="dt">int</span> j = <span class="dv">1</span>; j &lt;= n; j++)</a>
+<a class="sourceLine" id="cb11-12" title="12">            <span class="kw">if</span> (s1.<span class="fu">charAt</span>(i-<span class="dv">1</span>) == s2.<span class="fu">charAt</span>(j-<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb11-13" title="13">                dp[i][j] = dp[i - <span class="dv">1</span>][j - <span class="dv">1</span>];</a>
+<a class="sourceLine" id="cb11-14" title="14">            <span class="kw">else</span>               </a>
+<a class="sourceLine" id="cb11-15" title="15">                dp[i][j] = <span class="fu">min</span>(</a>
+<a class="sourceLine" id="cb11-16" title="16">                    dp[i - <span class="dv">1</span>][j] + <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb11-17" title="17">                    dp[i][j - <span class="dv">1</span>] + <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb11-18" title="18">                    dp[i-<span class="dv">1</span>][j-<span class="dv">1</span>] + <span class="dv">1</span></a>
+<a class="sourceLine" id="cb11-19" title="19">                );</a>
+<a class="sourceLine" id="cb11-20" title="20">    <span class="co">// storage the least editing distance of s1 and s2</span></a>
+<a class="sourceLine" id="cb11-21" title="21">    <span class="kw">return</span> dp[m][n];</a>
+<a class="sourceLine" id="cb11-22" title="22">}</a>
+<a class="sourceLine" id="cb11-23" title="23"></a>
+<a class="sourceLine" id="cb11-24" title="24"><span class="dt">int</span> <span class="fu">min</span>(<span class="dt">int</span> a, <span class="dt">int</span> b, <span class="dt">int</span> c) {</a>
+<a class="sourceLine" id="cb11-25" title="25">    <span class="kw">return</span> <span class="bu">Math</span>.<span class="fu">min</span>(a, <span class="bu">Math</span>.<span class="fu">min</span>(b, c));</a>
+<a class="sourceLine" id="cb11-26" title="26">}</a></code></pre></div>
+<h3 id="extension">4. Extension</h3>
+<p>Generally speaking, when dealing with the dynamic programming of two strings, we just follow the ideas of this article, making the DP table. Why? Because it`s easy to find out the relationship of the state transitions, such as the DP table of the edit distance:</p>
+<p><img src="../pictures/editDistance/4.jpg" /></p>
+<p>There is another detail: since every <code>dp[i][j]</code> is only related to the three status, the space complexity can be reduced to <span class="math inline"><em>O</em>(<em>m</em><em>i</em><em>n</em>(<em>M</em>, <em>N</em>))</span> (M, N is the length of the two strings). It`s not very difficult but the code is harder to read. You can try to optimize it by yourself.</p>
+<p>Maybe you will also ask, <strong>As we only found the minimum editing distance, how can we know the every step?</strong> In the example of modifying the article you mentioned earlier, only a editing distance is definitely not enough. You must know how to modify it.</p>
+<p>Actually, it`s very simple, just slightly modified the code and add additional information to the dp array:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb12-1" title="1"><span class="co">// int[][] dp;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="bu">Node</span>[][] dp;</a>
+<a class="sourceLine" id="cb12-3" title="3"></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="kw">class</span> <span class="bu">Node</span> {</a>
+<a class="sourceLine" id="cb12-5" title="5">    <span class="dt">int</span> val;</a>
+<a class="sourceLine" id="cb12-6" title="6">    <span class="dt">int</span> choice;</a>
+<a class="sourceLine" id="cb12-7" title="7">    <span class="co">// 0 skip</span></a>
+<a class="sourceLine" id="cb12-8" title="8">    <span class="co">// 1 insert</span></a>
+<a class="sourceLine" id="cb12-9" title="9">    <span class="co">// 2 delete</span></a>
+<a class="sourceLine" id="cb12-10" title="10">    <span class="co">// 3 replace</span></a>
+<a class="sourceLine" id="cb12-11" title="11">}</a></code></pre></div>
+<p>The <code>val</code> attribute is the value of the previous dp array, and the <code>choice</code> attribute represents the operation. When making the best choice, record the operation and then infer the specific operation from the result.</p>
+<p>Our final result is <code>dp [m] [n]</code> , where <code>val</code> holds the minimum edit distance, and <code>choice</code> holds the last operation, such as the insert operation, then you can move one space to the left:</p>
+<p><img src="../pictures/editDistance/5.jpg" /></p>
+<p>Repeat this process, you can return to the starting point <code>dp [0] [0]</code> step by step to form a path. Editing according to the operations on this path is the best solution.</p>
+<p><img src="../pictures/editDistance/6.jpg" /></p>
+<p>The above is the entire content of the edit distance algorithm.</p>
+</body>
+</html>

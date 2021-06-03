@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>ThrowingEggsinHighBuildings</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p>.# Classic Dynamic Programming Problem: Throwing Eggs in High Buildings</p>
+<p><strong>Translator: <a href="https://github.com/timmmGZ">timmmGZ</a></strong></p>
+<p><strong>Author: <a href="https://github.com/labuladong">labuladong</a></strong></p>
+<p>Today I am going to talk about a very classic algorithm problem. Suppose there are several floors in a high building and several eggs in your hands, lets calculate the minimum number of attempts and find out the floor where the eggs just won’t be broken. Many famous Chinese large enterprises, Google and Facebook often examine this question in a job interview, but they throw cups, broken bowls or something else instead of eggs, because they think throwing eggs is too wasteful.</p>
+<p>Specific problems will be discussed later, but there are many solutions to this problem, Dynamic Programming has already had several ideas with different efficiency, moreover, there is an extremely efficient mathematical solution. Anyway, let’s throw the tricky and weird skills away, because these skills can’t be inferior to each other, it is not cost effective to learn.</p>
+<p>Let’s use the general idea of Dynamic Programming that we always emphasized to study this problem.</p>
+<h3 id="first-analyze-the-problem">First, analyze the problem</h3>
+<p>Question: There is a <code>N</code> -storey building indexed from 1 to <code>N</code> in front of you, you get <code>K</code> eggs ( <code>K</code> &gt;= 1). It is determined that this building has floor F ( <code>0 &lt;= F &lt;= N</code> ), you drop an egg down from this floor and the egg <strong>just won’t be broken</strong> (the floors above <code>F</code> will break, and the floors below <code>F</code> won’t break). Now, in <strong>the worst</strong> case, how many times <strong>at least</strong> do you need to throw the eggs to <strong>determine</strong> what floor is this floor <code>F</code> on?</p>
+<p>In other words, you need to find the highest floor <code>F</code> where you can’t break the eggs, but what does it mean how many times “at least” to throw “in the worst”? We will understand by giving an example.</p>
+<p>For example, <strong>regardless of the number of eggs</strong>, there are 7 floors, how do you find the floor where the eggs are just broken?</p>
+<p>The most primitive way is linear search: Let’s throw it on the first floor and it isn’t broken, then we throw it on the second floor, not broken, then we go to the third floor……</p>
+<p>With this strategy, the <strong>worst</strong> case would be that I try to the 7th floor without breaking the eggs ( <code>F</code> = 7), that is, I threw the eggs 7 times.</p>
+<p>Now you may understand what is called “the worst case”, <strong>eggs breaking must happen when the search interval is exhausted (from 0 till N)</strong>, if you break the eggs on the first floor, this is your luck, not the worst case.</p>
+<p>Now let’s figure out what it means how many times “at least” to throw? Regardless of the number of eggs, it is still 7 floors, we can optimize the strategy.</p>
+<p>The best strategy is to use the Binary Search idea. first, we go to <code>(1 + 7) / 2 = 4th</code> floor and throw an egg:</p>
+<p>If it is broken, then it means <code>F</code> is less than 4, therefore I will go to <code>(1 + 3) / 2 = 2th</code> floor to try again…</p>
+<p>If it isn’t broken, then it means <code>F</code> is greater than or equal to 4, therefore I will go to <code>(5 + 7) / 2 = 6th</code> floor to try again…</p>
+<p>In this strategy, the <strong>worst</strong> case is that you try to the 7th floor without breaking the eggs ( <code>F = 7</code> ), or the eggs were broken all the way to the 1st floor ( <code>F = 0</code> ). However, no matter what the worst case is, you only need to try <code>log2(7)</code> rounding up equal to 3 times, which is less than 7 times you just tried. This is the so called how many times <strong>at least</strong> to throw.</p>
+<p>PS: This is a bit like Big O notation which is for calculating the complexity of algorithm.</p>
+<p>In fact, if the number of eggs is not limited, the binary search method can obviously get the least number of attempts, but the problem is that <strong>now the number of eggs is limited by <code>K</code> , and you can’t use the binary search directly.</strong></p>
+<p>For example, you just get 1 egg, 7 floors, are you sure to use binary search? You just go to the 4th floor and throw it, if the eggs are not broken, it is okay, but if they are broken, you will not have the eggs to continue the test, then you can’t be sure the floor <code>F</code> on which the eggs won’t be broken. In this case, only linear search can be used, and the algorithm should return a result of 7.</p>
+<p>Some readers may have this idea: binary search is undoubtedly the fastest way to eliminate floors, then use binary search first, and then use linear search when there is only 1 egg left, is the result the least number of eggs thrown?</p>
+<p>Unfortunately, it’s not, for example, make the floor higher, there are 100 floors and 2 eggs, if you throw it on the 50th floor and it is broken, you can only search from 1st to 49th floor linearly, in the worst case, you have to throw 50 times.</p>
+<p>If you don’t use 「binary search」, but 「quinary search」 and 「decimal search」, it will greatly reduce the number of the worst case attempts. Let’s say the first egg is thrown every ten floors, where the egg is broken, then where you search linearly for the second egg, it won’t be more than 20 times in total.</p>
+<p>Actually, the optimal solution is 14 times. There are many optimal strategies, and there is no regularity at all.</p>
+<p>I talk so much nonsense in order to make sure everyone understands the meaning of the topic, and realize that this topic is really complicated, it is even not easy to calculate by hand, so how to solve it with an algorithm?</p>
+<h3 id="second-analysis-of-ideas">Second, analysis of ideas</h3>
+<p>For the dynamic programming problem, we can directly set the framework we have emphasized many times before: what is the 「state」 of this problem, what are 「choices」, and then use exhaustive method.</p>
+<p><strong>The 「status」 is obviously the number of eggs <code>K</code> currently possessed and the number of floors <code>N</code> to be tested.</strong> As the test progresses, the number of eggs may decrease, and the search range of floors will decrease. This is the change of state.</p>
+<p><strong>The 「choice」 is actually choosing which floor to throw eggs on.</strong> Looking back at the linear search and binary search idea, the binary search selects to throw the eggs in the middle of the floor interval each time, and the linear search chooses to test floor by floor, different choices will cause a state transition.</p>
+<p>Now the 「state」 and 「choice」 are clear, <strong>the basic idea of dynamic programming is formed</strong>: it must be a two dimensional <code>DP</code> array or a <code>DP</code> function with two state parameters to represent the state transition; and a for loop to traverse all the choices , choose the best option to update the status:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Current state is K eggs and N floors</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co"># Returns the optimal result in this state</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">def</span> dp(K, N):</a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="bu">int</span> res</a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="cf">for</span> <span class="dv">1</span> <span class="op">&lt;=</span> i <span class="op">&lt;=</span> N:</a>
+<a class="sourceLine" id="cb1-6" title="6">        res <span class="op">=</span> <span class="bu">min</span>(res, Throw eggs on the i<span class="op">-</span>th floor this time)</a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="cf">return</span> res</a></code></pre></div>
+<p>This pseudo code has not shown recursion and state transition yet, but the general algorithm framework has been completed.</p>
+<p>After we choose to throw a egg on the <code>i</code> -th floor, two situations could happen: the egg is broken and the egg is not broken. <strong>Note that the state transition is now here</strong>:</p>
+<p><strong>If the egg is broken</strong>, then the number of eggs <code>K</code> should be reduced by one, and the search floor interval should be changed from <code>[1..N]</code> to <code>[1..i-1]</code> , <code>i-1</code> floors in total.</p>
+<p><strong>If the egg is not broken</strong>, then the number of eggs <code>K</code> will not change, and the searched floor interval should be changed from <code>[1..N]</code> to <code>[i+1..N]</code> , <code>N-i</code> floors in total.</p>
+<p><img src="../pictures/SuperEggDrop/1.jpg" /></p>
+<p>PS: Attentive readers may ask, if throwing a egg on the i-th floor is not broken, the search range of the floor is narrowed down to the upper floors, should it include the i-th floor? No, because it is included. As I said at the beginning that F can be equal to 0, after recursing upwards, the i-th floor is actually equivalent to the 0th floor, so there is nothing wrong.</p>
+<p>Because we are asking the number of eggs to be thrown in <strong>the worst case</strong>, so whether the egg is broken on the <code>i</code> floor, it depends on which situation’s result is <strong>larger</strong>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">def</span> dp(K, N):</a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="cf">for</span> <span class="dv">1</span> <span class="op">&lt;=</span> i <span class="op">&lt;=</span> N:</a>
+<a class="sourceLine" id="cb2-3" title="3">        <span class="co"># Minimum number of eggs throwing in the worst case</span></a>
+<a class="sourceLine" id="cb2-4" title="4">        res <span class="op">=</span> <span class="bu">min</span>(res, </a>
+<a class="sourceLine" id="cb2-5" title="5">                  <span class="bu">max</span>( </a>
+<a class="sourceLine" id="cb2-6" title="6">                        dp(K <span class="op">-</span> <span class="dv">1</span>, i <span class="op">-</span> <span class="dv">1</span>), <span class="co"># broken</span></a>
+<a class="sourceLine" id="cb2-7" title="7">                        dp(K, N <span class="op">-</span> i)      <span class="co"># not broken</span></a>
+<a class="sourceLine" id="cb2-8" title="8">                     ) <span class="op">+</span> <span class="dv">1</span> <span class="co"># throw once on the i-th floor</span></a>
+<a class="sourceLine" id="cb2-9" title="9">                 )</a>
+<a class="sourceLine" id="cb2-10" title="10">    <span class="cf">return</span> res</a></code></pre></div>
+<p>The recursive base case is easy to understand: when the number of floors <code>N</code> is 0, obviously no eggs need to be thrown; when the number of eggs <code>K</code> is 1, obviously all floors can only be searched linearly:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">def</span> dp(K, N):</a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="cf">if</span> K <span class="op">==</span> <span class="dv">1</span>: <span class="cf">return</span> N</a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="cf">if</span> N <span class="op">==</span> <span class="dv">0</span>: <span class="cf">return</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    ...</a></code></pre></div>
+<p>Now, this problem is actually solved! Just add a memo to eliminate overlapping subproblems:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">def</span> superEggDrop(K: <span class="bu">int</span>, N: <span class="bu">int</span>):</a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3">    memo <span class="op">=</span> <span class="bu">dict</span>()</a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="kw">def</span> dp(K, N) <span class="op">-&gt;</span> <span class="bu">int</span>:</a>
+<a class="sourceLine" id="cb4-5" title="5">        <span class="co"># base case</span></a>
+<a class="sourceLine" id="cb4-6" title="6">        <span class="cf">if</span> K <span class="op">==</span> <span class="dv">1</span>: <span class="cf">return</span> N</a>
+<a class="sourceLine" id="cb4-7" title="7">        <span class="cf">if</span> N <span class="op">==</span> <span class="dv">0</span>: <span class="cf">return</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb4-8" title="8">        <span class="co"># avoid calculating again</span></a>
+<a class="sourceLine" id="cb4-9" title="9">        <span class="cf">if</span> (K, N) <span class="kw">in</span> memo:</a>
+<a class="sourceLine" id="cb4-10" title="10">            <span class="cf">return</span> memo[(K, N)]</a>
+<a class="sourceLine" id="cb4-11" title="11"></a>
+<a class="sourceLine" id="cb4-12" title="12">        res <span class="op">=</span> <span class="bu">float</span>(<span class="st">&#39;INF&#39;</span>)</a>
+<a class="sourceLine" id="cb4-13" title="13">        <span class="co"># Exhaust all possible choices</span></a>
+<a class="sourceLine" id="cb4-14" title="14">        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, N <span class="op">+</span> <span class="dv">1</span>):</a>
+<a class="sourceLine" id="cb4-15" title="15">            res <span class="op">=</span> <span class="bu">min</span>(res, </a>
+<a class="sourceLine" id="cb4-16" title="16">                      <span class="bu">max</span>(</a>
+<a class="sourceLine" id="cb4-17" title="17">                            dp(K, N <span class="op">-</span> i), </a>
+<a class="sourceLine" id="cb4-18" title="18">                            dp(K <span class="op">-</span> <span class="dv">1</span>, i <span class="op">-</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-19" title="19">                         ) <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-20" title="20">                  )</a>
+<a class="sourceLine" id="cb4-21" title="21">        <span class="co"># Record into memo</span></a>
+<a class="sourceLine" id="cb4-22" title="22">        memo[(K, N)] <span class="op">=</span> res</a>
+<a class="sourceLine" id="cb4-23" title="23">        <span class="cf">return</span> res</a>
+<a class="sourceLine" id="cb4-24" title="24">    </a>
+<a class="sourceLine" id="cb4-25" title="25">    <span class="cf">return</span> dp(K, N)</a></code></pre></div>
+<p>What is the time complexity of this algorithm? <strong>The time complexity of the dynamic programming algorithm is the number of subproblems × the complexity of the function itself</strong>.</p>
+<p>The complexity of the function itself is the complexity of itself without the recursive part. Here the <code>dp</code> function has a for loop, so the complexity of the function itself is O(N).</p>
+<p>The number of subproblems is the total number of combinations of the different states, which is obviously the Cartesian product of the two states, and it is O(KN).</p>
+<p>So the total time complexity of the algorithm is O(K*N^2) and the space complexity is O(KN).</p>
+<h3 id="third-troubleshooting">Third, troubleshooting</h3>
+<p>This problem is very complicated, but the algorithm code is very simple, This is the characteristic of dynamic programming, exhaustive method plus memo/ DP table optimization.</p>
+<p>First of all, some readers may not understand why the code uses a for loop to traverse the floors <code>[1..N]</code> , and may confuse this logic with the linear search discussed before. Actually not like so, <strong>this is just making a 「choice」</strong>.</p>
+<p>Let’s say you have 2 eggs and you are facing 10 floors, which floor do you choose <strong>this time</strong>? Don’t know, so just try all 10 floors. As for how to choose next time, you don’t need to worry about it, There is a correct state transition, recursion will calculate the cost of each choice, the best one is the optimal solution.</p>
+<p>In addition, there are better solutions to this problem, such as modifying the for loop in the code to binary search, which can reduce the time complexity to O(K*N*logN); and then improving the dynamic programming solution can be further reduced to O(KN); use mathematical methods to solve, the time complexity reaches the optimal O(K*logN), and the space complexity reaches O(1).</p>
+<p>But such binary search above is also a bit misleading, you may think that it is similar to the binary search we discussed earlier, actually it is not the same at all. Above binary search can be used because the function graph of the state transition equation is monotonic, and the extreme value can be found quickly.</p>
+<p>Let me briefly introduce the optimization of binary search, In fact, it is just optimizing this code:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">def</span> dp(K, N):</a>
+<a class="sourceLine" id="cb5-2" title="2">    <span class="cf">for</span> <span class="dv">1</span> <span class="op">&lt;=</span> i <span class="op">&lt;=</span> N:</a>
+<a class="sourceLine" id="cb5-3" title="3">        <span class="co"># Minimum number of eggs throwing in the worst case</span></a>
+<a class="sourceLine" id="cb5-4" title="4">        res <span class="op">=</span> <span class="bu">min</span>(res, </a>
+<a class="sourceLine" id="cb5-5" title="5">                  <span class="bu">max</span>( </a>
+<a class="sourceLine" id="cb5-6" title="6">                        dp(K <span class="op">-</span> <span class="dv">1</span>, i <span class="op">-</span> <span class="dv">1</span>), <span class="co"># broken</span></a>
+<a class="sourceLine" id="cb5-7" title="7">                        dp(K, N <span class="op">-</span> i)      <span class="co"># not broken</span></a>
+<a class="sourceLine" id="cb5-8" title="8">                     ) <span class="op">+</span> <span class="dv">1</span> <span class="co"># throw once on the i-th floor</span></a>
+<a class="sourceLine" id="cb5-9" title="9">                 )</a>
+<a class="sourceLine" id="cb5-10" title="10">    <span class="cf">return</span> res</a></code></pre></div>
+<p>This for loop is the code implementation of the following state transition equation:</p>
+<!-- $$dp(K, N) = \min_{0 <= i <= N}\{\max\{dp(K - 1, i - 1), dp(K, N - i)\} + 1\}$$ -->
+<figure>
+<embed src="http://latex.codecogs.com/gif.latex?%24%24%20dp%28K%2C%20N%29%20%3D%20%5Cmin_%7B0%20%3C%3D%20i%20%3C%3D%20N%7D%5C%7B%5Cmax%5C%7Bdp%28K%20-%201%2C%20i%20-%201%29%2C%20dp%28K%2C%20N%20-%20i%29%5C%7D%20+%20%201%5C%7D%24%24" /><figcaption>equation</figcaption>
+</figure>
+<p>First of all, according to the definition of the <code>dp(K, N)</code> array (there are <code>K</code> eggs and <code>N</code> floors, how many times at least do we need to throw the eggs?). <strong>It is easy to know that when <code>K</code> is fixed, this function must be It is a monotonically increasing</strong>, no matter how smart your strategy is, the number of tests must increase if the number of floors increases.</p>
+<p>Then notice the two functions <code>dp(K-1, i-1)</code> and <code>dp(K, N-i)</code> , where <code>i</code> is increasing from 1 to <code>N</code> , if we fix <code>K</code> and <code>N</code> , <strong>treat these two functions as function with only one variable <code>i</code> , the former function should also increase monotonically with the increase of <code>i</code> , and the latter function should decrease monotonically with the increase of <code>i</code> </strong>:</p>
+<p><img src="../pictures/扔鸡蛋/2.jpg" /></p>
+<p>Now find the larger value of these two functions, and then find the minimum of these larger values, it is actually to find the intersection as above figure, readers who are familiar with binary search must have already noticed that this is equivalent to finding the Valley value, we can use binary search to quickly find this point.</p>
+<p>Let’s post the code directly, the idea is exactly the same:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">def</span> superEggDrop(<span class="va">self</span>, K: <span class="bu">int</span>, N: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">int</span>:</a>
+<a class="sourceLine" id="cb6-2" title="2">        </a>
+<a class="sourceLine" id="cb6-3" title="3">    memo <span class="op">=</span> <span class="bu">dict</span>()</a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="kw">def</span> dp(K, N):</a>
+<a class="sourceLine" id="cb6-5" title="5">        <span class="cf">if</span> K <span class="op">==</span> <span class="dv">1</span>: <span class="cf">return</span> N</a>
+<a class="sourceLine" id="cb6-6" title="6">        <span class="cf">if</span> N <span class="op">==</span> <span class="dv">0</span>: <span class="cf">return</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb6-7" title="7">        <span class="cf">if</span> (K, N) <span class="kw">in</span> memo:</a>
+<a class="sourceLine" id="cb6-8" title="8">            <span class="cf">return</span> memo[(K, N)]</a>
+<a class="sourceLine" id="cb6-9" title="9">                            </a>
+<a class="sourceLine" id="cb6-10" title="10">        <span class="co"># for 1 &lt;= i &lt;= N:</span></a>
+<a class="sourceLine" id="cb6-11" title="11">        <span class="co">#     res = min(res, </span></a>
+<a class="sourceLine" id="cb6-12" title="12">        <span class="co">#             max( </span></a>
+<a class="sourceLine" id="cb6-13" title="13">    <span class="co">#                     dp(K - 1, i - 1), </span></a>
+<a class="sourceLine" id="cb6-14" title="14">    <span class="co">#                     dp(K, N - i)      </span></a>
+<a class="sourceLine" id="cb6-15" title="15">        <span class="co">#                 ) + 1 </span></a>
+<a class="sourceLine" id="cb6-16" title="16">        <span class="co">#             )</span></a>
+<a class="sourceLine" id="cb6-17" title="17"></a>
+<a class="sourceLine" id="cb6-18" title="18">        res <span class="op">=</span> <span class="bu">float</span>(<span class="st">&#39;INF&#39;</span>)</a>
+<a class="sourceLine" id="cb6-19" title="19">        <span class="co"># use binary search instead of for loop(linear search)</span></a>
+<a class="sourceLine" id="cb6-20" title="20">        lo, hi <span class="op">=</span> <span class="dv">1</span>, N</a>
+<a class="sourceLine" id="cb6-21" title="21">        <span class="cf">while</span> lo <span class="op">&lt;=</span> hi:</a>
+<a class="sourceLine" id="cb6-22" title="22">            mid <span class="op">=</span> (lo <span class="op">+</span> hi) <span class="op">//</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb6-23" title="23">            broken <span class="op">=</span> dp(K <span class="op">-</span> <span class="dv">1</span>, mid <span class="op">-</span> <span class="dv">1</span>) <span class="co"># broken</span></a>
+<a class="sourceLine" id="cb6-24" title="24">            not_broken <span class="op">=</span> dp(K, N <span class="op">-</span> mid) <span class="co"># not broken</span></a>
+<a class="sourceLine" id="cb6-25" title="25">            <span class="co"># res = min(max(broken，not broken) + 1)</span></a>
+<a class="sourceLine" id="cb6-26" title="26">            <span class="cf">if</span> broken <span class="op">&gt;</span> not_broken:</a>
+<a class="sourceLine" id="cb6-27" title="27">                hi <span class="op">=</span> mid <span class="op">-</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-28" title="28">                res <span class="op">=</span> <span class="bu">min</span>(res, broken <span class="op">+</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb6-29" title="29">            <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb6-30" title="30">                lo <span class="op">=</span> mid <span class="op">+</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-31" title="31">                res <span class="op">=</span> <span class="bu">min</span>(res, not_broken <span class="op">+</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb6-32" title="32"></a>
+<a class="sourceLine" id="cb6-33" title="33">        memo[(K, N)] <span class="op">=</span> res</a>
+<a class="sourceLine" id="cb6-34" title="34">        <span class="cf">return</span> res</a>
+<a class="sourceLine" id="cb6-35" title="35">    </a>
+<a class="sourceLine" id="cb6-36" title="36">    <span class="cf">return</span> dp(K, N)</a></code></pre></div>
+<p>I won’t discuss about other solutions here, I will just leave them in the next article.</p>
+<p>I think our solution is enough: find the states, make the choices, it is clear and easy enough to understand, can be streamlined. If you can master this framework, then it’s not too late to consider those tricky and weird skills.</p>
+</body>
+</html>

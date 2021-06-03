@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>javascript-functions-use</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="a-toolkit-to-harness-the-full-power-of-javascript-functions">A Toolkit to Harness the Full Power of JavaScript Functions</h1>
+<blockquote>
+<p>Functions form an integral role in the JavaScript language — they are the means whereby logic is executed. But functions in Javascript are…</p>
+</blockquote>
+<p>Functions are blocks of code that are defined <strong>once</strong> but may be invoked or executed <strong>any number of times</strong>. A function is composed of a sequence of statements called the <strong>function body</strong>. Values can be passed to a function, and the function will always return a value (either <em>undefined</em> if not explicitly set, otherwise the value stipulated in the function’s <strong><em>return</em></strong> statement).</p>
+<p><strong>function</strong> helloWorld(){<br />
+<strong>return</strong> ‘hello world’; }helloWorld(); <em>//</em> returns <em>‘hello world’</em><strong>function</strong> noReturnValue(){<br />
+const t = ‘hello world’; }noReturnValue(); // returns <em>undefined</em></p>
+<p>JavaScript functions are also <strong>first-class objects</strong>, because they can have <strong>properties</strong> and <strong>methods</strong> just like any other object. They are, in fact, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><strong>Function</strong></a> objects.</p>
+<p>JavaScript functions can thus be thought of as <strong><em>objects that can be called or invoked</em></strong>.</p>
+<p>This being the case, JavaScript functions can be manipulated and utilised in interesting ways. They can, for example, be</p>
+<ol type="1">
+<li><strong><em>assigned to variables</em></strong></li>
+<li><strong><em>stored in the properties of objects or the elements of arrays</em></strong></li>
+<li><strong><em>passed as arguments to other functions</em></strong></li>
+<li><strong><em>returned as the result of other functions</em></strong></li>
+<li><strong><em>assigned properties through the Function object</em></strong></li>
+<li><strong><em>nested within other functions</em></strong></li>
+</ol>
+<p>Let’s see some examples of these awesome features!</p>
+<p>Functions can also be assigned to <strong>object properties</strong> rather than global properties. In this case, they are called <strong>methods</strong>.</p>
+<blockquote>
+<p>A method is a Javascript function that is stored as a property of an object and invoked through that object.</p>
+</blockquote>
+<p><strong>const</strong> o = new <strong>Object</strong>(); o.square = <strong>function</strong>(x){ <em>// ‘square’ is a method of object ‘o’</em><br />
+<strong>return</strong> x * x; }<strong>const</strong> y = o.square(16); <em>// 256</em> <strong>const</strong> squareRoot = <strong>function</strong>(x){ <em>// a function literal</em><br />
+<strong>return</strong> Math.sqrt(x); }o.root = squareRoot; <em>// ‘root’ is now a method of object ‘o’</em><br />
+o.root(4); <em>// 2</em></p>
+<p>Assigning a function to an element of an array:</p>
+<p><strong>const</strong> a = new Array(3); a[0] = <strong>function</strong>(x){return x * x; }<br />
+a[1] = 20; a[2] = a[0](a[1]); // the array element can now be invoked</p>
+<p>As we have just seen, a method is a function that is stored as a property of an object and invoked through that object.</p>
+<p>Any <strong>function</strong> that is used as a <strong>method</strong> is effectively passed an implicit argument: <strong>the object through which it is invoked</strong>.</p>
+<p>The object through which a method is invoked becomes the value of the <strong><em>this</em></strong> keyword within the body of the method.</p>
+<p>You can thus refer to the method’s object through the <strong><em>this</em></strong> keyword.</p>
+<p><strong>Object literal:</strong></p>
+<p><strong>const</strong> calculator = {<br />
+operand1 : 1, operand2: 2, compute: function(){</p>
+<pre><code>   this.result = this.operand1 + this.operand2;  </code></pre>
+<p>}<br />
+}calculator.compute(); console.log(calculator.result); // 3</p>
+<p><strong>Function constructor:</strong></p>
+<p><strong>function</strong> Person(first, last, age, eyeColor) {<br />
+this.firstName = first; this.lastName = last; this.age = age; this.eyeColor = eyeColor; this.name = function() {</p>
+<pre><code>  **return** this.firstName + &quot; &quot; + this.lastName;  </code></pre>
+<p>}; }<strong>const</strong> father = new Person(‘Patrick’, ‘Henry’, 56, ‘blue’); console.log(father.name()); // <em>‘Patrick Henry’</em></p>
+<p><strong>ES6 class:</strong></p>
+<p><strong>class</strong> Individual{constructor(){</p>
+<pre><code>  this.status = &#39;indifferent&#39;;  </code></pre>
+<p>}smile(){</p>
+<pre><code>  this.status = &#39;happy&#39;;  </code></pre>
+<p>}frown(){</p>
+<pre><code>  this.status = &#39;sad&#39;;  </code></pre>
+<p>}}; <strong>const</strong> Jack = new Individual(); <em>// new object created here</em><br />
+Jack.smile(); <em>// invoking the object’s method ‘smile()’</em><br />
+console.log(Jack.status); // <em>‘happy’</em></p>
+<p>OK, so the <strong><em>this</em></strong> keyword refers to the object through which the method is invoked. But can you take advantage of the <strong><em>this</em></strong> keyword in a normal JavaScript function (that is, one not invoked as a property of an object)?</p>
+<p><strong>Yes</strong>! JavaScript has also made available the <strong><em>apply()</em></strong>_, _ <strong><em>call()</em></strong> and <strong><em>bind()</em></strong> helper methods, to allow us invoke a function <strong>as if it were a method of an object</strong>.</p>
+<p>The <strong>first</strong> argument to <strong><em>call(), apply()</em></strong> and <strong><em>bind()</em></strong> helper methods is the <strong>object on which the function must be invoked</strong>; this argument becomes the value of the this keyword within the body of the function.</p>
+<p>Any remaining arguments to <strong><em>call</em>()</strong> are the <strong>values</strong> passed to the function that is invoked.</p>
+<p>For example, to pass two numbers to the function f() and invoke it as a method of object o:</p>
+<p><strong>const</strong> o = {<br />
+total: 23<br />
+}<strong>const</strong> f = function(a, b){<br />
+<strong>return</strong> this.total + a + b; }f.<strong>call</strong>(o, 1, 2); <em>// 26</em></p>
+<p>The <strong><em>apply</em>()</strong> method is like the <strong><em>call</em>()</strong> method, expect that the arguments can be passed to the function as an <strong>ARRAY</strong>:</p>
+<p><strong>const</strong> o = {<br />
+total: 25<br />
+}<strong>const</strong> f = function(a, b){<br />
+<strong>return</strong> this.total + a + b; }f.<strong>apply</strong>(o, [1, 2]); <em>// 28</em></p>
+<p><strong><em>bind</em>()</strong> — added as part of ECMAScript 5 — returns a bound function that, when executed <strong>later</strong>, will have the correct context for the <strong><em>this</em></strong> keyword.</p>
+<p>So <strong><em>bind</em>()</strong> can be used when the function needs to be <strong>called later</strong> whenever it’s needed.</p>
+<p><strong>const</strong> bound = f.<strong>bind</strong>(o, 1, 2); <em>// create a bound function with the context which will be invoked later_console.dir(bound); </em>// returns a function_console.log(bound()); <em>// invokes the bound function</em></p>
+<p>Since a JavaScript function is an object, you’re allowed to pass it as a parameter into another function. In fact, helper methods like <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort"><strong>Array.prototype.sort()</strong></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce"><strong>Array.prototype.reduce()</strong></a>, <a href="https://www.w3schools.com/jsref/met_win_settimeout.asp"><strong>setTimeout()</strong></a> and <a href="https://www.w3schools.com/jsref/met_win_setinterval.asp"><strong>setInterval()</strong></a> all expect a function in their arguments.</p>
+<p><strong>function</strong> add(x, y) {<br />
+<strong>return</strong> x + y; }<br />
+<strong>function</strong> subtract(x, y) {<br />
+<strong>return</strong> x - y; }<br />
+<strong>function</strong> divide(x, y) {<br />
+<strong>return</strong> x % y; }<br />
+<strong>function</strong> multiply(x, y) {<br />
+<strong>return</strong> x * y; }<em>// this function has the ‘operator’ function as one of its arguments</em><br />
+<strong>function</strong> operate(operator, operand1, operand2){<br />
+<strong>return</strong> operator(operand1, operand2); }<strong>const</strong> i = operate(add, operate(add, 2, 3), operate(multiply, 4, 5));</p>
+<p>The <strong>Array.sort()</strong> method:</p>
+<p><strong>const</strong> myList = [‘the’, ‘quick’, ‘brown’, ‘fox’, ‘jumped’, ‘over’, ‘the’, ‘lazy’, ‘dog’]; <strong>const</strong> compareFunction = (a, b) =&gt; {<br />
+<strong>return</strong> ( a &lt; b ) ? -1 : ( a &gt; b ) ? 1 : 0; }_// sort my list alphabetically<br />
+_myList.sort((a, b) =&gt; compareFunction(a, b));</p>
+<p>As indicated earlier, every JavaScript function is actually a <code>**Function**</code> object. This can be seen with the code <code>(function(){}).constructor === Function</code> which returns true.</p>
+<p>This being the case, when a function needs a variable whose value persists across invocations, it can be convenient to use a property of the <strong>Function</strong> object, instead of cluttering up the namespace by defining a global variable.</p>
+<p>For example, suppose you want to write a function that <strong>returns a unique integer whenever it is invoked</strong>. The function must never return the same value twice. In order to manage this, the function needs to keep track of the values it has already returned, and this information must persist across function invocations.</p>
+<p>You could store this information in a global variable, but that is unnecessary because the information is used only by the function itself. It is better to store the information in a <strong>property of the Function object</strong>.</p>
+<p><em>/* Create and initialise the “static” variable. Function declarations are processed before code is executed, so we can do this assignment before the function declaration. */<em>uniqueInteger.counter = 0; </em>/* Here’s the function. It returns a different value each time it is called and uses a “static” property of itself to keep track of the last value it returned. */</em><strong>function</strong> uniqueInteger(){<br />
+<em>// increment and return our “static” variable</em> <strong>return</strong> uniqueInteger.counter ++; }const i = uniqueInteger(); <em>// 0</em><br />
+const j = uniqueInteger(); <em>// 1</em><br />
+const k = uniqueInteger(); <em>// 2</em><br />
+const l = uniqueInteger(); <em>// 3</em></p>
+<p>In Javascript, functions can be nested within other functions</p>
+<p><strong>function</strong> hypothenuse (a, b) {<br />
+<strong>function</strong> square(x) { return x * x}; <strong>return</strong> Math.sqrt(square(a) + square(b)); }<strong>const</strong> h = hypothenuse(5, 8); <em>// 9.433981132056603</em></p>
+<p>JavaScript functions are essentially a combination of code to be executed and the scope in which to execute them. This combination of code and scope is known as a <strong>closure</strong>. All JavaScript functions are closures. Where closures become interesting is in the case of <strong>nested functions</strong>.</p>
+<blockquote>
+<p>Functions in JavaScript are lexically rather than <strong>dynamically</strong> scoped. This means that they run in the scope in which they are <strong>defined</strong> not the scope in which they are <strong>executed</strong>.</p>
+</blockquote>
+<p>Confused? OK, let’s take a step back and explore how scope works in JavaScript and then revisit this rather cryptic statement.</p>
+<p>When a function is <strong>defined</strong>, the <strong>current scope chain</strong> is saved and becomes part of the <strong>internal state of the function</strong>.</p>
+<p>At the top level, the scope chain consists simply of the <strong>global object</strong>.</p>
+<p>When you define a <strong>nested function</strong>, however, the lexical chain also <strong>includes the containing function</strong>. This means that nested functions can access all of the arguments and local variables of their containing function.</p>
+<p><strong>function</strong> foo(arg) {<br />
+<strong>function</strong> bar() {</p>
+<pre><code>  console.log(\ `arg: ${arg}\` );  </code></pre>
+<p>}<br />
+bar(); }console.log(foo(‘hello’)); // arg: hello</p>
+<p>The direct scope of arg is <strong><em>foo()</em></strong>, but it is also accessible in the nested scope <strong><em>bar()</em></strong>. With regard to nesting, <strong>foo() is the outer scope</strong> and <strong>bar() is the inner scope</strong>.</p>
+<p>Sharing the scope chain in this way is made possible through the <strong>Call Object.</strong></p>
+<p>When the javascript interpreter invokes a function, it does the following:</p>
+<ol type="1">
+<li><strong>It sets the scope to the scope chain that was in effect when the function was defined.</strong></li>
+<li>It adds a new object (known as the <strong>call object</strong>) to the front of the scope chain.</li>
+<li>This object is initialised with a property named <strong><em>arguments</em></strong> that refers to the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments"><strong>Arguments</strong></a> object for the function.</li>
+<li>Next, <strong>named parameters</strong> of the function are added to the call object.</li>
+<li>Any <strong>local variables</strong> declared in the function are also defined within this object.</li>
+</ol>
+<p>Since this call object is at the <strong>head</strong> of the scope chain, local variables, function parameters and the Arguments object are <strong>all in scope within the function</strong>.</p>
+<p>Consider a function <strong>g</strong> defined within a function <strong>f</strong>. When <strong>f</strong> is invoked, the scope chain consists of the <strong>call object for that invocation of f, </strong> followed by the <strong>global object.</strong></p>
+<p><strong>g</strong> is <strong>defined</strong> within <strong>f</strong>, so the scope chain is saved as part of the definition of <strong>g</strong>.</p>
+<p>When <strong>g</strong> is then <strong>invoked</strong>, the scope chain includes three objects:</p>
+<ul>
+<li><strong>its own call object</strong></li>
+<li><strong>the call object of f</strong></li>
+<li><strong>the global object</strong></li>
+</ul>
+<p><strong>function</strong> f(){ /* <strong>my scope chain when invoked consists of</strong></p>
+<pre><code> 1) my own call object   
+ 2) the global object \*/ **function** g(){ /\* **my** **scope chain when invoked consists of**   
+         1) my own call object   
+         2) the call object of f when I was defined  
+         3) the global object \*/ }  </code></pre>
+<p>}</p>
+<p>If the nested function is used <strong>only within the outer function</strong>, the only reference to the nested function is ONLY in the <strong>call object</strong>. Then, when the outer function returns, the nested function refers to the call object, and the call object refers to the nested function, but since there are no other references to either one, both objects become available for <strong>garbage collection</strong>.</p>
+<p>Things are different, however, if you have a reference to the nested function in the <strong>global scope.</strong> In this case, the nested function is <strong>exported outside the scope in which it is defined</strong>.</p>
+<p>How would one setup a reference to a nested function in the global scope? By using the nested function as the <strong>return value of the outer function</strong>, or by s<strong>toring the nested function as the property of some other object</strong>.</p>
+<p>In this case, there is an <strong>external reference</strong> to the nested function, and the nested function <strong>retains its reference to the call object of the outer function</strong>.</p>
+<p>In this case, the <strong>call object</strong> for that <strong>one particular invocation</strong> of the outer function <strong>continues to live</strong>, and the names and values of the function arguments and local variables persist to this object.</p>
+<p>A <em>closure</em> is therefore the combination of a function and the lexical environment within which that function was <strong>declared</strong>. <strong>This environment consists of any local variables that were in-scope at the time the closure was created</strong> <strong>(its birth scope)</strong>.</p>
+<p>The name stems from the fact that a closure “closes over” the <em>free</em> variables of a function. A variable is <em>free</em> if it is not declared within the function — that is, if it comes “from outside.”</p>
+<blockquote>
+<p>If a function leaves its scope, it stays connected, through its call object, to the <strong>scope chain that was in existence when it was first defined.</strong></p>
+</blockquote>
+<p>Let’s see some examples of closure in action.</p>
+<p><strong>Closure example 1:</strong></p>
+<p><strong>function</strong> createIncrementer(startValue) {<br />
+<strong>return</strong> <strong>function</strong> (step) {</p>
+<pre><code>  startValue += step;  
+  **return** startValue;  </code></pre>
+<p>}; }</p>
+<p>The function returned by <strong>createIncrementer()</strong> does not lose its connection to <strong>startValue</strong> — the variable <strong>provides the function with state that persists across function calls</strong>:</p>
+<p>const counterA = createIncrementer(5); const counterB = createIncrementer(10); counterA(2); // 7<br />
+counterB(2); // 12<br />
+counterA(7); // 14<br />
+counterB(7); // 19</p>
+<p>In this example, there is an <strong>external reference</strong> to the nested function, and the nested function <strong>retains its reference to the call object of the outer function</strong>. In this case, the call object for that <strong>one particular invocation</strong> of the outer function <strong>continues to live</strong>, and the names and values of the function arguments and local variables persist to this object.</p>
+<p><strong>Closure example 2:</strong></p>
+<p><strong>function</strong> makeBrowser() {<br />
+const name = ‘Mozilla’; <strong>function</strong> displayName() {</p>
+<pre><code>  console.log(name);   </code></pre>
+<p>}<br />
+<strong>return</strong> displayName; }const myBrowser = makeBrowser(); myBrowser(); // <em>‘Mozilla’</em></p>
+<p>In this example, <strong>makeBrowser</strong> is a reference to the instance of the function <strong>displayName</strong> created when <strong>makeBrowser</strong> is run. The instance of <strong>displayName</strong> maintains a reference to its lexical environment, within which the variable <strong>name</strong> exists. For this reason, when <strong>makeBrowser</strong> is invoked, the variable <strong>name</strong> remains available for use and “Mozilla” is logged to the console.</p>
+<p><strong>Closure example 3:</strong></p>
+<p><strong>function</strong> makeAdder(x) {<br />
+<strong>return</strong> <strong>function</strong>(y) {</p>
+<pre><code>  **return** x + y;   </code></pre>
+<p>}; }<br />
+const add5 = makeAdder(5); const add10 = makeAdder(10); console.log(add5(2)); // <em>7</em><br />
+console.log(add10(2)); // <em>12</em></p>
+<p>In this example, the function <strong>makeAdder(x)</strong> is defined, which takes a single argument, x, and returns a new function. The function it returns takes a single argument, y, and returns the sum of x and y.</p>
+<p>In essence, makeAdder is a function factory — it creates functions which can add a specific value to their argument. Here we use our function factory to create two new functions — one that adds 5 to its argument, and one that adds 10.</p>
+<p><strong>add5</strong> and <strong>add10</strong> are both closures. They share the same function body definition, but <strong>store different lexical environments</strong>. In add5’s lexical environment, x is 5, while in the lexical environment for add10, x is 10.</p>
+<p><strong>Closure example 4:</strong></p>
+<p>const uniqueId = (<strong>function</strong>() {<br />
+// the call object of this function holds our value let id = 0; // this is the private persistent value return <strong>function</strong>(){</p>
+<pre><code>  **return** id++; // return and increment  </code></pre>
+<p>}})(); // invoke the outer function after defining it</p>
+<p>Perhaps you want to write a function that can remember a value across invocations, but the value cannot be stored in a local variable, because the call object does not persist across invocations.</p>
+<p>A global variable would work, but that pollutes the global namespace.</p>
+<p>In the above example we use a closure to create a persistent and private variable that ONLY your function has access to.</p>
+<p>The outer function returns a nested function that has access to the persistent value (which is locked in its scope chain when the nested function is defined).</p>
+<p>We then store this nested function in the uniqueId variable.</p>
+<p>let i = uniqueId(); // 0<br />
+let j = uniqueId(); // 1<br />
+let k = uniqueId(); // 2<br />
+let l = uniqueId(); // 3</p>
+<p>Closures are useful because they let you associate some data (the lexical environment) with a function that operates on that data.</p>
+<p>This has obvious parallels to object-oriented programming, where objects allow us to associate some data (the object’s properties) with one or more methods.</p>
+<p>Consequently, you can use a closure anywhere that you might normally use an object with only a single method.</p>
+<p><a href="https://itnext.io/a-toolkit-to-harness-the-full-power-of-javascript-functions-633baaaba337">Source</a></p>
+</body>
+</html>
