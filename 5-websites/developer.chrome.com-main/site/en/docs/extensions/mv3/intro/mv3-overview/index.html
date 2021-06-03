@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-11-09" />
+  <title>Overview of Manifest V3</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Overview of Manifest V3</h1>
+<p class="date">2020-11-09</p>
+</header>
+<p>Manifest V3 (MV3) is a major step forward in steering towards our <a href="/docs/extensions/mv3/intro/platform-vision/">vision for the extensions platform</a>. MV3 focuses on the three pillars of that vision: privacy, security, and performance, while preserving and improving our foundation of capability and webbiness.</p>
+<p>This article summarizes the features and major changes introduced by MV3. For help migrating Manifest V2 extensions to MV3, or to better understand the architectural impact of these changes, see also the <a href="/docs/extensions/mv3/intro/mv3-migration/">MV3 migration guide</a>.</p>
+<p>Manifest V3 is available beginning with Chrome <a href="https://chromiumdash.appspot.com/schedule">88</a>, and the Chrome Web Store begins accepting MV3 extensions in January 2021.</p>
+<p>New features and changes will continue to be added to MV3, just as they have been in earlier manifest versions.</p>
+<h2 id="feature-summary-feature-summary">Feature summary {: #feature-summary }</h2>
+<p>There are a number of new features and functional changes for extensions using MV3:</p>
+<ul>
+<li><a href="#service-workers">Service workers</a> replace background pages.</li>
+<li><a href="#network-request-modification">Network request modification</a> is now handled with the new <a href="/docs/extensions/reference/declarativeNetRequest">declarativeNetRequest</a> API.</li>
+<li><a href="#remotely-hosted-code">Remotely hosted code</a> is no longer allowed; an extension can only execute JavaScript that is included within its package.</li>
+<li><a href="#promises">Promise</a> support has been added to many methods, though callbacks are still supported as an alternative. (We will eventually support promises on all appropriate methods.)</li>
+<li>A number of other, relatively <a href="#other-features">minor feature changes</a> are also introduced in MV3.</li>
+</ul>
+<p>Each of these changes is summarized in the sections below.</p>
+<h2 id="major-features-major-features">Major features {: #major-features }</h2>
+<p>This section introduces the most important and impactful features of MV3.</p>
+<h3 id="service-workers-service-workers">Service workers {: #service-workers }</h3>
+<p>Manifest V3 replaces background pages with service workers.</p>
+<p>Like their web page counterparts, extension service workers listen for and respond to events in order to enhance the end user’s experience. For web service workers this typically means managing cache, preloading resources, and enabling offline web pages. While extension service workers can still do all of this, the extension package already contains a bundle of resources that can be accessed offline. As such, extension service workers tend to focus on reacting to relevant browser events exposed by Chrome’s extensions APIs.</p>
+<h3 id="network-request-modification-network-request-modification">Network request modification {: #network-request-modification }</h3>
+<p>The way that extensions can modify network requests is changing in MV3. There’s a new <a href="/docs/extensions/reference/declarativeNetRequest">declarativeNetRequest</a> API which lets extensions modify and block network requests in a privacy-preserving and performant way. The essence of this API is:</p>
+<ul>
+<li>Rather than intercepting a request and modifying it procedurally, the extension asks Chrome to evaluate and modify requests on its behalf.</li>
+<li>The extension declares a set of rules: patterns to match requests and actions to perform when matched. The browser then modifies network requests as defined by these rules.</li>
+</ul>
+<p>Using this declarative approach dramatically reduces the need for persistent host permissions.</p>
+<p>{% Aside %} Some extensions may still require broad host permissions for certain use cases (such as redirecting requests). See <a href="/docs/extensions/mv3/intro/mv3-migration#declarativenetrequest-conditional-perms">Conditional permissions and declarativeNetRequest</a> for further details. {% endAside %}</p>
+<p>The blocking version of the <a href="/docs/extensions/reference/webRequest">webRequest</a> API is restricted to force-installed extensions in MV3. This is because of issues with the blocking webRequest approach:</p>
+<ul>
+<li><strong>Privacy</strong>: This requires excessive access to user data, because extensions need to read each network request made for the user.</li>
+<li><strong>Performance</strong>: Serializing &amp; deserializing data across multiple process hops &amp; the C++/JS boundary adds up.</li>
+<li><strong>Compatibility</strong>: Does not work well with event-based background execution as it requires the service worker to be running to handle every request.</li>
+</ul>
+<p>This means that developers can implement many common use cases, such as content blocking functionality, without requiring any host permissions.</p>
+<h3 id="remotely-hosted-code-remotely-hosted-code">Remotely hosted code {: #remotely-hosted-code }</h3>
+<p>A key security improvement in MV3 is that extensions can’t load remote code like JavaScript or Wasm files. This lets us more reliably and efficiently review the safe behavior of extensions when they’re submitted to the Chrome Web Store. Specifically, all logic must be included in the extension’s package.</p>
+<p>Instead of remote code, we recommend the use of remote configuration files. See the <a href="/docs/extensions/mv3/intro/mv3-migration#remotely-hosted-code">migration guide</a> for more about how to work with this change.</p>
+<h3 id="promises-promises">Promises {: #promises }</h3>
+<p>MV3 provides first-class support for promises: many popular APIs support promises now, and we will eventually support promises on all appropriate methods.</p>
+<p>You can use promise chains, as well as async/await. If you provide a callback to an API method, this prevents the promise from being returned. Therefore you can defer this part of your migration until you’re ready, or begin using promises immediately.</p>
+<p>Some scenarios, such as event listeners, will still require callbacks.</p>
+<h2 id="other-features-other-features">Other features {: #other-features }</h2>
+<p>There are a number of other changes introduced in MV3:</p>
+<ul>
+<li><a href="/docs/extensions/mv3/intro/mv3-migration#action-api-unification">Action API consolidation</a>: The Browser Action and Page Action APIs are unified into a single Action API.</li>
+<li><a href="/docs/extensions/mv3/intro/mv3-migration#web-accessible-resources">Web accessible resources</a>: These resources are now available only to specified sites and extensions.</li>
+<li><a href="/docs/extensions/mv3/intro/mv3-migration#content-security-policy">Content security policy (CSP)</a>: You now specify separate CSP for different execution contexts in a single object, and certain policies are disallowed.</li>
+<li><a href="/docs/extensions/mv3/intro/mv3-migration#executing-arbitrary-strings">executeScript() changes</a>: Extensions can no longer execute arbitrary strings, only script files and functions. This method is also migrating from the Tabs API to the new Scripting API.</li>
+</ul>
+<p>The following features will be added to MV3 soon:</p>
+<ul>
+<li><strong>Dynamic content scripts:</strong> the new Scripting API lets extensions register and unregister content scripts at runtime.</li>
+<li><strong>New favicon API:</strong> this new JavaScript API replaces “chrome://favicons” and gives developers a way to retrieve websites’ favicons.</li>
+<li><strong>In-memory storage:</strong> a new StorageArea on the Storage API that can be used to store values in memory across service worker restarts.</li>
+</ul>
+<p>Look for announcements of these and other MV3 features as they become available.</p>
+</body>
+</html>

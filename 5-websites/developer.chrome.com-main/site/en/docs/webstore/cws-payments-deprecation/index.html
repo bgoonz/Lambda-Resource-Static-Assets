@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-09-20" />
+  <title>Chrome Web Store payments deprecation</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Chrome Web Store payments deprecation</h1>
+<p class="date">2020-09-20</p>
+</header>
+<p>The Chrome Web Store payments system is now deprecated and will be shut down over the coming months. There are many other ways to monetize your extensions, and if you currently use Chrome Web Store payments, you’ll need to migrate to one of them.</p>
+<h2 id="why-this-is-changing-why-this-is-changing">Why this is changing {: #why-this-is-changing }</h2>
+<p>The web has come a long way in the 11 years since we launched the Chrome Web Store. Back then, we wanted to provide a way for developers to monetize their Web Store items. But in the years since, the ecosystem has grown and developers now have many payment-handling options available to them.</p>
+<h2 id="what-it-means-for-developers-what-it-means-for-developers">What it means for developers {: #what-it-means-for-developers }</h2>
+<p>If you don’t use Chrome Web Store payments to monetize your extension, then this does not affect you and you don’t have to do anything.</p>
+<p>If you use Chrome Web Store payments to charge for your extension or in-app purchases, you’ll need to migrate to another payments processor in the near future. If you use the licensing API to keep track of who has paid, you’ll need to implement another way of tracking user licenses.</p>
+<h2 id="details-of-whats-happening-details-of-whats-happening">Details of what’s happening {: #details-of-whats-happening }</h2>
+<p>You will need to migrate your billing if you are affected by this change. Specifically, you’ll need to make changes if you monetize your extensions in any of the following ways:</p>
+<ol type="1">
+<li>If you have configured a one-time purchase for your extension <a href="/docs/webstore/one_time_payments/#using-otps">using the developer dashboard</a>.</li>
+<li>If you use any of the following resources in the <a href="/docs/webstore/api_index/">Chrome Web Store API</a>:
+<ul>
+<li>InAppProducts</li>
+<li>UserLicenses</li>
+<li>Payments</li>
+</ul></li>
+<li>If you use the following helper methods provided by buy.js:
+<ul>
+<li>google.payments.inapp.getSkuDetails</li>
+<li>google.payments.inapp.buy</li>
+<li>google.payments.inapp.getPurchases</li>
+<li>google.payments.inapp.consumePurchase</li>
+</ul></li>
+</ol>
+<h2 id="milestone-dates-milestone-dates">Milestone dates {: #milestone-dates }</h2>
+<p>The deprecation timeline began with the temporary disabling of new paid items because of resource constraints due to Covid-19. We have since decided to make this change permanent, and over the coming months payments for existing items will be phased out.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/iqFt5YpdIgBp1EyKixKP.png”, alt=“Deprecation timeline”, height=“217”, width=“800” %}</p>
+<ul>
+<li><strong>March 27, 2020</strong> Publishing of paid items temporarily disabled.</li>
+<li><strong>September 21, 2020</strong> You can no longer create new paid extensions or in-app items. This change, in effect since March 2020, is now permanent.</li>
+<li><strong>December 1, 2020</strong> Free trials are disabled. The “Try Now” button in CWS will no longer be visible, and in-app free trials requests will result in an error.</li>
+<li><strong>Feb 1, 2021</strong> Your existing items and in-app purchases can no longer charge money with Chrome Web Store payments. You can still query license information for previously paid purchases and subscriptions. (The licensing API will accurately reflect the status of active subscriptions, but these subscriptions won’t auto-renew.)</li>
+<li><strong>At some future time</strong> The licensing API will no longer allow you to determine license status for your users.</li>
+</ul>
+<p>After payments is disabled, you can still use the Licensing API to determine if users are currently licensed. However, this is also deprecated and will be shut down at some point, so you should begin migrating your license tracking to a different implementation.</p>
+<h2 id="exporting-user-licenses-exporting-user-licenses">Exporting user licenses {: #exporting-user-licenses }</h2>
+<p>If you’re using the Chrome Web Store or the <a href="/docs/webstore/api_index/">Licensing API</a>, you’ll need to do the following:</p>
+<ul>
+<li>Migrate to another payments processor</li>
+<li>Migrate your licensing tracking</li>
+</ul>
+<p>There is no way to bulk export your existing user licenses, so you need to have your users help with this part of the migration.</p>
+<p>We recommend that you handle license migration in your back-end system, using the Chrome Web Store API. You’ll need to use OAuth 2.0 with your users’ consent to access these APIs. The general sequence is:</p>
+<ol type="1">
+<li>Implement your replacement payment/licensing scheme.</li>
+<li>Prepare a license migration app that runs on your site, which accesses the Chrome Web Store API. This app needs to use OAuth 2.0 to authenticate, with user consent, and fetch the user’s subscription details.</li>
+<li>Create and publish a new version of your extension that directs users to your site to perform the migration.</li>
+</ol>
+</body>
+</html>

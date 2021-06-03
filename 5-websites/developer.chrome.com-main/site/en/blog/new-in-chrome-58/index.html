@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2017-04-19" />
+  <title>New in Chrome 58</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">New in Chrome 58</h1>
+<p class="date">2017-04-19</p>
+</header>
+<p>{% YouTube id=‘y5-hH8DnqMk’ %}</p>
+<ul>
+<li>The <a href="#idb2">IndexedDB 2.0</a> standard is now fully supported in Chrome, and features new schema management, bulk action methods, and more standardized handling of failures.</li>
+<li>Progressive Web Apps become more immersive with <a href="#fullscreen"><code>display: fullscreen</code></a>.</li>
+<li><a href="#iframes"><code>allow-top-navigation-by-user-activation</code></a> gives sandboxed <code>iframes</code> new powers</li>
+<li>And there’s plenty <a href="#more">more</a>!</li>
+</ul>
+<p>Want the full list of changes? Check out the <a href="https://chromium.googlesource.com/chromium/src/+log/57.0.2987.98..58.0.3029.81?pretty=fuller&amp;n=10000">Chromium source repository change list</a></p>
+<p>I’m Pete LePage. Let’s dive in and see what’s new for developers in Chrome 58!</p>
+<h2 id="indexeddb-2.0-idb2">IndexedDB 2.0 {: #idb2 }</h2>
+<p>The structure of your site’s database has large performance impacts, and can be difficult to change. <a href="https://hacks.mozilla.org/2016/10/whats-new-in-indexeddb-2-0/">IndexedDB 2.0</a> changes that.</p>
+<ul>
+<li><code>object</code> stores and <code>indexes</code> can now be renamed in-place after a refactoring.</li>
+<li>Binary keys allow more natural keys without worrying about performance penalties.</li>
+<li>Data retrieval is easier with the <code>getKey()</code>, <code>openKeyCursor()</code> and <code>continuePrimaryKey()</code> methods.</li>
+</ul>
+<p>And bulk recovery of entire datasets no longer needs a cursor with the <code>getAll()</code> and <code>getAllKey()</code>.</p>
+<h2 id="full-screen-progressive-web-apps-fullscreen">Full screen Progressive Web Apps {: #fullscreen }</h2>
+<p>When Progressive Web Apps are launched from the Android home screen, they launch in a standalone app-like mode that hides the omnibox. This helps create an engaging user experience, and frees up screen space for content.</p>
+<p>However, for even more immersive experiences like games, video players, or other rich content, mobile UI elements such as the system bars can still be a distraction and take up valuable pixels that you may want.</p>
+<p>Now you can make your Progressive Web App feel fully immersive by setting <code>display: fullscreen</code> in your <a href="https://developers.google.com/web/fundamentals/web-app-manifest">web app manifest</a>.</p>
+<figure>
+{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/uaDm5T4ifsA6lQJohjmg.png”, alt="“, height=”450“, width=”800" %}
+<figcaption>
+A PWA launched from the home screen (left), launched from the home screen in <code>standalone</code> mode (middle), and launched from the home screen in <code>fullscreen</code> mode (right).
+</figcaption>
+</figure>
+<p>When your app is launched from the home screen, all non-app mobile UI elements will be hidden.</p>
+<h2 id="sandboxed-iframe-improvements-iframes">Sandboxed iframe Improvements {: #iframes }</h2>
+<p>Chrome 58 now supports the new iframe sandbox keyword <a href="https://html.spec.whatwg.org/multipage/browsers.html#attr-iframe-sandbox-allow-top-navigation-by-user-activation"><code>allow-top-navigation-by-user-activation</code></a>.</p>
+<p>When triggered by a user interaction, this keyword gives sandboxed iframes the ability to navigate the top-level page, while still blocking auto-redirects.</p>
+<h2 id="and-more-more">And more! {: #more }</h2>
+<p>And of course, there’s plenty more.</p>
+<ul>
+<li>Say goodbye to the <code>clearfix</code> hack. Instead of manually resetting multiple layout properties like float and clear, you can now add a new block-formatting context using <code>display: flow-root</code>.</li>
+<li><code>PointerEvents.getCoalescedEvents()</code> allows you to access all input events since the last time a <code>PointerEvent</code> was delivered. Perfect for when you need a precise history of points for things like drawing apps.</li>
+<li>And <code>Workers</code> and <code>SharedWorkers</code> can now be created using <code>data:</code> URLs, making development with <code>Workers</code> more secure by giving them an opaque origin.</li>
+</ul>
+<p>These are just a few of the changes in Chrome 58 for developers.</p>
+<p>If you enjoyed this video, check out <a href="https://www.youtube.com/playlist?list=PLNYkxOF6rcIC60856GnLEV5GQXMxc9ByJ">Designer vs. Developer</a>, a new video series that tries to solve the challenges faced when designers and developers work together.</p>
+<p>Then <a href="https://goo.gl/6FP1a5">subscribe</a> to our <a href="https://www.youtube.com/user/ChromeDevelopers/">YouTube channel</a>, and you’ll get an email notification whenever we launch a new video.</p>
+<p>I’m Pete LePage, and as soon as Chrome 59 is released, I’ll be right here to tell you – what’s new in Chrome!</p>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Theme configuration</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Theme configuration</h1>
+</header>
+<p>This configuration applies to all <a href="./overview.md">main themes</a>.</p>
+<h2 id="common">Common</h2>
+<h3 id="color-mode---dark-mode">Color mode - dark mode</h3>
+<p>The classic theme provides by default light and dark mode support, with a navbar switch for the user.</p>
+<p>It is possible to customize the color mode support with the following configuration:</p>
+<p>```js {6-35} title=“docusaurus.config.js” module.exports = { // … themeConfig: { // … colorMode: { // “light” | “dark” defaultMode: ‘light’,</p>
+<pre><code>  // Hides the switch in the navbar
+  // Useful if you want to support a single color mode
+  disableSwitch: false,
+
+  // Should we use the prefers-color-scheme media-query,
+  // using user system preferences, instead of the hardcoded defaultMode
+  respectPrefersColorScheme: false,
+
+  // Dark/light switch icon options
+  switchConfig: {
+    // Icon for the switch while in dark mode
+    darkIcon: &#39;🌙&#39;,
+
+    // CSS to apply to dark icon,
+    // React inline style object
+    // see https://reactjs.org/docs/dom-elements.html#style
+    darkIconStyle: {
+      marginLeft: &#39;2px&#39;,
+    },
+
+    // Unicode icons such as &#39;\u2600&#39; will work
+    // Unicode with 5 chars require brackets: &#39;\u{1F602}&#39;
+    lightIcon: &#39;\u{1F602}&#39;,
+
+    lightIconStyle: {
+      marginLeft: &#39;1px&#39;,
+    },
+  },
+},
+// ...</code></pre>
+<p>}, // … }; ```</p>
+<div class="caution">
+<p>With <code>respectPrefersColorScheme: true</code>, the <code>defaultMode</code> is overridden by user system preferences.</p>
+<p>If you only want to support one color mode, you likely want to ignore user system preferences.</p>
+</div>
+<h3 id="meta-image">Meta image</h3>
+<p>You can configure a default image that will be used for your meta tag, in particular <code>og:image</code> and <code>twitter:image</code>.</p>
+<p><code>js {4-6} title="docusaurus.config.js" module.exports = {   // ...   themeConfig: {     // Relative to your site's "static" directory.     // Cannot be SVGs. Can be external URLs too.     image: 'img/docusaurus.png',     // ...   }, };</code></p>
+<h3 id="metadatas">Metadatas</h3>
+<p>You can configure additional html metadatas (and override existing ones).</p>
+<p><code>js {4} title="docusaurus.config.js" module.exports = {   // ...   themeConfig: {     metadatas: [{name: 'twitter:card', content: 'summary'}],     // ...   }, };</code></p>
+<h3 id="announcement-bar">Announcement bar</h3>
+<p>Sometimes you want to announce something in your website. Just for such a case, you can add an announcement bar. This is a non-fixed and optionally dismissable panel above the navbar.</p>
+<p><code>js {4-11} title="docusaurus.config.js" module.exports = {   // ...   themeConfig: {     announcementBar: {       id: 'support_us', // Any value that will identify this message.       content:         'We are looking to revamp our docs, please fill &lt;a target="_blank" rel="noopener noreferrer" href="#"&gt;this survey&lt;/a&gt;',       backgroundColor: '#fafbfc', // Defaults to `#fff`.       textColor: '#091E42', // Defaults to `#000`.       isCloseable: false, // Defaults to `true`.     },     // ...   }, };</code></p>
+<h2 id="i18n">i18n</h2>
+<p>Read the <a href="../../i18n/i18n-introduction.md">i18n introduction</a> first.</p>
+<h3 id="translation-files-location">Translation files location</h3>
+<ul>
+<li><strong>Base path</strong>: <code>website/i18n/&lt;locale&gt;/docusaurus-theme-&lt;themeName&gt;</code></li>
+<li><strong>Multi-instance path</strong>: N/A</li>
+<li><strong>JSON files</strong>: extracted with <a href="../../cli.md#docusaurus-write-translations"><code>docusaurus write-translations</code></a></li>
+<li><strong>Markdown files</strong>: `N/A</li>
+</ul>
+<h3 id="example-file-system-structure">Example file-system structure</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">website/i18n</span>/<span class="op">&lt;</span><span class="ex">locale</span><span class="op">&gt;</span>/docusaurus-theme-classic</a>
+<a class="sourceLine" id="cb2-2" title="2">│</a>
+<a class="sourceLine" id="cb2-3" title="3">│ <span class="co"># translations for the theme</span></a>
+<a class="sourceLine" id="cb2-4" title="4">├── <span class="ex">navbar.json</span></a>
+<a class="sourceLine" id="cb2-5" title="5">└── <span class="ex">footer.json</span></a></code></pre></div>
+<h2 id="hooks">Hooks</h2>
+<h3 id="usethemecontext"><code>useThemeContext</code></h3>
+<p>React hook to access theme context. This context contains functions for setting light and dark mode and boolean property, indicating which mode is currently in use.</p>
+<p>Usage example:</p>
+<pre class="jsx"><code>import React from &#39;react&#39;;
+// highlight-next-line
+import useThemeContext from &#39;@theme/hooks/useThemeContext&#39;;
+
+const Example = () =&gt; {
+  // highlight-next-line
+  const {isDarkTheme, setLightTheme, setDarkTheme} = useThemeContext();
+
+  return &lt;h1&gt;Dark mode is now {isDarkTheme ? &#39;on&#39; : &#39;off&#39;}&lt;/h1&gt;;
+};</code></pre>
+<div class="note">
+<p>The component calling <code>useThemeContext</code> must be a child of the <code>Layout</code> component.</p>
+<pre class="jsx"><code>function ExamplePage() {
+  return (
+    &lt;Layout&gt;
+      &lt;Example /&gt;
+    &lt;/Layout&gt;
+  );
+}</code></pre>
+</div>
+<h2 id="navbar">Navbar</h2>
+<h3 id="navbar-title--logo">Navbar title &amp; logo</h3>
+<p>You can add a logo and title to the navbar via <code>themeConfig.navbar</code>. Logo can be placed in <a href="static-assets.md">static folder</a>. Logo URL is set to base URL of your site by default. Although you can specify your own URL for the logo, if it is an external link, it will open in a new tab. In addition, you can override a value for the target attribute of logo link, it can come in handy if you are hosting docs website in a subdirectory of your main website, and in which case you probably do not need a link in the logo to the main website will open in a new tab.</p>
+<p>To improve dark mode support, you can also set a different logo for this mode.</p>
+<p><code>js {5-11} title="docusaurus.config.js" module.exports = {   // ...   themeConfig: {     navbar: {       title: 'Site Title',       logo: {         alt: 'Site Logo',         src: 'img/logo.svg',         srcDark: 'img/logo_dark.svg', // Default to `logo.src`.         href: 'https://docusaurus.io/', // Default to `siteConfig.baseUrl`.         target: '_self', // By default, this value is calculated based on the `href` attribute (the external link will open in a new tab, all others in the current one).       },     },     // ...   }, };</code></p>
+<h3 id="navbar-items">Navbar items</h3>
+<p>You can add items to the navbar via <code>themeConfig.navbar.items</code>.</p>
+<p>By default, Navbar items are regular links (internal or external).</p>
+<p><code>js title="docusaurus.config.js" module.exports = {   // ...   themeConfig: {     navbar: {       // highlight-start       items: [         {           // Client-side routing, used for navigating within the website.           // The baseUrl will be automatically prepended to this value.           to: 'docs/introduction',           // A full-page navigation, used for navigating outside of the website.           // You should only use either `to` or `href`.           href: 'https://www.facebook.com',           // Prepends the baseUrl to href values.           prependBaseUrlToHref: true,           // The string to be shown.           label: 'Introduction',           // Left or right side of the navbar.           position: 'left', // or 'right'           // To apply the active class styling on all           // routes starting with this path.           // This usually isn't necessary           activeBasePath: 'docs',           // Alternative to activeBasePath if required.           activeBaseRegex: 'docs/(next|v8)',           // Custom CSS class (for styling any item).           className: '',         },         // ... other items       ],       // highlight-end     },     // ...   }, };</code></p>
+<p>React Router should automatically apply active link styling to links, but you can use <code>activeBasePath</code> in edge cases. For cases in which a link should be active on several different paths (such as when you have multiple doc folders under the same sidebar), you can use <code>activeBaseRegex</code>. <code>activeBaseRegex</code> is a more flexible alternative to <code>activeBasePath</code> and takes precedence over it – Docusaurus parses it into a regular expression that is tested against the current URL.</p>
+<p>Outbound (external) links automatically get <code>target="_blank" rel="noopener noreferrer"</code> attributes.</p>
+<h3 id="navbar-dropdown">Navbar dropdown</h3>
+<p>Navbar items can also be dropdown items by specifying the <code>items</code>, an inner array of navbar items.</p>
+<p><code>js {9-19} title="docusaurus.config.js" module.exports = {   // ...   themeConfig: {     navbar: {       items: [         {           label: 'Community',           position: 'left', // or 'right'           items: [             {               label: 'Facebook',               href: '...',             },             {               label: 'GitHub',               href: '...',             },             // ... more items           ],         },       ],     },     // ...   }, };</code></p>
+<h3 id="navbar-doc-link">Navbar doc link</h3>
+<p>If you want to link to a specific doc, this special navbar item type will render the link to the doc of the provided <code>docId</code>. It will get the class <code>navbar__link--active</code> as long as you browse a doc of the same sidebar.</p>
+<p>```js title=“docusaurus.config.js” module.exports = { themeConfig: { navbar: { items: [ // highlight-start { type: ‘doc’, docId: ‘introduction’,</p>
+<pre><code>      //// Optional
+      position: &#39;left&#39;,
+      label: &#39;Docs&#39;,
+      activeSidebarClassName: &#39;navbar__link--active&#39;,
+      docsPluginId: &#39;default&#39;,
+    },
+    // highlight-end
+  ],
+},</code></pre>
+<p>}, }; ```</p>
+<h3 id="navbar-docs-version-dropdown">Navbar docs version dropdown</h3>
+<p>If you use docs with versioning, this special navbar item type that will render a dropdown with all your site’s available versions.</p>
+<p>The user will be able to switch from one version to another, while staying on the same doc (as long as the doc id is constant across versions).</p>
+<p>```js {5-8} title=“docusaurus.config.js” module.exports = { themeConfig: { navbar: { items: [ { type: ‘docsVersionDropdown’,</p>
+<pre><code>      //// Optional
+      position: &#39;left&#39;,
+      // Add additional dropdown items at the beginning/end of the dropdown.
+      dropdownItemsBefore: [],
+      dropdownItemsAfter: [{to: &#39;/versions&#39;, label: &#39;All versions&#39;}],
+      // Do not add the link active class when browsing docs.
+      dropdownActiveClassDisabled: true,
+      docsPluginId: &#39;default&#39;,
+    },
+  ],
+},</code></pre>
+<p>}, }; ```</p>
+<h3 id="navbar-docs-version">Navbar docs version</h3>
+<p>If you use docs with versioning, this special navbar item type will link to the active/browsed version of your doc (depends on the current url), and fallback to the latest version.</p>
+<p>```js title=“docusaurus.config.js” module.exports = { themeConfig: { navbar: { items: [ // highlight-start { type: ‘docsVersion’,</p>
+<pre><code>      //// Optional
+      position: &#39;left&#39;,
+      to: &#39;/path&#39;, // by default, link to active/latest version
+      label: &#39;label&#39;, // by default, show active/latest version label
+      docsPluginId: &#39;default&#39;,
+    },
+    // highlight-end
+  ],
+},</code></pre>
+<p>}, }; ```</p>
+<h3 id="navbar-locale-dropdown">Navbar locale dropdown</h3>
+<p>If you use the <a href="../../i18n/i18n-introduction.md">i18n feature</a>, this special navbar item type will render a dropdown with all your site’s available locales.</p>
+<p>The user will be able to switch from one locale to another, while staying on the same page.</p>
+<p>```js {5-8} title=“docusaurus.config.js” module.exports = { themeConfig: { navbar: { items: [ { type: ‘localeDropdown’,</p>
+<pre><code>      //// Optional
+      position: &#39;left&#39;,
+      // Add additional dropdown items at the beginning/end of the dropdown.
+      dropdownItemsBefore: [],
+      dropdownItemsAfter: [
+        {
+          to: &#39;https://my-site.com/help-us-translate&#39;,
+          label: &#39;Help us translate&#39;,
+        },
+      ],
+    },
+  ],
+},</code></pre>
+<p>}, }; ```</p>
+<h3 id="navbar-search">Navbar search</h3>
+<p>If you use the <a href="../../search.md">search</a>, the search bar will be the rightmost element in the navbar.</p>
+<p>However, with this special navbar item type, you can change the default location.</p>
+<p><code>js {5-8} title="docusaurus.config.js" module.exports = {   themeConfig: {     navbar: {       items: [         {           type: 'search',           position: 'right',         },       ],     },   }, };</code></p>
+<h3 id="auto-hide-sticky-navbar">Auto-hide sticky navbar</h3>
+<p>You can enable this cool UI feature that automatically hides the navbar when a user starts scrolling down the page, and show it again when the user scrolls up.</p>
+<p><code>js {5} title="docusaurus.config.js" module.exports = {   // ...   themeConfig: {     navbar: {       hideOnScroll: true,     },     // ...   }, };</code></p>
+<h3 id="navbar-style">Navbar style</h3>
+<p>You can set the static Navbar style without disabling the theme switching ability. The selected style will always apply no matter which theme user have selected.</p>
+<p>Currently, there are two possible style options: <code>dark</code> and <code>primary</code> (based on the <code>--ifm-color-primary</code> color). You can see the styles preview in the <a href="https://infima.dev/docs/components/navbar/">Infima documentation</a>.</p>
+<p><code>js {5} title="docusaurus.config.js" module.exports = {   // ...   themeConfig: {     navbar: {       style: 'primary',     },     // ...   }, };</code></p>
+<!--
+
+## Footer {#footer}
+
+TODO.
+
+-->
+<h2 id="codeblock">CodeBlock</h2>
+<p>Docusaurus uses <a href="https://github.com/FormidableLabs/prism-react-renderer">Prism React Renderer</a> to highlight code blocks.</p>
+<h3 id="theme">Theme</h3>
+<p>By default, we use <a href="https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/themes/palenight.js">Palenight</a> as syntax highlighting theme. You can specify a custom theme from the <a href="https://github.com/FormidableLabs/prism-react-renderer/tree/master/src/themes">list of available themes</a>. If you want to use a different syntax highlighting theme when the site is in dark mode, you may also do so.</p>
+<p><code>js {5-6} title="docusaurus.config.js" module.exports = {   // ...   themeConfig: {     prism: {       theme: require('prism-react-renderer/themes/github'),       darkTheme: require('prism-react-renderer/themes/dracula'),     },     // ...   }, };</code></p>
+<div class="note">
+<p>If you use the line highlighting Markdown syntax, you might need to specify a different highlight background color for the dark mode syntax highlighting theme. Refer to the <a href="../../guides/markdown-features/markdown-features-code-blocks.mdx#line-highlighting">docs for guidance</a>.</p>
+</div>
+<h3 id="default-language">Default language</h3>
+<p>You can set a default language for code blocks if no language is added after the opening triple backticks (i.e. ```). Note that a valid <a href="https://prismjs.com/#supported-languages">language name</a> must be passed, e.g.:</p>
+<p><code>js {5} title="docusaurus.config.js" module.exports = {   // ...   themeConfig: {     prism: {       defaultLanguage: 'javascript',     },     // ...   }, };</code></p>
+<h2 id="footer-1">Footer</h2>
+<p>You can add logo and a copyright to the footer via <code>themeConfig.footer</code>. Logo can be placed in <a href="static-assets.md">static folder</a>. Logo URL works in the same way of the navbar logo.</p>
+<p><code>js {5-15} title="docusaurus.config.js"   // ...   footer: {     logo: {       alt: 'Facebook Open Source Logo',       src: 'img/oss_logo.png',       href: 'https://opensource.facebook.com',     },     copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,   }</code></p>
+<h2 id="footer-links">Footer Links</h2>
+<p>You can add links to the footer via <code>themeConfig.footer.links</code>:</p>
+<p><code>js {5-15} title="docusaurus.config.js" module.exports = {   // ...   footer: {     links: [       {         // Label of the section of these links         title: 'Docs',         items: [           {             // Label of the link             label: 'Style Guide',             // Client-side routing, used for navigating within the website.             // The baseUrl will be automatically prepended to this value.             to: 'docs/',           },           {             label: 'Second Doc',             to: 'docs/doc2/',           },         ],       },       {         title: 'Community',         items: [           {             label: 'Stack Overflow',             // A full-page navigation, used for navigating outside of the website.             href: 'https://stackoverflow.com/questions/tagged/docusaurus',           },           {             label: 'Discord',             href: 'https://discordapp.com/invite/docusaurus',           },           {             label: 'Twitter',             href: 'https://twitter.com/docusaurus',           },           {             //Renders the html pass-through instead of a simple link             html: `                 &lt;a href="https://www.netlify.com" target="_blank" rel="noreferrer noopener" aria-label="Deploys by Netlify"&gt;                   &lt;img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" /&gt;                 &lt;/a&gt;               `,           },         ],       },     ],   }, };</code></p>
+</body>
+</html>

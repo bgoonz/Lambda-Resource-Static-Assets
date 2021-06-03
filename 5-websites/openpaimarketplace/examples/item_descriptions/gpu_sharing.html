@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>gpu_sharing</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="gpu-sharing-job-template">GPU Sharing Job Template</h1>
+<p>This example shows how two jobs share one GPU in OpenPAI.</p>
+<p>We use <code>python &lt;script.py&gt; &amp;</code> to initialize each task to be a “Linux background job”. Then, the command <code>wait</code> will wait for all these jobs to finish. At last, we print the job log of each task.</p>
+<p>Comparing with using one GPU, gpu sharing has higher utilization in our experiement on a K80 GPU. However, this kind of GPU sharing job doesn’t ensure isolation for different tasks. Thus different tasks will affect with each other, and sometimes may fail due to various reasons.</p>
+<h2 id="training-data">Training Data</h2>
+<p>The training set is using <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a> dataset. PyTorch provides CIFAR-10 download in <code>torchvision.datasets.CIFAR10</code> and <em>DataLoader</em> in <code>torch.utils.data.DataLoader</code>.</p>
+<h2 id="how-to-use">How to use</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>The training code is under the <a href="https://github.com/microsoft/pai">Microsoft OpenPAI</a> <a href="https://github.com/microsoft/pai/blob/master/examples/Distributed-example/cifar10-single-node-gpus-cpu-DP.py">Distributed-example</a>.</p>
+<p>You should get the training code first. <code>wget https://raw.githubusercontent.com/microsoft/pai/master/examples/Distributed-example/cifar10-single-node-gpus-cpu-DP.py</code></p>
+<h3 id="training-command">Training command</h3>
+<p>Start two training processes and wait tile all of them finished. In order to share one GPU, you should apply <strong>1 GPU resource (SKU count = 1)</strong> for the job.</p>
+<pre><code>mkdir job1
+cd job1
+wget https://raw.githubusercontent.com/microsoft/pai/master/examples/Distributed-example/cifar10-single-node-gpus-cpu-DP.py
+python cifar10-single-node-gpus-cpu-DP.py --epoch 200 &amp;&gt; log &amp;
+cd ..
+mkdir job2
+cd job2
+wget https://raw.githubusercontent.com/microsoft/pai/master/examples/Distributed-example/cifar10-single-node-gpus-cpu-DP.py
+python cifar10-single-node-gpus-cpu-DP.py --epoch 200 &amp;&gt; log &amp;
+cd ..
+wait</code></pre>
+<h3 id="get-the-result-model">Get the result model</h3>
+<p>You can view the training process and result in the logs when training process is finished.</p>
+<pre><code>echo &#39;job1 log:&#39;
+cat job1/log
+echo &#39;job2 log:&#39;
+cat job2/log</code></pre>
+</body>
+</html>

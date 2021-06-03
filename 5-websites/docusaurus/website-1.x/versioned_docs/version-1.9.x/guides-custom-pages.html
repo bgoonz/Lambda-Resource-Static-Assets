@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Custom Pages</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Custom Pages</h1>
+</header>
+<p>You can add pages to your site that are not part of the standard docs or blog markdown files. You can do this by adding <code>.js</code> files to the <code>website/pages</code> directory. These files are <a href="https://reactjs.org/">React</a> components and the <code>render()</code> is called to create them, backed by CSS classes, etc.</p>
+<h2 id="customizing-your-home-page">Customizing Your Home Page</h2>
+<p>The easiest way to get started customizing your home page is to use the example site that was <a href="getting-started-site-creation.md">created</a> when you ran the <a href="getting-started-installation.md">Docusaurus initialization script</a>.</p>
+<p>You can <a href="getting-started-preparation.md#verifying-installation">start</a> your local server and go to <code>http://localhost:3000</code> to see what the example home page looks like. From there, edit the <code>website/pages/en/index.js</code> file and its various components to use the images and text you want for your project.</p>
+<h2 id="adding-other-custom-pages">Adding Other Custom Pages</h2>
+<p>Docusaurus provides some helpful example pages in the <code>website/pages/en</code> directory, including <code>index.js</code>, <code>users.js</code>, and <code>help.js</code>. These are good examples to showcase how to create a custom page for Docusaurus.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">root-directory</span></a>
+<a class="sourceLine" id="cb1-2" title="2">├── <span class="ex">docs</span></a>
+<a class="sourceLine" id="cb1-3" title="3">└── <span class="ex">website</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    ├── <span class="ex">blog</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    ├── <span class="ex">core</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    │   └── <span class="ex">Footer.js</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    ├── <span class="ex">package.json</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    ├── <span class="ex">pages</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    │   ├── <span class="ex">index.js</span></a>
+<a class="sourceLine" id="cb1-10" title="10">    │   ├── <span class="ex">users.js</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    │   └── <span class="ex">help.js</span></a>
+<a class="sourceLine" id="cb1-12" title="12">    ├── <span class="ex">sidebars.json</span></a>
+<a class="sourceLine" id="cb1-13" title="13">    ├── <span class="ex">siteConfig.js</span></a>
+<a class="sourceLine" id="cb1-14" title="14">    └── <span class="ex">static</span></a></code></pre></div>
+<p>You are also free to write your own pages. It is strongly suggested that you at least have an index page, but none of the pages provided are mandatory to include in your site. More information on how to use the provided components or include your own can be found <a href="api-pages.md">here</a>. Information on how to link to your different pages in the header navigation bar can be found <a href="guides-navigation.md">here</a>.</p>
+<blockquote>
+<p>If you want your page to show up in your navigation header, you will need to update <code>siteConfig.js</code> to add to the <code>headerLinks</code> element. e.g., <code>{ page: 'about-slash', label: 'About/' }</code>,</p>
+</blockquote>
+<h2 id="adding-static-pages">Adding Static Pages</h2>
+<p>Static <code>.html</code> files can also be used, but they will not include Docusaurus’ header, footer, or styles by default. These can be added to the <code>static</code> directory in the same way as other <a href="api-pages.md#using-static-assets">static assets</a>. Alternatively, they can be placed in the <code>pages</code> directory and would be served as-is instead of being rendered from React.</p>
+<p>If you wish to use Docusaurus’ stylesheet, you can access it at <code>${baseUrl}css/main.css</code>. If you wish to use separate css for these static pages, you can exclude them from being concatenated to Docusaurus’ styles by adding them into the <code>siteConfig.separateCss</code> field in <code>siteConfig.js</code>.</p>
+<blockquote>
+<p>You can set the <a href="api-site-config.md#optional-fields"><code>$wrapPagesHTML</code> site config option</a> in order to wrap raw HTML fragments with the Docusaurus site styling, header and footer.</p>
+</blockquote>
+<h2 id="customizing-your-site-footer">Customizing Your Site Footer</h2>
+<p>Starting from the example <code>core/Footer.js</code> file that was <a href="getting-started-site-creation.md">created</a> when you ran the <a href="getting-started-installation.md">Docusaurus initialization script</a>, edit the footer to include any links to pages on your site or other sites that you wish to have.</p>
+<p>The example provided has three columns with a footer image on the left and Facebook’s open source logo and copyright at the bottom. If your project is not a Facebook open source project, remove the logo and copyright. Otherwise, feel free to get creative with your footer and make it look however you’d like!</p>
+<p>Some suggestions for links you may want to provide: documentation, API, Twitter, Discord, Facebook groups, Stack Overflow, GitHub, etc.</p>
+<p>Your footer will automatically get applied to all pages on your site, including docs and blog posts. The sole exception to this is any static HTML pages you include.</p>
+<p>If you do not want a footer for your site, change the <code>render</code> function of <code>core/Footer.js</code> to return <code>null</code>. e.g.,</p>
+<pre class="jsx"><code>const React = require(&#39;react&#39;);
+
+class Footer extends React.Component {
+  render() {
+    return null;
+  }
+}
+
+module.exports = Footer;</code></pre>
+</body>
+</html>

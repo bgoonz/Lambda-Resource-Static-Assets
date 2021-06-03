@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2019-11-02" />
+  <title>Manifest V3 migration checklist</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Manifest V3 migration checklist</h1>
+<p class="date">2019-11-02</p>
+</header>
+<p>This page provides a quick reference to help you identify any changes you might need to make to an Manifest V2 extension so that it works under Manifest V3 (MV3). For more description of the nature of these changes see the <a href="/docs/extensions/mv3/intro/mv3-migration">MV3 migration guide</a>.</p>
+<h2 id="api-checklist-api_checklist">API checklist {: #api_checklist }</h2>
+<p>There are some changes you may need to make based on changes to the API surface. This section lists these changes.</p>
+<p><strong>Do you have host permissions in your manifest?</strong> <br/> <em>Host permissions in MV3 <a href="/docs/extensions/mv3/intro/mv3-migration#host-permissions">are a separate element</a>; you don’t specify them in <code>permissions</code> or <code>optional_permissions</code>.</em></p>
+<ul>
+<li>Move host permissions into the <code>host_permissions</code> field in manifest.json.</li>
+</ul>
+<p><strong>Are you using background pages?</strong> <br/> <em>Background pages are <a href="/docs/extensions/mv3/intro/mv3-migration#background-service-workers">replaced by service workers</a> in MV3.</em></p>
+<ul>
+<li>Replace <code>background.page</code> or <code>background.scripts</code> with <code>background.service_worker</code> in manifest.json. Note that the <code>service_worker</code> field takes a string, not an array of strings.</li>
+<li>Remove <code>background.persistent</code> from manifest.json.</li>
+<li>Update background scripts to adapt to the service worker execution context.</li>
+</ul>
+<p>{% Aside ‘gotchas’ %} Service workers must be registered at root level: they cannot be in a nested directory. {% endAside %}</p>
+<p><strong>Are you using the <code>browser_action</code> or <code>page_action</code> property in manifest.json?</strong> <br/> <em>These properties are <a href="/docs/extensions/mv3/intro/mv3-migration#action-api-unification">unified into a single property</a> in MV3.</em></p>
+<ul>
+<li>Replace these properties with <code>action</code>.</li>
+</ul>
+<p><strong>Are you using the <code>chrome.browserAction</code> or <code>chrome.pageAction</code> JavaScript API?</strong> <br/> <em>These two equivalent APIs are <a href="/docs/extensions/mv3/intro/mv3-migration#action-api-unification">unified into a single API</a> in MV3.</em> - Migrate to the <code>chrome.action</code> API.</p>
+<p><strong>Are you currently using the blocking version of <code>chrome.webRequest</code>?</strong> <br/> <em>This API is <a href="/docs/extensions/mv3/intro/mv3-migration#modifying-network-requests">replaced by <code>declarativeNetRequest</code></a> in MV3.</em></p>
+<p>{% Aside %} This only applies to user-installed extensions; force installed extensions (extensions distributed using <a href="https://www.chromium.org/administrators/policy-list-3#ExtensionInstallForcelist">ExtensionInstallForcelist</a>). These extensions — typically used in an enterprise setting — can still use the blocking version of <code>chrome.webRequest</code>. {% endAside %}</p>
+<ul>
+<li>Migrate request modification logic to <code>chrome.declarativeNetRequest</code> rules.</li>
+<li>Replace the <code>webRequestBlocking</code> permission with <code>declarativeNetRequest</code>.</li>
+<li>Remove the <code>webRequest</code> permission if you no longer need to observe network requests.</li>
+<li>Remove unnecessary host permissions; blocking a request or upgrading a request’s protocol doesn’t require host permissions with <code>declarativeNetRequest</code>.</li>
+</ul>
+<p><strong>Are you using these scripting/CSS methods in the chrome.tabs API?</strong> <br/> <em>In Manifest V3, several methods move from <code>chrome.tabs</code> to the <code>chrome.scripting</code> API.</em></p>
+<ul>
+<li>Change any of the following MV2 calls to use the correct MV3 API:</li>
+</ul>
+<table class="with-heading-tint">
+<thead>
+<tr>
+<th>
+Manifest V2
+</th>
+<th>
+Manifest V3
+</th>
+</tr>
+</thead>
+<tr>
+<td>
+tabs.executeScript()
+</td>
+<td>
+scripting.executeScript()
+</td>
+</tr>
+<tr>
+<td>
+tabs.insertCSS()
+</td>
+<td>
+scripting.insertCSS()
+</td>
+</tr>
+<tr>
+<td>
+tabs.removeCSS()
+</td>
+<td>
+scripting.removeCSS()
+</td>
+</tr>
+</table>
+<p><strong>Are you executing remote code or arbitrary strings?</strong> <br/> <em>You can no longer <a href="/docs/extensions/mv3/intro/mv3-migration#remotely-hosted-code">execute external logic</a> using <code>chrome.scripting.executeScript({code: '...'})</code>, <code>eval()</code>, and <code>new Function()</code>.</em></p>
+<ul>
+<li>Move all external code (JS, Wasm, CSS) into your extension bundle.</li>
+<li>Update script and style references to load resources from the extension bundle.</li>
+<li>Use <code>chrome.runtime.getURL()</code> to build resource URLs at runtime.</li>
+</ul>
+<p><strong>Are you executing functions that expect an MV2 background context?</strong> <br/> <em>The <a href="/docs/extensions/mv3/intro/mv3-migration#background-service-workers">adoption of service workers</a> in MV3 isn’t compatible with methods like <code>chrome.runtime.getBackgroundPage()</code>, <code>chrome.extension.getBackgroundPage()</code>, <code>chrome.extension.getExtensionTabs()</code>, and <code>chrome.extension.getViews()</code>.</em></p>
+<ul>
+<li>Migrate to a design that passes messages between other contexts and the background service worker.</li>
+</ul>
+<h2 id="security-checklist-security_checklist">Security Checklist {: #security_checklist }</h2>
+<p>There are some changes you may need to make based on changes in security policy. This section lists these changes.</p>
+<p><strong>Are you making CORS requests in content scripts?</strong> - Move these requests to the background service worker.</p>
+<p><strong>Are you using a custom <code>content_security_policy</code> in manifest.json?</strong> - Replace <code>content_security_policy</code> with <code>content_security_policy.extension_pages</code> or <code>content_security_policy.sandbox</code> as appropriate. - Remove references to external domains in <code>script-src</code>, <code>worker-src</code>, <code>object-src</code>, and <code>style-src</code> directives if present.</p>
+</body>
+</html>

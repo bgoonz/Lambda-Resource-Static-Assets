@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2018-04-18" />
+  <title>Run JavaScript in the Console</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Run JavaScript in the Console</h1>
+<p class="date">2018-04-18</p>
+</header>
+<p>This interactive tutorial shows you how to run JavaScript in the <a href="/docs/devtools">Chrome DevTools</a> Console. See <a href="/docs/devtools/console/log">Get Started With Logging Messages</a> to learn how to log messages to the Console. See <a href="/docs/devtools/javascript">Get Started With Debugging JavaScript</a> to learn how to pause JavaScript code and step through it one line at a time.</p>
+<p>{% Img src=“image/admin/niTYZhvjmKcUZpMZmuOV.png”, alt=“The Console.”, width=“800”, height=“463” %}</p>
+<p><strong>Figure 1</strong>. The <strong>Console</strong>.</p>
+<h2 id="overview-overview">Overview {: #overview }</h2>
+<p>The <strong>Console</strong> is a <a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a>, which stands for Read, Evaluate, Print, and Loop. It reads the JavaScript that you type into it, evaluates your code, prints out the result of your <a href="http://2ality.com/2012/09/expressions-vs-statements.html">expression</a>, and then loops back to the first step.</p>
+<h2 id="set-up-devtools-setup">Set up DevTools {: #setup }</h2>
+<p>This tutorial is designed so that you can open up the demo and try all the workflows yourself. When you physically follow along, you’re more likely to remember the workflows later.</p>
+<ol type="1">
+<li><p>Press Command+Option+J (Mac) or Control+Shift+J (Windows, Linux, Chrome OS) to open the <strong>Console</strong>, right here on this very page.</p>
+<p>{% Img src=“image/admin/5aHOGjzCHY5tHEnye4lU.png”, alt=“This tutorial on the left, and DevTools on the right.”, width=“800”, height=“480” %}</p>
+<p><strong>Figure 2</strong>. This tutorial on the left, and DevTools on the right.</p></li>
+</ol>
+<h2 id="view-and-change-the-pages-javascript-or-dom-page">View and change the page’s JavaScript or DOM {: #page }</h2>
+<p>When building or debugging a page, it’s often useful to run statements in the <strong>Console</strong> in order to change how the page looks or runs.</p>
+<ol type="1">
+<li><p>Notice the text in the button below.</p>
+<button id="hello">
+Hello, World!
+</button></li>
+<li><p>Type <code>document.getElementById('hello').textContent = 'Hello, Console!'</code> in the <strong>Console</strong> and then press Enter to evaluate the expression. Notice how the text inside the button changes.</p>
+<p>{% Img src=“image/admin/7AFYFztno8K9z7C7rXZm.png”, alt=“How the Console looks after evaluating the expression above.”, width=“800”, height=“463” %}</p>
+<p><strong>Figure 3</strong>. How the Console looks after evaluating the expression above.</p>
+<p>Below the code that you evaluated you see <code>"Hello, Console!"</code>. Recall the 4 steps of REPL: read, evaluate, print, loop. After evaluating your code, a REPL prints the result of the expression. So <code>"Hello, Console!"</code> must be the result of evaluating <code>document.getElementById('hello').textContent = 'Hello, Console!'</code>.</p></li>
+</ol>
+<h2 id="run-arbitrary-javascript-thats-not-related-to-the-page-playground">Run arbitrary JavaScript that’s not related to the page {: #playground }</h2>
+<p>Sometimes, you just want a code playground where you can test some code, or try out new JavaScript features you’re not familiar with. The Console is a perfect place for these kinds of experiments.</p>
+<ol type="1">
+<li>Type <code>5 + 15</code> in the Console and press Enter to evaluate the expression. The Console prints out the result of the expression below your code. <strong>Figure 4</strong> below shows how your Console should look after evaluating this expression.</li>
+<li><p>Type the following code into the <strong>Console</strong>. Try typing it out, character-by-character, rather than copy-pasting it.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">function</span> <span class="at">add</span>(a<span class="op">,</span> b<span class="op">=</span><span class="dv">20</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>See <a href="http://es6-features.org/#DefaultParameterValues">define default values for function arguments</a> if you’re unfamiliar with the <code>b=20</code> syntax.</p></li>
+<li><p>Now, call the function that you just defined.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="at">add</span>(<span class="dv">25</span>)<span class="op">;</span></a></code></pre></div>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/3V5mx06Kehe06nGL3csv.png”, alt=“How the Console looks after evaluating the expressions above.”, width=“800”, height=“463” %}</p>
+<p><strong>Figure 4</strong>. How the Console looks after evaluating the expressions above.</p>
+<p><code>add(25)</code> evaluates to <code>45</code> because when the <code>add</code> function is called without a second argument, <code>b</code> defaults to <code>20</code>.</p></li>
+</ol>
+<h2 id="next-steps-next">Next steps {: #next }</h2>
+<p>See <a href="/docs/devtools/console/reference#js">Run JavaScript</a> to explore more features related to running JavaScript in the Console.</p>
+<p>DevTools lets you pause a script in the middle of its execution. While you’re paused, you can use the <strong>Console</strong> to view and change the page’s <code>window</code> or <code>DOM</code> at that moment in time. This makes for a powerful debugging workflow. See <a href="/docs/devtools/javascript">Get Started With Debugging JavaScript</a> for an interactive tutorial.</p>
+<p>The <strong>Console</strong> also has a set of convenience functions that make it easier to interact with a page. For example:</p>
+<ul>
+<li>Rather than typing <code>document.querySelector()</code> to select an element, you can type <code>$()</code>. This syntax is inspired by jQuery, but it’s not actually jQuery. It’s just an alias for <code>document.querySelector()</code>.</li>
+<li><code>debug(function)</code> effectively sets a breakpoint on the first line of that function.</li>
+<li><code>keys(object)</code> returns an array containing the keys of the specified object.</li>
+</ul>
+<p>See <a href="/docs/devtools/console/utilities">Console Utilities API Reference</a> to explore all the convenience functions.</p>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2015-12-21" />
+  <title>Understand security issues</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Understand security issues</h1>
+<p class="date">2015-12-21</p>
+</header>
+<p>Use the <strong>Security</strong> Panel in Chrome DevTools to make sure HTTPS is properly implemented on a page. See <a href="https://web.dev/why-https">Why HTTPS Matters</a> to learn why every website should be protected with HTTPS, even sites that don’t handle sensitive user data.</p>
+<h2 id="open-the-security-panel-open">Open the Security panel {: #open }</h2>
+<p>The <strong>Security</strong> panel is the main place in DevTools for inspecting the security of a page.</p>
+<ol type="1">
+<li><a href="/docs/devtools/open">Open DevTools</a>.</li>
+<li><p>Click the <strong>Security</strong> tab to open the <strong>Security</strong> panel.</p>
+<p>{% Img src=“image/admin/WnYbcLXh2TCkhoVh9Jub.png”, alt=“The Security panel”, width=“800”, height=“566” %}</p>
+<p><strong>Figure 1</strong>. The Security panel</p></li>
+</ol>
+<h2 id="common-problems-problems">Common problems {: #problems }</h2>
+<h3 id="non-secure-main-origins-main">Non-secure main origins {: #main }</h3>
+<p>When the main origin of a page is not secure, the <strong>Security Overview</strong> says <strong>This page is not secure</strong>.</p>
+<p>{% Img src=“image/admin/37YwtqHGHTituFBvm74p.png”, alt=“A non-secure page”, width=“800”, height=“530” %}</p>
+<p><strong>Figure 2</strong>. A non-secure page</p>
+<p>This problem occurs when the URL that you visited was requested over HTTP. To make it secure you need to request it over HTTPS. For example, if you look at the URL in your address bar, it probably looks similar to <code>http://example.com</code>. To make it secure the URL should be <code>https://example.com</code>.</p>
+<p>If you’ve already got HTTPS set up on your server, all you need to do to fix this problem is configure your server to redirect all HTTP requests to HTTPS.</p>
+<p>If you don’t have HTTPS set up on your server, <a href="https://letsencrypt.org/">Let’s Encrypt</a> provides a free and relatively-easy way to start the process. Or, you might consider hosting your site on a CDN. Most major CDNs host sites on HTTPS by default now.</p>
+<p><strong>Tip</strong> The <a href="https://web.dev/redirects-http/">Redirect HTTP Traffic To HTTPS</a> audit in <a href="https://developers.google.com/web/tools/lighthouse">Lighthouse</a> can help automate the process of making sure that all HTTP requests are redirected to HTTPS.</p>
+<h3 id="mixed-content-mixed">Mixed content {: #mixed }</h3>
+<p><a href="https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content">Mixed content</a> means that the main origin of a page is secure, but the page requested resources from non-secure origins. Mixed content pages are only partially protected because the HTTP content is accessible to sniffers and vulnerable to man-in-the-middle attacks.</p>
+<p>{% Img src=“image/admin/T1250jd5mFG2827izkwI.png”, alt=“Mixed content”, width=“800”, height=“589” %}</p>
+<p><strong>Figure 3</strong>. Mixed content</p>
+<p>In <strong>Figure 3</strong> above, clicking <strong>View 1 request in Network panel</strong> opens the <strong>Network</strong> panel and applies the <code>mixed-content:displayed</code> filter so that the <strong>Network Log</strong> only shows non-secure resources.</p>
+<p>{% Img src=“image/admin/Eh7KosTILZPJZ85kdzgM.png”, alt=“Mixed resources in the Network Log”, width=“800”, height=“514” %}</p>
+<p><strong>Figure 4</strong>. Mixed resources in the Network Log</p>
+<h2 id="view-details-details">View details {: #details }</h2>
+<h3 id="view-main-origin-certificate-certificate">View main origin certificate {: #certificate }</h3>
+<p>From the <strong>Security Overview</strong> click <strong>View certificate</strong> to quickly inspect the main origin’s certificate.</p>
+<p>{% Img src=“image/admin/Zxh7Ko5oWlqjC88zjpHk.png”, alt=“A main origin certificate”, width=“800”, height=“566” %}</p>
+<p><strong>Figure 5</strong>. A main origin certificate</p>
+<h3 id="view-origin-details-origindetails">View origin details {: #origindetails }</h3>
+<p>Click one of the entries in the left-hand nav to view the origin’s details. From the details page you can view connection and certificate information. Certificate transparency information is also shown when available.</p>
+<p>{% Img src=“image/admin/Vh0PItXao7jFNl65mYFU.png”, alt=“Main origin details”, width=“800”, height=“848” %}</p>
+<p><strong>Figure 6</strong>. Main origin details</p>
+</body>
+</html>

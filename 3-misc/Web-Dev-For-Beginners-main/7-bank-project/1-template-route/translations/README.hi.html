@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.hi</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="एक-वेब-ऐप-में-बैंकिंग-ऐप-पार्ट-1-html-टेम्प्लेट-और-रूट-बनाएं">एक वेब ऐप में बैंकिंग ऐप पार्ट 1: HTML टेम्प्लेट और रूट बनाएं</h1>
+<h2 id="पूर्व-व्याख्यान-प्रश्नोत्तरी">पूर्व व्याख्यान प्रश्नोत्तरी</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/41?loc=hi">पूर्व व्याख्यान प्रश्नोत्तरी</a></p>
+<h3 id="परिचय">परिचय</h3>
+<p>ब्राउज़रों में जावास्क्रिप्ट के आगमन के बाद से, वेबसाइटें पहले से कहीं अधिक इंटरैक्टिव और जटिल होती जा रही हैं। वेब प्रौद्योगिकियों का अब आमतौर पर पूरी तरह कार्यात्मक अनुप्रयोग बनाने के लिए उपयोग किया जाता है जो सीधे एक ब्राउज़र में चलता है जिसे हम <a href="https://en.wikipedia.org/wiki/Web_application">वेब एप्लिकेशन</a> कहते हैं। चूंकि वेब ऐप्स अत्यधिक संवादात्मक हैं, इसलिए उपयोगकर्ता हर बार किसी क्रिया के पूरा होने तक पूर्ण पृष्ठ पुनः लोड होने की प्रतीक्षा नहीं करना चाहते हैं। यही कारण है कि एक चिकनी उपयोगकर्ता अनुभव प्रदान करने के लिए जावास्क्रिप्ट का उपयोग सीधे डोम का उपयोग करके HTML को अपडेट करने के लिए किया जाता है।</p>
+<p>इस पाठ में, हम बैंक वेब ऐप बनाने के लिए नींव रखने जा रहे हैं, HTML टेम्प्लेट का उपयोग करके ऐसी कई स्क्रीन बना सकते हैं जिन्हें प्रदर्शित किया जा सकता है और पूरे HTML पृष्ठ को फिर से लोड किए बिना अपडेट किया जा सकता है।</p>
+<h3 id="शर्त">शर्त</h3>
+<p>इस पाठ में हमारे द्वारा बनाए गए वेब ऐप का परीक्षण करने के लिए आपको एक स्थानीय वेब सर्वर की आवश्यकता होगी। यदि आपके पास एक नहीं है, तो आप <a href="https://nodejs.org">Node.js</a> को स्थापित कर सकते हैं और अपने प्रोजेक्ट फ़ोल्डर से कमांड <code>npx lite-server</code> का उपयोग कर सकते हैं। यह एक स्थानीय वेब सर्वर बनाएगा और आपके ऐप को एक ब्राउज़र में खोलेगा।</p>
+<h3 id="तैयारी">तैयारी</h3>
+<p>अपने कंप्यूटर पर, उसके अंदर <code>index.html</code> नामक फ़ाइल के साथ <code>bank</code> नामक एक फ़ोल्डर बनाएँ। हम इस HTML <a href="https://en.wikipedia.org/wiki/Boilerplate_code">boilerplate</a> से शुरू करेंगे :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">&lt;html</span><span class="ot"> lang=</span><span class="st">&quot;en&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="kw">&lt;meta</span><span class="ot"> name=</span><span class="st">&quot;viewport&quot;</span><span class="ot"> content=</span><span class="st">&quot;width=device-width, initial-scale=1.0&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="kw">&lt;title&gt;</span>Bank App<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="co">&lt;!-- This is where you&#39;ll work --&gt;</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<hr />
+<h2 id="html-टेम्पलेट">HTML टेम्पलेट</h2>
+<p>यदि आप एक वेब पेज के लिए कई स्क्रीन बनाना चाहते हैं, तो एक समाधान यह होगा कि आप जिस भी स्क्रीन को दिखाना चाहते हैं, उसके लिए एक HTML फाइल बनाई जाए। हालाँकि, यह समाधान कुछ असुविधा के साथ आता है:</p>
+<ul>
+<li>आपको स्क्रीन स्विच करते समय पूरे HTML को फिर से लोड करना होगा, जो धीमा हो सकता है।</li>
+<li>विभिन्न स्क्रीन के बीच डेटा साझा करना मुश्किल है।</li>
+</ul>
+<p>एक अन्य दृष्टिकोण में केवल एक HTML फ़ाइल है, और <code>&lt;template&gt;</code> तत्व का उपयोग करके कई <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">HTML टेम्पलेट्स</a> को परिभाषित करें। एक टेम्पलेट एक पुन: प्रयोज्य HTML ब्लॉक है जो ब्राउज़र द्वारा प्रदर्शित नहीं किया जाता है, और जावास्क्रिप्ट का उपयोग करके रनटाइम पर तत्काल किया जाना चाहिए।</p>
+<h3 id="टास्क">टास्क</h3>
+<p>हम दो स्क्रीन के साथ एक बैंक ऐप बनाएंगे: लॉगिन पेज और डैशबोर्ड। सबसे पहले, एचटीएमएल बॉडी में एक प्लेसहोल्डर तत्व जोड़ें, जिसका उपयोग हम अपने ऐप की विभिन्न स्क्रीन को इंस्टेंट करने के लिए करेंगे:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;app&quot;</span><span class="kw">&gt;</span>Loading...<span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<p>हम इसे एक <code>id</code> दे रहे हैं ताकि बाद में इसे जावास्क्रिप्ट के साथ ढूंढना आसान हो सके।</p>
+<blockquote>
+<p>युक्ति: चूंकि इस तत्व की सामग्री को बदल दिया जाएगा, हम एक लोडिंग संदेश या संकेतक में डाल सकते हैं जो ऐप लोड होने के दौरान दिखाया जाएगा।</p>
+</blockquote>
+<p>अगला, लॉगिन पृष्ठ के लिए HTML टेम्पलेट के नीचे जोड़ें। अभी के लिए हम केवल एक शीर्षक और एक अनुभाग रखेंगे जिसमें एक लिंक होगा जिसका उपयोग हम नेविगेशन करने के लिए करेंगे।</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;template</span><span class="ot"> id=</span><span class="st">&quot;login&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">&lt;h1&gt;</span>Bank App<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">&lt;section&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/dashboard&quot;</span><span class="kw">&gt;</span>Login<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="kw">&lt;/section&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">&lt;/template&gt;</span></a></code></pre></div>
+<p>फिर हम डैशबोर्ड पृष्ठ के लिए एक और HTML टेम्पलेट जोड़ेंगे। इस पृष्ठ में विभिन्न अनुभाग होंगे:</p>
+<ul>
+<li>शीर्षक के साथ हैडर और लॉगआउट लिंक</li>
+<li>बैंक खाते का वर्तमान संतुलन</li>
+<li>लेनदेन की एक सूची, एक तालिका में प्रदर्शित</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">&lt;template</span><span class="ot"> id=</span><span class="st">&quot;dashboard&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">&lt;header&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="kw">&lt;h1&gt;</span>Bank App<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/login&quot;</span><span class="kw">&gt;</span>Logout<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="kw">&lt;/header&gt;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="kw">&lt;section&gt;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    Balance: 100$</a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="kw">&lt;/section&gt;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="kw">&lt;section&gt;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">    <span class="kw">&lt;h2&gt;</span>Transactions<span class="kw">&lt;/h2&gt;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="kw">&lt;table&gt;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">      <span class="kw">&lt;thead&gt;</span></a>
+<a class="sourceLine" id="cb4-13" title="13">        <span class="kw">&lt;tr&gt;</span></a>
+<a class="sourceLine" id="cb4-14" title="14">          <span class="kw">&lt;th&gt;</span>Date<span class="kw">&lt;/th&gt;</span></a>
+<a class="sourceLine" id="cb4-15" title="15">          <span class="kw">&lt;th&gt;</span>Object<span class="kw">&lt;/th&gt;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">          <span class="kw">&lt;th&gt;</span>Amount<span class="kw">&lt;/th&gt;</span></a>
+<a class="sourceLine" id="cb4-17" title="17">        <span class="kw">&lt;/tr&gt;</span></a>
+<a class="sourceLine" id="cb4-18" title="18">      <span class="kw">&lt;/thead&gt;</span></a>
+<a class="sourceLine" id="cb4-19" title="19">      <span class="kw">&lt;tbody&gt;&lt;/tbody&gt;</span></a>
+<a class="sourceLine" id="cb4-20" title="20">    <span class="kw">&lt;/table&gt;</span></a>
+<a class="sourceLine" id="cb4-21" title="21">  <span class="kw">&lt;/section&gt;</span></a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="kw">&lt;/template&gt;</span></a></code></pre></div>
+<blockquote>
+<p>युक्ति: HTML टेम्प्लेट बनाते समय, यदि आप यह देखना चाहते हैं कि यह कैसा दिखेगा, तो आप <code>&lt;template&gt;</code> और <code>&lt;/template&gt;</code> लाइनों को <code>&lt;!-- --&gt;</code> के साथ संलग्न करके टिप्पणी कर सकते हैं।</p>
+</blockquote>
+<p>✅ आपको क्या लगता है कि हम टेम्प्लेट पर <code>id</code> विशेषताओं का उपयोग क्यों करते हैं? क्या हम कक्षाओं की तरह कुछ और उपयोग कर सकते हैं?</p>
+<h2 id="जावास्क्रिप्ट-के-साथ-टेम्पलेट्स-प्रदर्शित-करना">जावास्क्रिप्ट के साथ टेम्पलेट्स प्रदर्शित करना</h2>
+<p>यदि आप अपनी वर्तमान HTML फ़ाइल को किसी ब्राउज़र में आज़माते हैं, तो आप देखेंगे कि यह <code>Loading...</code> को प्रदर्शित करता है। ऐसा इसलिए है क्योंकि हमें HTML टेम्प्लेट को इंस्टेंट करने और प्रदर्शित करने के लिए कुछ जावास्क्रिप्ट कोड जोड़ना होगा।</p>
+<p>एक टेम्पलेट को तत्काल बनाना आमतौर पर 3 चरणों में किया जाता है: 1. DOM में टेम्पलेट तत्व को पुनः प्राप्त करें, उदाहरण के लिए <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/getEgetById"><code>document.getElementById</code></a> का उपयोग करके। 2. टेम्पलेट तत्व को क्लोन करें, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/cloneNode"><code>cloneNode</code></a> का उपयोग करके। 3. इसे एक दृश्य तत्व के तहत DOM में संलग्न करें, उदाहरण के लिए <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild"><code>appendChild</code></a> का उपयोग करके।</p>
+<p>✅ DOM को संलग्न करने से पहले हमें टेम्प्लेट को क्लोन करने की आवश्यकता क्यों है? आपको क्या लगता है कि अगर हम इस कदम को छोड़ देते तो क्या होता?</p>
+<h3 id="टास्क-1">टास्क</h3>
+<p>अपने प्रोजेक्ट फ़ोल्डर में <code>app.js</code> नामक एक नई फ़ाइल बनाएँ और उस फ़ाइल को अपने HTML के <code>&lt;head&gt;</code>अनुभाग में आयात करें:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;app.js&quot;</span><span class="ot"> defer</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<p>अब <code>app.js</code> में, हम एक नया फ़ंक्शन <code>updateRoute</code> बनाएंगे:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">function</span> <span class="at">updateRoute</span>(templateId) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">const</span> template <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(templateId)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">const</span> view <span class="op">=</span> <span class="va">template</span>.<span class="va">content</span>.<span class="at">cloneNode</span>(<span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="kw">const</span> app <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;app&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="va">app</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="va">app</span>.<span class="at">appendChild</span>(view)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>हम यहाँ क्या करते हैं, ऊपर वर्णित 3 चरण हैं। हम आईडी <code>templateId</code> के साथ टेम्पलेट को इंस्टेंट करते हैं, और हमारे ऐप प्लेसहोल्डर के भीतर इसकी क्लोन सामग्री डालते हैं। ध्यान दें कि हमें टेम्पलेट के पूरे उपप्रकार को कॉपी करने के लिए <code>cloneNode(true)</code> का उपयोग करने की आवश्यकता है।</p>
+<p>अब इस फंक्शन को टेम्प्लेट में से किसी एक पर कॉल करें और परिणाम देखें।</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="at">updateRoute</span>(<span class="st">&#39;login&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<p>✅ इस कोड का उद्देश्य क्या है <code>app.innerHTML =' ';</code>? इसके बिना क्या होता है?</p>
+<h2 id="रूटस-बनाना">रूटस बनाना</h2>
+<p>जब एक वेब ऐप के बारे में बात की जाती है, तो हम <em>रूटिंग</em> को मैप करने का इरादा <strong>URL</strong> विशिष्ट स्क्रीन पर प्रदर्शित करते हैं जिन्हें प्रदर्शित किया जाना चाहिए। एकाधिक HTML फ़ाइलों वाली वेब साइट पर, यह स्वचालित रूप से किया जाता है क्योंकि URL पर फ़ाइल पथ प्रतिबिंबित होते हैं। उदाहरण के लिए, अपने प्रोजेक्ट फ़ोल्डर में इन फ़ाइलों के साथ:</p>
+<pre><code>mywebsite/index.html
+mywebsite/login.html
+mywebsite/admin/index.html</code></pre>
+<p>यदि आप रूट के रूप में <code>mywebsite</code> के साथ एक वेब सर्वर बनाते हैं, तो URL मैपिंग निम्न होगी:</p>
+<pre><code>https://site.com            --&gt; mywebsite/index.html
+https://site.com/login.html --&gt; mywebsite/login.html
+https://site.com/admin/     --&gt; mywebsite/admin/index.html</code></pre>
+<p>हालाँकि, हमारे वेब ऐप के लिए हम सभी स्क्रीन वाले एक एकल HTML फ़ाइल का उपयोग कर रहे हैं ताकि यह डिफ़ॉल्ट व्यवहार हमारी मदद न करे। हमें इस नक्शे को मैन्युअल रूप से बनाना होगा और जावास्क्रिप्ट का उपयोग करके प्रदर्शित टेम्प्लेट को अपडेट करना होगा।</p>
+<h3 id="टास्क-2">टास्क</h3>
+<p>URL पथ और हमारे टेम्प्लेट के बीच एक <a href="https://en.wikipedia.org/wiki/Associative_array">मैप</a> को लागू करने के लिए हम एक साधारण वस्तु का उपयोग करेंगे। इस ऑब्जेक्ट को अपने <code>app.js</code> फ़ाइल के शीर्ष पर जोड़ें।</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">const</span> routes <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="st">&#39;/login&#39;</span><span class="op">:</span> <span class="op">{</span> <span class="dt">templateId</span><span class="op">:</span> <span class="st">&#39;login&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="st">&#39;/dashboard&#39;</span><span class="op">:</span> <span class="op">{</span> <span class="dt">templateId</span><span class="op">:</span> <span class="st">&#39;dashboard&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="op">};</span></a></code></pre></div>
+<p>अब चलो <code>updateRoute</code> फ़ंक्शन को थोड़ा संशोधित करते हैं। एक तर्क के रूप में सीधे <code>templateId</code> पास करने के बजाय, हम पहले वर्तमान URL को देखकर इसे पुनः प्राप्त करना चाहते हैं, और फिर संबंधित टेम्पलेट आईडी मान प्राप्त करने के लिए हमारे मानचित्र का उपयोग करते हैं। URL से केवल पथ अनुभाग प्राप्त करने के लिए हम <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/pathname"><code>window.location.pathname</code></a> का उपयोग कर सकते हैं।</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">function</span> <span class="at">updateRoute</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="kw">const</span> path <span class="op">=</span> <span class="va">window</span>.<span class="va">location</span>.<span class="at">pathname</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="kw">const</span> route <span class="op">=</span> routes[path]<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5">  <span class="kw">const</span> template <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="va">route</span>.<span class="at">templateId</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-6" title="6">  <span class="kw">const</span> view <span class="op">=</span> <span class="va">template</span>.<span class="va">content</span>.<span class="at">cloneNode</span>(<span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-7" title="7">  <span class="kw">const</span> app <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;app&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-8" title="8">  <span class="va">app</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-9" title="9">  <span class="va">app</span>.<span class="at">appendChild</span>(view)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="op">}</span></a></code></pre></div>
+<p>यहां हमने संबंधित टेम्प्लेट में घोषित मार्गों को मैप किया। आप इसे आज़मा सकते हैं कि यह आपके ब्राउज़र में URL को मैन्युअल रूप से बदलकर सही ढंग से काम करता है।</p>
+<p>✅ यदि आप URL में अज्ञात पथ दर्ज करते हैं तो क्या होगा? हम इसे कैसे हल कर सकते हैं?</p>
+<h2 id="नेवीगेशन-जोड़ना">नेवीगेशन जोड़ना</h2>
+<p>हमारे एप्लिकेशन के लिए अगला चरण मैन्युअल रूप से URL बदलने के बिना पृष्ठों के बीच नेविगेट करने की संभावना को जोड़ना है। इसका तात्पर्य दो चीजों से है:</p>
+<ol type="1">
+<li>वर्तमान URL को अद्यतन करना</li>
+<li>नए URL के आधार पर प्रदर्शित टेम्प्लेट को अपडेट करना</li>
+</ol>
+<p>हमने पहले ही <code>updateRoute</code> फ़ंक्शन के साथ दूसरे भाग का ध्यान रखा, इसलिए हमें यह पता लगाना होगा कि वर्तमान URL को कैसे अपडेट किया जाए।</p>
+<p>हमें जावास्क्रिप्ट और अधिक विशेष रूप से <a href="https://developer.mozilla.org/en-US/docs/Web/API/History/pushState"><code>history.pushState</code></a> का उपयोग करना होगा जो URL को अपडेट करने की अनुमति देता है HTML को पुनः लोड किए बिना, ब्राउज़िंग इतिहास में एक नई प्रविष्टि बनाएँ।</p>
+<blockquote>
+<p>नोट: जबकि HTML एंकर तत्व [<code>&lt;a href&gt;</code>] (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) का उपयोग हाइपरलिंक बनाने के लिए स्वयं किया जा सकता है विभिन्न यूआरएल, यह ब्राउज़र को डिफ़ॉल्ट रूप से HTML को फिर से लोड करेगा। क्लिक करें घटना पर preventDefault() फ़ंक्शन का उपयोग करके कस्टम जावास्क्रिप्ट के साथ रूटिंग को हैंडल करते समय इस व्यवहार को रोकना आवश्यक है।</p>
+</blockquote>
+<h3 id="टास्क-3">टास्क</h3>
+<p>आइए एक नया फ़ंक्शन बनाएं जिसे हम अपने ऐप में नेविगेट करने के लिए उपयोग कर सकते हैं:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">navigate</span>(path) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="va">window</span>.<span class="va">history</span>.<span class="at">pushState</span>(<span class="op">{},</span> path<span class="op">,</span> <span class="va">window</span>.<span class="va">location</span>.<span class="at">origin</span> <span class="op">+</span> path)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="at">updateRoute</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>यह विधि पहले दिए गए पथ के आधार पर वर्तमान URL को अपडेट करती है, फिर टेम्पलेट को अपडेट करती है। प्रॉपर्टी <code>window.location.origin</code> URL रूट लौटाती है, जिससे हम किसी दिए गए पथ से एक पूर्ण URL का पुनर्निर्माण कर सकते हैं।</p>
+<p>अब जब हमारे पास यह फ़ंक्शन है, तो हम इस समस्या का ध्यान रख सकते हैं कि अगर कोई रास्ता किसी परिभाषित मार्ग से मेल नहीं खाता है। यदि हम एक मैच नहीं पा सकते हैं, तो हम मौजूदा मार्ग में से किसी एक में वापसी को जोड़कर <code>updateRoute</code> फ़ंक्शन को संशोधित करेंगे।</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">function</span> <span class="at">updateRoute</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="kw">const</span> path <span class="op">=</span> <span class="va">window</span>.<span class="va">location</span>.<span class="at">pathname</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="kw">const</span> route <span class="op">=</span> routes[path]<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-4" title="4"></a>
+<a class="sourceLine" id="cb13-5" title="5">  <span class="cf">if</span> (<span class="op">!</span>route) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-6" title="6">    <span class="cf">return</span> <span class="at">navigate</span>(<span class="st">&#39;/login&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-8" title="8"></a>
+<a class="sourceLine" id="cb13-9" title="9">  ...</a></code></pre></div>
+<p>यदि कोई मार्ग नहीं मिल रहा है, तो हम अब <code>login</code> पेज पर रीडायरेक्ट करेंगे। Now let’s create a function to get the URL when a link is clicked, and to prevent the browser’s default link behavior:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">function</span> <span class="at">onLinkClick</span>(event) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="va">event</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="at">navigate</span>(<span class="va">event</span>.<span class="va">target</span>.<span class="at">href</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>HTML में हमारे <em>लॉगिन</em> और <em>लॉगआउट</em> लिंक से बाइंडिंग जोड़कर नेविगेशन सिस्टम को पूरा करें।</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/dashboard&quot;</span><span class="ot"> onclick=</span><span class="st">&quot;onLinkClick()&quot;</span><span class="kw">&gt;</span>Login<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb15-2" title="2">...</a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;/login&quot;</span><span class="ot"> onclick=</span><span class="st">&quot;onLinkClick()&quot;</span><span class="kw">&gt;</span>Logout<span class="kw">&lt;/a&gt;</span></a></code></pre></div>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onclick"><code>onclick</code></a> विशेषता का उपयोग करके जावास्क्रिप्ट कोड पर <code>click</code> ईवेंट को बांधें, यहाँ <code>navigate()</code> फ़ंक्शन पर कॉल करें।</p>
+<p>इन लिंक पर क्लिक करने का प्रयास करें, अब आपको अपने ऐप के विभिन्न स्क्रीन के बीच नेविगेट करने में सक्षम होना चाहिए।</p>
+<p>✅ <code>History.pushState</code> विधि HTML5 मानक का हिस्सा है और <a href="https://caniuse.com/?search=pushState">सभी आधुनिक ब्राउज़रों</a> में लागू किया गया है। यदि आप पुराने ब्राउज़रों के लिए एक वेब ऐप बना रहे हैं, तो इस एपीआई के स्थान पर आप एक ट्रिक का उपयोग कर सकते हैं: इससे पहले <a href="https://en.wikipedia.org/wiki/URI_fragment">हैश (<code>#</code>)</a> का उपयोग कर पथ आप नियमित एंकर नेविगेशन के साथ काम करने वाले रूटिंग को लागू कर सकते हैं और पृष्ठ को फिर से लोड नहीं करते हैं, क्योंकि इसका उद्देश्य एक पृष्ठ के भीतर आंतरिक लिंक बनाना था।</p>
+<h2 id="ब्राउजर-के-बैक-और-फॉरवर्ड-बटन-को-हैंडल-करना">ब्राउजर के बैक और फॉरवर्ड बटन को हैंडल करना</h2>
+<p><code>History.pushState</code> का उपयोग करके ब्राउज़र के नेविगेशन इतिहास में नई प्रविष्टियाँ बनाता है। आप देख सकते हैं कि आपके ब्राउज़र का <em>बैक बटन</em> पकड़कर, इसे कुछ इस तरह प्रदर्शित करना चाहिए:</p>
+<figure>
+<img src="../history.png" alt="नेविगेशन इतिहास का स्क्रीनशॉट" /><figcaption>नेविगेशन इतिहास का स्क्रीनशॉट</figcaption>
+</figure>
+<p>यदि आप कुछ बार बैक बटन पर क्लिक करने का प्रयास करते हैं, तो आप देखेंगे कि वर्तमान URL बदल जाता है और इतिहास अपडेट हो जाता है, लेकिन वही टेम्पलेट प्रदर्शित होता रहता है।</p>
+<p>ऐसा इसलिए है क्योंकि हमें नहीं पता है कि इतिहास बदलने के लिए हमें हर बार <code>updateRoute()</code> को कॉल करना होगा। यदि आप <a href="https://developer.mozilla.org/en-US/docs/Web/API/History/pushState"><code>history.pushState</code> दस्तावेज़ीकरण</a> पर एक नज़र डालते हैं, तो आप देख सकते हैं कि यदि राज्य बदलता है - इसका अर्थ है कि हम एक अलग URL पर चले गए - [<code>popstate</code>] (https://developer.mozilla.org/en-US/docs/Web/API/Window/popstate_event) इवेंट ट्रिगर है। हम उस समस्या को ठीक करने के लिए इसका उपयोग करेंगे।</p>
+<h3 id="टास्क-4">टास्क</h3>
+<p>यह सुनिश्चित करने के लिए कि ब्राउज़र इतिहास में परिवर्तन होने पर प्रदर्शित टेम्प्लेट को अपडेट किया जाता है, हम एक नया फ़ंक्शन संलग्न करेंगे जो <code>updateRoute()</code> कहता है। हम अपने <code>app.js</code> फ़ाइल के नीचे करेंगे:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="va">window</span>.<span class="at">onpopstate</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="at">updateRoute</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="at">updateRoute</span>()<span class="op">;</span></a></code></pre></div>
+<blockquote>
+<p>नोट: हमने एक <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Reference/Arrow_functions">एरो फंक्शन</a> का इस्तेमाल किया है ताकि हम अपने <code>poopstate</code> ईवेंट हैंडलर को संक्षिप्तता के लिए घोषित कर सकें, लेकिन नियमित कार्य एक ही काम करेगा।</p>
+</blockquote>
+<p>यहां एरो फंक्शन पर एक ताज़ा वीडियो है:</p>
+<p><a href="https://youtube.com/watch?v=OP6eEbOj2sc" title="एरो फंक्शन"><img src="https://img.youtube.com/vi/OP6eEbOj2sc/0.jpg" alt="एरो फंक्शन" /></a></p>
+<blockquote>
+<p>तीर के कार्यों के बारे में वीडियो के लिए ऊपर दी गई छवि पर क्लिक करें।</p>
+</blockquote>
+<p>अब अपने ब्राउज़र के बैक और फ़ॉरवर्ड बटन का उपयोग करने का प्रयास करें, और जांचें कि इस बार प्रदर्शित मार्ग सही ढंग से अपडेट किया गया है।</p>
+<hr />
+<h2 id="चुनौती">🚀 चुनौती</h2>
+<p>तीसरे पृष्ठ के लिए एक नया टेम्प्लेट और रूट जोड़ें जो इस ऐप के लिए क्रेडिट दिखाता है।</p>
+<h2 id="व्याख्यान-उपरांत-प्रश्नोत्तरी">व्याख्यान उपरांत प्रश्नोत्तरी</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/42?loc=hi">व्याख्यान उपरांत प्रश्नोत्तरी</a></p>
+<h2 id="समीक्षा-और-स्व-अध्ययन">समीक्षा और स्व अध्ययन</h2>
+<p>रूटिंग वेब विकास के आश्चर्यजनक रूप से मुश्किल भागों में से एक है, विशेष रूप से वेब पेज रीफ्रेश बिहेवियर से लेकर सिंगल पेज एप्लीकेशन पेज रिफ्रेश तक चलता है। <a href="https://docs.microsoft.com/en-us/azure/static-web-apps/routes?WT.mc_id=academic-13441-cxa">कैसे Azure स्टेटिक वेब ऐप सेवा</a> के बारे में थोड़ा पढ़ें रूटिंग । क्या आप बता सकते हैं कि उस दस्तावेज़ पर वर्णित कुछ निर्णय क्यों आवश्यक हैं?</p>
+<h2 id="असाइनमेंट">असाइनमेंट</h2>
+<p><a href="assignment.hi.md">रूटिंग में सुधार करें</a></p>
+</body>
+</html>

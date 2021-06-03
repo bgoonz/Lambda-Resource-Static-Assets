@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>couplet_dataset</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="couplet-dataset">Couplet Dataset</h1>
+<p>The couplet dataset is used in the <a href="https://int.openpai.org/plugin.html?index=0#/market_detail?itemId=2">Couplet Training Job Template</a>. You can also use this dataset to train your own couplet.</p>
+<p>The raw data is open sourced on GitHub, including about 70w pair couplet data. We preprocess the data to fit the couplet training job with <a href="https://github.com/pytorch/fairseq">fairseq</a> models.</p>
+<h2 id="about-the-dataset">About the dataset</h2>
+<h3 id="get-raw-data">Get raw data</h3>
+<p>The raw data are released on GitHub, you can <strong>download</strong> by click the link: <a href="https://github.com/wb14123/couplet-dataset/releases">couplet.tar.gz</a></p>
+<p>Extracted the file, data are organized as below:</p>
+<pre><code>.
+└── couplet
+    ├── test
+    │   ├── in.txt
+    │   └── out.txt
+    ├── train
+    │   ├── in.txt
+    │   └── out.txt
+    └── vocabs</code></pre>
+<p>There are training set and test set, with “in.txt” keeps the first line of a couplet (上联) and the “out.txt” keeps the second line of a couplet(下联) respectly. The setences stored in lines while each Chinese character is separated by a whitespace. For example:</p>
+<p>The 9 line in the in.txt of the training data is:</p>
+<pre><code>不 畏 鸿 门 传 汉 祚
+</code></pre>
+<p>The 9 line in the out.txt of the training data is:</p>
+<pre><code>难 堪 垓 下 别 虞 姬 </code></pre>
+<p>They form a couplet.</p>
+<h3 id="data-preprocess">Data preprocess</h3>
+<p>We preprocess the raw data to fit the <a href="https://int.openpai.org/plugin.html?index=0#/market_detail?itemId=2">Couplet Training Job Template</a> which use the fairseq models.</p>
+<ol type="1">
+<li><p>Merge the train and test data into one dataset. The file with <code>.up</code> suffix save the first line of the couplets, while the file with <code>.down</code> sufix save the second line of the couplets.</p></li>
+<li><p>Split the dataset to training, test and valid set with 98:1:1.</p>
+<p>For the specified split method, please view <a href="https://github.com/microsoft/ai-edu/blob/master/B-%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/B13-AI%E5%AF%B9%E8%81%94%E7%94%9F%E6%88%90%E6%A1%88%E4%BE%8B/docs/fairseq.md#%E5%88%92%E5%88%86%E6%95%B0%E6%8D%AE%E9%9B%86">here</a>.</p></li>
+</ol>
+<p>After preprocessing, we got the 6 data files.</p>
+<pre><code>.
+└── couplet_data
+    ├── test.down
+    ├── test.up
+    ├── train.down
+    ├── train.up
+    ├── valid.down
+    └── valid.up</code></pre>
+<h2 id="how-to-use">How to use</h2>
+<h3 id="download-to-local">Download to local</h3>
+<ol type="1">
+<li><p>You can download the <code>couplet_data.tgz</code> file by click the <code>Download</code> buttton.</p></li>
+<li><p>The dataset is stored on <code>Azure Blob Storage</code>, you can access the dataset via below url:</p>
+<pre><code>https://openpaimarketplace.blob.core.windows.net/marketplace/Couplet_data/couplet_data.tgz</code></pre></li>
+</ol>
+<h3 id="use-via-openpai-job-submission">Use via OpenPAI job submission</h3>
+<p>You can also submit an OpenPAI job with this data by adding <code>DATA_DIR</code> environment variable.</p>
+<pre><code>mkdir -p /data/
+cd /data
+wget &lt;% $data.uri[0] %&gt;
+tar xvf couplet_data.tgz
+export DATA_DIR=/data/couplet_data/</code></pre>
+<p>The parameter <code>data.uri[0]</code> is defined in the config file (under the <code>prerequisites</code> and <code>taskToles</code> items), which indicates the dataset address on Azure Blob Storage.</p>
+<pre><code>prerequisites:
+  - name: couplet_data
+    type: data
+    uri:
+      - &gt;-
+        https://openpaimarketplace.blob.core.windows.net/marketplace/Couplet_data/couplet_data.tgz
+taskRoles:
+  taskrole:
+    instances: 1
+    data: couplet_data</code></pre>
+<p>You can click “Edit YAML” on the <strong>Job submission</strong> page to get more information.</p>
+<h3 id="use-in-the-code">Use in the code</h3>
+<p>This is a simple example to show how to pass in the <code>DATA_DIR</code> to python code through the command.</p>
+<ul>
+<li>command line: <code>python3 test.py --data_dir ${DATA_DIR}</code></li>
+<li><p>Add below code to test.py: ``` import argparse</p>
+<p>parser = argparse.ArgumentParser() args = parser.add_argument(‘–data_dir’, default=None, help=“The path of the data dir”)</p>
+<p>train_up = args.data_dir + “/train.up” train_down = args.data_dir + “/train.down”</p>
+<p>… ```</p></li>
+</ul>
+<h2 id="related-project">Related project</h2>
+<p>The data is also used in the <a href="https://github.com/microsoft/ai-edu/tree/master/B-%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B/B13-AI%E5%AF%B9%E8%81%94%E7%94%9F%E6%88%90%E6%A1%88%E4%BE%8B">AI对联生成案例</a> on <a href="https://github.com/microsoft/ai-edu">AI-Edu Community</a>.</p>
+</body>
+</html>

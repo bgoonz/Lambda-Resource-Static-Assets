@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2012-09-18" />
+  <title>OAuth2: Authenticate users with Google</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">OAuth2: Authenticate users with Google</h1>
+<p class="date">2012-09-18</p>
+</header>
+<p>{% include ‘partials/extensions/mv2-legacy-page.md’ %}</p>
+<p><a href="https://oauth.net/2/">OAuth2</a> is the industry-standard protocol for authorization. It provides a mechanism for users to grant web and desktop applications access to private information without sharing their username, password and other private credentials.</p>
+<p>This tutorial builds an extension that accesses a user’s Google contacts using the <a href="https://developers.google.com/people/">Google People API</a> and the <a href="/identity">Chrome Identity API</a>. Because extensions don’t load over HTTPS, can’t perform redirects or set cookies, they rely on the Chrome Identity API to use OAuth2.</p>
+<h2 id="get-started-set_up">Get started {: #set_up }</h2>
+<p>Begin by creating a directory and the following starter files.</p>
+<p>The full, completed extension can be downloaded <a href="examples/tutorials/oauth_tutorial_complete.zip">here</a>.</p>
+<h3 id="manifest.json-manifest">manifest.json {: #manifest }</h3>
+<p>Add the manifest by creating a file called <code>manifest.json</code> and include the following code. Or download the file <a href="examples/tutorials/oauth_starter/manifest.json">here</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;OAuth Tutorial FriendBlock&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Uses OAuth to connect to Google&#39;s People API and display contacts photos.&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">&quot;manifest_version&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="dt">&quot;browser_action&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="dt">&quot;default_title&quot;</span><span class="fu">:</span> <span class="st">&quot;FriendBlock, friends face&#39;s in a block.&quot;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="dt">&quot;background&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-10" title="10">    <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-11" title="11">      <span class="st">&quot;background.js&quot;</span></a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-13" title="13">    <span class="dt">&quot;persistent&quot;</span><span class="fu">:</span> <span class="kw">false</span></a>
+<a class="sourceLine" id="cb1-14" title="14">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="fu">}</span></a></code></pre></div>
+<h3 id="background.js-background">background.js {: #background }</h3>
+<p>Add the background script by creating a file called <code>background.js</code> and include the following code. Or download the file <a href="examples/tutorials/oauth_starter/background.js">here</a>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">chrome</span>.<span class="va">browserAction</span>.<span class="va">onClicked</span>.<span class="at">addListener</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="va">chrome</span>.<span class="va">tabs</span>.<span class="at">create</span>(<span class="op">{</span><span class="dt">url</span><span class="op">:</span> <span class="st">&#39;index.html&#39;</span><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="index.html-index">index.html {: #index }</h3>
+<p>Add an HTML file called <code>index.html</code> and include the following code. Or download the file <a href="examples/tutorials/oauth_starter/index.html">here</a>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="kw">&lt;title&gt;</span>FriendBlock<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">&lt;style&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">      button {</a>
+<a class="sourceLine" id="cb3-6" title="6">        <span class="kw">padding</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">        <span class="kw">background-color</span>: <span class="cn">#3C79F8</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">        <span class="kw">display</span>: <span class="dv">inline-block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">      }</a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="kw">&lt;/style&gt;</span></a>
+<a class="sourceLine" id="cb3-11" title="11">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb3-12" title="12">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="kw">&lt;button&gt;</span>FriendBlock Contacts<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb3-14" title="14">    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;friendDiv&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-15" title="15">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<h2 id="upload-to-the-developer-dashboard-upload_to_dashboard">Upload to the developer dashboard {: #upload_to_dashboard }</h2>
+<p>Package the extension directory into a <code>.zip</code> file and upload it to the <a href="https://chrome.google.com/webstore/developer/dashboard">Chrome Developer Dashboard</a> without publishing it:</p>
+<ol type="1">
+<li>At the Developer Dashboard, click <strong>Add new item</strong>.</li>
+<li>Click <strong>Choose file</strong> and select the <code>.zip</code> extension directory and upload it.</li>
+<li>Without filling in additional fields, select <strong>Save Draft and return to dashboard</strong>.</li>
+</ol>
+<p>Find the extension under <strong>Your Listings</strong> and click on <strong>more info</strong>. From the popup, copy the public key and add it to the manifest inside the unzipped directory under the <a href="/key"><code>"key"</code></a> field.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;OAuth Tutorial FaceBlcok&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="er">...</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="dt">&quot;key&quot;</span><span class="fu">:</span> <span class="st">&quot;ThisKeyIsGoingToBeVeryLong/go8GGC2u3UD9WI3MkmBgyiDPP2OreImEQhPvwpliioUMJmERZK3zPAx72z8MDvGp7Fx7ZlzuZpL4yyp4zXBI+MUhFGoqEh32oYnm4qkS4JpjWva5Ktn4YpAWxd4pSCVs8I4MZms20+yx5OlnlmWQEwQiiIwPPwG1e1jRw0Ak5duPpE3uysVGZXkGhC5FyOFM+oVXwc1kMqrrKnQiMJ3lgh59LjkX4z1cDNX3MomyUMJ+I+DaWC2VdHggB74BNANSd+zkPQeNKg3o7FetlDJya1bk8ofdNBARxHFMBtMXu/ONfCT3Q2kCY9gZDRktmNRiHG/1cXhkIcN1RWrbsCkwIDAQAB&quot;</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="fu">}</span></a></code></pre></div>
+<h2 id="compare-ids-extension_management">Compare IDs {: #extension_management }</h2>
+<p>Open the Extensions Management page at <code>chrome://extensions</code>, ensure developer mode is enabled and upload the unpackaged extension directory. Compare the extension ID on the extensions management page to the Item ID in the Developer Dashboard. They should match.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/n6jGhPAAxEjOweiTePjP.png”, alt=“The ID of the extension matches in all places”, height=“438”, width=“567” %}</p>
+<p>The extension will maintain the same ID by including the <code>"key"</code> field in the manifest. Preserving a single ID is essential for API registration.</p>
+<h2 id="create-oauth-client-id-oauth_client">Create OAuth client ID {: #oauth_client }</h2>
+<p>Navigate to the <a href="https://console.developers.google.com/apis">Google API console</a> and create a new project. Once ready, select <strong>Credentials</strong> in the sidebar, click <strong>Create credentials</strong> and choose <strong>OAuth client ID</strong>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/iC6LC1PYreTxndYmLEWN.png”, alt=“Create credentials for extension”, height=“478”, width=“800” %}</p>
+<p>On the Create client ID page, select <strong>Chrome App</strong>. Fill out the name of the extension and place the extension ID at the end of the URL in the Application ID field.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/CwgbnssSgeRtqHGxRbpd.png”, alt=“Fill out extension information”, height=“366”, width=“800” %}</p>
+<p>Finish by clicking create. The console will provide an OAuth client ID.</p>
+<h2 id="register-oauth-in-manifest-oauth_registration">Register OAuth in manifest {: #oauth_registration }</h2>
+<p>Include the <code>"oauth2"</code> field in the extension manifest. Place the generated OAuth client ID under <code>"client_id"</code>. Include an empty string in <code>"scopes"</code> for now.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;OAuth Tutorial FriendBlock&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="dt">&quot;oauth2&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-5" title="5">    <span class="dt">&quot;client_id&quot;</span><span class="fu">:</span> <span class="st">&quot;yourExtensionOAuthClientIDWillGoHere.apps.googleusercontent.com&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="dt">&quot;scopes&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="st">&quot;&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<h2 id="initiate-first-oauth-flow-identity_permission">Initiate first OAuth flow {: #identity_permission }</h2>
+<p>Register the <a href="/identity"><code>identity</code></a> permission in the manifest.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;OAuth Tutorial FaceBlcok&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb6-5" title="5">    <span class="st">&quot;identity&quot;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<p>Create a file to manage the OAuth flow called <code>oauth.js</code> and include the following code. Or download it <a href="examples/tutorials/oauth_starter/oauth.js">here</a>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="va">window</span>.<span class="at">onload</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;button&#39;</span>).<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="va">chrome</span>.<span class="va">identity</span>.<span class="at">getAuthToken</span>(<span class="op">{</span><span class="dt">interactive</span><span class="op">:</span> <span class="kw">true</span><span class="op">},</span> <span class="kw">function</span>(token) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-4" title="4">      <span class="va">console</span>.<span class="at">log</span>(token)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="op">};</span></a></code></pre></div>
+<p>Place a script tag for <code>oauth.js</code> in the head of <code>index.html</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb8-1" title="1">...</a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="kw">&lt;title&gt;</span>FriendBlock<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    ...</a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="ot"> src=</span><span class="st">&quot;oauth.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb8-6" title="6">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb8-7" title="7">...</a></code></pre></div>
+<p>Reload the extension and click on the browser icon to open <code>index.html</code>. Open the console and click on the “FriendBlock Contacts” button. An OAuth token will appear in the console.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/aXVIN7YRfBnDc3ItHVJ2.png”, alt=“View the token in the console”, height=“227”, width=“800” %}</p>
+<h2 id="enable-the-google-people-api-enable_people">Enable the Google People API {: #enable_people }</h2>
+<p>Return to the Google API console and select <strong>Library</strong> from the sidebar. Search for “Google People API”, click on the correct result and enable it.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/AQbJX735qIGEJUephhXf.png”, alt=“Enable the People API”, height=“319”, width=“693” %}</p>
+<p>Add the <a href="https://developers.google.com/people/">Google People API</a> client library to <code>"scopes"</code> in the extension manifest.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;OAuth Tutorial FaceBlcok&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="dt">&quot;oauth2&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-5" title="5">    <span class="dt">&quot;client_id&quot;</span><span class="fu">:</span> <span class="st">&quot;yourExtensionOAuthClientIDWillGoHere.apps.googleusercontent.com&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="dt">&quot;scopes&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb9-7" title="7">      <span class="st">&quot;https://www.googleapis.com/auth/contacts.readonly&quot;</span></a>
+<a class="sourceLine" id="cb9-8" title="8">    <span class="ot">]</span></a>
+<a class="sourceLine" id="cb9-9" title="9">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-10" title="10">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="fu">}</span></a></code></pre></div>
+<p>Return to the Google API console and navigate back to credentials. Click “Create credentials” and select “API key” from the dropdown.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/c8Fpzw5f3fihBgx1RbIr.png”, alt=“Create People API credentials”, height=“369”, width=“699” %}</p>
+<p>Keep the generated API key for later use.</p>
+<h2 id="create-first-api-request-create_call">Create first API request {: #create_call }</h2>
+<p>Now that the extension has proper permissions, credentials, and can authorize a Google user, it can request data through the People API. Update the code in <code>oauth.js</code> to match below.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="va">window</span>.<span class="at">onload</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;button&#39;</span>).<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="va">chrome</span>.<span class="va">identity</span>.<span class="at">getAuthToken</span>(<span class="op">{</span><span class="dt">interactive</span><span class="op">:</span> <span class="kw">true</span><span class="op">},</span> <span class="kw">function</span>(token) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-4" title="4">      <span class="kw">let</span> init <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-5" title="5">        <span class="dt">method</span><span class="op">:</span> <span class="st">&#39;GET&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-6" title="6">        <span class="dt">async</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-7" title="7">        <span class="dt">headers</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-8" title="8">          <span class="dt">Authorization</span><span class="op">:</span> <span class="st">&#39;Bearer &#39;</span> <span class="op">+</span> token<span class="op">,</span></a>
+<a class="sourceLine" id="cb10-9" title="9">          <span class="st">&#39;Content-Type&#39;</span><span class="op">:</span> <span class="st">&#39;application/json&#39;</span></a>
+<a class="sourceLine" id="cb10-10" title="10">        <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-11" title="11">        <span class="st">&#39;contentType&#39;</span><span class="op">:</span> <span class="st">&#39;json&#39;</span></a>
+<a class="sourceLine" id="cb10-12" title="12">      <span class="op">};</span></a>
+<a class="sourceLine" id="cb10-13" title="13">      <span class="at">fetch</span>(</a>
+<a class="sourceLine" id="cb10-14" title="14">          <span class="st">&#39;https://people.googleapis.com/v1/contactGroups/all?maxMembers=20&amp;key=&lt;API_Key_Here&gt;&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-15" title="15">          init)</a>
+<a class="sourceLine" id="cb10-16" title="16">          .<span class="at">then</span>((response) <span class="kw">=&gt;</span> <span class="va">response</span>.<span class="at">json</span>())</a>
+<a class="sourceLine" id="cb10-17" title="17">          .<span class="at">then</span>(<span class="kw">function</span>(data) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-18" title="18">            <span class="va">console</span>.<span class="at">log</span>(data)</a>
+<a class="sourceLine" id="cb10-19" title="19">          <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-20" title="20">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-21" title="21">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-22" title="22"><span class="op">};</span></a></code></pre></div>
+<p>Replace <code>&lt;API_Key_Here&gt;</code> with the API key generated from the Google API console. The extension should log a JSON object that includes an array of <code>people/account_id</code>s under the <code>memberResourceNames</code> field.</p>
+<h2 id="block-faces-block_faces">Block faces {: #block_faces }</h2>
+<p>Now that the extension is returning a list of the user’s contacts, it can make additional requests to <a href="https://developers.google.com/people/v1/read-people">retrieve those contact’s profiles and information</a> . The extension will use the <code>memberResourceNames</code> to retrieve the photo information of user contacts. Update <code>oauth.js</code> to include the following code.</p>
+<pre class="js/22"><code>window.onload = function() {
+  document.querySelector(&#39;button&#39;).addEventListener(&#39;click&#39;, function() {
+    chrome.identity.getAuthToken({interactive: true}, function(token) {
+      let init = {
+        method: &#39;GET&#39;,
+        async: true,
+        headers: {
+          Authorization: &#39;Bearer &#39; + token,
+          &#39;Content-Type&#39;: &#39;application/json&#39;
+        },
+        &#39;contentType&#39;: &#39;json&#39;
+      };
+      fetch(
+          &#39;https://people.googleapis.com/v1/contactGroups/all?maxMembers=20&amp;key=&lt;API_Key_Here&gt;&#39;,
+          init)
+          .then((response) =&gt; response.json())
+          .then(function(data) {
+            let photoDiv = document.querySelector(&#39;#friendDiv&#39;);
+            let returnedContacts = data.memberResourceNames;
+            for (let i = 0; i &lt; returnedContacts.length; i++) {
+              fetch(
+                  &#39;https://people.googleapis.com/v1/&#39; + returnedContacts[i] +
+                      &#39;?personFields=photos&amp;key=&lt;API_Key_Here&gt;&#39;,
+                  init)
+                  .then((response) =&gt; response.json())
+                  .then(function(data) {
+                    let profileImg = document.createElement(&#39;img&#39;);
+                    profileImg.src = data.photos[0].url;
+                    photoDiv.appendChild(profileImg);
+                  });
+            };
+          });
+    });
+  });
+};</code></pre>
+<p>Reload and return to the extension. Click the FriendBlock button and ta-da! Enjoy contact’s faces in a block.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/EQkrpv2o5kKIWPYHVhXn.png”, alt=“Contact faces in a block”, height=“359”, width=“397” %}</p>
+</body>
+</html>

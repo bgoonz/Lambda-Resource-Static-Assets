@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.id</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="dasar-dasar-javascript-membuat-keputusan">Dasar-dasar JavaScript: Membuat Keputusan</h1>
+<figure>
+<img src="/sketchnotes/webdev101-js-decisions.png" alt="Dasar-dasar JavaScript - Membuat Keputusan" /><figcaption>Dasar-dasar JavaScript - Membuat Keputusan</figcaption>
+</figure>
+<blockquote>
+<p>Sketsa oleh <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+</blockquote>
+<h2 id="kuis-pra-kuliah">Kuis Pra-Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/11?loc=id">Kuis pra-Kuliah</a></p>
+<p>Membuat keputusan dan mengontrol urutan kode Anda berjalan membuat kode Anda dapat digunakan kembali dan kuat. Bagian ini membahas sintaks untuk mengontrol aliran data di JavaScript dan signifikansinya saat digunakan dengan tipe data Boolean.</p>
+<p><a href="https://youtube.com/watch?v=SxTp8j-fMMY" title="Membuat keputusan"><img src="https://img.youtube.com/vi/SxTp8j-fMMY/0.jpg" alt="Membuat keputusan" /></a></p>
+<h2 id="rekap-singkat-tentang-boolean">Rekap Singkat tentang Boolean</h2>
+<p>Boolean hanya dapat berupa dua nilai: <code>true</code> atau <code>false</code>. Boolean membantu membuat keputusan tentang baris kode mana yang harus dijalankan ketika kondisi tertentu terpenuhi.</p>
+<p>Setel boolean Anda menjadi true atau false seperti ini:</p>
+<p><code>let myTrueBool = true</code> <code>let myFalseBool = false</code></p>
+<p>✅ Nama Boolean diambil dari ahli matematika, filsuf, dan ahli logika Inggris George Boole (1815-1864).</p>
+<h2 id="operator-perbandingan-dan-boolean">Operator Perbandingan dan Boolean</h2>
+<p>Operator digunakan untuk mengevaluasi kondisi dengan membuat perbandingan yang akan menghasilkan nilai Boolean. Berikut ini adalah daftar operator yang sering digunakan.</p>
+<table>
+<colgroup>
+<col style="width: 3%" />
+<col style="width: 87%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Simbol</th>
+<th>Deskripsi</th>
+<th>Contoh</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td><strong>Kurang dari</strong>: Membandingkan dua nilai dan mengembalikan jenis data Boolean <code>true</code> jika nilai di sisi kiri kurang dari kanan</td>
+<td><code>5 &lt; 6 // true</code></td>
+</tr>
+<tr class="even">
+<td><code>&lt;=</code></td>
+<td><strong>Kurang dari atau sama dengan</strong>: Membandingkan dua nilai dan mengembalikan jenis data Boolean <code>true</code> jika nilai di sisi kiri kurang dari atau sama dengan kanan</td>
+<td><code>5 &lt;= 6 // true</code></td>
+</tr>
+<tr class="odd">
+<td><code>&gt;</code></td>
+<td><strong>Lebih besar dari</strong>: Membandingkan dua nilai dan mengembalikan tipe data Boolean <code>true</code> jika nilai di sisi kiri lebih besar dari kanan</td>
+<td><code>5 &gt; 6 // false</code></td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td><strong>Lebih besar dari atau sama dengan</strong>: Membandingkan dua nilai dan mengembalikan jenis data Boolean <code>true</code> jika nilai di sisi kiri lebih besar dari atau sama dengan kanan</td>
+<td><code>5 &gt;= 6 // false</code></td>
+</tr>
+<tr class="odd">
+<td><code>===</code></td>
+<td><strong>Kesetaraan ketat</strong>: Membandingkan dua nilai dan mengembalikan jenis data Boolean <code>true</code> jika nilai di kanan dan kiri sama DAN merupakan jenis data yang sama.</td>
+<td><code>5 === 6 // false</code></td>
+</tr>
+<tr class="even">
+<td><code>!==</code></td>
+<td><strong>Ketidaksamaan</strong>: Membandingkan dua nilai dan mengembalikan nilai Boolean yang berlawanan dari yang akan dikembalikan oleh operator persamaan ketat</td>
+<td><code>5 !== 6 // true</code></td>
+</tr>
+</tbody>
+</table>
+<p>✅ Uji pengetahuan Anda dengan menulis beberapa perbandingan di konsol browser Anda. Apakah data yang dikembalikan mengejutkan Anda?</p>
+<h2 id="pernyataan-if">Pernyataan If</h2>
+<p>Pernyataan if akan menjalankan kode di antara bloknya jika kondisinya benar.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">if</span> (kondisi) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="co">//Kondisinya benar. Kode di blok ini akan berjalan.</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Operator logika sering digunakan untuk membentuk kondisi tersebut.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">let</span> uangSekarang<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">let</span> hargaLaptop<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="cf">if</span> (uangSekarang <span class="op">&gt;=</span> hargaLaptop) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="co">//Kondisinya benar. Kode di blok ini akan berjalan.</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Mendapatkan laptop baru!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="op">}</span></a></code></pre></div>
+<h2 id="pernyataan-if..else">Pernyataan IF..Else</h2>
+<p>Pernyataan <code>else</code> akan menjalankan kode di antara bloknya jika kondisinya salah. Ini opsional dengan pernyataan <code>if</code>, jadi tidak semua <code>if</code> harus diikuti dengan pernyataan <code>else</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">let</span> uangSekarang<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">let</span> hargaLaptop<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="cf">if</span> (uangSekarang <span class="op">&gt;=</span> hargaLaptop) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="co">//Kondisinya benar. Kode di blok ini akan berjalan.</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Mendapatkan laptop baru!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="co">//Kondisinya benar. Kode di blok ini akan berjalan.</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Belum bisa membeli laptop baru!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="op">}</span></a></code></pre></div>
+<p>✅ Uji pemahaman Anda tentang kode ini dan kode berikut dengan menjalankannya di konsol browser. Ubah nilai variabel uangSekarang dan hargaLaptop untuk mengubah <code>console.log()</code> yang dikembalikan.</p>
+<h2 id="operator-logis-dan-boolean">Operator Logis dan Boolean</h2>
+<p>Keputusan mungkin memerlukan lebih dari satu perbandingan, dan dapat digabungkan dengan operator logika untuk menghasilkan nilai Boolean.</p>
+<table>
+<colgroup>
+<col style="width: 2%" />
+<col style="width: 54%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Simbol</th>
+<th>Deskripsi</th>
+<th>Contoh</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&amp;&amp;</code></td>
+<td><strong>Logical AND</strong>: Membandingkan dua ekspresi Boolean. Mengembalikan nilai benar <strong>hanya</strong> jika kedua sisi benar</td>
+<td><code>(5 &gt; 6) &amp;&amp; (5 &lt; 6 ) //Satu sisi salah, sisi lainnya benar. Mengembalikan nilai salah</code></td>
+</tr>
+<tr class="even">
+<td><code>\|\|</code></td>
+<td><strong>Logical OR</strong>: Membandingkan dua ekspresi Boolean. Mengembalikan nilai benar jika setidaknya satu sisi benar</td>
+<td><code>(5 &gt; 6) \|\| (5 &lt; 6) //Satu sisi salah, sisi lainnya benar. Mengembalikan nilai true</code></td>
+</tr>
+<tr class="odd">
+<td><code>!</code></td>
+<td><strong>Logical NOT</strong>: Menampilkan nilai kebalikan dari ekspresi Boolean</td>
+<td><code>!(5 &gt; 6) // 5 tidak lebih besar dari 6, tapi "!" akan kembali benar</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="kondisi-dan-keputusan-dengan-operator-logis">Kondisi dan Keputusan dengan Operator Logis</h2>
+<p>Operator logika dapat digunakan untuk membentuk kondisi dalam pernyataan if..else.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">let</span> uangSekarang<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">let</span> hargaLaptop<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">let</span> hargaDiskonLaptop <span class="op">=</span> hargaLaptop <span class="op">-</span> hargaLaptop <span class="op">*</span> <span class="fl">0.2</span><span class="op">;</span> <span class="co">//Harga laptop diskon 20 persen</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="cf">if</span> (uangSekarang <span class="op">&gt;=</span> hargaLaptop <span class="op">||</span> uangSekarang <span class="op">&gt;=</span> hargaDiskonLaptop) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="co">//Kondisinya benar. Kode di blok ini akan berjalan.</span></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Mendapatkan laptop baru!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="co">//Kondisinya benar. Kode di blok ini akan berjalan.</span></a>
+<a class="sourceLine" id="cb4-10" title="10">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Belum bisa membeli laptop baru!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="op">}</span></a></code></pre></div>
+<h3 id="operator-negasi">Operator Negasi</h3>
+<p>Anda telah melihat sejauh ini bagaimana jika Anda bisa menggunakan pernyataan <code>if ... else</code> untuk membuat logika kondisional. Apa pun yang menjadi <code>jika</code> perlu dievaluasi menjadi benar / salah. Dengan menggunakan operator <code>!</code> Anda dapat <em>negate</em> ekspresi. Ini akan terlihat seperti ini:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="cf">if</span> (<span class="op">!</span>kondisi) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="co">// berjalan jika kondisinya false</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="co">// berjalan jika kondisinya true</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="op">}</span></a></code></pre></div>
+<h3 id="ekspresi-terner">Ekspresi Terner</h3>
+<p><code>if ... else</code> bukanlah satu-satunya cara untuk mengekspresikan logika keputusan. Anda juga dapat menggunakan sesuatu yang disebut operator terner (ternary operator). Sintaksnya terlihat seperti ini:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">let</span> variable <span class="op">=</span> kondisi <span class="op">?</span> <span class="op">&lt;</span>kembalikan ini jika benar<span class="op">&gt;</span> : <span class="op">&lt;</span>kembalikan ini jika salah<span class="op">&gt;</span><span class="vs">`</span></a></code></pre></div>
+<p>Di bawah ini adalah contoh yang lebih nyata:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">let</span> nomorPertama <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">let</span> nomorKedua <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">let</span> nomorTerbesar <span class="op">=</span> nomorPertama <span class="op">&gt;</span> nomorKedua <span class="op">?</span> nomorPertama : nomorKedua<span class="op">;</span></a></code></pre></div>
+<p>✅ Luangkan waktu sebentar untuk membaca kode ini beberapa kali. Apakah Anda memahami cara kerja operator ini?</p>
+<p>Di atas menyatakan bahwa</p>
+<ul>
+<li>jika <code>nomorPertama</code> lebih besar dari <code>nomorKedua</code></li>
+<li>tetapkan <code>nomorPertama</code> ke <code>nomorTerbesar</code></li>
+<li>jika tidak tetapkan <code>nomorKedua</code>.</li>
+</ul>
+<p>Ekspresi terner hanyalah cara ringkas untuk menulis kode di bawah ini:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">let</span> nomorTerbesar<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="cf">if</span> (nomorPertama <span class="op">&gt;</span> nomorKedua) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  nomorTerbesar <span class="op">=</span> nomorPertama<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  nomorTerbesar <span class="op">=</span> nomorKedua<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="op">}</span></a></code></pre></div>
+<hr />
+<h2 id="tantangan">🚀 Tantangan</h2>
+<p>Buat program yang ditulis pertama kali dengan operator logika, lalu tulis ulang menggunakan ekspresi terner. Apa sintaks pilihan Anda?</p>
+<h2 id="kuis-pasca-kuliah">Kuis Pasca-Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/12?loc=id">Kuis pasca-kuliah</a></p>
+<h2 id="review-belajar-mandiri">Review &amp; Belajar Mandiri</h2>
+<p>Baca lebih lanjut tentang banyak operator yang tersedia untuk pengguna <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators">di MDN</a>.</p>
+<p>Lihat <a href="https://joshwcomeau.com/operator-lookup/">pencarian operator</a> oleh Josh Comeau yang luar biasa!</p>
+<h2 id="tugas">Tugas</h2>
+<p><a href="./assignment.id.md">Operator</a></p>
+</body>
+</html>

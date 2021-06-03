@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Versioning</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Versioning</h1>
+</header>
+<p>You can use the version script to create a new documentation version based on the latest content in the <code>docs</code> directory. That specific set of documentation will then be preserved and accessible even as the documentation in the <code>docs</code> directory changes moving forward.</p>
+<div class="caution">
+<p>Think about it before starting to version your documentation - it can become difficult for contributors to help improve it!</p>
+</div>
+<p>Most of the time, you don’t need versioning as it will just increase your build time, and introduce complexity to your codebase. Versioning is <strong>best suited for websites with high-traffic and rapid changes to documentation between versions</strong>. If your documentation rarely changes, don’t add versioning to your documentation.</p>
+<p>To better understand how versioning works and see if it suits your needs, you can read on below.</p>
+<h2 id="directory-structure">Directory structure</h2>
+<pre class="shell"><code>website
+├── sidebars.json        # sidebar for master (next) version
+├── docs                 # docs directory for master (next) version
+│   ├── foo
+│   │   └── bar.md       # https://mysite.com/docs/next/foo/bar
+│   └── hello.md         # https://mysite.com/docs/next/hello
+├── versions.json        # file to indicate what versions are available
+├── versioned_docs
+│   ├── version-1.1.0
+│   │   ├── foo
+│   │   │   └── bar.md   # https://mysite.com/docs/foo/bar
+│   │   └── hello.md
+│   └── version-1.0.0
+│       ├── foo
+│       │   └── bar.md   # https://mysite.com/docs/1.0.0/foo/bar
+│       └── hello.md
+├── versioned_sidebars
+│   ├── version-1.1.0-sidebars.json
+│   └── version-1.0.0-sidebars.json
+├── docusaurus.config.js
+└── package.json</code></pre>
+<p>The table below explains how a versioned file maps to its version and the generated URL.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Path</th>
+<th>Version</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>versioned_docs/version-1.0.0/hello.md</code></td>
+<td>1.0.0</td>
+<td>/docs/1.0.0/hello</td>
+</tr>
+<tr class="even">
+<td><code>versioned_docs/version-1.1.0/hello.md</code></td>
+<td>1.1.0 (latest)</td>
+<td>/docs/hello</td>
+</tr>
+<tr class="odd">
+<td><code>docs/hello.md</code></td>
+<td>next</td>
+<td>/docs/next/hello</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tagging-a-new-version">Tagging a new version</h3>
+<ol type="1">
+<li>First, make sure your content in the <code>docs</code> directory is ready to be frozen as a version. A version always should be based from master.</li>
+<li>Enter a new version number.</li>
+</ol>
+<p><code>bash npm2yarn npm run docusaurus docs:version 1.1.0</code></p>
+<p>When tagging a new version, the document versioning mechanism will:</p>
+<ul>
+<li>Copy the full <code>docs/</code> folder contents into a new <code>versioned_docs/version-&lt;version&gt;/</code> folder.</li>
+<li>Create a versioned sidebars file based from your current <a href="docs-introduction.md#sidebar">sidebar</a> configuration (if it exists) - saved as <code>versioned_sidebars/version-&lt;version&gt;-sidebars.json</code>.</li>
+<li>Append the new version number to <code>versions.json</code>.</li>
+</ul>
+<h2 id="docs">Docs</h2>
+<h3 id="creating-new-docs">Creating new docs</h3>
+<ol type="1">
+<li>Place the new file into the corresponding version folder.</li>
+<li>Include the reference for the new file into the corresponding sidebar file, according to version number.</li>
+</ol>
+<p><strong>Master docs</strong></p>
+<pre class="shell"><code># The new file.
+docs/new.md
+
+# Edit the corresponding sidebar file.
+sidebar.js</code></pre>
+<p><strong>Older docs</strong></p>
+<pre class="shell"><code># The new file.
+versioned_docs/version-1.0.0/new.md
+
+# Edit the corresponding sidebar file.
+versioned_sidebars/version-1.0.0-sidebars.json</code></pre>
+<h3 id="linking-docs">Linking docs</h3>
+<ul>
+<li>Remember to include the <code>.md</code> extension.</li>
+<li>Files will be linked to correct corresponding version.</li>
+<li>Relative paths work as well.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb4-1" title="1">The <span class="ot">[@hello](hello.md#paginate)</span> document is great!</a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3">See the <span class="ot">[Tutorial](../getting-started/tutorial.md)</span> for more info.</a></code></pre></div>
+<h2 id="versions">Versions</h2>
+<p>Each directory in <code>versioned_docs/</code> will represent a documentation version.</p>
+<h3 id="updating-an-existing-version">Updating an existing version</h3>
+<p>You can update multiple docs versions at the same time because each directory in <code>versioned_docs/</code> represents specific routes when published.</p>
+<ol type="1">
+<li>Edit any file.</li>
+<li>Commit and push changes.</li>
+<li>It will be published to the version.</li>
+</ol>
+<p>Example: When you change any file in <code>versioned_docs/version-2.6/</code>, it will only affect the docs for version <code>2.6</code>.</p>
+<h3 id="deleting-an-existing-version">Deleting an existing version</h3>
+<p>You can delete/remove versions as well.</p>
+<ol type="1">
+<li>Remove the version from <code>versions.json</code>.</li>
+</ol>
+<p>Example:</p>
+<p><code>diff {4} [   "2.0.0",   "1.9.0", - "1.8.0" ]</code></p>
+<ol start="2" type="1">
+<li>Delete the versioned docs directory. Example: <code>versioned_docs/version-1.8.0</code>.</li>
+<li>Delete the versioned sidebars file. Example: <code>versioned_sidebars/version-1.8.0-sidebars.json</code>.</li>
+</ol>
+<h2 id="recommended-practices">Recommended practices</h2>
+<h3 id="figure-out-the-behavior-for-the-current-version">Figure out the behavior for the “current” version</h3>
+<p>The “current” version is the version name for the <code>./docs</code> folder.</p>
+<p>There are different ways to manage versioning, but two very common patterns are:</p>
+<ul>
+<li>You release v1, and start immediately working on v2 (including its docs)</li>
+<li>You release v1, and will maintain it for some time before thinking about v2.</li>
+</ul>
+<p>Docusaurus defaults work great for the first usecase.</p>
+<p><strong>For the 2nd usecase</strong>: if you release v1 and don’t plan to work on v2 anytime soon, instead of versioning v1 and having to maintain the docs in 2 folders (<code>./docs</code> + <code>./versioned_docs/version-1.0.0</code>), you may consider using the following configuration instead:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="dt">&quot;lastVersion&quot;</span><span class="fu">:</span> <span class="st">&quot;current&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="dt">&quot;versions&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="dt">&quot;current&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-5" title="5">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-6" title="6">      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0.0&quot;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<p>The docs in <code>./docs</code> will be served at <code>/docs/1.0.0</code> instead of <code>/docs/next</code>, and <code>1.0.0</code> will become the default version we link to in the navbar dropdown, and you will only need to maintain a single <code>./docs</code> folder.</p>
+<p>See <a href="../../api/plugins/plugin-content-docs.md">docs plugin configuration</a> for more details.</p>
+<h3 id="version-your-documentation-only-when-needed">Version your documentation only when needed</h3>
+<p>For example, you are building a documentation for your npm package <code>foo</code> and you are currently in version 1.0.0. You then release a patch version for a minor bug fix and it’s now 1.0.1.</p>
+<p>Should you cut a new documentation version 1.0.1? <strong>You probably shouldn’t</strong>. 1.0.1 and 1.0.0 docs shouldn’t differ according to semver because there are no new features!. Cutting a new version for it will only just create unnecessary duplicated files.</p>
+<h3 id="keep-the-number-of-versions-small">Keep the number of versions small</h3>
+<p>As a good rule of thumb, try to keep the number of your versions below 10. <strong>It is very likely</strong> that you will have a lot of obsolete versioned documentation that nobody even reads anymore. For example, <a href="https://jestjs.io/versions">Jest</a> is currently in version <code>24.9</code>, and only maintains several latest documentation version with the lowest being <code>22.X</code>. Keep it small 😊</p>
+<h3 id="use-absolute-import-within-the-docs">Use absolute import within the docs</h3>
+<p>Don’t use relative paths import within the docs. Because when we cut a version the paths no longer work (the nesting level is different, among other reasons). You can utilize the <code>@site</code> alias provided by docusaurus, that points to the <code>website</code> directory. Example:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode diff"><code class="sourceCode diff"><a class="sourceLine" id="cb6-1" title="1"><span class="st">- import Foo from &#39;../src/components/Foo&#39;;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="va">+ import Foo from &#39;@site/src/components/Foo&#39;;</span></a></code></pre></div>
+<h3 id="global-or-versioned-colocated-assets">Global or versioned colocated assets</h3>
+<p>You should decide if assets like images and files are per version or shared between versions</p>
+<p>If your assets should be versioned, put them in the docs version, and use relative paths:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb7-1" title="1"><span class="al">![img alt](./myImage.png)</span></a>
+<a class="sourceLine" id="cb7-2" title="2"></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="ot">[download this file](./file.pdf)</span></a></code></pre></div>
+<p>If your assets are global, put them in <code>/static</code> and use absolute paths:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb8-1" title="1"><span class="al">![img alt](/myImage.png)</span></a>
+<a class="sourceLine" id="cb8-2" title="2"></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="ot">[download this file](/file.pdf)</span></a></code></pre></div>
+</body>
+</html>

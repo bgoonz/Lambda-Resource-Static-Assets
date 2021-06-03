@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2021-02-28" />
+  <title>What’s New In DevTools (Chrome 90)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 90)</h1>
+<p class="date">2021-02-28</p>
+</header>
+<p>{% Aside %} Interested in helping improve DevTools? Sign up to participate in <a href="https://google.qualtrics.com/jfe/form/SV_9YbKj35IGoGsDBj?reserved=1&amp;utm_source=Website%20feature&amp;Q_Language=en&amp;utm_medium=own_web&amp;utm_campaign=Q4&amp;productTag=chrm&amp;campaignDate=November2020&amp;referral_code=UXFm430458">Google User Research here</a>. {% endAside %}</p>
+<p>{% YouTube id=“UyXPdYLQVQk” %}</p>
+<p>{% YouTube id=“kOodTLAjPsE” %}</p>
+<h2 id="new-css-flexbox-debugging-tools-flexbox">New CSS flexbox debugging tools {: #flexbox }</h2>
+<p>DevTools now has dedicated CSS flexbox debugging tools!</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/hbg2toNQJqIWB30Mo2xt.png”, alt=“CSS flexbox debugging tools”, width=“800”, height=“452” %}</p>
+<p>When an HTML element on your page has <code>display: flex</code> or <code>display: inline-flex</code> applied to it, you can see a <code>flex</code> badge next to it in the Elements panel. Click the badge to toggle the display of a flex overlay on the page.</p>
+<p>In the <strong>Styles</strong> pane, you can click on the new icon next to the <code>display: flex</code> or <code>display: inline-flex</code> to open the <strong>Flexbox</strong> editor. Flexbox editor provides a quick way to edit the flexbox properties. Try it yourself!</p>
+<p>In addition, the <strong>Layout</strong> pane has a <strong>Flexbox</strong> section, display all the flexbox elements on the page. You can toggle the overlay of each element.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/pgEhguLqTSHn5AuiA7Ti.png”, alt=“Flexbox section in the Layout pane”, width=“800”, height=“303” %}</p>
+<p>Chromium issues: <a href="https://crbug.com/1166710">1166710</a>, <a href="https://crbug.com/1175699">1175699</a></p>
+<h2 id="new-core-web-vitals-overlay-cwv">New Core Web Vitals overlay {: #cwv }</h2>
+<p>Better visualize and measure your page performance with the new Core Web Vitals overlay.</p>
+<p><a href="https://web.dev/vitals/">Core Web Vitals</a> is an initiative by Google to provide unified guidance for quality signals that are essential to delivering a great user experience on the web.</p>
+<p>Open the <a href="/docs/devtools/command-menu">Command Menu</a>, run the <strong>Show Rendering</strong> command, and then enable the <strong>Core Web Vitals</strong> checkbox.</p>
+<p>The overlay currently displays:</p>
+<ul>
+<li><a href="https://web.dev/lcp/">Largest Contentful Paint (LCP)</a>: measures <em>loading performance</em>. To provide a good user experience, LCP should occur <strong>within 2.5 seconds</strong> of when the page first starts loading.</li>
+<li><a href="https://web.dev/fid/">First Input Delay (FID)</a>: measures <em>interactivity</em>. To provide a good user experience, pages should have a FID of <strong>less than 100 milliseconds</strong>.</li>
+<li><a href="https://web.dev/cls/">Cumulative Layout Shift (CLS)</a>: measures <em>visual stability</em>. To provide a good user experience, pages should maintain a CLS of <strong>less than 0.1</strong>.</li>
+</ul>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/95Iw3l9ePIopJuApx65h.png”, alt=“Core Web Vitals overlay”, width=“800”, height=“506” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1152089">1152089</a></p>
+<h2 id="issues-tab-updates-issues">Issues tab updates {: #issues }</h2>
+<h3 id="moved-issue-count-to-the-console-status-bar-issue-count">Moved issue count to the Console status bar {: #issue-count }</h3>
+<p>A new issue count button is now added in the <strong>Console status bar</strong> to improve the visibility of issues warnings. This will replace the issue message in the <strong>Console</strong>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/vg2AGCiq8IWkXU7MoHR9.png”, alt=“Issue count in the Console status bar”, width=“800”, height=“487” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1140516">1140516</a></p>
+<h3 id="report-trusted-web-activity-issues-twa">Report Trusted Web Activity issues {: #twa }</h3>
+<p>The <strong>Issues tab</strong> now reports <a href="/docs/android/trusted-web-activity/overview">Trusted Web Activity</a> issues. This aims to help developers understand and fix the Trusted Web Activity issues of their sites, improving the quality of their applications.</p>
+<p>Open a Trusted Web Activity. Then, open the <strong>Issues</strong> tabs by clicking on the <a href="#issue-count">Issues count</a> button in the <strong>Console</strong> status bar to view the issues. Watch this <a href="https://youtu.be/QJlbMfW3jPc">talk</a> by Andre to learn more about how to create and deploy Trusted Web Activity.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/FSoAR540YOC6B86Cl7l7.png”, alt=“Trusted Web Activity issues in the Issues tab”, width=“800”, height=“453” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1147479">1147479</a></p>
+<h2 id="format-strings-as-valid-javascript-string-literals-in-the-console-double-quotes">Format strings as (valid) JavaScript string literals in the Console {: #double-quotes }</h2>
+<p>Now, the <strong>Console</strong> formats strings as valid JavaScript string literals in the Console. Previously, the <strong>Console</strong> would not escape double quotes when printing strings.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/4OPajz8MHz5lPMhPpzg5.png”, alt=“Format strings as (valid) JavaScript string literals”, width=“800”, height=“439” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1178530">1178530</a></p>
+<h2 id="new-trust-tokens-pane-in-the-application-panel-trust-token-pane">New Trust Tokens pane in the Application panel {: #trust-token-pane }</h2>
+<p>DevTools now displays all available Trust Tokens in the current browsing context in the new <strong>Trust Tokens</strong> pane, under the <strong>Application</strong> panel.</p>
+<p>Trust Token is a new API to help combat fraud and distinguish bots from real humans, without passive tracking. Learn how to <a href="https://web.dev/trust-tokens/">get started with Trust Tokens</a>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/j5idcrmLOWTIcd6vG0q9.png”, alt=“New Trust Tokens pane”, width=“800”, height=“474” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1126824">1126824</a></p>
+<h2 id="emulate-the-css-color-gamut-media-feature-css-gamut">Emulate the CSS color-gamut media feature {: #css-gamut }</h2>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/OpwDY2ebDj8aOzTR9RlS.png”, alt=“Emulate the CSS color-gamut media feature”, width=“800”, height=“463” %}</p>
+<p>The <a href="https://www.chromestatus.com/feature/5354410980933632"><code>color-gamut</code></a> media query lets you test the approximate range of colors that are supported by the browser and the output device. For example, if the <code>color-gamut: p3</code> media query matches, it means that the user’s device supports the Display-P3 colorspace.</p>
+<p>Open the <a href="/docs/devtools/command-menu">Command Menu</a>, run the <strong>Show Rendering</strong> command, and then set the <strong>Emulate CSS media feature color-gamut</strong> dropdown.</p>
+<p>Chromium issue: <a href="https://crbug.com/1073887">1073887</a></p>
+<h2 id="improved-progressive-web-apps-tooling-pwa">Improved Progressive Web Apps tooling {: #pwa }</h2>
+<p>DevTools now display a more detailed <a href="https://web.dev/progressive-web-apps/">Progressive Web Apps (PWA)</a> installability warning message in the <strong>Console</strong>, with a link to <a href="https://goo.gle/improved-pwa-offline-detection">documentation</a>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/gotE1NFtBfITfdz4QDei.png”, alt=“PWA installability warning”, width=“800”, height=“346” %}</p>
+<p>The <strong>Manifest</strong> pane now shows a warning message if the manifest <strong>description</strong> exceeds 324 characters.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/DIxxWCedyNCknMSvO1rb.png”, alt=“PWA description truncate warning”, width=“800”, height=“514” %}</p>
+<p>In addition, the <strong>Manifest</strong> pane now shows a warning message if the screenshot of the PWA doesn’t match the requirements. Learn more about the the PWA <a href="https://web.dev/add-manifest/#screenshots">screenshots</a> property and its requirements here.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/lZzs7jdcln4N1D6PEBA6.png”, alt=“PWA screenshot warning”, width=“800”, height=“299” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1146450">1146450</a>, <a href="https://crbug.com/1169689">1169689</a>, <a href="https://crbug.com/965802">965802</a></p>
+<h2 id="new-remote-address-space-column-in-the-network-panel-remote-address-space">New <code>Remote Address Space</code> column in the Network panel {: #remote-address-space }</h2>
+<p>Use the new <code>Remote Address Space</code> column in the Network panel to see the network IP address space of each network resource.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/Wz4Z5hiSK66IKoRWQGDj.png”, alt=“New ‘Remote Address Space’ column”, width=“800”, height=“470” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1128885">1128885</a></p>
+<h2 id="performance-improvements-perf">Performance improvements {: #perf }</h2>
+<p>Page loads performance with DevTools opened are now improved. In some extreme cases we saw <strong>10x</strong> performance improvements.</p>
+<p>DevTools collects stack traces and attaches them to console messages or asynchronous tasks for later consumption by the developer in case of an issue. Since this collection has to happen synchronously in the browser engine, slow stack trace collection can significantly slow down the page with DevTools open. We’ve managed to reduce the overhead of stack trace collection significantly.</p>
+<p>Stay tuned for a more detailed engineering blog post explained on the implementation.</p>
+<p>Chromium issues: <a href="https://crbug.com/1069425">1069425</a>, <a href="https://crbug.com/1077657">1077657</a></p>
+<h2 id="display-alloweddisallowed-features-in-the-frame-details-view-permission-policy">Display allowed/disallowed features in the Frame details view {: #permission-policy }</h2>
+<p>Frame details view now shows a list of allowed and disallowed browser features controlled by the Permissions policy.</p>
+<p><a href="https://github.com/w3c/webappsec-permissions-policy/blob/main/permissions-policy-explainer.md">Permissions policy</a> is a web platform API which gives a website the ability to allow or block the use of browser features in its own frame or in iframes that it embeds.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/Ylt0ONDSndEn36MPmRUS.png”, alt=“Allowed/disallowed features based on Permission policy”, width=“800”, height=“497” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1158827">1158827</a></p>
+<h2 id="new-sameparty-column-in-the-cookies-pane-sameparty">New <code>SameParty</code> column in the Cookies pane {: #sameparty }</h2>
+<p>The Cookies pane in the Application panel now displays the <code>SameParty</code> attribute of the cookies. The <code>SameParty</code> attribute is a new boolean attribute to indicate whether a cookie should be included in requests to origins of the same <a href="https://github.com/privacycg/first-party-sets">First-Party Sets</a>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/8qaTUkcNI1wv0qh4U00g.png”, alt=“SameParty column”, width=“800”, height=“497” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1161427">1161427</a></p>
+<h2 id="deprecated-non-standard-fn.displayname-support-display-name">Deprecated non-standard <code>fn.displayName</code> support {: #display-name }</h2>
+<p>Support for the non-standard <code>fn.displayName</code> has been deprecated. Use <code>fn.name</code> instead.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/oXk5CGKAAPyJIQeecS0I.png”, alt=“Example usage of displayName”, width=“800”, height=“488” %}</p>
+<p>Chrome has traditionally supported the non-standard <code>fn.displayName</code> property as a way for developers to control debug names for functions that show up in <code>error.stack</code> and in DevTools stack traces. In the example above, the <strong>Call Stack</strong> would previously show <code>noLongerSupport</code>.</p>
+<p>Replace <code>fn.displayName</code> with the standard <code>fn.name</code>, which was made configurable (via <code>Object.defineProperty</code>) in ECMAScript 2015 to replace the non-standard<code>fn.displayName</code> property.</p>
+<p>Support for <code>fn.displayName</code> has been unreliable and not consistent across browser engines. It slows down stack trace collection, a cost that developers always pay no matter whether they actually use <code>fn.displayName</code> or not.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/aieojilTMlsewNdAaHHh.png”, alt=“Example usage of name”, width=“800”, height=“455” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1177685">1177685</a></p>
+<h2 id="deprecation-of-dont-show-chrome-data-saver-warning-in-the-settings-menu-data-saver-warning">Deprecation of <code>Don't show Chrome Data Saver warning</code> in the Settings menu {: #data-saver-warning }</h2>
+<p>The <code>Don't show Chrome Data Saver warning</code> setting is removed because <a href="https://blog.chromium.org/2019/04/data-saver-is-now-lite-mode.html">Chrome Data Saver has been deprecated</a>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/d0T9rqp1ASln0kWXE41w.png”, alt=“Deprecated ‘Don’t show Chrome Data Saver warning’ settings”, width=“800”, height=“473” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1056922">1056922</a></p>
+<h2 id="experimental-features-experimental">Experimental features {: #experimental }</h2>
+<h3 id="automatic-low-contrast-issue-reporting-in-the-issues-tab-low-contrast">Automatic low-contrast issue reporting in the Issues tab {: #low-contrast }</h3>
+<p>{% Aside %}</p>
+<p>To enable the experiment, check the <strong>Enable automatic contrast issue reporting via the Issues panel</strong> checkbox under <strong>Settings</strong> &gt; <strong>Experiments</strong>.</p>
+<p>{% endAside %}</p>
+<p>DevTools added experimental support for reporting contrast issues in the Issues tab automatically.</p>
+<p><a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">Low-contrast text</a> is the most common automatically-detectable accessibility issue on the web. Displaying these issues in the Issues tab helps developers discover these issues easier.</p>
+<p>Open a page with low-contrast issues (e.g. this <a href="https://jec.fyi/demo/cds-anchovy">demo</a>). Then, open the <strong>Issues</strong> tabs by clicking on the <a href="#issue-count">Issues count</a> button in the <strong>Console</strong> status bar to view the issues.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/rZE5UWUXF4K9JCMA3oSF.png”, alt=“Automatic low-contrast issue reporting”, width=“800”, height=“520” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1155460">1155460</a></p>
+<h3 id="full-accessibility-tree-view-in-the-elements-panel-accesibility-tree">Full accessibility tree view in the Elements panel {: #accesibility-tree }</h3>
+<p>{% Aside %}</p>
+<p>To enable the experiment, check the <strong>Full accessibility tree view in Elements pane</strong> checkbox under <strong>Settings</strong> &gt; <strong>Experiments</strong>.</p>
+<p>{% endAside %}</p>
+<p>You can now toggle to view the new and improved full accessibility tree view of a page.</p>
+<p>The current <a href="/docs/devtools/accessibility/reference#pane">accessibility pane</a> provides a limited display of its nodes, only showing the direct ancestor chain from the root node to the inspected node. The new accessibility tree view aims to improve that and makes the accessibility tree more explorable, useful, and easier for developers to use.</p>
+<p>After enabling the experiment, a new button will show in the <strong>Elements</strong> panel, click to switch between the existing DOM tree and the full accessibility tree.</p>
+<p>Please note that this is an early-stage experiment. We plan to improve and expand the functionality over time.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/pkTyHQF0YfbgiE9IZufX.png”, alt=“Full accessibility tree view”, width=“800”, height=“535” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/887173">887173</a></p>
+</body>
+</html>

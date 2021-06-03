@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.zh-tw</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="javascript-入門---做出決定">JavaScript 入門 - 做出決定</h1>
+<p><img src="/sketchnotes/webdev101-js-decisions.png" alt="JavaScript 入門 - 做出決定" /> &gt; 由 <a href="https://twitter.com/girlie_mac">Tomomi Imura</a> 繪製</p>
+<h2 id="課前測驗">課前測驗</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/11?loc=zh_tw">課前測驗</a></p>
+<p>為程式碼做決定與控制順序以提高其重複利用性與豐富性。這堂課程提供 JavaScript 的資料流控制語法與布林資料型的重點。</p>
+<p><a href="https://youtube.com/watch?v=SxTp8j-fMMY" title="做出決定"><img src="https://img.youtube.com/vi/SxTp8j-fMMY/0.jpg" alt="做出決定" /></a></p>
+<blockquote>
+<p>點擊上方圖片以觀賞關於程式做決定的影片。</p>
+</blockquote>
+<h2 id="回顧布林資料型">回顧布林資料型</h2>
+<p>布林只能有兩種數值： <code>true</code> 或 <code>false</code>。 布林幫助程式碼間在特定的條件下做出決定。</p>
+<p>設定布林值的方式如下：</p>
+<p><code>let myTrueBool = true</code> <code>let myFalseBool = false</code></p>
+<p>✅ 布林的命名來源為一位英格蘭數學家、哲學家暨邏輯學家喬治·布爾 George Boole (1815–1864)。</p>
+<h2 id="關係運算子與布林">關係運算子與布林</h2>
+<p>運算子會被使用在執行比較上，並回傳布林值。以下是常用的運算子列表。</p>
+<table>
+<thead>
+<tr class="header">
+<th>符號</th>
+<th>描述</th>
+<th>舉例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td><strong>小於</strong>： 比較兩數，當左數小於右數時，回傳 <code>true</code>。</td>
+<td><code>5 &lt; 6 // true</code></td>
+</tr>
+<tr class="even">
+<td><code>&lt;=</code></td>
+<td><strong>小於等於</strong>： 比較兩數，當左數小於右數或左數等於右數時，回傳 <code>true</code>。</td>
+<td><code>5 &lt;= 6 // true</code></td>
+</tr>
+<tr class="odd">
+<td><code>&gt;</code></td>
+<td><strong>大於</strong>： 比較兩數，當左數大於右數時，回傳 <code>true</code>。</td>
+<td><code>5 &gt; 6 // false</code></td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td><strong>大於等於</strong>： 比較兩數，當左數大於右數或左數等於右數時，回傳 <code>true</code>。</td>
+<td><code>5 &gt;= 6 // false</code></td>
+</tr>
+<tr class="odd">
+<td><code>===</code></td>
+<td><strong>嚴格相等</strong>： 比較兩數，當左數等於右數且有相同的資料型態時，回傳 <code>true</code>。</td>
+<td><code>5 === 6 // false</code></td>
+</tr>
+<tr class="even">
+<td><code>!==</code></td>
+<td><strong>嚴格不等於</strong>： 比較兩數，回傳值與嚴格相等恰恰相反。</td>
+<td><code>5 !== 6 // true</code></td>
+</tr>
+</tbody>
+</table>
+<p>✅ 藉由在瀏覽器命令欄中撰寫關係運算子來驗證你學到的知識。你有什麼意外發現嗎?</p>
+<h2 id="if-條件式">If 條件式</h2>
+<p>當條件成立時，If 條件式會執行區塊內的程式碼。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">if</span> (condition)<span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="co">//Condition was true. Code in this block will run.</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>邏輯運算子常被用在建立條件上。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">let</span> currentMoney<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">let</span> laptopPrice<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="cf">if</span> (currentMoney <span class="op">&gt;=</span> laptopPrice)<span class="op">{</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="co">//Condition was true. Code in this block will run.</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Getting a new laptop!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="op">}</span></a></code></pre></div>
+<h2 id="if..else-條件式">IF..Else 條件式</h2>
+<p>當條件不成立時，<code>else</code> 條件式會執行區塊內的程式碼。它可以和 <code>if</code> 條件式選擇性地使用。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">let</span> currentMoney<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">let</span> laptopPrice<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="cf">if</span> (currentMoney <span class="op">&gt;=</span> laptopPrice)<span class="op">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="co">// if 條件成立時，這段程式碼會被執行。</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Getting a new laptop!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="cf">else</span><span class="op">{</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="co">// else 條件成立時，這段程式碼會被執行。</span></a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Can&#39;t afford a new laptop, yet!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="op">}</span></a></code></pre></div>
+<p>✅ 在瀏覽器命令欄中測試你是否了解上述程式碼的意義。改變變數 currentMoney 和 laptopPrice 的數值來取得不同的回傳值 <code>console.log()</code>。</p>
+<h2 id="邏輯運算子與布林">邏輯運算子與布林</h2>
+<p>有時候條件內容包含兩個以上的比較，邏輯運算子可以協助串接比較式來回傳布林值。</p>
+<table>
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 54%" />
+<col style="width: 41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>符號</th>
+<th>描述</th>
+<th>舉例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&amp;&amp;</code></td>
+<td><strong>邏輯和</strong>： 比較兩個布林條件式，當兩者<strong>皆</strong>回傳 <code>true</code> 時，回傳 <code>true</code>。</td>
+<td><code>(5 &gt; 6) &amp;&amp; (5 &lt; 6 ) //左為false、右為true，回傳 false。</code></td>
+</tr>
+<tr class="even">
+<td><code>\|\|</code></td>
+<td><strong>邏輯或</strong>： 比較兩個布林條件式，當其中一個回傳 <code>true</code> 時，回傳 <code>true</code>。</td>
+<td><code>(5 &gt; 6) \|\| (5 &lt; 6) //左為false、右為true，回傳 true。</code></td>
+</tr>
+<tr class="odd">
+<td><code>!</code></td>
+<td><strong>邏輯非</strong>： 回傳布林條件式的相反回傳值。</td>
+<td><code>!(5 &gt; 6) // 5 不大於 6，但 "!" 讓回傳值為 true。</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="邏輯運算子下的決定與條件">邏輯運算子下的決定與條件</h2>
+<p>邏輯運算子可以用在建立 if..else 條件式中的條件。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">let</span> currentMoney<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">let</span> laptopPrice<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">let</span> laptopDiscountPrice <span class="op">=</span> laptopPrice <span class="op">-</span> (laptopPrice <span class="op">*</span> <span class="fl">.20</span>) <span class="co">//Laptop price at 20 percent off</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="cf">if</span> (currentMoney <span class="op">&gt;=</span> laptopPrice <span class="op">||</span> currentMoney <span class="op">&gt;=</span> laptopDiscountPrice)<span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="co">// if 條件成立時，這段程式碼會被執行。</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Getting a new laptop!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-10" title="10">    <span class="co">// else 條件成立時，這段程式碼會被執行。</span></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Can&#39;t afford a new laptop, yet!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="op">}</span></a></code></pre></div>
+<h3 id="否定運算子">否定運算子</h3>
+<p>你已經了解如何在 <code>if...else</code> 條件式中建立條件。任何 <code>if</code> 條件需要決定它的是與否。利用運算子 <code>!</code> 來 <em>否定</em> 結果。它以下列方式呈現：</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="cf">if</span> (<span class="op">!</span>condition) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="co">// condition 為 false 時，執行。</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="co">// condition 為 true 時，執行。</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="op">}</span></a></code></pre></div>
+<h3 id="條件運算子">條件運算子</h3>
+<p><code>if...else</code> 並不是唯一表達條件式的方式。你也可以使用名為條件運算子的符號。語法如下：</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">let</span> variable <span class="op">=</span> condition <span class="op">?</span> <span class="op">&lt;</span>條件成立時回傳 A<span class="op">&gt;</span> : <span class="op">&lt;</span>條件否定時回傳 B<span class="op">&gt;</span></a></code></pre></div>
+<p>下列是較明確的例子：</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">let</span> firstNumber <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">let</span> secondNumber <span class="op">=</span> <span class="dv">10</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">let</span> biggestNumber <span class="op">=</span> firstNumber <span class="op">&gt;</span> secondNumber <span class="op">?</span> firstNumber: secondNumber<span class="op">;</span></a></code></pre></div>
+<p>✅ 花點時間閱讀這段程式碼。你能了解這些運算子的運作方式嗎?</p>
+<p>上述的狀態為： - 若 <code>firstNumber</code> 大於 <code>secondNumber</code> 時 - 則賦予 <code>firstNumber</code> 數值 <code>biggestNumber</code> - 否則賦予為數值 <code>secondNumber</code>。</p>
+<p>條件運算子的另一種表達方式為：</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">let</span> biggestNumber<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="cf">if</span> (firstNumber <span class="op">&gt;</span> secondNumber) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  biggestNumber <span class="op">=</span> firstNumber<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  biggestNumber <span class="op">=</span> secondNumber<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="op">}</span></a></code></pre></div>
+<hr />
+<h2 id="挑戰">🚀 挑戰</h2>
+<p>建立一個程式，使用邏輯運算式來做判斷，再將程式碼改寫成條件運算子。你喜歡用哪一種語法?</p>
+<hr />
+<h2 id="課後測驗">課後測驗</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/12?loc=zh_tw">課後測驗</a></p>
+<h2 id="複習與自學">複習與自學</h2>
+<p>閱讀更多可被使用的運算子：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators">MDN</a>。</p>
+<p>瀏覽 Josh Comeau 所編制的<a href="https://joshwcomeau.com/operator-lookup/">運算子查詢表</a>！</p>
+<h2 id="作業">作業</h2>
+<p><a href="assignment.zh-tw.md">運算子</a></p>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>cli</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="cli">CLI</h1>
+<p>Docusaurus provides a set of scripts to help you generate, serve, and deploy your website.</p>
+<p>Once your website is bootstrapped, the website source will contain the Docusaurus scripts that you can invoke with your package manager:</p>
+<p><code>json title="package.json" {   // ...   "scripts": {     "docusaurus": "docusaurus",     "start": "docusaurus start",     "build": "docusaurus build",     "swizzle": "docusaurus swizzle",     "deploy": "docusaurus deploy",     "clear": "docusaurus clear",     "serve": "docusaurus serve",     "write-translations": "docusaurus write-translations",     "write-heading-ids": "docusaurus write-heading-ids"   } }</code></p>
+<h2 id="index">Index</h2>
+<p>import TOCInline from “<span class="citation" data-cites="theme/TOCInline">@theme/TOCInline</span>”</p>
+<p><TOCInline toc={toc[1].children}/></p>
+<h2 id="docusaurus-cli-commands">Docusaurus CLI commands</h2>
+<p>Below is a list of Docusaurus CLI commands and their usages:</p>
+<h3 id="docusaurus-start-sitedir"><code>docusaurus start [siteDir]</code></h3>
+<p>Builds and serves a preview of your site locally with <a href="https://webpack.js.org/configuration/dev-server">Webpack Dev Server</a>.</p>
+<h4 id="options">Options</h4>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--port</code></td>
+<td><code>3000</code></td>
+<td>Specifies the port of the dev server.</td>
+</tr>
+<tr class="even">
+<td><code>--host</code></td>
+<td><code>localhost</code></td>
+<td>Specify a host to use. For example, if you want your server to be accessible externally, you can use <code>--host 0.0.0.0</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>--hot-only</code></td>
+<td><code>false</code></td>
+<td>Enables Hot Module Replacement without page refresh as fallback in case of build failures. More information <a href="https://webpack.js.org/configuration/dev-server/#devserverhotonly">here</a>.</td>
+</tr>
+<tr class="even">
+<td><code>--no-open</code></td>
+<td><code>false</code></td>
+<td>Do not open automatically the page in the browser.</td>
+</tr>
+<tr class="odd">
+<td><code>--config</code></td>
+<td><code>undefined</code></td>
+<td>Path to docusaurus config file, default to <code>[siteDir]/docusaurus.config.js</code></td>
+</tr>
+<tr class="even">
+<td><code>--poll [optionalIntervalMs]</code></td>
+<td><code>false</code></td>
+<td>Use polling of files rather than watching for live reload as a fallback in environments where watching doesn’t work. More information <a href="https://webpack.js.org/configuration/watch/#watchoptionspoll">here</a>.</td>
+</tr>
+</tbody>
+</table>
+<div class="important">
+<p>Please note that some functionality (for example, anchor links) will not work in development. The functionality will work as expected in production.</p>
+</div>
+<h4 id="enabling-https">Enabling HTTPS`</h4>
+<p>There are multiple ways to obtain a certificate. We will use <a href="https://github.com/FiloSottile/mkcert">mkcert</a> as an example.</p>
+<ol type="1">
+<li><p>Run <code>mkcert localhost</code> to generate <code>localhost.pem</code> + <code>localhost-key.pem</code></p></li>
+<li><p>Run <code>mkcert -install</code> to install the cert in your trust store, and restart your browser</p></li>
+<li><p>Start the app with Docusaurus HTTPS env variables:</p></li>
+</ol>
+<pre class="shell"><code>HTTPS=true SSL_CRT_FILE=localhost.pem SSL_KEY_FILE=localhost-key.pem yarn start</code></pre>
+<ol start="4" type="1">
+<li>Open <code>https://localhost:3000/</code></li>
+</ol>
+<h3 id="docusaurus-build-sitedir"><code>docusaurus build [siteDir]</code></h3>
+<p>Compiles your site for production.</p>
+<h4 id="options-1">Options</h4>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--bundle-analyzer</code></td>
+<td><code>false</code></td>
+<td>Analyze your bundle with the <a href="https://github.com/webpack-contrib/webpack-bundle-analyzer">webpack bundle analyzer</a>.</td>
+</tr>
+<tr class="even">
+<td><code>--out-dir</code></td>
+<td><code>build</code></td>
+<td>The full path for the new output directory, relative to the current workspace.</td>
+</tr>
+<tr class="odd">
+<td><code>--config</code></td>
+<td><code>undefined</code></td>
+<td>Path to docusaurus config file, default to <code>[siteDir]/docusaurus.config.js</code></td>
+</tr>
+<tr class="even">
+<td><code>--no-minify</code></td>
+<td><code>false</code></td>
+<td>Build website without minimizing JS/CSS bundles.</td>
+</tr>
+</tbody>
+</table>
+<div class="info">
+<p>For advanced minification of CSS bundle, we use the <a href="https://github.com/cssnano/cssnano/tree/master/packages/cssnano-preset-advanced">advanced cssnano preset</a> (along with additional several PostCSS plugins) and <a href="https://github.com/jakubpawlowicz/clean-css#level-2-optimizations">level 2 optimization of clean-css</a>. If as a result of this advanced CSS minification you find broken CSS, build your website with the environment variable <code>USE_SIMPLE_CSS_MINIFIER=true</code> to minify CSS with the <a href="https://github.com/cssnano/cssnano/tree/master/packages/cssnano-preset-default">default cssnano preset</a>. <strong>Please <a href="https://github.com/facebook/docusaurus/issues/new?labels=bug%2C+needs+triage&amp;template=bug.md">fill out an issue</a> if you experience CSS minification bugs.</strong></p>
+</div>
+<h3 id="docusaurus-swizzle-sitedir"><code>docusaurus swizzle [siteDir]</code></h3>
+<div class="caution">
+<p>We highly discourage swizzling of components until we’ve reached a Beta stage. The components APIs have been changing rapidly and are likely to keep changing until we reach Beta. Stick with the default appearance for now if possible to save yourself some potential pain in future.</p>
+</div>
+<p>Change any Docusaurus theme components to your liking with <code>npm run swizzle</code>.</p>
+<p>```bash npm2yarn npm run swizzle [themeName] [componentName] [siteDir]</p>
+<h1 id="example-leaving-out-the-sitedir-to-indicate-this-directory">Example (leaving out the siteDir to indicate this directory)</h1>
+<p>npm run swizzle <span class="citation" data-cites="docusaurus/theme-classic">@docusaurus/theme-classic</span> DocSidebar ```</p>
+<p>Running the command will copy the relevant theme files to your site folder. You may then make any changes to it and Docusaurus will use it instead of the one provided from the theme.</p>
+<p><code>npm run swizzle</code> without <code>themeName</code> lists all the themes available for swizzling; similarly, <code>npm run swizzle &lt;themeName&gt;</code> without <code>componentName</code> lists all the components available for swizzling.</p>
+<h4 id="options-2">Options</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>themeName</code></td>
+<td>The name of the theme you are using.</td>
+</tr>
+<tr class="even">
+<td><code>swizzleComponent</code></td>
+<td>The name of the component to swizzle.</td>
+</tr>
+<tr class="odd">
+<td><code>--danger</code></td>
+<td>Allow swizzling of unstable components</td>
+</tr>
+<tr class="even">
+<td><code>--typescript</code></td>
+<td>Swizzle TypeScript components</td>
+</tr>
+</tbody>
+</table>
+<p>An example to use <code>--danger</code> flag let’s consider the below code:</p>
+<p><code>bash npm2yarn npm run swizzle @docusaurus/theme-classic Logo -- --danger</code></p>
+<div class="caution">
+<p>Unstable Components: components that have a higher risk of breaking changes due to internal refactorings.</p>
+</div>
+<p>To unswizzle a component, simply delete the files of the swizzled component.</p>
+<!--
+TODO a separate section for swizzle tutorial.
+To learn more about swizzling, check [here](#).
+-->
+<h3 id="docusaurus-deploy-sitedir"><code>docusaurus deploy [siteDir]</code></h3>
+<p>Deploys your site with <a href="https://pages.github.com/">GitHub Pages</a>. Check out the docs on <a href="deployment.mdx#deploying-to-github-pages">deployment</a> for more details.</p>
+<h4 id="options-3">Options</h4>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--out-dir</code></td>
+<td><code>build</code></td>
+<td>The full path for the new output directory, relative to the current workspace.</td>
+</tr>
+<tr class="even">
+<td><code>--skip-build</code></td>
+<td><code>false</code></td>
+<td>Deploy website without building it. This may be useful when using custom deploy script.</td>
+</tr>
+<tr class="odd">
+<td><code>--config</code></td>
+<td><code>undefined</code></td>
+<td>Path to docusaurus config file, default to <code>[siteDir]/docusaurus.config.js</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="docusaurus-serve-sitedir"><code>docusaurus serve [siteDir]</code></h3>
+<p>Serve your built website locally.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--port</code></td>
+<td><code>3000</code></td>
+<td>Use specified port</td>
+</tr>
+<tr class="even">
+<td><code>--dir</code></td>
+<td><code>build</code></td>
+<td>The full path for the output directory, relative to the current workspace</td>
+</tr>
+<tr class="odd">
+<td><code>--build</code></td>
+<td><code>false</code></td>
+<td>Build website before serving</td>
+</tr>
+<tr class="even">
+<td><code>--config</code></td>
+<td><code>undefined</code></td>
+<td>Path to docusaurus config file, default to <code>[siteDir]/docusaurus.config.js</code></td>
+</tr>
+<tr class="odd">
+<td><code>--host</code></td>
+<td><code>localhost</code></td>
+<td>Specify a host to use. For example, if you want your server to be accessible externally, you can use <code>--host 0.0.0.0</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="docusaurus-clear-sitedir"><code>docusaurus clear [siteDir]</code></h3>
+<p>Clear a Docusaurus site’s generated assets, caches, build artifacts.</p>
+<p>We recommend running this command before reporting bugs, after upgrading versions, or anytime you have issues with your Docusaurus site.</p>
+<h3 id="docusaurus-write-translations-sitedir"><code>docusaurus write-translations [siteDir]</code></h3>
+<p>Write the JSON translation files that you will have to translate.</p>
+<p>By default, the files are written in <code>website/i18n/&lt;defaultLocale&gt;/...</code>.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--locale</code></td>
+<td><code>&lt;defaultLocale&gt;</code></td>
+<td>Define which locale folder you want to write translations the JSON files in</td>
+</tr>
+<tr class="even">
+<td><code>--override</code></td>
+<td><code>false</code></td>
+<td>Override existing translation messages</td>
+</tr>
+<tr class="odd">
+<td><code>--config</code></td>
+<td><code>undefined</code></td>
+<td>Path to docusaurus config file, default to <code>[siteDir]/docusaurus.config.js</code></td>
+</tr>
+<tr class="even">
+<td><code>--messagePrefix</code></td>
+<td><code>''</code></td>
+<td>Allows to add a prefix to each translation message, to help you highlight untranslated strings</td>
+</tr>
+</tbody>
+</table>
+<h3 id="docusaurus-write-heading-ids-sitedir"><code>docusaurus write-heading-ids [siteDir]</code></h3>
+<p>Add <a href="./guides/markdown-features/markdown-features-headings.mdx#explicit-ids">explicit heading ids</a> to the Markdown documents of your site.</p>
+</body>
+</html>

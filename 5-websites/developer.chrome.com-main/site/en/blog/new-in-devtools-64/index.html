@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2017-12-28" />
+  <title>What’s New In DevTools (Chrome 64)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 64)</h1>
+<p class="date">2017-12-28</p>
+</header>
+<p>Welcome back! New features coming to DevTools in Chrome 64 include:</p>
+<ul>
+<li><a href="#perf-monitor">Performance Monitor</a>. View a page’s performance in real-time.</li>
+<li><a href="#console-sidebar">Console Sidebar</a>. Reduce Console noise and focus on the messages that are important to you.</li>
+<li><a href="#group-similar">Group similar Console messages</a>. The Console now groups similar messages together by default.</li>
+</ul>
+<p>Read on, or watch the video version of these release notes below.</p>
+<p>{% YouTube id=“90wNAn05Cf4” %}</p>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> Check what version of Chrome you’re running at <code>chrome://version</code>. If you’re running an earlier version, these features won’t exist. If you’re running a later version, these features may have changed. Chrome auto-updates to a new major version about every 6 weeks.</p>
+<p>{% endAside %}</p>
+<h2 id="performance-monitor-perf-monitor">Performance Monitor {: #perf-monitor }</h2>
+<p>Use the <strong>Performance Monitor</strong> to get a real-time view of various aspects of a page’s load or runtime performance, including:</p>
+<ul>
+<li>CPU usage.</li>
+<li>JavaScript heap size.</li>
+<li>The total number of DOM nodes, JavaScript event listeners, documents, and frames on the page.</li>
+<li>Layouts and style recalculations per second.</li>
+</ul>
+<p>If users are reporting that your app feels slow or janky, check the <strong>Performance Monitor</strong> for clues.</p>
+<p><strong>Why load perf matters</strong>: BookMyShow achieved an 80% increase in conversions when they built a Progressive Web App that focused on speed. <a href="https://developers.google.com/web/showcase/2017/bookmyshow">Learn more</a>.</p>
+<p>To use the <strong>Performance Monitor</strong>:</p>
+<ol type="1">
+<li>Open the <a href="/docs/devtools/command-menu/">Command Menu</a>.</li>
+<li><p>Start typing <code>Performance</code> then select <code>Show Performance Monitor</code>.</p>
+<p>{% Img src=“image/admin/T0NRJB8MqpmcdhwvRx2S.png”, alt=“The Performance Monitor”, width=“800”, height=“488” %} <strong>Figure 1</strong>. The Performance Monitor</p></li>
+<li><p>Click a metric to show or hide it. In Figure 1 the <strong>CPU Usage</strong>, <strong>JS heap size</strong>, and <strong>JS event listeners</strong> charts are shown.</p></li>
+</ol>
+<p>Related features:</p>
+<ul>
+<li><strong>Performance</strong> panel. Walk through a critical user journey and record everything that happens on the page, including JavaScript activity, network requests, CPU usage, and much more. Can also be used to analyze load performance. <a href="/docs/devtools/evaluate-performance">Learn more</a>.</li>
+<li><strong>Audits</strong> panel. Run a suite of automated load and runtime performance tests against any URL. <a href="https://developers.google.com/web/tools/lighthouse#devtools">Learn more</a>.</li>
+</ul>
+<p>If you’re just starting out with analyzing performance, the recommended path is to first use the <strong>Audits</strong> panel, and then investigate further using the <strong>Performance</strong> panel or <strong>Performance</strong> monitor.</p>
+<h2 id="console-sidebar-console-sidebar">Console Sidebar {: #console-sidebar }</h2>
+<p>On large sites, the Console can quickly get flooded with irrelevant messages. Use the new <strong>Console Sidebar</strong> to reduce the noise and focus on the messages that are important to you.</p>
+<p>{% Img src=“image/admin/Zh583Lcb57sNBWDGBas3.png”, alt=“Using the Console Sidebar to show error messages only”, width=“800”, height=“551” %}</p>
+<p><strong>Figure 2</strong>. Using the Console Sidebar to show error messages only</p>
+<p>The Console Sidebar is hidden by default. Click <strong>Show Console Sidebar</strong> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/iq3lqE16ilO9zTji6jEF.png”, alt=“Show Console Sidebar”, width=“30”, height=“26” %} to show it.</p>
+<p>Related features:</p>
+<ul>
+<li><strong>Filter</strong> text box. Enter some text and the <strong>Console</strong> only shows messages that include that text. Also supports regex patterns, <a href="/blog/new-in-devtools-62#negative-filters">negative filters</a>, and <a href="/blog/new-in-devtools-62#url-filters">URL filters</a>.</li>
+</ul>
+<h2 id="group-similar-console-messages-group-similar">Group similar Console messages {: #group-similar }</h2>
+<p>The Console now groups similar messages together by default. For example, in Figure 3 there are 27 instances of the message <code>[Violation] Avoid using document.write()</code>.</p>
+<p>{% Img src=“image/admin/uw6PiqfqFdJAlL7iScXm.png”, alt=“An example of the Console grouping similar messages together”, width=“800”, height=“493” %}</p>
+<p><strong>Figure 3</strong>. An example of the Console grouping similar messages together</p>
+<p>Click on a group to expand it and see each instance of the message.</p>
+<p>{% Img src=“image/admin/jzkZ5NxwQDLZlddAI7sS.png”, alt=“An example of an expanded group of Console messages”, width=“800”, height=“505” %}</p>
+<p><strong>Figure 4</strong>. An example of an expanded group of Console messages</p>
+<p>Uncheck the <strong>Group Similar</strong> checkbox to disable this feature.</p>
+<p>Related features:</p>
+<ul>
+<li>You can group your own Console messages with <a href="/docs/devtools/console/api#group"><code>console.group()</code></a>.</li>
+</ul>
+<h2 id="local-overrides-overrides">Local Overrides {: #overrides }</h2>
+<p>Whoops! We originally scheduled this feature to launch in Chrome 64, but pulled it close to the deadline in order to smooth out some rough edges. Apparently, the What’s New UI didn’t update in time. Sorry!</p>
+<p>This feature is shipping in Chrome 65, which will land approximately 6 weeks after Chrome 64. Check out <a href="/blog/new-in-devtools-65#overrides">Local Overrides</a> to learn more. If you’re on Windows or Mac, you can try Chrome 65 now by downloading <a href="https://www.google.com/chrome/browser/canary.html">Chrome Canary</a>.</p>
+</body>
+</html>

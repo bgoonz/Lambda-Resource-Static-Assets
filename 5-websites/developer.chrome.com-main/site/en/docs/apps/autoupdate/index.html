@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2012-09-17" />
+  <title>Autoupdating</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Autoupdating</h1>
+<p class="date">2012-09-17</p>
+</header>
+<p>{% Aside ‘caution’ %}</p>
+<p><strong>Important:</strong> Chrome will be removing support for Chrome Apps on all platforms. Chrome browser and the Chrome Web Store will continue to support extensions. <a href="https://blog.chromium.org/2020/01/moving-forward-from-chrome-apps.html"><strong>Read the announcement</strong></a> and learn more about <a href="/apps/migration"><strong>migrating your app</strong></a>.</p>
+<p>{% endAside %}</p>
+<p>We want extensions and apps to be autoupdated for some of the same reasons as Google Chrome itself: to incorporate bug and security fixes, add new features or performance enhancements, and improve user interfaces.</p>
+<p>If you publish using the <a href="https://chrome.google.com/webstore/developer/dashboard">Chrome Developer Dashboard</a>, you can <em>ignore this page</em>. You can use the dashboard to release updated versions to users, as well as to the Chrome Web Store.</p>
+<p>If you want to host somewhere other than the store, keep reading. You should also read <a href="hosting">Hosting</a> and <a href="packaging">Packaging</a>.</p>
+<p>{% Aside ‘warning’ %}</p>
+<p><strong>Warning:</strong> As of M33, Windows stable/beta channel users can only download extensions hosted in the Chrome Web Store (see <a href="http://blog.chromium.org/2013/11/protecting-windows-users-from-malicious.html">Protecting Windows users from malicious extensions</a>).</p>
+<p>{% endAside %}</p>
+<p>Previously when off-store extensions were supported, it was possible to have the native binaries and the extension be updated in lock step. However, extensions hosted on the Chrome Web Store are updated via the Chrome update mechanism which developers do not control. Extension developers should be careful about updating extensions that have a dependency on the native binary (for example, legacy extensions using <a href="npapi">NPAPI</a>).</p>
+<h2 id="overview-overview">Overview {: #overview }</h2>
+<ul>
+<li>A manifest may contain an “update_url” field, pointing to a location for doing update checks.</li>
+<li>The content returned by an update check is an <em>update manifest</em> XML document listing the latest version of an extension.</li>
+</ul>
+<p>Every few hours, the browser checks whether any installed extensions or apps have an update URL. For each one, it makes a request to that URL looking for an update manifest XML file. If the update manifest mentions a version that is more recent than what’s installed, the browser downloads and installs the new version. As with manual updates, the new <code>.crx</code> file must be signed with the same private key as the currently installed version.</p>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> In order to maintain user privacy, Google Chrome does not send any Cookie headers with autoupdate manifest requests, and ignores any Set-Cookie headers in the responses to those requests.</p>
+<p>{% endAside %}</p>
+<h2 id="update-url-update_url">Update URL {: #update_url }</h2>
+<p>If you’re hosting your own extension or app, you need to add the “update_url” field to your <a href="manifest"><code>manifest.json</code></a> file, like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;My extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;update_url&quot;</span><span class="fu">:</span> <span class="st">&quot;http://myhost.com/mytestextension/updates.xml&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="fu">}</span></a></code></pre></div>
+<h2 id="update-manifest-update_manifest">Update manifest {: #update_manifest }</h2>
+<p>The update manifest returned by the server should be an XML document that looks like this (highlights indicate parts you should modify):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;?xml</span> version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;<span class="kw">?&gt;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">&lt;gupdate</span><span class="ot"> xmlns=</span><span class="st">&#39;http://www.google.com/update2/response&#39;</span><span class="ot"> protocol=</span><span class="st">&#39;2.0&#39;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="kw">&lt;app</span><span class="ot"> appid=</span><span class="st">&#39;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&#39;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">&lt;updatecheck</span><span class="er"> codebase=&#39;http://myhost.com/mytestextension/mte_v2.crx&#39; version=&#39;2.0&#39;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="kw">&lt;/app&gt;</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">&lt;/gupdate&gt;</span></a></code></pre></div>
+<p>This XML format is borrowed from that used by Omaha, Google’s update infrastructure. See <a href="http://code.google.com/p/omaha/">http://code.google.com/p/omaha/</a> for more details. The extensions system uses the following attributes for the <strong><app></strong> and <strong><updatecheck></strong> elements of the update manifest:</p>
+<p><strong>appid</strong><br />
+The extension or app ID, generated based on a hash of the public key, as described in <a href="packaging">Packaging</a>. You can find the ID of an extension or Chrome App by going to the Extensions page (<strong>chrome://extensions</strong>).</p>
+<p>Hosted apps, however, are not listed on the Extensions page. You can find the ID of any app using the following steps:</p>
+<ul>
+<li>Open the app. You can do this by clicking its icon on the New Tab page.</li>
+<li>Open the JavaScript console. You can do this by clicking the wrench icon and choosing <strong>Tools &gt; JavaScript Console</strong>.</li>
+<li><p>Enter the following expression into the JavaScript console: <code>chrome.app.getDetails().id</code></p>
+<p>The console shows the app’s ID as a quoted string.</p></li>
+</ul>
+<p><strong>codebase</strong><br />
+A URL to the <code>.crx</code> file.</p>
+<p><strong>version</strong><br />
+Used by the client to determine whether it should download the <code>.crx</code> file specified by <code>codebase</code>. It should match the value of “version” in the <code>.crx</code> file’s <code>manifest.json</code> file.</p>
+<p>The update manifest XML file may contain information about multiple extensions by including multiple <app> elements.</p>
+<h2 id="testing-testing">Testing {: #testing }</h2>
+<p>The default update check frequency is several hours, but you can force an update using the Extensions page’s <strong>Update extensions now</strong> button.</p>
+<h2 id="advanced-usage-request-parameters-request_parameters">Advanced usage: request parameters {: #request_parameters }</h2>
+<p>The basic autoupdate mechanism is designed to make the server-side work as easy as just dropping a static XML file onto any plain web server such as Apache, and updating that XML file as you release new versions of your extensions.</p>
+<p>More advanced developers may wish to take advantage of the fact that we add on parameters to the request for the update manifest to indicate the extension ID and version. Then they can use the same update URL for all of their extensions, pointing to a URL running dynamic server-side code instead of a static XML file.</p>
+<p>The format of the request parameters is:</p>
+<p><code>?x=_&lt;extension_data&gt;_</code></p>
+<p>Where <code>_&lt;extension_data&gt;_</code> is a URL-encoded string of the format:</p>
+<p><code>_id=&lt;id&gt;_&amp;v=_&lt;version&gt;_</code></p>
+<p>For example, say you have two extensions, both of which point to the same update URL (<code>http://test.com/extension_updates.php</code>):</p>
+<ul>
+<li>Extension 1
+<ul>
+<li>ID: “aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa”</li>
+<li>Version: “1.1”</li>
+</ul></li>
+<li>Extension 2
+<ul>
+<li>ID: “bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb”</li>
+<li>Version: “0.4”</li>
+</ul></li>
+</ul>
+<p>The request to update each individual extension would be:</p>
+<ul>
+<li><code>http://test.com/extension_updates.php?x=id%3Daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa%26v%3D1.1</code></li>
+<li><code>http://test.com/extension_updates.php?x=id%3Dbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb%26v%3D0.4</code></li>
+</ul>
+<p>Multiple extensions can be listed in a single request for each unique update URL. For the above example, if a user has both of the extensions installed, then the two requests are merged into a single request:</p>
+<p><code>http://test.com/extension_updates.php?x=id%3Daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa%26v%3D1.1&amp;x=id%3Dbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb%26v%3D0.4</code></p>
+<p>If the number of installed extensions using the same update URL is large enough that a GET request URL is too long (over 2000 characters or so), the update check issues additional GET requests as necessary.</p>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> In the future, instead of issuing multiple GET requests, a single POST request might be issued with the request parameters in the POST body.</p>
+<p>{% endAside %}</p>
+<h2 id="advanced-usage-minimum-browser-version-minimum_browser_version">Advanced usage: minimum browser version {: #minimum_browser_version }</h2>
+<p>As we add more APIs to the extensions system, it’s possible you will want to release an updated version of an extension or app that will work only with newer versions of the browser. While Google Chrome itself is autoupdated, it can take a few days before the majority of the user base has updated to any given new release. To ensure that a given update will apply only to Google Chrome versions at or higher than a specific version, you add the “prodversionmin” attribute to the <app> element in your update manifest. For example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;?xml</span> version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;<span class="kw">?&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">&lt;gupdate</span><span class="ot"> xmlns=</span><span class="st">&#39;http://www.google.com/update2/response&#39;</span><span class="ot"> protocol=</span><span class="st">&#39;2.0&#39;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">&lt;app</span><span class="ot"> appid=</span><span class="st">&#39;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&#39;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">&lt;updatecheck</span><span class="er"> codebase=&#39;http://myhost.com/mytestextension/mte_v2.crx&#39; version=&#39;2.0&#39;</span><span class="ot"> prodversionmin=</span><span class="st">&#39;3.0.193.0&#39;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="kw">&lt;/app&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">&lt;/gupdate&gt;</span></a></code></pre></div>
+<p>This would ensure that users would autoupdate to version 2 only if they are running Google Chrome 3.0.193.0 or greater.</p>
+</body>
+</html>

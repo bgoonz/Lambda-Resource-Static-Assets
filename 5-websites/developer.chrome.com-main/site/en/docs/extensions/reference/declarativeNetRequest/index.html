@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>index</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h2 id="manifest">Manifest</h2>
+<p>Extensions must declare the <code>"declarativeNetRequest"</code> permission in the extension <a href="/docs/extensions/mv2/tabs">manifest</a> to use this API. The <code>"declarativeNetRequestFeedback"</code> permission is required to access functions and events which return information on declarative rules matched. <a href="/docs/extensions/mv2/declare_permissions">Host permissions</a> are required if the extension wants to redirect requests or modify headers. To specify static <a href="#type-Ruleset">Rulesets</a>, extensions must also declare the <code>"declarative_net_request"</code> manifest key, which should be a dictionary with a single key called <code>"rule_resources"</code>. It should be a list containing dictionaries of type <a href="#type-Ruleset">Ruleset</a>, as shown below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;My extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">&quot;declarative_net_request&quot;</span> <span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="dt">&quot;rule_resources&quot;</span> <span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-7" title="7">      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;ruleset_1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8">      <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-9" title="9">      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;rules_1.json&quot;</span></a>
+<a class="sourceLine" id="cb1-10" title="10">    <span class="fu">}</span><span class="ot">,</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-11" title="11">      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;ruleset_2&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-12" title="12">      <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-13" title="13">      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;rules_2.json&quot;</span></a>
+<a class="sourceLine" id="cb1-14" title="14">    <span class="fu">}</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb1-15" title="15">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-16" title="16">  <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-17" title="17">    <span class="st">&quot;declarativeNetRequest&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-18" title="18">    <span class="st">&quot;declarativeNetRequestFeedback&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-19" title="19">    <span class="st">&quot;*://example.com/*&quot;</span></a>
+<a class="sourceLine" id="cb1-20" title="20">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-21" title="21">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="fu">}</span></a></code></pre></div>
+<h2 id="rule-resources">Rule Resources</h2>
+<p>An extension can specify up to <a href="#property-MAX_NUMBER_OF_STATIC_RULESETS">MAX_NUMBER_OF_STATIC_RULESETS</a> <a href="#type-Ruleset">rulesets</a> as part of the <code>"rule_resources"</code> manifest key. An extension is allowed to enable at least <a href="#property-GUARANTEED_MINIMUM_STATIC_RULES">GUARANTEED_MINIMUM_STATIC_RULES</a> static rules. Additional static rule sets may or may not be enabled depending on the available <a href="#global-static-rule-limit">global static rule limit</a>.</p>
+<h2 id="global-static-rule-limit">Global Static Rule Limit</h2>
+<p>In addition to the <a href="#property-GUARANTEED_MINIMUM_STATIC_RULES">GUARANTEED_MINIMUM_STATIC_RULES</a> static rules guaranteed for each extension, extensions can enable additional static rulesets depending on the available global static rule limit. This global limit is shared between all extensions and can be used by extensions on a first-come, first-served basis. Extensions shouldn’t depend on the global limit having a specific value and should instead use the <a href="#method-getAvailableStaticRuleCount">getAvailableStaticRuleCount</a> API method to find the additional rule limit available to them.</p>
+<h2 id="rules">Rules</h2>
+<p>A single declarative <a href="#type-Rule">Rule</a> consists of four fields: <code>id</code>, <code>priority</code>, <code>condition</code>, and <code>action</code>. There are the following kinds of rules:</p>
+<ul>
+<li>Rules that block a network request.</li>
+<li>Rules that prevent a request from getting blocked by negating any matching blocked rules.</li>
+<li>Rules that redirect a network request.</li>
+<li>Rules that modify headers from a network request.</li>
+</ul>
+<p>An example rule:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;id&quot;</span> <span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="dt">&quot;action&quot;</span> <span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span> <span class="fu">:</span> <span class="st">&quot;block&quot;</span> <span class="fu">},</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="dt">&quot;condition&quot;</span> <span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="dt">&quot;urlFilter&quot;</span> <span class="fu">:</span> <span class="st">&quot;abc&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="dt">&quot;domains&quot;</span> <span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;foo.com&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="dt">&quot;resourceTypes&quot;</span> <span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;script&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="fu">}</span></a></code></pre></div>
+<p>The above rule will block all script requests originating from <code>"foo.com"</code> to any URL with <code>"abc"</code> as a substring.</p>
+<p>The <code>urlFilter</code> field of a rule condition is used to specify the pattern which is matched against the request URL. Some examples of URL filters:</p>
+<table>
+<tbody>
+<tr>
+<th>
+<code><b>urlFilter</b></code>
+</th>
+<th>
+Matches
+</th>
+<th>
+Does not match
+</th>
+</tr>
+<tr>
+<td>
+<code>“abc”</code>
+</td>
+<td>
+https://abcd.com<br>https://example.com/abcd
+</td>
+<td>
+http://ab.com
+</td>
+</tr>
+<tr>
+<td>
+<code>"abc*d"</code>
+</td>
+<td>
+https://abcd.com<br>https://example.com/abcxyzd
+</td>
+<td>
+http://abc.com
+</td>
+</tr>
+<tr>
+<td>
+<code>“||a.example.com”</code>
+</td>
+<td>
+https://a.example.com/<br>https://b.a.example.com/xyz
+</td>
+<td>
+http://example.com/
+</td>
+</tr>
+<tr>
+<td>
+<code>"|https*"</code>
+</td>
+<td>
+https://example.com
+</td>
+<td>
+http://example.com/<br>http://https.com
+</td>
+</tr>
+<tr>
+<td>
+<code>"example*^123|"</code>
+</td>
+<td>
+https://example.com/123<br>http://abc.com/example?123
+</td>
+<td>
+https://example.com/1234<br>https://abc.com/example0123
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dynamic-and-session-scoped-rules">Dynamic and session-scoped rules</h2>
+<p>An extension can add or remove rules dynamically using the <a href="#method-updateDynamicRules">updateDynamicRules</a> and the <a href="#method-updateSessionRules">updateSessionRules</a> API methods. - Rules added using the <a href="#method-updateDynamicRules">updateDynamicRules</a> API method are persisted across both sessions and extension updates. - Rules added using the <a href="#method-updateSessionRules">updateSessionRules</a> API method are not persisted across Chrome sessions. These rules are backed in memory by Chrome. - The number of dynamic and session-scoped rules that an an extension can add is bounded by the <a href="#property-MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES">MAX_NUMBER_OF_DYNAMIC_AND_SESSION_RULES</a> constant.</p>
+<h2 id="updating-enabled-rulesets">Updating enabled rulesets</h2>
+<p>An extension can update the set of enabled static rulesets using the <a href="#method-updateEnabledRulesets">updateEnabledRulesets</a> API method.</p>
+<ul>
+<li>The number of rules across enabled static rulesets across all extensions must not exceed the <a href="#global-static-rule-limit">global limit</a>. Calling <a href="#method-getAvailableStaticRuleCount">getAvailableStaticRuleCount</a> is recommended to check the number of rules an extension can still enable before the global limit is reached.</li>
+<li>The set of enabled static rulesets is persisted across sessions but not across extension updates. The <code>rule_resources</code> manifest key will determine the set of enabled static rulesets on initial extension install and on each subsequent extension update.</li>
+</ul>
+<h2 id="implementation-details">Implementation details</h2>
+<h3 id="matching-algorithm">Matching algorithm</h3>
+<p>Before the request is sent, each extension is queried for an action to take. The following actions are considered at this stage:</p>
+<ul>
+<li>Actions which block requests of type <code>block</code></li>
+<li>Actions which redirect requests of type <code>redirect</code> or <code>upgradeScheme</code></li>
+<li>Actions which allow requests of type <code>allow</code> or <code>allowAllRequests</code></li>
+</ul>
+<p>If more than one extension returns an action, the extension whose action type comes first in the list above gets priority. If more than one extension returns an action with the same priority (position in the list), the most recently installed extension gets priority.</p>
+<p>When an extension is queried for how to handle a request, the highest priority matching rule is returned. If more than one matching rule has the highest priority, the tie is broken based on the action type, in the following order of decreasing precedence:</p>
+<ul>
+<li><code>allow</code></li>
+<li><code>allowAllRequests</code></li>
+<li><code>block</code></li>
+<li><code>upgradeScheme</code></li>
+<li><code>redirect</code></li>
+</ul>
+<p>If the request was not blocked or redirected, the matching <code>modifyHeaders</code> rules are evaluated with the most recently installed extensions getting priority. Within each extension, all <code>modifyHeaders</code> rules with a priority lower than matching <code>allow</code> or <code>allowAllRequests</code> rules are ignored.</p>
+<p>If multiple <code>modifyHeaders</code> rules specify the same header, the resulting modification for the header is determined based on the priority of each rule and the operations specified.</p>
+<ul>
+<li>If a rule has appended to a header, then lower priority rules can only append to that header. <code>set</code> and <code>remove</code> operations are not permitted.</li>
+<li>If a rule has set a header, then lower priority rules cannot further modify the header, except for <code>append</code> rules from the same extension.</li>
+<li>If a rule has removed a header, then lower priority rules cannot further modify the header.</li>
+</ul>
+<h3 id="comparison-with-the-webrequest16-api">Comparison with the <a href="/docs/extensions/webRequest">webRequest</a> API</h3>
+<ul>
+<li>The declarativeNetRequest API allows for evaluating network requests in the browser itself. This makes it more performant than the webRequest API, where each network request is evaluated in JavaScript in the extension process.</li>
+<li>Because the requests are not intercepted by the extension process, declarativeNetRequest removes the need for extensions to have a background page; resulting in less memory consumption.</li>
+<li>Unlike the webRequest API, blocking requests using the declarativeNetRequest API requires no host permissions.</li>
+<li>The declarativeNetRequest API provides better privacy to users because extensions can’t actually read the network requests made on the user’s behalf.</li>
+<li>Unlike the webRequest API, any images or iframes blocked using the declarativeNetRequest API are automatically collapsed in the DOM.</li>
+<li>While deciding whether a request is to be blocked or redirected, the declarativeNetRequest API is given priority over the webRequest API because it allows for synchronous interception. Similarly, any headers removed through declarativeNetRequest API are not made visible to web request extensions.</li>
+<li>The webRequest API is more flexible as compared to the declarativeNetRequest API because it allows extensions to evaluate a request programmatically.</li>
+</ul>
+<h2 id="example">Example</h2>
+<p><strong>manifest.json</strong></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;declarativeNetRequest extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="dt">&quot;declarative_net_request&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="dt">&quot;rule_resources&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-6" title="6">      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;ruleset_1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-7" title="7">      <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-8" title="8">      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;rules.json&quot;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="fu">}</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb3-11" title="11">  <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb3-12" title="12">    <span class="st">&quot;*://*.google.com/*&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="st">&quot;*://*.abcd.com/*&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb3-14" title="14">    <span class="st">&quot;*://*.example.com/*&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb3-15" title="15">    <span class="st">&quot;http://*.xyz.com/*&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb3-16" title="16">    <span class="st">&quot;*://*.headers.com/*&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb3-17" title="17">    <span class="st">&quot;declarativeNetRequest&quot;</span></a>
+<a class="sourceLine" id="cb3-18" title="18">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-19" title="19">  <span class="dt">&quot;manifest_version&quot;</span><span class="fu">:</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb3-20" title="20"><span class="fu">}</span></a></code></pre></div>
+<p><strong>rules.json</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="ot">[</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="dt">&quot;action&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;block&quot;</span> <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="dt">&quot;condition&quot;</span><span class="fu">:</span> <span class="fu">{</span><span class="dt">&quot;urlFilter&quot;</span><span class="fu">:</span> <span class="st">&quot;google.com&quot;</span><span class="fu">,</span> <span class="dt">&quot;resourceTypes&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;main_frame&quot;</span><span class="ot">]</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-10" title="10">    <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="dt">&quot;action&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;allow&quot;</span> <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-12" title="12">    <span class="dt">&quot;condition&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;urlFilter&quot;</span><span class="fu">:</span> <span class="st">&quot;google.com/123&quot;</span><span class="fu">,</span> <span class="dt">&quot;resourceTypes&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;main_frame&quot;</span><span class="ot">]</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-13" title="13">  <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-14" title="14">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-15" title="15">    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">3</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-16" title="16">    <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-17" title="17">    <span class="dt">&quot;action&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;block&quot;</span> <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-18" title="18">    <span class="dt">&quot;condition&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;urlFilter&quot;</span><span class="fu">:</span> <span class="st">&quot;google.com/12345&quot;</span><span class="fu">,</span> <span class="dt">&quot;resourceTypes&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;main_frame&quot;</span><span class="ot">]</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-19" title="19">  <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-20" title="20">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-21" title="21">    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-22" title="22">    <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-23" title="23">    <span class="dt">&quot;action&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;redirect&quot;</span><span class="fu">,</span> <span class="dt">&quot;redirect&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://example.com&quot;</span> <span class="fu">}</span> <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-24" title="24">    <span class="dt">&quot;condition&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;urlFilter&quot;</span><span class="fu">:</span> <span class="st">&quot;google.com&quot;</span><span class="fu">,</span> <span class="dt">&quot;resourceTypes&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;main_frame&quot;</span><span class="ot">]</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-25" title="25">  <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-26" title="26">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-27" title="27">    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-28" title="28">    <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-29" title="29">    <span class="dt">&quot;action&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;redirect&quot;</span><span class="fu">,</span> <span class="dt">&quot;redirect&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;extensionPath&quot;</span><span class="fu">:</span> <span class="st">&quot;/a.jpg&quot;</span> <span class="fu">}</span> <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-30" title="30">    <span class="dt">&quot;condition&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;urlFilter&quot;</span><span class="fu">:</span> <span class="st">&quot;abcd.com&quot;</span><span class="fu">,</span> <span class="dt">&quot;resourceTypes&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;main_frame&quot;</span><span class="ot">]</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-31" title="31">  <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-32" title="32">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-33" title="33">    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">6</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-34" title="34">    <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-35" title="35">    <span class="dt">&quot;action&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-36" title="36">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;redirect&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-37" title="37">      <span class="dt">&quot;redirect&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-38" title="38">        <span class="dt">&quot;transform&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;scheme&quot;</span><span class="fu">:</span> <span class="st">&quot;https&quot;</span><span class="fu">,</span> <span class="dt">&quot;host&quot;</span><span class="fu">:</span> <span class="st">&quot;new.example.com&quot;</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-39" title="39">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-40" title="40">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-41" title="41">    <span class="dt">&quot;condition&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;urlFilter&quot;</span><span class="fu">:</span> <span class="st">&quot;||example.com&quot;</span><span class="fu">,</span> <span class="dt">&quot;resourceTypes&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;main_frame&quot;</span><span class="ot">]</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-42" title="42">  <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-43" title="43">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-44" title="44">    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">7</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-45" title="45">    <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-46" title="46">    <span class="dt">&quot;action&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-47" title="47">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;redirect&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-48" title="48">      <span class="dt">&quot;redirect&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-49" title="49">        <span class="dt">&quot;regexSubstitution&quot;</span><span class="fu">:</span> <span class="st">&quot;https://</span><span class="ch">\\</span><span class="st">1.xyz.com/&quot;</span></a>
+<a class="sourceLine" id="cb4-50" title="50">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-51" title="51">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-52" title="52">    <span class="dt">&quot;condition&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-53" title="53">      <span class="dt">&quot;regexFilter&quot;</span><span class="fu">:</span> <span class="st">&quot;^http://www</span><span class="ch">\\</span><span class="st">.(abc|def)</span><span class="ch">\\</span><span class="st">.xyz</span><span class="ch">\\</span><span class="st">.com/&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-54" title="54">      <span class="dt">&quot;resourceTypes&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb4-55" title="55">        <span class="st">&quot;main_frame&quot;</span></a>
+<a class="sourceLine" id="cb4-56" title="56">      <span class="ot">]</span></a>
+<a class="sourceLine" id="cb4-57" title="57">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-58" title="58">  <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-59" title="59">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-60" title="60">    <span class="dt">&quot;id&quot;</span> <span class="fu">:</span> <span class="dv">8</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-61" title="61">    <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-62" title="62">    <span class="dt">&quot;action&quot;</span> <span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-63" title="63">      <span class="dt">&quot;type&quot;</span> <span class="fu">:</span> <span class="st">&quot;allowAllRequests&quot;</span></a>
+<a class="sourceLine" id="cb4-64" title="64">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-65" title="65">    <span class="dt">&quot;condition&quot;</span> <span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-66" title="66">      <span class="dt">&quot;urlFilter&quot;</span> <span class="fu">:</span> <span class="st">&quot;||b.com/path&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-67" title="67">      <span class="dt">&quot;resourceTypes&quot;</span> <span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;sub_frame&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb4-68" title="68">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-69" title="69">  <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-70" title="70">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-71" title="71">    <span class="dt">&quot;id&quot;</span> <span class="fu">:</span> <span class="dv">9</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-72" title="72">    <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-73" title="73">    <span class="dt">&quot;action&quot;</span> <span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-74" title="74">      <span class="dt">&quot;type&quot;</span> <span class="fu">:</span> <span class="st">&quot;block&quot;</span></a>
+<a class="sourceLine" id="cb4-75" title="75">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-76" title="76">    <span class="dt">&quot;condition&quot;</span> <span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-77" title="77">      <span class="dt">&quot;urlFilter&quot;</span> <span class="fu">:</span> <span class="st">&quot;script.js&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-78" title="78">      <span class="dt">&quot;resourceTypes&quot;</span> <span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;script&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb4-79" title="79">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-80" title="80">  <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-81" title="81">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-82" title="82">    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">10</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-83" title="83">    <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-84" title="84">    <span class="dt">&quot;action&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-85" title="85">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;modifyHeaders&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-86" title="86">      <span class="dt">&quot;responseHeaders&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb4-87" title="87">        <span class="fu">{</span> <span class="dt">&quot;header&quot;</span><span class="fu">:</span> <span class="st">&quot;h1&quot;</span><span class="fu">,</span> <span class="dt">&quot;operation&quot;</span><span class="fu">:</span> <span class="st">&quot;remove&quot;</span> <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-88" title="88">        <span class="fu">{</span> <span class="dt">&quot;header&quot;</span><span class="fu">:</span> <span class="st">&quot;h2&quot;</span><span class="fu">,</span> <span class="dt">&quot;operation&quot;</span><span class="fu">:</span> <span class="st">&quot;set&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;v2&quot;</span> <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-89" title="89">        <span class="fu">{</span> <span class="dt">&quot;header&quot;</span><span class="fu">:</span> <span class="st">&quot;h3&quot;</span><span class="fu">,</span> <span class="dt">&quot;operation&quot;</span><span class="fu">:</span> <span class="st">&quot;append&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;v3&quot;</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-90" title="90">      <span class="ot">]</span></a>
+<a class="sourceLine" id="cb4-91" title="91">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-92" title="92">    <span class="dt">&quot;condition&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;urlFilter&quot;</span><span class="fu">:</span> <span class="st">&quot;headers.com/123&quot;</span><span class="fu">,</span> <span class="dt">&quot;resourceTypes&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;main_frame&quot;</span><span class="ot">]</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-93" title="93">  <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-94" title="94">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-95" title="95">    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">11</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-96" title="96">    <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-97" title="97">    <span class="dt">&quot;action&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-98" title="98">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;modifyHeaders&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-99" title="99">      <span class="dt">&quot;responseHeaders&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb4-100" title="100">        <span class="fu">{</span> <span class="dt">&quot;header&quot;</span><span class="fu">:</span> <span class="st">&quot;h1&quot;</span><span class="fu">,</span> <span class="dt">&quot;operation&quot;</span><span class="fu">:</span> <span class="st">&quot;set&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;v4&quot;</span> <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-101" title="101">        <span class="fu">{</span> <span class="dt">&quot;header&quot;</span><span class="fu">:</span> <span class="st">&quot;h2&quot;</span><span class="fu">,</span> <span class="dt">&quot;operation&quot;</span><span class="fu">:</span> <span class="st">&quot;append&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;v5&quot;</span> <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-102" title="102">        <span class="fu">{</span> <span class="dt">&quot;header&quot;</span><span class="fu">:</span> <span class="st">&quot;h3&quot;</span><span class="fu">,</span> <span class="dt">&quot;operation&quot;</span><span class="fu">:</span> <span class="st">&quot;append&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span> <span class="st">&quot;v6&quot;</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-103" title="103">      <span class="ot">]</span></a>
+<a class="sourceLine" id="cb4-104" title="104">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-105" title="105">    <span class="dt">&quot;condition&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;urlFilter&quot;</span><span class="fu">:</span> <span class="st">&quot;headers.com/12345&quot;</span><span class="fu">,</span> <span class="dt">&quot;resourceTypes&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;main_frame&quot;</span><span class="ot">]</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-106" title="106">  <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-107" title="107"><span class="ot">]</span></a></code></pre></div>
+<ul>
+<li>Consider a navigation to <code>"http://google.com"</code>. Rules with id (1) and (4) match. The request will be blocked because blocking rules have higher priority than redirect rules when the <code>"priority"</code> is the same.</li>
+<li>Consider a navigation to <code>"http://google.com/1234"</code>. Rules with id (1), (2), and (4) match. Because the request has a matching <code>allow</code> rule and no higher priority rules, the request is not blocked nor redirected and continues to <code>"http://google.com/1234"</code>.</li>
+<li>Consider a navigation to <code>"http://google.com/12345"</code> Rules with id (1), (2), (3), and (4) match. The request will be blocked because rule (3) has the highest priority, overriding all other matching rules.</li>
+<li>Consider a navigation to <code>"http://abcd.com"</code>. The rule with id (5) matches. Since rule (5) specifies an extension path, the request is redirected to <code>"chrome-extension://&lt;extension-id&gt;/a.jpg"</code>.</li>
+<li>Consider a navigation to <code>"http://example.com/path"</code>. The rule with id (6) matches. Since rule (6) specifies a url transform, the request is redirected to <code>"https://new.example.com/path"</code>.</li>
+<li>Consider a navigation to <code>"http://www.abc.xyz.com/path"</code>. The rule with id (7) matches. The request will be redirected to <code>"https://abc.xyz.com/path"</code>.</li>
+<li>Consider the following request hierarchy:
+<ul>
+<li>https://a.com/path (main-frame request)
+<ul>
+<li>https://b.com/path (sub-frame request, matches rule with id (8))
+<ul>
+<li>https://c.com/path (sub-frame request, matches rule with id (8))
+<ul>
+<li>https://c.com/script.js (script request, matches rules with ids (8, 9) but (8) has higher priority)</li>
+</ul></li>
+<li>https://b.com/script.js (script request, matches rules with ids (8, 9) but (8) has higher priority)</li>
+</ul></li>
+<li>https://d.com/path (sub-frame request)
+<ul>
+<li>https://d.com/script.js (script request, matches rule with ids (9))All requests in green will be allow-listed due to rule with id (8) and not be evaluated by the extensions’ ruleset. Requests in red will be blocked due to rule with id (9).</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Consider a navigation to <code>"http://headers.com/12345"</code> with response headers <code>{ "h1": "initial_1", "h2": "initial_2" }</code>. Rules with id (10) and (11) match. The request will have its response headers modified to <code>{ "h2": "v2", "h2": "v5", "h3": "v3", "h3": "v6" }</code>. Header <code>h1</code> was removed by (10), <code>h2</code> was set by (10) then appended by (11), and <code>h3</code> was appended by
+<ol start="10" type="1">
+<li>and (11).</li>
+</ol></li>
+</ul>
+</body>
+</html>

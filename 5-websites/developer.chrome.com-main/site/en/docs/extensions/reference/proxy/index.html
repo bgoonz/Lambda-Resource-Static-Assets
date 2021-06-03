@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>index</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h2 id="manifest">Manifest</h2>
+<p>You must declare the “proxy” permission in the <a href="/docs/extensions/mv2/tabs">extension manifest</a> to use the proxy settings API. For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;My extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="st">&quot;proxy&quot;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<h2 id="objects-and-properties">Objects and properties</h2>
+<p>Proxy settings are defined in a <a href="#type-ProxyConfig"><code>proxy.ProxyConfig</code></a> object. Depending on Chrome’s proxy settings, the settings may contain <a href="#type-ProxyRules"><code>proxy.ProxyRules</code></a> or a <a href="#type-PacScript"><code>proxy.PacScript</code></a>.</p>
+<h3 id="proxy-modes">Proxy modes</h3>
+<p>A ProxyConfig object’s <code>mode</code> attribute determines the overall behavior of Chrome with regards to proxy usage. It can take the following values:</p>
+<dl>
+<dt><code>direct</code></dt>
+<dd><p>In <code>direct</code> mode all connections are created directly, without any proxy involved. This mode allows no further parameters in the <code>ProxyConfig</code> object.</p>
+</dd>
+<dt><code>auto_detect</code></dt>
+<dd><p>In <code>auto_detect</code> mode the proxy configuration is determined by a PAC script that can be downloaded at <a href="http://wpad/wpad.dat">http://wpad/wpad.dat</a>. This mode allows no further parameters in the <code>ProxyConfig</code> object.</p>
+</dd>
+<dt><code>pac_script</code></dt>
+<dd><p>In <code>pac_script</code> mode the proxy configuration is determined by a PAC script that is either retrieved from the URL specified in the <a href="#type-PacScript"><code>proxy.PacScript</code></a> object or taken literally from the <code>data</code> element specified in the <a href="#type-PacScript"><code>proxy.PacScript</code></a> object. Besides this, this mode allows no further parameters in the <code>ProxyConfig</code> object.</p>
+</dd>
+<dt><code>fixed_servers</code></dt>
+<dd><p>In <code>fixed_servers</code> mode the proxy configuration is codified in a <a href="#type-ProxyRules"><code>proxy.ProxyRules</code></a> object. Its structure is described in <a href="#proxy_rules">Proxy rules</a>. Besides this, the <code>fixed_servers</code> mode allows no further parameters in the <code>ProxyConfig</code> object.</p>
+</dd>
+<dt><code>system</code></dt>
+<dd><p>In <code>system</code> mode the proxy configuration is taken from the operating system. This mode allows no further parameters in the <code>ProxyConfig</code> object. Note that the <code>system</code> mode is different from setting no proxy configuration. In the latter case, Chrome falls back to the system settings only if no command-line options influence the proxy configuration.</p>
+</dd>
+</dl>
+<h3 id="proxy-rules">Proxy rules</h3>
+<p>The <a href="#type-ProxyRules"><code>proxy.ProxyRules</code></a> object can contain either a <code>singleProxy</code> attribute or a subset of <code>proxyForHttp</code>, <code>proxyForHttps</code>, <code>proxyForFtp</code>, and <code>fallbackProxy</code>.</p>
+<p>In the first case, HTTP, HTTPS and FTP traffic is proxied through the specified proxy server. Other traffic is sent directly. In the latter case the behavior is slightly more subtle: If a proxy server is configured for the HTTP, HTTPS or FTP protocol, the respective traffic is proxied through the specified server. If no such proxy server is specified or traffic uses a different protocol than HTTP, HTTPS or FTP, the <code>fallbackProxy</code> is used. If no <code>fallbackProxy</code> is specified, traffic is sent directly without a proxy server.</p>
+<h3 id="proxy-server-objects">Proxy server objects</h3>
+<p>A proxy server is configured in a <a href="#type-ProxyServer"><code>proxy.ProxyServer</code></a> object. The connection to the proxy server (defined by the <code>host</code> attribute) uses the protocol defined in the <code>scheme</code> attribute. If no <code>scheme</code> is specified, the proxy connection defaults to <code>http</code>.</p>
+<p>If no <code>port</code> is defined in a <a href="#type-ProxyServer"><code>proxy.ProxyServer</code></a> object, the port is derived from the scheme. The default ports are:</p>
+<table>
+<tbody>
+<tr>
+<th>
+Scheme
+</th>
+<th>
+Port
+</th>
+</tr>
+<tr>
+<td>
+http
+</td>
+<td>
+80
+</td>
+</tr>
+<tr>
+<td>
+https
+</td>
+<td>
+443
+</td>
+</tr>
+<tr>
+<td>
+socks4
+</td>
+<td>
+1080
+</td>
+</tr>
+<tr>
+<td>
+socks5
+</td>
+<td>
+1080
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bypass-list">Bypass list</h3>
+<p>Individual servers may be excluded from being proxied with the <code>bypassList</code>. This list may contain the following entries:</p>
+<dl>
+<dt><code>[_&lt;scheme&gt;_://]_&lt;host-pattern&gt;_[:_&lt;port&gt;_]</code></dt>
+<dd><p>Match all hostnames that match the pattern <code>_&lt;host-pattern&gt;_</code>. A leading <code>"."</code> is interpreted as a <code>"*."</code>. Examples: <code>"foobar.com", "*foobar.com", "*.foobar.com", "*foobar.com:99", "https://x.*.y.com:99"</code>.</p>
+</dd>
+</dl>
+<table>
+<tbody>
+<tr>
+<th>
+Pattern
+</th>
+<th>
+Matches
+</th>
+<th>
+Does not match
+</th>
+</tr>
+<tr>
+<td>
+<code>“.foobar.com”</code>
+</td>
+<td>
+<code>“www.foobar.com”</code>
+</td>
+<td>
+<code>“foobar.com”</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>"*.foobar.com"</code>
+</td>
+<td>
+<code>“www.foobar.com”</code>
+</td>
+<td>
+<code>“foobar.com”</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>“foobar.com”</code>
+</td>
+<td>
+<code>“foobar.com”</code>
+</td>
+<td>
+<code>“www.foobar.com”</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>"*foobar.com"</code>
+</td>
+<td>
+<code>“foobar.com”</code>, <code>“www.foobar.com”</code>, <code>“foofoobar.com”</code>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<dl>
+<dt><code>[_&lt;scheme&gt;_://]_&lt;ip-literal&gt;_[:_&lt;port&gt;_]</code></dt>
+<dd><p>Match URLs that are IP address literals. Conceptually this is the similar to the first case, but with special cases to handle IP literal canonicalization. For example, matching on “[0:0:0::1]” is the same as matching on “[::1]” because the IPv6 canonicalization is done internally. Examples: <code>"127.0.1", "[0:0::1]", "[::1]", "http://[::1]:99"</code></p>
+</dd>
+<dt><code>_&lt;ip-literal&gt;_/_&lt;prefix-length-in-bits&gt;_</code></dt>
+<dd><p>Match any URL containing an IP literal within the given range. The IP range is specified using CIDR notation. Examples: <code>"192.168.1.1/16", "fefe:13::abc/33"</code></p>
+</dd>
+<dt><code>&lt;local&gt;</code></dt>
+<dd><p>Matches simple hostnames. A simple hostname is one that contains no dots and is not an IP literal. For instance <code>example</code> and <code>localhost</code> are simple hostnames, whereas <code>example.com</code>, <code>example.</code>, and <code>[::1]</code> are not. Example: <code>"&lt;local&gt;"</code></p>
+</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<p>The following code sets a SOCKS 5 proxy for HTTP connections to all servers but foobar.com and uses direct connections for all other protocols. The settings apply to regular and incognito windows, as incognito windows inherit settings from regular windows. Please also consult the <a href="/docs/extensions/types#ChromeSetting">Types API</a> documentation.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">var</span> config <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">mode</span><span class="op">:</span> <span class="st">&quot;fixed_servers&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">rules</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="dt">proxyForHttp</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-5" title="5">      <span class="dt">scheme</span><span class="op">:</span> <span class="st">&quot;socks5&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-6" title="6">      <span class="dt">host</span><span class="op">:</span> <span class="st">&quot;1.2.3.4&quot;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="dt">bypassList</span><span class="op">:</span> [<span class="st">&quot;foobar.com&quot;</span>]</a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="op">};</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="va">chrome</span>.<span class="va">proxy</span>.<span class="va">settings</span>.<span class="at">set</span>(</a>
+<a class="sourceLine" id="cb2-12" title="12">  <span class="op">{</span><span class="dt">value</span><span class="op">:</span> config<span class="op">,</span> <span class="dt">scope</span><span class="op">:</span> <span class="st">&#39;regular&#39;</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb2-13" title="13">  <span class="kw">function</span>() <span class="op">{}</span></a>
+<a class="sourceLine" id="cb2-14" title="14">)<span class="op">;</span></a></code></pre></div>
+<p>The following code sets a custom PAC script.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">var</span> config <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">mode</span><span class="op">:</span> <span class="st">&quot;pac_script&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="dt">pacScript</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="dt">data</span><span class="op">:</span> <span class="st">&quot;function FindProxyForURL(url, host) {</span><span class="sc">\n</span><span class="st">&quot;</span> <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-5" title="5">          <span class="st">&quot;  if (host == &#39;foobar.com&#39;)</span><span class="sc">\n</span><span class="st">&quot;</span> <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-6" title="6">          <span class="st">&quot;    return &#39;PROXY blackhole:80&#39;;</span><span class="sc">\n</span><span class="st">&quot;</span> <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-7" title="7">          <span class="st">&quot;  return &#39;DIRECT&#39;;</span><span class="sc">\n</span><span class="st">&quot;</span> <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-8" title="8">          <span class="st">&quot;}&quot;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="op">};</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="va">chrome</span>.<span class="va">proxy</span>.<span class="va">settings</span>.<span class="at">set</span>(</a>
+<a class="sourceLine" id="cb3-12" title="12">  <span class="op">{</span><span class="dt">value</span><span class="op">:</span> config<span class="op">,</span> <span class="dt">scope</span><span class="op">:</span> <span class="st">&#39;regular&#39;</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb3-13" title="13">  <span class="kw">function</span>() <span class="op">{}</span></a>
+<a class="sourceLine" id="cb3-14" title="14">)<span class="op">;</span></a></code></pre></div>
+<p>The next snippet queries the currently effective proxy settings. The effective proxy settings can be determined by another extension or by a policy. See the <a href="/docs/extensions/types#ChromeSetting">Types API</a> documentation for details.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="va">chrome</span>.<span class="va">proxy</span>.<span class="va">settings</span>.<span class="at">get</span>(</a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="op">{</span><span class="st">&#39;incognito&#39;</span><span class="op">:</span> <span class="kw">false</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="kw">function</span>(config) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="va">console</span>.<span class="at">log</span>(<span class="va">JSON</span>.<span class="at">stringify</span>(config))<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-6" title="6">)<span class="op">;</span></a></code></pre></div>
+<p>Note that the <code>value</code> object passed to <code>set()</code> is not identical to the <code>value</code> object passed to callback function of <code>get()</code>. The latter will contain a <code>rules.proxyForHttp.port</code> element.</p>
+</body>
+</html>

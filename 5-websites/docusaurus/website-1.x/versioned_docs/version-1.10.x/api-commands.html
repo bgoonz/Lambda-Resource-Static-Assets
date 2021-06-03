@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CLI Commands</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">CLI Commands</h1>
+</header>
+<p>Docusaurus provides a set of scripts to help you generate, serve, and deploy your website. These scripts can be invoked with the <code>run</code> command when using Yarn or npm. Some common commands are:</p>
+<ul>
+<li><a href="api-commands.md#docusaurus-start-port-number"><code>yarn run start</code></a>: build and serve the website from a local server</li>
+<li><a href="api-commands.md#docusaurus-examples"><code>yarn run examples</code></a>: create example configuration files</li>
+</ul>
+<h2 id="running-from-the-command-line">Running from the command line</h2>
+<p>The scripts can be run using either Yarn or npm. If you’ve already gone through our Getting Started guide, you may already be familiar with the <code>start</code> command. It’s the command that tells Docusaurus to run the <code>docusaurus-start</code> script which generates the site and starts up a server, and it’s usually invoked like so:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">yarn</span> run start</a></code></pre></div>
+<p>The same script can be invoked using npm:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">npm</span> run start</a></code></pre></div>
+<p>To run a particular script, just replace the <code>start</code> command in the examples above with the command associated with your script.</p>
+<h2 id="using-arguments">Using arguments</h2>
+<p>Some commands support optional arguments. For example, to start a server on port 8080, you can specify the <code>--port</code> argument when running <code>start</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">yarn</span> run start --port 8080</a></code></pre></div>
+<p>If you run Docusaurus using npm, you can still use the command line arguments by inserting a <code>--</code> between <code>npm run &lt;command&gt;</code> and the command arguments:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="ex">npm</span> run start -- --port 8080</a></code></pre></div>
+<h2 id="configuration">Configuration</h2>
+<p>These scripts are set up under the <code>"scripts"</code> key in your <code>website/package.json</code> file as part of the installation process. If you need help setting them up again, please refer to the <a href="getting-started-installation.md">Installation guide</a>.</p>
+<p>Docusaurus provides some default mappings to allow you to run commands following Node conventions. Instead of typing <code>docusaurus-start</code> every time, you can type <code>yarn run start</code> or <code>npm start</code> to achieve the same.</p>
+<h2 id="commands">Commands</h2>
+<p><AUTOGENERATED_TABLE_OF_CONTENTS></p>
+<hr />
+<h2 id="reference">Reference</h2>
+<h3 id="docusaurus-build"><code>docusaurus-build</code></h3>
+<p>Alias: <code>build</code>.</p>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 4%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Options</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--skip-image-compression</code></td>
+<td><code>false</code></td>
+<td>Skip compression of image assets. You usually won’t want to skip this unless your images have already been optimized.</td>
+</tr>
+<tr class="even">
+<td><code>--skip-next-release</code></td>
+<td><code>false</code></td>
+<td>Skip the next release documents when versioning is enabled. This will not build HTML files for documents in <code>/docs</code> directory.</td>
+</tr>
+</tbody>
+</table>
+<p>Generates the static website, applying translations if necessary. Useful for building the website prior to deployment.</p>
+<p>See also <a href="api-commands.md#docusaurus-start"><code>docusaurus-start</code></a>.</p>
+<hr />
+<h3 id="docusaurus-examples"><code>docusaurus-examples</code></h3>
+<p>Alias: <code>examples</code></p>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 5%" />
+<col style="width: 84%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Arguments</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;feature&gt;</code></td>
+<td>-</td>
+<td>Specify a feature <code>translations</code> or <code>versions</code> to generate the extra example files for that feature.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="ex">docusaurus-examples</span> <span class="op">&lt;</span>feature<span class="op">&gt;</span></a></code></pre></div>
+<p>When no feature is specified, sets up a minimally configured example website in your project. This command is covered in depth in the <a href="getting-started-preparation.md">Site Preparation guide</a>.</p>
+<hr />
+<h3 id="docusaurus-publish"><code>docusaurus-publish</code></h3>
+<p>Alias: <code>publish-gh-pages</code></p>
+<p><a href="api-commands.md#docusaurus-build">Builds</a>, then deploys the static website to GitHub Pages. This command is meant to be run during the deployment step in CircleCI, and therefore expects a few environment variables to be defined:</p>
+<p>The following environment variables are generally set manually by the user in the CircleCI <code>config.yml</code> file.</p>
+<ul>
+<li><code>GIT_USER</code>: The git user to be associated with the deploy commit.</li>
+<li><code>USE_SSH</code>: Whether to use SSH instead of HTTPS for your connection to the GitHub repo.</li>
+</ul>
+<p><strong>Example</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="va">GIT_USER=</span>docusaurus-bot <span class="va">USE_SSH=</span>true <span class="ex">yarn</span> run publish-gh-pages</a></code></pre></div>
+<p>The following environment variables are <a href="https://circleci.com/docs/1.0/environment-variables/">set by CircleCI</a> during the build process.</p>
+<ul>
+<li><code>CIRCLE_BRANCH</code>: The git branch associated with the commit that triggered the CI run.</li>
+<li><code>CI_PULL_REQUEST</code>: Expected to be truthy if the current CI run was triggered by a commit in a pull request.</li>
+</ul>
+<p>The following should be set by you in <code>siteConfig.js</code> as <code>organizationName</code> and <code>projectName</code>, respectively. If they are not set in your site configuration, they fall back to the <a href="https://circleci.com/docs/1.0/environment-variables/">CircleCI environment</a>.</p>
+<ul>
+<li><code>CIRCLE_PROJECT_USERNAME</code>: The GitHub username or organization name that hosts the Git repo, e.g. “facebook”.</li>
+<li><code>CIRCLE_PROJECT_REPONAME</code>: The name of the Git repo, e.g. “Docusaurus”.</li>
+</ul>
+<p>You can learn more about configuring automatic deployments with CircleCI in the <a href="getting-started-publishing.md">Publishing guide</a>.</p>
+<hr />
+<h3 id="docusaurus-rename-version"><code>docusaurus-rename-version</code></h3>
+<p>Alias: <code>rename-version</code></p>
+<p>Renames an existing version of the docs to a new version name.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Arguments</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;currentVersion&gt;</code></td>
+<td>-</td>
+<td>Version to be renamed.</td>
+</tr>
+<tr class="even">
+<td><code>&lt;newVersion&gt;</code></td>
+<td>-</td>
+<td>Version to be renamed to.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="ex">docusaurus-rename-version</span> <span class="op">&lt;</span>currentVersion<span class="op">&gt;</span> <span class="op">&lt;</span>newVersion<span class="op">&gt;</span></a></code></pre></div>
+<p>See the <a href="guides-versioning.md#renaming-existing-versions">Versioning guide</a> to learn more.</p>
+<hr />
+<h3 id="docusaurus-start"><code>docusaurus-start</code></h3>
+<p>Alias: <code>start</code>.</p>
+<p>This command will build the static website, apply translations if necessary, and then start a local server.</p>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 6%" />
+<col style="width: 82%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Options</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--port &lt;number&gt;</code></td>
+<td><code>3000</code></td>
+<td>The website will be served from port 3000 by default, but if the port is taken up, Docusaurus will attempt to find an available one.</td>
+</tr>
+<tr class="even">
+<td><code>--host &lt;host&gt;</code></td>
+<td><code>localhost</code></td>
+<td>Specify a host to use. E.g., if you want your server to be accessible externally, you can use –host 0.0.0.0.</td>
+</tr>
+<tr class="odd">
+<td><code>--watch</code></td>
+<td>-</td>
+<td>Whether to watch the files and live reload the page when files are changed. Defaults to true. Disable this by using <code>--no-watch</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>You can specify the browser application to be opened by setting the <code>BROWSER</code> environment variable before the command, e.g.:</p>
+<pre><code>$ BROWSER=firefox yarn start</code></pre>
+<hr />
+<h3 id="docusaurus-version-version"><code>docusaurus-version &lt;version&gt;</code></h3>
+<p>Alias: <code>version</code></p>
+<p>Generates a new version of the docs. This will result in a new copy of your site being generated and stored in its own versioned directory. Useful for capturing snapshots of API docs that map to specific versions of your software. Accepts any string as a version number.</p>
+<p>See the <a href="guides-versioning.md">Versioning guide</a> to learn more.</p>
+<hr />
+<h3 id="docusaurus-write-translations"><code>docusaurus-write-translations</code></h3>
+<p>Alias: <code>write-translations</code></p>
+<p>Writes the English for any strings that need to be translated into a <code>website/i18n/en.json</code> file. The script will go through every file in <code>website/pages/en</code> and through the <code>siteConfig.js</code> file and other config files to fetch English strings that will then be translated on Crowdin. See the <a href="guides-translation.md">Translation guide</a> to learn more.</p>
+</body>
+</html>

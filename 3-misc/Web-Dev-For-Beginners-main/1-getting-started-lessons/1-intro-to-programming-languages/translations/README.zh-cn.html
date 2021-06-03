@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.zh-cn</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="编程语言概述与工具介绍">编程语言概述与工具介绍</h1>
+<p>这节课涵盖了编程语言的基础知识，涉及到的内容适用于如今大多数现代编程语言。在“工具介绍”部分，你会了解到一些对开发者很有用的软件。</p>
+<p><img src="/sketchnotes/webdev101-programming.png" alt="Intro Programming" /> &gt; 涂鸦笔记作者：<a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="课前小测">课前小测</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/1?loc=zh_cn">课前小测</a></p>
+<h2 id="大纲">大纲</h2>
+<p>这节课我们将会介绍：</p>
+<ul>
+<li>什么是编程？</li>
+<li>编程语言的种类</li>
+<li>程序的基本要素</li>
+<li>对专业开发者很有用的软件和工具</li>
+</ul>
+<h2 id="什么是编程">什么是编程？</h2>
+<p>编程（programming） ，俗称写代码（coding），是向诸如计算机或移动设备之类的设备写入指令的过程。我们使用编程语言来编写这些指令，然后交由设备去解释（interpret）。这些指令的集合有许多叫法，常见的有<em>程序（program）</em>、<em>计算机程序（computer program）</em>、<em>应用程序（application / app）</em>和<em>可执行文件（executable）</em>。</p>
+<p><em>程序</em>可以是任何由代码编写的东西，比如网站、游戏和手机应用。尽管的确有办法不编写任何代码就创建一个程序，但是设备还是会去解析其底层逻辑，这个逻辑大概率是由代码编写的。所谓<em>正在运行</em>或是<em>执行代码</em>的程序所做的其实都是执行指令。你现在用来阅读这段文字的设备，也正在运行一个将文字输出到你的屏幕上的程序。</p>
+<p>✅ 查一查：谁被认为是世界上第一位计算机程序员？</p>
+<h2 id="编程语言">编程语言</h2>
+<p>编程语言的主要目的是：让开发者可以构建指令并将它们传递给设备。设备只能理解二进制（一堆 0 和 1），这对<em>大多数</em>开发者来说实在不算是高效的交流方式，而编程语言正是人类与计算机之间沟通的桥梁。</p>
+<p>编程语言有着不同的形式，也可能用于不同的目的。比如 JavaScript 主要用于 Web 应用，而 Bash 则主要用于操作系统。</p>
+<p>对于设备来说看，解释<em>低级语言（low level languages）</em>的指令一般会比解释<em>高级语言（high level languages）</em>的指令需要更少的步骤。然而，高级语言因为其可读性和兼容性会更加常用。JavaScript 就是一种高级语言。</p>
+<p>下面的代码展示了高级语言（以 JavaScript 为例）和低级语言（以 ARM 汇编代码为例）的区别：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">let</span> number <span class="op">=</span> <span class="dv">10</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">let</span> n1 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> n2 <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> nextTerm<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> number<span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="va">console</span>.<span class="at">log</span>(n1)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    nextTerm <span class="op">=</span> n1 <span class="op">+</span> n2<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    n1 <span class="op">=</span> n2<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    n2 <span class="op">=</span> nextTerm<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="op">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" title="1"> area ascen,code,readonly</a>
+<a class="sourceLine" id="cb2-2" title="2"> entry</a>
+<a class="sourceLine" id="cb2-3" title="3"> code<span class="dv">32</span></a>
+<a class="sourceLine" id="cb2-4" title="4"> adr r0,thumb+<span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-5" title="5"> bx r<span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-6" title="6"> code<span class="dv">16</span></a>
+<a class="sourceLine" id="cb2-7" title="7">thumb</a>
+<a class="sourceLine" id="cb2-8" title="8"> mov r0,#<span class="bn">00</span></a>
+<a class="sourceLine" id="cb2-9" title="9"> sub r0,r0,#<span class="bn">01</span></a>
+<a class="sourceLine" id="cb2-10" title="10"> mov r1,#<span class="bn">01</span></a>
+<a class="sourceLine" id="cb2-11" title="11"> mov r4,#<span class="dv">10</span></a>
+<a class="sourceLine" id="cb2-12" title="12"> ldr r2,=<span class="bn">0x40000000</span></a>
+<a class="sourceLine" id="cb2-13" title="13">back add r0,r<span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-14" title="14"> str r0,[r2]</a>
+<a class="sourceLine" id="cb2-15" title="15"> add r2,#<span class="bn">04</span></a>
+<a class="sourceLine" id="cb2-16" title="16"> mov r3,r<span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-17" title="17"> mov r0,r<span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-18" title="18"> mov r1,r<span class="dv">3</span></a>
+<a class="sourceLine" id="cb2-19" title="19"> sub r4,#<span class="bn">01</span></a>
+<a class="sourceLine" id="cb2-20" title="20"> cmp r4,#<span class="bn">00</span></a>
+<a class="sourceLine" id="cb2-21" title="21"> bne back</a>
+<a class="sourceLine" id="cb2-22" title="22"> end</a></code></pre></div>
+<p>不管你信不信，<em>它们做的事完全相同</em>：打印斐波那契数列的前 10 位。</p>
+<p>✅ <a href="https://zh.wikipedia.org/wiki/%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0%E5%88%97">斐波那契数列</a>是一个由 0 和 1 开头，每个数字都是它之前两个数字之和的数列。</p>
+<h2 id="程序的基本要素">程序的基本要素</h2>
+<p>程序中的单条指令（instruction）被称作<em>语句（statement）</em>，常用一个字符或是空行来标识指令结束的位置，这种标识可被称为<em>终止符（terminates）</em>。程序的结束方式也因语言而异。</p>
+<p>多数程序都需要用到从用户或其他地方获取到的数据（data），此时语句会根据这些数据来执行指令。数据会改变程序的行为，所以编程语言提供了一种临时存储此后会被用到的数据的方法。这些数据被称作<em>变量（variables）</em>。变量也是语句，用来指示设备将数据存到它的内存中。和代数学中的变量类似，程序中的变量也有独立的命名，其值在之后也可能发生改变。</p>
+<p>有的语句可能不会被设备执行，这通常是开发者有意为之，否则就是发生了意外的错误。这样的控制可以让应用程序更加稳定和可维护。一般来说这些控制的切换会在满足特定条件的情况下发生。<code>if..else</code> 语句就是一个在现代编程语言中常见的用于控制程序的语句。</p>
+<p>✅ 你会在此后的课程中学到更多关于此类语句的知识</p>
+<h2 id="工具介绍">工具介绍</h2>
+<p><a href="https://youtube.com/watch?v=69WJeXGBdxg" title="工具介绍"><img src="https://img.youtube.com/vi/69WJeXGBdxg/0.jpg" alt="Tools of the Trade" /></a></p>
+<p>在这一部分，你将会了解到一些能在你的专业开发之旅中颇有帮助的软件。</p>
+<p><strong>开发环境（development environment）</strong> 指的是一位开发者自己在编写软件时常会用到的工具和功能的集合。其中一些工具会按照开发者的特定需求被自定义配置，这些工具集也会随着时间发生变化，原因可能是开发者在工作或个人项目中改变了需求的优先级，抑或是切换到了另一种编程语言。开发环境往往因人而异。</p>
+<h3 id="编辑器">编辑器</h3>
+<p>编辑器（Editors）是软件开发中最关键的工具之一，是你用来编写甚至运行你的代码的地方。</p>
+<p>开发者选用编辑器还有这些原因：</p>
+<ul>
+<li><em>调试（Debugging）</em> 通过逐步或逐行地运行代码来发现漏洞和错误。一些编辑器自身带有调试功能，或者可以被自定义添加对特定编程语言的调试功能。</li>
+<li><em>语法高亮（Syntax highlighting）</em> 为代码添加颜色和文本格式以便阅读。多数编辑器都可以对语法高亮进行自定义。</li>
+<li><em>插件和集成（Extensions and Integrations）</em> 开发者可以根据自身需要为编辑器添加其原生本不包含的功能。比如，许多开发者需要为代码撰写文档来解释其工作原理，就会安装一个拼写检查插件来检查有没有拼写错误。多数插件都只支持特定的编辑器，多数编辑器也会提供搜索可用插件的方法。</li>
+<li><em>自定义（Customization）</em> 多数编辑器都是高度可自定义的，每一位开发者都能根据自身需要来自定义自己的开发环境。许多开发者还会编写自己的插件。</li>
+</ul>
+<h4 id="主流编辑器和-web-开发插件">主流编辑器和 Web 开发插件</h4>
+<ul>
+<li><a href="https://code.visualstudio.com/">Visual Studio Code</a>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code Spell Checker</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack">Live Share</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier - Code formatter</a></li>
+</ul></li>
+<li><a href="https://atom.io/">Atom</a>
+<ul>
+<li><a href="https://atom.io/packages/spell-check">spell-check</a></li>
+<li><a href="https://atom.io/packages/teletype">teletype</a></li>
+<li><a href="https://atom.io/packages/atom-beautify">atom-beautify</a></li>
+</ul></li>
+</ul>
+<h3 id="浏览器">浏览器</h3>
+<p>另一个关键工具是浏览器。Web 开发者需要用浏览器来观察它们的代码如何在网页上运行，还可以看到编辑器中编写的元素（如 HTML 元素）如何展现在网页上。</p>
+<p>许多浏览器都提供了<em>开发者工具</em>（DevTools），包括一系列有用的功能和信息，用以辅助开发者收集和捕获它们应用程序的重要信息。例如当网页发生错误时，获知错误是何时发生的有助于帮助解决错误，而浏览器 DevTools 就可以被配置来捕获这个信息。</p>
+<h4 id="主流浏览器和-devtools">主流浏览器和 DevTools</h4>
+<ul>
+<li><a href="https://docs.microsoft.com/microsoft-edge/devtools-guide-chromium?WT.mc_id=academic-13441-cxa">Edge</a></li>
+<li><a href="https://developers.google.com/web/tools/chrome-devtools/">Chrome</a></li>
+<li><a href="https://developer.mozilla.org/docs/Tools">Firefox</a></li>
+</ul>
+<h3 id="命令行工具command-line-tools">命令行工具（Command Line Tools）</h3>
+<p>一些开发者更喜欢使用较少的图形化界面来执行日常任务，因此选择使用命令行。开发代码需要大量的文字输入，一些开发者不喜欢自己在键盘上的工作流被打断，会使用键盘快捷键来切换桌面窗口、切换工作文件、使用工具等。大多数任务都可以通过鼠标完成，而使用命令行的一个好处就是无需再鼠标和键盘之间切换就能完成多数工作。命令行的另一个好处是它们是可配置的，所以你可以保存你的配置并随时修改，还可以将其导入到新的开发设备上。但开发环境毕竟因人而异，有人完全不想用命令行，有人则希望在命令行做所有事，还有一些人两种方式都乐意接受。</p>
+<h3 id="常用命令行选择">常用命令行选择</h3>
+<p>命令行选择基于你使用的操作系统会有所不同。</p>
+<p><em>💻 表示会预装在对应操作系统上</em></p>
+<h4 id="windows">Windows</h4>
+<ul>
+<li><a href="https://docs.microsoft.com/powershell/scripting/overview?view=powershell-7?WT.mc_id=academic-13441-cxa">Powershell</a> 💻</li>
+<li><a href="https://docs.microsoft.com/windows-server/administration/windows-commands/windows-commands?WT.mc_id=academic-13441-cxa">Command Line</a> (即 CMD) 💻</li>
+<li><a href="https://docs.microsoft.com/windows/terminal/?WT.mc_id=academic-13441-cxa">Windows Terminal</a></li>
+<li><a href="https://mintty.github.io/">mintty</a></li>
+</ul>
+<h4 id="macos">MacOS</h4>
+<ul>
+<li><a href="https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac">Terminal</a> 💻</li>
+<li><a href="https://iterm2.com/">iTerm</a></li>
+<li><a href="https://docs.microsoft.com/powershell/scripting/install/installing-powershell-core-on-macos?view=powershell-7?WT.mc_id=academic-13441-cxa">Powershell</a></li>
+</ul>
+<h4 id="linux">Linux</h4>
+<ul>
+<li><a href="https://www.gnu.org/software/bash/manual/html_node/index.html">Bash</a> 💻</li>
+<li><a href="https://docs.kde.org/trunk5/en/applications/konsole/index.html">KDE Konsole</a></li>
+<li><a href="https://docs.microsoft.com/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7?WT.mc_id=academic-13441-cxa">Powershell</a></li>
+</ul>
+<h4 id="常用命令行工具">常用命令行工具</h4>
+<ul>
+<li><a href="https://git-scm.com/">Git</a> (💻 &lt;- 在多数操作系统上)</li>
+<li><a href="https://www.npmjs.com/">NPM</a></li>
+<li><a href="https://classic.yarnpkg.com/en/docs/cli/">Yarn</a></li>
+</ul>
+<h3 id="文档">文档</h3>
+<p>当一位开发者想要学点新东西，他们基本都会去找文档（Documentation）来学习如何使用。开发者会依靠文档来指引他们如何合理地使用工具和语言，并且从中获取更多关于实现原理的深层知识。</p>
+<h4 id="web-开发常用文档">Web 开发常用文档</h4>
+<ul>
+<li><a href="https://developer.mozilla.org/docs/Web">Mozilla Developer Network</a></li>
+<li><a href="https://frontendmasters.com/learn/">Frontend Masters</a></li>
+</ul>
+<p>✅ 查一查：既然你已经对 Web 开发者的环境有所了解，何不比较一下其与 Web 设计师的环境的差异？</p>
+<hr />
+<h2 id="挑战">🚀 挑战</h2>
+<p>比较一些编程语言。JavaScript 和 Java 相互之间有什么独特的特征？COBOL 和 Go 之间呢？</p>
+<h2 id="课后小测">课后小测</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/2?loc=zh_cn">课后小测</a></p>
+<h2 id="复习-自学">复习 &amp; 自学</h2>
+<p>尝试接触一些不同的编程语言，用一种语言写一行代码，然后用另外两种语言重写这一行代码，你有什么感悟吗？</p>
+<h2 id="作业">作业</h2>
+<p><a href="assignment.zh-cn.md">阅读文档</a></p>
+</body>
+</html>

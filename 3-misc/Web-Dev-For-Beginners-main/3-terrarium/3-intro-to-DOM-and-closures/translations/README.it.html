@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.it</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="progetto-terrario-parte-3-manipolazione-del-dom-e-closure">Progetto Terrario Parte 3: Manipolazione del DOM e Closure</h1>
+<p><img src="/sketchnotes/webdev101-js.png" alt="Manipolazione DOM e closure" /> &gt; Sketchnote di <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="quiz-pre-lezione">Quiz Pre-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/19?loc=it">Quiz Pre-Lezione</a></p>
+<h3 id="introduzione">Introduzione</h3>
+<p>La manipolazione del DOM, acronimo per “Document Object Model”, è un aspetto chiave dello sviluppo web. Secondo <a href="https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction">MDN</a>, “Il Document Object Model (DOM) è la rappresentazione dei dati degli oggetti che compongono la struttura e il contenuto di un documento sul web”. Le sfide intorno alla manipolazione del DOM sul Web sono state spesso l’impulso dietro l’utilizzo di infrastrutture (framework) JavaScript invece di JavaScript puro (vanilla) per gestire il DOM, ma ce la faremo da soli!</p>
+<p>Inoltre, questa lezione introdurrà l’idea di una <a href="https://developer.mozilla.org/docs/Web/JavaScript/Closures">closure JavaScript</a>, che si può intendere come una funzione racchiusa da un’altra funzione in modo che la funzione più interna abbia accesso all’ambito della funzione più esterna.</p>
+<blockquote>
+<p>Le closure JavaScript sono un argomento vasto e complesso. Questa lezione tocca l’idea più basilare che nel codice di questo terrario si troverà una closure: una funzione interna e una funzione esterna costruite in modo da consentire alla funzione interna di accedere all’ambito della funzione esterna. Per molte più informazioni su come funziona, visitare l’<a href="https://developer.mozilla.org/docs/Web/JavaScript/Closures">ampia documentazione</a>.</p>
+</blockquote>
+<p>Verra usata una closure per manipolare il DOM.</p>
+<p>Si pensi al DOM come a un albero, che rappresenta tutti i modi in cui un documento di una pagina web può essere manipolato. Sono state scritte varie API (Application Program Interfaces) in modo che i programmatori, utilizzando linguaggio di programmazione di propria scelta, possano accedere al DOM e modificarlo, cambiarlo, riorganizzarlo e gestirlo in altro modo.</p>
+<figure>
+<img src="../images/dom-tree.png" alt="Rappresentazione dell’albero DOM" /><figcaption>Rappresentazione dell’albero DOM</figcaption>
+</figure>
+<blockquote>
+<p>Una rappresentazione del DOM e del markup HTML che lo indirizza Da <a href="https://www.researchgate.net/publication/221417012_Profile-Based_Focused_Crawler_for_Social_Media-Sharing_Websites">Olfa Nasraoui</a></p>
+</blockquote>
+<p>In questa lezione, verrà completato il progetto di terrario interattivo creando il codice JavaScript che consentirà a un utente di manipolare le piante sulla pagina.</p>
+<h3 id="pre-requisiti">Pre-requisiti</h3>
+<p>Si dovrebbe avere il codice HTML e CSS per il proprio terrario costruito. Alla fine di questa lezione si sarà in grado di spostare le piante dentro e fuori dal terrario trascinandole.</p>
+<h3 id="attività">Attività</h3>
+<p>Nella cartella terrarium, creare un nuovo file chiamato <code>script.js</code>. Importare quel file nella sezione <code>&lt;head&gt;</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1">    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;./script.js&quot;</span><span class="ot"> defer</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<h2 id="nota-utilizzare-defer-quando-si-importa-un-file-javascript-esterno-nel-file-html-in-modo-da-consentire-lesecuzione-di-javascript-solo-dopo-che-il-file-html-è-stato-completamente-caricato.-è-anche-possibile-utilizzare-lattributo-async-che-consente-lesecuzione-dello-script-durante-lanalisi-del-file-html-ma-in-questo-caso-è-importante-avere-gli-elementi-html-completamente-disponibili-per-il-trascinamento-prima-di-consentire-lesecuzione-dello-script-di-trascinamento.">&gt; Nota: utilizzare <code>defer</code> quando si importa un file JavaScript esterno nel file html in modo da consentire l’esecuzione di JavaScript solo dopo che il file HTML è stato completamente caricato. È anche possibile utilizzare l’attributo <code>async</code>, che consente l’esecuzione dello script durante l’analisi del file HTML, ma in questo caso, è importante avere gli elementi HTML completamente disponibili per il trascinamento prima di consentire l’esecuzione dello script di trascinamento.</h2>
+<h2 id="gli-elementi-dom">Gli elementi DOM</h2>
+<p>La prima cosa da fare è creare i riferimenti agli elementi che si vogliono manipolare nel DOM. Nel nostro caso, sono le 14 piante attualmente in attesa nelle barre laterali.</p>
+<h3 id="attività-1">Attività</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant1&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant2&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant3&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant4&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant5&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant6&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant7&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant8&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant9&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant10&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant11&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant12&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant13&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="at">dragElement</span>(<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;plant14&#39;</span>))<span class="op">;</span></a></code></pre></div>
+<p>Cosa sta succedendo qui? Si sta referenziando il documento e guardando attraverso il suo DOM per trovare un elemento con un ID particolare. Si ricorda nella prima lezione sull’HTML che sono stati forniti ID individuali a ciascuna immagine della pianta (<code>id = "plant1"</code>)? Ora si farà uso di quello sforzo. Dopo aver identificato ogni elemento, lo si passi a una funzione chiamata <code>dragElement</code> che verrà creata a breve. Quindi l’elemento nell’HTML è ora abilitato al trascinamento, o lo sarà a breve.</p>
+<p>✅ Perché gli elementi vengono referenziati in base al loro Id? Perché non la loro classe CSS? Si può fare riferimento alla lezione precedente su CSS per rispondere a questa domanda.</p>
+<hr />
+<h2 id="closure">Closure</h2>
+<p>Ora si è pronti per creare la closure dragElement, che è una funzione esterna che racchiude una o più funzioni interne (nel nostro caso, ne avremo tre).</p>
+<p>Le closure sono utili quando una o più funzioni devono accedere all’ambito di una funzione più esterna. Ecco un esempio:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">displayCandy</span>()<span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="kw">let</span> candy <span class="op">=</span> [<span class="st">&#39;jellybeans&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="kw">function</span> <span class="at">addCandy</span>(candyType) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">        <span class="va">candy</span>.<span class="at">push</span>(candyType)</a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="at">addCandy</span>(<span class="st">&#39;gumdrops&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="at">displayCandy</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="va">console</span>.<span class="at">log</span>(candy)</a></code></pre></div>
+<p>In questo esempio, la funzione displayCandy circonda una funzione che inserisce un nuovo tipo di caramella in una matrice già esistente nella funzione. Se si dovesse eseguire questo codice, l’array <code>candy</code> non sarebbe definito, poiché è una variabile locale (locale alla closure).</p>
+<p>✅ Come si può rendere accessibile l’array <code>candy</code>? Si provi a spostarlo fuori dalla closure. In questo modo, l’array diventa globale, anziché rimanere disponibile solo per l’ambito locale della closure.</p>
+<h3 id="attività-2">Attività</h3>
+<p>Sotto le dichiarazioni degli elementi in <code>script.js</code>, creare una funzione:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">function</span> <span class="at">dragElement</span>(terrariumElement) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="co">//imposta 4 posizioni per il posizionamento sullo schermo</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="kw">let</span> pos1 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-4" title="4">        pos2 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-5" title="5">        pos3 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-6" title="6">        pos4 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="va">terrariumElement</span>.<span class="at">onpointerdown</span> <span class="op">=</span> pointerDrag<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="op">}</span></a></code></pre></div>
+<p><code>dragElement</code> ottiene il suo oggetto <code>terrariumElement</code> dalle dichiarazioni nella parte superiore dello script. Quindi, si impostano alcune posizioni locali su <code>0</code> per l’oggetto passato alla funzione. Queste sono le variabili locali che verranno manipolate per ogni elemento quando si aggiunge la funzionalità di trascinamento all’interno della closure a ciascun elemento. Il terrario sarà popolato da questi elementi trascinati, quindi l’applicazione deve tenere traccia di dove sono posizionati.</p>
+<p>Inoltre, al terrariumElement passato a questa funzione viene assegnato un evento di riconoscimento pressione pulsante (<code>pointerdown</code>), che fa parte delle <a href="https://developer.mozilla.org/it/docs/Web/API">API web</a> progettate per aiutare con la gestione del DOM. <code>onpointerdown</code> si attiva quando viene premuto un pulsante o, in questo caso, viene toccato un elemento trascinabile. Questo gestore di evento funziona sia su browser <a href="https://caniuse.com/?search=onpointerdown">web che su browser di dispositivi mobili</a>, con poche eccezioni.</p>
+<p>✅ Il <a href="https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onclick">gestore di evento <code>onclick</code></a> ha molto più supporto intra-browser; perché non viene usato qui? Si pensi al tipo esatto di interazione con lo schermo che si sta cercando di creare qui.</p>
+<hr />
+<h2 id="la-funzione-pointerdrag">La funzione Pointerdrag</h2>
+<p>Il terrariumElement è pronto per essere trascinato in giro; quando viene generato l’evento <code>onpointerdown</code>, viene richiamata la funzione pointerDrag. Aggiungere quella funzione proprio sotto questa riga: <code>terrariumElement.onpointerdown = pointerDrag;</code>:</p>
+<h3 id="attività-3">Attività</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">function</span> <span class="at">pointerDrag</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">    <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(e)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    pos3 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientX</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">    pos4 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientY</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>Succedono molte cose. Innanzitutto, si impedisce che si verifichino gli eventi predefiniti che normalmente si verificano su pointerdown utilizzando <code>e.preventDefault();</code>. In questo modo si ha un maggiore controllo sul comportamento dell’interfaccia.</p>
+<blockquote>
+<p>Tornare su questa riga quando si è costruito completamente il file di script e provarlo senza <code>e.preventDefault()</code> - cosa succede?</p>
+</blockquote>
+<p>Secondo, aprire <code>index.html</code> in una finestra del browser e controllare l’interfaccia. Quando si fa clic su una pianta, puoi vedere come viene catturato l’evento “e”. Analizzare l’evento per vedere quante informazioni vengono raccolte da un evento pointerdown!</p>
+<p>Successivamente, notare come le variabili locali <code>pos3</code> e <code>pos4</code> sono impostate su e.clientX. È possibile trovare i valori di <code>e</code> nel riquadro di ispezione. Questi valori catturano le coordinate x e y della pianta nel momento in cui si fa clic su di essa o si tocca. Si avrà bisogno di un controllo preciso sul comportamento delle piante mentre si fa clic e si trascinano, in modo da tenere traccia delle loro coordinate.</p>
+<p>✅ Sta diventando più chiaro il motivo per cui l’intera app è costruita con un’unica grande closure? Se non lo fosse, come si manterrebbe l’ambito di ciascuna delle 14 piante trascinabili?</p>
+<p>Completare la funzione iniziale aggiungendo altre due manipolazioni di eventi del puntatore sotto <code>pos4 = e.clientY</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb6-1" title="1">document.onpointermove = elementDrag;</a>
+<a class="sourceLine" id="cb6-2" title="2">document.onpointerup = stopElementDrag;</a></code></pre></div>
+<p>Ora si sta indicando che si vuole che la pianta venga trascinata insieme al puntatore mentre lo si muove e che il gesto di trascinamento si interrompa quando si deseleziona la pianta. <code>onpointermove</code> e <code>onpointerup</code> sono tutte parti della stessa API come <code>onpointerdown</code>. L’interfaccia genererà errori ora poiché non si sono ancora definite le funzioni <code>elementDrag</code> e <code>stopElementDrag</code>, quindi verranno create successivamente.</p>
+<h2 id="le-funzioni-elementdrag-e-stopelementdrag">Le funzioni elementDrag e stopElementDrag</h2>
+<p>La closure verrà completata aggiungendo altre due funzioni interne che gestiranno ciò che accade quando si trascina una pianta e si smette di trascinarla. Il comportamento desiderato è che si possa trascinare qualsiasi pianta in qualsiasi momento e posizionarla ovunque sullo schermo. Questa interfaccia è abbastanza rigida (non esiste una zona di rilascio, ad esempio) per consentire di progettare il proprio terrario esattamente come si preferisce aggiungendo, rimuovendo e riposizionando le piante.</p>
+<h3 id="attività-4">Attività</h3>
+<p>Aggiungere la funzione <code>elementDrag</code> subito dopo la parentesi graffa di chiusura di <code>pointerDrag</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">elementDrag</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">    pos1 <span class="op">=</span> pos3 <span class="op">-</span> <span class="va">e</span>.<span class="at">clientX</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    pos2 <span class="op">=</span> pos4 <span class="op">-</span> <span class="va">e</span>.<span class="at">clientY</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">    pos3 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientX</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">    pos4 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientY</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="va">console</span>.<span class="at">log</span>(pos1<span class="op">,</span> pos2<span class="op">,</span> pos3<span class="op">,</span> pos4)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">    <span class="va">terrariumElement</span>.<span class="va">style</span>.<span class="at">top</span> <span class="op">=</span> <span class="va">terrariumElement</span>.<span class="at">offsetTop</span> <span class="op">-</span> pos2 <span class="op">+</span> <span class="st">&#39;px&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-8" title="8">    <span class="va">terrariumElement</span>.<span class="va">style</span>.<span class="at">left</span> <span class="op">=</span> <span class="va">terrariumElement</span>.<span class="at">offsetLeft</span> <span class="op">-</span> pos1 <span class="op">+</span> <span class="st">&#39;px&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="op">}</span></a></code></pre></div>
+<p>In questa funzione, si faranno molte modifiche alle posizioni iniziali 1-4 che verranno impostate come variabili locali nella funzione esterna. Cosa sta succedendo qui?</p>
+<p>Mentre si trascina, <code>pos1</code> viene riassegnato rendendolo uguale a <code>pos3</code> (che precedenza si è impostato come <code>e.clientX</code>) meno il valore corrente di <code>e.clientX</code>. Eseguire un’operazione simile per <code>pos2</code>. Quindi, reimpostare <code>pos3</code> e <code>pos4</code> sulle nuove coordinate X e Y dell’elemento. E’ possibile monitorare questi cambiamenti nella console mentre si trascina. Quindi, è stato manipolato lo stile css della pianta per impostare la sua nuova posizione in base alle nuove posizioni di <code>pos1</code> e <code>pos2</code>, calcolando le coordinate X e Y superiore e sinistra della pianta in base al confronto del suo scostamento con queste nuove posizioni.</p>
+<blockquote>
+<p><code>offsetTop</code> e <code>offsetLeft</code> sono proprietà CSS che impostano la posizione di un elemento in base a quella del suo genitore; il suo genitore può essere qualsiasi elemento che non è posizionato come <code>static</code>.</p>
+</blockquote>
+<p>Tutto questo ricalcolo del posizionamento consente di mettere a punto il comportamento del terrario e delle sue piante.</p>
+<h3 id="attività-5">Attività</h3>
+<p>Il compito finale per completare l’interfaccia è aggiungere la funzione <code>stopElementDrag</code> dopo la parentesi graffa di chiusura di <code>elementDrag</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">function</span> <span class="at">stopElementDrag</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="va">document</span>.<span class="at">onpointerup</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="va">document</span>.<span class="at">onpointermove</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Questa piccola funzione reimposta gli eventi <code>onpointerup</code> e <code>onpointermove</code> in modo che si possa riavviare il progresso della pianta iniziando a trascinarla di nuovo, o iniziare a trascinare una nuova pianta.</p>
+<p>✅ Cosa succede se non si impostano questi eventi su null?</p>
+<p>Ora tsdi è completato il progetto!</p>
+<p>🥇Congratulazioni! Il meraviglioso terrario è finito<img src="../images/terrarium-final.png" /></p>
+<hr />
+<h2 id="sfida">🚀 Sfida</h2>
+<p>Aggiungere un nuovo gestore di eventi alla closure per fare qualcosa di più con le piante; ad esempio, fare doppio clic su una pianta per portarla in primo piano. Si dia sfogo alla propria creatività!</p>
+<h2 id="quiz-post-lezione">Quiz Post-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/20?loc=it">Quiz post-lezione</a></p>
+<h2 id="revisione-e-auto-apprendimento">Revisione e Auto Apprendimento</h2>
+<p>Mentre trascinare elementi sullo schermo sembra banale, ci sono molti modi per farlo e molte insidie, a seconda dell’effetto che si cerca. In effetti, esiste un’intera <a href="https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API">API di trascinamento della selezione</a> che si può provare. Non è stata usata in questo modulo perché l’effetto che si voleva era leggermente diverso, tuttavia provare questa API sul proprio progetto per vedere cosa si può ottenere.</p>
+<p>Trovare ulteriori informazioni sugli eventi di puntamento nei <a href="https://www.w3.org/TR/pointerevents1/">documenti W3C</a> e nei <a href="https://developer.mozilla.org/docs/Web/API/Pointer_events">documenti Web MDN</a>.</p>
+<p>Controllare sempre le funzionalità del browser utilizzando <a href="https://caniuse.com/">CanIUse.com</a>.</p>
+<h2 id="compito">Compito</h2>
+<p><a href="assignment.it.md">Lavorare un po’ di più con il DOM</a></p>
+</body>
+</html>

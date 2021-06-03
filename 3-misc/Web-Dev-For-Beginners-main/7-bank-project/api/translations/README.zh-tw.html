@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.zh-tw</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="銀行-api-bank-api">銀行 API (Bank API)</h1>
+<blockquote>
+<p>由 <a href="https://nodejs.org">Node.js</a> 與 <a href="https://expressjs.com/">Express</a> 建立而成。</p>
+</blockquote>
+<p>這套 API 已經建好而不在本次課程的範疇內。</p>
+<p>然而，如果你想學習如何建立 API，你可以追蹤這一系列的影片：https://aka.ms/NodeBeginner (影片 17 到 21 為這套 API)。</p>
+<p>你也可以看看這套互動式教學： https://aka.ms/learn/express-api</p>
+<h2 id="運行伺服器">運行伺服器</h2>
+<p>確保你的 <a href="https://nodejs.org">Node.js</a> 已經安裝完成。</p>
+<ol type="1">
+<li>Git clone 這個數據庫.</li>
+<li>在資料夾 <code>api</code> 中開啟終端機，執行 <code>npm install</code>。</li>
+<li>執行 <code>npm start</code>。</li>
+</ol>
+<p>伺服器應該要在連接埠 <code>5000</code> 上監聽訊息。</p>
+<blockquote>
+<p>筆記：所有儲存的資料不是永久保存的，伺服器終止時會遺失所有資料。</p>
+</blockquote>
+<h2 id="api-項目">API 項目</h2>
+<table>
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>路由</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GET /api/</td>
+<td>取得伺服器資訊</td>
+</tr>
+<tr class="even">
+<td>POST /api/accounts/</td>
+<td>建立新的帳戶，範例： <code>{ user: 'Yohan', description: 'My budget', currency: 'EUR', balance: 100 }</code></td>
+</tr>
+<tr class="odd">
+<td>GET /api/accounts/:user</td>
+<td>取得特定帳戶的所有資料</td>
+</tr>
+<tr class="even">
+<td>DELETE /api/accounts/:user</td>
+<td>移除特定帳戶</td>
+</tr>
+<tr class="odd">
+<td>POST /api/accounts/:user/transactions</td>
+<td>建立新的交易明細，範例： <code>{ date: '2020-07-23T18:25:43.511Z', object: 'Bought a book', amount: -20 }</code></td>
+</tr>
+<tr class="even">
+<td>DELETE /api/accounts/:user/transactions/:id</td>
+<td>移除特定交易明細</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

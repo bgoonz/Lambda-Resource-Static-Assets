@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2019-03-25" />
+  <title>View Cache data</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">View Cache data</h1>
+<p class="date">2019-03-25</p>
+</header>
+<p>This guide shows you how to use <a href="/docs/devtools">Chrome DevTools</a> to inspect <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">Cache</a> data.</p>
+<p>If you’re trying to inspect <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching">HTTP cache</a> data, this is not the guide you want. The <strong>Size</strong> column of the <strong>Network Log</strong> has the information you’re looking for. See <a href="/docs/devtools/network#load">Log network activity</a>.</p>
+<h2 id="view-cache-data-view">View cache data {: #view }</h2>
+<ol type="1">
+<li><p>Click the <strong>Application</strong> tab to open the <strong>Application</strong> panel. The <strong>Manifest</strong> pane usually opens by default.</p>
+<p>{% Img src=“image/admin/3tTFCU70dPYRD95kmmB2.png”, alt=“The Manifest pane.”, width=“800”, height=“619” %}</p>
+<p><strong>Figure 1</strong>. The Manifest pane.</p></li>
+<li><p>Expand the <strong>Cache Storage</strong> section to view available caches.</p>
+<p>{% Img src=“image/admin/4h1B7kXmeAtOpE2RIiWX.png”, alt=“Available caches.”, width=“800”, height=“573” %}</p>
+<p><strong>Figure 2</strong>. Available caches.</p></li>
+<li><p>Click a cache to view its contents.</p>
+<p>{% Img src=“image/admin/meUW7vB4HHJ2Jtm3MOSo.png”, alt=“Viewing a cache’s contents.”, width=“800”, height=“408” %}</p>
+<p><strong>Figure 3</strong>. Viewing the <strong>airhorner-0.6.11</strong> cache.</p></li>
+<li><p>Click a resource to view its HTTP headers in the section below the table.</p>
+<p>{% Img src=“image/admin/7KpwTx6x1vZmknjLdt0o.png”, alt=“Viewing a resource’s HTTP headers.”, width=“800”, height=“521” %}</p>
+<p><strong>Figure 4</strong>. Viewing the HTTP headers of the <strong>/index.html</strong> resource.</p></li>
+<li><p>Click <strong>Preview</strong> to view a resource’s content.</p>
+<p>{% Img src=“image/admin/hsgw21Df0XNW29lHwbXz.png”, alt=“Viewing a resource’s content.”, width=“800”, height=“477” %}</p>
+<p><strong>Figure 5</strong>. Viewing the content of the <strong>/scripts.comlink.global.js</strong> resource.</p></li>
+</ol>
+<h2 id="refresh-a-resource-refresh">Refresh a resource {: #refresh }</h2>
+<ol type="1">
+<li><a href="#view">View a cache’s data</a>.</li>
+<li><p>Click the resource that you want to refresh. DevTools highlights it blue to indicate that it’s selected.</p>
+<p>{% Img src=“image/admin/CnT5LMGVd696SCltMJdW.png”, alt=“Selecting a resource.”, width=“800”, height=“488” %}</p>
+<p><strong>Figure 6</strong>. Selecting the <strong>/styles/main.css</strong> resource.</p></li>
+<li><p>Click <strong>Refresh</strong> {% Img src=“image/admin/b55bnqwzTUDyXdgIP7pd.png”, alt=“Refresh”, width=“24”, height=“25” %}.</p></li>
+</ol>
+<h2 id="filter-resources-filter">Filter resources {: #filter }</h2>
+<ol type="1">
+<li><a href="#view">View a cache’s data</a>.</li>
+<li><p>Use the <strong>Filter by Path</strong> text box to filter out any resources that do not match the path that you provide.</p>
+<p>{% Img src=“image/admin/RiYDO2lVWdbXNLRSOMM8.png”, alt=“Filtering out resources that do not match the specified path.”, width=“800”, height=“382” %}</p>
+<p><strong>Figure 7</strong>. Filtering out resources that do not match the <code>/script</code> path.</p></li>
+</ol>
+<h2 id="delete-a-resource-deleteresource">Delete a resource {: #deleteresource }</h2>
+<ol type="1">
+<li><a href="#view">View a cache’s data</a>.</li>
+<li><p>Click the resource that you want to delete. DevTools highlights it blue to indicate that it’s selected.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/3MLpzyWtyg9MyCsBKr0T.png”, alt=“Selecting a resource.”, width=“800”, height=“488” %}</p>
+<p><strong>Figure 8</strong>. Selecting the <strong>/styles/main.css</strong> resource.</p></li>
+<li><p>Click <strong>Delete Selected</strong> {% Img src=“image/admin/7n8KigaAtonB8ZzKDrkj.png”, alt=“Delete Selected”, width=“20”, height=“20” %}.</p></li>
+</ol>
+<h2 id="delete-all-cache-data-deletecache">Delete all cache data {: #deletecache }</h2>
+<ol type="1">
+<li>Open <strong>Application</strong> &gt; <strong>Clear Storage</strong>.</li>
+<li><p>Make sure that the <strong>Cache Storage</strong> checkbox is enabled.</p>
+<p>{% Img src=“image/admin/f7eXNmgoU2BqwR8Jxfvg.png”, alt=“The Cache Storage checkbox.”, width=“800”, height=“572” %}</p>
+<p><strong>Figure 9</strong>. The <strong>Cache Storage</strong> checkbox.</p></li>
+<li><p>Click <strong>Clear site data</strong>.</p>
+<p>{% Img src=“image/admin/C0MQhJ0YhFIuKudvcghG.png”, alt=“The Clear Site Data button.”, width=“800”, height=“572” %}</p>
+<p><strong>Figure 10</strong>. The <strong>Clear Site Data</strong> button.</p></li>
+</ol>
+</body>
+</html>

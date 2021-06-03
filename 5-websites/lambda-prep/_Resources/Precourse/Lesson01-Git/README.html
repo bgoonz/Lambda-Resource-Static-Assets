@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="lesson-1-git-fundamentals">Lesson 1: Git fundamentals</h1>
+<p>(Attention: These are the class notes for the <a href="http://www.lambdaschool.com">Lambda School</a> pre-course instruction workshop. This is meant to serve as an accompaniment to the class)</p>
+<p>In this lesson we will cover:</p>
+<ul>
+<li>Description of version control and Git.</li>
+<li>Basic terminal commands.</li>
+<li>Forking and cloning an existing Github.com repo.</li>
+<li>Basic Git commands (status, add, commit, push).</li>
+<li>Submitting a Pull Request.</li>
+</ul>
+<h3 id="prerequisites">Prerequisites:</h3>
+<ul>
+<li>Create a <a href="https://www.github.com/">Github.com</a> account.</li>
+<li>If you are or have applied to Lambda School then set your account email to public in settings.</li>
+<li>If you are on a Windows computer you can install the <a href="https://git-for-windows.github.io/">git-bash command terminal here</a></li>
+<li>If you are on a Mac, git is preinstalled and you can access it from your terminal. By pressing ⌘+space and entering “terminal”. (You can make sure you have git installed by typing “which git” and pressing enter, if a file path appears on your screen you are go to go. In some cases you may be directed to download the Xcode command line developer tools, follow the instructions)</li>
+<li>If you are on a Linux machine, you may need to install git by accessing your terminal and entering “apt-get install git”</li>
+<li>If you are having trouble installing Git, this resource will help: <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">https://git-scm.com/book/en/v2/Getting-Started-Installing-Git</a></li>
+</ul>
+<h2 id="description-of-version-control-and-git">Description of version control and Git</h2>
+<p>Version control is a concept in software engineering which applies to the management of source code. There are many systems for applying version control practices to source code. We will be focusing on one of the most popular, “Git”.</p>
+<h3 id="git">Git</h3>
+<p>Git was created in 2005 by Linus Torvalds. Git allows a team to work concurrently on a single project, or “repository”, all while staying current and up to date. This is done through branching, each member, or feature, can have a branch from the master branch. That branch can be edited as needed without interfering with the “master”. When the time comes to merge the branches back together, git will evaluate where the changes were made and will correct the master to reflect those changes without interfering with other changes. Git also acts as a sort of time machine, allowing a team to revert ANY changes made to the source code throughout the history of the code.</p>
+<h3 id="github.com">Github.com</h3>
+<p><a href="https://github.com">Github.com</a> is a network to store your repositories, essentially it is a repository of repositories. It is one of many available on the internet, and the most popular. Git != Github, although they work very well together. Github is a place for you to store your code or find other projects. It also acts as a portfolio for any code you’ve worked on. If you plan on being a developer you should have a Github account. We will be using Github extensively throughout your time at Lambda School.</p>
+<h2 id="basic-terminal-commands">Basic terminal commands:</h2>
+<blockquote>
+<p>We will be using the “terminal” or “command line” throughout your time at Lambda school. If you are on a Mac or Linux machine, you should have the terminal and git installed already, if you are on a Windows machine I recommend installing <a href="https://git-for-windows.github.io/">“git-bash”</a>.</p>
+</blockquote>
+<p>Within our terminal we can: traverse our file structure, add files, remove files, update files, and tons more! The terminal is a very powerful tool for developers and you will be using it a lot in your professional development career. It might look scary at first, but in time you will enjoy using it. It is best to get accustomed to it now. To begin we will learn the ‘basic’ commands:</p>
+<p>“List”: Allows us to view the contents of the current folder we are in.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1">  $ <span class="fu">ls</span></a></code></pre></div>
+<p>“Change Directory”: Allows us to move to a new folder or ‘directory’.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1">  $ <span class="bu">cd</span> [folder]</a></code></pre></div>
+<p>“Make Directory”: Makes a new folder in the directory you are currently in.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1">  $ <span class="fu">mkdir</span> [folder name]</a></code></pre></div>
+<p>“Touch” will create a new file.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1">  $ <span class="fu">touch</span> [file]</a></code></pre></div>
+<p>“Remove”: permanently deletes a file. (WARNING! This bypasses any “trashcan” or recycling can you may have and PERMANENTLY deletes the file) (also of note: This will not remove folders, we need a special command for that, that we will learn later.)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1">  $ <span class="fu">rm</span> [file]</a></code></pre></div>
+<h2 id="exercise">Exercise</h2>
+<p>In this exercise we will create a new folder titled: “LambdaSchool”</p>
+<p>To get to your top level folder type:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1">  <span class="bu">cd</span> ~</a></code></pre></div>
+<p>and press enter. Once in your top level type:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1">  <span class="fu">mkdir</span> LambdaSchool</a></code></pre></div>
+<p>and press enter. Congratulations you have created a directory!</p>
+<h2 id="github">Github</h2>
+<p>As mentioned before, Github is a central place to store, view, and download repositories, it is not synonymous with “git”. You need to have a Github account in order to complete this exercise.</p>
+<h3 id="forking">Forking</h3>
+<p>Github.com allows users to create their own copy of an repository (as long as it is public) and do whatever work you would like to that on under your own account. This is called “Forking”. Essentially this will create a new branch of the repo, and at a future time you may be able to reincorporate(“pull”) the changes you have made to this branch with the master branch you forked from.</p>
+<p>In order to fork a repo, you will visit the Github repo of your choosing (for this exercise we will be using <a href="http://github.com/lambdaschool/precourse">this</a> repo). Anywhere within the repo you will see a “Fork” button in the upper right hand corner, click this. Github will take a moment and copy all of the data to your account and it is now available to you to work on.</p>
+<h3 id="cloning">Cloning</h3>
+<p>In order to work on a project you must clone (download) it to your local machine. To do this, visit the top level of the forked repo on your own account, and click on the green button in the upper right hand side of the page that says: “Clone or Download” a dropdown should appear and will can click on the clipboard icon to copy the address. (Note: you can download the entire repo, but this is not advised as cloning will do quite a few steps for you behind the scenes that will make your life much easier.)</p>
+<p>Once you have the address copied, return to your terminal window and enter the following:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1">  $ <span class="bu">cd</span> LambdaSchool</a>
+<a class="sourceLine" id="cb8-2" title="2"></a>
+<a class="sourceLine" id="cb8-3" title="3">  $ <span class="fu">git</span> clone [copied address]</a></code></pre></div>
+<p>This will download the repo and you now have a local copy of the repo saved to your machine!</p>
+<h2 id="git-commands">Git commands:</h2>
+<p>Throughout these lessons, we will interact with git through our terminal. In the future you may wish to use a Git GUI interface, but during these lessons we will need to use the terminal for all git functions.</p>
+<p>In this exercise, we will add a file to our project and then commit this change to memory in git.</p>
+<p>In your terminal, cd into the LambdaSchool/Precourse folder</p>
+<p>Then enter the following in your terminal:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1">  $ <span class="fu">touch</span> Lesson01-Git/newFile.js</a></code></pre></div>
+<p>This will add a new file your your project titled “newFile.js”</p>
+<p>at this time we can use the git command “status”. Status will read back the status of all changes made to your repo. Use status often, if you’re not sure if something worked, using status will tell you.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1">  $ <span class="fu">git</span> status</a></code></pre></div>
+<p>You should see something along these lines:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1">  <span class="ex">Changes</span> not staged for commit:</a>
+<a class="sourceLine" id="cb11-2" title="2">    <span class="kw">(</span><span class="ex">use</span> <span class="st">&quot;git add &lt;file&gt;...&quot;</span> to update what will be committed<span class="kw">)</span></a>
+<a class="sourceLine" id="cb11-3" title="3">    <span class="kw">(</span><span class="ex">use</span> <span class="st">&quot;git checkout -- &lt;file&gt;...&quot;</span> to discard changes in working directory<span class="kw">)</span></a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5">    <span class="ex">modified</span>:   Lesson01-Git/README.md</a>
+<a class="sourceLine" id="cb11-6" title="6"></a>
+<a class="sourceLine" id="cb11-7" title="7">  <span class="ex">Untracked</span> files:</a>
+<a class="sourceLine" id="cb11-8" title="8">    <span class="kw">(</span><span class="ex">use</span> <span class="st">&quot;git add &lt;file&gt;...&quot;</span> to include in what will be committed<span class="kw">)</span></a>
+<a class="sourceLine" id="cb11-9" title="9"></a>
+<a class="sourceLine" id="cb11-10" title="10">    <span class="ex">Lesson01-Git/newFile.js</span></a>
+<a class="sourceLine" id="cb11-11" title="11">  </a>
+<a class="sourceLine" id="cb11-12" title="12">  <span class="ex">no</span> changes added to commit (use <span class="st">&quot;git add&quot;</span> and/or <span class="st">&quot;git commit -a&quot;</span>)</a></code></pre></div>
+<p>This tells us that we have a file that has been changed, but is not saved into the git history yet.</p>
+<p>To do this we will use the ‘add’ command:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1">  <span class="fu">git</span> add Lesson01-Git/newFile.js</a></code></pre></div>
+<p>This has added our changes to the history, now to save that history, we will use “commit”. Commit will take all of our added changes and save it to git history. For future reference you will be able to leave a message about the changes, this will make it easier to go back and find the changes you(or anyone) are looking for in the future ,if you should need to. It is always a good idea to leave a concise description of the changes in your commit. A shorthand way of leaving an inline message is using the ‘-m’ flag and writing your message directly after, in quotes.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1">  <span class="fu">git</span> commit -m <span class="st">&#39;added new file, newFile.js&#39;</span></a></code></pre></div>
+<p>Now that we have our changes saved locally, we want to share those changes in our Github. To do this we will “push”</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1">  <span class="fu">git</span> push</a></code></pre></div>
+<p>You will be prompted for your username and password. Enter these and then you will receive a message if your changes were pushed successfully:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1">  <span class="ex">Counting</span> objects: 5, done.</a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="ex">Delta</span> compression using up to 8 threads.</a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="ex">Compressing</span> objects: 100% (4/4), <span class="kw">done</span><span class="ex">.</span></a>
+<a class="sourceLine" id="cb15-4" title="4">  <span class="ex">Writing</span> objects: 100% (5/5), <span class="ex">2.97</span> KiB <span class="kw">|</span> <span class="ex">0</span> bytes/s, done.</a>
+<a class="sourceLine" id="cb15-5" title="5">  <span class="ex">Total</span> 5 (delta 1), <span class="ex">reused</span> 0 (delta 0)</a>
+<a class="sourceLine" id="cb15-6" title="6">  <span class="ex">remote</span>: Resolving deltas: 100% (1/1), <span class="ex">completed</span> with 1 local object.</a>
+<a class="sourceLine" id="cb15-7" title="7">  <span class="ex">To</span> git@github.com:[your username]/Precourse.git</a>
+<a class="sourceLine" id="cb15-8" title="8">    <span class="ex">cccc682..283b9dd</span>  master -<span class="op">&gt;</span> master</a></code></pre></div>
+<p>Congratulations! You just pushed your first git commit!</p>
+<h2 id="pull-requests">Pull Requests</h2>
+<p>Once you have completed the changes you intend to make, it will be time to merge those changes with the master branch. If you are not making changes directly to your own repository, you will need to submit a “Pull Request” or “PR” as we will refer to it. This allows to owner(or manager/supervisor/lead/senior) of the original repo to look over the changes and decide if they want to include these changes in their master. We will do this through Github.</p>
+<p>In this exercise, we will submit a pull request through github.com</p>
+<p>## Further reading and tutorials:</p>
+<ul>
+<li><a href="https://git-scm.com/">Git: official site</a></li>
+<li><a href="https://try.github.io/levels/1/challenges/1">Github: official tutorial</a></li>
+<li><a href="https://www.codecademy.com/learn/learn-git">Codecademy: Learn Git</a></li>
+<li><a href="https://git-scm.com/docs/gittutorial">Git: official tutorial</a></li>
+<li><a href="https://www.davidbaumgold.com/tutorials/command-line/">Termianl turorial</a></li>
+</ul>
+</body>
+</html>

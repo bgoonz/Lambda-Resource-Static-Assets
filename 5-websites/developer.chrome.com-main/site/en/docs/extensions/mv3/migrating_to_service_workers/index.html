@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-07-29" />
+  <title>Migrating from background pages to service workers</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Migrating from background pages to service workers</h1>
+<p class="date">2020-07-29</p>
+</header>
+<p><em>Background pages</em> have been a fundamental component of the Chrome Extension platform since its introduction. To put it simply, background pages provide extension authors with an environment that lives independent of any other window or tab. This allows extensions to observe and take action in response to events.</p>
+<p>In Manifest V3, the Chrome extension platform moves from background pages to <em>service workers</em>. As stated in <a href="https://developers.google.com/web/fundamentals/primers/service-workers/">Service Workers: an Introduction</a>, a “service worker is a script that your browser runs in the background, separate from a web page, opening the door to features that don’t need a web page or user interaction.” This is the technology that enables native-like experiences such as push notifications, rich offline support, background sync, and “Add to Home Screen” on the open web. Service workers were inspired in part by background pages in Chrome Extensions, but they iterate and improve on this model by tuning it for web-scale.</p>
+<p>When migrating to this new background context, you’ll need to keep two main things in mind. First, service workers are terminated when not in use and restarted when needed (similar to event pages). Second, service workers don’t have access to DOM. We’ll explore how to adapt to these challenges in the <a href="#events">Thinking with Events</a> and <a href="#workers">Working with Workers</a> sections below, respectively. If you already use an event page, skip straight to the second section.</p>
+<h2 id="thinking-with-events-events">Thinking with events {: #events }</h2>
+<p>Like event pages, service workers are a special execution environment that are started to handle events they’re interested in and are terminated when they’re no longer needed. The following sections provide recommendations for writing code in an ephemeral, evented execution context.</p>
+<p>{% Aside %}</p>
+<p>Several of these concepts are covered in <a href="/docs/extensions/mv3/background_migration/">Migrate to Event Driven Background Scripts</a>.</p>
+<p>{% endAside %}</p>
+<h2 id="top-level-event-listeners-event_listeners">Top-level event listeners {: #event_listeners }</h2>
+<p>In order for Chrome to successfully dispatch events to the appropriate listeners, extensions must register listeners in the first turn of the event loop. The most straightforward way to achieve this is to move event registration to the top-level of your service worker script.</p>
+<p>The below snippet shows how an existing extension initializes its browser action listener in a persistent background page.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="co">//// background.js</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">local</span>.<span class="at">get</span>([<span class="st">&quot;badgeText&quot;</span>]<span class="op">,</span> (<span class="op">{</span> badgeText <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="va">chrome</span>.<span class="va">action</span>.<span class="at">setBadgeText</span>(<span class="op">{</span> <span class="dt">text</span><span class="op">:</span> badgeText <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="co">// Listener is registered asynchronously</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="va">chrome</span>.<span class="va">action</span>.<span class="va">onClicked</span>.<span class="at">addListener</span>(handleActionClick)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>While this approach works in a persistent background page, it is not guaranteed to work in a service worker due to the asynchronous nature of the <a href="/docs/extensions/reference/storage/">Storage APIs</a>. When a service worker is terminated, so are the event listeners associated with it. And since events are dispatched when a service worker starts, asynchronously registering events results in them being dropped because there’s no listener registered when it is first spun up.</p>
+<p>To address this, move the event listener registration to the top level of your script. This ensures that Chrome will be able to immediately find and invoke your action’s click handler, even if your extension hasn’t finished executing its async startup logic.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">//// background.js</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">local</span>.<span class="at">get</span>([<span class="st">&quot;badgeText&quot;</span>]<span class="op">,</span> (<span class="op">{</span> badgeText <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="va">chrome</span>.<span class="va">action</span>.<span class="at">setBadgeText</span>(<span class="op">{</span> <span class="dt">text</span><span class="op">:</span> badgeText <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">// Listener is registered on startup</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="va">chrome</span>.<span class="va">action</span>.<span class="va">onClicked</span>.<span class="at">addListener</span>(handleActionClick)<span class="op">;</span></a></code></pre></div>
+<p>{% Aside %} In Manifest V3 the <code>chrome.browserAction</code> and <code>chrome.pageAction</code> APIs are consolidated into a single chrome.action API. {% endAside %}</p>
+<h3 id="persisting-state-with-storage-apis-state">Persisting state with storage APIs {: #state }</h3>
+<p>One of the main things to get used to when adopting service workers is that they are short-lived execution environments. In more practical terms, an extension’s service worker will start up, do some work, and get terminated repeatedly throughout a user’s browser session. This poses a challenge to extension developers accustomed to long-lived background pages as application data is not immediately available in global variables.</p>
+<p>This example is taken from a simple manifest version 2 extension that receives a name value from a content script and persists it in a global variable for later use.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">//// background.js</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">let</span> name <span class="op">=</span> <span class="kw">undefined</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="va">chrome</span>.<span class="va">runtime</span>.<span class="va">onMessage</span>.<span class="at">addListener</span>((<span class="op">{</span> type<span class="op">,</span> name <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="cf">if</span> (<span class="va">msg</span>.<span class="at">type</span> <span class="op">===</span> <span class="st">&quot;set-name&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    name <span class="op">=</span> <span class="va">msg</span>.<span class="at">name</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="va">chrome</span>.<span class="va">browserAction</span>.<span class="va">onClicked</span>.<span class="at">addListener</span>((tab) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-11" title="11">  <span class="va">chrome</span>.<span class="va">tabs</span>.<span class="at">sendMessage</span>(<span class="va">tab</span>.<span class="at">id</span><span class="op">,</span> <span class="op">{</span> name <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>If we port this code directly to a service worker, it’s possible that the service worker will be terminated between when the name is set and the user clicks the browser action. If this happens, the set name will have been lost and name variable will again be undefined.</p>
+<p>We can fix this bug by treating the <a href="/docs/extensions/reference/storage/">Storage APIs</a> as our source of truth.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">//// background.js</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="va">chrome</span>.<span class="va">runtime</span>.<span class="va">onMessage</span>.<span class="at">addListener</span>((<span class="op">{</span> type<span class="op">,</span> name <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="cf">if</span> (type <span class="op">===</span> <span class="st">&quot;set-name&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">local</span>.<span class="at">set</span>(<span class="op">{</span> name <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-7" title="7"></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="va">chrome</span>.<span class="va">action</span>.<span class="va">onClicked</span>.<span class="at">addListener</span>((tab) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">local</span>.<span class="at">get</span>([<span class="st">&quot;name&quot;</span>]<span class="op">,</span> (<span class="op">{</span> name <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-10" title="10">    <span class="va">chrome</span>.<span class="va">tabs</span>.<span class="at">sendMessage</span>(<span class="va">tab</span>.<span class="at">id</span><span class="op">,</span> <span class="op">{</span> name <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>{% Aside %} In Manifest V3 the chrome.browserAction and chrome.pageAction APIs are consolidated into a single chrome.action API. {% endAside %}</p>
+<h3 id="moving-from-timers-to-alarms-alarms">Moving from timers to alarms {: #alarms }</h3>
+<p>It’s common for web developers to perform delayed or periodic operations using the <code>setTimeout</code> or <code>setInterval</code> methods. These APIs can fail in service workers, though, because the scheduler will cancel the timers when the service worker is terminated.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="co">//// background.js</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">const</span> TIMEOUT <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">60</span> <span class="op">*</span> <span class="dv">1000</span><span class="op">;</span> <span class="co">// 3 minutes in milliseconds</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="va">window</span>.<span class="at">setTimeout</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="va">chrome</span>.<span class="va">action</span>.<span class="at">setIcon</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb5-5" title="5">    <span class="dt">path</span><span class="op">:</span> <span class="at">getRandomIconPath</span>()<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-6" title="6">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="op">},</span> TIMEOUT)<span class="op">;</span></a></code></pre></div>
+<p>Instead, we can use the <a href="/docs/extensions/reference/alarms/">Alarms API</a>. Like other listeners, alarm listeners should be registered in the top level of your script.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">//// background.js</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="va">chrome</span>.<span class="va">alarms</span>.<span class="at">create</span>(<span class="op">{</span> <span class="dt">delayInMinutes</span><span class="op">:</span> <span class="dv">3</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="va">chrome</span>.<span class="va">alarms</span>.<span class="va">onAlarm</span>.<span class="at">addListener</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="va">chrome</span>.<span class="va">action</span>.<span class="at">setIcon</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="dt">path</span><span class="op">:</span> <span class="at">getRandomIconPath</span>()<span class="op">,</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="working-with-workers-workers">Working with workers {: #workers }</h2>
+<p><a href="https://developers.google.com/web/ilt/pwa/introduction-to-service-worker">Service workers</a> are a specialized kind of <a href="https://developer.mozilla.org/en-US/docs/Web/API/Worker">web worker</a>, which are quite different from the web pages most web developers are used to working with. On a typical web page (or extension background page), the global execution context for JavaScript is a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window">Window</a>. This object exposes the capabilities that web developers are used to working with: window, element, IndexedDB, cookie, localStorage, fetch, etc. The <a href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerGlobalScope">global scope for service worker</a> is significantly more limited and doesn’t have many of these features. Most notably, service workers don’t have access to the DOM.</p>
+<p>The following sections cover some of the major use cases impacted by the move to service workers and recommendations on how to adapt.</p>
+<h3 id="parsing-and-traversing-with-xmlhtml-documents">Parsing and traversing with XML/HTML {: #documents }</h3>
+<p>Since service workers don’t have access to DOM, it’s not possible for an extension’s service worker to access the <a href="https://developer.mozilla.org/en-US/docs/Web/API/DOMParser">DOMParser</a> API or create iframes to parse and traverse documents. Extension developers have two ways to work around this limitation: create a new tab or use a library. Which you choose will depend on your use case.</p>
+<p>Libraries such as <a href="https://github.com/jsdom/jsdom">jsdom</a> can be used to emulate a typical browser window environment, complete with DOMParser, event propagation, and other capabilities like requestAnimationFrame. Lighter weight alternatives like <a href="https://github.com/developit/undom">undom</a> provide just enough DOM to power many frontend frameworks and libraries.</p>
+<p>Extensions that need a full native browser environment can use the <a href="/docs/extensions/reference/windows#method-create">chrome.windows.create()</a> and <a href="/docs/extensions/reference/tabs#method-create">chrome.tabs.create()</a> APIs from inside a service worker. Additionally, an extension’s popup still provides a full (temporary) window environment.</p>
+<h3 id="audiovideo-playback-and-capture-audio_vidio">Audio/video playback and capture {: #audio_vidio }</h3>
+<p>It’s not currently possible to play or capture media directly in a service worker. In order for a Manifest V3 extension to leverage the web’s media playback and capture capabilities, the extension will need to create a window environment using either <a href="/docs/extensions/reference/windows#method-create">chrome.windows.create()</a> or <a href="/docs/extensions/reference/tabs#method-create">chrome.tabs.create()</a>. Once created, the extension can use <a href="/docs/extensions/mv3/messaging">message passing</a> to coordinate between the playback document and service worker.</p>
+<h3 id="rendering-to-a-canvas-canvas">Rendering to a canvas {: #canvas }</h3>
+<p>In some cases developers use background pages to render content for display in other contexts or to create and cache assets. While service workers don’t have access to DOM and therefore cannot use <code>&lt;canvas&gt;</code> elements, service workers do have access to the <a href="https://html.spec.whatwg.org/multipage/canvas.html#the-offscreencanvas-interface">OffscreenCanvas API</a>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="co">//// background.js</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">function</span> <span class="at">buildCanvas</span>(width<span class="op">,</span> height) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="kw">const</span> canvas <span class="op">=</span> <span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&quot;canvas&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="va">canvas</span>.<span class="at">width</span> <span class="op">=</span> width<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="va">canvas</span>.<span class="at">height</span> <span class="op">=</span> height<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="cf">return</span> canvas<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>In the above block we’re constructing a canvas element and painting the entire canvas turquoise. To migrate to offscreen canvas, replace <code>document.createElement('canvas')</code> with <code>new OffscreenCanvas(width, height)</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="co">//// background.js</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">function</span> <span class="at">buildCanvas</span>(width<span class="op">,</span> height) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="kw">const</span> canvas <span class="op">=</span> <span class="kw">new</span> <span class="at">OffscreenCanvas</span>(width<span class="op">,</span> height)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="cf">return</span> canvas<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>For additional guidance on working with OffscreenCanvas, see <a href="https://developers.google.com/web/updates/2018/08/offscreen-canvas">OffscreenCanvas—Speed up Your Canvas Operations with a Web Worker</a>.</p>
+</body>
+</html>

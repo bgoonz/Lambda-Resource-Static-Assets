@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.ms</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="projek-terrarium-bahagian-3-memanipulasi-dom-dan-penutupan">Projek Terrarium Bahagian 3: Memanipulasi DOM dan Penutupan</h1>
+<p><img src="/sketchnotes/webdev101-js.png" alt="DOM dan penutupan" /> &gt; Sketchnote karya <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="kuiz-pra-kuliah">Kuiz Pra Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/19">Kuiz Pra Kuliah</a></p>
+<h3 id="pengenalan">Pengenalan</h3>
+<p>Memanipulasi DOM, atau “Document Object Model”, adalah aspek penting dalam pengembangan web. Menurut <a href="https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction">MDN</a>, “Document Object Model (DOM) adalah representasi data dari objek yang terdiri dari struktur dan kandungan dokumen di web.” Cabaran di sekitar manipulasi DOM di web sering menjadi dorongan di belakang menggunakan kerangka kerja JavaScript dan bukannya JavaScript vanila untuk menguruskan DOM, tetapi kami akan menguruskannya sendiri!</p>
+<p>Selain itu, pelajaran ini akan memperkenalkan idea <a href="https://developer.mozilla.org/docs/Web/JavaScript/Closures">Penutupan JavaScript</a>, yang dapat anda fikirkan sebagai fungsi yang dilampirkan oleh yang lain berfungsi sehingga fungsi dalaman mempunyai akses ke ruang fungsi scope luar.</p>
+<blockquote>
+<p>Penutupan JavaScript adalah topik yang luas dan kompleks. Pelajaran ini menyentuh idea paling asas bahawa dalam kod terarium ini, anda akan menemui penutup: fungsi dalaman dan fungsi luar yang dibina dengan cara yang membolehkan fungsi dalaman mengakses ke ruang lingkup fungsi luar. Untuk lebih banyak maklumat mengenai cara ini berfungsi, sila lawati <a href="https://developer.mozilla.org/docs/Web/JavaScript/Closures">dokumentasi yang luas</a>.</p>
+</blockquote>
+<p>Kami akan menggunakan penutup untuk memanipulasi DOM.</p>
+<p>Fikirkan DOM sebagai pokok, mewakili semua cara dokumen laman web dapat dimanipulasi. Berbagai API (Interface Program Aplikasi) telah ditulis sehingga pengaturcara, menggunakan bahasa pilihan program mereka, dapat mengakses DOM dan mengedit, mengubah, menyusun semula, dan sebaliknya mengaturnya.</p>
+<figure>
+<img src="../images/dom-tree.png" alt="Perwakilan pokok DOM" /><figcaption>Perwakilan pokok DOM</figcaption>
+</figure>
+<blockquote>
+<p>Perwakilan DOM dan markup HTML yang merujuknya. Oleh <a href="https://www.researchgate.net/publication/221417012_Profile-Based_Focused_Crawler_for_Social_Media-Sharing_Websites">Olfa Nasraoui</a></p>
+</blockquote>
+<p>Dalam pelajaran ini, kami akan menyelesaikan projek terarium interaktif kami dengan membuat JavaScript yang akan membolehkan pengguna memanipulasi tanaman di halaman.</p>
+<h3 id="prasyarat">Prasyarat</h3>
+<p>Anda harus mempunyai HTML dan CSS untuk terarium anda. Pada akhir pelajaran ini, anda akan dapat memindahkan tanaman ke dalam dan keluar dari terarium dengan menyeretnya.</p>
+<h3 id="tugas">Tugas</h3>
+<p>Dalam folder terarium anda, buat fail baru yang disebut <code>script.js</code>. Import fail itu di bahagian <code>&lt;head&gt;</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1">    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;./script.js&quot;</span><span class="ot"> defer</span><span class="kw">&gt;&lt;/script&gt;</span></a></code></pre></div>
+<h2 id="catatan-gunakan-defer-ketika-mengimpor-file-javascript-eksternal-ke-dalam-file-html-sehingga-memungkinkan-javascript-dijalankan-hanya-setelah-file-html-dimuat-sepenuhnya.-anda-juga-boleh-menggunakan-atribut-async-yang-membolehkan-skrip-dijalankan-semasa-fail-html-dihuraikan-tetapi-dalam-kes-kami-penting-untuk-memiliki-elemen-html-sepenuhnya-tersedia-untuk-menyeret-sebelum-kami-membiarkan-skrip-seret-dijalankan.">&gt; Catatan: gunakan <code>defer</code> ketika mengimpor file JavaScript eksternal ke dalam file html sehingga memungkinkan JavaScript dijalankan hanya setelah file HTML dimuat sepenuhnya. Anda juga boleh menggunakan atribut <code>async</code>, yang membolehkan skrip dijalankan semasa fail HTML dihuraikan, tetapi dalam kes kami, penting untuk memiliki elemen HTML sepenuhnya tersedia untuk menyeret sebelum kami membiarkan skrip seret dijalankan.</h2>
+<h2 id="elemen-dom">Elemen DOM</h2>
+<p>Perkara pertama yang perlu anda lakukan ialah membuat rujukan pada elemen yang ingin anda manipulasi dalam DOM. Dalam kes kami, mereka adalah 14 tanaman yang sedang menunggu di bar sisi.</p>
+<h3 id="tugas-1">Tugas</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1">dragElement(document.getElementById(&#39;plant1&#39;));</a>
+<a class="sourceLine" id="cb2-2" title="2">dragElement(document.getElementById(&#39;plant2&#39;));</a>
+<a class="sourceLine" id="cb2-3" title="3">dragElement(document.getElementById(&#39;plant3&#39;));</a>
+<a class="sourceLine" id="cb2-4" title="4">dragElement(document.getElementById(&#39;plant4&#39;));</a>
+<a class="sourceLine" id="cb2-5" title="5">dragElement(document.getElementById(&#39;plant5&#39;));</a>
+<a class="sourceLine" id="cb2-6" title="6">dragElement(document.getElementById(&#39;plant6&#39;));</a>
+<a class="sourceLine" id="cb2-7" title="7">dragElement(document.getElementById(&#39;plant7&#39;));</a>
+<a class="sourceLine" id="cb2-8" title="8">dragElement(document.getElementById(&#39;plant8&#39;));</a>
+<a class="sourceLine" id="cb2-9" title="9">dragElement(document.getElementById(&#39;plant9&#39;));</a>
+<a class="sourceLine" id="cb2-10" title="10">dragElement(document.getElementById(&#39;plant10&#39;));</a>
+<a class="sourceLine" id="cb2-11" title="11">dragElement(document.getElementById(&#39;plant11&#39;));</a>
+<a class="sourceLine" id="cb2-12" title="12">dragElement(document.getElementById(&#39;plant12&#39;));</a>
+<a class="sourceLine" id="cb2-13" title="13">dragElement(document.getElementById(&#39;plant13&#39;));</a>
+<a class="sourceLine" id="cb2-14" title="14">dragElement(document.getElementById(&#39;plant14&#39;));</a></code></pre></div>
+<p>Apa yang berlaku di sini? Anda merujuk dokumen dan mencari melalui DOM untuk mencari elemen dengan Id tertentu. Masih ingat pada pelajaran pertama mengenai HTML bahawa anda memberikan Id individu untuk setiap gambar tumbuhan (<code>id=" plant1"</code>)? Sekarang anda akan menggunakan usaha itu. Setelah mengenal pasti setiap elemen, anda meneruskan item tersebut ke fungsi yang disebut <code>dragElement</code> yang akan anda bina dalam satu minit. Oleh itu, elemen dalam HTML kini diaktifkan seret, atau tidak lama lagi.</p>
+<p>✅ Mengapakah kita merujuk elemen dengan Id? Mengapa tidak oleh kelas CSS mereka? Anda mungkin merujuk kepada pelajaran CSS sebelumnya untuk menjawab soalan ini.</p>
+<hr />
+<h2 id="penutupan">Penutupan</h2>
+<p>Sekarang anda sudah bersedia untuk membuat penutupan dragElement, yang merupakan fungsi luar yang merangkumi fungsi atau fungsi dalaman (dalam kes kita, kita akan mempunyai tiga).</p>
+<p>Penutupan berguna apabila satu atau lebih fungsi perlu memasuki ruang lingkup fungsi luar. Inilah contohnya:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">displayCandy</span>()<span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="kw">let</span> candy <span class="op">=</span> [<span class="st">&#39;jellybeans&#39;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="kw">function</span> <span class="at">addCandy</span>(candyType) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">        <span class="va">candy</span>.<span class="at">push</span>(candyType)</a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="at">addCandy</span>(<span class="st">&#39;gumdrops&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="at">displayCandy</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="va">console</span>.<span class="at">log</span>(candy)</a></code></pre></div>
+<p>Dalam contoh ini, fungsi displayCandy mengelilingi fungsi yang mendorong jenis permen baru ke dalam array yang sudah ada dalam fungsi tersebut. Sekiranya anda menjalankan kod ini, array <code>candy</code> tidak akan ditentukan, kerana ini adalah pemboleh ubah tempatan (tempatan hingga penutupan).</p>
+<p>✅ Bagaimanakah anda boleh membuat array <code>candy</code> dapat diakses? Cuba gerakkannya di luar penutup. Dengan cara ini, susunan menjadi global, dan bukannya hanya tersedia untuk skop tempatan penutupan.</p>
+<h3 id="tugas-2">Tugas</h3>
+<p>Di bawah deklarasi elemen dalam <code>script.js</code>, buat fungsi:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">function</span> <span class="at">dragElement</span>(terrariumElement) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="co">//tetapkan 4 kedudukan untuk penentuan kedudukan di skrin</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="kw">let</span> pos1 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-4" title="4">        pos2 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-5" title="5">        pos3 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-6" title="6">        pos4 <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="va">terrariumElement</span>.<span class="at">onpointerdown</span> <span class="op">=</span> pointerDrag<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="op">}</span></a></code></pre></div>
+<p><code>dragElement</code> dapatkan objek<code>terrariumElement</code> dari pernyataan di bahagian atas skrip. Kemudian, anda menetapkan beberapa kedudukan tempatan pada <code>0</code> untuk objek yang dilewatkan ke dalam fungsi. Ini adalah pemboleh ubah tempatan yang akan dimanipulasi untuk setiap elemen semasa anda menambahkan fungsi seret dan lepas dalam penutupan ke setiap elemen. Terarium akan dihuni oleh unsur-unsur yang diseret ini, jadi aplikasinya perlu memantau lokasi mereka ditempatkan.</p>
+<p>Selain itu, elemen terarium yang diteruskan ke fungsi ini diberikan acara <code>pointerdown</code>, yang merupakan sebahagian dari <a href="https://developer.mozilla.org/docs/Web/API">web API</a> yang dirancang untuk membantu pengurusan DOM. <code>onpointerdown</code> menyala apabila butang ditekan, atau dalam kes kita, elemen yang boleh diseret disentuh. Pengendali acara ini berfungsi pada <a href="https://caniuse.com/?search=onpointerdown">penyemak imbas web dan mudah alih</a>, dengan beberapa pengecualian.</p>
+<p>✅ <a href="https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers/onclick">Pengendali acara (event handler) <code>onclick</code></a> mempunyai sokongan penyemak imbas yang lebih banyak; mengapa anda tidak menggunakannya di sini? Fikirkan jenis interaksi skrin yang tepat yang ingin anda buat di sini.</p>
+<hr />
+<h2 id="fungsi-pointerdrag">Fungsi Pointerdrag</h2>
+<p>TerariumElement siap diseret; apabila peristiwa <code>onpointerdown</code> dipecat, fungsi pointerDrag dipanggil. Tambahkan fungsi itu tepat di bawah baris ini: <code>terrariumElement.onpointerdown = pointerDrag;</code>:</p>
+<h3 id="tugas-3">Tugas</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">function</span> <span class="at">pointerDrag</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">    <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(e)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    pos3 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientX</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">    pos4 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientY</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>Beberapa perkara berlaku. Pertama, anda mencegah kejadian lalai yang biasanya berlaku pada pointerdown tidak berlaku dengan menggunakan <code>e.preventDefault ();</code>. Dengan cara ini anda mempunyai lebih banyak kawalan terhadap tingkah laku antara muka.</p>
+<blockquote>
+<p>Kembali ke baris ini apabila anda telah membina fail skrip sepenuhnya dan mencubanya tanpa <code>e.preventDefault ()</code> - apa yang berlaku?</p>
+</blockquote>
+<p>Kedua, buka <code>index.html</code> di tetingkap penyemak imbas, dan periksa antara muka. Apabila anda mengklik kilang, anda dapat melihat bagaimana peristiwa ‘e’ ditangkap. Gali acara untuk melihat berapa banyak maklumat yang dikumpulkan oleh satu acara penunjuk ke bawah!</p>
+<p>Seterusnya, perhatikan bagaimana pemboleh ubah tempatan <code>pos3</code> dan<code>pos4</code> ditetapkan ke e.clientX. Anda boleh mendapatkan nilai <code>e</code> di panel pemeriksaan. Nilai-nilai ini menangkap koordinat x dan y loji pada saat anda mengklik atau menyentuhnya. Anda memerlukan kawalan yang terperinci terhadap tingkah laku tanaman semasa anda mengklik dan menyeretnya, jadi anda terus mengawasi koordinatnya.</p>
+<p>✅ Adakah semakin jelas mengapa keseluruhan aplikasi ini dibina dengan satu penutupan besar? Sekiranya tidak, bagaimana anda mengekalkan ruang lingkup bagi setiap 14 tumbuhan yang boleh diseret?</p>
+<p>Selesaikan fungsi awal dengan menambahkan dua lagi manipulasi peristiwa penunjuk di bawah <code>pos4 = e.clientY</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb6-1" title="1">document.onpointermove = elementDrag;</a>
+<a class="sourceLine" id="cb6-2" title="2">document.onpointerup = stopElementDrag;</a></code></pre></div>
+<p>Sekarang anda menunjukkan bahawa anda mahu kilang diseret bersama-sama dengan penunjuk semasa anda menggerakkannya, dan agar gerakan seret berhenti ketika anda membatalkan pilihan kilang. <code>onpointermove</code> dan<code>onpointerup</code> adalah semua bahagian dari API yang sama dengan <code>onpointerdown</code>. Antaramuka akan membuang ralat sekarang kerana anda belum menentukan fungsi <code>elementDrag</code> dan<code>stopElementDrag</code>, jadi bina yang seterusnya.</p>
+<h2 id="fungsi-elementdrag-dan-stopelementdrag">Fungsi elementDrag dan stopElementDrag</h2>
+<p>Anda akan menyelesaikan penutupan anda dengan menambahkan dua fungsi dalaman yang akan menangani apa yang berlaku semasa anda menyeret kilang dan berhenti menyeretnya. Tingkah laku yang anda mahukan ialah anda boleh menyeret mana-mana tanaman pada bila-bila masa dan meletakkannya di mana sahaja di skrin. Antaramuka ini agak tidak diingini (tidak ada zon penurunan) untuk membolehkan anda merancang terarium anda dengan tepat seperti yang anda suka dengan menambah, membuang, dan memasang semula tanaman.</p>
+<h3 id="tugas-4">Tugas</h3>
+<p>Tambahkan fungsi <code>elementDrag</code> tepat setelah pendakap keriting penutup<code>pointerDrag</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">elementDrag</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">    pos1 <span class="op">=</span> pos3 <span class="op">-</span> <span class="va">e</span>.<span class="at">clientX</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    pos2 <span class="op">=</span> pos4 <span class="op">-</span> <span class="va">e</span>.<span class="at">clientY</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">    pos3 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientX</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">    pos4 <span class="op">=</span> <span class="va">e</span>.<span class="at">clientY</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="va">console</span>.<span class="at">log</span>(pos1<span class="op">,</span> pos2<span class="op">,</span> pos3<span class="op">,</span> pos4)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">    <span class="va">terrariumElement</span>.<span class="va">style</span>.<span class="at">top</span> <span class="op">=</span> <span class="va">terrariumElement</span>.<span class="at">offsetTop</span> <span class="op">-</span> pos2 <span class="op">+</span> <span class="st">&#39;px&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-8" title="8">    <span class="va">terrariumElement</span>.<span class="va">style</span>.<span class="at">left</span> <span class="op">=</span> <span class="va">terrariumElement</span>.<span class="at">offsetLeft</span> <span class="op">-</span> pos1 <span class="op">+</span> <span class="st">&#39;px&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="op">}</span></a></code></pre></div>
+<p>Dalam fungsi ini, anda melakukan banyak pengeditan pada posisi awal 1-4 yang anda tetapkan sebagai pemboleh ubah tempatan dalam fungsi luar. Apa yang berlaku di sini?</p>
+<p>Semasa anda menyeret, anda menetapkan semula <code>pos1</code> dengan menjadikannya sama dengan<code>pos3</code> (yang anda tetapkan lebih awal sebagai <code>e.clientX</code>) tolak nilai <code>e.clientX</code> semasa. Anda melakukan operasi yang serupa dengan <code>pos2</code>. Kemudian, anda menetapkan semula <code>pos3</code> dan <code>pos4</code> ke koordinat X dan Y elemen yang baru. Anda boleh melihat perubahan ini di konsol semasa anda menyeret. Kemudian, anda memanipulasi gaya css kilang untuk menetapkan kedudukan barunya berdasarkan kedudukan baru <code>pos1</code> dan<code>pos2</code>, mengira koordinat X dan Y bahagian atas dan kiri kilang berdasarkan membandingkan ofsetnya dengan kedudukan baru ini.</p>
+<blockquote>
+<p><code>offsetTop</code> dan<code>offsetLeft</code> adalah sifat CSS yang menetapkan kedudukan elemen berdasarkan kedudukan induknya; induknya boleh menjadi unsur apa pun yang tidak diposisikan sebagai <code>statik</code>.</p>
+</blockquote>
+<p>Semua pengiraan semula kedudukan ini membolehkan anda menyesuaikan tingkah laku terarium dan tanamannya.</p>
+<h3 id="tugas-5">Tugas</h3>
+<p>Tugas terakhir untuk melengkapkan antara muka adalah dengan menambahkan fungsi <code>stopElementDrag</code> setelah pendakap keriting<code>elementDrag</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">function</span> <span class="at">stopElementDrag</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="va">document</span>.<span class="at">onpointerup</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="va">document</span>.<span class="at">onpointermove</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Fungsi kecil ini menetapkan semula peristiwa <code>onpointerup</code> dan <code>onpointermove</code> sehingga anda dapat memulakan semula kemajuan tanaman anda dengan mula menyeretnya lagi, atau mula menyeret loji baru.</p>
+<p>✅ Apakah yang berlaku jika anda tidak menetapkan peristiwa ini menjadi null?</p>
+<p>Sekarang anda telah menyelesaikan projek anda!</p>
+<p>🥇 Tahniah! Anda telah menyelesaikan terarium yang indah. <img src="../images/terrarium-final.png" alt="terarium selesai" /></p>
+<hr />
+<h2 id="cabaran">🚀Cabaran</h2>
+<p>Tambahkan pengendali acara (event handler) baharu ke penutupan anda untuk melakukan sesuatu yang lebih banyak pada tanaman; contohnya, klik dua kali loji untuk membawanya ke hadapan. Dapatkan kreatif!</p>
+<h2 id="kuiz-pasca-kuliah">Kuiz Pasca Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/20">Kuiz Pasca Kuliah</a></p>
+<h2 id="mengkaji-belajar-sendiri">Mengkaji &amp; Belajar Sendiri</h2>
+<p>Walaupun menyeret elemen di sekitar skrin kelihatan remeh, ada banyak cara untuk melakukan ini dan banyak perangkap, bergantung pada kesan yang anda cari. Sebenarnya, terdapat keseluruhan [drag and drop API] (https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API) yang boleh anda cuba. Kami tidak menggunakannya dalam modul ini kerana kesan yang kami mahukan agak berbeza, tetapi cuba API ini pada projek anda sendiri dan lihat apa yang boleh anda capai.</p>
+<p>Dapatkan lebih banyak maklumat mengenai peristiwa penunjuk pada <a href="https://www.w3.org/TR/pointerevents1/">dokumen W3C</a> dan di <a href="https://developer.mozilla.org/%20dokumen%20/%20Web%20/%20API%20/%20Pointer_events">dokumen web MDN</a>.</p>
+<p>Sentiasa periksa keupayaan penyemak imbas menggunakan <a href="https://caniuse.com/">CanIUse.com</a>.</p>
+<h2 id="tugasan">Tugasan</h2>
+<p><a href="assignment.ms.md">Bekerja sedikit dengan DOM</a></p>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2017-08-30" />
+  <title>One-Time Payments</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">One-Time Payments</h1>
+<p class="date">2017-08-30</p>
+</header>
+<p>If you choose to charge users for your Chrome App, Chrome Extension, or Chrome Theme in the Chrome Web Store, there are several options available to you. The Chrome Web Store has a built-in one-time payment system called Chrome Web Store Payments.</p>
+<p>Alternatively for Chrome Apps, you have the option of selling virtual goods with <a href="/docs/webstore/payments-iap">Payments Merchant Account</a> along with the Chrome Web Store API.</p>
+<div class="aside aside--note">
+<strong>Note: </strong>Chrome Web Store payment methods are not available for hosted apps.
+</div>
+<h2 id="offering-a-free-trial-offering-free-trial">Offering a free trial {: #offering-free-trial }</h2>
+<p>For Chrome Apps and Chrome Extensions, you can provide a free trial version that either gives the user full access for a limited period of time or restricts which features are available. You can enable the free trial by checking the appropriate box in the Developer Dashboard, then using the Licensing API to confirm what kind of license the user has and how long they’ve had it, with an upgrade path to the paid version.</p>
+<h2 id="chrome-web-store-licensing-api-cws-licensing-api">Chrome Web Store Licensing API {: #cws-licensing-api }</h2>
+<p>You can use the Chrome Web Store Licensing API to determine whether the user has paid for your item or how long they’ve been using their free trial. The Licensing API is a simple REST-based API that lets you query the Chrome Web Store license server to find out whether a particular user is using a free trial or if they have paid for your item.</p>
+<h2 id="contents">Contents</h2>
+<ol type="1">
+<li><a href="#before-starting">Before you get started</a></li>
+<li><a href="#using-otps">Using one-time payments</a></li>
+<li><a href="#verifying-payment">Verifying payment and offering free trial</a></li>
+<li><a href="#free2paid">Migrating from a free to a paid experience</a></li>
+<li><a href="#sample-app">Sample Chrome App</a></li>
+</ol>
+<h2 id="before-you-get-started-before-starting">Before you get started {: #before-starting }</h2>
+<p>If you don’t have one already, you must <a href="https://payments.google.com/merchant/signup">open a Google Payments Merchant account</a>, and associate that account with the store.</p>
+<div class="aside aside--note">
+<b>Note</b>: See <a href="/webstore/pricing#seller">Payments: Regions, fees and tiers</a> for more information about fees and locations where you can sell your app.
+</div>
+<h2 id="using-one-time-payments-using-otps">Using one-time payments {: #using-otps }</h2>
+<p>You can set up the one-time payment and offer a free trial option on the listing page of the <a href="https://chrome.google.com/webstore/developer/dashboard">Chrome Web Store Developer Dashboard</a>. The Chrome Web Store manages the licenses for each user and exposes that information through a REST API.</p>
+<p>To enable one-time payments:</p>
+<ol type="1">
+<li>Choose and set the price in the Chrome Web Store listing.</li>
+<li>Enable the Chrome Web Store API in the <a href="https://cloud.google.com/console">Google APIs Console</a>.</li>
+<li>Update the <code>manifest.json</code> to add the <a href="#update-manifest">necessary scope and permission</a>.</li>
+<li>Add code to your app to verify the license.</li>
+</ol>
+<h3 id="update-your-chrome-web-store-listing-update-cws-listing">Update your Chrome Web Store listing {: #update-cws-listing }</h3>
+<p>Follow the steps below to enable one-time payments for your item:</p>
+<ol type="1">
+<li>Click <strong>Change pricing</strong> in the Pricing and payments section of the listing.</li>
+<li>Choose <strong>This item uses Chrome Web Store Payments</strong>, and choose <strong>One-time payment</strong> in the drop down.</li>
+<li>If applicable, check the <strong>This item supports a free trial mode</strong> if you plan to offer a free trial for your item.</li>
+<li>Finally, click <strong>OK</strong> to return to the dashboard for your item.</li>
+</ol>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/VwqkyI8cJ1YVQR010lzh.png”, alt=“A screenshot of the change payment UI”, height=“560”, width=“795” %}</p>
+<h4 id="choosing-a-price-choosing-a-price">Choosing a price {: #choosing-a-price }</h4>
+<p>When you use Chrome Web Store Payments, you can choose from 18 tiers or set your own custom price for each supported region.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/fovAcun6Xbv1izwOcfh8.png”, alt=“A screenshot of the supported regions UI”, height=“523”, width=“652” %}</p>
+<p>To change the price of your item, select the tier you’d like in the Pricing and payments section of the listing. You can also set a custom price for each region, by choosing Mixed, and then select the price for each region in the Regions section.</p>
+<div class="aside aside--note">
+See <a href="/webstore/pricing#matrix">Payments: Regions, fees and tiers</a> for more information about the different tiers and prices in local currencies.
+</div>
+<h2 id="verifying-payment-and-offering-free-trial-verifying-payment">Verifying payment and offering free trial {: #verifying-payment }</h2>
+<p>To verify if the user has a license, you can query the Chrome Web Store Licensing API.</p>
+<p>Here’s an overview of the process required to use the licensing API</p>
+<ul>
+<li>Get the identity token for the current user.</li>
+<li>Make an authenticated request to the licensing server.</li>
+<li>Verify the response.</li>
+</ul>
+<h3 id="update-the-manifest.json-update-manifest">Update the manifest.json {: #update-manifest }</h3>
+<p>Before you can use the licensing API, you’ll need to modify the <code>manifest.json</code> file and add a new scope and potentially a new permission.</p>
+<ol type="1">
+<li>If you haven’t already, enable the Chrome Identity API, see <a href="/docs/extensions/reference/app_identity">User Authentication</a> for more information.</li>
+<li>If you haven’t already, enable the Chrome Web Store API in the <a href="https://code.google.com/apis/console">Google APIs Console</a>.</li>
+<li>In the <code>manifest.json</code> file:
+<ol type="1">
+<li>Add <code>https://www.googleapis.com/</code> to the <code>permissions</code> section.</li>
+<li>Add <code>https://www.googleapis.com/auth/chromewebstore.readonly</code> to the <code>scopes</code> subsection of the <code>oauth2</code> section.</li>
+</ol></li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="st">&quot;storage&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="st">&quot;identity&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="st">&quot;https://www.googleapis.com/&quot;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="dt">&quot;oauth2&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    <span class="dt">&quot;client_id&quot;</span><span class="fu">:</span> <span class="st">&quot;665859454684-s6nmohpktccl2srxvc67thbmpclpa36v.apps.googleusercontent.com&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="dt">&quot;scopes&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-10" title="10">      <span class="st">&quot;https://www.googleapis.com/auth/plus.login&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-11" title="11">      <span class="st">&quot;https://www.googleapis.com/auth/chromewebstore.readonly&quot;</span></a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="ot">]</span></a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<h3 id="verifying-the-license-verify-code">Verifying the license {: #verify-code }</h3>
+<p>To verify the user has either purchased your Web Store item or are using a free trial, do the following:</p>
+<ol type="1">
+<li>Get the current users authentication token using <code>chrome.identity.getAuthToken()</code>.</li>
+<li>Make an XHR with the users access token and your app ID to <code>https://www.googleapis.com/chromewebstore/v1.1/userlicenses/&lt;YOUR_APP_ID&gt;</code>.</li>
+<li>Parse the JSON response, verify the license and store the result.</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">var</span> CWS_LICENSE_API_URL <span class="op">=</span> <span class="st">&#39;https://www.googleapis.com/chromewebstore/v1.1/userlicenses/&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">var</span> req <span class="op">=</span> <span class="kw">new</span> <span class="at">XMLHttpRequest</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="va">req</span>.<span class="at">open</span>(<span class="st">&#39;GET&#39;</span><span class="op">,</span> CWS_LICENSE_API_URL <span class="op">+</span> <span class="va">chrome</span>.<span class="va">runtime</span>.<span class="at">id</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="va">req</span>.<span class="at">setRequestHeader</span>(<span class="st">&#39;Authorization&#39;</span><span class="op">,</span> <span class="st">&#39;Bearer &#39;</span> <span class="op">+</span> token)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="va">req</span>.<span class="at">onreadystatechange</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="cf">if</span> (<span class="va">req</span>.<span class="at">readyState</span> <span class="op">==</span> <span class="dv">4</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="kw">var</span> license <span class="op">=</span> <span class="va">JSON</span>.<span class="at">parse</span>(<span class="va">req</span>.<span class="at">responseText</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="at">verifyAndSaveLicense</span>(license)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="va">req</span>.<span class="at">send</span>()<span class="op">;</span></a></code></pre></div>
+<div class="aside aside--note">
+<b>Note</b>: You cannot offer free trial experiences for Themes because themes do not execute any JavaScript and cannot verify a license.
+</div>
+<h3 id="handling-and-parsing-the-response-parse-response">Handling and parsing the response {: #parse-response }</h3>
+<p>The response you get from the license server tells you three things: whether the user has access, the level of access the user should have, and how much longer the response is valid. If you just want to know whether the user has access, check the value of the <code>result</code> field. If you want to know whether the user should get a free trial version, check the value of the <code>accessLevel</code> field.</p>
+<p>Sample JSON license object</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;chromewebstore#license&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="dt">&quot;itemId&quot;</span><span class="fu">:</span> <span class="st">&quot;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="dt">&quot;createdTime&quot;</span><span class="fu">:</span> <span class="st">&quot;1377660091254&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="dt">&quot;result&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="dt">&quot;accessLevel&quot;</span><span class="fu">:</span> <span class="st">&quot;FULL&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="dt">&quot;maxAgeSecs&quot;</span><span class="fu">:</span> <span class="st">&quot;2052&quot;</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>
+Field Name
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+kind
+</td>
+<td>
+Identifies a Chrome Web Store license
+</td>
+</tr>
+<tr>
+<td>
+itemId
+</td>
+<td>
+Your app or extension ID
+</td>
+</tr>
+<tr>
+<td>
+createdTime
+</td>
+<td>
+The date that the license was created, returned as a Unix timestamp. You can use to limit functionality of a free trial to a specific period of time.
+</td>
+</tr>
+<tr>
+<td>
+result
+</td>
+<td>
+Whether the user has a license (full or trial), <code>true</code> or <code>false</code>
+</td>
+</tr>
+<tr>
+<td>
+accessLevel
+</td>
+<td>
+<code>FREE_TRIAL</code>, <code>FULL</code> or <code>NONE</code>
+</td>
+</tr>
+<tr>
+<td>
+maxAgeSecs
+</td>
+<td>
+The length of time the response is valid for, once that time has passed your app should query the license server again to check whether the user’s access has changed.
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="caching-the-response-cache-response">Caching the response {: #cache-response }</h3>
+<p>To improve the performance and avoid running into rate limits, you should cache the license data locally using the <a href="/docs/extensions/reference/storage"><code>chrome.storage.sync</code></a> API and only refresh it on a periodic basis. By storing the license data in the sync data, it will be synced across all machines that the users is logged into.</p>
+<p>In addition, do not block the user interface or lock the user out of your Chrome App or Extension while waiting for the licensing server to respond, but instead, allow the user to continue for a limited grace period until a response is received. Providing a grace period of at least a day or two will ensure that your Chrome App or Extension continues to work properly in an offline situation where the user may not be connected to the network.</p>
+<h2 id="handling-the-free-trial-experience-handling-trial">Handling the free trial experience {: #handling-trial }</h2>
+<p>If you decide to offer a free trial to users, there are several ways that you can allow users to try before they make the purchase. The two most common ways are providing full access for a limited time, or offering a limited feature set. Of course, you can also combine these two, or provide your own incentives to encourage users to upgrade to the paid version.</p>
+<h3 id="limited-time-access-trial-limited-time">Limited time access {: #trial-limited-time }</h3>
+<p>The license API makes it easy to provide a limited time trial experience by including the date the license was first issued to the user. Comparing the <code>createdDate</code> to the current date will tell you how long the user has been using the free trial.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">var</span> licenseStatus<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="cf">if</span> (<span class="va">license</span>.<span class="at">result</span> <span class="op">&amp;&amp;</span> <span class="va">license</span>.<span class="at">accessLevel</span> <span class="op">==</span> <span class="st">&quot;FULL&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Fully paid &amp; properly licensed.&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  licenseStatus <span class="op">=</span> <span class="st">&quot;FULL&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">license</span>.<span class="at">result</span> <span class="op">&amp;&amp;</span> <span class="va">license</span>.<span class="at">accessLevel</span> <span class="op">==</span> <span class="st">&quot;FREE_TRIAL&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="kw">var</span> daysAgoLicenseIssued <span class="op">=</span> <span class="va">Date</span>.<span class="at">now</span>() <span class="op">-</span> <span class="at">parseInt</span>(<span class="va">license</span>.<span class="at">createdTime</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">  daysAgoLicenseIssued <span class="op">=</span> daysAgoLicenseIssued / <span class="dv">1000</span> / <span class="dv">60</span> / <span class="dv">60</span> / <span class="dv">24</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="cf">if</span> (daysAgoLicenseIssued <span class="op">&lt;=</span> TRIAL_PERIOD_DAYS) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Free trial, still within trial period&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">    licenseStatus <span class="op">=</span> <span class="st">&quot;FREE_TRIAL&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-12" title="12">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Free trial, trial period expired.&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-13" title="13">    licenseStatus <span class="op">=</span> <span class="st">&quot;FREE_TRIAL_EXPIRED&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-14" title="14">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-16" title="16">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;No license ever issued.&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-17" title="17">  licenseStatus <span class="op">=</span> <span class="st">&quot;NONE&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="op">}</span></a></code></pre></div>
+<div class="aside aside--note">
+<b>Note</b>: After major updates or a significant period of time, you may want to allow the user to try your item again so they can try the new features and see how the item has changed.
+</div>
+<h3 id="limited-feature-set-trial-limited-feature">Limited feature set {: #trial-limited-feature }</h3>
+<p>Another way that you can provide a free trial to users is by offering them a limited feature set until they’ve upgraded to the paid version. For example, you might limit the number of files open at any given time, or the total number of files that the user can edit before being prompted for payment.</p>
+<h2 id="migrating-from-a-free-to-a-paid-experience-free2paid">Migrating from a free to a paid experience {: #free2paid }</h2>
+<p>If you decide to migrate from a free experience to a paid experience, you should consider what experience you want to provide for any user who installed your item prior to the change. We strongly recommend grandfathering these users into the full, paid experience though the decision is yours.</p>
+<p>Users who installed your item prior to the change will have a <code>FREE_TRIAL</code> license. To determine if a user installed your item prior to the price change, you can check the <code>createdTime</code> value in the license to determine when they first installed it.</p>
+<h2 id="sample-chrome-app-sample-app">Sample Chrome App {: #sample-app }</h2>
+<p>For a simple Chrome App that demonstrates how to use the Chrome Web Store Licensing API, see:</p>
+<ul>
+<li><a href="https://github.com/GoogleChrome/chrome-app-samples/tree/master/one-time-payment">source code</a></li>
+<li><a href="https://chrome.google.com/webstore/detail/one-time-payment-sample/ebcgmmcbgnpoclkoibogeiokfdmjbbob">published app</a></li>
+</ul>
+<p>You can install and run the published app from the Chrome Web Store to try out free trial experience.</p>
+</body>
+</html>

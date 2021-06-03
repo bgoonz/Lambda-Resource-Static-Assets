@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="http-timer">http-timer</h1>
+<blockquote>
+<p>Timings for HTTP requests</p>
+</blockquote>
+<p><a href="https://travis-ci.org/szmarczak/http-timer"><img src="https://travis-ci.org/szmarczak/http-timer.svg?branch=master" alt="Build Status" /></a> <a href="https://coveralls.io/github/szmarczak/http-timer?branch=master"><img src="https://coveralls.io/repos/github/szmarczak/http-timer/badge.svg?branch=master" alt="Coverage Status" /></a> <a href="https://packagephobia.now.sh/result?p=@szmarczak/http-timer"><img src="https://packagephobia.now.sh/badge?p=@szmarczak/http-timer" alt="install size" /></a></p>
+<p>Inspired by the <a href="https://github.com/request/request"><code>request</code> package</a>.</p>
+<h2 id="installation">Installation</h2>
+<p>NPM:</p>
+<blockquote>
+<p><code>npm install @szmarczak/http-timer</code></p>
+</blockquote>
+<p>Yarn:</p>
+<blockquote>
+<p><code>yarn add @szmarczak/http-timer</code></p>
+</blockquote>
+<h2 id="usage">Usage</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">const</span> https <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;https&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">const</span> timer <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;@szmarczak/http-timer&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">const</span> request <span class="op">=</span> <span class="va">https</span>.<span class="at">get</span>(<span class="st">&#39;https://httpbin.org/anything&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="at">timer</span>(request)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="va">request</span>.<span class="at">once</span>(<span class="st">&#39;response&#39;</span><span class="op">,</span> response <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    <span class="va">response</span>.<span class="at">resume</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="va">response</span>.<span class="at">once</span>(<span class="st">&#39;end&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-10" title="10">        <span class="va">console</span>.<span class="at">log</span>(<span class="va">response</span>.<span class="at">timings</span>)<span class="op">;</span> <span class="co">// You can use `request.timings` as well</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-13" title="13"></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="co">// {</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="co">//   start: 1572712180361,</span></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="co">//   socket: 1572712180362,</span></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="co">//   lookup: 1572712180415,</span></a>
+<a class="sourceLine" id="cb1-18" title="18"><span class="co">//   connect: 1572712180571,</span></a>
+<a class="sourceLine" id="cb1-19" title="19"><span class="co">//   upload: 1572712180884,</span></a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="co">//   response: 1572712181037,</span></a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="co">//   end: 1572712181039,</span></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="co">//   error: undefined,</span></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="co">//   abort: undefined,</span></a>
+<a class="sourceLine" id="cb1-24" title="24"><span class="co">//   phases: {</span></a>
+<a class="sourceLine" id="cb1-25" title="25"><span class="co">//     wait: 1,</span></a>
+<a class="sourceLine" id="cb1-26" title="26"><span class="co">//     dns: 53,</span></a>
+<a class="sourceLine" id="cb1-27" title="27"><span class="co">//     tcp: 156,</span></a>
+<a class="sourceLine" id="cb1-28" title="28"><span class="co">//     request: 313,</span></a>
+<a class="sourceLine" id="cb1-29" title="29"><span class="co">//     firstByte: 153,</span></a>
+<a class="sourceLine" id="cb1-30" title="30"><span class="co">//     download: 2,</span></a>
+<a class="sourceLine" id="cb1-31" title="31"><span class="co">//     total: 678</span></a>
+<a class="sourceLine" id="cb1-32" title="32"><span class="co">//   }</span></a>
+<a class="sourceLine" id="cb1-33" title="33"><span class="co">// }</span></a></code></pre></div>
+<h2 id="api">API</h2>
+<h3 id="timerrequest">timer(request)</h3>
+<p>Returns: <code>Object</code></p>
+<p><strong>Note</strong>: The time is a <code>number</code> representing the milliseconds elapsed since the UNIX epoch.</p>
+<ul>
+<li><code>start</code> - Time when the request started.</li>
+<li><code>socket</code> - Time when a socket was assigned to the request.</li>
+<li><code>lookup</code> - Time when the DNS lookup finished.</li>
+<li><code>connect</code> - Time when the socket successfully connected.</li>
+<li><code>secureConnect</code> - Time when the socket securely connected.</li>
+<li><code>upload</code> - Time when the request finished uploading.</li>
+<li><code>response</code> - Time when the request fired <code>response</code> event.</li>
+<li><code>end</code> - Time when the response fired <code>end</code> event.</li>
+<li><code>error</code> - Time when the request fired <code>error</code> event.</li>
+<li><code>abort</code> - Time when the request fired <code>abort</code> event.</li>
+<li><code>phases</code>
+<ul>
+<li><code>wait</code> - <code>timings.socket - timings.start</code></li>
+<li><code>dns</code> - <code>timings.lookup - timings.socket</code></li>
+<li><code>tcp</code> - <code>timings.connect - timings.lookup</code></li>
+<li><code>tls</code> - <code>timings.secureConnect - timings.connect</code></li>
+<li><code>request</code> - <code>timings.upload - (timings.secureConnect || timings.connect)</code></li>
+<li><code>firstByte</code> - <code>timings.response - timings.upload</code></li>
+<li><code>download</code> - <code>timings.end - timings.response</code></li>
+<li><code>total</code> - <code>(timings.end || timings.error || timings.abort) - timings.start</code></li>
+</ul></li>
+</ul>
+<p>If something has not been measured yet, it will be <code>undefined</code>.</p>
+<h2 id="license">License</h2>
+<p>MIT</p>
+</body>
+</html>

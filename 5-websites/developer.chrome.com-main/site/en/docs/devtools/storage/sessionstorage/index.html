@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2019-03-14" />
+  <title>View and edit session storage</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">View and edit session storage</h1>
+<p class="date">2019-03-14</p>
+</header>
+<p>This guide shows you how to use <a href="/docs/devtools">Chrome DevTools</a> to view, edit, and delete <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage"><code>sessionStorage</code></a> key-value pairs.</p>
+<h2 id="view-sessionstorage-keys-and-values-view">View sessionStorage keys and values {: #view }</h2>
+<ol type="1">
+<li><p>Click the <strong>Application</strong> tab to open the <strong>Application</strong> panel. The <strong>Manifest</strong> pane is shown by default.</p>
+<p>{% Img src=“image/admin/Rt9sE5wcM4XChjHAEbwm.png”, alt=“The Manifest pane”, width=“800”, height=“619” %}</p>
+<p><strong>Figure 1</strong>. The Manifest pane</p></li>
+<li><p>Expand the <strong>Session Storage</strong> menu.</p>
+<p>{% Img src=“image/admin/FNTagOn8cnsylvpMAqls.png”, alt=“The Session Storage Menu”, width=“800”, height=“579” %}</p>
+<p><strong>Figure 2</strong>. The <strong>Session Storage</strong> menu shows two domains: <strong>https://developers.google.com</strong> and <strong>https://www.youtube.com</strong></p></li>
+<li><p>Click a domain to view its key-value pairs.</p>
+<p>{% Img src=“image/admin/fJijNAIrM9DFmAGxkXAU.png”, alt=“The sessionStorage key-value pairs for the https://www.youtube.com domain”, width=“800”, height=“579” %}</p>
+<p><strong>Figure 3</strong>. The <code>sessionStorage</code> key-value pairs for the <strong>https://www.youtube.com</strong> domain</p></li>
+<li><p>Click a row of the table to view the value in the viewer below the table.</p>
+<p>{% Img src=“image/admin/YxEayGVMtIP0yExSuWVk.png”, alt=“Viewing the value of the yt-remote-cast-available key”, width=“800”, height=“579” %}</p>
+<p><strong>Figure 4</strong>. Viewing the value of the <code>yt-remote-cast-available</code> key</p></li>
+</ol>
+<h2 id="create-a-new-sessionstorage-key-value-pair-create">Create a new sessionStorage key-value pair {: #create }</h2>
+<ol type="1">
+<li><a href="#view">View a domain’s <code>sessionStorage</code> key-value pairs</a>.</li>
+<li><p>Double-click the empty part of the table. DevTools creates a new row and focuses your cursor in the <strong>Key</strong> column.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/wHbbYT8MsU3U68Op2yWj.png”, alt=“The empty part of the table to double-click in order to create a new key-value pair”, width=“800”, height=“579” %}</p>
+<p><strong>Figure 5</strong>. The empty part of the table to double-click in order to create a new key-value pair</p></li>
+</ol>
+<h2 id="edit-sessionstorage-keys-or-values-edit">Edit sessionStorage keys or values {: #edit }</h2>
+<ol type="1">
+<li><a href="#view">View a domain’s <code>sessionStorage</code> key-value pairs</a>.</li>
+<li><p>Double-click a cell in the <strong>Key</strong> or <strong>Value</strong> column to edit that key or value.</p>
+<p>{% Img src=“image/admin/tEPwnClhMoj3lQGkIpa8.png”, alt=“Editing a sessionStorage key”, width=“800”, height=“579” %}</p>
+<p><strong>Figure 6</strong>. Editing a <code>sessionStorage</code> key</p></li>
+</ol>
+<h2 id="delete-sessionstorage-key-value-pairs-delete">Delete sessionStorage key-value pairs {: #delete }</h2>
+<ol type="1">
+<li><a href="#view">View a domain’s <code>sessionStorage</code> key-value pairs</a>.</li>
+<li>Click the key-value pair that you want to delete. DevTools highlights it blue to indicate that it’s selected.</li>
+<li>Press the Delete key or click <strong>Delete Selected</strong> {% Img src=“image/admin/RZdVGIrpAWpIoQ7yo45u.png”, alt=“Delete Selected”, width=“20”, height=“20” %}.</li>
+</ol>
+<h2 id="delete-all-sessionstorage-key-value-pairs-for-a-domain-deleteall">Delete all sessionStorage key-value pairs for a domain {: #deleteall }</h2>
+<ol type="1">
+<li><a href="#view">View a domain’s <code>sessionStorage</code> key-value pairs</a>.</li>
+<li>Click <strong>Clear All</strong> {% Img src=“image/admin/XOrLlc1EDHyM8wRTRhD2.png”, alt=“Clear All”, width=“26”, height=“26” %}.</li>
+</ol>
+<h2 id="interact-with-sessionstorage-from-the-console-console">Interact with sessionStorage from the Console {: #console }</h2>
+<p>Since you can run JavaScript in the <strong>Console</strong>, and since the <strong>Console</strong> has access to the page’s JavaScript contexts, it’s possible to interact with <code>sessionStorage</code> from the <strong>Console</strong>.</p>
+<ol type="1">
+<li><p>Use the <strong>JavaScript contexts</strong> menu to change the JavaScript context of the <strong>Console</strong> if you want to access the <code>sessionStorage</code> key-value pairs of a domain other than the page you’re on.</p>
+<p>{% Img src=“image/admin/6CdoUiGdkS5zpuBeF9pE.png”, alt=“Changing the JavaScript context of the Console”, width=“800”, height=“525” %}</p>
+<p><strong>Figure 7</strong>. Changing the JavaScript context of the <strong>Console</strong></p></li>
+<li><p>Run your <code>sessionStorage</code> expressions in the Console, the same as you would in your JavaScript.</p>
+<p>{% Img src=“image/admin/y85mudOFG83xUq9rIUJE.png”, alt=“Interacting with sessionStorage from the Console”, width=“800”, height=“579” %}</p>
+<p><strong>Figure 8</strong>. Interacting with <code>sessionStorage</code> from the <strong>Console</strong></p></li>
+</ol>
+</body>
+</html>

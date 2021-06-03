@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>📦 plugin-content-docs</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">📦 plugin-content-docs</h1>
+</header>
+<p>Provides the <a href="../../guides/docs/docs-introduction.md">Docs</a> functionality and is the default docs plugin for Docusaurus.</p>
+<h2 id="installation">Installation</h2>
+<p><code>bash npm2yarn npm install --save @docusaurus/plugin-content-docs</code></p>
+<div class="tip">
+<p>If you have installed <code>@docusaurus/preset-classic</code>, you don’t need to install it as a dependency. You can also configure it through the <a href="presets.md#docusauruspreset-classic">classic preset options</a> instead of doing it like below.</p>
+</div>
+<h2 id="configuration">Configuration</h2>
+<p><code>js title="docusaurus.config.js" module.exports = {   plugins: [     [       '@docusaurus/plugin-content-docs',       {         /**          * Path to data on filesystem relative to site dir.          */         path: 'docs',         /**          * Base url to edit your site.          * Docusaurus will compute the final editUrl with "editUrl + relativeDocPath"          */         editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',         /**          * For advanced cases, compute the edit url for each markdown file yourself.          */         editUrl: function ({           locale,           version,           versionDocsDirPath,           docPath,           permalink,         }) {           return `https://github.com/facebook/docusaurus/edit/master/website/${versionDocsDirPath}/${docPath}`;         },         /**          * Useful if you commit localized files to git.          * When markdown files are localized, the edit url will target the localized file,          * instead of the original unlocalized file.          * Note: this option is ignored when editUrl is a function          */         editLocalizedFiles: false,         /**          * Useful if you don't want users to submit doc pull-requests to older versions.          * When docs are versioned, the edit url will link to the doc          * in current version, instead of the versioned doc.          * Note: this option is ignored when editUrl is a function          */         editCurrentVersion: false,         /**          * URL route for the docs section of your site.          * *DO NOT* include a trailing slash.          * INFO: It is possible to set just `/` for shipping docs without base path.          */         routeBasePath: 'docs',         include: ['**/*.md', '**/*.mdx'], // Extensions to include.         /**          * Path to sidebar configuration for showing a list of markdown pages.          */         sidebarPath: 'sidebars.js',         /**          * Function used to replace the sidebar items of type "autogenerated"          * by real sidebar items (docs, categories, links...)          */         sidebarItemsGenerator: function ({item, version, docs}) {           // Use the provided data to create a custom "sidebar slice"           return [{type: 'doc', id: 'doc1'}];         },         /**          * Theme components used by the docs pages          */         docLayoutComponent: '@theme/DocPage',         docItemComponent: '@theme/DocItem',         /**          * Remark and Rehype plugins passed to MDX          */         remarkPlugins: [           /* require('remark-math') */         ],         rehypePlugins: [],         /**          * Custom Remark and Rehype plugins passed to MDX before          * the default Docusaurus Remark and Rehype plugins.          */         beforeDefaultRemarkPlugins: [],         beforeDefaultRehypePlugins: [],         /**          * Whether to display the author who last updated the doc.          */         showLastUpdateAuthor: false,         /**          * Whether to display the last date the doc was updated.          */         showLastUpdateTime: false,         /**          * By default, versioning is enabled on versioned sites.          * This is a way to explicitly disable the versioning feature.          */         disableVersioning: false,         /**          * Skip the next release docs when versioning is enabled.          * This will not generate HTML files in the production build for documents          * in `/docs/next` directory, only versioned docs.          */         excludeNextVersionDocs: false,         /**          * The last version is the one we navigate to in priority on versioned sites          * It is the one displayed by default in docs navbar items          * By default, the last version is the first one to appear in versions.json          * By default, the last version is at the "root" (docs have path=/docs/myDoc)          * Note: it is possible to configure the path and label of the last version          * Tip: using lastVersion: 'current' make sense in many cases          */         lastVersion: undefined,         /**          * The docusaurus versioning defaults don't make sense for all projects          * This gives the ability customize the label and path of each version          * You may not like that default version          */         versions: {           /*           Example configuration:            current: {             label: 'Android SDK v2.0.0 (WIP)',             path: 'android-2.0.0',           },           '1.0.0': {             label: 'Android SDK v1.0.0',             path: 'android-1.0.0',           },           */         },         /**          * Sometimes you only want to include a subset of all available versions.          * Tip: limit to 2 or 3 versions to improve startup and build time in dev and deploy previews          */         onlyIncludeVersions: undefined, // ex: ["current", "1.0.0", "2.0.0"]       },     ],   ], };</code></p>
+<h2 id="markdown-frontmatter">Markdown Frontmatter</h2>
+<p>Markdown documents can use the following markdown frontmatter metadata fields, enclosed by a line <code>---</code> on either side:</p>
+<ul>
+<li><code>id</code>: A unique document id. If this field is not present, the document’s <code>id</code> will default to its file name (without the extension)</li>
+<li><code>title</code>: The title of your document. If this field is not present, the document’s <code>title</code> will default to its <code>id</code></li>
+<li><code>hide_title</code>: Whether to hide the title at the top of the doc. By default, it is <code>false</code></li>
+<li><code>hide_table_of_contents</code>: Whether to hide the table of contents to the right. By default it is <code>false</code></li>
+<li><code>sidebar_label</code>: The text shown in the document sidebar and in the next/previous button for this document. If this field is not present, the document’s <code>sidebar_label</code> will default to its <code>title</code></li>
+<li><code>sidebar_position</code>: Permits to control the position of a doc inside the generated sidebar slice, when using <code>autogenerated</code> sidebar items. Can be Int or Float.</li>
+<li><code>strip_number_prefixes</code>: When a document has a number prefix (<code>001 - My Doc.md</code>, <code>2. MyDoc.md</code>…), it is automatically removed, and the prefix is used as <code>sidebar_position</code>. Use <code>strip_number_prefixes: false</code> if you want to disable this behavior</li>
+<li><code>custom_edit_url</code>: The URL for editing this document. If this field is not present, the document’s edit URL will fall back to <code>editUrl</code> from options fields passed to <code>docusaurus-plugin-content-docs</code></li>
+<li><code>keywords</code>: Keywords meta tag for the document page, for search engines</li>
+<li><code>description</code>: The description of your document, which will become the <code>&lt;meta name="description" content="..."/&gt;</code> and <code>&lt;meta property="og:description" content="..."/&gt;</code> in <code>&lt;head&gt;</code>, used by search engines. If this field is not present, it will default to the first line of the contents</li>
+<li><code>image</code>: Cover or thumbnail image that will be used when displaying the link to your post</li>
+<li><code>slug</code>: Allows to customize the document url (<code>/&lt;routeBasePath&gt;/&lt;slug&gt;</code>). Support multiple patterns: <code>slug: my-doc</code>, <code>slug: /my/path/myDoc</code>, <code>slug: /</code></li>
+</ul>
+<p>Example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">id:</span><span class="at"> doc-markdown</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="fu">title:</span><span class="at"> Markdown Features</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="fu">hide_title:</span><span class="at"> </span><span class="ch">false</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="fu">hide_table_of_contents:</span><span class="at"> </span><span class="ch">false</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="fu">sidebar_label:</span><span class="at"> Markdown :)</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="fu">custom_edit_url:</span><span class="at"> https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="fu">description:</span><span class="at"> How do I find you when I cannot solve this problem</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="fu">keywords:</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="kw">-</span> docs</a>
+<a class="sourceLine" id="cb1-11" title="11">  <span class="kw">-</span> docusaurus</a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="fu">image:</span><span class="at"> https://i.imgur.com/mErPwqL.png</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="fu">slug:</span><span class="at"> /myDoc</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb1-15" title="15">My Document Markdown content</a></code></pre></div>
+<h2 id="i18n">i18n</h2>
+<p>Read the <a href="../../i18n/i18n-introduction.md">i18n introduction</a> first.</p>
+<h3 id="translation-files-location">Translation files location</h3>
+<ul>
+<li><strong>Base path</strong>: <code>website/i18n/&lt;locale&gt;/docusaurus-plugin-content-docs</code></li>
+<li><strong>Multi-instance path</strong>: <code>website/i18n/&lt;locale&gt;/docusaurus-plugin-content-docs-&lt;pluginId&gt;</code></li>
+<li><strong>JSON files</strong>: extracted with <a href="../../cli.md#docusaurus-write-translations"><code>docusaurus write-translations</code></a></li>
+<li><strong>Markdown files</strong>: <code>website/i18n/&lt;locale&gt;/docusaurus-plugin-content-docs/&lt;version&gt;</code></li>
+</ul>
+<h3 id="example-file-system-structure">Example file-system structure</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">website/i18n</span>/<span class="op">&lt;</span><span class="ex">locale</span><span class="op">&gt;</span>/docusaurus-plugin-content-docs</a>
+<a class="sourceLine" id="cb2-2" title="2">│</a>
+<a class="sourceLine" id="cb2-3" title="3">│ <span class="co"># translations for website/docs</span></a>
+<a class="sourceLine" id="cb2-4" title="4">├── <span class="ex">current</span></a>
+<a class="sourceLine" id="cb2-5" title="5">│   ├── <span class="ex">api</span></a>
+<a class="sourceLine" id="cb2-6" title="6">│   │   └── <span class="ex">config.md</span></a>
+<a class="sourceLine" id="cb2-7" title="7">│   └── <span class="ex">getting-started.md</span></a>
+<a class="sourceLine" id="cb2-8" title="8">├── <span class="ex">current.json</span></a>
+<a class="sourceLine" id="cb2-9" title="9">│</a>
+<a class="sourceLine" id="cb2-10" title="10">│ <span class="co"># translations for website/versioned_docs/version-1.0.0</span></a>
+<a class="sourceLine" id="cb2-11" title="11">├── <span class="ex">version-1.0.0</span></a>
+<a class="sourceLine" id="cb2-12" title="12">│   ├── <span class="ex">api</span></a>
+<a class="sourceLine" id="cb2-13" title="13">│   │   └── <span class="ex">config.md</span></a>
+<a class="sourceLine" id="cb2-14" title="14">│   └── <span class="ex">getting-started.md</span></a>
+<a class="sourceLine" id="cb2-15" title="15">└── <span class="ex">version-1.0.0.json</span></a></code></pre></div>
+</body>
+</html>

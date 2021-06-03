@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2017-08-30" />
+  <title>Identifying the User</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Identifying the User</h1>
+<p class="date">2017-08-30</p>
+</header>
+<p>This page tells you how to get the Google Account identity of a user, using Google’s OpenID endpoint. You need this identity if you support Chrome Web Store Payments, because payment information is tied to the user’s Google Account.</p>
+<p>Even if you don’t use Chrome Web Store Payments, consider using Google Accounts if your app needs a login system. Google Accounts can help you provide a better user experience, since users of the Chrome Web Store are likely to be logged in already, and they won’t have to set up and remember yet another username and password.</p>
+<h2 id="when-to-support-google-accounts">When to support Google Accounts</h2>
+<p>The following table summarizes when you should support Google Account logins using OpenID.</p>
+<table>
+<tbody>
+<tr>
+<th>
+App cost
+</th>
+<th>
+Payment plan/system
+</th>
+<th>
+Support for Google Accounts (using OpenID)
+</th>
+</tr>
+<tr>
+<td>
+Paid
+</td>
+<td>
+Chrome Web Store Payment System
+</td>
+<td>
+<b>Required</b><br>The Licensing API relies on Google Account user IDs.
+</td>
+</tr>
+<tr>
+<td>
+Paid
+</td>
+<td>
+Custom payment solution
+</td>
+<td>
+<b>Recommended</b><br>Users from the Chrome Web Store will have a better experience if you support the Google Account that they’re already logged into.
+</td>
+</tr>
+<tr>
+<td>
+Free
+</td>
+<td>
+You <b>might charge</b> for the app in the future
+</td>
+<td>
+<b>Recommended</b><br>Supporting Google Accounts might make adding payments simpler.
+</td>
+</tr>
+<tr>
+<td>
+Free
+</td>
+<td>
+<b>No plans to charge</b> for the app in the future
+</td>
+<td>
+<b>Optional</b><br>If you want to identify individual users, Google Accounts are a reasonable way to do so.
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-to-use-openid-with-google-accounts">How to use OpenID with Google Accounts</h2>
+<p>To get the user’s OpenID URL, you query Google’s OpenID service. If the user isn’t already logged in, the user will be prompted to sign in with a Google-provided login page or popup.</p>
+<div class="aside aside--note">
+<b>Note</b>: The OpenID URL is unique for a specific Google Account <em>and a specific app</em>. If you publish multiple apps, the same user will have a different OpenID URL for each app.
+</div>
+<p>Here’s what the login page looks like. Note that it has a Google URL, not a URL from the app’s site:</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/yDxgjzMfnbRFJi9XlGyj.png”, alt=“The Google login page.”, height=“368”, width=“644” %}</p>
+<p>If you’re writing a hosted app with Google App Engine, supporting Google Accounts is easy. You just use the default Google Accounts API authentication and the Users service. For details, see the user authentication docs (for <a href="https://developers.google.com/appengine/docs/java/users/overview">Java</a> or <a href="https://developers.google.com/appengine/docs/python/users/overview">Python</a>). Here’s an example (taken from the <a href="/docs/webstore/get_started">Licensing API</a> tutorial’s <a href="http://src.chromium.org/viewvc/chrome/trunk/src/chrome/common/extensions/docs/examples/apps/hello-java/HelloLicenseServlet.java">HelloLicenseServlet.java</a> file) of the code you use to get the current user’s OpenID URL if you’re implementing a Java app with Google App Engine:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" title="1">UserService userService = UserServiceFactory.<span class="fu">getUserService</span>();</a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">if</span> (userService.<span class="fu">isUserLoggedIn</span>()) {</a>
+<a class="sourceLine" id="cb1-4" title="4">  User user = userService.<span class="fu">getCurrentUser</span>();</a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="co">/* ...Do something with user.getFederatedIdentity(), which is the OpenID URL. */</span></a>
+<a class="sourceLine" id="cb1-6" title="6">}</a></code></pre></div>
+<p>If you aren’t using Google App Engine, you can get the Google OpenID endpoint by sending a request to <code>https://www.google.com/accounts/o8/id</code>. See <a href="https://developers.google.com/accounts/docs/OpenID">Federated Login for Google Account Users</a> for details.</p>
+<h2 id="how-to-skip-the-openid-approval-screen">How to skip the OpenID approval screen</h2>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/yDxgjzMfnbRFJi9XlGyj.png”, alt=“the Google Accounts approval page”, height=“368”, width=“644” %}</p>
+<p>Normally, the first time your app uses the Google OpenID endpoint to authenticate a particular user, the user must approve your access to their account. To the right, you can see a typical OpenID approval screen.</p>
+<p>Your users will have a better experience if they never see the approval screen. The screen is skipped if <strong>both</strong> of the following are true:</p>
+<ul>
+<li>Your app requests only the OpenID URL. If your app requests something else—the user’s email address, for example—the approval screen is shown.</li>
+<li>You specify your app’s OpenID realm in the Edit page.</li>
+</ul>
+<p>Here’s how to specify your OpenID realm:</p>
+<ol type="1">
+<li>In the Chrome Developer Dashboard, go to the Edit page for your app.</li>
+<li>In the <strong>OpenID</strong> section, select the checkbox.</li>
+<li>In the text field that appears, enter the realm that your app will use to query Google’s OpenID service.<br />
+This must be exactly the same as the value of the <code>openid.realm</code> field in your authentication requests.</li>
+<li>Save your changes.<br />
+They’ll take effect the next time you publish your app.</li>
+</ol>
+<p>If your app’s code doesn’t specify the value of the <code>openid.realm</code> parameter, look at your OpenID library to see how it sets that value. For details on how <code>openid.realm</code> is used, see <a href="https://developers.google.com/accounts/docs/OpenID#Parameters">Request parameters</a> in the Google OpenID documentation.</p>
+<h2 id="openid-resources">OpenID resources</h2>
+<p>You should use an existing OpenID library rather than implement your own. In addition to Google App Engine’s Users service, you can find OpenID libraries in a number of languages. Here are a few libraries we’ve used:</p>
+<ul>
+<li>Java: <a href="http://code.google.com/p/openid4java/">OpenID4Java</a></li>
+<li>Python: <a href="http://code.google.com/p/google-app-engine-django-openid/">GAE Django OpenID</a></li>
+<li>PHP: <a href="http://gitorious.org/lightopenid">LightOpenID</a></li>
+<li>Ruby: <a href="http://rubyforge.org/projects/ruby-openid/">ruby-openid</a> and <a href="http://github.com/josh/rack-openid">rack-openid</a>, used together</li>
+</ul>
+<p>You can find more libraries at Janrain’s <a href="http://www.janrain.com/openid-enabled">OpenID Enabled</a>, and a full list at the <a href="http://openid.net/developers/libraries/">OpenID Foundation</a>.</p>
+<p>The following pages have detailed explanations of how to use OpenID with Google Accounts:</p>
+<ul>
+<li><a href="/docs/webstore/authentication">Supporting Federated Login with Google Accounts for Chrome Web Store Apps</a></li>
+<li><a href="https://developers.google.com/accounts/docs/OpenID">Federated Login for Google Account Users</a></li>
+<li><a href="https://developers.google.com/appengine/articles/openid">Using Federated Authentication via OpenID in Google App Engine</a></li>
+</ul>
+<h2 id="what-next">What next?</h2>
+<p>If you’re using the Licensing API, your next stop is <a href="/docs/webstore/check_for_payment">Checking for Payment</a>. Otherwise, go on to <a href="/docs/webstore/images">Supplying Images</a>.</p>
+</body>
+</html>

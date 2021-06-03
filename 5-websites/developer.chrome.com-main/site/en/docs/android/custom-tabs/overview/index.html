@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-02-04" />
+  <title>Overview</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Overview</h1>
+<p class="date">2020-02-04</p>
+</header>
+<p>App developers face a choice when a user taps a URL to either launch a browser, or build their own in-app browser using WebViews.</p>
+<p>Both options present challenges - launching the browser is a heavy context switch for users that isn’t customizable, while WebViews <a href="https://research.google/pubs/pub46739/">don’t support</a> all features of the web platform, don’t share state with the browser and add maintenance overhead.</p>
+<p>Custom Tabs is a browser feature, <a href="https://android-developers.googleblog.com/2015/09/chrome-custom-tabs-smooth-transition.html">introduced by Chrome</a>, that is now supported by most major browsers on Android. It give apps more control over their web experience, and make transitions between native and web content more seamless without having to resort to a WebView.</p>
+<p>Note: For information on sharing the content in Custom Tabs, see the blog post, <a href="https://blog.chromium.org/2021/01/better-content-sharing-with-custom-tabs.html">Better content sharing with Custom Tabs</a>.</p>
+<p>Custom Tabs allow an app to customize how the browser looks and feels. An app can change things like:</p>
+<ul>
+<li>Toolbar color</li>
+<li>Enter and exit animations</li>
+<li>Add custom actions to the browser toolbar, overflow menu and bottom toolbar</li>
+</ul>
+<p>Custom Tabs also allow the developer to pre-start the browser and pre-fetch content for faster loading.</p>
+<p>{% Img src=“image/Vww75TFpThOgTNuASFM6UYfBAp53/mExXXCgjE1Hm0VDxskRw.gif”, alt=“Perfomance comparison between opening a browser, the WebView and Custom Tabs.”, width=“640”, height=“360” %}</p>
+<p>You can test this now with our <a href="https://github.com/GoogleChrome/android-browser-helper/tree/master/demos/custom-tabs-example-app">sample</a> on GitHub.</p>
+<h2 id="when-should-i-use-custom-tabs-vs-webview">When should I use Custom Tabs vs WebView?</h2>
+<p>The WebView is good solution if you are hosting your own content inside your app. If your app directs people to URLs outside your domain, we recommend that you use Custom Tabs for these reasons:</p>
+<ul>
+<li>Support for the same web platform features and capabilities as the browsers.</li>
+<li>Simple to implement. No need to build code to manage requests, permission grants or cookie stores.</li>
+<li>UI customization:
+<ul>
+<li>Toolbar color
+<ul>
+<li>Action button</li>
+<li>Custom menu items</li>
+<li>Custom in/out animations</li>
+<li>Bottom toolbar</li>
+</ul></li>
+</ul></li>
+<li>Navigation awareness: the browser delivers a callback to the application upon an external navigation.</li>
+<li>Security: the browser uses Google’s Safe Browsing to protect the user and the device from dangerous sites.</li>
+<li>Performance optimization:
+<ul>
+<li>Pre-warming of the Browser in the background, while avoiding stealing resources from the application.</li>
+<li>Providing a likely URL in advance to the browser, which may perform speculative work, speeding up page load time.</li>
+</ul></li>
+<li>Lifecycle management: the browser prevents the application from being evicted by the system while on top of it, by raising its importance to the “foreground” level.</li>
+<li>Shared cookie jar and permissions model so users don’t have to sign-in to sites they are already connected to, or re-grant permissions they have already granted.</li>
+<li>If the user has turned on Data Saver, they will still benefit from it.</li>
+<li>Synchronized AutoComplete across devices for better form completion.</li>
+<li>Simple customization model.</li>
+<li>Quickly return to app with a single tap.</li>
+<li>You want to use the latest browser implementations on devices pre-Lollipop (auto updating WebView) instead of older WebViews.</li>
+</ul>
+<h2 id="when-should-i-use-custom-tabs-vs-trusted-web-activity">When should I use Custom Tabs vs Trusted Web Activity</h2>
+<p><a href="/docs/android/trusted-web-activity">Trusted Web Activities</a> extend the Custom Tabs protocol and shares most of its benefits. But, instead of providing a customized UI, it allows developers to open a browser tab without any UI at all. It is recommended for developers who want to open their own <a href="https://web.dev/progressive-web-apps/">Progressive Web App</a>, in full screen, inside their own Android app.</p>
+<h2 id="where-is-custom-tabs-available">Where is Custom Tabs available?</h2>
+<p>Custom Tabs is a feature supported by browsers on the Android platform. It was originally introduced by <a href="https://play.google.com/store/apps/details?id=com.chrome">Chrome</a>, on version 45. Currentely, the protocol is supported by most Android browsers.</p>
+<p>We are looking for feedback, questions and suggestions on this project, so we encourage you to file issues on <a href="https://crbug.com">crbug.com</a> and ask questions to our Twitter account <span class="citation" data-cites="ChromiumDev">[@ChromiumDev]</span><a href="https://twitter.com/ChromiumDev">4</a>.</p>
+<h2 id="getting-started">Getting Started</h2>
+<p>If you are getting started with Custom Tabs, checkout the <a href="/docs/android/custom-tabs/integration-guide/">Implementation Guide</a> and the <a href="https://github.com/GoogleChrome/android-browser-helper/tree/master/demos/custom-tabs-example-app">GitHub Demo</a>.</p>
+<p>For questions, check the <a href="https://stackoverflow.com/questions/tagged/chrome-custom-tabs">chrome-custom-tabs</a> tag on StackOverflow.</p>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2018-10-10" />
+  <title>What’s New In DevTools (Chrome 71)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 71)</h1>
+<p class="date">2018-10-10</p>
+</header>
+<p>New features and major changes coming to Chrome DevTools in Chrome 71 include:</p>
+<ul>
+<li><a href="#hover">Hover over a Live Expression to highlight a DOM node</a></li>
+<li><a href="#store">Store DOM nodes as global variables</a></li>
+<li><a href="#HAR">Initiator and priority information now in HAR imports and exports</a></li>
+<li><a href="#command-menu">Access the Command Menu from the Main Menu</a></li>
+<li><a href="#picture-in-picture">Picture-in-Picture breakpoints</a></li>
+<li><a href="#bonus">(Bonus Tip) Run monitorEvents() in the Console to watch an element’s events fire</a></li>
+</ul>
+<p>Read on, or watch the video version of this page:</p>
+<p>{% YouTube id=“fJxFZO8OEEs” %}</p>
+<h2 id="hover-over-a-live-expression-to-highlight-a-dom-node-hover">Hover over a Live Expression to highlight a DOM node {: #hover }</h2>
+<p>When a <a href="/blog/new-in-devtools-70#watch">Live Expression</a> evaluates to a DOM node, hover over the Live Expression result to highlight that node in the viewport.</p>
+<p>{% Img src=“image/admin/RwKgxU3QgMl4HFhkiwCU.png”, alt=“Hovering over a Live Expression result to highlight the node in the viewport.”, width=“800”, height=“538” %}</p>
+<p><strong>Figure 1</strong>. Hovering over a Live Expression result to highlight the node in the viewport</p>
+<h2 id="store-dom-nodes-as-global-variables-store">Store DOM nodes as global variables {: #store }</h2>
+<p>To store a DOM node as a global variable, run an expression in the Console that evaluates to a node, right-click the result, and then select <strong>Store as global variable</strong>.</p>
+<p>{% Img src=“image/admin/DlSygYaM8NJJwMwWrMtk.png”, alt=“Store as global variable in the Console.”, width=“800”, height=“550” %}</p>
+<p><strong>Figure 2</strong>. Store as global variable in the Console</p>
+<p>Or, right-click the node in the <strong>DOM Tree</strong> and select <strong>Store as global variable</strong>.</p>
+<p>{% Img src=“image/admin/x6QyAxisOZRkPEGGI3Qd.png”, alt=“Store as global variable in the DOM Tree.”, width=“800”, height=“557” %}</p>
+<p><strong>Figure 3</strong>. Store as global variable in the DOM Tree</p>
+<h2 id="initiator-and-priority-information-now-in-har-imports-and-exports-har">Initiator and priority information now in HAR imports and exports {: #HAR }</h2>
+<p>If you’d like to diagnose network logs with colleagues, you can <a href="/docs/devtools/network/reference#save-as-har">export the network requests to a HAR file</a>.</p>
+<p>{% Img src=“image/admin/opKZS6d6ERQfvdXXhmQo.png”, alt=“Exporting network requests to a HAR file.”, width=“800”, height=“490” %}</p>
+<p><strong>Figure 8</strong>. Exporting network requests to a HAR file</p>
+<p>To import the file back into the Network panel, just drag and drop it.</p>
+<p>When you export a HAR file, DevTools now includes initiator and priority information in the HAR file. When you import HAR files back into DevTools, the <strong>Initiator</strong> and <strong>Priority</strong> columns are now populated.</p>
+<p>The <code>_initiator</code> field provides more context around what caused the resource to be requested. This maps to the <strong>Initiator</strong> column in the Requests table.</p>
+<p>{% Img src=“image/admin/UpzMoXodZw6gqWRZ4v0H.png”, alt=“The initiator column.”, width=“800”, height=“603” %}</p>
+<p><strong>Figure 9</strong>. The initiator column</p>
+<p>You can also <a href="/docs/devtools/network/reference#initiators-dependencies">hold <kbd>Shift</kbd> and hover over a request</a> to view its initiator and dependencies.</p>
+<p>{% Img src=“image/admin/yZxQUHD54lKX0DGvtM9Q.png”, alt=“Viewing initiators and dependencies.”, width=“800”, height=“568” %}</p>
+<p><strong>Figure 10</strong>. Viewing initiators and dependencies</p>
+<p>The <code>_priority</code> field states what priority level the browser assigned to the resource. This maps to the <strong>Priority</strong> column in the Requests table, which is hidden by default.</p>
+<p>{% Img src=“image/admin/3bARzJP9nyrR3Fu7oIl7.png”, alt=“The Priority column.”, width=“800”, height=“603” %}</p>
+<p><strong>Figure 11</strong>. The Priority column</p>
+<p>Right-click the header of the Requests table and select <strong>Priority</strong> to show the <strong>Priority</strong> column.</p>
+<p>{% Img src=“image/admin/hNGmMyPt6NSDS412Z4FP.png”, alt=“How to show the Priority column.”, width=“800”, height=“670” %}</p>
+<p><strong>Figure 12</strong>. How to show the <strong>Priority</strong> column</p>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> The <code>_initiator</code> and <code>_priority</code> fields begin with underscores because the <a href="https://dvcs.w3.org/hg/webperf/raw-file/tip/specs/HAR/Overview.html">HAR spec</a> states that custom fields must begin with underscores.</p>
+<p>{% endAside %}</p>
+<h2 id="access-the-command-menu-from-the-main-menu-command-menu">Access the Command Menu from the Main Menu {: #command-menu }</h2>
+<p>Use the <a href="/docs/devtools/command-menu/">Command Menu</a> for a fast way to access DevTools panels, tabs, and features.</p>
+<p>{% Img src=“image/admin/D4633SRg8P0N0DpISp5R.png”, alt=“The Command Menu.”, width=“800”, height=“630” %}</p>
+<p><strong>Figure 13</strong>. The Command Menu</p>
+<p>You can now open the Command Menu from the Main Menu. Click the <strong>Main Menu</strong> {% Img src=“image/admin/Z2PMFN1cVLHOqIbJrb23.png”, alt=“main”, width=“6”, height=“26” %} button and select <strong>Run command</strong>.</p>
+<p>{% Img src=“image/admin/E0sYAOSTscvoAvlPQIbk.png”, alt=“Opening the Command Menu from the Main Menu.”, width=“800”, height=“648” %}</p>
+<p><strong>Figure 14</strong>. Opening the Command Menu from the Main Menu</p>
+<h2 id="picture-in-picture-breakpoints-picture-in-picture">Picture-in-Picture breakpoints {: #picture-in-picture }</h2>
+<p><a href="https://github.com/WICG/picture-in-picture">Picture-in-Picture</a> is a new experimental API that enables a page to create a floating video window over the desktop.</p>
+<p>Enable the <code>enterpictureinpicture</code>, <code>leavepictureinpicture</code>, and <code>resize</code> checkboxes in the <a href="/docs/devtools/javascript/breakpoints#event-listeners">Event Listener Breakpoints pane</a> to pause whenever one of these picture-in-picture events fires. DevTools pauses on the first line of the handler.</p>
+<p>{% Img src=“image/admin/Cfa2fZ046Odp89JUdjAB.png”, alt=“Picture-in-Picture events in the Event Listener Breakpoints pane.”, width=“800”, height=“570” %}</p>
+<p><strong>Figure 16</strong>. Picture-in-Picture events in the Event Listener Breakpoints pane</p>
+<h2 id="bonus-tip-run-monitorevents-in-the-console-to-watch-an-elements-events-fire-bonus">(Bonus Tip) Run monitorEvents() in the Console to watch an element’s events fire {: #bonus }</h2>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> This section covers a lesser-known feature that has been in DevTools for a long time.</p>
+<p>{% endAside %}</p>
+<p>Suppose you want to add a red border around a button after focusing it and pressing <code>R</code>, <code>E</code>, <code>D</code>, but you don’t know what events to add listeners to. Use <a href="/docs/devtools/console/utilities#monitorevents"><code>monitorEvents()</code></a> to log all of the element’s events to the Console.</p>
+<ol type="1">
+<li><p>Get a reference to the node.</p>
+<p>{% Img src=“image/admin/4KI3LybfPi0pAZpuB8fT.png”, alt=“Using ‘Store as global variable’ to get a reference to the node.”, width=“800”, height=“500” %}</p>
+<p><strong>Figure 17</strong>. Using <strong>Store as global variable</strong> to get a reference to the node</p></li>
+<li><p>Pass the node as the first argument to <code>monitorEvents()</code>.</p>
+<p>{% Img src=“image/admin/xlOnKapF3FEesLmEpYSz.png”, alt=“Passing the node to monitorEvents().”, width=“800”, height=“500” %}</p>
+<p><strong>Figure 18</strong>. Passing the node to <code>monitorEvents()</code></p></li>
+<li><p>Interact with the node. DevTools logs all of the node’s events to the Console.</p>
+<p>{% Img src=“image/admin/jIZL7Oqiphr5zAHEPTDx.png”, alt=“The node’s events in the Console.”, width=“800”, height=“500” %}</p>
+<p><strong>Figure 19</strong>. The node’s events in the Console</p></li>
+</ol>
+<p>Call <a href="/docs/devtools/console/utilities#unmonitorevents"><code>unmonitorEvents()</code></a> to stop logging events to the Console.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="at">unmonitorEvents</span>(temp1)<span class="op">;</span></a></code></pre></div>
+<p>Pass an array as the second argument to <code>monitorEvents()</code> if you only want to monitor certain events or types of events:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="at">monitorEvents</span>(temp1<span class="op">,</span> [<span class="st">&#39;mouse&#39;</span><span class="op">,</span> <span class="st">&#39;focus&#39;</span>])<span class="op">;</span></a></code></pre></div>
+<p>The <code>mouse</code> type tells DevTools to log all mouse-related events, such as <code>mousedown</code> and <code>click</code>. Other supported types are <code>key</code>, <code>touch</code>, and <code>control</code>.</p>
+<p>Check out <a href="/docs/devtools/console/utilities">Command Line Reference</a> for other handy functions that you can call from the Console.</p>
+</body>
+</html>

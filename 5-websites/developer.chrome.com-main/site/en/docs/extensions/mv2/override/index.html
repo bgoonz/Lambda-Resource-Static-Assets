@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2012-09-18" />
+  <title>Overriding Chrome pages</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Overriding Chrome pages</h1>
+<p class="date">2012-09-18</p>
+</header>
+<p>{% include ‘partials/extensions/mv2-legacy-page.md’ %}</p>
+<p>Override pages are a way to substitute an HTML file from your extension for a page that Google Chrome normally provides. In addition to HTML, an override page usually has CSS and JavaScript code.</p>
+<p>An extension can replace any one of the following pages:</p>
+<ul>
+<li><strong>Bookmark Manager:</strong> The page that appears when the user chooses the Bookmark Manager menu item from the Chrome menu or, on Mac, the Bookmark Manager item from the Bookmarks menu. You can also get to this page by entering the URL <strong>chrome://bookmarks</strong>.</li>
+<li><strong>History:</strong> The page that appears when the user chooses the History menu item from the Chrome menu or, on Mac, the Show Full History item from the History menu. You can also get to this page by entering the URL <strong>chrome://history</strong>.</li>
+<li><strong>New Tab:</strong> The page that appears when the user creates a new tab or window. You can also get to this page by entering the URL <strong>chrome://newtab</strong>.</li>
+</ul>
+<div class="aside aside--note">
+<b>Note:</b> A single extension can override <b>only one page</b>. For example, an extension can’t override both the Bookmark Manager and History pages.
+</div>
+<p>Incognito windows are treated specially. New Tab pages cannot be overridden in incognito windows. Other override pages work in incognito windows as long as the <a href="/docs/extensions/mv2/manifest/incognito">incognito</a> manifest property is set to “spanning” (which is the default value). See <a href="/docs/extensions/mv2/overview#incognito">Saving data and incognito mode</a> in the Overview for more details on how you should treat incognito windows.</p>
+<p>The following screenshots show the default New Tab page and then a custom New Tab page.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/LbjiI23vPdf5z8jjttwN.png”, alt=“The default new tab page”, height=“173”, width=“200” %}</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/OvYbqxEERBMXwIQsxkm7.png”, alt=“A custom new tab page”, height=“173”, width=“200” %}</p>
+<h2 id="manifest-manifest">Manifest {: #manifest }</h2>
+<p>Register an override page in the <a href="/docs/extensions/mv2/tabs">extension manifest</a> like this:</p>
+<pre class="json/4-6"><code>{
+  &quot;name&quot;: &quot;My extension&quot;,
+  ...
+
+  &quot;chrome_url_overrides&quot; : {
+    &quot;pageToOverride&quot;: &quot;myPage.html&quot;
+  },
+  ...
+}</code></pre>
+<p>For <code>_pageToOverride_</code>, substitute one of the following:</p>
+<ul>
+<li><code>bookmarks</code></li>
+<li><code>history</code></li>
+<li><code>newtab</code></li>
+</ul>
+<h2 id="tips-tips">Tips {: #tips }</h2>
+<p>For an effective override page, follow these guidelines:</p>
+<ul>
+<li><strong>Make your page quick and small.</strong> Users expect built-in browser pages to open instantly. Avoid doing things that might take a long time. For example, avoid synchronous fetches of network or database resources.</li>
+<li><strong>Include a title in your page.</strong> Otherwise people might see the URL of the page, which could be confusing. Here’s an example of specifying the title: <code>&lt;title&gt;New Tab&lt;/title&gt;</code></li>
+<li><strong>Don’t rely on the page having the keyboard focus.</strong> The address bar always gets the focus first when the user creates a new tab.</li>
+<li><strong>Don’t try to emulate the default New Tab page.</strong> The APIs necessary to create a slightly modified version of the default New Tab page—with top pages, recently closed pages, tips, a theme background image, and so on—don’t exist yet. Until they do, you’re better off trying to make something completely different.</li>
+</ul>
+<h2 id="examples-examples">Examples {: #examples }</h2>
+<p>See the <a href="/docs/extensions/mv2/samples#search:chrome_url_overrides">override samples</a>.</p>
+</body>
+</html>

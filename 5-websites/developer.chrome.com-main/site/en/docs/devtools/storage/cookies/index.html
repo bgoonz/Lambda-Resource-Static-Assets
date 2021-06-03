@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2015-04-13" />
+  <title>View, edit, and delete cookies</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">View, edit, and delete cookies</h1>
+<p class="date">2015-04-13</p>
+</header>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies">HTTP Cookies</a> are mainly used to manage user sessions, store user personalization preferences, and track user behavior. They are also the cause of all of those annoying “this page uses cookies” consent forms that you see across the web. This guide teaches you how to view, edit, and delete a page’s cookies with Chrome DevTools.</p>
+<h2 id="open-the-cookies-pane-open">Open the Cookies pane {: #open }</h2>
+<ol type="1">
+<li><a href="/docs/devtools/open">Open Chrome DevTools</a>.</li>
+<li><p>Click the <strong>Application</strong> tab to open the <strong>Application</strong> panel. The <strong>Manifest</strong> pane will probably open.</p>
+<p>{% Img src=“image/admin/VdjVnm7S9Pbg4THMrlc0.png”, alt=“The Manifest pane”, width=“800”, height=“619” %}</p>
+<p><strong>Figure 1</strong>. The Manifest pane</p></li>
+<li><p>Under <strong>Storage</strong> expand <strong>Cookies</strong>, then select an origin.</p>
+<p>{% Img src=“image/admin/Yl2rWrOQvnBHkZwjUzOi.png”, alt=“The Cookies pane”, width=“800”, height=“445” %}</p>
+<p><strong>Figure 2</strong>. The Cookies pane</p></li>
+</ol>
+<h2 id="fields-fields">Fields {: #fields }</h2>
+<p>The <strong>Cookies</strong> table contains the following fields:</p>
+<ul>
+<li><strong>Name</strong>. The cookie’s name.</li>
+<li><strong>Value</strong>. The cookie’s value.</li>
+<li><strong>Domain</strong>. The hosts that are allowed to receive the cookie.</li>
+<li><strong>Path</strong>. The URL that must exist in the requested URL in order to send the <code>Cookie</code> header.</li>
+<li><strong>Expires / Max-Age</strong>. The cookie’s expiration date or maximum age. For [session cookies][6] this value is always <code>Session</code>.</li>
+<li><strong>Size</strong>. The cookie’s size, in bytes.</li>
+<li><strong>HTTP</strong>. If true, this field indicates that the cookie should only be used over HTTP, and JavaScript modification is not allowed.</li>
+<li><strong>Secure</strong>. If true, this field indicates that the cookie can only be sent to the server over a secure, HTTPS connection.</li>
+<li><strong>SameSite</strong>. Contains <code>strict</code> or <code>lax</code> if the cookie is using the experimental <code>SameSite</code> attribute.</li>
+<li><strong>Priority</strong>. Contains <code>low</code>, <code>medium</code> (default), or <code>high</code> if using depreciated <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=232693">cookie Priority</a> attribute.</li>
+</ul>
+<h2 id="filter-cookies-filter">Filter cookies {: #filter }</h2>
+<p>Use the <strong>Filter</strong> text box to filter cookies by <strong>Name</strong> or <strong>Value</strong>. Filtering by other fields is not supported.</p>
+<p>{% Img src=“image/admin/uqHAFnsQgjLFqg5Fcu6S.png”, alt=“Filtering out any cookies that don’t contain the text ‘NID’”, width=“800”, height=“401” %}</p>
+<p><strong>Figure 3</strong>. Filtering out any cookies that don’t contain the text <code>NID</code></p>
+<h2 id="edit-a-cookie-edit">Edit a cookie {: #edit }</h2>
+<p>The <strong>Name</strong>, <strong>Value</strong>, <strong>Domain</strong>, <strong>Path</strong>, and <strong>Expires / Max-Age</strong> fields are editable. Double-click a field to edit it.</p>
+<p>{% Img src=“image/admin/uUZg7B7jgE41Vaz4pYxx.png”, alt=“Setting the name of a cookie to ‘DEVTOOL!’”, width=“800”, height=“445” %}</p>
+<p><strong>Figure 4</strong>. Setting the name of a cookie to <code>DEVTOOLS!</code></p>
+<h2 id="delete-cookies-delete">Delete cookies {: #delete }</h2>
+<p>Select a cookie and then click <strong>Delete Selected</strong> {% Img src=“image/admin/frAwfK150YtdxHAOVccj.png”, alt=“Delete Selected”, width=“20”, height=“20” %} to delete that one cookie.</p>
+<p>{% Img src=“image/admin/SRIEc7haLwu49I4A94yg.png”, alt=“Deleting a selected cookie”, width=“800”, height=“401” %}</p>
+<p><strong>Figure 5</strong>. Deleting a selected cookie</p>
+<p>Click <strong>Clear All</strong> {% Img src=“image/admin/tQ74nCvbca93aX5voHXy.png”, alt=“Clear All”, width=“26”, height=“26” %} to delete all cookies.</p>
+<p>{% Img src=“image/admin/YKnko46qX5nMMn3V26Sn.png”, alt=“Clearing all cookies”, width=“800”, height=“401” %}</p>
+<p><strong>Figure 6</strong>. Clearing all cookies</p>
+</body>
+</html>

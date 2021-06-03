@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2017-08-29" />
+  <title>What’s New In DevTools (Chrome 62)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 62)</h1>
+<p class="date">2017-08-29</p>
+</header>
+<p>New features and changes coming to DevTools in Chrome 62:</p>
+<ul>
+<li><a href="#await">Support for top-level <code>await</code> operators in the <strong>Console</strong></a>.</li>
+<li><a href="#screenshot-areas">Screenshots of a portion of the viewport</a>, and <a href="#node-screenshots">screenshots of specific HTML nodes</a>.</li>
+<li><a href="#css-grid-highlighting">CSS Grid highlighting</a>.</li>
+<li><a href="#query-objects">A new <strong>Console</strong> API for querying objects</a>.</li>
+<li><a href="#negative-filters">Negative filters</a> and <a href="#url-filters">URL filters</a> in the <strong>Console</strong>.</li>
+<li><a href="#har-imports">HAR imports in the <strong>Network</strong> panel</a>.</li>
+<li><a href="#cache-preview">Previewable cache resources</a>.</li>
+<li><a href="#cache-debugging">More predictable cache debugging</a>.</li>
+<li><a href="#coverage">Block-level code coverage</a>.</li>
+</ul>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> You can check what version of Chrome you’re running at <code>chrome://version</code>. Chrome auto-updates to a new major version about every 6 weeks.</p>
+<p>{% endAside %}</p>
+<p>{% YouTube id=“eD4fiqjaxHw” %}</p>
+<h2 id="top-level-await-operators-in-the-console-await">Top-level await operators in the Console {: #await }</h2>
+<p>The <strong>Console</strong> now supports top-level <code>await</code> operators.</p>
+<p>{% Img src=“image/admin/71X0fX7b3MPd1XHh4RRq.png”, alt=“Using top-level await operators in the Console”, width=“800”, height=“578” %}</p>
+<p><strong>Figure 1</strong>. Using top-level <code>await</code> operators in the <strong>Console</strong></p>
+<h2 id="new-screenshot-workflows-screenshots">New screenshot workflows {: #screenshots }</h2>
+<p>You can now take a screenshot of a portion of the viewport, or of a specific HTML node.</p>
+<h3 id="screenshots-of-a-portion-of-the-viewport-screenshot-areas">Screenshots of a portion of the viewport {: #screenshot-areas }</h3>
+<p>To take a screenshot of a portion of your viewport:</p>
+<ol type="1">
+<li>Click <strong>Inspect</strong> {% Img src=“image/admin/nnx3r8nkEF8iDhofWHDV.png”, alt=“Inspect”, width=“26”, height=“26” %} or press <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> (Mac) or <kbd>Control</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> (Windows, Linux) to enter Inspect Element Mode.</li>
+<li>Hold <kbd>Command</kbd> (Mac) or <kbd>Control</kbd> (Windows, Linux) and select the portion of the viewport that you want to take a screenshot of.</li>
+<li>Release your mouse. DevTools downloads a screenshot of the portion that you selected.</li>
+</ol>
+<p>{% Img src=“image/admin/iR7k72K9hcWA3Fa673R5.png”, alt=“Taking a screenshot of a portion of the viewport”, width=“800”, height=“536” %}</p>
+<p><strong>Figure 2</strong>. Taking a screenshot of a portion of the viewport</p>
+<h3 id="screenshots-of-specific-html-nodes-node-screenshots">Screenshots of specific HTML nodes {: #node-screenshots }</h3>
+<p>To take a screenshot of a specific HTML node:</p>
+<ol type="1">
+<li><p><a href="/docs/devtools/css/reference#select">Select an element</a> in the <strong>Elements</strong> panel.</p>
+<p>{% Img src=“image/admin/SSf580tYGEHkxnoDw8qH.png”, alt=“An example of a node”, width=“800”, height=“475” %}</p>
+<p><strong>Figure 3</strong>. In this example, the goal is to take a screenshot of the blue header that contains the text <code>Tools</code>. Note that this node is already selected in the <strong>DOM Tree</strong> of the <strong>Elements</strong> panel</p></li>
+<li>Open the <a href="/docs/devtools/command-menu/">Command Menu</a>.</li>
+<li><p>Start typing <code>node</code> and select <code>Capture node screenshot</code>. DevTools downloads a screenshot of the selected node.</p>
+<p>{% Img src=“image/admin/oLRynL854GzTK6y4jzJa.png”, alt=“The result of the ‘Capture node screenshot’ command”, width=“800”, height=“111” %}</p>
+<p><strong>Figure 4</strong>. The result of the <code>Capture node screenshot</code> command</p></li>
+</ol>
+<h2 id="css-grid-highlighting-css-grid-highlighting">CSS Grid highlighting {: #css-grid-highlighting }</h2>
+<p>To view the CSS Grid that’s affecting an element, hover over an element in the <strong>DOM Tree</strong> of the <strong>Elements</strong> panel. A dashed border appears around each of the grid items. This only works when the selected item, or the parent of the selected item, has <code>display:grid</code> applied to it.</p>
+<p>{% Img src=“image/admin/N4dPMnuDcJErX3XMDVRF.png”, alt=“Highlighting a CSS Grid”, width=“800”, height=“618” %}</p>
+<p><strong>Figure 5</strong>. Highlighting a CSS Grid</p>
+<p>Check out the video below to learn the basics of CSS Grid in less than 2 minutes.</p>
+<p>{% YouTube id=“AqwPrR7hklE” %}</p>
+<h2 id="a-new-api-for-querying-heap-objects-query-objects">A new API for querying heap objects {: #query-objects }</h2>
+<p>Call <code>queryObjects(Constructor)</code> from the <strong>Console</strong> to return an array of objects that were created with the specified constructor. For example:</p>
+<ul>
+<li><code>queryObjects(Promise)</code>. Returns all Promises.</li>
+<li><code>queryObjects(HTMLElement)</code>. Returns all HTML elements.</li>
+<li><code>queryObjects(foo)</code>, where <code>foo</code> is a function name. Returns all objects that were instantiated via <code>new foo()</code>.</li>
+</ul>
+<p>The scope of <code>queryObjects()</code> is the currently-selected execution context in the <strong>Console</strong>. See <a href="/docs/devtools/console/reference/#context">Selecting execution context</a>.</p>
+<h2 id="new-console-filters-console-filters">New Console filters {: #console-filters }</h2>
+<p>The <strong>Console</strong> now supports negative and URL filters.</p>
+<h3 id="negative-filters-negative-filters">Negative filters {: #negative-filters }</h3>
+<p>Type <code>-&lt;text&gt;</code> in the <strong>Filter</strong> box to filter out any <strong>Console</strong> message that includes <code>&lt;text&gt;</code>.</p>
+<p>{% Img src=“image/admin/Ukp7ge0eweiyjk77ZaSf.png”, alt=“An example of 3 messages that will be filtered out”, width=“800”, height=“394” %}</p>
+<p><strong>Figure 6</strong>. The first statement logs <code>one</code>, <code>two</code>, <code>three</code>, and <code>four</code> to the <strong>Console</strong>. <code>two</code> is hidden because <code>-two</code> is entered in the <strong>Filter</strong> box</p>
+<p>DevTools filters out a message if <code>&lt;text&gt;</code> is found:</p>
+<ul>
+<li>In the message text.</li>
+<li>In the filename from which the message originated.</li>
+<li>In the stack trace text.</li>
+</ul>
+<p>The negative filter also works with regular expressions such as <code>-/[4-5]*ms/</code>.</p>
+<h3 id="url-filters-url-filters">URL filters {: #url-filters }</h3>
+<p>Type <code>url:&lt;text&gt;</code> in the <strong>Filter</strong> box to only show messages that originated from a script whose URL includes <code>&lt;text&gt;</code>.</p>
+<p>The filter uses fuzzy matching. If <code>&lt;text&gt;</code> appears anywhere in the URL, then DevTools shows the message.</p>
+<p>{% Img src=“image/admin/I3Wc8xjZBvzId3BRwEIm.png”, alt=“An example of URL filtering”, width=“800”, height=“389” %}</p>
+<p><strong>Figure 7</strong>. Using URL filtering to only display messages that originate from scripts whose URL includes <code>hymn</code>. By hovering over the script name, you can see that the host name includes this text</p>
+<h2 id="har-imports-in-the-network-panel-har-imports">HAR imports in the Network panel {: #har-imports }</h2>
+<p>Drag and drop a HAR file into the <strong>Network</strong> panel to import it.</p>
+<p>{% Img src=“image/admin/STHEvnbcwmLRvtK3ybUN.png”, alt=“Importing a HAR file”, width=“800”, height=“518” %}</p>
+<p><strong>Figure 8</strong>. Importing a HAR file</p>
+<p>{% Aside %}</p>
+<p><strong>Note</strong>: To export a HAR file, right-click a request and select <strong>Save As HAR With Content</strong>. All requests that DevTools has recorded are saved to the file. If you’ve got any filters enabled, those are ignored.</p>
+<p>{% endAside %}</p>
+<h2 id="previewable-cache-resources-in-the-application-panel-cache-preview">Previewable cache resources in the Application panel {: #cache-preview }</h2>
+<p>Click a row in a <strong>Cache Storage</strong> table to see a preview of that resource below the table.</p>
+<p>{% Img src=“image/admin/J7XEvBzF8nrvxBF8CGMU.png”, alt=“Previewing a cache resource”, width=“800”, height=“759” %}</p>
+<p><strong>Figure 9</strong>. Previewing a cache resource</p>
+<h2 id="more-responsive-cache-debugging-cache-debugging">More responsive cache debugging {: #cache-debugging }</h2>
+<p>In Chrome 61 and earlier, debugging caches created with the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Cache">Cache API</a> is… rough. For example, when a page creates a new cache, you have to manually refresh the page or DevTools in order to see the new cache.</p>
+<p>In Chrome 62, the <strong>Cache Storage</strong> tab now updates in real-time whenever you create, update, or delete a cache or a resource. Watch the video below for an example.</p>
+<p>{% YouTube id=“laZpBKpjzRM” %}</p>
+<p>See the <a href="https://googlechrome.github.io/devtools-samples/whatsnew/m62/cache.html">Cache Storage Demo</a> to try it out yourself.</p>
+<h2 id="block-level-code-coverage-coverage">Block-level code coverage {: #coverage }</h2>
+<p>In Chrome 61 and earlier, the <strong>Coverage</strong> tab marks all of the code within a function as used, so long as the function is called.</p>
+<p>{% Img src=“image/admin/iInIeUqCY8K85HCu09xT.png”, alt=“An example of the Coverage tab in Chrome 61”, width=“800”, height=“587” %}</p>
+<p><strong>Figure 10</strong>. An example of the <strong>Coverage</strong> tab in Chrome 61. Line 4 is marked used, even though it never executes</p>
+<p>Starting in Chrome 62, the <strong>Coverage</strong> tab now tells you which code within a function is called.</p>
+<p>{% Img src=“image/admin/lWKkk4JCXIn2Tt3ucxnp.png”, alt=“An example of the Coverage tab in Chrome 62”, width=“800”, height=“622” %}</p>
+<p><strong>Figure 11</strong>. An example of the <strong>Coverage</strong> tab in Chrome 62. Line 4 is marked unused</p>
+</body>
+</html>

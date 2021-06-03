@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2014-02-28" />
+  <title>Getting started</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Getting started</h1>
+<p class="date">2014-02-28</p>
+</header>
+<p>{# TODO: Reword this intro. “Components” is probably not the best word to use here any more as “web components” are a cross-browser tech for creating reusable custom elements or “components”. #}</p>
+<p>Extensions are made of different, but cohesive, components. Components can include <a href="/docs/extensions/mv3/background_pages">background scripts</a>, <a href="/docs/extensions/mv3/content_scripts">content scripts</a>, an <a href="/docs/extensions/mv3/options">options page</a>, <a href="/docs/extensions/mv3/user_interface">UI elements</a> and various logic files. Extension components are created with web development technologies: HTML, CSS, and JavaScript. An extension’s components will depend on its functionality and may not require every option.</p>
+<p>This tutorial will build an extension that allows the user to change the background color of the currently focused page. It will use many of the extension platform’s components to give an introductory demonstration of their relationships.</p>
+<p>To start, create a new directory to hold the extension’s files.</p>
+<p>The completed extension can be downloaded <a href="https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/file/WlD8wC6g8khYWPJUsQceQkhXSlv1/SVxMBoc5P3f6YV3O7Xbu.zip">here</a>.</p>
+<h2 id="create-the-manifest-manifest">Create the manifest {: #manifest }</h2>
+<p>Extensions start with their <a href="/docs/extensions/mv3/manifest">manifest</a>. Create a file called <code>manifest.json</code> and include the following code.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Getting Started Example&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Build an Extension!&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">&quot;manifest_version&quot;</span><span class="fu">:</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="fu">}</span></a></code></pre></div>
+<p>The directory holding the manifest file can be added as an extension in developer mode in its current state.</p>
+<ol type="1">
+<li>Open the Extension Management page by navigating to <code>chrome://extensions</code>.
+<ul>
+<li>Alternatively, open this page by clicking on the Extensions menu button and selecting <strong>Manage Extensions</strong> at the bottom of the menu.</li>
+<li>Alternatively, open this page by clicking on the Chrome menu, hovering over <strong>More Tools</strong> then selecting <strong>Extensions</strong></li>
+</ul></li>
+<li>Enable Developer Mode by clicking the toggle switch next to <strong>Developer mode</strong>.</li>
+<li>Click the <strong>Load unpacked</strong> button and select the extension directory.</li>
+</ol>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/iYdLKFsJ1KSVGLhbLRvS.png”, alt=“Load Extension”, height=“337”, width=“606” %}</p>
+<p>Ta-da! The extension has been successfully installed. Because no icons were included in the manifest, a generic icon will be created for the extension.</p>
+<h2 id="add-functionality-background">Add functionality {: #background }</h2>
+<p>The extension is now installed, but it doesn’t currently do anything because we haven’t told it what to do or when to do it. Let’s fix that by adding some code to store a background color value.</p>
+<p>To do this, we will need to create a <a href="/docs/extensions/mv3/background_pages">background script</a> and add it to the extension’s manifest. Start by creating a file named <code>background.js</code> inside the extension’s directory.</p>
+<pre class="json/5-7"><code>{
+  &quot;name&quot;: &quot;Getting Started Example&quot;,
+  &quot;description&quot;: &quot;Build an Extension!&quot;,
+  &quot;version&quot;: &quot;1.0&quot;,
+  &quot;manifest_version&quot;: 3,
+  &quot;background&quot;: {
+    &quot;service_worker&quot;: &quot;background.js&quot;
+  }
+}</code></pre>
+<p>Background scripts, like many other important components, must be registered in the manifest. Registering a background script in the manifest tells the extension which file to reference, and how that file should behave.</p>
+<p>Chrome is now aware that the extension includes a service worker. When you reload the extension, Chrome will scan the specified file for additional instructions, such as important events it needs to listen for.</p>
+<p>This extension will need information from a persistent variable as soon as its installed. Start by including a listening event for <a href="/docs/extensions/reference/runtime#event-onInstalled"><code>runtime.onInstalled</code></a> in the background script. Inside the <code>onInstalled</code> listener, the extension will set a value using the <a href="/docs/extensions/reference/storage">storage</a> API. This will allow multiple extension components to access that value and update it.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">let</span> color <span class="op">=</span> <span class="st">&#39;#3aa757&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="va">chrome</span>.<span class="va">runtime</span>.<span class="va">onInstalled</span>.<span class="at">addListener</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">sync</span>.<span class="at">set</span>(<span class="op">{</span> color <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Default background color set to %cgreen&#39;</span><span class="op">,</span> <span class="vs">`color: </span><span class="sc">${</span>color<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Most APIs, including the <a href="/docs/extensions/reference/storage">storage</a> API, must be registered under the <code>"permissions"</code> field in the manifest for the extension to use them.</p>
+<pre class="json/8"><code>{
+  &quot;name&quot;: &quot;Getting Started Example&quot;,
+  &quot;description&quot;: &quot;Build an Extension!&quot;,
+  &quot;version&quot;: &quot;1.0&quot;,
+  &quot;manifest_version&quot;: 3,
+  &quot;background&quot;: {
+    &quot;service_worker&quot;: &quot;background.js&quot;
+  },
+  &quot;permissions&quot;: [&quot;storage&quot;]
+}</code></pre>
+<p>Navigate back to the extension management page and click the <strong>Reload</strong> link. A new field, <strong>Inspect views</strong>, becomes available with a blue link, <strong>background page</strong>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/V96EHNVYQLVsjURz4Naz.png”, alt=“Inspect Views”, height=“337”, width=“606” %}</p>
+<p>Click the link to view the background script’s console log, “<code>Default background color set to green</code>”</p>
+<h2 id="introduce-a-user-interface-user_interface">Introduce a user interface {: #user_interface }</h2>
+<p>Extensions can have many forms of a <a href="/docs/extensions/mv3/user_interface">user interface</a>; this one will use a <a href="/docs/extensions/mv3/user_interface#popup">popup</a>. Create and add a file named <code>popup.html</code> to the extension’s directory. This extension uses a button to change the background color.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;button.css&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="kw">&lt;button</span><span class="ot"> id=</span><span class="st">&quot;changeColor&quot;</span><span class="kw">&gt;&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>Like the background script, this file must be declared in the manifest in order for Chrome to present it in the extension’s popup. To do this, add an <a href="/docs/extensions/reference/action"><code>action</code></a> object to the manifest and set <code>popup.html</code> as the action’s <code>default_popup</code>.</p>
+<pre class="json/9-11"><code>{
+  &quot;name&quot;: &quot;Getting Started Example&quot;,
+  &quot;description&quot;: &quot;Build an Extension!&quot;,
+  &quot;version&quot;: &quot;1.0&quot;,
+  &quot;manifest_version&quot;: 3,
+  &quot;background&quot;: {
+    &quot;service_worker&quot;: &quot;background.js&quot;
+  },
+  &quot;permissions&quot;: [&quot;storage&quot;],
+  &quot;action&quot;: {
+    &quot;default_popup&quot;: &quot;popup.html&quot;
+  }
+}</code></pre>
+<p>This popup’s HTML references an external CSS file named <code>button.css</code>. Add another file to the extension’s directory, name it appropriately, and add the following code.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb7-1" title="1">button {</a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">height</span>: <span class="dv">30</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="kw">width</span>: <span class="dv">30</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="kw">outline</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="kw">margin</span>: <span class="dv">10</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="kw">border</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">  <span class="kw">border-radius</span>: <span class="dv">2</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-8" title="8">}</a>
+<a class="sourceLine" id="cb7-9" title="9"></a>
+<a class="sourceLine" id="cb7-10" title="10">button<span class="fu">.current</span> {</a>
+<a class="sourceLine" id="cb7-11" title="11">  <span class="kw">box-shadow</span>: <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">2</span><span class="dt">px</span> <span class="cn">white</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-12" title="12">              <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">4</span><span class="dt">px</span> <span class="cn">black</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-13" title="13">}</a></code></pre></div>
+<p>Designation for toolbar icons is also included under <code>action</code> in the <code>default_icons</code> field. Download the images folder <a href="https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/file/WlD8wC6g8khYWPJUsQceQkhXSlv1/wy3lvPQdeJn4iqHmI0Rp.zip">here</a>, unzip it, and place it in the extension’s directory. Update the manifest so the extension knows how to use the images.</p>
+<pre class="json/11-16"><code>{
+  &quot;name&quot;: &quot;Getting Started Example&quot;,
+  &quot;description&quot;: &quot;Build an Extension!&quot;,
+  &quot;version&quot;: &quot;1.0&quot;,
+  &quot;manifest_version&quot;: 3,
+  &quot;background&quot;: {
+    &quot;service_worker&quot;: &quot;background.js&quot;
+  },
+  &quot;permissions&quot;: [&quot;storage&quot;],
+  &quot;action&quot;: {
+    &quot;default_popup&quot;: &quot;popup.html&quot;,
+    &quot;default_icon&quot;: {
+      &quot;16&quot;: &quot;/images/get_started16.png&quot;,
+      &quot;32&quot;: &quot;/images/get_started32.png&quot;,
+      &quot;48&quot;: &quot;/images/get_started48.png&quot;,
+      &quot;128&quot;: &quot;/images/get_started128.png&quot;
+    }
+  }
+}</code></pre>
+<p>Extensions also display images on the extension management page, the permissions warning, and favicon. These images are designated in the manifest under <a href="/docs/extensions/mv3/user_interface#icons"><code>icons</code></a>.</p>
+<pre class="json/18-23"><code>{
+  &quot;name&quot;: &quot;Getting Started Example&quot;,
+  &quot;description&quot;: &quot;Build an Extension!&quot;,
+  &quot;version&quot;: &quot;1.0&quot;,
+  &quot;manifest_version&quot;: 3,
+  &quot;background&quot;: {
+    &quot;service_worker&quot;: &quot;background.js&quot;
+  },
+  &quot;permissions&quot;: [&quot;storage&quot;],
+  &quot;action&quot;: {
+    &quot;default_popup&quot;: &quot;popup.html&quot;,
+    &quot;default_icon&quot;: {
+      &quot;16&quot;: &quot;/images/get_started16.png&quot;,
+      &quot;32&quot;: &quot;/images/get_started32.png&quot;,
+      &quot;48&quot;: &quot;/images/get_started48.png&quot;,
+      &quot;128&quot;: &quot;/images/get_started128.png&quot;
+    }
+  },
+  &quot;icons&quot;: {
+    &quot;16&quot;: &quot;/images/get_started16.png&quot;,
+    &quot;32&quot;: &quot;/images/get_started32.png&quot;,
+    &quot;48&quot;: &quot;/images/get_started48.png&quot;,
+    &quot;128&quot;: &quot;/images/get_started128.png&quot;
+  }
+}</code></pre>
+<p>If the extension is reloaded at this stage, it will include the provided icon rather than the default placeholder, and clicking the action will open a popup with button with default colors.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/j3Ff3oF0tEl9tE5ed6L0.png”, alt=“Popup”, height=“99”, width=“73” %}</p>
+<p>The last step for the popup UI is adding color to the button. Create and add a file named <code>popup.js</code> with the following code to the extension’s directory.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="co">// Initialize button with user&#39;s preferred color</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw">let</span> changeColor <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;changeColor&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-3" title="3"></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">sync</span>.<span class="at">get</span>(<span class="st">&quot;color&quot;</span><span class="op">,</span> (<span class="op">{</span> color <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-5" title="5">  <span class="va">changeColor</span>.<span class="va">style</span>.<span class="at">backgroundColor</span> <span class="op">=</span> color<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>This code grabs the button from <code>popup.html</code> and requests the color value from storage. It then applies the color as the background of the button. Include a script tag to <code>popup.js</code> in <code>popup.html</code>.</p>
+<pre class="html/7"><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;button.css&quot;&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button id=&quot;changeColor&quot;&gt;&lt;/button&gt;
+    &lt;script src=&quot;popup.js&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>Reload the extension to view the green button.</p>
+<h2 id="layer-logic-logic">Layer logic {: #logic }</h2>
+<p>The extension now has a custom icon and a popup, and it colors the popup button based on a value saved to the extension’s storage. Next, it needs logic for further user interaction. Update <code>popup.js</code> by adding the following to the end of the file.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="co">// When the button is clicked, inject setPageBackgroundColor into current page</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="va">changeColor</span>.<span class="at">addEventListener</span>(<span class="st">&quot;click&quot;</span><span class="op">,</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="kw">let</span> [tab] <span class="op">=</span> <span class="cf">await</span> <span class="va">chrome</span>.<span class="va">tabs</span>.<span class="at">query</span>(<span class="op">{</span> <span class="dt">active</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">currentWindow</span><span class="op">:</span> <span class="kw">true</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"></a>
+<a class="sourceLine" id="cb12-5" title="5">  <span class="va">chrome</span>.<span class="va">scripting</span>.<span class="at">executeScript</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb12-6" title="6">    <span class="dt">target</span><span class="op">:</span> <span class="op">{</span> <span class="dt">tabId</span><span class="op">:</span> <span class="va">tab</span>.<span class="at">id</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb12-7" title="7">    <span class="kw">function</span><span class="op">:</span> setPageBackgroundColor<span class="op">,</span></a>
+<a class="sourceLine" id="cb12-8" title="8">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-9" title="9"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-10" title="10"></a>
+<a class="sourceLine" id="cb12-11" title="11"><span class="co">// The body of this function will be executed as a content script inside the</span></a>
+<a class="sourceLine" id="cb12-12" title="12"><span class="co">// current page</span></a>
+<a class="sourceLine" id="cb12-13" title="13"><span class="kw">function</span> <span class="at">setPageBackgroundColor</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-14" title="14">  <span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">sync</span>.<span class="at">get</span>(<span class="st">&quot;color&quot;</span><span class="op">,</span> (<span class="op">{</span> color <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-15" title="15">    <span class="va">document</span>.<span class="va">body</span>.<span class="va">style</span>.<span class="at">backgroundColor</span> <span class="op">=</span> color<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-16" title="16">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-17" title="17"><span class="op">}</span></a></code></pre></div>
+<p>The updated code adds a <code>click</code> event listener to the button, which triggers a <a href="/docs/extensions/mv3/content_scripts/#programmatic">programmatically injected content script</a>. This turns the background color of the page the same color as the button. Using programmatic injection allows for user-invoked content scripts, instead of auto inserting unwanted code into web pages.</p>
+<p>The manifest will need the <a href="/docs/extensions/mv3/manifest/activeTab"><code>activeTab</code></a> permission to allow the extension temporary access to the current page, and the <a href="/docs/extensions/reference/scripting"><code>scripting</code></a> permission to use the Scripting API’s <a href="/docs/extensions/reference/scripting#method-executeScript"><code>executeScript</code></a> method.</p>
+<pre class="json/3"><code>{
+  &quot;name&quot;: &quot;Getting Started Example&quot;,
+  ...
+  &quot;permissions&quot;: [&quot;storage&quot;, &quot;activeTab&quot;, &quot;scripting&quot;],
+  ...
+}</code></pre>
+<p>The extension is now fully functional! Reload the extension, refresh this page, open the popup and click the button to turn it green! However, some users may want to change the background to a different color.</p>
+<h2 id="give-users-options-options">Give users options {: #options }</h2>
+<p>The extension currently only allows users to change the background to green. Including an options page gives users more control over the extension’s functionality, further customizing their browsing experience.</p>
+<p>Start by creating a file in the directory named <code>options.html</code> and include the following code.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb14-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb14-4" title="4">    <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;button.css&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb14-5" title="5">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb14-6" title="6">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb14-7" title="7">    <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;buttonDiv&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb14-8" title="8">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb14-9" title="9">    <span class="kw">&lt;div&gt;</span></a>
+<a class="sourceLine" id="cb14-10" title="10">      <span class="kw">&lt;p&gt;</span>Choose a different background color!<span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb14-11" title="11">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb14-12" title="12">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb14-13" title="13">  <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;options.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb14-14" title="14"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>Then register the options page in the manifest,</p>
+<pre class="json/3"><code>{
+  &quot;name&quot;: &quot;Getting Started Example&quot;,
+  ...
+  &quot;options_page&quot;: &quot;options.html&quot;
+}</code></pre>
+<p>Reload the extension and click <strong>DETAILS</strong>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/3fNrYEoJMOPQ00L7tBtp.png”, alt=“Inspect Views”, height=“337”, width=“606” %}</p>
+<p>Scroll down the details page and select <strong>Extension options</strong> to view the options page.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/z1VEYxYlJev7llaXIQUL.png”, alt=“Extension Options”, height=“726”, width=“645” %}</p>
+<p>The last step is to add the options logic. Create a file named <code>options.js</code> in the extension’s directory with the following code.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">let</span> page <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;buttonDiv&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="kw">let</span> selectedClassName <span class="op">=</span> <span class="st">&quot;current&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw">const</span> presetButtonColors <span class="op">=</span> [<span class="st">&quot;#3aa757&quot;</span><span class="op">,</span> <span class="st">&quot;#e8453c&quot;</span><span class="op">,</span> <span class="st">&quot;#f9bb2d&quot;</span><span class="op">,</span> <span class="st">&quot;#4688f1&quot;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-4" title="4"></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="co">// Reacts to a button click by marking the selected button and saving</span></a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="co">// the selection</span></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="kw">function</span> <span class="at">handleButtonClick</span>(event) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-8" title="8">  <span class="co">// Remove styling from the previously selected color</span></a>
+<a class="sourceLine" id="cb16-9" title="9">  <span class="kw">let</span> current <span class="op">=</span> <span class="va">event</span>.<span class="va">target</span>.<span class="va">parentElement</span>.<span class="at">querySelector</span>(</a>
+<a class="sourceLine" id="cb16-10" title="10">    <span class="vs">`.</span><span class="sc">${</span>selectedClassName<span class="sc">}</span><span class="vs">`</span></a>
+<a class="sourceLine" id="cb16-11" title="11">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-12" title="12">  <span class="cf">if</span> (current <span class="op">&amp;&amp;</span> current <span class="op">!==</span> <span class="va">event</span>.<span class="at">target</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-13" title="13">    <span class="va">current</span>.<span class="va">classList</span>.<span class="at">remove</span>(selectedClassName)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-14" title="14">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-15" title="15"></a>
+<a class="sourceLine" id="cb16-16" title="16">  <span class="co">// Mark the button as selected</span></a>
+<a class="sourceLine" id="cb16-17" title="17">  <span class="kw">let</span> color <span class="op">=</span> <span class="va">event</span>.<span class="va">target</span>.<span class="va">dataset</span>.<span class="at">color</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-18" title="18">  <span class="va">event</span>.<span class="va">target</span>.<span class="va">classList</span>.<span class="at">add</span>(selectedClassName)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-19" title="19">  <span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">sync</span>.<span class="at">set</span>(<span class="op">{</span> color <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-20" title="20"><span class="op">}</span></a>
+<a class="sourceLine" id="cb16-21" title="21"></a>
+<a class="sourceLine" id="cb16-22" title="22"><span class="co">// Add a button to the page for each supplied color</span></a>
+<a class="sourceLine" id="cb16-23" title="23"><span class="kw">function</span> <span class="at">constructOptions</span>(buttonColors) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-24" title="24">  <span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">sync</span>.<span class="at">get</span>(<span class="st">&quot;color&quot;</span><span class="op">,</span> (data) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-25" title="25">    <span class="kw">let</span> currentColor <span class="op">=</span> <span class="va">data</span>.<span class="at">color</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-26" title="26">    <span class="co">// For each color we were provided…</span></a>
+<a class="sourceLine" id="cb16-27" title="27">    <span class="cf">for</span> (<span class="kw">let</span> buttonColor <span class="kw">of</span> buttonColors) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-28" title="28">      <span class="co">// …create a button with that color…</span></a>
+<a class="sourceLine" id="cb16-29" title="29">      <span class="kw">let</span> button <span class="op">=</span> <span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&quot;button&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-30" title="30">      <span class="va">button</span>.<span class="va">dataset</span>.<span class="at">color</span> <span class="op">=</span> buttonColor<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-31" title="31">      <span class="va">button</span>.<span class="va">style</span>.<span class="at">backgroundColor</span> <span class="op">=</span> buttonColor<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-32" title="32"></a>
+<a class="sourceLine" id="cb16-33" title="33">      <span class="co">// …mark the currently selected color…</span></a>
+<a class="sourceLine" id="cb16-34" title="34">      <span class="cf">if</span> (buttonColor <span class="op">===</span> currentColor) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-35" title="35">        <span class="va">button</span>.<span class="va">classList</span>.<span class="at">add</span>(selectedClassName)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-36" title="36">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-37" title="37"></a>
+<a class="sourceLine" id="cb16-38" title="38">      <span class="co">// …and register a listener for when that button is clicked</span></a>
+<a class="sourceLine" id="cb16-39" title="39">      <span class="va">button</span>.<span class="at">addEventListener</span>(<span class="st">&quot;click&quot;</span><span class="op">,</span> handleButtonClick)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-40" title="40">      <span class="va">page</span>.<span class="at">appendChild</span>(button)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-41" title="41">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-42" title="42">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-43" title="43"><span class="op">}</span></a>
+<a class="sourceLine" id="cb16-44" title="44"></a>
+<a class="sourceLine" id="cb16-45" title="45"><span class="co">// Initialize the page by constructing the color options</span></a>
+<a class="sourceLine" id="cb16-46" title="46"><span class="at">constructOptions</span>(presetButtonColors)<span class="op">;</span></a></code></pre></div>
+<p>Four color options are provided then generated as buttons on the options page with onclick event listeners. When the user clicks a button, it updates the color value in the extension’s storage. Since all of the extension’s files pull the color information from this storage, no other values need to be updated.</p>
+<h2 id="take-the-next-step-next-steps">Take the next step {: #next-steps }</h2>
+<p>Congratulations! The directory now holds a fully-functional, albeit simplistic, Chrome extension.</p>
+<p>What’s next?</p>
+<ul>
+<li>The <a href="/docs/extensions/mv3/overview">Chrome Extension Overview</a> backs up a bit, and fills in a lot of detail about the Extensions architecture in general, and some specific concepts developers will want to be familiar with.</li>
+<li>Learn about the options available for debugging Extensions in the <a href="/docs/extensions/mv3/tut_debugging">debugging tutorial</a>.</li>
+<li>Chrome Extensions have access to powerful APIs above and beyond what’s available on the open web. The <a href="/docs/extensions/reference">chrome.* APIs documentation</a> will walk through each API.</li>
+<li>The <a href="/docs/extensions/mv3/devguide">developer’s guide</a> has dozens of additional links to pieces of documentation relevant to advanced extension creation.</li>
+</ul>
+</body>
+</html>

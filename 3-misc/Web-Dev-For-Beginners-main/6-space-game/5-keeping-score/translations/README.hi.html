@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.hi</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="एक-अंतरिक्ष-खेल-बनाएँ-भाग-५-स्कोरिंग-और-जीवन">एक अंतरिक्ष खेल बनाएँ भाग ५: स्कोरिंग और जीवन</h1>
+<h2 id="लेक्टरसे-पहलेकी-क्विज़">लेक्टरसे पहलेकी क्विज़</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/37?loc=hi">लेक्टरसे पहलेकी क्विज़</a></p>
+<p>इस पाठ में, आप सीखेंगे कि किसी खेल में स्कोरिंग कैसे जोड़ें और जीवन की गणना करें.</p>
+<h2 id="स्क्रीन-पर-टेक्स्ट-ड्रा-करें">स्क्रीन पर टेक्स्ट ड्रा करें</h2>
+<p>स्क्रीन पर गेम स्कोर प्रदर्शित करने में सक्षम होने के लिए, आपको यह जानना होगा कि स्क्रीन पर टेक्स्ट कैसे रखा जाए. उत्तर कैनवास ऑब्जेक्ट पर <code>fillText()</code> विधि का उपयोग कर रहा है। आप अन्य पहलुओं को भी नियंत्रित कर सकते हैं जैसे कि किस फ़ॉन्ट का उपयोग करना है, पाठ का रंग और यहां तक ​​कि इसके संरेखण (बाएं, दाएं, केंद्र)। नीचे कुछ कोड है जो स्क्रीन पर कुछ टेक्स्ट खींच रहा है.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="va">ctx</span>.<span class="at">font</span> <span class="op">=</span> <span class="st">&quot;30px Arial&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;red&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="va">ctx</span>.<span class="at">textAlign</span> <span class="op">=</span> <span class="st">&quot;right&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="va">ctx</span>.<span class="at">fillText</span>(<span class="st">&quot;show this on the screen&quot;</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></a></code></pre></div>
+<p>✅ <a href="https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_text">एक कैनवास में पाठ कैसे जोड़ें</a> इसके बारे में और पढ़ें और बेझिझक अपने को आकर्षक बनाने के लिए!</p>
+<h2 id="जीवन-एक-खेल-अवधारणा-के-रूप-में">जीवन, एक खेल अवधारणा के रूप में</h2>
+<p>एक खेल में एक जीवन होने की अवधारणा केवल एक संख्या है। एक अंतरिक्ष खेल के संदर्भ में यह सामान्य है कि आपके जहाज को नुकसान होने पर एक-एक करके कटे हुए जीवन का एक सेट आवंटित किया जाए। यदि आप एक नंबर के बजाय मिनीशिप या दिल की तरह इस का एक चित्रमय प्रतिनिधित्व दिखा सकते हैं तो अच्छा है.</p>
+<h2 id="क्या-बनाना-है">क्या बनाना है</h2>
+<p>चलो अपने खेल में निम्नलिखित जोड़ते हैं:</p>
+<ul>
+<li><strong>खेल का स्कोर</strong>: नष्ट होने वाले प्रत्येक दुश्मन जहाज के लिए, नायक को कुछ बिंदुओं से सम्मानित किया जाना चाहिए, हम प्रति जहाज १०० अंक का सुझाव देते हैं। खेल का स्कोर नीचे बाईं ओर दिखाया जाना चाहिए.</li>
+<li><strong>जीबन</strong>: आपके जहाज में तीन जीवन हैं। जब भी कोई दुश्मन जहाज आपसे टकराता है तो आप एक जीवन खो देते हैं। एक जीवन स्कोर नीचे दाईं ओर प्रदर्शित किया जाना चाहिए और निम्नलिखित ग्राफ़िक से बाहर किया जाना चाहिए! <a href="../solution/assets/life.png">जीवन छवि</a>.</li>
+</ul>
+<h2 id="अनुशंसित-कदम">अनुशंसित कदम</h2>
+<p>उन फ़ाइलों का पता लगाएँ जो आपके लिए <code>your-work</code> सब फ़ोल्डर में बनाई गई हैं। इसमें निम्नलिखित शामिल होना चाहिए:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">-</span><span class="kw">|</span> <span class="ex">assets</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">enemyShip.png</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">player.png</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">laserRed.png</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="ex">-</span><span class="kw">|</span> <span class="ex">index.html</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="ex">-</span><span class="kw">|</span> <span class="ex">app.js</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="ex">-</span><span class="kw">|</span> <span class="ex">package.json</span></a></code></pre></div>
+<p>आप टाइप करके अपना प्रोजेक्ट <code>your_work</code> फ़ोल्डर शुरू करें:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="bu">cd</span> your-work</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="ex">npm</span> start</a></code></pre></div>
+<p>उपरोक्त पते पर एक HTTP सर्वर शुरू होगा <code>http://localhost:5000</code>। एक ब्राउज़र खोले और उस पते को डाले , अभी उसे नायक और सभी दुश्मनों को प्रस्तुत करना चाहिए, और जैसे ही आप अपने बाएँ और दाएँ तीर मारते हैं, नायक चलता है और दुश्मनों को मार सकता है।.</p>
+<h3 id="कोड-जोड़े">कोड जोड़े</h3>
+<ol type="1">
+<li><p><code>solution/assets/</code> फ़ोल्डर से <code>your-work</code> फ़ोल्डर में आवश्यक असेट्स की प्रतिलिपि बनाएँ;आप एक <code>life.png</code> एसेट जोड़ देंगे। LifeImg को window.onload फ़ंक्शन में जोड़ें:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1">lifeImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadTexture</span>(<span class="st">&quot;assets/life.png&quot;</span>)<span class="op">;</span></a></code></pre></div></li>
+<li><p>असेट्स की सूची में <code>lifeImg</code> जोड़ें:</p></li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">let</span> heroImg<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-2" title="2">...</a>
+<a class="sourceLine" id="cb5-3" title="3">lifeImg<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-4" title="4">...</a>
+<a class="sourceLine" id="cb5-5" title="5">eventEmitter <span class="op">=</span> <span class="kw">new</span> <span class="at">EventEmitter</span>()<span class="op">;</span></a></code></pre></div>
+<ol type="1">
+<li><p><strong>चर जोड़ें</strong> वह कोड जोड़ें जो आपके कुल स्कोर(0) का प्रतिनिधित्व करता है और बाईं ओर (3) रहता है, इन स्कोर को स्क्रीन पर प्रदर्शित करता है.</p></li>
+<li><p><strong><code>updateGameObjects()</code> फ़ंक्शन बढ़ाएँ</strong>। दुश्मन टकराव को संभालने के लिए <code>updateGameObjects()</code> फ़ंक्शन बढ़ाएँ:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="va">enemies</span>.<span class="at">forEach</span>((enemy) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">const</span> heroRect <span class="op">=</span> <span class="va">hero</span>.<span class="at">rectFromGameObject</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="cf">if</span> (<span class="at">intersectRect</span>(heroRect<span class="op">,</span> <span class="va">enemy</span>.<span class="at">rectFromGameObject</span>())) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_HERO</span><span class="op">,</span> <span class="op">{</span> enemy <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div></li>
+<li><p><strong><code>life</code> ओर <code>points</code> जोड़े</strong>.</p>
+<ol type="1">
+<li><p><strong>आरंभिक चर</strong>. <code>हीरो</code> वर्ग में <code>this.cooldown = 0</code> के तहत, जीवन और बिंदुओ निर्धारित करें:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">this</span>.<span class="at">life</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">this</span>.<span class="at">points</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a></code></pre></div></li>
+<li><p><strong>स्क्रीन पर चर बनाए</strong>. इन मूल्यों को स्क्रीन पर बनाए:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">function</span> <span class="at">drawLife</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="co">// </span><span class="al">TODO</span><span class="co">, 35, 27</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="kw">const</span> START_POS <span class="op">=</span> <span class="va">canvas</span>.<span class="at">width</span> <span class="op">-</span> <span class="dv">180</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">hero</span>.<span class="at">life</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="va">ctx</span>.<span class="at">drawImage</span>(lifeImg<span class="op">,</span> START_POS <span class="op">+</span> <span class="dv">45</span> <span class="op">*</span> (i <span class="op">+</span> <span class="dv">1</span>)<span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span> <span class="op">-</span> <span class="dv">37</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-6" title="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb8-8" title="8"></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="kw">function</span> <span class="at">drawPoints</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-10" title="10">  <span class="va">ctx</span>.<span class="at">font</span> <span class="op">=</span> <span class="st">&quot;30px Arial&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-11" title="11">  <span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;red&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-12" title="12">  <span class="va">ctx</span>.<span class="at">textAlign</span> <span class="op">=</span> <span class="st">&quot;left&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-13" title="13">  <span class="at">drawText</span>(<span class="st">&quot;Points: &quot;</span> <span class="op">+</span> <span class="va">hero</span>.<span class="at">points</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span> <span class="op">-</span> <span class="dv">20</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="op">}</span></a>
+<a class="sourceLine" id="cb8-15" title="15"></a>
+<a class="sourceLine" id="cb8-16" title="16"><span class="kw">function</span> <span class="at">drawText</span>(message<span class="op">,</span> x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-17" title="17">  <span class="va">ctx</span>.<span class="at">fillText</span>(message<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-18" title="18"><span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>गेम लूप के तरीके जोड़ें</strong>. सुनिश्चित करें कि आप इन अपडेट्स को अपने विंडो में जोड़ें। फ़ंक्शन को <code>updateGameObjects()</code> के तहत लोड करें:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="at">drawPoints</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="at">drawLife</span>()<span class="op">;</span></a></code></pre></div></li>
+</ol></li>
+<li><p><strong>खेल के नियमों को लागू करें</strong>. निम्नलिखित खेल नियमों को लागू करें:</p>
+<ol type="1">
+<li><p><strong>हर हीरो और दुश्मन की टक्कर के लिए</strong>, जीवन घटाए.</p>
+<p>इस कटौती को करने के लिए <code>हीरो</code> क्लास का विस्तार करें:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="at">decrementLife</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="kw">this</span>.<span class="at">life</span><span class="op">--;</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">life</span> <span class="op">===</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="kw">this</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>हर लेजर के लिए जो दुश्मन को मारता है</strong>, १०० अंकों के साथ गेम स्कोर बढ़ाता है.</p>
+<p>इस वेतन वृद्धि को करने के लिए हीरो क्लास बढ़ाएँ:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1">  <span class="at">incrementPoints</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">    <span class="kw">this</span>.<span class="at">points</span> <span class="op">+=</span> <span class="dv">100</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="op">}</span></a></code></pre></div>
+<p>अपने कॉलिसन ईवेंट एमीटर्स में इन कार्यों को जोड़ें:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(</a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  (_<span class="op">,</span> <span class="op">{</span> first<span class="op">,</span> second <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-4" title="4">    <span class="va">first</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-5" title="5">    <span class="va">second</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-6" title="6">    <span class="va">hero</span>.<span class="at">incrementPoints</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-8" title="8">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-9" title="9"></a>
+<a class="sourceLine" id="cb12-10" title="10"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_HERO</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> enemy <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-11" title="11">  <span class="va">enemy</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-12" title="12">  <span class="va">hero</span>.<span class="at">decrementLife</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-13" title="13"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div></li>
+</ol></li>
+</ol>
+<p>✅ जावास्क्रिप्ट/कैनवस का उपयोग करके बनाए गए अन्य खेलों की खोज के लिए थोड़ा शोध करें। उनके सामान्य लक्षण क्या हैं?</p>
+<p>इस काम के अंत तक, आपको छोटे ‘जीवन’ जहाजों को नीचे दाईं ओर, बिंदुओं को नीचे बाईं ओर देखना चाहिए, और जब आप दुश्मनों को गोली मारते हैं, तो आपको अपने जीवन की गिनती में कमी और दुश्मनों से टकराते हुए देखना चाहिए। बहुत बढ़िया! आपका खेल लगभग पूरा हो गया है.</p>
+<hr />
+<h2 id="चुनोती">🚀 चुनोती</h2>
+<p>आपका कोड लगभग पूरा हो चुका है। क्या आप अपने अगले चरणों की कल्पना कर सकते हैं?</p>
+<h2 id="पोस्ट-व्याख्यान-प्रश्नोत्तरी">पोस्ट-व्याख्यान प्रश्नोत्तरी</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/38?loc=hi">पोस्ट-व्याख्यान प्रश्नोत्तरी</a></p>
+<h2 id="समीक्षा-और-स्व-अध्ययन">समीक्षा और स्व अध्ययन</h2>
+<p>कुछ तरीकों पर शोध करें जो आप खेल के स्कोर और जीवन को बढ़ा सकते हैं। <a href="https://playfab.com">PlayFab</a> जैसे कुछ दिलचस्प गेम इंजन हैं। इनमें से किसी एक का उपयोग करने से आपका खेल कैसे बढ़ेगा?</p>
+<h2 id="असाइनमेंट">असाइनमेंट</h2>
+<p><a href="assignment.hi.md">एक स्कोरिंग गेम बनाएँ</a></p>
+</body>
+</html>

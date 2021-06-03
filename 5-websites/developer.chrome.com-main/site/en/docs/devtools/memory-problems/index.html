@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2015-04-13" />
+  <title>Fix memory problems</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Fix memory problems</h1>
+<p class="date">2015-04-13</p>
+</header>
+<p>Learn how to use Chrome and DevTools to find memory issues that affect page performance, including memory leaks, memory bloat, and frequent garbage collections.</p>
+<h2 id="summary-summary">Summary {: #summary }</h2>
+<ul>
+<li>Find out how much memory your page is currently using with the Chrome Task Manager.</li>
+<li>Visualize memory usage over time with Timeline recordings.</li>
+<li>Identify detached DOM trees (a common cause of memory leaks) with Heap Snapshots.</li>
+<li>Find out when new memory is being allocated in your JS heap with Allocation Timeline recordings.</li>
+</ul>
+<h2 id="overview-overview">Overview {: #overview }</h2>
+<p>In the spirit of the <a href="https://web.dev/rail">RAIL</a> performance model, the focus of your performance efforts should be your users.</p>
+<p>Memory issues are important because they are often perceivable by users. Users can perceive memory issues in the following ways:</p>
+<ul>
+<li><strong>A page’s performance gets progressively worse over time.</strong> This is possibly a symptom of a memory leak. A memory leak is when a bug in the page causes the page to progressively use more and more memory over time.</li>
+<li><strong>A page’s performance is consistently bad.</strong> This is possibly a symptom of memory bloat. Memory bloat is when a page uses more memory than is necessary for optimal page speed.</li>
+<li><strong>A page’s performance is delayed or appears to pause frequently.</strong> This is possibly a symptom of frequent garbage collections. Garbage collection is when the browser reclaims memory. The browser decides when this happens. During collections, all script execution is paused. So if the browser is garbage collecting a lot, script execution is going to get paused a lot.</li>
+</ul>
+<h3 id="memory-bloat-how-much-is-too-much-memory_bloat_how_much_is_too_much">Memory bloat: how much is “too much”? {: #memory_bloat_how_much_is_too_much }</h3>
+<p>A memory leak is easy to define. If a site is progressively using more and more memory, then you’ve got a leak. But memory bloat is a bit harder to pin down. What qualifies as “using too much memory”?</p>
+<p>There are no hard numbers here, because different devices and browsers have different capabilities. The same page that runs smoothly on a high-end smartphone might crash on a low-end smartphone.</p>
+<p>The key here is to use the RAIL model and focus on your users. Find out what devices are popular with your users, and then test out your page on those devices. If the experience is consistently bad, the page may be exceeding the memory capabilities of those devices.</p>
+<h2 id="monitor-memory-use-in-realtime-with-the-chrome-task-manager-monitor_memory_use_in_realtime_with_the_chrome_task_manager">Monitor memory use in realtime with the Chrome Task Manager {: #monitor_memory_use_in_realtime_with_the_chrome_task_manager }</h2>
+<p>Use the Chrome Task Manager as a starting point to your memory issue investigation. The Task Manager is a realtime monitor that tells you how much memory a page is currently using.</p>
+<ol type="1">
+<li><p>Press Shift+Esc or go to the Chrome main menu and select <strong>More tools</strong> &gt; <strong>Task manager</strong> to open the Task Manager.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/N79qVbngo3RGfyJqVAXs.png”, alt=“Opening the Task Manager”, width=“800”, height=“441” %}</p></li>
+<li><p>Right-click on the table header of the Task Manager and enable <strong>JavaScript memory</strong>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/HgelJFumP0cFX1lYZc1V.png”, alt=“Enabling JS memory”, width=“764”, height=“705” %}</p></li>
+</ol>
+<p>These two columns tell you different things about how your page is using memory:</p>
+<ul>
+<li>The <strong>Memory</strong> column represents native memory. DOM nodes are stored in native memory. If this value is increasing, DOM nodes are getting created.</li>
+<li>The <strong>JavaScript Memory</strong> column represents the JS heap. This column contains two values. The value you’re interested in is the live number (the number in parentheses). The live number represents how much memory the reachable objects on your page are using. If this number is increasing, either new objects are being created, or the existing objects are growing.</li>
+</ul>
+<h2 id="visualize-memory-leaks-with-timeline-recordings-visualize_memory_leaks_with_timeline_recordings">Visualize memory leaks with Timeline recordings {: #visualize_memory_leaks_with_timeline_recordings }</h2>
+<p>You can also use the Timeline panel as another starting point in your investigation. The Timeline panel helps you visualize a page’s memory use over time.</p>
+<ol type="1">
+<li>Open the <strong>Timeline</strong> panel on DevTools.</li>
+<li>Enable the <strong>Memory</strong> checkbox.</li>
+<li><a href="/docs/devtools/evaluate-performance/reference/#record-runtime">Make a recording</a>.</li>
+</ol>
+<p>Tip: It’s a good practice to start and end your recording with a forced garbage collection. Click the <strong>collect garbage</strong> button ({% Img src=“image/admin/Qkf1EfUFRSoRsCEMVHdY.png”, alt=“force garbage collection button”, width=“18”, height=“20” %}) while recording to force garbage collection.</p>
+<p>To demonstrate Timeline memory recordings, consider the code below:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">var</span> x <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">function</span> <span class="at">grow</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10000</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="va">document</span>.<span class="va">body</span>.<span class="at">appendChild</span>(<span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&#39;div&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="va">x</span>.<span class="at">push</span>(<span class="kw">new</span> <span class="at">Array</span>(<span class="dv">1000000</span>).<span class="at">join</span>(<span class="st">&#39;x&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-9" title="9"></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;grow&#39;</span>).<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> grow)<span class="op">;</span></a></code></pre></div>
+<p>Every time that the button referenced in the code is pressed, ten thousand <code>div</code> nodes are appended to the document body, and a string of one million <code>x</code> characters is pushed onto the <code>x</code> array. Running this code produces a Timeline recording like the following screenshot:</p>
+<p>{% Img src=“image/admin/pPcZQbQ6EleigzceZoct.png”, alt=“simple growth example”, width=“800”, height=“349” %}</p>
+<p>First, an explanation of the user interface. The <strong>HEAP</strong> graph in the <strong>Overview</strong> pane (below <strong>NET</strong>) represents the JS heap. Below the <strong>Overview</strong> pane is the <strong>Counter</strong> pane. Here you can see memory usage broken down by JS heap (same as <strong>HEAP</strong> graph in the <strong>Overview</strong> pane), documents, DOM nodes, listeners, and GPU memory. Disabling a checkbox hides it from the graph.</p>
+<p>Now, an analysis of the code compared with the screenshot. If you look at the node counter (the green graph) you can see that it matches up cleanly with the code. The node count increases in discrete steps. You can presume that each increase in the node count is a call to <code>grow()</code>. The JS heap graph (the blue graph) is not as straightforward. In keeping with best practices, the first dip is actually a forced garbage collection (achieved by pressing the <strong>collect garbage</strong> button). As the recording progresses you can see that the JS heap size spikes. This is natural and expected: the JavaScript code is creating the DOM nodes on every button click and doing a lot of work when it creates the string of one million characters. The key thing here is the fact that the JS heap ends higher than it began (the “beginning” here being the point after the forced garbage collection). In the real world, if you saw this pattern of increasing JS heap size or node size, it would potentially mean a memory leak.</p>
+<h2 id="discover-detached-dom-tree-memory-leaks-with-heap-snapshots-discover_detached_dom_tree_memory_leaks_with_heap_snapshots">Discover detached DOM tree memory leaks with Heap Snapshots {: #discover_detached_dom_tree_memory_leaks_with_heap_snapshots }</h2>
+<p>A DOM node can only be garbage collected when there are no references to it from either the page’s DOM tree or JavaScript code. A node is said to be “detached” when it’s removed from the DOM tree but some JavaScript still references it. Detached DOM nodes are a common cause of memory leaks. This section teaches you how to use DevTools’ heap profilers to identify detached nodes.</p>
+<p>Here’s a simple example of detached DOM nodes.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">var</span> detachedTree<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">function</span> <span class="at">create</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="kw">var</span> ul <span class="op">=</span> <span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&#39;ul&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="kw">var</span> li <span class="op">=</span> <span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&#39;li&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="va">ul</span>.<span class="at">appendChild</span>(li)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-9" title="9">  detachedTree <span class="op">=</span> ul<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-11" title="11"></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;create&#39;</span>).<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> create)<span class="op">;</span></a></code></pre></div>
+<p>Clicking the button referenced in the code creates a <code>ul</code> node with ten <code>li</code> children. These nodes are referenced by the code but do not exist in the DOM tree, so they’re detached.</p>
+<p>Heap snapshots are one way to identify detached nodes. As the name implies, heap snapshots show you how memory is distributed among your page’s JS objects and DOM nodes at the point of time of the snapshot.</p>
+<p>To create a snapshot, open DevTools and go to the <strong>Profiles</strong> panel, select the <strong>Take Heap Snapshot</strong> radio button, and then press the <strong>Take Snapshot</strong> button.</p>
+<p>{% Img src=“image/admin/cZnWVusrPfoLR9R9edO1.png”, alt=“take heap snapshot”, width=“800”, height=“353” %}</p>
+<p>The snapshot may take some time to process and load. Once it’s finished, select it from the lefthand panel (named <strong>HEAP SNAPSHOTS</strong>).</p>
+<p>Type <code>Detached</code> in the <strong>Class filter</strong> textbox to search for detached DOM trees.</p>
+<p>{% Img src=“image/admin/WXv2Bv8LfZKGQBmgcPbl.png”, alt=“filtering for detached nodes”, width=“800”, height=“218” %}</p>
+<p>Expand the carats to investigate a detached tree.</p>
+<p>{% Img src=“image/admin/j2sPLeVjZ5tgbmVhs9Ri.png”, alt=“investigating detached tree”, width=“800”, height=“384” %}</p>
+<p>Nodes highlighted yellow have direct references to them from the JavaScript code. Nodes highlighted red do not have direct references. They are only alive because they are part of the yellow node’s tree. In general, you want to focus on the yellow nodes. Fix your code so that the yellow node isn’t alive for longer than it needs to be, and you also get rid of the red nodes that are part of the yellow node’s tree.</p>
+<p>Click on a yellow node to investigate it further. In the <strong>Objects</strong> pane you can see more information about the code that’s referencing it. For example, in the screenshot below you can see that the <code>detachedTree</code> variable is referencing the node. To fix this particular memory leak, you would study the code that uses <code>detachedTree</code> and ensure that it removes its reference to the node when it’s no longer needed.</p>
+<p>{% Img src=“image/admin/YB6UXZtlZ1eleCZUbUuG.png”, alt=“investigating a yellow node”, width=“800”, height=“369” %}</p>
+<h2 id="identify-js-heap-memory-leaks-with-allocation-timelines-identify_js_heap_memory_leaks_with_allocation_timelines">Identify JS heap memory leaks with Allocation Timelines {: #identify_js_heap_memory_leaks_with_allocation_timelines }</h2>
+<p>The Allocation Timeline is another tool that can help you track down memory leaks in your JS heap.</p>
+<p>To demonstrate the Allocation Timeline consider the following code:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">var</span> x <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw">function</span> <span class="at">grow</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="va">x</span>.<span class="at">push</span>(<span class="kw">new</span> <span class="at">Array</span>(<span class="dv">1000000</span>).<span class="at">join</span>(<span class="st">&#39;x&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;grow&#39;</span>).<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> grow)<span class="op">;</span></a></code></pre></div>
+<p>Every time that the button referenced in the code is pushed, a string of one million characters is added to the <code>x</code> array.</p>
+<p>To record an Allocation Timeline, open DevTools, go to the <strong>Profiles</strong> panel, select the <strong>Record Allocation Timeline</strong> radio button, press the <strong>Start</strong> button, perform the action that you suspect is causing the memory leak, and then press the <strong>stop recording</strong> button ({% Img src=“image/admin/1bMLuZwggo3QfUYi6Irk.png”, alt=“stop recording button”, width=“20”, height=“19” %}) when you’re done.</p>
+<p>As you’re recording, notice if any blue bars show up on the Allocation Timeline, like in the screenshot below.</p>
+<p>{% Img src=“image/admin/2OEngx5L3tELetdn1JDy.png”, alt=“new allocations”, width=“800”, height=“381” %}</p>
+<p>Those blue bars represent new memory allocations. Those new memory allocations are your candidates for memory leaks. You can zoom on a bar to filter the <strong>Constructor</strong> pane to only show objects that were allocated during the specified timeframe.</p>
+<p>{% Img src=“image/admin/j1EwNIGrsYdMX23HkF7I.png”, alt=“zoomed allocation timeline”, width=“800”, height=“252” %}</p>
+<p>Expand the object and click on its value to view more details about it in the <strong>Object</strong> pane. For example, in the screenshot below, by viewing the details of the object that was newly allocated, you’d be able to see that it was allocated to the <code>x</code> variable in the <code>Window</code> scope.</p>
+<p>{% Img src=“image/admin/y8Yq6Ma0MVawDaG7dz8b.png”, alt=“object details”, width=“800”, height=“368” %}</p>
+<h2 id="investigate-memory-allocation-by-function-allocation-profile">Investigate memory allocation by function {: #allocation-profile }</h2>
+<p>Use the <strong>Record Allocation Profiler</strong> type to view memory allocation by JavaScript function.</p>
+<p>{% Img src=“image/admin/EiRjVwtHv1eh7idYWz37.png”, alt=“Record Allocation Profiler”, width=“800”, height=“564” %}</p>
+<ol type="1">
+<li>Select the <strong>Record Allocation Profiler</strong> radio button. If there is a worker on the page, you can select that as the profiling target using the dropdown menu next to the <strong>Start</strong> button.</li>
+<li>Press the <strong>Start</strong> button.</li>
+<li>Perform the actions on the page which you want to investigate.</li>
+<li>Press the <strong>Stop</strong> button when you have finished all of your actions.</li>
+</ol>
+<p>DevTools shows you a breakdown of memory allocation by function. The default view is <strong>Heavy (Bottom Up)</strong>, which displays the functions that allocated the most memory at the top.</p>
+<p>{% Img src=“image/admin/bR7LtElQ59hH4L3DTpE4.png”, alt=“Allocation profile”, width=“800”, height=“382” %}</p>
+<h2 id="spot-frequent-garbage-collections-spot_frequent_garbage_collections">Spot frequent garbage collections {: #spot_frequent_garbage_collections }</h2>
+<p>If your page appears to pause frequently, then you may have garbage collection issues.</p>
+<p>You can use either the Chrome Task Manager or Timeline memory recordings to spot frequent garbage collections. In the Task Manager, frequently rising and falling <strong>Memory</strong> or <strong>JavaScript Memory</strong> values represent frequent garbage collections. In Timeline recordings, frequently rising and falling JS heap or node count graphs indicate frequent garbage collections.</p>
+<p>Once you’ve identified the problem, you can use an Allocation Timeline recording to find out where memory is being allocated and which functions are causing the allocations.</p>
+</body>
+</html>

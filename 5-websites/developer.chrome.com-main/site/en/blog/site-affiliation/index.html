@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2021-04-22" />
+  <title>Enable Chrome to share login credentials across affiliated sites</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Enable Chrome to share login credentials across affiliated sites</h1>
+<p class="date">2021-04-22</p>
+</header>
+<p>Chrome’s password manager already autofills credentials for sites with saved credentials, as well as in the following two cases:</p>
+<ol type="1">
+<li>When two sites are in the <a href="https://web.dev/same-site-same-origin/">same-site</a> relationship, Chrome will show autofill credentials for the other site if there’s at least one credential saved on one site. For example, because <code>www.example.com</code> and <code>m.example.com</code> are the same-site, Chrome can share saved credentials between the two sites and suggest the saved password to another.</li>
+<li>When a developer associates an Android app with a site that uses the same credentials, Chrome can suggest Android credentials on that site. Apps are associated with sites using <a href="https://developers.google.com/digital-asset-links/v1/getting-started">Digital Asset Links (DALs)</a>.</li>
+</ol>
+<p>You can now also associate websites in a cross-site relationship to enable users to save their credentials once and have the password manager suggest them to any of the affiliated websites.</p>
+<p>If you employ multiple domains that share the same account management backend (such as <code>https://www.example.com</code> and <code>https://www.example.co.uk)</code>, starting in version 91, you can enable Chrome to suggest passwords saved to domains associated with Digital Asset Links.</p>
+<p>{% Aside %} There’s a similar potential web platform feature called <a href="https://github.com/privacycg/first-party-sets">First-Party Sets</a>. However, while it allows for embeds from cross-site to be treated as the same party when the top-level domain is owned by the same organization, there’s no plan to have any effect on handling passwords. The Digital Asset Links is Google’s technology that can be used for passwords, but it has no effect on handling cookies. {% endAside %}</p>
+<p>To make a DAL association, developers need to put a JSON file that follows <a href="https://developers.google.com/digital-asset-links/v1/statements">the DAL syntax</a> at <code>/.well-known/assetlinks.json</code> on the respective domains.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ol type="1">
+<li>Use Chrome 91 or later.</li>
+<li>Enable the flag at <code>chrome://flags#filling-across-affiliated-websites</code>.</li>
+<li>Make sure “Offer to save passwords” is turned on in <code>chrome://settings/passwords</code>.</li>
+<li>Make sure your website’s sign-in domain is available through HTTPS.</li>
+</ol>
+<h2 id="associate-your-two-websites">Associate your two websites</h2>
+<ol type="1">
+<li><p>To declare that the website, for example <code>https://www.example.com,</code>can share credentials with <code>https://www.example.co.uk</code>, create a file named <code>assetlinks.json</code> with the following content:</p>
+<p><br></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">[</span><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;relation&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;delegate_permission/common.get_login_creds&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="dt">&quot;namespace&quot;</span><span class="fu">:</span> <span class="st">&quot;web&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="dt">&quot;site&quot;</span><span class="fu">:</span> <span class="st">&quot;https://www.example.com&quot;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-7" title="7"> <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="dt">&quot;relation&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;delegate_permission/common.get_login_creds&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="dt">&quot;namespace&quot;</span><span class="fu">:</span> <span class="st">&quot;web&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="dt">&quot;site&quot;</span><span class="fu">:</span> <span class="st">&quot;https://www.example.co.uk&quot;</span></a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-14" title="14"> <span class="fu">}</span><span class="ot">]</span></a></code></pre></div>
+<p><br></p>
+<p>The <code>relation</code> field is an array of one or more strings that describe the relationship between the sites. For sites to share sign-in credentials, specify the string <code>delegate_permission/common.get_login_creds</code>.<br />
+The <code>target</code> field is an object that specifies the asset the declaration applies to. The following fields identify a website:</p>
+<p><br></p>
+<table>
+<tr>
+<td>
+<code>namespace</code>
+</td>
+<td>
+Must be <code>web</code> for websites.
+</td>
+</tr>
+<tr>
+<td>
+<code>site</code>
+</td>
+<td>
+The website’s URL, in the format <code>https://<strong>domain</strong>[:<strong>optional_port</strong>]</code>; for example, <code>https://www.example.com</code>.
+</td>
+</tr>
+</table>
+<p>See the <a href="https://developers.google.com/digital-asset-links/v1/statements">Digital Asset Links reference</a> for details.</p></li>
+<li><p>Host the Digital Asset Links JSON file at the following location on the sign-in domain: <code>https://domain[:optional_port]/.well-known/assetlinks.json</code>.</p>
+<p><br></p>
+<p>In this example, the domain is <code>www.example.com</code>, so the JSON file should be hosted at <code>https://www.example.com/.well-known/assetlinks.json</code>.</p>
+<p><br></p>
+<p>The MIME type for the Digital Asset Links file needs to be JSON. Make sure the server sends a <code>Content-Type: application/json</code> header in the response.</p></li>
+<li><p>To declare the association in both websites, host the <code>assetlinks.json</code>at <code>https://www.example.co.uk/.well-known/assetlinks.json</code> as well:</p>
+<p><br></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">[</span><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;relation&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;delegate_permission/common.get_login_creds&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="dt">&quot;namespace&quot;</span><span class="fu">:</span> <span class="st">&quot;web&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="dt">&quot;site&quot;</span><span class="fu">:</span> <span class="st">&quot;https://www.example.com&quot;</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-7" title="7"> <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="dt">&quot;relation&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;delegate_permission/common.get_login_creds&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-10" title="10">  <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-11" title="11">    <span class="dt">&quot;namespace&quot;</span><span class="fu">:</span> <span class="st">&quot;web&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="dt">&quot;site&quot;</span><span class="fu">:</span> <span class="st">&quot;https://www.example.co.uk&quot;</span></a>
+<a class="sourceLine" id="cb2-13" title="13">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-14" title="14"> <span class="fu">}</span><span class="ot">]</span></a></code></pre></div></li>
+<li><p>Ensure that your host permits Google to retrieve your Digital Asset Links file. If you have a <code>robots.txt</code> file, it must allow the Googlebot agent to retrieve <code>/.well-known/assetlinks.json</code>. Most sites can simply allow any automated agent to retrieve files in the <code>/.well-known/</code> path so that other services can access the metadata in those files:</p>
+<p><br></p>
+<pre class="text"><code>User-agent: *
+Allow: /.well-known/</code></pre></li>
+</ol>
+<p>{% Aside %} Be aware that once you set up a DAL file, it may take a while for Googlebot to fetch the resource and recognize the association. {% endAside %}</p>
+<h2 id="associate-multiple-websites-with-one-another">Associate multiple websites with one another</h2>
+<p>You can associate multiple websites with one another by specifying each one in the Digital Asset Links file. For example, to associate the <code>example.com</code>, <code>example.co.uk,</code>and<code>example.co.jp</code>, specify all of those websites in the <code>assetlinks.json</code> JSON file and host it on each website at <code>https://EXAMPLE_DOMAIN_NAME/.well-known/assetlinks.json</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="ot">[</span><span class="fu">{</span>  </a>
+<a class="sourceLine" id="cb4-2" title="2">     <span class="dt">&quot;relation&quot;</span><span class="fu">:</span><span class="ot">[</span>  </a>
+<a class="sourceLine" id="cb4-3" title="3">        <span class="st">&quot;delegate_permission/common.get_login_creds&quot;</span>  </a>
+<a class="sourceLine" id="cb4-4" title="4">     <span class="ot">]</span><span class="fu">,</span>  </a>
+<a class="sourceLine" id="cb4-5" title="5">     <span class="dt">&quot;target&quot;</span><span class="fu">:{</span>  </a>
+<a class="sourceLine" id="cb4-6" title="6">        <span class="dt">&quot;site&quot;</span><span class="fu">:</span><span class="st">&quot;https://www.example.com&quot;</span><span class="fu">,</span>  </a>
+<a class="sourceLine" id="cb4-7" title="7">        <span class="dt">&quot;namespace&quot;</span><span class="fu">:</span><span class="st">&quot;web&quot;</span>  </a>
+<a class="sourceLine" id="cb4-8" title="8">     <span class="fu">}</span>  </a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="fu">}</span><span class="ot">,</span>  </a>
+<a class="sourceLine" id="cb4-10" title="10">  <span class="fu">{</span>  </a>
+<a class="sourceLine" id="cb4-11" title="11">     <span class="dt">&quot;relation&quot;</span><span class="fu">:</span><span class="ot">[</span>  </a>
+<a class="sourceLine" id="cb4-12" title="12">        <span class="st">&quot;delegate_permission/common.get_login_creds&quot;</span>  </a>
+<a class="sourceLine" id="cb4-13" title="13">     <span class="ot">]</span><span class="fu">,</span>  </a>
+<a class="sourceLine" id="cb4-14" title="14">     <span class="dt">&quot;target&quot;</span><span class="fu">:{</span>  </a>
+<a class="sourceLine" id="cb4-15" title="15">        <span class="dt">&quot;site&quot;</span><span class="fu">:</span><span class="st">&quot;https://www.example.co.uk&quot;</span><span class="fu">,</span>  </a>
+<a class="sourceLine" id="cb4-16" title="16">        <span class="dt">&quot;namespace&quot;</span><span class="fu">:</span><span class="st">&quot;web&quot;</span>  </a>
+<a class="sourceLine" id="cb4-17" title="17">     <span class="fu">}</span>  </a>
+<a class="sourceLine" id="cb4-18" title="18">  <span class="fu">}</span><span class="ot">,</span>  </a>
+<a class="sourceLine" id="cb4-19" title="19">  <span class="fu">{</span>  </a>
+<a class="sourceLine" id="cb4-20" title="20">     <span class="dt">&quot;relation&quot;</span><span class="fu">:</span><span class="ot">[</span>  </a>
+<a class="sourceLine" id="cb4-21" title="21">        <span class="st">&quot;delegate_permission/common.get_login_creds&quot;</span>  </a>
+<a class="sourceLine" id="cb4-22" title="22">     <span class="ot">]</span><span class="fu">,</span>  </a>
+<a class="sourceLine" id="cb4-23" title="23">     <span class="dt">&quot;target&quot;</span><span class="fu">:{</span>  </a>
+<a class="sourceLine" id="cb4-24" title="24">        <span class="dt">&quot;site&quot;</span><span class="fu">:</span><span class="st">&quot;https://www.example.co.jp&quot;</span><span class="fu">,</span>  </a>
+<a class="sourceLine" id="cb4-25" title="25">        <span class="dt">&quot;namespace&quot;</span><span class="fu">:</span><span class="st">&quot;web&quot;</span>  </a>
+<a class="sourceLine" id="cb4-26" title="26">     <span class="fu">}</span>  </a>
+<a class="sourceLine" id="cb4-27" title="27">  <span class="fu">}</span><span class="ot">]</span></a></code></pre></div>
+<p>{% Aside %} You can use include statements if you need to <a href="https://developers.google.com/digital-asset-links/v1/statements#scaling-to-dozens-of-statements-or-more">issue statements</a> from different sites to the same set of targets. For example, a website may be available on many different per-country top level domains, and you want to share credentials between all of them. Using include statements, you can set up pointers from many different sites to one central location, which defines statements for all of them. {% endAside %}</p>
+</body>
+</html>

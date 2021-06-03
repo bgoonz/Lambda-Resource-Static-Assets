@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>TypeScript Support</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">TypeScript Support</h1>
+</header>
+<h2 id="setup">Setup</h2>
+<p>Docusaurus supports writing and using TypeScript theme components. To start using TypeScript, add <code>@docusaurus/module-type-aliases</code> and some <code>@types</code> dependencies to your project:</p>
+<p><code>bash npm2yarn npm install --save-dev typescript @docusaurus/module-type-aliases @types/react @types/react-router-dom @types/react-helmet @tsconfig/docusaurus</code></p>
+<p>Then add <code>tsconfig.json</code> to your project root with the following content:</p>
+<p><code>json title="tsconfig.json" {   "extends": "@tsconfig/docusaurus/tsconfig.json",   "include": ["src/"] }</code></p>
+<p>Docusaurus doesn’t use this <code>tsconfig.json</code> to compile your project. It is added just for a nicer Editor experience, although you can choose to run <code>tsc</code> to type check your code for yourself or on CI.</p>
+<p>Now you can start writing TypeScript theme components.</p>
+<h2 id="swizzling-typescript-theme-components">Swizzling TypeScript theme components</h2>
+<p>For themes that supports TypeScript theme components, you can add the <code>--typescript</code> flag to the end of swizzling command to get TypeScript source code. For example, the following command will generate <code>index.tsx</code> and <code>styles.module.css</code> into <code>src/theme/Footer</code>.</p>
+<p><code>bash npm2yarn npm run swizzle @docusaurus/theme-classic Footer -- --typescript</code></p>
+<p>At this moment, the only official Docusaurus theme that supports TypeScript theme components is <code>@docusaurus/theme-classic</code>. If you are a Docusaurus theme package author who wants to add TypeScript support, see the <a href="./lifecycle-apis.md#gettypescriptthemepath">Lifecycle APIs docs</a>.</p>
+</body>
+</html>

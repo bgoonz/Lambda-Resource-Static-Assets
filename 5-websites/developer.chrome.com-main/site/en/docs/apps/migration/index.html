@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2016-08-18" />
+  <title>Transitioning from Chrome Apps</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Transitioning from Chrome Apps</h1>
+<p class="date">2016-08-18</p>
+</header>
+<p>{% Aside ‘caution’ %}</p>
+<p><strong>Important:</strong> Chrome will be removing support for Chrome Apps on all platforms. Chrome browser and the Chrome Web Store will continue to support extensions. <a href="https://blog.chromium.org/2020/01/moving-forward-from-chrome-apps.html"><strong>Read the announcement</strong></a> and learn more about <a href="/apps/migration"><strong>migrating your app</strong></a>.</p>
+<p>{% endAside %}</p>
+<p>To transition away from a Chrome packaged or hosted app, the following options are available.</p>
+<h2 id="chrome-packaged-apps-chrome-packaged-apps">Chrome packaged apps {: #chrome-packaged-apps }</h2>
+<p>Recommended migration options for packaged apps are listed in order from simplest to most complicated.</p>
+<h3 id="build-a-progressive-web-app-build-pwa">Build a Progressive Web App {: #build-pwa }</h3>
+<p>Building a <a href="https://developers.google.com/web/progressive-web-apps/">Progressive Web App</a> (PWA) is the ideal way to reach users across all operating systems.<br />
+As part of our <a href="https://developers.google.com/web/updates/capabilities">Web Capabilities</a> (codename: <a href="https://www.chromium.org/teams/web-capabilities-fugu">Fugu</a>) efforts, we are investigating ways to improve the migration path to the web for developers that depend on exclusive Chrome App APIs—in particular the Sockets, HID, File System, and Serial APIs. If there are web platform features you need that are <a href="https://caniuse.com/">only available in select browsers</a>, you can use feature detection to gracefully degrade or include explanatory text when your app is run in a browser that doesn’t support a particular API. If there are gaps in the web platform for your application, please <strong><a href="https://bugs.chromium.org/p/chromium/issues/entry?summary=Fugu+Request:++Add+your+feature+title&amp;comment&amp;labels=Type-Feature,Pri-3,Proj-Fugu">let us know</a></strong>.</p>
+<p>PWAs are installable on both <a href="https://developers.google.com/web/progressive-web-apps/desktop">desktop</a> and <a href="https://developers.google.com/web/fundamentals/app-install-banners/">mobile</a> platforms. Users who choose to install your PWA can launch it via icons and shortcuts, similar to the way that Chrome Apps can be installed today.</p>
+<h3 id="build-an-extension-enhanced-web-page-build-extension-web-page">Build an extension-enhanced web page {: #build-extension-web-page }</h3>
+<p>If there is a capability that your Chrome App has that the regular web platform can’t provide, it might be available as an <strong><a href="/docs/extensions/reference">extension API</a></strong>. In this case, you use a <strong><a href="/extensions/messaging#external-webpage">progressive web app together with an externally connectable extension your web app can send messages to</a></strong>. Building a web app is typically preferable to this, because this approach forces users to install an extension that is only useful on your site and can cause increased friction.</p>
+<p>As Chrome extensions can’t be run on other browsers, you should detect when required functionality isn’t available and provide explanatory text for users on these other browsers.</p>
+<h3 id="build-an-extension-build-extension">Build an extension {: #build-extension }</h3>
+<p>Depending on the user experience you want to provide, it might make sense to convert your entire app into an extension. For example you could provide a <strong><a href="/extensions/browserAction">browser action</a></strong> button which shows a small popup window for your user interface, or navigates to a page your extension provides. For some apps, this might be a good enough user experience to be a viable solution.</p>
+<p>Note there are significant costs to this approach. <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Porting_a_Google_Chrome_extension">While some browsers</a> support the same extensions API as Chrome, this support is not universal. This can significant friction for your users who would prefer a cross-browser alternative.</p>
+<h3 id="build-for-chrome-os-via-android-build-chromeos-android">Build for Chrome OS via Android {: #build-chromeos-android }</h3>
+<p>If you are an Android developer interested in building for Chrome OS, you can optimize your Android application for a better experience.</p>
+<p>Chrome App API/Capability migration recommendations (current as of Nov. 2019):</p>
+<table>
+<thead>
+<tr>
+<th>
+<strong>Chrome App feature/functionality</strong>
+</th>
+<th>
+<strong>Web platform migration recommendations</strong>
+</th>
+<th>
+<strong>Android migration recommendations</strong>
+</th>
+<th>
+<strong>Extension migration recommendations</strong>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="/apps/accessibilityFeatures">chrome.accessibilityFeatures</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/accessibilityFeatures">chrome.accessibilityFeatures</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/alarms">chrome.alarms</a>
+</td>
+<td>
+<a href="http://crbug.com/891339">Notification Triggers</a>
+</td>
+<td>
+<a href="https://developer.android.com/topic/libraries/architecture/workmanager">WorkManager</a>
+</td>
+<td>
+<a href="/extensions/alarms">chrome.alarms</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/app_runtime">chrome.app.runtime</a>
+</td>
+<td>
+<a href="https://bugs.chromium.org/p/chromium/issues/detail?id=844279">Launch Event</a>
+</td>
+<td>
+<a href="https://developer.android.com/guide/components/activities/activity-lifecycle">Activity Lifecycle</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/app_runtime#event-onRestarted">chrome.app.runtime.onRestarted</a>
+</td>
+<td>
+<a href="https://developers.google.com/web/updates/2018/07/page-lifecycle-api">Page Life Cycle</a>
+</td>
+<td>
+<a href="https://developer.android.com/guide/components/activities/activity-lifecycle#onresume">Activity.onResume</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/app_window">chrome.app.window</a>
+</td>
+<td>
+<a href="https://crbug.com/897300">Window Placement / Screen Enumeration</a>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/windows">chrome.windows</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/audio">chrome.audio</a>
+</td>
+<td>
+<a href="http://crbug.com/897326">Audio Device Client</a>
+</td>
+<td>
+<a href="https://developer.android.com/guide/topics/media/mediaplayer">Some Audio APIs</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/app_bluetooth">chrome.bluetooth</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/5264933985976320">Web Bluetooth API</a>
+</td>
+<td>
+<a href="https://developer.android.com/guide/topics/connectivity/bluetooth">Bluetooth API</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/bluetoothLowEnergy">chrome.bluetoothLowEnergy</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/5264933985976320">Web Bluetooth API</a>
+</td>
+<td>
+<a href="https://developer.android.com/guide/topics/connectivity/bluetooth-le">BTLE</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/bluetoothSocket">chrome.bluetoothSocket</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/5264933985976320">Web Bluetooth API</a>
+</td>
+<td>
+<a href="https://developer.android.com/reference/android/bluetooth/BluetoothSocket">Bluetooth Socket</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/browser">chrome.browser</a>
+</td>
+<td>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/open">window.open</a>
+</td>
+<td>
+<a href="https://developer.android.com/reference/android/content/Intent">Intent system</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/commands">chrome.commands</a>
+</td>
+<td>
+<a href="https://w3c.github.io/uievents/">UI Events</a>
+</td>
+<td>
+<a href="https://developer.android.com/training/keyboard-input/commands">Hard-code keyboard commands</a>
+</td>
+<td>
+<a href="/extensions/commands">chrome.commands</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/contextMenus">chrome.contextMenus</a>
+</td>
+<td>
+(HTML/script)
+</td>
+<td>
+<a href="https://developer.android.com/reference/android/view/ContextMenu">Native, Android has its own contextmenus</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/documentScan">chrome.documentScan</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/documentScan">chrome.documentScan</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/events">chrome.events</a>
+</td>
+<td>
+<a href="https://bugs.chromium.org/p/chromium/issues/detail?id=891339">Alarms</a>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/events">chrome.events</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/extensionTypes">chrome.extensionTypes</a>
+</td>
+<td>
+</td>
+<td>
+N/A
+</td>
+<td>
+<a href="/extensions/extensionTypes">chrome.extensionTypes</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/fileSystem">chrome.fileSystem</a>
+</td>
+<td>
+<a href="http://crbug.com/853326">Native FileSystem API</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/fileSystemProvider">chrome.fileSystemProvider</a>
+</td>
+<td>
+</td>
+<td>
+<a href="https://developer.android.com/reference/java/nio/file/spi/FileSystemProvider.html">FileSystemProvider</a>
+</td>
+<td>
+<a href="/extensions/fileSystemProvider">chrome.fileSystemProvider</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/gcm">chrome.gcm</a>
+</td>
+<td>
+<a href="https://developers.google.com/web/fundamentals/push-notifications/">Web Push Notifications</a>
+</td>
+<td>
+N/A
+</td>
+<td>
+<a href="/extensions/gcm">chrome.gcm</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/hid">chrome.hid</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/5172464636133376">Web HID API</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/i18n">chrome.i18n</a>
+</td>
+<td>
+(HTML/script)
+</td>
+<td>
+<a href="https://developer.android.com/guide/topics/resources/localization">Localization</a>
+</td>
+<td>
+<a href="/extensions/i18n">chrome.i18n</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/identity">chrome.identity</a>
+</td>
+<td>
+OAuth API or <a href="https://www.chromestatus.com/feature/5669923372138496">Credential Management API</a>
+</td>
+<td>
+<a href="https://developer.android.com/training/id-auth/authenticate">Native</a>
+</td>
+<td>
+<a href="/extensions/identity">chrome.identity</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/idle">chrome.idle</a>
+</td>
+<td>
+<a href="http://crbug.com/878979">User Idle Detection API</a>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/idle">chrome.idle</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/instanceID">chrome.instanceID</a>
+</td>
+<td>
+<a href="https://developers.google.com/web/fundamentals/push-notifications/">Web push</a>
+</td>
+<td>
+Per-App ID needs to be self-generated
+</td>
+<td>
+<a href="/extensions/instanceID">chrome.instanceID</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/mdns">chrome.mdns</a>
+</td>
+<td>
+</td>
+<td>
+<a href="https://developer.android.com/training/connect-devices-wirelessly/nsd">NDS discovery</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/mediaGalleries">chrome.mediaGalleries</a>
+</td>
+<td>
+<a href="http://crbug.com/853326">Native FileSystem API</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/networking_onc">chrome.networking.onc</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/notifications">chrome.notifications</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/5064350557536256">Notifications API</a>
+</td>
+<td>
+Notifications show in lower right of CrOS as system level notifications
+</td>
+<td>
+<a href="/extensions/notifications">chrome.notifications</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/permissions">chrome.permissions</a>
+</td>
+<td>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Permissions_API">Web Permissions API</a>
+</td>
+<td>
+N/A
+</td>
+<td>
+<a href="/extensions/permissions">chrome.permissions</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/power">chrome.power</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/4636879949398016">WakeLock API</a>
+</td>
+<td>
+<a href="http://b/133417350">In discussion</a>
+</td>
+<td>
+<a href="/extensions/power">chrome.power</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/printerProvider">chrome.printerProvider</a>
+</td>
+<td>
+<a href="/extensions/printerProvider">Transition to Extension</a>
+</td>
+<td>
+<a href="https://developer.android.com/reference/android/printservice/package-summary">android.printservice</a>
+</td>
+<td>
+<a href="/extensions/printerProvider">chrome.printerProvider</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/runtime">chrome.runtime</a>
+</td>
+<td>
+<a href="https://developers.google.com/web/updates/2018/07/page-lifecycle-api">Service Workers + Page Lifecycle API</a>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/runtime">chrome.runtime</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/messaging#connect">chrome.runtime.connect</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/6710044586409984">Channel Messaging API</a>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/runtime#method-connect">chrome.runtime.connect</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/messaging#simple">chrome.runtime.sendMessage</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/runtime#method-sendMessage">chrome.runtime.sendMessage</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/app_serial">chrome.serial</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/6577673212002304">Web Serial API</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/app_network">chrome.sockets.tcp</a>
+</td>
+<td>
+<a href="https://w3c.github.io/webrtc-quic/cs.html">QuicTransport C/S (or WebSockets)</a>
+</td>
+<td>
+<a href="https://developer.android.com/reference/java/net/Socket">android.net.ConnectivityManager and Java standard socket API</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/sockets_tcpServer">chrome.sockets.tcpServer</a>
+</td>
+<td>
+</td>
+<td>
+<a href="https://developer.android.com/reference/java/net/Socket">android.net.ConnectivityManager and Java standard socket API</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/sockets_udp">chrome.sockets.udp</a>
+</td>
+<td>
+<a href="https://w3c.github.io/webrtc-quic/cs.html">QuicTransport C/S</a>
+</td>
+<td>
+<a href="https://developer.android.com/reference/java/net/DatagramSocket">DatagramSocket API for UDP</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/storage">chrome.storage</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/5072127703121920">Cache API</a><br><a href="https://www.chromestatus.com/feature/6507459568992256">IndexedDB</a>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/storage">chrome.storage</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/extensions/manifest/storage">chrome.storage.managed</a>
+</td>
+<td>
+</td>
+<td>
+<a href="https://developer.android.com/work/managed-configurations">Managed Configurations</a>
+</td>
+<td>
+<a href="/extensions/storage#property-managed">chrome.storage.managed</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/syncFileSystem">chrome.syncFileSystem</a>
+</td>
+<td>
+</td>
+<td>
+<a href="https://developers.google.com/drive/api/v3/quickstart/java">Java - Drive REST API</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/system.cpu">chrome.system.cpu</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/6248386202173440">navigator.hardwareConcurrency</a>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/system_cpu">chrome.system.cpu</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/system.display">chrome.system.display</a>
+</td>
+<td>
+<a href="https://drafts.csswg.org/cssom-view/#the-screen-interface">window.screen</a>
+</td>
+<td>
+<a href="https://developer.android.com/reference/android/util/DisplayMetrics">DisplayMetrics, but high density displays are wonky</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/system.memory">chrome.system.memory</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/5119701235531776">navigator.deviceMemory</a>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/system_memory">chrome.system.memory</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/system.network">chrome.system.network</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/6338383617982464">Network Information API</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/system.storage">chrome.system.storage</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/5630353511284736">navigator.storage</a>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/system_storage">chrome.system.storage</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/tts">chrome.tts</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/4782875580825600">Web Speech API (Synthesis)</a>
+</td>
+<td>
+<a href="https://android-developers.googleblog.com/2009/09/introduction-to-text-to-speech-in.html">Android TTS 2009</a>
+</td>
+<td>
+<a href="/extensions/tts">chrome.tts</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/types">chrome.types</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+<a href="/extensions/types">chrome.types</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/app_usb">chrome.usb</a>
+</td>
+<td>
+<a href="https://www.chromestatus.com/feature/5651917954875392">Web USB API</a>
+</td>
+<td>
+<a href="http://go/arc++usb">Temporary* private USB host API</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/virtualKeyboard">chrome.virtualKeyboard</a>
+</td>
+<td>
+</td>
+<td>
+<a href="https://developer.android.com/training/keyboard-input">Soft Input Method</a>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/vpnProvider">chrome.vpnProvider</a>
+</td>
+<td>
+</td>
+<td>
+<a href="https://developer.android.com/reference/android/net/VpnService">VpnService</a>
+</td>
+<td>
+<a href="/extensions/vpnProvider">chrome.vpnProvider</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/wallpaper">chrome.wallpaper</a>
+</td>
+<td>
+</td>
+<td>
+<a href="https://developer.android.com/reference/android/app/WallpaperManager">WallpaperManager</a>
+</td>
+<td>
+<a href="/extensions/wallpaper">chrome.wallpaper</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/manifest/externally_connectable">externally_connectable</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/manifest/kiosk_enabled">kiosk_enabled</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/manifest/minimum_chrome_version">minimum_chrome_version</a>
+</td>
+<td>
+</td>
+<td>
+Target Android version
+</td>
+<td>
+<a href="/apps/manifest/minimum_chrome_version">minimum_chrome_version</a>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/apps/offline_apps">offline_enabled</a>
+</td>
+<td>
+<a href="https://developers.google.com/web/fundamentals/codelabs/offline/">Offline via Service Workers</a>
+</td>
+<td>
+Native
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/native-client">NaCl</a>
+</td>
+<td>
+<a href="/native-client/migration">Migration Guide</a>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="/docs/extensions/reference/webviewTag">&lt;webview&gt; tag</a>
+</td>
+<td>
+Native
+</td>
+<td>
+<a href="https://developer.android.com/reference/android/webkit/WebView">WebView</a>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="faqs-faqs">FAQs {: #faqs }</h2>
+<h3 id="q-what-if-the-chrome-app-migration-recommendations-do-not-meet-my-use-case-requirements-use-case-requirements">Q: What if the Chrome App migration recommendations do not meet my use case requirements? {: #use-case-requirements }</h3>
+<p>We’d like your feedback! Please fill out <a href="https://forms.gle/cNiZJbSutFbnFUdv8">this form</a> with as much detail as possible.</p>
+<h3 id="q-my-chrome-app-has-many-users.-whats-the-best-way-to-migrate-them-to-my-new-web-app-and-deprecate-my-chrome-app-best-migration-path">Q: My Chrome App has many users. What’s the best way to migrate them to my new web app and deprecate my Chrome App? {: #best-migration-path }</h3>
+<p>You will still be able to publish updates to your Chrome App until the runtime is removed. We recommend updating your app to include a message indicating that your app has been discontinued, and that users should visit your website going forward (see example below). You can also include an “uninstall” button that calls the <a href="/extensions/management#method-uninstallSelf"><code>uninstallSelf()</code></a> method.</p>
+<p>Starting with Chrome 75, the <a href="/extensions/management#method-installReplacementWebApp"><code>installReplacementWebApp()</code></a> method can be used inside of a Chrome App, in response to a button click or other user gesture, to automatically trigger the installation flow for your replacement PWA.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/Qw8PhA0V122tSWZTRyw9.png”, alt=“Shows button that can link to install PWA”, height=“468”, width=“598” %}</p>
+<h3 id="q-i-want-to-continue-to-have-a-ui-affordance-that-enables-users-to-launch-my-app-from-the-taskbardockhomescreen.-what-should-i-do-app-launcher">Q: I want to continue to have a UI affordance that enables users to launch my app from the taskbar/dock/homescreen. What should I do? {: #app-launcher }</h3>
+<p><a href="https://developers.google.com/web/progressive-web-apps/">Progressive Web Apps</a> are installable on both <a href="https://developers.google.com/web/progressive-web-apps/desktop">desktop</a> and <a href="https://developers.google.com/web/fundamentals/app-install-banners/">mobile</a> platforms. Users who choose to install your PWA can launch it via icons and shortcuts, similar to the way that Chrome Apps can be installed today.</p>
+<h3 id="q-i-want-my-app-to-run-in-its-own-window-not-in-a-tab.-is-this-something-i-can-do-with-a-web-app-run-in-window">Q: I want my app to run in its own window, not in a tab. Is this something I can do with a web app? {: #run-in-window }</h3>
+<p>You can provide <a href="https://developers.google.com/web/fundamentals/web-app-manifest/#display">metadata</a> in your Progressive Web App’s <a href="https://developers.google.com/web/fundamentals/web-app-manifest/">manifest file</a> indicating that, when launched after installation, it will open in its own window.</p>
+<h3 id="q-my-app-supports-keyboard-shortcuts.-can-the-web-support-this-also-keyboard-shortcuts">Q: My app supports keyboard shortcuts. Can the web support this also? {: #keyboard-shortcuts }</h3>
+<p>Web apps can support keyboard shortcuts by listening to the various key events (e.g. <strong><a href="https://developer.mozilla.org/en-US/docs/Web/Events/keydown">keydown</a></strong>), but the shortcuts you can support are limited. For example, you cannot intercept Ctrl+N, Ctrl+T etc. as these are used by the browser. Or, these might be shortcuts that are handled by the operating system (e.g. Alt+Tab on Windows).</p>
+<p>When your web app is used in <a href="https://developers.google.com/web/fundamentals/web-app-manifest/#display">fullscreen</a> mode, you are able to <a href="https://chromestatus.com/feature/5642959835889664">intercept</a> these system shortcuts.</p>
+<p>The <strong><a href="/extensions/commands">Extension Commands API</a></strong> supports richer keyboard shortcuts which operate across the entire browser, which may enable new capabilities if transitioning to an extension is possible.</p>
+<h3 id="q-my-app-needs-to-run-when-the-user-is-offline.-can-i-do-that-with-a-web-app-offline-app">Q: My app needs to run when the user is offline. Can I do that with a web app? {: #offline-app }</h3>
+<p>Yes, you can <strong><a href="https://developers.google.com/web/ilt/pwa/introduction-to-service-worker">use service workers to make your site run offline</a></strong>. The <a href="https://developers.google.com/web/tools/workbox/">Workbox</a> project can simplify developing a full-featured caching strategy for your service worker.</p>
+<h3 id="q-my-app-uses-the-chrome.gcm-api-to-receive-push-messages-from-the-cloud.-can-the-open-web-do-that-push-messages">Q: My app uses the chrome.gcm API to receive push messages from the cloud. Can the open web do that? {: #push-messages }</h3>
+<p>Yes, assuming the user has granted permission, the <strong><a href="https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/">Push API and Notifications API</a></strong> can allow your web app to show your user push notifications.</p>
+<h3 id="q-my-app-needs-to-be-able-to-show-notifications-to-the-user-even-when-it-has-no-windows-open.-can-i-do-that-with-the-open-web-show-notifications">Q: My app needs to be able to show notifications to the user even when it has no windows open. Can I do that with the open web? {: #show-notifications }</h3>
+<p>Yes, the <strong><a href="https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/">Push API and Notifications API</a></strong> can allow your web app to show your user push notifications even when your web app is closed, as long as an instance of the browser is running.</p>
+<h3 id="q-my-app-uses-chrome.bluetoothchrome.usb-to-talk-to-a-bluetoothusb-device.-can-this-be-done-on-the-open-web-bluetooth">Q: My app uses chrome.bluetooth/chrome.usb to talk to a Bluetooth/USB device. Can this be done on the open web? {: #bluetooth }</h3>
+<p>Both <a href="https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web">Web Bluetooth</a> and <a href="https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web">Web USB</a> are available in certain browsers, and can be used (along with feature detection) in a Progressive Web App.</p>
+<h3 id="q-my-app-uses-the-chrome.filesystem-api-to-read-and-write-user-specified-files-and-or-directories.-can-this-be-done-on-the-open-web-filesystem">Q: My app uses the chrome.fileSystem API to read and write user-specified files and / or directories. Can this be done on the open web? {: #fileSystem }</h3>
+<p>The open web can read single files that the user opens, but cannot retain access to those files, write to those files, or have any access to directories.</p>
+<p>There are plans to <a href="https://developers.google.com/web/updates/2018/11/writable-files">implement direct filesystem access</a>, and an experimental implementation is available in Chrome, but that functionality has not yet been fully standardized.</p>
+<h3 id="q-my-app-uses-the-chrome-sockets-api-to-do-networking.-can-this-be-done-with-the-open-web-sockets">Q: My app uses the chrome sockets API to do networking. Can this be done with the open web? {: #sockets }</h3>
+<p>You might be able to do what you need with <strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API">WebSockets</a></strong>. However, to use this, you will likely need to change the remote end of your connection.</p>
+<p>If that isn’t possible, we’d like to hear more about your use case—please let us know about what you’re trying to accomplish <a href="https://bit.ly/new-fugu-request">via the Chromium issue tracker</a>.</p>
+<h3 id="q-what-resources-are-available-to-help-with-a-progressive-web-app-migration-migration-resources">Q: What resources are available to help with a Progressive Web App migration? {: #migration-resources }</h3>
+<p>The Chrome team maintains the following sites and tools with information that can help during your migration:</p>
+<ul>
+<li><a href="https://developers.google.com/web/updates/capabilities">Web Capabilities</a> overview</li>
+<li><a href="https://developers.google.com/web/ilt/pwa/">Progressive Web Apps Training</a></li>
+<li><a href="https://developers.google.com/web/tools/workbox/">Workbox</a>, for generating a service worker</li>
+</ul>
+<p>If you have a specific question not addressed via those resources, we recommend asking a question on <a href="https://stackoverflow.com/">Stack Overflow</a>. This <a href="https://stackoverflow.com/questions/ask?tags=progressive-web-apps,google-chrome-app">template</a> can be used to create a question tagged with both <a href="https://stackoverflow.com/questions/tagged/google-chrome-app"><code>google-chrome-app</code></a> and <a href="https://stackoverflow.com/questions/tagged/progressive-web-apps"><code>progressive-web-apps</code></a>, to ensure maximum visibility.</p>
+<h3 id="q-id-like-to-use-a-capability-not-mentioned-already-that-lacks-a-web-alternative.-how-do-i-make-a-feature-request-missing-capability">Q: I’d like to use a capability not mentioned already that lacks a web alternative. How do I make a feature request? {: #missing-capability }</h3>
+<p>We’d like to hear more about what you’re trying to accomplish— let us know <a href="https://bit.ly/new-fugu-request">via the Chromium issue tracker</a>.</p>
+<h2 id="chrome-hosted-apps-hosted-apps">Chrome hosted apps {: #hosted-apps }</h2>
+<h2 id="faqs-hosted-apps-faqs">FAQs {: #hosted-apps-faqs }</h2>
+<h3 id="q-my-hosted-app-uses-the-notifications-permission.-how-do-i-do-that-on-the-web-hosted-apps-notifications-permission">Q: My hosted app uses the notifications permission. How do I do that on the web? {: #hosted-apps-notifications-permission }</h3>
+<p>Yes, assuming the user has granted permission, the <strong><a href="https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/">Push API and Notifications API</a></strong> can allow your web app to show your user push notifications.</p>
+<h3 id="q-my-hosted-app-uses-the-unlimitedstorage-permission.-how-do-i-do-that-on-the-web-unlimitedstorage">Q: My hosted app uses the unlimitedStorage permission. How do I do that on the web? {: #unlimitedStorage }</h3>
+<p>The unlimitedStorage permission ensured that data you store was ‘Persistent’, which means it can only be cleared manually by the user.</p>
+<p>The recommended alternative is to request <strong><a href="https://developers.google.com/web/updates/2016/06/persistent-storage?hl=en">Persistent Storage</a></strong> permission within your web app.</p>
+<h3 id="q-my-hosted-app-uses-the-geolocation-permission.-how-do-i-do-that-on-the-web-geolocation">Q: My hosted app uses the geolocation permission. How do I do that on the web? {: #geolocation }</h3>
+<p>The <strong><a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API">Geolocation API</a></strong> can be used in web apps to locate a user’s position.</p>
+<h3 id="q-my-hosted-app-uses-the-background-permission.-how-do-i-do-that-on-the-web-background">Q: My hosted app uses the background permission. How do I do that on the web? {: #background }</h3>
+<p>To ensure minimal power consumption we have been careful about introducing a generic method for sites to run in the background on user’s devices.</p>
+<p>Sites that have deployed a <a href="https://developers.google.com/web/ilt/pwa/introduction-to-service-worker">service worker</a> can ensure actions taken by the user while offline are synced to the server using the <strong><a href="https://developers.google.com/web/updates/2015/12/background-sync?hl=en">Background Sync API</a></strong>. This API allows sites to run some limited code in the background when the device re-connects to the internet, even if the tab has since been closed. Note that this API doesn’t allow for the service worker to be woken up periodically.</p>
+<p>A separate feature, <a href="https://developers.google.com/web/updates/2019/08/periodic-background-sync">Periodic Background Sync</a>, is being implemented as an experimental feature in Chrome. It allows developers to request periodic updates via a special event exposed on the service worker, with controls over the frequency of those updates.</p>
+<h3 id="q-my-hosted-app-uses-the-clipboardread-andor-clipboardwrite-permission.-how-do-i-do-that-on-the-web-clipboard">Q: My hosted app uses the clipboardRead and/or clipboardWrite permission. How do I do that on the web? {: #clipboard }</h3>
+<p>Web apps can use a standard platform API to copy and paste both <a href="https://developers.google.com/web/updates/2018/03/clipboardapi">text</a> and <a href="https://developers.google.com/web/updates/2019/07/image-support-for-async-clipboard">images programmatically.</a></p>
+</body>
+</html>

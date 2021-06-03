@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Configuration</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Configuration</h1>
+</header>
+<p>import TOCInline from ‘<span class="citation" data-cites="theme/TOCInline">@theme/TOCInline</span>’;</p>
+<p>Docusaurus has a unique take on configurations. We encourage you to congregate information of your site into one place. We guard the fields of this file, and facilitate making this data object accessible across your site.</p>
+<p>Keeping a well-maintained <code>docusaurus.config.js</code> helps you, your collaborators, and your open source contributors be able to focus on documentation while still being able to customize the site.</p>
+<h2 id="what-goes-into-a-docusaurusconfigjs">What goes into a <code>docusaurus.config.js</code>?</h2>
+<p>You should not have to write your <code>docusaurus.config.js</code> from scratch even if you are developing your site. All templates come with a <code>docusaurus.config.js</code> that includes defaults for the common options.</p>
+<p>However, it can be helpful if you have a high-level understanding of how the configurations are designed and implemented.</p>
+<p>The high-level overview of Docusaurus configuration can be categorized into:</p>
+<p><TOCInline toc={toc[0].children} /></p>
+<p>For exact reference to each of the configurable fields, you may refer to <a href="api/docusaurus.config.js.md"><strong><code>docusaurus.config.js</code> API reference</strong></a>.</p>
+<h3 id="site-metadata">Site metadata</h3>
+<p>Site metadata contains the essential global metadata such as <code>title</code>, <code>url</code>, <code>baseUrl</code> and <code>favicon</code>.</p>
+<p>They are used in a number of places such as your site’s title and headings, browser tab icon, social sharing (Facebook, Twitter) information or even to generate the correct path to serve your static files.</p>
+<h3 id="deployment-configurations">Deployment configurations</h3>
+<p>Deployment configurations such as <code>projectName</code> and <code>organizationName</code> are used when you deploy your site with the <code>deploy</code> command.</p>
+<p>It is recommended to check the <a href="deployment.mdx">deployment docs</a> for more information.</p>
+<h3 id="theme-plugin-and-preset-configurations">Theme, plugin, and preset configurations</h3>
+<p>List the <a href="using-themes.md">theme</a>, <a href="using-plugins.md">plugins</a>, and <a href="presets.md">presets</a> for your site in the <code>themes</code>, <code>plugins</code>, and <code>presets</code> fields, respectively. These are typically npm packages:</p>
+<p><code>js title="docusaurus.config.js" module.exports = {   // ...   plugins: [     '@docusaurus/plugin-content-blog',     '@docusaurus/plugin-content-pages',   ],   themes: ['@docusaurus/theme-classic'], };</code></p>
+<p>They can also be loaded from local directories:</p>
+<p>```js title=“docusaurus.config.js” const path = require(‘path’);</p>
+<p>module.exports = { // … themes: [path.resolve(__dirname, ‘/path/to/docusaurus-local-theme’)], }; ```</p>
+<p>To specify options for a plugin or theme, replace the name of the plugin or theme in the config file with an array containing the name and an options object:</p>
+<p><code>js title="docusaurus.config.js" module.exports = {   // ...   plugins: [     [       '@docusaurus/plugin-content-blog',       {         path: 'blog',         routeBasePath: 'blog',         include: ['*.md', '*.mdx'],         // ...       },     ],     '@docusaurus/plugin-content-pages',   ], };</code></p>
+<p>To specify options for a plugin or theme that is bundled in a preset, pass the options through the <code>presets</code> field. In this example, <code>docs</code> refers to <code>@docusaurus/plugin-content-docs</code> and <code>theme</code> refers to <code>@docusaurus/theme-classic</code>.</p>
+<p><code>js title="docusaurus.config.js" module.exports = {   // ...   presets: [     [       '@docusaurus/preset-classic',       {         docs: {           sidebarPath: require.resolve('./sidebars.js'),         },         theme: {           customCss: [require.resolve('./src/css/custom.css')],         },       },     ],   ], };</code></p>
+<p>For further help configuring themes, plugins, and presets, see <a href="using-themes.md">Using Themes</a>, <a href="using-plugins.md">Using Plugins</a>, and <a href="presets.md">Using Presets</a>.</p>
+<h3 id="custom-configurations">Custom configurations</h3>
+<p>Docusaurus guards <code>docusaurus.config.js</code> from unknown fields. To add custom fields, define them in <code>customFields</code>.</p>
+<p>Example:</p>
+<p><code>js title="docusaurus.config.js" module.exports = {   // ...   // highlight-start   customFields: {     image: '',     keywords: [],   },   // highlight-end   // ... };</code></p>
+<h2 id="accessing-configuration-from-components">Accessing configuration from components</h2>
+<p>Your configuration object will be made available to all the components of your site. And you may access them via React context as <code>siteConfig</code>.</p>
+<p>Basic example:</p>
+<pre class="jsx"><code>import React from &#39;react&#39;;
+// highlight-next-line
+import useDocusaurusContext from &#39;@docusaurus/useDocusaurusContext&#39;;
+
+const Hello = () =&gt; {
+  // highlight-start
+  const {siteConfig} = useDocusaurusContext();
+  // highlight-end
+  const {title, tagline} = siteConfig;
+
+  return &lt;div&gt;{`${title} · ${tagline}`}&lt;/div&gt;;
+};</code></pre>
+<div class="tip">
+<p>If you just want to use those fields on the client side, you could create your own JS files and import them as ES6 modules, there is no need to put them in <code>docusaurus.config.js</code>.</p>
+</div>
+<h2 id="customizing-babel-configuration">Customizing Babel Configuration</h2>
+<p>For new Docusaurus projects, we automatically generated a <code>babel.config.js</code> in project root.</p>
+<p><code>js title="babel.config.js" module.exports = {   presets: [require.resolve('@docusaurus/core/lib/babel/preset')], };</code></p>
+<p>Most of the times, this configuration will work just fine. If you want to customize it, you can directly edit this file to customize babel configuration. For your changes to take effect, you need to restart Docusaurus devserver.</p>
+</body>
+</html>

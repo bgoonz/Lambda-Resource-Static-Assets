@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2019-07-30" />
+  <title>The Chromium Chronicle #4: Test your Web Platform Features with WPT</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">The Chromium Chronicle #4: Test your Web Platform Features with WPT</h1>
+<p class="date">2019-07-30</p>
+</header>
+<p><strong>Episode 4:</strong> by Robert in Waterloo, ON (July, 2019)<br> <a href="/tags/chromium-chronicle/">Previous episodes</a></p>
+<p>If you work on Blink, you might know of web_tests (formerly LayoutTests). web-platform-tests (WPT) lives inside <code>web_test/external/wpt</code>. <strong>WPT is the preferred way to test web-exposed features</strong> as it is shared with other browsers via GitHub. It has two main types of tests: <em>reftests</em> and <em>testharness.js</em> tests.</p>
+<p><em>reftests</em> take and compare screenshots of two pages. By default, screenshots are taken after the <code>load</code> event is fired; if you add a <code>reftest-wait</code> class to the <code>&lt;html&gt;</code> element, the screenshot will be taken when the class is removed. Disabled tests mean diminishing test coverage. <strong>Be aware of font-related flakiness; use the <code>Ahem</code> font when possible.</strong></p>
+<p><a href="https://github.com/w3c/testharness.js/"><em>testharness.js</em></a> is a JavaScript framework for testing anything except rendering. When writing testharness.js tests, <strong>pay attention to timing, and remember to clean up global state.</strong></p>
+<p>Flaky timeout &amp; potential leaked states:</p>
+<p>{% Compare ‘worse’ %}</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;script&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="at">promise_test</span>(<span class="kw">async</span> t <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="at">assert_equals</span>(<span class="cf">await</span> <span class="at">slowLocalStorageTest</span>()<span class="op">,</span> <span class="st">&quot;expected&quot;</span><span class="op">,</span> <span class="st">&quot;message&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="va">localStorage</span>.<span class="at">clear</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="kw">&lt;/script&gt;</span></a></code></pre></div>
+<p>{% endCompare %}</p>
+<p>A better test with long timeout &amp; cleanup:</p>
+<p>{% Compare ‘better’ %}</p>
+<pre class="html/0,3"><code>&lt;meta name=&quot;timeout&quot; content=&quot;long&quot;&gt;
+&lt;script&gt;
+promise_test(async t =&gt; {
+  t.add_cleanup(() =&gt; localStorage.clear());
+  assert_equals(await slowLocalStorageTest(), &quot;expected&quot;, &quot;message&quot;);
+});
+&lt;/script&gt;</code></pre>
+<p>{% endCompare %}</p>
+<p><strong>Use testdriver.js if you need automation otherwise unavailable on the web.</strong> You can get a user gesture from <code>test_driver.bless</code>, generate complex, trusted inputs with <code>test_driver.action_sequence</code>, etc.</p>
+<p><strong>WPT also provides some useful server-side features through file names.</strong> Multi-global tests (<code>.any.js</code> and its friends) run the same tests in different scopes (<code>window</code>, <code>worker</code>, etc.); <code>.https.sub.html</code> asks the test to be loaded over HTTPS with server-side substitution support like below:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">var</span> anotherOrigin <span class="op">=</span> <span class="st">&quot;https://&amp;#123;&amp;#123;hosts[][www1]}}:&amp;#123;&amp;#123;ports[https][0]}}/path/to/page.html&quot;</span><span class="op">;</span></a></code></pre></div>
+<p><strong>Some features can also be enabled in query strings.</strong> <code>baz.html?pipe=sub|header(X-Key,val)|trickle(d1)</code> enables substitution, adds <code>X-Key: val</code> to the headers of the response, and delays 1 second before responding. Search for “pipes” on <a href="https://web-platform-tests.org">web-platform-tests.org</a> for more.</p>
+<p><strong>WPT can also test behaviors that are not included in specs yet;</strong> just name the test as <code>.tentative</code>. If you need Blink internal APIs (e.g. <code>testRunner</code>, <code>internals</code>), put your tests in <code>web_tests/wpt_internal</code>.</p>
+<p><strong>Changes made to WPT are automatically exported to GitHub.</strong> You will see comments from a bot in your CL. <strong>GitHub changes from other vendors are also continuously imported.</strong> To receive automatically filed bugs when new failures are imported, create an <code>OWNERS</code> file in a subdirectory in WPT:</p>
+<pre class="text"><code># TEAM: your-team@chromium.org
+# COMPONENT: Blink&gt;YourComponent
+# WPT-NOTIFY: true
+emails-here-will-be-cc@chromium.org</code></pre>
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li>Want to find out how your tests run on other browsers, and how interoperable your feature is? Use <a href="https://wpt.fyi">wpt.fyi</a>.</li>
+<li>Looking for more documentation on APIs, guidelines, examples, tips and more? Visit <a href="https://web-platform-tests.org">web-platform-tests.org</a>.</li>
+</ul>
+</body>
+</html>

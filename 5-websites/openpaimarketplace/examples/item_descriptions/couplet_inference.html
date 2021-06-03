@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>couplet_inference</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="couplet-inference-job-template">Couplet Inference Job Template</h1>
+<p>This is a model inference process. It serves with a language model trained by <strong>Couplet Training Job Template</strong>. This job will produce a url for user to ask for down part for a upper part of couplet.</p>
+<h2 id="trained-model">Trained model</h2>
+<p>The model is trained by <strong>Couplet Training Job Template</strong>, and is stored on Azure Blob Storage.</p>
+<h2 id="how-to-use">How to use</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ol type="1">
+<li><p>Load model file to container</p>
+<pre><code>mkdir -p /data/
+cd /data/
+wget &lt;% $script.uri %&gt;
+tar xvf couplet_inference_project.tgz
+cd /data/couplet/
+wget &lt;% $data.uri[0] %&gt;
+tar xvf couplet_checkpoint_best.tgz</code></pre></li>
+<li><p>When use this module, you should set three environment variables:</p>
+<pre><code>export DATA_DIR=/data/couplet/checkpoints/
+export CODE_DIR=/data/couplet/
+export FLASK_PORT=$PAI_PORT_LIST_taskrole_0_FLASK_PORT</code></pre></li>
+</ol>
+<ul>
+<li><p><code>DATA_DIR</code>: the training model path in container, by default it uses the output of couplet training job. If you want to use your own models. First make sure mount your models into container, and then change the <code>$DATA_DIR</code> with the path.</p></li>
+<li><p><code>CODE_DIR</code>: the service code, it will start a server at the given port.</p></li>
+<li><p><code>FLASK_RUN_PORT</code>: the service port container will output.</p></li>
+</ul>
+<h3 id="inference-command">Inference command</h3>
+<pre><code>pip install fairseq
+pip install flask
+pip install gunicorn
+cd ${CODE_DIR}
+gunicorn --bind=0.0.0.0:${FLASK_PORT} app:app</code></pre>
+<h2 id="how-to-check-the-result">How to check the result</h2>
+<p>After job finished successfully, you could check the job detail to get the container ip and <code>flask_port</code> number, then go to http://<ip>:<flask_port>?upper=<input> to test the result.</p>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>migrate-to-10.x</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h2 id="changes">Changes</h2>
+<h3 id="html">HTML</h3>
+<p>No markup changes.</p>
+<h3 id="scss">SCSS</h3>
+<p>No changes to <em>existing</em> selectors, but now has <em>new selectors</em>.</p>
+<h4 id="usage">Usage</h4>
+<p>The import path remains unchanged at:</p>
+<pre class="scss"><code>@import &#39;carbon-components/scss/components/breadcrumb/breadcrumb&#39;;</code></pre>
+<h4 id="selectors">Selectors</h4>
+<table>
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 34%" />
+<col style="width: 37%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>v9</th>
+<th>v10</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-</td>
+<td><code>bx--breadcrumb-item--current</code></td>
+<td>✨ New; Used to target current page breadcrumb</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td><code>bx--breadcrumb-item [aria-current='page']</code></td>
+<td>✨ New; Used to target current page breadcrumb</td>
+</tr>
+<tr class="odd">
+<td><code>bx--breadcrumb</code></td>
+<td>No change</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>bx--breadcrumb-item</code></td>
+<td>No change</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>bx--breadcrumb--no-trailing-slash</code></td>
+<td>No change</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-03-10" />
+  <title>What’s New In DevTools (Chrome 83)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 83)</h1>
+<p class="date">2020-03-10</p>
+</header>
+<p>{% YouTube id=“MLNERCykDPg” %}</p>
+<h2 id="emulate-vision-deficiencies-vision-deficiencies">Emulate vision deficiencies {: #vision-deficiencies }</h2>
+<p>Open the <a href="/docs/devtools/evaluate-performance/reference#rendering">Rendering tab</a> and use the new <strong>Emulate vision deficiencies</strong> feature to get a better idea of how people with different types of vision deficiencies experience your site.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/4Q4dkh5YFfsKnz2F89t4.png”, alt=“Emulating blurred vision.”, width=“800”, height=“481” %}</p>
+<p>Emulating blurred vision.</p>
+<p>DevTools can emulate blurred vision and the following <a href="http://www.colourblindawareness.org/colour-blindness/types-of-colour-blindness/">types of color vision deficiencies</a>:</p>
+<ul>
+<li>Protanopia: the inability to perceive any red light.</li>
+<li>Deuteranopia: the inability to perceive any green light.</li>
+<li>Tritanopia: the inability to perceive any blue light.</li>
+<li>Achromatopsia: the inability to perceive any color except for shades of grey (extremely rare).</li>
+</ul>
+<p>Less extreme versions of these color vision deficiencies exist, and in fact they are more common. For example, <em>protanomaly</em> is a reduced sensitivity to red light (as opposed to <em>protanopia</em>, which is the complete inability to perceive red light). However, these “-omaly” vision deficiencies are not as clearly defined: every person with such a vision deficiency is different and might see things differently (being able to perceive more/less of the relevant colors).</p>
+<p>By designing for the more extreme simulations in DevTools, your web apps are guaranteed to be accessible to people with protanomaly, deuteranomaly, tritanomaly, and achromatomaly as well.</p>
+<p>Send feedback to <a href="https://crbug.com/1003700">Chromium issue #1003700</a>.</p>
+<h2 id="emulate-locales-locales">Emulate locales {: #locales }</h2>
+<p>You can now emulate locales by setting a location in <strong>Sensors</strong> &gt; <strong>Location</strong>. <a href="/docs/devtools/command-menu">Open the <strong>Command Menu</strong></a> and type <code>Sensors</code> to access the <strong>Sensors</strong> tab. After performing these actions DevTools modifies the current default locale, affecting the following:</p>
+<ul>
+<li><code>Intl.*</code> APIs, e.g. <code>new Intl.NumberFormat().resolvedOptions().locale</code></li>
+<li>other locale-aware JavaScript APIs such as <code>String.prototype.localeCompare</code> and <code>*.prototype.toLocaleString</code>, e.g. <code>123_456..toLocaleString()</code></li>
+<li>DOM APIs such as <code>navigator.language</code> and <code>navigator.languages</code></li>
+<li>the <a href="https://developer.mozilla.org/docs/Web/HTTP/Headers/Accept-Language"><code>Accept-Language</code></a> HTTP request header</li>
+</ul>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> updates to <code>navigator.language</code> and <code>navigator.languages</code> are not visible immediately, but only after the next navigation or page reload. Changes to the <code>Accept-Language</code> HTTP header are only reflected for subsequent requests.</p>
+<p>{% endAside %}</p>
+<p>{% YouTube id=“lZEFwACYPo0” %}</p>
+<p>Check out <a href="https://mathiasbynens.be/demo/locale">Locale-dependent code example</a> to try it yourself.</p>
+<p>Send feedback to <a href="https://crbug.com/1051822">Chromium issue #1051822</a>.</p>
+<h2 id="cross-origin-embedder-policy-coep-debugging-coep">Cross-Origin Embedder Policy (COEP) debugging {: #COEP }</h2>
+<p>The Network panel now provides <a href="https://docs.google.com/document/d/1zDlfvfTJ_9e8Jdc8ehuV4zMEu9ySMCiTGMS9y0GU92k/edit#bookmark=id.uo6kivyh0ge2">Cross-Origin Embedder Policy</a> debugging information.</p>
+<p>The <strong>Status</strong> column now provides a quick explanation of why a request was blocked as well as a link to view that request’s headers for further debugging:</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/NR5ijqUdPHunvoOBWWlC.png”, alt=“Blocked requests in the Status column”, width=“800”, height=“384” %}</p>
+<p>The <strong>Response Headers</strong> section of the <strong>Headers</strong> tab provides more guidance on how to resolve the issues:</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/yFJu74FPKJkn99nTK14j.png”, alt=“More guidance in the Response Headers section”, width=“800”, height=“438” %}</p>
+<p>Send feedback to <a href="https://crbug.com/1051466">Chromium issue #1051466</a>.</p>
+<h2 id="new-icons-for-breakpoints-conditional-breakpoints-and-logpoints-debugging-icons">New icons for breakpoints, conditional breakpoints, and logpoints {: #debugging-icons }</h2>
+<p>The <strong>Sources</strong> panel has new icons for breakpoints, conditional breakpoints, and logpoints:</p>
+<ul>
+<li><a href="/docs/devtools/javascript/breakpoints#loc">Breakpoints</a> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/bB8RsXECQym7qfO16kaj.png”, alt=“Breakpoint”, width=“100”, height=“100” %} are represented by red circles.</li>
+<li><a href="/docs/devtools/javascript/breakpoints#conditional-loc">Conditional Breakpoints</a> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/ua2vgvlpL0lbMT7mOzgy.png”, alt=“Conditional Breakpoint”, width=“100”, height=“100” %} are represented by half-red half-white circles.</li>
+<li><a href="/blog/new-in-devtools-73#logpoints">Logpoints</a> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/GU0U13igWpNgErv9aSod.png”, alt=“Logpoint”, width=“100”, height=“100” %} are represented by red circles with Console icons.</li>
+</ul>
+<p>The motivation for the new icons was to make the UI more consistent with other GUI debugging tools (which usually color breakpoints red) and to make it easier to distinguish between the 3 features at a glance.</p>
+<p>Send feedback to <a href="https://crbug.com/1041830">Chromium issue #1041830</a>.</p>
+<h2 id="view-network-requests-that-set-a-specific-cookie-path-cookie-path">View network requests that set a specific cookie path {: #cookie-path }</h2>
+<p>Use the new <code>cookie-path</code> filter keyword in the <strong>Network</strong> panel to focus on the network requests that set a specific <a href="https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie#Directives">cookie path</a>.</p>
+<p>Check out <a href="/docs/devtools/network/reference#filter-by-property">Filter requests by properties</a> to discover more special keywords like <code>cookie-path</code>.</p>
+<h2 id="dock-to-left-from-the-command-menu-dock-to-left"><strong>Dock to left</strong> from the Command Menu {: #dock-to-left }</h2>
+<p>Open the <a href="/docs/devtools/command-menu">Command Menu</a> and run the <code>Dock to left</code> command to move DevTools to the left of your viewport.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/Fxnb0smaHkiP5PrXKO76.png”, alt=“DevTools docked to the left of the viewport”, width=“800”, height=“481” %}</p>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> DevTools has had the <strong>Dock to left</strong> feature for a long time but it was previously only accessible from the <a href="/docs/devtools/customize/placement#menu"><strong>Main Menu</strong></a>. The new feature in Chrome 83 is that you can now access this feature from the Command Menu.</p>
+<p>{% endAside %}</p>
+<p>Send feedback to <a href="https://crbug.com/1011679">Chromium issue #1011679</a>.</p>
+<h2 id="the-settings-option-in-the-main-menu-has-moved-settings">The <code>Settings</code> option in the <strong>Main Menu</strong> has moved {: #settings }</h2>
+<p>The option for opening <a href="/docs/devtools/customize#settings">Settings</a> from the <strong>Main Menu</strong> can now be found under <strong>More Tools</strong>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/aR6qHi4byFMPYGPitlu0.png”, alt=“Main Menu &gt; More Tools &gt; Settings”, width=“800”, height=“468” %}</p>
+<p>Send feedback to <a href="https://crbug.com/1050855">Chromium issue #1050855</a>.</p>
+<h2 id="the-audits-panel-is-now-the-lighthouse-panel-lighthouse">The <strong>Audits</strong> panel is now the <strong>Lighthouse</strong> panel {: #lighthouse }</h2>
+<p>The DevTools and Lighthouse teams frequently got feedback from web developers that they would hear that it’s possible to run <a href="https://developers.google.com/web/tools/lighthouse">Lighthouse</a> from DevTools, but when they went to try it out they couldn’t find the “Lighthouse” panel, so the <strong>Audits</strong> panel is now the <strong>Lighthouse</strong> panel.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/IJz4ISkV6IoWnMjVjOwF.png”, alt=“The Lighthouse panel”, width=“800”, height=“828” %}</p>
+<h2 id="delete-all-local-overrides-in-a-folder-overrides">Delete all Local Overrides in a folder {: #overrides }</h2>
+<p>After setting up <a href="/blog/new-in-devtools-65#overrides">Local Overrides</a> you can now right-click a folder and select the new <strong>Delete all overrides</strong> option to delete all Local Overrides in that folder.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/MutXfOtMnvN3IKjSOb6q.png”, alt=“Delete all overrides”, width=“800”, height=“534” %}</p>
+<p>Send feedback to <a href="https://crbug.com/1016501">Chromium issue #1016501</a>.</p>
+<h2 id="updated-long-tasks-ui-long-tasks">Updated Long tasks UI {: #long-tasks }</h2>
+<p>A <a href="https://web.dev/long-tasks-devtools/#what-are-long-tasks">Long Task</a> is JavaScript code that monopolizes the main thread for a long time, causing a web page to freeze.</p>
+<p>You’ve been able to <a href="https://web.dev/long-tasks-devtools/#are-there-long-tasks-in-my-page-that-could-delay-interactivity">visualize Long Tasks in the Performance panel</a> for a while now, but in Chrome 83 the Long Task visualization UI in the Performance panel has been updated. The Long Task portion of a task is now colored with a striped red background.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/zB1QLni239q7xxTYqUhP.png”, alt=“The new Long Task UI”, width=“800”, height=“568” %}</p>
+<p>Send feedback to <a href="https://crbug.com/1054447">Chromium issue #1054447</a>.</p>
+<h2 id="maskable-icon-support-in-the-manifest-pane-maskable-icons">Maskable icon support in the Manifest pane {: #maskable-icons }</h2>
+<p>Android Oreo introduced adaptive icons, which display app icons in a variety of shapes across different device models. <a href="https://web.dev/maskable-icon/">Maskable icons</a> are a new icon format that support adaptive icons, which enable you to ensure that your <a href="https://web.dev/progressive-web-apps">PWA</a> icon looks good on devices that support the maskable icons standard.</p>
+<p>Enable the new <strong>Show only the minimum safe area for maskable icons</strong> checkbox in the <strong>Manifest</strong> pane to check that your maskable icon will look good on Android Oreo devices. Check out <a href="https://web.dev/maskable-icon/#are-my-current-icons-ready">Are my current icons ready?</a> to learn more.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/IRDdXdCbPKD2wkKWdPlk.png”, alt=“The ‘Show only the minimum safe area for maskable icons’ checkbox”, width=“800”, height=“626” %}</p>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> This feature launched in Chrome 81. We’re covering it here in Chrome 83 because we forgot to cover it in What’s New In DevTools (Chrome 81).</p>
+<p>{% endAside %}</p>
+</body>
+</html>

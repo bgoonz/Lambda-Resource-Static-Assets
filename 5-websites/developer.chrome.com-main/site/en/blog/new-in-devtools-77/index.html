@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2019-07-22" />
+  <title>What’s New In DevTools (Chrome 77)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 77)</h1>
+<p class="date">2019-07-22</p>
+</header>
+<p>{% YouTube id=“R8KzoMoKhnM” %}</p>
+<h2 id="copy-elements-styles-copystyles">Copy element’s styles {: #copystyles }</h2>
+<p>Right-click a node in the <strong>DOM Tree</strong> to copy that DOM node’s CSS to your clipboard.</p>
+<p>{% Img src=“image/admin/FMGtP4Y7fVFJYuwxuChN.png”, alt=“Copy styles.”, width=“800”, height=“500” %}</p>
+<p>Figure 1. Copy element styles.</p>
+<p>Thanks <a href="https://twitter.com/argyleink">Adam Argyle</a> and <a href="https://chrome.google.com/webstore/detail/visbug/cdockenadnadldjbbgcallicgledbeoc">VisBug</a> for the <a href="https://twitter.com/argyleink/status/1142216452184821760">inspiration</a>.</p>
+<h2 id="visualize-layout-shifts-layoutshifts">Visualize layout shifts {: #layoutshifts }</h2>
+<p>{% Aside ‘warning’ %}</p>
+<p>This feature can cause your screen to flash a lot and may not be suitable for you if you’re prone to photosensitive epilepsy.</p>
+<p>{% endAside %}</p>
+<p>Supposing you’re reading a news article on your favorite website. As you’re reading the page, you keep losing your place because the content is jumping around. This problem is called layout shifting. It usually happens when images and ads finish loading. The page hasn’t reserved any space for the images and ads, so the browser has to shift all the other content down to make room for them. The solution is to use <a href="https://developers.google.com/web/fundamentals/performance/lazy-loading-guidance/images-and-video#layout_shifting_and_placeholders">placeholders</a>.</p>
+<p>DevTools can now help you detect layout shifting:</p>
+<ol type="1">
+<li>Open the <a href="/docs/devtools/command-menu">Command Menu</a>.</li>
+<li>Start typing <code>Rendering</code>.</li>
+<li>Run the <strong>Show Rendering</strong> command.</li>
+<li>Enable the <strong>Layout Shift Regions</strong> checkbox. As you interact with a page, layout shifts are highlighted blue.</li>
+</ol>
+<p>{% Img src=“image/admin/WIvRRrpIsp5VXBxpSNMd.png”, alt=“A layout shift.”, width=“800”, height=“589” %}</p>
+<p>Figure 2. A layout shift.</p>
+<p><a href="https://crbug.com/961846">Chromium issue #961846</a></p>
+<h2 id="lighthouse-5.1-in-the-audits-panel-audits">Lighthouse 5.1 in the Audits panel {: #audits }</h2>
+<p>{% Aside %}</p>
+<p>This update actually shipped in Chrome 76. We didn’t cover it in <a href="/blog/new-in-devtools-76">What’s New In DevTools (Chrome 76)</a> so we’re covering it now.</p>
+<p>{% endAside %}</p>
+<p>The Audits panel is now running <a href="https://github.com/GoogleChrome/lighthouse/releases/tag/v5.1.0">Lighthouse 5.1</a>. New audits include:</p>
+<ul>
+<li><a href="https://developers.google.com/web/fundamentals/design-and-ux/browser-customization#safari">Provides a valid <code>apple-touch-icon</code></a>. Checks that a PWA can be added to an iOS homescreen.</li>
+<li><a href="https://web.dev/use-lighthouse-for-performance-budgets/">Keep request counts and file sizes low</a>. Reports the total number of network requests and file sizes for various categories, such as documents, scripts, stylesheets, images, and so on.</li>
+<li><a href="https://developers.google.com/web/updates/2018/05/first-input-delay">Maximum Potential First Input Delay</a>. Measures the maximum potential time between a user’s first page interaction and the browser’s response to that interaction. Note that this metric replaces the Estimated Input Latency metric. Maximum Potential First Input Delay does not factor into your Performance category score.</li>
+</ul>
+<p>{% Img src=“image/admin/EsUVviA3LzqiHGtVFIkT.png”, alt=“The new Audits panel UI.”, width=“800”, height=“709” %}</p>
+<p>Figure 3. The new Audits panel UI.</p>
+<p>The Node and CLI versions of Lighthouse 5.1 have 3 new major features worth checking out:</p>
+<ul>
+<li><a href="https://web.dev/use-lighthouse-for-performance-budgets/">Performance Budgets</a>. Prevent your site from regressing over time by specifying request counts and file sizes that pages should not exceed.</li>
+<li><a href="https://github.com/GoogleChrome/lighthouse/blob/master/docs/plugins.md">Plugins</a>. Extend Lighthouse with your own custom audits.</li>
+<li><a href="https://github.com/GoogleChrome/lighthouse-stack-packs">Stack Packs</a>. Add audits tailored to specific technology stacks. The WordPress Stack Pack shipped first. React and AMP Stack Packs are in development.</li>
+</ul>
+<h2 id="os-theme-syncing-theming">OS theme syncing {: #theming }</h2>
+<p>If you’re using the dark theme of your OS, DevTools now switches to its own <a href="/docs/devtools/customize/dark-theme">dark theme</a> automatically.</p>
+<h2 id="keyboard-shortcut-for-opening-the-breakpoint-editor-breakpointeditor">Keyboard shortcut for opening the Breakpoint Editor {: #breakpointeditor }</h2>
+<p>Press <kbd>Control</kbd>+<kbd>Alt</kbd>+<kbd>B</kbd> or <kbd>Command</kbd>+<kbd>Option</kbd>+<kbd>B</kbd> (Mac) when focused in the Sources panel’s Editor to open the <strong>Breakpoint Editor</strong>. Use the Breakpoint Editor to create <a href="/blog/new-in-devtools-73#logpoints">Logpoints</a> and <a href="/docs/devtools/javascript/breakpoints#conditional-loc">Conditional Breakpoints</a>.</p>
+<p>{% Img src=“image/admin/XFpvnxtGd8QjIj0EcOH0.png”, alt=“The Breakpoint Editor.”, width=“800”, height=“534” %}</p>
+<p>Figure 4. The <strong>Breakpoint Editor</strong>.</p>
+<h2 id="prefetch-cache-in-network-panel-prefetch">Prefetch cache in Network panel {: #prefetch }</h2>
+<p>The <strong>Size</strong> column of the Network panel now says <code>(prefetch cache)</code> when a resource was loaded from the prefetch cache. <a href="https://developers.google.com/web/fundamentals/performance/resource-prioritization#prefetch">Prefetch</a> is a new-ish web platform feature for speeding up subsequent page loads. <a href="https://caniuse.com/#feat=link-rel-prefetch">Can I use…</a> reports that it’s supported in 83.33% of global browsers as of July 2019.</p>
+<p>{% Img src=“image/admin/UgdcdyfEi6gLqOOzfjkv.png”, alt=“The Size column showing that resources came from the prefetch cache.”, width=“800”, height=“475” %}</p>
+<p>Figure 5. The <strong>Size</strong> column shows that <code>prefetch2.html</code> and <code>prefetch2.css</code> came from <code>(prefetch cache)</code>.</p>
+<p>See <a href="https://devtools.glitch.me/wndt77/prefetch1.html">Prefetch Demo</a> to try it out.</p>
+<p><a href="https://crbug.com/935267">Chromium issue #935267</a></p>
+<h2 id="private-properties-when-viewing-objects-privateclassfields">Private properties when viewing objects {: #privateclassfields }</h2>
+<p>The Console now shows <a href="https://v8.dev/features/class-fields#private-class-fields">private class fields</a> in its object previews.</p>
+<p>{% Img src=“image/admin/XgPBCbTILE6qZ2zOr1VE.png”, alt=“When inspecting an object, the Console now shows private fields like ‘#color’.”, width=“800”, height=“285” %}</p>
+<p>Figure 6. The old version of Chrome on the left does not show the <code>#color</code> field when inspecting the object, whereas the new version on the right does.</p>
+<h2 id="notifications-and-push-messages-in-the-application-panel-backgroundservices">Notifications and push messages in the Application panel {: #backgroundservices }</h2>
+<p>The Background Services section of the Application panel now supports Push Messages and Notifications. Push Messages occur when a server sends information to a service worker. Notifications occur when a service worker or page script shows information to the user.</p>
+<p>As with the <a href="/blog/new-in-devtools-76#background">Background Fetch and Background Sync features from Chrome 76</a>, once you start recording, Push Messages and Notifications on this page are recorded for 3 days, even when the page is closed, and even when Chrome is closed.</p>
+<p>{% Img src=“image/admin/6TR4LtEvJV65NcX0XTtu.png”, alt=“The new Notifications and Push Messages panes.”, width=“800”, height=“401” %}</p>
+<p>Figure 7. The new Push Messages and Notifications panes in the Application panel.</p>
+<p><a href="https://crbug.com/927726">Chromium issue #927726</a></p>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>local-third-party-project-testing</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p>Sometimes you want to test the latest version of Docusaurus on a third-party project via <code>npm</code> or <code>yarn</code> without having to publish it to npm itself. For example, you may want to use the latest code in <code>master</code>.</p>
+<blockquote>
+<p>If you want to use Docusaurus to test Docusaurus, see the <a href="./testing-changes-on-Docusaurus-itself.md">testing changes on Docusaurus itself doc</a></p>
+</blockquote>
+<p>There are two reasonable ways to use a local version of the Docusaurus npm package to test changes you make to the Docusaurus core on a third-party project.</p>
+<h2 id="install-from-a-local-docusaurus-repo">Install from a local Docusaurus repo</h2>
+<blockquote>
+<p>If you want to use the docusaurus-init script for testing, you will have to update the <code>initialize.js</code> file to point to the local Docusaurus repo instead of installing it from the npm server. In some ways, it is just easier to do the manual steps.</p>
+</blockquote>
+<h3 id="install-the-package-from-the-docusaurus-repo">Install the package from the Docusaurus repo</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="bu">cd</span> /path/to/testing_project</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">mkdir</span> website <span class="co"># if this does not exist already</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="bu">cd</span> website</a></code></pre></div>
+<p>If you do not have a <code>package.json</code> file in the <code>website</code> directory, create one with the following content:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;docusaurus-start&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;docusaurus-build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="dt">&quot;publish-gh-pages&quot;</span><span class="fu">:</span> <span class="st">&quot;docusaurus-publish&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="dt">&quot;examples&quot;</span><span class="fu">:</span> <span class="st">&quot;docusaurus-examples&quot;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<p>Then:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Path to your Docusaurus clone</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="ex">npm</span> install ../../path/to/docusaurus/</a></code></pre></div>
+<h3 id="clowntown">Clowntown!</h3>
+<p>Now, we have a bit of clowntown here in the way symlinks are handled. The above <code>npm install</code>, creates a <code>node_modules</code> directory with a symlink in it. And errors will result if you try to access the local site after starting the server (as you do below). You will get something like this error:</p>
+<pre><code>ReferenceError: Unknown plugin &quot;transform-class-properties&quot; specified in &quot;base&quot; at 1, attempted to resolve relative to &quot;/Users/joelm/dev/testing-local-Docusaurus-changes-site/website/core&quot;
+</code></pre>
+<p>So, you should install these packages locally. <strong>Base the versions on the versions defined in the Docusaurus <code>package.json</code></strong>. e.g.,</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Still in the website directory of the testing project</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="ex">npm</span> install babel-plugin-transform-class-properties@^6.24.1</a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="ex">npm</span> install babel-plugin-transform-object-rest-spread@^6.26.0</a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="ex">npm</span> install react@^16.4.1</a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="ex">npm</span> install babel-preset-env@^1.7.0</a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="ex">npm</span> install babel-preset-react@^6.24.1</a></code></pre></div>
+<h3 id="test">Test</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="ex">./node_modules/.bin/docusaurus-examples</span> <span class="co"># or whatever you want to test, if anything</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="ex">./node_modules/.bin/docusaurus-start</span></a></code></pre></div>
+<h2 id="use-verdaccio">Use Verdaccio</h2>
+<p>Verdaccio is a good local npm server that you can use to test your packages.</p>
+<h3 id="install-verdaccio">Install verdaccio</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="ex">npm</span> install --global verdaccio</a></code></pre></div>
+<h3 id="publish-to-verdaccio">Publish to verdaccio</h3>
+<p>When you are ready to test the code that could make up the next version of your package, you can publish locally to verdaccio</p>
+<p>Run verdaccio in a <strong>separate terminal window</strong>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="ex">verdaccio</span></a></code></pre></div>
+<p>In another terminal window, get ready to publish your local npm package:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Your clone of Docusaurus</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="bu">cd</span> /path/to/docusaurus/</a>
+<a class="sourceLine" id="cb9-3" title="3"></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="co"># use anything for user, password, email</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co"># You should only have to do this once as long as you keep verdaccio installed</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="ex">npm</span> adduser --registry http://localhost:4873</a>
+<a class="sourceLine" id="cb9-7" title="7"></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="ex">npm</span> publish --registry http://localhost:4873</a></code></pre></div>
+<p>You can navigate to localhost:4873 and you can see that your package was published. You can also see it showing you the steps you ran above as well.</p>
+<h3 id="install-the-local-npm-package-and-test">Install the local npm package and test</h3>
+<p>Now install the package in the repo you want to test Docusaurus on.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="bu">cd</span> /path/to/testing_project/</a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="fu">mkdir</span> website <span class="co"># if this does not exist already</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="bu">cd</span> website</a></code></pre></div>
+<p>If you do not have a <code>package.json</code> file in the <code>website</code> directory, create one with the following content:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb11-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb11-3" title="3">    <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;docusaurus-start&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb11-4" title="4">    <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="st">&quot;docusaurus-build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb11-5" title="5">    <span class="dt">&quot;publish-gh-pages&quot;</span><span class="fu">:</span> <span class="st">&quot;docusaurus-publish&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb11-6" title="6">    <span class="dt">&quot;examples&quot;</span><span class="fu">:</span> <span class="st">&quot;docusaurus-examples&quot;</span></a>
+<a class="sourceLine" id="cb11-7" title="7">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<p>Then:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"><span class="ex">npm</span> install docusaurus --registry http://localhost:4873 <span class="co"># this may be slower than the normal npm registry</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="ex">npm</span> run examples <span class="co"># or whatever you want to test, if anything</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="ex">npm</span> run start</a></code></pre></div>
+</body>
+</html>

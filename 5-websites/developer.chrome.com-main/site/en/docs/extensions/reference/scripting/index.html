@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>index</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h2 id="manifest">Manifest</h2>
+<p>In order to use the <code>chrome.scripting</code> API, you need to specify a <code>"manifest_version"</code> of <code>3</code> or higher and include the <code>"scripting"</code> permission in your <a href="/docs/extensions/mv3/manifest">manifest file</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="er"> </span> <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Scripting Extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="er"> </span> <span class="dt">&quot;manifest_version&quot;</span><span class="fu">:</span> <span class="dv">3</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="er"> </span> <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;scripting&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="er"> </span> <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="fu">}</span></a></code></pre></div>
+<h2 id="usage">Usage</h2>
+<p>You can use the <code>chrome.scripting</code> API to inject JavaScript and CSS into websites. This is similar to what you can do with <a href="/docs/extensions/mv3/content_scripts">content scripts</a>, but by using the <code>chrome.scripting</code> API, extensions can make decisions at runtime.</p>
+<h3 id="injection-targets">Injection targets</h3>
+<p>You can use the <code>target</code> parameter to specify a target to inject JavaScript or CSS into.</p>
+<p>The only required field is <code>tabId</code>. By default, an injection will run in the main frame of the specified tab.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">const</span> tabId <span class="op">=</span> <span class="at">getTabId</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="va">chrome</span>.<span class="va">scripting</span>.<span class="at">executeScript</span>(</a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">      <span class="dt">target</span><span class="op">:</span> <span class="op">{</span><span class="dt">tabId</span><span class="op">:</span> tabId<span class="op">},</span></a>
+<a class="sourceLine" id="cb2-5" title="5">      <span class="dt">files</span><span class="op">:</span> [<span class="st">&#39;script.js&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    () <span class="kw">=&gt;</span> <span class="op">{</span> ... <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>To run in all frames of the specified tab, you can set the <code>allFrames</code> boolean to <code>true</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> tabId <span class="op">=</span> <span class="at">getTabId</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="va">chrome</span>.<span class="va">scripting</span>.<span class="at">executeScript</span>(</a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">      <span class="dt">target</span><span class="op">:</span> <span class="op">{</span><span class="dt">tabId</span><span class="op">:</span> tabId<span class="op">,</span> <span class="dt">allFrames</span><span class="op">:</span> <span class="kw">true</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb3-5" title="5">      <span class="dt">files</span><span class="op">:</span> [<span class="st">&#39;script.js&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    () <span class="kw">=&gt;</span> <span class="op">{</span> ... <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>You can also inject into specific frames of a tab by specifying individual frame IDs. For more information on frame IDs, see the <a href="/docs/extensions/reference/webNavigation">webNavigation API</a>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> tabId <span class="op">=</span> <span class="at">getTabId</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">const</span> frameIds <span class="op">=</span> [frameId1<span class="op">,</span> frameId2]<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="va">chrome</span>.<span class="va">scripting</span>.<span class="at">executeScript</span>(</a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5">      <span class="dt">target</span><span class="op">:</span> <span class="op">{</span><span class="dt">tabId</span><span class="op">:</span> tabId<span class="op">,</span> <span class="dt">frameIds</span><span class="op">:</span> frameIds<span class="op">},</span></a>
+<a class="sourceLine" id="cb4-6" title="6">      <span class="dt">files</span><span class="op">:</span> [<span class="st">&#39;script.js&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    () <span class="kw">=&gt;</span> <span class="op">{</span> ... <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>{% Aside %} You cannot specify both the <code>frameIds</code> and <code>allFrames</code> properties. {% endAside %}</p>
+<h3 id="injected-code">Injected code</h3>
+<p>Extensions can specify the code to be injected either via an external file or a runtime variable.</p>
+<h4 id="files">Files</h4>
+<p>Files are specified as strings that are paths relative to the extension’s root directory. The following code will inject the file <code>script.js</code> into the main frame of the tab.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">const</span> tabId <span class="op">=</span> <span class="at">getTabId</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="va">chrome</span>.<span class="va">scripting</span>.<span class="at">executeScript</span>(</a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-4" title="4">      <span class="dt">target</span><span class="op">:</span> <span class="op">{</span><span class="dt">tabId</span><span class="op">:</span> tabId<span class="op">},</span></a>
+<a class="sourceLine" id="cb5-5" title="5">      <span class="dt">files</span><span class="op">:</span> [<span class="st">&#39;script.js&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb5-7" title="7">    () <span class="kw">=&gt;</span> <span class="op">{</span> ... <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>{% Aside %} Note: Currently, a maximum of a single file is supported. {% endAside %}</p>
+<h4 id="runtime-functions">Runtime functions</h4>
+<p>When injecting JavaScript with <code>scripting.executeScript()</code>, you can specify a function to be executed instead of a file. This function should be a function variable available to the current extension context.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">function</span> <span class="at">getTitle</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="cf">return</span> <span class="va">document</span>.<span class="at">title</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="kw">const</span> tabId <span class="op">=</span> <span class="at">getTabId</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="va">chrome</span>.<span class="va">scripting</span>.<span class="at">executeScript</span>(</a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-7" title="7">      <span class="dt">target</span><span class="op">:</span> <span class="op">{</span><span class="dt">tabId</span><span class="op">:</span> tabId<span class="op">},</span></a>
+<a class="sourceLine" id="cb6-8" title="8">      <span class="kw">function</span><span class="op">:</span> getTitle<span class="op">,</span></a>
+<a class="sourceLine" id="cb6-9" title="9">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb6-10" title="10">    () <span class="kw">=&gt;</span> <span class="op">{</span> ... <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>This function will be executed in the context of injection target. However, this will not carry over any of the current execution context of the function. As such, bound parameters (including the <code>this</code> object) and externally-referenced variables will result in errors. For instance, the following code will not work, and will throw a ReferenceError because <code>color</code> is undefined when the function executes:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">const</span> color <span class="op">=</span> <span class="at">getUserColor</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">function</span> <span class="at">changeBackgroundColor</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="va">document</span>.<span class="va">body</span>.<span class="va">style</span>.<span class="at">backgroundColor</span> <span class="op">=</span> color<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="kw">const</span> tabId <span class="op">=</span> <span class="at">getTabId</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="va">chrome</span>.<span class="va">scripting</span>.<span class="at">executeScript</span>(</a>
+<a class="sourceLine" id="cb7-7" title="7">    <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-8" title="8">      <span class="dt">target</span><span class="op">:</span> <span class="op">{</span><span class="dt">tabId</span><span class="op">:</span> tabId<span class="op">},</span></a>
+<a class="sourceLine" id="cb7-9" title="9">      <span class="kw">function</span><span class="op">:</span> changeBackgroundColor<span class="op">,</span></a>
+<a class="sourceLine" id="cb7-10" title="10">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb7-11" title="11">    () <span class="kw">=&gt;</span> <span class="op">{</span> ... <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>You can work around this by using the <a href="/docs/extensions/reference/storage">Storage API</a> or by <a href="/docs/extensions/mv3/messaging">passing messages</a>.</p>
+<h4 id="runtime-strings">Runtime strings</h4>
+<p>If injecting CSS within a page, you can also specify a string to be used in the <code>css</code> property. This option is only available for <code>scripting.insertCSS()</code>; you can’t execute a string using <code>scripting.executeScript()</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">const</span> css <span class="op">=</span> <span class="st">&#39;body { background-color = &quot;red&quot;; }&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">const</span> tabId <span class="op">=</span> <span class="at">getTabId</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="va">chrome</span>.<span class="va">scripting</span>.<span class="at">insertCSS</span>(</a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-5" title="5">      <span class="dt">target</span><span class="op">:</span> <span class="op">{</span><span class="dt">tabId</span><span class="op">:</span> tabId<span class="op">},</span></a>
+<a class="sourceLine" id="cb8-6" title="6">      <span class="dt">css</span><span class="op">:</span> css<span class="op">,</span></a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb8-8" title="8">    () <span class="kw">=&gt;</span> <span class="op">{</span> ... <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="handling-results">Handling results</h3>
+<p>The results of executing JavaScript are passed to the extension. A single result is included per-frame. The main frame is guaranteed to be the first index in the resulting array; all other frames are in a non-deterministic order.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">function</span> <span class="at">getTitle</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="cf">return</span> <span class="va">document</span>.<span class="at">title</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="kw">const</span> tabId <span class="op">=</span> <span class="at">getTabId</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="va">chrome</span>.<span class="va">scripting</span>.<span class="at">executeScript</span>(</a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-7" title="7">      <span class="dt">target</span><span class="op">:</span> <span class="op">{</span><span class="dt">tabId</span><span class="op">:</span> tabId<span class="op">,</span> <span class="dt">allFrames</span><span class="op">:</span> <span class="kw">true</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb9-8" title="8">      <span class="kw">function</span><span class="op">:</span> getTitle<span class="op">,</span></a>
+<a class="sourceLine" id="cb9-9" title="9">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb9-10" title="10">    (injectionResults) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-11" title="11">      <span class="cf">for</span> (<span class="kw">const</span> frameResult <span class="kw">of</span> injectionResults)</a>
+<a class="sourceLine" id="cb9-12" title="12">        <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Frame Title: &#39;</span> <span class="op">+</span> <span class="va">frameResult</span>.<span class="at">result</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-13" title="13">    <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p><code>scripting.insertCSS()</code> does not return any results.</p>
+</body>
+</html>

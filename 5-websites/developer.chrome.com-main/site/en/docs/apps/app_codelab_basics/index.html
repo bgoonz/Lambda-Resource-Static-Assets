@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2014-10-17" />
+  <title>Step 1: Create and Run a Chrome App</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Step 1: Create and Run a Chrome App</h1>
+<p class="date">2014-10-17</p>
+</header>
+<p>{% Aside ‘caution’ %}</p>
+<p><strong>Important:</strong> Chrome will be removing support for Chrome Apps on all platforms. Chrome browser and the Chrome Web Store will continue to support extensions. <a href="https://blog.chromium.org/2020/01/moving-forward-from-chrome-apps.html"><strong>Read the announcement</strong></a> and learn more about <a href="/apps/migration"><strong>migrating your app</strong></a>.</p>
+<p>{% endAside %}</p>
+<p>In this step, you will learn:</p>
+<ul>
+<li>The basic building blocks of a Chrome App, including the manifest file and background scripts.</li>
+<li>How to install, run, and debug a Chrome App.</li>
+</ul>
+<p><em>Estimated time to complete this step: 10 minutes.</em><br />
+To preview what you will complete in this step, <a href="#launch">jump down to the bottom of this page ↓</a>.</p>
+<h2 id="get-familiar-with-chrome-apps-app-components">Get familiar with Chrome Apps {: #app-components }</h2>
+<p>A Chrome App contains these components:</p>
+<ul>
+<li>The <strong>manifest</strong> specifies the meta information of your app. The manifest tells Chrome about your app, how to launch it, and any extra permissions that it requires.</li>
+<li>The <strong>event page</strong>, also called a <strong>background script</strong>, is responsible for managing the app life cycle. The background script is where you register listeners for specific app events such as the launching and closing of the app’s window.</li>
+<li>All <strong>code files</strong> must be packaged in the Chrome App. This includes HTML, CSS, JS, and Native Client modules.</li>
+<li><strong>Assets</strong>, including app icons, should be packaged in the Chrome App as well.</li>
+</ul>
+<h3 id="create-a-manifest-manifest">Create a manifest {: #manifest }</h3>
+<p>Open your favorite code/text editor and create the following file named <strong>manifest.json</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;manifest_version&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Codelab&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">&quot;icons&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="dt">&quot;128&quot;</span><span class="fu">:</span> <span class="st">&quot;icon_128.png&quot;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="dt">&quot;app&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-10" title="10">    <span class="dt">&quot;background&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-11" title="11">      <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;background.js&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-14" title="14">  <span class="dt">&quot;minimum_chrome_version&quot;</span><span class="fu">:</span> <span class="st">&quot;28&quot;</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="fu">}</span></a></code></pre></div>
+<p>Notice how this manifest describes a background script named <em>background.js</em>. You will create that file next.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="er">&quot;background&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;background.js&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="fu">}</span></a></code></pre></div>
+<p>We’ll supply you with an app icon later in this step:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="er">&quot;icons&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">&quot;128&quot;</span><span class="fu">:</span> <span class="st">&quot;icon_128.png&quot;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="fu">}</span><span class="er">,</span></a></code></pre></div>
+<h3 id="create-a-background-script-background-script">Create a background script {: #background-script }</h3>
+<p>Create the following file and save it as <strong><em>background.js</em></strong>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co"> * Listens for the app launching then creates the window</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co"> *</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co"> * </span><span class="an">@see</span><span class="co"> /apps/app.window.html</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co"> */</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="va">chrome</span>.<span class="va">app</span>.<span class="va">runtime</span>.<span class="va">onLaunched</span>.<span class="at">addListener</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="va">chrome</span>.<span class="va">app</span>.<span class="va">window</span>.<span class="at">create</span>(<span class="st">&#39;index.html&#39;</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="dt">id</span><span class="op">:</span> <span class="st">&#39;main&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="dt">bounds</span><span class="op">:</span> <span class="op">{</span> <span class="dt">width</span><span class="op">:</span> <span class="dv">620</span><span class="op">,</span> <span class="dt">height</span><span class="op">:</span> <span class="dv">500</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-10" title="10">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>This background script simply waits for the <a href="/docs/extensions/reference/app_runtime#event-onLaunched">chrome.app.runtime.onLaunched</a> launch event for the application and executes the callback function:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="va">chrome</span>.<span class="va">app</span>.<span class="va">runtime</span>.<span class="va">onLaunched</span>.<span class="at">addListener</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="co">//...</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>When the Chrome App is launched, <a href="/docs/extensions/reference/app_window#method-create">chrome.app.window.create()</a> will create a new window using a basic HTML page (<em>index.html</em>) as the source. You will create the HTML view in the next step.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="va">chrome</span>.<span class="va">app</span>.<span class="va">window</span>.<span class="at">create</span>(<span class="st">&#39;index.html&#39;</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="dt">id</span><span class="op">:</span> <span class="st">&#39;main&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="dt">bounds</span><span class="op">:</span> <span class="op">{</span> <span class="dt">width</span><span class="op">:</span> <span class="dv">620</span><span class="op">,</span> <span class="dt">height</span><span class="op">:</span> <span class="dv">500</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Background scripts may contain additional listeners, windows, post messages, and launch data—all of which are used by the event page to manage the app.</p>
+<h3 id="create-an-html-view-html-view">Create an HTML view {: #html-view }</h3>
+<p>Create a simple web page to display a “Hello World” message to the screen and save it as <strong><em>index.html</em></strong>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb7-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">  <span class="kw">&lt;h1&gt;</span>Hello, let&#39;s code!<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>Just like any other web page, within this HTML file you can include additional packaged JavaScript, CSS, or assets.</p>
+<h3 id="add-an-app-icon-app-icon">Add an app icon {: #app-icon }</h3>
+<p>Right-click and save this 128x128 image to your project folder as <strong><em>icon_128.png</em></strong>:</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/oWw4vtq0F2ZrXo3uKhwG.png”, alt=“Chrome App icon for this codelab”, height=“128”, width=“128” %}</p>
+<p>You will use this PNG as our application’s icon that users will see in the launch menu.</p>
+<h3 id="confirm-that-you-have-created-all-your-files-confirm-files">Confirm that you have created all your files {: #confirm-files }</h3>
+<p>You should have these 4 files in your project folder now:</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/gYAyOofu4qTqwZj0tZVL.png”, alt=“File folder screenshot”, height=“110”, width=“590” %}</p>
+<h2 id="install-a-chrome-app-in-developer-mode-developer-mode">Install a Chrome App in developer mode {: #developer-mode }</h2>
+<p>Use <strong>developer mode</strong> to quickly load and launch your app without having to finalize your app as a distribution package.</p>
+<ol type="1">
+<li>Access <strong>chrome://extensions</strong> from the Chrome omnibox.</li>
+<li>Check off the <strong>Developer mode</strong> check box.</li>
+</ol>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/KIzjun6cpH8zHXJ4hBdF.gif”, alt=“Enable developer mode”, height=“188”, width=“735” %}</p>
+<ol start="3" type="1">
+<li>Click <strong>Load unpacked extension</strong>.</li>
+<li>Using the file picker dialog, navigate to your app’s project folder and select it to load your app.</li>
+</ol>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/t1hNzCpoh1S1STdxzhMd.gif”, alt=“Load unpacked extensions”, height=“289”, width=“634” %}</p>
+<h2 id="launch-your-finished-hello-world-app-launch">Launch your finished Hello World app {: #launch }</h2>
+<p>After loading your project as an unpacked extension, click <strong>Launch</strong> next to your installed app. A new standalone window should open up:</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/iibtdGOdf6gyQHUncpH0.png”, alt=“The finished Hello World app after Step 1”, height=“283”, width=“334” %}</p>
+<p>Congratulations, you’ve just created a new Chrome App!</p>
+<h2 id="debug-a-chrome-app-with-chrome-devtools-devtools-debug">Debug a Chrome App with Chrome DevTools {: #devtools-debug }</h2>
+<p>You can use the <a href="/devtools">Chrome Developer Tools</a> to inspect, debug, audit, and test your app just like you do on a regular web page.</p>
+<p>After you make changes to your code and reload your app (<strong>right-click &gt; Reload App</strong>), check the DevTools console for any errors (<strong>right-click &gt; Inspect Element</strong>).</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/8ZT2FbBlw1hD74sRWHJq.png”, alt=“Inspect Element dialog box”, height=“283”, width=“334” %}</p>
+<p>(We’ll cover the <strong>Inspect Background Page</strong> option in <a href="../app_codelab_alarms">Step 3</a> with alarms.)</p>
+<p>The DevTools JavaScript console has access to the same APIs available to your app. You can easily test an API call before adding it to your code:</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/ip0mFYkSIYw3sObYAow3.png”, alt=“DevTools console log”, height=“181”, width=“645” %}</p>
+<h2 id="for-more-information-recap">For more information {: #recap }</h2>
+<p>For more detailed information about some of the APIs introduced in this step, refer to:</p>
+<ul>
+<li><a href="/apps/manifest" title="Read &#39;Manifest File Format&#39; in the Chrome developer docs">Manifest File Format</a> <a href="#manifest" title="This feature mentioned in &#39;Create a manifest&#39;">↑</a></li>
+<li><a href="/apps/manifest/icons" title="Read &#39;Manifest - Icons&#39; in the Chrome developer docs">Manifest - Icons</a> <a href="#app-icon" title="This feature mentioned in &#39;Add an app icon&#39;">↑</a></li>
+<li><a href="../app_lifecycle" title="Read &#39;Manifest File Format&#39; in the Chrome developer docs">Chrome App Lifecycle</a> <a href="#background-script" title="This feature mentioned in &#39;Create a background script&#39;">↑</a></li>
+<li><a href="/docs/extensions/reference/app_runtime#event-onLaunched" title="Read &#39;chrome.app.runtime.onLaunched&#39; in the Chrome developer docs">chrome.app.runtime.onLaunched</a> <a href="#background-script" title="This feature mentioned in &#39;Create a background script&#39;">↑</a></li>
+<li><a href="/docs/extensions/reference/app_window#method-create" title="Read &#39;chrome.app.window.create()&#39; in the Chrome developer docs">chrome.app.window.create()</a> <a href="#background-script" title="This feature mentioned in &#39;Create a background script&#39;">↑</a></li>
+</ul>
+<p>Ready to continue onto the next step? Go to <a href="../app_codelab_import_todomvc">Step 2 - Import an existing web app »</a></p>
+</body>
+</html>

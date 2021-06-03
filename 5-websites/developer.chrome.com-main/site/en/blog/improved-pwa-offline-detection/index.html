@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2021-02-08" />
+  <title>Improving Progressive Web App offline support detection</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Improving Progressive Web App offline support detection</h1>
+<p class="date">2021-02-08</p>
+</header>
+<p>{% Aside ‘note’ %} <strong>Updated April 14th, 2021:</strong> We previously announced plans to update the installability criteria to ensure a PWA actually provides an offline experience. After listening to your feedback, and discovering a number of issues, <strong>we have decided to put those plans on hold</strong>. We strongly believe providing a valid page when the user is offline is critical to providing a good user experience. {% endAside %}</p>
+<p><a href="https://web.dev/pwa/">Progressive Web Apps (PWAs)</a> are a pattern for building modern, installable applications using web technology for mobile and desktop devices.</p>
+<p>One of the criteria for building a modern web experience, and not coincidentally PWAs, is that the app must continue to work even if the device is offline. That means no Chrome Dino screen if the user loses network access on their device!</p>
+<p>The goal of all PWA criteria is to help ensure users have a high quality, app-competitive experience when browsing the web. Chrome performs checks against <a href="https://web.dev/install-criteria/">PWA criteria</a> before enabling the install capability for a PWA.</p>
+<p>Only apps that fulfill all core <a href="https://web.dev/install-criteria/">Progressive Web App installability criteria</a>, including support for an offline mode, can be installed to the device from Chrome.</p>
+<h2 id="previous-offline-detection-logic">Previous offline detection logic</h2>
+<p>Verification of offline support has been part of PWA installability criteria for several years. Until recently, Chrome did not have the ability to simulate requests through the service worker, so a full check of correct offline behaviour was not possible.</p>
+<p>{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/qrDoFGCM2s8pBvM4n7Dv.png”, alt=“Diagram of service worker”, width=“800”, height=“385” %}</p>
+<p>That meant that Chrome did not have the ability to validate whether the <code>fetch</code> event handler returned a valid resource with HTTP 200 during the offline check. Chrome only checked whether the service worker actually had a <code>fetch</code> handler.</p>
+<h2 id="updated-offline-detection-logic">Updated offline detection logic</h2>
+<p>Chrome 89 added the ability to run simulated offline requests through the service worker, allowing improved offline detection logic to better reflect actual offline support of the application.</p>
+<p>We had planned to use this new ability to ensure that PWAs provided a valid page when offline, but have put those plans hold. The installability check will continue to pass if the page has a service worker that includes a <code>fetch</code> event handler.</p>
+<h2 id="what-does-this-mean-for-developers">What does this mean for developers?</h2>
+<p>While <strong>no changes are required now</strong>, we strongly recommend you provide an offline experience, as we expect to use the updated logic to check for a valid page at some point in the future.</p>
+<p>It’s up to you to decide what kind of offline experience you want to provide. On one end of the spectrum is a fully functional offline experience. This means pre-caching all the resources and data needed, and syncing data with your server when the user is online again. Caching resources will also help improve <a href="https://web.dev/vitals/">core web vital metrics</a> because it eliminates the need to download resources from the network every time. At the other end of the spectrum is a <a href="https://web.dev/offline-fallback-page/">custom offline fallback page</a>.</p>
+<p>{% Aside %} <strong>Want something easy?</strong> We’ve got all the code you need for a <a href="https://web.dev/offline-fallback-page/">custom offline fallback page</a> that you can literally copy and paste directly into your app. And for more complex scenarios, check out <a href="https://developers.google.com/web/tools/workbox">Workbox</a>, a set of libraries that can power a production-ready service worker for your Progressive Web App. {% endAside %}</p>
+<p>The warning that is shown under the <em>Issues</em> tab of developer tools will be removed around Chrome 90.</p>
+<p>{% Aside %} <strong>Have a question about service workers?</strong> Ask it on <a href="https://stackoverflow.com/">Stack Overflow</a> and tag it with <a href="https://stackoverflow.com/questions/tagged/service-worker"><code>service-worker</code></a> and <a href="https://stackoverflow.com/questions/tagged/progressive-web-apps"><code>progressive-web-apps</code></a>. Our team regularly monitors those tags and does our best to help. {% endAside %}</p>
+</body>
+</html>

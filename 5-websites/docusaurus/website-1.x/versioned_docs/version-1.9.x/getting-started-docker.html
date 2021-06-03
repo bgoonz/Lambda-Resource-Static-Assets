@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Docker</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Docker</h1>
+</header>
+<p><a href="https://www.docker.com/">Docker</a> is a tool that enables you to create, deploy, and manage lightweight, stand-alone packages that contain everything needed to run an application. It can help us to avoid conflicting dependencies &amp; unwanted behavior when running Docusaurus.</p>
+<h2 id="run-the-local-web-server-in-docker">Run the local web server in docker</h2>
+<p>Ensure you have previously installed <a href="https://www.docker.com/get-started">docker</a>.</p>
+<p>To run the local web server:</p>
+<ol type="1">
+<li><p><strong>Build the docker image</strong> – Enter the folder where you have Docusaurus installed. Run <code>docker build -t docusaurus-doc .</code></p>
+<p>Once the build phase finishes, you can verify the image exists by running <code>docker images</code>.</p>
+<blockquote>
+<p>We now include a <code>Dockerfile</code> when you install Docusaurus.</p>
+</blockquote></li>
+<li><p><strong>Run the Docusaurus container</strong> – To start docker run <code>docker run --rm -p 3000:3000 docusaurus-doc</code></p>
+<p>This will start a docker container with the image <code>docusaurus-doc</code>. To see more detailed container info run <code>docker ps</code> .</p></li>
+</ol>
+<h2 id="use-docker-compose">Use docker-compose</h2>
+<p>We can also use <code>docker-compose</code> to configure our application. This feature of docker allows you to run the web server and any additional services with a single command.</p>
+<blockquote>
+<p>Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application’s services. Then, with a single command, you create and start all the services from your configuration.</p>
+</blockquote>
+<p>Using Compose is a three-step process:</p>
+<ol type="1">
+<li><p>Define your app’s environment with a Dockerfile so it can be reproduced anywhere.</p></li>
+<li><p>Define the services that make up your app in <code>docker-compose.yml</code> so they can be run together in an isolated environment.</p></li>
+<li><p>Run <code>docker-compose up</code> and Compose starts and runs your entire app.</p></li>
+</ol>
+<p>We include a basic <code>docker-compose.yml</code> in your project:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&#39;3&#39;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="fu">docusaurus:</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="fu">build:</span><span class="at"> .</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="fu">ports:</span></a>
+<a class="sourceLine" id="cb1-7" title="7">      <span class="kw">-</span> 3000:3000</a>
+<a class="sourceLine" id="cb1-8" title="8">      <span class="kw">-</span> 35729:35729</a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb1-10" title="10">      <span class="kw">-</span> ./docs:/app/docs</a>
+<a class="sourceLine" id="cb1-11" title="11">      <span class="kw">-</span> ./website/blog:/app/website/blog</a>
+<a class="sourceLine" id="cb1-12" title="12">      <span class="kw">-</span> ./website/core:/app/website/core</a>
+<a class="sourceLine" id="cb1-13" title="13">      <span class="kw">-</span> ./website/i18n:/app/website/i18n</a>
+<a class="sourceLine" id="cb1-14" title="14">      <span class="kw">-</span> ./website/pages:/app/website/pages</a>
+<a class="sourceLine" id="cb1-15" title="15">      <span class="kw">-</span> ./website/static:/app/website/static</a>
+<a class="sourceLine" id="cb1-16" title="16">      <span class="kw">-</span> ./website/sidebars.json:/app/website/sidebars.json</a>
+<a class="sourceLine" id="cb1-17" title="17">      <span class="kw">-</span> ./website/siteConfig.js:/app/website/siteConfig.js</a>
+<a class="sourceLine" id="cb1-18" title="18">    <span class="fu">working_dir:</span><span class="at"> /app/website</span></a></code></pre></div>
+<p>To run a local web server with <code>docker-compose</code> run <code>docker-compose up</code>.</p>
+<p>To build static HTML pages for publishing run <code>docker-compose run docusaurus bash -c 'yarn publish-gh-pages'</code></p>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.es</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="build-a-space-game-part-iii-adding-motion">Build a Space Game Part III: Adding Motion</h1>
+<figure>
+<img src="video-url" alt="video" /><figcaption>video</figcaption>
+</figure>
+<h2 id="pre-lecture-prueba"><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/33">Pre-lecture prueba</a></h2>
+<p>¡Los juegos no son muy divertidos hasta que tienes extraterrestres corriendo por la pantalla! En este juego haremos uso de dos tipos de movimientos:</p>
+<ul>
+<li><strong>Keyboard/Mouse movement</strong> (Movimiento del teclado / mouse): cuando el usuario interactúa con el teclado o el mouse para mover un objeto en la pantalla.</li>
+<li><strong>Game induced movement</strong> (Movimiento inducido por el juego): cuando el juego mueve un objeto con un intervalo de tiempo determinado.</li>
+</ul>
+<p>Entonces, ¿cómo movemos las cosas en una pantalla? Se trata de coordenadas cartesianas: cambiamos la ubicación (x, y) del objeto y luego redibujamos la pantalla.</p>
+<p>Normalmente, necesita los siguientes pasos para lograr <em>movimiento</em> en una pantalla:</p>
+<ol type="1">
+<li><strong>Set a new location</strong> (Establecer una nueva ubicación) para un objeto; esto es necesario para percibir que el objeto se ha movido.</li>
+<li><strong>Clear the screen</strong> (Limpiar la pantalla), la pantalla debe limpiarse entre sorteos. Podemos borrarlo dibujando un rectángulo que llenamos con un color de fondo.</li>
+<li><strong>Redraw object</strong> (Redibujar objeto) en una nueva ubicación. Al hacer esto, finalmente logramos mover el objeto de un lugar a otro.</li>
+</ol>
+<p>Así es como puede verse en el código:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="co">//establecer la ubicación del héroe</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="va">hero</span>.<span class="at">x</span> <span class="op">+=</span> <span class="dv">5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co">// limpia el rectángulo que alberga al héroe</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="va">ctx</span>.<span class="at">clearRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co">// vuelve a dibujar el fondo del juego y el héroe</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span>)</a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;black&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="va">ctx</span>.<span class="at">drawImage</span>(heroImg<span class="op">,</span> <span class="va">hero</span>.<span class="at">x</span><span class="op">,</span> <span class="va">hero</span>.<span class="at">y</span>)<span class="op">;</span></a></code></pre></div>
+<p>✅ ¿Puedes pensar en una razón por la que volver a dibujar a tu héroe muchos fotogramas por segundo podría generar costos de rendimiento? Lea acerca de <a href="https://www.html5rocks.com/en/tutorials/canvas/performance/">alternativas a este patrón</a>.</p>
+<h2 id="manejar-eventos-de-teclado">Manejar eventos de teclado</h2>
+<p>Maneja eventos adjuntando eventos específicos al código. Los eventos del teclado se activan en toda la ventana, mientras que los eventos del mouse como un <code>click</code> se pueden conectar a hacer clic en un elemento específico. Usaremos eventos de teclado a lo largo de este proyecto.</p>
+<p>Para manejar un evento, debe usar el método <code>addEventListener()</code> de la ventana y proporcionarle dos parámetros de entrada. El primer parámetro es el nombre del evento, por ejemplo, <code>keyup</code>. El segundo parámetro es la función que debe invocarse como resultado del evento que tiene lugar.</p>
+<p>He aquí un ejemplo:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">window</span>.<span class="at">addEventListener</span>(<span class="st">&#39;keyup&#39;</span><span class="op">,</span> (evt) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="co">// `evt.key` = representación de cadena de la clave</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="cf">if</span> (<span class="va">evt</span>.<span class="at">key</span> <span class="op">===</span> <span class="st">&#39;ArrowUp&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="co">// hacer algo</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="op">}</span>)</a></code></pre></div>
+<p>Para los eventos clave, hay dos propiedades en el evento que puede usar para ver qué tecla se presionó:</p>
+<ul>
+<li><code>key</code>, esta es una representación de cadena de la tecla presionada, por ejemplo <code>ArrowUp</code></li>
+<li><code>keyCode</code>, esta es una representación numérica, por ejemplo, <code>37</code>, corresponde a <code>ArrowLeft</code>.</li>
+</ul>
+<p>✅ La manipulación de eventos clave es útil fuera del desarrollo del juego. ¿Qué otros usos se le ocurren para esta técnica?</p>
+<h3 id="teclas-especiales-una-advertencia">Teclas especiales: una advertencia</h3>
+<p>Hay algunas teclas * especiales * que afectan la ventana. Eso significa que si estás escuchando un evento <code>keyup</code> y usas estas teclas especiales para mover a tu héroe, también realizará un desplazamiento horizontal. Por esa razón, es posible que desee <em>apagar</em> este comportamiento integrado del navegador a medida que desarrolla su juego. Necesitas un código como este:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">let</span> onKeyDown <span class="op">=</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="va">e</span>.<span class="at">keyCode</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="cf">switch</span> (<span class="va">e</span>.<span class="at">keyCode</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="cf">case</span> <span class="dv">37</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="cf">case</span> <span class="dv">39</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="cf">case</span> <span class="dv">38</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="cf">case</span> <span class="dv">40</span><span class="op">:</span> <span class="co">// Teclas de flecha</span></a>
+<a class="sourceLine" id="cb3-8" title="8">    <span class="cf">case</span> <span class="dv">32</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb3-9" title="9">      <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">      <span class="cf">break</span><span class="op">;</span> <span class="co">// Space</span></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="cf">default</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb3-12" title="12">      <span class="cf">break</span><span class="op">;</span> <span class="co">// no bloquee otras llaves</span></a>
+<a class="sourceLine" id="cb3-13" title="13">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="op">};</span></a>
+<a class="sourceLine" id="cb3-15" title="15"></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="va">window</span>.<span class="at">addEventListener</span>(<span class="st">&#39;keydown&#39;</span><span class="op">,</span> onKeyDown)<span class="op">;</span></a></code></pre></div>
+<p>El código anterior asegurará que las teclas de flecha y la tecla de espacio tengan su comportamiento <em>predeterminado</em> apagado. El mecanismo de <em>apagado</em> ocurre cuando llamamos a <code>e.preventDefault()</code>.</p>
+<h2 id="movimiento-inducido-por-el-juego">Movimiento inducido por el juego</h2>
+<p>Podemos hacer que las cosas se muevan por sí mismas usando temporizadores como la función <code>setTimeout()</code> o <code>setInterval()</code> que actualizan la ubicación del objeto en cada tic o intervalo de tiempo. Esto es lo que puede parecer:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">let</span> id <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="co">//mover al enemigo en el eje y</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="va">enemy</span>.<span class="at">y</span> <span class="op">+=</span> <span class="dv">10</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="op">}</span>)</a></code></pre></div>
+<h2 id="el-bucle-del-juego">El bucle del juego</h2>
+<p>El bucle de juego es un concepto que es esencialmente una función que se invoca a intervalos regulares. Se llama bucle de juego, ya que todo lo que debería ser visible para el usuario se incluye en el bucle. El bucle del juego hace uso de todos los objetos del juego que son parte del juego, dibujándolos todos a menos que por alguna razón ya no deban ser parte del juego. Por ejemplo, si un objeto es un enemigo que fue golpeado por un láser y explota, ya no forma parte del ciclo del juego actual (aprenderás más sobre esto en lecciones posteriores).</p>
+<p>Así es como suele verse un bucle de juego, expresado en código:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">let</span> gameLoopId <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">function</span> <span class="at">gameLoop</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="va">ctx</span>.<span class="at">clearRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;black&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">    <span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="at">drawHero</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="at">drawEnemies</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">    <span class="at">drawStaticObjects</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="op">},</span> <span class="dv">200</span>)<span class="op">;</span></a></code></pre></div>
+<p>TEl ciclo anterior se invoca cada <code>200</code> milisegundos para volver a dibujar el lienzo. Tiene la capacidad de elegir el mejor intervalo que tenga sentido para su juego.</p>
+<h2 id="continuando-con-el-juego-espacial">Continuando con el juego espacial</h2>
+<p>Tomarás el código existente y lo extenderás. Empiece con el código que completó durante la parte I o use el código en <a href="your-work">Part II-starter</a>.</p>
+<ul>
+<li><strong>Moving the hero</strong> (Mover al héroe): agregará código para asegurarse de que puede mover al héroe con las teclas de flecha.</li>
+<li><strong>Move enemies</strong> (Mover enemigos): también necesitarás agregar código para asegurarte de que los enemigos se muevan de arriba hacia abajo a un ritmo determinado.</li>
+</ul>
+<h2 id="pasos-recomendados">Pasos recomendados</h2>
+<p>Busque los archivos que se han creado para usted en la subcarpeta <code>your-work</code>. Debe contener lo siguiente:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="ex">-</span><span class="kw">|</span> <span class="ex">assets</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">enemyShip.png</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">player.png</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="ex">-</span><span class="kw">|</span> <span class="ex">index.html</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="ex">-</span><span class="kw">|</span> <span class="ex">app.js</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="ex">-</span><span class="kw">|</span> <span class="ex">package.json</span></a></code></pre></div>
+<p>Comienzas tu proyecto en la carpeta <code>your_work</code> escribiendo:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="bu">cd</span> your-work</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="ex">npm</span> start</a></code></pre></div>
+<p>Lo anterior iniciará un servidor HTTP en la dirección <code>http://localhost:5000</code>. Abra un navegador e ingrese esa dirección, ahora mismo debería representar al héroe y a todos los enemigos; nada se mueve, ¡todavía!</p>
+<h3 id="agregar-código">Agregar código</h3>
+<ol type="1">
+<li><p><strong>Agrega objetos dedicados</strong> para <code>hero</code> y <code>enemy</code> y <code>game object</code>, deben tener propiedades <code>x</code> e <code>y</code>. (Recuerde la parte sobre <a href="../README.md">Herencia o composición</a>).</p>
+<ul>
+<li>SUGERENCIA* <code>game object</code> debe ser el que tenga <code>x</code> e <code>y</code> y la capacidad de dibujarse a sí mismo en un lienzo.</li>
+</ul>
+<blockquote>
+<p>consejo: comience agregando una nueva clase GameObject con su constructor delineado como se muestra a continuación, y luego dibuje en el lienzo:</p>
+</blockquote>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">class</span> GameObject <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="at">constructor</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="kw">this</span>.<span class="at">x</span> <span class="op">=</span> x<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="kw">this</span>.<span class="at">y</span> <span class="op">=</span> y<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-6" title="6">    <span class="kw">this</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-8" title="8">    <span class="kw">this</span>.<span class="at">width</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-9" title="9">    <span class="kw">this</span>.<span class="at">height</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-10" title="10">    <span class="kw">this</span>.<span class="at">img</span> <span class="op">=</span> <span class="kw">undefined</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-12" title="12"></a>
+<a class="sourceLine" id="cb8-13" title="13">  <span class="at">draw</span>(ctx) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-14" title="14">    <span class="va">ctx</span>.<span class="at">drawImage</span>(<span class="kw">this</span>.<span class="at">img</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">x</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">y</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">width</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">height</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-15" title="15">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-16" title="16"><span class="op">}</span></a></code></pre></div>
+<p>Ahora, amplíe este GameObject para crear el héroe y el enemigo.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">class</span> Hero <span class="kw">extends</span> GameObject <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="at">constructor</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    ...<span class="at">it</span> needs an x<span class="op">,</span> y<span class="op">,</span> type<span class="op">,</span> and speed</a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="op">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">class</span> Enemy <span class="kw">extends</span> GameObject <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="at">constructor</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="kw">super</span>(x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-4" title="4">    (<span class="kw">this</span>.<span class="at">width</span> <span class="op">=</span> <span class="dv">98</span>)<span class="op">,</span> (<span class="kw">this</span>.<span class="at">height</span> <span class="op">=</span> <span class="dv">50</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-5" title="5">    <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> <span class="st">&quot;Enemy&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-6" title="6">    <span class="kw">let</span> id <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-7" title="7">      <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">y</span> <span class="op">&lt;</span> <span class="va">canvas</span>.<span class="at">height</span> <span class="op">-</span> <span class="kw">this</span>.<span class="at">height</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-8" title="8">        <span class="kw">this</span>.<span class="at">y</span> <span class="op">+=</span> <span class="dv">5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-9" title="9">      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-10" title="10">        <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Stopped at&#39;</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">y</span>)</a>
+<a class="sourceLine" id="cb10-11" title="11">        <span class="at">clearInterval</span>(id)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-12" title="12">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-13" title="13">    <span class="op">},</span> <span class="dv">300</span>)</a>
+<a class="sourceLine" id="cb10-14" title="14">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-15" title="15"><span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>Agregue controladores de eventos clave</strong> para manejar la navegación de teclas (mueva el héroe hacia arriba / abajo a la izquierda / derecha)</p>
+<ul>
+<li>RECUERDE* es un sistema cartesiano, la parte superior izquierda es <code>0,0</code>. También recuerde agregar código para detener <em>comportamiento predeterminado</em>.</li>
+</ul>
+<blockquote>
+<p>consejo: cree su función onKeyDown y adjúntela a la ventana:</p>
+</blockquote>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"> <span class="kw">let</span> onKeyDown <span class="op">=</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">       <span class="va">console</span>.<span class="at">log</span>(<span class="va">e</span>.<span class="at">keyCode</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">         ...<span class="co">//agregue el código de la lección anterior para detener el comportamiento predeterminado</span></a>
+<a class="sourceLine" id="cb11-4" title="4">       <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-5" title="5"> }<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-6" title="6"></a>
+<a class="sourceLine" id="cb11-7" title="7"> <span class="va">window</span>.<span class="at">addEventListener</span>(<span class="st">&quot;keydown&quot;</span><span class="op">,</span> onKeyDown)<span class="op">;</span></a></code></pre></div>
+<p>Compruebe la consola de su navegador en este punto y observe cómo se registran las pulsaciones de teclas.</p></li>
+<li><p><strong>Implemente</strong> el <a href="../README.md">subpatrón Pub</a>, esto mantendrá su código limpio mientras sigue las partes restantes.</p>
+<p>Para hacer esta última parte, puede:</p>
+<ol type="1">
+<li><p><strong>Agregue un detector de eventos</strong> en la ventana:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"> <span class="va">window</span>.<span class="at">addEventListener</span>(<span class="st">&quot;keyup&quot;</span><span class="op">,</span> (evt) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">   <span class="cf">if</span> (<span class="va">evt</span>.<span class="at">key</span> <span class="op">===</span> <span class="st">&quot;ArrowUp&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-3" title="3">     <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_UP</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4">   <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">evt</span>.<span class="at">key</span> <span class="op">===</span> <span class="st">&quot;ArrowDown&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-5" title="5">     <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_DOWN</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-6" title="6">   <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">evt</span>.<span class="at">key</span> <span class="op">===</span> <span class="st">&quot;ArrowLeft&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-7" title="7">     <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_LEFT</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-8" title="8">   <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">evt</span>.<span class="at">key</span> <span class="op">===</span> <span class="st">&quot;ArrowRight&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-9" title="9">     <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_RIGHT</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-10" title="10">   <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-11" title="11"> <span class="op">}</span>)<span class="op">;</span></a></code></pre></div></li>
+<li><p><strong>Cree una clase EventEmitter</strong> para publicar y suscribirse a mensajes:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">class</span> EventEmitter <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="at">constructor</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-3" title="3">    <span class="kw">this</span>.<span class="at">listeners</span> <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb13-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-5" title="5"></a>
+<a class="sourceLine" id="cb13-6" title="6">  <span class="at">on</span>(message<span class="op">,</span> listener) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-7" title="7">    <span class="cf">if</span> (<span class="op">!</span><span class="kw">this</span>.<span class="at">listeners</span>[message]) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-8" title="8">      <span class="kw">this</span>.<span class="at">listeners</span>[message] <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-9" title="9">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-10" title="10">    <span class="kw">this</span>.<span class="at">listeners</span>[message].<span class="at">push</span>(listener)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-12" title="12"></a>
+<a class="sourceLine" id="cb13-13" title="13">  <span class="at">emit</span>(message<span class="op">,</span> payload <span class="op">=</span> <span class="kw">null</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-14" title="14">    <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">listeners</span>[message]) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-15" title="15">      <span class="kw">this</span>.<span class="at">listeners</span>[message].<span class="at">forEach</span>((l) <span class="kw">=&gt;</span> <span class="at">l</span>(message<span class="op">,</span> payload))<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-16" title="16">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-17" title="17">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-18" title="18"><span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>Agregue constantes</strong> y configure el EventEmitter:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">const</span> Messages <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="dt">KEY_EVENT_UP</span><span class="op">:</span> <span class="st">&quot;KEY_EVENT_UP&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="dt">KEY_EVENT_DOWN</span><span class="op">:</span> <span class="st">&quot;KEY_EVENT_DOWN&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb14-4" title="4">  <span class="dt">KEY_EVENT_LEFT</span><span class="op">:</span> <span class="st">&quot;KEY_EVENT_LEFT&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb14-5" title="5">  <span class="dt">KEY_EVENT_RIGHT</span><span class="op">:</span> <span class="st">&quot;KEY_EVENT_RIGHT&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="op">};</span></a>
+<a class="sourceLine" id="cb14-7" title="7"></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="kw">let</span> heroImg<span class="op">,</span> </a>
+<a class="sourceLine" id="cb14-9" title="9">    enemyImg<span class="op">,</span> </a>
+<a class="sourceLine" id="cb14-10" title="10">    laserImg<span class="op">,</span></a>
+<a class="sourceLine" id="cb14-11" title="11">    canvas<span class="op">,</span> ctx<span class="op">,</span> </a>
+<a class="sourceLine" id="cb14-12" title="12">    gameObjects <span class="op">=</span> []<span class="op">,</span> </a>
+<a class="sourceLine" id="cb14-13" title="13">    hero<span class="op">,</span> </a>
+<a class="sourceLine" id="cb14-14" title="14">    eventEmitter <span class="op">=</span> <span class="kw">new</span> <span class="at">EventEmitter</span>()<span class="op">;</span></a></code></pre></div></li>
+<li><p><strong>Inicializa el juego</strong></p></li>
+</ol>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">function</span> <span class="at">initGame</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  gameObjects <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="at">createEnemies</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4">  <span class="at">createHero</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-5" title="5"></a>
+<a class="sourceLine" id="cb15-6" title="6">  <span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_UP</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-7" title="7">    <span class="va">hero</span>.<span class="at">y</span> <span class="op">-=</span><span class="dv">5</span> <span class="op">;</span></a>
+<a class="sourceLine" id="cb15-8" title="8">  <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb15-9" title="9"></a>
+<a class="sourceLine" id="cb15-10" title="10">  <span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_DOWN</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-11" title="11">    <span class="va">hero</span>.<span class="at">y</span> <span class="op">+=</span> <span class="dv">5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-12" title="12">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-13" title="13"></a>
+<a class="sourceLine" id="cb15-14" title="14">  <span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_LEFT</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-15" title="15">    <span class="va">hero</span>.<span class="at">x</span> <span class="op">-=</span> <span class="dv">5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-16" title="16">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-17" title="17"></a>
+<a class="sourceLine" id="cb15-18" title="18">  <span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_RIGHT</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-19" title="19">    <span class="va">hero</span>.<span class="at">x</span> <span class="op">+=</span> <span class="dv">5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-20" title="20">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-21" title="21"><span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>Configura el bucle del juego</strong></p>
+<p>Refactorice la función window.onload para inicializar el juego y configurar un bucle de juego en un buen intervalo. También agregará un rayo láser:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="va">window</span>.<span class="at">onload</span> <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  canvas <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;canvas&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-3" title="3">  ctx <span class="op">=</span> <span class="va">canvas</span>.<span class="at">getContext</span>(<span class="st">&quot;2d&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-4" title="4">  heroImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadTexture</span>(<span class="st">&quot;assets/player.png&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-5" title="5">  enemyImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadTexture</span>(<span class="st">&quot;assets/enemyShip.png&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-6" title="6">  laserImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadTexture</span>(<span class="st">&quot;assets/laserRed.png&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-7" title="7"></a>
+<a class="sourceLine" id="cb16-8" title="8">  <span class="at">initGame</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-9" title="9">  <span class="kw">let</span> gameLoopId <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-10" title="10">    <span class="va">ctx</span>.<span class="at">clearRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-11" title="11">    <span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;black&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-12" title="12">    <span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-13" title="13">    <span class="at">drawGameObjects</span>(ctx)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-14" title="14">  <span class="op">},</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb16-15" title="15"></a>
+<a class="sourceLine" id="cb16-16" title="16"><span class="op">};</span></a></code></pre></div></li>
+<li><p><strong>Agregar código</strong> para mover enemigos en un cierto intervalo</p>
+<p>Refactorice la función <code>createEnemies()</code> para crear los enemigos y empujarlos a la nueva clase gameObjects:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">function</span> <span class="at">createEnemies</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-2" title="2">  <span class="kw">const</span> MONSTER_TOTAL <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb17-3" title="3">  <span class="kw">const</span> MONSTER_WIDTH <span class="op">=</span> MONSTER_TOTAL <span class="op">*</span> <span class="dv">98</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb17-4" title="4">  <span class="kw">const</span> START_X <span class="op">=</span> (<span class="va">canvas</span>.<span class="at">width</span> <span class="op">-</span> MONSTER_WIDTH) / <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb17-5" title="5">  <span class="kw">const</span> STOP_X <span class="op">=</span> START_X <span class="op">+</span> MONSTER_WIDTH<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-6" title="6"></a>
+<a class="sourceLine" id="cb17-7" title="7">  <span class="cf">for</span> (<span class="kw">let</span> x <span class="op">=</span> START_X<span class="op">;</span> x <span class="op">&lt;</span> STOP_X<span class="op">;</span> x <span class="op">+=</span> <span class="dv">98</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-8" title="8">    <span class="cf">for</span> (<span class="kw">let</span> y <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> y <span class="op">&lt;</span> <span class="dv">50</span> <span class="op">*</span> <span class="dv">5</span><span class="op">;</span> y <span class="op">+=</span> <span class="dv">50</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-9" title="9">      <span class="kw">const</span> enemy <span class="op">=</span> <span class="kw">new</span> <span class="at">Enemy</span>(x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-10" title="10">      <span class="va">enemy</span>.<span class="at">img</span> <span class="op">=</span> enemyImg<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-11" title="11">      <span class="va">gameObjects</span>.<span class="at">push</span>(enemy)<span class="op">;</span></a>
+<a class="sourceLine" id="cb17-12" title="12">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb17-13" title="13">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb17-14" title="14"><span class="op">}</span></a></code></pre></div>
+<p>y agregue una función <code>createHero()</code> para hacer un proceso similar para el héroe.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">function</span> <span class="at">createHero</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb18-2" title="2">  hero <span class="op">=</span> <span class="kw">new</span> <span class="at">Hero</span>(</a>
+<a class="sourceLine" id="cb18-3" title="3">    <span class="va">canvas</span>.<span class="at">width</span> / <span class="dv">2</span> <span class="op">-</span> <span class="dv">45</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb18-4" title="4">    <span class="va">canvas</span>.<span class="at">height</span> <span class="op">-</span> <span class="va">canvas</span>.<span class="at">height</span> / <span class="dv">4</span></a>
+<a class="sourceLine" id="cb18-5" title="5">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-6" title="6">  <span class="va">hero</span>.<span class="at">img</span> <span class="op">=</span> heroImg<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-7" title="7">  <span class="va">gameObjects</span>.<span class="at">push</span>(hero)<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-8" title="8"><span class="op">}</span></a></code></pre></div>
+<p>y finalmente, agregue una función <code>drawGameObjects()</code> para comenzar el dibujo:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">function</span> <span class="at">drawGameObjects</span>(ctx) <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-2" title="2">  <span class="va">gameObjects</span>.<span class="at">forEach</span>(go <span class="kw">=&gt;</span> <span class="va">go</span>.<span class="at">draw</span>(ctx))<span class="op">;</span></a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>¡Tus enemigos deberían comenzar a avanzar en tu nave espacial heroica!</p></li>
+</ol>
+<p>🚀 Desafío: como puede ver, su código puede convertirse en ‘código espagueti’ cuando comienza a agregar funciones, variables y clases. ¿Cómo puede organizar mejor su código para que sea más legible? Esboce un sistema para organizar su código, incluso si todavía reside en un archivo.</p>
+<h2 id="post-lecture-prueba"><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/34">Post-lecture prueba</a></h2>
+<h2 id="revisión-y-autoestudio">Revisión y autoestudio</h2>
+<p>Mientras escribimos nuestro juego sin usar marcos, existen muchos marcos de lienzo basados en JavaScript para el desarrollo de juegos. Tómate un tiempo para hacer algo <a href="https://github.com/collections/javascript-game-engines">leer sobre estos</a>.</p>
+<p><strong>Tarea</strong>: <a href="assignment.es.md">Comenta tu código</a></p>
+</body>
+</html>

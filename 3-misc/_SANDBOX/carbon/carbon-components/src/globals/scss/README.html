@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="scss"><code>scss</code></h1>
+<p>See <a href="http://carbondesignsystem.com/getting-started/developers">docs</a> to get started with Carbon SCSS.</p>
+<h2 id="usage-with-another-design-system">Usage with another design system</h2>
+<p>While we do <em>not</em> recommend using Carbon along with another design system in one application because doing so loses coheisiveness in your application’s user experience, you can use “selector namspacing” technique e.g. while you are migrating from another design system to Carbon and just flipping the switch at once is extremely hard.</p>
+<p>Below example generates CSS files whose CSS selectors are namespaced, e.g. <code>textarea</code> selector converted to <code>.carbon textarea</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">const</span> gulp <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;gulp&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">const</span> postcss <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;gulp-postcss&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">const</span> prefixSelector <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;postcss-prefix-selector&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="va">gulp</span>.<span class="at">task</span>(<span class="st">&#39;postcss:carbon&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  gulp</a>
+<a class="sourceLine" id="cb1-7" title="7">    .<span class="at">src</span>(<span class="st">&#39;node_modules/carbon-components/css/carbon-components.css&#39;</span>)</a>
+<a class="sourceLine" id="cb1-8" title="8">    .<span class="at">pipe</span>(</a>
+<a class="sourceLine" id="cb1-9" title="9">      <span class="at">postcss</span>([</a>
+<a class="sourceLine" id="cb1-10" title="10">        <span class="at">prefixSelector</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb1-11" title="11">          <span class="dt">prefix</span><span class="op">:</span> <span class="st">&#39;.carbon&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-12" title="12">          <span class="dt">transform</span><span class="op">:</span> (prefix<span class="op">,</span> selector<span class="op">,</span> prefixedSelector) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-13" title="13">            <span class="kw">const</span> list <span class="op">=</span> [prefixedSelector<span class="op">,</span> selector <span class="op">+</span> prefix]<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-14" title="14">            <span class="cf">if</span> (selector <span class="op">===</span> <span class="st">&#39;html&#39;</span> <span class="op">||</span> selector <span class="op">===</span> <span class="st">&#39;body&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-15" title="15">              <span class="co">// Mimics styles to `&lt;html&gt;`/`&lt;body&gt;` with e.g. `.carbon--body`</span></a>
+<a class="sourceLine" id="cb1-16" title="16">              <span class="va">list</span>.<span class="at">push</span>(<span class="vs">`</span><span class="sc">${</span>prefix<span class="sc">}</span><span class="vs">--</span><span class="sc">${</span>selector<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-17" title="17">            <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-18" title="18">            <span class="cf">return</span> list<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-19" title="19">          <span class="op">},</span></a>
+<a class="sourceLine" id="cb1-20" title="20">        <span class="op">}</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb1-21" title="21">      ])</a>
+<a class="sourceLine" id="cb1-22" title="22">    )</a>
+<a class="sourceLine" id="cb1-23" title="23">    .<span class="at">pipe</span>(<span class="va">gulp</span>.<span class="at">dest</span>(<span class="st">&#39;dist&#39;</span>))</a>
+<a class="sourceLine" id="cb1-24" title="24">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-25" title="25"></a>
+<a class="sourceLine" id="cb1-26" title="26"><span class="va">gulp</span>.<span class="at">task</span>(<span class="st">&#39;postcss:another-design-system&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span></a>
+<a class="sourceLine" id="cb1-27" title="27">  gulp</a>
+<a class="sourceLine" id="cb1-28" title="28">    .<span class="at">src</span>(<span class="st">&#39;node_modules/another-design-system/path/to/another-design-system.css&#39;</span>)</a>
+<a class="sourceLine" id="cb1-29" title="29">    .<span class="at">pipe</span>(</a>
+<a class="sourceLine" id="cb1-30" title="30">      <span class="at">postcss</span>([</a>
+<a class="sourceLine" id="cb1-31" title="31">        <span class="at">prefixSelector</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb1-32" title="32">          <span class="dt">prefix</span><span class="op">:</span> <span class="st">&#39;.another-design-system&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-33" title="33">          <span class="dt">transform</span><span class="op">:</span> (prefix<span class="op">,</span> selector<span class="op">,</span> prefixedSelector) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-34" title="34">            <span class="kw">const</span> list <span class="op">=</span> [prefixedSelector<span class="op">,</span> selector <span class="op">+</span> prefix]<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-35" title="35">            <span class="cf">if</span> (selector <span class="op">===</span> <span class="st">&#39;html&#39;</span> <span class="op">||</span> selector <span class="op">===</span> <span class="st">&#39;body&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-36" title="36">              <span class="co">// Mimics styles to `&lt;html&gt;`/`&lt;body&gt;` with e.g. `.another-design-system--body`</span></a>
+<a class="sourceLine" id="cb1-37" title="37">              <span class="va">list</span>.<span class="at">push</span>(<span class="vs">`</span><span class="sc">${</span>prefix<span class="sc">}</span><span class="vs">--</span><span class="sc">${</span>selector<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-38" title="38">            <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-39" title="39">            <span class="cf">return</span> list<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-40" title="40">          <span class="op">},</span></a>
+<a class="sourceLine" id="cb1-41" title="41">        <span class="op">}</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb1-42" title="42">      ])</a>
+<a class="sourceLine" id="cb1-43" title="43">    )</a>
+<a class="sourceLine" id="cb1-44" title="44">    .<span class="at">pipe</span>(<span class="va">gulp</span>.<span class="at">dest</span>(<span class="st">&#39;dist&#39;</span>))</a>
+<a class="sourceLine" id="cb1-45" title="45">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-46" title="46"></a>
+<a class="sourceLine" id="cb1-47" title="47"><span class="va">gulp</span>.<span class="at">task</span>(<span class="st">&#39;postcss&#39;</span><span class="op">,</span> [<span class="st">&#39;postcss:carbon&#39;</span><span class="op">,</span> <span class="st">&#39;postcss:another-design-system&#39;</span>])<span class="op">;</span></a></code></pre></div>
+<p>Below HTML is an example using a Carbon button is used along with a button with another design system, using what above build step generaes:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">&lt;link</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="ot">      rel=</span><span class="st">&quot;stylesheet&quot;</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="ot">      type=</span><span class="st">&quot;text/css&quot;</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="ot">      href=</span><span class="st">&quot;./dist/carbon-components.css&quot;</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-9" title="9">    <span class="kw">&lt;link</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="ot">      rel=</span><span class="st">&quot;stylesheet&quot;</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="ot">      type=</span><span class="st">&quot;text/css&quot;</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="ot">      href=</span><span class="st">&quot;./dist/another-design-system.css&quot;</span></a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-14" title="14">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb2-15" title="15">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb2-16" title="16">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;bx--body carbon--body carbon--html&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb2-17" title="17">      <span class="kw">&lt;button</span><span class="ot"> class=</span><span class="st">&quot;carbon bx--btn bx--btn--primary&quot;</span><span class="kw">&gt;</span>Carbon<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb2-18" title="18">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb2-19" title="19">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;another-design-system--body another-design-system--html&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb2-20" title="20">      <span class="kw">&lt;button</span><span class="ot"> class=</span><span class="st">&quot;another-design-system btn btn-primary&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb2-21" title="21">        Another design system</a>
+<a class="sourceLine" id="cb2-22" title="22">      <span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb2-23" title="23">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb2-24" title="24">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb2-25" title="25"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+</body>
+</html>

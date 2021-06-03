@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-08-20" />
+  <title>What’s New In DevTools (Chrome 86)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 86)</h1>
+<p class="date">2020-08-20</p>
+</header>
+<p>{% Aside %}</p>
+<p>Interested in helping improve DevTools? Sign up to participate in <a href="https://google.qualtrics.com/jfe/form/SV_3NMIMtX0F2zkakR?reserved=1&amp;utm_source=Website%20feature&amp;Q_Language=en&amp;utm_medium=own_web&amp;utm_campaign=Q4&amp;productTag=chrm&amp;campaignDate=November2020&amp;referral_code=UXbl384838">Google User Research here</a>.</p>
+<p>{% endAside %}</p>
+<p>{% YouTube id=“koUsK58dpNo” %}</p>
+<h2 id="new-media-panel-media-panel">New Media panel {: #media-panel }</h2>
+<p>DevTools now displays media players information in the <a href="/docs/devtools/media-panel">Media panel</a>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/DmEIPFNcIQcD2f1oVfGC.png”, alt=“New Media panel”, width=“800”, height=“487” %}</p>
+<p>Prior to the new media panel in DevTools, logging and debug information about video players could be found in <code>chrome://media-internals</code>.</p>
+<p>The new Media panel provides an easier way to view events, logs, properties, and a timeline of frame decodes in the same browser tab as the video player itself. You can live view and inspect on potential issues quicker (e.g. why dropped frames are occurring, why JavaScript is interacting with the player in an unexpected way).</p>
+<p>Chromium issue: <a href="https://crbug.com/1018414">1018414</a></p>
+<h2 id="capture-node-screenshots-via-elements-panel-context-menu-capture-node-screenshot">Capture node screenshots via Elements panel context menu {: #capture-node-screenshot }</h2>
+<p>You can now capture node screenshots via the context menu in the Elements panel.</p>
+<p>For example, you can take a screenshot of the table of content by right clicking the element and select <strong>Capture node screenshot</strong>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/r1qEVioRv6kTYoSCbAAG.png”, alt=“Capture node screenshots”, width=“800”, height=“377” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1100253">1100253</a></p>
+<h2 id="issues-tab-updates-issues-tab">Issues tab updates {: #issues-tab }</h2>
+<p>The Issues warning bar on the Console panel is now replaced with a regular message.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/KTMjp7sZIi82132RbSGD.png”, alt=“Issues in console message”, width=“800”, height=“483” %}</p>
+<p>Third-party cookie issues are now hidden by default in the Issues tab. Enable the new <strong>Include third-party cookie issues</strong> checkbox to view them.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/Bf8gnyAN5YX0nX14eqif.png”, alt=“third-party cookie issues checkbox”, width=“800”, height=“535” %}</p>
+<p>Chromium issues: <a href="https://crbug.com/1096481">1096481</a>, <a href="https://crbug.com/1068116">1068116</a>, <a href="https://crbug.com/1080589">1080589</a></p>
+<h2 id="emulate-missing-local-fonts-emulate-local-fonts">Emulate missing local fonts {: #emulate-local-fonts }</h2>
+<p>Open the <a href="/docs/devtools/evaluate-performance/reference#rendering">Rendering tab</a> and use the new <strong>Disable local fonts</strong> feature to emulate missing <code>local()</code> sources in <code>@font-face</code> rules.</p>
+<p>For example, when the font “Rubik” is installed on your device and the <code>@font-face src</code> rule uses it as a <code>local()</code> font, Chrome uses the local font file from your device.</p>
+<p>When <strong>Disable local fonts</strong> is enabled, DevTools ignores the <code>local()</code> fonts and fetches them from the network.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/U9GRJae9v4Mt9uEkz6Ut.png”, alt=“Emulate missing local fonts”, width=“800”, height=“487” %}</p>
+<p>Oftentimes, developers and designers use two different copies of the same font during development:</p>
+<ul>
+<li>A local font for your design tools, and</li>
+<li>A web font for your code</li>
+</ul>
+<p>Disabling local fonts makes it easier for you to:</p>
+<ul>
+<li>Debug and measure web fonts loading performance and optimization</li>
+<li>Verify correctness of your CSS <code>@font-face</code> rules</li>
+<li>Discover any differences between web fonts and their local versions</li>
+</ul>
+<p>Chromium issue: <a href="https://crbug.com/384968">384968</a></p>
+<h2 id="emulate-inactive-users-emulate-inactive-users">Emulate inactive users {: #emulate-inactive-users }</h2>
+<p>The <a href="https://web.dev/idle-detection">Idle Detection API</a> allows developers to detect inactive users and react on idle state changes. You can now use DevTools to emulate idle state changes in the <strong>Sensors</strong> tab for both the user state and the screen state instead of waiting for the actual idle state to change. You can open the <strong>Sensors</strong> tab from the <a href="/docs/devtools/customize#drawer"><strong>Drawer</strong></a>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/9bZbJYcIzAJx9n9hvAKw.png”, alt=“Emulate inactive users”, width=“800”, height=“487” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1090802">1090802</a></p>
+<h2 id="emulate-prefers-reduced-data-emulate-prefers-reduced-data">Emulate <code>prefers-reduced-data</code> {: #emulate-prefers-reduced-data }</h2>
+<p>{% Aside %}</p>
+<p>In Chrome 86, this feature is available behind the <a href="chrome://flags/#enable-experimental-web-platform-features">chrome://flags/#enable-experimental-web-platform-features</a> flag. You can see this emulation option only if the flag is enabled.</p>
+<p>{% endAside %}</p>
+<p>The <a href="https://drafts.csswg.org/mediaqueries-5/#descdef-media-prefers-reduced-data"><code>prefers-reduced-data</code></a> media query detects if the user prefers being served alternate content that uses less data for the page to be rendered.</p>
+<p>You can now use DevTools to emulate the <code>prefers-reduced-data</code> media query.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/Yl06AtiNkQb0L7fhxdFa.png”, alt=“Emulate prefers-reduced-data”, width=“800”, height=“449” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1096068">1096068</a></p>
+<h2 id="support-for-new-javascript-features-javascript">Support for new JavaScript features {: #javascript }</h2>
+<p>DevTools now has better support for some of the latest JavaScript language features:</p>
+<ul>
+<li><a href="https://v8.dev/features/logical-assignment">Logical assignment operators</a> - DevTools now supports logical assignment with the new operators <code>&amp;&amp;=</code>, <code>||=</code>, and <code>??=</code> in the Console and Sources panels.</li>
+<li>Pretty-print <a href="https://v8.dev/features/numeric-separators">numeric separators</a> - DevTools now properly pretty-prints the numeric separators in the Sources panel.</li>
+</ul>
+<p>Chromium issues: <a href="https://crbug.com/1086817">1086817</a>, <a href="https://crbug.com/1080569">1080569</a></p>
+<h2 id="lighthouse-6.2-in-the-lighthouse-panel-lighthouse">Lighthouse 6.2 in the Lighthouse panel {: #lighthouse }</h2>
+<p>The Lighthouse panel is now running Lighthouse 6.2. Check out the <a href="https://github.com/GoogleChrome/lighthouse/releases/tag/v6.2.0">release notes</a> for a full list of changes.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/JA6LSMIJs2adZUpKrVic.png”, alt=“Unsize image”, width=“800”, height=“448” %}</p>
+<p>New audits in Lighthouse 6.2:</p>
+<ul>
+<li><strong>Avoid long main thread tasks</strong>. Reports the longest tasks on the main thread, useful for identifying worst contributors to input delay.</li>
+<li><strong>Links are crawlable</strong>. Check if the <code>href</code> attribute of anchor elements links to an appropriate destination, so the links can be discovered.</li>
+<li><strong>Unsized image elements</strong> - Check if an explicit <code>width</code> and <code>height</code> is set on image elements. Explicit image size can reduce layout shifts and improve CLS.</li>
+<li><strong>Avoid non-composited animations</strong>. Reports <a href="https://web.dev/non-composited-animations/">non-composited animations</a> that appear janky and reduce CLS.</li>
+<li><strong>Listens for the <code>unload</code> events</strong>. Reports the <code>unload</code> event. Consider using the <code>pagehide</code> or <code>visibilitychange</code> events instead as the <code>unload</code> event does not fire reliably.</li>
+</ul>
+<p>Updated audits in Lighthouse 6.2:</p>
+<ul>
+<li><strong>Remove unused JavaScript</strong>. Lighthouse will now enhance the audit if a page has publicly-accessible JavaScript source maps.</li>
+</ul>
+<p>Chromium issue: <a href="https://crbug.com/772558">772558</a></p>
+<h2 id="deprecation-of-other-origins-listing-in-the-service-workers-pane-deprecate-sw-other-origins">Deprecation of “other origins” listing in the Service Workers pane {: #deprecate-sw-other-origins }</h2>
+<p>DevTools now provides a link to view the full list of service workers from other origins in a new browser tab - <code>chrome://serviceworker-internals/?devtools</code>.</p>
+<p>Previously DevTools displayed a list nested under the <strong>Application</strong> panel &gt; <strong>Service workers</strong> pane.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/NkuzBGAChhAFXGb5hUTj.png”, alt=“Link to other origins”, width=“800”, height=“473” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/807440">807440</a></p>
+<h2 id="show-coverage-summary-for-filtered-items-filter-coverage-summary">Show coverage summary for filtered items {: #filter-coverage-summary }</h2>
+<p>DevTools now recalculates and displays a summary of coverage information dynamically when filters are applied in the <a href="/docs/devtools/coverage"><strong>Coverage</strong></a> tab. Previously, the <strong>Coverage</strong> tab always displayed a summary of all coverage information.</p>
+<p>In the example below notice how the summary initially says <code>446 kB of 2.0 MB (22%) used so far. 1.5 MB unused.</code> and then says <code>57 kB of 604 kB (10%) used so far. 546 kB unused.</code> after CSS filtering has been applied.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/LL47aWqPhRWssfrS7CG3.png”, alt=“Coverage summary for filtered items”, width=“800”, height=“487” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1090802">1061385</a></p>
+<h2 id="new-frame-details-view-in-application-panel-frame-detailed-view">New frame details view in Application panel {: #frame-detailed-view }</h2>
+<p>DevTools now show a detailed view for each frame. Access it by clicking a frame under the <strong>Frames</strong> menu in the <strong>Application</strong> panel.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/mu4AlNhH4ccBxbxD0Iud.png”, alt=“New frame details view in Application panel”, width=“800”, height=“488” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1093247">1093247</a></p>
+<h3 id="frame-details-for-opened-windows-pop-up-frame-details">Frame details for opened windows {: #pop-up-frame-details }</h3>
+<p>DevTools now displays opened windows / pop-ups under the frame tree as well. The frame details view of the opened windows includes additional security information.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/bjoqstLwlkt4YgI3fPnc.png”, alt=“Opened window frame details”, width=“800”, height=“419” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1107766">1107766</a></p>
+<h3 id="security-and-isolation-information-coep-coop-security-frame-details">Security and isolation information (COEP / COOP) {: #security-frame-details }</h3>
+<p>DevTools now display secure context, <a href="https://web.dev/coop-coep/">Cross-Origin-Embedder-Policy (COEP) and Cross-Origin-Opener-Policy (COOP)</a> in the frame details.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/dKR9CacOdSXMaSnQMCoN.png”, alt=“Security and isolation information”, width=“800”, height=“499” %}</p>
+<p>More security information will be added to the frame details view soon.</p>
+<p>Chromium issue: <a href="https://crbug.com/1051466">1051466</a></p>
+<h2 id="elements-and-network-panel-updates-elements-network">Elements and Network panel updates {: #elements-network }</h2>
+<h3 id="accessible-color-suggestion-in-the-styles-pane-accessible-color">Accessible color suggestion in the Styles pane {: #accessible-color }</h3>
+<p>DevTools now provides color suggestions for low color contrast text.</p>
+<p>In the example below, <code>h1</code> has low contrast text. To fix it, open the color picker of the <code>color</code> property in the Styles pane. After you expand the <strong>Contrast ratio</strong> section, DevTools provides AA and AAA color suggestions. Click on the suggested color to apply the color.</p>
+<p>{% Video src=“video/BrQidfK9jaQyIHwdw91aVpkPiib2/WOjpk44xMhCtDUpZksQf.mp4” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1093227">1093227</a></p>
+<h3 id="reinstate-properties-pane-in-the-elements-panel-properties">Reinstate <strong>Properties</strong> pane in the Elements panel {: #properties }</h3>
+<p>The Properties pane is back, it was <a href="/blog/new-in-devtools-84#properties">deprecated in Chrome 84</a>. In a future version of DevTools, we are going to improve the workflow for inspecting properties of elements.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/pH2dORbQtsgbIPLjPdki.png”, alt=“Properties pane in the Elements panel”, width=“800”, height=“448” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1105205">1105205</a>, <a href="https://crbug.com/1116085">1116085</a></p>
+<h3 id="human-readable-x-client-data-header-values-in-the-network-panel-x-client-data">Human-readable <code>X-Client-Data</code> header values in the Network panel {: #x-client-data }</h3>
+<p>When inspecting a network resource in the Network panel, DevTools now formats any <code>X-Client-Data</code> header values in Headers pane as code.</p>
+<p>The <code>X-Client-Data</code> HTTP header contains a list of experiment IDs and Chrome flags that are enabled in your browser. The raw header values look like opaque strings since they are base-64-encoded, serialized <a href="/protocol-buffers">protocol buffers</a>. To make the contents more transparent to developers, DevTools is now showing the decoded values.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1UGV59FZody02UIJYY9z.png”, alt=“Human-readable <code>X-Client-Data</code> header values”, width=“800”, height=“454” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1103854">1103854</a></p>
+<h3 id="auto-complete-custom-fonts-in-the-styles-pane-auto-complete-custom-fonts">Auto-complete custom fonts in the Styles pane {: #auto-complete-custom-fonts }</h3>
+<p>Imported font faces are now added to the list of CSS auto-completion when editing the <code>font-family</code> property in the <strong>Styles</strong> pane.</p>
+<p>In this example, <code>'Noto Sans'</code> is a custom font installed in the local machine. It is displayed in the CSS completion list. Previously, it was not.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/vGxVqEkbmjCzdrohbrf6.png”, alt=“Auto-complete custom fonts”, width=“800”, height=“440” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1106221">1106221</a></p>
+<h3 id="consistently-display-resource-type-in-network-panel-redirect-resource-type">Consistently display resource type in Network panel {: #redirect-resource-type }</h3>
+<p>DevTools now consistently displays the same resource type as the original network request and appends <code>/ Redirect</code> to the <strong>Type</strong> column value when redirection (status 302) happens.</p>
+<p>Previously DevTools changed the type to <code>Other</code> sometimes.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/PZKRaTCgqsKPIH1Wq4LQ.png”, alt=“Display redirect resource type”, width=“800”, height=“487” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/997694">997694</a></p>
+<h3 id="clear-buttons-in-the-elements-and-network-panels-clear-input-button">Clear buttons in the Elements and Network panels {: #clear-input-button }</h3>
+<p>The filter text boxes in the <strong>Styles</strong> pane and <strong>Network</strong> panel, as well as the DOM search text box in the <strong>Elements</strong> panel, now have <strong>Clear</strong> buttons. Clicking <strong>Clear</strong> removes any text that you have input.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/BKLSpd4HoW62Ql8PbqEp.png”, alt=“Clear buttons in the Elements and Network panels”, width=“800”, height=“454” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1067184">1067184</a></p>
+</body>
+</html>

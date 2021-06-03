@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2019-12-05" />
+  <title>Improved WebAssembly debugging in Chrome DevTools</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Improved WebAssembly debugging in Chrome DevTools</h1>
+<p class="date">2019-12-05</p>
+</header>
+<h2 id="background">Background</h2>
+<p>Until recently, the only WebAssembly debugging that Chrome DevTools supported was viewing raw WebAssembly stack traces, and stepping over individual instructions in a disassembled WebAssembly text format.</p>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/AXC6Bckkc9hmT7Ga8LS5.png”, alt=“A screenshot of the previously limited WebAssembly debugging support in Chrome DevTools.”, width=“800”, height=“390” %}</p>
+<p>While this works with any WebAssembly module and helps somewhat with debugging small, isolated functions, it’s not very practical for larger apps where the mapping between the disassembled code and your sources is less obvious.</p>
+<h3 id="a-temporary-workaround">A temporary workaround</h3>
+<p>To work around this problem, Emscripten and DevTools have temporarily adapted the existing <a href="https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/">source maps</a> format to WebAssembly. This allowed mappings between binary offsets in the compiled module to original locations in source files.</p>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/yfen6cmVLP1GamPXkx4R.png”, alt=“A screenshot of the source-maps-powered debugging.”, width=“800”, height=“390” %}</p>
+<p>However, source maps were designed for text formats with clear mappings to JavaScript concepts and values, not for binary formats like WebAssembly with arbitrary source languages, type systems, and a linear memory. This made the integration hacky, limited, and not widely supported outside Emscripten.</p>
+<h2 id="enter-dwarf">Enter DWARF</h2>
+<p>On the other hand, many native languages already have a common debugging format, <a href="http://dwarfstd.org/">DWARF</a>, that provides all the necessary information for debuggers to resolve locations, variable names, type layouts, and more.</p>
+<p>While there are still some WebAssembly-specific features that need to be added for full compatibility, compilers like Clang and Rust already support emitting DWARF information in WebAssembly modules, which enabled the DevTools team to start using it directly in DevTools.</p>
+<p>As the first step, DevTools now supports native source mapping using this information, so you can start debugging Wasm modules produced by any of these compilers without resorting to the disassembled format or having to use any custom scripts.</p>
+<p>Instead, you just need to tell your compiler to include debug info like you normally would on other platforms. For example, in Clang and Emscripten this can be done by passing a <code>-g</code> flag during compilation:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1">  <span class="fu">clang</span> -g …sources… -target wasm32 -o out.wasm</a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="ex">emcc</span> -g …sources… -o out.js</a></code></pre></div>
+<p>You can use same <code>-g</code> flag in Rust:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1">  <span class="ex">rustc</span> -g source.rs --target wasm32-unknown-unknown -o out.wasm</a></code></pre></div>
+<p>Or, if you’re using Cargo, the debug info will be included by default:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1">  <span class="ex">cargo</span> build --target wasm32-unknown-unknown</a></code></pre></div>
+<p>This new DevTools integration with DWARF already covers support for stepping over the code, setting breakpoints, and resolving stack traces in your source languages.</p>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/JSQtk7ODB2OQxWBVTvDV.png”, alt=“A screenshot of the new DWARF-powered debugging.”, width=“800”, height=“390” %}</p>
+<h2 id="the-future">The future</h2>
+<p>There is still quite a bit of work to do though. For example, on the tooling side, <del>Emscripten (Binaryen) and</del> wasm-pack (wasm-bindgen) doesn’t support updating DWARF information on transformations they perform yet. For now, they won’t benefit from this integration.</p>
+<p>And on the Chrome DevTools side, we’ll be evolving integration more over time to ensure a seamless debugging experience, including:</p>
+<ul>
+<li>Resolving variable names</li>
+<li>Pretty-printing types</li>
+<li>Evaluating expressions in source languages</li>
+<li>…and much more!</li>
+</ul>
+<p>Stay tuned for future updates!</p>
+<p>{% Aside %} <em>Updated 2020-06-19</em>:</p>
+<p>The original blog post used to state that Emscripten doesn’t support DWARF yet. This has been fixed since, and Emscripten preserves debug information end-to-end, throughout any transformations and optimisations. {% endAside %}</p>
+</body>
+</html>

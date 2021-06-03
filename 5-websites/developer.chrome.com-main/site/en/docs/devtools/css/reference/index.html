@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2017-06-09" />
+  <title>CSS features reference</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">CSS features reference</h1>
+<p class="date">2017-06-09</p>
+</header>
+<p>Discover new workflows in this comprehensive reference of Chrome DevTools features related to viewing and changing CSS.</p>
+<p>See <a href="/docs/devtools/css">Get Started with Viewing and Changing CSS</a> to learn the basics.</p>
+<h2 id="select-an-element-select">Select an element {: #select }</h2>
+<p>The <strong>Elements</strong> panel of DevTools lets you view or change the CSS of one element at a time. The selected element is highlighted blue in the <strong>DOM Tree</strong>. The element’s styles are shown in the <strong>Styles</strong> pane. See <a href="/docs/devtools/css#view">View an element’s CSS</a> for a tutorial.</p>
+<p>{% Img src=“image/admin/Iganvpf9K9dEOpSb6wIA.png”, alt=“An example of a selected element”, width=“800”, height=“503” %}</p>
+<p><strong>Figure 1</strong>. The <code>h1</code> element that’s highlighted blue in the <strong>DOM Tree</strong> is the selected element. To the right, the element’s styles are shown in the <strong>Styles</strong> pane. To the left, the element is highlighted in the viewport, but only because the mouse is currently hovering over it in the <strong>DOM Tree</strong></p>
+<p>There are many ways to select an element:</p>
+<ul>
+<li>In your viewport, right-click the element and select <strong>Inspect</strong>.</li>
+<li>In DevTools, click <strong>Select an element</strong> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/7HgaRejtWu4NfpPOTtJU.png”, alt=“Select an element”, width=“26”, height=“26” %} or press <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> (Mac) or <kbd>Control</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> (Windows, Linux), and then click the element in the viewport.</li>
+<li>In DevTools, click the element in the <strong>DOM Tree</strong>.</li>
+<li>In DevTools, run a query like <code>document.querySelector('p')</code> in the <strong>Console</strong>, right-click the result, and then select <strong>Reveal in Elements panel</strong>.</li>
+</ul>
+<h2 id="view-css-view">View CSS {: #view }</h2>
+<h3 id="view-the-external-stylesheet-where-a-rule-is-defined-view-external">View the external stylesheet where a rule is defined {: #view-external }</h3>
+<p>In the <strong>Styles</strong> pane, click the link next to a CSS rule to open the external stylesheet that defines the rule.</p>
+<p>If the stylesheet is minified, see <a href="/docs/devtools/javascript/reference#format">Make a minified file readable</a>.</p>
+<p>{% Img src=“image/admin/DIRRbj70JvHO7EDpeSdC.svg”, alt=“Viewing the stylesheet where a rule is defined”, width=“800”, height=“488” %}</p>
+<p><strong>Figure 2</strong>. Clicking <code>devsite-google-blue.css:487</code> takes you to line 487 of <code>devsite-google-blue.css</code>, where the <code>.devsite-article h1:first-of-type</code> CSS rule is defined.</p>
+<h3 id="view-only-the-css-thats-actually-applied-to-an-element-computed">View only the CSS that’s actually applied to an element {: #computed }</h3>
+<p>The <strong>Styles</strong> tab shows you all of the rules that apply to an element, including declarations that have been overridden. When you’re not interested in overridden declarations, use the <strong>Computed</strong> tab to view only the CSS that’s actually being applied to an element.</p>
+<ol type="1">
+<li><a href="#select">Select an element</a>.</li>
+<li>Go to the <strong>Computed</strong> tab in the <strong>Elements</strong> panel.</li>
+</ol>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> On a wide DevTools window, the <strong>Computed</strong> tab does not exist. The contents of the <strong>Computed</strong> tab are shown on the <strong>Styles</strong> tab.</p>
+<p>{% endAside %}</p>
+<p>Inherited properties are opaque. Check the <strong>Show All</strong> checkbox to see all inherited values.</p>
+<p>{% Img src=“image/admin/QZo3RH4i4zmlurpX8M3B.svg”, alt=“The Computed tab”, width=“800”, height=“488” %}</p>
+<p><strong>Figure 3</strong>. The <strong>Computed</strong> tab shows the CSS properties being applied to the currently-selected <code>h1</code> element</p>
+<h3 id="view-css-properties-in-alphabetical-order-alphabetical">View CSS properties in alphabetical order {: #alphabetical }</h3>
+<p>Use the <strong>Computed</strong> tab. See <a href="#computed">View only the CSS that’s actually applied to an element</a>.</p>
+<h3 id="view-inherited-css-properties-inherited">View inherited CSS properties {: #inherited }</h3>
+<p>Check the <strong>Show All</strong> checkbox in the <strong>Computed</strong> tab. See <a href="#computed">View only the CSS that’s actually applied to an element</a>.</p>
+<h3 id="view-an-elements-box-model-box-model">View an element’s box model {: #box-model }</h3>
+<p>To view <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Box_model">the box model</a> of an element, go to the <strong>Styles</strong> tab. If your DevTools window is narrow, the <strong>Box Model</strong> diagram is at the bottom of the tab.</p>
+<p>To change a value, double-click on it.</p>
+<p>{% Img src=“image/admin/3M83x7zsgaeJctz6B3iu.png”, alt=“The Box Model diagram”, width=“800”, height=“592” %}</p>
+<p><strong>Figure 4</strong>. The <strong>Box Model</strong> diagram in the <strong>Styles</strong> tab shows the box model for the currently selected <code>h1</code> element</p>
+<h3 id="search-and-filter-an-elements-css-filter">Search and filter an element’s CSS {: #filter }</h3>
+<p>Use the <strong>Filter</strong> text box on the <strong>Styles</strong> and <strong>Computed</strong> tabs to search for specific CSS properties or values.</p>
+<p>To also search inherited properties in the <strong>Computed</strong> tab, check the <strong>Show All</strong> checkbox.</p>
+<p>{% Img src=“image/admin/2wXKvRxuWUObC2uNfIJ5.png”, alt=“Filtering the Styles tab”, width=“800”, height=“460” %}</p>
+<p><strong>Figure 5</strong>. Filtering the <strong>Styles</strong> tab to only show rules that include the search query <code>color</code></p>
+<p>{% Img src=“image/admin/sORR9WlEYpkRtltoSHp8.png”, alt=“Filtering the Computed tab”, width=“800”, height=“460” %}</p>
+<p><strong>Figure 6</strong>. Filtering the <strong>Computed</strong> tab to only show declarations that include the search query <code>100%</code></p>
+<h3 id="toggle-a-pseudo-class-pseudo-class">Toggle a pseudo-class {: #pseudo-class }</h3>
+<p>To toggle a pseudo-class like <code>:active</code>, <code>:focus</code>, <code>:hover</code>, <code>:visited</code>, <code>:focus-within</code> or <code>focus-visible</code>:</p>
+<ol type="1">
+<li><a href="#select">Select an element</a>.</li>
+<li>On the <strong>Elements</strong> panel, go to the <strong>Styles</strong> tab.</li>
+<li>Click <strong>:hov</strong>.</li>
+<li>Check the pseudo-class that you want to enable.</li>
+</ol>
+<p>{% Img src=“image/admin/Ag3tYHtZr72Op5Xf1J1A.png”, alt=“Toggling the :hover pseudo-class”, width=“800”, height=“523” %}</p>
+<p><strong>Figure 7</strong>. Toggling the <code>:hover</code> pseudo-class. In the viewport you can see that the <code>background-color: cornflowerblue</code> declaration is being applied to the element, even though the element is not actually being hovered over</p>
+<p>See <a href="/docs/devtools/css#pseudostates">Add a pseudostate to a class</a> for an interactive tutorial.</p>
+<h3 id="view-a-page-in-print-mode-print-mode">View a page in print mode {: #print-mode }</h3>
+<p>To view a page in print mode:</p>
+<ol type="1">
+<li>Open the <a href="/docs/devtools/command-menu">Command Menu</a>.</li>
+<li>Start typing <code>Rendering</code> and select <code>Show Rendering</code>.</li>
+<li>For the <strong>Emulate CSS Media</strong> dropdown, select <strong>print</strong>.</li>
+</ol>
+<h3 id="view-used-and-unused-css-with-the-coverage-tab-coverage">View used and unused CSS with the Coverage tab {: #coverage }</h3>
+<p>The Coverage tab shows you what CSS a page actually uses.</p>
+<ol type="1">
+<li>Press <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (Mac) or <kbd>Control</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> (Windows, Linux, Chrome OS) while DevTools is in focus to open the Command Menu.</li>
+<li><p>Start typing <code>coverage</code> and select <strong>Show Coverage</strong>. The Coverage tab appears.</p>
+<p>{% Img src=“image/admin/w4EnEqO6dqj8nGQEMq6j.png”, alt=“Opening the Coverage tab from the Command Menu.”, width=“800”, height=“526” %}</p>
+<p><strong>Figure 8</strong>. Opening the Coverage tab from the Command Menu</p>
+<p>{% Img src=“image/admin/WiWn2DPIl3HGsiM9hxNa.png”, alt=“The Coverage tab.”, width=“800”, height=“575” %}</p>
+<p><strong>Figure 9</strong>. The Coverage tab</p></li>
+<li><p>Click <strong>Start Instrumenting Coverage And Reload Page</strong> {% Img src=“image/admin/7Nr8n3jly53lAoufh6Tn.png”, alt=“Start Instrumenting Coverage And Reload Page”, width=“24”, height=“25” %}. The page reloads and the Coverage tab provides an overview of how much CSS (and JavaScript) is used from each file that the browser loads. Green represents used CSS. Red represents unused CSS.</p>
+<p>{% Img src=“image/admin/pvGdoYTcYTA5lO0mptQy.png”, alt=“An overview of how much CSS (and JavaScript) is used and unused.”, width=“800”, height=“575” %}</p>
+<p><strong>Figure 10</strong>. An overview of how much CSS (and JavaScript) is used and unused</p></li>
+<li><p>Click a CSS file to see a line-by-line breakdown of what CSS it uses.</p>
+<p>{% Img src=“image/admin/rA1y59EuQv5COtnFX8d7.png”, alt=“A line-by-line breakdown of used and unused CSS.”, width=“800”, height=“646” %}</p>
+<p><strong>Figure 11</strong>. Lines 55 to 57 and 65 to 67 of <code>devsite-google-blue.css</code> are unused, whereas lines 59 to 63 are used</p></li>
+</ol>
+<h3 id="force-print-preview-mode-print">Force print preview mode {: #print }</h3>
+<p>See <a href="/docs/devtools/css/print-preview">Force DevTools Into Print Preview Mode</a>.</p>
+<h2 id="change-css-change">Change CSS {: #change }</h2>
+<h3 id="add-a-css-declaration-to-an-element-add-declaration">Add a CSS declaration to an element {: #add-declaration }</h3>
+<p>Since the order of declarations affects how an element is styled, you can add declarations in different ways:</p>
+<ul>
+<li><a href="#add-declaration-inline">Add a inline declaration</a>. Equivalent to adding a <code>style</code> attribute to the element’s HTML.</li>
+<li><a href="#add-declaration-to-rule">Add a declaration to a style rule</a>.</li>
+</ul>
+<p><strong>What workflow should you use?</strong> For most scenarios, you probably want to use the inline declaration workflow. Inline declarations have higher specificity than external ones, so the inline workflow ensures that the changes take effect in the element as you’d expect. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity#Selector_Types">Selector Types</a> for more on specificity.</p>
+<p>If you’re debugging an element’s styles and you need to specifically test what happens when a declaration is defined in different places, use the other workflow.</p>
+<h4 id="add-an-inline-declaration-add-declaration-inline">Add an inline declaration {: #add-declaration-inline }</h4>
+<p>To add an inline declaration:</p>
+<ol type="1">
+<li><a href="#select">Select an element</a>.</li>
+<li>In the <strong>Styles</strong> pane, click between the brackets of the <strong>element.style</strong> section. The cursor focuses, allowing you to enter text.</li>
+<li>Enter a property name and press <kbd>Enter</kbd>.</li>
+<li>Enter a valid value for that property and press <kbd>Enter</kbd>. In the <strong>DOM Tree</strong>, you can see that a <code>style</code> attribute has been added to the element.</li>
+</ol>
+<p>{% Img src=“image/admin/aUviBexUPdpxXvUbSUxS.png”, alt=“Adding inline declarations”, width=“800”, height=“645” %}</p>
+<p><strong>Figure 12</strong>. The <code>margin-top</code> and <code>background-color</code> properties have been applied to the selected element. In the <strong>DOM Tree</strong> you can see the declarations reflected in the element’s <code>style</code> attribute</p>
+<h4 id="add-a-declaration-to-a-style-rule-add-declaration-to-rule">Add a declaration to a style rule {: #add-declaration-to-rule }</h4>
+<p>To add a declaration to an existing style rule:</p>
+<ol type="1">
+<li><a href="#select">Select an element</a>.</li>
+<li>In the <strong>Styles</strong> pane, click between the brackets of the style rule to which you want to add the declaration. The cursor focuses, allowing you to enter text.</li>
+<li>Enter a property name and press <kbd>Enter</kbd>.</li>
+<li>Enter a valid value for that property and press <kbd>Enter</kbd>.</li>
+</ol>
+<p><strong>Figure 13</strong>. Adding the <code>border-bottom-style:groove</code> declaration to a style rule</p>
+<h3 id="change-a-declaration-name-or-value-change-declaration">Change a declaration name or value {: #change-declaration }</h3>
+<p>Double-click a declaration’s name or value to change it. See <a href="#values-shortcuts">Change declaration values with keyboard shortcuts</a> for shortcuts for quickly incrementing or decrementing a value by 0.1, 1, 10, or 100 units.</p>
+<p>{% Img src=“image/admin/dQMFYTxsVz5WxQpuvRga.png”, alt=“Changing the value of a declaration”, width=“800”, height=“547” %}</p>
+<h3 id="change-declaration-values-with-keyboard-shortcuts-values-shortcuts">Change declaration values with keyboard shortcuts {: #values-shortcuts }</h3>
+<p>While editing the value of a declaration, you can use the following keyboard shortcuts to increment the value by a fixed amount:</p>
+<ul>
+<li><kbd>Option</kbd>+<kbd>Up</kbd> (Mac) or <kbd>Alt</kbd>+<kbd>Up</kbd> (Windows, Linux) to increment by 0.1.</li>
+<li><kbd>Up</kbd> to change the value by 1, or by 0.1 if the current value is between -1 and 1.</li>
+<li><kbd>Shift</kbd>+<kbd>Up</kbd> to increment by 10.</li>
+<li><kbd>Shift</kbd>+<kbd>Command</kbd>+<kbd>Up</kbd> (Mac) or <kbd>Shift</kbd>+<kbd>Page Up</kbd> (Windows, Linux) to increment the value by 100.</li>
+</ul>
+<p>Decrementing also works. Just replace each instance of <kbd>Up</kbd> mentioned above with <kbd>Down</kbd>.</p>
+<h3 id="add-a-class-to-an-element-add-class">Add a class to an element {: #add-class }</h3>
+<p>To add a class to an element:</p>
+<ol type="1">
+<li><a href="#select">Select the element</a> in the <strong>DOM Tree</strong>.</li>
+<li>Click <strong>.cls</strong>.</li>
+<li>Enter the name of the class in the <strong>Add New Class</strong> text box.</li>
+<li>Press <kbd>Enter</kbd>.</li>
+</ol>
+<p>{% Img src=“image/admin/US4gZWGNdDcz4MswYkV3.svg”, alt=“The Element Classes pane”, width=“800”, height=“460” %}</p>
+<p><strong>Figure 14</strong>. The <strong>Element Classes</strong> pane</p>
+<h3 id="toggle-a-class-toggle-class">Toggle a class {: #toggle-class }</h3>
+<p>To enable or disable a class on an element:</p>
+<ol type="1">
+<li><a href="#select">Select the element</a> in the <strong>DOM Tree</strong>.</li>
+<li>Open the <strong>Element Classes</strong> pane. See <a href="#add-class">Add a class to an element</a>. Below the <strong>Add New Class</strong> text box are all of the classes that are being applied to this element.</li>
+<li>Toggle the checkbox next to the class that you want to enable or disable.</li>
+</ol>
+<h3 id="add-a-style-rule-style-rule">Add a style rule {: #style-rule }</h3>
+<p>To add a new style rule:</p>
+<ol type="1">
+<li><a href="#select">Select an element</a>.</li>
+<li>Click <strong>New Style Rule</strong> {% Img src=“image/admin/XcURsD5IoAJqI4TwgY4w.png”, alt=“New Style Rule”, width=“20”, height=“20” %}. DevTools inserts a new rule beneath the <strong>element.style</strong> rule.</li>
+</ol>
+<p>{% Img src=“image/admin/yAkLVkP6eeeBihslr7oy.png”, alt=“Adding a new style rule”, width=“800”, height=“599” %}</p>
+<p><strong>Figure 15</strong>. DevTools adds the <code>h1.devsite-page-title</code> style rule after clicking <strong>New Style Rule</strong></p>
+<h4 id="choose-which-stylesheet-to-add-a-rule-to-style-rule-stylesheet">Choose which stylesheet to add a rule to {: #style-rule-stylesheet }</h4>
+<p>When <a href="#style-rule">adding a new style rule</a>, click and hold <strong>New Style Rule</strong> <img src="/docs/devtools/css/imgs/new-style-rule.png" alt="New Style Rule" /> to choose which stylesheet to add the style rule to.</p>
+<p>{% Img src=“image/admin/QEehBhl9E7tfEwyfdWgO.png”, alt=“Choosing a stylesheet”, width=“800”, height=“599” %}</p>
+<p><strong>Figure 16</strong>. Choosing a stylesheet</p>
+<h3 id="toggle-a-declaration-toggle-declaration">Toggle a declaration {: #toggle-declaration }</h3>
+<p>To toggle a single declaration on or off:</p>
+<ol type="1">
+<li><a href="#select">Select an element</a>.</li>
+<li>In the <strong>Styles</strong> pane, hover over the rule that defines the declaration. Checkboxes appear next to each declaration.</li>
+<li>Check or uncheck the checkbox next to the declaration. When you uncheck a declaration, DevTools crosses it out to indicate that it’s no longer active.</li>
+</ol>
+<p>{% Img src=“image/admin/Z36P2RuDUFAFIp8kTZ6N.png”, alt=“Toggling a declaration”, width=“800”, height=“608” %}</p>
+<p><strong>Figure 20</strong>. The <code>color</code> property for the currently-selected element has been toggled off</p>
+<h3 id="change-colors-with-the-color-picker-color-picker">Change colors with the Color Picker {: #color-picker }</h3>
+<p>The <strong>Color Picker</strong> provides a GUI for changing <code>color</code> and <code>background-color</code> declarations.</p>
+<p>To open the <strong>Color Picker</strong>:</p>
+<ol type="1">
+<li><a href="#select">Select an element</a>.</li>
+<li><p>In the <strong>Styles</strong> tab, find the <code>color</code> or <code>background-color</code> declaration that you want to change. To the left of the <code>color</code> or <code>background-color</code> value, there is a small square which is a preview of the color.</p>
+<p>{% Img src=“image/admin/SuJ1WT25iaaOgt8iWQzj.png”, alt=“Color preview”, width=“800”, height=“517” %}</p>
+<p><strong>Figure 24</strong>. The small blue square to the left of <code>rgb(123, 170, 247)</code> is a preview of that color</p></li>
+<li><p>Click the preview to open the <strong>Color Picker</strong>.</p>
+<p>{% Img src=“image/admin/i8pU9ALTZwhbvrhlXGm7.png”, alt=“The Color Picker”, width=“800”, height=“624” %}</p>
+<p><strong>Figure 25</strong>. The <strong>Color Picker</strong></p></li>
+</ol>
+<p>Here’s a description of each of the UI elements of the <strong>Color Picker</strong>:</p>
+<p>{% Img src=“image/admin/kAtu8Uoi2x8IFvaX561h.svg”, alt=“The Color Picker, annotated”, width=“800”, height=“548” %}</p>
+<p><strong>Figure 26</strong>. The <strong>Color Picker</strong>, annotated</p>
+<ol type="1">
+<li><strong>Shades</strong>.</li>
+<li><strong>Eyedropper</strong>. See <a href="#eyedropper">Sample a color off the page with the Eyedropper</a>.</li>
+<li><strong>Copy To Clipboard</strong>. Copy the <strong>Display Value</strong> to your clipboard.</li>
+<li><strong>Display Value</strong>. The RGBA, HSLA, or Hex representation of the color.</li>
+<li><strong>Color Palette</strong>. Click one of these squares to change the color to that square.</li>
+<li><strong>Hue</strong>.</li>
+<li><strong>Opacity</strong>.</li>
+<li><strong>Display Value Switcher</strong>. Toggle between the RGBA, HSLA, and Hex representations of the current color.</li>
+<li><strong>Color Palette Switcher</strong>. Toggle between the <a href="https://material.io/design/color/the-color-system.html#color-usage-and-palettes">Material Design palette</a>, a custom palette, or a page colors palette. DevTools generates the page color palette based on the colors that it finds in your stylesheets.</li>
+</ol>
+<h4 id="sample-a-color-off-the-page-with-the-eyedropper-eyedropper">Sample a color off the page with the Eyedropper {: #eyedropper }</h4>
+<p>When you open the <strong>Color Picker</strong>, the <strong>Eyedropper</strong> {% Img src=“image/admin/FCjp9jpqJo8tAB7LneFU.png”, alt=“Eyedropper”, width=“28”, height=“28” %} is on by default. To change the selected color to some other color on the page:</p>
+<ol type="1">
+<li>Hover over the target color in the viewport.</li>
+<li><p>Click to confirm.</p>
+<p>{% Img src=“image/admin/7g1d1iGpJgm98vIHA6pA.png”, alt=“Using the Eyedropper”, width=“800”, height=“529” %}</p>
+<p><strong>Figure 27</strong>. The <strong>Color Picker</strong> shows a current color value of <code>#212121</code>, which is close to black. This color would change to the blue that’s currently highlighted in the viewport once the blue was clicked</p></li>
+</ol>
+<h3 id="change-angle-value-with-the-angle-clock-angle-clock">Change angle value with the Angle Clock {: #angle-clock }</h3>
+<p>The <strong>Angle Clock</strong> provides a GUI for changing <code>&lt;angle&gt;</code>s in CSS property values.</p>
+<p>To open the <strong>Angle Clock</strong>:</p>
+<ol type="1">
+<li><a href="#select">Select an element</a> with angle declaration. For example, select the text below.</li>
+<li><p>In the <strong>Styles</strong> tab, find the <code>transform</code> or <code>background</code> declaration that you want to change. Click on the <strong>Angle Preview</strong> box next to the angle value.</p>
+<p>{% Img src=“image/admin/EjXqoXmADgOgKMRQSBsP.png”, alt=“Angle preview”, width=“800”, height=“661” %}</p>
+<p><strong>Figure 28</strong>. The small clock to the left of <code>-5deg</code> and <code>0.25turn</code> are preview of the angle.</p></li>
+<li><p>Click the preview to open the <strong>Angle Clock</strong>.</p>
+<p>{% Img src=“image/admin/CykQzGfW2DfCt2VUmTcR.png”, alt=“Angle clock”, width=“800”, height=“723” %}</p>
+<p><strong>Figure 29</strong>. The Angle Clock.</p></li>
+<li>Change the angle value by clicking on the <strong>Angle Clock</strong> circle or scroll your mouse to increase / decrease the angle value by 1.</li>
+<li><p>There are more keyboard shortcuts to change the angle value. Find out more in the <a href="/docs/devtools/shortcuts#styles">Styles pane keyboard shortcuts</a>.</p></li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.hi</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="एक-अंतरिक्ष-खेल-बनाएँ-भाग-६-अंत-और-पुनः-आरंभ">एक अंतरिक्ष खेल बनाएँ भाग ६: अंत और पुनः आरंभ</h1>
+<h2 id="प्री-रीडिंग-क्विज">प्री-रीडिंग क्विज</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/39?loc=hi">प्री-रीडिंग क्विज</a></p>
+<p>एक खेल में व्यक्त करने और <em>अंतिम स्थिति</em> के विभिन्न तरीके हैं। यह गेम के निर्माता के रूप में यह कहना है कि खेल क्यों समाप्त हो गया है। यहाँ कुछ कारण हैं, अगर हम मान लें कि हम उस अंतरिक्ष खेल के बारे में बात कर रहे हैं जो आप अभी तक बना रहे हैं:</p>
+<ul>
+<li><strong><code>N</code> दुश्मन के जहाज तबाह हो गए हैं</strong>: यदि आप एक गेम को विभिन्न स्तरों में विभाजित करते हैं तो यह काफी सामान्य है कि आपको एक स्तर पूरा करने के लिए <code>N</code> दुश्मन जहाजों को नष्ट करने की आवश्यकता है</li>
+<li><strong>आपका जहाज नष्ट हो गया है</strong>: यदि आपका जहाज नष्ट हो जाता है तो निश्चित रूप से ऐसे खेल हैं जहाँ आप खेल को खो देते हैं। एक और आम दृष्टिकोण यह है कि आपके पास जीवन की अवधारणा है। हर बार जब आपका जहाज नष्ट हो जाता है तो यह जीवन काट देता है। एक बार जब सभी जान चली गई तो आप खेल खो देते हैं.</li>
+<li><strong>आपने <code>N</code> अंक एकत्र किए हैं</strong>: एक और सामान्य अंतिम स्थिति आपके लिए अंक एकत्र करने की है। आप कैसे अंक प्राप्त करते हैं, यह आपके ऊपर है, लेकिन दुश्मन के जहाज को नष्ट करने या शायद वस्तुओं को इकट्ठा करने जैसी विभिन्न गतिविधियों के लिए अंक प्रदान करना काफी सामान्य है, जब वे <em>गिर</em> जाते हैं।.</li>
+<li><strong>एक स्तर पूरा करें</strong>: इसमें कई स्थितियां शामिल हो सकती हैं जैसे कि <code>X</code> दुश्मन के जहाज नष्ट,<code>Y</code> अंक एकत्र या शायद एक विशिष्ट आइटम एकत्र किया गया है.</li>
+</ul>
+<h2 id="पुनरारंभ">पुनरारंभ</h2>
+<p>यदि लोग आपके खेल का आनंद लेते हैं, तो वे इसे फिर से खेलना चाहते हैं। एक बार खेल जो भी कारण से आप को पुनरारंभ करने के लिए एक विकल्प की पेशकश के लिए समाप्त होता है.</p>
+<p>✅ इस बारे में थोड़ा सोचें कि आपको किन परिस्थितियों में गेम समाप्त होता है, और फिर आपको कैसे पुनरारंभ करने के लिए प्रेरित किया जाता है</p>
+<h2 id="क्या-बनना-है">क्या बनना है</h2>
+<p>आप इन नियमों को अपने खेल में शामिल करेंगे:</p>
+<ol type="1">
+<li><strong>खेल जीतना</strong>. एक बार सभी दुश्मन जहाजों को नष्ट कर दिए जाने के बाद, आप गेम जीतते हैं। इसके अतिरिक्त किसी प्रकार का विजय संदेश प्रदर्शित करें.</li>
+<li><strong>पुनरारंभ</strong>. एक बार जब आपका सारा जीवन खो जाता है या खेल जीत जाता है, तो आपको खेल को पुनः आरंभ करने का एक तरीका पेश करना चाहिए। याद है! आपको खेल को फिर से संगठित करना होगा और पिछले खेल की स्थिति को साफ करना चाहिए.</li>
+</ol>
+<h2 id="अनुशंसित-कदम">अनुशंसित कदम</h2>
+<p>उन फ़ाइलों का पता लगाएँ जो आपके लिए <code>your-work</code> सब फ़ोल्डर में बनाई गई हैं। इसमें निम्नलिखित शामिल होना चाहिए:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">-</span><span class="kw">|</span> <span class="ex">assets</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">enemyShip.png</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">player.png</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">laserRed.png</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">life.png</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="ex">-</span><span class="kw">|</span> <span class="ex">index.html</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="ex">-</span><span class="kw">|</span> <span class="ex">app.js</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="ex">-</span><span class="kw">|</span> <span class="ex">package.json</span></a></code></pre></div>
+<p>आप टाइप करके अपना प्रोजेक्ट <code>your_work</code> फ़ोल्डर शुरू करें:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="bu">cd</span> your-work</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="ex">npm</span> start</a></code></pre></div>
+<p>उपरोक्त पते पर एक HTTP सर्वर शुरू होगा <code>http: // localhost: 5000</code>। एक ब्राउज़र खोले और उस पतेको खोलें। आपका खेल खेलने योग्य अवस्था में होना चाहिए</p>
+<blockquote>
+<p>टिप: विज़ुअल स्टूडियो कोड में चेतावनियों से बचने के लिए, <code>window.onload</code> फ़ंक्शन को<code>gameLoopId</code> के रूप में (<code>let</code> के बिना) के रूप में संपादित करने के लिए संपादित करें, और स्वतंत्र रूप से फ़ाइल के शीर्ष पर gameLoopId की घोषणा करें, <code>let gameLoopId</code>;</p>
+</blockquote>
+<h3 id="कोड-जोड़े">कोड जोड़े</h3>
+<ol type="1">
+<li><p><strong>ट्रैक एंड कंडीशन</strong>. उन कोडों को जोड़ें जो दुश्मनों की संख्या का ट्रैक रखते हैं, या यदि इन दो कार्यों को जोड़ते हुए नायक जहाज को नष्ट कर दिया गया है:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">function</span> <span class="at">isHeroDead</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="cf">return</span> <span class="va">hero</span>.<span class="at">life</span> <span class="op">&lt;=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="kw">function</span> <span class="at">isEnemiesDead</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="kw">const</span> enemies <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>(</a>
+<a class="sourceLine" id="cb3-7" title="7">    (go) <span class="kw">=&gt;</span> <span class="va">go</span>.<span class="at">type</span> <span class="op">===</span> <span class="st">&quot;Enemy&quot;</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="va">go</span>.<span class="at">dead</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="cf">return</span> <span class="va">enemies</span>.<span class="at">length</span> <span class="op">===</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>संदेश संचालकों में तर्क जोड़ें</strong>. इन स्थितियों को संभालने के लिए <code>EventEmitter</code> संपादित करें:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> first<span class="op">,</span> second <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="va">first</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="va">second</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="va">hero</span>.<span class="at">incrementPoints</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="cf">if</span> (<span class="at">isEnemiesDead</span>()) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">GAME_END_WIN</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_HERO</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> enemy <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-12" title="12">  <span class="va">enemy</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-13" title="13">  <span class="va">hero</span>.<span class="at">decrementLife</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-14" title="14">  <span class="cf">if</span> (<span class="at">isHeroDead</span>()) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-15" title="15">    <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">GAME_END_LOSS</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">    <span class="cf">return</span><span class="op">;</span> <span class="co">// loss before victory</span></a>
+<a class="sourceLine" id="cb4-17" title="17">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-18" title="18">  <span class="cf">if</span> (<span class="at">isEnemiesDead</span>()) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-19" title="19">    <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">GAME_END_WIN</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-20" title="20">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-21" title="21"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-22" title="22"></a>
+<a class="sourceLine" id="cb4-23" title="23"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">GAME_END_WIN</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-24" title="24">  <span class="at">endGame</span>(<span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-25" title="25"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-26" title="26"></a>
+<a class="sourceLine" id="cb4-27" title="27"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">GAME_END_LOSS</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-28" title="28">  <span class="at">endGame</span>(<span class="kw">false</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-29" title="29"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div></li>
+<li><p><strong>नए संदेश प्रकार जोड़ें</strong>. इन संदेशों को स्थिरांक वस्तु में जोड़ें:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1">GAME_END_LOSS<span class="op">:</span> <span class="st">&quot;GAME_END_LOSS&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-2" title="2">GAME_END_WIN<span class="op">:</span> <span class="st">&quot;GAME_END_WIN&quot;</span><span class="op">,</span></a></code></pre></div></li>
+<li><p><strong>पुनः आरंभ कोड जोड़ें</strong> कोड जो चयनित बटन के प्रेस पर गेम को पुनरारंभ करता है.</p>
+<ol type="1">
+<li><strong><code>Enter</code> की प्रेस सुनो</strong>. इस प्रेस को सुनने के लिए अपनी विंडो के इवेंटलिस्ट को एडिट करें:</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"> <span class="cf">else</span> <span class="cf">if</span>(<span class="va">evt</span>.<span class="at">key</span> <span class="op">===</span> <span class="st">&quot;Enter&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">    <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_ENTER</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="op">}</span></a></code></pre></div>
+<ol type="1">
+<li><p><strong>पुनः आरंभ संदेश जोड़ें</strong>. इस संदेश को अपने संदेशों में लगातार जोड़ें:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1">KEY_EVENT_ENTER<span class="op">:</span> <span class="st">&quot;KEY_EVENT_ENTER&quot;</span><span class="op">,</span></a></code></pre></div></li>
+</ol></li>
+<li><p><strong>खेल के नियमों को लागू करें</strong>. निम्नलिखित खेल नियमों को लागू करें:</p>
+<ol type="1">
+<li><p><strong>खिलाड़ी शर्त जीता</strong>. जब सभी दुश्मन जहाज नष्ट हो जाते हैं, तो एक जीत संदेश प्रदर्शित करें.</p>
+<ol type="1">
+<li>सबसे पहले, एक <code>displayMessage()</code> फ़ंक्शन बनाएँ:</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">function</span> <span class="at">displayMessage</span>(message<span class="op">,</span> color <span class="op">=</span> <span class="st">&quot;red&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="va">ctx</span>.<span class="at">font</span> <span class="op">=</span> <span class="st">&quot;30px Arial&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> color<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="va">ctx</span>.<span class="at">textAlign</span> <span class="op">=</span> <span class="st">&quot;center&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="va">ctx</span>.<span class="at">fillText</span>(message<span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span> / <span class="dv">2</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span> / <span class="dv">2</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="op">}</span></a></code></pre></div>
+<ol type="1">
+<li>एक <code>endGame()</code> फ़ंक्शन बनाएँ:</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">function</span> <span class="at">endGame</span>(win) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="at">clearInterval</span>(gameLoopId)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"></a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="co">// set a delay so we are sure any paints have finished</span></a>
+<a class="sourceLine" id="cb9-5" title="5">  <span class="at">setTimeout</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="va">ctx</span>.<span class="at">clearRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-7" title="7">    <span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;black&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-8" title="8">    <span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-9" title="9">    <span class="cf">if</span> (win) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-10" title="10">      <span class="at">displayMessage</span>(</a>
+<a class="sourceLine" id="cb9-11" title="11">        <span class="st">&quot;Victory!!! Pew Pew... - Press [Enter] to start a new game Captain Pew Pew&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb9-12" title="12">        <span class="st">&quot;green&quot;</span></a>
+<a class="sourceLine" id="cb9-13" title="13">      )<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-14" title="14">    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-15" title="15">      <span class="at">displayMessage</span>(</a>
+<a class="sourceLine" id="cb9-16" title="16">        <span class="st">&quot;You died !!! Press [Enter] to start a new game Captain Pew Pew&quot;</span></a>
+<a class="sourceLine" id="cb9-17" title="17">      )<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-18" title="18">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb9-19" title="19">  <span class="op">},</span> <span class="dv">200</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-20" title="20"><span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>तर्क पुनः आरंभ</strong>. जब सभी जीवन खो जाते हैं या खिलाड़ी खेल जीत जाता है, तो प्रदर्शित करें कि खेल को फिर से शुरू किया जा सकता है। इसके अलावा खेल को पुनरारंभ करें जब <em>पुनरारंभ</em> की हिट होती है (आप तय कर सकते हैं कि पुनरारंभ करने के लिए किस की को मैप किया जाना चाहिए).</p>
+<ol type="1">
+<li><code>ResetGame()</code> फ़ंक्शन बनाएँ:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">function</span> <span class="at">resetGame</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="cf">if</span> (gameLoopId) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="at">clearInterval</span>(gameLoopId)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="va">eventEmitter</span>.<span class="at">clear</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-5" title="5">    <span class="at">initGame</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-6" title="6">    gameLoopId <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-7" title="7">      <span class="va">ctx</span>.<span class="at">clearRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-8" title="8">      <span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;black&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-9" title="9">      <span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-10" title="10">      <span class="at">drawPoints</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-11" title="11">      <span class="at">drawLife</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-12" title="12">      <span class="at">updateGameObjects</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-13" title="13">      <span class="at">drawGameObjects</span>(ctx)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-14" title="14">    <span class="op">},</span> <span class="dv">100</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-15" title="15">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-16" title="16"><span class="op">}</span></a></code></pre></div></li>
+<li><p><code>InitGame()</code> में गेम को रीसेट करने के लिए<code>EventEmitter</code> में कॉल जोड़ें:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_ENTER</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="at">resetGame</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div></li>
+<li><p>EventEmitter में <code>clear()</code> फ़ंक्शन जोड़ें:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="at">clear</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="kw">this</span>.<span class="at">listeners</span> <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="op">}</span></a></code></pre></div></li>
+</ol></li>
+</ol>
+<p>👽 💥 🚀 बधाई हो, कैप्टन! आपका खेल पूरा हो गया है! बहुत बढ़िया! 🚀 💥 👽</p>
+<hr />
+<h2 id="चुनौती">🚀 चुनौती</h2>
+<p>एक ध्वनि जोड़ें! क्या आप अपने गेम खेलने को बढ़ाने के लिए एक ध्वनि जोड़ सकते हैं, हो सकता है कि जब कोई लेजर हिट हो, या नायक मर जाए या जीत जाए? जावास्क्रिप्ट का उपयोग करके ध्वनि कैसे खेलें, यह जानने के लिए इस <a href="https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_audio_play">सैंडबॉक्स</a> पर एक नज़र डालें</p>
+<h2 id="पोस्ट-व्याख्यान-प्रश्नोत्तरी">पोस्ट-व्याख्यान प्रश्नोत्तरी</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/40?loc=hi">पोस्ट-व्याख्यान प्रश्नोत्तरी</a></p>
+<h2 id="समीक्षा-और-स्व-अध्ययन">समीक्षा और स्व अध्ययन</h2>
+<p>आपका असाइनमेंट एक फ्रेश सैंपल गेम बनाना है, इसलिए वहां के कुछ दिलचस्प गेम्स को देखें कि आप किस प्रकार के गेम का निर्माण कर सकते हैं.</p>
+<h2 id="असाइनमेंट">असाइनमेंट</h2>
+<p><a href="assignment.hi.md">एक नमूना खेल बनाएँ</a></p>
+</body>
+</html>

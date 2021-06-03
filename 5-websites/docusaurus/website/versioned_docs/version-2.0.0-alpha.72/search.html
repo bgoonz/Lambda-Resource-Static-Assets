@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="keywords" content="algolia, search" />
+  <title>Search</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Search</h1>
+</header>
+<p>Docusaurus’ own <code>@docusaurus/preset-classic</code> supports a search integration.</p>
+<p>There are two main options, you can use <a href="https://docsearch.algolia.com">Algolia DocSearch</a> or bring in your own <code>SearchBar</code> component.</p>
+<h2 id="using-algolia-docsearch">Using Algolia DocSearch</h2>
+<p>Algolia DocSearch works by crawling the content of your website every 24 hours and putting all the content in an Algolia index. This content is then queried directly from your front-end using the Algolia API. Note that your website needs to be publicly available for this to work (i.e., not behind a firewall). The service is free.</p>
+<p>If your website is <a href="https://docsearch.algolia.com/docs/who-can-apply">not eligible</a> for the free, hosted version of DocSearch, or if your website sits behind a firewall, then you can <a href="https://docsearch.algolia.com/docs/run-your-own/">run your own</a> DocSearch crawler. For best results, you may want to use a config file based on the <a href="https://github.com/algolia/docsearch-configs/blob/master/configs/docusaurus-2.json">Docusaurus 2 config</a>.</p>
+<h3 id="connecting-algolia">Connecting Algolia</h3>
+<p>To connect your docs with Algolia, add an <code>algolia</code> field in your <code>themeConfig</code>. <strong><a href="https://docsearch.algolia.com/apply/">Apply for DocSearch</a></strong> to get your Algolia index and API key.</p>
+<p>```jsx title=“docusaurus.config.js” module.exports = { // … themeConfig: { // … // highlight-start algolia: { apiKey: ‘YOUR_API_KEY’, indexName: ‘YOUR_INDEX_NAME’,</p>
+<pre><code>  // Optional: see doc section below
+  contextualSearch: true,
+
+  // Optional: Algolia search parameters
+  searchParameters: {},
+
+  //... other Algolia params
+},
+// highlight-end</code></pre>
+<p>}, }; ```</p>
+<div class="info">
+<p>The <code>searchParameters</code> option used to be named <code>algoliaOptions</code> in Docusaurus v1.</p>
+</div>
+<h3 id="contextual-search">Contextual search</h3>
+<p>Contextual search is mostly useful for versioned Docusaurus sites.</p>
+<p>Let’s consider you have 2 docs versions, v1 and v2. When you are browsing v2 docs, it would be odd to return search results for the v1 documentation. Sometimes v1 and v2 docs are quite similar, and you would end up with duplicate search results for the same query (one result per version).</p>
+<p>To solve this problem, the contextual search feature understands that you are browsing a specific docs version, and will create the search query filters dynamically.</p>
+<ul>
+<li>browsing <code>/docs/v1/myDoc</code>, search results will only include <strong>v1</strong> docs (+ other unversioned pages)</li>
+<li>browsing <code>/docs/v2/myDoc</code>, search results will only include <strong>v2</strong> docs (+ other unversioned pages)</li>
+</ul>
+<p><code>jsx title="docusaurus.config.js" module.exports = {   // ...   themeConfig: {     // ...     // highlight-start     algolia: {       contextualSearch: true,     },     // highlight-end   }, };</code></p>
+<div class="caution">
+<p>When using <code>contextualSearch: true</code>, the contextual facet filters will be merged with the ones provided with <code>algolia.searchParameters.facetFilters</code>.</p>
+</div>
+<h3 id="styling-your-algolia-search">Styling your Algolia search</h3>
+<p>By default, DocSearch comes with a fine-tuned theme that was designed for accessibility, making sure that colors and contrasts respect standards.</p>
+<p>Still, you can reuse the <a href="styling-layout#styling-your-site-with-infima">Infima CSS variables</a> from Docusaurus to style DocSearch by editing the <code>/src/css/custom.css</code> file.</p>
+<p>```css title=“/src/css/custom.css” html[data-theme=‘light’] .DocSearch { /* –docsearch-primary-color: var(–ifm-color-primary); <em>/ /</em> –docsearch-text-color: var(–ifm-font-color-base); <em>/ –docsearch-muted-color: var(–ifm-color-secondary-darkest); –docsearch-container-background: rgba(94, 100, 112, 0.7); /</em> Modal <em>/ –docsearch-modal-background: var(–ifm-color-secondary-lighter); /</em> Search box <em>/ –docsearch-searchbox-background: var(–ifm-color-secondary); –docsearch-searchbox-focus-background: var(–ifm-color-white); /</em> Hit <em>/ –docsearch-hit-color: var(–ifm-font-color-base); –docsearch-hit-active-color: var(–ifm-color-white); –docsearch-hit-background: var(–ifm-color-white); /</em> Footer */ –docsearch-footer-background: var(–ifm-color-white); }</p>
+<p>html[data-theme=‘dark’] .DocSearch { –docsearch-text-color: var(–ifm-font-color-base); –docsearch-muted-color: var(–ifm-color-secondary-darkest); –docsearch-container-background: rgba(47, 55, 69, 0.7); /* Modal <em>/ –docsearch-modal-background: var(–ifm-background-color); /</em> Search box <em>/ –docsearch-searchbox-background: var(–ifm-background-color); –docsearch-searchbox-focus-background: var(–ifm-color-black); /</em> Hit <em>/ –docsearch-hit-color: var(–ifm-font-color-base); –docsearch-hit-active-color: var(–ifm-color-white); –docsearch-hit-background: var(–ifm-color-emphasis-100); /</em> Footer */ –docsearch-footer-background: var(–ifm-background-surface-color); –docsearch-key-gradient: linear-gradient( -26.5deg, var(–ifm-color-emphasis-200) 0%, var(–ifm-color-emphasis-100) 100% ); } ```</p>
+<h3 id="customizing-the-algolia-search-behavior">Customizing the Algolia search behavior</h3>
+<!-- TODO: update options link once the documentation is available on the DocSearch website -->
+<p>Algolia DocSearch supports a <a href="https://autocomplete-experimental.netlify.app/docs/DocSearchModal#reference">list of options</a> that you can pass to the <code>algolia</code> field in the <code>docusaurus.config.js</code> file.</p>
+<p><code>js title="docusaurus.config.js" module.exports = {   themeConfig: {     // ...     algolia: {       apiKey: 'YOUR_API_KEY',       indexName: 'YOUR_INDEX_NAME',       // Options...     },   }, };</code></p>
+<h3 id="editing-the-algolia-search-component">Editing the Algolia search component</h3>
+<p>If you prefer to edit the Algolia search React component, swizzle the <code>SearchBar</code> component in <code>@docusaurus/theme-search-algolia</code>:</p>
+<p><code>bash npm2yarn npm run swizzle @docusaurus/theme-search-algolia SearchBar</code></p>
+<h2 id="using-your-own-search">Using your own search</h2>
+<p>To use your own search, swizzle the <code>SearchBar</code> component in <code>@docusaurus/theme-classic</code></p>
+<p><code>bash npm2yarn npm run swizzle @docusaurus/theme-classic SearchBar</code></p>
+<p>This will create a <code>src/themes/SearchBar</code> file in your project folder. Restart your dev server and edit the component, you will see that Docusaurus uses your own <code>SearchBar</code> component now.</p>
+<p><strong>Notes</strong>: You can alternatively <a href="#editing-the-algolia-search-component">swizzle from Algolia SearchBar</a> and create your own search component from there.</p>
+</body>
+</html>

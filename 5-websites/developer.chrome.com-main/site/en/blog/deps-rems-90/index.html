@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2021-03-11" />
+  <title>Deprecations and removals in Chrome 90</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Deprecations and removals in Chrome 90</h1>
+<p class="date">2021-03-11</p>
+</header>
+<p>{% include ‘partials/see-all-dep-rem.md’ %}</p>
+<p>Chrome 90 beta was released on March 11, 2021 and is expected to become the stable version in mid April, 2021.</p>
+<h2 id="remove-content-security-policy-directive-plugin-types">Remove Content Security Policy directive ‘plugin-types’</h2>
+<p>The <a href="https://www.chromestatus.com/feature/5742693948850176"><code>'plugin-types'</code> directive allows developers to restrict</a> which types of plugin can be loaded via <code>&lt;embed&gt;</code> or <code>&lt;object&gt;</code> html elements. This allowed developers to block Flash in their pages. Since Flash support has been discontinued, there is no longer any need for this policy directive.</p>
+<h2 id="remove-webrtc-rtp-data-channels">Remove WebRTC RTP data channels</h2>
+<p>Chrome has <a href="https://www.chromestatus.com/feature/6485681910054912">removed support for the non-standard RTP data channels</a> in WebRTC. Users should use the standard SCTP-based data channels instead.</p>
+<h2 id="return-empty-for-navigator.plugins-and-navigator.mimetypes">Return empty for navigator.plugins and navigator.mimeTypes</h2>
+<p>Chrome <a href="https://www.chromestatus.com/feature/5741884322349056">now returns empty for <code>navigator.plugins</code> and <code>navigator.mimeTypes</code></a>. With the removal of Flash, there is no longer the need to return anything for these properties.</p>
+<p>{% include ‘partials/deprecations-policy.md’ %}</p>
+</body>
+</html>

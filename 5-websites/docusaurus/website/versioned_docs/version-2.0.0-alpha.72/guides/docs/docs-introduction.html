@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Docs Introduction</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Docs Introduction</h1>
+</header>
+<p>The docs feature provides users with a way to organize Markdown files in a hierarchical format.</p>
+<h2 id="document-id">Document ID</h2>
+<p>Every document has a unique <code>id</code>. By default, a document <code>id</code> is the name of the document (without the extension) relative to the root docs directory.</p>
+<p>For example, <code>greeting.md</code> id is <code>greeting</code> and <code>guide/hello.md</code> id is <code>guide/hello</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">website</span> <span class="co"># Root directory of your site</span></a>
+<a class="sourceLine" id="cb1-2" title="2">└── <span class="ex">docs</span></a>
+<a class="sourceLine" id="cb1-3" title="3">   ├── <span class="ex">greeting.md</span></a>
+<a class="sourceLine" id="cb1-4" title="4">   └── <span class="ex">guide</span></a>
+<a class="sourceLine" id="cb1-5" title="5">      └── <span class="ex">hello.md</span></a></code></pre></div>
+<p>However, the <strong>last part</strong> of the <code>id</code> can be defined by user in the front matter. For example, if <code>guide/hello.md</code>’s content is defined as below, its final <code>id</code> is <code>guide/part1</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="fu">id:</span><span class="at"> part1</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb2-4" title="4">Lorem ipsum</a></code></pre></div>
+<p>If you want more control over the last part of the document URL, it is possible to add a <code>slug</code> (defaults to the <code>id</code>).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="fu">id:</span><span class="at"> part1</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="fu">slug:</span><span class="at"> part1.html</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb3-5" title="5">Lorem ipsum</a></code></pre></div>
+<div class="note">
+<p>It is possible to use:</p>
+<ul>
+<li>absolute slugs: <code>slug: /mySlug</code>, <code>slug: /</code>…</li>
+<li>relative slugs: <code>slug: mySlug</code>, <code>slug: ./../mySlug</code>…</li>
+</ul>
+</div>
+<h2 id="home-page-docs">Home page docs</h2>
+<p>If you want a document to be available at the root, and have a path like <code>https://docusaurus.io/docs/</code>, you can use the slug frontmatter:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb4-1" title="1"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="fu">id:</span><span class="at"> my-home-doc</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="fu">slug:</span><span class="at"> /</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb4-5" title="5">Lorem ipsum</a></code></pre></div>
+<h2 id="docs-only-mode">Docs-only mode</h2>
+<p>If you only want the documentation feature, you can run your Docusaurus 2 site without a landing page and display your documentation page as the index page instead.</p>
+<p>To enable docs-only mode, set the docs plugin <code>routeBasePath: '/'</code>, and use the frontmatter <code>slug: /</code> on the document that should be the index page (<a href="#home-page-docs">more infos</a>).</p>
+<div class="caution">
+<p>You should delete the existing homepage at <code>./src/pages/index.js</code>, or else there will be two files mapping to the same route!</p>
+</div>
+<div class="tip">
+<p>There’s also a “blog-only mode” for those who only want to use the blog feature of Docusaurus 2. You can use the same method detailed above. Follow the setup instructions on <a href="../../blog.md#blog-only-mode">Blog-only mode</a>.</p>
+</div>
+</body>
+</html>

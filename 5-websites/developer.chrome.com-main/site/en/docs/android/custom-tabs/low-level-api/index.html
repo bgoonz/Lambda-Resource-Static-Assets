@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-02-04" />
+  <title>Low level API</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Low level API</h1>
+<p class="date">2020-02-04</p>
+</header>
+<p>Although the recommended method to integrate your application with Custom Tabs is using the AndroidX Browser Library, a low level implementation is also available.</p>
+<p>The complete implementation of the Support Library is available on <a href="https://github.com/GoogleChrome/custom-tabs-client/tree/master/customtabs">Github</a> and an be used as a start point. It also contains the <a href="https://developer.android.com/guide/components/aidl.html">AIDL files</a> required to connect to the service, as the ones contained in the Chromium repository are not directly usable with Android Studio.</p>
+<h2 id="basics-for-launching-custom-tabs-using-the-low-level-api">Basics for Launching Custom Tabs using the Low Level API</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" title="1"><span class="co">// Using a VIEW intent for compatibility with any other browsers on device.</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co">// Caller should not be setting FLAG_ACTIVITY_NEW_TASK or </span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co">// FLAG_ACTIVITY_NEW_DOCUMENT. </span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="bu">String</span> url = ¨https:<span class="co">//paul.kinlan.me/¨;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">Intent intent = <span class="kw">new</span> <span class="fu">Intent</span>(Intent.<span class="fu">ACTION_VIEW</span>, Uri.<span class="fu">parse</span>(url)); </a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co">//  Must have. Extra used to match the session. Its value is an IBinder passed</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">//  whilst creating a news session. See newSession() below. Even if the service is not </span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">//  used and there is no valid session id to be provided, this extra has to be present </span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">//  with a null value to launch a custom tab.</span></a>
+<a class="sourceLine" id="cb1-10" title="10"></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="kw">private</span> <span class="dt">static</span> <span class="dt">final</span> <span class="bu">String</span> EXTRA_CUSTOM_TABS_SESSION = <span class="st">&quot;android.support.customtabs.extra.SESSION&quot;</span>;</a>
+<a class="sourceLine" id="cb1-12" title="12">Bundle extras = <span class="kw">new</span> Bundle;</a>
+<a class="sourceLine" id="cb1-13" title="13">extras.<span class="fu">putBinder</span>(EXTRA_CUSTOM_TABS_SESSION, </a>
+<a class="sourceLine" id="cb1-14" title="14">   sessionICustomTabsCallback.<span class="fu">asBinder</span>() <span class="co">/* Set to null for no session */</span>);</a>
+<a class="sourceLine" id="cb1-15" title="15">intent.<span class="fu">putExtras</span>(extras);</a></code></pre></div>
+<h2 id="adding-ui-customizations">Adding UI Customizations</h2>
+<p>UI Customizations are included by adding Extras to the ACTION_VIEW Intent. A full list of the extras keys used to customize the UI can be found on the <a href="https://developer.android.com/reference/androidx/browser/customtabs/CustomTabsIntent">CustomTabsIntent docs</a>. An example on how to add a custom toolbar color follows:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" title="1"><span class="co">// Extra that changes the background color for the address bar. colorInt is an int</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co">// that specifies a Color.</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="kw">private</span> <span class="dt">static</span> <span class="dt">final</span> <span class="bu">String</span> EXTRA_CUSTOM_TABS_TOOLBAR_COLOR = <span class="st">&quot;android.support.customtabs.extra.TOOLBAR_COLOR&quot;</span>;</a>
+<a class="sourceLine" id="cb2-5" title="5">intent.<span class="fu">putExtra</span>(EXTRA_CUSTOM_TABS_TOOLBAR_COLOR, colorInt);</a></code></pre></div>
+<h2 id="connecting-to-the-custom-tabs-service">Connecting to the Custom Tabs service</h2>
+<p>The Custom Tabs service can be used in the same way other Android Services are. The interface is created with AIDL and automatically creates a proxy service class for you.</p>
+<p>Use the methods on the proxy service to warm-up, create sessions and pre-fetch</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb3-1" title="1"><span class="co">// Package name for the Chrome channel the client wants to connect to. This</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co">// depends on the channel name.</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co">// Stable = com.android.chrome</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">// Beta = com.chrome.beta</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co">// Dev = com.chrome.dev</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">public</span> <span class="dt">static</span> <span class="dt">final</span> <span class="bu">String</span> CUSTOM_TAB_PACKAGE_NAME = <span class="st">&quot;com.chrome.dev&quot;</span>;  <span class="co">// Change when in stable</span></a>
+<a class="sourceLine" id="cb3-7" title="7"></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co">// Action to add to the service intent. This action can be used as a way </span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">// generically pick apps that handle custom tabs for both activity and service </span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="co">// side implementations.</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="kw">public</span> <span class="dt">static</span> <span class="dt">final</span> <span class="bu">String</span> ACTION_CUSTOM_TABS_CONNECTION =</a>
+<a class="sourceLine" id="cb3-12" title="12">       <span class="st">&quot;android.support.customtabs.action.CustomTabsService&quot;</span>;</a>
+<a class="sourceLine" id="cb3-13" title="13">Intent serviceIntent = <span class="kw">new</span> <span class="fu">Intent</span>(ACTION_CUSTOM_TABS_CONNECTION);</a>
+<a class="sourceLine" id="cb3-14" title="14"></a>
+<a class="sourceLine" id="cb3-15" title="15">serviceIntent.<span class="fu">setPackage</span>(CUSTOM_TAB_PACKAGE_NAME);</a>
+<a class="sourceLine" id="cb3-16" title="16">context.<span class="fu">bindService</span>(serviceIntent, mServiceConnection,</a>
+<a class="sourceLine" id="cb3-17" title="17">                    <span class="bu">Context</span>.<span class="fu">BIND_AUTO_CREATE</span> | <span class="bu">Context</span>.<span class="fu">BIND_WAIVE_PRIORITY</span>);    </a></code></pre></div>
+</body>
+</html>

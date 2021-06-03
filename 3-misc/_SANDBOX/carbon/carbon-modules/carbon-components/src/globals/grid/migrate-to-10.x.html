@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>migrate-to-10.x</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h2 id="grid">Grid</h2>
+<table>
+<thead>
+<tr class="header">
+<th>v9</th>
+<th>v10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>$max-width</code></td>
+<td>Deprecated, access from <code>$carbon--grid-breakpoints</code></td>
+</tr>
+<tr class="even">
+<td><code>$columns</code></td>
+<td>Deprecated, access from <code>$carbon--grid-breakpoints</code></td>
+</tr>
+<tr class="odd">
+<td><code>$grid-breakpoints</code></td>
+<td>Replaced with <code>$carbon--grid-breakpoints</code></td>
+</tr>
+<tr class="even">
+<td><code>$gutter-breakpoints</code></td>
+<td>Deprecated</td>
+</tr>
+<tr class="odd">
+<td><code>$grid-gutter-breakpoints</code></td>
+<td>Deprecated</td>
+</tr>
+<tr class="even">
+<td><code>grid</code> mixin</td>
+<td>Replaced with <code>carbon--grid</code></td>
+</tr>
+<tr class="odd">
+<td><code>breakpoint</code> function</td>
+<td>Replaced with <code>carbon--breakpoint</code></td>
+</tr>
+<tr class="even">
+<td><code>gutter</code> function</td>
+<td>Deprecated</td>
+</tr>
+<tr class="odd">
+<td><code>grid-gutter</code> function</td>
+<td>Deprecated</td>
+</tr>
+<tr class="even">
+<td><code>column-size</code> mixin</td>
+<td>Replaced with <code>carbon--make-col</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="breakpoints">Breakpoints</h2>
+<table>
+<thead>
+<tr class="header">
+<th>v9</th>
+<th>v10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>xs</td>
+<td>sm</td>
+</tr>
+<tr class="even">
+<td>sm</td>
+<td>md</td>
+</tr>
+<tr class="odd">
+<td>md</td>
+<td>lg</td>
+</tr>
+<tr class="even">
+<td>lg</td>
+<td>xlg</td>
+</tr>
+<tr class="odd">
+<td>xl</td>
+<td>max</td>
+</tr>
+<tr class="even">
+<td>xxl</td>
+<td>Removed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="classes">Classes</h2>
+<table>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>v9</th>
+<th>v10</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>bx--grid</code></td>
+<td>No change</td>
+</tr>
+<tr class="even">
+<td><code>bx--row</code></td>
+<td>No change</td>
+</tr>
+<tr class="odd">
+<td><code>bx--col-&lt;breakpoint&gt;-&lt;span&gt;</code></td>
+<td>Minimal change, replace breakpoint with new name</td>
+</tr>
+<tr class="even">
+<td><code>bx--offset-&lt;breakpoint&gt;-&lt;span&gt;</code></td>
+<td>Minimal change, replace breakpoint with new name</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

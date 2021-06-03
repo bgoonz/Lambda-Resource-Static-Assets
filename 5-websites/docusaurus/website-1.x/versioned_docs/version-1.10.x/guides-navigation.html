@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Navigation and Sidebars</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Navigation and Sidebars</h1>
+</header>
+<h2 id="referencing-site-documents">Referencing Site Documents</h2>
+<p>If you want to reference another document in your <code>docs</code> directory (or the location you set via the <a href="https://v1.docusaurus.io/docs/en/site-config.html#optional-fields">optional <code>customDocsPath</code></a> path site configuration option), then you just use the name of the document you want to reference.</p>
+<p>For example, if you are in <code>doc2.md</code> and you want to reference <code>doc1.md</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb1-1" title="1">I am referencing a <span class="ot">[document](doc1.md)</span>.</a></code></pre></div>
+<h2 id="how-documents-are-linked">How Documents are Linked</h2>
+<p>New markdown files within <code>docs</code> will show up as pages on the website. Links to those documents are created first by using the <code>id</code> in the header of each document. If there is no <code>id</code> field, then the name of the file will serve as the link name.</p>
+<p>For example, creating an empty file such as <code>docs/getting-started.md</code> will enable the new page URL as <code>/docs/getting-started.html</code>.</p>
+<p>Suppose you add this to your document:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">id:</span><span class="at"> intro</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="fu">title:</span><span class="at"> Getting Started</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb2-4" title="4">My new content here..</a></code></pre></div>
+<p>If you set the <code>id</code> field in the markdown header of the file, the doc will then be accessed from a URL of the form <code>/docs/intro.html</code>.</p>
+<blockquote>
+<p>You need an <code>id</code> field to be able to add the document to the sidebar.</p>
+</blockquote>
+<h2 id="adding-documents-to-a-sidebar">Adding Documents to a Sidebar</h2>
+<p>Many times, you will want to add a document to a sidebar that will be associated with one of the headers in the top navigation bar of the website. The most common sidebar, and the one that comes installed when Docusaurus is initialized, is the <code>docs</code> sidebar.</p>
+<blockquote>
+<p>“docs” is just a name. It has no inherent meaning. You can change it as you wish.</p>
+</blockquote>
+<p>You configure the contents of the sidebar, and the order of its documents, in the <code>website/sidebars.json</code> file.</p>
+<blockquote>
+<p>Until you add your document to <code>website/sidebars.json</code>, they will only be accessible via a direct URL. The doc will not show up in any sidebar.</p>
+</blockquote>
+<p>Within <code>sidebars.json</code>, add the <code>id</code> you used in the document header to existing sidebar/category. In the below case, <code>docs</code> is the name of the sidebar and <code>Getting Started</code> is a category within the sidebar.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="st">&quot;docs&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="st">&quot;Getting Started&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb3-4" title="4">      <span class="st">&quot;getting-started&quot;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    ...</a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  ...</a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="op">}</span></a></code></pre></div>
+<p>Or you can create a new category within the sidebar:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="st">&quot;docs&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="st">&quot;My New Sidebar Category&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb4-4" title="4">      <span class="st">&quot;getting-started&quot;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    ...</a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  ...</a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="op">}</span></a></code></pre></div>
+<p>However, for a document located in a docs subdirectory like below:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="ex">docs</span></a>
+<a class="sourceLine" id="cb5-2" title="2">└── <span class="ex">dir1</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    └── <span class="ex">getting-started.md</span></a></code></pre></div>
+<p>You should provide <code>directory/id</code> instead of <code>id</code> in <code>sidebars.json</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="st">&quot;docs&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="st">&quot;My New Sidebar Category&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb6-4" title="4">      <span class="st">&quot;dir1/getting-started&quot;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">    ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb6-6" title="6">    ...</a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb6-8" title="8">  ...</a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="op">}</span></a></code></pre></div>
+<h3 id="adding-subcategories">Adding Subcategories</h3>
+<p>It is possible to add subcategories to a sidebar. Instead of using IDs as the contents of the category array like the previous examples, you can pass an object where the keys will be the subcategory name and the value an array of IDs for that subcategory.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="st">&quot;docs&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="st">&quot;My Example Category&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb7-4" title="4">      <span class="st">&quot;examples&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-5" title="5">      <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-6" title="6">        <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;subcategory&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-7" title="7">        <span class="st">&quot;label&quot;</span><span class="op">:</span> <span class="st">&quot;My Example Subcategory&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-8" title="8">        <span class="st">&quot;ids&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb7-9" title="9">          <span class="st">&quot;my-examples&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-10" title="10">          ...</a>
+<a class="sourceLine" id="cb7-11" title="11">        ]</a>
+<a class="sourceLine" id="cb7-12" title="12">      <span class="op">},</span></a>
+<a class="sourceLine" id="cb7-13" title="13">      <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-14" title="14">        <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;subcategory&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-15" title="15">        <span class="st">&quot;label&quot;</span><span class="op">:</span> <span class="st">&quot;My Next Subcategory&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-16" title="16">        <span class="st">&quot;ids&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb7-17" title="17">          <span class="st">&quot;some-other-examples&quot;</span></a>
+<a class="sourceLine" id="cb7-18" title="18">        ]</a>
+<a class="sourceLine" id="cb7-19" title="19">      <span class="op">},</span></a>
+<a class="sourceLine" id="cb7-20" title="20">      <span class="st">&quot;even-more-examples&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-21" title="21">      ...</a>
+<a class="sourceLine" id="cb7-22" title="22">    ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb7-23" title="23">    ...</a>
+<a class="sourceLine" id="cb7-24" title="24">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-25" title="25"><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-26" title="26"></a>
+<a class="sourceLine" id="cb7-27" title="27"><span class="co">/*</span></a>
+<a class="sourceLine" id="cb7-28" title="28"><span class="co">The above will generate:</span></a>
+<a class="sourceLine" id="cb7-29" title="29"></a>
+<a class="sourceLine" id="cb7-30" title="30"><span class="co">- My Example Category</span></a>
+<a class="sourceLine" id="cb7-31" title="31"><span class="co">  - examples</span></a>
+<a class="sourceLine" id="cb7-32" title="32"><span class="co">  - My Example Subcategory</span></a>
+<a class="sourceLine" id="cb7-33" title="33"><span class="co">    - my-examples</span></a>
+<a class="sourceLine" id="cb7-34" title="34"><span class="co">    ...</span></a>
+<a class="sourceLine" id="cb7-35" title="35"><span class="co">  - My Next Subcategory</span></a>
+<a class="sourceLine" id="cb7-36" title="36"><span class="co">    - some-other-examples</span></a>
+<a class="sourceLine" id="cb7-37" title="37"><span class="co">  - even-more-examples</span></a>
+<a class="sourceLine" id="cb7-38" title="38"><span class="co">  ...</span></a>
+<a class="sourceLine" id="cb7-39" title="39"><span class="co">*/</span></a></code></pre></div>
+<h3 id="adding-new-sidebars">Adding New Sidebars</h3>
+<p>You can also put a document in a new sidebar. In the following example, we are creating an <code>examples-sidebar</code> sidebar within <code>sidebars.json</code> that has a category called <code>My Example Category</code> containing a document with an <code>id</code> of <code>my-examples</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="st">&quot;examples-sidebar&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="st">&quot;My Example Category&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb8-4" title="4">      <span class="st">&quot;my-examples&quot;</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6">    ...</a>
+<a class="sourceLine" id="cb8-7" title="7">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb8-8" title="8">  ...</a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="op">}</span></a></code></pre></div>
+<p>It is important to note that until you <a href="#additions-to-the-site-navigation-bar">add a document from the <code>"examples-sidebar"</code> sidebar to the nav bar</a>, it will be hidden.</p>
+<h2 id="additions-to-the-site-navigation-bar">Additions to the Site Navigation Bar</h2>
+<p>To expose sidebars, you will add click-able labels to the site navigation bar at the top of the website. You can add documents, pages and external links.</p>
+<h3 id="adding-documents">Adding Documents</h3>
+<p>After creating a new sidebar for the site by <a href="#adding-new-sidebars">adding</a> it to <code>sidebars.json</code>, you can expose the new sidebar from the top navigation bar by editing the <code>headerLinks</code> field of <code>siteConfig.js</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="dt">headerLinks</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb9-3" title="3">    ...</a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="op">{</span> <span class="dt">doc</span><span class="op">:</span> <span class="st">&#39;my-examples&#39;</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;Examples&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb9-5" title="5">    ...</a>
+<a class="sourceLine" id="cb9-6" title="6">  ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb9-7" title="7">  ...</a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="op">}</span></a></code></pre></div>
+<p>A label called <code>Examples</code> will be added to the site navigation bar and when you click on it at the top of your site, the <code>examples-sidebar</code> will be shown and the default document will be <code>my-examples</code>.</p>
+<h3 id="adding-custom-pages">Adding Custom Pages</h3>
+<p>To add custom pages to the site navigation bar, entries can be added to the <code>headerLinks</code> of <code>siteConfig.js</code>. For example, if we have a page within <code>website/pages/help.js</code>, we can link to it by adding the following:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="dt">headerLinks</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb10-3" title="3">    ...</a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="op">{</span> <span class="dt">page</span><span class="op">:</span> <span class="st">&#39;help&#39;</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;Help&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-5" title="5">    ...</a>
+<a class="sourceLine" id="cb10-6" title="6">  ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb10-7" title="7">  ...</a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="op">}</span></a></code></pre></div>
+<p>A label called <code>Help</code> will be added to the site navigation bar and when you click on it at the top of your site, the content from the <code>help.js</code> page will be shown.</p>
+<h3 id="adding-external-links">Adding External Links</h3>
+<p>Custom links can be added to the site navigation bar with the following entry in <code>siteConfig.js</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="dt">headerLinks</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb11-3" title="3">    ...</a>
+<a class="sourceLine" id="cb11-4" title="4">    <span class="op">{</span> <span class="dt">href</span><span class="op">:</span> <span class="st">&#39;https://github.com/facebook/docusaurus&#39;</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;GitHub&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb11-5" title="5">    ...</a>
+<a class="sourceLine" id="cb11-6" title="6">  ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb11-7" title="7">  ...</a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="op">}</span></a></code></pre></div>
+<p>A label called <code>GitHub</code> will be added to the site navigation bar and when you click on it at the top of your site, the content of the external link will be shown.</p>
+<blockquote>
+<p>To open external links in a new tab, provide an <code>external: true</code> flag within the header link config.</p>
+</blockquote>
+<h2 id="site-navigation-bar-positioning">Site Navigation Bar Positioning</h2>
+<p>You have limited control where the search and languages dropdown elements are shown in the site navigation bar at the top of your website.</p>
+<h3 id="search">Search</h3>
+<p>If search is enabled on your site, your search bar will appear to the right of your links. If you want to put the search bar between links in the header, add a search entry in the <code>headerLinks</code> config array:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="dt">headerLinks</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb12-3" title="3">    <span class="op">{</span> <span class="dt">doc</span><span class="op">:</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;Foo&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb12-4" title="4">    <span class="op">{</span> <span class="dt">search</span><span class="op">:</span> <span class="kw">true</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb12-5" title="5">    <span class="op">{</span> <span class="dt">doc</span><span class="op">:</span> <span class="st">&#39;bar&#39;</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;Bar&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb12-6" title="6">  ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb12-7" title="7">  ...</a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="op">}</span></a></code></pre></div>
+<h3 id="languages-dropdown">Languages Dropdown</h3>
+<p>If translations are enabled on your site, the language dropdown will appear to the right of your links (and to the left of the search bar, if search is enabled). If you want to put the language selection drop down between links in the header, add a languages entry in the <code>headerLinks</code> config array:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="dt">headerLinks</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb13-3" title="3">    <span class="op">{</span> <span class="dt">doc</span><span class="op">:</span> <span class="st">&#39;foo&#39;</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;Foo&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb13-4" title="4">    <span class="op">{</span> <span class="dt">languages</span><span class="op">:</span> <span class="kw">true</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb13-5" title="5">    <span class="op">{</span> <span class="dt">doc</span><span class="op">:</span> <span class="st">&#39;bar&#39;</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;Bar&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb13-6" title="6">  ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb13-7" title="7">  ...</a>
+<a class="sourceLine" id="cb13-8" title="8"><span class="op">}</span></a></code></pre></div>
+<h2 id="active-links-in-site-navigation-bar">Active Links In Site Navigation Bar</h2>
+<p>The links in the top navigation bar get <code>siteNavItemActive</code> and <code>siteNavGroupActive</code> class names to allow you to style the currently active link different from the others. <code>siteNavItemActive</code> is applied when there’s an exact match between the navigation link and the currently displayed web page.</p>
+<blockquote>
+<p>This does not include links of type <code>href</code> which are meant for external links only. If you manually set an <code>href</code> in your <code>headerLinks</code> to an internal page, document, or blog post, it will not get the <code>siteNavItemActive</code> class even if that page is being displayed.</p>
+</blockquote>
+<p>The <code>siteNavGroupActive</code> class will be added to these links:</p>
+<ul>
+<li><code>doc</code> links that belong to the same sidebar as the currently displayed document</li>
+<li>The blog link when a blog post or the blog listing page is being displayed</li>
+</ul>
+<p>These are two separate class names so you can have the active styles applied to either exact matches only or a bit more broadly for docs that belong together. If you don’t want to make this distinction you can add both classes to the same CSS rule.</p>
+<h2 id="secondary-on-page-navigation">Secondary On-Page Navigation</h2>
+<p>We support secondary on-page navigation so you can quickly see the topics associated with a given document. To enable this feature, you need to add the <code>onPageNav</code> site configuration <a href="api-site-config.md#optional-fields">option</a> to your <code>siteConfig.js</code>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="dt">onPageNav</span><span class="op">:</span> <span class="st">&#39;separate&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  ...</a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Currently, <code>'separate'</code> is the only option available for this field. This provides a separate navigation on the right side of the page.</p>
+<h2 id="collapsible-categories">Collapsible Categories</h2>
+<p>For sites with a sizable amount of content, we support the option to expand/collapse the links and subcategories under categories. To enable this feature, set the <code>docsSideNavCollapsible</code> site configuration <a href="api-site-config.md#optional-fields">option</a> in <code>siteConfig.js</code> to true.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="dt">docsSideNavCollapsible</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb15-3" title="3">  ...</a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="op">}</span></a></code></pre></div>
+</body>
+</html>

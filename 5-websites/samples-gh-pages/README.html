@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<p><a href="https://travis-ci.org/GoogleChrome/samples"><img src="https://travis-ci.org/GoogleChrome/samples.svg?branch=gh-pages" alt="Build Status" /></a></p>
+<h1 id="google-chrome-samples">Google Chrome Samples</h1>
+<p>Samples tied to new functionality in Google Chrome.</p>
+<p>Each sample corresponds to an entry in https://www.chromestatus.com/features, and using that interface is currently the best way to browse.</p>
+<h1 id="contributing-samples">Contributing Samples</h1>
+<p>Please use <a href="SAMPLE_STARTING_POINT"><code>SAMPLE_STARTING_POINT</code></a> as a starting point.</p>
+<p>While it’s possible to simply create a standard set of HTML/JS/CSS files within the new directory, you can take advantage of the <a href="http://jekyllrb.com/">Jekyll</a>-based templating system to handle most of the boilerplate. Any files that start with a <a href="http://jekyllrb.com/docs/frontmatter/">front matter</a> block will be templated, and any other files will be served verbatim.</p>
+<p>If you’re still unsure, two canonical samples that use templates are: - <a href="image-rendering-pixelated/index.html">image-rendering-pixelated</a> - <a href="report-validity/index.html">report-validity</a></p>
+<p>Follow the <a href="https://help.github.com/articles/using-jekyll-with-pages/">Using Jekyll with Pages</a> guide to mimic the production Jekyll environment during local development.</p>
+<p>Once complete, please file a pull request against the <code>gh-pages</code> branch with your sample. It’s ideal when filing a pull request @-mention the relevant engineer who worked on adding the feature into Chrome, to solicit their feedback and ensure that the sample properly describes the functionality. The email address of the engineer who worked on a given feature can be found in the corresponding https://www.chromestatus.com/features entry. If you’re unsure of the GitHub username corresponding to the engineer, an alternative is to email them a link to the pull request and ask for feedback directly.</p>
+<h1 id="style-linting-ci">Style / Linting / CI</h1>
+<p>The samples ideally should follow the <a href="http://google.github.io/styleguide/javascriptguide.xml">Google JavaScript Style Guide</a>, and that’s enforced via <a href="">ESLint</a>, using the <a href="https://github.com/google/eslint-config-google"><code>eslint-config-google</code></a> base configuration, with a few overrides as needed.</p>
+<p>Linting can be performed via <code>npm run lint</code> (make sure to <code>npm install</code> first).</p>
+<p>Various IDEs offer <a href="http://eslint.org/docs/user-guide/integrations.html">real-time ESLint integration</a>, and using those integrations that can help avoid errors before anything gets checked in.</p>
+<p><a href="https://travis-ci.org/GoogleChrome/samples">Travis CI</a> is currently being used to verify that the Jekyll build completes successfully and that linting passes without errors.</p>
+</body>
+</html>

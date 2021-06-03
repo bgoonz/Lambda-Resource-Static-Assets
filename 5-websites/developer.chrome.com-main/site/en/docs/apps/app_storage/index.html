@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2012-09-17" />
+  <title>Storage APIs</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Storage APIs</h1>
+<p class="date">2012-09-17</p>
+</header>
+<p>{% Aside ‘caution’ %}</p>
+<p><strong>Important:</strong> Chrome will be removing support for Chrome Apps on all platforms. Chrome browser and the Chrome Web Store will continue to support extensions. <a href="https://blog.chromium.org/2020/01/moving-forward-from-chrome-apps.html"><strong>Read the announcement</strong></a> and learn more about <a href="/apps/migration"><strong>migrating your app</strong></a>.</p>
+<p>{% endAside %}</p>
+<p>Almost every aspect of app development involves some element of sending or receiving data. Starting with the basics, you should use an MVC framework to help you design and implement your app so that data is completely separate from the app’s view on that data (see <a href="app_frameworks">MVC Architecture</a>).</p>
+<p>You also need to think about how data is handled when your app is offline (see <a href="offline_apps">Offline First</a>). This doc briefly introduces the storage options for sending, receiving, and saving data locally; the remainder of the doc shows you how to use Chrome’s File System and Sync File System APIs (see also <a href="fileSystem">fileSystem API</a> and <a href="syncFileSystem">syncFileSystem API</a>).</p>
+<p>{% Aside %}</p>
+<p><strong>API Samples:</strong> Want to play with the code? Check out the <a href="https://github.com/GoogleChrome/chrome-app-samples/tree/master/samples/filesystem-access">filesystem-access</a>, <a href="https://github.com/GoogleChrome/chrome-app-samples/tree/master/samples/syncfs-editor">syncfs-editor</a> and <a href="https://github.com/GoogleChrome/chrome-app-samples/tree/master/samples/storage">storage</a> samples.</p>
+<p>{% endAside %}</p>
+<h2 id="storage-options-options">Storage options {: #options }</h2>
+<p>Packaged apps use many different mechanisms to send and receive data. For external data (resources, web pages), you need to be aware of the <a href="contentSecurityPolicy">Content Security Policy (CSP)</a>. Similar to Chrome Extensions, you can use <a href="app_external#external">cross-origin XMLHttpRequests</a> to communicate with remote servers. You can also isolate external pages, so that the rest of your app is secure (see <a href="app_external#webview">Embed external web pages</a>).</p>
+<p>When saving data locally, you can use the <a href="storage">Chrome Storage API</a> to save small amounts of string data and IndexedDB to save structured data. With IndexedDB, you can persist JavaScript objects to an object store and use the store’s indexes to query data (to learn more, see HTML5 Rock’s <a href="http://www.html5rocks.com/tutorials/indexeddb/todo/">Simple Todo List Tutorial</a>). For all other types of data, like binary data, use the Filesystem and Sync Filesystem APIs.</p>
+<p>Chrome’s Filesystem and Sync Filesystem APIs extend the <a href="http://www.html5rocks.com/tutorials/file/filesystem/">HTML5 FileSystem API</a>. With Chrome’s Filesystem API, apps can create, read, navigate, and write to a sandboxed section of the user’s local file system. For example, a photo-sharing app can use the Filesystem API to read and write any photos that a user selects.</p>
+<p>With Chrome’s Sync Filesystem API, apps can save and synchronize data on a user’s Google Drive so that the same data can be available across different clients. For example, a <a href="https://github.com/GoogleChrome/chrome-app-samples/tree/master/samples/syncfs-editor">cloud-backed text editor</a> app can automatically sync new text files to a user’s Google Drive account. When the user opens the text editor in a new client, Google Drive pushes new text files to that instance of the text editor.</p>
+<p>Note: Unlike regular Filesystem API, Chrome’s Sync Filesystem API currently does <strong>NOT</strong> support directory operations, except for reading directory entries in the root directory. An attempt to create a directory in Sync Filesystem will result in INVALID_MODIFICATION_ERROR.</p>
+<h2 id="using-the-chrome-filesystem-api-filesystem">Using the Chrome Filesystem API {: #filesystem }</h2>
+<h3 id="adding-file-system-permission-filesystem-manifest">Adding file system permission {: #filesystem-manifest }</h3>
+<p>To use Chrome’s File System API, you need to add the “fileSystem” permission to the manifest, so that you can obtain permission from the user to store persistent data.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="er">&quot;permissions&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="st">&quot;...&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="st">&quot;fileSystem&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="ot">]</span></a></code></pre></div>
+<h3 id="user-options-for-selecting-files-import">User-options for selecting files {: #import }</h3>
+<p>Users expect to select files in the same way they always do. At a minimum, they expect a ‘choose file’ button and standard file-chooser. If your app makes heavy use of file-handing, you should also implement drag-and-drop (see below and also check out <a href="http://www.html5rocks.com/tutorials/dnd/basics/">Native HTML5 Drag and Drop</a>).</p>
+<h3 id="obtaining-the-path-of-a-fileentry-path">Obtaining the path of a fileEntry {: #path }</h3>
+<p>To get the full path of the file the user selected, <code>fileEntry</code>, call <code>getDisplayPath()</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">function</span> <span class="at">displayPath</span>(fileEntry) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="va">chrome</span>.<span class="va">fileSystem</span>.<span class="at">getDisplayPath</span>(fileEntry<span class="op">,</span> <span class="kw">function</span>(path) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(path)</a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="op">}</span></a></code></pre></div>
+<h3 id="implementing-drag-and-drop-drag">Implementing drag-and-drop {: #drag }</h3>
+<p>If you need to implement drag-and-drop selection, the drag-and-drop file controller (<code>dnd.js</code>) in the <a href="https://github.com/GoogleChrome/chrome-app-samples/tree/master/samples/filesystem-access">filesystem-access</a> sample is a good starting point. The controller creates a file entry from a <code>DataTransferItem</code> via drag-and-drop. In this example, the <code>fileEntry</code> is set to the first dropped item.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">var</span> dnd <span class="op">=</span> <span class="kw">new</span> <span class="at">DnDFileController</span>(<span class="st">&#39;body&#39;</span><span class="op">,</span> <span class="kw">function</span>(data) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">var</span> fileEntry <span class="op">=</span> <span class="va">data</span>.<span class="at">items</span>[<span class="dv">0</span>].<span class="at">webkitGetAsEntry</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="at">displayPath</span>(fileEntry)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="reading-a-file-read">Reading a file {: #read }</h3>
+<p>The following code opens the file (read-only) and reads it as text using a <code>FileReader</code> object. If the file doesn’t exist, an error is thrown.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">var</span> chosenFileEntry <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="va">chooseFileButton</span>.<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="va">chrome</span>.<span class="va">fileSystem</span>.<span class="at">chooseEntry</span>(<span class="op">{</span><span class="dt">type</span><span class="op">:</span> <span class="st">&#39;openFile&#39;</span><span class="op">},</span> <span class="kw">function</span>(readOnlyEntry) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="va">readOnlyEntry</span>.<span class="at">file</span>(<span class="kw">function</span>(file) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="kw">var</span> reader <span class="op">=</span> <span class="kw">new</span> <span class="at">FileReader</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8"></a>
+<a class="sourceLine" id="cb4-9" title="9">      <span class="va">reader</span>.<span class="at">onerror</span> <span class="op">=</span> errorHandler<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">      <span class="va">reader</span>.<span class="at">onloadend</span> <span class="op">=</span> <span class="kw">function</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-11" title="11">        <span class="va">console</span>.<span class="at">log</span>(<span class="va">e</span>.<span class="va">target</span>.<span class="at">result</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">      <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-13" title="13"></a>
+<a class="sourceLine" id="cb4-14" title="14">      <span class="va">reader</span>.<span class="at">readAsText</span>(file)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-15" title="15">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="writing-a-file-write">Writing a file {: #write }</h3>
+<p>The two common use-cases for writing a file are “Save” and “Save as”. The following code creates a <code>writableEntry</code> from the read-only <code>chosenFileEntry</code> and writes the selected file to it.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"> <span class="va">chrome</span>.<span class="va">fileSystem</span>.<span class="at">getWritableEntry</span>(chosenFileEntry<span class="op">,</span> <span class="kw">function</span>(writableFileEntry) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">    <span class="va">writableFileEntry</span>.<span class="at">createWriter</span>(<span class="kw">function</span>(writer) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">      <span class="va">writer</span>.<span class="at">onerror</span> <span class="op">=</span> errorHandler<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">      <span class="va">writer</span>.<span class="at">onwriteend</span> <span class="op">=</span> callback<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5"></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="va">chosenFileEntry</span>.<span class="at">file</span>(<span class="kw">function</span>(file) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-7" title="7">      <span class="va">writer</span>.<span class="at">write</span>(file)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-9" title="9">  <span class="op">},</span> errorHandler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>The following code creates a new file with “Save as” functionality and writes the new blob to the file using the <code>writer.write()</code> method.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="va">chrome</span>.<span class="va">fileSystem</span>.<span class="at">chooseEntry</span>(<span class="op">{</span><span class="dt">type</span><span class="op">:</span> <span class="st">&#39;saveFile&#39;</span><span class="op">},</span> <span class="kw">function</span>(writableFileEntry) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">    <span class="va">writableFileEntry</span>.<span class="at">createWriter</span>(<span class="kw">function</span>(writer) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">      <span class="va">writer</span>.<span class="at">onerror</span> <span class="op">=</span> errorHandler<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">      <span class="va">writer</span>.<span class="at">onwriteend</span> <span class="op">=</span> <span class="kw">function</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-5" title="5">        <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;write complete&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">      <span class="op">};</span></a>
+<a class="sourceLine" id="cb6-7" title="7">      <span class="va">writer</span>.<span class="at">write</span>(<span class="kw">new</span> <span class="at">Blob</span>([<span class="st">&#39;1234567890&#39;</span>]<span class="op">,</span> <span class="op">{</span><span class="dt">type</span><span class="op">:</span> <span class="st">&#39;text/plain&#39;</span><span class="op">}</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="op">},</span> errorHandler)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="using-the-chrome-sync-filesystem-api-sync-filesystem">Using the Chrome Sync Filesystem API {: #sync-filesystem }</h2>
+<p>Using syncable file storage, returned data objects can be operated on in the same way as local offline file systems in the <a href="http://www.w3.org/TR/file-system-api/">FileSystem API</a>, but with the added (and automatic) syncing of that data to Google Drive.</p>
+<h3 id="adding-sync-file-system-permission-sync-manifest">Adding sync file system permission {: #sync-manifest }</h3>
+<p>To use Chrome’s Sync Filesystem API, you need to add the “syncFileSystem” permission to the manifest, so that you can obtain permission from the user to store and sync persistent data.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="er">&quot;permissions&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="st">&quot;...&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="st">&quot;syncFileSystem&quot;</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="ot">]</span></a></code></pre></div>
+<h3 id="initiating-syncable-file-storage-initiate">Initiating syncable file storage {: #initiate }</h3>
+<p>To initiate syncable file storage in your app, simply call <a href="/apps/syncFileSystem#method-requestFileSystem">syncFileSystem.requestFileSystem</a>. This method returns a syncable filesystem backed by Google Drive, for example:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="va">chrome</span>.<span class="va">syncFileSystem</span>.<span class="at">requestFileSystem</span>(<span class="kw">function</span> (fs) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">   <span class="co">// FileSystem API should just work on the returned &#39;fs&#39;.</span></a>
+<a class="sourceLine" id="cb8-3" title="3">   <span class="va">fs</span>.<span class="va">root</span>.<span class="at">getFile</span>(<span class="st">&#39;test.txt&#39;</span><span class="op">,</span> <span class="op">{</span><span class="dt">create</span><span class="op">:</span><span class="kw">true</span><span class="op">},</span> getEntryCallback<span class="op">,</span> errorCallback)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="about-file-sync-status-file-status">About file sync status {: #file-status }</h3>
+<p>Use <a href="/apps/syncFileSystem#method-getFileStatus">syncFileSystem.getFileStatus</a> to get the sync status for a current file:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="va">chrome</span>.<span class="va">syncFileSystem</span>.<span class="at">getFileStatus</span>(entry<span class="op">,</span> <span class="kw">function</span>(status) <span class="op">{</span>...<span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>File sync status values can be one of the following: <code>'synced'</code>, <code>'pending'</code>, or <code>'conflicting'</code>. ‘Synced’ means the file is fully synchronized; there’re no pending local changes that haven’t been synchronized to Google Drive. There can, however, be pending changes on the Google Drive side that haven’t been fetched yet.</p>
+<p>‘Pending’ means the file has pending changes not yet synchronized to Google Drive. If the app is running online, local changes are (almost) immediately synchronized to Google Drive, and the <a href="/apps/syncFileSystem#event-onFileStatusChanged">syncFileSystem.onFileStatusChanged</a> event is fired with the <code>'synced'</code> status (see below for more details).</p>
+<p>The <a href="/apps/syncFileSystem#event-onFileStatusChanged">syncFileSystem.onFileStatusChanged</a> is fired when a file’s status changes to <code>'conflicting'</code>. ‘Conflicting’ means there are conflicting changes on both the local storage and Google Drive. A file can be in this state only if the conflict resolution policy is set to <code>'manual'</code>. The default policy is <code>'last_write_win'</code> and conflicts are automatically resolved by simple last-write-win policy. The system’s conflict resolution policy can be changed by <a href="/apps/syncFileSystem#method-setConflictResolutionPolicy">syncFileSystem.setConflictResolutionPolicy</a>.</p>
+<p>If the conflict resolution policy is set to <code>'manual'</code> and a file results in <code>'conflicting'</code> state, the app can still read and write the file as a local offline file, but the changes are not sync’ed and the file will be kept detached from remote changes made on other clients until the conflict is resolved. The easiest way to resolve a conflict is to delete or rename the local version of file. This forces the remote version to be synchronized, the conflicting state is resolved, and the <code>onFileStatusChanged</code> event is fired with the <code>'synced'</code> status.</p>
+<h3 id="listening-for-changes-in-synced-status">Listening for changes in synced status</h3>
+<p>The <a href="/apps/syncFileSystem#event-onFileStatusChanged">syncFileSystem.onFileStatusChanged</a> event is fired when the sync status of a file changes. For example, assume a file has pending changes and is in the ‘pending’ state. The app may have been in offline state so that the change is about to be synchronized. When the sync service detects the pending local change and uploads the change to Google Drive, the service fires the <code>onFileStatusChanged</code> event with following values: <code>{ fileEntry:a fileEntry for the file, status: 'synced', action: 'updated', direction: 'local_to_remote' }</code>.</p>
+<p>Similarly, regardless of the local activities, the sync service may detect remote changes made by another client, and downloads the changes from Google Drive to the local storage. If the remote change was for adding a new file, an event with following values is fired: <code>{ fileEntry: a fileEntry for the file, status: 'synced', action: 'added', direction: 'remote_to_local' }</code>.</p>
+<p>If both the local and remote side have conflicting changes for the same file and if the conflict resolution policy is set to <code>'manual'</code>, the file status is changed to <code>conflicting</code> state, is detached from the sync service, and won’t be synchronized until the conflict is resolved. In this case an event with following values is fired: <code>{ fileEntry: a fileEntry for the file, status: 'conflicting', action: null, direction: null }</code>.</p>
+<p>You can add a listener for this event that responds to any changes in status. For example, the <a href="https://github.com/agektmr/ChromeMusicPlayer">Chrome Music Player</a> app listens for any new music synced from Google Drive, but not yet imported to the user’s local storage on a particular client. Any music found gets synced to that client:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="va">chrome</span>.<span class="va">syncFileSystem</span>.<span class="va">onFileStatusChanged</span>.<span class="at">addListener</span>(<span class="kw">function</span>(fileInfo) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="cf">if</span> (<span class="va">fileInfo</span>.<span class="at">status</span> <span class="op">===</span> <span class="st">&#39;synced&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="cf">if</span> (<span class="va">fileInfo</span>.<span class="at">direction</span> <span class="op">===</span> <span class="st">&#39;remote_to_local&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-4" title="4">      <span class="cf">if</span> (<span class="va">fileInfo</span>.<span class="at">action</span> <span class="op">===</span> <span class="st">&#39;added&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-5" title="5">        <span class="va">db</span>.<span class="at">add</span>(<span class="va">fileInfo</span>.<span class="at">fileEntry</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-6" title="6">      <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">fileInfo</span>.<span class="at">action</span> <span class="op">===</span> <span class="st">&#39;deleted&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-7" title="7">        <span class="va">db</span>.<span class="at">remove</span>(<span class="va">fileInfo</span>.<span class="at">fileEntry</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-8" title="8">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-9" title="9">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="checking-api-usage-check-usage">Checking API usage {: #check-usage }</h3>
+<p>To check the amount of data being used by the API, query the app’s local sandboxed directory or the usage bytes returned by <a href="/apps/syncFileSystem#method-getUsageAndQuota">syncFileSystem.getUsageAndQuota</a>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="va">chrome</span>.<span class="va">syncFileSystem</span>.<span class="at">getUsageAndQuota</span>(fileSystem<span class="op">,</span> <span class="kw">function</span> (storageInfo) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">   <span class="at">updateUsageInfo</span>(<span class="va">storageInfo</span>.<span class="at">usageBytes</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">   <span class="at">updateQuotaInfo</span>(<span class="va">storageInfo</span>.<span class="at">quotaBytes</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>You can also look at the user’s sync backend service storage (in Google Drive). Synced files are saved in a hidden Google Drive folder, <strong>Chrome Syncable FileSystem</strong>. The folder won’t be shown in your ‘My Drive’ list but can be accessed by searching the folder name in the search box. (Note that the remote folder layout is <strong>not</strong> guaranteed to remain backwards compatible between releases.)</p>
+</body>
+</html>

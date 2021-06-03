@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.es</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="introducción-a-github">Introducción a GitHub</h1>
+<p>Esta lección cubre los conceptos básicos de GitHub, una plataforma para alojar y administrar cambios en tu código.</p>
+<p><img src="/sketchnotes/webdev101-github.png" alt="Intro to GitHub" /> &gt; Sketchnote by <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="pre-lecture-prueba"><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/3">Pre-lecture prueba</a></h2>
+<h3 id="introducción">Introducción</h3>
+<p>En esta lección, cubriremos:</p>
+<ul>
+<li>dando seguimiento al trabajo que realizas en tu máquina</li>
+<li>trabajar en proyectos con otros</li>
+<li>cómo contribuir al software de código abierto (open source)</li>
+</ul>
+<h3 id="prerrequisitos">Prerrequisitos</h3>
+<p>Antes de comenzar, verifica si Git está instalado. Escribe en tu terminal: <code>git --version</code></p>
+<p>Si Git no está instalado, <a href="https://git-scm.com/downloads">descarga Git aquí</a>. Luego, configura tu perfil de Git local en la terminal: <code>git config --global user.name "tu-nombre"</code> <code>git config --global user.email "tu-email"</code></p>
+<p>Para comprobar si Git ya está configurado, escribe: <code>git config --list</code></p>
+<p>También necesitarás una cuenta de GitHub, un editor de código (como Visual Studio Code) y deberás abrir tu terminal.</p>
+<p>Ve a <a href="https://github.com/">github.com</a> y crea una cuenta si aún no lo has hecho, o inicia sesión y completa tu perfil.</p>
+<p>✅ GitHub no es el único repositorio de código del mundo; hay otros, pero GitHub es el más conocido.</p>
+<h3 id="preparación">Preparación</h3>
+<p>Necesitarás una directorio con un proyecto de código en tu máquina local (computadora portátil o PC) y un repositorio público en GitHub, que te servirá como ejemplo de cómo contribuir a los proyectos de otros.</p>
+<hr />
+<h2 id="gestión-de-código">Gestión de código</h2>
+<p>Digamos que tienes una directorio local con algún proyecto de código y deseas rastrear tu progreso usando git, el sistema de control de versiones. Algunas personas comparan el uso de git con escribir una carta de amor a tu futuro. Al leer tus mensajes de confirmación días, semanas o meses después, podrás recordar por qué tomaste una decisión o “revertiste” un cambio, es decir, cuando escribes buenos “mensajes de confirmación”.</p>
+<h3 id="tarea-hacer-un-repositorio-git-y-enviar-código">Tarea: hacer un repositorio git y enviar código</h3>
+<ol type="1">
+<li><p><strong>Crear repositorio en GitHub</strong>. En GitHub.com, en la pestaña de repositorios, o en la barra de navegación superior derecha, busca el botón <strong>nuevo repositorio</strong>.</p>
+<ol type="1">
+<li>Dale un nombre a tu repositorio (directorio)</li>
+<li>Selecciona <strong>crear repositorio</strong>.</li>
+</ol></li>
+<li><p><strong>Navegue a su directorio de trabajo</strong>. En tu terminal, cambia a la directorio (también conocida como directorio) que deseas comenzar a rastrear. Escribe:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="bu">cd</span> [nombre de tu directorio]</a></code></pre></div></li>
+<li><p><strong>Inicializar un repositorio de git</strong>. En tu proyecto escribe:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">git</span> init</a></code></pre></div></li>
+<li><p><strong>Comprobar estado</strong>. Para checar el estado del proyecto escribe:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">git</span> status</a></code></pre></div>
+<p>La respuesta de la terminal (CLI) probablemente se verá así:</p>
+<pre class="output"><code>Changes not staged for commit:
+(use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+(use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+     modified:   file.txt
+     modified:   file2.txt</code></pre>
+<p>Por lo general, un comando <code>git status</code> te dice cosas como qué archivos están listos para ser guardados en el repositorio o cambios en tu codigo que puedes conservar.</p></li>
+<li><p><strong>Agregar archivos al seguimiento</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">git</span> add .</a></code></pre></div>
+<p>El argumento <code>git add</code> más <code>.</code> indica que todos tus archivos y cambios están listos para darles seguimiento.</p></li>
+<li><p><strong>Persistir en tu trabajo</strong>. En este punto, has agregado los archivos a lo que se denomina <em>área de preparación</em>. Un lugar donde Git rastrea tus archivos. Para que el cambio sea permanente, debes <em>commitir</em> los archivos. Para hacerlo, creas un <em>commit</em> con el comando <code>git commit</code>. Un <em>commit</em> representa un punto en el historial de tu repositorio que estás guardando. Escribe lo siguiente para crear un <em>commit</em>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">git</span> commit -m <span class="st">&quot;first commit&quot;</span></a></code></pre></div>
+<p>Esto confirma todos tus archivos, agregando el mensaje “primer compromiso”. Para futuros mensajes de confirmación, querrás ser más descriptivo en tu descripción para transmitir qué tipo de cambio has realizado.</p></li>
+<li><p><strong>Conecta tu repositorio de Git local con GitHub</strong>. Es bueno tener un repositorio de Git en tu máquina, pero también tienes que guarder todos sus archivos en algún lugar e invitar a otras personas a trabajar contigo en tu repositorio. Un buen lugar para hacerlo es GitHub. Recuerda que ya hemos creado un repositorio en GitHub, por lo que lo único que debemos hacer es conectar nuestro repositorio de Git local con GitHub. El comando <code>git remote add</code> hará precisamente eso. Escribe el siguiente comando:</p>
+<blockquote>
+<p>Nota, antes de escribir el comando, ve a la página de tu repositorio de GitHub para encontrar el URL del repositorio. Lo usarás en el siguiente comando. Reemplaza <code>repository_name</code> con tu URL de GitHub.</p>
+</blockquote>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">git</span> remote add origin https://github.com/username/repository_name.git</a></code></pre></div>
+<p>Esto crea un <em>remote</em>, o conexión, llamado “origin” que apunta al repositorio de GitHub que creaste anteriormente.</p></li>
+<li><p><strong>Envía archivos locales a GitHub</strong>. Hasta ahora ha creado una <em>conexión</em> entre el repositorio local y el repositorio de GitHub. Enviemos estos archivos a GitHub con el siguiente comando <code>git push</code>, así:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">git</span> push -u origin main</a></code></pre></div>
+<p>Esto envía una confirmación en tu rama “principal” a GitHub.</p></li>
+<li><p><strong>Para agregar más cambios</strong>. Si deseas continuar haciendo cambios y enviarlos a GitHub, solo necesitas usar los siguientes tres comandos:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">git</span> add .</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="fu">git</span> commit -m <span class="st">&quot;escribe tu mensaje de confirmación aquí&quot;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="fu">git</span> push</a></code></pre></div>
+<blockquote>
+<p>Sugerencia: es posible que también desees adoptar un archivo <code>.gitignore</code> para evitar que los archivos que no deseas rastrear aparezcan en GitHub. Puedes encontrar plantillas para archivos <code>.gitignore</code> en <a href="github.com/github/gitignore">.gitignore templates</a>.</p>
+</blockquote></li>
+</ol>
+<h4 id="confirmar-mensajes">Confirmar mensajes</h4>
+<p>Una buena línea de asunto (subject line) de confirmación de Git completa la siguiente oración: Si se aplica, esta confirmación será <su línea de asunto aquí></p>
+<p>Para el sujeto use el imperativo, tiempo presente: “cambiar” no “cambió” ni “cambiara”. Como en el sujeto, en el cuerpo (opcional) también use el imperativo, presente. El cuerpo debe incluir la motivación para el cambio y contrastarla con la conducta anterior. Estás explicando el “por qué”, no el “cómo”.</p>
+<p>✅ Tómate unos minutos para navegar por GitHub. ¿Puedes encontrar un mensaje de compromiso realmente bueno? ¿Puedes encontrar uno realmente mínimo? ¿Qué información crees que es la más importante y útil de transmitir en un mensaje de compromiso?</p>
+<h3 id="tarea-colaborar">Tarea: Colaborar</h3>
+<p>La razón principal para poner cosas en GitHub fue hacer posible la colaboración con otros desarrolladores.</p>
+<h2 id="trabajando-en-proyectos-con-otros">Trabajando en proyectos con otros</h2>
+<p>En tu repositorio, ve a <code>Insights &gt; Community</code> para ver cómo se compara tu proyecto con los estándares comunitarios recomendados.</p>
+<p>Aquí hay algunas cosas que pueden mejorar tu repositorio de GitHub: - <strong>Descripción</strong>. ¿Agregaste una descripción para tu proyecto? - <strong>README</strong>. ¿Agregaste un archivo README? GitHub proporciona una guía para escribir un <a href="https://docs.github.com/articles/about-readmes/">README</a>. - <strong>Guía de contribución</strong>. ¿Tiene <a href="https://docs.github.com/articles/setting-guidelines-for-repository-contributors/">guías de contribución</a> tu proyecto? - <strong>Código de Conducta</strong>. Crea un <a href="https://docs.github.com/articles/adding-a-code-of-conduct-to-your-project/">Código de conducta</a>. - <strong>Licencia</strong>. Quizás lo más importante, una <a href="https://docs.github.com/articles/adding-a-license-to-a-repository/">licencia</a>.</p>
+<p>Todos estos recursos beneficiarán la incorporación de nuevos miembros del equipo. Y esos son típicamente el tipo de cosas que los nuevos colaboradores miran antes incluso de mirar tu código, para descubrir si tu proyecto es el lugar adecuado para que ellos pasen su tiempo.</p>
+<p>✅ Los archivos README, aunque requieren tiempo para prepararse, a menudo son descuidados por los mantenedores. ¿Puedes encontrar un ejemplo de uno particularmente descriptivo? Nota: aquí hay algunas <a href="https://www.makeareadme.com/">herramientas para ayudar a crear buenos archivos READMEs</a> que te puedes probar.</p>
+<h3 id="tarea-fusionar-merging-código">Tarea: Fusionar (merging) código</h3>
+<p>Los documentos que contribuyes ayudan a las personas a contribuir al proyecto. Explica qué tipos de contribuciones estás buscando y cómo funciona el proceso. Los colaboradores deberán seguir una serie de pasos para poder contribuir a tu repositorio en GitHub:</p>
+<ol type="1">
+<li><strong>Bifurcando (forking) tu repositorio</strong> Probablemente querrás que la gente <em>bifurque</em> (fork) tu proyecto. Bifurcar significa crear una réplica de tu repositorio en su perfil de GitHub.</li>
+<li><strong>Clonar</strong>. Desde allí, clonarán el proyecto en su máquina local.</li>
+<li><strong>Crear una rama</strong>. Querrás pedirles que creen una _ rama_ para su trabajo.</li>
+<li><strong>Concentre su cambio en un área</strong>. Pida a los colaboradores que concentren sus contribuciones en una cosa a la vez; de esa manera, las posibilidades de <em>fusionar</em> su trabajo son mayores. Imagínate que escriben una corrección de errores, agregan una nueva función y actualizan varias pruebas; ¿qué sucede si quieres todos los cambios o solo puedes implementar 2 de 3 o 1 de 3 cambios?</li>
+</ol>
+<p>✅ Imagínate una situación en la que las ramas (branches) de git son particularmente críticas para escribir y enviar buen código. ¿Qué casos de uso se te ocurren?</p>
+<blockquote>
+<p>Se el cambio que deseas ver en el mundo y crea también ramas para tu propio trabajo. Todas las confirmaciones que realices se realizarán en la rama en la que estás actualmente “registrado”. Usa <code>git status</code> para ver qué rama es.</p>
+</blockquote>
+<p>Repasemos el flujo de trabajo de un colaborador. Supon que el colaborador ya ha <em>bifurcado</em> y <em>clonado</em> el repositorio para que tenga un repositorio de Git listo para trabajar en su máquina local:</p>
+<ol type="1">
+<li><p><strong>Crea una rama</strong>. Usa el comando <code>git branch</code> para crear una rama que tendrá los cambios que quieres contribuir:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="fu">git</span> branch [branch-name]</a></code></pre></div></li>
+<li><p><strong>Cambiar a rama de trabajo</strong>. Cambia a la rama especificada y actualiza tu directorio de trabajo con <code>git checkout</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"><span class="fu">git</span> checkout [branch-name]</a></code></pre></div></li>
+<li><p><strong>Trabaja</strong>. En este punto, deseas agregar tus cambios. No olvides informarle a Git con los siguientes comandos:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"><span class="fu">git</span> add .</a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="fu">git</span> commit -m <span class="st">&quot;mis cambios&quot;</span></a></code></pre></div>
+<p>Asegúrate de darle un buen nombre a tu commit, tanto por tu bien como por el mantenedor del repositorio en el que estás ayudando.</p></li>
+<li><p><strong>Combina tu trabajo con la rama <code>principal</code></strong>. En algún momento has terminado de trabajar y deseas combinar tu trabajo con el de la rama <code>principal</code>. La rama <code>main</code> podría haber cambiado mientras tanto, así que asegúrate de actualizarla con los siguientes comandos:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1"><span class="fu">git</span> checkout main</a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="fu">git</span> pull</a></code></pre></div>
+<p>En este punto, querrás asegurarte de que cualquier <em>conflicto</em>, situaciones en las que Git no pueda <em>combinarse</em> fácilmente los cambios, ocurren en tu rama de trabajo. Mientras tanto, ejecuta los siguientes comandos:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1"><span class="fu">git</span> checkout [branch_name]</a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="fu">git</span> merge main</a></code></pre></div>
+<p>Esto traerá todos los cambios de <code>main</code> a su rama y es de esperar que pueda continuar. De lo contrario, VS Code le dirá dónde está <em>confundido</em> Git y simplemente modificará los archivos afectados para decir qué contenido es el más preciso.</p></li>
+<li><p><strong>Envía tu trabajo a GitHub</strong>. Enviar tu trabajo a GitHub significa dos cosas. Empujar tu rama a tu repositorio y luego abrir un PR (Pull Request).</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1"><span class="fu">git</span> push --set-upstream origin [branch-name]</a></code></pre></div>
+<p>El comando anterior crea la rama en tu repositorio bifurcado.</p></li>
+<li><p><strong>Abre un PR</strong>. A continuación, abre un PR. Para hacerlo, navega al repositorio bifurcado en GitHub. Verás una indicación en GitHub donde te preguntarán si deseas crear un nuevo PR. Haz clic en eso y lo llevará a una interfaz donde puedes cambiar el título del mensaje de confirmación, asignarle una descripción más adecuada. Ahora, el mantenedor del repositorio que bifurcaste verá este PR y <em>dedos cruzados</em> apreciarán y _ fusionarán_ tu PR. Ahora eres un colaborador, yay :)</p></li>
+<li><p><strong>Limpiar</strong>. Se considera una buena práctica <em>limpiar</em> después de ti. Limpiar tanto tu rama local como la rama que enviaste a GitHub. Primero eliminémoslo localmente con el siguiente comando:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" title="1"><span class="fu">git</span> branch -d [branch-name]</a></code></pre></div>
+<p>Asegúrate de ir a la página de GitHub del repositorio bifurcado a continuación y elimina la rama remota que acabas de ingresar.</p></li>
+</ol>
+<p><code>Solicitud de extracción</code> parece un término tonto porque realmente deseas impulsar los cambios al proyecto. Pero el mantenedor (propietario del proyecto) o el equipo central debe considerar tus cambios antes de fusionarlo con la rama “principal” del proyecto, por lo que realmente estás solicitando una decisión de cambio a un mantenedor.</p>
+<p>Una solicitud de extracción es el lugar para comparar y discutir las diferencias introducidas en una rama con revisiones, comentarios, pruebas integradas y más. Una buena solicitud de extracción sigue aproximadamente las mismas reglas que un mensaje de confirmación. Puedes agregar una referencia a un problema en el rastreador de problemas, cuando tu trabajo, por ejemplo, soluciona un problema. Esto se hace usando un ‘#’ seguido del número de tu problema. Por ejemplo, <code>#97</code>.</p>
+<p>🤞 Cruza los dedos para que todos los controles pasen y los propietarios del proyecto combinen tus cambios en el proyecto🤞</p>
+<p>Actualice tu rama de trabajo local actual con todas las nuevas confirmaciones de la rama remota correspondiente en GitHub:</p>
+<p><code>git pull</code></p>
+<h2 id="cómo-contribuir-al-código-abierto">Cómo contribuir al código abierto</h2>
+<p>Primero, busquemos un repositorio en GitHub que te interese y al que te gustaría contribuir con un cambio. Querrás copiar el contenido a nuestra máquina.</p>
+<p>✅ Una buena forma de encontrar repositorios ‘aptos para principiantes’ es <a href="https://github.blog/2020-01-22-browse-good-first-issues-para-empezar-a-contribuir-al-código-abierto/">buscar por la etiqueta <code>buena-primera-edición</code></a>.</p>
+<p>Hay varias formas de copiar código. Una forma es “clonar” el contenido del repositorio, usando HTTPS, SSH o usando GitHub CLI (Interfaz de línea de comandos).</p>
+<p>Abre tu terminal y clona el repositorio así: <code>git clone https://github.com/ProjectURL</code></p>
+<p>Para trabajar en el proyecto, cambia al directorio correcto: <code>cd ProjectURL</code></p>
+<p>También puedes abrir todo el proyecto utilizando <a href="https://github.com/features/codespaces">Codespaces</a>, el entorno de desarrollo en la nube / editor de código integrado de GitHub o <a href="https://desktop.github.com/">GitHub Desktop</a>.</p>
+<p>Por último, puedes descargar el código en un directorio comprimido.</p>
+<h3 id="algunas-cosas-más-interesantes-sobre-github">Algunas cosas más interesantes sobre GitHub</h3>
+<p>Puede destacar, ver y / o “fork” cualquier repositorio público en GitHub. Puedes encontrar tus repositorios destacados en el menú desplegable de la parte superior derecha. Es como marcar como favorito, pero por código.</p>
+<p>Los proyectos tienen un rastreador de problemas, principalmente en GitHub en la pestaña “Issues” a menos que se indique lo contrario, donde las personas debaten los problemas relacionados con el proyecto. Y la pestaña Solicitudes de extracción es donde las personas debaten y revisan los cambios que están en curso.</p>
+<p>Los proyectos también pueden tener discusiones en foros, listas de correo o canales de chat como Slack, Discord o IRC.</p>
+<p>✅ Echa un vistazo a tu nuevo repositorio de GitHub y prueba algunas cosas, como editar la configuración, agregar información a tu repositorio y crear un proyecto (como un tablero Kanban). ¡Hay muchas cosas que puedes hacer!</p>
+<p>🚀 Desafío: empareja con un amigo(a) para trabajar en el código juntos. Crea un proyecto de forma colaborativa, bifurque el código, crea ramas y combina los cambios.</p>
+<h2 id="post-lecture-prueba"><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/4">Post-lecture prueba</a></h2>
+<h2 id="revisión-y-autoestudio">Revisión y autoestudio</h2>
+<p>Obtén más información sobre <a href="https://opensource.guide/how-to-contribute/#how-to-submit-a-contribution">contribución al software de código abierto</a>.</p>
+<p><a href="https://training.github.com/downloads/github-git-cheat-sheet/">Hoja de referencia de Git</a>.</p>
+<p>Práctica práctica práctica. GitHub tiene excelentes rutas de aprendizaje disponibles a través de <a href="https://lab.github.com/">lab.github.com</a>:</p>
+<ul>
+<li><a href="https://lab.github.com/githubtraining/first-week-on-github">Primera semana en GitHub</a></li>
+</ul>
+<p>También encontrarás laboratorios más avanzados.</p>
+<p><strong>Tarea</strong>: Completa <a href="https://lab.github.com/githubtraining/first-week-on-github">la primera semana en el laboratorio de capacitación de GitHub</a></p>
+</body>
+</html>

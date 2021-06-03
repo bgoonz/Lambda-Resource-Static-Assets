@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2017-12-14" />
+  <title>Installing extensions on Linux</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Installing extensions on Linux</h1>
+<p class="date">2017-12-14</p>
+</header>
+<p>{% include ‘partials/extensions/mv2page-in-mv3.md’ %}</p>
+<p>Extensions hosted outside of the <a href="http://chrome.google.com/webstore">Chrome Web Store</a> can only be installed by Linux users. This article describes how to package, host, and update <code>.crx</code> files from a personal server. If distributing an extension or theme solely through the <a href="http://chrome.google.com/webstore">Chrome Web Store</a>, consult <a href="/docs/extensions/mv3/hosting">Webstore Hosting and Updating</a>.</p>
+<h2 id="packaging-packaging">Packaging {: #packaging }</h2>
+<p>Extensions and themes are served as <code>.crx</code> files. When uploading through the <a href="https://chrome.google.com/webstore/developer/dashboard">Chrome Developer Dashboard</a> , the dashboard creates the <code>.crx</code> file automatically. If published on a personal server, the <code>.crx</code> file will need to be created locally or downloaded from the Chrome Web Store.</p>
+<!-- TODO this section's ID was previouly #create which is a duplicate of another section -->
+<h3 id="download-.crx-from-the-chrome-web-store">Download .crx from the Chrome Web Store</h3>
+<p>If an extension is hosted on the Chrome Web Store, the <code>.crx</code> file can be downloaded from the Developer Dashboard. Locate the extension under “Your Listings” and click on “More info”. In the popup window, click the blue <code>main.crx</code> link to download it.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/ympE762hCQc9EH6ZIB9W.png”, alt=“Download .crx from the Developer Dashboard”, height=“271”, width=“484” %}</p>
+<p>The downloaded file can be hosted on a personal server. This is the most secure way to host an extension locally as the contents of the extension will be signed by the Chrome Web Store. This helps detect potential attacks and tampering.</p>
+<h3 id="create-.crx-locally-create">Create .crx locally {: #create }</h3>
+<p>Extension directories are converted to <code>.crx</code> files at the Extensions Management Page. Navigate to <code>chrome://extensions/</code> in the ominibox, or click on the Chrome menu, hover over “More Tools” then select “Extensions”.</p>
+<p>On the Extensions Management Page, enable Developer Mode by clicking the toggle switch next to <strong>Developer mode</strong>. Then select the <strong>PACK EXTENSION</strong> button.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/uO9oti7LStDokrnq6d0Q.png”, alt=“Developer Mode is Checked then Click Pack Extension”, height=“120”, width=“642” %}</p>
+<p>Specify the path to the extension’s folder in the Extension root directory field then click the <strong>PACK EXTENSION</strong> button. Ignore the <strong>Private key</strong> field for a first-time package.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/a0iFUqr8SpjTcIjtXy44.png”, alt=“Specify Extension Path then Click Pack Extension”, height=“307”, width=“524” %}</p>
+<p>Chrome will create two files, a <code>.crx</code> file and a <code>.pem</code> file, which contains the extension’s private key.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/sECV1ZYWjipkhNiwwMJv.png”, alt=“Packaged Extension Files”, height=“210”, width=“521” %}</p>
+<p><strong>Do not lose the private key!</strong> Keep the <code>.pem</code> file in a secret and secure place; it will be needed to <a href="#update">update</a> the extension.</p>
+<!-- TODO duplicate ID (was previously #update) -->
+<h3 id="update-a-.crx-package">Update a .crx package</h3>
+<p>Update an extension’s <code>.crx</code> file by increasing the version number in <code>manifest.json</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.5&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="er">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.6&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="er">}</span></a></code></pre></div>
+<p>Return to the <a href="/packaging#extension_management">Extensions Management Page</a> and click the <strong>PACK EXTENSION</strong> button. Specify the path to the extensions directory and the location of private key.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/gcvNd3qR9hU7Pp0fQvhZ.png”, alt=“Updating Extension Files”, height=“305”, width=“521” %}</p>
+<p>The page will provide the path for the updated packaged extension.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/sECV1ZYWjipkhNiwwMJv.png”, alt=“Updating Extension Files”, height=“210”, width=“521” %}</p>
+<!-- TODO(kaycebasques): Had duplicated ID of #packaging -->
+<h3 id="package-through-command-line">Package through command line</h3>
+<p>Package extensions in the command line by invoking <a href="https://www.chromium.org/developers/how-tos/run-chromium-with-flags"><code>chrome.exe</code></a>. Use the <code>--pack-extension</code> flag to specify the location of the extension’s folder and the <code>--pack-extension-key</code> flag to specify the location of the extension’s private key file.</p>
+<pre class="shell"><code>chrome.exe --pack-extension=C:\myext --pack-extension-key=C:\myext.pem</code></pre>
+<h2 id="hosting-hosting">Hosting {: #hosting }</h2>
+<p>A server that hosts <code>.crx</code> files must use appropriate HTTP headers to allow users to install the extension by clicking a link.</p>
+<p>Google Chrome considers a file to be installable if <strong>either</strong> of the following is true:</p>
+<ul>
+<li>The file has the content type <code>application/x-chrome-extension</code></li>
+<li>The file suffix is <code>.crx</code> and <strong>both</strong> of the following are true:
+<ul>
+<li>The file <strong>is not</strong> served with the HTTP header <code>X-Content-Type-Options: nosniff</code></li>
+<li>The file <strong>is</strong> served with one of the following content types:
+<ul>
+<li>empty string</li>
+<li>“text/plain”</li>
+<li>“application/octet-stream”</li>
+<li>“unknown/unknown”</li>
+<li>“application/unknown”</li>
+<li>“*/*”</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>The most common reason for failing to recognize an installable file is that the server sends the header <code>X-Content-Type-Options: nosniff</code>. The second most common reason is that the server sends an unknown content type—one that isn’t in the previous list. To fix an HTTP header issue, either change the configuration of the server or try hosting the <code>.crx</code> file at another server.</p>
+<h2 id="updating-update">Updating {: #update }</h2>
+<p>Every few hours, the browser checks installed extensions for an update URL. For each one, it makes a request to that URL looking for an update manifest XML file.</p>
+<ul>
+<li>The content returned by an update check is an <em>update manifest</em> XML document listing the latest version of an extension.</li>
+</ul>
+<p>If the update manifest mentions a version that is more recent than what is installed, the browser downloads and installs the new version. As with manual updates, the new <code>.crx</code> file must be signed with the same private key as the currently installed version.</p>
+<div class="aside aside--note">
+<b>Note:</b> In order to maintain user privacy, Google Chrome does not send any Cookie headers with autoupdate manifest requests, and ignores any Set-Cookie headers in the responses to those requests.
+</div>
+<h3 id="update-url-update_url">Update URL {: #update_url }</h3>
+<p>Extensions hosted on servers outside of the Chrome Webstore must include the <code>update_url</code> field in their <a href="/docs/extensions/mv3/tabs"><code>manifest.json</code></a> file.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;My extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="dt">&quot;update_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://myhost.com/mytestextension/updates.xml&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="fu">}</span></a></code></pre></div>
+<h3 id="update-manifest-update_manifest">Update manifest {: #update_manifest }</h3>
+<p>The update manifest returned by the server should be an XML document.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;?xml</span> version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;<span class="kw">?&gt;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">&lt;gupdate</span><span class="ot"> xmlns=</span><span class="st">&#39;https://www.google.com/update2/response&#39;</span><span class="ot"> protocol=</span><span class="st">&#39;2.0&#39;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="kw">&lt;app</span><span class="ot"> appid=</span><span class="st">&#39;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&#39;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="kw">&lt;updatecheck</span><span class="er"> codebase=&#39;https://myhost.com/mytestextension/mte_v2.crx&#39; version=&#39;2.0&#39;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="kw">&lt;/app&gt;</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="kw">&lt;/gupdate&gt;</span></a></code></pre></div>
+<p>This XML format is borrowed from that used by <a href="https://github.com/google/omaha">Omaha</a>, Google’s update infrastructure. The extensions system uses the following attributes for the <code>&lt;app&gt;</code> and <code>&lt;updatecheck&gt;</code> elements of the update manifest:</p>
+<table>
+<tbody>
+<tr>
+<td>
+appid
+</td>
+<td>
+The extension ID is generated based on a hash of the public key, as described in <a href="/linux_hosting#packaging">packaging</a>. An extension’s ID is displayed on the <a href="/linux_hosting#extension_management">Extensions Managment Page</a>
+</td>
+</tr>
+<tr>
+<td>
+codebase
+</td>
+<td>
+An HTTPS URL to the <code>.crx</code> file.
+</td>
+</tr>
+<tr>
+<td>
+version
+</td>
+<td>
+Used by the client to determine whether it should download the <code>.crx</code> file specified by <code>codebase</code>. It should match the value of “version” in the <code>.crx</code> file’s <code>manifest.json</code> file.
+</td>
+</tr>
+</tbody>
+</table>
+<p>The update manifest XML file may contain information about multiple extensions by including multiple <app> elements.</p>
+<h3 id="testing-testing">Testing {: #testing }</h3>
+<p>The default update check frequency is several hours, but an update can be forced using the <strong>Update extensions now</strong> button on the Extensions Management Page.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/VoSOLJm03H8uwWTQJP7w.png”, alt=“Update Extensions Now”, height=“115”, width=“773” %}</p>
+<p>This will start checks for all installed extensions.</p>
+<h3 id="advanced-usage-request-parameters-request_parameters">Advanced usage: request parameters {: #request_parameters }</h3>
+<p>The basic autoupdate mechanism is designed to make the server-side work as easy as just dropping a static XML file onto any plain web server, such as Apache, and updating that XML file as new extension versions are released.</p>
+<p>Developers hosting multiple extensions may check request parameters, which indicate the extension ID and version in the update request. Including these paramaters allow extensions to update from the same URL running dynamic server-side code instead of a static XML file.</p>
+<p>The format of the request parameters is:</p>
+<p><code>?x=_&lt;extension_data&gt;_</code></p>
+<p>Where <code>_&lt;extension_data&gt;_</code> is a URL-encoded string of the format:</p>
+<p><code>_id=&lt;id&gt;_&amp;v=_&lt;version&gt;_</code></p>
+<p>For example, two extensions point to the same update URL (<code>https://test.com/extension_updates.php</code>):</p>
+<ul>
+<li>Extension 1
+<ul>
+<li>ID: “aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa”</li>
+<li>Version: “1.1”</li>
+</ul></li>
+<li>Extension 2
+<ul>
+<li>ID: “bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb”</li>
+<li>Version: “0.4”</li>
+</ul></li>
+</ul>
+<p>The request to update each individual extension would be,</p>
+<pre class="http"><code>https://test.com/extension_updates.php?x=id%3Daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa%26v%3D1.1</code></pre>
+<p>and</p>
+<pre class="http"><code>https://test.com/extension_updates.php?x=id%3Dbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb%26v%3D0.4</code></pre>
+<p>Multiple extensions can be listed in a single request for each unique update URL. For the above example, if a user has both of the extensions installed, then the two requests are merged into a single request:</p>
+<pre class="http"><code>https://test.com/extension_updates.php?x=id%3Daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa%26v%3D1.1&amp;x=id%3Dbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb%26v%3D0.4</code></pre>
+<p>If the number of installed extensions using the same update URL is large enough that a GET request URL is too long (over 2000 characters or so), the update check issues additional GET requests as necessary.</p>
+<h3 id="advanced-usage-minimum-browser-version-minimum_browser_version">Advanced usage: minimum browser version {: #minimum_browser_version }</h3>
+<p>As more APIs are added to the extensions system, an updated version of an extension that will work only with newer versions of the browser may be released. While Google Chrome itself is autoupdated, it can take a few days before the majority of the user base has updated to any given new release. To ensure that a given update will apply only to Google Chrome versions at or higher than a specific version, add the “prodversionmin” attribute to the <app> element in the update response.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">&lt;?xml</span> version=&#39;1.0&#39; encoding=&#39;UTF-8&#39;<span class="kw">?&gt;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">&lt;gupdate</span><span class="ot"> xmlns=</span><span class="st">&#39;http://www.google.com/update2/response&#39;</span><span class="ot"> protocol=</span><span class="st">&#39;2.0&#39;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="kw">&lt;app</span><span class="ot"> appid=</span><span class="st">&#39;aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&#39;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="kw">&lt;updatecheck</span><span class="er"> codebase=&#39;http://myhost.com/mytestextension/mte_v2.crx&#39; version=&#39;2.0&#39;</span><span class="ot"> prodversionmin=</span><span class="st">&#39;3.0.193.0&#39;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb9-5" title="5">  <span class="kw">&lt;/app&gt;</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="kw">&lt;/gupdate&gt;</span></a></code></pre></div>
+<p>This would ensure that users would autoupdate to version 2 only if they are running Google Chrome 3.0.193.0 or greater.</p>
+</body>
+</html>

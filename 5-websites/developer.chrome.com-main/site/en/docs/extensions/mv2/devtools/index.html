@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2012-09-17" />
+  <title>Extending DevTools</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Extending DevTools</h1>
+<p class="date">2012-09-17</p>
+</header>
+<p>{% include ‘partials/extensions/mv2-legacy-page.md’ %}</p>
+<h2 id="overview-overview">Overview {: #overview }</h2>
+<p>A DevTools extension adds functionality to the Chrome DevTools. It can add new UI panels and sidebars, interact with the inspected page, get information about network requests, and more. View <a href="https://chrome.google.com/webstore/category/ext/11-web-development">featured DevTools extensions</a>. DevTools extensions have access to an additional set of DevTools-specific extension APIs:</p>
+<ul>
+<li><a href="/docs/extensions/reference/devtools_inspectedWindow"><code>devtools.inspectedWindow</code></a></li>
+<li><a href="/docs/extensions/reference/devtools_network"><code>devtools.network</code></a></li>
+<li><a href="/docs/extensions/reference/devtools_panels"><code>devtools.panels</code></a></li>
+</ul>
+<p>A DevTools extension is structured like any other extension: it can have a background page, content scripts, and other items. In addition, each DevTools extension has a DevTools page, which has access to the DevTools APIs.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/kcLMpTY6qtez03TVSqt4.png”, alt=“Architecture diagram showing DevTools page communicating with the inspected window and the background page. The background page is shown communicating with the content scripts and accessing extension APIs. The DevTools page has access to the DevTools APIs, for example, creating panels.”, height=“556”, width=“522” %}</p>
+<h2 id="the-devtools-page-devtools-page">The DevTools page {: #devtools-page }</h2>
+<p>An instance of the extension’s DevTools page is created each time a DevTools window opens. The DevTools page exists for the lifetime of the DevTools window. The DevTools page has access to the DevTools APIs and a limited set of extension APIs. Specifically, the DevTools page can:</p>
+<ul>
+<li>Create and interact with panels using the <a href="/docs/extensions/reference/devtools_panels"><code>devtools.panels</code></a> APIs.</li>
+<li>Get information about the inspected window and evaluate code in the inspected window using the <a href="/docs/extensions/reference/devtools_inspectedWindow"><code>devtools.inspectedWindow</code></a> APIs.</li>
+<li>Get information about network requests using the <a href="/docs/extensions/reference/devtools_network"><code>devtools.network</code></a> APIs.</li>
+</ul>
+<p>The DevTools page cannot use most of the extensions APIs directly. It has access to the same subset of the <a href="/docs/extensions/reference/extension"><code>extension</code></a> and <a href="/docs/extensions/reference/runtime"><code>runtime</code></a> APIs that a content script has access to. Like a content script, a DevTools page can communicate with the background page using <a href="/docs/extensions/mv2/messaging">Message Passing</a>. For an example, see <a href="#injecting">Injecting a Content Script</a>.</p>
+<h2 id="creating-a-devtools-extension-creating">Creating a DevTools extension {: #creating }</h2>
+<p>To create a DevTools page for your extension, add the <code>devtools_page</code> field in the extension manifest:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="st">&quot;version&quot;</span><span class="er">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;minimum_chrome_version&quot;</span><span class="fu">:</span> <span class="st">&quot;10.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">&quot;devtools_page&quot;</span><span class="fu">:</span> <span class="st">&quot;devtools.html&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<p>An instance of the <code>devtools_page</code> specified in your extension’s manifest is created for every DevTools window opened. The page may add other extension pages as panels and sidebars to the DevTools window using the <a href="/docs/extensions/reference/devtools_panels"><code>devtools.panels</code></a> API.</p>
+<p>{% Aside %}</p>
+<p>The <code>devtools_page</code> field must point to an HTML page. This differs from the <code>background</code> field, used for specifying a background page, which lets you specify JavaScript files directly. The DevTools page must be local to your extension, so it is best to specify it using a relative URL.</p>
+<p>{% endAside %}</p>
+<p>The <code>chrome.devtools.*</code> API modules are available only to the pages loaded within the DevTools window. Content scripts and other extension pages do not have these APIs. Thus, the APIs are available only through the lifetime of the DevTools window.</p>
+<p>There are also some DevTools APIs that are still experimental. Refer to <a href="/docs/extensions/reference/experimental">chrome.experimental.* APIs</a> for the list of experimental APIs and guidelines on how to use them.</p>
+<h2 id="devtools-ui-elements-panels-and-sidebar-panes-devtools-ui">DevTools UI elements: panels and sidebar panes {: #devtools-ui }</h2>
+<p>In addition to the usual extension UI elements, such as browser actions, context menus and popups, a DevTools extension can add UI elements to the DevTools window:</p>
+<ul>
+<li>A <em>panel</em> is a top-level tab, like the Elements, Sources, and Network panels.</li>
+<li>A <em>sidebar pane</em> presents supplementary UI related to a panel. The Styles, Computed Styles, and Event Listeners panes on the Elements panel are examples of sidebar panes. (Note that the appearance of sidebar panes may not match the image, depending on the version of Chrome you’re using, and where the DevTools window is docked.)</li>
+</ul>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/TDNgfhI9byR4eeGQ0Xxv.png”, alt=“DevTools window showing Elements panel and Styles sidebar pane.”, height=“302”, width=“770” %}</p>
+<p>Each panel is its own HTML file, which can include other resources (JavaScript, CSS, images, and so on). Creating a basic panel looks like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">chrome</span>.<span class="va">devtools</span>.<span class="va">panels</span>.<span class="at">create</span>(<span class="st">&quot;My Panel&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="st">&quot;MyPanelIcon.png&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="st">&quot;Panel.html&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">function</span>(panel) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-5" title="5">      <span class="co">// code invoked on panel creation</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-7" title="7">)<span class="op">;</span></a></code></pre></div>
+<p>JavaScript executed in a panel or sidebar pane has access to the the same APIs as the DevTools page.</p>
+<p>Creating a basic sidebar pane for the Elements panel looks like this:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="va">chrome</span>.<span class="va">devtools</span>.<span class="va">panels</span>.<span class="va">elements</span>.<span class="at">createSidebarPane</span>(<span class="st">&quot;My Sidebar&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="kw">function</span>(sidebar) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">        <span class="co">// sidebar initialization code here</span></a>
+<a class="sourceLine" id="cb3-4" title="4">        <span class="va">sidebar</span>.<span class="at">setObject</span>(<span class="op">{</span> <span class="dt">some_data</span><span class="op">:</span> <span class="st">&quot;Some data to show&quot;</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>There are several ways to display content in a sidebar pane:</p>
+<ul>
+<li>HTML content. Call <a href="/docs/extensions/reference/devtools_panels#method-ExtensionSidebarPane-setPage"><code>setPage</code></a> to specify an HTML page to display in the pane.</li>
+<li>JSON data. Pass a JSON object to <a href="/docs/extensions/reference/devtools_panels#method-ExtensionSidebarPane-setObject"><code>setObject</code></a>.</li>
+<li>JavaScript expression. Pass an expression to <a href="/docs/extensions/reference/devtools_panels#method-ExtensionSidebarPane-setExpression"><code>setExpression</code></a>. DevTools evaluates the expression in the context of the inspected page, and displays the return value.</li>
+</ul>
+<p>For both <code>setObject</code> and <code>setExpression</code>, the pane displays the value as it would appear in the DevTools console. However, <code>setExpression</code> lets you display DOM elements and arbitrary JavaScript objects, while <code>setObject</code> only supports JSON objects.</p>
+<h2 id="communicating-between-extension-components-solutions">Communicating between extension components {: #solutions }</h2>
+<p>The following sections describe some typical scenarios for communicating between the different components of a DevTools extension.</p>
+<h3 id="injecting-a-content-script-injecting">Injecting a content script {: #injecting }</h3>
+<p>The DevTools page can’t call <a href="/docs/extensions/reference/tabs#method-executeScript"><code>tabs.executeScript</code></a> directly. To inject a content script from the DevTools page, you must retrieve the ID of the inspected window’s tab using the <a href="/docs/extensions/reference/devtools_inspectedWindow#property-tabId"><code>inspectedWindow.tabId</code></a> property and send a message to the background page. From the background page, call <a href="/docs/extensions/reference/tabs#method-executeScript"><code>tabs.executeScript</code></a> to inject the script.</p>
+<p>{% Aside %}</p>
+<p>If a content script has already been injected, you can add additional context scripts using the <code>eval</code> method. See <a href="#selected-element">Passing the Selected Element to a Content Script</a> for more information.</p>
+<p>{% endAside %}</p>
+<p>The following code snippets show how to inject a content script using <code>executeScript</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">// DevTools page -- devtools.js</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co">// Create a connection to the background page</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">var</span> backgroundPageConnection <span class="op">=</span> <span class="va">chrome</span>.<span class="va">runtime</span>.<span class="at">connect</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;devtools-page&quot;</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="va">backgroundPageConnection</span>.<span class="va">onMessage</span>.<span class="at">addListener</span>(<span class="kw">function</span> (message) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="co">// Handle responses from the background page, if any</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">// Relay the tab ID to the background page</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="va">chrome</span>.<span class="va">runtime</span>.<span class="at">sendMessage</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb4-13" title="13">    <span class="dt">tabId</span><span class="op">:</span> <span class="va">chrome</span>.<span class="va">devtools</span>.<span class="va">inspectedWindow</span>.<span class="at">tabId</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-14" title="14">    <span class="dt">scriptToInject</span><span class="op">:</span> <span class="st">&quot;content_script.js&quot;</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Code for the background page:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="co">// Background page -- background.js</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="va">chrome</span>.<span class="va">runtime</span>.<span class="va">onConnect</span>.<span class="at">addListener</span>(<span class="kw">function</span>(devToolsConnection) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="co">// assign the listener function to a variable so we can remove it later</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="kw">var</span> devToolsListener <span class="op">=</span> <span class="kw">function</span>(message<span class="op">,</span> sender<span class="op">,</span> sendResponse) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-5" title="5">        <span class="co">// Inject a content script into the identified tab</span></a>
+<a class="sourceLine" id="cb5-6" title="6">        <span class="va">chrome</span>.<span class="va">tabs</span>.<span class="at">executeScript</span>(<span class="va">message</span>.<span class="at">tabId</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-7" title="7">            <span class="op">{</span> <span class="dt">file</span><span class="op">:</span> <span class="va">message</span>.<span class="at">scriptToInject</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-9" title="9">    <span class="co">// add the listener</span></a>
+<a class="sourceLine" id="cb5-10" title="10">    <span class="va">devToolsConnection</span>.<span class="va">onMessage</span>.<span class="at">addListener</span>(devToolsListener)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-11" title="11"></a>
+<a class="sourceLine" id="cb5-12" title="12">    <span class="va">devToolsConnection</span>.<span class="va">onDisconnect</span>.<span class="at">addListener</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-13" title="13">         <span class="va">devToolsConnection</span>.<span class="va">onMessage</span>.<span class="at">removeListener</span>(devToolsListener)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-14" title="14">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="evaluating-javascript-in-the-inspected-window-evaluating-js">Evaluating JavaScript in the inspected window {: #evaluating-js }</h3>
+<p>You can use the <a href="/docs/extensions/reference/devtools_inspectedWindow#method-eval"><code>inspectedWindow.eval</code></a> method to execute JavaScript code in the context of the inspected page. You can invoke the <code>eval</code> method from a DevTools page, panel or sidebar pane.</p>
+<p>By default, the expression is evaluated in the context of the main frame of the page. Now, you may be familiar with the DevTools <a href="/devtools/docs/commandline-api">commandline API</a> features like element inspection (<code>inspect(elem)</code>), breaking on functions (<code>debug(fn)</code>), copying to clipboard (<code>copy()</code>) and more. <code>inspectedWindow.eval()</code> uses the same script execution context and options as the code typed at the DevTools console, which allows access to these APIs within the eval. For example, <a href="https://github.com/RedRibbon/SOAK/blob/ffdfad68ffb6051fa2d4e9db0219b3d234ac1ae8/pages/devtools.js#L6-L8">SOAK</a> uses it for inspecting an element:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="va">chrome</span>.<span class="va">devtools</span>.<span class="va">inspectedWindow</span>.<span class="at">eval</span>(</a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="st">&quot;inspect($$(&#39;head script[data-soak=main]&#39;)[0])&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">function</span>(result<span class="op">,</span> isException) <span class="op">{</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-4" title="4">)<span class="op">;</span></a></code></pre></div>
+<p>Alternatively, use the <code>useContentScriptContext: true</code> option for <code>inspectedWindow.eval()</code> to evaluate the expression in the same context as the content scripts. Calling <code>eval</code> with <code>useContentScriptContext: true</code> does not <em>create</em> a content script context, so you must load a context script before calling <code>eval</code>, either by calling <code>executeScript</code> or by specifying a content script in the <code>manifest.json</code> file.</p>
+<p>Once the context script context exists, you can use this option to inject additional content scripts.</p>
+<p>The <code>eval</code> method is powerful when used in the right context and dangerous when used inappropriately. Use the <a href="/docs/extensions/reference/tabs#method-executeScript"><code>tabs.executeScript</code></a> method if you don’t need access to the JavaScript context of the inspected page. For detailed cautions and a comparison of the two methods, see <a href="/docs/extensions/reference/devtools_inspectedWindow"><code>inspectedWindow</code></a>.</p>
+<h3 id="passing-the-selected-element-to-a-content-script-selected-element">Passing the selected element to a content script {: #selected-element }</h3>
+<p>The content script doesn’t have direct access to the current selected element. However, any code you execute using <a href="/docs/extensions/reference/devtools_inspectedWindow#method-eval"><code>inspectedWindow.eval</code></a> has access to the DevTools console and command-line APIs. For example, in evaluated code you can use <code>$0</code> to access the selected element.</p>
+<p>To pass the selected element to a content script:</p>
+<ul>
+<li>Create a method in the content script that takes the selected element as an argument.</li>
+<li>Call the method from the DevTools page using <a href="/docs/extensions/reference/devtools_inspectedWindow#method-eval"><code>inspectedWindow.eval</code></a> with the <code>useContentScriptContext: true</code> option.</li>
+</ul>
+<p>The code in your content script might look something like this:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">setSelectedElement</span>(el) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">    <span class="co">// do something with the selected element</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>Invoke the method from the DevTools page like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="va">chrome</span>.<span class="va">devtools</span>.<span class="va">inspectedWindow</span>.<span class="at">eval</span>(<span class="st">&quot;setSelectedElement($0)&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="op">{</span> <span class="dt">useContentScriptContext</span><span class="op">:</span> <span class="kw">true</span> <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>The <code>useContentScriptContext: true</code> option specifies that the expression must be evaluated in the same context as the content scripts, so it can access the <code>setSelectedElement</code> method.</p>
+<h3 id="getting-a-reference-panels-window-panel-window">Getting a reference panel’s <code>window</code> {: #panel-window }</h3>
+<p>To <code>postMessage</code> from a devtools panel, you’ll need a reference to its <code>window</code> object. Get a panel’s iframe window in from the the <a href="/docs/extensions/reference/devtools_panels#event-ExtensionPanel-onShown"><code>panel.onShown</code></a> event handler:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="va">onShown</span>.<span class="at">addListener</span>(<span class="kw">function</span> callback)</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="va">extensionPanel</span>.<span class="va">onShown</span>.<span class="at">addListener</span>(<span class="kw">function</span> (extPanelWindow) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    extPanelWindow <span class="kw">instanceof</span> Window<span class="op">;</span> <span class="co">// true</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="va">extPanelWindow</span>.<span class="at">postMessage</span>( <span class="co">// …</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="messaging-from-content-scripts-to-the-devtools-page-content-script-to-devtools">Messaging from content scripts to the DevTools page {: #content-script-to-devtools }</h3>
+<p>Messaging between the DevTools page and content scripts is indirect, by way of the background page.</p>
+<p>When sending a message <em>to</em> a content script, the background page can use the <a href="/docs/extensions/reference/tabs#method-sendMessage"><code>tabs.sendMessage</code></a> method, which directs a message to the content scripts in a specific tab, as shown in <a href="#injecting">Injecting a Content Script</a>.</p>
+<p>When sending a message <em>from</em> a content script, there is no ready-made method to deliver a message to the correct DevTools page instance associated with the current tab. As a workaround, you can have the DevTools page establish a long-lived connection with the background page, and have the background page keep a map of tab IDs to connections, so it can route each message to the correct connection.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="co">// background.js</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw">var</span> connections <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb10-3" title="3"></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="va">chrome</span>.<span class="va">runtime</span>.<span class="va">onConnect</span>.<span class="at">addListener</span>(<span class="kw">function</span> (port) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-5" title="5"></a>
+<a class="sourceLine" id="cb10-6" title="6">    <span class="kw">var</span> extensionListener <span class="op">=</span> <span class="kw">function</span> (message<span class="op">,</span> sender<span class="op">,</span> sendResponse) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-7" title="7"></a>
+<a class="sourceLine" id="cb10-8" title="8">        <span class="co">// The original connection event doesn&#39;t include the tab ID of the</span></a>
+<a class="sourceLine" id="cb10-9" title="9">        <span class="co">// DevTools page, so we need to send it explicitly.</span></a>
+<a class="sourceLine" id="cb10-10" title="10">        <span class="cf">if</span> (<span class="va">message</span>.<span class="at">name</span> <span class="op">==</span> <span class="st">&quot;init&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-11" title="11">          connections[<span class="va">message</span>.<span class="at">tabId</span>] <span class="op">=</span> port<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-12" title="12">          <span class="cf">return</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-13" title="13">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-14" title="14"></a>
+<a class="sourceLine" id="cb10-15" title="15">    <span class="co">// other message handling</span></a>
+<a class="sourceLine" id="cb10-16" title="16">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-17" title="17"></a>
+<a class="sourceLine" id="cb10-18" title="18">    <span class="co">// Listen to messages sent from the DevTools page</span></a>
+<a class="sourceLine" id="cb10-19" title="19">    <span class="va">port</span>.<span class="va">onMessage</span>.<span class="at">addListener</span>(extensionListener)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-20" title="20"></a>
+<a class="sourceLine" id="cb10-21" title="21">    <span class="va">port</span>.<span class="va">onDisconnect</span>.<span class="at">addListener</span>(<span class="kw">function</span>(port) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-22" title="22">        <span class="va">port</span>.<span class="va">onMessage</span>.<span class="at">removeListener</span>(extensionListener)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-23" title="23"></a>
+<a class="sourceLine" id="cb10-24" title="24">        <span class="kw">var</span> tabs <span class="op">=</span> <span class="va">Object</span>.<span class="at">keys</span>(connections)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-25" title="25">        <span class="cf">for</span> (<span class="kw">var</span> i<span class="op">=</span><span class="dv">0</span><span class="op">,</span> len<span class="op">=</span><span class="va">tabs</span>.<span class="at">length</span><span class="op">;</span> i <span class="op">&lt;</span> len<span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-26" title="26">          <span class="cf">if</span> (connections[tabs[i]] <span class="op">==</span> port) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-27" title="27">            <span class="kw">delete</span> connections[tabs[i]]</a>
+<a class="sourceLine" id="cb10-28" title="28">            <span class="cf">break</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-29" title="29">          <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-30" title="30">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-31" title="31">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-32" title="32"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-33" title="33"></a>
+<a class="sourceLine" id="cb10-34" title="34"><span class="co">// Receive message from content script and relay to the devTools page for the</span></a>
+<a class="sourceLine" id="cb10-35" title="35"><span class="co">// current tab</span></a>
+<a class="sourceLine" id="cb10-36" title="36"><span class="va">chrome</span>.<span class="va">runtime</span>.<span class="va">onMessage</span>.<span class="at">addListener</span>(<span class="kw">function</span>(request<span class="op">,</span> sender<span class="op">,</span> sendResponse) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-37" title="37">    <span class="co">// Messages from content scripts should have sender.tab set</span></a>
+<a class="sourceLine" id="cb10-38" title="38">    <span class="cf">if</span> (<span class="va">sender</span>.<span class="at">tab</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-39" title="39">      <span class="kw">var</span> tabId <span class="op">=</span> <span class="va">sender</span>.<span class="va">tab</span>.<span class="at">id</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-40" title="40">      <span class="cf">if</span> (tabId <span class="kw">in</span> connections) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-41" title="41">        connections[tabId].<span class="at">postMessage</span>(request)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-42" title="42">      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-43" title="43">        <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Tab not found in connection list.&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-44" title="44">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-45" title="45">    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-46" title="46">      <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;sender.tab not defined.&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-47" title="47">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb10-48" title="48">    <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-49" title="49"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>The DevTools page (or panel or sidebar pane) establishes the connection like this:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="co">// Create a connection to the background page</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">var</span> backgroundPageConnection <span class="op">=</span> <span class="va">chrome</span>.<span class="va">runtime</span>.<span class="at">connect</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb11-3" title="3">    <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;panel&quot;</span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-5" title="5"></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="va">backgroundPageConnection</span>.<span class="at">postMessage</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb11-7" title="7">    <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;init&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb11-8" title="8">    <span class="dt">tabId</span><span class="op">:</span> <span class="va">chrome</span>.<span class="va">devtools</span>.<span class="va">inspectedWindow</span>.<span class="at">tabId</span></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="messaging-from-injected-scripts-to-the-devtools-page-evaluated-scripts-to-devtools">Messaging from injected scripts to the DevTools page {: #evaluated-scripts-to-devtools }</h3>
+<p>While the above solution works for content scripts, code that is injected directly into the page (e.g. through appending a <code>&lt;script&gt;</code> tag or through <a href="/docs/extensions/reference/devtools_inspectedWindow#method-eval"><code>inspectedWindow.eval</code></a>) requires a different strategy. In this context, <a href="/docs/extensions/reference/runtime#method-sendMessage"><code>runtime.sendMessage</code></a> will not pass messages to the background script as expected.</p>
+<p>As a workaround, you can combine your injected script with a content script that acts as an intermediary. To pass messages to the content script, you can use the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window.postMessage"><code>window.postMessage</code></a> API. Here’s an example, assuming the background script from the previous section:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="co">// injected-script.js</span></a>
+<a class="sourceLine" id="cb12-2" title="2"></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="va">window</span>.<span class="at">postMessage</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb12-4" title="4">  <span class="dt">greeting</span><span class="op">:</span> <span class="st">&#39;hello there!&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb12-5" title="5">  <span class="dt">source</span><span class="op">:</span> <span class="st">&#39;my-devtools-extension&#39;</span></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="op">},</span> <span class="st">&#39;*&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="co">// content-script.js</span></a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="va">window</span>.<span class="at">addEventListener</span>(<span class="st">&#39;message&#39;</span><span class="op">,</span> <span class="kw">function</span>(event) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-4" title="4">  <span class="co">// Only accept messages from the same frame</span></a>
+<a class="sourceLine" id="cb13-5" title="5">  <span class="cf">if</span> (<span class="va">event</span>.<span class="at">source</span> <span class="op">!==</span> window) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-6" title="6">    <span class="cf">return</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-8" title="8"></a>
+<a class="sourceLine" id="cb13-9" title="9">  <span class="kw">var</span> message <span class="op">=</span> <span class="va">event</span>.<span class="at">data</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-10" title="10"></a>
+<a class="sourceLine" id="cb13-11" title="11">  <span class="co">// Only accept messages that we know are ours</span></a>
+<a class="sourceLine" id="cb13-12" title="12">  <span class="cf">if</span> (<span class="kw">typeof</span> message <span class="op">!==</span> <span class="st">&#39;object&#39;</span> <span class="op">||</span> message <span class="op">===</span> <span class="kw">null</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb13-13" title="13">      <span class="op">!</span><span class="va">message</span>.<span class="at">source</span> <span class="op">===</span> <span class="st">&#39;my-devtools-extension&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-14" title="14">    <span class="cf">return</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-15" title="15">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb13-16" title="16"></a>
+<a class="sourceLine" id="cb13-17" title="17">  <span class="va">chrome</span>.<span class="va">runtime</span>.<span class="at">sendMessage</span>(message)<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-18" title="18"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Your message will now flow from the injected script, to the content script, to the background script, and finally to the DevTools page.</p>
+<p>You can also consider <a href="https://github.com/GoogleChrome/devtools-docs/issues/143">two alternative message passing techniques here</a>.</p>
+<h3 id="detecting-when-devtools-opens-and-closes-detecting-open-close">Detecting when DevTools opens and closes {: #detecting-open-close }</h3>
+<p>If your extension needs to track whether the DevTools window is open, you can add an <a href="/docs/extensions/reference/runtime#event-onConnect">onConnect</a> listener to the background page, and call <a href="/docs/extensions/reference/runtime#method-connect">connect</a> from the DevTools page. Since each tab can have its own DevTools window open, you may receive multiple connect events. To track whether any DevTools window is open, you need to count the connect and disconnect events as shown below:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="co">// background.js</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="kw">var</span> openCount <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="va">chrome</span>.<span class="va">runtime</span>.<span class="va">onConnect</span>.<span class="at">addListener</span>(<span class="kw">function</span> (port) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-4" title="4">    <span class="cf">if</span> (<span class="va">port</span>.<span class="at">name</span> <span class="op">==</span> <span class="st">&quot;devtools-page&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-5" title="5">      <span class="cf">if</span> (openCount <span class="op">==</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-6" title="6">        <span class="at">alert</span>(<span class="st">&quot;DevTools window opening.&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-7" title="7">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb14-8" title="8">      openCount<span class="op">++;</span></a>
+<a class="sourceLine" id="cb14-9" title="9"></a>
+<a class="sourceLine" id="cb14-10" title="10">      <span class="va">port</span>.<span class="va">onDisconnect</span>.<span class="at">addListener</span>(<span class="kw">function</span>(port) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-11" title="11">          openCount<span class="op">--;</span></a>
+<a class="sourceLine" id="cb14-12" title="12">          <span class="cf">if</span> (openCount <span class="op">==</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-13" title="13">            <span class="at">alert</span>(<span class="st">&quot;Last DevTools window closing.&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-14" title="14">          <span class="op">}</span></a>
+<a class="sourceLine" id="cb14-15" title="15">      <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-16" title="16">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb14-17" title="17"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>The DevTools page creates a connection like this:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="co">// devtools.js</span></a>
+<a class="sourceLine" id="cb15-2" title="2"></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="co">// Create a connection to the background page</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="kw">var</span> backgroundPageConnection <span class="op">=</span> <span class="va">chrome</span>.<span class="va">runtime</span>.<span class="at">connect</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb15-5" title="5">    <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;devtools-page&quot;</span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<!-- TODO this section's ID was previously #examples which is a duplicate of another section -->
+<h2 id="devtools-extension-examples">DevTools extension examples</h2>
+<p>Browse the source of these DevTools extension examples:</p>
+<ul>
+<li><a href="https://github.com/PolymerLabs/polymer-devtools-extension">Polymer Devtools Extension</a> - uses many helpers running in the host page to query DOM/JS state to send back to the custom panel.</li>
+<li><a href="https://github.com/facebook/react/tree/master/packages/react-devtools">React DevTools Extension</a> - Uses a submodule of Blink to reuse DevTools UI components.</li>
+<li><a href="https://github.com/emberjs/ember-inspector">Ember Inspector</a> - Shared extension core with adapters for both Chrome and Firefox.</li>
+<li><a href="https://github.com/thomasboyt/coquette-inspect">Coquette-inspect</a> - A clean React-based extension with a debugging agent injected into the host page.</li>
+<li>our <a href="https://chrome.google.com/webstore/category/ext/11-web-development">DevTools Extension Gallery</a> and <a href="https://github.com/GoogleChrome/chrome-extensions-samples">Sample Extensions</a> have more worthwhile apps to install, try out, and learn from.</li>
+</ul>
+<h2 id="more-information-more">More information {: #more }</h2>
+<p>For information on the standard APIs that extensions can use, see <a href="/docs/extensions/reference/">chrome.* APIs</a> and <a href="/docs/extensions/api_other/">Other APIs</a>.</p>
+<p><a href="http://groups.google.com/group/google-chrome-developer-tools/topics">Give us feedback!</a> Your comments and suggestions help us improve the APIs.</p>
+<h2 id="examples-examples">Examples {: #examples }</h2>
+<p>You can find examples that use DevTools APIs in <a href="https://github.com/GoogleChrome/chrome-extensions-samples">Samples</a>.</p>
+</body>
+</html>

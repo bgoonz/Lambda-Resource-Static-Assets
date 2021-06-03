@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2012-09-18" />
+  <title>Using eval in Chrome extensions</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Using eval in Chrome extensions</h1>
+<p class="date">2012-09-18</p>
+</header>
+<p>{% include ‘partials/extensions/mv2-legacy-page.md’ %}</p>
+<p>Chrome’s extension system enforces a fairly strict default <a href="/docs/extensions/mv2/contentSecurityPolicy"><strong>Content Security Policy (CSP)</strong></a>. The policy restrictions are straightforward: script must be moved out-of-line into separate JavaScript files, inline event handlers must be converted to use <code>addEventListener</code>, and <code>eval()</code> is disabled. Chrome Apps have an <a href="/docs/extensions/mv2/contentSecurityPolicy">even more strict policy</a>, and we’re quite happy with the security properties these policies provide.</p>
+<p>We recognize, however, that a variety of libraries use <code>eval()</code> and <code>eval</code>-like constructs such as <code>new Function()</code> for performance optimization and ease of expression. Templating libraries are especially prone to this style of implementation. While some (like <a href="http://angularjs.org/">Angular.js</a>) support CSP out of the box, many popular frameworks haven’t yet updated to a mechanism that is compatible with extensions’ <code>eval</code>-less world. Removing support for that functionality has therefore proven <a href="http://crbug.com/107538">more problematic than expected</a> for developers.</p>
+<p>This document introduces sandboxing as a safe mechanism to include these libraries in your projects without compromising on security. For brevity, we’ll be using the term <em>extensions</em> throughout, but the concept applies equally to applications.</p>
+<h2 id="why-sandbox-why_sandbox">Why sandbox? {: #why_sandbox }</h2>
+<p><code>eval</code> is dangerous inside an extension because the code it executes has access to everything in the extension’s high-permission environment. A slew of powerful <code>chrome.*</code> APIs are available that could severely impact a user’s security and privacy; simple data exfiltration is the least of our worries. The solution on offer is a sandbox in which <code>eval</code> can execute code without access either to the extension’s data or the extension’s high-value APIs. No data, no APIs, no problem.</p>
+<p>We accomplish this by listing specific HTML files inside the extension package as being sandboxed. Whenever a sandboxed page is loaded, it will be moved to a <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/origin-0.html#sandboxed-origin-browsing-context-flag">unique origin</a>, and will be denied access to <code>chrome.*</code> APIs. If we load this sandboxed page into our extension via an <code>iframe</code>, we can pass it messages, let it act upon those messages in some way, and wait for it to pass us back a result. This simple messaging mechanism gives us everything we need to safely include <code>eval</code>-driven code in our extension’s workflow.</p>
+<h2 id="creating-and-using-a-sandbox.-creating_and_using">Creating and using a sandbox. {: #creating_and_using }</h2>
+<p>If you’d like to dive straight into code, please grab the <a href="/docs/extensions/mv2/samples#sandboxed-frame">sandboxing sample extension and take off</a>. It’s a working example of a tiny messaging API built on top of the <a href="http://handlebarsjs.com">Handlebars</a> templating library, and it should give you everything you need to get going. For those of you who’d like a little more explanation, let’s walk through that sample together here.</p>
+<h3 id="list-files-in-manifest-list_files">List files in manifest {: #list_files }</h3>
+<p>Each file that ought to be run inside a sandbox must be listed in the extension manifest by adding a <code>sandbox</code> property. This is a critical step, and it’s easy to forget, so please double check that your sandboxed file is listed in the manifest. In this sample, we’re sandboxing the file cleverly named “sandbox.html”. The manifest entry looks like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="er">...</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;sandbox&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">     <span class="dt">&quot;pages&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;sandbox.html&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<h3 id="load-the-sandboxed-file-load_file">Load the sandboxed file {: #load_file }</h3>
+<p>In order to do something interesting with the sandboxed file, we need to load it in a context where it can be addressed by the extension’s code. Here, <a href="/docs/extensions/examples/howto/sandbox/sandbox.html">sandbox.html</a> has been loaded into the extension’s <a href="/docs/apps/event_pages">Event Page</a> (<a href="/docs/extensions/examples/howto/sandbox/eventpage.html">eventpage.html</a>) via an <code>iframe</code>. <a href="/docs/extensions/examples/howto/sandbox/eventpage.js">eventpage.js</a> contains code that sends a message into the sandbox whenever the browser action is clicked by finding the <code>iframe</code> on the page, and executing the <code>postMessage</code> method on its <code>contentWindow</code>. The message is an object containing two properties: <code>context</code> and <code>command</code>. We’ll dive into both in a moment.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">chrome</span>.<span class="va">browserAction</span>.<span class="va">onClicked</span>.<span class="at">addListener</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2"> <span class="kw">var</span> iframe <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;theFrame&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"> <span class="kw">var</span> message <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">   <span class="dt">command</span><span class="op">:</span> <span class="st">&#39;render&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-5" title="5">   <span class="dt">context</span><span class="op">:</span> <span class="op">{</span><span class="dt">thing</span><span class="op">:</span> <span class="st">&#39;world&#39;</span><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-6" title="6"> <span class="op">};</span></a>
+<a class="sourceLine" id="cb2-7" title="7"> <span class="va">iframe</span>.<span class="va">contentWindow</span>.<span class="at">postMessage</span>(message<span class="op">,</span> <span class="st">&#39;*&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<div class="aside aside--note">
+For general information about the <code>postMessage</code> API, take a look at the <a href="https://developer.mozilla.org/en/DOM/window.postMessage"><code>postMessage</code> documentation on MDN </a>. It’s quite complete and worth reading. In particular, note that data can only be passed back and forth if it’s serializable. Functions, for instance, are not.
+</div>
+<h3 id="do-something-dangerous-do_something">Do something dangerous {: #do_something }</h3>
+<p>When <code>sandbox.html</code> is loaded, it loads the Handlebars library, and creates and compiles an inline template in the way Handlebars suggests:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;handlebars-1.0.0.beta.6.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">&lt;script</span><span class="ot"> id=</span><span class="st">&quot;hello-world-template&quot;</span><span class="ot"> type=</span><span class="st">&quot;text/x-handlebars-template&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="op">&lt;</span>div <span class="kw">class</span><span class="op">=</span><span class="st">&quot;entry&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello<span class="op">,</span> <span class="op">{{</span>thing<span class="op">}}!</span>&lt;/h1<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  &lt;/div<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="kw">&lt;script&gt;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="kw">var</span> templates <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="kw">var</span> source <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;hello-world-template&#39;</span>).<span class="at">innerHTML</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">  templates[<span class="st">&#39;hello&#39;</span>] <span class="op">=</span> <span class="va">Handlebars</span>.<span class="at">compile</span>(source)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="kw">&lt;/script&gt;</span></a></code></pre></div>
+<p>This doesn’t fail! Even though <code>Handlebars.compile</code> ends up using <code>new Function</code>, things work exactly as expected, and we end up with a compiled template in <code>templates['hello']</code>.</p>
+<h3 id="pass-the-result-back-pass_result">Pass the result back {: #pass_result }</h3>
+<p>We’ll make this template available for use by setting up a message listener that accepts commands from the Event Page. We’ll use the <code>command</code> passed in to determine what ought to be done (you could imagine doing more than simply rendering; perhaps creating templates? Perhaps managing them in some way?), and the <code>context</code> will be passed into the template directly for rendering. The rendered HTML will be passed back to the Event Page so the extension can do something useful with it later on:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">&lt;script&gt;</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="va">window</span>.<span class="at">addEventListener</span>(<span class="st">&#39;message&#39;</span><span class="op">,</span> <span class="kw">function</span>(event) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="kw">var</span> command <span class="op">=</span> <span class="va">event</span>.<span class="va">data</span>.<span class="at">command</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="kw">var</span> name <span class="op">=</span> <span class="va">event</span>.<span class="va">data</span>.<span class="at">name</span> <span class="op">||</span> <span class="st">&#39;hello&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="cf">switch</span>(command) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" title="6">      <span class="cf">case</span> <span class="st">&#39;render&#39;</span><span class="op">:</span></a>
+<a class="sourceLine" id="cb4-7" title="7">        <span class="va">event</span>.<span class="va">source</span>.<span class="at">postMessage</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb4-8" title="8">          <span class="dt">name</span><span class="op">:</span> name<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-9" title="9">          <span class="dt">html</span><span class="op">:</span> templates[name](<span class="va">event</span>.<span class="va">data</span>.<span class="at">context</span>)</a>
+<a class="sourceLine" id="cb4-10" title="10">        <span class="op">},</span> <span class="va">event</span>.<span class="at">origin</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">        <span class="cf">break</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-12" title="12"></a>
+<a class="sourceLine" id="cb4-13" title="13">      <span class="co">// case &#39;somethingElse&#39;:</span></a>
+<a class="sourceLine" id="cb4-14" title="14">      <span class="co">//   ...</span></a>
+<a class="sourceLine" id="cb4-15" title="15">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-16" title="16">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="kw">&lt;/script&gt;</span></a></code></pre></div>
+<p>Back in the Event Page, we’ll receive this message, and do something interesting with the <code>html</code> data we’ve been passed. In this case, we’ll just echo it out via a <a href="/docs/extensions/mv2/desktop_notifications">Desktop Notification</a>, but it’s entirely possible to use this HTML safely as part of the extension’s UI. Inserting it via <code>innerHTML</code> doesn’t pose a significant security risk, as even a complete compromise of the sandboxed code through some clever attack would be unable to inject dangerous script or plugin content into the high-permission extension context.</p>
+<p>This mechanism makes templating straightforward, but it of course isn’t limited to templating. Any code that doesn’t work out of the box under a strict Content Security Policy can be sandboxed; in fact, it’s often useful to sandbox components of your extensions that <em>would</em> run correctly in order to restrict each piece of your program to the smallest set of privileges necessary for it to properly execute. The <a href="http://www.youtube.com/watch?v=GBxv8SaX0gg">Writing Secure Web Apps and Chrome Extensions</a> presentation from Google I/O 2012 gives some good examples of these technique in action, and is worth 56 minutes of your time.</p>
+</body>
+</html>

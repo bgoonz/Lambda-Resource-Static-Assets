@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2017-08-30" />
+  <title>Choosing an App Type</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Choosing an App Type</h1>
+<p class="date">2017-08-30</p>
+</header>
+<p>Sometimes it’s hard to decide whether you need to publish a <a href="/docs/apps">hosted app</a> or a <a href="/docs/apps">Chrome App</a>—or maybe even an <a href="/docs/extensions">Chrome Extension</a>. This page aims to help you choose the right type of app.</p>
+<h2 id="overview">Overview</h2>
+<p>As the following figure shows, if you already have a web app, you don’t need to change it; you can just publish it as a hosted app. If you’re willing to modify your app or build one from scratch, you have more options.</p>
+<!-- TODO(kaycebasques): This flowchart needs to be converted into text for a11y. -->
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1605580911516.png”, alt=“A flowchart of the decision process.”, height=“627”, width=“581” %}</p>
+<p><strong>Note</strong>: <strong>2GB</strong> is the current size limit for packaged apps. If your app (with all its essential assets) can’t fit into a 2GB ZIP file, then your app is too big to be a packaged app.</p>
+<h2 id="details">Details</h2>
+<p>If you’re having trouble deciding what type of app to create, read the article <a href="/docs/webstore/apps_vs_extensions">Extensions, Packaged Apps, and Hosted Apps in the Chrome Web Store</a>. Here’s some additional information to help you choose:</p>
+<ul>
+<li>A <strong>hosted</strong> app can work in all web browsers, as long as it doesn’t depend on features that not all browsers support yet, such as <a href="/docs/extensions/reference/mv3/background_execution">background execution</a> or <a href="http://www.khronos.org/webgl/">WebGL</a>. On the other hand, because only Chrome supports the Chrome Web Store, you have the option of tailoring your app to Chrome.</li>
+<li>A <strong>packaged</strong> app will work only in Chrome. However, you can reuse the app’s code for ordinary web apps.</li>
+<li>Only an <strong>extension</strong> can present an icon in the toolbar, using a <a href="/docs/extensions/reference/browserAction">page action</a> or <a href="/docs/extensions/reference/browserAction">browser action</a>.</li>
+<li><p>If you’re not sure whether you need a <strong>packaged</strong> app or an <strong>extension</strong>, it should probably be an extension.</p>
+<p><strong>Note:</strong> As a rule of thumb, a packaged app should feel like a hosted app, not like an extension.</p></li>
+<li>Although an <strong>extension</strong> has little to no UI of its own, it can sometimes have a big effect on the UI of other pages and web apps. For example, an extension can <a href="/docs/extensions/mv3/override">replace a standard Chrome page</a>, such as the History page (chrome://history). Or it can change the contents or formatting of some or all websites—to use different fonts, for example.</li>
+<li>The <a href="/docs/webstore/check_for_payment">Licensing API</a> lets you check programmatically whether the user has paid for your app using Chrome Web Store Payments. The Licensing API is usually used only by <strong>hosted</strong> apps because packaged apps are stored locally and <a href="/docs/webstore/faq#faq-app-02">could be modified</a> to circumvent the API call.</li>
+<li><p>The <a href="/docs/extensions/reference">chrome.* APIs</a> let your <strong>packaged</strong> app or <strong>extension</strong> be tightly integrated with Chrome. They take advantage of Chrome support for functionality such as <a href="/docs/extensions/reference/idle">idle state</a>, <a href="/docs/extensions/reference/i18n">internationalization</a>, <a href="/docs/extensions/reference/tabs">tabs</a>, and <a href="/docs/extensions/reference/windows">windows</a>.</p></li>
+</ul>
+</body>
+</html>

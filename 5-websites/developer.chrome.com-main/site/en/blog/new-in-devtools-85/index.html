@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-07-01" />
+  <title>What’s New In DevTools (Chrome 85)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 85)</h1>
+<p class="date">2020-07-01</p>
+</header>
+<p>{% YouTube id=“NOal2gTzftI” %}</p>
+<h2 id="style-editing-for-css-in-js-frameworks-css-in-js">Style editing for CSS-in-JS frameworks {: #css-in-js }</h2>
+<p>The Styles pane now has better support for editing styles that were created with the <a href="https://drafts.csswg.org/cssom/">CSS Object Model</a> (CSSOM) APIs. Many CSS-in-JS frameworks and libraries use the CSSOM APIs under the hood to construct styles.</p>
+<p>You can also edit styles added in JavaScript using <a href="https://developers.google.com/web/updates/2019/02/constructable-stylesheets">Constructable Stylesheets</a> now. Constructable Stylesheets are a new way to create and distribute reusable styles when using <a href="https://developers.google.com/web/fundamentals/web-components/shadowdom">Shadow DOM</a>.</p>
+<p>For example, the <code>h1</code> styles added with <code>CSSStyleSheet</code> (CSSOM APIs) are not editable previously. There are editable now in the Styles pane:</p>
+<p>{% Video src=“video/BrQidfK9jaQyIHwdw91aVpkPiib2/ejZpFP0QqyhNy7p32goP.mp4” %}</p>
+<p>Chromium issue <a href="https://crbug.com/946975">#946975</a></p>
+<h2 id="lighthouse-6-in-the-lighthouse-panel-lighthouse">Lighthouse 6 in the Lighthouse panel {: #lighthouse }</h2>
+<p>The Lighthouse panel is now running Lighthouse 6. Check out <a href="https://web.dev/lighthouse-whats-new-6.0/">What’s New in Lighthouse 6.0</a> for a summary of all the major changes, or the <a href="https://github.com/GoogleChrome/lighthouse/releases/tag/v6.0.0">v6.0.0 release notes</a> for a full list of all changes.</p>
+<p>Lighthouse 6.0 introduces three new metrics to the report: Largest Contentful Paint (LCP), Cumulative Layout Shift (CLS), and Total Blocking Time (TBT). LCP and CLS are 2 of Google’s new <a href="https://web.dev/vitals/#core-web-vitals">Core Web Vitals</a>, and TBT is a lab measurement proxy for another Core Web Vital, First Input Delay.</p>
+<p>The performance score formula has also been reweighted to better reflect the users’ loading experience.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1Tmmm0bSZ1g2G5LRgt2p.png”, alt=“New performance metrics in Lighthouse 6.0”, width=“800”, height=“455” %}</p>
+<p>Chromium issue <a href="https://crbug.com/772558">#772558</a></p>
+<h3 id="first-meaningful-paint-fmp-deprecation-fmp-deprecation">First Meaningful Paint (FMP) deprecation {: #fmp-deprecation }</h3>
+<p>First Meaningful Paint (FMP) is deprecated in Lighthouse 6.0. It has also been removed from the Performance panel. <a href="https://web.dev/lcp/">Largest Contentful Paint</a> is the recommended replacement for FMP. See <a href="https://web.dev/first-meaningful-paint/">First Meaningful Paint</a> for an explanation of why it was deprecated.</p>
+<p>Chromium issue <a href="https://crbug.com/1096008">#1096008</a></p>
+<h2 id="support-for-new-javascript-features-javascript">Support for new JavaScript features {: #javascript }</h2>
+<p>DevTools now has better support for some of the latest JavaScript language features:</p>
+<ul>
+<li><a href="https://v8.dev/features/optional-chaining">Optional chaining</a> syntax autocompletion - property auto-completion in the Console now supports optional chaining syntax, e.g. <code>name?.</code> now works in addition to <code>name.</code> and <code>name[</code>.</li>
+<li>Syntax highlighting for <a href="https://v8.dev/features/class-fields#private-class-fields">private fields</a> - private class fields are now properly syntax-highlighted and pretty-printed in the Sources panel.</li>
+<li>Syntax highlighting for <a href="https://v8.dev/features/nullish-coalescing">Nullish coalescing operator</a> - DevTools now properly pretty-prints the nullish coalescing operator in the Sources panel.</li>
+</ul>
+<p>Chromium issues <a href="https://crbug.com/1083214">#1083214</a>, <a href="https://crbug.com/1073903">#1073903</a>, <a href="https://crbug.com/1083797">#1083797</a></p>
+<h2 id="new-app-shortcut-warnings-in-the-manifest-pane-app-shortcut-warnings">New app shortcut warnings in the Manifest pane {: #app-shortcut-warnings }</h2>
+<p><a href="https://web.dev/app-shortcuts">App shortcuts</a> help users quickly start common or recommended tasks within a web app.</p>
+<p>The Manifest pane now shows warnings if:</p>
+<ul>
+<li>the app shortcut icons are smaller than 96x96 pixels</li>
+<li>the app shortcut icons and manifest icons are not square (as they will be ignored)</li>
+</ul>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/2MLhQXnSoZmpTFfuyoWR.png”, alt=“App shortcut warnings”, width=“800”, height=“534” %}</p>
+<p>Chromium issue <a href="https://crbug.com/955497">#955497</a></p>
+<h2 id="service-worker-respondwith-events-in-the-timing-tab-timing-tab">Service worker <code>respondWith</code> events in the Timing tab {: #timing-tab }</h2>
+<p>The Timing tab of the Network panel now includes service worker <code>respondWith</code> events. <code>respondWith</code> is the time immediately before the service worker <code>fetch</code> event handler runs to the time when the <code>fetch</code> handler’s <code>respondWith</code> promise is settled.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/MAsxvpqRZLI4SOvwyfSK.png”, alt=“service worker <code>respondWith</code>”, width=“800”, height=“502” %}</p>
+<p>Chromium issue <a href="https://crbug.com/1066579">#1066579</a></p>
+<h2 id="consistent-display-of-the-computed-pane-computed-pane">Consistent display of the Computed pane {: #computed-pane }</h2>
+<p>The Computed pane in the Elements panel now displays consistently as a pane across all viewport sizes. Previously the Computed pane would merge inside the Styles pane when the width of the DevTools’ viewport was narrow.</p>
+<p>{% Video src=“video/BrQidfK9jaQyIHwdw91aVpkPiib2/AsgYdc0jmYE5M8VzHx2O.mp4” %}</p>
+<p>Chromium issue <a href="https://crbug.com/1073899">#1073899</a></p>
+<h2 id="bytecode-offsets-for-webassembly-files-wasm">Bytecode offsets for WebAssembly files {: #wasm }</h2>
+<p>DevTools now uses bytecode offsets for displaying line numbers of Wasm disassembly. This makes it clearer that you’re looking at binary data, and is more consistent with how the Wasm runtime references locations.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/qH0jKcKjN8X5cVZqt0SR.png”, alt=“Bytecode offsets”, width=“800”, height=“691” %}</p>
+<p>Chromium issue <a href="https://crbug.com/1071432">#1071432</a></p>
+<h2 id="line-wise-copy-and-cut-in-sources-panel-sources-panel">Line-wise copy and cut in Sources Panel {: #sources-panel }</h2>
+<p>When performing copy or cut with no selection in the <a href="/docs/devtools/sources#edit">Sources panel editor</a>, DevTools will copy or cut the current line content. For example, in the video below, the cursor is at the end of line 1. After pressing the cut keyboard shortcut, the entire line is copied to the clipboard and deleted.</p>
+<p>{% Video src=“video/BrQidfK9jaQyIHwdw91aVpkPiib2/gkwPfntrPTxuQkisI1n5.mp4” %}</p>
+<p>Chromium issue <a href="https://crbug.com/800028">#800028</a></p>
+<h2 id="console-settings-updates-console-settings">Console Settings updates {: #console-settings }</h2>
+<h3 id="ungroup-same-console-messages-ungroup-messages">Ungroup same console messages {: #ungroup-messages }</h3>
+<p>The <strong>Group similar</strong> toggle in Console Settings now applies to duplicate messages. Previously it just applied to similar messages.</p>
+<p>For example, previously, DevTools did not ungroup the messages <code>hello</code> even though <strong>Group similar</strong> is unchecked. Now, the <code>hello</code> messages are ungrouped:</p>
+<p>Chromium issue <a href="https://crbug.com/1082963">#1082963</a></p>
+<h3 id="persisting-selected-context-only-settings-selected-context">Persisting <strong>Selected context only</strong> settings {: #selected-context }</h3>
+<p>The <strong>Selected context only</strong> settings in Console Settings is now persisted. Previously the settings were reset every time you closed and reopened DevTools. This change makes the setting behavior consistent with other Console Settings options.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/5IOY8x1f61ddnRcdFFrg.png”, alt=“Selected context only”, width=“800”, height=“581” %}</p>
+<p>Chromium issue <a href="https://crbug.com/1055875">#1055875</a></p>
+<h2 id="performance-panel-updates-perf-panel">Performance panel updates {: #perf-panel }</h2>
+<h3 id="javascript-compilation-cache-information-in-performance-panel-javascript_compilation_cache_information_in_performance_panel">JavaScript compilation cache information in Performance panel {: #javascript_compilation_cache_information_in_performance_panel }</h3>
+<p><a href="https://v8.dev/blog/code-caching-for-devs">JavaScript compilation cache information</a> is now always displayed in the Summary tab of the Performance panel. Previously, DevTools wouldn’t show anything related to code caching if code caching didn’t happen.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/ihesnfou0XvBC59T3wfj.png”, alt=“JavaScript compilation cache information”, width=“800”, height=“447” %}</p>
+<p>Chromium issue <a href="https://crbug.com/912581">#912581</a></p>
+<h3 id="navigation-timing-alignment-in-the-performance-panel-navigation_timing_alignment_in_the_performance_panel">Navigation timing alignment in the Performance panel {: #navigation_timing_alignment_in_the_performance_panel }</h3>
+<p>The Performance panel used to show times in the rulers based on when the recording started. This has now changed for recordings where the user navigates, where DevTools now shows ruler times relative to the navigation instead.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/HURhX5qUI9CnNL09tJvj.png”, alt=“Align navigation timing in Performance panel”, width=“800”, height=“667” %}</p>
+<p>We’ve also updated times for <code>DOMContentLoaded</code>, First Paint, First Contentful Paint, and Largest Contentful Paint events to be relative to the start of the navigation, which means they match the timings reported by <code>PerformanceObserver</code>.</p>
+<p>Chromium issue <a href="https://crbug.com/974550">#974550</a></p>
+<h2 id="new-icons-for-breakpoints-conditional-breakpoints-and-logpoints-breakpoints">New icons for breakpoints, conditional breakpoints, and logpoints {: #breakpoints }</h2>
+<p>The <strong>Sources</strong> panel has new designs for breakpoints, conditional breakpoints, and logpoints. Breakpoints get a refreshed flag design with brighter and friendlier colors. Icons are added to differentiate conditional breakpoints and logpoints.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/BaH2w6G22IL5BkgQoO2K.png”, alt=“Breakpoints”, width=“800”, height=“809” %}</p>
+<p>Chromium issue <a href="https://crbug.com/1041830">#1041830</a></p>
+</body>
+</html>

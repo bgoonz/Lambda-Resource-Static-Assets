@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2015-04-13" />
+  <title>Console Utilities API reference</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Console Utilities API reference</h1>
+<p class="date">2015-04-13</p>
+</header>
+<p>The Console Utilities API contains a collection of convenience functions for performing common tasks: selecting and inspecting DOM elements, displaying data in readable format, stopping and starting the profiler, and monitoring DOM events.</p>
+<p>{% Aside ‘warning’ %}</p>
+<p><strong>Warning:</strong> These functions only work when you call them from the Chrome DevTools Console. They won’t work if you try to call them in your scripts.</p>
+<p>{% endAside %}</p>
+<p>Looking for <code>console.log()</code>, <code>console.error()</code>, and the rest of the <code>console.*</code> functions? See <a href="/docs/devtools/console/api">Console API Reference</a>.</p>
+<h2 id="recent">$_ {: #recent }</h2>
+<p><code>$_</code> returns the value of the most recently evaluated expression.</p>
+<p>In the following example, a simple expression (<code>2 + 2</code>) is evaluated. The <code>$_</code> property is then evaluated, which contains the same value:</p>
+<p>{% Img src=“image/admin/TfgjCE7ayHU8lwJJTFss.png”, alt=“$_ is the most recently evaluated expression”, width=“800”, height=“238” %}</p>
+<p>In the next example, the evaluated expression initially contains an array of names. Evaluating <code>$_.length</code> to find the length of the array, the value stored in <code>$_</code> changes to become the latest evaluated expression, 4:</p>
+<p>{% Img src=“image/admin/d2jU3P5gc4G2OuK4PMQ1.png”, alt=“$_ changes when new commands are evaluated”, width=“800”, height=“319” %}</p>
+<h2 id="dom">$0 - $4 {: #dom }</h2>
+<p>The <code>$0</code>, <code>$1</code>, <code>$2</code>, <code>$3</code> and <code>$4</code> commands work as a historical reference to the last five DOM elements inspected within the Elements panel or the last five JavaScript heap objects selected in the Profiles panel. <code>$0</code> returns the most recently selected element or JavaScript object, <code>$1</code> returns the second most recently selected one, and so on.</p>
+<p>In the following example, an <code>img</code> element is selected in the Elements panel. In the Console drawer, <code>$0</code> has been evaluated and displays the same element:</p>
+<p>{% Img src=“image/admin/v9jdOozAkvhutIYnejJl.png”, alt=“Example of $0”, width=“800”, height=“186” %}</p>
+<p>The image below shows a different element selected in the same page. The <code>$0</code> now refers to newly selected element, while <code>$1</code> returns the previously selected one:</p>
+<p>{% Img src=“image/admin/ET1JJFtUIXvaoPCGQ94C.png”, alt=“Example of $1”, width=“800”, height=“318” %}</p>
+<h2 id="selector-startnode-queryselector">$(selector, [startNode]) {: #queryselector }</h2>
+<p><code>$(selector)</code> returns the reference to the first DOM element with the specified CSS selector. When called with one argument, this function is an alias for the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector">document.querySelector()</a> function.</p>
+<p>The following example returns a reference to the first <code>&lt;img&gt;</code> element in the document:</p>
+<p>{% Img src=“image/admin/poVWF9iRLAYZ08O2t88S.png”, alt=“Example of $(‘img’)”, width=“800”, height=“234” %}</p>
+<p>Right-click on the returned result and select ‘Reveal in Elements Panel’ to find it in the DOM, or ‘Scroll in to View’ to show it on the page.</p>
+<p>The following example returns a reference to the currently selected element and displays its src property:</p>
+<p>{% Img src=“image/admin/TLcKoLAXcrFcOgSPnNaD.png”, alt=“Example of $(‘img’).src”, width=“800”, height=“234” %}</p>
+<p>This function also supports a second parameter, startNode, that specifies an ‘element’ or Node from which to search for elements. The default value of this parameter is <code>document</code>.</p>
+<p>The following example returns a reference to the first element after the currently selected Node and displays its src properly:</p>
+<p>{% Img src=“image/admin/Q5XlmeIMaHQkpP1QryBd.png”, alt=“Example of $(‘img’, div).src”, width=“800”, height=“234” %}</p>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> If you are using a library such as jQuery that uses <code>$</code>, this functionality will be overwritten, and <code>$</code> will correspond to that library’s implementation.</p>
+<p>{% endAside %}</p>
+<h2 id="selector-startnode-queryselectorall">$$(selector, [startNode]) {: #queryselectorall }</h2>
+<p><code>$$(selector)</code> returns an array of elements that match the given CSS selector. This command is equivalent to calling <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll">document.querySelectorAll()</a>.</p>
+<p>The following example uses <code>$$()</code> to create an array of all <code>&lt;img&gt;</code> elements in the current document and displays the value of each element’s <code>src</code> property:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1">    <span class="kw">var</span> images <span class="op">=</span> <span class="at">$$</span>(<span class="st">&#39;img&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="cf">for</span> (each <span class="kw">in</span> images) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">        <span class="va">console</span>.<span class="at">log</span>(images[each].<span class="at">src</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="op">}</span></a></code></pre></div>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/f3W2BdYq3PAl435AMXso.png”, alt=“Example of using $$() to select all images in the document and display their sources.”, width=“800”, height=“536” %}</p>
+<p>This function also supports a second parameter, startNode, that specifies an element or Node from which to search for elements. The default value of this parameter is <code>document</code>.</p>
+<p>This modified version of the previous example uses <code>$$()</code> to create an array of all <code>&lt;img&gt;</code> elements that appear in the current document after the selected Node:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">var</span> images <span class="op">=</span> <span class="at">$$</span>(<span class="st">&#39;img&#39;</span><span class="op">,</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;.devsite-header-background&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="at"> for</span> (each <span class="kw">in</span> images) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">      <span class="va"> console</span>.<span class="at">log</span>(images[each].<span class="at">src</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">   <span class="op">}</span></a></code></pre></div>
+<p>{% Img src=“image/admin/MKKFwNfiqaq8JPUkgchF.png”, alt=“Example of using $() to select all images appearing after the select div element in the document and displaying their sources.”, width=“800”, height=“336” %}</p>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> Press <kbd class="kbd">Shift</kbd> + <kbd class="kbd">Enter</kbd> in the console to start a new line without executing the script.</p>
+<p>{% endAside %}</p>
+<h2 id="xpath-startnode-xpath">$x(path, [startNode]) {: #xpath }</h2>
+<p><code>$x(path)</code> returns an array of DOM elements that match the given XPath expression.</p>
+<p>For example, the following returns all the <code>&lt;p&gt;</code> elements on the page:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1">    <span class="at">$x</span>(<span class="st">&quot;//p&quot;</span>)</a></code></pre></div>
+<p>{% Img src=“image/admin/8fIwlT9ZWd9109E9jyRb.png”, alt=“Example of using an XPath selector”, width=“800”, height=“282” %}</p>
+<p>The following example returns all the <code>&lt;p&gt;</code> elements that contain <code>&lt;a&gt;</code> elements:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1">    <span class="at">$x</span>(<span class="st">&quot;//p[a]&quot;</span>)</a></code></pre></div>
+<p>{% Img src=“image/admin/qvqloRRfS4IU1WhDsJkP.png”, alt=“Example of using a more complicated XPath selector”, width=“800”, height=“251” %}</p>
+<p>Similar to the other selector functions, <code>$x(path)</code> has an optional second parameter, <code>startNode</code>, that specifies an element or Node from which to search for elements.</p>
+<p>{% Img src=“image/admin/srYQFy4Y7TRlT0kGarUN.png”, alt=“Example of using an XPath selector with startNode”, width=“800”, height=“282” %}</p>
+<h2 id="clear-clear">clear() {: #clear }</h2>
+<p><code>clear()</code> clears the console of its history.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1">    <span class="at">clear</span>()<span class="op">;</span></a></code></pre></div>
+<h2 id="copyobject-copy">copy(object) {: #copy }</h2>
+<p><code>copy(object)</code> copies a string representation of the specified object to the clipboard.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1">    <span class="at">copy</span>($0)<span class="op">;</span></a></code></pre></div>
+<h2 id="debugfunction-debug">debug(function) {: #debug }</h2>
+<p>When the specified function is called, the debugger is invoked and breaks inside the function on the Sources panel allowing to step through the code and debug it.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1">    <span class="at">debug</span>(getData)<span class="op">;</span></a></code></pre></div>
+<p>{% Img src=“image/admin/dhPBjuzWvsEbHeGR5NpQ.png”, alt=“Breaking inside a function with debug()”, width=“800”, height=“526” %}</p>
+<p>Use <code>undebug(fn)</code> to stop breaking on the function, or use the UI to disable all breakpoints.</p>
+<p>For more information on breakpoints, see <a href="/docs/devtools/javascript/breakpoints">Pause Your Code With Breakpoints</a>.</p>
+<h2 id="dirobject-dir">dir(object) {: #dir }</h2>
+<p><code>dir(object)</code> displays an object-style listing of all the specified object’s properties. This method is an alias for the Console API’s <code>console.dir()</code> method.</p>
+<p>The following example shows the difference between evaluating <code>document.body</code> directly in the command line, and using <code>dir()</code> to display the same element:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1">    <span class="va">document</span>.<span class="at">body</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="at">dir</span>(<span class="va">document</span>.<span class="at">body</span>)<span class="op">;</span></a></code></pre></div>
+<p>{% Img src=“image/admin/SBW2kszkhG1rlXfxtQDg.png”, alt=“Logging document.body with and without dir() function”, width=“800”, height=“590” %}</p>
+<p>For more information, see the <a href="/docs/devtools/console/api/#dir"><code>console.dir()</code></a> entry in the Console API.</p>
+<h2 id="dirxmlobject-dirxml">dirxml(object) {: #dirxml }</h2>
+<p><code>dirxml(object)</code> prints an XML representation of the specified object, as seen in the Elements tab. This method is equivalent to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console">console.dirxml()</a> method.</p>
+<h2 id="inspectobjectfunction-inspect">inspect(object/function) {: #inspect }</h2>
+<p><code>inspect(object/function)</code> opens and selects the specified element or object in the appropriate panel: either the Elements panel for DOM elements or the Profiles panel for JavaScript heap objects.</p>
+<p>The following example opens the <code>document.body</code> in the Elements panel:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1">    <span class="at">inspect</span>(<span class="va">document</span>.<span class="at">body</span>)<span class="op">;</span></a></code></pre></div>
+<p>{% Img src=“image/admin/BDFR3iEMqRnWIWrrVEu6.png”, alt=“Inspecting an element with inspect()”, width=“800”, height=“337” %}</p>
+<p>When passing a function to inspect, the function opens the document up in the Sources panel for you to inspect.</p>
+<h2 id="geteventlistenersobject-geteventlisteners">getEventListeners(object) {: #geteventlisteners }</h2>
+<p><code>getEventListeners(object)</code> returns the event listeners registered on the specified object. The return value is an object that contains an array for each registered event type (<code>click</code> or <code>keydown</code>, for example). The members of each array are objects that describe the listener registered for each type. For example, the following lists all the event listeners registered on the document object:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1">    <span class="at">getEventListeners</span>(document)<span class="op">;</span></a></code></pre></div>
+<p>{% Img src=“image/admin/pVhvAi37yxLejbODHGSZ.png”, alt=“Output of using getEventListeners()”, width=“800”, height=“255” %}</p>
+<p>If more than one listener is registered on the specified object, then the array contains a member for each listener. In the following example, there are two event listeners registered on the document element for the <code>click</code> event:</p>
+<p>{% Img src=“image/admin/Hlh3CErBYJTTNg9butfj.png”, alt=“Multiple listeners”, width=“800”, height=“389” %}</p>
+<p>You can further expand each of these objects to explore their properties:</p>
+<p>{% Img src=“image/admin/EJnoDfrKGIhwz7cx0WE3.png”, alt=“Expanded view of listener object”, width=“800”, height=“389” %}</p>
+<h2 id="keysobject-keys">keys(object) {: #keys }</h2>
+<p><code>keys(object)</code> returns an array containing the names of the properties belonging to the specified object. To get the associated values of the same properties, use <code>values()</code>.</p>
+<p>For example, suppose your application defined the following object:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1">    <span class="kw">var</span> player1 <span class="op">=</span> <span class="op">{</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Ted&quot;</span><span class="op">,</span> <span class="st">&quot;level&quot;</span><span class="op">:</span> <span class="dv">42</span> <span class="op">}</span></a></code></pre></div>
+<p>Assuming <code>player1</code> was defined in the global namespace (for simplicity), typing <code>keys(player1)</code> and <code>values(player1)</code> in the console results in the following:</p>
+<p>{% Img src=“image/admin/HYEKFYyD93YzGLoF2avv.png”, alt=“Example of keys() and values() methods”, width=“800”, height=“226” %}</p>
+<h2 id="monitorfunction-monitor">monitor(function) {: #monitor }</h2>
+<p>When the function specified is called, a message is logged to the console that indicates the function name along with the arguments that are passed to the function when it was called.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1">    <span class="kw">function</span> <span class="at">sum</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">        <span class="cf">return</span> x <span class="op">+</span> y<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-4" title="4">    <span class="at">monitor</span>(sum)<span class="op">;</span></a></code></pre></div>
+<p>{% Img src=“image/admin/V28TFRjUqryt2u3b2zls.png”, alt=“Example of monitor() method”, width=“800”, height=“221” %}</p>
+<p>Use <code>unmonitor(function)</code> to cease monitoring.</p>
+<h2 id="monitoreventsobject-events-monitorevents">monitorEvents(object[, events]) {: #monitorevents }</h2>
+<p>When one of the specified events occurs on the specified object, the Event object is logged to the console. You can specify a single event to monitor, an array of events, or one of the generic events “types” mapped to a predefined collection of events. See examples below.</p>
+<p>The following monitors all resize events on the window object.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1">    <span class="at">monitorEvents</span>(window<span class="op">,</span> <span class="st">&quot;resize&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<p>{% Img src=“image/admin/ZrU8M58cKhN2eZRpiNVI.png”, alt=“Monitoring window resize events”, width=“800”, height=“252” %}</p>
+<p>The following defines an array to monitor both “resize” and “scroll” events on the window object:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1">    <span class="at">monitorEvents</span>(window<span class="op">,</span> [<span class="st">&quot;resize&quot;</span><span class="op">,</span> <span class="st">&quot;scroll&quot;</span>])</a></code></pre></div>
+<p>You can also specify one of the available event “types”, strings that map to predefined sets of events. The table below lists the available event types and their associated event mappings:</p>
+<table class="responsive">
+<thead>
+<tr>
+<th colspan="2">
+Event type &amp; Corresponding mapped events
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+mouse
+</td>
+<td>
+“mousedown”, “mouseup”, “click”, “dblclick”, “mousemove”, “mouseover”, “mouseout”, “mousewheel”
+</td>
+</tr>
+<tr>
+<td>
+key
+</td>
+<td>
+“keydown”, “keyup”, “keypress”, “textInput”
+</td>
+</tr>
+<tr>
+<td>
+touch
+</td>
+<td>
+“touchstart”, “touchmove”, “touchend”, “touchcancel”
+</td>
+</tr>
+<tr>
+<td>
+control
+</td>
+<td>
+“resize”, “scroll”, “zoom”, “focus”, “blur”, “select”, “change”, “submit”, “reset”
+</td>
+</tr>
+</tbody>
+</table>
+<p>For example, the following uses the “key” event type all corresponding key events on an input text field currently selected in the Elements panel.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1">    <span class="at">monitorEvents</span>($0<span class="op">,</span> <span class="st">&quot;key&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<p>Below is sample output after typing a characters in the text field:</p>
+<p>{% Img src=“image/admin/Shs04IRgNP87cbbjCbtd.png”, alt=“Monitoring key events”, width=“800”, height=“252” %}</p>
+<h2 id="profilename-and-profileendname-profilename_and_profileendname">profile([name]) and profileEnd([name]) {: #profilename_and_profileendname }</h2>
+<p><code>profile()</code> starts a JavaScript CPU profiling session with an optional name. <code>profileEnd()</code> completes the profile and displays the results in the Profile panel. (See also <a href="/docs/devtools/rendering-tools/js-execution">Speed Up JavaScript Execution</a>.)</p>
+<p>To start profiling:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1">    <span class="at">profile</span>(<span class="st">&quot;My profile&quot;</span>)</a></code></pre></div>
+<p>To stop profiling and display the results in the Profiles panel:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1">    <span class="at">profileEnd</span>(<span class="st">&quot;My profile&quot;</span>)</a></code></pre></div>
+<p>Profiles can also be nested. For example, this will work in any order:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb18-1" title="1">    <span class="at">profile</span>(<span class="st">&#39;A&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-2" title="2">    <span class="at">profile</span>(<span class="st">&#39;B&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-3" title="3">    <span class="at">profileEnd</span>(<span class="st">&#39;A&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb18-4" title="4">    <span class="at">profileEnd</span>(<span class="st">&#39;B&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<p>Result in the profiles panel:</p>
+<p>{% Img src=“image/admin/BWxxLJby5scm6zF0eidW.png”, alt=“Grouped profiles”, width=“800”, height=“469” %}</p>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> Multiple CPU profiles can operate at once and you aren’t required to close them out in creation order.</p>
+<p>{% endAside %}</p>
+<h2 id="queryobjectsconstructor-queryobjects">queryObjects(Constructor) {: #queryObjects }</h2>
+<p>Call <code>queryObjects(Constructor)</code> from the console to return an array of objects that were created with the specified constructor. For example:</p>
+<ul>
+<li><code>queryObjects(Promise)</code>. Returns all Promises.</li>
+<li><code>queryObjects(HTMLElement)</code>. Returns all HTML elements.</li>
+<li><code>queryObjects(foo)</code>, where <code>foo</code> is a function name. Returns all objects that were instantiated via <code>new foo()</code>.</li>
+</ul>
+<p>The scope of <code>queryObjects()</code> is the currently-selected execution context in the console.</p>
+<h2 id="tabledata-columns-table">table(data[, columns]) {: #table }</h2>
+<p>Log object data with table formatting by passing in a data object in with optional column headings. For example, to display a list of names using a table in the console, you would do:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1">    <span class="kw">var</span> names <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb19-2" title="2">        <span class="dv">0</span><span class="op">:</span> <span class="op">{</span> <span class="dt">firstName</span><span class="op">:</span> <span class="st">&quot;John&quot;</span><span class="op">,</span> <span class="dt">lastName</span><span class="op">:</span> <span class="st">&quot;Smith&quot;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb19-3" title="3">        <span class="dv">1</span><span class="op">:</span> <span class="op">{</span> <span class="dt">firstName</span><span class="op">:</span> <span class="st">&quot;Jane&quot;</span><span class="op">,</span> <span class="dt">lastName</span><span class="op">:</span> <span class="st">&quot;Doe&quot;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb19-4" title="4">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb19-5" title="5">    <span class="at">table</span>(names)<span class="op">;</span></a></code></pre></div>
+<p>{% Img src=“image/admin/jI1NQZJs08FsKA6nMyIp.png”, alt=“Example of table() method”, width=“800”, height=“488” %}</p>
+<h2 id="undebugfunction-undebug">undebug(function) {: #undebug }</h2>
+<p><code>undebug(function)</code> stops the debugging of the specified function so that when the function is called, the debugger is no longer invoked.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb20-1" title="1">    <span class="at">undebug</span>(getData)<span class="op">;</span></a></code></pre></div>
+<h2 id="unmonitorfunction-unmonitor">unmonitor(function) {: #unmonitor }</h2>
+<p><code>unmonitor(function)</code> stops the monitoring of the specified function. This is used in concert with <code>monitor(fn)</code>.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb21-1" title="1">    <span class="at">unmonitor</span>(getData)<span class="op">;</span></a></code></pre></div>
+<h2 id="unmonitoreventsobject-events-unmonitorevents">unmonitorEvents(object[, events]) {: #unmonitorevents }</h2>
+<p><code>unmonitorEvents(object[, events])</code> stops monitoring events for the specified object and events. For example, the following stops all event monitoring on the window object:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" title="1">    <span class="at">unmonitorEvents</span>(window)<span class="op">;</span></a></code></pre></div>
+<p>You can also selectively stop monitoring specific events on an object. For example, the following code starts monitoring all mouse events on the currently selected element, and then stops monitoring “mousemove” events (perhaps to reduce noise in the console output):</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb23-1" title="1">    <span class="at">monitorEvents</span>($0<span class="op">,</span> <span class="st">&quot;mouse&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb23-2" title="2">    <span class="at">unmonitorEvents</span>($0<span class="op">,</span> <span class="st">&quot;mousemove&quot;</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="valuesobject-values"> values(object) {: #values }</h2>
+<p><code>values(object)</code> returns an array containing the values of all properties belonging to the specified object.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb24-1" title="1">    <span class="at">values</span>(object)<span class="op">;</span></a></code></pre></div>
+</body>
+</html>

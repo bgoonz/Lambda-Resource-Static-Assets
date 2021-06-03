@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-10-22" />
+  <title>How we built the Chrome DevTools WebAuthn tab</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">How we built the Chrome DevTools WebAuthn tab</h1>
+<p class="date">2020-10-22</p>
+</header>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API">Web Authentication API</a>, also known as <strong>WebAuthn</strong>, allows servers to use public key cryptography - rather than passwords - to register and authenticate users. It does this by enabling integration between these servers and strong authenticators. These authenticators may be dedicated physical devices (e.g. security keys) or integrated with platforms (e.g. fingerprint readers). You can read more about WebAuthn here at <a href="https://webauthn.guide/">webauthn.guide</a>.</p>
+<h2 id="developer-pain-points">Developer pain points</h2>
+<p>Prior to this project, WebAuthn lacked native debugging support on Chrome. A developer building an app that used WebAuth required access to physical authenticators. This was especially difficult for two reasons:</p>
+<ol type="1">
+<li><p><strong>There are many different flavors of authenticators.</strong> Debugging the breadth of configurations and capabilities necessitated that the developer have access to many different, sometimes expensive, authenticators.</p></li>
+<li><p><strong>Physical authenticators are, by design, secure.</strong> Therefore, inspecting their state is usually impossible.</p></li>
+</ol>
+<p>We wanted to make this easier by adding debugging support right in the Chrome DevTools.</p>
+<h2 id="solution-a-new-webauthn-tab">Solution: a new WebAuthn tab</h2>
+<p>The WebAuthn DevTools tab makes debugging WebAuthn much easier by allowing developers to emulate these authenticators, customize their capabilities, and inspect their states.</p>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/4AB3QPTKzhIs5oI6n6tw.png”, alt=“New WebAuthn tab”, width=“800”, height=“484” %}</p>
+<h2 id="implementation">Implementation</h2>
+<p>Adding debugging support to WebAuthn was a two-part process.</p>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/U0S0a4jcg9rzOJuSqJ5W.png”, alt=“Two-part process”, width=“800”, height=“494” %}</p>
+<h3 id="part-1-adding-webauthn-domain-to-the-chrome-devtools-protocol">Part 1: Adding WebAuthn Domain to the Chrome DevTools Protocol</h3>
+<p>First, we implemented a new domain in the <a href="https://chromedevtools.github.io/devtools-protocol/">Chrome DevTools Protocol (CDP)</a> which hooks into a handler that communicates with the WebAuthn backend.</p>
+<p>The CDP connects DevTools front-end with Chromium. In our case, we utilized the WebAuthn domain acts to bridge between the WebAuthn DevTools tab and Chromium’s implementation of WebAuthn.</p>
+<p>The WebAuthn domain allows enabling and disabling the Virtual Authenticator Environment, which disconnects the browser from the real Authenticator Discovery and plugs in a Virtual Discovery instead.</p>
+<p>We also expose methods in the domain that act as a thin layer to the existing Virtual Authenticator and Virtual Discovery interfaces, which are part of Chromium’s WebAuthn implementation. These methods include adding and removing authenticators as well as creating, getting, and clearing their registered credentials.</p>
+<p>(Read the <a href="https://source.chromium.org/chromium/chromium/src/+/master:third_party/blink/public/devtools_protocol/browser_protocol.pdl;l=8038;drc=9ce34799f414521afa0e1312c6c61a886636e7ab">code</a>)</p>
+<aside class="note">
+While the WebAuthn domain made the WebAuthn tab possible, that’s not all it did. The WebAuthn domain was initially a larger part of the WebAuthn Testing API and is used by ChromeDriver to enable Web Platform Tests. Read more about the <a href="https://docs.google.com/document/d/1bp2cMgjm2HSpvL9-WsJoIQMsBi1oKGQY6CvWD-9WmIQ">WebAuthn Testing API.</a>
+</aside>
+<h3 id="part-2-building-the-user-facing-tab">Part 2: Building the user-facing tab</h3>
+<p>Second, we built a user-facing tab in the <a href="https://chromium.googlesource.com/devtools/devtools-frontend/">DevTools frontend</a>. The tab is made up of a view and a model. An auto-generated agent connects the domain with the tab.</p>
+<p>While there are 3 necessary components needed, we only needed to be concerned about two of them: the <strong>model</strong> and the <strong>view</strong>. The 3rd component - the <strong>agent</strong>, is autogenerated after adding the domain. Briefly, the agent is the layer that carries the calls between the front end and the CDP.</p>
+<h4 id="the-model">The model</h4>
+<p>The model is the JavaScript layer that connects the agent and the view. For our case, the model is quite simple. It takes commands from the view, builds the requests such that they’re consumable by the CDP, and then sends them through via the agent. These requests are usually one-directional with no information being sent back to the view.</p>
+<p>However, we do sometimes pass back a response from the model either to provide an ID for a newly-created authenticator or to return the credentials stored in an existing authenticator.</p>
+<p>(Read the <a href="https://source.chromium.org/chromium/chromium/src/+/master:third_party/devtools-frontend/src/front_end/sdk/WebAuthnModel.js">code</a>)</p>
+<h4 id="the-view">The view</h4>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/fOujwa2m8usb7vGLfFYm.png”, alt=“New WebAuthn tab”, width=“800”, height=“747” %}</p>
+<p>We use the view to provide the user-interface that a developer can find when accessing DevTools. It contains:</p>
+<ol type="1">
+<li>A toolbar to enable virtual authenticator environment.</li>
+<li>A section to add authenticators.</li>
+<li>A section for created authenticators.</li>
+</ol>
+<p>(Read the <a href="https://source.chromium.org/chromium/chromium/src/+/master:third_party/devtools-frontend/src/front_end/webauthn/WebauthnPane.js">code</a>)</p>
+<h5 id="toolbar-to-enable-virtual-authenticator-environment">Toolbar to enable virtual authenticator environment</h5>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/kBskqWsZKihMQGBvAkO4.png”, alt=“toolbar”, width=“800”, height=“365” %}</p>
+<p>Since most of the user-interactions are with one authenticator at a time rather than the entire tab, the only functionality we provide in the toolbar is toggling the virtual environment on and off.</p>
+<p>Why is this necessary? It’s important that the user has to explicitly toggle the environment because doing so disconnects the browser from the real Authenticator Discovery. Therefore, while it’s on, connected physical authenticators like a fingerprint reader won’t be recognized.</p>
+<p>We decided that an explicit toggle means a better user experience, especially for those who wander into the WebAuthn tab without expecting real discovery to be disabled.</p>
+<h5 id="adding-the-authenticators-section">Adding the Authenticators section</h5>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/wivYODOSqOh4iesYUiiT.png”, alt=“Adding the Authenticators section”, width=“800”, height=“494” %}</p>
+<p>Upon enabling the virtual authenticator environment, we present the developer with an inline-form that allows them to add a virtual authenticator. Within this form, we provide customization options which allow the user to decide the authenticator’s protocol and transport methods, as well as whether the authenticator supports resident keys and user verification.</p>
+<p>Once the user clicks <strong>Add</strong>, these options are bundled and sent to the model which makes the call to create an authenticator. Once that’s complete, the front end will receive a response and then modify the UI to include the newly-created authenticator.</p>
+<h5 id="the-authenticator-view">The Authenticator view</h5>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/EBtyAf2oFsgKW6hYBTNB.png”, alt=“The Authenticator view”, width=“800”, height=“545” %}</p>
+<p>Each time an authenticator is emulated, we add a section to the authenticator view to represent it. Each authenticator section includes a name, ID, configuration options, buttons to remove the authenticator or set it active, and a credential table.</p>
+<h6 id="the-authenticator-name">The Authenticator name</h6>
+<p>The authenticator’s name is customizable and defaults to “Authenticator” concatenated with the last 5 characters of its ID. Originally, the authenticator’s name was its full ID and unchangeable. We implemented customizable names so the user can label the authenticator based on its capabilities, the physical authenticator it’s meant to emulate, or any nickname that’s a bit easier to digest than a 36-character ID.</p>
+<h6 id="credentials-table">Credentials table</h6>
+<p>We added a table to each authenticator section that shows all the credentials registered by an authenticator. Within each row, we provide information about a credential, as well as buttons to remove or export the credential.</p>
+<p>Currently, we gather the information to fill these tables by polling the CDP to get the registered credentials for each authenticator. In the future, we plan on adding an event for credential creation.</p>
+<h6 id="the-active-button">The Active button</h6>
+<p>We also added an <strong>Active</strong> radio button to each authenticator section. The authenticator that is currently set active will be the only one that listens for and registers credentials. Without this, the registering of credentials given multiple authenticators is non-deterministic which would be a fatal flaw when trying to test WebAuthn using them.</p>
+<p>We implemented the active status using the <strong>SetUserPresence</strong> method on virtual authenticators. The <strong>SetUserPresence</strong> method sets whether tests of user presence succeed for a given authenticator. If we turn it off, an authenticator won’t be able to listen for credentials. Therefore, by ensuring that it is on for at most one authenticator (the one set as active), and disabling user presence for all the others, we can force deterministic behavior.</p>
+<p>An interesting challenge we faced while adding the active button was avoiding a race condition. Consider the following scenario:</p>
+<ol type="1">
+<li><p>User clicks <strong>Active</strong> radio button for Authenticator X, sending a request to the CDP to set X as active. The <strong>Active</strong> radio button for X is selected, and all the others are deselected.</p></li>
+<li><p>Immediately after, user clicks <strong>Active</strong> radio button for Authenticator Y, sending a request to the CDP to set Y as active. The <strong>Active</strong> radio button for Y is selected, and all the others, including for X, are deselected.</p></li>
+<li><p>In the backend, the call to set Y as active is completed and resolved. Y is now active and all other authenticators are not.</p></li>
+<li><p>In the backend, the call to set X as active is completed and resolved. X is now active and all other authenticators, including Y, are not.</p></li>
+</ol>
+<p>Now, the resulting situation is as follows: X <strong>is</strong> the active authenticator. However, the <strong>Active</strong> radio button for X <strong>isn’t</strong> selected. Y <strong>isn’t</strong> the active authenticator. However, the <strong>Active</strong> radio button for Y <strong>is</strong> selected. There is a disagreement between the front end and the actual status of the authenticators. Obviously, that’s a problem.</p>
+<p>Our solution: Establish pseudo two-way communication between the radio buttons and the active authenticator. First, we maintain a variable <code>activeId</code> in the view to keep track of the ID of the currently active authenticator. Then, we wait for the call to set an authenticator active to return then set <code>activeId</code> to the ID of that authenticator. Lastly, we loop through each authenticator section. If the ID of that section equals <code>activeId</code>, we set the button to selected. Otherwise, we set the button to unselected.</p>
+<p>Here’s what that looks like:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"></a>
+<a class="sourceLine" id="cb1-2" title="2"> <span class="kw">async</span> <span class="at">_setActiveAuthenticator</span>(authenticatorId) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">   <span class="cf">await</span> <span class="kw">this</span>.<span class="at">_clearActiveAuthenticator</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">   <span class="cf">await</span> <span class="kw">this</span>.<span class="va">_model</span>.<span class="at">setAutomaticPresenceSimulation</span>(authenticatorId<span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">   <span class="kw">this</span>.<span class="at">_activeId</span> <span class="op">=</span> authenticatorId<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">   <span class="kw">this</span>.<span class="at">_updateActiveButtons</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7"> <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-8" title="8"> </a>
+<a class="sourceLine" id="cb1-9" title="9"> <span class="at">_updateActiveButtons</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-10" title="10">   <span class="kw">const</span> authenticators <span class="op">=</span> <span class="kw">this</span>.<span class="va">_authenticatorsView</span>.<span class="at">getElementsByClassName</span>(<span class="st">&#39;authenticator-section&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-11" title="11">   <span class="va">Array</span>.<span class="at">from</span>(authenticators).<span class="at">forEach</span>(authenticator <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-12" title="12">     <span class="va">authenticator</span>.<span class="at">querySelector</span>(<span class="st">&#39;input.dt-radio-button&#39;</span>).<span class="at">checked</span> <span class="op">=</span></a>
+<a class="sourceLine" id="cb1-13" title="13">         <span class="va">authenticator</span>.<span class="at">getAttribute</span>(<span class="st">&#39;data-authenticator-id&#39;</span>) <span class="op">===</span> <span class="kw">this</span>.<span class="at">_activeId</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-14" title="14">   <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-15" title="15"> <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-16" title="16"> </a>
+<a class="sourceLine" id="cb1-17" title="17"> <span class="kw">async</span> <span class="at">_clearActiveAuthenticator</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-18" title="18">   <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">_activeId</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-19" title="19">     <span class="cf">await</span> <span class="kw">this</span>.<span class="va">_model</span>.<span class="at">setAutomaticPresenceSimulation</span>(<span class="kw">this</span>.<span class="at">_activeId</span><span class="op">,</span> <span class="kw">false</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-20" title="20">   <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-21" title="21">   <span class="kw">this</span>.<span class="at">_activeId</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-22" title="22"> <span class="op">}</span></a></code></pre></div>
+<h3 id="usage-metrics">Usage metrics</h3>
+<p>We wanted to track this feature’s usage. Initially, we came up with two options.</p>
+<ol type="1">
+<li><p><strong>Count each time the WebAuthn tab in DevTools was opened</strong>. This option could potentially lead to overcounting, as someone may open the tab without actually using it.</p></li>
+<li><p><strong>Track the number of times the “Enable virtual authenticator environment” checkbox in the toolbar was toggled</strong>. This option also had a potential overcounting problem as some may toggle the environment on and off multiple times in the same session.</p></li>
+</ol>
+<p>Ultimately, we decided to go with the latter but <strong>restrict the counting by having a check to see if the environment had already been enabled in the session</strong>. Therefore, we would only increase the count by 1 regardless of how many times the developer toggled the environment. This works because a new session is created each time the tab is reopened, thus resetting the check and allowing for the metric to be incremented again.</p>
+<h2 id="summary">Summary</h2>
+<p>Thank you for reading! If you have any suggestions to improve the WebAuthn tab, let us know by filing a <a href="https://crbug.com/new">bug</a>.</p>
+<p>Here’re some resources if you would like to learn more about WebAuthn:</p>
+<ul>
+<li><a href="https://docs.google.com/document/d/1A-cn0rxuHHAyGhywayk7xcTqSsR2X7va6H4kSMThOoY">WebAuthn DevTools front-end design doc</a></li>
+<li><a href="https://docs.google.com/document/d/1bp2cMgjm2HSpvL9-WsJoIQMsBi1oKGQY6CvWD-9WmIQ">Web Authentication testing API design doc</a></li>
+<li><a href="https://www.w3.org/TR/webauthn">Web Authentication API (WebAuthn) spec</a></li>
+<li><a href="https://webauthn.guide">WebAuthn explanation and guide</a></li>
+</ul>
+</body>
+</html>

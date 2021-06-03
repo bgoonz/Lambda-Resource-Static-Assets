@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Markdown Features</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Markdown Features</h1>
+</header>
+<p>Docusaurus uses <a href="https://guides.github.com/features/mastering-markdown/">GitHub Flavored Markdown (GFM)</a>. Find out more about Docusaurus-specific fields when writing Markdown.</p>
+<h2 id="markdown-headers">Markdown Headers</h2>
+<h3 id="documents">Documents</h3>
+<p>Documents use the following markdown header fields that are enclosed by a line <code>---</code> on either side:</p>
+<ul>
+<li><code>id</code>: A unique document id. If this field is not present, the document’s <code>id</code> will default to its file name (without the extension).</li>
+<li><code>title</code>: The title of your document. If this field is not present, the document’s <code>title</code> will default to its <code>id</code>.</li>
+<li><code>hide_title</code>: Whether to hide the title at the top of the doc.</li>
+<li><code>description</code>: The description of your document which will become the <code>&lt;meta name="description" content="..."/&gt;</code> and <code>&lt;meta property="og:description" content="..."/&gt;</code> in <code>&lt;head&gt;</code>, used by search engines. If this field is not present, it will default to the first line of the contents.</li>
+<li><code>sidebar_label</code>: The text shown in the document sidebar and in the next/previous button for this document. If this field is not present, the document’s <code>sidebar_label</code> will default to its <code>title</code>.</li>
+</ul>
+<p>For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb1-1" title="1"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">id:</span><span class="at"> doc1</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="fu">title:</span><span class="at"> My Document</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="fu">sidebar_label:</span><span class="at"> Document</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="ot">---</span></a></code></pre></div>
+<p>Versioned documents have their ids altered to include the version number when they get copied. The new <code>id</code> is <code>version-${version}-${id}</code> where <code>${version}</code> is the version number of that document and <code>${id}</code> is the original <code>id</code>. Additionally, versioned documents get an added <code>original_id</code> field with the original document id.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb2-1" title="1"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="fu">id:</span><span class="at"> version-1.0.0-doc1</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="fu">title:</span><span class="at"> My Document</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="fu">sidebar_label:</span><span class="at"> Document</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="fu">original_id:</span><span class="at"> doc1</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="ot">---</span></a></code></pre></div>
+<p><code>custom_edit_url</code>: The URL for editing this document. If this field is not present, the document’s edit URL will fall back to <code>editUrl</code> from optional fields of <code>siteConfig.js</code>. See <a href="api-site-config.md">siteConfig.js</a> docs for more information.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb3-1" title="1"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="fu">id:</span><span class="at"> doc-markdown</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="fu">title:</span><span class="at"> Markdown Features</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="fu">custom_edit_url:</span><span class="at"> https://github.com/facebook/docusaurus/edit/master/docs/api-doc-markdown.md</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="ot">---</span></a></code></pre></div>
+<h3 id="blog-posts">Blog Posts</h3>
+<p>Blog posts use the following markdown header fields that are enclosed by a line <code>---</code> on either side:</p>
+<p><code>title</code>: The title of this blog post.</p>
+<p><code>author</code>: The author of this blog post. If this field is omitted, no author name will be shown.</p>
+<p><code>authorURL</code>: A page to link to when a site user clicks the author’s name. If this field is omitted, the author’s name will not link to anything.</p>
+<p><code>authorFBID</code>: The author’s Facebook id, used only to get the author’s profile picture to display with the blog post. If this field is omitted, no author picture will be shown for the blog post.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb4-1" title="1"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="fu">title:</span><span class="at"> My First Blog Post</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="fu">author:</span><span class="at"> Frank Li</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="fu">authorURL:</span><span class="at"> http://twitter.com/franchementli</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="fu">authorFBID:</span><span class="at"> </span><span class="dv">100002976521003</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="ot">---</span></a></code></pre></div>
+<h2 id="extra-features">Extra Features</h2>
+<p>Docusaurus supports some extra features when writing documentation in markdown.</p>
+<h3 id="linking-other-documents">Linking other Documents</h3>
+<p>You can use relative URLs to other documentation files which will automatically get converted to the corresponding HTML links when they get rendered.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb5-1" title="1"><span class="ot">[This links to another document](other-document.md)</span></a></code></pre></div>
+<p>This markdown will automatically get converted into a link to <code>/docs/other-document.html</code> (or the appropriately translated/versioned link) once it gets rendered.</p>
+<p>This can help when you want to navigate through docs on GitHub since the links there will be functional links to other documents (still on GitHub), but the documents will have the correct HTML links when they get rendered.</p>
+<h3 id="linking-to-images-and-other-assets">Linking to Images and Other Assets</h3>
+<p>Static assets can be linked to in the same way that documents are, using relative URLs. Static assets used in documents and blogs should go into <code>docs/assets</code> and <code>website/blog/assets</code>, respectively. The markdown will get converted into correct link paths so that these paths will work for documents of all languages and versions.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb6-1" title="1"><span class="al">![alt-text](assets/doc-image.png)</span></a></code></pre></div>
+<h3 id="generating-table-of-contents">Generating Table of Contents</h3>
+<p>You can make an auto-generated list of links, which can be useful as a table of contents for API docs.</p>
+<p>In your markdown file, insert a line with the text <code>&lt;AUTOGENERATED_TABLE_OF_CONTENTS&gt;</code>. Write your documentation using <code>h3</code> headers for each function inside a code block. These will be found by Docusaurus and a list of links to these sections will be inserted at the text <code>&lt;AUTOGENERATED_TABLE_OF_CONTENTS&gt;</code>.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">### `docusaurus.function(a, b)`</span></a>
+<a class="sourceLine" id="cb7-2" title="2"></a>
+<a class="sourceLine" id="cb7-3" title="3">Text describing my function</a>
+<a class="sourceLine" id="cb7-4" title="4"></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="fu">### `docdoc(file)`</span></a>
+<a class="sourceLine" id="cb7-6" title="6"></a>
+<a class="sourceLine" id="cb7-7" title="7">Text describing my function</a></code></pre></div>
+<p>will lead to a table of contents of the functions:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb8-1" title="1">- <span class="bn">`docusaurus.function(a, b)`</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="fl">- </span><span class="bn">`docdoc(file)`</span></a></code></pre></div>
+<p>and each function will link to their corresponding sections in the page.</p>
+<h3 id="language-specific-code-tabs">Language-specific Code Tabs</h3>
+<p>Display code in multiple programming languages using code tabs. First, mark the start and end of a code tabs group, by using <code>&lt;!-- DOCUSAURUS_CODE_TABS --&gt;</code> and <code>&lt;!-- END_DOCUSAURUS_CODE_TABS --&gt;</code> respectively in your markdown. Then start each tab with <code>&lt;!--[TAB_TITLE]--&gt;</code>.</p>
+<p>Adding the following code to your Markdown file:</p>
+<script src="https://gist.github.com/yangshun/d36d04f383c40beb3f31dd2a16666f6c.js"></script>
+<p>produces this:</p>
+<!--DOCUSAURUS_CODE_TABS-->
+<!--JavaScript-->
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Hello, world!&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<!--Python-->
+<div class="sourceCode" id="cb10"><pre class="sourceCode py"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" title="1"><span class="bu">print</span>(<span class="st">&#39;Hello, world!&#39;</span>)</a></code></pre></div>
+<!--C-->
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb11-1" title="1"><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></a>
+<a class="sourceLine" id="cb11-2" title="2"></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="dt">int</span> main() {</a>
+<a class="sourceLine" id="cb11-4" title="4">  printf(<span class="st">&quot;Hello World!&quot;</span>);</a>
+<a class="sourceLine" id="cb11-5" title="5">  <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb11-6" title="6">}</a></code></pre></div>
+<!--Pascal-->
+<div class="sourceCode" id="cb12"><pre class="sourceCode pascal"><code class="sourceCode pascal"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">program</span> HelloWorld;</a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">begin</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  WriteLn(<span class="st">&#39;Hello, world!&#39;</span>);</a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="kw">end</span>.</a></code></pre></div>
+<!--END_DOCUSAURUS_CODE_TABS-->
+<h2 id="syntax-highlighting">Syntax Highlighting</h2>
+<p>Syntax highlighting is enabled by default on fenced code blocks. The language should be detected automatically, but you can sometimes get better results by specifying the language. You can do so using an <a href="https://github.github.com/gfm/#example-111">info string</a>, following the three opening backticks. The following JavaScript example…</p>
+<pre><code>```js
+ReactDOM.render(&lt;h1&gt;Hello, world!&lt;/h1&gt;, document.getElementById(&#39;root&#39;));
+```</code></pre>
+<p>…would be rendered with syntax highlighting like so:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1"><span class="va">ReactDOM</span>.<span class="at">render</span>(<span class="op">&lt;</span>h1<span class="op">&gt;</span>Hello<span class="op">,</span> world<span class="op">!</span>&lt;/h1<span class="op">&gt;,</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;root&#39;</span>))<span class="op">;</span></a></code></pre></div>
+<p>Highlighting is provided by <a href="https://highlightjs.org">Highlight.js</a> using the theme specified in your <code>siteConfig.js</code> file as part of the <code>highlight</code> key:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  ...</a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="dt">highlight</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-4" title="4">    <span class="dt">theme</span><span class="op">:</span> <span class="st">&#39;default&#39;</span></a>
+<a class="sourceLine" id="cb15-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb15-6" title="6">  ...</a>
+<a class="sourceLine" id="cb15-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>You can find the full list of supported themes in the Highlight.js <a href="https://github.com/isagalaev/highlight.js/tree/master/src/styles"><code>styles</code></a> directory.</p>
+<h3 id="registering-additional-languages">Registering additional languages</h3>
+<p>While Highlight.js provides support for <a href="https://highlightjs.org/static/demo/">many popular languages out of the box</a>, you may find the need to register additional language support. For these cases, we provide an escape valve by exposing the <code>hljs</code> constant as part of the <code>highlight</code> config key. This in turn allows you to call <a href="http://highlightjs.readthedocs.io/en/latest/api.html#registerlanguage-name-language"><code>registerLanguage</code></a>:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  ...</a>
+<a class="sourceLine" id="cb16-3" title="3">  <span class="dt">highlight</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-4" title="4">    <span class="dt">theme</span><span class="op">:</span> <span class="st">&#39;default&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb16-5" title="5">    <span class="dt">hljs</span><span class="op">:</span> <span class="kw">function</span>(hljs) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-6" title="6">      <span class="va">hljs</span>.<span class="at">registerLanguage</span>(<span class="st">&#39;galacticbasic&#39;</span><span class="op">,</span> <span class="kw">function</span>(hljs) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-7" title="7">        <span class="co">// ...</span></a>
+<a class="sourceLine" id="cb16-8" title="8">      <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-9" title="9">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="op">}</span></a></code></pre></div>
+<h3 id="using-prism-as-additional-syntax-highlighter">Using Prism as additional syntax highlighter</h3>
+<p>You can also opt to use Prism to syntax highlight certain languages available in the list <a href="https://github.com/PrismJS/prism/tree/master/components">here</a>. Include those languages in <code>usePrism</code> field in your <a href="api-site-config.md">siteConfig.js</a></p>
+<p>Example:</p>
+<pre><code>// siteConfig.js
+usePrism: [&#39;jsx&#39;]</code></pre>
+<p>Notice that the code block below uses JSX syntax highlighting from Prism.</p>
+<pre class="jsx"><code>class Example extends React.Component {
+  render() {
+    return (
+      &lt;View style={{flex: 1, alignItems: &#39;center&#39;, justifyContent: &#39;center&#39;}}&gt;
+        &lt;Text&gt;Docusaurus&lt;/Text&gt;
+        &lt;Button
+          title=&quot;Click me&quot;
+          onPress={() =&gt; this.props.navigation.push(&#39;Docusaurus&#39;)}
+        /&gt;
+      &lt;/View&gt;
+    );
+  }
+}</code></pre>
+<h3 id="adding-copy-code-buttons">Adding Copy Code Buttons</h3>
+<p>Docusaurus allows for adding buttons to copy the code within fenced code blocks. Please follow the instructions <a href="https://gist.github.com/yangshun/55db997ed0f8f4e6527571fc3bee4675">here</a> to add “Copy” buttons to your code blocks.</p>
+</body>
+</html>

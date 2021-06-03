@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.hi</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="एक-अंतरिक्ष-खेल-भाग-2-बनाएँ-कैनवस-के-लिए-नायक-और-राक्षस-बनाएँ">एक अंतरिक्ष खेल भाग 2 बनाएँ: कैनवस के लिए नायक और राक्षस बनाएँ</h1>
+<h2 id="लेक्चर-पाहिले-की-क्विज">लेक्चर पाहिले की क्विज</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/31?loc=hi">लेक्चर पाहिले की क्विज</a></p>
+<h2 id="कैनवास">कैनवास</h2>
+<p>कैनवास एक HTML तत्व है जो डिफ़ॉल्ट रूप से कोई सामग्री नहीं है; यह एक खाली स्लेट है. आपको उस पर ड्राइंग करके इसे जोड़ना होगा.</p>
+<p>✅ MDN पर <a href="https://developer.mozilla.org/docs/Web/API/Canvas_API">कैनवस एपीआई के बारे में और पढ़ें</a>.</p>
+<p>यहां बताया गया है कि पेज के मुख्य भाग के रूप में यह आमतौर पर घोषित किया जाता है:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;canvas</span><span class="ot"> id=</span><span class="st">&quot;myCanvas&quot;</span><span class="ot"> width=</span><span class="st">&quot;200&quot;</span><span class="ot"> height=</span><span class="st">&quot;100&quot;</span><span class="kw">&gt;&lt;/canvas&gt;</span></a></code></pre></div>
+<p>ऊपर हम <code>id</code>,<code>width</code> और <code>height</code> सेट कर रहे हैं</p>
+<ul>
+<li><code>id</code>: इसे सेट करें ताकि आप एक संदर्भ प्राप्त कर सकें जब आपको इसके साथ परस्पर करने की आवश्यकता हो.</li>
+<li><code>width</code>: यह तत्व की चौड़ाई है.</li>
+<li><code>height</code>: यह तत्व की ऊंचाई है.</li>
+</ul>
+<h2 id="सरल-ज्यामिति-खींचना">सरल ज्यामिति खींचना</h2>
+<p>कैनवस चीजों को आकर्षित करने के लिए एक कार्टेशियन समन्वय प्रणाली का उपयोग कर रहा है. इस प्रकार यह x- अक्ष और y- अक्ष का उपयोग करता है जहां कुछ स्थित है व्यक्त करने के लिए.स्थान <code>0,0</code> शीर्ष बाईं स्थिति है और नीचे दायाँ हिस्सा है जिसे आपने कैनवास का WIDTH और HEIGHT कहा है.</p>
+<figure>
+<img src="../canvas_grid.png" alt="कैनवास का ग्रिड" /><figcaption>कैनवास का ग्रिड</figcaption>
+</figure>
+<blockquote>
+<p><a href="https://developer.mozilla.org/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes">MDN</a> से छवि</p>
+</blockquote>
+<p>कैनवास तत्व पर आकर्षित करने के लिए आपको निम्नलिखित चरणों से गुजरना होगा:</p>
+<ol type="1">
+<li><strong>एक संदर्भ प्राप्त करें</strong> कैनवास तत्व के लिए.</li>
+<li><strong>एक संदर्भ प्राप्त करें</strong> संदर्भ तत्व पर जो कैनवास तत्व पर बैठता है.</li>
+<li><strong>एक ड्राइंग ऑपरेशन</strong> संदर्भ तत्व का उपयोग करके.</li>
+</ol>
+<p>उपरोक्त चरणों के लिए कोड आमतौर पर ऐसा दिखता है:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">// draws a red rectangle</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co">//1. get the canvas reference</span></a>
+<a class="sourceLine" id="cb2-3" title="3">canvas <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;myCanvas&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co">//2. set the context to 2D to draw basic shapes</span></a>
+<a class="sourceLine" id="cb2-6" title="6">ctx <span class="op">=</span> <span class="va">canvas</span>.<span class="at">getContext</span>(<span class="st">&quot;2d&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-7" title="7"></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co">//3. fill it with the color red</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&quot;red&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-10" title="10"></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">//4. and draw a rectangle with these parameters, setting location and size</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">200</span><span class="op">,</span> <span class="dv">200</span>)<span class="op">;</span> <span class="co">// x,y,width, height</span></a></code></pre></div>
+<p>✅ कैनवस एपीआई ज्यादातर 2डी आकृतियों पर केंद्रित है, लेकिन आप एक वेब साइट पर 3डी तत्वों को भी आकर्षित कर सकते हैं; इसके लिए, आप <a href="https://developer.mozilla.org/docs/Web/API/WebGL_API">वेबगियल एपीआई</a> का उपयोग कर सकते हैं.</p>
+<p>आप कैनवस एपीआई के साथ सभी प्रकार की चीजें आकर्षित कर सकते हैं जैसे की :</p>
+<ul>
+<li><strong>Geometrical shapes</strong>, हमने पहले ही दिखाया है कि एक आयत कैसे खींचना है, लेकिन बहुत कुछ है जो आप खींच सकते हैं.</li>
+<li><strong>Text</strong>, आप अपनी इच्छानुसार किसी भी फ़ॉन्ट और रंग के साथ एक पाठ खींच सकते हैं.</li>
+<li><strong>Images</strong>, आप उदाहरण के लिए .jpg या .png जैसी छवि परिसंपत्ति के आधार पर चित्र बना सकते हैं.</li>
+</ul>
+<p>✅ कोशिश करो! आप जानते हैं कि एक आयत कैसे बनाई जाती है, क्या आप किसी पृष्ठ पर एक वृत्त खींच सकते हैं? कोडपेन पर कुछ दिलचस्प कैनवस ड्रॉइंग पर एक नज़र डालें. यहाँ एक <a href="https://codepen.io/dissimulate/pen/KrAwx">विशेष रूप से प्रभावशाली उदाहरण है</a>.</p>
+<h2 id="छवि-एसेट-लोड-और-ड्रा-करे">छवि एसेट लोड और ड्रा करे</h2>
+<p>आप एक ‘Image’ ऑब्जेक्ट बनाकर एक छवि एसेट लोड करते हैं और इसकी <code>src</code> गुण सेट करते हैं.तब आप यह जानने के लिए <code>load</code> घटना सुनते हैं कि यह कब उपयोग होने के लिए तैयार है. कोड इस तरह दिखता है:</p>
+<h3 id="लोड-एसेट">लोड एसेट</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> img <span class="op">=</span> <span class="kw">new</span> <span class="at">Image</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="va">img</span>.<span class="at">src</span> <span class="op">=</span> <span class="st">&quot;path/to/my/image.png&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="va">img</span>.<span class="at">onload</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="co">// image loaded and ready to be used</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="op">};</span></a></code></pre></div>
+<h3 id="लोड-एसेट-पैटर्न">लोड एसेट पैटर्न</h3>
+<p>इसे एक निर्माण में ऊपर से लपेटने की सिफारिश की गई है, इसलिए इसका उपयोग करना आसान है और आप इसे पूरी तरह से लोड होने पर केवल हेरफेर करने का प्रयास करते हैं:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">function</span> <span class="at">loadAsset</span>(path) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="cf">return</span> <span class="kw">new</span> <span class="at">Promise</span>((resolve) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="kw">const</span> img <span class="op">=</span> <span class="kw">new</span> <span class="at">Image</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="va">img</span>.<span class="at">src</span> <span class="op">=</span> path<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="va">img</span>.<span class="at">onload</span> <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" title="6">      <span class="co">// image loaded and ready to be used</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="at">resolve</span>(img)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-11" title="11"></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">// use like so</span></a>
+<a class="sourceLine" id="cb4-13" title="13"></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="kw">async</span> <span class="kw">function</span> <span class="at">run</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-15" title="15">  <span class="kw">const</span> heroImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&quot;hero.png&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">  <span class="kw">const</span> monsterImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&quot;monster.png&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="op">}</span></a></code></pre></div>
+<p>गेम एसेट्स को स्क्रीन पर खींचने के लिए, आपका कोड इस तरह दिखेगा:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">run</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">const</span> heroImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&quot;hero.png&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="kw">const</span> monsterImg <span class="op">=</span> <span class="cf">await</span> <span class="at">loadAsset</span>(<span class="st">&quot;monster.png&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5">  canvas <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;myCanvas&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">  ctx <span class="op">=</span> <span class="va">canvas</span>.<span class="at">getContext</span>(<span class="st">&quot;2d&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="va">ctx</span>.<span class="at">drawImage</span>(heroImg<span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span> / <span class="dv">2</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span> / <span class="dv">2</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="va">ctx</span>.<span class="at">drawImage</span>(monsterImg<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="op">}</span></a></code></pre></div>
+<h2 id="अब-अपने-खेल-का-निर्माण-शुरू-करने-का-समय-आ-गया-है">अब अपने खेल का निर्माण शुरू करने का समय आ गया है</h2>
+<h3 id="क्या-बनना-है">क्या बनना है</h3>
+<p>आप कैनवास तत्व के साथ एक वेब पेज बनाएंगे। यह एक काली स्क्रीन <code>1024 * 768</code> को प्रस्तुत करना चाहिए। हमने आपको दो चित्र प्रदान किए हैं:</p>
+<ul>
+<li><p>हीरो शिप</p>
+<figure>
+<img src="../solution/assets/player.png" alt="हीरो शिप" /><figcaption>हीरो शिप</figcaption>
+</figure></li>
+<li><p>5*5 मॉन्स्टर</p>
+<figure>
+<img src="../solution/assets/enemyShip.png" alt="मॉन्स्टर शिप" /><figcaption>मॉन्स्टर शिप</figcaption>
+</figure></li>
+</ul>
+<h3 id="विकास-शुरू-करने-के-लिए-अनुशंसित-कदम">विकास शुरू करने के लिए अनुशंसित कदम</h3>
+<p>उन फ़ाइलों का पता लगाएँ जो आपके लिए <code>your-work</code> सब फ़ोल्डर में बनाई गई हैं. इसमें निम्नलिखित शामिल होना चाहिए:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="ex">-</span><span class="kw">|</span> <span class="ex">assets</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">enemyShip.png</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">player.png</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="ex">-</span><span class="kw">|</span> <span class="ex">index.html</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="ex">-</span><span class="kw">|</span> <span class="ex">app.js</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="ex">-</span><span class="kw">|</span> <span class="ex">package.json</span></a></code></pre></div>
+<p>विजुअल स्टूडियो कोड में इस फ़ोल्डर की कॉपी खोलें। आपके पास स्थानीय विकास पर्यावरण सेटअप होना चाहिए, अधिमानतः एनपीएम और नोड के साथ विजुअल स्टूडियो कोड स्थापित किया जाना चाहिए. यदि आपके पास अपने कंप्यूटर पर <code>npm</code> सेट नहीं है, तो <a href="https://www.npmjs.com/get-npm">यहाँ है कि कैसे करें</a>.</p>
+<p><code>Your_work</code> फ़ोल्डर में नेविगेट करके अपनी परियोजना शुरू करें:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="bu">cd</span> your-work</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="ex">npm</span> start</a></code></pre></div>
+<p>उपरोक्त पते पर एक HTTP सर्वर शुरू होगा <code>http: // localhost: 5000</code>। एक ब्राउज़र और उस पते पर इनपुट खोलें। यह अभी एक रिक्त पृष्ठ है, लेकिन यह बदल जाएगा</p>
+<blockquote>
+<p>नोट: अपनी स्क्रीन पर परिवर्तन देखने के लिए, अपने ब्राउज़र को ताज़ा करें.</p>
+</blockquote>
+<h3 id="कोड-जोड़ें">कोड जोड़ें</h3>
+<p>नीचे हल करने के लिए <code>your-work/app.js</code> के लिए आवश्यक कोड जोड़ें</p>
+<ol type="1">
+<li>काली पृष्ठभूमि के साथ एक कैनवास <strong>ड्रा</strong> करे &gt; टिप: <code>/app.js</code> में उपयुक्त TODO के तहत दो लाइनें जोड़ें,<code>ctx</code> तत्व को काला बनाने के लिए और शीर्ष/बाएँ निर्देशांक 0,0 पर हो और ऊँचाई और चौड़ाई कैनवास के बराबर हो।</li>
+<li><strong>भार</strong> बनावट &gt; टिप: <code>await loadTexture</code> का उपयोग करके खिलाड़ी और दुश्मन की छवियों को जोड़ें और छवि पथ में पास करें। आप उन्हें अभी तक स्क्रीन पर नहीं देखेंगे!</li>
+<li>नीचे आधे में स्क्रीन के केंद्र में नायक <strong>ड्रा</strong> करे &gt; टिप: स्क्रीन पर HeroImg ड्रा करने के लिए <code>drawImage</code> API का उपयोग करें, <code>canvas.width / 2 - 45</code> और <code>canvas.height - canvas.height / 4)</code> की सेटिंग;</li>
+<li><p>5*5 मॉन्स्टर <strong>ड्रा</strong> करे</p>
+<blockquote>
+<p>टिप: अब आप स्क्रीन पर दुश्मनों को आकर्षित करने के लिए कोड की टिप्पणी हटा सकते हैं। अगला, <code>createEnemy</code> फ़ंक्शन पर जाएं और इसे बनाएं.</p>
+</blockquote>
+<p>सबसे पहले, कुछ स्थिरांक स्थापित करें:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">const</span> MONSTER_TOTAL <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">const</span> MONSTER_WIDTH <span class="op">=</span> MONSTER_TOTAL <span class="op">*</span> <span class="dv">98</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="kw">const</span> START_X <span class="op">=</span> (<span class="va">canvas</span>.<span class="at">width</span> <span class="op">-</span> MONSTER_WIDTH) / <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="kw">const</span> STOP_X <span class="op">=</span> START_X <span class="op">+</span> MONSTER_WIDTH<span class="op">;</span></a></code></pre></div>
+<p>फिर, स्क्रीन पर राक्षसों की सरणी खींचने के लिए एक लूप बनाएं:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="cf">for</span> (<span class="kw">let</span> x <span class="op">=</span> START_X<span class="op">;</span> x <span class="op">&lt;</span> STOP_X<span class="op">;</span> x <span class="op">+=</span> <span class="dv">98</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="cf">for</span> (<span class="kw">let</span> y <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> y <span class="op">&lt;</span> <span class="dv">50</span> <span class="op">*</span> <span class="dv">5</span><span class="op">;</span> y <span class="op">+=</span> <span class="dv">50</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="va">ctx</span>.<span class="at">drawImage</span>(enemyImg<span class="op">,</span> x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="op">}</span></a></code></pre></div></li>
+</ol>
+<h2 id="परिणाम">परिणाम</h2>
+<p>समाप्त परिणाम ऐसा दिखना चाहिए:</p>
+<figure>
+<img src="../partI-solution.png" alt="एक नायक और 5 * 5 राक्षसों के साथ काली स्क्रीन" /><figcaption>एक नायक और 5 * 5 राक्षसों के साथ काली स्क्रीन</figcaption>
+</figure>
+<h2 id="घोल">घोल</h2>
+<p>कृपया पहले इसे स्वयं हल करने का प्रयास करें, लेकिन यदि आप अटक जाते हैं, तो एक [समाधान] (../solution/app.js) पर एक नज़र डालें</p>
+<hr />
+<h2 id="चुनौती">🚀 चुनौती</h2>
+<p>आपने 2डी-केंद्रित कैनवस एपीआई के साथ ड्राइंग के बारे में सीखा है; <a href="https://developer.mozilla.org/docs/Web/API/WebGL_API">वेबगियल एपीआई</a> पर एक नज़र डालें, और एक 3D ऑब्जेक्ट खींचने का प्रयास करें.</p>
+<h2 id="पोस्ट-व्याख्यान-प्रश्नोत्तरी">पोस्ट-व्याख्यान प्रश्नोत्तरी</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/32?loc=hi">पोस्ट-व्याख्यान प्रश्नोत्तरी</a></p>
+<h2 id="समीक्षा-और-स्व-अध्ययन">समीक्षा और स्व अध्ययन</h2>
+<p>कैनवस एपीआई के बारे में अधिक जानकारी के लिए <a href="https://developer.mozilla.org/docs/Web/API/Canvas_API">इसके बारे में पढ़े</a>.</p>
+<h2 id="असाइनमेंट">असाइनमेंट</h2>
+<p><a href="assignment.hi.md">कैनवस एपीआई के साथ खेले</a></p>
+</body>
+</html>

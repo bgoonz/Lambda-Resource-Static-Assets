@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.ko</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="terrarium-프로젝트-파트-2-css-소개">Terrarium 프로젝트 파트 2: CSS 소개</h1>
+<p><img src="/sketchnotes/webdev101-css.png" alt="Introduction to CSS" /> &gt; Sketchnote by <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="강의-전-퀴즈">강의 전 퀴즈</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/17?loc=ko">Pre-lecture quiz</a></p>
+<h3 id="소개">소개</h3>
+<p>CSS 또는 Cascading Style Sheets는 웹 개발의 중요한 이슈를 해결합니다: 웹 사이트를 멋지게 만드는 방법. 앱의 스타일을 지정하면 더 유용하고 보기 좋게 만들 수 있습니다; CSS를 사용하여 반응형 웹 디자인(RWD)을 만들 수도 있습니다 - 따라서 앱이 표시되는 화면 크기에 관계없이 멋지게 보일 수 있습니다. CSS는 앱을 멋지게 보이는 방법만 있는 것이 아닙니다; 사양에는 앱에 대한 정교한 상호 작용을 가능하게 하는 애니메이션 및 변환이 포함됩니다. CSS 워킹 그룹은 현재 CSS 사양을 유지하는 데 도움을 줍니다; <a href="https://www.w3.org/Style/CSS/members">World Wide Web Consortium 사이트</a>에서 작업을 확인할 수 있습니다.</p>
+<blockquote>
+<p>Note, CSS는 웹의 모든 것과 마찬가지로, 진화하는 언어이며, 모든 브라우저가 사양의 최신 부분을 지원하는 것은 아닙니다. 항상 <a href="caniuse.com">CanIUse.com</a>에 문의하여 구현을 확인하십시오.</p>
+</blockquote>
+<p>이 강의에서는, 온라인 terrarium에 스타일을 추가하며 여러 CSS 개념에 대해 자세히 알아봅시다: 캐스케이드, 상속과 선택자 사용, 포지셔닝과 레이아웃 구축을 하기위한 CSS 사용. 이 과정에서 terrarium을 레이아웃하고 실제 terrarium 자체를 만듭니다.</p>
+<h3 id="준비물">준비물</h3>
+<p>terrarium으로 HTML이 제작되고 스타일을 지정할 준비가 되어있어야 합니다.</p>
+<h3 id="작업">작업</h3>
+<p>terrarium 폴더에서, <code>style.css</code> 라고 불리는 파일을 만듭니다. 파일의 <code>&lt;head&gt;</code> 부분에 넣습니다:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;./style.css&quot;</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<hr />
+<h2 id="cascade">Cascade</h2>
+<p>Cascade 스타일 시트는 우선 순위에 따라 스타일이 적용 되도록 ‘Cascade’ 된다는 상상을 합칩니다. 웹 사이트 작성자가 지정한 스타일은 브라우저가 지정한 스타일보다 우선합니다. ’인라인’으로 설정된 스타일은 외부 스타일 시트에 설정된 스타일보다 우선합니다.</p>
+<h3 id="작업-1">작업</h3>
+<p><code>&lt;h1&gt;</code> 태그에 “color: red” inline 스타일을 추가합니다:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;h1</span><span class="ot"> style=</span><span class="st">&quot;color: red&quot;</span><span class="kw">&gt;</span>My Terrarium<span class="kw">&lt;/h1&gt;</span></a></code></pre></div>
+<p>그러고, <code>style.css</code> 파일에 다은 코드를 추가합니다:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1">h1 {</a>
+<a class="sourceLine" id="cb3-2" title="2"> <span class="kw">color</span>: <span class="cn">blue</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">}</a></code></pre></div>
+<p>✅ 웹 앱에는 어떤 색으로 표시되나요? 왜 그럴까요? 스타일을 오버라이드하는 방법을 찾을 수 있나요? 언제 하고 싶나요? 아니면 왜 안될까요?</p>
+<hr />
+<h2 id="상속">상속</h2>
+<p>스타일은 상위 스타일에서 하위 요소로 상속되므로, 중첩된 요소는 상위 스타일을 상속합니다.</p>
+<h3 id="작업-2">작업</h3>
+<p>본문의 폰트를 지정된 주어진 폰트로 설정하고, 중첩된 요소의 폰트를 확인합니다:</p>
+<pre><code>body {
+    font-family: helvetica, arial, sans-serif;
+}</code></pre>
+<p>브라우저의 콘솔에서 ’Elements’을 열고 H1 폰트를 보십시오. 브라우저에 기록된대로 본문에서 폰트를 상속합니다:</p>
+<figure>
+<img src="../images/1.png" alt="inherited font" /><figcaption>inherited font</figcaption>
+</figure>
+<p>✅ 중첩된 스타일이 다른 속성을 상속하도록 만들 수 있습니까?</p>
+<hr />
+<h2 id="css-선택자">CSS 선택자</h2>
+<h3 id="태그">태그</h3>
+<p>지금까지, <code>style.css</code> 파일에는 스타일이 지정된 태그가 몇 개 뿐이며, 앱이 매우 이상하게 보입니다:</p>
+<pre><code>body {
+    font-family: helvetica, arial, sans-serif;
+}
+
+h1 {
+    color: #3a241d;
+    text-align: center;
+}</code></pre>
+<p>이 태그 스타일링 방식을 사용하면 고유 요소를 제어할 수 있지만, terrarium에 있는 많은 식물의 스타일을 제어해야 합니다. 이를 위해서는, CSS 선택자를 활용해야 합니다.</p>
+<h3 id="id">Id</h3>
+<p>왼쪽과 오른쪽 컨테이너 레이아웃에 스타일을 추가합니다. 왼쪽 컨테이너와 오른쪽 컨테이너가 하나만 있으므로, 마크업에 Id가 제공됩니다. 스타일을 지정하려면, <code>#</code>을 사용하세요:</p>
+<pre><code>#left-container {
+    background-color: #eee;
+    width: 15%;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    height: 100%;
+    padding: 10px;
+}
+
+#right-container {
+    background-color: #eee;
+    width: 15%;
+    right: 0px;
+    top: 0px;
+    position: absolute;
+    height: 100%;
+    padding: 10px;
+}</code></pre>
+<p>여기에서는, 컨테이너를 화면의 맨 왼쪽과 오른쪽에 절대 위치로 두고, 너비에 백분율을 사용하여 작은 모바일 화면에 맞을 수 있도록 조정했습니다.</p>
+<p>✅ 이 코드는 꽤 반복되므로, “DRY” 하지 않습니다 (반복하지 마십시오); id와 클래스를 사용하여 스타일링하는 더 좋은 방법을 찾을 수 있나요? 마크업을 변경하고 CSS를 리팩토링해야 합니다:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;left-container&quot;</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a></code></pre></div>
+<h3 id="클래스">클래스</h3>
+<p>위의 예시에서, 화면에서 두가지 고유 요소를 꾸몄습니다. 화면의 많은 요소에 꾸미려면, CSS 클래스를 사용할 수 있습니다. 왼쪽과 오른쪽 컨테이너에 식물을 둘 수 있습니다.</p>
+<p>HTML 마크업의 각 식물에는 id와 클래스의 조합이 있습니다. id는 나중에 추가할 JavaScript에서 terrarium 식물 배치를 조작하는 데 사용됩니다. 그러나 이 강의에서는 모든 식물에 주어진 스타일로 부여합니다.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant1&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant1.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<p><code>style.css</code> 파일에 다음을 추가합니다:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">.plant-holder</span> {</a>
+<a class="sourceLine" id="cb9-2" title="2">    <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="kw">height</span>: <span class="dv">13</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="kw">left</span>: <span class="dv">-10</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-5" title="5">}</a>
+<a class="sourceLine" id="cb9-6" title="6"></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="fu">.plant</span> {</a>
+<a class="sourceLine" id="cb9-8" title="8">    <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-9" title="9">    <span class="kw">max-width</span>: <span class="dv">150</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-10" title="10">    <span class="kw">max-height</span>: <span class="dv">150</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-11" title="11">    <span class="kw">z-index</span>: <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-12" title="12">}</a></code></pre></div>
+<p>이 스니펫에서 볼 관점은 상대 위치와 절대 위치가 혼합되어 있다는 것이며, 다음 강의에서 다룰 것입니다. 높이가 백분율로 처리되는 방식을 살펴보십시오:</p>
+<p>식물 홀더의 높이를 13%로 설정하면, 스크롤할 필요없이 모든 식물이 각 수직 컨테이너에 출력되도록 할 수 있습니다.</p>
+<p>식물 홀더를 왼쪽으로 이동하여 식물이 컨테이너 인에서 더 가운데로 들어오도록 설정합니다. 이미지는 드래그하기 쉽게 만들기 위해 투명한 배경을 많이 가지고 있으므로, 화면에 더 잘 맞게 왼쪽으로 밀어야 합니다.</p>
+<p>그러면, 식물 자체의 최대 너비는 150% 입니다. 브라우저가 작아지면 같이 작아질 수 있습니다. 브라우저 크기를 조절해보십시오. 식물은 컨테이너에 있지만 크기에 맞게 작아집니다.</p>
+<p>또한 요소의 상대적 고도를 제어하는, ​​z-index의 사용은 주목할만 합니다 (식물이 컨테이너 위에 있고 terrarium 안에 있는 것처럼 보이게).</p>
+<p>✅ 식물 홀더와 식물 CSS 선택자가 필요한 이유는 무엇입니까?</p>
+<h2 id="css-포지셔닝">CSS 포지셔닝</h2>
+<p>위치 속성(static, relative, fixed, absolute 그리고 sticky 포지션)을 섞는 것은 약간 까다로울 수 있지만, 제대로 하면 페이지의 요소를 잘 제어할 수 있습니다.</p>
+<p>절대 위치 요소는 가장 가까운 위치에 있는 최상위를 기준으로 위치하며, 없는 경우 문서 본문에 따라 위치가 지정됩니다.</p>
+<p>상대 배치된 요소는 CSS의 방향에 따라 배치되며 처음 위치에서 떨어진 배치를 조정합니다.</p>
+<p>예시에서, <code>plant-holder</code>는 절대 위치지만 컨테이너 안에서는 상대 위치 요소입니다. 그 결과 사이드바 컨테이너가 왼쪽과 오른쪽에 고정되고, 식물 홀더가 중첩되어 사이드바 안에서 자체적으로 조정되므로 수직 행에 식물이 배치될 공간을 제공합니다.</p>
+<blockquote>
+<p>다음 강의에서 확인해보면, <code>plant</code>은 드래그 가능한 필요한 절대 위치에 있습니다.</p>
+</blockquote>
+<p>✅ 사이드 컨테이너와 식물 홀더의 위치 타입을 전환하여 실험하십시오. 무슨 일이 생기나요?</p>
+<h2 id="css-레이아웃">CSS 레이아웃</h2>
+<p>이제는 배웠던 모든 CSS를 사용하여 terrarium 자체를 만듭니다!</p>
+<p>먼저, CSS를 사용하여 <code>.terrarium</code> div 하위를 라운딩된 사각형으로 꾸밉니다:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb10-1" title="1"><span class="fu">.jar-walls</span> {</a>
+<a class="sourceLine" id="cb10-2" title="2">    <span class="kw">height</span>: <span class="dv">80</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="kw">width</span>: <span class="dv">60</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="kw">background</span>: <span class="cn">#d1e1df</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-5" title="5">    <span class="kw">border-radius</span>: <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-6" title="6">    <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-7" title="7">    <span class="kw">bottom</span>: <span class="dv">0.5</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-8" title="8">    <span class="kw">left</span>: <span class="dv">20</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-9" title="9">    <span class="kw">opacity</span>: <span class="dv">0.5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-10" title="10">    <span class="kw">z-index</span>: <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-11" title="11">}</a>
+<a class="sourceLine" id="cb10-12" title="12"></a>
+<a class="sourceLine" id="cb10-13" title="13"><span class="fu">.jar-top</span> {</a>
+<a class="sourceLine" id="cb10-14" title="14">    <span class="kw">width</span>: <span class="dv">50</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-15" title="15">    <span class="kw">height</span>: <span class="dv">5</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-16" title="16">    <span class="kw">background</span>: <span class="cn">#d1e1df</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-17" title="17">    <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-18" title="18">    <span class="kw">bottom</span>: <span class="dv">80.5</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-19" title="19">    <span class="kw">left</span>: <span class="dv">25</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-20" title="20">    <span class="kw">opacity</span>: <span class="dv">0.7</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-21" title="21">    <span class="kw">z-index</span>: <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-22" title="22">}</a>
+<a class="sourceLine" id="cb10-23" title="23"></a>
+<a class="sourceLine" id="cb10-24" title="24"><span class="fu">.jar-bottom</span> {</a>
+<a class="sourceLine" id="cb10-25" title="25">    <span class="kw">width</span>: <span class="dv">50</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-26" title="26">    <span class="kw">height</span>: <span class="dv">1</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-27" title="27">    <span class="kw">background</span>: <span class="cn">#d1e1df</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-28" title="28">    <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-29" title="29">    <span class="kw">bottom</span>: <span class="dv">0</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-30" title="30">    <span class="kw">left</span>: <span class="dv">25</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-31" title="31">    <span class="kw">opacity</span>: <span class="dv">0.7</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-32" title="32">}</a>
+<a class="sourceLine" id="cb10-33" title="33"></a>
+<a class="sourceLine" id="cb10-34" title="34"><span class="fu">.dirt</span> {</a>
+<a class="sourceLine" id="cb10-35" title="35">    <span class="kw">width</span>: <span class="dv">60</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-36" title="36">    <span class="kw">height</span>: <span class="dv">5</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-37" title="37">    <span class="kw">background</span>: <span class="cn">#3a241d</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-38" title="38">    <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-39" title="39">    <span class="kw">border-radius</span>: <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span><span class="dt">rem</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-40" title="40">    <span class="kw">bottom</span>: <span class="dv">1</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-41" title="41">    <span class="kw">left</span>: <span class="dv">20</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-42" title="42">    <span class="kw">opacity</span>: <span class="dv">0.7</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-43" title="43">    <span class="kw">z-index</span>: <span class="dv">-1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-44" title="44">}</a></code></pre></div>
+<p>여기서는 <code>border-radius</code>에 대해서도 백분율을 사용합니다. 브라우저를 줄이면 jar 모서리도 어떻게 변하는 지 볼 수 있습니다. 또한 jar 요소의 너비, 높이 백분율과 각 요소가 뷰포트 하단에 고정되어 중앙에 절대 배치되는 방식을 확인하십시오.</p>
+<p>✅ jar 색상과 투명도를 흙 색과 비교해보십시오. 무슨 일인가요? 왜 그럴까요?</p>
+<hr />
+<h2 id="도전">🚀 도전</h2>
+<p>jar 좌측 하단 부분에 ‘bubble’ 광택을 추가하여 유리처럼 보이도록 합니다. <code>.jar-glossy-long</code>과 <code>.jar-glossy-short</code>를 빛 반사되는 것처럼 보이도록 꾸밉니다. 다음과 같이 표시됩니다.</p>
+<figure>
+<img src=".././images/terrarium-final.png" alt="finished terrarium" /><figcaption>finished terrarium</figcaption>
+</figure>
+<p>강의 후 퀴즈를 완료하려면, 다음 학습 모듈을 진행하십시오: <a href="https://docs.microsoft.com/learn/modules/build-simple-website/4-css-basics?WT.mc_id=academic-13441-cxa">Style your HTML app with CSS</a></p>
+<h2 id="강의-후-퀴즈">강의 후 퀴즈</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/18?loc=ko">Post-lecture quiz</a></p>
+<h2 id="리뷰-자기주도-학습">리뷰 &amp; 자기주도 학습</h2>
+<p>CSS는 믿을 수 없게 간단해 보이지만, 모든 브라우저와 모든 화면 크기에 대해 완벽한 스타일을 지정하려면 많이 어렵습니다. CSS-Grid 및 Flexbox는 좀 더 구조화되고 안정적으로 보이게 개발된 도구입니다. <a href="https://flexboxfroggy.com/">Flexbox Froggy</a>와 <a href="https://codepip.com/games/grid-garden/">Grid Garden</a>을 플레이하여 도구에 대해 알아보세요.</p>
+<h2 id="과제">과제</h2>
+<p><a href="../assignment.md">CSS Refactoring</a></p>
+</body>
+</html>

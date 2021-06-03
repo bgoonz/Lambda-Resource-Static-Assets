@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2013-02-21" />
+  <title>What are extensions?</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What are extensions?</h1>
+<p class="date">2013-02-21</p>
+</header>
+<p>This page provides a brief introduction to Chrome extensions and walks through the creation of a “Hello, World!” extension.</p>
+<h2 id="about-extensions-intro">About extensions {: #intro }</h2>
+<p>Extensions are small software programs that customize the browsing experience. They let users tailor Chrome functionality and behavior in many ways, providing things like:</p>
+<ul>
+<li>Productivity tools</li>
+<li>Web page content enrichment</li>
+<li>Information aggregation</li>
+<li>Fun and games</li>
+</ul>
+<p>These are just a few examples of the many things that extensions can do. See the <a href="https://chrome.google.com/webstore">Chrome Web Store</a> to see thousands of different examples of published extensions.</p>
+<h3 id="how-do-extensions-work-basics">How do extensions work? {: #basics }</h3>
+<p>Extensions are built on web technologies such as HTML, JavaScript, and CSS. They run in a separate, sandboxed execution environment and interact with the Chrome browser.</p>
+<p>{# TODO: put a diagram here that is useful and helps with context #} {% if false %}</p>
+<p>Consider the context for this – Chrome runs on a device, connecting the user to resources on the Web, as depicted in this context diagram:</p>
+<p>{% Img src=“image/SHhb2PDKzXTggPGAYpv8JgR81pX2/5qVlqGn6vVMCWCSRclOY.png”, alt=“Context diagram of Chrome with an extension”, width=“517”, height=“476” %}</p>
+<p>Also shown in the diagram is an extension “plugged into” the Chrome browser. The extension can access and modify selected resources and actions in Chrome. There are two aspects to consider: {% endif %}</p>
+<p>Extensions let you “extend” the browser by using APIs to modify browser behavior and access web content. Extensions operate by means of an end-user UI and a developer API:</p>
+<p><strong>The extensions user interface</strong> This provides a consistent way for users to manage their extensions.</p>
+<p><strong>Extensions APIs</strong> The <a href="/docs/extensions/reference/">extensions APIs</a> allow the extension’s code to access features of the browser itself: activating tabs, modifying net requests, and so on.</p>
+<p>To create an extension, you assemble some resources – a manifest, JavaScript and HTML files, images, and others – that constitute the extension. For development and testing, you can load these “unpacked” into Chrome using <a href="/docs/extensions/mv3/getstarted/#manifest">extension developer mode</a>. Once you are happy with your extension, you can <a href="/docs/webstore/publish/">package it and distribute it to users</a>.</p>
+<h3 id="how-do-users-get-extensions-getting-extensions">How do users get extensions? {: #getting-extensions }</h3>
+<p>Most Chrome users get extensions from the <a href="https://chrome.google.com/webstore">Chrome Web Store</a>. Developers across the globe publish their extensions in the Chrome Web Store where they are reviewed and made available to end users.</p>
+<p>{% Aside %}</p>
+<p>Some organizations use <a href="https://cloud.google.com/docs/chrome-enterprise/policies/">enterprise policies</a> to install extensions on their user’s devices. These extensions may either be fetched from the Chrome Web Store or hosted on the organization’s web servers. {# TODO: See XXX for info on the capabilities and limitations of self hosting. #}</p>
+<p>{% endAside %}</p>
+<p>You can distribute your extensions through the <a href="https://chrome.google.com/webstore/devconsole">Chrome Developer Dashboard</a>, publishing them to the <a href="https://chrome.google.com/webstore">Chrome Web Store</a>. For more information, see the Chrome Web Store <a href="/docs/webstore">developer documentation</a>.</p>
+<h3 id="a-note-about-extensions-policy-policy">A note about extensions policy {: #policy }</h3>
+<p>Extensions on the Chrome Web Store must adhere to the <a href="/docs/webstore/program_policies/">Chrome Web Store policies</a>. Here are some things to keep in mind as you begin:</p>
+<ul>
+<li>An extension must fulfill a <a href="/docs/extensions/mv3/single_purpose">single purpose</a> that is narrowly defined and easy to understand. A single extension can include multiple components and a range of functionality, as long as everything contributes towards a common purpose.</li>
+</ul>
+<p>{% Img src=“image/SHhb2PDKzXTggPGAYpv8JgR81pX2/XniXB3snAeMvLwI1am3O.png”, alt=“Screenshot of AMP validator extension pinned”, width=“169”, height=“62” %}</p>
+<ul>
+<li>User interfaces should be minimal and have intent. They can range from a simple icon, such as the <a href="https://chrome.google.com/webstore/detail/amp-validator/nmoffdblmcmgeicmolmhobpoocbbmknc">AMP validator</a> extension shown above, to opening a new window with a form, like the <a href="https://chrome.google.com/webstore/detail/packagetrack-package-trac/hoipjclokbelgffomjhhiflphegpmlpe">Google Similar Pages</a> extension shown below.</li>
+</ul>
+<p>{% Img src=“image/SHhb2PDKzXTggPGAYpv8JgR81pX2/oR9iCEgY2889Z3mHHLll.png”, alt=“Screenshot of Google Similar Pages extension”, width=“334”, height=“597” %}</p>
+<h2 id="hello-extensions-hello-extensions">Hello extensions {: #hello-extensions }</h2>
+<p>Take a small step into extensions with this quick Hello Extensions example. Start by creating a new directory to store the extension’s files, or download them from the <a href="/docs/extensions/mv3/samples#search:hello">sample page</a>.</p>
+<p>Next, add a file called <code>manifest.json</code> and include the following code:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Hello Extensions&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Base Level Extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">&quot;manifest_version&quot;</span><span class="fu">:</span> <span class="dv">3</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="fu">}</span></a></code></pre></div>
+<p>Every extension requires a manifest, though most extensions will not do much with just the manifest. For this quick start, the extension has a popup file and icon declared under the <a href="/docs/extensions/reference/action"><code>action</code></a> field:</p>
+<pre class="json/5-8"><code>{
+  &quot;name&quot;: &quot;Hello Extensions&quot;,
+  &quot;description&quot;: &quot;Base Level Extension&quot;,
+  &quot;version&quot;: &quot;1.0&quot;,
+  &quot;manifest_version&quot;: 3,
+  &quot;action&quot;: {
+    &quot;default_popup&quot;: &quot;hello.html&quot;,
+    &quot;default_icon&quot;: &quot;hello_extensions.png&quot;
+  }
+}</code></pre>
+<p>Download <a href="https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/gmKIT88Ha1z8VBMJFOOH.png"><code>hello_extensions.png</code> here</a> and then create a file titled <code>hello.html</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="kw">&lt;h1&gt;</span>Hello Extensions<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>The extension now displays <code>hello.html</code> when the icon is clicked. The next step is to include a command in the <code>manifest.json</code> that enables a keyboard shortcut. This step is fun, but not necessary:</p>
+<pre class="json/9-17"><code>{
+  &quot;name&quot;: &quot;Hello Extensions&quot;,
+  &quot;description&quot;: &quot;Base Level Extension&quot;,
+  &quot;version&quot;: &quot;1.0&quot;,
+  &quot;manifest_version&quot;: 3,
+  &quot;action&quot;: {
+    &quot;default_popup&quot;: &quot;hello.html&quot;,
+    &quot;default_icon&quot;: &quot;hello_extensions.png&quot;
+  },
+  &quot;commands&quot;: {
+    &quot;_execute_action&quot;: {
+      &quot;suggested_key&quot;: {
+        &quot;default&quot;: &quot;Ctrl+Shift+F&quot;,
+        &quot;mac&quot;: &quot;MacCtrl+Shift+F&quot;
+      },
+      &quot;description&quot;: &quot;Opens hello.html&quot;
+    }
+  }
+}</code></pre>
+<p>The last step is to install the extension on your local machine.</p>
+<ol type="1">
+<li>Navigate to <code>chrome://extensions</code> in your browser. You can also access this page by clicking on the Chrome menu on the top right side of the Omnibox, hovering over <strong>More Tools</strong> and selecting <strong>Extensions</strong>.</li>
+<li>Check the box next to <strong>Developer Mode</strong>.</li>
+<li>Click <strong>Load Unpacked Extension</strong> and select the directory for your “Hello Extensions” extension.</li>
+</ol>
+<p>Congratulations! You can now use your popup-based extension by clicking the <code>hello_world.png</code> icon or by pressing <code>Ctrl+Shift+F</code> on your keyboard.</p>
+<h2 id="what-next-how-do-i-start">What next? {: #How-do-I-start }</h2>
+<ol type="1">
+<li>Follow the <a href="/docs/extensions/mv3/getstarted">Getting Started tutorial</a></li>
+<li>Explore the <a href="https://github.com/GoogleChrome/chrome-extensions-samples">extension samples</a></li>
+<li>Subscribe to the <a href="http://groups.google.com/a/chromium.org/group/chromium-extensions">chromium-extensions Google group</a></li>
+</ol>
+</body>
+</html>

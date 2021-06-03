@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>index</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h2 id="manifest">Manifest</h2>
+<p>You can use most <code>chrome.tabs</code> methods and events without declaring any permissions in the extension’s <a href="/docs/extensions/mv3/manifest/">manifest</a> file. However, if you require access to the <a href="#property-Tab-url"><code>url</code></a>, [<code>pendingUrl</code>][3], <a href="#property-Tab-title"><code>title</code></a>, or <a href="#property-Tab-favIconUrl"><code>favIconUrl</code></a> properties of <a href="#type-Tab"><code>tabs.Tab</code></a>, you must declare the <code>"tabs"</code> permission in the manifest, as shown below:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;My extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="st">&quot;tabs&quot;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<h2 id="examples">Examples</h2>
+<p>The following sections demonstrate several common use cases for the chrome.tabs API.</p>
+<h3 id="opening-an-extension-page-in-a-new-tab">Opening an extension page in a new tab</h3>
+<p>A common pattern for extensions is to open an onboarding page in a new tab when the extension is installed. The following example shows how to do this.</p>
+<p>{% Aside %}</p>
+<p>Content scripts cannot use <code>chrome.tabs.create()</code>.</p>
+<p>{% endAside %}</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">//// background.js</span></a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="va">chrome</span>.<span class="va">runtime</span>.<span class="va">onInstalled</span>.<span class="at">addListener</span>((reason) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="cf">if</span> (reason <span class="op">===</span> <span class="va">chrome</span>.<span class="va">runtime</span>.<span class="va">OnInstalledReason</span>.<span class="at">INSTALL</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="va">chrome</span>.<span class="va">tabs</span>.<span class="at">create</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">      <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;onboarding.html&#39;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="get-the-current-tab">Get the current tab</h3>
+<p>This example demonstrates how the background script can retrieve the currently focused tab.</p>
+<p>{% Aside %}</p>
+<p>This example requires Manifest due to the use of <a href="/docs/extensions/mv3/promises/">Promises</a>. Additionally, content scripts cannot use <code>tabs.query</code>.</p>
+<p>{% endAside %}</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">//// background.js</span></a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw">async</span> <span class="kw">function</span> <span class="at">getCurrentTab</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="kw">let</span> queryOptions <span class="op">=</span> <span class="op">{</span> <span class="dt">active</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">currentWindow</span><span class="op">:</span> <span class="kw">true</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="kw">let</span> [tab] <span class="op">=</span> <span class="cf">await</span> <span class="va">chrome</span>.<span class="va">tabs</span>.<span class="at">query</span>(queryOptions)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="cf">return</span> tab<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="op">}</span></a></code></pre></div>
+<h3 id="mute-the-specified-tab">Mute the specified tab</h3>
+<p>This example shows how an extension can toggle the muted state for a given tab.</p>
+<p>{% Aside %}</p>
+<p>Requires Manifest V3 due to the use of Promises. Content scripts cannot use <code>tabs.get</code> or <code>tabs.update</code>.</p>
+<p>{% endAside %}</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">//// background.js</span></a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">function</span> <span class="at">toggleMuteState</span>(tabId) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="va">chrome</span>.<span class="va">tabs</span>.<span class="at">get</span>(tabId<span class="op">,</span> <span class="kw">async</span> (tab) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="kw">let</span> muted <span class="op">=</span> <span class="op">!</span><span class="va">tab</span>.<span class="va">mutedInfo</span>.<span class="at">muted</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="cf">await</span> <span class="va">chrome</span>.<span class="va">tabs</span>.<span class="at">update</span>(tabId<span class="op">,</span> <span class="op">{</span> muted <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`Tab </span><span class="sc">${</span><span class="va">tab</span>.<span class="at">id</span><span class="sc">}</span><span class="vs"> is </span><span class="sc">${</span> muted <span class="op">?</span> <span class="st">&#39;muted&#39;</span> : <span class="st">&#39;unmuted&#39;</span> <span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="op">}</span></a></code></pre></div>
+<h3 id="more-samples">More samples</h3>
+<p>For more examples that demonstrate the Tabs API, see the <a href="https://github.com/GoogleChrome/chrome-extensions-samples/tree/master/mv2-archive/api/tabs/">mv2-archive/api/tabs</a> directory of the <a href="https://github.com/GoogleChrome/chrome-extensions-samples">chrome-extensions-samples</a> repository.</p>
+</body>
+</html>

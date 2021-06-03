@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.ja</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="スペースゲーム構築プロジェクト-その-4-レーザーを追加して衝突を検出する">スペースゲーム構築プロジェクト その 4: レーザーを追加して衝突を検出する</h1>
+<h2 id="レッスン前の小テスト">レッスン前の小テスト</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/35?loc=ja">レッスン前の小テスト</a></p>
+<p>このレッスンでは、JavaScript でレーザーを撃つ方法を学びます! 私たちはゲームに2つのものを追加します。</p>
+<ul>
+<li><strong>レーザー</strong>: このレーザーはあなたのヒーローの宇宙船から垂直に上向きに撃たれます</li>
+<li><strong>衝突検出</strong>、発射する能力を実装する一環として、我々はまたいくつかの素敵なゲームのルールを追加します
+<ul>
+<li><strong>レーザーが敵に当たる</strong>: レーザーが当たると敵が破壊される</li>
+<li><strong>レーザーがトップ画面に当たる</strong>: 画面上部に当たるとレーザーが破壊されます</li>
+<li><strong>敵とヒーローの衝突</strong>: 敵とヒーローがぶつかると破壊されます</li>
+<li><strong>敵が画面の下に当たる</strong>: 敵が画面下に当たると敵とヒーローが破壊されます</li>
+</ul></li>
+</ul>
+<p>要するに、あなた - <em>ヒーロー</em> - は画面の下部に移動するために管理する前に、レーザーですべての敵をヒットする必要があります。</p>
+<p>✅ これまでに書かれた最初のコンピュータゲームについて少し調べてみてください。その機能は何だったのでしょうか?</p>
+<p>一緒にヒーローになりましょう!</p>
+<h2 id="衝突検出">衝突検出</h2>
+<p>どのようにして衝突を検出するのか? ゲームオブジェクトを移動する長方形と考える必要があります。なぜでしょうか? ゲームオブジェクトの描画に使われる画像は矩形です。<code>x</code>、<code>y</code>、<code>width</code>、<code>height</code> を持っています。</p>
+<p>2 つの長方形、つまりヒーローと敵が交差すると、衝突します。そのときに何が起こるかは、ゲームのルール次第です。したがって、衝突検出を実装するためには以下のものが必要です。</p>
+<ol type="1">
+<li><p>ゲームオブジェクトの矩形表現を取得する方法。こんな感じです</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="at">rectFromGameObject</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">top</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">y</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="dt">left</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">x</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="dt">bottom</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">y</span> <span class="op">+</span> <span class="kw">this</span>.<span class="at">height</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="dt">right</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">x</span> <span class="op">+</span> <span class="kw">this</span>.<span class="at">width</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="op">}</span></a></code></pre></div></li>
+<li><p>比較関数で、この関数は次のようになります</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">function</span> <span class="at">intersectRect</span>(r1<span class="op">,</span> r2) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="cf">return</span> <span class="op">!</span>(<span class="va">r2</span>.<span class="at">left</span> <span class="op">&gt;</span> <span class="va">r1</span>.<span class="at">right</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="va">r2</span>.<span class="at">right</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">left</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="va">r2</span>.<span class="at">top</span> <span class="op">&gt;</span> <span class="va">r1</span>.<span class="at">bottom</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="va">r2</span>.<span class="at">bottom</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">top</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="op">}</span></a></code></pre></div></li>
+</ol>
+<h2 id="オブジェクトをどうやって破壊するか">オブジェクトをどうやって破壊するか</h2>
+<p>ゲーム内のオブジェクトを破壊するには、一定の間隔で発生するゲームループの中で、このアイテムをペイントしないようにゲームに知らせる必要があります。これを行うには、以下のように、何かが起こったときにゲームオブジェクトを <em>dead</em> としてマークする方法があります。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">// 衝突が発生します</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="va">enemy</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span></a></code></pre></div>
+<p>その後、画面を再描画する前に、このように、<em>dead</em> オブジェクトをソートしていきます。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1">gameObjects <span class="op">=</span> <span class="va">gameObject</span>.<span class="at">filter</span>(go <span class="kw">=&gt;</span> <span class="op">!</span><span class="va">go</span>.<span class="at">dead</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="レーザーの撃ち方">レーザーの撃ち方</h2>
+<p>レーザーを発射することは、キーイベントに反応して、特定の方向に移動するオブジェクトを作成することになります。そのため、以下のような作業を行う必要があります。</p>
+<ol type="1">
+<li><strong>レーザーオブジェクトを作成します</strong>: ヒーローの船の上部から、作成時に画面の上部に向かって上向きに移動を開始します</li>
+<li><strong>キーイベントにコードを添付します</strong>: レーザーを撮影しているプレイヤーを表すキーボードのキーを選択する必要があります</li>
+<li>キーを押すと<strong>レーザーのように見えるゲームオブジェクトを作成します</strong></li>
+</ol>
+<h2 id="レーザーのクールダウン">レーザーのクールダウン</h2>
+<p>レーザーは、例えば<em>スペース</em>のように、キーを押すたびに発射する必要があります。短時間で多くのレーザーが発射されるのを防ぐために、この問題を解決する必要があります。これを修正するには、いわゆる <em>クールダウン</em>、タイマーを実装することで、レーザーはそれほど頻繁にしか発射することができないことを保証します。以下の方法で実装できます。</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">class</span> Cooldown <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="at">constructor</span>(time) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="kw">this</span>.<span class="at">cool</span> <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="at">setTimeout</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-5" title="5">      <span class="kw">this</span>.<span class="at">cool</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="op">},</span> time)</a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-9" title="9"></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="kw">class</span> Weapon <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-11" title="11">  constructor <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-12" title="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-13" title="13">  <span class="at">fire</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-14" title="14">    <span class="cf">if</span> (<span class="op">!</span><span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">||</span> <span class="kw">this</span>.<span class="va">cooldown</span>.<span class="at">cool</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-15" title="15">      <span class="co">// レーザーを作る</span></a>
+<a class="sourceLine" id="cb5-16" title="16">      <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">=</span> <span class="kw">new</span> <span class="at">Cooldown</span>(<span class="dv">500</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-17" title="17">    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-18" title="18">      <span class="co">// 何もしない-まだクールダウンしていない。</span></a>
+<a class="sourceLine" id="cb5-19" title="19">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-20" title="20">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-21" title="21"><span class="op">}</span></a></code></pre></div>
+<p>✅ スペースゲームシリーズのレッスン1を参照して、<em>クールダウン</em>について思い出してください。</p>
+<h2 id="何を構築するか">何を構築するか</h2>
+<p>前回のレッスンで使用した既存のコード (クリーンアップしてリファクタリングしたはずのコード) を使用して、それを拡張します。 パート II のコードから始めるか、<a href="../../your-work">パートIII - スターター</a>のコードを使用してください。</p>
+<blockquote>
+<p>ヒント: 作業に使用するレーザーはすでにアセットフォルダにあり、コードで参照されています。</p>
+</blockquote>
+<ul>
+<li><strong>衝突検出を追加します</strong>、レーザーが何かに衝突するときは、次のルールを適用する必要があります
+<ol type="1">
+<li><strong>レーザーが敵に当たる</strong>: レーザーが当たると敵が破壊される</li>
+<li><strong>レーザーが画面上部に当たる</strong>: レーザーが画面の上部に当たると破壊される</li>
+<li><strong>敵とヒーローの衝突</strong>: 敵とヒーローがぶつかると破壊される</li>
+<li><strong>画面下に敵が当たる</strong>: 敵が画面下部に当たると敵とヒーローが破壊される</li>
+</ol></li>
+</ul>
+<h2 id="推奨される手順">推奨される手順</h2>
+<p>あなたのために作成されたファイルを <code>your-work</code> サブフォルダ内で探します。以下のファイルが含まれているはずです。</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="ex">-</span><span class="kw">|</span> <span class="ex">assets</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">enemyShip.png</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">player.png</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="ex">-</span><span class="kw">|</span> <span class="ex">laserRed.png</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="ex">-</span><span class="kw">|</span> <span class="ex">index.html</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="ex">-</span><span class="kw">|</span> <span class="ex">app.js</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="ex">-</span><span class="kw">|</span> <span class="ex">package.json</span></a></code></pre></div>
+<p>次のコマンドをタイピングして、あなたのプロジェクトを <code>your_work</code> フォルダから開始します。</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="bu">cd</span> your-work</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="ex">npm</span> start</a></code></pre></div>
+<p>上記は、<code>http://localhost:5000</code> というアドレスで HTTP サーバを起動します。ブラウザを開いてそのアドレスを入力すると、今はヒーローと全ての敵が表示されるはずですが、まだ何も動いていません。</p>
+<h3 id="コードの追加">コードの追加</h3>
+<ol type="1">
+<li><p><strong>衝突を処理するためにゲームオブジェクトの矩形表現を設定する</strong> 以下のコードでは、<code>GameObject</code> の矩形表現を取得することができます。GameObject クラスを編集して拡張します</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="at">rectFromGameObject</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">      <span class="dt">top</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">y</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-4" title="4">      <span class="dt">left</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">x</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-5" title="5">      <span class="dt">bottom</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">y</span> <span class="op">+</span> <span class="kw">this</span>.<span class="at">height</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6">      <span class="dt">right</span><span class="op">:</span> <span class="kw">this</span>.<span class="at">x</span> <span class="op">+</span> <span class="kw">this</span>.<span class="at">width</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="op">};</span></a>
+<a class="sourceLine" id="cb8-8" title="8">  <span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>衝突をチェックするコードの追加</strong> これは、2 つの矩形が交差するかどうかをテストする新しい関数になります</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">function</span> <span class="at">intersectRect</span>(r1<span class="op">,</span> r2) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="cf">return</span> <span class="op">!</span>(</a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="va">r2</span>.<span class="at">left</span> <span class="op">&gt;</span> <span class="va">r1</span>.<span class="at">right</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="va">r2</span>.<span class="at">right</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">left</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb9-5" title="5">    <span class="va">r2</span>.<span class="at">top</span> <span class="op">&gt;</span> <span class="va">r1</span>.<span class="at">bottom</span> <span class="op">||</span></a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="va">r2</span>.<span class="at">bottom</span> <span class="op">&lt;</span> <span class="va">r1</span>.<span class="at">top</span></a>
+<a class="sourceLine" id="cb9-7" title="7">  )<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="op">}</span></a></code></pre></div></li>
+<li><strong>レーザー発射機能の追加</strong>
+<ol type="1">
+<li><p><strong>キーイベントメッセージを追加します</strong>。<em>スペース</em>キーはヒーローの宇宙船の真上にレーザーを作成する必要があります。Messages オブジェクトに3つの定数を追加します</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"> KEY_EVENT_SPACE<span class="op">:</span> <span class="st">&quot;KEY_EVENT_SPACE&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-2" title="2"> COLLISION_ENEMY_LASER<span class="op">:</span> <span class="st">&quot;COLLISION_ENEMY_LASER&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-3" title="3"> COLLISION_ENEMY_HERO<span class="op">:</span> <span class="st">&quot;COLLISION_ENEMY_HERO&quot;</span><span class="op">,</span></a></code></pre></div></li>
+<li><p><strong>スペースキーを処理します</strong>。スペースを扱うために、<code>window.addEventListener</code> のキーアップ関数を編集します</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1">  } <span class="cf">else</span> <span class="cf">if</span>(<span class="va">evt</span>.<span class="at">keyCode</span> <span class="op">===</span> <span class="dv">32</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">    <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_SPACE</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>リスナーを追加します</strong>。スペースバーがヒットした時にヒーローが発射できるように <code>initGame()</code> 関数を編集します</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">KEY_EVENT_SPACE</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2"> <span class="cf">if</span> (<span class="va">hero</span>.<span class="at">canFire</span>()) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-3" title="3">   <span class="va">hero</span>.<span class="at">fire</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"> <span class="op">}</span></a></code></pre></div>
+<p>そして、敵がレーザーに衝突したときの動作を保証するために、新しい <code>eventEmitter.on()</code> 関数を追加します</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span> (_<span class="op">,</span> <span class="op">{</span> first<span class="op">,</span> second <span class="op">}</span>) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="va">first</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="va">second</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="op">}</span>)</a></code></pre></div></li>
+<li><p><strong>オブジェクトを移動させ</strong>、レーザーが徐々に画面上部に移動するようにします。先ほどと同じように <code>GameObject</code>を継承した Laser クラスを新たに作成します</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" title="1">  <span class="kw">class</span> Laser <span class="kw">extends</span> GameObject <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="at">constructor</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-3" title="3">    <span class="kw">super</span>(x<span class="op">,</span>y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-4" title="4">    (<span class="kw">this</span>.<span class="at">width</span> <span class="op">=</span> <span class="dv">9</span>)<span class="op">,</span> (<span class="kw">this</span>.<span class="at">height</span> <span class="op">=</span> <span class="dv">33</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-5" title="5">    <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> <span class="st">&#39;Laser&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-6" title="6">    <span class="kw">this</span>.<span class="at">img</span> <span class="op">=</span> laserImg<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-7" title="7">    <span class="kw">let</span> id <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-8" title="8">      <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">y</span> <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-9" title="9">        <span class="kw">this</span>.<span class="at">y</span> <span class="op">-=</span> <span class="dv">15</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-10" title="10">      <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-11" title="11">        <span class="kw">this</span>.<span class="at">dead</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb14-12" title="12">        <span class="at">clearInterval</span>(id)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-13" title="13">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb14-14" title="14">    <span class="op">},</span> <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb14-15" title="15">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb14-16" title="16"><span class="op">}</span></a></code></pre></div></li>
+<li><p><strong>衝突の処理</strong>、レーザーの衝突ルールの実装 衝突したオブジェクトのヒットをテストする <code>updateGameObjects()</code> 関数を追加します</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">function</span> <span class="at">updateGameObjects</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="kw">const</span> enemies <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>(go <span class="kw">=&gt;</span> <span class="va">go</span>.<span class="at">type</span> <span class="op">===</span> <span class="st">&#39;Enemy&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="kw">const</span> lasers <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>((go) <span class="kw">=&gt;</span> <span class="va">go</span>.<span class="at">type</span> <span class="op">===</span> <span class="st">&quot;Laser&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="co">// レーザーが当たる</span></a>
+<a class="sourceLine" id="cb15-5" title="5">  <span class="va">lasers</span>.<span class="at">forEach</span>((l) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-6" title="6">    <span class="va">enemies</span>.<span class="at">forEach</span>((m) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-7" title="7">      <span class="cf">if</span> (<span class="at">intersectRect</span>(<span class="va">l</span>.<span class="at">rectFromGameObject</span>()<span class="op">,</span> <span class="va">m</span>.<span class="at">rectFromGameObject</span>())) <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-8" title="8">      <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">COLLISION_ENEMY_LASER</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-9" title="9">        <span class="dt">first</span><span class="op">:</span> l<span class="op">,</span></a>
+<a class="sourceLine" id="cb15-10" title="10">        <span class="dt">second</span><span class="op">:</span> m<span class="op">,</span></a>
+<a class="sourceLine" id="cb15-11" title="11">      <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-12" title="12">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb15-13" title="13">   <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-14" title="14"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-15" title="15"></a>
+<a class="sourceLine" id="cb15-16" title="16">  gameObjects <span class="op">=</span> <span class="va">gameObjects</span>.<span class="at">filter</span>(go <span class="kw">=&gt;</span> <span class="op">!</span><span class="va">go</span>.<span class="at">dead</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-17" title="17"><span class="op">}</span>  </a></code></pre></div>
+<p>必ず <code>window.onload</code> のゲームループに <code>updateGameObjects()</code> を追加してください。</p></li>
+<li><p>レーザーに<strong>クールダウンを実装</strong>して、それがそんなに頻繁にしか発射できないようにします</p>
+<p>最後に、Hero クラスをクールダウンできるように編集します</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">class</span> Hero <span class="kw">extends</span> GameObject <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2"> <span class="at">constructor</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-3" title="3">   <span class="kw">super</span>(x<span class="op">,</span> y)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-4" title="4">   (<span class="kw">this</span>.<span class="at">width</span> <span class="op">=</span> <span class="dv">99</span>)<span class="op">,</span> (<span class="kw">this</span>.<span class="at">height</span> <span class="op">=</span> <span class="dv">75</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-5" title="5">   <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> <span class="st">&quot;Hero&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-6" title="6">   <span class="kw">this</span>.<span class="at">speed</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">0</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb16-7" title="7">   <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-8" title="8"> <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-9" title="9"> <span class="at">fire</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-10" title="10">   <span class="va">gameObjects</span>.<span class="at">push</span>(<span class="kw">new</span> <span class="at">Laser</span>(<span class="kw">this</span>.<span class="at">x</span> <span class="op">+</span> <span class="dv">45</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">y</span> <span class="op">-</span> <span class="dv">10</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-11" title="11">   <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">=</span> <span class="dv">500</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-12" title="12"></a>
+<a class="sourceLine" id="cb16-13" title="13">   <span class="kw">let</span> id <span class="op">=</span> <span class="at">setInterval</span>(() <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-14" title="14">     <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-15" title="15">       <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">-=</span> <span class="dv">100</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-16" title="16">     <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-17" title="17">       <span class="at">clearInterval</span>(id)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-18" title="18">     <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-19" title="19">   <span class="op">},</span> <span class="dv">200</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-20" title="20"> <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-21" title="21"> <span class="at">canFire</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-22" title="22">   <span class="cf">return</span> <span class="kw">this</span>.<span class="at">cooldown</span> <span class="op">===</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-23" title="23"> <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-24" title="24"><span class="op">}</span></a></code></pre></div></li>
+</ol></li>
+</ol>
+<p>この時点で、あなたのゲームはいくつかの機能を持っています! 矢印キーで移動したり、スペースバーでレーザーを発射したり、敵はあなたがそれらを打つときに消えることができます。よくできました!</p>
+<hr />
+<h2 id="チャレンジ">🚀 チャレンジ</h2>
+<p>爆発を追加しましょう! <a href="../../solution/spaceArt/readme.txt">スペースアートレポ</a>のゲームアセットを見て、レーザーがエイリアンに当たったときに爆発を追加してみてください。</p>
+<h2 id="レッスン後の小テスト">レッスン後の小テスト</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/36?loc=ja">レッスン後の小テスト</a></p>
+<h2 id="復習と自己学習">復習と自己学習</h2>
+<p>これまでのゲームの間隔を実験してみてください。それらを変更するとどうなるでしょうか? <a href="https://www.freecodecamp.org/news/javascript-timing-events-settimeout-and-setinterval/">JavaScript のタイミングイベント</a>についての詳細はこちら。</p>
+<h2 id="課題">課題</h2>
+<p><a href="assignment.ja.md">衝突を調べる</a></p>
+</body>
+</html>

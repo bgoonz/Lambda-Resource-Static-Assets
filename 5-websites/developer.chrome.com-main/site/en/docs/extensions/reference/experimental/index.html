@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2012-09-17" />
+  <title>chrome.experimental.* APIs</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">chrome.experimental.* APIs</h1>
+<p class="date">2012-09-17</p>
+</header>
+<h2 id="list-of-apis-overview">List of APIs {: #overview }</h2>
+<p>We’d like your <a href="http://groups.google.com/a/chromium.org/group/chromium-extensions/topics">feedback</a> on the following experimental APIs:</p>
+<table>
+<tbody>
+<tr>
+<th>
+Name
+</th>
+<th>
+Description
+</th>
+</tr>
+</tbody>
+</table>
+<p>Pay special attention to the following APIs, which we expect to finalize soon: <strong>devtools</strong>, <strong>permissions</strong>, For examples of using the experimental APIs, see <a href="/docs/extensions/mv2/samples#search:experimental">Samples</a>.</p>
+<div class="aside aside--warning">
+<b>Caution:</b> Don’t depend on these experimental APIs. They might disappear, and they <em>will</em> change. Also, the Chrome Web Store doesn’t allow you to upload items that use experimental APIs.
+</div>
+<h2 id="how-to-use-experimental-apis-using">How to use experimental APIs {: #using }</h2>
+<ol type="1">
+<li><p>Make sure you’re using either <a href="http://tools.google.com/dlpage/chromesxs">Canary</a> (which you can use at the same time as other Chrome channels) or the <a href="http://www.chromium.org/getting-involved/dev-channel">Dev channel</a>. Although the experimental APIs might work in other versions, we need your feedback on the latest incarnation of the APIs, which you can find in Canary and on the Dev channel.</p></li>
+<li><p>Specify the “experimental” <a href="/docs/extensions/mv2/declare_permissions">permission</a> in your manifest, like this:</p>
+<pre class="json/1"><code>&quot;permissions&quot;: [
+  &quot;experimental&quot;,
+  ...
+],</code></pre></li>
+<li>Enable the experimental API in your browser. You can do this in either of two ways:
+<ul>
+<li>Go to <strong>chrome://flags</strong>, find “Experimental Extension APIs”, click its “Enable” link, and restart Chrome. From now on, unless you return to that page and disable experimental APIs, you’ll be able to run extensions and apps that use experimental APIs.</li>
+<li><p>Specify the <strong>--enable-experimental-extension-apis</strong> flag each time you launch the browser. On Windows, you can do this by modifying the properties of the shortcut that you use to launch Google Chrome. For example:</p>
+<pre class="text"><code>path_to_chrome.exe --enable-experimental-extension-apis</code></pre></li>
+</ul></li>
+<li><p><a href="http://groups.google.com/a/chromium.org/group/chromium-extensions/topics">Give us feedback!</a> Your comments and suggestions help us improve the APIs and decide which ones should move from experimental to supported.</p></li>
+</ol>
+<h2 id="more-apis-other">More APIs {: #other }</h2>
+<p>For information on the standard APIs, see <a href="/docs/extensions/reference">chrome.* APIs</a> and <a href="/docs/extensions/api_other">Other APIs</a>.</p>
+</body>
+</html>

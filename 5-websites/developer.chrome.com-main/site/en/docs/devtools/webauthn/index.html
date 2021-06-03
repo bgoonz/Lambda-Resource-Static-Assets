@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-09-28" />
+  <title>Emulate authenticators and debug WebAuthn</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Emulate authenticators and debug WebAuthn</h1>
+<p class="date">2020-09-28</p>
+</header>
+<p>Use the <strong>WebAuthn</strong> tab in Chrome DevTools to create and interact with software-based virtual authenticators.</p>
+<h2 id="open-the-webauthn-tab-open_the_webauthn_tab">Open the WebAuthn tab {: #open_the_webauthn_tab }</h2>
+<ol type="1">
+<li>Visit a page that uses WebAuthn, such as our demo page here - <a href="https://webauthndemo.appspot.com/">webauthndemo.appspot.com/</a> (please login to access the page).</li>
+<li><a href="/docs/devtools/open/">Open DevTools</a>.</li>
+<li>Click <strong>More Options</strong> {% Img src=“image/admin/4sdCQbpBaG4MpoHB1J08.png”, alt=“More”, width=“6”, height=“26” %} &gt; <strong>More tools</strong> &gt; <strong>WebAuthn</strong> to open the WebAuthn tab.</li>
+</ol>
+<p>{% Img src=“image/admin/K3S8QGWK7tTtQtZ4sIwP.png”, alt=“WebAuthn tab”, width=“800”, height=“503” %}</p>
+<h2 id="enable-the-virtual-authenticator-environment-enable_the_virtual_authenticator_environment">Enable the virtual authenticator environment {: #enable_the_virtual_authenticator_environment }</h2>
+<ol type="1">
+<li>On the WebAuthn tab, click to enable the checkbox <strong>Enable virtual authenticator environment</strong>.</li>
+<li>Once enabled, you will see a new section <strong>New authenticator</strong>.</li>
+</ol>
+<p>{% Img src=“image/admin/hH3rbmSUw2abQmL0KDvT.png”, alt=“Enable virtual authenticator environment”, width=“800”, height=“503” %}</p>
+<h2 id="add-a-virtual-authenticator-add_a_virtual_authenticator">Add a virtual authenticator {: #add_a_virtual_authenticator }</h2>
+<ol type="1">
+<li>On the <strong>New authenticator</strong> section, configure the options.</li>
+<li>Click on the <strong>Add</strong> button.</li>
+<li>You can now see a new section of your newly-created authenticator. {% Img src=“image/admin/zdunt7WWgIHS3ttasw2O.png”, alt=“Authenticator”, width=“800”, height=“503” %}</li>
+</ol>
+<p>The <strong>Authenticator</strong> section includes a <strong>Credentials</strong> table. The table is empty until a credential is registered to the authenticator.</p>
+<p>{% Img src=“image/admin/3xYbc4RWWACU2gMubH42.png”, alt=“No credentials”, width=“800”, height=“503” %}</p>
+<h3 id="register-a-new-credential-register_a_new_credential">Register a new credential {: #register_a_new_credential }</h3>
+<p>To register a new credential, you need to have a web page that uses WebAuthn, for example our demo page here - <a href="https://webauthndemo.appspot.com/">webauthndemo.appspot.com/</a>.</p>
+<ol type="1">
+<li>On the demo page, click on <strong>Register new credential</strong> to register a new credential.</li>
+<li>A new credential is now added to the <strong>Credentials</strong> table in the WebAuthn tab.</li>
+</ol>
+<p>{% Img src=“image/admin/LCi3w3BXzGG3HPAnropc.png”, alt=“View credentials”, width=“800”, height=“503” %}</p>
+<p>On the demo page, you can click the <strong>Authenticate</strong> button multiple times. Observe the <strong>Credentials</strong> table. The <strong>Sign Count</strong> of the credential will increase accordingly.</p>
+<h3 id="export-and-remove-credentials-export_and_remove_credentials">Export and remove credentials {: #export_and_remove_credentials }</h3>
+<p>You can export or remove a credential by clicking the <strong>Export</strong> or <strong>Remove</strong> button.</p>
+<p>{% Img src=“image/admin/odTT7BuyuD9ZYYnF1kiI.png”, alt=“Export or remove a credential”, width=“800”, height=“503” %}</p>
+<h2 id="rename-an-authenticator-rename_an_authenticator">Rename an authenticator {: #rename_an_authenticator }</h2>
+<ol type="1">
+<li>To rename an authenticator, click the <strong>Edit</strong> button beside the authenticator name.</li>
+<li>Edit the name, then click <strong>Enter</strong> to save the changes.</li>
+</ol>
+<p>{% Img src=“image/admin/fcc5NnOYG6vfXm0sLswp.png”, alt=“Rename an authenticator”, width=“800”, height=“503” %}</p>
+<h2 id="set-the-active-authenticator-set_the_active_authenticator">Set the active authenticator {: #set_the_active_authenticator }</h2>
+<p>A newly created authenticator will be set active automatically. DevTools supports <strong>only one active virtual authenticator</strong> at any point of time.</p>
+<p>Removing the currently active authenticator results in no authenticator being active.</p>
+<p>To set an authenticator as the active authenticator, select the <strong>Active</strong> radio button of an authenticator.</p>
+<p>{% Img src=“image/admin/tcffTvPxti2Jl0BBRiVw.png”, alt=“Set active authenticator”, width=“800”, height=“503” %}</p>
+<h2 id="remove-a-virtual-authenticator-remove_a_virtual_authenticator">Remove a virtual authenticator {: #remove_a_virtual_authenticator }</h2>
+<p>To remove a virtual authenticator, click the <strong>Remove</strong> button of the authenticator.</p>
+<p>{% Img src=“image/admin/QfQ84aImd5DkQNnT8VlI.png”, alt=“Remove authenticator”, width=“800”, height=“503” %}</p>
+</body>
+</html>

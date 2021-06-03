@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-10-23" />
+  <title>Add an image or video</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Add an image or video</h1>
+<p class="date">2020-10-23</p>
+</header>
+<h2 id="navigate-to-the-media-uploader">Navigate to the media uploader</h2>
+<p>Visit <a href="https://chrome-gcs-uploader.web.app/">the image uploader page</a> and sign-in using your Google corporate account. Note that this page only allows Googlers access, so signing in with a personal account will fail.</p>
+<p>{% Aside ‘caution’ %} There are different uploaders for developer.chrome.com and web.dev: * <a href="https://chrome-gcs-uploader.web.app/">developer.chrome.com uploader</a> * <a href="https://web-dev-uploads.web.app/uploader">web.dev uploader</a> {% endAside %}</p>
+<h2 id="choose-a-file">Choose a file</h2>
+<p>Upload a high quality image (jpg or png if you need alpha transparency). Our image CDN will handle converting the image to webp if the browser supports it and it will resize the image so you don’t have to.</p>
+<ul>
+<li>Drag one or more files to the <strong>Drop files here!</strong> area</li>
+<li>Click <strong>Upload</strong></li>
+</ul>
+<p>A preview of the image or video with a shortcode snippet will appear. It should look something like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb1-1" title="1">{% raw %}{% Img src=&quot;image/foR0vJZKULb5AGJExlazy1xYDgI2/ZOR0at2oFXeasz6jKylI.jpg&quot;, alt=&quot;ALT_TEXT_HERE&quot;, width=&quot;380&quot;, height=&quot;240&quot; %}{% endraw %}</a></code></pre></div>
+<ul>
+<li>Click the copy button to copy the snippet to your clipboard 📋</li>
+</ul>
+<h2 id="paste">Paste!</h2>
+<p>Paste the copied code from the previous step into your article.</p>
+<p>Be sure to replace the text that says “ALT_TEXT_HERE” with your own description of the image. You can read more about writing effective alt text over on <a href="https://web.dev/handbook/inclusion-and-accessibility/#use-inclusive-images">the web.dev handbook</a>.</p>
+<p>{% Aside %} You may notice that the generated code is using either the {% raw %}<code>{% Img %}</code>{% endraw%} or {% raw %}<code>{% Video %}</code>{% endraw%} shortcodes. These are custom components for <code>developer.chrome.com</code> that ensure our media is responsive 📱 {% endAside %}</p>
+<h3 id="properties">Properties</h3>
+<p>The <code>{% raw %}</code>{% Img %}<code>{% endraw%}</code> and <code>{% raw %}</code>{% Video %}<code>{% endraw%}</code> shortcodes accepts many named arguments. Below are interfaces for both shortcodes. Each property of the interface is a named argument that can be used in the shortode.</p>
+<h4 id="img-properties-imgargs">Img Properties (<code>ImgArgs</code>)</h4>
+<div class="sourceCode" id="cb2"><pre class="sourceCode typescript"><code class="sourceCode typescript"><a class="sourceLine" id="cb2-1" title="1"><span class="op">{%</span> include <span class="st">&#39;../../../../../../types/site/_shortcodes/img.d.ts&#39;</span> <span class="op">%}</span></a></code></pre></div>
+<p>The <code>{% raw %}</code>{% Img %}<code>{% endraw%}</code> <code>params</code> object exposes the entire <a href="https://docs.imgix.com/apis/rendering">Imgix API</a> to you. For example, if you wanted to use the <a href="https://docs.imgix.com/apis/rendering/rotation/flip">flip API</a> to flip an image on its horitonzal axis you would do:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb3-1" title="1">{% raw %}{% Img </a>
+<a class="sourceLine" id="cb3-2" title="2">  src=&quot;image/foR0vJZKULb5AGJExlazy1xYDgI2/iuwBXAyKJMz4b7oRyIdI.jpg&quot;,</a>
+<a class="sourceLine" id="cb3-3" title="3">  alt=&quot;ALT_TEXT_HERE&quot;,</a>
+<a class="sourceLine" id="cb3-4" title="4">  width=&quot;380&quot;,</a>
+<a class="sourceLine" id="cb3-5" title="5">  height=&quot;240&quot;,</a>
+<a class="sourceLine" id="cb3-6" title="6">  params={flip: &#39;h&#39;}</a>
+<a class="sourceLine" id="cb3-7" title="7">%}{% endraw%}</a></code></pre></div>
+<p>{% Columns %} {% Column %} {% Img src=“image/foR0vJZKULb5AGJExlazy1xYDgI2/iuwBXAyKJMz4b7oRyIdI.jpg”, alt=“ALT_TEXT_HERE”, width=“380”, height=“240” %} Original {% endColumn %} {% Column %} {% Img src=“image/foR0vJZKULb5AGJExlazy1xYDgI2/iuwBXAyKJMz4b7oRyIdI.jpg”, alt=“ALT_TEXT_HERE”, width=“380”, height=“240”, params={flip: ‘h’} %} Flipped {% endColumn %} {% endColumns %}</p>
+<p>{% Aside %} Please call out in a review if you’re calling a specific Imgix API, so we can be aware of custom use-cases and potentially support them through our own shortcode directly. {% endAside %}</p>
+<h4 id="video-properties-videoargs">Video Properties (<code>VideoArgs</code>)</h4>
+<div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><a class="sourceLine" id="cb4-1" title="1"><span class="op">{%</span> include <span class="st">&#39;../../../../../../types/site/_shortcodes/video.d.ts&#39;</span> <span class="op">%}</span></a></code></pre></div>
+</body>
+</html>

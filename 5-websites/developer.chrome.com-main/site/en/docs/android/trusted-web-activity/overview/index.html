@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-02-04" />
+  <title>Overview</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Overview</h1>
+<p class="date">2020-02-04</p>
+</header>
+<p>{% YouTube id=‘6lHBw3F4cWs’ %}</p>
+<p><strong>Trusted Web Activity</strong> is a new way to open <em>your</em> web-app content such as <em>your</em> Progressive Web App (PWA) from <em>your</em> Android app using a protocol based on Custom Tabs.</p>
+<p>Note: Trusted Web Activity is available in <a href="https://play.google.com/store/apps/details?id=com.android.chrome">Chrome on Android</a>, version 72 and above.</p>
+<p><em>Looking for the code?</em></p>
+<ul>
+<li><a href="https://github.com/GoogleChrome/android-browser-helper">android-browser-helper library on GitHub</a></li>
+<li><a href="https://github.com/GoogleChrome/android-browser-helper/tree/master/demos">Trusted Web Activity demos</a></li>
+<li><a href="https://github.com/GoogleChromeLabs/bubblewrap">Bubblewrap, a NodeJs library / CLI to generate and build Trusted Web Activity projects</a></li>
+</ul>
+<p>There are a few things that make Trusted Web Activity different from other ways to open web content from your Android app:</p>
+<ol type="1">
+<li>Content in a Trusted Web activity is <strong>trusted</strong> – the app and the site it opens are expected to come from the same developer. (This is verified using <a href="/digital-asset-links/v1/getting-started">Digital Asset Links</a>.)</li>
+<li>The content rendered in a Trusted Web Activity comes from the <strong>web</strong>: they’re rendered by the user’s browser, in exactly the same way as a user would see it in their browser except they are run fullscreen. Web content should be accessible and useful in the browser first.</li>
+<li>Browsers are also updated independent of Android and your app – Chrome, for example, is available back to Android Jelly Bean. That saves on APK size and ensures you can use a modern web runtime. (Note that since Lollipop, WebView has also been updated independent of Android, but there are a <a href="https://developer.android.com/about/dashboards/index.html">significant number</a> of pre-Lollipop Android users.)</li>
+<li>The host app doesn’t have direct access to web content in a Trusted Web Activity or any other kind of web state, like cookies and <code>localStorage</code>. Nevertheless, you can coordinate with the web content by passing data to and from the page in URLs (e.g. through query parameters and <a href="/docs/multidevice/android/intents">intent URIs</a>.)</li>
+<li>Transitions between web and native content are between <strong>activities</strong>. Each activity (i.e. screen) of your app is either completely provided by the web, or by an Android activity</li>
+</ol>
+<p>To make it easier to test, there are currently no qualifications for content opened in the preview of Trusted Web activities. You can expect, however, that Trusted Web activities will need to meet the same <a href="https://web.dev/customize-install/#criteria">Add to Home Screen</a> requirements. You can audit your site for these requirements using the <a href="/web/tools/lighthouse/">Lighthouse</a> “<em>user can be prompted to Add to Home screen</em>” audit.</p>
+<p>Today, if the user’s version of Chrome doesn’t support Trusted Web activities, Chrome will fall back to a simple toolbar using a Custom Tab. It is also possible for other browsers to implement the same protocol that Trusted Web activities use. While the host app has the final say on what browser gets opened, we recommend the same policy as for Custom Tabs: use the user’s default browser, so long as that browser provides the required capabilities.</p>
+<h2 id="where-to-go-next">Where to go next</h2>
+<p>If you are looking for quickly building an Android app that just starts and opens your PWA, checkout out the <a href="/web/android/trusted-web-activity/quick-start/">Quick Start Guide</a>.</p>
+<p>If integrating Trusted Web Activity into an existing Android App, the <a href="/web/android/trusted-web-activity/integration-guide/">Integration Guide</a> is a good place to get started.</p>
+</body>
+</html>

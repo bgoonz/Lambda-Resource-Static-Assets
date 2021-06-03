@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2017-11-28" />
+  <title>What’s New In DevTools (Chrome 63)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 63)</h1>
+<p class="date">2017-11-28</p>
+</header>
+<p>Welcome back! New features coming to DevTools in Chrome 63 include:</p>
+<ul>
+<li><a href="#multi-client">Multi-client remote debugging support</a>.</li>
+<li><a href="#workspaces">Workspaces 2.0</a>.</li>
+<li><a href="#audits">Four new audits</a>.</li>
+<li><a href="#push">Simulate push notifications with custom data</a>.</li>
+<li><a href="#sync">Trigger background sync events with custom tags</a>.</li>
+</ul>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> You can check what version of Chrome you’re running at <code>chrome://version</code>. Chrome auto-updates to a new major version about every 6 weeks.</p>
+<p>{% endAside %}</p>
+<p>Read on or watch the video below to learn more!</p>
+<p>{% YouTube id=“Eyw_mwbABIQ” %}</p>
+<h2 id="multi-client-remote-debugging-support-multi-client">Multi-client remote debugging support {: #multi-client }</h2>
+<p>If you’ve ever tried debugging an app from an IDE like VS Code or WebStorm, you’ve probably discovered that opening DevTools messes up your debug session. This issue also made it impossible to use DevTools to debug WebDriver tests.</p>
+<p>As of Chrome 63, DevTools now supports multiple remote debugging clients by default, no configuration needed.</p>
+<p>Multi-client remote debugging was the <a href="https://crbug.com/129539">number 1 most-popular DevTools issue on crbug.com</a>, and number 3 across the entire Chromium project. Multi-client support also opens up quite a few interesting opportunities for integrating other tools with DevTools, or using those tools in new ways. For example:</p>
+<ul>
+<li>Protocol clients such as ChromeDriver or the Chrome debugging extensions for VS Code and Webstorm, and WebSocket clients such as Puppeteer, can now run at the same time as DevTools.</li>
+<li>Two separate WebSocket protocol clients, such as <a href="https://github.com/GoogleChrome/puppeteer">Puppeteer</a> or <a href="https://github.com/cyrus-and/chrome-remote-interface">chrome-remote-interface</a>, can now connect to the same tab simultaneously.</li>
+<li>Chrome Extensions using the <code>chrome.debugger</code> API can now run at the same time as DevTools.</li>
+<li>Multiple different Chrome Extensions can now use the <code>chrome.debugger</code> API on the same tab simultaneously.</li>
+</ul>
+<h2 id="workspaces-2.0-workspaces">Workspaces 2.0 {: #workspaces }</h2>
+<p>Workspaces have been around for some time in DevTools. This feature enables you to use DevTools as your IDE. You make some changes to your source code within DevTools, and the changes persist to the local version of your project on your file system.</p>
+<p>Workspaces 2.0 builds off of 1.0, adding a more helpful UX and improved auto-mapping of transpiled code. This feature was originally scheduled to be released shortly after Chrome Developer Summit (CDS) 2016, but the team postponed it to sort out some issues.</p>
+<p>Check out the “Authoring” part (around 14:28) of the DevTools talk from CDS 2016 to see Workspaces 2.0 in action.</p>
+<p>{% YouTube id=“HF1luRD4Qmk” %}</p>
+<h2 id="four-new-audits-audits">Four new audits {: #audits }</h2>
+<p>In Chrome 63 the <strong>Audits</strong> panel has 4 new audits:</p>
+<ul>
+<li>Serve images as WebP.</li>
+<li>Use images with appropriate aspect ratios.</li>
+<li>Avoid frontend JavaScript libraries with known security vulnerabilities.</li>
+<li>Browser errors logged to the Console.</li>
+</ul>
+<p>See <a href="https://developers.google.com/web/tools/lighthouse#devtools">Run Lighthouse in Chrome DevTools</a> to learn how to use the <strong>Audits</strong> panel to improve the quality of your pages.</p>
+<p>See <a href="https://developers.google.com/web/tools/lighthouse">Lighthouse</a> to learn more about the project that powers the <strong>Audits</strong> panel.</p>
+<h2 id="simulate-push-notifications-with-custom-data-push">Simulate push notifications with custom data {: #push }</h2>
+<p>Simulating push notifications has been around for a while in DevTools, with one limitation: you couldn’t send custom data. But with the new <strong>Push</strong> text box coming to the <strong>Service Worker</strong> pane in Chrome 63, now you can. Try it now:</p>
+<ol type="1">
+<li>Go to <a href="https://gauntface.github.io/simple-push-demo/">Simple Push Demo</a>.</li>
+<li>Click <strong>Enable Push Notifications</strong>.</li>
+<li>Click <strong>Allow</strong> when Chrome prompts you to allow notifications.</li>
+<li>Open DevTools.</li>
+<li>Go to the <strong>Service Workers</strong> pane.</li>
+<li><p>Write something in the <strong>Push</strong> text box.</p>
+<p>{% Img src=“image/admin/UQm1GplN9Vont3jI4wGb.png”, alt=“Simulating a push notification with custom data.”, width=“800”, height=“488” %}</p>
+<p><strong>Figure 1</strong>. Simulating a push notification with custom data via the <strong>Push</strong> text box in the <strong>Service Worker</strong> pane</p></li>
+<li><p>Click <strong>Push</strong> to send the notification.</p>
+<p>{% Img src=“image/admin/0WYH7Hl1TojntCXGQhpV.png”, alt=“The simulated push notification”, width=“789”, height=“188” %}</p>
+<p><strong>Figure 2</strong>. The simulated push notification</p></li>
+</ol>
+<h2 id="trigger-background-sync-events-with-custom-tags-sync">Trigger background sync events with custom tags {: #sync }</h2>
+<p>Triggering background sync events has also been in the <strong>Service Workers</strong> pane for some time, but now you can send custom tags:</p>
+<ol type="1">
+<li>Open DevTools.</li>
+<li>Go to the <strong>Service Workers</strong> pane.</li>
+<li>Enter some text in the <strong>Sync</strong> text box.</li>
+<li>Click <strong>Sync</strong>.</li>
+</ol>
+<p>{% Img src=“image/admin/JcCAO4fmPvVtkqZTqVgN.png”, alt=“Triggering a custom background sync event”, width=“800”, height=“553” %}</p>
+<p><strong>Figure 3</strong>. After clicking <strong>Sync</strong>, DevTools sends a background sync event with the custom tag <code>update-content</code> to the service worker</p>
+</body>
+</html>

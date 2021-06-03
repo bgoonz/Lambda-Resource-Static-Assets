@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>create-react-app-env</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="create-react-app-environments">Create-react-app environments</h1>
+<blockquote>
+<p>How to create builds targeting multiple environments</p>
+</blockquote>
+<h2 id="how-to-create-builds-targeting-multiple-environments">How to create builds targeting multiple environments</h2>
+<p><a href="chrome-extension://cjedbglnccaioiolemnfhjncicchinao/@tacomanator?source=post_page-----7b645312c09d--------------------------------"><img src="https://miro.medium.com/fit/c/56/56/1*myZZZ0vyaDACEdwumZDaLg@2x.jpeg" alt="Drew Goodwin" /></a></p>
+<p>Update: create-react-app 1.0.0 added <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-development-environment-variables-in-env">built-in support</a> for configuration files targeting the three pre-defined environments (<code>development</code>, <code>test</code>, and <code>production</code>), and 1.1.0 additionally adds support for <a href="https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#expanding-environment-variables-in-env">variable expansion</a>. I’ve added a section to the end of this article (see: Built-in support) summarizing the changes and limitations.</p>
+<p>If you’re using an older version of react-scripts, have not used environment configuration yet, or have more than three environments to build for, you may wish to read the entire article.</p>
+<p>React imports environment variables that are defined in a <em>.env</em> file at the root of the project. Skip to <strong>Environment Configuration</strong> if you’re already familiar with the details, but remember that that values in .env act as a defaults.</p>
+<h2 id="overview">Overview</h2>
+<ul>
+<li>Variables can be defined in your shell or in a <em>.env</em> file at the project root.</li>
+<li>Only variables starting with <code>REACT_APP_</code> are imported.</li>
+<li>Imported values are placed in <code>process.env</code>, for example <code>process.env.REACT_APP_SECRET_CODE</code>.</li>
+<li>The development server must be restarted to see new/updated variables.</li>
+<li>Variables from the shell take precedence those in a <em>.env</em> file.</li>
+<li>The value of<code>NODE_ENV</code> is set automatically to <strong>development</strong> (when using <code>npm start</code>), test (when using <code>npm test</code>) or <strong>production</strong> (when using <code>npm build</code>). Thus, from the point of view of create-react-app, there are only three environments.</li>
+</ul>
+<h2 id="setting-values">Setting values</h2>
+<p>Variables can be defined prior to or while running <code>npm start</code> or <code>npm build</code>:</p>
+<p>$ REACT_APP_SECRET_CODE=dev123 npm start<br />
+$ REACT_APP_SECRET_CODE=prod456 npm build</p>
+<p>Values could be set in <em>package.json</em>, and therefore tracked in revision control:</p>
+<p>“scripts”: {<br />
+“start”: “REACT_APP_SECRET_CODE=123 react-scripts start”,<br />
+…<br />
+}</p>
+<p>Setting values in <em>package.json</em> is an easy way to share configuration amongst a team, but the approach doesn’t scale particularly well. Think about what happens as the number of configuration variables or environments grows. Fortunately variable definitions can be put into a separate file named <em>.env</em>.</p>
+<p>Values in <em>.env</em> are automatically imported by the development server and build process. The format is the same as in the shell (<code>name=value</code>), with variable per line:</p>
+<p>$ cat .env<br />
+REACT_APP_SECRET_CODE=123<br />
+REACT_APP_HOST_ENV=staging<br />
+$</p>
+<p>Advantages of putting definitions in <em>.env</em> include:</p>
+<ul>
+<li>Easy to read as configuration grows.</li>
+<li>Easier to automate (more on this below).</li>
+<li><em>The values in the file act as a default</em>, and can be overridden by one of the methods above (defining in the shell). Thus others can override variables locally without changing <em>.env</em>. The multi-environment setup describe below will take advantage of this.</li>
+</ul>
+<p>Create react app uses <code>dotenv</code> to process the configuration. See the <a href="https://github.com/motdotla/dotenv">dotenv documentation</a> to learn more its syntax and semantics.</p>
+<h2 id="using-values">Using values</h2>
+<p>Imported values are placed in <code>process.env</code> automatically. They do not need to be imported manually. Imported values can be used in the same way as those defined in your JS files:</p>
+<p>if (process.env.NODE_ENV === ‘production’) { … }app.listen(process.env.REACT_APP_PORT);</p>
+<p>Remember that only those starting with <code>REACT_APP_</code> will be imported, and the development server or build must be restarted to pick up new values.</p>
+<p>Now we will cover using the environment variable support in <code>create-react-app</code> to build configuration for multiple environments. The aim is a simple way to standardize and automate the process of using environment specific values during the build, regardless of how you build your app.</p>
+<h2 id="overview-1">Overview</h2>
+<ul>
+<li>Define variables (with or without default values) in <em>.env</em>.</li>
+<li>Place environment specific values/overrides in <em>.env.local</em> file in the build location for the target environment.</li>
+<li>Optionally, create environment specific <em>.env</em> files (e.g. <em>.env.staging</em>) and consume these during the build process.</li>
+</ul>
+<h2 id="define-variables-in-.env">Define variables in .env</h2>
+<p>Variables could be set outside of create-react-app (e.g. in a shell startup script), but for the sake of consistency, replicability, and making things less mysterious, we should instead opt for a method that can be used universally in each environment—from local development to production. This helps ensure that a larger subset of the team is able to effectively lend a hand in supporting environments when the need arises. In other words, we want to use the method that best creates a process in which:</p>
+<ul>
+<li>The source of configuration values is known or can be easily deduced.</li>
+<li>Configuration is tracked and builds are reproducible.</li>
+</ul>
+<p>At present the way this can achieved in create-react-app is with <em>.env</em> files.</p>
+<p>Step 1, then, is to create a <em>.env</em> file for your project if you don’t have one already, place your configuration in it, and update references to the configuration in your code. For now we’ll assume these are your development values, but this will be revisited shortly.</p>
+<p>It’s also worth noting that by using .env files, variables are not global to the environment and will not persist beyond the running of the start command. In my opinion, this is a good thing. However, <a href="https://github.com/facebookincubator/create-react-app/issues/2223">create-react-app does not yet support for dotenv-expand</a>, so for some setups this may be a downside (<em>update:</em> as of 1.1.0 it does support expansion).</p>
+<h2 id="environment-specific-values-in-.env.local">Environment specific values in .env.local</h2>
+<p>Dotenv (what react-scripts uses to import environment variables) also checks for a file named <em>.env.local</em> and, if present, imports variables defined within it too. In the case of the same value being defined in both files, the order of precedence is (highest first):</p>
+<ul>
+<li>Shell</li>
+<li><em>.env.local</em></li>
+<li><em>.env</em></li>
+</ul>
+<p>Thus, values in <em>.env.local</em> override values in <em>.env</em>.</p>
+<p>Assuming you use an intermediary server or folder from which to build for each environment, Step 2, then, is to create a <em>.env.local</em> next to the <em>.env</em> file with environment specific overrides.</p>
+<p>If using default values in <em>.env</em> which are designed to be general purpose, this file may be empty for local development. For other environments (e.g. production) you’ll probably want to set each value explicitly, as changes must be managed more carefully.</p>
+<p>Lastly, an entry for <em>.env.local</em> should be added to the revision control ignore list (e.g. <em>.gitignore</em>) as it should not be checked in. If publishing a module with a <em>.npmignore</em> file, it should be added there as well.</p>
+<h2 id="environment-specific-.env-files">Environment specific .env files</h2>
+<p>The <em>.env.local</em> method works well in the sense that, done right, every environment uses the same method to set and consume environment configuration. However, it still relies on files which are not tracked and therefore does not achieve the goal of reproducibility of the build.</p>
+<p>One way to address this is to create <em>.env</em> files for each environment (e.g. <em>.env.staging</em> instead of <em>.env.local</em>) and to track these files in source control. In this case, dotenv will not automatically import the files, but the build script in <em>package.json</em> can be modified to do it instead (<em>update</em>: as of 1.0.0 this step is not necessary for the three pre-defined environments—the files are automatically imported):</p>
+<p>“scripts”: {<br />
+“build”: “sh -ac ‘. .env.build; react-scripts build’”,<br />
+…<br />
+}</p>
+<p>The <code>.</code> command is the same as <code>source</code>. It means to execute the file in the current context. In this case the environment variables within will thus be defined before running the next command: <code>react-scripts build</code>. This has the same order of precedence as when using <em>.env.local</em>.</p>
+<p>For multiple build environments, the above method can be generalized:</p>
+<p>“scripts”: {<br />
+“build”: “sh -ac ‘. .env.${REACT_APP_ENV}; react-scripts build’”,<br />
+…<br />
+}</p>
+<p>Now whomsoever has access to the pertinent configuration can build for that environment by specifying <code>REACT_APP_ENV</code> at time of build:</p>
+<p>$ REACT_APP_ENV=staging npm run build</p>
+<p>Additional shortcuts could be added for each environment:</p>
+<p>“scripts”: {<br />
+“build”: “sh -ac ‘. .env.${REACT_APP_ENV}; react-scripts build’”,<br />
+“build:staging”: “REACT_APP_ENV=staging npm run build”,<br />
+“build:production”: “REACT_APP_ENV=production npm run build”,<br />
+…<br />
+}</p>
+<p>Shortening the build command to:</p>
+<p>$ npm run build:staging</p>
+<h2 id="managing-configuration-in-revision-control">Managing configuration in revision control</h2>
+<p>The advice given by <a href="https://github.com/motdotla/dotenv">dotenv</a> is to <strong><em>not</em></strong> check these environment specific config files into revision control. I agree in principle—that checking production settings into your source repository is not a good idea—but I believe it is a very good idea to check your configuration in somewhere. Your builds should be reproducible, which means having the same configuration. Failing to account for this is asking for headaches down the road, when troubleshooting issues. So, unless you have another way to manage configuration and easily reproduce a given build, consider using a separate configuration repository, or a configuration management system, to store and retrieve environment configuration.</p>
+<p>One advantage to committing a default <em>.env</em> file with local development configuration into revision control is that other team members will automatically receive updates and need only restart their development server when no additional setup is required.</p>
+<h2 id="npm-module">NPM Module</h2>
+<p>As pointed out by</p>
+<p>, the <a href="https://www.npmjs.com/package/react-app-env">react-app-env</a> is a module which automates much of what is covered here, and may be suitable for your needs. To use react-app-env:</p>
+<p>Install it as a dev dependency:</p>
+<p>$ yarn add –dev react-app-env (or npm install –save-dev)</p>
+<p>And change the start and build scripts:</p>
+<p>“scripts”: {<br />
+“start”: “react-app-env start’”,<br />
+“build”: “react-app-env build’”,<br />
+“test”: “react-app-env test’”,<br />
+…<br />
+}</p>
+<p>And finally add at least two configuration files: <em>development.env</em> and <em>production.env</em>. Unlike the steps above, <a href="https://www.npmjs.com/package/react-app-env">react-app-env</a> automatically prepends <code>REACT_APP_</code> to variables. Thus the variable definitions in the example above would be changed to:</p>
+<p>SECRET_CODE=123<br />
+HOST_ENV=staging</p>
+<p>In the application, however, the full name including <code>REACT_APP_</code> must still be used to reference a variable. Given this I would personally prefer the library not automatically prepend, to prevent misunderstandings, but I see no option for this.</p>
+<p>By default <em>development.env</em> is used imported on <code>npm start</code> and <code>npm test</code>, and <em>production.env</em> on <code>npm build</code>. The <code>--env-file</code> flag can be used to support more environments:</p>
+<p>“scripts”: {<br />
+“build:staging”: “react-app-env –env-file=staging.env”,<br />
+…<br />
+}</p>
+<p>The contents of <em>.env</em> can still be used as default values, but <code>REACT_APP_</code> is not automatically prepended to variables in this file.</p>
+<p>Finally, the module expects the default environment files to be at the root of the project. To customize this (for example to support a separate configuration repository) and add more environments a setup similar to the manual one above could be used:</p>
+<p>“scripts”: {<br />
+“build”: “react-app-env –env-file=config/${BUILD_ENV}.env build”,<br />
+“build:staging”: “BUILD_ENV=staging npm run build”,<br />
+“build:production”: “BUILD_ENV=production npm run build”,<br />
+…<br />
+}</p>
+<p>The main differences between this approach one describe above (which does not use react-app-env) is the automatic prepending of <code>REACT_APP_</code>, and possibly also better cross platform support.</p>
+<p>Create-react-app 1.0.0 added support for automatically reading configuration files for the three pre-defined environments: <code>development</code>, <code>test</code>, and <code>production</code>.</p>
+<p>As before, default (lowest priority) values may be defined in <em>.env</em>, and the value of <code>NODE_ENV</code> is set automatically based on the script used:</p>
+<ul>
+<li>start → development</li>
+<li>test → test</li>
+<li>build → production</li>
+</ul>
+<p>The 1.0.0 release adds built-in support for a configuration file corresponding to each of these: <em>.env.development</em>, <em>.env.test</em>, and <em>.env.production</em>. The values from these files have higher priority than the values in <em>.env</em>. Each file (including the default file) supports another layer of overrides by adding <em>.local</em> to the end. The full order of precedence is (highest first):</p>
+<ol type="1">
+<li>shell</li>
+<li>.env._{environment}_.local</li>
+<li>.env._{environment}_</li>
+<li>.env.local</li>
+<li>.env</li>
+</ol>
+<p>Support for <a href="https://github.com/motdotla/dotenv-expand">dotenv-expand</a> was added in 1.1.0, enabling variable expansion within the <em>.env</em> files (example from create-react-app docs):</p>
+<p>DOMAIN=<a href="http://www.example.com/">www.example.com</a><br />
+REACT_APP_FOO=<span class="math inline"><em>D</em><em>O</em><em>M</em><em>A</em><em>I</em><em>N</em>/<em>f</em><em>o</em><em>o</em><em>R</em><em>E</em><em>A</em><em>C</em><em>T</em>_<em>A</em><em>P</em><em>P</em>_<em>B</em><em>A</em><em>R</em>=</span>DOMAIN/bar</p>
+<p>Variable expansion works with variables defined locally (in the same file), or on the shell, but unfortunately does not work across files. A value defined in <em>.env</em>, for example, is not able to be expanded within <em>.env.development</em>.</p>
+<p><a href="https://medium.com/@tacomanator/environments-with-create-react-app-7b645312c09d">Source</a></p>
+</body>
+</html>

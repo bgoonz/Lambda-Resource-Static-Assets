@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2012-09-18" />
+  <title>Give users options</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Give users options</h1>
+<p class="date">2012-09-18</p>
+</header>
+<p>{% include ‘partials/extensions/mv2-legacy-page.md’ %}</p>
+<p>Allow users to customise the behavior of an extension by providing an options page. A user can view an extension’s options by right-clicking the extension icon in the toolbar then selecting options or by navigating to the extension management page at <code>chrome://extensions</code>, locating the desired extension, clicking <strong>Details</strong>, then selection the options link.</p>
+<h2 id="write-the-options-page-write_page">Write the options page {: #write_page }</h2>
+<p>Below is an example options page.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">&lt;head&gt;&lt;title&gt;</span>My Test Extension Options<span class="kw">&lt;/title&gt;&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6">Favorite color:</a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="kw">&lt;select</span><span class="ot"> id=</span><span class="st">&quot;color&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-8" title="8"> <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;red&quot;</span><span class="kw">&gt;</span>red<span class="kw">&lt;/option&gt;</span></a>
+<a class="sourceLine" id="cb1-9" title="9"> <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;green&quot;</span><span class="kw">&gt;</span>green<span class="kw">&lt;/option&gt;</span></a>
+<a class="sourceLine" id="cb1-10" title="10"> <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;blue&quot;</span><span class="kw">&gt;</span>blue<span class="kw">&lt;/option&gt;</span></a>
+<a class="sourceLine" id="cb1-11" title="11"> <span class="kw">&lt;option</span><span class="ot"> value=</span><span class="st">&quot;yellow&quot;</span><span class="kw">&gt;</span>yellow<span class="kw">&lt;/option&gt;</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="kw">&lt;/select&gt;</span></a>
+<a class="sourceLine" id="cb1-13" title="13"></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="kw">&lt;label&gt;</span></a>
+<a class="sourceLine" id="cb1-15" title="15">  <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;checkbox&quot;</span><span class="ot"> id=</span><span class="st">&quot;like&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb1-16" title="16">  I like colors.</a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb1-18" title="18"></a>
+<a class="sourceLine" id="cb1-19" title="19"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;status&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="kw">&lt;button</span><span class="ot"> id=</span><span class="st">&quot;save&quot;</span><span class="kw">&gt;</span>Save<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb1-21" title="21"></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;options.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb1-24" title="24"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>Save a user’s preferred options across devices by using the <a href="/docs/extensions/reference/storage#property-sync">storage.sync</a> API.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">// Saves options to chrome.storage</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">function</span> <span class="at">save_options</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="kw">var</span> color <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;color&#39;</span>).<span class="at">value</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="kw">var</span> likesColor <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;like&#39;</span>).<span class="at">checked</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">sync</span>.<span class="at">set</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="dt">favoriteColor</span><span class="op">:</span> color<span class="op">,</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="dt">likesColor</span><span class="op">:</span> likesColor</a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="op">},</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-9" title="9">    <span class="co">// Update status to let user know options were saved.</span></a>
+<a class="sourceLine" id="cb2-10" title="10">    <span class="kw">var</span> status <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;status&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-11" title="11">    <span class="va">status</span>.<span class="at">textContent</span> <span class="op">=</span> <span class="st">&#39;Options saved.&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="at">setTimeout</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-13" title="13">      <span class="va">status</span>.<span class="at">textContent</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-14" title="14">    <span class="op">},</span> <span class="dv">750</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-15" title="15">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-17" title="17"></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="co">// Restores select box and checkbox state using the preferences</span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="co">// stored in chrome.storage.</span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="kw">function</span> <span class="at">restore_options</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-21" title="21">  <span class="co">// Use default value color = &#39;red&#39; and likesColor = true.</span></a>
+<a class="sourceLine" id="cb2-22" title="22">  <span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">sync</span>.<span class="at">get</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb2-23" title="23">    <span class="dt">favoriteColor</span><span class="op">:</span> <span class="st">&#39;red&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-24" title="24">    <span class="dt">likesColor</span><span class="op">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb2-25" title="25">  <span class="op">},</span> <span class="kw">function</span>(items) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-26" title="26">    <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;color&#39;</span>).<span class="at">value</span> <span class="op">=</span> <span class="va">items</span>.<span class="at">favoriteColor</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-27" title="27">    <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;like&#39;</span>).<span class="at">checked</span> <span class="op">=</span> <span class="va">items</span>.<span class="at">likesColor</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-28" title="28">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-29" title="29"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-30" title="30"><span class="va">document</span>.<span class="at">addEventListener</span>(<span class="st">&#39;DOMContentLoaded&#39;</span><span class="op">,</span> restore_options)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-31" title="31"><span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;save&#39;</span>).<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-32" title="32">    save_options)<span class="op">;</span></a></code></pre></div>
+<h2 id="declare-options-page-behavior-declare_options">Declare options page behavior {: #declare_options }</h2>
+<p>There are two available types of extension options pages, <a href="#full_page">full page</a> and <a href="#embedded_options">embedded</a>. The type of options is determined by how it is declared in the manifest.</p>
+<h3 id="full-page-options-full_page">Full page options {: #full_page }</h3>
+<p>An extension’s options page will be displayed in a new tab. The options HTML file is listed registered under the <code>options_page</code> field.</p>
+<pre class="json/3"><code>{
+  &quot;name&quot;: &quot;My extension&quot;,
+  ...
+  &quot;options_page&quot;: &quot;options.html&quot;,
+  ...
+}</code></pre>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/Ej3H0FMApR7srtGbZfBZ.png”, alt=“Full page options”, height=“124”, width=“367” %}</p>
+<h3 id="embedded-options-embedded_options">Embedded options {:#embedded_options }</h3>
+<p>Embedded options allows users to adjust extension options without navigating away from the extensions management page inside an embedded box. To declare an embedded options, register the HTML file under the <code>options_ui</code> field in the extension manifest, with the <code>open_in_tab</code> key set to false.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;My extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="dt">&quot;options_ui&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="dt">&quot;page&quot;</span><span class="fu">:</span> <span class="st">&quot;options.html&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="dt">&quot;open_in_tab&quot;</span><span class="fu">:</span> <span class="kw">false</span></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/AW1YkMTrWYUNmtTaRM0q.png”, alt=“Embedded options”, height=“386”, width=“633” %}</p>
+<ul>
+<li><p><strong><code>page</code> (string)</strong></p>
+<p>Path to the options page, relative to the extension’s root.</p></li>
+<li><p><strong><code>open_in_tab</code> (boolean)</strong></p>
+<p>Specify as <code>false</code> to declare an embedded options page. If <code>true</code>, the extension’s options page will be opened in a new tab rather than embedded in <em>chrome://extensions</em>.</p></li>
+</ul>
+<h2 id="consider-the-differences-considerations">Consider the differences {: #considerations }</h2>
+<p>Options pages embedded inside <em>chrome://extensions</em> have some subtle behavior differences related to not being hosted inside their own tabs.</p>
+<h3 id="linking-to-the-options-page-linking">Linking to the options page {: #linking }</h3>
+<p>An extension can link directly to the options page by calling <a href="/runtime#method-openOptionsPage"><code>chrome.runtime.openOptionsPage()</code></a> .</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;button</span><span class="ot"> id=</span><span class="st">&quot;go-to-options&quot;</span><span class="kw">&gt;</span>Go to options<span class="kw">&lt;/button&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;#go-to-options&#39;</span>).<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="cf">if</span> (<span class="va">chrome</span>.<span class="va">runtime</span>.<span class="at">openOptionsPage</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="va">chrome</span>.<span class="va">runtime</span>.<span class="at">openOptionsPage</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-5" title="5">    <span class="va">window</span>.<span class="at">open</span>(<span class="va">chrome</span>.<span class="va">runtime</span>.<span class="at">getURL</span>(<span class="st">&#39;options.html&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="tabs-api-tabs-api">Tabs API {: #tabs-api }</h3>
+<p>Extension embedded options page code is not hosted inside a tab, affecting how the <a href="/docs/extensions/reference/tabs">Tabs API</a> can be used:</p>
+<ul>
+<li><a href="/docs/extensions/reference/tabs#method-query">tabs.query</a> will never find a tab within an extension’s options page URL.</li>
+<li><a href="/docs/extensions/reference/tabs#event-onCreated">tabs.onCreated</a> will not fire when the options page is opened.</li>
+<li><a href="/docs/extensions/reference/tabs#event-onUpdated">tabs.onUpdated</a> will not fire when the options page load state changes.</li>
+<li><a href="/docs/extensions/reference/tabs#method-connect">tabs.connect</a> or <a href="/docs/extensions/reference/tabs#method-sendMessage">tabs.sendMessage</a> cannot be used to communicate with the options page.</li>
+</ul>
+<p>Using <a href="/docs/extensions/reference/runtime#method-connect">runtime.connect</a> and <a href="/docs/extensions/reference/runtime#method-sendMessage">runtime.sendMessage</a> is a work around to these restrictions, if the options page does need to manipulate the containing tab.</p>
+<h3 id="messaging-apis-messaging-api">Messaging APIs {: #messaging-api }</h3>
+<p>If an extension’s options page sends a message using <a href="/docs/extensions/reference/runtime#method-connect">runtime.connect</a> or <a href="/docs/extensions/reference/runtime#method-sendMessage">runtime.sendMessage</a>, the <a href="/docs/extensions/reference/runtime#property-MessageSender-tab">Sender’s tab</a> will not be set, and the <a href="/docs/extensions/reference/runtime#property-MessageSender-url">Sender’s URL</a> will be the options page URL.</p>
+<h3 id="sizing-sizing">Sizing {: #sizing }</h3>
+<p>The embedded options should automatically determine its own size based on the page content. However, the embedded box may not find a good size for some types of content. This problem is most common for options pages that adjust their content shape based on window size.</p>
+<p>If this is an issue, provide fixed minimum dimensions for the options page to ensure that the embedded page will find an appropriate size.</p>
+</body>
+</html>

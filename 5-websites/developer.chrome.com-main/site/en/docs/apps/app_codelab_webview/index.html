@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2014-10-17" />
+  <title>Step 4: Open External Links With a Webview</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Step 4: Open External Links With a Webview</h1>
+<p class="date">2014-10-17</p>
+</header>
+<p>{% Aside ‘caution’ %}</p>
+<p><strong>Important:</strong> Chrome will be removing support for Chrome Apps on all platforms. Chrome browser and the Chrome Web Store will continue to support extensions. <a href="https://blog.chromium.org/2020/01/moving-forward-from-chrome-apps.html"><strong>Read the announcement</strong></a> and learn more about <a href="/apps/migration"><strong>migrating your app</strong></a>.</p>
+<p>{% endAside %}</p>
+<p>{% Aside %}</p>
+<p><strong>Want to start fresh from here?</strong> Find the previous step’s code in the <a href="https://github.com/mangini/io13-codelab/archive/master.zip">reference code zip</a> under <strong><em>cheat_code &gt; solution_for_step3</em></strong>.</p>
+<p>{% endAside %}</p>
+<p>In this step, you will learn:</p>
+<ul>
+<li>How to show external web content inside your app in a secure and sandboxed way.</li>
+</ul>
+<p><em>Estimated time to complete this step: 10 minutes.</em><br />
+To preview what you will complete in this step, <a href="#launch">jump down to the bottom of this page ↓</a>.</p>
+<h2 id="learn-about-the-webview-tag-overview">Learn about the webview tag {: #overview }</h2>
+<p>Some applications need to present external web content directly to the user but keep them inside the application experience. For example, a news aggregator might want to embed the news from external sites with all the formatting, images, and behavior of the original site. For these and other usages, Chrome Apps have a custom HTML tag called <a href="/docs/extensions/reference/webviewTag">webview</a>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/8Au5I2qFyIOANWUbmh70.png”, alt=“The Todo app using a webview”, height=“524”, width=“737” %}</p>
+<p>{% Aside %}</p>
+<p><strong>Webviews are sandboxed processes:</strong> The enclosing Chrome App (also known as the “embedder page”) cannot easily access the webview’s loaded DOM. You can only interact with the webview using its API.</p>
+<p>{% endAside %}</p>
+<h2 id="implement-the-webview-tag-implement-webview">Implement the webview tag {: #implement-webview }</h2>
+<p>Update the Todo app to search for URLs in the todo item text and create a hyperlink. The link, when clicked, opens a new Chrome App window (not a browser tab) with a webview presenting the content.</p>
+<h3 id="update-permissions-update-permissions">Update permissions {: #update-permissions }</h3>
+<p>In <strong><em>manifest.json</em></strong>, request the <code>webview</code> permission:</p>
+<pre class="json/4"><code>&quot;permissions&quot;: [
+  &quot;storage&quot;,
+  &quot;alarms&quot;,
+  &quot;notifications&quot;,
+  &quot;webview&quot;
+],</code></pre>
+<h3 id="create-a-webview-embedder-page-create-webview">Create a webview embedder page {: #create-webview }</h3>
+<p>Create a new file in the root of your project folder and name it <strong><em>webview.html</em></strong>. This file is a basic webpage with one <code>&lt;webview&gt;</code> tag:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="kw">&lt;webview</span><span class="ot"> style=</span><span class="st">&quot;width: 100%; height: 100%;&quot;</span><span class="kw">&gt;&lt;/webview&gt;</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<h3 id="parse-for-urls-in-todo-items-parse-urls">Parse for URLs in todo items {: #parse-urls }</h3>
+<p>At the end of <strong><em>controller.js</em></strong>, add a new method called <code>_parseForURLs()</code>:</p>
+<pre class="js/4-7"><code>  Controller.prototype._getCurrentPage = function () {
+    return document.location.hash.split(&#39;/&#39;)[1];
+  };
+
+  Controller.prototype._parseForURLs = function (text) {
+    var re = /(https?:\/\/[^\s&quot;&lt;&gt;,]+)/g;
+    return text.replace(re, &#39;&lt;a href=&quot;$1&quot; data-src=&quot;$1&quot;&gt;$1&lt;/a&gt;&#39;);
+  };
+
+  // Export to window
+  window.app.Controller = Controller;
+})(window);</code></pre>
+<p>Whenever a string starting with “http://” or “https://” is found, a HTML anchor tag is created to wrap around the URL.</p>
+<h3 id="render-hyperlinks-in-the-todo-list-render-links">Render hyperlinks in the todo list {: #render-links }</h3>
+<p>Find <code>showAll()</code> in <em>controller.js</em>. Update <code>showAll()</code> to parse for links by using the <code>_parseForURLs()</code> method added previously:</p>
+<pre class="js/7/6"><code>/**
+ * An event to fire on load. Will get all items and display them in the
+ * todo-list
+ */
+Controller.prototype.showAll = function () {
+  this.model.read(function (data) {
+    this.$todoList.innerHTML = this.view.show(data);
+    this.$todoList.innerHTML = this._parseForURLs(this.view.show(data));
+  }.bind(this));
+};</code></pre>
+<p>Do the same for <code>showActive()</code> and <code>showCompleted()</code>:</p>
+<pre class="js/6,16/5,15"><code>/**
+ * Renders all active tasks
+ */
+Controller.prototype.showActive = function () {
+  this.model.read({ completed: 0 }, function (data) {
+    this.$todoList.innerHTML = this.view.show(data);
+    this.$todoList.innerHTML = this._parseForURLs(this.view.show(data));
+  }.bind(this));
+};
+
+/**
+ * Renders all completed tasks
+ */
+Controller.prototype.showCompleted = function () {
+  this.model.read({ completed: 1 }, function (data) {
+    this.$todoList.innerHTML = this.view.show(data);
+    this.$todoList.innerHTML = this._parseForURLs(this.view.show(data));
+  }.bind(this));
+};</code></pre>
+<p>And finally, add <code>_parseForURLs()</code> to <code>editItem()</code>:</p>
+<pre class="js/7/6"><code>Controller.prototype.editItem = function (id, label) {
+  ...
+  var onSaveHandler = function () {
+    ...
+      // Instead of re-rendering the whole view just update
+      // this piece of it
+      label.innerHTML = value;
+      label.innerHTML = this._parseForURLs(value);
+    ...
+  }.bind(this);
+  ...
+}</code></pre>
+<p>Still in <code>editItem()</code>, fix the code so that it uses the <code>innerText</code> of the label instead of the label’s <code>innerHTML</code>:</p>
+<pre class="js/3,7/2,6"><code>Controller.prototype.editItem = function (id, label) {
+  ...
+  // Get the innerHTML of the label instead of requesting the data from the
+  // Get the innerText of the label instead of requesting the data from the
+  // ORM. If this were a real DB this would save a lot of time and would avoid
+  // a spinner gif.
+  input.value = label.innerHTML;
+  input.value = label.innerText;
+  ...
+}</code></pre>
+<h3 id="open-new-window-containing-webview-open-webview">Open new window containing webview {: #open-webview }</h3>
+<p>Add a <code>_doShowUrl()</code> method to <em>controller.js</em>. This method opens a new Chrome App window via <a href="/docs/extensions/reference/app_window#method-create">chrome.app.window.create()</a> with <em>webview.html</em> as the window source:</p>
+<pre class="js/5-27"><code>  Controller.prototype._parseForURLs = function (text) {
+    var re = /(https?:\/\/[^\s&quot;&lt;&gt;,]+)/g;
+    return text.replace(re, &#39;&lt;a href=&quot;$1&quot; data-src=&quot;$1&quot;&gt;$1&lt;/a&gt;&#39;);
+  };
+
+  Controller.prototype._doShowUrl = function(e) {
+    // only applies to elements with data-src attributes
+    if (!e.target.hasAttribute(&#39;data-src&#39;)) {
+      return;
+    }
+    e.preventDefault();
+    var url = e.target.getAttribute(&#39;data-src&#39;);
+    chrome.app.window.create(
+     &#39;webview.html&#39;,
+     {hidden: true},   // only show window when webview is configured
+     function(appWin) {
+       appWin.contentWindow.addEventListener(&#39;DOMContentLoaded&#39;,
+         function(e) {
+           // when window is loaded, set webview source
+           var webview = appWin.contentWindow.
+                document.querySelector(&#39;webview&#39;);
+           webview.src = url;
+           // now we can show it:
+           appWin.show();
+         }
+       );
+     });
+  };
+
+  // Export to window
+  window.app.Controller = Controller;
+})(window);</code></pre>
+<p>In the <code>chrome.app.window.create()</code> callback, note how the webview’s URL is set via the <a href="/docs/extensions/reference/webviewTag#tag"><code>src</code> tag attribute</a>.</p>
+<p>Lastly, add a click event listener inside the <code>Controller</code> constructor to call <code>doShowUrl()</code> when a user clicks on a link:</p>
+<pre class="js/5"><code>function Controller(model, view) {
+  ...
+  this.router = new Router();
+  this.router.init();
+
+  this.$todoList.addEventListener(&#39;click&#39;, this._doShowUrl);
+
+  window.addEventListener(&#39;load&#39;, function () {
+    this._updateFilterState();
+  }.bind(this));
+  ...
+}</code></pre>
+<h2 id="launch-your-finished-todo-app-launch">Launch your finished Todo app {: #launch }</h2>
+<p>You are done Step 4! If you reload your app and add a todo item with a full URL starting with http:// or https://, you should see something like this:</p>
+<h2 id="for-more-information-recap">For more information {: #recap }</h2>
+<p>For more detailed information about some of the APIs introduced in this step, refer to:</p>
+<ul>
+<li><a href="/docs/extensions/mv3/declare_permissions/" title="Read &#39;Declare Permissions&#39; in the Chrome developer docs">Declare Permissions</a> <a href="#update-permissions" title="This feature mentioned in &#39;Update app permissions&#39;">↑</a></li>
+<li><a href="/docs/extensions/reference/webviewTag" title="Read &#39;&lt;webview&gt; Tag&#39; in the Chrome developer docs"><webview> Tag</a> <a href="#overview" title="This feature mentioned in &#39;Learn about the webview tag&#39;">↑</a></li>
+<li><a href="/docs/extensions/reference/app_window#method-create" title="Read &#39;chrome.app.window.create()&#39; in the Chrome developer docs">chrome.app.window.create()</a> <a href="#open-webview" title="This feature mentioned in &#39;Open new window containing webview&#39;">↑</a></li>
+</ul>
+<p>Ready to continue onto the next step? Go to <a href="../app_codelab_images">Step 5 - Add images from the web »</a></p>
+</body>
+</html>

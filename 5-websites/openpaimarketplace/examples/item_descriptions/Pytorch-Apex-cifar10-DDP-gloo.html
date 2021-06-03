@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Pytorch-Apex-cifar10-DDP-gloo</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="pytorch-ddp-job-template-with-apex-gloo-backend">PyTorch DDP Job Template With Apex (Gloo backend)</h1>
+<p>This example shows how to train a custom neural network on cifar10 with Pytorch on OpenPAI.</p>
+<p>We installed Apex before running <code>python &lt;script.py&gt;</code>,we recommend using the right network interface, so we used environment variables, and the sample program will be trained on two machines, each with two gpus.</p>
+<p>If you’re using the Gloo backend, you can specify multiple interfaces by separating them by a comma, like this: . The backend will dispatch operations in a round-robin fashion across these interfaces.And mixed precision training (training in a combination of float (FP32) and half (FP16) precision) allows us to use larger batch sizes and take advantage of NVIDIA Tensor Cores for faster computation.</p>
+<h2 id="training-data">Training Data</h2>
+<p>The training set is using <a href="https://www.cs.toronto.edu/~kriz/cifar.html">CIFAR-10</a> dataset. PyTorch provides CIFAR-10 download in <code>torchvision.datasets.CIFAR10</code> and <em>DataLoader</em> in <code>torch.utils.data.DataLoader</code>.</p>
+<h2 id="how-to-use">How to use</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Clone and install <code>Apex</code>, and set environment variable first.</p>
+<pre><code>export GLOO_SOCKET_IFNAME=eth0
+git clone https://github.com/NVIDIA/apex
+cd apex
+python setup.py install</code></pre>
+<h3 id="training-command">Training command</h3>
+<p>To run the job, you should apply <strong>2 SKU</strong> resources. The training code is as below.</p>
+<pre><code>cd ..
+wget https://raw.githubusercontent.com/microsoft/pai/master/examples/Distributed-example/cifar10-single-mul-DDP-nccl-gloo-Apex-mixed.py
+
+python  cifar10-single-mul-DDP-nccl-gloo-Apex-mixed.py -n 2 -g 2 --epochs 2 --dist-backend gloo</code></pre>
+<h3 id="get-the-result-model">Get the result model</h3>
+<p>You can view the training process and result in the logs when training process is finished.</p>
+</body>
+</html>

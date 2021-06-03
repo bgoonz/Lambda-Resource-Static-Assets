@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Static Assets</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Static Assets</h1>
+</header>
+<p>Every website needs assets: images, stylesheets, favicons etc. In such cases, you can create a directory named <code>static</code> at the root of your project.</p>
+<p>Every file you put into <strong>that directory will be copied</strong> into the root of the generated <code>build</code> folder with the directory hierarchy preserved. E.g. if you add a file named <code>sun.jpg</code> to the static folder, it will be copied to <code>build/sun.jpg</code>.</p>
+<p>This means that:</p>
+<ul>
+<li>for site <code>baseUrl: '/'</code>, the image <code>/static/img/docusaurus.png</code> will be served at <code>/img/docusaurus.png</code>.</li>
+<li>for site <code>baseUrl: '/subpath/'</code>, the image <code>/static/img/docusaurus.png</code> will be served at <code>/subpath/img/docusaurus.png</code>.</li>
+</ul>
+<h2 id="referencing-your-static-asset">Referencing your static asset</h2>
+<p>You can reference assets from the <code>static</code> folder in your code using absolute paths, but this is not ideal because changing the site <code>baseUrl</code> will <strong>break those link</strong>s.</p>
+<p>You can <code>import</code> / <code>require()</code> the static asset (recommended), or use the <code>useBaseUrl</code> utility function: both prepend the <code>baseUrl</code> to paths for you.</p>
+<h3 id="jsx-example">JSX example</h3>
+<p>```jsx title=“MyComponent.js” import DocusaurusImageUrl from ‘<span class="citation" data-cites="site/static/img/docusaurus.png">@site/static/img/docusaurus.png</span>’;</p>
+<p><img src={DocusaurusImageUrl} />; ```</p>
+<p><code>jsx title="MyComponent.js" &lt;img src={require('@site/static/img/docusaurus.png').default} /&gt;</code></p>
+<p>```jsx title=“MyComponent.js” import useBaseUrl from ‘<span class="citation" data-cites="docusaurus/useBaseUrl">@docusaurus/useBaseUrl</span>’;</p>
+<p><img src={useBaseUrl('/img/docusaurus.png')} />; ```</p>
+<p>You can also import SVG files: they will be transformed into React components.</p>
+<p>```jsx title=“MyComponent.js” import DocusaurusLogoWithKeytar from ‘<span class="citation" data-cites="site/static/img/docusaurus_keytar.svg">@site/static/img/docusaurus_keytar.svg</span>’;</p>
+<p><DocusaurusLogoWithKeytar title="Docusaurus Logo" className="logo" />; ```</p>
+<h3 id="markdown-example">Markdown example</h3>
+<p>Markdown links and images referencing assets of the static folder will be converted to <code>require("@site/static/assetName.png")"</code>, and <strong>the site baseUrl will be automatically prepended</strong> for you.</p>
+<p><code>md title="my-doc.md" ![Docusaurus](/img/docusaurus.png)</code></p>
+<p>Thanks to MDX, you can also use <code>useBaseUrl</code> utility function in Markdown files! You’d have to use html tags like <code>&lt;img&gt;</code> instead of the Markdown image syntax though. The syntax is exactly the same as in JSX.</p>
+<h2 id="jsx-titlemy-doc.mdx">```jsx title=“my-doc.mdx”</h2>
+<p>id: my-doc title: My Doc —</p>
+<p>// Add to the top of the file below the front matter. import useBaseUrl from ‘<span class="citation" data-cites="docusaurus/useBaseUrl">@docusaurus/useBaseUrl</span>’;</p>
+<p>…</p>
+<p><img alt="Docusaurus with Keytar" src={useBaseUrl('/img/docusaurus_keytar.svg')} /> ```</p>
+<h3 id="caveats">Caveats</h3>
+<p>Keep in mind that:</p>
+<ul>
+<li>By default, none of the files in <code>static</code> folder will be post-processed, hashed or minified.</li>
+<li>Missing files referenced via hardcoded absolute paths will not be detected at compilation time, and will result in a 404 error.</li>
+<li>By default, GitHub Pages runs published files through <a href="https://jekyllrb.com/">Jekyll</a>. Since Jekyll will discard any files that begin with <code>_</code>, it is recommended that you disable Jekyll by adding an empty file named <code>.nojekyll</code> file to your <code>static</code> directory if you are using GitHub pages for hosting.</li>
+</ul>
+</body>
+</html>

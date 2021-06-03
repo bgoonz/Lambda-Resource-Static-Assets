@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2018-06-12" />
+  <title>Using Inline Installation</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Using Inline Installation</h1>
+<p class="date">2018-06-12</p>
+</header>
+<p>{% Aside ‘warning’ %} As of 06/12/2018, inline installation is deprecated. For more information, read our <a href="https://blog.chromium.org/2018/06/improving-extension-transparency-for.html">Chromium Blog post</a> and <a href="/docs/extensions/mv2/inline_faq">Migration FAQ</a>. {% endAside %}</p>
+<p>Once you’ve <a href="/docs/webstore/publish">published</a> your app or extension, you may be wondering how users will find and install your app. For users who browse the Chrome Web Store and find your item, its a very easy one-click process to install it. However, if a user is already on your site, it can be cumbersome for them to complete the installation - they would need to navigate away from your site to the store, complete the install process, and then return.</p>
+<p>As of Google Chrome 15, you can initiate app and extensions installations “inline” from your site. These apps and extensions are still hosted in the Chrome Web Store, but users no longer have to leave your site to install them.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/iOr6LOVuZYykpCTpthlq.png”, alt=“Inline installation dialog”, height=“241”, width=“401” %}</p>
+<p>When users install the app, they will see an installation confirmation dialog similar to the one pictured on right. Just like the dialog displayed when installing directly from the Chrome Web Store, it lists all of the permissions that your app or extension is requesting. Additionally, this dialog includes the average Chrome Web Store rating and the number of users, giving users extra confidence about what they are about to install.</p>
+<h2 id="overview">Overview</h2>
+<p>Inline installation is composed of two parts: a declarative <code>&lt;link&gt;</code> tag and a call to the JavaScript function <code>chrome.webstore.install()</code>. In addition, you must also verify an association between the site that triggers inline installation and the relevant item(s) in the Chrome Web Store.</p>
+<h2 id="adding-a-chrome-web-store-link">Adding a Chrome Web Store link</h2>
+<p>The HTML page on your site from which you want inline installation to occur must contain one or more <code>&lt;link&gt;</code> tags in the <code>&lt;head&gt;</code> section referencing the items that the user can install. Each <code>&lt;link&gt;</code> tag must have the following format:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;chrome-webstore-item&quot;</span><span class="ot"> href=</span><span class="st">&quot;https://chrome.google.com/webstore/detail/itemID&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<p>The URL in the <code>&lt;link&gt;</code> tag must be exactly as specified above, except that you should replace <code>_itemID_</code> with the actual ID value for your item. To determine the ID value for a specific item, go to the <a href="https://chrome.google.com/webstore/developer/dashboard">Chrome Developer Dashboard</a> and click the name of the relevant app or extension. The ID value for that item will be shown in the browser address bar; it is a string of 32 Latin characters at the end of the URL in the address bar. Do not use the URL in the address bar as the URL in the <code>&lt;link&gt;</code> tag (the URL in the address bar uses a new format that includes the app name–this new format does not work for inline installation). Instead, copy the ID value from the URL in the address bar and paste the ID value into the URL specified in the <code>&lt;link&gt;</code> tag above.</p>
+<p>As an example, the <code>&lt;link&gt;</code> tag for the <a href="https://chrome.google.com/webstore/detail/apdfllckaahabafndbhieahigkjlhalf">Google Drive</a> app would look like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;chrome-webstore-item&quot;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="ot">    href=</span><span class="st">&quot;https://chrome.google.com/webstore/detail/apdfllckaahabafndbhieahigkjlhalf&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<h2 id="triggering-inline-installation">Triggering inline installation</h2>
+<p>To actually begin inline installation, the <code>chrome.webstore.install(_url_, _successCallback_, _failureCallback_)</code> function must be called. This function can only be called in response to a user gesture, for example within a click event handler; an exception will be thrown if it is not. The function can have the following parameters:</p>
+<ul>
+<li>url (optional string)
+<ul>
+<li>If you have more than one <code>&lt;link&gt;</code> tag on your page with the <code>chrome-webstore-item</code> relation, you can choose which item you’d like to install by passing in its URL here. If it is omitted, then the first (or only) link will be used. An exception will be thrown if the passed in URL does not exist on the page.</li>
+</ul></li>
+<li>successCallback (optional function)
+<ul>
+<li>This function is invoked when inline installation successfully completes (after the dialog is shown and the user agrees to add the item to Chrome). You may wish to use this to hide the user interface element that prompted the user to install the app or extension.</li>
+</ul></li>
+<li>failureCallback (optional function)
+<ul>
+<li>This function is invoked when inline installation does not successfully complete. Possible reasons for this include the user canceling the dialog, the linked item not being found in the store, or the install being initiated from a non-verified site. The callback is given a failure detail string as a parameter. You may wish to inspect or log that string for debugging purposes, but you should not rely on specific strings being passed back.</li>
+</ul></li>
+</ul>
+<h2 id="user-interface-elements-for-inline-installation">User interface elements for inline installation</h2>
+<p>One of the key concepts behind inline installation is that it allows you, the app developer, to choose when to prompt the user to install the app or extension. If the item is critical to your site, you may wish to have a modal dialog or other distinctive noticeable user interface element for prompting the user. If the item only provides secondary functionality, inline installation may be hidden away on a secondary page of your site.</p>
+<p>Since inline installation has to be triggered via a user gesture (for example, a mouse click) it is therefore suggested that you tie the action to a clickable user interface element such as a button. It is suggested that you use the same button label as the Chrome Web Store itself (in English, this is “Add to Chrome”).</p>
+<h2 id="checking-if-an-item-is-already-installed">Checking if an item is already installed</h2>
+<p>You may wish to only show user interface elements that prompt the user to install the item if it’s not already installed.</p>
+<p>To check if an app is already installed, you can use the <a href="/docs/webstore/faq#faq-app-24"><code>chrome.app.isInstalled</code></a> property. By querying it from a page contained within your app’s <a href="https://developers.google.com/chrome/apps/docs/developers_guide#manifest">URLs</a>, you can show or hide interface elements as appropriate. For example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;button</span><span class="ot"> onclick=</span><span class="st">&quot;chrome.webstore.install()&quot;</span><span class="ot"> id=</span><span class="st">&quot;install-button&quot;</span><span class="kw">&gt;</span>Add to Chrome<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">&lt;script&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="cf">if</span> (<span class="va">chrome</span>.<span class="va">app</span>.<span class="at">isInstalled</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;install-button&#39;</span>).<span class="va">style</span>.<span class="at">display</span> <span class="op">=</span> <span class="st">&#39;none&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">&lt;/script&gt;</span></a></code></pre></div>
+<p>Extensions can <a href="http://code.google.com/chrome/extensions/content_scripts.html#host-page-communication">communicate</a> with the embedding page via content scripts to let it know that they are already installed. For example, you could have a content script that targets the installation page:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">var</span> isInstalledNode <span class="op">=</span> <span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&#39;div&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="va">isInstalledNode</span>.<span class="at">id</span> <span class="op">=</span> <span class="st">&#39;extension-is-installed&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="va">document</span>.<span class="va">body</span>.<span class="at">appendChild</span>(isInstalledNode)<span class="op">;</span></a></code></pre></div>
+<p>Then your installation page can check for the presence of that DOM node, which signals that the extension is already installed:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="op">&lt;</span>button onclick<span class="op">=</span><span class="st">&quot;chrome.webstore.install()&quot;</span> id<span class="op">=</span><span class="st">&quot;install-button&quot;</span><span class="op">&gt;</span>Add to Chrome&lt;/button<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="op">&lt;</span>script<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="cf">if</span> (<span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;extension-is-installed&#39;</span>)) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;install-button&#39;</span>).<span class="va">style</span>.<span class="at">display</span> <span class="op">=</span> <span class="st">&#39;none&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-6" title="6">&lt;/script<span class="op">&gt;</span></a></code></pre></div>
+<h2 id="verified-site-requirement">Verified site requirement</h2>
+<p>For security reasons, inline installations can only be initiated by a page on a site that is <a href="http://www.google.com/support/webmasters/bin/answer.py?hl=en&amp;answer=34592">verified</a> (via <a href="http://www.google.com/webmasters/">Webmaster Tools</a>) as being associated with that item in the Chrome Web Store. Note that if you verify ownership for a domain (for example, <code>http://example.com</code>) you can initiate inline installation from any subdomain or page (for example, <code>http://app.example.com</code> or <code>http://example.com/page.html</code>). We may revoke your app or extension’s ability to use Inline Installation if we detect any association with deceptive practices, including deceptive ads and landing pages, or installation patterns that suggest user confusion.</p>
+<h2 id="enforcement-faq">Enforcement FAQ</h2>
+<p><strong>Why are we disabling inline installation for certain extensions?</strong> Inline installation is a powerful distribution mechanism that offers users a smoother experience installing Chrome extensions and helps developers reach more users. While the vast majority of developers have used this feature as intended, we have seen instances where an inline installation has been paired with ads and landing pages that confuse and mislead users into installing extensions they may not want. In response to this, we <a href="http://blog.chromium.org/2015/08/protecting-users-from-deceptive-inline.html">launched</a> our inline installation enforcement effort in September 2015, which we updated in March 2016.</p>
+<p><strong>What happens when inline installation is disabled?</strong> When an extension’s inline installation is disabled, attempts to trigger inline installation for your extension will result in a redirect to your item’s Chrome Web Store listing. Inline installation enforcement does not result in removal of your extension from the Chrome Web Store. Users will still be able to access and install your extension through the Chrome Web Store. Repeated abuse of inline installation, however, may lead to further enforcement actions.</p>
+<p>Starting in July 2017, inline installation may also be selectively disabled for malicious or deceptive webpage leading to your extension, on a per-install basis. When inline installation is disabled in this way, it will not affect other inline installations of the same extension originating from non-deceptive sources.</p>
+<p><strong>Will I know if my inline installation has been disabled?</strong> If inline installation has been disabled at the extension level, you will receive an alert to developer email account. If inline installation is disabled at the installation level, due to a deceptive or malicious installation context and not the extension itself, the developer will receive not receive an alert.</p>
+<p><strong>What are the criteria for disabling inline installation?</strong> The Chrome Web Store has two separate processes that govern inline installation. The first is run completely by an automated enforcement system. This system regularly scans all extensions hosted on the Chrome Web Store and tracks various signals associated with potential abuse of the inline installation mechanism. These signals include anomalous installations patterns and user complaints. Inline installation is automatically disabled for an extension when it significantly exceeds the typical values for these inline installation abuse metrics.</p>
+<p>In January 2018, we updated our automated enforcement systems to incorporate additional signals and disable deceptive or confusing flows faster.</p>
+<p>In addition to the automated enforcement system, the Chrome Web Store team periodically conducts manual reviews of landing pages and ads associated with an extension’s inline installation. If the team encounters a landing page or ad that violates the <a href="https://www.google.com/about/company/unwanted-software-policy.html">Unwanted Software Policy</a> or any other aspect of the <a href="/docs/webstore/program_policies#spam">Developer Program Policies</a>, inline installation for the associated extension will be permanently disabled. For violations involving malware or social engineering, further enforcement action may result.</p>
+<p>Please note that we may periodically adjust our enforcement signals. If we detect repeated or egregious violations or any attempts to game or manipulate our signals in any way, we may apply further enforcement actions.</p>
+<p><strong>How can I have inline installation reenabled for my extension?</strong> Once an extension’s inline installation has been disabled by our automated enforcement system, we closely track the extension’s installation patterns. If our system determines that user intent remains strong after a redirect to the extension’s Chrome Web Store listing, the system will automatically reenable inline installation. This process takes at least 30 days. If our system finds that user intent dramatically weakens following a redirect to the extension’s listing, inline installation will remain disabled.</p>
+<p>For cases where inline installation has been permanently disabled by our manual review process, there is no path to reenable that particular extension’s inline installation.</p>
+<p><strong>How can I ensure inline installation remains enabled for my extension?</strong> In general, we urge Chrome Web Store developers to ensure their inline installation landing pages prominently feature their extensions’ core features and deliver experiences that align with the expectations conveyed by the ads and landing pages associated with the installation flow. For more guidance on how to build clear and transparent landing pages, please refer to our <a href="https://www.google.com/about/company/unwanted-software-policy.html">Unwanted Software Policy</a> as well as our AdWords policies on <a href="https://support.google.com/adwordspolicy/answer/6020955?hl=en&amp;vid=1-635766371629017731-609235876">misrepresentation</a> and <a href="https://support.google.com/adwordspolicy/answer/6020954?hl=en&amp;ref_topic=1626336">abuse of the ad network</a>.</p>
+<p>Additionally, we recommend that Chrome Web Store developers carefully track any user feedback that indicate their extension’s installation may have led to any confusion or unexpected changes, in addition to installation metrics that may convey low user satisfaction, e.g., high churn rates.</p>
+<p><strong>Is there any way that I can request a re-review, or appeal this decision?</strong> Yes, appeals can be made through the instructions included in the notification email you will receive to the email address listed under your CWS developer account. Our enforcement team will process the appeal within 48 hours.</p>
+<p><strong>Why do you have an automated enforcement system?</strong> Our automated disable was built to ensure we are responsive to user feedback on unwanted extensions in a scalable, fair, and objective manner.</p>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>index</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h2 id="overview">Overview</h2>
+<p>This API has been optimized to meet the specific storage needs of extensions. It provides the same storage capabilities as the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">localStorage API</a> with the following key differences:</p>
+<ul>
+<li>User data can be automatically synced with Chrome sync (using <code>storage.sync</code>).</li>
+<li>Your extension’s content scripts can directly access user data without the need for a background page.</li>
+<li>A user’s extension settings can be persisted even when using <a href="/docs/extensions/mv2/manifest/incognito">split incognito behavior</a>.</li>
+<li>It’s asynchronous with bulk read and write operations, and therefore faster than the blocking and serial <code>localStorage API</code>.</li>
+<li>User data can be stored as objects (the <code>localStorage API</code> stores data in strings).</li>
+<li>Enterprise policies configured by the administrator for the extension can be read (using <code>storage.managed</code> with a <a href="/docs/extensions/mv2/manifest/storage">schema</a>).</li>
+</ul>
+<h2 id="manifest">Manifest</h2>
+<p>You must declare the “storage” permission in the <a href="/docs/extensions/mv2/tabs">extension manifest</a> to use the storage API. For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;My extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="st">&quot;storage&quot;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<h2 id="usage">Usage</h2>
+<p>To store user data for your extension, you can use either <code>storage.sync</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">sync</span>.<span class="at">set</span>(<span class="op">{</span><span class="dt">key</span><span class="op">:</span> value<span class="op">},</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Value is set to &#39;</span> <span class="op">+</span> value)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">sync</span>.<span class="at">get</span>([<span class="st">&#39;key&#39;</span>]<span class="op">,</span> <span class="kw">function</span>(result) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Value currently is &#39;</span> <span class="op">+</span> <span class="va">result</span>.<span class="at">key</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>or <code>storage.local</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">local</span>.<span class="at">set</span>(<span class="op">{</span><span class="dt">key</span><span class="op">:</span> value<span class="op">},</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Value is set to &#39;</span> <span class="op">+</span> value)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">local</span>.<span class="at">get</span>([<span class="st">&#39;key&#39;</span>]<span class="op">,</span> <span class="kw">function</span>(result) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Value currently is &#39;</span> <span class="op">+</span> <span class="va">result</span>.<span class="at">key</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>When using <code>storage.sync</code>, the stored data will automatically be synced to any Chrome browser that the user is logged into, provided the user has sync enabled.</p>
+<p>When Chrome is offline, Chrome stores the data locally. The next time the browser is online, Chrome syncs the data. Even if a user disables syncing, <code>storage.sync</code> will still work. In this case, it will behave identically to <code>storage.local</code>.</p>
+<p>{% Aside ‘warning’ %}</p>
+<p>Confidential user information should not be stored! The storage area isn’t encrypted.</p>
+<p>{% endAside %}</p>
+<p>The <code>storage.managed</code> storage is read-only.</p>
+<h2 id="storage-and-throttling-limits">Storage and throttling limits</h2>
+<p><code>chrome.storage</code> is not a big truck. It’s a series of tubes. And if you don’t understand, those tubes can be filled, and if they are filled when you put your message in, it gets in line, and it’s going to be delayed by anyone that puts into that tube enormous amounts of material.</p>
+<p>For details on the current limits of the storage API, and what happens when those limits are exceeded, please see the quota information for <a href="#property-sync">sync</a> and <a href="#property-local">local</a>.</p>
+<h2 id="examples">Examples</h2>
+<p>If you’re interested in tracking changes made to a data object, you can add a listener to its <code>onChanged</code> event. Whenever anything changes in storage, that event fires. Here’s sample code to listen for saved changes:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">//// background.js ////</span></a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">onChanged</span>.<span class="at">addListener</span>(<span class="kw">function</span> (changes<span class="op">,</span> namespace) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="cf">for</span> (<span class="kw">let</span> [key<span class="op">,</span> <span class="op">{</span> oldValue<span class="op">,</span> newValue <span class="op">}</span>] <span class="kw">of</span> <span class="va">Object</span>.<span class="at">entries</span>(changes)) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="va">console</span>.<span class="at">log</span>(</a>
+<a class="sourceLine" id="cb4-6" title="6">      <span class="vs">`Storage key &quot;</span><span class="sc">${</span>key<span class="sc">}</span><span class="vs">&quot; in namespace &quot;</span><span class="sc">${</span>namespace<span class="sc">}</span><span class="vs">&quot; changed.`</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="vs">`Old value was &quot;</span><span class="sc">${</span>oldValue<span class="sc">}</span><span class="vs">&quot;, new value is &quot;</span><span class="sc">${</span>newValue<span class="sc">}</span><span class="vs">&quot;.`</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>We can take this idea even further. In this example we have an <a href="https://developer.chrome.com/docs/extensions/mv3/options/">options page</a> that allows the user to toggle a “debug mode” in the extension (implementation not shown here). Changes to this setting are immediately saved to sync storage by the options page and the background script uses <code>storage.onChanged</code> to apply the setting as soon as possible.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="co">&lt;!-- options.html --&gt;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw">&lt;script</span><span class="ot"> defer src=</span><span class="st">&quot;options.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw">&lt;form</span><span class="ot"> id=</span><span class="st">&quot;optionsForm&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;debug&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;checkbox&quot;</span><span class="ot"> name=</span><span class="st">&quot;debug&quot;</span><span class="ot"> id=</span><span class="st">&quot;debug&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">    Enable debug mode</a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="kw">&lt;/form&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">//// options.js ////</span></a>
+<a class="sourceLine" id="cb6-2" title="2"></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co">// In-page cache of the user&#39;s options</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="kw">const</span> options <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">// Initialize the form with the user&#39;s option settings</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">sync</span>.<span class="at">get</span>(<span class="st">&#39;options&#39;</span><span class="op">,</span> (data) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-8" title="8">  <span class="va">Object</span>.<span class="at">assign</span>(options<span class="op">,</span> <span class="va">data</span>.<span class="at">options</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-9" title="9">  <span class="va">optionsForm</span>.<span class="va">debug</span>.<span class="at">checked</span> <span class="op">=</span> <span class="at">Boolean</span>(<span class="va">options</span>.<span class="at">debug</span>)<span class="op">;;</span></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-11" title="11"></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="co">// Immediately persist options changes</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="va">optionsForm</span>.<span class="va">debug</span>.<span class="at">addEventListener</span>(<span class="st">&#39;change&#39;</span><span class="op">,</span> (event) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-14" title="14">  <span class="va">options</span>.<span class="at">debug</span> <span class="op">=</span> <span class="va">event</span>.<span class="va">target</span>.<span class="at">checked</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-15" title="15">  <span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">sync</span>.<span class="at">set</span>(<span class="op">{</span>options<span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-16" title="16"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="co">//// background.js ////</span></a>
+<a class="sourceLine" id="cb7-2" title="2"></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="co">// Watch for changes to the user&#39;s options &amp; apply them</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">onChanged</span>.<span class="at">addListener</span>((changes<span class="op">,</span> area) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="cf">if</span> (area <span class="op">===</span> <span class="st">&#39;sync&#39;</span> <span class="op">&amp;&amp;</span> <span class="va">changes</span>.<span class="at">options</span><span class="op">?</span>.<span class="at">newValue</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="kw">const</span> debugMode <span class="op">=</span> <span class="at">Boolean</span>(<span class="va">changes</span>.<span class="va">options</span>.<span class="va">newValue</span>.<span class="at">debug</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;enable debug mode?&#39;</span><span class="op">,</span> debugMode)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-8" title="8">    <span class="at">setDebugMode</span>(debugMode)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-10" title="10">})<span class="op">;</span></a></code></pre></div>
+<p>Since service workers are not always running, Manifest V3 extensions sometimes need to asynchronously load data from storage before they execute their event handlers. To do this, the below snippet uses an async <code>action.onClicked</code> event handler that waits for the <code>storageCache</code> global to be populated before executing its logic.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="co">//// background.js ////</span></a>
+<a class="sourceLine" id="cb8-2" title="2"></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co">// Where we will expose all the data we retrieve from storage.sync.</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="kw">const</span> storageCache <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">// Asynchronously retrieve data from storage.sync, then cache it.</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="kw">const</span> initStorageCache <span class="op">=</span> <span class="at">getAllStorageSyncData</span>().<span class="at">then</span>(items <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-7" title="7">  <span class="co">// Copy the data retrieved from storage into storageCache.</span></a>
+<a class="sourceLine" id="cb8-8" title="8">  <span class="va">Object</span>.<span class="at">assign</span>(storageCache<span class="op">,</span> items)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-10" title="10"></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="va">chrome</span>.<span class="va">action</span>.<span class="va">onClicked</span>.<span class="at">addListener</span>(<span class="kw">async</span> (tab) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-12" title="12">  <span class="cf">try</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-13" title="13">    <span class="cf">await</span> initStorageCache<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-14" title="14">  <span class="op">}</span> <span class="cf">catch</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-15" title="15">    <span class="co">// Handle error that occurred during storage initialization.</span></a>
+<a class="sourceLine" id="cb8-16" title="16">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-17" title="17">  <span class="co">// Normal action handler logic.</span></a>
+<a class="sourceLine" id="cb8-18" title="18"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-19" title="19"></a>
+<a class="sourceLine" id="cb8-20" title="20"><span class="co">// Reads all data out of storage.sync and exposes it via a promise.</span></a>
+<a class="sourceLine" id="cb8-21" title="21"><span class="co">//</span></a>
+<a class="sourceLine" id="cb8-22" title="22"><span class="co">// Note: Once the Storage API gains promise support, this function</span></a>
+<a class="sourceLine" id="cb8-23" title="23"><span class="co">// can be greatly simplified.</span></a>
+<a class="sourceLine" id="cb8-24" title="24"><span class="kw">function</span> <span class="at">getAllStorageSyncData</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-25" title="25">  <span class="co">// Immediately return a promise and start asynchronous work</span></a>
+<a class="sourceLine" id="cb8-26" title="26">  <span class="cf">return</span> <span class="kw">new</span> <span class="at">Promise</span>((resolve<span class="op">,</span> reject) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-27" title="27">    <span class="co">// Asynchronously fetch all data from storage.sync.</span></a>
+<a class="sourceLine" id="cb8-28" title="28">    <span class="va">chrome</span>.<span class="va">storage</span>.<span class="va">sync</span>.<span class="at">get</span>(<span class="kw">null</span><span class="op">,</span> (items) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-29" title="29">      <span class="co">// Pass any observed errors down the promise chain.</span></a>
+<a class="sourceLine" id="cb8-30" title="30">      <span class="cf">if</span> (<span class="va">chrome</span>.<span class="va">runtime</span>.<span class="at">lastError</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-31" title="31">        <span class="cf">return</span> <span class="at">reject</span>(<span class="va">chrome</span>.<span class="va">runtime</span>.<span class="at">lastError</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-32" title="32">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-33" title="33">      <span class="co">// Pass the data retrieved from storage down the promise chain.</span></a>
+<a class="sourceLine" id="cb8-34" title="34">      <span class="at">resolve</span>(items)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-35" title="35">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-36" title="36">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-37" title="37"><span class="op">}</span></a></code></pre></div>
+</body>
+</html>

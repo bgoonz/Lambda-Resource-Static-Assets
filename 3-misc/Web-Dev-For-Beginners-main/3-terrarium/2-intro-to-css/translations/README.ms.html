@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.ms</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="projek-terrarium-bahagian-2-pengenalan-kepada-css">Projek Terrarium Bahagian 2: Pengenalan Kepada CSS</h1>
+<p><img src="/sketchnotes/webdev101-css.png" alt="Pengenalan Kepada CSS" /> &gt; Sketchnote karya <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="kuiz-pra-kuliah">Kuiz Pra Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/17">Kuiz Pra Kuliah</a></p>
+<h3 id="pengenalan">Pengenalan</h3>
+<p>CSS, atau Cascading Style Sheets, menyelesaikan masalah penting dalam pembangunan web: bagaimana menjadikan laman web anda kelihatan cantik. Menggayakan aplikasi anda menjadikannya lebih berguna dan kelihatan lebih baik; anda juga boleh menggunakan CSS untuk membuat Reka Bentuk Web Responsif (RWD) - membolehkan apl anda kelihatan baik tidak kira ukuran skrin yang dipaparkan. CSS bukan hanya menjadikan aplikasi anda kelihatan bagus; spesifikasinya merangkumi animasi dan transformasi yang membolehkan interaksi yang canggih untuk aplikasi anda. Kumpulan Kerja CSS membantu mengekalkan spesifikasi CSS semasa; anda boleh mengikuti karya mereka di <a href="https://www.w3.org/Style/CSS/members">laman web World Wide Web Consortium</a> .</p>
+<blockquote>
+<p>Perhatikan, CSS adalah bahasa yang berkembang, seperti semua yang ada di web, dan tidak semua penyemak imbas menyokong bahagian spesifikasi yang lebih baru. Sentiasa periksa pelaksanaan anda dengan merujuk <a href="https://caniuse.com">CanIUse.com</a>.</p>
+</blockquote>
+<p>Dalam pelajaran ini, kami akan menambahkan gaya ke terarium dalam talian kami dan mengetahui lebih lanjut mengenai beberapa konsep CSS: lata, pewarisan, dan penggunaan pemilih, penentuan kedudukan, dan menggunakan CSS untuk membina susun atur. Dalam prosesnya kita akan menyusun terarium dan membuat terarium itu sendiri.</p>
+<h3 id="prasyarat">Prasyarat</h3>
+<p>Anda harus mempunyai pengetahuan HTML untuk terarium anda dan siap digayakan.</p>
+<h3 id="tugas">Tugas</h3>
+<p>Dalam folder terarium anda, buat fail baru yang disebut <code>style.css</code>. Import fail itu di bahagian <code>&lt;head&gt;</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;./style.css&quot;</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<hr />
+<h2 id="the-cascade">The Cascade</h2>
+<p>Cascading Style Sheets menggabungkan idea bahawa gaya ‘cascade’ sehingga penerapan gaya dipandu oleh keutamaannya. Gaya yang ditetapkan oleh pengarang laman web lebih diutamakan daripada yang ditetapkan oleh penyemak imbas. Gaya yang ditetapkan ‘sebaris’ lebih diutamakan daripada yang ditetapkan dalam helaian gaya luaran.</p>
+<h3 id="tugas-1">Tugas</h3>
+<p>Tambahkan gaya sebaris “color: red” ke tag <code>&lt;h1&gt;</code> anda:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;h1</span><span class="ot"> style=</span><span class="st">&quot;color: red&quot;</span><span class="kw">&gt;</span>My Terrarium<span class="kw">&lt;/h1&gt;</span></a></code></pre></div>
+<p>Kemudian, tambahkan kod berikut ke fail <code>style.css</code> anda:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1">h1 {</a>
+<a class="sourceLine" id="cb3-2" title="2"> <span class="kw">color</span>: <span class="cn">blue</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">}</a></code></pre></div>
+<p>✅ Warna mana yang dipaparkan di aplikasi web anda? Kenapa? Bolehkah anda mencari cara untuk mengganti gaya? Bilakah anda mahu melakukan ini, atau mengapa tidak?</p>
+<hr />
+<h2 id="warisan">Warisan</h2>
+<p>Gaya diwarisi dari gaya nenek moyang hingga keturunan, sehingga elemen bersarang mewarisi gaya ibu bapa mereka.</p>
+<h3 id="tugas-2">Tugas</h3>
+<p>Tetapkan fon badan ke fon tertentu, dan periksa untuk melihat fon elemen bersarang:</p>
+<pre><code>body {
+    font-family: helvetica, arial, sans-serif;
+}</code></pre>
+<p>Buka konsol penyemak imbas anda ke tab ‘Elements’ dan perhatikan fon H1. Ini mewarisi fonnya dari badan, seperti yang dinyatakan dalam penyemak imbas:</p>
+<figure>
+<img src="../images/1.png" alt="inherited font" /><figcaption>inherited font</figcaption>
+</figure>
+<p>✅ Bolehkah anda menjadikan gaya bersarang mewarisi harta yang berbeza?</p>
+<hr />
+<h2 id="css-selector">CSS Selector</h2>
+<h3 id="tag">Tag</h3>
+<p>Setakat ini, fail <code>style.css</code> anda hanya mempunyai beberapa tag yang digayakan, dan aplikasinya kelihatan sangat pelik:</p>
+<pre><code>body {
+    font-family: helvetica, arial, sans-serif;
+}
+
+h1 {
+    color: #3a241d;
+    text-align: center;
+}</code></pre>
+<p>Cara menggayakan tag ini memberi anda kawalan terhadap elemen unik, tetapi anda perlu mengawal gaya banyak tanaman di terarium anda. Untuk melakukan itu, anda perlu memanfaatkan CSS selector.</p>
+<h3 id="id">Id</h3>
+<p>Tambahkan beberapa gaya untuk mengatur bekas kiri dan kanan. Oleh kerana hanya ada satu bekas kiri dan hanya satu bekas kanan, mereka diberi id dalam markup. Untuk menggayakannya, gunakan <code>#</code>:</p>
+<pre><code>#left-container {
+    background-color: #eee;
+    width: 15%;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    height: 100%;
+    padding: 10px;
+}
+
+#right-container {
+    background-color: #eee;
+    width: 15%;
+    right: 0px;
+    top: 0px;
+    position: absolute;
+    height: 100%;
+    padding: 10px;
+}</code></pre>
+<p>Di sini, anda telah meletakkan bekas ini dengan kedudukan mutlak di paling kiri dan kanan skrin, dan menggunakan peratusan untuk lebarnya sehingga dapat menskalakan untuk skrin mudah alih kecil.</p>
+<p>✅ Kod ini agak berulang, oleh itu tidak “DRY” (Don’t Repeat Yourself); bolehkah anda mencari cara yang lebih baik untuk menggayakan id ini, mungkin dengan id dan kelas? Anda perlu mengubah markup dan memfaktorkan semula CSS:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;left-container&quot;</span><span class="ot"> class=</span><span class="st">&quot;container&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a></code></pre></div>
+<h3 id="kelas">Kelas</h3>
+<p>Dalam contoh di atas, anda menggayakan dua elemen unik di skrin. Sekiranya anda mahu gaya diterapkan pada banyak elemen di layar, anda boleh menggunakan kelas CSS. Lakukan ini untuk menyusun tanaman di bekas kiri dan kanan.</p>
+<p>Perhatikan bahawa setiap tanaman dalam markup HTML mempunyai kombinasi id dan kelas. Id di sini digunakan oleh JavaScript yang akan anda tambahkan kemudian untuk memanipulasi penempatan tanaman terarium. Walau bagaimanapun, kelas-kelasnya memberi gaya kepada semua tanaman.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;plant-holder&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="kw">&lt;img</span><span class="ot"> class=</span><span class="st">&quot;plant&quot;</span><span class="ot"> alt=</span><span class="st">&quot;plant&quot;</span><span class="ot"> id=</span><span class="st">&quot;plant1&quot;</span><span class="ot"> src=</span><span class="st">&quot;./images/plant1.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<p>Tambahkan yang berikut ke fail <code>style.css</code> anda:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">.plant-holder</span> {</a>
+<a class="sourceLine" id="cb9-2" title="2">    <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="kw">height</span>: <span class="dv">13</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="kw">left</span>: <span class="dv">-10</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-5" title="5">}</a>
+<a class="sourceLine" id="cb9-6" title="6"></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="fu">.plant</span> {</a>
+<a class="sourceLine" id="cb9-8" title="8">    <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-9" title="9">    <span class="kw">max-width</span>: <span class="dv">150</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-10" title="10">    <span class="kw">max-height</span>: <span class="dv">150</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-11" title="11">    <span class="kw">z-index</span>: <span class="dv">2</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-12" title="12">}</a></code></pre></div>
+<p>Dalam coretan ini adalah gabungan kedudukan relatif dan mutlak, yang akan kita bahas di bahagian seterusnya. Lihat cara ketinggian dikendalikan oleh peratusan:</p>
+<p>Anda menetapkan ketinggian pemegang kilang kepada 13%, jumlah yang baik untuk memastikan bahawa semua tanaman dipaparkan di setiap bekas menegak tanpa perlu menatal.</p>
+<p>Anda menetapkan pemegang kilang bergerak ke kiri untuk membiarkan tanaman lebih berpusat di dalam bekasnya. Gambar mempunyai sejumlah besar latar belakang lutsinar sehingga membuatnya lebih mudah diseret, jadi perlu didorong ke kiri agar lebih pas di layar.</p>
+<p>Kemudian, kilang itu sendiri diberi lebar maksimum 150%. Ini memungkinkan untuk mengecil ketika penyemak imbas turun. Cuba ubah saiz penyemak imbas anda; tanaman tinggal di dalam bekasnya tetapi dikecilkan agar sesuai.</p>
+<p>Juga dapat diperhatikan adalah penggunaan z-index, yang mengendalikan ketinggian relatif suatu elemen (sehingga tanaman duduk di atas wadah dan tampak duduk di dalam terarium).</p>
+<p>✅ Mengapakah anda memerlukan pemegang tanaman dan CSS Selector?</p>
+<h2 id="kedudukan-css">Kedudukan CSS</h2>
+<p>Sifat pencampuran kedudukan (terdapat kedudukan statik, relatif, tetap, mutlak, dan melekit) boleh menjadi agak rumit, tetapi apabila dilakukan dengan betul, ia memberi anda kawalan yang baik terhadap unsur-unsur di halaman anda.</p>
+<p>Unsur-unsur yang diposisikan secara mutlak diposisikan berbanding dengan nenek moyang mereka yang terdekat, dan jika tidak ada, ia diposisikan sesuai dengan badan dokumen.</p>
+<p>Elemen kedudukan relatif diletakkan berdasarkan arahan CSS untuk menyesuaikan penempatannya dari kedudukan awalnya.</p>
+<p>Dalam sampel kami, <code>pemegang tumbuhan</code> adalah elemen kedudukan relatif yang diposisikan dalam wadah kedudukan mutlak. Tingkah laku yang dihasilkan adalah bahawa wadah bar sisi disematkan ke kiri dan kanan, dan pemegang tanaman bersarang, menyesuaikan diri di dalam bar sisi, memberi ruang untuk tanaman ditempatkan dalam barisan menegak.</p>
+<blockquote>
+<p><code>Tumbuhan</code> itu sendiri juga mempunyai kedudukan mutlak, yang diperlukan untuk membuatnya dapat diseret, seperti yang akan anda ketahui dalam pelajaran seterusnya.</p>
+</blockquote>
+<p>✅ Eksperimen dengan menukar jenis penempatan bekas sampingan dan pemegang tumbuhan. Apa yang berlaku?</p>
+<h2 id="susun-atur-css">Susun atur CSS</h2>
+<p>Sekarang anda akan menggunakan apa yang anda pelajari untuk membina terarium itu sendiri, semuanya menggunakan CSS!</p>
+<p>Pertama, gayakan anak-anak <code>.terrarium</code> sebagai segi empat bulat menggunakan CSS:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb10-1" title="1"><span class="fu">.jar-walls</span> {</a>
+<a class="sourceLine" id="cb10-2" title="2">    <span class="kw">height</span>: <span class="dv">80</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="kw">width</span>: <span class="dv">60</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="kw">background</span>: <span class="cn">#d1e1df</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-5" title="5">    <span class="kw">border-radius</span>: <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-6" title="6">    <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-7" title="7">    <span class="kw">bottom</span>: <span class="dv">0.5</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-8" title="8">    <span class="kw">left</span>: <span class="dv">20</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-9" title="9">    <span class="kw">opacity</span>: <span class="dv">0.5</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-10" title="10">    <span class="kw">z-index</span>: <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-11" title="11">}</a>
+<a class="sourceLine" id="cb10-12" title="12"></a>
+<a class="sourceLine" id="cb10-13" title="13"><span class="fu">.jar-top</span> {</a>
+<a class="sourceLine" id="cb10-14" title="14">    <span class="kw">width</span>: <span class="dv">50</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-15" title="15">    <span class="kw">height</span>: <span class="dv">5</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-16" title="16">    <span class="kw">background</span>: <span class="cn">#d1e1df</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-17" title="17">    <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-18" title="18">    <span class="kw">bottom</span>: <span class="dv">80.5</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-19" title="19">    <span class="kw">left</span>: <span class="dv">25</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-20" title="20">    <span class="kw">opacity</span>: <span class="dv">0.7</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-21" title="21">    <span class="kw">z-index</span>: <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-22" title="22">}</a>
+<a class="sourceLine" id="cb10-23" title="23"></a>
+<a class="sourceLine" id="cb10-24" title="24"><span class="fu">.jar-bottom</span> {</a>
+<a class="sourceLine" id="cb10-25" title="25">    <span class="kw">width</span>: <span class="dv">50</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-26" title="26">    <span class="kw">height</span>: <span class="dv">1</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-27" title="27">    <span class="kw">background</span>: <span class="cn">#d1e1df</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-28" title="28">    <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-29" title="29">    <span class="kw">bottom</span>: <span class="dv">0</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-30" title="30">    <span class="kw">left</span>: <span class="dv">25</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-31" title="31">    <span class="kw">opacity</span>: <span class="dv">0.7</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-32" title="32">}</a>
+<a class="sourceLine" id="cb10-33" title="33"></a>
+<a class="sourceLine" id="cb10-34" title="34"><span class="fu">.dirt</span> {</a>
+<a class="sourceLine" id="cb10-35" title="35">    <span class="kw">width</span>: <span class="dv">60</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-36" title="36">    <span class="kw">height</span>: <span class="dv">5</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-37" title="37">    <span class="kw">background</span>: <span class="cn">#3a241d</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-38" title="38">    <span class="kw">position</span>: <span class="dv">absolute</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-39" title="39">    <span class="kw">border-radius</span>: <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span><span class="dt">rem</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-40" title="40">    <span class="kw">bottom</span>: <span class="dv">1</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-41" title="41">    <span class="kw">left</span>: <span class="dv">20</span><span class="dt">%</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-42" title="42">    <span class="kw">opacity</span>: <span class="dv">0.7</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-43" title="43">    <span class="kw">z-index</span>: <span class="dv">-1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-44" title="44">}</a></code></pre></div>
+<p>Perhatikan penggunaan peratusan di sini. Sekiranya anda menurunkan penyemak imbas anda, anda dapat melihat bagaimana skala sudut jar juga. Perhatikan juga peratusan lebar dan tinggi untuk elemen balang dan bagaimana setiap elemen benar-benar diposisikan di tengah, disematkan ke bahagian bawah pandang.</p>
+<p>✅ Cubalah ubah warna balang dan kelegapan berbanding kotoran. Apa yang berlaku? Kenapa?</p>
+<hr />
+<h2 id="cabaran">🚀Cabaran</h2>
+<p>Tambahkan kilauan ‘bubble’ ke bahagian bawah kiri balang agar kelihatan lebih menyerupai kaca. Anda akan menggayakan <code>.jar-glossy-long</code> dan<code>.jar-glossy-short</code> agar kelihatan seperti kilauan yang dipantulkan. Ini rupanya:</p>
+<figure>
+<img src="../images/terrarium-final.png" alt="finished terrarium" /><figcaption>finished terrarium</figcaption>
+</figure>
+<p>Untuk menyelesaikan kuiz pasca kuliah, baca modul Belajar ini: <a href="https://docs.microsoft.com/learn/modules/build-simple-website/4-css-basics">Gaya aplikasi HTML anda dengan CSS</a></p>
+<h2 id="kuiz-pasca-kuliah">Kuiz Pasca Kuliah</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/18">Kuiz Pasca Kuliah</a></p>
+<h2 id="mengkaji-belajar-sendiri">Mengkaji &amp; Belajar Sendiri</h2>
+<p>CSS nampaknya sangat mudah, tetapi ada banyak cabaran ketika mencuba gaya aplikasi dengan sempurna untuk semua penyemak imbas dan semua saiz skrin. CSS-Grid dan Flexbox adalah alat yang telah dikembangkan untuk menjadikan pekerjaan itu sedikit lebih tersusun dan lebih dipercayai. Ketahui mengenai alat ini dengan bermain <a href="https://flexboxfroggy.com/">Flexbox Froggy</a> dan <a href="https://codepip.com/games/grid-garden/">Grid Garden</a>.</p>
+<h2 id="tugasan">Tugasan</h2>
+<p><a href="assignment.ms.md">Pemfaktoran Semula CSS</a></p>
+</body>
+</html>

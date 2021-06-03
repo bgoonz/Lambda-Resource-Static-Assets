@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2018-03-18" />
+  <title>Protect user privacy</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Protect user privacy</h1>
+<p class="date">2018-03-18</p>
+</header>
+<p>Users will not install an extension if it compromises their privacy or asks for more permissions that it seems to need. Permission requests should make sense to users and be limited to the critical information necessary to implement the extension. Extensions that collect or transmit any user data must comply with the <a href="/docs/webstore/program_policies#userdata">user data privacy policies</a> .</p>
+<p>Protect and respect extension users by including these precautions to keep their identity safe.</p>
+<p>{% Aside %} Remember: the less data an extension can access, the less data it can accidentally leak. {% endAside %}</p>
+<h2 id="reduce-required-permissions-required_permissions">Reduce required permissions {: #required_permissions }</h2>
+<p>The APIs that an extension can access are specified in the <code>permissions</code> field of the <a href="/docs/extensions/mv3/manifest">manifest</a>. The more permissions granted, the more avenues an attacker has to intercept information. Only the APIs an extension depends on should be listed, and consideration should be given to less invasive options. The less permissions an extension requests, the less permission warnings will be shown to a user. Users are more likely to install an extension with limited warnings.</p>
+<p>Extensions should not “future proof” access to user data by requesting permissions that they do not currently need, but may implement in the future. Include new permissions with extension updates and consider making them <a href="#optional_permissions">optional</a>.</p>
+<h3 id="activetab-activetab">activeTab {: #activeTab }</h3>
+<p>Extensions using host permissions to inject scripts can often substitute <a href="/docs/extensions/mv3/manifest/activeTab"><code>activeTab</code></a> instead. The <code>activeTab</code> permission will grant an extension temporary access to the currently active tab, only when the user <em>invokes</em> the extension. Access is cut off when the user navigates away from or closes the current tab. It serves as an alternative for many uses of <code>&lt;all_urls&gt;</code>.</p>
+<pre class="json/4"><code>{
+  &quot;name&quot;: &quot;Very Secure Extension&quot;,
+  &quot;version&quot;: &quot;1.0&quot;,
+  &quot;description&quot;: &quot;Example of a Secure Extension&quot;,
+  &quot;permissions&quot;: [&quot;activeTab&quot;],
+  &quot;manifest_version&quot;: 2
+}</code></pre>
+<p>The activeTab permission displays no warning messages during installation.</p>
+<h2 id="opt-for-optional-permissions-optional_permissions">Opt for optional permissions {: #optional_permissions }</h2>
+<p>Empower users to choose which features and permissions they need from an extension by including <a href="/docs/extensions/reference/permissions#manifest">optional permissions</a>. If a feature is not essential to the core functionality of an extension, make it optional and move the API or domain into the <code>optional_permissions</code> field.</p>
+<pre class="json/3"><code>{
+  &quot;name&quot;: &quot;Very Secure Extension&quot;,
+  ...
+  &quot;optional_permissions&quot;: [ &quot;tabs&quot;, &quot;https://www.google.com/&quot; ],
+  ...
+}</code></pre>
+<p>Including optional permissions allows an extension to explain why it needs a particular permission when the user enables the relevant feature. The extension can offer the user an option to enable features.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/5hIYQFOiYTl4EwyaYMLx.png”, alt=“A screenshot of a popup asking to enable permissions”, height=“248”, width=“258” %}</p>
+<p>Clicking <strong>Okay!</strong> will trigger the following event in the background script.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;#button&#39;</span>).<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span>(event) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="co">// Permissions must be requested from inside a user gesture, like a button&#39;s</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="co">// click handler.</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="va">chrome</span>.<span class="va">permissions</span>.<span class="at">request</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="dt">permissions</span><span class="op">:</span> [<span class="st">&#39;tabs&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="dt">origins</span><span class="op">:</span> [<span class="st">&#39;https://www.google.com/&#39;</span>]</a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="op">},</span> <span class="kw">function</span>(granted) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-8" title="8">    <span class="co">// The callback argument will be true if the user granted the permissions.</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="cf">if</span> (granted) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-10" title="10">      <span class="co">// doSomething();</span></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-12" title="12">      <span class="co">// doSomethingElse();</span></a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-14" title="14">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>The user will then be prompted with the following request.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/HPfMXx3PsqYcdFjlZ2iz.png”, alt=“A screenshot of optional permissions request.”, height=“323”, width=“800” %}</p>
+<p>Optional permissions can also be implemented in an extension update. Doing so will make the new feature available to users without disabling the extension, as may happen if updating with new required permissions.</p>
+<h2 id="limit-and-secure-user-information-data_collection">Limit and secure user information {: #data_collection }</h2>
+<p>Only request the minimum <a href="/webstore/user_data">user data</a> an extension needs. The less information an extension asks from a user means less exposure if the extension is compromised.</p>
+<p>All requested user data should be treated with care. Store and retrieve data in a secure server with a registered domain. Always use HTTPS to connect and avoid keeping sensitive user data in the client side of an extension as extension storage is not encrypted.</p>
+</body>
+</html>

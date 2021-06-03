@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lifecycle APIs</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Lifecycle APIs</h1>
+</header>
+<div class="caution">
+<p>This section is a work in progress.</p>
+</div>
+<p>Lifecycle APIs are shared by Themes and Plugins.</p>
+<h2 id="validateoptionsoptions-validate"><code>validateOptions({options, validate})</code></h2>
+<p>Return validated and normalized options for the plugin. This method is called before the plugin is initialized.You must return options since the returned options will be passed to plugin during initialization.</p>
+<h3 id="options"><code>options</code></h3>
+<p><code>validateOptions</code> is called with <code>options</code> passed to plugin for validation and normalization.</p>
+<h3 id="validate"><code>validate</code></h3>
+<p><code>validateOptions</code> is called with <code>validate</code> function which takes a <strong><a href="https://www.npmjs.com/package/joi">Joi</a></strong> schema and options as argument, returns validated and normalized options. <code>validate</code> will automatically handle error and validation config.</p>
+<div class="tip">
+<p><a href="https://www.npmjs.com/package/joi">Joi</a> is recommended for validation and normalization of options.</p>
+</div>
+<p>If you don’t use <strong><a href="https://www.npmjs.com/package/joi">Joi</a></strong> for validation you can throw an Error in case of invalid options and return options in case of success.</p>
+<p>```js {8-11} title=“my-plugin/src/index.js” module.exports = function (context, options) { return { name: ‘docusaurus-plugin’, // rest of methods }; };</p>
+<p>module.exports.validateOptions = ({options, validate}) =&gt; { const validatedOptions = validate(myValidationSchema, options); return validationOptions; }; ```</p>
+<p>You can also use ES modules style exports.</p>
+<p>```ts {8-11} title=“my-plugin/src/index.ts” export default function (context, options) { return { name: ‘docusaurus-plugin’, // rest of methods }; }</p>
+<p>export function validateOptions({options, validate}) { const validatedOptions = validate(myValidationSchema, options); return validationOptions; } ```</p>
+<h2 id="validatethemeconfigthemeconfig-validate"><code>validateThemeConfig({themeConfig, validate})</code></h2>
+<p>Return validated and normalized configuration for the theme.</p>
+<h3 id="themeconfig"><code>themeConfig</code></h3>
+<p><code>validateThemeConfig</code> is called with <code>themeConfig</code> provided in <code>docusaurus.config.js</code> for validation and normalization.</p>
+<h3 id="validate-1"><code>validate</code></h3>
+<p><code>validateThemeConfig</code> is called with <code>validate</code> function which takes a <strong><a href="https://www.npmjs.com/package/joi">Joi</a></strong> schema and <code>themeConfig</code> as argument, returns validated and normalized options. <code>validate</code> will automatically handle error and validation config.</p>
+<div class="tip">
+<p><a href="https://www.npmjs.com/package/joi">Joi</a> is recommended for validation and normalization of theme config.</p>
+</div>
+<p>If you don’t use <strong><a href="https://www.npmjs.com/package/joi">Joi</a></strong> for validation you can throw an Error in case of invalid options.</p>
+<p>```js {8-11} title=“my-theme/src/index.js” module.exports = function (context, options) { return { name: ‘docusaurus-plugin’, // rest of methods }; };</p>
+<p>module.exports.validateThemeConfig = ({themeConfig, validate}) =&gt; { const validatedThemeConfig = validate(myValidationSchema, options); return validatedThemeConfig; }; ```</p>
+<p>You can also use ES modules style exports.</p>
+<p>```ts {8-11} title=“my-theme/src/index.ts” export default function (context, options) { return { name: ‘docusaurus-plugin’, // rest of methods }; }</p>
+<p>export function validateThemeConfig({themeConfig, validate}) { const validatedThemeConfig = validate(myValidationSchema, options); return validatedThemeConfig; } ```</p>
+<h2 id="getpathstowatch"><code>getPathsToWatch()</code></h2>
+<p>Specifies the paths to watch for plugins and themes. The paths are watched by the dev server so that the plugin lifecycles are reloaded when contents in the watched paths change. Note that the plugins and themes modules are initially called with <code>context</code> and <code>options</code> from Node, which you may use to find the necessary directory information about the site.</p>
+<p>Example:</p>
+<p><code>js {5-7} title="docusaurus-plugin/src/index.js" const path = require('path'); module.exports = function (context, options) {   return {     name: 'docusaurus-plugin',     getPathsToWatch() {       const contentPath = path.resolve(context.siteDir, options.path);       return [`${contentPath}/**/*.{ts,tsx}`];     },   }; };</code></p>
+<h2 id="async-loadcontent"><code>async loadContent()</code></h2>
+<p>Plugins should use this lifecycle to fetch from data sources (filesystem, remote API, headless CMS, etc) or doing some server processing.</p>
+<p>For example, this plugin below return a random integer between 1 to 10 as content;</p>
+<p><code>js {5-6} title="docusaurus-plugin/src/index.js" const path = require('path'); module.exports = function (context, options) {   return {     name: 'docusaurus-plugin',     async loadContent() {       return 1 + Math.floor(Math.random() * 10);     },   }; };</code></p>
+<h2 id="async-contentloadedcontent-actions"><code>async contentLoaded({content, actions})</code></h2>
+<p>Plugins should use the data loaded in <code>loadContent</code> and construct the pages/routes that consume the loaded data (optional).</p>
+<h3 id="content"><code>content</code></h3>
+<p><code>contentLoaded</code> will be called <em>after</em> <code>loadContent</code> is done, the return value of <code>loadContent()</code> will be passed to <code>contentLoaded</code> as <code>content</code>.</p>
+<h3 id="actions"><code>actions</code></h3>
+<p><code>actions</code> contain two functions:</p>
+<ul>
+<li><code>addRoute(config: RouteConfig): void</code></li>
+</ul>
+<p>Create a route to add to the website.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">interface</span> RouteConfig <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  path<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  component<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  modules<span class="op">?:</span> RouteModule<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  routes<span class="op">?:</span> RouteConfig<span class="op">[];</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  exact<span class="op">?:</span> <span class="dt">boolean</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  priority<span class="op">?:</span> <span class="dt">number</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="kw">interface</span> RouteModule <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="op">[</span><span class="im">module</span>: <span class="dt">string</span>]: <span class="dt">Module</span> | <span class="dt">RouteModule</span> | <span class="dt">RouteModule</span>[]<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="kw">type</span> Module <span class="op">=</span></a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="op">|</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-14" title="14">      path<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-15" title="15">      __import<span class="op">?:</span> <span class="dt">boolean</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-16" title="16">      query<span class="op">?:</span> ParsedUrlQueryInput<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-17" title="17">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-18" title="18">  <span class="op">|</span> string<span class="op">;</span></a></code></pre></div>
+<ul>
+<li><code>createData(name: string, data: any): Promise&lt;string&gt;</code></li>
+</ul>
+<p>A function to help you create static data (generally json or string), that you can provide to your routes as props.</p>
+<p>For example, this plugin below create a <code>/friends</code> page which display <code>Your friends are: Yangshun, Sebastien</code>:</p>
+<p>```jsx title=“website/src/components/Friends.js” import React from ‘react’;</p>
+export default function FriendsComponent({friends}) { return
+<div>
+Your friends are {friends.join(‘,’)}
+</div>
+<p>; } ```</p>
+<p>```js {4-23} title=“docusaurus-friends-plugin/src/index.js” export default function friendsPlugin(context, options) { return { name: ‘docusaurus-friends-plugin’, async contentLoaded({content, actions}) { const {createData, addRoute} = actions; // Create friends.json const friends = [‘Yangshun’, ‘Sebastien’]; const friendsJsonPath = await createData( ‘friends.json’, JSON.stringify(friends), );</p>
+<pre><code>  // Add the &#39;/friends&#39; routes, and ensure it receives the friends props
+  addRoute({
+    path: &#39;/friends&#39;,
+    component: &#39;@site/src/components/Friends.js&#39;,
+    modules: {
+      // propName -&gt; JSON file path
+      friends: friendsJsonPath,
+    },
+    exact: true,
+  });
+},</code></pre>
+<p>}; } ```</p>
+<ul>
+<li><code>setGlobalData(data: any): void</code></li>
+</ul>
+<p>This function permits to create some global plugin data, that can be read from any page, including the pages created by other plugins, and your theme layout.</p>
+<p>This data become accessible to your client-side/theme code, through the <a href="./docusaurus-core.md#useglobaldata"><code>useGlobalData</code></a> and <a href="./docusaurus-core.md#useplugindatapluginname-string-pluginid-string"><code>usePluginData</code></a>.</p>
+<p>One this data is created, you can access it with the global data hooks APIs.</p>
+<div class="caution">
+<p>Global data is… global: its size affects the loading time of all pages of your site, so try to keep it small.</p>
+<p>Prefer <code>createData</code> and page-specific data whenever possible.</p>
+</div>
+<p>For example, this plugin below create a <code>/friends</code> page which display <code>Your friends are: Yangshun, Sebastien</code>:</p>
+<p>```jsx title=“website/src/components/Friends.js” import React from ‘react’; import {usePluginData} from ‘<span class="citation" data-cites="docusaurus/useGlobalData">@docusaurus/useGlobalData</span>’;</p>
+export default function FriendsComponent() { const {friends} = usePluginData(‘my-friends-plugin’); return
+<div>
+Your friends are {friends.join(‘,’)}
+</div>
+<p>; } ```</p>
+<p>```js {4-14} title=“docusaurus-friends-plugin/src/index.js” export default function friendsPlugin(context, options) { return { name: ‘docusaurus-friends-plugin’, async contentLoaded({content, actions}) { const {setGlobalData, addRoute} = actions; // Create friends global data setGlobalData({friends: [‘Yangshun’, ‘Sebastien’]});</p>
+<pre><code>  // Add the &#39;/friends&#39; routes
+  addRoute({
+    path: &#39;/friends&#39;,
+    component: &#39;@site/src/components/Friends.js&#39;,
+    exact: true,
+  });
+},</code></pre>
+<p>}; } ```</p>
+<h2 id="configurewebpackconfig-isserver-utils"><code>configureWebpack(config, isServer, utils)</code></h2>
+<p>Modifies the internal webpack config. If the return value is a JavaScript object, it will be merged into the final config using <a href="https://github.com/survivejs/webpack-merge"><code>webpack-merge</code></a>. If it is a function, it will be called and receive <code>config</code> as the first argument and an <code>isServer</code> flag as the argument argument.</p>
+<h3 id="config"><code>config</code></h3>
+<p><code>configureWebpack</code> is called with <code>config</code> generated according to client/server build. You may treat this as the base config to be merged with.</p>
+<h3 id="isserver"><code>isServer</code></h3>
+<p><code>configureWebpack</code> will be called both in server build and in client build. The server build receives <code>true</code> and the client build receives <code>false</code> as <code>isServer</code>.</p>
+<h3 id="utils"><code>utils</code></h3>
+<p>The initial call to <code>configureWebpack</code> also receives a util object consists of three functions:</p>
+<ul>
+<li><code>getStyleLoaders(isServer: boolean, cssOptions: {[key: string]: any}): Loader[]</code></li>
+<li><code>getCacheLoader(isServer: boolean, cacheOptions?: {}): Loader | null</code></li>
+<li><code>getBabelLoader(isServer: boolean, babelOptions?: {}): Loader</code></li>
+</ul>
+<p>You may use them to return your webpack configures conditionally.</p>
+<p>For example, this plugin below modify the webpack config to transpile <code>.foo</code> file.</p>
+<p><code>js title="docusaurus-plugin/src/index.js" module.exports = function (context, options) {   return {     name: 'custom-docusaurus-plugin',     // highlight-start     configureWebpack(config, isServer, utils) {       const {getCacheLoader} = utils;       return {         module: {           rules: [             {               test: /\.foo$/,               use: [getCacheLoader(isServer), 'my-custom-webpack-loader'],             },           ],         },       };     },     // highlight-end   }; };</code></p>
+<h3 id="merge-strategy">Merge strategy</h3>
+<p>We merge the Webpack configuration parts of plugins into the global Webpack config using <a href="https://github.com/survivejs/webpack-merge">webpack-merge</a>.</p>
+<p>It is possible to specify the merge strategy. For example, if you want a webpack rule to be prepended instead of appended:</p>
+<p><code>js title="docusaurus-plugin/src/index.js" module.exports = function (context, options) {   return {     name: 'custom-docusaurus-plugin',     configureWebpack(config, isServer, utils) {       return {         // highlight-start         mergeStrategy: {'module.rules': 'prepend'},         module: {rules: [myRuleToPrepend]},         // highlight-end       };     },   }; };</code></p>
+<p>Read the <a href="https://github.com/survivejs/webpack-merge#merging-with-strategies">webpack-merge strategy doc</a> for more details.</p>
+<h2 id="configurepostcssoptions"><code>configurePostCss(options)</code></h2>
+<p>Modifies <a href="https://webpack.js.org/loaders/postcss-loader/#postcssoptions"><code>postcssOptions</code> of <code>postcss-loader</code></a> during the generation of the client bundle.</p>
+<p>Should return the mutated <code>postcssOptions</code>.</p>
+<p>By default, <code>postcssOptions</code> looks like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> postcssOptions <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">ident</span><span class="op">:</span> <span class="st">&#39;postcss&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="dt">plugins</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="at">require</span>(<span class="st">&#39;postcss-preset-env&#39;</span>)(<span class="op">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5">      <span class="dt">autoprefixer</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" title="6">        <span class="dt">flexbox</span><span class="op">:</span> <span class="st">&#39;no-2009&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="op">},</span></a>
+<a class="sourceLine" id="cb4-8" title="8">      <span class="dt">stage</span><span class="op">:</span> <span class="dv">4</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="op">}</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-10" title="10">  ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="op">};</span></a></code></pre></div>
+<p>Example:</p>
+<p><code>js title="docusaurus-plugin/src/index.js" module.exports = function (context, options) {   return {     name: 'docusaurus-plugin',     // highlight-start     configurePostCss(postcssOptions) {       // Appends new PostCSS plugin.       postcssOptions.plugins.push(require('postcss-import'));       return postcssOptions;     },     // highlight-end   }; };</code></p>
+<h2 id="postbuildprops"><code>postBuild(props)</code></h2>
+<p>Called when a (production) build finishes.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode ts"><code class="sourceCode typescript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">type</span> Props <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  siteDir<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  generatedFilesDir<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  siteConfig<span class="op">:</span> DocusaurusConfig<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  outDir<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">  baseUrl<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  headTags<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">  preBodyTags<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-9" title="9">  postBodyTags<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-10" title="10">  routesPaths<span class="op">:</span> <span class="dt">string</span><span class="op">[];</span></a>
+<a class="sourceLine" id="cb5-11" title="11">  plugins<span class="op">:</span> <span class="bu">Plugin</span><span class="op">&lt;</span><span class="dt">any</span><span class="op">&gt;[];</span></a>
+<a class="sourceLine" id="cb5-12" title="12">  stats<span class="op">:</span> <span class="va">Stats</span><span class="op">.</span><span class="at">ToJsonOutput</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="op">};</span></a></code></pre></div>
+<p>Example:</p>
+<p><code>js {4-11} title="docusaurus-plugin/src/index.js" module.exports = function (context, options) {   return {     name: 'docusaurus-plugin',     async postBuild({siteConfig = {}, routesPaths = [], outDir, stats}) {       // Print out to console all the rendered routes.       routesPaths.map((route) =&gt; {         console.log(route);       });       // Print out to console all the webpack stats.       console.log(stats);     },   }; };</code></p>
+<h2 id="extendclicli"><code>extendCli(cli)</code></h2>
+<p>Register an extra command to enhance the CLI of docusaurus. <code>cli</code> is <a href="https://www.npmjs.com/package/commander">commander</a> object.</p>
+<p>Example:</p>
+<p><code>js {4-11} title="docusaurus-plugin/src/index.js" module.exports = function (context, options) {   return {     name: 'docusaurus-plugin',     extendCli(cli) {       cli         .command('roll')         .description('Roll a random number between 1 and 1000')         .action(() =&gt; {           console.log(Math.floor(Math.random() * 1000 + 1));         });     },   }; };</code></p>
+<h2 id="injecthtmltags"><code>injectHtmlTags()</code></h2>
+<p>Inject head and/or body HTML tags to Docusaurus generated HTML.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode typescript"><code class="sourceCode typescript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">function</span> <span class="fu">injectHtmlTags</span>()<span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  headTags<span class="op">?:</span> HtmlTags<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  preBodyTags<span class="op">?:</span> HtmlTags<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  postBodyTags<span class="op">?:</span> HtmlTags<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="op">};</span></a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="kw">type</span> HtmlTags <span class="op">=</span> <span class="dt">string</span> <span class="op">|</span> HtmlTagObject <span class="op">|</span> (<span class="dt">string</span> <span class="op">|</span> HtmlTagObject)<span class="op">[];</span></a>
+<a class="sourceLine" id="cb6-8" title="8"></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="kw">interface</span> HtmlTagObject <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-10" title="10">  <span class="co">/**</span></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="co">   * Attributes of the HTML tag</span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="co">   * E.g. `{&#39;disabled&#39;: true, &#39;value&#39;: &#39;demo&#39;, &#39;rel&#39;: &#39;preconnect&#39;}`</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co">   */</span></a>
+<a class="sourceLine" id="cb6-14" title="14">  attributes<span class="op">?:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-15" title="15">    <span class="op">[</span>attributeName<span class="op">:</span> <span class="dt">string</span><span class="op">]:</span> <span class="dt">string</span> <span class="op">|</span> <span class="dt">boolean</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-16" title="16">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb6-17" title="17">  <span class="co">/**</span></a>
+<a class="sourceLine" id="cb6-18" title="18"><span class="co">   * The tag name e.g. `div`, `script`, `link`, `meta`</span></a>
+<a class="sourceLine" id="cb6-19" title="19"><span class="co">   */</span></a>
+<a class="sourceLine" id="cb6-20" title="20">  tagName<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-21" title="21">  <span class="co">/**</span></a>
+<a class="sourceLine" id="cb6-22" title="22"><span class="co">   * The inner HTML</span></a>
+<a class="sourceLine" id="cb6-23" title="23"><span class="co">   */</span></a>
+<a class="sourceLine" id="cb6-24" title="24">  innerHTML<span class="op">?:</span> <span class="dt">string</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-25" title="25"><span class="op">}</span></a></code></pre></div>
+<p>Example:</p>
+<p><code>js title="docusaurus-plugin/src/index.js" module.exports = function (context, options) {   return {     name: 'docusaurus-plugin',     // highlight-start     injectHtmlTags() {       return {         headTags: [           {             tagName: 'link',             attributes: {               rel: 'preconnect',               href: 'https://www.github.com',             },           },         ],         preBodyTags: [           {             tagName: 'script',             attributes: {               charset: 'utf-8',               src: '/noflash.js',             },           },         ],         postBodyTags: [`&lt;div&gt; This is post body &lt;/div&gt;`],       };     },     // highlight-end   }; };</code></p>
+<h2 id="getthemepath"><code>getThemePath()</code></h2>
+<p>Returns the path to the directory where the theme components can be found. When your users calls <code>swizzle</code>, <code>getThemePath</code> is called and its returned path is used to find your theme components.</p>
+<p>If you use the folder directory above, your <code>getThemePath</code> can be:</p>
+<p>```js {6-8} title=“my-theme/src/index.js” const path = require(‘path’);</p>
+<p>module.exports = function (context, options) { return { name: ‘name-of-my-theme’, getThemePath() { return path.resolve(__dirname, ‘./theme’); }, }; }; ```</p>
+<h2 id="gettypescriptthemepath"><code>getTypeScriptThemePath()</code></h2>
+<p>Similar to <code>getThemePath()</code>, it should return the path to the directory where the source code of TypeScript theme components can be found. Theme components under this path will <strong>not</strong> be resolved by Webpack. Therefore, it is not a replacement of <code>getThemePath()</code>. Instead, this path is purely for swizzling TypeScript theme components.</p>
+<p>If you want to support TypeScript component swizzling for your theme, you can make the path returned by <code>getTypeScriptThemePath()</code> be your source directory, and make path returned by <code>getThemePath()</code> be the compiled JavaScript output.</p>
+<p>Example:</p>
+<p>```js {6-13} title=“my-theme/src/index.js” const path = require(‘path’);</p>
+<p>module.exports = function (context, options) { return { name: ‘name-of-my-theme’, getThemePath() { // Where compiled JavaScript output lives return path.join(__dirname, ‘..’, ‘lib’, ‘theme’); }, getTypeScriptThemePath() { // Where TypeScript source code lives return path.resolve(__dirname, ‘./theme’); }, }; }; ```</p>
+<h2 id="getswizzlecomponentlist"><code>getSwizzleComponentList()</code></h2>
+<p>Return a list of stable component that are considered as safe for swizzling. These components will be listed in swizzle component without <code>--danger</code>. All the components are considers unstable by default. If an empty array is returned then all components are considered unstable, if <code>undefined</code> is returned then all component are considered stable.</p>
+<p>```js {0-12} title=“my-theme/src/index.js” const swizzleAllowedComponents = [ ‘CodeBlock’, ‘DocSidebar’, ‘Footer’, ‘NotFound’, ‘SearchBar’, ‘hooks/useTheme’, ‘prism-include-languages’,];</p>
+<p>module.exports.getSwizzleComponentList = () =&gt; swizzleAllowedComponents; ```</p>
+<h2 id="getclientmodules"><code>getClientModules()</code></h2>
+<p>Returns an array of paths to the modules that are to be imported in the client bundle. These modules are imported globally before React even renders the initial UI.</p>
+<p>As an example, to make your theme load a <code>customCss</code> or <code>customJs</code> file path from <code>options</code> passed in by the user:</p>
+<p>```js {7-9} title=“my-theme/src/index.js” const path = require(‘path’);</p>
+<p>module.exports = function (context, options) { const {customCss, customJs} = options || {}; return { name: ‘name-of-my-theme’, getClientModules() { return [customCss, customJs]; }, }; }; ```</p>
+<!--
+For example, the in docusaurus-plugin-content-docs:
+
+    In loadContent, it loads the doc Markdown files based on the specified directory in options (defaulting to docs).
+    In contentLoaded, for each doc Markdown file, a route is created: /doc/installation, /doc/getting-started, etc.
+ -->
+<h2 id="example">Example</h2>
+<p>Here’s a mind model for a presumptuous plugin implementation.</p>
+<pre class="jsx"><code>const DEFAULT_OPTIONS = {
+  // Some defaults.
+};
+
+// A JavaScript function that returns an object.
+// `context` is provided by Docusaurus. Example: siteConfig can be accessed from context.
+// `opts` is the user-defined options.
+module.exports = function (context, opts) {
+  // Merge defaults with user-defined options.
+  const options = {...DEFAULT_OPTIONS, ...options};
+
+  return {
+    // A compulsory field used as the namespace for directories to cache
+    // the intermediate data for each plugin.
+    // If you&#39;re writing your own local plugin, you will want it to
+    // be unique in order not to potentially conflict with imported plugins.
+    // A good way will be to add your own project name within.
+    name: &#39;docusaurus-my-project-cool-plugin&#39;,
+
+    async loadContent() {
+      // The loadContent hook is executed after siteConfig and env has been loaded.
+      // You can return a JavaScript object that will be passed to contentLoaded hook.
+    },
+
+    async contentLoaded({content, actions}) {
+      // The contentLoaded hook is done after loadContent hook is done.
+      // `actions` are set of functional API provided by Docusaurus (e.g. addRoute)
+    },
+
+    async postBuild(props) {
+      // After docusaurus &lt;build&gt; finish.
+    },
+
+    // TODO
+    async postStart(props) {
+      // docusaurus &lt;start&gt; finish
+    },
+
+    // TODO
+    afterDevServer(app, server) {
+      // https://webpack.js.org/configuration/dev-server/#devserverbefore
+    },
+
+    // TODO
+    beforeDevServer(app, server) {
+      // https://webpack.js.org/configuration/dev-server/#devserverafter
+    },
+
+    configureWebpack(config, isServer) {
+      // Modify internal webpack config. If returned value is an Object, it
+      // will be merged into the final config using webpack-merge;
+      // If the returned value is a function, it will receive the config as the 1st argument and an isServer flag as the 2nd argument.
+    },
+
+    getPathsToWatch() {
+      // Paths to watch.
+    },
+
+    getThemePath() {
+      // Returns the path to the directory where the theme components can
+      // be found.
+    },
+
+    getClientModules() {
+      // Return an array of paths to the modules that are to be imported
+      // in the client bundle. These modules are imported globally before
+      // React even renders the initial UI.
+    },
+
+    extendCli(cli) {
+      // Register an extra command to enhance the CLI of Docusaurus
+    },
+
+    injectHtmlTags() {
+      // Inject head and/or body HTML tags.
+    },
+  };
+};</code></pre>
+</body>
+</html>

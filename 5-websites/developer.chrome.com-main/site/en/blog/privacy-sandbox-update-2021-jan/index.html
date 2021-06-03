@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2021-01-25" />
+  <title>Progress update on the Privacy Sandbox initiative</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Progress update on the Privacy Sandbox initiative</h1>
+<p class="date">2021-01-25</p>
+</header>
+<p><a href="https://web.dev/digging-into-the-privacy-sandbox/">The Privacy Sandbox initiative</a> proposes a set of privacy-preserving APIs to support business models that fund the open web in the absence of tracking mechanisms like third-party cookies. It was introduced in 2019, and Chrome shared updates on progress in <a href="https://blog.chromium.org/2020/01/building-more-private-web-path-towards.html">January</a> and <a href="https://blog.chromium.org/2020/10/progress-on-privacy-sandbox-and.html">October</a> last year.</p>
+<p>After a year of incubation, 2021 will be a year of testing with continued <a href="/blog/privacy-sandbox-participate">opportunities for the web ecosystem to get involved</a>. This post provides an update on the status of the Privacy Sandbox APIs and proposals.</p>
+<h2 id="progress-on-key-use-cases">Progress on key use cases</h2>
+<h3 id="placing-relevant-ads-on-a-site">Placing relevant ads on a site</h3>
+<p>Publishers and advertisers want to provide content, including ads, that is relevant and interesting to the user. On today’s web, people’s interests are often gauged by observing what sites or pages they visit, relying on third-party cookies or less-transparent and undesirable mechanisms like device fingerprinting.</p>
+<p>In March, with release 89, Chrome will launch an <a href="https://web.dev/origin-trials/">origin trial</a> for the <a href="https://github.com/WICG/floc">Federated Learning of Cohorts API</a> (FLoC). FLoC proposes a new way to reach people with relevant content and ads by clustering large groups of people with similar browsing patterns, hiding individuals “in the crowd” and keeping their web history on their browser. Today Google Ads is sharing <a href="https://blog.google/products/ads-commerce/2021-01-privacy-sandbox">an update from their tests of the FLoC algorithm</a>, which show that the proposed API could be similarly effective as third-party cookies in serving relevant interest-based ads.</p>
+<h3 id="building-first-party-audiences">Building first-party audiences</h3>
+<p>One of the use cases that has had exciting discussions in the standards community is around how companies can build audiences, and reach prior visitors to their websites through remarketing. Last year Chrome introduced <a href="https://github.com/WICG/turtledove">TURTLEDOVE</a>, a proposal that addresses this use case, while providing the same privacy protections as the other proposals. A website may ask the browser to store an Interest Group, including information about bidding and ad display, and on-device bidding by potential ads buyers would be based on this Interest Group.</p>
+<p>Chrome’s new <a href="https://github.com/WICG/turtledove/blob/master/FLEDGE.md">FLEDGE</a> proposal ( First “Locally-Executed Decision over Groups” Experiment) expands on TURTLEDOVE by incorporating new concepts from many other contributed proposals. FLEDGE includes a way for on-device bidding algorithms to use additional information from a new trusted server designed for this sole purpose. To help early experimentation before the new trusted servers are available, we propose a “Bring Your Own Server” model and expect to ship this first experiment during 2021.</p>
+<h3 id="measuring-advertising-effectiveness">Measuring advertising effectiveness</h3>
+<p>When a marketer runs an ad campaign, it’s important for them to understand how many people see each ad and if this results in an action by the consumer such as a purchase or sign-up.</p>
+<p>In September 2020, we opened up the <a href="https://web.dev/conversion-measurement/">Event Conversion Measurement API</a> for testing in public Chrome origin trials. It allows marketers to measure conversions without the use of third-party cookies; instead, the browser records clicks and conversions and shares an anonymized report. A future version of this technology will also support “view-through conversions” (when people see an ad but act on it later).</p>
+<p>To help marketers understand the audience reach of a particular ad campaign, in April 2020 we published the <a href="https://github.com/csharrison/aggregate-reporting-api">Aggregate Measurement API</a>, which helps measure how many times unique users viewed an ad across multiple sites, again, without<br />
+revealing data that could be used to identify individuals. This is made possible by reporting data only once it’s met a certain threshold for aggregation. We’re planning to open up the Aggregate Measurement API for testing via public origin trials in the first half of the year.</p>
+<h3 id="preventing-fraud">Preventing fraud</h3>
+<p>Sites and publishers need to ensure they are able to distinguish spammers, fraudsters and bots from real users. Last July we opened up the <a href="https://web.dev/trust-tokens/">Trust Tokens API</a> for testing. This supports evaluating a user’s authenticity to combat fraud without needing to know the user’s identity. Chrome 89 introduces an origin trial to support a new type of Trust Token issuer that can improve the detection of fraud originating on mobile devices while still safeguarding user privacy.</p>
+<h2 id="cookie-security-improvements">Cookie security improvements</h2>
+<p>In 2020, we also improved the safety of current web technology. The <a href="https://web.dev/samesite-cookies-explained/">SameSite cookie policy</a> has been adopted by Chrome and Edge and is coming to Firefox soon, treating cookies as first-party, unless the developer indicates that they need to be accessed across sites. We’ve also rolled this out for Android webview and expect to enforce the “SameSite=Lax” default treatment beginning in apps targeting Android S.</p>
+<p>New in this month’s Chrome 88 release, we are strengthening this policy by <a href="https://web.dev/schemeful-samesite/">modifying the definition of SameSite</a> to prevent some forms of cross-site attacks, including downgrading a connection’s security. Now secure and insecure versions of the same host domain, such as <a href="https://site.example">https://site.example</a> and <a href="http://site.example">http://site.example</a>, are considered as third-party context to each other.</p>
+<p>We recognize that real-world websites can span multiple domains or country code domains (such as .com, co.uk, and .de). With Chrome 89, we will be introducing <strong><a href="https://github.com/privacycg/first-party-sets">First Party Sets</a></strong> as an origin trial in Chrome so domain owners can explicitly declare a group of related web domains as belonging to the same organization, and be treated as “same party” to each other. Users can then for example stay logged in on a shopping site even if the site experience spans multiple domains. <a href="https://www.chromium.org/updates/first-party-sets">Sign up for the trial.</a></p>
+<h2 id="preventing-covert-tracking">Preventing covert tracking</h2>
+<p>We’ve also been making progress on changes in Chrome to prevent existing intrusive tracking techniques, and enable mitigating workarounds:</p>
+<ul>
+<li><p>In the coming weeks, we are completing the Chrome stable rollout of the new <a href="https://web.dev/user-agent-client-hints/">User-Agent Client Hints (UA-CH) API</a> which enables developers to request specific information about a user’s browser instead of getting it all by default. We encourage developers to begin migrating to the UA-CH API, as Chrome will eventually begin limiting the information available in the traditional User-Agent string which today can be used for fingerprinting.</p></li>
+<li><p>Last week, we introduced <a href="https://github.com/bslassey/ip-blindness">Gnatcatcher</a>, a proposal that allows groups of users to send their traffic through the same privatizing server, effectively hiding their IP addresses from the site host. Gnatcatcher also ensures that sites requiring access to IP addresses for legitimate purposes such as abuse prevention can do so, subject to certification and auditing.</p></li>
+<li><p>As we shared last October, we’re also closing the ability for a site to observe other sites that a user might have visited through <a href="https://developers.google.com/web/updates/2020/10/http-cache-partitioning">caching</a> mechanisms. This ensures that cached resources can only be accessed by the site that made the original request, decreasing the risk of security attacks such as cross-site tracking and search attacks. This change will be rolled out to all Chrome users beginning in March with Chrome 89.</p></li>
+</ul>
+<h2 id="find-out-more">Find out more</h2>
+<ul>
+<li><a href="https://web.dev/digging-into-the-privacy-sandbox/">Digging in to the Privacy Sandbox</a></li>
+<li><a href="https://www.chromium.org/Home/chromium-privacy/privacy-sandbox">The Privacy Sandbox</a></li>
+<li><a href="/blog/privacy-sandbox-participate/">How to participate in the Privacy Sandbox initiative</a></li>
+<li><a href="https://blog.chromium.org/">Privacy Sandbox in 2021: Testing a More Private Web</a></li>
+</ul>
+<hr />
+<p>
+Photo by <a href="https://unsplash.com/@adityaries?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Aditya Saxena</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a>
+</p>
+</body>
+</html>

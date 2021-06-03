@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Items:Insert</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Items:Insert</h1>
+</header>
+<p>Inserts a new <a href="/docs/webstore/webstore_api/items/">item</a>.</p>
+<p>This method supports an upload URI and accepts uploaded media.</p>
+<h2 id="request-request">Request {: #request }</h2>
+<h3 id="http-request">HTTP request</h3>
+<pre class="text"><code>POST https://www.googleapis.com/upload/chromewebstore/v1.1/items</code></pre>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>
+Parameter name
+</th>
+<th>
+Value
+</th>
+<th>
+Description
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="3">
+<b>Required query parameters</b>
+</td>
+</tr>
+<tr id="uploadType_id">
+<td>
+<code>uploadType</code>
+</td>
+<td>
+<code>string</code>
+</td>
+<td>
+The type of upload request to the <strong>/upload</strong> URI. The only accepted value is <code>media</code>: a simple upload of the media data.
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<b>Optional query parameters</b>
+</td>
+</tr>
+<tr id="publisherEmail">
+<td>
+<code>publisherEmail</code>
+</td>
+<td>
+<code>string</code>
+</td>
+<td>
+The email of the publisher who owns the items. Defaults to the caller’s email address.
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="authorization-auth">Authorization {: #auth }</h3>
+<p>This request requires authorization with the following scope.</p>
+<table>
+<thead>
+<tr>
+<th>
+Scope
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<code>https://www.googleapis.com/auth/chromewebstore</code>
+</td>
+</tr>
+<tr>
+<td>
+The above URL is used as the scope parameter when generating an access token. For more details on API authorization and authentication, consult the <a href="https://developers.google.com/accounts/docs/OAuth2">OAuth 2.0 documentation</a>.
+</td>
+</tr>
+</tbody>
+</table>
+<h3 id="request-body">Request body</h3>
+<p>Do not supply a request body with this method.</p>
+<h2 id="response-response">Response {: #response }</h2>
+<p>If successful, this method returns an <a href="/docs/webstore/webstore_api/items/#resource">Items resource</a> in the response body.</p>
+</body>
+</html>

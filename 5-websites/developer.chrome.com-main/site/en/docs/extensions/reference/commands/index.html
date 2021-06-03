@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>index</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h2 id="manifest">Manifest</h2>
+<p>You must have a <code>"manifest_version"</code> of at least <code>2</code> to use this API.</p>
+<h2 id="usage">Usage</h2>
+<p>The commands API allows you to define specific commands, and bind them to a default key combination. Each command your extension accepts must be listed in the manifest as an attribute of the ‘commands’ manifest key. An extension can have many commands but only 4 suggested keys can be specified. The user can manually add more shortcuts from the chrome://extensions/configureCommands dialog.</p>
+<p>Supported keys: A-Z, 0-9, Comma, Period, Home, End, PageUp, PageDown, Space, Insert, Delete, Arrow keys (Up, Down, Left, Right) and the Media Keys (MediaNextTrack, MediaPlayPause, MediaPrevTrack, MediaStop).</p>
+<p>Note: All key combinations must include either Ctrl* or Alt. Combinations that involve Ctrl+Alt are not permitted in order to avoid conflicts with the AltGr key. Shift can be used in addition to Alt or Ctrl, but is not required. Modifiers (such as Ctrl) can not be used in combination with the Media Keys. Tab key was removed from list of supported keys in Chrome version 33 and above for accessibility reasons.</p>
+<p>* Please note that on Mac ‘Ctrl’ is automatically converted to ‘Command’. If you want ‘Ctrl’ instead, please specify ‘MacCtrl’ under <code>"mac"</code>. Specifying ‘MacCtrl’ under <code>"default"</code> will cause the extension to be uninstallable.</p>
+<p>* Additionally, on Chrome OS, you can specify ‘Search’ as a modifier.</p>
+<p>Certain Chrome shortcuts (e.g. window management) always take priority over Extension Command shortcuts and can not be overwritten.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;My extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;commands&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="dt">&quot;toggle-feature-foo&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-6" title="6">      <span class="dt">&quot;suggested_key&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-7" title="7">        <span class="dt">&quot;default&quot;</span><span class="fu">:</span> <span class="st">&quot;Ctrl+Shift+Y&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8">        <span class="dt">&quot;mac&quot;</span><span class="fu">:</span> <span class="st">&quot;Command+Shift+Y&quot;</span></a>
+<a class="sourceLine" id="cb1-9" title="9">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-10" title="10">      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Toggle feature foo&quot;</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="dt">&quot;_execute_browser_action&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-13" title="13">      <span class="dt">&quot;suggested_key&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-14" title="14">        <span class="dt">&quot;windows&quot;</span><span class="fu">:</span> <span class="st">&quot;Ctrl+Shift+Y&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-15" title="15">        <span class="dt">&quot;mac&quot;</span><span class="fu">:</span> <span class="st">&quot;Command+Shift+Y&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-16" title="16">        <span class="dt">&quot;chromeos&quot;</span><span class="fu">:</span> <span class="st">&quot;Ctrl+Shift+U&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-17" title="17">        <span class="dt">&quot;linux&quot;</span><span class="fu">:</span> <span class="st">&quot;Ctrl+Shift+J&quot;</span></a>
+<a class="sourceLine" id="cb1-18" title="18">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-19" title="19">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-20" title="20">    <span class="dt">&quot;_execute_page_action&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-21" title="21">      <span class="dt">&quot;suggested_key&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-22" title="22">        <span class="dt">&quot;default&quot;</span><span class="fu">:</span> <span class="st">&quot;Ctrl+Shift+E&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-23" title="23">        <span class="dt">&quot;windows&quot;</span><span class="fu">:</span> <span class="st">&quot;Alt+Shift+P&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-24" title="24">        <span class="dt">&quot;mac&quot;</span><span class="fu">:</span> <span class="st">&quot;Alt+Shift+P&quot;</span></a>
+<a class="sourceLine" id="cb1-25" title="25">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-26" title="26">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-27" title="27">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-28" title="28">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-29" title="29"><span class="fu">}</span></a></code></pre></div>
+<p>In your background page, you can bind a handler to each of the commands defined in the manifest (except for ‘_execute_browser_action’ and ‘_execute_page_action’) via onCommand.addListener. For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">chrome</span>.<span class="va">commands</span>.<span class="va">onCommand</span>.<span class="at">addListener</span>(<span class="kw">function</span>(command) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Command:&#39;</span><span class="op">,</span> command)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>The ‘_execute_browser_action’ and ‘_execute_page_action’ commands are reserved for the action of opening your extension’s popups. They won’t normally generate events that you can handle. If you need to take action based on your popup opening, consider listening for an ‘onDomReady’ event inside your popup’s code.</p>
+<h2 id="scope">Scope</h2>
+<p>By default, Commands are scoped to the Chrome browser, which means that while the browser does not have focus, the shortcut will be inactive. On desktop Chrome, Commands can instead have global scope, as of version 35, and will then also work while Chrome does *not* have focus. NOTE: The exception here is Chrome OS, where global commands are not allowed at the moment.</p>
+<p>The user is free to designate any shortcut as global using the UI in chrome://extensions \ Keyboard Shortcuts, but the extension developer is limited to specifying only Ctrl+Shift+[0..9] as global shortcuts. This is to minimize the risk of overriding shortcuts in other applications since if, for example, Alt+P were to be allowed as global, the printing shortcut might not work in other applications.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;My extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="dt">&quot;commands&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="dt">&quot;toggle-feature-foo&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-6" title="6">      <span class="dt">&quot;suggested_key&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-7" title="7">        <span class="dt">&quot;default&quot;</span><span class="fu">:</span> <span class="st">&quot;Ctrl+Shift+5&quot;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb3-9" title="9">      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Toggle feature foo&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-10" title="10">      <span class="dt">&quot;global&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb3-12" title="12">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb3-13" title="13">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="fu">}</span></a></code></pre></div>
+</body>
+</html>

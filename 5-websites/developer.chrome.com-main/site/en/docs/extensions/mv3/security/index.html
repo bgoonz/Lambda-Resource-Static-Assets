@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2018-03-06" />
+  <title>Stay secure</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Stay secure</h1>
+<p class="date">2018-03-06</p>
+</header>
+<p>Extensions have access to special privileges within the browser, making them an appealing target for attackers. If an extension is compromised, <em>every</em> user of that extension becomes vulnerable to malicious and unwanted intrusion. Keep an extension secure and its users protected by incorporating these practices.</p>
+<h2 id="protect-developer-accounts-pda">Protect developer accounts {: #PDA }</h2>
+<p>Extension code is uploaded and updated through Google accounts. If developers’ accounts are compromised, an attacker could push malicious code directly to all users. Protect these accounts by creating specifically developer accounts and enabling <a href="https://support.google.com/accounts/answer/185839?hl=en">two-factor authentication</a> , preferably with a <a href="https://support.google.com/accounts/answer/6103523">security key</a> .</p>
+<h3 id="keep-groups-selective-group_publishing">Keep groups selective {: #group_publishing }</h3>
+<p>If using <a href="/docs/webstore/group-publishers">group publishing</a>, keep the group confined to trusted developers. Do not accept membership requests from unknown persons.</p>
+<h2 id="never-use-http-ever-https">Never use HTTP, Ever {: #https }</h2>
+<p>When requesting or sending data, avoid an HTTP connection. Assume that any HTTP connections will have eavesdroppers or contain modifications. HTTPS should always be prefered, as it has built-in security circumventing most <a href="https://www.owasp.org/index.php/Man-in-the-middle_attack">man-in-the-middle attacks</a>.</p>
+<h2 id="request-minimal-permissions-permissions">Request minimal permissions {: #permissions }</h2>
+<p>The Chrome browser limits an extension’s access to privileges that have been explicitly requested in the <a href="/docs/extensions/mv3/manifest">manifest</a>. Extensions should minimize their permissions by only registering APIs and websites they depend on. Arbitrary code should be kept to a minimum.</p>
+<p>Limiting an extensions privileges limits what a potential attacker can exploit.</p>
+<h3 id="cross-origin-xmlhttprequest-xhr">Cross-origin XMLHttpRequest {: #xhr }</h3>
+<p>An extension can only use <a href="/docs/extensions/mv3/xhr">XMLHttpRequest</a> to get resources from itself and from domains specified in the permissions.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Very Secure Extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Example of a Secure Extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="st">&quot;/*&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="st">&quot;https://*.google.com/&quot;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="dt">&quot;manifest_version&quot;</span><span class="fu">:</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="fu">}</span></a></code></pre></div>
+<p>This extension requests access to anything on developer.chrome.com and subdomains of Google by listing <code>"/*"</code> and <code>"https://*google.com/"</code> in the permissions. If the extension were compromised, it would still only have permission to interact with websites that meet the <a href="/docs/extensions/mv3/match_patterns">match pattern</a>. The attacker would not be able to access <code>"https://user_bank_info.com"</code> or interact with <code>"https://malicious_website.com"</code>.</p>
+<h2 id="limit-manifest-fields-manifest_fields">Limit manifest fields {: #manifest_fields }</h2>
+<p>Including unnecessary registrations in the manifest creates vulnerabilities and makes an extension more visible. Limit manifest fields to those the extension relies on and give specific field registration.</p>
+<h3 id="externally-connectable-externally_connectable">Externally connectable {: #externally_connectable }</h3>
+<p>Use the <a href="/docs/extensions/mv3/manifest/externally_connectable"><code>externally_connectable</code></a> field to declare which external extensions and web pages the extension will exchange information with. Restrict who the extension can externally connect with to trusted sources.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Super Safe Extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">&quot;externally_connectable&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="dt">&quot;ids&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-5" title="5">      <span class="st">&quot;iamafriendlyextensionhereisdatas&quot;</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="dt">&quot;matches&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-8" title="8">      <span class="st">&quot;/*&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb2-9" title="9">      <span class="st">&quot;https://*google.com/&quot;</span></a>
+<a class="sourceLine" id="cb2-10" title="10">    <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-11" title="11">    <span class="dt">&quot;accepts_tls_channel_id&quot;</span><span class="fu">:</span> <span class="kw">false</span></a>
+<a class="sourceLine" id="cb2-12" title="12">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb2-13" title="13">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<h3 id="web-accessible-resources-web_accessible_resources">Web-accessible resources {: #web_accessible_resources }</h3>
+<p>Making resources accessible by the web, under the <a href="/docs/extensions/mv3/manifest/web_accessible_resources"><code>web_accessible_resources</code></a> will make an extension detectable by websites and attackers.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="dt">&quot;web_accessible_resources&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="st">&quot;images/*.png&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="st">&quot;style/secure_extension.css&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="st">&quot;script/secure_extension.js&quot;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<p>The more web accessible resources available, the more avenues a potential attacker can exploit. Keep these files to a minimum.</p>
+<h2 id="include-an-explicit-content-security-policy-content_security_policy">Include an explicit content security policy {: #content_security_policy }</h2>
+<p>Include a <a href="/docs/apps/contentSecurityPolicy">content security policy</a> for the extension in the manifest to prevent cross-site scripting attacks. If the extension only loads resources from itself register the following:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Very Secure Extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Example of a Secure Extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="dt">&quot;content_security_policy&quot;</span><span class="fu">:</span> <span class="st">&quot;default-src &#39;self&#39;&quot;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="st">&quot;manifest_version&quot;</span><span class="er">:</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<p>If the extension needs to include scripts from specific hosts, they can be included:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Very Secure Extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Example of a Secure Extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="dt">&quot;content_security_policy&quot;</span><span class="fu">:</span> <span class="st">&quot;default-src &#39;self&#39; https://extension.resource.com&quot;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">  <span class="st">&quot;manifest_version&quot;</span><span class="er">:</span> <span class="dv">2</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<h2 id="avoid-executable-apis-avoid">Avoid executable APIs {: #avoid }</h2>
+<p>APIs that execute code should be replaced with safer alternatives.</p>
+<h3 id="document.write-and-innerhtml-document_write">document.write() and innerHTML {: #document_write }</h3>
+<p>While it may be simpler to dynamically create HTML elements with <code>document.write()</code> and <code>innerHTML</code>, it leaves the extension, and web pages the extension depends on, open to attackers inserting malicious scripts. Instead, manually create DOM nodes and use <code>innerText</code> to insert dynamic content.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">function</span> <span class="at">constructDOM</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">let</span> newTitle <span class="op">=</span> <span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&#39;h1&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="va">newTitle</span>.<span class="at">innerText</span> <span class="op">=</span> host<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="va">document</span>.<span class="at">appendChild</span>(newTitle)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="op">}</span></a></code></pre></div>
+<h3 id="eval-eval">eval() {: #eval }</h3>
+<p>Avoid using <code>eval()</code> whenever possible to prevent attacks, as <code>eval()</code> will execute any code passed into it, which may be malicious.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">var</span> xhr <span class="op">=</span> <span class="kw">new</span> <span class="at">XMLHttpRequest</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="va">xhr</span>.<span class="at">open</span>(<span class="st">&quot;GET&quot;</span><span class="op">,</span> <span class="st">&quot;https://api.example.com/data.json&quot;</span><span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="va">xhr</span>.<span class="at">onreadystatechange</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="cf">if</span> (<span class="va">xhr</span>.<span class="at">readyState</span> <span class="op">==</span> <span class="dv">4</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-5" title="5">    <span class="co">// </span><span class="al">WARNING</span><span class="co">! Might be evaluating an evil script!</span></a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="kw">var</span> resp <span class="op">=</span> <span class="at">eval</span>(<span class="st">&quot;(&quot;</span> <span class="op">+</span> <span class="va">xhr</span>.<span class="at">responseText</span> <span class="op">+</span> <span class="st">&quot;)&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">    ...</a>
+<a class="sourceLine" id="cb7-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="va">xhr</span>.<span class="at">send</span>()<span class="op">;</span></a></code></pre></div>
+<p>Instead, prefer safer, and faster, methods such as <code>JSON.parse()</code></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">var</span> xhr <span class="op">=</span> <span class="kw">new</span> <span class="at">XMLHttpRequest</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="va">xhr</span>.<span class="at">open</span>(<span class="st">&quot;GET&quot;</span><span class="op">,</span> <span class="st">&quot;https://api.example.com/data.json&quot;</span><span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="va">xhr</span>.<span class="at">onreadystatechange</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="cf">if</span> (<span class="va">xhr</span>.<span class="at">readyState</span> <span class="op">==</span> <span class="dv">4</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="co">// JSON.parse does not evaluate the attacker&#39;s scripts.</span></a>
+<a class="sourceLine" id="cb8-6" title="6">    <span class="kw">var</span> resp <span class="op">=</span> <span class="va">JSON</span>.<span class="at">parse</span>(<span class="va">xhr</span>.<span class="at">responseText</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="op">}</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="va">xhr</span>.<span class="at">send</span>()<span class="op">;</span></a></code></pre></div>
+<h2 id="use-content-scripts-carefully-content_scripts">Use content scripts carefully {: #content_scripts }</h2>
+<p>While <a href="/docs/extensions/mv3/content_scripts">content scripts</a> live in an <a href="/docs/extensions/mv3/content_scripts#isolated_world">isolated world</a>, they are not immune from attacks:</p>
+<ul>
+<li>Content scripts are the only part of an extension that interacts directly with the web page. Because of this, hostile web pages may manipulate parts of the DOM the content script depends on, or exploit surprising web standard behavior, such as <a href="https://html.spec.whatwg.org/#dom-window-nameditem">named items</a>.</li>
+<li>To interact with DOM of web pages, content scripts need to execute in the same renderer process as the web page. This makes content scripts vulnerable to leaking data via side channel attacks (e.g., <a href="https://spectreattack.com/">Spectre</a>), and to being taken over by an attacker if a malicious web page compromises the renderer process.</li>
+</ul>
+<p>Sensitive work should be performed in a dedicated process, such as the extension’s <a href="/docs/extensions/mv3/background_pages">background script</a>. Avoid accidentally exposing extension privileges to content scripts:</p>
+<ul>
+<li>Assume that <a href="/docs/extensions/mv3/messaging#content-scripts-are-less-trustworthy">messages from a content script</a> might have been crafted by an attacker (e.g. <a href="#sanitize">validate and sanitize</a> all input and protect your scripts from <a href="/docs/extensions/mv3/messaging#cross-site-scripting">cross-site scripting</a>).</li>
+<li>Assume any data sent to the content script might leak to the web page. Do not send sensitive data (e.g. secrets from the extension, data from other web origins, browsing history) to content scripts.</li>
+<li>Limit the scope of privileged actions that can be triggered by content scripts. Do not allow content scripts to <a href="/docs/extensions/mv3/xhr#xhr-vs-content-scripts">trigger requests to arbitrary URLs</a> or pass arbitrary arguments to extension APIs (e.g., do not allow passing arbitrary URLs to <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"><code>fetch</code></a> or <a href="/docs/extensions/reference/tabs#method-create"><code>chrome.tabs.create</code></a> API).</li>
+</ul>
+<h2 id="register-and-sanitize-inputs-sanitize">Register and sanitize inputs {: #sanitize }</h2>
+<p>Safeguard an extension from malicious scripts by limiting listeners to only what the extension is expecting, validating the senders of incoming data, and sanitizing all inputs.</p>
+<p>An extension should only register for <a href="/docs/extensions/reference/runtime#event-onMessageExternal"><code>runtime.onRequestExternal</code></a>, if it is expecting communication from an external website or extension. Always validate that the sender matches a trusted source.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="co">// The ID of an external extension</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">const</span> kFriendlyExtensionId <span class="op">=</span> <span class="st">&quot;iamafriendlyextensionhereisdatas&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="va">chrome</span>.<span class="va">runtime</span>.<span class="va">onMessageExternal</span>.<span class="at">addListener</span>(</a>
+<a class="sourceLine" id="cb9-5" title="5">  <span class="kw">function</span>(request<span class="op">,</span> sender<span class="op">,</span> sendResponse) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="cf">if</span> (<span class="va">sender</span>.<span class="at">id</span> <span class="op">===</span> kFriendlyExtensionId)</a>
+<a class="sourceLine" id="cb9-7" title="7">      <span class="at">doSomething</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Even messages via <a href="/docs/extensions/reference/runtime#event-onMessage">runtime.onMessage</a> event from the extension itself should be scrutinized to ensure the <a href="/docs/extensions/reference/runtime#type-MessageSender">MessageSender</a> is not from a compromised <a href="/docs/extensions/mv3/content_scripts">content script</a>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="va">chrome</span>.<span class="va">runtime</span>.<span class="va">onMessage</span>.<span class="at">addListener</span>(<span class="kw">function</span>(request<span class="op">,</span> sender<span class="op">,</span> sendResponse) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="cf">if</span> (<span class="va">request</span>.<span class="at">allowedAction</span>)</a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;This is an allowed action.&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Prevent an extension from executing an attacker’s script by sanitizing user inputs and incoming data, even from the extension itself and approved sources. <a href="/docs/extensions/mv3/security#avoid">Avoid executable APIs</a>.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">function</span> <span class="at">sanitizeInput</span>(input) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">    <span class="cf">return</span> <span class="va">input</span>.<span class="at">replace</span>(<span class="ss">/&amp;/g</span><span class="op">,</span> <span class="st">&#39;&amp;amp;&#39;</span>).<span class="at">replace</span>(<span class="ss">/&lt;/g</span><span class="op">,</span> <span class="st">&#39;&amp;lt;&#39;</span>).<span class="at">replace</span>(<span class="ss">/&quot;/g</span><span class="op">,</span> <span class="st">&#39;&amp;quot;&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="op">}</span></a></code></pre></div>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2019-04-16" />
+  <title>The Chromium Chronicle #1: Task Scheduling Best Practices</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">The Chromium Chronicle #1: Task Scheduling Best Practices</h1>
+<p class="date">2019-04-16</p>
+</header>
+<p>The Chrome team is proud to introduce the Chromium Chronicle, a monthly series geared specifically to Chromium developers, developers who build the browser.</p>
+<p>The Chromium Chronicle will primarily focus on spreading technical knowledge and best practices to write, build, and test Chrome. Our plan is to feature topics that are relevant and useful to Chromium developers, such as code health, helpful tools, unit testing, accessibility and much more! Each article will be written and edited by Chrome engineers.</p>
+<p>We are excited about this new series, and hope you are too! Ready to dive in? Take a look at our first episode below!</p>
+<h2 id="task-scheduling-best-practices">Task Scheduling Best Practices</h2>
+<p><strong>Episode 1:</strong> by Gabriel Charette in Montréal, PQ (April, 2019)<br> <a href="/tags/chromium-chronicle/">Previous episodes</a></p>
+<p>Chrome code that needs in-process asynchronous execution typically posts tasks to sequences. Sequences are chrome-managed “virtual threads” and are <a href="https://chromium.googlesource.com/chromium/src/+/lkgr/docs/threading_and_tasks.md#Prefer-Sequences-to-Threads">preferred to creating your own thread</a>. How does an object know which sequence to post to?</p>
+<p>{% Compare ‘worse’ %}</p>
+<p>The old paradigm is to receive a SequencedTaskRunner from the creator:</p>
+<pre class="cpp/0"><code>Foo::Foo(scoped_refptr&lt;base::SequencedTaskRunner&gt; backend_task_runner)
+    : backend_task_runner_(std::move(backend_task_runner)) {}</code></pre>
+<p>{% endCompare %}</p>
+<p>{% Compare ‘better’ %}</p>
+<p>The preferred paradigm is to create an independent SequencedTaskRunner:</p>
+<pre class="cpp/2-3"><code>Foo::Foo()
+    : backend_task_runner_(
+          base::CreateSequencedTaskRunnerWithTraits({
+              base::MayBlock(), base::TaskPriority::BEST_EFFORT})) {}</code></pre>
+<p>{% endCompare %}</p>
+<p>This is easier to read and write as all the information is local and there’s no risk of inter-dependency with unrelated tasks.</p>
+<p>This paradigm is also better when it comes to testing. Instead of injecting task runners manually, tests can <strong>instantiate a controlled task environment</strong> to manage Foo’s tasks:</p>
+<pre class="cpp/4"><code>class FooTest : public testing::Test {
+ public
+  (...)
+ protected:
+  base::test::TaskEnvironment task_environment_;
+  Foo foo_;
+};</code></pre>
+<p>Having <strong>TaskEnvironment first in the fixture</strong> naturally ensures it manages the task environment throughout Foo’s lifetime. The TaskEnvironment will capture Foo’s request-on-construction to create a SequencedTaskRunner and will manage its tasks under each FooTest.</p>
+<p>To test the result of asynchronous execution, <strong>use the <code>RunLoop::Run()+QuitClosure()</code> paradigm</strong>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb4-1" title="1">TEST_F(FooTest, TestAsyncWork) {</a>
+<a class="sourceLine" id="cb4-2" title="2">  RunLoop run_loop;</a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="va">foo_</span>.BeginAsyncWork(run_loop.QuitClosure());</a>
+<a class="sourceLine" id="cb4-4" title="4">  run_loop.Run();</a>
+<a class="sourceLine" id="cb4-5" title="5">  EXPECT_TRUE(<span class="va">foo_</span>.work_done());</a>
+<a class="sourceLine" id="cb4-6" title="6">}</a></code></pre></div>
+<p>This is preferred to RunUntilIdle(), which can be flaky if the asynchronous workload involves a task outside of the TaskEnvironment’s purview, e.g. a system event, so use <a href="https://cs.chromium.org/chromium/src/base/test/task_environment.h?type=cs&amp;q=%22void+RunUntilIdle()%22+WARNING+case:yes&amp;sq=package:chromium&amp;g=0"><code>RunUntilIdle()</code> with care</a>.</p>
+<p>{% Aside %} Pro-tip: Use TaskEnvironment’s <code>MOCK_TIME</code> mode to reliably test delayed tasks. {% endAside %}</p>
+<p><strong>Want to learn more?</strong> Read our documentation on <a href="https://chromium.googlesource.com/chromium/src/+/master/docs/threading_and_tasks.md">threading and tasks</a> or get involved in the <a href="https://docs.google.com/document/d/1QabRo8c7D9LsYY3cEcaPQbOCLo8Tu-6VLykYXyl3Pkk/edit">migration to TaskEnvironment</a>!</p>
+</body>
+</html>

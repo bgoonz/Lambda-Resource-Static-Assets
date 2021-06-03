@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Creating Pages</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Creating Pages</h1>
+</header>
+<p>In this section, we will learn about creating pages in Docusaurus.</p>
+<p>This is useful for creating <strong>one-off standalone pages</strong> like a showcase page, playground page or support page.</p>
+<p>The functionality of pages is powered by <code>@docusaurus/plugin-content-pages</code>.</p>
+<p>You can use React components, or Markdown.</p>
+<div class="note">
+<p>Pages do not have sidebars, only <a href="./docs/docs-introduction.md">docs</a> have.</p>
+</div>
+<h2 id="add-a-react-page">Add a React page</h2>
+<p>Create a file <code>/src/pages/helloReact.js</code>:</p>
+<p>```jsx title=“/src/pages/helloReact.js” import React from ‘react’; import Layout from ‘<span class="citation" data-cites="theme/Layout">@theme/Layout</span>’;</p>
+function Hello() { return ( <Layout title="Hello"> &lt;div style={{ display: ‘flex’, justifyContent: ‘center’, alignItems: ‘center’, height: ‘50vh’, fontSize: ‘20px’, }}&gt;
+<p>
+Edit <code>pages/hello.js</code> and save to reload.
+</p>
+<pre><code>  &lt;/div&gt;
+&lt;/Layout&gt;</code></pre>
+<p>); }</p>
+<p>export default Hello; ```</p>
+<p>Once you save the file, the development server will automatically reload the changes. Now open <code>http://localhost:3000/helloReact</code>, you will see the new page you just created.</p>
+<p>Each page doesn’t come with any styling. You will need to import the <code>Layout</code> component from <code>@theme/Layout</code> and wrap your contents within that component if you want the navbar and/or footer to appear.</p>
+<div class="tip">
+<p>You can also create TypeScript pages with the <code>.tsx</code> extension (<code>helloReact.tsx</code>).</p>
+</div>
+<h2 id="add-a-markdown-page">Add a Markdown page</h2>
+<p>Create a file <code>/src/pages/helloMarkdown.md</code>:</p>
+<h2 id="mdx-titlesrcpageshellomarkdown.md">```mdx title=“/src/pages/helloMarkdown.md”</h2>
+<p>title: my hello page title description: my hello page description hide_table_of_contents: true —</p>
+<h1 id="hello">Hello</h1>
+<p>How are you? ```</p>
+<p>In the same way, a page will be created at <code>http://localhost:3000/helloMarkdown</code>.</p>
+<p>Markdown pages are less flexible than React pages, because it always uses the theme layout.</p>
+<p>Here’s an <a href="/examples/markdownPageExample">example Markdown page</a>.</p>
+<div class="tip">
+<p>You can use the full power of React in Markdown pages too, refer to the <a href="https://mdxjs.com/">MDX</a> documentation.</p>
+</div>
+<h2 id="routing">Routing</h2>
+<p>If you are familiar with other static site generators like Jekyll and Next, this routing approach will feel familiar to you. Any JavaScript file you create under <code>/src/pages/</code> directory will be automatically converted to a website page, following the <code>/src/pages/</code> directory hierarchy. For example:</p>
+<ul>
+<li><code>/src/pages/index.js</code> → <code>&lt;baseUrl&gt;</code></li>
+<li><code>/src/pages/foo.js</code> → <code>&lt;baseUrl&gt;/foo</code></li>
+<li><code>/src/pages/foo/test.js</code> → <code>&lt;baseUrl&gt;/foo/test</code></li>
+<li><code>/src/pages/foo/index.js</code> → <code>&lt;baseUrl&gt;/foo/</code></li>
+</ul>
+<p>In this component-based development era, it is encouraged to co-locate your styling, markup and behavior together into components. Each page is a component, and if you need to customize your page design with your own styles, we recommend co-locating your styles with the page component in its own directory. For example, to create a “Support” page, you could do one of the following:</p>
+<ul>
+<li>Add a <code>/src/pages/support.js</code> file</li>
+<li>Create a <code>/src/pages/support/</code> directory and a <code>/src/pages/support/index.js</code> file.</li>
+</ul>
+<p>The latter is preferred as it has the benefits of letting you put files related to the page within that directory. For example, a CSS module file (<code>styles.module.css</code>) with styles meant to only be used on the “Support” page. <strong>Note:</strong> this is merely a recommended directory structure and you will still need to manually import the CSS module file within your component module (<code>support/index.js</code>). By default, any Markdown or Javascript file starting with <code>_</code> will be ignored, and no routes will be created for that file (see the <code>exclude</code> option).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">my-website</span></a>
+<a class="sourceLine" id="cb2-2" title="2">├── <span class="ex">src</span></a>
+<a class="sourceLine" id="cb2-3" title="3">│   └── <span class="ex">pages</span></a>
+<a class="sourceLine" id="cb2-4" title="4">│       ├── <span class="ex">styles.module.css</span></a>
+<a class="sourceLine" id="cb2-5" title="5">│       ├── <span class="ex">index.js</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">|</span>       ├──<span class="ex">_ignored.js</span></a>
+<a class="sourceLine" id="cb2-7" title="7">│       └── <span class="ex">support</span></a>
+<a class="sourceLine" id="cb2-8" title="8">│           ├── <span class="ex">index.js</span></a>
+<a class="sourceLine" id="cb2-9" title="9">│           └── <span class="ex">styles.module.css</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="ex">.</span></a></code></pre></div>
+<div class="caution">
+<p>All JavaScript/TypeScript files within the <code>src/pages/</code> directory will have corresponding website paths generated for them. If you want to create reusable components into that directory, use the <code>exclude</code> option (by default, files prefixed with <code>_</code>, test files(<code>.test.js</code>) and files in <code>__tests__</code> directory are not turned into pages).</p>
+</div>
+<h2 id="using-react">Using React</h2>
+<p>React is used as the UI library to create pages. Every page component should export a React component, and you can leverage on the expressiveness of React to build rich and interactive content.</p>
+<h2 id="duplicate-routes">Duplicate Routes</h2>
+<p>You may accidentally create multiple pages that are meant to be accessed on the same route. When this happens, Docusaurus will warn you about duplicate routes when you run <code>yarn start</code> or <code>yarn build</code>, but the site will still be built successfully. The page that was created last will be accessible, but it will override other conflicting pages. To resolve this issue, you should modify or remove any conflicting routes.</p>
+</body>
+</html>

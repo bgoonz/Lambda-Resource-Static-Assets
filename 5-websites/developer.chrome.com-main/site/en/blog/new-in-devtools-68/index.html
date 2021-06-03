@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2018-05-21" />
+  <title>What’s New In DevTools (Chrome 68)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 68)</h1>
+<p class="date">2018-05-21</p>
+</header>
+<p>New to DevTools in Chrome 68:</p>
+<ul>
+<li><a href="#eagerevaluation">Eager Evaluation</a>. As you type expressions, the Console previews the result.</li>
+<li><a href="#hints">Argument hints</a>. As you type functions, the Console shows you the expected arguments for that function.</li>
+<li><a href="#autocomplete">Function autocompletion</a>. After typing a function call such as <code>document.querySelector('p')</code>, the Console shows you the functions and properties that the return value supports.</li>
+<li><a href="#keywords">ES2017 keywords in the Console</a>. Keywords such as <code>await</code> are now available in the Console’s autocomplete UI.</li>
+<li><a href="#lh3">Lighthouse 3.0 in the Audits panel</a>. Faster, more consistent audits, a new UI, and new audits.</li>
+<li><a href="#bigint"><code>BigInt</code> support</a>. Try out JavaScript’s new arbitrary-precision integer in the Console.</li>
+<li><a href="#watch">Adding property paths to the Watch pane</a>. Add properties from the Scope pane to the Watch pane.</li>
+<li><a href="#timestamps">“Show timestamps” moved to Settings</a>.</li>
+</ul>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> Check what version of Chrome you’re running at <code>chrome://version</code>. If you’re running an earlier version, these features won’t exist. If you’re running a later version, these features may have changed. Chrome auto-updates to a new major version about every 6 weeks.</p>
+<p>{% endAside %}</p>
+<p>Read on, or watch the video version of the release notes, below.</p>
+<p>{% YouTube id=“br4JZ5qz_20” %}</p>
+<h2 id="assistive-console-console">Assistive Console {: #console }</h2>
+<p>Chrome 68 ships with a few new Console features related to autocompletion and previewing.</p>
+<h3 id="eager-evaluation-eagerevaluation">Eager Evaluation {: #eagerevaluation }</h3>
+<p>When you type an expression in the Console, the Console can now show a preview of the result of that expression below your cursor.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/4g8ftatASRDChBV9sx3g.png”, alt=“The Console is printing the result of the sort() operation before it has been explicitly executed.”, width=“800”, height=“497” %}</p>
+<p><strong>Figure 1</strong>. The Console is printing the result of the <code>sort()</code> operation before it has been explicitly executed</p>
+<p>To enable Eager Evaluation:</p>
+<ol type="1">
+<li>Open the <strong>Console</strong>.</li>
+<li>Open <strong>Console Settings</strong> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/jYHojXbVbXa7SfX2r5zA.png”, alt=“The Console Settings button”, width=“28”, height=“28” %}.</li>
+<li>Enable the <strong>Eager evaluation</strong> checkbox.</li>
+</ol>
+<p>DevTools does not eager evaluate if the expression causes <a href="https://stackoverflow.com/a/8129277/1669860">side effects</a>.</p>
+<h3 id="argument-hints-hints">Argument hints {: #hints }</h3>
+<p>As you’re typing out functions, the Console now shows you the arguments that the function expects.</p>
+<p>{% Img src=“image/admin/5c1WCwmfD4i6a835ilvv.png”, alt=“Argument hints in the Console.”, width=“800”, height=“951” %}</p>
+<p><strong>Figure 2</strong>. Various examples of argument hints in the Console</p>
+<p>Notes:</p>
+<ul>
+<li>A question mark before an arg, such as <code>?options</code>, represents an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters">optional</a> arg.</li>
+<li>An ellipsis before an arg, such as <code>...items</code>, represents a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">spread</a>.</li>
+<li>Some functions, such as <code>CSS.supports()</code>, accept multiple argument signatures.</li>
+</ul>
+<h3 id="autocomplete-after-function-executions-autocomplete">Autocomplete after function executions {: #autocomplete }</h3>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> This feature depends on <a href="#eagerevaluation">Eager Evaluation</a>, which needs to be enabled from <strong>Console Settings</strong> {% Img src=“image/admin/le64GLKlj72gyFGlOt8z.png”, alt=“Console Settings”, width=“36”, height=“36” %}.</p>
+<p>{% endAside %}</p>
+<p>After enabling Eager Evaluation, the Console now also shows you which properties and functions are available after you type out a function.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/5HCPgrbOpSeJNImxx3tU.png”, alt=“After running document.querySelector(‘p’), the Console can now show you the available properties and functions for that element.”, width=“800”, height=“600” %}</p>
+<p><strong>Figure 3</strong>. The top screenshot represents the old behavior, and the bottom screenshot represents the new behavior that supports function autocompletion</p>
+<h3 id="es2017-keywords-in-autocomplete-keywords">ES2017 keywords in autocomplete {: #keywords }</h3>
+<p>ES2017 keywords, such as <code>await</code>, are now available in the Console’s autocomplete UI.</p>
+<p>{% Img src=“image/admin/a386VKlJGY81qaQk5xHG.png”, alt=“The Console now suggests ‘await’ in its autocomplete UI.”, width=“800”, height=“461” %}</p>
+<p><strong>Figure 4</strong>. The Console now suggests <code>await</code> in its autocomplete UI</p>
+<h2 id="faster-more-reliable-audits-a-new-ui-and-new-audits-lh3">Faster, more reliable audits, a new UI, and new audits {: #lh3 }</h2>
+<p>Chrome 68 ships with Lighthouse 3.0. The next sections are a roundup of some of the biggest changes. See <a href="https://developers.google.com/web/updates/2018/05/lighthouse3">Announcing Lighthouse 3.0</a> for the full story.</p>
+<h3 id="faster-more-reliable-audits-lantern">Faster, more reliable audits {: #lantern }</h3>
+<p>Lighthouse 3.0 has a new internal auditing engine, codenamed Lantern, which completes your audits faster, and with less variance between runs.</p>
+<h3 id="new-ui-ui">New UI {: #ui }</h3>
+<p>Lighthouse 3.0 also brings a new UI, thanks to a collaboration between the Lighthouse and Chrome UX (Research &amp; Design) teams.</p>
+<p>{% Img src=“image/admin/pl2otqSS0e37W0i2kwlz.png”, alt=“The new report UI in Lighthouse 3.0.”, width=“800”, height=“996” %}</p>
+<p><strong>Figure 5</strong>. The new report UI in Lighthouse 3.0</p>
+<h3 id="new-audits-audits">New audits {: #audits }</h3>
+<p>Lighthouse 3.0 also ships with 4 new audits:</p>
+<ul>
+<li>First Contentful Paint</li>
+<li>robots.txt is not valid</li>
+<li>Use video formats for animated content</li>
+<li>Avoid multiple, costly round trips to any origin</li>
+</ul>
+<h2 id="bigint-support-bigint">BigInt support {: #bigint }</h2>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> This isn’t a DevTools features per se, but it is a new JavaScript capability that you can try out in the Console.</p>
+<p>{% endAside %}</p>
+<p>Chrome 68 supports a new numeric primitive called <a href="https://developers.google.com/web/updates/2018/05/bigint"><code>BigInt</code></a>. <code>BigInt</code> lets you represent integers with arbitrary precision. Try it out in the Console:</p>
+<p>{% Img src=“image/admin/DDJt3uIWbO5V1ZQSblye.png”, alt=“An example of BigInt in the Console.”, width=“800”, height=“564” %}</p>
+<p><strong>Figure 6</strong>. An example of <code>BigInt</code> in the Console</p>
+<h2 id="add-property-path-to-watch-watch">Add property path to watch {: #watch }</h2>
+<p>While paused on a breakpoint, right-click a property in the Scope pane and select <strong>Add property path to watch</strong> to add that property to the Watch pane.</p>
+<p>{% Img src=“image/admin/Go7V8YiZD5n1vJUwlg7a.png”, alt=“An example of Add property path to watch.”, width=“800”, height=“557” %}</p>
+<p><strong>Figure 7</strong>. An example of <strong>Add property path to watch</strong></p>
+<h2 id="show-timestamps-moved-to-settings-timestamps">“Show timestamps” moved to settings {: #timestamps }</h2>
+<p>The <strong>Show timestamps</strong> checkbox previously in <strong>Console Settings</strong> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/jYHojXbVbXa7SfX2r5zA.png”, alt=“The Console Settings button”, width=“28”, height=“28” %} has moved to <a href="/docs/devtools/customize/#settings">Settings</a>.</p>
+</body>
+</html>

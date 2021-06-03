@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>grammar_check_training</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="grammar-check-model-training-job-template">Grammar Check Model Training Job Template</h1>
+<p>This is a grammar check model training process.</p>
+<h2 id="training-data">Training Data</h2>
+<p>You could get data from <strong>Grammar Check Dataset</strong> in OpenPAI Marketplace.</p>
+<h2 id="how-to-use">How to use</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>When use this module, you should</p>
+<ol type="1">
+<li><p>Load training data from Azure Blob to container</p>
+<pre><code> mkdir -p /data/grammarCheck/
+ cd /data/grammarCheck/
+ wget &lt;% $data.uri[0] %&gt;
+ tar xvf gramarCheck_data.tgz</code></pre></li>
+<li><p>Set three environment variables:</p>
+<pre><code> export DATA_DIR=/data/grammarCheck/dataset
+ mkdir -p /data/grammarCheck/output
+ export OUTPUT_DIR=/data/grammarCheck/
+ export PREPROCESSED_DATA_DIR=./preprocessed_data</code></pre></li>
+<li><p>install <code>fairseq</code></p>
+<pre><code>pip install fairseq==0.9.0</code></pre>
+<strong>NOTE</strong>:</li>
+</ol>
+<ul>
+<li><p>The value of <code>data</code> and <code>output</code> are defined under the <code>prerequisites</code> and <code>taskRoles</code> fileds of the YAML file on the <code>Job submission</code> page.</p></li>
+<li><p><code>PREPROCESSED_DATA_DIR</code>: The path to store intermediate result, by default it is ./processed_data.</p></li>
+<li><p><code>OUTPUT_DIR</code>: The path to store output result, i.e. the training model files.</p></li>
+</ul>
+<h3 id="training-command">Training command</h3>
+<pre><code>fairseq-preprocess \
+--source-lang origin \
+--target-lang correct \
+--trainpref ${DATA_DIR}/processed_data/train \
+--validpref ${DATA_DIR}/processed_data/dev \
+--testpref ${DATA_DIR}/processed_data/test \
+--destdir ${PREPROCESSED_DATA_DIR}</code></pre>
+<pre><code>fairseq-train ${PREPROCESSED_DATA_DIR} \
+--log-interval 100 \
+--lr 0.25 \
+--clip-norm 0.1 \
+--dropout 0.2  \
+--criterion label_smoothed_cross_entropy \
+--save-dir ${OUTPUT_DIR} \
+-a lstm \
+--max-tokens 4000 \
+--max-epoch 100 \
+--batch-size 256</code></pre>
+<h2 id="get-the-result-model">Get the result model</h2>
+<p>&lt;TBD&gt;</p>
+</body>
+</html>

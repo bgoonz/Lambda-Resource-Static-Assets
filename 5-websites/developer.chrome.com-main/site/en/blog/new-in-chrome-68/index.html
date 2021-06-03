@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2018-07-24" />
+  <title>New in Chrome 68</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">New in Chrome 68</h1>
+<p class="date">2018-07-24</p>
+</header>
+<p>{% YouTube id=‘jlbLRsAmKtw’ %}</p>
+<ul>
+<li>The <a href="#a2hs">Add to Home Screen behavior</a> on Android is changing to give you more control.</li>
+<li>The <a href="#page-lifecycle">Page Lifecycle API</a> tells you when your tab has been suspended or restored.</li>
+<li>And the <a href="#payment-handler">Payment Handler API</a> makes it possible for web-based payment apps to support the Payment Request experience.</li>
+</ul>
+<p>And there’s <a href="#more">plenty more</a>!</p>
+<p>I’m Pete LePage. Let’s dive in and see what’s new for developers in Chrome 68!</p>
+<p>Want the full list of changes? Check out the <a href="https://chromium.googlesource.com/chromium/src/+log/67.0.3396.62..68.0.3440.70">Chromium source repository change list</a>.</p>
+<h2 id="add-to-home-screen-changes-a2hs">Add to Home Screen changes {: #a2hs }</h2>
+<p>If your site meets the <a href="https://developers.google.com/web/fundamentals/app-install-banners/#criteria">add to home screen criteria</a>, Chrome will no longer show the add to home screen banner. Instead, you’re in control over when and how to prompt the user.</p>
+<p>To prompt the user, listen for the <code>beforeinstallprompt</code> event, then, save the event and add a button or other UI element to your app to indicate it can be installed.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">let</span> installPromptEvent<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="va">window</span>.<span class="at">addEventListener</span>(<span class="st">&#39;beforeinstallprompt&#39;</span><span class="op">,</span> (event) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="co">// Prevent Chrome &lt;= 67 from automatically showing the prompt</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="va">event</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="co">// Stash the event so it can be triggered later.</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  installPromptEvent <span class="op">=</span> event<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="co">// Update the install UI to notify the user app can be installed</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;#install-button&#39;</span>).<span class="at">disabled</span> <span class="op">=</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/b11lXsSixVY6VrDV1Emd.png”, alt="“, className=”float-right“, height=”417“, width=”800" %}</p>
+<p>When the user clicks the install button, call <code>prompt()</code> on the saved <code>beforeinstallprompt</code> event, Chrome then shows the add to home screen dialog.</p>
+<p><br style="clear: both;"></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">btnInstall</span>.<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="co">// Update the install UI to remove the install button</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;#install-button&#39;</span>).<span class="at">disabled</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="co">// Show the modal add to home screen dialog</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="va">installPromptEvent</span>.<span class="at">prompt</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="co">// Wait for the user to respond to the prompt</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="va">installPromptEvent</span>.<span class="va">userChoice</span>.<span class="at">then</span>(handleInstall)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/e8QdF96TkOMv3pzLAVYN.png”, alt="“, className=”float-right“, height=”417“, width=”800" %}</p>
+<p>To give you time to update your site Chrome will show a mini-infobar the first time a user visits a site that meets the add to home screen criteria. Once dismissed, the mini-infobar will not be shown again for a while.</p>
+<p><a href="https://developers.google.com/web/updates/2018/06/a2hs-updates"><strong>Changes to Add to Home Screen Behavior</strong></a> has the full details, including code samples you can use and more.</p>
+<h2 id="page-lifecycle-api-page-lifecycle">Page Lifecycle API {: #page-lifecycle }</h2>
+<p>{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/uDSah821BWaTBBpcJgam.png”, alt="“, className=”float-right“, height=”541“, width=”800" %}</p>
+<p>When a user has a large number of tabs running, critical resources such as memory, CPU, battery and the network can be oversubscribed, leading to a bad user experience.</p>
+<p>If your site is running in the background, the system may suspend it to conserve resources. With the new Page Lifecycle API, you can now listen for, and respond to these events.</p>
+<p>For example, if a user’s had a tab in the background for a while, the browser may choose to suspend script execution on that page to conserve resources. Before doing so, it will fire the <code>freeze</code> event, allowing you to close open IndexedDB or network connections or save any unsaved view state. Then, when the user refocuses the tab, the <code>resume</code> event is fired, where you can reinitialize anything that was torn down.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> prepareForFreeze <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="co">// Close any open IndexedDB connections.</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="co">// Release any web locks.</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="co">// Stop timers or polling.</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="op">};</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">const</span> reInitializeApp <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="co">// Restore IndexedDB connections.</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="co">// Re-acquire any needed web locks.</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="co">// Restart timers or polling.</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="op">};</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="va">document</span>.<span class="at">addEventListener</span>(<span class="st">&#39;freeze&#39;</span><span class="op">,</span> prepareForFreeze)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="va">document</span>.<span class="at">addEventListener</span>(<span class="st">&#39;resume&#39;</span><span class="op">,</span> reInitializeApp)<span class="op">;</span></a></code></pre></div>
+<p>Check out Phil’s <a href="https://developers.google.com/web/updates/2018/07/page-lifecycle-api">Page Lifecycle API</a> post for <strong>lots</strong> more detail, including code samples, tips and more. You can find the <a href="https://wicg.github.io/page-lifecycle/spec.html">spec</a> and an <a href="https://github.com/WICG/page-lifecycle">explainer doc</a> on GitHub.</p>
+<h2 id="payment-handler-api-payment-handler">Payment Handler API {: #payment-handler }</h2>
+<p>The <a href="https://www.w3.org/TR/payment-request/">Payment Request API</a> is an open, standards-based way to accept payments. The <a href="https://www.w3.org/TR/payment-handler/">Payment Handler API</a> extends the reach of Payment Request by enabling web-based payment apps to facilitate payments directly within the Payment Request experience.</p>
+<p>As a seller, adding an existing web-based payment app is as easy as adding an entry to the <code>supportedMethods</code> property.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> request <span class="op">=</span> <span class="kw">new</span> <span class="at">PaymentRequest</span>([<span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="co">// Your custom payment method identifier comes here</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="dt">supportedMethods</span><span class="op">:</span> <span class="st">&#39;https://bobpay.xyz/pay&#39;</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="op">}</span>]<span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="dt">total</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;total&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="dt">amount</span><span class="op">:</span> <span class="op">{</span> <span class="dt">value</span><span class="op">:</span> <span class="st">&#39;10&#39;</span><span class="op">,</span> <span class="dt">currency</span><span class="op">:</span> <span class="st">&#39;USD&#39;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>If a service worker that can handle the specified payment method is installed, it will show up in the Payment Request UI and the user can pay with it.</p>
+<p>Eiji has a <a href="https://developers.google.com/web/updates/2018/06/payment-handler-api">great post</a> that shows how to implement this for merchant sites, and for payment handlers.</p>
+<h2 id="and-more-more">And more! {: #more }</h2>
+<p>These are just a few of the changes in Chrome 68 for developers, of course, there’s plenty more.</p>
+<ul>
+<li>Content embedded in an <code>iframe</code> <a href="https://www.chromestatus.com/feature/5629582019395584">requires a user gesture to navigate</a> the top-level browsing context to a different origin.</li>
+<li>Since Chrome 1, the CSS <a href="https://www.chromestatus.com/feature/5575087101050880"><code>cursor</code> values for <code>grab</code> and <code>grabbing</code></a> have been prefixed, we now support the standard, un-prefixed values. <strong>Finally.</strong></li>
+<li>And - this is a big one! The HTTP <a href="https://developers.google.com/web/updates/2018/06/fresher-sw">cache is now ignored when requesting updates to a service worker</a>, bringing Chrome inline with the spec and other browsers.</li>
+</ul>
+<h3 id="new-in-devtools">New in DevTools</h3>
+<p>Be sure to check out <a href="/blog/new-in-devtools-68">New in Chrome DevTools</a>, to learn what’s new in for DevTools in Chrome 68.</p>
+<h3 id="subscribe">Subscribe</h3>
+<p>Then, click the <a href="https://goo.gl/6FP1a5">subscribe</a> button on our <a href="https://www.youtube.com/user/ChromeDevelopers/">YouTube channel</a>, and you’ll get an email notification whenever we launch a new video.</p>
+<p>I’m Pete LePage, and as soon as Chrome 69 is released, I’ll be right here to tell you – what’s new in Chrome!</p>
+</body>
+</html>

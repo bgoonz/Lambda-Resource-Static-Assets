@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2018-01-23" />
+  <title>New in Chrome 64</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">New in Chrome 64</h1>
+<p class="date">2018-01-23</p>
+</header>
+<p>{% YouTube id=‘y5sb-icqOyg’ %}</p>
+<ul>
+<li>Support for <a href="#resizeobserver"><code>ResizeObservers</code></a>, will notify you when an element’s content rectangle has changed its size.</li>
+<li>Modules can now access to host specific metadata with <a href="#import-meta">import.meta</a>.</li>
+<li>The <a href="#popup-blocker">pop-up blocker</a> gets strong.</li>
+<li><a href="#window-alert"><code>window.alert()</code></a> no longer changes focus.</li>
+</ul>
+<p>And there’s <a href="#more">plenty more</a>!</p>
+<p>I’m Pete LePage. Let’s dive in and see what’s new for developers in Chrome 64!</p>
+<p>Want the full list of changes? Check out the <a href="https://chromium.googlesource.com/chromium/src/+log/63.0.3239.84..64.0.3282.140">Chromium source repository change list</a>.</p>
+<h2 id="resizeobserver-resizeobserver"><code>ResizeObserver</code> {: #resizeobserver }</h2>
+<p>Tracking when an element’s size changes can be a bit of a pain. Most likely, you’ll attach a listener to the document’s <code>resize</code> event, then call <code>getBoundingClientRect</code> or <code>getComputedStyle</code>. But, both of those can cause layout thrashing.</p>
+<p>And what if the browser window didn’t change size, but a new element was added to the document? Or you added <code>display: none</code> to an element? Both of those can change the size of other elements within the page.</p>
+<p><code>ResizeObserver</code> notifies you whenever an element’s size changes, and provides the new height and width of the element, reducing the risk of layout thrashing.</p>
+<p>Like other Observers, using it is pretty simple, create a <code>ResizeObserver</code> object and pass a callback to the constructor. The callback will be given an array of <code>ResizeOberverEntries</code>–one entry per observed element–which contain the new dimensions for the element.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">const</span> ro <span class="op">=</span> <span class="kw">new</span> <span class="at">ResizeObserver</span>( entries <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="cf">for</span> (<span class="kw">const</span> entry <span class="kw">of</span> entries) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="kw">const</span> cr <span class="op">=</span> <span class="va">entry</span>.<span class="at">contentRect</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Element:&#39;</span><span class="op">,</span> <span class="va">entry</span>.<span class="at">target</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`Element size: </span><span class="sc">${</span><span class="va">cr</span>.<span class="at">width</span><span class="sc">}</span><span class="vs">px × </span><span class="sc">${</span><span class="va">cr</span>.<span class="at">height</span><span class="sc">}</span><span class="vs">px`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="va">console</span>.<span class="at">log</span>(<span class="vs">`Element padding: </span><span class="sc">${</span><span class="va">cr</span>.<span class="at">top</span><span class="sc">}</span><span class="vs">px ; </span><span class="sc">${</span><span class="va">cr</span>.<span class="at">left</span><span class="sc">}</span><span class="vs">px`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-9" title="9"></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="co">// Observe one or multiple elements</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="va">ro</span>.<span class="at">observe</span>(someElement)<span class="op">;</span></a></code></pre></div>
+<p>Check out <a href="https://developers.google.com/web/updates/2016/10/resizeobserver"><code>ResizeObserver</code>: It’s like <code>document.onresize</code> for Elements</a> for more details and real world examples.</p>
+<h2 id="improved-pop-up-blocker-popup-blocker">Improved Pop-up Blocker {: #popup-blocker }</h2>
+<p>I hate tab-unders. You know them, it’s when a page opens a pop-up to some destination AND navigates the page. Usually one of them is an ad or something that you didn’t want.</p>
+<p>Starting in Chrome 64, these type of navigations will be blocked, and Chrome will show some native UI to the user - allowing them to follow the redirect if they want.</p>
+<h2 id="import.meta-import-meta"><code>import.meta</code> {: #import-meta }</h2>
+<p>When writing JavaScript modules, you often want access to host-specific metadata about the current module. Chrome 64 now supports the <code>import.meta</code> property within modules and exposes the URL for the module as <code>import.meta.url</code>.</p>
+<p>This is really helpful when you want to resolve resources relative to the module file as opposed to the current HTML document.</p>
+<h2 id="and-more-more">And more! {: #more }</h2>
+<p>These are just a few of the changes in Chrome 64 for developers, of course, there’s plenty more.</p>
+<ul>
+<li>Chrome now supports <a href="https://developers.google.com/web/updates/2017/07/upcoming-regexp-features#named_captures">named captures</a> and <a href="https://developers.google.com/web/updates/2017/07/upcoming-regexp-features#unicode_property_escapes">Unicode property escapes</a> in regular expressions.</li>
+<li>The default <code>preload</code> value for <code>&lt;audio&gt;</code> and <code>&lt;video&gt;</code> elements is now <code>metadata</code>. This brings Chrome in line with other browsers and helps to reduce bandwidth and resource usage by only loading the metadata and not the media itself.</li>
+<li>You can now use <code>Request.prototype.cache</code> to view the cache mode of a <code>Request</code> and determine whether a request is a reload request.</li>
+<li>Using the Focus Management API, you can now focus an element without scrolling to it with the <code>preventScroll</code> attribute.</li>
+</ul>
+<h2 id="window.alert-window-alert"><code>window.alert()</code> {: #window-alert }</h2>
+<p>Oh, and one more! While this isn’t really a “developer feature”, it makes me happy. <code>window.alert()</code> no longer brings a background tab to the foreground! Instead, the alert will be shown when the user switches to back to that tab.</p>
+<p>No more random tab switching because something fired a <code>window.alert</code> on me. I’m looking at you old Google Calendar.</p>
+<p>Be sure to <a href="https://goo.gl/6FP1a5">subscribe</a> to our <a href="https://www.youtube.com/user/ChromeDevelopers/">YouTube channel</a>, and you’ll get an email notification whenever we launch a new video.</p>
+<p>I’m Pete LePage, and as soon as Chrome 65 is released, I’ll be right here to tell you – what’s new in Chrome!</p>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2021-02-26" />
+  <title>CSS-in-JS support in DevTools</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">CSS-in-JS support in DevTools</h1>
+<p class="date">2021-02-26</p>
+</header>
+<p>This article talks about CSS-in-JS support in DevTools that landed since Chrome 85 and, in general, what we mean by CSS-in-JS and how it’s different from regular CSS that has been supported by DevTools for a long time.</p>
+<h2 id="what-is-css-in-js">What is CSS-in-JS?</h2>
+<p>The definition of CSS-in-JS is rather vague. In a broad sense, it’s an approach for managing CSS code using JavaScript. For example, it could mean that the CSS content is defined using JavaScript and the final CSS output is generated on the fly by the app.</p>
+<p>In the context of DevTools, CSS-in-JS means that the CSS content is injected into the page using <a href="https://developers.google.com/web/updates/2018/03/cssom">CSSOM APIs</a>. Regular CSS is injected using <code>&lt;style&gt;</code> or <code>&lt;link&gt;</code> elements, and it has a static source (e.g. a DOM node or a network resource). In contrast, CSS-in-JS often does not have a static source. A special case here is that the content of a <code>&lt;style&gt;</code> element can be updated using CSSOM API, causing the source to become out of sync with the actual CSS stylesheet.</p>
+<p>If you use any CSS-in-JS library (e.g. <a href="https://github.com/styled-components/styled-components">styled-component</a>, <a href="https://emotion.sh/">Emotion</a>, <a href="https://cssinjs.org/">JSS</a>), the library might inject styles using CSSOM APIs under the hood depending on the mode of development and the browser.</p>
+<p>Let’s look at some examples on how you can inject a stylesheet using CSSOM API similar to what CSS-in-JS libraries are doing.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="co">// Insert new rule to an existing CSS stylesheet</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">const</span> element <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;style&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">const</span> stylesheet <span class="op">=</span> <span class="va">element</span>.<span class="at">sheet</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="va">stylesheet</span>.<span class="at">replaceSync</span>(<span class="st">&#39;.some { color: blue; }&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="va">stylesheet</span>.<span class="at">insertRule</span>(<span class="st">&#39;.some { color: green; }&#39;</span>)<span class="op">;</span> </a></code></pre></div>
+<p>You can <a href="https://developers.google.com/web/updates/2019/02/constructable-stylesheets">create a completely new stylesheet</a> as well:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">// Create a completely new stylesheet</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">const</span> sheet <span class="op">=</span> <span class="kw">new</span> <span class="at">CSSStyleSheet</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="va">stylesheet</span>.<span class="at">replaceSync</span>(<span class="st">&#39;.some { color: blue; }&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="va">stylesheet</span>.<span class="at">insertRule</span>(<span class="st">&#39;.some { color: green; }&#39;</span>)<span class="op">;</span> </a>
+<a class="sourceLine" id="cb2-5" title="5"></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">// Apply constructed stylesheet to the document</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="va">document</span>.<span class="at">adoptedStyleSheets</span> <span class="op">=</span> [...<span class="va">document</span>.<span class="at">adoptedStyleSheets</span><span class="op">,</span> sheet]<span class="op">;</span></a></code></pre></div>
+<h2 id="css-support-in-devtools">CSS support in DevTools</h2>
+<p>In DevTools, the most commonly used feature when dealing with CSS is the <strong>Styles</strong> pane. In the <strong>Styles</strong> pane, you can view what rules apply to a particular element and you can edit the rules and see the changes on the page in realtime.</p>
+<p>{% Video src=“video/dPDCek3EhZgLQPGtEG3y0fTn4v82/Jy8q9gPbQknRturLyCsq.mp4”, autoplay=“true”, muted=“true”, loop=“true” %}</p>
+<p>Before last year, the support for CSS rules modified using CSSOM APIs was rather limited: <strong>you could only see the applied rules but could not edit them.</strong> The main goal we had last year was to allow editing of CSS-in-JS rules using the Styles pane. Sometimes we also call CSS-in-JS styles <a href="https://developers.google.com/web/updates/2019/02/constructable-stylesheets">“constructed”</a> to indicate that they were constructed using Web APIs.</p>
+<p>Let’s dive into the details of Styles editing works in DevTools.</p>
+<h2 id="style-editing-mechanism-in-devtools">Style editing mechanism in DevTools</h2>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/I0kXoEu7jgbAd288aSGQ.svg”, alt=“Style editing mechanism in DevTools”, width=“800”, height=“433” %}</p>
+<p>When you select an element in DevTools, the <strong>Styles</strong> pane is shown. The <strong>Styles</strong> pane issues a CDP command called <a href="https://chromedevtools.github.io/devtools-protocol/tot/CSS/#method-getMatchedStylesForNode">CSS.getMatchedStylesForNode</a> to get CSS rules that apply to the element. CDP stands for Chrome DevTools Protocol and it’s an API that allows DevTools frontend to get additional information about the inspected page.</p>
+<p>When invoked, <code>CSS.getMatchedStylesForNode</code> identifies all the stylesheets in the document and parses them using the browser’s CSS parser. Then it builds an index that associates every CSS rule with a position in the stylesheet source.</p>
+<p>You might ask, why does it need to parse the CSS again? The problem here is that for performance reasons the browser itself is not concerned with the source positions of CSS rules and, therefore, it does not store them. But DevTools needs the source positions to support CSS editing. We don’t want regular Chrome users to pay the performance penalty, but we do want DevTools users to have access to the source positions. This re-parsing approach addresses both use cases with minimal downsides.</p>
+<p>Next, the <code>CSS.getMatchedStylesForNode</code> implementation asks the browser’s style engine to provide CSS rules that match the given element. And at last, the method associates the rules returned by the style engine with the source code and provides a structured response about CSS rules so that DevTools knows which part of the rule is the selector or properties. It allows DevTools to edit the selector and the properties independently.</p>
+<p>Now let’s look at editing. Remember that <code>CSS.getMatchedStylesForNode</code> returns source positions for every rule? That’s crucial for editing. When you change a rule, DevTools issues another CDP command that actually updates the page. The command includes the original position of the fragment of the rule that is being updated and the new text that the fragment needs to be updated with.</p>
+<p>On the backend, when handling the edit call, DevTools updates the target stylesheet. It also updates the copy of the stylesheet source that it maintains and updates the source positions for the updated rule. In response to the edit call, the DevTools frontend gets back the updated positions for the text fragment that has been just updated.</p>
+<p>This explains why editing CSS-in-JS in DevTools didn’t work out of the box: <strong>CSS-in-JS doesn’t have an actual source stored anywhere</strong> and <strong>the CSS rules live in the browser’s memory in CSSOM data structures</strong>.</p>
+<h2 id="how-we-added-support-for-css-in-js">How we added support for CSS-in-JS</h2>
+<p>So, to support editing of CSS-in-JS rules, we decided that the best solution would be to create a source for constructed stylesheets that can be edited using the existing mechanism described above.</p>
+<p>The first step is to build the source text. The browser’s style engine stores the CSS rules in the <code>CSSStyleSheet</code> class. That class is the one whose instances you can create from JavaScript as discussed previously. The code to build the source text is as follows:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" title="1">String InspectorStyleSheet::CollectStyleSheetRules() {</a>
+<a class="sourceLine" id="cb3-2" title="2">  StringBuilder builder;</a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="cf">for</span> (<span class="dt">unsigned</span> i = <span class="dv">0</span>; i &lt; page_style_sheet_-&gt;length(); i++) {</a>
+<a class="sourceLine" id="cb3-4" title="4">    builder.Append(page_style_sheet_-&gt;item(i)-&gt;cssText());</a>
+<a class="sourceLine" id="cb3-5" title="5">    builder.Append(<span class="ch">&#39;\n&#39;</span>);</a>
+<a class="sourceLine" id="cb3-6" title="6">  }</a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="cf">return</span> builder.ToString();</a>
+<a class="sourceLine" id="cb3-8" title="8">}</a></code></pre></div>
+<p>It iterates over the rules found in a CSSStyleSheet instance and builds a single string out of it. This method is invoked when an instance of InspectorStyleSheet class is created. The InspectorStyleSheet class wraps a CSSStyleSheet instance and extracts additional metadata that is required by DevTools:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb4-1" title="1"><span class="dt">void</span> InspectorStyleSheet::UpdateText() {</a>
+<a class="sourceLine" id="cb4-2" title="2">  String text;</a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="dt">bool</span> success = InspectorStyleSheetText(&amp;text);</a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="cf">if</span> (!success)</a>
+<a class="sourceLine" id="cb4-5" title="5">    success = InlineStyleSheetText(&amp;text);</a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="cf">if</span> (!success)</a>
+<a class="sourceLine" id="cb4-7" title="7">    success = ResourceStyleSheetText(&amp;text);</a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="cf">if</span> (!success)</a>
+<a class="sourceLine" id="cb4-9" title="9">    success = CSSOMStyleSheetText(&amp;text);</a>
+<a class="sourceLine" id="cb4-10" title="10">  <span class="cf">if</span> (success)</a>
+<a class="sourceLine" id="cb4-11" title="11">    InnerSetText(text, false);</a>
+<a class="sourceLine" id="cb4-12" title="12">}</a></code></pre></div>
+<p>In this snippet, we see <code>CSSOMStyleSheetText</code> that calls <code>CollectStyleSheetRules</code> internally. <code>CSSOMStyleSheetText</code> is invoked if the stylesheet is not inline or a resource stylesheet. Basically, these two snippets already allow basic editing of the stylesheets that are created using the <code>new CSSStyleSheet()</code> constructor.</p>
+<p>A special case is the stylesheets associated with a <code>&lt;style&gt;</code> tag that have been mutated using the CSSOM API. In this case, the stylesheet contains the source text and additional rules that are not present in the source. To handle this case, we introduce a method to merge those additional rules into the source text. Here, the order matters because CSS rules can be inserted in the middle of the original source text. For example, imagine that the original <code>&lt;style&gt;</code> element contained the following text:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb5-1" title="1"><span class="co">/* comment */</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="fu">.rule1</span> {}</a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="fu">.rule3</span> {}</a></code></pre></div>
+<p>Then the page inserted some new rules using the JS API producing the following order of rules: .rule0, .rule1, .rule2, .rule3, .rule4. The resulting source text after the merge operation should be as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">.rule0</span> {}</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">/* comment */</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="fu">.rule1</span> {}</a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="fu">.rule2</span> {}</a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="fu">.rule3</span> {}</a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="fu">.rule4</span> {}</a></code></pre></div>
+<p>The preservation of the original comments and indentation is important for the editing process because the source text positions of rules have to be precise.</p>
+<p>Another aspect that is special for CSS-in-JS stylesheets is that <em>they can be changed by the page at any time</em>. If the actual CSSOM rules would go out of sync with the text version, the editing would not work. For this we introduced a so-called <strong>probe</strong>, that allows the browser to notify the backend part of DevTools when a stylesheet is being mutated. Mutated stylesheets are then synchronized during the next call to CSS.getMatchedStylesForNode.</p>
+<p>With all these pieces in place, CSS-in-JS editing already works but we wanted to improve the UI to indicate if a stylesheet was constructed. We have added a new attribute called <code>isConstructed</code> to CDP’s <a href="https://chromedevtools.github.io/devtools-protocol/tot/CSS/#type-CSSStyleSheetHeader">CSS.CSSStyleSheetHeader</a> that the frontend makes use of to properly display the source of a CSS rule:</p>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/IcXohpDMPKuHH2L9yaTB.png”, alt=“Constructable stylesheet”, width=“800”, height=“484” %}</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>To recap our story here, we went through the relevant use cases related to CSS-in-JS that DevTools didn’t support and walked through the solution to support those use cases. The interesting part of this implementation is that we were able to leverage existing functionality by making CSSOM CSS rules have a regular source text, avoiding the need to completely re-architect style editing in DevTools.</p>
+<p>For more background, check out <a href="https://goo.gle/devtools-css-in-js">our design proposal</a> or the Chromium <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=946975">tracking bug</a> which references all related patches.</p>
+</body>
+</html>

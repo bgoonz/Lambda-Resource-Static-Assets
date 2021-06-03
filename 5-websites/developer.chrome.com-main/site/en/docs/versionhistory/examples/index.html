@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2021-03-04" />
+  <title>VersionHistory API examples</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">VersionHistory API examples</h1>
+<p class="date">2021-03-04</p>
+</header>
+<p>This page shows example usage of the VersionHistory web service API.</p>
+<h2 id="platform">Platform</h2>
+<p>List all platforms:</p>
+<pre class="http"><code>GET https://versionhistory.googleapis.com/v1/chrome/platforms/</code></pre>
+<p>List all platform and channel combinations:</p>
+<pre class="http"><code>GET https://versionhistory.googleapis.com/v1/chrome/platforms/all/channels</code></pre>
+<p>List all versions for all platform and channel combinations.</p>
+<pre class="http"><code>GET https://versionhistory.googleapis.com/v1/chrome/platforms/all/channels/all/versions</code></pre>
+<h2 id="version">Version</h2>
+<p>List all versions for Windows in the <code>stable</code> channel:</p>
+<pre class="http"><code>GET https://versionhistory.googleapis.com/v1/chrome/platforms/win/channels/stable/versions</code></pre>
+<p>List all versions for Windows in the <code>stable</code> channel in ascending order by version:</p>
+<pre class="http"><code>GET https://versionhistory.googleapis.com/v1/chrome/platforms/win/channels/stable/versions?order_by=version%20asc</code></pre>
+<p>List all versions for Windows in <code>stable</code>, <code>beta</code>, and <code>dev</code> channels:</p>
+<pre class="http"><code>GET https://versionhistory.googleapis.com/v1/chrome/platforms/win/channels/all/versions/?filter=channel&lt;=dev</code></pre>
+<h2 id="release">Release</h2>
+<p>List all releases for Windows in the <code>stable</code> channel:</p>
+<pre class="http"><code>GET https://versionhistory.googleapis.com/v1/chrome/platforms/win/channels/stable/versions/all/releases</code></pre>
+<p>List all releases for the version <code>85.0.4183.83</code>:</p>
+<pre class="http"><code>GET https://versionhistory.googleapis.com/v1/chrome/platforms/all/channels/all/versions/85.0.4183.83/releases</code></pre>
+<p>List all releases for Windows that are currently being served:</p>
+<pre class="http"><code>GET https://versionhistory.googleapis.com/v1/chrome/platforms/win/channels/all/versions/all/releases?filter=endtime=1970-01-01T00:00:00Z</code></pre>
+<p>List all releases for Windows in the <code>stable</code> channel that reached 100% rollout:</p>
+<pre class="http"><code>GET https://versionhistory.googleapis.com/v1/chrome/platforms/win/channels/stable/versions/all/releases?filter=fraction=1</code></pre>
+</body>
+</html>

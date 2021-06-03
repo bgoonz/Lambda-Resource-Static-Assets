@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2021-01-28" />
+  <title>Deprecations and removals in Chrome 89</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Deprecations and removals in Chrome 89</h1>
+<p class="date">2021-01-28</p>
+</header>
+<p>{% include ‘partials/see-all-dep-rem.md’ %}</p>
+<p>Chrome 89 beta was released on January 28, 2021 and is expected to become the stable version in the first week of March 2021.</p>
+<h2 id="remove-prefixed-events-for">Remove prefixed events for <link rel=prerender></h2>
+<p>The legacy prefixed events (webkitprerenderstart, webkitprerenderstop, webkitprerenderload, and webkitprerenderdomcontentloaded) dispatched on <code>&lt;link rel=prerender&gt;</code> are now removed from Chrome.</p>
+<p><a href="https://www.chromestatus.com/feature/4925917174431744">Chrome Platform Status</a></p>
+<h2 id="stop-cloning-sessionstorage-for-windows-opened-with-noopener">Stop cloning sessionStorage for windows opened with noopener</h2>
+<p>When a window is opened with noopener, Chrome will no longer clone the sessionStorage of its opener; it will instead start an empty sessionStorage namespace. This brings Chrome in conformance with the HTML specification.</p>
+<p><a href="https://www.chromestatus.com/feature/5679997870145536">Chrome Platform Status</a> | <a href="https://crbug.com/771959">Chromium Bug</a></p>
+<p>{% include ‘partials/deprecations-policy.md’ %}</p>
+</body>
+</html>

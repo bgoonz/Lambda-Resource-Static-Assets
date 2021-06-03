@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2014-02-14" />
+  <title>Overriding Chrome settings</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Overriding Chrome settings</h1>
+<p class="date">2014-02-14</p>
+</header>
+<p>{% include ‘partials/extensions/mv2page-in-mv3.md’ %}</p>
+<p>Settings overrides are a way for extensions to override selected Chrome settings. The API is available on Windows in all current versions of Chrome and is available on Mac in Chrome 56 and later.</p>
+<h2 id="homepage-search-provider-and-startup-pages-others">Homepage, search provider, and startup pages {: #others }</h2>
+<p>Here is an example how <a href="#homepage">homepage</a>, <a href="#search_provider">search provider</a> and <a href="#startup_pages">startup pages</a> can be modified in the <a href="/docs/extensions/mv3/manifest/">extension manifest</a>. Web sites used in the settings API must be <a href="https://support.google.com/webmasters/answer/35179">verified</a> (via Webmaster Tools) as being associated with that item in the Chrome Web Store. Note that if you verify ownership for a domain (for example, http://example.com) you can use any subdomain or page (for example, http://app.example.com or http://example.com/page.html) within your extension.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;My extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;chrome_settings_overrides&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="dt">&quot;homepage&quot;</span><span class="fu">:</span> <span class="st">&quot;http://www.homepage.com&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="dt">&quot;search_provider&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-7" title="7">        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;name.__MSG_url_domain__&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8">        <span class="dt">&quot;keyword&quot;</span><span class="fu">:</span> <span class="st">&quot;keyword.__MSG_url_domain__&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-9" title="9">        <span class="dt">&quot;search_url&quot;</span><span class="fu">:</span> <span class="st">&quot;http://www.foo.__MSG_url_domain__/s?q={searchTerms}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-10" title="10">        <span class="dt">&quot;favicon_url&quot;</span><span class="fu">:</span> <span class="st">&quot;http://www.foo.__MSG_url_domain__/favicon.ico&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-11" title="11">        <span class="dt">&quot;suggest_url&quot;</span><span class="fu">:</span> <span class="st">&quot;http://www.foo.__MSG_url_domain__/suggest?q={searchTerms}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-12" title="12">        <span class="dt">&quot;instant_url&quot;</span><span class="fu">:</span> <span class="st">&quot;http://www.foo.__MSG_url_domain__/instant?q={searchTerms}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-13" title="13">        <span class="dt">&quot;image_url&quot;</span><span class="fu">:</span> <span class="st">&quot;http://www.foo.__MSG_url_domain__/image?q={searchTerms}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-14" title="14">        <span class="dt">&quot;search_url_post_params&quot;</span><span class="fu">:</span> <span class="st">&quot;search_lang=__MSG_url_domain__&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-15" title="15">        <span class="dt">&quot;suggest_url_post_params&quot;</span><span class="fu">:</span> <span class="st">&quot;suggest_lang=__MSG_url_domain__&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-16" title="16">        <span class="dt">&quot;instant_url_post_params&quot;</span><span class="fu">:</span> <span class="st">&quot;instant_lang=__MSG_url_domain__&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-17" title="17">        <span class="dt">&quot;image_url_post_params&quot;</span><span class="fu">:</span> <span class="st">&quot;image_lang=__MSG_url_domain__&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-18" title="18">        <span class="dt">&quot;alternate_urls&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-19" title="19">          <span class="st">&quot;http://www.moo.__MSG_url_domain__/s?q={searchTerms}&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-20" title="20">          <span class="st">&quot;http://www.noo.__MSG_url_domain__/s?q={searchTerms}&quot;</span></a>
+<a class="sourceLine" id="cb1-21" title="21">        <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-22" title="22">        <span class="dt">&quot;encoding&quot;</span><span class="fu">:</span> <span class="st">&quot;UTF-8&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-23" title="23">        <span class="dt">&quot;is_default&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb1-24" title="24">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-25" title="25">    <span class="dt">&quot;startup_pages&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;http://www.startup.com&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb1-26" title="26">   <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-27" title="27">   <span class="dt">&quot;default_locale&quot;</span><span class="fu">:</span> <span class="st">&quot;de&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-28" title="28">   <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-29" title="29"><span class="fu">}</span></a></code></pre></div>
+<h2 id="customizing-values-customizing">Customizing values {: #customizing }</h2>
+<p>Values in the manifest can be customized in the following ways:</p>
+<ul>
+<li>All values of the <code>search_provider</code>, <code>homepage</code> and <code>startup_pages</code> properties can be localized using the <a href="/docs/extensions/reference/i18n">chrome.i18n API</a>.</li>
+<li><p>For <a href="/docs/extensions/mv3/external_extensions/">external extensions</a>, the <code>search_provider</code>, <code>homepage</code> and <code>startup_pages</code> URL values can be parametrized using a registry key. A new registry entry should be created next to the “update_url” key (see instructions <a href="/docs/extensions/mv3/external_extensions/#registry">here</a>). The value name is “install_parameter”, the value data is an arbitrary string:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;update_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://clients2.google.com/service/update2/crx&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">&quot;install_parameter&quot;</span><span class="fu">:</span> <span class="st">&quot;Value&quot;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="fu">}</span></a></code></pre></div>
+<p>All occurrences of the substring “__PARAM__” in the manifest URLs will be substituted with the “install_parameter” value. If “install_parameter” is absent, occurrences of “__PARAM__” are removed. Note that “__PARAM__” cannot be part of the hostname. It needs to occur after the first ‘/’ in the URL.</p></li>
+</ul>
+<h2 id="reference-reference">Reference {: #reference }</h2>
+<p>An extension can override one or more of the following properties in the manifest:</p>
+<ul>
+<li><p><strong><code>homepage</code> (string)</strong> - optional</p>
+<p>New value for the homepage.</p></li>
+<li><p><strong><code>search_provider</code> (object)</strong> - optional</p>
+<p>A search engine</p>
+<table>
+<tbody>
+<tr>
+<th>
+Type
+</th>
+<th>
+Attribute
+</th>
+<th>
+Description
+</th>
+</tr>
+<tr id="property-search_provider-name">
+<td>
+string
+</td>
+<td>
+<span class="optional">(optional)</span> name
+</td>
+<td>
+<p>
+Name of the search engine displayed to user. This may only be omitted if <em>prepopulated_id</em> is set.
+</p>
+</td>
+</tr>
+<tr id="property-search_provider-keyword">
+<td>
+string
+</td>
+<td>
+<span class="optional">(optional)</span> keyword
+</td>
+<td>
+<p>
+Omnibox keyword for the search engine. This may only be omitted if <em>prepopulated_id</em> is set.
+</p>
+</td>
+</tr>
+<tr id="property-search_provider-favicon_url">
+<td>
+string
+</td>
+<td>
+<span class="optional">(optional)</span> favicon_url
+</td>
+<td>
+<p>
+An icon URL for the search engine. This may only be omitted if <em>prepopulated_id</em> is set.
+</p>
+</td>
+</tr>
+<tr id="property-search_provider-search_url">
+<td>
+string
+</td>
+<td>
+search_url
+</td>
+<td>
+<p>
+An search URL used by the search engine.
+</p>
+</td>
+</tr>
+<tr id="property-search_provider-encoding">
+<td>
+string
+</td>
+<td>
+<span class="optional">(optional)</span> encoding
+</td>
+<td>
+<p>
+Encoding of the search term. This may only be omitted if <em>prepopulated_id</em> is set.
+</p>
+</td>
+</tr>
+<tr id="property-search_provider-suggest_url">
+<td>
+string
+</td>
+<td>
+<span class="optional">(optional)</span> suggest_url
+</td>
+<td>
+<p>
+If omitted, this engine does not support suggestions.
+</p>
+</td>
+</tr>
+<tr id="property-search_provider-image_url">
+<td>
+string
+</td>
+<td>
+<span class="optional">(optional)</span> image_url
+</td>
+<td>
+<p>
+If omitted, this engine does not support image search.
+</p>
+</td>
+</tr>
+<tr id="property-search_provider-search_url_post_params">
+<td>
+string
+</td>
+<td>
+<span class="optional">(optional)</span> search_url_post_params
+</td>
+<td>
+<p>
+The string of post parameters to search_url
+</p>
+</td>
+</tr>
+<tr id="property-search_provider-suggest_url_post_params">
+<td>
+string
+</td>
+<td>
+<span class="optional">(optional)</span> suggest_url_post_params
+</td>
+<td>
+<p>
+The string of post parameters to suggest_url
+</p>
+</td>
+</tr>
+<tr id="property-search_provider-image_url_post_params">
+<td>
+string
+</td>
+<td>
+<span class="optional">(optional)</span> image_url_post_params
+</td>
+<td>
+<p>
+The string of post parameters to image_url
+</p>
+</td>
+</tr>
+<tr id="property-search_provider-alternate_urls">
+<td>
+array of string
+</td>
+<td>
+<span class="optional">(optional)</span> alternate_urls
+</td>
+<td>
+<p>
+A list of URL patterns that can be used, in addition to |search_url|.
+</p>
+</td>
+</tr>
+<tr id="property-search_provider-prepopulated_id">
+<td>
+integer
+</td>
+<td>
+<span class="optional">(optional)</span> prepopulated_id
+</td>
+<td>
+<p>
+An ID of the built-in search engine in Chrome.
+</p>
+</td>
+</tr>
+<tr id="property-search_provider-is_default">
+<td>
+boolean
+</td>
+<td>
+is_default
+</td>
+<td>
+<p>
+Specifies if the search provider should be default.
+</p>
+</td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong><code>startup_pages</code> (array of string)</strong> - optional</p>
+<p>An array of length one containing a URL to be used as the startup page.</p></li>
+</ul>
+</body>
+</html>

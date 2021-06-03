@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>migrate-to-10.x</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h2 id="data-table">Data Table</h2>
+<h3 id="html">HTML</h3>
+<p>Aside from using new icons from the <a href="https://github.com/IBM/carbon-elements"><code>carbon-elements</code></a> package, there are several structural changes and new selectors in the Data Table component. Please see the new structure below and reference the <a href="https://next.carbondesignsystem.com/components/data-table/code">data table page</a> in our site to copy the specified new markup.</p>
+<p>React and other framework variants should reflect the changes automatically.</p>
+<p><strong>Things to note</strong>:</p>
+<ul>
+<li>All <code>-v2</code>’s in selectors have been removed</li>
+<li>All SVG icons have changed to new icons.</li>
+<li>Structural changes and new selectors in the table title. See structure below and SCSS section for more details.</li>
+<li>Structural changes and new selectors in the table toolbar. See structure below and SCSS section for more details.</li>
+<li>Toolbar overflow menu now uses the overflow menu component <code>&lt;ul&gt;</code> markup instead of just <code>button.bx--batch-actions</code></li>
+<li><code>bx—search</code> container in toolbar no longer has the <code>bx--search—light</code> class</li>
+<li>Batch action buttons no longer have <code>bx--btn—ghost</code> class</li>
+<li>New markup/selector involving expandable features includes a <code>div.bx--child-row-inner-container</code> as a wrapper for content within the child row <code>td</code>.</li>
+<li>New markup/selectors involving sortable features include an additional icon <code>bx--table-sort__icon-unsorted</code> for non-sorted state, and a new class for sortable data table <code>bx--data-table—-sort</code>.</li>
+<li>New selectors <code>bx—table-column-checkbox</code> and <code>bx—table-column-menu</code> for checkbox and overflow menu <code>td</code>’s and <code>th</code>’s.</li>
+<li>New selector for <code>li</code> within a row overflow menu <code>bx--table-row--menu-option</code>. See SCSS section for more details.</li>
+</ul>
+<p><strong>New Structure</strong>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">bx--data-table-container</span></a>
+<a class="sourceLine" id="cb1-2" title="2">├── <span class="ex">bx--data-table-header</span></a>
+<a class="sourceLine" id="cb1-3" title="3">│   ├── <span class="ex">bx--data-table-header__title</span></a>
+<a class="sourceLine" id="cb1-4" title="4">│   └── <span class="ex">bx--data-table-header__description</span></a>
+<a class="sourceLine" id="cb1-5" title="5">├── <span class="ex">bx--table-toolbar</span></a>
+<a class="sourceLine" id="cb1-6" title="6">│   ├── <span class="ex">bx--batch-actions</span></a>
+<a class="sourceLine" id="cb1-7" title="7">│   │   ├── <span class="ex">bx--batch-action-list</span></a>
+<a class="sourceLine" id="cb1-8" title="8">│   │   └── <span class="ex">bx--batch-summary</span></a>
+<a class="sourceLine" id="cb1-9" title="9">│   │       └── <span class="ex">bx--batch-summary__para</span></a>
+<a class="sourceLine" id="cb1-10" title="10">│   └── <span class="ex">bx--toolbar-content</span></a>
+<a class="sourceLine" id="cb1-11" title="11">│       ├── <span class="ex">bx--toolbar-search-container-expandable</span> (bx--toolbar-search-container-persistent)</a>
+<a class="sourceLine" id="cb1-12" title="12">│       ├── <span class="ex">bx--overflow-menu</span> bx--toolbar-action</a>
+<a class="sourceLine" id="cb1-13" title="13">│       └── <span class="ex">bx--btn--primary</span></a>
+<a class="sourceLine" id="cb1-14" title="14">└── <span class="ex">bx--data-table</span></a>
+<a class="sourceLine" id="cb1-15" title="15">    ├── <span class="ex">thead</span></a>
+<a class="sourceLine" id="cb1-16" title="16">    └── <span class="ex">tbody</span></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="ex">pagination</span></a></code></pre></div>
+<h3 id="selectors">Selectors</h3>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 19%" />
+<col style="width: 51%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>v9</th>
+<th>v10</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Table container</strong></td>
+<td><code>.bx--data-table-v2-container</code></td>
+<td><code>.bx--data-table-container</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="even">
+<td><strong>Table header</strong></td>
+<td><code>.bx--data-table-v2-header</code></td>
+<td><code>.bx--data-table-header</code></td>
+<td>:eyes: Changed; Also, now a container class on a <code>div</code> instead of an <code>h4</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>-</td>
+<td><code>.bx--data-table-header__title</code></td>
+<td>:sparkles: New</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>-</td>
+<td><code>.bx--data-table-header__description</code></td>
+<td>:sparkles: New</td>
+</tr>
+<tr class="odd">
+<td><strong>Toolbar</strong></td>
+<td><code>bx--toolbar-search-container</code></td>
+<td><code>bx--toolbar-search-container-expandable</code></td>
+<td>:sparkles: New; Default is expandable search</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>-</td>
+<td><code>bx--toolbar-search-container-persistent</code></td>
+<td>:sparkles: New; Optional persistent search</td>
+</tr>
+<tr class="odd">
+<td><strong>Data Table</strong></td>
+<td><code>.bx--data-table-v2--no-border</code></td>
+<td>-</td>
+<td>:skull: Removed</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>.bx--data-table-v2--static</code></td>
+<td><code>.bx--data-table--static</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>.bx--data-table-v2--selected</code></td>
+<td><code>.bx--data-table--selected</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>.bx--data-table-v2--zebra</code></td>
+<td><code>.bx--data-table--zebra</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>-</td>
+<td><code>.bx--data-table—-sort</code></td>
+<td>:sparkles: New</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>.bx--data-table-v2—-small</code></td>
+<td><code>.bx--data-table—-small</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>.bx--data-table-v2—-compact</code></td>
+<td><code>.bx--data-table—-compact</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>.bx--data-table-v2—-tall</code></td>
+<td><code>.bx--data-table—-tall</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>.bx--data-table-v2--compact</code></td>
+<td><code>.bx--data-table--compact</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>.bx--data-table-v2--short</code></td>
+<td><code>.bx--data-table--short</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>.bx--data-table-v2--tall</code></td>
+<td><code>.bx--data-table--tall</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="even">
+<td><strong>Table Rows</strong></td>
+<td><code>.bx--parent-row-v2</code></td>
+<td><code>.bx--parent-row</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>.bx--expandable-row-v2</code></td>
+<td><code>.bx--expandable-row</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>.bx--expandable-row--hidden-v2</code></td>
+<td><code>.bx--expandable-row--hidden</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>.bx--expandable-row--hover-v2</code></td>
+<td><code>.bx--expandable-row--hover</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="even">
+<td><strong>Table Columns</strong></td>
+<td>-</td>
+<td><code>.bx—table-column-checkbox</code></td>
+<td>:sparkles: New; Used in <code>th</code>’s and <code>td</code>’s with checkbox.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>-</td>
+<td><code>.bx—table-column-menu</code></td>
+<td>:sparkles: New; Used in <code>td</code>’s with overflow menu</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>.bx—table-expand-v2</code></td>
+<td><code>.bx—table-expand</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>-</td>
+<td><code>.bx--child-row-inner-container</code></td>
+<td>:sparkles: New; Container inside expand child row <code>td</code>, allows for motion animation</td>
+</tr>
+<tr class="even">
+<td><strong>Buttons, Icons and more</strong></td>
+<td><code>bx--table-sort-v2</code></td>
+<td><code>bx--table-sort</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>bx--table-sort-v2__icon</code></td>
+<td><code>bx--table-sort__icon</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>-</td>
+<td><code>.bx--table-sort__icon-unsorted</code></td>
+<td>:sparkles: New</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>bx--table-expand-v2__button</code></td>
+<td><code>bx--table-expand__button</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>bx--table-expand-v2__svg</code></td>
+<td><code>bx--table-expand__svg</code></td>
+<td>:eyes: Changed</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>-</td>
+<td><code>bx--table-row--menu-option</code></td>
+<td>:sparkles: New; Addional class added to <code>li.bx--overflow-menu-options__option</code> in table row overflow menus</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

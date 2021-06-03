@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-09-08" />
+  <title>DevTools architecture refresh: migrating to JavaScript modules</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">DevTools architecture refresh: migrating to JavaScript modules</h1>
+<p class="date">2020-09-08</p>
+</header>
+<p>As you might know, <a href="/docs/devtools/">Chrome DevTools</a> is a web application written using HTML, CSS and JavaScript. Over the years, DevTools has gotten more feature-rich, smarter and knowledgeable about the broader web platform. While DevTools has expanded over the years, its architecture largely resembles the original architecture when it was still part of <a href="https://webkit.org/web-inspector/">WebKit</a>.</p>
+<p>This post is part of a <strong>series of blog posts</strong> describing <strong>the changes we are making to DevTools’ architecture and how it is built</strong>. We will explain how DevTools has historically worked, what the benefits and limitations were and what we have done to alleviate these limitations. Therefore, let’s dive deep into module systems, how to load code and how we ended up using JavaScript modules.</p>
+<h2 id="in-the-beginning-there-was-nothing-beginning">In the beginning, there was nothing {: #beginning }</h2>
+<p>While the current frontend landscape has a variety of module systems with tools built around them, as well as the <a href="https://v8.dev/features/modules">now-standardized JavaScript modules format</a>, none of these existed when DevTools was first built. DevTools is built on top of code that initially shipped in WebKit more than 12 years ago.</p>
+<p>The first mention of a module system in DevTools stems from 2012: <a href="https://chromium.googlesource.com/chromium/src/+/3a68bf939c8c8909ca84fea932fd42739e796638%5E%21/">the introduction of a list of modules with an associated list of sources</a>. This was part of the Python infrastructure used back then to compile and build DevTools. A follow-up change extracted all modules into a separate <code>frontend_modules.json</code> file (<a href="https://chromium.googlesource.com/chromium/src/+/f8dbf1efbac98ffb266a10a32469b28ca0dff7b4">commit</a>) in 2013 and then into separate <code>module.json</code> files (<a href="https://chromium.googlesource.com/chromium/src/+/f0148d511def6522b3166ec507a18328e72ea652">commit</a>) in 2014.</p>
+<p>An example <code>module.json</code> file:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="st">&quot;dependencies&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="st">&quot;common&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="st">&quot;scripts&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="st">&quot;StylePane.js&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="st">&quot;ElementsPanel.js&quot;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  ]</a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="op">}</span></a></code></pre></div>
+<p>Since 2014, the <code>module.json</code> pattern has been used in DevTools to specify its modules and source files. Meanwhile, the web ecosystem rapidly evolved and multiple module formats were created, including UMD, CommonJS and the eventually standardized JavaScript modules. However, DevTools stuck with the <code>module.json</code> format.</p>
+<p>While DevTools remained working, there were a couple of downsides of using a non-standardized and unique module system:</p>
+<ol type="1">
+<li>The <code>module.json</code> format required custom build tooling, akin to modern bundlers.</li>
+<li>There was no IDE integration, which required custom tooling to generate files modern IDEs could understand (<a href="https://chromium-review.googlesource.com/c/devtools/devtools-frontend/+/2098602/3/scripts/generate_jsconfig.js">the original script to generate jsconfig.json files for VS Code</a>).</li>
+<li>Functions, classes and objects were all put on the global scope to make sharing between modules possible.</li>
+<li>Files were order-dependent, meaning the order in which <code>sources</code> were listed was important. There was no guarantee that code you rely on would be loaded, other than that a human had verified it.</li>
+</ol>
+<p>All in all, when evaluating the current state of the module system in DevTools and the other (more widely used) module formats, we concluded that the <code>module.json</code> pattern was creating more problems than it solved and it was time to plan our move away from it.</p>
+<h2 id="the-benefits-of-standards-standards">The benefits of standards {: #standards }</h2>
+<p>Out of the existing module systems, we chose JavaScript modules as the one to migrate to. At the time of that decision JavaScript modules were still shipping behind a flag in Node.js and a large amount of packages available on NPM did not have an JavaScript modules bundle we could use. Despite this, we concluded that JavaScript modules were the best option.</p>
+<p>The primary benefit of JavaScript modules is that it is <strong>the standardized module format for JavaScript</strong>. When we listed the downsides of the <code>module.json</code> (see above), we realized that almost all of them were related to using a non-standardized and unique module format.</p>
+<blockquote>
+<p>Choosing a module format that is non-standardized means that we have to invest time ourselves into building integrations with the build tools and tools our maintainers used.</p>
+</blockquote>
+<p>These integrations often were brittle and lacked support for features, requiring additional maintenance time, sometimes leading to subtle bugs that would eventually ship to users.</p>
+<p>Since JavaScript modules were the standard, it meant that IDEs like VS Code, type checkers like Closure Compiler/TypeScript and build tools like Rollup/minifiers would be able to understand the source code we wrote. Moreover, when a new maintainer would join the DevTools team, they would not have to spend time learning a proprietary <code>module.json</code> format, whereas they would (likely) already be familiar with JavaScript modules.</p>
+<p>Of course, when DevTools was initially built, none of the above benefits existed. It took years of work in standards groups, runtime implementations and developers using JavaScript modules providing feedback to get to the point where they are now. But when JavaScript modules became available we had a choice to make: either keep maintaining our own format, or invest in migrating to the new one.</p>
+<h2 id="the-cost-of-the-shiny-new-cost">The cost of the shiny new {: #cost }</h2>
+<p>Even though JavaScript modules had plenty of benefits that we would like to use, we remained in the non-standard <code>module.json</code> world. Reaping the benefits of JavaScript modules meant that we had to significantly invest in cleaning up technical debt, performing a migration that could potentially break features and introduce regression bugs.</p>
+<p>At this point, it was not a question of “Do we want to use JavaScript modules?”, but a question of <strong>“How expensive is it to be able to use JavaScript modules?”</strong>. Here, we had to balance the risk of breaking our users with regressions, the cost of engineers spending (a large amount of) time migrating and the temporary worse state we would work in.</p>
+<p>That last point turned out to be very important. Even though we could in theory get to JavaScript modules, during a migration we would end up with code that would have to take into account <strong>both</strong> <code>module.json</code> and JavaScript modules. Not only was this technically difficult to achieve, it also meant that all engineers working on DevTools would need to know how to work in this environment. They would have to continuously ask themselves “For this part of the codebase, is it <code>module.json</code> or JavaScript modules and how do I make changes?”.</p>
+<blockquote>
+<p>Sneak peek: The hidden cost of guiding our fellow maintainers through a migration was bigger than we anticipated.</p>
+</blockquote>
+<p>After the cost analysis, we concluded that it was still worthwhile to migrate to JavaScript modules. Therefore, our main goals were the following:</p>
+<ol type="1">
+<li>Make sure that the usage of JavaScript modules reaps the benefits to the fullest extent possible.</li>
+<li>Make sure that the integration with the existing <code>module.json</code>-based system is safe and does not lead to negative user impact (regression bugs, user frustration).</li>
+<li>Guide all DevTools maintainers through the migration, primarily with checks and balances built-in to prevent accidental mistakes.</li>
+</ol>
+<h2 id="spreadsheets-transformations-and-technical-debt-debt">Spreadsheets, transformations and technical debt {: #debt }</h2>
+<p>While the goal was clear, the limitations imposed by the <code>module.json</code> format proved to be difficult to workaround. It took several iterations, prototypes and architectural changes before we developed a solution we were comfortable with. We wrote <a href="https://docs.google.com/document/d/1h9dOy3nNPNfZ2AtZXzB-DwJqG4Oo37WWvKLCuzCcPzo/preview">a design doc</a> with the migration strategy we ended up. The design doc also listed our initial time estimation: 2-4 weeks.</p>
+<blockquote>
+<p>Spoiler alert: the most intensive part of the migration took 4 months and from start to finish took 7 months!</p>
+</blockquote>
+<p>The initial plan, however, stood the test of time: we would teach the DevTools runtime to load all files listed in the <code>scripts</code> array in the <code>module.json</code> file using the old way, while all files in listed in the <code>modules</code> array with <a href="https://v8.dev/features/dynamic-import">JavaScript modules dynamic import</a>. Any file that would reside in the <code>modules</code> array would be able to use ES imports/exports.</p>
+<p>Additionally, we would perform the migration in 2 phases (we eventually split up the last phase into 2 sub-phases, see below): the <code>export</code>- and <code>import</code>-phases. The status of which module would be in which phase was tracked in a large spreadsheet:</p>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/pHs4SlOXdOIg3Qw3hS4j.png”, alt=“JavaScript modules migration spreadsheet”, width=“800”, height=“251” %}</p>
+<p>A snippet of the progress sheet is publicly available <a href="https://docs.google.com/spreadsheets/d/1V3__BKLaiVHF7t9cgX-4DNwO1FgZdteF35hOlH0QLVo/preview">here</a>.</p>
+<h3 id="export-phase"><code>export</code>-phase</h3>
+<p>The first phase would be to add <code>export</code>-statements for all symbols that were supposed to be shared between modules/files. The transformation would be automated, by <a href="https://chromium-review.googlesource.com/c/chromium/src/+/1808867">running a script per folder</a>. Given the following symbol would exist in the <code>module.json</code> world:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">Module</span>.<span class="va">File1</span>.<span class="at">exported</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;exported&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="va">Module</span>.<span class="va">File1</span>.<span class="at">localFunctionInFile</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="op">};</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="va">Module</span>.<span class="va">File1</span>.<span class="at">localFunctionInFile</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Local&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="op">};</span></a></code></pre></div>
+<p>(Here, <code>Module</code> is the name of the module and <code>File1</code> the name of the file. In our sourcetree, that would be <code>front_end/module/file1.js</code>.)</p>
+<p>This would be transformed to the following:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="im">export</span> <span class="kw">function</span> <span class="at">exported</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;exported&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="va">Module</span>.<span class="va">File1</span>.<span class="at">localFunctionInFile</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="im">export</span> <span class="kw">function</span> <span class="at">localFunctionInFile</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Local&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-8" title="8"></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">/** Legacy export object */</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="va">Module</span>.<span class="at">File1</span> <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-11" title="11">  exported<span class="op">,</span></a>
+<a class="sourceLine" id="cb3-12" title="12">  localFunctionInFile<span class="op">,</span></a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="op">};</span></a></code></pre></div>
+<p>Initially, our plan was to rewrite same-file imports during this phase as well. For example, in the above example we would rewrite <code>Module.File1.localFunctionInFile</code> to <code>localFunctionInFile</code>. However, we realized that it would be easier to automate and safer to apply if we separated these two transformations. Therefore, the “migrate all symbols in the same file” would become the second sub-phase of the <code>import</code>-phase.</p>
+<p>Since adding the <code>export</code> keyword in a file transforms the file from a “script” to a “module”, a lot of the DevTools infrastructure had to be updated accordingly. This included the runtime (with dynamic import), but also tools like <code>ESLint</code> to run in module mode.</p>
+<p>One discovery we made while working through these issues is that our tests were running in “sloppy” mode. Since JavaScript modules imply that files run in <code>"use strict"</code> mode, this would also affect our tests. As it turned out, <a href="https://chromium-review.googlesource.com/c/chromium/src/+/1958116">a non-trivial amount of tests</a> were relying on this sloppiness, including <a href="https://chromium-review.googlesource.com/c/chromium/src/+/1958116/3/third_party/blink/web_tests/http/tests/devtools/console/console-eval-scoped.js">a test</a> that used a <code>with</code>-statement 😱.</p>
+<p>In the end, updating the very first folder to include <code>export</code>-statements <a href="https://chromium-review.googlesource.com/c/chromium/src/+/1816563">took about a week</a> and <a href="https://chromium-review.googlesource.com/c/chromium/src/+/1825420">multiple attempts with relands</a>.</p>
+<h3 id="import-phase"><code>import</code>-phase</h3>
+<p>After all symbols are both exported using <code>export</code>-statements and remained on the global scope (legacy), we had to update all references to cross-file symbols to use ES imports. The end goal would be to remove all “legacy export objects”, cleaning up the global scope. The transformation would be automated, by <a href="https://chromium-review.googlesource.com/c/devtools/devtools-frontend/+/1958525">running a script per folder</a>.</p>
+<p>For example, for the following symbols that exist in the <code>module.json</code> world:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="va">Module</span>.<span class="va">File1</span>.<span class="at">exported</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="va">AnotherModule</span>.<span class="va">AnotherFile</span>.<span class="at">alsoExported</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="va">SameModule</span>.<span class="va">AnotherFile</span>.<span class="at">moduleScoped</span>()<span class="op">;</span></a></code></pre></div>
+<p>They would be transformed to:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> Module <span class="im">from</span> <span class="st">&#39;../module/Module.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="im">import</span> <span class="op">*</span> <span class="im">as</span> AnotherModule <span class="im">from</span> <span class="st">&#39;../another_module/AnotherModule.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="im">import</span> <span class="op">{</span>moduleScoped<span class="op">}</span> <span class="im">from</span> <span class="st">&#39;./AnotherFile.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5"></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="va">Module</span>.<span class="va">File1</span>.<span class="at">exported</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="va">AnotherModule</span>.<span class="va">AnotherFile</span>.<span class="at">alsoExported</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="at">moduleScoped</span>()<span class="op">;</span></a></code></pre></div>
+<p>However, there were some caveats with this approach:</p>
+<ol type="1">
+<li>Not every symbol was named as <code>Module.File.symbolName</code>. Some symbols were named solely <code>Module.File</code> or even <code>Module.CompletelyDifferentName</code>. This inconsistency meant that we had to create an internal mapping from the old global object to the new imported object.</li>
+<li>Sometimes there would be clashes between moduleScoped names. Most prominently, we used a pattern of declaring certain types of <code>Events</code>, where each symbol was named just <code>Events</code>. This meant that if you were listening for multiple types of events declared in different files, a nameclash would occur on the <code>import</code>-statement for those <code>Events</code>.</li>
+<li>As it turned out, there were circular dependencies between files. This was fine in a global scope context, as the usage of the symbol was after all code was loaded. However, if you require an <code>import</code>, the circular dependency would be made explicit. This isn’t a problem immediately, unless you have side-effect function calls in your global scope code, which DevTools also had. All in all, it required some surgery and refactoring to make the transformation safe.</li>
+</ol>
+<h2 id="a-whole-new-world-with-javascript-modules-new-world">A whole new world with JavaScript modules {: #new-world }</h2>
+<p>In February 2020, 6 months after the start in September 2019, <a href="https://chromium-review.googlesource.com/c/devtools/devtools-frontend/+/2055066">the last cleanups</a> were performed in the <code>ui/</code> folder. This marked the unofficial end to the migration. After letting the dust settle down, we officially marked the migration as <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1006759#c410">finished on March 5th 2020</a>. 🎉</p>
+<p>Now, all modules in DevTools use JavaScript modules to share code. We still put some symbols on the global scope (in the <code>module-legacy.js</code> files) for our legacy tests or to integrate with other parts of the DevTools architecture. These will be removed over time, but we don’t consider them a blocker for future development. We also have <a href="https://docs.google.com/presentation/d/1KaTDaKEcLmgv3Wum79gPP9mv9x2fm3kuEgx_b8wLVug/preview">a style guide for our usage of JavaScript modules</a>.</p>
+<h3 id="statistics">Statistics</h3>
+<p>Conservative estimates for the number of CLs (abbreviation for changelist - the term used in Gerrit that represents a change - similar to a GitHub pull request) involved in this migration are around <strong>250 CLs, largely performed by 2 engineers</strong>. We don’t have definitive statistics on the size of changes made, but a conservative estimate of lines changed (calculated as the sum of absolute difference between insertions and deletions for each CL) is roughly <strong>30,000 (~20% of all of DevTools frontend code)</strong>.</p>
+<p>The first file using <code>export</code> shipped in Chrome 79, released to stable in December 2019. The last change to migrate to <code>import</code> shipped in Chrome 83, released to stable in May 2020.</p>
+<p>We are aware of one regression that shipped to Chrome stable and that was introduced as part of this migration. The auto-completion of snippets in the command menu <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1060565">broke</a> due to an <a href="https://chromium-review.googlesource.com/c/devtools/devtools-frontend/+/2107222/2/front_end/snippets/SnippetsQuickOpen.js">extraneous <code>default</code> export</a>. We have had several other regressions, but our automated test suites and Chrome Canary users reported these and we fixed them before they were able to reach Chrome stable users.</p>
+<p>You can see the full journey (not all CLs are attached to this bug, but most of them are) logged on <a href="https://crbug.com/1006759">crbug.com/1006759</a>.</p>
+<h2 id="what-we-learned-learned">What we learned {: #learned }</h2>
+<ol type="1">
+<li>Decisions made in the past can have a long-lasting impact on your project. Even though JavaScript modules (and other module formats) were available for quite some time, DevTools was not in a position to justify the migration. Deciding when to and when not to migrate is difficult and based on educated guesses.</li>
+<li>Our initial time estimates were in weeks rather than months. This largely stems from the fact that we found more unexpected problems than we anticipated in our initial cost analysis. Even though the migration plan was solid, technical debt was (more often than we would have liked) the blocker.</li>
+<li>The JavaScript modules migration included a large amount of (seemingly unrelated) technical debt cleanups. The migration to a modern standardized module format allowed us to realign our coding best practices with modern day web development. For example, we were able to replace our custom Python bundler with a minimal Rollup configuration.</li>
+<li>Despite the large impact on our codebase (~20% of code changed), very few regressions were reported. While we did have numerous issues migrating the first couple of files, after a while we had a solid, partially automated, workflow. This meant that negative user impact for our stable users was minimal for this migration.</li>
+<li>Teaching the intricacies of a particular migration to fellow maintainers is difficult and sometimes impossible. Migrations of this scale are difficult to follow and require a lot of domain knowledge. Transferring that domain knowledge to others working in the same codebase is not desirable per se for the job they are doing. Knowing what to share and what details not to share is an art, but a necessary one. It is therefore crucial to reduce the amount of large migrations, or at the very least not perform them at the same time.</li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="can-i-cache-this-build-status">Can I cache this? <a href="https://travis-ci.org/kornelski/http-cache-semantics"><img src="https://travis-ci.org/kornelski/http-cache-semantics.svg?branch=master" alt="Build Status" /></a></h1>
+<p><code>CachePolicy</code> tells when responses can be reused from a cache, taking into account <a href="http://httpwg.org/specs/rfc7234.html">HTTP RFC 7234</a> rules for user agents and shared caches. It also implements <a href="https://tools.ietf.org/html/rfc5861">RFC 5861</a>, implementing <code>stale-if-error</code> and <code>stale-while-revalidate</code>. It’s aware of many tricky details such as the <code>Vary</code> header, proxy revalidation, and authenticated responses.</p>
+<h2 id="usage">Usage</h2>
+<p>Cacheability of an HTTP response depends on how it was requested, so both <code>request</code> and <code>response</code> are required to create the policy.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">const</span> policy <span class="op">=</span> <span class="kw">new</span> <span class="at">CachePolicy</span>(request<span class="op">,</span> response<span class="op">,</span> options)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="cf">if</span> (<span class="op">!</span><span class="va">policy</span>.<span class="at">storable</span>()) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="co">// throw the response away, it&#39;s not usable at all</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="cf">return</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">// Cache the data AND the policy object in your cache</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">// (this is pseudocode, roll your own cache (lru-cache package works))</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="va">letsPretendThisIsSomeCache</span>.<span class="at">set</span>(</a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="va">request</span>.<span class="at">url</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="op">{</span> policy<span class="op">,</span> response <span class="op">},</span></a>
+<a class="sourceLine" id="cb1-13" title="13">    <span class="va">policy</span>.<span class="at">timeToLive</span>()</a>
+<a class="sourceLine" id="cb1-14" title="14">)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">// And later, when you receive a new request:</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">const</span> <span class="op">{</span> policy<span class="op">,</span> response <span class="op">}</span> <span class="op">=</span> <span class="va">letsPretendThisIsSomeCache</span>.<span class="at">get</span>(<span class="va">newRequest</span>.<span class="at">url</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co">// It&#39;s not enough that it exists in the cache, it has to match the new request, too:</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="cf">if</span> (policy <span class="op">&amp;&amp;</span> <span class="va">policy</span>.<span class="at">satisfiesWithoutRevalidation</span>(newRequest)) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="co">// OK, the previous response can be used to respond to the `newRequest`.</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="co">// Response headers have to be updated, e.g. to add Age and remove uncacheable headers.</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="va">response</span>.<span class="at">headers</span> <span class="op">=</span> <span class="va">policy</span>.<span class="at">responseHeaders</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-9" title="9">    <span class="cf">return</span> response<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="op">}</span></a></code></pre></div>
+<p>It may be surprising, but it’s not enough for an HTTP response to be <a href="#yo-fresh">fresh</a> to satisfy a request. It may need to match request headers specified in <code>Vary</code>. Even a matching fresh response may still not be usable if the new request restricted cacheability, etc.</p>
+<p>The key method is <code>satisfiesWithoutRevalidation(newRequest)</code>, which checks whether the <code>newRequest</code> is compatible with the original request and whether all caching conditions are met.</p>
+<h3 id="constructor-options">Constructor options</h3>
+<p>Request and response must have a <code>headers</code> property with all header names in lower case. <code>url</code>, <code>status</code> and <code>method</code> are optional (defaults are any URL, status <code>200</code>, and <code>GET</code> method).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> request <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="dt">url</span><span class="op">:</span> <span class="st">&#39;/&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="dt">method</span><span class="op">:</span> <span class="st">&#39;GET&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="dt">headers</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">        <span class="dt">accept</span><span class="op">:</span> <span class="st">&#39;*/*&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="op">};</span></a>
+<a class="sourceLine" id="cb3-8" title="8"></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="kw">const</span> response <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="dt">status</span><span class="op">:</span> <span class="dv">200</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="dt">headers</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-12" title="12">        <span class="st">&#39;cache-control&#39;</span><span class="op">:</span> <span class="st">&#39;public, max-age=7234&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="op">},</span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="op">};</span></a>
+<a class="sourceLine" id="cb3-15" title="15"></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="kw">const</span> options <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-17" title="17">    <span class="dt">shared</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-18" title="18">    <span class="dt">cacheHeuristic</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-19" title="19">    <span class="dt">immutableMinTimeToLive</span><span class="op">:</span> <span class="dv">24</span> <span class="op">*</span> <span class="dv">3600</span> <span class="op">*</span> <span class="dv">1000</span><span class="op">,</span> <span class="co">// 24h</span></a>
+<a class="sourceLine" id="cb3-20" title="20">    <span class="dt">ignoreCargoCult</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-21" title="21"><span class="op">};</span></a></code></pre></div>
+<p>If <code>options.shared</code> is <code>true</code> (default), then the response is evaluated from a perspective of a shared cache (i.e. <code>private</code> is not cacheable and <code>s-maxage</code> is respected). If <code>options.shared</code> is <code>false</code>, then the response is evaluated from a perspective of a single-user cache (i.e. <code>private</code> is cacheable and <code>s-maxage</code> is ignored). <code>shared: true</code> is recommended for HTTP clients.</p>
+<p><code>options.cacheHeuristic</code> is a fraction of response’s age that is used as a fallback cache duration. The default is 0.1 (10%), e.g. if a file hasn’t been modified for 100 days, it’ll be cached for 100*0.1 = 10 days.</p>
+<p><code>options.immutableMinTimeToLive</code> is a number of milliseconds to assume as the default time to cache responses with <code>Cache-Control: immutable</code>. Note that <a href="http://httpwg.org/http-extensions/immutable.html">per RFC</a> these can become stale, so <code>max-age</code> still overrides the default.</p>
+<p>If <code>options.ignoreCargoCult</code> is true, common anti-cache directives will be completely ignored if the non-standard <code>pre-check</code> and <code>post-check</code> directives are present. These two useless directives are most commonly found in bad StackOverflow answers and PHP’s “session limiter” defaults.</p>
+<h3 id="storable"><code>storable()</code></h3>
+<p>Returns <code>true</code> if the response can be stored in a cache. If it’s <code>false</code> then you MUST NOT store either the request or the response.</p>
+<h3 id="satisfieswithoutrevalidationnewrequest"><code>satisfiesWithoutRevalidation(newRequest)</code></h3>
+<p>This is the most important method. Use this method to check whether the cached response is still fresh in the context of the new request.</p>
+<p>If it returns <code>true</code>, then the given <code>request</code> matches the original response this cache policy has been created with, and the response can be reused without contacting the server. Note that the old response can’t be returned without being updated, see <code>responseHeaders()</code>.</p>
+<p>If it returns <code>false</code>, then the response may not be matching at all (e.g. it’s for a different URL or method), or may require to be refreshed first (see <code>revalidationHeaders()</code>).</p>
+<h3 id="responseheaders"><code>responseHeaders()</code></h3>
+<p>Returns updated, filtered set of response headers to return to clients receiving the cached response. This function is necessary, because proxies MUST always remove hop-by-hop headers (such as <code>TE</code> and <code>Connection</code>) and update response’s <code>Age</code> to avoid doubling cache time.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="va">cachedResponse</span>.<span class="at">headers</span> <span class="op">=</span> <span class="va">cachePolicy</span>.<span class="at">responseHeaders</span>(cachedResponse)<span class="op">;</span></a></code></pre></div>
+<h3 id="timetolive"><code>timeToLive()</code></h3>
+<p>Returns approximate time in <em>milliseconds</em> until the response becomes stale (i.e. not fresh).</p>
+<p>After that time (when <code>timeToLive() &lt;= 0</code>) the response might not be usable without revalidation. However, there are exceptions, e.g. a client can explicitly allow stale responses, so always check with <code>satisfiesWithoutRevalidation()</code>. <code>stale-if-error</code> and <code>stale-while-revalidate</code> extend the time to live of the cache, that can still be used if stale.</p>
+<h3 id="toobjectfromobjectjson"><code>toObject()</code>/<code>fromObject(json)</code></h3>
+<p>Chances are you’ll want to store the <code>CachePolicy</code> object along with the cached response. <code>obj = policy.toObject()</code> gives a plain JSON-serializable object. <code>policy = CachePolicy.fromObject(obj)</code> creates an instance from it.</p>
+<h3 id="refreshing-stale-cache-revalidation">Refreshing stale cache (revalidation)</h3>
+<p>When a cached response has expired, it can be made fresh again by making a request to the origin server. The server may respond with status 304 (Not Modified) without sending the response body again, saving bandwidth.</p>
+<p>The following methods help perform the update efficiently and correctly.</p>
+<h4 id="revalidationheadersnewrequest"><code>revalidationHeaders(newRequest)</code></h4>
+<p>Returns updated, filtered set of request headers to send to the origin server to check if the cached response can be reused. These headers allow the origin server to return status 304 indicating the response is still fresh. All headers unrelated to caching are passed through as-is.</p>
+<p>Use this method when updating cache from the origin server.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="va">updateRequest</span>.<span class="at">headers</span> <span class="op">=</span> <span class="va">cachePolicy</span>.<span class="at">revalidationHeaders</span>(updateRequest)<span class="op">;</span></a></code></pre></div>
+<h4 id="revalidatedpolicyrevalidationrequest-revalidationresponse"><code>revalidatedPolicy(revalidationRequest, revalidationResponse)</code></h4>
+<p>Use this method to update the cache after receiving a new response from the origin server. It returns an object with two keys:</p>
+<ul>
+<li><code>policy</code> — A new <code>CachePolicy</code> with HTTP headers updated from <code>revalidationResponse</code>. You can always replace the old cached <code>CachePolicy</code> with the new one.</li>
+<li><code>modified</code> — Boolean indicating whether the response body has changed.
+<ul>
+<li>If <code>false</code>, then a valid 304 Not Modified response has been received, and you can reuse the old cached response body. This is also affected by <code>stale-if-error</code>.</li>
+<li>If <code>true</code>, you should use new response’s body (if present), or make another request to the origin server without any conditional headers (i.e. don’t use <code>revalidationHeaders()</code> this time) to get the new resource.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">// When serving requests from cache:</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">const</span> <span class="op">{</span> oldPolicy<span class="op">,</span> oldResponse <span class="op">}</span> <span class="op">=</span> <span class="va">letsPretendThisIsSomeCache</span>.<span class="at">get</span>(</a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="va">newRequest</span>.<span class="at">url</span></a>
+<a class="sourceLine" id="cb6-4" title="4">)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="cf">if</span> (<span class="op">!</span><span class="va">oldPolicy</span>.<span class="at">satisfiesWithoutRevalidation</span>(newRequest)) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-7" title="7">    <span class="co">// Change the request to ask the origin server if the cached response can be used</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="va">newRequest</span>.<span class="at">headers</span> <span class="op">=</span> <span class="va">oldPolicy</span>.<span class="at">revalidationHeaders</span>(newRequest)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-9" title="9"></a>
+<a class="sourceLine" id="cb6-10" title="10">    <span class="co">// Send request to the origin server. The server may respond with status 304</span></a>
+<a class="sourceLine" id="cb6-11" title="11">    <span class="kw">const</span> newResponse <span class="op">=</span> <span class="cf">await</span> <span class="at">makeRequest</span>(newRequest)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-12" title="12"></a>
+<a class="sourceLine" id="cb6-13" title="13">    <span class="co">// Create updated policy and combined response from the old and new data</span></a>
+<a class="sourceLine" id="cb6-14" title="14">    <span class="kw">const</span> <span class="op">{</span> policy<span class="op">,</span> modified <span class="op">}</span> <span class="op">=</span> <span class="va">oldPolicy</span>.<span class="at">revalidatedPolicy</span>(</a>
+<a class="sourceLine" id="cb6-15" title="15">        newRequest<span class="op">,</span></a>
+<a class="sourceLine" id="cb6-16" title="16">        newResponse</a>
+<a class="sourceLine" id="cb6-17" title="17">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-18" title="18">    <span class="kw">const</span> response <span class="op">=</span> modified <span class="op">?</span> newResponse : oldResponse<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-19" title="19"></a>
+<a class="sourceLine" id="cb6-20" title="20">    <span class="co">// Update the cache with the newer/fresher response</span></a>
+<a class="sourceLine" id="cb6-21" title="21">    <span class="va">letsPretendThisIsSomeCache</span>.<span class="at">set</span>(</a>
+<a class="sourceLine" id="cb6-22" title="22">        <span class="va">newRequest</span>.<span class="at">url</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-23" title="23">        <span class="op">{</span> policy<span class="op">,</span> response <span class="op">},</span></a>
+<a class="sourceLine" id="cb6-24" title="24">        <span class="va">policy</span>.<span class="at">timeToLive</span>()</a>
+<a class="sourceLine" id="cb6-25" title="25">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-26" title="26"></a>
+<a class="sourceLine" id="cb6-27" title="27">    <span class="co">// And proceed returning cached response as usual</span></a>
+<a class="sourceLine" id="cb6-28" title="28">    <span class="va">response</span>.<span class="at">headers</span> <span class="op">=</span> <span class="va">policy</span>.<span class="at">responseHeaders</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-29" title="29">    <span class="cf">return</span> response<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-30" title="30"><span class="op">}</span></a></code></pre></div>
+<h1 id="yo-fresh">Yo, FRESH</h1>
+<figure>
+<img src="fresh.jpg" alt="satisfiesWithoutRevalidation" /><figcaption>satisfiesWithoutRevalidation</figcaption>
+</figure>
+<h2 id="used-by">Used by</h2>
+<ul>
+<li><a href="https://imageoptim.com/api">ImageOptim API</a>, <a href="https://github.com/zkat/make-fetch-happen">make-fetch-happen</a>, <a href="https://www.npmjs.com/package/cacheable-request">cacheable-request</a> (<a href="https://www.npmjs.com/package/got">got</a>), <a href="https://github.com/npm/registry-fetch">npm/registry-fetch</a>, <a href="https://github.com/kornelski/http-cache-semantics/network/dependents">etc.</a></li>
+</ul>
+<h2 id="implemented">Implemented</h2>
+<ul>
+<li><code>Cache-Control</code> response header with all the quirks.</li>
+<li><code>Expires</code> with check for bad clocks.</li>
+<li><code>Pragma</code> response header.</li>
+<li><code>Age</code> response header.</li>
+<li><code>Vary</code> response header.</li>
+<li>Default cacheability of statuses and methods.</li>
+<li>Requests for stale data.</li>
+<li>Filtering of hop-by-hop headers.</li>
+<li>Basic revalidation request</li>
+<li><code>stale-if-error</code></li>
+</ul>
+<h2 id="unimplemented">Unimplemented</h2>
+<ul>
+<li>Merging of range requests, <code>If-Range</code> (but correctly supports them as non-cacheable)</li>
+<li>Revalidation of multiple representations</li>
+</ul>
+<h3 id="trusting-server-date">Trusting server <code>Date</code></h3>
+<p>Per the RFC, the cache should take into account the time between server-supplied <code>Date</code> and the time it received the response. The RFC-mandated behavior creates two problems:</p>
+<ul>
+<li>Servers with incorrectly set timezone may add several hours to cache age (or more, if the clock is completely wrong).</li>
+<li>Even reasonably correct clocks may be off by a couple of seconds, breaking <code>max-age=1</code> trick (which is useful for reverse proxies on high-traffic servers).</li>
+</ul>
+<p>Previous versions of this library had an option to ignore the server date if it was “too inaccurate”. To support the <code>max-age=1</code> trick the library also has to ignore dates that pretty accurate. There’s no point of having an option to trust dates that are only a bit inaccurate, so this library won’t trust any server dates. <code>max-age</code> will be interpreted from the time the response has been received, not from when it has been sent. This will affect only <a href="https://tools.ietf.org/html/rfc1149">RFC 1149 networks</a>.</p>
+</body>
+</html>

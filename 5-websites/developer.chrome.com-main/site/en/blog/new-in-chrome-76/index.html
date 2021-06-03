@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2019-07-30" />
+  <title>New in Chrome 76</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">New in Chrome 76</h1>
+<p class="date">2019-07-30</p>
+</header>
+<p>{% YouTube id=‘I1nosVzVbB4’ %}</p>
+<p>In Chrome 76, we’ve added support for:</p>
+<ul>
+<li><a href="#dark-mode"><code>prefers-color-scheme</code></a> media query, bringing dark mode to websites.</li>
+<li>An <a href="#pwa-install">install button in the omnibox</a> to make installation of Progressive Web Apps on desktop easier.</li>
+<li><a href="#prevent-mini-infobar">Preventing the mini-infobar from appearing</a> on Progressive Web Apps on mobile.</li>
+<li>More frequent <a href="#update-webapk">updates of WebAPKs</a>.</li>
+<li>And plenty <a href="#more">more</a>.</li>
+</ul>
+<p>I’m <a href="https://twitter.com/petele">Pete LePage</a>, let’s dive in and see what’s new for developers in Chrome 76!</p>
+<h2 id="pwa-omnibox-install-button-pwa-install">PWA Omnibox Install Button {: #pwa-install }</h2>
+{# TODO(petele): video element, float-right, auto-play #}
+<figure class="float-right">
+{% Video src=[ “video/0g2WvpbGRGdVs0aAPc6ObG7gkud2/PK7Qq8FyeMg2DDRL3XQT.webm”, “video/0g2WvpbGRGdVs0aAPc6ObG7gkud2/bh7RkIIECjmXkIdToJdq.mp4”]%}
+</figure>
+<p>In Chrome 76, we’re making it easier for users to install Progressive Web Apps on the desktop, by adding an install button to the address bar, sometimes called the omnibox.</p>
+<p>If your site meets the <a href="https://developers.google.com/web/fundamentals/app-install-banners/#criteria">Progressive Web App installability criteria</a>, Chrome will show an install button in the omnibox indicating to the user that your PWA can be installed. If the user clicks the install button, it’s essentially the same as calling <code>prompt()</code> on the <code>beforeinstallprompt</code> event; it shows the install dialog, making it easy for the user to install your PWA.</p>
+<p>See <a href="https://developers.google.com/web/updates/2019/06/pwa-install-addressbar">Address Bar Install for Progressive Web Apps on the Desktop</a> for complete details.</p>
+<p><br style="clear:both;"></p>
+<h2 id="more-control-over-the-pwa-mini-infobar-prevent-mini-infobar">More control over the PWA mini-infobar {: #prevent-mini-infobar }</h2>
+<figure class="float-right">
+{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/e8QdF96TkOMv3pzLAVYN.png”, alt="“, height=”417“, width=”800" %}
+<figcaption>
+Example of the Add to Home screen mini-infobar for AirHorner
+</figcaption>
+</figure>
+<p>On mobile, Chrome shows the <a href="https://developers.google.com/web/fundamentals/app-install-banners/#mini-info-bar">mini-infobar</a> the first time a user visits your site if it meets the <a href="https://developers.google.com/web/fundamentals/app-install-banners/#criteria">Progressive Web App installability criteria</a>. We heard from you that you want to be able to prevent the mini-infobar from appearing, and provide your own install promotion instead.</p>
+<p>Starting in Chrome 76, calling <code>preventDefault()</code> on the <code>beforeinstallprompt</code> event will stop the mini-infobar from appearing.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="va">window</span>.<span class="at">addEventListener</span>(<span class="st">&#39;beforeinstallprompt&#39;</span><span class="op">,</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="co">// Don&#39;t show mini-infobar</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="va">e</span>.<span class="at">preventDefault</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="co">// Stash the event so it can be triggered later.</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  deferredPrompt <span class="op">=</span> e<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="co">// Update UI to promote PWA installation</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="at">pwaInstallAvailable</span>(<span class="kw">true</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Be sure to update your UI - to let users know your PWA can be installed. Check out <a href="https://developers.google.com/web/fundamentals/app-install-banners/promoting-install-mobile">Patterns for Promoting PWA Installation</a> for our recommend best practices for promoting the installation of your Progressive Web Apps.</p>
+<h2 id="faster-updates-to-webapks-update-webapk">Faster updates to WebAPKs {: #update-webapk }</h2>
+<p>When a Progressive Web App is installed on Android, Chrome automatically requests and installs a <a href="https://developers.google.com/web/fundamentals/integration/webapks">Web APK</a>. After it’s been installed, Chrome periodically checks if the web app manifest has changed, maybe you’ve updated the icons, colors, or changed the app name, to see if a new WebAPK is required.</p>
+<p>Starting in Chrome 76, Chrome will check the manifest more frequently; checking every day, instead of every three days. If any of the key properties have changed, Chrome will request and install a new WebAPK, ensuring the title, icons and other properties are up to date.</p>
+<p>See <a href="https://developers.google.com/web/updates/2019/06/webapk-update-frequency">Updating WebAPKs More Frequently</a> for complete details.</p>
+<h2 id="dark-mode-dark-mode">Dark mode {: #dark-mode }</h2>
+<p>Many operating systems now support a dark mode, or dark theme.</p>
+<p>The <code>prefers-color-scheme</code> media query, allows you to adjust the look and feel of your site to match the user’s preferred mode.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb2-1" title="1"><span class="im">@media</span> (<span class="kw">prefers-color-scheme</span>: dark) {</a>
+<a class="sourceLine" id="cb2-2" title="2">  body {</a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="kw">background-color</span>: <span class="cn">black</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">color</span>: <span class="cn">white</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  }</a>
+<a class="sourceLine" id="cb2-6" title="6">}</a></code></pre></div>
+<p>Tom has a great article <a href="https://web.dev/prefers-color-scheme/">Hello darkness, my old friend</a> on <a href="https://web.dev/blog/">web.dev</a> with everything you need to know, plus tips for architecting your style sheets to support both a light, and a dark mode.</p>
+<h2 id="and-more-more">And more! {: #more }</h2>
+<p>These are just a few of the changes in Chrome 76 for developers, of course, there’s plenty more.</p>
+<h3 id="promise.allsettled"><code>Promise.allSettled()</code></h3>
+<p>Personally, I’m really excited about <code>Promise.allSettled()</code>. It’s similar to <code>Promise.all()</code>, except it waits until all of the promises are settled before returning.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> promises <span class="op">=</span> [</a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="at">fetch</span>(<span class="st">&#39;/api-call-1&#39;</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="at">fetch</span>(<span class="st">&#39;/api-call-2&#39;</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="at">fetch</span>(<span class="st">&#39;/api-call-3&#39;</span>)<span class="op">,</span></a>
+<a class="sourceLine" id="cb3-5" title="5">]<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">// Imagine some of these requests fail, and some succeed.</span></a>
+<a class="sourceLine" id="cb3-7" title="7"></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="cf">await</span> <span class="va">Promise</span>.<span class="at">allSettled</span>(promises)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">// All API calls have finished (either failed or succeeded).</span></a></code></pre></div>
+<h3 id="reading-blobs-is-easier">Reading blobs is easier</h3>
+<p><code>Blob</code>s are easier to read with three new methods: <code>text()</code>, <code>arrayBuffer()</code>, and <code>stream()</code>; this means we don’t have to create a wrapper around file reader any more!</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">// New easier way</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">const</span> text <span class="op">=</span> <span class="cf">await</span> <span class="va">blob</span>.<span class="at">text</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">const</span> aBuff <span class="op">=</span> <span class="cf">await</span> <span class="va">blob</span>.<span class="at">arrayBuffer</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">const</span> stream <span class="op">=</span> <span class="cf">await</span> <span class="va">blob</span>.<span class="at">stream</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">// Old, wrapped reader</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="cf">return</span> <span class="kw">new</span> <span class="at">Promise</span>((resolve) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="kw">const</span> reader <span class="op">=</span> <span class="kw">new</span> <span class="at">FileReader</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="va">reader</span>.<span class="at">addEventListener</span>(<span class="st">&#39;loadend&#39;</span><span class="op">,</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-10" title="10">    <span class="kw">const</span> text <span class="op">=</span> <span class="va">e</span>.<span class="va">srcElement</span>.<span class="at">result</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="at">resolve</span>(text)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-13" title="13">  <span class="va">reader</span>.<span class="at">readAsText</span>(file)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="image-support-in-the-async-clipboard-api">Image support in the async clipboard API</h3>
+<p>And, we’ve added support for <a href="https://developers.google.com/web/updates/2019/07/image-support-for-async-clipboard">images to the Asynchronous Clipboard API</a>, making it easy to programmatically copy and paste images.</p>
+<h2 id="further-reading">Further reading</h2>
+<p>This covers only some of the key highlights, check the links below for additional changes in Chrome 76.</p>
+<ul>
+<li><a href="/blog/new-in-devtools-76">What’s new in Chrome DevTools (76)</a></li>
+<li><a href="https://developers.google.com/web/updates/2019/06/chrome-76-deps-rems">Chrome 76 deprecations &amp; removals</a></li>
+<li><a href="https://www.chromestatus.com/features#milestone%3D76">ChromeStatus.com updates for Chrome 76</a></li>
+<li><a href="https://v8.dev/blog/v8-release-76">What’s new in JavaScript in Chrome 76</a></li>
+<li><a href="https://chromium.googlesource.com/chromium/src/+log/75.0.3770.67..76.0.3809.88">Chromium source repository change list</a></li>
+</ul>
+<h2 id="subscribe">Subscribe</h2>
+<p>Want to stay up to date with our videos, then <a href="https://goo.gl/6FP1a5">subscribe</a> to our <a href="https://www.youtube.com/user/ChromeDevelopers/">Chrome Developers YouTube channel</a>, and you’ll get an email notification whenever we launch a new video.</p>
+<p>I’m Pete LePage, and as soon as Chrome 77 is released, I’ll be right here to tell you – what’s new in Chrome!</p>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.ja</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="プログラミング言語と開発ツール入門">プログラミング言語と開発ツール入門</h1>
+<p>このレッスンでは、まずプログラミング言語の基礎を学びます。 ここで取り上げた特徴は、最新のプログラミング言語のほとんどに当てはまります。 次にツールセクションでは、開発者にとって有用なソフトウェアを紹介します。</p>
+<p><img src="/sketchnotes/webdev101-programming.png" alt="Intro Programming" /> &gt; Sketchnote by <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="事前クイズ">事前クイズ</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/1?loc=ja">事前クイズ</a></p>
+<h2 id="introduction">Introduction</h2>
+<p>この講座には以下が含まれています。</p>
+<ul>
+<li>プログラミングとは何か？</li>
+<li>プログラミング言語の種類</li>
+<li>プログラムの基本要素</li>
+<li>開発ツール</li>
+</ul>
+<h2 id="プログラミングとは何か">プログラミングとは何か？</h2>
+<p>プログラミング(コーディングとも表されます)とは、コンピュータやモバイル機器などのデバイスに対して、命令を出すことです。 命令はプログラミング言語で書かれており、そしてデバイスはその命令を解釈して実行します。 この命令は色々な名称で呼ばれることがありますが、<em>プログラム</em>、<em>コンピュータプログラム</em>、<em>アプリケーション(アプリ)</em>、<em>実行可能ファイル</em>、などが一般的に使われています。</p>
+<p><em>プログラム</em>とは、コードで書かれている何かです。 Webサイトも、ゲームも、スマホアプリも、全てがプログラムです。 コードを書かずにプログラムを作ることも可能ですが、作り上げたロジックは実際にはコードで書かれていて、実際にデバイスが解釈するのはコードです。 プログラムはコードを実行し、デバイスに命令を出します。 あなたが今このレッスンを読んでいるということは、文字を画面に表示するというプログラムをデバイスが実行しているということです。</p>
+<p>✅ ちょっと調べてみましょう：世界初のコンピュータプログラマは誰でしょうか？</p>
+<h2 id="プログラミング言語">プログラミング言語</h2>
+<p>プログラミング言語の主な目的は、開発者がデバイスに対して命令を送信する手助けをすることです。 デバイスはバイナリ(要するに0と1)しか理解することができず、そして<em>ほとんどの</em>開発者にとってバイナリはあまり効率的な命令手段ではありません。 プログラミング言語は、人間とコンピュータがコミュニケーションを取るための手段なのです。</p>
+<p>世の中には様々な目的のために様々なプログラミング言語が存在しています。 たとえばJavaScriptは主にWebアプリケーションのために、Bashは主にOSとの対話のために使われます。</p>
+<p><em>低レベル言語</em>とは、デバイスが命令を解釈するために必要なステップ数が、<em>高レベル言語</em>より少ない言語のことです。 高レベル言語が人気であるのは、その読みやすさとサポート能力によるものです。 JavaScriptは高レベル言語とされています。</p>
+<p>次のコードは、高レベル言語であるJavaScriptと、低レベル言語であるARMアセンブリの違いを表したものです。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">let</span> number <span class="op">=</span> <span class="dv">10</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">let</span> n1 <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> n2 <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> nextTerm<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> number<span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="va">console</span>.<span class="at">log</span>(n1)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    nextTerm <span class="op">=</span> n1 <span class="op">+</span> n2<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    n1 <span class="op">=</span> n2<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    n2 <span class="op">=</span> nextTerm<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="op">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" title="1"> area ascen,code,readonly</a>
+<a class="sourceLine" id="cb2-2" title="2"> entry</a>
+<a class="sourceLine" id="cb2-3" title="3"> code<span class="dv">32</span></a>
+<a class="sourceLine" id="cb2-4" title="4"> adr r0,thumb+<span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-5" title="5"> bx r<span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-6" title="6"> code<span class="dv">16</span></a>
+<a class="sourceLine" id="cb2-7" title="7">thumb</a>
+<a class="sourceLine" id="cb2-8" title="8"> mov r0,#<span class="bn">00</span></a>
+<a class="sourceLine" id="cb2-9" title="9"> sub r0,r0,#<span class="bn">01</span></a>
+<a class="sourceLine" id="cb2-10" title="10"> mov r1,#<span class="bn">01</span></a>
+<a class="sourceLine" id="cb2-11" title="11"> mov r4,#<span class="dv">10</span></a>
+<a class="sourceLine" id="cb2-12" title="12"> ldr r2,=<span class="bn">0x40000000</span></a>
+<a class="sourceLine" id="cb2-13" title="13">back add r0,r<span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-14" title="14"> str r0,[r2]</a>
+<a class="sourceLine" id="cb2-15" title="15"> add r2,#<span class="bn">04</span></a>
+<a class="sourceLine" id="cb2-16" title="16"> mov r3,r<span class="dv">0</span></a>
+<a class="sourceLine" id="cb2-17" title="17"> mov r0,r<span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-18" title="18"> mov r1,r<span class="dv">3</span></a>
+<a class="sourceLine" id="cb2-19" title="19"> sub r4,#<span class="bn">01</span></a>
+<a class="sourceLine" id="cb2-20" title="20"> cmp r4,#<span class="bn">00</span></a>
+<a class="sourceLine" id="cb2-21" title="21"> bne back</a>
+<a class="sourceLine" id="cb2-22" title="22"> end</a></code></pre></div>
+<p>信じられないかもしれませんが、両者は同じ処理をしています。 いずれもフィボナッチ数を順番に10個出力します。</p>
+<p>✅ <a href="https://ja.wikipedia.org/wiki/%E3%83%95%E3%82%A3%E3%83%9C%E3%83%8A%E3%83%83%E3%83%81%E6%95%B0">フィボナッチ数</a>とは、各数がその手前の二つの値の和である値の集合です。</p>
+<h2 id="プログラムの基本要素">プログラムの基本要素</h2>
+<p>プログラムにおいてひとつの命令は<em>文</em>と呼ばれ、文は通常は改行などの<em>区切り文字</em>で分かたれます。 プログラムの区切り文字は言語によって異なります。</p>
+<p>多くのプログラムは、ユーザや他から来た入力データによって出力が変わります。 データによってプログラムの動作を変えるため、プログラミング言語にはデータを一時的に保存しておく方法が用意されています。 そのデータは<em>変数</em>と呼ばれています。 変数とは、デバイス内のメモリにデータを保存する文のことです。 プログラムにおける変数は数学における変数と似ていて、変数には固有の名称があり、その値は処理の経過に伴って変化することがあります。</p>
+<p>プログラムには、実行されない文が現れることがあります。 これは、そうなるように開発者が設計して制御されたものであるか、予期せぬエラーが発生したかのいずれかです。 アプリケーションの制御は、堅牢で信頼性の高いプログラムを書くために必要なことです。 制御は、何らかの条件が満たされたことによって発生することが一般的です。 最近のプログラミング言語には、実行される文を制御するために<code>if...else</code>のような文が存在します。</p>
+<p>✅ これら文については次のレッスンで詳しく学びます。</p>
+<h2 id="開発ツール">開発ツール</h2>
+<p><a href="https://youtube.com/watch?v=69WJeXGBdxg" title="Tools of the Trade"><img src="https://img.youtube.com/vi/69WJeXGBdxg/0.jpg" alt="Tools of the Trade" /></a></p>
+<p>このセクションでは、プロの開発者としての道を歩き始めるときに役立つであろうソフトウェアについて紹介します。</p>
+<p><strong>開発環境</strong>とは、開発者がソフトウェアを作成する際に頻繁に使用するツールや機能のセットのことです。 開発環境は、開発者が特定のニーズに合わせてカスタマイズしたり、優先順位を変更したり、異なるプログラミング言語を使用したりといった理由で次々と変わっていくこともあります。 開発環境は、それを使用する開発者の数と同じくらい千差万別です。</p>
+<h3 id="エディタ">エディタ</h3>
+<p>ソフトウェア開発において最も重要なツールのひとつが、エディタです。 エディタはコードを書く場所であり、時にはコードを実行する場所であることもあります。</p>
+<p>開発者がエディタを使う理由は、それ以外にも多々あります。</p>
+<ul>
+<li><p><em>デバッグ</em> コードを1行1行ステップ実行することで、バグやエラーを発見しやすくします。 デバッグ機能を備えたエディタや、特定のプログラミング言語用にカスタマイズすることができるエディタも存在します。</p></li>
+<li><p><em>シンタックスハイライト</em> コードに色や書式を設定することで、コードを読みやすくします。 多くのエディタはシンタックスハイライトをカスタマイズすることもできます。</p></li>
+<li><p><em>拡張機能</em> デフォルトでは含まれない、一部の開発者向けに特化された拡張機能を追加することができます。 例えば、コードをドキュメント化してどのように動作するかを確認したいユーザがいて、タイプミスのチェックのためにスペルチェックを行いたいユーザがいて、各自が自分のほしい拡張機能をインストールすることができます。 ほとんどの拡張機能は特定のエディタでのみ動作するもので、そしてほとんどのエディタは拡張機能を検索する方法を用意しています。</p></li>
+<li><p><em>カスタマイズ</em> ほとんどのエディタは幅広いカスタマイズが可能で、開発者は自分のニーズに合わせた開発環境を作ることができます。 さらに多くのエディタでは、開発者が自分で拡張機能を作ることも可能です。</p></li>
+</ul>
+<h4 id="有名なエディタとweb開発向けのエクステンション">有名なエディタとWeb開発向けのエクステンション</h4>
+<ul>
+<li><a href="https://code.visualstudio.com/">Visual Studio Code</a>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code Spell Checker</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack">Live Share</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">Prettier - Code formatter</a></li>
+</ul></li>
+<li><a href="https://atom.io/">Atom</a>
+<ul>
+<li><a href="https://atom.io/packages/spell-check">spell-check</a></li>
+<li><a href="https://atom.io/packages/teletype">teletype</a></li>
+<li><a href="https://atom.io/packages/atom-beautify">atom-beautify</a></li>
+</ul></li>
+</ul>
+<h3 id="ブラウザ">ブラウザ</h3>
+<p>もうひとつの重要なツールはブラウザです。 Web開発者は、自分のコードがWeb上でどのように実行されるかを確認するため、そしてHTML要素を視覚的に確認するためにブラウザを必要とします。</p>
+<p>多くのブラウザには<em>開発者ツール</em>が付属しており、アプリケーションの動作を収集・分析するために便利な機能や情報があります。 たとえば開発者ツールを使って、Webページにエラーがあった場合に、いつどこでエラーが発生したかを把握することができます。</p>
+<h4 id="有名なブラウザ">有名なブラウザ</h4>
+<ul>
+<li><a href="https://docs.microsoft.com/microsoft-edge/devtools-guide-chromium?WT.mc_id=academic-13441-cxa">Edge</a></li>
+<li><a href="https://developers.google.com/web/tools/chrome-devtools/">Chrome</a></li>
+<li><a href="https://developer.mozilla.org/docs/Tools">Firefox</a></li>
+</ul>
+<h3 id="コマンドラインツール">コマンドラインツール</h3>
+<p>開発者の中には、日常の作業をGUIで行うことを好まず、コマンドラインに多くを頼る人もいます。 コードの開発には多量のタイピングが必要となるため、マウスを使うためにキーボードから手を外すことで作業の流れを中断されることを避け、キーボードショートカットを駆使して複数のファイルを操作したり複数のツールを併用したりします。</p>
+<p>多くのタスクはマウスだけでも実行可能です。 しかし、コマンドラインの利点のひとつが、マウスとキーボードで行ったり来たりせずにキーボードだけで作業を完結できるというものです。 またコマンドラインのもうひとつの利点が、カスタム設定を登録しておくことが可能ということです。 さらにマシンを新調したときに設定を移動することもできます。</p>
+<p>開発環境は個人個人によって非常に異なるため、コマンドラインの使用を避ける人もいれば、完全にコマンドラインだけしか使わない人もいます。 両方とも使う人も多いでしょう。</p>
+<h3 id="有名なコマンドラインオプション">有名なコマンドラインオプション</h3>
+<p>コマンドラインオプションは、OSによって異なります。</p>
+<p>💻はOSにプリインストールされているものです。</p>
+<h4 id="windows">Windows</h4>
+<ul>
+<li><a href="https://docs.microsoft.com/powershell/scripting/overview?view=powershell-7?WT.mc_id=academic-13441-cxa">Powershell</a> 💻</li>
+<li><a href="https://docs.microsoft.com/windows-server/administration/windows-commands/windows-commands?WT.mc_id=academic-13441-cxa">Command Line</a> (also known as CMD) 💻</li>
+<li><a href="https://docs.microsoft.com/windows/terminal/?WT.mc_id=academic-13441-cxa">Windows Terminal</a></li>
+<li><a href="https://mintty.github.io/">mintty</a></li>
+</ul>
+<h4 id="macos">MacOS</h4>
+<ul>
+<li><a href="https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac">Terminal</a> 💻</li>
+<li><a href="https://iterm2.com/">iTerm</a></li>
+<li><a href="https://docs.microsoft.com/powershell/scripting/install/installing-powershell-core-on-macos?view=powershell-7?WT.mc_id=academic-13441-cxa">Powershell</a></li>
+</ul>
+<h4 id="linux">Linux</h4>
+<ul>
+<li><a href="https://www.gnu.org/software/bash/manual/html_node/index.html">Bash</a> 💻</li>
+<li><a href="https://docs.kde.org/trunk5/en/applications/konsole/index.html">KDE Konsole</a></li>
+<li><a href="https://docs.microsoft.com/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7?WT.mc_id=academic-13441-cxa">Powershell</a></li>
+</ul>
+<h4 id="有名なコマンドラインツール">有名なコマンドラインツール</h4>
+<ul>
+<li><a href="https://git-scm.com/">Git</a> (多くのOSで 💻)</li>
+<li><a href="https://www.npmjs.com/">NPM</a></li>
+<li><a href="https://classic.yarnpkg.com/en/docs/cli/">Yarn</a></li>
+</ul>
+<h3 id="ドキュメント">ドキュメント</h3>
+<p>何か新しいことを学びたいと思ったとき、その使い方を学ぶためには大抵ドキュメントに頼ることになるでしょう。 開発者は、ツールや言語を適切に使用する方法を学んだり、その仕組みについて深く調べる場合、まずはドキュメントを参照します。</p>
+<h4 id="web開発者向けの有名なドキュメント">Web開発者向けの有名なドキュメント</h4>
+<ul>
+<li><a href="https://developer.mozilla.org/docs/Web">Mozilla Developer Network</a></li>
+<li><a href="https://frontendmasters.com/learn/">Frontend Masters</a></li>
+</ul>
+<p>✅ Web開発者の開発環境の基礎を理解したところで、Webデザイナーの開発環境との違いを見てみましょう。</p>
+<hr />
+<h2 id="チャレンジ">🚀 チャレンジ</h2>
+<p>いくつかのプログラミング言語について比較してみましょう。 JavaScriptとJavaの特徴は？ COBOLとGoについては？</p>
+<h2 id="事後テスト">事後テスト</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/1?loc=ja">事後テスト</a></p>
+<h2 id="レビュー-自習">レビュー &amp; 自習</h2>
+<p>プログラマーが利用できる様々な言語について、少しだけかじってみましょう。 ひとつの言語で1行書いて実行したら、次は別のふたつの言語で同じことをやってみてください。 なにかわかりましたか？</p>
+<h2 id="課題">課題</h2>
+<p><a href="assignment.ja.md">ドキュメントを読む</a></p>
+</body>
+</html>

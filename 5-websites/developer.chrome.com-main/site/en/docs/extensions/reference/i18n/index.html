@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>index</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p>You need to put all of its user-visible strings into a file named <a href="/docs/extensions/mv2/i18n-messages"><code>messages.json</code></a>. Each time you add a new locale, you add a messages file under a directory named <code>_locales/_localeCode_</code>, where <em>localeCode</em> is a code such as <code>en</code> for English.</p>
+<p>Here’s the file hierarchy for an internationalized extension that supports English (<code>en</code>), Spanish (<code>es</code>), and Korean (<code>ko</code>):</p>
+<figure>
+<img src="i18n-hierarchy.gif" alt="In the extension directory: manifest.json, .html, .js, _locales directory. In the _locales directory: en, es, and ko directories, each with a messages.json file." /><figcaption>In the extension directory: manifest.json, <em>.html, </em>.js, _locales directory. In the _locales directory: en, es, and ko directories, each with a messages.json file.</figcaption>
+</figure>
+<h2 id="how-to-support-multiple-languages">How to support multiple languages</h2>
+<p>Say you have an extension with the files shown in the following figure:</p>
+<figure>
+<img src="i18n-before.gif" alt="A manifest.json file and a file with JavaScript. The .json file has “name”: “Hello World”. The JavaScript file has title = “Hello World”;" /><figcaption>A manifest.json file and a file with JavaScript. The .json file has “name”: “Hello World”. The JavaScript file has title = “Hello World”;</figcaption>
+</figure>
+<p>To internationalize this extension, you name each user-visible string and put it into a messages file. The extension’s manifest, CSS files, and JavaScript code use each string’s name to get its localized version.</p>
+<p>Here’s what the extension looks like when it’s internationalized (note that it still has only English strings):</p>
+<figure>
+<img src="i18n-after-1.gif" alt="In the manifest.json file, “Hello World” has been changed to “MSG_extName”, and a new “default_locale” item has the value “en”. In the JavaScript file, “Hello World” has been changed to chrome.i18n.getMessage(“extName”). A new file named _locales/en/messages.json defines “extName”." /><figcaption>In the manifest.json file, “Hello World” has been changed to “<strong>MSG_extName</strong>”, and a new “default_locale” item has the value “en”. In the JavaScript file, “Hello World” has been changed to chrome.i18n.getMessage(“extName”). A new file named _locales/en/messages.json defines “extName”.</figcaption>
+</figure>
+<p>{% Aside %}</p>
+<p><strong>Important:</strong> If an extension has a <code>_locales</code> directory, the <a href="/docs/extensions/mv2/tabs">manifest</a> <strong>must</strong> define “default_locale”.</p>
+<p>{% endAside %}</p>
+<p>Some notes about internationalizing:</p>
+<ul>
+<li>You can use any of the <a href="#overview-locales">supported locales</a>. If you use an unsupported locale, Google Chrome ignores it.</li>
+<li><p>In <code>manifest.json</code> and CSS files, refer to a string named <em>messagename</em> like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="er">__MSG_messagename__</span></a></code></pre></div></li>
+<li><p>In your extension or app’s JavaScript code, refer to a string named <em>messagename</em> like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">chrome</span>.<span class="va">i18n</span>.<span class="at">getMessage</span>(<span class="st">&quot;messagename&quot;</span>)</a></code></pre></div></li>
+<li>In each call to <code>getMessage()</code>, you can supply up to 9 strings to be included in the message. See <a href="#examples-getMessage">Examples: getMessage</a> for details.</li>
+<li>Some messages, such as <code>@@bidi_dir</code> and <code>@@ui_locale</code>, are provided by the internationalization system. See the <a href="#overview-predefined">Predefined messages</a> section for a full list of predefined message names.</li>
+<li><p>In <code>messages.json</code>, each user-visible string has a name, a “message” item, and an optional “description” item. The name is a key such as “extName” or “search_string” that identifies the string. The “message” specifies the value of the string in this locale. The optional “description” provides help to translators, who might not be able to see how the string is used in your extension. For example:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">&quot;search_string&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;hello%20world&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;The string we search for. Put %20 between words that go together.&quot;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<p>For more information, see <a href="/docs/extensions/mv2/i18n-messages">Formats: Locale-Specific Messages</a>.</p></li>
+</ul>
+<p>Once an extension or app is internationalized, translating it is simple. You copy <code>messages.json</code>, translate it, and put the copy into a new directory under <code>_locales</code>. For example, to support Spanish, just put a translated copy of <code>messages.json</code> under <code>_locales/es</code>. The following figure shows the previous extension with a new Spanish translation.</p>
+<figure>
+<img src="i18n-after-2.gif" alt="This looks the same as the previous figure, but with a new file at _locales/es/messages.json that contains a Spanish translation of the messages." /><figcaption>This looks the same as the previous figure, but with a new file at _locales/es/messages.json that contains a Spanish translation of the messages.</figcaption>
+</figure>
+<h2 id="predefined-messages-overview-predefined">Predefined messages {: #overview-predefined }</h2>
+<p>The internationalization system provides a few predefined messages to help you localize. These include <code>@@ui_locale</code>, so you can detect the current UI locale, and a few <code>@@bidi_...</code> messages that let you detect the text direction. The latter messages have similar names to constants in the <a href="https://code.google.com/apis/gadgets/docs/i18n.html#BIDI">gadgets BIDI (bi-directional) API</a>.</p>
+<p>The special message <code>@@extension_id</code> can be used in the CSS and JavaScript files, whether or not the extension or app is localized. This message doesn’t work in manifest files.</p>
+<p>The following table describes each predefined message.</p>
+<table>
+<tbody>
+<tr>
+<th>
+Message name
+</th>
+<th>
+Description
+</th>
+</tr>
+<tr>
+<td>
+<code>@<span class="citation" data-cites="extension_id">@extension_id</span></code>
+</td>
+<td>
+The extension or app ID; you might use this string to construct URLs for resources inside the extension. Even unlocalized extensions can use this message.<br><b>Note:</b> You can’t use this message in a manifest file.
+</td>
+</tr>
+<tr>
+<td>
+<code>@<span class="citation" data-cites="ui_locale">@ui_locale</span></code>
+</td>
+<td>
+The current locale; you might use this string to construct locale-specific URLs.
+</td>
+</tr>
+<tr>
+<td>
+<code>@<span class="citation" data-cites="bidi_dir">@bidi_dir</span></code>
+</td>
+<td>
+The text direction for the current locale, either “ltr” for left-to-right languages such as English or “rtl” for right-to-left languages such as Japanese.
+</td>
+</tr>
+<tr>
+<td>
+<code>@<span class="citation" data-cites="bidi_reversed_dir">@bidi_reversed_dir</span></code>
+</td>
+<td>
+If the <code>@<span class="citation" data-cites="bidi_dir">@bidi_dir</span></code> is “ltr”, then this is “rtl”; otherwise, it’s “ltr”.
+</td>
+</tr>
+<tr>
+<td>
+<code>@<span class="citation" data-cites="bidi_start_edge">@bidi_start_edge</span></code>
+</td>
+<td>
+If the <code>@<span class="citation" data-cites="bidi_dir">@bidi_dir</span></code> is “ltr”, then this is “left”; otherwise, it’s “right”.
+</td>
+</tr>
+<tr>
+<td>
+<code>@<span class="citation" data-cites="bidi_end_edge">@bidi_end_edge</span></code>
+</td>
+<td>
+If the <code>@<span class="citation" data-cites="bidi_dir">@bidi_dir</span></code> is “ltr”, then this is “right”; otherwise, it’s “left”.
+</td>
+</tr>
+</tbody>
+</table>
+<p>Here’s an example of using <code>@@extension_id</code> in a CSS file to construct a URL:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb4-1" title="1">body {</a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">background-image</span>:<span class="fu">url(</span><span class="st">&#39;chrome-extension://__MSG_@@extension_id__/background.png&#39;</span><span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">}</a></code></pre></div>
+<p>If the extension ID is abcdefghijklmnopqrstuvwxyzabcdef, then the bold line in the previous code snippet becomes:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb5-1" title="1">  background-image<span class="in">:url(&#39;chrome-extension://abcdefghijklmnopqrstuvwxyzabcdef/background.png&#39;)</span>;</a></code></pre></div>
+<p>Here’s an example of using <code>@@bidi_*</code> messages in a CSS file:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb6-1" title="1">body {</a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">direction</span>: __MSG_@@bidi_dir__<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">}</a>
+<a class="sourceLine" id="cb6-4" title="4"></a>
+<a class="sourceLine" id="cb6-5" title="5">div<span class="pp">#header</span> {</a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="kw">margin-bottom</span>: <span class="dv">1.05</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="kw">overflow</span>: <span class="dv">hidden</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">  <span class="kw">padding-bottom</span>: <span class="dv">1.5</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-9" title="9">  padding-__MSG_<span class="im">@@bidi_start_edge__</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-10" title="10">  padding-__MSG_<span class="im">@@bidi_end_edge__</span>: <span class="dv">1.5</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-11" title="11">  <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-12" title="12">}</a></code></pre></div>
+<p>For left-to-right languages such as English, the bold lines become:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb7-1" title="1">  dir<span class="in">: ltr</span>;</a>
+<a class="sourceLine" id="cb7-2" title="2">  padding-left<span class="in">: 0;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  padding-right<span class="in">: 1.5em;</span></a></code></pre></div>
+<h2 id="locales">Locales</h2>
+<p>You can choose from many locales, including some (such as <code>en</code>) that let a single translation support multiple variations of a language (such as <code>en_GB</code> and <code>en_US</code>).</p>
+<h3 id="supported-locales">Supported locales</h3>
+<p>You can use any of the <a href="https://code.google.com/chrome/webstore/docs/i18n.html#localeTable">locales that the Chrome Web Store supports</a>.</p>
+<h3 id="searching-for-messages">Searching for messages</h3>
+<p>You don’t have to define every string for every supported locale. As long as the default locale’s <code>messages.json</code> file has a value for every string, your extension or app will run no matter how sparse a translation is. Here’s how the extension system searches for a message:</p>
+<ol type="1">
+<li>Search the messages file (if any) for the user’s preferred locale. For example, when Google Chrome’s locale is set to British English (<code>en_GB</code>), the system first looks for the message in <code>_locales/en_GB/messages.json</code>. If that file exists and the message is there, the system looks no further.</li>
+<li>If the user’s preferred locale has a region (that is, the locale has an underscore: _), search the locale without that region. For example, if the <code>en_GB</code> messages file doesn’t exist or doesn’t contain the message, the system looks in the <code>en</code> messages file. If that file exists and the message is there, the system looks no further.</li>
+<li>Search the messages file for the default locale. For example, if the extension’s “default_locale” is set to “es”, and neither <code>_locales/en_GB/messages.json</code> nor <code>_locales/en/messages.json</code> contains the message, the extension uses the message from <code>_locales/es/messages.json</code>.</li>
+</ol>
+<p>In the following figure, the message named “colores” is in all three locales that the extension supports, but “extName” is in only two of the locales. Wherever a user running Google Chrome in US English sees the label “Colors”, a user of British English sees “Colours”. Both US English and British English users see the extension name “Hello World”. Because the default language is Spanish, users running Google Chrome in any non-English language see the label “Colores” and the extension name “Hola mundo”.</p>
+<figure>
+<img src="i18n-strings.gif" alt="Four files: manifest.json and three messages.json files (for es, en, and en_GB). The es and en files show entries for messages named “extName” and “colores”; the en_GB file has just one entry (for “colores”)." /><figcaption>Four files: manifest.json and three messages.json files (for es, en, and en_GB). The es and en files show entries for messages named “extName” and “colores”; the en_GB file has just one entry (for “colores”).</figcaption>
+</figure>
+<h3 id="how-to-set-your-browsers-locale">How to set your browser’s locale</h3>
+<p>To test translations, you might want to set your browser’s locale. This section tells you how to set the locale in <a href="#testing-win">Windows</a>, <a href="#testing-mac">Mac OS X</a>, <a href="#testing-linux">Linux</a>, and <a href="#testing-chromeos">Chrome OS</a>.</p>
+<h4 id="windows">Windows</h4>
+<p>You can change the locale using either a locale-specific shortcut or the Google Chrome UI. The shortcut approach is quicker, once you’ve set it up, and it lets you use several languages at once.</p>
+<h5 id="using-a-locale-specific-shortcut">Using a locale-specific shortcut</h5>
+<p>To create and use a shortcut that launches Google Chrome with a particular locale:</p>
+<ol type="1">
+<li>Make a copy of the Google Chrome shortcut that’s already on your desktop.</li>
+<li>Rename the new shortcut to match the new locale.</li>
+<li><p>Change the shortcut’s properties so that the Target field specifies the <code>--lang</code> and <code>--user-data-dir</code> flags. The target should look something like this:</p>
+<pre class="text"><code>path_to_chrome.exe --lang=locale --user-data-dir=c:\locale_profile_dir</code></pre></li>
+<li><p>Launch Google Chrome by double-clicking the shortcut.</p></li>
+</ol>
+<p>For example, to create a shortcut that launches Google Chrome in Spanish (<code>es</code>), you might create a shortcut named <code>chrome-es</code> that has the following target:</p>
+<pre class="text"><code>path_to_chrome.exe --lang=es --user-data-dir=c:\chrome-profile-es</code></pre>
+<p>You can create as many shortcuts as you like, making it easy to test in multiple languages. For example:</p>
+<pre class="text"><code>path_to_chrome.exe --lang=en --user-data-dir=c:\chrome-profile-en
+path_to_chrome.exe --lang=en_GB --user-data-dir=c:\chrome-profile-en_GB
+path_to_chrome.exe --lang=ko --user-data-dir=c:\chrome-profile-ko</code></pre>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> Specifying <code>--user-data-dir</code> is optional but handy. Having one data directory per locale lets you run the browser in several languages at the same time. A disadvantage is that because the locales’ data isn’t shared, you have to install your extension multiple times—once per locale, which can be challenging when you don’t speak the language. For more information, see <a href="https://www.chromium.org/developers/creating-and-using-profiles">Creating and Using Profiles</a>.</p>
+<p>{% endAside %}</p>
+<h5 id="using-the-ui">Using the UI</h5>
+<p>Here’s how to change the locale using the UI on Google Chrome for Windows:</p>
+<ol type="1">
+<li>App icon &gt; <strong>Options</strong></li>
+<li>Choose the <strong>Under the Hood</strong> tab</li>
+<li>Scroll down to <strong>Web Content</strong></li>
+<li>Click <strong>Change font and language settings</strong></li>
+<li>Choose the <strong>Languages</strong> tab</li>
+<li>Use the drop down to set the <strong>Google Chrome language</strong></li>
+<li>Restart Chrome</li>
+</ol>
+<h4 id="mac-os-x">Mac OS X</h4>
+<p>To change the locale on Mac, you use the system preferences.</p>
+<ol type="1">
+<li>From the Apple menu, choose <strong>System Preferences</strong></li>
+<li>Under the <strong>Personal</strong> section, choose <strong>International</strong></li>
+<li>Choose your language and location</li>
+<li>Restart Chrome</li>
+</ol>
+<h4 id="linux">Linux</h4>
+<p>To change the locale on Linux, first quit Google Chrome. Then, all in one line, set the LANGUAGE environment variable and launch Google Chrome. For example:</p>
+<pre class="text"><code>LANGUAGE=es ./chrome</code></pre>
+<h4 id="chrome-os">Chrome OS</h4>
+<p>To change the locale on Chrome OS:</p>
+<ol type="1">
+<li>From the system tray, choose <strong>Settings</strong>.</li>
+<li>Under the <strong>Languages and input</strong> section, choose the <strong>Language</strong> dropdown.</li>
+<li>If your language is not listed, click <strong>Add languages</strong> and add it.</li>
+<li>Once added, click the the 3-dot <strong>More actions</strong> menu item next to your language and choose <strong>Display Chrome OS in this language</strong>.</li>
+<li>Click the <strong>Restart</strong> button that appears next to the set language to restart Chrome OS.</li>
+</ol>
+<h2 id="examples">Examples</h2>
+<p>You can find simple examples of internationalization in the <a href="https://github.com/GoogleChrome/chrome-extensions-samples/tree/master/mv2-archive/api/i18n/">examples/api/i18n</a> directory. For a complete example, see <a href="https://github.com/GoogleChrome/chrome-extensions-samples/tree/master/mv2-archive/extensions/news/">examples/extensions/news</a>. For other examples and for help in viewing the source code, see <a href="/docs/extensions/mv2/samples">Samples</a>.</p>
+<h3 id="examples-getmessage">Examples: getMessage</h3>
+<p>The following code gets a localized message from the browser and displays it as a string. It replaces two placeholders within the message with the strings “string1” and “string2”.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">function</span> <span class="at">getMessage</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="kw">var</span> message <span class="op">=</span> <span class="va">chrome</span>.<span class="va">i18n</span>.<span class="at">getMessage</span>(<span class="st">&quot;click_here&quot;</span><span class="op">,</span> [<span class="st">&quot;string1&quot;</span><span class="op">,</span> <span class="st">&quot;string2&quot;</span>])<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;languageSpan&quot;</span>).<span class="at">innerHTML</span> <span class="op">=</span> message<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="op">}</span></a></code></pre></div>
+<p>Here’s how you’d supply and use a single string:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" title="1">  <span class="co">// In JavaScript code</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="va">status</span>.<span class="at">innerText</span> <span class="op">=</span> <span class="va">chrome</span>.<span class="va">i18n</span>.<span class="at">getMessage</span>(<span class="st">&quot;error&quot;</span><span class="op">,</span> errorDetails)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb14-1" title="1"><span class="er">&quot;error&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Error: $details$&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Generic error template. Expects error parameter to be passed in.&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb14-4" title="4">  <span class="dt">&quot;placeholders&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb14-5" title="5">    <span class="dt">&quot;details&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb14-6" title="6">      <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;$1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb14-7" title="7">      <span class="dt">&quot;example&quot;</span><span class="fu">:</span> <span class="st">&quot;Failed to fetch RSS feed.&quot;</span></a>
+<a class="sourceLine" id="cb14-8" title="8">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb14-9" title="9">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="fu">}</span></a></code></pre></div>
+<p>For more information about placeholders, see the <a href="/docs/extensions/mv2/i18n-messages">Locale-Specific Messages</a> page. For details on calling <code>getMessage()</code>, see the <a href="#method-getMessage">API reference</a>.</p>
+<h3 id="example-getacceptlanguages">Example: getAcceptLanguages</h3>
+<p>The following code gets accept-languages from the browser and displays them as a string by separating each accept-language with ‘,’.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">function</span> <span class="at">getAcceptLanguages</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="va">chrome</span>.<span class="va">i18n</span>.<span class="at">getAcceptLanguages</span>(<span class="kw">function</span>(languageList) <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-3" title="3">    <span class="kw">var</span> languages <span class="op">=</span> <span class="va">languageList</span>.<span class="at">join</span>(<span class="st">&quot;,&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4">    <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;languageSpan&quot;</span>).<span class="at">innerHTML</span> <span class="op">=</span> languages<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-5" title="5">  <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>For details on calling <code>getAcceptLanguages()</code>, see the <a href="#method-getAcceptLanguages">API reference</a>.</p>
+<h3 id="example-detectlanguage">Example: detectLanguage</h3>
+<p>The following code detects up to 3 languages from the given string and displays the result as strings separated by new lines.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">function</span> <span class="at">detectLanguage</span>(inputText) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="va">chrome</span>.<span class="va">i18n</span>.<span class="at">detectLanguage</span>(inputText<span class="op">,</span> <span class="kw">function</span>(result) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-3" title="3">    <span class="kw">var</span> outputLang <span class="op">=</span> <span class="st">&quot;Detected Language: &quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-4" title="4">    <span class="kw">var</span> outputPercent <span class="op">=</span> <span class="st">&quot;Language Percentage: &quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-5" title="5">    <span class="cf">for</span>(i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">result</span>.<span class="va">languages</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-6" title="6">      outputLang <span class="op">+=</span> <span class="va">result</span>.<span class="at">languages</span>[i].<span class="at">language</span> <span class="op">+</span> <span class="st">&quot; &quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-7" title="7">      outputPercent <span class="op">+=</span><span class="va">result</span>.<span class="at">languages</span>[i].<span class="at">percentage</span> <span class="op">+</span> <span class="st">&quot; &quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-8" title="8">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb16-9" title="9">    <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&quot;languageSpan&quot;</span>).<span class="at">innerHTML</span> <span class="op">=</span> outputLang <span class="op">+</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span> <span class="op">+</span> outputPercent <span class="op">+</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Reliable: &quot;</span> <span class="op">+</span> <span class="va">result</span>.<span class="at">isReliable</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb16-10" title="10">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="op">}</span></a></code></pre></div>
+<p>For more details on calling <code>detectLanguage(inputText)</code>, see the <a href="#method-detectLanguage">API reference</a>.</p>
+</body>
+</html>

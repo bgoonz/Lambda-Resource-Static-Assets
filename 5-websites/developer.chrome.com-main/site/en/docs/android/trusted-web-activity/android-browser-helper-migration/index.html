@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-01-10" />
+  <title>android-browser-helper, a new library to build Trusted Web Activities.</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">android-browser-helper, a new library to build Trusted Web Activities.</h1>
+<p class="date">2020-01-10</p>
+</header>
+<p>We have released version <a href="https://github.com/GoogleChrome/android-browser-helper/releases/tag/1.0.0">1.0.0</a> of, <a href="https://github.com/GoogleChrome/android-browser-helper">android-browser-helper</a>, a new Android Library for <a href="/docs/android/trusted-web-activity/">Trusted Web Activity</a> which, besides being built on top of the modern <a href="https://developer.android.com/jetpack/">Android JetPack</a> libraries, makes it easier for developers to use Trusted Web Activity to build their Android applications.</p>
+<p><strong>android-browser-helper is now the recommended library to build applications that use Trusted Web Activity.</strong></p>
+<p>The library is hosted on the official <a href="https://maven.google.com/">Google Maven repository</a>, which works out of the box in Android Projects, and is also compatible with AndroidX, which was a common <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=983378#c4">issue</a> with the previous library.</p>
+<p>More features and development experience improvements will be added this library. This is a short list of what has already been added:</p>
+<ul>
+<li>Handles opening the content in a browser that supports Trusted Web Activities and, if one is not installed, implements a fallback strategy.</li>
+<li>Makes the fallback strategy customizable, so developers can customize how their application behaves when a browser the supports Trusted Web Activities is not installed. The <a href="https://github.com/GoogleChrome/android-browser-helper/tree/master/demos/twa-webview-fallback">twa-webview-fallback</a> demo shows how to use a fallback strategy that uses the <a href="https://developer.android.com/guide/webapps/webview">Android WebView</a>, for example.</li>
+<li>Makes configuring Trusted Web Actitivities that work with multiple origins easier, as illustrated on the twa-multi-domain]<a href="https://github.com/GoogleChrome/android-browser-helper/tree/master/demos/twa-multi-domain">4</a> demo.</li>
+</ul>
+<p>The library can be added to Android application by using the following dependency to the appllication <code>build.gradle</code>:</p>
+<pre class="groovy"><code>dependencies {
+    //...
+    implementation &#39;com.google.androidbrowserhelper:androidbrowserhelper:2.2.0&#39;
+}</code></pre>
+<h2 id="migrating-from-the-custom-tabs-client">Migrating from the custom-tabs-client</h2>
+<p>Developers who were using the previous <a href="https://jitpack.io/#GoogleChrome/custom-tabs-client"><code>custom-tabs-client</code></a> will have to implement a few changes in their application, when migrating to <code>android-browser-helper</code>.</p>
+<p>Fortunately, besides replacing using the old library with the new library, those changes mainly involve changing searching and replacing a few strings throughout <code>AndroidManifest.xml</code>.</p>
+<p>Here’s a summary of the names changed:</p>
+<table>
+<colgroup>
+<col style="width: 51%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name on custom-tabs-client (Old Library)</th>
+<th>Name on android-browser-helper (New Library)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>android.support.customtabs.trusted.LauncherActivity</td>
+<td>com.google.androidbrowserhelper.trusted.LauncherActivity</td>
+</tr>
+<tr class="even">
+<td>android.support.v4.content.FileProvider</td>
+<td>androidx.core.content.FileProvider</td>
+</tr>
+<tr class="odd">
+<td>android.support.customtabs.trusted.TrustedWebActivityService</td>
+<td>com.google.androidbrowserhelper.trusted.DelegationService</td>
+</tr>
+</tbody>
+</table>
+<p>The <a href="https://github.com/GoogleChromeLabs/svgomg-twa">svgomg-twa demo</a> has been updated to use android-browser-helper. this <a href="https://github.com/GoogleChromeLabs/svgomg-twa/pull/76/files">diff</a> shows all the changes required when migrating an existing project using <code>custom-tabs-client</code> to <code>android-browser-helper</code>.</p>
+<h2 id="are-we-missing-anything">Are we missing anything?</h2>
+<p>android-browser-helper has the goal of simplifying the development of applications using Trusted Web Activities. The library will continue to evolve as Trusted Web Activity get more features.</p>
+<p>If you are missing a feature in Trusted Web Activities, think of ways that android-browser-helper could make make the development work simpler, or have a question on how to use the library, make sure to pop by the <a href="https://github.com/GoogleChrome/android-browser-helper">GitHub repository</a> and file an <a href="https://github.com/GoogleChrome/android-browser-helper/issues">issue</a>.</p>
+<h2 id="feedback-feedback-.hide-from-toc">Feedback {: #feedback .hide-from-toc }</h2>
+</body>
+</html>

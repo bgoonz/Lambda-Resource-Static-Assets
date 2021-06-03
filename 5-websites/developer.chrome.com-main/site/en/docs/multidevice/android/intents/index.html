@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2014-02-28" />
+  <title>Android Intents with Chrome</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Android Intents with Chrome</h1>
+<p class="date">2014-02-28</p>
+</header>
+<p>A little known feature in Android lets you launch apps directly from a web page via an <a href="http://developer.android.com/guide/components/intents-filters.html">Android Intent</a>. One scenario is launching an app when the user lands on a page, which you can achieve by embedding an iframe in the page with a custom URI-scheme set as the <code>src</code>, as follows: <code>&lt;iframe src="paulsawesomeapp://page1"&gt; &lt;/iframe&gt;</code>. This works in the Chrome for Android browser, version 18 and earlier. It also works in the Android browser, of course.</p>
+<p>The functionality has changed slightly in Chrome for Android, versions 25 and later. It is no longer possible to launch an Android app by setting an iframe’s <code>src</code> attribute. For example, navigating an iframe to a URI with a custom scheme such as <code>paulsawesomeapp://</code> will not work even if the user has the appropriate app installed. Instead, you should implement a user gesture to launch the app via a custom scheme, or use the “intent:” syntax described in this article.</p>
+<h2 id="syntax">Syntax</h2>
+<p>The best practice is to construct an intent anchor and embed that into the page so the user can launch the app. This gives you a lot more flexibility in controlling how apps are launched, including the ability to pass extra information into the app via <a href="http://developer.android.com/guide/components/intents-filters.html#extras">Intent Extras</a>.</p>
+<p>The basic syntax for an intent-based URI is as follows:</p>
+<pre class="text"><code>intent:  
+   HOST/URI-path // Optional host  
+   #Intent;  
+      package=\[string\];  
+      action=\[string\];  
+      category=\[string\];  
+      component=\[string\];  
+      scheme=\[string\];  
+   end;</code></pre>
+<p>See the <a href="https://code.google.com/p/android-source-browsing/source/browse/core/java/android/content/Intent.java?repo=platform--frameworks--base#6514">Android source</a> for parsing details.</p>
+<p>Also, you may choose to specify fallback URL by adding the following string extra:</p>
+<pre class="text"><code>S.browser_fallback_url=[encoded_full_url]</code></pre>
+<p>When an intent could not be resolved, or an external application could not be launched, then the user will be redirected to the fallback URL if it was given.</p>
+<p>Some example cases where Chrome does not launch an external application are as follows:</p>
+<ul>
+<li>The intent could not be resolved, i.e., no app can handle the intent.</li>
+<li>JavaScript timer tried to open an application without user gesture.</li>
+</ul>
+<p>Note that <code>S.&lt;name&gt;</code> is a way to define string extras. <code>S.browser_fallback_url</code> was chosen for backward compatibility, but the target app won’t see browser_fallback_url value as Chrome removes it.</p>
+<h2 id="examples">Examples</h2>
+<p>Here’s an intent that launches the Zxing barcode scanner app. It follows the syntax thus:</p>
+<pre class="text"><code>intent:  
+   //scan/  
+   #Intent;  
+      package=com.google.zxing.client.android;  
+      scheme=zxing;  
+   end;</code></pre>
+<p>To launch the Zxing barcode scanner app, you encode your <code>href</code> on the anchor as follows:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb4-1" title="1">  <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;end&quot;</span><span class="kw">&gt;</span> Take a QR code <span class="kw">&lt;/a&gt;</span></a></code></pre></div>
+<p>See the <a href="https://code.google.com/p/zxing/source/browse/trunk/android/AndroidManifest.xml#97">Android Zxing Manifest</a>, which defines the package and the host.</p>
+<p>Also, if fallback URL is specified, the full URL will look like this:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1">   <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;S.browser_fallback_url=http%3A%2F%2Fzxing.org;end&quot;</span><span class="kw">&gt;</span> Take a QR code <span class="kw">&lt;/a&gt;</span></a></code></pre></div>
+<p>Now the URL will get you to zxing.org if the app could not be found, or the link was triggered from JavaScript without user gesture (or for other cases where we don’t launch an external application.)</p>
+<h2 id="considerations">Considerations</h2>
+<p>If the activity you invoke via an intent contains <a href="http://developer.android.com/guide/components/intents-filters.html#extras">extras</a>, you can include these as well.</p>
+<p>Only activities that have the category filter, <a href="http://developer.android.com/reference/android/content/Intent.html#CATEGORY_BROWSABLE">android.intent.category.BROWSABLE</a> are able to be invoked using this method as it indicates that the application is safe to open from the Browser.</p>
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="http://developer.android.com/guide/components/intents-filters.html">Android Intents and Intent Filters</a></li>
+<li><a href="http://developer.android.com/guide/components/activities.html">Android Activities</a></li>
+</ul>
+<p>And Chrome doesn’t launch an external app for a given Intent URI in the following cases.</p>
+<ul>
+<li>When the Intent URI is redirected from a typed in URL.</li>
+<li>When the Intent URI is initiated without user gesture.</li>
+</ul>
+</body>
+</html>

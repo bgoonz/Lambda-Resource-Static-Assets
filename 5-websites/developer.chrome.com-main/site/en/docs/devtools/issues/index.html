@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-05-14" />
+  <title>Find and fix problems with the Issues tab</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Find and fix problems with the Issues tab</h1>
+<p class="date">2020-05-14</p>
+</header>
+<p>The <strong>Issues</strong> tab in Chrome DevTools reduces the notification fatigue and clutter of the Console. Use it to find solutions to problems detected by the browser, such as cookie issues and mixed content.</p>
+<p>{% Aside %}</p>
+<p>In Chrome 84, the Issues tab supports three types of issue:</p>
+<ul>
+<li><a href="https://web.dev/samesite-cookies-explained">Cookie problems</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content">Mixed content</a></li>
+<li><a href="https://web.dev/coop-coep/">COEP issues</a></li>
+</ul>
+<p>Future versions of Chrome will support more issue types.</p>
+<p>{% endAside %}</p>
+<h2 id="open-the-issues-tab-open">Open the Issues tab {: #open }</h2>
+<ol type="1">
+<li>Visit a page with issues to fix, such as <a href="https://samesite-sandbox.glitch.me/">samesite-sandbox.glitch.me</a>.</li>
+<li><a href="/docs/devtools/open">Open DevTools</a>.</li>
+<li><p>Click the <strong>Go to Issues</strong> button in the yellow warning bar.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/gCmzHUEJiNXOrvIB0fZg.png”, alt=“Chrome DevTools screenshot showing yellow warning bar for Issues detected.”, width=“800”, height=“350” %}</p>
+<p>Alternatively, select <strong>Issues</strong> from the <strong>More tools</strong> menu.</p>
+<p>{% Img src=“image/admin/I1lYj0JQnddws06dscVU.png”, alt=“Chrome DevTools screenshot showing Issues tab in More tools menu.”, width=“800”, height=“350” %}</p></li>
+<li><p>Once you’re on the Issues tab, click the <strong>Reload page</strong> button if necessary.</p>
+<p>{% Img src=“image/admin/LeFSmbYEy8cjAmdqNYr9.png”, alt=“Chrome DevTools screenshot showing Issues tab with ‘Reload page’ button.”, width=“800”, height=“481” %}</p>
+<p>You’ll notice that issues reported in the Console (such as the cookie warnings here) are quite hard to understand. It’s not clear what needs to be done to fix the issues reported.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/TjbgfCTF4wLnhifvpiRc.png”, alt=“Chrome DevTools screenshot showing Issues tab with two cookie issues.”, width=“800”, height=“529” %}</p></li>
+</ol>
+<h2 id="view-items-in-the-issues-tab-view-issues">View items in the Issues tab {: #view-issues }</h2>
+<p>The <strong>Issues</strong> tab presents warnings from the browser in a structured, aggregated, and actionable way.</p>
+<ol type="1">
+<li><p>Click an item in the <strong>Issues</strong> tab to get guidance on how to fix the issue and find affected resources.</p>
+<p>{% Img src=“image/admin/ohxdDJRkjvFGaFHO3i0R.png”, alt=“Chrome DevTools screenshot showing a cookie issue open in the Issues tab.”, width=“800”, height=“657” %}</p>
+<p>Each item has four components:</p>
+<ul>
+<li>A headline describing the issue.</li>
+<li>A description providing the context and the solution.</li>
+<li>An <strong>AFFECTED RESOURCES</strong> section that links to resources within the appropriate DevTools context, such as the Network panel.</li>
+<li>Links to further guidance.</li>
+</ul></li>
+<li><p>Click on <strong>AFFECTED RESOURCES</strong> items to view details. In this example, there is one cookie and one request affected.</p>
+<p>{% Img src=“image/admin/6AwuuJhT2Uuxzc395J41.png”, alt=“Chrome DevTools screenshot showing affected resources open in the Issues tab.”, width=“800”, height=“657” %}</p></li>
+</ol>
+<h2 id="view-issues-in-context-issues-devtools">View issues in context {: #issues-devtools }</h2>
+<ol type="1">
+<li><p>Click on a resource link to view the item in the appropriate context within DevTools. In this example, click <code>samesite-sandbox.glitch.me</code> to show the cookies attached to that request.</p>
+<p>{% Img src=“image/admin/REHyxZ4gkbfzZgRCp3OG.png”, alt=“Chrome DevTools screenshot showing affected resources open in the Issues tab.”, width=“800”, height=“657” %}</p></li>
+<li><p>Scroll to view the item with a problem: in this case, the cookie <code>ck02</code>. Hover over the information icon on the right to see the problem and how to fix it.</p>
+<p>{% Img src=“image/admin/CQlNNpB5ISFRD5lCYkKw.png”, alt=“Chrome DevTools screenshot showing issue with a resource opened from the Issues tab.”, width=“800”, height=“679” %}</p></li>
+</ol>
+</body>
+</html>

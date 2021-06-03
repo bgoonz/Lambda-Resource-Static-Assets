@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-01-29" />
+  <title>What’s New In DevTools (Chrome 81)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 81)</h1>
+<p class="date">2020-01-29</p>
+</header>
+<p>{% YouTube id=“HJNaNDspffM” %}</p>
+<h2 id="moto-g4-support-in-device-mode-motog4">Moto G4 support in Device Mode {: #motog4 }</h2>
+<p>After <a href="/docs/devtools/device-mode#viewport">enabling the Device Toolbar</a> you can now simulate the dimensions of a Moto G4 viewport from the <strong>Device</strong> list.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/sjq2F9xT7TvvuMn9dK19.png”, alt=“Simulating a Moto G4 viewport”, width=“800”, height=“697” %}</p>
+<p>Click <a href="/docs/devtools/device-mode#frame">Show Device Frame</a> to show the Moto G4 hardware around the viewport.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/g4Zv3NVUWJ9zXA8ap5Nx.png”, alt=“Showing the Moto G4 hardware”, width=“800”, height=“663” %}</p>
+<p>Related features:</p>
+<ul>
+<li>Open the <a href="/docs/devtools/command-menu">Command Menu</a> and run the <code>Capture screenshot</code> command to take a screenshot of the viewport that includes the Moto G4 hardware (after enabling <strong>Show Device Frame</strong>).</li>
+<li><a href="/docs/devtools/device-mode#throttle">Throttle the network and CPU</a> to more accurately simulate a mobile user’s web browsing conditions.</li>
+</ul>
+<p><a href="https://crbug.com/924693">Chromium issue #924693</a></p>
+<h2 id="cookie-related-updates-cookies">Cookie-related updates {: #cookies }</h2>
+<h3 id="blocked-cookies-in-the-cookies-pane-blockedcookies">Blocked cookies in the Cookies pane {: #blockedcookies }</h3>
+<p>The Cookies pane in the Application panel now colors blocked cookies with a yellow background.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/xL1eFHhHrBSttaKvAWNY.png”, alt=“Blocked cookies in the Cookies pane of the Application panel”, width=“800”, height=“339” %}</p>
+<p>See also <a href="/blog/new-in-devtools-79#blockedcookies">Debug why a cookie was blocked</a> to learn how to access a similar UI from the Network panel.</p>
+<p><a href="https://crbug.com/1030258">Chromium issue #1030258</a></p>
+<h3 id="cookie-priority-in-the-cookie-pane-cookiepriority">Cookie priority in the Cookie pane {: #cookiepriority }</h3>
+<p>The Cookies tables in the Network and Application panels now include a <strong>Priority</strong> column.</p>
+<p>{% Aside “caution” %}</p>
+<p>Chrome is the only browser that supports cookie priority.</p>
+<p>{% endAside %}</p>
+<p><a href="https://crbug.com/1026879">Chromium issue #1026879</a></p>
+<h3 id="edit-all-cookie-values-edit">Edit all cookie values {: #edit }</h3>
+<p>All cells in the Cookie tables are editable now, except cells in the <strong>Size</strong> column because that column represents the network size of the cookie, in bytes. See <a href="/docs/devtools/storage/cookies#fields">Fields</a> for an explanation of each column.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/I9QWmwImTskUoTWvNl6f.png”, alt=“Editing a cookie value”, width=“800”, height=“267” %}</p>
+<h3 id="copy-as-node.js-fetch-to-include-cookie-data-fetchcookies">Copy as Node.js fetch to include cookie data {: #fetchcookies }</h3>
+<p>Right-click a network request and select <strong>Copy</strong> &gt; <strong>Copy as Node.js fetch</strong> to get a <code>fetch</code> expression that includes cookie data.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/iu0PwomIqe8ebeeLTtKM.png”, alt=“Copy as Node.js fetch”, width=“800”, height=“393” %}</p>
+<p><a href="https://crbug.com/1029826">Chromium issue #1029826</a></p>
+<h2 id="more-accurate-web-app-manifest-icons-manifesticons">More accurate web app manifest icons {: #manifesticons }</h2>
+<p>Previously, the Manifest pane in the Application panel would perform its own requests in order to display web app manifest icons. DevTools now shows the exact same manifest icon that Chrome uses.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/d6TqfMrcnEc21yq9bXMq.png”, alt=“Icons in the Manifest pane”, width=“800”, height=“521” %}</p>
+<p><a href="https://crbug.com/985402">Chromium issue #985402</a></p>
+<h2 id="hover-over-css-content-properties-to-see-unescaped-values-content">Hover over CSS <code>content</code> properties to see unescaped values {: #content }</h2>
+<p>Hover over the value of a <code>content</code> property to see the unescaped version of the value.</p>
+<p>For example, on this <a href="https://mathiasbynens.github.io/css-dbg-stories/css-escapes.html">demo</a> when you inspect the <code>p::after</code> pseudo-element you see an escaped string in the Styles pane:</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/sgqFVrsJHu5X6sRu1zNw.png”, alt=“The escaped string”, width=“800”, height=“497” %}</p>
+<p>When you hover over the <code>content</code> value you see the unescaped value:</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/R906EbXoT2HZ5Qa2s81W.png”, alt=“The unescaped value”, width=“586”, height=“72” %}</p>
+<h2 id="more-detailed-source-map-errors-in-the-console-sourcemaperrors">More detailed source map errors in the Console {: #sourcemaperrors }</h2>
+<p>The Console now provides more detail on why a source map failed to load or parse. Previously it just provided an error without explaining what went wrong.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/OHmBSg0ClDD9vOlk4bt9.png”, alt=“A source map loading error in the Console”, width=“800”, height=“479” %}</p>
+<h2 id="setting-for-disabling-scrolling-past-the-end-of-a-file-scrolling">Setting for disabling scrolling past the end of a file {: #scrolling }</h2>
+<p>Open <a href="/docs/devtools/customize#settings">Settings</a> and then disable <strong>Preferences</strong> &gt; <strong>Sources</strong> &gt; <strong>Allow scrolling past end of file</strong> to disable the default UI behavior that allows you to scroll well past the end of a file in the <strong>Sources</strong> panel.</p>
+<p>Here’s a <a href="https://imgur.com/zJytuf1">GIF of the feature</a>.</p>
+</body>
+</html>

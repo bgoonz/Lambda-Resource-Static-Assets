@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2019-12-10" />
+  <title>New in Chrome 79</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">New in Chrome 79</h1>
+<p class="date">2019-12-10</p>
+</header>
+<p>{% YouTube id=‘L0OB0_bO5I0’ %}</p>
+<p>Chrome 79 is rolling out now!</p>
+<ul>
+<li>Installed Progressive Web Apps on Android now support <a href="#maskable-icons">maskable icons</a>.</li>
+<li>You can now create immersive experiences with the <a href="#webxr">WebXR Device API</a>.</li>
+<li>The <a href="#wake-lock">Wake Lock API</a> is available as an origin trial.</li>
+<li>The <a href="#rendersubtree"><code>rendersubtree</code> attribute</a> is available as an origin trial.</li>
+<li>Videos from the <a href="#cds2019">Chrome DevSummit</a> are now online.</li>
+<li>And plenty more.</li>
+</ul>
+<p>I’m <a href="https://petelepage.com/">Pete LePage</a>, let’s dive in and see what’s new for developers in Chrome 79!</p>
+<h2 id="maskable-icons-maskable-icons">Maskable Icons {: #maskable-icons }</h2>
+<p>If you’re running Android O or later, and you’ve installed a Progressive Web App, you’ve probably noticed the annoying white circle around the icon.</p>
+{# TODO(petele): video element, float-right, auto-play #}
+<figure class="float-right">
+{% Video src=[ “video/0g2WvpbGRGdVs0aAPc6ObG7gkud2/cjPOLN1GYdcOzAQfLer9.webm”, “video/0g2WvpbGRGdVs0aAPc6ObG7gkud2/sgGdDrY5eBVo43VP2iyW.mp4” ] %}
+</figure>
+<p>Thankfully, Chrome 79 now supports maskable icons for installed Progressive Web Apps.You’ll need to design your icon to fit within the safe zone - essentially a circle with a diameter that’s 80% of the canvas.</p>
+<p>Then, in the web app manifest, you’ll need to add a new <code>purpose</code> property to the icon, and set its value to <code>maskable</code>.</p>
+<p><br style="clear:both;"></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;icons&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-6" title="6">      <span class="dt">&quot;src&quot;</span><span class="fu">:</span> <span class="st">&quot;path/to/maskable_icon.png&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">      <span class="dt">&quot;sizes&quot;</span><span class="fu">:</span> <span class="st">&quot;196x196&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;image/png&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-9" title="9">      <span class="dt">&quot;purpose&quot;</span><span class="fu">:</span> <span class="st">&quot;maskable&quot;</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="er">]</span></a>
+<a class="sourceLine" id="cb1-11" title="11">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="fu">}</span></a></code></pre></div>
+<p>Tiger Oakes has a great post on CSS Tricks - <a href="https://css-tricks.com/maskable-icons-android-adaptive-icons-for-your-pwa/">Maskable Icons: Android Adaptive Icons for Your PWA</a> with all of the details, and has a great tool you can use for testing your icons to make sure they’ll fit.</p>
+<h2 id="web-xr-webxr">Web XR {: #webxr }</h2>
+<p>You can now create immersive experiences for smartphones and head-mounted displays with the WebXR Device API.</p>
+<p>WebXR enables a whole spectrum of immersive experiences. From using augmented reality to see what a new couch might look like in your home before you buy it, to virtual reality games and 360 degree movies, and more.</p>
+<p>To get started with the new API, read <a href="https://blog.chromium.org/2019/10/chrome-79-beta-virtual-reality-comes-to.html">Virtual Reality Comes to the Web</a>.</p>
+<h2 id="new-origin-trials-origin-trials">New origin trials {: #origin-trials }</h2>
+<p>Origin trials provide an opportunity for us to validate experimental features and APIs, and make it possible for you to provide feedback on their usability and effectiveness in broader deployment.</p>
+<p>{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/b8W2avaeSBFf7PhZcxAX.png”, alt="“, className=”float-right“, height=”590“, width=”800" %}</p>
+<p>Experimental features are typically only available behind a flag, but when we offer an Origin Trial for a feature, you can register for that origin trial to enable the feature for all users on your origin.</p>
+<p>Opting into an origin trial allows you to build demos and prototypes that your beta testing users can try for the duration of the trial without requiring them to flip any special flags in Chrome.</p>
+<p>There’s more info on origin trials in the <a href="https://googlechrome.github.io/OriginTrials/developer-guide.html">Origin Trials Guide for Web Developers</a>. You can see a list of active origin trials, and sign up for them on the <a href="/origintrials/#/trials/active">Chrome Origin Trials</a> page.</p>
+<h3 id="wake-lock-wake-lock">Wake Lock {: #wake-lock }</h3>
+<p>One of my biggest pet peeves about Google Slides is that if you leave the deck open on a single slide for too long, the screensaver kicks in. Before you can continue, you need to unlock your computer. Ugh.</p>
+<p>But, with the new Wake Lock API, a page can request a lock, and prevent the screen from dimming or the screensaver from kicking in. It’s perfect for Slides, but it’s also helpful for things like recipe sites - where you might want to keep the screen on while you follow the instructions.</p>
+<p>To request a wake lock, you need to call <code>navigator.wakeLock.request()</code>, and save the <code>WakeLockSentinel</code> object that it returns.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">// The wake lock sentinel.</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">let</span> wakeLock <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co">// Function that attempts to request a wake lock.</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="kw">const</span> requestWakeLock <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="cf">try</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    wakeLock <span class="op">=</span> <span class="cf">await</span> <span class="va">navigator</span>.<span class="va">wakeLock</span>.<span class="at">request</span>(<span class="st">&#39;screen&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="va">wakeLock</span>.<span class="at">addEventListener</span>(<span class="st">&#39;release&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-9" title="9">      <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Wake Lock was released&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-10" title="10">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-11" title="11">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Wake Lock is active&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-12" title="12">  <span class="op">}</span> <span class="cf">catch</span> (err) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="va">console</span>.<span class="at">error</span>(<span class="vs">`</span><span class="sc">${</span><span class="va">err</span>.<span class="at">name</span><span class="sc">}</span><span class="vs">, </span><span class="sc">${</span><span class="va">err</span>.<span class="at">message</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-14" title="14">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="op">};</span></a></code></pre></div>
+<p>The lock is maintained until the user navigates away from the page, or you call <code>release</code> on the <code>WakeLockSentinel</code> object you saved earlier.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">// Function that attempts to release the wake lock.</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">const</span> releaseWakeLock <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="cf">if</span> (<span class="op">!</span>wakeLock) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="cf">return</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="cf">try</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="cf">await</span> <span class="va">wakeLock</span>.<span class="at">release</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">    wakeLock <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="op">}</span> <span class="cf">catch</span> (err) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="va">console</span>.<span class="at">error</span>(<span class="vs">`</span><span class="sc">${</span><span class="va">err</span>.<span class="at">name</span><span class="sc">}</span><span class="vs">, </span><span class="sc">${</span><span class="va">err</span>.<span class="at">message</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="op">};</span></a></code></pre></div>
+<p>More details are at <a href="https://web.dev/wakelock">web.dev/wakelock</a>.</p>
+<h3 id="rendersubtree-attribute-rendersubtree"><code>rendersubtree</code> attribute {: #rendersubtree }</h3>
+<p>There are times when you don’t want part of the DOM to render immediately. For example scrollers with a large amount of content, or tabbed UIs where only some of the content is visible at any given time.</p>
+<p>The new <code>rendersubtree</code> attribute tells the browser it can skip rendering that subtree. This allows the browser to spend more time processing the rest of the page, increasing performance.</p>
+<p>When <code>rendersubtree</code> is set to <code>invisible</code>, the element’s content is not drawn or hit-tested, allowing for rendering optimizations.</p>
+<p>Changing the <code>rendersubtree</code> to <code>activatable</code>, makes the content visible by removing the <code>invisible</code> attribute, and rendering the content.</p>
+<h2 id="chrome-dev-summit-2019-cds2019">Chrome Dev Summit 2019 {: #cds2019 }</h2>
+<p>{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/4L4iDgNCnYAykp3UXZRe.png”, alt="“, className=”float-right“, height=”420“, width=”800" %}</p>
+<p>If you missed Chrome Dev Summit, all of the talks are on our <a href="https://www.youtube.com/playlist?list=PLNYkxOF6rcIDA1uGhqy45bqlul0VcvKMr">YouTube channel</a>.</p>
+<p>Jake also has a great <a href="https://twitter.com/jaffathecake/status/1197190886821466113">Twitter thread</a> with all the fun stuff that went on between the talks, including the newest member of our team, <a href="https://twitter.com/surjiko">Surjiko</a>.</p>
+<h2 id="further-reading">Further reading</h2>
+<p>This covers only some of the key highlights. Check the links below for additional changes in Chrome 78.</p>
+<ul>
+<li><a href="/blog/new-in-devtools-79">What’s new in Chrome DevTools (79)</a></li>
+<li><a href="https://developers.google.com/web/updates/2019/10/chrome-79-deps-rems">Chrome 79 deprecations &amp; removals</a></li>
+<li><a href="https://www.chromestatus.com/features#milestone%3D79">ChromeStatus.com updates for Chrome 79</a></li>
+<li><a href="https://v8.dev/blog/v8-release-79">What’s new in JavaScript in Chrome 79</a></li>
+<li><a href="https://chromium.googlesource.com/chromium/src/+log/78.0.3904.72..79.0.3945.82">Chromium source repository change list</a></li>
+</ul>
+<h2 id="subscribe">Subscribe</h2>
+<p>Want to stay up to date with our videos, then <a href="https://goo.gl/6FP1a5">subscribe</a> to our <a href="https://www.youtube.com/user/ChromeDevelopers/">Chrome Developers YouTube channel</a>, and you’ll get an email notification whenever we launch a new video.</p>
+<p>I’m Pete LePage, and as soon as Chrome 80 is released, I’ll be right here to tell you – what’s new in Chrome!</p>
+</body>
+</html>

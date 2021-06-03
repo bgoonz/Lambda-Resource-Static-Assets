@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.it</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="progetto-di-estensione-del-browser-parte-1-tutto-sui-browser">Progetto di Estensione del Browser Parte 1: Tutto sui Browser</h1>
+<p><img src="/sketchnotes/browser.jpg" alt="schizzo di un browser" /> &gt; Sketchnote di <a href="https://dev.to/wassimchegham/ever-wondered-what-happens-when-you-type-in-a-url-in-an-address-bar-in-a-browser-3dob">Wassim Chegham</a></p>
+<h2 id="quiz-pre-lezione">Quiz Pre-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/23?loc=it">Quiz Pre-Lezione</a></p>
+<h3 id="introduzione">Introduzione</h3>
+<p>Le estensioni del browser aggiungono funzionalità a un browser. Ma prima di crearne una, si dovrebbe imparare qualcosa su come i browser svolgono il loro lavoro.</p>
+<h3 id="informazioni-sul-browser">Informazioni sul browser</h3>
+<p>In questa serie di lezioni si imparerà come creare un’estensione per il browser che funzionerà con i browser Chrome, Firefox ed Edge. In questa parte si scoprirà come funzionano i browser e come impacchettare gli elementi dell’estensione del browser.</p>
+<p>Ma cos’è esattamente un browser? È un’applicazione software che consente a un utente finale di accedere ai contenuti da un server e visualizzarli su pagine web.</p>
+<p>✅ Un po’ di storia: il primo browser si chiamava “WorldWideWeb” ed fu creato da Sir Timothy Berners-Lee nel 1990.</p>
+<p><img src="../images/earlybrowsers.jpg" alt="primi browser" /> &gt; Alcuni dei primi browser, tramite <a href="https://www.slideshare.net/KMcGrane/week-4-ixd-history-personal-computing">Karen McGrane</a></p>
+<p>Quando un utente si connette a Internet utilizzando un indirizzo URL (Uniform Resource Locator), solitamente utilizzando Hypertext Transfer Protocol tramite un indirizzo <code>http</code> o <code>https</code> , il browser comunica con un server web e recupera una pagina web.</p>
+<p>A questo punto, il motore di rendering del browser la visualizza sul dispositivo dell’utente, che potrebbe essere un telefono cellulare, un desktop o un laptop.</p>
+<p>I browser hanno anche la capacità di memorizzare nella cache il contenuto in modo che non debba essere recuperato dal server ogni volta. Possono registrare la cronologia dell’attività di navigazione di un utente, memorizzare i “cookie”, che sono piccoli frammenti di dati che contengono informazioni utilizzate per memorizzare l’attività di un utente e altro ancora.</p>
+<p>Una cosa davvero importante da ricordare sui browser è che non sono tutti uguali! Ogni browser ha i suoi punti di forza e di debolezza e uno sviluppatore web professionista deve capire come far funzionare bene le pagine web su più browser. Ciò include la gestione di piccoli schermi come quelli di un telefono cellulare, così come la gestione di un utente offline.</p>
+<p>Un sito web davvero utile che probabilmente si dovrebbe aggiungere ai preferiti da usare in qualunque browser preferisci è <a href="https://www.caniuse.com">caniuse.com</a>. Quando si creano pagine web, è molto utile utilizzare gli elenchi di tecnologie supportate forniti da caniuse in modo da poter supportare al meglio i propri utenti.</p>
+<p>✅ Come si può sapere quali browser sono più popolari con la base di utenti del proprio sito web? Controllando le analitiche: si possono installare vari pacchetti di analisi come parte del proprio processo di sviluppo web e che evidenzieranno quali browser sono più utilizzati tra i vari browser popolari.</p>
+<h2 id="estensioni-del-browser">Estensioni del browser</h2>
+<p>Perché si vorrebbe creare un’estensione per il browser? È una cosa utile da collegare al browser quando si ha bisogno di un rapido accesso ad attività che si tende a ripetere. Ad esempio, se ci si ritrova a dover controllare i colori nelle varie pagine Web con cui si interagisce, si potrebbe installare un’estensione del browser per la selezione dei colori. Se si hanno problemi a ricordare le password, si potrebbe utilizzare un’estensione del browser per la gestione delle password.</p>
+<p>Anche le estensioni del browser sono divertenti da sviluppare. Tendono a gestire un numero finito di compiti che svolgono bene.</p>
+<p>✅ Quali sono le proprie estensioni browser preferite? Quali compiti svolgono?</p>
+<h3 id="installazione-di-estensioni">Installazione di estensioni</h3>
+<p>Prima di iniziare a creare, si dia un’occhiata al processo di creazione e distribuzione di un’estensione del browser. Mentre ogni browser varia leggermente nel modo in cui gestiscono questa attività, il processo è simile su Chrome e Firefox rispetto a questo esempio su Edge:</p>
+<figure>
+<img src="../images/install-on-edge.png" alt="videata del browser Edge che mostra la pagina delle estensioni edge:// aperte e il menu delle impostazioni aperto" /><figcaption>videata del browser Edge che mostra la pagina delle estensioni edge:// aperte e il menu delle impostazioni aperto</figcaption>
+</figure>
+<p>In sostanza, il processo sarà:</p>
+<ul>
+<li>creare la propria estensione usando <code>npm build</code></li>
+<li>navigare nel browser fino al menu Estensioni utilizzando il pulsante “Impostazioni e altro ancora” (l’icona <code>...</code> ) in alto a destra</li>
+<li>abilitare la “Modalità sviluppatore” (switch in basso a sinistra), quindi se si tratta di una nuova installazione scegliere <code>Carica decompresssa</code> per caricare una nuova estensione dalla sua cartella di compilazione (nel nostro caso è <code>/dist</code>)</li>
+<li>oppure, fare clic su <code>Aggiorna</code> se si sta ricaricando l’estensione già installata</li>
+</ul>
+<p>✅ Queste istruzioni riguardano le estensioni create dallo sviluppatore; per installare le estensioni che sono state rilasciate nello store di estensioni del browser associato a ciascun browser, è necessario accedere a tali <a href="https://microsoftedge.microsoft.com/addons/Microsoft-Edge-Extensions-Home">store</a> e installare l’estensione di propria scelta.</p>
+<h3 id="si-comincia">Si comincia</h3>
+<p>Verrè costruita un’estensione del browser che mostra l’impronta di carbonio della propria regione, mostrando l’utilizzo e la fonte di energia. L’estensione avrà un form che raccoglie una chiave API in modo che ai possa accedere all’API di CO2 Signal.</p>
+<p><strong>Occorrente:</strong></p>
+<ul>
+<li><a href="https://www.co2signal.com/">una chiave API</a>; inserire la propria email nella casella in questa pagina e se ne riceverà una</li>
+<li>il <a href="http://api.electricitymap.org/v3/zones">codice della propria regione</a> corrispondente alla <a href="https://www.electricitymap.org/map">Electricity Map</a> (a Boston, ad esempio, si utilizza “US-NEISO”).</li>
+<li>il <a href="../../start">codice di partenza</a>. Scaricare la cartella <code>start</code>; si completerà il codice in questa cartella.</li>
+<li><a href="https://www.npmjs.com">NPM</a> - NPM è uno strumento di gestione dei pacchetti; si installa localmente e i pacchetti elencati nel file <code>package.json</code> verranno installati per essere utilizzati dalla propria risorsa web</li>
+</ul>
+<p>✅ Ulteriori informazioni sulla gestione dei pacchetti in questo <a href="https://docs.microsoft.com/it-it/learn/modules/create-nodejs-project-dependencies/">eccellente modulo di apprendimento</a></p>
+<p>Ci si prenda un minuto per esaminare la base di codice:</p>
+<pre><code>dist
+ - | manifest.json (valori predefiniti impostati qui)
+ - | index.html (markup e front-end HTML qui)
+ - | background.js (background JS qui)
+ - | main.js (compilato JS)
+
+ src
+ - | index.js (il proprio codice JS va qui)</code></pre>
+<p>✅ Una volta che si ha a portata di mano la chiave API e il codice regionale, andranno memorizzati da qualche parte in una nota per un utilizzo futuro.</p>
+<h3 id="creare-lhtml-per-lestensione">Creare l’HTML per l’estensione</h3>
+<p>Questa estensione ha due viste. Una per raccogliere la chiave API e il codice regionale:</p>
+<figure>
+<img src="../images/1.png" alt="videata dell’estensione completata aperta in un browser, che mostra un form con input per il nome della regione e la chiave API." /><figcaption>videata dell’estensione completata aperta in un browser, che mostra un form con input per il nome della regione e la chiave API.</figcaption>
+</figure>
+<p>e la seconda per visualizzare l’utilizzo di carbonio della regione:</p>
+<figure>
+<img src="../images/2.png" alt="videata dell’estensione completata che mostra i valori per l’utilizzo di carbonio e la percentuale di combustibili fossili per la regione USA-NEISO." /><figcaption>videata dell’estensione completata che mostra i valori per l’utilizzo di carbonio e la percentuale di combustibili fossili per la regione USA-NEISO.</figcaption>
+</figure>
+<p>Si inizia costruendo l’HTML per il form e applicando uno stile con CSS.</p>
+<p>Nella cartella <code>/dist</code> si creerà un form e un’area dei risultati. Nel file <code>index.html</code> , popolare l’area del form contraddistinta da "<!-- form area -->:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;form</span><span class="ot"> class=</span><span class="st">&quot;form-data&quot;</span><span class="ot"> autocomplete=</span><span class="st">&quot;on&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="kw">&lt;div&gt;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">        <span class="kw">&lt;h2&gt;</span>Nuovo? Aggiungi le tue informazioni<span class="kw">&lt;/h2&gt;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="kw">&lt;div&gt;</span></a>
+<a class="sourceLine" id="cb2-6" title="6">        <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;region&quot;</span><span class="kw">&gt;</span>Nome Regione<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">        <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> id=</span><span class="st">&quot;region&quot;</span><span class="ot"> required class=</span><span class="st">&quot;region-name&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb2-9" title="9">    <span class="kw">&lt;div&gt;</span></a>
+<a class="sourceLine" id="cb2-10" title="10">        <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;api&quot;</span><span class="kw">&gt;</span>La tua chiave API da tmrow<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb2-11" title="11">        <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> id=</span><span class="st">&quot;api&quot;</span><span class="ot"> required class=</span><span class="st">&quot;api-key&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="kw">&lt;button</span><span class="ot"> class=</span><span class="st">&quot;search-btn&quot;</span><span class="kw">&gt;</span>Invia<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="kw">&lt;/form&gt;</span> </a></code></pre></div>
+<p>Questo è il form in cui le proprie informazioni recuperate verranno inserite e salvate nella memoria locale del browser (local storage)</p>
+<p>Successivamente, creare l’area dei risultati; sotto il tag di chiusura del form, dopo ’<!-- result area --> aggiungere alcuni div:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;result&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;loading&quot;</span><span class="kw">&gt;</span>caricamento...<span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;errors&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;data&quot;</span><span class="kw">&gt;&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;result-container&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">        <span class="kw">&lt;p&gt;&lt;strong&gt;</span>Regione: <span class="kw">&lt;/strong&gt;&lt;span</span><span class="ot"> class=</span><span class="st">&quot;my-region&quot;</span><span class="kw">&gt;&lt;/span&gt;&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">        <span class="kw">&lt;p&gt;&lt;strong&gt;</span>Utilizzo Carbonio: <span class="kw">&lt;/strong&gt;&lt;span</span><span class="ot"> class=</span><span class="st">&quot;carbon-usage&quot;</span><span class="kw">&gt;&lt;/span&gt;&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">        <span class="kw">&lt;p&gt;&lt;strong&gt;</span>Percentuale di Combustibile Fossile: <span class="kw">&lt;/strong&gt;&lt;span</span><span class="ot"> class=</span><span class="st">&quot;fossil-fuel&quot;</span><span class="kw">&gt;&lt;/span&gt;&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="kw">&lt;button</span><span class="ot"> class=</span><span class="st">&quot;clear-btn&quot;</span><span class="kw">&gt;</span>Cambia regione<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
+<p>A questo punto, si può provare una compilazione. Assicurarsi di installare le dipendenze del pacchetto di questa estensione:</p>
+<pre><code>npm install</code></pre>
+<p>Questo comando utilizzerà npm, il Node Package Manager, per installare webpack per il processo di compilazione dell’estensione. Webpack è un <em>bundler</em> che gestisce la compilazione del codice (un <em>bundler</em> è uno strumento che prande pezzi di codice javascript e dipendenze e li raggruppa in un unico file che verrà in genere usato nel browser - n.d.t.). Si può vedere l’output di questo processo guardando in <code>/dist/main.js -</code> si vede che il codice è stato raggruppato.</p>
+<p>Per ora, l’estensione dovrebbe essere compilata e, se la si distribuisce in Edge come estensione, si vedrebbe un form ben disposto.</p>
+<p>Congratulazioni, si sono compiuti i primi passi verso la creazione di un’estensione per il browser. Nelle lezioni successive verrà resa più funzionale e utile.</p>
+<hr />
+<h2 id="sfida">🚀 Sfida</h2>
+<p>Si dia un’occhiata alle estensioni del browser in uno store e se ne installi una nel proprio browser. Si possono esaminare i suoi file in modi interessanti. Cosa si è scoperto?</p>
+<h2 id="quiz-post-lezione">Quiz Post-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/24?loc=it">Quiz post-lezione</a></p>
+<h2 id="revisione-e-auto-apprendimento">Revisione e Auto Apprendimento</h2>
+<p>In questa lezione si è imparato qualcosa sulla storia del browser web; si colga l’occasione per informarsi su come gli inventori del World Wide Web ne immaginavano l’uso leggendo di più sulla sua storia. Alcuni siti utili includono:</p>
+<p><a href="https://www.mozilla.org/it/firefox/browsers/browser-history/">La storia dei browser web</a></p>
+<p><a href="https://webfoundation.org/about/vision/history-of-the-web/">Storia del web (in inglese)</a></p>
+<p><a href="https://www.theguardian.com/technology/2019/mar/12/tim-berners-lee-on-30-years-of-the-web-if-we-dream-a-little-we-can-get-the-web-we-want">Un’intervista con Tim Berners-Lee (in inglese)</a></p>
+<h2 id="compito">Compito</h2>
+<p><a href="assignment.it.md">Restyling dell’estensione</a></p>
+</body>
+</html>

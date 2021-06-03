@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>index</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p>In the following figure, the multicolored square to the right of the address bar is the icon for a browser action. A popup is below the icon.</p>
+<p><img src="browser-action.png" /></p>
+<p>If you want to create an icon that isn’t always visible, use a <a href="/docs/extensions/pageAction">page action</a> instead of a browser action.</p>
+<h2 id="manifest">Manifest</h2>
+<p>Register your browser action in the <a href="/docs/extensions/mv2/tabs">extension manifest</a> like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;My extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;action&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="dt">&quot;default_icon&quot;</span><span class="fu">:</span> <span class="fu">{</span>                <span class="er">//</span> <span class="er">optional</span></a>
+<a class="sourceLine" id="cb1-6" title="6">      <span class="dt">&quot;16&quot;</span><span class="fu">:</span> <span class="st">&quot;images/icon16.png&quot;</span><span class="fu">,</span>     <span class="er">//</span> <span class="er">optional</span></a>
+<a class="sourceLine" id="cb1-7" title="7">      <span class="dt">&quot;24&quot;</span><span class="fu">:</span> <span class="st">&quot;images/icon24.png&quot;</span><span class="fu">,</span>     <span class="er">//</span> <span class="er">optional</span></a>
+<a class="sourceLine" id="cb1-8" title="8">      <span class="dt">&quot;32&quot;</span><span class="fu">:</span> <span class="st">&quot;images/icon32.png&quot;</span>      <span class="er">//</span> <span class="er">optional</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-10" title="10">    <span class="dt">&quot;default_title&quot;</span><span class="fu">:</span> <span class="st">&quot;Google Mail&quot;</span><span class="fu">,</span>  <span class="er">//</span> <span class="er">optional</span><span class="fu">,</span> <span class="er">shown</span> <span class="er">in</span> <span class="er">tooltip</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="dt">&quot;default_popup&quot;</span><span class="fu">:</span> <span class="st">&quot;popup.html&quot;</span>    <span class="er">//</span> <span class="er">optional</span></a>
+<a class="sourceLine" id="cb1-12" title="12">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<p>You can provide any size icon to be used in Chrome, and Chrome will select the closest one and scale it to the appropriate size to fill the 16-dip space. However, if the exact size isn’t provided, this scaling can cause the icon to lose detail or look fuzzy.</p>
+<p>Since devices with less-common scale factors like 1.5x or 1.2x are becoming more common, you are encouraged to provide multiple sizes for your icons. This also ensures that if the icon display size is ever changed, you don’t need to do any more work to provide different icons!</p>
+<p>The old syntax for registering the default icon is still supported:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;My extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="dt">&quot;browser_action&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="er">...</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="dt">&quot;default_icon&quot;</span><span class="fu">:</span> <span class="st">&quot;images/icon32.png&quot;</span>  <span class="er">//</span> <span class="er">optional</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="er">//</span> <span class="er">equivalent</span> <span class="er">to</span> <span class="st">&quot;default_icon&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;32&quot;</span><span class="fu">:</span> <span class="st">&quot;images/icon32.png&quot;</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="fu">}</span></a></code></pre></div>
+<h2 id="parts-of-the-ui">Parts of the UI</h2>
+<p>A browser action can have an <a href="#icon">icon</a>, a <a href="#tooltip">tooltip</a>, a <a href="#badge">badge</a>, and a <a href="#popup">popup</a>.</p>
+<h3 id="icon">Icon</h3>
+<p>The browser action icons in Chrome are 16 dips (device-independent pixels) wide and high. Larger icons are resized to fit, but for best results, use a 16-dip square icon.</p>
+<p>You can set the icon in two ways: using a static image or using the HTML5 <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html">canvas element</a>. Using static images is easier for simple applications, but you can create more dynamic UIs—such as smooth animation—using the canvas element.</p>
+<p>Static images can be in any format WebKit can display, including BMP, GIF, ICO, JPEG, or PNG. For unpacked extensions, images must be in the PNG format.</p>
+<p>To set the icon, use the <strong>default_icon</strong> field of <strong>browser_action</strong> in the <a href="#manifest">manifest</a>, or call the <a href="#method-setIcon"><code>browserAction.setIcon</code></a> method.</p>
+<p>To properly display icon when screen pixel density (ratio <code>size_in_pixel / size_in_dip</code>) is different than 1, the icon can be defined as set of images with different sizes. The actual image to display will be selected from the set to best fit the pixel size of 16 dip. The icon set can contain any size icon specification, and Chrome will select the most appropriate one.</p>
+<h3 id="tooltip">Tooltip</h3>
+<p>To set the tooltip, use the <strong>default_title</strong> field of <strong>browser_action</strong> in the <a href="#manifest">manifest</a>, or call the <a href="#method-setTitle"><code>browserAction.setTitle</code></a> method. You can specify locale-specific strings for the <strong>default_title</strong> field; see <a href="/extensions/i18n">Internationalization</a> for details.</p>
+<h3 id="badge">Badge</h3>
+<p>Browser actions can optionally display a <em>badge</em>—a bit of text that is layered over the icon. Badges make it easy to update the browser action to display a small amount of information about the state of the extension.</p>
+<p>Because the badge has limited space, it should have 4 characters or less.</p>
+<p>Set the text and color of the badge using <a href="#method-setBadgeText"><code>browserAction.setBadgeText</code></a> and <a href="#method-setBadgeBackgroundColor"><code>browserAction.setBadgeBackgroundColor</code></a>, respectively.</p>
+<h3 id="popup">Popup</h3>
+<p>If a browser action has a popup, the popup appears when the user clicks the extension’s icon. The popup can contain any HTML contents that you like, and it’s automatically sized to fit its contents. The popup cannot be smaller than 25x25 and cannot be larger than 800x600.</p>
+<p>To add a popup to your browser action, create an HTML file with the popup’s contents. Specify the HTML file in the <strong>default_popup</strong> field of <strong>browser_action</strong> in the <a href="#manifest">manifest</a>, or call the <a href="#method-setPopup"><code>browserAction.setPopup</code></a> method.</p>
+<h2 id="tips">Tips</h2>
+<p>For the best visual impact, follow these guidelines:</p>
+<ul>
+<li><strong>Do</strong> use browser actions for features that make sense on most pages.</li>
+<li><strong>Don’t</strong> use browser actions for features that make sense for only a few pages. Use <a href="/extensions/pageAction">page actions</a> instead.</li>
+<li><strong>Do</strong> use big, colorful icons that make the most of the 16x16-dip space. Browser action icons should seem a little bigger and heavier than page action icons.</li>
+<li><strong>Don’t</strong> attempt to mimic Google Chrome’s monochrome menu icon. That doesn’t work well with themes, and anyway, extensions should stand out a little.</li>
+<li><strong>Do</strong> use alpha transparency to add soft edges to your icon. Because many people use themes, your icon should look nice on a variety of background colors.</li>
+<li><strong>Don’t</strong> constantly animate your icon. That’s just annoying.</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<p>You can find simple examples of using browser actions in the <a href="https://github.com/GoogleChrome/chrome-extensions-samples/tree/master/mv2-archive/api/browserAction/">examples/api/browserAction</a> directory. For other examples and for help in viewing the source code, see <a href="/docs/extensions/mv2/samples">Samples</a>.</p>
+</body>
+</html>

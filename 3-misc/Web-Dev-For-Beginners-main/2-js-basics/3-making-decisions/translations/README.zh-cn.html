@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.zh-cn</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="javascript-基础做出决定">JavaScript 基础：做出决定</h1>
+<p><img src="/sketchnotes/webdev101-js-decisions.png" alt="JavaScript Basics - Making decisions" /> &gt; 涂鸦笔记作者：<a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="课前小测">课前小测</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/11?loc=zh_cn">课前小测</a></p>
+<p>对你的代码运行方式做出决定并且控制它们的顺序可以让你的代码更加可复用和稳定。这节课会介绍 JavaScript 中控制数据流的语法以及其与布尔数据类型搭配使用时的重要性。</p>
+<p><a href="https://youtube.com/watch?v=SxTp8j-fMMY" title="做出决定"><img src="https://img.youtube.com/vi/SxTp8j-fMMY/0.jpg" alt="Making Decisions" /></a></p>
+<blockquote>
+<p>点击上方图片来观看一个有关做出决定的视频。</p>
+</blockquote>
+<h2 id="布尔值简要回顾">布尔值简要回顾</h2>
+<p>布尔值只有两个值：<code>true</code> 或 <code>false</code>。布尔值有助于决定在满足一定条件下应该运行哪些行的代码。</p>
+<p>可以用如下方式将你的布尔变量设为真或假：</p>
+<p><code>let myTrueBool = true</code> <code>let myFalseBool = false</code></p>
+<p>✅ 布尔值（Booleans）的命名来源于英国数学家、哲学家和逻辑学家 George Boole（1815-1864）。</p>
+<h2 id="比较运算符comparison-operators与布尔值">比较运算符（Comparison Operators）与布尔值</h2>
+<p>一些运算符可用于表示比较的结果（会以布尔值返回）。下面是一些常用的运算符：</p>
+<table>
+<thead>
+<tr class="header">
+<th>符号</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td><strong>小于</strong>：比较两个值，如果左边的值小于右边的值则返回 <code>true</code></td>
+<td><code>5 &lt; 6 // true</code></td>
+</tr>
+<tr class="even">
+<td><code>&lt;=</code></td>
+<td><strong>小于或等于</strong>：比较两个值，如果左边的值小于或等于右边的值则返回 <code>true</code></td>
+<td><code>5 &lt;= 6 // true</code></td>
+</tr>
+<tr class="odd">
+<td><code>&gt;</code></td>
+<td><strong>大于</strong>：比较两个值，如果左边的值大于右边的值则返回 <code>true</code></td>
+<td><code>5 &gt; 6 // false</code></td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td><strong>大于或等于</strong>：比较两个值，如果左边的值大于或等于右边的值则返回 <code>true</code></td>
+<td><code>5 &gt;= 6 // false</code></td>
+</tr>
+<tr class="odd">
+<td><code>===</code></td>
+<td><strong>严格等于</strong>：比较两个值，如果左边的值等于右边的值<strong>且</strong>数据类型相同则返回 <code>true</code></td>
+<td><code>5 === 6 // false</code></td>
+</tr>
+<tr class="even">
+<td><code>!==</code></td>
+<td><strong>不等于</strong>：比较两个值，返回与“严格等于”运算结果相反的布尔值</td>
+<td><code>5 !== 6 // true</code></td>
+</tr>
+</tbody>
+</table>
+<p>✅ 在你的浏览器控制台中亲手写一些比较来验证你的知识。有任何让你感到意外的返回结果吗？</p>
+<h2 id="if-语句">If 语句</h2>
+<p>If 语句会在条件为真的情况下运行它的块中的代码。</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="cf">if</span> (condition)<span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="co">// 如果 condition 为 true，这个块中的代码将会运行。</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="op">}</span></a></code></pre></div>
+<p>比较/逻辑运算符常被用于构造条件式。</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">let</span> currentMoney<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">let</span> laptopPrice<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="cf">if</span> (currentMoney <span class="op">&gt;=</span> laptopPrice)<span class="op">{</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="co">// 如果条件为 true，这个块中的代码将会运行。</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Getting a new laptop!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="op">}</span></a></code></pre></div>
+<h2 id="if..else-语句">If..Else 语句</h2>
+<p><code>else</code> 语句会在条件为假的情况下运行它块中的代码。它后面可以跟上一个 <code>if</code> 语句。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">let</span> currentMoney<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">let</span> laptopPrice<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="cf">if</span> (currentMoney <span class="op">&gt;=</span> laptopPrice)<span class="op">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="co">// 如果条件为 true，这个块中的代码将会运行。</span></a>
+<a class="sourceLine" id="cb3-6" title="6">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Getting a new laptop!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="cf">else</span><span class="op">{</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="co">// 如果条件为 false，这个块中的代码将会运行。</span></a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Can&#39;t afford a new laptop, yet!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="op">}</span></a></code></pre></div>
+<p>✅ 通过在浏览器控制台运行上方和接下来的代码来检查你对它的理解是否正确。可以通过修改 currentMoney 和 laptopPrice 变量的值来尝试改变 <code>console.log()</code> 打印出的值。</p>
+<h2 id="逻辑运算符logical-operators与布尔值">逻辑运算符（Logical Operators）与布尔值</h2>
+<p>做出决定可能需要不止一次比较，可以用逻辑运算符将比较结果串在一起来产生一个布尔值。</p>
+<table>
+<thead>
+<tr class="header">
+<th>符号</th>
+<th>描述</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&amp;&amp;</code></td>
+<td><strong>逻辑与（AND）</strong>：比较两个布尔表达式，只有在两边<strong>都是真</strong>时返回真</td>
+<td><code>(5 &gt; 6) &amp;&amp; (5 &lt; 6 ) // 一边为假，另一边为真，返回假</code></td>
+</tr>
+<tr class="even">
+<td><code>\|\|</code></td>
+<td><strong>逻辑或（OR）</strong>：比较两个布尔表达式，在至少一边为真时返回真</td>
+<td><code>(5 &gt; 6) \|\| (5 &lt; 6) // 一边为假，另一边为真，返回真</code></td>
+</tr>
+<tr class="odd">
+<td><code>!</code></td>
+<td><strong>逻辑非（NOT）</strong>：返回与一个布尔表达式相反的布尔值</td>
+<td><code>!(5 &gt; 6) // 5 并不比 6 大，但 "!" 会返回真</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="用逻辑运算符来构造条件和决定">用逻辑运算符来构造条件和决定</h2>
+<p>If…else 语句中，逻辑运算符可以用来构造条件。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">let</span> currentMoney<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">let</span> laptopPrice<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">let</span> laptopDiscountPrice <span class="op">=</span> laptopPrice <span class="op">-</span> (laptopPrice <span class="op">*</span> <span class="fl">.20</span>) <span class="co">// 打八折后的笔记本电脑价格</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="cf">if</span> (currentMoney <span class="op">&gt;=</span> laptopPrice <span class="op">||</span> currentMoney <span class="op">&gt;=</span> laptopDiscountPrice)<span class="op">{</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="co">// 如果条件为 true，这个块中的代码将会运行。</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Getting a new laptop!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-10" title="10">    <span class="co">// 如果条件为 false，这个块中的代码将会运行。</span></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Can&#39;t afford a new laptop, yet!&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="op">}</span></a></code></pre></div>
+<h3 id="取反运算符negation-operator">取反运算符（Negation operator）</h3>
+<p>你现在已经了解到如何用 <code>if...else</code> 语句来创建条件逻辑。任何传入 <code>if</code> 的东西都需要计算出一个 true 或者 false。通过 <code>!</code> 运算符你可以将表达式 <em>取反</em>。就像这样：</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="cf">if</span> (<span class="op">!</span>condition) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="co">// 如果 condition 为 false 则运行</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="co">// 如果 condition 为 true 则运行</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="op">}</span></a></code></pre></div>
+<h3 id="三元表达式ternary-expressions">三元表达式（Ternary expressions）</h3>
+<p><code>if...else</code> 并非表达决定逻辑的唯一方式，你也可以使用一个叫做三元运算符的东西。语法如下：</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">let</span> variable <span class="op">=</span> condition <span class="op">?</span> <span class="op">&lt;</span>若为 <span class="kw">true</span> 则返回这个<span class="op">&gt;</span> : <span class="op">&lt;</span>若为 <span class="kw">false</span> 则返回这个<span class="op">&gt;</span></a></code></pre></div>
+<p>下方是一个更具体的例子：</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">let</span> firstNumber <span class="op">=</span> <span class="dv">20</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">let</span> secondNumber <span class="op">=</span> <span class="dv">10</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">let</span> biggestNumber <span class="op">=</span> firstNumber <span class="op">&gt;</span> secondNumber <span class="op">?</span> firstNumber: secondNumber<span class="op">;</span></a></code></pre></div>
+<p>✅ 花一分钟多看几遍上方代码，你能想明白这些运算符是什么意思吗？</p>
+<p>上方代码表示：</p>
+<ul>
+<li>如果 <code>firstNumber</code> 大于 <code>secondNumber</code></li>
+<li>就将 <code>firstNumber</code> 赋值给 <code>biggestNumber</code></li>
+<li>否则将 <code>secondNumber</code> 赋值给 <code>biggestNumber</code></li>
+</ul>
+<p>三元表达式其实只是下方代码的一个简单写法：</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">let</span> biggestNumber<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="cf">if</span> (firstNumber <span class="op">&gt;</span> secondNumber) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  biggestNumber <span class="op">=</span> firstNumber<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  biggestNumber <span class="op">=</span> secondNumber<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="op">}</span></a></code></pre></div>
+<hr />
+<h2 id="挑战">🚀 挑战</h2>
+<p>用逻辑运算符写一个程序，然后用三元表达式重写它。你更喜欢哪种语法？</p>
+<hr />
+<h2 id="课后小测">课后小测</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/12?loc=zh_cn">Post-lecture quiz</a></p>
+<h2 id="复习-自学">复习 &amp; 自学</h2>
+<p>在 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators">MDN</a> 上了解更多开发者可以使用的运算符。</p>
+<p>试用一下由 Josh Comeau 制作的绝妙的<a href="https://joshwcomeau.com/operator-lookup/">运算符查询器</a>！</p>
+<h2 id="作业">作业</h2>
+<p><a href="assignment.zh-cn.md">运算符</a></p>
+</body>
+</html>

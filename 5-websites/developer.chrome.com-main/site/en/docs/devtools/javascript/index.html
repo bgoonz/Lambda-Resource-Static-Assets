@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2017-01-04" />
+  <title>Debug JavaScript</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Debug JavaScript</h1>
+<p class="date">2017-01-04</p>
+</header>
+<p>This tutorial teaches you the basic workflow for debugging any JavaScript issue in DevTools. Read on, or watch the video version of this tutorial, below.</p>
+<p>{% YouTube id=“H0XScE08hy8” %}</p>
+<h2 id="step-1-reproduce-the-bug-reproduce">Step 1: Reproduce the bug {: #reproduce }</h2>
+<p>Finding a series of actions that consistently reproduces a bug is always the first step to debugging.</p>
+<ol type="1">
+<li><p>Click <strong>Open Demo</strong>. The demo opens in a new tab.</p>
+<p><a href="https://googlechrome.github.io/devtools-samples/debug-js/get-started">Open Demo</a></p></li>
+<li>Enter <code>5</code> in the <strong>Number 1</strong> text box.</li>
+<li>Enter <code>1</code> in the <strong>Number 2</strong> text box.</li>
+<li><p>Click <strong>Add Number 1 and Number 2</strong>. The label below the button says <code>5 + 1 = 51</code>. The result should be <code>6</code>. This is the bug you’re going to fix.</p>
+<p>{% Img src=“image/admin/dCZqJCgs1FHWJAeJ1Nub.png”, alt=“The result of 5 + 1 is 51. It should be 6.”, width=“800”, height=“707” %}</p>
+<p><strong>Figure 1</strong>. The result of 5 + 1 is 51. It should be 6.</p></li>
+</ol>
+<h2 id="step-2-get-familiar-with-the-sources-panel-ui-sources-ui">Step 2: Get familiar with the Sources panel UI {: #sources-ui }</h2>
+<p>DevTools provides a lot of different tools for different tasks, such as changing CSS, profiling page load performance, and monitoring network requests. The <strong>Sources</strong> panel is where you debug JavaScript.</p>
+<ol type="1">
+<li><p>Open DevTools by pressing Command+Option+I (Mac) or Control+Shift+I (Windows, Linux). This shortcut opens the <strong>Console</strong> panel.</p>
+<p>{% Img src=“image/admin/JS6A41j5zLtT1J0xqjqL.png”, alt=“The Console panel.”, width=“800”, height=“494” %}</p>
+<p><strong>Figure 2</strong>. The <strong>Console</strong> panel</p></li>
+<li><p>Click the <strong>Sources</strong> tab.</p>
+<p>{% Img src=“image/admin/1jeGIsUUPzcGzXOrPOTB.png”, alt=“The Sources panel.”, width=“800”, height=“566” %}</p>
+<p><strong>Figure 3</strong>. The <strong>Sources</strong> panel</p></li>
+</ol>
+<p>The <strong>Sources</strong> panel UI has 3 parts:</p>
+<p>{% Img src=“image/admin/fgJB1mwfZsJ7Pv21hzSt.png”, alt=“The 3 parts of the Sources panel UI.”, width=“800”, height=“566” %}</p>
+<p><strong>Figure 4</strong>. The 3 parts of the <strong>Sources</strong> panel UI</p>
+<ol type="1">
+<li>The <strong>File Navigator</strong> pane. Every file that the page requests is listed here.</li>
+<li>The <strong>Code Editor</strong> pane. After selecting a file in the <strong>File Navigator</strong> pane, the contents of that file are displayed here.</li>
+<li>The <strong>JavaScript Debugging</strong> pane. Various tools for inspecting the page’s JavaScript. If your DevTools window is wide, this pane is displayed to the right of the <strong>Code Editor</strong> pane.</li>
+</ol>
+<h2 id="step-3-pause-the-code-with-a-breakpoint-event-breakpoint">Step 3: Pause the code with a breakpoint {: #event-breakpoint }</h2>
+<p>A common method for debugging a problem like this is to insert a lot of <code>console.log()</code> statements into the code, in order to inspect values as the script executes. For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">function</span> <span class="at">updateLabel</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="kw">var</span> addend1 <span class="op">=</span> <span class="at">getNumber1</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;addend1:&#39;</span><span class="op">,</span> addend1)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="kw">var</span> addend2 <span class="op">=</span> <span class="at">getNumber2</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;addend2:&#39;</span><span class="op">,</span> addend2)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="kw">var</span> sum <span class="op">=</span> addend1 <span class="op">+</span> addend2<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;sum:&#39;</span><span class="op">,</span> sum)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="va">label</span>.<span class="at">textContent</span> <span class="op">=</span> addend1 <span class="op">+</span> <span class="st">&#39; + &#39;</span> <span class="op">+</span> addend2 <span class="op">+</span> <span class="st">&#39; = &#39;</span> <span class="op">+</span> sum<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="op">}</span></a></code></pre></div>
+<p>The <code>console.log()</code> method may get the job done, but <strong>breakpoints</strong> can get it done faster. A breakpoint lets you pause your code in the middle of its execution, and examine all values at that moment in time. Breakpoints have a few advantages over the <code>console.log()</code> method:</p>
+<ul>
+<li>With <code>console.log()</code>, you need to manually open the source code, find the relevant code, insert the <code>console.log()</code> statements, and then reload the page in order to see the messages in the Console. With breakpoints, you can pause on the relevant code without even knowing how the code is structured.</li>
+<li>In your <code>console.log()</code> statements you need to explicitly specify each value that you want to inspect. With breakpoints, DevTools shows you the values of all variables at that moment in time. Sometimes there are variables affecting your code that you’re not even aware of.</li>
+</ul>
+<p>In short, breakpoints can help you find and fix bugs faster than the <code>console.log()</code> method.</p>
+<p>If you take a step back and think about how the app works, you can make an educated guess that the incorrect sum (<code>5 + 1 = 51</code>) gets computed in the <code>click</code> event listener that’s associated to the <strong>Add Number 1 and Number 2</strong> button. Therefore, you probably want to pause the code around the time that the <code>click</code> listener executes. <strong>Event Listener Breakpoints</strong> let you do exactly that:</p>
+<ol type="1">
+<li>In the <strong>JavaScript Debugging</strong> pane, click <strong>Event Listener Breakpoints</strong> to expand the section. DevTools reveals a list of expandable event categories, such as <strong>Animation</strong> and <strong>Clipboard</strong>.</li>
+<li>Next to the <strong>Mouse</strong> event category, click <strong>Expand</strong> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/aRiQWVlQJQz6Mbv1RMag.png”, alt=“Expand”, width=“14”, height=“16” %}. DevTools reveals a list of mouse events, such as <strong>click</strong> and <strong>mousedown</strong>. Each event has a checkbox next to it.</li>
+<li><p>Check the <strong>click</strong> checkbox. DevTools is now set up to automatically pause when <em>any</em> <code>click</code> event listener executes.</p>
+<p>{% Img src=“image/admin/j7toLd0kyGNvBJtMhRHS.png”, alt=“The click checkbox is enabled.”, width=“800”, height=“536” %}</p>
+<p><strong>Figure 5</strong>. The <strong>click</strong> checkbox is enabled</p></li>
+<li><p>Back on the demo, click <strong>Add Number 1 and Number 2</strong> again. DevTools pauses the demo and highlights a line of code in the <strong>Sources</strong> panel. DevTools should be paused on this line of code:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">function</span> <span class="at">onClick</span>() <span class="op">{</span></a></code></pre></div>
+<p>If you’re paused on a different line of code, press <strong>Resume Script Execution</strong> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/lk63wTlzwXWuRIdSsKP4.png”, alt=“ALT_TEXT_HERE”, width=“26”, height=“20” %} until you’re paused on the correct line.</p>
+<p>{% Aside %}</p>
+<p><strong>Note</strong>: If you paused on a different line, you have a browser extension that registers a <code>click</code> event listener on every page that you visit. You were paused in the extension’s <code>click</code> listener. If you use Incognito Mode to <a href="https://support.google.com/chrome/answer/95464">browse in private</a>, which disables all extensions, you can see that you pause on the correct line of code every time.</p>
+<p>{% endAside %}</p></li>
+</ol>
+<p><strong>Event Listener Breakpoints</strong> are just one of many types of breakpoints available in DevTools. It’s worth memorizing all the different types, because each type ultimately helps you debug different scenarios as quickly as possible. See <a href="/docs/devtools/javascript/breakpoints">Pause Your Code With Breakpoints</a> to learn when and how to use each type.</p>
+<h2 id="step-4-step-through-the-code-code-stepping">Step 4: Step through the code {: #code-stepping }</h2>
+<p>One common cause of bugs is when a script executes in the wrong order. Stepping through your code enables you to walk through your code’s execution, one line at a time, and figure out exactly where it’s executing in a different order than you expected. Try it now:</p>
+<ol type="1">
+<li><p>On the <strong>Sources</strong> panel of DevTools, click <strong>Step into next function call</strong> {% Img src=“image/admin/uQ1yacZ8AMGI0EFMxT05.png”, alt=“Step into next function call”, width=“18”, height=“26” %} to step through the execution of the <code>onClick()</code> function, one line at a time. DevTools highlights the following line of code:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="cf">if</span> (<span class="at">inputsAreEmpty</span>()) <span class="op">{</span></a></code></pre></div></li>
+<li><p>Click <strong>Step over next function call</strong> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/KMlE5HW4DU3PRgYEHny9.png”, alt=“Step over next function call.”, width=“36”, height=“20” %}. DevTools executes <code>inputsAreEmpty()</code> without stepping into it. Notice how DevTools skips a few lines of code. This is because <code>inputsAreEmpty()</code> evaluated to false, so the <code>if</code> statement’s block of code didn’t execute.</p></li>
+</ol>
+<p>That’s the basic idea of stepping through code. If you look at the code in <code>get-started.js</code>, you can see that the bug is probably somewhere in the <code>updateLabel()</code> function. Rather than stepping through every line of code, you can use another type of breakpoint to pause the code closer to the probable location of the bug.</p>
+<h2 id="step-5-set-a-line-of-code-breakpoint-line-breakpoint">Step 5: Set a line-of-code breakpoint {: #line-breakpoint }</h2>
+<p>Line-of-code breakpoints are the most common type of breakpoint. When you’ve got a specific line of code that you want to pause on, use a line-of-code breakpoint:</p>
+<ol type="1">
+<li><p>Look at the last line of code in <code>updateLabel()</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="va">label</span>.<span class="at">textContent</span> <span class="op">=</span> addend1 <span class="op">+</span> <span class="st">&#39; + &#39;</span> <span class="op">+</span> addend2 <span class="op">+</span> <span class="st">&#39; = &#39;</span> <span class="op">+</span> sum<span class="op">;</span></a></code></pre></div></li>
+<li>To the left of the code you can see the line number of this particular line of code, which is <strong>32</strong>. Click on <strong>32</strong>. DevTools puts a blue icon on top of <strong>32</strong>. This means that there is a line-of-code breakpoint on this line. DevTools now always pauses before this line of code is executed.</li>
+<li><p>Click <strong>Resume script execution</strong> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/lk63wTlzwXWuRIdSsKP4.png”, alt=“Resume Script Execution”, width=“26”, height=“20” %}. The script continues executing until it reaches line 32. On lines 29, 30, and 31, DevTools prints out the values of <code>addend1</code>, <code>addend2</code>, and <code>sum</code> to the right of each line’s semi-colon.</p>
+<p>{% Img src=“image/admin/99Omb7ALyJB7MfYpuqXp.png”, alt=“DevTools pauses on the line-of-code breakpoint on line 32.”, width=“800”, height=“571” %}</p>
+<p><strong>Figure 6</strong>. DevTools pauses on the line-of-code breakpoint on line 32</p></li>
+</ol>
+<h2 id="step-6-check-variable-values-check-values">Step 6: Check variable values {: #check-values }</h2>
+<p>The values of <code>addend1</code>, <code>addend2</code>, and <code>sum</code> look suspicious. They’re wrapped in quotes, which means that they’re strings. This is a good hypothesis for the explaining the cause of the bug. Now it’s time to gather more information. DevTools provides a lot of tools for examining variable values.</p>
+<h3 id="method-1-the-scope-pane-scope">Method 1: The Scope pane {: #scope }</h3>
+<p>When you’re paused on a line of code, the <strong>Scope</strong> pane shows you what local and global variables are currently defined, along with the value of each variable. It also shows closure variables, when applicable. Double-click a variable value to edit it. When you’re not paused on a line of code, the <strong>Scope</strong> pane is empty.</p>
+<p>{% Img src=“image/admin/Tynv55DnsSgtvpd6Iz9z.png”, alt=“The Scope pane.”, width=“800”, height=“538” %}</p>
+<p><strong>Figure 7</strong>. The <strong>Scope</strong> pane</p>
+<h3 id="method-2-watch-expressions-watch-expressions">Method 2: Watch Expressions {: #watch-expressions }</h3>
+<p>The <strong>Watch Expressions</strong> tab lets you monitor the values of variables over time. As the name implies, Watch Expressions aren’t just limited to variables. You can store any valid JavaScript expression in a Watch Expression. Try it now:</p>
+<ol type="1">
+<li>Click the <strong>Watch</strong> tab.</li>
+<li>Click <strong>Add Expression</strong> {% Img src=“image/admin/IYPLvXHyMtjVBILENOIL.png”, alt=“Add Expression”, width=“20”, height=“20” %}.</li>
+<li>Type <code>typeof sum</code>.</li>
+<li><p>Press Enter. DevTools shows <code>typeof sum: "string"</code>. The value to the right of the colon is the result of your Watch Expression.</p>
+<p>{% Img src=“image/admin/iAZLQFWjCy2kNbYKPGpR.png”, alt=“The Watch Expression pane.”, width=“800”, height=“542” %}</p>
+<p><strong>Figure 8</strong>. The Watch Expression pane (bottom-right), after creating the <code>typeof sum</code> Watch Expression. If your DevTools window is large, the Watch Expression pane is on the right, above the <strong>Event Listener Breakpoints</strong> pane.</p></li>
+</ol>
+<p>As suspected, <code>sum</code> is being evaluated as a string, when it should be a number. You’ve now confirmed that this is the cause of the bug.</p>
+<h3 id="method-3-the-console-console">Method 3: The Console {: #console }</h3>
+<p>In addition to viewing <code>console.log()</code> messages, you can also use the Console to evaluate arbitrary JavaScript statements. In terms of debugging, you can use the Console to test out potential fixes for bugs. Try it now:</p>
+<ol type="1">
+<li>If you don’t have the Console drawer open, press Escape to open it. It opens at the bottom of your DevTools window.</li>
+<li>In the Console, type <code>parseInt(addend1) + parseInt(addend2)</code>. This statement works because you are paused on a line of code where <code>addend1</code> and <code>addend2</code> are in scope.</li>
+<li><p>Press Enter. DevTools evaluates the statement and prints out <code>6</code>, which is the result you expect the demo to produce.</p>
+<p>{% Img src=“image/admin/Z5dF1m9vAWBnpMG29Ltv.png”, alt=“The Console drawer, after evaluating parseInt(addend1) + parseInt(addend2).”, width=“800”, height=“608” %}</p>
+<p><strong>Figure 9</strong>. The Console drawer, after evaluating <code>parseInt(addend1) + parseInt(addend2)</code>.</p></li>
+</ol>
+<h2 id="step-7-apply-a-fix-apply-fix">Step 7: Apply a fix {: #apply-fix }</h2>
+<p>You’ve found a fix for the bug. All that’s left is to try out your fix by editing the code and re-running the demo. You don’t need to leave DevTools to apply the fix. You can edit JavaScript code directly within the DevTools UI. Try it now:</p>
+<ol type="1">
+<li>Click <strong>Resume script execution</strong> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/lk63wTlzwXWuRIdSsKP4.png”, alt=“Resume Script Execution”, width=“26”, height=“20” %}.</li>
+<li>In the <strong>Code Editor</strong>, replace line 31, <code>var sum = addend1 + addend2</code>, with <code>var sum = parseInt(addend1) + parseInt(addend2)</code>.</li>
+<li>Press Command+S (Mac) or Control+S (Windows, Linux) to save your change.</li>
+<li>Click <strong>Deactivate breakpoints</strong> {% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/WTW7ZmEWJsBaeMrmXRJn.png”, alt=“Deactivate breakpoints”, width=“19”, height=“17” %}. It changes blue to indicate that it’s active. While this is set, DevTools ignores any breakpoints you’ve set.</li>
+<li>Try out the demo with different values. The demo now calculates correctly.</li>
+</ol>
+<p>{% Aside “caution” %}</p>
+<p><strong>Caution:</strong> This workflow only applies a fix to the code that is running in your browser. It won’t fix the code for all users that visit your page. To do that, you need to fix the code that’s on your servers.</p>
+<p>{% endAside %}</p>
+<h2 id="next-steps-next-steps">Next steps {: #next-steps }</h2>
+<p>Congratulations! You now know how to make the most of Chrome DevTools when debugging JavaScript. The tools and methods you learned in this tutorial can save you countless hours.</p>
+<p>This tutorial only showed you two ways to set breakpoints. DevTools offers many other ways, including:</p>
+<ul>
+<li>Conditional breakpoints that are only triggered when the condition that you provide is true.</li>
+<li>Breakpoints on caught or uncaught exceptions.</li>
+<li>XHR breakpoints that are triggered when the requested URL matches a substring that you provide.</li>
+</ul>
+<p>See <a href="/docs/devtools/javascript/breakpoints">Pause Your Code With Breakpoints</a> to learn when and how to use each type.</p>
+<p>There’s a couple of code stepping controls that weren’t explained in this tutorial. See <a href="/docs/devtools/javascript/reference#stepping">Step over line of code</a> to learn more.</p>
+</body>
+</html>

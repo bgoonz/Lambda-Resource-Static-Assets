@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.it</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="costruire-un-gioco-spaziale-parte-1-introduzione">Costruire un Gioco Spaziale Parte 1: Introduzione</h1>
+<figure>
+<img src="../../images/pewpew.gif" alt="video" /><figcaption>video</figcaption>
+</figure>
+<h2 id="quiz-pre-lezione">Quiz Pre-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/29?loc=it">Quiz Pre-Lezione</a></p>
+<h3 id="ereditarietà-e-composizione-nello-sviluppo-del-gioco">Ereditarietà e Composizione nello sviluppo del gioco</h3>
+<p>Nelle lezioni precedenti, non c’era molto bisogno di preoccuparsi dell’architettura di progettazione delle app che sono state create, poiché i progetti erano di portata molto ridotta. Tuttavia, quando le dimensioni e l’ambito delle applicazioni aumentano, le decisioni sull’architettura diventano una preoccupazione maggiore. Esistono due approcci principali per creare applicazioni più grandi in JavaScript: <em>composizione</em> o <em>ereditarietà</em>. Ci sono pro e contro in entrambi, che verranno spiegiati dall’interno del contesto di un gioco.</p>
+<p>✅ Uno dei libri di programmazione più famosi mai scritti ha a che fare con <a href="https://it.wikipedia.org/wiki/Design_Patterns">i modelli di progettazione</a>.</p>
+<p>In un gioco ci sono <code>oggetti di gioco</code> che esistono su uno schermo. Ciò significa che hanno una posizione su un sistema di coordinate cartesiane, caratterizzati dall’avere una coordinata <code>x</code> e una <code>y</code> . Man mano che si sviluppa un gioco si noterà che tutti gli oggetti di gioco hanno una proprietà standard, comune a ogni gioco che si crea, ovvero elementi che sono:</p>
+<ul>
+<li><strong>basati sulla posizione</strong> La maggior parte, se non tutti, gli elementi del gioco sono basati sulla posizione. Ciò significa che hanno una posizione, una <code>x</code> e una <code>y</code>.</li>
+<li><strong>mobili</strong> Questi sono oggetti che possono spostarsi in una nuova posizione. Tipicamente un eroe, un mostro o un personaggio non giocante (NPC - Non Player Character), ma non, ad esempio, un oggetto statico come un albero.</li>
+<li><strong>autodistruggenti</strong> Questi oggetti esistono solo per un determinato periodo di tempo prima che vengano contrassegnati per l’eliminazione. Di solito questo è rappresentato da un booleano <code>morto</code> o <code>distrutto</code> che segnala al motore di gioco che questo oggetto non dovrebbe più essere renderizzato.</li>
+<li><strong>raffreddamento</strong> Il “raffreddamento” è una proprietà tipica tra gli oggetti di breve durata. Un classico esempio è un pezzo di testo o un effetto grafico come un’esplosione che dovrebbe essere visto solo per pochi millisecondi.</li>
+</ul>
+<p>✅ Si pensi a un gioco come Pac-Man. Si riescono a identificare i quattro tipi di oggetti sopra elencati in questo gioco?</p>
+<h3 id="esprimere-il-comportamento">Esprimere il comportamento</h3>
+<p>Quanto descritto sopra è il comportamento che possono avere gli oggetti di gioco. Allora come vanno codificati? Si può esprimere questo comportamento tramite metodi associati a classi o oggetti.</p>
+<p><strong>Classi</strong></p>
+<p>L’idea è di usare <code>classi</code> insieme all’<code>ereditarietà</code> per ottenere l’aggiunta di un determinato comportamento a una classe.</p>
+<p>✅ L’ereditarietà è un concetto importante da comprendere. Ulteriori informazioni sull’<a href="https://developer.mozilla.org/it/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">articolo di MDN sull’ereditarietà</a>.</p>
+<p>Espresso tramite codice, un oggetto di gioco può tipicamente avere questo aspetto:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co">//Imposta la classe GameObject</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">class</span> GameObject <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="at">constructor</span>(x<span class="op">,</span> y<span class="op">,</span> type) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="kw">this</span>.<span class="at">x</span> <span class="op">=</span> x<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="kw">this</span>.<span class="at">y</span> <span class="op">=</span> y<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="kw">this</span>.<span class="at">type</span> <span class="op">=</span> type<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-10" title="10"></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="co">//Questa classe estenderà le proprietà di classe di GameObject</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="kw">class</span> Movable <span class="kw">extends</span> GameObject <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="at">constructor</span>(x<span class="op">,</span>y<span class="op">,</span> type) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-14" title="14">    <span class="kw">super</span>(x<span class="op">,</span>y<span class="op">,</span> type)</a>
+<a class="sourceLine" id="cb1-15" title="15">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-16" title="16"></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="co">//questo oggetto movibile può essere spostato nello schermo</span></a>
+<a class="sourceLine" id="cb1-18" title="18">  <span class="at">moveTo</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-19" title="19">    <span class="kw">this</span>.<span class="at">x</span> <span class="op">=</span> x<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-20" title="20">    <span class="kw">this</span>.<span class="at">y</span> <span class="op">=</span> y<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-21" title="21">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-23" title="23"></a>
+<a class="sourceLine" id="cb1-24" title="24"><span class="co">//classe specifica che estende la classe Movable, per poter approfittare di tutte le proprietà che eredita</span></a>
+<a class="sourceLine" id="cb1-25" title="25"><span class="kw">class</span> Hero <span class="kw">extends</span> Movable <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-26" title="26">  <span class="at">constructor</span>(x<span class="op">,</span>y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-27" title="27">    <span class="kw">super</span>(x<span class="op">,</span>y<span class="op">,</span> <span class="st">&#39;Hero&#39;</span>)</a>
+<a class="sourceLine" id="cb1-28" title="28">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-29" title="29"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-30" title="30"></a>
+<a class="sourceLine" id="cb1-31" title="31"><span class="co">//questa classe, d&#39;altro canto, eredita solo le proprietà di GameObject</span></a>
+<a class="sourceLine" id="cb1-32" title="32"><span class="kw">class</span> Tree <span class="kw">extends</span> GameObject <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-33" title="33">  <span class="at">constructor</span>(x<span class="op">,</span>y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-34" title="34">    <span class="kw">super</span>(x<span class="op">,</span>y<span class="op">,</span> <span class="st">&#39;Tree&#39;</span>)</a>
+<a class="sourceLine" id="cb1-35" title="35">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-36" title="36"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-37" title="37"></a>
+<a class="sourceLine" id="cb1-38" title="38"><span class="co">//un eroe può spostarsi...</span></a>
+<a class="sourceLine" id="cb1-39" title="39"><span class="kw">const</span> hero <span class="op">=</span> <span class="kw">new</span> <span class="at">Hero</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-40" title="40"><span class="va">hero</span>.<span class="at">moveTo</span>(<span class="dv">5</span><span class="op">,</span><span class="dv">5</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-41" title="41"></a>
+<a class="sourceLine" id="cb1-42" title="42"><span class="co">//ma un albero no</span></a>
+<a class="sourceLine" id="cb1-43" title="43"><span class="kw">const</span> tree <span class="op">=</span> <span class="kw">new</span> <span class="at">Tree</span>()<span class="op">;</span></a></code></pre></div>
+<p>✅ Ci si prenda qualche minuto per rivedere un eroe di Pac-Man (Inky, Pinky o Blinky, per esempio) e come sarebbe scritto in JavaScript.</p>
+<p><strong>Composizione</strong></p>
+<p>Un modo diverso di gestire l’ereditarietà degli oggetti consiste nell’usare la <em>composizione</em>. Con questo sistema gli oggetti esprimono il loro comportamento in questo modo:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="co">//crea una costante gameObject</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">const</span> gameObject <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">x</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="dt">y</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;&#39;</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="op">};</span></a>
+<a class="sourceLine" id="cb2-7" title="7"></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co">//...e una costante movable</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="kw">const</span> movable <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-10" title="10">  <span class="at">moveTo</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-11" title="11">    <span class="kw">this</span>.<span class="at">x</span> <span class="op">=</span> x<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="kw">this</span>.<span class="at">y</span> <span class="op">=</span> y<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-13" title="13">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">//poi la costante movableObject viene composta dalle costanti gameObject e movable</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="kw">const</span> movableObject <span class="op">=</span> <span class="op">{</span>...<span class="at">gameObject</span><span class="op">,</span> ...<span class="at">movable</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb2-17" title="17"></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="co">//quindi si scrive una funzione per crear un nuovo eroe che eredita le proprietà di movableObject</span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="kw">function</span> <span class="at">createHero</span>(x<span class="op">,</span> y) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-20" title="20">  <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-21" title="21">    ...<span class="at">movableObject</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-22" title="22">    x<span class="op">,</span></a>
+<a class="sourceLine" id="cb2-23" title="23">    y<span class="op">,</span></a>
+<a class="sourceLine" id="cb2-24" title="24">    <span class="dt">type</span><span class="op">:</span> <span class="st">&#39;Hero&#39;</span></a>
+<a class="sourceLine" id="cb2-25" title="25">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-26" title="26"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-27" title="27"><span class="co">//...e un oggetto statico che eredita solo le proprietà di gameObject</span></a>
+<a class="sourceLine" id="cb2-28" title="28"><span class="kw">function</span> <span class="at">createStatic</span>(x<span class="op">,</span> y<span class="op">,</span> type) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-29" title="29">  <span class="cf">return</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-30" title="30">    ...<span class="at">gameObject</span></a>
+<a class="sourceLine" id="cb2-31" title="31">    x<span class="op">,</span></a>
+<a class="sourceLine" id="cb2-32" title="32">    y<span class="op">,</span></a>
+<a class="sourceLine" id="cb2-33" title="33">    type</a>
+<a class="sourceLine" id="cb2-34" title="34">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-35" title="35"><span class="op">}</span></a>
+<a class="sourceLine" id="cb2-36" title="36"><span class="co">//crea l&#39;eroe e lo muove</span></a>
+<a class="sourceLine" id="cb2-37" title="37"><span class="kw">const</span> hero <span class="op">=</span> <span class="at">createHero</span>(<span class="dv">10</span><span class="op">,</span><span class="dv">10</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-38" title="38"><span class="va">hero</span>.<span class="at">moveTo</span>(<span class="dv">5</span><span class="op">,</span><span class="dv">5</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-39" title="39"><span class="co">//e crea un albero statico immobile</span></a>
+<a class="sourceLine" id="cb2-40" title="40"><span class="kw">const</span> tree <span class="op">=</span> <span class="at">createStatic</span>(<span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">,</span> <span class="st">&#39;Tree&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<p><strong>Quale modello si dovrebbe usare?</strong></p>
+<p>Dipende dallo sviluppatore quale modello scegliere. JavaScript supporta entrambi questi paradigmi.</p>
+<p>–</p>
+<p>Un altro modello comune nello sviluppo di giochi affronta il problema della gestione dell’esperienza utente e delle prestazioni del gioco.</p>
+<h2 id="modello-pubsub">Modello pub/sub</h2>
+<p>✅ Pub/Sub sta per pubblica/sottoscrivi (‘publish-subscribe’)</p>
+<p>Questo modello indirizza l’idea che parti disparate della propria applicazione non dovrebbero sapere l’una dell’altra. Perché? Rende molto più facile vedere cosa sta succedendo in generale se le varie parti sono separate. Inoltre, è più facile cambiare improvvisamente un comportamento se necessario. Come si realizza? Si fa stabilendo alcuni concetti:</p>
+<ul>
+<li><strong>messaggio</strong>: un messaggio è solitamente una stringa di testo accompagnata da un payload opzionale (un dato che chiarisce di cosa tratta il messaggio). Un messaggio tipico in un gioco può essere <code>KEY_PRESSED_ENTER</code>.</li>
+<li><strong>publisher</strong>: questo elemento <em>pubblica</em> un messaggio e lo invia a tutti i sottoscrittori.</li>
+<li><strong>subscriber</strong>: questo elemento <em>ascolta</em> messaggi specifici e svolge alcune attività come risultato della ricezione di questo messaggio, come sparare con un laser.</li>
+</ul>
+<p>L’implementazione è di dimensioni piuttosto ridotte ma è un modello molto potente. Ecco come può essere implementato:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="co">//imposta la classe EventEmitter che contiene i listener</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">class</span> EventEmitter <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="at">constructor</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">this</span>.<span class="at">listeners</span> <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">//quando un messaggio viene ricevuto, si fa gestire il suo payload al listener</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="at">on</span>(message<span class="op">,</span> listener) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-8" title="8">    <span class="cf">if</span> (<span class="op">!</span><span class="kw">this</span>.<span class="at">listeners</span>[message]) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-9" title="9">      <span class="kw">this</span>.<span class="at">listeners</span>[message] <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="kw">this</span>.<span class="at">listeners</span>[message].<span class="at">push</span>(listener)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-12" title="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="co">//quando un messaggio viene ricevuto, si invia a un listener con un payload</span></a>
+<a class="sourceLine" id="cb3-14" title="14">  <span class="at">emit</span>(message<span class="op">,</span> payload <span class="op">=</span> <span class="kw">null</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-15" title="15">    <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">listeners</span>[message]) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-16" title="16">      <span class="kw">this</span>.<span class="at">listeners</span>[message].<span class="at">forEach</span>(l <span class="kw">=&gt;</span> <span class="at">l</span>(message<span class="op">,</span> payload))</a>
+<a class="sourceLine" id="cb3-17" title="17">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-18" title="18">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb3-19" title="19"><span class="op">}</span></a></code></pre></div>
+<p>Per utilizzare il codice qui sopra si può creare un’implementazione molto piccola:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="co">//impostazione di una struttura di messaggio</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">const</span> Messages <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="dt">HERO_MOVE_LEFT</span><span class="op">:</span> <span class="st">&#39;HERO_MOVE_LEFT&#39;</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="op">};</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">//invoca l&#39;eventEmitter impostato sopra</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="kw">const</span> eventEmitter <span class="op">=</span> <span class="kw">new</span> <span class="at">EventEmitter</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co">//imposta un eroe</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="kw">const</span> hero <span class="op">=</span> <span class="at">createHero</span>(<span class="dv">0</span><span class="op">,</span><span class="dv">0</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">//fa in modo che eventEmitter sappia come monitorare i messages di pertinenza dell&#39;eroe per spostarsi a sinistra, e agisce di conseguenza</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">HERO_MOVE_LEFT</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-11" title="11">  <span class="va">hero</span>.<span class="at">move</span>(<span class="dv">5</span><span class="op">,</span><span class="dv">0</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-13" title="13"></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co">//imposta window per ascoltare un evento keyup, nello specifico se viene premuto freccia sinistra emette un messaggio che fa spostare l&#39;eroe a sinistra</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="va">window</span>.<span class="at">addEventListener</span>(<span class="st">&#39;keyup&#39;</span><span class="op">,</span> (evt) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-16" title="16">  <span class="cf">if</span> (<span class="va">evt</span>.<span class="at">key</span> <span class="op">===</span> <span class="st">&#39;ArrowLeft&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-17" title="17">    <span class="va">eventEmitter</span>.<span class="at">emit</span>(<span class="va">Messages</span>.<span class="at">HERO_MOVE_LEFT</span>)</a>
+<a class="sourceLine" id="cb4-18" title="18">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Sopra si collega un evento della tastiera, <code>ArrowLeft</code> e si invia il messaggio <code>HERO_MOVE_LEFT</code> (spostamento a sinistra - n.d.t.). Questo messaggio viene recepito e come risultato si sposta l’eroe (<code>hero</code>). Il punto di forza di questo modello è che l’event listener e l’eroe non sanno nulla l’uno dell’altro. Si può rimappare <code>ArrowLeft</code> sul tasto <code>A</code>. Inoltre sarebbe possibile fare qualcosa di completamente diverso su <code>ArrowLeft</code> apportando alcune modifiche alla funzione <code>on</code> di eventEmitter:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="va">eventEmitter</span>.<span class="at">on</span>(<span class="va">Messages</span>.<span class="at">HERO_MOVE_LEFT</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="va">hero</span>.<span class="at">move</span>(<span class="dv">5</span><span class="op">,</span><span class="dv">0</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Man mano che le cose diventano più complicate quando il gioco cresce, questo modello rimane lo stesso in termini di complessità e il proprio codice rimane pulito. Si consiglia vivamente di adottare questo modello.</p>
+<hr />
+<h2 id="sfida">🚀 Sfida</h2>
+<p>Pensare a come il modello pub/sub può migliorare un gioco. Quali parti dovrebbero emettere eventi e come dovrebbe reagire a questi il gioco? Ora si ha la possibilità di essere creativi, pensando a un nuovo gioco e a come potrebbero comportarsi le sue parti.</p>
+<h2 id="quiz-post-lezione">Quiz Post-Lezione</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/30?loc=it">Quiz post-lezione</a></p>
+<h2 id="revisione-e-auto-apprendimento">Revisione e Auto Apprendimento</h2>
+<p>Saperne di più su Pub/Sub <a href="https://docs.microsoft.com/it-it/azure/architecture/patterns/publisher-subscriber?WT.mc_id=academic-4621-cxa">leggendo qui</a>.</p>
+<h2 id="compito">Compito</h2>
+<p><a href="assignment.it.md">Produrre uno schizzo di un gioco</a></p>
+</body>
+</html>

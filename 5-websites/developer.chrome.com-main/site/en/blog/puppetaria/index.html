@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-11-10" />
+  <title>Puppetaria: accessibility-first Puppeteer scripts</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Puppetaria: accessibility-first Puppeteer scripts</h1>
+<p class="date">2020-11-10</p>
+</header>
+<h2 id="puppeteer-and-its-approach-to-selectors-.intro">Puppeteer and its approach to selectors {: .intro }</h2>
+<p>Puppeteer is a browser automation library for Node: it lets you control a browser using a simple and modern JavaScript API.</p>
+<p>The most prominent browser task is, of course, browsing web pages. Automating this task essentially amounts to automating interactions with the webpage.</p>
+<p>In Puppeteer, this is achieved by querying for DOM elements using string-based selectors and performing actions such as clicking or typing text on the elements. For example, a script that opens opens <a href="https://developer.google.com">developer.google.com</a>, finds the search box, and searches for <code>puppetaria</code> could look like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1">(<span class="kw">async</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">   <span class="kw">const</span> browser <span class="op">=</span> <span class="cf">await</span> <span class="va">puppeteer</span>.<span class="at">launch</span>(<span class="op">{</span> <span class="dt">headless</span><span class="op">:</span> <span class="kw">false</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">   <span class="kw">const</span> page <span class="op">=</span> <span class="cf">await</span> <span class="va">browser</span>.<span class="at">newPage</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">   <span class="cf">await</span> <span class="va">page</span>.<span class="at">goto</span>(<span class="st">&#39;https://developers.google.com/&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">waitUntil</span><span class="op">:</span> <span class="st">&#39;load&#39;</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">   <span class="co">// Find the search box using a suitable CSS selector.</span></a>
+<a class="sourceLine" id="cb1-6" title="6">   <span class="kw">const</span> search <span class="op">=</span> <span class="cf">await</span> <span class="va">page</span>.<span class="at">$</span>(<span class="st">&#39;devsite-search &gt; form &gt; div.devsite-search-container&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">   <span class="co">// Click to expand search box and focus it.</span></a>
+<a class="sourceLine" id="cb1-8" title="8">   <span class="cf">await</span> <span class="va">search</span>.<span class="at">click</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-9" title="9">   <span class="co">// Enter search string and press Enter.</span></a>
+<a class="sourceLine" id="cb1-10" title="10">   <span class="cf">await</span> <span class="va">search</span>.<span class="at">type</span>(<span class="st">&#39;puppetaria&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-11" title="11">   <span class="cf">await</span> <span class="va">search</span>.<span class="at">press</span>(<span class="st">&#39;Enter&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-12" title="12"> <span class="op">}</span>)()<span class="op">;</span></a></code></pre></div>
+<p>How elements are identified using query selectors is therefore a defining part of the Puppeteer experience. Until now, selectors in Puppeteer have been limited to CSS and XPath selectors which, albeit expressionally very powerful, can have drawbacks for persisting browser interactions in scripts.</p>
+<h3 id="syntactic-vs.-semantic-selectors-.selectors">Syntactic vs. semantic selectors {: .selectors }</h3>
+<p>CSS selectors are syntactic in nature; they are tightly bound to the inner workings of the textual representation of the DOM tree in the sense that they reference IDs and class names from the DOM. As such, they provide an integral tool for web developers for modifying or adding styles to an element in a page, but in that context the developer has full control over the page and its DOM tree.</p>
+<p>On the other hand, a Puppeteer script is an external observer of a page, so when CSS selectors are used in this context, it introduces hidden assumptions about how the page is implemented which the Puppeteer script has no control over.</p>
+<p>The effect is that such scripts can be brittle and susceptible to source code changes. Suppose, for example, that one uses Puppeteer scripts for automated testing for a web application containing the node <code>&lt;button&gt;Submit&lt;/button&gt;</code> as the third child of the <code>body</code> element. One snippet from a test case might look like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">const</span> button <span class="op">=</span> <span class="cf">await</span> <span class="va">page</span>.<span class="at">$</span>(<span class="st">&#39;body:nth-child(3)&#39;</span>)<span class="op">;</span> <span class="co">// problematic selector</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="cf">await</span> <span class="va">button</span>.<span class="at">click</span>()<span class="op">;</span></a></code></pre></div>
+<p>Here, we are using the selector <code>'body:nth-child(3)'</code> to find the submit button, but this is tightly bound to exactly this version of the webpage. If an element is later added above the button, this selector no longer works!</p>
+<p>This is not news to test writers: Puppeteer users already attempt to pick selectors that are robust to such changes. With Puppetaria, we give users a new tool in this quest.</p>
+<p>Puppeteer now ships with an <strong>alternative query handler based on querying the accessibility tree rather than relying on CSS selectors</strong>. The underlying philosophy here is that if the concrete element we want to select has not changed, then the corresponding accessibility node should not have changed either.</p>
+<p>We name such selectors “<a href="https://w3c.github.io/aria/">ARIA</a> selectors” and support querying for the computed accessible name and role of the accessibility tree. Compared to the CSS selectors, these properties are semantic in nature. They are not tied to syntactic properties of the DOM but instead descriptors for how the page is observed through assistive technologies such as screen readers.</p>
+<p>In the test script example above, we could instead use the selector <code>aria/Submit[role="button"]</code> to select the wanted button, where <code>Submit</code> refers to the accessible name of the element:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> button <span class="op">=</span> <span class="cf">await</span> <span class="va">page</span>.<span class="at">$</span>(<span class="st">&#39;aria/Submit[role=&quot;button&quot;]&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="cf">await</span> <span class="va">button</span>.<span class="at">click</span>()<span class="op">;</span></a></code></pre></div>
+<p>Now, if we later decide to change the text content of our button from <code>Submit</code> to <code>Done</code> the test will again fail, but in this case that is desirable; by changing the name of the button we change the page’s content, as opposed to its visual presentation or how it happens to be structured in the DOM. Our tests should warn us about such changes to ensure that such changes are intentional.</p>
+<p>Going back to the larger example with the search bar, we could leverage the new <code>aria</code> handler and replace</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> search <span class="op">=</span> <span class="cf">await</span> <span class="va">page</span>.<span class="at">$</span>(<span class="st">&#39;devsite-search &gt; form &gt; div.devsite-search-container&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<p>with</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">const</span> search <span class="op">=</span> <span class="cf">await</span> <span class="va">page</span>.<span class="at">$</span>(<span class="st">&#39;aria/Open search[role=&quot;button&quot;]&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<p>to locate the search bar!</p>
+<p>More generally, we believe that using such ARIA selectors can provide the following benefits to Puppeteer users:</p>
+<ul>
+<li>Make selectors in test scripts more resilient to source code changes.</li>
+<li>Make test scripts more readable (accessible names are semantic descriptors).</li>
+<li>Motivate good practices for assigning accessibility properties to elements.</li>
+</ul>
+<p>The rest of this article dives into the details on how we implemented the Puppetaria project.</p>
+<h2 id="the-design-process-.design-process">The design process {: .design-process }</h2>
+<h3 id="background">Background</h3>
+<p>As motivated above, we want to enable querying elements by their accessible name and role. These are properties of the <a href="https://chromium.googlesource.com/chromium/src/+/master/docs/accessibility/overview.md#concepts">accessibility tree</a>, a dual to the usual DOM tree, that is used by devices such as screen readers to show webpages.</p>
+<p>From looking at the specification for <a href="https://w3c.github.io/accname/#mapping_additional_nd_te">computing the accessible name</a>, it is clear that computing the name for an element is a non-trivial task, so from the beginning we decided that we wanted to reuse Chromium’s existing infrastructure for this.</p>
+<h3 id="how-we-approached-implementing-it">How we approached implementing it</h3>
+<p>Even limiting ourselves to using Chromium’s accessibility tree, there are quite a few ways that we could implement ARIA querying in Puppeteer. To see why, let’s first see how Puppeteer controls the browser.</p>
+<p>The browser exposes a debugging interface via a protocol called the <a href="https://chromedevtools.github.io/devtools-protocol/">Chrome DevTools Protocol (CDP)</a>. This exposes functionality such as “reload the page” or “execute this piece of JavaScript in the page and hand back the result” via a language-agnostic interface.</p>
+<p>Both the DevTools front-end and Puppeteer are using CDP to talk to the browser. To implement CDP commands, there is DevTools infrastructure inside all components of Chrome: in the browser, in the renderer, and so on. CDP takes care of routing the commands to the right place.</p>
+<p>Puppeteer actions such as querying, clicking, and evaluating expressions are performed by leveraging CDP commands such as <code>Runtime.evaluate</code> that evaluates JavaScript directly in the page context and hands back the result. Other Puppeteer actions such as emulating color vision deficiency, taking screenshots, or capturing traces use CDP to communicate directly with the Blink rendering process.</p>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/THoFH0AXxL8DkZxXcVdU.jpg”, alt=“CDP”, width=“800”, height=“416” %}</p>
+<p>This already leaves us with two paths for implementing our querying functionality; we can:</p>
+<ul>
+<li>Write our querying logic in JavaScript and have that injected into the page using <code>Runtime.evaluate</code>, or</li>
+<li>Use a CDP endpoint that can access and query the accessibility tree directly in the Blink process.</li>
+</ul>
+<p>We implemented 3 prototypes:</p>
+<ul>
+<li><strong>JS DOM traversal</strong> - based on injecting JavaScript into the page</li>
+<li><strong>Puppeteer AXTree traversal</strong> - based on using the existing CDP access to the accessibility tree</li>
+<li><strong>CDP DOM traversal</strong> - using a new CDP endpoint purpose-built for querying the accessibility tree</li>
+</ul>
+<h4 id="js-dom-traversal">JS DOM traversal</h4>
+<p>This prototype does a full traversal of the DOM and uses <code>element.computedName</code> and <code>element.computedRole</code>, gated on the <a href="https://www.chromestatus.com/feature/5530552681627648"><code>ComputedAccessibilityInfo</code> launch flag</a>, to retrieve the name and role for each element during the traversal. #### Puppeteer AXTree traversal Here, we instead retrieve the full accessibility tree through CDP and traverse it in Puppeteer. The resulting accessibility nodes are then mapped to DOM nodes. #### CDP DOM traversal For this prototype, we implemented a new CDP endpoint specifically for querying the accessibility tree. This way, the querying can happen on the back-end through a C++ implementation instead of in the page context via JavaScript.</p>
+<h3 id="unit-test-benchmark">Unit test benchmark</h3>
+<p>The following figure compares the total runtime of querying four elements 1000 times for the 3 prototypes. The benchmark was executed in 3 different configurations varying the page size and whether or not caching of accessibility elements was enabled.</p>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/c7Lhh6it37eo2fLMbfDx.svg”, alt=“Benchmark: Total runtime of querying four elements 1000 times”, width=“779”, height=“390” %}</p>
+<p>It is quite clear that there is a considerable performance gap between the CDP-backed querying mechanism and the two others implemented solely in Puppeteer, and the relative difference seems to increase dramatically with the page size. It is somewhat interesting to see that the JS DOM traversal prototype responds so well to enabling accessibility caching. With caching disabled, the accessibility tree is computed on demand and discards the tree after each interaction if the domain is diabled. Enabling the domain makes Chromium cache the computed tree instead.</p>
+<p>For the JS DOM traversal we ask for the accessible name and role for every element during the traversal, so if caching is disabled, Chromium computes and discards the accessibility tree for every element we visit. For the CDP based approaches, on the other hand, the tree is only discarded between each call to CDP, i.e. for every query. These approaches also benefit from enabling caching, as the accessibility tree is then persisted across CDP calls, but the performance boost is therefore comparatively smaller.</p>
+<p>Even though enabling caching looks desirable here, it does come with a cost of additional memory usage. For Puppeteer scripts that e.g <a href="https://pptr.dev/#?product=Puppeteer&amp;version=v5.4.1&amp;show=api-class-tracing">records trace files</a>, this could be problematic. We therefore decided not to enable accessibility tree caching per default. Users can turn on caching themselves by enabling the CDP <a href="https://chromedevtools.github.io/devtools-protocol/tot/Accessibility/#method-enable">Accessibility domain</a>.</p>
+<h3 id="devtools-test-suite-benchmark-.benchmark">DevTools test suite benchmark {: .benchmark }</h3>
+<p>The previous benchmark showed that implementing our querying mechanism at the CDP layer gives a performance boost in a clinical unit-test scenario.</p>
+<p>To see if the difference is pronounced enough to make it noticeable in a more realistic scenario of running a full test suite, we <a href="https://chromium-review.googlesource.com/c/devtools/devtools-frontend/+/2360013">patched the DevTools end-to-end test suite</a> to make use of the JavaScript and CDP-based prototypes and compared the runtimes. In this benchmark, we changed a total of 43 selectors from <code>[aria-label=…]</code> to a custom query handler <code>aria/…</code>, which we then implemented using each of the prototypes.</p>
+<p>Some of the selectors are used multiple times in test scripts, so the actual number of executions of the <code>aria</code> query handler was 113 per run of the suite. The total number of query selections was 2253, so only a fraction of the query selections happened through the prototypes.</p>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/MH69UUB0VSuVa4EXDm12.svg”, alt=“Benchmark: e2e test suite”, width=“787”, height=“371” %}</p>
+<p>As seen in the figure above, there is a discernible difference in the total runtime. The data is too noisy to conclude anything specific, but it is clear that the performance gap between the two prototypes shows in this scenario as well. ### A new CDP endpoint In light of the above benchmarks, and since the launch flag-based approach was undesirable in general, we decided to move forward with implementing a new CDP command for querying the accessibility tree. Now, we had to figure out the interface of this new endpoint.</p>
+<p>For our use case in Puppeteer, we need the endpoint to take so-called <a href="https://chromedevtools.github.io/devtools-protocol/tot/Runtime/#type-RemoteObjectId"><code>RemoteObjectIds</code></a> as argument and, to enable us to find the corresponding DOM elements afterwards, it should return a list of objects that contains the <a href="https://chromedevtools.github.io/devtools-protocol/tot/DOM/#type-BackendNodeId"><code>backendNodeIds</code></a> for the DOM elements.</p>
+<p>As seen in the chart below, we tried quite a few approaches satisfying this interface. From this, we found that the size of the returned objects, i.e whether or not we returned full accessibility nodes or only the <code>backendNodeIds</code> made no discernible difference. On the other hand, we found that using the existing <a href="https://source.chromium.org/chromium/chromium/src/+/master:third_party/blink/renderer/modules/accessibility/ax_object.h;l=977-982;drc=92569ee6b4ff7e0344f7780d2b2e843b1c359d05"><code>NextInPreOrderIncludingIgnored</code></a> was a poor choice for implementing the traversal logic here, as that yielded a noticeable slow-down.</p>
+<p>{% Img src=“image/dPDCek3EhZgLQPGtEG3y0fTn4v82/k7HVILl9aJRKiYdzNaty.svg”, alt=“Benchmark: Comparison of CDP-based AXTree traversal prototypes”, width=“800”, height=“418” %}</p>
+<h3 id="wrapping-it-all-up-.wrapping-up">Wrapping it all up {: .wrapping-up }</h3>
+<p>Now, with the CDP endpoint in place, we implemented the query handler on <a href="https://github.com/puppeteer/puppeteer/issues/6307">the Puppeteer side</a>. The grunt of the work here was to restructure the query handling code to enable queries to resolve directly through CDP instead of querying through JavaScript evaluated in the page context.</p>
+<h2 id="whats-next-.whats-next">What’s next? {: .whats-next }</h2>
+<p>The new <code>aria</code> handler shipped with <a href="https://github.com/puppeteer/puppeteer/releases/tag/v5.4.0">Puppeteer v5.4.0</a> as a built-in query handler. We are looking forward to seeing how users adopt it into their test scripts, and we cannot wait to hear your ideas on how we can make this even more useful!</p>
+</body>
+</html>

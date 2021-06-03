@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2017-07-27" />
+  <title>New in Chrome 60</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">New in Chrome 60</h1>
+<p class="date">2017-07-27</p>
+</header>
+<p>{% YouTube id=‘vE7JTf2_-ws’ %}</p>
+<ul>
+<li><a href="#paint">Paint Timing API</a> allows you to measure time to first paint and time to first contentful paint with the Paint Timings AP.</li>
+<li>The <a href="#fontdisplay"><code>font-display</code></a> allows you to control how fonts are rendered before they’re downloaded.</li>
+<li><a href="#wasm">WebAssembly</a> has landed</li>
+<li>And there’s <a href="#more">plenty more</a>!</li>
+</ul>
+<p>Want the full list of changes? Check out the <a href="https://chromium.googlesource.com/chromium/src/+log/59.0.3071.80..60.0.3112.78?pretty=fuller&amp;n=10000">Chromium source repository change list</a></p>
+<p>I’m Pete LePage. Let’s dive in and see what’s new for developers in Chrome 60!</p>
+<h2 id="paint-timings-api-paint">Paint timings API {: #paint }</h2>
+<p>When a user navigates to a web page, they’re look for some visual feedback to reassure them that everything is working. With the new paint timings API, we can now measure that.</p>
+<p>The API exposes two metrics:</p>
+<ul>
+<li><strong>Time to first paint</strong> - which marks the point when the browser starts to render something, the first bit of content on the screen.</li>
+<li><strong>Time to first contentful paint</strong> - which marks the point when the browser renders the first bit of content from the DOM, text, an image, etc.</li>
+</ul>
+<p>{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/Bwe8cTocyJGd5wNiaFMm.png”, alt="“, height=”279“, width=”800" %}</p>
+<p>Check out <a href="https://developers.google.com/web/updates/2017/06/user-centric-performance-metrics">Leveraging the Performance Metrics that Most Affect User Experience</a> to learn how you can track these metrics and use them to improve your experience.</p>
+<h2 id="css-font-display-property-fontdisplay">CSS <code>font-display</code> property {: #fontdisplay }</h2>
+<p>Web Fonts give you the ability to incorporate rich typography. But, if the user doesn’t already have the typeface, it needs to be downloaded, potentially making your site appear slow.</p>
+<p>Thankfully, most browsers will use a fallback if the font takes too long to download. The new <code>font-display</code> property, allows you to control how a downloadable font renders before it’s fully loaded.</p>
+<ul>
+<li><strong><code>auto</code></strong> uses whatever font display strategy the user-agent uses.</li>
+<li><strong><code>block</code></strong> gives the font face a short block period and an infinite swap period.</li>
+<li><strong><code>swap</code></strong> gives the font face a zero second block period and an infinite swap period.</li>
+<li><strong><code>fallback</code></strong> gives the font face an extremely small block period and a short swap period.</li>
+<li><strong><code>optional</code></strong> gives the font face an extremely small block period and a zero second swap period.</li>
+</ul>
+<p>It’s supported in Chrome 60 and Opera, and is in development on Firefox. Check out <a href="https://developers.google.com/web/updates/2016/02/font-display">Controlling Font Performance with <code>font-display</code></a> for more information.</p>
+<h2 id="webassembly-wasm">WebAssembly {: #wasm }</h2>
+<p>{% YouTube id=“6v4E6oksar0” %}</p>
+<p>Web Assembly or wasm provides a new way to run code, written in languages like C and C++ on the web, at near native speed.</p>
+<p>It provides the speed necessary to build an in-browser video editor or to run a Unity game at a high frame rate utilizing existing standards-based web platform APIs.</p>
+<p>You can find more info at <a href="http://webassembly.org">webassembly.org</a>, including demos, docs and how to get started.</p>
+<h2 id="and-more-more">And more! {: #more }</h2>
+<ul>
+<li>The new <a href="https://developers.google.com/web/updates/2017/06/budget-api">Web Budget API</a> enables sites with the Push Notification permission to send a limited number of push messages that trigger background work such as syncing data or dismissing notifications, without the need to show a user-visible notification.</li>
+<li><a href="https://w3c.github.io/push-api/#dom-pushsubscription-expirationtime"><code>PushSubscription.expirationTime</code></a> is now available, notifying sites when and if a subscription will expire.</li>
+<li><a href="https://developers.google.com/web/updates/2017/06/object-rest-spread">Object rest &amp; spread</a> properties are now supported, making it simpler to merge and shallow-clone objects and implement various immutable object patterns.</li>
+</ul>
+<p><strong>Note:</strong> The <a href="https://developers.google.com/web/fundamentals/discovery-and-monetization/payment-request/">Payment Request API</a> was pushed to Chrome 61.</p>
+<p>These are just a few of the changes in Chrome 60 for developers.</p>
+<p>Then <a href="https://goo.gl/6FP1a5">subscribe</a> to our <a href="https://www.youtube.com/user/ChromeDevelopers/">YouTube channel</a>, and you’ll get an email notification whenever we launch a new video.</p>
+<p>I’m Pete LePage, and as soon as Chrome 61 is released, I’ll be right here to tell you – what’s new in Chrome!</p>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2018-04-16" />
+  <title>Reach peak performance</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Reach peak performance</h1>
+<p class="date">2018-04-16</p>
+</header>
+<p>{% include ‘partials/extensions/mv2-legacy-page.md’ %}</p>
+<p>Extensions are an addition to the browser, designed to provide supplementary and customized functionality. An extension that slows down or impairs the browsing experience is problematic to the user and counter to the Chrome extension objective. In addition to general good coding habits, developers should follow these practices to ensure their extensions are running at peak performance.</p>
+<h2 id="defer-everything-possible-defer_everything">Defer everything Possible {: #defer_everything }</h2>
+<p>Refrain from loading resources until they are needed. Include only what is needed to open an extension in its startup function. Do not load things during startup that are only needed if the user clicks a button, or features that work only when the user is logged in before they have a chance to do so.</p>
+<h2 id="manage-important-events-background_pages">Manage important events {: #background_pages }</h2>
+<p>An efficient <a href="/background_pages">background script</a> contains registered events that are important to their extension. They lie dormant until a listener is triggered, act accordingly, then return to a dormant state. It is a drain on system resources to keep an unneeded script running.</p>
+<p>Background scripts should be registered in the manifest with their persistence set to false if possible.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;High Performance Extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;description&quot;</span> <span class="fu">:</span> <span class="st">&quot;Sleepy Background Script&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="dt">&quot;background&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-7" title="7">   <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;background.js&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8">   <span class="dt">&quot;persistent&quot;</span><span class="fu">:</span> <span class="kw">false</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="fu">}</span></a></code></pre></div>
+<p>The only occasion to keep a background script persistently active is if the extension uses <a href="/webRequest"><code>chrome.webRequest</code> API</a> to block or modify network requests. The webRequest API is incompatible with non-persistent background pages.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;High Performance Extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">&quot;description&quot;</span> <span class="fu">:</span> <span class="st">&quot;Persistent Background Script&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="dt">&quot;background&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="dt">&quot;scripts&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;background.js&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="dt">&quot;persistent&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb2-9" title="9">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb2-10" title="10">  <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-11" title="11">    <span class="st">&quot;webRequest&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="st">&quot;webRequestBlocking&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="st">&quot;https://&lt;distracting social media site&gt;.com/*&quot;</span></a>
+<a class="sourceLine" id="cb2-14" title="14">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-15" title="15"> <span class="er">...</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="fu">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="va">chrome</span>.<span class="va">webRequest</span>.<span class="va">onBeforeRequest</span>.<span class="at">addListener</span>(</a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">function</span>(details) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="cf">return</span> <span class="op">{</span><span class="dt">redirectUrl</span><span class="op">:</span> <span class="st">&quot;/&quot;</span><span class="op">};</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="op">{</span><span class="dt">urls</span><span class="op">:</span> [<span class="st">&quot;https://social.media.distraction.com/*&quot;</span>]<span class="op">},</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  [<span class="st">&quot;blocking&quot;</span>]</a>
+<a class="sourceLine" id="cb3-7" title="7">)<span class="op">;</span></a></code></pre></div>
+<h2 id="contain-content-scripts-content_script">Contain content scripts {: #content_script }</h2>
+<p><a href="/content_scripts">Content scripts</a> should work as the secret agents of an extension, subtly reading from or modifying the webpage while relying on the extension core to work heavier logic. They should have clear targets to avoid invasive activity on irrelevant pages. Ideally, content scripts should go unnoticed in the browsing experience aside from purposeful behavior.</p>
+<h3 id="declare-targets-declare_targets">Declare targets {: #declare_targets }</h3>
+<p>An extension running content scripts in unnecessary locations or at inappropriate times can cause the browser to slow down and potentially create functionality errors. Avoid this by providing <a href="/match_patterns">match patterns</a> in the manifest and running the script at <code>document_idle</code> instead of <code>document_start</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;High Performance Extension&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="dt">&quot;description&quot;</span> <span class="fu">:</span> <span class="st">&quot;Superfly Superlight Content Scripts&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="dt">&quot;content_scripts&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb4-7" title="7">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-8" title="8">      <span class="dt">&quot;js&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;content_script.js&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-9" title="9">      <span class="dt">&quot;matches&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;/*&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-10" title="10">      <span class="dt">&quot;run_at&quot;</span><span class="fu">:</span> <span class="st">&quot;document_idle&quot;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-12" title="12">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb4-13" title="13">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<p>If an extension will only need to access a webpage with the user’s action, have it <a href="/content_scripts#pi">injected programmatically</a>. A programmatic injection will only run when a user invokes it.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="va">chrome</span>.<span class="va">browserAction</span>.<span class="va">onClicked</span>.<span class="at">addListener</span>(<span class="kw">function</span>(tab) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="va">chrome</span>.<span class="va">tabs</span>.<span class="at">executeScript</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="dt">code</span><span class="op">:</span> <span class="st">&#39;document.body.style.fontSize=&quot;100px&quot;&#39;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h3 id="use-content-scripts-only-when-required-no_content_scripts">Use content scripts only when required {: #no_content_scripts }</h3>
+<p>Many extensions may not need a content script at all to accomplish desired functionality. Using the <a href="/declarativeContent"><code>declarativeContent</code> API</a> will set rules for the extension to recognize when relevant conditions are met. This is more efficient than a content script and uses less code!</p>
+<p>If an extension needed to display a page action to the user when they visited a site with an HTML5 <code>&lt;video&gt;</code> element, it could specify a declarative rule.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="va">chrome</span>.<span class="va">runtime</span>.<span class="va">onInstalled</span>.<span class="at">addListener</span>(<span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="va">chrome</span>.<span class="va">declarativeContent</span>.<span class="va">onPageChanged</span>.<span class="at">removeRules</span>(<span class="kw">undefined</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="va">chrome</span>.<span class="va">declarativeContent</span>.<span class="va">onPageChanged</span>.<span class="at">addRules</span>([</a>
+<a class="sourceLine" id="cb6-4" title="4">      <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-5" title="5">        <span class="dt">conditions</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb6-6" title="6">          <span class="kw">new</span> <span class="va">chrome</span>.<span class="va">declarativeContent</span>.<span class="at">PageStateMatcher</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb6-7" title="7">            <span class="dt">css</span><span class="op">:</span> [<span class="st">&quot;video&quot;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb6-8" title="8">          <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb6-9" title="9">        ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb6-10" title="10">        <span class="dt">actions</span><span class="op">:</span> [ <span class="kw">new</span> <span class="va">chrome</span>.<span class="va">declarativeContent</span>.<span class="at">ShowPageAction</span>() ]</a>
+<a class="sourceLine" id="cb6-11" title="11">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-12" title="12">    ])<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-13" title="13">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<h2 id="evaluate-code-efficiency-code">Evaluate code efficiency {: #code }</h2>
+<p>The same general practices for website performance can be applied to extensions such as implement techniques of asynchronous programming and keeping code minimal and compact.</p>
+<p>Use tools, such as <a href="https://developers.google.com/web/tools/lighthouse">Lighthouse</a>, to evaluate an extensions performance and target areas that could improve on visual extension pages.</p>
+</body>
+</html>

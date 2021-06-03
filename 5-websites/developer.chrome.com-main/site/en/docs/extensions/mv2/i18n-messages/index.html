@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2012-09-18" />
+  <title>Localization message formats</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Localization message formats</h1>
+<p class="date">2012-09-18</p>
+</header>
+<p>{% include ‘partials/extensions/mv2-legacy-page.md’ %}</p>
+<p>Each internationalized extension or app has at least one file named <code>messages.json</code> that provides locale-specific strings. This page describes the format of <code>messages.json</code> files. For information on how to internationalize and localize, see the <a href="/docs/extensions/i18n">Internationalization</a> page.</p>
+<h2 id="field-summary-overview">Field summary {: #overview }</h2>
+<p>The following code shows the supported fields for <code>messages.json</code>. Only the “<em>name</em>” and “message” fields are required.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Message text, with optional placeholders.&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Translator-aimed description of the message.&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="dt">&quot;placeholders&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-6" title="6">      <span class="dt">&quot;placeholder_name&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-7" title="7">        <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;A string to be placed within the message.&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8">        <span class="dt">&quot;example&quot;</span><span class="fu">:</span> <span class="st">&quot;Translator-aimed example of the placeholder string.&quot;</span></a>
+<a class="sourceLine" id="cb1-9" title="9">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-10" title="10">      <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-12" title="12">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<h2 id="example-example">Example {: #example }</h2>
+<p>Here’s a <code>messages.json</code> file that defines three messages named “prompt_for_name”, “hello”, and “bye”:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;prompt_for_name&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;What&#39;s your name?&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Ask for the user&#39;s name&quot;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="dt">&quot;hello&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Hello, $USER$&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Greet the user&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-9" title="9">    <span class="dt">&quot;placeholders&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-10" title="10">      <span class="dt">&quot;user&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-11" title="11">        <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;$1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-12" title="12">        <span class="dt">&quot;example&quot;</span><span class="fu">:</span> <span class="st">&quot;Cira&quot;</span></a>
+<a class="sourceLine" id="cb2-13" title="13">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-14" title="14">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-15" title="15">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb2-16" title="16">  <span class="dt">&quot;bye&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-17" title="17">    <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Goodbye, $USER$. Come back to $OUR_SITE$ soon!&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-18" title="18">    <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Say goodbye to the user&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-19" title="19">    <span class="dt">&quot;placeholders&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-20" title="20">      <span class="dt">&quot;our_site&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-21" title="21">        <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;Example.com&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-22" title="22">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb2-23" title="23">      <span class="dt">&quot;user&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-24" title="24">        <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;$1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-25" title="25">        <span class="dt">&quot;example&quot;</span><span class="fu">:</span> <span class="st">&quot;Cira&quot;</span></a>
+<a class="sourceLine" id="cb2-26" title="26">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-27" title="27">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-28" title="28">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-29" title="29"><span class="fu">}</span></a></code></pre></div>
+<h2 id="field-details-field_details">Field details {: #field_details }</h2>
+<p>This section describes each field that can appear in a <code>messages.json</code> file. For details on how the messages file is used—for example, what happens when a locale doesn’t define all the messages—see <a href="/docs/extensions/i18n">Internationalization</a>.</p>
+<h3 id="name-name">name {: #name }</h3>
+<p>Actually, there’s no field called “name”. This field’s name is the name of the message—the same <em>name</em> that you see in <code>__MSG__name___</code> or <code>getMessage("_name_")</code>.</p>
+<p>The name is a case-insensitive key that lets you retrieve the localized message text. The name can include the following characters:</p>
+<ul>
+<li>A-Z</li>
+<li>a-z</li>
+<li>0-9</li>
+<li>_ (underscore)</li>
+<li>@</li>
+</ul>
+<div class="aside aside--note">
+<b>Note:</b> Don’t define names that begin with “@@”. Those names are reserved for <a href="i18n#overview-predefined">predefined messages</a>.
+</div>
+<p>Here are three examples of names, taken from the <a href="#example">Example</a> section:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="er">&quot;prompt_for_name&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="fu">}</span><span class="er">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="er">&quot;hello&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="fu">}</span><span class="er">,</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="er">&quot;bye&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="er">...</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<p>For more examples of using names, see the <a href="/docs/extensions/i18n">Internationalization</a> page.</p>
+<h3 id="message-message">message {: #message }</h3>
+<p>The translated message, in the form of a string that can contain <a href="#placeholders">placeholders</a>. Use <code>$_placeholder_name_$</code> (case insensitive) to refer to a particular placeholder. For example, you can refer to a placeholder named “our_site” as <code>$our_site$</code>, <code>$OUR_SITE$</code>, or <code>$oUR_sITe$</code>.</p>
+<p>Here are three examples of messages, taken from the <a href="#example">Example</a> section:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="er">&quot;message&quot;:</span> <span class="er">&quot;What&#39;s</span> <span class="er">your</span> <span class="er">name?&quot;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="er">...</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="er">&quot;message&quot;:</span> <span class="er">&quot;Hello,</span> <span class="er">$USER$&quot;</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="er">...</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="er">&quot;message&quot;:</span> <span class="er">&quot;Goodbye,</span> <span class="er">$USER$.</span> <span class="er">Come</span> <span class="er">back</span> <span class="er">to</span> <span class="er">$OUR_SITE$</span> <span class="er">soon!&quot;</span></a></code></pre></div>
+<p>To put a dollar sign (<code>$</code>) into the string, use <code>$$</code>. For example, use the following code to specify the message <strong>Amount (in $)</strong>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"><span class="er">&quot;message&quot;:</span> <span class="er">&quot;Amount</span> <span class="er">(in</span> <span class="er">$$)&quot;</span></a></code></pre></div>
+<p>Although placeholders such as <code>$USER$</code> are the preferred way of referring to <em>substitution strings</em> (strings specified using the <em>substitutions</em> parameter of <a href="/docs/extensions/i18n#method-getMessage">i18n.getMessage</a>) you can also refer to substitution strings directly within the message. For example, the following message refers to the first three substitution strings passed into <code>getMessage()</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1"><span class="er">&quot;message&quot;:</span> <span class="er">&quot;Params:</span> <span class="er">$1,</span> <span class="er">$2,</span> <span class="er">$3&quot;</span></a></code></pre></div>
+<p>Despite that example, we recommend that you stick to using placeholders instead of <code>$_n_</code> strings within your messages. Think of placeholders as good variable names. A week after you write your code, you’ll probably forget what <code>$1</code> refers to, but you’ll know what your placeholders refer to. For more information on placeholders and substitution strings, see the <a href="#placeholders">placeholders</a> section.</p>
+<h3 id="description-description">description {: #description }</h3>
+<p><em>Optional.</em> A description of the message, intended to give context or details to help the translator make the best possible translation.</p>
+<p>Here are three examples of descriptions, taken from the <a href="#example">Example</a> section:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="er">&quot;description&quot;:</span> <span class="er">&quot;Ask</span> <span class="er">for</span> <span class="er">the</span> <span class="er">user&#39;s</span> <span class="er">name&quot;</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="er">...</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="er">&quot;description&quot;:</span> <span class="er">&quot;Greet</span> <span class="er">the</span> <span class="er">user&quot;</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="er">...</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="er">&quot;description&quot;:</span> <span class="er">&quot;Say</span> <span class="er">goodbye</span> <span class="er">to</span> <span class="er">the</span> <span class="er">user&quot;</span></a></code></pre></div>
+<h3 id="placeholders-placeholders">placeholders {: #placeholders }</h3>
+<p><em>Optional.</em> Defines one or more substrings to be used within the message. Here are two reasons you might want to use a placeholder:</p>
+<ul>
+<li>To define the text for a part of your message that shouldn’t be translated. Examples: HTML code, trademarked names, formatting specifiers.</li>
+<li>To refer to a substitution string passed into <code>getMessage()</code>. Example: <code>$1</code>.</li>
+</ul>
+<p>Each placeholder has a name, a “content” item, and an optional “example” item. A placeholder’s name is case-insensitive and can contain the same characters as a <a href="#name">message name</a>.</p>
+<p>The “content” item’s value is a string that can refer to substitution strings, which are specified using the <a href="/docs/extensions/i18n#method-getMessage">i18n.getMessage</a> method’s <em>substitutions</em> parameter. The value of a “content” item is typically something like “Example.com” or “$1”. If you refer to a substitution string that doesn’t exist, you get an empty string. The following table shows how <code>$_n_</code> strings correspond to strings specified by the <em>substitutions</em> parameter.</p>
+<table class="simple">
+<tbody>
+<tr>
+<th>
+<em>substitutions</em> parameter
+</th>
+<th>
+Value of $1
+</th>
+<th>
+Value of $2
+</th>
+<th>
+Value of $3
+</th>
+</tr>
+<tr>
+<td>
+<code>userName</code>
+</td>
+<td>
+value of <code>userName</code>
+</td>
+<td>
+<code>""</code>
+</td>
+<td>
+<code>""</code>
+</td>
+</tr>
+<tr>
+<td>
+<code>[“Cira”, “Kathy”]</code>
+</td>
+<td>
+<code>“Cira”</code>
+</td>
+<td>
+<code>“Kathy”</code>
+</td>
+<td>
+<code>""</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The “example” item (optional, but highly recommended) helps translators by showing how the content appears to the end user. For example, a placeholder for a dollar amount should have an example like <code>"$23.45"</code>.</p>
+<p>The following snippet, taken from the <a href="#example">Example</a> section, shows a “placeholders” item that contains two placeholders named “our_site” and “user”. The “our_site” placeholder has no “example” item because its value is obvious from the “content” field.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" title="1"><span class="er">&quot;placeholders&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">&quot;our_site&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;Example.com&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="dt">&quot;user&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-6" title="6">    <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;$1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="dt">&quot;example&quot;</span><span class="fu">:</span> <span class="st">&quot;Cira&quot;</span></a>
+<a class="sourceLine" id="cb8-8" title="8">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="fu">}</span></a></code></pre></div>
+</body>
+</html>

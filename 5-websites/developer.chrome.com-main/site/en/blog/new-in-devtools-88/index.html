@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-11-12" />
+  <title>What’s New In DevTools (Chrome 88)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 88)</h1>
+<p class="date">2020-11-12</p>
+</header>
+<p>{% Aside %}</p>
+<p>Interested in helping improve DevTools? Sign up to participate in <a href="https://google.qualtrics.com/jfe/form/SV_3NMIMtX0F2zkakR?reserved=1&amp;utm_source=Website%20feature&amp;Q_Language=en&amp;utm_medium=own_web&amp;utm_campaign=Q4&amp;productTag=chrm&amp;campaignDate=November2020&amp;referral_code=UXbl384838">Google User Research here</a>.</p>
+<p>{% endAside %}</p>
+<p>{% YouTube id=“3tUXV_n3yng” %}</p>
+<h2 id="faster-devtools-startup-fast-startup">Faster DevTools startup {: #fast-startup }</h2>
+<p>DevTools startup now is ~37% faster in terms of JavaScript compilation (from 6.9s down to 5s)! 🎉</p>
+<p>The team did some optimization to reduce the performance overhead of serialisation, parsing and deserialisation during the startup.</p>
+<p>There will be an upcoming engineering blog post explaining the implementation in detail. Stay tuned!</p>
+<p>Chromium issue: <a href="https://crbug.com/1029427">1029427</a></p>
+<h2 id="new-css-angle-visualization-tools-css-angle">New CSS angle visualization tools {: #css-angle }</h2>
+<p>DevTools now has better support for CSS angle debugging!</p>
+<p>{% Img src=“image/admin/M1Au4mPpxHaFbLoEGNIi.png”, alt=“CSS angle”, width=“800”, height=“608” %}</p>
+<p>When an HTML element on your page has CSS angle applied to it (e.g. <code>background: linear-gradient(angle, color-stop1, color-stop2)</code>, <code>transform: rotate(angle)</code>), a clock icon is shown next to the angle in the Styles pane. Click on the clock icon to toggle the clock overlay. Click anywhere in the clock or drag the needle to change the angle!</p>
+<p>There are mouse and keyboard shortcuts to change the angle value as well, check out our <a href="/docs/devtools/css/reference#angle-clock">documentation</a> to learn more!</p>
+<p>Chromium issues: <a href="https://crbug.com/1126178">1126178</a>, <a href="https://crbug.com/1138633">1138633</a></p>
+<h2 id="emulate-unsupported-image-types-emulate-image">Emulate unsupported image types {: #emulate-image }</h2>
+<p>DevTools added two new emulations in the Rendering tab, allowing you to disable AVIF and WebP image formats. These new emulations make it easier for developers to test different image loading scenarios without having to switch browsers.</p>
+<p>Suppose we have the following HTML code to serve an image in AVIF and WebP for newer browsers, with a fallback PNG image for older browsers.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="op">&lt;</span>picture<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="op">&lt;</span>source srcset<span class="op">=</span><span class="st">&quot;test.avif&quot;</span> type<span class="op">=</span><span class="st">&quot;image/avif&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="op">&lt;</span>source srcset<span class="op">=</span><span class="st">&quot;test.webp&quot;</span> type<span class="op">=</span><span class="st">&quot;image/webp&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="op">&lt;</span>img src<span class="op">=</span><span class="st">&quot;test.png&quot;</span> alt<span class="op">=</span><span class="st">&quot;A test image&quot;</span><span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">&lt;/picture<span class="op">&gt;</span></a></code></pre></div>
+<p>Open the <strong>Rendering</strong> tab, select “Disable AVIF image format” and refresh the page. Hover over the <code>img src</code>. The current image src (<code>currentSrc</code>) is now the fallback WebP image.</p>
+<p>{% Img src=“image/admin/WHyF0XexaaWPCp07vJRj.png”, alt=“Emulate image types”, width=“800”, height=“480” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1130556">1130556</a></p>
+<h2 id="simulate-storage-quota-size-in-the-storage-pane-simulate-storage">Simulate storage quota size in the Storage pane {: #simulate-storage }</h2>
+<p>You can now override storage quota size in the Storage pane. This feature gives you the ability to simulate different devices and test the behavior of your apps in low disk availability scenarios.</p>
+<p>Go to <strong>Application</strong> &gt; <strong>Storage</strong>, enable the <strong>Simulate custom storage quota</strong> checkbox, and enter any valid number to simulate the storage quota.</p>
+<p>{% Img src=“image/admin/tO7iv8T0Y1mPK4fMFQSK.png”, alt=“Simulate storage quota size”, width=“800”, height=“480” %}</p>
+<p>Chromium issues: <a href="https://crbug.com/945786">945786</a>, <a href="https://crbug.com/1146985">1146985</a></p>
+<h2 id="new-web-vitals-lane-in-the-performance-panel-recordings-web-vitals">New Web Vitals lane in the Performance panel recordings {: #web-vitals }</h2>
+<p>Performance recordings now have an option to display Web Vitals information.</p>
+<p>After recording your load performance, enable the <strong>Web Vitals</strong> checkbox in the Performance panel to view the new Web Vitals lane.</p>
+<p>The lane currently displays Web Vitals information such as <a href="https://web.dev/fcp">First Contentful Paint</a> (FCP), <a href="https://web.dev/lcp">Largest Contentful Paint</a> (LCP) and <a href="https://web.dev/cls">Layout Shift</a> (LS).</p>
+<p>Check out <a href="https://web.dev/vitals">web.dev/vitals</a> to learn more about how to optimize user experience with the Web Vitals metrics.</p>
+<p>{% Img src=“image/admin/AFxlLLBhqMQdxTbc1s92.png”, alt=“Web Vitals lane”, width=“800”, height=“480” %}</p>
+<p>Chromium issue: N/A</p>
+<h2 id="report-cors-errors-in-the-network-panel-cors">Report CORS errors in the Network panel {: #cors }</h2>
+<p>DevTools now shows CORS error when a network request is failed due to Cross-origin Resource Sharing (CORS).</p>
+<p>In the <strong>Network</strong> panel, observe the failed CORS network request. The status column shows <strong>“CORS error”</strong>. Hover over on the error, the tooltip now shows the error code. Previously, DevTools only showed generic <strong>“(failed)”</strong> status for CORS errors.</p>
+<p>This lays the foundation for our next enhancements on providing more detailed description of the CORS problems!</p>
+<p>{% Img src=“image/admin/DHGTFV0ybVJzeD3MmUIe.png”, alt=“CORS errors”, width=“800”, height=“480” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1141824">1141824</a></p>
+<h2 id="frame-details-view-updates-frame-details">Frame details view updates {: #frame-details }</h2>
+<h3 id="cross-origin-isolation-information-in-the-frame-details-view-cross-origin">Cross-origin isolation information in the Frame details view {: #cross-origin }</h3>
+<p>The cross-origin isolated status is now displayed under the <strong>Security &amp; Isolation</strong> section.</p>
+<p>The new <strong>API availability</strong> section displays the availability of <code>SharedArrayBuffer</code>s (SAB) and whether they can be shared using <code>postMessage()</code>.</p>
+<p>A deprecation warning will show if the SAB and <code>postMessage()</code> is currently available, but the context is not cross-origin isolated. Learn more about cross-origin isolation and why it will be required for features like <code>SharedArrayBuffers</code> in this <a href="https://web.dev/why-coop-coep">article</a>.</p>
+<p>{% Img src=“image/admin/zUKJS3qlUNqxTpPYLslQ.png”, alt=“Cross-origin information”, width=“800”, height=“480” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1139899">1139899</a></p>
+<h3 id="new-web-workers-information-in-the-frame-details-view-web-worker">New Web Workers information in the Frame details view {: #web-worker }</h3>
+<p>DevTools now displays dedicated web workers under the frame which creates them.</p>
+<p>In the <strong>Application</strong> panel, expand a frame with web workers, then select a worker under the <strong>Workers</strong> tree to view the web worker’s details.</p>
+<p>{% Img src=“image/admin/rHxO3TM0jpwuDj2XFW7L.png”, alt=“Web workers information”, width=“800”, height=“480” %}</p>
+<p>Chromium issues: <a href="https://crbug.com/1122507">1122507</a>, <a href="https://crbug.com/1051466">1051466</a></p>
+<h3 id="display-opener-frame-details-for-opened-windows-opener-frame">Display opener frame details for opened windows {: #opener-frame }</h3>
+<p>You can now view the details about which frame caused the opening of another Window.</p>
+<p>Select an opened window under the <strong>Frames</strong> tree to view the window details. Click on the <strong>Opener Frame</strong> link to reveal the opener in the Elements panel.</p>
+<p>{% Img src=“image/admin/ceCIdX7RvwqU226EgZXK.png”, alt=“Opener frame details”, width=“800”, height=“480” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1107766">1107766</a></p>
+<h2 id="open-network-panel-from-the-service-workers-pane-sw">Open Network panel from the Service Workers pane {: #sw }</h2>
+<p>View all service worker (SW) request routing information with the new <strong>Network requests</strong> link. This provides developers added context when debugging the SW.</p>
+<p>Go to <strong>Application</strong> &gt; <strong>Service Workers</strong>, click on the <strong>Network requests</strong> of a SW. The <strong>Network</strong> panel is opened in the bottom panel displaying all service worker related requests (the network requests are filtered by <em>“is:service-worker-intercepted”</em>).</p>
+<p>{% Img src=“image/admin/ivX2jn1HnNYrpKA6gOmR.png”, alt=“Open Network panel from the Service Workers”, width=“800”, height=“480” %}</p>
+<p>Chromium issue: N/A</p>
+<h2 id="new-copy-options-in-the-network-panel-copy">New copy options in the Network panel {: #copy }</h2>
+<h3 id="copy-property-value-copy-value">Copy property value {: #copy-value }</h3>
+<p>The new <strong>“Copy value”</strong> option in the context menu lets you copy the property value of a network request.</p>
+<p>{% Img src=“image/admin/5eUVpfTNli3XXgaFoScB.png”, alt=“Copy property value”, width=“800”, height=“480” %}</p>
+<p>In the <strong>Network</strong> panel, click on a network request to open the <strong>Headers</strong> pane. Right click on one of the properties under these section: Request payload (JSON) Form Data Query String Parameters Request Headers Response Headers</p>
+<p>Then, you can select <strong>Copy value</strong> to copy the property value to your clipboard.</p>
+<p>Chromium issue: <a href="https://crbug.com/1132084">1132084</a></p>
+<h3 id="copy-stacktrace-for-network-initiator-copy-stacktrace">Copy stacktrace for network initiator {: #copy-stacktrace }</h3>
+<p>Right-click a network request, then select <strong>Copy stacktrace</strong> to copy the stacktrace to your clipboard.</p>
+<p>{% Img src=“image/admin/D50DOHVfdgQ2d0P2hDSP.png”, alt=“Copy stacktrace”, width=“800”, height=“480” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1139615">1139615</a></p>
+<h2 id="wasm-debugging-updates-wasm">Wasm debugging updates {: #wasm }</h2>
+<h3 id="preview-wasm-variable-value-on-mouseover-wasm-mouseover">Preview Wasm variable value on mouseover {: #wasm-mouseover }</h3>
+<p>When hovering over a variable in WebAssembly (Wasm) disassembly while paused on a breakpoint, DevTools now shows the variable current value.</p>
+<p>In the <strong>Sources</strong> panel, open a Wasm file, put a breakpoint and refresh the page. Hover to a variable to see the value.</p>
+<p>{% Img src=“image/admin/6Uugv35ktmbzkQyJ3X92.png”, alt=“Preview Wasm variable on mouseover”, width=“800”, height=“480” %}</p>
+<p>Chromium issues: <a href="https://crbug.com/1058836">1058836</a>, <a href="https://crbug.com/1071432">1071432</a></p>
+<h3 id="evaluate-wasm-variable-in-the-console-wasm-console">Evaluate Wasm variable in the Console {: #wasm-console }</h3>
+<p>You can now evaluate Wasm variable in the Console while paused on a breakpoint.</p>
+<p>In this example, we put a breakpoint on the line <code>local.get $input</code>. When debugging, type <code>$input</code> in the Console will return the current value of the variable, which is <code>4</code> in this case.</p>
+<p>{% Img src=“image/admin/sxagdNxUWL0G8qBUsQnu.png”, alt=“Evaluate Wasm variable in the Console”, width=“800”, height=“508” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1127914">1127914</a></p>
+<h2 id="consistent-units-of-measurement-for-filememory-sizes-consistent-kb">Consistent units of measurement for file/memory sizes {: #consistent-kb }</h2>
+<p>DevTools now consistently use kB for displaying file/memory sizes. Previously DevTools mixed kB (1000 bytes) and KiB (1024 bytes). For example, the Network panel previously used “kB” labels but actually performed calculations using KiB, which caused needless confusion.</p>
+<p>Chromium issue: <a href="https://crbug.com/1035309">1035309</a></p>
+<h2 id="highlight-pseudo-elements-in-the-elements-panel-pseudo">Highlight pseudo elements in the Elements panel {: #pseudo }</h2>
+<p>DevTools has increased the color contrast of pseudo elements to help you better spot them.</p>
+<p>{% Img src=“image/admin/9vSBemIYz3MuM4eaq4ge.png”, alt=“Highlight pseudo elementse”, width=“800”, height=“549” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1143833">1143833</a></p>
+<h2 id="experimental-features-experimental">Experimental features {: #experimental }</h2>
+<h3 id="css-flexbox-debugging-tools-flexbox">CSS Flexbox debugging tools {: #flexbox }</h3>
+<p>{% Aside %}</p>
+<p>To enable the experiment, check the <strong>Enable CSS Flexbox debugging features</strong> checkbox under <strong>Settings</strong> &gt; <strong>Experiments</strong>.</p>
+<p>{% endAside %}</p>
+<p>Flexbox debugging tools are coming!</p>
+<p>For starters, DevTools now shows a <code>flex</code> badge in the Elements panel for elements with <code>display: flex</code> applied to it.</p>
+<p>Beside that, new alignment icons are added in the following flexbox properties:</p>
+<ul>
+<li><code>flex-direction</code></li>
+<li><code>align-items</code></li>
+<li><code>align-content</code></li>
+<li><code>align-self</code></li>
+<li><code>justify-items</code></li>
+<li><code>justify-content</code></li>
+</ul>
+<p>On top of that, these icons are context-aware. The icon direction will be adjusted according to:</p>
+<ul>
+<li><code>flex-direction</code></li>
+<li><code>direction</code></li>
+<li><code>writing-mode</code></li>
+</ul>
+<p>These icons aim to help you better visualize the flexbox layout of the page.</p>
+<p>{% Img src=“image/admin/DtWip3leUSGoK2Rvm92B.png”, alt=“CSS Flex debugging”, width=“800”, height=“480” %}</p>
+<p>Here is the <a href="https://goo.gle/devtools-flex">design doc</a> of the Flexbox tooling features. More features will be added soon.</p>
+<p>Give it a try and <a href="https://crbug.com/1136394">let us know</a> what you think!</p>
+<p>Chromium issues: <a href="https://crbug.com/1144090">1144090</a>, <a href="https://crbug.com/1139945">1139945</a></p>
+<h3 id="customize-chords-keyboard-shortcuts-keyboard-shortcuts">Customize chords keyboard shortcuts {: #keyboard-shortcuts }</h3>
+<p>{% Aside %}</p>
+<p>To enable the experiment, check the <strong>Enable keyboard shortcut editor</strong> checkbox under <strong>Settings</strong> &gt; <strong>Experiments</strong>.</p>
+<p>{% endAside %}</p>
+<p>DevTools added experimental support for <a href="/blog/new-in-devtools-87#customize">customize keyboard shortcuts</a> since last release.</p>
+<p>You can now create chords (a.k.a multi-keypress shortcuts) in the shortcut editor.</p>
+<p>Go to <strong>Settings</strong> &gt; <strong>Shortcuts</strong>, hovering on a command and click the <strong>Edit</strong> button (pen icon) to customize the chords shortcut.</p>
+<p>{% Img src=“image/admin/tF18281gSqF69MENLGuk.png”, alt=“Chords keyboard shortcuts”, width=“800”, height=“508” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/174309">174309</a></p>
+</body>
+</html>

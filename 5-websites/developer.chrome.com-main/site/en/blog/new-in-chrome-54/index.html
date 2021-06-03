@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2016-10-18" />
+  <title>New In Chrome 54</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">New In Chrome 54</h1>
+<p class="date">2016-10-18</p>
+</header>
+<p>Note: I’m trying something new with the latest video release of New In Chrome, in addition to posting it on YouTube, I’ve posted a fully annoted version of the script. It includes all of the relevant links I mentioned, and a few other helpful links. Leave your thoughts in the comments and let me know if this is useful to you!</p>
+<p>{% YouTube id=“qPD2yc8BoDk” %}</p>
+<p><a href="https://www.youtube.com/watch?v=qPD2yc8BoDk">Watch on YouTube</a></p>
+<ul>
+<li>You can now create your own custom HTML tag with and make re-usable web components with <a href="#custom-elements">Custom Elements v1</a>.</li>
+<li>It’s easier to send messages between open windows or tabs on the same origin with the <a href="#broadcast-channel">BroadcastChannel API</a>.</li>
+<li><a href="#request-full-screen">Media experience get better</a> on Android and <a href="#foreign-fetch">foreign fetch</a> is now available as an origin trial.</li>
+</ul>
+<p>I’m Pete LePage, let’s dive in and see what’s new for developers in Chrome 54!</p>
+<h2 id="custom-elements-v1-custom-elements">Custom elements v1 {: #custom-elements }</h2>
+<p>Complex user interfaces often require a large amount of HTML. Most languages allow developers to create their own components built on top of language primitives to mitigate this kind of verbosity. But until now, creating reusable components on the web has been difficult.</p>
+<p>Custom elements allow you to create your own custom HTML tags, and define the new element’s API and behavior in JavaScript. The result, a browser-native way to build reusable, interoperable components.</p>
+<p>Chrome 54 provides support for the latest custom elements <a href="https://goo.gl/9luiog">V1 spec</a>, and will continue to support the <a href="https://goo.gl/iJA2rJ">V0 API</a> until enough of you have moved to V1.</p>
+<p>Check out our <a href="https://goo.gl/7MhkyV">primer on custom elements</a> to how you can use it to create reusable web components for your site or application.</p>
+<h2 id="broadcastchannel-api-broadcast-channel">BroadcastChannel API {: #broadcast-channel }</h2>
+<p>It is not uncommon for desktop users to have multiple windows or tabs open simultaneously, and some sites even encourage this behavior, such as web editors that open documents in their own tabs.</p>
+<p>Communicating between those tabs can be difficult. The <a href="https://goo.gl/xDGxJT"><code>BroadcastChannel</code> API</a> is a new one-to-many messaging API between windows, tabs, iframes, web workers, and service workers. It allows scripts to establish named channels to send messages between browsing contexts of the same origin.</p>
+<h3 id="other-broadcastchannel-resources">Other <code>BroadcastChannel</code> resources</h3>
+<ul>
+<li><a href="https://goo.gl/Lek3U0">Spec</a></li>
+<li><a href="https://developers.google.com/web/updates/2016/09/broadcastchannel#feature_detection_and_browser_support">Polyfill</a></li>
+</ul>
+<h2 id="requestfullscreen-request-full-screen"><code>requestFullScreen</code> {: #request-full-screen }</h2>
+<p>Media is an increasingly important part of the browsing experience.</p>
+<p>In addition to a user gesture, you can now use <a href="https://goo.gl/7ALaod"><code>Element.requestFullScreen()</code></a> to trigger full screen mode after a <a href="https://goo.gl/knihpA">screen orientation change</a> - and allows you to create richer media experiences that include rotate to full screen.</p>
+<h2 id="foreign-fetch-foreign-fetch">Foreign fetch {: #foreign-fetch }</h2>
+<p>Imagine if a commonly used origin like an API provider, web font service or other service had the ability to deploy its own service worker.</p>
+<p>Instead of always going to the network, the provider could implement their own custom networking logic, and take advantage of a single, authoritative cache instance for storing its responses.</p>
+<p>Now, thanks to foreign fetch, which is available in Chrome 54 as an origin trial, it’s a reality. Check out <a href="https://goo.gl/BWt5RA">Jeffrey’s post</a> linked in the comments below!</p>
+<h2 id="closing">Closing</h2>
+<p>These are just a few of the changes in Chrome 54 for developers.</p>
+<p>Check the description for more details and links the documentation and specifications.</p>
+<p>Oh, and don’t forget to check out the <a href="/devsummit/">Chrome Dev Summit</a>, we’ll be streaming it on YouTube on November 10th and 11th.</p>
+<p>If you want to stay up to date with Chrome and know what’s coming, click that <a href="https://goo.gl/6FP1a5">Subscribe</a> button up there.</p>
+<p>I’m Pete LePage, and as soon as Chrome 55 is released, I’ll be right here to tell you – what’s new in Chrome!</p>
+</body>
+</html>

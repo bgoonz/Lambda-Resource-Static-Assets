@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.nl</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="javascript-basics-gegevenstypen">JavaScript Basics: Gegevenstypen</h1>
+<p><img src="/sketchnotes/webdev101-js-datatypes.png" alt="JavaScript Basics - Data types" /> &gt; Sketchnote door <a href="https://twitter.com/girlie_mac">Tomomi Imura</a></p>
+<h2 id="quiz-voorafgaand-aan-de-lezing">Quiz voorafgaand aan de lezing</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/7">Quiz voorafgaand aan de lezing</a></p>
+<p>Deze les behandelt de basisprincipes van JavaScript, de taal die voor interactiviteit op internet zorgt.</p>
+<p><a href="https://youtube.com/watch?v=JNIXfGiDWM8" title="Gegevenstypen in JavaScript"><img src="https://img.youtube.com/vi/JNIXfGiDWM8/0.jpg" alt="Gegevenstypen in JavaScript" /></a></p>
+<p>Laten we beginnen met variabelen en de gegevenstypen waarmee ze worden gevuld!</p>
+<h2 id="variabelen">Variabelen</h2>
+<p>Variabelen slaan waarden op die in uw code kunnen worden gebruikt en gewijzigd.</p>
+<p>Het creëren en <strong>declareren</strong> van een variabele heeft de volgende syntaxis <strong>[sleutelwoord] [naam]</strong>. Het bestaat uit twee delen:</p>
+<ul>
+<li><p><strong>Sleutelwoord</strong>. Sleutelwoorden kunnen <code>let</code> of <code>var</code> zijn.</p>
+<blockquote>
+<p>Let op, het sleutelwoord <code>let</code> is geïntroduceerd in ES6 en geeft uw variabele een zogenaamde <em>block scope</em>. Het wordt aanbevolen om <code>let</code> over <code>var</code> te gebruiken. In toekomstige delen gaan we dieper in op block scopes.</p>
+</blockquote></li>
+<li><p><strong>De variabelenaam</strong>, dit is een naam die u zelf kiest.</p></li>
+</ul>
+<h3 id="taak---werken-met-variabelen">Taak - werken met variabelen</h3>
+<ol type="1">
+<li><p><strong>Declareer een variabele</strong>. Laten we een variabele declareren met het sleutelwoord <code>let</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">let</span> myVariable<span class="op">;</span></a></code></pre></div>
+<p><code>myVariable</code> is nu gedeclareerd met het <code>let</code> sleutelwoord. Het heeft momenteel geen waarde.</p></li>
+<li><p><strong>Wijs een waarde toe</strong>. Sla een waarde op in een variabele met de operator <code>=</code>, gevolgd door de verwachte waarde.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1">myVariable <span class="op">=</span> <span class="dv">123</span><span class="op">;</span></a></code></pre></div>
+<blockquote>
+<p>Let op: het gebruik van <code>=</code> in deze les betekent dat we gebruik maken van een “toewijzingsoperator”, die wordt gebruikt om een waarde aan een variabele te geven. Het duidt niet op gelijkheid.</p>
+</blockquote>
+<p><code>myVariable</code> is nu <em>geïnitialiseerd</em> met de waarde 123.</p></li>
+<li><p><strong>Refactor</strong>. Vervang uw code door de volgende verklaring.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">let</span> myVariable <span class="op">=</span> <span class="dv">123</span><span class="op">;</span></a></code></pre></div>
+<p>Het bovenstaande wordt een <em>expliciete initialisatie</em> genoemd wanneer een variabele wordt gedeclareerd en tegelijkertijd een waarde krijgt toegewezen.</p></li>
+<li><p><strong>Wijzig de variabele waarde</strong>. Wijzig de waarde van de variabele op de volgende manier:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1">myVariable <span class="op">=</span> <span class="dv">321</span><span class="op">;</span></a></code></pre></div>
+<p>Zodra een variabele is gedeclareerd, kunt u de waarde ervan op elk moment in uw code wijzigen met de operator <code>=</code> en de nieuwe waarde.</p>
+<p>✅ Probeer het! U kunt JavaScript rechtstreeks in uw browser schrijven. Open een browservenster en ga naar Developer Tools. In de console vind u een prompt; typ <code>let myVariable = 123</code>, druk op Return en typ vervolgens <code>myVariable</code>. Wat gebeurt er? Let op, in de volgende lessen leert u meer over deze concepten.</p></li>
+</ol>
+<h2 id="constanten">Constanten</h2>
+<p>Declaratie en initialisatie van een constante volgt dezelfde concepten als een variabele, met uitzondering van het sleutelwoord <code>const</code>. Constanten worden doorgaans gedeclareerd met alleen hoofdletters.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">const</span> MY_VARIABLE <span class="op">=</span> <span class="dv">123</span><span class="op">;</span></a></code></pre></div>
+<p>Constanten zijn vergelijkbaar met variabelen, met twee uitzonderingen:</p>
+<ul>
+<li><strong>Moet waarde hebben</strong>. Constanten moeten worden geïnitialiseerd, anders treedt er een fout op bij het uitvoeren van code.</li>
+<li><strong>Referentie kan niet worden gewijzigd</strong>. De referentie van een constante kan niet worden gewijzigd nadat deze is geïnitialiseerd, anders treedt er een fout op bij het uitvoeren van code. Laten we naar twee voorbeelden kijken:
+<ul>
+<li><p><strong>Eenvoudige waarde</strong>. Het volgende is NIET toegestaan:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">const</span> PI <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2">PI <span class="op">=</span> <span class="dv">4</span><span class="op">;</span> <span class="co">// niet toegestaan</span></a></code></pre></div></li>
+<li><p><strong>Objectreferentie is beveiligd</strong>. Het volgende is NIET toegestaan.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">const</span> obj <span class="op">=</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">3</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb7-2" title="2">obj <span class="op">=</span> <span class="op">{</span> <span class="dt">b</span><span class="op">:</span> <span class="dv">5</span> <span class="op">}</span> <span class="co">// niet toegestaan</span></a></code></pre></div></li>
+<li><p><strong>Objectwaarde is niet beschermd</strong>. Het volgende is toegestaan:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">const</span> obj <span class="op">=</span> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span> <span class="dv">3</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="va">obj</span>.<span class="at">a</span> <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>  <span class="co">// toegestaan</span></a></code></pre></div>
+<p>Hierboven verandert u de waarde van het object maar niet de referentie zelf, waardoor het toegestaan is.</p></li>
+</ul>
+<blockquote>
+<p>Let op: een ‘const’ betekent dat de referentie is beschermd tegen opnieuw toewijzen. De waarde is echter niet <em>onveranderlijk</em> en kan veranderen, vooral als het een complexe constructie is, zoals een object.</p>
+</blockquote></li>
+</ul>
+<h2 id="gegevenstypen">Gegevenstypen</h2>
+<p>Variabelen kunnen veel verschillende soorten waarden opslaan, zoals getallen en tekst. Deze verschillende soorten waarden staan bekend als het <strong>gegevenstype</strong>. Gegevenstypen zijn een belangrijk onderdeel van softwareontwikkeling omdat het ontwikkelaars helpt beslissingen te nemen over hoe de code moet worden geschreven en hoe de software moet worden uitgevoerd. Bovendien hebben sommige gegevenstypen unieke kenmerken die helpen bij het transformeren of extraheren van aanvullende informatie in een waarde.</p>
+<p>✅ Gegevenstypen worden ook wel JavaScript-gegevensprimitieven genoemd, omdat dit de gegevenstypen op het laagste niveau zijn die door de taal worden geleverd. Er zijn 6 primitieve gegevenstypen: string, number, bigint, boolean, undefined, en symbol. Neem even de tijd om te visualiseren wat elk van deze primitieven zou kunnen vertegenwoordigen. Wat is een <code>zebra</code>? Hoe zit het met <code>0</code>? <code>true</code>?</p>
+<h3 id="getallen">Getallen</h3>
+<p>In de vorige sectie was de waarde van <code>myVariable</code> een gegevenstype met een getal.</p>
+<p><code>let myVariable = 123;</code></p>
+<p>Variabelen kunnen alle soorten getallen opslaan, inclusief decimalen of negatieve getallen. Getallen kunnen ook worden gebruikt met rekenkundige operatoren, behandeld in de <a href="#operators">volgende sectie</a>.</p>
+<h3 id="rekenkundige-operatoren">Rekenkundige operatoren</h3>
+<p>Er zijn verschillende soorten operatoren die kunnen worden gebruikt bij het uitvoeren van rekenkundige functies, en sommige worden hier vermeld:</p>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 59%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbool</th>
+<th>beschrijving</th>
+<th>Voorbeeld</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>+</code></td>
+<td><strong>Toevoeging</strong>: Berekent de som van twee getallen</td>
+<td><code>1 + 2 //verwacht antwoord is 3</code></td>
+</tr>
+<tr class="even">
+<td><code>-</code></td>
+<td><strong>Aftrekken</strong>: Berekent het verschil tussen twee getallen</td>
+<td><code>1 - 2 //verwacht antwoord is -1</code></td>
+</tr>
+<tr class="odd">
+<td><code>*</code></td>
+<td><strong>Vermenigvuldiging</strong>: Berekent het product van twee getallen</td>
+<td><code>1 * 2 //verwacht antwoord is 2</code></td>
+</tr>
+<tr class="even">
+<td><code>/</code></td>
+<td><strong>Divisie</strong>: Berekent het quotiënt van twee getallen</td>
+<td><code>1 / 2 //verwacht antwoord is 0.5</code></td>
+</tr>
+<tr class="odd">
+<td><code>%</code></td>
+<td><strong>Rest</strong>: Berekent de rest uit de deling van twee getallen</td>
+<td><code>1 % 2 //verwacht antwoord is 1</code></td>
+</tr>
+</tbody>
+</table>
+<p>✅ Probeer het! Probeer een rekenkundige bewerking in de console van uw browser. Verrassen de resultaten u?</p>
+<h3 id="strings">Strings</h3>
+<p>Strings zijn sets van tekens die tussen enkele of dubbele aanhalingstekens staan.</p>
+<ul>
+<li><code>'Dit is een string'</code></li>
+<li><code>"Dit is ook een string"</code></li>
+<li><code>let myString = 'Dit is een tekenreekswaarde die is opgeslagen in een variabele';</code></li>
+</ul>
+<p>Denk eraan om aanhalingstekens te gebruiken bij het schrijven van een string, anders neemt JavaScript aan dat het een variabelenaam is.</p>
+<h3 id="strings-formatteren">Strings formatteren</h3>
+<p>Strings zijn tekstueel en moeten van tijd tot tijd worden opgemaakt.</p>
+<p>Gebruik de operator <code>+</code> om twee of meer strings <strong>samen te voegen</strong>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">let</span> myString1 <span class="op">=</span> <span class="st">&quot;Hello&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">let</span> myString2 <span class="op">=</span> <span class="st">&quot;World&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"></a>
+<a class="sourceLine" id="cb9-4" title="4">myString1 <span class="op">+</span> myString2 <span class="op">+</span> <span class="st">&quot;!&quot;</span><span class="op">;</span> <span class="co">//HelloWorld!</span></a>
+<a class="sourceLine" id="cb9-5" title="5">myString1 <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> myString2 <span class="op">+</span> <span class="st">&quot;!&quot;</span><span class="op">;</span> <span class="co">//Hello World!</span></a>
+<a class="sourceLine" id="cb9-6" title="6">myString1 <span class="op">+</span> <span class="st">&quot;, &quot;</span> <span class="op">+</span> myString2 <span class="op">+</span> <span class="st">&quot;!&quot;</span><span class="op">;</span> <span class="co">//Hello, World!</span></a></code></pre></div>
+<p>✅ Waarom is <code>1 + 1 = 2</code> in JavaScript, maar <code>'1' + '1' = 11?</code> Denk er eens over na. Hoe zit het met <code>'1' + 1</code>?</p>
+<p><strong>Template literals</strong> zijn een andere manier om strings op te maken, behalve dat in plaats van aanhalingstekens de backtick wordt gebruikt. Alles wat geen platte tekst is, moet tussen tijdelijke aanduidingen <code>${}</code> worden geplaatst. Dit omvat alle variabelen die strings kunnen zijn.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">let</span> myString1 <span class="op">=</span> <span class="st">&quot;Hello&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw">let</span> myString2 <span class="op">=</span> <span class="st">&quot;World&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-3" title="3"></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="vs">`</span><span class="sc">${</span>myString1<span class="sc">}</span><span class="vs"> </span><span class="sc">${</span>myString2<span class="sc">}</span><span class="vs">!`</span> <span class="co">//Hello World!</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="vs">`</span><span class="sc">${</span>myString1<span class="sc">}</span><span class="vs">, </span><span class="sc">${</span>myString2<span class="sc">}</span><span class="vs">!`</span> <span class="co">//Hello, World!</span></a></code></pre></div>
+<p>U kunt uw opmaakdoelen met beide methoden bereiken, maar template literals respecteren alle spaties en regeleinden.</p>
+<p>✅ Wanneer zou u een template literal versus een gewone string gebruiken?</p>
+<h3 id="booleans">Booleans</h3>
+<p>Booleans kunnen slechts twee waarden zijn: <code>true</code> of <code>false</code>. Booleans kunnen helpen bij het nemen van beslissingen over welke regels code moeten worden uitgevoerd wanneer aan bepaalde voorwaarden is voldaan. In veel gevallen helpen <a href="#%20operators">operatoren</a> bij het instellen van de waarde van een Boolean waarde en u zult vaak merken en variabelen schrijven die geïnitialiseerd worden of dat hun waarden worden bijgewerkt met een operator.</p>
+<ul>
+<li><code>let myTrueBool = true</code></li>
+<li><code>let myFalseBool = false</code></li>
+</ul>
+<p>✅ Een variabele kan als ‘waar’ worden beschouwd als deze resulteert in een boolean waarde <code>true</code>. Interessant is dat in JavaScript <a href="https://developer.mozilla.org/nl/docs/Glossary/Truthy">alle waarden waarheidsgetrouw zijn, tenzij ze als onjuist zijn gedefinieerd</a>.</p>
+<hr />
+<h2 id="uitdaging">🚀 Uitdaging</h2>
+<p>JavaScript is berucht om zijn verrassende manieren om af en toe met gegevenstypen om te gaan. Doe een beetje onderzoek naar deze ‘valstrikken’. Bijvoorbeeld: hoofdlettergevoeligheid kan bijten! Probeer dit in uw console: <code>let age = 1; let Age = 2; age == Age</code> (lost <code>false</code> op - waarom?). Welke andere valstrikken kunt u vinden?</p>
+<h2 id="quiz-na-de-lezing">Quiz na de lezing</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/8">Quiz na de lezing</a></p>
+<h2 id="beoordeling-en-zelfstudie">Beoordeling en zelfstudie</h2>
+<p>Bekijk <a href="https://css-tricks.com/snippets/javascript/">deze lijst met JavaScript-oefeningen</a> en probeer er een. Wat heeft u geleerd?</p>
+<h2 id="toewijzing">Toewijzing</h2>
+<p><a href="assignment.nl.md">Gegevenstypen Oefening</a></p>
+</body>
+</html>

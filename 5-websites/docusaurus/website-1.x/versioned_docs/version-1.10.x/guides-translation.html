@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Translations &amp; Localization</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Translations &amp; Localization</h1>
+</header>
+<p>Docusaurus allows for easy translation functionality using <a href="https://crowdin.com/">Crowdin</a>. Documentation files written in English are uploaded to Crowdin for translation by users within a community. Top-level pages written with English strings can be translated by wrapping any strings you want to translate in a <code>&lt;translate&gt;</code> tag. Other titles and labels will also be found and properly translated.</p>
+<h2 id="docusaurus-translation-configurations">Docusaurus Translation Configurations</h2>
+<p>To generate example files for translations with Docusaurus, run the <code>examples</code> script with the command line argument <code>translations</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">npm</span> run examples translations</a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">yarn</span> examples translations</a></code></pre></div>
+<p>This will create the following files:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">pages/en/help-with-translations.js</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="ex">languages.js</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="ex">../crowdin.yaml</span></a></code></pre></div>
+<ul>
+<li>The <code>pages/en/help-with-translations.js</code> file includes the same starter help page generated by the <code>examples</code> script but now includes translation tags.</li>
+</ul>
+<blockquote>
+<p>Generally, you will use <code>help-with-translations.js</code> as a guide to enable translations in your other pages, but not actually commit the file to your repo (i.e., you can delete it). However, if you want a Help page, and you currently do not have one, you can rename this file to <code>help.js</code> and use it as a starting point.</p>
+</blockquote>
+<ul>
+<li><p>The <code>languages.js</code> file tells Docusaurus what languages you want to enable for your site. By default, we expect English to be enabled.</p></li>
+<li><p>The <code>crowdin.yaml</code> file is used to configure Crowdin integration and is copied up one level into your Docusaurus project repo. If your Docusaurus project resides in <code>/project/website</code>, then <code>crowdin.yaml</code> will be copied to <code>/project/crowdin.yaml</code>.</p></li>
+</ul>
+<h2 id="translating-your-existing-docs">Translating Your Existing Docs</h2>
+<p>Your documentation files (e.g., the <code>.md</code> files that live in your <code>docs</code> directory) do not need to be changed or moved to support translations. They will be uploaded to Crowdin to be translated directly.</p>
+<h2 id="enabling-translations-on-pages">Enabling Translations on Pages</h2>
+<p>Pages allow you to customize the layout and specific content of pages like a custom index page or help page.</p>
+<p>Pages with text that you want translated should be placed in <code>website/pages/en</code> directory.</p>
+<p>Wrap strings you want translated in a <code>&lt;translate&gt;</code> tag, and add the following <code>require</code> statement to the top of the file:</p>
+<pre class="jsx"><code>...
+const translate = require(&#39;../../server/translate.js&#39;).translate;
+...
+&lt;h2&gt;
+  &lt;translate&gt;This header will be translated&lt;/translate&gt;
+&lt;/h2&gt;
+...</code></pre>
+<p>You can also include an optional description attribute to give more context to a translator about how to translate the string:</p>
+<pre class="jsx"><code>&lt;p&gt;
+  &lt;translate desc=&quot;flower, not verb&quot;&gt;Rose&lt;/translate&gt;
+&lt;p&gt;</code></pre>
+<blockquote>
+<p>The <code>&lt;translate&gt;</code> tag generally works well on pure strings. If you have a string like “Docusaurus currently provides support to help your website use <a href="$%7BsiteConfig.baseUrl%7D$%7BsiteConfig.docsUrl%7D/$%7Bthis.props.language%7D/translation.html">translations</a>”, wrapping the <code>&lt;translation&gt;</code> tag around that entire string will cause issues because of the markdown linking, etc. Your options are to not translate those strings, or spread a bunch of <code>&lt;translate&gt;</code> tags amongst the pure substrings of that string.</p>
+</blockquote>
+<h2 id="gathering-strings-to-translate">Gathering Strings to Translate</h2>
+<p>The strings within localized Pages must be extracted and provided to Crowdin.</p>
+<p>Add the following script to your <code>website/package.json</code> file, if it does not exist already:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  ...</a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="st">&quot;scripts&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="st">&quot;write-translations&quot;</span><span class="op">:</span> <span class="st">&quot;docusaurus-write-translations&quot;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  ...</a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="op">}</span></a></code></pre></div>
+<p>Running the script will generate a <code>website/i18n/en.json</code> file containing all the strings that will be translated from English into other languages.</p>
+<p>The script will include text from the following places:</p>
+<ul>
+<li><code>title</code> and <code>sidebar_label</code> strings in document markdown headers</li>
+<li>category names in <code>sidebars.json</code></li>
+<li>tagline in <code>siteConfig.js</code></li>
+<li>header link <code>label</code> strings in <code>siteConfig.js</code></li>
+<li>strings wrapped in the <code>&lt;translate&gt;</code> tag in any <code>.js</code> files inside <code>pages</code></li>
+</ul>
+<h3 id="custom-translation-strings">Custom Translation Strings</h3>
+<p>If you want to add additional custom translation strings or override any of the strings that get produced by the script that creates the <code>website/i18n/en.json</code> file, you can add a <code>website/data/custom-translation-strings.json</code> file. The file should have a form of:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="dt">&quot;localized-strings&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="dt">&quot;docs&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-4" title="4">      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-5" title="5">        <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;string1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-6" title="6">        <span class="dt">&quot;sidebar_label&quot;</span><span class="fu">:</span> <span class="st">&quot;string2&quot;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb7-8" title="8">      <span class="dt">&quot;version-0.0.1-id&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-9" title="9">        <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;string3&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-10" title="10">        <span class="dt">&quot;sidebar_label&quot;</span><span class="fu">:</span> <span class="st">&quot;string4&quot;</span></a>
+<a class="sourceLine" id="cb7-11" title="11">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-12" title="12">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-13" title="13">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb7-14" title="14">  <span class="dt">&quot;pages-strings&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-15" title="15">    <span class="dt">&quot;id3&quot;</span><span class="fu">:</span> <span class="st">&quot;string3&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-16" title="16">    <span class="dt">&quot;id4&quot;</span><span class="fu">:</span> <span class="st">&quot;string4&quot;</span></a>
+<a class="sourceLine" id="cb7-17" title="17">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-18" title="18"><span class="fu">}</span></a></code></pre></div>
+<p>where <code>localized-strings</code> represent strings in your documentation content and <code>pages-strings</code> represents metadata in your documentation (e.g., title, links, etc).</p>
+<p>Here is an example:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">&quot;_comment&quot;</span><span class="fu">:</span> <span class="st">&quot;This file is used to provide custom strings for translations, including overriding defaults&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="dt">&quot;localized-strings&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="dt">&quot;translation&quot;</span><span class="fu">:</span> <span class="st">&quot;Translations and Localization&quot;</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb8-6" title="6">  <span class="dt">&quot;pages-strings&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="dt">&quot;Help Translate|recruit community translators for your project&quot;</span><span class="fu">:</span> <span class="st">&quot;Help Us Translate&quot;</span></a>
+<a class="sourceLine" id="cb8-8" title="8">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<p>See the generated <code>website/i18n/en.json</code> for an example.</p>
+<h2 id="how-strings-get-translated">How Strings Get Translated</h2>
+<p>Docusaurus itself does not do any translation from one language to another. Instead, it integrates <a href="https://crowdin.com/">Crowdin</a> to upload translations and then downloads the appropriately translated files from Crowdin.</p>
+<h2 id="how-docusaurus-uses-string-translations">How Docusaurus Uses String Translations</h2>
+<p>This section provides context about how translations in Docusaurus works.</p>
+<h3 id="strings">Strings</h3>
+<p>A Docusaurus site has many strings used throughout it that require localization. However, maintaining a list of strings used throughout a site can be laborious. Docusaurus simplifies this by centralizing strings.</p>
+<p>The header navigation, for example, can have links to ‘Home’ or your ‘Blog’. This and other strings found in the headers and sidebars of pages are extracted and placed into <code>i18n/en.json</code>. When your files are translated, say into Spanish, an <code>i18n/es-ES.json</code> file will be downloaded from Crowdin. Then, when the Spanish pages are generated, Docusaurus will replace the English version of corresponding strings with translated strings from the corresponding localized strings file (e.g. In a Spanish enabled site ‘Help’ will become ‘Ayuda’).</p>
+<h3 id="markdown-files">Markdown Files</h3>
+<p>For documentation files themselves, translated versions of these files are downloaded and then rendered through the proper layout template.</p>
+<h3 id="other-pages">Other Pages</h3>
+<p>For other pages, Docusaurus will automatically transform all <code>&lt;translate&gt;</code> tags it finds into function calls that return the translated strings from the corresponding localized file <em><code>locale.json</code></em>.</p>
+<h2 id="crowdin">Crowdin</h2>
+<p>Crowdin is a company that provides translation services. For Open Source projects, Crowdin provides free string translations.</p>
+<p>Create your translation project on <a href="https://crowdin.com/">Crowdin</a>. You can use <a href="https://support.crowdin.com/translation-process-overview/">Crowdin’s guides</a> to learn more about the translations work flow. <em>We suggest that you deselect and do not include “English” as a translatable language to prevent the creation of <code>en-US</code> localization files as this can lead to confusion.</em></p>
+<blockquote>
+<p>Ensure in your Crowdin settings, in the Translations section, that “Duplicate Strings” are set to <a href="https://support.crowdin.com/api/create-project/">“Hide - all duplicates will share the same translation”</a>. This setting will ensure that identical strings between versions share a single translation.</p>
+</blockquote>
+<p>Your project will need a <code>crowdin.yaml</code> file generated. If you ran <code>yarn examples translations</code> or <code>npm run examples translations</code>, this file was created for you on the same level as your <code>website</code> directory.</p>
+<blockquote>
+<p>You will need to install the <code>crowdin</code> command line interface. Please follow the <a href="https://support.crowdin.com/cli-tool/">installation directions</a>.</p>
+</blockquote>
+<p>The example below can be automatically generated by the Docusaurus cli with the <code>examples</code> script. It should be placed in the top level of your project directory to configure how and what files are uploaded/downloaded.</p>
+<p>Below is an example Crowdin configuration for the respective languages: German, Spanish, French, Japanese, Korean, Bahasa Indonesia, Portuguese Brazilian, Chinese Simplified, and Chinese Traditional.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">project_identifier_env:</span><span class="at"> CROWDIN_DOCUSAURUS_PROJECT_ID</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="fu">api_key_env:</span><span class="at"> CROWDIN_DOCUSAURUS_API_KEY</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="fu">base_path:</span><span class="at"> </span><span class="st">&#39;./&#39;</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="fu">preserve_hierarchy:</span><span class="at"> </span><span class="ch">true</span></a>
+<a class="sourceLine" id="cb9-5" title="5"></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="fu">files:</span></a>
+<a class="sourceLine" id="cb9-7" title="7">  <span class="kw">-</span> <span class="fu">source:</span><span class="at"> </span><span class="st">&#39;/docs/**/*.md&#39;</span></a>
+<a class="sourceLine" id="cb9-8" title="8">    <span class="fu">translation:</span><span class="at"> </span><span class="st">&#39;/website/translated_docs/%locale%/**/%original_file_name%&#39;</span></a>
+<a class="sourceLine" id="cb9-9" title="9">    <span class="fu">languages_mapping:</span><span class="at"> </span><span class="dt">&amp;anchor</span></a>
+<a class="sourceLine" id="cb9-10" title="10">      <span class="fu">locale:</span></a>
+<a class="sourceLine" id="cb9-11" title="11">        <span class="fu">&#39;de&#39;:</span><span class="at"> </span><span class="st">&#39;de&#39;</span></a>
+<a class="sourceLine" id="cb9-12" title="12">        <span class="fu">&#39;es-ES&#39;:</span><span class="at"> </span><span class="st">&#39;es-ES&#39;</span></a>
+<a class="sourceLine" id="cb9-13" title="13">        <span class="fu">&#39;fr&#39;:</span><span class="at"> </span><span class="st">&#39;fr&#39;</span></a>
+<a class="sourceLine" id="cb9-14" title="14">        <span class="fu">&#39;ja&#39;:</span><span class="at"> </span><span class="st">&#39;ja&#39;</span></a>
+<a class="sourceLine" id="cb9-15" title="15">        <span class="fu">&#39;ko&#39;:</span><span class="at"> </span><span class="st">&#39;ko&#39;</span></a>
+<a class="sourceLine" id="cb9-16" title="16">        <span class="fu">&#39;mr&#39;:</span><span class="at"> </span><span class="st">&#39;mr-IN&#39;</span></a>
+<a class="sourceLine" id="cb9-17" title="17">        <span class="fu">&#39;pt-BR&#39;:</span><span class="at"> </span><span class="st">&#39;pt-BR&#39;</span></a>
+<a class="sourceLine" id="cb9-18" title="18">        <span class="fu">&#39;zh-CN&#39;:</span><span class="at"> </span><span class="st">&#39;zh-CN&#39;</span></a>
+<a class="sourceLine" id="cb9-19" title="19">        <span class="fu">&#39;zh-TW&#39;:</span><span class="at"> </span><span class="st">&#39;zh-TW&#39;</span></a></code></pre></div>
+<p>You can go <a href="https://support.crowdin.com/configuration-file/">here</a> to learn more about customizing your <code>crowdin.yaml</code> file.</p>
+<h3 id="setup-the-crowdin-scripts">Setup the Crowdin Scripts</h3>
+<p>You will want to manually sync your files to and from Crowdin. The sync process will upload any markdown files in <code>/docs</code> as well as translatable strings in <code>website/i18n/en.json</code>. (These strings can be generated by running <code>yarn write-translations</code>.)</p>
+<p>You can add the following to your <code>package.json</code> to manually trigger Crowdin.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="st">&quot;scripts&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="st">&quot;crowdin-upload&quot;</span><span class="op">:</span> <span class="st">&quot;crowdin --config ../crowdin.yaml upload sources --auto-update -b master&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="st">&quot;crowdin-download&quot;</span><span class="op">:</span> <span class="st">&quot;crowdin --config ../crowdin.yaml download -b master&quot;</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="op">},</span></a></code></pre></div>
+<h3 id="manual-file-sync">Manual File Sync</h3>
+<p>You will always want to upload your markdown files and translatable strings first and the download the translations section. So run the commands in this order:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"><span class="va">CROWDIN_DOCUSAURUS_PROJECT_ID=</span>YOUR_CROWDIN_PROJECT_ID <span class="va">CROWDIN_DOCUSAURUS_API_KEY=</span>YOUR_CROWDIN_API_KEY <span class="ex">yarn</span> run crowdin-upload</a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="va">CROWDIN_DOCUSAURUS_PROJECT_ID=</span>YOUR_CROWDIN_PROJECT_ID <span class="va">CROWDIN_DOCUSAURUS_API_KEY=</span>YOUR_CROWDIN_API_KEY <span class="ex">yarn</span> run crowdin-download</a></code></pre></div>
+<blockquote>
+<p><code>YOUR_CROWDIN_PROJECT_ID</code> is the name of your Crowdin project. e.g., for https://crowdin.com/project/docusaurus/, that variable would be set to <code>docusaurus</code>. <code>YOUR_CROWDIN_API_KEY</code> is a unique key that is like a password. You can find it in the <code>API</code> tab of your Crowdin project’s <code>Settings</code>.</p>
+</blockquote>
+<blockquote>
+<p>These commands require having an environment variable set with your Crowdin project id and api key (<code>CROWDIN_PROJECT_ID</code>, <code>CROWDIN_API_KEY</code>). You can preface them inline as done above or add them permanently to your <code>.bashrc</code> or <code>.bash_profile</code>.</p>
+</blockquote>
+<blockquote>
+<p>If you run more than one localized Docusaurus project on your computer, you should change the name of the environment variables to something unique (<code>CROWDIN_PROJECTNAME_PROJECT_ID</code>, <code>CROWDIN_PROJECTNAME_API_KEY</code>).</p>
+</blockquote>
+<blockquote>
+<p>Since the files are generated, you do not need to have any files in your <code>website/i18n</code> or <code>website/translated_docs</code> directory as part of your repo. So you can can add <code>website/i18n/*</code> and <code>website/translated_docs</code> to your <code>.gitignore</code> file.</p>
+</blockquote>
+<h3 id="automated-file-sync-using-circleci">Automated File Sync Using CircleCI</h3>
+<p>You can automate pulling down and uploading translations for your files using the <a href="https://circleci.com">CircleCI</a> web continuous integration service.</p>
+<p>First, update the <code>.circleci/config.yml</code> file in your project directory to include steps to upload English files to be translated and download translated files using the Crowdin CLI. Here is an example <code>.circleci/config.yml</code> file:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># If you only want circle to run on direct commits to master, you can uncomment this out</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="co"># and uncomment the filters: *filter-only-master down below too</span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="co">#</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="co"># aliases:</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="co">#  - &amp;filter-only-master</span></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="co">#    branches:</span></a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="co">#      only:</span></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="co">#        - master</span></a>
+<a class="sourceLine" id="cb12-9" title="9"></a>
+<a class="sourceLine" id="cb12-10" title="10"><span class="fu">version:</span><span class="at"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb12-11" title="11"><span class="fu">jobs:</span></a>
+<a class="sourceLine" id="cb12-12" title="12">  <span class="fu">deploy-website:</span></a>
+<a class="sourceLine" id="cb12-13" title="13">    <span class="fu">docker:</span></a>
+<a class="sourceLine" id="cb12-14" title="14">      <span class="co"># specify the version you desire here</span></a>
+<a class="sourceLine" id="cb12-15" title="15">      <span class="kw">-</span> <span class="fu">image:</span><span class="at"> circleci/node:8.11.1</span></a>
+<a class="sourceLine" id="cb12-16" title="16"></a>
+<a class="sourceLine" id="cb12-17" title="17">    <span class="fu">steps:</span></a>
+<a class="sourceLine" id="cb12-18" title="18">      <span class="kw">-</span> checkout</a>
+<a class="sourceLine" id="cb12-19" title="19">      <span class="kw">-</span> <span class="fu">run:</span></a>
+<a class="sourceLine" id="cb12-20" title="20">          <span class="fu">name:</span><span class="at"> Deploying to GitHub Pages</span></a>
+<a class="sourceLine" id="cb12-21" title="21"><span class="fu">          command:</span> <span class="st">|</span></a>
+<a class="sourceLine" id="cb12-22" title="22">            git config --global user.email &quot;&lt;GITHUB_USERNAME&gt;@users.noreply.github.com&quot;</a>
+<a class="sourceLine" id="cb12-23" title="23">            git config --global user.name &quot;&lt;YOUR_NAME&gt;&quot;</a>
+<a class="sourceLine" id="cb12-24" title="24">            echo &quot;machine github.com login &lt;GITHUB_USERNAME&gt; password $GITHUB_TOKEN&quot; &gt; ~/.netrc</a>
+<a class="sourceLine" id="cb12-25" title="25">            # install Docusaurus and generate file of English strings</a>
+<a class="sourceLine" id="cb12-26" title="26">            - cd website &amp;&amp; yarn install &amp;&amp; yarn run write-translations &amp;&amp; cd ..</a>
+<a class="sourceLine" id="cb12-27" title="27">            # crowdin install</a>
+<a class="sourceLine" id="cb12-28" title="28">            - sudo apt-get install default-jre</a>
+<a class="sourceLine" id="cb12-29" title="29">            - wget https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb</a>
+<a class="sourceLine" id="cb12-30" title="30">            - sudo dpkg -i crowdin.deb</a>
+<a class="sourceLine" id="cb12-31" title="31">            # translations upload/download</a>
+<a class="sourceLine" id="cb12-32" title="32">            - crowdin --config crowdin.yaml upload sources --auto-update -b master</a>
+<a class="sourceLine" id="cb12-33" title="33">            - crowdin --config crowdin.yaml download -b master</a>
+<a class="sourceLine" id="cb12-34" title="34">            # build and publish website</a>
+<a class="sourceLine" id="cb12-35" title="35">            cd website &amp;&amp; GIT_USER=&lt;GIT_USER&gt; yarn run publish-gh-pages</a>
+<a class="sourceLine" id="cb12-36" title="36"></a>
+<a class="sourceLine" id="cb12-37" title="37"><span class="fu">workflows:</span></a>
+<a class="sourceLine" id="cb12-38" title="38">  <span class="fu">version:</span><span class="at"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb12-39" title="39">  <span class="fu">build_and_deploy:</span></a>
+<a class="sourceLine" id="cb12-40" title="40">    <span class="fu">jobs:</span></a>
+<a class="sourceLine" id="cb12-41" title="41">      <span class="kw">-</span> <span class="fu">deploy-website:</span></a>
+<a class="sourceLine" id="cb12-42" title="42"><span class="co">#         filters: *filter-only-master</span></a></code></pre></div>
+<p>The <code>crowdin</code> command uses the <code>crowdin.yaml</code> file generated with the <code>examples</code> script. It should be placed in your project directory to configure how and what files are uploaded/downloaded.</p>
+<p>Note that in the <code>crowdin.yaml</code> file, <code>CROWDIN_PROJECT_ID</code> and <code>CROWDIN_API_KEY</code> are environment variables set-up in Circle for your Crowdin project. They can be found in your Crowdin project settings.</p>
+<p>Now, Circle will help you automatically get translations prior to building your website. The provided <code>crowdin.yaml</code> file will copy translated documents into <code>website/translated_docs/</code>, and translated versions of the <code>i18n/en.json</code> strings file will into <code>i18n/${language}.json</code>.</p>
+<p>If you wish to use Crowdin on your machine locally, you can install the <a href="https://support.crowdin.com/cli-tool/">Crowdin CLI tool</a> and run the same commands found in the <code>circle.yaml</code> file. The only difference is that you must set <code>project_identifier</code> and <code>api_key</code> values in the <code>crowdin.yaml</code> file since you will not have Circle environment variables set up.</p>
+<h2 id="versioned-translations">Versioned Translations</h2>
+<p>If you wish to have translation and versioning for your documentation, add the following section to the end of your <code>crowdin.yaml</code> file:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb13-1" title="1">  <span class="kw">-</span></a>
+<a class="sourceLine" id="cb13-2" title="2">    <span class="fu">source:</span><span class="at"> </span><span class="st">&#39;/website/versioned_docs/**/*.md&#39;</span></a>
+<a class="sourceLine" id="cb13-3" title="3">    <span class="fu">translation:</span><span class="at"> </span><span class="st">&#39;/website/translated_docs/%locale%/**/%original_file_name%&#39;</span></a>
+<a class="sourceLine" id="cb13-4" title="4">    <span class="fu">languages_mapping:</span><span class="at"> </span><span class="dt">*anchor</span></a></code></pre></div>
+<p>Translated, versioned documents will be copied into <code>website/translated_docs/${language}/${version}/</code>.</p>
+</body>
+</html>

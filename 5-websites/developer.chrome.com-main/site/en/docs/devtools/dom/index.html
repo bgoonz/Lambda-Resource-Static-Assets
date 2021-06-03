@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2019-03-01" />
+  <title>Get Started With Viewing And Changing The DOM</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Get Started With Viewing And Changing The DOM</h1>
+<p class="date">2019-03-01</p>
+</header>
+<p>Complete these interactive tutorials to learn the basics of viewing and changing a page’s DOM using Chrome DevTools.</p>
+<p>This tutorial assumes that you know the difference between the DOM and HTML. See <a href="#appendix">Appendix: HTML versus the DOM</a> for an explanation.</p>
+<h2 id="view-dom-nodes-view">View DOM nodes {: #view }</h2>
+<p>The DOM Tree of the Elements panel is where you do all DOM-related activities in DevTools.</p>
+<h3 id="inspect-a-node-inspect">Inspect a node {: #inspect }</h3>
+<p>When you’re interested in a particular DOM node, <strong>Inspect</strong> is a fast way to open DevTools and investigate that node.</p>
+<ol type="1">
+<li><p>Right-click <strong>Michelangelo</strong> below and select <strong>Inspect</strong>.</p>
+<ul>
+<li>Michelangelo</li>
+<li>Raphael</li>
+</ul>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/psbHIPohm8wsZkGA7WXl.png”, alt=“Inspecting a node”, width=“800”, height=“780” %}</p>
+<p>The <strong>Elements</strong> panel of DevTools opens. <code>&lt;li&gt;Michelangelo&lt;/li&gt;</code> is highlighted in the <strong>DOM Tree</strong>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/Cz2LKMmJ3sVjkDdfW4i8.png”, alt=“Highlighting the Michelangelo&lt; node”, width=“800”, height=“483” %}</p></li>
+</ol>
+<ol type="1">
+<li><p>Click the <strong>Inspect</strong> <img src="/web/tools/chrome-devtools/images/shared/inspect.png" alt="Inspect" />{: .inline-icon } icon in the top-left corner of DevTools.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/2canqdvrgnHBayY1VsLM.png”, alt=“The Inspect icon”, width=“800”, height=“545” %}</p></li>
+<li><p>Click the <strong>Tokyo</strong> text below.</p>
+<ul>
+<li>Tokyo</li>
+<li>Beirut</li>
+</ul>
+<p>Now, <code>&lt;li&gt;Tokyo&lt;/li&gt;</code> is highlighted in the DOM Tree.</p></li>
+</ol>
+<p>Inspecting a node is also the first step towards viewing and changing a node’s styles. See <a href="/docs/devtools/css/">Get Started With Viewing And Changing CSS</a>.</p>
+<h3 id="navigate-the-dom-tree-with-a-keyboard-keynav">Navigate the DOM Tree with a keyboard {: #keynav }</h3>
+<p>Once you’ve selected a node in the DOM Tree, you can navigate the DOM Tree with your keyboard.</p>
+<ol type="1">
+<li><p>Right-click <strong>Ringo</strong> below and select <strong>Inspect</strong>. <code>&lt;li&gt;Ringo&lt;/li&gt;</code> is selected in the DOM Tree.</p>
+<ul>
+<li>George</li>
+<li>Ringo</li>
+<li>Paul</li>
+<li>John</li>
+</ul>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/6hDrHKpnSMFwCdugWuXR.png”, alt=“Inspecting the Ringo node”, width=“800”, height=“545” %}</p></li>
+<li><p>Press the <kbd>Up</kbd> arrow key 2 times. <code>&lt;ul&gt;</code> is selected.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/2rwp1VpNq4vDNAM0Q9hR.png”, alt=“Inspecting the ul node”, width=“800”, height=“545” %}</p></li>
+<li>Press the <kbd>Left</kbd> arrow key. The <code>&lt;ul&gt;</code> list collapses.</li>
+<li>Press the <kbd>Left</kbd> arrow key again. The parent of the <code>&lt;ul&gt;</code> node is selected. In this case it’s the <code>&lt;li&gt;</code> node containing the instructions for step 1.</li>
+<li>Press the <kbd>Down</kbd> arrow key 2 times so that you’ve re-selected the <code>&lt;ul&gt;</code> list that you just collapsed. It should look like this: <code>&lt;ul&gt;...&lt;/ul&gt;</code></li>
+<li><p>Press the <kbd>Right</kbd> arrow key. The list expands.</p></li>
+</ol>
+<h3 id="scroll-into-view-scroll1">Scroll into view {: #scroll1 }</h3>
+<p>When viewing the DOM Tree, sometimes you’ll find yourself interested in a DOM node that’s not currently in the viewport. For example, suppose that you scrolled to the bottom of the page, and you’re interested in the <code>&lt;h1&gt;</code> node at the top of the page. <strong>Scroll into view</strong> lets you quickly reposition the viewport so that you can see the node.</p>
+<ol type="1">
+<li><p>Right-click <strong>Magritte</strong> below and select <strong>Inspect</strong>.</p>
+<ul>
+<li>Magritte</li>
+<li>Soutine</li>
+</ul></li>
+<li><p>Go to the <a href="#scroll2">Appendix: Scroll into view</a> section at the bottom of this page. The instructions continue there.</p></li>
+</ol>
+<p>After completing the instructions at the bottom of the page you should jump back up to here.</p>
+<h3 id="search-for-nodes-search">Search for nodes {: #search }</h3>
+<p>You can search the DOM Tree by string, CSS selector, or XPath selector.</p>
+<ol type="1">
+<li>Focus your cursor on the <strong>Elements</strong> panel.</li>
+<li>Press <kbd>Control</kbd>+<kbd>F</kbd> or <kbd>Command</kbd>+<kbd>F</kbd> (Mac). The Search bar opens at the bottom of the DOM Tree.</li>
+<li><p>Type <code>The Moon is a Harsh Mistress</code>. The last sentence is highlighted in the DOM Tree.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/qigo04bdlo2evHazfIAp.png”, alt=“Highlighting the query in the Search bar”, width=“800”, height=“545” %}</p></li>
+</ol>
+<p>As mentioned above, the Search bar also supports CSS and XPath selectors.</p>
+<h2 id="edit-the-dom-edit">Edit the DOM {: #edit }</h2>
+<p>You can edit the DOM on the fly and see how those changes affect the page.</p>
+<h3 id="edit-content-content">Edit content {: #content }</h3>
+<p>To edit a node’s content, double-click the content in the DOM Tree.</p>
+<ol type="1">
+<li><p>Right-click <strong>Michelle</strong> below and select <strong>Inspect</strong>.</p>
+<ul>
+<li>Fry</li>
+<li>Michelle</li>
+</ul></li>
+<li><p>In the DOM Tree, double-click <code>Michelle</code>. In other words, double-click the text between <code>&lt;li&gt;</code> and <code>&lt;/li&gt;</code>. The text is highlighted blue to indicate that it’s selected.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/6izVzx17nim6eDn96Vhd.png”, alt=“Editing the text”, width=“800”, height=“545” %}</p></li>
+<li><p>Delete <code>Michelle</code>, type <code>Leela</code>, then press <kbd>Enter</kbd> to confirm the change. The text above changes from <strong>Michelle</strong> to <strong>Leela</strong>.</p></li>
+</ol>
+<h3 id="edit-attributes-attributes">Edit attributes {: #attributes }</h3>
+<p>To edit attributes, double-click the attribute name or value. Follow the instructions below to learn how to add attributes to a node.</p>
+<ol type="1">
+<li><p>Right-click <strong>Howard</strong> below and select <strong>Inspect</strong>.</p>
+<ul>
+<li>Howard</li>
+<li>Vince</li>
+</ul></li>
+<li><p>Double-click <code>&lt;li&gt;</code>. The text is highlighted to indicate that the node is selected.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/U5cgUXHsZ3H9vnL9TmQ0.png”, alt=“Editing the node”, width=“800”, height=“545” %}</p></li>
+<li><p>Press the <kbd>Right</kbd> arrow key, add a space, type <code>style="background-color:gold"</code>, and then press <kbd>Enter</kbd>. The background color of the node changes to gold.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/7SKDEvndWzq2KPSketg1.png”, alt=“Adding a style attribute to the node”, width=“800”, height=“545” %}</p></li>
+</ol>
+<h3 id="edit-node-type-type">Edit node type {: #type }</h3>
+<p>To edit a node’s type, double-click the type and then type in the new type.</p>
+<ol type="1">
+<li><p>Right-click <strong>Hank</strong> below and select <strong>Inspect</strong>.</p>
+<ul>
+<li>Dean</li>
+<li>Hank</li>
+<li>Thaddeus</li>
+<li>Brock</li>
+</ul></li>
+<li>Double-click <code>&lt;li&gt;</code>. The text <code>li</code> is highlighted.</li>
+<li><p>Delete <code>li</code>, type <code>button</code>, then press <kbd>Enter</kbd>. The <code>&lt;li&gt;</code> node changes to a <code>&lt;button&gt;</code> node.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/nbdyNWefo9fqESvfWdha.png”, alt=“Changing the node type to button”, width=“800”, height=“545” %}</p></li>
+</ol>
+<h3 id="reorder-dom-nodes-reorder">Reorder DOM nodes {: #reorder }</h3>
+<p>Drag nodes to reorder them.</p>
+<ol type="1">
+<li><p>Right-click <strong>Elvis Presley</strong> below and select <strong>Inspect</strong>. Notice that it’s the last item in the list.</p>
+<ul>
+<li>
+Stevie Wonder
+</li>
+<li>
+Tom Waits
+</li>
+<li>
+Chris Thile
+</li>
+<li>
+Elvis Presley
+</li>
+</ul></li>
+<li><p>In the DOM Tree, drag <code>&lt;li&gt;Elvis Presley&lt;/li&gt;</code> to the top of the list.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/qD6OQFkcxcKkOZJxHlqB.png”, alt=“Dragging the node to the top of the list”, width=“800”, height=“592” %}</p></li>
+</ol>
+<h3 id="force-state-state">Force state {: #state }</h3>
+<p>You can force nodes to remain in states like <code>:active</code>, <code>:hover</code>, <code>:focus</code>, <code>:visited</code>, and <code>:focus-within</code>.</p>
+<style>
+  .demo--hover:hover {
+    background-color: orange;
+  }
+</style>
+<ol type="1">
+<li><p>Hover over <strong>The Lord of the Flies</strong> below. The background color becomes orange.</p>
+<ul>
+<li class="demo--hover">
+The Lord of the Flies
+</li>
+<li>
+Crime and Punishment
+</li>
+<li>
+Moby Dick
+</li>
+</ul></li>
+<li><p>Right-click <strong>The Lord of the Flies</strong> above and select <strong>Inspect</strong>.</p></li>
+</ol>
+<ol type="1">
+<li>Right-click <code>&lt;li class="demo--hover"&gt;The Lord of the Flies&lt;/li&gt;</code> and select <strong>Force State</strong> &gt; <strong>:hover</strong>. See <a href="#options">Appendix: Missing options</a> if you don’t see this option. The background color remains orange even though you’re not actually hovering over the node.</li>
+</ol>
+<h3 id="hide-a-node-hide">Hide a node {: #hide }</h3>
+<p>Press <kbd>H</kbd> to hide a node.</p>
+<ol type="1">
+<li><p>Right-click <strong>The Stars My Destination</strong> below and select <strong>Inspect</strong>.</p>
+<ul>
+<li>The Count of Monte Cristo</li>
+<li>The Stars My Destination</li>
+</ul></li>
+<li><p>Press the <kbd>H</kbd> key. The node is hidden.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/ynrZooiPHy2DUBbdGL3k.png”, alt=“What the node looks like in the DOM Tree after it’s hidden”, width=“800”, height=“545” %}</p></li>
+<li><p>Press the <kbd>H</kbd> key again. The node is shown again.</p></li>
+</ol>
+<h3 id="delete-a-node-delete">Delete a node {: #delete }</h3>
+<p>Press <kbd>Delete</kbd> to delete a node.</p>
+<ol type="1">
+<li><p>Right-click <strong>Foundation</strong> below and select <strong>Inspect</strong>.</p>
+<ul>
+<li>The Illustrated Man</li>
+<li>Through the Looking-Glass</li>
+<li>Foundation</li>
+</ul></li>
+<li>Press the <kbd>Delete</kbd> key. The node is deleted.</li>
+<li><p>Press <kbd>Control</kbd>+<kbd>Z</kbd> or <kbd>Command</kbd>+<kbd>Z</kbd> (Mac). The last action is undone and the node reappears.</p></li>
+</ol>
+<h2 id="access-nodes-in-the-console-console">Access nodes in the Console {: #console }</h2>
+<p>DevTools provides a few shortcuts for accessing DOM nodes from the Console, or getting JavaScript references to them.</p>
+<h3 id="reference-the-currently-selected-node-with-0-current">Reference the currently-selected node with $0 {: #current }</h3>
+<p>When you inspect a node, the <code>== $0</code> text next to the node means that you can reference this node in the Console with the variable <code>$0</code>.</p>
+<ol type="1">
+<li><p>Right-click <strong>The Left Hand of Darkness</strong> below and select <strong>Inspect</strong>.</p>
+<ul>
+<li>The Left Hand of Darkness</li>
+<li>Dune</li>
+</ul></li>
+<li>Press the <kbd>Escape</kbd> key to open the Console Drawer.</li>
+<li><p>Type <code>$0</code> and press the <kbd>Enter</kbd> key. The result of the expression shows that <code>$0</code> evaluates to <code>&lt;li&gt;The Left Hand of Darkness&lt;/li&gt;</code>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/y3AQHZHbv25cRX1AJt4E.png”, alt=“The result of the first $0 expression in the Console”, width=“800”, height=“636” %}</p></li>
+<li>Hover over the result. The node is highlighted in the viewport.</li>
+<li><p>Click <code>&lt;li&gt;Dune&lt;/li&gt;</code> in the DOM Tree, type <code>$0</code> in the Console again, and then press <kbd>Enter</kbd> again. Now, <code>$0</code> evaluates to <code>&lt;li&gt;Dune&lt;/li&gt;</code>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/AJpUgl9zL9w4skXkaDEE.png”, alt=“The result of the second $0 expression in the Console”, width=“800”, height=“636” %}</p></li>
+</ol>
+<h3 id="store-as-global-variable-global">Store as global variable {: #global }</h3>
+<p>If you need to refer back to a node many times, store it as a global variable.</p>
+<ol type="1">
+<li><p>Right-click <strong>The Big Sleep</strong> below and select <strong>Inspect</strong>.</p>
+<ul>
+<li>The Big Sleep</li>
+<li>The Long Goodbye</li>
+</ul></li>
+<li>Right-click <code>&lt;li&gt;The Big Sleep&lt;/li&gt;</code> in the DOM Tree and select <strong>Store as global variable</strong>. See <a href="#options">Appendix: Missing options</a> if you don’t see this option.</li>
+<li><p>Type <code>temp1</code> in the Console and then press <kbd>Enter</kbd>. The result of the expression shows that the variable evaluates to the node.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/hDCScCM1db0EnAM0VYAZ.png”, alt=“The result of the temp1 expression”, width=“800”, height=“636” %}</p></li>
+</ol>
+<h3 id="copy-js-path-path">Copy JS path {: #path }</h3>
+<p>Copy the JavaScript path to a node when you need to reference it in an automated test.</p>
+<ol type="1">
+<li><p>Right-click <strong>The Brothers Karamazov</strong> below and select <strong>Inspect</strong>.</p>
+<ul>
+<li>The Brothers Karamazov</li>
+<li>Crime and Punishment</li>
+</ul></li>
+<li>Right-click <code>&lt;li&gt;The Brothers Karamazov&lt;/li&gt;</code> in the DOM Tree and select <strong>Copy</strong> &gt; <strong>Copy JS Path</strong>. A <code>document.querySelector()</code> expression that resolves to the node has been copied to your clipboard.</li>
+<li>Press <kbd>Control</kbd>+<kbd>V</kbd> or <kbd>Command</kbd>+<kbd>V</kbd> (Mac) to paste the expression into the Console.</li>
+<li><p>Press <kbd>Enter</kbd> to evaluate the expression.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/r2zpHdCY7TQ0mMzRg3Ov.png”, alt=“The result of the Copy JS Path expression”, width=“800”, height=“636” %}</p></li>
+</ol>
+<h2 id="break-on-dom-changes-breakpoints">Break on DOM changes {: #breakpoints }</h2>
+<p>DevTools allows you to pause a page’s JavaScript when the JavaScript modifies the DOM. See <a href="/docs/devtools/javascript/breakpoints/#dom">DOM change breakpoints</a>.</p>
+<!--
+
+TODO(kaycebasques): On developers.google.com/web we interactive tutorials that required JS
+embedded directly into the page but we can't do that anymore --- 2021 March 11
+
+https://github.com/google/WebFundamentals/blob/f9bd5c30d9cee69556ca15daf14fea29f87c3161/src/content/en/tools/chrome-devtools/dom/index.md
+
+-->
+<h2 id="next-steps-next">Next steps {: #next }</h2>
+<p>That covers most of the DOM-related features in DevTools. You can discover the rest of them by right-clicking nodes in the DOM Tree and experimenting with the other options that weren’t covered in this tutorial. See also <a href="/docs/devtools/shortcuts#elements">Elements panel keyboard shortcuts</a>.</p>
+<p>Check out the <a href="/docs/devtools/">Chrome DevTools homepage</a> to discover everything else you can do with DevTools.</p>
+<p>See <a href="/docs/devtools/overview/#community">Community</a> if you want to contact the DevTools team or get help from the DevTools community.</p>
+<h2 id="appendix-html-versus-the-dom-appendix">Appendix: HTML versus the DOM {: #appendix }</h2>
+<p>This section quickly explains the difference between HTML and the DOM.</p>
+<p>When you use a web browser to request a page like <code>https://example.com</code> the server returns HTML like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb1-1" title="1"><span class="dt">&lt;!doctype </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="kw">&lt;title&gt;</span>Hello, world!<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="kw">&lt;h1&gt;</span>Hello, world!<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    <span class="kw">&lt;p&gt;</span>This is a hypertext document on the World Wide Web.<span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;/script.js&quot;</span><span class="ot"> async</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<p>The browser parses the HTML and creates a tree of objects like this:</p>
+<pre class="text"><code>html
+  head
+    title
+  body
+    h1
+    p
+    script</code></pre>
+<p>This tree of objects, or nodes, representing the page’s content is called the DOM. Right now it looks the same as the HTML, but suppose that the script referenced at the bottom of the HTML runs this code:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> h1 <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;h1&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="va">h1</span>.<span class="va">parentElement</span>.<span class="at">removeChild</span>(h1)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw">const</span> p <span class="op">=</span> <span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&#39;p&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="va">p</span>.<span class="at">textContent</span> <span class="op">=</span> <span class="st">&#39;Wildcard!&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="va">document</span>.<span class="va">body</span>.<span class="at">appendChild</span>(p)<span class="op">;</span></a></code></pre></div>
+<p>That code removes the <code>h1</code> node and adds another <code>p</code> node to the DOM. The complete DOM now looks like this:</p>
+<pre class="text"><code>html
+  head
+    title
+  body
+    p
+    script
+    p</code></pre>
+<p>The page’s HTML is now different than its DOM. In other words, HTML represents initial page content, and the DOM represents current page content. When JavaScript adds, removes, or edits nodes, the DOM becomes different than the HTML.</p>
+<p>See <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction">Introduction to the DOM</a>{: .external } to learn more.</p>
+<h2 id="appendix-scroll-into-view-scroll2">Appendix: Scroll into view {: #scroll2 }</h2>
+<p>This is a continuation of the <a href="#scroll1">Scroll into view</a> section. Follow the instructions below to complete the section.</p>
+<ol type="1">
+<li>The <code>&lt;li&gt;Magritte&lt;/li&gt;</code> node should still be selected in your DOM Tree. If not, go back to <a href="#scroll1">Scroll into view</a> and start over.</li>
+<li><p>Right-click the <code>&lt;li&gt;Magritte&lt;/li&gt;</code> node and select <strong>Scroll into view</strong>. Your viewport scrolls back up so that you can see the <strong>Magritte</strong> node. See <a href="#options">Appendix: Missing options</a> if you can’t see the <strong>Scroll into view</strong> option.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/FBb3y3CzDXA5P0sNEuyd.png”, alt=“Scroll into view”, width=“800”, height=“603” %}</p></li>
+</ol>
+<h2 id="appendix-missing-options-options">Appendix: Missing options {: #options }</h2>
+<p>Many of the instructions in this tutorial instruct you to right-click a node in the DOM Tree and then select an option from the context menu that pops up. If you don’t see the specified option in the context menu, try right-clicking away from the node text.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/t4SYwbs3B0dqdnS2WSC2.png”, alt=“Where to click if you’re not seeing all the options”, width=“800”, height=“545” %}</p>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2012-09-17" />
+  <title>Alternative extension distribution options</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Alternative extension distribution options</h1>
+<p class="date">2012-09-17</p>
+</header>
+<p>{% include ‘partials/extensions/mv2-legacy-page.md’ %}</p>
+<p>All Chrome extensions must be distributed either directly from the Chrome Web Store or by using the mechanisms described below. Failure to comply with one of these distribution methods constitutes a violation of the <a href="/docs/extensions/mv2/single_purpose">Chrome extension policy</a> and may result in the extension and/or the software distributing it to be flagged as <a href="https://www.google.com/about/company/unwanted-software-policy.html">unwanted software</a>.</p>
+<p>Usually, users install extensions from the Chrome Web Store, but sometimes you might want an extension to be installed via other means. Here are two typical cases:</p>
+<ul>
+<li>An extension is associated with some other software, and the extension should be installed whenever the user installs that other software.</li>
+<li>A network admin wants to install the same extensions throughout their organization.</li>
+</ul>
+<p>An extension that is not installed from the Chrome Web Store is known as an <em>external extension</em>. For developers who want to distribute an extension as part of the installation process for other software, or for network admins that want to distribute an extension throughout their organization, Google Chrome supports the following extension installation methods:</p>
+<ul>
+<li>Using a preferences JSON file (for Mac OS X and Linux only)</li>
+<li>Using the Windows registry (for Windows only)</li>
+</ul>
+<p>Both ways support installing an extension hosted at an <code>update_URL</code>. On Windows and Mac, the <code>update_URL</code> must point to the Chrome Web Store where the extension must be hosted.</p>
+<p>The preferences file on <a href="/docs/extensions/mv2/linux_hosting">Linux can point to your own server where you are hosting the extension</a>. The preferences JSON file also supports installing an extension from a <code>.crx</code> extension file on the user’s Linux computer.</p>
+<h2 id="before-you-begin-prereqs">Before you begin {: #prereqs }</h2>
+<p>First, <a href="/webstore/publish">publish</a> the extension in the Chrome Web Store, or package a <a href="/docs/extensions/mv2/hosting"><code>.crx</code> file</a> and make sure that it installs successfully.</p>
+<p>{% Aside ‘warning’ %}</p>
+<p><strong>Windows and Mac installs must come from Chrome Web Store:</strong> As of Chrome 33, no external installs are allowed from a path to a local <code>.crx</code> on Windows (see <a href="http://blog.chromium.org/2013/11/protecting-windows-users-from-malicious.html">Protecting Windows users from malicious extensions</a>). As of Chrome 44, no external installs are allowed from a path to a local .crx on Mac (see <a href="http://blog.chromium.org/2015/05/continuing-to-protect-chrome-users-from.html">Continuing to protect Chrome users from malicious extensions</a>).</p>
+<p>{% endAside %}</p>
+<p>If installing from an <a href="/docs/apps/autoupdate#update_url">update URL</a>, ensure that the extension is properly <a href="/docs/extensions/mv2/hosting">hosted</a>.</p>
+<p>Before you edit the preferences file or the registry, make a note of the following:</p>
+<ul>
+<li>The intended <strong>location</strong> of the extension’s <code>.crx</code> file, or the update URL from which it is served</li>
+<li>The extension’s <strong>version</strong> (from the manifest file or the <strong>chrome://extensions</strong> page)</li>
+<li>The extension’s <strong>ID</strong> (from the <strong>chrome://extensions</strong> page when you’ve loaded the packed extension)</li>
+</ul>
+<p>The following examples assume the version is <code>1.0</code> and the ID is <code>aaaaaaaaaabbbbbbbbbbcccccccccc</code>.</p>
+<h2 id="using-a-preferences-file-preferences">Using a preferences file {: #preferences }</h2>
+<p>{% Aside %}</p>
+<p><strong>Mac OS X and Linux only:</strong> Do not use the preferences file for Windows. Use <a href="#registry">Windows registry</a> instead.</p>
+<p>{% endAside %}</p>
+<ol type="1">
+<li>If you are installing from a file on Linux, make the <code>.crx</code> extension file available to the machine you want to install the extension on. (Copy it to a local directory or to a network share for example, <code>\\server\share\extension.crx</code> or <code>/home/share/extension.crx</code>.)</li>
+<li><p>Create a file with the following name in one of the folders listed below: <code>aaaaaaaaaabbbbbbbbbbcccccccccc.json</code> where the file name (without the extension) corresponds to your extension’s ID. The location depends on the operating system.</p>
+<dl>
+<dt>Mac OS X:</dt>
+<dd><p>For a specific user: <code>~USERNAME/Library/Application Support/Google/Chrome/External Extensions/</code> For all users: <code>/Library/Application Support/Google/Chrome/External Extensions/</code></p>
+</dd>
+</dl>
+<p>The external extension file for all users is read only if every directory in the path is owned by the user <code>root</code>, has the group <code>admin</code> or <code>wheel</code>, and is not world writable. The path must also be free of symbolic links. These restrictions prevent an unprivileged user from causing extensions to be installed for all users. See <a href="#troubleshooting">troubleshooting</a> for details.</p>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> The above path for all users was added in Chrome 16. Prior versions used a different path: <code>/Applications/Google Chrome.app/Contents/Extensions/</code> This path was deprecated in version 17. Support was removed in version 20. Use one of the paths above instead.</p>
+<p>{% endAside %}</p>
+<dl>
+<dt>Linux:</dt>
+<dd><p><code>/opt/google/chrome/extensions/</code></p>
+</dd>
+</dl>
+<p><code>/usr/share/google-chrome/extensions/</code></p>
+<p><strong>Note:</strong> Use <code>chmod</code> if necessary to make sure that the <code>aaaaaaaaaabbbbbbbbbbcccccccccc.json</code> files are world-readable.</p></li>
+<li>Linux only: If you are installing from a file, specify the extension’s location and version with fields named “external_crx” and “external_version” in the file created above.
+<ul>
+<li>Example:</li>
+<li><div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="dt">&quot;external_crx&quot;</span><span class="fu">:</span> <span class="st">&quot;/home/share/extension.crx&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">&quot;external_version&quot;</span><span class="fu">:</span> <span class="st">&quot;1.0&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="fu">}</span></a></code></pre></div></li>
+<li><strong>Note:</strong> You need to escape each <code>\</code> character in the location. For example, <code>\\server\share\extension.crx</code> would be <code>"\\\\server\\share\\extension.crx"</code>.</li>
+</ul></li>
+<li>If you are installing from an update URL, specify the extension’s update URL with field name “external_update_url”.</li>
+<li>Example of installation from local .crx file (Linux only):
+<ol type="1">
+<li><div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="dt">&quot;external_update_url&quot;</span><span class="fu">:</span> <span class="st">&quot;http://myhost.com/mytestextension/updates.xml&quot;</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="fu">}</span></a></code></pre></div></li>
+</ol></li>
+<li>Example of installation from the Chrome Webstore (Mac and Linux):
+<ol type="1">
+<li><div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="dt">&quot;external_update_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://clients2.google.com/service/update2/crx&quot;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="fu">}</span></a></code></pre></div></li>
+</ol></li>
+<li>If you would like to install extension only for some browser locales, you can list supported locales in field name “supported_locale”. Locale may specify parent locale like “en”, in this case the extension will be installed for all English locales like “en-US”, “en-GB”, etc. If another browser locale is selected that is not supported by the extension, the external extensions will be uninstalled. If “supported_locales” list is missing, the extension will be installed for any locale.
+<ul>
+<li>Example:</li>
+<li><div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1">  <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="dt">&quot;external_update_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://clients2.google.com/service/update2/crx&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="dt">&quot;supported_locales&quot;</span><span class="fu">:</span> <span class="ot">[</span> <span class="st">&quot;en&quot;</span><span class="ot">,</span> <span class="st">&quot;fr&quot;</span><span class="ot">,</span> <span class="st">&quot;de&quot;</span> <span class="ot">]</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="fu">}</span></a></code></pre></div></li>
+</ul></li>
+<li>Save the JSON file.</li>
+<li><p>Launch Google Chrome and go to <strong>chrome://extensions</strong>; you should see the extension listed.</p></li>
+</ol>
+<p>{% Aside %}</p>
+<p><strong>Note:</strong> Previous versions of Google Chrome used an <code>external_extensions.json</code> file to specify which extensions to install. This file has been deprecated in favor of individual <code>.json</code> files, one per extension.</p>
+<p>{% endAside %}</p>
+<h3 id="troubleshooting-mac-os-permissions-problems-troubleshooting">Troubleshooting Mac OS permissions problems {: #troubleshooting }</h3>
+<p>On Mac OS, the external extensions files for all users are only read if file system permissions prevent unprivileged users from changing it. If you do not see external extensions installed when Chrome is launched, there may be a permissions problem with the external extensions preferences files. To see if this is the problem, follow these steps:</p>
+<ol type="1">
+<li>Launch the Console program. You can find it under /Applications/Utilities/Console.</li>
+<li>If the leftmost icon in the Console says “Show Log List”, click that icon. A second column appears at the left.</li>
+<li>Click “Console Messages” in the left pane.</li>
+<li>Search for the string <strong>Can not read external extensions</strong>. If there is a problem reading the external extensions files, you will see an error message. Look for another error message directly above it, which should explain the issue. For example, if you see the following error: “Path /Library/Application Support/Google/Chrome is owned by the wrong group”, you need to use <code>chgrp</code> or the Finder’s Get Info dialog to change the directory’s group owner to the Administrator group.</li>
+<li>After fixing the issue, relaunch Chrome. Test that the external extension is now installed. It is possible that one permissions error keeps Chrome from detecting a second error. If the external extension was not installed, repeat these steps until you do not see an error in the Console application.</li>
+</ol>
+<h2 id="using-the-windows-registry-registry">Using the Windows registry {: #registry }</h2>
+<ol type="1">
+<li>Find or create the following key in the registry:
+<ul>
+<li>32-bit Windows: <code>HKEY_LOCAL_MACHINE\Software\Google\Chrome\Extensions</code></li>
+<li>64-bit Windows: <code>HKEY_LOCAL_MACHINE\Software\Wow6432Node\Google\Chrome\Extensions</code></li>
+</ul></li>
+<li>Create a new key (folder) under the <strong>Extensions</strong> key with the same name as the ID of your extension (for example, <code>aaaaaaaaaabbbbbbbbbbcccccccccc</code>).</li>
+<li><p>In your extension key, create a property, “update_url”, and set it to the value: “https://clients2.google.com/service/update2/crx” (this points to your extension’s crx in the Chrome Web Store):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="dt">&quot;update_url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://clients2.google.com/service/update2/crx&quot;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="fu">}</span></a></code></pre></div></li>
+<li><p>Launch the browser and go to <strong>chrome://extensions</strong>; you should see the extension listed.</p></li>
+</ol>
+<h2 id="updating-and-uninstalling-updating">Updating and uninstalling {: #updating }</h2>
+<p>Google Chrome scans the metadata entries in the preferences and registry each time the browser starts, and makes any necessary changes to the installed external extensions.</p>
+<p>To update your extension to a new version, update the file, and then update the version in the preferences or registry.</p>
+<p>To uninstall your extension (for example, if your software is uninstalled), remove your preference file (aaaaaaaaaabbbbbbbbbbcccccccccc.json) or the metadata from the registry.</p>
+<h2 id="faq-faq">FAQ {: #faq }</h2>
+<p>This section answers common questions about external extensions.</p>
+<p><strong>Will the methodology for allowing a “pre-install” still be supported by Google Chrome from M33 onwards?</strong></p>
+<p>Yes, but only as an install from a Chrome Web Store <code>update_URL</code>, not from a local file path.</p>
+<p><strong>Can I specify a URL as a path to the external extension?</strong></p>
+<p>Yes, use the <a href="#preferences">preferences JSON</a> file for Mac OS X and Linux; the <a href="#registry">registry</a> for Windows. The extension must be hosted as explained in <a href="/docs/extensions/mv2/hosting">hosting</a>. In the preferences file, use the “external_update_url” property to point to an <a href="/docs/apps/autoupdate#update_manifest">update manifest</a> that has the URL for your extension. In the Windows registry, use the “update_url” property.</p>
+<p><strong>What are some common mistakes when installing with the preferences file?</strong></p>
+<ul>
+<li>Not specifying the same id/version as the one listed in the <code>.crx</code></li>
+<li>The .json file (<code>aaaaaaaaaabbbbbbbbbbcccccccccc.json</code>) is in the wrong location or the ID specified does not match the extension ID.</li>
+<li>Syntax error in JSON file (forgetting to separate entries with comma or leaving a trailing comma somewhere)</li>
+<li>JSON file entry points to the wrong path to the <code>.crx</code> (or path specified but no filename)</li>
+<li>Backslashes in UNC path not escaped (for example, <code>"\\server\share\file"</code> is wrong; it should be <code>"\\\\server\\share\\extension"</code>)</li>
+<li>Permissions problems on a network share</li>
+</ul>
+<p><strong>What are some common mistakes when installing with the registry?</strong></p>
+<ul>
+<li>Not specifying the same id/version as the one listed in the Chrome Web Store</li>
+<li>Key created in the wrong location in the registry</li>
+<li>Registry entry points to the wrong path to the <code>.crx</code> file in the Chrome Web Store</li>
+<li>Permissions problems on a network share</li>
+</ul>
+<p><strong>How do I update my native binaries and extension in-step?</strong></p>
+<p>Previously when off-store extensions were supported, it was possible to have the native binaries and the extension be updated in lock step. However, extensions hosted on the Chrome Web Store are updated via the Chrome update mechanism which developers do not control. Extension developers should be careful about updating extensions that have a dependency on the native binary (for example, legacy extensions using <a href="/docs/apps/npapi">NPAPI</a>).</p>
+<p><strong>What if the user uninstalls the extension?</strong></p>
+<p>If the user uninstalls the extension through the UI, it will no longer be installed or updated on each startup. In other words, the external extension is blocklisted.</p>
+<p><strong>How do I get off the blocklist?</strong></p>
+<p>If the user uninstalls your extension, you should respect that decision. However, if you (the developer) accidentally uninstalled your extension through the UI, you can remove the blocklist tag by installing the extension normally through the UI, and then uninstalling it.</p>
+</body>
+</html>

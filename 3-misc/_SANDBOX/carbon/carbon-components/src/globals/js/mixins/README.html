@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="carbon-component-model">Carbon component model</h1>
+<p>Carbon has a very simple component model for vanilla JavaScript, like below, covering basic lifecycle of <a href="#creation">creation</a>/<a href="#clean-up">clean-up</a>. Most of the interface is implemented in <a href="./create-component.js"><code>create-component.js</code></a> mixin, explained <a href="#component-lifecycle-create-componentjs">later</a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode typescript"><code class="sourceCode typescript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">interface</span> Handle <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="co">// Clean things up, e.g. event handlers</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="fu">release</span>()<span class="op">:</span> <span class="dt">null</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="op">}</span></a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co">// No mandatory properties in component options at bare-bone component model</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">// (But mix-ins define ones, e.g. `.selectorInit` used for most components)</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="kw">interface</span> ComponentOptions <span class="op">{}</span></a>
+<a class="sourceLine" id="cb1-9" title="9"></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="kw">interface</span> Component <span class="kw">extends</span> Handle <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-11" title="11">  <span class="co">// The constructor takes the DOM element to work with, and instance-specific options</span></a>
+<a class="sourceLine" id="cb1-12" title="12">  <span class="kw">new</span> (element<span class="op">:</span> <span class="bu">Element</span><span class="op">,</span> options<span class="op">:</span> ComponentOptions <span class="op">=</span> <span class="op">{}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-13" title="13"></a>
+<a class="sourceLine" id="cb1-14" title="14">  <span class="co">// List of components instantiated by this component</span></a>
+<a class="sourceLine" id="cb1-15" title="15">  <span class="co">// `.release()` in this component should release them</span></a>
+<a class="sourceLine" id="cb1-16" title="16">  children<span class="op">:</span> Component<span class="op">[];</span></a>
+<a class="sourceLine" id="cb1-17" title="17"></a>
+<a class="sourceLine" id="cb1-18" title="18">  <span class="co">// Factory method, checks for existing instance before calling the constructor</span></a>
+<a class="sourceLine" id="cb1-19" title="19">  <span class="kw">static</span> <span class="fu">create</span>(element<span class="op">:</span> <span class="bu">Element</span><span class="op">,</span> options<span class="op">:</span> ComponentOptions <span class="op">=</span> <span class="op">{}</span>)<span class="op">:</span> Component<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-20" title="20"></a>
+<a class="sourceLine" id="cb1-21" title="21">  <span class="co">// Registry of component instances</span></a>
+<a class="sourceLine" id="cb1-22" title="22">  <span class="kw">static</span> <span class="bu">WeakMap</span><span class="op">&lt;</span><span class="bu">Element</span><span class="op">,</span> Component<span class="op">&gt;</span> components<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-23" title="23"></a>
+<a class="sourceLine" id="cb1-24" title="24">  <span class="co">// Default options</span></a>
+<a class="sourceLine" id="cb1-25" title="25">  <span class="kw">static</span> ComponentOptions options<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-26" title="26"><span class="op">}</span></a></code></pre></div>
+<h2 id="example">Example</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="im">import</span> <span class="op">{</span> Loading <span class="op">}</span> <span class="im">from</span> <span class="vs">`carbon-components`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co">// Where HTML snippet like one in http://carbondesignsystem.com/components/loading/code is</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="kw">const</span> element <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;[data-loading]&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">// Instantiates `Loading` (spinner) without making it spinning</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="kw">const</span> loading <span class="op">=</span> <span class="va">Loading</span>.<span class="at">create</span>(element<span class="op">,</span> <span class="op">{</span> <span class="dt">active</span><span class="op">:</span> <span class="kw">false</span> <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="va">loading</span>.<span class="at">set</span>(<span class="kw">true</span>)<span class="op">;</span> <span class="co">// Starts the spinner</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="va">loading</span>.<span class="at">set</span>(<span class="kw">false</span>)<span class="op">;</span> <span class="co">// Stops the spinner</span></a>
+<a class="sourceLine" id="cb2-11" title="11"></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">// Returns an existing instance if there is one, creates a new instance otherwise</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="va">console</span>.<span class="at">log</span>(<span class="va">Loading</span>.<span class="at">create</span>(element) <span class="op">===</span> loading)<span class="op">;</span> <span class="co">// `true`</span></a>
+<a class="sourceLine" id="cb2-14" title="14"></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">// Looks for an existing instance</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="va">console</span>.<span class="at">log</span>(<span class="va">Loading</span>.<span class="va">components</span>.<span class="at">get</span>(element) <span class="op">===</span> loading)<span class="op">;</span> <span class="co">// `true`</span></a></code></pre></div>
+<h1 id="carbon-component-mixins">Carbon component mixins</h1>
+<p>Carbon component mixins, based on <a href="https://github.com/justinfagnani/proposal-mixins#subclass-factory-pattern">Subclass Factory Pattern</a>, provides the basis for Carbon component classes by allowing component implementation to compose small pieces of functionalities to base them on, instead of introducing “fat base class”.</p>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<ul>
+<li><a href="#component-lifecycle-create-componentjs">Component lifecycle (<code>create-component.js</code>)</a>
+<ul>
+<li><a href="#creation">Creation</a></li>
+<li><a href="#clean-up">Clean-up</a></li>
+<li><a href="#registry-of-component-instances">Registry of component instances</a></li>
+</ul></li>
+<li><a href="#sugar-layers-for-component-instantiation">Sugar layers for component instantiation</a>
+<ul>
+<li><a href="#searching-for-dom-nodes-to-intantiate-components-on-init-component-by-searchjs">Searching for DOM nodes to intantiate components on (<code>init-component-by-search.js</code>)</a></li>
+<li><a href="#lazily-instantiating-a-component-upon-an-event-on-a-root-element-init-component-by-eventjs">Lazily instantiating a component upon an event on a root element (<code>init-component-by-event.js</code>)</a></li>
+<li><a href="#lazily-instantiating-a-component-upon-an-event-on-a-launcher-button-init-component-by-launcherjs">Lazily instantiating a component upon an event on a launcher button (<code>init-component-by-launcher.js</code>)</a></li>
+</ul></li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<h2 id="component-lifecycle-create-component.js">Component lifecycle (<a href="./create-component.js"><code>create-component.js</code></a>)</h2>
+<p><a href="./create-component.js"><code>create-component.js</code></a> mixin covers component lifecycle, which is, <a href="#creation">creation</a> and <a href="#clean-up">clean-up</a>.</p>
+<h3 id="creation">Creation</h3>
+<p><a href="https://github.com/IBM/carbon-components/blob/0336425/src/globals/js/mixins/create-component.js#L44-L46">Static <code>.create(element)</code> method</a> covers the creation part. It first checks if there is an instance of the same component class with by looking up static <code>components</code> property for one associated with the given <code>element</code>, and simply returns it if there is one. Otherwise, a new instance of the component is created by calling the constructor with the given <code>element</code> and returns the new instance.</p>
+<p>A Carbon component works with the given <code>element</code> and its descendants to hook event handlers on, change DOM properties of, mangle styles of, and so on. We call it the <em>root element</em> of the component.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="im">import</span> mixin <span class="im">from</span> <span class="st">&#39;carbon-components/src/globals/js/misc/mixin.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="im">import</span> createComponent <span class="im">from</span> <span class="st">&#39;carbon-components/src/globals/js/mixins/create-component.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="kw">class</span> MyClass <span class="kw">extends</span> <span class="at">mixin</span>(createComponent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  …</a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="co">// Every component must define static `components` property</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="kw">static</span> components <span class="op">=</span> <span class="kw">new</span> <span class="at">WeakMap</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="co">// Every component must define static `options` property</span></a>
+<a class="sourceLine" id="cb3-11" title="11">  <span class="kw">static</span> options <span class="op">=</span> <span class="op">{</span> <span class="dt">foo</span><span class="op">:</span> <span class="st">&#39;foo0&#39;</span><span class="op">,</span> <span class="dt">bar</span><span class="op">:</span> <span class="st">&#39;bar0&#39;</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="op">}</span></a>
+<a class="sourceLine" id="cb3-13" title="13"></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="kw">const</span> div <span class="op">=</span> <span class="va">document</span>.<span class="va">body</span>.<span class="at">appendChild</span>(<span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&#39;div&#39;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="kw">const</span> options <span class="op">=</span> <span class="op">{</span> <span class="dt">foo</span><span class="op">:</span> <span class="st">&#39;foo1&#39;</span><span class="op">,</span> <span class="dt">baz</span><span class="op">:</span> <span class="st">&#39;baz1&#39;</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="kw">const</span> myClassInstance <span class="op">=</span> <span class="va">MyClass</span>.<span class="at">create</span>(div<span class="op">,</span> options)<span class="op">;</span></a></code></pre></div>
+<p>The constructor in <code>create-component.js</code> mixin sets the following properties:</p>
+<table>
+<colgroup>
+<col style="width: 2%" />
+<col style="width: 97%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>element</code></td>
+<td>The root element of the component (see above).</td>
+</tr>
+<tr class="even">
+<td><code>options</code></td>
+<td>The component options.</td>
+</tr>
+<tr class="odd">
+<td><code>children</code></td>
+<td>The array of Carbon component instances that has to be released along with this component. An exanple is with <a href="http://www.carbondesignsystem.com/components/overflow-menu/code">overflow menu</a> component which creates another Carbon component called <a href="../../../components/floating-menu/floating-menu.js">floating menu</a>, and the floating menu has to be released along with the overflow menu.</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>.options</code> property inherits static <code>.options</code> property and merges in the 2nd argument of static <code>.create()</code> method. In above example, <code>.options</code> will be equal to <code>{ foo: 'foo1', bar: 'bar0', baz: 'baz1' }</code>.</p>
+<h3 id="clean-up">Clean-up</h3>
+<p><a href="https://github.com/IBM/carbon-components/blob/0336425/src/globals/js/mixins/create-component.js#L51-L57"><code>.release()</code></a> method covers the clean-up part. It takes care of cleaning-up Carbon components in <code>.children</code> property as well as one in static <code>.components</code> property.</p>
+<p>If a Carbon component has other things to clean-up (e.g. event listeners), it can override the <code>.release()</code> method and write code there to clean things up.</p>
+<p><code>.release()</code> method should return <code>null</code> to allow the caller of <code>.release()</code> e.g. to assign the return value to a variable referring to Carbon component instance, marking that the instance is gone.</p>
+<h3 id="registry-of-component-instances">Registry of component instances</h3>
+<p>Every component must define static <code>components</code> property, which is an instance of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap"><code>WeakMap</code></a>. The constructor in <code>create-component.js</code> <a href="https://github.com/IBM/carbon-components/blob/0336425/src/globals/js/mixins/create-component.js#L37">sets the component instance to static <code>.components</code> property</a>, mapped with the DOM element the component is instantiated on. This allows application code to grab a Carbon component instance associated with the root element.</p>
+<h2 id="sugar-layers-for-component-instantiation">Sugar layers for component instantiation</h2>
+<p>Carbon defines three types of mixins to allow applications to instantiate components in batch. A component can inherit one of those three mixins to support batch instantiation.</p>
+<h3 id="searching-for-dom-nodes-to-intantiate-components-on-init-component-by-search.js">Searching for DOM nodes to intantiate components on (<a href="./init-component-by-search.js"><code>init-component-by-search.js</code></a>)</h3>
+<p>The most basic one is <a href="./init-component-by-search.js"><code>init-component-by-search.js</code></a>, which searches for DOM elements matching component option’s <code>.selectorInit</code> property.</p>
+<p>For example, given the following HTML:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">&lt;main&gt;</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">&lt;div</span><span class="ot"> data-my-component</span><span class="kw">&gt;</span>The content of component 0<span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="kw">&lt;div</span><span class="ot"> data-my-component</span><span class="kw">&gt;</span>The content of component 1<span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">&lt;/main&gt;</span></a></code></pre></div>
+<p>The call of static <code>.init()</code> method below instantiates components on the two <code>&lt;div&gt;</code>s above:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="im">import</span> mixin <span class="im">from</span> <span class="st">&#39;carbon-components/src/globals/js/misc/mixin.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="im">import</span> createComponent <span class="im">from</span> <span class="st">&#39;carbon-components/src/globals/js/mixins/create-component.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="im">import</span> initComponentBySearch <span class="im">from</span> <span class="st">&#39;carbon-components/src/globals/js/mixins/init-component-by-search.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="kw">class</span> MyClass <span class="kw">extends</span> <span class="at">mixin</span>(createComponent<span class="op">,</span> initComponentBySearch) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-6" title="6">  …</a>
+<a class="sourceLine" id="cb5-7" title="7"></a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="kw">static</span> components <span class="op">=</span> <span class="kw">new</span> <span class="at">WeakMap</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-9" title="9">  <span class="kw">static</span> options <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-10" title="10">    <span class="dt">selectorInit</span><span class="op">:</span> <span class="st">&#39;[data-my-component]&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-11" title="11">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="op">}</span></a>
+<a class="sourceLine" id="cb5-13" title="13"></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="kw">const</span> main <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;main&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-15" title="15"></a>
+<a class="sourceLine" id="cb5-16" title="16"><span class="co">// Instantiates components on two `&lt;div&gt;`s above</span></a>
+<a class="sourceLine" id="cb5-17" title="17"><span class="va">MyClass</span>.<span class="at">init</span>(main)<span class="op">;</span></a></code></pre></div>
+<h3 id="lazily-instantiating-a-component-upon-an-event-on-a-root-element-init-component-by-event.js">Lazily instantiating a component upon an event on a root element (<a href="./init-component-by-event.js"><code>init-component-by-event.js</code></a>)</h3>
+<p><a href="./init-component-by-event.js"><code>init-component-by-event.js</code></a> mixin allows delaying component instantiation until an event happens on a DOM element that will be the root element. For example, the static <code>.init()</code> method of Carbon <a href="http://www.carbondesignsystem.com/components/tooltip/code"><code>Tooltip</code> component</a> delays instantiating the components until user hovers the mouse over a trigger button or user puts the keyboard focus on a trigger buton.</p>
+<p>Given the same example HTML as the one for <code>init-component-by-search.js</code> above, the call of static <code>.init()</code> method below detects <code>click</code> events on DOM elements with <code>data-my-component</code> attribute, and instantiates the component when such event happens:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="im">import</span> mixin <span class="im">from</span> <span class="st">&#39;carbon-components/src/globals/js/misc/mixin.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="im">import</span> createComponent <span class="im">from</span> <span class="st">&#39;carbon-components/src/globals/js/mixins/create-component.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="im">import</span> initComponentByEvent <span class="im">from</span> <span class="st">&#39;carbon-components/src/globals/js/mixins/init-component-by-event.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4"></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="kw">class</span> MyClass <span class="kw">extends</span> <span class="at">mixin</span>(createComponent<span class="op">,</span> initComponentByEvent) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="at">constructor</span>(element) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-7" title="7">    <span class="kw">super</span>(element)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="co">// Side note: Make sure calling `.removeEventListener()` in the `.release()` method</span></a>
+<a class="sourceLine" id="cb6-9" title="9">    <span class="va">element</span>.<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">_handleClick</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-10" title="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-11" title="11"></a>
+<a class="sourceLine" id="cb6-12" title="12">  <span class="co">// Called when this component is instantiated upon an event</span></a>
+<a class="sourceLine" id="cb6-13" title="13">  <span class="at">createdByEvent</span>(evt) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-14" title="14">    <span class="kw">this</span>.<span class="at">_handleClick</span>(evt)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-15" title="15">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-16" title="16"></a>
+<a class="sourceLine" id="cb6-17" title="17">  …</a>
+<a class="sourceLine" id="cb6-18" title="18"></a>
+<a class="sourceLine" id="cb6-19" title="19">  _handleClick <span class="op">=</span> evt <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-20" title="20">    <span class="at">alert</span>(<span class="st">&#39;clicked!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-21" title="21">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb6-22" title="22"></a>
+<a class="sourceLine" id="cb6-23" title="23">  …</a>
+<a class="sourceLine" id="cb6-24" title="24"></a>
+<a class="sourceLine" id="cb6-25" title="25">  <span class="kw">static</span> components <span class="op">=</span> <span class="kw">new</span> <span class="at">WeakMap</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-26" title="26">  <span class="kw">static</span> options <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-27" title="27">    <span class="dt">selectorInit</span><span class="op">:</span> <span class="st">&#39;[data-my-component]&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb6-28" title="28">    <span class="co">// Clicking on a DOM element with `data-my-component` attribute will instantiate this component</span></a>
+<a class="sourceLine" id="cb6-29" title="29">    <span class="dt">initEventNames</span><span class="op">:</span> [<span class="st">&#39;click&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb6-30" title="30">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb6-31" title="31"><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-32" title="32"></a>
+<a class="sourceLine" id="cb6-33" title="33"><span class="kw">const</span> main <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;main&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-34" title="34"><span class="va">MyClass</span>.<span class="at">init</span>(main)<span class="op">;</span></a></code></pre></div>
+<p>Changing <code>initEventNames</code> option above allows you to hook more/different event types to instantiate components upon.</p>
+<p><code>.createdByEvent()</code> method allows you to run an event handler of the event that caused instantiating the component.</p>
+<h3 id="lazily-instantiating-a-component-upon-an-event-on-a-launcher-button-init-component-by-launcher.js">Lazily instantiating a component upon an event on a launcher button (<a href="./init-component-by-launcher.js"><code>init-component-by-launcher.js</code></a>)</h3>
+<p><a href="./init-component-by-launcher.js"><code>init-component-by-launcher.js</code></a> mix-in allows delaying component instantiation until an event happens on an element that has semantic association to the compoennt. For example, the static <code>.init()</code> method of Carbon <a href="http://www.carbondesignsystem.com/components/modal/code"><code>Modal</code> component</a> delays instantiating the components until user clicks on a launcher button.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">&lt;main&gt;</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">&lt;button</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="ot">    class=</span><span class="st">&quot;bx--btn bx--btn--secondary&quot;</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="ot">    type=</span><span class="st">&quot;button&quot;</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="ot">    data-my-component-target=</span><span class="st">&quot;#id-of-my-component&quot;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">    Launch</a>
+<a class="sourceLine" id="cb7-8" title="8">  <span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb7-9" title="9">  <span class="kw">&lt;div</span><span class="ot"> data-my-component id=</span><span class="st">&quot;id-of-my-component&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb7-10" title="10">    The content of my component</a>
+<a class="sourceLine" id="cb7-11" title="11">  <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb7-12" title="12"><span class="kw">&lt;/main&gt;</span></a></code></pre></div>
+<p>Given the example HTML above, the call of static <code>.init()</code> method below detects <code>click</code> events on DOM elements with <code>data-my-component-target</code> attribute, and when one happens, looks for the DOM element the element’s <code>data-my-component-target</code> attribute points to as a selector, and instantiates a component on the DOM element if found.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="im">import</span> mixin <span class="im">from</span> <span class="st">&#39;carbon-components/src/globals/js/misc/mixin.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="im">import</span> createComponent <span class="im">from</span> <span class="st">&#39;carbon-components/src/globals/js/mixins/create-component.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="im">import</span> initComponentByLauncher <span class="im">from</span> <span class="st">&#39;carbon-components/src/globals/js/mixins/init-component-by-launcher.js&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="kw">class</span> MyClass <span class="kw">extends</span> <span class="at">mixin</span>(createComponent<span class="op">,</span> initComponentByLauncher) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-6" title="6">  …</a>
+<a class="sourceLine" id="cb8-7" title="7"></a>
+<a class="sourceLine" id="cb8-8" title="8">  <span class="co">// Called when user clicks on the launcher button</span></a>
+<a class="sourceLine" id="cb8-9" title="9">  <span class="at">createdByLauncher</span>(evt) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-10" title="10">    <span class="at">alert</span>(<span class="st">&#39;launched!&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-12" title="12"></a>
+<a class="sourceLine" id="cb8-13" title="13">  …</a>
+<a class="sourceLine" id="cb8-14" title="14"></a>
+<a class="sourceLine" id="cb8-15" title="15">  <span class="kw">static</span> components <span class="op">=</span> <span class="kw">new</span> <span class="at">WeakMap</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-16" title="16">  <span class="kw">static</span> options <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-17" title="17">    <span class="dt">selectorInit</span><span class="op">:</span> <span class="st">&#39;[data-my-component]&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-18" title="18">    <span class="co">// Clicking on DOM elements with `data-my-component-target` attribute</span></a>
+<a class="sourceLine" id="cb8-19" title="19">    <span class="co">// will look for a DOM element `data-my-component-target` points to,</span></a>
+<a class="sourceLine" id="cb8-20" title="20">    <span class="co">// and will instantiate this component on the DOM element found</span></a>
+<a class="sourceLine" id="cb8-21" title="21">    <span class="dt">attribInitTarget</span><span class="op">:</span> <span class="st">&#39;data-my-component-target&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-22" title="22">    <span class="dt">initEventNames</span><span class="op">:</span> [<span class="st">&#39;click&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb8-23" title="23">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb8-24" title="24"><span class="op">}</span></a>
+<a class="sourceLine" id="cb8-25" title="25"></a>
+<a class="sourceLine" id="cb8-26" title="26"><span class="kw">const</span> main <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;main&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-27" title="27"><span class="va">MyClass</span>.<span class="at">init</span>(main)<span class="op">;</span></a></code></pre></div>
+<p>Changing <code>attribInitTarget</code> option above allows you to change the attribute name to associate a trigger button with a component’s root element.</p>
+<p>Changing <code>initEventNames</code> option above allows you to hook more/different event types to instantiate components upon.</p>
+<p><code>.createdByLauncher()</code> method allows you to run an event handler of the event that caused instantiating the component.</p>
+<h1 id="other-mixins">Other mixins</h1>
+<h2 id="evented-state.js"><code>evented-state.js</code></h2>
+<p>In our components, oftentimes clicking a UI element implies a certain state change. Examples are things like closing menus, opening modals, or changing a page. In our vanilla library, we try to emit CustomEvents for these actions to let the consuming developer respond to them with a callback function.</p>
+<p><em>Public Methods added</em></p>
+<ul>
+<li><code>changeState</code></li>
+</ul>
+<p><strong>*Required</strong> Private Methods*</p>
+<ul>
+<li><code>_changeState</code></li>
+</ul>
+<h2 id="evented-show-hide-state.js"><code>evented-show-hide-state.js</code></h2>
+<p>This one adds hide/show methods to your component and kicks off the change state - you’re expected to add in the element that triggers the action, as well as a callback to do something with the state change.</p>
+<p><em>Public Methods Added</em></p>
+<ul>
+<li><code>show</code></li>
+<li><code>hide</code></li>
+</ul>
+<h2 id="track-blur.js"><code>track-blur.js</code></h2>
+<p>Adds a blur handler to your component - expects a handleBlur method to be added into the consuming component</p>
+<p><strong>Required Public Methods added</strong></p>
+<ul>
+<li><code>handleBlur</code></li>
+</ul>
+</body>
+</html>

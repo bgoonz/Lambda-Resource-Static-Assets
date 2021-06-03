@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2019-08-27" />
+  <title>The Chromium Chronicle #5: Coding Outside the Sandbox</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">The Chromium Chronicle #5: Coding Outside the Sandbox</h1>
+<p class="date">2019-08-27</p>
+</header>
+<p><strong>Episode 5:</strong> by Ade in Mountain View, CA (August, 2019)<br> <a href="/tags/chromium-chronicle/">Previous episodes</a></p>
+<p>Chrome is split into processes. Some of them are sandboxed, which means that they have reduced access to the system and to users’ accounts. In a sandboxed process, bugs that allow malicious code to run are much less severe.</p>
+<p><strong>The browser process has no sandbox</strong>, so a bug could give malicious code full access to the whole device. What should you do differently? And what’s the situation with other processes?</p>
+<p>{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/FFBrFUv5NMb2xhG4Zukw.png”, alt=“Sandbox diagram”, height=“310”, width=“800” %}</p>
+<p><strong>All code has bugs.</strong> In the browser process, those bugs allow malicious code to install a program, steal user data, adjust computer settings, access content of all browser tabs, login data, etc.</p>
+<p><strong>In other processes, OS access is limited</strong> via platform-specific restrictions. For more information, see Chrome’s <a href="https://chromium.googlesource.com/chromium/src/+/master/docs/design/sandbox.md">sandbox implementation guide</a>.</p>
+<p>Make sure to avoid the following common mistakes:</p>
+<p>{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/H5cmSK3JieUkRBdPw9oj.jpg”, alt=“rule of two”, className=“float-left”, height=“597”, width=“800” %}</p>
+<ul>
+<li><strong>Don’t parse or interpret untrustworthy data using C++ in the browser process.</strong></li>
+<li>Don’t trust the origin a renderer claims to represent. The browser’s <a href="https://cs.chromium.org/search/?q=RenderFrameHost&amp;sq=package:chromium&amp;type=cs">RenderFrameHost</a> can be used to get the current origin securely.</li>
+</ul>
+<p><br style="clear: both;" /></p>
+<p>{% Compare ‘better’ %}</p>
+<p>Instead, use the following best practices:</p>
+<ul>
+<li>Be extra paranoid if your code is in the browser process.</li>
+<li>Validate all IPC from other processes. Assume all other processes are already compromised and out to trick you.</li>
+<li>Do your processing in a renderer or utility process or some other sandboxed process. Ideally, also use a memory safe language such as JavaScript (solves &gt;50% security bugs).</li>
+</ul>
+<p>{% endCompare %}</p>
+<p>For years, we ran network stacks (e.g. HTTP, DNS, QUIC) in the browser process, which led to some <a href="https://bugs.chromium.org/p/chromium/issues/list?q=type%3Dbug-security%20component%3AInternals%3ENetwork%20status%3Afixed%2Cverified%20security_severity%3Dcritical&amp;can=1">critical vulnerabilities</a>. On some platforms, networking now has its own process, with a sandbox coming.</p>
+<h2 id="additional-resources">Additional Resources</h2>
+<ul>
+<li><a href="https://chromium.googlesource.com/chromium/src/+/master/docs/security/rule-of-2.md">Chromium’s Rule of Two</a>: no more than two of unsafe data, unsafe code, and unsafe process.</li>
+<li><a href="https://chromium.googlesource.com/chromium/src/+/HEAD/docs/security/mojo.md#Validate-privilege_presuming-data-received-over-IPC">Validating IPC Data</a>: a guide on how to ensure that IPCs from the renderer process are not full of fibs and misrepresentations.</li>
+</ul>
+</body>
+</html>

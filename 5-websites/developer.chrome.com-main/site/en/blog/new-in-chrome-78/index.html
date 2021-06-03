@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2019-10-22" />
+  <title>New in Chrome 78</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">New in Chrome 78</h1>
+<p class="date">2019-10-22</p>
+</header>
+<p>{% YouTube id=‘Q81403HNZRc’ %}</p>
+<p>Chrome 78 is rolling out now!</p>
+<p>I’m <a href="https://twitter.com/petele">Pete LePage</a>, let’s dive in and see what’s new for developers in Chrome 78!</p>
+<h2 id="css-properties-and-values-api-css-prop-val">CSS Properties and Values API {: #css-prop-val }</h2>
+<p>CSS variables, technically called custom properties, are awesome. They let you define and use your own properties throughout your CSS. But, custom properties are not much more than a simple search and replace.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb1-1" title="1">html {</a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="va">--my-color</span>: <span class="cn">green</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">}</a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="fu">.thing</span> {</a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="kw">color</span>: <span class="fu">var(</span><span class="va">--my-color</span><span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">}</a></code></pre></div>
+<p>If you used a variable for a color, but assigned a URL as a value, the rule would just be silently discarded. With the CSS Properties and Values API, you can define a type and default fallback value for your custom properties.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb2-1" title="1">html {</a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="va">--my-color</span>: <span class="fu">url(</span><span class="st">‘not-a-color&#39;</span><span class="fu">)</span><span class="op">;</span> <span class="er">// Oops, not a color!</span></a>
+<a class="sourceLine" id="cb2-3" title="3">}</a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="fu">.thing</span> {</a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="kw">color</span>: <span class="fu">var(</span><span class="va">--my-color</span><span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-6" title="6">}</a></code></pre></div>
+<p>Registering a property is as easy as calling <code>window.CSS.registerProperty()</code> and providing the name of the property you’re defining the type of property it is, if it should inherit, and it’s initial value.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="va">window</span>.<span class="va">CSS</span>.<span class="at">registerProperty</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;--my-color&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="dt">syntax</span><span class="op">:</span> <span class="st">&#39;&lt;color&gt;&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="dt">inherits</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="dt">initialValue</span><span class="op">:</span> <span class="st">&#39;black&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Take a look at Sam Richard’s <a href="https://web.dev/css-props-and-vals/">Smarter custom properties with Houdini’s new API</a> article on web.dev for complete details.</p>
+<h2 id="fresher-service-workers-fresher-service-workers">Fresher service workers {: #fresher-service-workers }</h2>
+<p>Byte-for-byte checks are now performed for service worker scripts imported by <code>importScripts()</code>. In the past, the only way to force an installed service worker to pick up changes to an imported script was to change the imported script’s URL, usually either by adding in a semver value or hash in the URL.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="at">importScripts</span>(<span class="st">&#39;https://example.com/v1.1.0/index.js&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="at">importScripts</span>(<span class="st">&#39;https://example.com/index.abcd1234.js&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<p>Starting in Chrome 78, each time an update check is performed for a top-level service worker file, Chrome will also check whether or not the contents of any imported scripts have changed. If they have, it will trigger the full service worker update flow. This brings Chrome into conformance with the spec, and matches what Firefox and Safari do.</p>
+<p>Jeff has all the details in <a href="https://developers.google.com/web/updates/2019/09/fresher-sw">Fresher service workers, by default</a>, including some important things to know about how the HTTP cache impacts the update cycle.</p>
+<h2 id="new-origin-trials-origin-trials">New origin trials {: #origin-trials }</h2>
+<p>Origin trials provide an opportunity for us to validate experimental features and APIs, and make it possible for you to provide feedback on their usability and effectiveness in broader deployment.</p>
+<p><a href="/origintrials/#/trials/active"> {% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/b8W2avaeSBFf7PhZcxAX.png”, alt="“, className=”float-right“, height=”590“, width=”800" %} </a></p>
+<p>Experimental features are typically only available behind a flag, but when we offer an Origin Trial for a feature, you can register for that origin trial to enable the feature for all users on your origin.</p>
+<p>Opting into an origin trial allows you to build demos and prototypes that your beta testing users can try for the duration of the trial without requiring them to flip any special flags in Chrome.</p>
+<p>There’s more info on origin trials in the <a href="https://googlechrome.github.io/OriginTrials/developer-guide.html">Origin Trials Guide for Web Developers</a>. You can see a list of active origin trials, and sign up for them on the <a href="/origintrials/#/trials/active">Chrome Origin Trials</a> page.</p>
+<p><br style="clear:both;"></p>
+<h3 id="native-file-system-native-file-system">Native File System {: #native-file-system }</h3>
+<p><em>An <a href="/origintrials/#/view_trial/3868592079911256065">Origin Trial for the Native File System API</a> starts in Chrome 78 and is expected to run through Chrome 80.</em></p>
+<p>{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/EL75pXlnIVUHlQ4fXSo8.jpg”, alt="“, className=”float-right“, height=”577“, width=”800" %}</p>
+<p>The Native File System API enables developers to build powerful web apps that interact with files on the user’s local device. After a user grants a web app access, this API allows web apps to read or save changes directly to files and folders on the user’s device.</p>
+<p>I’m really excited about all of the new experiences this enables, no more having to “upload” or “download” files I want to work with. Check out my post about the <a href="https://developers.google.com/web/updates/2019/08/native-file-system">Native File System</a> for all the details, including code, a demo, and how we’re working to keep users safe.</p>
+<h3 id="sms-receiver-sms-receiver">SMS Receiver {: #sms-receiver }</h3>
+<p><em>An <a href="/origintrials/#/view_trial/607985949695016961">Origin Trial for the SMS Receiver API</a> starts in Chrome 78 and is expected to run through Chrome 80.</em></p>
+<p>The SMS Receiver API, now available as an origin trial, lets your web app receive specially formatted SMS messages for your app’s origin. From this, you can programmatically obtain an OTP from an SMS message and verify a phone number for the user more easily.</p>
+<p>Eiji wrote <a href="https://web.dev/sms-receiver-api-announcement/">Verify phone numbers on the web with the SMS Receiver API</a> with all the details, and how to sign up for the origin trial.</p>
+<h2 id="chrome-dev-summit-2019-cds2019">Chrome Dev Summit 2019 {: #cds2019 }</h2>
+<p><a href="/devsummit/"> {% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/4L4iDgNCnYAykp3UXZRe.png”, alt="“, className=”float-right“, height=”420“, width=”800" %} </a></p>
+<p>Don’t forget to tune into the <a href="/devsummit/">Chrome Dev Summit</a> on November 11th and 12th, it’ll be streaming live, on the <a href="https://www.youtube.com/user/ChromeDevelopers/">Chrome Developers YouTube channel</a>.</p>
+<p><br style="clear:both;"></p>
+<h2 id="further-reading">Further reading</h2>
+<p>This covers only some of the key highlights. Check the links below for additional changes in Chrome 78.</p>
+<ul>
+<li><a href="/blog/new-in-devtools-78">What’s new in Chrome DevTools (78)</a></li>
+<li><a href="https://developers.google.com/web/updates/2019/09/chrome-78-deps-rems">Chrome 78 deprecations &amp; removals</a></li>
+<li><a href="https://www.chromestatus.com/features#milestone%3D78">ChromeStatus.com updates for Chrome 78</a></li>
+<li><a href="https://v8.dev/blog/v8-release-78">What’s new in JavaScript in Chrome 78</a></li>
+<li><a href="https://chromium.googlesource.com/chromium/src/+log/77.0.3865.75..78.0.3904.72">Chromium source repository change list</a></li>
+</ul>
+<h2 id="subscribe">Subscribe</h2>
+<p>Want to stay up to date with our videos, then <a href="https://goo.gl/6FP1a5">subscribe</a> to our <a href="https://www.youtube.com/user/ChromeDevelopers/">Chrome Developers YouTube channel</a>, and you’ll get an email notification whenever we launch a new video, or add our <a href="https://developers.google.com/web/shows/rss.xml">RSS feed</a> to your feed reader.</p>
+<p>I’m Pete LePage, and as soon as Chrome 79 is released, I’ll be right here to tell you – what’s new in Chrome!</p>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2014-02-28" />
+  <title>WebView Tips &amp; Tricks</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">WebView Tips &amp; Tricks</h1>
+<p class="date">2014-02-28</p>
+</header>
+<p>This article outlines some useful tips to enhance your application’s user experience.</p>
+<h2 id="flicker-of-colors-when-the-application-loads">Flicker of colors when the application loads</h2>
+<p>Ever noticed a flash of black and white when an application loads up with a WebView?</p>
+<p>This tends to be caused by the loading of the window background color of the app (usually set in the theme), followed by the white flash of the WebView background before it loads any content and then the final color defined by the pages CSS.</p>
+<p>The fix for this white flash is simple.</p>
+<h3 id="set-the-background-of-the-layout">Set the background of the layout</h3>
+<p>All you need to do is set the background color of the WebView, which removes the white flash. The only delay in displaying this color will be in the native app to draw the WebView:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" title="1">mWebView.<span class="fu">setBackgroundColor</span>(<span class="bu">Color</span>.<span class="fu">parseColor</span>(<span class="st">&quot;#3498db&quot;</span>));</a></code></pre></div>
+<p>In Android it’s generally good practice to define color values in a <code>res/values/colors.xml</code> file, as described in <a href="https://developer.android.com/guide/topics/resources/more-resources.html#Color">the Android App Resource guide</a>. Using a color defined in the application’s resources, the above line would become:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" title="1">mWebView.<span class="fu">setBackgroundColor</span>(<span class="fu">getResources</span>().<span class="fu">getColor</span>(R.<span class="fu">color</span>.<span class="fu">my_color_name</span>));</a></code></pre></div>
+<h2 id="touch-feedback">Touch Feedback</h2>
+<p>One of the common differences between native and web applications is the lack of touch feedback in many web apps.</p>
+<p>The solution is simple, you need to support the :active pseudo class.</p>
+<p>If you have a simple button with the following styling:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">.btn</span> {</a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">display</span>: <span class="dv">inline-block</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">position</span>: <span class="dv">relative</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="kw">background-color</span>: <span class="cn">#f39c12</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="kw">padding</span>: <span class="dv">14</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="kw">border-radius</span>: <span class="dv">5</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="kw">border-bottom-style</span>: <span class="dv">solid</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="kw">border-width</span>: <span class="dv">4</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="kw">border-color</span>: <span class="cn">#DA8300</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-11" title="11">}</a></code></pre></div>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1604543700975.png”, alt=“A screenshot of the example button.”, width=“656”, height=“299” %}</p>
+<p>The pressed state may look like:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">.btn</span><span class="in">:active</span> {</a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">background-color</span>: <span class="cn">#E68F05</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="kw">border-color</span>: <span class="cn">#CD7600</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="kw">border-width</span>: <span class="dv">2</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="kw">top</span>: <span class="dv">2</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">}</a></code></pre></div>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1604543733832.png”, alt=“A screenshot of the button being touched.”, width=“656”, height=“299” %}</p>
+<p>All this does is darken the background color and border color slightly, decrease the border size, so it looks like the button is sinking into the UI. The <code>top</code> property adjusts the position to balance the smaller border.</p>
+<h3 id="lighten-darken">Lighten / Darken</h3>
+<p>If you use Sass you can use the darken / lighten mixins to alter the colors of elements without needing to know the exact hex value. Or you can make use of online tools such as <a href="http://hexcolortool.com/">http://hexcolortool.com/</a>.</p>
+<h3 id="system-highlights">System highlights</h3>
+<p>Many user agents will add some form of touch feedback to elements, preventing the need for the page to define anything specific. In the WebView you may notice an orange color on elements or an orange ring around links and elements.</p>
+<p>For example a button element in the new WebView is given an orange outline:</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1604543764609.png”, alt=“A screenshot of the outlined button.”, width=“656”, height=“195” %}</p>
+<p>In the old webview a highlight color is applied on top of certain elements:</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1604543794370.png”, alt=“A screenshot of a button with a highlight color on top of it.”, width=“656”, height=“158” %}</p>
+<p>If you are taking care of the touch and focus feedback yourself, you can override the defaults with the following CSS properties:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb5-1" title="1">-webkit-tap-highlight-color<span class="in">: rgba(0,0,0, 0.0)</span>;</a>
+<a class="sourceLine" id="cb5-2" title="2">outline<span class="in">: none</span>;</a></code></pre></div>
+<p>And set your own colors like so:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb6-1" title="1">button {</a>
+<a class="sourceLine" id="cb6-2" title="2">  …</a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">outline</span>: <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="kw">-webkit-tap-highlight-color</span>: <span class="fu">rgba(</span><span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">,</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0.0</span><span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">}</a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7">button<span class="in">:focus</span> {</a>
+<a class="sourceLine" id="cb6-8" title="8">  <span class="kw">background-color</span>: <span class="cn">#E68F05</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-9" title="9">  <span class="kw">border-color</span>: <span class="cn">#DA8300</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-10" title="10">}</a>
+<a class="sourceLine" id="cb6-11" title="11"></a>
+<a class="sourceLine" id="cb6-12" title="12">button<span class="in">:active</span> {</a>
+<a class="sourceLine" id="cb6-13" title="13">  <span class="kw">background-color</span>: <span class="cn">#FFA91F</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-14" title="14">  <span class="kw">border-color</span>: <span class="cn">#E68F05</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-15" title="15">}</a></code></pre></div>
+<p>This causes the button to have different colors depending on the state, so there is the default state, a focused color and then a pressed (or active) state.</p>
+<p>Press Me! No, Press Me!</p>
+<p>The main areas to set these properties are form input fields and anchor tags.</p>
+</body>
+</html>

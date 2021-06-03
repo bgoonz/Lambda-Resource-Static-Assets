@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2014-02-28" />
+  <title>WebView Workflow</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">WebView Workflow</h1>
+<p class="date">2014-02-28</p>
+</header>
+<p><strong>Note:</strong> The steps described here don’t work with the latest versions of Android Studio. This document will be updated when a fix is available.</p>
+<p>One of the great things with web development is the rich set of tools you can use to improve your workflow.</p>
+<p>An example of one of these tools is <a href="http://gruntjs.com/">Grunt</a>, a JavaScript task runner that allows you to simply define tasks to perform on your web app, from compiling Sass and starting a live server to compressing images, minifying JavaScript and running JSHint before creating a production-ready build.</p>
+<p><a href="http://yeoman.io/">Yeoman</a> is a tool which helps create web applications, generating boilerplate, bringing in libraries from <a href="http://bower.io/">Bower</a> and <a href="https://npmjs.org/">npm</a>, and creating a Grunt file with predefined tasks.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1604541751329.png”, alt=“The Yeoman, Grunt, and Bower logos.”, width=“656”, height=“264” %}</p>
+<p>In this tutorial you’ll use Yeoman to create a new basic web application, then integrate the Android Studio build system (<a href="http://www.gradle.org/">Gradle</a>) with Grunt, to build your web application. You’ll also set up Grunt tasks to launch a local live-reload server for testing your application in the browser, so you don’t have to manually refresh the page each time you change an HTML, CSS or JavaScript file.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before getting started, you’ll need to install a few prerequisites:</p>
+<ol type="1">
+<li>Install Yeoman: <a href="https://github.com/yeoman/yeoman/wiki/Getting-Started">https://github.com/yeoman/yeoman/wiki/Getting-Started</a></li>
+<li>Install Android Studio: <a href="https://developer.android.com/studio/install">http://developer.android.com/sdk/installing/studio.html</a></li>
+</ol>
+<h2 id="step-1.-create-a-new-project-in-android-studio-with-a-webview">Step 1. Create a new project in Android Studio with a WebView</h2>
+<p>You can find a full instructions on how to do this in the <a href="/docs/multidevice/webview/gettingstarted/">Getting Started Guide</a>.</p>
+<h2 id="step-2.-create-a-subdirectory-in-your-android-studio-project-for-the-web-app-content">Step 2. Create a subdirectory in your Android Studio project for the web app content</h2>
+<p>After you’ve created your project, create a new top level directory:</p>
+<ul>
+<li><p>In Android Studio, right-click the project folder and selecting <strong>New</strong> &gt; <strong>Directory</strong>.</p>
+<p>Name the directory <code>webapp</code>.</p></li>
+</ul>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1604541811944.png”, alt=“Creating a new directory.”, width=“656”, height=“142” %}</p>
+<h2 id="step-3.-create-a-yeoman-project-in-your-new-directory">Step 3. Create a Yeoman project in your new directory</h2>
+<p>In a terminal <code>cd</code> to the the <code>webapp</code> directory in the project.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="bu">cd</span> <span class="op">&lt;</span>path-to-project<span class="op">&gt;</span>/webapp/</a></code></pre></div>
+<p>Then create a new web app with Yeoman:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">yo</span> webapp</a></code></pre></div>
+<p>Follow the on-screen prompts to select project options.</p>
+<p>You may need to run <strong><code>sudo npm install</code></strong> depending on how npm is installed on your machine.</p>
+<p>Before proceeding to the next step, test the app by running the following command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">grunt</span> server</a></code></pre></div>
+<p>A new tab should open in your browser, connecting to a local server started by Grunt. If you change one of the HTML, CSS or JavaScript files in the project, the page automatically reloads and updates. If you run <code>grunt build</code> a new directory, <code>dist</code>, is created and your web app is compressed, optimised and made into a production ready version inside this folder.</p>
+<h2 id="step-4.-configure-the-gradle-build">Step 4. Configure the Gradle build</h2>
+<p>In your <code>webapp</code> directory create a new file called <code>build.gradle</code>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1604541870306.png”, alt=“Creating a new file.”, width=“656”, height=“166” %}</p>
+<p>In your new <code>build.gradle</code> file, add the following:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">import</span> org.apache.tools.ant.taskdefs.condition.Os</a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3">task <span class="fu">buildWebApp</span>(type: Exec) {</a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5">  executable = Os.<span class="fu">isFamily</span>(Os.<span class="fu">FAMILY_WINDOWS</span>) ? <span class="st">&quot;grunt.cmd&quot;</span> : <span class="st">&quot;grunt&quot;</span></a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7">  args = [<span class="st">&quot;build&quot;</span>]</a>
+<a class="sourceLine" id="cb4-8" title="8">}</a></code></pre></div>
+<p>This creates a new task called <code>buildWebApp</code> with a predefined type <code>Exec</code>. You then set the <code>executable</code> variable in <code>Exec</code> to the relevant grunt command depending on the current OS. <code>args</code> are set to <code>"build"</code> which equates to <code>grunt build</code> being run on the command line. Finally, the import at the top is to make use of <code>Os.isFamily(Os.FAMILY_WINDOWS)</code>.</p>
+<p>Before we can use this new task we need to make the project aware of the new <code>build.gradle</code> file.</p>
+<p>Open <code>settings.gradle</code> in the root directory and add the following line:</p>
+<pre class="text"><code>include &#39;:webapp&#39;</code></pre>
+<h2 id="step-5.-build-your-webapp-when-you-build-the-android-app">Step 5. Build your WebApp when you build the android app</h2>
+<p>The final step is to get the web app to build and then copy the app into the <code>assets</code> directory of our Android app.</p>
+<p>Copy the following into the Android apps <code>build.gradle</code> file:</p>
+<pre class="text"><code>task copyWebApplication(type: Copy) {
+  from &#39;../webapp/dist&#39;
+  into &#39;src/main/assets/www&#39;
+}
+
+task deleteWebApplication(type: Delete) {
+  delete &#39;src/main/assets/www&#39;
+}
+
+copyWebApplication.dependsOn &#39;:webapp:buildWebApp&#39;
+copyWebApplication.dependsOn deleteWebApplication
+
+android.applicationVariants.all { variant -&gt;
+  tasks.getByPath(&quot;:${project.name}:assemble${variant.buildType.name.capitalize()}&quot;).dependsOn copyWebApplication
+}</code></pre>
+<p>Let’s examine each part of this.</p>
+<h3 id="task-copywebapplication">task copyWebApplication</h3>
+<pre class="text"><code>task copyWebApplication(type: Copy) {
+  from &#39;../webapp/dist&#39;
+  into &#39;src/main/assets/www&#39;
+}</code></pre>
+<p>This <code>Copy</code> task copies your application from the <code>webapp/dist</code> directory. We want to copy the files to <code>src/main/assets/www</code>. This task also creates the necessary file structure if any of the required directories don’t exist.</p>
+<h3 id="task-deletewebapplication">task deleteWebApplication</h3>
+<pre class="text"><code>task deleteWebApplication(type: Delete) {
+  delete &#39;src/main/assets/www&#39;
+}</code></pre>
+<p>This delete task deletes all the files in the <code>assets/www</code> directory.</p>
+<h3 id="copywebapplication.dependson">copyWebApplication.dependsOn</h3>
+<pre class="text"><code>copyWebApplication.dependsOn &#39;:webapp:buildWebApp&#39;
+copyWebApplication.dependsOn deleteWebApplication</code></pre>
+<p>The first line of this states that the <code>copyWebApplication</code> has a dependency on the <code>buildWebApp</code> task from our web app’s <code>build.gradle</code> file.</p>
+<p>The second line states there is a dependency on the <code>deleteWebApplication</code> task.</p>
+<p>In other words, before we actually copy any files to the <code>assets</code> directory, make sure we build the web app and also delete the current contents of the <code>assets</code> directory.</p>
+<h3 id="android.applicationvariants.all">android.applicationVariants.all</h3>
+<pre class="text"><code>android.applicationVariants.all { variant -&gt;
+  tasks.getByPath(&quot;:${project.name}:assemble${variant.buildType.name.capitalize()}&quot;).dependsOn copyWebApplication
+}</code></pre>
+<p>This task specifies the dependencies for all of your project’s builds, for each version of your app. Here it sets a dependency on the <code>assemble</code> tasks to run <code>copyWebApplication</code>.</p>
+<p>The <code>assemble</code> tasks assembles the output of the project, so the web app needs to be copied over to the Android project first.</p>
+<h2 id="step-6.-make-sure-everything-works">Step 6. Make sure everything works</h2>
+<p>In Android Studio, you should have no <code>assets</code> directory in your Android applications <code>src</code> folder.</p>
+<p>Don’t forget you’ll need to set the WebView to use the <code>index.html</code> page:</p>
+<p><code>mWebView.loadUrl("file:///android_asset/www/index.html");</code></p>
+<p><strong>Note:</strong> If your page uses JavaScript, you need to enable it explicitly. For details, see the <a href="/docs/multidevice/webview/gettingstarted/#enable_javascript">Getting Started Guide</a>.</p>
+<p>Now press <strong>Run</strong> and let your application build. You should see an <code>assets</code> directory with your web application in the <code>www</code> subdirectory.</p>
+<h2 id="step-7.-what-about-live-server-and-live-reload">Step 7. What about live server and live reload?</h2>
+<p>So now you have a good build process for your Android application. But what about developing and debugging the web content? Live reloading can be pretty useful for making quick changes.</p>
+<p>To enable this, you can create two “product flavors” for your app, one a <em>live server version</em> and one a <em>static version</em>, where the web content is packaged into the Android application.</p>
+<p>In your Android app’s <code>build.gradle</code> add the following lines in bold at the end of the <code>android</code> element:</p>
+<pre class="text"><code>android {
+  ...
+  defaultConfig {
+    ...
+  }
+  productFlavors {
+    staticbuild {
+      packageName &quot;com.google.chrome.myapplication&quot;
+    }
+
+    liveserver {
+      packageName &quot;com.google.chrome.myapplication.liveserver&quot;
+    }
+  }
+
+}</code></pre>
+<p>Gradle will now offer you the ability to create a version of your app with a liveserver package name, and one with your normal package name. To check if it worked, click <strong>Sync Project with Gradle Files</strong> (on the top bar next to the <strong>Run</strong> button).</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1604541916467.png”, alt=“Sync Project With Gradle Files”, width=“656”, height=“156” %}</p>
+<p>Then view the <strong>Build Variants</strong> which are in the bottom left corner of Android Studio and essentially shows you what versions of your app you can build.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1604541989518.png”, alt=“LiveserverDebug”, width=“656”, height=“540” %}</p>
+<p>For each <strong><em>productFlavor</em></strong> there are <strong><em>Debug</em></strong> and <strong><em>Release</em></strong> versions, which the Android plugin for Gradle gives you by default. This determines whether the build should be a debug build or a release build suitable to deploy on the Play store.</p>
+<p>Now you have two versions, but they don’t actually do anything different yet.</p>
+<h2 id="step-8.-load-from-a-live-server">Step 8. Load from a live server</h2>
+<p>In this step, you’ll configure your application to load a different URL depending on which product flavor you build.</p>
+<p>In your Android application, the files common to all product flavors are in <code>src/main</code>. To add code or resources specific to one product flavor, you create another directory under <code>src</code> with the same name as your <strong><em>productFlavor</em></strong>. When you build for that build variant, Gradle and the Android plugin merge these additional files on top of the files in <code>src/main</code>.</p>
+<p>In this case, you’ll define the URL as a string resource, and use that resource in your code instead of a hard-coded URL.</p>
+<ol type="1">
+<li><p>Create the folders <code>src/liveserver</code> and <code>src/staticbuild</code>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1604542062720.png”, alt=“A screenshot of the directory hierarchy.”, width=“656”, height=“709” %}</p></li>
+<li><p>In the <code>liveserver</code> folder, create a new folder named <code>res</code> with a subfolder named <code>values</code>. Inside this create a file named <code>config.xml</code>. Repeat this process for the <code>staticbuild</code> folder.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/1604542103713.png”, alt=“Another screenshot of the directory hierarchy.”, width=“656”, height=“520” %}</p></li>
+<li><p>Now inside your config files add the following lines:</p>
+<p><code>src/liveserver/res/values/config.xml</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;utf-8&quot;<span class="kw">?&gt;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">&lt;resources&gt;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="kw">&lt;string</span><span class="ot"> name=</span><span class="st">&quot;init_url&quot;</span><span class="kw">&gt;</span>http://<span class="kw">&lt;Your</span><span class="ot"> Local</span> <span class="er">Machine</span> <span class="er">IP</span> <span class="er">Address&gt;:9000&lt;/string&gt;</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="er">&lt;/resources&gt;</span></a></code></pre></div>
+<p><code>src/staticbuild/res/values/config.xml</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;utf-8&quot;<span class="kw">?&gt;</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw">&lt;resources&gt;</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="kw">&lt;string</span><span class="ot"> name=</span><span class="st">&quot;init_url&quot;</span><span class="kw">&gt;</span>file:///android_asset/www/index.html<span class="kw">&lt;/string&gt;</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="kw">&lt;/resources&gt;</span></a></code></pre></div></li>
+<li><p>Now set your WebView to use the <code>init_url</code> from these config files.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb14-1" title="1">mWebView.<span class="fu">loadUrl</span>(<span class="fu">getString</span>(R.<span class="fu">string</span>.<span class="fu">init_url</span>));</a></code></pre></div></li>
+<li><p>Create a new file called <code>AndroidManifest.xml</code> in <code>liveserver/AndroidManifest.xml</code> and add the following lines:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;utf-8&quot;<span class="kw">?&gt;</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw">&lt;manifest</span><span class="ot"> xmlns:android=</span><span class="st">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="kw">&lt;uses-permission</span><span class="ot"> android:name=</span><span class="st">&quot;android.permission.INTERNET&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="kw">&lt;/manifest&gt;</span></a></code></pre></div>
+<p>This adds the Internet permission for the <code>liveserver</code> builds.</p></li>
+<li><p>Finally, inside <code>webapp/Gruntfile.js</code> look for:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb16-1" title="1">connect<span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="dt">options</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb16-3" title="3">    <span class="dt">port</span><span class="op">:</span> <span class="dv">9000</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb16-4" title="4">    <span class="dt">livereload</span><span class="op">:</span> <span class="dv">35729</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb16-5" title="5">    <span class="co">// change this to &#39;0.0.0.0&#39; to access the server from outside</span></a>
+<a class="sourceLine" id="cb16-6" title="6">    <span class="dt">hostname</span><span class="op">:</span> <span class="op">**</span><span class="st">&#39;localhost&#39;</span><span class="op">**</span></a>
+<a class="sourceLine" id="cb16-7" title="7">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb16-8" title="8">  ...</a>
+<a class="sourceLine" id="cb16-9" title="9"><span class="op">}</span></a></code></pre></div>
+<p>Replace <code>localhost</code> with <code>0.0.0.0</code> so your local server is accessible from the local network:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb17-1" title="1">connect<span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-2" title="2">  <span class="dt">options</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb17-3" title="3">    <span class="dt">port</span><span class="op">:</span> <span class="dv">9000</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb17-4" title="4">    <span class="dt">livereload</span><span class="op">:</span> <span class="dv">35729</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb17-5" title="5">    <span class="co">// change this to &#39;0.0.0.0&#39; to access the server from outside</span></a>
+<a class="sourceLine" id="cb17-6" title="6">    <span class="dt">hostname</span><span class="op">:</span> <span class="st">&#39;**0.0.0.0&#39;</span><span class="op">**</span></a>
+<a class="sourceLine" id="cb17-7" title="7">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb17-8" title="8">  ...</a>
+<a class="sourceLine" id="cb17-9" title="9"><span class="op">}</span></a></code></pre></div></li>
+</ol>
+<p>To test your changes:</p>
+<ol type="1">
+<li><p>Start the live server by running the following command:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" title="1"><span class="ex">grunt</span> server</a></code></pre></div></li>
+<li><p>In Android Studio, in the <strong>Build Variant</strong> selection, select <strong>LiveserverDebug</strong>. Then click <strong>Run</strong>.</p>
+<p>You should be able to edit your HTML, CSS and JavaScript content and see it reflected immediately in the browser.</p></li>
+</ol>
+<p>You now have two versions of your application: a development version with live reload from the Grunt server; and a static version, packaged locally in the Android App.</p>
+</body>
+</html>

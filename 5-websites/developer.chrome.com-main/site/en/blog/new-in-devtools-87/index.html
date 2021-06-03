@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-10-01" />
+  <title>What’s New In DevTools (Chrome 87)</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">What’s New In DevTools (Chrome 87)</h1>
+<p class="date">2020-10-01</p>
+</header>
+<p>{% Aside %}</p>
+<p>Interested in helping improve DevTools? Sign up to participate in <a href="https://google.qualtrics.com/jfe/form/SV_3NMIMtX0F2zkakR?reserved=1&amp;utm_source=Website%20feature&amp;Q_Language=en&amp;utm_medium=own_web&amp;utm_campaign=Q4&amp;productTag=chrm&amp;campaignDate=November2020&amp;referral_code=UXbl384838">Google User Research here</a>.</p>
+<p>{% endAside %}</p>
+<p>{% YouTube id=“bE3O6EhLjPc” %}</p>
+<h2 id="new-css-grid-debugging-tools-css-grid">New CSS Grid debugging tools {: #css-grid }</h2>
+<p>DevTools now has better support for CSS grid debugging!</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/eY07EGjmEvoS8stHYsB1.png”, alt=“CSS grid debugging”, width=“800”, height=“524” %}</p>
+<p>When an HTML element on your page has <code>display: grid</code> or <code>display: inline-grid</code> applied to it, you can see a <code>grid</code> badge next to it in the <strong>Elements</strong> panel. Click the badge to toggle the display of a grid overlay on the page.</p>
+<p>The new <strong>Layout</strong> pane has a <strong>Grid</strong> section offering you a number of options for viewing the grids.</p>
+<p>Check out the <a href="/docs/devtools/css/grid">documentation</a> to learn more.</p>
+<p>Chromium issue: <a href="https://crbug.com/1047356">1047356</a></p>
+<h2 id="new-webauthn-tab-webauthn">New WebAuthn tab {: #webauthn }</h2>
+<p>You can now emulate authenticators and debug the <a href="https://w3c.github.io/webauthn/">Web Authentication API</a> with the new <a href="/docs/devtools/webauthn">WebAuthn tab</a>.</p>
+<p>Select <strong>More options</strong> &gt; <strong>More tools</strong> &gt; <strong>WebAuthn</strong> to open the WebAuthn tab.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/5FjbhXHqEKYflSyEhWon.png”, alt=“WebAuthn tab”, width=“800”, height=“512” %}</p>
+<p>Prior to the new <strong>WebAuthn</strong> tab, there was no native WebAuthn debugging support on Chrome. Developers needed physical authenticators to test their web application with Web Authentication API.</p>
+<p>With the new <strong>WebAuthn</strong> tab, web developers can now emulate these authenticators, customize their capabilities, and inspect their states, without the need of any physical authenticators. This makes the debugging experience much easier.</p>
+<p>Check out our <a href="/docs/devtools/webauthn">documentation</a> to learn more about the WebAuthn feature.</p>
+<p>Chromium issue: <a href="https://crbug.com/1034663">1034663</a></p>
+<h2 id="move-tools-between-top-and-bottom-panel-moveable-tools">Move tools between top and bottom panel {: #moveable-tools }</h2>
+<p>DevTools now support moving tools in DevTools between the top and bottom panel. This way, you can view any two tools at once.</p>
+<p>For example, if you would like to view <strong>Elements</strong> and <strong>Sources</strong> panel at once, you can right click on the <strong>Sources</strong> panel, and select <strong>Move to bottom</strong> to move it to the bottom.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/DQGr4zX238Doo49X41xz.png”, alt=“Move to bottom”, width=“800”, height=“524” %}</p>
+<p>Similarly, you can move any bottom tab to the top by right clicking on a tab and select <strong>Move to top</strong>.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/gyWUnfer6FYewfNbjoXl.png”, alt=“Move to top”, width=“800”, height=“524” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1075732">1075732</a></p>
+<h2 id="elements-panel-updates-elements-panel">Elements panel updates {: #elements-panel }</h2>
+<h3 id="view-the-computed-sidebar-pane-in-the-styles-pane-computed-sidebar-pane">View the Computed sidebar pane in the Styles pane {: #computed-sidebar-pane }</h3>
+<p>You can now toggle the <strong>Computed sidebar</strong> pane in the Styles pane.</p>
+<p>The <strong>Computed sidebar</strong> pane in the <strong>Styles</strong> pane is collapsed by default. Click on the button to toggle it.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/vvGnNg7t4aVqbjB6w3nl.png”, alt=“Computed sidebar pane”, width=“800”, height=“522” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1073899">1073899</a></p>
+<h3 id="grouping-css-properties-in-the-computed-pane-grouping-css-prop">Grouping CSS properties in the Computed pane {: #grouping-css-prop }</h3>
+<p>You can now group the CSS properties by categories in the <strong>Computed</strong> pane.</p>
+<p>With this new grouping feature, it will be easier to navigate in the <strong>Computed</strong> pane (less scrolling) and selectively focus on a set of related properties for CSS inspection.</p>
+<p>On the <strong>Elements</strong> panel, select an element. Toggle the <strong>Group</strong> checkbox to group/ungroup the CSS properties.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/JjL1F5FYRjTVnhudSJBC.png”, alt=“Grouping CSS properties”, width=“800”, height=“522” %}</p>
+<p>Chromium issues: <a href="https://crbug.com/1096230">1096230</a>, <a href="https://crbug.com/1084673">1084673</a>, <a href="https://crbug.com/1106251">1106251</a></p>
+<h2 id="lighthouse-6.4-in-the-lighthouse-panel-lighthouse">Lighthouse 6.4 in the Lighthouse panel {: #lighthouse }</h2>
+<p>The <strong>Lighthouse</strong> panel is now running Lighthouse 6.4. Check out the <a href="https://github.com/GoogleChrome/lighthouse/releases">release notes</a> for a full list of changes.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/SU7fhHwII5BDUNTPwMwh.png”, alt=“Lighthouse”, width=“800”, height=“524” %}</p>
+<p>New audits in Lighthouse 6.4:</p>
+<ul>
+<li><strong>Preload fonts</strong>. Validates if all fonts that use<code>font-display: optional</code> were preloaded.</li>
+<li><strong>Valid sourcemaps</strong>. Audits if a page has valid sourcemaps for large, first-party JavaScript.</li>
+<li><strong>[Experimental] Large JavaScript library</strong>. Large JavaScript libraries can lead to poor performance. This audit suggests cheaper alternatives to common, large JavaScript libraries like <code>moment.js</code>.</li>
+</ul>
+<p>Chromium issue: <a href="https://crbug.com/772558">772558</a></p>
+<h2 id="performance.mark-events-in-the-timings-section-perf-mark"><code>performance.mark()</code> events in the Timings section {: #perf-mark }</h2>
+<p>The <a href="/blog/new-in-devtools-72#metrics">Timings section</a> of a Performance recording now marks <code>performance.mark()</code> events.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/viBrya85v25YsfDogDjk.png”, alt=“Performance.mark events”, width=“800”, height=“521” %}</p>
+<h2 id="new-resource-type-and-url-filters-in-the-network-panel-network-filters">New <code>resource-type</code> and <code>url</code> filters in the Network panel {: #network-filters }</h2>
+<p>Use the new <code>resource-type</code> and <code>url</code> keywords in the <strong>Network panel</strong> to filter network requests.</p>
+<p>For example, use <code>resource-type:image</code> to focus on the network requests that are images.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/D3KPJsvmvwvR3wauVpQl.png”, alt=“resource-type filter”, width=“800”, height=“522” %}</p>
+<p>Check out <a href="/docs/devtools/network/reference#filter-by-property">filter requests by properties</a> to discover more special keywords like <code>resource-type</code> and <code>url</code>.</p>
+<p>Chromium issues: <a href="https://crbug.com/1121141">1121141</a>, <a href="https://crbug.com/1104188">1104188</a></p>
+<h2 id="frame-details-view-updates-frame-details">Frame details view updates {: #frame-details }</h2>
+<h3 id="display-coep-and-coop-reporting-to-endpoint-reporting-to">Display COEP and COOP <code>reporting to</code> endpoint {: #reporting-to }</h3>
+<p>You can now view the Cross-Origin Embedder Policy (COEP) and Cross-Origin Opener Policy (COOP)<code>reporting to</code> endpoint under the <strong>Security &amp; Isolation</strong> section.</p>
+<p>The <a href="https://developers.google.com/web/updates/2018/09/reportingapi">Reporting API</a> defines a new HTTP header, <code>Report-To</code>, that gives web developers a way to specify server endpoints for the browser to send warnings and errors to.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/ouxjUfRZuORirRiXs7PL.png”, alt=“reporting to endpoint”, width=“800”, height=“524” %}</p>
+<p>Read this <a href="https://web.dev/coop-coep/">article</a> to learn more about how to enable COEP and COOP and make your website “cross-origin isolated”.</p>
+<p>Chromium issue: <a href="https://crbug.com/1051466">1051466</a></p>
+<h3 id="display-coep-and-coop-report-only-mode-report-only">Display COEP and COOP <code>report-only</code> mode {: #report-only }</h3>
+<p>DevTools now displays <code>report-only</code> label for COEP and COOP that are set to <code>report-only</code> mode.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/q0t3pw0ALUIBUx0K63bK.png”, alt=“report-only label”, width=“800”, height=“524” %}</p>
+<p>Watch this <a href="https://youtu.be/XLNJYhjA-0c">video</a> to learn about how to prevent information leaks and enable COOP and COEP in your website.</p>
+<p>Chromium issue: <a href="https://crbug.com/1051466">1051466</a></p>
+<h2 id="deprecation-of-settings-in-the-more-tools-menu-deprecate-settings">Deprecation of <code>Settings</code> in the More tools menu {: #deprecate-settings }</h2>
+<p>The <code>Settings</code> in the More tools menu has been deprecated. Open the <strong>Settings</strong> from the main panel instead.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/PSirLdDNbFF4WD21jS5Y.png”, alt=“Settings in the main panel”, width=“800”, height=“522” %}</p>
+<p>Chromium issue: <a href="https://crbug.com/1121312">1121312</a></p>
+<h2 id="experimental-features-experimental">Experimental features {: #experimental }</h2>
+<p>{% Aside “caution” %}</p>
+<p>Caution: Experimental features are still under development and subject to change.</p>
+<p>{% endAside %}</p>
+<h3 id="view-and-fix-color-contrast-issues-in-the-css-overview-panel-css-overview">View and fix color contrast issues in the CSS Overview panel {: #css-overview }</h3>
+<p>{% Aside %}</p>
+<p>To enable this experiment, check the <strong>CSS Overview</strong> checkbox under <strong>Settings</strong> &gt; <strong>Experiments</strong>.</p>
+<p>{% endAside %}</p>
+<p><strong>CSS Overview</strong> panel now displays a list of low color contrast texts of your page.</p>
+<p>In this example, the <a href="https://jec.fyi/demo/accessible-color-multi">demo page</a> has a low color contrast issue. Click on the issue, you can view a list of elements that have the issue.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/nPm8RBrXiJdotyN9uptQ.png”, alt=“Low color contrast issues”, width=“800”, height=“521” %}</p>
+<p>Click on an element in the list to open the element in <strong>Elements</strong> panel. DevTools <a href="/blog/new-in-devtools-86#accessible-color">provides auto color suggestion</a> to help you fix the low contrast text.</p>
+<p>Chromium issue: <a href="https://crbug.com/1120316">1120316</a></p>
+<h3 id="customize-keyboard-shortcuts-in-devtools-customize">Customize keyboard shortcuts in DevTools {: #customize }</h3>
+<p>{% Aside %}</p>
+<p>To enable this experiment, check the <strong>Enable keyboard shortcut editor</strong> checkbox under <strong>Settings</strong> &gt; <strong>Experiments</strong>.</p>
+<p>{% endAside %}</p>
+<p>You can now customize the keyboard shortcuts for your favourite commands in DevTools.</p>
+<p>Go to <strong>Settings</strong> &gt; <strong>Shortcuts</strong>, hovering on a command and click the <strong>Edit</strong> button (pen icon) to customize the keyboard shortcut.</p>
+<p>{% Img src=“image/BrQidfK9jaQyIHwdw91aVpkPiib2/FDXOHeck0BGR4FrPR2pk.png”, alt=“Customize keyboard shortcuts”, width=“800”, height=“522” %}</p>
+<p>To reset all shortcuts, click on <strong>Restore default shortcuts</strong>.</p>
+<p>Chromium issue: <a href="https://crbug.com/174309">174309</a></p>
+</body>
+</html>

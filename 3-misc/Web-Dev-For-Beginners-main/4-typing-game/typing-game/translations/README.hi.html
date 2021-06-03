@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.hi</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="इवेंट्स-का-उपयोग-करके-एक-गेम-बनाना">इवेंट्स का उपयोग करके एक गेम बनाना</h1>
+<h2 id="पूर्व-व्याख्यान-प्रश्नोत्तरी">पूर्व व्याख्यान प्रश्नोत्तरी</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/21?loc=hi">पूर्व व्याख्यान प्रश्नोत्तरी</a></p>
+<h2 id="इवेंट-संचालित-प्रोग्रामिंग">इवेंट संचालित प्रोग्रामिंग</h2>
+<p>ब्राउज़र आधारित एप्लिकेशन बनाते समय, हम उपयोगकर्ता के लिए एक ग्राफिकल यूजर इंटरफेस (जीयूआई) प्रदान करते हैं, जो कि हमने जो बनाया है, उसके साथ इंटरैक्ट करने के लिए। ब्राउज़र के साथ बातचीत करने का सबसे आम तरीका विभिन्न तत्वों में क्लिक और टाइपिंग है। एक डेवलपर के रूप में हमारे सामने जो चुनौती है, वह यह है कि हम नहीं जानते कि वे कब इन ऑपरेशनों को करने जा रहे हैं!</p>
+<p>[ईवेंट संचालित प्रोग्रामिंग] (https://en.wikipedia.org/wiki/Event-driven_programming) प्रोग्रामिंग का प्रकार जो हमें अपने GUI को बनाने के लिए करने की आवश्यकता है। यदि हम इस वाक्यांश को थोड़ा तोड़ते हैं, तो हम यहाँ मुख्य शब्द ** ईवेंट ** देखते हैं। <a href="https://www.merriam-webster.com/dEDIA/event">ईवेंट</a>, मरियम-वेबस्टर के अनुसार, “कुछ ऐसा होता है” के रूप में परिभाषित किया गया है। यह हमारी स्थिति का पूरी तरह से वर्णन करता है। हम जानते हैं कि कुछ ऐसा होने जा रहा है जिसके लिए हम प्रतिक्रिया में कुछ कोड निष्पादित करना चाहते हैं, लेकिन हम नहीं जानते कि यह कब होगा।</p>
+<p>जिस तरह से हम कोड के एक भाग को चिह्नित करते हैं जिसे हम निष्पादित करना चाहते हैं वह एक फ़ंक्शन बनाकर है। जब हम [प्रक्रियात्मक प्रोग्रामिंग] (https://en.wikipedia.org/wiki/Procedural_programming) के बारे में सोचते हैं, तो कार्यों को एक विशिष्ट क्रम में बुलाया जाता है। यही बात इवेंट संचालित प्रोग्रामिंग के साथ सही होने वाली है। अंतर <strong>कैसे</strong> कार्यों को कहा जाएगा।</p>
+<p>ईवेंट्स (बटन क्लिकिंग, टाइपिंग आदि) को संभालने के लिए, हम <strong>ईवेंट श्रोताओं</strong> को रजिस्टर करते हैं। एक ईवेंट श्रोता एक ऐसा फंक्शन है जो किसी घटना को होने के लिए सुनता है और प्रतिक्रिया में निष्पादित करता है। इवेंट श्रोता यूआई को अपडेट कर सकते हैं, सर्वर पर कॉल कर सकते हैं, या उपयोगकर्ता की कार्रवाई के जवाब में और कुछ भी किया जा सकता है। हम एक घटना श्रोता को <a href="https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener">addEventListener</a> का उपयोग करके, और निष्पादित करने के लिए एक फ़ंक्शन प्रदान करके जोड़ते हैं।</p>
+<blockquote>
+<p><strong>ध्यान दें:</strong> यह ध्यान देने योग्य है कि घटना श्रोताओं को बनाने के कई तरीके हैं। आप अनाम फ़ंक्शंस का उपयोग कर सकते हैं, या नामित नाम बना सकते हैं। आप विभिन्न शॉर्टकट का उपयोग कर सकते हैं, जैसे कि <code>click</code> प्रॉपर्टी सेट करना, या <code>addEventListener</code> का उपयोग करना। हमारे अभ्यास में हम <code>addEventLister</code> और अनाम कार्यों पर ध्यान केंद्रित करने जा रहे हैं, क्योंकि यह संभवतः सबसे आम तकनीक वेब डेवलपर्स का उपयोग है। यह सबसे अधिक लचीली भी है, क्योंकि सभी घटनाओं के लिए <code>addEventListener</code> काम करता है, और इवेंट नाम को एक पैरामीटर के रूप में प्रदान किया जा सकता है।</p>
+</blockquote>
+<h3 id="आम-इवेंट्स">आम इवेंट्स</h3>
+<p>एप्लिकेशन बनाते समय आपको सुनने के लिए <a href="https://developer.mozilla.org/docs/Web/Events">दर्जनों इवेंट</a> उपलब्ध हैं। मूल रूप से एक पृष्ठ पर एक उपयोगकर्ता कुछ भी करता है, एक घटना को बढ़ाता है, जो आपको यह सुनिश्चित करने के लिए बहुत शक्ति देता है कि वे आपकी इच्छा का अनुभव प्राप्त करें। सौभाग्य से, आपको आम तौर पर केवल कुछ मुट्ठी भर घटनाओं की आवश्यकता होगी। यहां कुछ सामान्य बातें हैं (दोनों में से एक का उपयोग हम अपने खेल को बनाते समय करेंगे)</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/click_event">click</a>: उपयोगकर्ता ने कुछ पर क्लिक किया, आमतौर पर एक बटन या हाइपरलिंक</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/contextmenu_event">contextmenu</a>: उपयोगकर्ता ने सही माउस बटन क्लिक किया</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/select_event">select</a>: उपयोगकर्ता ने कुछ टेक्स्ट पर प्रकाश डाला</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/input_event">input</a>: उपयोगकर्ता कुछ टेक्स्ट इनपुट करता है</li>
+</ul>
+<h2 id="खेल-का-निर्माण">खेल का निर्माण</h2>
+<p>हम जावास्क्रिप्ट में ईवेंट कैसे काम करते हैं, यह जानने के लिए एक गेम बनाने जा रहे हैं। हमारा खेल एक खिलाड़ी के टाइपिंग कौशल का परीक्षण करने जा रहा है, जो सभी डेवलपर्स के पास सबसे कम क्षमता वाले कौशल में से एक है। हम सभी को अपनी टाइपिंग का अभ्यास करना चाहिए! खेल का सामान्य प्रवाह इस तरह दिखेगा:</p>
+<ul>
+<li>प्लेयर स्टार्ट बटन पर क्लिक करता है और टाइप करने के लिए एक उद्धरण के साथ प्रस्तुत किया जाता है</li>
+<li>प्लेयर टेक्स्ट बॉक्स में जितनी जल्दी हो सके उद्धरण टाइप करें
+<ul>
+<li>जैसा कि प्रत्येक शब्द पूरा हो गया है, अगले एक को हाइलाइट किया गया है</li>
+<li>यदि खिलाड़ी के पास टाइपो है, तो टेक्स्टबॉक्स को लाल रंग में अपडेट किया जाता है</li>
+<li>जब खिलाड़ी बोली को पूरा करता है, तो एक सफल संदेश बीते हुए समय के साथ प्रदर्शित होता है</li>
+</ul></li>
+</ul>
+<p>चलो हमारे खेल का निर्माण करें, और घटनाओं के बारे में जानें!</p>
+<h3 id="फ़ाइल-संरचना">फ़ाइल संरचना</h3>
+<p>हमें कुल तीन फ़ाइलों की आवश्यकता है: <strong>index.html</strong>, <strong>script.js</strong> और <strong>style.css</strong>. आइए उन लोगों की स्थापना करके शुरू करें, जो हमारे लिए जीवन को थोड़ा आसान बनाते हैं।</p>
+<ul>
+<li>कंसोल या टर्मिनल विंडो खोलकर और निम्न आदेश जारी करके अपने काम के लिए एक नया फ़ोल्डर बनाएँ:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Linux or macOS</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">mkdir</span> typing-game <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> typing-game</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co"># Windows</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="ex">md</span> typing-game <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> typing-game</a></code></pre></div>
+<ul>
+<li>विजुअल स्टूडियो कोड खोलें</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">code</span> .</a></code></pre></div>
+<ul>
+<li>विज़ुअल स्टूडियो कोड के फ़ोल्डर में निम्नलिखित नामों के साथ तीन फाइलें जोड़ें:
+<ul>
+<li>index.html</li>
+<li>script.js</li>
+<li>style.css</li>
+</ul></li>
+</ul>
+<h2 id="उपयोगकर्ता-इंटरफ़ेस-बनाएँ">उपयोगकर्ता इंटरफ़ेस बनाएँ</h2>
+<p>यदि हम आवश्यकताओं का पता लगाते हैं, तो हम जानते हैं कि हमें अपने HTML पृष्ठ पर मुट्ठी भर तत्वों की आवश्यकता है। यह एक रेसिपी की तरह है, जहाँ हमें कुछ सामग्री की आवश्यकता होती है:</p>
+<ul>
+<li>उपयोगकर्ता टाइप करने के लिए बोली प्रदर्शित करने के लिए कहीं</li>
+<li>कहीं कोई संदेश प्रदर्शित करने के लिए, जैसे कोई सफलता संदेश</li>
+<li>टाइपिंग के लिए एक टेक्स्टबॉक्स</li>
+<li>एक स्टार्ट बटन</li>
+</ul>
+<p>उनमें से प्रत्येक को आईडी की आवश्यकता होगी ताकि हम अपने जावास्क्रिप्ट में उनके साथ काम कर सकें। हम सीएसएस और जावास्क्रिप्ट फ़ाइलों के संदर्भ भी जोड़ेंगे जिन्हें हम बनाने जा रहे हैं।</p>
+<p><strong>index.html</strong> नामक एक नई फ़ाइल बनाएँ। निम्नलिखित HTML जोड़ें:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="co">&lt;!-- inside index.html --&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="kw">&lt;title&gt;</span>Typing game<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="kw">&lt;link</span><span class="ot"> rel=</span><span class="st">&quot;stylesheet&quot;</span><span class="ot"> href=</span><span class="st">&quot;style.css&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="kw">&lt;h1&gt;</span>Typing game!<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="kw">&lt;p&gt;</span>Practice your typing skills with a quote from Sherlock Holmes. Click **start** to begin!<span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="kw">&lt;p</span><span class="ot"> id=</span><span class="st">&quot;quote&quot;</span><span class="kw">&gt;&lt;/p&gt;</span> <span class="co">&lt;!-- This will display our quote --&gt;</span></a>
+<a class="sourceLine" id="cb3-11" title="11">  <span class="kw">&lt;p</span><span class="ot"> id=</span><span class="st">&quot;message&quot;</span><span class="kw">&gt;&lt;/p&gt;</span> <span class="co">&lt;!-- This will display any status messages --&gt;</span></a>
+<a class="sourceLine" id="cb3-12" title="12">  <span class="kw">&lt;div&gt;</span></a>
+<a class="sourceLine" id="cb3-13" title="13">    <span class="kw">&lt;input</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> aria-label=</span><span class="st">&quot;current word&quot;</span><span class="ot"> id=</span><span class="st">&quot;typed-value&quot;</span> <span class="kw">/&gt;</span> <span class="co">&lt;!-- The textbox for typing --&gt;</span></a>
+<a class="sourceLine" id="cb3-14" title="14">    <span class="kw">&lt;button</span><span class="ot"> type=</span><span class="st">&quot;button&quot;</span><span class="ot"> id=</span><span class="st">&quot;start&quot;</span><span class="kw">&gt;</span>Start<span class="kw">&lt;/button&gt;</span> <span class="co">&lt;!-- To start the game --&gt;</span></a>
+<a class="sourceLine" id="cb3-15" title="15">  <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb3-16" title="16">  <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;script.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<h3 id="एप्लिकेशन-लॉन्च-करें">एप्लिकेशन लॉन्च करें</h3>
+<p>यह देखना हमेशा सबसे अच्छा होता है कि कैसे चीजें देखें। चलो हमारे आवेदन का शुभारंभ करें। विजुअल स्टूडियो कोड के लिए एक अद्भुत एक्सटेंशन है जिसे <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">लाइव सर्वर</a> कहा जाता है, जो आपके आवेदन को सहेजने और हर बार सहेजने के लिए ब्राउज़र को ताज़ा करेगा।</p>
+<ul>
+<li>लिंक का पालन करके और <strong>स्थापित</strong> पर क्लिक करके <a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">लाइव सर्वर</a> स्थापित करें
+<ul>
+<li>आपको विज़ुअल स्टूडियो कोड खोलने के लिए ब्राउज़र द्वारा और फिर इंस्टॉलेशन करने के लिए विज़ुअल स्टूडियो कोड द्वारा संकेत दिया जाएगा</li>
+<li>संकेत मिलने पर विज़ुअल स्टूडियो कोड को पुनरारंभ करें</li>
+</ul></li>
+<li>विजुअल स्टूडियो कोड में स्थापित होने के बाद, कमांड पलेट खोलने के लिए Ctrl-Shift-P (या Cmd-Shift-P) पर क्लिक करें।</li>
+<li><strong>Live Server: Open with Live Server</strong> लिखे
+<ul>
+<li>लाइव सर्वर आपके एप्लिकेशन को होस्ट करना शुरू कर देगा</li>
+</ul></li>
+<li>एक ब्राउज़र खोलें और <strong>https://localhost:5500</strong> पर नेविगेट करें</li>
+<li>अब आपको आपके द्वारा बनाया गया पेज देखना चाहिए!</li>
+</ul>
+<p>चलो कुछ कार्यक्षमता जोड़ते हैं।</p>
+<h2 id="सीएसएस-जोड़ें">सीएसएस जोड़ें</h2>
+<p>हमारे HTML के निर्माण के साथ, मुख्य स्टाइलिंग के लिए CSS जोड़ते हैं। हमें उस शब्द को हाइलाइट करने की आवश्यकता है जो खिलाड़ी को टाइप करना चाहिए, और यदि उन्होंने टाइप किया है तो टेक्स्टबॉक्स को रंगीन करें। हम इसे दो वर्गों के साथ करेंगे।</p>
+<p><strong>style.css</strong> नाम की एक नई फ़ाइल बनाएं और निम्न सिंटैक्स जोड़ें।</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb4-1" title="1"><span class="co">/* inside style.css */</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="fu">.highlight</span> {</a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="kw">background-color</span>: <span class="cn">yellow</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">}</a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="fu">.error</span> {</a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="kw">background-color</span>: <span class="cn">lightcoral</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="kw">border</span>: <span class="cn">red</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">}</a></code></pre></div>
+<p>✅ जब यह सीएसएस की बात आती है तो आप अपने पेज को लेआउट कर सकते हैं लेकिन आप इसे पसंद कर सकते हैं थोड़ा समय लें और पृष्ठ को अधिक आकर्षक बनाएं:</p>
+<ul>
+<li>एक अलग फ़ॉन्ट चुनें</li>
+<li>हेडर को कलर करें</li>
+<li>आइटम का आकार बदलें</li>
+</ul>
+<h2 id="जावास्क्रिप्ट">जावास्क्रिप्ट</h2>
+<p>हमारे यूआई के साथ, यह जावास्क्रिप्ट पर हमारा ध्यान केंद्रित करने का समय है जो तर्क प्रदान करेगा। हम इसे मुट्ठी भर चरणों में तोड़ने जा रहे हैं:</p>
+<ul>
+<li>[स्थिरांक बनाएँ]](#add-the-constants)</li>
+<li><a href="#add-start-logic">खेल शुरू करने के लिए इवेंट श्रोता</a></li>
+<li><a href="#add-typing-logic">टाइप करने के लिए ईवेंट श्रोता</a></li>
+</ul>
+<p>लेकिन सबसे पहले, <strong>script.js</strong> नामक एक नई फ़ाइल बनाएं।</p>
+<h3 id="स्थिरांक-जोड़ें">स्थिरांक जोड़ें</h3>
+<p>प्रोग्रामिंग के लिए हमारे जीवन को थोड़ा आसान बनाने के लिए हमें कुछ वस्तुओं की आवश्यकता है। फिर, एक नुस्खा के समान, यहाँ हम क्या करेंगे:</p>
+<ul>
+<li>सभी उद्धरणों की सूची के साथ अरै</li>
+<li>वर्तमान बोली के लिए सभी शब्दों को संग्रहीत करने के लिए खाली अरै</li>
+<li>खिलाड़ी शब्द के सूचकांक को संग्रहीत करने के लिए स्थान वर्तमान में टाइप कर रहा है</li>
+<li>जिस समय खिलाड़ी ने शुरुआत पर क्लिक किया</li>
+</ul>
+<p>हम UI तत्वों के संदर्भ भी चाहते हैं:</p>
+<ul>
+<li>टेक्सटबॉक्स (<strong>typed-value</strong>)</li>
+<li>क्वोट डिस्प्ले (<strong>quote</strong>)</li>
+<li>मैसेज (<strong>message</strong>)</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="co">// inside script.js</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co">// all of our quotes</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw">const</span> quotes <span class="op">=</span> [</a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="st">&#39;When you have eliminated the impossible, whatever remains, however improbable, must be the truth.&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-5" title="5">    <span class="st">&#39;There is nothing more deceptive than an obvious fact.&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="st">&#39;I ought to know by this time that when a fact appears to be opposed to a long train of deductions it invariably proves to be capable of bearing some other interpretation.&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="st">&#39;I never make exceptions. An exception disproves the rule.&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-8" title="8">    <span class="st">&#39;What one man can invent another can discover.&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-9" title="9">    <span class="st">&#39;Nothing clears up a case so much as stating it to another person.&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-10" title="10">    <span class="st">&#39;Education never ends, Watson. It is a series of lessons, with the greatest for the last.&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-11" title="11">]<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="co">// store the list of words and the index of the word the player is currently typing</span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="kw">let</span> words <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="kw">let</span> wordIndex <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="co">// the starting time</span></a>
+<a class="sourceLine" id="cb5-16" title="16"><span class="kw">let</span> startTime <span class="op">=</span> <span class="va">Date</span>.<span class="at">now</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-17" title="17"><span class="co">// page elements</span></a>
+<a class="sourceLine" id="cb5-18" title="18"><span class="kw">const</span> quoteElement <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;quote&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-19" title="19"><span class="kw">const</span> messageElement <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;message&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-20" title="20"><span class="kw">const</span> typedValueElement <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;typed-value&#39;</span>)<span class="op">;</span></a></code></pre></div>
+<p>✅ आगे बढ़ो और अपने खेल के लिए अधिक उद्धरण जोड़ें</p>
+<blockquote>
+<p><strong>नोट:</strong> हम तत्वों को पुनः प्राप्त कर सकते हैं जब भी हम <code>document.getElementById</code> का उपयोग करके कोड में चाहते हैं। इस तथ्य के कारण कि हम नियमित रूप से इन तत्वों को संदर्भित करने जा रहे हैं, हम स्थिरांक के साथ स्थिरांक का उपयोग करके स्थिरांक से बचने जा रहे हैं। फ्रेमवर्क जैसे कि <a href="https://vuejs.org/">Vue.js</a> या <a href="https://reactjs.org/">रिएक्ट</a> आपको अपने कोड को बेहतर बनाने में मदद कर सकते हैं।</p>
+</blockquote>
+<p><code>const</code>,<code>let</code> और <code>var</code> का उपयोग करके वीडियो देखने के लिए एक मिनट का समय लें</p>
+<p><a href="https://youtube.com/watch?v=JNIXfGiDWM8" title="चर के प्रकार"><img src="https://img.youtube.com/vi/JNIXfGiDWM8/0.jpg" alt="चर के प्रकार" /></a></p>
+<blockquote>
+<p>चरों के बारे में वीडियो के लिए ऊपर दी गई छवि पर क्लिक करें।</p>
+</blockquote>
+<h3 id="प्रारंभ-तर्क-जोड़ें">प्रारंभ तर्क जोड़ें</h3>
+<p>गेम शुरू करने के लिए, प्लेयर स्टार्ट पर क्लिक करेगा। बेशक, हम नहीं जानते कि वे कब शुरू करने जा रहे हैं। यह वह जगह है जहाँ एक <a href="https://developer.mozilla.org/docs/Web/API/EventTarget/addEventListener">इवेंट श्रोता</a> खेल में आता है। एक ईवेंट श्रोता हमें कुछ होने (किसी घटना) के लिए सुनने और प्रतिक्रिया में कोड निष्पादित करने की अनुमति देगा। हमारे मामले में, हम उस कोड को निष्पादित करना चाहते हैं जब उपयोगकर्ता प्रारंभ पर क्लिक करता है।</p>
+<p>जब उपयोगकर्ता <strong>प्रारंभ</strong> पर क्लिक करता है, तो हमें एक उद्धरण का चयन करना होगा, उपयोगकर्ता इंटरफ़ेस सेटअप करना और वर्तमान शब्द और समय के लिए सेटअप ट्रैकिंग करना होगा। नीचे दिए गए जावास्क्रिप्ट को आपको जोड़ना होगा; हम स्क्रिप्ट ब्लॉक के ठीक बाद इस पर चर्चा करते हैं।</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">// at the end of script.js</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;start&#39;</span>).<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="co">// get a quote</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="kw">const</span> quoteIndex <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">Math</span>.<span class="at">random</span>() <span class="op">*</span> <span class="va">quotes</span>.<span class="at">length</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="kw">const</span> quote <span class="op">=</span> quotes[quoteIndex]<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="co">// Put the quote into an array of words</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  words <span class="op">=</span> <span class="va">quote</span>.<span class="at">split</span>(<span class="st">&#39; &#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">  <span class="co">// reset the word index for tracking</span></a>
+<a class="sourceLine" id="cb6-9" title="9">  wordIndex <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-10" title="10"></a>
+<a class="sourceLine" id="cb6-11" title="11">  <span class="co">// UI updates</span></a>
+<a class="sourceLine" id="cb6-12" title="12">  <span class="co">// Create an array of span elements so we can set a class</span></a>
+<a class="sourceLine" id="cb6-13" title="13">  <span class="kw">const</span> spanWords <span class="op">=</span> <span class="va">words</span>.<span class="at">map</span>(<span class="kw">function</span>(word) <span class="op">{</span> <span class="cf">return</span> <span class="vs">`&lt;span&gt;</span><span class="sc">${</span>word<span class="sc">}</span><span class="vs"> &lt;/span&gt;`</span><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-14" title="14">  <span class="co">// Convert into string and set as innerHTML on quote display</span></a>
+<a class="sourceLine" id="cb6-15" title="15">  <span class="va">quoteElement</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="va">spanWords</span>.<span class="at">join</span>(<span class="st">&#39;&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-16" title="16">  <span class="co">// Highlight the first word</span></a>
+<a class="sourceLine" id="cb6-17" title="17">  <span class="va">quoteElement</span>.<span class="at">childNodes</span>[<span class="dv">0</span>].<span class="at">className</span> <span class="op">=</span> <span class="st">&#39;highlight&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-18" title="18">  <span class="co">// Clear any prior messages</span></a>
+<a class="sourceLine" id="cb6-19" title="19">  <span class="va">messageElement</span>.<span class="at">innerText</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-20" title="20"></a>
+<a class="sourceLine" id="cb6-21" title="21">  <span class="co">// Setup the textbox</span></a>
+<a class="sourceLine" id="cb6-22" title="22">  <span class="co">// Clear the textbox</span></a>
+<a class="sourceLine" id="cb6-23" title="23">  <span class="va">typedValueElement</span>.<span class="at">value</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-24" title="24">  <span class="co">// set focus</span></a>
+<a class="sourceLine" id="cb6-25" title="25">  <span class="va">typedValueElement</span>.<span class="at">focus</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-26" title="26">  <span class="co">// set the event handler</span></a>
+<a class="sourceLine" id="cb6-27" title="27"></a>
+<a class="sourceLine" id="cb6-28" title="28">  <span class="co">// Start the timer</span></a>
+<a class="sourceLine" id="cb6-29" title="29">  startTime <span class="op">=</span> <span class="kw">new</span> <span class="at">Date</span>().<span class="at">getTime</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-30" title="30"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>चलो कोड को तोड़ते है</p>
+<ul>
+<li>ट्रैकिंग शब्द सेट करें
+<ul>
+<li><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/floor">math.floor</a> और <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Math/random">math.random</a> का उपयोग करके हम <code>quotes</code> सरणी से एक उद्धरण का चयन करने के लिए अनुमति देते हैं।</li>
+<li>हम <code>quote</code> को <code>words</code> की एक सरणी में बदलते हैं, इसलिए हम उस खिलाड़ी को ट्रैक कर सकते हैं जो खिलाड़ी वर्तमान में टाइप कर रहा है</li>
+<li><code>wordIndex</code> 0 पर सेट है, क्योंकि खिलाड़ी पहले शब्द पर शुरू होगा</li>
+</ul></li>
+<li>यूआई सेटअप करें
+<ul>
+<li><code>spanWords</code> की एक सरणी बनाएं, जिसमें <code>span</code> तत्व के अंदर प्रत्येक शब्द होता है
+<ul>
+<li>यह हमें प्रदर्शन पर शब्द को उजागर करने की अनुमति देगा</li>
+</ul></li>
+<li>एक स्ट्रिंग बनाने के लिए <code>join</code> करने के लिए अरै का उपयोग करें जिसे हम <code>quoteElement</code> पर <code>innerHTML</code> अपडेट करने के लिए उपयोग कर सकते हैं
+<ul>
+<li>यह खिलाड़ी को बोली प्रदर्शित करेगा</li>
+</ul></li>
+<li>पीले रंग के रूप में हाइलाइट करने के लिए <code>highlight</code> के लिए पहले <code>span</code> तत्व का <code>className</code> सेट करें</li>
+<li><code>messageElement</code> को <code>''</code> पर सेट करके <code>messageElement</code> को साफ करें</li>
+</ul></li>
+<li>टेक्स्टबॉक्स सेट करें
+<ul>
+<li><code>typedValueElement</code> पर वर्तमान <code>value</code> को साफ़ करें</li>
+<li><code>focus</code> को ‘typedValueElement’ पर सेट करें</li>
+</ul></li>
+<li><code>getTime</code> कहकर टाइमर शुरू करें</li>
+</ul>
+<h3 id="टाइपिंग-तर्क-जोड़ें">टाइपिंग तर्क जोड़ें</h3>
+<p>खिलाड़ी के प्रकार के रूप में, एक <code>input</code> घटना को उठाया जाएगा। यह ईवेंट श्रोता यह सुनिश्चित करने के लिए जांच करेगा कि खिलाड़ी शब्द को सही ढंग से टाइप कर रहा है, और गेम की वर्तमान स्थिति को संभाल सकता है। <strong>script.js</strong> पर लौटकर, निम्नलिखित कोड को अंत में जोड़ें। हम इसे बाद में तोड़ देंगे।</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="co">// at the end of script.js</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="va">typedValueElement</span>.<span class="at">addEventListener</span>(<span class="st">&#39;input&#39;</span><span class="op">,</span> () <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="co">// Get the current word</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="kw">const</span> currentWord <span class="op">=</span> words[wordIndex]<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="co">// get the current value</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="kw">const</span> typedValue <span class="op">=</span> <span class="va">typedValueElement</span>.<span class="at">value</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-7" title="7"></a>
+<a class="sourceLine" id="cb7-8" title="8">  <span class="cf">if</span> (typedValue <span class="op">===</span> currentWord <span class="op">&amp;&amp;</span> wordIndex <span class="op">===</span> <span class="va">words</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-9" title="9">    <span class="co">// end of sentence</span></a>
+<a class="sourceLine" id="cb7-10" title="10">    <span class="co">// Display success</span></a>
+<a class="sourceLine" id="cb7-11" title="11">    <span class="kw">const</span> elapsedTime <span class="op">=</span> <span class="kw">new</span> <span class="at">Date</span>().<span class="at">getTime</span>() <span class="op">-</span> startTime<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-12" title="12">    <span class="kw">const</span> message <span class="op">=</span> <span class="vs">`CONGRATULATIONS! You finished in </span><span class="sc">${</span>elapsedTime / <span class="dv">1000</span><span class="sc">}</span><span class="vs"> seconds.`</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-13" title="13">    <span class="va">messageElement</span>.<span class="at">innerText</span> <span class="op">=</span> message<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-14" title="14">  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">typedValue</span>.<span class="at">endsWith</span>(<span class="st">&#39; &#39;</span>) <span class="op">&amp;&amp;</span> <span class="va">typedValue</span>.<span class="at">trim</span>() <span class="op">===</span> currentWord) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-15" title="15">    <span class="co">// end of word</span></a>
+<a class="sourceLine" id="cb7-16" title="16">    <span class="co">// clear the typedValueElement for the new word</span></a>
+<a class="sourceLine" id="cb7-17" title="17">    <span class="va">typedValueElement</span>.<span class="at">value</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-18" title="18">    <span class="co">// move to the next word</span></a>
+<a class="sourceLine" id="cb7-19" title="19">    wordIndex<span class="op">++;</span></a>
+<a class="sourceLine" id="cb7-20" title="20">    <span class="co">// reset the class name for all elements in quote</span></a>
+<a class="sourceLine" id="cb7-21" title="21">    <span class="cf">for</span> (<span class="kw">const</span> wordElement <span class="kw">of</span> <span class="va">quoteElement</span>.<span class="at">childNodes</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-22" title="22">      <span class="va">wordElement</span>.<span class="at">className</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-23" title="23">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-24" title="24">    <span class="co">// highlight the new word</span></a>
+<a class="sourceLine" id="cb7-25" title="25">    <span class="va">quoteElement</span>.<span class="at">childNodes</span>[wordIndex].<span class="at">className</span> <span class="op">=</span> <span class="st">&#39;highlight&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-26" title="26">  <span class="op">}</span> <span class="cf">else</span> <span class="cf">if</span> (<span class="va">currentWord</span>.<span class="at">startsWith</span>(typedValue)) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-27" title="27">    <span class="co">// currently correct</span></a>
+<a class="sourceLine" id="cb7-28" title="28">    <span class="co">// highlight the next word</span></a>
+<a class="sourceLine" id="cb7-29" title="29">    <span class="va">typedValueElement</span>.<span class="at">className</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-30" title="30">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-31" title="31">    <span class="co">// error state</span></a>
+<a class="sourceLine" id="cb7-32" title="32">    <span class="va">typedValueElement</span>.<span class="at">className</span> <span class="op">=</span> <span class="st">&#39;error&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-33" title="33">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-34" title="34"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>कोड को तोड़ दो! हम वर्तमान शब्द को पकड़कर शुरू करते हैं और खिलाड़ी ने इस प्रकार अब तक टाइप किया है। फिर हमारे पास झरना तर्क है, जहां हम जांचते हैं कि क्या उद्धरण पूरा है, शब्द पूरा है, शब्द सही है, या (अंत में), अगर कोई त्रुटि है।</p>
+<ul>
+<li>उद्धरण पूर्ण है, <code>typedValue</code> द्वारा <code>currentWord</code> के बराबर होने का संकेत दिया गया है, और <code>wordIndex</code> को <code>words</code> की <code>length</code> से कम के बराबर किया जा रहा है
+<ul>
+<li>वर्तमान समय से <code>startTime</code> घटाकर<code>elapsedTime</code> की गणना करें</li>
+<li>मिलीसेकंड से सेकंड में परिवर्तित करने के लिए <code>elapsedTime</code> को 1,000 से विभाजित करें</li>
+<li>एक सफलता संदेश प्रदर्शित करें</li>
+</ul></li>
+<li>शब्द पूरा हो गया है, जो <code>typedValue</code> द्वारा एक स्थान के साथ समाप्त होने का संकेत है (एक शब्द का अंत) और <code>typedValue</code> को<code>currentWord</code> के बराबर किया जा रहा है
+<ul>
+<li>अगले शब्द को टाइप करने की अनुमति देने के लिए <code>typedElement</code> to <code>''</code> पर <code>value</code> सेट करें</li>
+<li>वृद्धि <code>wordIndex</code> अगले शब्द पर ले जाने के लिए</li>
+<li>प्रदर्शन को फिर से प्रदर्शित करने के लिए <code>className</code> को <code>''</code> के लिए <code>quoteElement</code> के सभी <code>childNodes</code> के माध्यम से लूप करें</li>
+<li>वर्तमान शब्द के <code>className</code> को टाइप करने के लिए अगले शब्द के रूप में फ़्लैग करने के लिए <code>highlight</code> पर सेट करें</li>
+</ul></li>
+<li>वर्तमान में शब्द सही ढंग से टाइप किया गया है (लेकिन पूरा नहीं), <code>currentWord</code> द्वारा इंगित <code>typedValue</code> से शुरू हुआ
+<ul>
+<li>सुनिश्चित करें कि <code>typeNalueElement</code> को <code>className</code> को क्लीयर करके डिफ़ॉल्ट के रूप में प्रदर्शित किया गया है</li>
+</ul></li>
+<li>यदि हमने इसे दूर किया है, तो हमारे पास एक त्रुटि है
+<ul>
+<li><code>className</code> पर <code>typedValueElement</code> से <code>error</code> सेट करे</li>
+</ul></li>
+</ul>
+<h2 id="अपने-ऐप्लकैशनको-टेसेट-करे">अपने ऐप्लकैशनको टेसेट करे</h2>
+<p>आपने इसे अंत तक बना दिया है! अंतिम चरण हमारे आवेदन कार्यों को सुनिश्चित करना है। इसे आजमा कर देखें! अगर वहाँ त्रुटियां हैं तो चिंता न करें; <strong>सभी डेवलपर्स</strong> में त्रुटियां हैं। संदेशों की जांच करें और आवश्यकतानुसार डिबग करें।</p>
+<p><strong>start</strong> पर क्लिक करें, और दूर टाइप करना शुरू करें! यह हमें पहले देखे गए एनीमेशन की तरह दिखना चाहिए।</p>
+<figure>
+<img src="/4-typing-game/images/demo.gif" alt="खेल का एनीमेशन" /><figcaption>खेल का एनीमेशन</figcaption>
+</figure>
+<hr />
+<h2 id="चुनौती">🚀 चुनौती</h2>
+<p>अधिक कार्यक्षमता जोड़ें</p>
+<ul>
+<li>पूर्ण होने पर <code>input</code> ईवेंट श्रोता को अक्षम करें, और बटन पर क्लिक करने पर इसे फिर से सक्षम करें</li>
+<li>खिलाड़ी द्वारा बोली पूरा करने पर टेक्स्टबॉक्स को अक्षम करें</li>
+<li>सफलता संदेश के साथ एक मॉडल संवाद बॉक्स प्रदर्शित करें</li>
+<li><a href="https://developer.mozilla.org/docs/Web/API/Window/localStorage">localStorage</a> का उपयोग करके उच्च स्कोर स्टोर करें</li>
+</ul>
+<h2 id="व्याख्यान-उपरांत-प्रश्नोत्तरी">व्याख्यान उपरांत प्रश्नोत्तरी</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/22?loc=hi">व्याख्यान उपरांत प्रश्नोत्तरी</a></p>
+<h2 id="समीक्षा-और-स्व-अध्ययन">समीक्षा और स्व अध्ययन</h2>
+<p>वेब ब्राउज़र के माध्यम से डेवलपर के लिए <a href="https://developer.mozilla.org/en-US/docs/Web/Events">उपलब्ध सभी घटनाओं</a> को पढ़ें, और उन परिदृश्यों पर विचार करें जिनमें आप प्रत्येक का उपयोग करेंगे।</p>
+<h2 id="असाइनमेंट">असाइनमेंट</h2>
+<p><a href="assignment.hi.md">एक नया कीबोर्ड गेम बनाए</a></p>
+</body>
+</html>

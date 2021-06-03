@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README.zh-tw</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="建立銀行網頁應用程式-part-2登入與註冊表單">建立銀行網頁應用程式 Part 2：登入與註冊表單</h1>
+<h2 id="課前測驗">課前測驗</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/43?loc=zh_tw">課前測驗</a></p>
+<h3 id="大綱">大綱</h3>
+<p>在大多數當代網頁應用程式中，你可以建立自己的帳戶來擁有自己的私人空間。許多用戶在同一時間可以存取同一個網頁應用程式，你就必須有一套機制分開儲存不同用戶的資料並顯示適當的資訊。我們不會涉及到如何管理<a href="https://zh.wikipedia.org/wiki/%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81">用戶個資的安全</a>，它是個相當廣泛的主題，我們僅會確保每個用戶能在這款銀行應用上建立一到多個數位帳戶。</p>
+<p>在這單元中，我們會使用 HTML 表單來新增登入與註冊的功能。我們會看到如何使用伺服器 API 傳遞資料，定義基本的用戶字串輸入之檢查機制。</p>
+<h3 id="開始之前">開始之前</h3>
+<p>你需要完成第一單元 <a href="../../1-template-route/translations/README.zh-tw.md">HTML 模板與網頁路由</a>的應用程式。你還需要安裝 <a href="https://nodejs.org">Node.js</a> 與在本地端<a href="../../api/translations/README.zh-tw.md">運行伺服器 API</a>以傳輸建立帳戶所需的資料。</p>
+<p>你可以測試伺服器是否運作正常，在終端機內輸入指令：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">curl</span> http://localhost:5000/api</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co"># -&gt; 會回傳結果 &quot;Bank API v1.0.0&quot; </span></a></code></pre></div>
+<hr />
+<h2 id="表單與其控制">表單與其控制</h2>
+<p><code>&lt;form&gt;</code> 元素打包了 HTML 文件中使用者輸入與提交資料的地方。有許多種使用者介面(UI)以表單的方式呈現，最常見的內容會包含 <code>&lt;input&gt;</code> 與 <code>&lt;button&gt;</code> 元素。</p>
+<p>有許多種 <code>&lt;input&gt;</code> 的<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">種類</a>，舉例來說，若要建立使用者輸入使用者名稱的地方，你可以：</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;username&quot;</span><span class="ot"> name=</span><span class="st">&quot;username&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<p><code>name</code> 屬性同時亦是表單傳輸資料的名稱。<code>id</code> 屬性是用來與 <code>&lt;label&gt;</code> 做表單控制(form control)的連接。</p>
+<blockquote>
+<p>花點時間看看 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input"><code>&lt;input&gt;</code> 種類</a>的清單與<a href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Other_form_controls">其他表單控制</a>，讓你在建立使用者介面時，有全部供你使用的原生 UI 元素可以參考。</p>
+</blockquote>
+<p>✅ 紀錄一下 <code>&lt;input&gt;</code> 是種<a href="https://developer.mozilla.org/en-US/docs/Glossary/Empty_element">空元素</a>，你<em>不應該</em>在它後面加上對應的結束標籤。然而，你仍然可以在它的後面使用 <code>&lt;input/&gt;</code>，這沒有強制規定。</p>
+<p>表單中的 <code>&lt;button&gt;</code> 元素是有些特別。如果你沒有指定它的 <code>type</code> 屬性，它會在你輸入文字時，自動地提交表單內容給伺服器。這邊有一些你可以設定的 <code>type</code> 內容：</p>
+<ul>
+<li><code>submit</code>： <code>&lt;form&gt;</code> 內的預設型態，按鈕會觸發表單提交這項行為。</li>
+<li><code>reset</code>： 按鈕會重置所有表單控制回初始狀態。</li>
+<li><code>button</code>： 在按鈕按下時不執行預設行為。你可以藉由 JavaScript 自由定義之後的動作。</li>
+</ul>
+<h3 id="課題">課題</h3>
+<p>在 <code>login</code> 模板內加入表單。我們需要<em>使用者名稱(username)</em>的輸入框與<em>登入(Login)</em>的按鈕。</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">&lt;template</span><span class="ot"> id=</span><span class="st">&quot;login&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">&lt;h1&gt;</span>Bank App<span class="kw">&lt;/h1&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">&lt;section&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="kw">&lt;h2&gt;</span>Login<span class="kw">&lt;/h2&gt;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="kw">&lt;form</span><span class="ot"> id=</span><span class="st">&quot;loginForm&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">      <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;username&quot;</span><span class="kw">&gt;</span>Username<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">      <span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;username&quot;</span><span class="ot"> name=</span><span class="st">&quot;user&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">      <span class="kw">&lt;button&gt;</span>Login<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">    <span class="kw">&lt;/form&gt;</span></a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="kw">&lt;/section&gt;</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="kw">&lt;/template&gt;</span></a></code></pre></div>
+<p>如果你仔細地看，你會注意到我們在這裡還加了 <code>&lt;label&gt;</code> 元素。<code>&lt;label&gt;</code> 元素被用來新增文字到 UI 上，譬如說我們的使用者名稱。為了讓表單得以被閱讀，標籤是很重要的，此外它還有額外的優點：</p>
+<ul>
+<li>連結標籤到表單控制上，它能幫助使用者的額外工具，好比說螢幕報讀器，理解接下來該提供何種資料。</li>
+<li>你可以點擊標籤，它會跳轉到相對應的輸入框，讓使用觸控型裝置的用戶更容易操作。</li>
+</ul>
+<blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility/What_is_accessibility">網頁親和力</a>是非常重要但常被忽視的主題。感謝<a href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility/HTML">語義化 HTML 元素</a>的幫助，建立無障礙的網頁內容變得更加容易。你可以<a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility">閱讀更多有關網頁親和力的文章</a>，避免觸犯到常見的錯誤並成為負責任的開發者。</p>
+</blockquote>
+<p>現在，我們加入第二張表單給用戶註冊使用，就像前一張一樣：</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">&lt;hr/&gt;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">&lt;h2&gt;</span>Register<span class="kw">&lt;/h2&gt;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">&lt;form</span><span class="ot"> id=</span><span class="st">&quot;registerForm&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;user&quot;</span><span class="kw">&gt;</span>Username<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;user&quot;</span><span class="ot"> name=</span><span class="st">&quot;user&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;currency&quot;</span><span class="kw">&gt;</span>Currency<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb4-7" title="7">  <span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;currency&quot;</span><span class="ot"> name=</span><span class="st">&quot;currency&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> value=</span><span class="st">&quot;$&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">  <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;description&quot;</span><span class="kw">&gt;</span>Description<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;description&quot;</span><span class="ot"> name=</span><span class="st">&quot;description&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">  <span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;balance&quot;</span><span class="kw">&gt;</span>Current balance<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">  <span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;balance&quot;</span><span class="ot"> name=</span><span class="st">&quot;balance&quot;</span><span class="ot"> type=</span><span class="st">&quot;number&quot;</span><span class="ot"> value=</span><span class="st">&quot;0&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">  <span class="kw">&lt;button&gt;</span>Register<span class="kw">&lt;/button&gt;</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="kw">&lt;/form&gt;</span></a></code></pre></div>
+<p>藉由 <code>value</code> 屬性，我們可以定義輸入框內的預設值。 注意一下 <code>balance</code> 的輸入類型為 <code>number</code>。它看起來與其他輸入框不一樣嗎？試著與它互動看看。</p>
+<p>✅ 你能只利用鍵盤造訪表格，與表格互動嗎？你是如何做到的？</p>
+<h2 id="提交資料給伺服器">提交資料給伺服器</h2>
+<p>現在我們有可以使用的 UI 了，下一個步驟要將資料送給我們的伺服器。讓我們來快速地測試一下程式：在點擊 <em>Login</em> 或 <em>Register</em> 按鈕後，發生了什麼事？</p>
+<p>你有注意到瀏覽器的網址列改變了嗎？</p>
+<figure>
+<img src="../images/click-register.png" alt="截圖：點擊 Register 按鈕後，瀏覽器網址列改變" /><figcaption>截圖：點擊 Register 按鈕後，瀏覽器網址列改變</figcaption>
+</figure>
+<p><code>&lt;form&gt;</code> 預設的行為：使用 <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.3">GET 方法</a>提交表格，將表格資料接在網址後面，傳送給目前網址的伺服器。然而這個方法有一些缺點：</p>
+<ul>
+<li>資料大小有上限限制(大約 2000 字元)</li>
+<li>可以直接在網址內看到資料(對密碼而言，這並不恰當)</li>
+<li>它不能做檔案的上傳</li>
+</ul>
+<p>這也是為什麼你需要將它轉換為 <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5">POST 方法</a>，將表單資料存在 HTTP 請求的內容中。這樣就不會遇到上述的限制。</p>
+<blockquote>
+<p>POST 是常見的資料傳輸方法，<a href="https://www.w3.org/2001/tag/doc/whenToUseGet.html">在一些特別的情況下</a>，使用 GET 方法相對起來比較恰當。例如進行搜尋的時候。</p>
+</blockquote>
+<h3 id="課題-1">課題</h3>
+<p>加入 <code>action</code> 與 <code>method</code> 屬性到註冊表單之中：</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;form</span><span class="ot"> id=</span><span class="st">&quot;registerForm&quot;</span><span class="ot"> action=</span><span class="st">&quot;//localhost:5000/api/accounts&quot;</span><span class="ot"> method=</span><span class="st">&quot;POST&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<p>現在，試著以你的名字申請新的帳戶。在點擊 <em>Register</em> 按鈕後，你應該能看到像這樣的畫面：</p>
+<figure>
+<img src="../images/form-post.png" alt="瀏覽器網址為 localhost:5000/api/accounts，並顯示 JSON 的資料字串。" /><figcaption>瀏覽器網址為 localhost:5000/api/accounts，並顯示 JSON 的資料字串。</figcaption>
+</figure>
+<p>若所有事情都運作正常，伺服器應該會回應你的請求，附帶 <a href="https://www.json.org/json-en.html">JSON</a> 包含著你剛建立的帳戶資料。</p>
+<p>✅ 試著以相同名字再註冊一次。發生了什麼事？</p>
+<h2 id="不重新載入地提交資料">不重新載入地提交資料</h2>
+<p>你可能會注意到，這些行動間出現了一個小問題：在提交表單時，我們離開了網頁應用，瀏覽器又重新導回到伺服器的網址。我們試著避免網頁應用重新載入所有的頁面，做出<a href="https://zh.wikipedia.org/zh-tw/%E5%8D%95%E9%A1%B5%E5%BA%94%E7%94%A8">單一頁面應用程式 (SPA)</a>。</p>
+<p>為了讓傳遞資料給伺服器時，不發生頁面重新載入的情況，我們需要使用 JavaScript。</p>
+<p>比起直接在 <code>&lt;form&gt;</code> 元素的 <code>action</code> 屬性加入網址，你可以使用 <code>javascript:</code> 字串接在程式語句前頭來執行自訂的行為。使用這方法也意味著你需要額外修改一些原本瀏覽器會做的行為。</p>
+<ul>
+<li>接收表單資料</li>
+<li>轉換並編碼表單資料成合適的格式</li>
+<li>建立 HTTP 請求並傳遞給伺服器</li>
+</ul>
+<h3 id="課題-2">課題</h3>
+<p>將註冊表單的 <code>action</code> 替換為：</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">&lt;form</span><span class="ot"> id=</span><span class="st">&quot;registerForm&quot;</span><span class="ot"> action=</span><span class="st">&quot;javascript:register()&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<p>開啟 <code>app.js</code>，加入新的函式 <code>register</code>：</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">function</span> <span class="at">register</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">const</span> registerForm <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;registerForm&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="kw">const</span> formData <span class="op">=</span> <span class="kw">new</span> <span class="at">FormData</span>(registerForm)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="kw">const</span> data <span class="op">=</span> <span class="va">Object</span>.<span class="at">fromEntries</span>(formData)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="kw">const</span> jsonData <span class="op">=</span> <span class="va">JSON</span>.<span class="at">stringify</span>(data)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="op">}</span></a></code></pre></div>
+<p>我們使用 <code>getElementById()</code> 蒐集表單的元素，使用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData"><code>FormData</code></a> 協助從表單控制中取出 key/value 的數據對。 之後，利用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries"><code>Object.fromEntries()</code></a> 轉換資料成正規物件，最後再將檔案轉成 <a href="https://www.json.org/json-en.html">JSON</a> ── 一個在網路上常見的資料交換格式。</p>
+<p>現在資料已經準備提交給伺服器了。建立新函式 <code>createAccount</code>：</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">createAccount</span>(account) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="cf">try</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="kw">const</span> response <span class="op">=</span> <span class="cf">await</span> <span class="at">fetch</span>(<span class="st">&#39;//localhost:5000/api/accounts&#39;</span><span class="op">,</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-4" title="4">      <span class="dt">method</span><span class="op">:</span> <span class="st">&#39;POST&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb8-5" title="5">      <span class="dt">headers</span><span class="op">:</span> <span class="op">{</span> <span class="st">&#39;Content-Type&#39;</span><span class="op">:</span> <span class="st">&#39;application/json&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb8-6" title="6">      <span class="dt">body</span><span class="op">:</span> account</a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-8" title="8">    <span class="cf">return</span> <span class="cf">await</span> <span class="va">response</span>.<span class="at">json</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-9" title="9">  <span class="op">}</span> <span class="cf">catch</span> (error) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-10" title="10">    <span class="cf">return</span> <span class="op">{</span> <span class="dt">error</span><span class="op">:</span> <span class="va">error</span>.<span class="at">message</span> <span class="op">||</span> <span class="st">&#39;Unknown error&#39;</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb8-11" title="11">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="op">}</span></a></code></pre></div>
+<p>這個函式做了什麼？首先，注意關鍵字 <code>async</code>，代表著函式包含了<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function"><strong>非同步化程式</strong></a>。在與關鍵字 <code>await</code> 一起使用時，它會在繼續運行程式前，等待非同步的程式被執行，就像等待伺服器回應一樣。</p>
+<p>這邊有關於使用 <code>async/await</code> 的影片：</p>
+<p><a href="https://youtube.com/watch?v=YwmlRkrxvkk" title="Async 與 Await 管理 promises"><img src="https://img.youtube.com/vi/YwmlRkrxvkk/0.jpg" alt="Async 與 Await 管理 promises" /></a></p>
+<blockquote>
+<p>點擊上方圖片以觀看關於 async/await 的影片。</p>
+</blockquote>
+<p>我們使用 API <code>fetch()</code> 來傳送 JSON 資料給伺服器。這個方法需要使用兩個參數：</p>
+<ul>
+<li>伺服器的網址，在此使用 <code>//localhost:5000/api/accounts</code>。</li>
+<li>網頁請求的設定，就是我們定義 <code>POST</code> 方法與提供請求的 <code>body</code>。當我們傳輸 JSON 資料給伺服器，我們還需要在標頭的 <code>Content-Type</code> 定為 <code>application/json</code>，伺服器才知道該如何解讀裡面的內容。</li>
+</ul>
+<p>當伺服器以 JSON 回應請求後，我們可以使用 <code>await response.json()</code> 來取得 JSON 的內容並回傳結果。注意在此為非同步程式的方法，我們使用關鍵字 <code>await</code> 回傳任何在解讀封包時產生的錯誤訊息。</p>
+<p>現在，在函式 <code>register</code> 中呼叫 <code>createAccount()</code>：</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> <span class="at">createAccount</span>(jsonData)<span class="op">;</span></a></code></pre></div>
+<p>因為我們在這此使用了關鍵字 <code>await</code>，我們需要在註冊函式前新增關鍵字 <code>async</code>：</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">register</span>() <span class="op">{</span></a></code></pre></div>
+<p>最後，我們儲存一些紀錄來檢查結果。最後的函式應該會如下方格式：</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">register</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="kw">const</span> registerForm <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;registerForm&#39;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="kw">const</span> formData <span class="op">=</span> <span class="kw">new</span> <span class="at">FormData</span>(registerForm)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4">  <span class="kw">const</span> jsonData <span class="op">=</span> <span class="va">JSON</span>.<span class="at">stringify</span>(<span class="va">Object</span>.<span class="at">fromEntries</span>(formData))<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-5" title="5">  <span class="kw">const</span> result <span class="op">=</span> <span class="cf">await</span> <span class="at">createAccount</span>(jsonData)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-6" title="6"></a>
+<a class="sourceLine" id="cb11-7" title="7">  <span class="cf">if</span> (<span class="va">result</span>.<span class="at">error</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-8" title="8">    <span class="cf">return</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;An error occured:&#39;</span><span class="op">,</span> <span class="va">result</span>.<span class="at">error</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-9" title="9">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-10" title="10"></a>
+<a class="sourceLine" id="cb11-11" title="11">  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Account created!&#39;</span><span class="op">,</span> result)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-12" title="12"><span class="op">}</span></a></code></pre></div>
+<p>過程有些冗長，但我們達成了！當你開啟<a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools">瀏覽器開發者工具</a>，試著註冊新的帳戶，你應該能看到網頁並沒有改變，但命令欄中會顯示帳戶成功註冊的訊息。</p>
+<figure>
+<img src="../images/browser-console.png" alt="瀏覽器命令欄中顯示紀錄訊息之截圖" /><figcaption>瀏覽器命令欄中顯示紀錄訊息之截圖</figcaption>
+</figure>
+<p>✅ 你覺得傳給伺服器的資料是安全的嗎？其他人有辦法攔截網頁請求嗎？你可以閱讀 <a href="https://en.wikipedia.org/wiki/HTTPS">HTTPS</a>，了解更多關於安全的資料傳輸。</p>
+<h2 id="資料驗證">資料驗證</h2>
+<p>試著在註冊新帳戶時，不輸入你的使用者名稱，你會發現伺服器回傳了錯誤狀態訊息：<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400#:~:text=The%20HyperText%20Transfer%20Protocol%20(HTTP,%2C%20or%20deceptive%20request%20routing).">400 (Bad Request)</a>。</p>
+<p>在傳輸資料給伺服器之前，最好先<a href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation">驗證表單資料</a>，以確保我們傳送合法的網頁請求。 HTML5 表單控制內建包含了驗證方法，使用了多樣的屬性： controls provides built-in validation using various attributes:</p>
+<ul>
+<li><code>required</code>： 輸入框必須被填寫，否則表單不能被提交。</li>
+<li><code>minlength</code> 和 <code>maxlength</code>： 定義輸入框的文字下限與文字上限。</li>
+<li><code>min</code> 和 <code>max</code>： 定義輸入框的數字下限與數字上限。</li>
+<li><code>type</code>： 定義輸入框內的資料格式，例如<code>數字</code>、<code>email</code>、<code>檔案</code>或是<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">其他內建的格式</a>。這個屬性可能會改變表單控制的表現方法。</li>
+<li><code>pattern</code>： 允許定義<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">正規表示法</a>的字串，測試輸入的內容是否滿足它。</li>
+</ul>
+<blockquote>
+<p>提示：你可以自定義表單控制的呈現方法，利用 CSS pseudo-classes <code>:valid</code> 和 <code>:invalid</code> 判斷內容是否合理。</p>
+</blockquote>
+<h3 id="課題-3">課題</h3>
+<p>在建立新的合法帳戶時，有兩個必須被填寫的輸入框：使用者名稱與資產狀態，而其他選項則是可有可無。現在更新表單的 HTML 語法，使用 <code>required</code> 屬性並標記提示在標籤中：</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;user&quot;</span><span class="kw">&gt;</span>Username (required)<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;user&quot;</span><span class="ot"> name=</span><span class="st">&quot;user&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> required</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">...</a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">&quot;currency&quot;</span><span class="kw">&gt;</span>Currency (required)<span class="kw">&lt;/label&gt;</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;currency&quot;</span><span class="ot"> name=</span><span class="st">&quot;currency&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> value=</span><span class="st">&quot;$&quot;</span><span class="ot"> required</span><span class="kw">&gt;</span></a></code></pre></div>
+<p>伺服器並沒設定輸入框的文字上限，定義合理的文字輸入上限是必要的。</p>
+<p>在文字框內加入 <code>maxlength</code> 屬性：</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;user&quot;</span><span class="ot"> name=</span><span class="st">&quot;user&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> maxlength=</span><span class="st">&quot;20&quot;</span><span class="ot"> required</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb13-2" title="2">...</a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;currency&quot;</span><span class="ot"> name=</span><span class="st">&quot;currency&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> value=</span><span class="st">&quot;$&quot;</span><span class="ot"> maxlength=</span><span class="st">&quot;5&quot;</span><span class="ot"> required</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb13-4" title="4">...</a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="kw">&lt;input</span><span class="ot"> id=</span><span class="st">&quot;description&quot;</span><span class="ot"> name=</span><span class="st">&quot;description&quot;</span><span class="ot"> type=</span><span class="st">&quot;text&quot;</span><span class="ot"> maxlength=</span><span class="st">&quot;100&quot;</span><span class="kw">&gt;</span></a></code></pre></div>
+<p>現在，如果文字框並沒有滿足我們所定義的規則時，在點擊了 <em>Register</em> 按鈕後，你會看到：</p>
+<figure>
+<img src="../images/validation-error.png" alt="傳輸錯誤表單而出現驗證失敗的截圖" /><figcaption>傳輸錯誤表單而出現驗證失敗的截圖</figcaption>
+</figure>
+<p>這類在傳輸資料給伺服器<em>之前</em>的驗證系統稱之為<strong>用戶端(client-side)</strong>驗證。但注意有些資料是沒有辦法在傳輸前被驗證的。舉例來說，我們沒辦法在發出請求前，確認是否已經存在著一組相同姓名的帳戶。伺服器上額外的驗證措施就稱之為<strong>伺服器端(server-side)</strong>驗證。</p>
+<p>通常這兩個驗證都需要去編寫，用戶端驗證能及時回饋給用戶，提升使用者體驗；伺服器端驗證確保你要處理的用戶資料是合理且安全的。</p>
+<hr />
+<h2 id="挑戰">🚀 挑戰</h2>
+<p>當相同使用者名稱的帳戶已經存在時，在 HTML 上顯示錯誤訊息。</p>
+<p>這邊有做過一些造型的最終登入頁面範本。</p>
+<figure>
+<img src="../images/result.png" alt="加上 CSS 造型的登入頁面截圖" /><figcaption>加上 CSS 造型的登入頁面截圖</figcaption>
+</figure>
+<h2 id="課後測驗">課後測驗</h2>
+<p><a href="https://nice-beach-0fe9e9d0f.azurestaticapps.net/quiz/44?loc=zh_tw">課後測驗</a></p>
+<h2 id="複習與自學">複習與自學</h2>
+<p>開發者在建立表單時需要發揮他們的創意，尤其是策畫資料驗證的規則。在 <a href="https://codepen.com">CodePen</a> 上學習不同表單流程，你能發現什麼有趣且令人發想的表單嗎？</p>
+<h2 id="作業">作業</h2>
+<p><a href="assignment.zh-tw.md">造型化你的銀行程式</a></p>
+</body>
+</html>

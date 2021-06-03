@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2021-01-11" />
+  <title>The Chromium Chronicle #16: Updating Google Apps on Desktop</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">The Chromium Chronicle #16: Updating Google Apps on Desktop</h1>
+<p class="date">2021-01-11</p>
+</header>
+<p><strong>Episode 16:</strong> by Anjali Doneria in Bellevue, WA (January 2021)<br> <a href="/tags/chromium-chronicle/">Previous episodes</a></p>
+<p>Ever wondered how Chrome keeps itself up-to-date on your desktop? Or how updates are served to Chromebooks, Chromecast, or Android? Wait no more! Read on to understand how Google Update works to serve regular updates to your devices.</p>
+<p><strong>Google Update is the tool for managing desktop (Mac and Windows) client install and update processes. It’s not just for Chrome!</strong> This tool serves updates via Auto-Update Server (also known as Omaha Server).</p>
+<p>On Windows, Google Update works both as an installer and updater for Google apps, while on Mac, Keystone is designed to centrally update all Mac software that Google ships; it is installed by the software it updates during install or first launch.</p>
+<p>{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/XPiCoUveSMYp24BbOT50.jpg”, alt=“Overview of how Omaha works”, height=“431”, width=“701” %}</p>
+<p>The update process is controlled by rules in Omaha Configuration Language. The following example shows an update for Chrome extensions update checks:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode protobuf"><code class="sourceCode protobuf"><a class="sourceLine" id="cb1-1" title="1">Update {</a>
+<a class="sourceLine" id="cb1-2" title="2">  # UpdatedVersion and subsequent Pair MUST be provided for chrome responses</a>
+<a class="sourceLine" id="cb1-3" title="3">  UpdatedVersion: <span class="st">&quot;1.8.3.0&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  Pair: {Tag: <span class="st">&quot;version&quot;</span> Value: <span class="st">&quot;{updated_version}&quot;</span> }</a>
+<a class="sourceLine" id="cb1-5" title="5">  Codebase: <span class="st">&quot;http://dl.google.com/foo/{updated_version}/item.crx&quot;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">}</a></code></pre></div>
+<p>Once you are done creating/changing your config, it can be deployed on Omaha Server. Alternatively, you can use Release Manager to automatically upload binaries to dl.google.com, generate and deploy the Omaha config. And voila, your desktop app is now ready to serve updates through Google Update!</p>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="dcterms.date" content="2020-10-06" />
+  <title>New in Chrome 86</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">New in Chrome 86</h1>
+<p class="date">2020-10-06</p>
+</header>
+<p>Chrome 86 is starting to roll out to stable now.</p>
+<p>{% YouTube id=‘GNuG-5m4Ud0’ %}</p>
+<p>Here’s what you need to know:</p>
+<ul>
+<li>The <a href="#fs-access">File System Access API</a> is now available in stable.</li>
+<li>There are new origin trials for <a href="#web-hid">Web HID</a> and the <a href="#win-place">Multi-screen Window Placement API</a>.</li>
+<li>There’s some new stuff in CSS, and <a href="#more">plenty more</a>.</li>
+</ul>
+<p>I’m <a href="https://twitter.com/petele">Pete LePage</a>, working and shooting from home, let’s dive in and see what’s new for developers in Chrome 86!</p>
+<h2 id="file-system-access-fs-access">File System Access {: #fs-access }</h2>
+<p>Today, you can use the <code>&lt;input type="file"&gt;</code> element read a file from disk. To save changes, add <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/download"><code>download</code></a> to an anchor tag, it’ll show the file picker, then saves the file. There’s no way to write to the same file you opened. That workflow is annoying.</p>
+<p>With the File System Access API (formerly the Native File System API), which graduated from it’s origin trial, and is now available in stable, you can call <code>showOpenFilePicker()</code>, which shows a file picker, then returns a file handle that you can use to read the file.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">getFileHandle</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="kw">const</span> opts <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">types</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb1-4" title="4">      <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-5" title="5">        <span class="dt">description</span><span class="op">:</span> <span class="st">&#39;Text Files&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb1-6" title="6">        <span class="dt">accept</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-7" title="7">          <span class="st">&#39;text/plain&#39;</span><span class="op">:</span> [<span class="st">&#39;.txt&#39;</span><span class="op">,</span> <span class="st">&#39;.text&#39;</span>]<span class="op">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8">          <span class="st">&#39;text/html&#39;</span><span class="op">:</span> [<span class="st">&#39;.html&#39;</span><span class="op">,</span> <span class="st">&#39;.htm&#39;</span>]</a>
+<a class="sourceLine" id="cb1-9" title="9">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-10" title="10">      <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    ]</a>
+<a class="sourceLine" id="cb1-12" title="12">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="cf">return</span> <span class="cf">await</span> <span class="va">window</span>.<span class="at">showOpenFilePicker</span>(opts)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="op">}</span></a></code></pre></div>
+<p>To save a file to disk, you can either use that file handle that you got earlier, or call <code>showSaveFilePicker()</code> to get a new file handle.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">saveFile</span>(fileHandle) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="cf">if</span> (<span class="op">!</span>fileHandle) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    fileHandle <span class="op">=</span> <span class="cf">await</span> <span class="va">window</span>.<span class="at">showSaveFilePicker</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="kw">const</span> writable <span class="op">=</span> <span class="cf">await</span> <span class="va">fileHandle</span>.<span class="at">createWritable</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="cf">await</span> <span class="va">writable</span>.<span class="at">write</span>(contents)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="cf">await</span> <span class="va">writable</span>.<span class="at">close</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="op">}</span></a></code></pre></div>
+<figure class="float-right">
+{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/9zxgacmiGxvljxLSDkOD.jpg”, alt=“permission prompt screen shot”, height=“281”, width=“800” %}
+<figcaption>
+Prompt to the user requesting permission to write to a file.
+</figcaption>
+</figure>
+<p>Before writing, Chrome will check if the user has granted write permission, if write permission hasn’t been granted, Chrome will prompt the user first.</p>
+<p>Calling <code>showDirectoryPicker()</code> will open a directory, allowing you to get a list of files, or create new files in that directory. Perfect for things like IDEs, or media players that interact with lots of files. Of course, before you can write anything, the user must grant write permission.</p>
+<p>There’s a lot more to the API, so check out the <a href="https://web.dev/file-system-access/">File System Access article</a> on web.dev.</p>
+<h2 id="origin-trial-webhid-web-hid">Origin Trial: WebHID {: #web-hid }</h2>
+<figure class="float-right">
+{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/s3z7rDiMGGKttmxRSSlL.jpg”, alt=“Game controller”, height=“534”, width=“800” %}
+<figcaption>
+Game controller.
+</figcaption>
+</figure>
+<p>Human interface devices, commonly referred to as HID, takes input from, or provides output to… humans. There’s a long tail of human interface devices that are too new, too old, or too uncommon to be accessible by the systems’ device drivers.</p>
+<p>The WebHID API, now available as an <a href="/origintrials/#/view_trial/1074108511127863297">origin trial</a>, solves this by providing a way to access these devices in JavaScript. With WebHID, web based games can take full advantage of gamepads, including all of the buttons, joysticks, sensors, triggers, LEDs, rumble packs, and more.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="va">butOpenHID</span>.<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">async</span> (e) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">const</span> deviceFilter <span class="op">=</span> <span class="op">{</span> <span class="dt">vendorId</span><span class="op">:</span> <span class="bn">0x0fd9</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">const</span> opts <span class="op">=</span> <span class="op">{</span> <span class="dt">filters</span><span class="op">:</span> [deviceFilter] <span class="op">};</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="kw">const</span> devices <span class="op">=</span> <span class="cf">await</span> <span class="va">navigator</span>.<span class="va">hid</span>.<span class="at">requestDevice</span>(opts)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  myDevice <span class="op">=</span> devices[<span class="dv">0</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="cf">await</span> <span class="va">myDevice</span>.<span class="at">open</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="va">myDevice</span>.<span class="at">addEventListener</span>(<span class="st">&#39;inputreport&#39;</span><span class="op">,</span> handleInpRpt)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Web based video chat apps can use the telephony buttons on specialized speakers, to start or end calls, mute the audio, and more.</p>
+<figure class="float-right">
+{% Img src=“image/0g2WvpbGRGdVs0aAPc6ObG7gkud2/zzryfqePHZDWDS8W4OQy.jpg”, alt=“HID device picker”, height=“513”, width=“800” %}
+<figcaption>
+HID device picker.
+</figcaption>
+</figure>
+<p>Of course, powerful APIs like this, can only interact with devices when the user explicitly chooses to allow it.</p>
+<p>Check out <a href="https://web.dev/hid/">Connecting to uncommon HID devices</a> for more details, examples, how you can get started, and a cool demo.</p>
+<p><br style="clear:both;"></p>
+<h2 id="origin-trial-multi-screen-window-placement-api-win-place">Origin Trial: Multi-Screen Window Placement API {: #win-place }</h2>
+<p>Today, you can get the properties of the screen the browser window is on by calling <code>window.screen()</code>. But what if you have a multi-monitor setup? Sorry, the browser will only tell you about the screen it’s currently on.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> screen <span class="op">=</span> <span class="va">window</span>.<span class="at">screen</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="va">console</span>.<span class="at">log</span>(screen)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co">// {</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">//   availHeight: 1612,</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">//   availLeft: 0,</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">//   availTop: 23,</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co">//   availWidth: 3008,</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co">//   colorDepth: 24,</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">//   orientation: {...},</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co">//   pixelDepth: 24,</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">//   width: 3008</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">// }</span></a></code></pre></div>
+<p>The Multi-Screen Window Placement API, starts an <a href="/origintrials/#/view_trial/1411878483180650497">origin trial</a> in Chrome 86, it allows you to enumerate the screens connected to your machine, and place windows on specific screens. Being able to place windows on specific screens is critical for things like presentation apps, financial services apps, and more.</p>
+<p>Before you can use the API, you’ll need to request permission. If you don’t, the browser will prompt the user when you first try to use it.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">async</span> <span class="kw">function</span> <span class="at">getPermission</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">const</span> opt <span class="op">=</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;window-placement&#39;</span> <span class="op">};</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="cf">try</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="kw">const</span> perm <span class="op">=</span> <span class="cf">await</span> <span class="va">navigator</span>.<span class="va">permissions</span>.<span class="at">query</span>(opt)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">    <span class="cf">return</span> <span class="va">perm</span>.<span class="at">state</span> <span class="op">===</span> <span class="st">&#39;granted&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">  <span class="op">}</span> <span class="cf">catch</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="op">}</span></a></code></pre></div>
+<p>Once the user has granted permission, calling <code>window.getScreens()</code> returns a promise that resolves with an array of <code>Screen</code> objects.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">const</span> screens <span class="op">=</span> <span class="cf">await</span> <span class="va">window</span>.<span class="at">getScreens</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="va">console</span>.<span class="at">log</span>(screens)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co">// [</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">//   {id: 0, internal: false, primary: true, left: 0, ...},</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co">//   {id: 1, internal: true, primary: false, left: 3008, ...},</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">// ]</span></a></code></pre></div>
+<p>I can then use that information when calling <code>requestFullScreen()</code>, or placing new windows. Tom has all the details in his <a href="https://web.dev/multi-screen-window-placement/">Managing several displays with the Multi-Screen Window Placement API</a> article on web.dev.</p>
+<h2 id="and-more-more">And more {: #more }</h2>
+<p>The new CSS selector, <code>:focus-visible</code>, lets you opt-in to the same heuristic the browser uses when it’s deciding whether to display the default focus indicator.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb7-1" title="1"><span class="co">/* Focusing the button with a keyboard will</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co">   show a dashed black line. */</span></a>
+<a class="sourceLine" id="cb7-3" title="3">button<span class="in">:focus-visible</span> {</a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="kw">outline</span>: <span class="dv">4</span><span class="dt">px</span> <span class="dv">dashed</span> <span class="cn">black</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">}</a>
+<a class="sourceLine" id="cb7-6" title="6"></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co">/* Focusing the button with a mouse, touch,</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="co">   or stylus will show a subtle drop shadow. */</span></a>
+<a class="sourceLine" id="cb7-9" title="9">button<span class="in">:focus:not(</span>:focus-visible<span class="in">)</span> {</a>
+<a class="sourceLine" id="cb7-10" title="10">  <span class="kw">outline</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-11" title="11">  <span class="kw">box-shadow</span>: <span class="dv">1</span><span class="dt">px</span> <span class="dv">1</span><span class="dt">px</span> <span class="dv">5</span><span class="dt">px</span> <span class="fu">rgba(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">.7</span><span class="fu">)</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-12" title="12">}</a></code></pre></div>
+<p>You can customize the color, size, or type of number or bullet for lists with the CSS <code>::marker</code> Pseudo-Element.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb8-1" title="1">li<span class="in">::marker</span> {</a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="kw">content</span>: <span class="st">&#39;😍&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-3" title="3">}</a>
+<a class="sourceLine" id="cb8-4" title="4">li<span class="in">:last-child::marker</span> {</a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="kw">content</span>: <span class="st">&#39;🤯&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-6" title="6">}</a></code></pre></div>
+<p>And Chrome Dev Summit will be coming to a screen near you, so stay tuned to our YouTube channel for more info!</p>
+<h2 id="further-reading">Further reading</h2>
+<p>This covers only some of the key highlights. Check the links below for additional changes in Chrome 86.</p>
+<ul>
+<li><a href="/blog/new-in-devtools-85">What’s new in Chrome DevTools (86)</a></li>
+<li><a href="https://developers.google.com/web/updates/2020/09/chrome-86-deps-rems">Chrome 86 deprecations &amp; removals</a></li>
+<li><a href="https://www.chromestatus.com/features#milestone%3D86">ChromeStatus.com updates for Chrome 86</a></li>
+<li><a href="https://v8.dev/blog/v8-release-86">What’s new in JavaScript in Chrome 86</a></li>
+<li><a href="https://chromium.googlesource.com/chromium/src/+log/85.0.4183.85..86.0.4240.75">Chromium source repository change list</a></li>
+</ul>
+<h2 id="subscribe">Subscribe</h2>
+<p>Want to stay up to date with our videos, then <a href="https://goo.gl/6FP1a5">subscribe</a> to our <a href="https://www.youtube.com/user/ChromeDevelopers/">Chrome Developers YouTube channel</a>, and you’ll get an email notification whenever we launch a new video, or add our <a href="https://developers.google.com/web/shows/rss.xml">RSS feed</a> to your feed reader.</p>
+<p>I’m Pete LePage, and as soon as Chrome 87 is released, I’ll be right here to tell you – what’s new in Chrome!</p>
+</body>
+</html>

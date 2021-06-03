@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>grammar_check_inference</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="grammar-check-inference-job-template">Grammar Check Inference Job Template</h1>
+<h2 id="trained-model">Trained model</h2>
+<p>This is a model inference process. The input data is the training models trained by <strong>Grammer Check Model Training Job</strong>, and this job will use <code>fairseq-generate</code> to correct test sentences.</p>
+<h2 id="how-to-use">How to use</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ol type="1">
+<li><p>Load model file to container</p>
+<pre><code> mkdir -p /data/grammarCheck/
+ cd /data/grammarCheck/
+ wget &lt;% $data.uri[0] %&gt;
+ tar xvf gramarCheck_data_bin.tgz
+ wget &lt;% $data.uri[1] %&gt;
+ tar xvf gramarCheck_checkpoint_best.tgz</code></pre></li>
+<li><p>When use this module, you should set three environment variables:</p>
+<pre><code> export PREPROCESSED_DATA_DIR=/data/grammarCheck/data-bin/
+ export MODEL_SAVE_DIR=/data/grammarCheck/checkpoints/</code></pre></li>
+<li><p>Install <code>fairseq</code></p>
+<pre><code>pip install fairseq</code></pre></li>
+</ol>
+<p>This job uses two data input, the preprocessed data and checkpoint files trained by <code>Grammer Check Model Training Job</code>:</p>
+<ul>
+<li><p><code>PREPROCESSED_DATA_DIR</code>: the training model path in container, by default it uses the output of couplet training job. If you want to use your own models. First make sure mount your models into container, and then change the <code>$DATA_DIR</code> with the path.</p></li>
+<li><p><code>MODEL_SAVE_DIR</code>: the service code, it will start a server at the given port.</p></li>
+</ul>
+<h3 id="inference-command">Inference command</h3>
+<pre><code>fairseq-generate ${PREPROCESSED_DATA_DIR} --path ${MODEL_SAVE_DIR}/checkpoint_best.pt --source-lang origin --target-lang correct</code></pre>
+<h2 id="how-to-check-the-result">How to check the result</h2>
+<p>You could check the inference results in stdout output.</p>
+</body>
+</html>

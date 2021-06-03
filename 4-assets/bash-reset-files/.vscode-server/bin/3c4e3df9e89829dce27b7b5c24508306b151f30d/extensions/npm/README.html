@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="node-npm">Node npm</h1>
+<p><strong>Notice:</strong> This extension is bundled with Visual Studio Code. It can be disabled but not uninstalled.</p>
+<h2 id="features">Features</h2>
+<h3 id="task-running">Task Running</h3>
+<p>This extension supports running npm scripts defined in the <code>package.json</code> as <a href="https://code.visualstudio.com/docs/editor/tasks">tasks</a>. Scripts with the name ‘build’, ‘compile’, or ‘watch’ are treated as build tasks.</p>
+<p>To run scripts as tasks, use the <strong>Tasks</strong> menu.</p>
+<p>For more information about auto detection of Tasks, see the <a href="https://code.visualstudio.com/Docs/editor/tasks#_task-autodetection">documentation</a>.</p>
+<h3 id="script-explorer">Script Explorer</h3>
+<p>The Npm Script Explorer shows the npm scripts found in your workspace. The explorer view is enabled by the setting <code>npm.enableScriptExplorer</code>. A script can be opened, run, or debug from the explorer.</p>
+<h3 id="run-scripts-from-the-editor">Run Scripts from the Editor</h3>
+<p>The extension supports to run the selected script as a task when editing the <code>package.json</code>file. You can either run a script from the hover shown on a script or using the command <code>Run Selected Npm Script</code>.</p>
+<h3 id="run-scripts-from-a-folder-in-the-explorer">Run Scripts from a Folder in the Explorer</h3>
+<p>The extension supports running a script as a task from a folder in the Explorer. The command <code>Run NPM Script in Folder...</code> shown in the Explorer context menu finds all scripts in <code>package.json</code> files that are contained in this folder. You can then select the script to be executed as a task from the resulting list. You enable this support with the <code>npm.runScriptFromFolder</code> which is <code>false</code> by default.</p>
+<h3 id="others">Others</h3>
+<p>The extension fetches data from https://registry.npmjs.org and https://registry.bower.io to provide auto-completion and information on hover features on npm dependencies.</p>
+<h2 id="settings">Settings</h2>
+<ul>
+<li><code>npm.autoDetect</code> - Enable detecting scripts as tasks, the default is <code>on</code>.</li>
+<li><code>npm.runSilent</code> - Run npm script with the <code>--silent</code> option, the default is <code>false</code>.</li>
+<li><code>npm.packageManager</code> - The package manager used to run the scripts: <code>auto</code>, <code>npm</code>, <code>yarn</code> or <code>pnpm</code>, the default is <code>auto</code>, which detects your package manager based on your files.</li>
+<li><code>npm.exclude</code> - Glob patterns for folders that should be excluded from automatic script detection. The pattern is matched against the <strong>absolute path</strong> of the package.json. For example, to exclude all test folders use ‘**/test/**’.</li>
+<li><code>npm.enableScriptExplorer</code> - Enable an explorer view for npm scripts.</li>
+<li><code>npm.scriptExplorerAction</code> - The default click action: <code>open</code> or <code>run</code>, the default is <code>open</code>.</li>
+<li><code>npm.enableRunFromFolder</code> - Enable running npm scripts from the context menu of folders in Explorer, the default is <code>false</code>.</li>
+<li><code>npm.scriptCodeLens.enable</code> - Enable/disable the code lenses to run a script, the default is <code>false</code>.</li>
+</ul>
+</body>
+</html>

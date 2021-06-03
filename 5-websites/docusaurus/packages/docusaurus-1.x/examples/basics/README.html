@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>README</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<p>This website was created with <a href="https://docusaurus.io/">Docusaurus</a>.</p>
+<h1 id="whats-in-this-document">What’s In This Document</h1>
+<ul>
+<li><a href="#get-started-in-5-minutes">Get Started in 5 Minutes</a></li>
+<li><a href="#directory-structure">Directory Structure</a></li>
+<li><a href="#editing-content">Editing Content</a></li>
+<li><a href="#adding-content">Adding Content</a></li>
+<li><a href="#full-documentation">Full Documentation</a></li>
+</ul>
+<h1 id="get-started-in-5-minutes">Get Started in 5 Minutes</h1>
+<ol type="1">
+<li>Make sure all the dependencies for the website are installed:</li>
+</ol>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Install dependencies</span></a>
+<a class="sourceLine" id="cb1-2" title="2">$ <span class="ex">yarn</span></a></code></pre></div>
+<ol start="2" type="1">
+<li>Run your dev server:</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Start the site</span></a>
+<a class="sourceLine" id="cb2-2" title="2">$ <span class="ex">yarn</span> start</a></code></pre></div>
+<h2 id="directory-structure">Directory Structure</h2>
+<p>Your project file structure should look something like this</p>
+<pre><code>my-docusaurus/
+  docs/
+    doc-1.md
+    doc-2.md
+    doc-3.md
+  website/
+    blog/
+      2016-3-11-oldest-post.md
+      2017-10-24-newest-post.md
+    core/
+    node_modules/
+    pages/
+    static/
+      css/
+      img/
+    package.json
+    sidebars.json
+    siteConfig.js</code></pre>
+<h1 id="editing-content">Editing Content</h1>
+<h2 id="editing-an-existing-docs-page">Editing an existing docs page</h2>
+<p>Edit docs by navigating to <code>docs/</code> and editing the corresponding document:</p>
+<p><code>docs/doc-to-be-edited.md</code></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb4-1" title="1">---</a>
+<a class="sourceLine" id="cb4-2" title="2">id: page-needs-edit</a>
+<a class="sourceLine" id="cb4-3" title="3">title: This Doc Needs To Be Edited</a>
+<a class="sourceLine" id="cb4-4" title="4">---</a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6">Edit me...</a></code></pre></div>
+<p>For more information about docs, click <a href="https://docusaurus.io/docs/en/navigation">here</a></p>
+<h2 id="editing-an-existing-blog-post">Editing an existing blog post</h2>
+<p>Edit blog posts by navigating to <code>website/blog</code> and editing the corresponding post:</p>
+<p><code>website/blog/post-to-be-edited.md</code></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb5-1" title="1">---</a>
+<a class="sourceLine" id="cb5-2" title="2">id: post-needs-edit</a>
+<a class="sourceLine" id="cb5-3" title="3">title: This Blog Post Needs To Be Edited</a>
+<a class="sourceLine" id="cb5-4" title="4">---</a>
+<a class="sourceLine" id="cb5-5" title="5"></a>
+<a class="sourceLine" id="cb5-6" title="6">Edit me...</a></code></pre></div>
+<p>For more information about blog posts, click <a href="https://docusaurus.io/docs/en/adding-blog">here</a></p>
+<h1 id="adding-content">Adding Content</h1>
+<h2 id="adding-a-new-docs-page-to-an-existing-sidebar">Adding a new docs page to an existing sidebar</h2>
+<ol type="1">
+<li>Create the doc as a new markdown file in <code>/docs</code>, example <code>docs/newly-created-doc.md</code>:</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode md"><code class="sourceCode markdown"><a class="sourceLine" id="cb6-1" title="1">---</a>
+<a class="sourceLine" id="cb6-2" title="2">id: newly-created-doc</a>
+<a class="sourceLine" id="cb6-3" title="3">title: This Doc Needs To Be Edited</a>
+<a class="sourceLine" id="cb6-4" title="4">---</a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6">My new content here..</a></code></pre></div>
+<ol type="1">
+<li>Refer to that doc’s ID in an existing sidebar in <code>website/sidebars.json</code>:</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="co">// Add newly-created-doc to the Getting Started category of docs</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="op">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="st">&quot;docs&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-4" title="4">    <span class="st">&quot;Getting Started&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb7-5" title="5">      <span class="st">&quot;quick-start&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb7-6" title="6">      <span class="st">&quot;newly-created-doc&quot;</span> <span class="co">// new doc here</span></a>
+<a class="sourceLine" id="cb7-7" title="7">    ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb7-8" title="8">    ...</a>
+<a class="sourceLine" id="cb7-9" title="9">  <span class="op">},</span></a>
+<a class="sourceLine" id="cb7-10" title="10">  ...</a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="op">}</span></a></code></pre></div>
+<p>For more information about adding new docs, click <a href="https://docusaurus.io/docs/en/navigation">here</a></p>
+<h2 id="adding-a-new-blog-post">Adding a new blog post</h2>
+<ol type="1">
+<li>Make sure there is a header link to your blog in <code>website/siteConfig.js</code>:</li>
+</ol>
+<p><code>website/siteConfig.js</code></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1">headerLinks<span class="op">:</span> [</a>
+<a class="sourceLine" id="cb8-2" title="2">    ...</a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="op">{</span> <span class="dt">blog</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;Blog&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    ...</a>
+<a class="sourceLine" id="cb8-5" title="5">]</a></code></pre></div>
+<ol start="2" type="1">
+<li>Create the blog post with the format <code>YYYY-MM-DD-My-Blog-Post-Title.md</code> in <code>website/blog</code>:</li>
+</ol>
+<p><code>website/blog/2018-05-21-New-Blog-Post.md</code></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb9-1" title="1">---</a>
+<a class="sourceLine" id="cb9-2" title="2">author: Frank Li</a>
+<a class="sourceLine" id="cb9-3" title="3">authorURL: https://twitter.com/foobarbaz</a>
+<a class="sourceLine" id="cb9-4" title="4">authorFBID: 503283835</a>
+<a class="sourceLine" id="cb9-5" title="5">title: New Blog Post</a>
+<a class="sourceLine" id="cb9-6" title="6">---</a>
+<a class="sourceLine" id="cb9-7" title="7"></a>
+<a class="sourceLine" id="cb9-8" title="8">Lorem Ipsum...</a></code></pre></div>
+<p>For more information about blog posts, click <a href="https://docusaurus.io/docs/en/adding-blog">here</a></p>
+<h2 id="adding-items-to-your-sites-top-navigation-bar">Adding items to your site’s top navigation bar</h2>
+<ol type="1">
+<li>Add links to docs, custom pages or external links by editing the headerLinks field of <code>website/siteConfig.js</code>:</li>
+</ol>
+<p><code>website/siteConfig.js</code></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="dt">headerLinks</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb10-3" title="3">    ...</a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="co">/* you can add docs */</span></a>
+<a class="sourceLine" id="cb10-5" title="5">    <span class="op">{</span> <span class="dt">doc</span><span class="op">:</span> <span class="st">&#39;my-examples&#39;</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;Examples&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-6" title="6">    <span class="co">/* you can add custom pages */</span></a>
+<a class="sourceLine" id="cb10-7" title="7">    <span class="op">{</span> <span class="dt">page</span><span class="op">:</span> <span class="st">&#39;help&#39;</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;Help&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-8" title="8">    <span class="co">/* you can add external links */</span></a>
+<a class="sourceLine" id="cb10-9" title="9">    <span class="op">{</span> <span class="dt">href</span><span class="op">:</span> <span class="st">&#39;https://github.com/facebook/docusaurus&#39;</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;GitHub&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb10-10" title="10">    ...</a>
+<a class="sourceLine" id="cb10-11" title="11">  ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb10-12" title="12">  ...</a>
+<a class="sourceLine" id="cb10-13" title="13"><span class="op">}</span></a></code></pre></div>
+<p>For more information about the navigation bar, click <a href="https://docusaurus.io/docs/en/navigation">here</a></p>
+<h2 id="adding-custom-pages">Adding custom pages</h2>
+<ol type="1">
+<li>Docusaurus uses React components to build pages. The components are saved as .js files in <code>website/pages/en</code>:</li>
+<li>If you want your page to show up in your navigation header, you will need to update <code>website/siteConfig.js</code> to add to the <code>headerLinks</code> element:</li>
+</ol>
+<p><code>website/siteConfig.js</code></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="dt">headerLinks</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb11-3" title="3">    ...</a>
+<a class="sourceLine" id="cb11-4" title="4">    <span class="op">{</span> <span class="dt">page</span><span class="op">:</span> <span class="st">&#39;my-new-custom-page&#39;</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">&#39;My New Custom Page&#39;</span> <span class="op">},</span></a>
+<a class="sourceLine" id="cb11-5" title="5">    ...</a>
+<a class="sourceLine" id="cb11-6" title="6">  ]<span class="op">,</span></a>
+<a class="sourceLine" id="cb11-7" title="7">  ...</a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="op">}</span></a></code></pre></div>
+<p>For more information about custom pages, click <a href="https://docusaurus.io/docs/en/custom-pages">here</a>.</p>
+<h1 id="full-documentation">Full Documentation</h1>
+<p>Full documentation can be found on the <a href="https://docusaurus.io/">website</a>.</p>
+</body>
+</html>
