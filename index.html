@@ -13,7 +13,21 @@
 </head>
 <body>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css" />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.js"></script>
+  <script type="text/javascript">
+    algoliasearchNetlify({
+      appId: 'KR2EZWQOOJ',
+      apiKey: '130703a64f46ec7d6e3c5189ebcd88e6',
+      siteId: '75476e4e-6edd-4555-8914-89385ee81cdd',
+      branch: 'master',
+      selector: 'div#search',
+    });
+  </script>
+
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css" />
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.js"></script>
 <script type="text/javascript">
   algoliasearchNetlify({
@@ -23,7 +37,7 @@
     branch: 'master',
     selector: 'div#search',
   });
-</script>
+</script> -->
 
 <ul>
 
@@ -40,5 +54,31 @@
 </ul>
   <script async src="https://cse.google.com/cse.js?cx=07d4440552681e18d"></script>
 <div class="gcse-search"></div>
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js" integrity="sha256-EXPXz4W6pQgfYY3yTpnDa3OH8/EPn16ciVsPQ/ypsjk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.8.3/dist/instantsearch.production.min.js" integrity="sha256-LAGhRRdtVoD6RLo2qDQsU2mp+XVSciKRC8XPOBWmofM=" crossorigin="anonymous"></script>
+
+
+<script>
+  const searchClient = algoliasearch('KR2EZWQOOJ', '130703a64f46ec7d6e3c5189ebcd88e6');
+
+const search = instantsearch({
+  indexName: 'demo_ecommerce',
+  searchClient,
+});
+
+search.addWidgets([
+  instantsearch.widgets.searchBox({
+    container: '#searchbox',
+  }),
+
+  instantsearch.widgets.hits({
+    container: '#hits',
+  })
+]);
+
+search.start();
+
+
+</script>
 </body>
 </html>

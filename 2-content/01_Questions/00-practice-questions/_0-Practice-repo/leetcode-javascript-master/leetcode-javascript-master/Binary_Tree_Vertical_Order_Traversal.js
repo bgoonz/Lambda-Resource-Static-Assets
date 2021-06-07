@@ -10,26 +10,26 @@
  * @return {number[][]}
  */
 
-var verticalOrder = function(root) {
-    var res = [];
+const verticalOrder = root => {
+    const res = [];
     
     if(root === null) {
         return res;
     }
     
-    var hash = {};
-    var queue = [];
+    const hash = {};
+    const queue = [];
     queue.push([root, 0]);
-    var min = Infinity;
-    var max = -Infinity;
+    let min = Infinity;
+    let max = -Infinity;
     
     while(queue.length) {
-        var len = queue.length;
+        const len = queue.length;
         
-        for(var i = 0; i < len; i++) {
-            var pair = queue.shift();
-            var node = pair[0];
-            var order = pair[1];
+        for(let i = 0; i < len; i++) {
+            const pair = queue.shift();
+            const node = pair[0];
+            const order = pair[1];
             
             hash[order] = hash[order] || [];
             hash[order].push(node.val);

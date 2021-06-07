@@ -12,7 +12,7 @@ Question: What will be the output of the code below?
 
 Question: How would you make this work?
 
-    add(2, 5); add(2)(5); 
+    add(2, 5); add(2)(5);
 
 Question: What value is returned from the following statement?
 
@@ -49,6 +49,5 @@ Question: What will the code below output to the console and why?
 Question: Consider the two functions below. Will they both return the same thing? Why or why not?
 
     function foo1(){  return {      bar: "hello"  };}function foo2(){  return  {      bar: "hello"  };}
-
 
 [Source](http://localhost:9090/questions/coding-questions/)

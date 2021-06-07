@@ -9,11 +9,11 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-var postorderTraversal = function(root) {
-    var result = [];
-    var stack = [];
-    var prev = null;
-    var curr = null;
+const postorderTraversal = root => {
+    const result = [];
+    const stack = [];
+    let prev = null;
+    let curr = null;
     
     if(root === null) {
         return result;

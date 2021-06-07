@@ -78,7 +78,7 @@ Note: Do not use the eval built-in library function.
 
 
 console.log(calculate("10+20-((2-4)*6-5)*6"));
-var calculate = function(s) {
+var calculate = s => {
 
 
 

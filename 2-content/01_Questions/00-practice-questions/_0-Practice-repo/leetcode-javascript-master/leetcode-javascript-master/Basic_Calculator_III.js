@@ -1,16 +1,16 @@
 function evaluateStr(expression) {
-  var values = [];
-  var ops = [];
+  const values = [];
+  const ops = [];
 
-  for(var i = 0; i < expression.length; i++) {
-    var ch = expression[i];
+  for(let i = 0; i < expression.length; i++) {
+    const ch = expression[i];
 
     if(ch === ' ') {
       continue;
     }
 
     if(ch.match(/\d/)) {
-      var numStr = '';
+      let numStr = '';
 
       while(i < expression.length && expression[i].match(/\d/)) {
         numStr += expression[i++];
@@ -40,7 +40,7 @@ function evaluateStr(expression) {
 }
 
 function hasPrecedence(op1, op2) {
-  var precedenceMap = {
+  const precedenceMap = {
     '=': 1,
     '(': 2,
     '+': 3,
@@ -51,8 +51,8 @@ function hasPrecedence(op1, op2) {
     '^': 5
   };
 
-  var precendence1 = precedenceMap[op1];
-  var precendence2 = precedenceMap[op2];
+  const precendence1 = precedenceMap[op1];
+  const precendence2 = precedenceMap[op2];
 
   return precendence2 >= precendence1;
 }
@@ -70,7 +70,7 @@ function applyOp(val1, val2, op) {
 }
 
 
-var data = [
+const data = [
   '(11+(22*3-4)*5-(3+1))',
   '11+22*3+(1*3+1)',
   '11+22*3-(1*3+1)',

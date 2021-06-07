@@ -1,33 +1,34 @@
 function conjuctNamesWithLimit(names, limit) {
-  var left, right;
-  
+  let left;
+  let right;
+
   if(names.length === 0) {
     return '';
   }
-  
+
   if(limit === 0) {
-    return names.length + ' more';
+    return `${names.length} more`;
   }
-  
+
   if(limit >= names.length) {
     left = names.slice(0, -1);
     right = names.slice(-1)[0];
-    return left.join(', ') + ' and ' + right;
+    return `${left.join(', ')} and ${right}`;
   } else {
     left = names.slice(0, limit);
     right = names.slice(limit);    
-    return left.join(', ') + ' and ' + right.length + ' more';
+    return `${left.join(', ')} and ${right.length} more`;
   }
 }
 
-var data = [
+const data = [
   [],
   ['a','b'],
   ['a','b','c'],
   ['a','b','c','d']
-]
+];
 
-for(var i = 0; i < 5; i++){
+for(let i = 0; i < 5; i++){
   data.forEach((d)=>{
     console.log(conjuctNamesWithLimit(d, i));
   });

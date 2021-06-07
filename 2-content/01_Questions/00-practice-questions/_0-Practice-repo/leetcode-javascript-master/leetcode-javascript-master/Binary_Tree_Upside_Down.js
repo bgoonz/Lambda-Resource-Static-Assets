@@ -32,8 +32,8 @@
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-var upsideDownBinaryTree = function(root) {
-    var newRoot = root;
+var upsideDownBinaryTree = root => {
+    let newRoot = root;
     
     generateUpsideDownHelper(root);
     
@@ -48,7 +48,7 @@ var upsideDownBinaryTree = function(root) {
         }
     
         if(root.left) {
-            var ret = generateUpsideDownHelper(root.left);
+            const ret = generateUpsideDownHelper(root.left);
             ret.left = root.right;
             ret.right = root;
             root.left = null;
@@ -62,7 +62,7 @@ var upsideDownBinaryTree = function(root) {
 
 
 // simpler solution
-var upsideDownBinaryTree = function(root) {
+var upsideDownBinaryTree = root => {
     // second condition ensure the left most child will be the new root
     if (!root || (!root.left && !root.right)) {
         return root;

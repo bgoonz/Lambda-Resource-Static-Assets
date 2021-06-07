@@ -19,8 +19,8 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-var rightSideView = function(root) {
-    var result = [];
+const rightSideView = root => {
+    const result = [];
     
     if(root === null) {
         return result;
@@ -30,10 +30,10 @@ var rightSideView = function(root) {
     queue.push(root);
     
     while(queue.length > 0) {
-        var len = queue.length;
+        const len = queue.length;
         
-        for(var i = 0; i < len; i++) {
-            var node = queue.shift();
+        for(let i = 0; i < len; i++) {
+            const node = queue.shift();
             
             if(node.left) {
                 queue.push(node.left);

@@ -1,268 +1,896 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>Pytania z CSS</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-  </style>
-</head>
-<body>
-<header id="title-block-header">
-<h1 class="title">Pytania z CSS</h1>
-</header>
-<p>Odpowiedzi do <a href="https://github.com/h5bp/Front-end-Developer-Interview-Questions/blob/master/src/questions/css-questions.md">Front-end Job Interview Questions - CSS Questions</a>. Pull requesty mile widziane, jeśli masz sugestie i poprawki!</p>
-<h2 id="spis-treści">Spis treści</h2>
-<ul>
-<li><a href="#czym-jest-specyficzność-selektora-css-i-jak-działa">Czym jest specyficzność selektora CSS i jak działa?</a></li>
-<li><a href="#jaka-jest-różnica-pomiędzy-css-resetting-oraz-normalizing-które-wybrałbyś-i-dlaczego">Jaka jest różnica pomiędzy CSS “resetting” oraz “normalizing”? Które wybrałbyś, i dlaczego?</a></li>
-<li><a href="#opisz-floaty-i-jak-one-działają">Opisz <code>float</code>y i jak one działają.</a></li>
-<li><a href="#opisz-z-index-i-jak-powstaje-stacking-context">Opisz <code>z-index</code> i jak powstaje stacking context.</a></li>
-<li><a href="#opisz-block-formatting-context-bfc-i-jak-działa">Opisz Block Formatting Context (BFC) i jak działa.</a></li>
-<li><a href="#jakie-są-różne-techniki-czyszczenia-i-które-są-odpowiednie-w-jakim-kontekście">Jakie są różne techniki czyszczenia i które są odpowiednie w jakim kontekście?</a></li>
-<li><a href="#wyjaśnij-css-sprites-i-jak-zaimplementujesz-je-na-stronie-lub-witrynie">Wyjaśnij CSS sprites, i jak zaimplementujesz je na stronie lub witrynie.</a></li>
-<li><a href="#jak-podchodziłbyś-do-rozwiązywania-problemów-związanych-ze-stylem-specyficznym-dla-przeglądarki">Jak podchodziłbyś do rozwiązywania problemów związanych ze stylem specyficznym dla przeglądarki?</a></li>
-<li><a href="#jak-wyświetlasz-swoje-strony-w-przeglądarkach-z-ograniczeniami-funkcji-jakich-technikprocesów-używasz">Jak wyświetlasz swoje strony w przeglądarkach z ograniczeniami funkcji? Jakich technik/procesów używasz?</a></li>
-<li><a href="#jakie-są-różne-sposoby-wizualnego-ukrywania-treści-i-udostępniania-jej-tylko-dla-czytników-ekranu">Jakie są różne sposoby wizualnego ukrywania treści (i udostępniania jej tylko dla czytników ekranu)?</a></li>
-<li><a href="#czy-kiedykolwiek-korzystałeś-z-systemu-siatki-grid-system-a-jeśli-tak-to-co-preferujesz">Czy kiedykolwiek korzystałeś z systemu siatki (grid system), a jeśli tak, to co preferujesz?</a></li>
-<li><a href="#czy-używałeś-lub-implementowałeś-media-queries-lub-mobile-specific-layoutsCSS">Czy używałeś lub implementowałeś media queries lub mobile-specific layouts/CSS?</a></li>
-<li><a href="#czy-znasz-stylizację-cvg">Czy znasz stylizację SVG?</a></li>
-<li><span class="citation" data-cites="media">[Czy możesz podać przykład właściwości @media innej niż screen?]</span>(#czy-możesz-podać-przykład-właściwości-media-innej-niż-screen)</li>
-<li><a href="#jakie-są-tricki-do-pisania-wydajnego-css">Jakie są “tricki” do pisania wydajnego CSS?</a></li>
-<li><a href="#jakie-są-zaletywady-korzystania-z-preprocesorów-css">Jakie są zalety/wady korzystania z preprocesorów CSS?</a></li>
-<li><a href="#opisz-co-lubisz-a-czego-nie-w-preprocesorach-css-z-których-korzystałeś">Opisz, co lubisz, a czego nie w preprocesorach CSS, z których korzystałeś.</a></li>
-<li><a href="#jak-zaimplementowałbyś-kompozycję-do-projektowania-stron-internetowych-która-wykorzystuje-niestandardowe-czcionki">Jak zaimplementowałbyś kompozycję do projektowania stron internetowych, która wykorzystuje niestandardowe czcionki?</a></li>
-<li><a href="#wyjaśnij-w-jaki-sposób-przeglądarka-określa-które-elementy-pasują-do-selektora-css">Wyjaśnij, w jaki sposób przeglądarka określa, które elementy pasują do selektora CSS.</a></li>
-<li><a href="#opisz-pseudoelementy-i-omów-do-czego-służą">Opisz pseudoelementy i omów, do czego służą.</a></li>
-<li><a href="#wyjaśnij-swoje-zrozumienie-box-model-i-sposób-w-jaki-chcesz-aby-przeglądarka-w-css-renderowała-układ-w-różnych-modelach-pudełkowych">Wyjaśnij swoje zrozumienie box model i sposób, w jaki chcesz, aby przeglądarka w CSS renderowała układ w różnych modelach pudełkowych.</a></li>
-<li><a href="#co-robi---box-sizing-border-box--jakie-są-tego-zalety">Co robi <code>* { box-sizing: border-box; }</code>? Jakie są tego zalety?</a></li>
-<li><a href="#czym-jest-właściwość-display-w-css-i-czy-możesz-podać-kilka-przykładów-jej-użycia">Czym jest właściwość <code>display</code> w CSS i czy możesz podać kilka przykładów jej użycia?</a></li>
-<li><a href="#jaka-jest-różnica-pomiędzy-inline-a-inline-block">Jaka jest różnica pomiędzy <code>inline</code>, a <code>inline-block</code>?</a></li>
-<li><a href="#jaka-jest-różnica-między-pozycjonowaniem-relative-fixed-absolute-i-static-elementu">Jaka jest różnica między pozycjonowaniem <code>relative</code>, <code>fixed</code>, <code>absolute</code> i <code>static</code> elementu?</a></li>
-<li><a href="#z-jakich-istniejących-frameworków-css-korzystałeś-lokalnie-lub-na-produkcji-jak-byś-je-zmieniłulepszył">Z jakich istniejących frameworków CSS korzystałeś lokalnie lub na produkcji? Jak byś je zmienił/ulepszył?</a></li>
-<li><a href="#czy-robiłeś-coś-w-nowej-specyfikacji-css-flexbox-lub-grid">Czy robiłeś coś w nowej specyfikacji CSS Flexbox lub Grid?</a></li>
-<li><a href="#czy-potrafisz-wyjaśnić-różnicę-między-kodowaniem-strony-internetowej-aby-była-responsywna-a-używaniem-mobile-first-strategy">Czy potrafisz wyjaśnić różnicę między kodowaniem strony internetowej, aby była responsywna, a używaniem mobile-first strategy?</a></li>
-<li><a href="#czym-różni-się-projektowanie-responsywne-od-projektowania-adaptacyjnego">Czym różni się projektowanie responsywne od projektowania adaptacyjnego?</a></li>
-<li><a href="#czy-kiedykolwiek-pracowałeś-z-grafiką-retina-jeśli-tak-kiedy-i-jakich-technik-użyłeś">Czy kiedykolwiek pracowałeś z grafiką Retina? Jeśli tak, kiedy i jakich technik użyłeś?</a></li>
-<li><a href="#czy-jest-jakiś-powód-dla-którego-chciałbyś-użyć-translate-zamiast-pozycjonowania-absolute-lub-odwrotnie-i-dlaczego">Czy jest jakiś powód, dla którego chciałbyś użyć <code>translate ()</code> zamiast pozycjonowania <code>absolute</code> lub odwrotnie? I dlaczego?</a></li>
-</ul>
-<h3 id="czym-jest-specyficzność-selektora-css-i-jak-działa">Czym jest specyficzność selektora CSS i jak działa?</h3>
-<p>Przeglądarka określa, jakie style mają być wyświetlane w elemencie, w zależności od specyfiki reguł CSS. Zakładamy, że przeglądarka już określiła reguły, które pasują do określonego elementu. Wśród reguł dopasowania, specyfika, cztery wartości oddzielone przecinkami, <code>a, b, c, d</code> są obliczane dla każdej reguły na podstawie:</p>
-<ol type="1">
-<li><code>a</code> określa, czy stosowane są style wbudowane. Jeśli deklaracja właściwości jest stylem wbudowanym w elemencie, <code>a</code> jest 1, w przeciwnym razie 0.</li>
-<li><code>b</code> jest numerem ID selektorów.</li>
-<li><code>c</code> to liczba selektorów klas, atrybutów i pseudoklas.</li>
-<li><code>d</code> to liczba znaczników i selektorów pseudoelementów.</li>
-</ol>
-<p>Wynikająca z tego specyficzność nie jest wynikiem, ale macierzą wartości, które można porównać kolumna po kolumnie. Porównując selektory w celu ustalenia, która ma najwyższą swoistość, spójrz od lewej do prawej i porównaj najwyższą wartość w każdej kolumnie. Tak więc wartość w kolumnie <code>b</code> zastąpi wartości w kolumnach <code>c</code> i <code>d</code>, bez względu na to, jakie mogą być. Jako taka, specyfika <code>0,1,0,0</code> byłaby większa niż jedno z <code>0,0,10,10</code>.</p>
-<p>W przypadkach o jednakowej specyficzności: najnowsza reguła się liczy. Jeśli dwukrotnie zapisałeś tę samą regułę w arkuszu stylów (niezależnie od wewnętrznego lub zewnętrznego), wówczas dolna reguła w arkuszu stylów jest bliżej elementu, który ma być stylizowany, jest uważana za bardziej szczegółową i dlatego zostanie zastosowana.</p>
-<p>Pisałbym reguły CSS o niskiej specyficzności, aby w razie potrzeby można je było łatwo zastąpić. Pisząc kod biblioteki komponentu interfejsu użytkownika CSS, ważne jest, aby miały niską specyficzność, aby użytkownicy biblioteki mogli je zastąpić bez stosowania zbyt skomplikowanych reguł CSS tylko ze względu na zwiększenie specyficzności lub uciekanie się do <code>!important</code>.</p>
-<h6 id="bibliografia">Bibliografia</h6>
-<ul>
-<li>https://www.smashingmagazine.com/2007/07/css-specificity-things-you-should-know/</li>
-<li>https://www.sitepoint.com/web-foundations/specificity/</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="jaka-jest-różnica-pomiędzy-css-resetting-oraz-normalizing-które-wybrałbyś-i-dlaczego">Jaka jest różnica pomiędzy CSS “resetting” oraz “normalizing”? Które wybrałbyś, i dlaczego?</h3>
-<ul>
-<li><strong>Resetting</strong> - Resetowanie ma na celu usunięcie wszystkich domyślnych stylów przeglądarki z elementów. Na przykład <code>margin</code>, <code>padding</code>, <code>font-size</code> wszystkich elementów są resetowane, aby były takie same. Będziesz musiał zmienić styl dla wspólnych elementów typograficznych.</li>
-<li><strong>Normalizing</strong> - Normalizacja zachowuje użyteczne style domyślne zamiast “unstyling” wszystkiego. Poprawia również błędy w typowych zależnościach przeglądarki.</li>
-</ul>
-<p>Zdecydowałbym się zresetować, gdy mam bardzo niestandardowy lub niekonwencjonalny projekt strony, tak że muszę zrobić dużo własnej stylizacji i nie muszę zachowywać żadnej domyślnej stylizacji.</p>
-<h6 id="bibliografia-1">Bibliografia</h6>
-<ul>
-<li>https://stackoverflow.com/questions/6887336/what-is-the-difference-between-normalize-css-and-reset-css</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="opisz-floaty-i-jak-one-działają.">Opisz <code>float</code>y i jak one działają.</h3>
-<p>Float to właściwość pozycjonowania CSS. Elementy pływające (floated elements) pozostają częścią przepływu strony i będą wpływać na położenie innych elementów (np. tekst będzie płynął wokół elementów pływających), w przeciwieństwie do elementów <code>position: absolute</code>, które są usuwane z przepływu strony.</p>
-<p>Właściwość <code>clear</code> CSS może być użyta do pozycjonowania poniżej elementów pływających <code>left</code>/<code>right</code>/<code>both</code>.</p>
-<p>Jeśli element nadrzędny zawiera wyłącznie elementy pływające, jego wysokość zostanie zwinięta do zera. Można to naprawić, usuwając float za pływającymi elementami w kontenerze, ale przed zamknięciem kontenera.</p>
-<p>Hack <code>.clearfix</code> używa sprytnego CSS <a href="#describe-pseudo-elements-and-discuss-what-they-are-used-for">pseudo selektora</a> (<code>:after</code>) do czyszczenia float’ów. Zamiast ustawiać przepełnienie dla elementu nadrzędnego, stosuje się do niego dodatkową klasę <code>clearfix</code>. Następnie stosuje ten CSS:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">.clearfix</span><span class="in">:after</span> {</a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>Pytania z CSS</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <header id="title-block-header">
+      <h1 class="title">Pytania z CSS</h1>
+    </header>
+    <p>
+      Odpowiedzi do
+      <a
+        href="https://github.com/h5bp/Front-end-Developer-Interview-Questions/blob/master/src/questions/css-questions.md"
+        >Front-end Job Interview Questions - CSS Questions</a
+      >. Pull requesty mile widziane, jeśli masz sugestie i poprawki!
+    </p>
+    <h2 id="spis-treści">Spis treści</h2>
+    <ul>
+      <li>
+        <a href="#czym-jest-specyficzność-selektora-css-i-jak-działa"
+          >Czym jest specyficzność selektora CSS i jak działa?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#jaka-jest-różnica-pomiędzy-css-resetting-oraz-normalizing-które-wybrałbyś-i-dlaczego"
+          >Jaka jest różnica pomiędzy CSS “resetting” oraz “normalizing”? Które
+          wybrałbyś, i dlaczego?</a
+        >
+      </li>
+      <li>
+        <a href="#opisz-floaty-i-jak-one-działają"
+          >Opisz <code>float</code>y i jak one działają.</a
+        >
+      </li>
+      <li>
+        <a href="#opisz-z-index-i-jak-powstaje-stacking-context"
+          >Opisz <code>z-index</code> i jak powstaje stacking context.</a
+        >
+      </li>
+      <li>
+        <a href="#opisz-block-formatting-context-bfc-i-jak-działa"
+          >Opisz Block Formatting Context (BFC) i jak działa.</a
+        >
+      </li>
+      <li>
+        <a
+          href="#jakie-są-różne-techniki-czyszczenia-i-które-są-odpowiednie-w-jakim-kontekście"
+          >Jakie są różne techniki czyszczenia i które są odpowiednie w jakim
+          kontekście?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#wyjaśnij-css-sprites-i-jak-zaimplementujesz-je-na-stronie-lub-witrynie"
+          >Wyjaśnij CSS sprites, i jak zaimplementujesz je na stronie lub
+          witrynie.</a
+        >
+      </li>
+      <li>
+        <a
+          href="#jak-podchodziłbyś-do-rozwiązywania-problemów-związanych-ze-stylem-specyficznym-dla-przeglądarki"
+          >Jak podchodziłbyś do rozwiązywania problemów związanych ze stylem
+          specyficznym dla przeglądarki?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#jak-wyświetlasz-swoje-strony-w-przeglądarkach-z-ograniczeniami-funkcji-jakich-technikprocesów-używasz"
+          >Jak wyświetlasz swoje strony w przeglądarkach z ograniczeniami
+          funkcji? Jakich technik/procesów używasz?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#jakie-są-różne-sposoby-wizualnego-ukrywania-treści-i-udostępniania-jej-tylko-dla-czytników-ekranu"
+          >Jakie są różne sposoby wizualnego ukrywania treści (i udostępniania
+          jej tylko dla czytników ekranu)?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#czy-kiedykolwiek-korzystałeś-z-systemu-siatki-grid-system-a-jeśli-tak-to-co-preferujesz"
+          >Czy kiedykolwiek korzystałeś z systemu siatki (grid system), a jeśli
+          tak, to co preferujesz?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#czy-używałeś-lub-implementowałeś-media-queries-lub-mobile-specific-layoutsCSS"
+          >Czy używałeś lub implementowałeś media queries lub mobile-specific
+          layouts/CSS?</a
+        >
+      </li>
+      <li><a href="#czy-znasz-stylizację-cvg">Czy znasz stylizację SVG?</a></li>
+      <li>
+        <span class="citation" data-cites="media"
+          >[Czy możesz podać przykład właściwości @media innej niż
+          screen?]</span
+        >(#czy-możesz-podać-przykład-właściwości-media-innej-niż-screen)
+      </li>
+      <li>
+        <a href="#jakie-są-tricki-do-pisania-wydajnego-css"
+          >Jakie są “tricki” do pisania wydajnego CSS?</a
+        >
+      </li>
+      <li>
+        <a href="#jakie-są-zaletywady-korzystania-z-preprocesorów-css"
+          >Jakie są zalety/wady korzystania z preprocesorów CSS?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#opisz-co-lubisz-a-czego-nie-w-preprocesorach-css-z-których-korzystałeś"
+          >Opisz, co lubisz, a czego nie w preprocesorach CSS, z których
+          korzystałeś.</a
+        >
+      </li>
+      <li>
+        <a
+          href="#jak-zaimplementowałbyś-kompozycję-do-projektowania-stron-internetowych-która-wykorzystuje-niestandardowe-czcionki"
+          >Jak zaimplementowałbyś kompozycję do projektowania stron
+          internetowych, która wykorzystuje niestandardowe czcionki?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#wyjaśnij-w-jaki-sposób-przeglądarka-określa-które-elementy-pasują-do-selektora-css"
+          >Wyjaśnij, w jaki sposób przeglądarka określa, które elementy pasują
+          do selektora CSS.</a
+        >
+      </li>
+      <li>
+        <a href="#opisz-pseudoelementy-i-omów-do-czego-służą"
+          >Opisz pseudoelementy i omów, do czego służą.</a
+        >
+      </li>
+      <li>
+        <a
+          href="#wyjaśnij-swoje-zrozumienie-box-model-i-sposób-w-jaki-chcesz-aby-przeglądarka-w-css-renderowała-układ-w-różnych-modelach-pudełkowych"
+          >Wyjaśnij swoje zrozumienie box model i sposób, w jaki chcesz, aby
+          przeglądarka w CSS renderowała układ w różnych modelach
+          pudełkowych.</a
+        >
+      </li>
+      <li>
+        <a href="#co-robi---box-sizing-border-box--jakie-są-tego-zalety"
+          >Co robi <code>* { box-sizing: border-box; }</code>? Jakie są tego
+          zalety?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#czym-jest-właściwość-display-w-css-i-czy-możesz-podać-kilka-przykładów-jej-użycia"
+          >Czym jest właściwość <code>display</code> w CSS i czy możesz podać
+          kilka przykładów jej użycia?</a
+        >
+      </li>
+      <li>
+        <a href="#jaka-jest-różnica-pomiędzy-inline-a-inline-block"
+          >Jaka jest różnica pomiędzy <code>inline</code>, a
+          <code>inline-block</code>?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#jaka-jest-różnica-między-pozycjonowaniem-relative-fixed-absolute-i-static-elementu"
+          >Jaka jest różnica między pozycjonowaniem <code>relative</code>,
+          <code>fixed</code>, <code>absolute</code> i
+          <code>static</code> elementu?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#z-jakich-istniejących-frameworków-css-korzystałeś-lokalnie-lub-na-produkcji-jak-byś-je-zmieniłulepszył"
+          >Z jakich istniejących frameworków CSS korzystałeś lokalnie lub na
+          produkcji? Jak byś je zmienił/ulepszył?</a
+        >
+      </li>
+      <li>
+        <a href="#czy-robiłeś-coś-w-nowej-specyfikacji-css-flexbox-lub-grid"
+          >Czy robiłeś coś w nowej specyfikacji CSS Flexbox lub Grid?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#czy-potrafisz-wyjaśnić-różnicę-między-kodowaniem-strony-internetowej-aby-była-responsywna-a-używaniem-mobile-first-strategy"
+          >Czy potrafisz wyjaśnić różnicę między kodowaniem strony internetowej,
+          aby była responsywna, a używaniem mobile-first strategy?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#czym-różni-się-projektowanie-responsywne-od-projektowania-adaptacyjnego"
+          >Czym różni się projektowanie responsywne od projektowania
+          adaptacyjnego?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#czy-kiedykolwiek-pracowałeś-z-grafiką-retina-jeśli-tak-kiedy-i-jakich-technik-użyłeś"
+          >Czy kiedykolwiek pracowałeś z grafiką Retina? Jeśli tak, kiedy i
+          jakich technik użyłeś?</a
+        >
+      </li>
+      <li>
+        <a
+          href="#czy-jest-jakiś-powód-dla-którego-chciałbyś-użyć-translate-zamiast-pozycjonowania-absolute-lub-odwrotnie-i-dlaczego"
+          >Czy jest jakiś powód, dla którego chciałbyś użyć
+          <code>translate ()</code> zamiast pozycjonowania
+          <code>absolute</code> lub odwrotnie? I dlaczego?</a
+        >
+      </li>
+    </ul>
+    <h3 id="czym-jest-specyficzność-selektora-css-i-jak-działa">
+      Czym jest specyficzność selektora CSS i jak działa?
+    </h3>
+    <p>
+      Przeglądarka określa, jakie style mają być wyświetlane w elemencie, w
+      zależności od specyfiki reguł CSS. Zakładamy, że przeglądarka już
+      określiła reguły, które pasują do określonego elementu. Wśród reguł
+      dopasowania, specyfika, cztery wartości oddzielone przecinkami,
+      <code>a, b, c, d</code> są obliczane dla każdej reguły na podstawie:
+    </p>
+    <ol type="1">
+      <li>
+        <code>a</code> określa, czy stosowane są style wbudowane. Jeśli
+        deklaracja właściwości jest stylem wbudowanym w elemencie,
+        <code>a</code> jest 1, w przeciwnym razie 0.
+      </li>
+      <li><code>b</code> jest numerem ID selektorów.</li>
+      <li><code>c</code> to liczba selektorów klas, atrybutów i pseudoklas.</li>
+      <li><code>d</code> to liczba znaczników i selektorów pseudoelementów.</li>
+    </ol>
+    <p>
+      Wynikająca z tego specyficzność nie jest wynikiem, ale macierzą wartości,
+      które można porównać kolumna po kolumnie. Porównując selektory w celu
+      ustalenia, która ma najwyższą swoistość, spójrz od lewej do prawej i
+      porównaj najwyższą wartość w każdej kolumnie. Tak więc wartość w kolumnie
+      <code>b</code> zastąpi wartości w kolumnach <code>c</code> i
+      <code>d</code>, bez względu na to, jakie mogą być. Jako taka, specyfika
+      <code>0,1,0,0</code> byłaby większa niż jedno z <code>0,0,10,10</code>.
+    </p>
+    <p>
+      W przypadkach o jednakowej specyficzności: najnowsza reguła się liczy.
+      Jeśli dwukrotnie zapisałeś tę samą regułę w arkuszu stylów (niezależnie od
+      wewnętrznego lub zewnętrznego), wówczas dolna reguła w arkuszu stylów jest
+      bliżej elementu, który ma być stylizowany, jest uważana za bardziej
+      szczegółową i dlatego zostanie zastosowana.
+    </p>
+    <p>
+      Pisałbym reguły CSS o niskiej specyficzności, aby w razie potrzeby można
+      je było łatwo zastąpić. Pisząc kod biblioteki komponentu interfejsu
+      użytkownika CSS, ważne jest, aby miały niską specyficzność, aby
+      użytkownicy biblioteki mogli je zastąpić bez stosowania zbyt
+      skomplikowanych reguł CSS tylko ze względu na zwiększenie specyficzności
+      lub uciekanie się do <code>!important</code>.
+    </p>
+    <h6 id="bibliografia">Bibliografia</h6>
+    <ul>
+      <li>
+        https://www.smashingmagazine.com/2007/07/css-specificity-things-you-should-know/
+      </li>
+      <li>https://www.sitepoint.com/web-foundations/specificity/</li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="jaka-jest-różnica-pomiędzy-css-resetting-oraz-normalizing-które-wybrałbyś-i-dlaczego"
+    >
+      Jaka jest różnica pomiędzy CSS “resetting” oraz “normalizing”? Które
+      wybrałbyś, i dlaczego?
+    </h3>
+    <ul>
+      <li>
+        <strong>Resetting</strong> - Resetowanie ma na celu usunięcie wszystkich
+        domyślnych stylów przeglądarki z elementów. Na przykład
+        <code>margin</code>, <code>padding</code>,
+        <code>font-size</code> wszystkich elementów są resetowane, aby były
+        takie same. Będziesz musiał zmienić styl dla wspólnych elementów
+        typograficznych.
+      </li>
+      <li>
+        <strong>Normalizing</strong> - Normalizacja zachowuje użyteczne style
+        domyślne zamiast “unstyling” wszystkiego. Poprawia również błędy w
+        typowych zależnościach przeglądarki.
+      </li>
+    </ul>
+    <p>
+      Zdecydowałbym się zresetować, gdy mam bardzo niestandardowy lub
+      niekonwencjonalny projekt strony, tak że muszę zrobić dużo własnej
+      stylizacji i nie muszę zachowywać żadnej domyślnej stylizacji.
+    </p>
+    <h6 id="bibliografia-1">Bibliografia</h6>
+    <ul>
+      <li>
+        https://stackoverflow.com/questions/6887336/what-is-the-difference-between-normalize-css-and-reset-css
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3 id="opisz-floaty-i-jak-one-działają.">
+      Opisz <code>float</code>y i jak one działają.
+    </h3>
+    <p>
+      Float to właściwość pozycjonowania CSS. Elementy pływające (floated
+      elements) pozostają częścią przepływu strony i będą wpływać na położenie
+      innych elementów (np. tekst będzie płynął wokół elementów pływających), w
+      przeciwieństwie do elementów <code>position: absolute</code>, które są
+      usuwane z przepływu strony.
+    </p>
+    <p>
+      Właściwość <code>clear</code> CSS może być użyta do pozycjonowania poniżej
+      elementów pływających
+      <code>left</code>/<code>right</code>/<code>both</code>.
+    </p>
+    <p>
+      Jeśli element nadrzędny zawiera wyłącznie elementy pływające, jego
+      wysokość zostanie zwinięta do zera. Można to naprawić, usuwając float za
+      pływającymi elementami w kontenerze, ale przed zamknięciem kontenera.
+    </p>
+    <p>
+      Hack <code>.clearfix</code> używa sprytnego CSS
+      <a href="#describe-pseudo-elements-and-discuss-what-they-are-used-for"
+        >pseudo selektora</a
+      >
+      (<code>:after</code>) do czyszczenia float’ów. Zamiast ustawiać
+      przepełnienie dla elementu nadrzędnego, stosuje się do niego dodatkową
+      klasę <code>clearfix</code>. Następnie stosuje ten CSS:
+    </p>
+    <div class="sourceCode" id="cb1">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">.clearfix</span><span class="in">:after</span> {</a>
 <a class="sourceLine" id="cb1-2" title="2">  <span class="kw">content</span>: <span class="st">&#39; &#39;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb1-3" title="3">  <span class="kw">visibility</span>: <span class="dv">hidden</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb1-4" title="4">  <span class="kw">display</span>: <span class="dv">block</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb1-5" title="5">  <span class="kw">height</span>: <span class="dv">0</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb1-6" title="6">  <span class="kw">clear</span>: <span class="dv">both</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb1-7" title="7">}</a></code></pre></div>
-<p>Alternatywnie, nadaj właściwość <code>overflow: auto</code> lub <code>overflow: hidden</code> elementowi nadrzędnemu, który ustanowi nowy kontekst formatowania bloku wewnątrz elementów podrzędnych i rozszerzy się, aby objąć jego elementy podrzędne.</p>
-<h6 id="bibliografia-2">Bibliografia</h6>
-<ul>
-<li>https://css-tricks.com/all-about-floats/</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="opisz-z-index-i-jak-powstaje-stacking-context.">Opisz <code>z-index</code> i jak powstaje stacking context.</h3>
-<p>Właściwość <code>z-index</code> w CSS kontroluje pionową kolejność układania elementów, które się nakładają. <code>z-index</code> wpływa tylko na elementy, które mają wartość <code>position</code>, która nie jest <code>static</code>.</p>
-<p>Bez żadnej wartości <code>z-index</code>, elementy układają się w kolejności, w jakiej występują w DOM (najniższy na dole na tym samym poziomie hierarchii pojawia się na górze). Elementy z pozycjonowaniem niestatycznym (i ich potomnymi) zawsze będą pojawiać się na elementach z domyślnym pozycjonowaniem statycznym, niezależnie od hierarchii HTML.</p>
-<p>Kontekst stosu to element zawierający zestaw warstw. W lokalnym kontekście stosowym wartości <code>z-index</code> jego elementów podrzędnych są ustawione względem tego elementu, a nie do katalogu głównego dokumentu. Warstwy poza tym kontekstem - np. sibling elements lokalnego kontekstu stosu - nie mogą znajdować się między warstwami w tym kontekście. Jeśli element B znajduje się na szczycie elementu A, element potomny elementu A, elementu C, nigdy nie może być wyższy niż element B, nawet jeśli element C ma wyższy <code>z-index</code>, niż element B.</p>
-<p>Każdy kontekst stosu jest samowystarczalny - po ułożeniu zawartości elementu cały element jest rozpatrywany w kolejności stosu nadrzędnego kontekstu stosu. Kilka właściwości CSS wyzwala nowy kontekst stosu, taki jak <code>opacity</code> mniejszy niż 1, <code>filter</code> który nie jest <code>none</code>, oraz <code>transform</code> który nie jest <code>none</code>.</p>
-<p><em>Uwaga: To, co dokładnie kwalifikuje element do utworzenia kontekstu stosu, znajduje się w tym długim zestawie <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context#The_stacking_context">reguł</a>.</em></p>
-<h6 id="bibliografia-3">Bibliografia</h6>
-<ul>
-<li>https://css-tricks.com/almanac/properties/z/z-index/</li>
-<li>https://philipwalton.com/articles/what-no-one-told-you-about-z-index/</li>
-<li>https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="opisz-block-formatting-context-bfc-i-jak-działa.">Opisz Block Formatting Context (BFC) i jak działa.</h3>
-<p>Block Formatting Context (BFC) jest częścią wizualnego renderowania CSS strony internetowej, na której układane są pola bloków. Float’y, elementy absolutnie pozycjonowane, <code>inline-blocks</code>, <code>table-cells</code>, <code>table-caption</code>, i elementy z <code>overflow</code> inne niż <code>visible</code> (z wyjątkiem sytuacji, gdy ta wartość została propagowana do viewport), ustal nowe konteksty formatowania bloków.</p>
-<p>Umiejętność ustanowienia kontekstu formatowania bloku jest ważna, ponieważ bez tego pole zawierające nie będzie <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context#Make_float_content_and_alongside_content_the_same_height">zawierało floated children</a>. Jest to podobne do zwijających się marginesów, ale bardziej podstępne, ponieważ całe boxes zapadają się w dziwny sposób.</p>
-<p>BFC to box HTML, który spełnia co najmniej jeden z następujących warunków:</p>
-<ul>
-<li>Wartość <code>float</code> nie jest <code>none</code>.</li>
-<li>Wartość <code>position</code> nie jest <code>static</code> ani <code>relative</code>.</li>
-<li>Wartość <code>display</code> jest <code>table-cell</code>, <code>table-caption</code>, <code>inline-block</code>, <code>flex</code>, lub <code>inline-flex</code>.</li>
-<li>Wartość <code>overflow</code> nie jest <code>visible</code>.</li>
-</ul>
-<p>W BFC lewa zewnętrzna krawędź każdego box’a dotyka lewej krawędzi bloku zawierającego (w przypadku formatowania od prawej do lewej dotykają się prawej krawędzi).</p>
-<p>Pionowe marginesy między sąsiadującymi polami na poziomie bloku w zwinięciu BFC. Przeczytaj więcej na temat <a href="https://www.sitepoint.com/web-foundations/collapsing-margins/">zawijanych marginesów</a>.</p>
-<h6 id="bibliografia-4">Bibliografia</h6>
-<ul>
-<li>https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context</li>
-<li>https://www.sitepoint.com/understanding-block-formatting-contexts-in-css/</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="jakie-są-różne-techniki-czyszczenia-i-które-są-odpowiednie-w-jakim-kontekście">Jakie są różne techniki czyszczenia i które są odpowiednie w jakim kontekście?</h3>
-<ul>
-<li>Pusta metoda <code>div</code> - <code>&lt;div style="clear:both;"&gt;&lt;/div&gt;</code>.</li>
-<li>Metoda clearfix - nawiązując do klasy powyżej <code>.clearfix</code>.</li>
-<li><code>overflow: auto</code> lub metoda <code>overflow: hidden</code> - Rodzic ustanowi nowy kontekst formatowania bloku i rozszerzy się, aby zawierał elementy podrzędne.</li>
-</ul>
-<p>W dużych projektach napisałbym klasę użyteczności <code>.clearfix</code> i używał ich w miejscach, w których tego potrzebuję. <code>overflow: hidden</code> może podcinać children, jeśli children jest wyższy od parent i nie jest zbyt idealny.</p>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="wyjaśnij-css-sprites-i-jak-zaimplementujesz-je-na-stronie-lub-witrynie.">Wyjaśnij CSS sprites, i jak zaimplementujesz je na stronie lub witrynie.</h3>
-<p>CSS sprites łączy wiele obrazów w jeden większy obraz. Jest to powszechnie stosowana technika ikon (Gmail ją używa). Jak ją zaimplementować:</p>
-<ol type="1">
-<li>Użyj generatora sprite, który pakuje wiele obrazów w jeden i generuje odpowiedni CSS do tego.</li>
-<li>Każdy obraz miałby odpowiednią klasę CSS <code>background-image</code>, <code>background-position</code> i <code>background-size</code> - zdefiniowane właściwości.</li>
-<li>Aby użyć tego obrazu, dodaj odpowiednią klasę do swojego elementu.</li>
-</ol>
-<p><strong>Korzyści:</strong></p>
-<ul>
-<li>Zmniejszy liczbę żądań HTTP dla wielu obrazów (wymagane jest tylko jedno pojedyncze żądanie na spritesheet). Jednak w przypadku HTTP2 ładowanie wielu obrazów nie stanowi już większego problemu.</li>
-<li>Pobieraj z wyprzedzeniem zasoby, które nie zostaną pobrane, dopóki nie będą potrzebne, takie jak obrazy, które pojawiają się tylko w pseudo-states <code>: hover</code>. Nie widać migania.</li>
-</ul>
-<h6 id="bibliografia-5">Bibliografia</h6>
-<ul>
-<li>https://css-tricks.com/css-sprites/</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="jak-podchodziłbyś-do-rozwiązywania-problemów-związanych-ze-stylem-specyficznym-dla-przeglądarki">Jak podchodziłbyś do rozwiązywania problemów związanych ze stylem specyficznym dla przeglądarki?</h3>
-<ul>
-<li>Po zidentyfikowaniu problemu i sprawiającej kłopoty przeglądarki użyj osobnego arkusza stylów, który ładuje się tylko wtedy, gdy używana jest konkretna przeglądarka. Ta technika wymaga jednak renderowania po stronie serwera.</li>
-<li>Używaj bibliotek takich jak Bootstrap, które już obsługują te problemy ze stylem.</li>
-<li>Użyj <code>autoprefixer</code>, aby automatycznie dodać prefiksy dostawcy do swojego kodu.</li>
-<li>Użyj Reset CSS lub Normalize.css.</li>
-<li>Jeśli korzystasz z Postcss (lub podobnej biblioteki do transpilowania), mogą istnieć wtyczki, które pozwolą ci wybrać nowoczesną składnię CSS (a nawet propozycje W3C), które przekształcą te sekcje twojego kodu w odpowiedni bezpieczny kod, który będzie pracować w celach, dla których korzystałeś.</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="jak-wyświetlasz-swoje-strony-w-przeglądarkach-z-ograniczeniami-funkcji-jakich-technikprocesów-używasz">Jak wyświetlasz swoje strony w przeglądarkach z ograniczeniami funkcji? Jakich technik/procesów używasz?</h3>
-<ul>
-<li>Wdzięczna degradacja (graceful degradation) - praktyka polegająca na tworzeniu aplikacji dla nowoczesnych przeglądarek przy jednoczesnym zapewnieniu jej funkcjonalności w starszych przeglądarkach.</li>
-<li>Progresywne ulepszenie (progressive enhancement) - Praktyka budowania aplikacji dla podstawowego poziomu doświadczenia użytkownika, ale dodawanie ulepszeń funkcjonalnych, gdy przeglądarka ją obsługuje.</li>
-<li>Używanie <a href="https://caniuse.com/">caniuse.com</a> aby sprawdzić obsługę funkcji.</li>
-<li>Autoprefixer do automatycznego wstawiania prefiksu dostawcy.</li>
-<li>Wykrywanie funkcji za pomocą <a href="https://modernizr.com/">Modernizr</a>.</li>
-<li>Używanie zapytań CSS Feature <span class="citation" data-cites="support">[@support]</span>(https://developer.mozilla.org/en-US/docs/Web/CSS/<span class="citation" data-cites="supports">@supports</span>)</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="jakie-są-różne-sposoby-wizualnego-ukrywania-treści-i-udostępniania-jej-tylko-dla-czytników-ekranu">Jakie są różne sposoby wizualnego ukrywania treści (i udostępniania jej tylko dla czytników ekranu)?</h3>
-<p>Te techniki są związane z dostępnością (a11y).</p>
-<ul>
-<li><code>width: 0; height: 0</code>. Spraw, aby element nie zajmował w ogóle miejsca na ekranie, co powoduje, że nie jest pokazywany.</li>
-<li><code>position: absolute; left: -99999px</code>. Ustaw go poza ekranem.</li>
-<li><code>text-indent: -9999px</code>. Działa to tylko w przypadku tekstu w elementach <code>block</code>.</li>
-<li>Metadane. Na przykład za pomocą Schema.org, RDF i JSON-LD.</li>
-<li>WAI-ARIA. Specyfikacja techniczna W3C określająca sposób zwiększenia dostępności stron internetowych.</li>
-</ul>
-<p>Nawet jeśli WAI-ARIA jest idealnym rozwiązaniem, wybrałbym podejście pozycjonowania <code>absolute</code>, ponieważ ma najmniej zastrzeżeń, działa na większość elementów i jest łatwą techniką.</p>
-<h6 id="bibliografia-6">Bibliografia</h6>
-<ul>
-<li>https://www.w3.org/TR/wai-aria-1.1/</li>
-<li>https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA</li>
-<li>http://a11yproject.com/</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="czy-kiedykolwiek-korzystałeś-z-systemu-siatki-grid-system-a-jeśli-tak-to-co-preferujesz">Czy kiedykolwiek korzystałeś z systemu siatki (grid system), a jeśli tak, to co preferujesz?</h3>
-<p>Przed tym jak Flex stał się popularny (około roku 2014), oparty na <code>float</code> grid system był najbardziej niezawodny, ponieważ nadal ma największą obsługę przeglądarek wśród alternatywnych istniejących systemów (flex, grid). Bootstrap korzystał z podejścia <code>float</code> do chwili, gdy Bootstrap 4, przełączył się na podejście oparte na <code>flex</code>. W chwili pisania (2020r.), <code>flex</code> jest zalecanym podejściem do budowania systemów gridowych i ma <a href="https://caniuse.com/#search=flex">przyzwoitą obsługę przeglądarki</a>.</p>
-<p>Dla odważnych, mogą zajrzeć w <a href="https://css-tricks.com/snippets/css/complete-guide-grid/">CSS Grid Layout</a>, który używa nowej błyszczącej właściwości <code>grid</code>; jest nawet lepszy niż <code>flex</code> do budowania układów siatki i będzie de facto sposobem na zrobienie tego w przyszłości.</p>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="czy-używałeś-lub-implementowałeś-media-queries-lub-mobile-specific-layoutscss">Czy używałeś lub implementowałeś media queries lub mobile-specific layouts/CSS?</h3>
-<p>Tak. Przykładem może być przekształcenie nawigacji stacked pill w nawigację fixed-bottom tab poza pewnym breakpointem.</p>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="czy-znasz-stylizację-svg">Czy znasz stylizację SVG?</h3>
-<p>Tak, istnieje kilka sposobów pokolorowania kształtów (w tym określenie atrybutów obiektu) za pomocą wbudowanego CSS, osadzonej sekcji CSS lub zewnętrznego pliku CSS. Większość plików SVG, które można znaleźć w Internecie, wykorzystuje wbudowany CSS, ale z każdym typem wiążą się wady i zalety.</p>
-<p>Podstawowe kolorowanie można wykonać, ustawiając dwa atrybuty w węźle: <code>fill</code> i <code>stroke</code>. <code>fill</code> ustawia kolor wewnątrz obiektu i <code>stroke</code> ustawia kolor linii rysowanej wokół obiektu. Możesz używać tych samych schematów nazewnictwa kolorów CSS, których używasz w HTML, niezależnie od tego, czy są to nazwy kolorów (to znaczy <code>red</code>), wartości RGB (tzn. <code>rgb(255,0,0)</code>), wartości Hex, wartości RGBA, etc.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;rect</span></a>
+<a class="sourceLine" id="cb1-7" title="7">}</a></code></pre>
+    </div>
+    <p>
+      Alternatywnie, nadaj właściwość <code>overflow: auto</code> lub
+      <code>overflow: hidden</code> elementowi nadrzędnemu, który ustanowi nowy
+      kontekst formatowania bloku wewnątrz elementów podrzędnych i rozszerzy
+      się, aby objąć jego elementy podrzędne.
+    </p>
+    <h6 id="bibliografia-2">Bibliografia</h6>
+    <ul>
+      <li>https://css-tricks.com/all-about-floats/</li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3 id="opisz-z-index-i-jak-powstaje-stacking-context.">
+      Opisz <code>z-index</code> i jak powstaje stacking context.
+    </h3>
+    <p>
+      Właściwość <code>z-index</code> w CSS kontroluje pionową kolejność
+      układania elementów, które się nakładają. <code>z-index</code> wpływa
+      tylko na elementy, które mają wartość <code>position</code>, która nie
+      jest <code>static</code>.
+    </p>
+    <p>
+      Bez żadnej wartości <code>z-index</code>, elementy układają się w
+      kolejności, w jakiej występują w DOM (najniższy na dole na tym samym
+      poziomie hierarchii pojawia się na górze). Elementy z pozycjonowaniem
+      niestatycznym (i ich potomnymi) zawsze będą pojawiać się na elementach z
+      domyślnym pozycjonowaniem statycznym, niezależnie od hierarchii HTML.
+    </p>
+    <p>
+      Kontekst stosu to element zawierający zestaw warstw. W lokalnym kontekście
+      stosowym wartości <code>z-index</code> jego elementów podrzędnych są
+      ustawione względem tego elementu, a nie do katalogu głównego dokumentu.
+      Warstwy poza tym kontekstem - np. sibling elements lokalnego kontekstu
+      stosu - nie mogą znajdować się między warstwami w tym kontekście. Jeśli
+      element B znajduje się na szczycie elementu A, element potomny elementu A,
+      elementu C, nigdy nie może być wyższy niż element B, nawet jeśli element C
+      ma wyższy <code>z-index</code>, niż element B.
+    </p>
+    <p>
+      Każdy kontekst stosu jest samowystarczalny - po ułożeniu zawartości
+      elementu cały element jest rozpatrywany w kolejności stosu nadrzędnego
+      kontekstu stosu. Kilka właściwości CSS wyzwala nowy kontekst stosu, taki
+      jak <code>opacity</code> mniejszy niż 1, <code>filter</code> który nie
+      jest <code>none</code>, oraz <code>transform</code> który nie jest
+      <code>none</code>.
+    </p>
+    <p>
+      <em
+        >Uwaga: To, co dokładnie kwalifikuje element do utworzenia kontekstu
+        stosu, znajduje się w tym długim zestawie
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context#The_stacking_context"
+          >reguł</a
+        >.</em
+      >
+    </p>
+    <h6 id="bibliografia-3">Bibliografia</h6>
+    <ul>
+      <li>https://css-tricks.com/almanac/properties/z/z-index/</li>
+      <li>
+        https://philipwalton.com/articles/what-no-one-told-you-about-z-index/
+      </li>
+      <li>
+        https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3 id="opisz-block-formatting-context-bfc-i-jak-działa.">
+      Opisz Block Formatting Context (BFC) i jak działa.
+    </h3>
+    <p>
+      Block Formatting Context (BFC) jest częścią wizualnego renderowania CSS
+      strony internetowej, na której układane są pola bloków. Float’y, elementy
+      absolutnie pozycjonowane, <code>inline-blocks</code>,
+      <code>table-cells</code>, <code>table-caption</code>, i elementy z
+      <code>overflow</code> inne niż <code>visible</code> (z wyjątkiem sytuacji,
+      gdy ta wartość została propagowana do viewport), ustal nowe konteksty
+      formatowania bloków.
+    </p>
+    <p>
+      Umiejętność ustanowienia kontekstu formatowania bloku jest ważna, ponieważ
+      bez tego pole zawierające nie będzie
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context#Make_float_content_and_alongside_content_the_same_height"
+        >zawierało floated children</a
+      >. Jest to podobne do zwijających się marginesów, ale bardziej podstępne,
+      ponieważ całe boxes zapadają się w dziwny sposób.
+    </p>
+    <p>
+      BFC to box HTML, który spełnia co najmniej jeden z następujących warunków:
+    </p>
+    <ul>
+      <li>Wartość <code>float</code> nie jest <code>none</code>.</li>
+      <li>
+        Wartość <code>position</code> nie jest <code>static</code> ani
+        <code>relative</code>.
+      </li>
+      <li>
+        Wartość <code>display</code> jest <code>table-cell</code>,
+        <code>table-caption</code>, <code>inline-block</code>,
+        <code>flex</code>, lub <code>inline-flex</code>.
+      </li>
+      <li>Wartość <code>overflow</code> nie jest <code>visible</code>.</li>
+    </ul>
+    <p>
+      W BFC lewa zewnętrzna krawędź każdego box’a dotyka lewej krawędzi bloku
+      zawierającego (w przypadku formatowania od prawej do lewej dotykają się
+      prawej krawędzi).
+    </p>
+    <p>
+      Pionowe marginesy między sąsiadującymi polami na poziomie bloku w
+      zwinięciu BFC. Przeczytaj więcej na temat
+      <a href="https://www.sitepoint.com/web-foundations/collapsing-margins/"
+        >zawijanych marginesów</a
+      >.
+    </p>
+    <h6 id="bibliografia-4">Bibliografia</h6>
+    <ul>
+      <li>
+        https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Block_formatting_context
+      </li>
+      <li>
+        https://www.sitepoint.com/understanding-block-formatting-contexts-in-css/
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="jakie-są-różne-techniki-czyszczenia-i-które-są-odpowiednie-w-jakim-kontekście"
+    >
+      Jakie są różne techniki czyszczenia i które są odpowiednie w jakim
+      kontekście?
+    </h3>
+    <ul>
+      <li>
+        Pusta metoda <code>div</code> -
+        <code>&lt;div style="clear:both;"&gt;&lt;/div&gt;</code>.
+      </li>
+      <li>
+        Metoda clearfix - nawiązując do klasy powyżej <code>.clearfix</code>.
+      </li>
+      <li>
+        <code>overflow: auto</code> lub metoda <code>overflow: hidden</code> -
+        Rodzic ustanowi nowy kontekst formatowania bloku i rozszerzy się, aby
+        zawierał elementy podrzędne.
+      </li>
+    </ul>
+    <p>
+      W dużych projektach napisałbym klasę użyteczności <code>.clearfix</code> i
+      używał ich w miejscach, w których tego potrzebuję.
+      <code>overflow: hidden</code> może podcinać children, jeśli children jest
+      wyższy od parent i nie jest zbyt idealny.
+    </p>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="wyjaśnij-css-sprites-i-jak-zaimplementujesz-je-na-stronie-lub-witrynie."
+    >
+      Wyjaśnij CSS sprites, i jak zaimplementujesz je na stronie lub witrynie.
+    </h3>
+    <p>
+      CSS sprites łączy wiele obrazów w jeden większy obraz. Jest to powszechnie
+      stosowana technika ikon (Gmail ją używa). Jak ją zaimplementować:
+    </p>
+    <ol type="1">
+      <li>
+        Użyj generatora sprite, który pakuje wiele obrazów w jeden i generuje
+        odpowiedni CSS do tego.
+      </li>
+      <li>
+        Każdy obraz miałby odpowiednią klasę CSS <code>background-image</code>,
+        <code>background-position</code> i <code>background-size</code> -
+        zdefiniowane właściwości.
+      </li>
+      <li>
+        Aby użyć tego obrazu, dodaj odpowiednią klasę do swojego elementu.
+      </li>
+    </ol>
+    <p><strong>Korzyści:</strong></p>
+    <ul>
+      <li>
+        Zmniejszy liczbę żądań HTTP dla wielu obrazów (wymagane jest tylko jedno
+        pojedyncze żądanie na spritesheet). Jednak w przypadku HTTP2 ładowanie
+        wielu obrazów nie stanowi już większego problemu.
+      </li>
+      <li>
+        Pobieraj z wyprzedzeniem zasoby, które nie zostaną pobrane, dopóki nie
+        będą potrzebne, takie jak obrazy, które pojawiają się tylko w
+        pseudo-states <code>: hover</code>. Nie widać migania.
+      </li>
+    </ul>
+    <h6 id="bibliografia-5">Bibliografia</h6>
+    <ul>
+      <li>https://css-tricks.com/css-sprites/</li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="jak-podchodziłbyś-do-rozwiązywania-problemów-związanych-ze-stylem-specyficznym-dla-przeglądarki"
+    >
+      Jak podchodziłbyś do rozwiązywania problemów związanych ze stylem
+      specyficznym dla przeglądarki?
+    </h3>
+    <ul>
+      <li>
+        Po zidentyfikowaniu problemu i sprawiającej kłopoty przeglądarki użyj
+        osobnego arkusza stylów, który ładuje się tylko wtedy, gdy używana jest
+        konkretna przeglądarka. Ta technika wymaga jednak renderowania po
+        stronie serwera.
+      </li>
+      <li>
+        Używaj bibliotek takich jak Bootstrap, które już obsługują te problemy
+        ze stylem.
+      </li>
+      <li>
+        Użyj <code>autoprefixer</code>, aby automatycznie dodać prefiksy
+        dostawcy do swojego kodu.
+      </li>
+      <li>Użyj Reset CSS lub Normalize.css.</li>
+      <li>
+        Jeśli korzystasz z Postcss (lub podobnej biblioteki do transpilowania),
+        mogą istnieć wtyczki, które pozwolą ci wybrać nowoczesną składnię CSS (a
+        nawet propozycje W3C), które przekształcą te sekcje twojego kodu w
+        odpowiedni bezpieczny kod, który będzie pracować w celach, dla których
+        korzystałeś.
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="jak-wyświetlasz-swoje-strony-w-przeglądarkach-z-ograniczeniami-funkcji-jakich-technikprocesów-używasz"
+    >
+      Jak wyświetlasz swoje strony w przeglądarkach z ograniczeniami funkcji?
+      Jakich technik/procesów używasz?
+    </h3>
+    <ul>
+      <li>
+        Wdzięczna degradacja (graceful degradation) - praktyka polegająca na
+        tworzeniu aplikacji dla nowoczesnych przeglądarek przy jednoczesnym
+        zapewnieniu jej funkcjonalności w starszych przeglądarkach.
+      </li>
+      <li>
+        Progresywne ulepszenie (progressive enhancement) - Praktyka budowania
+        aplikacji dla podstawowego poziomu doświadczenia użytkownika, ale
+        dodawanie ulepszeń funkcjonalnych, gdy przeglądarka ją obsługuje.
+      </li>
+      <li>
+        Używanie <a href="https://caniuse.com/">caniuse.com</a> aby sprawdzić
+        obsługę funkcji.
+      </li>
+      <li>Autoprefixer do automatycznego wstawiania prefiksu dostawcy.</li>
+      <li>
+        Wykrywanie funkcji za pomocą
+        <a href="https://modernizr.com/">Modernizr</a>.
+      </li>
+      <li>
+        Używanie zapytań CSS Feature
+        <span class="citation" data-cites="support">[@support]</span
+        >(https://developer.mozilla.org/en-US/docs/Web/CSS/<span
+          class="citation"
+          data-cites="supports"
+          >@supports</span
+        >)
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="jakie-są-różne-sposoby-wizualnego-ukrywania-treści-i-udostępniania-jej-tylko-dla-czytników-ekranu"
+    >
+      Jakie są różne sposoby wizualnego ukrywania treści (i udostępniania jej
+      tylko dla czytników ekranu)?
+    </h3>
+    <p>Te techniki są związane z dostępnością (a11y).</p>
+    <ul>
+      <li>
+        <code>width: 0; height: 0</code>. Spraw, aby element nie zajmował w
+        ogóle miejsca na ekranie, co powoduje, że nie jest pokazywany.
+      </li>
+      <li>
+        <code>position: absolute; left: -99999px</code>. Ustaw go poza ekranem.
+      </li>
+      <li>
+        <code>text-indent: -9999px</code>. Działa to tylko w przypadku tekstu w
+        elementach <code>block</code>.
+      </li>
+      <li>Metadane. Na przykład za pomocą Schema.org, RDF i JSON-LD.</li>
+      <li>
+        WAI-ARIA. Specyfikacja techniczna W3C określająca sposób zwiększenia
+        dostępności stron internetowych.
+      </li>
+    </ul>
+    <p>
+      Nawet jeśli WAI-ARIA jest idealnym rozwiązaniem, wybrałbym podejście
+      pozycjonowania <code>absolute</code>, ponieważ ma najmniej zastrzeżeń,
+      działa na większość elementów i jest łatwą techniką.
+    </p>
+    <h6 id="bibliografia-6">Bibliografia</h6>
+    <ul>
+      <li>https://www.w3.org/TR/wai-aria-1.1/</li>
+      <li>https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA</li>
+      <li>http://a11yproject.com/</li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="czy-kiedykolwiek-korzystałeś-z-systemu-siatki-grid-system-a-jeśli-tak-to-co-preferujesz"
+    >
+      Czy kiedykolwiek korzystałeś z systemu siatki (grid system), a jeśli tak,
+      to co preferujesz?
+    </h3>
+    <p>
+      Przed tym jak Flex stał się popularny (około roku 2014), oparty na
+      <code>float</code> grid system był najbardziej niezawodny, ponieważ nadal
+      ma największą obsługę przeglądarek wśród alternatywnych istniejących
+      systemów (flex, grid). Bootstrap korzystał z podejścia
+      <code>float</code> do chwili, gdy Bootstrap 4, przełączył się na podejście
+      oparte na <code>flex</code>. W chwili pisania (2020r.),
+      <code>flex</code> jest zalecanym podejściem do budowania systemów
+      gridowych i ma
+      <a href="https://caniuse.com/#search=flex"
+        >przyzwoitą obsługę przeglądarki</a
+      >.
+    </p>
+    <p>
+      Dla odważnych, mogą zajrzeć w
+      <a href="https://css-tricks.com/snippets/css/complete-guide-grid/"
+        >CSS Grid Layout</a
+      >, który używa nowej błyszczącej właściwości <code>grid</code>; jest nawet
+      lepszy niż <code>flex</code> do budowania układów siatki i będzie de facto
+      sposobem na zrobienie tego w przyszłości.
+    </p>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="czy-używałeś-lub-implementowałeś-media-queries-lub-mobile-specific-layoutscss"
+    >
+      Czy używałeś lub implementowałeś media queries lub mobile-specific
+      layouts/CSS?
+    </h3>
+    <p>
+      Tak. Przykładem może być przekształcenie nawigacji stacked pill w
+      nawigację fixed-bottom tab poza pewnym breakpointem.
+    </p>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3 id="czy-znasz-stylizację-svg">Czy znasz stylizację SVG?</h3>
+    <p>
+      Tak, istnieje kilka sposobów pokolorowania kształtów (w tym określenie
+      atrybutów obiektu) za pomocą wbudowanego CSS, osadzonej sekcji CSS lub
+      zewnętrznego pliku CSS. Większość plików SVG, które można znaleźć w
+      Internecie, wykorzystuje wbudowany CSS, ale z każdym typem wiążą się wady
+      i zalety.
+    </p>
+    <p>
+      Podstawowe kolorowanie można wykonać, ustawiając dwa atrybuty w węźle:
+      <code>fill</code> i <code>stroke</code>. <code>fill</code> ustawia kolor
+      wewnątrz obiektu i <code>stroke</code> ustawia kolor linii rysowanej wokół
+      obiektu. Możesz używać tych samych schematów nazewnictwa kolorów CSS,
+      których używasz w HTML, niezależnie od tego, czy są to nazwy kolorów (to
+      znaczy <code>red</code>), wartości RGB (tzn. <code>rgb(255,0,0)</code>),
+      wartości Hex, wartości RGBA, etc.
+    </p>
+    <div class="sourceCode" id="cb2">
+      <pre
+        class="sourceCode html"
+      ><code class="sourceCode html"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">&lt;rect</span></a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="ot">  x=</span><span class="st">&quot;10&quot;</span></a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="ot">  y=</span><span class="st">&quot;10&quot;</span></a>
 <a class="sourceLine" id="cb2-4" title="4"><span class="ot">  width=</span><span class="st">&quot;100&quot;</span></a>
@@ -271,270 +899,614 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-7" title="7"><span class="ot">  fill=</span><span class="st">&quot;purple&quot;</span></a>
 <a class="sourceLine" id="cb2-8" title="8"><span class="ot">  fill-opacity=</span><span class="st">&quot;0.5&quot;</span></a>
 <a class="sourceLine" id="cb2-9" title="9"><span class="ot">  stroke-opacity=</span><span class="st">&quot;0.8&quot;</span></a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="kw">/&gt;</span></a></code></pre></div>
-<p>Powyższe <code>fill="purple"</code> to przykład <em>presentational attribute</em>. Co ciekawe, w przeciwieństwie do stylów wbudowanych, takich jak <code>style="fill: purple"</code>, który również jest atrybutem, atrybuty prezentacji można <a href="https://css-tricks.com/presentation-attributes-vs-inline-styles/">zastąpić stylami CSS</a> zdefiniowanymi w arkuszu stylów. Więc, jeśli zrobić coś takiego jak <code>svg { fill: blue; }</code> zastąpiłoby to zdefiniowane przez nas fioletowe wypełnienie.</p>
-<h6 id="bibliografia-7">Bibliografia</h6>
-<ul>
-<li>https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Fills_and_Strokes</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="czy-możesz-podać-przykład-właściwości-media-innej-niż-screen">Czy możesz podać przykład właściwości <span class="citation" data-cites="media">@media</span> innej niż screen?</h3>
-<p>Tak, są cztery typy właściwości <span class="citation" data-cites="media">@media</span> (włączając w to <em>screen</em>):</p>
-<ul>
-<li><code>all</code> - dla wszystkich typu media</li>
-<li><code>print</code> - dla drukarek</li>
-<li><code>speech</code> - lub czytników ekranu, które “czytają” stronę na głos</li>
-<li><code>screen</code> - do ekranów komputerowych, tabletów, smartfonów itp.</li>
-</ul>
-<p>Tu jest przykład użycia typu <code>print</code> media:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1"><span class="im">@media</span> <span class="dv">print</span> {</a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="kw">/&gt;</span></a></code></pre>
+    </div>
+    <p>
+      Powyższe <code>fill="purple"</code> to przykład
+      <em>presentational attribute</em>. Co ciekawe, w przeciwieństwie do stylów
+      wbudowanych, takich jak <code>style="fill: purple"</code>, który również
+      jest atrybutem, atrybuty prezentacji można
+      <a href="https://css-tricks.com/presentation-attributes-vs-inline-styles/"
+        >zastąpić stylami CSS</a
+      >
+      zdefiniowanymi w arkuszu stylów. Więc, jeśli zrobić coś takiego jak
+      <code>svg { fill: blue; }</code> zastąpiłoby to zdefiniowane przez nas
+      fioletowe wypełnienie.
+    </p>
+    <h6 id="bibliografia-7">Bibliografia</h6>
+    <ul>
+      <li>
+        https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Fills_and_Strokes
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3 id="czy-możesz-podać-przykład-właściwości-media-innej-niż-screen">
+      Czy możesz podać przykład właściwości
+      <span class="citation" data-cites="media">@media</span> innej niż screen?
+    </h3>
+    <p>
+      Tak, są cztery typy właściwości
+      <span class="citation" data-cites="media">@media</span> (włączając w to
+      <em>screen</em>):
+    </p>
+    <ul>
+      <li><code>all</code> - dla wszystkich typu media</li>
+      <li><code>print</code> - dla drukarek</li>
+      <li>
+        <code>speech</code> - lub czytników ekranu, które “czytają” stronę na
+        głos
+      </li>
+      <li>
+        <code>screen</code> - do ekranów komputerowych, tabletów, smartfonów
+        itp.
+      </li>
+    </ul>
+    <p>Tu jest przykład użycia typu <code>print</code> media:</p>
+    <div class="sourceCode" id="cb3">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb3-1" title="1"><span class="im">@media</span> <span class="dv">print</span> {</a>
 <a class="sourceLine" id="cb3-2" title="2">  body {</a>
 <a class="sourceLine" id="cb3-3" title="3">    <span class="kw">color</span>: <span class="cn">black</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb3-4" title="4">  }</a>
-<a class="sourceLine" id="cb3-5" title="5">}</a></code></pre></div>
-<h6 id="bibliografia-8">Bibliografia</h6>
-<ul>
-<li>https://developer.mozilla.org/en-US/docs/Web/CSS/<span class="citation" data-cites="media#Syntax">@media#Syntax</span></li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="jakie-są-tricki-do-pisania-wydajnego-css">Jakie są “tricki” do pisania wydajnego CSS?</h3>
-<p>Po pierwsze, zrozum, że przeglądarki dopasowują selektory od skrajnie prawej (key selector) do lewej. Przeglądarki odfiltrowują elementy w DOM zgodnie z key selector’em i przesuwają w górę jego elementy nadrzędne, aby ustalić dopasowania. Im krótsza długość łańcucha selektora, tym szybciej przeglądarka może ustalić, czy ten element pasuje do selektora. Dlatego unikaj key selectorów, które są selektorami tagów i uniwersalnymi. Pasują do dużej liczby elementów, a przeglądarki będą musiały wykonać więcej pracy, aby ustalić, czy rodzice pasują.</p>
-<p>Metodologia <a href="https://bem.info/">BEM (Block Element Modifier)</a> zaleca, aby wszystko miało jedną klasę, a tam, gdzie potrzebna jest hierarchia, która wpisuje się również w nazwę klasy, w naturalny sposób sprawia to, że selektor jest wydajny i łatwy do zastąpienia.</p>
-<p>Należy pamiętać, które właściwości CSS wyzwalają <a href="https://csstriggers.com/">trigger</a> reflow, repaint, i compositing. Unikaj pisania stylów, które zmieniają układ (wyzwalanie przepływu) tam, gdzie to możliwe.</p>
-<h6 id="bibliografia-9">Bibliografia</h6>
-<ul>
-<li>https://developers.google.com/web/fundamentals/performance/rendering/</li>
-<li>https://csstriggers.com/</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="jakie-są-zaletywady-korzystania-z-preprocesorów-css">Jakie są zalety/wady korzystania z preprocesorów CSS?</h3>
-<p><strong>Zalety:</strong></p>
-<ul>
-<li>CSS jest łatwiejszy w utrzymaniu.</li>
-<li>Łatwe do pisania zagnieżdżone selektory.</li>
-<li>Zmienne dla spójnego motywu. Może udostępniać pliki motywów w różnych projektach.</li>
-<li>Mixins do generowania powtarzanego CSS.</li>
-<li>Funkcje Sass, takie jak pętle, listy i mapy, mogą ułatwić konfigurację i zmniejszyć poziom szczegółowości.</li>
-<li>Dzielenie kodu na wiele plików. Pliki CSS można również podzielić, ale będzie to wymagało żądania HTTP pobrania każdego pliku CSS.</li>
-</ul>
-<p><strong>Wady:</strong></p>
-<ul>
-<li>Wymaga narzędzi do wstępnego przetwarzania. Czas ponownej kompilacji może być długi.</li>
-<li>Brak pisania obecnego i potencjalnie użytecznego CSS. Na przykład, używając czegoś podobnego do <a href="https://github.com/postcss/postcss-loader">postcss-loader</a> z <a href="https://webpack.js.org/">webpack</a>, możesz napisać potencjalnie kompatybilny CSS, pozwalając na używanie takich zmiennych jak CSS zamiast zmiennych Sass. W ten sposób uczysz się nowych umiejętności, które mogą się opłacić, jeśli/gdy zostaną ujednolicone.</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="opisz-co-lubisz-a-czego-nie-w-preprocesorach-css-z-których-korzystałeś.">Opisz, co lubisz, a czego nie w preprocesorach CSS, z których korzystałeś.</h3>
-<p><strong>Polubione:</strong></p>
-<ul>
-<li>Głównie zalety wymienione powyżej.</li>
-<li>Less jest napisany w JavaScript, który dobrze współpracuje z Node.</li>
-</ul>
-<p><strong>Niepolubione:</strong></p>
-<ul>
-<li>Używam Sass przez <code>node-sass</code>, który jest powiązaniem dla LibSass napisanego w C++. Muszę często go przekompilować podczas przełączania między wersjami węzłów.</li>
-<li>W Less, nazwy zmiennych są poprzedzone znakiem <code>@</code>, które można pomylić z natywnymi słowami kluczowymi CSS, takimi jak <code>@media</code>, <code>@import</code> i reguła <code>@font-face</code>.</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="jak-zaimplementowałbyś-kompozycję-do-projektowania-stron-internetowych-która-wykorzystuje-niestandardowe-czcionki">Jak zaimplementowałbyś kompozycję do projektowania stron internetowych, która wykorzystuje niestandardowe czcionki?</h3>
-<p>Użycie <code>@font-face</code> i zdefiniowanie <code>font-family</code> dla różnych <code>font-weight</code>.</p>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="wyjaśnij-w-jaki-sposób-przeglądarka-określa-które-elementy-pasują-do-selektora-css.">Wyjaśnij, w jaki sposób przeglądarka określa, które elementy pasują do selektora CSS.</h3>
-<p>Ta część jest związana z powyższą na temat <a href="#what-are-some-of-the-gotchas-for-writing-efficient-css">pisania wydajnego CSS</a>. Przeglądarki dopasowują selektory od skrajnie prawej (key selector) do lewej. Przeglądarki odfiltrowują elementy w DOM zgodnie z key selector i przesuwają w górę jego elementy nadrzędne, aby ustalić dopasowania. Im krótsza długość łańcucha selektora, tym szybciej przeglądarka może ustalić, czy ten element pasuje do selektora.</p>
-<p>Na przykład ten selektor <code>p span</code>, przeglądarka najpierw znajduje wszystkie elementy <code>&lt;span&gt;</code> i przemierza jego rodzica aż do roota, aby znaleźć element <code>&lt;p&gt;</code>. Dla konkretnego <code>&lt;span&gt;</code>, jak tylko znajdzie <code>&lt;p&gt;</code>, wie że <code>&lt;span&gt;</code> dopasowane i może zatrzymać dopasowanie.</p>
-<h6 id="bibliografia-10">Bibliografia</h6>
-<ul>
-<li>https://stackoverflow.com/questions/5797014/why-do-browsers-match-css-selectors-from-right-to-left</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="opisz-pseudoelementy-i-omów-do-czego-służą.">Opisz pseudoelementy i omów, do czego służą.</h3>
-<p>Pseudoelement CSS jest słowem kluczowym dodawanym do selektora, który pozwala stylizować określoną część wybranych elementów. Mogą być używane do dekoracji (<code>:first-line</code>, <code>:first-letter</code>) lub dodawać elementy do znaczników (w połączeniu z <code>content: ...</code>) bez konieczności modyfikowania znaczników (<code>:before</code>, <code>:after</code>).</p>
-<ul>
-<li><code>:first-line</code> i <code>:first-letter</code> może służyć do ozdabiania tekstu.</li>
-<li>Użycie <code>.clearfix</code> jak pokazano powyżej, aby dodać element zero-space z <code>clear: both</code>.</li>
-<li>Trójkątne strzałki w tooltips używają <code>:before</code> i <code>:after</code>. Zachęca do rozdzielenia rzeczy, ponieważ trójkąt jest uważany za część stylizacji, a nie DOM.</li>
-</ul>
-<h6 id="bibliografia-11">Bibliografia</h6>
-<ul>
-<li>https://css-tricks.com/almanac/selectors/a/after-and-before/</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="wyjaśnij-swoje-zrozumienie-box-model-i-sposób-w-jaki-chcesz-aby-przeglądarka-w-css-renderowała-układ-w-różnych-modelach-pudełkowych.">Wyjaśnij swoje zrozumienie box model i sposób, w jaki chcesz, aby przeglądarka w CSS renderowała układ w różnych modelach pudełkowych.</h3>
-<p>Model pola CSS opisuje prostokątne pola, które są generowane dla elementów w drzewie dokumentu i rozmieszczone zgodnie z wizualnym modelem formatowania. Każdy box ma pole zawartości (np. text, an image, etc.) i opcjonalne otoczenie polami <code>padding</code>, <code>border</code>, i <code>margin</code>.</p>
-<p>Model pudełkowy CSS odpowiada za obliczenie:</p>
-<ul>
-<li>Ile miejsca zajmuje element bloku.</li>
-<li>Niezależnie od tego, czy granice i/lub marginesy nachodzą na siebie, czy się zawalają.</li>
-<li>Wymiary pudełka.</li>
-</ul>
-<p>Model pudełkowy ma następujące zasady:</p>
-<ul>
-<li>Wymiary elementu bloku są obliczane przez <code>width</code>, <code>height</code>, <code>padding</code>, <code>border</code> i <code>margin</code>.</li>
-<li>Jeśli <code>height</code> nie jest określona, element blokowy będzie tak samo wysoki, jak zawarta w nim zawartość, plus <code>padding</code> (chyba że są to floaty, dla których patrz poniżej).</li>
-<li>Jeśli <code>width</code> nie jest określona, element blokowy non-floated rozszerzy się, aby dopasować się do szerokości jego rodzica minus <code>padding</code>.</li>
-<li><code>height</code> elementu jest obliczany na podstawie zawartości <code>height</code>.</li>
-<li><code>width</code> elementu jest obliczany na podstawie zawartości <code>width</code>.</li>
-<li>Domyślnie, <code>padding</code> i <code>border</code> nie są częścią <code>width</code> oraz <code>height</code> elementu.</li>
-</ul>
-<h6 id="bibliografia-12">Bibliografia</h6>
-<ul>
-<li>https://www.smashingmagazine.com/2010/06/the-principles-of-cross-browser-css-coding/#understand-the-css-box-model</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="co-robi-box-sizing-border-box-jakie-są-tego-zalety">Co robi <code>* { box-sizing: border-box; }</code>? Jakie są tego zalety?</h3>
-<ul>
-<li>Domyślnie, elementy mają <code>box-sizing: content-box</code> zastosowane, i uwzględniany jest tylko rozmiar contentu.</li>
-<li><code>box-sizing: border-box</code> zmienia jak <code>width</code> i <code>height</code> elementów są liczone, <code>border</code> i <code>padding</code> są również uwzględniane w obliczeniach.</li>
-<li><code>height</code> elementu jest teraz obliczany na podstawie zawartości <code>height</code> + pionowy <code>padding</code> + pionowa szerokość <code>border</code>.</li>
-<li><code>width</code> elementu jest teraz obliczany na podstawie zawartości <code>width</code> + poziomy <code>padding</code> + pozioma szerokość <code>border</code>.</li>
-<li>Biorąc pod uwagę <code>padding</code> oraz <code>border</code> jako część naszego modelu pudełkowego lepiej współgra z tym, jak projektanci wyobrażają sobie treść w gridach.</li>
-</ul>
-<h6 id="bibliografia-13">Bibliografia</h6>
-<ul>
-<li>https://www.paulirish.com/2012/box-sizing-border-box-ftw/</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="czym-jest-właściwość-display-w-css-i-czy-możesz-podać-kilka-przykładów-jej-użycia">Czym jest właściwość <code>display</code> w CSS i czy możesz podać kilka przykładów jej użycia?</h3>
-<ul>
-<li><code>none</code>, <code>block</code>, <code>inline</code>, <code>inline-block</code>, <code>flex</code>, <code>grid</code>, <code>table</code>, <code>table-row</code>, <code>table-cell</code>, <code>list-item</code>.</li>
-</ul>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;"><code>display</code></th>
-<th style="text-align: left;">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>none</code></td>
-<td style="text-align: left;">Does not display an element (the elementv no longer affects the layout of the document). All child element are also no longer displayed. The document is rendered as if the element did not exist in the document tree</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>block</code></td>
-<td style="text-align: left;">The element consumes the whole line in the block direction (which is usually horizontal)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>inline</code></td>
-<td style="text-align: left;">Elements can be laid out beside each other</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>inline-block</code></td>
-<td style="text-align: left;">Similar to <code>inline</code>, but allows some <code>block</code> properties like setting <code>width</code> and <code>height</code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>table</code></td>
-<td style="text-align: left;">Behaves like the <code>&lt;table&gt;</code> element</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>table-row</code></td>
-<td style="text-align: left;">Behaves like the <code>&lt;tr&gt;</code> element</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>table-cell</code></td>
-<td style="text-align: left;">Behaves like the <code>&lt;td&gt;</code> element</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>list-item</code></td>
-<td style="text-align: left;">Behaves like a <code>&lt;li&gt;</code> element which allows it to define <code>list-style-type</code> and <code>list-style-position</code></td>
-</tr>
-</tbody>
-</table>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="jaka-jest-różnica-pomiędzy-inline-a-inline-block">Jaka jest różnica pomiędzy <code>inline</code>, a <code>inline-block</code>?</h3>
-<p>Dla dobrego porównania wrzucę porównanie z <code>block</code>.</p>
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th><code>block</code></th>
-<th><code>inline-block</code></th>
-<th><code>inline</code></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Size</td>
-<td>Fills up the width of its parent container.</td>
-<td>Depends on content.</td>
-<td>Depends on content.</td>
-</tr>
-<tr class="even">
-<td>Positioning</td>
-<td>Start on a new line and tolerates no HTML elements next to it (except when you add <code>float</code>)</td>
-<td>Flows along with other content and allows other elements beside it.</td>
-<td>Flows along with other content and allows other elements beside it.</td>
-</tr>
-<tr class="odd">
-<td>Can specify <code>width</code> and <code>height</code></td>
-<td>Yes</td>
-<td>Yes</td>
-<td>No. Will ignore if being set.</td>
-</tr>
-<tr class="even">
-<td>Can be aligned with <code>vertical-align</code></td>
-<td>No</td>
-<td>Yes</td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td>Margins and paddings</td>
-<td>All sides respected.</td>
-<td>All sides respected.</td>
-<td>Only horizontal sides respected. Vertical sides, if specified, do not affect layout. Vertical space it takes up depends on <code>line-height</code>, even though the <code>border</code> and <code>padding</code> appear visually around the content.</td>
-</tr>
-<tr class="even">
-<td>Float</td>
-<td>-</td>
-<td>-</td>
-<td>Becomes like a <code>block</code> element where you can set vertical margins and paddings.</td>
-</tr>
-</tbody>
-</table>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="jaka-jest-różnica-między-pozycjonowaniem-relative-fixed-absolute-i-static-elementu">Jaka jest różnica między pozycjonowaniem <code>relative</code>, <code>fixed</code>, <code>absolute</code> i <code>static</code> elementu?</h3>
-<p>Element pozycjonowany to element, którego obliczona właściwość <code>position</code> jest albo <code>relative</code>, <code>absolute</code>, <code>fixed</code> lub <code>sticky</code>.</p>
-<ul>
-<li><code>static</code> - Pozycja domyślna; element wpłynie na stronę w normalny sposób. Właściwości <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code> i <code>z-index</code> nie mają zastosowania.</li>
-<li><code>relative</code> - Pozycja elementu jest dopasowywana względem siebie, bez zmiany układu (i tym samym pozostawiając odstęp dla elementu, w którym byłby, gdyby nie został ustawiony).</li>
-<li><code>absolute</code> - Element jest usuwany z przepływu strony i ustawiany w określonej pozycji względem najbliższego umieszczonego przodka, jeśli taki istnieje, lub w inny sposób względem początkowego bloku zawierającego. Pola absolutnie pozycjonowane mogą mieć marginesy i nie zwijają się z żadnymi innymi marginesami. Te elementy nie wpływają na pozycję innych elementów.</li>
-<li><code>fixed</code> - Element jest usuwany z przepływu strony i ustawiany w określonej pozycji względem viewport i nie porusza się podczas przewijania.</li>
-<li><code>sticky</code> - Pozycjonowanie sticky to hybryda pozycjonowania względnego i ustalonego. Element jest traktowany jako pozycja <code>relative</code>, dopóki nie przekroczy określonego progu, w którym to momencie jest traktowany jako pozycja <code>fixed</code>.</li>
-</ul>
-<h6 id="bibliografia-14">Bibliografia</h6>
-<ul>
-<li>https://developer.mozilla.org/en/docs/Web/CSS/position</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="z-jakich-istniejących-frameworków-css-korzystałeś-lokalnie-lub-na-produkcji-jak-byś-je-zmieniłulepszył">Z jakich istniejących frameworków CSS korzystałeś lokalnie lub na produkcji? Jak byś je zmienił/ulepszył?</h3>
-<ul>
-<li><strong>Bootstrap</strong> - Cykl wolnego wydania. Bootstrap 4 jest w wersji alfa od prawie 2 lat. Dodać spinner button component, ponieważ jest on powszechnie używany.</li>
-<li><strong>Semantic UI</strong> - Struktura kodu źródłowego sprawia, że dostosowanie motywu jest niezwykle trudne do zrozumienia. Niekonwencjonalny system tematyczny jest trudny do dostosowania. Zahardkodowana ścieżka konfiguracji w bibliotece dostawcy. Niezbyt dobrze zaprojektowany do nadpisywania zmiennych w przeciwieństwie do Bootstrap.</li>
-<li><strong>Bulma</strong> - Wymaganych jest wiele niesemantycznych i zbędnych klas i znaczników. Niekompatybilny wstecz. Uaktualnianie wersji psuje aplikację w subtelny sposób.</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="czy-robiłeś-coś-w-nowej-specyfikacji-css-flexbox-lub-grid">Czy robiłeś coś w nowej specyfikacji CSS Flexbox lub Grid?</h3>
-<p>Tak. Flexbox jest przeznaczony głównie do układów 1-wymiarowych, a Grid do układów 2-wymiarowych.</p>
-<p>Flexbox rozwiązuje wiele typowych problemów w CSS, takich jak pionowe centrowanie elementów w kontenerze, sticky footer itp. Bootstrap i Bulma są oparte na Flexbox i jest to prawdopodobnie zalecany sposób tworzenia układów w dzisiejszych czasach. Próbowałem już Flexboksa wcześniej, ale napotkałem pewne problemy z niekompatybilnością przeglądarki (Safari) przy użyciu <code>flex-grow</code>, i musiałem przepisać mój kod przy użyciu <code>inline-block</code> i matematyki, aby obliczyć szerokości w procentach, to nie było miłe doświadczenie.</p>
-<p>Grid jest zdecydowanie najbardziej intuicyjnym podejściem do tworzenia układów opartych na grid’zie (lepiej!), ale obsługa przeglądarki nie jest w tej chwili szeroka.</p>
-<h6 id="bibliografia-15">Bibliografia</h6>
-<ul>
-<li>https://philipwalton.github.io/solved-by-flexbox/</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="czy-potrafisz-wyjaśnić-różnicę-między-kodowaniem-strony-internetowej-aby-była-responsywna-a-używaniem-mobile-first-strategy">Czy potrafisz wyjaśnić różnicę między kodowaniem strony internetowej, aby była responsywna, a używaniem mobile-first strategy?</h3>
-<p>Pamiętaj, że te dwa podejścia nie są wykluczające.</p>
-<p>Uaktywnienie strony internetowej oznacza, że niektóre elementy zareagują, dostosowując jej rozmiar lub inne funkcje zgodnie z rozmiarem ekranu urządzenia, zwykle szerokością viewport, poprzez CSS media queries, na przykład zmniejszając rozmiar czcionki na mniejszych urządzeniach.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb4-1" title="1"><span class="im">@media</span> (<span class="kw">min-width</span>: <span class="dv">601</span><span class="dt">px</span>) {</a>
+<a class="sourceLine" id="cb3-5" title="5">}</a></code></pre>
+    </div>
+    <h6 id="bibliografia-8">Bibliografia</h6>
+    <ul>
+      <li>
+        https://developer.mozilla.org/en-US/docs/Web/CSS/<span
+          class="citation"
+          data-cites="media#Syntax"
+          >@media#Syntax</span
+        >
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3 id="jakie-są-tricki-do-pisania-wydajnego-css">
+      Jakie są “tricki” do pisania wydajnego CSS?
+    </h3>
+    <p>
+      Po pierwsze, zrozum, że przeglądarki dopasowują selektory od skrajnie
+      prawej (key selector) do lewej. Przeglądarki odfiltrowują elementy w DOM
+      zgodnie z key selector’em i przesuwają w górę jego elementy nadrzędne, aby
+      ustalić dopasowania. Im krótsza długość łańcucha selektora, tym szybciej
+      przeglądarka może ustalić, czy ten element pasuje do selektora. Dlatego
+      unikaj key selectorów, które są selektorami tagów i uniwersalnymi. Pasują
+      do dużej liczby elementów, a przeglądarki będą musiały wykonać więcej
+      pracy, aby ustalić, czy rodzice pasują.
+    </p>
+    <p>
+      Metodologia
+      <a href="https://bem.info/">BEM (Block Element Modifier)</a> zaleca, aby
+      wszystko miało jedną klasę, a tam, gdzie potrzebna jest hierarchia, która
+      wpisuje się również w nazwę klasy, w naturalny sposób sprawia to, że
+      selektor jest wydajny i łatwy do zastąpienia.
+    </p>
+    <p>
+      Należy pamiętać, które właściwości CSS wyzwalają
+      <a href="https://csstriggers.com/">trigger</a> reflow, repaint, i
+      compositing. Unikaj pisania stylów, które zmieniają układ (wyzwalanie
+      przepływu) tam, gdzie to możliwe.
+    </p>
+    <h6 id="bibliografia-9">Bibliografia</h6>
+    <ul>
+      <li>
+        https://developers.google.com/web/fundamentals/performance/rendering/
+      </li>
+      <li>https://csstriggers.com/</li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3 id="jakie-są-zaletywady-korzystania-z-preprocesorów-css">
+      Jakie są zalety/wady korzystania z preprocesorów CSS?
+    </h3>
+    <p><strong>Zalety:</strong></p>
+    <ul>
+      <li>CSS jest łatwiejszy w utrzymaniu.</li>
+      <li>Łatwe do pisania zagnieżdżone selektory.</li>
+      <li>
+        Zmienne dla spójnego motywu. Może udostępniać pliki motywów w różnych
+        projektach.
+      </li>
+      <li>Mixins do generowania powtarzanego CSS.</li>
+      <li>
+        Funkcje Sass, takie jak pętle, listy i mapy, mogą ułatwić konfigurację i
+        zmniejszyć poziom szczegółowości.
+      </li>
+      <li>
+        Dzielenie kodu na wiele plików. Pliki CSS można również podzielić, ale
+        będzie to wymagało żądania HTTP pobrania każdego pliku CSS.
+      </li>
+    </ul>
+    <p><strong>Wady:</strong></p>
+    <ul>
+      <li>
+        Wymaga narzędzi do wstępnego przetwarzania. Czas ponownej kompilacji
+        może być długi.
+      </li>
+      <li>
+        Brak pisania obecnego i potencjalnie użytecznego CSS. Na przykład,
+        używając czegoś podobnego do
+        <a href="https://github.com/postcss/postcss-loader">postcss-loader</a> z
+        <a href="https://webpack.js.org/">webpack</a>, możesz napisać
+        potencjalnie kompatybilny CSS, pozwalając na używanie takich zmiennych
+        jak CSS zamiast zmiennych Sass. W ten sposób uczysz się nowych
+        umiejętności, które mogą się opłacić, jeśli/gdy zostaną ujednolicone.
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="opisz-co-lubisz-a-czego-nie-w-preprocesorach-css-z-których-korzystałeś."
+    >
+      Opisz, co lubisz, a czego nie w preprocesorach CSS, z których korzystałeś.
+    </h3>
+    <p><strong>Polubione:</strong></p>
+    <ul>
+      <li>Głównie zalety wymienione powyżej.</li>
+      <li>
+        Less jest napisany w JavaScript, który dobrze współpracuje z Node.
+      </li>
+    </ul>
+    <p><strong>Niepolubione:</strong></p>
+    <ul>
+      <li>
+        Używam Sass przez <code>node-sass</code>, który jest powiązaniem dla
+        LibSass napisanego w C++. Muszę często go przekompilować podczas
+        przełączania między wersjami węzłów.
+      </li>
+      <li>
+        W Less, nazwy zmiennych są poprzedzone znakiem <code>@</code>, które
+        można pomylić z natywnymi słowami kluczowymi CSS, takimi jak
+        <code>@media</code>, <code>@import</code> i reguła
+        <code>@font-face</code>.
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="jak-zaimplementowałbyś-kompozycję-do-projektowania-stron-internetowych-która-wykorzystuje-niestandardowe-czcionki"
+    >
+      Jak zaimplementowałbyś kompozycję do projektowania stron internetowych,
+      która wykorzystuje niestandardowe czcionki?
+    </h3>
+    <p>
+      Użycie <code>@font-face</code> i zdefiniowanie
+      <code>font-family</code> dla różnych <code>font-weight</code>.
+    </p>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="wyjaśnij-w-jaki-sposób-przeglądarka-określa-które-elementy-pasują-do-selektora-css."
+    >
+      Wyjaśnij, w jaki sposób przeglądarka określa, które elementy pasują do
+      selektora CSS.
+    </h3>
+    <p>
+      Ta część jest związana z powyższą na temat
+      <a href="#what-are-some-of-the-gotchas-for-writing-efficient-css"
+        >pisania wydajnego CSS</a
+      >. Przeglądarki dopasowują selektory od skrajnie prawej (key selector) do
+      lewej. Przeglądarki odfiltrowują elementy w DOM zgodnie z key selector i
+      przesuwają w górę jego elementy nadrzędne, aby ustalić dopasowania. Im
+      krótsza długość łańcucha selektora, tym szybciej przeglądarka może
+      ustalić, czy ten element pasuje do selektora.
+    </p>
+    <p>
+      Na przykład ten selektor <code>p span</code>, przeglądarka najpierw
+      znajduje wszystkie elementy <code>&lt;span&gt;</code> i przemierza jego
+      rodzica aż do roota, aby znaleźć element <code>&lt;p&gt;</code>. Dla
+      konkretnego <code>&lt;span&gt;</code>, jak tylko znajdzie
+      <code>&lt;p&gt;</code>, wie że <code>&lt;span&gt;</code> dopasowane i może
+      zatrzymać dopasowanie.
+    </p>
+    <h6 id="bibliografia-10">Bibliografia</h6>
+    <ul>
+      <li>
+        https://stackoverflow.com/questions/5797014/why-do-browsers-match-css-selectors-from-right-to-left
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3 id="opisz-pseudoelementy-i-omów-do-czego-służą.">
+      Opisz pseudoelementy i omów, do czego służą.
+    </h3>
+    <p>
+      Pseudoelement CSS jest słowem kluczowym dodawanym do selektora, który
+      pozwala stylizować określoną część wybranych elementów. Mogą być używane
+      do dekoracji (<code>:first-line</code>, <code>:first-letter</code>) lub
+      dodawać elementy do znaczników (w połączeniu z <code>content: ...</code>)
+      bez konieczności modyfikowania znaczników (<code>:before</code>,
+      <code>:after</code>).
+    </p>
+    <ul>
+      <li>
+        <code>:first-line</code> i <code>:first-letter</code> może służyć do
+        ozdabiania tekstu.
+      </li>
+      <li>
+        Użycie <code>.clearfix</code> jak pokazano powyżej, aby dodać element
+        zero-space z <code>clear: both</code>.
+      </li>
+      <li>
+        Trójkątne strzałki w tooltips używają <code>:before</code> i
+        <code>:after</code>. Zachęca do rozdzielenia rzeczy, ponieważ trójkąt
+        jest uważany za część stylizacji, a nie DOM.
+      </li>
+    </ul>
+    <h6 id="bibliografia-11">Bibliografia</h6>
+    <ul>
+      <li>https://css-tricks.com/almanac/selectors/a/after-and-before/</li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="wyjaśnij-swoje-zrozumienie-box-model-i-sposób-w-jaki-chcesz-aby-przeglądarka-w-css-renderowała-układ-w-różnych-modelach-pudełkowych."
+    >
+      Wyjaśnij swoje zrozumienie box model i sposób, w jaki chcesz, aby
+      przeglądarka w CSS renderowała układ w różnych modelach pudełkowych.
+    </h3>
+    <p>
+      Model pola CSS opisuje prostokątne pola, które są generowane dla elementów
+      w drzewie dokumentu i rozmieszczone zgodnie z wizualnym modelem
+      formatowania. Każdy box ma pole zawartości (np. text, an image, etc.) i
+      opcjonalne otoczenie polami <code>padding</code>, <code>border</code>, i
+      <code>margin</code>.
+    </p>
+    <p>Model pudełkowy CSS odpowiada za obliczenie:</p>
+    <ul>
+      <li>Ile miejsca zajmuje element bloku.</li>
+      <li>
+        Niezależnie od tego, czy granice i/lub marginesy nachodzą na siebie, czy
+        się zawalają.
+      </li>
+      <li>Wymiary pudełka.</li>
+    </ul>
+    <p>Model pudełkowy ma następujące zasady:</p>
+    <ul>
+      <li>
+        Wymiary elementu bloku są obliczane przez <code>width</code>,
+        <code>height</code>, <code>padding</code>, <code>border</code> i
+        <code>margin</code>.
+      </li>
+      <li>
+        Jeśli <code>height</code> nie jest określona, element blokowy będzie tak
+        samo wysoki, jak zawarta w nim zawartość, plus
+        <code>padding</code> (chyba że są to floaty, dla których patrz poniżej).
+      </li>
+      <li>
+        Jeśli <code>width</code> nie jest określona, element blokowy non-floated
+        rozszerzy się, aby dopasować się do szerokości jego rodzica minus
+        <code>padding</code>.
+      </li>
+      <li>
+        <code>height</code> elementu jest obliczany na podstawie zawartości
+        <code>height</code>.
+      </li>
+      <li>
+        <code>width</code> elementu jest obliczany na podstawie zawartości
+        <code>width</code>.
+      </li>
+      <li>
+        Domyślnie, <code>padding</code> i <code>border</code> nie są częścią
+        <code>width</code> oraz <code>height</code> elementu.
+      </li>
+    </ul>
+    <h6 id="bibliografia-12">Bibliografia</h6>
+    <ul>
+      <li>
+        https://www.smashingmagazine.com/2010/06/the-principles-of-cross-browser-css-coding/#understand-the-css-box-model
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3 id="co-robi-box-sizing-border-box-jakie-są-tego-zalety">
+      Co robi <code>* { box-sizing: border-box; }</code>? Jakie są tego zalety?
+    </h3>
+    <ul>
+      <li>
+        Domyślnie, elementy mają
+        <code>box-sizing: content-box</code> zastosowane, i uwzględniany jest
+        tylko rozmiar contentu.
+      </li>
+      <li>
+        <code>box-sizing: border-box</code> zmienia jak <code>width</code> i
+        <code>height</code> elementów są liczone, <code>border</code> i
+        <code>padding</code> są również uwzględniane w obliczeniach.
+      </li>
+      <li>
+        <code>height</code> elementu jest teraz obliczany na podstawie
+        zawartości <code>height</code> + pionowy <code>padding</code> + pionowa
+        szerokość <code>border</code>.
+      </li>
+      <li>
+        <code>width</code> elementu jest teraz obliczany na podstawie zawartości
+        <code>width</code> + poziomy <code>padding</code> + pozioma szerokość
+        <code>border</code>.
+      </li>
+      <li>
+        Biorąc pod uwagę <code>padding</code> oraz <code>border</code> jako
+        część naszego modelu pudełkowego lepiej współgra z tym, jak projektanci
+        wyobrażają sobie treść w gridach.
+      </li>
+    </ul>
+    <h6 id="bibliografia-13">Bibliografia</h6>
+    <ul>
+      <li>https://www.paulirish.com/2012/box-sizing-border-box-ftw/</li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="czym-jest-właściwość-display-w-css-i-czy-możesz-podać-kilka-przykładów-jej-użycia"
+    >
+      Czym jest właściwość <code>display</code> w CSS i czy możesz podać kilka
+      przykładów jej użycia?
+    </h3>
+    <ul>
+      <li>
+        <code>none</code>, <code>block</code>, <code>inline</code>,
+        <code>inline-block</code>, <code>flex</code>, <code>grid</code>,
+        <code>table</code>, <code>table-row</code>, <code>table-cell</code>,
+        <code>list-item</code>.
+      </li>
+    </ul>
+    <table>
+      <colgroup>
+        <col style="width: 50%" />
+        <col style="width: 50%" />
+      </colgroup>
+      <thead>
+        <tr class="header">
+          <th style="text-align: left"><code>display</code></th>
+          <th style="text-align: left">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td style="text-align: left"><code>none</code></td>
+          <td style="text-align: left">
+            Does not display an element (the elementv no longer affects the
+            layout of the document). All child element are also no longer
+            displayed. The document is rendered as if the element did not exist
+            in the document tree
+          </td>
+        </tr>
+        <tr class="even">
+          <td style="text-align: left"><code>block</code></td>
+          <td style="text-align: left">
+            The element consumes the whole line in the block direction (which is
+            usually horizontal)
+          </td>
+        </tr>
+        <tr class="odd">
+          <td style="text-align: left"><code>inline</code></td>
+          <td style="text-align: left">
+            Elements can be laid out beside each other
+          </td>
+        </tr>
+        <tr class="even">
+          <td style="text-align: left"><code>inline-block</code></td>
+          <td style="text-align: left">
+            Similar to <code>inline</code>, but allows some
+            <code>block</code> properties like setting <code>width</code> and
+            <code>height</code>
+          </td>
+        </tr>
+        <tr class="odd">
+          <td style="text-align: left"><code>table</code></td>
+          <td style="text-align: left">
+            Behaves like the <code>&lt;table&gt;</code> element
+          </td>
+        </tr>
+        <tr class="even">
+          <td style="text-align: left"><code>table-row</code></td>
+          <td style="text-align: left">
+            Behaves like the <code>&lt;tr&gt;</code> element
+          </td>
+        </tr>
+        <tr class="odd">
+          <td style="text-align: left"><code>table-cell</code></td>
+          <td style="text-align: left">
+            Behaves like the <code>&lt;td&gt;</code> element
+          </td>
+        </tr>
+        <tr class="even">
+          <td style="text-align: left"><code>list-item</code></td>
+          <td style="text-align: left">
+            Behaves like a <code>&lt;li&gt;</code> element which allows it to
+            define <code>list-style-type</code> and
+            <code>list-style-position</code>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3 id="jaka-jest-różnica-pomiędzy-inline-a-inline-block">
+      Jaka jest różnica pomiędzy <code>inline</code>, a
+      <code>inline-block</code>?
+    </h3>
+    <p>Dla dobrego porównania wrzucę porównanie z <code>block</code>.</p>
+    <table>
+      <colgroup>
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+        <col style="width: 25%" />
+      </colgroup>
+      <thead>
+        <tr class="header">
+          <th></th>
+          <th><code>block</code></th>
+          <th><code>inline-block</code></th>
+          <th><code>inline</code></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd">
+          <td>Size</td>
+          <td>Fills up the width of its parent container.</td>
+          <td>Depends on content.</td>
+          <td>Depends on content.</td>
+        </tr>
+        <tr class="even">
+          <td>Positioning</td>
+          <td>
+            Start on a new line and tolerates no HTML elements next to it
+            (except when you add <code>float</code>)
+          </td>
+          <td>
+            Flows along with other content and allows other elements beside it.
+          </td>
+          <td>
+            Flows along with other content and allows other elements beside it.
+          </td>
+        </tr>
+        <tr class="odd">
+          <td>Can specify <code>width</code> and <code>height</code></td>
+          <td>Yes</td>
+          <td>Yes</td>
+          <td>No. Will ignore if being set.</td>
+        </tr>
+        <tr class="even">
+          <td>Can be aligned with <code>vertical-align</code></td>
+          <td>No</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr class="odd">
+          <td>Margins and paddings</td>
+          <td>All sides respected.</td>
+          <td>All sides respected.</td>
+          <td>
+            Only horizontal sides respected. Vertical sides, if specified, do
+            not affect layout. Vertical space it takes up depends on
+            <code>line-height</code>, even though the <code>border</code> and
+            <code>padding</code> appear visually around the content.
+          </td>
+        </tr>
+        <tr class="even">
+          <td>Float</td>
+          <td>-</td>
+          <td>-</td>
+          <td>
+            Becomes like a <code>block</code> element where you can set vertical
+            margins and paddings.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="jaka-jest-różnica-między-pozycjonowaniem-relative-fixed-absolute-i-static-elementu"
+    >
+      Jaka jest różnica między pozycjonowaniem <code>relative</code>,
+      <code>fixed</code>, <code>absolute</code> i <code>static</code> elementu?
+    </h3>
+    <p>
+      Element pozycjonowany to element, którego obliczona właściwość
+      <code>position</code> jest albo <code>relative</code>,
+      <code>absolute</code>, <code>fixed</code> lub <code>sticky</code>.
+    </p>
+    <ul>
+      <li>
+        <code>static</code> - Pozycja domyślna; element wpłynie na stronę w
+        normalny sposób. Właściwości <code>top</code>, <code>right</code>,
+        <code>bottom</code>, <code>left</code> i <code>z-index</code> nie mają
+        zastosowania.
+      </li>
+      <li>
+        <code>relative</code> - Pozycja elementu jest dopasowywana względem
+        siebie, bez zmiany układu (i tym samym pozostawiając odstęp dla
+        elementu, w którym byłby, gdyby nie został ustawiony).
+      </li>
+      <li>
+        <code>absolute</code> - Element jest usuwany z przepływu strony i
+        ustawiany w określonej pozycji względem najbliższego umieszczonego
+        przodka, jeśli taki istnieje, lub w inny sposób względem początkowego
+        bloku zawierającego. Pola absolutnie pozycjonowane mogą mieć marginesy i
+        nie zwijają się z żadnymi innymi marginesami. Te elementy nie wpływają
+        na pozycję innych elementów.
+      </li>
+      <li>
+        <code>fixed</code> - Element jest usuwany z przepływu strony i ustawiany
+        w określonej pozycji względem viewport i nie porusza się podczas
+        przewijania.
+      </li>
+      <li>
+        <code>sticky</code> - Pozycjonowanie sticky to hybryda pozycjonowania
+        względnego i ustalonego. Element jest traktowany jako pozycja
+        <code>relative</code>, dopóki nie przekroczy określonego progu, w którym
+        to momencie jest traktowany jako pozycja <code>fixed</code>.
+      </li>
+    </ul>
+    <h6 id="bibliografia-14">Bibliografia</h6>
+    <ul>
+      <li>https://developer.mozilla.org/en/docs/Web/CSS/position</li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="z-jakich-istniejących-frameworków-css-korzystałeś-lokalnie-lub-na-produkcji-jak-byś-je-zmieniłulepszył"
+    >
+      Z jakich istniejących frameworków CSS korzystałeś lokalnie lub na
+      produkcji? Jak byś je zmienił/ulepszył?
+    </h3>
+    <ul>
+      <li>
+        <strong>Bootstrap</strong> - Cykl wolnego wydania. Bootstrap 4 jest w
+        wersji alfa od prawie 2 lat. Dodać spinner button component, ponieważ
+        jest on powszechnie używany.
+      </li>
+      <li>
+        <strong>Semantic UI</strong> - Struktura kodu źródłowego sprawia, że
+        dostosowanie motywu jest niezwykle trudne do zrozumienia.
+        Niekonwencjonalny system tematyczny jest trudny do dostosowania.
+        Zahardkodowana ścieżka konfiguracji w bibliotece dostawcy. Niezbyt
+        dobrze zaprojektowany do nadpisywania zmiennych w przeciwieństwie do
+        Bootstrap.
+      </li>
+      <li>
+        <strong>Bulma</strong> - Wymaganych jest wiele niesemantycznych i
+        zbędnych klas i znaczników. Niekompatybilny wstecz. Uaktualnianie wersji
+        psuje aplikację w subtelny sposób.
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3 id="czy-robiłeś-coś-w-nowej-specyfikacji-css-flexbox-lub-grid">
+      Czy robiłeś coś w nowej specyfikacji CSS Flexbox lub Grid?
+    </h3>
+    <p>
+      Tak. Flexbox jest przeznaczony głównie do układów 1-wymiarowych, a Grid do
+      układów 2-wymiarowych.
+    </p>
+    <p>
+      Flexbox rozwiązuje wiele typowych problemów w CSS, takich jak pionowe
+      centrowanie elementów w kontenerze, sticky footer itp. Bootstrap i Bulma
+      są oparte na Flexbox i jest to prawdopodobnie zalecany sposób tworzenia
+      układów w dzisiejszych czasach. Próbowałem już Flexboksa wcześniej, ale
+      napotkałem pewne problemy z niekompatybilnością przeglądarki (Safari) przy
+      użyciu <code>flex-grow</code>, i musiałem przepisać mój kod przy użyciu
+      <code>inline-block</code> i matematyki, aby obliczyć szerokości w
+      procentach, to nie było miłe doświadczenie.
+    </p>
+    <p>
+      Grid jest zdecydowanie najbardziej intuicyjnym podejściem do tworzenia
+      układów opartych na grid’zie (lepiej!), ale obsługa przeglądarki nie jest
+      w tej chwili szeroka.
+    </p>
+    <h6 id="bibliografia-15">Bibliografia</h6>
+    <ul>
+      <li>https://philipwalton.github.io/solved-by-flexbox/</li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="czy-potrafisz-wyjaśnić-różnicę-między-kodowaniem-strony-internetowej-aby-była-responsywna-a-używaniem-mobile-first-strategy"
+    >
+      Czy potrafisz wyjaśnić różnicę między kodowaniem strony internetowej, aby
+      była responsywna, a używaniem mobile-first strategy?
+    </h3>
+    <p>Pamiętaj, że te dwa podejścia nie są wykluczające.</p>
+    <p>
+      Uaktywnienie strony internetowej oznacza, że niektóre elementy zareagują,
+      dostosowując jej rozmiar lub inne funkcje zgodnie z rozmiarem ekranu
+      urządzenia, zwykle szerokością viewport, poprzez CSS media queries, na
+      przykład zmniejszając rozmiar czcionki na mniejszych urządzeniach.
+    </p>
+    <div class="sourceCode" id="cb4">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb4-1" title="1"><span class="im">@media</span> (<span class="kw">min-width</span>: <span class="dv">601</span><span class="dt">px</span>) {</a>
 <a class="sourceLine" id="cb4-2" title="2">  <span class="fu">.my-class</span> {</a>
 <a class="sourceLine" id="cb4-3" title="3">    <span class="kw">font-size</span>: <span class="dv">24</span><span class="dt">px</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb4-4" title="4">  }</a>
@@ -544,9 +1516,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb4-8" title="8">  <span class="fu">.my-class</span> {</a>
 <a class="sourceLine" id="cb4-9" title="9">    <span class="kw">font-size</span>: <span class="dv">12</span><span class="dt">px</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb4-10" title="10">  }</a>
-<a class="sourceLine" id="cb4-11" title="11">}</a></code></pre></div>
-<p>Mobile-first strategy również jest responsywna, jednak zgadza się, że powinniśmy domyślnie zdefiniować wszystkie style dla urządzeń mobilnych, a później dopiero dodać konkretne reguły responsywne do innych urządzeń. Zgodnie z poprzednim przykładem:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">.my-class</span> {</a>
+<a class="sourceLine" id="cb4-11" title="11">}</a></code></pre>
+    </div>
+    <p>
+      Mobile-first strategy również jest responsywna, jednak zgadza się, że
+      powinniśmy domyślnie zdefiniować wszystkie style dla urządzeń mobilnych, a
+      później dopiero dodać konkretne reguły responsywne do innych urządzeń.
+      Zgodnie z poprzednim przykładem:
+    </p>
+    <div class="sourceCode" id="cb5">
+      <pre
+        class="sourceCode css"
+      ><code class="sourceCode css"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">.my-class</span> {</a>
 <a class="sourceLine" id="cb5-2" title="2">  <span class="kw">font-size</span>: <span class="dv">12</span><span class="dt">px</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb5-3" title="3">}</a>
 <a class="sourceLine" id="cb5-4" title="4"></a>
@@ -554,35 +1535,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb5-6" title="6">  <span class="fu">.my-class</span> {</a>
 <a class="sourceLine" id="cb5-7" title="7">    <span class="kw">font-size</span>: <span class="dv">24</span><span class="dt">px</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb5-8" title="8">  }</a>
-<a class="sourceLine" id="cb5-9" title="9">}</a></code></pre></div>
-<p>Mobile-first strategy ma 2 główne zalety:</p>
-<ul>
-<li>Jest bardziej wydajna na urządzeniach mobilnych, ponieważ wszystkie zastosowane reguły nie muszą być sprawdzane pod kątem media queries.</li>
-<li>Wymusza pisanie czystszego kodu w odniesieniu do responsywnych reguł CSS.</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="czym-różni-się-projektowanie-responsywne-od-projektowania-adaptacyjnego">Czym różni się projektowanie responsywne od projektowania adaptacyjnego?</h3>
-<p>Zarówno responsywne, jak i adaptacyjne próbują zoptymalizować wrażenia użytkownika na różnych urządzeniach, dostosowując się do różnych rozmiarów viewport, rozdzielczości, kontekstów użytkowania, mechanizmów kontrolnych i tak dalej.</p>
-<p>Responsywne projektowanie działa na zasadzie elastyczności - jedna płynna strona internetowa, która może dobrze wyglądać na dowolnym urządzeniu. Responsywne strony internetowe używają media queries, elastycznych gridów i responsywnych obrazów, aby stworzyć wrażenia użytkownika, które zmieniają w zależności od wielu czynników. Jak pojedyncza piłka rosnąca lub kurcząca się, aby zmieścić się w kilku różnych obręczach.</p>
-<p>Projektowanie adaptacyjne bardziej przypomina nowoczesną definicję stopniowego ulepszania. Zamiast jednego elastycznego projektu, projekt adaptacyjny wykrywa urządzenie i inne funkcje, a następnie zapewnia odpowiednią funkcję i układ na podstawie predefiniowanego zestawu rozmiarów viewport i innych cech. Witryna wykrywa typ używanego urządzenia i zapewnia wstępnie ustawiony układ tego urządzenia. Zamiast jednej piłki przechodzącej przez kilka różnej wielkości obręczy, będziesz mieć kilka różnych piłek do użycia w zależności od rozmiaru obręczy.</p>
-<p>Obie z tych metod mają pewne problemy, które warto ocenić:</p>
-<ul>
-<li>Elastyczne projektowanie może być dość trudne, ponieważ zasadniczo używasz jednego, choć responsywnego układu, pasującego do wszystkich sytuacji. Jak ustawić punkty przerwania media query to jedno z takich wyzwań. Czy używasz standardowych wartości progowych? A może używasz punktów przerwania, które mają sens dla twojego konkretnego układu? Co jeśli ten układ się zmieni?</li>
-<li>Projektowanie adaptacyjne zazwyczaj wymaga user agent sniffing lub wykrywania DPI itp., co może okazać się zawodne.</li>
-</ul>
-<h6 id="bibliografia-16">Bibliografia</h6>
-<ul>
-<li>https://developer.mozilla.org/en-US/docs/Archive/Apps/Design/UI_layout_basics/Responsive_design_versus_adaptive_design</li>
-<li>http://mediumwell.com/responsive-adaptive-mobile/</li>
-<li>https://css-tricks.com/the-difference-between-responsive-and-adaptive-design/</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="czy-kiedykolwiek-pracowałeś-z-grafiką-retina-jeśli-tak-kiedy-i-jakich-technik-użyłeś">Czy kiedykolwiek pracowałeś z grafiką Retina? Jeśli tak, kiedy i jakich technik użyłeś?</h3>
-<p><em>Retina</em> jest po prostu marketingowym terminem odnoszącym się do ekranów o wysokiej rozdzielczości ze współczynnikiem pikseli większym niż 1. Kluczową rzeczą, o której należy wiedzieć, jest to, że użycie współczynnika pikseli oznacza, że wyświetlacze emulują ekran o niższej rozdzielczości w celu wyświetlenia elementów o tym samym rozmiarze. Obecnie rozważamy defacto wszystkie wyświetlacze urządzeń mobilnych <em>retina</em>.</p>
-<p>Przeglądarki domyślnie renderują elementy DOM zgodnie z rozdzielczością urządzenia, z wyjątkiem obrazów.</p>
-<p>Aby mieć wyraźną, ładną grafikę, która najlepiej wykorzystuje wyświetlacze retina, musimy w miarę możliwości używać obrazów o wysokiej rozdzielczości. Jednak używanie zawsze obrazów o najwyższej rozdzielczości będzie miało wpływ na wydajność, ponieważ więcej bajtów będzie trzeba przesłać przewodowo.</p>
-<p>Aby rozwiązać ten problem, możemy użyć responsywnych obrazów, jak określono w HTML5. Wymaga udostępnienia przeglądarki różnych plików o tym samym obrazie w różnych rozdzielczościach i pozwala zdecydować, który obraz jest najlepszy, używając atrybutu HTML <code>srcset</code> i opcjonalnie <code>sizes</code>, na przykład:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">&lt;div</span><span class="ot"> responsive-background-image</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb5-9" title="9">}</a></code></pre>
+    </div>
+    <p>Mobile-first strategy ma 2 główne zalety:</p>
+    <ul>
+      <li>
+        Jest bardziej wydajna na urządzeniach mobilnych, ponieważ wszystkie
+        zastosowane reguły nie muszą być sprawdzane pod kątem media queries.
+      </li>
+      <li>
+        Wymusza pisanie czystszego kodu w odniesieniu do responsywnych reguł
+        CSS.
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="czym-różni-się-projektowanie-responsywne-od-projektowania-adaptacyjnego"
+    >
+      Czym różni się projektowanie responsywne od projektowania adaptacyjnego?
+    </h3>
+    <p>
+      Zarówno responsywne, jak i adaptacyjne próbują zoptymalizować wrażenia
+      użytkownika na różnych urządzeniach, dostosowując się do różnych rozmiarów
+      viewport, rozdzielczości, kontekstów użytkowania, mechanizmów kontrolnych
+      i tak dalej.
+    </p>
+    <p>
+      Responsywne projektowanie działa na zasadzie elastyczności - jedna płynna
+      strona internetowa, która może dobrze wyglądać na dowolnym urządzeniu.
+      Responsywne strony internetowe używają media queries, elastycznych gridów
+      i responsywnych obrazów, aby stworzyć wrażenia użytkownika, które
+      zmieniają w zależności od wielu czynników. Jak pojedyncza piłka rosnąca
+      lub kurcząca się, aby zmieścić się w kilku różnych obręczach.
+    </p>
+    <p>
+      Projektowanie adaptacyjne bardziej przypomina nowoczesną definicję
+      stopniowego ulepszania. Zamiast jednego elastycznego projektu, projekt
+      adaptacyjny wykrywa urządzenie i inne funkcje, a następnie zapewnia
+      odpowiednią funkcję i układ na podstawie predefiniowanego zestawu
+      rozmiarów viewport i innych cech. Witryna wykrywa typ używanego urządzenia
+      i zapewnia wstępnie ustawiony układ tego urządzenia. Zamiast jednej piłki
+      przechodzącej przez kilka różnej wielkości obręczy, będziesz mieć kilka
+      różnych piłek do użycia w zależności od rozmiaru obręczy.
+    </p>
+    <p>Obie z tych metod mają pewne problemy, które warto ocenić:</p>
+    <ul>
+      <li>
+        Elastyczne projektowanie może być dość trudne, ponieważ zasadniczo
+        używasz jednego, choć responsywnego układu, pasującego do wszystkich
+        sytuacji. Jak ustawić punkty przerwania media query to jedno z takich
+        wyzwań. Czy używasz standardowych wartości progowych? A może używasz
+        punktów przerwania, które mają sens dla twojego konkretnego układu? Co
+        jeśli ten układ się zmieni?
+      </li>
+      <li>
+        Projektowanie adaptacyjne zazwyczaj wymaga user agent sniffing lub
+        wykrywania DPI itp., co może okazać się zawodne.
+      </li>
+    </ul>
+    <h6 id="bibliografia-16">Bibliografia</h6>
+    <ul>
+      <li>
+        https://developer.mozilla.org/en-US/docs/Archive/Apps/Design/UI_layout_basics/Responsive_design_versus_adaptive_design
+      </li>
+      <li>http://mediumwell.com/responsive-adaptive-mobile/</li>
+      <li>
+        https://css-tricks.com/the-difference-between-responsive-and-adaptive-design/
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="czy-kiedykolwiek-pracowałeś-z-grafiką-retina-jeśli-tak-kiedy-i-jakich-technik-użyłeś"
+    >
+      Czy kiedykolwiek pracowałeś z grafiką Retina? Jeśli tak, kiedy i jakich
+      technik użyłeś?
+    </h3>
+    <p>
+      <em>Retina</em> jest po prostu marketingowym terminem odnoszącym się do
+      ekranów o wysokiej rozdzielczości ze współczynnikiem pikseli większym niż
+      1. Kluczową rzeczą, o której należy wiedzieć, jest to, że użycie
+      współczynnika pikseli oznacza, że wyświetlacze emulują ekran o niższej
+      rozdzielczości w celu wyświetlenia elementów o tym samym rozmiarze.
+      Obecnie rozważamy defacto wszystkie wyświetlacze urządzeń mobilnych
+      <em>retina</em>.
+    </p>
+    <p>
+      Przeglądarki domyślnie renderują elementy DOM zgodnie z rozdzielczością
+      urządzenia, z wyjątkiem obrazów.
+    </p>
+    <p>
+      Aby mieć wyraźną, ładną grafikę, która najlepiej wykorzystuje wyświetlacze
+      retina, musimy w miarę możliwości używać obrazów o wysokiej
+      rozdzielczości. Jednak używanie zawsze obrazów o najwyższej rozdzielczości
+      będzie miało wpływ na wydajność, ponieważ więcej bajtów będzie trzeba
+      przesłać przewodowo.
+    </p>
+    <p>
+      Aby rozwiązać ten problem, możemy użyć responsywnych obrazów, jak
+      określono w HTML5. Wymaga udostępnienia przeglądarki różnych plików o tym
+      samym obrazie w różnych rozdzielczościach i pozwala zdecydować, który
+      obraz jest najlepszy, używając atrybutu HTML <code>srcset</code> i
+      opcjonalnie <code>sizes</code>, na przykład:
+    </p>
+    <div class="sourceCode" id="cb6">
+      <pre
+        class="sourceCode html"
+      ><code class="sourceCode html"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">&lt;div</span><span class="ot"> responsive-background-image</span><span class="kw">&gt;</span></a>
 <a class="sourceLine" id="cb6-2" title="2">  <span class="kw">&lt;img</span></a>
 <a class="sourceLine" id="cb6-3" title="3"><span class="ot">    src=</span><span class="st">&quot;/images/test-1600.jpg&quot;</span></a>
 <a class="sourceLine" id="cb6-4" title="4"><span class="ot">    sizes=</span><span class="st">&quot;</span></a>
@@ -595,31 +1653,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb6-11" title="11"><span class="st">      /images/test-1200.jpg 1200w</span></a>
 <a class="sourceLine" id="cb6-12" title="12"><span class="st">    &quot;</span></a>
 <a class="sourceLine" id="cb6-13" title="13">  <span class="kw">/&gt;</span></a>
-<a class="sourceLine" id="cb6-14" title="14"><span class="kw">&lt;/div&gt;</span></a></code></pre></div>
-<p>Ważne jest, aby pamiętać, że przeglądarki, które nie obsługują <code>srcset</code> HTML5 (np. IE11), zignorują go i zamiast tego użyją <code>src</code>. Jeśli naprawdę musimy obsługiwać IE11 i chcemy udostępnić tę funkcję ze względu na wydajność, możemy użyć polyfill JavaScript, np. Picturefill (link w bibliografii).</p>
-<p>W przypadku ikon wolałbym również używać plików SVG i czcionek ikon, jeśli to możliwe, ponieważ renderują one bardzo ostro, niezależnie od rozdzielczości.</p>
-<h6 id="bibliografia-17">Bibliografia</h6>
-<ul>
-<li>https://css-tricks.com/responsive-images-youre-just-changing-resolutions-use-srcset/</li>
-<li>http://scottjehl.github.io/picturefill/</li>
-<li>https://aclaes.com/responsive-background-images-with-srcset-and-sizes/</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="czy-jest-jakiś-powód-dla-którego-chciałbyś-użyć-translate-zamiast-pozycjonowania-absolute-lub-odwrotnie-i-dlaczego">Czy jest jakiś powód, dla którego chciałbyś użyć <code>translate ()</code> zamiast pozycjonowania <code>absolute</code> lub odwrotnie? I dlaczego?</h3>
-<p><code>translate()</code> jest wartością CSS <code>transform</code>. Zmieniając <code>transform</code> lub <code>opacity</code> nie powoduje ponownego wczytywania przeglądarki ani odmalowywania, ale powoduje kompozycje; podczas gdy zmiana bezwzględnych wyzwalaczy pozycjonowania <code>reflow</code>. <code>transform</code> powoduje, że przeglądarka tworzy warstwę GPU dla elementu, ale zmiana bezwzględnych właściwości pozycjonowania wykorzystuje procesor. W związku z tym <code>translate()</code> jest bardziej wydajny i spowoduje krótszy czas malowania dla płynniejszych animacji.</p>
-<p>Kiedy używasz <code>translate ()</code>, element nadal zajmuje swoją pierwotną przestrzeń (coś w rodzaju <code>position: relative</code>), w przeciwieństwie do zmiany absolutnego pozycjonowania.</p>
-<h6 id="bibliografia-18">Bibliografia</h6>
-<ul>
-<li>https://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/</li>
-</ul>
-<p><a href="#spis-treści">[↑] Powrót na górę</a></p>
-<h3 id="inne-odpowiedzi">Inne odpowiedzi</h3>
-<ul>
-<li>https://neal.codes/blog/front-end-interview-css-questions</li>
-<li>https://quizlet.com/28293152/front-end-interview-questions-css-flash-cards/</li>
-<li>http://peterdoes.it/2015/12/03/a-personal-exercise-front-end-job-interview-questions-and-my-answers-all/</li>
-</ul>
-<hr />
-<p>Stworzone przez <span class="citation" data-cites="yangshun">[@yangshun]</span>(https://github.com/yangshun) polska wersja od <span class="citation" data-cites="mbiesiad">[@mbiesiad]</span>(https://github.com/mbiesiad)</p>
-</body>
+<a class="sourceLine" id="cb6-14" title="14"><span class="kw">&lt;/div&gt;</span></a></code></pre>
+    </div>
+    <p>
+      Ważne jest, aby pamiętać, że przeglądarki, które nie obsługują
+      <code>srcset</code> HTML5 (np. IE11), zignorują go i zamiast tego użyją
+      <code>src</code>. Jeśli naprawdę musimy obsługiwać IE11 i chcemy
+      udostępnić tę funkcję ze względu na wydajność, możemy użyć polyfill
+      JavaScript, np. Picturefill (link w bibliografii).
+    </p>
+    <p>
+      W przypadku ikon wolałbym również używać plików SVG i czcionek ikon, jeśli
+      to możliwe, ponieważ renderują one bardzo ostro, niezależnie od
+      rozdzielczości.
+    </p>
+    <h6 id="bibliografia-17">Bibliografia</h6>
+    <ul>
+      <li>
+        https://css-tricks.com/responsive-images-youre-just-changing-resolutions-use-srcset/
+      </li>
+      <li>http://scottjehl.github.io/picturefill/</li>
+      <li>
+        https://aclaes.com/responsive-background-images-with-srcset-and-sizes/
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3
+      id="czy-jest-jakiś-powód-dla-którego-chciałbyś-użyć-translate-zamiast-pozycjonowania-absolute-lub-odwrotnie-i-dlaczego"
+    >
+      Czy jest jakiś powód, dla którego chciałbyś użyć
+      <code>translate ()</code> zamiast pozycjonowania <code>absolute</code> lub
+      odwrotnie? I dlaczego?
+    </h3>
+    <p>
+      <code>translate()</code> jest wartością CSS <code>transform</code>.
+      Zmieniając <code>transform</code> lub <code>opacity</code> nie powoduje
+      ponownego wczytywania przeglądarki ani odmalowywania, ale powoduje
+      kompozycje; podczas gdy zmiana bezwzględnych wyzwalaczy pozycjonowania
+      <code>reflow</code>. <code>transform</code> powoduje, że przeglądarka
+      tworzy warstwę GPU dla elementu, ale zmiana bezwzględnych właściwości
+      pozycjonowania wykorzystuje procesor. W związku z tym
+      <code>translate()</code> jest bardziej wydajny i spowoduje krótszy czas
+      malowania dla płynniejszych animacji.
+    </p>
+    <p>
+      Kiedy używasz <code>translate ()</code>, element nadal zajmuje swoją
+      pierwotną przestrzeń (coś w rodzaju <code>position: relative</code>), w
+      przeciwieństwie do zmiany absolutnego pozycjonowania.
+    </p>
+    <h6 id="bibliografia-18">Bibliografia</h6>
+    <ul>
+      <li>
+        https://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
+      </li>
+    </ul>
+    <p><a href="#spis-treści">[↑] Powrót na górę</a></p>
+    <h3 id="inne-odpowiedzi">Inne odpowiedzi</h3>
+    <ul>
+      <li>https://neal.codes/blog/front-end-interview-css-questions</li>
+      <li>
+        https://quizlet.com/28293152/front-end-interview-questions-css-flash-cards/
+      </li>
+      <li>
+        http://peterdoes.it/2015/12/03/a-personal-exercise-front-end-job-interview-questions-and-my-answers-all/
+      </li>
+    </ul>
+    <hr />
+    <p>
+      Stworzone przez
+      <span class="citation" data-cites="yangshun">[@yangshun]</span
+      >(https://github.com/yangshun) polska wersja od
+      <span class="citation" data-cites="mbiesiad">[@mbiesiad]</span
+      >(https://github.com/mbiesiad)
+    </p>
+  </body>
 </html>

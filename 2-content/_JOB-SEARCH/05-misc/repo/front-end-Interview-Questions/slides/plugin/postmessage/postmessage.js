@@ -24,19 +24,18 @@
 
 */
 
-(function (){
+(function () {
+  window.addEventListener(
+    "message",
+    function (event) {
+      var data = JSON.parse(event.data),
+        method = data.method,
+        args = data.args;
 
-	window.addEventListener( "message", function ( event ) {
-		var data = JSON.parse( event.data ),
-				method = data.method,
-				args = data.args;
-
-		if( typeof Reveal[method] === 'function' ) {
-			Reveal[method].apply( Reveal, data.args );
-		}
-	}, false);
-
-}());
-
-
-
+      if (typeof Reveal[method] === "function") {
+        Reveal[method].apply(Reveal, data.args);
+      }
+    },
+    false
+  );
+})();

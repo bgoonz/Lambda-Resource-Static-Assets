@@ -1,71 +1,165 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>README</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-</head>
-<body>
-<h1 align="center">
-Front End Interview Handbook
-</h1>
-<div data-align="center">
-<p><a href="https://dribbble.com/shots/4263961-Front-End-Interview-Scroll"> <img src="../../assets/scroll.svg" alt="Front End Interview Handbook" width="400"/> </a></p>
-</div>
-<h2 id="what-is-this">What is this?</h2>
-<p>Unlike typical software engineer job interviews, front-end job interviews have less emphasis on algorithms and have more questions on intricate knowledge and expertise about the domain — HTML, CSS, JavaScript, just to name a few areas.</p>
-<p>While there are some existing resources to help front end developers in preparing for interviews, they aren’t as abundant as materials for a software engineer interview. Among the existing resources, probably the most helpful question bank would be <a href="https://github.com/h5bp/Front-end-Developer-Interview-Questions">Front-end Developer Interview Questions</a>. Unfortunately, I couldn’t find many complete and satisfactory answers to these questions online, hence here is my attempt at answering them. Being an open source repository, the project can live on with the support of the community as the state of web evolves.</p>
-<hr />
-<div data-align="center">
-<p><strong>💰 Interested in Front End Dev jobs? Sign up with <a href="https://triplebyte.com/a/PJaJNpO/feihg">Triplebyte</a> to efficiently interview with top tech companies! 💰</strong></p>
-</div>
-<hr />
-<h2 id="looking-for-generic-interview-preparation">Looking for Generic Interview Preparation?</h2>
-<p>You might be interested in the <a href="https://github.com/yangshun/tech-interview-handbook">Tech Interview Handbook</a> which has helpful content on general coding interviews such as algorithms, behavioral questions and an <a href="https://github.com/yangshun/tech-interview-handbook/blob/master/preparing/cheatsheet.md">interview cheatsheet</a>!</p>
-<div data-align="center">
-<a href="https://yangshun.github.io/tech-end-interview-handbook/"> <img src="../../assets/coding.svg" alt="Web Technologies illustration" width="400"/> </a> <br/>
-<p>
-<em>Credits: Illustration by <a href="https://undraw.co/">unDraw</a></em>
-</p>
-<h3>
-<a href="https://yangshun.github.io/tech-interview-handbook/">Read on the website</a>
-</h3>
-</div>
-<h2 id="table-of-contents">Table of Contents</h2>
-<ol type="1">
-<li><a href="html-questions.md">HTML Questions</a></li>
-<li><a href="css-questions.md">CSS Questions</a></li>
-<li><a href="javascript-questions.md">JavaScript Questions</a></li>
-</ol>
-<h2 id="contents">Contents</h2>
-<ul>
-<li><a href="/contents/en/README.md">English</a></li>
-<li><a href="/contents/zh/README.md">Chinese (Simplified) (简体中文)</a></li>
-<li><a href="/contents/jp/README.md">Japanese (日本語)</a></li>
-<li><a href="/contents/kr/README.md">Korean (한국어)</a></li>
-<li><a href="contents/pl/README.md">Polish (Polski)</a></li>
-<li><a href="contents/pr/README.md">Portuguese (Português)</a></li>
-<li><a href="/contents/ru/README.md">Russian (Русский)</a></li>
-<li><a href="/contents/tl/README.md">Tagalog</a></li>
-</ul>
-<h2 id="related">Related</h2>
-<p>If you are interested in how data structures are implemented, check out <a href="https://github.com/yangshun/lago">Lago</a>, a Data Structures and Algorithms library for JavaScript. It is pretty much still WIP but I intend to make it into a library that is able to be used in production and also a reference resource for revising Data Structures and Algorithms.</p>
-<h2 id="contributing">Contributing</h2>
-<h3 id="code-of-conduct">Code of Conduct</h3>
-<p>We have adopted the same Code of Conduct as Facebook that we expect project participants to adhere to. Please read <a href="https://code.facebook.com/codeofconduct">the full text</a> so that you can understand what actions will and will not be tolerated.</p>
-<h3 id="contributing-guide">Contributing Guide</h3>
-<p>Read our <a href="/CONTRIBUTING.md">contributing guide</a> to learn about how you can contribute, how to propose improvements or if you are interested in translating the content.</p>
-<h3 id="supporting">Supporting</h3>
-<p>Many hours of hard work have gone into this project. Your support will be very appreciated!</p>
-<p><a href="https://www.buymeacoffee.com/yangshun" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee"/></a></p>
-<h2 id="license">License</h2>
-<p>All projects and packages in this repository are <a href="/LICENSE">MIT licensed</a>.</p>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 align="center">Front End Interview Handbook</h1>
+    <div data-align="center">
+      <p>
+        <a href="https://dribbble.com/shots/4263961-Front-End-Interview-Scroll">
+          <img
+            src="../../assets/scroll.svg"
+            alt="Front End Interview Handbook"
+            width="400"
+          />
+        </a>
+      </p>
+    </div>
+    <h2 id="what-is-this">What is this?</h2>
+    <p>
+      Unlike typical software engineer job interviews, front-end job interviews
+      have less emphasis on algorithms and have more questions on intricate
+      knowledge and expertise about the domain — HTML, CSS, JavaScript, just to
+      name a few areas.
+    </p>
+    <p>
+      While there are some existing resources to help front end developers in
+      preparing for interviews, they aren’t as abundant as materials for a
+      software engineer interview. Among the existing resources, probably the
+      most helpful question bank would be
+      <a href="https://github.com/h5bp/Front-end-Developer-Interview-Questions"
+        >Front-end Developer Interview Questions</a
+      >. Unfortunately, I couldn’t find many complete and satisfactory answers
+      to these questions online, hence here is my attempt at answering them.
+      Being an open source repository, the project can live on with the support
+      of the community as the state of web evolves.
+    </p>
+    <hr />
+    <div data-align="center">
+      <p>
+        <strong
+          >💰 Interested in Front End Dev jobs? Sign up with
+          <a href="https://triplebyte.com/a/PJaJNpO/feihg">Triplebyte</a> to
+          efficiently interview with top tech companies! 💰</strong
+        >
+      </p>
+    </div>
+    <hr />
+    <h2 id="looking-for-generic-interview-preparation">
+      Looking for Generic Interview Preparation?
+    </h2>
+    <p>
+      You might be interested in the
+      <a href="https://github.com/yangshun/tech-interview-handbook"
+        >Tech Interview Handbook</a
+      >
+      which has helpful content on general coding interviews such as algorithms,
+      behavioral questions and an
+      <a
+        href="https://github.com/yangshun/tech-interview-handbook/blob/master/preparing/cheatsheet.md"
+        >interview cheatsheet</a
+      >!
+    </p>
+    <div data-align="center">
+      <a href="https://yangshun.github.io/tech-end-interview-handbook/">
+        <img
+          src="../../assets/coding.svg"
+          alt="Web Technologies illustration"
+          width="400"
+        />
+      </a>
+      <br />
+      <p>
+        <em
+          >Credits: Illustration by <a href="https://undraw.co/">unDraw</a></em
+        >
+      </p>
+      <h3>
+        <a href="https://yangshun.github.io/tech-interview-handbook/"
+          >Read on the website</a
+        >
+      </h3>
+    </div>
+    <h2 id="table-of-contents">Table of Contents</h2>
+    <ol type="1">
+      <li><a href="html-questions.md">HTML Questions</a></li>
+      <li><a href="css-questions.md">CSS Questions</a></li>
+      <li><a href="javascript-questions.md">JavaScript Questions</a></li>
+    </ol>
+    <h2 id="contents">Contents</h2>
+    <ul>
+      <li><a href="/contents/en/README.md">English</a></li>
+      <li>
+        <a href="/contents/zh/README.md">Chinese (Simplified) (简体中文)</a>
+      </li>
+      <li><a href="/contents/jp/README.md">Japanese (日本語)</a></li>
+      <li><a href="/contents/kr/README.md">Korean (한국어)</a></li>
+      <li><a href="contents/pl/README.md">Polish (Polski)</a></li>
+      <li><a href="contents/pr/README.md">Portuguese (Português)</a></li>
+      <li><a href="/contents/ru/README.md">Russian (Русский)</a></li>
+      <li><a href="/contents/tl/README.md">Tagalog</a></li>
+    </ul>
+    <h2 id="related">Related</h2>
+    <p>
+      If you are interested in how data structures are implemented, check out
+      <a href="https://github.com/yangshun/lago">Lago</a>, a Data Structures and
+      Algorithms library for JavaScript. It is pretty much still WIP but I
+      intend to make it into a library that is able to be used in production and
+      also a reference resource for revising Data Structures and Algorithms.
+    </p>
+    <h2 id="contributing">Contributing</h2>
+    <h3 id="code-of-conduct">Code of Conduct</h3>
+    <p>
+      We have adopted the same Code of Conduct as Facebook that we expect
+      project participants to adhere to. Please read
+      <a href="https://code.facebook.com/codeofconduct">the full text</a> so
+      that you can understand what actions will and will not be tolerated.
+    </p>
+    <h3 id="contributing-guide">Contributing Guide</h3>
+    <p>
+      Read our <a href="/CONTRIBUTING.md">contributing guide</a> to learn about
+      how you can contribute, how to propose improvements or if you are
+      interested in translating the content.
+    </p>
+    <h3 id="supporting">Supporting</h3>
+    <p>
+      Many hours of hard work have gone into this project. Your support will be
+      very appreciated!
+    </p>
+    <p>
+      <a href="https://www.buymeacoffee.com/yangshun" target="_blank"
+        ><img
+          src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png"
+          alt="Buy Me A Coffee"
+      /></a>
+    </p>
+    <h2 id="license">License</h2>
+    <p>
+      All projects and packages in this repository are
+      <a href="/LICENSE">MIT licensed</a>.
+    </p>
+  </body>
 </html>

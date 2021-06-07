@@ -46,18 +46,18 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-var preorderTraversal = function(root) {
-    var result = [];
+const preorderTraversal = root => {
+    const result = [];
 
     if(root === null) {
         return result;
     }
     
-    var stack = [];
+    const stack = [];
     stack.push(root);
     
     while(stack.length) {
-        var node = stack.pop();
+        const node = stack.pop();
         result.push(node.val);
         
         if(node.right !== null) {

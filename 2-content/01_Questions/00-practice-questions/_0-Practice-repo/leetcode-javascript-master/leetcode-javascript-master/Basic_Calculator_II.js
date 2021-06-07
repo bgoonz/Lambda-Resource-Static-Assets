@@ -23,18 +23,18 @@
  * @param {string} s
  * @return {number}
  */
-var calculate = function(s) {
-    var values = [];
-    var ops = [];
+const calculate = s => {
+    const values = [];
+    const ops = [];
     
-    for(var i = 0; i < s.length; i++) {
-        var ch = s[i];
+    for(let i = 0; i < s.length; i++) {
+        const ch = s[i];
         if(ch === ' ') {
             continue;
         }
         
         if(ch.match(/\d/)) {
-            var num = '';
+            let num = '';
             while(i < s.length && s[i].match(/\d/)) {
                 num += s[i++];
             }
@@ -57,18 +57,18 @@ var calculate = function(s) {
     return values.pop();
 };
 
-var hasPrecedence = function(op1, op2) {
-    var map = {
+var hasPrecedence = (op1, op2) => {
+    const map = {
         '-': 1,
         '+': 1,
         '/': 2,
         '*': 2
-    }
+    };
     
     return map[op1] > map[op2];
 }
 
-var applyOp = function(v1, v2, op) {
+var applyOp = (v1, v2, op) => {
     if(op === '*') {
         return v2*v1;
     } else if(op === '-') {

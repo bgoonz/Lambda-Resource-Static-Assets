@@ -8,7 +8,7 @@
  * @return {number}
  */
  
-var rangeBitwiseAnd = function(m, n) {
+const rangeBitwiseAnd = (m, n) => {
     while(n > m){
         n = n & (n-1);
     }

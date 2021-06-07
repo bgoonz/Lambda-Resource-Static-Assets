@@ -6,12 +6,12 @@ function canWin(arr) {
     return false;
   }
 
-  var visitedIdx = {};
-  var unvisited = [];
+  const visitedIdx = {};
+  const unvisited = [];
   unvisited.push(0);
 
   while(unvisited.length > 0) {
-    var curVisitIdx = unvisited.shift();
+    const curVisitIdx = unvisited.shift();
 
     if(visitedIdx[curVisitIdx] === undefined) {
       visitedIdx[curVisitIdx] = true;
@@ -28,6 +28,6 @@ function canWin(arr) {
   return false;
 }
 
-var arr = [3,3,6,2,0,2];
+const arr = [3,3,6,2,0,2];
 // win path 0 3 1 4
 console.log(canWin(arr));

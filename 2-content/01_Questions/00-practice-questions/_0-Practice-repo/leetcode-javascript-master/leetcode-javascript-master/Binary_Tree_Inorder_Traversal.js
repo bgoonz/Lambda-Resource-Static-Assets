@@ -10,16 +10,16 @@
  * @return {number[]}
  */
  
-var inorderTraversal = function(root) {
-    var result = [];
+const inorderTraversal = root => {
+    const result = [];
     
     if(root === null){
         return result;
     }
     
 
-    var stack = [];
-    var cur = root;
+    const stack = [];
+    let cur = root;
     
     while(true){
         while(cur !== null){

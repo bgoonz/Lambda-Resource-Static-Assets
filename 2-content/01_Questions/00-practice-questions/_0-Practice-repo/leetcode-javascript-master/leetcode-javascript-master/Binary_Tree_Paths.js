@@ -29,8 +29,8 @@
   * @return {string[]}
   */
 
- var binaryTreePaths = function(root) {
-     var res = [];
+ const binaryTreePaths = root => {
+     const res = [];
      
      function dfs(node, curr, res) {
          if(node === null) {

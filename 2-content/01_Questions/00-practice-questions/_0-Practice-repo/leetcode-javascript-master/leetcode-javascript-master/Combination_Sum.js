@@ -22,23 +22,23 @@
  * @param {number} target
  * @return {number[][]}
  */
-var combinationSum = function(candidates, target) {
-    var result = [];
+var combinationSum = (candidates, target) => {
+    const result = [];
 
     if(candidates === null || candidates.length === 0){
         return result;
     }
 
-    candidates.sort(function(a,b){return a > b ? 1 : -1});
+    candidates.sort((a, b) => {return a > b ? 1 : -1});
 
-    var output = [];
+    const output = [];
 
     generate(candidates, result, output, target, 0);
 
     return result;
 };
 
-var generate = function(candidates, result, output, sum, index){
+var generate = (candidates, result, output, sum, index) => {
     if(sum === 0){
         result.push(output.slice());
     }
@@ -46,7 +46,7 @@ var generate = function(candidates, result, output, sum, index){
         return;
     }
 
-    for(var i = index; i < candidates.length; i++){
+    for(let i = index; i < candidates.length; i++){
         if(i > index && candidates[i] === candidates[i - 1]){
             continue;
         }
@@ -61,13 +61,13 @@ var generate = function(candidates, result, output, sum, index){
 
 
 // Another solution
-var combinationSum = function(candidates, target) {
-    var results = [];
+var combinationSum = (candidates, target) => {
+    const results = [];
     comb(candidates.sort(), 0, [], 0, target, results);
     return results;
 };
 
-var comb = function(cand, index, partial, partialSum, target, results) {
+var comb = (cand, index, partial, partialSum, target, results) => {
     if(target === partialSum) {
         results.push(partial);
         return;

@@ -24,7 +24,7 @@
  * @param {string[]} words
  * @return {string}
  */
-var alienOrder = function(words) {
+const alienOrder = words => {
     if (words.length === 0) {
         return '';
     }
@@ -69,7 +69,7 @@ var alienOrder = function(words) {
       
       
         // since words are in lexico order. wert and woo after skipping w, they becomes ert and oo, e will have higher order than oo
-        if (j < prev.length && requiredCharMap[prev.charAt(j)].indexOf(cur.charAt(j)) === -1) {
+        if (j < prev.length && !requiredCharMap[prev.charAt(j)].includes(cur.charAt(j))) {
             requiredCharMap[prev.charAt(j)].push(cur.charAt(j));
             // number of prerequisite for using that char in this case it will be o: 1 since o has prerequisite e
             // { w: [], e: [ 'o' ], r: [], t: [], o: [] } 
@@ -93,7 +93,7 @@ var alienOrder = function(words) {
         result.push(rootChar);
         
         for (i = 0; i < requiredCharMap[rootChar].length; i++) {
-            var charRequiresRoot = requiredCharMap[rootChar][i];
+            const charRequiresRoot = requiredCharMap[rootChar][i];
             charPreReqCount[charRequiresRoot]--;
             
             if (charPreReqCount[charRequiresRoot] === 0) {
@@ -109,7 +109,7 @@ var alienOrder = function(words) {
     });
   
     return hasCycle ? '' : result.join('');
-}
+};
 
 
 
@@ -122,7 +122,7 @@ var alienOrder = function(words) {
 // ];
 
 
-var words =[
+const words =[
   'wert',
   'woo'
 ];

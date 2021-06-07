@@ -19,13 +19,13 @@
  * @param {number[][]} grid
  * @return {number}
  */
-var minTotalDistance = function(grid) {
-    var xpos = [];
-    var ypos = [];
+const minTotalDistance = grid => {
+    const xpos = [];
+    const ypos = [];
     
     // get all positions
-    for(var x = 0; x < grid.length; x++) {
-        for(var y = 0; y < grid[0].length; y++) {
+    for(let x = 0; x < grid.length; x++) {
+        for(let y = 0; y < grid[0].length; y++) {
             if(grid[x][y] === 1) {
                 xpos.push(x);
                 ypos.push(y);
@@ -37,16 +37,16 @@ var minTotalDistance = function(grid) {
     return getMedianPoint(xpos) + getMedianPoint(ypos, true);
 };
 
-var getMedianPoint = function(arr, shouldSort) {
+var getMedianPoint = (arr, shouldSort) => {
     if(shouldSort) {
         arr.sort((a,b)=> {
             return a > b ? 1 : -1;
         });
     }
     
-    var beg = 0;
-    var end = arr.length - 1;
-    var res = 0;
+    let beg = 0;
+    let end = arr.length - 1;
+    let res = 0;
     
     while(beg < end) {
         res += arr[end--] - arr[beg++];

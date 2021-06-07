@@ -31,61 +31,63 @@ function TrieNode(chr) {
 /**
  * @constructor
  */
-var WordDictionary = function() {
-   this.root = new TrieNode(null, false);
-};
-
-/**
- * @param {string} word
- * @return {void}
- * Adds a word into the data structure.
- */
-WordDictionary.prototype.addWord = function(word) {
-    var node = this.root;
-    for(var i = 0; i < word.length; i++) {
-        var chr = word[i];
-        node.children[chr] = node.children[chr] || new TrieNode(chr);
-        node = node.children[chr];
+class WordDictionary {
+    constructor() {
+       this.root = new TrieNode(null, false);
     }
-    
-    node.isWord = true;
-};
 
-/**
- * @param {string} word
- * @return {boolean}
- * Returns if the word is in the data structure. A word could
- * contain the dot character '.' to represent any one letter.
- */
-WordDictionary.prototype.search = function(word) {
-    var node = this.root;
-    
-    function dfs(node, word, i) {
-        if(i === word.length) {
-            return node.isWord;
-        }
+    /**
+     * @param {string} word
+     * @return {void}
+     * Adds a word into the data structure.
+     */
+    addWord(word) {
+        let node = this.root;
+
+        word.forEach(chr => {
+            node.children[chr] = node.children[chr] || new TrieNode(chr);
+            node = node.children[chr];
+        });
+
+        node.isWord = true;
+    }
+
+    /**
+     * @param {string} word
+     * @return {boolean}
+     * Returns if the word is in the data structure. A word could
+     * contain the dot character '.' to represent any one letter.
+     */
+    search(word) {
+        const node = this.root;
         
-        var chr = word[i];
-        
-        if(chr === '.') {
-            for(var key in node.children) {
-                if(dfs(node.children[key], word, i + 1)) {
-                    return true;
-                }
+        function dfs({isWord, children}, word, i) {
+            if(i === word.length) {
+                return isWord;
             }
-        } else if(node.children[chr]) {
-            return dfs(node.children[chr], word, i + 1);
+            
+            const chr = word[i];
+            
+            if(chr === '.') {
+                for(const key in children) {
+                    if(dfs(children[key], word, i + 1)) {
+                        return true;
+                    }
+                }
+            } else if(children[chr]) {
+                return dfs(children[chr], word, i + 1);
+            }
+            
+            return false;
         }
         
-        return false;
+        return dfs(node, word, 0);
     }
-    
-    return dfs(node, word, 0);
-};
 
-/**
- * Your WordDictionary object will be instantiated and called as such:
- * var wordDictionary = new WordDictionary();
- * wordDictionary.addWord("word");
- * wordDictionary.search("pattern");
- */
+    /**
+     * Your WordDictionary object will be instantiated and called as such:
+     * var wordDictionary = new WordDictionary();
+     * wordDictionary.addWord("word");
+     * wordDictionary.search("pattern");
+     */
+}

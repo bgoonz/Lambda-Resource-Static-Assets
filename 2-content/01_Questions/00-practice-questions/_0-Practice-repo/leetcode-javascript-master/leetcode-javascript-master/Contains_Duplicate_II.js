@@ -7,7 +7,7 @@
  * @param {number} k
  * @return {boolean}
  */
-var containsNearbyDuplicate = function(nums, k) {
+const containsNearbyDuplicate = (nums, k) => {
     if(k <= 0){
         return false;
     }
@@ -16,10 +16,10 @@ var containsNearbyDuplicate = function(nums, k) {
         return false;
     }
     
-    var hash = {};
+    const hash = {};
     
-    for(var i = 0; i < nums.length; i++){
-        var val = nums[i];
+    for(let i = 0; i < nums.length; i++){
+        const val = nums[i];
         if(hash[val] !== undefined){
             if((i - hash[val]) <= k){
                 return true;
