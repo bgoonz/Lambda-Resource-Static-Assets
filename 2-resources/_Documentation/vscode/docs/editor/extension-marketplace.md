@@ -7,11 +7,12 @@ PageTitle: Managing Extensions in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Discover, add, update, disable and uninstall Visual Studio Code extensions (plug-ins) through the Extension Marketplace.
 ---
+
 # Extension Marketplace
 
 **Increase the power of Visual Studio Code through Extensions**
 
-The features that Visual Studio Code includes out-of-the-box are just the start. VS Code extensions let you add languages, debuggers, and tools to your installation to support your development workflow. VS Code's rich extensibility model lets extension authors plug directly into the VS Code UI and contribute functionality through the same APIs used by VS Code.  This topic explains how to find, install, and manage VS Code extensions from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/VSCode).
+The features that Visual Studio Code includes out-of-the-box are just the start. VS Code extensions let you add languages, debuggers, and tools to your installation to support your development workflow. VS Code's rich extensibility model lets extension authors plug directly into the VS Code UI and contribute functionality through the same APIs used by VS Code. This topic explains how to find, install, and manage VS Code extensions from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/VSCode).
 
 ## Browse for extensions
 
@@ -35,9 +36,9 @@ To install an extension, click the **Install** button. Once the installation is 
 
 On the extension details page, you can read the extension's README as well as review the extension's:
 
-* **Contributions** - The extension's additions to VS Code such as settings, commands and keyboard shortcuts, language grammars, debugger, etc.
-* **Changelog** - The extension repository CHANGELOG if available.
-* **Dependencies** - Lists if the extension depends on any other extensions.
+- **Contributions** - The extension's additions to VS Code such as settings, commands and keyboard shortcuts, language grammars, debugger, etc.
+- **Changelog** - The extension repository CHANGELOG if available.
+- **Dependencies** - Lists if the extension depends on any other extensions.
 
 ![extension contributions](images/extension-marketplace/extension-contributions.png)
 
@@ -53,11 +54,11 @@ You can run various Extensions view commands by clicking on the Extensions view'
 
 There are commands to show:
 
-* The list of currently installed extensions
-* The list of outdated extensions that can be updated
-* The list of currently enabled/disabled extensions
-* The list of recommended extensions based on your workspace
-* The list of globally popular extensions
+- The list of currently installed extensions
+- The list of outdated extensions that can be updated
+- The list of currently enabled/disabled extensions
+- The list of recommended extensions based on your workspace
+- The list of globally popular extensions
 
 You can sort the extension list by **Install Count** or **Rating** in either ascending or descending order. You can learn more about extension search filters [below](#extensions-view-filters).
 
@@ -97,7 +98,7 @@ Extensions remain disabled for all VS Code sessions until you re-enable them.
 
 ### Enable an extension
 
-Similarly if you have disabled an extension (it will be in the **Disabled** section of the list and marked ***Disabled***), you can re-enable it with the **Enable** or **Enable (Workspace)** commands in the dropdown menu.
+Similarly if you have disabled an extension (it will be in the **Disabled** section of the list and marked **_Disabled_**), you can re-enable it with the **Enable** or **Enable (Workspace)** commands in the dropdown menu.
 
 ![enable extension](images/extension-marketplace/enable-extension.png)
 
@@ -115,8 +116,8 @@ If you have extensions auto-update disabled, you can quickly look for extension 
 
 You can see a list of recommended extensions using **Show Recommended Extensions**, which sets the `@recommended` [filter](#extensions-view-filters). Extension recommendations can either be:
 
-* **Workspace Recommendations** - Recommended by other users of your current workspace.
-* **Other Recommendations** - Recommended based on recently opened files.
+- **Workspace Recommendations** - Recommended by other users of your current workspace.
+- **Other Recommendations** - Recommended based on recently opened files.
 
 See the section below to learn how to [contribute](#workspace-recommended-extensions) recommendations for other users in your project.
 
@@ -163,17 +164,17 @@ The Extensions view search box supports filters to help you find and manage exte
 
 Here are the Extensions view filters:
 
-* `@builtin` - Show extensions that come with VS Code. Grouped by type (Programming Languages, Themes, etc.).
-* `@disabled` - Show disabled installed extensions.
-* `@installed` - Show installed extensions.
-* `@outdated` - Show outdated installed extensions. A newer version is available on the Marketplace.
-* `@enabled` - Show enabled installed extensions. Extensions can be individually enabled/disabled.
-* `@recommended` - Show recommended extensions. Grouped as Workspace specific or general use.
-* `@category` - Show extensions belonging to specified category. Below are a few of supported categories. For a complete list, type `@category` and follow the options in the suggestion list:
-    * `@category:themes`
-    * `@category:formatters`
-    * `@category:linters`
-    * `@category:snippets`
+- `@builtin` - Show extensions that come with VS Code. Grouped by type (Programming Languages, Themes, etc.).
+- `@disabled` - Show disabled installed extensions.
+- `@installed` - Show installed extensions.
+- `@outdated` - Show outdated installed extensions. A newer version is available on the Marketplace.
+- `@enabled` - Show enabled installed extensions. Extensions can be individually enabled/disabled.
+- `@recommended` - Show recommended extensions. Grouped as Workspace specific or general use.
+- `@category` - Show extensions belonging to specified category. Below are a few of supported categories. For a complete list, type `@category` and follow the options in the suggestion list:
+  - `@category:themes`
+  - `@category:formatters`
+  - `@category:linters`
+  - `@category:snippets`
 
 These filters can be combined as well. For example: Use `@installed @category:themes` to view all installed themes.
 
@@ -183,9 +184,9 @@ If no filter is provided, the Extensions view displays the currently installed a
 
 You can sort extensions with the `@sort` filter, which can take the following values:
 
-* `installs` - Sort by Marketplace installation count, in descending order.
-* `rating` - Sort by Marketplace rating (1-5 stars), in descending order.
-* `name` - Sort alphabetically by extension name.
+- `installs` - Sort by Marketplace installation count, in descending order.
+- `rating` - Sort by Marketplace rating (1-5 stars), in descending order.
+- `name` - Sort alphabetically by extension name.
 
 ![sort by install count](images/extension-marketplace/sort-install-count.png)
 
@@ -231,10 +232,7 @@ An example `extensions.json` could be:
 
 ```json
 {
-    "recommendations": [
-        "dbaeumer.vscode-eslint",
-        "msjsdiag.debugger-for-chrome"
-    ]
+  "recommendations": ["dbaeumer.vscode-eslint", "msjsdiag.debugger-for-chrome"]
 }
 ```
 
@@ -252,9 +250,9 @@ VS Code prompts a user to install the recommended extensions when a workspace is
 
 Here are a few topics you may find interesting...
 
-* [Extension API](/api) - Start learning about the VS Code extension API.
-* [Your First Extension](/api/get-started/your-first-extension.md) - Try creating a simple Hello World extension.
-* [Publishing to the Marketplace](/api/working-with-extensions/publishing-extension.md) - Publish your own extension to the VS Code Marketplace.
+- [Extension API](/api) - Start learning about the VS Code extension API.
+- [Your First Extension](/api/get-started/your-first-extension.md) - Try creating a simple Hello World extension.
+- [Publishing to the Marketplace](/api/working-with-extensions/publishing-extension.md) - Publish your own extension to the VS Code Marketplace.
 
 ## Common questions
 
@@ -262,15 +260,15 @@ Here are a few topics you may find interesting...
 
 Extensions are installed in a per user extensions folder. Depending on your platform, the location is in the following folder:
 
-* **Windows** `%USERPROFILE%\.vscode\extensions`
-* **macOS** `~/.vscode/extensions`
-* **Linux** `~/.vscode/extensions`
+- **Windows** `%USERPROFILE%\.vscode\extensions`
+- **macOS** `~/.vscode/extensions`
+- **Linux** `~/.vscode/extensions`
 
 You can change the location by launching VS Code with the `--extensions-dir <dir>` command-line [option](/docs/editor/command-line.md).
 
 ### Whenever I try to install any extension, I get a connect ETIMEDOUT error
 
-You may see this error if your machine is going through a proxy server to access the Internet.  See the [Proxy server support](/docs/setup/network.md#proxy-server-support) section in the setup topic for details.
+You may see this error if your machine is going through a proxy server to access the Internet. See the [Proxy server support](/docs/setup/network.md#proxy-server-support) section in the setup topic for details.
 
 ### Can I download an extension directly from the Marketplace?
 
@@ -284,8 +282,8 @@ Once downloaded, you can then install the extension via the **Install from VSIX*
 
 Yes, if you would prefer to not have VS Code display extension recommendations in the Extensions view or through notifications, you can modify the following settings:
 
-* `extensions.showRecommendationsOnlyOnDemand` - Set to true to remove the **RECOMMENDED** section.
-* `extensions.ignoreRecommendations` - Set to true to silence extension recommendation notifications.
+- `extensions.showRecommendationsOnlyOnDemand` - Set to true to remove the **RECOMMENDED** section.
+- `extensions.ignoreRecommendations` - Set to true to silence extension recommendation notifications.
 
 The **Show Recommended Extensions** command is always available if you wish to see recommendations.
 
@@ -302,8 +300,8 @@ If a malicious extension is reported and verified, or a vulnerability is found i
 
 The Marketplace also provides you with resources to make an informed decision about the extensions you install:
 
-* **Ratings & Review** - Read what others think about the extension.
-* **Q & A** - Review existing questions and the level of the publisher's responsiveness. You can also engage with the extension's publisher(s) if you have concerns.
-* **Issues, Repository, and License** - Check if the publisher has provided these and if they have the support you expect.
+- **Ratings & Review** - Read what others think about the extension.
+- **Q & A** - Review existing questions and the level of the publisher's responsiveness. You can also engage with the extension's publisher(s) if you have concerns.
+- **Issues, Repository, and License** - Check if the publisher has provided these and if they have the support you expect.
 
 If you do see an extension that looks suspicious, you can report the extension to the Marketplace with the **Report Abuse** link at the bottom of the extension **More Info** section.

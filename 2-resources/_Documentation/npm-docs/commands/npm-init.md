@@ -25,12 +25,11 @@ running any other initialization-related operations.
 The init command is transformed to a corresponding `npx` operation as
 follows:
 
-* `npm init foo` -> `npx create-foo`
-* `npm init @usr/foo` -> `npx @usr/create-foo`
-* `npm init @usr` -> `npx @usr/create`
+- `npm init foo` -> `npx create-foo`
+- `npm init @usr/foo` -> `npx @usr/create-foo`
+- `npm init @usr` -> `npx @usr/create`
 
-Any additional options will be passed directly to the command, so `npm init
-foo -- --hello` will map to `npx create-foo --hello`.
+Any additional options will be passed directly to the command, so `npm init foo -- --hello` will map to `npx create-foo --hello`.
 
 If the initializer is omitted (by just calling `npm init`), init will fall
 back to legacy init behavior. It will ask you a bunch of questions, and
@@ -74,7 +73,7 @@ $ npm init -y
 ### A note on caching
 
 The npm cli utilizes its internal package cache when using the package
-name specified.  You can use the following to change how and when the
+name specified. You can use the following to change how and when the
 cli uses this cache. See [`npm cache`](/commands/npm-cache) for more on
 how the cache works.
 
@@ -85,7 +84,7 @@ immediately even if the package is already in the cache.
 
 #### prefer-offline
 
-Bypasses staleness checks for packages.  Missing data will still be
+Bypasses staleness checks for packages. Missing data will still be
 requested from the server. To force full offline mode, use `offline`.
 
 #### offline
@@ -95,8 +94,8 @@ an error.
 
 ### See Also
 
-* [init-package-json module](http://npm.im/init-package-json)
-* [package.json](/configuring-npm/package-json)
-* [npm version](/commands/npm-version)
-* [npm scope](/using-npm/scope)
-* [npm exec](/commands/npm-exec)
+- [init-package-json module](http://npm.im/init-package-json)
+- [package.json](/configuring-npm/package-json)
+- [npm version](/commands/npm-version)
+- [npm scope](/using-npm/scope)
+- [npm exec](/commands/npm-exec)

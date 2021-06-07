@@ -7,6 +7,7 @@ PageTitle: Get Started Tutorial for Wonder Woman project in Visual Studio Code
 DateApproved: 10/22/2020
 MetaDescription: A Wonder Woman project tutorial using the Python extension in Visual Studio Code.
 ---
+
 # Learn Python with Wonder Woman
 
 Check out these WONDER WOMAN 1984 inspired lessons built to help you write your first lines of Python code. In the first module, learn how to crack a Caesar Cipher code that reveals a secret message with a location. In the second module, create a personality quiz to determine which character you're most like!

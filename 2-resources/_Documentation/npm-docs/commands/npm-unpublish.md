@@ -47,9 +47,9 @@ passed.
 
 ### See Also
 
-* [npm deprecate](/commands/npm-deprecate)
-* [npm publish](/commands/npm-publish)
-* [npm registry](/using-npm/registry)
-* [npm adduser](/commands/npm-adduser)
-* [npm owner](/commands/npm-owner)
-* [npm login](/commands/npm-login)
+- [npm deprecate](/commands/npm-deprecate)
+- [npm publish](/commands/npm-publish)
+- [npm registry](/using-npm/registry)
+- [npm adduser](/commands/npm-adduser)
+- [npm owner](/commands/npm-owner)
+- [npm login](/commands/npm-login)

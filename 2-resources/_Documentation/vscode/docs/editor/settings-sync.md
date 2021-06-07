@@ -7,11 +7,12 @@ PageTitle: Settings Sync in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Synchronize your user settings across all your Visual Studio Code instances.
 ---
+
 # Settings Sync
 
 Settings Sync lets you share your Visual Studio Code configurations such as settings, keybindings, and installed extensions across your machines so you are always working with your favorite setup.
 
->**Note**: Settings Sync is still in preview.
+> **Note**: Settings Sync is still in preview.
 
 ## Turning on Settings Sync
 
@@ -37,9 +38,9 @@ If you already synced from a machine and turning on sync from another machine, y
 
 ![Settings Sync Merge or Replace dialog](images/settings-sync/sync-merge-replace.png)
 
-* **Merge**: Selecting this option will merge **local** settings with **remote** settings from the cloud.
-* **Replace Local**: Selecting this option will overwrite **local** settings with remote settings from the cloud.
-* **Merge Manually...**: Selecting this option will open **Merges** view where you can merge preferences one by one.
+- **Merge**: Selecting this option will merge **local** settings with **remote** settings from the cloud.
+- **Replace Local**: Selecting this option will overwrite **local** settings with remote settings from the cloud.
+- **Merge Manually...**: Selecting this option will open **Merges** view where you can merge preferences one by one.
 
 ![Settings Sync Merges](images/settings-sync/sync-merges-view.png)
 
@@ -57,12 +58,12 @@ All built-in and installed extensions are synchronized along with their global e
 
 Following UI State is synchronized currently:
 
-* Display Language
-* Activity Bar entries
-* Panel entries
-* Views layout and visibility
-* Recently used commands
-* Do not show again notifications
+- Display Language
+- Activity Bar entries
+- Panel entries
+- Views layout and visibility
+- Recently used commands
+- Do not show again notifications
 
 You can always change what is synced via the **Settings Sync: Configure** command or by opening the **Manage** gear menu, selecting **Settings Sync is On**, and then **Settings Sync: Configure**.
 
@@ -70,9 +71,9 @@ You can always change what is synced via the **Settings Sync: Configure** comman
 
 When synchronizing settings between multiple machines, there may occasionally be conflicts. Conflicts can happen when first setting up sync between machines or when settings change while a machine is offline. When conflicts occur, you will be presented with the following options:
 
-* **Accept Local**: Selecting this option will overwrite **remote** settings in the cloud with your local settings.
-* **Accept Remote**: Selecting this option will overwrite **local** settings with remote settings from the cloud.
-* **Show Conflicts**: Selecting this will display a diff editor similar to the Source Control diff editor, where you can preview the local and remote settings and choose to either accept local or remote or manually resolve the changes in your local settings file and then accept the local file.
+- **Accept Local**: Selecting this option will overwrite **remote** settings in the cloud with your local settings.
+- **Accept Remote**: Selecting this option will overwrite **local** settings with remote settings from the cloud.
+- **Show Conflicts**: Selecting this will display a diff editor similar to the Source Control diff editor, where you can preview the local and remote settings and choose to either accept local or remote or manually resolve the changes in your local settings file and then accept the local file.
 
 ## Switching Accounts
 
@@ -98,7 +99,7 @@ You can open these views using **Settings Sync: Show Synced Data** command from 
 
 Local backups folder in the disk can be accessed via the **Settings Sync: Open Local Backups Folder** command. The folder is organized by the type of preference and contains versions of your JSON files, named with a timestamp of when the backup occurred.
 
->**Note**: Local backups are automatically deleted after 30 days. For remote backups the latest 20 versions of each individual resource (settings, extensions, etc.) is retained.
+> **Note**: Local backups are automatically deleted after 30 days. For remote backups the latest 20 versions of each individual resource (settings, extensions, etc.) is retained.
 
 ## Synced Machines
 
@@ -118,7 +119,7 @@ If you want to remove all your data from our servers, just turn off sync via **S
 
 ## Next steps
 
-* [User and Workspace settings](/docs/getstarted/settings.md) - Learn how to configure VS Code to your preferences through user and workspace settings.
+- [User and Workspace settings](/docs/getstarted/settings.md) - Learn how to configure VS Code to your preferences through user and workspace settings.
 
 ## Common questions
 

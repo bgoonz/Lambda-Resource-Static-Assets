@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>kubernetes-env-vars</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="kubernetes-service-environment-variables">Kubernetes service environment variables</h1>
+<p>When you communicate with another service in the same Kubernetes cluster, for example with an HTTP request, you typically use the hardcoded service name in the URL for the request, but that won’t work in some scenarios with Bridge to Kubernetes. This article describes how to use the Kubernetes service environment variables to specify the connection URL.</p>
+<h2 id="avoid-redirection-failures">Avoid redirection failures</h2>
+<p>Bridge to Kubernetes reroutes traffic by modifying the host name resolution to redirect network traffic to its own version of the services. The redirection works in most scenarios, but fails in the case where the Bridge to Kubernetes process has restricted privilege, such as when the request originates from a non-elevated user account or when using VS Code Remote SSH. This is because in order to enable the name resolution for redirected services, Bridge to Kubernetes needs to modify the hosts file, but that is not possible when Bridge to Kubernetes runs from a non-elevated user account. To work around this issue, you can write your code to use the Kubernetes service environment variables instead of a hardcoded service name.</p>
+<h2 id="environment-variables-table">Environment variables table</h2>
+<p>The following table shows the Kubernetes service environment variables that are available from any service in the cluster, for an example service using the TCP protocol on a port. The <em>servicename</em> is the name of the service, converted to uppercase, and with hyphens converted to underscores, so for example, a service named web-api yields an environment variable named WEB_API_SERVICE_HOST.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 43%" />
+<col style="width: 17%" />
+<col style="width: 38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>servicename</em>_SERVICE_HOST</td>
+<td>10.0.0.11</td>
+<td>The name of the service host</td>
+</tr>
+<tr class="even">
+<td><em>servicename</em>_SERVICE_PORT</td>
+<td>6379</td>
+<td>The port for the service</td>
+</tr>
+<tr class="odd">
+<td><em>servicename</em>_PORT</td>
+<td>tcp://10.0.0.11:6379</td>
+<td>The URL with protocol, IP address, and port.</td>
+</tr>
+<tr class="even">
+<td><em>servicename</em>_PORT<strong>portnumber</strong>_protocol_</td>
+<td>tcp://10.0.0.11:6379</td>
+<td>The URL with protocol, IP address and port.</td>
+</tr>
+<tr class="odd">
+<td><em>servicename</em>_PORT<strong>portnumber</strong>_protocol__PROTO</td>
+<td>tcp</td>
+<td>The protocol identifier.</td>
+</tr>
+<tr class="even">
+<td><em>servicename</em>_PORT<strong>portnumber</strong>_protocol__PORT</td>
+<td>6379</td>
+<td>The port number for TCP.</td>
+</tr>
+<tr class="odd">
+<td><em>servicename</em>_PORT<strong>portnumber</strong>_protocol__ADDR</td>
+<td>10.0.0.11</td>
+<td>The IP address for TCP.</td>
+</tr>
+</tbody>
+</table>
+<p>So if the service is named web-api, the variables are WEB_API_SERVICE_HOST and WEB_API_SERVICE_PORT, and so on. The default environment variables created by Kubernetes are described in the <a href="https://kubernetes.io/docs/concepts/services-networking/service/#environment-variables">Kubernetes documentation</a>. For information about the supported protocols, see <a href="https://kubernetes.io/docs/concepts/services-networking/service/#protocol-support">Supported protocols</a>.</p>
+<h2 id="environment-variables-in-source-code">Environment variables in source code</h2>
+<p>To enable your services to run in Bridge to Kubernetes without elevated privileges, replace any hardcoded references to the hostname with the environment variable. The following example shows this in a .NET service named mywebapi written in C#:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode csharp"><code class="sourceCode cs"><a class="sourceLine" id="cb1-1" title="1">    <span class="kw">using</span> <span class="dt">var</span> client = <span class="kw">new</span> <span class="fu">HttpClient</span>();</a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="dt">var</span> host = Environment.<span class="fu">GetEnvironmentVariable</span>(<span class="st">&quot;MYWEBAPI_SERVICE_HOST&quot;</span>);</a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">var</span> port = Environment.<span class="fu">GetEnvironmentVariable</span>(<span class="st">&quot;MYWEBAPI_SERVICE_PORT&quot;</span>);</a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="dt">var</span> request = <span class="kw">new</span> <span class="fu">HttpRequestMessage</span>();</a>
+<a class="sourceLine" id="cb1-5" title="5">    request.<span class="fu">RequestUri</span> = <span class="kw">new</span> <span class="fu">Uri</span>($<span class="st">&quot;http://{host}:{port}/api/data&quot;</span>);</a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="dt">var</span> response = await client.<span class="fu">SendAsync</span>(request);</a></code></pre></div>
+<p>An example in Node.js looks like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="va">server</span>.<span class="at">get</span>(<span class="st">&quot;/api/data&quot;</span><span class="op">,</span> <span class="kw">function</span> (req<span class="op">,</span> res) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="kw">var</span> options <span class="op">=</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="dt">host</span><span class="op">:</span> <span class="va">process</span>.<span class="va">env</span>.<span class="at">MYWEBAPI_SERVICE_HOST</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="dt">port</span><span class="op">:</span> <span class="va">process</span>.<span class="va">env</span>.<span class="at">MYWEBAPI_SERVICE_PORT</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="dt">path</span><span class="op">:</span> <span class="st">&quot;/api/data&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-6" title="6">    <span class="dt">method</span><span class="op">:</span> <span class="st">&quot;GET&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="op">};</span></a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="kw">var</span> req <span class="op">=</span> <span class="va">http</span>.<span class="at">request</span>(options<span class="op">,</span> <span class="kw">function</span> (response) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-9" title="9">    <span class="va">res</span>.<span class="at">setHeader</span>(<span class="st">&quot;Content-Type&quot;</span><span class="op">,</span> <span class="st">&quot;application/json&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-10" title="10">    <span class="kw">var</span> responseString <span class="op">=</span> <span class="st">&quot;&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-11" title="11">    <span class="co">//another chunk of data has been received, so append it to `responseString`</span></a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="va">response</span>.<span class="at">on</span>(<span class="st">&quot;data&quot;</span><span class="op">,</span> <span class="kw">function</span> (chunk) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-13" title="13">      responseString <span class="op">+=</span> chunk<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-14" title="14">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-15" title="15">    <span class="va">response</span>.<span class="at">on</span>(<span class="st">&quot;end&quot;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-16" title="16">      <span class="va">res</span>.<span class="at">send</span>(responseString)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-17" title="17">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-18" title="18">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-19" title="19"></a>
+<a class="sourceLine" id="cb2-20" title="20">  <span class="va">req</span>.<span class="at">on</span>(<span class="st">&quot;error&quot;</span><span class="op">,</span> <span class="kw">function</span> (e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb2-21" title="21">    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;problem with request: &quot;</span> <span class="op">+</span> <span class="va">e</span>.<span class="at">message</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-22" title="22">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-23" title="23"></a>
+<a class="sourceLine" id="cb2-24" title="24">  <span class="va">req</span>.<span class="at">end</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-25" title="25"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>To update your code to use the environment variables, look for any occurrences of the hostname and update to use the value obtained from the environment variable <em>servicename</em>_SERVICE_HOST.</p>
+<p>Even if you usually don’t specify the port used by the target service when calling it, you will need to use the <em>servicename</em>_SERVICE_PORT environment variable. Specifying the port allows Bridge to Kubernetes to avoid the conflicts happening when a specific port isn’t available on the development machine. You don’t need to change the port on which your service listens for this to work: you just need to make sure that when your service calls other services, it calls them using both the <em>servicename</em>_SERVICE_HOST and <em>servicename</em>_SERVICE_PORT environment variables.</p>
+<p>If you reuse the same code elsewhere in the cluster, that is fine, because these environment variables are available in every pod in the cluster. If you reuse the same code outside of a Kubernetes cluster, you either have to set up the equivalent environment variables or modify the code appropriately for the new platform or hosting service.</p>
+<h2 id="set-vs-code-to-use-kubernetes-service-environment-variables">Set VS Code to use Kubernetes service environment variables</h2>
+<p>If you’re using VS Code with a remote computer or running VS Code as a normal user, you also need to configure VS Code to use the Kubernetes service environment variables. Open tasks.json, find the task with the label <code>bridge-to-kubernetes.service</code> and add the property <code>usekubernetesServiceEnvironmentVariables</code> with the value <code>true</code>, as shown in the following code:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1">    <span class="er">&quot;tasks&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb3-2" title="2">        <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">            <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;bridge-to-kubernetes.service&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">            <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;bridge-to-kubernetes.service&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-5" title="5">            <span class="dt">&quot;service&quot;</span><span class="fu">:</span> <span class="st">&quot;bikes&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-6" title="6">            <span class="dt">&quot;ports&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb3-7" title="7">                <span class="dv">3000</span></a>
+<a class="sourceLine" id="cb3-8" title="8">            <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-9" title="9">            <span class="dt">&quot;useKubernetesServiceEnvironmentVariables&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb3-10" title="10">        <span class="fu">}</span></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="ot">]</span></a></code></pre></div>
+<p>The setting is only needed if you are running VS Code as a normal user, or if you are using a remote session, but if you have modified your code as described in this article, there is no harm in setting this property.</p>
+<h2 id="next-steps">Next steps</h2>
+<p>Read more about Bridge to Kubernetes configuration at <a href="https://docs.microsoft.com/visualstudio/containers/configure-bridge-to-kubernetes">How to configure Bridge to Kubernetes</a>.</p>
+</body>
+</html>

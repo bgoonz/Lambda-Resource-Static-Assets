@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>containers</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="develop-with-containers">Develop with containers</h1>
+<h2 id="what-are-development-containers">What are development containers?</h2>
+<p>Containers are pieces of software that package code and all of the dependencies that code needs to run, including the runtime, tools, libraries, and settings. Development containers specifically let you code within this piece of software, providing a separate coding environment from your computer.</p>
+<p>A Python dev container would include your Python app along with all the Python runtimes and dependencies already set up for you, no extra downloads necessary:</p>
+<figure>
+<img src="images/containers/python-container.png" alt="Python Container Diagram" /><figcaption>Python Container Diagram</figcaption>
+</figure>
+<p>In your class, you could have a specific container for an assignment. Each student in your class will get the same exact same version of dependencies, such as the same version of Python or a C++ compiler, regardless of their operating system or any other files already installed on their computer.</p>
+<p>In the diagram below, you’ll see an example of three dev containers: one for Python, one for Java, and one for C++. Each of these dev containers would include the app and the dependencies that app needs to run. The dependencies are separate from the rest of your computer (which are represented by the Infrastructure and Host Operating System).</p>
+<figure>
+<img src="images/containers/container-architecture.png" alt="Container Architecture Diagram" /><figcaption>Container Architecture Diagram</figcaption>
+</figure>
+<h2 id="get-started-with-dev-containers-in-vs-code">Get started with dev containers in VS Code</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>To get started with using dev containers in VS Code, you’ll need to download the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers">Remote - Containers extension</a> from the Extension Marketplace.</p>
+<figure>
+<img src="images/containers/remote-containers.png" alt="Remote Containers extension" /><figcaption>Remote Containers extension</figcaption>
+</figure>
+<p>You’ll also need to download <a href="https://docs.docker.com/docker-for-windows/install-windows-home/">Docker</a>, which is the industry standard for building and sharing containers.</p>
+<h3 id="sample-dev-containers">Sample dev containers</h3>
+<p>Rather than creating dev containers from scratch, Remote - Containers has several ways to help you <a href="/docs/remote/create-dev-container.md">create dev containers</a> or access existing dev containers.</p>
+<p>Below is a list of sample dev containers we’d recommend starting out with:</p>
+<ul>
+<li><a href="https://github.com/microsoft/vscode-remote-try-python">Try Out Development Containers: Python</a></li>
+<li><a href="https://github.com/microsoft/vscode-remote-try-java">Try Out Development Containers: Java</a></li>
+<li><a href="https://github.com/microsoft/vscode-remote-try-cpp">Try Out Development Containers: C++</a></li>
+<li><a href="https://github.com/microsoft/vscode-remote-try-node">Try Out Development Containers: Node.js</a></li>
+<li><a href="https://github.com/microsoft/vscode-remote-try-dotnetcore">Try Out Development Containers: .NET Core</a></li>
+<li><a href="https://github.com/microsoft/vscode-remote-try-go">Try Out Development Containers: Go</a></li>
+<li><a href="https://github.com/microsoft/vscode-remote-try-php">Try Out Development Containers: PHP</a></li>
+<li><a href="https://github.com/microsoft/vscode-remote-try-rust">Try Out Development Containers: Rust</a></li>
+</ul>
+<h2 id="learning-resources">Learning resources</h2>
+<p>To learn how to get started with the Remote - Containers extension, check out this 5-minute introductory video:</p>
+<iframe src="https://youtube.com/embed/Uvf2FVS1F8k?rel=0&amp;disablekb=0&amp;modestbranding=1&amp;showinfo=0" frameborder="0" allowfullscreen>
+</iframe>
+<p>You can also read more in our <a href="/blogs/2020/07/27/containers-edu.md">Development Containers in Education</a> blog post.</p>
+<h2 id="next-steps">Next steps</h2>
+<p>We also highly recommend checking out the step-by-step <a href="/docs/remote/containers-tutorial.md">Containers tutorial</a>.</p>
+</body>
+</html>

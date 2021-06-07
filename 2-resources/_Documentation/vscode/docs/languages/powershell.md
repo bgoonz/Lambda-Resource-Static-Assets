@@ -7,6 +7,7 @@ PageTitle: PowerShell editing with Visual Studio Code
 DateApproved: 9/17/2018
 MetaDescription: Learn about using PowerShell in Visual Studio Code
 ---
+
 # PowerShell in Visual Studio Code
 
 [PowerShell](https://docs.microsoft.com/powershell/) is a task-based command-line shell and scripting language built on [.NET](https://docs.microsoft.com/dotnet), which provides a powerful toolset for administrators on any platform.
@@ -60,17 +61,17 @@ You can also open the examples from the Command Palette (`kb(workbench.action.sh
 
 ## Major features
 
-* Syntax highlighting
-* Code snippets
-* IntelliSense for cmdlets and more
-* Rule-Based analysis provided by PowerShell Script Analyzer
-* "Go to definition" of cmdlets and variables
-* Find references of cmdlets and variables
-* Document and Workspace symbol discovery
-* Run selected section of PowerShell code using `kbstyle(F8)`
-* Launch online help for the symbol under the cursor using `kbstyle(Ctrl + F1)`
-* Local script debugging and basic interactive console support
-* Enable ISE mode using `kbstyle(Ctrl + Shift + P)` then search for "Enable ISE Mode"
+- Syntax highlighting
+- Code snippets
+- IntelliSense for cmdlets and more
+- Rule-Based analysis provided by PowerShell Script Analyzer
+- "Go to definition" of cmdlets and variables
+- Find references of cmdlets and variables
+- Document and Workspace symbol discovery
+- Run selected section of PowerShell code using `kbstyle(F8)`
+- Launch online help for the symbol under the cursor using `kbstyle(Ctrl + F1)`
+- Local script debugging and basic interactive console support
+- Enable ISE mode using `kbstyle(Ctrl + Shift + P)` then search for "Enable ISE Mode"
 
 ## Debugging
 
@@ -120,7 +121,7 @@ Windows 10 and Server 2016 comes with Pester 3.40 pre-installed. To update Peste
 
 ## Plaster
 
- Plaster is a template-based file and project generator written in PowerShell. Its purpose is to streamline the creation of PowerShell module projects, Pester tests, DSC configurations and more. See the [GitHub Plaster repository](https://github.com/PowerShell/Plaster) for more information, for documentation on Plaster's cmdlets see [Cmdlet Documentation](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/Plaster.md).
+Plaster is a template-based file and project generator written in PowerShell. Its purpose is to streamline the creation of PowerShell module projects, Pester tests, DSC configurations and more. See the [GitHub Plaster repository](https://github.com/PowerShell/Plaster) for more information, for documentation on Plaster's cmdlets see [Cmdlet Documentation](https://github.com/PowerShell/Plaster/blob/master/docs/en-US/Plaster.md).
 
 The PowerShell extension allows the creation of new Plaster projects by running the **PowerShell: Create New Project from Plaster Template** command from the Command Palette (`kb(workbench.action.showCommands)`).
 

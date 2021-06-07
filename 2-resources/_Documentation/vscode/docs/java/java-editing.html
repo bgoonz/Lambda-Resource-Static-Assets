@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>java-editing</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="navigate-and-edit-java-source-code">Navigate and edit Java source code</h1>
+<p>Visual Studio Code is a source code editor first and foremost with rich editing <a href="/docs/editor/codebasics.md">features</a>. In this document, we will go through a few Java-specific features, which are helpful when working with Java.</p>
+<p>If you run into any issues when using the features below, you can contact us by clicking the <strong>Report an issue</strong> button below.</p>
+<p><a class="tutorial-feedback-btn" onclick="reportIssue('java-tutorial', 'editing')" href="javascript:void(0)">Report an issue</a></p>
+<h2 id="code-navigation">Code navigation</h2>
+<p>With the <a href="/docs/getstarted/userinterface.md#outline-view">Outline view</a>, you can conveniently navigate your methods within the same class. <a href="/docs/java/java-project.md#project-view">Project view</a> also provide a great overview of your project. As a Java editor, it also supports CodeLens (references) and Javadoc hovers and highlights out of box.</p>
+<p>Once you open your Java project or any source files with VS Code, all code navigation features as well as syntax check and documentation (hover to see Javadoc) would be available immediately by its <a href="/docs/java/java-project.md#lightweight-mode">Lightweight Mode</a>.</p>
+<h3 id="search-for-symbols">Search for symbols</h3>
+<p>You can search for symbols in the current file or workspace to navigate your code more quickly.</p>
+<p>To search for a symbol in the current file, use <strong>Quick Open</strong> (<code>kb(workbench.action.quickOpen)</code>) then enter the ‘@’ command, then enter the name of the symbol you’re looking for. A list of potential matches will appear and be filtered as you type. Choose from the list of matches to navigate to its location.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/java/java-editing/search-in-file.mp4" type="video/mp4">
+</video>
+<p>To search for a symbol in the current workspace, start by pressing <code>kb(workbench.action.showAllSymbols)</code>, then enter the name of the symbol. A list of potential matches will appear as before. If you choose a match that was found in a file that’s not already open, the file will be opened before navigating to the match’s location. Alternatively, you can also use <strong>Quick Open</strong> (<code>kb(workbench.action.quickOpen)</code>) then enter the ‘#’ command to search the current workspace. <code>kb(workbench.action.showAllSymbols)</code> is just the shortcut for the ‘#’ commands, so everything works the same.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/java/java-editing/search-in-workspace.mp4" type="video/mp4">
+</video>
+<h3 id="peek-definition">Peek Definition</h3>
+<p>You can take a quick look at how a symbol was defined by using the Peek Definition feature. This feature displays a few lines of code near the definition inside a peek window, so you can take a look without navigating away from your current location.</p>
+<p>To peek at a symbol’s definition, place your cursor on the symbol anywhere it’s used in your source code and then press <code>kb(editor.action.peekDefinition)</code>. Alternatively, you can choose <strong>Peek Definition</strong> from the context menu (right-click, then choose <strong>Peek Definition</strong>).</p>
+<h3 id="go-to-definition">Go to Definition</h3>
+<p>You can also quickly navigate to where a symbol is defined by using the Go to Definition feature.</p>
+<p>To go to a symbol’s definition, place your cursor on the symbol anywhere it is used in your source code and then press <code>kb(editor.action.revealDefinition)</code>. Alternatively, you can choose <strong>Go to Definition</strong> from the context menu (right-click, then choose <strong>Go to Definition</strong>). When there’s only one definition of the symbol, you’ll navigate directly to its location, otherwise the competing definitions are displayed in a peek window as described in the previous section and you have to choose the definition that you want to go to.</p>
+<h3 id="go-to-super-implementation">Go to Super Implementation</h3>
+<p>You can keep track of class implementations and overriding methods by clicking the <strong>Go to Super Implementation</strong> link on hover.</p>
+<figure>
+<img src="images/java-editing/goto-super.png" alt="Spring Navigation" /><figcaption>Spring Navigation</figcaption>
+</figure>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/java/java-editing/goto-super-implementation.mp4" type="video/mp4">
+</video>
+<h3 id="call-hierarchy">Call Hierarchy</h3>
+<p>A Call Hierarchy view shows all calls from or to a function and allows you to drill into callers of callers and call of calls. Right-click on a function and select <strong>Peek</strong> &gt; <strong>Peek Call Hierarchy</strong>.</p>
+<figure>
+<img src="images/java-editing/call-hierarchy.png" alt="Call Hierarchy Peek" /><figcaption>Call Hierarchy Peek</figcaption>
+</figure>
+<p>You can also right-click in a function body and pick <strong>Show Call Hierarchy</strong>.</p>
+<figure>
+<img src="images/java-editing/call-hierarchy.gif" alt="Call Hierarchy Menu" /><figcaption>Call Hierarchy Menu</figcaption>
+</figure>
+<h3 id="folding-regions">Folding regions</h3>
+<p>Folding regions allows you to fold or unfold code snippet to better view the source code.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/java/java-editing/folding-range.mp4" type="video/mp4">
+</video>
+<h3 id="smart-selection">Smart Selection</h3>
+<p>With <a href="https://code.visualstudio.com/updates/v1_33#_smart-select-api">Smart Selection</a> (semantic selection), you can expand or shrink the selection range based on the semantic information of the caret position in your source code.</p>
+<ul>
+<li>To expand the selection, use <code>kb(editor.action.smartSelect.expand)</code>.</li>
+<li>To shrink the selection, use <code>kb(editor.action.smartSelect.shrink)</code>.</li>
+</ul>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/java/java-editing/smart-selection.mp4" type="video/mp4">
+</video>
+<h3 id="semantic-highlighting">Semantic Highlighting</h3>
+<p>Syntax highlighting is a very important feature that allows you to read code more efficiently. With the help of <a href="https://github.com/microsoft/vscode/wiki/Semantic-Highlighting-Overview">Semantic Highlighting</a>, VS Code can provide more accurate source code coloring based on symbol information from the Java language service.</p>
+<p>Below is just one example, left is the behavior after enabling semantic highlighting and right is the one with only syntax highlighting.</p>
+<figure>
+<img src="images/java-editing/semantic-highlighting.png" alt="Semantic Highlighting" /><figcaption>Semantic Highlighting</figcaption>
+</figure>
+<p>To enable semantic highlighting, you can toggle the <code>java.semanticHighlighting.enabled</code> setting. You will also be prompted to enable or disable semantic highlighting on startup:</p>
+<figure>
+<img src="images/java-editing/semantic-highlighting-switch.png" alt="Semantic Highlighting Switch" /><figcaption>Semantic Highlighting Switch</figcaption>
+</figure>
+<p>You can learn more about the details of Java semantic highlighting on the <a href="https://github.com/redhat-developer/vscode-java/wiki/Semantic-Highlighting">Java extension wiki</a>.</p>
+<h3 id="navigating-code-with-spring-boot">Navigating code with Spring Boot</h3>
+<p>The <a href="https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-spring-boot">Spring Boot Tools</a> extension provides enhanced navigation and code completion support for Spring Boot projects.</p>
+<ul>
+<li><code>@/</code> shows all defined request mappings (mapped path, request method, source location)</li>
+<li><code>@+</code> shows all defined beans (bean name, bean type, source location)</li>
+<li><code>@&gt;</code> shows all functions (prototype implementation)</li>
+<li><code>@</code> shows all Spring annotations in the code</li>
+</ul>
+<figure>
+<img src="images/java-editing/spring-navigation.png" alt="Spring Navigation" /><figcaption>Spring Navigation</figcaption>
+</figure>
+<p>To learn more about Spring Boot support with Visual Studio Code, read <a href="/docs/java/java-spring-boot.md">Spring Boot in Visual Studio Code</a>.</p>
+<h2 id="code-editing">Code editing</h2>
+<p>Editing code is also easy with IntelliSense for smart code completions and signature details. You can use code snippets as well as various code actions such as generating Getters/Setters and organizing imports to further boost your productivity.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/java/java-editing/code-editing.mp4" type="video/mp4">
+</video>
+<p>Java support in Visual Studio Code detects issues within your code automatically, and provides you with Quick Fix suggestions.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/java/java-editing/quick-fix.mp4" type="video/mp4">
+</video>
+<p>For more details about refactoring and code actions, see <a href="/docs/java/java-refactoring.md">Refactoring and Source Actions</a>.</p>
+<h3 id="intellisense">IntelliSense</h3>
+<p>Code completion in Visual Studio Code for Java is provided by <a href="https://marketplace.visualstudio.com/items?itemName=redhat.java">Language Support for Java(TM) by Red Hat</a>. The extension is powered by the same <a href="https://www.eclipse.org/jdt/">Java development tools (JDT)</a> behind Eclipse, so you can expect the same level of support.</p>
+<p>In addition, there’s also AI-assisted IntelliSense called <a href="https://visualstudio.microsoft.com/services/intellicode/">IntelliCode</a>. It saves you time by putting what you’re most likely to use at the top of your completion list. IntelliCode recommendations are based on thousands of open-source projects on GitHub each with over 100 stars, so it’s trained on the most common usages from high quality projects. When combined with the context of your code, the completion list is tailored to promote those practices. Here’s IntelliCode for Java in action.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/java/java-editing/intellicode.mp4" type="video/mp4">
+</video>
+<p>IntelliCode works well with popular Java libraries and frameworks like Java SE and Spring. It will help you whether you are doing monolithic web apps or modern microservices.</p>
+<h3 id="create-new-file">Create new file</h3>
+<p>VS Code supports applying templates when you create a Java source file. When you create a <code>.java</code> file in the File Explorer, the language server will automatically generate the class body, and fill the package info for you:</p>
+<figure>
+<img src="images/java-editing/create-new-file.gif" alt="New File" /><figcaption>New File</figcaption>
+</figure>
+<h2 id="code-snippets">Code snippets</h2>
+<p>Visual Studio Code supports a wide range of popular Java code snippets to make you more productive, such as class/interface, syserr, sysout, if/else, try/catch, static main method. Leveraging information from Java language server, it also provides a preview of the code snippet during the selection.</p>
+<figure>
+<img src="images/java-editing/code-snippet.png" alt="Code Snippet" /><figcaption>Code Snippet</figcaption>
+</figure>
+</body>
+</html>

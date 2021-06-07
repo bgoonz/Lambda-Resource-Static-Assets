@@ -7,6 +7,7 @@ PageTitle: Portable Mode in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Visual Studio Code supports a Portable Mode.
 ---
+
 # Portable Mode
 
 Visual Studio Code supports [Portable mode](https://en.wikipedia.org/wiki/Portable_application). This mode enables all data created and maintained by VS Code to live near itself, so it can be moved around across environments.
@@ -64,13 +65,13 @@ You can also migrate an existing installation to Portable mode:
 1. [Download](/download) the VS Code ZIP distribution for your platform.
 2. Create the `data` or `code-portable-data` folder as above.
 3. Copy the user data directory `Code` to `data` and rename it to `user-data`:
-    * **Windows** `%APPDATA%\Code`
-    * **macOS** `$HOME/Library/Application Support/Code`
-    * **Linux** `$HOME/.config/Code`
+   - **Windows** `%APPDATA%\Code`
+   - **macOS** `$HOME/Library/Application Support/Code`
+   - **Linux** `$HOME/.config/Code`
 4. Copy the extensions directory to `data`:
-    * **Windows** `%USERPROFILE%\.vscode\extensions`
-    * **macOS** `~/.vscode/extensions`
-    * **Linux** `~/.vscode/extensions`
+   - **Windows** `%USERPROFILE%\.vscode\extensions`
+   - **macOS** `~/.vscode/extensions`
+   - **Linux** `~/.vscode/extensions`
 
 Here's the desired outcome on **Windows**:
 

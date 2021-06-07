@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>java-tomcat-jetty</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="working-with-application-servers-in-vs-code">Working with Application Servers in VS Code</h1>
+<p>Visual Studio Code is a code editor-centric development tool, so it doesn’t come with any embedded application server. For most servers, you will need to deploy them using the command line, and then use the appropriate debugger <a href="https://code.visualstudio.com/docs/java/java-debugging#_configuration">configuration</a> if you wish to attach to it.</p>
+<p>On the other hand, we know that for certain Java workloads, server integration is very useful. With Visual Studio Code, you can find third party extensions for popular application servers, for example <a href="https://tomcat.apache.org/">Tomcat</a>, <a href="https://www.eclipse.org/jetty/">Jetty</a>, and <a href="https://openliberty.io/">Open Liberty</a>, which are helpful when working with those servers locally.</p>
+<p>For <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-spring-boot-dashboard">Spring Boot Dashboard</a>, see <a href="/docs/java/java-spring-boot.md">Spring Boot in Visual Studio Code</a>.</p>
+<p>If you run into any issues when using the features below, you can contact us by clicking the <strong>Report an issue</strong> button below.</p>
+<p><a class="tutorial-feedback-btn" onclick="reportIssue('java-tutorial', 'tomcat-jetty')" href="javascript:void(0)">Report an issue</a></p>
+<h2 id="tomcat">Tomcat</h2>
+<p>With the <a href="https://marketplace.visualstudio.com/items?itemName=adashen.vscode-tomcat">Tomcat</a> extension, you can manage all your local Tomcat servers within the editor and easily debug and run your <code>war</code> package on Tomcat and link Tomcat into your workspace. You can also create a new Tomcat server from the explorer using the <strong>Add</strong> button and run a <code>war</code> package on it. You can also create the server during the deployment.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/java/java-tomcat-jetty/tomcat.mp4" type="video/mp4">
+</video>
+<p>For running and debugging a package, you can right-click a server to select a <code>war</code> package to debug. More details could be found in the <a href="https://github.com/adashen/vscode-tomcat">GitHub repository</a> of the <a href="https://marketplace.visualstudio.com/items?itemName=adashen.vscode-tomcat">Tomcat</a> extension.</p>
+<h2 id="jetty">Jetty</h2>
+<p>The <a href="https://marketplace.visualstudio.com/items?itemName=SummerSun.vscode-jetty">Jetty for Java</a> extension for Visual Studio Code makes it much easier for you to run and deploy your <code>war</code> package, operate your Jetty Server, and interact with your application within the editor.</p>
+<p>The extension includes the following features:</p>
+<ul>
+<li>Add Jetty Server from download directory</li>
+<li>Start/Restart/Stop/Delete Jetty Server</li>
+<li>Run/Debug/Delete <code>war</code> package</li>
+<li>Reveal <code>war</code> package in file explorer</li>
+<li>Open Server homepage</li>
+<li>Open <code>war</code> package homepage</li>
+</ul>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/java/java-tomcat-jetty/jetty.mp4" type="video/mp4">
+</video>
+<p>More details could be found in the <a href="https://github.com/summersun/vscode-jetty">GitHub repository</a> of the <a href="https://marketplace.visualstudio.com/items?itemName=SummerSun.vscode-jetty">Jetty for Java</a> extension.</p>
+<h2 id="open-liberty">Open Liberty</h2>
+<p>The <a href="https://marketplace.visualstudio.com/items?itemName=Open-Liberty.liberty-dev-vscode-ext">Open Liberty Tools</a> extension lets you run your application on Open Liberty, allowing you to deploy, test, and debug your application from Visual Studio Code.</p>
+<p>After you start your application with the Open Liberty Tools extension, your source code is automatically compiled and deployed to the running server, making it easy to iterate on your changes. You can run tests on demand or automatically, so that you can get immediate feedback on your changes. You can also attach a debugger at any time to debug your running application.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/java/java-tomcat-jetty/open-liberty.mp4" type="video/mp4">
+</video>
+<p>More details can be found in the <a href="https://github.com/OpenLiberty/liberty-dev-vscode-ext">GitHub repository</a> of the <a href="https://marketplace.visualstudio.com/items?itemName=Open-Liberty.liberty-dev-vscode-ext">Open Liberty Tools</a> extension.</p>
+<h2 id="other-servers">Other servers</h2>
+<p>You can use the <a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-community-server-connector">Community Server Connectors</a> extension from Red Hat to deploy projects to Apache Felix, Tomcat, and Karaf in VS Code.</p>
+<p>The <a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-server-connector">Server Connector</a> extension by Red Hat allows you to start, stop, and deploy to a Red Hat server and runtime products like WildFly, JBoss EAP, Minishift, CDK.</p>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=MicroProfile-Community.vscode-microprofile-pack">Extension Pack for MicroProfile</a> provides tools for creating MicroProfile projects to develop and deploy to runtimes such as Open Liberty, Quarkus, and Payara.</p>
+</body>
+</html>

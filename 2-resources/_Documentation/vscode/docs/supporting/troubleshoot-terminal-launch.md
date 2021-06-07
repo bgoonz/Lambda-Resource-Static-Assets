@@ -21,14 +21,14 @@ To troubleshoot Integrated Terminal launch failures in Visual Studio Code, follo
 
 1. **Check your user settings.** Review these `terminal.integrated` [settings](/docs/getstarted/settings.md) that could affect the launch:
 
-   * `terminal.integrated.shell.{platform}` - The path of the shell that the terminal uses.
-   * `terminal.integrated.shellArgs.{platform}` - The command-line arguments when launching the shell process.
-   * `terminal.integrated.cwd` - The current working directory (cwd) for the shell process.
-   * `terminal.integrated.env.{platform}` - Environment variables that will be added to the shell process.
-   * `terminal.integrated.inheritEnv` - Whether new shells should inherit their environment from VS Code.
-   * `terminal.integrated.automationShell.{platform}` - Shell path for automation-related terminal usage like tasks and debug.
-   * `terminal.integrated.splitCwd` - Controls the current working directory a split terminal starts with.
-   * `terminal.integrated.windowsEnableConpty` - Whether to use ConPTY for Windows terminal process communication.
+   - `terminal.integrated.shell.{platform}` - The path of the shell that the terminal uses.
+   - `terminal.integrated.shellArgs.{platform}` - The command-line arguments when launching the shell process.
+   - `terminal.integrated.cwd` - The current working directory (cwd) for the shell process.
+   - `terminal.integrated.env.{platform}` - Environment variables that will be added to the shell process.
+   - `terminal.integrated.inheritEnv` - Whether new shells should inherit their environment from VS Code.
+   - `terminal.integrated.automationShell.{platform}` - Shell path for automation-related terminal usage like tasks and debug.
+   - `terminal.integrated.splitCwd` - Controls the current working directory a split terminal starts with.
+   - `terminal.integrated.windowsEnableConpty` - Whether to use ConPTY for Windows terminal process communication.
 
    You can review settings in the Settings editor (**File** > **Preferences** > **Settings**) and search for specific settings by the setting ID.
 
@@ -52,10 +52,10 @@ To troubleshoot Integrated Terminal launch failures in Visual Studio Code, follo
 
 If none of these steps helped solve the issue, you can also try:
 
-* Ask about it on [Stack Overflow](https://stackoverflow.com/), often launch issues are related to environment setup and not a problem with VS Code.
-* If the terminal is being launched from an extension, report the issue to the extension by opening the issue reporter (Help > Report Issue) and set File On = "An Extension"
-* If you believe it to be a bug with VS Code, report the issue using the issue reporter (**Help** > **Report Issue**). The issue reporter will autofill relevant information, see [Creating great terminal issues](https://github.com/microsoft/vscode/wiki/Terminal-Issues#creating-great-terminal-issues) for what else to include in the report.
-* If you're on Windows 10 1809 (build 17763) or below, the issue is related to the legacy "winpty" backend. Upgrading to Windows 1903 (build 18362) will move you onto the new "conpty" backend that is built by Microsoft and could fix your problem.
+- Ask about it on [Stack Overflow](https://stackoverflow.com/), often launch issues are related to environment setup and not a problem with VS Code.
+- If the terminal is being launched from an extension, report the issue to the extension by opening the issue reporter (Help > Report Issue) and set File On = "An Extension"
+- If you believe it to be a bug with VS Code, report the issue using the issue reporter (**Help** > **Report Issue**). The issue reporter will autofill relevant information, see [Creating great terminal issues](https://github.com/microsoft/vscode/wiki/Terminal-Issues#creating-great-terminal-issues) for what else to include in the report.
+- If you're on Windows 10 1809 (build 17763) or below, the issue is related to the legacy "winpty" backend. Upgrading to Windows 1903 (build 18362) will move you onto the new "conpty" backend that is built by Microsoft and could fix your problem.
 
 ## Exit codes
 
@@ -73,8 +73,8 @@ This can happen if Windows Subsystem for Linux (WSL) is not set up with a valid 
 
 **Note:** 'docker-desktop-data' is not a valid distribution.
 
-* Open PowerShell and enter `wslconfig.exe /l` to confirm WSL is installed correctly and list the currently available Linux distributions within your system. Confirm a valid distribution has **(default)** next to it.
-* To change the default distribution, enter `wslconfig.exe /setdefault "distributionNameAsShownInList"`
+- Open PowerShell and enter `wslconfig.exe /l` to confirm WSL is installed correctly and list the currently available Linux distributions within your system. Confirm a valid distribution has **(default)** next to it.
+- To change the default distribution, enter `wslconfig.exe /setdefault "distributionNameAsShownInList"`
 
 ### The terminal not working when running the 32-bit Windows client on 64-bit Windows?
 

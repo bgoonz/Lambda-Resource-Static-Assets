@@ -23,8 +23,8 @@ current folder and use the `name` property.
 
 #### browser
 
-* Default: OS X: `"open"`, Windows: `"start"`, Others: `"xdg-open"`
-* Type: String or Boolean
+- Default: OS X: `"open"`, Windows: `"start"`, Others: `"xdg-open"`
+- Type: String or Boolean
 
 The browser that is called by the `npm bugs` command to open websites.
 
@@ -35,17 +35,17 @@ Set to `true` to use default system URL opener.
 
 #### registry
 
-* Default: https://registry.npmjs.org/
-* Type: url
+- Default: https://registry.npmjs.org/
+- Type: url
 
 The base URL of the npm package registry.
 
 ### See Also
 
-* [npm docs](/commands/npm-docs)
-* [npm view](/commands/npm-view)
-* [npm publish](/commands/npm-publish)
-* [npm registry](/using-npm/registry)
-* [npm config](/commands/npm-config)
-* [npmrc](/configuring-npm/npmrc)
-* [package.json](/configuring-npm/package-json)
+- [npm docs](/commands/npm-docs)
+- [npm view](/commands/npm-view)
+- [npm publish](/commands/npm-publish)
+- [npm registry](/using-npm/registry)
+- [npm config](/commands/npm-config)
+- [npmrc](/configuring-npm/npmrc)
+- [package.json](/configuring-npm/package-json)

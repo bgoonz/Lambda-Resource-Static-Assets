@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>codespaces</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="github-codespaces">GitHub Codespaces</h1>
+<p><a href="https://github.com/features/codespaces">GitHub Codespaces</a> provides cloud-powered development environments for any activity - whether it’s a long-term project, or a short-term task like reviewing a pull request. You can work with these environments from Visual Studio Code or in a browser-based editor.</p>
+<figure>
+<img src="images/codespaces/github-codespaces-extension.png" alt="GitHub Codespaces extension" /><figcaption>GitHub Codespaces extension</figcaption>
+</figure>
+<h2 id="environments">Environments</h2>
+<p>An environment is the “backend” half of GitHub Codespaces. It’s where all of the compute associated with software development happens: compiling, debugging, restoring, etc. When you need to work on a new project, pick up a new task, or review a PR, you can simply spin up a Cloud-hosted environment, and GitHub Codespaces takes care of configuring it correctly. It automatically configures everything you need to work on your project: the source code, runtime, compiler, debugger, editor, custom dotfile configurations, relevant editor extensions and more.</p>
+<h2 id="customization">Customization</h2>
+<p>GitHub Codespaces are fully customizable on a per project basis. This is accomplished by including a <code>devcontainer.json</code> file in the project’s repository, similar to VS Code <a href="/docs/remote/containers.md">Remote Container</a> development.</p>
+<p>Example customizations include:</p>
+<ul>
+<li>Setting which Linux-based operating system to use.</li>
+<li>Automatically installing various tools, runtimes, and frameworks.</li>
+<li>Forwarding commonly used ports.</li>
+<li>Setting environment variables.</li>
+<li>Configuring editor settings and installing preferred extensions.</li>
+</ul>
+<p>See the <a href="https://docs.github.com/github/developing-online-with-codespaces/configuring-codespaces-for-your-project">Configuring Codespaces</a> documentation for codespace-specific <code>devcontainer.json</code> settings.</p>
+<h2 id="dotfile-per-user-configuration">Dotfile per user configuration</h2>
+<p>Dotfiles are files whose filename begins with a dot (.). They typically contain configuration information for applications and can control how terminals, editors, source control, and various other tools behave. <code>.bashrc</code>, <code>.gitignore</code> and <code>.editorconfig</code> are examples of dotfiles commonly used by developers.</p>
+<p>You can specify a GitHub repo containing your dotfiles, a target location for the files, as well as install commands when creating a codespace.</p>
+<p>See the <a href="https://docs.github.com/github/developing-online-with-codespaces/personalizing-codespaces-for-your-account">Personalizing Codespaces</a> documentation to learn how to add your dotfile configurations to a codespace.</p>
+<h2 id="getting-started">Getting started</h2>
+<p>There are getting started topics for both GitHub Codespaces clients. These will fast-track you through signing in to GitHub Codespaces, creating your first codespace, and connecting to it with your preferred client:</p>
+<ul>
+<li><a href="https://docs.github.com/github/developing-online-with-codespaces/using-codespaces-in-visual-studio-code">Codespaces in VS Code</a> - Use the <a href="https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces">GitHub Codespaces</a> extension to connect and work in your environment.</li>
+<li><a href="https://docs.github.com/github/developing-online-with-codespaces/creating-a-codespace">Codespaces in the browser</a> - Connect to your codespace through a browser-based editor.</li>
+</ul>
+<h2 id="extension-authors">Extension authors</h2>
+<p>The VS Code extension API hides most of the implementation details of running remotely so many extensions will just work in GitHub Codespaces environments without any modification. However, we recommend that you test your extension in a codespace to be sure that all of its functionality works as expected. See the article on <a href="/api/advanced-topics/remote-extensions.md">Supporting Remote Development and GitHub Codespaces</a> for details.</p>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="why-is-an-extension-not-installable-in-the-browser">Why is an extension not installable in the browser</h3>
+<p>There are a small number of extensions that have built-in assumptions or need to run on the desktop. Examples are when an extension accesses files from the VS Code installation on the desktop or when an extension depends on a executable that must run in a desktop environment. When you try to install such an extension in the browser, you will be informed that the extension is not available.</p>
+<p><strong>Notice</strong> such an extension can still be used when connecting to a Codespace from VS Code running on the desktop.</p>
+<h3 id="how-do-i-allow-vs-code-to-access-my-clipboard-for-reading">How do I allow VS Code to access my clipboard for reading?</h3>
+<p>In certain cases, VS Code might ask you for permission to access the clipboard when reading from it. You should be able to grant access to the clipboard from your browser either through settings (search for “site permissions”) or by looking for this option in the address bar on the right:</p>
+<figure>
+<img src="images/codespaces/allow-clipboard-access.png" alt="Allow clipboard access in browser" /><figcaption>Allow clipboard access in browser</figcaption>
+</figure>
+<p>Once you have granted VS Code access to the clipboard, you can retry the operation.</p>
+<h2 id="questions-or-feedback">Questions or feedback</h2>
+<p>If you have questions, you can consult the GitHub Codespaces <a href="https://docs.github.com/github/developing-online-with-codespaces/troubleshooting-your-codespace">Troubleshooting guide</a>. If you’d like to provide feedback, you can enter issues in the GitHub Codespaces <a href="https://github.community/c/codespaces-beta/45">Support Community</a>.</p>
+</body>
+</html>

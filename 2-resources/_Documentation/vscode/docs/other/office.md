@@ -7,6 +7,7 @@ PageTitle: Office Add-ins with Visual Studio Code
 DateApproved: 3/5/2018
 MetaDescription: See how to use the features of Visual Studio Code and integrate your Add-in with Office/Office 365.
 ---
+
 # Office Add-ins with Visual Studio Code
 
 [Office Add-ins](https://docs.microsoft.com/office/dev/add-ins/overview/office-add-ins) run inside an Office application and can interact with contents of the Office document using the rich JavaScript API.
@@ -19,14 +20,14 @@ Under the hood, an Office Add-in is just a web app that you can host anywhere. U
 
 Follow the instructions to [Create an Office Add-in using any editor](https://developer.microsoft.com/office/blogs/creating-office-add-ins-with-any-editor-introducing-yo-office) to install the necessary prerequisites, and use Yo Office to create a new add-in project. The following table lists the project attributes to select in the Yeoman generator.
 
-| Option | Value |
-|:------|:------|
-|New subfolder | (accept the default) |
-| Add-in name | Outlook Add-in |
-| Supported Office application | (select Outlook) |
-| Create new add-in | Yes, I want a new add-in |
-| Add [TypeScript](https://www.typescriptlang.org/) | No |
-| Choose framework | Jquery |
+| Option                                            | Value                    |
+| :------------------------------------------------ | :----------------------- |
+| New subfolder                                     | (accept the default)     |
+| Add-in name                                       | Outlook Add-in           |
+| Supported Office application                      | (select Outlook)         |
+| Create new add-in                                 | Yes, I want a new add-in |
+| Add [TypeScript](https://www.typescriptlang.org/) | No                       |
+| Choose framework                                  | Jquery                   |
 
 ## Use Visual Studio Code to develop your Office Add-in!
 
@@ -44,7 +45,7 @@ code .
 
 Open the `manifest.xml` file that was created by Yo Office and locate the `SourceLocation` node. Update this URL to the URL where you will host the Add-in.
 
->**Tip:** If you are using an Azure Web App as the host, the URL will look something like `https://[name-of-your-web-app].azurewebsites.net/[path-to-add-in]`. If you are using the self-hosted option listed above, it will be `http://localhost:3000/[path-to-add-in]`.
+> **Tip:** If you are using an Azure Web App as the host, the URL will look something like `https://[name-of-your-web-app].azurewebsites.net/[path-to-add-in]`. If you are using the self-hosted option listed above, it will be `http://localhost:3000/[path-to-add-in]`.
 
 ### Debugging your Office Add-in
 
@@ -62,7 +63,7 @@ Mail Add-ins can be installed within the Outlook Web App. Browse to your [Outloo
 
 ![Manage Add-ins](images/office/owamanageaddins.png)
 
-On the **Manage add-ins** page, select the *+* icon and then select **Add from a file**.
+On the **Manage add-ins** page, select the _+_ icon and then select **Add from a file**.
 
 ![Add from File](images/office/owaaddaddin.png)
 
@@ -98,7 +99,7 @@ To install an Add-in within an Office application, select the **Insert** tab and
 
 ![Excel Add-in](images/office/exceladdin.png)
 
-Using the Office Add-ins dialog you can select Add-ins you've uploaded to your Office 365 tenancy's App Catalog (*listed under My Organization*) or acquire Add-ins from the Office Store.
+Using the Office Add-ins dialog you can select Add-ins you've uploaded to your Office 365 tenancy's App Catalog (_listed under My Organization_) or acquire Add-ins from the Office Store.
 
 ## Next steps
 

@@ -7,6 +7,7 @@ PageTitle: Use Microsoft Live Share to collaborate with Visual Studio Code
 DateApproved: 10/22/2020
 MetaDescription: Use Microsoft Live Share to collaborate with Visual Studio Code
 ---
+
 # Collaborate with Live Share
 
 ## What is Live Share?

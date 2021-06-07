@@ -7,6 +7,7 @@ ContentId: 42e65445-fb3b-4561-8730-bbd19769a160
 MetaDescription: Developing on Remote Machines or VMs using Visual Studio Code Remote Development and SSH
 DateApproved: 3/31/2021
 ---
+
 # Remote Development using SSH
 
 The **Visual Studio Code Remote - SSH** extension allows you to open a remote folder on any remote machine, virtual machine, or container with a running SSH server and take full advantage of VS Code's feature set. Once connected to a server, you can interact with files and folders anywhere on the remote filesystem.
@@ -23,7 +24,7 @@ This lets VS Code provide a **local-quality development experience** — includi
 
 ### System requirements
 
-**Local:**  A supported [OpenSSH compatible SSH client](/docs/remote/troubleshooting.md#installing-a-supported-ssh-client) must also be installed.
+**Local:** A supported [OpenSSH compatible SSH client](/docs/remote/troubleshooting.md#installing-a-supported-ssh-client) must also be installed.
 
 **Remote SSH host**: A running [SSH server](/docs/remote/troubleshooting.md#installing-a-supported-ssh-server) on:
 
@@ -53,11 +54,11 @@ To get started, you need to:
 
 2. **[Optional]** If your Linux or macOS SSH host will be accessed by multiple users at the same time, consider enabling **Remote.SSH: Remote Server Listen On Socket** in VS Code [User settings](/docs/getstarted/settings.md) for improved security.
 
-    In the Settings editor:
+   In the Settings editor:
 
-    ![Listen on socket VS Code setting](images/ssh/ssh-listen-on-socket.png)
+   ![Listen on socket VS Code setting](images/ssh/ssh-listen-on-socket.png)
 
-    See the [Tips and Tricks](/docs/remote/troubleshooting.md#improving-security-on-multi-user-servers) article for details.
+   See the [Tips and Tricks](/docs/remote/troubleshooting.md#improving-security-on-multi-user-servers) article for details.
 
 3. **[Optional]** While password-based authentication is supported, we recommend setting up **key based authentication** for your host. See the [Tips and Tricks](/docs/remote/troubleshooting.md#configuring-key-based-authentication) article for details.
 
@@ -67,37 +68,37 @@ To connect to a remote host for the first time, follow these steps:
 
 1. Verify you can connect to the SSH host by running the following command from a terminal / PowerShell window replacing `user@hostname` as appropriate.
 
-    ```bash
-    ssh user@hostname
-    # Or for Windows when using a domain / AAD account
-    ssh user@domain@hostname
-    ```
+   ```bash
+   ssh user@hostname
+   # Or for Windows when using a domain / AAD account
+   ssh user@domain@hostname
+   ```
 
 2. In VS Code, select **Remote-SSH: Connect to Host...** from the Command Palette (`kbstyle(F1)`) and use the same `user@hostname` as in step 1.
 
-    ![Illustration of user@host input box](images/ssh/ssh-user@box.png)
+   ![Illustration of user@host input box](images/ssh/ssh-user@box.png)
 
 3. If VS Code cannot automatically detect the type of server you are connecting to, you will be asked to select the type manually.
 
-    ![Illustration of platform selection](images/ssh/ssh-select-platform.png)
+   ![Illustration of platform selection](images/ssh/ssh-select-platform.png)
 
-    Once you select a platform, it will be stored in [VS Code settings](/docs/getstarted/settings.md) under the `remote.SSH.remotePlatform` property so you can change it at any time.
+   Once you select a platform, it will be stored in [VS Code settings](/docs/getstarted/settings.md) under the `remote.SSH.remotePlatform` property so you can change it at any time.
 
 4. After a moment, VS Code will connect to the SSH server and set itself up. VS Code will keep you up-to-date using a progress notification and you can see a detailed log in the `Remote - SSH` output channel.
 
-    > **Tip:** Connection hanging or failing? See [troubleshooting tips](/docs/remote/troubleshooting.md#troubleshooting-hanging-or-failing-connections) for information on resolving common problems.
-    >
-    > If you see errors about SSH file permissions, see the section on [Fixing SSH file permission errors](/docs/remote/troubleshooting.md#fixing-ssh-file-permission-errors).
+   > **Tip:** Connection hanging or failing? See [troubleshooting tips](/docs/remote/troubleshooting.md#troubleshooting-hanging-or-failing-connections) for information on resolving common problems.
+   >
+   > If you see errors about SSH file permissions, see the section on [Fixing SSH file permission errors](/docs/remote/troubleshooting.md#fixing-ssh-file-permission-errors).
 
 5. After you are connected, you'll be in an empty window. You can always refer to the Status bar to see which host you are connected to.
 
-    ![SSH Status bar item](images/ssh/ssh-statusbar.png)
+   ![SSH Status bar item](images/ssh/ssh-statusbar.png)
 
-    Clicking on the Status bar item will provide a list of remote commands while you are connected.
+   Clicking on the Status bar item will provide a list of remote commands while you are connected.
 
 6. You can then open any folder or workspace on the remote machine using **File > Open...** or **File > Open Workspace...** just as you would locally!
 
-    ![File Open on a remote SSH host](images/ssh/ssh-open-folder.png)
+   ![File Open on a remote SSH host](images/ssh/ssh-open-folder.png)
 
 From here, [install any extensions](#managing-extensions) you want to use when connected to the host and start editing!
 

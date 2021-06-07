@@ -7,6 +7,7 @@ PageTitle: Visual Studio Code Tasks (legacy version)
 DateApproved: 3/31/2021
 MetaDescription: Expand your development workflow with task integration in Visual Studio Code (Gulp, Grunt, Jake and more).
 ---
+
 # Tasks (legacy version)
 
 ---
@@ -15,9 +16,9 @@ This documentation describes the legacy Tasks system in Visual Studio Code versi
 
 ---
 
-Developers use lots of tools, mostly run from the command line, to automate jobs outside the inner software development loop (edit, compile, test and debug).  Given their importance in the development life-cycle, it is very helpful to be able to run them and analyze their results from within Visual Studio Code.
+Developers use lots of tools, mostly run from the command line, to automate jobs outside the inner software development loop (edit, compile, test and debug). Given their importance in the development life-cycle, it is very helpful to be able to run them and analyze their results from within Visual Studio Code.
 
->**Note:** Task support is only available when working on a workspace folder. It is not available when editing single files.
+> **Note:** Task support is only available when working on a workspace folder. It is not available when editing single files.
 
 ## Hello World
 
@@ -37,17 +38,17 @@ Tasks are defined in a workspace `tasks.json` file and VS Code has templates for
 
 Select the **Tasks: Configure Task Runner** command and you will see a list of task runner templates. Select **Others** to create a task which runs an external command.
 
->**Note:** If you don't see the list of task runner templates, you may already have a `tasks.json` file in your folder and its contents will be open in the editor. Close the file and either delete or rename it for this example.
+> **Note:** If you don't see the list of task runner templates, you may already have a `tasks.json` file in your folder and its contents will be open in the editor. Close the file and either delete or rename it for this example.
 
 You should now see a `tasks.json` file in your workspace `.vscode` folder with the following content:
 
 ```json
 {
-    "version": "0.1.0",
-    "command": "echo",
-    "isShellCommand": true,
-    "args": ["Hello World"],
-    "showOutput": "always"
+  "version": "0.1.0",
+  "command": "echo",
+  "isShellCommand": true,
+  "args": ["Hello World"],
+  "showOutput": "always"
 }
 ```
 
@@ -59,7 +60,7 @@ You can get IntelliSense on `tasks.json` variables and their values with hover a
 
 ![tasks IntelliSense](images/tasks/tasks-intellisense.png)
 
->**Tip:** You can run your task through **Quick Open** (`kb(workbench.action.quickOpen)`) by typing 'task', `kbstyle(Space)` and the command name. In this case, 'task echo'.
+> **Tip:** You can run your task through **Quick Open** (`kb(workbench.action.quickOpen)`) by typing 'task', `kbstyle(Space)` and the command name. In this case, 'task echo'.
 
 ## Output Window Behavior
 
@@ -75,7 +76,7 @@ To see the exact command VS Code is running, you can enable the `echoCommand` se
 
 ![tasks echoCommand](images/tasks/tasks-echoCommand.png)
 
->**Note:** VS Code ships with predefined `tasks.json` templates to run npm, MSBuild, Maven and other command-line tools. A great way to learn about tasks is to review these templates and see which tools or task runners are similar to other tools you may be using.
+> **Note:** VS Code ships with predefined `tasks.json` templates to run npm, MSBuild, Maven and other command-line tools. A great way to learn about tasks is to review these templates and see which tools or task runners are similar to other tools you may be using.
 
 ## command and tasks[]
 
@@ -87,23 +88,23 @@ Here's a simple example passing different arguments to the `echo` command:
 
 ```json
 {
-    "version": "0.1.0",
-    "command": "echo",
-    "isShellCommand": true,
-    "args": [],
-    "showOutput": "always",
-    "echoCommand": true,
-    "suppressTaskName": true,
-    "tasks": [
-        {
-            "taskName": "hello",
-            "args": ["Hello World"]
-        },
-        {
-            "taskName": "bye",
-            "args": ["Good Bye"]
-        }
-    ]
+  "version": "0.1.0",
+  "command": "echo",
+  "isShellCommand": true,
+  "args": [],
+  "showOutput": "always",
+  "echoCommand": true,
+  "suppressTaskName": true,
+  "tasks": [
+    {
+      "taskName": "hello",
+      "args": ["Hello World"]
+    },
+    {
+      "taskName": "bye",
+      "args": ["Good Bye"]
+    }
+  ]
 }
 ```
 
@@ -113,8 +114,8 @@ Now when you run **Tasks: Run Task**, you will now see two tasks in the dropdown
 
 Some `tasks.json` properties such as `showOutput` and `suppressTaskName` can be set both globally and then overridden in specific tasks. The `tasks` `args` property values are appended to the global arguments. The final command line is constructed as follows:
 
-* If `suppressTaskName` is `true`, the command line is `command 'global args' 'task args'`.
-* If `suppressTaskName` is `false`, it is `command 'global args' taskName 'task args'`.
+- If `suppressTaskName` is `true`, the command line is `command 'global args' 'task args'`.
+- If `suppressTaskName` is `false`, it is `command 'global args' taskName 'task args'`.
 
 There are also `tasks` specific properties. One useful property is `isBuildCommand`, which if set to true, will run the task with the **Tasks: Run Build Task** (`kb(workbench.action.tasks.build)`) command.
 
@@ -124,23 +125,23 @@ If you want to run multiple different commands you can specify different command
 
 ```json
 {
-    "version": "0.1.0",
-    "tasks": [
-        {
-            "taskName": "tsc",
-            "command": "tsc",
-            "args": ["-w"],
-            "isShellCommand": true,
-            "isBackground": true,
-            "problemMatcher": "$tsc-watch"
-        },
-        {
-            "taskName": "build",
-            "command": "gulp",
-            "args": ["build"],
-            "isShellCommand": true
-        }
-    ]
+  "version": "0.1.0",
+  "tasks": [
+    {
+      "taskName": "tsc",
+      "command": "tsc",
+      "args": ["-w"],
+      "isShellCommand": true,
+      "isBackground": true,
+      "problemMatcher": "$tsc-watch"
+    },
+    {
+      "taskName": "build",
+      "command": "gulp",
+      "args": ["build"],
+      "isShellCommand": true
+    }
+  ]
 }
 ```
 
@@ -154,9 +155,9 @@ For example, to bind `kbstyle(Ctrl+H)` to the `build` task from above, add the f
 
 ```json
 {
-    "key": "ctrl+h",
-    "command": "workbench.action.tasks.runTask",
-    "args": "build"
+  "key": "ctrl+h",
+  "command": "workbench.action.tasks.runTask",
+  "args": "build"
 }
 ```
 
@@ -168,8 +169,8 @@ Below is an example of a configuration that passes the current opened file to th
 
 ```json
 {
-    "command": "tsc",
-    "args": ["${file}"]
+  "command": "tsc",
+  "args": ["${file}"]
 }
 ```
 
@@ -181,13 +182,13 @@ Below is an example that uses the Node.js executable as a command and is treated
 
 ```json
 {
-    "version": "0.1.0",
-    "windows": {
-        "command": "C:\\Program Files\\nodejs\\node.exe"
-    },
-    "linux": {
-        "command": "/usr/bin/node"
-    }
+  "version": "0.1.0",
+  "windows": {
+    "command": "C:\\Program Files\\nodejs\\node.exe"
+  },
+  "linux": {
+    "command": "/usr/bin/node"
+  }
 }
 ```
 
@@ -197,11 +198,11 @@ In the example below:
 
 ```json
 {
-    "version": "0.1.0",
-    "showOutput": "never",
-    "windows": {
-        "showOutput": "always"
-    }
+  "version": "0.1.0",
+  "showOutput": "never",
+  "windows": {
+    "showOutput": "always"
+  }
 }
 ```
 
@@ -211,23 +212,23 @@ Tasks local commands can be made operating specific as well. The syntax is the s
 
 ```json
 {
-    "version": "0.1.0",
-    "tasks": [
-        {
-            "taskName": "build",
-            "command": "gulp",
-            "isShellCommand": true,
-            "windows": {
-                "args": ["build", "win32"]
-            },
-            "linux": {
-                "args": ["build", "linux"]
-            },
-            "osx": {
-                "args": ["build", "osx"]
-            }
-        }
-    ]
+  "version": "0.1.0",
+  "tasks": [
+    {
+      "taskName": "build",
+      "command": "gulp",
+      "isShellCommand": true,
+      "windows": {
+        "args": ["build", "win32"]
+      },
+      "linux": {
+        "args": ["build", "linux"]
+      },
+      "osx": {
+        "args": ["build", "osx"]
+      }
+    }
+  ]
 }
 ```
 
@@ -255,9 +256,9 @@ The CSS topic provides examples of how to use Tasks to generate CSS files.
 
 ## Autodetecting Gulp, Grunt and Jake Tasks
 
-VS Code can autodetect tasks from within Gulp, Grunt and Jake files.  This adds their tasks to the task list without requiring additional configuration (unless you need to use a problem matcher, more on that in a moment).
+VS Code can autodetect tasks from within Gulp, Grunt and Jake files. This adds their tasks to the task list without requiring additional configuration (unless you need to use a problem matcher, more on that in a moment).
 
-To help make this example more concrete, let's use this simple Gulp file.  This defines two tasks: build and debug. The first compiles C# code using [Mono](https://www.mono-project.com/)'s compiler. The second starts the MyApp under the Mono debugger.
+To help make this example more concrete, let's use this simple Gulp file. This defines two tasks: build and debug. The first compiles C# code using [Mono](https://www.mono-project.com/)'s compiler. The second starts the MyApp under the Mono debugger.
 
 ```javascript
 var gulp = require("gulp");
@@ -265,16 +266,16 @@ var gulp = require("gulp");
 var program = "MyApp";
 var port = 55555;
 
-gulp.task('default', ['debug']);
+gulp.task("default", ["debug"]);
 
-gulp.task('build', function() {
-    return gulp
-        .src('./**/*.cs')
-        .pipe(msc(['-fullpaths', '-debug', '-target:exe', '-out:' + program]));
+gulp.task("build", function () {
+  return gulp
+    .src("./**/*.cs")
+    .pipe(msc(["-fullpaths", "-debug", "-target:exe", "-out:" + program]));
 });
 
-gulp.task('debug', ['build'], function(done) {
-    return mono.debug({ port: port, program: program}, done);
+gulp.task("debug", ["build"], function (done) {
+  return mono.debug({ port: port, program: program }, done);
 });
 ```
 
@@ -282,7 +283,7 @@ Pressing `kb(workbench.action.showCommands)` and then typing `Run Task` followed
 
 ![Task list](images/tasks/gulpautodetect.png)
 
->**Note:** Gulp, Grunt and Jake are autodetected only if the corresponding files (for example `gulpfile.js`) are present in the root of the opened folder.
+> **Note:** Gulp, Grunt and Jake are autodetected only if the corresponding files (for example `gulpfile.js`) are present in the root of the opened folder.
 
 ## Processing Task Output with Problem Matchers
 
@@ -304,7 +305,7 @@ You can also create your own problem matcher which we'll talk about soon.
 
 ## Mapping Gulp, Grunt and Jake Output to Problem Matchers
 
-You need to configure the tasks in a `tasks.json` file (located under your workspace `.vscode` folder) if you want to do more than just run the task.  For example, you might want to match reported problems and highlight them within VS Code, or to trigger a build task using the **Tasks: Run Build Task** command (`kb(workbench.action.tasks.build)`).
+You need to configure the tasks in a `tasks.json` file (located under your workspace `.vscode` folder) if you want to do more than just run the task. For example, you might want to match reported problems and highlight them within VS Code, or to trigger a build task using the **Tasks: Run Build Task** command (`kb(workbench.action.tasks.build)`).
 
 If you don't already have a `tasks.json` under your workspace `.vscode` folder, running the **Tasks: Configure Task Runner** action from the **Command Palette** (`kb(workbench.action.showCommands)`) will offer you a set of templates to pick from.
 
@@ -312,26 +313,20 @@ For this example, select `Gulp` from the list. Given a `gulpfile.js` like the ex
 
 ```json
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "0.1.0",
-    "command": "gulp",
-    "isShellCommand": true,
-    "args": [
-        "--no-color"
-    ],
-    "tasks": [
-        {
-            "taskName": "build",
-            "args": [],
-            "isBuildCommand": true,
-            "problemMatcher": [
-                "$lessCompile",
-                "$tsc",
-                "$jshint"
-            ]
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "0.1.0",
+  "command": "gulp",
+  "isShellCommand": true,
+  "args": ["--no-color"],
+  "tasks": [
+    {
+      "taskName": "build",
+      "args": [],
+      "isBuildCommand": true,
+      "problemMatcher": ["$lessCompile", "$tsc", "$jshint"]
+    }
+  ]
 }
 ```
 
@@ -348,12 +343,12 @@ The `problemMatcher` property will then be:
 Several things to note about this `tasks.json`:
 
 1. We want to run the gulp command in a shell (VS Code directly executing it) so we used **isShellCommand**.
-2. We added an explicit **tasks** property which allowed us to *optionally* augment a task that was in the `gulpfile.js`.
-3. We defined a problem matcher **$msCompile** to process the output - since we are compiling C# using the Mono compiler, the built-in one works as *msc* adheres to the Microsoft compiler pattern.
+2. We added an explicit **tasks** property which allowed us to _optionally_ augment a task that was in the `gulpfile.js`.
+3. We defined a problem matcher **$msCompile** to process the output - since we are compiling C# using the Mono compiler, the built-in one works as _msc_ adheres to the Microsoft compiler pattern.
 
 ## Defining a Problem Matcher
 
-VS Code ships some of the most common problem matchers out of the box.  However, there are lots of compilers and linting tools out there, all of which produce their own style of errors and warnings.  So let's talk about how to make your own problem matcher.
+VS Code ships some of the most common problem matchers out of the box. However, there are lots of compilers and linting tools out there, all of which produce their own style of errors and warnings. So let's talk about how to make your own problem matcher.
 
 We have a `helloWorld.c` program in which the developer mistyped **printf** as **prinft**. Compiling it with [gcc](https://gcc.gnu.org/) will produce the following warning:
 
@@ -361,33 +356,33 @@ We have a `helloWorld.c` program in which the developer mistyped **printf** as *
 helloWorld.c:5:3: warning: implicit declaration of function ‘prinft’
 ```
 
-We want to produce a problem matcher that can capture the message in the output and show a corresponding problem in VS Code.  Problem matchers heavily rely on [regular expressions](https://en.wikipedia.org/wiki/Regular_expression). The section below assumes you are familiar with regular expressions.
+We want to produce a problem matcher that can capture the message in the output and show a corresponding problem in VS Code. Problem matchers heavily rely on [regular expressions](https://en.wikipedia.org/wiki/Regular_expression). The section below assumes you are familiar with regular expressions.
 
->**Tip:** We have found the [RegEx101 playground](https://regex101.com/) a really good way to develop and test regular expressions.
+> **Tip:** We have found the [RegEx101 playground](https://regex101.com/) a really good way to develop and test regular expressions.
 
 A matcher that captures the above warning (and errors) looks like:
 
 ```json
 {
-    // The problem is owned by the cpp language service.
-    "owner": "cpp",
-    // The file name for reported problems is relative to the opened folder.
-    "fileLocation": ["relative", "${workspaceFolder}"],
-    // The actual pattern to match problems in the output.
-    "pattern": {
-        // The regular expression. Example to match: helloWorld.c:5:3: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
-        "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-        // The first match group matches the file name which is relative.
-        "file": 1,
-        // The second match group matches the line on which the problem occurred.
-        "line": 2,
-        // The third match group matches the column at which the problem occurred.
-        "column": 3,
-        // The fourth match group matches the problem's severity. Can be ignored. Then all problems are captured as errors.
-        "severity": 4,
-        // The fifth match group matches the message.
-        "message": 5
-    }
+  // The problem is owned by the cpp language service.
+  "owner": "cpp",
+  // The file name for reported problems is relative to the opened folder.
+  "fileLocation": ["relative", "${workspaceFolder}"],
+  // The actual pattern to match problems in the output.
+  "pattern": {
+    // The regular expression. Example to match: helloWorld.c:5:3: warning: implicit declaration of function ‘printf’ [-Wimplicit-function-declaration]
+    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+    // The first match group matches the file name which is relative.
+    "file": 1,
+    // The second match group matches the line on which the problem occurred.
+    "line": 2,
+    // The third match group matches the column at which the problem occurred.
+    "column": 3,
+    // The fourth match group matches the problem's severity. Can be ignored. Then all problems are captured as errors.
+    "severity": 4,
+    // The fifth match group matches the message.
+    "message": 5
+  }
 }
 ```
 
@@ -397,21 +392,21 @@ Here is a finished `tasks.json` file with the code above (comments removed) wrap
 
 ```json
 {
-    "version": "0.1.0",
-    "command": "gcc",
-    "args": ["-Wall", "helloWorld.c", "-o", "helloWorld"],
-    "problemMatcher": {
-        "owner": "cpp",
-        "fileLocation": ["relative", "${workspaceFolder}"],
-        "pattern": {
-            "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
-            "file": 1,
-            "line": 2,
-            "column": 3,
-            "severity": 4,
-            "message": 5
-        }
+  "version": "0.1.0",
+  "command": "gcc",
+  "args": ["-Wall", "helloWorld.c", "-o", "helloWorld"],
+  "problemMatcher": {
+    "owner": "cpp",
+    "fileLocation": ["relative", "${workspaceFolder}"],
+    "pattern": {
+      "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+      "file": 1,
+      "line": 2,
+      "column": 3,
+      "severity": 4,
+      "message": 5
     }
+  }
 }
 ```
 
@@ -426,7 +421,7 @@ There are a couple more properties that can be used inside a pattern. These are:
 - **endColumn** the match group index for the problem's end column. Can be omitted if no end column value is provided by the compiler.
 - **code** the match group index for the problem's code. Can be omitted if no code value is provided by the compiler.
 
->**Note:** A functional pattern must at least provide a match group for file, message and line or location.
+> **Note:** A functional pattern must at least provide a match group for file, message and line or location.
 
 ## Defining a Multiline Problem Matcher
 
@@ -438,30 +433,30 @@ test.js
 ✖ 1 problems (1 errors, 0 warnings)
 ```
 
-Our problem matcher is line-based so we need to capture the file name (test.js) with a different regular expression than the actual problem location and message (1:0   error  Missing "use strict" statement).
+Our problem matcher is line-based so we need to capture the file name (test.js) with a different regular expression than the actual problem location and message (1:0 error Missing "use strict" statement).
 
 To do this we use an array of problem patterns for the `pattern` property. This way you define a pattern per each line you want to match.
 
-The following problem pattern matches the output from ESLint in stylish mode - but still has one small issue which we will resolve next.  The code below has a first regular expression to capture the file name and the second to capture the line, column, severity, message and error code:
+The following problem pattern matches the output from ESLint in stylish mode - but still has one small issue which we will resolve next. The code below has a first regular expression to capture the file name and the second to capture the line, column, severity, message and error code:
 
 ```json
 {
-    "owner": "javascript",
-    "fileLocation": ["relative", "${workspaceFolder}"],
-    "pattern": [
-        {
-            "regexp": "^([^\\s].*)$",
-            "file": 1
-        },
-        {
-            "regexp": "^\\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)\\s\\s+(.*)$",
-            "line": 1,
-            "column": 2,
-            "severity": 3,
-            "message": 4,
-            "code": 5
-        }
-    ]
+  "owner": "javascript",
+  "fileLocation": ["relative", "${workspaceFolder}"],
+  "pattern": [
+    {
+      "regexp": "^([^\\s].*)$",
+      "file": 1
+    },
+    {
+      "regexp": "^\\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)\\s\\s+(.*)$",
+      "line": 1,
+      "column": 2,
+      "severity": 3,
+      "message": 4,
+      "code": 5
+    }
+  ]
 }
 ```
 
@@ -478,7 +473,7 @@ test.js
 ✖ 6 problems (6 errors, 0 warnings)
 ```
 
-The pattern's first regular expression will match "test.js", the second "1:0  error ...". The next line "1:9  error ..." is processed but not matched by the first regular expression and so no problem is captured.
+The pattern's first regular expression will match "test.js", the second "1:0 error ...". The next line "1:9 error ..." is processed but not matched by the first regular expression and so no problem is captured.
 
 To make this work, the last regular expression of a multiline pattern can specify the `loop` property. If set to true, it instructs the task system to apply the last pattern of a multiline matcher to the lines in the output as long as the regular expression matches.
 
@@ -488,23 +483,23 @@ Here is a problem matcher to fully capture ESLint stylish problems:
 
 ```json
 {
-    "owner": "javascript",
-    "fileLocation": ["relative", "${workspaceFolder}"],
-    "pattern": [
-        {
-            "regexp": "^([^\\s].*)$",
-            "file": 1
-        },
-        {
-            "regexp": "^\\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)\\s\\s+(.*)$",
-            "line": 1,
-            "column": 2,
-            "severity": 3,
-            "message": 4,
-            "code": 5,
-            "loop": true
-        }
-    ]
+  "owner": "javascript",
+  "fileLocation": ["relative", "${workspaceFolder}"],
+  "pattern": [
+    {
+      "regexp": "^([^\\s].*)$",
+      "file": 1
+    },
+    {
+      "regexp": "^\\s+(\\d+):(\\d+)\\s+(error|warning|info)\\s+(.*)\\s\\s+(.*)$",
+      "line": 1,
+      "column": 2,
+      "severity": 3,
+      "message": 4,
+      "code": 5,
+      "loop": true
+    }
+  ]
 }
 ```
 
@@ -552,33 +547,33 @@ A full handcrafted `tasks.json` for a tsc task running in watch mode looks like 
 
 ```json
 {
-    "version": "0.1.0",
-    "command": "tsc",
-    "suppressTaskName": true,
-    "tasks": [
-        {
-            "taskName": "watch",
-            "args": ["--watch"],
-            "isBackground": true,
-            "problemMatcher": {
-                "owner": "typescript",
-                "fileLocation": "relative",
-                "pattern": {
-                    "regexp": "^([^\\s].*)\\((\\d+|\\,\\d+|\\d+,\\d+,\\d+,\\d+)\\):\\s+(error|warning|info)\\s+(TS\\d+)\\s*:\\s*(.*)$",
-                    "file": 1,
-                    "location": 2,
-                    "severity": 3,
-                    "code": 4,
-                    "message": 5
-                },
-                "watching": {
-                    "activeOnStart": true,
-                    "beginsPattern": "^\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(?: AM| PM)? - File change detected\\. Starting incremental compilation\\.\\.\\.",
-                    "endsPattern": "^\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(?: AM| PM)? - Compilation complete\\. Watching for file changes\\."
-                }
-            }
+  "version": "0.1.0",
+  "command": "tsc",
+  "suppressTaskName": true,
+  "tasks": [
+    {
+      "taskName": "watch",
+      "args": ["--watch"],
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "typescript",
+        "fileLocation": "relative",
+        "pattern": {
+          "regexp": "^([^\\s].*)\\((\\d+|\\,\\d+|\\d+,\\d+,\\d+,\\d+)\\):\\s+(error|warning|info)\\s+(TS\\d+)\\s*:\\s*(.*)$",
+          "file": 1,
+          "location": 2,
+          "severity": 3,
+          "code": 4,
+          "message": 5
+        },
+        "watching": {
+          "activeOnStart": true,
+          "beginsPattern": "^\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(?: AM| PM)? - File change detected\\. Starting incremental compilation\\.\\.\\.",
+          "endsPattern": "^\\s*\\d{1,2}:\\d{1,2}:\\d{1,2}(?: AM| PM)? - Compilation complete\\. Watching for file changes\\."
         }
-    ]
+      }
+    }
+  ]
 }
 ```
 
@@ -586,6 +581,6 @@ A full handcrafted `tasks.json` for a tsc task running in watch mode looks like 
 
 That was tasks - let's keep going...
 
-* [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
-* [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.* [Language Support](/docs/languages/overview.md) - Learn about our supported programming languages, both shipped with VS Code and through community extensions.
-* [Debugging](/docs/editor/debugging.md) - Debug your source code directly in the VS Code editor.
+- [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
+- [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.\* [Language Support](/docs/languages/overview.md) - Learn about our supported programming languages, both shipped with VS Code and through community extensions.
+- [Debugging](/docs/editor/debugging.md) - Debug your source code directly in the VS Code editor.

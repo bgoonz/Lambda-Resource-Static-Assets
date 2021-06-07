@@ -7,6 +7,7 @@ PageTitle: Customize default settings in Visual Studio Code C++ projects
 DateApproved: 05/21/2020
 MetaDescription: How to customize semantic colorization of C++ code in Visual Studio Code.
 ---
+
 # Customizing default settings
 
 You can override the default values for properties set in `c_cpp_properties.json`.
@@ -30,13 +31,13 @@ C_Cpp.default.browse.databaseFilename              : string
 C_Cpp.default.browse.limitSymbolsToIncludedHeaders : boolean
 ```
 
-These settings have all of the benefits of VS Code settings, meaning that they can have default, "User", "Workspace", and "Folder" values.  So you can set a global value for `C_Cpp.default.cppStandard` in your "User" settings and have it apply to all of the folders you open. If any one folder needs a different value, you can override the value by adding a "Folder" or "Workspace" value.
+These settings have all of the benefits of VS Code settings, meaning that they can have default, "User", "Workspace", and "Folder" values. So you can set a global value for `C_Cpp.default.cppStandard` in your "User" settings and have it apply to all of the folders you open. If any one folder needs a different value, you can override the value by adding a "Folder" or "Workspace" value.
 
 This property of VS Code settings allows you to configure each of your workspaces independently - making the `c_cpp_properties.json` file optional.
 
 ## Updated `c_cpp_properties.json` syntax
 
-A special variable has been added to the accepted syntax of `c_cpp_properties.json` that will instruct the extension to insert  the value from the VS Code settings mentioned above. If you set the value of any setting in `c_cpp_properties.json` to "${default}" it will instruct the extension to read the VS Code default setting for that property and insert it. For example:
+A special variable has been added to the accepted syntax of `c_cpp_properties.json` that will instruct the extension to insert the value from the VS Code settings mentioned above. If you set the value of any setting in `c_cpp_properties.json` to "${default}" it will instruct the extension to read the VS Code default setting for that property and insert it. For example:
 
 ```json
 "configurations": [
@@ -93,19 +94,20 @@ C_Cpp.default.systemIncludePath : string[]
 The extension determines the system includePath and defines to send to the IntelliSense engine in the following manner:
 
 1. If `compileCommands` has a valid value and the file open in the editor is in the database, use the compile command in the database entry to determine the include path and defines.
+
    - The system include path and defines are determined using the following logic (in order):
-      1. If `systemIncludePath` has a value, use it (continue to the next step to search for system defines).
-      2. If `compilerPath` is valid, query it.
-      3. Interpret the first argument in the command as the compiler and attempt to query it.
-      4. If `compilerPath` is "", use an empty array for system include path and defines.
-      5. If `compilerPath` is undefined, look for a compiler on the system and query it.
+     1. If `systemIncludePath` has a value, use it (continue to the next step to search for system defines).
+     2. If `compilerPath` is valid, query it.
+     3. Interpret the first argument in the command as the compiler and attempt to query it.
+     4. If `compilerPath` is "", use an empty array for system include path and defines.
+     5. If `compilerPath` is undefined, look for a compiler on the system and query it.
 
 2. If `compileCommands` is invalid or the current file is not listed in the database, use the `includePath` and `defines` properties in the configuration for IntelliSense.
    - The system include path and defines are determined using the following logic (in order):
-      1. If `systemIncludePath` has a value, use it (continue to the next step to search for system defines).
-      2. If `compilerPath` is valid, query it.
-      3. If `compilerPath` is "", use an empty array for system include path and defines (they are assumed to be in the `includePath` and `defines` for the current config already).
-      4. If `compilerPath` is undefined, look for a compiler on the system and query it.
+     1. If `systemIncludePath` has a value, use it (continue to the next step to search for system defines).
+     2. If `compilerPath` is valid, query it.
+     3. If `compilerPath` is "", use an empty array for system include path and defines (they are assumed to be in the `includePath` and `defines` for the current config already).
+     4. If `compilerPath` is undefined, look for a compiler on the system and query it.
 
 System includes should not be added to the `includePath` or `browse.path` variables. If the extension detects any system include paths in the `includePath` property it will silently remove them so that it can ensure system include paths are added last and in the correct order (this is especially important for GCC/Clang).
 

@@ -8,6 +8,7 @@ DateApproved: 07/18/2019
 MetaDescription: A Python hello world tutorial using the Python extension in Visual Studio Code (a great Python IDE like PyCharm, if not the best Python IDE)
 MetaSocialImage: images/tutorial/social.png
 ---
+
 # Getting Started with Python in VS Code
 
 In this tutorial, you use Python 3 to create the simplest Python "Hello World" application in Visual Studio Code. By using the Python extension, you make VS Code into a great lightweight Python IDE (which you may find a productive alternative to PyCharm).
@@ -24,7 +25,7 @@ If you have any problems, feel free to file an issue for this tutorial in the [V
 
 ## Prerequisites
 
-To successfully complete this tutorial, you need to first setup your Python  development environment. Specifically, this tutorial requires:
+To successfully complete this tutorial, you need to first setup your Python development environment. Specifically, this tutorial requires:
 
 - VS Code
 - VS Code Python extension
@@ -45,7 +46,7 @@ Along with the Python extension, you need to install a Python interpreter. Which
 
 Install [Python from python.org](https://www.python.org/downloads/). You can typically use the **Download Python** button that appears first on the page to download the latest version.
 
->**Note**: If you don't have admin access, an additional option for installing Python on Windows is to use the Microsoft Store. The Microsoft Store provides installs of [Python 3.7](https://www.microsoft.com/en-us/p/python-37/9nj46sx7x90p), [Python 3.8](https://www.microsoft.com/en-us/p/python-38/9mssztt1n39l), and [Python 3.9](https://www.microsoft.com/en-au/p/python-39/9p7qfqmjrfp7). Be aware that you might have compatibility issues with some packages using this method.
+> **Note**: If you don't have admin access, an additional option for installing Python on Windows is to use the Microsoft Store. The Microsoft Store provides installs of [Python 3.7](https://www.microsoft.com/en-us/p/python-37/9nj46sx7x90p), [Python 3.8](https://www.microsoft.com/en-us/p/python-38/9mssztt1n39l), and [Python 3.9](https://www.microsoft.com/en-au/p/python-39/9p7qfqmjrfp7). Be aware that you might have compatibility issues with some packages using this method.
 
 For additional information about using Python on Windows, see [Using Python on Windows at Python.org](https://docs.python.org/3.9/using/windows.html)
 
@@ -53,7 +54,7 @@ For additional information about using Python on Windows, see [Using Python on W
 
 The system install of Python on macOS is not supported. Instead, an installation through [Homebrew](https://brew.sh/) is recommended. To install Python using Homebrew on macOS use `brew install python3` at the Terminal prompt.
 
-> **Note** On macOS, make sure the location of your VS Code installation is included in your PATH environment variable.  See [these setup instructions](/docs/setup/mac.md#launching-from-the-command-line) for more information.
+> **Note** On macOS, make sure the location of your VS Code installation is included in your PATH environment variable. See [these setup instructions](/docs/setup/mac.md#launching-from-the-command-line) for more information.
 
 ### Linux
 
@@ -71,19 +72,19 @@ To verify that you've installed Python successfully on your machine, run one of 
 
 - Linux/macOS: open a Terminal Window and type the following command:
 
-    ```bash
-    python3 --version
-    ```
+  ```bash
+  python3 --version
+  ```
 
 - Windows: open a command prompt and run the following command:
 
-    ```ps
-    py -3 --version
-    ```
+  ```ps
+  py -3 --version
+  ```
 
 If the installation was successful, the output window should show the version of Python that you installed.
 
-   > **Note** You can use the `py -0` command in the VS Code integrated terminal to view the versions of python installed on your machine. The default interpreter is identified by an asterisk (*).
+> **Note** You can use the `py -0` command in the VS Code integrated terminal to view the versions of python installed on your machine. The default interpreter is identified by an asterisk (\*).
 
 ## Start VS Code in a project (workspace) folder
 
@@ -95,7 +96,7 @@ cd hello
 code .
 ```
 
->**Note**: If you're using an Anaconda distribution, be sure to use an Anaconda command prompt.
+> **Note**: If you're using an Anaconda distribution, be sure to use an Anaconda command prompt.
 
 By starting VS Code in a folder, that folder becomes your "workspace". VS Code stores settings that are specific to that workspace in `.vscode/settings.json`, which are separate from user settings that are stored globally.
 
@@ -129,7 +130,7 @@ Name the file `hello.py`, and it automatically opens in the editor:
 
 By using the `.py` file extension, you tell VS Code to interpret this file as a Python program, so that it evaluates the contents with the Python extension and the selected interpreter.
 
->**Note**: The File Explorer toolbar also allows you to create folders within your workspace to better organize your code. You can use the **New folder** button to quickly create a folder.
+> **Note**: The File Explorer toolbar also allows you to create folders within your workspace to better organize your code. You can use the **New folder** button to quickly create a folder.
 
 Now that you have a code file in your Workspace, enter the following source code in `hello.py`:
 
@@ -164,7 +165,7 @@ There are three other ways you can run Python code within VS Code:
 
 - Right-click anywhere in the editor window and select **Run Python File in Terminal** (which saves the file automatically):
 
-   ![Run Python File in Terminal command in the Python editor](images/tutorial/run-python-file-in-terminal.png)
+  ![Run Python File in Terminal command in the Python editor](images/tutorial/run-python-file-in-terminal.png)
 
 - Select one or more lines, then press `kbstyle(Shift+Enter)` or right-click and select **Run Selection/Line in Python Terminal**. This command is convenient for testing just a part of a file.
 - From the Command Palette (`kb(workbench.action.showCommands)`), select the **Python: Start REPL** command to open a REPL terminal for the currently selected Python interpreter. In the REPL, you can then enter and run lines of code one at a time.
@@ -242,12 +243,13 @@ Unless you're using an Anaconda distribution or have previously installed the `m
 
 To install the `matplotlib` package (which also installs `numpy` as a dependency), stop the debugger and use the Command Palette to run **Terminal: Create New Integrated Terminal** (`kb(workbench.action.terminal.new)`). This command opens a command prompt for your selected interpreter.
 
-A best practice among Python developers is to avoid installing packages into a global interpreter environment. You instead use a project-specific `virtual environment` that contains a copy of a global interpreter. Once you activate that environment, any packages you then install are isolated from other environments. Such isolation reduces many complications that can arise from conflicting package versions. To create a *virtual environment* and install the required packages, enter the following commands as appropriate for your operating system:
+A best practice among Python developers is to avoid installing packages into a global interpreter environment. You instead use a project-specific `virtual environment` that contains a copy of a global interpreter. Once you activate that environment, any packages you then install are isolated from other environments. Such isolation reduces many complications that can arise from conflicting package versions. To create a _virtual environment_ and install the required packages, enter the following commands as appropriate for your operating system:
 
 > **Note**: For additional information about virtual environments, see [Environments](/docs/python/environments.md#global-virtual-and-conda-environments).
 
 1. Create and activate the virtual environment
-   >**Note**: When you create a new virtual environment, you should be prompted by VS Code to set it as the default for your workspace folder. If selected, the environment will automatically be activated when you open a new terminal.
+
+   > **Note**: When you create a new virtual environment, you should be prompted by VS Code to set it as the default for your workspace folder. If selected, the environment will automatically be activated when you open a new terminal.
 
    ![Virtual environment dialog](images/tutorial/virtual-env-dialog.png)
 

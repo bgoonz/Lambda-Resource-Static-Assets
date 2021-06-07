@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>multi-root-workspaces</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="multi-root-workspaces">Multi-root Workspaces</h1>
+<p>You can work with multiple project folders in Visual Studio Code with multi-root workspaces. This can be helpful when you are working on several related projects at one time. For example, you might have a repository with a product’s documentation that you like to keep current when you update the product source code.</p>
+<figure>
+<img src="images/multi-root-workspaces/hero.png" alt="multi-root hero" /><figcaption>multi-root hero</figcaption>
+</figure>
+<blockquote>
+<p><strong>Note</strong>: If you’d like to learn more about the VS Code “workspace” concept, you can review <a href="/docs/editor/workspaces.md">What is a VS Code “workspace”?</a> Unless you are explicitly creating a multi-root workspace, a “workspace” is just your project’s single root folder.</p>
+</blockquote>
+<h2 id="adding-folders">Adding folders</h2>
+<p>It is easy to add another folder to your existing workspace. There are several gestures for adding folders:</p>
+<h3 id="add-folder-to-workspace">Add Folder to Workspace</h3>
+<p>The <strong>File</strong> &gt; <strong>Add Folder to Workspace</strong> command brings up an Open Folder dialog to select the new folder.</p>
+<figure>
+<img src="images/multi-root-workspaces/add-root-folder.png" alt="Add Root Folder" /><figcaption>Add Root Folder</figcaption>
+</figure>
+<p>Once a root folder is added, the Explorer will show the new folder as a root in the File Explorer. You can right-click on any of the root folders and use the context menu to add or remove folders.</p>
+<figure>
+<img src="images/multi-root-workspaces/explorer-context.png" alt="Remove Root Folder" /><figcaption>Remove Root Folder</figcaption>
+</figure>
+<p>The File Explorer should work and behave as before. You can move files between root folders and use any of the typical file operation actions provided in the context menu and the Explorer view.</p>
+<p>Settings like <code>files.exclude</code> are supported for each root folder if configured, and across all folders if configured as global user setting.</p>
+<h3 id="drag-and-drop">Drag and drop</h3>
+<p>You can use drag and drop to add folders to a workspace. Drag a folder to the File Explorer to add it to the current workspace. You can even select and drag multiple folders.</p>
+<blockquote>
+<p><strong>Note</strong>: Dropping a single folder into the editor region of VS Code will still open the folder in single folder mode. If you drag and drop multiple folders into the editor region, a new multi-root workspace will be created.</p>
+</blockquote>
+<p>You can also use drag and drop to reorder folders in the workspace.</p>
+<h3 id="multiple-selection-native-file-open-dialogs">Multiple selection native file open dialogs</h3>
+<p>Opening multiple folders with your platform’s native file open dialog will create a multi-root workspace.</p>
+<h3 id="command-line-add">command line –add</h3>
+<p>Add a folder or multiple folders to the last active VS Code instance for a multi-root workspace.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1">  <span class="ex">code</span> --add vscode vscode-docs</a></code></pre></div>
+<h3 id="removing-folders">Removing folders</h3>
+<p>You can remove a folder from a Workspace with the <strong>Remove Folder from Workspace</strong> context menu command.</p>
+<h2 id="workspace-file">Workspace file</h2>
+<p>When you add multiple folders, they are initially placed in a Workspace titled <strong>UNTITLED WORKSPACE</strong> and that name will remain until you save the workspace. You do not need to save a Workspace until you want to have it in a permanent location, for example, on your Desktop. Untitled Workspaces are present as long as the VS Code instance they are using is open. Once you completely close an instance with an untitled workspace, you will be asked to save it if you plan to open it again in the future:</p>
+<figure>
+<img src="images/multi-root-workspaces/save-workspace.png" alt="save workspace dialog" /><figcaption>save workspace dialog</figcaption>
+</figure>
+<p>When you save your workspace, it will create a <code>.code-workspace</code> file and the file name will be displayed in the File Explorer.</p>
+<h3 id="save-workspace-as">Save Workspace As…</h3>
+<p>If you want to move your Workspace file to a new location, you can use the <strong>File</strong> &gt; <strong>Save Workspace As</strong> command, which will automatically set the correct folder paths relative to the new Workspace file location.</p>
+<h3 id="opening-workspace-files">Opening workspace files</h3>
+<p>To reopen a Workspace, you can:</p>
+<ul>
+<li>Double-click the <code>.code-workspace</code> file in your platform’s Explorer.</li>
+<li>Use the <strong>File</strong> &gt; <strong>Open Workspace</strong> command and select the Workspace file.</li>
+<li>Select the Workspace from the <strong>File</strong> &gt; <strong>Open Recent</strong> (<code>kb(workbench.action.openRecent)</code>) list.
+<ul>
+<li>Workspaces have a <strong>(Workspace)</strong> suffix to differentiate them from folders.</li>
+</ul></li>
+</ul>
+<figure>
+<img src="images/multi-root-workspaces/open-recent.png" alt="open recent workspace list" /><figcaption>open recent workspace list</figcaption>
+</figure>
+<p>Just like <strong>Close Folder</strong> when a single folder is open in VS Code, there is a <strong>Close Workspace</strong> (<code>kb(workbench.action.closeFolder)</code>) command to close the active Workspace.</p>
+<h3 id="workspace-file-schema">Workspace file schema</h3>
+<p>The schema of <code>.code-workspace</code> is fairly straightforward. You have an array of folders with either absolute or relative paths. Relative paths are better when you want to share Workspace files.</p>
+<p>You can override the display name of your folders with the <code>name</code> attribute, to give more meaningful names to folders in the Explorer. For example, you could name your project folders such as ‘Product’ and ‘Documentation’ to easily identify the content by folder name:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;folders&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">      <span class="er">//</span> <span class="er">Source</span> <span class="er">code</span></a>
+<a class="sourceLine" id="cb2-5" title="5">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Product&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-6" title="6">      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;vscode&quot;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb2-8" title="8">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-9" title="9">      <span class="er">//</span> <span class="er">Docs</span> <span class="er">and</span> <span class="er">release</span> <span class="er">notes</span></a>
+<a class="sourceLine" id="cb2-10" title="10">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Documentation&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-11" title="11">      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;vscode-docs&quot;</span></a>
+<a class="sourceLine" id="cb2-12" title="12">    <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-14" title="14">      <span class="er">//</span> <span class="er">Yeoman</span> <span class="er">extension</span> <span class="er">generator</span></a>
+<a class="sourceLine" id="cb2-15" title="15">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Extension generator&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-16" title="16">      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;vscode-generator-code&quot;</span></a>
+<a class="sourceLine" id="cb2-17" title="17">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-18" title="18">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="fu">}</span></a></code></pre></div>
+<p>which will result in the following Explorer display:</p>
+<figure>
+<img src="images/multi-root-workspaces/named-folders.png" alt="named folders" /><figcaption>named folders</figcaption>
+</figure>
+<p>As you can see from the example above, you can add comments to your Workspace files.</p>
+<p>The Workspace file can also contain Workspace <a href="#settings">global settings</a> under <code>settings</code> and <a href="#extensions">extension recommendations</a> under <code>extensions</code>, which we will discuss below.</p>
+<figure>
+<img src="images/multi-root-workspaces/workspace-file-schema.png" alt="workspace file schema" /><figcaption>workspace file schema</figcaption>
+</figure>
+<h2 id="general-ui">General UI</h2>
+<h3 id="editor">Editor</h3>
+<p>There are only a few changes to the VS Code UI when you are using multi-root workspaces, primarily to disambiguate files between folders. For example, if there is a name collision between files in multiple folders, VS Code will include the folder name in tabbed headers.</p>
+<figure>
+<img src="images/multi-root-workspaces/tabbed-headers.png" alt="tabbed headers" /><figcaption>tabbed headers</figcaption>
+</figure>
+<p>If you’d always like to see the folder displayed in the tabbed header, you can use the <code>workbench.editor.labelFormat</code> <a href="/docs/getstarted/settings.md">setting</a> “medium” or “long” values to show the folder or full paths.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="er">&quot;workbench.editor.labelFormat&quot;:</span> <span class="er">&quot;medium&quot;</span></a></code></pre></div>
+<p>VS Code UI such as the <strong>OPEN EDITORS</strong> and <strong>Quick Open</strong> (<code>kb(workbench.action.quickOpen)</code>) lists include the folder name.</p>
+<figure>
+<img src="images/multi-root-workspaces/quick-open-list.png" alt="quick pick has folder name" /><figcaption>quick pick has folder name</figcaption>
+</figure>
+<p>If you are using an <a href="/docs/getstarted/themes.md#file-icon-themes">File Icon Theme</a> and the active theme supports it, you will see a special Workspace icon.</p>
+<p>Below you can see the Workspace icons from the built-in <strong>Minimal (Visual Studio Code)</strong> file icon theme:</p>
+<figure>
+<img src="images/multi-root-workspaces/workspace-icon.png" alt="custom workspace icon" /><figcaption>custom workspace icon</figcaption>
+</figure>
+<h3 id="search">Search</h3>
+<p>VS Code features like global search work across all folders and group the search results by folder.</p>
+<figure>
+<img src="images/multi-root-workspaces/search.png" alt="multi-root search results" /><figcaption>multi-root search results</figcaption>
+</figure>
+<p>When you have a multi-root workspace open, you can choose to search in a single root folder by using the <code>./</code> syntax in the <strong>files to include</strong> box. For example, if you enter <code>./project1/**/*.txt</code>, that will search for all <code>.txt</code> files under the <code>project1/</code> root folder.</p>
+<h2 id="settings">Settings</h2>
+<p>With multiple root folders in one workspace, it is possible to have a <code>.vscode</code> folder in each root folder defining the settings that should apply for that folder. To avoid setting collisions, only resource (file, folder) settings are applied when using a multi-root workspace. Settings that affect the entire editor (for example, UI layout) are ignored. For example, two projects cannot both set the zoom level.</p>
+<p>User settings are supported as with single folder projects and you can also set global Workspace settings that will apply to all folders in your multi-root Workspace. Global Workspace settings will be stored in your <code>.code-workspace</code> file.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">&quot;folders&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-4" title="4">      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;vscode&quot;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;vscode-docs&quot;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-10" title="10">      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;vscode-generator-code&quot;</span></a>
+<a class="sourceLine" id="cb4-11" title="11">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-12" title="12">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-13" title="13">  <span class="dt">&quot;settings&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-14" title="14">    <span class="dt">&quot;window.zoomLevel&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-15" title="15">    <span class="dt">&quot;files.autoSave&quot;</span><span class="fu">:</span> <span class="st">&quot;afterDelay&quot;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="fu">}</span></a></code></pre></div>
+<p>When you go from a single folder instance to multiple folders, VS Code will add the appropriate editor-wide settings from the first folder to the new global Workspace settings.</p>
+<p>You can easily review and modify the different settings files through the Settings editor. The Settings editor tabs let you select your User settings, global Workspace settings, and individual folder settings.</p>
+<figure>
+<img src="images/multi-root-workspaces/settings-dropdown.png" alt="settings dropdown" /><figcaption>settings dropdown</figcaption>
+</figure>
+<p>You can also open specific settings files with the commands:</p>
+<ul>
+<li><strong>Preferences: Open User Settings</strong> - Open your global User settings</li>
+<li><strong>Preferences: Open Workspace Settings</strong> - Open the settings section of your Workspace file.</li>
+<li><strong>Preferences: Open Folder Settings</strong> - Open the settings for the active folder.</li>
+</ul>
+<p>Global Workspace settings override User settings and folder settings can override Workspace or User settings.</p>
+<h3 id="unsupported-folder-settings">Unsupported folder settings</h3>
+<p>Unsupported editor-wide folder settings will be shown as grayed out in your folder settings and are filtered out of the <strong>DEFAULT FOLDER SETTINGS</strong> list. You will also see an information icon in front of the setting.</p>
+<figure>
+<img src="images/multi-root-workspaces/unsupported-setting-info.png" alt="unsupported setting information" /><figcaption>unsupported setting information</figcaption>
+</figure>
+<h2 id="debugging">Debugging</h2>
+<p>With multi-root workspaces, VS Code searches across all folders for <code>launch.json</code> debug configuration files and displays them with the folder name as a suffix. Additionally VS Code will also display launch configurations defined in the workspace configuration file.</p>
+<figure>
+<img src="images/multi-root-workspaces/debugging-dropdown.png" alt="debugging dropdown" /><figcaption>debugging dropdown</figcaption>
+</figure>
+<p>The example above shows the debugging configurations for the <a href="https://marketplace.visualstudio.com/items?itemName=eg2.tslint">TSLint extension</a>. There is a <code>launch</code> configuration from the <code>tslint</code> extension folder to start the extension running in the VS Code Extension Host and also an <code>attach</code> configuration from the <code>tslint-server</code> folder to attach the debugger to a running TSLint server.</p>
+<p>You can also see the three <strong>Add Config</strong> commands for the folders, <code>tslint</code>, <code>tslint-server</code>, and <code>tslint-tests</code>, in the vscode-tslint <a href="https://github.com/microsoft/vscode-tslint/blob/main/vscode-tslint.code-workspace">Workspace</a>. The <strong>Add Config</strong> command will either open an existing <code>launch.json</code> file in the folder’s <code>.vscode</code> subfolder or create a new one and display the debugging configuration template dropdown.</p>
+<figure>
+<img src="images/multi-root-workspaces/add-launch-config.png" alt="debugging template dropdown" /><figcaption>debugging template dropdown</figcaption>
+</figure>
+<p><a href="/docs/editor/variables-reference.md">Variables</a> used in a configuration (for example <code>${workspaceFolder}</code> or the now deprecated <code>${workspaceRoot}</code>) are resolved relative to the folder they belong to. It is possible to scope a variable per workspace folder by appending the root folder’s name to a variable (separated by a colon).</p>
+<h3 id="workspace-launch-configurations">Workspace launch configurations</h3>
+<p>Workspace scoped launch configurations live in the <code>"launch"</code> section of the workspace configuration file (<strong>Workspaces: Open Workspace Configuration File</strong> in the Command Palette):</p>
+<figure>
+<img src="images/multi-root-workspaces/workspace-settings.png" alt="Workspace Settings" /><figcaption>Workspace Settings</figcaption>
+</figure>
+<p>Alternatively, new launch configurations can be added via the “Add Config (workspace)” entry of the Launch Configuration dropdown menu:</p>
+<figure>
+<img src="images/multi-root-workspaces/add-config.png" alt="Add Config" /><figcaption>Add Config</figcaption>
+</figure>
+<p>A compound launch configuration can reference the individual launch configurations by name as long as the names are unique within the workspace, for example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1">  <span class="er">&quot;compounds&quot;:</span> <span class="ot">[</span><span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Launch Server &amp; Client&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-3" title="3">      <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb5-4" title="4">        <span class="st">&quot;Launch Server&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb5-5" title="5">        <span class="st">&quot;Launch Client&quot;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">      <span class="ot">]</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="fu">}</span><span class="ot">]</span></a></code></pre></div>
+<p>If the individual launch configuration names are not unique, the qualifying folder can be specified with a more verbose “folder” syntax:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1">  <span class="er">&quot;compounds&quot;:</span> <span class="ot">[</span><span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Launch Server &amp; Client&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-3" title="3">      <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb6-4" title="4">        <span class="st">&quot;Launch Server&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb6-5" title="5">        <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-6" title="6">          <span class="dt">&quot;folder&quot;</span><span class="fu">:</span> <span class="st">&quot;Web Client&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-7" title="7">          <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Launch Client&quot;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">        <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb6-9" title="9">        <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-10" title="10">          <span class="dt">&quot;folder&quot;</span><span class="fu">:</span> <span class="st">&quot;Desktop Client&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-11" title="11">          <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Launch Client&quot;</span></a>
+<a class="sourceLine" id="cb6-12" title="12">        <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-13" title="13">      <span class="ot">]</span></a>
+<a class="sourceLine" id="cb6-14" title="14">  <span class="fu">}</span><span class="ot">]</span></a></code></pre></div>
+<p>In addition to <code>compounds</code>, the <code>launch</code> section of the workspace configuration file can contain regular launch configurations too. Make sure that all used variables are explicitly scoped to a specific folder because otherwise they are not valid for the workspace. You can find more details about explicitly scoped variables in the <a href="/docs/editor/variables-reference.md#variables-scoped-per-workspace-folder">Variables Reference</a>.</p>
+<p>Here is an example for a launch configuration where the program lives in a folder “Program” and where all files from a folder “Library” should be skipped when stepping:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="er">&quot;launch&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-4" title="4">      <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-5" title="5">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Launch test&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-6" title="6">      <span class="dt">&quot;program&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder:Program}/test.js&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-7" title="7">      <span class="dt">&quot;skipFiles&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb7-8" title="8">        <span class="st">&quot;${workspaceFolder:Library}/out/**/*.js&quot;</span></a>
+<a class="sourceLine" id="cb7-9" title="9">      <span class="ot">]</span></a>
+<a class="sourceLine" id="cb7-10" title="10">  <span class="fu">}</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="fu">}</span></a></code></pre></div>
+<h2 id="tasks">Tasks</h2>
+<p>Similar to how VS Code searches for debugging configurations, VS Code will also try to autodetect tasks from gulp, grunt, npm, and TypeScript project files across all folders in a workspace as well as search for tasks defined in <code>tasks.json</code> files. The location of tasks is indicated by a folder name suffix. Note that tasks defined in <code>tasks.json</code> must be version 2.0.0.</p>
+<figure>
+<img src="images/multi-root-workspaces/tasks-dropdown.png" alt="tasks dropdown" /><figcaption>tasks dropdown</figcaption>
+</figure>
+<p>From the TSLint extension <a href="https://github.com/microsoft/vscode-tslint/blob/main/vscode-tslint.code-workspace">Workspace</a> example above, you can see that there are two <strong>configured tasks</strong> from <code>tasks.json</code> files in the <code>tslint</code> and <code>tslint-tests</code> folders and numerous autodetected npm and TypeScript compiler <strong>detected tasks</strong>.</p>
+<h3 id="workspace-task-configuration">Workspace task configuration</h3>
+<p>Workspace scoped tasks live in the <code>"tasks"</code> section of the workspace configuration file (<strong>Workspaces: Open Workspace Configuration File</strong> in the Command Palette). Only <code>"shell"</code> and <code>"process"</code> type tasks can be defined in the workspace configuration file.</p>
+<h2 id="source-control">Source Control</h2>
+<p>With multi-root workspaces, there is a <strong>SOURCE CONTROL PROVIDERS</strong> section that gives you an overview when you have multiple active repositories. These can be contributed by several SCM providers; for example, you can have Git repositories side-by-side with Azure DevOps Server workspaces. As you select repositories in this view, you can see the source control details below.</p>
+<figure>
+<img src="images/multi-root-workspaces/multiple-scm-providers.png" alt="multiple scm providers" /><figcaption>multiple scm providers</figcaption>
+</figure>
+<p>You can use <code>kbstyle(Ctrl+Click)</code> or <code>kbstyle(Shift+Click)</code> to select multiple repositories. Their details will appear as separate regions underneath.</p>
+<h2 id="extensions">Extensions</h2>
+<p>Multi-root workspaces have been available as a preview on Insiders build since the June 2017 <a href="/updates/v1_14.md#preview-multi-root-workspaces">1.14 release</a> and we’ve been working with extension authors to help them get ready for the release to Stable. If you are an extension author, you can review our <a href="https://github.com/microsoft/vscode/wiki/Adopting-Multi-Root-Workspace-APIs">Adopting Multi Root Workspace APIs</a> guide to learn about VS Code API changes and how to make your extension work well across multiple folders.</p>
+<p>Below are some of the popular extensions that have already adopted the multi-root workspace APIs.</p>
+<div class="marketplace-extensions-multi-root-ready">
+
+</div>
+<p><strong>Note</strong>: If an extension doesn’t yet support multiple folders, it will still work in the first folder of your multi-root workspace.</p>
+<h3 id="extension-recommendations">Extension recommendations</h3>
+<p>VS Code supports folder level extension recommendations through the <code>extensions.json</code> files under the folder’s <code>.vscode</code> subfolder. You can also provide global Workspace extension recommendations by adding them to your <code>.code-workspace</code> file. You can use the <strong>Extensions: Configure Recommended Extensions (Workspace Folder)</strong> command to open your Workspace file and add extension identifiers ({publisherName}.{extensionName}) to the <code>extensions.recommendations</code> array.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">&quot;folders&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-4" title="4">      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;vscode&quot;</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-7" title="7">      <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="st">&quot;vscode-docs&quot;</span></a>
+<a class="sourceLine" id="cb8-8" title="8">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb8-9" title="9">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-10" title="10">  <span class="dt">&quot;extensions&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-11" title="11">    <span class="dt">&quot;recommendations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb8-12" title="12">      <span class="st">&quot;eg2.tslint&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb8-13" title="13">      <span class="st">&quot;dbaeumer.vscode-eslint&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb8-14" title="14">      <span class="st">&quot;msjsdiag.debugger-for-chrome&quot;</span></a>
+<a class="sourceLine" id="cb8-15" title="15">    <span class="ot">]</span></a>
+<a class="sourceLine" id="cb8-16" title="16">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb8-17" title="17"><span class="fu">}</span></a></code></pre></div>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="/docs/editor/workspaces.md">What is a VS Code “workspace”?</a> - More about single-folder and multi-root workspaces.</li>
+<li><a href="/docs/editor/debugging.md">Debugging</a> - Learn how to set up debugging for your application.</li>
+<li><a href="/docs/editor/tasks.md">Tasks</a> - Tasks let you run external tools like compilers within VS Code.</li>
+</ul>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="how-can-i-go-back-to-working-with-a-single-project-folder">How can I go back to working with a single project folder?</h3>
+<p>You can either close the Workspace and open the folder directly or remove the folder from Workspace.</p>
+<h3 id="as-an-extension-author-what-do-i-need-to-do">As an extension author what do I need to do?</h3>
+<p>See our <a href="https://github.com/microsoft/vscode/wiki/Adopting-Multi-Root-Workspace-APIs">Adopting Multi Root Workspace APIs</a> guide. Most extensions can easily support multi-root workspaces.</p>
+</body>
+</html>

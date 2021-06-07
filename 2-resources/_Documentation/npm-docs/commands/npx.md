@@ -32,23 +32,23 @@ as running it via `npm run`.
 
 Whatever packages are specified by the `--package` option will be
 provided in the `PATH` of the executed command, along with any locally
-installed package executables.  The `--package` option may be
+installed package executables. The `--package` option may be
 specified multiple times, to execute the supplied command in an environment
 where all specified packages are available.
 
 If any requested packages are not present in the local project
 dependencies, then they are installed to a folder in the npm cache, which
-is added to the `PATH` environment variable in the executed process.  A
+is added to the `PATH` environment variable in the executed process. A
 prompt is printed (which can be suppressed by providing either `--yes` or
 `--no`).
 
 Package names provided without a specifier will be matched with whatever
-version exists in the local project.  Package names with a specifier will
+version exists in the local project. Package names with a specifier will
 only be considered a match if they have the exact same name and version as
 the local dependency.
 
 If no `-c` or `--call` option is provided, then the positional arguments
-are used to generate the command string.  If no `--package` options
+are used to generate the command string. If no `--package` options
 are provided, then npm will attempt to determine the executable name from
 the package specifier provided as the first positional argument according
 to the following heuristic:
@@ -68,8 +68,8 @@ the first command argument.
 
 ### `npx` vs `npm exec`
 
-When run via the `npx` binary, all flags and options *must* be set prior to
-any positional arguments.  When run via `npm exec`, a double-hyphen `--`
+When run via the `npx` binary, all flags and options _must_ be set prior to
+any positional arguments. When run via `npm exec`, a double-hyphen `--`
 flag can be used to suppress npm's parsing of switches and options that
 should be sent to the executed command.
 
@@ -97,7 +97,7 @@ $ npm exec foo@latest bar --package=@npmcli/foo
 ```
 
 In this case, npm will parse the `--package` option first, resolving the
-`@npmcli/foo` package.  Then, it will execute the following command in that
+`@npmcli/foo` package. Then, it will execute the following command in that
 context:
 
 ```
@@ -105,7 +105,7 @@ $ foo@latest bar
 ```
 
 The double-hyphen character is recommended to explicitly tell npm to stop
-parsing command line options and switches.  The following command would
+parsing command line options and switches. The following command would
 thus be equivalent to the `npx` command above:
 
 ```
@@ -141,7 +141,7 @@ $ npx -c 'eslint && say "hooray, lint passed"'
 ### Compatibility with Older npx Versions
 
 The `npx` binary was rewritten in npm v7.0.0, and the standalone `npx`
-package deprecated at that time.  `npx` uses the `npm exec`
+package deprecated at that time. `npx` uses the `npm exec`
 command instead of a separate argument parser and install process, with
 some affordances to maintain backwards compatibility with the arguments it
 accepted in previous versions.
@@ -150,16 +150,16 @@ This resulted in some shifts in its functionality:
 
 - Any `npm` config value may be provided.
 - To prevent security and user-experience problems from mistyping package
-  names, `npx` prompts before installing anything.  Suppress this
+  names, `npx` prompts before installing anything. Suppress this
   prompt with the `-y` or `--yes` option.
 - The `--no-install` option is deprecated, and will be converted to `--no`.
 - Shell fallback functionality is removed, as it is not advisable.
 - The `-p` argument is a shorthand for `--parseable` in npm, but shorthand
-  for `--package` in npx.  This is maintained, but only for the `npx`
+  for `--package` in npx. This is maintained, but only for the `npx`
   executable.
-- The `--ignore-existing` option is removed.  Locally installed bins are
+- The `--ignore-existing` option is removed. Locally installed bins are
   always present in the executed process `PATH`.
-- The `--npm` option is removed.  `npx` will always use the `npm` it ships
+- The `--npm` option is removed. `npx` will always use the `npm` it ships
   with.
 - The `--node-arg` and `-n` options are removed.
 - The `--always-spawn` option is redundant, and thus removed.
@@ -168,10 +168,10 @@ This resulted in some shifts in its functionality:
 
 ### See Also
 
-* [npm run-script](/commands/npm-run-script)
-* [npm scripts](/using-npm/scripts)
-* [npm test](/commands/npm-test)
-* [npm start](/commands/npm-start)
-* [npm restart](/commands/npm-restart)
-* [npm stop](/commands/npm-stop)
-* [npm config](/commands/npm-config)
+- [npm run-script](/commands/npm-run-script)
+- [npm scripts](/using-npm/scripts)
+- [npm test](/commands/npm-test)
+- [npm start](/commands/npm-start)
+- [npm restart](/commands/npm-restart)
+- [npm stop](/commands/npm-stop)
+- [npm config](/commands/npm-config)

@@ -7,9 +7,10 @@ PageTitle: Transact-SQL with Visual Studio Code
 DateApproved: 1/24/2017
 MetaDescription: Learn about Visual Studio Code editor features (code completion, debugging, snippets, linting) for Transact-SQL.
 ---
+
 # Transact-SQL in Visual Studio Code
 
-Turn Visual Studio Code into a powerful editor for [Transact-SQL]  (T-SQL) development, with the [mssql] extension available in the VS Code Marketplace. The [mssql] extension is optimized to work with SQL Server running on-premises, in any cloud, Azure SQL Database, and Azure SQL Data Warehouse.
+Turn Visual Studio Code into a powerful editor for [Transact-SQL] (T-SQL) development, with the [mssql] extension available in the VS Code Marketplace. The [mssql] extension is optimized to work with SQL Server running on-premises, in any cloud, Azure SQL Database, and Azure SQL Data Warehouse.
 
 Connect to SQL databases, type T-SQL code, execute T-SQL code, view results, and save results as JSON or CSV files. While typing T-SQL code, you get rich T-SQL language features like T-SQL IntelliSense (code completion), syntax highlighting, linting, code navigation and code snippets.
 
@@ -62,26 +63,26 @@ T-SQL snippets provide code templates for commonly used T-SQL statements. Type "
 
 ## Next steps
 
-* Download the free [SQL Server 2017 Developer Edition].
-* Install the [mssql] extension from the Visual Studio Code Marketplace.
-* [Build an app] using SQL Server - Get started with SQL Server on macOS, Linux, and Windows using your favorite programming language.
-* Contribute to the mssql extension on [GitHub]. Submit a bug report or a feature suggestion on our [GitHub Issue Tracker].
+- Download the free [SQL Server 2017 Developer Edition].
+- Install the [mssql] extension from the Visual Studio Code Marketplace.
+- [Build an app] using SQL Server - Get started with SQL Server on macOS, Linux, and Windows using your favorite programming language.
+- Contribute to the mssql extension on [GitHub]. Submit a bug report or a feature suggestion on our [GitHub Issue Tracker].
 
 ## Further Reading
 
-* [SQL Server documentation]
-* [SQL Server on Linux documentation]
-* [SQL Server Blog]
-* [SQL Server Videos] on Channel9
+- [SQL Server documentation]
+- [SQL Server on Linux documentation]
+- [SQL Server Blog]
+- [SQL Server Videos] on Channel9
 
-[Transact-SQL]: https://docs.microsoft.com/sql/t-sql/language-reference
+[transact-sql]: https://docs.microsoft.com/sql/t-sql/language-reference
 [mssql]: https://aka.ms/mssql-marketplace
-[Download VS Code]: https://code.visualstudio.com/download
-[SQL Server 2017 Developer Edition]: https://www.microsoft.com/sql-server/sql-server-downloads
-[Build an app]: https://aka.ms/sqldev
-[SQL Server documentation]: https://docs.microsoft.com/sql/sql-server/sql-server-technical-documentation
-[SQL Server on Linux documentation]: https://docs.microsoft.com/sql/linux/
-[SQL Server Blog]: https://blogs.technet.microsoft.com/dataplatforminsider/
-[SQL Server Videos]: https://channel9.msdn.com/Tags/sql+server
-[GitHub]: https://github.com/microsoft/vscode-mssql
-[GitHub Issue Tracker]: https://github.com/microsoft/vscode-mssql/issues
+[download vs code]: https://code.visualstudio.com/download
+[sql server 2017 developer edition]: https://www.microsoft.com/sql-server/sql-server-downloads
+[build an app]: https://aka.ms/sqldev
+[sql server documentation]: https://docs.microsoft.com/sql/sql-server/sql-server-technical-documentation
+[sql server on linux documentation]: https://docs.microsoft.com/sql/linux/
+[sql server blog]: https://blogs.technet.microsoft.com/dataplatforminsider/
+[sql server videos]: https://channel9.msdn.com/Tags/sql+server
+[github]: https://github.com/microsoft/vscode-mssql
+[github issue tracker]: https://github.com/microsoft/vscode-mssql/issues

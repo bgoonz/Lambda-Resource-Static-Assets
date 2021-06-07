@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>docker-compose</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="use-docker-compose">Use Docker Compose</h1>
+<p>Docker Compose provides a way to orchestrate multiple containers that work together. Examples include a service that processes requests and a front-end web site, or a service that uses a supporting function such as a Redis cache. If you are using the microservices model for your app development, you can use Docker Compose to factor the app code into several independently running services that communicate using web requests. This article helps you enable Docker Compose for your apps, whether they are Node.js, Python, or .NET Core, and also helps you configure debugging in Visual Studio Code for these scenarios.</p>
+<p>Also, for single-container scenarios, using Docker Compose provides tool-independent configuration in a way that a single Dockerfile does not. Configuration settings such as volume mounts for the container, port mappings, and environment variables can be declared in the docker-compose YML files.</p>
+<p>To use Docker Compose in VS Code using the Docker extension, you should already be familiar with the basics of <a href="https://docs.docker.com/compose/">Docker Compose</a>.</p>
+<h2 id="adding-docker-compose-support-to-your-project">Adding Docker Compose support to your project</h2>
+<p>If you already have one or more Dockerfiles, you can add Docker Compose files by opening the <strong>Command Palette</strong> (<code>kb(workbench.action.showCommands)</code>), and using the <strong>Docker: Add Docker Compose Files to Workspace</strong> command. Follow the prompts.</p>
+<p>You can add Docker Compose files to your workspace at the same time you add a Dockerfile by opening the <strong>Command Palette</strong> (<code>kb(workbench.action.showCommands)</code>) and using the <strong>Docker: Add Docker Files to Workspace</strong> command. You’ll be asked if you want to add Docker Compose files. If you want to keep your existing Dockerfile, choose <strong>No</strong> when prompted to overwrite the Dockerfile.</p>
+<p>The Docker extension adds the <code>docker-compose.yml</code> file to your workspace. This file contains the configuration to bring up the containers as expected in production. In some cases, a <code>docker-compose.debug.yml</code> is also generated. This file provides a simplified mode for starting that enables the debugger.</p>
+<figure>
+<img src="images/compose/docker-compose-files.png" alt="Screenshot of project with docker-compose files" /><figcaption>Screenshot of project with docker-compose files</figcaption>
+</figure>
+<p>The VS Code Docker extension generates files that work out of the box, but you can also customize them to optimize for your scenario. You can then use the <strong>Docker Compose Up</strong> command (right-click on the <code>docker-compose.yml</code> file, or find the command in the <strong>Command Palette</strong>) to get everything started at once. You can also use the <code>docker-compose up</code> command from the command prompt or terminal window in VS Code to start the containers. Refer to the <a href="https://docs.docker.com/compose/reference/up">Docker Compose documentation</a> about how to configure the Docker Compose behavior and what command-line options are available.</p>
+<p>With the docker-compose files, you can now specify port mappings in the docker-compose files, rather than in the .json configuration files. For examples, see the <a href="https://docs.docker.com/compose/compose-file/#ports">Docker Compose documentation</a>.</p>
+<blockquote>
+<p><strong>Tip</strong>: When using Docker Compose, don’t specify a host port. Instead, let the Docker pick a random available port to automatically avoid port conflict issues.</p>
+</blockquote>
+<h2 id="add-new-containers-to-your-projects">Add new containers to your projects</h2>
+<p>If you want to add another app or service, you can run <strong>Add Docker Compose Files to Workspace</strong> again, and choose to overwrite the existing docker-compose files, but you’ll lose any customization in those files. If you want to preserve changes to the compose files, you can manually modify the <code>docker-compose.yml</code> file to add the new service. Typically, you can cut and paste the existing service section and change the names as appropriate for the new service.</p>
+<p>You can run the <strong>Add Docker Files to Workspace</strong> command again to generate the <code>Dockerfile</code> for a new app. While each app or service has its own Dockerfile, there’s typically one <code>docker-compose.yml</code> and one <code>docker-compose.debug.yml</code> file per workspace.</p>
+<p>In Python projects, you have the <code>Dockerfile</code>, <code>.dockerignore</code>, <code>docker-compose*.yml</code> files all in the root folder of the workspace. When you add another app or service, move the Dockerfile into the app’s folder.</p>
+<p>In Node.js projects, the <code>Dockerfile</code> and <code>.dockerignore</code> files will be next to the <code>package.json</code> for that service.</p>
+<p>For .NET, the folder structure is already set up to handle multiple projects when you create the Docker Compose files, <code>.dockerignore</code> and <code>docker-compose*.yml</code> are placed in the workspace root (for example, if the project is in <code>src/project1</code>, then the files are in <code>src</code>), so when you add another service, you create another project in a folder, say <code>project2</code>, and recreate or modify the docker-compose files as described previously.</p>
+<h2 id="debug">Debug</h2>
+<p>First, refer to the debugging documentation for your target platform, to understand the basics on debugging in containers with VS Code:</p>
+<ul>
+<li><a href="/docs/containers/debug-node.md">Node.js debugging</a></li>
+<li><a href="/docs/containers/debug-python.md">Python Docker debugging</a></li>
+<li><a href="/docs/containers/debug-netcore.md">.NET Core debugging</a></li>
+</ul>
+<p>If you want to debug in Docker Compose, run the command <strong>Docker Compose Up</strong> using one of the two Docker Compose files as described in the previous section, and then attach using the appropriate <strong>Attach</strong> launch configuration. Launching directly using the normal launch configuration does not use Docker Compose.</p>
+<p>Create an <strong>Attach</strong> <a href="/docs/editor/debugging.md#launch-configurations">launch configuration</a>. This is a section in <code>launch.json</code>. The process is mostly manual, but in some cases, the Docker extension can help by adding a pre-configured launch configuration that you can use as a template and customize. The process for each platform (Node.js, Python, and .NET Core) is described in the following sections.</p>
+<h3 id="node.js">Node.js</h3>
+<ol type="1">
+<li><p>On the <strong>Debug</strong> tab, choose the <strong>Configuration</strong> dropdown, choose <strong>New Configuration</strong> and select the <code>Docker Attach</code> configuration template <strong>Node.js Docker Attach (Preview)</strong>.</p></li>
+<li><p>Configure the debugging port in <code>docker-compose.debug.yml</code>. This is set when you create the file, so you might not need to change it. In the example below, port 9229 is used for debugging on both the host and the container.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3.4&quot;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="fu">node-hello:</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="fu">image:</span><span class="at"> node-hello</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="fu">build:</span><span class="at"> .</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="fu">environment:</span></a>
+<a class="sourceLine" id="cb1-8" title="8">      <span class="fu">NODE_ENV:</span><span class="at"> development</span></a>
+<a class="sourceLine" id="cb1-9" title="9">    <span class="fu">ports:</span></a>
+<a class="sourceLine" id="cb1-10" title="10">      <span class="kw">-</span> <span class="dv">3000</span></a>
+<a class="sourceLine" id="cb1-11" title="11">      <span class="kw">-</span> 9229:9229</a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="fu">command:</span><span class="at"> node --inspect=0.0.0.0:9229 ./bin/www</span></a></code></pre></div></li>
+<li><p>If you have multiple apps, you need to change the port for one of them, so that each app has a unique port. You can point to the right debugging port in the <code>launch.json</code>, and save the file. If you omit this, the port will be chosen automatically.</p>
+<p>Here’s an example that shows the Node.js launch configuration - Attach:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"> <span class="er">&quot;configurations&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-2" title="2">     <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">         <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">         <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;attach&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-5" title="5">         <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Docker: Attach to Node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-6" title="6">         <span class="dt">&quot;remoteRoot&quot;</span><span class="fu">:</span> <span class="st">&quot;/usr/src/app&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-7" title="7">         <span class="dt">&quot;port&quot;</span><span class="fu">:</span> <span class="dv">9229</span> <span class="er">//</span> <span class="er">Optional;</span> <span class="er">otherwise</span> <span class="er">inferred</span> <span class="er">from</span> <span class="er">the</span> <span class="er">docker-compose.debug.yml.</span></a>
+<a class="sourceLine" id="cb2-8" title="8">     <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb2-9" title="9">     <span class="er">//</span> <span class="er">...</span></a>
+<a class="sourceLine" id="cb2-10" title="10"> <span class="ot">]</span></a></code></pre></div></li>
+<li><p>When done editing the <strong>Attach</strong> configuration, save <code>launch.json</code>, and select your new launch configuration as the active configuration. In the <strong>Debug</strong> tab, find the new configuration in the <strong>Configuration</strong> dropdown.</p>
+<figure>
+<img src="images/compose/docker-compose-configuration.png" alt="Screenshot of Configuration dropdown" /><figcaption>Screenshot of Configuration dropdown</figcaption>
+</figure></li>
+<li><p>Right-click on the <code>docker-compose.debug.yml</code> file and choose <strong>Compose Up</strong>.</p></li>
+<li><p>When you attach to a service that exposes an HTTP endpoint that returns HTML, the web browser doesn’t open automatically. To open the app in the browser, choose the container in the sidebar, right-click and choose <strong>Open in Browser</strong>. If multiple ports are configured, you’ll be asked to choose the port.</p></li>
+<li><p>Launch the debugger in the usual way. From the <strong>Debug</strong> tab, choose the green arrow (<strong>Start</strong> button) or use <code>kb(workbench.action.debug.start)</code>.</p></li>
+</ol>
+<h3 id="python">Python</h3>
+<p>For debugging Python with Docker Compose, follow these steps:</p>
+<ol type="1">
+<li><p>On the <strong>Debug</strong> tab, choose the <strong>Configuration</strong> dropdown, choose <strong>New Configuration</strong>, choose <strong>Python</strong>, and select the <code>Remote Attach</code> configuration template.</p>
+<figure>
+<img src="images/compose/docker-compose-python-remote-attach.png" alt="Screenshot of Python Remote Attach" /><figcaption>Screenshot of Python Remote Attach</figcaption>
+</figure></li>
+<li><p>You’ll be prompted to choose the host machine (for example, localhost) and port you want to use for debugging. The default debugging port for Python is 5678. If you have multiple apps, you need to change the port for one of them, so that each app has a unique port. You can point to the right debugging port in the <code>launch.json</code>, and save the file. If you omit this, the port will be chosen automatically.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1">     <span class="er">&quot;configurations&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb3-2" title="2">     <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Python: Remote Attach&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">        <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;python&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-5" title="5">        <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;attach&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-6" title="6">        <span class="dt">&quot;port&quot;</span><span class="fu">:</span> <span class="dv">5678</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-7" title="7">        <span class="dt">&quot;host&quot;</span><span class="fu">:</span> <span class="st">&quot;localhost&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-8" title="8">        <span class="dt">&quot;pathMappings&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb3-9" title="9">            <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-10" title="10">                <span class="dt">&quot;localRoot&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-11" title="11">                <span class="dt">&quot;remoteRoot&quot;</span><span class="fu">:</span> <span class="st">&quot;/app&quot;</span></a>
+<a class="sourceLine" id="cb3-12" title="12">            <span class="fu">}</span></a>
+<a class="sourceLine" id="cb3-13" title="13">        <span class="ot">]</span></a>
+<a class="sourceLine" id="cb3-14" title="14">    <span class="fu">}</span></a></code></pre></div></li>
+<li><p>When done editing the <strong>Attach</strong> configuration, save the <code>launch.json</code>. Navigate to the <strong>Debug</strong> tab and select <strong>Python: Remote Attach</strong> as the active configuration.</p></li>
+<li><p>If you already have a valid Dockerfile, we recommend running the command <strong>Docker: Add Docker Compose Files to Workspace</strong>. This will create a <code>docker-compose.yml</code> file and also a <code>docker-compose.debug.yml</code>, which volume maps and starts the Python debugger in the container. If you do not have a Dockerfile already, we recommend running <strong>Docker: Add Docker Files to Workspace</strong> and selecting <strong>Yes</strong> to include Docker Compose files.</p>
+<blockquote>
+<p><strong>Note</strong>: By default, when using <strong>Docker: Add Docker Files to Workspace</strong>, choosing the Django and Flask options will scaffold a Dockerfile configured for Gunicorn. Follow the instructions in the <a href="/docs/containers/quickstart-python.md#gunicorn-modifications-for-djangoflask-apps">Python in a container quickstart</a> to ensure it is configured properly before proceeding.</p>
+</blockquote></li>
+<li><p>Right-click on the <code>docker-compose.debug.yml</code> file (example shown below) and choose <strong>Compose Up</strong>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3.4&quot;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  <span class="fu">pythonsamplevscodedjangotutorial:</span></a>
+<a class="sourceLine" id="cb4-5" title="5">    <span class="fu">image:</span><span class="at"> pythonsamplevscodedjangotutorial</span></a>
+<a class="sourceLine" id="cb4-6" title="6">    <span class="fu">build:</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="fu">context:</span><span class="at"> .</span></a>
+<a class="sourceLine" id="cb4-8" title="8">      <span class="fu">dockerfile:</span><span class="at"> ./Dockerfile</span></a>
+<a class="sourceLine" id="cb4-9" title="9">    <span class="fu">command:</span></a>
+<a class="sourceLine" id="cb4-10" title="10">      <span class="kw">[</span></a>
+<a class="sourceLine" id="cb4-11" title="11">        <span class="st">&quot;sh&quot;</span><span class="kw">,</span></a>
+<a class="sourceLine" id="cb4-12" title="12">        <span class="st">&quot;-c&quot;</span><span class="kw">,</span></a>
+<a class="sourceLine" id="cb4-13" title="13">        <span class="st">&quot;pip install debugpy -t /tmp &amp;&amp; python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000 --nothreading --noreload&quot;</span><span class="kw">,</span></a>
+<a class="sourceLine" id="cb4-14" title="14">      <span class="kw">]</span></a>
+<a class="sourceLine" id="cb4-15" title="15">    <span class="fu">ports:</span></a>
+<a class="sourceLine" id="cb4-16" title="16">      <span class="kw">-</span> 8000:8000</a>
+<a class="sourceLine" id="cb4-17" title="17">      <span class="kw">-</span> 5678:5678</a></code></pre></div></li>
+<li><p>Once your container is built and running, attach the debugger by hitting <code>kb(workbench.action.debug.start)</code> with the <strong>Python: Remote Attach</strong> launch configuration selected.</p>
+<figure>
+<img src="images/compose/docker-compose-python-debug.png" alt="Screenshot of debugging in Python" /><figcaption>Screenshot of debugging in Python</figcaption>
+</figure>
+<blockquote>
+<p><strong>Note:</strong> If you would like to import the Python debugger into a specific file, more information can be found in the <a href="https://github.com/microsoft/debugpy#debugpy-import-usage">debugpy README</a>.</p>
+</blockquote></li>
+<li><p>When you attach to a service that exposes an HTTP endpoint and returns HTML, the web browser may not open automatically. To open the app in the browser, right-click the container in the Docker Explorer and choose <strong>Open in Browser</strong>. If multiple ports are configured, you’ll be asked to choose the port.</p>
+<figure>
+<img src="images/compose/docker-compose-open-in-browser.png" alt="Screenshot - Open in Browser" /><figcaption>Screenshot - Open in Browser</figcaption>
+</figure>
+<p>You’re now debugging your running app in the container.</p></li>
+</ol>
+<h3 id="net">.NET</h3>
+<ol type="1">
+<li><p>On the <strong>Debug</strong> tab, choose the <strong>Configuration</strong> dropdown, choose <strong>New Configuration</strong> and select the <code>Docker Attach</code> configuration template <strong>.NET Core Docker Attach (Preview)</strong>.</p></li>
+<li><p>VS Code tries to copy <code>vsdbg</code> from the host machine to the target container using a default path. You can also provide a path to an existing instance of <code>vsdbg</code> in the <strong>Attach</strong> configuration.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"> <span class="er">&quot;netCore&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">     <span class="dt">&quot;debuggerPath&quot;</span><span class="fu">:</span> <span class="st">&quot;/remote_debugger/vsdbg&quot;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"> <span class="fu">}</span></a></code></pre></div></li>
+<li><p>When done editing the <strong>Attach</strong> configuration, save <code>launch.json</code>, and select your new launch configuration as the active configuration. In the <strong>Debug</strong> tab, find the new configuration in the <strong>Configuration</strong> dropdown.</p></li>
+<li><p>Right-click on the <code>docker-compose.debug.yml</code> file and choose <strong>Compose Up</strong>.</p></li>
+<li><p>When you attach to a service that exposes an HTTP endpoint that returns HTML, the web browser doesn’t open automatically. To open the app in the browser, choose the container in the sidebar, right-click and choose <strong>Open in Browser</strong>. If multiple ports are configured, you’ll be asked to choose the port.</p></li>
+<li><p>Launch the debugger in the usual way. From the <strong>Debug</strong> tab, choose the green arrow (<strong>Start</strong> button) or use <code>kb(workbench.action.debug.start)</code>.</p>
+<figure>
+<img src="images/compose/docker-compose-attach.png" alt="Screenshot of starting debugging" /><figcaption>Screenshot of starting debugging</figcaption>
+</figure></li>
+<li><p>If you try to attach to a .NET Core app running in a container, you’ll see a prompt ask to select your app’s container.</p>
+<figure>
+<img src="images/compose/select-container.png" alt="Screenshot of container selection" /><figcaption>Screenshot of container selection</figcaption>
+</figure>
+<p>To skip this step, specify the container name in the <strong>Attach</strong> configuration in launch.json:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1">    <span class="er">&quot;containerName&quot;:</span> <span class="er">&quot;Your</span> <span class="er">ContainerName&quot;</span></a></code></pre></div>
+<p>Next, you’re asked if you want to copy the debugger (<code>vsdbg</code>) into the container. Choose <strong>Yes</strong>.</p>
+<figure>
+<img src="images/compose/docker-compose-netcore-debugger-prompt.png" alt="Screenshot of debugger prompt" /><figcaption>Screenshot of debugger prompt</figcaption>
+</figure></li>
+</ol>
+<p>If everything is configured correctly, the debugger should be attached to your .NET Core app.</p>
+<figure>
+<img src="images/compose/docker-compose-debugging.png" alt="Screenshot of debug session" /><figcaption>Screenshot of debug session</figcaption>
+</figure>
+<h2 id="volume-mounts">Volume mounts</h2>
+<p>By default, the Docker extension does not do any volume mounting for debugging components. There’s no need for it in .NET Core or Node.js, since the required components are built into the runtime. If your app requires volume mounts, specify them by using the <code>volumes</code> tag in the <code>docker-compose*.yml</code> files.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">-</span> /host-folder-path:/container-folder-path</a></code></pre></div>
+<h2 id="docker-compose-with-multiple-compose-files">Docker Compose with multiple Compose files</h2>
+<p>Workspaces can have multiple docker-compose files to handle different environments like development, test, and production. The content of the configuration can be split into multiple files. For example, a base compose file that defines the common information for all environments and separate override files that define environment-specific information. When these files are passed as input to the <code>docker-compose</code> command, it combines these files into a single configuration. By default, the <strong>Docker: Compose Up</strong> command passes a single file as input to the compose command, but you can customize the <code>compose up</code> command to pass in multiple files using <a href="/docs/containers/reference.md#command-customization">command customization</a>. Or, you can use a <a href="/docs/editor/tasks.md#custom-tasks">custom task</a> to invoke the <code>docker-compose</code> command with the desired parameters.</p>
+<blockquote>
+<p><strong>Note</strong>: If your workspace has <code>docker-compose.yml</code> and <code>docker-compose.override.yml</code> and no other compose files, then the <code>docker-compose</code> command is invoked with no input files and it implicitly uses these files. In this case, no customization is needed.</p>
+</blockquote>
+<h2 id="command-customization">Command customization</h2>
+<p><a href="/docs/containers/reference.md#command-customization">Command customization</a> provides various ways to customize the <code>compose up</code> command based on your requirements. The following are few sample command customization for the <code>compose up</code> command.</p>
+<h3 id="base-file-and-an-override-file">Base file and an override file</h3>
+<p>Let’s assume your workspace has a base compose file (<code>docker-compose.yml</code>) and an override file for each environment (<code>docker-compose.dev.yml</code>, <code>docker-compose.test.yml</code> and <code>docker-compose.prod.yml</code>) and you always compose up with the base file and an override file. In this case, the <code>compose up</code> command can be customized as in the following example. When the <code>compose up</code> command is invoked, the <code>${configurationFile}</code> is replaced by the selected file.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" title="1"><span class="er">&quot;docker.commands.composeUp&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">        <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;override&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-4" title="4">        <span class="dt">&quot;template&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-compose -f docker-compose.yml ${configurationFile}  up -d --build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="ot">]</span></a></code></pre></div>
+<h3 id="template-matching">Template matching</h3>
+<p>Let’s assume you have different set of input files for each environment. You could define multiple templates with regular expression match, and the selected file name will be matched against this <code>match</code> property and the corresponding template will be used.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb9-1" title="1"><span class="er">&quot;docker.commands.composeUp&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb9-2" title="2">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">        <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;dev-match&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-4" title="4">        <span class="dt">&quot;template&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-compose -f docker-compose.yml -f docker-compose.debug.yml -f docker-compose.dev.yml up -d --build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-5" title="5">        <span class="dt">&quot;match&quot;</span><span class="fu">:</span> <span class="st">&quot;dev&quot;</span></a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb9-7" title="7">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-8" title="8">        <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;test-match&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-9" title="9">        <span class="dt">&quot;template&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-compose -f docker-compose.yml -f docker-compose.debug.yml -f docker-compose.test.yml up -d --build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-10" title="10">        <span class="dt">&quot;match&quot;</span><span class="fu">:</span> <span class="st">&quot;test&quot;</span></a>
+<a class="sourceLine" id="cb9-11" title="11">    <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb9-12" title="12">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-13" title="13">        <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;prod-match&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-14" title="14">        <span class="dt">&quot;template&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-compose -f docker-compose.yml -f docker-compose.release.yml -f docker-compose.prod.yml up -d --build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-15" title="15">        <span class="dt">&quot;match&quot;</span><span class="fu">:</span> <span class="st">&quot;prod&quot;</span></a>
+<a class="sourceLine" id="cb9-16" title="16">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-17" title="17"><span class="ot">]</span></a></code></pre></div>
+<h3 id="pick-a-template-when-the-command-is-invoked">Pick a template when the command is invoked</h3>
+<p>If you omit the <code>match</code> property from command templates, you will be asked which template to use each time <code>compose up</code> command is invoked. For example:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb10-1" title="1"><span class="er">&quot;docker.commands.composeUp&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb10-2" title="2">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-3" title="3">        <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;dev&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-4" title="4">        <span class="dt">&quot;template&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-compose -f docker-compose.yml -f docker-compose.common.dev.yml ${configurationFile} up -d --build&quot;</span></a>
+<a class="sourceLine" id="cb10-5" title="5">    <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb10-6" title="6">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-7" title="7">        <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;test&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-8" title="8">        <span class="dt">&quot;template&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-compose -f docker-compose.yml -f docker-compose.common.test.yml ${configurationFile} up -d --build&quot;</span></a>
+<a class="sourceLine" id="cb10-9" title="9">    <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb10-10" title="10">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-11" title="11">        <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;prod&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-12" title="12">        <span class="dt">&quot;template&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-compose -f docker-compose.yml -f docker-compose.common.prod.yml ${configurationFile} up -d --build&quot;</span></a>
+<a class="sourceLine" id="cb10-13" title="13">    <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb10-14" title="14"><span class="ot">]</span><span class="er">,</span></a></code></pre></div>
+<h2 id="custom-tasks">Custom tasks</h2>
+<p>Rather than use command customization, you can also define a task like the following to invoke a <code>docker-compose</code> command. Please refer <a href="/docs/editor/tasks.md#custom-tasks">custom task</a> for more detail on this.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb11-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;shell&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;compose-up-dev&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb11-4" title="4">  <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-compose -f docker-compose.yml -f docker-compose.Common.yml -f docker-compose.dev.yml up -d --build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb11-5" title="5">  <span class="dt">&quot;presentation&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb11-6" title="6">    <span class="dt">&quot;reveal&quot;</span><span class="fu">:</span> <span class="st">&quot;always&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb11-7" title="7">    <span class="dt">&quot;panel&quot;</span><span class="fu">:</span> <span class="st">&quot;new&quot;</span></a>
+<a class="sourceLine" id="cb11-8" title="8">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="https://docs.docker.com/compose/">Overview of Docker Compose in the Docker documentation</a></li>
+</ul>
+</body>
+</html>

@@ -7,6 +7,7 @@ ContentId: bae55561-1032-40d4-b6a6-47054da96098
 MetaDescription: Create a development container using Visual Studio Code Remote Development
 DateApproved: 3/31/2021
 ---
+
 # Create a development container
 
 The **Visual Studio Code Remote - Containers** extension lets you use a [Docker container](https://docker.com) as a full-featured development environment. It allows you to open any folder or repository inside a container and take advantage of Visual Studio Code's full feature set. A `devcontainer.json` file in your project tells VS Code how to access (or create) a **development container** with a well-defined tool and runtime stack. This container can be used to run an application or to sandbox tools, libraries, or runtimes needed for working with a codebase.
@@ -32,28 +33,26 @@ You can use an image as a starting point for your `devcontainer.json`. An image 
 
 ```json
 {
-    "image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:0-12"
+  "image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:0-12"
 }
 ```
 
 You can alter your configuration to do things such as:
 
-* Install additional tools such as Git in the container.
-* Automatically install extensions.
-* Forward or publish additional ports.
-* Set runtime arguments.
-* Reuse or [extend your existing Docker Compose setup](https://aka.ms/vscode-remote/containers/docker-compose/extend).
-* Add more [advanced container configurations](/docs/remote/containers-advanced.md).
+- Install additional tools such as Git in the container.
+- Automatically install extensions.
+- Forward or publish additional ports.
+- Set runtime arguments.
+- Reuse or [extend your existing Docker Compose setup](https://aka.ms/vscode-remote/containers/docker-compose/extend).
+- Add more [advanced container configurations](/docs/remote/containers-advanced.md).
 
 For this example, if you'd like to install the [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) into your container and automatically forward port 3000, your `devcontainer.json` would look like:
 
 ```json
 {
-    "image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:0-12",
-    "extensions": [
-        "dbaeumer.vscode-eslint"
-    ],
-    "forwardPorts": [ 3000 ]
+  "image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:0-12",
+  "extensions": ["dbaeumer.vscode-eslint"],
+  "forwardPorts": [3000]
 }
 ```
 
@@ -69,9 +68,9 @@ After running this command, when VS Code restarts, you're now within a Node.js a
 
 Through a `devcontainer.json` file, you can:
 
-* Spin up a stand-alone "sandbox" container to isolate your toolchain or speed up setup.
-* Work with a container deployed application defined by an image, [Dockerfile](#dockerfile), or [Docker Compose](#use-docker-compose).
-* [Use Docker or Kubernetes](/docs/remote/containers-advanced.md#using-docker-or-kubernetes-from-a-container) from inside a dev container to build and deploy your app.
+- Spin up a stand-alone "sandbox" container to isolate your toolchain or speed up setup.
+- Work with a container deployed application defined by an image, [Dockerfile](#dockerfile), or [Docker Compose](#use-docker-compose).
+- [Use Docker or Kubernetes](/docs/remote/containers-advanced.md#using-docker-or-kubernetes-from-a-container) from inside a dev container to build and deploy your app.
 
 If `devcontainer.json`'s supported workflows do not meet your needs, you can also [attach to an already running container instead](/docs/remote/attach-container.md).
 
@@ -146,11 +145,9 @@ A Dockerfile will also live in the `.devcontainer` folder. You can replace the `
 
 ```json
 {
-    "build": { "dockerfile": "Dockerfile" },
-    "extensions": [
-        "dbaeumer.vscode-eslint"
-    ],
-    "forwardPorts": [ 3000 ]
+  "build": { "dockerfile": "Dockerfile" },
+  "extensions": ["dbaeumer.vscode-eslint"],
+  "forwardPorts": [3000]
 }
 ```
 
@@ -229,10 +226,10 @@ To get started quickly, **open the folder** you want to work with in VS Code and
 
 You'll be asked to either select an existing Docker Compose file (if one exists), or pick a pre-defined container configuration from the [vscode-dev-containers repository](https://github.com/microsoft/vscode-dev-containers) in a filterable list sorted based on your folder's contents. Many of these "dev container definitions" use a Dockerfile, so select one of the following definitions as a starting point for Docker Compose:
 
-* [Existing Docker Compose](https://aka.ms/vscode-remote/samples/existing-docker-compose)
-* [Node.js & MongoDB](https://aka.ms/vscode-remote/samples/node-mongo)
-* [Python & PostgreSQL](https://aka.ms/vscode-remote/samples/python-postgres)
-* [Docker-from-Docker Compose](https://aka.ms/vscode-remote/samples/docker-from-docker-compose).
+- [Existing Docker Compose](https://aka.ms/vscode-remote/samples/existing-docker-compose)
+- [Node.js & MongoDB](https://aka.ms/vscode-remote/samples/node-mongo)
+- [Python & PostgreSQL](https://aka.ms/vscode-remote/samples/python-postgres)
+- [Docker-from-Docker Compose](https://aka.ms/vscode-remote/samples/docker-from-docker-compose).
 
 After you make your selection, VS Code will add the appropriate `.devcontainer/devcontainer.json` (or `.devcontainer.json`) file to the folder.
 
@@ -242,11 +239,11 @@ For example:
 
 ```json
 {
-    "name": "[Optional] Your project name here",
-    "dockerComposeFile": "../docker-compose.yml",
-    "service": "the-name-of-the-service-you-want-to-work-with-in-vscode",
-    "workspaceFolder": "/default/workspace/path/in/container/to/open",
-    "shutdownAction": "stopCompose"
+  "name": "[Optional] Your project name here",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "the-name-of-the-service-you-want-to-work-with-in-vscode",
+  "workspaceFolder": "/default/workspace/path/in/container/to/open",
+  "shutdownAction": "stopCompose"
 }
 ```
 
@@ -305,9 +302,9 @@ If your application was built using C++, Go, or Rust, or another language that u
 ```yaml
 # Required for ptrace-based debuggers like C++, Go, and Rust
 cap_add:
-- SYS_PTRACE
+  - SYS_PTRACE
 security_opt:
-- seccomp:unconfined
+  - seccomp:unconfined
 ```
 
 After you create your container for the first time, you will need to run the **Remote-Containers: Rebuild Container** command for updates to `devcontainer.json`, your Docker Compose files, or related Dockerfiles to take effect.
@@ -329,16 +326,16 @@ Referencing an existing deployment / non-development focused `docker-compose.yml
 
 For example:
 
-* Docker Compose will shut down a container if its entry point shuts down. This is problematic for situations where you are debugging and need to restart your app on a repeated basis.
-* You also may not be mapping the local filesystem into the container or exposing ports to other resources like databases you want to access.
-* You may want to copy the contents of your local `.ssh` folder into the container or set the ptrace options described above in [Use Docker Compose](#use-docker-compose).
+- Docker Compose will shut down a container if its entry point shuts down. This is problematic for situations where you are debugging and need to restart your app on a repeated basis.
+- You also may not be mapping the local filesystem into the container or exposing ports to other resources like databases you want to access.
+- You may want to copy the contents of your local `.ssh` folder into the container or set the ptrace options described above in [Use Docker Compose](#use-docker-compose).
 
 You can solve these and other issues like them by extending your entire Docker Compose configuration with [multiple `docker-compose.yml` files](https://docs.docker.com/compose/extends/#multiple-compose-files) that override or supplement your primary one.
 
 For example, consider this additional `.devcontainer/docker-compose.extend.yml` file:
 
 ```yaml
-version: '3'
+version: "3"
 services:
   your-service-name-here:
     volumes:
@@ -360,18 +357,14 @@ This same file can provide additional settings, such as port mappings, as needed
 
 ```json
 {
-    "name": "[Optional] Your project name here",
+  "name": "[Optional] Your project name here",
 
-    // The order of the files is important since later files override previous ones
-    "dockerComposeFile": [
-        "../docker-compose.yml",
-        "docker-compose.extend.yml"
-    ],
+  // The order of the files is important since later files override previous ones
+  "dockerComposeFile": ["../docker-compose.yml", "docker-compose.extend.yml"],
 
-    "service": "your-service-name-here",
-    "workspaceFolder": "/workspace",
-    "shutdownAction": "stopCompose"
-
+  "service": "your-service-name-here",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose"
 }
 ```
 
@@ -381,32 +374,32 @@ VS Code will then **automatically use both files** when starting up any containe
 docker-compose -f docker-compose.yml -f .devcontainer/docker-compose.extend.yml up
 ```
 
-While the `postCreateCommand` property allows you to install additional tools inside your container, in some cases you may want to have a specific Dockerfile for development. You can also use this same approach to reference a custom `Dockerfile` specifically for development without modifying your existing Docker Compose file.  For example, you can update `.devcontainer/devcontainer.extend.yml` as follows:
+While the `postCreateCommand` property allows you to install additional tools inside your container, in some cases you may want to have a specific Dockerfile for development. You can also use this same approach to reference a custom `Dockerfile` specifically for development without modifying your existing Docker Compose file. For example, you can update `.devcontainer/devcontainer.extend.yml` as follows:
 
 ```yaml
-version: '3'
+version: "3"
 services:
   your-service-name-here:
-      # Note that the path of the Dockerfile and context is relative to the *primary*
-      # docker-compose.yml file (the first in the devcontainer.json "dockerComposeFile"
-      # array). The sample below assumes your primary file is in the root of your project.
-      build:
-        context: .
-        dockerfile: .devcontainer/Dockerfile
-      volumes:
-        - .:/workspace:cached
-      command: /bin/sh -c "while sleep 1000; do :; done"
+    # Note that the path of the Dockerfile and context is relative to the *primary*
+    # docker-compose.yml file (the first in the devcontainer.json "dockerComposeFile"
+    # array). The sample below assumes your primary file is in the root of your project.
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - .:/workspace:cached
+    command: /bin/sh -c "while sleep 1000; do :; done"
 ```
 
 For example:
 
 ```json
 {
-    "name": "[Optional] Your project name here",
-    "dockerComposeFile": "../docker-compose.yml",
-    "service": "the-name-of-the-service-you-want-to-work-with-in-vscode",
-    "workspaceFolder": "/default/workspace/path/in/container/to/open",
-    "shutdownAction": "stopCompose"
+  "name": "[Optional] Your project name here",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "the-name-of-the-service-you-want-to-work-with-in-vscode",
+  "workspaceFolder": "/default/workspace/path/in/container/to/open",
+  "shutdownAction": "stopCompose"
 }
 ```
 
@@ -416,10 +409,10 @@ Once you have added a `.devcontainer/devcontainer.json` file to your folder, run
 
 The following are dev container definitions that use Docker Compose:
 
-* [Existing Docker Compose](https://aka.ms/vscode-remote/samples/existing-docker-compose) - Includes a set of files that you can drop into an existing project that will reuse a `docker-compose.yml` file in the root of your project.
-* [Node.js & MongoDB](https://aka.ms/vscode-remote/samples/node-mongo) -  A Node.js container that connects to a Mongo DB in a different container.
-* [Python & PostgreSQL](https://aka.ms/vscode-remote/samples/python-postgres) -  A Python container that connects to PostGreSQL in a different container.
-* [Docker-from-Docker Compose](https://aka.ms/vscode-remote/samples/docker-from-docker-compose) - Includes the Docker CLI and illustrates how you can use it to access your local Docker install from inside a dev container by volume mounting the Docker Unix socket.
+- [Existing Docker Compose](https://aka.ms/vscode-remote/samples/existing-docker-compose) - Includes a set of files that you can drop into an existing project that will reuse a `docker-compose.yml` file in the root of your project.
+- [Node.js & MongoDB](https://aka.ms/vscode-remote/samples/node-mongo) - A Node.js container that connects to a Mongo DB in a different container.
+- [Python & PostgreSQL](https://aka.ms/vscode-remote/samples/python-postgres) - A Python container that connects to PostGreSQL in a different container.
+- [Docker-from-Docker Compose](https://aka.ms/vscode-remote/samples/docker-from-docker-compose) - Includes the Docker CLI and illustrates how you can use it to access your local Docker install from inside a dev container by volume mounting the Docker Unix socket.
 
 Congratulations! You've now configured a dev container in Visual Studio Code. Continue reading to learn how to share container configurations among teammates and various projects.
 
@@ -454,6 +447,6 @@ Once in place, the configuration will be automatically picked up when using any 
 
 ## Next steps
 
-* [Attach to a Running Container](/docs/remote/attach-container.md) - Attach to an already running Docker container.
-* [Advanced Containers](/docs/remote/containers-advanced.md) - Find solutions to advanced container scenarios.
-* [devcontainer.json reference](/docs/remote/devcontainerjson-reference.md) - Review the `devcontainer.json` schema.
+- [Attach to a Running Container](/docs/remote/attach-container.md) - Attach to an already running Docker container.
+- [Advanced Containers](/docs/remote/containers-advanced.md) - Find solutions to advanced container scenarios.
+- [devcontainer.json reference](/docs/remote/devcontainerjson-reference.md) - Review the `devcontainer.json` schema.

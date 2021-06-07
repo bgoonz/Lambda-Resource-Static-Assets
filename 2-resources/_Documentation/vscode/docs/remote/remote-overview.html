@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>remote-overview</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="vs-code-remote-development">VS Code Remote Development</h1>
+<p><strong>Visual Studio Code Remote Development</strong> allows you to use a container, remote machine, or the <a href="https://docs.microsoft.com/windows/wsl">Windows Subsystem for Linux</a> (WSL) as a full-featured development environment. You can:</p>
+<ul>
+<li>Develop on the <strong>same operating system</strong> you deploy to or use <strong>larger or more specialized</strong> hardware.</li>
+<li><strong>Sandbox</strong> your development environment to avoid impacting your local <strong>machine configuration</strong>.</li>
+<li>Make it easy for new contributors to <strong>get started</strong> and keep everyone on a <strong>consistent environment</strong>.</li>
+<li>Use tools or runtimes <strong>not available</strong> on your local OS or manage <strong>multiple versions</strong> of them.</li>
+<li>Develop your Linux-deployed applications using the <strong>Windows Subsystem for Linux</strong>.</li>
+<li>Access an <strong>existing</strong> development environment from <strong>multiple machines or locations</strong>.</li>
+<li>Debug an <strong>application running somewhere else</strong> such as a customer site or in the cloud.</li>
+</ul>
+<p><strong>No source code</strong> needs to be on your local machine to get these benefits. Each extension in the <a href="https://aka.ms/vscode-remote/download/extension">Remote Development extension pack</a> can run commands and other extensions directly inside a container, in WSL, or on a remote machine so that everything feels like it does when you run locally.</p>
+<figure>
+<img src="images/remote-overview/architecture.png" alt="Architecture" /><figcaption>Architecture</figcaption>
+</figure>
+<h2 id="getting-started">Getting started</h2>
+<h3 id="remote-development-extension-pack">Remote Development extension pack</h3>
+<p>The <a href="https://aka.ms/vscode-remote/download/extension">Remote Development extension pack</a> includes three extensions. See the following articles to get started with each of them:</p>
+<ul>
+<li><a href="/docs/remote/ssh.md">Remote - SSH</a> - Connect to any location by opening folders on a remote machine/VM using SSH.</li>
+<li><a href="/docs/remote/containers.md">Remote - Containers</a> - Work with a sandboxed toolchain or container-based application inside (or mounted into) a container.</li>
+<li><a href="/docs/remote/wsl.md">Remote - WSL</a> - Get a Linux-powered development experience in the Windows Subsystem for Linux.</li>
+</ul>
+<p>While most VS Code extensions should work unmodified in a remote environment, extension authors can learn more at <a href="/api/advanced-topics/remote-extensions.md">Supporting Remote Development</a>.</p>
+<h2 id="remote-tutorials">Remote tutorials</h2>
+<p>The tutorials below will walk you through running Visual Studio Code with the Remote Development extensions.</p>
+<table>
+<colgroup>
+<col style="width: 63%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tutorial</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="/docs/remote/ssh-tutorial.md">Remote via SSH</a></td>
+<td>Connect to remote and virtual machines with Visual Studio Code via SSH.</td>
+</tr>
+<tr class="even">
+<td><a href="/docs/remote/wsl-tutorial.md">Work in WSL</a></td>
+<td>Run Visual Studio Code in Windows Subsystem for Linux.</td>
+</tr>
+<tr class="odd">
+<td><a href="/docs/remote/containers-tutorial.md">Develop in Containers</a></td>
+<td>Run Visual Studio Code in a Docker Container.</td>
+</tr>
+<tr class="even">
+<td><a href="https://docs.github.com/github/developing-online-with-codespaces/using-codespaces-in-visual-studio-code">GitHub Codespaces</a></td>
+<td>Connect to a codespace with Visual Studio Code.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="github-codespaces">GitHub Codespaces</h2>
+<p><a href="/docs/remote/codespaces.md">GitHub Codespaces</a> provides remote development environments that are managed for you. You can configure and create a development environment hosted in the cloud, which is spun up and available when you need it.</p>
+<h2 id="questions-or-feedback">Questions or feedback</h2>
+<ul>
+<li>See <a href="/docs/remote/troubleshooting.md">Tips and Tricks</a> or the <a href="/docs/remote/faq.md">FAQ</a>.</li>
+<li>Search on <a href="https://stackoverflow.com/questions/tagged/vscode-remote">Stack Overflow</a>.</li>
+<li>Add a <a href="https://aka.ms/vscode-remote/feature-requests">feature request</a> or <a href="https://aka.ms/vscode-remote/issues/new">report a problem</a>.</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>configure-intellisense-crosscompilation</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="intellisense-for-cross-compiling">IntelliSense for cross-compiling</h1>
+<p>The article is about configuring the C/C++ extension to provide proper IntelliSense (code completions) in Visual Studio Code when you compile for a different architecture than your development host machine. For example, when your host machine is x64 but you are compiling for ARM.</p>
+<p>The C/C++ extension isn’t a compiler–it provides rich language features such as syntax highlighting and IntelliSense. For the extension to provide correct IntelliSense suggestions, and to reflect the right sizes of data types, you need to configure the C++ extension to emulate the target architecture.</p>
+<p>These configuration settings are stored in your project’s <code>c_cpp_properties.json</code> file. To edit this file, in VS Code, select <strong>C/C++: Edit Configurations (UI)</strong> from the Command Palette (<code>kb(workbench.action.showCommands)</code>):</p>
+<figure>
+<img src="images/cpp/command-palette.png" alt="Command Palette" /><figcaption>Command Palette</figcaption>
+</figure>
+<h2 id="example-intellisense-configuration">Example IntelliSense configuration</h2>
+<p>The following shows configuring the C/C++ extension for a Linux x64 host machine that targets Linux ARM. It configures the following IntelliSense settings:</p>
+<ul>
+<li><strong>Compiler path</strong>: the extension queries your compiler at this location to retrieve system libraries and compiler defines.</li>
+<li><strong>IntelliSense mode</strong>: emulates the target architecture and compiler so that the extension can provide correct IntelliSense and reflect the right sizes of data types such as <code>pointer</code>, <code>size_t</code>, <code>long</code>, and so on.</li>
+</ul>
+<p>At a minimum, setting <strong>compiler path</strong> and <strong>IntelliSense mode</strong> provides enough information for the extension to emulate your project’s target architecture.</p>
+<h3 id="compiler-path">Compiler path</h3>
+<p>Set to the full path of the compiler you are using to build your project.</p>
+<p>For example:</p>
+<figure>
+<img src="images/intellisense/compiler-path.png" alt="Compiler path setting" /><figcaption>Compiler path setting</figcaption>
+</figure>
+<h3 id="intellisense-mode">IntelliSense mode</h3>
+<p>Set to the architecture-specific variant of the compiler you are using.</p>
+<p>For example:</p>
+<figure>
+<img src="images/intellisense/intellisense-mode.png" alt="IntelliSense mode setting" /><figcaption>IntelliSense mode setting</figcaption>
+</figure>
+<h3 id="include-path">Include path</h3>
+<p>You only need to modify the <strong>Include path</strong> if your program includes header files that aren’t in your workspace, or that are not in the standard library path.</p>
+<p>The C/C++ extension populates the include path by querying the compiler specified by <strong>Compiler path</strong>. If the extension can’t find the path for the target system libraries, you can enter the include path manually:</p>
+<figure>
+<img src="images/intellisense/include-path.png" alt="Include path setting" /><figcaption>Include path setting</figcaption>
+</figure>
+<p>Given the settings above, your <code>c_cpp_configuration.json</code> file will look something like the following. You can open it by selecting <strong>C/C++: Edit Configurations (JSON)</strong> from the Command Palette:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;myConfigurationName&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">      <span class="dt">&quot;includePath&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;${workspaceFolder}/**&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-6" title="6">      <span class="dt">&quot;defines&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">      <span class="dt">&quot;compilerPath&quot;</span><span class="fu">:</span> <span class="st">&quot;/usr/bin/arm-none-eabi-g++&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8">      <span class="dt">&quot;cStandard&quot;</span><span class="fu">:</span> <span class="st">&quot;c11&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-9" title="9">      <span class="dt">&quot;cppStandard&quot;</span><span class="fu">:</span> <span class="st">&quot;c++14&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-10" title="10">      <span class="dt">&quot;IntelliSenseMode&quot;</span><span class="fu">:</span> <span class="st">&quot;gcc-arm&quot;</span></a>
+<a class="sourceLine" id="cb1-11" title="11">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-12" title="12">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li>For more information about IntelliSense configuration, see <a href="/docs/cpp/customize-default-settings-cpp.md">Customizing default settings</a>.</li>
+<li>If you have trouble configuring the settings, file an issue in the <a href="https://github.com/microsoft/vscode-docs/issues">VS Code documentation repository</a>.</li>
+<li>Explore the <a href="/docs/cpp/c-cpp-properties-schema-reference.md">c_cpp_properties schema</a>.</li>
+<li>Review the <a href="/docs/languages/cpp.md">Overview of the C++ extension</a>.</li>
+</ul>
+</body>
+</html>

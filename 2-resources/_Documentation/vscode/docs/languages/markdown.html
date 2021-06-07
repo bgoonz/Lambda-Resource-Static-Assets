@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>markdown</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="markdown-and-visual-studio-code">Markdown and Visual Studio Code</h1>
+<p>Working with Markdown files in Visual Studio Code is simple, straightforward, and fun. Besides VS Code’s basic editing, there are a number of Markdown specific features that will help you be more productive.</p>
+<h2 id="markdown-extensions">Markdown extensions</h2>
+<p>In addition to the functionality VS Code provides out of the box, you can install an extension for greater functionality.</p>
+<div class="marketplace-extensions-markdown-curated">
+
+</div>
+<blockquote>
+<p>Tip: Click on an extension tile above to read the description and reviews to decide which extension is best for you. See more in the <a href="https://marketplace.visualstudio.com">Marketplace</a>.</p>
+</blockquote>
+<h2 id="markdown-preview">Markdown preview</h2>
+<p>VS Code supports Markdown files out of the box. You just start writing Markdown text, save the file with the .md extension and then you can toggle the visualization of the editor between the code and the preview of the Markdown file; obviously, you can also open an existing Markdown file and start working with it. To switch between views, press <code>kb(markdown.showPreview)</code> in the editor. You can view the preview side-by-side (<code>kb(markdown.showPreviewToSide)</code>) with the file you are editing and see changes reflected in real-time as you edit.</p>
+<p>Here is an example with a very simple file.</p>
+<figure>
+<img src="images/Markdown/preview.png" alt="Markdown Preview" /><figcaption>Markdown Preview</figcaption>
+</figure>
+<blockquote>
+<p><strong>Tip:</strong> You can also right-click on the editor Tab and select <strong>Open Preview</strong> (<code>kb(markdown.showPreview)</code>) or use the <strong>Command Palette</strong> (<code>kb(workbench.action.showCommands)</code>) to run the <strong>Markdown: Open Preview to the Side</strong> command (<code>kb(markdown.showPreviewToSide)</code>).</p>
+</blockquote>
+<h3 id="dynamic-previews-and-preview-locking">Dynamic previews and preview locking</h3>
+<p>By default, Markdown previews automatically update to preview the currently active Markdown file:</p>
+<figure>
+<img src="images/Markdown/md-dynamic-preview.gif" alt="The preview automatically switching to preview the current Markdown document" /><figcaption>The preview automatically switching to preview the current Markdown document</figcaption>
+</figure>
+<p>You can lock a Markdown preview using the <strong>Markdown: Toggle Preview Locking</strong> command to keep it locked to its current Markdown document. Locked previews are indicated by <strong>[Preview]</strong> in the title:</p>
+<figure>
+<img src="images/Markdown/locked-preview-title.png" alt="A locked markdown preview" /><figcaption>A locked markdown preview</figcaption>
+</figure>
+<h3 id="editor-and-preview-synchronization">Editor and preview synchronization</h3>
+<p>VS Code automatically synchronizes the Markdown editor and the preview panes. Scroll the Markdown preview and the editor is scrolled to match the preview’s viewport. Scroll the Markdown editor and the preview is scrolled to match its viewport:</p>
+<figure>
+<img src="images/Markdown/preview-scroll-sync.gif" alt="Markdown Preview editor selection scroll sync" /><figcaption>Markdown Preview editor selection scroll sync</figcaption>
+</figure>
+<p>You can disable scroll synchronization using the <code>markdown.preview.scrollPreviewWithEditor</code> and <code>markdown.preview.scrollEditorWithPreview</code> <a href="/docs/getstarted/settings.md">settings</a>.</p>
+<p>The currently selected line in the editor is indicated in the Markdown preview by a light gray bar in the left margin:</p>
+<figure>
+<img src="images/Markdown/preview-selection-marker.png" alt="Markdown Preview editor line marker" /><figcaption>Markdown Preview editor line marker</figcaption>
+</figure>
+<p>Additionally, double clicking an element in the Markdown preview will automatically open the editor for the file and scroll to the line nearest the clicked element.</p>
+<figure>
+<img src="images/Markdown/double-click-preview-switch.gif" alt="Markdown Preview double click switches to editor" /><figcaption>Markdown Preview double click switches to editor</figcaption>
+</figure>
+<h2 id="outline-view">Outline view</h2>
+<p>The Outline view is a separate section in the bottom of the File Explorer. When expanded, it will show the symbol tree of the currently active editor. For Markdown files, the symbol tree is the Markdown file’s header hierarchy.</p>
+<figure>
+<img src="images/Markdown/markdown-outline-view.png" alt="Markdown Outline view" /><figcaption>Markdown Outline view</figcaption>
+</figure>
+<p>The Outline view is a great way to review your document’s header structure and outline.</p>
+<h2 id="extending-the-markdown-preview">Extending the Markdown preview</h2>
+<p>Extensions can contribute custom styles and scripts to the Markdown preview to change its appearance and add new functionality. Here’s a set of example extensions that customize the preview:</p>
+<div class="marketplace-extensions-markdown-preview-curated">
+
+</div>
+<h3 id="using-your-own-css">Using your own CSS</h3>
+<p>You can also use your own CSS in the Markdown preview with the <code>"markdown.styles": []</code> <a href="/docs/getstarted/settings.md">setting</a>. This lists URLs for style sheets to load in the Markdown preview. These stylesheets can either be <code>https</code> URLs, or relative paths to local files in the current workspace.</p>
+<p>For example, to load a stylesheet called <code>Style.css</code> at the root of your current workspace, use <strong>File</strong> &gt; <strong>Preferences</strong> &gt; <strong>Settings</strong> to bring up the workspace <code>settings.json</code> file and make this update:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="er">//</span> <span class="er">Place</span> <span class="er">your</span> <span class="er">settings</span> <span class="er">in</span> <span class="er">this</span> <span class="er">file</span> <span class="er">to</span> <span class="er">overwrite</span> <span class="er">default</span> <span class="er">and</span> <span class="er">user</span> <span class="er">settings.</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;markdown.styles&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;Style.css&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="fu">}</span></a></code></pre></div>
+<h3 id="keep-trailing-whitespace-in-order-to-create-line-breaks">Keep trailing whitespace in order to create line breaks</h3>
+<p>To create <a href="https://spec.commonmark.org/0.29/#hard-line-breaks">hard line breaks</a>, Markdown requires two or more spaces at the end of a line. Depending on your user or workspace settings, VS Code may be configured to remove trailing whitespace. In order to keep trailing whitespace in Markdown files only, you can add these lines to your <code>settings.json</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;[markdown]&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="dt">&quot;files.trimTrailingWhitespace&quot;</span><span class="fu">:</span> <span class="kw">false</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="fu">}</span></a></code></pre></div>
+<h2 id="markdown-preview-security">Markdown preview security</h2>
+<p>For security reasons, VS Code restricts the content displayed in the Markdown preview. This includes disabling script execution and only allowing resources to be loaded over <code>https</code>.</p>
+<p>When the Markdown preview blocks content on a page, an alert popup is shown in the top right corner of the preview window:</p>
+<figure>
+<img src="images/Markdown/security-alert.png" alt="markdown security alert" /><figcaption>markdown security alert</figcaption>
+</figure>
+<p>You can change what content is allowed in the Markdown preview by clicking on this popup or running the <strong>Markdown: Change preview security settings</strong> command in any Markdown file:</p>
+<figure>
+<img src="images/Markdown/security-selector.png" alt="markdown security selector" /><figcaption>markdown security selector</figcaption>
+</figure>
+<p>The Markdown preview security settings apply to all files in the workspace.</p>
+<p>Here are the details about each of these security levels:</p>
+<h3 id="strict">Strict</h3>
+<p>This is the default setting. Only loads trusted content and disables script execution. Blocks <code>http</code> images.</p>
+<p>It is strongly recommended that you keep <code>Strict</code> security enabled unless you have a very good reason to change it AND you trust all markdown files in the workspace.</p>
+<h3 id="allow-insecure-content">Allow insecure content</h3>
+<p>Keeps scripts disabled but allows content to be loaded over <code>http</code>.</p>
+<h3 id="disable">Disable</h3>
+<p>Disables additional security in the preview window. This allows script execution and also allows content to be loaded over <code>http</code>.</p>
+<h2 id="snippets-for-markdown">Snippets for Markdown</h2>
+<p>There are several built-in Markdown snippets included in VS Code - press <code>kb(editor.action.triggerSuggest)</code> (Trigger Suggest) and you get a context specific list of suggestions.</p>
+<blockquote>
+<p><strong>Tip:</strong> You can add in your own User Defined Snippets for Markdown. Take a look at <a href="/docs/editor/userdefinedsnippets.md">User Defined Snippets</a> to find out how.</p>
+</blockquote>
+<h2 id="compiling-markdown-into-html">Compiling Markdown into HTML</h2>
+<p>VS Code integrates with Markdown compilers through the integrated <a href="/docs/editor/tasks.md">task runner</a>. We can use this to compile <code>.md</code> files into <code>.html</code> files. Let’s walk through compiling a simple Markdown document.</p>
+<h3 id="step-1-install-a-markdown-compiler">Step 1: Install a Markdown compiler</h3>
+<p>For this walkthrough, we use the popular <a href="https://nodejs.org">Node.js</a> module, <a href="https://github.com/markdown-it/markdown-it">markdown-it</a>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">npm</span> install -g markdown-it</a></code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> There are many Markdown compilers to choose from beyond <strong>markdown-it</strong>. Pick the one that best suits your needs and environment.</p>
+</blockquote>
+<h3 id="step-2-create-a-simple-md-file">Step 2: Create a simple MD file</h3>
+<p>Open VS Code on an empty folder and create a <code>sample.md</code> file.</p>
+<blockquote>
+<p><strong>Note:</strong> You can open a folder with VS Code by either selecting the folder with <strong>File</strong> &gt; <strong>Open Folder</strong> or navigating to the folder and typing ‘code .’ at the command line.</p>
+</blockquote>
+<p>Place the following source code in that file:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown"><code class="sourceCode markdown"><a class="sourceLine" id="cb4-1" title="1"><span class="fu"># Hello Markdown in VS Code!</span></a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3">This is a simple introduction to compiling Markdown in VS Code.</a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5">Things you&#39;ll need:</a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7">- <span class="ot">[Node.js](https://nodejs.org)</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="fl">- </span><span class="ot">[markdown-it](https://www.npmjs.com/package/markdown-it)</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="fl">- </span><span class="ot">[tasks.json](/docs/editor/tasks.md)</span></a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="fu">## Section Title</span></a>
+<a class="sourceLine" id="cb4-12" title="12"></a>
+<a class="sourceLine" id="cb4-13" title="13">&gt;<span class="dt"> This block quote is here for your information.</span></a></code></pre></div>
+<h3 id="step-3-create-tasks.json">Step 3: Create tasks.json</h3>
+<p>The next step is to set up the task configuration file <code>tasks.json</code>. To do this, run <strong>Terminal</strong> &gt; <strong>Configure Tasks</strong> and click <strong>Create tasks.json file from templates</strong>. VS Code then presents a list of possible <code>tasks.json</code> templates to choose from. Select <strong>Others</strong> since we want to run an external command.</p>
+<p>This generates a <code>tasks.json</code> file in your workspace <code>.vscode</code> folder with the following content:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="er">//</span> <span class="er">See</span> <span class="er">https</span><span class="fu">:</span><span class="er">//go.microsoft.com/fwlink/?LinkId=</span><span class="dv">733558</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="er">//</span> <span class="er">for</span> <span class="er">the</span> <span class="er">documentation</span> <span class="er">about</span> <span class="er">the</span> <span class="er">tasks.json</span> <span class="er">format</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="st">&quot;version&quot;</span><span class="er">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-7" title="7">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;echo&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-8" title="8">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;shell&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-9" title="9">      <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;echo Hello&quot;</span></a>
+<a class="sourceLine" id="cb5-10" title="10">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb5-11" title="11">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="fu">}</span></a></code></pre></div>
+<p>To use <strong>markdown-it</strong> to compile the Markdown file, change the contents as follows:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="er">//</span> <span class="er">See</span> <span class="er">https</span><span class="fu">:</span><span class="er">//go.microsoft.com/fwlink/?LinkId=</span><span class="dv">733558</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="er">//</span> <span class="er">for</span> <span class="er">the</span> <span class="er">documentation</span> <span class="er">about</span> <span class="er">the</span> <span class="er">tasks.json</span> <span class="er">format</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="st">&quot;version&quot;</span><span class="er">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-7" title="7">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;Compile Markdown&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-8" title="8">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;shell&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-9" title="9">      <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;markdown-it sample.md -o sample.html&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-10" title="10">      <span class="dt">&quot;group&quot;</span><span class="fu">:</span> <span class="st">&quot;build&quot;</span></a>
+<a class="sourceLine" id="cb6-11" title="11">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-12" title="12">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="fu">}</span></a></code></pre></div>
+<blockquote>
+<p><strong>Tip:</strong> While the sample is there to help with common configuration settings, IntelliSense is available for the <code>tasks.json</code> file as well to help you along. Use <code>kb(editor.action.triggerSuggest)</code> to see the available settings.</p>
+</blockquote>
+<h3 id="step-4-run-the-build-task">Step 4: Run the Build Task</h3>
+<p>Since in more complex environments there can be more than one build task we prompt you to pick the task to execute after pressing <code>kb(workbench.action.tasks.build)</code> (<strong>Run Build Task</strong>). In addition, we allow you to scan the output for compile problems. Since we only want to convert the Markdown file to HTML select <strong>Never scan the build output</strong> from the presented list.</p>
+<p>At this point, you should see an additional file show up in the file list <code>sample.html</code>.</p>
+<p>If you want to make the <strong>Compile Markdown</strong> task the default build task to run execute <strong>Configure Default Build Task</strong> from the global <strong>Terminal</strong> menu and select <strong>Compile Markdown</strong> from the presented list. The final <code>tasks.json</code> file will then look like this:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="er">//</span> <span class="er">See</span> <span class="er">https</span><span class="fu">:</span><span class="er">//go.microsoft.com/fwlink/?LinkId=</span><span class="dv">733558</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="er">//</span> <span class="er">for</span> <span class="er">the</span> <span class="er">documentation</span> <span class="er">about</span> <span class="er">the</span> <span class="er">tasks.json</span> <span class="er">format</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="st">&quot;version&quot;</span><span class="er">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-7" title="7">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;Compile Markdown&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-8" title="8">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;shell&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-9" title="9">      <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;markdown-it sample.md -o sample.html&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-10" title="10">      <span class="dt">&quot;problemMatcher&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-11" title="11">      <span class="dt">&quot;group&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-12" title="12">        <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-13" title="13">        <span class="dt">&quot;isDefault&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb7-14" title="14">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-15" title="15">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-16" title="16">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb7-17" title="17"><span class="fu">}</span></a></code></pre></div>
+<h2 id="automating-markdown-compilation">Automating Markdown compilation</h2>
+<p>Let’s take things a little further and automate Markdown compilation with VS Code. We can do so with the same task runner integration as before, but with a few modifications.</p>
+<h3 id="step-1-install-gulp-and-some-plug-ins">Step 1: Install Gulp and some plug-ins</h3>
+<p>We use <a href="https://gulpjs.com/">Gulp</a> to create a task that automates Markdown compilation. We also use the <a href="https://www.npmjs.com/package/gulp-markdown">gulp-markdown</a> plug-in to make things a little easier.</p>
+<p>We need to install gulp both globally (<code>-g</code> switch) and locally:</p>
+<pre><code>npm install -g gulp
+npm install gulp gulp-markdown-it</code></pre>
+<blockquote>
+<p><strong>Note:</strong> gulp-markdown-it is a Gulp plug-in for the <strong>markdown-it</strong> module we were using before. There are many other Gulp Markdown plug-ins you can use, as well as plug-ins for Grunt.</p>
+</blockquote>
+<p>You can test that your gulp installation was successful by typing <code>gulp -v</code>. You should see a version displayed for both the global (CLI) and local installations.</p>
+<h3 id="step-2-create-a-simple-gulp-task">Step 2: Create a simple Gulp task</h3>
+<p>Open VS Code on the same folder from before (contains <code>sample.md</code> and <code>tasks.json</code> under the <code>.vscode</code> folder), and create <code>gulpfile.js</code> at the root.</p>
+<p>Place the following source code in that file:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">var</span> gulp <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;gulp&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">var</span> markdown <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;gulp-markdown-it&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="va">gulp</span>.<span class="at">task</span>(<span class="st">&quot;markdown&quot;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-5" title="5">  <span class="cf">return</span> gulp</a>
+<a class="sourceLine" id="cb9-6" title="6">    .<span class="at">src</span>(<span class="st">&quot;**/*.md&quot;</span>)</a>
+<a class="sourceLine" id="cb9-7" title="7">    .<span class="at">pipe</span>(<span class="at">markdown</span>())</a>
+<a class="sourceLine" id="cb9-8" title="8">    .<span class="at">pipe</span>(</a>
+<a class="sourceLine" id="cb9-9" title="9">      <span class="va">gulp</span>.<span class="at">dest</span>(<span class="kw">function</span> (f) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-10" title="10">        <span class="cf">return</span> <span class="va">f</span>.<span class="at">base</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb9-11" title="11">      <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb9-12" title="12">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-13" title="13"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-14" title="14"></a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="va">gulp</span>.<span class="at">task</span>(<span class="st">&quot;default&quot;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-16" title="16">  <span class="cf">return</span> <span class="va">gulp</span>.<span class="at">watch</span>(<span class="st">&quot;**/*.md&quot;</span><span class="op">,</span> <span class="va">gulp</span>.<span class="at">series</span>([<span class="st">&quot;markdown&quot;</span>]))<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-17" title="17"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>What is happening here?</p>
+<ol type="1">
+<li>We are watching for changes to any Markdown file in our workspace, i.e. the current folder open in VS Code.</li>
+<li>We take the set of Markdown files that have changed, and run them through our Markdown compiler, i.e. <code>gulp-markdown-it</code>.</li>
+<li>We now have a set of HTML files, each named respectively after their original Markdown file. We then put these files in the same directory.</li>
+</ol>
+<h3 id="step-3-run-the-gulp-default-task">Step 3: Run the gulp default Task</h3>
+<p>To complete the tasks integration with VS Code, we will need to modify the task configuration from before to run the default Gulp task we just created. You can either delete the <code>tasks.json</code> file or empty it only keeping the <code>"version": "2.0.0"</code> property. Now execute <strong>Run Task</strong> from the global <strong>Terminal</strong> menu. Observe that you are presented with a picker listing the tasks defined in the gulp file. Select <strong>gulp: default</strong> to start the task. We allow you to scan the output for compile problems. Since we only want to convert the Markdown file to HTML select <strong>Never scan the build output</strong> from the presented list. At this point, if you create and/or modify other Markdown files, you see the respective HTML files generated and/or changes reflected on save. You can also enable <a href="/docs/editor/codebasics.md#saveauto-save">Auto Save</a> to make things even more streamlined.</p>
+<p>If you want to make the <strong>gulp: default</strong> task the default build task executed when pressing <code>kb(workbench.action.tasks.build)</code> run <strong>Configure Default Build Task</strong> from the global <strong>Terminal</strong> menu and select <strong>gulp: default</strong> from the presented list. The final <code>tasks.json</code> file will then look like this:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb10-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="er">//</span> <span class="er">See</span> <span class="er">https</span><span class="fu">:</span><span class="er">//go.microsoft.com/fwlink/?LinkId=</span><span class="dv">733558</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="er">//</span> <span class="er">for</span> <span class="er">the</span> <span class="er">documentation</span> <span class="er">about</span> <span class="er">the</span> <span class="er">tasks.json</span> <span class="er">format</span></a>
+<a class="sourceLine" id="cb10-4" title="4">  <span class="st">&quot;version&quot;</span><span class="er">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-5" title="5">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb10-6" title="6">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-7" title="7">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;gulp&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-8" title="8">      <span class="dt">&quot;task&quot;</span><span class="fu">:</span> <span class="st">&quot;default&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-9" title="9">      <span class="dt">&quot;problemMatcher&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-10" title="10">      <span class="dt">&quot;group&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-11" title="11">        <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-12" title="12">        <span class="dt">&quot;isDefault&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb10-13" title="13">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb10-14" title="14">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb10-15" title="15">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb10-16" title="16"><span class="fu">}</span></a></code></pre></div>
+<h3 id="step-4-terminate-the-gulp-default-task">Step 4: Terminate the gulp default Task</h3>
+<p>The <strong>gulp: default</strong> task runs in the background and watches for file changes to Markdown files. If you want to stop the task, you can use the <strong>Terminate Task</strong> from the global <strong>Terminal</strong> menu.</p>
+<h2 id="next-steps">Next steps</h2>
+<p>Read on to find out about:</p>
+<ul>
+<li><a href="/docs/languages/css.md">CSS, SCSS, and Less</a> - Want to edit your CSS? VS Code has great support for CSS, SCSS, and Less editing.</li>
+</ul>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="is-there-spell-checking">Is there spell checking?</h3>
+<p>Not installed with VS Code but there are spell checking extensions. Check the <a href="https://marketplace.visualstudio.com/vscode">VS Code Marketplace</a> to look for useful extensions to help with your workflow.</p>
+<h3 id="does-vs-code-support-github-flavored-markdown">Does VS Code support GitHub Flavored Markdown?</h3>
+<p>No, VS Code targets the <a href="https://commonmark.org">CommonMark</a> Markdown specification using the <a href="https://github.com/markdown-it/markdown-it">markdown-it</a> library. GitHub is moving toward the CommonMark specification which you can read about in this <a href="https://github.blog/2017-03-14-a-formal-spec-for-github-markdown/">update</a>.</p>
+<h3 id="in-the-walkthrough-above-i-didnt-find-the-configure-task-command-in-the-command-palette">In the walkthrough above, I didn’t find the Configure Task command in the Command Palette?</h3>
+<p>You may have opened a file in VS Code rather than a folder. You can open a folder by either selecting the folder with <strong>File</strong> &gt; <strong>Open Folder</strong> or navigating to the folder and typing ‘code .’ at the command line.</p>
+</body>
+</html>

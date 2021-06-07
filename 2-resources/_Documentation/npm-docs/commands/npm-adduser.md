@@ -25,7 +25,7 @@ To reset your password, go to <https://www.npmjs.com/forgot>
 To change your email address, go to <https://www.npmjs.com/email-edit>
 
 You may use this command multiple times with the same user account to
-authorize on a new machine.  When authenticating on a new machine,
+authorize on a new machine. When authenticating on a new machine,
 the username, password and email address must all match with
 your existing record.
 
@@ -75,8 +75,8 @@ different hostnames. See `always-auth` in [`config`](/using-npm/config) for more
 
 #### auth-type
 
-* Default: `'legacy'`
-* Type: `'legacy'`, `'sso'`, `'saml'`, `'oauth'`
+- Default: `'legacy'`
+- Type: `'legacy'`, `'sso'`, `'saml'`, `'oauth'`
 
 What authentication strategy to use with `adduser`/`login`. Some npm registries
 (for example, npmE) might support alternative auth strategies besides classic
@@ -84,8 +84,8 @@ username/password entry in legacy npm.
 
 ### See Also
 
-* [npm registry](/using-npm/registry)
-* [npm config](/commands/npm-config)
-* [npmrc](/configuring-npm/npmrc)
-* [npm owner](/commands/npm-owner)
-* [npm whoami](/commands/npm-whoami)
+- [npm registry](/using-npm/registry)
+- [npm config](/commands/npm-config)
+- [npmrc](/configuring-npm/npmrc)
+- [npm owner](/commands/npm-owner)
+- [npm whoami](/commands/npm-whoami)

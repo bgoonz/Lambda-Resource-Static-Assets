@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>extension-marketplace</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="extension-marketplace">Extension Marketplace</h1>
+<p><strong>Increase the power of Visual Studio Code through Extensions</strong></p>
+<p>The features that Visual Studio Code includes out-of-the-box are just the start. VS Code extensions let you add languages, debuggers, and tools to your installation to support your development workflow. VS Code’s rich extensibility model lets extension authors plug directly into the VS Code UI and contribute functionality through the same APIs used by VS Code. This topic explains how to find, install, and manage VS Code extensions from the <a href="https://marketplace.visualstudio.com/VSCode">Visual Studio Code Marketplace</a>.</p>
+<h2 id="browse-for-extensions">Browse for extensions</h2>
+<p>You can browse and install extensions from within VS Code. Bring up the Extensions view by clicking on the Extensions icon in the <strong>Activity Bar</strong> on the side of VS Code or the <strong>View: Extensions</strong> command (<code>kb(workbench.view.extensions)</code>).</p>
+<figure>
+<img src="images/extension-marketplace/extensions-view-icon.png" alt="Extensions view icon" /><figcaption>Extensions view icon</figcaption>
+</figure>
+<p>This will show you a list of the most popular VS Code extensions on the <a href="https://marketplace.visualstudio.com/VSCode">VS Code Marketplace</a>.</p>
+<figure>
+<img src="images/extension-marketplace/extensions-popular.png" alt="popular extensions" /><figcaption>popular extensions</figcaption>
+</figure>
+<p>Each extension in the list includes a brief description, the publisher, the download count, and a five star rating. You can click on the extension item to display the extension’s details page where you can learn more.</p>
+<blockquote>
+<p><strong>Note:</strong> If your computer’s Internet access goes through a proxy server, you will need to configure the proxy server. See <a href="/docs/setup/network.md#proxy-server-support">Proxy server support</a> for details.</p>
+</blockquote>
+<h3 id="install-an-extension">Install an extension</h3>
+<p>To install an extension, click the <strong>Install</strong> button. Once the installation is complete, the <strong>Install</strong> button will change to the <strong>Manage</strong> gear button.</p>
+<h3 id="extension-details">Extension details</h3>
+<p>On the extension details page, you can read the extension’s README as well as review the extension’s:</p>
+<ul>
+<li><strong>Contributions</strong> - The extension’s additions to VS Code such as settings, commands and keyboard shortcuts, language grammars, debugger, etc.</li>
+<li><strong>Changelog</strong> - The extension repository CHANGELOG if available.</li>
+<li><strong>Dependencies</strong> - Lists if the extension depends on any other extensions.</li>
+</ul>
+<figure>
+<img src="images/extension-marketplace/extension-contributions.png" alt="extension contributions" /><figcaption>extension contributions</figcaption>
+</figure>
+<p>If an extension is an Extension Pack, the <strong>Extension Pack</strong> section will display which extensions will be installed when you install the pack. <a href="/api/references/extension-manifest.md#extension-packs">Extension Packs</a> bundle separate extensions together so they can be easily installed at one time.</p>
+<figure>
+<img src="images/extension-marketplace/extension-dependencies.png" alt="extension dependencies" /><figcaption>extension dependencies</figcaption>
+</figure>
+<h3 id="extensions-view-commands">Extensions view commands</h3>
+<p>You can run various Extensions view commands by clicking on the Extensions view’s <code>...</code> <strong>More Actions</strong> button.</p>
+<figure>
+<img src="images/extension-marketplace/more-button.png" alt="more button" /><figcaption>more button</figcaption>
+</figure>
+<p>There are commands to show:</p>
+<ul>
+<li>The list of currently installed extensions</li>
+<li>The list of outdated extensions that can be updated</li>
+<li>The list of currently enabled/disabled extensions</li>
+<li>The list of recommended extensions based on your workspace</li>
+<li>The list of globally popular extensions</li>
+</ul>
+<p>You can sort the extension list by <strong>Install Count</strong> or <strong>Rating</strong> in either ascending or descending order. You can learn more about extension search filters <a href="#extensions-view-filters">below</a>.</p>
+<figure>
+<img src="images/extension-marketplace/more-dropdown.png" alt="more dropdown" /><figcaption>more dropdown</figcaption>
+</figure>
+<h3 id="search-for-an-extension">Search for an extension</h3>
+<p>You can clear the Search box at the top of the Extensions view and type in the name of the extension, tool, or programming language you’re looking for.</p>
+<p>For example, typing ‘python’ will bring up a list of Python language extensions:</p>
+<figure>
+<img src="images/extension-marketplace/extensions-python.png" alt="python extensions" /><figcaption>python extensions</figcaption>
+</figure>
+<p>If you know the exact identifier for an extension you’re looking for, you can use the <code>@id:</code> prefix, for example <code>@id:octref.vetur</code>. Additionally, to filter or sort results, you can use the <a href="#extensions-view-filters">filter</a> and <a href="#sorting">sort</a> commands, detailed below.</p>
+<h2 id="manage-extensions">Manage extensions</h2>
+<p>VS Code makes it easy to manage your extensions. You can install, disable, update, and uninstall extensions through the Extensions view, the <strong>Command Palette</strong> (commands have the <strong>Extensions:</strong> prefix) or command-line switches.</p>
+<h3 id="list-installed-extensions">List installed extensions</h3>
+<p>By default, the Extensions view will show the extensions you currently have enabled, all extensions that are recommended for you, and a collapsed view of all extensions you have disabled. You can use the <strong>Show Installed Extensions</strong> command, available in the <strong>Command Palette</strong> (<code>kb(workbench.action.showCommands)</code>) or the <strong>More Actions</strong> (<code>...</code>) dropdown menu, to clear any text in the search box and show the list of all installed extensions, which includes those that have been disabled.</p>
+<h3 id="uninstall-an-extension">Uninstall an extension</h3>
+<p>To uninstall an extension, click the gear button at the right of an extension entry and then choose <strong>Uninstall</strong> from the dropdown menu. This will uninstall the extension and prompt you to reload VS Code.</p>
+<figure>
+<img src="images/extension-marketplace/uninstall-extension.png" alt="uninstall an extension" /><figcaption>uninstall an extension</figcaption>
+</figure>
+<h3 id="disable-an-extension">Disable an extension</h3>
+<p>If you don’t want to permanently remove an extension, you can instead temporarily disable the extension by clicking the gear button at the right of an extension entry. You can disable an extension globally or just for your current Workspace. You will be prompted to reload VS Code after you disable an extension.</p>
+<p>If you want to quickly disable all installed extensions, there is a <strong>Disable All Installed Extensions</strong> command in the <strong>Command Palette</strong> and <strong>More Actions</strong> (<code>...</code>) dropdown menu.</p>
+<p>Extensions remain disabled for all VS Code sessions until you re-enable them.</p>
+<h3 id="enable-an-extension">Enable an extension</h3>
+<p>Similarly if you have disabled an extension (it will be in the <strong>Disabled</strong> section of the list and marked <strong><em>Disabled</em></strong>), you can re-enable it with the <strong>Enable</strong> or <strong>Enable (Workspace)</strong> commands in the dropdown menu.</p>
+<figure>
+<img src="images/extension-marketplace/enable-extension.png" alt="enable extension" /><figcaption>enable extension</figcaption>
+</figure>
+<p>There is also an <strong>Enable All Extensions</strong> command in the <strong>More Actions</strong> (<code>...</code>) dropdown menu.</p>
+<h3 id="extension-auto-update">Extension auto-update</h3>
+<p>VS Code checks for extension updates and installs them automatically. After an update, you will be prompted to reload VS Code. If you’d rather update your extensions manually, you can disable auto-update with the <strong>Disable Auto Updating Extensions</strong> command that sets the <code>extensions.autoUpdate</code> <a href="/docs/getstarted/settings.md">setting</a> to <code>false</code>. If you don’t want VS Code to even check for updates, you can set the <code>extensions.autoCheckUpdates</code> setting to false.</p>
+<h3 id="update-an-extension-manually">Update an extension manually</h3>
+<p>If you have extensions auto-update disabled, you can quickly look for extension updates by using the <strong>Show Outdated Extensions</strong> command that uses the <code>@outdated</code> filter. This will display any available updates for your currently installed extensions. Click the <strong>Update</strong> button for the outdated extension and the update will be installed and you’ll be prompted to reload VS Code. You can also update all your outdated extensions at one time with the <strong>Update All Extensions</strong> command. If you also have automatic checking for updates disabled, you can use the <strong>Check for Extension Updates</strong> command to check which of your extensions can be updated.</p>
+<h2 id="recommended-extensions">Recommended extensions</h2>
+<p>You can see a list of recommended extensions using <strong>Show Recommended Extensions</strong>, which sets the <code>@recommended</code> <a href="#extensions-view-filters">filter</a>. Extension recommendations can either be:</p>
+<ul>
+<li><strong>Workspace Recommendations</strong> - Recommended by other users of your current workspace.</li>
+<li><strong>Other Recommendations</strong> - Recommended based on recently opened files.</li>
+</ul>
+<p>See the section below to learn how to <a href="#workspace-recommended-extensions">contribute</a> recommendations for other users in your project.</p>
+<h3 id="ignoring-recommendations">Ignoring recommendations</h3>
+<p>To dismiss a recommendation, click on the extension item to open the Details pane and then press the <strong>Ignore Recommendation</strong> button. Ignored recommendations will no longer be recommended to you.</p>
+<figure>
+<img src="images/extension-marketplace/ignore-recommendation.png" alt="Ignore extension recommendation" /><figcaption>Ignore extension recommendation</figcaption>
+</figure>
+<h2 id="configuring-extensions">Configuring extensions</h2>
+<p>VS Code extensions may have very different configurations and requirements. Some extensions contribute <a href="/docs/getstarted/settings.md">settings</a> to VS Code, which can be modified in the Settings editor. Other extensions may have their own configuration files. Extensions may also require installation and setup of additional components like compilers, debuggers, and command-line tools. Consult the extension’s README (visible in the Extensions view details page) or go to the extension page on the <a href="https://marketplace.visualstudio.com/VSCode">VS Code Marketplace</a> (click on the extension name in the details page). Many extensions are open source and have a link to their repository on their Marketplace page.</p>
+<h2 id="command-line-extension-management">Command line extension management</h2>
+<p>To make it easier to automate and configure VS Code, it is possible to list, install, and uninstall extensions from the <a href="/docs/editor/command-line.md">command line</a>. When identifying an extension, provide the full name of the form <code>publisher.extension</code>, for example <code>ms-python.python</code>.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">code</span> --extensions-dir <span class="op">&lt;</span>dir<span class="op">&gt;</span></a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="ex">Set</span> the root path for extensions.</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="ex">code</span> --list-extensions</a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="ex">List</span> the installed extensions.</a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="ex">code</span> --show-versions</a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="ex">Show</span> versions of installed extensions, when using --list-extension.</a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="ex">code</span> --install-extension (<span class="op">&lt;</span>extension-id<span class="op">&gt;</span> <span class="kw">|</span> <span class="op">&lt;</span><span class="ex">extension-vsix-path</span><span class="op">&gt;</span>)</a>
+<a class="sourceLine" id="cb1-8" title="8">    <span class="ex">Installs</span> an extension.</a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="ex">code</span> --uninstall-extension (<span class="op">&lt;</span>extension-id<span class="op">&gt;</span> <span class="kw">|</span> <span class="op">&lt;</span><span class="ex">extension-vsix-path</span><span class="op">&gt;</span>)</a>
+<a class="sourceLine" id="cb1-10" title="10">    <span class="ex">Uninstalls</span> an extension.</a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="ex">code</span> --enable-proposed-api (<span class="op">&lt;</span>extension-id<span class="op">&gt;</span>)</a>
+<a class="sourceLine" id="cb1-12" title="12">    <span class="ex">Enables</span> proposed API features for extensions. Can receive one or more extension IDs to enable individually.</a></code></pre></div>
+<p>You can see the extension ID on the extension details page next to the extension name.</p>
+<figure>
+<img src="images/extension-marketplace/extension-identifier.png" alt="extension identifier" /><figcaption>extension identifier</figcaption>
+</figure>
+<h2 id="extensions-view-filters">Extensions view filters</h2>
+<p>The Extensions view search box supports filters to help you find and manage extensions. You may have seen filters such as <code>@installed</code> and <code>@recommended</code> if you used the commands <strong>Show Installed Extensions</strong> and <strong>Show Recommended Extensions</strong>. Also, there are filters available to let you sort by popularity or ratings and search by category (for example ‘Linters’) and tags (for example ‘node’). You can see a complete listing of all filters and sort commands by typing <code>@</code> in the extensions search box and navigating through the suggestions:</p>
+<figure>
+<img src="images/extension-marketplace/extension-search-filters.png" alt="intellisense on extension search filters" /><figcaption>intellisense on extension search filters</figcaption>
+</figure>
+<p>Here are the Extensions view filters:</p>
+<ul>
+<li><code>@builtin</code> - Show extensions that come with VS Code. Grouped by type (Programming Languages, Themes, etc.).</li>
+<li><code>@disabled</code> - Show disabled installed extensions.</li>
+<li><code>@installed</code> - Show installed extensions.</li>
+<li><code>@outdated</code> - Show outdated installed extensions. A newer version is available on the Marketplace.</li>
+<li><code>@enabled</code> - Show enabled installed extensions. Extensions can be individually enabled/disabled.</li>
+<li><code>@recommended</code> - Show recommended extensions. Grouped as Workspace specific or general use.</li>
+<li><code>@category</code> - Show extensions belonging to specified category. Below are a few of supported categories. For a complete list, type <code>@category</code> and follow the options in the suggestion list:
+<ul>
+<li><code>@category:themes</code></li>
+<li><code>@category:formatters</code></li>
+<li><code>@category:linters</code></li>
+<li><code>@category:snippets</code></li>
+</ul></li>
+</ul>
+<p>These filters can be combined as well. For example: Use <code>@installed @category:themes</code> to view all installed themes.</p>
+<p>If no filter is provided, the Extensions view displays the currently installed and recommended extensions.</p>
+<h3 id="sorting">Sorting</h3>
+<p>You can sort extensions with the <code>@sort</code> filter, which can take the following values:</p>
+<ul>
+<li><code>installs</code> - Sort by Marketplace installation count, in descending order.</li>
+<li><code>rating</code> - Sort by Marketplace rating (1-5 stars), in descending order.</li>
+<li><code>name</code> - Sort alphabetically by extension name.</li>
+</ul>
+<figure>
+<img src="images/extension-marketplace/sort-install-count.png" alt="sort by install count" /><figcaption>sort by install count</figcaption>
+</figure>
+<h3 id="categories-and-tags">Categories and tags</h3>
+<p>Extensions can set <strong>Categories</strong> and <strong>Tags</strong> describing their features.</p>
+<figure>
+<img src="images/extension-marketplace/categories-and-tags.png" alt="extension categories and tags" /><figcaption>extension categories and tags</figcaption>
+</figure>
+<p>You can filter on category and tag by using <code>category:</code> and <code>tag:</code>.</p>
+<p>Supported categories are: <code>[Programming Languages, Snippets, Linters, Themes, Debuggers, Formatters, Keymaps, SCM Providers, Other, Extension Packs, Language Packs, Data Science, Machine Learning, Visualization, Notebooks]</code>. They can be accessed through IntelliSense in the extensions search box:</p>
+<figure>
+<img src="images/extension-marketplace/extension-search-categories.png" alt="categories debuggers" /><figcaption>categories debuggers</figcaption>
+</figure>
+<p>Note that you must surround the category name in quotes if it is more than one word (for example, <code>category:"SCM Providers"</code>).</p>
+<p>Tags may contain any string and are not provided by IntelliSense, so review the Marketplace to find helpful tags.</p>
+<h2 id="install-from-a-vsix">Install from a VSIX</h2>
+<p>You can manually install a VS Code extension packaged in a <code>.vsix</code> file. Using the <strong>Install from VSIX</strong> command in the Extensions view command dropdown, or the <strong>Extensions: Install from VSIX</strong> command in the <strong>Command Palette</strong>, point to the <code>.vsix</code> file.</p>
+<p>You can also install using the VS Code <code>--install-extension</code> command-line switch providing the path to the <code>.vsix</code> file.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">code</span> --install-extension myextension.vsix</a></code></pre></div>
+<p>You may provide the <code>--install-extension</code> multiple times on the command line to install multiple extensions at once.</p>
+<p>If you’d like to learn more about packaging and publishing extensions, see our <a href="/api/working-with-extensions/publishing-extension.md">Publishing Extensions</a> topic in the Extension API.</p>
+<h2 id="workspace-recommended-extensions">Workspace recommended extensions</h2>
+<p>A good set of extensions can make working with a particular workspace or programming language more productive and you’d often like to share this list with your team or colleagues. You can create a recommended list of extensions for a workspace with the <strong>Extensions: Configure Recommended Extensions (Workspace Folder)</strong> command.</p>
+<p>In a single folder workspace, the command creates an <code>extensions.json</code> file located in the workspace <code>.vscode</code> folder where you can add a list of extensions identifiers ({publisherName}.{extensionName}).</p>
+<p>In a <a href="/docs/editor/multi-root-workspaces.md">multi-root workspace</a>, the command will open your <code>.code-workspace</code> file where you can list extensions under <code>extensions.recommendations</code>. You can still add extension recommendations to individual folders in a multi-root workspace by using the <strong>Extensions: Configure Recommended Extensions (Workspace Folder)</strong> command.</p>
+<p>An example <code>extensions.json</code> could be:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">&quot;recommendations&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;dbaeumer.vscode-eslint&quot;</span><span class="ot">,</span> <span class="st">&quot;msjsdiag.debugger-for-chrome&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="fu">}</span></a></code></pre></div>
+<p>which recommends a linter extension, ESLint, and the Chrome debugger extension.</p>
+<p>An extension is identified using its publisher name and extension identifier <code>publisher.extension</code>. You can see the name on the extension’s detail page. VS Code will provide you with auto-completion for installed extensions inside these files.</p>
+<p><img src="images/extension-marketplace/extension-identifier.png" alt="Extension identifier" />.</p>
+<p>VS Code prompts a user to install the recommended extensions when a workspace is opened for the first time. The user can also review the list with the <strong>Extensions: Show Recommended Extensions</strong> command.</p>
+<figure>
+<img src="images/extension-marketplace/recommendations.png" alt="Show Recommendations" /><figcaption>Show Recommendations</figcaption>
+</figure>
+<h2 id="next-steps">Next steps</h2>
+<p>Here are a few topics you may find interesting…</p>
+<ul>
+<li><a href="/api">Extension API</a> - Start learning about the VS Code extension API.</li>
+<li><a href="/api/get-started/your-first-extension.md">Your First Extension</a> - Try creating a simple Hello World extension.</li>
+<li><a href="/api/working-with-extensions/publishing-extension.md">Publishing to the Marketplace</a> - Publish your own extension to the VS Code Marketplace.</li>
+</ul>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="where-are-extensions-installed">Where are extensions installed?</h3>
+<p>Extensions are installed in a per user extensions folder. Depending on your platform, the location is in the following folder:</p>
+<ul>
+<li><strong>Windows</strong> <code>%USERPROFILE%\.vscode\extensions</code></li>
+<li><strong>macOS</strong> <code>~/.vscode/extensions</code></li>
+<li><strong>Linux</strong> <code>~/.vscode/extensions</code></li>
+</ul>
+<p>You can change the location by launching VS Code with the <code>--extensions-dir &lt;dir&gt;</code> command-line <a href="/docs/editor/command-line.md">option</a>.</p>
+<h3 id="whenever-i-try-to-install-any-extension-i-get-a-connect-etimedout-error">Whenever I try to install any extension, I get a connect ETIMEDOUT error</h3>
+<p>You may see this error if your machine is going through a proxy server to access the Internet. See the <a href="/docs/setup/network.md#proxy-server-support">Proxy server support</a> section in the setup topic for details.</p>
+<h3 id="can-i-download-an-extension-directly-from-the-marketplace">Can I download an extension directly from the Marketplace?</h3>
+<p>Some users prefer to download an extension once from the Marketplace and then install it multiple times from a local share. This is useful when there are connectivity concerns or if your development team wants to use a fixed set of extensions.</p>
+<p>To download an extension, navigate to the details page for the specific extension within the <a href="https://marketplace.visualstudio.com/vscode">Marketplace</a>. On that page, there is a <strong>Download Extension</strong> link in the <strong>Resources</strong> section, which is located on the right-hand side of the page.</p>
+<p>Once downloaded, you can then install the extension via the <strong>Install from VSIX</strong> command in the Extensions view command dropdown.</p>
+<h3 id="can-i-stop-vs-code-from-providing-extension-recommendations">Can I stop VS Code from providing extension recommendations?</h3>
+<p>Yes, if you would prefer to not have VS Code display extension recommendations in the Extensions view or through notifications, you can modify the following settings:</p>
+<ul>
+<li><code>extensions.showRecommendationsOnlyOnDemand</code> - Set to true to remove the <strong>RECOMMENDED</strong> section.</li>
+<li><code>extensions.ignoreRecommendations</code> - Set to true to silence extension recommendation notifications.</li>
+</ul>
+<p>The <strong>Show Recommended Extensions</strong> command is always available if you wish to see recommendations.</p>
+<h3 id="can-i-trust-extensions-from-the-marketplace">Can I trust extensions from the Marketplace?</h3>
+<p>The Marketplace runs a virus scan on each extension package that’s published to ensure its safety. The virus scan is run for each new extension and for each extension update. Until the scan is all clear, the extension won’t be published in the Marketplace for public usage.</p>
+<p>The Marketplace also prevents extension authors from name-squatting on official publishers such as Microsoft and RedHat.</p>
+<p>If a malicious extension is reported and verified, or a vulnerability is found in an extension dependency:</p>
+<ol type="1">
+<li>The extension is removed from the Marketplace.</li>
+<li>The extension is added to a kill list so that if it has been installed, it will be automatically uninstalled by VS Code.</li>
+</ol>
+<p>The Marketplace also provides you with resources to make an informed decision about the extensions you install:</p>
+<ul>
+<li><strong>Ratings &amp; Review</strong> - Read what others think about the extension.</li>
+<li><strong>Q &amp; A</strong> - Review existing questions and the level of the publisher’s responsiveness. You can also engage with the extension’s publisher(s) if you have concerns.</li>
+<li><strong>Issues, Repository, and License</strong> - Check if the publisher has provided these and if they have the support you expect.</li>
+</ul>
+<p>If you do see an extension that looks suspicious, you can report the extension to the Marketplace with the <strong>Report Abuse</strong> link at the bottom of the extension <strong>More Info</strong> section.</p>
+</body>
+</html>

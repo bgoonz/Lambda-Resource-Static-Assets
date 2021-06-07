@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>jupyter-support-py</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="working-with-the-python-interactive-window">Working with the Python Interactive window</h1>
+<p><a href="https://jupyter-notebook.readthedocs.io/en/latest/">Jupyter</a> (formerly IPython Notebook) is an open-source project that lets you easily combine Markdown text and executable Python source code on one canvas called a <strong>notebook</strong>. Visual Studio Code supports working with <a href="/docs/python/jupyter-support.md">Jupyter Notebooks natively</a>, as well as through Python code files. This topic covers the support offered through Python code files and demonstrates how to:</p>
+<ul>
+<li>Work with Jupyter-like code cells</li>
+<li>Run code in the Python Interactive Window</li>
+<li>View, inspect, and filter variables using the Variable explorer and data viewer</li>
+<li>Connect to a remote Jupyter server</li>
+<li>Debug a Jupyter notebook</li>
+<li>Export a Jupyter notebook</li>
+</ul>
+<p>To work with Jupyter notebooks, you must activate an Anaconda environment in VS Code, or another Python environment in which you’ve installed the <a href="https://pypi.org/project/jupyter/">Jupyter package</a>. To select an environment, use the <strong>Python: Select Interpreter</strong> command from the Command Palette (<code>kb(workbench.action.showCommands)</code>).</p>
+<p>Once the appropriate environment is activated, you can create and run Jupyter-like code cells, connect to a remote Jupyter server for running code cells, and export Python files as Jupyter notebooks.</p>
+<h2 id="jupyter-code-cells">Jupyter code cells</h2>
+<p>You define Jupyter-like code cells within Python code using a <code># %%</code> comment:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># %%</span></a>
+<a class="sourceLine" id="cb1-2" title="2">msg <span class="op">=</span> <span class="st">&quot;Hello World&quot;</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="bu">print</span>(msg)</a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co"># %%</span></a>
+<a class="sourceLine" id="cb1-6" title="6">msg <span class="op">=</span> <span class="st">&quot;Hello again&quot;</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="bu">print</span>(msg)</a></code></pre></div>
+<blockquote>
+<p><strong>Note</strong>: Make sure to save the code shown above in a file with a .py extension.</p>
+</blockquote>
+<p>When the Python extension detects a code cell, it adds <strong>Run Cell</strong> and <strong>Debug Cell</strong> CodeLens adornments. The first cell also includes <strong>Run Below</strong> and all subsequent cells include <strong>Run Above</strong>:</p>
+<figure>
+<img src="images/jupyter/code-cells-01.png" alt="Jupyter adornments for code cells in the VS Code editor" /><figcaption>Jupyter adornments for code cells in the VS Code editor</figcaption>
+</figure>
+<blockquote>
+<p><strong>Note:</strong> By default, <strong>Debug Cell</strong> just steps into user code. If you want to step into non-user code, you need to uncheck <strong>Data Science: Debug Just My Code</strong> in the Python extension settings (<code>kb(workbench.action.openSettings)</code>).</p>
+</blockquote>
+<p><strong>Run Cell</strong> applies to only the one code cell. <strong>Run Below</strong>, which appears on the first cell, runs all the code in the file. <strong>Run Above</strong> applies to all the code cells up to, but not including, the cell with the adornment. You would use <strong>Run Above</strong>, for example, to initialize the state of the runtime environment before running that specific cell.</p>
+<p>Selecting a command starts Jupyter (if necessary, which might take a minute), then runs the appropriate cell(s) in the <strong>Python Interactive</strong> window:</p>
+<figure>
+<img src="images/jupyter/code-cells-02.png" alt="Code cells running in a Python Interactive window" /><figcaption>Code cells running in a Python Interactive window</figcaption>
+</figure>
+<p>You can also run code cells using (<code>kbstyle(Ctrl+Enter)</code>) or the <strong>Python: Run Selection/Line in Python Terminal</strong> command (<code>kbstyle(Shift+Enter)</code>). After using this command, the Python extension automatically moves the cursor to the next cell. If you’re in the last cell in the file, the extension automatically inserts another <code># %%</code> delimiter for a new cell, mimicking the behavior of a Jupyter notebook.</p>
+<p>You can also click in the margin to the left of line numbers to set breakpoints. Then you can use <strong>Debug Cell</strong> to start a debugging session for that code cell. The debugger stops execution at breakpoints and allows you to step through code one line at a time and inspect variables (see <a href="debugging.md">Debugging</a> for details).</p>
+<h3 id="additional-commands-and-keyboard-shortcuts">Additional commands and keyboard shortcuts</h3>
+<p>The following table lists additional commands and keyboard shortcuts supported when working with code cells.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Keyboard shortcut</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Python: Go to Next Cell</td>
+<td><code>kbstyle(Ctrl+Alt+])</code></td>
+</tr>
+<tr class="even">
+<td>Python: Go to Previous Cell</td>
+<td><code>kbstyle(Ctrl+Alt+[)</code></td>
+</tr>
+<tr class="odd">
+<td>Python: Extend Selection by Cell Above</td>
+<td><code>kbstyle(Ctrl+Shift+Alt+[)</code></td>
+</tr>
+<tr class="even">
+<td>Python: Extend Selection by Cell Below</td>
+<td><code>kbstyle(Ctrl+Shift+Alt+])</code></td>
+</tr>
+<tr class="odd">
+<td>Python: Move Selected Cells Up</td>
+<td><code>kbstyle(Ctrl+; U)</code></td>
+</tr>
+<tr class="even">
+<td>Python: Move Selected Cells Down</td>
+<td><code>kbstyle(Ctrl+; D)</code></td>
+</tr>
+<tr class="odd">
+<td>Python: Insert Cell Above</td>
+<td><code>kbstyle(Ctrl+; A)</code></td>
+</tr>
+<tr class="even">
+<td>Python: Insert Cell Below</td>
+<td><code>kbstyle(Ctrl+; B)</code></td>
+</tr>
+<tr class="odd">
+<td>Python: Insert Cell Below Position</td>
+<td><code>kbstyle(Ctrl+; S)</code></td>
+</tr>
+<tr class="even">
+<td>Python: Delete Selected Cells</td>
+<td><code>kbstyle(Ctrl+; X)</code></td>
+</tr>
+<tr class="odd">
+<td>Python: Change Cell to Code</td>
+<td><code>kbstyle(Ctrl+; C)</code></td>
+</tr>
+<tr class="even">
+<td>Python: Change Cell to Markdown</td>
+<td><code>kbstyle(Ctrl+; M)</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="python-interactive-window">Python Interactive window</h2>
+<p>The <strong>Python Interactive</strong> window, mentioned in the previous section, can be used as a standalone console with arbitrary code (with or without code cells). To use the window as a console, open it with the <strong>Jupyter: Create Interactive Window</strong> command from the Command Palette. You can then type in code, using <code>kbstyle(Enter)</code> to go to a new line and <code>kbstyle(Shift+Enter)</code> to run the code.</p>
+<p>To use the window with a file, use the <strong>Jupyter: Run Current File in Python Interactive Window</strong> command from the Command Palette.</p>
+<h3 id="intellisense">IntelliSense</h3>
+<p>The Python Interactive window has full IntelliSense – code completions, member lists, quick info for methods, and parameter hints. You can be just as productive typing in the Python Interactive window as you are in the code editor.</p>
+<figure>
+<img src="images/jupyter/interactive-window-intellisense.gif" alt="IntelliSense in the Python Interactive window" /><figcaption>IntelliSense in the Python Interactive window</figcaption>
+</figure>
+<h3 id="plot-viewer">Plot Viewer</h3>
+<p>The Plot Viewer gives you the ability to work more deeply with your plots. In the viewer you can pan, zoom, and navigate plots in the current session. You can also export plots to PDF, SVG, and PNG formats.</p>
+<p>Within the Python Interactive window, double-click any plot to open it in the viewer, or select the expand button on the upper left corner of the plot.</p>
+<figure>
+<img src="images/jupyter/plot-viewer.gif" alt="Plot Viewer with the Python Interactive window" /><figcaption>Plot Viewer with the Python Interactive window</figcaption>
+</figure>
+<blockquote>
+<p><strong>Note:</strong> The Python Interactive window supports rendering plots created with <a href="https://matplotlib.org/">matplotlib</a> and <a href="https://altair-viz.github.io/index.html">Altair</a>.</p>
+</blockquote>
+<h3 id="live-share-for-python-interactive">Live Share for Python Interactive</h3>
+<p>The Python Interactive window also supports <a href="https://visualstudio.microsoft.com/services/live-share/">Visual Studio Live Share</a> for real-time collaboration. Live Share lets you co-edit and co-debug while sharing audio, servers, terminals, diffs, comments, and more.</p>
+<figure>
+<img src="images/jupyter/live-share-and-interactive.gif" alt="Live Share for the Python Interactive window" /><figcaption>Live Share for the Python Interactive window</figcaption>
+</figure>
+<p>This feature requires the <a href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack">Live Share extensions</a> to be installed on both host and guest machines.</p>
+<h2 id="variable-explorer-and-data-viewer">Variable explorer and data viewer</h2>
+<p>Within the Python Interactive window, it’s possible to view, inspect, and filter the variables within your current Jupyter session. By expanding the <strong>Variables</strong> section after running code and cells, you’ll see a list of the current variables, which will automatically update as variables are used in code.</p>
+<figure>
+<img src="images/jupyter/jupyter-variable-explorer.png" alt="Variable Explorer" /><figcaption>Variable Explorer</figcaption>
+</figure>
+<p>For additional information about your variables, you can also double-click on a row or use the <strong>Show variable in data viewer</strong> button to see a more detailed view of a variable in the Data Viewer. Once open, you can filter the values by searching over the rows.</p>
+<figure>
+<img src="images/jupyter/jupyter-data-viewer.png" alt="Data Viewer" /><figcaption>Data Viewer</figcaption>
+</figure>
+<blockquote>
+<p><strong>Note:</strong> Variable explorer is enabled by default, but can be turned off in settings (Python &gt; Data Science: Show Jupyter Variable Explorer).</p>
+</blockquote>
+<h2 id="connect-to-a-remote-jupyter-server">Connect to a remote Jupyter server</h2>
+<p>You can offload intensive computation in a Jupyter notebook to other computers by connecting to a remote Jupyter server. Once connected, code cells run on the remote server rather than the local computer.</p>
+<p>To connect to a remote Jupyter server:</p>
+<ol type="1">
+<li>Run the <strong>Jupyter: Specify local or remote Jupyter server for connections</strong> command from the Command Palette (<code>kb(workbench.action.showCommands)</code>).</li>
+<li>Select how you would like to connect to a Jupyter server. <img src="images/jupyter/local-remote-connections.png" alt="Prompt to supply a Jupyter server URI" /></li>
+<li><p>If working remotely, provide the server’s URI (hostname) with the authentication token included with a <code>?token=</code> URL parameter when prompted. (If you start the server in the VS Code terminal with an authentication token enabled, the URL with the token typically appears in the terminal output from where you can copy it.) Alternatively, you can specify a username and password after providing the URI.</p>
+<figure>
+<img src="images/jupyter/enter-url-auth-token.png" alt="Prompt to supply a Jupyter server URI" /><figcaption>Prompt to supply a Jupyter server URI</figcaption>
+</figure></li>
+<li><p>The Python Interactive window indicates where code is run by displaying the URI (which is blurred out in the image below):</p>
+<figure>
+<img src="images/jupyter/jupyter-running-remotely.png" alt="The Python Interactive window showing that code is running on a remote Jupyter server" /><figcaption>The Python Interactive window showing that code is running on a remote Jupyter server</figcaption>
+</figure></li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> For added security, Microsoft recommends configuring your Jupyter server with security precautions such as SSL and token support. This helps ensure that requests sent to the Jupyter server are authenticated and connections to the remoter server are encrypted. For guidance about securing a notebook server, see the <a href="https://jupyter-notebook.readthedocs.io/en/stable/public_server.html#securing-a-notebook-server">Jupyter docs</a>.</p>
+</blockquote>
+<h2 id="convert-jupyter-notebooks-to-python-code-file">Convert Jupyter notebooks to Python code file</h2>
+<p>When you’ve activated an environment with Jupyter installed, you can open a Jupyter notebook file (<code>.ipynb</code>) in VS Code and then convert it to Python code. Once you’ve converted the file, you can run the code as you would with any other Python file and also use the VS Code debugger. Opening and debugging notebooks in VS Code is a convenient way to find and resolve code bugs, which is difficult to do directly in a Jupyter notebook.</p>
+<p>When you open a notebook file, Visual Studio Code will open it in the Notebook Editor automatically. Use the convert icon on the toolbar to convert the Notebook (.ipynb) file to a Python file (.py).</p>
+<figure>
+<img src="images/jupyter/native-toolbar-convert.png" alt="Icon to convert a Jupyter notebook file" /><figcaption>Icon to convert a Jupyter notebook file</figcaption>
+</figure>
+<p>Select the convert icon followed by “Python Script”, wait a few seconds, and then VS Code opens the converted notebook in an untitled file. The notebook’s cells are delimited in the Python file with <code># %%</code> comments; Markdown cells are converted wholly to comments preceded with <code># %% [markdown]</code>, and render as HTML in the interactive window alongside code and output such as graphs:</p>
+<figure>
+<img src="images/jupyter/jupyter-notebook.png" alt="Jupyter notebook running in VS Code and the Python Interactive window" /><figcaption>Jupyter notebook running in VS Code and the Python Interactive window</figcaption>
+</figure>
+<blockquote>
+<p><strong>Note:</strong> The first time you run code cells in a Python file, the Python extension starts a Jupyter server. It may take some time for the server to start up and for the <strong>Python Interactive</strong> window to appear with the results of the code.</p>
+</blockquote>
+<h2 id="debug-a-jupyter-notebook">Debug a Jupyter notebook</h2>
+<p>The Visual Studio Code debugger lets you step through your code, set breakpoints, examine state, and analyze problems. Using the debugger is a helpful way to find and correct issues in notebook code.</p>
+<ol type="1">
+<li><p>In VS Code, activate a Python environment in which Jupyter is installed, as described at the beginning of this article.</p></li>
+<li><p>Import the notebook’s <code>.ipynb</code> file into VS Code as described in the previous section. (Download the file first if you’re using a cloud-based Jupyter environment such as <a href="https://docs.microsoft.com/azure/notebooks">Azure Notebooks</a>.)</p></li>
+<li><p>To start the debugger, use one of the following options:</p>
+<ul>
+<li>For the whole notebook, open the Command Palette (<code>kb(workbench.action.showCommands)</code>) and run the <strong>Jupyter: Debug Current File in Python Interactive Window</strong> command.</li>
+<li>For an individual cell, use the <strong>Debug Cell</strong> adornment that appears above the cell. The debugger specifically starts on the code in that cell. By default, <strong>Debug Cell</strong> just steps into user code. If you want to step into non-user code, you need to uncheck <strong>Data Science: Debug Just My Code</strong> in the Python extension settings (<code>kb(workbench.action.openSettings)</code>).</li>
+</ul></li>
+<li><p>To familiarize yourself with the general debugging features of VS Code, such as inspecting variables, setting breakpoints, and other activities, review <a href="/docs/editor/debugging.md">VS Code debugging</a>.</p></li>
+<li><p>As you find issues, stop the debugger, correct your code, save the file, and start the debugger again.</p></li>
+<li><p>When you’re satisfied that all your code is correct. Save the file, then export the notebook as described in the following section. You can then upload the notebook to your normal Jupyter environment.</p></li>
+</ol>
+<h2 id="export-a-jupyter-notebook">Export a Jupyter notebook</h2>
+<p>In addition to opening a Jupyter notebook, you can also use one of the following commands from the Command Palette (<code>kb(workbench.action.showCommands)</code>) to export content from a Python file in VS Code to a Jupyter notebook (with the <code>.ipynb</code> extension).</p>
+<ul>
+<li><strong>Jupyter: Export Current Python File as Jupyter Notebook</strong>: creates a Jupyter notebook from the contents of the current file, using the <code># %%</code> and <code># %% [markdown]</code> delimiters to specify their respective cell types.</li>
+<li><strong>Jupyter: Export Current Python File and Output as Jupyter Notebook</strong>: creates a Jupyter notebook from the contents of the current file and includes output from code cells.</li>
+<li><strong>Jupyter: Export Interactive Window as Jupyter Notebook</strong>: creates a Jupyter notebook from the contents of the Python Interactive window.</li>
+</ul>
+<p>After exporting the contents, VS Code displays a prompt through which you can open the notebook in a browser.</p>
+</body>
+</html>

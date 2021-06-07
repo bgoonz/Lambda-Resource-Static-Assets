@@ -7,6 +7,7 @@ PageTitle: The Natvis framework provides custom views for native C++ objects
 DateApproved: 07/25/2019
 MetaDescription: Learn how the Natvis framework provides custom views for native C++ objects in Visual Studio Code
 ---
+
 # Natvis: Custom views for native objects
 
 The [Natvis](https://docs.microsoft.com/visualstudio/debugger/create-custom-views-of-native-objects) framework allows developers to write custom schemas to help visualize native objects.

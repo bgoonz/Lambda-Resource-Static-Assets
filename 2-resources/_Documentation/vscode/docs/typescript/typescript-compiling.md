@@ -7,6 +7,7 @@ PageTitle: TypeScript Compiling with Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Learn about TypeScript compiling with Visual Studio Code.
 ---
+
 # Compiling TypeScript
 
 [TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript. It offers classes, modules, and interfaces to help you build robust components. The [TypeScript language specification](https://github.com/microsoft/TypeScript/tree/master/doc) has full details about the language.
@@ -48,11 +49,11 @@ A simple `tsconfig.json` looks like this for ES5, **CommonJS** [modules](http://
 
 ```json
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "sourceMap": true
-    }
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "sourceMap": true
+  }
 }
 ```
 
@@ -67,7 +68,7 @@ VS Code integrates with `tsc` through our integrated [task runner](/docs/editor/
 Open VS Code on an empty folder and create a `helloworld.ts` file, place the following code in that file...
 
 ```typescript
-let message : string = "Hello World";
+let message: string = "Hello World";
 console.log(message);
 ```
 
@@ -134,7 +135,7 @@ You can see the error and warning counts in the Status Bar. Click on the error a
 
 You can also use the keyboard to open the list `kb(workbench.actions.view.problems)`.
 
->**Tip:** Tasks offer rich support for many actions. Check the [Tasks](/docs/editor/tasks.md) topic for more information on how to configure them.
+> **Tip:** Tasks offer rich support for many actions. Check the [Tasks](/docs/editor/tasks.md) topic for more information on how to configure them.
 
 ## JavaScript source map support
 
@@ -148,11 +149,11 @@ Having the generated JavaScript file in the same folder at the TypeScript source
 
 ```json
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "outDir": "out"
-    }
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "out"
+  }
 }
 ```
 
@@ -185,8 +186,8 @@ VS Code ships with a recent stable version of the TypeScript language service an
 
 Reasons for doing this include:
 
-* Trying out the latest TypeScript features by switching to the TypeScript nightly build (`typescript@next`).
-* Making sure you are using the same version of TypeScript for IntelliSense that you use to compile your code.
+- Trying out the latest TypeScript features by switching to the TypeScript nightly build (`typescript@next`).
+- Making sure you are using the same version of TypeScript for IntelliSense that you use to compile your code.
 
 The active TypeScript version and its install location are displayed in the Status Bar when viewing a TypeScript file:
 
@@ -208,11 +209,11 @@ For example:
 
 ```json
 {
-   "typescript.tsdk": "/usr/local/lib/node_modules/typescript/lib"
+  "typescript.tsdk": "/usr/local/lib/node_modules/typescript/lib"
 }
 ```
 
->**Tip:** To get a specific TypeScript version, specify `@version` during npm install. For example, for TypeScript 3.6.0, you would use `npm install --save-dev typescript@3.6.0`. To preview the next version of TypeScript, run `npm install --save-dev typescript@next`.
+> **Tip:** To get a specific TypeScript version, specify `@version` during npm install. For example, for TypeScript 3.6.0, you would use `npm install --save-dev typescript@3.6.0`. To preview the next version of TypeScript, run `npm install --save-dev typescript@next`.
 
 Note that while `typescript.tsdk` points to the `lib` directory inside of `typescript` in these examples, the `typescript` directory must be a full TypeScript install that contains the TypeScript `package.json` file.
 
@@ -220,7 +221,7 @@ You can also tell VS Code to use a specific version of TypeScript in a particula
 
 ```json
 {
-   "typescript.tsdk": "./node_modules/typescript/lib"
+  "typescript.tsdk": "./node_modules/typescript/lib"
 }
 ```
 
@@ -236,7 +237,7 @@ This extension automatically replaces VS Code's built-in TypeScript version with
 
 It is possible to have mixed TypeScript and JavaScript projects. To enable JavaScript inside a TypeScript project, you can set the `allowJs` property to `true` in the `tsconfig.json`.
 
->**Tip:** The `tsc` compiler does not detect the presence of a `jsconfig.json` file automatically. Use the `–p` argument to make `tsc` use your `jsconfig.json` file, e.g. `tsc -p jsconfig.json`.
+> **Tip:** The `tsc` compiler does not detect the presence of a `jsconfig.json` file automatically. Use the `–p` argument to make `tsc` use your `jsconfig.json` file, e.g. `tsc -p jsconfig.json`.
 
 ## Working with large projects
 
@@ -258,7 +259,7 @@ See the [TypeScript documentation](https://www.typescriptlang.org/docs/handbook/
 
 Read on to find out about:
 
-* [Debugging TypeScript](/docs/typescript/typescript-debugging.md) - Configure the debugger for your TypeScript project.
+- [Debugging TypeScript](/docs/typescript/typescript-debugging.md) - Configure the debugger for your TypeScript project.
 
 ## Common questions
 
@@ -278,12 +279,12 @@ No, the TypeScript language service that ships with Visual Studio 2015 and 2017 
 
 By default, VS Code TypeScript displays code style issues as warnings instead of errors. This applies to:
 
-* Variable is declared but never used
-* Property is declared but its value is never read
-* Unreachable code detected
-* Unused label
-* Fall through case in switch
-* Not all code paths return a value
+- Variable is declared but never used
+- Property is declared but its value is never read
+- Unreachable code detected
+- Unused label
+- Fall through case in switch
+- Not all code paths return a value
 
 Treating these as warnings is consistent with other tools, such as TSLint. These will still be displayed as errors when you run `tsc` from the command line.
 

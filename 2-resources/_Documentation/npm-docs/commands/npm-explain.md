@@ -38,7 +38,7 @@ node_modules/tacks/node_modules/glob
 ```
 
 To explain just the package residing at a specific folder, pass that as the
-argument to the command.  This can be useful when trying to figure out
+argument to the command. This can be useful when trying to figure out
 exactly why a given dependency is being duplicated to satisfy conflicting
 version requirements within the project.
 
@@ -57,19 +57,19 @@ node_modules/nyc/node_modules/find-up
 
 #### json
 
-* Default: false
-* Type: Boolean
+- Default: false
+- Type: Boolean
 
 Show information in JSON format.
 
 ### See Also
 
-* [npm config](/commands/npm-config)
-* [npmrc](/configuring-npm/npmrc)
-* [npm folders](/configuring-npm/folders)
-* [npm ls](/commands/npm-ls)
-* [npm install](/commands/npm-install)
-* [npm link](/commands/npm-link)
-* [npm prune](/commands/npm-prune)
-* [npm outdated](/commands/npm-outdated)
-* [npm update](/commands/npm-update)
+- [npm config](/commands/npm-config)
+- [npmrc](/configuring-npm/npmrc)
+- [npm folders](/configuring-npm/folders)
+- [npm ls](/commands/npm-ls)
+- [npm install](/commands/npm-install)
+- [npm link](/commands/npm-link)
+- [npm prune](/commands/npm-prune)
+- [npm outdated](/commands/npm-outdated)
+- [npm update](/commands/npm-update)

@@ -7,6 +7,7 @@ PageTitle: Java in Visual Studio Code
 DateApproved: 1/29/2021
 MetaDescription: Learn about Visual Studio Code editor features (code completion, debugging, snippets, linting) for Java.
 ---
+
 # Java in Visual Studio Code
 
 Support for Java in Visual Studio Code is provided through a wide range of [extensions](/docs/editor/extension-marketplace.md). Combined with the power of core VS Code, these extensions give you a lightweight and performant code editor that also supports many of the most common Java development techniques.
@@ -79,7 +80,7 @@ This document describes some of the key features included in those Java extensio
 
 Before you start, you must have the Java SE Development Kit (JDK) on your local environment. To run the VS Code for Java extension, Java SE 11 or above version is required; for projects, VS Code for Java supports projects with version 1.5 or above. For how to configure, refer to [Configure JDK](/docs/java/java-project.md#configure-jdk).
 
-For developers new to Java or new to VS Code, we provide a Getting Started experience. Once you've installed the [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack), you can open the Getting Started experience from within VS Code with the **Java: Getting Started** command from the Command Palette.  Open the Command Palette (`kb(workbench.action.showCommands)`) and type "Java: Getting Started".
+For developers new to Java or new to VS Code, we provide a Getting Started experience. Once you've installed the [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack), you can open the Getting Started experience from within VS Code with the **Java: Getting Started** command from the Command Palette. Open the Command Palette (`kb(workbench.action.showCommands)`) and type "Java: Getting Started".
 
 ![Java Getting Started](images/java/getting-started.png)
 
@@ -97,7 +98,7 @@ There are three things you must understand to work with Java in VS Code:
 
 ### VS Code Workspaces
 
-In Visual Studio Code, a "Workspace" means a collection of one or more filesystem folders (and their children) and all of the VS Code configurations that take effect when that "Workspace" is open in VS Code.  There are two kinds of "Workspaces" in VS Code, "folder workspaces" and "multi-root workspaces".
+In Visual Studio Code, a "Workspace" means a collection of one or more filesystem folders (and their children) and all of the VS Code configurations that take effect when that "Workspace" is open in VS Code. There are two kinds of "Workspaces" in VS Code, "folder workspaces" and "multi-root workspaces".
 
 A "folder workspace" is presented by VS Code when you open a filesystem folder (directory) in VS Code.
 
@@ -185,18 +186,18 @@ You may [Sign up](https://devblogs.microsoft.com/visualstudio/java-on-visual-stu
 
 Learn more about Java in VS Code
 
-* [Java Tutorial with VS Code](/docs/java/java-tutorial.md)
-* [Code Editing and Navigation](/docs/java/java-editing.md)
-* [Java Debugging](/docs/java/java-debugging.md)
-* [Java Testing](/docs/java/java-testing.md)
-* [Java Project Management](/docs/java/java-project.md)
-* [Spring Boot with VS Code](/docs/java/java-spring-boot.md)
-* [Tomcat and Jetty Support](/docs/java/java-tomcat-jetty.md)
-* [Azure with VS Code](/docs/java/java-on-azure.md)
+- [Java Tutorial with VS Code](/docs/java/java-tutorial.md)
+- [Code Editing and Navigation](/docs/java/java-editing.md)
+- [Java Debugging](/docs/java/java-debugging.md)
+- [Java Testing](/docs/java/java-testing.md)
+- [Java Project Management](/docs/java/java-project.md)
+- [Spring Boot with VS Code](/docs/java/java-spring-boot.md)
+- [Tomcat and Jetty Support](/docs/java/java-tomcat-jetty.md)
+- [Azure with VS Code](/docs/java/java-on-azure.md)
 
 Read on to find out more about Visual Studio Code:
 
-* [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
-* [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.
-* [Tasks](/docs/editor/tasks.md) - use tasks to build your project and more
-* [Debugging](/docs/editor/debugging.md) - find out how to use the debugger with your project
+- [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
+- [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.
+- [Tasks](/docs/editor/tasks.md) - use tasks to build your project and more
+- [Debugging](/docs/editor/debugging.md) - find out how to use the debugger with your project

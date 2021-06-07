@@ -8,6 +8,7 @@ DateApproved: 7/30/2018
 MetaDescription: Debugging is a core feature of Visual Studio Code. Learn how to configure and use the Node.js debugger in this introductory video.
 MetaSocialImage: images/opengraph/introvideos.png
 ---
+
 # Debugging in Visual Studio Code
 
 Debugging is a core feature of Visual Studio Code. In this tutorial, we will show you how to run and debug a program in VS Code. We’ll take a tour of the Run View, explore some debugging features, and end by setting a breakpoint.
@@ -20,17 +21,17 @@ Next video: [Version Control](/docs/introvideos/versioncontrol.md)
 
 ## Video outline
 
-* Debugging that "just works".
-* Run a sample Node.js app.
-* Use a `launch.json` configuration file.
-* Single file debugging.
-* Set a breakpoint.
+- Debugging that "just works".
+- Run a sample Node.js app.
+- Use a `launch.json` configuration file.
+- Single file debugging.
+- Set a breakpoint.
 
 ## Next video
 
-* [Version Control](/docs/introvideos/versioncontrol.md) - Learn the basics of Git version control.
+- [Version Control](/docs/introvideos/versioncontrol.md) - Learn the basics of Git version control.
 
 ## Related resources
 
-* [Debugging](/docs/editor/debugging.md) - Official documentation for VS Code debugging.
-* [Integrated Terminal](/docs/editor/integrated-terminal.md) - Use the integrated terminal inside VS Code.
+- [Debugging](/docs/editor/debugging.md) - Official documentation for VS Code debugging.
+- [Integrated Terminal](/docs/editor/integrated-terminal.md) - Use the integrated terminal inside VS Code.

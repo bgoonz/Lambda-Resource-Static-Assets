@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>linux</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="remote-development-with-linux">Remote Development with Linux</h1>
+<p>Linux is a highly variable environment and the large number of server, container, and desktop distributions can make it difficult to know what is supported. Visual Studio Code Remote Development has prerequisites for the specific host / container / WSL distribution you will be connecting to.</p>
+<p>The extensions are known to work when connecting to recent stable/LTS version of:</p>
+<ul>
+<li><strong>Ubuntu 64-bit x86, ARMv8l (AArch64)</strong> (16.04+, IoT 18.04+)</li>
+<li><strong>Debian 64-bit x86, ARMv8l (AArch64)</strong> (Stretch/9+)</li>
+<li><strong>Raspbian ARMv7l (AArch32) 32-bit</strong> (Stretch/9+)</li>
+<li><strong>CentOS / RHEL 64-bit x86</strong> (7+)</li>
+<li><strong>Alpine Linux 64-bit x86 containers or WSL hosts</strong> (3.9+) in Remote - Containers, Remote - WSL</li>
+</ul>
+<p>The following non-Linux SSH hosts are also supported:</p>
+<ul>
+<li><strong>Windows 10 / Server 2016/2019 SSH hosts</strong> (1803+) using the <a href="https://docs.microsoft.com/windows-server/administration/openssh/openssh_install_firstuse">official OpenSSH Server</a> and enabling <code>remote.SSH.useLocalServer</code> <a href="/docs/getstarted/settings.md">in VS Code settings</a>.</li>
+<li><strong>macOS</strong> 10.14+ (Mojave) SSH hosts with <a href="https://support.apple.com/guide/mac-help/allow-a-remote-computer-to-access-your-mac-mchlp1066/mac">Remote Login enabled</a>.</li>
+</ul>
+<p>However, if you are using a non-standard configuration or downstream distribution of Linux, you may run into issues. This document provides information on requirements as well as tips to help you get up and running even if your configuration is only community-supported.</p>
+<p>Note that <strong>other extensions may have dependencies</strong> beyond those listed here. Some extensions also contain compiled native code that <strong>may not work on Alpine Linux, or ARMv7 (AArch32), or ARMv8 (AArch64)</strong>. These platforms are considered in “preview” for this reason. If you encounter an issue that only occurs with a particular extension, <strong>contact the extension authors</strong> for information on their native dependencies.</p>
+<h2 id="local-linux-prerequisites">Local Linux prerequisites</h2>
+<p>If you are running Linux locally, the <a href="/docs/supporting/requirements.md">VS Code prerequisites</a> drive most of the requirements.</p>
+<p>In addition, specific Remote Development extensions have further requirements:</p>
+<ul>
+<li><strong>Remote - SSH:</strong> <code>ssh</code> needs to be in the path. The shell binary is typically in the <code>openssh-client</code> package.</li>
+<li><strong>Remote - Containers</strong>: Docker CE/EE 18.06+ and Docker Compose 1.21+. Follow the <a href="https://docs.docker.com/install/#supported-platforms">official install instructions for Docker CE/EE for your distribution</a>. If you are using Docker Compose, follow the <a href="https://docs.docker.com/compose/install/">Install Docker Compose directions</a> as well. (Note that the Ubuntu Snap package is not supported and packages in distributions may be out of date.) <code>docker</code> and <code>docker-compose</code> must also be in the path. However, Docker does not need to be running if you are <a href="https://aka.ms/vscode-remote/containers/remote-host">using a remote host</a>.</li>
+</ul>
+<h2 id="remote-host-container-wsl-linux-prerequisites">Remote host / container / WSL Linux prerequisites</h2>
+<p>Platform prerequisites are primarily driven by the version of the <a href="https://nodejs.org/en/docs/meta/topics/dependencies/">Node.js</a> runtime (and by extension the <a href="https://v8docs.nodesource.com">V8 JavaScript engine</a>) shipped in the server component automatically installed on each remote endpoint. This server also has a set of related native node modules that need to be compiled and tested for each target. <strong>64-bit x86 glibc-based</strong> Linux distributions currently provide the best support given these requirements.</p>
+<p>You may encounter issues with certain extensions with native dependencies with <strong>ARMv7l (AArch32) / ARMv8l (AArch64) glibc-based</strong> hosts, containers, or WSL and <strong>64-bit x86 musl-based Alpine Linux</strong>. For ARMv7l/ARMv8l, extensions may only include x86_64 versions of native modules or runtimes in the extension. For Alpine Linux, included native code or runtimes may not work due to <a href="https://wiki.musl-libc.org/functional-differences-from-glibc.html">fundamental differences</a> between how <code>libc</code> is implemented in Alpine Linux (<code>musl</code>) and other distributions (<code>glibc</code>). In both these cases, extensions will need to opt-in to supporting these platforms by compiling / including binaries for these additional targets. Please raise an issue with the appropriate extension author requesting support if you encounter an extension that does not work as expected.</p>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 9%" />
+<col style="width: 44%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Distribution</th>
+<th>Base Requirements</th>
+<th>Remote - SSH Requirements</th>
+<th>Notes</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>General</td>
+<td>kernel &gt;= 3.10, glibc &gt;=2.17, libstdc++ &gt;= 3.4.18, Python 2.6 or 2.7, tar</td>
+<td>OpenSSH server, <code>bash</code>, and <code>curl</code> or <code>wget</code></td>
+<td>Run <code>ldd --version</code> to check the glibc version. Run <code>strings /usr/lib64/libstdc++.so.6                                                                                                               | grep GLIBCXX</code> to see if libstdc++ 3.4.18 is available.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Ubuntu 16.04+, Debian 8+, Raspbian Stretch/9+ and downstream distributions</td>
+<td><code>libc6 libstdc++6 python-minimal ca-certificates tar</code></td>
+<td><code>openssh-server bash</code> and <code>curl</code> or <code>wget</code></td>
+<td>Requires kernel &gt;= 3.10, glibc &gt;= 2.17, libstdc++ &gt;= 3.4.18. Debian &lt; 8 (Jessie) and Ubuntu &lt; 14.04 do not meet this requirement.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>RHEL / CentOS 7+</td>
+<td><code>glibc libgcc libstdc++ python ca-certificates tar</code></td>
+<td><code>openssh-server bash</code> and <code>curl</code> or <code>wget</code></td>
+<td>Requires kernel &gt;= 3.10, glibc &gt;= 2.17, libstdc++ &gt;= 3.4.18. RHEL / CentOS &lt; 7 does not meet this requirement without using a <a href="#updating-glibc-and-libstdc-on-rhel-centos-6">workaround to upgrade</a>.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Alpine Linux 3.9+</td>
+<td><code>musl libgcc libstdc++</code>. musl &gt;= 1.1.18, glibc not required.</td>
+<td>Not yet supported.</td>
+<td>Supported in Remote - Containers and Remote - WSL. Extensions installed in the container may not work due to <code>glibc</code> dependencies in extension native code.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>openSUSE Leap / SUSE Linux Enterprise 15+</td>
+<td><code>glibc libgcc_s1 libstdc++6 python ca-certificates gzip tar</code></td>
+<td><code>curl</code> or <code>wget</code></td>
+<td>Requires kernel &gt;= 3.10, glibc, libstdc++6</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="tips-by-linux-distribution">Tips by Linux distribution</h2>
+<p>The following is a list of distributions and any base requirements that may be missing. End-of-life versions of distributions are not included.</p>
+<ul>
+<li>✅ = Working</li>
+<li>⚠️ = Working, but see note for limitations</li>
+<li>🔬 = Experimental</li>
+<li>🛑 = Unsupported, but has workaround</li>
+<li>❌ = Unsupported</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 6%" />
+<col style="width: 22%" />
+<col style="width: 56%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Server Distribution</th>
+<th>Docker Image</th>
+<th>Missing libraries</th>
+<th>Notes / additional steps</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>⚠️ Alpine Linux 3.10 (64-bit)</td>
+<td><code>alpine:3.10</code></td>
+<td><code>libgcc libstdc++</code></td>
+<td>Supported in Remote - Containers and Remote - WSL only. Some extensions installed in the container may not work due to <code>glibc</code> dependencies in extension native code.</td>
+</tr>
+<tr class="even">
+<td>✅ CentOS 7 Server (64-bit)</td>
+<td><code>centos:7</code></td>
+<td>&lt;none&gt;</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="odd">
+<td>🛑 CentOS 6 Server (64-bit)</td>
+<td><code>centos:6</code></td>
+<td><code>glibc</code> &gt;= 2.17, <code>libstdc++</code> &gt;= 3.4.18</td>
+<td><a href="#updating-glibc-and-libstdc-on-rhel-centos-6">Requires a workaround</a>.</td>
+</tr>
+<tr class="even">
+<td>✅ Debian 10 Server (64-bit)</td>
+<td><code>debian:10</code></td>
+<td>&lt;none&gt;</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="odd">
+<td>✅ Debian 9 Server (64-bit)</td>
+<td><code>debian:9</code></td>
+<td>&lt;none&gt;</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="even">
+<td>✅ openSUSE Leap Server 15 (64-bit)</td>
+<td><code>opensuse/leap:15</code></td>
+<td>Docker image is missing <code>tar</code> and <code>gzip</code>.</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="odd">
+<td>✅ openSUSE Leap Server 42.3 (64-bit)</td>
+<td><code>opensuse/leap:42.3</code></td>
+<td>Docker image is missing <code>tar</code> and <code>gzip</code>.</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="even">
+<td>✅ Oracle Linux 7 (64-bit)</td>
+<td><code>oraclelinux:7</code></td>
+<td>&lt;none&gt;</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="odd">
+<td>🛑️ Oracle Linux 6 (64-bit)</td>
+<td><code>oraclelinux:6</code></td>
+<td><code>glibc</code> &gt;= 2.17, <code>libstdc++</code> &gt;= 3.4.18. Docker image is missing <code>tar</code>.</td>
+<td><a href="#updating-glibc-and-libstdc-on-rhel-centos-6">Requires a workaround</a>.</td>
+</tr>
+<tr class="even">
+<td>⚠️ Raspbian Stretch/9 (ARMv7l 32-bit)</td>
+<td>&lt;n/a&gt;</td>
+<td>&lt;none&gt;</td>
+<td>Some extensions may not work when installed on an ARMv7l host due to extension x86 native code. Remote - Containers <strong>does</strong> support connecting to containers on an ARM host.</td>
+</tr>
+<tr class="odd">
+<td>✅ RedHat Enterprise Linux 7 (64-bit)</td>
+<td></td>
+<td>&lt;none&gt;</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="even">
+<td>🛑 RedHat Enterprise Linux 6 (64-bit)</td>
+<td></td>
+<td><code>glibc</code> &gt;= 2.17, <code>libstdc++</code> &gt;= 3.4.18</td>
+<td><a href="#updating-glibc-and-libstdc-on-rhel-centos-6">Requires a workaround</a>.</td>
+</tr>
+<tr class="odd">
+<td>✅ SUSE Linux Enterprise Server 15 (64-bit)</td>
+<td></td>
+<td>Docker image is missing <code>tar</code> and <code>gzip</code>.</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="even">
+<td>✅ SUSE Linux Enterprise Server 12 (64-bit)</td>
+<td></td>
+<td>Docker image is missing <code>tar</code> and <code>gzip</code>.</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="odd">
+<td>❌ SUSE Linux Enterprise Server 11 (64-bit)</td>
+<td></td>
+<td><code>glibc</code> &gt;= 2.17, <code>libstdc++</code> &gt;= 3.4.18</td>
+<td>Might work compiling glibc from source, but untested.</td>
+</tr>
+<tr class="even">
+<td>⚠️ Ubuntu 18.04 IoT (ARMv8l 64-bit)</td>
+<td></td>
+<td>&lt;n/a&gt;</td>
+<td>Some extensions may not work when installed on an ARMv8l host due to extension x86 native code. Remote - Containers <strong>does</strong> support connecting to containers on an ARM host.</td>
+</tr>
+<tr class="odd">
+<td>✅ Ubuntu Server 20.04 (64-bit)</td>
+<td><code>ubuntu:20.04</code></td>
+<td>&lt;none&gt;</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="even">
+<td>✅ Ubuntu Server 19.04 (64-bit)</td>
+<td><code>ubuntu:19.04</code></td>
+<td>&lt;none&gt;</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="odd">
+<td>✅ Ubuntu Server 18.04 (64-bit)</td>
+<td><code>ubuntu:18.04</code></td>
+<td>&lt;none&gt;</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="even">
+<td>✅ Ubuntu Server 16.04 (64-bit)</td>
+<td><code>ubuntu:16.04</code></td>
+<td>&lt;none&gt;</td>
+<td>&lt;none&gt;</td>
+</tr>
+<tr class="odd">
+<td>✅ Ubuntu Server 14.04 (64-bit)</td>
+<td><code>ubuntu:14.04</code></td>
+<td>&lt;none&gt;</td>
+<td>&lt;none&gt;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="updating-glibc-and-libstdc-on-rhel-centos-6">Updating glibc and libstdc++ on RHEL / CentOS 6</h2>
+<p>RHEL / CentOS 6 ships with glibc 2.12 and libstdc++ 3.4.13. Unfortunately, this does not meet the requirements for Remote Development. RHEL / CentOS 6 goes out of support <a href="https://endoflife.software/operating-systems/linux/centos">in 2020</a>, so we strongly recommend <strong>upgrading to RHEL / CentOS 7</strong> or higher.</p>
+<p>However, as a workaround, you can either build glibc manually or use the following script to install updated binaries. The bash script below will upgrade these libraries without having to build them. It is adapted from information in this <a href="https://serverkurma.com/linux/how-to-update-glibc-newer-version-on-centos-6-x/">article</a>, this <a href="https://gist.github.com/harv/f86690fcad94f655906ee9e37c85b174">gist</a>, and this <a href="https://copr.fedorainfracloud.org/coprs/mosquito/myrepo-el6/">Fedora copr project</a>. The article also includes instructions for manually building glibc if you would prefer not to use the binaries from the article.</p>
+<p>Do not run this script on anything mission critical <strong>without a rollback strategy</strong> since it does update libraries that other applications depend on.</p>
+<p>For servers, run the following script and restart the server so the updates take effect.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Update glibc and static libs</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">wget</span> http://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/glibc-2.17-55.fc20/glibc-2.17-55.el6.x86_64.rpm</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="fu">wget</span> http://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/glibc-2.17-55.fc20/glibc-common-2.17-55.el6.x86_64.rpm</a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="fu">wget</span> http://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/glibc-2.17-55.fc20/glibc-devel-2.17-55.el6.x86_64.rpm</a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="fu">wget</span> http://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/glibc-2.17-55.fc20/glibc-headers-2.17-55.el6.x86_64.rpm</a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="fu">wget</span> https://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/glibc-2.17-55.fc20/glibc-utils-2.17-55.el6.x86_64.rpm</a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="fu">wget</span> https://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/glibc-2.17-55.fc20/glibc-static-2.17-55.el6.x86_64.rpm</a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="fu">sudo</span> rpm -Uh --force --nodeps \</a>
+<a class="sourceLine" id="cb1-9" title="9">    glibc-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb1-10" title="10">    glibc-common-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb1-11" title="11">    glibc-devel-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb1-12" title="12">    glibc-headers-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb1-13" title="13">    glibc-static-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb1-14" title="14">    glibc-utils-2.17-55.el6.x86_64.rpm</a>
+<a class="sourceLine" id="cb1-15" title="15"></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="co"># Update libstdc++</span></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="fu">wget</span> https://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/gcc-4.8.2-16.3.fc20/libstdc++-4.8.2-16.3.el6.x86_64.rpm</a>
+<a class="sourceLine" id="cb1-18" title="18"><span class="fu">wget</span>  https://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/gcc-4.8.2-16.3.fc20/libstdc++-devel-4.8.2-16.3.el6.x86_64.rpm</a>
+<a class="sourceLine" id="cb1-19" title="19"><span class="fu">wget</span> https://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/gcc-4.8.2-16.3.fc20/libstdc++-static-4.8.2-16.3.el6.x86_64.rpm</a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="fu">sudo</span> rpm -Uh \</a>
+<a class="sourceLine" id="cb1-21" title="21">    libstdc++-4.8.2-16.3.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb1-22" title="22">    libstdc++-devel-4.8.2-16.3.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb1-23" title="23">    libstdc++-static-4.8.2-16.3.el6.x86_64.rpm</a></code></pre></div>
+<p>In a container environment, you can add similar contents to a Dockerfile:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">FROM</span> centos:6</a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">RUN</span> yum -y install wget tar</a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co"># Update glibc</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">RUN</span> wget -q http://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/glibc-2.17-55.fc20/glibc-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-7" title="7">    &amp;&amp; wget -q http://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/glibc-2.17-55.fc20/glibc-common-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-8" title="8">    &amp;&amp; wget -q http://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/glibc-2.17-55.fc20/glibc-devel-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-9" title="9">    &amp;&amp; wget -q http://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/glibc-2.17-55.fc20/glibc-headers-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-10" title="10">    &amp;&amp; wget -q https://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/glibc-2.17-55.fc20/glibc-utils-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-11" title="11">    &amp;&amp; wget -q https://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/glibc-2.17-55.fc20/glibc-static-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-12" title="12">    &amp;&amp; rpm -Uh --force --nodeps \</a>
+<a class="sourceLine" id="cb2-13" title="13">        glibc-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-14" title="14">        glibc-common-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-15" title="15">        glibc-devel-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-16" title="16">        glibc-headers-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-17" title="17">        glibc-static-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-18" title="18">        glibc-utils-2.17-55.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-19" title="19">    &amp;&amp; rm *.rpm</a>
+<a class="sourceLine" id="cb2-20" title="20"></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="co"># Update libstdc++</span></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="kw">RUN</span>  wget -q https://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/gcc-4.8.2-16.3.fc20/libstdc++-4.8.2-16.3.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-23" title="23">    &amp;&amp; wget -q https://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/gcc-4.8.2-16.3.fc20/libstdc++-devel-4.8.2-16.3.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-24" title="24">    &amp;&amp; wget -q https://copr-be.cloud.fedoraproject.org/results/mosquito/myrepo-el6/epel-6-x86_64/gcc-4.8.2-16.3.fc20/libstdc++-static-4.8.2-16.3.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-25" title="25">    &amp;&amp; rpm -Uh \</a>
+<a class="sourceLine" id="cb2-26" title="26">        libstdc++-4.8.2-16.3.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-27" title="27">        libstdc++-devel-4.8.2-16.3.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-28" title="28">        libstdc++-static-4.8.2-16.3.el6.x86_64.rpm \</a>
+<a class="sourceLine" id="cb2-29" title="29">    &amp;&amp; rm *.rpm</a></code></pre></div>
+<h2 id="questions-or-feedback">Questions or feedback</h2>
+<ul>
+<li>See <a href="/docs/remote/troubleshooting.md#containers-tips">Tips and Tricks</a> or the <a href="/docs/remote/faq.md">FAQ</a>.</li>
+<li>Search on <a href="https://stackoverflow.com/questions/tagged/vscode-remote">Stack Overflow</a>.</li>
+<li>Add a <a href="https://aka.ms/vscode-remote/feature-requests">feature request</a> or <a href="https://aka.ms/vscode-remote/issues/new">report a problem</a>.</li>
+<li>Create a <a href="https://aka.ms/vscode-dev-containers">development container definition</a> for others to use.</li>
+<li>Contribute to <a href="https://github.com/microsoft/vscode-docs">our documentation</a> or <a href="https://github.com/microsoft/vscode">VS Code itself</a>.</li>
+<li>See our <a href="https://aka.ms/vscode-remote/contributing">CONTRIBUTING</a> guide for details.</li>
+</ul>
+</body>
+</html>

@@ -7,6 +7,7 @@ PageTitle: Ember JavaScript Tutorial in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Ember JavaScript tutorial showing IntelliSense and code navigation support in the Visual Studio Code editor.
 ---
+
 # Using Ember in Visual Studio Code
 
 [Ember](https://emberjs.com/) is a popular JavaScript framework for building web application user interfaces. The Visual Studio Code editor supports Ember.js IntelliSense and code navigation out of the box.
@@ -17,7 +18,7 @@ MetaDescription: Ember JavaScript tutorial showing IntelliSense and code navigat
 
 We'll be using the [Ember CLI](https://ember-cli.com/) for this tutorial. To install and use the command line interface as well as run the Ember.js application server, you'll need the [Node.js](https://nodejs.org/) JavaScript runtime and [npm](https://www.npmjs.com/) (the Node.js package manager) installed. npm is included with Node.js which you can install from [Node.js downloads](https://nodejs.org/en/download/).
 
->**Tip**: To test that you have Node.js and npm correctly installed on your machine, you can type `node --version` and `npm --version`.
+> **Tip**: To test that you have Node.js and npm correctly installed on your machine, you can type `node --version` and `npm --version`.
 
 To install Ember CLI, in a terminal or command prompt type:
 
@@ -40,7 +41,7 @@ cd my-app
 ember serve
 ```
 
-Once you see the **Build successful** message, you can open your browser to [http://localhost:4200](http://localhost:4200) and you  should see "Congratulations, you made it!". You can press `kbstyle(Ctrl+C)` to stop the Ember server.
+Once you see the **Build successful** message, you can open your browser to [http://localhost:4200](http://localhost:4200) and you should see "Congratulations, you made it!". You can press `kbstyle(Ctrl+C)` to stop the Ember server.
 
 ![Ember welcome page](images/emberjs/welcome-page.png)
 

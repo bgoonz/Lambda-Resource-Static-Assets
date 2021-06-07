@@ -7,6 +7,7 @@ PageTitle: PHP Programming with Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Learn about Visual Studio Code editor features (syntax highlighting, snippets, linting) and extensions for PHP.
 ---
+
 # PHP in Visual Studio Code
 
 Visual Studio Code is a great editor for PHP development. You get features like syntax highlighting and bracket matching, IntelliSense (code completion), and snippets out of the box and you can add more functionality through community-created VS Code [extensions](/docs/editor/extension-marketplace.md).
@@ -19,9 +20,9 @@ VS Code uses the official PHP linter (`php -l`) for PHP language diagnostics. Th
 
 There are three [settings](/docs/getstarted/settings.md) to control the PHP linter:
 
-* `php.validate.enable`: controls whether to enable PHP linting at all. Enabled by default.
-* `php.validate.executablePath`: points to the PHP executable on disk. Set this if the PHP executable is not on the system path.
-* `php.validate.run`: controls whether the validation is triggered on save (value: `"onSave"`) or on type (value: `"onType"`). Default is on save.
+- `php.validate.enable`: controls whether to enable PHP linting at all. Enabled by default.
+- `php.validate.executablePath`: points to the PHP executable on disk. Set this if the PHP executable is not on the system path.
+- `php.validate.run`: controls whether the validation is triggered on save (value: `"onSave"`) or on type (value: `"onType"`). Default is on save.
 
 To change the PHP settings, open your **User or Workspace Settings** (`kb(workbench.action.openSettings)`) and type 'php' to filter the list of available settings.
 
@@ -33,7 +34,7 @@ To set the PHP executable path, select the **Edit in settings.json** link under 
 
 ```json
 {
-    "php.validate.executablePath": "c:/php/php.exe"
+  "php.validate.executablePath": "c:/php/php.exe"
 }
 ```
 
@@ -41,7 +42,7 @@ To set the PHP executable path, select the **Edit in settings.json** link under 
 
 ```json
 {
-    "php.validate.executablePath": "/usr/bin/php"
+  "php.validate.executablePath": "/usr/bin/php"
 }
 ```
 
@@ -69,5 +70,5 @@ PHP debugging with **XDebug** is supported through a [PHP Debug extension](https
 
 Read on to find out about:
 
-* [Extension Marketplace](/docs/editor/extension-marketplace.md) - Browse the extensions others have shared
-* [Debugging](/docs/editor/debugging.md) - Learn more about VS Code debugging
+- [Extension Marketplace](/docs/editor/extension-marketplace.md) - Browse the extensions others have shared
+- [Debugging](/docs/editor/debugging.md) - Learn more about VS Code debugging

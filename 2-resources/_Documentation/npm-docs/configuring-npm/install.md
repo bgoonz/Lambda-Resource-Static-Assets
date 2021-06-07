@@ -42,21 +42,21 @@ different versions.
 
 #### OSX or Linux Node version managers
 
-* [nvm](https://github.com/creationix/nvm)
-* [n](https://github.com/tj/n)
+- [nvm](https://github.com/creationix/nvm)
+- [n](https://github.com/tj/n)
 
 #### Windows Node version managers
 
-* [nodist](https://github.com/marcelklehr/nodist)
-* [nvm-windows](https://github.com/coreybutler/nvm-windows)
+- [nodist](https://github.com/marcelklehr/nodist)
+- [nvm-windows](https://github.com/coreybutler/nvm-windows)
 
 ### Using a Node installer to install Node.js and npm
 
 If you are unable to use a Node version manager, you can use a Node
 installer to install both Node.js and npm on your system.
 
-* [Node.js installer](https://nodejs.org/en/download/)
-* [NodeSource installer](https://github.com/nodesource/distributions). If
+- [Node.js installer](https://nodejs.org/en/download/)
+- [NodeSource installer](https://github.com/nodesource/distributions). If
   you use Linux, we recommend that you use a NodeSource installer.
 
 #### OS X or Windows Node installers

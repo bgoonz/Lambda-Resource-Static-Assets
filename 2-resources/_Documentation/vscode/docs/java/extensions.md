@@ -7,6 +7,7 @@ PageTitle: Java extensions for Visual Studio Code
 DateApproved: 1/2/2019
 MetaDescription: Popular Java extensions for Visual Studio Code
 ---
+
 # Java extensions for Visual Studio Code
 
 Visual Studio Code provides many features as a Java language editor. You can also install VS Code extensions to add more features for Java development.
@@ -80,16 +81,16 @@ You can use [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azur
 
 ### Team development
 
-* The [Azure Repos](https://marketplace.visualstudio.com/items?itemName=ms-vsts.team) extension makes it easy to connect to your Azure DevOps Servers, allowing you to easily monitor builds, pull requests, and work items for your TFVC or Git source repositories.
+- The [Azure Repos](https://marketplace.visualstudio.com/items?itemName=ms-vsts.team) extension makes it easy to connect to your Azure DevOps Servers, allowing you to easily monitor builds, pull requests, and work items for your TFVC or Git source repositories.
 
 ### Internet of Things
 
-* The [Azure IoT Toolkit](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-toolkit) for VS Code makes it easy to develop and connect your [IoT applications to Azure](https://docs.microsoft.com//azure/index#pivot=services&panel=iot). With this extension, you can interact with Azure IoT Hub, manage devices connected to Azure IoT Hub, and develop with code snippets for Azure IoT Hub.
+- The [Azure IoT Toolkit](https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-toolkit) for VS Code makes it easy to develop and connect your [IoT applications to Azure](https://docs.microsoft.com//azure/index#pivot=services&panel=iot). With this extension, you can interact with Azure IoT Hub, manage devices connected to Azure IoT Hub, and develop with code snippets for Azure IoT Hub.
 
 ### General tools
 
-* The [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack) provides a rich set of extensions that makes it easy to discover and interact with Azure services to power your applications.
+- The [Azure Tools Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack) provides a rich set of extensions that makes it easy to discover and interact with Azure services to power your applications.
 
-* The [Azure Resource Manager Tools](https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools) provide a rich editing experience for Azure Resource Manager deployment templates and template language expressions. For example, IntelliSense for TLE function names, parameter references, signature help, Go to Definition, Peek Definition, and Peek References as well as Errors and Warnings, making it quick and easy to author Azure Resource Manager templates in VS Code.
+- The [Azure Resource Manager Tools](https://marketplace.visualstudio.com/items?itemName=msazurermtools.azurerm-vscode-tools) provide a rich editing experience for Azure Resource Manager deployment templates and template language expressions. For example, IntelliSense for TLE function names, parameter references, signature help, Go to Definition, Peek Definition, and Peek References as well as Errors and Warnings, making it quick and easy to author Azure Resource Manager templates in VS Code.
 
 Visit [Azure Extensions](/docs/azure/extensions.md) to find more Azure extensions.

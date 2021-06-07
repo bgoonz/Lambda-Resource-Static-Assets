@@ -24,9 +24,9 @@ This article assumes you already have your own cluster with a microservices arch
 
 ### Prerequisites
 
-* A Kubernetes cluster with an app that you want to debug.
-* [Visual Studio Code][vs-code] running on macOS, Windows 10, or Linux (currently in preview).
-* The [Bridge to Kubernetes][btk-vs-code] extension installed in Visual Studio Code.
+- A Kubernetes cluster with an app that you want to debug.
+- [Visual Studio Code][vs-code] running on macOS, Windows 10, or Linux (currently in preview).
+- The [Bridge to Kubernetes][btk-vs-code] extension installed in Visual Studio Code.
 
 ## Connect to your cluster and debug a service
 
@@ -66,9 +66,9 @@ Your development computer is connected when the VS Code status bar turns orange 
 
 Once your development computer is connected, traffic starts redirecting to your development computer for the service you are replacing.
 
-> **Note**: On subsequent launches, you will not be prompted for the service name, port, launch task, or whether to run isolated. These values are saved in `.vscode/tasks.json`. To change these settings later, open the Command Palette (`kb(workbench.action.showCommands)`), and run the command **Bridge to Kubernetes: Configure**. You can open *.vscode/launch.json* and *.vscode/tasks.json* to see the specific configuration settings that Bridge to Kubernetes adds to your launch profile.
+> **Note**: On subsequent launches, you will not be prompted for the service name, port, launch task, or whether to run isolated. These values are saved in `.vscode/tasks.json`. To change these settings later, open the Command Palette (`kb(workbench.action.showCommands)`), and run the command **Bridge to Kubernetes: Configure**. You can open _.vscode/launch.json_ and _.vscode/tasks.json_ to see the specific configuration settings that Bridge to Kubernetes adds to your launch profile.
 >
->If your cluster uses [gRPC C core](https://github.com/grpc/grpc/), an implementation of gRPC that uses [c-ares](https://github.com/c-ares/c-ares), an environment variable is added to your launch profile, GRPC_DNS_RESOLVER, with the value `native`. This variable specifies to use a workaround to avoid a 2-minute time delay when connecting. For more information, see this [gRPC issue](https://github.com/grpc/grpc/issues/18691).
+> If your cluster uses [gRPC C core](https://github.com/grpc/grpc/), an implementation of gRPC that uses [c-ares](https://github.com/c-ares/c-ares), an environment variable is added to your launch profile, GRPC_DNS_RESOLVER, with the value `native`. This variable specifies to use a workaround to avoid a 2-minute time delay when connecting. For more information, see this [gRPC issue](https://github.com/grpc/grpc/issues/18691).
 
 ## Set a break point
 
@@ -88,7 +88,7 @@ Select **Run** then **Stop Debugging** or press `kb(workbench.action.debug.stop)
 
 ## Additional configuration
 
-Bridge to Kubernetes can handle routing traffic and replicating environment variables without any additional configuration. If you need to download any files that are mounted to the container in your Kubernetes cluster, such as a ConfigMap file, you can create a `KubernetesLocalProcessConfig.yaml` to download those files to your development computer. For more information, see [Configure Bridge to Kubernetes][kubernetesLocalProcessConfig-yaml].
+Bridge to Kubernetes can handle routing traffic and replicating environment variables without any additional configuration. If you need to download any files that are mounted to the container in your Kubernetes cluster, such as a ConfigMap file, you can create a `KubernetesLocalProcessConfig.yaml` to download those files to your development computer. For more information, see [Configure Bridge to Kubernetes][kuberneteslocalprocessconfig-yaml].
 
 ## Using logging and diagnostics
 
@@ -122,37 +122,37 @@ var response = await client.SendAsync(request);
 For Node.js services, you can use code similar to the following, taken from the todo-app sample in the [mindaro repo](https://github.com/Microsoft/mindaro):
 
 ```js
-    server.get("/api/stats", function (req, res) {
-        var options = {
-            host: process.env.STATS_API_HOST,
-            path: '/stats',
-            method: 'GET'
-        };
-        const val = req.get('kubernetes-route-as');
-        if (val) {
-            console.log('Forwarding kubernetes-route-as header value - %s', val);
-            options.headers = {
-                'kubernetes-route-as': val
-            }
-        }
-        var req = http.request(options, function(statResponse) {
-            res.setHeader('Content-Type', 'application/json');
-            var responseString = '';
-            //another chunk of data has been received, so append it to `responseString`
-            statResponse.on('data', function (chunk) {
-                responseString += chunk;
-            });
-            statResponse.on('end', function () {
-                res.send(responseString);
-            });
-        });
-
-        req.on('error', function(e) {
-            console.log('problem with request: ' + e.message);
-          });
-
-          req.end();
+server.get("/api/stats", function (req, res) {
+  var options = {
+    host: process.env.STATS_API_HOST,
+    path: "/stats",
+    method: "GET",
+  };
+  const val = req.get("kubernetes-route-as");
+  if (val) {
+    console.log("Forwarding kubernetes-route-as header value - %s", val);
+    options.headers = {
+      "kubernetes-route-as": val,
+    };
+  }
+  var req = http.request(options, function (statResponse) {
+    res.setHeader("Content-Type", "application/json");
+    var responseString = "";
+    //another chunk of data has been received, so append it to `responseString`
+    statResponse.on("data", function (chunk) {
+      responseString += chunk;
     });
+    statResponse.on("end", function () {
+      res.send(responseString);
+    });
+  });
+
+  req.on("error", function (e) {
+    console.log("problem with request: " + e.message);
+  });
+
+  req.end();
+});
 ```
 
 ## Communicating with other services
@@ -161,11 +161,11 @@ When you communicate with another service in the same Kubernetes cluster, for ex
 
 ## Troubleshooting
 
- If you get this error when activating the Bridge to Kubernetes extension:
+If you get this error when activating the Bridge to Kubernetes extension:
 
 "Failed to update dependencies: maximum number of retries exceeded"
 
- First, retry the activation using the button. If it repeatedly does not succeed, see [https://github.com/microsoft/mindaro/issues/32](https://github.com/microsoft/mindaro/issues/32).
+First, retry the activation using the button. If it repeatedly does not succeed, see [https://github.com/microsoft/mindaro/issues/32](https://github.com/microsoft/mindaro/issues/32).
 
 When you are using Bridge to Kubernetes in a remote SSH session, if EndpointManager fails, the issue might be that Bridge to Kubernetes cannot modify the hosts file due to a permissions issue. To enable remote SSH or running as non-elevated user, you should update your code to use Kubernetes service environment variables, and configure VS Code to use them, as described in the [Service environment variables](/docs/containers/kubernetes-env-vars.md) topic.
 
@@ -187,6 +187,6 @@ Information about the currently supported features and a future roadmap for Brid
 [supported-regions]: https://azure.microsoft.com/global-infrastructure/services/?products=kubernetes-service
 [troubleshooting]: https://docs.microsoft.com/azure/dev-spaces/troubleshooting#fail-to-restore-original-configuration-of-deployment-on-cluster
 [vs-code]: https://code.visualstudio.com/download
-[kubernetesLocalProcessConfig-yaml]: https://docs.microsoft.com/visualstudio/containers/configure-bridge-to-kubernetes
+[kuberneteslocalprocessconfig-yaml]: https://docs.microsoft.com/visualstudio/containers/configure-bridge-to-kubernetes
 [btk-how-it-works]: https://docs.microsoft.com/visualstudio/containers/overview-bridge-to-kubernetes
 [btk-overview-routing]: https://docs.microsoft.com/visualstudio/containers/overview-bridge-to-kubernetes#using-routing-capabilities-for-developing-in-isolation

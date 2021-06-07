@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>java-spring-cloud</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="java-on-azure-spring-cloud">Java on Azure Spring Cloud</h1>
+<p>This tutorial shows you how to create a Java web application with Visual Studio Code. You’ll learn how to run, debug, and edit the Java web app locally and then on a fully managed Microservices platform built for Java workloads: <a href="https://azure.microsoft.com/services/spring-cloud/">Azure Spring Cloud</a>.</p>
+<h2 id="scenario">Scenario</h2>
+<p>We will deploy a simple Spring Boot Getting Started web app to Azure Spring Cloud.</p>
+<p>Azure Spring Cloud makes it easy to deploy Spring Boot microservice applications to Azure without any code changes. The service manages the infrastructure of Spring Cloud applications so developers can focus on their code. Other benefits include:</p>
+<ul>
+<li>Efficiently migrate existing Spring apps and manage cloud scaling and costs.</li>
+<li>Modernize apps with Spring Cloud patterns to improve agility and speed of delivery.</li>
+<li>Run Java at cloud scale and drive higher usage without complicated infrastructure.</li>
+<li>Develop and deploy rapidly without containerization dependencies.</li>
+<li>Monitor production workloads efficiently and effortlessly.</li>
+</ul>
+<figure>
+<img src="images/java-webapp/greeting-from-spring.png" alt="Greeting from Java" /><figcaption>Greeting from Java</figcaption>
+</figure>
+<h2 id="before-you-begin">Before you begin</h2>
+<p>Before running and deploying this sample, you must have the Java SE Development Kit (JDK) version 11 or above and Apache Maven build tools on your local development environment. If you don’t already have them, install these tools first.</p>
+<p>Download and install the <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack">Java Extension Pack</a>.</p>
+<blockquote>
+<p><strong>Note</strong>: The <code>JAVA_HOME</code> environment variable must be set to the install location of the JDK to complete this tutorial.</p>
+</blockquote>
+<p>Download Apache Maven version 3 or greater:</p>
+<p><a class="tutorial-next-btn" href="https://maven.apache.org/download.cgi" target="_blank" style="background-color:#68217A">Download Apache Maven</a></p>
+<p>Install Apache Maven for your local development environment:</p>
+<p><a class="tutorial-next-btn" href="https://maven.apache.org/install" target="_blank" style="background-color:#68217A">Install Apache Maven</a></p>
+<h2 id="download-and-test-the-spring-boot-app">Download and test the Spring Boot app</h2>
+<p>Clone the <a href="https://github.com/spring-guides/gs-spring-boot">Spring Boot Getting Started</a> sample project to your local machine. You can clone a Git repository with the <strong>Git: Clone</strong> command in the <strong>Command Palette</strong> (<code>kb(workbench.action.showCommands)</code>). Paste <code>https://github.com/spring-guides/gs-spring-boot.git</code> as the URL of the remote repository and then decide the parent directory under which to put the local repository. After that, open the <code>complete</code> folder within the cloned repository in VS Code by navigating to the folder and typing <code>code .</code>.</p>
+<blockquote>
+<p><strong>Note</strong>: You can install Visual Studio Code from <a href="https://code.visualstudio.com/">https://code.visualstudio.com</a> and Git from <a href="https://git-scm.com/">https://git-scm.com</a>.</p>
+</blockquote>
+<figure>
+<img src="images/java-webapp/clone-repository.gif" alt="Clone Spring Repository" /><figcaption>Clone Spring Repository</figcaption>
+</figure>
+<p>From within VS Code, open any of the Java files within the <code>complete</code> folder (for example <code>src\main\java\hello\Application.java</code>). If you don’t have the Java language extensions installed for VS Code, you will be prompted to install the Microsoft <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack">Java Extension Pack</a>. Follow the instructions and reload VS Code after the installation.</p>
+<figure>
+<img src="images/java-webapp/install-extensions.gif" alt="Install Java Extensions" /><figcaption>Install Java Extensions</figcaption>
+</figure>
+<p>Once you have the Java Extension Pack installed, it will automatically build the project for you (the build may take several minutes). You can run the application within VS Code by pressing <code>kb(workbench.action.debug.start)</code> and selecting the <strong>Java</strong> environment. The Java Debug extension will generate a debugging configuration file <code>launch.json</code> for you under a <code>.vscode</code> folder in your project. You can see build progress in the VS Code Status bar and when everything is finished, the final active debug configuration is displayed.</p>
+<figure>
+<img src="images/java-webapp/debugging-status-bar.png" alt="debug configuration in the Status bar" /><figcaption>debug configuration in the Status bar</figcaption>
+</figure>
+<p>You can learn more about how VS Code launches your application in Debugging <a href="/docs/editor/debugging.md#launch-configurations">Launch Configurations</a>. Press <code>kb(workbench.action.debug.start)</code> again to launch the debugger.</p>
+<figure>
+<img src="images/java-webapp/run-spring-boot.gif" alt="Run Spring Boot" /><figcaption>Run Spring Boot</figcaption>
+</figure>
+<p>Test the web app by browsing to <a href="http://localhost:8080">http://localhost:8080</a> using a web browser. You should see the following message displayed: “Greetings from Spring Boot!”.</p>
+<figure>
+<img src="images/java-webapp/greeting-from-spring.png" alt="Greeting from Spring" /><figcaption>Greeting from Spring</figcaption>
+</figure>
+<h2 id="make-a-change">Make a change</h2>
+<p>Let’s now edit <code>HelloController.java</code> to change “Greetings from Spring Boot!” to something else like “Hello World”. VS Code provides a great editing experience for Java, check out <a href="/docs/languages/java.md#editing-and-navigating-code">Editing and Navigating Code</a> to learn about VS Code’s editing and code navigation features.</p>
+<p>Select the <strong>Restart</strong> button on the top of the editor to relaunch the app and see result by reloading the browser.</p>
+<figure>
+<img src="images/java-webapp/restart-application.png" alt="Restart Application" /><figcaption>Restart Application</figcaption>
+</figure>
+<h2 id="debug-the-application">Debug the application</h2>
+<p>Set a breakpoint (<code>kb(editor.debug.action.toggleBreakpoint)</code>) in the application source code, and reload your browser to hit the breakpoint.</p>
+<figure>
+<img src="images/java-webapp/debugging.png" alt="Debug Application" /><figcaption>Debug Application</figcaption>
+</figure>
+<p>If you would like to learn more about debugging Java with VS Code, you can read <a href="/docs/java/java-debugging.md">Java Debugging</a>.</p>
+<p>Congratulations, you have your first Spring Boot web app running locally! Read on to learn how to host it in the cloud.</p>
+<h2 id="deploy-to-azure-spring-cloud">Deploy to Azure Spring Cloud</h2>
+<p>We just built a Java web application and ran it locally. Now you will learn how to deploy from Visual Studio Code and run it on <a href="https://azure.microsoft.com/services/spring-cloud/">Azure Spring Cloud</a>.</p>
+<h3 id="install-the-azure-spring-cloud-extension">Install the Azure Spring Cloud extension</h3>
+<p>The <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-azurespringcloud">Azure Spring Cloud</a> extension is used to create, manage, and deploy to Azure Spring Cloud with key features including:</p>
+<ul>
+<li>Create/View/Delete apps in Azure Spring Cloud</li>
+<li>Deploy Jar to the app</li>
+<li>Access the app with public/private endpoint</li>
+<li>Start, stop, and restart the app</li>
+<li>Scale the app in/out, up/down</li>
+<li>Config application settings such as environment variables and JVM options</li>
+<li>Stream logs from the app</li>
+</ul>
+<p>To install the Azure Spring Cloud extension, open the Extensions view (<code>kb(workbench.view.extensions)</code>) and search for <code>azure spring cloud</code> to filter the results. Select the Microsoft <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-azurespringcloud">Azure Spring Cloud</a> extension. For a command-line experience, you can also check out the <a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-quickstart">Azure Spring Cloud quickstart with Azure CLI</a>.</p>
+<h3 id="sign-in-to-your-azure-subscription">Sign in to your Azure subscription</h3>
+<p>The deploy process uses the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account">Azure Account</a> extension (installed along with the Spring Cloud extension as a dependency) and you need to sign in with your Azure subscription.</p>
+<p>If you don’t have an Azure subscription, you can sign up for a <a href="https://azure.microsoft.com/pricing/free-trial/">free Azure account</a>.</p>
+<p><a class="tutorial-next-btn" href="https://azure.microsoft.com/pricing/free-trial/" target="_blank" style="background-color:#68217A">Create your free Azure account</a></p>
+<p>To sign in to Azure, run <strong>Azure: Sign In</strong> from the <strong>Command Palette</strong> (<code>kb(workbench.action.showCommands)</code>). You can then sign in to your account using the <strong>Device Login</strong> flow. Select <strong>Copy &amp; Open</strong> to open your default browser.</p>
+<figure>
+<img src="images/java-webapp/devicelogin.png" alt="Azure sign in code" /><figcaption>Azure sign in code</figcaption>
+</figure>
+<p>Paste in the access code and continue the sign in process.</p>
+<figure>
+<img src="images/java-webapp/devicelogin2.png" alt="Azure Device Login" /><figcaption>Azure Device Login</figcaption>
+</figure>
+<h3 id="create-an-app-on-azure-spring-cloud">Create an app on Azure Spring Cloud</h3>
+<p>Once you are signed in to your Azure account and you have your app open in Visual Studio Code, select the Azure icon in the Activity Bar to open the Azure Explorer and you will see the Azure Spring Cloud panel.</p>
+<ol type="1">
+<li><p>Right-click on your subscription and select <strong>Create Service in Portal</strong>. Finish the following steps on the Azure Portal to create an Azure Spring Cloud service instance.</p>
+<figure>
+<img src="images/java-spring-cloud/create-service.png" alt="Create Azure Spring Cloud Service instance" /><figcaption>Create Azure Spring Cloud Service instance</figcaption>
+</figure></li>
+<li><p>After the service instance is created, refresh the Azure Explorer to display the new service instance. Right-click on the service instance and select <strong>Create App</strong>. Type the app name, select the Java version, and then press <code>kbstyle(Enter)</code> to start creating. The app will be ready in a few minutes.</p>
+<figure>
+<img src="images/java-spring-cloud/create-app.png" alt="Create App" /><figcaption>Create App</figcaption>
+</figure></li>
+</ol>
+<h3 id="build-and-deploy-the-app">Build and deploy the app</h3>
+<p>You can open the command prompt or terminal window and build the project using Maven commands. The build will generate a new <code>war</code> or <code>jar</code> artifact in the <code>target</code> directory.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">mvn</span> clean package</a></code></pre></div>
+<ol type="1">
+<li><p>Right-click on the App in Azure Explorer, select <strong>Deploy</strong>, and pick your built Jar file when prompted.</p>
+<figure>
+<img src="images/java-spring-cloud/deploy-app.png" alt="Deploy App" /><figcaption>Deploy App</figcaption>
+</figure></li>
+<li><p>You can watch the deployment status on the bottom right. Once done, select <strong>Access Public Endpoint</strong> to test the app running on Azure and <strong>Yes</strong> when prompted to assign a public endpoint. Be aware that only Spring Boot fat Jar is supported, <a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-tutorial-prepare-app-deployment?pivots=programming-language-java">learn more about apps on Azure Spring Cloud</a>.</p>
+<figure>
+<img src="images/java-spring-cloud/access-public-endpoint.png" alt="Access public endpoint" /><figcaption>Access public endpoint</figcaption>
+</figure></li>
+</ol>
+<h3 id="scale-the-app">Scale the app</h3>
+<ol type="1">
+<li><p>You can easily scale the app by right-clicking on the <strong>Instance count</strong> under <strong>Scale Settings</strong> and selecting <strong>Edit</strong>. Type “2” and press <code>kbstyle(Enter)</code> to scale the app.</p>
+<figure>
+<img src="images/java-spring-cloud/scale.png" alt="Scale app" /><figcaption>Scale app</figcaption>
+</figure></li>
+</ol>
+<h3 id="stream-your-application-logs">Stream your application logs</h3>
+<ol type="1">
+<li><p>Expand the <strong>App Instances</strong> node, right-click the instance you want to see logs, and select <strong>Start Streaming Logs</strong>.</p>
+<figure>
+<img src="images/java-spring-cloud/start-log-streaming.png" alt="Start log streaming" /><figcaption>Start log streaming</figcaption>
+</figure></li>
+<li><p>The Visual Studio Code output window opens with a connection to the log stream.</p>
+<figure>
+<img src="images/java-spring-cloud/log-output.png" alt="Log output" /><figcaption>Log output</figcaption>
+</figure></li>
+</ol>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li>Explore more powerful features of <a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-quickstart-sample-app-introduction?pivots=programming-language-java">Azure Spring Cloud with Microservices</a>.</li>
+<li>To learn more about Java Debugging features, read the <a href="/docs/java/java-debugging.md">Java Debugging Tutorial</a>.</li>
+</ul>
+</body>
+</html>

@@ -8,6 +8,7 @@ DateApproved: 06/28/2019
 MetaDescription: Testing Python in Visual Studio Code including the Test Explorer
 MetaSocialImage: images/tutorial/social.png
 ---
+
 # Python testing in Visual Studio Code
 
 The [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python) supports testing with Python's built-in [unittest](https://docs.python.org/3/library/unittest.html) framework as well as [pytest](https://docs.pytest.org/en/latest/). [Nose](https://nose.readthedocs.io/en/latest/) is also supported, although the framework itself is in maintenance mode.
@@ -18,7 +19,7 @@ After [enabling a test framework](#enable-a-test-framework), use the **Python: D
 
 (If you're already familiar with unit testing, you can skip to the [walkthroughs](#example-test-walkthroughs).)
 
-A *unit* is a specific piece of code to be tested, such as a function or a class. *Unit tests* are then other pieces of code that specifically exercise the code unit with a full range of different inputs, including boundary and edge cases.
+A _unit_ is a specific piece of code to be tested, such as a function or a class. _Unit tests_ are then other pieces of code that specifically exercise the code unit with a full range of different inputs, including boundary and edge cases.
 
 For example, say you have a function to validate the format of an account number that a user enters in a web form:
 
@@ -28,13 +29,13 @@ def validate_account_number_format(account_string):
     # ...
 ```
 
-Unit tests are concerned only with the unit's *interface*&mdash;its arguments and return values&mdash;not with its implementation (which is why no code is shown here in the function body; often you'd be using other well-tested libraries to help implement the function). In this example, the function accepts any string and returns true if that string contains a properly formatted account number, false otherwise.
+Unit tests are concerned only with the unit's _interface_&mdash;its arguments and return values&mdash;not with its implementation (which is why no code is shown here in the function body; often you'd be using other well-tested libraries to help implement the function). In this example, the function accepts any string and returns true if that string contains a properly formatted account number, false otherwise.
 
 To thoroughly test this function, you want to throw at it every conceivable input: valid strings, mistyped strings (off by one or two characters, or containing invalid characters), strings that are too short or too long, blank strings, null arguments, strings containing control characters (non-text codes), string containing HTML, strings containing injection attacks (such as SQL commands or JavaScript code), and so on. It's especially important to test security cases like injection attacks if the validated string is later used in database queries or displayed in the app's UI.
 
 For each input, you then define the function's expected return value (or values). In this example, again, the function should return true for only properly formatted strings. (Whether the number itself is a real account is a different matter that would be handled elsewhere through a database query.)
 
-With all the arguments and expected return values in hand, you now write the tests themselves, which are pieces of code that call the function with a particular input, then compare the actual return value with the expected return value (this comparison is called an *assertion*):
+With all the arguments and expected return values in hand, you now write the tests themselves, which are pieces of code that call the function with a particular input, then compare the actual return value with the expected return value (this comparison is called an _assertion_):
 
 ```python
 # Import the code to be tested
@@ -66,9 +67,9 @@ class Test_TestAccountValidator(test_framework.TestBaseClass):
 
 The exact structure of the code depends on the test framework you're using, and specific examples are provided later in this article. In any case, as you can see, each test is very simple: invoke the function with an argument and assert the expected return value.
 
-The combined results of all the tests is your test report, which tells you whether the function (the unit), is behaving as expected across all test cases. That is, when a unit passes all of its tests, you can be confident that it's functioning properly. (The practice of *test-driven development* is where you actually write the tests first, then write the code to pass more and more tests until all of them pass.)
+The combined results of all the tests is your test report, which tells you whether the function (the unit), is behaving as expected across all test cases. That is, when a unit passes all of its tests, you can be confident that it's functioning properly. (The practice of _test-driven development_ is where you actually write the tests first, then write the code to pass more and more tests until all of them pass.)
 
-Because unit tests are small, isolated piece of code (in unit testing you avoid external dependencies and use mock data or otherwise simulated inputs), they're quick and inexpensive to run. This characteristic means that you can run unit tests early and often. Developers typically run unit tests even before committing code to a repository; gated check-in systems can also run unit tests before merging a commit. Many continuous integration systems also run unit tests after every build. Running the unit test early and often means that you quickly catch *regressions,* which are unexpected changes in the behavior of code that previously passed all its unit tests. Because the test failure can easily be traced to a particular code change, it's easy to find and remedy the cause of the failure, which is undoubtedly better than discovering a problem much later in the process!
+Because unit tests are small, isolated piece of code (in unit testing you avoid external dependencies and use mock data or otherwise simulated inputs), they're quick and inexpensive to run. This characteristic means that you can run unit tests early and often. Developers typically run unit tests even before committing code to a repository; gated check-in systems can also run unit tests before merging a commit. Many continuous integration systems also run unit tests after every build. Running the unit test early and often means that you quickly catch _regressions,_ which are unexpected changes in the behavior of code that previously passed all its unit tests. Because the test failure can easily be traced to a particular code change, it's easy to find and remedy the cause of the failure, which is undoubtedly better than discovering a problem much later in the process!
 
 For a general background on unit testing, see [Unit Testing](https://wikipedia.org/wiki/Unit_testing) on Wikipedia. For a variety of useful unit test examples, see [https://github.com/gwtw/py-sorting](https://github.com/gwtw/py-sorting), a repository with tests for different sorting algorithms.
 
@@ -92,7 +93,7 @@ With this code, you can experience working with tests in VS Code as described in
 
 Testing in Python is disabled by default. To enable testing, use the **Python: Configure Tests** command on the Command Palette. This command prompts you to select a test framework, the folder containing tests, and the pattern used to identify test files.
 
-You can also configure testing manually by setting *one and only one* of the following settings to true: `python.testing.unittestEnabled`, `python.testing.pytestEnabled`, and `python.testing.nosetestsEnabled`. Each framework also has specific configuration settings as described under [Test configuration settings](#test-configuration-settings) for their folders and patterns.
+You can also configure testing manually by setting _one and only one_ of the following settings to true: `python.testing.unittestEnabled`, `python.testing.pytestEnabled`, and `python.testing.nosetestsEnabled`. Each framework also has specific configuration settings as described under [Test configuration settings](#test-configuration-settings) for their folders and patterns.
 
 It's important that you enable only a single test framework at a time. For this reason, when you enable one framework also be sure to disable the others. The **Python: Configure Tests** command does this automatically.
 
@@ -181,38 +182,38 @@ You run tests using any of the following actions:
 
 - Select **Run Tests** on the Status Bar (which can change appearance based on results),
 
-    ![Test command on the VS Code status bar](images/testing/discovery-succeeded-status-bar.png)
+  ![Test command on the VS Code status bar](images/testing/discovery-succeeded-status-bar.png)
 
-    then select one of the commands like **Run All Tests** or **Discover Tests**:
+  then select one of the commands like **Run All Tests** or **Discover Tests**:
 
-    ![Test commands that appear after using the Run Tests status bar command](images/testing/run-test-commands.png)
+  ![Test commands that appear after using the Run Tests status bar command](images/testing/run-test-commands.png)
 
 - In **Test Explorer**:
 
   - To run all discovered tests, select the play button at the top of **Test Explorer**:
 
-      ![Running all tests through Test Explorer](images/testing/test-explorer-run-all-tests.png)
+    ![Running all tests through Test Explorer](images/testing/test-explorer-run-all-tests.png)
 
   - To run a specific group of tests, or a single test, select the file, class, or test, then select the play button to the right of that item:
 
-      ![Running tests at specific scopes through Test Explorer](images/testing/test-explorer-run-scoped-tests.png)
+    ![Running tests at specific scopes through Test Explorer](images/testing/test-explorer-run-scoped-tests.png)
 
 - Right-click a file in Explorer and select **Run All Tests**, which runs the tests in that one file.
 
 - From the **Command Palette**, select any of the run test commands:
 
-    ![Python testing commands on the Command Palette](images/testing/commands.png)
+  ![Python testing commands on the Command Palette](images/testing/commands.png)
 
-    | Command | Description |
-    | --- | --- |
-    | Debug All Tests | See [Debug tests](#debug-tests). |
-    | Debug Test Method | See [Debug tests](#debug-tests). |
-    | Run All Tests | Searches for and runs all tests in the workspace and its subfolders. |
-    | Run Current Test File | Runs the test in the file that's currently viewed in the editor. |
-    | Run Failed Tests | Re-runs any tests that failed in a previous test run. Runs all test if no tests have been run yet. |
-    | Run Test File | Prompts for a specific test filename, then runs the test in that file. |
-    | Run Test Method | Prompts for the name of a test to run, providing auto-completion for test names. |
-    | Show Test Output | Opens the Python Test Log panel with information about passing and failing tests, as well as errors and skipped tests. |
+  | Command               | Description                                                                                                            |
+  | --------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+  | Debug All Tests       | See [Debug tests](#debug-tests).                                                                                       |
+  | Debug Test Method     | See [Debug tests](#debug-tests).                                                                                       |
+  | Run All Tests         | Searches for and runs all tests in the workspace and its subfolders.                                                   |
+  | Run Current Test File | Runs the test in the file that's currently viewed in the editor.                                                       |
+  | Run Failed Tests      | Re-runs any tests that failed in a previous test run. Runs all test if no tests have been run yet.                     |
+  | Run Test File         | Prompts for a specific test filename, then runs the test in that file.                                                 |
+  | Run Test Method       | Prompts for the name of a test to run, providing auto-completion for test names.                                       |
+  | Show Test Output      | Opens the Python Test Log panel with information about passing and failing tests, as well as errors and skipped tests. |
 
 After a test run, VS Code displays results directly with the CodeLens adornments in the editor and in **Test Explorer**. Results are shown both for individual tests as well as any classes and files containing those tests. Failed tests are also adorned in the editor with a red underline.
 
@@ -251,7 +252,7 @@ Support for running tests in parallel with pytest is available through the `pyte
     addopts=-n4
    ```
 
-1. Run your tests, which will now be run in parallel.
+3. Run your tests, which will now be run in parallel.
 
 ## Debug tests
 
@@ -267,23 +268,23 @@ For example, the `test_decrement` functions given earlier are failing because th
 
 1. Stop the debugger and correct the faulty code:
 
-    ```python
-    # unittest
-    self.assertEqual(inc_dec.decrement(3), 2)
+   ```python
+   # unittest
+   self.assertEqual(inc_dec.decrement(3), 2)
 
-    # pytest
-    assert inc_dec.decrement(3) == 2
-    ```
+   # pytest
+   assert inc_dec.decrement(3) == 2
+   ```
 
 1. Save the file and run the tests again to confirm that they pass, and see that the CodeLens adornments also indicate passing status.
 
-    > **Note**: running or debugging a test does not automatically save the test file. Always be sure to save changes to a test before running it, otherwise you'll likely be confused by the results because they still reflect the previous version of the file!
+   > **Note**: running or debugging a test does not automatically save the test file. Always be sure to save changes to a test before running it, otherwise you'll likely be confused by the results because they still reflect the previous version of the file!
 
 The **Python: Debug All Tests** and **Python: Debug Test Method** commands (on both the Command Palette and Status Bar menu) launch the debugger for all tests and a single test method, respectively. You can also use the "bug" icons in **Test Explorer** to launch the debugger for all tests in a selected scope as well as all discovered tests.
 
-The debugger works the same for tests as for other Python code, including breakpoints, variable inspection, and so on. To customize settings for debugging tests, you can specify ```"request":"test"``` in the launch.json file in the ```.vscode``` folder from your workspace. This configuration will be used when you run **Python: Debug All Tests** and **Python: Debug Test Method** commands.
+The debugger works the same for tests as for other Python code, including breakpoints, variable inspection, and so on. To customize settings for debugging tests, you can specify `"request":"test"` in the launch.json file in the `.vscode` folder from your workspace. This configuration will be used when you run **Python: Debug All Tests** and **Python: Debug Test Method** commands.
 
-For example, the configuration below in the ```launch.json``` file disables the ```justMyCode``` setting for debugging tests:
+For example, the configuration below in the `launch.json` file disables the `justMyCode` setting for debugging tests:
 
 ```py
 {
@@ -295,10 +296,9 @@ For example, the configuration below in the ```launch.json``` file disables the 
 }
 ```
 
-If you have more than one configuration entry with ```"request":"test"```, the first definition will be used since we currently don't support multiple definitions for this request type.
+If you have more than one configuration entry with `"request":"test"`, the first definition will be used since we currently don't support multiple definitions for this request type.
 
 For more information on debugging, see [Python debugging configurations](/docs/python/debugging.md) and the general VS Code [Debugging](/docs/editor/debugging.md) article.
-
 
 ## Test configuration settings
 
@@ -306,19 +306,19 @@ The behavior of testing with Python is driven by both general settings and setti
 
 ### General settings
 
-| Setting<br/>(python.testing.) | Default | Description |
-| --- | --- | --- |
-| autoTestDiscoverOnSaveEnabled | `true` | Specifies whether to enable or disable auto run test discovery when saving a test file. |
-| cwd | null | Specifies an optional working directory for tests. |
-| debugPort | `3000` | Port number used for debugging of unittest tests. |
-| promptToConfigure | `true` | Specifies whether VS Code prompts to configure a test framework if potential tests are discovered. |
+| Setting<br/>(python.testing.) | Default | Description                                                                                        |
+| ----------------------------- | ------- | -------------------------------------------------------------------------------------------------- |
+| autoTestDiscoverOnSaveEnabled | `true`  | Specifies whether to enable or disable auto run test discovery when saving a test file.            |
+| cwd                           | null    | Specifies an optional working directory for tests.                                                 |
+| debugPort                     | `3000`  | Port number used for debugging of unittest tests.                                                  |
+| promptToConfigure             | `true`  | Specifies whether VS Code prompts to configure a test framework if potential tests are discovered. |
 
 ### unittest configuration settings
 
-| Setting<br/>(python.testing.) | Default | Description |
-| --- | --- | --- |
-| unittestEnabled | `false` | Specifies whether unittest is enabled as the test framework. All other frameworks should be disabled. |
-| unittestArgs | `["-v", "-s", ".", "-p", "*test*.py"]` | Arguments to pass to unittest, where each element that's separated by a space is a separate item in the list. See below for a description of the defaults. |
+| Setting<br/>(python.testing.) | Default                                | Description                                                                                                                                                |
+| ----------------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| unittestEnabled               | `false`                                | Specifies whether unittest is enabled as the test framework. All other frameworks should be disabled.                                                      |
+| unittestArgs                  | `["-v", "-s", ".", "-p", "*test*.py"]` | Arguments to pass to unittest, where each element that's separated by a space is a separate item in the list. See below for a description of the defaults. |
 
 The default arguments for unittest are as follows:
 
@@ -332,24 +332,24 @@ See [unittest command-line interface](https://docs.python.org/3/library/unittest
 
 ### pytest configuration settings
 
-| Setting<br/>(python.testing.) | Default | Description |
-| --- | --- | --- |
-| pytestEnabled | `false` | Specifies whether pytest is enabled as the test framework. All other frameworks should be disabled. |
-| pytestPath | `"pytest"` | Path to pytest. Use a full path if pytest is located outside the current environment. |
-| pytestArgs | `[]` | Arguments to pass to pytest, where each element that's separated by a space is a separate item in the list. See [pytest command-line options](https://docs.pytest.org/en/latest/reference/reference.html#command-line-flags). |
+| Setting<br/>(python.testing.) | Default    | Description                                                                                                                                                                                                                   |
+| ----------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| pytestEnabled                 | `false`    | Specifies whether pytest is enabled as the test framework. All other frameworks should be disabled.                                                                                                                           |
+| pytestPath                    | `"pytest"` | Path to pytest. Use a full path if pytest is located outside the current environment.                                                                                                                                         |
+| pytestArgs                    | `[]`       | Arguments to pass to pytest, where each element that's separated by a space is a separate item in the list. See [pytest command-line options](https://docs.pytest.org/en/latest/reference/reference.html#command-line-flags). |
 
 You can also configure pytest using a `pytest.ini` file as described on [pytest Configuration](https://docs.pytest.org/en/latest/reference/customize.html).
 
 > **Note**
-> If you have the pytest-cov coverage module installed, VS Code doesn't stop at breakpoints while debugging because pytest-cov is using the same technique to access the source code being run. To prevent this behavior, include `--no-cov` in `pytestArgs` when debugging tests, for example by adding `"env": {"PYTEST_ADDOPTS": "--no-cov"}` to your debug configuration.  (See [Debug Tests](#debug-tests) above about how to set up that launch configuration.) (For more information, see [Debuggers and PyCharm](https://pytest-cov.readthedocs.io/en/latest/debuggers.html) in the pytest-cov documentation.)
+> If you have the pytest-cov coverage module installed, VS Code doesn't stop at breakpoints while debugging because pytest-cov is using the same technique to access the source code being run. To prevent this behavior, include `--no-cov` in `pytestArgs` when debugging tests, for example by adding `"env": {"PYTEST_ADDOPTS": "--no-cov"}` to your debug configuration. (See [Debug Tests](#debug-tests) above about how to set up that launch configuration.) (For more information, see [Debuggers and PyCharm](https://pytest-cov.readthedocs.io/en/latest/debuggers.html) in the pytest-cov documentation.)
 
 ### Nose configuration settings
 
-| Setting<br/>(python.testing.) | Default | Description |
-| --- | --- | --- |
-| nosetestsEnabled | `false` | Specifies whether Nose  is enabled as the test framework. All other frameworks should be disabled. |
-| nosetestPath | `"nosetests"` | Path to Nose. Use a full path if Nose is located outside the current environment. |
-| nosetestArgs | `[]` | Arguments to pass to Nose, where each element that's separated by a space is a separate item in the list. See [Nose usage options](https://nose.readthedocs.io/en/latest/usage.html#options). |
+| Setting<br/>(python.testing.) | Default       | Description                                                                                                                                                                                   |
+| ----------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| nosetestsEnabled              | `false`       | Specifies whether Nose is enabled as the test framework. All other frameworks should be disabled.                                                                                             |
+| nosetestPath                  | `"nosetests"` | Path to Nose. Use a full path if Nose is located outside the current environment.                                                                                                             |
+| nosetestArgs                  | `[]`          | Arguments to pass to Nose, where each element that's separated by a space is a separate item in the list. See [Nose usage options](https://nose.readthedocs.io/en/latest/usage.html#options). |
 
 You can also configure nose with a `.noserc` or `nose.cfg` file as described on [Nose configuration](https://nose.readthedocs.io/en/latest/usage.html#configuration).
 

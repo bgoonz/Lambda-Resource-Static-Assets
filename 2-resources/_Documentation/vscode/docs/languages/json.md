@@ -7,6 +7,7 @@ PageTitle: JSON editing in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Edit JSON files in Visual Studio Code
 ---
+
 # Editing JSON with Visual Studio Code
 
 JSON is a data format that is common in configuration files like `package.json` or `project.json`. We also use it extensively in Visual Studio Code for our configuration files. When opening a file that ends with `.json`, VS Code provides features to make it simpler to write or modify the file's content.
@@ -45,7 +46,7 @@ You can fold regions of source code using the folding icons on the gutter betwee
 
 ## JSON with Comments
 
-In addition to the default JSON mode following the [JSON specification](https://www.json.org/), VS Code also has a **JSON with Comments** (jsonc) mode. This mode is used for the VS Code configuration files such as `settings.json`, `tasks.json`, or `launch.json`. When in the **JSON with Comments** mode, you can use single line (//) as well as block comments (/* */) as used in JavaScript. The current editor mode is indicated in the editor's Status Bar. Select the mode indicator to change the mode and to configure how file names and extensions are associated to modes.
+In addition to the default JSON mode following the [JSON specification](https://www.json.org/), VS Code also has a **JSON with Comments** (jsonc) mode. This mode is used for the VS Code configuration files such as `settings.json`, `tasks.json`, or `launch.json`. When in the **JSON with Comments** mode, you can use single line (//) as well as block comments (/\* \*/) as used in JavaScript. The current editor mode is indicated in the editor's Status Bar. Select the mode indicator to change the mode and to configure how file names and extensions are associated to modes.
 
 ## JSON schemas and settings
 
@@ -63,8 +64,8 @@ In the following example, the JSON file specifies that its contents follow the [
 
 ```json
 {
-   "$schema": "https://json.schemastore.org/coffeelint",
-   "line_endings": "unix"
+  "$schema": "https://json.schemastore.org/coffeelint",
+  "line_endings": "unix"
 }
 ```
 
@@ -85,7 +86,7 @@ The following excerpt from User [Settings](/docs/getstarted/settings.md) shows h
 ]
 ```
 
->**Tip:** In addition to defining a schema for `.babelrc`, also make sure that `.babelrc` is associated to the JSON language mode. This is also done in the settings using the `files.association` array setting.
+> **Tip:** In addition to defining a schema for `.babelrc`, also make sure that `.babelrc` is associated to the JSON language mode. This is also done in the settings using the `files.association` array setting.
 
 ### Mapping to a schema in the workspace
 
@@ -131,7 +132,7 @@ Schemas and schema associations can also be defined by an extension. Check out t
 
 ### File match syntax
 
-The file match syntax supports the '*' wildcard. Also, you can define exclusion patterns, starting with '!'. For an association to match, at least one pattern needs to match and the last matching pattern must not be an exclusion pattern.
+The file match syntax supports the '\*' wildcard. Also, you can define exclusion patterns, starting with '!'. For an association to match, at least one pattern needs to match and the last matching pattern must not be an exclusion pattern.
 
 ```json
   "json.schemas": [
@@ -194,15 +195,15 @@ If you want your descriptions to support formatting like links, you can opt in b
 
 ```json
 {
-   "$schema": "http://json-schema.org/schema",
-   "type": "object",
-   "properties": {
-       "name" : {
-           "type": "string",
-           "description": "The name of the entry",
-           "markdownDescription": "The name of the entry. [See the documentation](https://example.com)"
-       }
-   }
+  "$schema": "http://json-schema.org/schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the entry",
+      "markdownDescription": "The name of the entry. [See the documentation](https://example.com)"
+    }
+  }
 }
 ```
 

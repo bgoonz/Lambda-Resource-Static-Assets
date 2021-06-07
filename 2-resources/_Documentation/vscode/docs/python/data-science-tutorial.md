@@ -8,6 +8,7 @@ DateApproved: 3/23/2020
 MetaDescription: Python data science tutorial demonstrating the use of common data science and machine learning libraries with Visual Studio code Jupyter Notebook support.
 MetaSocialImage: images/tutorial/social.png
 ---
+
 # Data Science in Visual Studio Code
 
 This tutorial demonstrates using Visual Studio Code and the Microsoft Python extension with common data science libraries to explore a basic data science scenario. Specifically, using passenger data from the Titanic, you will learn how to set up a data science environment, import and clean data, create a machine learning model for predicting survival on the Titanic, and evaluate the accuracy of the generated model.
@@ -19,11 +20,11 @@ The following installations are required for the completion of the tutorial. If 
 - [Visual Studio Code](https://code.visualstudio.com/)
 - The [Python extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-python.python) from the Visual Studio Marketplace. For additional details on installing extensions, see [Extension Marketplace](/docs/editor/extension-marketplace.md). The Python extension is named **Python** and published by Microsoft.
 
-   [![Python extension on Marketplace](images/data-science-tutorial/python-extension-marketplace.png)](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+  [![Python extension on Marketplace](images/data-science-tutorial/python-extension-marketplace.png)](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 
 - [Miniconda with Python 3.7](https://docs.conda.io/en/latest/miniconda.html)
 
-   > **Note**: If you already have the full Anaconda distribution installed, you don't need to install Miniconda. Alternatively, if you'd prefer not to use Anaconda or Miniconda, you can create a Python virtual environment and install the packages needed for the tutorial using pip. If you go this route, you will need to install the following packages: pandas, jupyter, seaborn, scikit-learn, keras, and tensorflow.
+  > **Note**: If you already have the full Anaconda distribution installed, you don't need to install Miniconda. Alternatively, if you'd prefer not to use Anaconda or Miniconda, you can create a Python virtual environment and install the packages needed for the tutorial using pip. If you go this route, you will need to install the following packages: pandas, jupyter, seaborn, scikit-learn, keras, and tensorflow.
 
 ## Set up a data science environment
 
@@ -34,7 +35,7 @@ Visual Studio Code and the Python extension provide a great editor for data scie
 1. Open the project folder in VS Code by running VS Code and using the **File** > **Open Folder** command.
 1. Once VS Code launches, open the Command Palette (**View** > **Command Palette** or `kb(workbench.action.showCommands)`). Then select the **Python: Select Interpreter** command:
 
-    ![Data Science tutorial: opening the Command Palette in VS Code](images/shared/command-palette.png)
+   ![Data Science tutorial: opening the Command Palette in VS Code](images/shared/command-palette.png)
 
 1. The **Python: Select Interpreter** command presents the list of available interpreters that VS Code was able to locate automatically (your list will vary from the one shown below; if you don't see the desired interpreter see [Configuring Python environments](/docs/python/environments.md)). From the list, select the Anaconda environment you created, which should include the text **'myenv': conda**.
 
@@ -136,7 +137,7 @@ This tutorial uses the [Titanic dataset](http://biostat.mc.vanderbilt.edu/wiki/p
    data.corr().abs()[["survived"]]
    ```
 
-      ![Determining the correlation between having relatives and survival](images/data-science-tutorial/jupyter-cell-04.png)
+   ![Determining the correlation between having relatives and survival](images/data-science-tutorial/jupyter-cell-04.png)
 
 1. You'll notice that in fact when looked at from the standpoint of whether a person had relatives, versus how many relatives, there is a higher correlation with survival. With this information in hand, you can now drop from the dataset the low value **sibsp** and **parch** columns, as well as any rows that had **NaN** values, to end up with a dataset that can be used for training a model.
 

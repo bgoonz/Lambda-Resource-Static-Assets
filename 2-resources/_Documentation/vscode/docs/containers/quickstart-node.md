@@ -7,6 +7,7 @@ PageTitle: Build and run a Node.js app in a container
 DateApproved: 07/31/2020
 MetaDescription: Develop, build, and debug a Node.js app in a Docker container, using Visual Studio Code.
 ---
+
 # Node.js in a container
 
 In this guide you will learn how to:
@@ -56,6 +57,7 @@ The Docker extension helps you author Dockerfiles by using [IntelliSense](/docs/
    Note how the Docker extension lists all available Dockerfile instructions and describes the syntax.
 
    > The Docker extension uses the `base` stage of the `Dockerfile` to create a debug version of the container image for your service. Put the environment variable definition in the `base` stage to have this variable available in both debug and release versions of the container image.
+
 1. Save the `Dockerfile` file.
 
 ## Run the service locally
@@ -104,14 +106,15 @@ When the Docker extension adds files to the application, it also adds a **VS Cod
    ![Selected Docker debug configuration](images/quickstarts/node-debug-configuration-dark.png)
 
 1. Start debugging (use the `kb(workbench.action.debug.start)` key).
-    - The Docker image for the service builds.
-    - The Docker container for the service runs.
-    - The browser opens to the (random) port mapped to the service container.
-    - The debugger stops at the breakpoint in `index.js`.
 
-    > Note that, because the debugger attaches *after* the application starts, the breakpoint may missed the first time around; you might have to refresh the browser to see the debugger break on the second try.
-    >
-    > You can configure the application to wait for the debugger to attach before starting execution by setting the [inspectMode](/docs/containers/reference.md#node-object-properties-dockerrun-task) property to `break` in the `docker-run: debug` task in `tasks.json` under the `node` object.
+   - The Docker image for the service builds.
+   - The Docker container for the service runs.
+   - The browser opens to the (random) port mapped to the service container.
+   - The debugger stops at the breakpoint in `index.js`.
+
+   > Note that, because the debugger attaches _after_ the application starts, the breakpoint may missed the first time around; you might have to refresh the browser to see the debugger break on the second try.
+   >
+   > You can configure the application to wait for the debugger to attach before starting execution by setting the [inspectMode](/docs/containers/reference.md#node-object-properties-dockerrun-task) property to `break` in the `docker-run: debug` task in `tasks.json` under the `node` object.
 
 ## View the application logs
 
@@ -120,7 +123,7 @@ You can view the logs in VS Code by using the **View Logs** command on the conta
 1. Navigate to the Docker Explorer.
 1. In the **Containers** tab, right-click on your container and choose **View Logs**.
 
-    ![Screenshot of logs in the terminal](images/quickstarts/node-view-logs-dark.png)
+   ![Screenshot of logs in the terminal](images/quickstarts/node-view-logs-dark.png)
 
 1. The output will be displayed in the terminal.
 

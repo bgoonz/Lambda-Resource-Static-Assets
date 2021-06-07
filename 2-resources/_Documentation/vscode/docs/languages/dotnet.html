@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>dotnet</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="using-.net-core-in-visual-studio-code">Using .NET Core in Visual Studio Code</h1>
+<p><a href="https://docs.microsoft.com/dotnet/core">.NET Core</a> provides a fast and modular platform for creating server apps that run on Windows, Linux, and macOS. Use Visual Studio Code with the C# and F# extensions to get a powerful editing experience with <a href="https://docs.microsoft.com/visualstudio/ide/visual-csharp-intellisense">C# IntelliSense</a>, F# IntelliSense (smart code completion), and debugging.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Install the following:</p>
+<ul>
+<li><a href="https://dotnet.microsoft.com/download">.NET Core SDK</a>. The SDK also includes the Runtime.</li>
+<li>The <a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp">C# extension</a> from the VS Code Marketplace.</li>
+<li>The <a href="https://marketplace.visualstudio.com/items?itemName=Ionide.Ionide-fsharp">F# extension (Ionide)</a> from the VS Code Marketplace.</li>
+</ul>
+<h2 id="create-a-c-hello-world-app">Create a C# “Hello World” app</h2>
+<ol type="1">
+<li><p>Initialize a C# project:</p>
+<ul>
+<li>Open a terminal/command prompt and navigate to the folder in which you’d like to create the app.</li>
+<li>Enter the following command in the command shell:</li>
+</ul>
+<pre class="cmd"><code>  dotnet new console</code></pre></li>
+<li><p>When the project folder is first opened in VS Code:</p>
+<ul>
+<li>A “Required assets to build and debug are missing. Add them?” notification appears at the bottom right of the window.</li>
+<li>Select <strong>Yes</strong>.</li>
+</ul></li>
+<li><p>Run the app by entering the following command in the command shell:</p>
+<pre class="cmd"><code>dotnet run</code></pre></li>
+</ol>
+<p>Watch a video tutorial for further C# setup help on <a href="https://channel9.msdn.com/Blogs/dotnet/Get-started-VSCode-Csharp-NET-Core-Windows">Windows</a>, <a href="https://channel9.msdn.com/Blogs/dotnet/Get-started-VSCode-NET-Core-Mac">macOS</a>, or <a href="https://channel9.msdn.com/Blogs/dotnet/Get-started-with-VS-Code-Csharp-dotnet-Core-Ubuntu">Linux</a>.</p>
+<h2 id="create-an-f-hello-world-app">Create an F# “Hello World” app</h2>
+<ol type="1">
+<li><p>Initialize an F# project:</p>
+<ul>
+<li>Open a terminal/command prompt and navigate to the folder in which you’d like to create the app.</li>
+<li>Enter the following command in the command shell:</li>
+</ul>
+<pre class="cmd"><code>dotnet new console -lang &quot;F#&quot;</code></pre></li>
+<li><p>Once it completes, open the project in Visual Studio Code:</p>
+<pre class="cmd"><code>code .</code></pre></li>
+<li><p>Run the app by entering the following command in the command shell:</p>
+<pre class="cmd"><code> dotnet run</code></pre></li>
+</ol>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li>Continue exploring C# development: <a href="https://docs.microsoft.com/dotnet/articles/csharp/getting-started/with-visual-studio-code#debug">Debug with VS Code and .NET Core</a></li>
+<li><a href="/docs/editor/codebasics.md">Basic Editing</a> - Learn about the powerful VS Code editor.</li>
+<li><a href="/docs/editor/editingevolved.md">Code Navigation</a> - Move quickly through your source code.</li>
+<li><a href="/docs/languages/csharp.md">Working with C#</a> - Learn about the great C# support you’ll have when working on your .NET Core application.</li>
+<li><a href="/docs/editor/tasks.md">Tasks</a> - Running tasks with Gulp, Grunt, and Jake. Showing Errors and Warnings</li>
+<li><a href="https://docs.microsoft.com/dotnet/core/">.NET Core Docs</a> - Visit the .NET Core docs for more information on this powerful cross-platform development solution.</li>
+<li><a href="/docs/azure/deployment.md">Deploying Applications to Azure</a> - Deploy your app to <a href="https://azure.microsoft.com">Azure</a>.</li>
+<li><a href="https://docs.microsoft.com/dotnet/fsharp/get-started/get-started-vscode">Get Started with F# in Visual Studio Code</a></li>
+</ul>
+</body>
+</html>

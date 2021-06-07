@@ -35,12 +35,10 @@ npm test
 (test.js output would be here)
 ```
 
-
-
 ### See Also
 
-* [npm run-script](/commands/npm-run-script)
-* [npm scripts](/using-npm/scripts)
-* [npm start](/commands/npm-start)
-* [npm restart](/commands/npm-restart)
-* [npm stop](/commands/npm-stop)
+- [npm run-script](/commands/npm-run-script)
+- [npm scripts](/using-npm/scripts)
+- [npm start](/commands/npm-start)
+- [npm restart](/commands/npm-restart)
+- [npm stop](/commands/npm-stop)

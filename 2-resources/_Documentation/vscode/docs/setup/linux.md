@@ -7,6 +7,7 @@ PageTitle: Running Visual Studio Code on Linux
 DateApproved: 3/31/2021
 MetaDescription: Get Visual Studio Code up and running on Linux.
 ---
+
 # Visual Studio Code on Linux
 
 ## Installation
@@ -184,9 +185,9 @@ See the [Developing in WSL](/docs/remote/wsl.md) documentation to learn more or 
 
 Once you have installed VS Code, these topics will help you learn more about it:
 
-* [Additional Components](/docs/setup/additional-components.md) - Learn how to install Git, Node.js, TypeScript, and tools like Yeoman.
-* [User Interface](/docs/getstarted/userinterface.md) - A quick orientation to VS Code.
-* [User/Workspace Settings](/docs/getstarted/settings.md) - Learn how to configure VS Code to your preferences through settings.
+- [Additional Components](/docs/setup/additional-components.md) - Learn how to install Git, Node.js, TypeScript, and tools like Yeoman.
+- [User Interface](/docs/getstarted/userinterface.md) - A quick orientation to VS Code.
+- [User/Workspace Settings](/docs/getstarted/settings.md) - Learn how to configure VS Code to your preferences through settings.
 
 ## Common questions
 

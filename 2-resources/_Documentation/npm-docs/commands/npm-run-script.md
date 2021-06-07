@@ -14,7 +14,7 @@ aliases: run, rum, urn
 
 ### Description
 
-This runs an arbitrary command from a package's `"scripts"` object.  If no
+This runs an arbitrary command from a package's `"scripts"` object. If no
 `"command"` is provided, it will list the available scripts.
 
 `run[-script]` is used by the test, start, restart, and stop commands, but
@@ -22,7 +22,7 @@ can be called directly, as well. When the scripts in the package are
 printed out, they're separated into lifecycle (test, start, restart) and
 directly-run scripts.
 
-Any positional arguments are passed to the specified script.  Use `--` to
+Any positional arguments are passed to the specified script. Use `--` to
 pass `-`-prefixed flags and options which would otherwise be parsed by npm.
 
 For example:
@@ -31,7 +31,7 @@ For example:
 npm run test -- --grep="pattern"
 ```
 
-The arguments will only be passed to the script specified after ```npm run```
+The arguments will only be passed to the script specified after `npm run`
 and not to any `pre` or `post` script.
 
 The `env` script is a special built-in command that can be used to list
@@ -82,8 +82,8 @@ forgotten.
 
 #### if-present
 
-* Type: Boolean
-* Default: false
+- Type: Boolean
+- Default: false
 
 You can use the `--if-present` flag to avoid exiting with a non-zero exit code
 when the script is undefined. This lets you run potentially undefined scripts
@@ -91,31 +91,31 @@ without breaking the execution chain.
 
 #### ignore-scripts
 
-* Type: Boolean
-* Default: false
+- Type: Boolean
+- Default: false
 
 Skips running `pre` and `post` scripts.
 
 #### script-shell
 
-* Type: String
-* Default: `null`
+- Type: String
+- Default: `null`
 
 Optional custom script to use to execute the command. If not defined defaults
 to `/bin/sh` on Unix, defaults to `env.comspec` or `cmd.exe` on Windows.
 
 #### silent
 
-* Type: Boolean
-* Default: false
+- Type: Boolean
+- Default: false
 
 You can use the `--silent` flag to prevent showing `npm ERR!` output on error.
 
 ### See Also
 
-* [npm scripts](/using-npm/scripts)
-* [npm test](/commands/npm-test)
-* [npm start](/commands/npm-start)
-* [npm restart](/commands/npm-restart)
-* [npm stop](/commands/npm-stop)
-* [npm config](/commands/npm-config)
+- [npm scripts](/using-npm/scripts)
+- [npm test](/commands/npm-test)
+- [npm start](/commands/npm-start)
+- [npm restart](/commands/npm-restart)
+- [npm stop](/commands/npm-stop)
+- [npm config](/commands/npm-config)

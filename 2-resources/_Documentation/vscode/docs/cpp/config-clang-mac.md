@@ -7,6 +7,7 @@ PageTitle: Configure VS Code for Clang/LLVM on macOS
 DateApproved: 3/18/2020
 MetaDescription: Configure the C++ extension in Visual Studio Code to target Clang/LLVM
 ---
+
 # Using Clang in Visual Studio Code
 
 In this tutorial, you configure Visual Studio Code on macOS to use the Clang/LLVM compiler and debugger.
@@ -23,7 +24,7 @@ To successfully complete this tutorial, you must do the following:
 
 1. Install the [C++ extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools). You can install the C/C++ extension by searching for 'c++' in the Extensions view (`kb(workbench.view.extensions)`).
 
-    ![C/C++ extension](images/cpp/cpp-extension.png)
+   ![C/C++ extension](images/cpp/cpp-extension.png)
 
 ### Ensure Clang is installed
 
@@ -92,7 +93,7 @@ You can also enable [Auto Save](/docs/editor/codebasics.md#saveauto-save) to aut
 
 The Activity Bar on the edge of Visual Studio Code lets you open different views such as **Search**, **Source Control**, and **Run**. You'll look at the **Run** view later in this tutorial. You can find out more about the other views in the VS Code [User Interface documentation](/docs/getstarted/userinterface.md).
 
->**Note**: When you save or open a C++ file, you may see a notification from the C/C++ extension about the availability of an Insiders version, which lets you test new features and fixes. You can ignore this notification by selecting the `X` (**Clear Notification**).
+> **Note**: When you save or open a C++ file, you may see a notification from the C/C++ extension about the availability of an Insiders version, which lets you test new features and fixes. You can ignore this notification by selecting the `X` (**Clear Notification**).
 
 ## Explore IntelliSense
 
@@ -119,34 +120,32 @@ Replace the contents of that file with the following:
 
 ```json
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "shell",
-            "label": "clang++ build active file",
-            "command": "/usr/bin/clang++",
-            "args": [
-                "-std=c++17",
-                "-stdlib=libc++",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": [
-                "$gcc"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "clang++ build active file",
+      "command": "/usr/bin/clang++",
+      "args": [
+        "-std=c++17",
+        "-stdlib=libc++",
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
 }
 ```
 
@@ -167,7 +166,7 @@ The `problemMatcher` value selects the output parser to use for finding errors a
 
 The `"isDefault": true` value in the `group` object specifies that this task will be run when you press `kb(workbench.action.tasks.build)`. This property is for convenience only; if you set it to `false`, you can still build from the Terminal menu with **Terminal > Run Build Task**.
 
->**Note**: You can learn more about `tasks.json` variables in the [variables reference](/docs/editor/variables-reference.md).
+> **Note**: You can learn more about `tasks.json` variables in the [variables reference](/docs/editor/variables-reference.md).
 
 ### Running the build
 
@@ -179,7 +178,7 @@ The `"isDefault": true` value in the `group` object specifies that this task wil
 
 1. Create a new terminal using the **+** button and you'll have a new terminal with the `helloworld` folder as the working directory. Run `ls` and you should now see the executable `helloworld` along with the debugging file (`helloworld.dSYM`).
 
-    ![Hello World in macOS terminal](images/clang-mac/helloworld-in-terminal.png)
+   ![Hello World in macOS terminal](images/clang-mac/helloworld-in-terminal.png)
 
 1. You can run `helloworld` in the terminal by typing `./helloworld`.
 
@@ -201,25 +200,25 @@ VS Code creates a `launch.json` file, opens it in the editor, and builds and run
 
 ```json
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "clang++ - Build and debug active file",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [],
-            "stopAtEntry": true,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "lldb",
-            "preLaunchTask": "clang++ build active file"
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "clang++ - Build and debug active file",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": true,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+      "preLaunchTask": "clang++ build active file"
+    }
+  ]
 }
 ```
 
@@ -239,7 +238,7 @@ Ensure that the `preLaunchTask` value matches the `label` of the build task in t
 - The Integrated Terminal appears at the bottom of the source code editor. In the **Debug Output** tab, you see output that indicates the debugger is up and running.
 - The editor highlights the first statement in the `main` method. This is a breakpoint that the C++ extension automatically sets for you:
 
-   ![Initial breakpoint](images/msvc/stopAtEntry.png)
+  ![Initial breakpoint](images/msvc/stopAtEntry.png)
 
 - The Run view on the left shows debugging information. You'll see an example later in the tutorial.
 
@@ -251,9 +250,9 @@ Now you're ready to start stepping through the code.
 
 1. Click or press the **Step over** icon in the debugging control panel so that the `for (const string& word : msg)` statement is highlighted.
 
-    ![Step over button](images/cpp/step-over-button.png)
+   ![Step over button](images/cpp/step-over-button.png)
 
-    The **Step Over** command skips over all the internal function calls within the `vector` and `string` classes that are invoked when the `msg` variable is created and initialized. Notice the change in the **Variables** window. The contents of `msg` are visible because that statement has completed.
+   The **Step Over** command skips over all the internal function calls within the `vector` and `string` classes that are invoked when the `msg` variable is created and initialized. Notice the change in the **Variables** window. The contents of `msg` are visible because that statement has completed.
 
 1. Press **Step over** again to advance to the next statement (skipping over all the internal code that is executed to initialize the loop). Now, the **Variables** window shows information about the loop variable.
 
@@ -287,23 +286,21 @@ Visual Studio Code places these settings in `.vscode/c_cpp_properties.json`. If 
 
 ```json
 {
-    "configurations": [
-        {
-            "name": "Mac",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "defines": [],
-            "macFrameworkPath": [
-                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
-            ],
-            "compilerPath": "/usr/bin/clang",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64"
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "Mac",
+      "includePath": ["${workspaceFolder}/**"],
+      "defines": [],
+      "macFrameworkPath": [
+        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+      ],
+      "compilerPath": "/usr/bin/clang",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "clang-x64"
+    }
+  ],
+  "version": 4
 }
 ```
 
@@ -315,8 +312,8 @@ You only need to modify the **Include path** setting if your program includes he
 
 The C/C++ extension attempts to populate `compilerPath` with the default compiler location based on what it finds on your system. The `compilerPath` search order is:
 
-* Your PATH for the names of known compilers. The order the compilers appear in the list depends on your PATH.
-* Then hard-coded XCode paths are searched, such as `/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/`
+- Your PATH for the names of known compilers. The order the compilers appear in the list depends on your PATH.
+- Then hard-coded XCode paths are searched, such as `/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/`
 
 ### Mac framework path
 
@@ -344,10 +341,10 @@ The workaround is to have VS Code launch the terminal once. You can do this by a
 
 ```json
 {
-    "label": "Open Terminal",
-    "type": "shell",
-    "command": "osascript -e 'tell application \"Terminal\"\ndo script \"echo hello\"\nend tell'",
-    "problemMatcher": []
+  "label": "Open Terminal",
+  "type": "shell",
+  "command": "osascript -e 'tell application \"Terminal\"\ndo script \"echo hello\"\nend tell'",
+  "problemMatcher": []
 }
 ```
 

@@ -60,7 +60,7 @@ Because scoped packages are installed into a scope folder, you have to
 include the name of the scope when requiring them in your code, e.g.
 
 ```javascript
-require('@myorg/mypackage')
+require("@myorg/mypackage");
 ```
 
 There is nothing special about the way Node treats scope folders. This
@@ -89,8 +89,7 @@ To publish a private scoped package to the npm registry, you must have
 an [npm Private Modules](https://docs.npmjs.com/private-modules/intro)
 account.
 
-You can then publish the module with `npm publish` or `npm publish
---access restricted`, and it will be present in the npm registry, with
+You can then publish the module with `npm publish` or `npm publish --access restricted`, and it will be present in the npm registry, with
 restricted access. You can then change the access permissions, if
 desired, with `npm access` or on the npmjs.com website.
 
@@ -122,7 +121,7 @@ that registry instead.
 
 ### See also
 
-* [npm install](/commands/npm-install)
-* [npm publish](/commands/npm-publish)
-* [npm access](/commands/npm-access)
-* [npm registry](/using-npm/registry)
+- [npm install](/commands/npm-install)
+- [npm publish](/commands/npm-publish)
+- [npm access](/commands/npm-access)
+- [npm registry](/using-npm/registry)

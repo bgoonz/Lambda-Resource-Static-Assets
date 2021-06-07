@@ -7,6 +7,7 @@ PageTitle: Visual Studio Code Themes
 DateApproved: 3/31/2021
 MetaDescription: Changing the color theme in Visual Studio Code. You can use color themes provided by VS Code, the community or create your own new themes.
 ---
+
 # Color Themes
 
 Color themes let you modify the colors in Visual Studio Code's user interface to suit your preferences and work environment.
@@ -35,7 +36,7 @@ The active color theme is stored in your user [settings](/docs/getstarted/settin
 
 There are several out-of-the-box color themes in VS Code for you to try.
 
-Many more themes have been uploaded to the VS Code [Extension Marketplace](/docs/editor/extension-marketplace.md) by the community.  If you find one you want to use, install it and restart VS Code and the new theme will be available.
+Many more themes have been uploaded to the VS Code [Extension Marketplace](/docs/editor/extension-marketplace.md) by the community. If you find one you want to use, install it and restart VS Code and the new theme will be available.
 
 You can search for themes in the Extensions view (`kb(workbench.view.extensions)`) search box using the `@category:"themes"` filter.
 
@@ -73,7 +74,7 @@ A pre-configured set of syntax tokens ('comments', 'strings', ...) is available 
 
 ![Advanced Token Color Customization](images/themes/token_color_customization_advanced.png)
 
->**Note**: Directly configuring TextMate rules is an advanced skill as you need to understand on how TextMate grammars work. Go to the [Color Theme guide](/api/extension-guides/color-theme.md) for more information.
+> **Note**: Directly configuring TextMate rules is an advanced skill as you need to understand on how TextMate grammars work. Go to the [Color Theme guide](/api/extension-guides/color-theme.md) for more information.
 
 Again, to customize a specific theme only, use the following syntax:
 
@@ -193,8 +194,8 @@ You can create your own File Icon Theme from icons (preferably SVG), see the [Fi
 
 Themes are just one way to customize VS Code. If you'd like to learn more about VS Code customization and extensibility, try these topics:
 
-* [Settings](/docs/getstarted/settings) -  Learn how to configure VS Code to your preferences through user and workspace settings.
-* [Snippets](/docs/editor/userdefinedsnippets.md) - Add additional snippets to your favorite language.
-* [Extension API](/api) - Learn about other ways to extend VS Code.
-* [Color Theme](/api/extension-guides/color-theme.md) - Color Theme extension API.
-* [File Icon Theme](/api/extension-guides/file-icon-theme.md) - File Icon Theme extension API.
+- [Settings](/docs/getstarted/settings) - Learn how to configure VS Code to your preferences through user and workspace settings.
+- [Snippets](/docs/editor/userdefinedsnippets.md) - Add additional snippets to your favorite language.
+- [Extension API](/api) - Learn about other ways to extend VS Code.
+- [Color Theme](/api/extension-guides/color-theme.md) - Color Theme extension API.
+- [File Icon Theme](/api/extension-guides/file-icon-theme.md) - File Icon Theme extension API.

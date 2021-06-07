@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="./prism.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./prism.css" />
     <script async defer src="./prism.js"></script>
   </head>
 
-  <body>;
+  <body>
+    ;
     <h3 id="variables">Variables</h3>
     <pre class="scss"><code>:root {
   --text-color: #30333a;
@@ -64,7 +68,9 @@
   @media (min-width: 30em) { ··· }
 }</code></pre>
     <h3 id="custom-selectors">Custom selectors</h3>
-    <pre class="scss"><code>@custom-selector :--button input[type=&#39;submit&#39;], input[type=&#39;button&#39;];
+    <pre
+      class="scss"
+    ><code>@custom-selector :--button input[type=&#39;submit&#39;], input[type=&#39;button&#39;];
 @custom-selector :--enter :hover, :focus;</code></pre>
     <pre class="scss"><code>:--button { ··· }
 :--button:--enter { ··· }</code></pre>
@@ -77,16 +83,22 @@ a::before { ··· }         /* a:before -- for IE compatibility */
 [frame=hsides i] { ··· }  /* [frame=hsides] -- but case insensitive */</code></pre>
     <h2 id="media-queries">Media queries</h2>
     <h3 id="custom-media-queries">Custom media queries</h3>
-    <pre class="scss"><code>@custom-media --viewport-medium (width &lt;= 50rem);</code></pre>
+    <pre
+      class="scss"
+    ><code>@custom-media --viewport-medium (width &lt;= 50rem);</code></pre>
     <pre class="scss"><code>@media (--viewport-medium) { ··· }</code></pre>
     <h3 id="media-query-ranges">Media query ranges</h3>
-    <pre class="scss"><code>@media (width &gt;= 500px) { ··· }    /* (min-width: 500px) */</code></pre>
+    <pre
+      class="scss"
+    ><code>@media (width &gt;= 500px) { ··· }    /* (min-width: 500px) */</code></pre>
     <h2 id="properties">Properties</h2>
     <h3 id="property-fallbacks">Property fallbacks</h3>
     <pre class="scss"><code>/* font-feature-settings fallback */
 h2 { font-variant-caps: small-caps; }
 table { font-variant-numeric: lining-nums; }</code></pre>
-    <pre class="scss"><code>div { filter: blur(4px); }          /* svg filter fallback */
+    <pre
+      class="scss"
+    ><code>div { filter: blur(4px); }          /* svg filter fallback */
 div { overflow-wrap: break-word; }  /* word-wrap fallback */</code></pre>
     <h3 id="autoprefixing">Autoprefixing</h3>
     <pre class="scss"><code>div {
@@ -106,8 +118,11 @@ div { overflow-wrap: break-word; }  /* word-wrap fallback */</code></pre>
     <p>{: .-one-column}</p>
     <ul>
       <li>Based on cssnext 2.9.0.</li>
-      <li><a href="http://cssnext.io/features/" class="uri">http://cssnext.io/features/</a></li>
+      <li>
+        <a href="http://cssnext.io/features/" class="uri"
+          >http://cssnext.io/features/</a
+        >
+      </li>
     </ul>
   </body>
-
 </html>

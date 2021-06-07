@@ -7,6 +7,7 @@ ContentId: ed14ef07-f44c-4675-b95b-cb5faffc7abb
 MetaDescription: Attach to a running container using Visual Studio Code Remote Development
 DateApproved: 3/31/2021
 ---
+
 # Attach to a running container
 
 Visual Studio Code can create and start containers for you but that may not match your workflow and you may prefer to "attach" VS Code to an already running Docker container - regardless of how it was started. Once attached, you can install extensions, edit, and debug like you can when you open a folder in a container using [devcontainer.json](/docs/remote/devcontainerjson-reference.md).
@@ -23,36 +24,34 @@ To attach to a Docker container, either select **Remote-Containers: Attach to Ru
 
 VS Code supports image or container name-level configuration files to speed up setup when you repeatedly connect to a given Docker container. Once attached, anytime you open a folder, [install an extension](/docs/remote/containers.md#managing-extensions), or [forward a port](/docs/remote/containers.md#forwarding-or-publishing-a-port), a local image-specific configuration file will automatically be updated to remember your settings so that when you attach again, everything is back to the right place.
 
-* By default, an **image-level** configuration is used. To view or update it after attaching, select **Remote-Containers: Open Container Configuration** from the Command Palette (`kbstyle(F1)`).
+- By default, an **image-level** configuration is used. To view or update it after attaching, select **Remote-Containers: Open Container Configuration** from the Command Palette (`kbstyle(F1)`).
 
-* If you would prefer to tie your configuration to a **container name**, select **Remote-Containers: Open Named Configuration File** from the Command Palette (`kbstyle(F1)`) after attaching. Any updates from this point forward will apply to this name-level configuration rather than at the image level.
+- If you would prefer to tie your configuration to a **container name**, select **Remote-Containers: Open Named Configuration File** from the Command Palette (`kbstyle(F1)`) after attaching. Any updates from this point forward will apply to this name-level configuration rather than at the image level.
 
 Both of these files support a subset of `devcontainer.json` properties:
 
 ```json
 {
-    // Default path to open when attaching to a new container.
-    "workspaceFolder": "/path/to/code/in/container/here",
+  // Default path to open when attaching to a new container.
+  "workspaceFolder": "/path/to/code/in/container/here",
 
-    // An array of extension IDs that specify the extensions to
-    // install inside the container when you first attach to it.
-    "extensions": [
-        "dbaeumer.vscode-eslint"
-    ],
+  // An array of extension IDs that specify the extensions to
+  // install inside the container when you first attach to it.
+  "extensions": ["dbaeumer.vscode-eslint"],
 
-    // Any *default* container specific VS Code settings
-    "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
-    },
+  // Any *default* container specific VS Code settings
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
 
-    // An array port numbers to forward
-    "forwardPorts": [8000],
+  // An array port numbers to forward
+  "forwardPorts": [8000],
 
-    // Container user VS Code should use when connecting
-    "remoteUser": "vscode",
+  // Container user VS Code should use when connecting
+  "remoteUser": "vscode",
 
-    // Set environment variables for VS Code and sub-processes
-    "remoteEnv": { "MY_VARIABLE": "some-value" }
+  // Set environment variables for VS Code and sub-processes
+  "remoteEnv": { "MY_VARIABLE": "some-value" }
 }
 ```
 
@@ -74,6 +73,6 @@ To attach to a container in a Kubernetes cluster, first install the [Kubernetes 
 
 ## Next steps
 
-* [Create a Development Container](/docs/remote/create-dev-container.md) - Create a custom container for your work environment.
-* [Advanced Containers](/docs/remote/containers-advanced.md) - Find solutions to advanced container scenarios.
-* [devcontainer.json reference](/docs/remote/devcontainerjson-reference.md) - Review the `devcontainer.json` schema.
+- [Create a Development Container](/docs/remote/create-dev-container.md) - Create a custom container for your work environment.
+- [Advanced Containers](/docs/remote/containers-advanced.md) - Find solutions to advanced container scenarios.
+- [devcontainer.json reference](/docs/remote/devcontainerjson-reference.md) - Review the `devcontainer.json` schema.

@@ -7,6 +7,7 @@ PageTitle: Visual Studio Code Tips and Tricks
 DateApproved: 3/31/2021
 MetaDescription: Visual Studio Code Tips and Tricks for power users.
 ---
+
 # Visual Studio Code Tips and Tricks
 
 "Tips and Tricks" lets you jump right in and learn how to be productive with Visual Studio Code. You'll become familiar with its powerful editing, code intelligence, and source code control features and learn useful keyboard shortcuts. This topic goes pretty fast and provides a broad overview, so be sure to look at the other in-depth topics in [Getting Started](/docs/getstarted/userinterface.md) and the [User Guide](/docs/editor/codebasics.md) to learn more.
@@ -141,12 +142,12 @@ If you want to persist the new language mode for that file type, you can use the
 
 There are many things you can do to customize VS Code.
 
-* Change your theme
-* Change your keyboard shortcuts
-* Tune your settings
-* Add JSON validation
-* Create snippets
-* Install extensions
+- Change your theme
+- Change your keyboard shortcuts
+- Tune your settings
+- Add JSON validation
+- Create snippets
+- Install extensions
 
 ### Change your theme
 
@@ -164,13 +165,13 @@ Additionally, you can install and change your File Icon themes.
 
 Are you used to keyboard shortcuts from another editor? You can install a Keymap extension that brings the keyboard shortcuts from your favorite editor to VS Code. Go to **Preferences** > **Keymaps** to see the current list on the [Marketplace](https://marketplace.visualstudio.com/search?target=VSCode&category=Keymaps&sortBy=Downloads). Some of the more popular ones:
 
-* [Vim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
-* [Sublime Text Keymap](https://marketplace.visualstudio.com/items?itemName=ms-vscode.sublime-keybindings)
-* [Emacs Keymap](https://marketplace.visualstudio.com/items?itemName=hiro-sun.vscode-emacs)
-* [Atom Keymap](https://marketplace.visualstudio.com/items?itemName=ms-vscode.atom-keybindings)
-* [Brackets Keymap](https://marketplace.visualstudio.com/items?itemName=ms-vscode.brackets-keybindings)
-* [Eclipse Keymap](https://marketplace.visualstudio.com/items?itemName=alphabotsec.vscode-eclipse-keybindings)
-* [Visual Studio Keymap](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vs-keybindings)
+- [Vim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim)
+- [Sublime Text Keymap](https://marketplace.visualstudio.com/items?itemName=ms-vscode.sublime-keybindings)
+- [Emacs Keymap](https://marketplace.visualstudio.com/items?itemName=hiro-sun.vscode-emacs)
+- [Atom Keymap](https://marketplace.visualstudio.com/items?itemName=ms-vscode.atom-keybindings)
+- [Brackets Keymap](https://marketplace.visualstudio.com/items?itemName=ms-vscode.brackets-keybindings)
+- [Eclipse Keymap](https://marketplace.visualstudio.com/items?itemName=alphabotsec.vscode-eclipse-keybindings)
+- [Visual Studio Keymap](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vs-keybindings)
 
 ### Customize your keyboard shortcuts
 
@@ -375,15 +376,15 @@ In the **Extensions** view, click **Show Recommended Extensions** in the **More 
 
 Are you interested in creating your own extension? You can learn how to do this in the [Extension API documentation](/api), specifically check out the [documentation on contribution points](/api/references/contribution-points.md).
 
-* configuration
-* commands
-* keybindings
-* languages
-* debuggers
-* grammars
-* themes
-* snippets
-* jsonValidation
+- configuration
+- commands
+- keybindings
+- languages
+- debuggers
+- grammars
+- themes
+- snippets
+- jsonValidation
 
 ## Files and folders
 
@@ -395,8 +396,8 @@ Keyboard Shortcut: `kb(workbench.action.terminal.toggleTerminal)`
 
 Further reading:
 
-* [Integrated Terminal](/docs/editor/integrated-terminal.md) documentation
-* [Mastering VS Code's Terminal article](https://www.growingwiththeweb.com/2017/03/mastering-vscodes-terminal.html)
+- [Integrated Terminal](/docs/editor/integrated-terminal.md) documentation
+- [Mastering VS Code's Terminal article](https://www.growingwiththeweb.com/2017/03/mastering-vscodes-terminal.html)
 
 ### Toggle Sidebar
 
@@ -521,9 +522,7 @@ You can add vertical column rulers to the editor with the `editor.rulers` settin
 
 ```json
 {
-    "editor.rulers": [
-        20, 40, 60
-    ]
+  "editor.rulers": [20, 40, 60]
 }
 ```
 
@@ -698,39 +697,39 @@ Here is configuration to use ES6.
 
 ```json
 {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true,
-        "node": true
-    },
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "jsx": true,
-            "classes": true,
-            "defaultParams": true
-        }
-    },
-    "rules": {
-        "no-const-assign": 1,
-        "no-extra-semi": 0,
-        "semi": 0,
-        "no-fallthrough": 0,
-        "no-empty": 0,
-        "no-mixed-spaces-and-tabs": 0,
-        "no-redeclare": 0,
-        "no-this-before-super": 1,
-        "no-undef": 1,
-        "no-unreachable": 1,
-        "no-use-before-define": 0,
-        "constructor-super": 1,
-        "curly": 0,
-        "eqeqeq": 0,
-        "func-names": 0,
-        "valid-typeof": 1
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "classes": true,
+      "defaultParams": true
     }
+  },
+  "rules": {
+    "no-const-assign": 1,
+    "no-extra-semi": 0,
+    "semi": 0,
+    "no-fallthrough": 0,
+    "no-empty": 0,
+    "no-mixed-spaces-and-tabs": 0,
+    "no-redeclare": 0,
+    "no-this-before-super": 1,
+    "no-undef": 1,
+    "no-unreachable": 1,
+    "no-use-before-define": 0,
+    "constructor-super": 1,
+    "curly": 0,
+    "eqeqeq": 0,
+    "func-names": 0,
+    "valid-typeof": 1
+  }
 }
 ```
 
@@ -903,19 +902,19 @@ This will generate a `tasks.json` file with content like the following. See the 
 
 ```json
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "npm",
-            "script": "install",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "install",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
 }
 ```
 
@@ -935,9 +934,9 @@ For example, to bind `kbstyle(Ctrl+H)` to the `Run tests` task, add the followin
 
 ```json
 {
-    "key": "ctrl+h",
-    "command": "workbench.action.tasks.runTask",
-    "args": "Run tests"
+  "key": "ctrl+h",
+  "command": "workbench.action.tasks.runTask",
+  "args": "Run tests"
 }
 ```
 
@@ -957,6 +956,6 @@ VS Code has a [Portable mode](/docs/editor/portable.md) which lets you keep sett
 
 The Visual Studio Code team uses the Insiders version to test the latest features and bug fixes of VS Code. You can also use the Insiders version by [downloading it here](/insiders).
 
-* For Early Adopters - Insiders has the most recent code changes for users and extension authors to try out.
-* Frequent Builds - New builds every day with the latest bug fixes and features.
-* Side-by-side install - Insiders installs next to the Stable build allowing you to use either independently.
+- For Early Adopters - Insiders has the most recent code changes for users and extension authors to try out.
+- Frequent Builds - New builds every day with the latest bug fixes and features.
+- Side-by-side install - Insiders installs next to the Stable build allowing you to use either independently.

@@ -7,6 +7,7 @@ PageTitle: Configure Visual Studio Code for Microsoft C++
 DateApproved: 2/19/2020
 MetaDescription: Configure the C++ extension in Visual Studio Code to target Microsoft C++ on Windows.
 ---
+
 # Configure VS Code for Microsoft C++
 
 In this tutorial, you configure Visual Studio Code to use the Microsoft Visual C++ compiler and debugger on Windows.
@@ -23,7 +24,7 @@ To successfully complete this tutorial, you must do the following:
 
 1. Install the [C/C++ extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools). You can install the C/C++ extension by searching for 'c++' in the Extensions view (`kb(workbench.view.extensions)`).
 
-    ![C/C++ extension](images/cpp/cpp-extension.png)
+   ![C/C++ extension](images/cpp/cpp-extension.png)
 
 1. Install the Microsoft Visual C++ (MSVC) compiler toolset.
 
@@ -37,7 +38,7 @@ To successfully complete this tutorial, you must do the following:
 
    ![Cpp build tools workload](images/msvc/cpp-build-tools.png)
 
->**Note**: You can use the C++ toolset from Visual Studio Build Tools along with Visual Studio Code to compile, build, and verify any C++ codebase as long as you also have a valid Visual Studio license (either Community, Pro, or Enterprise) that you are actively using to develop that C++ codebase.
+> **Note**: You can use the C++ toolset from Visual Studio Build Tools along with Visual Studio Code to compile, build, and verify any C++ codebase as long as you also have a valid Visual Studio license (either Community, Pro, or Enterprise) that you are actively using to develop that C++ codebase.
 
 ### Check your Microsoft Visual C++ installation
 
@@ -108,7 +109,7 @@ You can also enable [Auto Save](/docs/editor/codebasics.md#saveauto-save) to aut
 
 The Activity Bar on the far left lets you open different views such as **Search**, **Source Control**, and **Run**. You'll look at the **Run** view later in this tutorial. You can find out more about the other views in the VS Code [User Interface documentation](/docs/getstarted/userinterface.md).
 
->**Note**: When you save or open a C++ file, you may see a notification from the C/C++ extension about the availability of an Insiders version, which lets you test new features and fixes. You can ignore this notification by selecting the `X` (**Clear Notification**).
+> **Note**: When you save or open a C++ file, you may see a notification from the C/C++ extension about the availability of an Insiders version, which lets you test new features and fixes. You can ignore this notification by selecting the `X` (**Clear Notification**).
 
 ## Explore IntelliSense
 
@@ -132,34 +133,32 @@ Your new `tasks.json` file should look similar to the JSON below:
 
 ```json
 {
-"version": "2.0.0",
-"tasks": [
+  "version": "2.0.0",
+  "tasks": [
     {
-        "type": "shell",
-        "label": "cl.exe build active file",
-        "command": "cl.exe",
-        "args": [
-            "/Zi",
-            "/EHsc",
-            "/Fe:",
-            "${fileDirname}\\${fileBasenameNoExtension}.exe",
-            "${file}"
-        ],
-        "problemMatcher": [
-            "$msCompile"
-        ],
-        "group": {
-            "kind": "build",
-            "isDefault": true
-        }
+      "type": "shell",
+      "label": "cl.exe build active file",
+      "command": "cl.exe",
+      "args": [
+        "/Zi",
+        "/EHsc",
+        "/Fe:",
+        "${fileDirname}\\${fileBasenameNoExtension}.exe",
+        "${file}"
+      ],
+      "problemMatcher": ["$msCompile"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     }
-]
+  ]
 }
 ```
 
 The `command` setting specifies the program to run; in this case that is "cl.exe". The `args` array specifies the command-line arguments that will be passed to cl.exe. These arguments must be specified in the order expected by the compiler. This task tells the C++ compiler to take the active file (`${file}`), compile it, and create an executable file (`/Fe:` switch) in the current directory (`${fileDirname}`) with the same name as the active file but with the `.exe` extension (`${fileBasenameNoExtension}.exe`), resulting in `helloworld.exe` for our example.
 
->**Note**: You can learn more about `tasks.json` variables in the [variables reference](/docs/editor/variables-reference.md).
+> **Note**: You can learn more about `tasks.json` variables in the [variables reference](/docs/editor/variables-reference.md).
 
 The `label` value is what you will see in the tasks list; you can name this whatever you like.
 
@@ -177,11 +176,11 @@ The `"isDefault": true` value in the `group` object specifies that this task wil
 
 1. Create a new terminal using the **+** button and you'll have a new terminal (running PowerShell) with the `helloworld` folder as the working directory. Run `ls` and you should now see the executable `helloworld.exe` along with various intermediate C++ output and debugging files (`helloworld.obj`, `helloworld.pdb`).
 
-    ![Hello World in PowerShell terminal](images/msvc/helloworld-in-terminal.png)
+   ![Hello World in PowerShell terminal](images/msvc/helloworld-in-terminal.png)
 
 1. You can run `helloworld` in the terminal by typing `.\helloworld.exe`.
 
->**Note**: You might need to press `kbstyle(Enter)` a couple of times initially to see the PowerShell prompt in the terminal. This issue should be fixed in a future release of Windows.
+> **Note**: You might need to press `kbstyle(Enter)` a couple of times initially to see the PowerShell prompt in the terminal. This issue should be fixed in a future release of Windows.
 
 ### Modifying tasks.json
 
@@ -199,21 +198,21 @@ VS Code creates a `launch.json` file, opens it in the editor, and builds and run
 
 ```json
 {
-"version": "0.2.0",
-"configurations": [
+  "version": "0.2.0",
+  "configurations": [
     {
-        "name": "cl.exe build and debug active file",
-        "type": "cppvsdbg",
-        "request": "launch",
-        "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-        "args": [],
-        "stopAtEntry": false,
-        "cwd": "${workspaceFolder}",
-        "environment": [],
-        "externalConsole": false,
-        "preLaunchTask": "cl.exe build active file"
+      "name": "cl.exe build and debug active file",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "preLaunchTask": "cl.exe build active file"
     }
-]
+  ]
 }
 ```
 
@@ -229,7 +228,7 @@ By default, the C++ extension won't add any breakpoints to your source code and 
 - The Integrated Terminal appears at the bottom of the source code editor. In the **Debug Output** tab, you see output that indicates the debugger is up and running.
 - The editor highlights the first statement in the `main` method. This is a breakpoint that the C++ extension automatically sets for you:
 
-   ![Initial breakpoint](images/msvc/stopAtEntry.png)
+  ![Initial breakpoint](images/msvc/stopAtEntry.png)
 
 - The Run view on the left shows debugging information. You'll see an example later in the tutorial.
 
@@ -241,9 +240,9 @@ Now you're ready to start stepping through the code.
 
 1. Click or press the **Step over** icon in the debugging control panel until the `for (const string& word : msg)` statement is highlighted.
 
-    ![Step over button](images/cpp/step-over-button.png)
+   ![Step over button](images/cpp/step-over-button.png)
 
-    The **Step Over** command skip over all the internal function calls within the `vector` and `string` classes that are invoked when the `msg` variable is created and initialized. Notice the change in the **Variables** window on the left. In this case, the errors are expected because, although the variable names for the loop are now visible to the debugger, the statement has not executed yet, so there is nothing to read at this point. The contents of `msg` are visible, however, because that statement has completed.
+   The **Step Over** command skip over all the internal function calls within the `vector` and `string` classes that are invoked when the `msg` variable is created and initialized. Notice the change in the **Variables** window on the left. In this case, the errors are expected because, although the variable names for the loop are now visible to the debugger, the statement has not executed yet, so there is nothing to read at this point. The contents of `msg` are visible, however, because that statement has completed.
 
 1. Press **Step over** again to advance to the next statement in this program (skipping over all the internal code that is executed to initialize the loop). Now, the **Variables** window shows information about the loop variables.
 
@@ -251,13 +250,13 @@ Now you're ready to start stepping through the code.
 
 1. If you like, you can keep pressing **Step over** until all the words in the vector have been printed to the console. But if you are curious, try pressing the **Step Into** button to step through source code in the C++ standard library!
 
-    ![Breakpoint in gcc standard library header](images/msvc/msvc-system-header-stepping.png)
+   ![Breakpoint in gcc standard library header](images/msvc/msvc-system-header-stepping.png)
 
-    To return to your own code, one way is to keep pressing **Step over**. Another way is to set a breakpoint in your code by switching to the `helloworld.cpp` tab in the code editor, putting the insertion point somewhere on the `cout` statement inside the loop, and pressing `kb(editor.debug.action.toggleBreakpoint)`. A red dot appears in the gutter on the left to indicate that a breakpoint has been set on this line.
+   To return to your own code, one way is to keep pressing **Step over**. Another way is to set a breakpoint in your code by switching to the `helloworld.cpp` tab in the code editor, putting the insertion point somewhere on the `cout` statement inside the loop, and pressing `kb(editor.debug.action.toggleBreakpoint)`. A red dot appears in the gutter on the left to indicate that a breakpoint has been set on this line.
 
-    ![Breakpoint in main](images/cpp/breakpoint-in-main.png)
+   ![Breakpoint in main](images/cpp/breakpoint-in-main.png)
 
-    Then press `kb(workbench.action.debug.start)` to start execution from the current line in the standard library header. Execution will break on `cout`. If you like, you can press `kb(editor.debug.action.toggleBreakpoint)` again to toggle off the breakpoint.
+   Then press `kb(workbench.action.debug.start)` to start execution from the current line in the standard library header. Execution will break on `cout`. If you like, you can press `kb(editor.debug.action.toggleBreakpoint)` again to toggle off the breakpoint.
 
 ## Set a watch
 
@@ -289,25 +288,19 @@ Visual Studio Code places these settings in `.vscode\c_cpp_properties.json`. If 
 
 ```json
 {
-"configurations": [
+  "configurations": [
     {
-        "name": "Win32",
-        "includePath": [
-            "${workspaceFolder}/**"
-        ],
-        "defines": [
-            "_DEBUG",
-            "UNICODE",
-            "_UNICODE"
-        ],
-        "windowsSdkVersion": "10.0.18362.0",
-        "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.24.28314/bin/Hostx64/x64/cl.exe",
-        "cStandard": "c11",
-        "cppStandard": "c++17",
-        "intelliSenseMode": "msvc-x64"
+      "name": "Win32",
+      "includePath": ["${workspaceFolder}/**"],
+      "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
+      "windowsSdkVersion": "10.0.18362.0",
+      "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.24.28314/bin/Hostx64/x64/cl.exe",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "msvc-x64"
     }
-],
-"version": 4
+  ],
+  "version": 4
 }
 ```
 
@@ -321,9 +314,9 @@ The C/C++ extension attempts to populate `compilerPath` with the default compile
 
 The `compilerPath` search order is:
 
-* First check for the Microsoft Visual C++ compilerOpe
-* Then look for g++ on Windows Subsystem for Linux (WSL)
-* Then g++ for Mingw-w64.
+- First check for the Microsoft Visual C++ compilerOpe
+- Then look for g++ on Windows Subsystem for Linux (WSL)
+- Then g++ for Mingw-w64.
 
 If you have g++ or WSL installed, you might need to change `compilerPath` to match the preferred compiler for your project. For Microsoft C++, the path should look something like this, depending on which specific version you have installed: "C:/Program Files (x86)/Microsoft Visual Studio/2017/BuildTools/VC/Tools/MSVC/14.16.27023/bin/Hostx64/x64/cl.exe".
 

@@ -7,6 +7,7 @@ PageTitle: Developing in the Windows Subsystem for Linux with Visual Studio Code
 DateApproved: 10/22/2020
 MetaDescription: Learn to use development in the Windows Subsystem for Linux (WSL) with Visual Studio Code
 ---
+
 # Use the Windows Subsystem for Linux (WSL)
 
 ## What is WSL?

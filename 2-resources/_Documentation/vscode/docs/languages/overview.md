@@ -7,6 +7,7 @@ PageTitle: Language Support in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: In Visual Studio Code we have support for all common languages including smart code completion and debugging.
 ---
+
 # Programming Languages
 
 ## Hundreds of programming languages supported
@@ -19,7 +20,7 @@ Here are eight of the most popular language extensions:
 
 Go to the [Marketplace](https://marketplace.visualstudio.com/vscode) or use the integrated [Extensions view](/docs/editor/extension-marketplace.md) and search for your desired programming language to find snippets, code completion/IntelliSense providers, linters, debuggers and more.
 
->**Note**: If you want to change the display language of VS Code (for example, to Chinese), see the [Display Language](/docs/getstarted/locales.md) topic.
+> **Note**: If you want to change the display language of VS Code (for example, to Chinese), see the [Display Language](/docs/getstarted/locales.md) topic.
 
 ## Language specific documentation
 
@@ -32,12 +33,12 @@ Click on any linked item to get an overview of how to use VS Code in the context
 
 The richness of support varies across the different languages and their extensions:
 
-* Syntax highlighting and bracket matching
-* Smart completions (IntelliSense)
-* Linting and corrections
-* Code navigation (Go to Definition, Find All References)
-* Debugging
-* Refactoring
+- Syntax highlighting and bracket matching
+- Smart completions (IntelliSense)
+- Linting and corrections
+- Code navigation (Go to Definition, Find All References)
+- Debugging
+- Refactoring
 
 ## Changing the language for the selected file
 
@@ -79,8 +80,8 @@ IntelliSense (`kb(editor.action.triggerSuggest)`) will show you the available la
 
 Now you know that VS Code has support for the languages you care about. Read on...
 
-* [Code Navigation](/docs/editor/editingevolved.md) - Peek and Go to Definition and more
-* [Debugging](/docs/editor/debugging.md) - This is where VS Code really shines
+- [Code Navigation](/docs/editor/editingevolved.md) - Peek and Go to Definition and more
+- [Debugging](/docs/editor/debugging.md) - This is where VS Code really shines
 
 ## Common questions
 

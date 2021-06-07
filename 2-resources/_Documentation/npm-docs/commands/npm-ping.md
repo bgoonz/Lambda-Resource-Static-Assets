@@ -18,13 +18,15 @@ If it works it will output something like:
 ```bash
 Ping success: {*Details about registry*}
 ```
+
 otherwise you will get:
+
 ```bash
 Ping error: {*Detail about error}
 ```
 
 ### See Also
 
-* [npm doctor](/commands/npm-doctor)
-* [npm config](/commands/npm-config)
-* [npmrc](/configuring-npm/npmrc)
+- [npm doctor](/commands/npm-doctor)
+- [npm config](/commands/npm-config)
+- [npmrc](/configuring-npm/npmrc)

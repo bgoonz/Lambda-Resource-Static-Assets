@@ -182,9 +182,9 @@ Another advanced feature the debugger supports is 'Hot Code' replacement. Hot co
 
 You may use the debug setting `java.debug.settings.hotCodeReplace` to control how to trigger Hot Code replacement. The possible setting values are:
 
-* `manual` - Click the toolbar to apply the changes (default).
-* `auto` - Automatically apply the changes after compilation.
-* `never` - Disable Hot Code replacement.
+- `manual` - Click the toolbar to apply the changes (default).
+- `auto` - Automatically apply the changes after compilation.
+- `never` - Disable Hot Code replacement.
 
 ### Logpoints
 
@@ -276,18 +276,18 @@ If you encounter issues when using the debugger, a detailed troubleshooting guid
 
 Common issues explained include:
 
-* Java Language Support extension fails to start.
-* Build failed, do you want to continue?
-* *.java isn't on the classpath. Only syntax errors will be reported.
-* Program Error: Could not find or load main class X.
-* Program throws ClassNotFoundException.
-* Failed to complete hot code replace.
-* Please specify the host name and the port of the remote debuggee in the launch.json.
-* Failed to evaluate. Reason: Cannot evaluate because the thread is resumed.
-* Cannot find a class with the main method.
-* No delegateCommandHandler for vscode.java.startDebugSession when starting Debugger.
-* Failed to resolve classpath.
-* Request type "X" is not supported. Only "launch" and "attach" are supported.
+- Java Language Support extension fails to start.
+- Build failed, do you want to continue?
+- \*.java isn't on the classpath. Only syntax errors will be reported.
+- Program Error: Could not find or load main class X.
+- Program throws ClassNotFoundException.
+- Failed to complete hot code replace.
+- Please specify the host name and the port of the remote debuggee in the launch.json.
+- Failed to evaluate. Reason: Cannot evaluate because the thread is resumed.
+- Cannot find a class with the main method.
+- No delegateCommandHandler for vscode.java.startDebugSession when starting Debugger.
+- Failed to resolve classpath.
+- Request type "X" is not supported. Only "launch" and "attach" are supported.
 
 ## Feedback and questions
 
@@ -297,9 +297,9 @@ You can find the full list of issues at [Issue Tracker](https://github.com/micro
 
 Read on to find out about:
 
-* [Debugging](/docs/editor/debugging.md) - Find out how to use the debugger in VS Code with your project for any language.
+- [Debugging](/docs/editor/debugging.md) - Find out how to use the debugger in VS Code with your project for any language.
 
 And for Java:
 
-* [Java Testing](/docs/java/java-testing.md) - Test Java within VS Code with the Java Test Runner extension.
-* [Java Extensions](/docs/java/extensions.md) - Learn about more useful Java extensions for VS Code.
+- [Java Testing](/docs/java/java-testing.md) - Test Java within VS Code with the Java Test Runner extension.
+- [Java Extensions](/docs/java/extensions.md) - Learn about more useful Java extensions for VS Code.

@@ -7,15 +7,16 @@ PageTitle: Debug C++ in Visual Studio Code
 DateApproved: 05/21/2020
 MetaDescription: How to debug C++ programs in Visual Studio Code.
 ---
+
 # Debug C++ in Visual Studio Code
 
 After you have set up the basics of your debugging environment as specified in the configuration tutorials for each target compiler/platform, you can learn more details about debugging C/C++ in this section.
 
 Visual Studio Code supports the following debuggers for C/C++ depending on the operating system you are using:
 
-* **Linux**: GDB
-* **macOS**: LLDB or GDB
-* **Windows**: the Visual Studio Windows Debugger or GDB (using Cygwin or MinGW)
+- **Linux**: GDB
+- **macOS**: LLDB or GDB
+- **Windows**: the Visual Studio Windows Debugger or GDB (using Cygwin or MinGW)
 
 ## Windows debugging with GDB
 
@@ -49,9 +50,9 @@ Function breakpoints enable you to break execution at the beginning of a functio
 
 VS Code supports expression evaluation in several contexts:
 
-* You can type an expression into the **Watch** section of the **Run** view and it will be evaluated each time a breakpoint is hit.
-* You can type an expression into the **Debug Console** and it will be evaluated only once.
-* You can evaluate any expression that appears in your code while you're stopped at a breakpoint.
+- You can type an expression into the **Watch** section of the **Run** view and it will be evaluated each time a breakpoint is hit.
+- You can type an expression into the **Debug Console** and it will be evaluated only once.
+- You can evaluate any expression that appears in your code while you're stopped at a breakpoint.
 
 Expressions in the **Watch** section take effect in the application being debugged; an expression that modifies the value of a variable will modify that variable for the duration of the program.
 
@@ -100,10 +101,10 @@ For the `C++ (GDB/LLDB)` debugging environment, you can execute GDB, LLDB and LL
 
 ## Other debugging features
 
-* Unconditional breakpoints
-* Watch window
-* Call stack
-* Stepping
+- Unconditional breakpoints
+- Watch window
+- Call stack
+- Stepping
 
 For more information on debugging with VS Code, see this introduction to [debugging in VS Code](/docs/editor/debugging.md).
 
@@ -127,47 +128,48 @@ If you are experiencing a debugging problem with the extension that we can't dia
 
 All platforms:
 
-* Because the extension doesn't parse function bodies, **Peek Definition** and **Go to Definition** don't work for symbols defined inside the body of a function.
+- Because the extension doesn't parse function bodies, **Peek Definition** and **Go to Definition** don't work for symbols defined inside the body of a function.
 
 ### Debugging
 
 Windows:
 
-* GDB on Cygwin and MinGW cannot break a running process. To set a breakpoint when the application is running (not stopped under the debugger), or to pause the application being debugged, press `kbstyle(Ctrl-C)` in the application's terminal.
-* GDB on Cygwin cannot open core dumps.
+- GDB on Cygwin and MinGW cannot break a running process. To set a breakpoint when the application is running (not stopped under the debugger), or to pause the application being debugged, press `kbstyle(Ctrl-C)` in the application's terminal.
+- GDB on Cygwin cannot open core dumps.
 
 Linux:
 
-* You may see an error saying: `ptrace: Operation not permitted`. This is due to GDB needing elevated permissions in order to attach to a process. This can be solved using the solutions below:
-    1. When using *attach to process*, you need to provide your password before the debugging session can begin.
-    1. To disable this error temporarily, use the following command:
+- You may see an error saying: `ptrace: Operation not permitted`. This is due to GDB needing elevated permissions in order to attach to a process. This can be solved using the solutions below:
 
-        `echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope`
+  1. When using _attach to process_, you need to provide your password before the debugging session can begin.
+  1. To disable this error temporarily, use the following command:
 
-    1. To remove the error permanently, add a file called `10-ptrace.conf` to `/etc/sysctl.d/` and add the following `kernel.yama.ptrace_scope = 0`.
+     `echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope`
+
+  1. To remove the error permanently, add a file called `10-ptrace.conf` to `/etc/sysctl.d/` and add the following `kernel.yama.ptrace_scope = 0`.
 
 macOS:
 
-* LLDB:
-    * When debugging with LLDB, if the Terminal window is closed while in break mode, debugging does not stop. Debugging can be stopped by pressing the **Stop** button.
-    * When debugging is stopped the Terminal window is not closed.
-* GDB:
-    * Additional manual install steps are required to use GDB on macOS. See _Manual Installation of GDB for OS X_ in the [README](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).
-    * When attaching to a process with GDB, the application being debugged cannot be interrupted. GDB will only bind breakpoints set while the application is not running (either before attaching to the application, or while the application is in a stopped state). This is due to [a bug in GDB](https://sourceware.org/bugzilla/show_bug.cgi?id=20035).
-    * Core dumps cannot be loaded when debugging with GDB because GDB [does not support the core dump format used in macOS](https://www.sourceware.org/ml/gdb/2014-01/msg00036.html).
-    * When attached to a process with GDB, break-all will end the process.
+- LLDB:
+  - When debugging with LLDB, if the Terminal window is closed while in break mode, debugging does not stop. Debugging can be stopped by pressing the **Stop** button.
+  - When debugging is stopped the Terminal window is not closed.
+- GDB:
+  - Additional manual install steps are required to use GDB on macOS. See _Manual Installation of GDB for OS X_ in the [README](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools).
+  - When attaching to a process with GDB, the application being debugged cannot be interrupted. GDB will only bind breakpoints set while the application is not running (either before attaching to the application, or while the application is in a stopped state). This is due to [a bug in GDB](https://sourceware.org/bugzilla/show_bug.cgi?id=20035).
+  - Core dumps cannot be loaded when debugging with GDB because GDB [does not support the core dump format used in macOS](https://www.sourceware.org/ml/gdb/2014-01/msg00036.html).
+  - When attached to a process with GDB, break-all will end the process.
 
 ## Next steps
 
 Read on to find out about:
 
-* [Configure VS Code for Windows Subsystem for Linux](/docs/cpp/config-wsl.md)
-* [Configure VS Code for Mingw-w64 and GCC](/docs/cpp/config-mingw.md)
-* [Configure VS Code for macOS](/docs/cpp/config-clang-mac.md)
-* [Configure C/C++ debugging](/docs/cpp/launch-json-reference.md) - Learn about additional debugger configuration options.
-* [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful Visual Studio Code editor.
-* [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.
-* [Tasks](/docs/editor/tasks.md) - use tasks to build your project and more.
-* [Debugging](/docs/editor/debugging.md) - find out about the Visual Studio Code debugger.
+- [Configure VS Code for Windows Subsystem for Linux](/docs/cpp/config-wsl.md)
+- [Configure VS Code for Mingw-w64 and GCC](/docs/cpp/config-mingw.md)
+- [Configure VS Code for macOS](/docs/cpp/config-clang-mac.md)
+- [Configure C/C++ debugging](/docs/cpp/launch-json-reference.md) - Learn about additional debugger configuration options.
+- [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful Visual Studio Code editor.
+- [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.
+- [Tasks](/docs/editor/tasks.md) - use tasks to build your project and more.
+- [Debugging](/docs/editor/debugging.md) - find out about the Visual Studio Code debugger.
 
 If you have any other questions or run into any issues, please file an issue on [GitHub](https://github.com/microsoft/vscode-cpptools/issues).

@@ -29,9 +29,7 @@ Workspaces are usually defined via the `workspaces` property of the
 ```json
 {
   "name": "my-workspaces-powered-project",
-  "workspaces": [
-    "workspace-a"
-  ]
+  "workspaces": ["workspace-a"]
 }
 ```
 
@@ -90,6 +88,5 @@ nested workspaces to be consumed elsewhere.
 
 ### See also
 
-* [npm install](/commands/npm-install)
-* [npm publish](/commands/npm-publish)
-
+- [npm install](/commands/npm-install)
+- [npm publish](/commands/npm-publish)

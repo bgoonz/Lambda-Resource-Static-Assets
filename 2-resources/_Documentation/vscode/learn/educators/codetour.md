@@ -7,6 +7,7 @@ PageTitle: Visual Studio Code CodeTour Extension
 DateApproved: 01/21/2021
 MetaDescription: Visual Studio CodeTour Extension
 ---
+
 # CodeTour
 
 Helping students understand a new codebase can be challenging and time consuming. Creating descriptive enough instructions can be cumbersome and still not easy enough for students to follow. CodeTour can help you introduce your students to your assignments and projects in a streamlined and interactive way.

@@ -7,6 +7,7 @@ PageTitle: Setup Visual Studio Code's Network Connection
 DateApproved: 3/31/2021
 MetaDescription: Setup VS Code's Network Connection.
 ---
+
 # Network Connections in Visual Studio Code
 
 Visual Studio Code is built on top of [Electron](https://electron.atom.io/) and benefits from all the networking stack capabilities of [Chromium](https://www.chromium.org/). This also means that VS Code users get much of the networking support available in [Google Chrome](https://www.google.com/chrome/index.html).
@@ -17,20 +18,20 @@ A handful of features within VS Code require network communication to work, such
 
 If you are behind a firewall that needs to allow specific domains used by VS Code, here's the list of hostnames you should allow communication to go through:
 
-* `update.code.visualstudio.com` - Visual Studio Code download and update server
-* `code.visualstudio.com` - Visual Studio Code documentation
-* `go.microsoft.com` - Microsoft link forwarding service
-* `vscode.blob.core.windows.net` - Visual Studio Code blob storage, used for remote server
-* `marketplace.visualstudio.com` - Visual Studio Marketplace
-* `*.gallery.vsassets.io` - Visual Studio Marketplace
-* `*.gallerycdn.vsassets.io` - Visual Studio Marketplace
-* `rink.hockeyapp.net` - Crash reporting service
-* `bingsettingssearch.trafficmanager.net` - In-product settings search
-* `vscode.search.windows.net` - In-product settings search
-* `raw.githubusercontent.com` - GitHub repository raw file access
-* `vsmarketplacebadge.apphb.com` - Visual Studio Marketplace badge service
-* `az764295.vo.msecnd.net` - Visual Studio Code download CDN
-* `download.visualstudio.microsoft.com` - Visual Studio download server, provides dependencies for some VS Code extensions (C++, C#)
+- `update.code.visualstudio.com` - Visual Studio Code download and update server
+- `code.visualstudio.com` - Visual Studio Code documentation
+- `go.microsoft.com` - Microsoft link forwarding service
+- `vscode.blob.core.windows.net` - Visual Studio Code blob storage, used for remote server
+- `marketplace.visualstudio.com` - Visual Studio Marketplace
+- `*.gallery.vsassets.io` - Visual Studio Marketplace
+- `*.gallerycdn.vsassets.io` - Visual Studio Marketplace
+- `rink.hockeyapp.net` - Crash reporting service
+- `bingsettingssearch.trafficmanager.net` - In-product settings search
+- `vscode.search.windows.net` - In-product settings search
+- `raw.githubusercontent.com` - GitHub repository raw file access
+- `vsmarketplacebadge.apphb.com` - Visual Studio Marketplace badge service
+- `az764295.vo.msecnd.net` - Visual Studio Code download CDN
+- `download.visualstudio.microsoft.com` - Visual Studio download server, provides dependencies for some VS Code extensions (C++, C#)
 
 ## Proxy server support
 
@@ -71,10 +72,10 @@ Authenticated proxies should work seamlessly within VS Code with the addition of
 
 The authentication methods supported are:
 
-* Basic
-* Digest
-* NTLM
-* Negotiate
+- Basic
+- Digest
+- NTLM
+- Negotiate
 
 When using VS Code behind an authenticated HTTP proxy, the following authentication popup should appear:
 
@@ -88,9 +89,9 @@ See [Chromium HTTP authentication](https://www.chromium.org/developers/design-do
 
 Often HTTPS proxies rewrite SSL certificates of the incoming requests. Chromium was designed to reject responses which are signed by certificates which it doesn't trust. If you hit any SSL trust issues, there are a few options available for you:
 
-* Since Chromium uses the OS's certificate trust infrastructure, the preferred option is to add your proxy's certificate to your OS's trust chain. See the [Chromium Root Certificate Policy](https://www.chromium.org/Home/chromium-security/root-ca-policy) documentation to learn more.
-* If your proxy runs in `localhost`, you can always try the [--allow-insecure-localhost](https://peter.sh/experiments/chromium-command-line-switches/#allow-insecure-localhost) command-line flag.
-* If all else fails, you can tell VS Code to ignore all certificate errors using the [--ignore-certificate-errors](https://peter.sh/experiments/chromium-command-line-switches/#ignore-certificate-errors) command-line flag. **Warning:** This is **dangerous** and **not recommended**, since it opens the door to security issues.
+- Since Chromium uses the OS's certificate trust infrastructure, the preferred option is to add your proxy's certificate to your OS's trust chain. See the [Chromium Root Certificate Policy](https://www.chromium.org/Home/chromium-security/root-ca-policy) documentation to learn more.
+- If your proxy runs in `localhost`, you can always try the [--allow-insecure-localhost](https://peter.sh/experiments/chromium-command-line-switches/#allow-insecure-localhost) command-line flag.
+- If all else fails, you can tell VS Code to ignore all certificate errors using the [--ignore-certificate-errors](https://peter.sh/experiments/chromium-command-line-switches/#ignore-certificate-errors) command-line flag. **Warning:** This is **dangerous** and **not recommended**, since it opens the door to security issues.
 
 ## Legacy proxy server support
 
@@ -104,7 +105,7 @@ Due to both of these constraints, the `http.proxy`, `http.proxyStrictSSL` and `h
 
 Here are some helpful links that might help you troubleshoot networking issues in VS Code:
 
-* [Network Settings](https://www.chromium.org/developers/design-documents/network-settings)
-* [Debugging problems with the network proxy](https://www.chromium.org/developers/design-documents/network-stack/debugging-net-proxy)
-* [Configuring a SOCKS proxy server in Chrome](https://www.chromium.org/developers/design-documents/network-stack/socks-proxy)
-* [Proxy settings and fallback (Windows)](https://www.chromium.org/developers/design-documents/network-stack/proxy-settings-fallback)
+- [Network Settings](https://www.chromium.org/developers/design-documents/network-settings)
+- [Debugging problems with the network proxy](https://www.chromium.org/developers/design-documents/network-stack/debugging-net-proxy)
+- [Configuring a SOCKS proxy server in Chrome](https://www.chromium.org/developers/design-documents/network-stack/socks-proxy)
+- [Proxy settings and fallback (Windows)](https://www.chromium.org/developers/design-documents/network-stack/proxy-settings-fallback)

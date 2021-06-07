@@ -7,17 +7,18 @@ PageTitle: Accessibility in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Visual Studio Code user accessibility features.  Learn here about the various ways VS Code aids user accessibility.
 ---
+
 # Accessibility
 
 Visual Studio Code has many features to help make the editor accessible to all users. Zoom and High Contrast colors improve editor visibility, keyboard-only navigation allows use without a mouse, and the editor has been optimized for screen readers.
 
 ## Zoom
 
-You can adjust the Zoom level in VS Code with the **View** > **Appearance** > **Zoom** commands.  The zoom level increases or decreases by 20% each time a **Zoom** command is executed.
+You can adjust the Zoom level in VS Code with the **View** > **Appearance** > **Zoom** commands. The zoom level increases or decreases by 20% each time a **Zoom** command is executed.
 
-* **View** > **Appearance** > **Zoom In** (`kb(workbench.action.zoomIn)`) - increase the Zoom level.
-* **View** > **Appearance** > **Zoom Out** (`kb(workbench.action.zoomOut)`) - decrease the Zoom level.
-* **View** > **Appearance** > **Reset Zoom** (`kb(workbench.action.zoomReset)`) - reset the Zoom level to 0.
+- **View** > **Appearance** > **Zoom In** (`kb(workbench.action.zoomIn)`) - increase the Zoom level.
+- **View** > **Appearance** > **Zoom Out** (`kb(workbench.action.zoomOut)`) - decrease the Zoom level.
+- **View** > **Appearance** > **Reset Zoom** (`kb(workbench.action.zoomReset)`) - reset the Zoom level to 0.
 
 ![Zoomed in editor](images/accessibility/zoomed-in.png)
 
@@ -27,13 +28,13 @@ When you adjust the zoom level with the **View** > **Zoom In / Out** commands, t
 
 ## High Contrast theme
 
-We support a High Contrast color theme on all platforms.  Use **File** > **Preferences** > **Color Theme** (`kb(workbench.action.selectTheme)`) to display the **Select Color Theme** dropdown and select the **High Contrast** theme.
+We support a High Contrast color theme on all platforms. Use **File** > **Preferences** > **Color Theme** (`kb(workbench.action.selectTheme)`) to display the **Select Color Theme** dropdown and select the **High Contrast** theme.
 
 ![High Contrast Theme](images/accessibility/high-contrast.png)
 
 ## Keyboard navigation
 
-You will find that VS Code provides an exhaustive list of commands in the **Command Palette** (`kb(workbench.action.showCommands)`) so that you can run VS Code without using the mouse.  Press `kb(workbench.action.showCommands)` then type a command name (for example 'git') to filter the list of commands.
+You will find that VS Code provides an exhaustive list of commands in the **Command Palette** (`kb(workbench.action.showCommands)`) so that you can run VS Code without using the mouse. Press `kb(workbench.action.showCommands)` then type a command name (for example 'git') to filter the list of commands.
 
 VS Code also has many preset keyboard shortcuts for commands. These are displayed to the right of the command in the **Command Palette**.
 
@@ -49,13 +50,13 @@ To make it easier to start and end selection using the keyboard we have four com
 
 ## Tab navigation
 
-You can use the `kbstyle(Tab)` key to jump between VS Code UI controls. Use `kbstyle(Shift+Tab)` to tab in reverse order.  As you tab through the UI controls, you can see an indicator around the UI element once the element gains focus.
+You can use the `kbstyle(Tab)` key to jump between VS Code UI controls. Use `kbstyle(Shift+Tab)` to tab in reverse order. As you tab through the UI controls, you can see an indicator around the UI element once the element gains focus.
 
 All elements in the workbench support tab navigation, but workbench toolbars and tab lists have only one tab stop, to avoid having too many. Once the focus is on a toolbar or a tab list, you can use the arrow keys to navigate within them.
 
 ## Tab trapping
 
-By default, pressing the `kbstyle(Tab)` within a source code file inserts the Tab character (or spaces depending on your Indentation setting) and does not leave the open file. You can toggle the trapping of `kbstyle(Tab)` with `kb(editor.action.toggleTabFocusMode)` and subsequent `kbstyle(Tab)` keys will move focus out of the file.  When default `kbstyle(Tab)` trapping is off, you will see an indicator in the Status Bar.
+By default, pressing the `kbstyle(Tab)` within a source code file inserts the Tab character (or spaces depending on your Indentation setting) and does not leave the open file. You can toggle the trapping of `kbstyle(Tab)` with `kb(editor.action.toggleTabFocusMode)` and subsequent `kbstyle(Tab)` keys will move focus out of the file. When default `kbstyle(Tab)` trapping is off, you will see an indicator in the Status Bar.
 
 ![tab moves focus](images/accessibility/tab-moves-focus.png)
 
@@ -107,11 +108,11 @@ Once a focus is in the Status bar via **Focus Next Part** (`kb(workbench.action.
 
 The VS Code debugger UI is user accessible and has the following features:
 
-* Changes in debug state are read out (for example 'started', 'breakpoint hit', 'terminated', ...).
-* All debug actions are keyboard accessible.
-* Both the Run view and Debug Console support Tab navigation.
-* Debug hover is keyboard accessible (`kb(editor.action.showHover)`).
-* Keyboard shortcuts can be created to set focus to each debugger area.
+- Changes in debug state are read out (for example 'started', 'breakpoint hit', 'terminated', ...).
+- All debug actions are keyboard accessible.
+- Both the Run view and Debug Console support Tab navigation.
+- Debug hover is keyboard accessible (`kb(editor.action.showHover)`).
+- Keyboard shortcuts can be created to set focus to each debugger area.
 
 ## Current known issues
 
@@ -126,10 +127,10 @@ There is screen reader support for the editor with VoiceOver.
 Screen reader support for the editor is still work in progress because the accessibility implementation for Chrome on Linux is work in progress.
 Thus there are a couple of things needed in order to have screen reader Orca working with VS Code:
 
-* Make sure to use the latest version of Orca out of master. More details can be found on the [Orca page](https://gitlab.gnome.org/GNOME/orca/-/blob/master/README.md).
-* We have tested that VS Code works well with Orca on Ubuntu 18, Fedora 31, Arch Linux. With Ubuntu 19, we have encountered issues.
-* Make sure to have the setting `"editor.accessibilitySupport": "on"` in VS Code. You can do this using settings, or by running the **Show Accessibility Help** command and pressing `kbstyle(Ctrl+E)` to turn on accessibilitySupport.
-* If Orca is still silent, try setting `ACCESSIBILITY_ENABLED=1` as an environment variable.
+- Make sure to use the latest version of Orca out of master. More details can be found on the [Orca page](https://gitlab.gnome.org/GNOME/orca/-/blob/master/README.md).
+- We have tested that VS Code works well with Orca on Ubuntu 18, Fedora 31, Arch Linux. With Ubuntu 19, we have encountered issues.
+- Make sure to have the setting `"editor.accessibilitySupport": "on"` in VS Code. You can do this using settings, or by running the **Show Accessibility Help** command and pressing `kbstyle(Ctrl+E)` to turn on accessibilitySupport.
+- If Orca is still silent, try setting `ACCESSIBILITY_ENABLED=1` as an environment variable.
 
 After enabling that setting, VS Code should work with the Orca screen reader.
 
@@ -137,6 +138,6 @@ After enabling that setting, VS Code should work with the Orca screen reader.
 
 Read on to find out about:
 
-* [Visual Studio Code User Interface](/docs/getstarted/userinterface.md) - A quick orientation to VS Code.
-* [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
-* [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.
+- [Visual Studio Code User Interface](/docs/getstarted/userinterface.md) - A quick orientation to VS Code.
+- [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
+- [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.

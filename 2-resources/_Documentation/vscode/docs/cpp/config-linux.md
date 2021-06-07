@@ -7,6 +7,7 @@ PageTitle: Get Started with C++ on Linux in Visual Studio Code
 DateApproved: 3/19/2020
 MetaDescription: Configure the C++ extension in Visual Studio Code to target g++ and GDB on Linux
 ---
+
 # Using C++ on Linux in VS Code
 
 In this tutorial, you will configure Visual Studio Code to use the GCC C++ compiler (g++) and GDB debugger on Linux. GCC stands for GNU Compiler Collection; GDB is the GNU debugger.
@@ -22,7 +23,7 @@ To successfully complete this tutorial, you must do the following:
 1. Install [Visual Studio Code](/download).
 1. Install the [C++ extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools). You can install the C/C++ extension by searching for 'c++' in the Extensions view (`kb(workbench.view.extensions)`).
 
-    ![C/C++ extension](images/cpp/cpp-extension.png)
+   ![C/C++ extension](images/cpp/cpp-extension.png)
 
 ### Ensure GCC is installed
 
@@ -99,7 +100,7 @@ You can also enable [Auto Save](/docs/editor/codebasics.md#saveauto-save) to aut
 
 The Activity Bar on the edge of Visual Studio Code lets you open different views such as **Search**, **Source Control**, and **Run**. You'll look at the **Run** view later in this tutorial. You can find out more about the other views in the VS Code [User Interface documentation](/docs/getstarted/userinterface.md).
 
->**Note**: When you save or open a C++ file, you may see a notification from the C/C++ extension about the availability of an Insiders version, which lets you test new features and fixes. You can ignore this notification by selecting the `X` (**Clear Notification**).
+> **Note**: When you save or open a C++ file, you may see a notification from the C/C++ extension about the availability of an Insiders version, which lets you test new features and fixes. You can ignore this notification by selecting the `X` (**Clear Notification**).
 
 ## Explore IntelliSense
 
@@ -125,34 +126,32 @@ Your new `tasks.json` file should look similar to the JSON below:
 
 ```json
 {
-"version": "2.0.0",
-"tasks": [
+  "version": "2.0.0",
+  "tasks": [
     {
-        "type": "shell",
-        "label": "g++ build active file",
-        "command": "/usr/bin/g++",
-        "args": [
-            "-g",
-            "${file}",
-            "-o",
-            "${fileDirname}/${fileBasenameNoExtension}"
-        ],
-        "options": {
-            "cwd": "/usr/bin"
-        },
-        "problemMatcher": [
-            "$gcc"
-        ],
-        "group": {
-            "kind": "build",
-            "isDefault": true
-        }
+      "type": "shell",
+      "label": "g++ build active file",
+      "command": "/usr/bin/g++",
+      "args": [
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}"
+      ],
+      "options": {
+        "cwd": "/usr/bin"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     }
-]
+  ]
 }
 ```
 
->**Note**: You can learn more about `tasks.json` variables in the [variables reference](/docs/editor/variables-reference.md).
+> **Note**: You can learn more about `tasks.json` variables in the [variables reference](/docs/editor/variables-reference.md).
 
 The `command` setting specifies the program to run; in this case that is g++.
 The `args` array specifies the command-line arguments that will be passed to g++. These arguments must be specified in the order expected by the compiler.
@@ -173,7 +172,7 @@ The `"isDefault": true` value in the `group` object specifies that this task wil
 
 1. Create a new terminal using the **+** button and you'll have a terminal running your default shell with the `helloworld` folder as the working directory. Run `ls` and you should now see the executable `helloworld` (no file extension).
 
-    ![WSL bash terminal](images/wsl/wsl-bash-terminal.png)
+   ![WSL bash terminal](images/wsl/wsl-bash-terminal.png)
 
 1. You can run `helloworld` in the terminal by typing `./helloworld`.
 
@@ -195,38 +194,38 @@ VS Code creates a `launch.json` file, opens it in the editor, and builds and run
 
 ```json
 {
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "g++ build and debug active file",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
         {
-            "name": "g++ build and debug active file",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "g++ build active file",
-            "miDebuggerPath": "/usr/bin/gdb"
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
         }
-    ]
+      ],
+      "preLaunchTask": "g++ build active file",
+      "miDebuggerPath": "/usr/bin/gdb"
+    }
+  ]
 }
 ```
 
- In the JSON above, `program` specifies the program you want to debug. Here it is set to the active file folder `${fileDirname}` and active filename without an extension `${fileBasenameNoExtension}`, which if `helloworld.cpp` is the active file will be `helloworld`.
+In the JSON above, `program` specifies the program you want to debug. Here it is set to the active file folder `${fileDirname}` and active filename without an extension `${fileBasenameNoExtension}`, which if `helloworld.cpp` is the active file will be `helloworld`.
 
 By default, the C++ extension won't add any breakpoints to your source code and the `stopAtEntry` value is set to `false`.
 
- Change the `stopAtEntry` value to `true` to cause the debugger to stop on the `main` method when you start debugging.
+Change the `stopAtEntry` value to `true` to cause the debugger to stop on the `main` method when you start debugging.
 
 ### Start a debugging session
 
@@ -236,13 +235,13 @@ By default, the C++ extension won't add any breakpoints to your source code and 
 - The Integrated Terminal appears at the bottom of the source code editor. In the **Debug Output** tab, you see output that indicates the debugger is up and running.
 - The editor highlights the first statement in the `main` method. This is a breakpoint that the C++ extension automatically sets for you:
 
-   ![Initial breakpoint](images/wsl/wsl-breakpoint-default.png)
+  ![Initial breakpoint](images/wsl/wsl-breakpoint-default.png)
 
 - The Run view on the left shows debugging information. You'll see an example later in the tutorial.
 
 - At the top of the code editor, a debugging control panel appears. You can move this around the screen by grabbing the dots on the left side.
 
-   ![Debugging controls](images/cpp/debug-controls.png)
+  ![Debugging controls](images/cpp/debug-controls.png)
 
 ## Step through the code
 
@@ -302,20 +301,18 @@ Visual Studio Code places these settings in `.vscode/c_cpp_properties.json`. If 
 
 ```json
 {
-    "configurations": [
-        {
-            "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64"
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "Linux",
+      "includePath": ["${workspaceFolder}/**"],
+      "defines": [],
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "clang-x64"
+    }
+  ],
+  "version": 4
 }
 ```
 

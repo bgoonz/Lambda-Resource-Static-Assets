@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>windows</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="visual-studio-code-on-windows">Visual Studio Code on Windows</h1>
+<h2 id="installation">Installation</h2>
+<ol type="1">
+<li>Download the <a href="https://go.microsoft.com/fwlink/?LinkID=534107">Visual Studio Code installer</a> for Windows.</li>
+<li>Once it is downloaded, run the installer (VSCodeUserSetup-{version}.exe). This will only take a minute.</li>
+<li>By default, VS Code is installed under <code>C:\users\{username}\AppData\Local\Programs\Microsoft VS Code</code>.</li>
+</ol>
+<p>Alternatively, you can also download a <a href="/docs/?dv=winzip">Zip archive</a>, extract it and run Code from there.</p>
+<blockquote>
+<p><strong>Note:</strong> .NET Framework 4.5.2 or higher is required for VS Code. If you are using Windows 7, make sure you have at least <a href="https://www.microsoft.com/download/details.aspx?id=42643">.NET Framework 4.5.2</a> installed. You can check your version of .NET Framework using this command, <code>reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\full" /v version</code> from a command prompt.</p>
+</blockquote>
+<blockquote>
+<p><strong>Tip:</strong> Setup will add Visual Studio Code to your <code>%PATH%</code>, so from the console you can type ‘code .’ to open VS Code on that folder. You will need to restart your console after the installation for the change to the <code>%PATH%</code> environmental variable to take effect.</p>
+</blockquote>
+<h2 id="user-versus-system-setup">User versus system setup</h2>
+<p>VS Code provides both Windows user and system level setups. Installing the <a href="https://go.microsoft.com/fwlink/?LinkID=534107">user setup</a> does not require Administrator privileges as the location will be under your user Local AppData (LOCALAPPDATA) folder. User setup also provides a smoother background update experience.</p>
+<p>The <a href="https://go.microsoft.com/fwlink/?linkid=852157">system setup</a> requires elevation to Administrator privileges and will place the installation under Program Files.</p>
+<p>See the <a href="/download">Download Visual Studio Code</a> page for a complete list of available installation options.</p>
+<h2 id="bit-versions">32-bit versions</h2>
+<p>If you need to run a 32-bit version of VS Code, both a 32-bit <a href="https://go.microsoft.com/fwlink/?LinkId=723965">Installer</a> and <a href="https://go.microsoft.com/fwlink/?LinkID=733265">Zip archive</a> are available.</p>
+<h2 id="updates">Updates</h2>
+<p>VS Code ships monthly <a href="/updates">releases</a> and supports auto-update when a new release is available. If you’re prompted by VS Code, accept the newest update and it will be installed (you won’t need to do anything else to get the latest bits).</p>
+<blockquote>
+<p>Note: You can <a href="/docs/supporting/faq.md#how-do-i-opt-out-of-vs-code-autoupdates">disable auto-update</a> if you prefer to update VS Code on your own schedule.</p>
+</blockquote>
+<h2 id="windows-as-a-developer-machine">Windows as a developer machine</h2>
+<p>Windows is a popular operating system and it can be a great cross-platform development environment. This section describes cross-platform features such as the <a href="https://docs.microsoft.com/windows/wsl/install-win10">Windows Subsystem for Linux</a> (WSL) and the new Windows Terminal.</p>
+<h3 id="recent-windows-build">Recent Windows build</h3>
+<p>Make sure you are on a recent Windows 10 build. Check <strong>Settings</strong> &gt; <strong>Windows Update</strong> to see if you are up-to-date.</p>
+<h3 id="windows-subsystem-for-linux">Windows Subsystem for Linux</h3>
+<p>With WSL, you can install and run Linux distributions on Windows. This enables you to develop and test your source code on Linux while still working locally on your Windows machine.</p>
+<p>When coupled with the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">Remote - WSL</a> extension, you get full VS Code editing and debugging support while running in the context of WSL.</p>
+<p>See the <a href="/docs/remote/wsl.md">Developing in WSL</a> documentation to learn more or try the <a href="/docs/remote/wsl-tutorial.md">Working in WSL</a> introductory tutorial.</p>
+<h3 id="new-windows-terminal">New Windows Terminal</h3>
+<p>Available from the Microsoft Store, the <a href="https://www.microsoft.com/p/windows-terminal-preview/9n0dx20hk701?SilentAuth=1&amp;wa=wsignin1.0&amp;activetab=pivot%3Aoverviewtab">Windows Terminal (Preview)</a> lets you easily open PowerShell, Command Prompt, and WSL terminals in a multiple tab shell.</p>
+<h2 id="next-steps">Next steps</h2>
+<p>Once you have installed VS Code, these topics will help you learn more about VS Code:</p>
+<ul>
+<li><a href="/docs/setup/additional-components.md">Additional Components</a> - Learn how to install Git, Node.js, TypeScript, and tools like Yeoman.</li>
+<li><a href="/docs/getstarted/userinterface.md">User Interface</a> - A quick orientation to VS Code.</li>
+<li><a href="/docs/getstarted/settings.md">User/Workspace Settings</a> - Learn how to configure VS Code to your preferences through settings.</li>
+<li><a href="/docs/getstarted/tips-and-tricks.md">Tips and Tricks</a> - Lets you jump right in and learn how to be productive with VS Code.</li>
+</ul>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="what-command-line-arguments-are-supported-by-the-windows-setup">What command-line arguments are supported by the Windows Setup?</h3>
+<p>VS Code uses <a href="https://www.jrsoftware.org/isinfo.php">Inno Setup</a> to create its setup package for Windows. Thus, all the <a href="https://www.jrsoftware.org/ishelp/index.php?topic=setupcmdline">Inno Setup command-line switches</a> are available for use.</p>
+<p>Additionally, you can prevent the Setup from launching VS Code after completion with <code>/mergetasks=!runcode</code>.</p>
+<h3 id="scrolling-is-laggy-and-not-smooth">Scrolling is laggy and not smooth</h3>
+<p>On certain devices, editor scrolling is not smooth but laggy for an unpleasant experience. If you notice this issue, make sure you install the Windows 10 October 2018 update where this issue is fixed.</p>
+<h3 id="im-having-trouble-with-the-installer">I’m having trouble with the installer</h3>
+<p>Try using the <a href="/docs/?dv=winzip">zip file</a> instead of the installer. To use this, unzip VS Code in your <code>AppData\Local\Programs</code> folder.</p>
+<blockquote>
+<p><strong>Note:</strong> When VS Code is installed via a Zip file, you will need to manually update it for each <a href="/updates">release</a>.</p>
+</blockquote>
+<h3 id="icons-are-missing">Icons are missing</h3>
+<p>I installed Visual Studio Code on my Windows 7 or 8 machine. Why are some icons not appearing in the workbench and editor?</p>
+<p>VS Code uses <a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics">SVG</a> icons and we have found instances where the .SVG file extension is associated with something other than <code>image/svg+xml</code>. We’re considering options to fix it, but for now here’s a workaround:</p>
+<p>Using the Command Prompt:</p>
+<ol type="1">
+<li>Open an Administrator Command Prompt.</li>
+<li>Type <code>REG ADD HKCR\.svg /f /v "Content Type" /t REG_SZ /d image/svg+xml</code>.</li>
+</ol>
+<p>Using the Registry Editor (regedit):</p>
+<ol type="1">
+<li>Start <code>regedit</code>.</li>
+<li>Open the <code>HKEY_CLASSES_ROOT</code> key.</li>
+<li>Find the <code>.svg</code> key.</li>
+<li>Set its <code>Content Type</code> Data value to <code>image/svg+xml</code>.</li>
+<li>Exit <code>regedit</code>.</li>
+</ol>
+</body>
+</html>

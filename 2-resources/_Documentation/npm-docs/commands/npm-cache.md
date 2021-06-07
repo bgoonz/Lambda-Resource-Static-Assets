@@ -22,17 +22,17 @@ npm cache verify
 
 Used to add, list, or clean the npm cache folder.
 
-* add:
-  Add the specified package to the local cache.  This command is primarily
+- add:
+  Add the specified package to the local cache. This command is primarily
   intended to be used internally by npm, but it can provide a way to
   add data to the local installation cache explicitly.
 
-* clean:
-  Delete all data out of the cache folder.  Note that this is typically
+- clean:
+  Delete all data out of the cache folder. Note that this is typically
   unnecessary, as npm's cache is self-healing and resistant to data
   corruption issues.
 
-* verify:
+- verify:
   Verify the contents of the cache folder, garbage collecting any unneeded
   data, and verifying the integrity of the cache index and all cached data.
 
@@ -68,8 +68,7 @@ automatically delete corrupted contents. The primary guarantee that the
 cache makes is that, if it does return data, that data will be exactly the
 data that was inserted.
 
-To run an offline verification of existing cache contents, use `npm cache
-verify`.
+To run an offline verification of existing cache contents, use `npm cache verify`.
 
 ### Configuration
 
@@ -81,13 +80,13 @@ The root cache folder.
 
 ### See Also
 
-* [npm folders](/configuring-npm/folders)
-* [npm config](/commands/npm-config)
-* [npmrc](/configuring-npm/npmrc)
-* [npm install](/commands/npm-install)
-* [npm publish](/commands/npm-publish)
-* [npm pack](/commands/npm-pack)
-* https://npm.im/cacache
-* https://npm.im/pacote
-* https://npm.im/@npmcli/arborist
-* https://npm.im/make-fetch-happen
+- [npm folders](/configuring-npm/folders)
+- [npm config](/commands/npm-config)
+- [npmrc](/configuring-npm/npmrc)
+- [npm install](/commands/npm-install)
+- [npm publish](/commands/npm-publish)
+- [npm pack](/commands/npm-pack)
+- https://npm.im/cacache
+- https://npm.im/pacote
+- https://npm.im/@npmcli/arborist
+- https://npm.im/make-fetch-happen

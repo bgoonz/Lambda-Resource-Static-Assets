@@ -8,6 +8,7 @@ DateApproved: 3/31/2021
 MetaDescription: TypeScript tutorial with Visual Studio Code.
 MetaSocialImage: images/typescript-tutorial/Languages_typescript.png
 ---
+
 # TypeScript tutorial in Visual Studio Code
 
 [TypeScript](https://www.typescriptlang.org) is a typed superset of JavaScript that compiles to plain JavaScript. It offers classes, modules, and interfaces to help you build robust components. The [TypeScript language specification](https://github.com/microsoft/TypeScript/tree/master/doc) has full details about the language.
@@ -45,7 +46,7 @@ From the File Explorer, create a new file called `helloworld.ts`.
 Now add the following TypeScript code. You'll notice the TypeScript keyword `let` and the `string` type declaration.
 
 ```typescript
-let message : string = "Hello World";
+let message: string = "Hello World";
 console.log(message);
 ```
 
@@ -82,10 +83,10 @@ Add a simple `tsconfig.json` which set the options to compile to ES5 and use **C
 
 ```json
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs"
-    }
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs"
+  }
 }
 ```
 
@@ -103,11 +104,11 @@ Having the generated JavaScript file in the same folder as the TypeScript source
 
 ```json
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "outDir": "out"
-    }
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "out"
+  }
 }
 ```
 
@@ -117,7 +118,7 @@ See [Compiling TypeScript](/docs/typescript/typescript-compiling.md) to learn ab
 
 ## Error checking
 
-TypeScript helps you avoid common programming mistakes through strong type checking. For example, if you assign a number to `message`, the TypeScript compiler will complain with **'error TS2322: Type '2' is not assignable to type 'string'**.  You can see type checking errors in VS Code both in the editor (red squiggles with hover information) and the Problems panel (`kb(workbench.actions.view.problems)`). The `[ts]` prefix lets you know this error is coming from the TypeScript language service.
+TypeScript helps you avoid common programming mistakes through strong type checking. For example, if you assign a number to `message`, the TypeScript compiler will complain with **'error TS2322: Type '2' is not assignable to type 'string'**. You can see type checking errors in VS Code both in the editor (red squiggles with hover information) and the Problems panel (`kb(workbench.actions.view.problems)`). The `[ts]` prefix lets you know this error is coming from the TypeScript language service.
 
 ![incorrect type error](images/tutorial/incorrect-type-error.png)
 
@@ -135,12 +136,12 @@ VS Code has built-in support for TypeScript debugging. To support debugging Type
 
 ```json
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "outDir": "out",
-        "sourceMap": true
-    }
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "out",
+    "sourceMap": true
+  }
 }
 ```
 
@@ -162,8 +163,8 @@ See [Debugging TypeScript](/docs/typescript/typescript-debugging.md) to learn mo
 
 This tutorial was a quick introduction to using VS Code for TypeScript development. Read on to learn more about using VS Code's compiling and debugging support for TypeScript:
 
-* [Compiling TypeScript](/docs/typescript/typescript-compiling.md) - Use VS Code's powerful task system for compiling TypeScript.
-* [Debugging TypeScript](/docs/typescript/typescript-debugging.md) - Configure the debugger for your TypeScript project.
+- [Compiling TypeScript](/docs/typescript/typescript-compiling.md) - Use VS Code's powerful task system for compiling TypeScript.
+- [Debugging TypeScript](/docs/typescript/typescript-debugging.md) - Configure the debugger for your TypeScript project.
 
 ## Common questions
 

@@ -83,4 +83,4 @@ $ npm hook rm id-deadbeef
 
 ### See Also
 
-* ["Introducing Hooks" blog post](https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm)
+- ["Introducing Hooks" blog post](https://blog.npmjs.org/post/145260155635/introducing-hooks-get-notifications-of-npm)

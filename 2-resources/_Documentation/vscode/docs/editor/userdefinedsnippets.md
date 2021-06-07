@@ -7,6 +7,7 @@ PageTitle: Snippets in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: It is easy to add code snippets to Visual Studio Code both for your own use or to share with others on the public Extension Marketplace. TextMate .tmSnippets files are supported.
 ---
+
 # Snippets in Visual Studio Code
 
 Code snippets are templates that make it easier to enter repeating code patterns, such as loops or conditional-statements.
@@ -46,27 +47,20 @@ Below is an example of a `for` loop snippet for JavaScript:
 ```json
 // in file 'Code/User/snippets/javascript.json'
 {
-    "For Loop": {
-        "prefix": [
-          "for",
-          "for-const"
-        ],
-        "body": [
-          "for (const ${2:element} of ${1:array}) {",
-          "\t$0",
-          "}"
-        ],
-        "description": "A for loop."
-    }
+  "For Loop": {
+    "prefix": ["for", "for-const"],
+    "body": ["for (const ${2:element} of ${1:array}) {", "\t$0", "}"],
+    "description": "A for loop."
+  }
 }
 ```
 
 In the example above:
 
-* "For Loop" is the snippet name. It is displayed via IntelliSense if no `description` is provided.
-* `prefix` defines one or more trigger words that display the snippet in IntelliSense. Substring matching is performed on prefixes, so in this case, "fc" could match "for-const".
-* `body` is one or more lines of content, which will be joined as multiple lines upon insertion. Newlines and embedded tabs will be formatted according to the context in which the snippet is inserted.
-* `description` is an optional description of the snippet displayed by IntelliSense.
+- "For Loop" is the snippet name. It is displayed via IntelliSense if no `description` is provided.
+- `prefix` defines one or more trigger words that display the snippet in IntelliSense. Substring matching is performed on prefixes, so in this case, "fc" could match "for-const".
+- `body` is one or more lines of content, which will be joined as multiple lines upon insertion. Newlines and embedded tabs will be formatted according to the context in which the snippet is inserted.
+- `description` is an optional description of the snippet displayed by IntelliSense.
 
 Additionally, the `body` of the example above has three placeholders (listed in order of traversal): `${1:array}`, `${2:element}`, and `$0`. You can quickly jump to the next placeholder with `kb(jumpToNextSnippetPlaceholder)`, at which point you may edit the placeholder or jump again the next one. The string after the colon (if any) is the default text, for example `element` in `${2:element}`. Placeholder traversal order is ascending by number, starting from one; zero is an optional special case that always comes last, and exits snippet mode with the cursor at the specified position.
 
@@ -116,56 +110,56 @@ With `$name` or `${name:default}`, you can insert the value of a variable. When 
 
 The following variables can be used:
 
-* `TM_SELECTED_TEXT` The currently selected text or the empty string
-* `TM_CURRENT_LINE` The contents of the current line
-* `TM_CURRENT_WORD` The contents of the word under cursor or the empty string
-* `TM_LINE_INDEX` The zero-index based line number
-* `TM_LINE_NUMBER` The one-index based line number
-* `TM_FILENAME` The filename of the current document
-* `TM_FILENAME_BASE` The filename of the current document without its extensions
-* `TM_DIRECTORY` The directory of the current document
-* `TM_FILEPATH` The full file path of the current document
-* `RELATIVE_FILEPATH` The relative (to the opened workspace or folder) file path of the current document
-* `CLIPBOARD` The contents of your clipboard
-* `WORKSPACE_NAME` The name of the opened workspace or folder
-* `WORKSPACE_FOLDER` The path of the opened workspace or folder
+- `TM_SELECTED_TEXT` The currently selected text or the empty string
+- `TM_CURRENT_LINE` The contents of the current line
+- `TM_CURRENT_WORD` The contents of the word under cursor or the empty string
+- `TM_LINE_INDEX` The zero-index based line number
+- `TM_LINE_NUMBER` The one-index based line number
+- `TM_FILENAME` The filename of the current document
+- `TM_FILENAME_BASE` The filename of the current document without its extensions
+- `TM_DIRECTORY` The directory of the current document
+- `TM_FILEPATH` The full file path of the current document
+- `RELATIVE_FILEPATH` The relative (to the opened workspace or folder) file path of the current document
+- `CLIPBOARD` The contents of your clipboard
+- `WORKSPACE_NAME` The name of the opened workspace or folder
+- `WORKSPACE_FOLDER` The path of the opened workspace or folder
 
 For inserting the current date and time:
 
-* `CURRENT_YEAR` The current year
-* `CURRENT_YEAR_SHORT` The current year's last two digits
-* `CURRENT_MONTH` The month as two digits (example '02')
-* `CURRENT_MONTH_NAME` The full name of the month (example 'July')
-* `CURRENT_MONTH_NAME_SHORT` The short name of the month (example 'Jul')
-* `CURRENT_DATE` The day of the month
-* `CURRENT_DAY_NAME` The name of day (example 'Monday')
-* `CURRENT_DAY_NAME_SHORT` The short name of the day (example 'Mon')
-* `CURRENT_HOUR` The current hour in 24-hour clock format
-* `CURRENT_MINUTE` The current minute
-* `CURRENT_SECOND` The current second
-* `CURRENT_SECONDS_UNIX` The number of seconds since the Unix epoch
+- `CURRENT_YEAR` The current year
+- `CURRENT_YEAR_SHORT` The current year's last two digits
+- `CURRENT_MONTH` The month as two digits (example '02')
+- `CURRENT_MONTH_NAME` The full name of the month (example 'July')
+- `CURRENT_MONTH_NAME_SHORT` The short name of the month (example 'Jul')
+- `CURRENT_DATE` The day of the month
+- `CURRENT_DAY_NAME` The name of day (example 'Monday')
+- `CURRENT_DAY_NAME_SHORT` The short name of the day (example 'Mon')
+- `CURRENT_HOUR` The current hour in 24-hour clock format
+- `CURRENT_MINUTE` The current minute
+- `CURRENT_SECOND` The current second
+- `CURRENT_SECONDS_UNIX` The number of seconds since the Unix epoch
 
 For inserting random values:
 
-* `RANDOM` 6 random Base-10 digits
-* `RANDOM_HEX` 6 random Base-16 digits
-* `UUID` A Version 4 UUID
+- `RANDOM` 6 random Base-10 digits
+- `RANDOM_HEX` 6 random Base-16 digits
+- `UUID` A Version 4 UUID
 
 For inserting line or block comments, honoring the current language:
 
-* `BLOCK_COMMENT_START` Example output: in PHP `/*` or in HTML `<!--`
-* `BLOCK_COMMENT_END ` Example output: in PHP `*/` or in HTML `-->`
-* `LINE_COMMENT` Example output: in PHP `//`
+- `BLOCK_COMMENT_START` Example output: in PHP `/*` or in HTML `<!--`
+- `BLOCK_COMMENT_END ` Example output: in PHP `*/` or in HTML `-->`
+- `LINE_COMMENT` Example output: in PHP `//`
 
 The snippet below inserts `/* Hello World */` in JavaScript files and `<!-- Hello World -->` in HTML files:
 
 ```json
 {
-    "hello": {
-        "scope": "javascript,html",
-        "prefix": "hello",
-        "body": "$BLOCK_COMMENT_START Hello World $BLOCK_COMMENT_END"
-    }
+  "hello": {
+    "scope": "javascript,html",
+    "prefix": "hello",
+    "body": "$BLOCK_COMMENT_START Hello World $BLOCK_COMMENT_END"
+  }
 }
 ```
 
@@ -204,12 +198,12 @@ The format for Placeholder-Transforms is the same as for Variable-Transforms.
 
 The examples are shown within double quotes, as they would appear inside a snippet body, to illustrate the need to double escape certain characters. Sample transformations and the resulting output for the filename `example-123.456-TEST.js`.
 
-Example | Output | Explanation
--------------|--------|------------
-`"${TM_FILENAME/[\\.]/_/}"` | `example-123_456-TEST.js` | Replace the first `.` with `_`
-`"${TM_FILENAME/[\\.-]/_/g}"` | `example_123_456_TEST_js` | Replace each `.` or `-` with `_`
-`"${TM_FILENAME/(.*)/${1:/upcase}/}"` | `EXAMPLE-123.456-TEST.JS` | Change to all uppercase
-`"${TM_FILENAME/[^0-9^a-z]//gi}"` | `example123456TESTjs` | Remove non-alphanumeric characters
+| Example                               | Output                    | Explanation                        |
+| ------------------------------------- | ------------------------- | ---------------------------------- |
+| `"${TM_FILENAME/[\\.]/_/}"`           | `example-123_456-TEST.js` | Replace the first `.` with `_`     |
+| `"${TM_FILENAME/[\\.-]/_/g}"`         | `example_123_456_TEST_js` | Replace each `.` or `-` with `_`   |
+| `"${TM_FILENAME/(.*)/${1:/upcase}/}"` | `EXAMPLE-123.456-TEST.JS` | Change to all uppercase            |
+| `"${TM_FILENAME/[^0-9^a-z]//gi}"`     | `example123456TESTjs`     | Remove non-alphanumeric characters |
 
 ### Grammar
 
@@ -275,9 +269,9 @@ Also, instead of using the `snippet` argument value to define your snippet inlin
 
 ## Next steps
 
-* [Command Line](/docs/editor/command-line.md) - VS Code has a rich command-line interface to open or diff files and install extensions.
-* [Extension API](/api) - Learn about other ways to extend VS Code.
-* [Snippet Guide](/api/language-extensions/snippet-guide.md) - You can package snippets for use in VS Code.
+- [Command Line](/docs/editor/command-line.md) - VS Code has a rich command-line interface to open or diff files and install extensions.
+- [Extension API](/api) - Learn about other ways to extend VS Code.
+- [Snippet Guide](/api/language-extensions/snippet-guide.md) - You can package snippets for use in VS Code.
 
 ## Common questions
 
@@ -307,6 +301,6 @@ $MyVar = 2
 
 Yes, you can hide specific snippets from showing in IntelliSense (completion list) by selecting the **Hide from IntelliSense** button to the right of snippet items in the **Insert Snippet** command dropdown.
 
- ![Hide from IntelliSense button in Insert Snippet dropdown](images/userdefinedsnippets/hide-from-intellisense.png)
+![Hide from IntelliSense button in Insert Snippet dropdown](images/userdefinedsnippets/hide-from-intellisense.png)
 
- You can still select the snippet with the **Insert Snippet** command but the hidden snippet won't be displayed in IntelliSense.
+You can still select the snippet with the **Insert Snippet** command but the hidden snippet won't be displayed in IntelliSense.

@@ -32,7 +32,7 @@ If you chose **Python: General**, non-root privileges will be set up by default,
 
 Within the Dockerfile, you must expose a **non-system port**, create a working directory for your app code, and then add a non-root user with access to the app directory. Lastly, ensure your exposed port **matches** the port binding of the Gunicorn command. The `CMD` command below configures Gunicorn for a Django container. For more information on configuring Gunicorn, refer to the documentation on [Gunicorn configuration for Django/Flask apps](/docs/containers/quickstart-python.md#gunicorn-modifications-for-djangoflask-apps).
 
-``` dockerfile
+```dockerfile
 # 1024 or higher
 EXPOSE 1024
 
@@ -56,13 +56,11 @@ After choosing a non-system port and setting up the container to run as a non-ro
 
 **Django apps**
 
-``` json
+```json
 {
   "type": "docker-run",
   "label": "docker-run: debug",
-  "dependsOn": [
-    "docker-build"
-  ],
+  "dependsOn": ["docker-build"],
   "python": {
     "args": [
       "runserver",
@@ -77,13 +75,11 @@ After choosing a non-system port and setting up the container to run as a non-ro
 
 **Flask apps**
 
-``` json
+```json
 {
   "type": "docker-run",
   "label": "docker-run: debug",
-  "dependsOn": [
-    "docker-build"
-  ],
+  "dependsOn": ["docker-build"],
   "dockerRun": {
     "env": {
       "FLASK_APP": "path_to/flask_entry_point.py"
@@ -94,8 +90,10 @@ After choosing a non-system port and setting up the container to run as a non-ro
       "run",
       "--no-debugger",
       "--no-reload",
-      "--host", "0.0.0.0",
-      "--port", "1024" //<- Change this port number
+      "--host",
+      "0.0.0.0",
+      "--port",
+      "1024" //<- Change this port number
     ],
     "module": "flask"
   }
@@ -160,15 +158,15 @@ In order to give access to a non-root user `appuser` from within the container, 
 1. Copy the explicit UID from your Dockerfile (`5678` in the example above).
 1. From the **host machine's** command line, run one of these commands:
 
-    ```bash
-    # Example of giving a User ID with the value of 5678 access to the /share folder on the host machine
+   ```bash
+   # Example of giving a User ID with the value of 5678 access to the /share folder on the host machine
 
-    setfacl -m u:5678:rwx /share
+   setfacl -m u:5678:rwx /share
 
-    # Example of giving a Group ID with the value of 6789 access to the /share folder on the host machine
+   # Example of giving a Group ID with the value of 6789 access to the /share folder on the host machine
 
-    setfacl -m g:6789:rwx /share
-    ```
+   setfacl -m g:6789:rwx /share
+   ```
 
 ### Binding to a low-range port
 
@@ -176,21 +174,21 @@ If you hit `kb(workbench.action.debug.start)` to start your container and it imm
 
 1. Open and modify your `launch.json` file:
 
-    ```json
-    {
-      "name": "Docker: {Configuration Name}",
-      "type": "docker",
-      "request": "launch",
-      "preLaunchTask": "docker-run: debug",
-      "removeContainerAfterDebug": false, //<- add this line
-      // ... the rest of the launch configuration
-    }
-    ```
+   ```json
+   {
+     "name": "Docker: {Configuration Name}",
+     "type": "docker",
+     "request": "launch",
+     "preLaunchTask": "docker-run: debug",
+     "removeContainerAfterDebug": false //<- add this line
+     // ... the rest of the launch configuration
+   }
+   ```
 
 2. Hit `kb(workbench.action.debug.start)` to run your container again.
 3. After the container exits once more, navigate to the Docker extension, right-click the container, and select **View Logs**.
 
-  ![User clicking view logs on their container](images/quickstarts/python-user-rights-view-logs.png)
+![User clicking view logs on their container](images/quickstarts/python-user-rights-view-logs.png)
 
 In a Django app, you may see the error:
 

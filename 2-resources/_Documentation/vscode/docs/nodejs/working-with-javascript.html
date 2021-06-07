@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>working-with-javascript</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="working-with-javascript">Working with JavaScript</h1>
+<p>This topic describes some of the advanced JavaScript features supported by Visual Studio Code. Using the TypeScript language service, VS Code can provide smart completions (IntelliSense) as well as type checking for JavaScript.</p>
+<h2 id="intellisense">IntelliSense</h2>
+<p>Visual Studio Code’s JavaScript <a href="/docs/editor/intellisense.md">IntelliSense</a> provides intelligent code completion, parameter info, references search, and many other advanced language features. Our JavaScript IntelliSense is powered by the <a href="https://github.com/microsoft/TypeScript/wiki/JavaScript-Language-Service-in-Visual-Studio">JavaScript language service</a> developed by the TypeScript team. While IntelliSense should just work for most JavaScript projects without any configuration, you can make IntelliSense even more useful with <a href="/docs/languages/javascript.md#jsdoc-support">JSDoc</a> or by configuring a <code>jsconfig.json</code> project.</p>
+<p>For the details of how JavaScript IntelliSense works, including being based on type inference, JSDoc annotations, TypeScript declarations, and mixing JavaScript and TypeScript projects, see the <a href="https://github.com/microsoft/TypeScript/wiki/JavaScript-Language-Service-in-Visual-Studio">JavaScript language service documentation</a>.</p>
+<p>When type inference does not provide the desired information, type information may be provided explicitly with JSDoc annotations. This document describes the <a href="https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html#supported-jsdoc">JSDoc annotations</a> currently supported.</p>
+<p>In addition to objects, methods, and properties, the JavaScript IntelliSense window also provides basic word completion for the symbols in your file.</p>
+<h3 id="typings-and-automatic-type-acquisition">Typings and Automatic Type Acquisition</h3>
+<p>IntelliSense for JavaScript libraries and frameworks is powered by TypeScript type declaration (typings) files. Type declaration files are written in TypeScript so they can express the data types of parameters and functions, allowing VS Code to provide a rich IntelliSense experience in a performant manner.</p>
+<p>Many popular libraries ship with typings files so you get IntelliSense for them automatically. For libraries that do not include typings, VS Code’s <code>Automatic Type Acquisition</code> will automatically install community maintained typings file for you.</p>
+<p>Automatic type acquisition requires <a href="https://www.npmjs.com">npmjs</a>, the Node.js package manager, which is included with the <a href="https://nodejs.org">Node.js</a> runtime. In this image you can see IntelliSense, including the method signature, parameter info, and the method’s documentation for the popular <a href="https://lodash.com/">lodash</a> library.</p>
+<figure>
+<img src="images/working-with-javascript/lodash-typings.png" alt="lodash typings" /><figcaption>lodash typings</figcaption>
+</figure>
+<p>Type declaration files are automatically downloaded and managed by Visual Studio Code for packages listed in your project’s <code>package.json</code> or that you import into a JavaScript file.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;dependencies&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">&quot;lodash&quot;</span><span class="fu">:</span> <span class="st">&quot;^4.17.0&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="fu">}</span></a></code></pre></div>
+<p>You can alternately explicitly list packages to acquire type declaration files for in a <a href="#javascript-projects-jsconfigjson">jsconfig.json</a>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;typeAcquisition&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="dt">&quot;include&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;jquery&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="fu">}</span></a></code></pre></div>
+<p>Most common JavaScript libraries ship with declaration files or have type declaration files available. You can search for a library’s type declaration file package using the <a href="https://microsoft.github.io/TypeSearch">TypeSearch</a> site.</p>
+<h3 id="fixing-npm-not-installed-warning-for-automatic-type-acquisition">Fixing npm not installed warning for Automatic Type Acquisition</h3>
+<p><a href="#typings-and-automatic-type-acquisition">Automatic Type Acquisition</a> uses <a href="https://www.npmjs.com">npm</a>, the Node.js package manager, to install and manage Type Declaration (typings) files. To ensure that Automatic Type Acquisition works properly, first ensure that you have npm installed on your machine.</p>
+<p>Run <code>npm --version</code> from a terminal or command prompt to quickly check that npm is installed and available.</p>
+<p>npm is installed with the Node.js runtime, which is available for download from <a href="https://nodejs.org">Nodejs.org</a>. Install the current LTS (Long Term Support) version and the npm executable will be added by default to your system path.</p>
+<p>If you have npm installed but still see a warning message, you can explicitly tell VS Code where npm is installed with the <code>typescript.npm</code> <a href="/docs/getstarted/settings.md">setting</a>. This should be set to the full path of the npm executable on your machine, and this does not have to match the version of npm you are using to manage packages in your workspace. <code>typescript.npm</code> requires TypeScript 2.3.4+.</p>
+<p>For example, on Windows, you would add a path like this to your <code>settings.json</code> file:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">&quot;typescript.npm&quot;</span><span class="fu">:</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Program Files</span><span class="ch">\\</span><span class="st">nodejs</span><span class="ch">\\</span><span class="st">npm.cmd&quot;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="fu">}</span></a></code></pre></div>
+<h2 id="javascript-projects-jsconfig.json">JavaScript projects (jsconfig.json)</h2>
+<p>The presence of a <a href="/docs/languages/jsconfig.md">jsconfig.json</a> file in a directory indicates that the directory is the root of a JavaScript project. <code>jsconfig.json</code> specifies the root files and the options for the language features provided by the <a href="https://github.com/microsoft/TypeScript/wiki/JavaScript-Language-Service-in-Visual-Studio">JavaScript language service</a>. For common setups, a <code>jsconfig.json</code> file is not required, however, there are situations when you will want to add a <code>jsconfig.json</code>.</p>
+<ul>
+<li>Not all files should be in your JavaScript project (for example, you want to exclude some files from showing IntelliSense). This situation is common with front-end and back-end code.</li>
+<li>Your workspace contains more than one project context. In this situation, you should add a <code>jsconfig.json</code> file at the root folder for each project.</li>
+<li>You are using the TypeScript compiler to down-level compile JavaScript source code.</li>
+</ul>
+<h3 id="location-of-jsconfig.json">Location of jsconfig.json</h3>
+<p>To define our code as a JavaScript project, create <code>jsconfig.json</code> at the root of your JavaScript code as shown below. A JavaScript project is the source files of the project and should not include the derived or packaged files (such as a <code>dist</code> directory).</p>
+<figure>
+<img src="images/working-with-javascript/jsconfig_setup.png" alt="jsconfig setup" /><figcaption>jsconfig setup</figcaption>
+</figure>
+<p>In more complex projects, you may have more than one <code>jsconfig.json</code> file defined inside a workspace. You will want to do this so that the source code in one project does not appear in the IntelliSense of another project.</p>
+<p>Illustrated below is a project with a <code>client</code> and <code>server</code> folder, showing two separate JavaScript projects:</p>
+<figure>
+<img src="images/working-with-javascript/complex_jsconfig_setup.png" alt="multiple jsconfigs" /><figcaption>multiple jsconfigs</figcaption>
+</figure>
+<h3 id="writing-jsconfig.json">Writing jsconfig.json</h3>
+<p>Below is a simple template for <code>jsconfig.json</code> file, which defines the JavaScript <code>target</code> to be <code>ES6</code> and the <code>exclude</code> attribute excludes the <code>node_modules</code> folder. You can copy and paste this code into your <code>jsconfig.json</code> file.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;commonjs&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;es6&quot;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="dt">&quot;exclude&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;node_modules&quot;</span><span class="ot">,</span> <span class="st">&quot;**/node_modules/*&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<p>The <code>exclude</code> attribute tells the language service which files are not part of your source code. If IntelliSense is slow, add folders to your <code>exclude</code> list (VS Code will prompt you to do this if it detects slow completions). You will want to <code>exclude</code> files generated by a build process (such as a <code>dist</code> directory). These files will cause suggestions to show up twice and will slow down IntelliSense.</p>
+<p>You can explicitly set the files in your project using the <code>include</code> attribute. If no <code>include</code> attribute is present, then this defaults to including all files in the containing directory and subdirectories. When a <code>include</code> attribute is specified, only those files are included.</p>
+<p>Here is an example with an explicit <code>include</code> attribute:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;commonjs&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;es6&quot;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb5-6" title="6">  <span class="dt">&quot;include&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;src/**/*&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<p>The best practice, and least error prone route, is to use the <code>include</code> attribute with a single <code>src</code> folder. Note that file paths in <code>exclude</code> and <code>include</code> are relative to the location of <code>jsconfig.json</code>.</p>
+<p>For more information, see the full <a href="/docs/languages/jsconfig.md">jsconfig.json documentation</a>.</p>
+<h3 id="migrating-to-typescript">Migrating to TypeScript</h3>
+<p>It is possible to have mixed TypeScript and JavaScript projects. To start migrating to TypeScript, rename your <code>jsconfig.json</code> file to <code>tsconfig.json</code> and set the <code>allowJs</code> property to <code>true</code>. For more information, see <a href="https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html">Migrating from JavaScript</a>.</p>
+<blockquote>
+<p><strong>Note:</strong> <code>jsconfig.json</code> is the same as a <code>tsconfig.json</code> file, only with <code>allowJs</code> set to true. See <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html">the documentation for <code>tsconfig.json</code></a> here to see other available options.</p>
+</blockquote>
+<h2 id="type-checking-javascript">Type checking JavaScript</h2>
+<p>VS Code allows you to leverage some of TypeScript’s advanced type checking and error reporting functionality in regular JavaScript files. This is a great way to catch common programming mistakes. These type checks also enable some exciting <a href="">Quick Fixes</a> for JavaScript, including <strong>Add missing import</strong> and <strong>Add missing property</strong>.</p>
+<figure>
+<img src="images/working-with-javascript/checkjs-example.gif" alt="Using type checking and Quick Fixes in a JavaScript file" /><figcaption>Using type checking and Quick Fixes in a JavaScript file</figcaption>
+</figure>
+<p>TypeScript can infer types in <code>.js</code> files same as in <code>.ts</code> files. When types cannot be inferred, they can be specified using JSDoc comments. You can read more about how TypeScript uses JSDoc for JavaScript type checking in <a href="https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html">Type Checking JavaScript Files</a>.</p>
+<p>Type checking of JavaScript is optional and opt-in. Existing JavaScript validation tools such as ESLint can be used alongside the new built-in type checking functionality.</p>
+<p>You can get started with type checking a few different ways depending on your needs.</p>
+<p><strong>Per file</strong></p>
+<p>The easiest way to enable type checking in a JavaScript file is by adding <code>// @ts-check</code> to the top of a file.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">// @ts-check</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">let</span> itsAsEasyAs <span class="op">=</span> <span class="st">&quot;abc&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" title="3">itsAsEasyAs <span class="op">=</span> <span class="dv">123</span><span class="op">;</span> <span class="co">// Error: Type &#39;123&#39; is not assignable to type &#39;string&#39;</span></a></code></pre></div>
+<p>Using <code>// @ts-check</code> is a good approach if you just want to try type checking in a few files but not yet enable it for an entire codebase.</p>
+<p><strong>Using a setting</strong></p>
+<p>To enable type checking for all JavaScript files without changing any code, just add <code>"js/ts.implicitProjectConfig.checkJs": true</code> to your workspace or user settings. This enables type checking for any JavaScript file that is not part of a <code>jsconfig.json</code> or <code>tsconfig.json</code> project.</p>
+<p>You can opt individual files out of type checking with a <code>// @ts-nocheck</code> comment at the top of the file:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="co">// @ts-nocheck</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">let</span> easy <span class="op">=</span> <span class="st">&quot;abc&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" title="3">easy <span class="op">=</span> <span class="dv">123</span><span class="op">;</span> <span class="co">// no error</span></a></code></pre></div>
+<p>You can also disable individual errors in a JavaScript file using a <code>// @ts-ignore</code> comment on the line before the error:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">let</span> easy <span class="op">=</span> <span class="st">&quot;abc&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co">// @ts-ignore</span></a>
+<a class="sourceLine" id="cb8-3" title="3">easy <span class="op">=</span> <span class="dv">123</span><span class="op">;</span> <span class="co">// no error</span></a></code></pre></div>
+<p><strong>Using jsconfig or tsconfig</strong></p>
+<p>To enable type checking for JavaScript files that are part of a <code>jsconfig.json</code> or <code>tsconfig.json</code>, add <code>"checkJs": true</code> to the project’s compiler options:</p>
+<p><code>jsconfig.json</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="dt">&quot;checkJs&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-5" title="5">  <span class="dt">&quot;exclude&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;node_modules&quot;</span><span class="ot">,</span> <span class="st">&quot;**/node_modules/*&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="fu">}</span></a></code></pre></div>
+<p><code>tsconfig.json</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb10-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="dt">&quot;allowJs&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="dt">&quot;checkJs&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb10-5" title="5">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb10-6" title="6">  <span class="dt">&quot;exclude&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;node_modules&quot;</span><span class="ot">,</span> <span class="st">&quot;**/node_modules/*&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<p>This enables type checking for all JavaScript files in the project. You can use <code>// @ts-nocheck</code> to disable type checking per file.</p>
+<p>JavaScript type checking requires TypeScript 2.3. If you are unsure what version of TypeScript is currently active in your workspace, run the <strong>TypeScript: Select TypeScript Version</strong> command to check. You must have a <code>.js/.ts</code> file open in the editor to run this command. If you open a TypeScript file, the version appears in the lower right corner.</p>
+<h3 id="global-variables-and-type-checking">Global variables and type checking</h3>
+<p>Let’s say that you are working in legacy JavaScript code that uses global variables or non-standard DOM APIs:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode ts"><code class="sourceCode typescript"><a class="sourceLine" id="cb11-1" title="1"><span class="bu">window</span><span class="op">.</span><span class="at">onload</span> <span class="op">=</span> <span class="fu">function</span> () <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="fu">if</span> (<span class="bu">window</span><span class="op">.</span><span class="va">webkitNotifications</span><span class="op">.</span><span class="fu">requestPermission</span>() <span class="op">===</span> CAN_NOTIFY) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-3" title="3">    <span class="bu">window</span><span class="op">.</span><span class="va">webkitNotifications</span><span class="op">.</span><span class="fu">createNotification</span>(<span class="kw">null</span><span class="op">,</span> <span class="st">&quot;Woof!&quot;</span><span class="op">,</span> <span class="st">&quot;🐶&quot;</span>).<span class="fu">show</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-5" title="5">    <span class="fu">alert</span>(<span class="st">&quot;Could not notify&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-6" title="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="op">};</span></a></code></pre></div>
+<p>If you try to use <code>// @ts-check</code> with the above code, you’ll see a number of errors about the use of global variables:</p>
+<ol type="1">
+<li><code>Line 2</code> - <code>Property 'webkitNotifications' does not exist on type 'Window'.</code></li>
+<li><code>Line 2</code> - <code>Cannot find name 'CAN_NOTIFY'.</code></li>
+<li><code>Line 3</code> - <code>Property 'webkitNotifications' does not exist on type 'Window'.</code></li>
+</ol>
+<p>If you want to continue using <code>// @ts-check</code> but are confident that these are not actual issues with your application, you have to let TypeScript know about these global variables.</p>
+<p>To start, <a href="#javascript-project-jsconfigjson">create a <code>jsconfig.json</code></a> at the root of your project:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb12-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{},</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="dt">&quot;exclude&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;node_modules&quot;</span><span class="ot">,</span> <span class="st">&quot;**/node_modules/*&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="fu">}</span></a></code></pre></div>
+<p>Then reload VS Code to make sure the change is applied. The presence of a <code>jsconfig.json</code> lets TypeScript know that your Javascript files are part of a larger project.</p>
+<p>Now create a <code>globals.d.ts</code> file somewhere your workspace:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode ts"><code class="sourceCode typescript"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">interface</span> <span class="bu">Window</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  webkitNotifications<span class="op">:</span> <span class="dt">any</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb13-4" title="4"></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="kw">declare</span> <span class="kw">var</span> CAN_NOTIFY<span class="op">:</span> <span class="dt">number</span><span class="op">;</span></a></code></pre></div>
+<p><code>d.ts</code> files are type declarations. In this case, <code>globals.d.ts</code> lets TypeScript know that a global <code>CAN_NOTIFY</code> exists and that a <code>webkitNotifications</code> property exists on <code>window</code>. You can read more about writing <code>d.ts</code> in the <a href="https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html">TypeScript documentation</a>. <code>d.ts</code> files do not change how JavaScript is evaluated, they are used only for providing better JavaScript language support.</p>
+<h2 id="using-tasks">Using tasks</h2>
+<h3 id="using-the-typescript-compiler">Using the TypeScript compiler</h3>
+<p>One of the key features of TypeScript is the ability to use the latest JavaScript language features, and emit code that can execute in JavaScript runtimes that don’t yet understand those newer features. With JavaScript using the same language service, it too can now take advantage of this same feature.</p>
+<p>The TypeScript compiler <code>tsc</code> can down-level compile JavaScript files from ES6 to another language level. Configure the <code>jsconfig.json</code> with the desired options and then use the –p argument to make <code>tsc</code> use your <code>jsconfig.json</code> file, for example <code>tsc -p jsconfig.json</code> to down-level compile.</p>
+<p>Read more about the compiler options for down level compilation in the <a href="/docs/languages/jsconfig.md#down-level-compilation-with-typescript-compiler">jsconfig documentation</a>.</p>
+<h3 id="running-babel">Running Babel</h3>
+<p>The <a href="https://babeljs.io">Babel</a> transpiler turns ES6 files into readable ES5 JavaScript with Source Maps. You can easily integrate <strong>Babel</strong> into your workflow by adding the configuration below to your <code>tasks.json</code> file (located under the workspace’s <code>.vscode</code> folder). The <code>group</code> setting makes this task the default <strong>Task: Run Build Task</strong> gesture. <code>isBackground</code> tells VS Code to keep running this task in the background. To learn more, go to <a href="/docs/editor/tasks.md">Tasks</a>.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb14-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb14-4" title="4">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb14-5" title="5">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;watch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb14-6" title="6">      <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder}/node_modules/.bin/babel&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb14-7" title="7">      <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;src&quot;</span><span class="ot">,</span> <span class="st">&quot;--out-dir&quot;</span><span class="ot">,</span> <span class="st">&quot;lib&quot;</span><span class="ot">,</span> <span class="st">&quot;-w&quot;</span><span class="ot">,</span> <span class="st">&quot;--source-maps&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb14-8" title="8">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;shell&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb14-9" title="9">      <span class="dt">&quot;group&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;build&quot;</span><span class="fu">,</span> <span class="dt">&quot;isDefault&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">},</span></a>
+<a class="sourceLine" id="cb14-10" title="10">      <span class="dt">&quot;isBackground&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb14-11" title="11">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb14-12" title="12">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb14-13" title="13"><span class="fu">}</span></a></code></pre></div>
+<p>Once you have added this, you can start <strong>Babel</strong> with the <code>kb(workbench.action.tasks.build)</code> (<strong>Run Build Task</strong>) command and it will compile all files from the <code>src</code> directory into the <code>lib</code> directory.</p>
+<blockquote>
+<p><strong>Tip:</strong> For help with Babel CLI, see the instructions in <a href="https://babeljs.io/docs/setup/#installation">Using Babel</a>. The example above uses the CLI option.</p>
+</blockquote>
+<h2 id="disable-javascript-support">Disable JavaScript support</h2>
+<p>If you prefer to use JavaScript language features supported by other JavaScript language tools such as <a href="https://flow.org/">Flow</a>, you can disable VS Code’s built-in JavaScript support. You do this by disabling the built-in TypeScript language extension <strong>TypeScript and JavaScript Language Features</strong> (vscode.typescript-language-features) which also provides the JavaScript language support.</p>
+<p>To disable JavaScript/TypeScript support, go to the Extensions view (<code>kb(workbench.view.extensions)</code>) and filter on built-in extensions (<strong>Show Built-in Extensions</strong> in the <strong>…</strong> <strong>More Actions</strong> dropdown), then type ‘typescript’. Select the <strong>TypeScript and JavaScript Language Features</strong> extension and press the <strong>Disable</strong> button. VS Code built-in extensions cannot be uninstalled, only disabled, and can be re-enabled at any time.</p>
+<figure>
+<img src="images/working-with-javascript/disable-TS-language.png" alt="TypeScript and JavaScript Language Features extension" /><figcaption>TypeScript and JavaScript Language Features extension</figcaption>
+</figure>
+</body>
+</html>

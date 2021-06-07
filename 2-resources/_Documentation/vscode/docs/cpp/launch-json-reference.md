@@ -7,6 +7,7 @@ PageTitle: Configure launch.json for C/C++ debugging in Visual Studio Code
 DateApproved: 07/25/2019
 MetaDescription: Configure launch.json for C/C++ debugging in Visual Studio Code
 ---
+
 # Configuring C/C++ debugging
 
 The `launch.json` file is used to configure the debugger in Visual Studio Code.
@@ -70,18 +71,18 @@ When a `visualizerFile` is specified, `showDisplayString` will enable the displa
 
 ```json
 {
-   "name": "C++ Launch (Windows)",
-   "type": "cppvsdbg",
-   "request": "launch",
-   "program": "C:\\app1\\Debug\\app1.exe",
-   "symbolSearchPath": "C:\\Symbols;C:\\SymbolDir2",
-   "externalConsole": true,
-   "logging": {
-       "moduleLoad": false,
-       "trace": true
-    },
-   "visualizerFile": "${workspaceFolder}/my.natvis",
-   "showDisplayString": true
+  "name": "C++ Launch (Windows)",
+  "type": "cppvsdbg",
+  "request": "launch",
+  "program": "C:\\app1\\Debug\\app1.exe",
+  "symbolSearchPath": "C:\\Symbols;C:\\SymbolDir2",
+  "externalConsole": true,
+  "logging": {
+    "moduleLoad": false,
+    "trace": true
+  },
+  "visualizerFile": "${workspaceFolder}/my.natvis",
+  "showDisplayString": true
 }
 ```
 
@@ -105,13 +106,13 @@ Environment variables to add to the environment for the program. Example: `[ { "
 
 ```json
 {
-   "name": "C++ Launch",
-   "type": "cppdbg",
-   "request": "launch",
-   "program": "${workspaceFolder}/a.out",
-   "args": ["arg1", "arg2"],
-   "environment": [{"name": "config", "value": "Debug"}],
-   "cwd": "${workspaceFolder}"
+  "name": "C++ Launch",
+  "type": "cppdbg",
+  "request": "launch",
+  "program": "${workspaceFolder}/a.out",
+  "args": ["arg1", "arg2"],
+  "environment": [{ "name": "config", "value": "Debug" }],
+  "cwd": "${workspaceFolder}"
 }
 ```
 
@@ -151,33 +152,37 @@ The command to execute after the debugger is fully set up in order to cause the 
 
 ```json
 {
-   "name": "C++ Launch",
-   "type": "cppdbg",
-   "request": "launch",
-   "program": "${workspaceFolder}/a.out",
-   "stopAtEntry": false,
-   "customLaunchSetupCommands": [
-      { "text": "target-run", "description": "run target", "ignoreFailures": false }
-   ],
-   "launchCompleteCommand": "exec-run",
-   "linux": {
-      "MIMode": "gdb",
-      "miDebuggerPath": "/usr/bin/gdb"
-   },
-   "osx": {
-      "MIMode": "lldb"
-   },
-   "windows": {
-      "MIMode": "gdb",
-      "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
-   }
+  "name": "C++ Launch",
+  "type": "cppdbg",
+  "request": "launch",
+  "program": "${workspaceFolder}/a.out",
+  "stopAtEntry": false,
+  "customLaunchSetupCommands": [
+    {
+      "text": "target-run",
+      "description": "run target",
+      "ignoreFailures": false
+    }
+  ],
+  "launchCompleteCommand": "exec-run",
+  "linux": {
+    "MIMode": "gdb",
+    "miDebuggerPath": "/usr/bin/gdb"
+  },
+  "osx": {
+    "MIMode": "lldb"
+  },
+  "windows": {
+    "MIMode": "gdb",
+    "miDebuggerPath": "C:\\MinGw\\bin\\gdb.exe"
+  }
 }
 ```
 
 ### symbolLoadInfo
 
 - **loadAll**: If true, symbols for all libs will be loaded, otherwise no solib symbols will be loaded. Modified by ExceptionList. Default value is true.
-- **exceptionList**: List of filenames (wildcards allowed) separated by semicolons `;`. Modifies behavior of LoadAll. If LoadAll is true then don't load symbols for libs that match any name in the list. Otherwise only load symbols for libs that match. Example: ```"foo.so;bar.so"```
+- **exceptionList**: List of filenames (wildcards allowed) separated by semicolons `;`. Modifies behavior of LoadAll. If LoadAll is true then don't load symbols for libs that match any name in the list. Otherwise only load symbols for libs that match. Example: `"foo.so;bar.so"`
 
 ## Debugging dump files
 

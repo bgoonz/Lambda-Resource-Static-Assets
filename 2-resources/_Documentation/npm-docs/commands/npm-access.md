@@ -29,28 +29,28 @@ For all of the subcommands, `npm access` will perform actions on the packages
 in the current working directory if no package name is passed to the
 subcommand.
 
-* public / restricted:
+- public / restricted:
   Set a package to be either publicly accessible or restricted.
 
-* grant / revoke:
+- grant / revoke:
   Add or remove the ability of users and teams to have read-only or read-write
   access to a package.
 
-* 2fa-required / 2fa-not-required:
+- 2fa-required / 2fa-not-required:
   Configure whether a package requires that anyone publishing it have two-factor
   authentication enabled on their account.
 
-* ls-packages:
+- ls-packages:
   Show all of the packages a user or a team is able to access, along with the
   access level, except for read-only public packages (it won't print the whole
   registry listing)
 
-* ls-collaborators:
+- ls-collaborators:
   Show all of the access privileges for a package. Will only show permissions
   for packages to which you have at least read access. If `<user>` is passed in,
   the list is filtered only to teams _that_ user happens to belong to.
 
-* edit:
+- edit:
   Set the access privileges for a package at once using `$EDITOR`.
 
 ### Details
@@ -58,17 +58,17 @@ subcommand.
 `npm access` always operates directly on the current registry, configurable
 from the command line using `--registry=<registry url>`.
 
-Unscoped packages are *always public*.
+Unscoped packages are _always public_.
 
-Scoped packages *default to restricted*, but you can either publish them as
+Scoped packages _default to restricted_, but you can either publish them as
 public using `npm publish --access=public`, or set their access as public using
 `npm access public` after the initial publish.
 
 You must have privileges to set the access of a package:
 
-* You are an owner of an unscoped or scoped package.
-* You are a member of the team that owns a scope.
-* You have been given read-write privileges for a package, either as a member
+- You are an owner of an unscoped or scoped package.
+- You are a member of the team that owns a scope.
+- You have been given read-write privileges for a package, either as a member
   of a team or directly as an owner.
 
 If you have two-factor authentication enabled then you'll be prompted to
@@ -83,8 +83,8 @@ Management of teams and team memberships is done with the `npm team` command.
 
 ### See Also
 
-* [`libnpmaccess`](https://npm.im/libnpmaccess)
-* [npm team](/commands/npm-team)
-* [npm publish](/commands/npm-publish)
-* [npm config](/commands/npm-config)
-* [npm registry](/using-npm/registry)
+- [`libnpmaccess`](https://npm.im/libnpmaccess)
+- [npm team](/commands/npm-team)
+- [npm publish](/commands/npm-publish)
+- [npm config](/commands/npm-config)
+- [npm registry](/using-npm/registry)

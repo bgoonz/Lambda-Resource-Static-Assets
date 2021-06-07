@@ -5,9 +5,10 @@ TOCTitle: Debugging Recipes
 ContentId: 215832f9-d5bd-4cea-8cea-bfc4dc7ff7d1
 PageTitle: Node.js Debugging Recipes for Visual Studio Code
 DateApproved: 3/31/2021
-MetaDescription:  Learn more about how to setup debugging in Visual Studio Code with debugging recipes
+MetaDescription: Learn more about how to setup debugging in Visual Studio Code with debugging recipes
 MetaSocialImage: debugging_Debugging.png
 ---
+
 # Node.js Debugging Recipes
 
 Visual Studio Code supports debugging of many languages and platforms via debuggers that are either built-in or contributed by extensions.
@@ -43,9 +44,9 @@ You can read more about how our Debugger for Chrome works in this introduction [
 
 **Blog posts**:
 
-* [Live edit and debug your React apps directly from VS Code](https://medium.com/@auchenberg/live-edit-and-debug-your-react-apps-directly-from-vs-code-without-leaving-the-editor-3da489ed905f)
+- [Live edit and debug your React apps directly from VS Code](https://medium.com/@auchenberg/live-edit-and-debug-your-react-apps-directly-from-vs-code-without-leaving-the-editor-3da489ed905f)
 
-* [Super-charged live editing and JavaScript debugging for Angular using VS Code](https://medium.com/@auchenberg/super-charged-live-editing-and-javascript-debugging-for-angular-using-visual-studio-code-c29da251ec71)
+- [Super-charged live editing and JavaScript debugging for Angular using VS Code](https://medium.com/@auchenberg/super-charged-live-editing-and-javascript-debugging-for-angular-using-visual-studio-code-c29da251ec71)
 
 ## Electron - Debug Electron applications
 
@@ -59,6 +60,6 @@ The Visual Studio Code editor supports debugging [Electron](https://electron.ato
 
 ## Next steps
 
-* [Debugging](/docs/editor/debugging.md) - Read about general VS Code debugging features.
-* [Node.js Debugging](/docs/nodejs/nodejs-debugging.md) - Learn about the built-in Node.js debugger.
-* [Video: Getting started with Node.js debugging](https://www.youtube.com/watch?v=2oFKNL7vYV8) - Attach to a running Node.js process.
+- [Debugging](/docs/editor/debugging.md) - Read about general VS Code debugging features.
+- [Node.js Debugging](/docs/nodejs/nodejs-debugging.md) - Learn about the built-in Node.js debugger.
+- [Video: Getting started with Node.js debugging](https://www.youtube.com/watch?v=2oFKNL7vYV8) - Attach to a running Node.js process.

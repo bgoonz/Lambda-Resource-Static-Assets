@@ -7,6 +7,7 @@ PageTitle: Markdown editing with Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Get the best out of Visual Studio Code for Markdown
 ---
+
 # Markdown and Visual Studio Code
 
 Working with Markdown files in Visual Studio Code is simple, straightforward, and fun. Besides VS Code's basic editing, there are a number of Markdown specific features that will help you be more productive.
@@ -27,7 +28,7 @@ Here is an example with a very simple file.
 
 ![Markdown Preview](images/Markdown/preview.png)
 
->**Tip:** You can also right-click on the editor Tab and select **Open Preview** (`kb(markdown.showPreview)`) or use the **Command Palette** (`kb(workbench.action.showCommands)`) to run the **Markdown: Open Preview to the Side** command (`kb(markdown.showPreviewToSide)`).
+> **Tip:** You can also right-click on the editor Tab and select **Open Preview** (`kb(markdown.showPreview)`) or use the **Command Palette** (`kb(workbench.action.showCommands)`) to run the **Markdown: Open Preview to the Side** command (`kb(markdown.showPreviewToSide)`).
 
 ### Dynamic previews and preview locking
 
@@ -78,9 +79,7 @@ For example, to load a stylesheet called `Style.css` at the root of your current
 ```json
 // Place your settings in this file to overwrite default and user settings.
 {
-    "markdown.styles": [
-        "Style.css"
-    ]
+  "markdown.styles": ["Style.css"]
 }
 ```
 
@@ -130,7 +129,7 @@ Disables additional security in the preview window. This allows script execution
 
 There are several built-in Markdown snippets included in VS Code - press `kb(editor.action.triggerSuggest)` (Trigger Suggest) and you get a context specific list of suggestions.
 
->**Tip:** You can add in your own User Defined Snippets for Markdown. Take a look at [User Defined Snippets](/docs/editor/userdefinedsnippets.md) to find out how.
+> **Tip:** You can add in your own User Defined Snippets for Markdown. Take a look at [User Defined Snippets](/docs/editor/userdefinedsnippets.md) to find out how.
 
 ## Compiling Markdown into HTML
 
@@ -161,9 +160,9 @@ This is a simple introduction to compiling Markdown in VS Code.
 
 Things you'll need:
 
-* [Node.js](https://nodejs.org)
-* [markdown-it](https://www.npmjs.com/package/markdown-it)
-* [tasks.json](/docs/editor/tasks.md)
+- [Node.js](https://nodejs.org)
+- [markdown-it](https://www.npmjs.com/package/markdown-it)
+- [tasks.json](/docs/editor/tasks.md)
 
 ## Section Title
 
@@ -178,16 +177,16 @@ This generates a `tasks.json` file in your workspace `.vscode` folder with the f
 
 ```json
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "echo",
-            "type": "shell",
-            "command": "echo Hello"
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "echo",
+      "type": "shell",
+      "command": "echo Hello"
+    }
+  ]
 }
 ```
 
@@ -195,17 +194,17 @@ To use **markdown-it** to compile the Markdown file, change the contents as foll
 
 ```json
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Compile Markdown",
-            "type": "shell",
-            "command": "markdown-it sample.md -o sample.html",
-            "group": "build"
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile Markdown",
+      "type": "shell",
+      "command": "markdown-it sample.md -o sample.html",
+      "group": "build"
+    }
+  ]
 }
 ```
 
@@ -221,21 +220,21 @@ If you want to make the **Compile Markdown** task the default build task to run 
 
 ```json
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Compile Markdown",
-            "type": "shell",
-            "command": "markdown-it sample.md -o sample.html",
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile Markdown",
+      "type": "shell",
+      "command": "markdown-it sample.md -o sample.html",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
 }
 ```
 
@@ -265,19 +264,22 @@ Open VS Code on the same folder from before (contains `sample.md` and `tasks.jso
 Place the following source code in that file:
 
 ```javascript
-var gulp = require('gulp');
-var markdown = require('gulp-markdown-it');
+var gulp = require("gulp");
+var markdown = require("gulp-markdown-it");
 
-gulp.task('markdown', function() {
-    return gulp.src('**/*.md')
-        .pipe(markdown())
-        .pipe(gulp.dest(function(f) {
-            return f.base;
-        }));
+gulp.task("markdown", function () {
+  return gulp
+    .src("**/*.md")
+    .pipe(markdown())
+    .pipe(
+      gulp.dest(function (f) {
+        return f.base;
+      })
+    );
 });
 
-gulp.task('default', function() {
-    return gulp.watch('**/*.md', gulp.series(['markdown']));
+gulp.task("default", function () {
+  return gulp.watch("**/*.md", gulp.series(["markdown"]));
 });
 ```
 
@@ -295,20 +297,20 @@ If you want to make the **gulp: default** task the default build task executed w
 
 ```json
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "type": "gulp",
-            "task": "default",
-            "problemMatcher": [],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "gulp",
+      "task": "default",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
 }
 ```
 
@@ -320,7 +322,7 @@ The **gulp: default** task runs in the background and watches for file changes t
 
 Read on to find out about:
 
-* [CSS, SCSS, and Less](/docs/languages/css.md) - Want to edit your CSS? VS Code has great support for CSS, SCSS, and Less editing.
+- [CSS, SCSS, and Less](/docs/languages/css.md) - Want to edit your CSS? VS Code has great support for CSS, SCSS, and Less editing.
 
 ## Common questions
 

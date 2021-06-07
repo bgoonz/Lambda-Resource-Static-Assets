@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>mongodb</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="working-with-mongodb">Working with MongoDB</h1>
+<p>Visual Studio Code has great support for working with <a href="https://www.mongodb.com/what-is-mongodb">MongoDB</a> databases, whether your own instance or in <a href="https://www.mongodb.com/cloud/atlas/azure-mongodb?utm_campaign=marketplace&amp;utm_source=&amp;utm_medium=marketplace">Azure with MongoDB Atlas</a>. With the <a href="https://marketplace.visualstudio.com/items?itemName=mongodb.mongodb-vscode">MongoDB for VS Code</a> extension, you can create, manage, and query MongoDB databases from within VS Code.</p>
+<h2 id="install-the-extension">Install the extension</h2>
+<p>MongoDB support for VS Code is provided by the <a href="https://marketplace.visualstudio.com/items?itemName=mongodb.mongodb-vscode">MongoDB for VS Code</a> extension. To install the MongoDB for VS Code extension, open the Extensions view by pressing <code>kb(workbench.view.extensions)</code> and search for ‘MongoDB’ to filter the results. Select the <strong>MongoDB for VS Code</strong> extension.</p>
+<figure>
+<img src="images/mongodb/install-cosmosdb-extension.png" alt="Select MongoDB for VS Code" /><figcaption>Select MongoDB for VS Code</figcaption>
+</figure>
+<h2 id="connect-to-mongodb">Connect to MongoDB</h2>
+<p>Once you’ve installed the MongoDB for VS Code extension, you’ll notice there is a new <strong>MongoDB</strong> Activity Bar view. Select the MongoDB view and you’ll see the MongoDB Explorer.</p>
+<figure>
+<img src="images/mongodb/cosmosdb-explorer.png" alt="MongoDB explorer" /><figcaption>MongoDB explorer</figcaption>
+</figure>
+<p>To connect to a MongoDB database, select <strong>Add Connection</strong> and enter the connection details for the database then <strong>Connect</strong>, the default is a local MongoDB server at <code>mongodb://127.0.0.1:27017</code>. You can also enter a connection string, click the “connect with a connection string” link and paste the connection string.</p>
+<figure>
+<img src="images/mongodb/attach-database-account.png" alt="Database Connection setup" /><figcaption>Database Connection setup</figcaption>
+</figure>
+<blockquote>
+<p><strong>Note</strong>: Make sure your MongoDB server (mongod.exe) is running if you are connecting to a local MongoDB server.</p>
+</blockquote>
+<p>Once attached, you can work with the MongoDB server, managing MongoDB Databases, Collections, and Documents.</p>
+<figure>
+<img src="images/mongodb/attached-mongodb-database.png" alt="attached MongoDB database" /><figcaption>attached MongoDB database</figcaption>
+</figure>
+<p>You can expand databases to view their collections with their schema and indexes and you can select individual MongoDB Documents to view their JSON.</p>
+<figure>
+<img src="images/mongodb/open-document.png" alt="open mongodb document" /><figcaption>open mongodb document</figcaption>
+</figure>
+<p>You can also attach a MongoDB shell to the active connection, simply by right-clicking on the connection itself.</p>
+<figure>
+<img src="images/mongodb/connection.png" alt="MongoDB Connection" /><figcaption>MongoDB Connection</figcaption>
+</figure>
+<blockquote>
+<p><strong>Note</strong>: Make sure the MongoDB shell (<code>mongo</code> or <code>mongosh</code>) <a href="https://docs.mongodb.com/mongodb-shell/install#mdb-shell-install">is installed</a> and is on your path. In the extension’s settings, you can choose which shell you are using.</p>
+</blockquote>
+<h2 id="mongodb-commands">MongoDB Commands</h2>
+<p>There are MongoDB specific commands available in the VS Code <strong>Command Palette</strong> (<code>kb(workbench.action.showCommands)</code>) as well as through Explorer context menus.</p>
+<figure>
+<img src="images/mongodb/mongodb-commands.png" alt="mongodb commands" /><figcaption>mongodb commands</figcaption>
+</figure>
+<h2 id="using-playgrounds">Using Playgrounds</h2>
+<p>One of the most powerful features of the VS Code MongoDB integration is <strong>Mongo Playgrounds</strong>. Playgrounds let you create, run, and save MongoDB commands from a VS Code editor. Create a new playground with the <strong>MongoDB: Create MongoDB Playground</strong> command.</p>
+<figure>
+<img src="images/mongodb/new-mongo-scrapbook.png" alt="new mongo Playground" /><figcaption>new mongo Playground</figcaption>
+</figure>
+<p>In a playground, you can reference MongoDB entities and commands and you get rich IntelliSense as you type. Playgrounds are useful for prototyping database operations and queries. Execute selected lines in the playground queries with the <strong>MongoDB: Run Selected Lines From Playground</strong> command.</p>
+<figure>
+<img src="images/mongodb/scrapbook.png" alt="mongodb Playground" /><figcaption>mongodb Playground</figcaption>
+</figure>
+<figure>
+<img src="images/mongodb/run-playground.png" alt="Run Playground queries" /><figcaption>Run Playground queries</figcaption>
+</figure>
+<h2 id="mongodb-on-azure">MongoDB on Azure</h2>
+<p>You can easily create a MongoDB cluster on Azure for <strong>Free</strong> with <a href="https://www.mongodb.com/cloud/atlas/signup?utm_campaign=marketplace&amp;utm_source=signup&amp;utm_medium=marketplace">MongoDB Atlas</a>.</p>
+<p>Choose <strong>Create a New Cluster</strong> from the dashboard and choose <strong>Azure</strong> as the Cloud Provider. Once the cluster is created, connect to using the connection string provided by <strong>MongoDB Atlas</strong>.</p>
+<figure>
+<img src="images/mongodb/create-azure-cluster.png" alt="Create Azure Cluster" /><figcaption>Create Azure Cluster</figcaption>
+</figure>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="/docs/azure/extensions.md">Azure Extensions</a> - The VS Code Marketplace has hundreds of extensions for Azure and the cloud.</li>
+<li><a href="/docs/azure/deployment.md">Deploying to Azure</a> - Learn step-by-step how to deploy your application to Azure.</li>
+<li><a href="/docs/azure/docker.md">Working with Docker</a> - Put your application in a Docker container for easy reuse and deployment.</li>
+</ul>
+</body>
+</html>

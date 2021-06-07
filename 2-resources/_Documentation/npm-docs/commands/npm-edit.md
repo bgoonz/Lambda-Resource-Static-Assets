@@ -27,16 +27,16 @@ changes to your locally installed copy.
 
 #### editor
 
-* Default: `EDITOR` environment variable if set, or `"vi"` on Posix,
+- Default: `EDITOR` environment variable if set, or `"vi"` on Posix,
   or `"notepad"` on Windows.
-* Type: path
+- Type: path
 
 The command to run for `npm edit` or `npm config edit`.
 
 ### See Also
 
-* [npm folders](/configuring-npm/folders)
-* [npm explore](/commands/npm-explore)
-* [npm install](/commands/npm-install)
-* [npm config](/commands/npm-config)
-* [npmrc](/configuring-npm/npmrc)
+- [npm folders](/configuring-npm/folders)
+- [npm explore](/commands/npm-explore)
+- [npm install](/commands/npm-install)
+- [npm config](/commands/npm-config)
+- [npmrc](/configuring-npm/npmrc)

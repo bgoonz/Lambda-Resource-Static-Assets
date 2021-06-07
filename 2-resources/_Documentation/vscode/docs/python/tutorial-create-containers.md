@@ -8,6 +8,7 @@ DateApproved: 08/12/2019
 MetaDescription: How to create Docker containers for Python web apps using the VS Code docker extension
 MetaSocialImage: images/tutorial/social.png
 ---
+
 # Create Docker containers for Python
 
 This tutorial walks you through the full process of containerizing an existing Python application using [Docker](https://www.docker.com/) and pushing the app image to a Docker registry, all within Visual Studio Code. The tutorial also demonstrates how to use base container images that include production-ready web servers (uwsgi and nginx), and how to configure those servers for both [Django](https://www.djangoproject.com/) and [Flask](https://flask.palletsprojects.com) web apps, which is helpful to know no matter what your deployment target.
@@ -62,7 +63,7 @@ To create an Azure Container Registry, as shown later in this tutorial, do the f
 
 1. Make sure that the registry endpoint you created is visible under **Registries** in the **Docker** explorer of VS Code:
 
-    ![Docker explorer in VS Code showing registries](images/create-containers/registries.png)
+   ![Docker explorer in VS Code showing registries](images/create-containers/registries.png)
 
 ## Create a container image
 
@@ -80,11 +81,11 @@ A container image is a bundle of your app code and its dependencies. To create a
 
 1. With all this information, the Docker extension creates the following files:
 
-    - The `Dockerfile` file describes the contents of your app's layer in the image. Your app layer is added on top of the base image indicated in the `Dockerfile`.. By default, the name of the image is the name of the workspace folder in VS Code.
+   - The `Dockerfile` file describes the contents of your app's layer in the image. Your app layer is added on top of the base image indicated in the `Dockerfile`.. By default, the name of the image is the name of the workspace folder in VS Code.
 
-    - A `.dockerignore` file that reduces image size by excluding files and folders that aren't needed in the image, such as `.git` and `.vscode`. For Python, add another line to the file for `__pycache__`.
+   - A `.dockerignore` file that reduces image size by excluding files and folders that aren't needed in the image, such as `.git` and `.vscode`. For Python, add another line to the file for `__pycache__`.
 
-    - `docker-compose.yml` and `docker-compose.debug.yml` files that are used with [Docker compose](https://docs.docker.com/compose/overview/). For the purposes of this tutorial, you can ignore or delete these files.
+   - `docker-compose.yml` and `docker-compose.debug.yml` files that are used with [Docker compose](https://docs.docker.com/compose/overview/). For the purposes of this tutorial, you can ignore or delete these files.
 
 > **Tip:** VS Code provides great support for Docker files. See the [Working with Docker](/docs/azure/docker.md) article to learn about rich language features like smart suggestions, completions, and error detection.
 
@@ -104,43 +105,43 @@ The following steps summarize the configuration used in the [python-sample-vscod
 
 1. The `Dockerfile` indicates the location and name of the Flask app object, the location of static files for nginx, and the location of the `uwsgi.ini` file. (The `Dockerfile` in the sample contains further explanatory comments that are omitted here.)
 
-    ```dockerfile
-    FROM tiangolo/uwsgi-nginx-flask:python3.6-alpine3.7
+   ```dockerfile
+   FROM tiangolo/uwsgi-nginx-flask:python3.6-alpine3.7
 
-    ENV LISTEN_PORT=5000
-    EXPOSE 5000
+   ENV LISTEN_PORT=5000
+   EXPOSE 5000
 
-    # Indicate where uwsgi.ini lives
-    ENV UWSGI_INI=uwsgi.ini
+   # Indicate where uwsgi.ini lives
+   ENV UWSGI_INI=uwsgi.ini
 
-    # Tell nginx where static files live.
-    ENV STATIC_URL=/hello_app/static
+   # Tell nginx where static files live.
+   ENV STATIC_URL=/hello_app/static
 
-    # Set the folder where uwsgi looks for the app
-    WORKDIR /hello_app
+   # Set the folder where uwsgi looks for the app
+   WORKDIR /hello_app
 
-    # Copy the app contents to the image
-    COPY . /hello_app
+   # Copy the app contents to the image
+   COPY . /hello_app
 
-    # If you have additional requirements beyond Flask (which is included in the
-    # base image), generate a requirements.txt file with pip freeze and uncomment
-    # the next three lines.
-    #COPY requirements.txt /
-    #RUN pip install --no-cache-dir -U pip
-    #RUN pip install --no-cache-dir -r /requirements.txt
-    ```
+   # If you have additional requirements beyond Flask (which is included in the
+   # base image), generate a requirements.txt file with pip freeze and uncomment
+   # the next three lines.
+   #COPY requirements.txt /
+   #RUN pip install --no-cache-dir -U pip
+   #RUN pip install --no-cache-dir -r /requirements.txt
+   ```
 
 1. The `uwsgi.ini` file, which is in the root of the sample project folder, provides configuration arguments for the uwsgi server. For the sample, the configuration below says that the Flask app object is found in the `hello_app/webapp.py` module, and that it's named (that is, "callable" as) `app`. The other values are additional common uwsgi settings:
 
-    ```ini
-    [uwsgi]
-    module = hello_app.webapp
-    callable = app
-    uid = 1000
-    master = true
-    threads = 2
-    processes = 4
-    ```
+   ```ini
+   [uwsgi]
+   module = hello_app.webapp
+   callable = app
+   uid = 1000
+   master = true
+   threads = 2
+   processes = 4
+   ```
 
 ### Changes for Django apps
 
@@ -154,56 +155,56 @@ The following steps summarize the configuration used in the [python-sample-vscod
 
 1. In your Django project's `settings.py` file, modify the `ALLOWED_HOSTS` list to include the root URL to which you intend to deploy the app. For example, the following code assumes deployment to an Azure App Service (azurewebsites.net) named "vsdocs-django-sample-container":
 
-    ```python
-    ALLOWED_HOSTS = [
-        # Example host name only; customize to your specific host
-        "vsdocs-django-sample-container.azurewebsites.net"
-    ]
-    ```
+   ```python
+   ALLOWED_HOSTS = [
+       # Example host name only; customize to your specific host
+       "vsdocs-django-sample-container.azurewebsites.net"
+   ]
+   ```
 
-    Without this entry, you'll eventually get all the way through the deployment only to see a "DisallowedHost" message that instructs to you add the domain to `ALLOWED_HOSTS`, which requires that you rebuild, push, and redeploy the image all over again!
+   Without this entry, you'll eventually get all the way through the deployment only to see a "DisallowedHost" message that instructs to you add the domain to `ALLOWED_HOSTS`, which requires that you rebuild, push, and redeploy the image all over again!
 
 1. Create a `uwsgi.ini` file in the Django project folder (alongside `manage.py`) that contains startup arguments for the uwsgi server. In the sample, the Django project is in a folder called `web_project`, which is where the `wsgi.py` and `setting.py` files live.
 
-    ```ini
-    [uwsgi]
-    chdir = .
-    module = web_project.wsgi:application
-    env = DJANGO_SETTINGS_MODULE=web_project.settings
-    uid = 1000
-    master = true
-    threads = 2
-    processes = 4
-    ```
+   ```ini
+   [uwsgi]
+   chdir = .
+   module = web_project.wsgi:application
+   env = DJANGO_SETTINGS_MODULE=web_project.settings
+   uid = 1000
+   master = true
+   threads = 2
+   processes = 4
+   ```
 
-1. To serve static files, copy the *nginx.conf* file from the [django-react-devcontainer repo](https://github.com/qubitron/django-react-devcontainer/blob/master/nginx.conf) into your Django project folder.
+1. To serve static files, copy the _nginx.conf_ file from the [django-react-devcontainer repo](https://github.com/qubitron/django-react-devcontainer/blob/master/nginx.conf) into your Django project folder.
 
 1. Modify the `Dockerfile` to indicate the location of `uwsgi.ini`, set the location of static files for nginx, and make sure the SQLite database file is writable. (The `Dockerfile` in the sample contains further explanatory comments that are omitted here.)
 
-    ```dockerfile
-    FROM tiangolo/uwsgi-nginx:python3.6-alpine3.7
+   ```dockerfile
+   FROM tiangolo/uwsgi-nginx:python3.6-alpine3.7
 
-    ENV LISTEN_PORT=8000
-    EXPOSE 8000
+   ENV LISTEN_PORT=8000
+   EXPOSE 8000
 
-    # Indicate where uwsgi.ini lives
-    ENV UWSGI_INI=uwsgi.ini
+   # Indicate where uwsgi.ini lives
+   ENV UWSGI_INI=uwsgi.ini
 
-    # Tell nginx where static files live (as typically collected using Django's
-    # collectstatic command.
-    ENV STATIC_URL=/app/static_collected
+   # Tell nginx where static files live (as typically collected using Django's
+   # collectstatic command.
+   ENV STATIC_URL=/app/static_collected
 
-    # Copy the app files to a folder and run it from there
-    WORKDIR /app
-    ADD . /app
+   # Copy the app files to a folder and run it from there
+   WORKDIR /app
+   ADD . /app
 
-    # Make app folder writable for the sake of db.sqlite3, and make that file also writable.
-    RUN chmod g+w /app
-    RUN chmod g+w /app/db.sqlite3
+   # Make app folder writable for the sake of db.sqlite3, and make that file also writable.
+   RUN chmod g+w /app
+   RUN chmod g+w /app/db.sqlite3
 
-    # Make sure dependencies are installed
-    RUN python3 -m pip install -r requirements.txt
-    ```
+   # Make sure dependencies are installed
+   RUN python3 -m pip install -r requirements.txt
+   ```
 
 > **Note**: When building a Docker image on Windows, you typically see the message below, which is why the Dockerfile shown here includes the two `chmod` commands. If need to make other files writable, add the appropriate `chmod` commands to your Dockerfile.
 >
@@ -223,35 +224,35 @@ With the necessary `Dockerfile` in place, you're ready to build the Docker image
 
 1. When prompted for a name to give the image, use a name that follows the conventional form of `<registry or username>/<image name>:<tag>`, where `<tag>` is typically `latest`. Here are some examples (when using the Azure Container Registry):
 
-    ```sh
-    # Examples for Azure Container Registry, prefixed with the registry name
-    vsdocsregistry.azurecr.io/python-sample-vscode-django-tutorial:latest
-    vsdocsregistry.azurecr.io/python-sample-vscode-flask-tutorial:latest
-    vsdocsregistry.azurecr.io/myexpressapp:latest
+   ```sh
+   # Examples for Azure Container Registry, prefixed with the registry name
+   vsdocsregistry.azurecr.io/python-sample-vscode-django-tutorial:latest
+   vsdocsregistry.azurecr.io/python-sample-vscode-flask-tutorial:latest
+   vsdocsregistry.azurecr.io/myexpressapp:latest
 
-    # Examples for Docker hub, prefixed with your username
-    vsdocs-team/python-sample-vscode-django-tutorial:latest
-    vsdocs-team/python-sample-vscode-flask-tutorial:latest
-    vsdocs-team/myexpressapp:latest
-    ```
+   # Examples for Docker hub, prefixed with your username
+   vsdocs-team/python-sample-vscode-django-tutorial:latest
+   vsdocs-team/python-sample-vscode-flask-tutorial:latest
+   vsdocs-team/myexpressapp:latest
+   ```
 
 1. Each step of Docker's build process appears in the VS Code Terminal panel, including any errors that occur running the steps in the `Dockerfile`.
 
-    > **Tip**: every time you run the **Docker: Build image** command, the Docker extension opens another Terminal in VS Code in which to run the command. You can close each terminal once the build is complete. Alternately, you can reuse the same terminal to build the image by scrolling up in the command history using the up arrow.
+   > **Tip**: every time you run the **Docker: Build image** command, the Docker extension opens another Terminal in VS Code in which to run the command. You can close each terminal once the build is complete. Alternately, you can reuse the same terminal to build the image by scrolling up in the command history using the up arrow.
 
 1. When the build is complete, the image appears in the **Docker** explorer under **Images**:
 
-    ![Docker Image](images/create-containers/image-list.png)
+   ![Docker Image](images/create-containers/image-list.png)
 
 1. Run and test your container locally by using the following command, replacing `<image_name>` with your specific image, and changing the port numbers as needed. For web apps, you can then open browser to `localhost:<port>` to see the running app.
 
-    ```bash
-    # For Flask sample
-    docker run --rm -it -p 5000:5000 <image_name>
+   ```bash
+   # For Flask sample
+   docker run --rm -it -p 5000:5000 <image_name>
 
-    # For Django sample
-    docker run --rm -it -p 8000:8000 <image_name>
-    ```
+   # For Django sample
+   docker run --rm -it -p 8000:8000 <image_name>
+   ```
 
 ### Two useful features of the Docker extension
 
@@ -273,7 +274,7 @@ Once you're confident that your image works, the next step is to push it to your
 
 1. Once completed, expand the **Registries** > **Azure** (or **DockerHub**) node in the **Docker** explorer, then expand the registry and image name to see the exact image. (You may need to refresh the **Docker** explorer.)
 
-    ![The built app image in the Azure Container Registry](images/create-containers/image-in-acr.png)
+   ![The built app image in the Azure Container Registry](images/create-containers/image-in-acr.png)
 
 > **Tip:** The first time you push an image, you see that VS Code uploads all of the different layers that make up the image. Subsequent push operations, however, upload only those layers that have changed. Because it's typically only your app code that's changes, those uploads happen much more quickly, making for a tight edit-build-deploy-test loop. To see this, make a small change to your code, rebuild the image, and then push again to the registry. The whole process typically completes in a matter of seconds.
 

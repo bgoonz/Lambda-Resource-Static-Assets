@@ -7,6 +7,7 @@ ContentId: 44988826-46b8-498a-b1c9-f821378c2870
 MetaDescription: Work in Windows Subsystem for Linux with Visual Studio Code
 DateApproved: 3/31/2021
 ---
+
 # Remote development in WSL
 
 This tutorial walks you through enabling [Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl/install-win10) (WSL) and running Visual Studio Code in WSL using the [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) extension.
@@ -75,7 +76,7 @@ Select **Install**.
 
 ![install Ubuntu](images/wsl-tutorial/install-ubuntu.png)
 
-And when done, select **Launch** to get started. This will open a Linux terminal and complete the installation.  You'll need to create a user ID and password since you are setting up a full Linux instance. You are now running Linux on Windows.
+And when done, select **Launch** to get started. This will open a Linux terminal and complete the installation. You'll need to create a user ID and password since you are setting up a full Linux instance. You are now running Linux on Windows.
 
 ![Linux terminal](images/wsl-tutorial/linux-terminal.png)
 
@@ -102,9 +103,9 @@ echo 'print("hello from python on ubuntu on windows!")' >> hello.py
 python3 hello.py
 ```
 
-In a remote Linux environment (this WSL distro is technically another machine without UI, that just happens to be running locally on your computer), your development tools and experiences are pretty limited.  You can run [Vim](https://stackoverflow.blog/2017/05/23/stack-overflow-helping-one-million-developers-exit-vim/) in the terminal to edit your file, or you can edit the sources on the Windows side through the `\\wsl$` mount:
+In a remote Linux environment (this WSL distro is technically another machine without UI, that just happens to be running locally on your computer), your development tools and experiences are pretty limited. You can run [Vim](https://stackoverflow.blog/2017/05/23/stack-overflow-helping-one-million-developers-exit-vim/) in the terminal to edit your file, or you can edit the sources on the Windows side through the `\\wsl$` mount:
 
-![\\wsl$ mount](images/wsl-tutorial/wsl$-mount.png)
+![\wsl$ mount](images/wsl-tutorial/wsl$-mount.png)
 
 The problem with this model is that the Python runtime, pip, or any conda packages for that matter, are not installed on Windows.
 
@@ -200,8 +201,8 @@ Congratulations, you've successfully completed this tutorial!
 
 Next, check out the other Remote Development extensions.
 
-* [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
-* [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh)
+- [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
 Or get them all by installing the
 [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) Extension Pack.

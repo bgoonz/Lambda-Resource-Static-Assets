@@ -7,6 +7,7 @@ PageTitle: C/C++ extension FAQ
 DateApproved: 05/22/2020
 MetaDescription: Frequently asked questions about the C/C++ extension in Visual Studio Code.
 ---
+
 # Frequently asked questions
 
 - [Why are my files corrupted on format?](#why-are-my-files-corrupted-on-format)
@@ -99,7 +100,7 @@ The debugger needs to be configured to know which executable and debugger to use
 
 From the main menu, select **Run** > **Add Configuration...**.
 
-The file `launch.json` will now be open for editing with a new configuration. The default settings will *probably* work except that you need to specify the `program` setting.
+The file `launch.json` will now be open for editing with a new configuration. The default settings will _probably_ work except that you need to specify the `program` setting.
 
 See [Debug configuration](/docs/cpp/launch-json-reference.md) for more in-depth documentation on how to configure the debugger.
 
@@ -111,9 +112,9 @@ When in doubt, please check your compiler's documentation for the options necess
 
 ### Clang (C++)
 
-* If you invoke the compiler manually, add the `--debug` option.
-* If you're using a script, make sure the `CXXFLAGS` environment variable is set. For example, `export CXXFLAGS="${CXXFLAGS} --debug"`.
-* If you're using CMake, make sure the `CMAKE_CXX_FLAGS` is set. For example, `export CMAKE_CXX_FLAGS=${CXXFLAGS}`.
+- If you invoke the compiler manually, add the `--debug` option.
+- If you're using a script, make sure the `CXXFLAGS` environment variable is set. For example, `export CXXFLAGS="${CXXFLAGS} --debug"`.
+- If you're using CMake, make sure the `CMAKE_CXX_FLAGS` is set. For example, `export CMAKE_CXX_FLAGS=${CXXFLAGS}`.
 
 ### Clang (C)
 

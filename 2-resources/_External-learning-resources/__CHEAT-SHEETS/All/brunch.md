@@ -74,24 +74,24 @@ module.exports = {
 
 Compile to CSS
 
-  * stylus-brunch
-  * less-brunch
-  * sass-brunch
+- stylus-brunch
+- less-brunch
+- sass-brunch
 
 Compile to HTML
 
-  * static-jade-brunch
+- static-jade-brunch
 
 Embedded templates
 
-  * emblem-brunch
+- emblem-brunch
 
 Etc
 
-  * uglify-js-brunch
-  * jshint-brunch
-  * imageoptimizer-brunch
+- uglify-js-brunch
+- jshint-brunch
+- imageoptimizer-brunch
 
 ## References
 
-  * <https://github.com/brunch/brunch/blob/master/docs/config.md>
+- <https://github.com/brunch/brunch/blob/master/docs/config.md>

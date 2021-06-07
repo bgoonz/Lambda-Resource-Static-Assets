@@ -7,13 +7,14 @@ ContentId: 3e5af2a6-7669-4b5d-b19f-78077af14fda
 DateApproved: 3/31/2021
 MetaDescription: Working with JavaScript in Visual Studio Code
 ---
+
 # Working with JavaScript
 
 This topic describes some of the advanced JavaScript features supported by Visual Studio Code. Using the TypeScript language service, VS Code can provide smart completions (IntelliSense) as well as type checking for JavaScript.
 
 ## IntelliSense
 
-Visual Studio Code's JavaScript [IntelliSense](/docs/editor/intellisense.md) provides intelligent code completion, parameter info,  references search, and many other advanced language features. Our JavaScript IntelliSense is powered by the [JavaScript language service](https://github.com/microsoft/TypeScript/wiki/JavaScript-Language-Service-in-Visual-Studio) developed by the TypeScript team. While IntelliSense should just work for most JavaScript projects without any configuration, you can make IntelliSense even more useful with [JSDoc](/docs/languages/javascript.md#jsdoc-support) or by configuring a `jsconfig.json` project.
+Visual Studio Code's JavaScript [IntelliSense](/docs/editor/intellisense.md) provides intelligent code completion, parameter info, references search, and many other advanced language features. Our JavaScript IntelliSense is powered by the [JavaScript language service](https://github.com/microsoft/TypeScript/wiki/JavaScript-Language-Service-in-Visual-Studio) developed by the TypeScript team. While IntelliSense should just work for most JavaScript projects without any configuration, you can make IntelliSense even more useful with [JSDoc](/docs/languages/javascript.md#jsdoc-support) or by configuring a `jsconfig.json` project.
 
 For the details of how JavaScript IntelliSense works, including being based on type inference, JSDoc annotations, TypeScript declarations, and mixing JavaScript and TypeScript projects, see the [JavaScript language service documentation](https://github.com/microsoft/TypeScript/wiki/JavaScript-Language-Service-in-Visual-Studio).
 
@@ -35,9 +36,9 @@ Type declaration files are automatically downloaded and managed by Visual Studio
 
 ```json
 {
-    "dependencies": {
-        "lodash": "^4.17.0"
-    }
+  "dependencies": {
+    "lodash": "^4.17.0"
+  }
 }
 ```
 
@@ -45,11 +46,9 @@ You can alternately explicitly list packages to acquire type declaration files f
 
 ```json
 {
-    "typeAcquisition": {
-        "include": [
-            "jquery"
-        ]
-    }
+  "typeAcquisition": {
+    "include": ["jquery"]
+  }
 }
 ```
 
@@ -99,14 +98,11 @@ Below is a simple template for `jsconfig.json` file, which defines the JavaScrip
 
 ```json
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6"
-    },
-    "exclude": [
-        "node_modules",
-        "**/node_modules/*"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6"
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
 }
 ```
 
@@ -118,13 +114,11 @@ Here is an example with an explicit `include` attribute:
 
 ```json
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6"
-    },
-    "include": [
-        "src/**/*"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6"
+  },
+  "include": ["src/**/*"]
 }
 ```
 
@@ -156,8 +150,8 @@ The easiest way to enable type checking in a JavaScript file is by adding `// @t
 
 ```js
 // @ts-check
-let itsAsEasyAs = 'abc'
-itsAsEasyAs = 123 // Error: Type '123' is not assignable to type 'string'
+let itsAsEasyAs = "abc";
+itsAsEasyAs = 123; // Error: Type '123' is not assignable to type 'string'
 ```
 
 Using `// @ts-check` is a good approach if you just want to try type checking in a few files but not yet enable it for an entire codebase.
@@ -170,16 +164,16 @@ You can opt individual files out of type checking with a `// @ts-nocheck` commen
 
 ```js
 // @ts-nocheck
-let easy = 'abc'
-easy = 123 // no error
+let easy = "abc";
+easy = 123; // no error
 ```
 
 You can also disable individual errors in a JavaScript file using a `// @ts-ignore` comment on the line before the error:
 
 ```js
-let easy = 'abc'
+let easy = "abc";
 // @ts-ignore
-easy = 123 // no error
+easy = 123; // no error
 ```
 
 **Using jsconfig or tsconfig**
@@ -190,13 +184,10 @@ To enable type checking for JavaScript files that are part of a `jsconfig.json` 
 
 ```json
 {
-    "compilerOptions": {
-        "checkJs": true
-    },
-    "exclude": [
-        "node_modules",
-        "**/node_modules/*"
-    ]
+  "compilerOptions": {
+    "checkJs": true
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
 }
 ```
 
@@ -204,14 +195,11 @@ To enable type checking for JavaScript files that are part of a `jsconfig.json` 
 
 ```json
 {
-    "compilerOptions": {
-        "allowJs": true,
-        "checkJs": true
-    },
-    "exclude": [
-        "node_modules",
-        "**/node_modules/*"
-    ]
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
 }
 ```
 
@@ -224,13 +212,13 @@ JavaScript type checking requires TypeScript 2.3. If you are unsure what version
 Let's say that you are working in legacy JavaScript code that uses global variables or non-standard DOM APIs:
 
 ```ts
-window.onload = function() {
-    if (window.webkitNotifications.requestPermission() === CAN_NOTIFY) {
-        window.webkitNotifications.createNotification(null, 'Woof!', '🐶').show()
-    } else {
-        alert('Could not notify')
-    }
-}
+window.onload = function () {
+  if (window.webkitNotifications.requestPermission() === CAN_NOTIFY) {
+    window.webkitNotifications.createNotification(null, "Woof!", "🐶").show();
+  } else {
+    alert("Could not notify");
+  }
+};
 ```
 
 If you try to use `// @ts-check` with the above code, you'll see a number of errors about the use of global variables:
@@ -245,11 +233,8 @@ To start, [create a `jsconfig.json`](#javascript-project-jsconfigjson) at the ro
 
 ```json
 {
-    "compilerOptions": { },
-    "exclude": [
-        "node_modules",
-        "**/node_modules/*"
-    ]
+  "compilerOptions": {},
+  "exclude": ["node_modules", "**/node_modules/*"]
 }
 ```
 
@@ -259,7 +244,7 @@ Now create a `globals.d.ts` file somewhere your workspace:
 
 ```ts
 interface Window {
-    webkitNotifications: any;
+  webkitNotifications: any;
 }
 
 declare var CAN_NOTIFY: number;
@@ -283,17 +268,17 @@ The [Babel](https://babeljs.io) transpiler turns ES6 files into readable ES5 Jav
 
 ```json
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "watch",
-            "command": "${workspaceFolder}/node_modules/.bin/babel",
-            "args": ["src", "--out-dir", "lib", "-w", "--source-maps"],
-            "type": "shell",
-            "group": { "kind": "build", "isDefault": true },
-            "isBackground": true
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "watch",
+      "command": "${workspaceFolder}/node_modules/.bin/babel",
+      "args": ["src", "--out-dir", "lib", "-w", "--source-maps"],
+      "type": "shell",
+      "group": { "kind": "build", "isDefault": true },
+      "isBackground": true
+    }
+  ]
 }
 ```
 

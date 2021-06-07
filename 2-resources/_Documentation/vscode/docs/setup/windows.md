@@ -7,6 +7,7 @@ PageTitle: Running Visual Studio Code on Windows
 DateApproved: 3/31/2021
 MetaDescription: Get Visual Studio Code up and running on Windows
 ---
+
 # Visual Studio Code on Windows
 
 ## Installation
@@ -17,9 +18,9 @@ MetaDescription: Get Visual Studio Code up and running on Windows
 
 Alternatively, you can also download a [Zip archive](/docs/?dv=winzip), extract it and run Code from there.
 
->**Note:** .NET Framework 4.5.2 or higher is required for VS Code. If you are using Windows 7, make sure you have at least [.NET Framework 4.5.2](https://www.microsoft.com/download/details.aspx?id=42643) installed. You can check your version of .NET Framework using this command, `reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\full" /v version` from a command prompt.
+> **Note:** .NET Framework 4.5.2 or higher is required for VS Code. If you are using Windows 7, make sure you have at least [.NET Framework 4.5.2](https://www.microsoft.com/download/details.aspx?id=42643) installed. You can check your version of .NET Framework using this command, `reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\full" /v version` from a command prompt.
 
->**Tip:** Setup will add Visual Studio Code to your `%PATH%`, so from the console you can type 'code .' to open VS Code on that folder. You will need to restart your console after the installation for the change to the `%PATH%` environmental variable to take effect.
+> **Tip:** Setup will add Visual Studio Code to your `%PATH%`, so from the console you can type 'code .' to open VS Code on that folder. You will need to restart your console after the installation for the change to the `%PATH%` environmental variable to take effect.
 
 ## User versus system setup
 
@@ -37,7 +38,7 @@ If you need to run a 32-bit version of VS Code, both a 32-bit [Installer](https:
 
 VS Code ships monthly [releases](/updates) and supports auto-update when a new release is available. If you're prompted by VS Code, accept the newest update and it will be installed (you won't need to do anything else to get the latest bits).
 
->Note: You can [disable auto-update](/docs/supporting/faq.md#how-do-i-opt-out-of-vs-code-autoupdates) if you prefer to update VS Code on your own schedule.
+> Note: You can [disable auto-update](/docs/supporting/faq.md#how-do-i-opt-out-of-vs-code-autoupdates) if you prefer to update VS Code on your own schedule.
 
 ## Windows as a developer machine
 
@@ -63,10 +64,10 @@ Available from the Microsoft Store, the [Windows Terminal (Preview)](https://www
 
 Once you have installed VS Code, these topics will help you learn more about VS Code:
 
-* [Additional Components](/docs/setup/additional-components.md) - Learn how to install Git, Node.js, TypeScript, and tools like Yeoman.
-* [User Interface](/docs/getstarted/userinterface.md) - A quick orientation to VS Code.
-* [User/Workspace Settings](/docs/getstarted/settings.md) - Learn how to configure VS Code to your preferences through settings.
-* [Tips and Tricks](/docs/getstarted/tips-and-tricks.md) - Lets you jump right in and learn how to be productive with VS Code.
+- [Additional Components](/docs/setup/additional-components.md) - Learn how to install Git, Node.js, TypeScript, and tools like Yeoman.
+- [User Interface](/docs/getstarted/userinterface.md) - A quick orientation to VS Code.
+- [User/Workspace Settings](/docs/getstarted/settings.md) - Learn how to configure VS Code to your preferences through settings.
+- [Tips and Tricks](/docs/getstarted/tips-and-tricks.md) - Lets you jump right in and learn how to be productive with VS Code.
 
 ## Common questions
 
@@ -83,9 +84,9 @@ On certain devices, editor scrolling is not smooth but laggy for an unpleasant e
 
 ### I'm having trouble with the installer
 
-Try using the [zip file](/docs/?dv=winzip) instead of the installer.  To use this, unzip VS Code in your `AppData\Local\Programs` folder.
+Try using the [zip file](/docs/?dv=winzip) instead of the installer. To use this, unzip VS Code in your `AppData\Local\Programs` folder.
 
->**Note:** When VS Code is installed via a Zip file, you will need to manually update it for each [release](/updates).
+> **Note:** When VS Code is installed via a Zip file, you will need to manually update it for each [release](/updates).
 
 ### Icons are missing
 

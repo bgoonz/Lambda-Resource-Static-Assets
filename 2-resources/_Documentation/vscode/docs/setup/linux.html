@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>linux</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="visual-studio-code-on-linux">Visual Studio Code on Linux</h1>
+<h2 id="installation">Installation</h2>
+<p>See the <a href="/download">Download Visual Studio Code</a> page for a complete list of available installation options.</p>
+<p>By downloading and using Visual Studio Code, you agree to the <a href="https://code.visualstudio.com/license">license terms</a> and <a href="https://go.microsoft.com/fwlink/?LinkID=528096&amp;clcid=0x409">privacy statement</a>.</p>
+<h3 id="snap">Snap</h3>
+<p>Visual Studio Code is officially distributed as a Snap package in the <a href="https://snapcraft.io/store">Snap Store</a>:</p>
+<p><a href="https://snapcraft.io/code"><img src="images/linux/snap-store.png" alt="Get it from the Snap Store" /></a></p>
+<p>You can install it by running:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">sudo</span> snap install --classic code <span class="co"># or code-insiders</span></a></code></pre></div>
+<p>Once installed, the Snap daemon will take care of automatically updating VS Code in the background. You will get an in-product update notification whenever a new update is available.</p>
+<p><strong>Note:</strong> If <code>snap</code> isn’t available in your Linux distribution, please check the following <a href="https://docs.snapcraft.io/installing-snapd">Installing snapd guide</a>, which can help you get that set up.</p>
+<p>Learn more about snaps from the <a href="https://docs.snapcraft.io">official Snap Documentation</a>.</p>
+<h3 id="debian-and-ubuntu-based-distributions">Debian and Ubuntu based distributions</h3>
+<p>The easiest way to install Visual Studio Code for Debian/Ubuntu based distributions is to download and install the <a href="https://go.microsoft.com/fwlink/?LinkID=760868">.deb package (64-bit)</a>, either through the graphical software center if it’s available, or through the command line with:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">sudo</span> apt install ./<span class="op">&lt;</span>file<span class="op">&gt;</span>.deb</a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co"># If you&#39;re on an older Linux distribution, you will need to run this instead:</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co"># sudo dpkg -i &lt;file&gt;.deb</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co"># sudo apt-get install -f # Install dependencies</span></a></code></pre></div>
+<p>Note that other binaries are also available on the <a href="/Download">VS Code download page</a>.</p>
+<p>Installing the .deb package will automatically install the apt repository and signing key to enable auto-updating using the system’s package manager. Alternatively, the repository and key can also be installed manually with the following script:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">wget</span> -qO- https://packages.microsoft.com/keys/microsoft.asc <span class="kw">|</span> <span class="ex">gpg</span> --dearmor <span class="op">&gt;</span> packages.microsoft.gpg</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="fu">sudo</span> install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="fu">sudo</span> sh -c <span class="st">&#39;echo &quot;deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main&quot; &gt; /etc/apt/sources.list.d/vscode.list&#39;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="fu">rm</span> -f packages.microsoft.gpg</a></code></pre></div>
+<p>Then update the package cache and install the package using:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">sudo</span> apt install apt-transport-https</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="fu">sudo</span> apt update</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="fu">sudo</span> apt install code <span class="co"># or code-insiders</span></a></code></pre></div>
+<h3 id="rhel-fedora-and-centos-based-distributions">RHEL, Fedora, and CentOS based distributions</h3>
+<p>We currently ship the stable 64-bit VS Code in a yum repository, the following script will install the key and repository:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">sudo</span> rpm --import https://packages.microsoft.com/keys/microsoft.asc</a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="fu">sudo</span> sh -c <span class="st">&#39;echo -e &quot;[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc&quot; &gt; /etc/yum.repos.d/vscode.repo&#39;</span></a></code></pre></div>
+<p>Then update the package cache and install the package using <code>dnf</code> (Fedora 22 and above):</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">sudo</span> dnf check-update</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="fu">sudo</span> dnf install code</a></code></pre></div>
+<p>Or on older versions using <code>yum</code>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="ex">yum</span> check-update</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="fu">sudo</span> yum install code</a></code></pre></div>
+<p>Due to the manual signing process and the system we use to publish, the yum repo may lag behind and not get the latest version of VS Code immediately.</p>
+<h3 id="opensuse-and-sle-based-distributions">openSUSE and SLE-based distributions</h3>
+<p>The yum repository above also works for openSUSE and SLE-based systems, the following script will install the key and repository:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">sudo</span> rpm --import https://packages.microsoft.com/keys/microsoft.asc</a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="fu">sudo</span> sh -c <span class="st">&#39;echo -e &quot;[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc&quot; &gt; /etc/zypp/repos.d/vscode.repo&#39;</span></a></code></pre></div>
+<p>Then update the package cache and install the package using:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">sudo</span> zypper refresh</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="fu">sudo</span> zypper install code</a></code></pre></div>
+<h3 id="aur-package-for-arch-linux">AUR package for Arch Linux</h3>
+<p>There is a community-maintained <a href="https://aur.archlinux.org/packages/visual-studio-code-bin">Arch User Repository package for VS Code</a>.</p>
+<p>To get more information about the installation from the AUR, please consult the following wiki entry: <a href="https://wiki.archlinux.org/index.php/Arch_User_Repository#Build_and_install_the_package">Install AUR Packages</a>.</p>
+<h3 id="nix-package-for-nixos-or-any-linux-distribution-using-nix-package-manager">Nix package for NixOS (or any Linux distribution using Nix package manager)</h3>
+<p>There is a community maintained <a href="https://github.com/NixOS/nixpkgs/blob/master/pkgs/applications/editors/vscode/default.nix">VS Code Nix package</a> in the nixpkgs repository. In order to install it using Nix, set <code>allowUnfree</code> option to true in your <code>config.nix</code> and execute:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="ex">nix-env</span> -i vscode</a></code></pre></div>
+<h3 id="installing-.rpm-package-manually">Installing .rpm package manually</h3>
+<p>The <a href="https://go.microsoft.com/fwlink/?LinkID=760867">VS Code .rpm package (64-bit)</a> can also be manually downloaded and installed, however, auto-updating won’t work unless the repository above is installed. Once downloaded it can be installed using your package manager, for example with <code>dnf</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"><span class="fu">sudo</span> dnf install <span class="op">&lt;</span>file<span class="op">&gt;</span>.rpm</a></code></pre></div>
+<p>Note that other binaries are also available on the <a href="/Download">VS Code download page</a>.</p>
+<h2 id="updates">Updates</h2>
+<p>VS Code ships monthly and you can see when a new release is available by checking the <a href="/updates">release notes</a>. If the VS Code repository was installed correctly, then your system package manager should handle auto-updating in the same way as other packages on the system.</p>
+<p><strong>Note:</strong> Updates are automatic and run in the background for the <a href="#snap">Snap package</a>.</p>
+<h2 id="node.js">Node.js</h2>
+<p>Node.js is a popular platform and runtime for easily building and running JavaScript applications. It also includes <a href="https://www.npmjs.com/">npm</a>, a Package Manager for Node.js modules. You’ll see Node.js and npm mentioned frequently in our documentation and some optional VS Code tooling requires Node.js (for example, the VS Code <a href="/api/get-started/your-first-extension.md">extension generator</a>).</p>
+<p>If you’d like to install Node.js on Linux, see <a href="https://nodejs.org/en/download/package-manager">Installing Node.js via package manager</a> to find the Node.js package and installation instructions tailored to your Linux distribution. You can also install and support multiple versions of Node.js by using the <a href="https://github.com/creationix/nvm">Node Version Manager</a>.</p>
+<p>To learn more about JavaScript and Node.js, see our <a href="/docs/nodejs/nodejs-tutorial.md">Node.js tutorial</a>, where you’ll learn about running and debugging Node.js applications with VS Code.</p>
+<h2 id="setting-vs-code-as-the-default-text-editor">Setting VS Code as the default text editor</h2>
+<h3 id="xdg-open">xdg-open</h3>
+<p>You can set the default text editor for text files (<code>text/plain</code>) that is used by <code>xdg-open</code> with the following command:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"><span class="ex">xdg-mime</span> default code.desktop text/plain</a></code></pre></div>
+<h3 id="debian-alternatives-system">Debian alternatives system</h3>
+<p>Debian-based distributions allow setting a default <strong>editor</strong> using the <a href="https://wiki.debian.org/DebianAlternatives">Debian alternatives system</a>, without concern for the MIME type. You can set this by running the following and selecting code:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" title="1"><span class="fu">sudo</span> update-alternatives --set editor /usr/bin/code</a></code></pre></div>
+<p>If Visual Studio Code doesn’t show up as an alternative to <code>editor</code>, you need to register it:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1"><span class="fu">sudo</span> update-alternatives --install editor /usr/bin/editor <span class="va">$(</span><span class="fu">which</span> code<span class="va">)</span></a></code></pre></div>
+<h2 id="windows-as-a-linux-developer-machine">Windows as a Linux developer machine</h2>
+<p>Another option for Linux development with VS Code is to use a Windows machine with the <a href="https://docs.microsoft.com/windows/wsl/install-win10">Windows Subsystem for Linux</a> (WSL).</p>
+<h3 id="windows-subsystem-for-linux">Windows Subsystem for Linux</h3>
+<p>With WSL, you can install and run Linux distributions on Windows. This enables you to develop and test your source code on Linux while still working locally on a Windows machine. WSL supports Linux distributions such as Ubuntu, Debian, SUSE, and Alpine available from the Microsoft Store.</p>
+<p>When coupled with the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">Remote - WSL</a> extension, you get full VS Code editing and debugging support while running in the context of a Linux distro on WSL.</p>
+<p>See the <a href="/docs/remote/wsl.md">Developing in WSL</a> documentation to learn more or try the <a href="/docs/remote/wsl-tutorial.md">Working in WSL</a> introductory tutorial.</p>
+<h2 id="next-steps">Next steps</h2>
+<p>Once you have installed VS Code, these topics will help you learn more about it:</p>
+<ul>
+<li><a href="/docs/setup/additional-components.md">Additional Components</a> - Learn how to install Git, Node.js, TypeScript, and tools like Yeoman.</li>
+<li><a href="/docs/getstarted/userinterface.md">User Interface</a> - A quick orientation to VS Code.</li>
+<li><a href="/docs/getstarted/settings.md">User/Workspace Settings</a> - Learn how to configure VS Code to your preferences through settings.</li>
+</ul>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="azure-vm-issues">Azure VM Issues</h3>
+<p>I’m getting a “Running without the SUID sandbox” error?</p>
+<p>You can safely ignore this error.</p>
+<h3 id="debian-and-moving-files-to-trash">Debian and moving files to trash</h3>
+<p>If you see an error when deleting files from the VS Code Explorer on the Debian operating system, it might be because the trash implementation that VS Code is using is not there.</p>
+<p>Run these commands to solve this issue:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" title="1"><span class="fu">sudo</span> apt-get install gvfs-bin</a></code></pre></div>
+<h3 id="conflicts-with-vs-code-packages-from-other-repositories">Conflicts with VS Code packages from other repositories</h3>
+<p>Some distributions, for example <a href="https://pop.system76.com">Pop!_OS</a> provide their own <code>code</code> package. To ensure the official VS Code repository is used, create a file named <code>/etc/apt/preferences.d/code</code> with the following content:</p>
+<pre><code>Package: code
+Pin: origin &quot;packages.microsoft.com&quot;
+Pin-Priority: 9999</code></pre>
+<h3 id="visual-studio-code-is-unable-to-watch-for-file-changes-in-this-large-workspace-error-enospc">“Visual Studio Code is unable to watch for file changes in this large workspace” (error ENOSPC)</h3>
+<p>When you see this notification, it indicates that the VS Code file watcher is running out of handles because the workspace is large and contains many files. Before adjusting platform limits, make sure that potentially large folders, such as Python <code>.venv</code>, are added to the <code>files.watcherExclude</code> setting (more details below). The current limit can be viewed by running:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" title="1"><span class="fu">cat</span> /proc/sys/fs/inotify/max_user_watches</a></code></pre></div>
+<p>The limit can be increased to its maximum by editing <code>/etc/sysctl.conf</code> (except on Arch Linux, read below) and adding this line to the end of the file:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" title="1"><span class="ex">fs.inotify.max_user_watches</span>=524288</a></code></pre></div>
+<p>The new value can then be loaded in by running <code>sudo sysctl -p</code>.</p>
+<p>While 524,288 is the maximum number of files that can be watched, if you’re in an environment that is particularly memory constrained, you may wish to lower the number. Each file watch <a href="https://stackoverflow.com/a/7091897/1156119">takes up 1080 bytes</a>, so assuming that all 524,288 watches are consumed, that results in an upper bound of around 540 MiB.</p>
+<p><a href="https://www.archlinux.org/">Arch</a>-based distros (including Manjaro) require you to change a different file; follow <a href="https://gist.github.com/tbjgolden/c53ca37f3bc2fab8c930183310918c8c">these steps</a> instead.</p>
+<p>Another option is to exclude specific workspace directories from the VS Code file watcher with the <code>files.watcherExclude</code> <a href="/docs/getstarted/settings.md">setting</a>. The default for <code>files.watcherExclude</code> excludes <code>node_modules</code> and some folders under <code>.git</code>, but you can add other directories that you don’t want VS Code to track.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb19-1" title="1"><span class="er">&quot;files.watcherExclude&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb19-2" title="2">    <span class="dt">&quot;**/.git/objects/**&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb19-3" title="3">    <span class="dt">&quot;**/.git/subtree-cache/**&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb19-4" title="4">    <span class="dt">&quot;**/node_modules/*/**&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb19-5" title="5">  <span class="fu">}</span></a></code></pre></div>
+<h3 id="i-cant-see-chinese-characters-in-ubuntu">I can’t see Chinese characters in Ubuntu</h3>
+<p>We’re working on a fix. In the meantime, open the application menu, then choose <strong>File</strong> &gt; <strong>Preferences</strong> &gt; <strong>Settings</strong>. In the <strong>Text Editor</strong> &gt; <strong>Font</strong> section, set “Font Family” to <code>Droid Sans Mono, Droid Sans Fallback</code>. If you’d rather edit the <code>settings.json</code> file directly, set <code>editor.fontFamily</code> as shown:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb20-1" title="1">    <span class="er">&quot;editor.fontFamily&quot;:</span> <span class="er">&quot;Droid</span> <span class="er">Sans</span> <span class="er">Mono,</span> <span class="er">Droid</span> <span class="er">Sans</span> <span class="er">Fallback&quot;</span></a></code></pre></div>
+<h3 id="package-git-is-not-installed">Package git is not installed</h3>
+<p>This error can appear during installation and is typically caused by the package manager’s lists being out of date. Try updating them and installing again:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># For .deb</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="fu">sudo</span> apt-get update</a>
+<a class="sourceLine" id="cb21-3" title="3"></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="co"># For .rpm (Fedora 21 and below)</span></a>
+<a class="sourceLine" id="cb21-5" title="5"><span class="fu">sudo</span> yum check-update</a>
+<a class="sourceLine" id="cb21-6" title="6"></a>
+<a class="sourceLine" id="cb21-7" title="7"><span class="co"># For .rpm (Fedora 22 and above)</span></a>
+<a class="sourceLine" id="cb21-8" title="8"><span class="fu">sudo</span> dnf check-update</a></code></pre></div>
+<h3 id="the-code-bin-command-does-not-bring-the-window-to-the-foreground-on-ubuntu">The code bin command does not bring the window to the foreground on Ubuntu</h3>
+<p>Running <code>code .</code> on Ubuntu when VS Code is already open in the current directory will not bring VS Code into the foreground. This is a feature of the OS which can be disabled using <code>ccsm</code>.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># Install</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="fu">sudo</span> apt-get update</a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="fu">sudo</span> apt-get install compizconfig-settings-manager</a>
+<a class="sourceLine" id="cb22-4" title="4"></a>
+<a class="sourceLine" id="cb22-5" title="5"><span class="co"># Run</span></a>
+<a class="sourceLine" id="cb22-6" title="6"><span class="ex">ccsm</span></a></code></pre></div>
+<p>Under <strong>General</strong> &gt; <strong>General Options</strong> &gt; <strong>Focus &amp; Raise Behaviour</strong>, set “Focus Prevention Level” to “Off”. Remember this is an OS-level setting that will apply to all applications, not just VS Code.</p>
+<h3 id="cannot-install-.deb-package-due-to-etcaptsources.list.dvscode.list-no-such-file-or-directory">Cannot install .deb package due to “/etc/apt/sources.list.d/vscode.list: No such file or directory”</h3>
+<p>This can happen when <code>sources.list.d</code> doesn’t exist or you don’t have access to create the file. To fix this, try manually creating the folder and an empty <code>vscode.list</code> file:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb23-1" title="1"><span class="fu">sudo</span> mkdir /etc/apt/sources.list.d</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="fu">sudo</span> touch /etc/apt/sources.list.d/vscode.list</a></code></pre></div>
+<h3 id="cannot-move-or-resize-the-window-while-x-forwarding-a-remote-window">Cannot move or resize the window while X forwarding a remote window</h3>
+<p>If you are using X forwarding to use VS Code remotely, you will need to use the native title bar to ensure you can properly manipulate the window. You can switch to using it by setting <code>window.titleBarStyle</code> to <code>native</code>.</p>
+<h3 id="using-the-custom-title-bar">Using the custom title bar</h3>
+<p>The custom title bar and menus were enabled by default on Linux for several months. The custom title bar has been a success on Windows, but the customer response on Linux suggests otherwise. Based on feedback, we have decided to make this setting opt-in on Linux and leave the native title bar as the default.</p>
+<p>The custom title bar provides many benefits including great theming support and better accessibility through keyboard navigation and screen readers. Unfortunately, these benefits do not translate as well to the Linux platform. Linux has a variety of desktop environments and window managers that can make the VS Code theming look foreign to users. For users needing the accessibility improvements, we recommend enabling the custom title bar when running in accessibility mode using a screen reader. You can still manually set the title bar with the <strong>Window: Title Bar Style</strong> (<code>window.titleBarStyle</code>) setting.</p>
+<h3 id="broken-cursor-in-editor-with-display-scaling-enabled">Broken cursor in editor with display scaling enabled</h3>
+<p>Due to an upstream <a href="https://github.com/electron/electron/issues/14787">issue #14787</a> with Electron, the mouse cursor may render incorrectly with scaling enabled. If you notice that the usual text cursor is not being rendered inside the editor as you would expect, try falling back to the native menu bar by configuring the setting <code>window.titleBarStyle</code> to <code>native</code>.</p>
+<h3 id="repository-changed-its-origin-value">Repository changed its origin value</h3>
+<p>If you receive an error similar to the following:</p>
+<pre><code>E: Repository &#39;...&#39; changed its &#39;Origin&#39; value from &#39;...&#39; to &#39;...&#39;
+N: This must be accepted explicitly before updates for this repository can be applied. See apt-secure(8) manpage for details.</code></pre>
+<p>Use <code>apt</code> instead of <code>apt-get</code> and you will be prompted to accept the origin change:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" title="1"><span class="fu">sudo</span> apt update</a></code></pre></div>
+</body>
+</html>

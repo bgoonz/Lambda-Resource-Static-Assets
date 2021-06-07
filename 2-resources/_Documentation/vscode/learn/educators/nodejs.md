@@ -32,10 +32,10 @@ VS Code is great for Charles because it has a [portable mode](/docs/editor/porta
 
 The extensions he likes to have installed:
 
-* [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - His favorite! Auto-formatting keeps students focused on program logic and linting helps them quickly find, understand, and fix errors in their JavaScript code.
-* [TabNine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode) - Longer AI-driven code-snippets helps non-native English speakers avoid code-breaking typos and reduces the impact of slow typing.
-* [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) - Share API designs as `.http` files and simplify manual API testing within VS Code.
-* [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) - Vue.js framework support for syntax highlighting, code completion, and more! This helps students focus on their Vue.js code rather than getting stuck solving syntactical errors.
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - His favorite! Auto-formatting keeps students focused on program logic and linting helps them quickly find, understand, and fix errors in their JavaScript code.
+- [TabNine](https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode) - Longer AI-driven code-snippets helps non-native English speakers avoid code-breaking typos and reduces the impact of slow typing.
+- [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) - Share API designs as `.http` files and simplify manual API testing within VS Code.
+- [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) - Vue.js framework support for syntax highlighting, code completion, and more! This helps students focus on their Vue.js code rather than getting stuck solving syntactical errors.
 
 These extensions are also part of the Node.js and JavaScript Education Extension Pack below!
 
@@ -45,57 +45,57 @@ And here are his recommended settings, which help his students have consistent f
 
 ```json
 {
-    // Formatting and linting
-    "editor.formatOnPaste": true,
-    "editor.formatOnSave": true, // hero!
-    "editor.tabCompletion": "on",
-    "editor.tabSize": 2,
-    "eslint.format.enable": true,
-    "eslint.workingDirectories": [{ "mode": "auto" }], // important for mono-repo projects
-    "files.autoSave": "onFocusChange", // hero
-    "prettier.endOfLine": "auto", // cross-platform
-    "prettier.semi": false, // align with ESLint Standard
-    "prettier.singleQuote": true, // align with ESLint Standard
-    "prettier.trailingComma": "none", // align with ESLint Standard
-    "tabnine.experimentalAutoImports": true,
+  // Formatting and linting
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true, // hero!
+  "editor.tabCompletion": "on",
+  "editor.tabSize": 2,
+  "eslint.format.enable": true,
+  "eslint.workingDirectories": [{ "mode": "auto" }], // important for mono-repo projects
+  "files.autoSave": "onFocusChange", // hero
+  "prettier.endOfLine": "auto", // cross-platform
+  "prettier.semi": false, // align with ESLint Standard
+  "prettier.singleQuote": true, // align with ESLint Standard
+  "prettier.trailingComma": "none", // align with ESLint Standard
+  "tabnine.experimentalAutoImports": true,
 
-    // Language-Specific
-    "javascript.format.insertSpaceBeforeFunctionParenthesis": false, // align with ESLint Standard
-    "javascript.updateImportsOnFileMove.enabled": "always",
-    "typescript.format.insertSpaceBeforeFunctionParenthesis": false, // align with ESLint Standard
-    "typescript.updateImportsOnFileMove.enabled": "always",
-    "[javascript]": {
+  // Language-Specific
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": false, // align with ESLint Standard
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.format.insertSpaceBeforeFunctionParenthesis": false, // align with ESLint Standard
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint" // preconfig ESLint
-    },
-    "[typescript]": {
+  },
+  "[typescript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint" // preconfig ESLint
-    },
-    "[json]": {
+  },
+  "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[jsonc]": {
+  },
+  "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[html]": {
+  },
+  "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[css]": {
+  },
+  "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[scss]": {
+  },
+  "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[markdown]": {
+  },
+  "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[vue]": {
+  },
+  "[vue]": {
     "editor.defaultFormatter": "octref.vetur"
-    },
-    "vetur.format.options.tabSize": 2,
-    "vetur.format.options.useTabs": false,
-    "vetur.format.defaultFormatter.html": "prettier",
-    "vetur.format.defaultFormatter.js": "vscode-typescript", // for consistency with TS option
-    "vetur.format.defaultFormatter.ts": "vscode-typescript"
+  },
+  "vetur.format.options.tabSize": 2,
+  "vetur.format.options.useTabs": false,
+  "vetur.format.defaultFormatter.html": "prettier",
+  "vetur.format.defaultFormatter.js": "vscode-typescript", // for consistency with TS option
+  "vetur.format.defaultFormatter.ts": "vscode-typescript"
 }
 ```
 
@@ -109,13 +109,13 @@ Unsure which extensions to recommend to your students? You can point your studen
 
 The extension pack contains:
 
-* [npm](https://marketplace.visualstudio.com/items?itemName=eg2.vscode-npm-script) and [npm IntelliSense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense) for verifying status of npm packages(installed or not) and auto-completions.
-* [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) for basic JavaScript, TypeScript, and Vue.js functionality like auto-completions, linting, error highlighting before compiling.
-* [Live Share](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack) to enable real-time collaboration and [Live Share Audio](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-audio) to enable audio calls as well.
-* [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) to work on remote projects (for example, to access lab machines) through SSH with full VS Code functionality.
-* [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) to run REST Calls within VS Code for quick manual testing.
-* [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner) to run snippets (selected code) and single files of any code with a single click.
-* and more!
+- [npm](https://marketplace.visualstudio.com/items?itemName=eg2.vscode-npm-script) and [npm IntelliSense](https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense) for verifying status of npm packages(installed or not) and auto-completions.
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) for basic JavaScript, TypeScript, and Vue.js functionality like auto-completions, linting, error highlighting before compiling.
+- [Live Share](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack) to enable real-time collaboration and [Live Share Audio](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-audio) to enable audio calls as well.
+- [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) to work on remote projects (for example, to access lab machines) through SSH with full VS Code functionality.
+- [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) to run REST Calls within VS Code for quick manual testing.
+- [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner) to run snippets (selected code) and single files of any code with a single click.
+- and more!
 
 ## Free lesson: Build a Node.js app for Azure Cosmos DB
 

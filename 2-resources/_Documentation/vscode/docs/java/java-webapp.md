@@ -23,7 +23,7 @@ Before running and deploying this sample, you must have the Java SE Development 
 
 Download and install the [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack), which has JDK 11 included.
 
->**Note**: The `JAVA_HOME` environment variable must be set to the install location of the JDK to complete this tutorial.
+> **Note**: The `JAVA_HOME` environment variable must be set to the install location of the JDK to complete this tutorial.
 
 Download Apache Maven version 3 or greater:
 
@@ -37,7 +37,7 @@ Install Apache Maven for your local development environment:
 
 Clone the [Spring Boot Getting Started](https://github.com/spring-guides/gs-spring-boot) sample project to your local machine. You can clone a Git repository with the **Git: Clone** command in the **Command Palette** (`kb(workbench.action.showCommands)`). Paste `https://github.com/spring-guides/gs-spring-boot.git` as the URL of the remote repository and then decide the parent directory under which to put the local repository. After that, open the `complete` folder within the cloned repository in VS Code by navigating to the folder and typing `code .`.
 
->**Note**: You can install Visual Studio Code from [https://code.visualstudio.com](https://code.visualstudio.com/) and Git from [https://git-scm.com](https://git-scm.com/).
+> **Note**: You can install Visual Studio Code from [https://code.visualstudio.com](https://code.visualstudio.com/) and Git from [https://git-scm.com](https://git-scm.com/).
 
 ![Clone Spring Repository](images/java-webapp/clone-repository.gif)
 
@@ -154,11 +154,11 @@ The [Spring Boot Starter](https://docs.microsoft.com/java/azure/spring-framework
 
 2. Navigate to `src/main/resources` and open `application.properties`. Replace below properties in `application.properties` with information of your database.
 
-    ```bash
-    azure.documentdb.uri=your-documentdb-uri
-    azure.documentdb.key=your-documentdb-key
-    azure.documentdb.database=your-documentdb-databasename
-    ```
+   ```bash
+   azure.documentdb.uri=your-documentdb-uri
+   azure.documentdb.key=your-documentdb-key
+   azure.documentdb.database=your-documentdb-databasename
+   ```
 
 ### Run and debug the application
 
@@ -183,5 +183,5 @@ Alternatively, you can also use Maven to package and run your project as steps b
 
 ## Next steps
 
-* To containerize and deploy a web application, check out the [Docker Container Tutorial](/docs/azure/docker.md).
-* To learn more about Java Debugging features, see the [Java Debugging Tutorial](/docs/java/java-debugging.md).
+- To containerize and deploy a web application, check out the [Docker Container Tutorial](/docs/azure/docker.md).
+- To learn more about Java Debugging features, see the [Java Debugging Tutorial](/docs/java/java-debugging.md).

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>c-cpp-properties-schema-reference</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="c_cpp_properties.json-reference">c_cpp_properties.json reference</h1>
+<p>This article explains the scheme for the c_cpp_properties.json settings file.</p>
+<p>For more information about changing these settings, see <a href="/docs/cpp/customize-default-settings-cpp.md">Customizing Default Settings</a> and <a href="/docs/cpp/configure-intellisense-crosscompilation.md">Configure IntelliSense for cross-compiling</a>.</p>
+<h2 id="example">Example</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;env&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">&quot;myDefaultIncludePath&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-4" title="4">      <span class="st">&quot;${workspaceFolder}&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">      <span class="st">&quot;${workspaceFolder}/include&quot;</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="dt">&quot;myCompilerPath&quot;</span><span class="fu">:</span> <span class="st">&quot;/usr/local/bin/gcc-7&quot;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-10" title="10">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-11" title="11">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Mac&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-12" title="12">      <span class="dt">&quot;intelliSenseMode&quot;</span><span class="fu">:</span> <span class="st">&quot;clang-x64&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-13" title="13">      <span class="dt">&quot;includePath&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;${myDefaultIncludePath}&quot;</span><span class="ot">,</span> <span class="st">&quot;/another/path&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-14" title="14">      <span class="dt">&quot;macFrameworkPath&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;/System/Library/Frameworks&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-15" title="15">      <span class="dt">&quot;defines&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;FOO&quot;</span><span class="ot">,</span> <span class="st">&quot;BAR=100&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-16" title="16">      <span class="dt">&quot;forcedInclude&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;${workspaceFolder}/include/config.h&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-17" title="17">      <span class="dt">&quot;compilerPath&quot;</span><span class="fu">:</span> <span class="st">&quot;/usr/bin/clang&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-18" title="18">      <span class="dt">&quot;cStandard&quot;</span><span class="fu">:</span> <span class="st">&quot;c11&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-19" title="19">      <span class="dt">&quot;cppStandard&quot;</span><span class="fu">:</span> <span class="st">&quot;c++17&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-20" title="20">      <span class="dt">&quot;compileCommands&quot;</span><span class="fu">:</span> <span class="st">&quot;/path/to/compile_commands.json&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-21" title="21">      <span class="dt">&quot;browse&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-22" title="22">        <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;${workspaceFolder}&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-23" title="23">        <span class="dt">&quot;limitSymbolsToIncludedHeaders&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-24" title="24">        <span class="dt">&quot;databaseFilename&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span></a>
+<a class="sourceLine" id="cb1-25" title="25">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-26" title="26">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-27" title="27">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-28" title="28">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb1-29" title="29"><span class="fu">}</span></a></code></pre></div>
+<h2 id="top-level-properties">Top-level properties</h2>
+<ul>
+<li><p><code>env</code> An array of user-defined variables that will be available for substitution in the configurations via the standard environment variable syntax: <code>${&lt;var&gt;}</code> or <code>${env:&lt;var&gt;}</code>. Strings and arrays of strings are accepted.</p></li>
+<li><p><code>configurations</code> An array of configuration objects that provide the IntelliSense engine with information about your project and your preferences. By default, the extension creates a configuration for you based on your operating system. You may also add additional configurations.</p></li>
+<li><p><code>version</code> We recommend you don’t edit this field. It tracks the current version of the <code>c_cpp_properties.json</code> file so that the extension knows what properties and settings should be present and how to upgrade this file to the latest version.</p></li>
+</ul>
+<h2 id="configuration-properties">Configuration properties</h2>
+<ul>
+<li><p><code>name</code> A friendly name that identifies a configuration. <code>Linux</code>, <code>Mac</code>, and <code>Win32</code> are special identifiers for configurations that will be autoselected on those platforms. The status bar in VS Code will show you which configuration is active. You can also click on the label in the status bar to change the active configuration.</p></li>
+<li><p><code>compilerPath</code> (optional) The full path to the compiler you use to build your project, for example <code>/usr/bin/gcc</code>, to enable more accurate IntelliSense. The extension will query the compiler to determine the system include paths and default defines to use for IntelliSense.</p>
+<p>Putting <code>"compilerPath": ""</code> (empty string) will skip querying a compiler. This is useful if a specified compiler doesn’t support the arguments that are used for the query, as the extension will default back to any compiler it can find (like Visual C). Leaving out the <code>compilerPath</code> property does not skip the query.</p></li>
+<li><p><code>compilerArgs</code> (optional) Compiler arguments to modify the includes or defines used, for example <code>-nostdinc++</code>, <code>-m32</code>, etc.</p></li>
+<li><p><code>intelliSenseMode</code> The IntelliSense mode to use that maps to an architecture-specific variant of MSVC, gcc, or Clang. If not set or if set to <code>${default}</code>, the extension will choose the default for that platform.</p>
+<p>Platform defaults:</p>
+<ul>
+<li>Windows: <code>msvc-x64</code></li>
+<li>Linux: <code>gcc-x64</code></li>
+<li>macOS: <code>clang-x64</code></li>
+</ul></li>
+<li><p><code>includePath</code> An include path is a folder that contains header files (such as <code>#include "myHeaderFile.h"</code>) that are included in a source file. Specify a list of paths for the IntelliSense engine to use while searching for included header files. Searching on these paths is not recursive. Specify <code>**</code> to indicate recursive search. For example, <code>${workspaceFolder}/**</code> will search through all subdirectories while <code>${workspaceFolder}</code> will not. If on Windows with Visual Studio installed, or if a compiler is specified in the <code>compilerPath</code> setting, it is not necessary to list the system include paths in this list.</p></li>
+<li><p><code>defines</code> A list of preprocessor definitions for the IntelliSense engine to use while parsing files. Optionally, use <code>=</code> to set a value, for example <code>VERSION=1</code>.</p></li>
+<li><p><code>cStandard</code> The version of the C language standard to use for IntelliSense.</p></li>
+<li><p><code>cppStandard</code> The version of the C++ language standard to use for IntelliSense.</p></li>
+<li><p><code>configurationProvider</code> The ID of a VS Code extension that can provide IntelliSense configuration information for source files. For example, use the VS Code extension ID <code>ms-vscode.cmake-tools</code> to provide configuration information from the CMake Tools extension.</p></li>
+<li><p><code>windowsSdkVersion</code> The versions of the Windows SDK include path to use on Windows, for example <code>10.0.17134.0</code>.</p></li>
+<li><p><code>macFrameworkPath</code> A list of paths for the IntelliSense engine to use while searching for included headers from Mac frameworks. Only supported on configurations for macOS.</p></li>
+<li><p><code>forcedInclude</code> (optional) A list of files that should be included before any other characters in the source file are processed. Files are included in the order listed.</p></li>
+<li><p><code>compileCommands</code> (optional) The full path to the <code>compile_commands.json</code> file for the workspace. The include paths and defines discovered in this file will be used instead of the values set for <code>includePath</code> and <code>defines</code> settings. If the compile commands database does not contain an entry for the translation unit that corresponds to the file you opened in the editor, then a warning message will appear and the extension will use the <code>includePath</code> and <code>defines</code> settings instead.</p>
+<p>For more information about the file format, see the <a href="https://clang.llvm.org/docs/JSONCompilationDatabase.html">Clang documentation</a>. Some build systems, such as CMake, <a href="https://cmake.org/cmake/help/v3.5/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html">simplify generating this file</a>.</p></li>
+<li><p><code>browse</code> The set of properties used when <code>"C_Cpp.intelliSenseEngine"</code> is set to <code>"Tag Parser"</code> (also referred to as “fuzzy” IntelliSense, or the “browse” engine). These properties are also used by the Go To Definition/Declaration features, or when the “Default” IntelliSense engine is unable to resolve the #includes in your source files.</p></li>
+</ul>
+<h3 id="browse-properties">Browse properties</h3>
+<ul>
+<li><p><code>path</code> A list of paths for the Tag Parser to search for headers included by your source files. If omitted, <code>includePath</code> will be used as the <code>path</code>. Searching on these paths is recursive by default. Specify <code>*</code> to indicate non-recursive search. For example: <code>${workspaceFolder}</code> will search through all subdirectories while <code>${workspaceFolder}/*</code> will not.</p></li>
+<li><p><code>limitSymbolsToIncludedHeaders</code> When true, the Tag Parser will only parse code files that have been directly or indirectly included by a source file in <code>${workspaceFolder}</code>. When false, the Tag Parser will parse all code files found in the paths specified in the <code>browse.path</code> list.</p></li>
+<li><p><code>databaseFilename</code> The path to the generated symbol database. This property instructs the extension to save the Tag Parser’s symbol database somewhere other than the workspace’s default storage location. If a relative path is specified, it will be made relative to the workspace’s default storage location, not the workspace folder itself. The <code>${workspaceFolder}</code> variable can be used to specify a path relative to the workspace folder (for example <code>${workspaceFolder}/.vscode/browse.vc.db</code>)</p></li>
+</ul>
+<h2 id="supported-variables">Supported variables</h2>
+<p>You can allow <code>tasks.json</code> or <code>launch.json</code> to query the current active configuration from <code>c_cpp_properties.json</code>. To do this, use the variable <code>${command:cpptools.activeConfigName}</code> as an argument in a <code>tasks.json</code> or <code>launch.json</code> script.</p>
+</body>
+</html>

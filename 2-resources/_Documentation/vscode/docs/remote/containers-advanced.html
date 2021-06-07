@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>containers-advanced</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="advanced-container-configuration">Advanced Container Configuration</h1>
+<p>This article includes advanced setup scenarios for the <a href="https://aka.ms/vscode-remote/download/containers">Visual Studio Code Remote - Containers</a> extension. See the <a href="/docs/remote/containers.md">Developing inside a Container</a> article for additional information.</p>
+<h2 id="adding-environment-variables">Adding environment variables</h2>
+<p>You can set environment variables in your container without altering the container image by using one of the options below. However, you should verify <strong>Terminal &gt; Integrated: Inherit Env</strong> is checked in settings or the variables you set may not appear in the Integrated Terminal.</p>
+<figure>
+<img src="images/containers/inherit-env.png" alt="Inherit env setting" /><figcaption>Inherit env setting</figcaption>
+</figure>
+<h3 id="option-1-add-individual-variables">Option 1: Add individual variables</h3>
+<p>Depending on what you reference in <code>devcontainer.json</code>:</p>
+<ul>
+<li><p><strong>Dockerfile or image</strong>: Add the <code>containerEnv</code> property to <code>devcontainer.json</code> to set variables that should apply to the entire container or <code>remoteEnv</code> to set variables for VS Code and related sub-processes (terminals, tasks, debugging, etc):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="er">&quot;containerEnv&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="dt">&quot;MY_CONTAINER_VAR&quot;</span><span class="fu">:</span> <span class="st">&quot;some-value-here&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="dt">&quot;MY_CONTAINER_VAR2&quot;</span><span class="fu">:</span> <span class="st">&quot;${localEnv:SOME_LOCAL_VAR}&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="fu">}</span><span class="er">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="er">&quot;remoteEnv&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="dt">&quot;PATH&quot;</span><span class="fu">:</span> <span class="st">&quot;${containerEnv:PATH}:/some/other/path&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">    <span class="dt">&quot;MY_REMOTE_VARIABLE&quot;</span><span class="fu">:</span> <span class="st">&quot;some-other-value-here&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    <span class="dt">&quot;MY_REMOTE_VARIABLE2&quot;</span><span class="fu">:</span> <span class="st">&quot;${localEnv:SOME_LOCAL_VAR}&quot;</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<p>As this example illustrates, <code>containerEnv</code> can reference local variables and <code>remoteEnv</code> can reference both local and existing container variables.</p></li>
+<li><p><strong>Docker Compose</strong>: Since Docker Compose has built-in support for updating container-wide variables, only <code>remoteEnv</code> is supported in <code>devcontainer.json</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="er">&quot;remoteEnv&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="dt">&quot;PATH&quot;</span><span class="fu">:</span> <span class="st">&quot;${containerEnv:PATH}:/some/other/path&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="dt">&quot;MY_REMOTE_VARIABLE&quot;</span><span class="fu">:</span> <span class="st">&quot;some-other-value-here&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="dt">&quot;MY_REMOTE_VARIABLE2&quot;</span><span class="fu">:</span> <span class="st">&quot;${localEnv:SOME_LOCAL_VAR}&quot;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="fu">}</span></a></code></pre></div>
+<p>As this example illustrates, <code>remoteEnv</code> can reference both local and existing container variables.</p>
+<p>To update variables that apply to the entire container, update (or <a href="/docs/remote/create-dev-container.md#extend-your-docker-compose-file-for-development">extend</a>) your <code>docker-compose.yml</code> with the following for the appropriate service:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="fu">your-service-name-here:</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="fu">environment:</span></a>
+<a class="sourceLine" id="cb3-5" title="5">      <span class="kw">-</span> YOUR_ENV_VAR_NAME=your-value-goes-here</a>
+<a class="sourceLine" id="cb3-6" title="6">      <span class="kw">-</span> ANOTHER_VAR=another-value</a>
+<a class="sourceLine" id="cb3-7" title="7">      <span class="co"># ...</span></a></code></pre></div></li>
+</ul>
+<p>If you’ve already built the container and connected to it, run <strong>Remote-Containers: Rebuild Container</strong> from the Command Palette (<code>kbstyle(F1)</code>) to pick up the change. Otherwise run <strong>Remote-Containers: Open Folder in Container…</strong> to connect to the container.</p>
+<h3 id="option-2-use-an-env-file">Option 2: Use an env file</h3>
+<p>If you have a large number of environment variables that you need to set, you can use a <code>.env</code> file instead. VS Code will automatically pick up a file called <code>.env</code> in your workspace root, but you can also create one in another location.</p>
+<p>First, create an environment file somewhere in your source tree. Consider this <code>.devcontainer/devcontainer.env</code> file:</p>
+<pre class="text"><code>YOUR_ENV_VAR_NAME=your-value-goes-here
+ANOTHER_ENV_VAR_NAME=your-value-goes-here</code></pre>
+<p>Next, depending on what you reference in <code>devcontainer.json</code>:</p>
+<ul>
+<li><p><strong>Dockerfile or image</strong>: Edit <code>devcontainer.json</code> and add a path to the <code>devcontainer.env</code> :</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"><span class="er">&quot;runArgs&quot;:</span> <span class="ot">[</span><span class="st">&quot;--env-file&quot;</span><span class="ot">,</span><span class="st">&quot;.devcontainer/devcontainer.env&quot;</span><span class="ot">]</span></a></code></pre></div></li>
+<li><p><strong>Docker Compose:</strong> Edit <code>docker-compose.yml</code> and add a path to the <code>devcontainer.env</code> file relative to the Docker Compose file:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="fu">your-service-name-here:</span></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="fu">env_file:</span><span class="at"> devcontainer.env</span></a>
+<a class="sourceLine" id="cb6-5" title="5">    <span class="co"># ...</span></a></code></pre></div></li>
+</ul>
+<p>If you’ve already built the container and connected to it, run <strong>Remote-Containers: Rebuild Container</strong> from the Command Palette (<code>kbstyle(F1)</code>) to pick up the change. Otherwise run <strong>Remote-Containers: Open Folder in Container…</strong> to connect to the container.</p>
+<h2 id="adding-another-local-file-mount">Adding another local file mount</h2>
+<p>You can add a volume bound to any local folder by using the following appropriate steps, based on what you reference in <code>devcontainer.json</code>:</p>
+<ul>
+<li><p><strong>Dockerfile or image</strong>: Add the following to the <code>mounts</code> property (VS Code 1.41+) in this same file:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="er">&quot;mounts&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="st">&quot;source=/local/source/path/goes/here,target=/target/path/in/container/goes/here,type=bind,consistency=cached&quot;</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="ot">]</span></a></code></pre></div>
+<p>You can also reference local environment variables or the local path of the workspace. For example, this will bind mount <code>~</code> (<code>$HOME</code>) on macOS/Linux and the user’s folder (<code>%USERPROFILE%</code>) on Windows and a sub-folder in the workspace to a different location:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" title="1"><span class="er">&quot;mounts&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="st">&quot;source=${localEnv:HOME}${localEnv:USERPROFILE},target=/host-home-folder,type=bind,consistency=cached&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="st">&quot;source=${localWorkspaceFolder}/app-data,target=/data,type=bind,consistency=cached&quot;</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="ot">]</span></a></code></pre></div></li>
+<li><p><strong>Docker Compose:</strong> Update (or <a href="/docs/remote/create-dev-container.md#extend-your-docker-compose-file-for-development">extend</a>) your <code>docker-compose.yml</code> with the following for the appropriate service:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="fu">your-service-name-here:</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb9-5" title="5">      <span class="kw">-</span> /local/source/path/goes/here:/target/path/in/container/goes/here:cached</a>
+<a class="sourceLine" id="cb9-6" title="6">      <span class="kw">-</span> ~:/host-home-folder:cached</a>
+<a class="sourceLine" id="cb9-7" title="7">      <span class="kw">-</span> ./data-subfolder:/data:cached</a>
+<a class="sourceLine" id="cb9-8" title="8">      <span class="co"># ...</span></a></code></pre></div></li>
+</ul>
+<p>If you’ve already built the container and connected to it, run <strong>Remote-Containers: Rebuild Container</strong> from the Command Palette (<code>kbstyle(F1)</code>) to pick up the change. Otherwise run <strong>Remote-Containers: Open Folder in Container…</strong> to connect to the container.</p>
+<h2 id="persist-bash-history-between-runs">Persist <code>bash</code> history between runs</h2>
+<p>You can also use a mount to persist your bash command history across sessions / container rebuilds.</p>
+<p>First, update your <code>Dockerfile</code> so that each time a command is used in <code>bash</code>, the history is updated and stored in a location we will persist.</p>
+<p>If you have a root user, update your <code>Dockerfile</code> with the following:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">RUN</span> SNIPPET=<span class="st">&quot;export PROMPT_COMMAND=&#39;history -a&#39; &amp;&amp; export HISTFILE=/commandhistory/.bash_history&quot;</span> \</a>
+<a class="sourceLine" id="cb10-2" title="2">    &amp;&amp; echo $SNIPPET &gt;&gt; <span class="st">&quot;/root/.bashrc&quot;</span></a></code></pre></div>
+<p>If you have a non-root user, update your <code>Dockerfile</code> with the following. Replace <code>user-name-goes-here</code> with the name of a <a href="#adding-a-nonroot-user-to-your-dev-container">non-root user</a> in the container.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">ARG</span> USERNAME=user-name-goes-here</a>
+<a class="sourceLine" id="cb11-2" title="2"></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="kw">RUN</span> SNIPPET=<span class="st">&quot;export PROMPT_COMMAND=&#39;history -a&#39; &amp;&amp; export HISTFILE=/commandhistory/.bash_history&quot;</span> \</a>
+<a class="sourceLine" id="cb11-4" title="4">    &amp;&amp; mkdir /commandhistory \</a>
+<a class="sourceLine" id="cb11-5" title="5">    &amp;&amp; touch /commandhistory/.bash_history \</a>
+<a class="sourceLine" id="cb11-6" title="6">    &amp;&amp; chown -R $USERNAME /commandhistory \</a>
+<a class="sourceLine" id="cb11-7" title="7">    &amp;&amp; echo $SNIPPET &gt;&gt; <span class="st">&quot;/home/$USERNAME/.bashrc&quot;</span></a></code></pre></div>
+<p>Next, add a local volume to store the command history. This step varies depending on whether or not you are using Docker Compose.</p>
+<ul>
+<li><p><strong>Dockerfile or image</strong>: Use the <code>mounts</code> property (VS Code 1.41+) in your <code>devcontainer.json</code> file.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb12-1" title="1">  <span class="er">&quot;mounts&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb12-2" title="2">      <span class="st">&quot;source=projectname-bashhistory,target=/commandhistory,type=volume&quot;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="ot">]</span></a></code></pre></div></li>
+<li><p><strong>Docker Compose:</strong> Update (or <a href="/docs/remote/create-dev-container.md#extend-your-docker-compose-file-for-development">extend</a>) your <code>docker-compose.yml</code> with the following for the appropriate service.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb13-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="fu">your-service-name-here:</span></a>
+<a class="sourceLine" id="cb13-4" title="4">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb13-5" title="5">      <span class="kw">-</span> projectname-bashhistory:/commandhistory</a>
+<a class="sourceLine" id="cb13-6" title="6">      <span class="co"># ...</span></a>
+<a class="sourceLine" id="cb13-7" title="7"><span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb13-8" title="8">  <span class="fu">projectname-bashhistory:</span></a></code></pre></div></li>
+</ul>
+<p>Finally, if you’ve already built the container and connected to it, run <strong>Remote-Containers: Rebuild Container</strong> from the Command Palette (<code>kbstyle(F1)</code>) to pick up the change. Otherwise run <strong>Remote-Containers: Open Folder in Container…</strong> to connect to the container.</p>
+<h2 id="changing-the-default-source-code-mount">Changing the default source code mount</h2>
+<p>If you add the <code>image</code> or <code>dockerFile</code> properties to <code>devcontainer.json</code>, VS Code will automatically “bind” mount your current workspace folder into the container. If <code>git</code> is present on the host’s <code>PATH</code> and the folder containing <code>.devcontainer/devcontainer.json</code> is within a <code>git</code> repository, the current workspace mounted will be the root of the repository. If <code>git</code> is not present on the host’s <code>PATH</code>, the current workspace mounted will be the folder containing <code>.devcontainer/devcontainer.json</code>.</p>
+<p>While this is convenient, you may want to change <a href="https://docs.docker.com/engine/reference/commandline/service_create/#add-bind-mounts-volumes-or-memory-filesystems">mount settings</a>, alter the type of mount, location, or <a href="#developing-inside-a-container-on-a-remote-docker-host">run in a remote container</a>.</p>
+<p>You can use the <code>workspaceMount</code> property in <code>devcontainer.json</code> to change the automatic mounting behavior. It expects the same value as the <a href="https://docs.docker.com/engine/reference/commandline/run/#add-bind-mounts-or-volumes-using-the---mount-flag">Docker CLI <code>--mount</code> flag</a>.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb14-1" title="1"><span class="er">&quot;workspaceMount&quot;:</span> <span class="er">&quot;source=$</span><span class="fu">{</span><span class="er">localWorkspaceFolder</span><span class="fu">}</span><span class="er">/sub-folder,target=/workspace,type=bind,consistency=delegated&quot;,</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="er">&quot;workspaceFolder&quot;:</span> <span class="er">&quot;/workspace&quot;</span></a></code></pre></div>
+<p>This also allows you to do something like a named volume mount instead of a bind mount, which can be useful particularly when <a href="#developing-inside-a-container-on-a-remote-docker-host">using a remote Docker Host</a> or you <a href="#use-a-named-volume-for-your-entire-source-tree">want to store your entire source tree in a volume</a>.</p>
+<p>If you’ve already built the container and connected to it, run <strong>Remote-Containers: Rebuild Container</strong> from the Command Palette (<code>kbstyle(F1)</code>) to pick up the change. Otherwise run <strong>Remote-Containers: Open Folder in Container…</strong> to connect to the container.</p>
+<h2 id="improving-container-disk-performance">Improving container disk performance</h2>
+<p>The Remote - Containers extension uses “bind mounts” to source code in your local filesystem by default. While this is the simplest option, on macOS and Windows, you may encounter slower disk performance when running commands like <code>yarn install</code> from inside the container. There are few things you can do to resolve these type of issues.</p>
+<h3 id="store-your-source-code-in-the-wsl-2-filesystem-on-windows">Store your source code in the WSL 2 filesystem on Windows</h3>
+<p>Windows 10 2004 and up includes an improved version of the Windows Subsystem for Linux (WSL 2) that provides a full Linux kernel and has significantly improved performance over WSL 1. Docker Desktop 2.3+ includes a new WSL 2 Engine that runs Docker in WSL rather than in a VM. Therefore, if you store your source code in the WSL 2 filesystem, you will see improved performance along with better compatibility for things like setting permissions.</p>
+<p>See <a href="/docs/remote/containers.md#open-a-wsl-2-folder-in-a-container-on-windows">Open a WSL 2 folder in a container on Windows</a> for details on using this new engine from VS Code.</p>
+<h3 id="update-the-mount-consistency-to-delegated-for-macos">Update the mount consistency to ‘delegated’ for macOS</h3>
+<p>By default, the Remote - Containers extension uses the Docker <a href="https://docs.docker.com/docker-for-mac/osxfs-caching/">cached mount consistency</a> on macOS since this provides a good mix between performance and write guarantees on the host OS. However, you can opt to use the <code>delegated</code> consistency instead if you do not expect to be writing to the same file in both locations very often.</p>
+<p>When using a <strong>Dockerfile or image</strong>, update the <strong>Remote &gt; Containers: Workspace Mount Consistency</strong> property in settings to <code>delegated</code>:</p>
+<figure>
+<img src="images/containers/workspace-mount-setting.png" alt="Workspace Mount setting" /><figcaption>Workspace Mount setting</figcaption>
+</figure>
+<p>When using <strong>Docker Compose</strong>, update your local bind mount in <code>docker-compose.yml</code> as follows:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb15-1" title="1"><span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="co"># Update this to wherever you want VS Code to mount the folder of your project</span></a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="kw">-</span> .:/workspace:delegated</a></code></pre></div>
+<p>If you’ve already built the container and connected to it, run <strong>Remote-Containers: Rebuild Container</strong> from the Command Palette (<code>kbstyle(F1)</code>) to pick up the change. Otherwise run <strong>Remote-Containers: Open Folder in Container…</strong> to connect to the container.</p>
+<h3 id="use-clone-repository-in-container-volume">Use Clone Repository in Container Volume</h3>
+<p>The <strong>Remote-Containers: Clone Repository in Container Volume…</strong> command uses an isolated, local Docker named volume instead binding to the local filesystem. In addition to not polluting your file tree, local volumes have the added benefit of improved performance on Windows and macOS.</p>
+<p>See <a href="/docs/remote/containers.md#quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume">Open a Git repository or GitHub PR in an isolated container volume</a> for details on using this approach.</p>
+<p>The next two sections will outline how to use a named volume in other scenarios.</p>
+<h3 id="use-a-targeted-named-volume">Use a targeted named volume</h3>
+<p>Since macOS and Windows run containers in a VM, “bind” mounts are not as fast as using the container’s filesystem directly. Fortunately, Docker has the concept of a local “named volume” that can act like the container’s filesystem but survives container rebuilds. This makes it ideal for storing package folders like <code>node_modules</code>, data folders, or output folders like <code>build</code> where write performance is critical. Follow the appropriate steps below based on what you reference in <code>devcontainer.json</code>.</p>
+<p><strong>Dockerfile or image</strong>:</p>
+<p>Let’s use the <a href="https://github.com/microsoft/vscode-remote-try-node">vscode-remote-try-node</a> repository to illustrate how to speed up <code>yarn install</code>.</p>
+<p>Follow these steps:</p>
+<ol type="1">
+<li><p>Use the <code>workspaceMount</code> property in <code>devcontainer.json</code> to tell VS Code where to bind your source code. Then use the <code>mounts</code> property (VS Code 1.41+) to mount the <code>node_modules</code> sub-folder into a named local volume instead.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb16-1" title="1"><span class="er">&quot;mounts&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb16-2" title="2">    <span class="st">&quot;source=try-node-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume&quot;</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="ot">]</span></a></code></pre></div></li>
+<li><p>Since this repository <a href="#adding-a-nonroot-user-to-your-dev-container">runs VS Code as the non-root “node” user</a>, we need to add a <code>postCreateCommand</code> to be sure the user can access the folder.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb17-1" title="1"><span class="er">&quot;remoteUser&quot;:</span> <span class="er">&quot;node&quot;,</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="er">&quot;mounts&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb17-3" title="3">    <span class="st">&quot;source=try-node-node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume&quot;</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="ot">]</span><span class="er">,</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="er">&quot;postCreateCommand&quot;:</span> <span class="er">&quot;sudo</span> <span class="er">chown</span> <span class="er">node</span> <span class="er">node_modules&quot;</span></a></code></pre></div>
+<p>This second step is not required if you will be running in the container as <code>root</code>.</p></li>
+</ol>
+<p>If you’ve already built the container and connected to it, run <strong>Remote-Containers: Rebuild Container</strong> from the Command Palette (<code>kbstyle(F1)</code>) to pick up the change. Otherwise run <strong>Remote-Containers: Open Folder in Container…</strong> to connect to the container.</p>
+<p>Two notes on this approach:</p>
+<ol type="1">
+<li><p>If you delete the <code>node_modules</code> folder in the container, it may lose the connection to the volume. Delete the contents of the <code>node_modules</code> folder instead when needed (<code>rm -rf node_modules/* node_modules/.*</code>).</p></li>
+<li><p>You’ll find that an empty <code>node_modules</code> folder gets created locally with this method. This is because the volume mount point in the container is inside the local filesystem bind mount. This is expected and harmless.</p></li>
+</ol>
+<p><strong>Docker Compose</strong>:</p>
+<p>While vscode-remote-try-node does not use Docker Compose, the steps are similar, but the volume mount configuration is placed in a different file.</p>
+<ol type="1">
+<li><p>In your Docker Compose file (or an <a href="/docs/remote/create-dev-container.md#extend-your-docker-compose-file-for-development">extended one</a>), add a named local volume mount to the <code>node_modules</code> sub-folder for the appropriate service(s). For example:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb18-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb18-3" title="3">  <span class="fu">your-service-name-here:</span></a>
+<a class="sourceLine" id="cb18-4" title="4">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb18-5" title="5">      <span class="co"># Or wherever you&#39;ve mounted your source code</span></a>
+<a class="sourceLine" id="cb18-6" title="6">      <span class="kw">-</span> .:/workspace:cached</a>
+<a class="sourceLine" id="cb18-7" title="7">      <span class="kw">-</span> try-node-node_modules:/workspace/node_modules</a>
+<a class="sourceLine" id="cb18-8" title="8">    <span class="co"># ...</span></a>
+<a class="sourceLine" id="cb18-9" title="9"></a>
+<a class="sourceLine" id="cb18-10" title="10"><span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb18-11" title="11">  <span class="fu">try-node-node_modules:</span></a></code></pre></div></li>
+<li><p>Next, be sure the <code>workspaceFolder</code> property in <code>devcontainer.json</code> matches the place your actual source code is mounted:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb19-1" title="1"><span class="er">&quot;workspaceFolder&quot;:</span> <span class="er">&quot;/workspace&quot;</span></a></code></pre></div></li>
+<li><p>If you’re running in the container with a <a href="#adding-a-nonroot-user-to-your-dev-container">user other than root</a>, add a <code>postCreateCommand</code> to update the owner of the folder you mount since it may have been mounted as root. Replace <code>user-name-goes-here</code> with the appropriate user.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb20-1" title="1"><span class="er">&quot;remoteUser&quot;:</span> <span class="er">&quot;node&quot;,</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="er">&quot;workspaceFolder&quot;:</span> <span class="er">&quot;/workspace&quot;,</span></a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="er">&quot;postCreateCommand&quot;:</span> <span class="er">&quot;sudo</span> <span class="er">chown</span> <span class="er">user-name-goes-here</span> <span class="er">node_modules&quot;</span></a></code></pre></div></li>
+</ol>
+<p>If you’ve already built the container and connected to it, run <strong>Remote-Containers: Rebuild Container</strong> from the Command Palette (<code>kbstyle(F1)</code>) to pick up the change. Otherwise run <strong>Remote-Containers: Open Folder in Container…</strong> to connect to the container.</p>
+<h3 id="use-a-named-volume-for-your-entire-source-tree">Use a named volume for your entire source tree</h3>
+<p>Finally, if none of the above options meet your needs, you can go one step further and <strong>clone your entire source tree inside of a named volume</strong> rather than locally. You can set up a named volume by taking an existing <code>devcontainer.json</code> configuration and modifying it as follows (updating <code>your-volume-name-here</code> with whatever you want to call the volume).</p>
+<p>Depending on what you reference in <code>devcontainer.json</code>:</p>
+<ul>
+<li><p><strong>Dockerfile or image</strong>: Use the following properties in <code>devcontainer.json</code> to mount a local named volume into the container:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb21-1" title="1"><span class="er">&quot;workspaceMount&quot;:</span> <span class="er">&quot;source=your-volume-name-here,target=/workspace,type=volume&quot;</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="er">&quot;workspaceFolder&quot;:</span> <span class="er">&quot;/workspace&quot;,</span></a></code></pre></div></li>
+<li><p><strong>Docker Compose</strong>: Update (or <a href="/docs/remote/create-dev-container.md#extend-your-docker-compose-file-for-development">extend</a>) your <code>docker-compose.yml</code> with the following for the appropriate service(s):</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb22-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb22-3" title="3">  <span class="fu">your-service-name-here:</span></a>
+<a class="sourceLine" id="cb22-4" title="4">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb22-5" title="5">      <span class="kw">-</span> your-volume-name-here:/workspace</a>
+<a class="sourceLine" id="cb22-6" title="6">    <span class="co"># ...</span></a>
+<a class="sourceLine" id="cb22-7" title="7"></a>
+<a class="sourceLine" id="cb22-8" title="8"><span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb22-9" title="9">  <span class="fu">your-volume-name-here:</span></a></code></pre></div>
+<p>You’ll also want to be sure the <code>workspaceFolder</code> property in <code>devcontainer.json</code> matches the place the volume is mounted (or a sub-folder inside the volume):</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb23-1" title="1"><span class="er">&quot;workspaceFolder&quot;:</span> <span class="er">&quot;/workspace&quot;</span></a></code></pre></div></li>
+</ul>
+<p>If you’ve already built the container and connected to it, run <strong>Remote-Containers: Rebuild Container</strong> from the Command Palette (<code>kbstyle(F1)</code>) to pick up the change. Otherwise run <strong>Remote-Containers: Open Folder in Container…</strong> to connect to the container.</p>
+<p>Next, either use the <strong>Git: Clone</strong> command from the Command Palette or <strong>start an integrated terminal</strong> (<code>kb(workbench.action.terminal.new)</code>) and use the <code>git clone</code> command to clone your source code into the <code>/workspace</code> folder.</p>
+<p>Finally, use the <strong>File &gt; Open… / Open Folder…</strong> command to open the cloned repository in the container.</p>
+<h2 id="avoiding-extension-reinstalls-on-container-rebuild">Avoiding extension reinstalls on container rebuild</h2>
+<p>By default, VS Code will install extensions and VS Code Server inside the container’s filesystem. While this has performance benefits over a locally mounted filesystem, the disadvantage is that VS Code will have to reinstall them on a container rebuild. If you find yourself rebuilding frequently, you can use a local “named volume” mount so that the extensions and VS Code Server survive a container rebuild.</p>
+<p>There are a two side effects of doing this you should be aware of:</p>
+<ul>
+<li>Deleting the container will not automatically delete the named volume.</li>
+<li>Sharing the volume across multiple containers can have unintended consequences, so to be safe we will pick a unique name for each.</li>
+</ul>
+<p>To create the named local volume, follow these steps:</p>
+<ol type="1">
+<li><p><strong>If you are running as a non-root user</strong>, you’ll need to ensure your Dockerfile creates <code>~/.vscode-server/extensions</code> and/or <code>~/.vscode-server-insiders/extensions</code> in the container with this non-root user as the owner. If you do not do this, the folder will be owned by root and your connection will fail with a permissions issue. See <a href="#adding-a-nonroot-user-to-your-dev-container">Adding a non-root user to your dev container</a> for full details, but you can use this snippet in your Dockerfile to create the folders. Replace <code>user-name-goes-here</code> with the actual user name:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">ARG</span> USERNAME=user-name-goes-here</a>
+<a class="sourceLine" id="cb24-2" title="2"></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="kw">RUN</span> mkdir -p /home/$USERNAME/.vscode-server/extensions \</a>
+<a class="sourceLine" id="cb24-4" title="4">        /home/$USERNAME/.vscode-server-insiders/extensions \</a>
+<a class="sourceLine" id="cb24-5" title="5">    &amp;&amp; chown -R $USERNAME \</a>
+<a class="sourceLine" id="cb24-6" title="6">        /home/$USERNAME/.vscode-server \</a>
+<a class="sourceLine" id="cb24-7" title="7">        /home/$USERNAME/.vscode-server-insiders</a></code></pre></div></li>
+<li><p>Next, we’ll configure a named volume mount for <code>~/.vscode-server/extensions</code> and <code>~/.vscode-server-insiders/extensions</code> in the container. The configuration will depend on whether you specify an image, Dockerfile, or Docker Compose file in your <code>devcontainer.json</code> file.</p>
+<p><strong>Dockerfile or image</strong>:</p>
+<p>Add the following to <code>devcontainer.json</code>, replacing <code>/root</code> with the home directory in the container if not root (for example <code>/home/user-name-goes-here</code>) and <code>unique-vol-name-here</code> with a unique name for the volume:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb25-1" title="1"><span class="er">&quot;mounts&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb25-2" title="2">    <span class="st">&quot;source=unique-vol-name-here,target=/root/.vscode-server/extensions,type=volume&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb25-3" title="3">    <span class="er">//</span> <span class="er">And/or</span> <span class="er">for</span> <span class="er">VS</span> <span class="er">Code</span> <span class="er">Insiders</span></a>
+<a class="sourceLine" id="cb25-4" title="4">    <span class="st">&quot;source=unique-vol-name-here-insiders,target=/root/.vscode-server-insiders/extensions,type=volume&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb25-5" title="5"><span class="ot">]</span></a></code></pre></div>
+<p><strong>Docker Compose</strong>:</p>
+<p>Update (or <a href="/docs/remote/create-dev-container.md#extend-your-docker-compose-file-for-development">extend</a>) your <code>docker-compose.yml</code> with the following for the appropriate service. Replacing <code>/root</code> with the home directory in the container if not root (for example <code>/home/user-name-goes-here</code>) and <code>unique-vol-name-here</code> with a unique name for the volume.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode yml"><code class="sourceCode yaml"><a class="sourceLine" id="cb26-1" title="1"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb26-2" title="2">  <span class="fu">your-service-name-here:</span></a>
+<a class="sourceLine" id="cb26-3" title="3">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb26-4" title="4">      <span class="kw">-</span> unique-vol-name-here:/root/.vscode-server/extensions</a>
+<a class="sourceLine" id="cb26-5" title="5">      <span class="co"># And/or for VS Code Insiders</span></a>
+<a class="sourceLine" id="cb26-6" title="6">      <span class="kw">-</span> unique-vol-name-here-insiders:/root/.vscode-server-insiders/extensions</a>
+<a class="sourceLine" id="cb26-7" title="7">    <span class="co"># ...</span></a>
+<a class="sourceLine" id="cb26-8" title="8"></a>
+<a class="sourceLine" id="cb26-9" title="9"><span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb26-10" title="10">  <span class="fu">unique-vol-name-here:</span></a>
+<a class="sourceLine" id="cb26-11" title="11">  <span class="fu">unique-vol-name-here-insiders:</span></a></code></pre></div></li>
+<li><p>Finally, if you’ve already built the container and connected to it, you’ll need to run <strong>Remote-Containers: Rebuild Container</strong> from the Command Palette (<code>kbstyle(F1)</code>) to pick up the change. Otherwise run <strong>Remote-Containers: Reopen Folder in Container</strong> to connect to the container for the first time.</p></li>
+</ol>
+<p>After the container is up and running, subsequent rebuilds will not reacquire any extensions or the VS Code server. The build will also <strong>not use the latest extensions list</strong> from <code>devcontainer.json</code>.</p>
+<p>However, if you want to completely reset, you can delete the volume and everything will be reinstalled on restart.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb27-1" title="1"><span class="ex">docker</span> volume rm unique-vol-name-here</a></code></pre></div>
+<h2 id="adding-a-non-root-user-to-your-dev-container">Adding a non-root user to your dev container</h2>
+<p>Many Docker images use root as the default user, but there are cases where you may prefer to use a non-root user instead. If you do so, there are some <strong>quirks with local filesystem (bind) mounts</strong> that you should know about. Specifically:</p>
+<ul>
+<li><p><strong>Docker Desktop for Mac</strong>: Inside the container, any mounted files/folders will act as if they are owned by the container user you specify. Locally, all filesystem operations will use the permissions of your local user instead.</p></li>
+<li><p><strong>Docker Desktop for Windows</strong>: Inside the container, any mounted files/folders will appear as if they are owned by <code>root</code> but the user you specify will still be able to read/write them and all files will be executable. Locally, all filesystem operations will use the permissions of your local user instead. This is because there is fundamentally no way to directly map Windows-style file permissions to Linux.</p></li>
+<li><p><strong>Docker CE/EE on Linux</strong>: Inside the container, any mounted files/folders will have the exact same permissions as outside the container - including the owner user ID (UID) and group ID (GID). Because of this, your container user will either need to have the same UID or be in a group with the same GID. The actual name of the user / group does not matter. The first user on a machine typically gets a UID of 1000, so most containers use this as the ID of the user to try to avoid this problem.</p></li>
+</ul>
+<h3 id="specifying-a-user-for-vs-code">Specifying a user for VS Code</h3>
+<p>If the image or Dockerfile you are using <strong>already provides an optional non-root user</strong> (like the <code>node</code> image) but still defaults to root, you can opt into having VS Code (server) and any sub-processes (terminals, tasks, debugging) use it by specifying the <code>remoteUser</code> property in <code>devcontainer.json</code>:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb28-1" title="1"><span class="er">&quot;remoteUser&quot;:</span> <span class="er">&quot;user-name-goes-here&quot;</span></a></code></pre></div>
+<p>On Linux, if you are referencing a <strong>Dockerfile or image</strong> in <code>devcontainer.json</code>, this will also automatically update the container user’s UID/GID to match your local user to avoid the bind mount permissions problem that exists in this environment (unless you set <code>"updateRemoteUserUID": false</code>). In the <strong>Docker Compose</strong> case, the container user’s UID/GID will not be updated but you can <a href="#change-the-uidgid-of-an-existing-container-user">manually change these values in a Dockerfile</a>.</p>
+<p>Since this setting only affects VS Code and related sub-processes, VS Code needs to be restarted (or the window reloaded) for it to take effect. However, UID/GID updates are only applied when the container is created and requires a rebuild to change.</p>
+<h3 id="specifying-the-default-container-user">Specifying the default container user</h3>
+<p>In some cases, you may need all processes in the container to run as a different user (for example, due to startup requirements) rather than just VS Code. How you do this varies slightly depending on whether or not you are using Docker Compose.</p>
+<ul>
+<li><p><strong>Dockerfile and image</strong>: Add the <code>containerUser</code> property to this same file.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb29-1" title="1"><span class="er">&quot;containerUser&quot;:</span> <span class="er">&quot;user-name-goes-here&quot;</span></a></code></pre></div>
+<p>On Linux, like <code>remoteUser</code>, this will also automatically update the container user’s UID/GID to match your local user to avoid the bind mount permissions problem that exists in this environment (unless you set <code>"updateRemoteUserUID": false</code>).</p></li>
+<li><p><strong>Docker Compose</strong>: Update (or <a href="/docs/remote/create-dev-container.md#extend-your-docker-compose-file-for-development">extend</a>) your <code>docker-compose.yml</code> with the following for the appropriate service:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb30-1" title="1"><span class="fu">user:</span><span class="at"> user-name-or-UID-goes-here</span></a></code></pre></div></li>
+</ul>
+<h3 id="creating-a-non-root-user">Creating a non-root user</h3>
+<p>While any images or Dockerfiles that come from the Remote - Containers extension will include a non-root user with a UID/GID of 1000 (typically either called <code>vscode</code> or <code>node</code>), many base images and Dockerfiles do not. Fortunately, you can update or create a Dockerfile that adds a non-root user into your container.</p>
+<p>Running your application as a non-root user is recommended even in production (since it is more secure), so this is a good idea even if you’re reusing an existing Dockerfile. For example, this snippet for a Debian/Ubuntu container will create a user called <code>user-name-goes-here</code>, give it the ability to use <code>sudo</code>, and set it as the default:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">ARG</span> USERNAME=user-name-goes-here</a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="kw">ARG</span> USER_UID=1000</a>
+<a class="sourceLine" id="cb31-3" title="3"><span class="kw">ARG</span> USER_GID=$USER_UID</a>
+<a class="sourceLine" id="cb31-4" title="4"></a>
+<a class="sourceLine" id="cb31-5" title="5"><span class="co"># Create the user</span></a>
+<a class="sourceLine" id="cb31-6" title="6"><span class="kw">RUN</span> groupadd --gid $USER_GID $USERNAME \</a>
+<a class="sourceLine" id="cb31-7" title="7">    &amp;&amp; useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \</a>
+<a class="sourceLine" id="cb31-8" title="8">    <span class="co">#</span></a>
+<a class="sourceLine" id="cb31-9" title="9">    <span class="co"># [Optional] Add sudo support. Omit if you don&#39;t need to install software after connecting.</span></a>
+<a class="sourceLine" id="cb31-10" title="10">    &amp;&amp; apt-get update \</a>
+<a class="sourceLine" id="cb31-11" title="11">    &amp;&amp; apt-get install -y sudo \</a>
+<a class="sourceLine" id="cb31-12" title="12">    &amp;&amp; echo $USERNAME ALL=\(root\) NOPASSWD:ALL &gt; /etc/sudoers.d/$USERNAME \</a>
+<a class="sourceLine" id="cb31-13" title="13">    &amp;&amp; chmod 0440 /etc/sudoers.d/$USERNAME</a>
+<a class="sourceLine" id="cb31-14" title="14"></a>
+<a class="sourceLine" id="cb31-15" title="15"><span class="co"># ********************************************************</span></a>
+<a class="sourceLine" id="cb31-16" title="16"><span class="co"># * Anything else you want to do like clean up goes here *</span></a>
+<a class="sourceLine" id="cb31-17" title="17"><span class="co"># ********************************************************</span></a>
+<a class="sourceLine" id="cb31-18" title="18"></a>
+<a class="sourceLine" id="cb31-19" title="19"><span class="co"># [Optional] Set the default user. Omit if you want to keep the default as root.</span></a>
+<a class="sourceLine" id="cb31-20" title="20"><span class="kw">USER</span> $USERNAME</a></code></pre></div>
+<blockquote>
+<p><strong>Tip:</strong> If you hit an error when building about the GID or UID already existing, the image you selected likely already has a non-root user you can take advantage of directly.</p>
+</blockquote>
+<p>In either case, if you’ve already built the container and connected to it, run <strong>Remote-Containers: Rebuild Container</strong> from the Command Palette (<code>kbstyle(F1)</code>) to pick up the change. Otherwise run <strong>Remote-Containers: Open Folder in Container…</strong> to connect to the container.</p>
+<h3 id="change-the-uidgid-of-an-existing-container-user">Change the UID/GID of an existing container user</h3>
+<p>While the <code>remoteUser</code> property tries to automatically update the UID/GID as appropriate on Linux when using a <strong>Dockerfile or image</strong>, you can use this snippet in your Dockerfile to manually change the UID/GID of a user instead. Update the <code>ARG</code> values as appropriate.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">ARG</span> USERNAME=user-name-goes-here</a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="kw">ARG</span> USER_UID=1000</a>
+<a class="sourceLine" id="cb32-3" title="3"><span class="kw">ARG</span> USER_GID=$USER_UID</a>
+<a class="sourceLine" id="cb32-4" title="4"></a>
+<a class="sourceLine" id="cb32-5" title="5"><span class="kw">RUN</span> groupmod --gid $USER_GID $USERNAME \</a>
+<a class="sourceLine" id="cb32-6" title="6">    &amp;&amp; usermod --uid $USER_UID --gid $USER_GID $USERNAME \</a>
+<a class="sourceLine" id="cb32-7" title="7">    &amp;&amp; chown -R $USER_UID:$USER_GID /home/$USERNAME</a></code></pre></div>
+<p>Note that on Alpine Linux, you’ll need to install the <code>shadow</code> package first.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">RUN</span> apk add --no-cache shadow</a></code></pre></div>
+<h2 id="setting-the-project-name-for-docker-compose">Setting the project name for Docker Compose</h2>
+<p>VS Code will respect the value of the <a href="https://docs.docker.com/compose/reference/envvars/#compose_project_name">COMPOSE_PROJECT_NAME</a> environment variable if set for the VS Code process or in a <code>.env</code> file in the root of the project.</p>
+<p>For example, after shutting down all VS Code windows, you can start VS Code from the command line as follows:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb34-1" title="1"><span class="co"># from bash</span></a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="va">COMPOSE_PROJECT_NAME=</span>foo <span class="ex">code</span> .</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode powershell"><code class="sourceCode powershell"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># from PowerShell</span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="va">$env</span>:COMPOSE_PROJECT_NAME=foo</a>
+<a class="sourceLine" id="cb35-3" title="3">code .</a></code></pre></div>
+<p>Or add the following to a <code>.env</code> file in the root of the project (<strong>not</strong> in the <code>.devcontainer</code> folder):</p>
+<pre><code>COMPOSE_PROJECT_NAME=foo</code></pre>
+<h2 id="using-docker-or-kubernetes-from-a-container">Using Docker or Kubernetes from a container</h2>
+<p>While you can build, deploy, and debug your application inside a dev container, you may also need to test it by running it inside a set of production-like containers. Fortunately, by installing the needed Docker or Kubernetes CLIs and mounting your local Docker socket, you can build and deploy your app’s container images from inside your dev container.</p>
+<p>Once the needed CLIs are in place, you can also work with the appropriate container cluster using the <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">Docker</a> extension if you force it to run as a Workspace extension or the <a href="https://marketplace.visualstudio.com/items?itemName=ms-kubernetes-tools.vscode-kubernetes-tools">Kubernetes</a> extension.</p>
+<p>See the following example dev containers definitions for additional information on a specific scenario:</p>
+<ul>
+<li><p><a href="https://aka.ms/vscode-remote/samples/docker-in-docker">Docker-in-Docker</a> - Illustrates how to run Docker (or Moby) entirely inside a container. Provides support for bind mounting all folders inside the development container, but cannot reuse your local machine’s cache.</p></li>
+<li><p><a href="https://aka.ms/vscode-remote/samples/docker-from-docker">Docker-from-Docker</a> - Also known as “Docker-outside-of-Docker”, this illustrates how you can use the Docker (or Moby) CLI in your dev container to connect to your host’s Docker daemon by bind mounting the Docker Unix socket. Lower overhead and can reuse your machine’s cache, but has <a href="#mounting-host-volumes-with-docker-from-inside-a-container">bind mounting limitations</a>.</p></li>
+<li><p><a href="https://aka.ms/vscode-remote/samples/docker-from-docker-compose">Docker-from-Docker Compose</a> - Variation of Docker-from-Docker for situations where you are using Docker Compose instead of a single Dockerfile.</p></li>
+<li><p><a href="https://aka.ms/vscode-remote/samples/kubernetes-helm">Kubernetes-Helm</a> - Takes the Docker-from-Docker model and adds kubectl and Helm to illustrate how you can access a local Minikube or Docker provided Kubernetes cluster.</p></li>
+</ul>
+<h3 id="mounting-host-volumes-with-docker-from-inside-a-container">Mounting host volumes with Docker from inside a container</h3>
+<p>When following the <a href="https://aka.ms/vscode-remote/samples/docker-in-docker">Docker-in-Docker</a> model, using the Docker CLI from inside a dev container will cause it to interact with a Docker daemon running in the same place. This means that you can “bind” mount anything inside the dev container into the “inner” containers you create.</p>
+<p>For example, this will “just work”:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb37-1" title="1"><span class="ex">docker</span> run -v /workspace/examplefile.txt:/incontainer/path debian</a></code></pre></div>
+<p>However, if you wish to bind mount a host folder available into this inner container, you need to <a href="#adding-another-local-file-mount">mount it</a> into your dev container first.</p>
+<p>With <a href="https://aka.ms/vscode-remote/samples/docker-from-docker">Docker-from-Docker</a>, the type of bind mounting that works by default is reversed. Here, the Docker CLI inside the container interacts with the host’s Docker daemon instead. This affects mounting directories from inside the container as the path inside the container may not match the path of the directory on the host.</p>
+<p>The same example above will fail since the path on the host, outside the container isn’t <code>/workspace/...</code>. In addition, some folders simply cannot be mounted because they only exist in the container. If you need to do this, you may find the Docker-in-Docker model fits your needs better.</p>
+<p>If you are opening a folder in a container, you can pass the host directory into the container as an environment variable to allow you to mount the workspace folder. (This does not, however, work if you used a volume - Docker-in-Docker is the best choice there.) To do so, add the following to <code>devcontainer.json</code>:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb38-1" title="1">  <span class="er">&quot;remoteEnv&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb38-2" title="2">    <span class="er">//</span> <span class="er">Pass</span> <span class="er">in</span> <span class="er">the</span> <span class="er">host</span> <span class="er">directory</span> <span class="er">for</span> <span class="er">Docker</span> <span class="er">mount</span> <span class="er">commands</span> <span class="er">from</span> <span class="er">inside</span> <span class="er">the</span> <span class="er">container</span></a>
+<a class="sourceLine" id="cb38-3" title="3">    <span class="dt">&quot;HOST_PROJECT_PATH&quot;</span><span class="fu">:</span> <span class="st">&quot;${localWorkspaceFolder}&quot;</span></a>
+<a class="sourceLine" id="cb38-4" title="4">  <span class="fu">}</span></a></code></pre></div>
+<p>The example below is from a <code>makefile</code> and mounts the <code>KUBECONFIG</code> file from the development container into the new Docker container it starts:</p>
+<pre class="make"><code>docker run -p 8089:8089 -p 9090:9090 -v $(shell echo ${KUBECONFIG} | sed s#/workspace#${HOST_PROJECT_PATH}#):/kubeconfig.json -e KUBECONFIG=/kubeconfig.json ${IMG} -f behaviours/run_submit_locust.py</code></pre>
+<h2 id="connecting-to-multiple-containers-at-once">Connecting to multiple containers at once</h2>
+<p>Currently you can only connect to one container per VS Code window. However, you can spin up multiple VS Code windows to <a href="/docs/remote/attach-container.md">attach to them</a>.</p>
+<p>If you’d prefer to use <code>devcontainer.json</code> instead and are using Docker Compose, you can create separate <code>devcontainer.json</code> files for each service in your source tree that point to a common <code>docker-compose.yml</code>.</p>
+<p>To see how this works, consider this example source tree:</p>
+<pre class="text"><code>📁 project-root
+    📁 .git
+    📁 container1-src
+        📄 .devcontainer.json
+        📄 hello.go
+    📁 container2-src
+        📄 .devcontainer.json
+        📄 hello.js
+    📄 docker-compose.yml</code></pre>
+<p>The location of the <code>.git</code> folder is important, since we will need to ensure the containers can see this path for source control to work properly.</p>
+<p>Next, assume the <code>docker-compose.yml</code> in the root is as follows:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb41-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb41-3" title="3">  <span class="fu">container-1:</span></a>
+<a class="sourceLine" id="cb41-4" title="4">    <span class="fu">image:</span><span class="at"> ubuntu:bionic</span></a>
+<a class="sourceLine" id="cb41-5" title="5">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb41-6" title="6">      <span class="co"># Mount the root folder that contains .git</span></a>
+<a class="sourceLine" id="cb41-7" title="7">      <span class="kw">-</span> .:/workspace:cached</a>
+<a class="sourceLine" id="cb41-8" title="8">    <span class="fu">command:</span><span class="at"> /bin/sh -c &quot;while sleep 1000; do :; done&quot;</span></a>
+<a class="sourceLine" id="cb41-9" title="9">    <span class="fu">links:</span></a>
+<a class="sourceLine" id="cb41-10" title="10">      <span class="kw">-</span> container-2</a>
+<a class="sourceLine" id="cb41-11" title="11">    <span class="co"># ...</span></a>
+<a class="sourceLine" id="cb41-12" title="12"></a>
+<a class="sourceLine" id="cb41-13" title="13">  <span class="fu">container-2:</span></a>
+<a class="sourceLine" id="cb41-14" title="14">    <span class="fu">image:</span><span class="at"> ubuntu:bionic</span></a>
+<a class="sourceLine" id="cb41-15" title="15">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb41-16" title="16">      <span class="co"># Mount the root folder that contains .git</span></a>
+<a class="sourceLine" id="cb41-17" title="17">      <span class="kw">-</span> .:/workspace:cached</a>
+<a class="sourceLine" id="cb41-18" title="18">    <span class="fu">command:</span><span class="at"> /bin/sh -c &quot;while sleep 1000; do :; done&quot;</span></a>
+<a class="sourceLine" id="cb41-19" title="19">    <span class="co"># ...</span></a></code></pre></div>
+<p>You can then set up <code>container1-src/.devcontainer.json</code> for Go development as follows:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb42-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb42-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Container 1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb42-3" title="3">  <span class="dt">&quot;dockerComposeFile&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;../docker-compose.yml&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb42-4" title="4">  <span class="dt">&quot;service&quot;</span><span class="fu">:</span> <span class="st">&quot;container-1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb42-5" title="5">  <span class="dt">&quot;shutdownAction&quot;</span><span class="fu">:</span> <span class="st">&quot;none&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb42-6" title="6">  <span class="dt">&quot;extensions&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;golang.go&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb42-7" title="7">  <span class="er">//</span> <span class="er">Open</span> <span class="er">the</span> <span class="er">sub-folder</span> <span class="er">with</span> <span class="er">the</span> <span class="er">source</span> <span class="er">code</span></a>
+<a class="sourceLine" id="cb42-8" title="8">  <span class="dt">&quot;workspaceFolder&quot;</span><span class="fu">:</span> <span class="st">&quot;/workspace/container1-src&quot;</span></a>
+<a class="sourceLine" id="cb42-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<p>Next, you can set up <code>container2-src/.devcontainer.json</code> for Node.js development by changing <code>workspaceFolder</code> and installing Node.js extensions:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb43-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb43-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Container 2&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb43-3" title="3">  <span class="dt">&quot;dockerComposeFile&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;../docker-compose.yml&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb43-4" title="4">  <span class="dt">&quot;service&quot;</span><span class="fu">:</span> <span class="st">&quot;container-2&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb43-5" title="5">  <span class="dt">&quot;shutdownAction&quot;</span><span class="fu">:</span> <span class="st">&quot;none&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb43-6" title="6">  <span class="dt">&quot;extensions&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;dbaeumer.vscode-eslint&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb43-7" title="7">  <span class="dt">&quot;workspaceFolder&quot;</span><span class="fu">:</span> <span class="st">&quot;/workspace/container2-src&quot;</span></a>
+<a class="sourceLine" id="cb43-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<p>The <code>"shutdownAction":"none"</code> in the <code>devcontainer.json</code> files is optional, but will leave the containers running when VS Code closes – which prevents you from accidentally shutting down both containers by closing one window.</p>
+<p>To connect to both:</p>
+<ol type="1">
+<li>Run <strong>Remote-Containers: Open Folder in Container…</strong> from the Command Palette (<code>kbstyle(F1)</code>) and select the <code>container1-src</code> folder.</li>
+<li>VS Code will then start up both containers, connect this window to service <code>container-1</code>, and install the Go extension.</li>
+<li>Next, start up a new window using <strong>File</strong> &gt; <strong>New Window</strong>.</li>
+<li>In the new window, run <strong>Remote-Containers: Open Folder in Container…</strong> from the Command Palette (<code>kbstyle(F1)</code>) and select the <code>container2-src</code> folder.</li>
+<li>Since the services are already running, VS Code will then connect to <code>container-2</code> and install the ESLint extension.</li>
+</ol>
+<p>You can now interact with both containers at once from separate windows.</p>
+<h3 id="extending-a-docker-compose-file-when-connecting-to-two-containers">Extending a Docker Compose file when connecting to two containers</h3>
+<p>If you want to <a href="/docs/remote/create-dev-container.md#extend-your-docker-compose-file-for-development">extend your Docker Compose file for development</a>, you should use a single <code>docker-compose.yml</code> that extends <strong>both</strong> services (as needed) and is referenced in <strong>both</strong> <code>.devcontainer.json</code> files.</p>
+<p>For example, consider this <code>docker-compose.devcontainer.yml</code> file:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb44-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb44-3" title="3">  <span class="fu">container-1:</span></a>
+<a class="sourceLine" id="cb44-4" title="4">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb44-5" title="5">      <span class="kw">-</span> ~:~/local-home-folder:cached <span class="co"># Additional bind mount</span></a>
+<a class="sourceLine" id="cb44-6" title="6">    <span class="co"># ...</span></a>
+<a class="sourceLine" id="cb44-7" title="7"></a>
+<a class="sourceLine" id="cb44-8" title="8">  <span class="fu">container-2:</span></a>
+<a class="sourceLine" id="cb44-9" title="9">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb44-10" title="10">      <span class="kw">-</span> ~/some-folder:~/some-folder:cached <span class="co"># Additional bind mount</span></a>
+<a class="sourceLine" id="cb44-11" title="11">    <span class="co"># ...</span></a></code></pre></div>
+<p>Both <code>.devcontainer.json</code> files would be updated as follows:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb45-1" title="1"><span class="er">&quot;dockerComposeFile&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb45-2" title="2">  <span class="st">&quot;../docker-compose.yml&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb45-3" title="3">  <span class="st">&quot;../docker-compose.devcontainer.yml&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb45-4" title="4"><span class="ot">]</span></a></code></pre></div>
+<p>This list of compose files is used when starting the containers, so referencing different files in each <code>.devcontainer.json</code> can have unexpected results.</p>
+<h2 id="configure-a-sandbox-for-multiple-projects-or-folders">Configure a sandbox for multiple projects or folders</h2>
+<p>While development containers often are tied to a single folder, repository, or project, they can also be used with multiple folders as a way to simplify setup or sandbox your tools. Imagine you had your source code across multiple repositories in a single folder for a given toolset.</p>
+<p>For example:</p>
+<pre class="text"><code>📁 Repos
+   📁 node
+   📁 python
+      📁 starter-snake-python
+      📁 vscode-remote-try-python
+      📁 your-python-project-here
+   📁 go
+   📁 dotnet</code></pre>
+<p>Let’s set up a container for use with all of the Python projects in the <code>./Repos/python</code> folder.</p>
+<ol type="1">
+<li><p>Start VS Code, select <strong>Remote-Containers: Open Folder in Container…</strong> from the Command Palette (<code>kbstyle(F1)</code>) or quick actions Status bar item, and select the <code>./Repos/python</code> folder.</p>
+<blockquote>
+<p><strong>Tip:</strong> If you want to edit the container’s contents or settings before opening the folder, you can run <strong>Remote-Containers: Add Development Container Configuration Files…</strong> instead.</p>
+</blockquote>
+<figure>
+<img src="images/common/remote-dev-status-bar.png" alt="Quick actions Status bar item" /><figcaption>Quick actions Status bar item</figcaption>
+</figure></li>
+<li><p>Now pick a starting point for your dev container. You can either select a base <strong>dev container definition</strong> from a filterable list, or use an existing <a href="https://docs.docker.com/engine/reference/builder/">Dockerfile</a> or <a href="https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples">Docker Compose file</a> if one exists in the folder you selected.</p>
+<blockquote>
+<p><strong>Note:</strong> When using Alpine Linux containers, some extensions may not work due to <code>glibc</code> dependencies in native code inside the extension.</p>
+</blockquote>
+<figure>
+<img src="images/containers/select-dev-container-def-python.png" alt="Select a python dev container definition" /><figcaption>Select a python dev container definition</figcaption>
+</figure>
+<p>The list will be automatically sorted based on the contents of the folder you open. Note the dev container definitions displayed come from the <a href="https://aka.ms/vscode-dev-containers">vscode-dev-containers repository</a>. You can browse the <code>containers</code> folder of that repository to see the contents of each definition.</p></li>
+<li><p>After picking the starting point for your container, VS Code will add the dev container configuration files to the <code>./Repos/python/.devcontainer</code> folder.</p></li>
+<li><p>The VS Code window will reload and start building the dev container. A progress notification provides status updates. You only have to build a dev container the first time you open it; opening the folder after the first successful build will be much quicker.</p>
+<figure>
+<img src="images/containers/dev-container-progress.png" alt="Dev Container Progress Notification" /><figcaption>Dev Container Progress Notification</figcaption>
+</figure></li>
+<li><p>After the build completes, VS Code will automatically connect to the container. Once connected use <strong>File &gt; Open… / Open Folder…</strong> to select one of the folders under <code>./Repos/python</code>.</p>
+<figure>
+<img src="images/containers/open-folder-python.png" alt="Open python folder in the container" /><figcaption>Open python folder in the container</figcaption>
+</figure></li>
+<li><p>In a moment, VS Code will open the folder inside the same container. In the future, you can use the <strong>Remote Explorer</strong> in the Activity Bar to open this sub-folder in the container directly.</p>
+<figure>
+<img src="images/containers/containers-explorer-python.png" alt="Container explorer with multiple folders under python container" /><figcaption>Container explorer with multiple folders under python container</figcaption>
+</figure></li>
+</ol>
+<blockquote>
+<p><strong>Tip:</strong> Instead of mounting the local filesystem, you can use a similar flow to set up a container with an isolated, more performant volume that you clone your source code into. See the <a href="/docs/remote/containers-advanced.md#use-a-named-volume-for-your-entire-source-tree">Advanced Containers</a> article for details.</p>
+</blockquote>
+<h2 id="developing-inside-a-container-on-a-remote-docker-host">Developing inside a container on a remote Docker host</h2>
+<p>Sometimes you may want to use the Remote - Containers extension to develop inside a container that sits on a remote server. Docker does <strong>not</strong> support mounting (binding) your local filesystem into a remote container, so VS Code’s default <code>devcontainer.json</code> behavior to use your local source code will not work. While this is the default behavior, in this section we will cover connecting to a remote host so that you can either <a href="/docs/remote/attach-container.md">attach to any running container</a>, or use a <strong>local</strong> <code>devcontainer.json</code> file as a way to configure, create, and connect to a remote dev container.</p>
+<p>However, note that the <strong>Docker CLI still needs to be installed locally</strong> (along with the Docker Compose CLI if you are using it).</p>
+<h3 id="a-basic-remote-example">A basic remote example</h3>
+<p>Setting up VS Code to attach to a container on a remote Docker host can be as easy as setting the <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">Docker extension</a> <code>docker.host</code> property in <code>settings.json</code> and restarting VS Code (or reloading the window).</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb47-1" title="1"><span class="er">&quot;docker.host&quot;:&quot;ssh://your-remote-user@your-remote-machine-fqdn-or-ip-here&quot;</span></a></code></pre></div>
+<p>Using SSH requires a <a href="/docs/remote/troubleshooting.md#installing-a-supported-ssh-client">supported SSH client</a>, that you have <a href="/docs/remote/troubleshooting.md#configuring-key-based-authentication">key based authentication</a> configured for the remote host, and that the <strong>key is imported into your local SSH agent</strong>. See the article on <a href="/docs/remote/containers.md#using-ssh-keys">using SSH Keys with Git</a> for details on configuring the agent and adding your key.</p>
+<p>At this point, you can <a href="/docs/remote/attach-container.md">attach</a> to containers on the remote host. We’ll cover more on information on how you can connect using <a href="#connect-using-vs-code-settings-or-local-environment-variables">settings and environment variables</a> or <a href="#connect-using-docker-machine">Docker Machine</a> later in this section.</p>
+<p>For <code>devcontainer.json</code>, there is one additional step: You’ll need to update any configured (or auto-configured) bind mounts so they no longer point to the local filesystem.</p>
+<p>There’s two variations of this setup. The first is to <strong>create your remote dev container first</strong>, and then <strong>clone your source code into a named volume</strong> since this does not require you to have direct access to the filesystem on the remote host.</p>
+<p>Here is a basic <code>devcontainer.json</code> example of this setup:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb48-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb48-2" title="2">  <span class="dt">&quot;image&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span> <span class="er">//</span> <span class="er">Or</span> <span class="dt">&quot;dockerFile&quot;</span></a>
+<a class="sourceLine" id="cb48-3" title="3">  <span class="dt">&quot;workspaceFolder&quot;</span><span class="fu">:</span> <span class="st">&quot;/workspace&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb48-4" title="4">  <span class="dt">&quot;workspaceMount&quot;</span><span class="fu">:</span> <span class="st">&quot;source=remote-workspace,target=/workspace,type=volume&quot;</span></a>
+<a class="sourceLine" id="cb48-5" title="5"><span class="fu">}</span></a></code></pre></div>
+<p>In fact, the <strong>Remote-Containers: Clone Repository in Container Volume…</strong> command in the Command Palette (<code>kbstyle(F1)</code>) uses this same technique. If you already have a <code>devcontainer.json</code> file in a GitHub repository that references an image or Dockerfile, the command will automatically use a named volume instead of a bind mount - which also works with remote hosts.</p>
+<p>The second approach is to <strong>bind mount a folder on the remote machine</strong> into your container. This requires you to have access to the remote filesystem, but also allows you to work with <strong>existing source code</strong> on the remote machine.</p>
+<p>Update the <code>workspaceMount</code> property in the example above to use this model instead:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb49-1" title="1"><span class="er">&quot;workspaceMount&quot;:</span> <span class="er">&quot;source=/absolute/path/on/remote/machine,target=/workspace,type=bind,consistency=cached&quot;</span></a></code></pre></div>
+<p>In either case, to try it out, run <strong>Remote-Containers: Open Folder in Container…</strong>, and select the local folder with the <code>.devcontainer.json</code> file in it.</p>
+<p>See <a href="#converting-an-existing-or-predefined-devcontainerjson">Converting an existing or pre-defined devcontainer.json</a> for information on other scenarios like Docker Compose.</p>
+<h3 id="connect-using-vs-code-settings-or-local-environment-variables">Connect using VS Code settings or local environment variables</h3>
+<p>If you already have a remote Docker host up and running, you can use the following properties in your workspace or user <code>settings.json</code> to specify the host.</p>
+<p><strong>The SSH protocol</strong></p>
+<p>Recent versions of Docker (18.06+) have added support for the SSH protocol to connect to remote Docker Host. This is easy to configure as you only need to set one property in <code>settings.json</code> to use it.</p>
+<p>First, install a <a href="/docs/remote/troubleshooting.md#installing-a-supported-ssh-client">supported SSH client</a>, configure <a href="/docs/remote/troubleshooting.md#configuring-key-based-authentication">key based authentication</a>), and then <strong>import your key into your local SSH agent</strong> (which often is not running by default on Windows and Linux). See the article on <a href="/docs/remote/containers.md#using-ssh-keys">using SSH Keys with Git</a> for details on configuring the agent and adding the key.</p>
+<p>Then, add the following <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">Docker extension</a> <code>docker.host</code> property to <code>settings.json</code> (replacing values as appropriate):</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb50-1" title="1"><span class="er">&quot;docker.host&quot;:&quot;ssh://your-remote-user@your-remote-machine-fqdn-or-ip-here&quot;</span></a></code></pre></div>
+<p>After restarting VS Code (or reloading the window), you will now be able to <a href="/docs/remote/attach-container.md">attach to any running container</a> on the remote host. You can also <a href="#converting-an-existing-or-predefined-devcontainerjson">use specialized, local <code>devcontainer.json</code> files to create / connect to a remote dev container</a>.</p>
+<blockquote>
+<p><strong>Tip:</strong> If this is not working for you but you are able to connect to the host using SSH from the command line, be sure you have the <a href="/docs/remote/containers.md#using-ssh-keys">SSH agent running with your authentication key</a>. If all else fails, you can use <a href="/docs/remote/troubleshooting.md#using-an-ssh-tunnel-to-connect-to-a-remote-docker-host">an SSH tunnel as a fallback</a> instead.</p>
+</blockquote>
+<p><strong>Using the TCP protocol</strong></p>
+<p>While the SSH protocol has its own built-in authorization mechanism, using the TCP protocol often requires setting other <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">Docker extension</a> properties. These are:</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb51-1" title="1"><span class="er">&quot;docker.host&quot;:&quot;tcp://your-remote-machine-fqdn-or-ip-here:port&quot;,</span></a>
+<a class="sourceLine" id="cb51-2" title="2"><span class="er">&quot;docker.certPath&quot;:</span> <span class="er">&quot;/optional/path/to/folder/with/certificate/files&quot;,</span></a>
+<a class="sourceLine" id="cb51-3" title="3"><span class="er">&quot;docker.tlsVerify&quot;:</span> <span class="er">&quot;1&quot;</span> <span class="er">//</span> <span class="er">or</span> <span class="er">&quot;0&quot;</span></a></code></pre></div>
+<p>As with SSH, restart VS Code (or reload the window) for the settings to take effect.</p>
+<p><strong>Using environment variables instead of settings.json</strong></p>
+<p>If you’d prefer not to use <code>settings.json</code>, you can set <strong>environment variables</strong> in a terminal instead. The steps to do so are:</p>
+<ol type="1">
+<li>Shut down <strong>all instances</strong> of VS Code.</li>
+<li>Ensure VS Code is in your operating system <code>PATH</code>.</li>
+<li>Set the environment variables (for example <code>DOCKER_HOST</code>) in a terminal / command prompt.</li>
+<li>Type <code>code</code> in this same terminal / command prompt to launch VS Code with the variables set.</li>
+</ol>
+<h3 id="connect-using-docker-machine">Connect using Docker Machine</h3>
+<p><a href="https://docs.docker.com/machine/">Docker Machine</a> is a CLI that allows you to securely set up remote Docker hosts and connect to them. You should also be aware that drivers like the <a href="https://docs.docker.com/machine/drivers/generic">generic driver</a> shown below will require that any non-root user you specify has <a href="https://serverfault.com/questions/160581/how-to-setup-passwordless-sudo-on-linux">passwordless-sudo</a> privileges.</p>
+<p>Use the following command with the appropriate values to set up Docker on a remote SSH host. Note that you can use alternate <a href="https://docs.docker.com/machine/drivers/">Docker Machine drivers</a> instead if you prefer.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb52-1" title="1"><span class="ex">docker-machine</span> create --driver generic --generic-ip-address your-ip-address-here --generic-ssh-user your-remote-user-here give-it-a-name-here</a></code></pre></div>
+<p>Once you have a machine set up:</p>
+<ol type="1">
+<li>Shut down <strong>all instances</strong> of VS Code.</li>
+<li>Ensure VS Code is in your operating system <code>PATH</code>.</li>
+<li><p>Execute one of the following commands for your OS:</p>
+<p><strong>macOS or Linux</strong>:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb53-1" title="1"><span class="bu">eval</span> <span class="va">$(</span><span class="ex">docker-machine</span> env give-it-a-name-here<span class="va">)</span></a>
+<a class="sourceLine" id="cb53-2" title="2"><span class="ex">code</span></a></code></pre></div>
+<p><strong>Windows PowerShell</strong>:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode powershell"><code class="sourceCode powershell"><a class="sourceLine" id="cb54-1" title="1">docker-machine env give-it-a-name-here | <span class="fu">Invoke-Expression</span></a>
+<a class="sourceLine" id="cb54-2" title="2">code</a></code></pre></div></li>
+</ol>
+<h3 id="converting-an-existing-or-pre-defined-devcontainer.json">Converting an existing or pre-defined devcontainer.json</h3>
+<p>To convert an existing or pre-defined, local <code>devcontainer.json</code> into a remote one, follow these steps:</p>
+<ol type="1">
+<li><p>Open a <strong>local</strong> folder in VS Code (not a remote one) where you want to convert the file.</p></li>
+<li><p>If you did not select a folder with a <code>devcontainer.json</code> in it, you can pick a pre-defined one by running <strong>Remote-Containers: Add Container Configuration File…</strong> from the Command Palette (<code>kbstyle(F1)</code>).</p></li>
+<li><p>Follow these steps based on what your <code>.devcontainer/devcontainer.json</code> or <code>.devcontainer.json</code> references to alter the source code mount:</p>
+<p><strong>Dockerfile or image</strong>:</p>
+<p>If you do <strong>not</strong> have login access to the remote host, use a Docker “volume” for your source code. Update <code>.devcontainer/devcontainer.json</code> as follows (replacing <code>remote-workspace</code> with a unique volume name if desired):</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb55-1" title="1"><span class="er">&quot;workspaceMount&quot;:</span> <span class="er">&quot;source=remote-workspace,target=/workspace,type=volume&quot;</span></a>
+<a class="sourceLine" id="cb55-2" title="2"><span class="er">&quot;workspaceFolder&quot;:</span> <span class="er">&quot;/workspace&quot;,</span></a></code></pre></div>
+<p>If you <strong>do</strong> have login access, you can use a remote filesystem bind mount instead:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb56-1" title="1"><span class="er">&quot;workspaceMount&quot;:</span> <span class="er">&quot;source=/absolute/path/on/remote/machine,target=/workspace,type=bind,consistency=cached&quot;</span></a>
+<a class="sourceLine" id="cb56-2" title="2"><span class="er">&quot;workspaceFolder&quot;:</span> <span class="er">&quot;/workspace&quot;,</span></a></code></pre></div>
+<p>The <code>workspaceMount</code> property supports the same values as the <a href="https://docs.docker.com/engine/reference/commandline/run/#add-bind-mounts-or-volumes-using-the---mount-flag">Docker CLI <code>--mount</code> flag</a> if you have a different scenario in mind.</p>
+<p><strong>Docker Compose</strong>:</p>
+<p>If you do <strong>not</strong> have login access to the remote host, update (or <a href="/docs/remote/create-dev-container.md#extend-your-docker-compose-file-for-development">extend</a>) your <code>docker-compose.yml</code>. Replace <code>your-service-name-here</code> with the value specified for the <code>"service"</code> property in <code>devcontainer.json</code> and appropriate and <code>remote-workspace</code> with a unique volume name:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb57-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb57-3" title="3">  <span class="fu">your-service-name-here:</span></a>
+<a class="sourceLine" id="cb57-4" title="4">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb57-5" title="5">      <span class="kw">-</span> remote-workspace:/workspace</a>
+<a class="sourceLine" id="cb57-6" title="6">    <span class="co"># ...</span></a>
+<a class="sourceLine" id="cb57-7" title="7"></a>
+<a class="sourceLine" id="cb57-8" title="8"><span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb57-9" title="9">  <span class="fu">remote-workspace:</span></a></code></pre></div>
+<p>If you <strong>do</strong> have login access, you can use a remote filesystem bind mount instead:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb58-1" title="1"><span class="fu">version:</span><span class="at"> </span><span class="st">&quot;3&quot;</span></a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="fu">services:</span></a>
+<a class="sourceLine" id="cb58-3" title="3">  <span class="fu">your-service-name-here:</span></a>
+<a class="sourceLine" id="cb58-4" title="4">    <span class="fu">volumes:</span></a>
+<a class="sourceLine" id="cb58-5" title="5">      <span class="kw">-</span> /absolute/path/on/remote/machine:/workspace:cached</a>
+<a class="sourceLine" id="cb58-6" title="6">    <span class="co"># ...</span></a></code></pre></div>
+<p>See the <a href="https://docs.docker.com/compose/compose-file/#volumes">Docker Compose documentation on <code>volumes</code></a> if you need to support a different scenario.</p></li>
+<li><p>Run the <strong>Remote-Containers: Reopen Folder in Container</strong> command from the Command Palette (<code>kbstyle(F1)</code>) or <strong>Remote-Containers: Rebuild Container</strong>.</p></li>
+<li><p>If you used a volume instead of a bind mount, use <code>kb(workbench.action.terminal.new)</code> to open a terminal inside the container. You can run <code>git clone</code> from here to pull down your source code and use <strong>File &gt; Open… / Open Folder…</strong> to open the cloned repository.</p></li>
+</ol>
+<p>Next time you want to connect to this same container, run <strong>Remote-Containers: Open Folder in Container…</strong> and select the same local folder in a VS Code window.</p>
+<h3 id="optional-making-the-remote-source-code-available-locally">[Optional] Making the remote source code available locally</h3>
+<p>If you store your source code on the remote host’s filesystem instead of inside a Docker volume, there are several ways you can access the files locally:</p>
+<ol type="1">
+<li><a href="/docs/remote/troubleshooting.md#using-sshfs-to-access-files-on-your-remote-host">Mount the remote filesystem using SSHFS</a>.</li>
+<li><a href="/docs/remote/troubleshooting.md#using-rsync-to-maintain-a-local-copy-of-your-source-code">Sync files from the remote host to your local machine using <code>rsync</code></a>.</li>
+<li><a href="https://docs.docker.com/machine/reference/mount/">Use the mount command</a> if you are using <a href="https://docs.docker.com/machine/">Docker Machine</a>.</li>
+</ol>
+<p>Using SSHFS or Docker Machine’s mount command are the more convenient options and do not require any file sync’ing. However, performance will be significantly slower than working through VS Code, so they are best used for single file edits and uploading/downloading content. If you need to use an application that bulk reads/write to many files at once (like a local source control tool), rsync is a better choice.</p>
+<h2 id="reducing-dockerfile-build-warnings">Reducing Dockerfile build warnings</h2>
+<p>The following are some tips for eliminating warnings that may be appearing in your Dockerfile builds.</p>
+<h3 id="debconf-delaying-package-configuration-since-apt-utils-is-not-installed">debconf: delaying package configuration, since apt-utils is not installed</h3>
+<p>This error can typically be safely ignored and is tricky to get rid of completely. However, you can reduce it to one message in stdout when installing the needed package by adding the following to your Dockerfile:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb59-1" title="1"><span class="kw">RUN</span> apt-get update \</a>
+<a class="sourceLine" id="cb59-2" title="2">    &amp;&amp; export DEBIAN_FRONTEND=noninteractive \</a>
+<a class="sourceLine" id="cb59-3" title="3">    &amp;&amp; apt-get -y install --no-install-recommends apt-utils dialog 2&gt;&amp;1</a></code></pre></div>
+<h3 id="warning-apt-key-output-should-not-be-parsed-stdout-is-not-a-terminal">Warning: apt-key output should not be parsed (stdout is not a terminal)</h3>
+<p>This non-critical warning tells you not to parse the output of <code>apt-key</code>, so as long as your script doesn’t, there’s no problem. You can safely ignore it.</p>
+<p>This occurs in Dockerfiles because the <code>apt-key</code> command is not running from a terminal. Unfortunately, this error cannot be eliminated completely, but can be hidden unless the <code>apt-key</code> command returns a non-zero exit code (indicating a failure).</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb60-1" title="1"><span class="co"># (OUT=$(apt-key add - 2&gt;&amp;1) || echo $OUT) will only print the output with non-zero exit code is hit</span></a>
+<a class="sourceLine" id="cb60-2" title="2">curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | (OUT=$(apt-key add - 2&gt;&amp;1) || echo $OUT)</a></code></pre></div>
+<p>You can also set the <code>APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE</code> environment variable to suppress the warning, but it looks a bit scary so be sure to add comments in your Dockerfile if you use it:</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb61-1" title="1"><span class="co"># Suppress an apt-key warning about standard out not being a terminal. Use in this script is safe.</span></a>
+<a class="sourceLine" id="cb61-2" title="2"><span class="kw">ENV</span> APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn</a></code></pre></div>
+<h3 id="information-messages-appearing-in-red">Information messages appearing in red</h3>
+<p>Some CLIs output certain information (like debug details) to standard error instead of standard out. These will appear in red in VS Code’s terminal and output logs.</p>
+<p>If the messages are harmless, you can pipe the output of the command from standard error to standard out instead by appending <code>2&gt;&amp;1</code> to the end of the command.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb62-1" title="1"><span class="kw">RUN</span> apt-get -y install --no-install-recommends apt-utils dialog 2&gt;&amp;1</a></code></pre></div>
+<p>If the command fails, you will still be able to see the errors but they won’t be in red.</p>
+<h2 id="questions-or-feedback">Questions or feedback</h2>
+<ul>
+<li>See <a href="/docs/remote/troubleshooting.md#containers-tips">Tips and Tricks</a> or the <a href="/docs/remote/faq.md">FAQ</a>.</li>
+<li>Search on <a href="https://stackoverflow.com/questions/tagged/vscode-remote">Stack Overflow</a>.</li>
+<li>Add a <a href="https://aka.ms/vscode-remote/feature-requests">feature request</a> or <a href="https://aka.ms/vscode-remote/issues/new">report a problem</a>.</li>
+<li>Create a <a href="https://aka.ms/vscode-dev-containers">development container definition</a> for others to use.</li>
+<li>Contribute to <a href="https://github.com/microsoft/vscode-docs">our documentation</a> or <a href="https://github.com/microsoft/vscode">VS Code itself</a>.</li>
+<li>See our <a href="https://aka.ms/vscode-remote/contributing">CONTRIBUTING</a> guide for details.</li>
+</ul>
+</body>
+</html>

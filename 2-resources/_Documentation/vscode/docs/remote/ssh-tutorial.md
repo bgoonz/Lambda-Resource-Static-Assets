@@ -7,6 +7,7 @@ ContentId: beb86509-a36f-4e3b-a32e-b3d8c3966dd7
 MetaDescription: Connect over SSH with Visual Studio Code
 DateApproved: 3/31/2021
 ---
+
 # Remote development over SSH
 
 This tutorial walks you through creating and connecting to a virtual machine (VM) on Azure using the Visual Studio Code [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) extension. You'll create a Node.js Express web app to show how you can edit and debug on a remote machine with VS Code just like you could if the source code was local.
@@ -103,7 +104,7 @@ Before connecting in Remote - SSH, you can verify you're able to connect to your
 
 > Note: If you run into an error `ssh: connect to host <host ip> port 22: Connection timed out`, you may need to delete NRMS-Rule-106 from the Networking tab of your VM:
 
-   ![Virtual machine list of NRMS rules](images/ssh-tutorial/vm-nrms-rules.png)
+![Virtual machine list of NRMS rules](images/ssh-tutorial/vm-nrms-rules.png)
 
 Set the user and hostname in the connection information text box.
 
@@ -243,8 +244,8 @@ Congratulations, you've successfully completed this tutorial!
 
 Next, check out the other Remote Development extensions.
 
-* [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
-* [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+- [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
+- [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
 Or get them all by installing the
 [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) Extension Pack.

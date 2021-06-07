@@ -7,6 +7,7 @@ ContentId: d1187f99-354f-4798-9c19-e432e4ae8572
 MetaDescription: Working with MongoDB in Visual Studio Code
 DateApproved: 3/31/2021
 ---
+
 # Working with MongoDB
 
 Visual Studio Code has great support for working with [MongoDB](https://www.mongodb.com/what-is-mongodb) databases, whether your own instance or in [Azure with MongoDB Atlas](https://www.mongodb.com/cloud/atlas/azure-mongodb?utm_campaign=marketplace&utm_source=&utm_medium=marketplace). With the [MongoDB for VS Code](https://marketplace.visualstudio.com/items?itemName=mongodb.mongodb-vscode) extension, you can create, manage, and query MongoDB databases from within VS Code.
@@ -27,7 +28,7 @@ To connect to a MongoDB database, select **Add Connection** and enter the connec
 
 ![Database Connection setup](images/mongodb/attach-database-account.png)
 
->**Note**: Make sure your MongoDB server (mongod.exe) is running if you are connecting to a local MongoDB server.
+> **Note**: Make sure your MongoDB server (mongod.exe) is running if you are connecting to a local MongoDB server.
 
 Once attached, you can work with the MongoDB server, managing MongoDB Databases, Collections, and Documents.
 
@@ -41,7 +42,7 @@ You can also attach a MongoDB shell to the active connection, simply by right-cl
 
 ![MongoDB Connection](images/mongodb/connection.png)
 
->**Note**: Make sure the MongoDB shell (`mongo` or `mongosh`) [is installed](https://docs.mongodb.com/mongodb-shell/install#mdb-shell-install) and is on your path. In the extension's settings, you can choose which shell you are using.
+> **Note**: Make sure the MongoDB shell (`mongo` or `mongosh`) [is installed](https://docs.mongodb.com/mongodb-shell/install#mdb-shell-install) and is on your path. In the extension's settings, you can choose which shell you are using.
 
 ## MongoDB Commands
 
@@ -71,6 +72,6 @@ Choose **Create a New Cluster** from the dashboard and choose **Azure** as the C
 
 ## Next steps
 
-* [Azure Extensions](/docs/azure/extensions.md) - The VS Code Marketplace has hundreds of extensions for Azure and the cloud.
-* [Deploying to Azure](/docs/azure/deployment.md) - Learn step-by-step how to deploy your application to Azure.
-* [Working with Docker](/docs/azure/docker.md) - Put your application in a Docker container for easy reuse and deployment.
+- [Azure Extensions](/docs/azure/extensions.md) - The VS Code Marketplace has hundreds of extensions for Azure and the cloud.
+- [Deploying to Azure](/docs/azure/deployment.md) - Learn step-by-step how to deploy your application to Azure.
+- [Working with Docker](/docs/azure/docker.md) - Put your application in a Docker container for easy reuse and deployment.

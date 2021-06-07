@@ -7,6 +7,7 @@ PageTitle: Working over SSH with Visual Studio Code
 DateApproved: 10/22/2020
 MetaDescription: Learn to use SSH connections to lab machines with Visual Studio Code
 ---
+
 # Working over SSH
 
 ## What is SSH?

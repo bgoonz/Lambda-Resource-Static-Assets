@@ -7,6 +7,7 @@ PageTitle: Build and run an ASP.NET Core app in a container
 DateApproved: 01/29/2020
 MetaDescription: Develop, build, and debug an ASP.NET Core app in a Docker container, using Visual Studio Code.
 ---
+
 # ASP.NET Core in a container
 
 In this guide you will learn how to:
@@ -40,7 +41,7 @@ In this guide you will learn how to:
 
 1. Use **.NET: ASP.NET Core** when prompted for application platform.
 1. Choose **Windows** or **Linux** when prompted to choose the operating system.
-    > Windows is only applicable if your Docker installation is configured to use Windows containers.
+   > Windows is only applicable if your Docker installation is configured to use Windows containers.
 1. You will be asked if you want to add Docker Compose files. We will not use Docker Compose in this tutorial, so both "Yes" and "No" answers are fine.
 1. Change the port for application endpoint to `5000`.
 1. `Dockerfile` and `.dockerignore` files are added to the workspace.
@@ -52,7 +53,7 @@ In this guide you will learn how to:
 1. Open terminal prompt (`kb(workbench.action.terminal.toggleTerminal)`).
 1. Issue `dotnet build` command to build the application:
 
-   ``` output
+   ```output
    ~/code/scratch/netcorerest$ dotnet build
    Microsoft (R) Build Engine version 16.3.0+0f4c62fea for .NET Core
    Copyright (C) Microsoft Corporation. All rights reserved.
@@ -77,6 +78,7 @@ You can use the Docker extension to author Docker files. The extension provides 
    Note how the Docker extension lists all available Dockerfile instructions and describes the syntax.
 
    > The Docker extension uses the `base` stage of the `Dockerfile` to create a debug version of the container image for your service. Put the `ASPNETCORE_URLS` environment variable definition in the `base` stage to have this variable available in both debug and release versions of the container image.
+
 1. Save the `Dockerfile` file.
 
 ## Build the image
@@ -96,12 +98,37 @@ You can use the Docker extension to author Docker files. The extension provides 
 
    ```jsonc
    [
-       {"date":"2019-11-07T23:31:57.0527092+00:00","temperatureC":4,"temperatureF":39,"summary":"Bracing"},
-       {"date":"2019-11-08T23:31:57.0539243+00:00","temperatureC":-19,"temperatureF":-2,"summary":"Freezing"},
-       {"date":"2019-11-09T23:31:57.0539269+00:00","temperatureC":2,"temperatureF":35,"summary":"Freezing"},
-       {"date":"2019-11-10T23:31:57.0539275+00:00","temperatureC":-4,"temperatureF":25,"summary":"Freezing"},
-       {"date":"2019-11-11T23:31:57.053928+00:00","temperatureC":9,"temperatureF":48,"summary":"Bracing"}
-    ]
+     {
+       "date": "2019-11-07T23:31:57.0527092+00:00",
+       "temperatureC": 4,
+       "temperatureF": 39,
+       "summary": "Bracing"
+     },
+     {
+       "date": "2019-11-08T23:31:57.0539243+00:00",
+       "temperatureC": -19,
+       "temperatureF": -2,
+       "summary": "Freezing"
+     },
+     {
+       "date": "2019-11-09T23:31:57.0539269+00:00",
+       "temperatureC": 2,
+       "temperatureF": 35,
+       "summary": "Freezing"
+     },
+     {
+       "date": "2019-11-10T23:31:57.0539275+00:00",
+       "temperatureC": -4,
+       "temperatureF": 25,
+       "summary": "Freezing"
+     },
+     {
+       "date": "2019-11-11T23:31:57.053928+00:00",
+       "temperatureC": 9,
+       "temperatureF": 48,
+       "summary": "Bracing"
+     }
+   ]
    ```
 
    > By default Docker will assign a randomly chosen **host port** to a port exposed by a container (the **container port**). In our application the exposed (container) port is 5000. When you issue **Run** command for an image, VS Code will try to use the same port number for the host port and container port. This makes it easy to remember which port to use to communicate with the container, but it won't work if the host port is already in use.
@@ -129,20 +156,20 @@ When Docker files were added to the application, the Docker extension also added
 1. Open `.vscode/launch.json` file and find `Docker .NET Core Launch` debug configuration.
 1. Add `dockerServerReadyAction` to `Docker .NET Core Launch` configuration:
 
-    ```json
-    "dockerServerReadyAction": {
-        "uriFormat": "%s://localhost:%s/WeatherForecast"
-    }
-    ```
+   ```json
+   "dockerServerReadyAction": {
+       "uriFormat": "%s://localhost:%s/WeatherForecast"
+   }
+   ```
 
 1. Make sure the configuration is selected as active:
 
-    ![Selected Docker debug configuration](images/quickstarts/aspnetcore-debug-configuration.png)
+   ![Selected Docker debug configuration](images/quickstarts/aspnetcore-debug-configuration.png)
 
 1. Start debugging (`kb(workbench.action.debug.start)`).
-    - The debug version of the service container builds and starts.
-    - The browser opens to request a new weather forecast.
-    - The breakpoint in the `WeatherForecastController` is hit.
+   - The debug version of the service container builds and starts.
+   - The browser opens to request a new weather forecast.
+   - The breakpoint in the `WeatherForecastController` is hit.
 
 You can use specific port on the host by changing the Docker run options used by `docker-run: debug` task (defined in `.vscode/tasks.json` file). For example, if you want to use the same port (5000) to expose the service, the `docker-run: debug` task definition would look like this:
 

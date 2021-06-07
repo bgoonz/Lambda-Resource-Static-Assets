@@ -7,6 +7,7 @@ PageTitle: Visual Studio Code Variables Reference
 DateApproved: 3/31/2021
 MetaDescription: Visual Studio Code variable substitution reference
 ---
+
 # Variables Reference
 
 Visual Studio Code supports variable substitution in [Debugging](/docs/editor/debugging.md) and [Task](/docs/editor/tasks.md) configuration files as well as some select settings. Variable substitution is supported inside some key and value strings in `launch.json` and `tasks.json` files using **${variableName}** syntax.
@@ -56,7 +57,7 @@ So you will have the following values for each variable:
 - **${execPath}** - location of Code.exe
 - **${pathSeparator}** - `/` on macOS or linux, `\\` on Windows
 
->**Tip**: Use IntelliSense inside string values for `tasks.json` and `launch.json` to get a full list of predefined variables.
+> **Tip**: Use IntelliSense inside string values for `tasks.json` and `launch.json` to get a full list of predefined variables.
 
 ### Variables scoped per workspace folder
 
@@ -70,12 +71,12 @@ You can also reference environment variables through the **${env:Name}** syntax 
 
 ```json
 {
-    "type": "node",
-    "request": "launch",
-    "name": "Launch Program",
-    "program": "${workspaceFolder}/app.js",
-    "cwd": "${workspaceFolder}",
-    "args": [ "${env:USERNAME}" ]
+  "type": "node",
+  "request": "launch",
+  "name": "Launch Program",
+  "program": "${workspaceFolder}/app.js",
+  "cwd": "${workspaceFolder}",
+  "args": ["${env:USERNAME}"]
 }
 ```
 
@@ -93,14 +94,14 @@ An example of this functionality is in VS Code's Node.js debugger extension, whi
 
 ```json
 {
-    "configurations": [
-        {
-            "type": "node",
-            "request": "attach",
-            "name": "Attach by Process ID",
-            "processId": "${command:extension.pickNodeProcess}"
-        }
-    ]
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Attach by Process ID",
+      "processId": "${command:extension.pickNodeProcess}"
+    }
+  ]
 }
 ```
 
@@ -114,21 +115,21 @@ The following example shows the overall structure of a `tasks.json` that makes u
 
 ```json
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "task name",
-            "command": "${input:variableID}",
-            // ...
-        }
-    ],
-    "inputs": [
-        {
-            "id": "variableID",
-            "type": "type of input variable",
-            // type specific configuration attributes
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "task name",
+      "command": "${input:variableID}"
+      // ...
+    }
+  ],
+  "inputs": [
+    {
+      "id": "variableID",
+      "type": "type of input variable"
+      // type specific configuration attributes
+    }
+  ]
 }
 ```
 
@@ -149,7 +150,7 @@ Each type requires additional configuration attributes:
 `pickString`:
 
 - **description**: Shown in the quick pick, provides context for the input.
-- **options**:  An array of options for the user to pick from.
+- **options**: An array of options for the user to pick from.
 - **default**: Default value that will be used if the user doesn't enter something else. It must be one of the option values.
 
 `command`:
@@ -161,34 +162,40 @@ Below is an example of a `tasks.json` that illustrates the use of `inputs` using
 
 ```json
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "ng g",
-            "type": "shell",
-            "command": "ng",
-            "args": [
-                "g",
-                "${input:componentType}",
-                "${input:componentName}"
-            ],
-        }
-    ],
-    "inputs": [
-        {
-            "type": "pickString",
-            "id": "componentType",
-            "description": "What type of component do you want to create?",
-            "options": ["component", "directive", "pipe", "service", "class", "guard", "interface", "enum", "enum"],
-            "default": "component"
-        },
-        {
-            "type": "promptString",
-            "id": "componentName",
-            "description": "Name your component.",
-            "default": "my-new-component"
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ng g",
+      "type": "shell",
+      "command": "ng",
+      "args": ["g", "${input:componentType}", "${input:componentName}"]
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "componentType",
+      "description": "What type of component do you want to create?",
+      "options": [
+        "component",
+        "directive",
+        "pipe",
+        "service",
+        "class",
+        "guard",
+        "interface",
+        "enum",
+        "enum"
+      ],
+      "default": "component"
+    },
+    {
+      "type": "promptString",
+      "id": "componentName",
+      "description": "Name your component.",
+      "default": "my-new-component"
+    }
+  ]
 }
 ```
 
@@ -200,24 +207,24 @@ The following example shows how to use a user input variable of type `command` i
 
 ```json
 {
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Run specific test",
-            "program": "${workspaceFolder}/${input:pickTest}"
-        }
-    ],
-    "inputs": [
-        {
-            "id": "pickTest",
-            "type": "command",
-            "command": "extension.mochaSupport.testPicker",
-            "args": {
-                "testFolder": "/out/tests",
-            }
-        }
-    ]
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run specific test",
+      "program": "${workspaceFolder}/${input:pickTest}"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "pickTest",
+      "type": "command",
+      "command": "extension.mochaSupport.testPicker",
+      "args": {
+        "testFolder": "/out/tests"
+      }
+    }
+  ]
 }
 ```
 
@@ -225,23 +232,23 @@ Command inputs can also be used with tasks. In this example, the built-in Termin
 
 ```json
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Terminate All Tasks",
-            "command": "echo ${input:terminate}",
-            "type": "shell",
-            "problemMatcher": []
-        }
-    ],
-     "inputs": [
-        {
-            "id": "terminate",
-            "type": "command",
-            "command": "workbench.action.tasks.terminate",
-            "args": "terminateAll"
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Terminate All Tasks",
+      "command": "echo ${input:terminate}",
+      "type": "shell",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "terminate",
+      "type": "command",
+      "command": "workbench.action.tasks.terminate",
+      "args": "terminateAll"
+    }
+  ]
 }
 ```
 
@@ -280,12 +287,13 @@ One easy way to check a variable's runtime value is to create a VS Code [task](/
 
 ```json
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "echo",
-            "type": "shell",
-            "command": "echo ${workspaceFolder}"
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "echo",
+      "type": "shell",
+      "command": "echo ${workspaceFolder}"
+    }
+  ]
 }
+```

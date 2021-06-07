@@ -7,6 +7,7 @@ ContentId: eceea3f0-feee-47c2-8b65-1f1b0825355b
 MetaDescription: Visual Studio Code Remote Development
 DateApproved: 3/31/2021
 ---
+
 # VS Code Remote Development
 
 **Visual Studio Code Remote Development** allows you to use a container, remote machine, or the [Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl) (WSL) as a full-featured development environment. You can:
@@ -39,12 +40,12 @@ While most VS Code extensions should work unmodified in a remote environment, ex
 
 The tutorials below will walk you through running Visual Studio Code with the Remote Development extensions.
 
-Tutorial | Description
---- | ---
-[Remote via SSH](/docs/remote/ssh-tutorial.md) | Connect to remote and virtual machines with Visual Studio Code via SSH.
-[Work in WSL](/docs/remote/wsl-tutorial.md) | Run Visual Studio Code in Windows Subsystem for Linux.
-[Develop in Containers](/docs/remote/containers-tutorial.md) | Run Visual Studio Code in a Docker Container.
-[GitHub Codespaces](https://docs.github.com/github/developing-online-with-codespaces/using-codespaces-in-visual-studio-code) | Connect to a codespace with Visual Studio Code.
+| Tutorial                                                                                                                     | Description                                                             |
+| ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| [Remote via SSH](/docs/remote/ssh-tutorial.md)                                                                               | Connect to remote and virtual machines with Visual Studio Code via SSH. |
+| [Work in WSL](/docs/remote/wsl-tutorial.md)                                                                                  | Run Visual Studio Code in Windows Subsystem for Linux.                  |
+| [Develop in Containers](/docs/remote/containers-tutorial.md)                                                                 | Run Visual Studio Code in a Docker Container.                           |
+| [GitHub Codespaces](https://docs.github.com/github/developing-online-with-codespaces/using-codespaces-in-visual-studio-code) | Connect to a codespace with Visual Studio Code.                         |
 
 ## GitHub Codespaces
 

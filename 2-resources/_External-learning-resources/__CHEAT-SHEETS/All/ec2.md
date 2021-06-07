@@ -12,14 +12,14 @@ category: Devops
 
     $ brew info ec2-api-tools
 
- * Before you can use these tools you must export some variables to your $SHELL
-   and download your X.509 certificate and private key from Amazon Web Services.
+- Before you can use these tools you must export some variables to your $SHELL
+  and download your X.509 certificate and private key from Amazon Web Services.
 
- * Your certificate and private key are available at
-   [aws-portal.amazon.com](http://aws-portal.amazon.com/gp/aws/developer/account/index.html?action=access-key).
+- Your certificate and private key are available at
+  [aws-portal.amazon.com](http://aws-portal.amazon.com/gp/aws/developer/account/index.html?action=access-key).
 
- * Download two `.pem` files, one starting with `pk-`, and one starting with `cert-`.
-   You need to put both into a folder in your home directory, `~/.ec2`.
+- Download two `.pem` files, one starting with `pk-`, and one starting with `cert-`.
+  You need to put both into a folder in your home directory, `~/.ec2`.
 
 ### Key pair
 
@@ -58,7 +58,7 @@ category: Devops
 
 ### Ubuntu images
 
- * [Ubuntu EC2 AMI locator](http://cloud-images.ubuntu.com/locator/ec2/)
+- [Ubuntu EC2 AMI locator](http://cloud-images.ubuntu.com/locator/ec2/)
 
 ### Change certificates
 

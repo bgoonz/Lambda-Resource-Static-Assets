@@ -73,15 +73,15 @@ npm view express contributors.name contributors.email
 ```
 
 "Person" fields are shown as a string if they would be shown as an
-object.  So, for example, this will show the list of `npm` contributors in
-the shortened string format.  (See [`package.json`](/configuring-npm/package.json) for more on this.)
+object. So, for example, this will show the list of `npm` contributors in
+the shortened string format. (See [`package.json`](/configuring-npm/package.json) for more on this.)
 
 ```bash
 npm view npm contributors
 ```
 
 If a version range is provided, then data will be printed for every
-matching version of the package.  This will show which version of `jsdom`
+matching version of the package. This will show which version of `jsdom`
 was required by each matching version of `yui3`:
 
 ```bash
@@ -111,8 +111,8 @@ the field name.
 
 ### See Also
 
-* [npm search](/commands/npm-search)
-* [npm registry](/using-npm/registry)
-* [npm config](/commands/npm-config)
-* [npmrc](/configuring-npm/npmrc)
-* [npm docs](/commands/npm-docs)
+- [npm search](/commands/npm-search)
+- [npm registry](/using-npm/registry)
+- [npm config](/commands/npm-config)
+- [npmrc](/configuring-npm/npmrc)
+- [npm docs](/commands/npm-docs)

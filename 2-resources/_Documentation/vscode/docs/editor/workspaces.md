@@ -7,16 +7,17 @@ PageTitle: Workspaces in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Learn about Visual Studio Code workspaces
 ---
+
 # What is a VS Code "workspace"?
 
 A Visual Studio Code "workspace" is the collection of one or more folders that are opened in a VS Code window (instance). In most cases, you will have a single folder opened as the workspace but, depending on your development workflow, you can include more than one folder, using an advanced configuration called [Multi-root workspaces](#multiroot-workspaces).
 
 The concept of a workspace enables VS Code to:
 
-* Configure settings that only apply to a specific folder or folders but not others.
-* Persist [task](/docs/editor/tasks.md) and [debugger launch](/docs/editor/debugging.md) configurations that are only valid in the context of that workspace.
-* Store and restore UI state associated with that workspace (for example, the files that are opened).
-* Selectively enable or disable extensions only for that workspace.
+- Configure settings that only apply to a specific folder or folders but not others.
+- Persist [task](/docs/editor/tasks.md) and [debugger launch](/docs/editor/debugging.md) configurations that are only valid in the context of that workspace.
+- Store and restore UI state associated with that workspace (for example, the files that are opened).
+- Selectively enable or disable extensions only for that workspace.
 
 You may see the terms "folder" and "workspace" used interchangeably in VS Code documentation, issues, and community discussions. Think of a workspace as the root of a project that has extra VS Code knowledge and capabilities.
 
@@ -32,7 +33,7 @@ You don't have to do anything for a folder to become a VS Code workspace other t
 
 ![Single-folder workspace](images/workspaces/single-folder-workspace.png)
 
-*A single-folder workspace opened inside VS Code*
+_A single-folder workspace opened inside VS Code_
 
 ## Multi-root workspaces
 
@@ -40,20 +41,20 @@ You don't have to do anything for a folder to become a VS Code workspace other t
 
 ```json
 {
-    "folders": [
-        {
-            "path": "my-folder-a"
-        },
-        {
-            "path": "my-folder-b"
-        }
-    ]
+  "folders": [
+    {
+      "path": "my-folder-a"
+    },
+    {
+      "path": "my-folder-b"
+    }
+  ]
 }
 ```
 
 ![Multi-root workspace](images/workspaces/multi-root-workspace.png)
 
-*A multi-root workspace opened in VS Code*
+_A multi-root workspace opened in VS Code_
 
 > **Note:** The visual difference of having a folder opened versus opening a `.code-workspace` file can be subtle. To give you a hint that a `.code-workspace` file has been opened, some areas of the user interface (for example, the root of the File Explorer) show an extra **(Workspace)** suffix next to the name.
 
@@ -63,7 +64,7 @@ It is easy to add or remove folders in your workspace. You can start off by open
 
 ![Untitled multi-root workspace](images/workspaces/untitled-workspace.png)
 
-*An untitled multi-root workspace opened in VS Code*
+_An untitled multi-root workspace opened in VS Code_
 
 > **Note:** There is really no difference between an untitled workspace and a saved workspace other than the fact that an untitled workspace is automatically created for you for your convenience and will always restore until you save it. We automatically delete untitled workspaces (after asking you for confirmation) when you close a window in which an untitled workspace is opened.
 
@@ -79,7 +80,7 @@ Workspace settings will be stored in `.vscode/settings.json` when you open a fol
 
 ![Single-folder workspace settings](images/workspaces/single-folder-settings.png)
 
-*The Settings editor when a folder is opened as workspace*
+_The Settings editor when a folder is opened as workspace_
 
 ### Multi-root workspace settings
 
@@ -89,7 +90,7 @@ You can still configure settings per root folder and the Settings editor will pr
 
 ![Multi-root settings](images/workspaces/multi-root-settings.png)
 
-*The Settings editor when a multi-root workspace is opened*
+_The Settings editor when a multi-root workspace is opened_
 
 Settings configured per folder will override settings defined in the `.code-workspace`.
 

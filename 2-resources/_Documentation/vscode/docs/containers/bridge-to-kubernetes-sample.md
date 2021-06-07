@@ -5,6 +5,7 @@ PageTitle: Use Bridge to Kubernetes to run and debug locally with Kubernetes
 DateApproved: 10/20/2020
 MetaDescription: Use a todo sample app to learn how to use Bridge to Kubernetes to develop, debug, and test a Kubernetes application locally in Visual Studio Code
 ---
+
 # Use Bridge to Kubernetes with a sample
 
 This sample illustrates how Bridge to Kubernetes can be used to develop a microservice version of a simple TODO application on any Kubernetes cluster. This sample, using Visual Studio Code, has been adapted from code provided by [TodoMVC](http://todomvc.com). In this example, we use MiniKube to host the application, but these steps should work with any Kubernetes cluster.
@@ -41,7 +42,7 @@ minikube start --vm-driver hyperv --hyperv-virtual-switch "Primary Virtual Switc
 
 ## Deploy the application
 
-Clone the [mindaro repo](https://github.com/Microsoft/mindaro) and open a command window with the current working folder to *samples/todo-app*.
+Clone the [mindaro repo](https://github.com/Microsoft/mindaro) and open a command window with the current working folder to _samples/todo-app_.
 
 Create a namespace for the sample.
 
@@ -144,7 +145,7 @@ Notice the traffic that initially started in your cluster was redirected to your
 
 Press play and let the request continue complete transparently.
 
-This is just one example on how to use Bridge to Kubernetes on non-AKS clusters.  Try it on your own project next!
+This is just one example on how to use Bridge to Kubernetes on non-AKS clusters. Try it on your own project next!
 
 ## Clean up
 

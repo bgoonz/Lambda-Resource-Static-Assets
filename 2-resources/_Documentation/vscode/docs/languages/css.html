@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>css</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="css-scss-and-less">CSS, SCSS and Less</h1>
+<p>Visual Studio Code has built-in support for editing style sheets in CSS <code>.css</code>, SCSS <code>.scss</code> and Less <code>.less</code>. In addition, you can install an extension for greater functionality.</p>
+<div class="marketplace-extensions-css-curated">
+
+</div>
+<blockquote>
+<p><strong>Tip:</strong> Click on an extension tile above to read the description and reviews to decide which extension is best for you. See more in the <a href="https://marketplace.visualstudio.com">Marketplace</a>.</p>
+</blockquote>
+<h2 id="intellisense">IntelliSense</h2>
+<p>VS Code has support for selectors, properties and values. Use <code>kb(editor.action.triggerSuggest)</code> to get a list of context specific options.</p>
+<figure>
+<img src="images/css/intellisense.png" alt="IntelliSense in CSS" /><figcaption>IntelliSense in CSS</figcaption>
+</figure>
+<p>Proposals contain extensive documentation, including a list of browsers that support the property. To see the full description text of the selected entry, use <code>kb(toggleSuggestionDetails)</code>.</p>
+<h2 id="syntax-coloring-color-preview">Syntax coloring &amp; color preview</h2>
+<p>As you type, there is syntax highlighting as well as in context preview of colors.</p>
+<figure>
+<img src="images/css/color.png" alt="Syntax and color" /><figcaption>Syntax and color</figcaption>
+</figure>
+<p>Clicking on a color preview will launch the integrated color picker which supports configuration of hue, saturation and opacity.</p>
+<figure>
+<img src="images/css/css-color-picker.png" alt="Color picker in CSS" /><figcaption>Color picker in CSS</figcaption>
+</figure>
+<blockquote>
+<p><strong>Tip:</strong> You can trigger between different color modes by clicking on the color string at the top of the picker.</p>
+</blockquote>
+<p>You can hide VS Code’s color previews by setting the following <a href="/docs/getstarted/settings.md">setting</a>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="er">&quot;editor.colorDecorators&quot;:</span> <span class="er">false</span></a></code></pre></div>
+<p>To just disable it for css, Less and SCSS, use</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="er">&quot;</span><span class="ot">[</span><span class="er">css</span><span class="ot">]</span><span class="er">&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="dt">&quot;editor.colorDecorators&quot;</span><span class="fu">:</span> <span class="kw">false</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="fu">}</span></a></code></pre></div>
+<h2 id="folding">Folding</h2>
+<p>You can fold regions of source code using the folding icons on the gutter between line numbers and line start. Folding regions are available for all declarations (for example, rule declarations) and for multiline comments in the source code.</p>
+<p>Additionally you can use the following region markers to define a folding region: <code>/*#region*/</code> and <code>/*#endregion*/</code> in CSS/SCSS/Less or <code>// #region</code> and <code>// #endregion</code> In SCSS/Less.</p>
+<p>If you prefer to switch to indentation based folding for CSS, Less and SCSS, use:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="er">&quot;</span><span class="ot">[</span><span class="er">css</span><span class="ot">]</span><span class="er">&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="dt">&quot;editor.foldingStrategy&quot;</span><span class="fu">:</span> <span class="st">&quot;indentation&quot;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="fu">}</span><span class="er">,</span></a></code></pre></div>
+<h2 id="emmet-snippets">Emmet snippets</h2>
+<p><a href="/docs/editor/emmet.md">Emmet abbreviation support</a> is built into VS Code, suggestions are listed along with other suggestions and snippets in the editor auto-completion list.</p>
+<blockquote>
+<p><strong>Tip:</strong> See the CSS section of the <a href="https://docs.emmet.io/cheat-sheet">Emmet cheat sheet</a> for valid abbreviations.</p>
+</blockquote>
+<p>VS Code also supports <a href="/docs/editor/userdefinedsnippets.md">User Defined Snippets</a>.</p>
+<h2 id="syntax-verification-linting">Syntax Verification &amp; Linting</h2>
+<p>There is support for CSS version &lt;= 2.1, Sass version &lt;= 3.2 and Less version &lt;= 2.3.</p>
+<blockquote>
+<p><strong>Note:</strong> You can disable VS Code’s default CSS, Sass or Less validation by setting the corresponding <code>.validate</code> User or Workspace <a href="/docs/getstarted/settings.md">setting</a> to false.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="er">&quot;css.validate&quot;:</span> <span class="er">false</span></a></code></pre></div>
+</blockquote>
+<h2 id="go-to-symbol-in-file">Go to Symbol in file</h2>
+<p>You can quickly navigate to the relevant CSS symbol in the current file by pressing <code>kb(workbench.action.gotoSymbol)</code>.</p>
+<h2 id="hovers">Hovers</h2>
+<p>Hovering over a selector or property will provide an HTML snippet that is matched by the CSS rule.</p>
+<figure>
+<img src="images/css/hover.png" alt="Hover in CSS" /><figcaption>Hover in CSS</figcaption>
+</figure>
+<h2 id="go-to-declaration-and-find-references">Go to Declaration and Find References</h2>
+<p>This is supported for Sass and Less variables in the same file. <a href="https://developer.mozilla.org/docs/Web/CSS/Using_CSS_variables">CSS variables</a> per the <a href="https://drafts.csswg.org/css-variables/">draft standards proposal</a> are also supported.</p>
+<p>There is jump to definition for <code>@import</code> and <code>url()</code> links in CSS, SCSS and Less.</p>
+<h2 id="css-custom-data">CSS custom data</h2>
+<p>You can extend VS Code’s CSS support through a declarative <a href="https://github.com/microsoft/vscode-css-languageservice/blob/main/docs/customData.md">custom data format</a>. By setting <code>css.customData</code> to a list of JSON files following the custom data format, you can enhance VS Code’s understanding of new CSS properties, at-directives, pseudo-classes and pesudo-elements. VS Code will then offer language support such as completion &amp; hover information for the provided properties, at-directives, pseudo-classes and pesudo-elements.</p>
+<p>You can read more about using custom data in the <a href="https://github.com/microsoft/vscode-custom-data">vscode-custom-data</a> repository.</p>
+<h2 id="transpiling-sass-and-less-into-css">Transpiling Sass and Less into CSS</h2>
+<p>VS Code can integrate with Sass and Less transpilers through our integrated <a href="/docs/editor/tasks.md">task runner</a>. We can use this to transpile <code>.scss</code> or <code>.less</code> files into <code>.css</code> files. Let’s walk through transpiling a simple Sass/Less file.</p>
+<h3 id="step-1-install-a-sass-or-less-transpiler">Step 1: Install a Sass or Less transpiler</h3>
+<p>For this walkthrough, let’s use either the <a href="https://www.npmjs.com/package/node-sass">node-sass</a> or <a href="https://www.npmjs.com/package/less">less</a> Node.js module.</p>
+<blockquote>
+<p><strong>Note:</strong> If you don’t have <a href="https://nodejs.org">Node.js</a> and the <a href="https://www.npmjs.com/">npm</a> package manager already installed, you’ll need to do so for this walkthrough. <a href="https://nodejs.org/en/download/">Install Node.js for your platform</a>. The Node Package Manager (npm) is included in the Node.js distribution. You’ll need to open a new terminal (command prompt) for <code>npm</code> to be on your PATH.</p>
+</blockquote>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1"><span class="ex">npm</span> install -g node-sass less</a></code></pre></div>
+<h3 id="step-2-create-a-simple-sass-or-less-file">Step 2: Create a simple Sass or Less file</h3>
+<p>Open VS Code on an empty folder and create a <code>styles.scss</code> or <code>styles.less</code> file. Place the following code in that file:</p>
+<pre class="scss"><code>$padding: 6px;
+
+nav {
+  ul {
+    margin: 0;
+    padding: $padding;
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+  }
+
+  a {
+    display: block;
+    padding: $padding 12px;
+    text-decoration: none;
+  }
+}</code></pre>
+<p>For the Less version of the above file, just change <code>$padding</code> to <code>@padding</code>.</p>
+<blockquote>
+<p><strong>Note:</strong> This is a very simple example, which is why the source code is almost identical between both file types. In more advanced scenarios, the syntaxes and constructs will be much different.</p>
+</blockquote>
+<h3 id="step-3-create-tasks.json">Step 3: Create tasks.json</h3>
+<p>The next step is to set up the task configuration. To do this, run <strong>Terminal</strong> &gt; <strong>Configure Tasks</strong> and click <strong>Create tasks.json file from templates</strong>. In the selection dialog that shows up, select <strong>Others</strong>.</p>
+<p>This will create a sample <code>tasks.json</code> file in the workspace <code>.vscode</code> folder. The initial version of file has an example to run an arbitrary command. We will modify that configuration for transpiling Sass/Less instead:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="er">//</span> <span class="er">Sass</span> <span class="er">configuration</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="er">//</span> <span class="er">See</span> <span class="er">https</span><span class="fu">:</span><span class="er">//go.microsoft.com/fwlink/?LinkId=</span><span class="dv">733558</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="er">//</span> <span class="er">for</span> <span class="er">the</span> <span class="er">documentation</span> <span class="er">about</span> <span class="er">the</span> <span class="er">tasks.json</span> <span class="er">format</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="st">&quot;version&quot;</span><span class="er">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb7-7" title="7">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-8" title="8">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;Sass Compile&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-9" title="9">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;shell&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-10" title="10">      <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;node-sass styles.scss styles.css&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-11" title="11">      <span class="dt">&quot;group&quot;</span><span class="fu">:</span> <span class="st">&quot;build&quot;</span></a>
+<a class="sourceLine" id="cb7-12" title="12">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-13" title="13">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" title="1"><span class="er">//</span> <span class="er">Less</span> <span class="er">configuration</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="er">//</span> <span class="er">See</span> <span class="er">https</span><span class="fu">:</span><span class="er">//go.microsoft.com/fwlink/?LinkId=</span><span class="dv">733558</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="er">//</span> <span class="er">for</span> <span class="er">the</span> <span class="er">documentation</span> <span class="er">about</span> <span class="er">the</span> <span class="er">tasks.json</span> <span class="er">format</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="st">&quot;version&quot;</span><span class="er">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-8" title="8">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;Less Compile&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-9" title="9">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;shell&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-10" title="10">      <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;lessc styles.less styles.css&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-11" title="11">      <span class="dt">&quot;group&quot;</span><span class="fu">:</span> <span class="st">&quot;build&quot;</span></a>
+<a class="sourceLine" id="cb8-12" title="12">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb8-13" title="13">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<h3 id="step-4-run-the-build-task">Step 4: Run the Build Task</h3>
+<p>As this is the only command in the file, you can execute it by pressing <code>kb(workbench.action.tasks.build)</code> (<strong>Run Build Task</strong>). The sample Sass/Less file should not have any compile problems, so by running the task all that happens is a corresponding <code>styles.css</code> file is created.</p>
+<p>Since in more complex environments there can be more than one build task we prompt you to pick the task to execute after pressing <code>kb(workbench.action.tasks.build)</code> (<strong>Run Build Task</strong>). In addition, we allow you to scan the output for compile problems (errors and warnings). Depending on the compiler, select an appropriate entry in the list to scan the tool output for errors and warnings. If you don’t want to scan the output, select <strong>Never scan the build output</strong> from the presented list.</p>
+<p>At this point, you should see an additional file show up in the file list <code>styles.css</code>.</p>
+<p>If you want to make the task the default build task to run execute <strong>Configure Default Build Task</strong> from the global <strong>Terminal</strong> menu and select the corresponding <strong>Sass</strong> or <strong>Less</strong> task from the presented list.</p>
+<blockquote>
+<p><strong>Note:</strong> If your build fails or you see an error message such as “An output directory must be specified when compiling a directory”, be sure the filenames in your <code>tasks.json</code> match the filenames on disk. You can always test your build by running <code>node-sass styles.scss styles.css</code> from the command line.</p>
+</blockquote>
+<h2 id="automating-sassless-compilation">Automating Sass/Less compilation</h2>
+<p>Let’s take things a little further and automate Sass/Less compilation with VS Code. We can do so with the same task runner integration as before, but with a few modifications.</p>
+<h3 id="step-1-install-gulp-and-some-plug-ins">Step 1: Install Gulp and some plug-ins</h3>
+<p>We will use <a href="https://gulpjs.com/">Gulp</a> to create a task that will automate Sass/Less compilation. We will also use the <a href="https://www.npmjs.com/package/gulp-sass">gulp-sass</a> plug-in to make things a little easier. The Less plug-in is <a href="https://www.npmjs.com/package/gulp-less">gulp-less</a>.</p>
+<p>We need to install gulp both globally (<code>-g</code> switch) and locally:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="ex">npm</span> install -g gulp</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="ex">npm</span> install gulp gulp-sass gulp-less</a></code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> <code>gulp-sass</code> and <code>gulp-less</code> are Gulp plug-ins for the <code>node-sass</code> and <code>lessc</code> modules we were using before. There are many other Gulp Sass and Less plug-ins you can use, as well as plug-ins for Grunt.</p>
+</blockquote>
+<p>You can test that your gulp installation was successful by typing <code>gulp -v</code>. You should see a version displayed for both the global (CLI) and local installations.</p>
+<h3 id="step-2-create-a-simple-gulp-task">Step 2: Create a simple Gulp task</h3>
+<p>Open VS Code on the same folder from before (contains <code>styles.scss</code>/<code>styles.less</code> and <code>tasks.json</code> under the <code>.vscode</code> folder), and create <code>gulpfile.js</code> at the root.</p>
+<p>Place the following code in the <code>gulpfile.js</code> file:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="co">// Sass configuration</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw">var</span> gulp <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;gulp&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="kw">var</span> sass <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;gulp-sass&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-4" title="4"></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="va">gulp</span>.<span class="at">task</span>(<span class="st">&quot;sass&quot;</span><span class="op">,</span> <span class="kw">function</span> (cb) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-6" title="6">  gulp</a>
+<a class="sourceLine" id="cb10-7" title="7">    .<span class="at">src</span>(<span class="st">&quot;*.scss&quot;</span>)</a>
+<a class="sourceLine" id="cb10-8" title="8">    .<span class="at">pipe</span>(<span class="at">sass</span>())</a>
+<a class="sourceLine" id="cb10-9" title="9">    .<span class="at">pipe</span>(</a>
+<a class="sourceLine" id="cb10-10" title="10">      <span class="va">gulp</span>.<span class="at">dest</span>(<span class="kw">function</span> (f) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-11" title="11">        <span class="cf">return</span> <span class="va">f</span>.<span class="at">base</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-12" title="12">      <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb10-13" title="13">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-14" title="14">  <span class="at">cb</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-15" title="15"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-16" title="16"></a>
+<a class="sourceLine" id="cb10-17" title="17"><span class="va">gulp</span>.<span class="at">task</span>(</a>
+<a class="sourceLine" id="cb10-18" title="18">  <span class="st">&quot;default&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb10-19" title="19">  <span class="va">gulp</span>.<span class="at">series</span>(<span class="st">&quot;sass&quot;</span><span class="op">,</span> <span class="kw">function</span> (cb) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-20" title="20">    <span class="va">gulp</span>.<span class="at">watch</span>(<span class="st">&quot;*.scss&quot;</span><span class="op">,</span> <span class="va">gulp</span>.<span class="at">series</span>(<span class="st">&quot;sass&quot;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-21" title="21">    <span class="at">cb</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb10-22" title="22">  <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb10-23" title="23">)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="co">// Less configuration</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">var</span> gulp <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;gulp&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="kw">var</span> less <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;gulp-less&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="va">gulp</span>.<span class="at">task</span>(<span class="st">&quot;less&quot;</span><span class="op">,</span> <span class="kw">function</span> (cb) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-6" title="6">  gulp</a>
+<a class="sourceLine" id="cb11-7" title="7">    .<span class="at">src</span>(<span class="st">&quot;*.less&quot;</span>)</a>
+<a class="sourceLine" id="cb11-8" title="8">    .<span class="at">pipe</span>(<span class="at">less</span>())</a>
+<a class="sourceLine" id="cb11-9" title="9">    .<span class="at">pipe</span>(</a>
+<a class="sourceLine" id="cb11-10" title="10">      <span class="va">gulp</span>.<span class="at">dest</span>(<span class="kw">function</span> (f) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-11" title="11">        <span class="cf">return</span> <span class="va">f</span>.<span class="at">base</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-12" title="12">      <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb11-13" title="13">    )<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-14" title="14">  <span class="at">cb</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-15" title="15"><span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-16" title="16"></a>
+<a class="sourceLine" id="cb11-17" title="17"><span class="va">gulp</span>.<span class="at">task</span>(</a>
+<a class="sourceLine" id="cb11-18" title="18">  <span class="st">&quot;default&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb11-19" title="19">  <span class="va">gulp</span>.<span class="at">series</span>(<span class="st">&quot;less&quot;</span><span class="op">,</span> <span class="kw">function</span> (cb) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-20" title="20">    <span class="va">gulp</span>.<span class="at">watch</span>(<span class="st">&quot;*.less&quot;</span><span class="op">,</span> <span class="va">gulp</span>.<span class="at">series</span>(<span class="st">&quot;less&quot;</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-21" title="21">    <span class="at">cb</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-22" title="22">  <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb11-23" title="23">)<span class="op">;</span></a></code></pre></div>
+<p>What is happening here?</p>
+<ol type="1">
+<li>Our <code>default</code> gulp task first runs the <code>sass</code> or <code>less</code> task once when it starts up.</li>
+<li>It then watches for changes to any SCSS/Less file at the root of our workspace, for example the current folder open in VS Code.</li>
+<li>It takes the set of SCSS/Less files that have changed and runs them through our respective compiler, for example <code>gulp-sass</code>, <code>gulp-less</code>.</li>
+<li>We now have a set of CSS files, each named respectively after their original SCSS/Less file. We then put these files in the same directory.</li>
+</ol>
+<h3 id="step-3-run-the-gulp-default-task">Step 3: Run the gulp default task</h3>
+<p>To complete the tasks integration with VS Code, we will need to modify the task configuration from before to run the default Gulp task we just created. You can either delete the <code>tasks.json</code> file or empty it only keeping the <code>"version": "2.0.0"</code> property. Now execute <strong>Run Task</strong> from the global <strong>Terminal</strong> menu. Observe that you are presented with a picker listing the tasks defined in the gulp file. Select <strong>gulp: default</strong> to start the task. We allow you to scan the output for compile problems. Depending on the compiler, select an appropriate entry in the list to scan the tool output for errors and warnings. If you don’t want to scan the output, select <strong>Never scan the build output</strong> from the presented list. At this point, if you create and/or modify Less or SASS files, you see the respective CSS files generated and/or changes reflected on save. You can also enable <a href="/docs/editor/codebasics.md#saveauto-save">Auto Save</a> to make things even more streamlined.</p>
+<p>If you want to make the <strong>gulp: default</strong> task the default build task executed when pressing <code>kb(workbench.action.tasks.build)</code> run <strong>Configure Default Build Task</strong> from the global <strong>Terminal</strong> menu and select <strong>gulp: default</strong> from the presented list.</p>
+<h3 id="step-4-terminate-the-gulp-default-task">Step 4: Terminate the gulp default Task</h3>
+<p>The <strong>gulp: default</strong> task runs in the background and watches for file changes to Sass/Less files. If you want to stop the task, you can use the <strong>Terminate Task</strong> from the global <strong>Terminal</strong> menu.</p>
+<h2 id="customizing-css-scss-and-less-settings">Customizing CSS, SCSS and Less Settings</h2>
+<p>You can configure the following lint warnings as <a href="/docs/getstarted/settings.md">User and Workspace Settings</a>.</p>
+<p>The <code>validate</code> setting allows you turn off the built-in validation. You would do this if you rather use a different linter.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Id</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>css.validate</td>
+<td>Enables or disables all css validations</td>
+<td>true</td>
+</tr>
+<tr class="even">
+<td>less.validate</td>
+<td>Enables or disables all less validations</td>
+<td>true</td>
+</tr>
+<tr class="odd">
+<td>scss.validate</td>
+<td>Enables or disables all scss validations</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+<p>To configure an option for CSS, use <code>css.lint.</code> as the prefix to the id; for SCSS and Less, use <code>scss.lint.</code> and <code>less.lint.</code>.</p>
+<p>Set a setting to <code>warning</code> or <code>error</code> if you want to enable lint checking, use <code>ignore</code> to disable it. Lint checks are performed as you type.</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 84%" />
+<col style="width: 2%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Id</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>validate</td>
+<td>Enables or disables all validations</td>
+<td>true</td>
+</tr>
+<tr class="even">
+<td>compatibleVendorPrefixes</td>
+<td>When using a property with a vendor-specific prefix (for example <code>-webkit-transition</code>), make sure to also include all other vendor-specific properties e.g. <code>-moz-transition</code>, <code>-ms-transition</code> and <code>-o-transition</code></td>
+<td>ignore</td>
+</tr>
+<tr class="odd">
+<td>vendorPrefix</td>
+<td>When using a property with a vendor-specific prefix for example <code>-webkit-transition</code>, make sure to also include the standard property if it exists e.g. <code>transition</code></td>
+<td>warning</td>
+</tr>
+<tr class="even">
+<td>duplicateProperties</td>
+<td>Warn about duplicate properties in the same ruleset</td>
+<td>ignore</td>
+</tr>
+<tr class="odd">
+<td>emptyRules</td>
+<td>Warn about empty rulesets</td>
+<td>warning</td>
+</tr>
+<tr class="even">
+<td>importStatement</td>
+<td>Warn about using an <code>import</code> statement as import statements are loaded sequentially which has a negative impact on web page performance</td>
+<td>ignore</td>
+</tr>
+<tr class="odd">
+<td>boxModel</td>
+<td>Do not use <code>width</code> or <code>height</code> when using <code>padding</code> or <code>border</code></td>
+<td>ignore</td>
+</tr>
+<tr class="even">
+<td>universalSelector</td>
+<td>Warn when using the universal selector <code>*</code> as it is known to be slow and should be avoided</td>
+<td>ignore</td>
+</tr>
+<tr class="odd">
+<td>zeroUnits</td>
+<td>Warn when having zero with a unit e.g. <code>0em</code> as zero does not need a unit.</td>
+<td>ignore</td>
+</tr>
+<tr class="even">
+<td>fontFaceProperties</td>
+<td>Warn when using <code>@font-face</code> rule without defining a <code>src</code> and <code>font-family</code> property</td>
+<td>warning</td>
+</tr>
+<tr class="odd">
+<td>hexColorLength</td>
+<td>Warn when using hex numbers that don’t consist of three or six hex numbers</td>
+<td>error</td>
+</tr>
+<tr class="even">
+<td>argumentsInColorFunction</td>
+<td>Warn when an invalid number of parameters in color functions e.g. <code>rgb</code></td>
+<td>error</td>
+</tr>
+<tr class="odd">
+<td>unknownProperties</td>
+<td>Warn when using an unknown property</td>
+<td>warning</td>
+</tr>
+<tr class="even">
+<td>ieHack</td>
+<td>Warn when using an IE hack <code>*propertyName</code> or <code>_propertyName</code></td>
+<td>ignore</td>
+</tr>
+<tr class="odd">
+<td>unknownVendorSpecificProperties</td>
+<td>Warn when using an unknown vendor-specific property</td>
+<td>ignore</td>
+</tr>
+<tr class="even">
+<td>propertyIgnoredDueToDisplay</td>
+<td>Warn when using a property that is ignored due to the display. For example, with <code>display: inline</code>, the <code>width</code>, <code>height</code>, <code>margin-top</code>, <code>margin-bottom</code>, and <code>float</code> properties have no effect.</td>
+<td>warning</td>
+</tr>
+<tr class="odd">
+<td>important</td>
+<td>Warn when using <code>!important</code> as it is an indication that the specificity of the entire CSS has gotten out of control and needs to be refactored.</td>
+<td>ignore</td>
+</tr>
+<tr class="even">
+<td>float</td>
+<td>Warn when using <code>float</code> as floats lead to fragile CSS that is easy to break if one aspect of the layout changes.</td>
+<td>ignore</td>
+</tr>
+<tr class="odd">
+<td>idSelector</td>
+<td>Warn when using selectors for an id <code>#id</code> as selectors should not contain IDs because these rules are too tightly coupled with the HTML.</td>
+<td>ignore</td>
+</tr>
+</tbody>
+</table>
+<h2 id="next-steps">Next steps</h2>
+<p>Read on to find out about:</p>
+<ul>
+<li><a href="/docs/editor/tasks.md">Configure Tasks</a> - Dig into Tasks to help you transpile your SCSS and Less to CSS.</li>
+<li><a href="/docs/editor/codebasics.md">Basic Editing</a> - Learn about the powerful VS Code editor.</li>
+<li><a href="/docs/editor/editingevolved.md">Code Navigation</a> - Move quickly through your source code.</li>
+<li><a href="/docs/languages/html.md">HTML</a> - CSS is just the start, HTML is also very well supported in VS Code.</li>
+</ul>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="does-vs-code-provide-a-color-picker">Does VS Code provide a color picker?</h3>
+<p>Yes, color picker has been added in version <a href="https://code.visualstudio.com/updates/v1_15#_color-picker">1.15</a>.</p>
+<h3 id="is-there-support-for-the-indentation-based-sass-syntax-.sass">Is there support for the indentation based Sass syntax (.sass)?</h3>
+<p>No, but there are several extensions in the Marketplace supporting the indented flavor of Sass, for example, the <a href="https://marketplace.visualstudio.com/items?itemName=Syler.sass-indented">Sass</a> extension originally created by Robin Bentley, now maintained by Leonard Grosoli.</p>
+</body>
+</html>

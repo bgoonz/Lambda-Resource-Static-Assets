@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>devcontainerjson-reference</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="devcontainer.json-reference">devcontainer.json reference</h1>
+<p>A <code>devcontainer.json</code> file in your project tells Visual Studio Code how to access (or create) a <strong>development container</strong> with a well-defined tool and runtime stack. This container can be used to run an application or to sandbox tools, libraries, or runtimes needed for working with a codebase. It can be used with the <a href="https://aka.ms/vscode-remote/download/containers">Remote - Containers</a> extension or <a href="https://github.com/features/codespaces">GitHub Codespaces</a>.</p>
+<p>See <a href="/docs/remote/create-dev-container.md#set-up-a-folder-to-run-in-a-container">Set up a folder to run in a container</a> for more information on configuring a dev container or use the <strong>Remote-Containers: Add Development Container Configuration Files…</strong> or <strong>Codespaces: Add DevelopmentContainer Configuration Files…</strong> commands from the Command Pallette (<code>kbstyle(F1)</code>) to add a wide variety of base configurations from the <a href="https://github.com/microsoft/vscode-dev-containers/tree/master/containers">vscode-dev-containers repository</a>.</p>
+<h2 id="devcontainer.json-properties">devcontainer.json properties</h2>
+<p>While some devcontainer.json properties apply generally, others are only used in specific scenarios. The following table will outline the properties that apply in each situation.</p>
+<table>
+<colgroup>
+<col style="width: 3%" />
+<col style="width: 3%" />
+<col style="width: 93%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Dockerfile or image</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>image</code></td>
+<td>string</td>
+<td><strong>Required</strong> when <a href="/docs/remote/create-dev-container.md#using-an-image-or-dockerfile">using an image</a>. The name of an image in a container registry (<a href="https://hub.docker.com">DockerHub</a>, <a href="https://docs.github.com/en/packages/guides/about-github-container-registry">Github Container Registry</a>, <a href="https://azure.microsoft.com/services/container-registry/">Azure Container Registry</a>) that VS Code should use to create the dev container.</td>
+</tr>
+<tr class="odd">
+<td><code>build.dockerfile</code> / <code>dockerFile</code></td>
+<td>string</td>
+<td><strong>Required</strong> when <a href="/docs/remote/create-dev-container.md#using-an-image-or-dockerfile">using a Dockerfile</a>. The location of a <a href="https://docs.docker.com/engine/reference/builder/">Dockerfile</a> that defines the contents of the container. The path is relative to the <code>devcontainer.json</code> file. You can find a number of sample Dockerfiles for different runtimes in the <a href="https://github.com/microsoft/vscode-dev-containers/tree/master/containers">vscode-dev-containers repository</a>.</td>
+</tr>
+<tr class="even">
+<td><code>build.context</code> / <code>context</code></td>
+<td>string</td>
+<td>Path that the Docker build should be run from relative to <code>devcontainer.json</code>. For example, a value of <code>".."</code> would allow you to reference content in sibling directories. Defaults to <code>"."</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>build.args</code></td>
+<td>Object</td>
+<td>A set of name-value pairs containing <a href="https://docs.docker.com/engine/reference/commandline/build/#set-build-time-variables---build-arg">Docker image build arguments</a> that should be passed when building a Dockerfile. Environment and <a href="#variables-in-devcontainerjson">pre-defined variables</a> may be referenced in the values. Defaults to not set. For example: <code>"build": { "args": { "MYARG": "MYVALUE", "MYARGFROMENVVAR": "${localEnv:VARIABLE_NAME}" } }</code></td>
+</tr>
+<tr class="even">
+<td><code>build.target</code></td>
+<td>string</td>
+<td>A string that specifies a <a href="https://docs.docker.com/engine/reference/commandline/build/#specifying-target-build-stage---target">Docker image build target</a> that should be passed when building a Dockerfile. Defaults to not set. For example: <code>"build": { "target": "development" }</code></td>
+</tr>
+<tr class="odd">
+<td><code>appPort</code></td>
+<td>integer,<br>string,<br>array</td>
+<td>In most cases, we recommend using the new <a href="/docs/remote/containers.md#always-forwarding-a-port">forwardPorts property</a>. This property accepts a port or array of ports that should be <a href="/docs/remote/containers.md#publishing-a-port">published</a> locally when the container is running. Unlike <code>forwardPorts</code>, your application may need to listen on all interfaces (<code>0.0.0.0</code>) not just <code>localhost</code> for it to be available externally. Defaults to <code>[]</code>.</td>
+</tr>
+<tr class="even">
+<td><code>containerEnv</code></td>
+<td>object</td>
+<td>A set of name-value pairs that sets or overrides environment variables for the container. Environment and <a href="#variables-in-devcontainerjson">pre-defined variables</a> may be referenced in the values. For example:<br/> <code>"containerEnv": { "MY_VARIABLE": "${localEnv:MY_VARIABLE}" }</code><br /> Requires the container be recreated / rebuilt to change.</td>
+</tr>
+<tr class="odd">
+<td><code>remoteEnv</code></td>
+<td>object</td>
+<td>A set of name-value pairs that sets or overrides environment variables for VS Code (or sub-processes like terminals) but not the container as a whole. Environment and <a href="#variables-in-devcontainerjson">pre-defined variables</a> may be referenced in the values. Be sure <strong>Terminal &gt; Integrated: Inherit Env</strong> is is checked in settings or the variables will not appear in the terminal. For example: <br /><code>"remoteEnv": { "PATH": "${containerEnv:PATH}:/some/other/path", "MY_VARIABLE": "${localEnv:MY_VARIABLE}" }</code><br />Updates are applied when VS Code is restarted (or the window is reloaded).</td>
+</tr>
+<tr class="even">
+<td><code>containerUser</code></td>
+<td>string</td>
+<td>Overrides the user all operations run as inside the container. Defaults to either <code>root</code> or the last <code>USER</code> instruction in the related Dockerfile used to create the image.<br>On Linux, the specified container user’s UID/GID will be updated to match the local user’s UID/GID to avoid permission problems with bind mounts (unless disabled using <code>updateRemoteUserUID</code>).<br>Requires the container be recreated / rebuilt for updates to take effect.</td>
+</tr>
+<tr class="odd">
+<td><code>remoteUser</code></td>
+<td>string</td>
+<td>Overrides the user that VS Code runs as in the container (along with sub-processes like terminals, tasks, or debugging). Defaults to the <code>containerUser</code>.<br>On Linux, the specified container user’s UID/GID will be updated to match the local user’s UID/GID to avoid permission problems with bind mounts (unless disabled using <code>updateRemoteUserUID</code>).<br>Updates are applied when VS Code is restarted (or the window is reloaded), but UID/GID updates are only applied when the container is created and requires a rebuild to change.</td>
+</tr>
+<tr class="even">
+<td><code>updateRemoteUserUID</code></td>
+<td>boolean</td>
+<td>On Linux, if <code>containerUser</code> or <code>remoteUser</code> is specified, the container user’s UID/GID will be updated to match the local user’s UID/GID to avoid permission problems with bind mounts. Defaults to <code>true</code>.<br>Requires the container be recreated / rebuilt for updates to take effect.</td>
+</tr>
+<tr class="odd">
+<td><code>mounts</code></td>
+<td>array</td>
+<td>An array of additional mount points to add to the container when created. Each value is a string that accepts the same values as the <a href="https://docs.docker.com/engine/reference/commandline/run/#add-bind-mounts-or-volumes-using-the---mount-flag">Docker CLI <code>--mount</code> flag</a>. Environment and <a href="#variables-in-devcontainerjson">pre-defined variables</a> may be referenced in the value. For example:<br /><code>"mounts": ["source=${localWorkspaceFolder}/app-scripts,target=/usr/local/share/app-scripts,type=bind,consistency=cached"]</code> <br /><br />⚠️ Codespaces ignores “bind” mounts with the exception of the Docker socket.</td>
+</tr>
+<tr class="even">
+<td><code>workspaceMount</code></td>
+<td>string</td>
+<td>Overrides the default local mount point for the workspace when the container is created. Supports the same values as the <a href="https://docs.docker.com/engine/reference/commandline/run/#add-bind-mounts-or-volumes-using-the---mount-flag">Docker CLI <code>--mount</code> flag</a>. Primarily useful for <a href="/docs/remote/containers-advanced.md#developing-inside-a-container-on-a-remote-docker-host">configuring remote containers</a> or <a href="/docs/remote/containers-advanced.md#improving-container-disk-performance">improving disk performance</a>. Environment and <a href="#variables-in-devcontainerjson">pre-defined variables</a> may be referenced in the value. For example: <br /><code>"workspaceMount": "source=${localWorkspaceFolder}/sub-folder,target=/workspace,type=bind,consistency=cached"</code><br /><br />⚠️ Not yet supported in Codespaces or when using Clone Repository in Container Volume.</td>
+</tr>
+<tr class="odd">
+<td><code>workspaceFolder</code></td>
+<td>string</td>
+<td>Sets the default path that VS Code should open when connecting to the container. Typically used in conjunction with <code>workspaceMount</code>. Defaults to the automatic source code mount location.<br /><br />⚠️ Only supported for Docker Compose in Codespaces and when using Clone Repository in Container Volume.</td>
+</tr>
+<tr class="even">
+<td><code>runArgs</code></td>
+<td>array</td>
+<td>An array of <a href="https://docs.docker.com/engine/reference/commandline/run/">Docker CLI arguments</a> that should be used when running the container. Defaults to <code>[]</code>. For example, this allows ptrace based debuggers like C++ to work in the container:<br /> <code>"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ]</code> .</td>
+</tr>
+<tr class="odd">
+<td><code>overrideCommand</code></td>
+<td>boolean</td>
+<td>Tells VS Code whether it should run <code>/bin/sh -c "while sleep 1000; do :; done"</code> when starting the container instead of the container’s default command. Defaults to <code>true</code> since the container can shut down if the default command fails. Set to <code>false</code> if the default command must run for the container to function properly.</td>
+</tr>
+<tr class="even">
+<td><code>shutdownAction</code></td>
+<td>enum</td>
+<td>Indicates whether VS Code should stop the container when the VS Code window is closed / shut down.<br>Values are <code>none</code> and <code>stopContainer</code> (default). <br /><br /> ⚠️ Does not apply to Codespaces.</td>
+</tr>
+<tr class="odd">
+<td><strong>Docker Compose</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>dockerComposeFile</code></td>
+<td>string,<br>array</td>
+<td><strong>Required.</strong> Path or an ordered list of paths to Docker Compose files relative to the <code>devcontainer.json</code> file. Using an array is useful <a href="/docs/remote/create-dev-container.md#extend-your-docker-compose-file-for-development">when extending your Docker Compose configuration</a>. The order of the array matters since the contents of later files can override values set in previous ones.<br>The default <code>.env</code> file is picked up from the root of the project, but you can use <code>env_file</code> in your Docker Compose file to specify an alternate location.</td>
+</tr>
+<tr class="odd">
+<td><code>service</code></td>
+<td>string</td>
+<td><strong>Required.</strong> The name of the service VS Code should connect to once running.</td>
+</tr>
+<tr class="even">
+<td><code>runServices</code></td>
+<td>array</td>
+<td>An array of services in your Docker Compose configuration that should be started by VS Code. These will also be stopped when you disconnect unless <code>"shutdownAction"</code> is <code>"none"</code>. Defaults to all services.</td>
+</tr>
+<tr class="odd">
+<td><code>workspaceFolder</code></td>
+<td>string</td>
+<td>Sets the default path that VS Code should open when connecting to the container (which is often the path to a volume mount where the source code can be found in the container). Defaults to <code>"/"</code>.</td>
+</tr>
+<tr class="even">
+<td><code>remoteEnv</code></td>
+<td>object</td>
+<td>A set of name-value pairs that sets or overrides environment variables for VS Code (or sub-processes like terminals) but not the container as a whole. Environment and <a href="#variables-in-devcontainerjson">pre-defined variables</a> may be referenced in the values. Be sure <strong>Terminal &gt; Integrated: Inherit Env</strong> is is checked in settings or the variables will not appear in the terminal. For example: <br /><code>"remoteEnv": { "PATH": "${containerEnv:PATH}:/some/other/path", "MY_VARIABLE": "${localEnv:MY_VARIABLE}" }</code><br />Updates are applied when VS Code is restarted (or the window is reloaded)</td>
+</tr>
+<tr class="odd">
+<td><code>remoteUser</code></td>
+<td>string</td>
+<td>Overrides the user that VS Code runs as in the container (along with sub-processes like terminals, tasks, or debugging). Does not change the user the container as a whole runs as (which can be <a href="https://docs.docker.com/compose/compose-file/#domainname-hostname-ipc-mac_address-privileged-read_only-shm_size-stdin_open-tty-user-working_dir">set in your Docker Compose file</a>). Defaults to the user the container as a whole is running as (often <code>root</code>).<br>Updates are applied when VS Code is restarted (or the window is reloaded).</td>
+</tr>
+<tr class="even">
+<td><code>shutdownAction</code></td>
+<td>enum</td>
+<td>Indicates whether VS Code should stop the containers when the VS Code window is closed / shut down.<br>Values are <code>none</code> and <code>stopCompose</code> (default).<br /><br /> ⚠️ Does not apply to Codespaces.</td>
+</tr>
+<tr class="odd">
+<td><strong>General</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>name</code></td>
+<td>string</td>
+<td>A display name for the container.</td>
+</tr>
+<tr class="odd">
+<td><code>extensions</code></td>
+<td>array</td>
+<td>An array of extension IDs that specify the extensions that should be installed inside the container when it is created. Defaults to <code>[]</code>.</td>
+</tr>
+<tr class="even">
+<td><code>settings</code></td>
+<td>object</td>
+<td>Adds default <code>settings.json</code> values into a container/machine specific settings file.</td>
+</tr>
+<tr class="odd">
+<td><code>forwardPorts</code></td>
+<td>array</td>
+<td>An array of ports that should be forwarded from inside the container to the local machine.</td>
+</tr>
+<tr class="even">
+<td><code>portsAttributes</code></td>
+<td>object</td>
+<td>Sets default properties for specific forwarded ports. Can use a port number, range, or a regular expression.</td>
+</tr>
+<tr class="odd">
+<td><code>otherPortsAttributes</code></td>
+<td>object</td>
+<td>Configure the behavior of any ports that aren’t configured using <code>portsAttributes</code>.</td>
+</tr>
+<tr class="even">
+<td><code>postCreateCommand</code></td>
+<td>string,<br>array</td>
+<td>A command string or list of command arguments to run <strong>inside</strong> the container after is created. The commands execute from the <code>workspaceFolder</code> in the container. Use <code>&amp;&amp;</code> in a string to execute multiple commands. For example, <code>"yarn install"</code> or <code>"apt-get update &amp;&amp; apt-get install -y curl"</code>. The array syntax <code>["yarn", "install"]</code> will invoke the command (in this case <code>yarn</code>) directly without using a shell. <br />It fires after your source code has been mounted, so you can also run shell scripts from your source tree. For example: <code>bash scripts/install-dev-tools.sh</code>. Not set by default.</td>
+</tr>
+<tr class="odd">
+<td><code>postStartCommand</code></td>
+<td>string,<br>array</td>
+<td>A command string or list of command arguments to run when the container starts (in all cases). The parameters behave exactly like <code>postCreateCommand</code>, but the commands execute on start rather than create. Not set by default.</td>
+</tr>
+<tr class="even">
+<td><code>postAttachCommand</code></td>
+<td>string,<br>array</td>
+<td>A command string or list of command arguments to run after VS Code has attached to a running container (in all cases). The parameters behave exactly like <code>postCreateCommand</code>, but the commands execute on attach rather than create. Not set by default.</td>
+</tr>
+<tr class="odd">
+<td><code>initializeCommand</code></td>
+<td>string,<br>array</td>
+<td>A command string or list of command arguments to run on the <strong>host machine</strong> before the container is created. The command executes from the <code>workspaceFolder</code> locally. The array syntax <code>["yarn", "install"]</code> will invoke the command (in this case <code>yarn</code>) directly without using a shell, but <strong>supports Windows/macOS/Linux path translation</strong>. The string syntax (<code>"yarn install"</code>) is better for simple commands.<br /><br /> ⚠️ The command is run wherever the source code is located on the host. For Codespaces, this is in the cloud.</td>
+</tr>
+<tr class="even">
+<td><code>userEnvProbe</code></td>
+<td>enum</td>
+<td>Indicates the type of shell VS Code should use to “probe” for user environment variables to use by default while debugging or running a task: <code>none</code> (default), <code>interactiveShell</code>, <code>loginShell</code>, or <code>loginInteractiveShell</code>. Interactive shells will typically include variables set in <code>/etc/bash.bashrc</code> and <code>.bashrc</code> while login shells usually include variables from these “rc” files, <code>/etc/profile</code>, and <code>.profile</code>. The default is <code>none</code>, since the other modes can slow startup.</td>
+</tr>
+<tr class="odd">
+<td><code>devPort</code></td>
+<td>integer</td>
+<td>Allows you to force a specific port that the VS Code Server should use in the container. Defaults to a random, available port.</td>
+</tr>
+</tbody>
+</table>
+<p>If you’ve already built the container and connected to it, be sure to run <strong>Remote-Containers: Rebuild Container</strong> or <strong>Codespaces: Rebuild Container</strong> from the Command Palette (<code>kbstyle(F1)</code>) to pick up the change.</p>
+<h3 id="formatting-string-vs.-array-properties">Formatting string vs. array properties</h3>
+<p>The format of certain properties will vary depending on the involvement of a shell.</p>
+<p><code>postCreateCommand</code>, <code>postStartCommand</code>, <code>postAttachCommand</code>, and <code>initializeCommand</code> all have an array and a string type, while <code>runArgs</code> only has the array type. An array is passed to the OS for execution without going through a shell, whereas a string goes through a shell (it needs to be parsed into command and arguments).</p>
+<p>Using <code>runArgs</code> via a typical command line, you’ll need single quotes if the shell runs into parameters with spaces. However, these single quotes aren’t passed on to the executable. Thus, in your <code>devcontainer.json</code>, you’d follow the array format and leave out the single quotes:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="er">&quot;runArgs&quot;:</span> <span class="ot">[</span><span class="st">&quot;--device-cgroup-rule=my rule here&quot;</span><span class="ot">]</span></a></code></pre></div>
+<p>Rather than:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="er">&quot;runArgs&quot;:</span> <span class="ot">[</span><span class="st">&quot;--device-cgroup-rule=&#39;my rule here&#39;&quot;</span><span class="ot">]</span></a></code></pre></div>
+<p>We can compare the string and the array versions of <code>postAttachCommand</code> as well. You can use the following string format, which will remove the single quotes as part of the shell’s parsing:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="er">&quot;postAttachCommand&quot;:</span> <span class="er">&quot;echo</span> <span class="er">foo=&#39;bar&#39;&quot;</span></a></code></pre></div>
+<p>By contrast, the array format will keep the single quotes and write them to standard out (you can see the output in the dev container log):</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="er">&quot;postAttachCommand&quot;:</span> <span class="ot">[</span><span class="st">&quot;echo&quot;</span><span class="ot">,</span> <span class="st">&quot;foo=&#39;bar&#39;&quot;</span><span class="ot">]</span></a></code></pre></div>
+<h2 id="variables-in-devcontainer.json">Variables in devcontainer.json</h2>
+<p>Variables can be referenced in certain string values in <code>devcontainer.json</code> in the following format: <strong>${variableName}</strong>. The following is a list of available variables you can use.</p>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 2%" />
+<col style="width: 89%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>${localEnv:VARIABLE_NAME}</code></td>
+<td>Any</td>
+<td>Value of an environment variable on the <strong>host machine</strong> (in this case, called <code>VARIABLE_NAME</code>). Unset variables are left blank. To for example, this would set a variable to your local home folder on Linux / macOS or the user folder on Windows:<br/> <code>"remoteEnv": { "LOCAL_USER_PATH": "${localEnv:HOME}${localEnv:USERPROFILE}" }</code> <br /><br /> ⚠️ For Codespaces, the host is in the cloud rather than your local machine.</td>
+</tr>
+<tr class="even">
+<td><code>${containerEnv:VARIABLE_NAME}</code></td>
+<td><code>remoteEnv</code></td>
+<td>Value of an existing environment variable inside the container once it is up and running (in this case, called <code>VARIABLE_NAME</code>). For example:<br /> <code>"remoteEnv": { "PATH": "${containerEnv:PATH}:/some/other/path" }</code></td>
+</tr>
+<tr class="odd">
+<td><code>${localWorkspaceFolder}</code></td>
+<td>Any</td>
+<td>Path of the local folder that was opened in VS Code (that contains <code>.devcontainer/devcontainer.json</code>).<br /><br />⚠️ Not yet supported when using Clone Repository in Container Volume.</td>
+</tr>
+<tr class="even">
+<td><code>${containerWorkspaceFolder}</code></td>
+<td>Any</td>
+<td>The path that the workspaces files can be found in the container.</td>
+</tr>
+<tr class="odd">
+<td><code>${localWorkspaceFolderBasename}</code></td>
+<td>Any</td>
+<td>Name of the local folder that was opened in VS Code (that contains <code>.devcontainer/devcontainer.json</code>).<br /><br />⚠️ Not yet supported when using Clone Repository in Container Volume.</td>
+</tr>
+<tr class="even">
+<td><code>${containerWorkspaceFolderBasename}</code></td>
+<td>Any</td>
+<td>Name of the folder where the workspace files can be found in the container.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="attached-container-configuration-reference">Attached container configuration reference</h2>
+<p><a href="/docs/remote/attach-container.md#attached-container-configuration-files">Attached container configuration files</a> are similar to <code>devcontainer.json</code> and supports a subset of its properties.</p>
+<table>
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 4%" />
+<col style="width: 91%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>workspaceFolder</code></td>
+<td>string</td>
+<td>Sets the default path that VS Code should open when connecting to the container (which is often the path to a volume mount where the source code can be found in the container). Not set by default (an empty window is opened).</td>
+</tr>
+<tr class="even">
+<td><code>extensions</code></td>
+<td>array</td>
+<td>An array of extension IDs that specify the extensions that should be installed inside the container when it is created. Defaults to <code>[]</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>settings</code></td>
+<td>object</td>
+<td>Adds default <code>settings.json</code> values into a container/machine specific settings file.</td>
+</tr>
+<tr class="even">
+<td><code>forwardPorts</code></td>
+<td>array</td>
+<td>A list of ports that should be forwarded from inside the container to the local machine.</td>
+</tr>
+<tr class="odd">
+<td><code>remoteEnv</code></td>
+<td>object</td>
+<td>A set of name-value pairs that sets or overrides environment variables for VS Code (or sub-processes like terminals) but not the container as a whole. Environment and <a href="#variables-in-attached-container-configuration-files">pre-defined variables</a> may be referenced in the values.<br>For example: <code>"remoteEnv": { "PATH": "${containerEnv:PATH}:/some/other/path" }</code></td>
+</tr>
+<tr class="even">
+<td><code>remoteUser</code></td>
+<td>string</td>
+<td>Overrides the user that VS Code runs as in the container (along with sub-processes like terminals, tasks, or debugging). Defaults to the user the container as a whole is running as (often <code>root</code>).</td>
+</tr>
+<tr class="odd">
+<td><code>postAttachCommand</code></td>
+<td>string,<br>array</td>
+<td>A command string or list of command arguments to run after VS Code attaches to the container. Use <code>&amp;&amp;</code> in a string to execute multiple commands. For example, <code>"yarn install"</code> or <code>"apt-get update &amp;&amp; apt-get install -y curl"</code>. The array syntax <code>["yarn", "install"]</code> will invoke the command (in this case <code>yarn</code>) directly without using a shell. Not set by default.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="variables-in-attached-container-configuration-files">Variables in attached container configuration files</h2>
+<p>Variables can be referenced in certain string values in attached configuration files in the following format: <strong>${variableName}</strong>. The following is a list of available variables you can use.</p>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 4%" />
+<col style="width: 84%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Properties</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>${containerEnv:VAR_NAME}</code></td>
+<td><code>remoteEnv</code></td>
+<td>Value of an existing environment variable inside the container (in this case, <code>VAR_NAME</code>) once it is up and running. For example: <code>"remoteEnv": { "PATH": "${containerEnv:PATH}:/some/other/path" }</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

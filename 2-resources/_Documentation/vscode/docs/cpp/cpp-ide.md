@@ -7,6 +7,7 @@ PageTitle: Edit and navigate C++ code in Visual Studio Code
 DateApproved: 07/25/2019
 MetaDescription: How to edit and navigate C++ source files in Visual Studio Code.
 ---
+
 # Edit C++ in Visual Studio Code
 
 This topic provides a quick overview of general C/C++ editor features, as well as some that are specific to C/C++. For more information about editing in Visual Studio Code, see [Basic Editing](/docs/editor/codebasics.md) and [Code Navigation](/docs/editor/editingevolved.md).
@@ -31,8 +32,8 @@ The C/C++ extension for Visual Studio Code supports source code formatting using
 
 You can format an entire file with **Format Document** (`kb(editor.action.formatDocument)`) or just the current selection with **Format Selection** (`kb(editor.action.formatSelection)`) in right-click context menu. You can also configure auto-formatting with the following [settings](/docs/getstarted/settings.md):
 
-* `editor.formatOnSave` - to format when you save your file.
-* `editor.formatOnType` - to format as you type (triggered on the `kbstyle(;)` character).
+- `editor.formatOnSave` - to format when you save your file.
+- `editor.formatOnType` - to format as you type (triggered on the `kbstyle(;)` character).
 
 By default, the clang-format style is set to "file" which means it looks for a `.clang-format` file inside your workspace. If the `.clang-format` file is found, formatting is applied according to the settings specified in the file. If no `.clang-format` file is found in your workspace, formatting is applied based on a default style specified in the `C_Cpp.clang_format_fallbackStyle` [setting](/docs/getstarted/settings.md) instead. Currently, the default formatting style is "Visual Studio" which is an approximation of the default code formatter in Visual Studio.
 
@@ -67,7 +68,7 @@ You can hover over a symbol to see an inline view of its definition:
 
 ### Peek Definition
 
-The **Peek Definition** feature displays a few lines of code near the definition inside a *peek window*, so that you don't have to navigate away from your current location.
+The **Peek Definition** feature displays a few lines of code near the definition inside a _peek window_, so that you don't have to navigate away from your current location.
 
 To peek at a symbol's definition, place your cursor on the symbol anywhere it's used in your source code and then press `kb(editor.action.peekDefinition)`. Alternatively, you can choose **Peek Definition** from the context menu (right-click, then choose **Peek Definition**).
 
@@ -109,14 +110,14 @@ To go to a symbol's definition, place your cursor on the symbol anywhere it is u
 
 Read on to find out about:
 
-* [Configure VS Code for Windows Subsystem for Linux](/docs/cpp/config-wsl.md)
-* [Configure VS Code for MSVC](/docs/cpp/config-mingw.md)
-* [Configure VS Code for Mingw-w64 and GCC](/docs/cpp/config-mingw.md)
-* [Configure VS Code for macOS](/docs/cpp/config-clang-mac.md)
-* [Configure IntelliSense for cross-compiling](configure-intellisense-crosscompilation.md)
-* [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
-* [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.
-* [Tasks](/docs/editor/tasks.md) - use tasks to build your project and more
-* [Debugging](/docs/editor/debugging.md) - find out how to use the debugger with your project
+- [Configure VS Code for Windows Subsystem for Linux](/docs/cpp/config-wsl.md)
+- [Configure VS Code for MSVC](/docs/cpp/config-mingw.md)
+- [Configure VS Code for Mingw-w64 and GCC](/docs/cpp/config-mingw.md)
+- [Configure VS Code for macOS](/docs/cpp/config-clang-mac.md)
+- [Configure IntelliSense for cross-compiling](configure-intellisense-crosscompilation.md)
+- [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
+- [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.
+- [Tasks](/docs/editor/tasks.md) - use tasks to build your project and more
+- [Debugging](/docs/editor/debugging.md) - find out how to use the debugger with your project
 
 If you have any other questions or run into any issues, please file an issue on [GitHub](https://github.com/microsoft/vscode-cpptools/issues). You may be asked to provide logging information from the extension to help diagnose the issue. See [C/C++ extension logging](/docs/cpp/enable-logging-cpp.md) for help on providing extension logs.

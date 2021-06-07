@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>customize-default-settings-cpp</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="customizing-default-settings">Customizing default settings</h1>
+<p>You can override the default values for properties set in <code>c_cpp_properties.json</code>.</p>
+<h2 id="visual-studio-code-settings">Visual Studio Code settings</h2>
+<p>The following <code>C_Cpp.default.*</code> settings map to each of the properties in a configuration block of <code>c_cpp_properties.json</code>. Namely:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="er">C_Cpp.default.includePath</span>                          <span class="er">:</span> <span class="er">string</span><span class="ot">[]</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="er">C_Cpp.default.defines</span>                              <span class="er">:</span> <span class="er">string</span><span class="ot">[]</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="er">C_Cpp.default.compileCommands</span>                      <span class="er">:</span> <span class="er">string</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="er">C_Cpp.default.macFrameworkPath</span>                     <span class="er">:</span> <span class="er">string</span><span class="ot">[]</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="er">C_Cpp.default.forcedInclude</span>                        <span class="er">:</span> <span class="er">string</span><span class="ot">[]</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="er">C_Cpp.default.intelliSenseMode</span>                     <span class="er">:</span> <span class="er">string</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="er">C_Cpp.default.compilerPath</span>                         <span class="er">:</span> <span class="er">string</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="er">C_Cpp.default.cStandard</span>                            <span class="er">:</span> <span class="er">c89</span> <span class="er">|</span> <span class="er">c99</span> <span class="er">|</span> <span class="er">c11</span> <span class="er">|</span> <span class="er">c17</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="er">C_Cpp.default.cppStandard</span>                          <span class="er">:</span> <span class="er">c++98</span> <span class="er">|</span> <span class="er">c++03</span> <span class="er">|</span> <span class="er">c++11</span> <span class="er">|</span> <span class="er">c++14</span> <span class="er">|</span> <span class="er">c++17</span> <span class="er">|</span> <span class="er">c++20</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="er">C_Cpp.default.browse.path</span>                          <span class="er">:</span> <span class="er">string</span><span class="ot">[]</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="er">C_Cpp.default.browse.databaseFilename</span>              <span class="er">:</span> <span class="er">string</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="er">C_Cpp.default.browse.limitSymbolsToIncludedHeaders</span> <span class="er">:</span> <span class="er">boolean</span></a></code></pre></div>
+<p>These settings have all of the benefits of VS Code settings, meaning that they can have default, “User”, “Workspace”, and “Folder” values. So you can set a global value for <code>C_Cpp.default.cppStandard</code> in your “User” settings and have it apply to all of the folders you open. If any one folder needs a different value, you can override the value by adding a “Folder” or “Workspace” value.</p>
+<p>This property of VS Code settings allows you to configure each of your workspaces independently - making the <code>c_cpp_properties.json</code> file optional.</p>
+<h2 id="updated-c_cpp_properties.json-syntax">Updated <code>c_cpp_properties.json</code> syntax</h2>
+<p>A special variable has been added to the accepted syntax of <code>c_cpp_properties.json</code> that will instruct the extension to insert the value from the VS Code settings mentioned above. If you set the value of any setting in <code>c_cpp_properties.json</code> to “${default}” it will instruct the extension to read the VS Code default setting for that property and insert it. For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="er">&quot;configurations&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Win32&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">        <span class="dt">&quot;includePath&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-5" title="5">            <span class="st">&quot;additional/paths&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb2-6" title="6">            <span class="st">&quot;${default}&quot;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">        <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-8" title="8">        <span class="dt">&quot;defines&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-9" title="9">            <span class="st">&quot;${default}&quot;</span></a>
+<a class="sourceLine" id="cb2-10" title="10">        <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-11" title="11">        <span class="dt">&quot;macFrameworkPath&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-12" title="12">            <span class="st">&quot;${default}&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb2-13" title="13">            <span class="st">&quot;additional/paths&quot;</span></a>
+<a class="sourceLine" id="cb2-14" title="14">        <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-15" title="15">        <span class="dt">&quot;forcedInclude&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-16" title="16">            <span class="st">&quot;${default}&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb2-17" title="17">            <span class="st">&quot;additional/paths&quot;</span></a>
+<a class="sourceLine" id="cb2-18" title="18">        <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-19" title="19">        <span class="dt">&quot;compileCommands&quot;</span><span class="fu">:</span> <span class="st">&quot;${default}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-20" title="20">        <span class="dt">&quot;browse&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-21" title="21">            <span class="dt">&quot;limitSymbolsToIncludedHeaders&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-22" title="22">            <span class="dt">&quot;databaseFilename&quot;</span><span class="fu">:</span> <span class="st">&quot;${default}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-23" title="23">            <span class="dt">&quot;path&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-24" title="24">                <span class="st">&quot;${default}&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb2-25" title="25">                <span class="st">&quot;additional/paths&quot;</span></a>
+<a class="sourceLine" id="cb2-26" title="26">            <span class="ot">]</span></a>
+<a class="sourceLine" id="cb2-27" title="27">        <span class="fu">},</span></a>
+<a class="sourceLine" id="cb2-28" title="28">        <span class="dt">&quot;intelliSenseMode&quot;</span><span class="fu">:</span> <span class="st">&quot;${default}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-29" title="29">        <span class="dt">&quot;cStandard&quot;</span><span class="fu">:</span> <span class="st">&quot;${default}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-30" title="30">        <span class="dt">&quot;cppStandard&quot;</span><span class="fu">:</span> <span class="st">&quot;${default}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-31" title="31">        <span class="dt">&quot;compilerPath&quot;</span><span class="fu">:</span> <span class="st">&quot;${default}&quot;</span></a>
+<a class="sourceLine" id="cb2-32" title="32">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-33" title="33"><span class="ot">]</span><span class="er">,</span></a></code></pre></div>
+<p>Note that for the properties that accept string[], the syntax proposed above allows you to augment the VS Code setting with additional values, thus allowing you to have common paths listed in the VS Code settings and configuration-specific settings in <code>c_cpp_properties.json</code>.</p>
+<p>If a property is missing from <code>c_cpp_properties.json</code>, the extension will use the value in the VS Code setting. If a developer assigns values to all of the settings that apply for a given folder, then <code>c_cpp_properties.json</code> could be removed from the .vscode folder as it will no longer be needed.</p>
+<p>For in-depth information about the c_cpp_properties.json settings file, See <a href="/docs/cpp/c-cpp-properties-schema-reference.md">c_cpp_properties.json reference</a>.</p>
+<h3 id="system-includes">System includes</h3>
+<p>A new setting will be added that allows you specify the system include path separate from the folder’s include path. If this setting has a value, then the system include path the extension gets from the compiler specified in the <code>compilerPath</code> setting will not be added to the path array that the extension uses for IntelliSense. We may want to provide a VS Code command to populate this value from the compiler’s default for users who are interested in using it in case they want to make some modifications to the defaults.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="er">C_Cpp.default.systemIncludePath</span> <span class="er">:</span> <span class="er">string</span><span class="ot">[]</span></a></code></pre></div>
+<h3 id="system-include-pathdefines-resolution-strategies">System include path/defines resolution strategies</h3>
+<p>The extension determines the system includePath and defines to send to the IntelliSense engine in the following manner:</p>
+<ol type="1">
+<li><p>If <code>compileCommands</code> has a valid value and the file open in the editor is in the database, use the compile command in the database entry to determine the include path and defines.</p>
+<ul>
+<li>The system include path and defines are determined using the following logic (in order):
+<ol type="1">
+<li>If <code>systemIncludePath</code> has a value, use it (continue to the next step to search for system defines).</li>
+<li>If <code>compilerPath</code> is valid, query it.</li>
+<li>Interpret the first argument in the command as the compiler and attempt to query it.</li>
+<li>If <code>compilerPath</code> is "", use an empty array for system include path and defines.</li>
+<li>If <code>compilerPath</code> is undefined, look for a compiler on the system and query it.</li>
+</ol></li>
+</ul></li>
+<li>If <code>compileCommands</code> is invalid or the current file is not listed in the database, use the <code>includePath</code> and <code>defines</code> properties in the configuration for IntelliSense.
+<ul>
+<li>The system include path and defines are determined using the following logic (in order):
+<ol type="1">
+<li>If <code>systemIncludePath</code> has a value, use it (continue to the next step to search for system defines).</li>
+<li>If <code>compilerPath</code> is valid, query it.</li>
+<li>If <code>compilerPath</code> is "", use an empty array for system include path and defines (they are assumed to be in the <code>includePath</code> and <code>defines</code> for the current config already).</li>
+<li>If <code>compilerPath</code> is undefined, look for a compiler on the system and query it.</li>
+</ol></li>
+</ul></li>
+</ol>
+<p>System includes should not be added to the <code>includePath</code> or <code>browse.path</code> variables. If the extension detects any system include paths in the <code>includePath</code> property it will silently remove them so that it can ensure system include paths are added last and in the correct order (this is especially important for GCC/Clang).</p>
+<h3 id="enhanced-semantic-colorization">Enhanced semantic colorization</h3>
+<p>When IntelliSense is enabled, the Visual Studio Code C/C++ extension supports semantic colorization. See <a href="/docs/cpp/colorization-cpp.md">Enhanced colorization</a> for more details about setting colors for classes, functions, variables and so on.</p>
+<h3 id="extension-logging">Extension logging</h3>
+<p>If you are experiencing a problem with the extension that we can’t diagnose based on information in your issue report, we might ask you to enable logging and send us your logs. See <a href="/docs/cpp/enable-logging-cpp.md">C/C++ extension logging</a> for information about how to collect logs.</p>
+</body>
+</html>

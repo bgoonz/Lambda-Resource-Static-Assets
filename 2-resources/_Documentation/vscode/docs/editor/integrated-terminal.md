@@ -7,15 +7,16 @@ PageTitle: Integrated Terminal in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Visual Studio Code has an integrated terminal so you can work in the shell of your choice without leaving the editor.
 ---
+
 # Integrated Terminal
 
 In Visual Studio Code, you can open an integrated terminal, initially starting at the root of your workspace. This can be convenient as you don't have to switch windows or alter the state of an existing terminal to perform a quick command-line task.
 
 To open the terminal:
 
-* Use the `kb(workbench.action.terminal.toggleTerminal)` keyboard shortcut with the backtick character.
-* Use the **View** > **Terminal** menu command.
-* From the **Command Palette** (`kb(workbench.action.showCommands)`), use the **View: Toggle Integrated Terminal** command.
+- Use the `kb(workbench.action.terminal.toggleTerminal)` keyboard shortcut with the backtick character.
+- Use the **View** > **Terminal** menu command.
+- From the **Command Palette** (`kb(workbench.action.showCommands)`), use the **View: Toggle Integrated Terminal** command.
 
 ![Terminal](images/integrated-terminal/integrated-terminal.png)
 
@@ -29,7 +30,7 @@ You can create multiple terminals open to different locations and easily navigat
 
 Remove terminal instances by pressing the trash can button.
 
->**Tip:** If you use multiple terminals extensively, you can add key bindings for the `focusNext`, `focusPrevious` and `kill` commands outlined in the [Key Bindings section](/docs/editor/integrated-terminal.md#terminal-keybindings) to allow navigation between them using only the keyboard.
+> **Tip:** If you use multiple terminals extensively, you can add key bindings for the `focusNext`, `focusPrevious` and `kill` commands outlined in the [Key Bindings section](/docs/editor/integrated-terminal.md#terminal-keybindings) to allow navigation between them using only the keyboard.
 
 ### Terminal Splitting
 
@@ -39,14 +40,14 @@ You can also split the terminal by triggering the `kb(workbench.action.terminal.
 
 When focusing a split terminal pane, you can move focus and resize using one of the following commands:
 
-Key|Command|
----|---|
-`kb(workbench.action.terminal.focusPreviousPane)` | Focus Previous Pane |
-`kb(workbench.action.terminal.focusNextPane)` | Focus Next Pane |
-`kb(workbench.action.terminal.resizePaneLeft)` | Resize Pane Left |
-`kb(workbench.action.terminal.resizePaneRight)` | Resize Pane Right |
-`kb(workbench.action.terminal.resizePaneUp)` | Resize Pane Up |
-`kb(workbench.action.terminal.resizePaneDown)` | Resize Pane Down |
+| Key                                               | Command             |
+| ------------------------------------------------- | ------------------- |
+| `kb(workbench.action.terminal.focusPreviousPane)` | Focus Previous Pane |
+| `kb(workbench.action.terminal.focusNextPane)`     | Focus Next Pane     |
+| `kb(workbench.action.terminal.resizePaneLeft)`    | Resize Pane Left    |
+| `kb(workbench.action.terminal.resizePaneRight)`   | Resize Pane Right   |
+| `kb(workbench.action.terminal.resizePaneUp)`      | Resize Pane Up      |
+| `kb(workbench.action.terminal.resizePaneDown)`    | Resize Pane Down    |
 
 ## Configuration
 
@@ -58,7 +59,7 @@ The terminal's shell defaults to `$SHELL` on Linux and macOS and PowerShell on W
 
 VS Code will automatically present a set of common profiles for the dropdown and also detect less common ones which will only show up when selecting a default profile.
 
->**Note:** Profiles won't work automatically when set in the workspace scope, you must grant the _workspace_ permissions to configure your profile or environment changes using the **Terminal: Manage Workspace Shell Permissions** command.
+> **Note:** Profiles won't work automatically when set in the workspace scope, you must grant the _workspace_ permissions to configure your profile or environment changes using the **Terminal: Manage Workspace Shell Permissions** command.
 
 ### Configuring profiles
 
@@ -83,9 +84,9 @@ Profiles can be created using either a `path` or a `source`, as well as a set of
 
 Other arguments supports in profiles include:
 
-* `overrideName`: A boolean indicating whether or not to replace the dynamic terminal title which detects what program is running with the static profile name.
+- `overrideName`: A boolean indicating whether or not to replace the dynamic terminal title which detects what program is running with the static profile name.
 
->**Tip:** The integrated terminal shell is running with the permissions of VS Code. If you need to run a shell command with elevated (administrator) or different permissions, you can use platform utilities such as `runas.exe` within a terminal.
+> **Tip:** The integrated terminal shell is running with the permissions of VS Code. If you need to run a shell command with elevated (administrator) or different permissions, you can use platform utilities such as `runas.exe` within a terminal.
 
 ### Removing built-in profiles
 
@@ -114,12 +115,12 @@ The `env` and `cwd` terminal settings all support resolving [variables](https://
 
 You can customize the integrated terminal font and line height with the following settings:
 
-* `terminal.integrated.fontFamily`
-* `terminal.integrated.fontSize`
-* `terminal.integrated.fontWeight`
-* `terminal.integrated.fontWeightBold`
-* `terminal.integrated.lineHeight`
-* `terminal.integrated.letterSpacing`
+- `terminal.integrated.fontFamily`
+- `terminal.integrated.fontSize`
+- `terminal.integrated.fontWeight`
+- `terminal.integrated.fontWeightBold`
+- `terminal.integrated.lineHeight`
+- `terminal.integrated.letterSpacing`
 
 ## Terminal keybindings
 
@@ -127,43 +128,43 @@ The **View: Toggle Integrated Terminal** command is bound to `kb(workbench.actio
 
 Below are the keyboard shortcuts to quickly navigate within the integrated terminal:
 
-Key|Command|
----|---|
-`kb(workbench.action.terminal.toggleTerminal)`|Show integrated terminal|
-`kb(workbench.action.terminal.new)`|Create new terminal|
-`kb(workbench.action.terminal.scrollUp)`|Scroll up|
-`kb(workbench.action.terminal.scrollDown)`|Scroll down|
-`kb(workbench.action.terminal.scrollUpPage)`|Scroll page up|
-`kb(workbench.action.terminal.scrollDownPage)`|Scroll page down|
-`kb(workbench.action.terminal.scrollToTop)`|Scroll to top|
-`kb(workbench.action.terminal.scrollToBottom)`|Scroll to bottom|
-`kb(workbench.action.terminal.clear)`|Clear the terminal|
+| Key                                            | Command                  |
+| ---------------------------------------------- | ------------------------ |
+| `kb(workbench.action.terminal.toggleTerminal)` | Show integrated terminal |
+| `kb(workbench.action.terminal.new)`            | Create new terminal      |
+| `kb(workbench.action.terminal.scrollUp)`       | Scroll up                |
+| `kb(workbench.action.terminal.scrollDown)`     | Scroll down              |
+| `kb(workbench.action.terminal.scrollUpPage)`   | Scroll page up           |
+| `kb(workbench.action.terminal.scrollDownPage)` | Scroll page down         |
+| `kb(workbench.action.terminal.scrollToTop)`    | Scroll to top            |
+| `kb(workbench.action.terminal.scrollToBottom)` | Scroll to bottom         |
+| `kb(workbench.action.terminal.clear)`          | Clear the terminal       |
 
 Other terminal commands are available and can be bound to your preferred keyboard shortcuts, such as:
 
-* `workbench.action.terminal.focus`: Focus the terminal. This is like toggle but focuses the terminal instead of hiding it, if it is visible.
-* `workbench.action.terminal.focusNext`: Focuses the next terminal instance.
-* `workbench.action.terminal.focusPrevious`: Focuses the previous terminal instance.
-* `workbench.action.terminal.focusAtIndexN`: Focuses the terminal at index N (N=1-9)
-* `workbench.action.terminal.kill`: Remove the current terminal instance.
-* `workbench.action.terminal.runSelectedText`: Run the selected text in the terminal instance.
-* `workbench.action.terminal.runActiveFile`: Run the active file in the terminal instance.
+- `workbench.action.terminal.focus`: Focus the terminal. This is like toggle but focuses the terminal instead of hiding it, if it is visible.
+- `workbench.action.terminal.focusNext`: Focuses the next terminal instance.
+- `workbench.action.terminal.focusPrevious`: Focuses the previous terminal instance.
+- `workbench.action.terminal.focusAtIndexN`: Focuses the terminal at index N (N=1-9)
+- `workbench.action.terminal.kill`: Remove the current terminal instance.
+- `workbench.action.terminal.runSelectedText`: Run the selected text in the terminal instance.
+- `workbench.action.terminal.runActiveFile`: Run the active file in the terminal instance.
 
 ### Copy & Paste
 
 The keybindings for copy and paste follow platform standards:
 
-* Linux: `kbstyle(Ctrl+Shift+C)` and `kbstyle(Ctrl+Shift+V)`
-* macOS: `kbstyle(Cmd+C)` and `kbstyle(Cmd+V)`
-* Windows: `kbstyle(Ctrl+C)` and `kbstyle(Ctrl+V)`
+- Linux: `kbstyle(Ctrl+Shift+C)` and `kbstyle(Ctrl+Shift+V)`
+- macOS: `kbstyle(Cmd+C)` and `kbstyle(Cmd+V)`
+- Windows: `kbstyle(Ctrl+C)` and `kbstyle(Ctrl+V)`
 
 ### Right click behavior
 
 The right click behavior differs based on the platform:
 
-* Linux: Show the context menu.
-* macOS: Select the word under the cursor and show the context menu.
-* Windows: Copy and drop selection if there is a selection, otherwise paste.
+- Linux: Show the context menu.
+- macOS: Select the word under the cursor and show the context menu.
+- Windows: Copy and drop selection if there is a selection, otherwise paste.
 
 This can be configured using the `terminal.integrated.rightClickBehavior` setting.
 
@@ -237,8 +238,8 @@ This feature supports [variable substitution](/docs/editor/variables-reference.m
 
 Note that the command only works with the `\u0000` format for using characters via their character code (not `\x00`). You can read more about these hex code and the sequences terminals work with on the following resources:
 
-* [XTerm Control Sequences](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html)
-* [List of C0 and C1 control codes](https://github.com/xtermjs/xterm.js/blob/0e45909c7e79c83452493d2cd46d99c0a0bb585f/src/common/data/EscapeSequences.ts)
+- [XTerm Control Sequences](https://invisible-island.net/xterm/ctlseqs/ctlseqs.html)
+- [List of C0 and C1 control codes](https://github.com/xtermjs/xterm.js/blob/0e45909c7e79c83452493d2cd46d99c0a0bb585f/src/common/data/EscapeSequences.ts)
 
 ## Rename terminal sessions
 
@@ -250,7 +251,7 @@ By default, the terminal will open at the folder that is opened in the Explorer.
 
 ```json
 {
-    "terminal.integrated.cwd": "/home/user"
+  "terminal.integrated.cwd": "/home/user"
 }
 ```
 
@@ -258,7 +259,7 @@ Split terminals on Windows will start in the directory that the parent terminal 
 
 ```json
 {
-    "terminal.integrated.splitCwd": "workspaceRoot"
+  "terminal.integrated.splitCwd": "workspaceRoot"
 }
 ```
 
@@ -270,10 +271,10 @@ You can set `terminal.integrated.automationShell.<platform>` to override the she
 
 ```jsonc
 {
-    "terminal.integrated.shell.osx": "/usr/local/bin/fish",
-    // Use a fully POSIX-compatible shell and avoid running a complex ~/.fishrc
-    // for tasks and debug
-    "terminal.integrated.automationShell.osx": "/bin/sh"
+  "terminal.integrated.shell.osx": "/usr/local/bin/fish",
+  // Use a fully POSIX-compatible shell and avoid running a complex ~/.fishrc
+  // for tasks and debug
+  "terminal.integrated.automationShell.osx": "/bin/sh"
 }
 ```
 
@@ -301,9 +302,9 @@ There is an experimental renderer based on WebGL that can also be enabled:
 
 The basics of the terminal have been covered in this document, read on to find out more about:
 
-* [Tasks](/docs/editor/tasks.md) - Tasks let you integrate with external tools and leverage the terminal heavily.
-* [Mastering VS Code's Terminal](https://www.growingwiththeweb.com/2017/03/mastering-vscodes-terminal.html) - An external blog with plenty of power user tips for the terminal.
-* Explore the rest of the terminal commands by browsing your keybindings.json file within VS Code.
+- [Tasks](/docs/editor/tasks.md) - Tasks let you integrate with external tools and leverage the terminal heavily.
+- [Mastering VS Code's Terminal](https://www.growingwiththeweb.com/2017/03/mastering-vscodes-terminal.html) - An external blog with plenty of power user tips for the terminal.
+- Explore the rest of the terminal commands by browsing your keybindings.json file within VS Code.
 
 ## Common questions
 
@@ -379,8 +380,8 @@ Run `npm config delete prefix` or `nvm use --delete-prefix v8.9.1 --silent` to u
 
 This is mostly a macOS problem and does not happen in external terminals. The typical reasons for this are the following:
 
-* `npm` was globally installed using another instance of `node` that is somewhere in your path (such as `/usr/local/bin/npm`).
-* In order to get the development tools on the `$PATH`, VS Code will launch a bash login shell on start up. This means that your `~/.bash_profile` has already run and when an Integrated Terminal launches, it will run **another** login shell, reordering the `$PATH` potentially in unexpected ways.
+- `npm` was globally installed using another instance of `node` that is somewhere in your path (such as `/usr/local/bin/npm`).
+- In order to get the development tools on the `$PATH`, VS Code will launch a bash login shell on start up. This means that your `~/.bash_profile` has already run and when an Integrated Terminal launches, it will run **another** login shell, reordering the `$PATH` potentially in unexpected ways.
 
 To resolve this issue, you need to track down where the old `npm` is installed and remove both it and its out of date node_modules. You can do this by finding the `nvm` initialization script and running `which npm` before it runs, which should print the path when you launch a new terminal.
 

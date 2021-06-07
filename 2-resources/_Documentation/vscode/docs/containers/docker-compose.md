@@ -7,6 +7,7 @@ PageTitle: Use Docker Compose to work with multiple containers
 DateApproved: 04/21/2020
 MetaDescription: Develop a multi-container app running in a Docker containers using Docker Compose and Visual Studio Code.
 ---
+
 # Use Docker Compose
 
 Docker Compose provides a way to orchestrate multiple containers that work together. Examples include a service that processes requests and a front-end web site, or a service that uses a supporting function such as a Redis cache. If you are using the microservices model for your app development, you can use Docker Compose to factor the app code into several independently running services that communicate using web requests. This article helps you enable Docker Compose for your apps, whether they are Node.js, Python, or .NET Core, and also helps you configure debugging in Visual Studio Code for these scenarios.
@@ -62,19 +63,19 @@ Create an **Attach** [launch configuration](/docs/editor/debugging.md#launch-con
 1. Configure the debugging port in `docker-compose.debug.yml`. This is set when you create the file, so you might not need to change it. In the example below, port 9229 is used for debugging on both the host and the container.
 
    ```yml
-    version: '3.4'
+   version: "3.4"
 
-    services:
-      node-hello:
-        image: node-hello
-        build: .
-        environment:
-          NODE_ENV: development
-        ports:
-          - 3000
-          - 9229:9229
-        command: node --inspect=0.0.0.0:9229 ./bin/www
-    ```
+   services:
+     node-hello:
+       image: node-hello
+       build: .
+       environment:
+         NODE_ENV: development
+       ports:
+         - 3000
+         - 9229:9229
+       command: node --inspect=0.0.0.0:9229 ./bin/www
+   ```
 
 1. If you have multiple apps, you need to change the port for one of them, so that each app has a unique port. You can point to the right debugging port in the `launch.json`, and save the file. If you omit this, the port will be chosen automatically.
 
@@ -113,57 +114,62 @@ For debugging Python with Docker Compose, follow these steps:
 
 1. You'll be prompted to choose the host machine (for example, localhost) and port you want to use for debugging. The default debugging port for Python is 5678. If you have multiple apps, you need to change the port for one of them, so that each app has a unique port. You can point to the right debugging port in the `launch.json`, and save the file. If you omit this, the port will be chosen automatically.
 
-    ```json
-         "configurations": [
-         {
-            "name": "Python: Remote Attach",
-            "type": "python",
-            "request": "attach",
-            "port": 5678,
-            "host": "localhost",
-            "pathMappings": [
-                {
-                    "localRoot": "${workspaceFolder}",
-                    "remoteRoot": "/app"
-                }
-            ]
-        }
-    ```
+   ```json
+        "configurations": [
+        {
+           "name": "Python: Remote Attach",
+           "type": "python",
+           "request": "attach",
+           "port": 5678,
+           "host": "localhost",
+           "pathMappings": [
+               {
+                   "localRoot": "${workspaceFolder}",
+                   "remoteRoot": "/app"
+               }
+           ]
+       }
+   ```
 
 1. When done editing the **Attach** configuration, save the `launch.json`. Navigate to the **Debug** tab and select **Python: Remote Attach** as the active configuration.
 
 1. If you already have a valid Dockerfile, we recommend running the command **Docker: Add Docker Compose Files to Workspace**. This will create a `docker-compose.yml` file and also a `docker-compose.debug.yml`, which volume maps and starts the Python debugger in the container. If you do not have a Dockerfile already, we recommend running **Docker: Add Docker Files to Workspace** and selecting **Yes** to include Docker Compose files.
 
-    > **Note**: By default, when using **Docker: Add Docker Files to Workspace**, choosing the Django and Flask options will scaffold a Dockerfile configured for Gunicorn. Follow the instructions in the [Python in a container quickstart](/docs/containers/quickstart-python.md#gunicorn-modifications-for-djangoflask-apps) to ensure it is configured properly before proceeding.
+   > **Note**: By default, when using **Docker: Add Docker Files to Workspace**, choosing the Django and Flask options will scaffold a Dockerfile configured for Gunicorn. Follow the instructions in the [Python in a container quickstart](/docs/containers/quickstart-python.md#gunicorn-modifications-for-djangoflask-apps) to ensure it is configured properly before proceeding.
 
 1. Right-click on the `docker-compose.debug.yml` file (example shown below) and choose **Compose Up**.
 
-    ```yml
-    version: '3.4'
+   ```yml
+   version: "3.4"
 
-    services:
-      pythonsamplevscodedjangotutorial:
-        image: pythonsamplevscodedjangotutorial
-        build:
-          context: .
-          dockerfile: ./Dockerfile
-        command: ["sh", "-c", "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000 --nothreading --noreload"]
-        ports:
-          - 8000:8000
-          - 5678:5678
-    ```
+   services:
+     pythonsamplevscodedjangotutorial:
+       image: pythonsamplevscodedjangotutorial
+       build:
+         context: .
+         dockerfile: ./Dockerfile
+       command:
+         [
+           "sh",
+           "-c",
+           "pip install debugpy -t /tmp && python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 manage.py runserver 0.0.0.0:8000 --nothreading --noreload",
+         ]
+       ports:
+         - 8000:8000
+         - 5678:5678
+   ```
 
 1. Once your container is built and running, attach the debugger by hitting `kb(workbench.action.debug.start)` with the **Python: Remote Attach** launch configuration selected.
 
-    ![Screenshot of debugging in Python](images/compose/docker-compose-python-debug.png)
+   ![Screenshot of debugging in Python](images/compose/docker-compose-python-debug.png)
 
-    > **Note:** If you would like to import the Python debugger into a specific file, more information can be found in the [debugpy README](https://github.com/microsoft/debugpy#debugpy-import-usage).
+   > **Note:** If you would like to import the Python debugger into a specific file, more information can be found in the [debugpy README](https://github.com/microsoft/debugpy#debugpy-import-usage).
 
 1. When you attach to a service that exposes an HTTP endpoint and returns HTML, the web browser may not open automatically. To open the app in the browser, right-click the container in the Docker Explorer and choose **Open in Browser**. If multiple ports are configured, you'll be asked to choose the port.
 
    ![Screenshot - Open in Browser](images/compose/docker-compose-open-in-browser.png)
 
-    You're now debugging your running app in the container.
+   You're now debugging your running app in the container.
 
 ### .NET
 
@@ -211,7 +217,7 @@ By default, the Docker extension does not do any volume mounting for debugging c
 
 ```yml
 volumes:
-    - /host-folder-path:/container-folder-path
+  - /host-folder-path:/container-folder-path
 ```
 
 ## Docker Compose with multiple Compose files
@@ -239,7 +245,7 @@ Let's assume your workspace has a base compose file (`docker-compose.yml`) and a
 
 ### Template matching
 
-Let's assume you have  different set of input files for each environment. You could define multiple templates with regular expression match, and the selected file name will be matched against this `match` property and the corresponding template will be used.
+Let's assume you have different set of input files for each environment. You could define multiple templates with regular expression match, and the selected file name will be matched against this `match` property and the corresponding template will be used.
 
 ```json
 "docker.commands.composeUp": [
@@ -288,13 +294,13 @@ Rather than use command customization, you can also define a task like the follo
 
 ```json
 {
-    "type": "shell",
-    "label": "compose-up-dev",
-    "command": "docker-compose -f docker-compose.yml -f docker-compose.Common.yml -f docker-compose.dev.yml up -d --build",
-    "presentation": {
-        "reveal": "always",
-        "panel": "new"
-    }
+  "type": "shell",
+  "label": "compose-up-dev",
+  "command": "docker-compose -f docker-compose.yml -f docker-compose.Common.yml -f docker-compose.dev.yml up -d --build",
+  "presentation": {
+    "reveal": "always",
+    "panel": "new"
+  }
 }
 ```
 

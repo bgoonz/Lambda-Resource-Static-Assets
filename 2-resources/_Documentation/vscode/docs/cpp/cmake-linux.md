@@ -7,6 +7,7 @@ PageTitle: Get started with CMake Tools on Linux
 DateApproved: 06/11/2020
 MetaDescription: Get started with the CMake Tools Visual Studio Code extension on Linux
 ---
+
 # Get started with CMake Tools on Linux
 
 CMake is an open-source, cross-platform tool that uses compiler and platform independent configuration files to generate native build tool files specific to your compiler and platform.
@@ -24,11 +25,11 @@ To complete this tutorial on Ubuntu, install the following:
 1. [Visual Studio Code](/download).
 1. [C++ extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools). Install the C/C++ extension by searching for 'c++' in the **Extensions** view (`kb(workbench.view.extensions)`).
 
-    ![C/C++ extension](images/cpp/cpp-extension.png)
+   ![C/C++ extension](images/cpp/cpp-extension.png)
 
 1. [CMake Tools extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools). Install the CMake Tools extension by searching for 'CMake tools' in the **Extensions** view (`kb(workbench.view.extensions)`).
 
-    ![CMake tools extension](images/cpp/cmake-extension.png)
+   ![CMake tools extension](images/cpp/cmake-extension.png)
 
 1. You'll also need to install CMake, a compiler, a debugger, and build tools.
 
@@ -52,7 +53,7 @@ For this tutorial on Ubuntu, we'll use the GCC compiler, GDB to debug, and `make
 
 ### Check if GCC is installed
 
- To see if GCC is already installed on your system, open a Terminal window and enter the following command:
+To see if GCC is already installed on your system, open a Terminal window and enter the following command:
 
 ```bash
 gcc -v
@@ -110,7 +111,7 @@ Before you can use the CMake Tools extension to build a project, you need to con
 
 1. Select the compiler you want to use. For example, depending on the compilers you have installed, you might see something like:
 
-    ![Select the kit](images/cpp/cmake-selectkit.png)
+   ![Select the kit](images/cpp/cmake-selectkit.png)
 
 ## Configure Hello World
 
@@ -164,11 +165,11 @@ Go ahead and press `kb(workbench.action.debug.start)` to continue.
 
 You've now used the VS Code CMake Tools extension to use CMake to build and debug a C++ app on Ubuntu. The steps are the same for other platforms; the difference being how you install CMake and the compiler/debugger for the platform of your choice. For instructions on setting up compilers/debuggers for other platforms, see the following:
 
-* [Microsoft C++ on Windows](/docs/cpp/config-msvc.md)
-* [Clang on macOS](/docs/cpp/config-clang-mac.md)
-* [GCC on Windows Subsystem for Linux](/docs/cpp/config-wsl.md)
+- [Microsoft C++ on Windows](/docs/cpp/config-msvc.md)
+- [Clang on macOS](/docs/cpp/config-clang-mac.md)
+- [GCC on Windows Subsystem for Linux](/docs/cpp/config-wsl.md)
 
 ## Next steps
 
-* Explore the [CMake Tools](https://github.com/microsoft/vscode-cmake-tools/blob/develop/docs/README.md) documentation
-* Review the [Overview of the C++ extension](/docs/languages/cpp.md)
+- Explore the [CMake Tools](https://github.com/microsoft/vscode-cmake-tools/blob/develop/docs/README.md) documentation
+- Review the [Overview of the C++ extension](/docs/languages/cpp.md)

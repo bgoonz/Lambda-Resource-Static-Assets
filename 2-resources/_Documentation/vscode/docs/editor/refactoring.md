@@ -7,6 +7,7 @@ PageTitle: Refactoring source code in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Refactoring source code in Visual Studio Code.
 ---
+
 # Refactoring
 
 [Source code refactoring](https://en.wikipedia.org/wiki/Code_refactoring) can improve the quality and maintainability of your project by restructuring your code while not modifying the runtime behavior. Visual Studio Code supports refactoring operations (refactorings) such as [Extract Method](https://refactoring.com/catalog/extractMethod.html) and [Extract Variable](https://refactoring.com/catalog/extractVariable.html) to improve your code base from within your editor.
@@ -23,7 +24,7 @@ In VS Code, Code Actions can provide both refactorings and Quick Fixes for detec
 
 If you'd just like to see refactorings without Quick Fixes, you can use the **Refactor** command (`kb(editor.action.refactor)`).
 
->**Note:** If you prefer to not see the Code Action lightbulb in your editor, you can disable lightbulbs with the `editor.lightbulb.enable` [setting](/docs/getstarted/settings.md). You can still open Quick Fixes through **Quick Fix** command and `kb(editor.action.quickFix)` keyboard shortcut.
+> **Note:** If you prefer to not see the Code Action lightbulb in your editor, you can disable lightbulbs with the `editor.lightbulb.enable` [setting](/docs/getstarted/settings.md). You can still open Quick Fixes through **Quick Fix** command and `kb(editor.action.quickFix)` keyboard shortcut.
 
 ## Refactoring actions
 
@@ -33,7 +34,7 @@ Select the source code you'd like to extract and then click on the lightbulb in 
 
 ### Extract Variable
 
-TypeScript language service provides **Extract to const**  refactoring to create a new local variable for the currently selected expression:
+TypeScript language service provides **Extract to const** refactoring to create a new local variable for the currently selected expression:
 
 ![Extract local](images/refactoring/ts-extract-local.gif)
 
@@ -80,9 +81,9 @@ You can also control how/when Code Actions are automatically applied using the `
 
 Valid values for `"apply"`:
 
-* `"first"` - Always automatically apply the first available Code Action.
-* `"ifSingle"` - Default. Automatically apply the Code Action if only one is available. Otherwise, show the context menu.
-* `"never"` - Always show the Code Action context menu, even if only a single Code Action is available.
+- `"first"` - Always automatically apply the first available Code Action.
+- `"ifSingle"` - Default. Automatically apply the Code Action if only one is available. Otherwise, show the context menu.
+- `"never"` - Always show the Code Action context menu, even if only a single Code Action is available.
 
 When a Code Action keybinding is configured with `"preferred": true`, only preferred Quick Fixes and refactorings are shown. A preferred Quick Fix addresses the underlying error, while a preferred refactoring is the most common refactoring choice. For example, while multiple `refactor.extract.constant` refactorings may exist, each extracting to a different scope in the file, the preferred `refactor.extract.constant` refactoring is the one that extracts to a local variable.
 
@@ -110,9 +111,9 @@ You can find extensions that support refactoring by looking in the VS Code [Mark
 
 ## Next steps
 
-* [Intro Video - Code Editing](/docs/introvideos/codeediting.md) - Watch an introductory video on code editing features.
-* [Code Navigation](/docs/editor/editingevolved) - VS Code lets you move quickly through your source code.
-* [Debugging](/docs/editor/debugging.md) - Learn about debugging with VS Code.
+- [Intro Video - Code Editing](/docs/introvideos/codeediting.md) - Watch an introductory video on code editing features.
+- [Code Navigation](/docs/editor/editingevolved) - VS Code lets you move quickly through your source code.
+- [Debugging](/docs/editor/debugging.md) - Learn about debugging with VS Code.
 
 ## Common questions
 

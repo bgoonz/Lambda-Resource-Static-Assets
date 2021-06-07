@@ -7,6 +7,7 @@ PageTitle: jsconfig.json Reference
 DateApproved: 3/31/2021
 MetaDescription: View the reference for jsconfig.json.
 ---
+
 # jsconfig.json
 
 ## What is jsconfig.json?
@@ -21,9 +22,9 @@ The presence of `jsconfig.json` file in a directory indicates that the directory
 
 Visual Studio Code's JavaScript support can run in two different modes:
 
-* **File Scope - no jsconfig.json**: In this mode, JavaScript files opened in Visual Studio Code are treated as independent units. As long as a file `a.js` doesn't reference a file `b.ts` explicitly (either using `import` or **CommonJS** [modules](http://www.commonjs.org/specs/modules/1.0)), there is no common project context between the two files.
+- **File Scope - no jsconfig.json**: In this mode, JavaScript files opened in Visual Studio Code are treated as independent units. As long as a file `a.js` doesn't reference a file `b.ts` explicitly (either using `import` or **CommonJS** [modules](http://www.commonjs.org/specs/modules/1.0)), there is no common project context between the two files.
 
-* **Explicit Project - with jsconfig.json**: A JavaScript project is defined via a `jsconfig.json` file. The presence of such a file in a directory indicates that the directory is the root of a JavaScript project. The file itself can optionally list the files belonging to the project, the files to be excluded from the project, as well as compiler options (see below).
+- **Explicit Project - with jsconfig.json**: A JavaScript project is defined via a `jsconfig.json` file. The presence of such a file in a directory indicates that the directory is the root of a JavaScript project. The file itself can optionally list the files belonging to the project, the files to be excluded from the project, as well as compiler options (see below).
 
 The JavaScript experience is improved when you have a `jsconfig.json` file in your workspace that defines the project context. For this reason, we offer a hint to create a `jsconfig.json` file when you open a JavaScript file in a fresh workspace.
 
@@ -47,13 +48,11 @@ The `exclude` attribute (a glob pattern) tells the language service what files a
 
 ```json
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6"
-    },
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6"
+  },
+  "exclude": ["node_modules"]
 }
 ```
 
@@ -65,13 +64,11 @@ Alternatively, you can explicitly set the files in your project using the `inclu
 
 ```json
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6"
-    },
-    "include": [
-        "src/**/*"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6"
+  },
+  "include": ["src/**/*"]
 }
 ```
 
@@ -83,17 +80,17 @@ Below are `jsconfig` `"compilerOptions"` to configure the JavaScript language su
 
 > **Tip:** Do not be confused by `compilerOptions`. This attribute exists because `jsconfig.json` is a descendant of `tsconfig.json`, which is used for compiling TypeScript.
 
-Option  | Description
-----------------|-----
-`noLib` | Do not include the default library file (lib.d.ts)
-`target`| Specifies which default library (lib.d.ts) to use. The values are "es3", "es5", "es6", "es2015", "es2016", "es2017", "es2018", "es2019", "es2020", "esnext".
-`module` | Specifies the module system, when generating module code. The values are "amd", "commonJS", "es2015", "es6", "esnext", "none", "system", "umd".
-`moduleResolution` | Specifies how modules are resolved for imports. The values are "node" and "classic".
-`checkJs` | Enable type checking on JavaScript files.
-`experimentalDecorators`|Enables experimental support for proposed ES decorators.
-`allowSyntheticDefaultImports`|Allow default imports from modules with no default export. This does not affect code emit, just type checking.
-`baseUrl`|Base directory to resolve non-relative module names.
-`paths`|Specify path mapping to be computed relative to baseUrl option.
+| Option                         | Description                                                                                                                                                  |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `noLib`                        | Do not include the default library file (lib.d.ts)                                                                                                           |
+| `target`                       | Specifies which default library (lib.d.ts) to use. The values are "es3", "es5", "es6", "es2015", "es2016", "es2017", "es2018", "es2019", "es2020", "esnext". |
+| `module`                       | Specifies the module system, when generating module code. The values are "amd", "commonJS", "es2015", "es6", "esnext", "none", "system", "umd".              |
+| `moduleResolution`             | Specifies how modules are resolved for imports. The values are "node" and "classic".                                                                         |
+| `checkJs`                      | Enable type checking on JavaScript files.                                                                                                                    |
+| `experimentalDecorators`       | Enables experimental support for proposed ES decorators.                                                                                                     |
+| `allowSyntheticDefaultImports` | Allow default imports from modules with no default export. This does not affect code emit, just type checking.                                               |
+| `baseUrl`                      | Base directory to resolve non-relative module names.                                                                                                         |
+| `paths`                        | Specify path mapping to be computed relative to baseUrl option.                                                                                              |
 
 You can read more about the available `compilerOptions` in the [TypeScript compilerOptions documentation](https://www.typescriptlang.org/docs/handbook/compiler-options.html).
 
@@ -117,23 +114,23 @@ For example, for alias 'ClientApp':
 and then to use the alias
 
 ```js
-import Something from 'ClientApp/foo'
+import Something from "ClientApp/foo";
 ```
 
 ## Best Practices
 
 Whenever possible, you should exclude folders with JavaScript files that are not part of the source code for your project.
 
->**Tip:** If you do not have a `jsconfig.json` in your workspace, VS Code will by default exclude the `node_modules` folder.
+> **Tip:** If you do not have a `jsconfig.json` in your workspace, VS Code will by default exclude the `node_modules` folder.
 
 Below is a table, mapping common project components to their installation folders that are recommended to exclude:
 
-Component | folder to exclude
-----------|-----------
-`node` | exclude the `node_modules` folder
-`webpack`, `webpack-dev-server` | exclude the content folder, for example `dist`.
-`bower` | exclude the `bower_components` folder
-`ember` | exclude the `tmp` and `temp` folders
-`jspm` | exclude the `jspm_packages` folder
+| Component                       | folder to exclude                               |
+| ------------------------------- | ----------------------------------------------- |
+| `node`                          | exclude the `node_modules` folder               |
+| `webpack`, `webpack-dev-server` | exclude the content folder, for example `dist`. |
+| `bower`                         | exclude the `bower_components` folder           |
+| `ember`                         | exclude the `tmp` and `temp` folders            |
+| `jspm`                          | exclude the `jspm_packages` folder              |
 
 When your JavaScript project is growing too large and performance slows, it is often because of library folders like `node_modules`. If VS Code detects that your project is growing too large, it will prompt you to edit the `exclude` list.

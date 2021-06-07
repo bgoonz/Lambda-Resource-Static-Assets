@@ -8,6 +8,7 @@ DateApproved: 3/31/2021
 MetaDescription: React JavaScript tutorial showing IntelliSense, debugging, and code navigation support in the Visual Studio Code editor.
 MetaSocialImage: /assets/images/nodejs_javascript_vscode.png
 ---
+
 # Using React in Visual Studio Code
 
 [React](https://facebook.github.io/react/) is a popular JavaScript library developed by Facebook for building web application user interfaces. The Visual Studio Code editor supports React.js IntelliSense and code navigation out of the box.
@@ -18,7 +19,7 @@ MetaSocialImage: /assets/images/nodejs_javascript_vscode.png
 
 We'll be using the `create-react-app` [generator](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app) for this tutorial. To use the generator as well as run the React application server, you'll need [Node.js](https://nodejs.org/) JavaScript runtime and [npm](https://www.npmjs.com/) (Node.js package manager) installed. npm is included with Node.js which you can download and install from [Node.js downloads](https://nodejs.org/en/download/).
 
->**Tip**: To test that you have Node.js and npm correctly installed on your machine, you can type `node --version` and `npm --version` in a terminal or command prompt.
+> **Tip**: To test that you have Node.js and npm correctly installed on your machine, you can type `node --version` and `npm --version` in a terminal or command prompt.
 
 You can now create a new React application by typing:
 
@@ -28,7 +29,7 @@ npx create-react-app my-app
 
 where `my-app` is the name of the folder for your application. This may take a few minutes to create the React application and install its dependencies.
 
->**Note**: If you've previously installed `create-react-app` globally via `npm install -g create-react-app`, we recommend you uninstall the package using `npm uninstall -g create-react-app` to ensure that npx always uses the latest version.
+> **Note**: If you've previously installed `create-react-app` globally via `npm install -g create-react-app`, we recommend you uninstall the package using `npm uninstall -g create-react-app` to ensure that npx always uses the latest version.
 
 Let's quickly run our React application by navigating to the new folder and typing `npm start` to start the web server and open the application in a browser:
 
@@ -89,21 +90,25 @@ Press `kbstyle(Escape)` to close the Peek window.
 Let's update the sample application to "Hello World!". Create a new H1 header with "Hello, world!" and replace the `<App />` tag in `ReactDOM.render` with `element`.
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-var element = React.createElement('h1', { className: 'greeting' }, 'Hello, world!');
-ReactDOM.render(element, document.getElementById('root'));
+var element = React.createElement(
+  "h1",
+  { className: "greeting" },
+  "Hello, world!"
+);
+ReactDOM.render(element, document.getElementById("root"));
 
 reportWebVitals();
 ```
 
 Once you save the `index.js` file, the running instance of the server will update the web page and you'll see "Hello World!" when you refresh your browser.
 
->**Tip**: VS Code supports Auto Save, which by default saves your files after a delay. Check the **Auto Save** option in the **File** menu to turn on Auto Save or directly configure the `files.autoSave` user [setting](/docs/getstarted/settings.md).
+> **Tip**: VS Code supports Auto Save, which by default saves your files after a delay. Check the **Auto Save** option in the **File** menu to turn on Auto Save or directly configure the `files.autoSave` user [setting](/docs/getstarted/settings.md).
 
 ![Hello, world](images/reactjs/hello-world.png)
 
@@ -111,7 +116,7 @@ Once you save the `index.js` file, the running instance of the server will updat
 
 To debug the client side React code, we'll need to install the [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) extension.
 
->Note: This tutorial assumes you have the Chrome browser installed. There are also debugger extensions for the [Edge](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-edge) and [Firefox](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-firefox-debug) browsers.
+> Note: This tutorial assumes you have the Chrome browser installed. There are also debugger extensions for the [Edge](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-edge) and [Firefox](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-firefox-debug) browsers.
 
 Open the Extensions view (`kb(workbench.view.extensions)`) and type 'chrome' in the search box. You'll see several extensions which reference Chrome.
 
@@ -133,16 +138,16 @@ We need to make one change for our example: change the port of the `url` from `8
 
 ```json
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
 }
 ```
 
@@ -190,26 +195,20 @@ The command will prompt you to answer a series of questions in the **Terminal** 
 
 ```js
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2020": true
+  env: {
+    browser: true,
+    es2020: true,
+  },
+  extends: ["eslint:recommended", "plugin:react/recommended"],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 11,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-    }
+    ecmaVersion: 11,
+    sourceType: "module",
+  },
+  plugins: ["react"],
+  rules: {},
 };
 ```
 

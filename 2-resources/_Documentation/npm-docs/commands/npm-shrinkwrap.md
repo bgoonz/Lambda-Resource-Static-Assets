@@ -21,10 +21,10 @@ design and purpose of package locks in npm, see
 
 ### See Also
 
-* [npm install](/commands/npm-install)
-* [npm run-script](/commands/npm-run-script)
-* [npm scripts](/using-npm/scripts)
-* [package.json](/configuring-npm/package-json)
-* [package-lock.json](/configuring-npm/package-lock-json)
-* [npm-shrinkwrap.json](/configuring-npm/npm-shrinkwrap-json)
-* [npm ls](/commands/npm-ls)
+- [npm install](/commands/npm-install)
+- [npm run-script](/commands/npm-run-script)
+- [npm scripts](/using-npm/scripts)
+- [package.json](/configuring-npm/package-json)
+- [package-lock.json](/configuring-npm/package-lock-json)
+- [npm-shrinkwrap.json](/configuring-npm/npm-shrinkwrap-json)
+- [npm ls](/commands/npm-ls)

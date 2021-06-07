@@ -7,13 +7,14 @@ PageTitle: Multi-root Workspaces in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: You can open and work on multiple project folders in Visual Studio Code with multi-root workspaces.
 ---
+
 # Multi-root Workspaces
 
 You can work with multiple project folders in Visual Studio Code with multi-root workspaces. This can be helpful when you are working on several related projects at one time. For example, you might have a repository with a product's documentation that you like to keep current when you update the product source code.
 
 ![multi-root hero](images/multi-root-workspaces/hero.png)
 
->**Note**: If you'd like to learn more about the VS Code "workspace" concept, you can review [What is a VS Code "workspace"?](/docs/editor/workspaces.md) Unless you are explicitly creating a multi-root workspace, a "workspace" is just your project's single root folder.
+> **Note**: If you'd like to learn more about the VS Code "workspace" concept, you can review [What is a VS Code "workspace"?](/docs/editor/workspaces.md) Unless you are explicitly creating a multi-root workspace, a "workspace" is just your project's single root folder.
 
 ## Adding folders
 
@@ -37,7 +38,7 @@ Settings like `files.exclude` are supported for each root folder if configured, 
 
 You can use drag and drop to add folders to a workspace. Drag a folder to the File Explorer to add it to the current workspace. You can even select and drag multiple folders.
 
->**Note**: Dropping a single folder into the editor region of VS Code will still open the folder in single folder mode. If you drag and drop multiple folders into the editor region, a new multi-root workspace will be created.
+> **Note**: Dropping a single folder into the editor region of VS Code will still open the folder in single folder mode. If you drag and drop multiple folders into the editor region, a new multi-root workspace will be created.
 
 You can also use drag and drop to reorder folders in the workspace.
 
@@ -73,10 +74,10 @@ If you want to move your Workspace file to a new location, you can use the **Fil
 
 To reopen a Workspace, you can:
 
-* Double-click the `.code-workspace` file in your platform's Explorer.
-* Use the **File** > **Open Workspace** command and select the Workspace file.
-* Select the Workspace from the **File** > **Open Recent** (`kb(workbench.action.openRecent)`) list.
-  * Workspaces have a **(Workspace)** suffix to differentiate them from folders.
+- Double-click the `.code-workspace` file in your platform's Explorer.
+- Use the **File** > **Open Workspace** command and select the Workspace file.
+- Select the Workspace from the **File** > **Open Recent** (`kb(workbench.action.openRecent)`) list.
+  - Workspaces have a **(Workspace)** suffix to differentiate them from folders.
 
 ![open recent workspace list](images/multi-root-workspaces/open-recent.png)
 
@@ -90,23 +91,23 @@ You can override the display name of your folders with the `name` attribute, to 
 
 ```json
 {
-    "folders": [
-        {
-            // Source code
-            "name": "Product",
-            "path": "vscode"
-        },
-        {
-            // Docs and release notes
-            "name": "Documentation",
-            "path": "vscode-docs"
-        },
-        {
-            // Yeoman extension generator
-            "name": "Extension generator",
-            "path": "vscode-generator-code"
-        }
-    ]
+  "folders": [
+    {
+      // Source code
+      "name": "Product",
+      "path": "vscode"
+    },
+    {
+      // Docs and release notes
+      "name": "Documentation",
+      "path": "vscode-docs"
+    },
+    {
+      // Yeoman extension generator
+      "name": "Extension generator",
+      "path": "vscode-generator-code"
+    }
+  ]
 }
 ```
 
@@ -160,21 +161,21 @@ User settings are supported as with single folder projects and you can also set 
 
 ```json
 {
-    "folders": [
-        {
-            "path": "vscode"
-        },
-        {
-            "path": "vscode-docs"
-        },
-        {
-            "path": "vscode-generator-code"
-        }
-    ],
-    "settings": {
-        "window.zoomLevel": 1,
-        "files.autoSave": "afterDelay"
+  "folders": [
+    {
+      "path": "vscode"
+    },
+    {
+      "path": "vscode-docs"
+    },
+    {
+      "path": "vscode-generator-code"
     }
+  ],
+  "settings": {
+    "window.zoomLevel": 1,
+    "files.autoSave": "afterDelay"
+  }
 }
 ```
 
@@ -186,9 +187,9 @@ You can easily review and modify the different settings files through the Settin
 
 You can also open specific settings files with the commands:
 
-* **Preferences: Open User Settings** - Open your global User settings
-* **Preferences: Open Workspace Settings** - Open the settings section of your Workspace file.
-* **Preferences: Open Folder Settings** - Open the settings for the active folder.
+- **Preferences: Open User Settings** - Open your global User settings
+- **Preferences: Open Workspace Settings** - Open the settings section of your Workspace file.
+- **Preferences: Open Folder Settings** - Open the settings for the active folder.
 
 Global Workspace settings override User settings and folder settings can override Workspace or User settings.
 
@@ -307,29 +308,29 @@ VS Code supports folder level extension recommendations through the `extensions.
 
 ```json
 {
-    "folders": [
-        {
-            "path": "vscode"
-        },
-        {
-            "path": "vscode-docs"
-        }
-    ],
-    "extensions": {
-        "recommendations": [
-            "eg2.tslint",
-            "dbaeumer.vscode-eslint",
-            "msjsdiag.debugger-for-chrome"
-        ]
+  "folders": [
+    {
+      "path": "vscode"
+    },
+    {
+      "path": "vscode-docs"
     }
+  ],
+  "extensions": {
+    "recommendations": [
+      "eg2.tslint",
+      "dbaeumer.vscode-eslint",
+      "msjsdiag.debugger-for-chrome"
+    ]
+  }
 }
 ```
 
 ## Next steps
 
-* [What is a VS Code "workspace"?](/docs/editor/workspaces.md) - More about single-folder and multi-root workspaces.
-* [Debugging](/docs/editor/debugging.md) - Learn how to set up debugging for your application.
-* [Tasks](/docs/editor/tasks.md) - Tasks let you run external tools like compilers within VS Code.
+- [What is a VS Code "workspace"?](/docs/editor/workspaces.md) - More about single-folder and multi-root workspaces.
+- [Debugging](/docs/editor/debugging.md) - Learn how to set up debugging for your application.
+- [Tasks](/docs/editor/tasks.md) - Tasks let you run external tools like compilers within VS Code.
 
 ## Common questions
 

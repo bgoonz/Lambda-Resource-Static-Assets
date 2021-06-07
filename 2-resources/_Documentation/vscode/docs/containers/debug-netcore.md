@@ -5,6 +5,7 @@ PageTitle: Debug a .NET Core app running in a Docker container
 DateApproved: 01/29/2020
 MetaDescription: Debug a .NET Core app running in a Docker container, using Visual Studio Code.
 ---
+
 # Debug .NET Core within a container
 
 ## Prerequisites
@@ -15,7 +16,7 @@ MetaDescription: Debug a .NET Core app running in a Docker container, using Visu
 
 1. macOS users only: Add `/usr/local/share/dotnet/sdk/NuGetFallbackFolder` as a shared folder in your Docker preferences.
 
-    ![dockerSharedFolders](images/debug/mac-folders.png)
+   ![dockerSharedFolders](images/debug/mac-folders.png)
 
 ## Walkthrough
 

@@ -7,17 +7,38 @@ tags:
   - SVG
   - SVG:Tutorial
 ---
-<p>{{ PreviousNext("Web/SVG/Tutorial/Other_content_in_SVG", "Web/SVG/Tutorial/SVG_Fonts") }}</p>
 
-<p>There are situations, where basic shapes do not provide the flexibility you need to achieve a certain effect. Drop shadows, to provide a popular example, cannot be created reasonably with a combination of gradients. Filters are SVG's mechanism to create sophisticated effects.</p>
+<p>
+  {{ PreviousNext("Web/SVG/Tutorial/Other_content_in_SVG",
+  "Web/SVG/Tutorial/SVG_Fonts") }}
+</p>
 
-<p>A basic example is to add a blur effect to SVG content. While basic blurs can be achieved with the help of gradients, the blur filter is needed to do anything beyond.</p>
+<p>
+  There are situations, where basic shapes do not provide the flexibility you
+  need to achieve a certain effect. Drop shadows, to provide a popular example,
+  cannot be created reasonably with a combination of gradients. Filters are
+  SVG's mechanism to create sophisticated effects.
+</p>
+
+<p>
+  A basic example is to add a blur effect to SVG content. While basic blurs can
+  be achieved with the help of gradients, the blur filter is needed to do
+  anything beyond.
+</p>
 
 <h2 id="Example">Example</h2>
 
-<p>Filters are defined by {{SVGElement('filter')}} element, which should be put in the <code>&lt;defs&gt;</code> section of your SVG file. Between the filter tags, goes a list of <em>primitives</em>, basic operations that build on top of the previous operations (like blurring, adding a lighting effect, etc). To apply your created filter on a graphic element, you set the {{SVGAttr('filter')}} attribute.</p>
+<p>
+  Filters are defined by {{SVGElement('filter')}} element, which should be put
+  in the <code>&lt;defs&gt;</code> section of your SVG file. Between the filter
+  tags, goes a list of <em>primitives</em>, basic operations that build on top
+  of the previous operations (like blurring, adding a lighting effect, etc). To
+  apply your created filter on a graphic element, you set the
+  {{SVGAttr('filter')}} attribute.
+</p>
 
-<pre class="brush: html">&lt;svg width="250" viewBox="0 0 200 85"
+<pre class="brush: html">
+&lt;svg width="250" viewBox="0 0 200 85"
      xmlns="http://www.w3.org/2000/svg" version="1.1"&gt;
   &lt;defs&gt;
     &lt;!-- Filter declaration --&gt;
@@ -64,85 +85,133 @@ tags:
 
 <h3 id="Step_1">Step 1</h3>
 
-<pre class="brush: html">&lt;feGaussianBlur in="SourceAlpha"
+<pre class="brush: html">
+&lt;feGaussianBlur in="SourceAlpha"
                 stdDeviation="4"
-                result="blur"/&gt;</pre>
+                result="blur"/&gt;</pre
+>
 
-<p>{{SVGElement('feGaussianBlur')}} takes <code>in</code> "SourceAlpha", which is the alpha channel of the source graphic, applies a blur of 4, and stores the <code>result</code> in a temporary buffer named "blur".</p>
+<p>
+  {{SVGElement('feGaussianBlur')}} takes <code>in</code> "SourceAlpha", which is
+  the alpha channel of the source graphic, applies a blur of 4, and stores the
+  <code>result</code> in a temporary buffer named "blur".
+</p>
 
 <h3 id="Step_2">Step 2</h3>
 
-<pre class="brush: html">&lt;feOffset in="blur"
+<pre class="brush: html">
+&lt;feOffset in="blur"
           dx="4" dy="4"
-          result="offsetBlur"/&gt;</pre>
+          result="offsetBlur"/&gt;</pre
+>
 
-<p>{{SVGElement('feOffset')}} takes <code>in</code> "blur", which we previously created, shifts the result 4 to the right and 4 to the bottom, and stores the <code>result</code> in the buffer "offsetBlur". The two first primitives just created a drop shadow.</p>
+<p>
+  {{SVGElement('feOffset')}} takes <code>in</code> "blur", which we previously
+  created, shifts the result 4 to the right and 4 to the bottom, and stores the
+  <code>result</code> in the buffer "offsetBlur". The two first primitives just
+  created a drop shadow.
+</p>
 
 <h3 id="Step_3">Step 3</h3>
 
-<pre class="brush: html">&lt;feSpecularLighting in="offsetBlur"
+<pre class="brush: html">
+&lt;feSpecularLighting in="offsetBlur"
                     surfaceScale="5" specularConstant=".75"
                     specularExponent="20" lighting-color="#bbbbbb"
                     result="specOut"&gt;
   &lt;fePointLight x="-5000" y="-10000" z="20000"/&gt;
-&lt;/feSpecularLighting&gt;</pre>
+&lt;/feSpecularLighting&gt;</pre
+>
 
-<p>{{SVGelement('feSpecularLighting')}} takes <code>in</code> "offsetBlur", generates a lighting effect, and stores the <code>result</code> in the buffer "specOut".</p>
+<p>
+  {{SVGelement('feSpecularLighting')}} takes <code>in</code> "offsetBlur",
+  generates a lighting effect, and stores the <code>result</code> in the buffer
+  "specOut".
+</p>
 
 <h3 id="Step_4">Step 4</h3>
 
-<pre class="brush: html">&lt;feComposite in="specOut" in2="SourceAlpha"
+<pre class="brush: html">
+&lt;feComposite in="specOut" in2="SourceAlpha"
              operator="in"
-             result="specOut"/&gt;</pre>
+             result="specOut"/&gt;</pre
+>
 
-<p>The first {{SVGElement('feComposite')}} takes <code>in</code> "specOut" and "SourceAlpha", masks out the result of "specOut" so that the result is not bigger than "SourceAlpha" (the original source graphic), and overrides the <code>result</code> "specOut".</p>
+<p>
+  The first {{SVGElement('feComposite')}} takes <code>in</code> "specOut" and
+  "SourceAlpha", masks out the result of "specOut" so that the result is not
+  bigger than "SourceAlpha" (the original source graphic), and overrides the
+  <code>result</code> "specOut".
+</p>
 
 <h3 id="Step_5">Step 5</h3>
 
-<pre class="brush: html">&lt;feComposite in="SourceGraphic" in2="specOut"
+<pre class="brush: html">
+&lt;feComposite in="SourceGraphic" in2="specOut"
              operator="arithmetic"
              k1="0" k2="1" k3="1" k4="0"
-             result="litPaint"/&gt;</pre>
+             result="litPaint"/&gt;</pre
+>
 
-<p>The second {{SVGElement('feComposite')}} takes <code>in</code> "SourceGraphic" and "specOut", adds the result of "specOut" on top of "SourceGraphic", and stores the <code>result</code> in "litPaint".</p>
+<p>
+  The second {{SVGElement('feComposite')}} takes <code>in</code> "SourceGraphic"
+  and "specOut", adds the result of "specOut" on top of "SourceGraphic", and
+  stores the <code>result</code> in "litPaint".
+</p>
 
 <h3 id="Step_6">Step 6</h3>
 
-<pre class="brush: html">&lt;feMerge&gt;
+<pre class="brush: html">
+&lt;feMerge&gt;
   &lt;feMergeNode in="offsetBlur"/&gt;
   &lt;feMergeNode in="litPaint"/&gt;
-&lt;/feMerge&gt;</pre>
+&lt;/feMerge&gt;</pre
+>
 
-<p>Finally, {{SVGElement('feMerge')}} merges together "offsetBlur", which is the drop shadow, and "litPaint", which is the original source graphic with a lighting effect.</p>
+<p>
+  Finally, {{SVGElement('feMerge')}} merges together "offsetBlur", which is the
+  drop shadow, and "litPaint", which is the original source graphic with a
+  lighting effect.
+</p>
 
-<div style="display: flex; text-align: center;">
-<div><img alt="Source graphic" src="filters01-0.png">
-<p>Source graphic</p>
+<div style="display: flex; text-align: center">
+  <div>
+    <img alt="Source graphic" src="filters01-0.png" />
+    <p>Source graphic</p>
+  </div>
+
+  <div>
+    <img alt="Primitive 1" src="filters01-1.png" />
+    <p>Primitive 1</p>
+  </div>
+
+  <div>
+    <img alt="Primitive 2" src="filters01-2.png" />
+    <p>Primitive 2</p>
+  </div>
+
+  <div>
+    <img alt="Primitive 3" src="filters01-3.png" />
+    <p>Primitive 3</p>
+  </div>
+
+  <div>
+    <img alt="Primitive 4" src="filters01-4.png" />
+    <p>Primitive 4</p>
+  </div>
+
+  <div>
+    <img alt="Primitive 5" src="filters01-5.png" />
+    <p>Primitive 5</p>
+  </div>
+
+  <div>
+    <img alt="Primitive 6" src="filters01-6.png" />
+    <p>Primitive 6</p>
+  </div>
 </div>
 
-<div><img alt="Primitive 1" src="filters01-1.png">
-<p>Primitive 1</p>
-</div>
-
-<div><img alt="Primitive 2" src="filters01-2.png">
-<p>Primitive 2</p>
-</div>
-
-<div><img alt="Primitive 3" src="filters01-3.png">
-<p>Primitive 3</p>
-</div>
-
-<div><img alt="Primitive 4" src="filters01-4.png">
-<p>Primitive 4</p>
-</div>
-
-<div><img alt="Primitive 5" src="filters01-5.png">
-<p>Primitive 5</p>
-</div>
-
-<div><img alt="Primitive 6" src="filters01-6.png">
-<p>Primitive 6</p>
-</div>
-</div>
-
-<p>{{ PreviousNext("Web/SVG/Tutorial/Other_content_in_SVG", "Web/SVG/Tutorial/SVG_Fonts") }}</p>
+<p>
+  {{ PreviousNext("Web/SVG/Tutorial/Other_content_in_SVG",
+  "Web/SVG/Tutorial/SVG_Fonts") }}
+</p>

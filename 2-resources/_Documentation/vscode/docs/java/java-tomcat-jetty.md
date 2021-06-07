@@ -36,12 +36,12 @@ The [Jetty for Java](https://marketplace.visualstudio.com/items?itemName=SummerS
 
 The extension includes the following features:
 
-* Add Jetty Server from download directory
-* Start/Restart/Stop/Delete Jetty Server
-* Run/Debug/Delete `war` package
-* Reveal `war` package in file explorer
-* Open Server homepage
-* Open `war` package homepage
+- Add Jetty Server from download directory
+- Start/Restart/Stop/Delete Jetty Server
+- Run/Debug/Delete `war` package
+- Reveal `war` package in file explorer
+- Open Server homepage
+- Open `war` package homepage
 
 <video autoplay loop muted playsinline controls>
   <source src="/docs/java/java-tomcat-jetty/jetty.mp4" type="video/mp4">

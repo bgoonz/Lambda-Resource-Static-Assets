@@ -7,6 +7,7 @@ PageTitle: Container tools extension for Visual Studio Code
 DateApproved: 07/31/2020
 MetaDescription: Tools for developing and debugging with Docker containers, using Visual Studio Code.
 ---
+
 # Working with containers
 
 The [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) extension makes it easy to build, manage, and deploy containerized applications from Visual Studio Code.
@@ -67,7 +68,7 @@ An image in an Azure Container Registry can be deployed to Azure App Service dir
 
 ## Debugging services running inside a container
 
-You can debug services built using .NET (C#) and Node.js that are running inside a container. The extension offers custom tasks that help with launching a service under the debugger and with attaching the debugger to a running service instance. For more information see [Debug container application](/docs/containers/debug-common.md)  and [Extension Properties and Tasks](/docs/containers/reference.md) pages.
+You can debug services built using .NET (C#) and Node.js that are running inside a container. The extension offers custom tasks that help with launching a service under the debugger and with attaching the debugger to a running service instance. For more information see [Debug container application](/docs/containers/debug-common.md) and [Extension Properties and Tasks](/docs/containers/reference.md) pages.
 
 ## Azure CLI integration
 
@@ -75,7 +76,7 @@ You can start Azure CLI (command-line interface) in a standalone, Linux-based co
 
 ## Docker Compose
 
-[Docker Compose](https://docs.docker.com/compose/) lets you define and run multi-container applications with Docker. You can define what  shape these containers look like with a file called `docker-compose.yml`.
+[Docker Compose](https://docs.docker.com/compose/) lets you define and run multi-container applications with Docker. You can define what shape these containers look like with a file called `docker-compose.yml`.
 
 Visual Studio Code's experience for authoring `docker-compose.yml` is also very rich, providing IntelliSense for valid Docker compose directives and it will query Docker Hub for metadata on public Docker images.
 
@@ -83,15 +84,15 @@ Visual Studio Code's experience for authoring `docker-compose.yml` is also very 
 2. Define a new service called `web:`
 3. On the second line, bring up IntelliSense by pressing `kb(editor.action.triggerSuggest)` to see a list of all valid compose directives.
 
- ![Docker Compose IntelliSense](images/overview/dockercomposeintellisense.png)
+![Docker Compose IntelliSense](images/overview/dockercomposeintellisense.png)
 
 4. For the `image` directive, you can press `kb(editor.action.triggerSuggest)` again and VS Code will query the Docker Hub index for public images.
 
- ![Docker Compose image suggestions](images/overview/dockercomposeimageintellisense.png)
+![Docker Compose image suggestions](images/overview/dockercomposeimageintellisense.png)
 
 VS Code will first show a list of popular images along with metadata such as the number of stars and description. If you continue typing, VS Code will query the Docker Hub index for matching images, including searching public profiles. For example, searching for 'Microsoft' will show you all the public Microsoft images.
 
- ![Docker Compose Microsoft image suggestions](images/overview/dockercomposesearch.png)
+![Docker Compose Microsoft image suggestions](images/overview/dockercomposesearch.png)
 
 ## Next steps
 

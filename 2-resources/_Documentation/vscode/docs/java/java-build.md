@@ -123,8 +123,8 @@ There are two ways to generate a Maven project:
 
 VS Code supports basic Gradle Java project (not including Android). There are also a couple third party extensions available for writing `.gradle` files as well as running Gradle tasks.
 
-* [Gradle Language Support](https://marketplace.visualstudio.com/items?itemName=naco-siren.gradle-language)
-* [Gradle Tasks](https://marketplace.visualstudio.com/items?itemName=richardwillis.vscode-gradle)
+- [Gradle Language Support](https://marketplace.visualstudio.com/items?itemName=naco-siren.gradle-language)
+- [Gradle Tasks](https://marketplace.visualstudio.com/items?itemName=richardwillis.vscode-gradle)
 
 ### Additional resources
 
@@ -136,7 +136,7 @@ In addition to Maven, there's also a [Bazel extension](https://marketplace.visua
 
 Read on to find out more about:
 
-* [Java Editing](/docs/java/java-editing.md) - Explore the editing features for Java in VS Code.
-* [Java Debugging](/docs/java/java-debugging.md) - Find out how to debug your Java project with VS Code.
-* [Java Testing](/docs/java/java-testing.md) - Use VS Code for your JUnit and TestNG cases.
-* [Java Extensions](/docs/java/extensions.md) - Learn about more useful Java extensions for VS Code.
+- [Java Editing](/docs/java/java-editing.md) - Explore the editing features for Java in VS Code.
+- [Java Debugging](/docs/java/java-debugging.md) - Find out how to debug your Java project with VS Code.
+- [Java Testing](/docs/java/java-testing.md) - Use VS Code for your JUnit and TestNG cases.
+- [Java Extensions](/docs/java/extensions.md) - Learn about more useful Java extensions for VS Code.

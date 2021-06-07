@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>cpp-debug</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="debug-c-in-visual-studio-code">Debug C++ in Visual Studio Code</h1>
+<p>After you have set up the basics of your debugging environment as specified in the configuration tutorials for each target compiler/platform, you can learn more details about debugging C/C++ in this section.</p>
+<p>Visual Studio Code supports the following debuggers for C/C++ depending on the operating system you are using:</p>
+<ul>
+<li><strong>Linux</strong>: GDB</li>
+<li><strong>macOS</strong>: LLDB or GDB</li>
+<li><strong>Windows</strong>: the Visual Studio Windows Debugger or GDB (using Cygwin or MinGW)</li>
+</ul>
+<h2 id="windows-debugging-with-gdb">Windows debugging with GDB</h2>
+<p>You can debug Windows applications created using Cygwin or MinGW by using VS Code. To use Cygwin or MinGW debugging features, the debugger path must be set manually in the launch configuration (<code>launch.json</code>). To debug your Cygwin or MinGW application, add the <code>miDebuggerPath</code> property and set its value to the location of the corresponding gdb.exe for your Cygwin or MinGW environment.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1">    <span class="er">&quot;miDebuggerPath&quot;:</span> <span class="er">&quot;c:\\mingw\\bin\\gdb.exe&quot;</span></a></code></pre></div>
+<p>Cygwin/MinGW debugging on Windows supports both attach and launch debugging scenarios.</p>
+<p>To learn more, see <a href="/docs/cpp/launch-json-reference.md">Configuring C/C++ debugging</a>.</p>
+<p>If you are debugging with GDB on Windows, see <a href="/docs/cpp/config-mingw.md">Windows Debugging with MinGW64</a>.</p>
+<h2 id="conditional-breakpoints">Conditional breakpoints</h2>
+<p>Conditional breakpoints enable you to break execution on a particular line of code only when the value of the condition is true. To set a conditional breakpoint, right-click on an existing breakpoint and select <strong>Edit Breakpoint</strong>. This opens a small peek window where you can enter the condition that must evaluate to true in order for the breakpoint to be hit during debugging.</p>
+<figure>
+<img src="images/cpp/condbreak.png" alt="A conditional break" /><figcaption>A conditional break</figcaption>
+</figure>
+<p>In the editor, conditional breakpoints are indicated by a breakpoint symbol that has a black equals sign inside of it. You can place the cursor over a conditional breakpoint to show its condition.</p>
+<h2 id="function-breakpoints">Function breakpoints</h2>
+<p>Function breakpoints enable you to break execution at the beginning of a function instead of on a particular line of code. To set a function breakpoint, on the <strong>Run</strong> view right-click inside the <strong>Breakpoints</strong> section, then choose <strong>Add Function Breakpoint</strong> and enter the name of the function on which you want to break execution.</p>
+<h2 id="expression-evaluation">Expression evaluation</h2>
+<p>VS Code supports expression evaluation in several contexts:</p>
+<ul>
+<li>You can type an expression into the <strong>Watch</strong> section of the <strong>Run</strong> view and it will be evaluated each time a breakpoint is hit.</li>
+<li>You can type an expression into the <strong>Debug Console</strong> and it will be evaluated only once.</li>
+<li>You can evaluate any expression that appears in your code while you’re stopped at a breakpoint.</li>
+</ul>
+<p>Expressions in the <strong>Watch</strong> section take effect in the application being debugged; an expression that modifies the value of a variable will modify that variable for the duration of the program.</p>
+<h2 id="multi-threaded-debugging">Multi-threaded debugging</h2>
+<p>The C/C++ extension for VS Code has the ability to debug multi-threaded programs. All threads and their call stacks appear in the <strong>Call Stack</strong> section:</p>
+<figure>
+<img src="images/cpp/threads.png" alt="Multi-threaded process" /><figcaption>Multi-threaded process</figcaption>
+</figure>
+<h2 id="memory-dump-debugging">Memory dump debugging</h2>
+<p>The C/C++ extension for VS Code also has the ability to debug memory dumps. To debug a memory dump, open your <code>launch.json</code> file and add the <code>coreDumpPath</code> (for GDB or LLDB) or <code>dumpPath</code> (for the Visual Studio Windows Debugger) property to the <strong>C++ Launch</strong> configuration, set its value to be a string containing the path to the memory dump. This will even work for x86 programs being debugged on an x64 machine.</p>
+<h2 id="additional-symbols">Additional symbols</h2>
+<p>If there are additional directories where the debugger can find symbol files (for example, <code>.pdb</code> files for the Visual Studio Windows Debugger), they can be specified by adding the <code>additionalSOLibSearchPath</code> (for GDB or LLDB) or <code>symbolSearchPath</code> (for the Visual Studio Windows Debugger).</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1">    <span class="er">&quot;additionalSOLibSearchPath&quot;:</span> <span class="er">&quot;/path/to/symbols;/another/path/to/symbols&quot;</span></a></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1">    <span class="er">&quot;symbolSearchPath&quot;:</span> <span class="er">&quot;C:\\path\\to\\symbols;C:\\another\\path\\to\\symbols&quot;</span></a></code></pre></div>
+<h2 id="locate-source-files">Locate source files</h2>
+<p>The source file location can be changed if the source files are not located in the compilation location. This is done by simple replacement pairs added in the <code>sourceFileMap</code> section. The first match in this list will be used.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="er">&quot;sourceFileMap&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="dt">&quot;/build/gcc-4.8-fNUjSI/gcc-4.8-4.8.4/build/i686-linux-gnu/libstdc++-v3/include/i686-linux-gnu&quot;</span><span class="fu">:</span> <span class="st">&quot;/usr/include/i686-linux-gnu/c++/4.8&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="dt">&quot;/build/gcc-4.8-fNUjSI/gcc-4.8-4.8.4/build/i686-linux-gnu/libstdc++-v3/include&quot;</span><span class="fu">:</span> <span class="st">&quot;/usr/include/c++/4.8&quot;</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="fu">}</span></a></code></pre></div>
+<h2 id="gdb-lldb-and-lldb-mi-commands-gdblldb">GDB, LLDB, and LLDB-MI Commands (GDB/LLDB)</h2>
+<p>For the <code>C++ (GDB/LLDB)</code> debugging environment, you can execute GDB, LLDB and LLDB-MI commands directly through the debug console with the <code>-exec</code> command, but be careful, executing commands directly in the debug console is untested and might crash VS Code in some cases.</p>
+<h2 id="other-debugging-features">Other debugging features</h2>
+<ul>
+<li>Unconditional breakpoints</li>
+<li>Watch window</li>
+<li>Call stack</li>
+<li>Stepping</li>
+</ul>
+<p>For more information on debugging with VS Code, see this introduction to <a href="/docs/editor/debugging.md">debugging in VS Code</a>.</p>
+<p>For additional ways to configure the launch.json file so that you can debug your C/C++ app, see <a href="/docs/cpp/launch-json-reference.md">Configuring C/C++ debugging</a>.</p>
+<h3 id="natvis-framework">Natvis framework</h3>
+<p>You create custom views of C++ object in the debugger with the <a href="https://docs.microsoft.com/visualstudio/debugger/create-custom-views-of-native-objects">Natvis</a> framework. You can read the <a href="/docs/cpp/natvis.md">Custom views for native objects</a> topic for details on using Natvis with the C/C++ extension.</p>
+<h3 id="debug-remotely">Debug remotely</h3>
+<p>For information about attaching to a remote process, such as debugging a process in a Docker container, see <a href="/docs/cpp/pipe-transport.md">Pipe transport</a>.</p>
+<h3 id="debug-the-debugger">Debug the debugger</h3>
+<p>If you are experiencing a debugging problem with the extension that we can’t diagnose based on information in your issue report, we might ask you to enable logging and send us your logs. See <a href="/docs/cpp/enable-logging-cpp.md#enable-logging-for-the-debug-adapter">Enable logging for the debug adapter</a> to learn how to get C/C++ extension logs.</p>
+<h2 id="known-limitations">Known limitations</h2>
+<h3 id="symbols-and-code-navigation">Symbols and code navigation</h3>
+<p>All platforms:</p>
+<ul>
+<li>Because the extension doesn’t parse function bodies, <strong>Peek Definition</strong> and <strong>Go to Definition</strong> don’t work for symbols defined inside the body of a function.</li>
+</ul>
+<h3 id="debugging">Debugging</h3>
+<p>Windows:</p>
+<ul>
+<li>GDB on Cygwin and MinGW cannot break a running process. To set a breakpoint when the application is running (not stopped under the debugger), or to pause the application being debugged, press <code>kbstyle(Ctrl-C)</code> in the application’s terminal.</li>
+<li>GDB on Cygwin cannot open core dumps.</li>
+</ul>
+<p>Linux:</p>
+<ul>
+<li><p>You may see an error saying: <code>ptrace: Operation not permitted</code>. This is due to GDB needing elevated permissions in order to attach to a process. This can be solved using the solutions below:</p>
+<ol type="1">
+<li>When using <em>attach to process</em>, you need to provide your password before the debugging session can begin.</li>
+<li><p>To disable this error temporarily, use the following command:</p>
+<p><code>echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope</code></p></li>
+<li><p>To remove the error permanently, add a file called <code>10-ptrace.conf</code> to <code>/etc/sysctl.d/</code> and add the following <code>kernel.yama.ptrace_scope = 0</code>.</p></li>
+</ol></li>
+</ul>
+<p>macOS:</p>
+<ul>
+<li>LLDB:
+<ul>
+<li>When debugging with LLDB, if the Terminal window is closed while in break mode, debugging does not stop. Debugging can be stopped by pressing the <strong>Stop</strong> button.</li>
+<li>When debugging is stopped the Terminal window is not closed.</li>
+</ul></li>
+<li>GDB:
+<ul>
+<li>Additional manual install steps are required to use GDB on macOS. See <em>Manual Installation of GDB for OS X</em> in the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">README</a>.</li>
+<li>When attaching to a process with GDB, the application being debugged cannot be interrupted. GDB will only bind breakpoints set while the application is not running (either before attaching to the application, or while the application is in a stopped state). This is due to <a href="https://sourceware.org/bugzilla/show_bug.cgi?id=20035">a bug in GDB</a>.</li>
+<li>Core dumps cannot be loaded when debugging with GDB because GDB <a href="https://www.sourceware.org/ml/gdb/2014-01/msg00036.html">does not support the core dump format used in macOS</a>.</li>
+<li>When attached to a process with GDB, break-all will end the process.</li>
+</ul></li>
+</ul>
+<h2 id="next-steps">Next steps</h2>
+<p>Read on to find out about:</p>
+<ul>
+<li><a href="/docs/cpp/config-wsl.md">Configure VS Code for Windows Subsystem for Linux</a></li>
+<li><a href="/docs/cpp/config-mingw.md">Configure VS Code for Mingw-w64 and GCC</a></li>
+<li><a href="/docs/cpp/config-clang-mac.md">Configure VS Code for macOS</a></li>
+<li><a href="/docs/cpp/launch-json-reference.md">Configure C/C++ debugging</a> - Learn about additional debugger configuration options.</li>
+<li><a href="/docs/editor/codebasics.md">Basic Editing</a> - Learn about the powerful Visual Studio Code editor.</li>
+<li><a href="/docs/editor/editingevolved.md">Code Navigation</a> - Move quickly through your source code.</li>
+<li><a href="/docs/editor/tasks.md">Tasks</a> - use tasks to build your project and more.</li>
+<li><a href="/docs/editor/debugging.md">Debugging</a> - find out about the Visual Studio Code debugger.</li>
+</ul>
+<p>If you have any other questions or run into any issues, please file an issue on <a href="https://github.com/microsoft/vscode-cpptools/issues">GitHub</a>.</p>
+</body>
+</html>

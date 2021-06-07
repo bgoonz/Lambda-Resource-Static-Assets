@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>csharp</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="working-with-c">Working with C#</h1>
+<p>The C# support in Visual Studio Code is optimized for cross-platform .NET Core development (see <a href="/docs/languages/dotnet.md">working with .NET Core and VS Code</a> for another relevant article). Our focus with VS Code is to be a great editor for cross-platform C# development.</p>
+<figure>
+<img src="images/csharp/c_sharp_hero.png" alt="C# language within VS Code" /><figcaption>C# language within VS Code</figcaption>
+</figure>
+<p>VS Code supports debugging of C# applications running on either .NET Core or Mono.</p>
+<p>For detailed instructions on:</p>
+<ul>
+<li>.NET Core debugging - see the <a href="https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger.md">Microsoft C# extension’s GitHub page</a>.</li>
+<li>Mono debugging - see the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.mono-debug">Mono Debug extension’s README</a>.</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> <a href="https://github.com/OmniSharp/omnisharp-vscode/wiki/Desktop-.NET-Framework">VS Code has limited support for debugging applications running on the Desktop .NET Framework.</a></p>
+</blockquote>
+<p>Due to this focus, many standard C# project types are not recognized by VS Code. An example of a non-supported project type is an ASP.NET MVC Application (though <a href="https://asp.net">ASP.NET Core</a> is supported). In these cases, if you want to have a lightweight tool to edit a file - VS Code has you covered. If you want the best possible experience for those projects and development on Windows in general, we recommend you use <a href="https://visualstudio.microsoft.com/vs/community">Visual Studio Community</a>.</p>
+<h2 id="installing-c-support">Installing C# support</h2>
+<p>C# language support is an optional <a href="https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp">install from the Marketplace</a>. You can install it from within VS Code by searching for ‘C#’ in the <strong>Extensions</strong> view (<code>kb(workbench.view.extensions)</code>) or if you already have a project with C# files, VS Code will prompt you to install the extension as soon as you open a C# file.</p>
+<p><a href="https://channel9.msdn.com/Blogs/dotnet/Get-started-VSCode-Csharp-NET-Core-Windows">Video Tutorial on Getting Started with C# in VS Code with .NET Core</a></p>
+<h2 id="roslyn-and-omnisharp">Roslyn and OmniSharp</h2>
+<p>Visual Studio Code uses the power of <a href="https://github.com/dotnet/roslyn">Roslyn</a> and <a href="https://www.omnisharp.net">OmniSharp</a> to offer an enhanced C# experience. We offer support for:</p>
+<ul>
+<li>.NET Core projects</li>
+<li>MSBuild projects</li>
+<li>C# scripts (CSX)</li>
+</ul>
+<p>On startup the best matching projects are loaded automatically but you can also choose your projects manually. The status bar will show what projects have been loaded and also allows you to select a different set of projects. To do so, click on the status bar projects item and select <em>Change projects…</em>. In the image below a single project has been picked up:</p>
+<figure>
+<img src="images/csharp/selectproject.png" alt="Select Project" /><figcaption>Select Project</figcaption>
+</figure>
+<p>The available options include:</p>
+<ul>
+<li>Selecting a <code>project.json</code> file will open a .NET Core project and VS Code will load that project plus the referenced projects.</li>
+<li>Selecting a <code>*.sln</code> file opens a MSBuild-project. It will load the referenced <code>*.csproj</code> projects and sibling or descendant <code>project.json</code> files but no other project files that are referenced from the solution file.</li>
+<li>Selecting a <code>folder</code> will make VS Code scan for <code>*.sln</code>, <code>project.json</code> and <code>*.csx</code> files (C# scripts) and VS Code will attempt to load them all.</li>
+</ul>
+<p>Once the project is loaded the enhanced experiences light up…</p>
+<h2 id="editing-evolved">Editing Evolved</h2>
+<p>There is a lot to discover with C# and the editor, such as format on type, IntelliSense, the rename-refactoring, etc.</p>
+<figure>
+<img src="images/csharp/editingevolved.png" alt="Right Click Menu" /><figcaption>Right Click Menu</figcaption>
+</figure>
+<p>For a full description of our editing features, go to the <a href="/docs/editor/codebasics.md">Basic Editing</a> and <a href="/docs/editor/editingevolved.md">Code Navigation</a> documentation.</p>
+<p>Here are a few highlights…</p>
+<h2 id="intellisense">IntelliSense</h2>
+<p>IntelliSense just works: hit <code>kb(editor.action.triggerSuggest)</code> at any time to get context specific suggestions.</p>
+<figure>
+<img src="images/csharp/intellisense.png" alt="IntelliSense" /><figcaption>IntelliSense</figcaption>
+</figure>
+<h2 id="snippets-for-c">Snippets for C#</h2>
+<p>We have several built-in snippets included in VS Code that will come up as you type or you can press <code>kb(editor.action.triggerSuggest)</code> (Trigger Suggest) and we will give you a context specific list of suggestions.</p>
+<figure>
+<img src="images/csharp/snippet.png" alt="Snippets" /><figcaption>Snippets</figcaption>
+</figure>
+<blockquote>
+<p><strong>Tip:</strong> You can add in your own User Defined Snippets for C#. Take a look at <a href="/docs/editor/userdefinedsnippets.md">User Defined Snippets</a> to find out how.</p>
+</blockquote>
+<h2 id="search-for-symbols">Search for Symbols</h2>
+<p>There are also features outside the editor. One is the ability to search for symbols from wherever you are. Hit <code>kb(workbench.action.showAllSymbols)</code>, start typing, and see a list of matching C# symbols. Select one and you’ll be taken straight to its code location.</p>
+<figure>
+<img src="images/csharp/symbols.png" alt="Symbols" /><figcaption>Symbols</figcaption>
+</figure>
+<h2 id="codelens">CodeLens</h2>
+<p>Another cool feature is the ability to see the number of references to a method directly above the method. Click on the reference info to see the references in the Peek view. This reference information updates as you type.</p>
+<blockquote>
+<p><strong>Note:</strong> Methods defined in <code>object</code>, such as <code>equals</code> and <code>hashCode</code> do not get reference information due to performance reasons.</p>
+</blockquote>
+<figure>
+<img src="images/csharp/codelens.png" alt="CodeLens" /><figcaption>CodeLens</figcaption>
+</figure>
+<blockquote>
+<p><strong>Tip:</strong> You can turn off references information displayed in CodeLens with the <code>editor.codeLens</code> <a href="/docs/getstarted/settings.md">setting</a>.</p>
+</blockquote>
+<h2 id="find-referencespeek-definition">Find References/Peek Definition</h2>
+<p>You can click on the references of an object to find the locations of its use in place without losing context. This same experience works in reverse where you can Peek the definition of an object and see it inline without leaving your location.</p>
+<figure>
+<img src="images/csharp/peek.png" alt="Peek" /><figcaption>Peek</figcaption>
+</figure>
+<h2 id="quick-fixes-suggestions">Quick Fixes / Suggestions</h2>
+<p>There are some basic quick fixes supported in VS Code. You will see a lightbulb and clicking on it, or pressing <code>kb(editor.action.quickFix)</code> provides you with a simple list of fixes/suggestions.</p>
+<figure>
+<img src="images/csharp/lightbulb.png" alt="Quick fix" /><figcaption>Quick fix</figcaption>
+</figure>
+<h2 id="next-steps">Next steps</h2>
+<p>Read on to find out about:</p>
+<ul>
+<li><a href="/docs/languages/dotnet.md">.NET Core Development</a> - get up and running with cross-platform .NET</li>
+<li><a href="/docs/editor/codebasics.md">Basic Editing</a> - Learn about the powerful VS Code editor.</li>
+<li><a href="/docs/editor/tasks.md">Tasks</a> - Use tasks to build your project and more.</li>
+<li><a href="/docs/editor/debugging.md">Debugging</a> - Find out how to use the debugger with your project.</li>
+<li><a href="/docs/other/unity.md">Unity development</a> - Learn about using VS Code with your Unity projects.</li>
+</ul>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="my-project-wont-load">My Project won’t load</h3>
+<p>VS Code only supports a limited set of project types (primarily .NET Core). For full .NET project support, we suggest you use <a href="https://visualstudio.microsoft.com/vs/community">Visual Studio Community</a>.</p>
+<h3 id="intellisense-is-not-working">IntelliSense is not working</h3>
+<p>This is typically as a result of the current project type not being supported. You can see an indication in the OmniSharp flame in the bottom left hand side of the status bar.</p>
+<h3 id="how-do-i-buildrun-my-project">How do I build/run my project?</h3>
+<p>VS Code supports tasks for build and natively understand the output of MSBuild, CSC, XBuild. Find out more in the <a href="/docs/editor/tasks.md">Tasks</a> documentation.</p>
+<h3 id="im-missing-required-assets-to-build-and-debug-c-in-vs-code.-my-debugger-says-no-configuration">I’m missing required assets to build and debug C# in VS Code. My debugger says “No Configuration”</h3>
+<p>The Visual Studio Code C# extension can generate the assets you need to build and debug. If you missed the prompt when you first opened a new C# project, you can still perform this operation through the Command Palette (<strong>View &gt; Command Palette</strong>) by typing ‘.NET’, and running <strong>.NET: Generate Assets for Build and Debug</strong>. This command will generate the necessary <code>launch.json</code> and <code>tasks.json</code> configuration files (under the <code>.vscode</code> folder).</p>
+</body>
+</html>

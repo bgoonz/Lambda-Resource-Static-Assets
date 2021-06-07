@@ -8,6 +8,7 @@ DateApproved: 3/31/2021
 MetaDescription: Learn more about installing and integrating JavaScript and Node.js extensions in the Visual Studio Code editor.
 MetaSocialImage: /assets/images/nodejs_javascript_vscode.png
 ---
+
 # JavaScript extensions for VS Code
 
 Visual Studio Code supports many features for JavaScript and Node.js development. The features that ship with the downloaded product are the core features: debugging, IntelliSense, code navigation, etc.
@@ -77,5 +78,3 @@ When you develop for the front end, you might not see the value of an integrated
 Prefer to debug using a different browser? You can find extensions for [Edge](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-edge) and [Firefox](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-firefox-debug) as well.
 
 ![debugger for chrome image](images/extensions/chrome_debugger.png)
-
-

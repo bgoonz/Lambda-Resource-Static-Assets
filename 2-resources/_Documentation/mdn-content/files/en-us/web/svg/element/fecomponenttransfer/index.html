@@ -6,11 +6,23 @@ tags:
   - SVG
   - SVG Filter
 ---
+
 <div>{{SVGRef}}</div>
 
-<p>The <strong><code>&lt;feComponentTransfer&gt;</code></strong> <a href="/en-US/docs/Web/SVG">SVG</a> filter primitive performs color-component-wise remapping of data for each pixel. It allows operations like brightness adjustment, contrast adjustment, color balance or thresholding.</p>
+<p>
+  The <strong><code>&lt;feComponentTransfer&gt;</code></strong>
+  <a href="/en-US/docs/Web/SVG">SVG</a> filter primitive performs
+  color-component-wise remapping of data for each pixel. It allows operations
+  like brightness adjustment, contrast adjustment, color balance or
+  thresholding.
+</p>
 
-<p>The calculations are performed on non-premultiplied color values. The colors are modified by changing each channel (R, G, B, and A) to the result of what the children {{SVGElement("feFuncR")}}, {{SVGElement("feFuncB")}}, {{SVGElement("feFuncG")}}, and {{SVGElement("feFuncA")}} return.</p>
+<p>
+  The calculations are performed on non-premultiplied color values. The colors
+  are modified by changing each channel (R, G, B, and A) to the result of what
+  the children {{SVGElement("feFuncR")}}, {{SVGElement("feFuncB")}},
+  {{SVGElement("feFuncG")}}, and {{SVGElement("feFuncA")}} return.
+</p>
 
 <h2 id="Usage_context">Usage context</h2>
 
@@ -21,28 +33,42 @@ tags:
 <h3 id="Global_attributes">Global attributes</h3>
 
 <ul>
- <li><a href="/en-US/docs/Web/SVG/Attribute#core_attributes">Core attributes</a></li>
- <li><a href="/en-US/docs/Web/SVG/Attribute#presentation_attributes">Presentation attributes</a></li>
- <li><a href="/en-US/docs/Web/SVG/Attribute#filter_primitive_attributes">Filter primitive attributes</a></li>
- <li>{{SVGAttr("class")}}</li>
- <li>{{SVGAttr("style")}}</li>
+  <li>
+    <a href="/en-US/docs/Web/SVG/Attribute#core_attributes">Core attributes</a>
+  </li>
+  <li>
+    <a href="/en-US/docs/Web/SVG/Attribute#presentation_attributes"
+      >Presentation attributes</a
+    >
+  </li>
+  <li>
+    <a href="/en-US/docs/Web/SVG/Attribute#filter_primitive_attributes"
+      >Filter primitive attributes</a
+    >
+  </li>
+  <li>{{SVGAttr("class")}}</li>
+  <li>{{SVGAttr("style")}}</li>
 </ul>
 
 <h3 id="Specific_attributes">Specific attributes</h3>
 
 <ul>
- <li>{{SVGAttr("in")}}</li>
+  <li>{{SVGAttr("in")}}</li>
 </ul>
 
 <h2 id="DOM_Interface">DOM Interface</h2>
 
-<p>This element implements the {{domxref("SVGFEComponentTransferElement")}} interface.</p>
+<p>
+  This element implements the {{domxref("SVGFEComponentTransferElement")}}
+  interface.
+</p>
 
 <h2 id="Example">Example</h2>
 
 <h3 id="SVG">SVG</h3>
 
-<pre class="brush: html; highlight[12-17,20-24,27-31,34-38]">&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300"&gt;
+<pre class="brush: html; highlight[12-17,20-24,27-31,34-38]">
+&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300"&gt;
   &lt;defs&gt;
     &lt;linearGradient id="rainbow" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100%" y2="0"&gt;
       &lt;stop offset="0" stop-color="#ff0000"&gt;&lt;/stop&gt;
@@ -103,13 +129,16 @@ tags:
     &lt;text x="0" y="270"&gt;Gamma function&lt;/text&gt;
     &lt;rect x="0" y="280" width="100%" height="20" style="filter:url(#gamma)"&gt;&lt;/rect&gt;
   &lt;/g&gt;
-&lt;/svg&gt;</pre>
+&lt;/svg&gt;</pre
+>
 
 <h3 id="CSS">CSS</h3>
 
-<pre class="brush: css">rect {
+<pre class="brush: css">
+rect {
   fill: url(#rainbow);
-}</pre>
+}</pre
+>
 
 <h3 id="Result">Result</h3>
 
@@ -118,25 +147,35 @@ tags:
 <h2 id="Specifications">Specifications</h2>
 
 <table class="standard-table">
- <thead>
-  <tr>
-   <th scope="col">Specification</th>
-   <th scope="col">Status</th>
-   <th scope="col">Comment</th>
-  </tr>
- </thead>
- <tbody>
-  <tr>
-   <td>{{SpecName('Filters 1.0', '#feComponentTransferElement', '&lt;feComponentTransfer&gt;')}}</td>
-   <td>{{Spec2('Filters 1.0')}}</td>
-   <td>Specified that missing transfer function elements are treated like they were specified with their {{SVGAttr("type")}} attributes set to <code>identity</code>.</td>
-  </tr>
-  <tr>
-   <td>{{SpecName('SVG1.1', 'filters.html#feComponentTransferElement', '&lt;feComponentTransfer&gt;')}}</td>
-   <td>{{Spec2('SVG1.1')}}</td>
-   <td>Initial definition</td>
-  </tr>
- </tbody>
+  <thead>
+    <tr>
+      <th scope="col">Specification</th>
+      <th scope="col">Status</th>
+      <th scope="col">Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        {{SpecName('Filters 1.0', '#feComponentTransferElement',
+        '&lt;feComponentTransfer&gt;')}}
+      </td>
+      <td>{{Spec2('Filters 1.0')}}</td>
+      <td>
+        Specified that missing transfer function elements are treated like they
+        were specified with their {{SVGAttr("type")}} attributes set to
+        <code>identity</code>.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        {{SpecName('SVG1.1', 'filters.html#feComponentTransferElement',
+        '&lt;feComponentTransfer&gt;')}}
+      </td>
+      <td>{{Spec2('SVG1.1')}}</td>
+      <td>Initial definition</td>
+    </tr>
+  </tbody>
 </table>
 
 <h2 id="Browser_compatibility">Browser compatibility</h2>
@@ -146,25 +185,29 @@ tags:
 <h2 id="See_also">See also</h2>
 
 <ul>
- <li>{{SVGElement("filter")}}</li>
- <li>{{SVGElement("feBlend")}}</li>
- <li>{{SVGElement("feColorMatrix")}}</li>
- <li>{{SVGElement("feComposite")}}</li>
- <li>{{SVGElement("feConvolveMatrix")}}</li>
- <li>{{SVGElement("feDiffuseLighting")}}</li>
- <li>{{SVGElement("feDisplacementMap")}}</li>
- <li>{{SVGElement("feFlood")}}</li>
- <li>{{SVGElement("feFuncA")}}</li>
- <li>{{SVGElement("feFuncB")}}</li>
- <li>{{SVGElement("feFuncG")}}</li>
- <li>{{SVGElement("feFuncR")}}</li>
- <li>{{SVGElement("feGaussianBlur")}}</li>
- <li>{{SVGElement("feImage")}}</li>
- <li>{{SVGElement("feMerge")}}</li>
- <li>{{SVGElement("feMorphology")}}</li>
- <li>{{SVGElement("feOffset")}}</li>
- <li>{{SVGElement("feSpecularLighting")}}</li>
- <li>{{SVGElement("feTile")}}</li>
- <li>{{SVGElement("feTurbulence")}}</li>
- <li><a href="/en-US/docs/Web/SVG/Tutorial/Filter_effects">SVG tutorial: Filter effects</a></li>
+  <li>{{SVGElement("filter")}}</li>
+  <li>{{SVGElement("feBlend")}}</li>
+  <li>{{SVGElement("feColorMatrix")}}</li>
+  <li>{{SVGElement("feComposite")}}</li>
+  <li>{{SVGElement("feConvolveMatrix")}}</li>
+  <li>{{SVGElement("feDiffuseLighting")}}</li>
+  <li>{{SVGElement("feDisplacementMap")}}</li>
+  <li>{{SVGElement("feFlood")}}</li>
+  <li>{{SVGElement("feFuncA")}}</li>
+  <li>{{SVGElement("feFuncB")}}</li>
+  <li>{{SVGElement("feFuncG")}}</li>
+  <li>{{SVGElement("feFuncR")}}</li>
+  <li>{{SVGElement("feGaussianBlur")}}</li>
+  <li>{{SVGElement("feImage")}}</li>
+  <li>{{SVGElement("feMerge")}}</li>
+  <li>{{SVGElement("feMorphology")}}</li>
+  <li>{{SVGElement("feOffset")}}</li>
+  <li>{{SVGElement("feSpecularLighting")}}</li>
+  <li>{{SVGElement("feTile")}}</li>
+  <li>{{SVGElement("feTurbulence")}}</li>
+  <li>
+    <a href="/en-US/docs/Web/SVG/Tutorial/Filter_effects"
+      >SVG tutorial: Filter effects</a
+    >
+  </li>
 </ul>

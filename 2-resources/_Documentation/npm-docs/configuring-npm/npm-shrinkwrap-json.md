@@ -6,8 +6,7 @@ description: A publishable lockfile
 
 ### Description
 
-`npm-shrinkwrap.json` is a file created by [`npm
-shrinkwrap`](/commands/npm-shrinkwrap). It is identical to
+`npm-shrinkwrap.json` is a file created by [`npm shrinkwrap`](/commands/npm-shrinkwrap). It is identical to
 `package-lock.json`, with one major caveat: Unlike `package-lock.json`,
 `npm-shrinkwrap.json` may be included when publishing a package.
 
@@ -28,7 +27,7 @@ refer to the manual page for
 
 ### See also
 
-* [npm shrinkwrap](/commands/npm-shrinkwrap)
-* [package-lock.json](/configuring-npm/package-lock-json)
-* [package.json](/configuring-npm/package-json)
-* [npm install](/commands/npm-install)
+- [npm shrinkwrap](/commands/npm-shrinkwrap)
+- [package-lock.json](/configuring-npm/package-lock-json)
+- [package.json](/configuring-npm/package-json)
+- [npm install](/commands/npm-install)

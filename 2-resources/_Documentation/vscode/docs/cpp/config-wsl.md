@@ -7,6 +7,7 @@ PageTitle: Get Started with C++ and Windows Subsystem for Linux in Visual Studio
 DateApproved: 11/22/2019
 MetaDescription: Configuring the C++ extension in Visual Studio Code to target g++ and GDB on WSL installation with Ubuntu
 ---
+
 # Using C++ and WSL in VS Code
 
 In this tutorial, you will configure Visual Studio Code to use the GCC C++ compiler (g++) and GDB debugger on Ubuntu in the [Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl/install-win10) (WSL). GCC stands for GNU Compiler Collection; GDB is the GNU debugger. WSL is a Linux environment within Windows that runs directly on the machine hardware, not in a virtual machine.
@@ -70,7 +71,7 @@ To successfully complete this tutorial, you must do the following steps:
    whereis gdb
    ```
 
->**Note**: The setup steps for installing the g++ compiler and GDB debugger apply if you are working directly on a Linux machine rather than in WSL. Running VS Code in your helloworld project, as well as the editing, building, and debugging steps are the same.
+> **Note**: The setup steps for installing the g++ compiler and GDB debugger apply if you are working directly on a Linux machine rather than in WSL. Running VS Code in your helloworld project, as well as the editing, building, and debugging steps are the same.
 
 ## Run VS Code in WSL
 
@@ -119,24 +120,24 @@ If you already have C/C++ language extensions installed locally in VS Code, you'
 
 Now paste in this source code:
 
-   ```cpp
-   #include <iostream>
-   #include <vector>
-   #include <string>
+```cpp
+#include <iostream>
+#include <vector>
+#include <string>
 
-   using namespace std;
+using namespace std;
 
-   int main()
+int main()
+{
+   vector<string> msg {"Hello", "C++", "World", "from", "VS Code", "and the C++ extension!"};
+
+   for (const string& word : msg)
    {
-      vector<string> msg {"Hello", "C++", "World", "from", "VS Code", "and the C++ extension!"};
-
-      for (const string& word : msg)
-      {
-         cout << word << " ";
-      }
-      cout << endl;
+      cout << word << " ";
    }
-   ```
+   cout << endl;
+}
+```
 
 Now press `kb(workbench.action.files.save)` to save the file. Notice how the file you just added appears in the **File Explorer** view (`kb(workbench.view.explorer)`) in the side bar of VS Code:
 
@@ -168,36 +169,34 @@ Your new `tasks.json` file should look similar to the JSON below:
 
 ```json
 {
-"version": "2.0.0",
-"tasks": [
+  "version": "2.0.0",
+  "tasks": [
     {
-        "type": "shell",
-        "label": "g++ build active file",
-        "command": "/usr/bin/g++",
-        "args": [
-            "-g",
-            "${file}",
-            "-o",
-            "${fileDirname}/${fileBasenameNoExtension}"
-        ],
-        "options": {
-            "cwd": "/usr/bin"
-        },
-        "problemMatcher": [
-            "$gcc"
-        ],
-        "group": {
-            "kind": "build",
-            "isDefault": true
-        }
+      "type": "shell",
+      "label": "g++ build active file",
+      "command": "/usr/bin/g++",
+      "args": [
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}"
+      ],
+      "options": {
+        "cwd": "/usr/bin"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     }
-]
+  ]
 }
 ```
 
 The `command` setting specifies the program to run; in this case that is g++. The `args` array specifies the command-line arguments that will be passed to g++. These arguments must be specified in the order expected by the compiler. This task tells g++ to take the active file (`${file}`), compile it, and create an executable file in the current directory (`${fileDirname}`) with the same name as the active file but without an extension (`${fileBasenameNoExtension}`), resulting in `helloworld` for our example.
 
->**Note**: You can learn more about `tasks.json` variables in the [variables reference](/docs/editor/variables-reference.md).
+> **Note**: You can learn more about `tasks.json` variables in the [variables reference](/docs/editor/variables-reference.md).
 
 The `label` value is what you will see in the tasks list; you can name this whatever you like.
 
@@ -213,7 +212,7 @@ The `"isDefault": true` value in the `group` object specifies that this task wil
 
 1. Create a new terminal using the **+** button and you'll have a bash terminal running in the context of WSL with the `helloworld` folder as the working directory. Run `ls` and you should now see the executable `helloworld` (no file extension).
 
-    ![WSL bash terminal](images/wsl/wsl-bash-terminal.png)
+   ![WSL bash terminal](images/wsl/wsl-bash-terminal.png)
 
 1. You can run `helloworld` in the terminal by typing `./helloworld`.
 
@@ -233,34 +232,34 @@ VS Code creates a `launch.json` file, opens it in the editor, and builds and run
 
 ```json
 {
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "g++ build and debug active file",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${fileDirname}/${fileBasenameNoExtension}",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
         {
-            "name": "g++ build and debug active file",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${fileDirname}/${fileBasenameNoExtension}",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "g++ build active file",
-            "miDebuggerPath": "/usr/bin/gdb"
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
         }
-    ]
+      ],
+      "preLaunchTask": "g++ build active file",
+      "miDebuggerPath": "/usr/bin/gdb"
+    }
+  ]
 }
 ```
 
- The `program` setting specifies the program you want to debug. Here it is set to the active file folder `${fileDirname}` and active filename without an extension `${fileBasenameNoExtension}`, which if `helloworld.cpp` is the active file will be `helloworld`.
+The `program` setting specifies the program you want to debug. Here it is set to the active file folder `${fileDirname}` and active filename without an extension `${fileBasenameNoExtension}`, which if `helloworld.cpp` is the active file will be `helloworld`.
 
 By default, the C++ extension won't add any breakpoints to your source code and the `stopAtEntry` value is set to `false`. Change the `stopAtEntry` value to `true` to cause the debugger to stop on the `main` method when you start debugging.
 
@@ -274,13 +273,13 @@ The remaining steps are provided as an optional exercise to help you get familia
 - The Integrated Terminal appears at the bottom of the source code editor. In the **Debug Output** tab, you see output that indicates the debugger is up and running.
 - The editor highlights the first statement in the `main` method. This is a breakpoint that the C++ extension automatically sets for you:
 
-   ![Initial breakpoint](images/wsl/wsl-breakpoint-default.png)
+  ![Initial breakpoint](images/wsl/wsl-breakpoint-default.png)
 
 - The Run view on the left shows debugging information. You'll see an example later in the tutorial.
 
 - At the top of the code editor, a debugging control panel appears. You can move this around the screen by grabbing the dots on the left side.
 
-   ![Debugging controls](images/cpp/debug-controls.png)
+  ![Debugging controls](images/cpp/debug-controls.png)
 
 ## Step through the code
 
@@ -344,20 +343,18 @@ Visual Studio Code places these settings in `.vscode/c_cpp_properties.json`. If 
 
 ```json
 {
-    "configurations": [
-        {
-            "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64"
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "Linux",
+      "includePath": ["${workspaceFolder}/**"],
+      "defines": [],
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "clang-x64"
+    }
+  ],
+  "version": 4
 }
 ```
 

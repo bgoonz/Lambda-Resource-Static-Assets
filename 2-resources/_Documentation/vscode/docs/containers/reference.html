@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>reference</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="customize-the-docker-extension">Customize the Docker extension</h1>
+<p>The Docker extension includes several Visual Studio Code tasks to control the behavior of Docker <a href="#docker-build-task">build</a> and <a href="#docker-run-task">run</a>, and form the basis of container startup for debugging.</p>
+<p>The tasks allow for a great deal of control and customization. The final configuration is a combination of general defaults, platform-specific defaults (such as Node.js, Python, or .NET Core), and user input. User input takes precedence when it conflicts with defaults.</p>
+<p>All common features of Visual Studio Code tasks (for example, grouping tasks into compound tasks) are supported by Docker extension tasks. For more information on common task features and properties, see the Visual Studio Code <a href="/docs/editor/tasks.md#custom-tasks">custom task</a> documentation.</p>
+<h2 id="docker-build-task">Docker build task</h2>
+<p>The <code>docker-build</code> task builds Docker images using the Docker command line (CLI). The task can be used by itself, or as part of a chain of tasks to run and/or debug an application within a Docker container.</p>
+<p>The most important configuration settings for the <code>docker-build</code> task are <code>dockerBuild</code> and <code>platform</code>:</p>
+<ul>
+<li>The <code>dockerBuild</code> object specifies parameters for the Docker build command. Values specified by this object are applied directly to Docker build CLI invocation.</li>
+<li>The <code>platform</code> property is a hint that changes how the <code>docker-build</code> task determines Docker build defaults.</li>
+</ul>
+<p>See <a href="#build-task-reference">property reference</a> for full list of all task properties.</p>
+<h3 id="platform-support">Platform support</h3>
+<p>While the <code>docker-build</code> task in <code>tasks.json</code> can be used to build any Docker image, the extension has explicit support (and simplified configuration) for Node.js, Python, and .NET Core.</p>
+<h3 id="node.js-docker-build">Node.js (docker-build)</h3>
+<p><strong>Minimal configuration using defaults</strong></p>
+<p>A Node.js based Docker image with no specific platform options can just set the <code>platform</code> property to <code>node</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-5" title="5">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;Build Node Image&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-6" title="6">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">      <span class="dt">&quot;platform&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span></a>
+<a class="sourceLine" id="cb1-8" title="8">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="fu">}</span></a></code></pre></div>
+<p><strong>Platform defaults</strong></p>
+<p>For Node.js Docker images, the <code>docker-build</code> task infers the following options:</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 84%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Inferred Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dockerBuild.context</code></td>
+<td>The same directory in which the <code>package.json</code> resides.</td>
+</tr>
+<tr class="even">
+<td><code>dockerBuild.dockerfile</code></td>
+<td>The file <code>Dockerfile</code> in the same directory as the <code>package.json</code> resides.</td>
+</tr>
+<tr class="odd">
+<td><code>dockerBuild.tag</code></td>
+<td>The application’s <code>name</code> property in <code>package.json</code> (if defined), else the base name of the folder in which <code>package.json</code> resides.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="python-docker-build">Python (docker-build)</h3>
+<p><strong>Minimal configuration using defaults</strong></p>
+<p>A Python based Docker image with no specific platform options can just set the <code>platform</code> property to <code>python</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-5" title="5">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-6" title="6">      <span class="dt">&quot;platform&quot;</span><span class="fu">:</span> <span class="st">&quot;python&quot;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-8" title="8">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<p><strong>Platform defaults</strong></p>
+<p>For Python Docker images, the <code>docker-build</code> task infers the following options:</p>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Inferred Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dockerBuild.context</code></td>
+<td>The default context is the workspace folder.</td>
+</tr>
+<tr class="even">
+<td><code>dockerBuild.dockerfile</code></td>
+<td>The default <code>Dockerfile</code> path will be in the root of the workspace folder.</td>
+</tr>
+<tr class="odd">
+<td><code>dockerBuild.tag</code></td>
+<td>The base name of the root workspace folder.</td>
+</tr>
+<tr class="even">
+<td><code>dockerBuild.pull</code></td>
+<td>Defaults to true in order to pull new base images before building.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="net-core-docker-build">.NET Core (docker-build)</h3>
+<p><strong>Minimal configuration using defaults</strong></p>
+<p>When you build a .NET Core-based Docker image, you can omit the <code>platform</code> property and just set the <code>netCore</code> object (<code>platform</code> is implicitly set to <code>netcore</code> when <code>netCore</code> object is present). Note that <code>appProject</code> is a required property:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-5" title="5">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;Build Node Image&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-6" title="6">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-7" title="7">      <span class="dt">&quot;netCore&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-8" title="8">        <span class="dt">&quot;appProject&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder}/project.csproj&quot;</span></a>
+<a class="sourceLine" id="cb3-9" title="9">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb3-10" title="10">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb3-11" title="11">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="fu">}</span></a></code></pre></div>
+<p><strong>Platform defaults</strong></p>
+<p>For .NET Core-based images, the <code>docker-build</code> task infers the following options:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Inferred Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dockerBuild.context</code></td>
+<td>The root workspace folder.</td>
+</tr>
+<tr class="even">
+<td><code>dockerBuild.dockerfile</code></td>
+<td>The file <code>Dockerfile</code> in the root workspace folder.</td>
+</tr>
+<tr class="odd">
+<td><code>dockerBuild.tag</code></td>
+<td>The base name of the root workspace folder.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="build-task-reference">Build task reference</h2>
+<p>Here are all properties available for configuring <code>docker-build</code> task. All properties are optional unless indicated otherwise.</p>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 91%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dockerBuild</code></td>
+<td>Options for controlling the <code>docker build</code> command executed (<a href="#dockerbuild-object-properties">see below</a>). <br/> Required unless <code>platform</code> is set.</td>
+</tr>
+<tr class="even">
+<td><code>platform</code></td>
+<td>Determines the platform: .NET Core (<code>netcore</code>) or Node.js (<code>node</code>) and default settings for <code>docker build</code> command.</td>
+</tr>
+<tr class="odd">
+<td><code>node</code></td>
+<td>Determines options specific for Node.js projects (<a href="#node-object-properties-dockerbuild-task">see below</a>).</td>
+</tr>
+<tr class="even">
+<td><code>python</code></td>
+<td>There are no object properties for Python in the <code>docker-build</code> task.</td>
+</tr>
+<tr class="odd">
+<td><code>netCore</code></td>
+<td>Determines options specific for .NET Core projects (<a href="#netcore-object-properties-dockerbuild-task">see below</a>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dockerbuild-object-properties">dockerBuild object properties</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 87%" />
+<col style="width: 8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+<th><code>docker build</code> CLI Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>context</code></td>
+<td>The path to the Docker build context. <br/> Required, unless inferred from the platform.</td>
+<td><code>PATH</code></td>
+</tr>
+<tr class="even">
+<td><code>dockerfile</code></td>
+<td>The path to the Dockerfile. <br/> Required, unless inferred from the platform.</td>
+<td><code>-f</code> or <code>--file</code></td>
+</tr>
+<tr class="odd">
+<td><code>tag</code></td>
+<td>The tag applied to the Docker image. <br/> Required, unless inferred from the platform.</td>
+<td><code>-t</code> or <code>--tag</code></td>
+</tr>
+<tr class="even">
+<td><code>buildArgs</code></td>
+<td>Build arguments applied to the command line. This is a list of key-value pairs.</td>
+<td><code>--build-arg</code></td>
+</tr>
+<tr class="odd">
+<td><code>labels</code></td>
+<td>Labels added to the Docker image. This is a list of key-value pairs (a JSON object). <br/> In addition to labels specified here, a label <code>com.microsoft.created-by</code>, set to <code>visual-studio-code</code> is added to the image. This behavior can be turned off by setting <code>includeDefaults</code> property of the <code>labels</code> object to false.</td>
+<td><code>--label</code></td>
+</tr>
+<tr class="even">
+<td><code>target</code></td>
+<td>The target in the Dockerfile to build to.</td>
+<td><code>--target</code></td>
+</tr>
+<tr class="odd">
+<td><code>pull</code></td>
+<td>Whether or not to pull new base images before building.</td>
+<td><code>--pull</code></td>
+</tr>
+<tr class="even">
+<td><code>customOptions</code></td>
+<td>Any extra parameters to add before the context argument. No attempt is made to resolve conflicts with other options or validate this option.</td>
+<td>(any)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="node-object-properties-docker-build-task">node object properties (<code>docker-build</code> task)</h3>
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 59%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>package</code></td>
+<td>The path to the <code>package.json</code> file associated with the Dockerfile and <code>docker-build</code> task.</td>
+<td>The file <code>package.json</code> in the root workspace folder.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="netcore-object-properties-docker-build-task">netCore object properties (<code>docker-build</code> task)</h3>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 91%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>appProject</code></td>
+<td>The .NET Core project file (<code>.csproj</code>, <code>.fsproj</code>, etc.) associated with the Dockerfile and <code>docker-build</code> task. <br/> Required always.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="docker-run-task">Docker run task</h2>
+<p>The <code>docker-run</code> task in <code>tasks.json</code> creates and starts a Docker container using the Docker command line (CLI). The task can be used by itself, or as part of a chain of tasks to debug an application within a Docker container.</p>
+<p>The most important configuration settings for the <code>docker-run</code> task are <code>dockerRun</code> and <code>platform</code>:</p>
+<ul>
+<li>The <code>dockerRun</code> object specifies parameters for the Docker run command. Values specified by this object are applied directly to Docker run CLI invocation.</li>
+<li>The <code>platform</code> property is a hint that changes how the <code>docker-run</code> task determines Docker run defaults.</li>
+</ul>
+<p>See <a href="#run-task-reference">property reference</a> for full list of all task properties.</p>
+<h3 id="platform-support-1">Platform support</h3>
+<p>While the <code>docker-run</code> task can be used to run any Docker image, the extension has explicit support (and simplified configuration) for Node.js, Python, and .NET Core.</p>
+<h3 id="node.js-docker-run">Node.js (docker-run)</h3>
+<p><strong>Minimal configuration using defaults</strong></p>
+<p>A Node.js based Docker image with no specific platform options can just set the <code>platform</code> property to <code>node</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;Run Node Image&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-6" title="6">      <span class="dt">&quot;node&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="dt">&quot;platform&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span></a>
+<a class="sourceLine" id="cb4-8" title="8">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-9" title="9">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="fu">}</span></a></code></pre></div>
+<p><strong>Platform defaults</strong></p>
+<p>For Node.js-based Docker images, the <code>docker-run</code> task infers the following options:</p>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 89%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Inferred Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dockerRun.command</code></td>
+<td>Generated from the npm <code>start</code> script in the <code>package.json</code> (if it exists), else generated from the <code>main</code> property in the <code>package.json</code>.</td>
+</tr>
+<tr class="even">
+<td><code>dockerRun.containerName</code></td>
+<td>Derived from the application package name.</td>
+</tr>
+<tr class="odd">
+<td><code>dockerRun.image</code></td>
+<td>The tag from a dependent <code>docker-build</code> task (if one exists) or derived from the application package name, itself derived from the <code>name</code> property within <code>package.json</code> or the base name of the folder in which it resides.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="python-docker-run">Python (docker-run)</h3>
+<p>When building a Python-based Docker image, you can omit the <code>platform</code> property and just set the <code>python</code> object (<code>platform</code> is implicitly set to <code>python</code> when <code>python</code> object is present)</p>
+<p><strong>Minimal configuration for Django Apps</strong></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run: debug&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="dt">&quot;dependsOn&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;docker-build&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="dt">&quot;python&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;runserver&quot;</span><span class="ot">,</span> <span class="st">&quot;0.0.0.0:8000&quot;</span><span class="ot">,</span> <span class="st">&quot;--nothreading&quot;</span><span class="ot">,</span> <span class="st">&quot;--noreload&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-7" title="7">    <span class="dt">&quot;file&quot;</span><span class="fu">:</span> <span class="st">&quot;path_to/manage.py&quot;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<p><strong>Minimal configuration for Flask Apps</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run: debug&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="dt">&quot;dependsOn&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;docker-build&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="dt">&quot;dockerRun&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="dt">&quot;env&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-7" title="7">      <span class="dt">&quot;FLASK_APP&quot;</span><span class="fu">:</span> <span class="st">&quot;path_to/flask_entry_point.py&quot;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-9" title="9">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb6-10" title="10">  <span class="dt">&quot;python&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-11" title="11">    <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb6-12" title="12">      <span class="st">&quot;run&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb6-13" title="13">      <span class="st">&quot;--no-debugger&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb6-14" title="14">      <span class="st">&quot;--no-reload&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb6-15" title="15">      <span class="st">&quot;--host&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb6-16" title="16">      <span class="st">&quot;0.0.0.0&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb6-17" title="17">      <span class="st">&quot;--port&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb6-18" title="18">      <span class="st">&quot;5000&quot;</span></a>
+<a class="sourceLine" id="cb6-19" title="19">    <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-20" title="20">    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;flask&quot;</span></a>
+<a class="sourceLine" id="cb6-21" title="21">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-22" title="22"><span class="fu">}</span></a></code></pre></div>
+<p><strong>Minimal configuration for General Apps</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run: debug&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="dt">&quot;dependsOn&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;docker-build&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="dt">&quot;python&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="dt">&quot;file&quot;</span><span class="fu">:</span> <span class="st">&quot;path_to/app_entry_point.py&quot;</span></a>
+<a class="sourceLine" id="cb7-7" title="7">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<p><strong>Platform defaults</strong></p>
+<p>For Python-based Docker images, the <code>docker-run</code> task infers the following options:</p>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 82%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Inferred Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dockerRun.command</code></td>
+<td>Generated by the Python object and is called by the Python Debugger.</td>
+</tr>
+<tr class="even">
+<td><code>dockerRun.containerName</code></td>
+<td>Derived from the base name of the root workspace folder.</td>
+</tr>
+<tr class="odd">
+<td><code>dockerRun.image</code></td>
+<td>The tag from a dependent docker-build task (if one exists) or derived from the base name of the root workspace folder.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="net-core-docker-run">.NET Core (docker-run)</h3>
+<p><strong>Minimal configuration using defaults</strong></p>
+<p>When building a .NET Core-based Docker image, you can omit the <code>platform</code> property and just set the <code>netCore</code> object (<code>platform</code> is implicitly set to <code>netcore</code> when <code>netCore</code> object is present). Note that <code>appProject</code> is a required property:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-5" title="5">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;Run .NET Core Image&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-7" title="7">      <span class="dt">&quot;netCore&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-8" title="8">        <span class="dt">&quot;appProject&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder}/project.csproj&quot;</span></a>
+<a class="sourceLine" id="cb8-9" title="9">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb8-10" title="10">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb8-11" title="11">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="fu">}</span></a></code></pre></div>
+<p><strong>Platform defaults</strong></p>
+<p>For .NET Core-based images, the <code>docker-run</code> task infers the following options:</p>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 86%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Inferred Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dockerRun.containerName</code></td>
+<td>Derived from the base name of the root workspace folder.</td>
+</tr>
+<tr class="even">
+<td><code>dockerRun.env</code></td>
+<td>Adds the following environment variables as required: <code>ASPNETCORE_ENVIRONMENT</code>, <code>ASPNETCORE_URLS</code>, and <code>DOTNET_USE_POLLING_FILE_WATCHER</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>dockerRun.image</code></td>
+<td>The tag from a dependent <code>docker-build</code> task (if one exists) or derived from the base name of the root workspace folder.</td>
+</tr>
+<tr class="even">
+<td><code>dockerRun.os</code></td>
+<td><code>Linux</code></td>
+</tr>
+<tr class="odd">
+<td><code>dockerRun.volumes</code></td>
+<td>Adds the following volumes as required: the local application folder, the source folder, the debugger folder, the NuGet package folder, and NuGet fallback folder.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="run-task-reference">Run task reference</h2>
+<p>Here are all properties available for configuring <code>docker-run</code> task. All properties are optional unless indicated otherwise.</p>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 92%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dockerRun</code></td>
+<td>Options for controlling the <code>docker run</code> command executed (<a href="#dockerrun-object-properties">see below</a>). <br/> Required unless <code>platform</code> is set.</td>
+</tr>
+<tr class="even">
+<td><code>platform</code></td>
+<td>Determines the platform: .NET Core (<code>netcore</code>) or Node.js (<code>node</code>) and default settings for <code>docker run</code> command.</td>
+</tr>
+<tr class="odd">
+<td><code>node</code></td>
+<td>For Node.js projects, this controls various options (<a href="#node-object-properties-dockerrun-task">see below</a>).</td>
+</tr>
+<tr class="even">
+<td><code>python</code></td>
+<td>For Python projects, this controls various options (<a href="#python-object-properties-dockerrun-task">see below</a>).</td>
+</tr>
+<tr class="odd">
+<td><code>netCore</code></td>
+<td>For .NET Core projects, this controls various options (<a href="#netcore-object-properties-dockerrun-task">see below</a>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dockerrun-object-properties">dockerRun object properties</h3>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 79%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+<th>CLI Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>image</code></td>
+<td>The name (tag) of the image to run. <br/> Required unless inferred from the platform.</td>
+<td><code>IMAGE</code></td>
+</tr>
+<tr class="even">
+<td><code>command</code></td>
+<td>The command to run upon starting the container. <br/> Required, unless inferred from the platform.</td>
+<td><code>COMMAND [ARG...]</code></td>
+</tr>
+<tr class="odd">
+<td><code>containerName</code></td>
+<td>The name given to the started container. <br/> Required, unless inferred from the platform.</td>
+<td><code>--name</code></td>
+</tr>
+<tr class="even">
+<td><code>env</code></td>
+<td>Environment variables set in the container. This is a list of key-value pairs.</td>
+<td><code>-e</code> or <code>--env</code></td>
+</tr>
+<tr class="odd">
+<td><code>envFiles</code></td>
+<td>This is a list of <code>.env</code> files.</td>
+<td><code>--env-file</code></td>
+</tr>
+<tr class="even">
+<td><code>labels</code></td>
+<td>Labels given to the started container. This is a list of key-value pairs.</td>
+<td><code>--label</code></td>
+</tr>
+<tr class="odd">
+<td><code>network</code></td>
+<td>The name of the network to which the container will be connected.</td>
+<td><code>--network</code></td>
+</tr>
+<tr class="even">
+<td><code>networkAlias</code></td>
+<td>The network-scoped alias for the started container.</td>
+<td><code>--network-alias</code></td>
+</tr>
+<tr class="odd">
+<td><code>os</code></td>
+<td>Default is <code>Linux</code>, the other option is <code>Windows</code>. The container operating system used.</td>
+<td>N/A</td>
+</tr>
+<tr class="even">
+<td><code>ports</code></td>
+<td>The ports to publish (map) from container to host. This is a list of objects (<a href="#ports-object-properties">see below</a>).</td>
+<td><code>-p</code> or <code>--publish</code></td>
+</tr>
+<tr class="odd">
+<td><code>portsPublishAll</code></td>
+<td>Whether to publish all ports exposed by the Docker image. Defaults to <code>true</code> if no ports are explicitly published.</td>
+<td><code>-P</code></td>
+</tr>
+<tr class="even">
+<td><code>extraHosts</code></td>
+<td>The hosts to add to the container for DNS resolution. This is a list of objects (<a href="#extrahosts-object-properties">see below</a>).</td>
+<td><code>--add-host</code></td>
+</tr>
+<tr class="odd">
+<td><code>volumes</code></td>
+<td>The volumes to map into the started container. This is a list of objects (<a href="#volumes-object-properties">see below</a>).</td>
+<td><code>-v</code> or <code>--volume</code></td>
+</tr>
+<tr class="even">
+<td><code>remove</code></td>
+<td>Whether or not to remove the container after it stops.</td>
+<td><code>--rm</code></td>
+</tr>
+<tr class="odd">
+<td><code>customOptions</code></td>
+<td>Any extra parameters to add before the image argument. No attempt is made to resolve conflicts with other options or validate this option.</td>
+<td>(any)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ports-object-properties">ports object properties</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>containerPort</code></td>
+<td>The port number bound on the container. <br/> Required.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>hostPort</code></td>
+<td>The port number bound on the host.</td>
+<td>(randomly selected by Docker)</td>
+</tr>
+<tr class="odd">
+<td><code>protocol</code></td>
+<td>The protocol for the binding (<code>tcp</code> or <code>udp</code>).</td>
+<td><code>tcp</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="extrahosts-object-properties">extraHosts object properties</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>hostname</code></td>
+<td>The hostname for DNS resolution. <br/> Required.</td>
+</tr>
+<tr class="even">
+<td><code>ip</code></td>
+<td>The IP address associated with the above hostname. <br/> Required.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="volumes-object-properties">volumes object properties</h3>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 73%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>localPath</code></td>
+<td>The path on the local machine that will be mapped. <br/> Required.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>containerPath</code></td>
+<td>The path in the container to which the local path will be mapped. <br/> Required.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>permissions</code></td>
+<td>Permissions the container has on the mapped path. Can be <code>ro</code> (read-only) or <code>rw</code> (read-write).</td>
+<td>Container dependent.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="node-object-properties-docker-run-task">node object properties (<code>docker-run</code> task)</h3>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 79%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>package</code></td>
+<td>The path to the <code>package.json</code> file associated with the <code>docker-run</code> task.</td>
+<td>The file <code>package.json</code> in the root workspace folder.</td>
+</tr>
+<tr class="even">
+<td><code>enableDebugging</code></td>
+<td>Whether or not to enable debugging within the container.</td>
+<td><code>false</code></td>
+</tr>
+<tr class="odd">
+<td><code>inspectMode</code></td>
+<td>Defines the initial interaction between the application and the debugger (<code>default</code> or <code>break</code>). <br/> The value <code>default</code> allows the application to run until the debugger attaches. <br/> The value <code>break</code> prevents the application from running until the debugger attaches.</td>
+<td><code>default</code></td>
+</tr>
+<tr class="even">
+<td><code>inspectPort</code></td>
+<td>The port on which debugging should occur.</td>
+<td><code>9229</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="python-object-properties-docker-run-task">python object properties (<code>docker-run</code> task)</h3>
+<table>
+<colgroup>
+<col style="width: 7%" />
+<col style="width: 43%" />
+<col style="width: 49%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>args</code></td>
+<td>Arguments passed to the Python app.</td>
+<td>Platform dependent. Defaults of scaffolding shown <a href="#python-docker-run">above</a></td>
+</tr>
+<tr class="even">
+<td><code>debugPort</code></td>
+<td>The port that the debugger will listen on.</td>
+<td><code>5678</code></td>
+</tr>
+<tr class="odd">
+<td><code>wait</code></td>
+<td>Whether to wait for debugger to attach.</td>
+<td><code>true</code></td>
+</tr>
+<tr class="even">
+<td><code>module</code></td>
+<td>The Python module to run (only module <strong>or</strong> file should be chosen).</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code>file</code></td>
+<td>The Python file to run (only module <strong>or</strong> file should be chosen).</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="netcore-object-properties-docker-run-task">netCore object properties (<code>docker-run</code> task)</h3>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 89%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>appProject</code></td>
+<td>The .NET Core project file (<code>.csproj</code>, <code>.fsproj</code>, etc.) associated with <code>docker-run</code> task. <br/> Required.</td>
+</tr>
+<tr class="even">
+<td><code>configureSsl</code></td>
+<td>Whether to configure ASP.NET Core SSL certificates and other settings to enable SSL on the service in the container.</td>
+</tr>
+<tr class="odd">
+<td><code>enableDebugging</code></td>
+<td>Whether to enable the started container for debugging. This will infer additional volume mappings and other options necessary for debugging.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="docker-compose-task">Docker Compose task</h2>
+<p>The <code>docker-compose</code> task in <code>tasks.json</code> creates and starts Docker containers using the Docker Compose command line (CLI). The task can be used by itself, or as part of a chain of tasks to debug an application within a Docker container.</p>
+<p>The most important configuration setting for the <code>docker-compose</code> task is <code>dockerCompose</code>:</p>
+<ul>
+<li>The <code>dockerCompose</code> object specifies parameters for the Docker Compose command. Values specified by this object are applied directly to Docker Compose CLI invocation.</li>
+</ul>
+<p>See <a href="#compose-task-reference">property reference</a> for full list of all task properties.</p>
+<p><strong>Example configuration</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-5" title="5">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;Run docker-compose up&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-6" title="6">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-compose&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-7" title="7">      <span class="dt">&quot;dockerCompose&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-8" title="8">        <span class="dt">&quot;up&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-9" title="9">          <span class="dt">&quot;detached&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-10" title="10">          <span class="dt">&quot;build&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-11" title="11">          <span class="dt">&quot;services&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;myservice&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb9-12" title="12">        <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-13" title="13">        <span class="dt">&quot;files&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb9-14" title="14">          <span class="st">&quot;${workspaceFolder}/docker-compose.yml&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb9-15" title="15">          <span class="st">&quot;${workspaceFolder}/docker-compose.debug.yml&quot;</span></a>
+<a class="sourceLine" id="cb9-16" title="16">        <span class="ot">]</span></a>
+<a class="sourceLine" id="cb9-17" title="17">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-18" title="18">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-19" title="19">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb9-20" title="20"><span class="fu">}</span></a></code></pre></div>
+<h2 id="compose-task-reference">Compose task reference</h2>
+<p>Here are all properties available for configuring <code>docker-compose</code> task. All properties are optional unless indicated otherwise.</p>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 89%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dockerCompose</code></td>
+<td>Options for controlling the <code>docker-compose</code> command executed (<a href="#dockercompose-object-properties">see below</a>). <br/> Required.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dockercompose-object-properties">dockerCompose object properties</h3>
+<table>
+<colgroup>
+<col style="width: 3%" />
+<col style="width: 86%" />
+<col style="width: 9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+<th>CLI Equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>up</code></td>
+<td>Run a <code>docker-compose up</code> command. <br/> Either this or <code>down</code> must be specified, but not both.</td>
+<td><code>docker-compose up</code></td>
+</tr>
+<tr class="even">
+<td><code>down</code></td>
+<td>Run a <code>docker-compose down</code> command. <br/> Either this or <code>up</code> must be specified, but not both.</td>
+<td><code>docker-compose down</code></td>
+</tr>
+<tr class="odd">
+<td><code>files</code></td>
+<td>The list of Docker Compose YAML files to use in the <code>docker-compose</code> command. If not specified, the Docker Compose CLI looks for <code>docker-compose.yml</code> and <code>docker-compose.override.yml</code>.</td>
+<td><code>-f &lt;file&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="up-object-properties">up object properties</h3>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 75%" />
+<col style="width: 11%" />
+<col style="width: 3%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+<th>CLI Equivalent</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>detached</code></td>
+<td>Whether or not to run detached.</td>
+<td><code>-d</code></td>
+<td><code>true</code></td>
+</tr>
+<tr class="even">
+<td><code>build</code></td>
+<td>Whether or not to build before running.</td>
+<td><code>--build</code></td>
+<td><code>true</code></td>
+</tr>
+<tr class="odd">
+<td><code>scale</code></td>
+<td>Number of instances of each service to run. This is a list of key-value pairs.</td>
+<td><code>--scale SERVICE=NUM</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>services</code></td>
+<td>A subset of the services to start.</td>
+<td><code>[SERVICE...]</code></td>
+<td>(all)</td>
+</tr>
+<tr class="odd">
+<td><code>customOptions</code></td>
+<td>Any extra parameters to add after the <code>up</code> argument. No attempt is made to resolve conflicts with other options or validate this option.</td>
+<td>(any)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="down-object-properties">down object properties</h3>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 83%" />
+<col style="width: 6%" />
+<col style="width: 3%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property</th>
+<th>Description</th>
+<th>CLI Equivalent</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>removeImages</code></td>
+<td>Whether to remove images, and which. <code>all</code> will remove all images used by any service, <code>local</code> will remove only images without a custom tag. Leaving this unset will remove no images.</td>
+<td><code>--rmi</code></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>removeVolumes</code></td>
+<td>Whether or not to remove named volumes.</td>
+<td><code>-v</code></td>
+<td><code>false</code></td>
+</tr>
+<tr class="odd">
+<td><code>customOptions</code></td>
+<td>Any extra parameters to add after the <code>down</code> argument. No attempt is made to resolve conflicts with other options or validate this option.</td>
+<td>(any)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="command-customization">Command customization</h2>
+<p>The Docker extension executes a number of Docker CLI commands when you perform various operations, such as to build images, run containers, attach to containers, and view container logs. Some of these commands have a large number of optional arguments, often used in very specific scenarios. Many of these commands can be customized.</p>
+<p>For example, the token <code>${serviceList}</code> in the <a href="#docker-compose-up">Compose Up</a> command allows for easily starting a subset of the services within your Docker Compose YAML file(s).</p>
+<p>For each of these customizable Docker commands, a configuration setting is available to set the template of what to execute. Alternatively, you can define multiple templates, optionally with a regular expression, which when matched, hints the context in which a template should be used. The templates support some tokens similar to <code>launch.json</code> and <code>tasks.json</code>, for example, <code>${workspaceFolder}</code>.</p>
+<h3 id="settings-json-schema">Settings JSON schema</h3>
+<p>You have two options for configuring each of the templates (listed below). The first option is a single template that overrides the default behavior:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb10-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="dt">&quot;docker.commands.build&quot;</span><span class="fu">:</span> <span class="st">&quot;docker build --rm -f </span><span class="ch">\&quot;</span><span class="st">${dockerfile}</span><span class="ch">\&quot;</span><span class="st"> -t ${tag} </span><span class="ch">\&quot;</span><span class="st">${context}</span><span class="ch">\&quot;</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="fu">}</span></a></code></pre></div>
+<p>The second option is multiple templates that will be chosen based on the <code>match</code> regular expression, the <code>contextTypes</code> in which it is applicable, as well as user input. The <code>contextTypes</code> property is a list of Docker context types in which a command template applies. If it is undefined or empty, the template is applicable in all Docker contexts.</p>
+<p>For example, three templates are shown in the following example:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb11-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="dt">&quot;docker.commands.build&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb11-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb11-4" title="4">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;Default build command&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb11-5" title="5">      <span class="dt">&quot;template&quot;</span><span class="fu">:</span> <span class="st">&quot;docker build --rm -f </span><span class="ch">\&quot;</span><span class="st">${dockerfile}</span><span class="ch">\&quot;</span><span class="st"> -t ${tag} </span><span class="ch">\&quot;</span><span class="st">${context}</span><span class="ch">\&quot;</span><span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb11-6" title="6">    <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb11-7" title="7">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb11-8" title="8">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;Alpine-specific build command&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb11-9" title="9">      <span class="dt">&quot;template&quot;</span><span class="fu">:</span> <span class="st">&quot;docker build -p 1234:1234 -f </span><span class="ch">\&quot;</span><span class="st">${dockerfile}</span><span class="ch">\&quot;</span><span class="st"> -t ${tag} </span><span class="ch">\&quot;</span><span class="st">${context}</span><span class="ch">\&quot;</span><span class="st">&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb11-10" title="10">      <span class="dt">&quot;match&quot;</span><span class="fu">:</span> <span class="st">&quot;alpine&quot;</span></a>
+<a class="sourceLine" id="cb11-11" title="11">    <span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb11-12" title="12">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb11-13" title="13">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;Context-specific build command&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb11-14" title="14">      <span class="dt">&quot;template&quot;</span><span class="fu">:</span> <span class="st">&quot;docker build -f </span><span class="ch">\&quot;</span><span class="st">${dockerfile}</span><span class="ch">\&quot;</span><span class="st"> .&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb11-15" title="15">      <span class="dt">&quot;contextTypes&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;moby&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb11-16" title="16">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb11-17" title="17">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb11-18" title="18"><span class="fu">}</span></a></code></pre></div>
+<h3 id="selection-behavior">Selection behavior</h3>
+<p>The command template chosen to execute is selected based on the following rules:</p>
+<ol type="1">
+<li>If no setting is configured, the default command template is chosen.</li>
+<li>If only a single template is configured (the first example above), that template is chosen.</li>
+<li>If multiple templates are configured:
+<ol type="1">
+<li>Constrained templates are checked. A constrained template has either <code>match</code> or <code>contextTypes</code>, or both. The <code>match</code> regular expression is compared against contextual hints–for example, image name, container name, etc. The <code>contextTypes</code> property causes the template to apply only in certain context types, for example, <code>moby</code> or <code>aci</code> (or both).</li>
+<li>If multiple constrained templates apply, the user will be prompted to choose. If only one applies, the user will not be prompted.</li>
+<li>If there no applicable constrained templates, unconstrained templates are checked. An unconstrained template has neither <code>match</code> nor <code>contextTypes</code>, and is therefore always applicable.</li>
+<li>If multiple unconstrained templates apply, the user will be prompted to choose. If only one applies, the user will not be prompted.</li>
+</ol></li>
+</ol>
+<h3 id="docker-build">Docker Build</h3>
+<table>
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Configuration Setting</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>docker.commands.build</code></td>
+<td><code>docker build --rm -f "${dockerfile}" -t ${tag} "${context}"</code></td>
+</tr>
+</tbody>
+</table>
+<p>Supported tokens:</p>
+<table>
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 91%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Token</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>${dockerfile}</code></td>
+<td>The workspace-relative path of the selected <code>Dockerfile</code>.</td>
+</tr>
+<tr class="even">
+<td><code>${tag}</code></td>
+<td>The value entered/confirmed by the user upon invoking the build command. If previously built, defaults to the previously entered value for that <code>Dockerfile</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>${context}</code></td>
+<td>If set, the value of the <code>docker.imageBuildContextPath</code> configuration setting. Otherwise, the workspace-relative folder in which the <code>Dockerfile</code> resides.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note</strong>: If the <code>docker.commands.build</code> setting does not contain the <code>${tag}</code> token, the user will <strong>not</strong> be prompted to enter/confirm a tag.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong>: The <code>match</code> regular expression will be compared against the selected Dockerfile name and the workspace folder name.</p>
+</blockquote>
+<h3 id="docker-run">Docker Run</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Configuration Setting</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>docker.commands.run</code></td>
+<td><code>docker run --rm -d ${exposedPorts} ${tag}</code></td>
+</tr>
+<tr class="even">
+<td><code>docker.commands.runInteractive</code></td>
+<td><code>docker run --rm -it ${exposedPorts} ${tag}</code></td>
+</tr>
+</tbody>
+</table>
+<p>Supported tokens:</p>
+<table>
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 93%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Token</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>${exposedPorts}</code></td>
+<td>Generated from the list of exposed ports in the image (ultimately from the <code>Dockerfile</code>), where each exposed port is mapped to the same port on the local machine. For example, <code>"EXPOSE 5000 5001"</code> would generate <code>"-p 5000:5000 -p 5001:5001"</code>.</td>
+</tr>
+<tr class="even">
+<td><code>${tag}</code></td>
+<td>The full tag of the selected image.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note</strong>: The <code>match</code> regular expression will be compared against the full tag of the selected image.</p>
+</blockquote>
+<h3 id="docker-attach">Docker Attach</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Configuration Setting</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>docker.commands.attach</code></td>
+<td><code>docker exec -it ${containerId} ${shellCommand}</code></td>
+</tr>
+</tbody>
+</table>
+<p>Supported tokens:</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 87%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Token</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>${containerId}</code></td>
+<td>The ID of the container to attach to.</td>
+</tr>
+<tr class="even">
+<td><code>${shellCommand}</code></td>
+<td>If <code>bash</code> is present in the container, it is substituted here, otherwise <code>sh</code>. In Windows containers, <code>cmd</code> is always used.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note</strong>: The <code>match</code> regular expression will be compared against the container name and full tag of the container image.</p>
+</blockquote>
+<h3 id="docker-logs">Docker Logs</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Configuration Setting</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>docker.commands.logs</code></td>
+<td><code>docker logs -f ${containerId}</code></td>
+</tr>
+</tbody>
+</table>
+<p>Supported tokens:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Token</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>${containerId}</code></td>
+<td>The ID of the container to view the logs for.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note</strong>: The <code>match</code> regular expression will be compared against the container name and full tag of the container image.</p>
+</blockquote>
+<h3 id="docker-compose-up">Docker Compose Up</h3>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 69%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Configuration Setting</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>docker.commands.composeUp</code></td>
+<td><code>docker-compose ${configurationFile} up ${detached} ${build}</code></td>
+</tr>
+</tbody>
+</table>
+<p>Supported tokens:</p>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 83%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Token</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>${configurationFile}</code></td>
+<td>Set to <code>-f</code> plus the workspace-relative path to the selected Docker Compose YAML file.</td>
+</tr>
+<tr class="even">
+<td><code>${detached}</code></td>
+<td>Set to <code>-d</code> if the configuration setting <code>docker.dockerComposeDetached</code> is set to <code>true</code>. Otherwise, set to <code>""</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>${build}</code></td>
+<td>Set to <code>--build</code> if the configuration setting <code>docker.dockerComposeBuild</code> is set to <code>true</code>. Otherwise, set to <code>""</code>.</td>
+</tr>
+<tr class="even">
+<td><code>${serviceList}</code></td>
+<td>If specified, prompts for a subset of the services to start when the command is run.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="docker-compose-down">Docker Compose Down</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Configuration Setting</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>docker.commands.composeDown</code></td>
+<td><code>docker-compose ${configurationFile} down</code></td>
+</tr>
+</tbody>
+</table>
+<p>Supported tokens:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Token</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>${configurationFile}</code></td>
+<td>Set to <code>-f</code> plus the workspace-relative path to the selected Docker Compose YAML file.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="additional-supported-tokens">Additional supported tokens</h3>
+<p>In addition to the command-specific supported tokens, the following tokens are supported in all command templates:</p>
+<table>
+<colgroup>
+<col style="width: 14%" />
+<col style="width: 85%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Token</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>${workspaceFolder}</code></td>
+<td>The selected workspace folder path.</td>
+</tr>
+<tr class="even">
+<td><code>${config:some.setting.identifier}</code></td>
+<td>The value of any configuration setting, as long as it is a string, number, or boolean. These setting identifiers can be arbitrarily defined and do not need to belong to Visual Studio Code or to any extension.</td>
+</tr>
+<tr class="odd">
+<td><code>${env:Name}</code></td>
+<td>The value of an environment variable.</td>
+</tr>
+<tr class="even">
+<td><code>${command:commandID}</code></td>
+<td>The string return value of a command.</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

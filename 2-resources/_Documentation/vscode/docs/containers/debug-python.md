@@ -22,9 +22,7 @@ You can configure the entry point of the Docker container by setting properties 
     {
       "type": "docker-run",
       "label": "docker-run: debug",
-      "dependsOn": [
-        "docker-build"
-      ],
+      "dependsOn": ["docker-build"],
       "python": {
         "module": "myapp"
       }
@@ -41,16 +39,9 @@ You can configure the entry point of the Docker container by setting properties 
     {
       "type": "docker-run",
       "label": "docker-run: debug",
-      "dependsOn": [
-        "docker-build"
-      ],
+      "dependsOn": ["docker-build"],
       "python": {
-        "args": [
-          "runserver",
-          "0.0.0.0:8000",
-          "--nothreading",
-          "--noreload"
-        ],
+        "args": ["runserver", "0.0.0.0:8000", "--nothreading", "--noreload"],
         "file": "manage.py"
       }
     }
@@ -97,7 +88,7 @@ Here is an example of using `dockerServerReadyAction` to launch the browser to o
 }
 ```
 
-  > **Note**: The regex found in the `pattern` attribute simply attempts to capture a logged message similar to "Starting development server at `http://localhost:8000`". It accommodates variations in the url for http or https, any host name, and any port.
+> **Note**: The regex found in the `pattern` attribute simply attempts to capture a logged message similar to "Starting development server at `http://localhost:8000`". It accommodates variations in the url for http or https, any host name, and any port.
 
 ### Important dockerServerReadyAction object properties
 
@@ -115,51 +106,51 @@ When you select **Docker: Add Docker Files to Workspace** for Django or Flask, w
 
 1. In the Dockerfile, comment out the line that adds app code to the container.
 
-    ``` dockerfile
-    #ADD . /app
-    ```
+   ```dockerfile
+   #ADD . /app
+   ```
 
 1. Within the `docker-run` task in the `tasks.json` file, create a new dockerRun attribute with a `volumes` property. This will create a mapping from the current workspace folder (app code) to the `/app` folder in the container.
 
-    ``` json
-    {
-      "type": "docker-run",
-      "label": "docker-run: debug",
-      "dependsOn": [
-        "docker-build"
-      ],
-      "dockerRun": {
-        "volumes": [
-          {
-            "containerPath": "/app", "localPath": "${workspaceFolder}"
-          }
-        ]
-      },
-      ...
-    }
-    ```
+   ```json
+   {
+     "type": "docker-run",
+     "label": "docker-run: debug",
+     "dependsOn": [
+       "docker-build"
+     ],
+     "dockerRun": {
+       "volumes": [
+         {
+           "containerPath": "/app", "localPath": "${workspaceFolder}"
+         }
+       ]
+     },
+     ...
+   }
+   ```
 
 1. Edit the python attribute by **removing** `--noreload` and `--nothreading`.
 
-    ``` json
-    {
-      ...
-      "dockerRun": {
-        "volumes": [
-          {
-            "containerPath": "/app", "localPath": "${workspaceFolder}"
-          }
-        ]
-      },
-      "python": {
-        "args": [
-          "runserver",
-          "0.0.0.0:8000",
-        ],
-        "file": "manage.py"
-      }
-    }
-    ```
+   ```json
+   {
+     ...
+     "dockerRun": {
+       "volumes": [
+         {
+           "containerPath": "/app", "localPath": "${workspaceFolder}"
+         }
+       ]
+     },
+     "python": {
+       "args": [
+         "runserver",
+         "0.0.0.0:8000",
+       ],
+       "file": "manage.py"
+     }
+   }
+   ```
 
 1. Select the **Docker: Python – Django** launch configuration and hit `kb(workbench.action.debug.start)` to build and run your container.
 1. Modify and save any file.
@@ -169,60 +160,60 @@ When you select **Docker: Add Docker Files to Workspace** for Django or Flask, w
 
 1. In the Dockerfile, comment out the line that adds app code to the container.
 
-    ``` dockerfile
-    #ADD . /app
-    ```
+   ```dockerfile
+   #ADD . /app
+   ```
 
 1. Within the `docker-run` task in the `tasks.json` file, edit the existing dockerRun attribute by adding a `FLASK_ENV` in the `env` property as well as a `volumes` property. This will create a mapping from the current workspace folder (app code) to the `/app` folder in the container.
 
-    ``` json
-    {
-      "type": "docker-run",
-      "label": "docker-run: debug",
-      "dependsOn": [
-        "docker-build"
-      ],
-      "dockerRun": {
-        "env": {
-          "FLASK_APP": "path_to/flask_entry_point.py",
-          "FLASK_ENV": "development"
-        },
-        "volumes": [
-          {
-            "containerPath": "/app", "localPath": "${workspaceFolder}"
-          }
-        ]
-      },
-      ...
-    }
-    ```
+   ```json
+   {
+     "type": "docker-run",
+     "label": "docker-run: debug",
+     "dependsOn": [
+       "docker-build"
+     ],
+     "dockerRun": {
+       "env": {
+         "FLASK_APP": "path_to/flask_entry_point.py",
+         "FLASK_ENV": "development"
+       },
+       "volumes": [
+         {
+           "containerPath": "/app", "localPath": "${workspaceFolder}"
+         }
+       ]
+     },
+     ...
+   }
+   ```
 
 1. Edit the python attribute by **removing** `--no-reload` and `--no-debugger`.
 
-    ``` json
-    {
-      ...
-      "dockerRun": {
-        "env": {
-          "FLASK_APP": "path_to/flask_entry_point.py",
-          "FLASK_ENV": "development"
-        },
-        "volumes": [
-          {
-            "containerPath": "/app", "localPath": "${workspaceFolder}"
-          }
-        ]
-      },
-      "python": {
-        "args": [
-          "run",
-          "--host", "0.0.0.0",
-          "--port", "5000"
-        ],
-        "module": "flask"
-      }
-    }
-    ```
+   ```json
+   {
+     ...
+     "dockerRun": {
+       "env": {
+         "FLASK_APP": "path_to/flask_entry_point.py",
+         "FLASK_ENV": "development"
+       },
+       "volumes": [
+         {
+           "containerPath": "/app", "localPath": "${workspaceFolder}"
+         }
+       ]
+     },
+     "python": {
+       "args": [
+         "run",
+         "--host", "0.0.0.0",
+         "--port", "5000"
+       ],
+       "module": "flask"
+     }
+   }
+   ```
 
 1. Select the **Docker: Python – Flask** launch configuration and hit `kb(workbench.action.debug.start)` to build and run your container.
 1. Modify and save any file.

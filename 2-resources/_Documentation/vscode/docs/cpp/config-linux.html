@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>config-linux</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="using-c-on-linux-in-vs-code">Using C++ on Linux in VS Code</h1>
+<p>In this tutorial, you will configure Visual Studio Code to use the GCC C++ compiler (g++) and GDB debugger on Linux. GCC stands for GNU Compiler Collection; GDB is the GNU debugger.</p>
+<p>After configuring VS Code, you will compile and debug a simple C++ program in VS Code. This tutorial does not teach you GCC, GDB, Ubuntu or the C++ language. For those subjects, there are many good resources available on the Web.</p>
+<p>If you have trouble, feel free to file an issue for this tutorial in the <a href="https://github.com/microsoft/vscode-docs/issues">VS Code documentation repository</a>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>To successfully complete this tutorial, you must do the following:</p>
+<ol type="1">
+<li>Install <a href="/download">Visual Studio Code</a>.</li>
+<li><p>Install the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">C++ extension for VS Code</a>. You can install the C/C++ extension by searching for ‘c++’ in the Extensions view (<code>kb(workbench.view.extensions)</code>).</p>
+<figure>
+<img src="images/cpp/cpp-extension.png" alt="C/C++ extension" /><figcaption>C/C++ extension</figcaption>
+</figure></li>
+</ol>
+<h3 id="ensure-gcc-is-installed">Ensure GCC is installed</h3>
+<p>Although you’ll use VS Code to edit your source code, you’ll compile the source code on Linux using the g++ compiler. You’ll also use GDB to debug. These tools are not installed by default on Ubuntu, so you have to install them. Fortunately, that’s easy.</p>
+<p>First, check to see whether GCC is already installed. To verify whether it is, open a Terminal window and enter the following command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">gcc</span> -v</a></code></pre></div>
+<p>If GCC isn’t installed, run the following command from the terminal window to update the Ubuntu package lists. An out-of-date Linux distribution can sometimes interfere with attempts to install new packages.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">sudo</span> apt-get update</a></code></pre></div>
+<p>Next install the GNU compiler tools and the GDB debugger with this command:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">sudo</span> apt-get install build-essential gdb</a></code></pre></div>
+<h2 id="create-hello-world">Create Hello World</h2>
+<p>From the terminal window, create an empty folder called <code>projects</code> to store your VS Code projects. Then create a subfolder called <code>helloworld</code>, navigate into it, and open VS Code in that folder by entering the following commands:</p>
+<pre class="cmd"><code>mkdir projects
+cd projects
+mkdir helloworld
+cd helloworld
+code .</code></pre>
+<p>The <code>code .</code> command opens VS Code in the current working folder, which becomes your “workspace”. As you go through the tutorial, you will create three files in a <code>.vscode</code> folder in the workspace:</p>
+<ul>
+<li><code>tasks.json</code> (compiler build settings)</li>
+<li><code>launch.json</code> (debugger settings)</li>
+<li><code>c_cpp_properties.json</code> (compiler path and IntelliSense settings)</li>
+</ul>
+<h3 id="add-hello-world-source-code-file">Add hello world source code file</h3>
+<p>In the File Explorer title bar, select <strong>New File</strong> and name the file <code>helloworld.cpp</code>.</p>
+<figure>
+<img src="images/msvc/new-file-button.png" alt="New File title bar button" /><figcaption>New File title bar button</figcaption>
+</figure>
+<p>Paste in the following source code:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb5-1" title="1"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="kw">using</span> <span class="kw">namespace</span> std;</a>
+<a class="sourceLine" id="cb5-6" title="6"></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb5-8" title="8">{</a>
+<a class="sourceLine" id="cb5-9" title="9">    vector&lt;string&gt; msg {<span class="st">&quot;Hello&quot;</span>, <span class="st">&quot;C++&quot;</span>, <span class="st">&quot;World&quot;</span>, <span class="st">&quot;from&quot;</span>, <span class="st">&quot;VS Code&quot;</span>, <span class="st">&quot;and the C++ extension!&quot;</span>};</a>
+<a class="sourceLine" id="cb5-10" title="10"></a>
+<a class="sourceLine" id="cb5-11" title="11">    <span class="cf">for</span> (<span class="at">const</span> string&amp; word : msg)</a>
+<a class="sourceLine" id="cb5-12" title="12">    {</a>
+<a class="sourceLine" id="cb5-13" title="13">        cout &lt;&lt; word &lt;&lt; <span class="st">&quot; &quot;</span>;</a>
+<a class="sourceLine" id="cb5-14" title="14">    }</a>
+<a class="sourceLine" id="cb5-15" title="15">    cout &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb5-16" title="16">}</a></code></pre></div>
+<p>Now press <code>kb(workbench.action.files.save)</code> to save the file. Notice that your files are listed in the <strong>File Explorer</strong> view (<code>kb(workbench.view.explorer)</code>) in the side bar of VS Code:</p>
+<figure>
+<img src="images/msvc/file-explorer.png" alt="File Explorer" /><figcaption>File Explorer</figcaption>
+</figure>
+<p>You can also enable <a href="/docs/editor/codebasics.md#saveauto-save">Auto Save</a> to automatically save your file changes, by checking <strong>Auto Save</strong> in the main <strong>File</strong> menu.</p>
+<p>The Activity Bar on the edge of Visual Studio Code lets you open different views such as <strong>Search</strong>, <strong>Source Control</strong>, and <strong>Run</strong>. You’ll look at the <strong>Run</strong> view later in this tutorial. You can find out more about the other views in the VS Code <a href="/docs/getstarted/userinterface.md">User Interface documentation</a>.</p>
+<blockquote>
+<p><strong>Note</strong>: When you save or open a C++ file, you may see a notification from the C/C++ extension about the availability of an Insiders version, which lets you test new features and fixes. You can ignore this notification by selecting the <code>X</code> (<strong>Clear Notification</strong>).</p>
+</blockquote>
+<h2 id="explore-intellisense">Explore IntelliSense</h2>
+<p>In the <code>helloworld.cpp</code> file, hover over <code>vector</code> or <code>string</code> to see type information. After the declaration of the <code>msg</code> variable, start typing <code>msg.</code>as you would when calling a member function. You should immediately see a completion list that shows all the member functions, and a window that shows the type information for the <code>msg</code> object:</p>
+<figure>
+<img src="images/wsl/msg-intellisense.png" alt="Statement completion IntelliSense" /><figcaption>Statement completion IntelliSense</figcaption>
+</figure>
+<p>You can press the <code>kbstyle(Tab)</code> key to insert the selected member. Then, when you add the opening parenthesis, you’ll see information about arguments that the function requires.</p>
+<h2 id="build-helloworld.cpp">Build helloworld.cpp</h2>
+<p>Next, you’ll create a <code>tasks.json</code> file to tell VS Code how to build (compile) the program. This task will invoke the g++ compiler to create an executable file from the source code.</p>
+<p>It’s important to have <code>helloworld.cpp</code> open in the editor because the next step uses the active file in the editor for context to create the build task in the next step.</p>
+<p>From the main menu, choose <strong>Terminal</strong> &gt; <strong>Configure Default Build Task</strong>. A dropdown appears showing various predefined build tasks for C++ compilers. Choose <strong>C/C++: g++ build active file</strong>.</p>
+<figure>
+<img src="images/wsl/build-active-file.png" alt="Tasks C++ build dropdown" /><figcaption>Tasks C++ build dropdown</figcaption>
+</figure>
+<p>This will create a <code>tasks.json</code> file in a <code>.vscode</code> folder and open it in the editor.</p>
+<p>Your new <code>tasks.json</code> file should look similar to the JSON below:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-5" title="5">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;shell&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-6" title="6">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;g++ build active file&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-7" title="7">      <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;/usr/bin/g++&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-8" title="8">      <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb6-9" title="9">        <span class="st">&quot;-g&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb6-10" title="10">        <span class="st">&quot;${file}&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb6-11" title="11">        <span class="st">&quot;-o&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb6-12" title="12">        <span class="st">&quot;${fileDirname}/${fileBasenameNoExtension}&quot;</span></a>
+<a class="sourceLine" id="cb6-13" title="13">      <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-14" title="14">      <span class="dt">&quot;options&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-15" title="15">        <span class="dt">&quot;cwd&quot;</span><span class="fu">:</span> <span class="st">&quot;/usr/bin&quot;</span></a>
+<a class="sourceLine" id="cb6-16" title="16">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb6-17" title="17">      <span class="dt">&quot;problemMatcher&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;$gcc&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-18" title="18">      <span class="dt">&quot;group&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-19" title="19">        <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-20" title="20">        <span class="dt">&quot;isDefault&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb6-21" title="21">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-22" title="22">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-23" title="23">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb6-24" title="24"><span class="fu">}</span></a></code></pre></div>
+<blockquote>
+<p><strong>Note</strong>: You can learn more about <code>tasks.json</code> variables in the <a href="/docs/editor/variables-reference.md">variables reference</a>.</p>
+</blockquote>
+<p>The <code>command</code> setting specifies the program to run; in this case that is g++. The <code>args</code> array specifies the command-line arguments that will be passed to g++. These arguments must be specified in the order expected by the compiler.</p>
+<p>This task tells g++ to take the active file (<code>${file}</code>), compile it, and create an executable file in the current directory (<code>${fileDirname}</code>) with the same name as the active file but without an extension (<code>${fileBasenameNoExtension}</code>), resulting in <code>helloworld</code> for our example.</p>
+<p>The <code>label</code> value is what you will see in the tasks list; you can name this whatever you like.</p>
+<p>The <code>"isDefault": true</code> value in the <code>group</code> object specifies that this task will be run when you press <code>kb(workbench.action.tasks.build)</code>. This property is for convenience only; if you set it to false, you can still run it from the Terminal menu with <strong>Tasks: Run Build Task</strong>.</p>
+<h3 id="running-the-build">Running the build</h3>
+<ol type="1">
+<li>Go back to <code>helloworld.cpp</code>. Your task builds the active file and you want to build <code>helloworld.cpp</code>.</li>
+<li>To run the build task defined in <code>tasks.json</code>, press <code>kb(workbench.action.tasks.build)</code> or from the <strong>Terminal</strong> main menu choose <strong>Run Build Task</strong>.</li>
+<li><p>When the task starts, you should see the Integrated Terminal panel appear below the source code editor. After the task completes, the terminal shows output from the compiler that indicates whether the build succeeded or failed. For a successful g++ build, the output looks something like this:</p>
+<figure>
+<img src="images/wsl/wsl-task-in-terminal.png" alt="G++ build output in terminal" /><figcaption>G++ build output in terminal</figcaption>
+</figure></li>
+<li><p>Create a new terminal using the <strong>+</strong> button and you’ll have a terminal running your default shell with the <code>helloworld</code> folder as the working directory. Run <code>ls</code> and you should now see the executable <code>helloworld</code> (no file extension).</p>
+<figure>
+<img src="images/wsl/wsl-bash-terminal.png" alt="WSL bash terminal" /><figcaption>WSL bash terminal</figcaption>
+</figure></li>
+<li><p>You can run <code>helloworld</code> in the terminal by typing <code>./helloworld</code>.</p></li>
+</ol>
+<h3 id="modifying-tasks.json">Modifying tasks.json</h3>
+<p>You can modify your <code>tasks.json</code> to build multiple C++ files by using an argument like <code>"${workspaceFolder}/*.cpp"</code> instead of <code>${file}</code>. You can also modify the output filename by replacing <code>"${fileDirname}/${fileBasenameNoExtension}"</code> with a hard-coded filename (for example ‘helloworld.out’).</p>
+<h2 id="debug-helloworld.cpp">Debug helloworld.cpp</h2>
+<p>Next, you’ll create a <code>launch.json</code> file to configure VS Code to launch the GDB debugger when you press <code>kb(workbench.action.debug.start)</code> to debug the program.</p>
+<p>From the main menu, choose <strong>Run</strong> &gt; <strong>Add Configuration…</strong> and then choose <strong>C++ (GDB/LLDB)</strong>.</p>
+<p>You’ll then see a dropdown for various predefined debugging configurations. Choose <strong>g++ build and debug active file</strong>.</p>
+<figure>
+<img src="images/wsl/build-and-debug-active-file.png" alt="C++ debug configuration dropdown" /><figcaption>C++ debug configuration dropdown</figcaption>
+</figure>
+<p>VS Code creates a <code>launch.json</code> file, opens it in the editor, and builds and runs ‘helloworld’.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.2.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb7-4" title="4">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-5" title="5">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;g++ build and debug active file&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-6" title="6">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;cppdbg&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-7" title="7">      <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-8" title="8">      <span class="dt">&quot;program&quot;</span><span class="fu">:</span> <span class="st">&quot;${fileDirname}/${fileBasenameNoExtension}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-9" title="9">      <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-10" title="10">      <span class="dt">&quot;stopAtEntry&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-11" title="11">      <span class="dt">&quot;cwd&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-12" title="12">      <span class="dt">&quot;environment&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-13" title="13">      <span class="dt">&quot;externalConsole&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-14" title="14">      <span class="dt">&quot;MIMode&quot;</span><span class="fu">:</span> <span class="st">&quot;gdb&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-15" title="15">      <span class="dt">&quot;setupCommands&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb7-16" title="16">        <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-17" title="17">          <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Enable pretty-printing for gdb&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-18" title="18">          <span class="dt">&quot;text&quot;</span><span class="fu">:</span> <span class="st">&quot;-enable-pretty-printing&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-19" title="19">          <span class="dt">&quot;ignoreFailures&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb7-20" title="20">        <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-21" title="21">      <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-22" title="22">      <span class="dt">&quot;preLaunchTask&quot;</span><span class="fu">:</span> <span class="st">&quot;g++ build active file&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-23" title="23">      <span class="dt">&quot;miDebuggerPath&quot;</span><span class="fu">:</span> <span class="st">&quot;/usr/bin/gdb&quot;</span></a>
+<a class="sourceLine" id="cb7-24" title="24">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-25" title="25">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb7-26" title="26"><span class="fu">}</span></a></code></pre></div>
+<p>In the JSON above, <code>program</code> specifies the program you want to debug. Here it is set to the active file folder <code>${fileDirname}</code> and active filename without an extension <code>${fileBasenameNoExtension}</code>, which if <code>helloworld.cpp</code> is the active file will be <code>helloworld</code>.</p>
+<p>By default, the C++ extension won’t add any breakpoints to your source code and the <code>stopAtEntry</code> value is set to <code>false</code>.</p>
+<p>Change the <code>stopAtEntry</code> value to <code>true</code> to cause the debugger to stop on the <code>main</code> method when you start debugging.</p>
+<h3 id="start-a-debugging-session">Start a debugging session</h3>
+<ol type="1">
+<li>Go back to <code>helloworld.cpp</code> so that it is the active file.</li>
+<li>Press <code>kb(workbench.action.debug.start)</code> or from the main menu choose <strong>Run &gt; Start Debugging</strong>. Before you start stepping through the code, let’s take a moment to notice several changes in the user interface:</li>
+</ol>
+<ul>
+<li>The Integrated Terminal appears at the bottom of the source code editor. In the <strong>Debug Output</strong> tab, you see output that indicates the debugger is up and running.</li>
+<li><p>The editor highlights the first statement in the <code>main</code> method. This is a breakpoint that the C++ extension automatically sets for you:</p>
+<figure>
+<img src="images/wsl/wsl-breakpoint-default.png" alt="Initial breakpoint" /><figcaption>Initial breakpoint</figcaption>
+</figure></li>
+<li><p>The Run view on the left shows debugging information. You’ll see an example later in the tutorial.</p></li>
+<li><p>At the top of the code editor, a debugging control panel appears. You can move this around the screen by grabbing the dots on the left side.</p>
+<figure>
+<img src="images/cpp/debug-controls.png" alt="Debugging controls" /><figcaption>Debugging controls</figcaption>
+</figure></li>
+</ul>
+<h2 id="step-through-the-code">Step through the code</h2>
+<p>Now you’re ready to start stepping through the code.</p>
+<ol type="1">
+<li><p>Click or press the <strong>Step over</strong> icon in the debugging control panel.</p>
+<figure>
+<img src="images/cpp/step-over-button.png" alt="Step over button" /><figcaption>Step over button</figcaption>
+</figure>
+<p>This will advance program execution to the first line of the for loop, and skip over all the internal function calls within the <code>vector</code> and <code>string</code> classes that are invoked when the <code>msg</code> variable is created and initialized. Notice the change in the <strong>Variables</strong> window on the side.</p>
+<figure>
+<img src="images/wsl/debug-view-variables.png" alt="Debugging windows" /><figcaption>Debugging windows</figcaption>
+</figure></li>
+<li>Press <strong>Step over</strong> again to advance to the next statement in this program (skipping over all the internal code that is executed to initialize the loop). Now, the <strong>Variables</strong> window shows information about the loop variables.</li>
+<li>Press <strong>Step over</strong> again to execute the <code>cout</code> statement. (Note that as of the March 2019 release, the C++ extension does not print any output to the <strong>Debug Console</strong> until the last cout executes.)</li>
+<li><p>If you like, you can keep pressing <strong>Step over</strong> until all the words in the vector have been printed to the console. But if you are curious, try pressing the <strong>Step Into</strong> button to step through source code in the C++ standard library!</p>
+<figure>
+<img src="images/cpp/gcc-system-header-stepping.png" alt="Breakpoint in gcc standard library header" /><figcaption>Breakpoint in gcc standard library header</figcaption>
+</figure>
+<p>To return to your own code, one way is to keep pressing <strong>Step over</strong>. Another way is to set a breakpoint in your code by switching to the <code>helloworld.cpp</code> tab in the code editor, putting the insertion point somewhere on the <code>cout</code> statement inside the loop, and pressing <code>kb(editor.debug.action.toggleBreakpoint)</code>. A red dot appears in the gutter on the left to indicate that a breakpoint has been set on this line.</p>
+<figure>
+<img src="images/cpp/breakpoint-in-main.png" alt="Breakpoint in main" /><figcaption>Breakpoint in main</figcaption>
+</figure>
+<p>Then press <code>kb(workbench.action.debug.start)</code> to start execution from the current line in the standard library header. Execution will break on <code>cout</code>. If you like, you can press <code>kb(editor.debug.action.toggleBreakpoint)</code> again to toggle off the breakpoint.</p>
+<p>When the loop has completed, you can see the output in the <strong>Debug Console</strong> tab of the integrated terminal, along with some other diagnostic information that is output by GDB.</p>
+<figure>
+<img src="images/wsl/debug-console-output-wsl.png" alt="Debug console display" /><figcaption>Debug console display</figcaption>
+</figure></li>
+</ol>
+<h2 id="set-a-watch">Set a watch</h2>
+<p>To keep track of the value of a variable as your program executes, set a <strong>watch</strong> on the variable.</p>
+<ol type="1">
+<li><p>Place the insertion point inside the loop. In the <strong>Watch</strong> window, click the plus sign and in the text box, type <code>word</code>, which is the name of the loop variable. Now view the Watch window as you step through the loop.</p>
+<figure>
+<img src="images/cpp/watch-window.png" alt="Watch window" /><figcaption>Watch window</figcaption>
+</figure></li>
+<li><p>To quickly view the value of any variable while execution is paused on a breakpoint, you can hover over it with the mouse pointer.</p>
+<figure>
+<img src="images/cpp/mouse-hover.png" alt="Mouse hover" /><figcaption>Mouse hover</figcaption>
+</figure></li>
+</ol>
+<h2 id="cc-configurations">C/C++ configurations</h2>
+<p>If you want more control over the C/C++ extension, you can create a <code>c_cpp_properties.json</code> file, which will allow you to change settings such as the path to the compiler, include paths, C++ standard (default is C++17), and more.</p>
+<p>You can view the C/C++ configuration UI by running the command <strong>C/C++: Edit Configurations (UI)</strong> from the Command Palette (<code>kb(workbench.action.showCommands)</code>).</p>
+<figure>
+<img src="images/cpp/command-palette.png" alt="Command Palette" /><figcaption>Command Palette</figcaption>
+</figure>
+<p>This opens the <strong>C/C++ Configurations</strong> page. When you make changes here, VS Code writes them to a file called <code>c_cpp_properties.json</code> in the <code>.vscode</code> folder.</p>
+<figure>
+<img src="images/wsl/intellisense-configurations-wsl.png" alt="IntelliSense configuration window" /><figcaption>IntelliSense configuration window</figcaption>
+</figure>
+<p>You only need to modify the <strong>Include path</strong> setting if your program includes header files that are not in your workspace or in the standard library path.</p>
+<p>Visual Studio Code places these settings in <code>.vscode/c_cpp_properties.json</code>. If you open that file directly, it should look something like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-4" title="4">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Linux&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-5" title="5">      <span class="dt">&quot;includePath&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;${workspaceFolder}/**&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6">      <span class="dt">&quot;defines&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-7" title="7">      <span class="dt">&quot;compilerPath&quot;</span><span class="fu">:</span> <span class="st">&quot;/usr/bin/gcc&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-8" title="8">      <span class="dt">&quot;cStandard&quot;</span><span class="fu">:</span> <span class="st">&quot;c11&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-9" title="9">      <span class="dt">&quot;cppStandard&quot;</span><span class="fu">:</span> <span class="st">&quot;c++17&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-10" title="10">      <span class="dt">&quot;intelliSenseMode&quot;</span><span class="fu">:</span> <span class="st">&quot;clang-x64&quot;</span></a>
+<a class="sourceLine" id="cb8-11" title="11">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb8-12" title="12">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-13" title="13">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<h2 id="reusing-your-c-configuration">Reusing your C++ configuration</h2>
+<p>VS Code is now configured to use gcc on Linux. The configuration applies to the current workspace. To reuse the configuration, just copy the JSON files to a <code>.vscode</code> folder in a new project folder (workspace) and change the names of the source file(s) and executable as needed.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="compiler-and-linking-errors">Compiler and linking errors</h3>
+<p>The most common cause of errors (such as <code>undefined _main</code>, or <code>attempting to link with file built for unknown-unsupported file format</code>, and so on) occurs when <code>helloworld.cpp</code> is not the active file when you start a build or start debugging. This is because the compiler is trying to compile something that isn’t source code, like your <code>launch.json</code>, <code>tasks.json</code>, or <code>c_cpp_properties.json</code> file.</p>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li>Explore the <a href="/docs/editor/codebasics.md">VS Code User Guide</a>.</li>
+<li>Review the <a href="/docs/languages/cpp.md">Overview of the C++ extension</a>.</li>
+<li>Create a new workspace, copy your .json files to it, adjust the necessary settings for the new workspace path, program name, and so on, and start coding!</li>
+</ul>
+</body>
+</html>

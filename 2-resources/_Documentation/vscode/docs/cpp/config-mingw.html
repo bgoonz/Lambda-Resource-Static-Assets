@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>config-mingw</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="using-gcc-with-mingw">Using GCC with MinGW</h1>
+<p>In this tutorial, you configure Visual Studio Code to use the GCC C++ compiler (g++) and GDB debugger from <a href="http://mingw-w64.org/doku.php/start">mingw-w64</a> to create programs that run on Windows.</p>
+<p>After configuring VS Code, you will compile and debug a simple Hello World program in VS Code. This tutorial does not teach you about GCC, GDB, Mingw-w64, or the C++ language. For those subjects, there are many good resources available on the Web.</p>
+<p>If you have any problems, feel free to file an issue for this tutorial in the <a href="https://github.com/microsoft/vscode-docs/issues">VS Code documentation repository</a>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>To successfully complete this tutorial, you must do the following steps:</p>
+<ol type="1">
+<li><p>Install <a href="/download">Visual Studio Code</a>.</p></li>
+<li><p>Install the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">C/C++ extension for VS Code</a>. You can install the C/C++ extension by searching for ‘c++’ in the Extensions view (<code>kb(workbench.view.extensions)</code>).</p>
+<figure>
+<img src="images/cpp/cpp-extension.png" alt="C/C++ extension" /><figcaption>C/C++ extension</figcaption>
+</figure></li>
+<li><p>Install Mingw-w64 via the SourceForge website. Click <a href="https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/mingw-w64-install.exe/download">Mingw-w64</a> to download the Windows Mingw-w64 installer.</p>
+<ol type="1">
+<li>Run the installer.</li>
+<li>For <strong>Architecture</strong> select <strong>x86_64</strong> and then select <strong>Next</strong>.</li>
+<li>On the Installation Folder page, use the default installation folder. Copy the location as you will need it later.</li>
+<li>Select <strong>Next</strong> to start the installation.</li>
+</ol></li>
+<li>Add the path to your Mingw-w64 <code>bin</code> folder to the Windows <code>PATH</code> environment variable by using the following steps:
+<ol type="1">
+<li>In the Windows search bar, type ‘settings’ to open your Windows Settings.</li>
+<li>Search for <strong>Edit environment variables for your account</strong>.</li>
+<li>Choose the <code>Path</code> variable and then select <strong>Edit</strong>.</li>
+<li>Select <strong>New</strong> and add the Mingw-w64 destination folder path to the system path. The exact path depends on which version of Mingw-w64 you have installed and where you installed it. If you used the settings above to install Mingw-w64, then add this to the path: <code>C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin</code>.</li>
+<li>Select <strong>OK</strong> to save the updated PATH. You will need to reopen any console windows for the new PATH location to be available.</li>
+</ol></li>
+</ol>
+<h3 id="check-your-mingw-installation">Check your MinGW installation</h3>
+<p>To check that your Mingw-w64 tools are correctly installed and available, open a <strong>new</strong> Command Prompt and type:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">g++</span> --version</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">gdb</span> --version</a></code></pre></div>
+<p>If you don’t see the expected output or <code>g++</code> or <code>gdb</code> is not a recognized command, check your installation (Windows <strong>Control Panel</strong> &gt; <strong>Programs</strong>) and make sure your PATH entry matches the Mingw-w64 binary location where the compilers are located.</p>
+<h2 id="create-hello-world">Create Hello World</h2>
+<p>From a Windows command prompt, create an empty folder called <code>projects</code> where you can place all your VS Code projects. Then create a sub-folder called <code>helloworld</code>, navigate into it, and open VS Code in that folder by entering the following commands:</p>
+<pre class="cmd"><code>mkdir projects
+cd projects
+mkdir helloworld
+cd helloworld
+code .</code></pre>
+<p>The “code .” command opens VS Code in the current working folder, which becomes your “workspace”. As you go through the tutorial, you will see three files created in a <code>.vscode</code> folder in the workspace:</p>
+<ul>
+<li><code>tasks.json</code> (build instructions)</li>
+<li><code>launch.json</code> (debugger settings)</li>
+<li><code>c_cpp_properties.json</code> (compiler path and IntelliSense settings)</li>
+</ul>
+<h3 id="add-a-source-code-file">Add a source code file</h3>
+<p>In the File Explorer title bar, select the <strong>New File</strong> button and name the file <code>helloworld.cpp</code>.</p>
+<figure>
+<img src="images/mingw/new-file-button.png" alt="New File title bar button" /><figcaption>New File title bar button</figcaption>
+</figure>
+<h3 id="add-hello-world-source-code">Add hello world source code</h3>
+<p>Now paste in this source code:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb3-1" title="1"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="pp">#include </span><span class="im">&lt;string&gt;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="kw">using</span> <span class="kw">namespace</span> std;</a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="dt">int</span> main()</a>
+<a class="sourceLine" id="cb3-8" title="8">{</a>
+<a class="sourceLine" id="cb3-9" title="9">    vector&lt;string&gt; msg {<span class="st">&quot;Hello&quot;</span>, <span class="st">&quot;C++&quot;</span>, <span class="st">&quot;World&quot;</span>, <span class="st">&quot;from&quot;</span>, <span class="st">&quot;VS Code&quot;</span>, <span class="st">&quot;and the C++ extension!&quot;</span>};</a>
+<a class="sourceLine" id="cb3-10" title="10"></a>
+<a class="sourceLine" id="cb3-11" title="11">    <span class="cf">for</span> (<span class="at">const</span> string&amp; word : msg)</a>
+<a class="sourceLine" id="cb3-12" title="12">    {</a>
+<a class="sourceLine" id="cb3-13" title="13">        cout &lt;&lt; word &lt;&lt; <span class="st">&quot; &quot;</span>;</a>
+<a class="sourceLine" id="cb3-14" title="14">    }</a>
+<a class="sourceLine" id="cb3-15" title="15">    cout &lt;&lt; endl;</a>
+<a class="sourceLine" id="cb3-16" title="16">}</a></code></pre></div>
+<p>Now press <code>kb(workbench.action.files.save)</code> to save the file. Notice how the file you just added appears in the <strong>File Explorer</strong> view (<code>kb(workbench.view.explorer)</code>) in the side bar of VS Code:</p>
+<figure>
+<img src="images/mingw/file-explorer-mingw.png" alt="File Explorer" /><figcaption>File Explorer</figcaption>
+</figure>
+<p>You can also enable <a href="/docs/editor/codebasics.md#saveauto-save">Auto Save</a> to automatically save your file changes, by checking <strong>Auto Save</strong> in the main <strong>File</strong> menu.</p>
+<p>The Activity Bar on the far left lets you open different views such as <strong>Search</strong>, <strong>Source Control</strong>, and <strong>Run</strong>. You’ll look at the <strong>Run</strong> view later in this tutorial. You can find out more about the other views in the VS Code <a href="/docs/getstarted/userinterface.md">User Interface documentation</a>.</p>
+<blockquote>
+<p><strong>Note</strong>: When you save or open a C++ file, you may see a notification from the C/C++ extension about the availability of an Insiders version, which lets you test new features and fixes. You can ignore this notification by selecting the <code>X</code> (<strong>Clear Notification</strong>).</p>
+</blockquote>
+<h2 id="explore-intellisense">Explore IntelliSense</h2>
+<p>In your new <code>helloworld.cpp</code> file, hover over <code>vector</code> or <code>string</code> to see type information. After the declaration of the <code>msg</code> variable, start typing <code>msg.</code> as you would when calling a member function. You should immediately see a completion list that shows all the member functions, and a window that shows the type information for the <code>msg</code> object:</p>
+<figure>
+<img src="images/wsl/msg-intellisense.png" alt="Statement completion IntelliSense" /><figcaption>Statement completion IntelliSense</figcaption>
+</figure>
+<p>You can press the <code>kbstyle(Tab)</code> key to insert the selected member; then, when you add the opening parenthesis, you will see information about any arguments that the function requires.</p>
+<h2 id="build-helloworld.cpp">Build helloworld.cpp</h2>
+<p>Next, you’ll create a <code>tasks.json</code> file to tell VS Code how to build (compile) the program. This task will invoke the g++ compiler to create an executable file based on the source code.</p>
+<p>From the main menu, choose <strong>Terminal</strong> &gt; <strong>Configure Default Build Task</strong>. In the dropdown, which will display a tasks dropdown listing various predefined build tasks for C++ compilers. Choose <strong>g++.exe build active file</strong>, which will build the file that is currently displayed (active) in the editor.</p>
+<figure>
+<img src="images/mingw/build-active-file.png" alt="Tasks C++ build dropdown" /><figcaption>Tasks C++ build dropdown</figcaption>
+</figure>
+<p>This will create a <code>tasks.json</code> file in a <code>.vscode</code> folder and open it in the editor.</p>
+<p>Your new <code>tasks.json</code> file should look similar to the JSON below:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb4-4" title="4">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-5" title="5">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;shell&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-6" title="6">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;C/C++: g++.exe build active file&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Program Files</span><span class="ch">\\</span><span class="st">mingw-w64</span><span class="ch">\\</span><span class="st">x86_64-8.1.0-posix-seh-rt_v6-rev0</span><span class="ch">\\</span><span class="st">mingw64</span><span class="ch">\\</span><span class="st">bin</span><span class="ch">\\</span><span class="st">g++.exe&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-8" title="8">      <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb4-9" title="9">        <span class="st">&quot;-g&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-10" title="10">        <span class="st">&quot;${file}&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-11" title="11">        <span class="st">&quot;-o&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb4-12" title="12">        <span class="st">&quot;${fileDirname}</span><span class="ch">\\</span><span class="st">${fileBasenameNoExtension}.exe&quot;</span></a>
+<a class="sourceLine" id="cb4-13" title="13">      <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-14" title="14">      <span class="dt">&quot;options&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-15" title="15">        <span class="dt">&quot;cwd&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder}&quot;</span></a>
+<a class="sourceLine" id="cb4-16" title="16">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-17" title="17">      <span class="dt">&quot;problemMatcher&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;$gcc&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-18" title="18">      <span class="dt">&quot;group&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-19" title="19">        <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;build&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-20" title="20">        <span class="dt">&quot;isDefault&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb4-21" title="21">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-22" title="22">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-23" title="23">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb4-24" title="24"><span class="fu">}</span></a></code></pre></div>
+<p>The <code>command</code> setting specifies the program to run; in this case that is g++. The <code>args</code> array specifies the command-line arguments that will be passed to g++. These arguments must be specified in the order expected by the compiler. This task tells g++ to take the active file (<code>${file}</code>), compile it, and create an executable file in the current directory (<code>${fileDirname}</code>) with the same name as the active file but with the <code>.exe</code> extension (<code>${fileBasenameNoExtension}.exe</code>), resulting in <code>helloworld.exe</code> for our example.</p>
+<blockquote>
+<p><strong>Note</strong>: You can learn more about <code>tasks.json</code> variables in the <a href="/docs/editor/variables-reference.md">variables reference</a>.</p>
+</blockquote>
+<p>The <code>label</code> value is what you will see in the tasks list; you can name this whatever you like.</p>
+<p>The <code>"isDefault": true</code> value in the <code>group</code> object specifies that this task will be run when you press <code>kb(workbench.action.tasks.build)</code>. This property is for convenience only; if you set it to false, you can still run it from the Terminal menu with <strong>Tasks: Run Build Task</strong>.</p>
+<h3 id="running-the-build">Running the build</h3>
+<ol type="1">
+<li>Go back to <code>helloworld.cpp</code>. Your task builds the active file and you want to build <code>helloworld.cpp</code>.</li>
+<li>To run the build task defined in <code>tasks.json</code>, press <code>kb(workbench.action.tasks.build)</code> or from the <strong>Terminal</strong> main menu choose <strong>Run Build Task</strong>.</li>
+<li><p>When the task starts, you should see the Integrated Terminal panel appear below the source code editor. After the task completes, the terminal shows output from the compiler that indicates whether the build succeeded or failed. For a successful g++ build, the output looks something like this:</p>
+<figure>
+<img src="images/mingw/build-output-in-terminal.png" alt="G++ build output in terminal" /><figcaption>G++ build output in terminal</figcaption>
+</figure></li>
+<li><p>Create a new terminal using the <strong>+</strong> button and you’ll have a new terminal with the <code>helloworld</code> folder as the working directory. Run <code>dir</code> and you should now see the executable <code>helloworld.exe</code>.</p>
+<figure>
+<img src="images/mingw/helloworld-in-terminal.png" alt="Hello World in PowerShell terminal" /><figcaption>Hello World in PowerShell terminal</figcaption>
+</figure></li>
+<li><p>You can run <code>helloworld</code> in the terminal by typing <code>helloworld.exe</code> (or <code>.\helloworld.exe</code> if you use a PowerShell terminal).</p></li>
+</ol>
+<blockquote>
+<p><strong>Note</strong>: You might need to press <code>kbstyle(Enter)</code> a couple of times initially to see the PowerShell prompt in the terminal. This issue should be fixed in a future release of Windows.</p>
+</blockquote>
+<h3 id="modifying-tasks.json">Modifying tasks.json</h3>
+<p>You can modify your <code>tasks.json</code> to build multiple C++ files by using an argument like <code>"${workspaceFolder}\\*.cpp"</code> instead of <code>${file}</code>. This will build all <code>.cpp</code> files in your current folder. You can also modify the output filename by replacing <code>"${fileDirname}\\${fileBasenameNoExtension}.exe"</code> with a hard-coded filename (for example <code>"${workspaceFolder}\\myProgram.exe"</code>).</p>
+<h2 id="debug-helloworld.cpp">Debug helloworld.cpp</h2>
+<p>Next, you’ll create a <code>launch.json</code> file to configure VS Code to launch the GDB debugger when you press <code>kb(workbench.action.debug.start)</code> to debug the program.</p>
+<ol type="1">
+<li>From the main menu, choose <strong>Run</strong> &gt; <strong>Add Configuration…</strong> and then choose <strong>C++ (GDB/LLDB)</strong>.</li>
+<li>You’ll then see a dropdown for various predefined debugging configurations. Choose <strong>g++.exe build and debug active file</strong>.</li>
+</ol>
+<figure>
+<img src="images/mingw/build-and-debug-active-file.png" alt="C++ debug configuration dropdown" /><figcaption>C++ debug configuration dropdown</figcaption>
+</figure>
+<p>VS Code creates a <code>launch.json</code> file, opens it in the editor, and builds and runs ‘helloworld’.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.2.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-5" title="5">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;g++.exe - Build and debug active file&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-6" title="6">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;cppdbg&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-7" title="7">      <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-8" title="8">      <span class="dt">&quot;program&quot;</span><span class="fu">:</span> <span class="st">&quot;${fileDirname}</span><span class="ch">\\</span><span class="st">${fileBasenameNoExtension}.exe&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-9" title="9">      <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-10" title="10">      <span class="dt">&quot;stopAtEntry&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-11" title="11">      <span class="dt">&quot;cwd&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-12" title="12">      <span class="dt">&quot;environment&quot;</span><span class="fu">:</span> <span class="ot">[]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-13" title="13">      <span class="dt">&quot;externalConsole&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-14" title="14">      <span class="dt">&quot;MIMode&quot;</span><span class="fu">:</span> <span class="st">&quot;gdb&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-15" title="15">      <span class="dt">&quot;miDebuggerPath&quot;</span><span class="fu">:</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Program Files</span><span class="ch">\\</span><span class="st">mingw-w64</span><span class="ch">\\</span><span class="st">x86_64-8.1.0-posix-seh-rt_v6-rev0</span><span class="ch">\\</span><span class="st">mingw64</span><span class="ch">\\</span><span class="st">bin</span><span class="ch">\\</span><span class="st">gdb.exe&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-16" title="16">      <span class="dt">&quot;setupCommands&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb5-17" title="17">        <span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-18" title="18">          <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Enable pretty-printing for gdb&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-19" title="19">          <span class="dt">&quot;text&quot;</span><span class="fu">:</span> <span class="st">&quot;-enable-pretty-printing&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-20" title="20">          <span class="dt">&quot;ignoreFailures&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb5-21" title="21">        <span class="fu">}</span></a>
+<a class="sourceLine" id="cb5-22" title="22">      <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-23" title="23">      <span class="dt">&quot;preLaunchTask&quot;</span><span class="fu">:</span> <span class="st">&quot;C/C++: g++.exe build active file&quot;</span></a>
+<a class="sourceLine" id="cb5-24" title="24">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb5-25" title="25">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb5-26" title="26"><span class="fu">}</span></a></code></pre></div>
+<p>The <code>program</code> setting specifies the program you want to debug. Here it is set to the active file folder <code>${fileDirname}</code> and active filename with the <code>.exe</code> extension <code>${fileBasenameNoExtension}.exe</code>, which if <code>helloworld.cpp</code> is the active file will be <code>helloworld.exe</code>.</p>
+<p>By default, the C++ extension won’t add any breakpoints to your source code and the <code>stopAtEntry</code> value is set to <code>false</code>.</p>
+<p>Change the <code>stopAtEntry</code> value to <code>true</code> to cause the debugger to stop on the <code>main</code> method when you start debugging.</p>
+<blockquote>
+<p><strong>Note</strong>: The <code>preLaunchTask</code> setting is used to specify task to be executed before launch. Make sure it is consistent with the <code>tasks.json</code> file <code>label</code> setting.</p>
+</blockquote>
+<h3 id="start-a-debugging-session">Start a debugging session</h3>
+<ol type="1">
+<li>Go back to <code>helloworld.cpp</code> so that it is the active file.</li>
+<li>Press <code>kb(workbench.action.debug.start)</code> or from the main menu choose <strong>Run &gt; Start Debugging</strong>. Before you start stepping through the source code, let’s take a moment to notice several changes in the user interface:</li>
+</ol>
+<ul>
+<li>The Integrated Terminal appears at the bottom of the source code editor. In the <strong>Debug Output</strong> tab, you see output that indicates the debugger is up and running.</li>
+<li><p>The editor highlights the first statement in the <code>main</code> method. This is a breakpoint that the C++ extension automatically sets for you:</p>
+<figure>
+<img src="images/mingw/stopAtEntry.png" alt="Initial breakpoint" /><figcaption>Initial breakpoint</figcaption>
+</figure></li>
+<li><p>The Run view on the left shows debugging information. You’ll see an example later in the tutorial.</p></li>
+<li><p>At the top of the code editor, a debugging control panel appears. You can move this around the screen by grabbing the dots on the left side.</p></li>
+</ul>
+<h2 id="step-through-the-code">Step through the code</h2>
+<p>Now you’re ready to start stepping through the code.</p>
+<ol type="1">
+<li><p>Click or press the <strong>Step over</strong> icon in the debugging control panel.</p>
+<figure>
+<img src="images/cpp/step-over-button.png" alt="Step over button" /><figcaption>Step over button</figcaption>
+</figure>
+<p>This will advance program execution to the first line of the for loop, and skip over all the internal function calls within the <code>vector</code> and <code>string</code> classes that are invoked when the <code>msg</code> variable is created and initialized. Notice the change in the <strong>Variables</strong> window on the left.</p>
+<figure>
+<img src="images/wsl/debug-view-variables.png" alt="Debugging windows" /><figcaption>Debugging windows</figcaption>
+</figure>
+<p>In this case, the errors are expected because, although the variable names for the loop are now visible to the debugger, the statement has not executed yet, so there is nothing to read at this point. The contents of <code>msg</code> are visible, however, because that statement has completed.</p></li>
+<li>Press <strong>Step over</strong> again to advance to the next statement in this program (skipping over all the internal code that is executed to initialize the loop). Now, the <strong>Variables</strong> window shows information about the loop variables.</li>
+<li>Press <strong>Step over</strong> again to execute the <code>cout</code> statement. (Note that as of the March 2019 release, the C++ extension does not print any output to the <strong>Debug Console</strong> until the loop exits.)</li>
+<li><p>If you like, you can keep pressing <strong>Step over</strong> until all the words in the vector have been printed to the console. But if you are curious, try pressing the <strong>Step Into</strong> button to step through source code in the C++ standard library!</p>
+<figure>
+<img src="images/cpp/gcc-system-header-stepping.png" alt="Breakpoint in gcc standard library header" /><figcaption>Breakpoint in gcc standard library header</figcaption>
+</figure>
+<p>To return to your own code, one way is to keep pressing <strong>Step over</strong>. Another way is to set a breakpoint in your code by switching to the <code>helloworld.cpp</code> tab in the code editor, putting the insertion point somewhere on the <code>cout</code> statement inside the loop, and pressing <code>kb(editor.debug.action.toggleBreakpoint)</code>. A red dot appears in the gutter on the left to indicate that a breakpoint has been set on this line.</p>
+<figure>
+<img src="images/cpp/breakpoint-in-main.png" alt="Breakpoint in main" /><figcaption>Breakpoint in main</figcaption>
+</figure>
+<p>Then press <code>kb(workbench.action.debug.start)</code> to start execution from the current line in the standard library header. Execution will break on <code>cout</code>. If you like, you can press <code>kb(editor.debug.action.toggleBreakpoint)</code> again to toggle off the breakpoint.</p>
+<p>When the loop has completed, you can see the output in the Integrated Terminal, along with some other diagnostic information that is output by GDB.</p>
+<figure>
+<img src="images/mingw/debug-output.png" alt="Debug output in terminal" /><figcaption>Debug output in terminal</figcaption>
+</figure></li>
+</ol>
+<h2 id="set-a-watch">Set a watch</h2>
+<p>Sometimes you might want to keep track of the value of a variable as your program executes. You can do this by setting a <strong>watch</strong> on the variable.</p>
+<ol type="1">
+<li><p>Place the insertion point inside the loop. In the <strong>Watch</strong> window, click the plus sign and in the text box, type <code>word</code>, which is the name of the loop variable. Now view the Watch window as you step through the loop.</p>
+<figure>
+<img src="images/cpp/watch-window.png" alt="Watch window" /><figcaption>Watch window</figcaption>
+</figure></li>
+<li><p>Add another watch by adding this statement before the loop: <code>int i = 0;</code>. Then, inside the loop, add this statement: <code>++i;</code>. Now add a watch for <code>i</code> as you did in the previous step.</p></li>
+<li><p>To quickly view the value of any variable while execution is paused on a breakpoint, you can hover over it with the mouse pointer.</p>
+<figure>
+<img src="images/cpp/mouse-hover.png" alt="Mouse hover" /><figcaption>Mouse hover</figcaption>
+</figure></li>
+</ol>
+<h2 id="cc-configurations">C/C++ configurations</h2>
+<p>If you want more control over the C/C++ extension, you can create a <code>c_cpp_properties.json</code> file, which will allow you to change settings such as the path to the compiler, include paths, C++ standard (default is C++17), and more.</p>
+<p>You can view the C/C++ configuration UI by running the command <strong>C/C++: Edit Configurations (UI)</strong> from the Command Palette (<code>kb(workbench.action.showCommands)</code>).</p>
+<figure>
+<img src="images/cpp/command-palette.png" alt="Command Palette" /><figcaption>Command Palette</figcaption>
+</figure>
+<p>This opens the <strong>C/C++ Configurations</strong> page. When you make changes here, VS Code writes them to a file called <code>c_cpp_properties.json</code> in the <code>.vscode</code> folder.</p>
+<p>Here, we’ve changed the <strong>Configuration name</strong> to <strong>GCC</strong>, set the <strong>Compiler path</strong> dropdown to the g++ compiler, and the <strong>IntelliSense mode</strong> to match the compiler (<strong>gcc-x64</strong>)</p>
+<figure>
+<img src="images/mingw/intellisense-configurations-mingw.png" alt="Command Palette" /><figcaption>Command Palette</figcaption>
+</figure>
+<p>Visual Studio Code places these settings in <code>.vscode\c_cpp_properties.json</code>. If you open that file directly, it should look something like this:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-4" title="4">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;GCC&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-5" title="5">      <span class="dt">&quot;includePath&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;${workspaceFolder}/**&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-6" title="6">      <span class="dt">&quot;defines&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;_DEBUG&quot;</span><span class="ot">,</span> <span class="st">&quot;UNICODE&quot;</span><span class="ot">,</span> <span class="st">&quot;_UNICODE&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-7" title="7">      <span class="dt">&quot;windowsSdkVersion&quot;</span><span class="fu">:</span> <span class="st">&quot;10.0.18362.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-8" title="8">      <span class="dt">&quot;compilerPath&quot;</span><span class="fu">:</span> <span class="st">&quot;C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/g++.exe&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-9" title="9">      <span class="dt">&quot;cStandard&quot;</span><span class="fu">:</span> <span class="st">&quot;c11&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-10" title="10">      <span class="dt">&quot;intelliSenseMode&quot;</span><span class="fu">:</span> <span class="st">&quot;gcc-x64&quot;</span></a>
+<a class="sourceLine" id="cb6-11" title="11">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-12" title="12">  <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-13" title="13">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="dv">4</span></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<p>You only need to add to the <strong>Include path</strong> array setting if your program includes header files that are not in your workspace or in the standard library path.</p>
+<h3 id="compiler-path">Compiler path</h3>
+<p>The extension uses the <code>compilerPath</code> setting to infer the path to the C++ standard library header files. When the extension knows where to find those files, it can provide features like smart completions and <strong>Go to Definition</strong> navigation.</p>
+<p>The C/C++ extension attempts to populate <code>compilerPath</code> with the default compiler location based on what it finds on your system. The extension looks in several common compiler locations.</p>
+<p>The <code>compilerPath</code> search order is:</p>
+<ul>
+<li>First check for the Microsoft Visual C++ compiler</li>
+<li>Then look for g++ on Windows Subsystem for Linux (WSL)</li>
+<li>Then g++ for Mingw-w64.</li>
+</ul>
+<p>If you have Visual Studio or WSL installed, you may need to change <code>compilerPath</code> to match the preferred compiler for your project. For example, if you installed Mingw-w64 version 8.1.0 using the i686 architecture, Win32 threading, and sjlj exception handling install options, the path would look like this: <code>C:\Program Files (x86)\mingw-w64\i686-8.1.0-win32-sjlj-rt_v6-rev0\mingw64\bin\g++.exe</code>.</p>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li>Explore the <a href="/docs/editor/codebasics.md">VS Code User Guide</a>.</li>
+<li>Review the <a href="/docs/languages/cpp.md">Overview of the C++ extension</a>.</li>
+<li>Create a new workspace, copy your <code>.vscode</code> JSON files to it, adjust the necessary settings for the new workspace path, program name, and so on, and start coding!</li>
+</ul>
+</body>
+</html>

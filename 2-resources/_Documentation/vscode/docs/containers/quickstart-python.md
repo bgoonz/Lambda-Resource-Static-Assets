@@ -7,6 +7,7 @@ PageTitle: Build and run a Python app in a container
 DateApproved: 2/18/2020
 MetaDescription: Develop, build, and debug a Python app in a Docker container, using Visual Studio Code.
 ---
+
 # Python in a container
 
 In this guide you will learn how to:
@@ -45,7 +46,7 @@ After verifying your app runs properly, you can now Dockerize your application.
 1. Open the project folder in VS Code.
 1. Open the Command Palette (`kb(workbench.action.showCommands)`) and use the **Docker: Add Docker Files to Workspace...** command:
 
-    ![Add Dockerfile to a Python project](images/quickstarts/python-add-python.png)
+   ![Add Dockerfile to a Python project](images/quickstarts/python-add-python.png)
 
 1. When the prompt appears, select **Python: Django**, **Python: Flask**, or **Python: General** as the app type. For this tutorial, we will select **Python: Django**.
 
@@ -53,20 +54,20 @@ After verifying your app runs properly, you can now Dockerize your application.
 
 1. Enter the relative path to the app's entry point. This excludes the workspace folder you start from. According to [official Django documentation](https://docs.djangoproject.com/en/3.0/intro/tutorial01/#creating-a-project), this path is commonly `manage.py` (root folder) or `subfolder_name/manage.py`. According to [official Flask documentation](https://flask.palletsprojects.com/en/1.1.x/api/), this is the path to where you create your Flask instance.
 
-    >**Tip**: You may also enter the path to a folder name as long as this folder includes a `__main__.py` file.
+   > **Tip**: You may also enter the path to a folder name as long as this folder includes a `__main__.py` file.
 
 1. If **Python: Django** or **Python: Flask** was selected, specify app port for local development. Django defaults to port 8000, while Flask defaults to port 5000; however, any unused port will work. We recommend selecting port 1024 or above to mitigate security concerns from [running as a root user](/docs/containers/python-configure-containers.md).
 
 1. With all of this information, the Docker extension creates the following files:
 
-    - A `Dockerfile`. To learn more about IntelliSense in this file, refer to the [overview](/docs/containers/overview.md).
+   - A `Dockerfile`. To learn more about IntelliSense in this file, refer to the [overview](/docs/containers/overview.md).
 
-    - A `.dockerignore` file to reduce the image size by excluding files and folders that aren't needed such as `.git`, `.vscode`, and `__pycache__`.
+   - A `.dockerignore` file to reduce the image size by excluding files and folders that aren't needed such as `.git`, `.vscode`, and `__pycache__`.
 
-    - If Docker Compose was selected, a `docker-compose.yml`  and `docker-compose.debug.yml` file.
+   - If Docker Compose was selected, a `docker-compose.yml` and `docker-compose.debug.yml` file.
 
-    - If one does not already exist, a `requirements.txt` file for capturing all app dependencies.
-    > **Important note**: To use our setup, the Python framework (Django/Flask) and Gunicorn **must be included** in the `requirements.txt` file. If the virtual environment/host machine already has these prerequisites installed and is supposed to be identical to the container environment, ensure app dependencies are ported over by running `pip freeze > requirements.txt` in the terminal. **This will overwrite your current `requirements.txt` file.**
+   - If one does not already exist, a `requirements.txt` file for capturing all app dependencies.
+     > **Important note**: To use our setup, the Python framework (Django/Flask) and Gunicorn **must be included** in the `requirements.txt` file. If the virtual environment/host machine already has these prerequisites installed and is supposed to be identical to the container environment, ensure app dependencies are ported over by running `pip freeze > requirements.txt` in the terminal. **This will overwrite your current `requirements.txt` file.**
 
 ### Add an environment variable to the image
 
@@ -75,7 +76,7 @@ The Docker Extension helps you author Dockerfiles by using [IntelliSense](/docs/
 1. Open the `Dockerfile`.
 2. Underneath the `EXPOSE` statement, type `kb(editor.action.triggerSuggest)` to trigger IntelliSense and scroll to `ENV`.
 
-    ![Adding environment variable to Dockerfile](images/quickstarts/python-edit-dockerfile.png)
+   ![Adding environment variable to Dockerfile](images/quickstarts/python-edit-dockerfile.png)
 
 3. Press `kbstyle(Tab)` or `kbstyle(Enter)` to complete the statement, then set the `key` to VAR1 and the `value` to 10.
 
@@ -95,7 +96,7 @@ CMD ["gunicorn", "--bind", "0.0.0.0:8000", "{workspace_folder_name}.wsgi"]`
 
 If your project does not follow Django's default project structure (that is, a workspace folder and a wsgi.py file within a subfolder named the same as the workspace) you must overwrite the Gunicorn entry point in the Dockerfile to locate the correct `wsgi.py` file.
 
-  > **Tip**: If your `wsgi.py` file is in the root folder, the final argument in the command above will be `"wsgi"`. Within subfolders, the argument would be `"subfolder1_name.subfolder2_name.wsgi"`.
+> **Tip**: If your `wsgi.py` file is in the root folder, the final argument in the command above will be `"wsgi"`. Within subfolders, the argument would be `"subfolder1_name.subfolder2_name.wsgi"`.
 
 ### Flask apps
 
@@ -114,7 +115,7 @@ CMD ["gunicorn", "--bind", "0.0.0.0:5000", "{subfolder}.{module_file}:app"]
 
 During the **Docker: Add Docker Files to Workspace...** command, you configure the path to the Flask instance, however, the Docker extension assumes your Flask instance variable is named `app`. If this is not the case, you must change the variable name in the Dockerfile.
 
-  > **Tip**: If your main module was in the root folder as a file named `main.py` and had a Flask instance variable was named `myapp`, the final argument in the command above will be `"main:myapp"`. Within subfolders, the argument would be `"subfolder1_name.subfolder2_name.main:myapp"`.
+> **Tip**: If your main module was in the root folder as a file named `main.py` and had a Flask instance variable was named `myapp`, the final argument in the command above will be `"main:myapp"`. Within subfolders, the argument would be `"subfolder1_name.subfolder2_name.main:myapp"`.
 
 ## Build, run, and debug the container
 
@@ -122,20 +123,21 @@ The **Docker: Add Docker Files to Workspace...** command automatically creates a
 
 1. Navigate to the `manage.py` file and set a breakpoint on this line:
 
-    ```python
-      os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'helloworld.settings')
-    ```
+   ```python
+     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'helloworld.settings')
+   ```
 
-    >**Note**: If you have created an app project as shown in the [Create a Django app](/docs/python/tutorial-django.md#create-a-django-app) section of the Django tutorial, you can also set a breakpoint in `views.py` or wherever you choose.
+   > **Note**: If you have created an app project as shown in the [Create a Django app](/docs/python/tutorial-django.md#create-a-django-app) section of the Django tutorial, you can also set a breakpoint in `views.py` or wherever you choose.
 
 1. Navigate to **Run and Debug** and select **Docker: Python - Django**.
 
-    ![Selected Docker debug configuration](images/quickstarts/python-debug-configuration.png)
+   ![Selected Docker debug configuration](images/quickstarts/python-debug-configuration.png)
 
 1. Start debugging using the `kb(workbench.action.debug.start)` key.
-    - The Docker image builds.
-    - The Docker container runs.
-    - The python debugger stops at the breakpoint in `manage.py`.
+
+   - The Docker image builds.
+   - The Docker container runs.
+   - The python debugger stops at the breakpoint in `manage.py`.
 
 1. Step over this line once.
 1. Navigate to the **Debug Console** and type `os.environ["DJANGO_SETTINGS_MODULE"]`
@@ -143,9 +145,9 @@ The **Docker: Add Docker Files to Workspace...** command automatically creates a
 
 The Docker extension will launch your browser to a randomly mapped port:
 
-  ![Django website launches](images/quickstarts/python-web-launch.png)
+![Django website launches](images/quickstarts/python-web-launch.png)
 
->**Tip**: To modify your Docker build settings, such as changing the image tag, navigate to `.vscode -> tasks.json` under the `dockerBuild` attribute in the `docker-build` task. Use IntelliSense within the file (`kb(editor.action.triggerSuggest)`) to display all other valid directives.
+> **Tip**: To modify your Docker build settings, such as changing the image tag, navigate to `.vscode -> tasks.json` under the `dockerBuild` attribute in the `docker-build` task. Use IntelliSense within the file (`kb(editor.action.triggerSuggest)`) to display all other valid directives.
 
 ## Use the Docker Explorer
 
@@ -154,7 +156,7 @@ The Docker Explorer provides an interactive experience to examine and manage Doc
 1. Navigate to the Docker Explorer.
 1. In the **Containers** tab, right-click on your container and choose **View Logs**.
 
-    ![Viewing the logs of a container](images/quickstarts/python-view-logs.png)
+   ![Viewing the logs of a container](images/quickstarts/python-view-logs.png)
 
 1. The output will be displayed in the terminal.
 

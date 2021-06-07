@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>containers-tutorial</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="remote-development-in-containers">Remote development in Containers</h1>
+<p>This tutorial walks you through running Visual Studio Code in a <a href="https://www.docker.com/">Docker</a> container using the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers">Remote - Containers</a> extension. You need no prior knowledge of Docker to complete this tutorial.</p>
+<p>Running VS Code <strong>inside</strong> a Docker container can be useful for many reasons, but in this walkthrough we’ll focus on using a Docker container to set up a development environment that is isolated from your local environment.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>You need <a href="https://code.visualstudio.com/">Visual Studio Code</a> installed.</p>
+<h2 id="install-docker">Install Docker</h2>
+<p>Docker is needed to create and manage your containers.</p>
+<h3 id="docker-desktop">Docker Desktop</h3>
+<p>Download and install <a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>.</p>
+<h3 id="start-docker">Start Docker</h3>
+<p>Run the Docker Desktop application to start Docker. You will know it’s running if you look in the activity tray and see the Docker whale icon.</p>
+<p>Docker might take a few minutes to start. If the whale icon is animated, it is probably still in the process of starting. You can click on the icon to see the status.</p>
+<figure>
+<img src="images/containers-tutorial/docker-status.png" alt="Docker status" /><figcaption>Docker status</figcaption>
+</figure>
+<h3 id="check-docker">Check Docker</h3>
+<p>Once Docker is running, you can confirm that everything is working by opening a <strong>new</strong> terminal window and typing the command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">docker</span> --version</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co"># Docker version 18.09.2, build 6247962</span></a></code></pre></div>
+<h2 id="install-the-extension">Install the extension</h2>
+<p>The Remote - Containers extension lets you run Visual Studio Code inside a Docker container.</p>
+<blockquote>
+<p><a class="tutorial-install-extension-btn" href="vscode:extension/ms-vscode-remote.remote-containers">Install the Remote - Containers extension</a></p>
+</blockquote>
+<figure>
+<img src="images/containers-tutorial/containers-extension.png" alt="Remote - Containers extension" /><figcaption>Remote - Containers extension</figcaption>
+</figure>
+<h3 id="check-installation">Check installation</h3>
+<p>With the Remote - Containers extension installed, you will see a new Status bar item at the far left.</p>
+<figure>
+<img src="images/containers-tutorial/remote-status-bar.png" alt="Remote Status bar item" /><figcaption>Remote Status bar item</figcaption>
+</figure>
+<p>The Remote Status bar item can quickly show you in which context VS Code is running (local or remote) and clicking on the item will bring up the Remote - Containers commands.</p>
+<figure>
+<img src="images/containers-tutorial/remote-containers-commands.png" alt="Remote - Containers commands" /><figcaption>Remote - Containers commands</figcaption>
+</figure>
+<h2 id="get-the-sample">Get the sample</h2>
+<p>To create a Docker container, we are going to open a GitHub repository with a Node.js project.</p>
+<p>Select <strong>Remote-Containers: Try a Sample…</strong> from the command list that appears and select the Node sample from the list.</p>
+<figure>
+<img src="images/containers/select-a-sample.png" alt="Select a sample from the list" /><figcaption>Select a sample from the list</figcaption>
+</figure>
+<p><strong>Note</strong>: There are other remote container samples such as <code>vscode-remote-try-python</code> or <code>vscode-remote-try-java</code>, but this tutorial will use <code>vscode-remote-try-node</code>.</p>
+<h3 id="wait-for-the-container-to-build">Wait for the container to build</h3>
+<p>The window will then reload, but since the container does not exist yet, VS Code will create one and clone the sample repository into an isolated <a href="https://docs.docker.com/storage/volumes/">container volume</a>. This may take some time, and a progress notification will provide status updates. Fortunately, this step isn’t necessary the next time you open the folder since the container will already exist.</p>
+<figure>
+<img src="images/containers/dev-container-progress.png" alt="Dev Container Progress Notification" /><figcaption>Dev Container Progress Notification</figcaption>
+</figure>
+<p>After the container is built, VS Code automatically connects to it and maps the project folder from your local file system into the container.</p>
+<h3 id="check-the-container">Check the container</h3>
+<p>Once the container is running and you’re connected, you should see your remote context change in the bottom left of the Status bar:</p>
+<figure>
+<img src="images/containers-tutorial/connected.png" alt="Building image" /><figcaption>Building image</figcaption>
+</figure>
+<h2 id="check-your-environment">Check your environment</h2>
+<p>One of the useful things about developing in a container is that you can use specific versions of dependencies that your application needs without impacting your local development environment.</p>
+<p>The specific container for this tutorial has Node.js v12 installed, which you can check by opening a new terminal <strong>Terminal</strong> &gt; <strong>New Terminal</strong> (<code>kb(workbench.action.terminal.new)</code>) and entering:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">node</span> --version<span class="kw">;</span> <span class="ex">npm</span> --version</a></code></pre></div>
+<p>This should show the following versions:</p>
+<figure>
+<img src="images/containers-tutorial/version-check-updated.png" alt="Node.js version check" /><figcaption>Node.js version check</figcaption>
+</figure>
+<h3 id="run-the-application">Run the application</h3>
+<p>We can now hit <code>kb(workbench.action.debug.start)</code>, which will run the application inside the container. Once the process starts, navigate to <a href="http://localhost:3000">http://localhost:3000</a> and you should see the simple Node.js server running!</p>
+<figure>
+<img src="images/containers-tutorial/hello-remote-world.png" alt="Running the application" /><figcaption>Running the application</figcaption>
+</figure>
+<h3 id="ending-your-container-connection">Ending your container connection</h3>
+<p>You can end your session in the container and go back to running VS Code locally with <strong>File</strong> &gt; <strong>Close Remote Connection</strong>.</p>
+<h2 id="how-it-works">How it works</h2>
+<p>This next section describes in more detail how the Remote - Containers extension sets up and configures your containers.</p>
+<p>The remote container extension uses the files in the <code>.devcontainer</code> folder, namely <code>devcontainer.json</code>, and an optional <code>Dockerfile</code> or <code>docker-compose.yml</code>, to create your dev containers.</p>
+<p>First your image is built from the supplied Docker file or image name. Then a container is created and started using some of the settings in the <code>devcontainer.json</code>. Finally your Visual Studio Code environment is installed and configured again according to settings in the <code>devcontainer.json</code>.</p>
+<p>Once all of this is done, your local copy of Visual Studio Code connects to the Visual Studio Code Server running inside of your new dev container.</p>
+<h3 id="devcontainer.json">devcontainer.json</h3>
+<p>The <code>devcontainer.json</code> is basically a config file that determines how your dev container gets built and started.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="er">//devcontainer.json</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Node.js Sample&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="dt">&quot;dockerFile&quot;</span><span class="fu">:</span> <span class="st">&quot;Dockerfile&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="dt">&quot;settings&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="dt">&quot;terminal.integrated.shell.linux&quot;</span><span class="fu">:</span> <span class="st">&quot;/bin/bash&quot;</span></a>
+<a class="sourceLine" id="cb3-8" title="8">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10">  <span class="dt">&quot;extensions&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;dbaeumer.vscode-eslint&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-11" title="11"></a>
+<a class="sourceLine" id="cb3-12" title="12">  <span class="dt">&quot;forwardPorts&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="dv">3000</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-13" title="13"></a>
+<a class="sourceLine" id="cb3-14" title="14">  <span class="dt">&quot;postCreateCommand&quot;</span><span class="fu">:</span> <span class="st">&quot;yarn install&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-15" title="15"></a>
+<a class="sourceLine" id="cb3-16" title="16">  <span class="dt">&quot;remoteUser&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="fu">}</span></a></code></pre></div>
+<p>The above example is taken from the <code>vscode-remote-try-node</code> repo we used in the tutorial.</p>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 86%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>dockerfile</code></td>
+<td>Relative path to a <code>Dockerfile</code> that you wish to use as your image.</td>
+</tr>
+<tr class="even">
+<td><code>settings</code></td>
+<td>Adds default <code>settings.json</code> values into a container/machine specific settings file.</td>
+</tr>
+<tr class="odd">
+<td><code>extensions</code></td>
+<td>An array of extension IDs that specify the extensions that should be installed inside the container when it is created.</td>
+</tr>
+<tr class="even">
+<td><code>forwardPorts</code></td>
+<td>Make a list of ports inside the container available locally.</td>
+</tr>
+<tr class="odd">
+<td><code>postCreateCommand</code></td>
+<td>A command string or list of command arguments to run after the container is created.</td>
+</tr>
+<tr class="even">
+<td><code>remoteUser</code></td>
+<td>Overrides the user that VS Code runs as in the container (along with sub-processes). Defaults to the <code>containerUser</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="/docs/remote/devcontainerjson-reference.md">Full list</a> of <code>devcontainer.json</code> options.</p>
+<h3 id="congratulations">Congratulations!</h3>
+<p>Congratulations, you’ve successfully completed this tutorial!</p>
+<p>This has been a brief overview of what is possible using dev containers. As a next step, we recommend checking out how you can <a href="/docs/remote/containers.md#quick-start-open-an-existing-folder-in-a-container">open an existing folder from your machine in a container</a> or <a href="/docs/remote/containers.md#quick-start-open-a-git-repository-or-github-pr-in-an-isolated-container-volume">opening a GitHub repository or PR in a container</a>.</p>
+<p>Check out the other Remote Development extensions.</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">Remote - SSH</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl">Remote - WSL</a></li>
+</ul>
+<p>Or get them all by installing the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack">Remote Development</a> Extension Pack.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="verify-docker-context">Verify Docker context</h3>
+<p>If you are not using a fresh Docker install and the <strong>Remote-Containers: Try a Sample…</strong> sample encounters issues with the current context, you should check your Docker context. Fresh installs will have a ‘default’ context and you can set it back as the current context.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Displays the list of contexts, &#39;*&#39; denotes the current context</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="ex">docker</span> context list</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co"># Switches the list to the &#39;default&#39; context</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="ex">docker</span> context use default</a></code></pre></div>
+</body>
+</html>

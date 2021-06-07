@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>environments</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="using-python-environments-in-vs-code">Using Python environments in VS Code</h1>
+<p>An “environment” in Python is the context in which a Python program runs. An environment consists of an interpreter and any number of installed packages. The Python extension for VS Code provides helpful integration features for working with different environments.</p>
+<blockquote>
+<p><strong>Note</strong>: If you’re looking to get started with Python in Visual Studio Code, refer to the tutorial <a href="/docs/python/python-tutorial.md">Getting Started with Python in VS Code</a>.</p>
+</blockquote>
+<h2 id="select-and-activate-an-environment">Select and activate an environment</h2>
+<p>By default, the Python extension looks for and uses the first Python interpreter it finds in the system path. If it doesn’t find an interpreter, it issues a warning. On macOS, the extension also issues a warning if you’re using the OS-installed Python interpreter, because you typically want to use an interpreter you install directly. In either case, you can disable these warnings by setting <code>python.disableInstallationCheck</code> to <code>true</code> in your user <a href="/docs/getstarted/settings.md">settings</a>.</p>
+<p>To select a specific environment, use the <strong>Python: Select Interpreter</strong> command from the <strong>Command Palette</strong> (<code>kb(workbench.action.showCommands)</code>).</p>
+<figure>
+<img src="images/environments/select-interpreters-command.png" alt="Python: Select Interpreter command" /><figcaption>Python: Select Interpreter command</figcaption>
+</figure>
+<p>You can switch environments at any time; switching environments helps you test different parts of your project with different interpreters or library versions as needed.</p>
+<p>The <strong>Python: Select Interpreter</strong> command displays a list of available global environments, conda environments, and virtual environments. (See the <a href="#where-the-extension-looks-for-environments">Where the extension looks for environments</a> section for details, including the distinctions between these types of environments.) The following image, for example, shows several Anaconda and CPython installations along with a conda environment and a virtual environment (<code>env</code>) that’s located within the workspace folder:</p>
+<figure>
+<img src="images/environments/interpreters-list.png" alt="List of interpreters" /><figcaption>List of interpreters</figcaption>
+</figure>
+<blockquote>
+<p><strong>Note:</strong> On Windows, it can take a little time for VS Code to detect available conda environments. During that process, you may see “(cached)” before the path to an environment. The label indicates that VS Code is presently working with cached information for that environment.</p>
+</blockquote>
+<p>Selecting an interpreter from the list adds an entry for <code>python.pythonPath</code> with the path to the interpreter inside your <a href="/docs/getstarted/settings.md">Workspace Settings</a>. Because the path is part of the workspace settings, the same environment should already be selected whenever you open that workspace. If you’d like to set up a default interpreter for your applications, you can instead add an entry for <code>python.pythonPath</code> manually inside your User Settings. To do so, open the Command Palette (<code>kb(workbench.action.showCommands)</code>) and enter <strong>Preferences: Open User Settings</strong>. Then set <code>python.pythonPath</code>, which is in the Python extension section of User Settings, with the appropriate interpreter.</p>
+<p>The Python extension uses the selected environment for running Python code (using the <strong>Python: Run Python File in Terminal</strong> command), providing language services (auto-complete, syntax checking, linting, formatting, etc.) when you have a <code>.py</code> file open in the editor, and opening a terminal with the <strong>Terminal: Create New Integrated Terminal</strong> command. In the latter case, VS Code automatically activated the selected environment.</p>
+<blockquote>
+<p><strong>Tip</strong>: To prevent automatic activation of a selected environment, add <code>"python.terminal.activateEnvironment": false</code> to your <code>settings.json</code> file (it can be placed anywhere as a sibling to the existing settings).</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong>: By default, VS Code uses the interpreter identified by <code>python:pythonPath</code> setting when debugging code. You can override this behavior by specifying a different path in the <code>pythonPath</code> property of a debug configuration. See <a href="#choose-a-debugging-environment">Choose a debugging environment</a>.</p>
+</blockquote>
+<p>The Status Bar always shows the current interpreter.</p>
+<figure>
+<img src="images/environments/selected-interpreter-status-bar.png" alt="Status Bar showing a selected interpreter" /><figcaption>Status Bar showing a selected interpreter</figcaption>
+</figure>
+<p>The Status Bar also reflects when no interpreter is selected.</p>
+<figure>
+<img src="images/environments/no-interpreter-selected-statusbar.png" alt="No interpreter selected" /><figcaption>No interpreter selected</figcaption>
+</figure>
+<p>In either case, clicking this area of the Status Bar is a convenient shortcut for the <strong>Python: Select Interpreter</strong> command.</p>
+<blockquote>
+<p><strong>Tip</strong>: If you have any problems with VS Code recognizing a virtual environment, please <a href="https://github.com/microsoft/vscode-docs/issues">file an issue</a> in the documentation repository so we can help determine the cause.</p>
+</blockquote>
+<h3 id="environments-and-terminal-windows">Environments and Terminal windows</h3>
+<p>After using <strong>Python: Select Interpreter</strong>, that interpreter is applied when right-clicking a file and selecting <strong>Python: Run Python File in Terminal</strong>. The environment is also activated automatically when you use the <strong>Terminal: Create New Integrated Terminal</strong> command unless you change the <code>python.terminal.activateEnvironment</code> setting to <code>false</code>.</p>
+<p>However, launching VS Code from a shell in which a certain Python environment is activated does not automatically activate that environment in the default Integrated Terminal. Use the <strong>Terminal: Create New Integrated Terminal</strong> command after VS Code is running.</p>
+<blockquote>
+<p><strong>Note:</strong> conda environments cannot be automatically activated in the integrated terminal if PowerShell is set as the integrated shell. See <a href="/docs/editor/integrated-terminal.md#configuration">Integrated terminal - Configuration</a> for how to change the shell.</p>
+</blockquote>
+<p>Any changes you make to an activated environment within the terminal are persistent. For example, using <code>conda install &lt;package&gt;</code> from the terminal with a conda environment activated installs the package into that environment permanently. Similarly, using <code>pip install</code> in a terminal with a virtual environment activated adds the package to that environment.</p>
+<p>Changing interpreters with the <strong>Python: Select Interpreter</strong> command doesn’t affect terminal panels that are already open. You can thus activate separate environments in a split terminal: select the first interpreter, create a terminal for it, select a different interpreter, then use the split button (<code>kb(workbench.action.terminal.split)</code>) in the terminal title bar.</p>
+<h3 id="choose-a-debugging-environment">Choose a debugging environment</h3>
+<p>By default, the <code>python.pythonPath</code> setting specifies the Python interpreter to use for debugging. However, if you have a <code>pythonPath</code> property in the debug configuration of <code>launch.json</code>, that interpreter is used instead. To be more specific, VS Code applies the following order of precedence when determining which interpreter to use for debugging:</p>
+<ol type="1">
+<li><code>pythonPath</code> property of the selected debug configuration in <code>launch.json</code></li>
+<li><code>python.pythonPath</code> setting in the workspace <code>settings.json</code></li>
+<li><code>python.pythonPath</code> setting in the user <code>settings.json</code></li>
+</ol>
+<p>For more details on debug configuration, see <a href="/docs/python/debugging.md">Debugging configurations</a>.</p>
+<h2 id="where-the-extension-looks-for-environments">Where the extension looks for environments</h2>
+<p>The extension automatically looks for interpreters in the following locations:</p>
+<ul>
+<li>Standard install paths such as <code>/usr/local/bin</code>, <code>/usr/sbin</code>, <code>/sbin</code>, <code>c:\\python27</code>, <code>c:\\python36</code>, etc.</li>
+<li>Virtual environments located directly under the workspace (project) folder.</li>
+<li>Virtual environments located in the folder identified by the <code>python.venvPath</code> setting (see <a href="/docs/python/settings-reference.md#general-settings">General settings</a>), which can contain multiple virtual environments. The extension looks for virtual environments in the first-level subfolders of <code>venvPath</code>.</li>
+<li>Virtual environments located in a <code>~/.virtualenvs</code> folder for <a href="https://virtualenvwrapper.readthedocs.io/">virtualenvwrapper</a>.</li>
+<li>Interpreters installed by <a href="https://github.com/pyenv/pyenv">pyenv</a>.</li>
+<li>Virtual environments located in the path identified by <code>WORKON_HOME</code> (as used by <a href="https://virtualenvwrapper.readthedocs.io/">virtualenvwrapper</a>).</li>
+<li>Conda environments that contain a Python interpreter. VS Code does not show conda environments that don’t contain an interpreter.</li>
+<li>Interpreters installed in a <code>.direnv</code> folder for <a href="https://direnv.net/">direnv</a> under the workspace (project) folder.</li>
+</ul>
+<p>You can also <a href="#manually-specify-an-interpreter">manually specify an interpreter</a> if Visual Studio Code does not locate it automatically.</p>
+<blockquote>
+<p><strong>Note</strong>: Once the “select interpreter” flow is triggered, <a href="https://pipenv.readthedocs.io/">pipenv</a> environments for the workspace folder will be searched for. If one is found, then no other interpreters are searched for or listed as pipenv expects to manage all aspects.</p>
+</blockquote>
+<p>The extension also loads an <a href="#environment-variable-definitions-file">environment variable definitions file</a> identified by the <code>python.envFile</code> setting. The default value of this setting is <code>${workspaceFolder}/.env</code>.</p>
+<h3 id="global-virtual-and-conda-environments">Global, virtual, and conda environments</h3>
+<p>By default, any Python interpreter that you’ve installed runs in its own <strong>global environment</strong>, which is not specific to any one project. For example, if you just run <code>python</code> (Windows) or <code>python3</code> (macOS/Linux) at a new command prompt, you’re running in that interpreter’s global environment. Accordingly, any packages that you install or uninstall affect the global environment and all programs that you run within that context.</p>
+<blockquote>
+<p><strong>Note</strong>: The Python Extension version 2018.8.1 and later automatically updates environments.</p>
+</blockquote>
+<p>Although working in the global environment is an easy way to get started, that environment will, over time, become cluttered with many different packages that you’ve installed for different projects. Such clutter makes it difficult to thoroughly test an application against a specific set of packages with known versions, which is exactly the kind of environment you’d set up on a build server or web server.</p>
+<p>For this reason, developers often create a <strong>virtual environment</strong> for a project. A virtual environment is a subfolder in a project that contains a copy of a specific interpreter. When you activate the virtual environment, any packages you install are installed only in that environment’s subfolder. When you then run a Python program within that environment, you know that it’s running against only those specific packages. Be aware that if you’re not using a <strong>virtual environment</strong>, and you have multiple versions of Python installed and set in the <code>path</code> variable, you might need to specify the Python interpreter to use in the terminal for installing packages to the global environment.</p>
+<blockquote>
+<p><strong>Note</strong>: While it’s possible to open a virtual environment folder as a workspace, doing so is not recommended and might cause issues with using the Python extension.</p>
+</blockquote>
+<blockquote>
+<p><strong>Tip</strong>: A <strong>conda environment</strong> is a virtual environment that’s created and managed using the <code>conda</code> package manager. See <a href="#conda-environments">Conda environments</a> for more details.</p>
+</blockquote>
+<p>To create a virtual environment, use the following command, where “.venv” is the name of the environment folder:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># macOS/Linux</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co"># You may need to run sudo apt-get install python3-venv first</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="ex">python3</span> -m venv .venv</a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co"># Windows</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co"># You can also use py -3 -m venv .venv</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="ex">python</span> -m venv .venv</a></code></pre></div>
+<p>When you create a new virtual environment, a prompt will be displayed to allow you to select it for the workspace.</p>
+<figure>
+<img src="images/environments/python-environment-prompt.png" alt="Python environment prompt" /><figcaption>Python environment prompt</figcaption>
+</figure>
+<p>This will add the path to the Python interpreter from the new virtual environment to your workspace settings. That environment will then be used when installing packages and running code through the Python extension. For examples of using virtual environment in projects, see the <a href="/docs/python/tutorial-django.md">Django tutorial</a> and the <a href="/docs/python/tutorial-flask.md">Flask tutorial</a>.</p>
+<p>If the activate command generates the message “Activate.ps1 is not digitally signed. You cannot run this script on the current system.”, then you need to temporarily change the PowerShell execution policy to allow scripts to run (see <a href="https://go.microsoft.com/fwlink/?LinkID=135170">About Execution Policies</a> in the PowerShell documentation):</p>
+<pre class="cmd"><code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process</code></pre>
+<blockquote>
+<p><strong>Note</strong>: If you’re using a version of the Python extension prior to 2018.10, and you create a virtual environment in a VS Code terminal, you must run the <strong>Reload Window</strong> command from the Command Palette and then use <strong>Python: Select Interpreter</strong> to activate the environment. If you have any problems with VS Code recognizing a virtual environment, please <a href="https://github.com/microsoft/vscode-docs/issues">file an issue</a> in the documentation repository so we can help determine the cause.</p>
+</blockquote>
+<blockquote>
+<p><strong>Tip</strong>: When you’re ready to deploy the application to other computers, you can create a <code>requirements.txt</code> file with the command <code>pip freeze &gt; requirements.txt</code> (<code>pip3</code> on macOS/Linux). The requirements file describes the packages you’ve installed in your virtual environment. With only this file, you or other developers can restore those packages using <code>pip install -r requirements.txt</code> (or, again, <code>pip3</code> on macOS/Linux). By using a requirements file, you need not commit the virtual environment itself to source control.</p>
+</blockquote>
+<h3 id="conda-environments">Conda environments</h3>
+<p>A conda environment is a Python environment that’s managed using the <code>conda</code> package manager (see <a href="https://conda.io/projects/conda/en/latest/user-guide/getting-started.html">Getting started with conda</a> (conda.io)). Conda works well to create environments with interrelated dependencies as well as binary packages. Unlike virtual environments, which are scoped to a project, conda environments are available globally on any given computer. This availability makes it easy to configure several distinct conda environments and then choose the appropriate one for any given project.</p>
+<p>As noted earlier, the Python extension automatically detects existing conda environments provided that the environment contains a Python interpreter. For example, the following command creates a conda environment with the Python 3.4 interpreter and several libraries, which VS Code then shows in the list of available interpreters:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">conda</span> create -n env-01 python=3.4 scipy=0.15.0 astroid babel</a></code></pre></div>
+<p>In contrast, if you fail to specify an interpreter, as with <code>conda create --name env-00</code>, the environment won’t appear in the list.</p>
+<p>For more information on the conda command line, see <a href="https://conda.io/docs/user-guide/tasks/manage-environments.html">Conda environments</a> (conda.io).</p>
+<p>Additional notes:</p>
+<ul>
+<li><p>If you create a new conda environment while VS Code is running, use the <strong>Reload Window</strong> command to refresh the environment list shown with <strong>Python: Select Interpreter</strong>; otherwise you may not see the environment there. It might take a short time to appear; if you don’t see it at first, wait 15 seconds then try using the command again.</p></li>
+<li><p>To ensure the environment is set up well from a shell perspective, one option is to use an Anaconda prompt with the activated environment to launch VS Code using the <code>code .</code> command. At that point you just need to select the interpreter using the Command Palette or by clicking on the status bar.</p></li>
+<li><p>Although the Python extension for VS Code doesn’t currently have direct integration with conda environment.yml files, VS Code itself is a great YAML editor.</p></li>
+<li><p>Conda environments can’t be automatically activated in the VS Code Integrated Terminal if the default shell is set to PowerShell. To change the shell, see <a href="/docs/editor/integrated-terminal.md#configuration">Integrated terminal - Configuration</a>.</p></li>
+<li><p>You can manually specify the path to the conda executable to use for activation (version 4.4+). To do so, open the Command Palette (<code>kb(workbench.action.showCommands)</code>) and enter <strong>Preferences: Open User Settings</strong>. Then set <code>python.condaPath</code>, which is in the Python extension section of User Settings, with the appropriate path.</p></li>
+</ul>
+<h3 id="manually-specify-an-interpreter">Manually specify an interpreter</h3>
+<p>If VS Code does not automatically locate an interpreter you want to use, you can set the path to it manually in your Workspace Settings <code>settings.json</code> file. With any of the entries that follow, you can just add the line as a sibling to other existing settings.)</p>
+<p>First, select the <strong>File</strong> (<strong>Code</strong> on macOS) &gt; <strong>Preferences</strong> &gt; <strong>Settings</strong> menu command (<code>kb(workbench.action.openSettings)</code>) to open your <a href="/docs/getstarted/settings.md">Settings</a>, select <strong>Workspace</strong>.</p>
+<p>Then do any of the following steps:</p>
+<ol type="1">
+<li><p>Create or modify an entry for <code>python.pythonPath</code> with the full path to the Python executable (if you edit <code>settings.json</code> directly, add the line below as the setting):</p>
+<p>For example:</p>
+<ul>
+<li><p>Windows:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="er">&quot;python.pythonPath&quot;:</span> <span class="er">&quot;c:/python36/python.exe&quot;,</span></a></code></pre></div></li>
+<li><p>macOS/Linux:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"><span class="er">&quot;python.pythonPath&quot;:</span> <span class="er">&quot;/home/python36/python&quot;,</span></a></code></pre></div></li>
+</ul></li>
+<li><p>You can also use <code>python.pythonPath</code> to point to a virtual environment, for example:</p>
+<p>Windows:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1"><span class="er">&quot;python.pythonPath&quot;:</span> <span class="er">&quot;c:/dev/ala/venv/Scripts/python.exe&quot;,</span></a></code></pre></div>
+<p>macOS/Linux:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="er">&quot;python.pythonPath&quot;:</span> <span class="er">&quot;/home/abc/dev/ala/venv/bin/python&quot;,</span></a></code></pre></div></li>
+<li><p>You can use an environment variable in the path setting using the syntax <code>${env:VARIABLE}</code>. For example, if you’ve created a variable named <code>PYTHON_INSTALL_LOC</code> with a path to an interpreter, you can then use the following setting value:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" title="1"><span class="er">&quot;python.pythonPath&quot;:</span> <span class="er">&quot;$</span><span class="fu">{</span><span class="er">env</span><span class="fu">:</span><span class="er">PYTHON_INSTALL_LOC</span><span class="fu">}</span><span class="er">&quot;,</span></a></code></pre></div>
+<blockquote>
+<p><strong>Note</strong>: Variable substitution is only supported in VS Code settings files, it will not work in <code>.env</code> environment files.</p>
+</blockquote>
+<p>By using an environment variable, you can easily transfer a project between operating systems where the paths are different, just be sure to set the environment variable on the operating system first.</p></li>
+</ol>
+<h2 id="environment-variable-definitions-file">Environment variable definitions file</h2>
+<p>An environment variable definitions file is a simple text file containing key-value pairs in the form of <code>environment_variable=value</code>, with <code>#</code> used for comments. Multiline values are not supported, but values can refer to any other environment variable that’s already defined in the system or earlier in the file. For more information, see <a href="#variable-substitution">Variable substitution</a>. Environment variable definitions files can be used for scenarios such as debugging and tool execution (including linters, formatters, IntelliSense, and testing tools), but are not applied to the terminal.</p>
+<p>By default, the Python extension looks for and loads a file named <code>.env</code> in the current workspace folder, then applies those definitions. The file is identified by the default entry <code>"python.envFile": "${workspaceFolder}/.env"</code> in your user settings (see <a href="/docs/python/settings-reference.md#general-settings">General settings</a>). You can change the <code>python.envFile</code> setting at any time to use a different definitions file.</p>
+<p>A debug configuration also contains an <code>envFile</code> property that also defaults to the <code>.env</code> file in the current workspace (see <a href="/docs/python/debugging.md#set-configuration-options">Debugging - Set configuration options</a>). This property allows you to easily set variables for debugging purposes that replace variables specified in the default <code>.env</code> file.</p>
+<p>For example, when developing a web application, you might want to easily switch between development and production servers. Instead of coding the different URLs and other settings into your application directly, you could use separate definitions files for each. For example:</p>
+<p><strong>dev.env file</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># dev.env - development configuration</span></a>
+<a class="sourceLine" id="cb9-2" title="2"></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="co"># API endpoint</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="va">MYPROJECT_APIENDPOINT=</span>https://my.domain.com/api/dev/</a>
+<a class="sourceLine" id="cb9-5" title="5"></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="co"># Variables for the database</span></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="va">MYPROJECT_DBURL=</span>https://my.domain.com/db/dev</a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="va">MYPROJECT_DBUSER=</span>devadmin</a>
+<a class="sourceLine" id="cb9-9" title="9"><span class="va">MYPROJECT_DBPASSWORD=</span>!<span class="ex">dfka**213</span>=</a></code></pre></div>
+<p><strong>prod.env file</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># prod.env - production configuration</span></a>
+<a class="sourceLine" id="cb10-2" title="2"></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="co"># API endpoint</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="va">MYPROJECT_APIENDPOINT=</span>https://my.domain.com/api/</a>
+<a class="sourceLine" id="cb10-5" title="5"></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co"># Variables for the database</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="va">MYPROJECT_DBURL=</span>https://my.domain.com/db/</a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="va">MYPROJECT_DBUSER=</span>coreuser</a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="va">MYPROJECT_DBPASSWORD=</span>kKKfa98<span class="ex">*11@</span></a></code></pre></div>
+<p>You can then set the <code>python.envFile</code> setting to <code>${workspaceFolder}/prod.env</code>, then set the <code>envFile</code> property in the debug configuration to <code>${workspaceFolder}/dev.env</code>.</p>
+<blockquote>
+<p><strong>Note</strong>: When environment variables are specified using multiple methods, be aware that there is an order of precedence. Environment variables contained in the <code>.env</code> file specified by the <code>python.envFile</code> setting (user or workspace) will override variables defined in the <code>envFile</code> specified in <code>launch.json</code>, as well as any <code>env</code> variables defined in the <code>launch.json</code> file itself. Similarly, environment variables defined in the <code>envFile</code> specified in <code>launch.json</code> will override <code>env</code> variables defined in the <code>launch.json</code> file.</p>
+</blockquote>
+<h3 id="variable-substitution">Variable substitution</h3>
+<p>When defining an environment variable in a definitions file, you can use the value of any existing environment variable with the following general syntax:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"><span class="op">&lt;</span><span class="ex">VARIABLE</span><span class="op">&gt;</span>=...<span class="va">${env:EXISTING_VARIABLE}</span>...</a></code></pre></div>
+<p>where <code>...</code> means any other text as used in the value. The curly braces are required.</p>
+<p>Within this syntax, the following rules apply:</p>
+<ul>
+<li>Variables are processed in the order they appear in the <code>.env</code> file, so you can use any variable that’s defined earlier in the file.</li>
+<li>Single or double quotes don’t affect substituted value and are included in the defined value. For example, if the value of <code>VAR1</code> is <code>abcedfg</code>, then <code>VAR2='${env:VAR1}'</code> assigns the value <code>'abcedfg'</code> to <code>VAR2</code>.</li>
+<li>The <code>$</code> character can be escaped with a backslash, as in <code>\$</code>.</li>
+<li>You can use recursive substitution, such as <code>PYTHONPATH=${env:PROJ_DIR}:${env:PYTHONPATH}</code> (where <code>PROJ_DIR</code> is any other environment variable).</li>
+<li>You can use only simple substitution; nesting such as <code>${_${env:VAR1}_EX}</code> is not supported.</li>
+<li>Entries with unsupported syntax are left as-is.</li>
+</ul>
+<h2 id="use-of-the-pythonpath-variable">Use of the PYTHONPATH variable</h2>
+<p>The <a href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH">PYTHONPATH</a> environment variable specifies additional locations where the Python interpreter should look for modules. In VS Code, PYTHONPATH can be set through the terminal settings (terminal.integrated.env.*) and/or within an <code>.env</code> file.</p>
+<p>When the terminal settings are used, PYTHONPATH affects any tools that are run within the terminal by a user, as well as any action the extension performs for a user that is routed through the terminal such as debugging. However, in this case when the extension is performing an action that isn’t routed through the terminal, such as the use of a linter or formatter, then this setting will not have an effect on module look-up.</p>
+<p>When PYTHONPATH is set using an <code>.env</code> file, it will affect anything the extension does on your behalf and actions performed by the debugger, but it will not affect tools run in the terminal.</p>
+<p>If needed, you can set PYTHONPATH using both methods.</p>
+<p>An example of when to use PYTHONPATH would be if you have source code in a <code>src</code> folder and tests in a <code>tests</code> folder. When running tests, however, those tests can’t normally access modules in <code>src</code> unless you hard-code relative paths. To solve this problem, add the path to <code>src</code> to PYTHONPATH.</p>
+<p>The value of PYTHONPATH can contain multiple locations separated by <code>os.pathsep</code>: a semicolon (<code>;</code>) on Windows and a colon (<code>:</code>) on Linux/macOS. Invalid paths are ignored. If you find that your value for PYTHONPATH isn’t working as expected, make sure that you’re using the correct separator between locations for the operating system. For example, using a colon to separate locations on Windows, or using a semicolon to separate locations on Linux/macOS results in an invalid value for PYTHONPATH, which is ignored.</p>
+<blockquote>
+<p><strong>Note</strong>: PYTHONPATH does <strong>not</strong> specify a path to a Python interpreter itself, and should not be used with the <code>python.pythonPath</code> setting. For additional information about PYTHONPATH, read the <a href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH">PYTHONPATH documentation</a>.</p>
+</blockquote>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="/docs/python/editing.md">Editing code</a> - Learn about autocomplete, IntelliSense, formatting, and refactoring for Python.</li>
+<li><a href="/docs/python/debugging.md">Debugging</a> - Learn to debug Python both locally and remotely.</li>
+<li><a href="/docs/python/testing.md">Testing</a> - Configure test environments and discover, run, and debug tests.</li>
+<li><a href="/docs/python/settings-reference.md">Settings reference</a> - Explore the full range of Python-related settings in VS Code.</li>
+</ul>
+</body>
+</html>

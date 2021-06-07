@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>nodejs-debugging</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="node.js-debugging-in-vs-code">Node.js debugging in VS Code</h1>
+<p>The Visual Studio Code editor has built-in debugging support for the <a href="https://nodejs.org/">Node.js</a> runtime and can debug JavaScript, TypeScript, and many other languages that are transpiled into JavaScript. Setting up a project for Node.js debugging is straightforward with VS Code providing appropriate launch configuration defaults and snippets.</p>
+<p>There are a few ways you can debug your Node.js programs in VS Code:</p>
+<ul>
+<li>Use <a href="#auto-attach">auto attach</a> to debug process you run in VS Code’s integrated terminal,</li>
+<li>Use the <a href="#javascript-debug-terminal">JavaScript debug terminal</a>, in a similar way, or</li>
+<li>Use a <a href="#launch-configuration">launch config</a> to start your program, or <a href="#attaching-to-nodejs">attach to a process</a> launched outside of VS Code</li>
+</ul>
+<h2 id="auto-attach">Auto Attach</h2>
+<p>If the <strong>Auto Attach</strong> feature is enabled, the Node debugger automatically attaches to certain Node.js processes that have been launched from VS Code’s Integrated Terminal. To enable the feature, either use the <strong>Toggle Auto Attach</strong> command from the command palette (<code>kbstyle(F1)</code>) or, if it’s already activated, use the <strong>Auto Attach</strong> Status bar item.</p>
+<p>There are three modes for auto attach, which you can select in the resulting Quick Pick and via the <strong>debug.javascript.autoAttachFilter</strong> setting:</p>
+<ul>
+<li><code>smart</code> (default) - If you execute a script outside of your <code>node_modules</code> folder or use a common ‘runner’ script like mocha or ts-node, the process will be debugged. You can configure the ‘runner’ script allow list using the <strong>Auto Attach Smart Pattern</strong> setting (<code>debug.javascript.autoAttachSmartPattern</code>).</li>
+<li><code>always</code> - All Node.js processes launched in the Integrated Terminal will be debugged.</li>
+<li><code>onlyWithFlag</code> - Only processes launched with the <code>--inspect</code> or <code>--inspect-brk</code> flag will be debugged.</li>
+</ul>
+<p>After enabling <strong>Auto Attach</strong>, you’ll need to restart your terminal. This can be done by clicking the ⚠ icon in the top right of the terminal, or just creating a new one. Then, the debugger should attach to your program within a second:</p>
+<figure>
+<img src="images/nodejs-debugging/auto-attach.gif" alt="Auto Attach" /><figcaption>Auto Attach</figcaption>
+</figure>
+<p>When auto attach is on, the <code>Auto Attach</code> item will appear in the status bar across the bottom of the VS Code window. Clicking it allows you to change the auto attach mode, or temporarily turn it off. Temporarily turning off auto attach is useful if you’re running some one-off programs where you don’t need debugging, but you don’t want to disable the feature entirely.</p>
+<h3 id="additional-configuration">Additional Configuration</h3>
+<p><strong>Other Launch Configuration Properties</strong></p>
+<p>You can apply <a href="#launch-configuration-attributes">other properties normally found in launch.json</a> to auto attach in the <strong>debug.javascript.terminalOptions</strong> setting. For example, to add node internals to your skipFiles, you could add the following to your user or workspace settings:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1">  <span class="st">&quot;debug.javascript.terminalOptions&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">    <span class="st">&quot;skipFiles&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb1-3" title="3">      <span class="st">&quot;&lt;node_internals&gt;/**&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    ]</a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="op">},</span></a></code></pre></div>
+<p><strong>Auto Attach Smart Patterns</strong></p>
+<p>In <code>smart</code> Auto Attach mode, VS Code will try to attach to your code, and not attach to build tools you aren’t interested in debugging. It does this by matching the main script against a list of <a href="/docs/editor/codebasics.md#advanced-search-options">glob patterns</a>. The glob patterns are configurable in the <strong>debug.javascript.autoAttachSmartPattern</strong> setting, which defaults to:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1">[</a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="st">&quot;!**/node_modules/**&quot;</span><span class="op">,</span> <span class="co">// exclude scripts in node_modules folders</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="st">&quot;**/$KNOWN_TOOLS$/**&quot;</span><span class="op">,</span> <span class="co">// but include some common tools</span></a>
+<a class="sourceLine" id="cb2-4" title="4">]<span class="op">;</span></a></code></pre></div>
+<p><code>$KNOWN_TOOLS$</code> is replaced list a list of common ‘code runners’ such as <code>ts-node</code>, <code>mocha</code>, <code>ava</code>, and so on. You can modify this list if these settings don’t work. For example, to exclude <code>mocha</code> and include <code>my-cool-test-runner</code>, you could add two lines:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1">[</a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="st">&quot;!**/node_modules/**&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="st">&quot;**/$KNOWN_TOOLS$/**&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">  <span class="st">&quot;!**/node_modules/mocha/**&quot;</span><span class="op">,</span> <span class="co">// use &quot;!&quot; to exclude all scripts in &quot;mocha&quot; node modules</span></a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="st">&quot;**/node_modules/my-cool-test-runner/**&quot;</span><span class="op">,</span> <span class="co">// include scripts in the custom test runner</span></a>
+<a class="sourceLine" id="cb3-6" title="6">]<span class="op">;</span></a></code></pre></div>
+<h2 id="javascript-debug-terminal">JavaScript Debug Terminal</h2>
+<p>In a similar way to <a href="#auto-attach">auto attach</a>, the JavaScript Debug Terminal will automatically debug any Node.js process you run in it. You can create a Debug Terminal by running the use the <strong>Debug: Create JavaScript Debug Terminal</strong> command from the command palette (<code>kbstyle(F1)</code>), or by selecting the <strong>Create JavaScript Debug Terminal</strong> from the terminal switcher dropdown.</p>
+<figure>
+<img src="images/nodejs-debugging/create-debug-terminal.png" alt="Create Debug Terminal" /><figcaption>Create Debug Terminal</figcaption>
+</figure>
+<h3 id="additional-configuration-1">Additional Configuration</h3>
+<p><strong>Other Launch Configuration Properties</strong></p>
+<p>You can apply <a href="#launch-configuration-attributes">other properties normally found in launch.json</a> to the debug terminal in the <strong>debug.javascript.terminalOptions</strong> setting. For example, to add node internals to your skipFiles, you could add the following to your user or workspace settings:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="st">&quot;debug.javascript.terminalOptions&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="st">&quot;skipFiles&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="st">&quot;&lt;node_internals&gt;/**&quot;</span></a>
+<a class="sourceLine" id="cb4-4" title="4">  ]</a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="op">},</span></a></code></pre></div>
+<h2 id="launch-configuration">Launch Configuration</h2>
+<p>Launch configs are the traditional way to set up debugging in VS Code, and provide you the most configuration options for running complex applications.</p>
+<p>In this section we’ll go into more detail about configurations and features for more advanced debugging scenarios. You’ll find instruction for debugging with <a href="/docs/nodejs/nodejs-debugging.md#source-maps">source maps</a>, <a href="/docs/nodejs/nodejs-debugging.md#skipping-uninteresting-code-node-chrome">stepping over external code</a>, doing <a href="/docs/nodejs/nodejs-debugging.md#remote-debugging">remote debugging</a>, and much more.</p>
+<p>If you’d like to watch an introductory video, see <a href="https://www.youtube.com/watch?v=2oFKNL7vYV8">Getting started with Node.js debugging</a>.</p>
+<blockquote>
+<p><strong>Note</strong>: If you are just getting started with VS Code, you can learn about general debugging features and creating <code>launch.json</code> configuration files in the <a href="/docs/editor/debugging.md">Debugging</a> topic.</p>
+</blockquote>
+<h2 id="launch-configuration-attributes">Launch configuration attributes</h2>
+<p>Debugging configurations are stored in a <code>launch.json</code> file located in your workspace’s <code>.vscode</code> folder. An introduction into the creation and use of debugging configuration files is in the general <a href="/docs/editor/debugging.md#launch-configurations">Debugging</a> article.</p>
+<p>Below is a reference of common <code>launch.json</code> attributes specific to the Node.js debugger. You can view the complete set of options in the <a href="https://github.com/microsoft/vscode-js-debug/blob/main/OPTIONS.md">vscode-js-debug options</a> documentation.</p>
+<p>The following attributes are supported in launch configurations of type <code>launch</code> and <code>attach</code>:</p>
+<ul>
+<li><code>outFiles</code> - array of glob patterns for locating generated JavaScript files. See section <a href="/docs/nodejs/nodejs-debugging.md#source-maps">Source maps</a>.</li>
+<li><code>resolveSourceMapLocations</code> - an array of glob patterns for locations where source maps should be parsed. See section <a href="/docs/nodejs/nodejs-debugging.md#source-maps">Source maps</a>.</li>
+<li><code>timeout</code> - when restarting a session, give up after this number of milliseconds. See section <a href="/docs/nodejs/nodejs-debugging.md#attaching-to-nodejs">Attaching to Node.js</a>.</li>
+<li><code>stopOnEntry</code> - break immediately when the program launches.</li>
+<li><code>localRoot</code> - VS Code’s root directory. See section <a href="/docs/nodejs/nodejs-debugging.md#remote-debugging">Remote debugging</a> below.</li>
+<li><code>remoteRoot</code> - Node’s root directory. See section <a href="/docs/nodejs/nodejs-debugging.md#remote-debugging">Remote debugging</a> below.</li>
+<li><code>smartStep</code>- try to automatically step over code that doesn’t map to source files. See section <a href="/docs/nodejs/nodejs-debugging.md#smart-stepping">Smart stepping</a>.</li>
+<li><code>skipFiles</code> - automatically skip files covered by these glob patterns. See section <a href="/docs/nodejs/nodejs-debugging.md#skipping-uninteresting-code-node-chrome">Skipping uninteresting code</a>.</li>
+<li><code>trace</code> - enable diagnostic output.</li>
+</ul>
+<p>These attributes are only available for launch configurations of request type <code>launch</code>:</p>
+<ul>
+<li><code>program</code> - an absolute path to the Node.js program to debug.</li>
+<li><code>args</code> - arguments passed to the program to debug. This attribute is of type array and expects individual arguments as array elements.</li>
+<li><code>cwd</code> - launch the program to debug in this directory.</li>
+<li><code>runtimeExecutable</code> - absolute path to the runtime executable to be used. Default is <code>node</code>. See section <a href="/docs/nodejs/nodejs-debugging.md#launch-configuration-support-for-npm-and-other-tools">Launch configuration support for ‘npm’ and other tools</a>.</li>
+<li><code>runtimeArgs</code> - optional arguments passed to the runtime executable.</li>
+<li><code>runtimeVersion</code> - if “<a href="https://github.com/creationix/nvm">nvm</a>” (or “<a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a>”) or “<a href="https://github.com/jasongin/nvs">nvs</a>” is used for managing Node.js versions, this attribute can be used to select a specific version of Node.js. See section <a href="/docs/nodejs/nodejs-debugging.md#multi-version-support">Multi version support</a> below.</li>
+<li><code>env</code> - optional environment variables. This attribute expects environment variables as a list of string typed key/value pairs.</li>
+<li><code>envFile</code> - optional path to a file containing environment variable definitions. See section <a href="/docs/nodejs/nodejs-debugging.md#load-environment-variables-from-external-file-node">Load environment variables from external file</a> below.</li>
+<li><code>console</code> - the console to launch the program (<code>internalConsole</code>, <code>integratedTerminal</code>, <code>externalTerminal</code>). See section <a href="/docs/nodejs/nodejs-debugging.md#node-console">Node Console</a> below.</li>
+<li><code>outputCapture</code> - if set to <code>std</code>, output from the process stdout/stderr will be shown in the Debug Console, instead of listening to output over the debug port. This is useful for programs or log libraries that write directly to the stdout/stderr streams instead of using <code>console.*</code> APIs.</li>
+</ul>
+<p>This attribute is only available for launch configurations of request type <code>attach</code>:</p>
+<ul>
+<li><code>restart</code> - restart the connection on termination. See section <a href="/docs/nodejs/nodejs-debugging.md#restarting-debug-sessions-automatically-when-source-is-edited">Restarting debug session automatically</a>.</li>
+<li><code>protocol</code> - debug protocol to use. See section <a href="/docs/nodejs/nodejs-debugging.md#supported-nodelike-runtimes">Supported Node-like runtimes</a> above.</li>
+<li><code>port</code> - debug port to use. See sections <a href="/docs/nodejs/nodejs-debugging.md#attaching-to-nodejs">Attaching to Node.js</a> and <a href="/docs/nodejs/nodejs-debugging.md#remote-debugging">Remote debugging</a>.</li>
+<li><code>address</code> - TCP/IP address of the debug port. See sections <a href="/docs/nodejs/nodejs-debugging.md#attaching-to-nodejs">Attaching to Node.js</a> and <a href="/docs/nodejs/nodejs-debugging.md#remote-debugging">Remote debugging</a>.</li>
+<li><code>processId</code> - the debugger tries to attach to this process after having sent a USR1 signal. With this setting, the debugger can attach to an already running process that was not started in debug mode. When using the <code>processId</code> attribute, the debug port is determined automatically based on the Node.js version (and the used protocol) and cannot be configured explicitly. So don’t specify a <code>port</code> attribute.</li>
+<li><code>continueOnAttach</code> - whether to continue the process if it’s paused when we attach to it. This option is useful if you launch your program with <code>--inspect-brk</code>.</li>
+</ul>
+<h3 id="launch-configurations-for-common-scenarios">Launch configurations for common scenarios</h3>
+<p>You can trigger IntelliSense (<code>kb(editor.action.triggerSuggest)</code>) in your <code>launch.json</code> file to see launch configuration snippets for commonly used Node.js debugging scenarios.</p>
+<figure>
+<img src="images/nodejs-debugging/launch-snippets.png" alt="Launch configuration snippets for Node.js" /><figcaption>Launch configuration snippets for Node.js</figcaption>
+</figure>
+<p>You can also bring up the snippets with the <strong>Add Configuration…</strong> button in the lower right of the <code>launch.json</code> editor window.</p>
+<figure>
+<img src="images/nodejs-debugging/add-configuration-button.png" alt="Add Configuration button" /><figcaption>Add Configuration button</figcaption>
+</figure>
+<p>These are the available snippets:</p>
+<ul>
+<li><strong>Launch Program</strong>: Launch a Node.js program in debug mode.</li>
+<li><strong>Launch via npm</strong>: Launch a Node.js program through an npm ‘debug’ script. If you have defined an npm debug script in your package.json, you can use it directly from your launch configuration. Make sure that the debug port used in the npm script, corresponds to the port specified in the snippet.</li>
+<li><strong>Attach</strong>: Attach to the debug port of a locally running Node.js program. Make sure that the Node.js program to debug has been started in debug mode, and the debug port used is the same as the one specified in the snippet.</li>
+<li><strong>Attach to Remote Program</strong>: Attach to the debug port of a Node.js program running on the host specified by the <code>address</code> attribute. Make sure that the Node.js program to debug has been started in debug mode, and the debug port used is the same as the one specified in the snippet. To help VS Code map source files between your workspace and the filesystem of the remote host, make sure to specify correct paths for the <code>localRoot</code>and <code>remoteRoot</code> attributes.</li>
+<li><strong>Attach by Process ID</strong>: Open the process picker to select a node or gulp process for debugging. With this launch configuration, you can even attach to a node or gulp process that was not started in debug mode.</li>
+<li><strong>Nodemon Setup</strong>: Use nodemon to relaunch a debug session automatically whenever the JavaScript source has changed. Make sure that you have nodemon installed globally. Note that terminating the debug session only terminates the program to debug, not nodemon itself. To terminate nodemon, press <code>kbstyle(Ctrl+C)</code> in the Integrated Terminal.</li>
+<li><strong>Mocha Tests</strong>: Debug mocha tests in a <code>test</code> folder of your project. Make sure that your project has ‘mocha’ installed in its <code>node_modules</code> folder.</li>
+<li><strong>Yeoman generator</strong>: Debug a yeoman generator. The snippet asks you to specify the name of the generator. Make sure that your project has ‘yo’ installed in its <code>node_modules</code> folder and that your generated project has been installed for debugging by running <code>npm link</code> in the project folder.</li>
+<li><strong>Gulp task</strong>: Debug a gulp task. Make sure that your project has ‘gulp’ installed in its <code>node_modules</code> folder.</li>
+<li><strong>Electron Main</strong>: Debug the main Node.js process of an Electron application. The snippet assumes that the Electron executable has been installed inside the <code>node_modules/.bin</code> directory of the workspace.</li>
+</ul>
+<h3 id="node-console">Node console</h3>
+<p>By default, Node.js debug sessions launch the target in the internal VS Code Debug Console. Since the Debug Console does not support programs that need to read input from the console, you can enable either an external terminal or use the VS Code Integrated Terminal by setting the <code>console</code> attribute in your launch configuration to <code>externalTerminal</code> or <code>integratedTerminal</code> respectively. The default is <code>internalConsole</code>.</p>
+<p>If an external terminal is used, you can configure which terminal program to use via the <code>terminal.external.windowsExec</code>, <code>terminal.external.osxExec</code>, and <code>terminal.external.linuxExec</code> settings.</p>
+<h3 id="launch-configuration-support-for-npm-and-other-tools">Launch configuration support for ‘npm’ and other tools</h3>
+<p>Instead of launching the Node.js program directly with node, you can use ‘npm’ scripts or other task runner tools directly from a launch configuration:</p>
+<ul>
+<li>Any program available on the PATH (for example ‘npm’, ‘mocha’, ‘gulp’, etc.) can be used for the <code>runtimeExecutable</code> attribute and arguments can be passed via <code>runtimeArgs</code>.</li>
+<li>You do not have to set the <code>program</code> attribute if your npm script or other tool implicitly specifies the program to launch.</li>
+</ul>
+<p>Let’s look at an ‘npm’ example. If your <code>package.json</code> has a ‘debug’ script, for example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1">  <span class="er">&quot;scripts&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">    <span class="dt">&quot;debug&quot;</span><span class="fu">:</span> <span class="st">&quot;node myProgram.js&quot;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="fu">}</span><span class="er">,</span></a></code></pre></div>
+<p>the corresponding launch configuration would look like this:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Launch via npm&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="dt">&quot;cwd&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-6" title="6">  <span class="dt">&quot;runtimeExecutable&quot;</span><span class="fu">:</span> <span class="st">&quot;npm&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="dt">&quot;runtimeArgs&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;run-script&quot;</span><span class="ot">,</span> <span class="st">&quot;debug&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<h3 id="multi-version-support">Multi version support</h3>
+<p>If you are using ‘<a href="https://github.com/creationix/nvm">nvm</a>’ (or ‘<a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a>’) to manage your Node.js versions, it is possible to specify a <code>runtimeVersion</code> attribute in a launch configuration for selecting a specific version of Node.js:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Launch test&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="dt">&quot;runtimeVersion&quot;</span><span class="fu">:</span> <span class="st">&quot;14&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="dt">&quot;program&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder}/test.js&quot;</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<p>If you are using ‘<a href="https://github.com/jasongin/nvs">nvs</a>’ to manage your Node.js versions, it is possible to use <code>runtimeVersion</code> attribute to select a specific version, architecture, and flavor Node.js, for example:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Launch test&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="dt">&quot;runtimeVersion&quot;</span><span class="fu">:</span> <span class="st">&quot;chackracore/8.9.4/x64&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6">  <span class="dt">&quot;program&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder}/test.js&quot;</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<p>Make sure to have those Node.js versions installed that you want to use with the <code>runtimeVersion</code> attribute, as the feature will not download and install the version automatically. For example, you’ll have to run something like <code>nvm install 7.10.1</code> or <code>nvs add 7.10.1</code> from the integrated terminal if you plan to add <code>"runtimeVersion": "7.10.1"</code> to your launch configuration.</p>
+<p>If you omit the minor and patch version and have, for example, <code>"runtimeVersion": "14"</code>, then the most recent <code>14.x.y</code> version installed on your system will be used.</p>
+<h3 id="load-environment-variables-from-external-file">Load environment variables from external file</h3>
+<p>The VS Code Node debugger supports loading environment variables from a file and passing them to the Node.js runtime. To use this feature, add an attribute <code>envFile</code> to your launch configuration and specify the absolute path to the file containing the environment variables:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb9-1" title="1">   <span class="er">//...</span></a>
+<a class="sourceLine" id="cb9-2" title="2">   <span class="er">&quot;envFile&quot;:</span> <span class="er">&quot;$</span><span class="fu">{</span><span class="er">workspaceFolder</span><span class="fu">}</span><span class="er">/.env&quot;,</span></a>
+<a class="sourceLine" id="cb9-3" title="3">   <span class="er">&quot;env&quot;:</span> <span class="fu">{</span> <span class="dt">&quot;USER&quot;</span><span class="fu">:</span> <span class="st">&quot;john doe&quot;</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb9-4" title="4">   <span class="er">//...</span></a></code></pre></div>
+<p>Any environment variable specified in the <code>env</code> dictionary will override variables loaded from the file.</p>
+<p>Here’s an example of an <code>.env</code> file:</p>
+<pre><code>USER=doe
+PASSWORD=abc123
+
+# a comment
+
+# an empty value:
+empty=
+
+# new lines expanded in quoted strings:
+lines=&quot;foo\nbar&quot;</code></pre>
+<h2 id="attaching-to-node.js">Attaching to Node.js</h2>
+<p>If you want to attach the VS Code debugger to an external Node.js program, launch Node.js as follows:</p>
+<pre><code>node --inspect program.js</code></pre>
+<p>or if the program shouldn’t start running, but must wait for the debugger to attach:</p>
+<pre><code>node --inspect-brk program.js</code></pre>
+<p>Now you have a couple options for attaching the debugger to your program:</p>
+<ul>
+<li>open a “process picker” that lists all potential candidate processes and let you pick one, or</li>
+<li>create an “attach” configuration that explicitly specifies all configuration options and then press <strong>F5</strong>.</li>
+</ul>
+<p>Let’s go through these options in detail:</p>
+<h3 id="attach-to-node-process-action">Attach to Node Process action</h3>
+<p>The <strong>Attach to Node Process</strong> command from the command palette (<code>kbstyle(F1)</code>) opens a Quick Pick menu that lists all potential processes that are available to the Node.js debugger:</p>
+<figure>
+<img src="images/nodejs-debugging/process-picker.png" alt="Node.js Process picker" /><figcaption>Node.js Process picker</figcaption>
+</figure>
+<p>The individual processes listed in the picker show the debug port and process ID. Once you select your Node.js process in that list, the Node.js debugger will try to attach to it.</p>
+<p>In addition to Node.js processes, the picker also shows other programs that were launched with one of the various forms <code>--inspect</code> arguments. This makes it possible to attach to Electron’s or VS Code’s helper processes.</p>
+<h3 id="setting-up-an-attach-configuration">Setting up an “Attach” configuration</h3>
+<p>This option requires more work but in contrast to the previous two options it allows you to configure various debug configuration options explicitly.</p>
+<p>The simplest “attach” configuration looks like this:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb13-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Attach to Process&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb13-4" title="4">  <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;attach&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb13-5" title="5">  <span class="dt">&quot;port&quot;</span><span class="fu">:</span> <span class="dv">9229</span></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="fu">}</span></a></code></pre></div>
+<p>The port <code>9229</code> is the default debug port of the <code>--inspect</code> and <code>--inspect-brk</code> options. To use a different port (for example <code>12345</code>), add it to the options like this: <code>--inspect=12345</code> and <code>--inspect-brk=12345</code> and change the <code>port</code> attribute in the launch configuration to match.</p>
+<p>If you want to attach to a Node.js process that hasn’t been started in debug mode, you can do this by specifying the process ID of the Node.js process as a string:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb14-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb14-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Attach to Process&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb14-4" title="4">  <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;attach&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb14-5" title="5">  <span class="dt">&quot;processId&quot;</span><span class="fu">:</span> <span class="st">&quot;53426&quot;</span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="fu">}</span></a></code></pre></div>
+<p>Since it is a bit laborious to repeatedly find the process ID and enter it in the launch configuration, Node debug supports a command variable <code>PickProcess</code> that will open the process picker (from above).</p>
+<p>Using the <code>PickProcess</code> variable the launch configuration looks like this:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb15-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Attach to Process&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb15-4" title="4">  <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;attach&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb15-5" title="5">  <span class="dt">&quot;processId&quot;</span><span class="fu">:</span> <span class="st">&quot;${command:PickProcess}&quot;</span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="fu">}</span></a></code></pre></div>
+<h2 id="stop-debugging">Stop debugging</h2>
+<p>Using the <strong>Debug: Stop</strong> action (available in the Debug toolbar or via the <strong>Command Palette</strong>) stops the debug session.</p>
+<p>If the debug session was started in “attach” mode (and the red terminate button in the Debug toolbar shows a superimposed “plug”), pressing <strong>Stop</strong> disconnects the Node.js debugger from the debuggee that then continues execution.</p>
+<p>If the debug session is in “launch” mode, pressing <strong>Stop</strong> does the following:</p>
+<ol type="1">
+<li><p>When pressing <strong>Stop</strong> for the first time, the debuggee is requested to shut down gracefully by sending a <code>SIGINT</code> signal. The debuggee is free to intercept this signal and clean up anything as necessary and then shut down. If there are no breakpoints (or problems) in that shutdown code, the debuggee and the debug session will terminate.</p></li>
+<li><p>However if the debugger hits a breakpoint in the shutdown code or if the debuggee does not terminate properly by itself, then the debug session will not end. In this case, pressing <strong>Stop</strong> again will force terminate the debuggee and its child processes (<code>SIGKILL</code>).</p></li>
+</ol>
+<p>So if you see that a debug session doesn’t end when you press the red <strong>Stop</strong> button, then press the button again to force a shutdown of the debuggee.</p>
+<p>Note that on the Windows operating system, pressing <strong>Stop</strong> always forcibly kills the debuggee and its child processes.</p>
+<h2 id="source-maps">Source maps</h2>
+<p>The Node.js debugger of VS Code supports JavaScript source maps that help debugging of transpiled languages, for example, TypeScript or minified/uglified JavaScript. With source maps, it’s possible to single step through or set breakpoints in the original source. If no source map exists for the original source, or if the source map is broken and cannot successfully map between the source and the generated JavaScript, then breakpoints show up as unverified (gray hollow circles).</p>
+<p>The source map feature is controlled by the <code>sourceMaps</code> attribute that defaults to <code>true</code>. This means that node debugging always tries to use source maps (if it can find any) and as a consequence, you can even specify a source file (for example, app.ts) with the <code>program</code> attribute. If you need to disable source maps for some reason, you can set the <code>sourceMaps</code> attribute to <code>false</code>.</p>
+<h3 id="tool-configuration">Tool Configuration</h3>
+<p>Since source maps are not always automatically created, you should make sure to configure your transpiler to create them. For example:</p>
+<p><strong>TypeScript</strong></p>
+<p>For TypeScript, you can enable sourcemaps by passing <code>--sourceMap</code> to <code>tsc</code>, or by adding <code>"sourceMap": true</code> in your tsconfig.json file.</p>
+<pre><code>tsc --sourceMap --outDir bin app.ts</code></pre>
+<p><strong>Babel</strong></p>
+<p>For Babel, you’ll want to set the <a href="https://babeljs.io/docs/en/options#sourcemaps">sourceMaps</a> option to <code>true</code>, or pass the <code>--source-maps</code> option when compiling your code.</p>
+<pre><code>npx babel script.js --out-file script-compiled.js --source-maps</code></pre>
+<p><strong>Webpack</strong></p>
+<p>Webpack has <a href="https://webpack.js.org/configuration/devtool/">numerous</a> source map options. We recommend setting the property <code>devtool: "source-map"</code> in your <code>webpack.config.js</code> for the best fidelity of results, although you can experiment with other settings causes slowdowns in your build.</p>
+<p>Also, if you have additional compilation steps in webpack, such as using a TypeScript loader, you’ll also want to make sure that those steps are set up to generate sourcemaps. Otherwise, the sourcemaps that webpack generates will map back to the compiled code from the loader, instead of the real sources.</p>
+<h3 id="source-map-discovery">Source Map Discovery</h3>
+<p>By default, VS Code will search your entire workspace, excluding <code>node_modules</code>, for sourcemaps. In large workspaces, this search might be slow. You can configure the locations where VS Code will search for source maps by setting the <code>outFiles</code> attribute in your <code>launch.json</code>. For example, this configuration will only discover sourcemaps for <code>.js</code> files in the <code>bin</code> folder:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb18-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb18-2" title="2">  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="st">&quot;0.2.0&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb18-3" title="3">  <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb18-4" title="4">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb18-5" title="5">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Launch TypeScript&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb18-6" title="6">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb18-7" title="7">      <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb18-8" title="8">      <span class="dt">&quot;program&quot;</span><span class="fu">:</span> <span class="st">&quot;app.ts&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb18-9" title="9">      <span class="dt">&quot;outFiles&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;${workspaceFolder}/bin/**/*.js&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb18-10" title="10">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb18-11" title="11">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb18-12" title="12"><span class="fu">}</span></a></code></pre></div>
+<p>Note that the <code>outFiles</code> should match your JavaScript files, not the source map files (which may end in <code>.map</code> instead of <code>.js</code>).</p>
+<h3 id="source-map-resolution">Source Map Resolution</h3>
+<p>By default, only source maps in your <code>outFiles</code> will be resolved. This behavior is used to prevent dependencies from interfering with breakpoints you set. For example, if you had a file <code>src/index.ts</code> and a dependency had a source map that referenced <code>webpack:///./src/index.ts</code>, that would incorrectly resolve to your source file and could lead to surprising results.</p>
+<p>You can configure this behavior by setting the <code>resolveSourceMapLocations</code> option. If set to <code>null</code>, every source map will be resolved. For example, this configuration will additionally allow source maps in <code>node_modules/some-dependency</code> to be resolved:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb19-1" title="1">  <span class="st">&quot;resolveSourceMapLocations&quot;</span><span class="op">:</span> [</a>
+<a class="sourceLine" id="cb19-2" title="2">    <span class="st">&quot;out/**/*.js&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb19-3" title="3">    <span class="st">&quot;node_modules/some-dependency/**/*.js&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb19-4" title="4">  ]</a></code></pre></div>
+<h3 id="smart-stepping">Smart stepping</h3>
+<p>With the <code>smartStep</code> attribute set to <code>true</code> in a launch configuration, VS Code will automatically skip ‘uninteresting code’ when stepping through code in the debugger. ‘Uninteresting code’ is code that is generated by a transpiling process but is not covered by a source map so it does not map back to the original source. This code gets in your way when stepping through source code in the debugger because it makes the debugger switch between the original source code and generated code that you are not interested in. <code>smartStep</code> will automatically step through code not covered by a source map until it reaches a location that is covered by a source map again.</p>
+<p>Smart stepping is especially useful for cases like async/await downcompilation in TypeScript, where the compiler injects helper code that is not covered by a source map.</p>
+<p>The <code>smartStep</code> feature only applies to JavaScript code that was generated from source and therefore has a source map. For JavaScript without sources, the smart stepping option has no effect.</p>
+<h3 id="javascript-source-map-tips">JavaScript source map tips</h3>
+<p>A common issue when debugging with source maps is that you’ll set a breakpoint, and it will turn gray. If you hover the cursor over it, you’ll see the message, <code>"Breakpoint ignored because generated code not found (source map problem?)"</code>. What now? There are a range of issues that can lead to this. First, a quick explanation of how the Node debug adapter handles source maps.</p>
+<p>When you set a breakpoint in <code>app.ts</code>, the debug adapter has to figure out the path to <code>app.js</code>, the transpiled version of your TypeScript file, which is what is actually running in Node. But, there is not a straightforward way to figure this out starting from the <code>.ts</code> file. Instead, the debug adapter uses the <code>outFiles</code> attribute in the <code>launch.json</code> to find all the transpiled <code>.js</code> files, and parses them for a source map, which contains the locations of its associated <code>.ts</code> files.</p>
+<p>When you build your <code>app.ts</code> file in TypeScript with source maps enabled, it either produces an <code>app.js.map</code> file, or a source map inlined as a base64-encoded string in a comment at the bottom of the <code>app.js</code> file. To find the <code>.ts</code> files associated with this map, the debug adapter looks at two properties in the source map, <code>sources</code>, and <code>sourceRoot</code>. <code>sourceRoot</code> is optional - if present, it is prepended to each path in <code>sources</code>, which is an array of paths. The result is an array of absolute or relative paths to <code>.ts</code> files. Relative paths are resolved relative to the source map.</p>
+<p>Finally, the debug adapter searches for the full path of <code>app.ts</code> in this resulting list of <code>.ts</code> files. If there’s a match, it has found the source map file to use when mapping <code>app.ts</code> to <code>app.js</code>. If there is no match, then it can’t bind the breakpoint, and it will turn gray.</p>
+<p>Here are some things to try when your breakpoints turn gray:</p>
+<ul>
+<li>While debugging, run the <strong>Debug: Create Diagnostic Information for Current Session</strong> command. This command will bring up a tool that can provide hints to help you resolve any issues from the command palette (<code>kbstyle(F1)</code>).</li>
+<li>Did you build with source maps enabled? Make sure there are <code>.js.map</code> files, or inlined source maps in your <code>.js</code> files.</li>
+<li>Are the <code>sourceRoot</code> and <code>sources</code> properties in your source map correct? Can they be combined to get the correct path to the <code>.ts</code> file?</li>
+<li>Have you opened the folder in VS Code with the incorrect case? It’s possible to open folder <code>foo/</code> from the command line like <code>code FOO</code> in which case source maps may not be resolved correctly.</li>
+<li>Try searching for help with your particular setup on Stack Overflow or by filing an issue on GitHub.</li>
+<li>Try adding a <code>debugger</code> statement. If it breaks into the <code>.ts</code> file there, but breakpoints at that spot don’t bind, that is useful information to include with a GitHub issue.</li>
+</ul>
+<h2 id="remote-debugging">Remote debugging</h2>
+<blockquote>
+<p><strong>Note:</strong> VS Code now has universal <a href="/docs/remote/remote-overview.md">remote development capabilities</a>. Using the <a href="https://aka.ms/vscode-remote/download/extension">Remote Development</a> extensions, Node.js development in remote scenarios and containers is no different than Node.js development in a local setup. <strong>This is the recommended way to remote debug Node.js programs</strong>. Check out the <a href="/docs/remote/remote-overview.md#getting-started">Getting started</a> section and <a href="/docs/remote/remote-overview.md#remote-tutorials">Remote tutorials</a> to learn more.</p>
+</blockquote>
+<p>If you are unable to use any of the Remote Development extensions to debug your Node.js program, below is a guide on how to debug a remote Node.js program from your local instance of VS Code.</p>
+<p>The Node.js debugger supports remote debugging where you attach to a process running on a different machine, or in a container. Specify a remote host via the <code>address</code> attribute. For example:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb20-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb20-2" title="2">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb20-3" title="3">  <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;attach&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb20-4" title="4">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Attach to remote&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb20-5" title="5">  <span class="dt">&quot;address&quot;</span><span class="fu">:</span> <span class="st">&quot;192.168.148.2&quot;</span><span class="fu">,</span> <span class="er">//</span> <span class="er">&lt;-</span> <span class="er">remote</span> <span class="er">address</span> <span class="er">here</span></a>
+<a class="sourceLine" id="cb20-6" title="6">  <span class="dt">&quot;port&quot;</span><span class="fu">:</span> <span class="dv">9229</span></a>
+<a class="sourceLine" id="cb20-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<p>By default, VS Code will stream the debugged source from the remote Node.js folder to the local VS Code and show it in a read-only editor. You can step through this code, but cannot modify it. If you want VS Code to open the editable source from your workspace instead, you can set up a mapping between the remote and local locations. A <code>localRoot</code> and a <code>remoteRoot</code> attribute can be used to map paths between a local VS Code project and a (remote) Node.js folder. This works even locally on the same system or across different operating systems. Whenever a code path needs to be converted from the remote Node.js folder to a local VS Code path, the <code>remoteRoot</code> path is stripped off the path and replaced by <code>localRoot</code>. For the reverse conversion, the <code>localRoot</code> path is replaced by the <code>remoteRoot</code>.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb21-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb21-2" title="2">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb21-3" title="3">  <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;attach&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb21-4" title="4">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Attach to remote&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb21-5" title="5">  <span class="dt">&quot;address&quot;</span><span class="fu">:</span> <span class="st">&quot;TCP/IP address of process to be debugged&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb21-6" title="6">  <span class="dt">&quot;port&quot;</span><span class="fu">:</span> <span class="dv">9229</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb21-7" title="7">  <span class="dt">&quot;localRoot&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder}&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb21-8" title="8">  <span class="dt">&quot;remoteRoot&quot;</span><span class="fu">:</span> <span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Users</span><span class="ch">\\</span><span class="st">username</span><span class="ch">\\</span><span class="st">project</span><span class="ch">\\</span><span class="st">server&quot;</span></a>
+<a class="sourceLine" id="cb21-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<h2 id="access-loaded-scripts">Access Loaded Scripts</h2>
+<p>If you need to set a breakpoint in a script that is not part of your workspace and therefore cannot be easily located and opened through normal VS Code file browsing, you can access the loaded scripts via the <strong>LOADED SCRIPTS</strong> view in the Run view:</p>
+<figure>
+<img src="images/nodejs-debugging/loaded-scripts-explorer.gif" alt="Loaded Scripts Explorer" /><figcaption>Loaded Scripts Explorer</figcaption>
+</figure>
+<p>The <strong>LOADED SCRIPTS</strong> view lets you quickly select the script by typing its name or filter the list when <strong>Enable Filter on Type</strong> is on.</p>
+<p>Scripts are loaded into a read-only editor where you can set breakpoints. These breakpoints are remembered across debug sessions but you only have access to the script content while a debug session is running.</p>
+<h2 id="restarting-debug-sessions-automatically-when-source-is-edited">Restarting debug sessions automatically when source is edited</h2>
+<p>The <code>restart</code> attribute of a launch configuration controls whether the Node.js debugger automatically restarts after the debug session has ended. This feature is useful if you use <a href="https://nodemon.io"><strong>nodemon</strong></a> to restart Node.js on file changes. Setting the launch configuration attribute <code>restart</code> to <code>true</code> makes the node debugger automatically try to reattach to Node.js after Node.js has terminated.</p>
+<p>If you have started your program <code>server.js</code> via <strong>nodemon</strong> on the command line like this:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb22-1" title="1"><span class="ex">nodemon</span> --inspect server.js</a></code></pre></div>
+<p>you can attach the VS Code debugger to it with the following launch configuration:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb23-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb23-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Attach to node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb23-3" title="3">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb23-4" title="4">  <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;attach&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb23-5" title="5">  <span class="dt">&quot;restart&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb23-6" title="6">  <span class="dt">&quot;port&quot;</span><span class="fu">:</span> <span class="dv">9229</span></a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<p>Alternatively you can start your program <code>server.js</code> via <strong>nodemon</strong> directly with a launch config and attach the VS Code debugger:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb24-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb24-2" title="2">  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Launch server.js via nodemon&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb24-3" title="3">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb24-4" title="4">  <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb24-5" title="5">  <span class="dt">&quot;runtimeExecutable&quot;</span><span class="fu">:</span> <span class="st">&quot;nodemon&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb24-6" title="6">  <span class="dt">&quot;program&quot;</span><span class="fu">:</span> <span class="st">&quot;${workspaceFolder}/server.js&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb24-7" title="7">  <span class="dt">&quot;console&quot;</span><span class="fu">:</span> <span class="st">&quot;integratedTerminal&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb24-8" title="8">  <span class="dt">&quot;internalConsoleOptions&quot;</span><span class="fu">:</span> <span class="st">&quot;neverOpen&quot;</span></a>
+<a class="sourceLine" id="cb24-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<blockquote>
+<p><strong>Tip:</strong> Pressing the <strong>Stop</strong> button stops the debug session and disconnects from Node.js, but <strong>nodemon</strong> (and Node.js) will continue to run. To stop <strong>nodemon</strong>, you will have to kill it from the command line (which is easily possible if you use the <code>integratedTerminal</code> as shown above).</p>
+</blockquote>
+<blockquote>
+<p><strong>Tip:</strong> In case of syntax errors, <strong>nodemon</strong> will not be able to start Node.js successfully until the error has been fixed. In this case, VS Code will continue trying to attach to Node.js but eventually give up (after 10 seconds). To avoid this, you can increase the timeout by adding a <code>timeout</code> attribute with a larger value (in milliseconds).</p>
+</blockquote>
+<h2 id="restart-frame">Restart frame</h2>
+<p>The Node debugger supports restarting execution at a stack frame. This can be useful in situations where you have found a problem in your source code and you want to rerun a small portion of the code with modified input values. Stopping and then restarting the full debug session can be time-consuming. The <strong>Restart Frame</strong> action allows you to reenter the current function after you have changed variables with the <strong>Set Value</strong> action:</p>
+<p>
+<img alt="restart frame" src="https://az754404.vo.msecnd.net/public/restartFrame.gif" />
+</p>
+<p><strong>Restart Frame</strong> won’t roll back mutation to state outside of the function, so it may not always work as expected.</p>
+<h2 id="breakpoints">Breakpoints</h2>
+<h3 id="conditional-breakpoints">Conditional Breakpoints</h3>
+<p>Conditional breakpoints are breakpoints that only pause when an expression returns a truthy value. You can create one by right-clicking in the gutter beside a line number and selecting “Conditional Breakpoint”:</p>
+<figure>
+<img src="images/nodejs-debugging/conditional-breakpoint.gif" alt="Conditional breakpoint" /><figcaption>Conditional breakpoint</figcaption>
+</figure>
+<h3 id="logpoints">Logpoints</h3>
+<p>Something you want to just log a message or value when code hits a certain location, rather than pausing. You can do this with logpoints. Logpoints don’t pause, but rather log a message to the Debug Console when hit. In the JavaScript debugger, you can use curly braces to interpolate expressions into the message, like <code>current value is: {myVariable.property}</code>.</p>
+<p>You can create one by right-clicking in the gutter beside a line number and selecting “Logpoint”. For example, this might log something like <code>location is /usr/local</code>:</p>
+<figure>
+<img src="images/nodejs-debugging/logpoint-breakpoint.gif" alt="Logpoint" /><figcaption>Logpoint</figcaption>
+</figure>
+<h3 id="hit-count-breakpoints">Hit count breakpoints</h3>
+<p>The ‘hit count condition’ controls how many times a breakpoint needs to be hit before it will ‘break’ execution. You can place a hit count breakpoint by right-clicking in the gutter beside a line number, selecting “Conditional Breakpoint”, and then switching to “Hit Count”.</p>
+<figure>
+<img src="images/nodejs-debugging/hit-count-breakpoint.gif" alt="Hit count breakpoint" /><figcaption>Hit count breakpoint</figcaption>
+</figure>
+<p>The hit count syntax supported by the Node.js debugger is either an integer or one of the operators <code>&lt;</code>, <code>&lt;=</code>, <code>==</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>%</code> followed by an integer.</p>
+<p>Some examples:</p>
+<ul>
+<li><code>&gt;10</code> break always after 10 hits</li>
+<li><code>&lt;3</code> break on the first two hits only</li>
+<li><code>10</code> same as <code>&gt;=10</code></li>
+<li><code>%2</code> break on every other hit</li>
+</ul>
+<h3 id="breakpoint-validation">Breakpoint validation</h3>
+<p>For performance reasons, Node.js parses the functions inside JavaScript files lazily on first access. As a consequence, breakpoints don’t work in source code areas that haven’t been seen (parsed) by Node.js.</p>
+<p>Since this behavior is not ideal for debugging, VS Code passes the <code>--nolazy</code> option to Node.js automatically. This prevents the delayed parsing and ensures that breakpoints can be validated before running the code (so they no longer “jump”).</p>
+<p>Since the <code>--nolazy</code> option might increase the start-up time of the debug target significantly, you can easily opt out by passing a <code>--lazy</code> as a <code>runtimeArgs</code> attribute.</p>
+<p>When doing so, you will find that some of your breakpoints don’t “stick” to the line requested but instead “jump” for the next possible line in already-parsed code. To avoid confusion, VS Code always shows breakpoints at the location where Node.js thinks the breakpoint is. In the <strong>BREAKPOINTS</strong> section, these breakpoints are shown with an arrow between requested and actual line number:</p>
+<figure>
+<img src="images/nodejs-debugging/breakpointsvalidation.png" alt="Breakpoints View" /><figcaption>Breakpoints View</figcaption>
+</figure>
+<p>This breakpoint validation occurs when a session starts and the breakpoints are registered with Node.js, or when a session is already running and a new breakpoint is set. In this case, the breakpoint may “jump” to a different location. After Node.js has parsed all the code (for example, by running through it), breakpoints can be easily reapplied to the requested locations with the <strong>Reapply</strong> button in the <strong>BREAKPOINTS</strong> section header. This should make the breakpoints “jump back” to the requested location.</p>
+<figure>
+<img src="images/nodejs-debugging/breakpointstoolbar.png" alt="Breakpoint Actions" /><figcaption>Breakpoint Actions</figcaption>
+</figure>
+<h2 id="skipping-uninteresting-code">Skipping uninteresting code</h2>
+<p>VS Code Node.js debugging has a feature to avoid source code that you don’t want to step through (also known as ‘Just My Code’). This feature can be enabled with the <code>skipFiles</code> attribute in your launch configuration. <code>skipFiles</code> is an array of glob patterns for script paths to skip.</p>
+<p>For example, using:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode typescript"><code class="sourceCode typescript"><a class="sourceLine" id="cb25-1" title="1">  <span class="st">&quot;skipFiles&quot;</span><span class="op">:</span> <span class="op">[</span></a>
+<a class="sourceLine" id="cb25-2" title="2">    <span class="st">&quot;${workspaceFolder}/node_modules/**/*.js&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb25-3" title="3">    <span class="st">&quot;${workspaceFolder}/lib/**/*.js&quot;</span></a>
+<a class="sourceLine" id="cb25-4" title="4">  <span class="op">]</span></a></code></pre></div>
+<p>all code in the <code>node_modules</code> and <code>lib</code> folders in your project will be skipped.</p>
+<p>Built-in <strong>core modules</strong> of Node.js can be referred to by the ‘magic name’ <code>&lt;node_internals&gt;</code> in a glob pattern. The following example skips all internal modules:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb26-1" title="1">  <span class="er">&quot;skipFiles&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb26-2" title="2">     <span class="st">&quot;&lt;node_internals&gt;/**/*.js&quot;</span></a>
+<a class="sourceLine" id="cb26-3" title="3">   <span class="ot">]</span></a></code></pre></div>
+<p>The exact ‘skipping’ rules are as follows:</p>
+<ul>
+<li>If you step into a skipped file, you won’t stop there - you will stop on the next executed line that is not in a skipped file.</li>
+<li>If you have set the option to break on thrown exceptions, then you won’t break on exceptions thrown from skipped files unless they bubble up into a non-skipped file.</li>
+<li>If you set a breakpoint in a skipped file, you will stop at that breakpoint, and you will be able to step through it until you step out of it, at which point normal skipping behavior will resume.</li>
+<li>The location of console messages from inside skip files will be shown as the first non-skipped location in the call stack.</li>
+</ul>
+<p>Skipped source is shown in a ‘dimmed’ style in the CALL STACK view:</p>
+<figure>
+<img src="images/nodejs-debugging/dimmed-callstack.png" alt="Skipped source is dimmed in call stack view" /><figcaption>Skipped source is dimmed in call stack view</figcaption>
+</figure>
+<p>Hovering over the dimmed entries explains why the stack frame is dimmed.</p>
+<p>A context menu item on the call stack, <strong>Toggle skipping this file</strong> enables you to easily skip a file at runtime without adding it to your launch config. This option only persists for the current debugging session. You can also use it to stop skipping a file that is skipped by the <code>skipFiles</code> option in your launch config.</p>
+<blockquote>
+<p><strong>Note:</strong> The <code>legacy</code> protocol debugger supports negative glob patterns, but they must <strong>follow</strong> a positive pattern: positive patterns add to the set of skipped files, while negative patterns subtract from that set.</p>
+</blockquote>
+<p>In the following (<code>legacy</code> protocol-only) example all but a ‘math’ module is skipped:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode typescript"><code class="sourceCode typescript"><a class="sourceLine" id="cb27-1" title="1"><span class="st">&quot;skipFiles&quot;</span><span class="op">:</span> <span class="op">[</span></a>
+<a class="sourceLine" id="cb27-2" title="2">    <span class="st">&quot;${workspaceFolder}/node_modules/**/*.js&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb27-3" title="3">    <span class="st">&quot;!${workspaceFolder}/node_modules/math/**/*.js&quot;</span></a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="op">]</span></a></code></pre></div>
+<blockquote>
+<p><strong>Note:</strong> The <code>legacy</code> protocol debugger has to emulate the <code>skipFiles</code> feature because the <strong>V8 Debugger Protocol</strong> does not support it natively. This might result in slow stepping performance.</p>
+</blockquote>
+<h2 id="supported-node-like-runtimes">Supported Node-like runtimes</h2>
+<p>The current VS Code JavaScript debugger supports Node version at or above 8.x, recent Chrome versions, and recent Edge versions (via the <code>pwa-msedge</code> launch type).</p>
+<h2 id="next-steps">Next steps</h2>
+<p>In case you didn’t already read the Node.js section, take a look at:</p>
+<ul>
+<li><a href="/docs/nodejs/nodejs-tutorial.md">Node.js</a> - End to end Node scenario with a sample application</li>
+</ul>
+<p>To see tutorials on the basics of Node.js debugging, check out these videos:</p>
+<ul>
+<li><a href="/docs/introvideos/debugging.md">Intro Video - Debugging</a> - Introductory video showcasing the basics of debugging.</li>
+<li><a href="https://www.youtube.com/watch?v=2oFKNL7vYV8">Getting started with Node.js debugging</a> - Learn how to attach to a running Node.js process.</li>
+</ul>
+<p>To learn about VS Code’s task running support, go to:</p>
+<ul>
+<li><a href="/docs/editor/tasks.md">Tasks</a> - Running tasks with Gulp, Grunt, and Jake. Showing Errors and Warnings</li>
+</ul>
+<p>To write your own debugger extension, visit:</p>
+<ul>
+<li><a href="/api/extension-guides/debugger-extension.md">Debugger Extension</a> - Steps to create a VS Code debug extension starting from a mock sample</li>
+</ul>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="can-i-debug-if-im-using-symlinks">Can I debug if I’m using symlinks?</h3>
+<p>Yes, if you’ve created symlinks for folders inside your project, such as with <code>npm link</code>, you can debug the symlinked sources by telling the Node.js runtime to preserve symlinked paths. Use the node.exe <code>--preserve-symlinks</code> <a href="https://nodejs.org/api/cli.html#cli_preserve_symlinks">switch</a> in your launch configuration <code>runtimeArgs</code> attribute. <code>runtimeArgs</code>, an array of strings, are passed to the debugging session runtime executable, which defaults to node.exe.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb28-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb28-2" title="2">  <span class="dt">&quot;runtimeArgs&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;--preserve-symlinks&quot;</span><span class="ot">]</span></a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="fu">}</span></a></code></pre></div>
+<p>If your main script is inside a symlinked path, then you will also need to add the <code>"--preserve-symlinks-main"</code> option. This option is only available in Node 10+.</p>
+<h3 id="how-do-i-debug-ecmascript-modules">How do I debug ECMAScript modules?</h3>
+<p>If you use esm or pass <code>--experimental-modules</code> to Node.js in order to use ECMAScript modules, you can pass these options through the <code>runtimeArgs</code> attribute of <code>launch.json</code>:</p>
+<ul>
+<li><code>"runtimeArgs": ["--experimental-modules"]</code> - Use the <a href="https://nodejs.org/api/esm.html">experimental ECMAScript modules support</a> in Node v8.5.0+</li>
+<li><code>"runtimeArgs": ["-r", "esm"]</code> - Use the <a href="https://github.com/standard-things/esm">esm ES module loader</a> (<code>["-r esm"]</code> without a comma won’t work)</li>
+</ul>
+</body>
+</html>

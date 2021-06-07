@@ -67,7 +67,7 @@ You can save your Jupyter Notebook using the keyboard combo `kbstyle(Ctrl+S)` or
 
 You can export a Jupyter Notebook as a Python file (.py), a PDF, or an HTML file. To export, just click the convert icon on the main toolbar. You'll then be presented with file options from the Command Palette.
 
- ![Convert Jupyter Notebook to Python file](images/jupyter/native-toolbar-convert.png)
+![Convert Jupyter Notebook to Python file](images/jupyter/native-toolbar-convert.png)
 
 > **Note:** For PDF export, you must have TeX installed. If you don't, you will be notified that you need to install it when you select the PDF option. Also, be aware that if you have SVG-only output in your Notebook, they will not be displayed in the PDF. To have SVG graphics in a PDF, either ensure that your output includes a non-SVG image format or else you can first export to HTML and then save as PDF using your browser.
 
@@ -102,7 +102,7 @@ When a cell is in command mode, the vertical bar to the left of the cell will be
 
 ![Code cell in command mode](images/jupyter/native-code-cells-09.png)
 
- When you're in edit mode, the vertical bar will have diagonal lines.
+When you're in edit mode, the vertical bar will have diagonal lines.
 
 ![Code cell in edit mode](images/jupyter/native-code-cells-10.png)
 
@@ -114,7 +114,7 @@ Code cells can be added to a Notebook using the main toolbar, a code cell's vert
 
 ![Add code cells](images/jupyter/native-code-cells-07.png)
 
- Using the plus icon in the main toolbar will add a new cell directly below the currently selected cell. Using the add cell icons at the top and bottom of the Jupyter Notebook, will add a code cell at the top and bottom respectively. And using the add icon in the code cell's toolbar, will add a new code cell directly below it.
+Using the plus icon in the main toolbar will add a new cell directly below the currently selected cell. Using the add cell icons at the top and bottom of the Jupyter Notebook, will add a code cell at the top and bottom respectively. And using the add icon in the code cell's toolbar, will add a new code cell directly below it.
 
 When a code cell is in command mode, the `kbstyle(A)` key can be used to add a cell above and the `kbstyle(B)` can be used to add a cell below the selected cell.
 
@@ -128,14 +128,13 @@ Once your code is added, you can run a cell using the green run arrow and the ou
 
 ![Run Jupyter code cell](images/jupyter/native-code-cells-03.png)
 
-You can also use key combos to run a selected code cell. 
+You can also use key combos to run a selected code cell.
 
 - `kbstyle(Ctrl+Enter)` runs the currently selected cell
 - `kbstyle(Shift+Enter)` runs the currently selected cell and, if a cell is not already present, inserts a new cell immediately below (focus moves to the below cell in command mode)
-- `kbstyle(Alt+Enter)` runs the currently selected cell and inserts a new cell immediately below (focus moves to new cell in edit mode). 
+- `kbstyle(Alt+Enter)` runs the currently selected cell and inserts a new cell immediately below (focus moves to new cell in edit mode).
 
 These keyboard combos can be used in both command and edit modes.
-
 
 ### Run multiple code cells
 
@@ -240,8 +239,8 @@ If you need additional debug support in order to diagnose an issue in your code 
 
 1. After saving the .py file, to start the debugger, use one of the following options:
 
-    - For the whole Notebook, open the Command Palette (`kb(workbench.action.showCommands)`) and run the **Jupyter: Debug Current File in Python Interactive Window** command.
-    - For an individual cell, use the **Debug Cell** adornment that appears above the cell. The debugger specifically starts on the code in that cell. By default, **Debug Cell** just steps into user code. If you want to step into non-user code, you need to uncheck **Data Science: Debug Just My Code** in the Python extension settings (`kb(workbench.action.openSettings)`).
+   - For the whole Notebook, open the Command Palette (`kb(workbench.action.showCommands)`) and run the **Jupyter: Debug Current File in Python Interactive Window** command.
+   - For an individual cell, use the **Debug Cell** adornment that appears above the cell. The debugger specifically starts on the code in that cell. By default, **Debug Cell** just steps into user code. If you want to step into non-user code, you need to uncheck **Data Science: Debug Just My Code** in the Python extension settings (`kb(workbench.action.openSettings)`).
 
 1. To familiarize yourself with the general debugging features of VS Code, such as inspecting variables, setting breakpoints, and other activities, review [VS Code debugging](/docs/editor/debugging.md).
 
@@ -258,10 +257,10 @@ To connect to a remote Jupyter server:
 1. Run the **Jupyter: Specify local or remote Jupyter server for connections** command from the Command Palette (`kb(workbench.action.showCommands)`).
 2. When prompted to **Pick how to connect to Jupyter**, select **Existing: Specify the URI of an existing server**.
 
-    ![Choose to connect to an existing server](images/jupyter/connect-to-existing.png)
+   ![Choose to connect to an existing server](images/jupyter/connect-to-existing.png)
 
 3. When prompted to **Enter the URI of a Jupyter server**, provide the server's URI (hostname) with the authentication token included with a `?token=` URL parameter. (If you start the server in the VS Code terminal with an authentication token enabled, the URL with the token typically appears in the terminal output from where you can copy it.) Alternatively, you can specify a username and password after providing the URI.
 
-    ![Prompt to supply a Jupyter server URI](images/jupyter/enter-url-auth-token.png)
+   ![Prompt to supply a Jupyter server URI](images/jupyter/enter-url-auth-token.png)
 
 > **Note:** For added security, Microsoft recommends configuring your Jupyter server with security precautions such as SSL and token support. This helps ensure that requests sent to the Jupyter server are authenticated and connections to the remoter server are encrypted. For guidance about securing a notebook server, see the [Jupyter docs](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html#securing-a-notebook-server).

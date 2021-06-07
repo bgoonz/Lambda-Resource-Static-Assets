@@ -12,8 +12,7 @@ npm restart [-- <args>]
 
 ### Description
 
-This restarts a project.  It is equivalent to running `npm run-script
-restart`.
+This restarts a project. It is equivalent to running `npm run-script restart`.
 
 If the current project has a `"restart"` script specified in
 `package.json`, then the following scripts will be run:
@@ -29,16 +28,16 @@ If it does _not_ have a `"restart"` script specified, but it does have
 2. prestop
 3. stop
 4. poststop
-6. prestart
-7. start
-8. poststart
-9. postrestart
+5. prestart
+6. start
+7. poststart
+8. postrestart
 
 ### See Also
 
-* [npm run-script](/commands/npm-run-script)
-* [npm scripts](/using-npm/scripts)
-* [npm test](/commands/npm-test)
-* [npm start](/commands/npm-start)
-* [npm stop](/commands/npm-stop)
-* [npm restart](/commands/npm-restart)
+- [npm run-script](/commands/npm-run-script)
+- [npm scripts](/using-npm/scripts)
+- [npm test](/commands/npm-test)
+- [npm start](/commands/npm-start)
+- [npm stop](/commands/npm-stop)
+- [npm restart](/commands/npm-restart)

@@ -5,17 +5,18 @@ description: Manage your authentication tokens
 ---
 
 ### Synopsis
+
 ```bash
   npm token list [--json|--parseable]
   npm token create [--read-only] [--cidr=1.1.1.1/24,2.2.2.2/16]
   npm token revoke <id|token>
-  ```
+```
 
 ### Description
 
 This lets you list, create and revoke authentication tokens.
 
-* `npm token list`:
+- `npm token list`:
   Shows a table of all active authentication tokens. You can request
   this as JSON with `--json` or tab-separated values with `--parseable`.
 
@@ -39,7 +40,7 @@ This lets you list, create and revoke authentication tokens.
 +--------+---------+------------+----------+----------------+
 ```
 
-* `npm token create [--read-only] [--cidr=<cidr-ranges>]`:
+- `npm token create [--read-only] [--cidr=<cidr-ranges>]`:
   Create a new authentication token. It can be `--read-only`, or accept
   a list of
   [CIDR](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
@@ -64,10 +65,10 @@ This lets you list, create and revoke authentication tokens.
 +----------------+--------------------------------------+
 ```
 
-* `npm token revoke <token|id>`:
-  Immediately removes an authentication token from the registry.  You
-  will no longer be able to use it.  This can accept both complete
+- `npm token revoke <token|id>`:
+  Immediately removes an authentication token from the registry. You
+  will no longer be able to use it. This can accept both complete
   tokens (such as those you get back from `npm token create`, and those
   found in your `.npmrc`), and ids as seen in the parseable or json
-  output of `npm token list`.  This will NOT accept the truncated token
+  output of `npm token list`. This will NOT accept the truncated token
   found in the normal `npm token list` output.

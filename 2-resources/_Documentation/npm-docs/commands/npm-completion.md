@@ -15,7 +15,7 @@ source <(npm completion)
 Enables tab-completion in all npm commands.
 
 The synopsis above
-loads the completions into your current shell.  Adding it to
+loads the completions into your current shell. Adding it to
 your ~/.bashrc or ~/.zshrc will make the completions available
 everywhere:
 
@@ -25,8 +25,8 @@ npm completion >> ~/.zshrc
 ```
 
 You may of course also pipe the output of `npm completion` to a file
-such as `/usr/local/etc/bash_completion.d/npm` or 
-`/etc/bash_completion.d/npm` if you have a system that will read 
+such as `/usr/local/etc/bash_completion.d/npm` or
+`/etc/bash_completion.d/npm` if you have a system that will read
 that file for you.
 
 When `COMP_CWORD`, `COMP_LINE`, and `COMP_POINT` are defined in the
@@ -35,5 +35,5 @@ completions based on the arguments.
 
 ### See Also
 
-* [npm developers](/using-npm/developers)
-* [npm](/commands/npm)
+- [npm developers](/using-npm/developers)
+- [npm](/commands/npm)

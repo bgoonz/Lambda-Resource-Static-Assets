@@ -62,8 +62,7 @@ Echo the config value(s) to stdout.
 If multiple keys are provided, then the values will be prefixed with the
 key names.
 
-If no keys are provided, then this command behaves the same as `npm config
-list`.
+If no keys are provided, then this command behaves the same as `npm config list`.
 
 #### list
 
@@ -88,13 +87,13 @@ Deletes the specified keys from all configuration files.
 npm config edit
 ```
 
-Opens the config file in an editor.  Use the `--global` flag to edit the
+Opens the config file in an editor. Use the `--global` flag to edit the
 global config.
 
 ### See Also
 
-* [npm folders](/configuring-npm/folders)
-* [npm config](/commands/npm-config)
-* [package.json](/configuring-npm/package-json)
-* [npmrc](/configuring-npm/npmrc)
-* [npm](/commands/npm)
+- [npm folders](/configuring-npm/folders)
+- [npm config](/commands/npm-config)
+- [package.json](/configuring-npm/package-json)
+- [npmrc](/configuring-npm/npmrc)
+- [npm](/commands/npm)

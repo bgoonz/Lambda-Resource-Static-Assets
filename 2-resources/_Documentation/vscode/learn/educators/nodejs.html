@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>nodejs</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="node.js-and-javascript-in-visual-studio-code">Node.js and JavaScript in Visual Studio Code</h1>
+<p>Visual Studio Code is the most popular free code editor among JavaScript developers around the world according to the <a href="https://2020.stateofjs.com/other-tools/#text_editors">State of JS 2020 survey</a>. It is easily customizable and has a rich ecosystem of extensions to help your students learn Node.js and JavaScript.</p>
+<p>Below is a case study of a Computer Science educator in Thailand and includes his recommendations for VS Code extensions and settings in the classroom.</p>
+<h2 id="intro-to-web-development-at-naresuan-university">Intro to Web Development at Naresuan University</h2>
+<p><a href="https://th.linkedin.com/in/ajahncharles">Charles Allen</a> is a lecturer at <a href="https://www.nu.ac.th">Naresuan University</a> in Thailand, where he teaches several Computer Science and Business courses. He teaches a project-based Web Development course, where students build a TypeScript app using the <a href="https://vuejs.org">Vue.js</a> framework and <a href="https://firebase.google.com">Firebase</a> platform.</p>
+<h3 id="why-visual-studio-code">Why Visual Studio Code?</h3>
+<p>Charles has been using Visual Studio Code to teach for the past four years. In his own words:</p>
+<blockquote>
+<p>“The more realistic the learning environment, the more comprehensive the education. I am not just teaching code; I’m also teaching the tools, tactics, and teamwork my students will need to start building for themselves. VS Code is the first choice of web professionals, so it’s the first choice for my class!”</p>
+</blockquote>
+<h3 id="portable-setup">Portable setup</h3>
+<p>VS Code is great for Charles because it has a <a href="/docs/editor/portable.md">portable mode</a>, which stores all of VS Code’s application data in one location. He prepares a single “image”, <a href="https://github.com/AjahnCharles/lab-image-win">available on GitHub</a>, containing his favorite extensions, settings, and cached versions of some libraries. This customized folder structure can be quickly copied to every lab machine without needing to run installers, download additional files, or manually configure each machine.</p>
+<h2 id="classroom-extensions">Classroom extensions</h2>
+<p>The extensions he likes to have installed:</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a> - His favorite! Auto-formatting keeps students focused on program logic and linting helps them quickly find, understand, and fix errors in their JavaScript code.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=TabNine.tabnine-vscode">TabNine</a> - Longer AI-driven code-snippets helps non-native English speakers avoid code-breaking typos and reduces the impact of slow typing.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client">REST Client</a> - Share API designs as <code>.http</code> files and simplify manual API testing within VS Code.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a> - Vue.js framework support for syntax highlighting, code completion, and more! This helps students focus on their Vue.js code rather than getting stuck solving syntactical errors.</li>
+</ul>
+<p>These extensions are also part of the Node.js and JavaScript Education Extension Pack below!</p>
+<h2 id="classroom-settings">Classroom settings</h2>
+<p>And here are his recommended settings, which help his students have consistent formatting of their code to make his life reviewing and grading their work that much easier. You can use his settings by editing the <a href="/docs/getstarted/settings.md">settings file</a> and pasting these in:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="er">//</span> <span class="er">Formatting</span> <span class="er">and</span> <span class="er">linting</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;editor.formatOnPaste&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">&quot;editor.formatOnSave&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="er">//</span> <span class="er">hero!</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">&quot;editor.tabCompletion&quot;</span><span class="fu">:</span> <span class="st">&quot;on&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="dt">&quot;editor.tabSize&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="dt">&quot;eslint.format.enable&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-8" title="8">  <span class="dt">&quot;eslint.workingDirectories&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="fu">{</span> <span class="dt">&quot;mode&quot;</span><span class="fu">:</span> <span class="st">&quot;auto&quot;</span> <span class="fu">}</span><span class="ot">]</span><span class="fu">,</span> <span class="er">//</span> <span class="er">important</span> <span class="er">for</span> <span class="er">mono-repo</span> <span class="er">projects</span></a>
+<a class="sourceLine" id="cb1-9" title="9">  <span class="dt">&quot;files.autoSave&quot;</span><span class="fu">:</span> <span class="st">&quot;onFocusChange&quot;</span><span class="fu">,</span> <span class="er">//</span> <span class="er">hero</span></a>
+<a class="sourceLine" id="cb1-10" title="10">  <span class="dt">&quot;prettier.endOfLine&quot;</span><span class="fu">:</span> <span class="st">&quot;auto&quot;</span><span class="fu">,</span> <span class="er">//</span> <span class="er">cross-platform</span></a>
+<a class="sourceLine" id="cb1-11" title="11">  <span class="dt">&quot;prettier.semi&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span> <span class="er">//</span> <span class="er">align</span> <span class="er">with</span> <span class="er">ESLint</span> <span class="er">Standard</span></a>
+<a class="sourceLine" id="cb1-12" title="12">  <span class="dt">&quot;prettier.singleQuote&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="er">//</span> <span class="er">align</span> <span class="er">with</span> <span class="er">ESLint</span> <span class="er">Standard</span></a>
+<a class="sourceLine" id="cb1-13" title="13">  <span class="dt">&quot;prettier.trailingComma&quot;</span><span class="fu">:</span> <span class="st">&quot;none&quot;</span><span class="fu">,</span> <span class="er">//</span> <span class="er">align</span> <span class="er">with</span> <span class="er">ESLint</span> <span class="er">Standard</span></a>
+<a class="sourceLine" id="cb1-14" title="14">  <span class="dt">&quot;tabnine.experimentalAutoImports&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-15" title="15"></a>
+<a class="sourceLine" id="cb1-16" title="16">  <span class="er">//</span> <span class="er">Language-Specific</span></a>
+<a class="sourceLine" id="cb1-17" title="17">  <span class="dt">&quot;javascript.format.insertSpaceBeforeFunctionParenthesis&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span> <span class="er">//</span> <span class="er">align</span> <span class="er">with</span> <span class="er">ESLint</span> <span class="er">Standard</span></a>
+<a class="sourceLine" id="cb1-18" title="18">  <span class="dt">&quot;javascript.updateImportsOnFileMove.enabled&quot;</span><span class="fu">:</span> <span class="st">&quot;always&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-19" title="19">  <span class="dt">&quot;typescript.format.insertSpaceBeforeFunctionParenthesis&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span> <span class="er">//</span> <span class="er">align</span> <span class="er">with</span> <span class="er">ESLint</span> <span class="er">Standard</span></a>
+<a class="sourceLine" id="cb1-20" title="20">  <span class="dt">&quot;typescript.updateImportsOnFileMove.enabled&quot;</span><span class="fu">:</span> <span class="st">&quot;always&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-21" title="21">  <span class="dt">&quot;[javascript]&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-22" title="22">    <span class="dt">&quot;editor.defaultFormatter&quot;</span><span class="fu">:</span> <span class="st">&quot;dbaeumer.vscode-eslint&quot;</span> <span class="er">//</span> <span class="er">preconfig</span> <span class="er">ESLint</span></a>
+<a class="sourceLine" id="cb1-23" title="23">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-24" title="24">  <span class="dt">&quot;[typescript]&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-25" title="25">    <span class="dt">&quot;editor.defaultFormatter&quot;</span><span class="fu">:</span> <span class="st">&quot;dbaeumer.vscode-eslint&quot;</span> <span class="er">//</span> <span class="er">preconfig</span> <span class="er">ESLint</span></a>
+<a class="sourceLine" id="cb1-26" title="26">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-27" title="27">  <span class="dt">&quot;[json]&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-28" title="28">    <span class="dt">&quot;editor.defaultFormatter&quot;</span><span class="fu">:</span> <span class="st">&quot;esbenp.prettier-vscode&quot;</span></a>
+<a class="sourceLine" id="cb1-29" title="29">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-30" title="30">  <span class="dt">&quot;[jsonc]&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-31" title="31">    <span class="dt">&quot;editor.defaultFormatter&quot;</span><span class="fu">:</span> <span class="st">&quot;esbenp.prettier-vscode&quot;</span></a>
+<a class="sourceLine" id="cb1-32" title="32">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-33" title="33">  <span class="dt">&quot;[html]&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-34" title="34">    <span class="dt">&quot;editor.defaultFormatter&quot;</span><span class="fu">:</span> <span class="st">&quot;esbenp.prettier-vscode&quot;</span></a>
+<a class="sourceLine" id="cb1-35" title="35">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-36" title="36">  <span class="dt">&quot;[css]&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-37" title="37">    <span class="dt">&quot;editor.defaultFormatter&quot;</span><span class="fu">:</span> <span class="st">&quot;esbenp.prettier-vscode&quot;</span></a>
+<a class="sourceLine" id="cb1-38" title="38">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-39" title="39">  <span class="dt">&quot;[scss]&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-40" title="40">    <span class="dt">&quot;editor.defaultFormatter&quot;</span><span class="fu">:</span> <span class="st">&quot;esbenp.prettier-vscode&quot;</span></a>
+<a class="sourceLine" id="cb1-41" title="41">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-42" title="42">  <span class="dt">&quot;[markdown]&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-43" title="43">    <span class="dt">&quot;editor.defaultFormatter&quot;</span><span class="fu">:</span> <span class="st">&quot;esbenp.prettier-vscode&quot;</span></a>
+<a class="sourceLine" id="cb1-44" title="44">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-45" title="45">  <span class="dt">&quot;[vue]&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-46" title="46">    <span class="dt">&quot;editor.defaultFormatter&quot;</span><span class="fu">:</span> <span class="st">&quot;octref.vetur&quot;</span></a>
+<a class="sourceLine" id="cb1-47" title="47">  <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-48" title="48">  <span class="dt">&quot;vetur.format.options.tabSize&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-49" title="49">  <span class="dt">&quot;vetur.format.options.useTabs&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-50" title="50">  <span class="dt">&quot;vetur.format.defaultFormatter.html&quot;</span><span class="fu">:</span> <span class="st">&quot;prettier&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-51" title="51">  <span class="dt">&quot;vetur.format.defaultFormatter.js&quot;</span><span class="fu">:</span> <span class="st">&quot;vscode-typescript&quot;</span><span class="fu">,</span> <span class="er">//</span> <span class="er">for</span> <span class="er">consistency</span> <span class="er">with</span> <span class="er">TS</span> <span class="er">option</span></a>
+<a class="sourceLine" id="cb1-52" title="52">  <span class="dt">&quot;vetur.format.defaultFormatter.ts&quot;</span><span class="fu">:</span> <span class="st">&quot;vscode-typescript&quot;</span></a>
+<a class="sourceLine" id="cb1-53" title="53"><span class="fu">}</span></a></code></pre></div>
+<p>Thank you Charles for sharing your experiences and favorite VS Code settings! If you’re interested in using VS Code for your Node.js web development classes, you can get started with the <a href="https://marketplace.visualstudio.com/items?itemName=tanhakabir.node-js-education-extension-pack">Node.js and JavaScript Education Extension Pack</a> that contains Charles’ favorite extensions, extensions for real-time collaboration, and more!</p>
+<h2 id="node.js-and-javascript-extension-pack">Node.js and JavaScript Extension Pack</h2>
+<p>Unsure which extensions to recommend to your students? You can point your students to the <a href="https://marketplace.visualstudio.com/items?itemName=tanhakabir.node-js-education-extension-pack">Node.js and JavaScript Education Extension Pack</a> that contains essential and helpful extensions for the classroom. You can download the extension pack from the <a href="https://marketplace.visualstudio.com/vscode">VS Code Marketplace</a>:</p>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=tanhakabir.node-js-education-extension-pack"><img src="images/nodejs/node-js-extension-pack.png" alt="Node.js and JavaScript Education Extension Pack" /></a></p>
+<p>The extension pack contains:</p>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=eg2.vscode-npm-script">npm</a> and <a href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense">npm IntelliSense</a> for verifying status of npm packages(installed or not) and auto-completions.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">ESLint</a> and <a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a> for basic JavaScript, TypeScript, and Vue.js functionality like auto-completions, linting, error highlighting before compiling.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack">Live Share</a> to enable real-time collaboration and <a href="https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-audio">Live Share Audio</a> to enable audio calls as well.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">Remote - SSH</a> to work on remote projects (for example, to access lab machines) through SSH with full VS Code functionality.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=humao.rest-client">REST Client</a> to run REST Calls within VS Code for quick manual testing.</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner">Code Runner</a> to run snippets (selected code) and single files of any code with a single click.</li>
+<li>and more!</li>
+</ul>
+<h2 id="free-lesson-build-a-node.js-app-for-azure-cosmos-db">Free lesson: Build a Node.js app for Azure Cosmos DB</h2>
+<p>Build a database app to store and query data in Azure Cosmos DB by using Visual Studio Code and Node.js. View full details of the lessons on <a href="https://docs.microsoft.com/learn/modules/build-node-cosmos-app-vscode">Microsoft Learn: Build a Node.js app for Azure Cosmos DB</a>.</p>
+<p><a href="https://docs.microsoft.com/learn/modules/build-node-cosmos-app-vscode"><img src="images/nodejs/learn-build-node-app.png" alt="Build a Node.js app for Azure Cosmos DB" /></a></p>
+</body>
+</html>

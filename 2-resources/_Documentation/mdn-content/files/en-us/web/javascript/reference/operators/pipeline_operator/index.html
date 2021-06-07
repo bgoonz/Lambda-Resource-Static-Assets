@@ -2,26 +2,30 @@
 title: Pipeline operator (|>)
 slug: Web/JavaScript/Reference/Operators/Pipeline_operator
 tags:
-- Chaining
-- Experimental
-- JavaScript
-- Language feature
-- Operator
-- Pipeline
+  - Chaining
+  - Experimental
+  - JavaScript
+  - Language feature
+  - Operator
+  - Pipeline
 browser-compat: javascript.operators.pipeline
 ---
+
 <div>{{jsSidebar("Operators")}}</div>
 
-<p>The experimental pipeline operator <code>|&gt;</code> (currently at stage 1) pipes the
-  value of an expression into a function. This allows the creation of chained function
-  calls in a readable manner. The result is syntactic sugar in which a function call with
-  a single argument can be written like this:</p>
+<p>
+  The experimental pipeline operator <code>|&gt;</code> (currently at stage 1)
+  pipes the value of an expression into a function. This allows the creation of
+  chained function calls in a readable manner. The result is syntactic sugar in
+  which a function call with a single argument can be written like this:
+</p>
 
 <pre class="brush: js">let url = "%21" |&gt; decodeURI;</pre>
 
 <p>The equivalent call in traditional syntax looks like this:</p>
 
-<pre class="brush: js">let url = decodeURI("%21");
+<pre class="brush: js">
+let url = decodeURI("%21");
 </pre>
 
 <h2 id="Syntax">Syntax</h2>
@@ -29,15 +33,21 @@ browser-compat: javascript.operators.pipeline
 <pre class="brush: js"><var>expression</var> |&gt; <var>function</var>
 </pre>
 
-<p>The value of the specified <code><var>expression</var></code> is passed into the
-  <code><var>function</var></code> as its sole parameter.</p>
+<p>
+  The value of the specified <code><var>expression</var></code> is passed into
+  the <code><var>function</var></code> as its sole parameter.
+</p>
 
 <h3 id="Parameters">Parameters</h3>
 
 <dl>
-  <dt><code><var>expression</var></code></dt>
+  <dt>
+    <code><var>expression</var></code>
+  </dt>
   <dd>Any valid expression.</dd>
-  <dt><code><var>function</var></code></dt>
+  <dt>
+    <code><var>function</var></code>
+  </dt>
   <dd>Any function.</dd>
 </dl>
 
@@ -45,9 +55,12 @@ browser-compat: javascript.operators.pipeline
 
 <h3 id="Chaining_function_calls">Chaining function calls</h3>
 
-<p>The pipeline operator can improve readability when chaining several functions.</p>
+<p>
+  The pipeline operator can improve readability when chaining several functions.
+</p>
 
-<pre class="brush: js">const double = (n) =&gt; n * 2;
+<pre class="brush: js">
+const double = (n) =&gt; n * 2;
 const increment = (n) =&gt; n + 1;
 
 // without pipeline operator
@@ -68,7 +81,10 @@ double(increment(double(double(5)))); // 42
 <h2 id="See_also">See also</h2>
 
 <ul>
-  <li><a href="https://github.com/tc39/proposal-pipeline-operator">Github -
-      Proposal-pipeline-operator</a></li>
+  <li>
+    <a href="https://github.com/tc39/proposal-pipeline-operator"
+      >Github - Proposal-pipeline-operator</a
+    >
+  </li>
   <li><a href="https://github.com/tc39/proposals">TC39 proposals</a></li>
 </ul>

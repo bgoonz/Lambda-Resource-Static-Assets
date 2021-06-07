@@ -7,13 +7,14 @@ PageTitle: Code Navigation in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Visual Studio Code is a first class editor - but it's also so much more with features such as IntelliSense and smart code navigation.
 ---
+
 # Code Navigation
 
 Visual Studio Code has a high productivity code editor which, when combined with programming language services, gives you the power of an IDE and the speed of a text editor. In this topic, we'll first describe VS Code's language intelligence features (suggestions, parameter hints, smart code navigation) and then show the power of the core text editor.
 
 ## Quick file navigation
 
->**Tip:** You can open any file by its name when you type `kb(workbench.action.quickOpen)` (**Quick Open**).
+> **Tip:** You can open any file by its name when you type `kb(workbench.action.quickOpen)` (**Quick Open**).
 
 The Explorer is great for navigating between files when you are exploring a project. However, when you are working on a task, you will find yourself quickly jumping between the same set of files. VS Code provides two powerful commands to navigate in and across files with easy-to-use key bindings.
 
@@ -25,7 +26,7 @@ Alternatively, you can use `kb(workbench.action.navigateBack)` and `kb(workbench
 
 ## Breadcrumbs
 
-The editor has a navigation bar above its contents called [Breadcrumbs](https://en.wikipedia.org/wiki/Breadcrumb_(navigation)). It shows the current location and allows you to quickly navigate between folders, files, and symbols.
+The editor has a navigation bar above its contents called [Breadcrumbs](<https://en.wikipedia.org/wiki/Breadcrumb_(navigation)>). It shows the current location and allows you to quickly navigate between folders, files, and symbols.
 
 ![Breadcrumbs](images/editingevolved/breadcrumbs.png)
 
@@ -51,9 +52,9 @@ You can control how symbols are ordered in the Breadcrumbs dropdown with the `br
 
 Allowed values are:
 
-* `position` - position in the file (default)
-* `name` - alphabetical order
-* `type` - symbol type order
+- `position` - position in the file (default)
+- `name` - alphabetical order
+- `type` - symbol type order
 
 ### Breadcrumb keyboard navigation
 
@@ -129,9 +130,9 @@ Some languages support rename symbol across files. Press `kb(editor.action.renam
 
 Warnings or Errors can be generated either via [configured tasks](/docs/editor/tasks.md), by rich language services, or by linters, that constantly analyze your code in the background. Since we love bug-free code, warnings and errors show up in multiple places:
 
-* In the Status Bar, there is a summary of all errors and warnings counts.
-* You can click on the summary or press `kb(workbench.actions.view.problems)` to display the **PROBLEMS** panel with a list of all current errors.
-* If you open a file that has errors or warnings, they will be rendered inline with the text and in the overview ruler.
+- In the Status Bar, there is a summary of all errors and warnings counts.
+- You can click on the summary or press `kb(workbench.actions.view.problems)` to display the **PROBLEMS** panel with a list of all current errors.
+- If you open a file that has errors or warnings, they will be rendered inline with the text and in the overview ruler.
 
 ![errors in problems panel](images/editingevolved/errors.png)
 
@@ -158,9 +159,7 @@ The option to **Manage Trusted Domains**, also available at any time from the Co
 ```jsonc
 // You can use the "Manage Trusted Domains" command to open this file.
 // Save this file to apply the trusted domains rules.
-[
-  "*.twitter.com"
-]
+["*.twitter.com"]
 ```
 
 The **Trusted Domains** JSON file also has comments with examples of the supported domain formats and a list of the domains trusted by default, such as `https://*.visualstudio.com` and `https://*.microsoft.com`.
@@ -169,10 +168,10 @@ The **Trusted Domains** JSON file also has comments with examples of the support
 
 Now that you know how the editor works, time to try a few other things...
 
-* [Intro Video - Code Editing](/docs/introvideos/codeediting.md) - Watch an introductory video on code editing features.
-* [User Interface](/docs/getstarted/userinterface.md) - In case you missed a basic orientation around VS Code.
-* [Key Bindings](/docs/getstarted/keybindings.md) - Learn how to modify key bindings to your preference.
-* [Debugging](/docs/editor/debugging.md) - This is where VS Code really shines.
+- [Intro Video - Code Editing](/docs/introvideos/codeediting.md) - Watch an introductory video on code editing features.
+- [User Interface](/docs/getstarted/userinterface.md) - In case you missed a basic orientation around VS Code.
+- [Key Bindings](/docs/getstarted/keybindings.md) - Learn how to modify key bindings to your preference.
+- [Debugging](/docs/editor/debugging.md) - This is where VS Code really shines.
 
 ## Common questions
 
@@ -182,14 +181,14 @@ With the command `workbench.action.quickOpenPreviousEditor`, you can have the se
 
 ```json
 [
-    {
-        "key": "ctrl+p",
-        "command": "workbench.action.quickOpenPreviousEditor"
-    },
-    {
-        "key": "ctrl+p",
-        "command": "-workbench.action.quickOpen"
-    }
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpenPreviousEditor"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "-workbench.action.quickOpen"
+  }
 ]
 ```
 
@@ -199,16 +198,16 @@ By default, `kbstyle(Ctrl+Tab)` navigates between editors of the same editor gro
 
 ```json
 [
-    {
-        "key": "ctrl+tab",
-        "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor",
-        "when": "!inEditorsPicker"
-    },
-    {
-        "key": "ctrl+shift+tab",
-        "command": "workbench.action.quickOpenLeastRecentlyUsedEditor",
-        "when": "!inEditorsPicker"
-    }
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor",
+    "when": "!inEditorsPicker"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.quickOpenLeastRecentlyUsedEditor",
+    "when": "!inEditorsPicker"
+  }
 ]
 ```
 
@@ -216,9 +215,9 @@ By default, `kbstyle(Ctrl+Tab)` navigates between editors of the same editor gro
 
 Here is a list of commands you can use to navigate in editors without opening a picker:
 
-Key|Command|Command ID
----|-------|----------
-`kb(workbench.action.openNextRecentlyUsedEditor)`|Open Next Recently Used Editor|`workbench.action.openNextRecentlyUsedEditor`
-`kb(workbench.action.openPreviousRecentlyUsedEditor)`|Open Previously Used Editor|`workbench.action.openPreviousRecentlyUsedEditor`
-`kb(workbench.action.openNextRecentlyUsedEditorInGroup)`|Open Next Recently Used Editor in Group|`workbench.action.openNextRecentlyUsedEditorInGroup`
-`kb(workbench.action.openPreviousRecentlyUsedEditorInGroup)`|Open Previously Used Editor in Group|`workbench.action.openPreviousRecentlyUsedEditorInGroup`
+| Key                                                          | Command                                 | Command ID                                               |
+| ------------------------------------------------------------ | --------------------------------------- | -------------------------------------------------------- |
+| `kb(workbench.action.openNextRecentlyUsedEditor)`            | Open Next Recently Used Editor          | `workbench.action.openNextRecentlyUsedEditor`            |
+| `kb(workbench.action.openPreviousRecentlyUsedEditor)`        | Open Previously Used Editor             | `workbench.action.openPreviousRecentlyUsedEditor`        |
+| `kb(workbench.action.openNextRecentlyUsedEditorInGroup)`     | Open Next Recently Used Editor in Group | `workbench.action.openNextRecentlyUsedEditorInGroup`     |
+| `kb(workbench.action.openPreviousRecentlyUsedEditorInGroup)` | Open Previously Used Editor in Group    | `workbench.action.openPreviousRecentlyUsedEditorInGroup` |

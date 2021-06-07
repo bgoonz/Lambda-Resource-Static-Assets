@@ -5,16 +5,16 @@ description: Set tasks in the scripts section of package.json
 ---
 
 ### Synopsis
+
 An npm command that lets you create a task in the scripts section of the package.json.
 
 ```bash
 npm set-script [<script>] [<command>]
 ```
 
-
 **Example:**
 
-* `npm set-script start "http-server ."`
+- `npm set-script start "http-server ."`
 
 ```json
 {
@@ -28,7 +28,7 @@ npm set-script [<script>] [<command>]
 
 ### See Also
 
-* [npm run-script](/commands/npm-run-script)
-* [npm install](/commands/npm-install)
-* [npm test](/commands/npm-test)
-* [npm start](/commands/npm-start)
+- [npm run-script](/commands/npm-run-script)
+- [npm install](/commands/npm-install)
+- [npm test](/commands/npm-test)
+- [npm start](/commands/npm-start)

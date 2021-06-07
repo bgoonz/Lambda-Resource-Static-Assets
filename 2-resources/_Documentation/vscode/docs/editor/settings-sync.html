@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>settings-sync</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="settings-sync">Settings Sync</h1>
+<p>Settings Sync lets you share your Visual Studio Code configurations such as settings, keybindings, and installed extensions across your machines so you are always working with your favorite setup.</p>
+<blockquote>
+<p><strong>Note</strong>: Settings Sync is still in preview.</p>
+</blockquote>
+<h2 id="turning-on-settings-sync">Turning on Settings Sync</h2>
+<p>You can turn on Settings Sync using the <strong>Turn On Settings Sync…</strong> entry in the <strong>Manage</strong> gear menu at the bottom of the Activity Bar.</p>
+<figure>
+<img src="images/settings-sync/turn-on-sync.png" alt="Turn on Sync command" /><figcaption>Turn on Sync command</figcaption>
+</figure>
+<p>You will be asked to sign in and what preferences you would like to sync; currently Settings, Keyboard Shortcuts, Extensions, User Snippets, and UI State are supported.</p>
+<figure>
+<img src="images/settings-sync/sync-configure.png" alt="Settings Sync configure dialog" /><figcaption>Settings Sync configure dialog</figcaption>
+</figure>
+<p>Selecting the <strong>Sign in &amp; Turn on</strong> button will ask you to choose between signing in with your Microsoft or GitHub account.</p>
+<figure>
+<img src="images/settings-sync/sync-accounts.png" alt="Settings Sync configure dialog" /><figcaption>Settings Sync configure dialog</figcaption>
+</figure>
+<p>After making this selection, the browser will open so that you can sign in to your Microsoft or GitHub account. When a Microsoft account is chosen, you can use either personal accounts, such as Outlook accounts, or Azure accounts, and you can also link a GitHub account to a new or existing Microsoft account.</p>
+<p>After signing in, Settings Sync will be turned on and continue to synchronize your preferences automatically in the background.</p>
+<h2 id="merge-or-replace">Merge or Replace</h2>
+<p>If you already synced from a machine and turning on sync from another machine, you will be shown with following <strong>Merge or Replace</strong> dialog.</p>
+<figure>
+<img src="images/settings-sync/sync-merge-replace.png" alt="Settings Sync Merge or Replace dialog" /><figcaption>Settings Sync Merge or Replace dialog</figcaption>
+</figure>
+<ul>
+<li><strong>Merge</strong>: Selecting this option will merge <strong>local</strong> settings with <strong>remote</strong> settings from the cloud.</li>
+<li><strong>Replace Local</strong>: Selecting this option will overwrite <strong>local</strong> settings with remote settings from the cloud.</li>
+<li><strong>Merge Manually…</strong>: Selecting this option will open <strong>Merges</strong> view where you can merge preferences one by one.</li>
+</ul>
+<figure>
+<img src="images/settings-sync/sync-merges-view.png" alt="Settings Sync Merges" /><figcaption>Settings Sync Merges</figcaption>
+</figure>
+<h2 id="configuring-synced-data">Configuring synced data</h2>
+<p>Machine settings (with <code>machine</code> or <code>machine-overridable</code> <a href="/updates/v1_34.md#machinespecific-settings">scopes</a>) are not synchronized by default, since their values are specific to a given machine. You can also add or remove settings you want to this list from the Settings editor or using the setting <code>settingsSync.ignoredSettings</code>.</p>
+<figure>
+<img src="images/settings-sync/sync-ignored-settings.png" alt="Settings Sync ignored settings" /><figcaption>Settings Sync ignored settings</figcaption>
+</figure>
+<p>Keyboard Shortcuts are synchronized per platform by default. If your keyboard shortcuts are platform-agnostic, you can synchronize them across platforms by disabling the setting <code>settingsSync.keybindingsPerPlatform</code>.</p>
+<p>All built-in and installed extensions are synchronized along with their global enablement state. You can skip synchronizing an extension, either from the Extensions view (<code>kb(workbench.view.extensions)</code>) or using the setting <code>settingsSync.ignoredExtensions</code>.</p>
+<figure>
+<img src="images/settings-sync/sync-ignored-extensions.png" alt="Settings Sync ignored settings" /><figcaption>Settings Sync ignored settings</figcaption>
+</figure>
+<p>Following UI State is synchronized currently:</p>
+<ul>
+<li>Display Language</li>
+<li>Activity Bar entries</li>
+<li>Panel entries</li>
+<li>Views layout and visibility</li>
+<li>Recently used commands</li>
+<li>Do not show again notifications</li>
+</ul>
+<p>You can always change what is synced via the <strong>Settings Sync: Configure</strong> command or by opening the <strong>Manage</strong> gear menu, selecting <strong>Settings Sync is On</strong>, and then <strong>Settings Sync: Configure</strong>.</p>
+<h2 id="conflicts">Conflicts</h2>
+<p>When synchronizing settings between multiple machines, there may occasionally be conflicts. Conflicts can happen when first setting up sync between machines or when settings change while a machine is offline. When conflicts occur, you will be presented with the following options:</p>
+<ul>
+<li><strong>Accept Local</strong>: Selecting this option will overwrite <strong>remote</strong> settings in the cloud with your local settings.</li>
+<li><strong>Accept Remote</strong>: Selecting this option will overwrite <strong>local</strong> settings with remote settings from the cloud.</li>
+<li><strong>Show Conflicts</strong>: Selecting this will display a diff editor similar to the Source Control diff editor, where you can preview the local and remote settings and choose to either accept local or remote or manually resolve the changes in your local settings file and then accept the local file.</li>
+</ul>
+<h2 id="switching-accounts">Switching Accounts</h2>
+<p>If at any time you want to sync your data to a different account, you can turn off and turn on Settings Sync again with different account.</p>
+<h2 id="syncing-stable-versus-insiders">Syncing Stable versus Insiders</h2>
+<p>By default, the VS Code Stable and <a href="/insiders">Insiders</a> builds use different Settings Sync services, and therefore do not share settings. You can sync your Insiders with Stable by selecting the Stable sync service while turning on Settings Sync. This option is only available in VS Code Insiders.</p>
+<figure>
+<img src="images/settings-sync/settings-sync-switch.png" alt="Settings Sync Switch Service" /><figcaption>Settings Sync Switch Service</figcaption>
+</figure>
+<p><strong>Note:</strong> Since Insiders builds are newer than Stable builds, syncing them can sometimes lead to data incompatibility. In such cases, Settings sync will be disabled automatically on stable to prevent data inconsistencies. Once newer version of Stable build is released, you can upgrade your stable client and turn on sync to continue syncing.</p>
+<h2 id="restoring-data">Restoring data</h2>
+<p>VS Code always stores local and remote backups of your preferences while syncing and provides views for accessing these. In case something goes wrong, you can restore your data from these views.</p>
+<figure>
+<img src="images/settings-sync/sync-backup-views.png" alt="Settings Sync backup views" /><figcaption>Settings Sync backup views</figcaption>
+</figure>
+<p>You can open these views using <strong>Settings Sync: Show Synced Data</strong> command from the Command Palette. The Local Sync activity view is hidden by default and you can enable it using <strong>Views</strong> submenu under <strong>Settings Sync</strong> view overflow actions.</p>
+<figure>
+<img src="images/settings-sync/sync-enable-local-activity-view.png" alt="Settings Sync enable local backup views" /><figcaption>Settings Sync enable local backup views</figcaption>
+</figure>
+<p>Local backups folder in the disk can be accessed via the <strong>Settings Sync: Open Local Backups Folder</strong> command. The folder is organized by the type of preference and contains versions of your JSON files, named with a timestamp of when the backup occurred.</p>
+<blockquote>
+<p><strong>Note</strong>: Local backups are automatically deleted after 30 days. For remote backups the latest 20 versions of each individual resource (settings, extensions, etc.) is retained.</p>
+</blockquote>
+<h2 id="synced-machines">Synced Machines</h2>
+<p>VS Code keeps track of the machines synchronizing your preferences and provides a view to access them. Every machine is given a default name based on the type of VS Code (Insiders or Stable) and the platform it is on. You can always update the machine name using the edit action available on the machine entry in the view. You can also disable sync on another machine using <strong>Turn off Settings Sync</strong> context menu action on the machine entry in the view.</p>
+<figure>
+<img src="images/settings-sync/sync-machines-view.png" alt="Settings Sync machines views" /><figcaption>Settings Sync machines views</figcaption>
+</figure>
+<p>You can open this view using <strong>Settings Sync: Show Synced Data</strong> command from the Command Palette.</p>
+<h2 id="reporting-issues">Reporting issues</h2>
+<p>Settings Sync activity can be monitored in the <strong>Log (Settings Sync)</strong> output view. If you experience a problem with Settings Sync, include this log when creating the issue. If your problem is related to authentication, also include the log from the <strong>Account</strong> output view.</p>
+<h2 id="how-do-i-delete-my-data">How do I delete my data?</h2>
+<p>If you want to remove all your data from our servers, just turn off sync via <strong>Settings Sync is On</strong> menu available under <strong>Manage</strong> gear menu and select the checkbox to clear all cloud data. If you choose to re-enable sync, it will be as if you’re signing in for the first time.</p>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="/docs/getstarted/settings.md">User and Workspace settings</a> - Learn how to configure VS Code to your preferences through user and workspace settings.</li>
+</ul>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="is-vs-code-settings-sync-the-same-as-the-settings-sync-extension">Is VS Code Settings Sync the same as the Settings Sync extension?</h3>
+<p>No, the <a href="https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync">Settings Sync</a> extension by <a href="https://marketplace.visualstudio.com/publishers/Shan">Shan Khan</a> uses a private Gist on GitHub to share your VS Code settings across different machines and is unrelated to the VS Code Settings Sync.</p>
+<h3 id="what-types-of-accounts-can-i-use-for-settings-sync-sign-in">What types of accounts can I use for Settings Sync sign in?</h3>
+<p>VS Code Settings Sync supports signing in with either a Microsoft account (for example Outlook or Azure accounts) or a GitHub account. Sign in with GitHub Enterprise accounts is not supported. Other authentication providers may be supported in the future and you can review the proposed Authentication Provider API in <a href="https://github.com/microsoft/vscode/issues/88309">issue #88309</a>.</p>
+<h3 id="can-i-use-a-different-backend-or-service-for-settings-sync">Can I use a different backend or service for Settings Sync?</h3>
+<p>Settings Sync uses a dedicated service to store settings and coordinate updates. A service provider API may be exposed in the future to allow for custom Settings Sync backends.</p>
+<h2 id="troubleshooting-keychain-issues">Troubleshooting keychain issues</h2>
+<p>Settings Sync persists authentication information to the system keychain. Writing to the keychain can fail in some cases if the keychain is misconfigured.</p>
+<h3 id="macos">macOS</h3>
+<p>If the keychain throws the error “The user name or passphrase you entered is not correct.”, open the Keychain Access app, right-click on the <code>login</code> keychain, and lock and unlock it again. This error was first reported in <a href="https://github.com/atom/node-keytar/issues/76">issue #76</a> as a problem after upgrading to macOS High Sierra, but it has also been reported on more recent macOS versions.</p>
+<h3 id="linux">Linux</h3>
+<p>If the keychain throws the error “No such interface”org.freedesktop.Secret.Collection" on object at path /org/freedesktop/secrets/collection/login", try following the steps described in <a href="https://github.com/microsoft/vscode/issues/92972#issuecomment-625751232">issue #92972</a> to create a new keyring.</p>
+<h2 id="can-i-share-settings-between-vs-code-stable-and-insiders">Can I share settings between VS Code Stable and Insiders?</h2>
+<p>Yes. Please refer to the <a href="#syncing-stable-versus-insiders">Syncing Stable versus Insiders</a> section for more information.</p>
+<p>Please note that this can sometimes lead to data incompatibility because Insiders builds are newer than Stable builds. In such cases, Settings Sync will be disabled automatically on Stable to prevent data inconsistencies. Once a newer version of the Stable build is released, you can upgrade your client and turn on Settings Sync to continue syncing.</p>
+</body>
+</html>

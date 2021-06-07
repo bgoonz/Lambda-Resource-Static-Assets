@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>cmake-linux</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="get-started-with-cmake-tools-on-linux">Get started with CMake Tools on Linux</h1>
+<p>CMake is an open-source, cross-platform tool that uses compiler and platform independent configuration files to generate native build tool files specific to your compiler and platform.</p>
+<p>The CMake Tools extension integrates Visual Studio Code and CMake to make it easy to configure, build, and debug your C++ project.</p>
+<p>In this tutorial, you’ll use the CMake Tools extension for Visual Studio Code to configure, build, and debug a simple C++ CMake project on Linux. Aside from installing CMake, your compiler, debugger, and build tools, the steps in this tutorial apply generally to how you’d use CMake on other platforms, like Windows.</p>
+<p>If you have any trouble, please file an issue for this tutorial in the <a href="https://github.com/microsoft/vscode-docs/issues">VS Code documentation repository</a>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>To complete this tutorial on Ubuntu, install the following:</p>
+<ol type="1">
+<li><a href="/download">Visual Studio Code</a>.</li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">C++ extension for VS Code</a>. Install the C/C++ extension by searching for ‘c++’ in the <strong>Extensions</strong> view (<code>kb(workbench.view.extensions)</code>).</p>
+<figure>
+<img src="images/cpp/cpp-extension.png" alt="C/C++ extension" /><figcaption>C/C++ extension</figcaption>
+</figure></li>
+<li><p><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools">CMake Tools extension for VS Code</a>. Install the CMake Tools extension by searching for ‘CMake tools’ in the <strong>Extensions</strong> view (<code>kb(workbench.view.extensions)</code>).</p>
+<figure>
+<img src="images/cpp/cmake-extension.png" alt="CMake tools extension" /><figcaption>CMake tools extension</figcaption>
+</figure></li>
+<li><p>You’ll also need to install CMake, a compiler, a debugger, and build tools.</p></li>
+</ol>
+<h3 id="ensure-that-cmake-is-installed">Ensure that CMake is installed</h3>
+<p>The VS Code CMake Tools extension does its work by using CMake installed on your system. For best results, use CMake version 3.15 or greater.</p>
+<p>See if CMake is already installed on your system. Open a Terminal window and enter the following command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">cmake</span> --version</a></code></pre></div>
+<p>To install CMake, or to get a later version if you don’t at least have version 3.15, see the instructions for your platform at <a href="https://apt.kitware.com/">Kitware APT Repository</a>. Install version 3.15 or greater.</p>
+<h3 id="ensure-that-development-tools-are-installed">Ensure that development tools are installed</h3>
+<p>Although you’ll use VS Code to edit your source code, you’ll compile and debug the source code using the compiler, debugger, and build tools (such as <code>make</code>) installed on your system.</p>
+<p>For this tutorial on Ubuntu, we’ll use the GCC compiler, GDB to debug, and <code>make</code> to build the project. These tools are not installed by default on Ubuntu, so you need to install them. Fortunately, that’s easy.</p>
+<h3 id="check-if-gcc-is-installed">Check if GCC is installed</h3>
+<p>To see if GCC is already installed on your system, open a Terminal window and enter the following command:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">gcc</span> -v</a></code></pre></div>
+<p>If GCC isn’t installed, run the following command from the Terminal window to update the Ubuntu package lists. An out-of-date Linux distribution can interfere with getting the latest packages.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">sudo</span> apt-get update</a></code></pre></div>
+<p>Next, install the GNU compiler, <code>make</code>, and the GDB debugger with this command:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">sudo</span> apt-get install build-essential gdb</a></code></pre></div>
+<h2 id="create-a-cmake-project">Create a CMake project</h2>
+<p>If you have an existing CMake project that already has a <code>CMakeLists.txt</code> file in the root directory, you can skip to <a href="#select-a-kit">Select a kit</a> to configure your existing project.</p>
+<p>Otherwise, create a folder for a new project. From the Terminal window, create an empty folder called <code>cmakeQuickStart</code>, navigate into it, and open VS Code in that folder by entering the following commands:</p>
+<pre class="cmd"><code>mkdir cmakeQuickStart
+cd cmakeQuickStart
+code .</code></pre>
+<p>The <code>code .</code> command opens VS Code in the current working folder, which becomes your “workspace”.</p>
+<h3 id="create-a-cmake-hello-world-project">Create a CMake hello world project</h3>
+<p>The CMake Tools extension can create the files for a basic CMake project for you. Open the Command Palette (<code>kb(workbench.action.showCommands)</code>) and run the <strong>CMake: Quick Start</strong> command:</p>
+<figure>
+<img src="images/cpp/cmake-quickstart-command-palette.png" alt="Create CMake quickstart" /><figcaption>Create CMake quickstart</figcaption>
+</figure>
+<p>Enter a project name. This will be written to <code>CMakeLists.txt</code> and a few initial source files.</p>
+<p>Next, select <strong>Executable</strong> as the project type to create a basic source file (<code>main.cpp</code>) that includes a basic <code>main()</code> function.</p>
+<figure>
+<img src="images/cpp/cmake-choose-type.png" alt="Choose project type" /><figcaption>Choose project type</figcaption>
+</figure>
+<p><strong>Note:</strong> If you had wanted to create a basic source and header file, you would have selected <strong>Library</strong> instead. But for this tutorial, <strong>Executable</strong> will do. If you are prompted to configure IntelliSense for the folder, select <strong>Allow</strong>.</p>
+<p>This creates a hello world CMake project containing <code>main.cpp</code>, <code>CMakeLists.txt</code> (which tells the CMake tools how to build your project), and a folder named <code>build</code> for your build files:</p>
+<figure>
+<img src="images/cpp/cmake-project-contents.png" alt="Project contents" /><figcaption>Project contents</figcaption>
+</figure>
+<h3 id="select-a-kit">Select a kit</h3>
+<p>Before you can use the CMake Tools extension to build a project, you need to configure it to know about the compilers on your system. Do that by scanning for ‘kits’. A kit represents a toolchain, which is the compiler, linker, and other tools used to build your project. To scan for kits:</p>
+<ol type="1">
+<li><p>Open the Command Palette (<code>kb(workbench.action.showCommands)</code>) and run <strong>CMake: Select a Kit</strong>. The extension will automatically scan for kits on your computer and create a list of compilers found on your system.</p></li>
+<li><p>Select the compiler you want to use. For example, depending on the compilers you have installed, you might see something like:</p>
+<figure>
+<img src="images/cpp/cmake-selectkit.png" alt="Select the kit" /><figcaption>Select the kit</figcaption>
+</figure></li>
+</ol>
+<h2 id="configure-hello-world">Configure Hello World</h2>
+<p>There are two things you must do to configure your CMake project: select a kit (which you just did) and select a variant.</p>
+<p>The kit you selected previously is shown in the Status bar. For example:</p>
+<figure>
+<img src="images/cpp/cmake-kit-statusbar.png" alt="Selected kit in Status bar" /><figcaption>Selected kit in Status bar</figcaption>
+</figure>
+<p>To change the kit, you can click on the kit in the Status bar, or run the <strong>CMake: Select a kit</strong> command again from the Command Palette. If you don’t see the compiler you’re looking for, you can edit the <code>cmake-tools-kits.json</code> file in your project. To edit the file, open the Command Palette (<code>kb(workbench.action.showCommands)</code>) and run the <strong>CMake: Edit User-Local CMake Kits</strong> command.</p>
+<h3 id="select-a-variant">Select a variant</h3>
+<p>A variant contains instructions for how to build your project. By default, the CMake Tools extension provides four variants, each corresponding to a default build type: <code>Debug</code>, <code>Release</code>, <code>MinRelSize</code>, and <code>RelWithDebInfo</code>. These options do the following:</p>
+<p><code>Debug</code>: disables optimizations and includes debug info. <code>Release</code> : Includes optimizations but no debug info. <code>MinRelSize</code> : Optimizes for size. No debug info. <code>RelWithDebInfo</code> : Optimizes for speed and includes debug info.</p>
+<p>To select a variant, open the Command Palette (<code>kb(workbench.action.showCommands)</code>) run the <strong>CMake: Select Variant</strong> command.</p>
+<figure>
+<img src="images/cpp/cmake-select-variant.png" alt="Select variant" /><figcaption>Select variant</figcaption>
+</figure>
+<p>Select <strong>Debug</strong> to include debug information with your build.</p>
+<figure>
+<img src="images/cpp/cmake-variant-type.png" alt="Select debug variant type" /><figcaption>Select debug variant type</figcaption>
+</figure>
+<p>The selected variant will appear in the Status bar next to the active kit.</p>
+<h3 id="cmake-configure">CMake: Configure</h3>
+<p>Now that you’ve selected a kit and a variant, open the Command Palette (<code>kb(workbench.action.showCommands)</code>) and run the <strong>CMake: Configure</strong> command to configure your project. This generates build files in the project’s build folder using the kit and variant you selected.</p>
+<h2 id="build-hello-world">Build hello world</h2>
+<p>After configuring your project, you’re ready to build. Open the Command Palette (<code>kb(workbench.action.showCommands)</code>) and run the <strong>CMake: Build</strong> command, or select the <strong>Build</strong> button from the Status bar.</p>
+<figure>
+<img src="images/cpp/cmake-build.png" alt="Build" /><figcaption>Build</figcaption>
+</figure>
+<p>You can select which targets you’d like to build by selecting <strong>CMake: Set Build Target</strong> from the Command Palette. By default, CMake Tools builds all targets. The selected target will appear in the Status bar next to the <strong>Build</strong> button.</p>
+<h2 id="debug-hello-world">Debug hello world</h2>
+<p>To run and debug your project, open <code>main.cpp</code> and put a breakpoint on the <code>std::cout</code> line. Then open the Command Palette (<code>kb(workbench.action.showCommands)</code>) and run <strong>CMake: Debug</strong>. The debugger will stop on the <code>std::cout</code> line:</p>
+<figure>
+<img src="images/cpp/cmake-debug.png" alt="Debug" /><figcaption>Debug</figcaption>
+</figure>
+<p>Go ahead and press <code>kb(workbench.action.debug.start)</code> to continue.</p>
+<p>You’ve now used the VS Code CMake Tools extension to use CMake to build and debug a C++ app on Ubuntu. The steps are the same for other platforms; the difference being how you install CMake and the compiler/debugger for the platform of your choice. For instructions on setting up compilers/debuggers for other platforms, see the following:</p>
+<ul>
+<li><a href="/docs/cpp/config-msvc.md">Microsoft C++ on Windows</a></li>
+<li><a href="/docs/cpp/config-clang-mac.md">Clang on macOS</a></li>
+<li><a href="/docs/cpp/config-wsl.md">GCC on Windows Subsystem for Linux</a></li>
+</ul>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li>Explore the <a href="https://github.com/microsoft/vscode-cmake-tools/blob/develop/docs/README.md">CMake Tools</a> documentation</li>
+<li>Review the <a href="/docs/languages/cpp.md">Overview of the C++ extension</a></li>
+</ul>
+</body>
+</html>

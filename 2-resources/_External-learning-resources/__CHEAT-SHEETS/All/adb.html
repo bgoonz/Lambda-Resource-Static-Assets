@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="./prism.css">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./prism.css" />
     <script async defer src="./prism.js"></script>
   </head>
 
-  <body>;
+  <body>
+    ;
     <h3 id="device-basics">Device Basics</h3>
     <table>
       <thead>
@@ -63,9 +67,14 @@
         </tr>
       </tbody>
     </table>
-    <p><code>wait-for-device</code> can be specified after <code>adb</code> to ensure that the command will run once the
-      device is connected.</p>
-    <p><code>-s</code> can be used to send the commands to a specific device when multiple are connected.</p>
+    <p>
+      <code>wait-for-device</code> can be specified after <code>adb</code> to
+      ensure that the command will run once the device is connected.
+    </p>
+    <p>
+      <code>-s</code> can be used to send the commands to a specific device when
+      multiple are connected.
+    </p>
     <h4 id="examples">Examples</h4>
     <pre><code>$ adb wait-for-device devices
  List of devices attached
@@ -148,7 +157,9 @@ $ adb pull /sdcard/test.txt pulledTest.txt</code></pre>
       <tbody>
         <tr class="odd">
           <td><code>adb shell &lt;command&gt;</code></td>
-          <td>Runs the specified command on device (most unix commands work here)</td>
+          <td>
+            Runs the specified command on device (most unix commands work here)
+          </td>
         </tr>
         <tr class="even">
           <td><code>adb shell wm size</code></td>
@@ -173,5 +184,4 @@ $ adb pull /sdcard/test.txt pulledTest.txt</code></pre>
       </tbody>
     </table>
   </body>
-
 </html>

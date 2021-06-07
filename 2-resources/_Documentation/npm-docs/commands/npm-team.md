@@ -30,7 +30,7 @@ If you have two-factor authentication enabled in `auth-and-writes` mode, then
 you can provide a code from your authenticator with `[--otp <otpcode>]`.
 If you don't include this then you will be prompted.
 
-* create / destroy:
+- create / destroy:
   Create a new team, or destroy an existing one. Note: You cannot remove the
   `developers` team, <a href="https://docs.npmjs.com/about-developers-team" target="_blank">learn more.</a>
 
@@ -43,7 +43,7 @@ If you don't include this then you will be prompted.
   You should see a confirming message such as: `+@org:newteam` once the new
   team has been created.
 
-* add:
+- add:
   Add a user to an existing team.
 
   Adding a new user `username` to a team named `newteam` under the `org` org:
@@ -54,7 +54,7 @@ If you don't include this then you will be prompted.
 
   On success, you should see a message: `username added to @org:newteam`
 
-* rm:
+- rm:
   Using `npm team rm` you can also remove users from a team they belong to.
 
   Here's an example removing user `username` from `newteam` team
@@ -67,7 +67,7 @@ If you don't include this then you will be prompted.
   Once the user is removed a confirmation message is displayed:
   `username removed from @org:newteam`
 
-* ls:
+- ls:
   If performed on an organization name, will return a list of existing teams
   under that organization. If performed on a team, it will instead return a list
   of all users belonging to that particular team.
@@ -89,11 +89,11 @@ If you don't include this then you will be prompted.
 `npm team` always operates directly on the current registry, configurable from
 the command line using `--registry=<registry url>`.
 
-You must be a *team admin* to create teams and manage team membership, under
+You must be a _team admin_ to create teams and manage team membership, under
 the given organization. Listing teams and team memberships may be done by
 any member of the organization.
 
-Organization creation and management of team admins and *organization* members
+Organization creation and management of team admins and _organization_ members
 is done through the website, not the npm CLI.
 
 To use teams to manage permissions on packages belonging to your organization,
@@ -101,6 +101,6 @@ use the `npm access` command to grant or revoke the appropriate permissions.
 
 ### See Also
 
-* [npm access](/commands/npm-access)
-* [npm config](/commands/npm-config)
-* [npm registry](/using-npm/registry)
+- [npm access](/commands/npm-access)
+- [npm config](/commands/npm-config)
+- [npm registry](/using-npm/registry)

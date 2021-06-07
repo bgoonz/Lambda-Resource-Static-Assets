@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>typescript-compiling</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="compiling-typescript">Compiling TypeScript</h1>
+<p><a href="https://www.typescriptlang.org">TypeScript</a> is a typed superset of JavaScript that compiles to plain JavaScript. It offers classes, modules, and interfaces to help you build robust components. The <a href="https://github.com/microsoft/TypeScript/tree/master/doc">TypeScript language specification</a> has full details about the language.</p>
+<h2 id="install-the-typescript-compiler">Install the TypeScript compiler</h2>
+<p>Visual Studio Code includes TypeScript language support but does not include the TypeScript compiler, <code>tsc</code>. You will need to install the TypeScript compiler either globally or in your workspace to transpile TypeScript source code to JavaScript (<code>tsc HelloWorld.ts</code>).</p>
+<p>The easiest way to install TypeScript is through npm, the <a href="https://www.npmjs.com/">Node.js Package Manager</a>. If you have npm installed, you can install TypeScript globally (<code>-g</code>) on your computer by:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">npm</span> install -g typescript</a></code></pre></div>
+<p>You can test your install by checking the version or help.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">tsc</span> --version</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="ex">tsc</span> --help</a></code></pre></div>
+<p>Another option is to install the TypeScript compiler locally in your project (<code>npm install --save-dev typescript</code>) and has the benefit of avoiding possible interactions with other TypeScript projects you may have.</p>
+<h3 id="compiler-versus-language-service">Compiler versus language service</h3>
+<p>It is important to keep in mind that VS Code’s TypeScript language service is separate from your installed TypeScript compiler. You can see the VS Code’s TypeScript version in the Status Bar when you open a TypeScript file.</p>
+<figure>
+<img src="images/compiling/version-status-bar.png" alt="TypeScript version displayed in the Status Bar" /><figcaption>TypeScript version displayed in the Status Bar</figcaption>
+</figure>
+<p>Later in the article, we’ll discuss how you can <a href="#using-newer-typescript-versions">change</a> the version of TypeScript language service that VS Code uses.</p>
+<h2 id="tsconfig.json">tsconfig.json</h2>
+<p>Typically the first step in any new TypeScript project is to add a <code>tsconfig.json</code> file. A <code>tsconfig.json</code> file defines the TypeScript <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html">project settings</a>, such as the compiler options and the files that should be included. To do this, open up the folder where you want to store your source and add a new file named <code>tsconfig.json</code>. Once in this file, IntelliSense (<code>kb(editor.action.triggerSuggest)</code>) will help you along the way.</p>
+<figure>
+<img src="images/compiling/tsconfigintellisense.png" alt="tsconfig.json IntelliSense" /><figcaption>tsconfig.json IntelliSense</figcaption>
+</figure>
+<p>A simple <code>tsconfig.json</code> looks like this for ES5, <strong>CommonJS</strong> <a href="http://www.commonjs.org/specs/modules/1.0">modules</a> and source maps:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;es5&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-4" title="4">    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;commonjs&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-5" title="5">    <span class="dt">&quot;sourceMap&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<p>Now when you create a <code>.ts</code> file as part of the project we will offer up rich editing experiences and syntax validation.</p>
+<h2 id="transpile-typescript-into-javascript">Transpile TypeScript into JavaScript</h2>
+<p>VS Code integrates with <code>tsc</code> through our integrated <a href="/docs/editor/tasks.md">task runner</a>. We can use this to transpile <code>.ts</code> files into <code>.js</code> files. Another benefit of using VS Code tasks is that you get integrated error and warning detection displayed in the <a href="/docs/editor/editingevolved.md#errors-warnings">Problems</a> panel. Let’s walk through transpiling a simple TypeScript Hello World program.</p>
+<h3 id="step-1-create-a-simple-ts-file">Step 1: Create a simple TS file</h3>
+<p>Open VS Code on an empty folder and create a <code>helloworld.ts</code> file, place the following code in that file…</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode typescript"><code class="sourceCode typescript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">let</span> message<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;Hello World&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(message)<span class="op">;</span></a></code></pre></div>
+<p>To test that you have the TypeScript compiler <code>tsc</code> installed correctly and a working Hello World program, open a terminal and type <code>tsc helloworld.ts</code>. You can use the Integrated Terminal (<code>kb(workbench.action.terminal.toggleTerminal)</code>) directly in VS Code.</p>
+<p>You should now see the transpiled <code>helloworld.js</code> JavaScript file, which you can run if you have <a href="https://nodejs.org">Node.js</a> installed, by typing <code>node helloworld.js</code>.</p>
+<figure>
+<img src="images/compiling/build-hello-world.png" alt="build and run Hello World" /><figcaption>build and run Hello World</figcaption>
+</figure>
+<h3 id="step-2-run-the-typescript-build">Step 2: Run the TypeScript build</h3>
+<p>Execute <strong>Run Build Task</strong> (<code>kb(workbench.action.tasks.build)</code>) from the global <strong>Terminal</strong> menu. If you created a <code>tsconfig.json</code> file in the earlier section, this should present the following picker:</p>
+<figure>
+<img src="images/compiling/typescript-build.png" alt="TypeScript Build" /><figcaption>TypeScript Build</figcaption>
+</figure>
+<p>Select the <strong>tsc: build</strong> entry. This will produce a <code>HelloWorld.js</code> and <code>HelloWorld.js.map</code> file in the workspace.</p>
+<p>If you selected <strong>tsc: watch</strong>, the TypeScript compiler watches for changes to your TypeScript files and runs the transpiler on each change.</p>
+<p>Under the covers, we run the TypeScript compiler as a task. The command we use is: <code>tsc -p .</code></p>
+<h3 id="step-3-make-the-typescript-build-the-default">Step 3: Make the TypeScript Build the default</h3>
+<p>You can also define the TypeScript build task as the default build task so that it is executed directly when triggering <strong>Run Build Task</strong> (<code>kb(workbench.action.tasks.build)</code>). To do so, select <strong>Configure Default Build Task</strong> from the global <strong>Terminal</strong> menu. This shows you a picker with the available build tasks. Select TypeScript <strong>tsc: build</strong>, which generates the following <code>tasks.json</code> file in a <code>.vscode</code> folder:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode ts"><code class="sourceCode typescript"><a class="sourceLine" id="cb5-1" title="1"><span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">    <span class="co">// See https://go.microsoft.com/fwlink/?LinkId=733558</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="co">// for the documentation about the tasks.json format</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="st">&quot;version&quot;</span><span class="op">:</span> <span class="st">&quot;2.0.0&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-5" title="5">    <span class="st">&quot;tasks&quot;</span><span class="op">:</span> <span class="op">[</span></a>
+<a class="sourceLine" id="cb5-6" title="6">        <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-7" title="7">            <span class="st">&quot;type&quot;</span><span class="op">:</span> <span class="st">&quot;typescript&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-8" title="8">            <span class="st">&quot;tsconfig&quot;</span><span class="op">:</span> <span class="st">&quot;tsconfig.json&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-9" title="9">            <span class="st">&quot;problemMatcher&quot;</span><span class="op">:</span> <span class="op">[</span></a>
+<a class="sourceLine" id="cb5-10" title="10">                <span class="st">&quot;$tsc&quot;</span></a>
+<a class="sourceLine" id="cb5-11" title="11">            <span class="op">],</span></a>
+<a class="sourceLine" id="cb5-12" title="12">            <span class="st">&quot;group&quot;</span><span class="op">:</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-13" title="13">                <span class="st">&quot;kind&quot;</span><span class="op">:</span> <span class="st">&quot;build&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-14" title="14">                <span class="st">&quot;isDefault&quot;</span><span class="op">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb5-15" title="15">            <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-16" title="16">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-17" title="17">    <span class="op">]</span></a>
+<a class="sourceLine" id="cb5-18" title="18"><span class="op">}</span></a></code></pre></div>
+<p>Notice that the task has a <code>group</code> JSON object that sets the task <code>kind</code> to <code>build</code> and makes it the default. Now when you select the <strong>Run Build Task</strong> command or press (<code>kb(workbench.action.tasks.build)</code>), you are not prompted to select a task and your compilation starts.</p>
+<blockquote>
+<p><strong>Tip:</strong> You can also run the program using VS Code’s Run/Debug feature. Details about running and debugging Node.js applications in VS Code can be found in the <a href="/docs/nodejs/nodejs-tutorial.md#debugging-your-node-application">Node.js tutorial</a></p>
+</blockquote>
+<h3 id="step-4-reviewing-build-issues">Step 4: Reviewing build issues</h3>
+<p>The VS Code task system can also detect build issues through a <a href="/docs/editor/tasks.md#defining-a-problem-matcher">problem matcher</a>. A problem matcher parses build output based on the specific build tool and provides integrated issue display and navigation. VS Code ships with many problem matchers and <code>$tsc</code> seen above in <code>tasks.json</code> is the problem matcher for TypeScript compiler output.</p>
+<p>As an example, if there was a simple error (extra ‘g’ in <code>console.log</code>) in our TypeScript file, we may get the following output from <code>tsc</code>:</p>
+<pre><code>HelloWorld.ts(3,17): error TS2339: Property &#39;logg&#39; does not exist on type &#39;Console&#39;.</code></pre>
+<p>This would show up in the terminal panel (<code>kb(workbench.action.terminal.toggleTerminal)</code>) and selecting the <strong>Tasks - build tsconfig.json</strong> in the terminal view dropdown.</p>
+<p>You can see the error and warning counts in the Status Bar. Click on the error and warnings icon to get a list of the problems and navigate to them.</p>
+<figure>
+<img src="images/compiling/error-status-bar.png" alt="Error in Status Bar" /><figcaption>Error in Status Bar</figcaption>
+</figure>
+<p>You can also use the keyboard to open the list <code>kb(workbench.actions.view.problems)</code>.</p>
+<blockquote>
+<p><strong>Tip:</strong> Tasks offer rich support for many actions. Check the <a href="/docs/editor/tasks.md">Tasks</a> topic for more information on how to configure them.</p>
+</blockquote>
+<h2 id="javascript-source-map-support">JavaScript source map support</h2>
+<p>TypeScript debugging supports JavaScript source maps. To generate source maps for your TypeScript files, compile with the <code>--sourcemap</code> option or set the <code>sourceMap</code> property in the <code>tsconfig.json</code> file to <code>true</code>.</p>
+<p>In-lined source maps (a source map where the content is stored as a data URL instead of a separate file) are also supported, although in-lined source is not yet supported.</p>
+<h2 id="output-location-for-generated-files">Output location for generated files</h2>
+<p>Having the generated JavaScript file in the same folder at the TypeScript source will quickly get cluttered on larger projects. You can specify the output directory for the compiler with the <code>outDir</code> attribute.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="dt">&quot;compilerOptions&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="dt">&quot;target&quot;</span><span class="fu">:</span> <span class="st">&quot;es5&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-4" title="4">    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;commonjs&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-5" title="5">    <span class="dt">&quot;outDir&quot;</span><span class="fu">:</span> <span class="st">&quot;out&quot;</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<h2 id="hiding-derived-javascript-files">Hiding derived JavaScript files</h2>
+<p>When you are working with TypeScript, you often don’t want to see generated JavaScript files in the File Explorer or in Search results. VS Code offers filtering capabilities with a <code>files.exclude</code> <a href="/docs/getstarted/settings.md">workspace setting</a> and you can easily create an expression to hide those derived files:</p>
+<p><code>**/*.js: { "when": "$(basename).ts" }</code></p>
+<p>This pattern will match on any JavaScript file (<code>**/*.js</code>) but only if a sibling TypeScript file with the same name is present. The File Explorer will no longer show derived resources for JavaScript if they are compiled to the same location.</p>
+<p><img src="images/compiling/hidingDerivedBefore.png" alt="Hiding derived resources" /> <img src="images/compiling/hidingDerivedAfter.png" alt="Hiding derived resources" /></p>
+<p>Add the <code>files.exclude</code> setting with a filter in the workspace <code>settings.json</code> file, located in the <code>.vscode</code> folder at the root of the workspace. You can open the workspace <code>settings.json</code> via the <strong>Preferences: Open Workspace Settings (JSON)</strong> command from the Command Palette (<code>kb(workbench.action.showCommands)</code>).</p>
+<p>To exclude JavaScript files generated from both <code>.ts</code> and <code>.tsx</code> source files, use this expression:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" title="1"><span class="er">&quot;files.exclude&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="dt">&quot;**/*.js&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;when&quot;</span><span class="fu">:</span> <span class="st">&quot;$(basename).ts&quot;</span> <span class="fu">},</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="dt">&quot;**/**.js&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;when&quot;</span><span class="fu">:</span> <span class="st">&quot;$(basename).tsx&quot;</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="fu">}</span></a></code></pre></div>
+<p>This is a bit of a trick. The search glob pattern is used as a key. The settings above use two different glob patterns to provide two unique keys but the search will still match the same files.</p>
+<h2 id="using-newer-typescript-versions">Using newer TypeScript versions</h2>
+<p>VS Code ships with a recent stable version of the TypeScript language service and uses this by default to provide IntelliSense in your workspace. The workspace version of TypeScript is independent of the version of TypeScript you use to compile your <code>*.ts</code> files. You can just use VS Code’s built-in TypeScript version for IntelliSense without worry for most common cases, but sometimes you may need to change the version of TypeScript VS Code uses for IntelliSense.</p>
+<p>Reasons for doing this include:</p>
+<ul>
+<li>Trying out the latest TypeScript features by switching to the TypeScript nightly build (<code>typescript@next</code>).</li>
+<li>Making sure you are using the same version of TypeScript for IntelliSense that you use to compile your code.</li>
+</ul>
+<p>The active TypeScript version and its install location are displayed in the Status Bar when viewing a TypeScript file:</p>
+<figure>
+<img src="images/compiling/status-bar-version.png" alt="TypeScript status bar version" /><figcaption>TypeScript status bar version</figcaption>
+</figure>
+<p>You have a few options if you want to change the default version of TypeScript in your workspace:</p>
+<h3 id="using-the-workspace-version-of-typescript">Using the workspace version of TypeScript</h3>
+<p>If your workspace has a specific TypeScript version, you can switch between the workspace version of TypeScript and the version that VS Code uses by default by opening a TypeScript or JavaScript file and clicking on the TypeScript version number in the Status Bar. A message box will appear asking you which version of TypeScript VS Code should use:</p>
+<figure>
+<img src="images/compiling/select-ts-version-message.png" alt="TypeScript version selector" /><figcaption>TypeScript version selector</figcaption>
+</figure>
+<p>Use this to switch between the version of TypeScript that comes with VS Code and the version of TypeScript in your workspace. You can also trigger the TypeScript version selector with the <strong>TypeScript: Select TypeScript Version</strong> command.</p>
+<p>VS Code will automatically detect workspace versions of TypeScript that are installed under <code>node_modules</code> in the root of your workspace. You can also explicitly tell VS Code which version of TypeScript to use by configuring the <code>typescript.tsdk</code> in your user or workspace <a href="/docs/getstarted/settings.md">settings</a>. The <code>typescript.tsdk</code> setting should point to a directory containing the TypeScript <code>tsserver.js</code> file. You can find the TypeScript installation location using <code>npm list -g typescript</code>. The <code>tsserver.js</code> file is usually in the <code>lib</code> folder.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="dt">&quot;typescript.tsdk&quot;</span><span class="fu">:</span> <span class="st">&quot;/usr/local/lib/node_modules/typescript/lib&quot;</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="fu">}</span></a></code></pre></div>
+<blockquote>
+<p><strong>Tip:</strong> To get a specific TypeScript version, specify <code>@version</code> during npm install. For example, for TypeScript 3.6.0, you would use <code>npm install --save-dev typescript@3.6.0</code>. To preview the next version of TypeScript, run <code>npm install --save-dev typescript@next</code>.</p>
+</blockquote>
+<p>Note that while <code>typescript.tsdk</code> points to the <code>lib</code> directory inside of <code>typescript</code> in these examples, the <code>typescript</code> directory must be a full TypeScript install that contains the TypeScript <code>package.json</code> file.</p>
+<p>You can also tell VS Code to use a specific version of TypeScript in a particular workspace by adding a <code>typescript.tsdk</code> workspace setting pointing to the directory of the <code>tsserver.js</code> file:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb10-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  <span class="dt">&quot;typescript.tsdk&quot;</span><span class="fu">:</span> <span class="st">&quot;./node_modules/typescript/lib&quot;</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="fu">}</span></a></code></pre></div>
+<p>The <code>typescript.tsdk</code> workspace setting only tells VS Code that a workspace version of TypeScript exists. To actually start using the workspace version for IntelliSense, you must run the <strong>TypeScript: Select TypeScript Version</strong> command and select the workspace version.</p>
+<h3 id="using-typescript-nightly-builds">Using TypeScript nightly builds</h3>
+<p>The simplest way to try out the latest TypeScript features in VS Code is to install the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-typescript-next">JavaScript and TypeScript Nightly extension</a>.</p>
+<p>This extension automatically replaces VS Code’s built-in TypeScript version with the latest TypeScript nightly build. Just make sure you <a href="#using-the-workspace-version-of-typescript">switch back to using VS Code’s TypeScript version</a> if you’ve configured your TypeScript version with the <strong>TypeScript: Select TypeScript Version</strong> command.</p>
+<h2 id="mixed-typescript-and-javascript-projects">Mixed TypeScript and JavaScript projects</h2>
+<p>It is possible to have mixed TypeScript and JavaScript projects. To enable JavaScript inside a TypeScript project, you can set the <code>allowJs</code> property to <code>true</code> in the <code>tsconfig.json</code>.</p>
+<blockquote>
+<p><strong>Tip:</strong> The <code>tsc</code> compiler does not detect the presence of a <code>jsconfig.json</code> file automatically. Use the <code>–p</code> argument to make <code>tsc</code> use your <code>jsconfig.json</code> file, e.g. <code>tsc -p jsconfig.json</code>.</p>
+</blockquote>
+<h2 id="working-with-large-projects">Working with large projects</h2>
+<p>If you are working in a codebase with hundreds or thousands of TypeScript files, here are some steps you can take to improve both the editing experience in VS Code as well as compile times on the command line.</p>
+<h3 id="make-sure-your-tsconfig-only-includes-files-you-care-about">Make sure your tsconfig only includes files you care about</h3>
+<p>Use <code>include</code> or <code>files</code> in your project’s <code>tsconfig.json</code> to make sure the project only includes the files that should be part of the project.</p>
+<p><a href="https://github.com/microsoft/TypeScript/wiki/Performance#configuring-tsconfigjson-or-jsconfigjson">More information</a> on configuring your project’s <code>tsconfig.json</code>.</p>
+<h3 id="break-up-your-project-using-project-references">Break up your project using project references</h3>
+<p>Instead of structuring your source code as a single large project, you can improve performance by breaking it up into smaller projects using <a href="https://www.typescriptlang.org/docs/handbook/project-references.html">project references</a>. This allows TypeScript to load just a subset of your codebase at a time, instead of loading the entire thing.</p>
+<p>See the <a href="https://www.typescriptlang.org/docs/handbook/project-references.html">TypeScript documentation</a> for details on how to use project references and best practices for working with them.</p>
+<h2 id="next-steps">Next steps</h2>
+<p>Read on to find out about:</p>
+<ul>
+<li><a href="/docs/typescript/typescript-debugging.md">Debugging TypeScript</a> - Configure the debugger for your TypeScript project.</li>
+</ul>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="how-do-i-resolve-a-typescript-cannot-compile-external-module-error">How do I resolve a TypeScript “Cannot compile external module” error?</h3>
+<p>If you get that error, resolve it by creating a <code>tsconfig.json</code> file in the root folder of your project. The tsconfig.json file lets you control how Visual Studio Code compiles your TypeScript code. For more information, see the <a href="https://www.typescriptlang.org/docs/handbook/tsconfig-json.html">tsconfig.json overview</a>.</p>
+<h3 id="why-do-i-get-different-errors-and-warnings-with-vs-code-than-when-i-compile-my-typescript-project">Why do I get different errors and warnings with VS Code than when I compile my TypeScript project?</h3>
+<p>VS Code ships with a recent stable version of the TypeScript language service and it may not match the version of TypeScript installed globally on your computer or locally in your workspace. For that reason, you may see differences between your compiler output and errors detected by the active TypeScript language service. See <a href="/docs/languages/typescript.md#using-newer-typescript-versions">Using newer TypeScript versions</a> for details on installing a matching TypeScript version.</p>
+<h3 id="can-i-use-the-version-of-typescript-that-ships-with-vs-2015">Can I use the version of TypeScript that ships with VS 2015?</h3>
+<p>No, the TypeScript language service that ships with Visual Studio 2015 and 2017 isn’t compatible with VS Code. You will need to install a separate version of TypeScript from <a href="https://www.npmjs.com/package/typescript">npm</a>.</p>
+<h3 id="why-are-some-errors-reported-as-warnings">Why are some errors reported as warnings?</h3>
+<p>By default, VS Code TypeScript displays code style issues as warnings instead of errors. This applies to:</p>
+<ul>
+<li>Variable is declared but never used</li>
+<li>Property is declared but its value is never read</li>
+<li>Unreachable code detected</li>
+<li>Unused label</li>
+<li>Fall through case in switch</li>
+<li>Not all code paths return a value</li>
+</ul>
+<p>Treating these as warnings is consistent with other tools, such as TSLint. These will still be displayed as errors when you run <code>tsc</code> from the command line.</p>
+<p>You can disable this behavior by setting <code>"typescript.reportStyleChecksAsWarnings": false</code> in your User <a href="/docs/getstarted/settings.md">settings</a>.</p>
+</body>
+</html>

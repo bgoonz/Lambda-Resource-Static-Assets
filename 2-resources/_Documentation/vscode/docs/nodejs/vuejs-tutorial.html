@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>vuejs-tutorial</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="using-vue-in-visual-studio-code">Using Vue in Visual Studio Code</h1>
+<p><a href="https://vuejs.org/">Vue.js</a> is a popular JavaScript library for building web application user interfaces and Visual Studio Code has built-in support for the Vue.js building blocks of <a href="/docs/languages/html.md">HTML</a>, <a href="/docs/languages/css.md">CSS</a>, and <a href="/docs/languages/javascript.md">JavaScript</a>. For a richer Vue.js development environment, you can install the <a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a> extension which supports Vue.js IntelliSense, code snippets, formatting, and more.</p>
+<hr />
+<figure>
+<img src="images/vuejs/welcome-to-vue.png" alt="welcome to Vue" /><figcaption>welcome to Vue</figcaption>
+</figure>
+<hr />
+<h2 id="welcome-to-vue">Welcome to Vue</h2>
+<p>We’ll be using the <a href="https://cli.vuejs.org/">Vue CLI</a> for this tutorial. If you are new to the Vue.js framework, you can find great documentation and tutorials on the <a href="https://vuejs.org">vuejs.org</a> website.</p>
+<p>To install and use the Vue CLI as well as run the Vue application server, you’ll need the <a href="https://nodejs.org/">Node.js</a> JavaScript runtime and <a href="https://www.npmjs.com/">npm</a> (the Node.js package manager) installed. npm is included with Node.js which you can install from <a href="https://nodejs.org/en/download/">Node.js downloads</a>.</p>
+<blockquote>
+<p><strong>Tip</strong>: To test that you have Node.js and npm correctly installed on your machine, you can type <code>node --version</code> and <code>npm --version</code>.</p>
+</blockquote>
+<p>To install the <code>vue/cli</code> , in a terminal or command prompt type:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">npm</span> install -g @vue/cli</a></code></pre></div>
+<p>This may take a few minutes to install. You can now create a new Vue.js application by typing:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">vue</span> create my-app</a></code></pre></div>
+<p>where <code>my-app</code> is the name of the folder for your application. You will be prompted to select a preset and you can keep the default <code>(babel, eslint)</code>, which will use <a href="https://babeljs.io">Babel</a> to transpile the JavaScript to browser compatible ES5 and install the <a href="https://eslint.org/">ESLint</a> linter to detect coding errors. It may take a few minutes to create the Vue application and install its dependencies.</p>
+<p>Let’s quickly run our Vue application by navigating to the new folder and typing <code>npm run serve</code> to start the web server and open the application in a browser:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="bu">cd</span> my-app</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="ex">npm</span> run serve</a></code></pre></div>
+<p>You should see “Welcome to your Vue.js App” on <a href="http://localhost:8080">http://localhost:8080</a> in your browser. You can press <code>kbstyle(Ctrl+C)</code> to stop the <code>vue-cli-service</code> server.</p>
+<p>To open your Vue application in VS Code, from a terminal (or command prompt), navigate to the <code>my-app</code> folder and type <code>code .</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="bu">cd</span> my-app</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="ex">code</span> .</a></code></pre></div>
+<p>VS Code will launch and display your Vue application in the File Explorer.</p>
+<h2 id="vetur-extension">Vetur extension</h2>
+<p>Now expand the <code>src</code> folder and select the <code>App.vue</code> file. You’ll notice that VS Code doesn’t show any syntax highlighting and it treats the file as <strong>Plain Text</strong> as you can see in the lower right Status Bar. You’ll also see a notification recommending the <a href="https://marketplace.visualstudio.com/items?itemName=octref.vetur">Vetur</a> extension for the <code>.vue</code> file type.</p>
+<figure>
+<img src="images/vuejs/vetur-extension-recommendation.png" alt="vetur extension recommendation" /><figcaption>vetur extension recommendation</figcaption>
+</figure>
+<p>The Vetur extension supplies Vue.js language features (syntax highlighting, IntelliSense, snippets, formatting) to VS Code.</p>
+<figure>
+<img src="images/vuejs/vetur-extension.png" alt="vetur extension" /><figcaption>vetur extension</figcaption>
+</figure>
+<p>From the notification, press <strong>Install</strong> to download and install the Vetur extension. You should see the Vetur extension <strong>Installing</strong> in the Extensions view. Once the installation is complete (may take several minutes), the <strong>Install</strong> button will change to the <strong>Manage</strong> gear button.</p>
+<p>Now you should see that <code>.vue</code> is a recognized file type for the Vue language and you have language features such as syntax highlighting, bracket matching, and hover descriptions.</p>
+<figure>
+<img src="images/vuejs/vue-language-features.png" alt="vue language features" /><figcaption>vue language features</figcaption>
+</figure>
+<h2 id="intellisense">IntelliSense</h2>
+<p>As you start typing in <code>App.vue</code>, you’ll see smart suggestions or completions both for HTML and CSS but also for Vue.js specific items like declarations (<code>v-bind</code>, <code>v-for</code>) in the Vue <code>template</code> section:</p>
+<figure>
+<img src="images/vuejs/suggestions.png" alt="Vue.js suggestions" /><figcaption>Vue.js suggestions</figcaption>
+</figure>
+<p>and Vue properties (<code>methods</code>, <code>computed</code>) in the <code>scripts</code> section:</p>
+<figure>
+<img src="images/vuejs/javascript-suggestions.png" alt="Vue.js JavaScript suggestions" /><figcaption>Vue.js JavaScript suggestions</figcaption>
+</figure>
+<h3 id="go-to-definition-peek-definition">Go to Definition, Peek definition</h3>
+<p>VS Code through the Vue extension language service can also provide type definition information in the editor through <strong>Go to Definition</strong> (<code>kb(editor.action.revealDefinition)</code>) or <strong>Peek Definition</strong> (<code>kb(editor.action.peekDefinition)</code>). Put the cursor over the <code>App</code>, right click and select <strong>Peek Definition</strong>. A <a href="/docs/editor/editingevolved.md#peek">Peek window</a> will open showing the <code>App</code> definition from <code>App.js</code>.</p>
+<figure>
+<img src="images/vuejs/peek-definition.png" alt="Vue.js peek definition" /><figcaption>Vue.js peek definition</figcaption>
+</figure>
+<p>Press <code>kbstyle(Escape)</code> to close the Peek window.</p>
+<h2 id="hello-world">Hello World!</h2>
+<p>Let’s update the sample application to “Hello World!”. In <code>App.vue</code> replace the HelloWorld component <code>msg</code> custom attribute text with “Hello World!”.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">&lt;template&gt;</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">&lt;div</span><span class="ot"> id=</span><span class="st">&quot;app&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;./assets/logo.png&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">    <span class="kw">&lt;HelloWorld</span><span class="ot"> msg=</span><span class="st">&quot;Hello World!&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="kw">&lt;/template&gt;</span></a></code></pre></div>
+<p>Once you save the <code>App.vue</code> file (<code>kb(workbench.action.files.save)</code>), restart the server with <code>npm run serve</code> and you’ll see “Hello World!”. Leave the server running while we go on to learn about Vue.js client side debugging.</p>
+<blockquote>
+<p><strong>Tip</strong>: VS Code supports Auto Save, which by default saves your files after a delay. Check the <strong>Auto Save</strong> option in the <strong>File</strong> menu to turn on Auto Save or directly configure the <code>files.autoSave</code> user <a href="/docs/getstarted/settings.md">setting</a>.</p>
+</blockquote>
+<hr />
+<figure>
+<img src="images/vuejs/hello-world.png" alt="hello world" /><figcaption>hello world</figcaption>
+</figure>
+<hr />
+<h2 id="linting">Linting</h2>
+<p>Linters analyze your source code and can warn you about potential problems before you run your application. The Vue ESLint plugin (<a href="https://www.npmjs.com/package/eslint-plugin-vue">eslint-plugin-vue</a>) checks for Vue.js specific syntax errors which are shown in the editor as red squigglies and are also displayed in the <strong>Problems</strong> panel (<strong>View</strong> &gt; <strong>Problems</strong> <code>kb(workbench.actions.view.problems)</code>).</p>
+<p>Below you can see an error when the Vue linter detects more than one root element in a template:</p>
+<figure>
+<img src="images/vuejs/vue-linting.png" alt="Vue linting" /><figcaption>Vue linting</figcaption>
+</figure>
+<h2 id="debugging">Debugging</h2>
+<p>You can debug client side Vue.js code with the <a href="https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome">Debugger for Chrome</a> extension. You can learn more from the <a href="https://github.com/microsoft/vscode-recipes/tree/main/vuejs-cli">Vue.js debugging in Chrome and VS Code</a> recipe on the VS Code debugging <a href="https://github.com/microsoft/vscode-recipes">recipes</a> site.</p>
+<blockquote>
+<p>Note: There are currently issues with the sourcemaps generated by vue-cli, which cause issues with the debugging experience in VS Code. See <a href="https://github.com/vuejs/vue-loader/issues/1163">https://github.com/vuejs/vue-loader/issues/1163</a>.</p>
+</blockquote>
+<p>Another popular tool for debugging Vue.js is the <a href="https://github.com/vuejs/vue-devtools">vue-devtools</a> plug-in.</p>
+<h2 id="other-extensions">Other extensions</h2>
+<p>Vetur is only one of many Vue.js extensions available for VS Code. You can search in the Extensions view (<code>kb(workbench.view.extensions)</code>) by typing ‘vue’.</p>
+<figure>
+<img src="images/vuejs/vue-extensions.png" alt="Vue.js extensions" /><figcaption>Vue.js extensions</figcaption>
+</figure>
+<p>There are also Extension Packs which bundle extensions that other people have found useful for Vue.js development.</p>
+<figure>
+<img src="images/vuejs/vue-extension-pack.png" alt="Vue.js extension pack" /><figcaption>Vue.js extension pack</figcaption>
+</figure>
+</body>
+</html>

@@ -28,36 +28,36 @@ shape of the output from `npm ls`.
 
 #### browser
 
-* Default: OS X: `"open"`, Windows: `"start"`, Others: `"xdg-open"`
-* Type: String
+- Default: OS X: `"open"`, Windows: `"start"`, Others: `"xdg-open"`
+- Type: String
 
 The browser that is called by the `npm fund` command to open websites.
 
 #### json
 
-* Type: Boolean
-* Default: false
+- Type: Boolean
+- Default: false
 
 Show information in JSON format.
 
 #### unicode
 
-* Type: Boolean
-* Default: true
+- Type: Boolean
+- Default: true
 
 Whether to represent the tree structure using unicode characters.
 Set it to `false` in order to use all-ansi output.
 
 #### which
 
-* Type: Number
-* Default: undefined
+- Type: Number
+- Default: undefined
 
 If there are multiple funding sources, which 1-indexed source URL to open.
 
 ## See Also
 
-* [npm install](/commands/npm-install)
-* [npm docs](/commands/npm-docs)
-* [npm ls](/commands/npm-ls)
-* [npm config](/commands/npm-config)
+- [npm install](/commands/npm-install)
+- [npm docs](/commands/npm-docs)
+- [npm ls](/commands/npm-ls)
+- [npm config](/commands/npm-config)

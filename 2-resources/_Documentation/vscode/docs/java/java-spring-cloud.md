@@ -17,11 +17,11 @@ We will deploy a simple Spring Boot Getting Started web app to Azure Spring Clou
 
 Azure Spring Cloud makes it easy to deploy Spring Boot microservice applications to Azure without any code changes. The service manages the infrastructure of Spring Cloud applications so developers can focus on their code. Other benefits include:
 
-* Efficiently migrate existing Spring apps and manage cloud scaling and costs.
-* Modernize apps with Spring Cloud patterns to improve agility and speed of delivery.
-* Run Java at cloud scale and drive higher usage without complicated infrastructure.
-* Develop and deploy rapidly without containerization dependencies.
-* Monitor production workloads efficiently and effortlessly.
+- Efficiently migrate existing Spring apps and manage cloud scaling and costs.
+- Modernize apps with Spring Cloud patterns to improve agility and speed of delivery.
+- Run Java at cloud scale and drive higher usage without complicated infrastructure.
+- Develop and deploy rapidly without containerization dependencies.
+- Monitor production workloads efficiently and effortlessly.
 
 ![Greeting from Java](images/java-webapp/greeting-from-spring.png)
 
@@ -31,7 +31,7 @@ Before running and deploying this sample, you must have the Java SE Development 
 
 Download and install the [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack).
 
->**Note**: The `JAVA_HOME` environment variable must be set to the install location of the JDK to complete this tutorial.
+> **Note**: The `JAVA_HOME` environment variable must be set to the install location of the JDK to complete this tutorial.
 
 Download Apache Maven version 3 or greater:
 
@@ -45,7 +45,7 @@ Install Apache Maven for your local development environment:
 
 Clone the [Spring Boot Getting Started](https://github.com/spring-guides/gs-spring-boot) sample project to your local machine. You can clone a Git repository with the **Git: Clone** command in the **Command Palette** (`kb(workbench.action.showCommands)`). Paste `https://github.com/spring-guides/gs-spring-boot.git` as the URL of the remote repository and then decide the parent directory under which to put the local repository. After that, open the `complete` folder within the cloned repository in VS Code by navigating to the folder and typing `code .`.
 
->**Note**: You can install Visual Studio Code from [https://code.visualstudio.com](https://code.visualstudio.com/) and Git from [https://git-scm.com](https://git-scm.com/).
+> **Note**: You can install Visual Studio Code from [https://code.visualstudio.com](https://code.visualstudio.com/) and Git from [https://git-scm.com](https://git-scm.com/).
 
 ![Clone Spring Repository](images/java-webapp/clone-repository.gif)
 
@@ -91,13 +91,13 @@ We just built a Java web application and ran it locally. Now you will learn how 
 
 The [Azure Spring Cloud](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-azurespringcloud) extension is used to create, manage, and deploy to Azure Spring Cloud with key features including:
 
-* Create/View/Delete apps in Azure Spring Cloud
-* Deploy Jar to the app
-* Access the app with public/private endpoint
-* Start, stop, and restart the app
-* Scale the app in/out, up/down
-* Config application settings such as environment variables and JVM options
-* Stream logs from the app
+- Create/View/Delete apps in Azure Spring Cloud
+- Deploy Jar to the app
+- Access the app with public/private endpoint
+- Start, stop, and restart the app
+- Scale the app in/out, up/down
+- Config application settings such as environment variables and JVM options
+- Stream logs from the app
 
 To install the Azure Spring Cloud extension, open the Extensions view (`kb(workbench.view.extensions)`) and search for `azure spring cloud` to filter the results. Select the Microsoft [Azure Spring Cloud](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-azurespringcloud) extension. For a command-line experience, you can also check out the [Azure Spring Cloud quickstart with Azure CLI](https://docs.microsoft.com/azure/spring-cloud/spring-cloud-quickstart).
 
@@ -123,11 +123,11 @@ Once you are signed in to your Azure account and you have your app open in Visua
 
 1. Right-click on your subscription and select **Create Service in Portal**. Finish the following steps on the Azure Portal to create an Azure Spring Cloud service instance.
 
-    ![Create Azure Spring Cloud Service instance](images/java-spring-cloud/create-service.png)
+   ![Create Azure Spring Cloud Service instance](images/java-spring-cloud/create-service.png)
 
 1. After the service instance is created, refresh the Azure Explorer to display the new service instance. Right-click on the service instance and select **Create App**. Type the app name, select the Java version, and then press `kbstyle(Enter)` to start creating. The app will be ready in a few minutes.
 
-    ![Create App](images/java-spring-cloud/create-app.png)
+   ![Create App](images/java-spring-cloud/create-app.png)
 
 ### Build and deploy the app
 
@@ -139,29 +139,29 @@ mvn clean package
 
 1. Right-click on the App in Azure Explorer, select **Deploy**, and pick your built Jar file when prompted.
 
-    ![Deploy App](images/java-spring-cloud/deploy-app.png)
+   ![Deploy App](images/java-spring-cloud/deploy-app.png)
 
 2. You can watch the deployment status on the bottom right. Once done, select **Access Public Endpoint** to test the app running on Azure and **Yes** when prompted to assign a public endpoint. Be aware that only Spring Boot fat Jar is supported, [learn more about apps on Azure Spring Cloud](https://docs.microsoft.com/azure/spring-cloud/spring-cloud-tutorial-prepare-app-deployment?pivots=programming-language-java).
 
-    ![Access public endpoint](images/java-spring-cloud/access-public-endpoint.png)
+   ![Access public endpoint](images/java-spring-cloud/access-public-endpoint.png)
 
 ### Scale the app
 
 1. You can easily scale the app by right-clicking on the **Instance count** under **Scale Settings** and selecting **Edit**. Type "2" and press `kbstyle(Enter)` to scale the app.
 
-    ![Scale app](images/java-spring-cloud/scale.png)
+   ![Scale app](images/java-spring-cloud/scale.png)
 
 ### Stream your application logs
 
 1. Expand the **App Instances** node, right-click the instance you want to see logs, and select **Start Streaming Logs**.
 
-    ![Start log streaming](images/java-spring-cloud/start-log-streaming.png)
+   ![Start log streaming](images/java-spring-cloud/start-log-streaming.png)
 
 1. The Visual Studio Code output window opens with a connection to the log stream.
 
-    ![Log output](images/java-spring-cloud/log-output.png)
+   ![Log output](images/java-spring-cloud/log-output.png)
 
 ## Next steps
 
-* Explore more powerful features of [Azure Spring Cloud with Microservices](https://docs.microsoft.com/azure/spring-cloud/spring-cloud-quickstart-sample-app-introduction?pivots=programming-language-java).
-* To learn more about Java Debugging features, read the [Java Debugging Tutorial](/docs/java/java-debugging.md).
+- Explore more powerful features of [Azure Spring Cloud with Microservices](https://docs.microsoft.com/azure/spring-cloud/spring-cloud-quickstart-sample-app-introduction?pivots=programming-language-java).
+- To learn more about Java Debugging features, read the [Java Debugging Tutorial](/docs/java/java-debugging.md).

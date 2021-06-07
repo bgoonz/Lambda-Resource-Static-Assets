@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>json</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="editing-json-with-visual-studio-code">Editing JSON with Visual Studio Code</h1>
+<p>JSON is a data format that is common in configuration files like <code>package.json</code> or <code>project.json</code>. We also use it extensively in Visual Studio Code for our configuration files. When opening a file that ends with <code>.json</code>, VS Code provides features to make it simpler to write or modify the file’s content.</p>
+<figure>
+<img src="images/json/json_hero.png" alt="JSON within VS Code" /><figcaption>JSON within VS Code</figcaption>
+</figure>
+<h2 id="intellisense-and-validation">IntelliSense and validation</h2>
+<p>For properties and values, both for JSON data with or without a schema, we offer up suggestions as you type with IntelliSense. You can also manually see suggestions with the <strong>Trigger Suggestions</strong> command (<code>kb(editor.action.triggerSuggest)</code>). We also perform structural and value verification based on an associated JSON schema giving you red squiggles.</p>
+<figure>
+<img src="images/json/intellisense.png" alt="IntelliSense" /><figcaption>IntelliSense</figcaption>
+</figure>
+<h3 id="package-and-project-dependencies">Package and project dependencies</h3>
+<p>We also offer IntelliSense for specific value sets such as package and project dependencies in <code>package.json</code>, <code>project.json</code>, and <code>bower.json</code>.</p>
+<h2 id="quick-navigation">Quick navigation</h2>
+<p>JSON files can get large and we support quick navigation to properties using the <strong>Go to Symbol</strong> command (<code>kb(workbench.action.gotoSymbol)</code>).</p>
+<figure>
+<img src="images/json/gotosymbol.png" alt="Goto Symbol" /><figcaption>Goto Symbol</figcaption>
+</figure>
+<h2 id="hovers">Hovers</h2>
+<p>When you hover over properties and values for JSON data with or without schema, we will provide additional context.</p>
+<figure>
+<img src="images/json/hoverandtoggle.png" alt="Hover" /><figcaption>Hover</figcaption>
+</figure>
+<h2 id="formatting">Formatting</h2>
+<p>You can format your JSON document using <code>kb(editor.action.formatDocument)</code> or <strong>Format Document</strong> from the context menu.</p>
+<h2 id="folding">Folding</h2>
+<p>You can fold regions of source code using the folding icons on the gutter between line numbers and line start. Folding regions are available for all object and array elements.</p>
+<h2 id="json-with-comments">JSON with Comments</h2>
+<p>In addition to the default JSON mode following the <a href="https://www.json.org/">JSON specification</a>, VS Code also has a <strong>JSON with Comments</strong> (jsonc) mode. This mode is used for the VS Code configuration files such as <code>settings.json</code>, <code>tasks.json</code>, or <code>launch.json</code>. When in the <strong>JSON with Comments</strong> mode, you can use single line (//) as well as block comments (/* */) as used in JavaScript. The current editor mode is indicated in the editor’s Status Bar. Select the mode indicator to change the mode and to configure how file names and extensions are associated to modes.</p>
+<h2 id="json-schemas-and-settings">JSON schemas and settings</h2>
+<p>To understand the structure of JSON files, we use <a href="https://json-schema.org/">JSON schemas</a>. JSON schemas describe the shape of the JSON file, as well as value sets, default values, and descriptions. The JSON support shipped with VS Code supports JSON Schema Draft 7.</p>
+<p>Servers like <a href="https://www.schemastore.org">JSON Schema Store</a> provide schemas for most of the common JSON-based configuration files. However, schemas can also be defined in a file in the VS Code workspace, as well as the VS Code settings files.</p>
+<p>The association of a JSON file to a schema can be done either in the JSON file itself using the <code>$schema</code> attribute, or in the User or Workspace <a href="/docs/getstarted/settings.md">settings</a> (<strong>File</strong> &gt; <strong>Preferences</strong> &gt; <strong>Settings</strong>) under the property <code>json.schemas</code>.</p>
+<p>VS Code extensions can also define schemas and schema mapping. That’s why VS Code already knows about the schema of some well-known JSON files such as <code>package.json</code>, <code>bower.json</code>, and <code>tsconfig.json</code>.</p>
+<h3 id="mapping-in-the-json">Mapping in the JSON</h3>
+<p>In the following example, the JSON file specifies that its contents follow the <a href="http://www.coffeelint.org/">CoffeeLint</a> schema.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;$schema&quot;</span><span class="fu">:</span> <span class="st">&quot;https://json.schemastore.org/coffeelint&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;line_endings&quot;</span><span class="fu">:</span> <span class="st">&quot;unix&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="fu">}</span></a></code></pre></div>
+<p>Note that this syntax is VS Code-specific and not part of the <a href="https://json-schema.org/latest/json-schema-core.html#rfc.section.7">JSON Schema specification</a>. Adding the <code>$schema</code> key changes the JSON itself, which systems consuming the JSON might not expect, for example, schema validation might fail. If this is the case, you can use one of the other mapping methods.</p>
+<h3 id="mapping-in-the-user-settings">Mapping in the User Settings</h3>
+<p>The following excerpt from User <a href="/docs/getstarted/settings.md">Settings</a> shows how <code>.babelrc</code> files are mapped to the <a href="https://babeljs.io/docs/usage/babelrc">babelrc</a> schema located on <a href="https://json.schemastore.org/babelrc">https://json.schemastore.org/babelrc</a>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="er">&quot;json.schemas&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-2" title="2">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">        <span class="dt">&quot;fileMatch&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-4" title="4">            <span class="st">&quot;/.babelrc&quot;</span></a>
+<a class="sourceLine" id="cb2-5" title="5">        <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-6" title="6">        <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://json.schemastore.org/babelrc&quot;</span></a>
+<a class="sourceLine" id="cb2-7" title="7">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="ot">]</span></a></code></pre></div>
+<blockquote>
+<p><strong>Tip:</strong> In addition to defining a schema for <code>.babelrc</code>, also make sure that <code>.babelrc</code> is associated to the JSON language mode. This is also done in the settings using the <code>files.association</code> array setting.</p>
+</blockquote>
+<h3 id="mapping-to-a-schema-in-the-workspace">Mapping to a schema in the workspace</h3>
+<p>To map a schema that is located in the workspace, use a relative path. In this example, a file in the workspace root called <code>myschema.json</code> will be used as the schema for all files ending with <code>.foo.json</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb3-1" title="1"><span class="er">&quot;json.schemas&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb3-3" title="3">        <span class="dt">&quot;fileMatch&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb3-4" title="4">            <span class="st">&quot;/*.foo.json&quot;</span></a>
+<a class="sourceLine" id="cb3-5" title="5">        <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb3-6" title="6">        <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;./myschema.json&quot;</span></a>
+<a class="sourceLine" id="cb3-7" title="7">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="ot">]</span></a></code></pre></div>
+<h3 id="mapping-to-a-schema-defined-in-settings">Mapping to a schema defined in settings</h3>
+<p>To map a schema that is defined in the User or Workspace settings, use the <code>schema</code> property. In this example, a schema is defined that will be used for all files named <code>.myconfig</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="er">&quot;json.schemas&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb4-2" title="2">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-3" title="3">        <span class="dt">&quot;fileMatch&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb4-4" title="4">            <span class="st">&quot;/.myconfig&quot;</span></a>
+<a class="sourceLine" id="cb4-5" title="5">        <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-6" title="6">        <span class="dt">&quot;schema&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-7" title="7">            <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-8" title="8">            <span class="dt">&quot;properties&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-9" title="9">                <span class="dt">&quot;name&quot;</span> <span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-10" title="10">                    <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-11" title="11">                    <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;The name of the entry&quot;</span></a>
+<a class="sourceLine" id="cb4-12" title="12">                <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-13" title="13">            <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-14" title="14">        <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-15" title="15">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="ot">]</span></a></code></pre></div>
+<h3 id="mapping-a-schema-in-an-extension">Mapping a schema in an extension</h3>
+<p>Schemas and schema associations can also be defined by an extension. Check out the <a href="/api/references/contribution-points.md#contributes.jsonValidation">jsonValidation contribution point</a>.</p>
+<h3 id="file-match-syntax">File match syntax</h3>
+<p>The file match syntax supports the ‘*’ wildcard. Also, you can define exclusion patterns, starting with ‘!’. For an association to match, at least one pattern needs to match and the last matching pattern must not be an exclusion pattern.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1">  <span class="er">&quot;json.schemas&quot;:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb5-2" title="2">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-3" title="3">      <span class="dt">&quot;fileMatch&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb5-4" title="4">        <span class="st">&quot;/receipts/*.json&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb5-5" title="5">        <span class="st">&quot;!/receipts/*.excluded.json&quot;</span></a>
+<a class="sourceLine" id="cb5-6" title="6">      <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-7" title="7">      <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;./receipts.schema.json&quot;</span></a>
+<a class="sourceLine" id="cb5-8" title="8">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb5-9" title="9">  <span class="ot">]</span></a></code></pre></div>
+<h3 id="define-snippets-in-json-schemas">Define snippets in JSON schemas</h3>
+<p>JSON schemas describe the shape of the JSON file, as well as value sets and default values, which are used by the JSON language support to provide completion proposals. If you are a schema author and want to provide even more customized completion proposals, you can also specify snippets in the schema.</p>
+<p>The following example shows a schema for a key binding settings file defining a snippet:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">    <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;array&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;Keybindings configuration&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="dt">&quot;items&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-5" title="5">        <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-6" title="6">        <span class="dt">&quot;required&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;key&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-7" title="7">        <span class="dt">&quot;defaultSnippets&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb6-8" title="8">            <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-9" title="9">                <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;New keybinding&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-10" title="10">                <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Binds a key to a command for a given state&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-11" title="11">                <span class="dt">&quot;body&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;key&quot;</span><span class="fu">:</span> <span class="st">&quot;$1&quot;</span><span class="fu">,</span> <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;$2&quot;</span><span class="fu">,</span> <span class="dt">&quot;when&quot;</span><span class="fu">:</span> <span class="st">&quot;$3&quot;</span> <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-12" title="12">            <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-13" title="13">        <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-14" title="14">        <span class="dt">&quot;properties&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-15" title="15">            <span class="dt">&quot;key&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-16" title="16">                <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span></a>
+<a class="sourceLine" id="cb6-17" title="17">            <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-18" title="18">            <span class="er">...</span></a>
+<a class="sourceLine" id="cb6-19" title="19">        <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-20" title="20">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-21" title="21"><span class="fu">}</span></a></code></pre></div>
+<p>This is an example in a JSON schema:</p>
+<figure>
+<img src="images/json/defaultSnippets.png" alt="Default snippets in JSON schema" /><figcaption>Default snippets in JSON schema</figcaption>
+</figure>
+<p>Use the property <code>defaultSnippets</code> to specify any number of snippets for the given JSON object.</p>
+<ul>
+<li><code>label</code> and <code>description</code> will be shown in the completion selection dialog. If no label is provided, a stringified object representation of the snippet will be shown as label instead.</li>
+<li><code>body</code> is the JSON object that is stringified and inserted when the completion is selected by the user. <a href="/docs/editor/userdefinedsnippets.md#snippet-syntax">Snippet syntax</a> can be used inside strings literals to define tabstops, placeholders, and variables. If a string starts with <code>^</code>, the string content will be inserted as-is, not stringified. You can use this to specify snippets for numbers and booleans.</li>
+</ul>
+<p>Note that <code>defaultSnippets</code> is not part of the JSON schema specification but a VS Code-specific schema extension.</p>
+<h3 id="use-rich-formatting-in-hovers">Use rich formatting in hovers</h3>
+<p>VS Code will use the standard <code>description</code> field from the <a href="https://json-schema.org/latest/json-schema-core.html#rfc.section.7">JSON Schema specification</a> in order to provide information about properties on hover and during autocomplete.</p>
+<p>If you want your descriptions to support formatting like links, you can opt in by using <a href="/docs/languages/markdown.md">Markdown</a> in your formatting with the <code>markdownDescription</code> property.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="dt">&quot;$schema&quot;</span><span class="fu">:</span> <span class="st">&quot;http://json-schema.org/schema&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;object&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="dt">&quot;properties&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-5" title="5">    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-6" title="6">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;string&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-7" title="7">      <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;The name of the entry&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-8" title="8">      <span class="dt">&quot;markdownDescription&quot;</span><span class="fu">:</span> <span class="st">&quot;The name of the entry. [See the documentation](https://example.com)&quot;</span></a>
+<a class="sourceLine" id="cb7-9" title="9">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-10" title="10">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="fu">}</span></a></code></pre></div>
+<p>Note that <code>markdownDescription</code> is not part of the JSON schema specification but a VS Code-specific schema extension.</p>
+<h3 id="offline-mode">Offline mode</h3>
+<p><code>json.schemaDownload.enable</code> controls whether the JSON extension fetches JSON schemas from <code>http</code> and <code>https</code>.</p>
+<p>A warning triangle will show in the status bar when the current editor would like to use schemas that cannot be downloaded.</p>
+</body>
+</html>

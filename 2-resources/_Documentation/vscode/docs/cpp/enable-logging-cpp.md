@@ -7,6 +7,7 @@ PageTitle: How to enable logging in the Visual Studio Code C/C++ extension
 DateApproved: 07/25/2019
 MetaDescription: How to enable logging in the Visual Studio Code C/C++ extension
 ---
+
 # C/C++ extension logging
 
 Logging information is available for the language server and the debug adapter. If you are experiencing a problem that we are unable to diagnose based on information in your issue report, we might ask you to enable logging and send us your logs.

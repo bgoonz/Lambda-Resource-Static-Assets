@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>tutorial-flask</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="flask-tutorial-in-visual-studio-code">Flask Tutorial in Visual Studio Code</h1>
+<p>Flask is a lightweight Python framework for web applications that provides the basics for URL routing and page rendering.</p>
+<p>Flask is called a “micro” framework because it doesn’t directly provide features like form validation, database abstraction, authentication, and so on. Such features are instead provided by special Python packages called Flask extensions. The extensions integrate seamlessly with Flask so that they appear as if they were part of Flask itself. For example, Flask doesn’t provide a page template engine, but installing Flask includes the Jinja templating engine by default. For convenience, we typically speak of these defaults as part of Flask.</p>
+<p>In this Flask tutorial, you create a simple Flask app with three pages that use a common base template. Along the way, you experience a number of features of Visual Studio Code including using the terminal, the editor, the debugger, code snippets, and more.</p>
+<p>The completed code project for this Flask tutorial can be found on GitHub: <a href="https://github.com/microsoft/python-sample-vscode-flask-tutorial">python-sample-vscode-flask-tutorial</a>.</p>
+<p>If you have any problems, feel free to file an issue for this tutorial in the <a href="https://github.com/microsoft/vscode-docs/issues">VS Code documentation repository</a>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>To successfully complete this Flask tutorial, you must do the following (which are the same steps as in the <a href="/docs/python/python-tutorial.md">general Python tutorial</a>):</p>
+<ol type="1">
+<li><p>Install the <a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python extension</a>.</p></li>
+<li><p>Install a version of Python 3 (for which this tutorial is written). Options include:</p>
+<ul>
+<li>(All operating systems) A download from <a href="https://www.python.org/downloads/">python.org</a>; typically use the <strong>Download Python 3.9.1</strong> button that appears first on the page (or whatever is the latest version).</li>
+<li>(Linux) The built-in Python 3 installation works well, but to install other Python packages you must run <code>sudo apt install python3-pip</code> in the terminal.</li>
+<li>(macOS) An installation through <a href="https://brew.sh/">Homebrew</a> on macOS using <code>brew install python3</code> (the system install of Python on macOS is not supported).</li>
+<li>(All operating systems) A download from <a href="https://www.anaconda.com/download/">Anaconda</a> (for data science purposes).</li>
+</ul></li>
+<li><p>On Windows, make sure the location of your Python interpreter is included in your PATH environment variable. You can check the location by running <code>path</code> at the command prompt. If the Python interpreter’s folder isn’t included, open Windows Settings, search for “environment”, select <strong>Edit environment variables for your account</strong>, then edit the <strong>Path</strong> variable to include that folder.</p></li>
+</ol>
+<h2 id="create-a-project-environment-for-the-flask-tutorial">Create a project environment for the Flask tutorial</h2>
+<p>In this section, you create a virtual environment in which Flask is installed. Using a virtual environment avoids installing Flask into a global Python environment and gives you exact control over the libraries used in an application. A virtual environment also makes it easy to <a href="#create-a-requirementstxt-file-for-the-environment">Create a requirements.txt file for the environment</a>.</p>
+<ol type="1">
+<li><p>On your file system, create a project folder for this tutorial, such as <code>hello_flask</code>.</p></li>
+<li><p>In that folder, use the following command (as appropriate to your computer) to create a virtual environment named <code>env</code> based on your current interpreter:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Linux</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">sudo</span> apt-get install python3-venv    <span class="co"># If needed</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="ex">python3</span> -m venv env</a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co"># macOS</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="ex">python3</span> -m venv env</a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co"># Windows</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="ex">python</span> -m venv env</a></code></pre></div>
+<blockquote>
+<p><strong>Note</strong>: Use a stock Python installation when running the above commands. If you use <code>python.exe</code> from an Anaconda installation, you see an error because the ensurepip module isn’t available, and the environment is left in an unfinished state.</p>
+</blockquote></li>
+<li><p>Open the project folder in VS Code by running <code>code .</code>, or by running VS Code and using the <strong>File</strong> &gt; <strong>Open Folder</strong> command.</p></li>
+<li><p>In VS Code, open the Command Palette (<strong>View</strong> &gt; <strong>Command Palette</strong> or (<code>kb(workbench.action.showCommands)</code>)). Then select the <strong>Python: Select Interpreter</strong> command:</p>
+<figure>
+<img src="images/shared/command-palette.png" alt="Flask tutorial: opening the Command Palette in VS Code" /><figcaption>Flask tutorial: opening the Command Palette in VS Code</figcaption>
+</figure></li>
+<li><p>The command presents a list of available interpreters that VS Code can locate automatically (your list will vary; if you don’t see the desired interpreter, see <a href="/docs/python/environments.md">Configuring Python environments</a>). From the list, select the virtual environment in your project folder that starts with <code>./env</code> or <code>.\env</code>:</p>
+<figure>
+<img src="images/shared/select-virtual-environment.png" alt="Flask tutorial: selecting the virtual environment for Python" /><figcaption>Flask tutorial: selecting the virtual environment for Python</figcaption>
+</figure></li>
+<li><p>Run <a href="/docs/editor/integrated-terminal.md"><strong>Terminal: Create New Integrated Terminal</strong></a> (<code>kb(workbench.action.terminal.new)</code>)) from the Command Palette, which creates a terminal and automatically activates the virtual environment by running its activation script.</p>
+<blockquote>
+<p><strong>Note</strong>: On Windows, if your default terminal type is PowerShell, you may see an error that it cannot run activate.ps1 because running scripts is disabled on the system. The error provides a link for information on how to allow scripts. Otherwise, use <strong>Terminal: Select Default Shell</strong> to set “Command Prompt” or “Git Bash” as your default instead.</p>
+</blockquote></li>
+<li><p>The selected environment appears on the left side of the VS Code status bar, and notice the “(venv)” indicator that tells you that you’re using a virtual environment:</p>
+<figure>
+<img src="images/shared/environment-in-status-bar.png" alt="Flask tutorial: selected environment showing in the VS Code status bar" /><figcaption>Flask tutorial: selected environment showing in the VS Code status bar</figcaption>
+</figure></li>
+<li><p>Update pip in the virtual environment by running the following command in the VS Code Terminal:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">python</span> -m pip install --upgrade pip</a></code></pre></div></li>
+<li><p>Install Flask in the virtual environment by running the following command in the VS Code Terminal:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="ex">python</span> -m pip install flask</a></code></pre></div></li>
+</ol>
+<p>You now have a self-contained environment ready for writing Flask code. VS Code activates the environment automatically when you use <strong>Terminal: Create New Integrated Terminal</strong>. If you open a separate command prompt or terminal, activate the environment by running <code>source env/bin/activate</code> (Linux/macOS) or <code>env\Scripts\Activate.ps1</code> (Windows). You know the environment is activated when the command prompt shows <strong>(env)</strong> at the beginning.</p>
+<h2 id="create-and-run-a-minimal-flask-app">Create and run a minimal Flask app</h2>
+<ol type="1">
+<li><p>In VS Code, create a new file in your project folder named <code>app.py</code> using either <strong>File</strong> &gt; <strong>New</strong> from the menu, pressing <code>kbstyle(Ctrl+N)</code>, or using the new file icon in the Explorer View (shown below).</p>
+<figure>
+<img src="images/flask-tutorial/new-file-icon.png" alt="Flask tutorial: new file icon in Explorer View" /><figcaption>Flask tutorial: new file icon in Explorer View</figcaption>
+</figure></li>
+<li><p>In <code>app.py</code>, add code to import Flask and create an instance of the Flask object. If you type the code below (instead of using copy-paste), you can observe VS Code’s <a href="/docs/python/editing.md#autocomplete-and-intellisense">IntelliSense and auto-completions</a>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" title="1"><span class="im">from</span> flask <span class="im">import</span> Flask</a>
+<a class="sourceLine" id="cb4-2" title="2">app <span class="op">=</span> Flask(<span class="va">__name__</span>)</a></code></pre></div></li>
+<li><p>Also in <code>app.py</code>, add a function that returns content, in this case a simple string, and use Flask’s <code>app.route</code> decorator to map the URL route <code>/</code> to that function:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" title="1"><span class="at">@app.route</span>(<span class="st">&quot;/&quot;</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">def</span> home():</a>
+<a class="sourceLine" id="cb5-3" title="3">    <span class="cf">return</span> <span class="st">&quot;Hello, Flask!&quot;</span></a></code></pre></div>
+<blockquote>
+<p><strong>Tip</strong>: You can use multiple decorators on the same function, one per line, depending on how many different routes you want to map to the same function.</p>
+</blockquote></li>
+<li><p>Save the <code>app.py</code> file (<code>kb(workbench.action.files.save)</code>).</p></li>
+<li><p>In the Integrated Terminal, run the app by entering <code>python -m flask run</code>, which runs the Flask development server. The development server looks for <code>app.py</code> by default. When you run Flask, you should see output similar to the following:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">(</span><span class="fu">env</span><span class="kw">)</span> <span class="ex">D</span>:\py<span class="dt">\\</span>hello_flask<span class="op">&gt;</span>python -m flask run</a>
+<a class="sourceLine" id="cb6-2" title="2"> <span class="ex">*</span> Environment: production</a>
+<a class="sourceLine" id="cb6-3" title="3">   <span class="ex">WARNING</span>: Do not use the development server in a production environment.</a>
+<a class="sourceLine" id="cb6-4" title="4">   <span class="ex">Use</span> a production WSGI server instead.</a>
+<a class="sourceLine" id="cb6-5" title="5"> <span class="ex">*</span> Debug mode: off</a>
+<a class="sourceLine" id="cb6-6" title="6"> <span class="ex">*</span> Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)</a></code></pre></div>
+<p>If you see an error that the Flask module cannot be found, make sure you’ve run <code>python -m pip install flask</code> in your virtual environment as described at the end of the previous section.</p>
+<p>Also, if you want to run the development server on a different IP address or port, use the host and port command-line arguments, as with <code>--host=0.0.0.0 --port=80</code>.</p></li>
+<li><p>To open your default browser to the rendered page, <code>kbstyle(Ctrl+click)</code> the <code>http://127.0.0.1:5000/</code> URL in the terminal.</p>
+<figure>
+<img src="images/flask-tutorial/app-in-browser-01.png" alt="Flask tutorial: the running app in a browser" /><figcaption>Flask tutorial: the running app in a browser</figcaption>
+</figure></li>
+<li><p>Observe that when you visit a URL like /, a message appears in the debug terminal showing the HTTP request:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1"><span class="ex">127.0.0.1</span> - - [11/Jul/2018 08:40:15] <span class="st">&quot;GET / HTTP/1.1&quot;</span> 200 -</a></code></pre></div></li>
+<li><p>Stop the app by using <code>kbstyle(Ctrl+C)</code> in the terminal.</p></li>
+</ol>
+<blockquote>
+<p><strong>Tip</strong>: If you want to use a different filename than <code>app.py</code>, such as <code>program.py</code>, define an environment variable named FLASK_APP and set its value to your chosen file. Flask’s development server then uses the value of FLASK_APP instead of the default file <code>app.py</code>. For more information, see <a href="https://flask.palletsprojects.com/en/1.1.x/cli/">Flask command line interface</a>.</p>
+</blockquote>
+<h2 id="run-the-app-in-the-debugger">Run the app in the debugger</h2>
+<p>Debugging gives you the opportunity to pause a running program on a particular line of code. When a program is paused, you can examine variables, run code in the Debug Console panel, and otherwise take advantage of the features described on <a href="/docs/python/debugging.md">Debugging</a>. Running the debugger also automatically saves any modified files before the debugging session begins.</p>
+<p><strong>Before you begin</strong>: Make sure you’ve stopped the running app at the end of the last section by using <code>kbstyle(Ctrl+C)</code> in the terminal. If you leave the app running in one terminal, it continues to own the port. As a result, when you run the app in the debugger using the same port, the original running app handles all the requests and you won’t see any activity in the app being debugged and the program won’t stop at breakpoints. In other words, if the debugger doesn’t seem to be working, make sure that no other instance of the app is still running.</p>
+<ol type="1">
+<li><p>Replace the contents of <code>app.py</code> with the following code, which adds a second route and function that you can step through in the debugger:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" title="1"><span class="im">from</span> flask <span class="im">import</span> Flask</a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="im">from</span> datetime <span class="im">import</span> datetime</a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="im">import</span> re</a>
+<a class="sourceLine" id="cb8-4" title="4"></a>
+<a class="sourceLine" id="cb8-5" title="5">app <span class="op">=</span> Flask(<span class="va">__name__</span>)</a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="at">@app.route</span>(<span class="st">&quot;/&quot;</span>)</a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="kw">def</span> home():</a>
+<a class="sourceLine" id="cb8-9" title="9">    <span class="cf">return</span> <span class="st">&quot;Hello, Flask!&quot;</span></a>
+<a class="sourceLine" id="cb8-10" title="10"></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="at">@app.route</span>(<span class="st">&quot;/hello/&lt;name&gt;&quot;</span>)</a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="kw">def</span> hello_there(name):</a>
+<a class="sourceLine" id="cb8-13" title="13">    now <span class="op">=</span> datetime.now()</a>
+<a class="sourceLine" id="cb8-14" title="14">    formatted_now <span class="op">=</span> now.strftime(<span class="st">&quot;%A, </span><span class="sc">%d</span><span class="st"> %B, %Y at </span><span class="sc">%X</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb8-15" title="15"></a>
+<a class="sourceLine" id="cb8-16" title="16">    <span class="co"># Filter the name argument to letters only using regular expressions. URL arguments</span></a>
+<a class="sourceLine" id="cb8-17" title="17">    <span class="co"># can contain arbitrary text, so we restrict to safe characters only.</span></a>
+<a class="sourceLine" id="cb8-18" title="18">    match_object <span class="op">=</span> re.match(<span class="st">&quot;[a-zA-Z]+&quot;</span>, name)</a>
+<a class="sourceLine" id="cb8-19" title="19"></a>
+<a class="sourceLine" id="cb8-20" title="20">    <span class="cf">if</span> match_object:</a>
+<a class="sourceLine" id="cb8-21" title="21">        clean_name <span class="op">=</span> match_object.group(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb8-22" title="22">    <span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb8-23" title="23">        clean_name <span class="op">=</span> <span class="st">&quot;Friend&quot;</span></a>
+<a class="sourceLine" id="cb8-24" title="24"></a>
+<a class="sourceLine" id="cb8-25" title="25">    content <span class="op">=</span> <span class="st">&quot;Hello there, &quot;</span> <span class="op">+</span> clean_name <span class="op">+</span> <span class="st">&quot;! It&#39;s &quot;</span> <span class="op">+</span> formatted_now</a>
+<a class="sourceLine" id="cb8-26" title="26">    <span class="cf">return</span> content</a></code></pre></div>
+<p>The decorator used for the new URL route, <code>/hello/&lt;name&gt;</code>, defines an endpoint /hello/ that can accept any additional value. The identifier inside <code>&lt;</code> and <code>&gt;</code> in the route defines a variable that is passed to the function and can be used in your code.</p>
+<p>URL routes are case-sensitive. For example, the route <code>/hello/&lt;name&gt;</code> is distinct from <code>/Hello/&lt;name&gt;</code>. If you want the same function to handle both, use decorators for each variant.</p>
+<p>As described in the code comments, always filter arbitrary user-provided information to avoid various attacks on your app. In this case, the code filters the name argument to contain only letters, which avoids injection of control characters, HTML, and so forth. (When you use templates in the next section, Flask does automatic filtering and you won’t need this code.)</p></li>
+<li><p>Set a breakpoint at the first line of code in the <code>hello_there</code> function (<code>now = datetime.now()</code>) by doing any one of the following:</p>
+<ul>
+<li>With the cursor on that line, press <code>kb(editor.debug.action.toggleBreakpoint)</code>, or,</li>
+<li>With the cursor on that line, select the <strong>Run</strong> &gt; <strong>Toggle Breakpoint</strong> menu command, or,</li>
+<li>Click directly in the margin to the left of the line number (a faded red dot appears when hovering there).</li>
+</ul>
+<p>The breakpoint appears as a red dot in the left margin:</p>
+<figure>
+<img src="images/flask-tutorial/debug-breakpoint-set.png" alt="Flask tutorial: a breakpoint set on the first line of the hello_there function" /><figcaption>Flask tutorial: a breakpoint set on the first line of the hello_there function</figcaption>
+</figure></li>
+<li><p>Switch to <strong>Run</strong> view in VS Code (using the left-side activity bar or <code>kb(workbench.action.debug.start)</code>). You may see the message “To customize Run and Debug create a launch.json file”. This means that you don’t yet have a <code>launch.json</code> file containing debug configurations. VS Code can create that for you if you click on the <strong>create a launch.json file</strong> link:</p>
+<figure>
+<img src="images/shared/debug-panel-initial-view.png" alt="Flask tutorial: initial view of the debug panel" /><figcaption>Flask tutorial: initial view of the debug panel</figcaption>
+</figure></li>
+<li><ol type="1">
+<li>Select the link and VS Code will prompt for a debug configuration. Select <strong>Flask</strong> from the dropdown and VS Code will populate a new <code>launch.json</code> file with a Flask run configuration. The <code>launch.json</code> file contains a number of debugging configurations, each of which is a separate JSON object within the <code>configuration</code> array.</li>
+</ol></li>
+<li><p>Scroll down to and examine the configuration, which is named “Python: Flask”. This configuration contains <code>"module": "flask",</code>, which tells VS Code to run Python with <code>-m flask</code> when it starts the debugger. It also defines the FLASK_APP environment variable in the <code>env</code> property to identify the startup file, which is <code>app.py</code> by default, but allows you to easily specify a different file. If you want to change the host and/or port, you can use the <code>args</code> array.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb9-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Python: Flask&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;python&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-5" title="5">    <span class="dt">&quot;module&quot;</span><span class="fu">:</span> <span class="st">&quot;flask&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="dt">&quot;env&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb9-7" title="7">        <span class="dt">&quot;FLASK_APP&quot;</span><span class="fu">:</span> <span class="st">&quot;app.py&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-8" title="8">        <span class="dt">&quot;FLASK_ENV&quot;</span><span class="fu">:</span> <span class="st">&quot;development&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-9" title="9">        <span class="dt">&quot;FLASK_DEBUG&quot;</span><span class="fu">:</span> <span class="st">&quot;0&quot;</span></a>
+<a class="sourceLine" id="cb9-10" title="10">    <span class="fu">},</span></a>
+<a class="sourceLine" id="cb9-11" title="11">    <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb9-12" title="12">        <span class="st">&quot;run&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb9-13" title="13">        <span class="st">&quot;--no-debugger&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb9-14" title="14">        <span class="st">&quot;--no-reload&quot;</span></a>
+<a class="sourceLine" id="cb9-15" title="15">    <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb9-16" title="16">    <span class="dt">&quot;jinja&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb9-17" title="17"><span class="fu">}</span><span class="er">,</span></a></code></pre></div>
+<blockquote>
+<p><strong>Note</strong>: If the <code>env</code> entry in your configuration contains <code>"FLASK_APP": "${workspaceFolder}/app.py"</code>, change it to <code>"FLASK_APP": "app.py"</code> as shown above. Otherwise you may encounter error messages like “Cannot import module C” where C is the drive letter where your project folder resides.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong>: Once <code>launch.json</code> is created, an <strong>Add Configuration</strong> button appears in the editor. That button displays a list of additional configurations to add to the beginning of the configuration list. (The <strong>Run</strong> &gt; <strong>Add Configuration</strong> menu command does the same action.).</p>
+</blockquote></li>
+<li><p>Save <code>launch.json</code> (<code>kb(workbench.action.files.save)</code>). In the debug configuration dropdown list select the <strong>Python: Flask</strong> configuration.</p>
+<figure>
+<img src="images/flask-tutorial/debug-select-configuration.png" alt="Flask tutorial: selecting the Flask debugging configuration" /><figcaption>Flask tutorial: selecting the Flask debugging configuration</figcaption>
+</figure></li>
+<li><p>Start the debugger by selecting the <strong>Run</strong> &gt; <strong>Start Debugging</strong> menu command, or selecting the green <strong>Start Debugging</strong> arrow next to the list (<code>kb(workbench.action.debug.continue)</code>):</p>
+<figure>
+<img src="images/flask-tutorial/debug-continue-arrow.png" alt="Flask tutorial: start debugging/continue arrow on the debug toolbar" /><figcaption>Flask tutorial: start debugging/continue arrow on the debug toolbar</figcaption>
+</figure>
+<p>Observe that the status bar changes color to indicate debugging:</p>
+<figure>
+<img src="images/flask-tutorial/debug-status-bar.png" alt="Flask tutorial: appearance of the debugging status bar" /><figcaption>Flask tutorial: appearance of the debugging status bar</figcaption>
+</figure>
+<p>A debugging toolbar (shown below) also appears in VS Code containing commands in the following order: Pause (or Continue, <code>kb(workbench.action.debug.continue)</code>), Step Over (<code>kb(workbench.action.debug.stepOver)</code>), Step Into (<code>kb(workbench.action.debug.stepInto)</code>), Step Out (<code>kb(workbench.action.debug.stepOut)</code>), Restart (<code>kb(workbench.action.debug.restart)</code>), and Stop (<code>kb(workbench.action.debug.stop)</code>). See <a href="/docs/editor/debugging.md">VS Code debugging</a> for a description of each command.</p>
+<figure>
+<img src="images/flask-tutorial/debug-toolbar.png" alt="Flask tutorial: the VS Code debug toolbar" /><figcaption>Flask tutorial: the VS Code debug toolbar</figcaption>
+</figure></li>
+<li><p>Output appears in a “Python Debug Console” terminal. <code>kbstyle(Ctrl+click)</code> the <code>http://127.0.0.1:5000/</code> link in that terminal to open a browser to that URL. In the browser’s address bar, navigate to <code>http://127.0.0.1:5000/hello/VSCode</code>. Before the page renders, VS Code pauses the program at the breakpoint you set. The small yellow arrow on the breakpoint indicates that it’s the next line of code to run.</p>
+<figure>
+<img src="images/flask-tutorial/debug-program-paused.png" alt="Flask tutorial: VS Code paused at a breakpoint" /><figcaption>Flask tutorial: VS Code paused at a breakpoint</figcaption>
+</figure></li>
+<li><p>Use Step Over to run the <code>now = datetime.now()</code> statement.</p></li>
+<li><p>On the left side of the VS Code window, you see a <strong>Variables</strong> pane that shows local variables, such as <code>now</code>, as well as arguments, such as <code>name</code>. Below that are panes for <strong>Watch</strong>, <strong>Call Stack</strong>, and <strong>Breakpoints</strong> (see <a href="/docs/editor/debugging.md">VS Code debugging</a> for details). In the <strong>Locals</strong> section, try expanding different values. You can also double-click values (or use <code>kb(debug.setVariable)</code>) to modify them. Changing variables such as <code>now</code>, however, can break the program. Developers typically make changes only to correct values when the code didn’t produce the right value to begin with.</p>
+<figure>
+<img src="images/flask-tutorial/debug-local-variables.png" alt="Flask tutorial: local variables and arguments in VS Code during debugging" /><figcaption>Flask tutorial: local variables and arguments in VS Code during debugging</figcaption>
+</figure></li>
+<li><p>When a program is paused, the <strong>Debug Console</strong> panel (which is different from the “Python Debug Console” in the Terminal panel) lets you experiment with expressions and try out bits of code using the current state of the program. For example, once you’ve stepped over the line <code>now = datetime.now()</code>, you might experiment with different date/time formats. In the editor, select the code that reads <code>now.strftime("%A, %d %B, %Y at %X")</code>, then right-click and select <strong>Debug: Evaluate</strong> to send that code to the debug console, where it runs:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="ex">now.strftime</span>(<span class="st">&quot;%A, %d %B, %Y at %X&quot;</span>)</a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="st">&#39;Wednesday, 31 October, 2018 at 18:13:39&#39;</span></a></code></pre></div>
+<blockquote>
+<p><strong>Tip</strong>: The <strong>Debug Console</strong> also shows exceptions from within the app that may not appear in the terminal. For example, if you see a “Paused on exception” message in the <strong>Call Stack</strong> area of Run view, switch to the <strong>Debug Console</strong> to see the exception message.</p>
+</blockquote></li>
+<li><p>Copy that line into the &gt; prompt at the bottom of the debug console, and try changing the formatting:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" title="1"><span class="ex">now.strftime</span>(<span class="st">&quot;%a, %d %B, %Y at %X&quot;</span>)</a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">&#39;Wed, 31 October, 2018 at 18:13:39&#39;</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="ex">now.strftime</span>(<span class="st">&quot;%a, %d %b, %Y at %X&quot;</span>)</a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="st">&#39;Wed, 31 Oct, 2018 at 18:13:39&#39;</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="ex">now.strftime</span>(<span class="st">&quot;%a, %d %b, %y at %X&quot;</span>)</a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="st">&#39;Wed, 31 Oct, 18 at 18:13:39&#39;</span></a></code></pre></div>
+<blockquote>
+<p><strong>Note</strong>: If you see a change you like, you can copy and paste it into the editor during a debugging session. However, those changes aren’t applied until you restart the debugger.</p>
+</blockquote></li>
+<li><p>Step through a few more lines of code, if you’d like, then select Continue (<code>kb(workbench.action.debug.continue)</code>) to let the program run. The browser window shows the result:</p>
+<figure>
+<img src="images/flask-tutorial/debug-run-result.png" alt="Flask tutorial: result of the modified program" /><figcaption>Flask tutorial: result of the modified program</figcaption>
+</figure></li>
+<li><p>Close the browser and stop the debugger when you’re finished. To stop the debugger, use the Stop toolbar button (the red square) or the <strong>Run</strong> &gt; <strong>Stop Debugging</strong> command (<code>kb(workbench.action.debug.stop)</code>).</p></li>
+</ol>
+<blockquote>
+<p><strong>Tip</strong>: To make it easier to repeatedly navigate to a specific URL like <code>http://127.0.0.1:5000/hello/VSCode</code>, output that URL using a <code>print</code> statement. The URL appears in the terminal where you can use <code>kbstyle(Ctrl+click)</code> to open it in a browser.</p>
+</blockquote>
+<h2 id="go-to-definition-and-peek-definition-commands">Go to Definition and Peek Definition commands</h2>
+<p>During your work with Flask or any other library, you may want to examine the code in those libraries themselves. VS Code provides two convenient commands that navigate directly to the definitions of classes and other objects in any code:</p>
+<ul>
+<li><p><strong>Go to Definition</strong> jumps from your code into the code that defines an object. For example, in <code>app.py</code>, right-click on the <code>Flask</code> class (in the line <code>app = Flask(__name__)</code>) and select <strong>Go to Definition</strong> (or use <code>kb(editor.action.revealDefinition)</code>), which navigates to the class definition in the Flask library.</p></li>
+<li><p><strong>Peek Definition</strong> (<code>kb(editor.action.peekDefinition)</code>, also on the right-click context menu), is similar, but displays the class definition directly in the editor (making space in the editor window to avoid obscuring any code). Press <code>kbstyle(Escape)</code> to close the Peek window or use the <strong>x</strong> in the upper right corner.</p>
+<figure>
+<img src="images/flask-tutorial/peek-definition.png" alt="Flask tutorial: peek definition showing the Flask class inline" /><figcaption>Flask tutorial: peek definition showing the Flask class inline</figcaption>
+</figure></li>
+</ul>
+<h2 id="use-a-template-to-render-a-page">Use a template to render a page</h2>
+<p>The app you’ve created so far in this tutorial generates only plain text web pages from Python code. Although it’s possible to generate HTML directly in code, developers avoid such a practice because it opens the app to <a href="https://flask.palletsprojects.com/security/#cross-site-scripting-xss">cross-site scripting (XSS) attacks</a>. In the <code>hello_there</code> function of this tutorial, for example, one might think to format the output in code with something like <code>content = "&lt;h1&gt;Hello there, " + clean_name + "!&lt;/h1&gt;</code>, where the result in <code>content</code> is given directly to a browser. This opening allows an attacker to place malicious HTML, including JavaScript code, in the URL that ends up in <code>clean_name</code> and thus ends up being run in the browser.</p>
+<p>A much better practice is to keep HTML out of your code entirely by using <strong>templates</strong>, so that your code is concerned only with data values and not with rendering.</p>
+<ul>
+<li>A template is an HTML file that contains placeholders for values that the code provides at run time. The templating engine takes care of making the substitutions when rendering the page. The code, therefore, concerns itself only with data values and the template concerns itself only with markup.</li>
+<li>The default templating engine for Flask is <a href="https://jinja.palletsprojects.com">Jinja</a>, which is installed automatically when you install Flask. This engine provides flexible options including automatic escaping (to prevent XSS attacks) and template inheritance. With inheritance, you can define a base page with common markup and then build upon that base with page-specific additions.</li>
+</ul>
+<p>In this section, you create a single page using a template. In the sections that follow, you configure the app to serve static files, and then create multiple pages to the app that each contains a nav bar from a base template.</p>
+<ol type="1">
+<li><p>Inside the <code>hello_flask</code> folder, create a folder named <code>templates</code>, which is where Flask looks for templates by default.</p></li>
+<li><p>In the <code>templates</code> folder, create a file named <code>hello_there.html</code> with the contents below. This template contains two placeholders named “name” and “date”, which are delineated by pairs of curly braces, <code>\{{</code> and <code>}}</code>. As you can see, you can also include formatting code in the template directly:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb12-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb12-4" title="4">    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb12-5" title="5">    <span class="kw">&lt;title&gt;</span>Hello, Flask<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb12-6" title="6">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb12-7" title="7">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb12-8" title="8">    {%if name %}</a>
+<a class="sourceLine" id="cb12-9" title="9">    <span class="kw">&lt;strong&gt;</span>Hello there, \{{ name }}!<span class="kw">&lt;/strong&gt;</span> It&#39;s \{{ date.strftime(&quot;%A, %d</a>
+<a class="sourceLine" id="cb12-10" title="10">    %B, %Y at %X&quot;) }}. {% else %} What&#39;s your name? Provide it after /hello/</a>
+<a class="sourceLine" id="cb12-11" title="11">    in the URL. {% endif %}</a>
+<a class="sourceLine" id="cb12-12" title="12">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb12-13" title="13"><span class="kw">&lt;/html&gt;</span></a></code></pre></div>
+<blockquote>
+<p><strong>Tip</strong>: Flask developers often use the <a href="https://pythonhosted.org/Flask-Babel/">flask-babel</a> extension for date formatting, rather than <code>strftime</code>, as flask-babel takes locales and timezones into consideration.</p>
+</blockquote></li>
+<li><p>In <code>app.py</code>, import Flask’s <code>render_template</code> function near the top of the file:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb13-1" title="1"><span class="im">from</span> flask <span class="im">import</span> render_template</a></code></pre></div></li>
+<li><p>Also in <code>app.py</code>, modify the <code>hello_there</code> function to use <code>render_template</code> to load a template and apply the named values (and add a route to recognize the case without a name). <code>render_template</code> assumes that the first argument is relative to the <code>templates</code> folder. Typically, developers name the templates the same as the functions that use them, but matching names are not required because you always refer to the exact filename in your code.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb14-1" title="1"><span class="at">@app.route</span>(<span class="st">&quot;/hello/&quot;</span>)</a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="at">@app.route</span>(<span class="st">&quot;/hello/&lt;name&gt;&quot;</span>)</a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="kw">def</span> hello_there(name <span class="op">=</span> <span class="va">None</span>):</a>
+<a class="sourceLine" id="cb14-4" title="4">    <span class="cf">return</span> render_template(</a>
+<a class="sourceLine" id="cb14-5" title="5">        <span class="st">&quot;hello_there.html&quot;</span>,</a>
+<a class="sourceLine" id="cb14-6" title="6">        name<span class="op">=</span>name,</a>
+<a class="sourceLine" id="cb14-7" title="7">        date<span class="op">=</span>datetime.now()</a>
+<a class="sourceLine" id="cb14-8" title="8">    )</a></code></pre></div>
+<p>You can see that the code is now much simpler, and concerned only with data values, because the markup and formatting is all contained in the template.</p></li>
+<li><p>Start the program (inside or outside of the debugger, using <code>kb(workbench.action.debug.run)</code>), navigate to a /hello/name URL, and observe the results.</p></li>
+<li><p>Also try navigating to a /hello/name URL using a name like <code>&lt;a%20value%20that%20could%20be%20HTML&gt;</code> to see Flask’s automatic escaping at work. The “name” value shows up as plain text in the browser rather than as rendering an actual element.</p></li>
+</ol>
+<h2 id="serve-static-files">Serve static files</h2>
+<p>Static files are of two types. First are those files like stylesheets to which a page template can just refer directly. Such files can live in any folder in the app, but are commonly placed within a <code>static</code> folder.</p>
+<p>The second type are those that you want to address in code, such as when you want to implement an API endpoint that returns a static file. For this purpose, the Flask object contains a built-in method, <code>send_static_file</code>, which generates a response with a static file contained within the app’s <code>static</code> folder.</p>
+<p>The following sections demonstrate both types of static files.</p>
+<h3 id="refer-to-static-files-in-a-template">Refer to static files in a template</h3>
+<ol type="1">
+<li><p>In the <code>hello_flask</code> folder, create a folder named <code>static</code>.</p></li>
+<li><p>Within the <code>static</code> folder, create a file named <code>site.css</code> with the following contents. After entering this code, also observe the syntax highlighting that VS Code provides for CSS files, including a color preview:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb15-1" title="1"><span class="fu">.message</span> {</a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="kw">font-weight</span>: <span class="dv">600</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-3" title="3">  <span class="kw">color</span>: <span class="cn">blue</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" title="4">}</a></code></pre></div></li>
+<li><p>In <code>templates/hello_there.html</code>, add the following line before the <code>&lt;/head&gt;</code> tag, which creates a reference to the stylesheet.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">&lt;link</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="ot">  rel=</span><span class="st">&quot;stylesheet&quot;</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="ot">  type=</span><span class="st">&quot;text/css&quot;</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="ot">  href=</span><span class="st">&quot;\{{ url_for(&#39;static&#39;, filename=&#39;site.css&#39;)}}&quot;</span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="kw">/&gt;</span></a></code></pre></div>
+<p>Flask’s <a href="https://flask.palletsprojects.com/api/#flask.url_for">url_for</a> tag that is used here, creates the appropriate path to the file. Because it can accept variables as arguments, <code>url_for</code> allows you to programmatically control the generated path, if desired.</p></li>
+<li><p>Also in <code>templates/hello_there.html</code>, replace the contents <code>&lt;body&gt;</code> element with the following markup that uses the <code>message</code> style instead of a <code>&lt;strong&gt;</code> tag (and also displays a message if you just use a hello/ URL without a name):</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb17-1" title="1">{%if name %} <span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;message&quot;</span><span class="kw">&gt;</span>Hello there, \{{ name }}!<span class="kw">&lt;/span&gt;</span> It&#39;s \{{</a>
+<a class="sourceLine" id="cb17-2" title="2">date.strftime(&quot;%A, %d %B, %Y at %X&quot;) }}. {% else %}</a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">&quot;message&quot;</span></a>
+<a class="sourceLine" id="cb17-4" title="4">  <span class="kw">&gt;</span>What&#39;s your name? Provide it after /hello/ in the URL.<span class="kw">&lt;/span</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb17-6" title="6">{% endif %}</a></code></pre></div></li>
+<li><p>Run the app, navigate to a /hello/name URL, and observe that the message renders in blue. Stop the app when you’re done.</p></li>
+</ol>
+<h3 id="serve-a-static-file-from-code">Serve a static file from code</h3>
+<ol type="1">
+<li><p>In the <code>static</code> folder, create a JSON data file named <code>data.json</code> with the following contents (which are meaningless sample data):</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb18-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb18-2" title="2">  <span class="dt">&quot;01&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb18-3" title="3">    <span class="dt">&quot;note&quot;</span><span class="fu">:</span> <span class="st">&quot;This data is very simple because we&#39;re demonstrating only the mechanism.&quot;</span></a>
+<a class="sourceLine" id="cb18-4" title="4">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb18-5" title="5"><span class="fu">}</span></a></code></pre></div></li>
+<li><p>In <code>app.py</code>, add a function with the route /api/data that returns the static data file using the <code>send_static_file</code> method:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb19-1" title="1"><span class="at">@app.route</span>(<span class="st">&quot;/api/data&quot;</span>)</a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw">def</span> get_data():</a>
+<a class="sourceLine" id="cb19-3" title="3">    <span class="cf">return</span> app.send_static_file(<span class="st">&quot;data.json&quot;</span>)</a></code></pre></div></li>
+<li><p>Run the app and navigate to the /api/data endpoint to see that the static file is returned. Stop the app when you’re done.</p></li>
+</ol>
+<h2 id="create-multiple-templates-that-extend-a-base-template">Create multiple templates that extend a base template</h2>
+<p>Because most web apps have more than one page, and because those pages typically share many common elements, developers separate those common elements into a base page template that other page templates can then extend. (This is also called template inheritance.)</p>
+<p>Also, because you’ll likely create many pages that extend the same template, it’s helpful to create a code snippet in VS Code with which you can quickly initialize new page templates. A snippet helps you avoid tedious and error-prone copy-paste operations.</p>
+<p>The following sections walk through different parts of this process.</p>
+<h3 id="create-a-base-page-template-and-styles">Create a base page template and styles</h3>
+<p>A base page template in Flask contains all the shared parts of a set of pages, including references to CSS files, script files, and so forth. Base templates also define one or more <strong>block</strong> tags that other templates that extend the base are expected to override. A block tag is delineated by <code>{% block &lt;name&gt; %}</code> and <code>{% endblock %}</code> in both the base template and extended templates.</p>
+<p>The following steps demonstrate creating a base template.</p>
+<ol type="1">
+<li><p>In the <code>templates</code> folder, create a file named <code>layout.html</code> with the contents below, which contains blocks named “title” and “content”. As you can see, the markup defines a simple nav bar structure with links to Home, About, and Contact pages, which you create in a later section. Each link again uses Flask’s <code>url_for</code> tag to generate a link at runtime for the matching route.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode html"><code class="sourceCode html"><a class="sourceLine" id="cb20-1" title="1"><span class="dt">&lt;!DOCTYPE </span>html<span class="dt">&gt;</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="kw">&lt;html&gt;</span></a>
+<a class="sourceLine" id="cb20-3" title="3">  <span class="kw">&lt;head&gt;</span></a>
+<a class="sourceLine" id="cb20-4" title="4">    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb20-5" title="5">    <span class="kw">&lt;title&gt;</span>{% block title %}{% endblock %}<span class="kw">&lt;/title&gt;</span></a>
+<a class="sourceLine" id="cb20-6" title="6">    <span class="kw">&lt;link</span></a>
+<a class="sourceLine" id="cb20-7" title="7"><span class="ot">      rel=</span><span class="st">&quot;stylesheet&quot;</span></a>
+<a class="sourceLine" id="cb20-8" title="8"><span class="ot">      type=</span><span class="st">&quot;text/css&quot;</span></a>
+<a class="sourceLine" id="cb20-9" title="9"><span class="ot">      href=</span><span class="st">&quot;\{{ url_for(&#39;static&#39;, filename=&#39;site.css&#39;)}}&quot;</span></a>
+<a class="sourceLine" id="cb20-10" title="10">    <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb20-11" title="11">  <span class="kw">&lt;/head&gt;</span></a>
+<a class="sourceLine" id="cb20-12" title="12"></a>
+<a class="sourceLine" id="cb20-13" title="13">  <span class="kw">&lt;body&gt;</span></a>
+<a class="sourceLine" id="cb20-14" title="14">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;navbar&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb20-15" title="15">      <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;\{{ url_for(&#39;home&#39;) }}&quot;</span><span class="ot"> class=</span><span class="st">&quot;navbar-brand&quot;</span><span class="kw">&gt;</span>Home<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb20-16" title="16">      <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;\{{ url_for(&#39;about&#39;) }}&quot;</span><span class="ot"> class=</span><span class="st">&quot;navbar-item&quot;</span><span class="kw">&gt;</span>About<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb20-17" title="17">      <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;\{{ url_for(&#39;contact&#39;) }}&quot;</span><span class="ot"> class=</span><span class="st">&quot;navbar-item&quot;</span><span class="kw">&gt;</span>Contact<span class="kw">&lt;/a&gt;</span></a>
+<a class="sourceLine" id="cb20-18" title="18">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb20-19" title="19"></a>
+<a class="sourceLine" id="cb20-20" title="20">    <span class="kw">&lt;div</span><span class="ot"> class=</span><span class="st">&quot;body-content&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb20-21" title="21">      {% block content %} {% endblock %}</a>
+<a class="sourceLine" id="cb20-22" title="22">      <span class="kw">&lt;hr</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb20-23" title="23">      <span class="kw">&lt;footer&gt;</span></a>
+<a class="sourceLine" id="cb20-24" title="24">        <span class="kw">&lt;p&gt;</span><span class="dv">&amp;copy;</span> 2018<span class="kw">&lt;/p&gt;</span></a>
+<a class="sourceLine" id="cb20-25" title="25">      <span class="kw">&lt;/footer&gt;</span></a>
+<a class="sourceLine" id="cb20-26" title="26">    <span class="kw">&lt;/div&gt;</span></a>
+<a class="sourceLine" id="cb20-27" title="27">  <span class="kw">&lt;/body&gt;</span></a>
+<a class="sourceLine" id="cb20-28" title="28"><span class="kw">&lt;/html&gt;</span></a></code></pre></div></li>
+<li><p>Add the following styles to <code>static/site.css</code> below the existing “message” style, and save the file. (This walkthrough doesn’t attempt to demonstrate responsive design; these styles simply generate a reasonably interesting result.)</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb21-1" title="1"><span class="fu">.navbar</span> {</a>
+<a class="sourceLine" id="cb21-2" title="2">  <span class="kw">background-color</span>: <span class="cn">lightslategray</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-3" title="3">  <span class="kw">font-size</span>: <span class="dv">1</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-4" title="4">  <span class="kw">font-family</span>: <span class="st">&quot;Trebuchet MS&quot;</span><span class="op">,</span> <span class="st">&quot;Lucida Sans Unicode&quot;</span><span class="op">,</span> <span class="st">&quot;Lucida Grande&quot;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb21-5" title="5">    <span class="st">&quot;Lucida Sans&quot;</span><span class="op">,</span> Arial<span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-6" title="6">  <span class="kw">color</span>: <span class="cn">white</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-7" title="7">  <span class="kw">padding</span>: <span class="dv">8</span><span class="dt">px</span> <span class="dv">5</span><span class="dt">px</span> <span class="dv">8</span><span class="dt">px</span> <span class="dv">5</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-8" title="8">}</a>
+<a class="sourceLine" id="cb21-9" title="9"></a>
+<a class="sourceLine" id="cb21-10" title="10"><span class="fu">.navbar</span> a {</a>
+<a class="sourceLine" id="cb21-11" title="11">  <span class="kw">text-decoration</span>: <span class="dv">none</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-12" title="12">  <span class="kw">color</span>: <span class="bu">inherit</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-13" title="13">}</a>
+<a class="sourceLine" id="cb21-14" title="14"></a>
+<a class="sourceLine" id="cb21-15" title="15"><span class="fu">.navbar-brand</span> {</a>
+<a class="sourceLine" id="cb21-16" title="16">  <span class="kw">font-size</span>: <span class="dv">1.2</span><span class="dt">em</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-17" title="17">  <span class="kw">font-weight</span>: <span class="dv">600</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-18" title="18">}</a>
+<a class="sourceLine" id="cb21-19" title="19"></a>
+<a class="sourceLine" id="cb21-20" title="20"><span class="fu">.navbar-item</span> {</a>
+<a class="sourceLine" id="cb21-21" title="21">  <span class="kw">font-variant</span>: <span class="dv">small-caps</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-22" title="22">  <span class="kw">margin-left</span>: <span class="dv">30</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-23" title="23">}</a>
+<a class="sourceLine" id="cb21-24" title="24"></a>
+<a class="sourceLine" id="cb21-25" title="25"><span class="fu">.body-content</span> {</a>
+<a class="sourceLine" id="cb21-26" title="26">  <span class="kw">padding</span>: <span class="dv">5</span><span class="dt">px</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-27" title="27">  <span class="kw">font-family</span>: <span class="st">&quot;Segoe UI&quot;</span><span class="op">,</span> Tahoma<span class="op">,</span> Geneva<span class="op">,</span> Verdana<span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb21-28" title="28">}</a></code></pre></div></li>
+</ol>
+<p>You can run the app at this point, but because you haven’t made use of the base template anywhere and haven’t changed any code files, the result is the same as the previous step. Complete the remaining sections to see the final effect.</p>
+<h3 id="create-a-code-snippet">Create a code snippet</h3>
+<p>Because the three pages you create in the next section extend <code>layout.html</code>, it saves time to create a <strong>code snippet</strong> to initialize a new template file with the appropriate reference to the base template. A code snippet provides a consistent piece of code from a single source, which avoids errors that can creep in when using copy-paste from existing code.</p>
+<ol type="1">
+<li><p>In VS Code, select the <strong>File</strong> (Windows/Linux) or <strong>Code</strong> (macOS), menu, then select <strong>Preferences</strong> &gt; <strong>User snippets</strong>.</p></li>
+<li><p>In the list that appears, select <strong>html</strong>. (The option may appear as “html.json” in the <strong>Existing Snippets</strong> section of the list if you’ve created snippets previously.)</p></li>
+<li><p>After VS code opens <code>html.json</code>, add the following entry within the existing curly braces (the explanatory comments, not shown here, describe details such as how the <code>$0</code> line indicates where VS Code places the cursor after inserting a snippet):</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb22-1" title="1"><span class="er">&quot;Flask</span> <span class="er">Tutorial:</span> <span class="er">template</span> <span class="er">extending</span> <span class="er">layout.html&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb22-2" title="2">    <span class="dt">&quot;prefix&quot;</span><span class="fu">:</span> <span class="st">&quot;flextlayout&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb22-3" title="3">    <span class="dt">&quot;body&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb22-4" title="4">        <span class="st">&quot;{% extends </span><span class="ch">\&quot;</span><span class="st">layout.html</span><span class="ch">\&quot;</span><span class="st"> %}&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb22-5" title="5">        <span class="st">&quot;{% block title %}&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb22-6" title="6">        <span class="st">&quot;$0&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb22-7" title="7">        <span class="st">&quot;{% endblock %}&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb22-8" title="8">        <span class="st">&quot;{% block content %}&quot;</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb22-9" title="9">        <span class="st">&quot;{% endblock %}&quot;</span></a>
+<a class="sourceLine" id="cb22-10" title="10">    <span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb22-11" title="11"></a>
+<a class="sourceLine" id="cb22-12" title="12">    <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;Boilerplate template that extends layout.html&quot;</span></a>
+<a class="sourceLine" id="cb22-13" title="13"><span class="fu">}</span><span class="er">,</span></a></code></pre></div></li>
+<li><p>Save the <code>html.json</code> file (<code>kb(workbench.action.files.save)</code>).</p></li>
+<li><p>Now, whenever you start typing the snippet’s prefix, such as <code>flext</code>, VS Code provides the snippet as an autocomplete option, as shown in the next section. You can also use the <strong>Insert Snippet</strong> command to choose a snippet from a menu.</p></li>
+</ol>
+<p>For more information on code snippets in general, refer to <a href="/docs/editor/userdefinedsnippets.md">Creating snippets</a>.</p>
+<h3 id="use-the-code-snippet-to-add-pages">Use the code snippet to add pages</h3>
+<p>With the code snippet in place, you can quickly create templates for the Home, About, and Contact pages.</p>
+<ol type="1">
+<li><p>In the <code>templates</code> folder, create a new file named <code>home.html</code>, Then start typing <code>flext</code> to see the snippet appear as a completion:</p>
+<figure>
+<img src="images/flask-tutorial/autocomplete-for-code-snippet.png" alt="Flask tutorial: autocompletion for the flextlayout code snippet" /><figcaption>Flask tutorial: autocompletion for the flextlayout code snippet</figcaption>
+</figure>
+<p>When you select the completion, the snippet’s code appears with the cursor on the snippet’s insertion point:</p>
+<figure>
+<img src="images/flask-tutorial/code-snippet-inserted.png" alt="Flask tutorial: insertion of the flextlayout code snippet" /><figcaption>Flask tutorial: insertion of the flextlayout code snippet</figcaption>
+</figure></li>
+<li><p>At the insertion point in the “title” block, write <code>Home</code>, and in the “content” block, write <code>&lt;p&gt;Home page for the Visual Studio Code Flask tutorial.&lt;/p&gt;</code>, then save the file. These lines are the only unique parts of the extended page template:</p></li>
+<li><p>In the <code>templates</code> folder, create <code>about.html</code>, use the snippet to insert the boilerplate markup, insert <code>About us</code> and <code>&lt;p&gt;About page for the Visual Studio Code Flask tutorial.&lt;/p&gt;</code> in the “title” and “content” blocks, respectively, then save the file.</p></li>
+<li><p>Repeat the previous step to create <code>templates/contact.html</code> using <code>Contact us</code> and <code>&lt;p&gt;Contact page for the Visual Studio Code Flask tutorial.&lt;/p&gt;</code> in the two content blocks.</p></li>
+<li><p>In <code>app.py</code>, add functions for the /about/ and /contact/ routes that refer to their respective page templates. Also modify the <code>home</code> function to use the <code>home.html</code> template.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb23-1" title="1"><span class="co"># Replace the existing home function with the one below</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="at">@app.route</span>(<span class="st">&quot;/&quot;</span>)</a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="kw">def</span> home():</a>
+<a class="sourceLine" id="cb23-4" title="4">    <span class="cf">return</span> render_template(<span class="st">&quot;home.html&quot;</span>)</a>
+<a class="sourceLine" id="cb23-5" title="5"></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="co"># New functions</span></a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="at">@app.route</span>(<span class="st">&quot;/about/&quot;</span>)</a>
+<a class="sourceLine" id="cb23-8" title="8"><span class="kw">def</span> about():</a>
+<a class="sourceLine" id="cb23-9" title="9">    <span class="cf">return</span> render_template(<span class="st">&quot;about.html&quot;</span>)</a>
+<a class="sourceLine" id="cb23-10" title="10"></a>
+<a class="sourceLine" id="cb23-11" title="11"><span class="at">@app.route</span>(<span class="st">&quot;/contact/&quot;</span>)</a>
+<a class="sourceLine" id="cb23-12" title="12"><span class="kw">def</span> contact():</a>
+<a class="sourceLine" id="cb23-13" title="13">    <span class="cf">return</span> render_template(<span class="st">&quot;contact.html&quot;</span>)</a></code></pre></div></li>
+</ol>
+<h3 id="run-the-app">Run the app</h3>
+<p>With all the page templates in place, save <code>app.py</code>, run the app, and open a browser to see the results. Navigate between the pages to verify that the page templates are properly extending the base template.</p>
+<figure>
+<img src="images/flask-tutorial/full-app.png" alt="Flask tutorial: app rendering a common nav bar from the base template" /><figcaption>Flask tutorial: app rendering a common nav bar from the base template</figcaption>
+</figure>
+<h2 id="optional-activities">Optional activities</h2>
+<p>The following sections describe additional steps that you might find helpful in your work with Python and Visual Studio Code.</p>
+<h3 id="create-a-requirements.txt-file-for-the-environment">Create a requirements.txt file for the environment</h3>
+<p>When you share your app code through source control or some other means, it doesn’t make sense to copy all the files in a virtual environment because recipients can always recreate the environment themselves.</p>
+<p>Accordingly, developers typically omit the virtual environment folder from source control and instead describe the app’s dependencies using a <code>requirements.txt</code> file.</p>
+<p>Although you can create the file by hand, you can also use the <code>pip freeze</code> command to generate the file based on the exact libraries installed in the activated environment:</p>
+<ol type="1">
+<li><p>With your chosen environment selected using the <strong>Python: Select Interpreter</strong> command, run the <strong>Terminal: Create New Integrated Terminal</strong> command (<code>kb(workbench.action.terminal.new)</code>)) to open a terminal with that environment activated.</p></li>
+<li><p>In the terminal, run <code>pip freeze &gt; requirements.txt</code> to create the <code>requirements.txt</code> file in your project folder.</p></li>
+</ol>
+<p>Anyone (or any build server) that receives a copy of the project needs only to run the <code>pip install -r requirements.txt</code> command to reinstall the packages in the original the environment. (The recipient still needs to create their own virtual environment, however.)</p>
+<blockquote>
+<p><strong>Note</strong>: <code>pip freeze</code> lists all the Python packages you have installed in the current environment, including packages you aren’t currently using. The command also lists packages with exact version numbers, which you might want to convert to ranges for more flexibility in the future. For more information, see <a href="https://pip.pypa.io/en/stable/user_guide/#requirements-files">Requirements Files</a> in the pip command documentation.</p>
+</blockquote>
+<h3 id="refactor-the-project-to-support-further-development">Refactor the project to support further development</h3>
+<p>Throughout this Flask tutorial, all the app code is contained in a single <code>app.py</code> file. To allow for further development and to separate concerns, it’s helpful to refactor the pieces of <code>app.py</code> into separate files.</p>
+<ol type="1">
+<li><p>In your project folder, create a folder for the app, such as <code>hello_app</code>, to separate its files from other project-level files like <code>requirements.txt</code> and the <code>.vscode</code> folder where VS Code stores settings and debug configuration files.</p></li>
+<li><p>Move the <code>static</code> and <code>templates</code> folders into <code>hello_app</code>, because these folders certainly contain app code.</p></li>
+<li><p>In the <code>hello_app</code> folder, create a file named <code>views.py</code> that contains the routings and the view functions:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb24-1" title="1"><span class="im">from</span> flask <span class="im">import</span> Flask</a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="im">from</span> flask <span class="im">import</span> render_template</a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="im">from</span> datetime <span class="im">import</span> datetime</a>
+<a class="sourceLine" id="cb24-4" title="4"><span class="im">from</span> . <span class="im">import</span> app</a>
+<a class="sourceLine" id="cb24-5" title="5"></a>
+<a class="sourceLine" id="cb24-6" title="6"><span class="at">@app.route</span>(<span class="st">&quot;/&quot;</span>)</a>
+<a class="sourceLine" id="cb24-7" title="7"><span class="kw">def</span> home():</a>
+<a class="sourceLine" id="cb24-8" title="8">    <span class="cf">return</span> render_template(<span class="st">&quot;home.html&quot;</span>)</a>
+<a class="sourceLine" id="cb24-9" title="9"></a>
+<a class="sourceLine" id="cb24-10" title="10"><span class="at">@app.route</span>(<span class="st">&quot;/about/&quot;</span>)</a>
+<a class="sourceLine" id="cb24-11" title="11"><span class="kw">def</span> about():</a>
+<a class="sourceLine" id="cb24-12" title="12">    <span class="cf">return</span> render_template(<span class="st">&quot;about.html&quot;</span>)</a>
+<a class="sourceLine" id="cb24-13" title="13"></a>
+<a class="sourceLine" id="cb24-14" title="14"><span class="at">@app.route</span>(<span class="st">&quot;/contact/&quot;</span>)</a>
+<a class="sourceLine" id="cb24-15" title="15"><span class="kw">def</span> contact():</a>
+<a class="sourceLine" id="cb24-16" title="16">    <span class="cf">return</span> render_template(<span class="st">&quot;contact.html&quot;</span>)</a>
+<a class="sourceLine" id="cb24-17" title="17"></a>
+<a class="sourceLine" id="cb24-18" title="18"><span class="at">@app.route</span>(<span class="st">&quot;/hello/&quot;</span>)</a>
+<a class="sourceLine" id="cb24-19" title="19"><span class="at">@app.route</span>(<span class="st">&quot;/hello/&lt;name&gt;&quot;</span>)</a>
+<a class="sourceLine" id="cb24-20" title="20"><span class="kw">def</span> hello_there(name <span class="op">=</span> <span class="va">None</span>):</a>
+<a class="sourceLine" id="cb24-21" title="21">    <span class="cf">return</span> render_template(</a>
+<a class="sourceLine" id="cb24-22" title="22">        <span class="st">&quot;hello_there.html&quot;</span>,</a>
+<a class="sourceLine" id="cb24-23" title="23">        name<span class="op">=</span>name,</a>
+<a class="sourceLine" id="cb24-24" title="24">        date<span class="op">=</span>datetime.now()</a>
+<a class="sourceLine" id="cb24-25" title="25">    )</a>
+<a class="sourceLine" id="cb24-26" title="26"></a>
+<a class="sourceLine" id="cb24-27" title="27"><span class="at">@app.route</span>(<span class="st">&quot;/api/data&quot;</span>)</a>
+<a class="sourceLine" id="cb24-28" title="28"><span class="kw">def</span> get_data():</a>
+<a class="sourceLine" id="cb24-29" title="29">    <span class="cf">return</span> app.send_static_file(<span class="st">&quot;data.json&quot;</span>)</a></code></pre></div></li>
+<li><p>Optional: Right-click in the editor and select the <strong>Sort Imports</strong> command, which consolidates imports from identical modules, removes unused imports, and sorts your import statements. Using the command on the code above in <code>views.py</code> changes the imports as follows (you can remove the extra lines, of course):</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb25-1" title="1"><span class="im">from</span> datetime <span class="im">import</span> datetime</a>
+<a class="sourceLine" id="cb25-2" title="2"></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="im">from</span> flask <span class="im">import</span> Flask, render_template</a>
+<a class="sourceLine" id="cb25-4" title="4"></a>
+<a class="sourceLine" id="cb25-5" title="5"><span class="im">from</span> . <span class="im">import</span> app</a></code></pre></div></li>
+<li><p>In the <code>hello_app</code> folder, create a file <code>__init__.py</code> with the following contents:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb26-1" title="1"><span class="im">import</span> flask</a>
+<a class="sourceLine" id="cb26-2" title="2">app <span class="op">=</span> flask.Flask(<span class="va">__name__</span>)</a></code></pre></div></li>
+<li><p>In the <code>hello_app</code> folder, create a file <code>webapp.py</code> with the following contents:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># Entry point for the application.</span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="im">from</span> . <span class="im">import</span> app    <span class="co"># For application discovery by the &#39;flask&#39; command.</span></a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="im">from</span> . <span class="im">import</span> views  <span class="co"># For import side-effects of setting up routes.</span></a></code></pre></div></li>
+<li><p>Open the debug configuration file <code>launch.json</code> and update the <code>env</code> property as follows to point to the startup object:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb28-1" title="1"><span class="er">&quot;env&quot;:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb28-2" title="2">    <span class="dt">&quot;FLASK_APP&quot;</span><span class="fu">:</span> <span class="st">&quot;hello_app.webapp&quot;</span></a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="fu">}</span><span class="er">,</span></a></code></pre></div></li>
+<li><p>Delete the original <code>app.py</code> file in the project root, as its contents have been moved into other app files.</p></li>
+<li><p>Your project’s structure should now be similar to the following:</p>
+<figure>
+<img src="images/flask-tutorial/project-structure.png" alt="Flask tutorial: modified project structure with separate files and folders for parts of the app" /><figcaption>Flask tutorial: modified project structure with separate files and folders for parts of the app</figcaption>
+</figure></li>
+<li>Run the app in the debugger again to make sure everything works. To run the app outside of the VS Code debugger, use the following steps from a terminal:
+<ol type="1">
+<li>Set an environment variable for <code>FLASK_APP</code>. On Linux and macOS, use <code>export set FLASK_APP=webapp</code>; on Windows use <code>set FLASK_APP=webapp</code>.</li>
+<li>Navigate into the <code>hello_app</code> folder, then launch the program using <code>python -m flask run</code>.</li>
+</ol></li>
+</ol>
+<h3 id="create-a-container-for-a-flask-app-using-the-docker-extension">Create a container for a Flask app using the Docker extension</h3>
+<p>The <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">Docker extension</a> makes it easy to build, manage, and deploy containerized applications from Visual Studio Code. If you’re interested in learning how to create a Python container for the Flask app developed in this tutorial, check out the <a href="/docs/containers/quickstart-python.md">Python in a container</a> tutorial, which will walk you through how to:</p>
+<ul>
+<li>Create a <code>Dockerfile</code> file describing a simple Python container.</li>
+<li>Build, run, and verify the functionality of a <a href="https://flask.palletsprojects.com">Flask</a> app.</li>
+<li>Debug the app running in a container.</li>
+</ul>
+<p>If you have any problems, feel free to file an issue for this tutorial in the <a href="https://github.com/microsoft/vscode-docs/issues">VS Code documentation repository</a>.</p>
+<h2 id="next-steps">Next steps</h2>
+<p>Congratulations on completing this walkthrough of working with Flask in Visual Studio Code!</p>
+<p>The completed code project from this tutorial can be found on GitHub: <a href="https://github.com/microsoft/python-sample-vscode-flask-tutorial">python-sample-vscode-flask-tutorial</a>.</p>
+<p>Because this tutorial has only scratched the surface of page templates, refer to the <a href="https://jinja.palletsprojects.com">Jinja2 documentation</a> for more information about templates. The <a href="https://jinja.palletsprojects.com/templates/#synopsis">Template Designer Documentation</a> contains all the details on the template language. You might also want to review the <a href="https://flask.palletsprojects.com/tutorial">official Flask tutorial</a> as well as the documentation for Flask <a href="https://flask.palletsprojects.com/extensions/">extensions</a>.</p>
+<p>To try your app on a production website, check out the tutorial <a href="https://docs.microsoft.com/azure/python/tutorial-deploy-containers-01">Deploy Python apps to Azure App Service using Docker Containers</a>. Azure also offers a standard container, <a href="https://docs.microsoft.com/azure/python/tutorial-deploy-app-service-on-linux-01">App Service on Linux</a>, to which you deploy web apps from within VS Code.</p>
+<p>You may also want to review the following articles in the VS Code docs that are relevant to Python:</p>
+<ul>
+<li><a href="/docs/python/editing.md">Editing Python code</a></li>
+<li><a href="/docs/python/linting.md">Linting</a></li>
+<li><a href="/docs/python/environments.md">Managing Python environments</a></li>
+<li><a href="/docs/python/debugging.md">Debugging Python</a></li>
+<li><a href="/docs/python/testing.md">Testing</a></li>
+</ul>
+<p>If you encountered any problems in the course of this tutorial, feel free to file an issue in the <a href="https://github.com/microsoft/vscode-docs/issues">VS Code documentation repository</a>.</p>
+</body>
+</html>

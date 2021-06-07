@@ -6,6 +6,7 @@ PageTitle: Visual Studio Code workarounds for errors you might hit in the produc
 DateApproved: 3/31/2021
 MetaDescription: Several error conditions can easily be resolved by the user this page is designed to help un-block you.
 ---
+
 # Common Error Cases
 
 Some errors that occur when using Visual Studio Code can be worked around or resolved by you. This topic describes several common error conditions, listed by error code number, and what you can do to resolve them.
@@ -18,8 +19,8 @@ On Linux, the VS Code Node.js debugger requires the [gnome-terminal](https://hel
 
 There are two options for solving this problem:
 
-* Install the gnome-terminal by running the command `sudo apt-get install gnome-terminal` (or the equivalent of your Linux distribution).
-* Manually launch your program in debug mode by passing a `--inspect` or `--inspect-brk` option to Node.js and then attach the VS Code debugger to port 9229 on 'localhost'.
+- Install the gnome-terminal by running the command `sudo apt-get install gnome-terminal` (or the equivalent of your Linux distribution).
+- Manually launch your program in debug mode by passing a `--inspect` or `--inspect-brk` option to Node.js and then attach the VS Code debugger to port 9229 on 'localhost'.
 
 ## 20003
 
@@ -31,15 +32,15 @@ In the example below, the `program` attribute has a relative path to `app.js` at
 
 ```json
 {
-"version": "0.2.0",
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "./app.js"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "./app.js"
+    }
+  ]
 }
 ```
 
@@ -47,15 +48,15 @@ The fix is to use an absolute path or better use the `${workspaceFolder}` variab
 
 ```json
 {
-"version": "0.2.0",
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/app.js"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/app.js"
+    }
+  ]
 }
 ```
 

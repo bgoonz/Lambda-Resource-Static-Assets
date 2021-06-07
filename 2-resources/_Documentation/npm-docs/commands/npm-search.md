@@ -17,7 +17,7 @@ aliases: s, se, find
 Search the registry for packages matching the search terms. `npm search`
 performs a linear, incremental, lexically-ordered search through package
 metadata for all files in the registry. If your terminal has color
-support, it will further highlight the matches in the results.  This can
+support, it will further highlight the matches in the results. This can
 be disabled with the config item `color`
 
 Additionally, using the `--searchopts` and `--searchexclude` options
@@ -32,7 +32,7 @@ their npm username with `=`.
 
 If a term starts with `/`, then it's interpreted as a regular expression
 and supports standard JavaScript RegExp syntax. In this case search will
-ignore a trailing `/` .  (Note you must escape or quote many regular
+ignore a trailing `/` . (Note you must escape or quote many regular
 expression characters in most shells.)
 
 ### Configuration
@@ -42,35 +42,35 @@ parameters to the cli prefixed with `--` (e.g. `--json`)
 
 #### description
 
-* Default: true
-* Type: Boolean
+- Default: true
+- Type: Boolean
 
 #### color
 
- * Default: true
- * Type: Boolean
+- Default: true
+- Type: Boolean
 
 Used as `--no-color`, disables color highlighting of matches in the
 results.
 
 #### json
 
-* Default: false
-* Type: Boolean
+- Default: false
+- Type: Boolean
 
 Output search results as a JSON array.
 
 #### parseable
 
-* Default: false
-* Type: Boolean
+- Default: false
+- Type: Boolean
 
 Output search results as lines with tab-separated columns.
 
 #### long
 
-* Default: false
-* Type: Boolean
+- Default: false
+- Type: Boolean
 
 Display full package descriptions and other long text across multiple
 lines. When disabled (which is the default) the output will
@@ -79,22 +79,22 @@ extremely long names will fall on multiple lines.
 
 #### searchopts
 
-* Default: ""
-* Type: String
+- Default: ""
+- Type: String
 
 Space-separated options that are always passed to search.
 
 #### searchexclude
 
-* Default: ""
-* Type: String
+- Default: ""
+- Type: String
 
 Space-separated options that limit the results from search.
 
 #### registry
 
- * Default: https://registry.npmjs.org/
- * Type: url
+- Default: https://registry.npmjs.org/
+- Type: url
 
 Search the specified registry for modules. If you have configured npm to
 point to a different default registry (such as your internal private
@@ -115,7 +115,7 @@ updates immediately even for fresh search results.
 
 #### prefer-offline
 
-Bypasses staleness checks for cached searches.  Missing data will still
+Bypasses staleness checks for cached searches. Missing data will still
 be requested from the server. To force full offline mode, use `offline`.
 
 #### offline
@@ -125,9 +125,9 @@ an error.
 
 ### See Also
 
-* [npm registry](/using-npm/registry)
-* [npm config](/commands/npm-config)
-* [npmrc](/configuring-npm/npmrc)
-* [npm view](/commands/npm-view)
-* [npm cache](/commands/npm-cache)
-* https://npm.im/npm-registry-fetch
+- [npm registry](/using-npm/registry)
+- [npm config](/commands/npm-config)
+- [npmrc](/configuring-npm/npmrc)
+- [npm view](/commands/npm-view)
+- [npm cache](/commands/npm-cache)
+- https://npm.im/npm-registry-fetch

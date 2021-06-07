@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>emberjs-tutorial</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="using-ember-in-visual-studio-code">Using Ember in Visual Studio Code</h1>
+<p><a href="https://emberjs.com/">Ember</a> is a popular JavaScript framework for building web application user interfaces. The Visual Studio Code editor supports Ember.js IntelliSense and code navigation out of the box.</p>
+<figure>
+<img src="images/emberjs/tomster-logo.png" alt="Welcome to app" /><figcaption>Welcome to app</figcaption>
+</figure>
+<h2 id="welcome-to-ember">Welcome to Ember</h2>
+<p>We’ll be using the <a href="https://ember-cli.com/">Ember CLI</a> for this tutorial. To install and use the command line interface as well as run the Ember.js application server, you’ll need the <a href="https://nodejs.org/">Node.js</a> JavaScript runtime and <a href="https://www.npmjs.com/">npm</a> (the Node.js package manager) installed. npm is included with Node.js which you can install from <a href="https://nodejs.org/en/download/">Node.js downloads</a>.</p>
+<blockquote>
+<p><strong>Tip</strong>: To test that you have Node.js and npm correctly installed on your machine, you can type <code>node --version</code> and <code>npm --version</code>.</p>
+</blockquote>
+<p>To install Ember CLI, in a terminal or command prompt type:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1"><span class="ex">npm</span> install -g ember-cli</a></code></pre></div>
+<p>This may take a few minutes to install. You can now create a new Ember.js application by typing:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1"><span class="ex">ember</span> new my-app</a></code></pre></div>
+<p><code>my-app</code> is the name of the folder for your application. This may take a few minutes to create the Ember application in <a href="/docs/languages/javascript.md">JavaScript</a> and install its dependencies.</p>
+<p>Let’s quickly run our Ember application by navigating to the new folder and typing <code>ember serve</code> to start the web server and open the application in a browser:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="bu">cd</span> my-app</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="ex">ember</span> serve</a></code></pre></div>
+<p>Once you see the <strong>Build successful</strong> message, you can open your browser to <a href="http://localhost:4200">http://localhost:4200</a> and you should see “Congratulations, you made it!”. You can press <code>kbstyle(Ctrl+C)</code> to stop the Ember server.</p>
+<figure>
+<img src="images/emberjs/welcome-page.png" alt="Ember welcome page" /><figcaption>Ember welcome page</figcaption>
+</figure>
+<p>To open your Ember application in VS Code, open another terminal (or command prompt) and navigate to the <code>my-app</code> folder and type <code>code .</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="bu">cd</span> my-app</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="ex">code</span> .</a></code></pre></div>
+<h3 id="syntax-highlighting-and-bracket-matching">Syntax highlighting and bracket matching</h3>
+<p>Now expand the <code>app</code> folder and select the <code>app.js</code> file. You’ll notice that VS Code has syntax highlighting for the various source code elements and, if you put the cursor on a parentheses, the matching bracket is also selected.</p>
+<figure>
+<img src="images/emberjs/bracket-matching.png" alt="react bracket matching" /><figcaption>react bracket matching</figcaption>
+</figure>
+<h2 id="intellisense">IntelliSense</h2>
+<p>As you start typing in <code>app.js</code>, you’ll see smart suggestions or completions.</p>
+<figure>
+<img src="images/emberjs/suggestions.png" alt="Ember suggestions" /><figcaption>Ember suggestions</figcaption>
+</figure>
+<p>After you select a suggestion and type <code>.</code>, you see the types and methods on the object through <a href="/docs/editor/intellisense.md">IntelliSense</a>.</p>
+<figure>
+<img src="images/emberjs/intellisense.png" alt="Ember intellisense" /><figcaption>Ember intellisense</figcaption>
+</figure>
+<p>VS Code uses the TypeScript language service for its JavaScript code intelligence and it has a feature called <a href="/docs/nodejs/working-with-javascript.md#typings-and-automatic-type-acquisition">Automatic Type Acquisition</a> (ATA). ATA pulls down the npm Type Declaration files (<code>*.d.ts</code>) for the npm modules referenced in the <code>package.json</code>.</p>
+<p>If you select a method, you’ll also get parameter help:</p>
+<figure>
+<img src="images/emberjs/parameter-help.png" alt="Ember parameter help" /><figcaption>Ember parameter help</figcaption>
+</figure>
+<h3 id="go-to-definition-peek-definition">Go to Definition, Peek definition</h3>
+<p>Through the TypeScript language service, VS Code can also provide type definition information in the editor through <strong>Go to Definition</strong> (<code>kb(editor.action.revealDefinition)</code>) or <strong>Peek Definition</strong> (<code>kb(editor.action.peekDefinition)</code>). Put the cursor over <code>Application</code>, right click and select <strong>Peek Definition</strong>. A <a href="/docs/editor/editingevolved.md#peek">Peek window</a> will open showing the <code>Application</code> definition from <code>ember_application</code> Type Declaration file.</p>
+<figure>
+<img src="images/emberjs/peek-definition.png" alt="react peek definition" /><figcaption>react peek definition</figcaption>
+</figure>
+<p>Press <code>kbstyle(Escape)</code> to close the Peek window.</p>
+<h2 id="extensions">Extensions</h2>
+<p>The VS Code Marketplace has many community created extensions for Ember.js development which add features like code snippets and advanced code suggestions. You can search in the Extensions view (<code>kb(workbench.view.extensions)</code>) by typing ‘ember’.</p>
+<figure>
+<img src="images/emberjs/ember-extensions.png" alt="Ember.js extensions" /><figcaption>Ember.js extensions</figcaption>
+</figure>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="can-i-debug-ember-client-side-code-with-vs-code">Can I debug Ember client side code with VS Code?</h3>
+<p>You can use the <a href="https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome">Debugger for Chrome</a> extension for client side debugging. Unfortunately it is difficult to get the configuration correct due to the sourcemaps created by the Ember CLI default transpiler. See <a href="https://github.com/microsoft/vscode-chrome-debug/issues/193">issue #193</a> for an explanation and partial workaround.</p>
+</body>
+</html>

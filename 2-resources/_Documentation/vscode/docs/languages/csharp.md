@@ -8,6 +8,7 @@ DateApproved: 7/16/2018
 MetaDescription: Find out how to get the best out of Visual Studio Code and C#.
 MetaSocialImage: images/csharp/languages_csharp.png
 ---
+
 # Working with C&#35;
 
 The C# support in Visual Studio Code is optimized for cross-platform .NET Core development (see [working with .NET Core and VS Code](/docs/languages/dotnet.md) for another relevant article). Our focus with VS Code is to be a great editor for cross-platform C# development.
@@ -18,10 +19,10 @@ VS Code supports debugging of C# applications running on either .NET Core or Mon
 
 For detailed instructions on:
 
-* .NET Core debugging - see the [Microsoft C# extension's GitHub page](https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger.md).
-* Mono debugging - see the [Mono Debug extension's README](https://marketplace.visualstudio.com/items?itemName=ms-vscode.mono-debug).
+- .NET Core debugging - see the [Microsoft C# extension's GitHub page](https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger.md).
+- Mono debugging - see the [Mono Debug extension's README](https://marketplace.visualstudio.com/items?itemName=ms-vscode.mono-debug).
 
->**Note:** [VS Code has limited support for debugging applications running on the Desktop .NET Framework.](https://github.com/OmniSharp/omnisharp-vscode/wiki/Desktop-.NET-Framework)
+> **Note:** [VS Code has limited support for debugging applications running on the Desktop .NET Framework.](https://github.com/OmniSharp/omnisharp-vscode/wiki/Desktop-.NET-Framework)
 
 Due to this focus, many standard C# project types are not recognized by VS Code. An example of a non-supported project type is an ASP.NET MVC Application (though [ASP.NET Core](https://asp.net) is supported). In these cases, if you want to have a lightweight tool to edit a file - VS Code has you covered. If you want the best possible experience for those projects and development on Windows in general, we recommend you use [Visual Studio Community](https://visualstudio.microsoft.com/vs/community).
 
@@ -35,19 +36,19 @@ C# language support is an optional [install from the Marketplace](https://market
 
 Visual Studio Code uses the power of [Roslyn](https://github.com/dotnet/roslyn) and [OmniSharp](https://www.omnisharp.net) to offer an enhanced C# experience. We offer support for:
 
-* .NET Core projects
-* MSBuild projects
-* C# scripts (CSX)
+- .NET Core projects
+- MSBuild projects
+- C# scripts (CSX)
 
-On startup the best matching projects are loaded automatically but you can also choose your projects manually. The status bar will show what projects have been loaded and also allows you to select a different set of projects. To do so, click on the status bar projects item and select *Change projects…*. In the image below a single project has been picked up:
+On startup the best matching projects are loaded automatically but you can also choose your projects manually. The status bar will show what projects have been loaded and also allows you to select a different set of projects. To do so, click on the status bar projects item and select _Change projects…_. In the image below a single project has been picked up:
 
 ![Select Project](images/csharp/selectproject.png)
 
 The available options include:
 
-* Selecting a ```project.json``` file will open a .NET Core project and VS Code will load that project plus the referenced projects.
-* Selecting a ```*.sln``` file opens a MSBuild-project. It will load the referenced ```*.csproj``` projects and sibling or descendant ```project.json``` files but no other project files that are referenced from the solution file.
-* Selecting a ```folder``` will make VS Code scan for ```*.sln```, ```project.json``` and ```*.csx``` files (C# scripts) and VS Code will attempt to load them all.
+- Selecting a `project.json` file will open a .NET Core project and VS Code will load that project plus the referenced projects.
+- Selecting a `*.sln` file opens a MSBuild-project. It will load the referenced `*.csproj` projects and sibling or descendant `project.json` files but no other project files that are referenced from the solution file.
+- Selecting a `folder` will make VS Code scan for `*.sln`, `project.json` and `*.csx` files (C# scripts) and VS Code will attempt to load them all.
 
 Once the project is loaded the enhanced experiences light up...
 
@@ -73,7 +74,7 @@ We have several built-in snippets included in VS Code that will come up as you t
 
 ![Snippets](images/csharp/snippet.png)
 
->**Tip:** You can add in your own User Defined Snippets for C#. Take a look at [User Defined Snippets](/docs/editor/userdefinedsnippets.md) to find out how.
+> **Tip:** You can add in your own User Defined Snippets for C#. Take a look at [User Defined Snippets](/docs/editor/userdefinedsnippets.md) to find out how.
 
 ## Search for Symbols
 
@@ -85,11 +86,11 @@ There are also features outside the editor. One is the ability to search for sym
 
 Another cool feature is the ability to see the number of references to a method directly above the method. Click on the reference info to see the references in the Peek view. This reference information updates as you type.
 
->**Note:** Methods defined in `object`, such as `equals` and `hashCode` do not get reference information due to performance reasons.
+> **Note:** Methods defined in `object`, such as `equals` and `hashCode` do not get reference information due to performance reasons.
 
 ![CodeLens](images/csharp/codelens.png)
 
->**Tip:** You can turn off references information displayed in CodeLens with the `editor.codeLens` [setting](/docs/getstarted/settings.md).
+> **Tip:** You can turn off references information displayed in CodeLens with the `editor.codeLens` [setting](/docs/getstarted/settings.md).
 
 ## Find References/Peek Definition
 
@@ -107,11 +108,11 @@ There are some basic quick fixes supported in VS Code. You will see a lightbulb 
 
 Read on to find out about:
 
-* [.NET Core Development](/docs/languages/dotnet.md) - get up and running with cross-platform .NET
-* [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
-* [Tasks](/docs/editor/tasks.md) - Use tasks to build your project and more.
-* [Debugging](/docs/editor/debugging.md) - Find out how to use the debugger with your project.
-* [Unity development](/docs/other/unity.md) - Learn about using VS Code with your Unity projects.
+- [.NET Core Development](/docs/languages/dotnet.md) - get up and running with cross-platform .NET
+- [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
+- [Tasks](/docs/editor/tasks.md) - Use tasks to build your project and more.
+- [Debugging](/docs/editor/debugging.md) - Find out how to use the debugger with your project.
+- [Unity development](/docs/other/unity.md) - Learn about using VS Code with your Unity projects.
 
 ## Common questions
 

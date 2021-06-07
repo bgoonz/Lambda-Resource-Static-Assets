@@ -21,8 +21,8 @@ in the current folder and use the `repository` property.
 
 #### browser
 
-* Default: OS X: `"open"`, Windows: `"start"`, Others: `"xdg-open"`
-* Type: String or Boolean
+- Default: OS X: `"open"`, Windows: `"start"`, Others: `"xdg-open"`
+- Type: String or Boolean
 
 The browser that is called by the `npm repo` command to open websites.
 
@@ -33,5 +33,5 @@ Set to `true` to use default system URL opener.
 
 ### See Also
 
-* [npm docs](/commands/npm-docs)
-* [npm config](/commands/npm-config)
+- [npm docs](/commands/npm-docs)
+- [npm config](/commands/npm-config)

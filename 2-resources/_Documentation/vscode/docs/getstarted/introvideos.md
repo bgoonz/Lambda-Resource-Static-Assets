@@ -8,6 +8,7 @@ DateApproved: 3/31/2021
 MetaDescription: Overview of Visual Studio Code's introductory videos.
 MetaSocialImage: images/introvideos/opengraph_introvideos.png
 ---
+
 # Introductory Videos
 
 Start your journey using Visual Studio Code with this set of introductory videos! These videos are designed to give you an overview of VS Code's various features and quickly get you familiar with them.

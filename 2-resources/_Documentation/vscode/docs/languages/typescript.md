@@ -45,9 +45,9 @@ If semantic highlighting is enabled and the color theme has a corresponding styl
 
 Semantic highlighting can change colors based on:
 
-* The resolved type of a symbol: namespace, variable, property, variable, property, class, interface, typeParameter.
-* Whether the variable/property is read-only (const) or modifiable.
-* Whether the variable/property type is callable (a function type) or not.
+- The resolved type of a symbol: namespace, variable, property, variable, property, class, interface, typeParameter.
+- Whether the variable/property is read-only (const) or modifiable.
+- Whether the variable/property type is callable (a function type) or not.
 
 ## IntelliSense
 
@@ -99,7 +99,7 @@ As you write a TypeScript function call, VS Code shows information about the fun
 
 ![Signature help for the lodash capitalize function](images/typescript/signature-help.png)
 
-Signature help is shown automatically when you type a `(` or `,` within a function call. Use `kb(editor.action.triggerParameterHints)`  to manually trigger signature help.
+Signature help is shown automatically when you type a `(` or `,` within a function call. Use `kb(editor.action.triggerParameterHints)` to manually trigger signature help.
 
 ## Auto imports
 
@@ -141,16 +141,16 @@ Set `"typescript.autoClosingTags"` to `false` to disable JSX tag closing.
 
 Code navigation lets you quickly navigate TypeScript projects.
 
-* **Go to Definition** `kb(editor.action.revealDefinition)` - Go to the source code of a symbol definition.
-* **Peek Definition** `kb(editor.action.peekDefinition)` - Bring up a Peek window that shows the definition of a symbol.
-* **Go to References** `kb(editor.action.goToReferences)` - Show all references to a symbol.
-* **Go to Type Definition** `kb(editor.action.goToTypeDefinition)` - Go to the type that defines a symbol. For an instance of a class, this will reveal the class itself instead of where the instance is defined.
-* **Go to Implementation** `kb(editor.action.goToImplementation)` - Go to the implementations of an interface or abstract method.
+- **Go to Definition** `kb(editor.action.revealDefinition)` - Go to the source code of a symbol definition.
+- **Peek Definition** `kb(editor.action.peekDefinition)` - Bring up a Peek window that shows the definition of a symbol.
+- **Go to References** `kb(editor.action.goToReferences)` - Show all references to a symbol.
+- **Go to Type Definition** `kb(editor.action.goToTypeDefinition)` - Go to the type that defines a symbol. For an instance of a class, this will reveal the class itself instead of where the instance is defined.
+- **Go to Implementation** `kb(editor.action.goToImplementation)` - Go to the implementations of an interface or abstract method.
 
 You can navigate via symbol search using the **Go to Symbol** commands from the **Command Palette** (`kb(workbench.action.showCommands)`).
 
-* **Go to Symbol in File** `kb(workbench.action.gotoSymbol)`
-* **Go to Symbol in Workspace** `kb(workbench.action.showAllSymbols)`
+- **Go to Symbol in File** `kb(workbench.action.gotoSymbol)`
+- **Go to Symbol in Workspace** `kb(workbench.action.showAllSymbols)`
 
 ## Rename
 
@@ -168,44 +168,44 @@ See [Refactorings](/docs/editor/refactoring.md) for more information about refac
 
 Available TypeScript refactorings include:
 
-* **Extract to method or function** - Extract the selected statements or expressions to either a new method or a new function in the file.
+- **Extract to method or function** - Extract the selected statements or expressions to either a new method or a new function in the file.
 
-   ![Triggering the extract method refactoring on a selection](images/typescript/refactor-extract-function.gif)
+  ![Triggering the extract method refactoring on a selection](images/typescript/refactor-extract-function.gif)
 
-   After selecting the **Extract to method** or **Extract to function** refactoring, enter the name of the extracted method/function.
+  After selecting the **Extract to method** or **Extract to function** refactoring, enter the name of the extracted method/function.
 
-* **Extract to constant** - Extract the selected expression to a new constant in the file.
+- **Extract to constant** - Extract the selected expression to a new constant in the file.
 
-   ![Extracting a constant from a selection](images/typescript/refactor-extract-constant.gif)
+  ![Extracting a constant from a selection](images/typescript/refactor-extract-constant.gif)
 
-* **Extract type to interface or type alias** - Extract the selected complex type to either an interface or a type alias.
+- **Extract type to interface or type alias** - Extract the selected complex type to either an interface or a type alias.
 
-   ![Extract an inline type to an interface](images/typescript/refactor-extract-interface.gif)
+  ![Extract an inline type to an interface](images/typescript/refactor-extract-interface.gif)
 
-* **Move to new file** - Move one or more classes, functions, constants, or interfaces in the top-level scope of the file to a new file. The new file's name is inferred from the selected symbol's name.
+- **Move to new file** - Move one or more classes, functions, constants, or interfaces in the top-level scope of the file to a new file. The new file's name is inferred from the selected symbol's name.
 
-   ![Moving a class to a new file](images/typescript/refactor-move-file.gif)
+  ![Moving a class to a new file](images/typescript/refactor-move-file.gif)
 
-* **Convert between named imports and namespace imports** - Convert between named imports (`import { Name } from './foo'`) and namespace imports (`import * as foo from './foo'`).
+- **Convert between named imports and namespace imports** - Convert between named imports (`import { Name } from './foo'`) and namespace imports (`import * as foo from './foo'`).
 
-   ![Converting a named import to a namespace import](images/typescript/refactor-convert-import.gif)
+  ![Converting a named import to a namespace import](images/typescript/refactor-convert-import.gif)
 
-* **Convert between default export and named export** - Convert from using a `export default` and having a named export (`export const Foo = ...`).
+- **Convert between default export and named export** - Convert from using a `export default` and having a named export (`export const Foo = ...`).
 
-* **Generate get and set accessors** - Encapsulate a selected class property by generating a getter and setter for it.
+- **Generate get and set accessors** - Encapsulate a selected class property by generating a getter and setter for it.
 
-   ![Generating getters and setters from class property](images/typescript/refactor-generate-get-set.gif)
+  ![Generating getters and setters from class property](images/typescript/refactor-generate-get-set.gif)
 
-* **Convert parameters to destructured object** - Rewrite a function that takes a long list of arguments to take a single arguments object.
+- **Convert parameters to destructured object** - Rewrite a function that takes a long list of arguments to take a single arguments object.
 
 ## Quick Fixes
 
 Quick Fixes are suggested edits that address simple coding errors. Example Quick Fixes include:
 
-* Adding a missing `this` to a member access.
-* Fixing a misspelled property name.
-* Removing unreachable code or unused imports
-* Declaring
+- Adding a missing `this` to a member access.
+- Fixing a misspelled property name.
+- Removing unreachable code or unused imports
+- Declaring
 
 When you move your cursor on to a TypeScript error, VS Code shows a lightbulb that indicates that Quick Fixes are available. Click the lightbulb or press `kb(editor.action.quickFix)` to show a list of available Quick Fixes and [refactorings](#refactoring).
 
@@ -262,10 +262,10 @@ You can also set `editor.codeActionsOnSave` to an array of Code Actions to execu
 
 Here are some source actions:
 
-* `"organizeImports"` -  Enables organize imports on save.
-* `"fixAll"` - Auto Fix on Save computes all possible fixes in one round (for all providers including ESLint).
-* `"fixAll.eslint"` -  Auto Fix only for ESLint.
-* `"addMissingImports"` - Adds all missing imports on save.
+- `"organizeImports"` - Enables organize imports on save.
+- `"fixAll"` - Auto Fix on Save computes all possible fixes in one round (for all providers including ESLint).
+- `"fixAll.eslint"` - Auto Fix only for ESLint.
+- `"addMissingImports"` - Adds all missing imports on save.
 
 See [TypeScript](/docs/typescript/typescript-tutorial) for more information.
 
@@ -307,9 +307,9 @@ When you move or rename a file that is imported by other files in your TypeScrip
 
 The `typescript.updateImportsOnFileMove.enabled` setting controls this behavior. Valid settings values are:
 
-* `"prompt"` - The default. Asks if paths should be updated for each file move.
-* `"always"` - Always automatically update paths.
-* `"never"` - Do not update paths automatically and do not prompt.
+- `"prompt"` - The default. Asks if paths should be updated for each file move.
+- `"always"` - Always automatically update paths.
+- `"never"` - Do not update paths automatically and do not prompt.
 
 ## Debugging
 
@@ -343,9 +343,9 @@ VS Code provides many features for TypeScript out of the box. In addition to wha
 
 To learn more, see:
 
-* [TypeScript tutorial](/docs/typescript/typescript-tutorial.md) - Create a simple Hello World TypeScript in VS Code.
-* [Compiling TypeScript](/docs/typescript/typescript-compiling.md) - Compile TypeScript to a JavaScript target version.
-* [Debugging TypeScript](/docs/typescript/typescript-debugging.md) - Learn about debugging TypeScript both server and client-side with VS Code.
+- [TypeScript tutorial](/docs/typescript/typescript-tutorial.md) - Create a simple Hello World TypeScript in VS Code.
+- [Compiling TypeScript](/docs/typescript/typescript-compiling.md) - Compile TypeScript to a JavaScript target version.
+- [Debugging TypeScript](/docs/typescript/typescript-debugging.md) - Learn about debugging TypeScript both server and client-side with VS Code.
 
 ## Common questions
 

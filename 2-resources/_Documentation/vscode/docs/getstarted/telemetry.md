@@ -7,9 +7,10 @@ ContentId: 47a2e3b1-24f2-42e6-a6e6-272c2a0f3218
 DateApproved: 3/31/2021
 MetaDescription: Learn about Visual Studio Code collected telemetry and how to opt out.
 ---
+
 # Telemetry
 
-Visual Studio Code collects telemetry data, which is used to help understand how to improve the product. For example, this usage data helps to debug issues, such as slow start-up times, and to prioritize new features.  While we appreciate the insights this data provides, we also know that not everyone wants to send usage data and you can disable telemetry as described in [disable telemetry reporting](#disable-telemetry-reporting). You can also read our [privacy statement](https://go.microsoft.com/fwlink/?LinkID=528096&clcid=0x409) to learn more.
+Visual Studio Code collects telemetry data, which is used to help understand how to improve the product. For example, this usage data helps to debug issues, such as slow start-up times, and to prioritize new features. While we appreciate the insights this data provides, we also know that not everyone wants to send usage data and you can disable telemetry as described in [disable telemetry reporting](#disable-telemetry-reporting). You can also read our [privacy statement](https://go.microsoft.com/fwlink/?LinkID=528096&clcid=0x409) to learn more.
 
 ## Disable telemetry reporting
 
@@ -31,11 +32,11 @@ VS Code collects data about any crashes that occur and sends it to Microsoft to 
 
 If you don't wish to send crash data to Microsoft, you can change the `enable-crash-reporter` runtime argument to `false`
 
-* Open the Command Palette (`kb(workbench.action.showCommands)`).
-* Run the **Preferences: Configure Runtime Arguments** command.
-* This command will open a `argv.json` file to configure runtime arguments.
-* Edit `"enable-crash-reporter": false`.
-* Restart VS Code.
+- Open the Command Palette (`kb(workbench.action.showCommands)`).
+- Run the **Preferences: Configure Runtime Arguments** command.
+- This command will open a `argv.json` file to configure runtime arguments.
+- Edit `"enable-crash-reporter": false`.
+- Restart VS Code.
 
 ## Extensions and telemetry
 
@@ -67,13 +68,13 @@ In addition to supporting the General Data Protection Regulation (GDPR), the VS 
 
 To ensure GDPR compliance, we made several updates to VS Code, these include:
 
-* Making it easier to opt out of telemetry collection by placing a notification in product for all existing and new users.
-* Reviewing and classifying the telemetry that we send (documented in [our OSS codebase](https://github.com/microsoft/vscode/pull/34997)).
-* Ensuring that we have valid data retention policies in place for any data we do collect, for example crash dumps.
+- Making it easier to opt out of telemetry collection by placing a notification in product for all existing and new users.
+- Reviewing and classifying the telemetry that we send (documented in [our OSS codebase](https://github.com/microsoft/vscode/pull/34997)).
+- Ensuring that we have valid data retention policies in place for any data we do collect, for example crash dumps.
 
 In short, we have worked hard to do the right thing, for all users, as these practices apply to all geographies, not just Europe.
 
-One question we expect people to ask is to see the data we collect. However, we don't have a reliable way to do this as VS Code does not have a 'sign-in' experience that would uniquely identify a user.  We do send information that helps us approximate a single user for diagnostic purposes (this is based on a hash of the network adapter NIC) but this is not guaranteed to be unique. For example, virtual machines (VMs) often rotate NIC IDs or allocate from a pool. This technique is sufficient to help us when working through problems, but it is not reliable enough for us to 'provide your data'.
+One question we expect people to ask is to see the data we collect. However, we don't have a reliable way to do this as VS Code does not have a 'sign-in' experience that would uniquely identify a user. We do send information that helps us approximate a single user for diagnostic purposes (this is based on a hash of the network adapter NIC) but this is not guaranteed to be unique. For example, virtual machines (VMs) often rotate NIC IDs or allocate from a pool. This technique is sufficient to help us when working through problems, but it is not reliable enough for us to 'provide your data'.
 
 We expect our approach to evolve as we learn more about GDPR and the expectations of our users. We greatly appreciate the data users do send to us, as it is very valuable and VS Code is a better product for everyone because of it. And again, if you are worried about privacy, we offer the ability to disable sending telemetry as described in [disable telemetry reporting](/docs/getstarted/telemetry.md#disable-telemetry-reporting).
 
@@ -131,6 +132,6 @@ Additionally, telemetry authors can add a `telemetry.json` file to their root bu
 
 ## Next steps
 
-* [Visual Studio Code FAQ](/docs/supporting/faq.md) - Consult the Frequently Asked Questions to learn more.
-* [User and Workspace Settings](/docs/getstarted/settings.md) - Read about available options to customize VS Code.
-* [Key Bindings](/docs/getstarted/keybindings.md) - You can easily modify commonly used keyboard shortcuts.
+- [Visual Studio Code FAQ](/docs/supporting/faq.md) - Consult the Frequently Asked Questions to learn more.
+- [User and Workspace Settings](/docs/getstarted/settings.md) - Read about available options to customize VS Code.
+- [Key Bindings](/docs/getstarted/keybindings.md) - You can easily modify commonly used keyboard shortcuts.

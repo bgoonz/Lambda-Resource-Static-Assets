@@ -17,7 +17,7 @@ Testing Java in Visual Studio Code is enabled by the [Java Test Runner](https://
 - [JUnit 5](https://junit.org/junit5/) (v5.1.0+)
 - [TestNG](https://testng.org/doc/) (v6.8.0+)
 
->**Note**: More information about the test frameworks can be found at [JUnit](https://junit.org/) and [TestNG](https://testng.org/).
+> **Note**: More information about the test frameworks can be found at [JUnit](https://junit.org/) and [TestNG](https://testng.org/).
 
 The [Java Test Runner](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test) works with the [Language Support for Java by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java) and [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug) extensions to provide the following features:
 
@@ -44,7 +44,7 @@ Make sure you have the below tools available already
 
 You may refer to [Java Extensions](/docs/java/java-tutorial.md#before-you-begin) to set up the environment.
 
->**Note**: More information about JDK can be found at [supported Java versions](/docs/java/java-tutorial.md#supported-java-versions).
+> **Note**: More information about JDK can be found at [supported Java versions](/docs/java/java-tutorial.md#supported-java-versions).
 
 ### Getting Started for JUnit 5
 

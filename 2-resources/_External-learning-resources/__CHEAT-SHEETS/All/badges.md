@@ -7,9 +7,9 @@ Here are some badges for open source projects.
 ### Badge markdown
 
     Travis
-    [![Status](https://travis-ci.org/rstacruz/REPO.svg?branch=master)](https://travis-ci.org/rstacruz/REPO)  
+    [![Status](https://travis-ci.org/rstacruz/REPO.svg?branch=master)](https://travis-ci.org/rstacruz/REPO)
     CodeClimate (shields.io)
-    [![CodeClimate](http://img.shields.io/codeclimate/github/rstacruz/REPO.svg?style=flat)](https://codeclimate.com/github/rstacruz/REPO 
+    [![CodeClimate](http://img.shields.io/codeclimate/github/rstacruz/REPO.svg?style=flat)](https://codeclimate.com/github/rstacruz/REPO
     "CodeClimate")
 
     Coveralls (shields.io)
@@ -87,15 +87,14 @@ Here are some badges for open source projects.
 
 ### Links
 
- * Everything: http://shields.io/
+- Everything: http://shields.io/
 
- * Version badge (gems, npm): http://badge.fury.io/
+- Version badge (gems, npm): http://badge.fury.io/
 
- * Dependencies (ruby): http://gemnasium.com/
+- Dependencies (ruby): http://gemnasium.com/
 
- * CI: http://travis-ci.org/
+- CI: http://travis-ci.org/
 
- * Code quality (ruby): http://codeclimate.com/
+- Code quality (ruby): http://codeclimate.com/
 
- * Test coverage: https://coveralls.io/
-
+- Test coverage: https://coveralls.io/

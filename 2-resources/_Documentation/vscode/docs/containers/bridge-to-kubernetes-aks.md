@@ -16,10 +16,10 @@ This guide uses the [Bike Sharing sample application][bike-sharing-github] to de
 
 ### Prerequisites
 
-* An Azure subscription. If you don't have an Azure subscription, you can create a [free account](https://azure.microsoft.com/free).
-* [Azure CLI installed][azure-cli].
-* [Visual Studio Code][vs-code] running on macOS, Windows 10, or Linux (currently in preview).
-* The [Bridge to Kubernetes][btk-vs-code] extension installed in Visual Studio Code.
+- An Azure subscription. If you don't have an Azure subscription, you can create a [free account](https://azure.microsoft.com/free).
+- [Azure CLI installed][azure-cli].
+- [Visual Studio Code][vs-code] running on macOS, Windows 10, or Linux (currently in preview).
+- The [Bridge to Kubernetes][btk-vs-code] extension installed in Visual Studio Code.
 
 ## Create a Kubernetes cluster
 
@@ -130,16 +130,16 @@ Remove the breakpoint by putting your cursor on line 233 in `server.js` and hitt
 Edit `server.js` to remove lines 234 and 235:
 
 ```javascript
-    // Hard code image url *FIX ME*
-    theBike.imageUrl = "/static/logo.svg";
+// Hard code image url *FIX ME*
+theBike.imageUrl = "/static/logo.svg";
 ```
 
 The section should now look like:
 
 ```javascript
-    var theBike = result;
-    theBike.id = theBike._id;
-    delete theBike._id;
+var theBike = result;
+theBike.id = theBike._id;
+delete theBike._id;
 ```
 
 Save your changes and press `kb(workbench.action.debug.restart)` or select **Run** then **Restart Debugging**. After you are reconnected, refresh your browser and verify that you no longer see a placeholder image for the bike.
@@ -150,7 +150,7 @@ Select **Run** then **Stop Debugging** or press `kb(workbench.action.debug.stop)
 
 ## Additional configuration
 
-Bridge to Kubernetes can handle routing traffic and replicating environment variables without any additional configuration. If you need to download any files that are mounted to the container in your Kubernetes cluster, such as a ConfigMap file, you can create a `KubernetesLocalProcessConfig.yaml` to download those files to your development computer. For more information, see [Configure Bridge to Kubernetes][kubernetesLocalProcessConfig-yaml].
+Bridge to Kubernetes can handle routing traffic and replicating environment variables without any additional configuration. If you need to download any files that are mounted to the container in your Kubernetes cluster, such as a ConfigMap file, you can create a `KubernetesLocalProcessConfig.yaml` to download those files to your development computer. For more information, see [Configure Bridge to Kubernetes][kuberneteslocalprocessconfig-yaml].
 
 ## Using logging and diagnostics
 
@@ -178,11 +178,11 @@ Use the provided script to remove the sample application from your cluster.
 
 ## Troubleshooting
 
- If you get this error when activating the Bridge to Kubernetes extension:
+If you get this error when activating the Bridge to Kubernetes extension:
 
 "Failed to update dependencies: maximum number of retries exceeded"
 
- First, retry the activation using the button. If it repeatedly does not succeed, see [https://github.com/microsoft/mindaro/issues/32](https://github.com/microsoft/mindaro/issues/32).
+First, retry the activation using the button. If it repeatedly does not succeed, see [https://github.com/microsoft/mindaro/issues/32](https://github.com/microsoft/mindaro/issues/32).
 
 ## Next steps
 
@@ -202,6 +202,6 @@ Learn more about Bridge to Kubernetes at [How Bridge to Kubernetes works][btk-ho
 [supported-regions]: https://azure.microsoft.com/global-infrastructure/services/?products=kubernetes-service
 [troubleshooting]: https://docs.microsoft.com/azure/dev-spaces/troubleshooting#fail-to-restore-original-configuration-of-deployment-on-cluster
 [vs-code]: https://code.visualstudio.com/download
-[kubernetesLocalProcessConfig-yaml]: https://docs.microsoft.com/visualstudio/containers/configure-bridge-to-kubernetes
+[kuberneteslocalprocessconfig-yaml]: https://docs.microsoft.com/visualstudio/containers/configure-bridge-to-kubernetes
 [btk-how-it-works]: https://docs.microsoft.com/visualstudio/containers/overview-bridge-to-kubernetes
 [btk-overview-routing]: https://docs.microsoft.com/visualstudio/containers/overview-bridge-to-kubernetes#using-routing-capabilities-for-developing-in-isolation

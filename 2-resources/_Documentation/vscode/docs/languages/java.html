@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>java</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="java-in-visual-studio-code">Java in Visual Studio Code</h1>
+<p>Support for Java in Visual Studio Code is provided through a wide range of <a href="/docs/editor/extension-marketplace.md">extensions</a>. Combined with the power of core VS Code, these extensions give you a lightweight and performant code editor that also supports many of the most common Java development techniques.</p>
+<p>This article will give you an overview of different capabilities of Visual Studio Code for Java developers. For a quick walkthrough of editing, running, and debugging a Java program with Visual Studio Code, use the button below.</p>
+<p><a class="tutorial-next-btn" href="/docs/java/java-tutorial">Java Getting Started Tutorial</a></p>
+<h2 id="overview">Overview</h2>
+<p>VS Code provides essential language features such as code completion, refactoring, linting, formatting, and code snippets along with convenient debugging and unit test support. VS Code also integrates with tooling and frameworks such as Maven, Tomcat, Jetty, and Spring Boot. Leveraging the power of Visual Studio Code, Java developers get an excellent tool for both quick code editing and also the full debugging and testing cycle. It’s a great choice for your Java work if you’re looking for a tool which:</p>
+<ul>
+<li>Is fast, lightweight, free, and open source.</li>
+<li>Supports many other languages, not just Java.</li>
+<li>Helps start your Java journey without installing and learning a complex IDE.</li>
+<li>Provides great microservices support including popular frameworks, container tooling, and cloud integration.</li>
+<li>Offers team-based collaboration features such as <a href="https://visualstudio.microsoft.com/services/live-share">Visual Studio Live Share</a>.</li>
+<li>Improves your productivity through IntelliSense and other code-aware editing features.</li>
+</ul>
+<h2 id="install-visual-studio-code-for-java">Install Visual Studio Code for Java</h2>
+<p>To help you set up quickly, we recommend you use the <strong>Coding Pack for Java</strong>, which is the bundle of VS Code, the Java Development Kit (JDK), and a collection of suggested extensions by Microsoft. The Coding Pack can also be used to fix an existing development environment.</p>
+<p><a class="tutorial-install-extension-btn" onclick="pushCodingPackEvent('java', 'win')" href="https://aka.ms/vscode-java-installer-win">Install the Coding Pack for Java - Windows</a></p>
+<p><a class="tutorial-install-extension-btn" onclick="pushCodingPackEvent('java', 'mac')" href="https://aka.ms/vscode-java-installer-mac">Install the Coding Pack for Java - macOS</a><br></p>
+<blockquote>
+<p><strong>Note</strong>: The Coding Pack for Java is only available for Windows and macOS. For other operating systems, you will need to manually install a JDK, VS Code, and Java extensions.</p>
+</blockquote>
+<p>If you have already installed VS Code and want to add Java support to it, we recommend to use <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack">Java Extension Pack</a>, a collection of extensions suggested by Microsoft:</p>
+<ol type="1">
+<li><a href="https://marketplace.visualstudio.com/items?itemName=redhat.java">Language Support for Java(TM) by Red Hat</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug">Debugger for Java</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test">Java Test Runner</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven">Maven for Java</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency">Project Manager for Java</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode">Visual Studio IntelliCode</a></li>
+</ol>
+<p><a class="tutorial-install-extension-btn" href="vscode:extension/vscjava.vscode-java-pack">Install the Java Extension Pack</a></p>
+<p>Alternatively, you can add Java language support to VS Code by installing the popular Java extensions by yourself.</p>
+<blockquote>
+<p><a href="/download">Download VS Code</a> - If you haven’t downloaded VS Code yet, quickly install for your platform (Windows, macOS, Linux).</p>
+</blockquote>
+<p>There are also other popular Java extensions you can pick for your own needs, including:</p>
+<ol type="1">
+<li><a href="https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-spring-boot">Spring Boot Tools</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-spring-initializr">Spring Initializr Java Support</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-spring-boot-dashboard">Spring Boot Dashboard</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=adashen.vscode-tomcat">Tomcat</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=SummerSun.vscode-jetty">Jetty</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-community-server-connector">Community Server Connectors</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-server-connector">Server Connector</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=MicroProfile-Community.vscode-microprofile-pack">Extension Pack for MicroProfile</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=shengchen.vscode-checkstyle">CheckStyle</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode">SonarLint</a></li>
+</ol>
+<p>Thanks to the great Java community around VS Code, the list doesn’t end there. You can search for more Java extensions easily within VS Code:</p>
+<ol type="1">
+<li>Go to the <strong>Extensions</strong> view (<code>kb(workbench.view.extensions)</code>).</li>
+<li>Filter the extensions list by typing “java”.</li>
+</ol>
+<figure>
+<img src="images/java/extensions.png" alt="Java Extensions" /><figcaption>Java Extensions</figcaption>
+</figure>
+<p>This document describes some of the key features included in those Java extensions.</p>
+<h2 id="getting-started">Getting started</h2>
+<p><strong>NOTE:</strong> If you are using VS Code on Windows and want to take advantage of the Windows Subsystem for Linux, see <a href="/docs/remote/wsl">Developing in WSL</a>.</p>
+<p>Before you start, you must have the Java SE Development Kit (JDK) on your local environment. To run the VS Code for Java extension, Java SE 11 or above version is required; for projects, VS Code for Java supports projects with version 1.5 or above. For how to configure, refer to <a href="/docs/java/java-project.md#configure-jdk">Configure JDK</a>.</p>
+<p>For developers new to Java or new to VS Code, we provide a Getting Started experience. Once you’ve installed the <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack">Java Extension Pack</a>, you can open the Getting Started experience from within VS Code with the <strong>Java: Getting Started</strong> command from the Command Palette. Open the Command Palette (<code>kb(workbench.action.showCommands)</code>) and type “Java: Getting Started”.</p>
+<figure>
+<img src="images/java/getting-started.png" alt="Java Getting Started" /><figcaption>Java Getting Started</figcaption>
+</figure>
+<h2 id="working-with-java-source-files">Working with Java source files</h2>
+<p>You can use VS Code to read, write, run, and debug Java source file(s) without creating a project. VS Code for Java supports two modes, lightweight and standard. Lightweight mode is ideal for scenarios that only deal with source file(s). If you want to work with a full scale project, standard mode will be required. You can easily switch from lightweight mode to standard mode, when needed. To learn more, see <a href="/docs/java/java-project.md#lightweight-mode">Lightweight Mode</a>.</p>
+<h2 id="working-with-java-project">Working with Java project</h2>
+<p>There are three things you must understand to work with Java in VS Code:</p>
+<ol type="1">
+<li>How does VS Code handle Workspaces?</li>
+<li>How does VS Code handle Java?</li>
+<li>How does VS Code handle Workspaces that contain Java?</li>
+</ol>
+<h3 id="vs-code-workspaces">VS Code Workspaces</h3>
+<p>In Visual Studio Code, a “Workspace” means a collection of one or more filesystem folders (and their children) and all of the VS Code configurations that take effect when that “Workspace” is open in VS Code. There are two kinds of “Workspaces” in VS Code, “folder workspaces” and “multi-root workspaces”.</p>
+<p>A “folder workspace” is presented by VS Code when you open a filesystem folder (directory) in VS Code.</p>
+<p>A “multi-root workspace” can refer to multiple folders (directories) from disparate parts of the file system and VS Code displays the contents of the folder(s) of the workspace together in the <a href="/docs/getstarted/userinterface.md#basic-layout">File Explorer</a>. To learn more, see <a href="/docs/editor/multi-root-workspaces.md">Multi-root Workspaces</a>.</p>
+<h3 id="java-project-in-vs-code">Java project in VS Code</h3>
+<p>In contrast to IDEs such as IntelliJ IDEA, NetBeans, or Eclipse, the concept of a “Java project” is provided entirely by extensions, and is not a core concept in the base VS Code. When working with “Java projects” in VS Code, you must have the necessary extensions installed to work with those project files.</p>
+<p>For example, Maven, Eclipse, and Gradle Java projects are supported through <a href="https://marketplace.visualstudio.com/items?itemName=redhat.java">Language Support for Java(TM) by Red Hat</a>, by utilizing <a href="https://www.eclipse.org/m2e/">M2Eclipse</a>, which provides Maven support, and <a href="https://github.com/eclipse/buildship">Buildship</a>, which provides Gradle support through the <a href="https://github.com/eclipse/eclipse.jdt.ls">Eclipse JDT Language Server</a>.</p>
+<p>With <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven">Maven for Java</a>, you can generate projects from <a href="https://maven.apache.org/guides/introduction/introduction-to-archetypes.html">Maven Archetypes</a>, browse through all the Maven projects within your workspace, and execute Maven goals easily from an embedded explorer. Projects can also be created and managed with the <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency">Project Manager for Java</a> extension.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/languages/java/package-viewer.mp4" type="video/mp4">
+</video>
+<p>Visual Studio Code also supports working with standalone Java files outside of a Java project, described in the <a href="/docs/java/java-tutorial.md">Java Tutorial with VS Code</a>.</p>
+<h3 id="vs-code-workspaces-that-contain-java-project">VS Code Workspaces that contain Java project</h3>
+<p>Assuming the necessary Java extensions are installed, opening a VS Code workspace that contains Java artifacts will cause those extensions to understand those artifacts and present options for working with them.</p>
+<p>More details about Java project support can be found in <a href="/docs/java/java-project.md">Java Project Management in Visual Studio Code</a> and <a href="/docs/java/java-build.md">Build Tools</a>.</p>
+<h2 id="editing">Editing</h2>
+<h3 id="code-navigation">Code Navigation</h3>
+<p>Java in Visual Studio Code also supports source code navigation features such as search for symbol, Peek Definition, and Go to Definition. The <a href="https://marketplace.visualstudio.com/items?itemName=Pivotal.vscode-spring-boot">Spring Boot Tools</a> extension provides enhanced navigation and code completion support for <a href="https://projects.spring.io/spring-boot/">Spring Boot</a> projects.</p>
+<p>One of the key advantages of VS Code is speed. When you open your Java source file or folder, within a few seconds, with the help of <a href="/docs/java/java-project.md#lightweight-mode">Lightweight Mode</a>, you will be able to navigate your code base with Outline view as well as commands such as <strong>Go to Definition</strong> and <strong>Go to Reference</strong>. This is especially useful when you open a project for the first time.</p>
+<h3 id="code-completion">Code Completion</h3>
+<p><a href="/docs/editor/intellisense.md">IntelliSense</a> is a general term for language features, including intelligent code completion (in-context method and variable suggestions) across all your files and for built-in and third-party modules. VS Code supports code completion and IntelliSense for Java through <a href="https://marketplace.visualstudio.com/items?itemName=redhat.java">Language Support for Java(TM) by Red Hat</a>. It also provides AI-assisted IntelliSense called <a href="https://visualstudio.microsoft.com/services/intellicode/">IntelliCode</a> by putting what you’re most likely to use at the top of your completion list.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/languages/java/intellisense.mp4" type="video/mp4">
+</video>
+<p>See also in <a href="/docs/java/java-editing.md">Java Code Navigation and Editing</a>. VS Code also supports a range of <a href="/docs/java/java-refactoring.md">Refactoring</a> and <a href="/docs/java/java-linting.md">Linting</a> features.</p>
+<h2 id="debugging">Debugging</h2>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug">Debugger for Java</a> is a lightweight Java Debugger based on <a href="https://github.com/microsoft/java-debug">Java Debug Server</a>. It works with <a href="https://marketplace.visualstudio.com/items?itemName=redhat.java">Language Support for Java by Red Hat</a> to allow users to debug Java code within Visual Studio Code.</p>
+<p>Starting a debugging session is easy, click on the <strong>Run|Debug</strong> button available at the CodeLens of your <code>main()</code> function, or press <code>kb(workbench.action.debug.start)</code>. The debugger will automatically generate the proper configuration for you.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/languages/java/resolve-main.mp4" type="video/mp4">
+</video>
+<p>Although it’s lightweight, the Java debugger supports advanced features such as expression evaluation, conditional breakpoints, and hot code replacement. For more debugging related information, visit <a href="/docs/java/java-debugging.md">Java Debugging</a>.</p>
+<h2 id="testing">Testing</h2>
+<p>With the support from the <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test">Java Test Runner</a> extension, you can easily run, debug, and manage your JUnit and TestNG test cases.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/languages/java/testng.mp4" type="video/mp4">
+</video>
+<p>For more about testing, read <a href="/docs/java/java-testing.md">Testing Java</a>.</p>
+<h2 id="spring-boot-tomcat-and-jetty">Spring Boot, Tomcat, and Jetty</h2>
+<p>To further improve your Java productivity in VS Code, there are extensions for most popular frameworks and tools such as <a href="https://projects.spring.io/spring-boot/">Spring Boot</a>, <a href="https://tomcat.apache.org/">Tomcat</a>, and <a href="https://www.eclipse.org/jetty/">Jetty</a> created by the community.</p>
+<p>The <a href="https://marketplace.visualstudio.com/items?itemName=adashen.vscode-tomcat">Tomcat</a> extension includes an explorer to easily navigate and manage your Tomcat servers. You can create, start, debug, stop, and rename your Tomcat server with the extension.</p>
+<video autoplay loop muted playsinline controls>
+<source src="/docs/languages/java/tomcat.mp4" type="video/mp4">
+</video>
+<p>See <a href="/docs/java/java-tomcat-jetty.md">Application Servers</a> to learn more about support for Tomcat and Jetty as well as other application servers with VS Code.</p>
+<p><a href="https://projects.spring.io/spring-boot/">Spring Boot</a> support is provided by <a href="https://marketplace.visualstudio.com/search?term=publisher%3A%22Pivotal%22&amp;target=VSCode&amp;category=All%20categories&amp;sortBy=Relevance">Pivotal</a>. There are also <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-spring-initializr">Spring Initializr Java Support</a> and <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-spring-boot-dashboard">Spring Boot Dashboard</a> extensions available from Microsoft to further improve your experience with Spring Boot in Visual Studio Code.</p>
+<p>See <a href="/docs/java/java-spring-boot.md">Spring Boot with VS Code</a> to learn more about Spring Boot support with VS Code and also <a href="/docs/java/java-webapp.md">Deploy to Azure Web Apps</a> or <a href="/docs/java/java-spring-cloud.md">Deploy to Azure Spirng Cloud</a> to learn more about deploying Spring apps to Azure from VS Code.</p>
+<h2 id="next-steps">Next steps</h2>
+<p>You may <a href="https://devblogs.microsoft.com/visualstudio/java-on-visual-studio-code-april-update#signup">Sign up</a> to follow the latest of Java on Visual Studio Code.</p>
+<p>Learn more about Java in VS Code</p>
+<ul>
+<li><a href="/docs/java/java-tutorial.md">Java Tutorial with VS Code</a></li>
+<li><a href="/docs/java/java-editing.md">Code Editing and Navigation</a></li>
+<li><a href="/docs/java/java-debugging.md">Java Debugging</a></li>
+<li><a href="/docs/java/java-testing.md">Java Testing</a></li>
+<li><a href="/docs/java/java-project.md">Java Project Management</a></li>
+<li><a href="/docs/java/java-spring-boot.md">Spring Boot with VS Code</a></li>
+<li><a href="/docs/java/java-tomcat-jetty.md">Tomcat and Jetty Support</a></li>
+<li><a href="/docs/java/java-on-azure.md">Azure with VS Code</a></li>
+</ul>
+<p>Read on to find out more about Visual Studio Code:</p>
+<ul>
+<li><a href="/docs/editor/codebasics.md">Basic Editing</a> - Learn about the powerful VS Code editor.</li>
+<li><a href="/docs/editor/editingevolved.md">Code Navigation</a> - Move quickly through your source code.</li>
+<li><a href="/docs/editor/tasks.md">Tasks</a> - use tasks to build your project and more</li>
+<li><a href="/docs/editor/debugging.md">Debugging</a> - find out how to use the debugger with your project</li>
+</ul>
+</body>
+</html>

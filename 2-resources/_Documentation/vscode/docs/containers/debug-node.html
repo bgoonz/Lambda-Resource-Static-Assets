@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>debug-node</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="debug-node.js-within-a-container">Debug Node.js within a container</h1>
+<p>When adding Docker files to a Node.js project, tasks and launch configurations are added to enable debugging that application within a Docker container. However, due to the large ecosystem surrounding Node.js, those tasks cannot accommodate every application framework or library, which means that some applications will require additional configuration.</p>
+<h2 id="configuring-the-docker-container-entry-point">Configuring the Docker container entry point</h2>
+<p>The Docker extension infers the entry point of the Docker container–that is, the command line for starting the application in a debug mode within the Docker container–via properties of <code>package.json</code>. The extension first looks for the <code>start</code> script in the <code>scripts</code> object; if found and, if it starts with a <code>node</code> or <code>nodejs</code> command, it uses that to build the command line for starting the application in debug mode. If not found or, if not a recognized <code>node</code> command, the <code>main</code> property in the <code>package.json</code> is used. If neither is found or recognized, then you need to explicitly set the <code>dockerRun.command</code> property of the <code>docker-run</code> task used to start the Docker container.</p>
+<p>Some Node.js application frameworks include CLIs for managing the application and are used to start the application in the <code>start</code> script, which obscure the underlying <code>node</code> commands. In these cases, the Docker extension cannot infer the start command and you must explicitly configure the start command.</p>
+<h3 id="example-configuring-the-entry-point-for-a-nest.js-application">Example: Configuring the entry point for a <a href="https://nestjs.com/">Nest.js</a> application</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb1-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run: debug&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-6" title="6">      <span class="dt">&quot;dependsOn&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;docker-build&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-7" title="7">      <span class="dt">&quot;dockerRun&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-8" title="8">        <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;nest start --debug 0.0.0.0:9229&quot;</span></a>
+<a class="sourceLine" id="cb1-9" title="9">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb1-10" title="10">      <span class="dt">&quot;node&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-11" title="11">        <span class="dt">&quot;enableDebugging&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb1-12" title="12">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-13" title="13">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-14" title="14">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="fu">}</span></a></code></pre></div>
+<h3 id="example-configuring-the-entry-point-for-a-meteor-application">Example: Configuring the entry point for a <a href="https://www.meteor.com/">Meteor</a> application</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-4" title="4">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-5" title="5">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run: debug&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-6" title="6">      <span class="dt">&quot;dependsOn&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;docker-build&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-7" title="7">      <span class="dt">&quot;dockerRun&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-8" title="8">        <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;node --inspect=0.0.0.0:9229 main.js&quot;</span></a>
+<a class="sourceLine" id="cb2-9" title="9">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb2-10" title="10">      <span class="dt">&quot;node&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-11" title="11">        <span class="dt">&quot;enableDebugging&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb2-12" title="12">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-13" title="13">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-14" title="14">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="fu">}</span></a></code></pre></div>
+<h2 id="automatically-launching-the-browser-to-the-entry-page-of-the-application">Automatically launching the browser to the entry page of the application</h2>
+<p>The Docker extension can automatically launch the browser to the entry point of the application after it has started in the debugger. This feature is enabled by default and configured via the <code>dockerServerReadyAction</code> object of the debug configuration in <code>launch.json</code>.</p>
+<p>This feature depends on several aspects of the application:</p>
+<ul>
+<li>The application must output logs to the debug console.</li>
+<li>The application must log a “server ready” message.</li>
+<li>The application must serve a browsable page.</li>
+</ul>
+<p>While the default settings may work for an Express.js based application, other Node.js frameworks may require explicit configuration of one or more of those aspects.</p>
+<h3 id="ensuring-application-logs-are-written-to-the-debug-console">Ensuring application logs are written to the debug console</h3>
+<p>This feature depends on the application writing its logs to the debug console of the attached debugger. However, not all logging frameworks write to the debug console, even when configured to use a console-based logger (as some “console” loggers actually bypass the console and write directly to <code>stdout</code>).</p>
+<p>The solution varies depending on the logging framework, but it generally requires creating/adding a logger that <em>actually</em> writes to the console.</p>
+<h3 id="example-configuring-express-applications-to-write-to-the-debug-console">Example: Configuring Express applications to write to the debug console</h3>
+<p>By default, <a href="https://expressjs.com/">Express.js</a> uses the <a href="https://github.com/visionmedia/debug">debug</a> logging module, which can bypass the console. This can be resolved by explicitly binding the log function to the console’s <code>debug()</code> method.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">var</span> app <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;../app&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">var</span> debug <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;debug&quot;</span>)(<span class="st">&quot;my-express-app:server&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw">var</span> http <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;http&quot;</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co">// Force logging to the debug console.</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="va">debug</span>.<span class="at">log</span> <span class="op">=</span> <span class="va">console</span>.<span class="va">debug</span>.<span class="at">bind</span>(console)<span class="op">;</span></a></code></pre></div>
+<p>Also note that the <code>debug</code> logger writes logs only when enabled via the <code>DEBUG</code> environment variable, which can be set in the <code>docker-run</code> task. (This environment variable is set to <code>*</code> by default when Docker files are added to the application.)</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb4-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="dt">&quot;tasks&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb4-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-4" title="4">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-5" title="5">      <span class="dt">&quot;label&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run: debug&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-6" title="6">      <span class="dt">&quot;dependsOn&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;docker-build&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb4-7" title="7">      <span class="dt">&quot;dockerRun&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-8" title="8">        <span class="dt">&quot;env&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-9" title="9">          <span class="dt">&quot;DEBUG&quot;</span><span class="fu">:</span> <span class="st">&quot;*&quot;</span></a>
+<a class="sourceLine" id="cb4-10" title="10">        <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-11" title="11">      <span class="fu">},</span></a>
+<a class="sourceLine" id="cb4-12" title="12">      <span class="dt">&quot;node&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb4-13" title="13">        <span class="dt">&quot;enableDebugging&quot;</span><span class="fu">:</span> <span class="kw">true</span></a>
+<a class="sourceLine" id="cb4-14" title="14">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-15" title="15">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb4-16" title="16">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="fu">}</span></a></code></pre></div>
+<h3 id="configuring-when-the-application-is-ready">Configuring when the application is “ready”</h3>
+<p>The extension determines the application is “ready” to receive HTTP connections when it writes a message of the form <code>Listening on port &lt;number&gt;</code> to the debug console, as Express.js does by default. If the application logs a different message, then you should set the <code>pattern</code> property of the <a href="/docs/containers/debug-common.md#dockerserverreadyaction-object-properties">dockerServerReadyAction</a> object of the debug launch configuration to a <a href="https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions">JavaScript regular expression</a> that matches that message. The regular expression should include a capture group that corresponds to the port on which the application is listening.</p>
+<p>For example, suppose the application logs the following message:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">function</span> <span class="at">onListening</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">var</span> addr <span class="op">=</span> <span class="va">server</span>.<span class="at">address</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="kw">var</span> bind <span class="op">=</span> <span class="kw">typeof</span> addr <span class="op">===</span> <span class="st">&quot;string&quot;</span> <span class="op">?</span> <span class="st">&quot;pipe &quot;</span> <span class="op">+</span> addr : <span class="st">&quot;port &quot;</span> <span class="op">+</span> <span class="va">addr</span>.<span class="at">port</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="at">debug</span>(<span class="st">&quot;Application has started on &quot;</span> <span class="op">+</span> bind)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="op">}</span></a></code></pre></div>
+<p>The corresponding <code>pattern</code> in the debug launch configuration (in <code>launch.json</code>) is:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-4" title="4">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Docker Node.js Launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-5" title="5">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-6" title="6">      <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-7" title="7">      <span class="dt">&quot;preLaunchTask&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run: debug&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-8" title="8">      <span class="dt">&quot;platform&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-9" title="9">      <span class="dt">&quot;dockerServerReadyAction&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-10" title="10">        <span class="dt">&quot;pattern&quot;</span><span class="fu">:</span> <span class="st">&quot;Application has started on port (</span><span class="ch">\\</span><span class="st">d+)&quot;</span></a>
+<a class="sourceLine" id="cb6-11" title="11">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-12" title="12">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-13" title="13">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<blockquote>
+<p>Note the <code>(\\d+)</code> capture group for the port number, and the use of <code>\</code> as a JSON escape character for the backslash in the <code>\d</code> character class.</p>
+</blockquote>
+<h3 id="configuring-the-application-entry-page">Configuring the application entry page</h3>
+<p>By default, the Docker extension will open the “main” page of the browser (however that is determined by the application). If the browser should be opened to a specific page, the <code>uriFormat</code> property of the <a href="/docs/containers/debug-common.md#dockerserverreadyaction-object-properties">dockerServerReadyAction</a> object of the debug launch configuration should be set to a Node.js format string, with one string token that indicates where the port should be substituted.</p>
+<p>The corresponding <code>uriFormat</code> in the debug launch configuration (in <code>launch.json</code>) to open the <code>about.html</code> page instead of the main page would be:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-4" title="4">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Docker Node.js Launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-5" title="5">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-6" title="6">      <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-7" title="7">      <span class="dt">&quot;preLaunchTask&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run: debug&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-8" title="8">      <span class="dt">&quot;platform&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-9" title="9">      <span class="dt">&quot;dockerServerReadyAction&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-10" title="10">        <span class="dt">&quot;uriFormat&quot;</span><span class="fu">:</span> <span class="st">&quot;http://localhost:%s/about.html&quot;</span></a>
+<a class="sourceLine" id="cb7-11" title="11">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-12" title="12">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb7-13" title="13">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<h2 id="mapping-docker-container-source-files-to-the-local-workspace">Mapping Docker container source files to the local workspace</h2>
+<p>By default, the Docker extension assumes the application source files in the running Docker container are located in an <code>/usr/src/app</code> folder, and the debugger then maps those files back to the root of the opened workspace, in order to translate breakpoints from the container back to Visual Studio Code.</p>
+<p>If the application source files are in a different location (for example, different Node.js frameworks have different conventions), either within the Docker container or within the opened workspace, then one or both of the <code>localRoot</code> and <code>remoteRoot</code> properties of the <a href="/docs/containers/debug-node.md#node-object-properties">node</a> object of the debug launch configuration should be set the root source locations within the workspace and the Docker container, respectively.</p>
+<p>For example, if the application instead resides in <code>/usr/my-custom-location</code>, the corresponding <code>remoteRoot</code> property would be:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">&quot;configurations&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-4" title="4">      <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Docker Node.js Launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-5" title="5">      <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;docker&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-6" title="6">      <span class="dt">&quot;request&quot;</span><span class="fu">:</span> <span class="st">&quot;launch&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-7" title="7">      <span class="dt">&quot;preLaunchTask&quot;</span><span class="fu">:</span> <span class="st">&quot;docker-run: debug&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-8" title="8">      <span class="dt">&quot;platform&quot;</span><span class="fu">:</span> <span class="st">&quot;node&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb8-9" title="9">      <span class="dt">&quot;node&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb8-10" title="10">        <span class="dt">&quot;remoteRoot&quot;</span><span class="fu">:</span> <span class="st">&quot;/usr/my-custom-location&quot;</span></a>
+<a class="sourceLine" id="cb8-11" title="11">      <span class="fu">}</span></a>
+<a class="sourceLine" id="cb8-12" title="12">    <span class="fu">}</span></a>
+<a class="sourceLine" id="cb8-13" title="13">  <span class="ot">]</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="fu">}</span></a></code></pre></div>
+<h1 id="troubleshooting">Troubleshooting</h1>
+<h2 id="docker-image-fails-to-build-or-start-due-to-missing-node_modules">Docker image fails to build or start due to missing node_modules</h2>
+<p>Dockerfiles are often arranged in such a way as to optimize either image build time, image size, or both. However, not every Node.js application framework supports all of the typical Node.js Dockerfile optimizations. In particular, for some frameworks, the <code>node_modules</code> folder must be an immediate subfolder of the application root folder, whereas, the Docker extension scaffolds a Dockerfile where the <code>node_modules</code> folder exists at a parent or ancestor level (which is generally allowed by Node.js).</p>
+<p>The solution is to remove that optimization from the <code>Dockerfile</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode dockerfile"><code class="sourceCode dockerfile"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">FROM</span> node:10.13-alpine</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">ENV</span> NODE_ENV=production</a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="kw">WORKDIR</span> /usr/src/app</a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="kw">COPY</span> [<span class="st">&quot;package.json&quot;</span>, <span class="st">&quot;package-lock.json*&quot;</span>, <span class="st">&quot;npm-shrinkwrap.json*&quot;</span>, <span class="st">&quot;./&quot;</span>]</a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co"># Remove the `&amp;&amp; mv node_modules ../` from the RUN command:</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="co"># RUN npm install --production --silent &amp;&amp; mv node_modules ../</span></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="kw">RUN</span> npm install --production --silent</a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="kw">COPY</span> . .</a>
+<a class="sourceLine" id="cb9-9" title="9"><span class="kw">EXPOSE</span> 3000</a>
+<a class="sourceLine" id="cb9-10" title="10"><span class="kw">CMD</span> npm start</a></code></pre></div>
+</body>
+</html>

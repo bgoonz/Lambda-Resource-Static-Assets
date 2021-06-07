@@ -7,6 +7,7 @@ PageTitle: Visual Studio Code Webinars
 DateApproved: 10/22/2020
 MetaDescription: Visual Studio Code Webinars
 ---
+
 # Visual Studio Code Webinars
 
 Check out previous talks about using VS Code in classrooms or other education scenarios.

@@ -15,7 +15,7 @@ npm start [-- <args>]
 This runs a predefined command specified in the `"start"` property of
 a package's `"scripts"` object.
 
-If the `"scripts"` object does not define a  `"start"` property, npm
+If the `"scripts"` object does not define a `"start"` property, npm
 will run `node server.js`.
 
 Note that this is different from the default node behavior of running
@@ -47,8 +47,8 @@ npm start
 
 ### See Also
 
-* [npm run-script](/commands/npm-run-script)
-* [npm scripts](/using-npm/scripts)
-* [npm test](/commands/npm-test)
-* [npm restart](/commands/npm-restart)
-* [npm stop](/commands/npm-stop)
+- [npm run-script](/commands/npm-run-script)
+- [npm scripts](/using-npm/scripts)
+- [npm test](/commands/npm-test)
+- [npm restart](/commands/npm-restart)
+- [npm stop](/commands/npm-stop)

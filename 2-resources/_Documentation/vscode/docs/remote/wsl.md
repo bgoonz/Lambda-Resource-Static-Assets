@@ -7,6 +7,7 @@ ContentId: 79bcdbf9-d6a5-4e04-bbee-e7bb71f09f0a
 MetaDescription: Using Visual Studio Code Remote Development with the Windows Subsystem for Linux (WSL)
 DateApproved: 3/31/2021
 ---
+
 # Developing in WSL
 
 The **Visual Studio Code Remote - WSL** extension lets you use the [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/windows/wsl) as your full-time development environment right from VS Code. You can develop in a Linux-based environment, use Linux-specific toolchains and utilities, and run and debug your Linux-based applications all from the comfort of Windows.
@@ -27,11 +28,11 @@ To get started, you need to:
 
 1. Install the [Windows Subsystem for Linux](https://docs.microsoft.com/windows/wsl/install-win10) along with your preferred Linux distribution.
 
-    > **Note:** WSL 1 does have some [known limitations](#known-limitations) for certain types of development. Also, extensions installed in Alpine Linux may not work due to `glibc` dependencies in native source code inside the extension. See the [Remote Development and Linux](https://aka.ms/vscode-remote/linux) article for details.
+   > **Note:** WSL 1 does have some [known limitations](#known-limitations) for certain types of development. Also, extensions installed in Alpine Linux may not work due to `glibc` dependencies in native source code inside the extension. See the [Remote Development and Linux](https://aka.ms/vscode-remote/linux) article for details.
 
 2. Install [Visual Studio Code](https://code.visualstudio.com/) on the **Windows** side (not in WSL).
 
-    > **Note:** When prompted to **Select Additional Tasks** during installation, be sure to check the **Add to PATH** option so you can easily open a folder in WSL using the `code` command.
+   > **Note:** When prompted to **Select Additional Tasks** during installation, be sure to check the **Add to PATH** option so you can easily open a folder in WSL using the `code` command.
 
 3. Install the [Remote Development extension pack](https://aka.ms/vscode-remote/download/extension).
 
@@ -47,17 +48,17 @@ Opening a folder inside the Windows Subsystem for Linux in VS Code is very simil
 
 3. Type **`code .`** in the terminal. When doing this for the first time, you should see VS Code fetching components needed to run in WSL. This should only take a short while, and is only needed once.
 
-    > **Note:** If this command does not work, you may need to restart your terminal or you may not have added VS Code to your path when it was installed.
+   > **Note:** If this command does not work, you may need to restart your terminal or you may not have added VS Code to your path when it was installed.
 
 4. After a moment, a new VS Code window will appear, and you'll see a notification that VS Code is opening the folder in WSL.
 
    ![WSL Starting notification](images/wsl//wsl-starting-notification.png)
 
-    VS Code will now continue to configure itself in WSL and keep you up to date as it makes progress.
+   VS Code will now continue to configure itself in WSL and keep you up to date as it makes progress.
 
 5. Once finished, you now see a WSL indicator in the bottom left corner, and you'll be able to use VS Code as you would normally!
 
-    ![WSL Status Bar Item](images/wsl/wsl-statusbar-indicator.png)
+   ![WSL Status Bar Item](images/wsl/wsl-statusbar-indicator.png)
 
 That's it! Any VS Code operations you perform in this window will be executed in the WSL environment, everything from editing and file operations, to debugging, using terminals, and more.
 
@@ -139,7 +140,7 @@ If you are using WSL 2 and [Docker Desktop's WSL 2 back-end](https://docs.docker
 
 1. If you have not already, [install and setup](https://docs.docker.com/docker-for-windows/wsl-tech-preview/) Docker Desktop's WSL 2 support.
 
-    > **Tip:**  Go to **Settings > Resources > WSL Integration** and enable Docker integration with the WSL distribution you will be using.
+   > **Tip:** Go to **Settings > Resources > WSL Integration** and enable Docker integration with the WSL distribution you will be using.
 
 2. If you have not already, install the [Remote - Containers](https://aka.ms/vscode-remote/download/containers) extension along with the WSL extension.
 
@@ -149,11 +150,11 @@ If you are using WSL 2 and [Docker Desktop's WSL 2 back-end](https://docs.docker
 
 5. If the folder does not have a `.devcontainer/devcontainer.json` file in it, you'll be asked to pick a starting point from a filterable list or an existing [Dockerfile](https://docs.docker.com/engine/reference/builder/) or [Docker Compose file](https://docs.docker.com/compose/compose-file/#compose-file-structure-and-examples) (if one exists).
 
-    ![Select a node dev container definition](images/containers/select-dev-container-def.png)
+   ![Select a node dev container definition](images/containers/select-dev-container-def.png)
 
 6. The VS Code window (instance) will reload and start building the dev container. A progress notification provides status updates.
 
-    ![Dev Container Progress Notification](images/containers/dev-container-progress.png)
+   ![Dev Container Progress Notification](images/containers/dev-container-progress.png)
 
 7. After the build completes, VS Code will automatically connect to the container. You can now work with the your source code from inside the container.
 
@@ -177,17 +178,17 @@ For large workspace you want to increase the polling interval: `remote.WSL.fileW
 
 ### Golang in WSL 1
 
-| Issue | Existing issues |
-|---|---|
-Delve debugger doesn't work under WSL | [go-delve/delve#810](https://github.com/go-delve/delve/issues/810),  [Microsoft/vscode-go#926](https://github.com/microsoft/vscode-go/issues/926) |
+| Issue                                 | Existing issues                                                                                                                                  |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Delve debugger doesn't work under WSL | [go-delve/delve#810](https://github.com/go-delve/delve/issues/810), [Microsoft/vscode-go#926](https://github.com/microsoft/vscode-go/issues/926) |
 
 ### Node.js in WSL 1
 
-| Issue | Existing issues |
-|---|---|
-NodeJS Error: spawn EACCES (different variants of this error) | [Microsoft/WSL#3886](https://github.com/microsoft/WSL/issues/3886) |
-Webpack HMR not working | [Microsoft/WSL#2709](https://github.com/microsoft/WSL/issues/2709) |
-Firebase via node unusably slow only on WSL | [Microsoft/WSL#2657](https://github.com/microsoft/WSL/issues/2657) |
+| Issue                                                         | Existing issues                                                    |
+| ------------------------------------------------------------- | ------------------------------------------------------------------ |
+| NodeJS Error: spawn EACCES (different variants of this error) | [Microsoft/WSL#3886](https://github.com/microsoft/WSL/issues/3886) |
+| Webpack HMR not working                                       | [Microsoft/WSL#2709](https://github.com/microsoft/WSL/issues/2709) |
+| Firebase via node unusably slow only on WSL                   | [Microsoft/WSL#2657](https://github.com/microsoft/WSL/issues/2657) |
 
 ### Git limitations
 
@@ -225,7 +226,7 @@ wslconfig /l
 
 ### I'm seeing an error about a missing library or dependency
 
-Some extensions rely on libraries not found in the vanilla install of certain WSL Linux distributions. You can add additional libraries into your Linux distribution by using its package manager.  For Ubuntu and Debian based distributions, run `sudo apt-get install <package>` to install the needed libraries. Check the documentation for your extension or the runtime that is mentioned for additional installation details.
+Some extensions rely on libraries not found in the vanilla install of certain WSL Linux distributions. You can add additional libraries into your Linux distribution by using its package manager. For Ubuntu and Debian based distributions, run `sudo apt-get install <package>` to install the needed libraries. Check the documentation for your extension or the runtime that is mentioned for additional installation details.
 
 ### What are the connectivity requirements for the Remote - WSL extension?
 
@@ -255,7 +256,7 @@ When the remote VSCode is started from a WSL terminal, the download is done usin
 - wget proxy settings: [https://stackoverflow.com/questions/11211705/how-to-set-proxy-for-wget](https://stackoverflow.com/questions/11211705/how-to-set-proxy-for-wget)
 - manually in the [server setup script](/docs/remote/wsl.md#advanced-environment-setup-script)
 
-Once the server is up and running the proxy settings on the *Remote* tab are used.
+Once the server is up and running the proxy settings on the _Remote_ tab are used.
 
 ### Can I force an extension to run locally / remotely ?
 

@@ -7,6 +7,7 @@ PageTitle: Visual Studio Code Installers
 DateApproved: 10/22/2020
 MetaDescription: Visual Studio Code Coding Packs for programming languages such as Python and Java
 ---
+
 # Coding Packs
 
 As educators, we know it's frustrating to install all the different software to get your students ready to code. There's editors/IDEs, runtimes and compilers, packages or libraries, and different versions of each...it's annoying! We've got you covered.

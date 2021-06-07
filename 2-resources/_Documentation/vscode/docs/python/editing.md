@@ -8,6 +8,7 @@ DateApproved: 01/29/2019
 MetaDescription: Editing Python in Visual Studio Code
 MetaSocialImage: images/tutorial/social.png
 ---
+
 # Editing Python in Visual Studio Code
 
 The Python extension provides many features for editing Python source code in Visual Studio Code:
@@ -78,9 +79,9 @@ For more on IntelliSense generally, see [IntelliSense](/docs/editor/intellisense
 
 If autocomplete and IntelliSense are not working for a custom module, check the following causes:
 
-| Cause | Solution |
-| --- | --- |
-| The path to the python interpreter is incorrect | Check the `pythonPath` setting. Restart VS Code if you make a correction. |
+| Cause                                                                              | Solution                                                                              |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| The path to the python interpreter is incorrect                                    | Check the `pythonPath` setting. Restart VS Code if you make a correction.             |
 | The custom module is located in a non-standard location (not installed using pip). | Add the location to the `python.autoComplete.extraPaths` setting and restart VS Code. |
 
 ## Quick Fixes
@@ -95,7 +96,7 @@ The add imports Code Action also recognizes some of the popular abbreviations fo
 
 The import suggestions list is ordered with import statements for packages (or modules) at the top, followed by statements for additional modules and/or members (classes, objects, etc.) from specified packages.
 
-> **Note**: This functionality requires use of the [Microsoft Python Language Server](https://devblogs.microsoft.com/python/introducing-the-python-language-server). To enable the language server,  set `python.jediEnabled` to **false** in your [settings.json file](/docs/python/settings-reference.md). Additionally, you'll need to make sure that linting is enabled by opening the Command Palette (**View > Command Palette...** or `kb(workbench.action.showCommands)`) and running the **Python: Enable Linting** command (Select **On** in the dropdown menu that appears).
+> **Note**: This functionality requires use of the [Microsoft Python Language Server](https://devblogs.microsoft.com/python/introducing-the-python-language-server). To enable the language server, set `python.jediEnabled` to **false** in your [settings.json file](/docs/python/settings-reference.md). Additionally, you'll need to make sure that linting is enabled by opening the Command Palette (**View > Command Palette...** or `kb(workbench.action.showCommands)`) and running the **Python: Enable Linting** command (Select **On** in the dropdown menu that appears).
 
 ## Run Selection/Line in Terminal (REPL)
 
@@ -117,19 +118,19 @@ The Python extension supports source code formatting using either [autopep8](htt
 
 ### General formatting settings
 
-| Setting<br/>(python.formatting.) | Default value | Description |
-| --- | --- | --- |
-| provider | `"autopep8"` | Specifies the formatter to use, either "autopep8", "yapf", or "black". |
+| Setting<br/>(python.formatting.) | Default value | Description                                                            |
+| -------------------------------- | ------------- | ---------------------------------------------------------------------- |
+| provider                         | `"autopep8"`  | Specifies the formatter to use, either "autopep8", "yapf", or "black". |
 
 ### Formatter-specific settings
 
 The following settings apply to the individual formatters. The Python extension looks in the current `pythonPath` for the formatter. To use a formatter in another location, specify that location in the appropriate custom path setting. The `pip install` commands may require elevation.
 
-| Formatter | Install steps | Arguments setting<br/>(python.formatting.) | Custom path setting<br/>(python.formatting.) |
-| --- | --- | --- | --- |
-| autopep8 | pip install pep8<br/>pip install --upgrade autopep8 | autopep8Args | autopep8Path |
-| black (see note) | pip install black | blackArgs | blackPath |
-| yapf | pip install yapf | yapfArgs | yapfPath |
+| Formatter        | Install steps                                       | Arguments setting<br/>(python.formatting.) | Custom path setting<br/>(python.formatting.) |
+| ---------------- | --------------------------------------------------- | ------------------------------------------ | -------------------------------------------- |
+| autopep8         | pip install pep8<br/>pip install --upgrade autopep8 | autopep8Args                               | autopep8Path                                 |
+| black (see note) | pip install black                                   | blackArgs                                  | blackPath                                    |
+| yapf             | pip install yapf                                    | yapfArgs                                   | yapfPath                                     |
 
 > **Note**: By default, the Black formatter can't be installed when a Python 2 environment is active. Attempting to do so may display the message "Formatter black is not installed. Install?". If you try to install Black in response, another message appears saying "Could not find a version that satisfies the requirement black' No matching distribution found for black."
 >
@@ -149,13 +150,13 @@ In the second example, the top-level element `{based_on_style: chromium, indent_
 
 If formatting fails, check the following possible causes:
 
-| Cause | Solution |
-| --- | --- |
-| The path to the python interpreter is incorrect. | Check the `pythonPath` setting. |
-| The formatter is not installed in the current environment. | Open a command prompt, navigate to the location specified in the `pythonPath` setting, and run `pip install` for the formatter.
-| The path to the formatter is incorrect. | Check the value of the appropriate `python.formatting.<formatter>Path` setting. |
-| Custom arguments for the formatter are incorrect. | Check that the appropriate `python.formatting.<formatter>Path` setting does not contain arguments, and that `python.formatting.<formatter>Args` contains a list of individual top-level argument elements such as `"python.formatting.yapfArgs": ["--style", "{based_on_style: chromium, indent_width: 20}"]`. |
-| Pop up with warning message `Black does not support the "Format Select" command.` | `black` does not support formatting sections of code, it can be prevented with the following settings `"[python]": {"editor.formatOnPaste": false, "editor.formatOnSaveMode": "file"}`.|
+| Cause                                                                             | Solution                                                                                                                                                                                                                                                                                                       |
+| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The path to the python interpreter is incorrect.                                  | Check the `pythonPath` setting.                                                                                                                                                                                                                                                                                |
+| The formatter is not installed in the current environment.                        | Open a command prompt, navigate to the location specified in the `pythonPath` setting, and run `pip install` for the formatter.                                                                                                                                                                                |
+| The path to the formatter is incorrect.                                           | Check the value of the appropriate `python.formatting.<formatter>Path` setting.                                                                                                                                                                                                                                |
+| Custom arguments for the formatter are incorrect.                                 | Check that the appropriate `python.formatting.<formatter>Path` setting does not contain arguments, and that `python.formatting.<formatter>Args` contains a list of individual top-level argument elements such as `"python.formatting.yapfArgs": ["--style", "{based_on_style: chromium, indent_width: 20}"]`. |
+| Pop up with warning message `Black does not support the "Format Select" command.` | `black` does not support formatting sections of code, it can be prevented with the following settings `"[python]": {"editor.formatOnPaste": false, "editor.formatOnSaveMode": "file"}`.                                                                                                                        |
 
 ## Refactoring
 
@@ -187,7 +188,7 @@ Invoked by:
 
 ### Sort Imports
 
-Sort Imports uses the isort package to consolidate specific imports from the same module into a single `import` statement and  to organize `import` statements in alphabetical order.
+Sort Imports uses the isort package to consolidate specific imports from the same module into a single `import` statement and to organize `import` statements in alphabetical order.
 
 Invoked by:
 

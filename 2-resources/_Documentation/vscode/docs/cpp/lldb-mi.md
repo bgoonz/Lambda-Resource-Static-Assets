@@ -7,6 +7,7 @@ PageTitle: How to set up debugging on macOS with LLDB-MI
 DateApproved: 2/12/2020
 MetaDescription: How to set up debugging on macOS with LLDB-MI
 ---
+
 # Debugging with LLDB-MI on macOS
 
 The debug adapter for the [C/C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) utilizes the machine interface mode for both gdb and lldb. To use this interface in lldb, the extension utilizes `lldb-mi`. The `lldb-mi` executable was built from the GitHub [lldb-mi repository](https://github.com/lldb-tools/lldb-mi) and has a dependency on the `LLDB.framework`, which is part of XCode.
@@ -21,15 +22,15 @@ You can get the `LLDB.framework` one of two ways.
 
 XCode:
 
-   1. Open the **Apple App Store**.
-   2. Search for 'XCode'.
-   3. Select the **XCode** application and then **Install**.
+1.  Open the **Apple App Store**.
+2.  Search for 'XCode'.
+3.  Select the **XCode** application and then **Install**.
 
 XCode Command Line Tools:
 
-   1. Open a terminal.
-   2. Run `xcode-select --install`.
-   3. Confirm the prompt.
+1.  Open a terminal.
+2.  Run `xcode-select --install`.
+3.  Confirm the prompt.
 
 ## Example launch.json
 
@@ -77,7 +78,7 @@ If you wish to use an LLDB.framework that is not installed with XCode, you need 
 
 For example, if you have the `LLDB.framework` folder located at `/Users/default/example/`, you would:
 
-1. Copy `~/.vscode/extensions/ms.vscode-cpptools-<version>/debugAdapters/lldb-mi/bin/lldb-mi` into  `/Users/default/example/`.
+1. Copy `~/.vscode/extensions/ms.vscode-cpptools-<version>/debugAdapters/lldb-mi/bin/lldb-mi` into `/Users/default/example/`.
 
 2. Add the following to your existing configuration:
 
@@ -91,5 +92,5 @@ If you built your own `lldb-mi`, you can use it by setting `miDebuggerPath` to t
 
 ## References
 
-* [LLDB-MI Build](https://dev.azure.com/ms/vscode-cpptools/_build?definitionId=313)
-* [LLDB-MI Repository](https://github.com/lldb-tools/lldb-mi)
+- [LLDB-MI Build](https://dev.azure.com/ms/vscode-cpptools/_build?definitionId=313)
+- [LLDB-MI Repository](https://github.com/lldb-tools/lldb-mi)

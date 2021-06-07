@@ -4,6 +4,7 @@ PageTitle: Get Started with Visual Studio Code
 DateApproved: 10/22/2020
 MetaDescription: Get Started with Visual Studio Code
 ---
+
 # Learn to code with Visual Studio Code
 
 Learning to code is intimidating, so set yourself up for success with a tool built for you. Visual Studio Code is a free coding editor that helps you start coding quickly.
@@ -15,7 +16,7 @@ Use it to code in any programming language, without switching editors. Visual St
 
 ### Collaborate and code remotely
 
-Work together remotely with your teachers or classmates using the free [LiveShare extension](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack). Edit and debug your code in real-time, and use the chat and call features to ask questions or discuss ideas together. Whether you're working on a group assignment or teaching a lesson, you can invite multiple people to join your  session and code together. Check out this [tutorial on how start using LiveShare](/learn/collaboration/live-share.md).
+Work together remotely with your teachers or classmates using the free [LiveShare extension](https://marketplace.visualstudio.com/items?itemName=MS-vsliveshare.vsliveshare-pack). Edit and debug your code in real-time, and use the chat and call features to ask questions or discuss ideas together. Whether you're working on a group assignment or teaching a lesson, you can invite multiple people to join your session and code together. Check out this [tutorial on how start using LiveShare](/learn/collaboration/live-share.md).
 
 ### Code to learn
 

@@ -12,7 +12,7 @@ npm star [<pkg>...]
 
 ### Description
 
-"Starring" a package means that you have some interest in it.  It's
+"Starring" a package means that you have some interest in it. It's
 a vaguely positive way to show that you care.
 
 It's a boolean thing. Starring repeatedly has no additional effect.
@@ -33,8 +33,8 @@ You can see all your starred packages using [`npm stars`](/commands/npm-stars)
 
 ### See Also
 
-* [npm unstar](/commands/npm-unstar)
-* [npm stars](/commands/npm-stars)
-* [npm view](/commands/npm-view)
-* [npm whoami](/commands/npm-whoami)
-* [npm adduser](/commands/npm-adduser)
+- [npm unstar](/commands/npm-unstar)
+- [npm stars](/commands/npm-stars)
+- [npm view](/commands/npm-view)
+- [npm whoami](/commands/npm-whoami)
+- [npm adduser](/commands/npm-adduser)

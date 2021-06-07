@@ -60,20 +60,20 @@ You can also click in the margin to the left of line numbers to set breakpoints.
 
 The following table lists additional commands and keyboard shortcuts supported when working with code cells.
 
-|Command  |Keyboard shortcut  |
-|---------|---------|
-|Python: Go to Next Cell                  | `kbstyle(Ctrl+Alt+])`      |
-|Python: Go to Previous Cell              | `kbstyle(Ctrl+Alt+[)`      |
-|Python: Extend Selection by Cell Above   | `kbstyle(Ctrl+Shift+Alt+[)` |
-|Python: Extend Selection by Cell Below   | `kbstyle(Ctrl+Shift+Alt+])` |
-|Python: Move Selected Cells Up           | `kbstyle(Ctrl+; U)`        |
-|Python: Move Selected Cells Down         | `kbstyle(Ctrl+; D)`        |
-|Python: Insert Cell Above                | `kbstyle(Ctrl+; A)`        |
-|Python: Insert Cell Below                | `kbstyle(Ctrl+; B)`        |
-|Python: Insert Cell Below Position       | `kbstyle(Ctrl+; S)`        |
-|Python: Delete Selected Cells            | `kbstyle(Ctrl+; X)`        |
-|Python: Change Cell to Code              | `kbstyle(Ctrl+; C)`        |
-|Python: Change Cell to Markdown          | `kbstyle(Ctrl+; M)`        |
+| Command                                | Keyboard shortcut           |
+| -------------------------------------- | --------------------------- |
+| Python: Go to Next Cell                | `kbstyle(Ctrl+Alt+])`       |
+| Python: Go to Previous Cell            | `kbstyle(Ctrl+Alt+[)`       |
+| Python: Extend Selection by Cell Above | `kbstyle(Ctrl+Shift+Alt+[)` |
+| Python: Extend Selection by Cell Below | `kbstyle(Ctrl+Shift+Alt+])` |
+| Python: Move Selected Cells Up         | `kbstyle(Ctrl+; U)`         |
+| Python: Move Selected Cells Down       | `kbstyle(Ctrl+; D)`         |
+| Python: Insert Cell Above              | `kbstyle(Ctrl+; A)`         |
+| Python: Insert Cell Below              | `kbstyle(Ctrl+; B)`         |
+| Python: Insert Cell Below Position     | `kbstyle(Ctrl+; S)`         |
+| Python: Delete Selected Cells          | `kbstyle(Ctrl+; X)`         |
+| Python: Change Cell to Code            | `kbstyle(Ctrl+; C)`         |
+| Python: Change Cell to Markdown        | `kbstyle(Ctrl+; M)`         |
 
 ## Python Interactive window
 
@@ -126,14 +126,14 @@ To connect to a remote Jupyter server:
 
 1. Run the **Jupyter: Specify local or remote Jupyter server for connections** command from the Command Palette (`kb(workbench.action.showCommands)`).
 2. Select how you would like to connect to a Jupyter server.
-    ![Prompt to supply a Jupyter server URI](images/jupyter/local-remote-connections.png)
+   ![Prompt to supply a Jupyter server URI](images/jupyter/local-remote-connections.png)
 3. If working remotely, provide the server's URI (hostname) with the authentication token included with a `?token=` URL parameter when prompted. (If you start the server in the VS Code terminal with an authentication token enabled, the URL with the token typically appears in the terminal output from where you can copy it.) Alternatively, you can specify a username and password after providing the URI.
 
-    ![Prompt to supply a Jupyter server URI](images/jupyter/enter-url-auth-token.png)
+   ![Prompt to supply a Jupyter server URI](images/jupyter/enter-url-auth-token.png)
 
 4. The Python Interactive window indicates where code is run by displaying the URI (which is blurred out in the image below):
 
-    ![The Python Interactive window showing that code is running on a remote Jupyter server](images/jupyter/jupyter-running-remotely.png)
+   ![The Python Interactive window showing that code is running on a remote Jupyter server](images/jupyter/jupyter-running-remotely.png)
 
 > **Note:** For added security, Microsoft recommends configuring your Jupyter server with security precautions such as SSL and token support. This helps ensure that requests sent to the Jupyter server are authenticated and connections to the remoter server are encrypted. For guidance about securing a notebook server, see the [Jupyter docs](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html#securing-a-notebook-server).
 
@@ -161,8 +161,8 @@ The Visual Studio Code debugger lets you step through your code, set breakpoints
 
 1. To start the debugger, use one of the following options:
 
-    - For the whole notebook, open the Command Palette (`kb(workbench.action.showCommands)`) and run the **Jupyter: Debug Current File in Python Interactive Window** command.
-    - For an individual cell, use the **Debug Cell** adornment that appears above the cell. The debugger specifically starts on the code in that cell. By default, **Debug Cell** just steps into user code. If you want to step into non-user code, you need to uncheck **Data Science: Debug Just My Code** in the Python extension settings (`kb(workbench.action.openSettings)`).
+   - For the whole notebook, open the Command Palette (`kb(workbench.action.showCommands)`) and run the **Jupyter: Debug Current File in Python Interactive Window** command.
+   - For an individual cell, use the **Debug Cell** adornment that appears above the cell. The debugger specifically starts on the code in that cell. By default, **Debug Cell** just steps into user code. If you want to step into non-user code, you need to uncheck **Data Science: Debug Just My Code** in the Python extension settings (`kb(workbench.action.openSettings)`).
 
 1. To familiarize yourself with the general debugging features of VS Code, such as inspecting variables, setting breakpoints, and other activities, review [VS Code debugging](/docs/editor/debugging.md).
 

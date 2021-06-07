@@ -7,6 +7,7 @@ PageTitle: Choosing an environment for container development
 DateApproved: 01/29/2020
 MetaDescription: Guidance on choosing remote or local environments for developing and debugging containerized apps, using Visual Studio Code.
 ---
+
 # Your development environment
 
 You can choose whether to develop a container-based service in the **local environment**, or in a **remote environment**. The local environment is the operating system of your developer workstation; using the local environment means you build and run your service container(s) using Docker installed on your workstation. Docker is supported on Windows, macOS, and various Linux distributions; for system and hardware requirements, refer to [Docker installation page](https://docs.docker.com/get-docker/).
@@ -24,7 +25,7 @@ The second important choice is whether to debug your service running as an ordin
 
 1. Consider using a [development container](/docs/remote/containers.md) first, if you need a remote environment.
 
-    - On Windows, using [Windows Subsystem for Linux (WSL)](#windows-subsystem-for-linux) is good option.
+   - On Windows, using [Windows Subsystem for Linux (WSL)](#windows-subsystem-for-linux) is good option.
 
 1. Debugging your service running in a container is possible, but brings additional complexity. Use normal debugging by default, and debugging in the container when you need it.
 
@@ -76,7 +77,7 @@ Windows Subsystem for Linux represents a great choice for container-based servic
 
 The recommended way to enable container development with a remote machine is to do [a full Docker installation](https://docs.docker.com/install/) on the machine, including Docker daemon.
 
->**Note**: Docker Desktop product is supported only on physical Windows and macOS machines, not virtual machines. If you want to use a virtual machine as a remote development environment, we recommend to use a Linux VM with [Docker Engine](https://docs.docker.com/engine/).
+> **Note**: Docker Desktop product is supported only on physical Windows and macOS machines, not virtual machines. If you want to use a virtual machine as a remote development environment, we recommend to use a Linux VM with [Docker Engine](https://docs.docker.com/engine/).
 
 After Docker is installed and working on the remote machine, you can use VS Code's [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) extension from the [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) extension pack to connect to your remote machine and work there.
 
@@ -90,7 +91,7 @@ After Docker is installed and working on the remote machine, you can use VS Code
 
    ![Screenshot - Installing the Docker extension](images/devenv/install-in-ssh.png)
 
->**NOTE**: If you are using the Docker extension to build Docker images and have source code, the approach above probably means you have your source enlistment on the remote host, rather than on your developer workstation. If you are just using the Docker extension for the Docker Explorer features, then you can disregard this.
+> **NOTE**: If you are using the Docker extension to build Docker images and have source code, the approach above probably means you have your source enlistment on the remote host, rather than on your developer workstation. If you are just using the Docker extension for the Docker Explorer features, then you can disregard this.
 
 ### Local Linux VM
 

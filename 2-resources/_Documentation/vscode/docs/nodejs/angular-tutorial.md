@@ -8,6 +8,7 @@ DateApproved: 3/31/2021
 MetaDescription: Angular JavaScript tutorial showing IntelliSense, debugging, and code navigation support in the Visual Studio Code editor.
 MetaSocialImage: images/angular/Welcome-to-app.png
 ---
+
 # Using Angular in Visual Studio Code
 
 [Angular](https://angular.io/) is a popular JavaScript library developed by Google for building web application user interfaces. The Visual Studio Code editor supports Angular IntelliSense and code navigation out of the box.
@@ -18,7 +19,7 @@ MetaSocialImage: images/angular/Welcome-to-app.png
 
 We'll be using the [Angular CLI](https://cli.angular.io/) for this tutorial. To install and use the command line interface as well as run the Angular application server, you'll need the [Node.js](https://nodejs.org/) JavaScript runtime and [npm](https://www.npmjs.com/) (the Node.js package manager) installed. npm is included with Node.js which you can install from [Node.js downloads](https://nodejs.org/en/download/).
 
->**Tip**: To test that you have Node.js and npm correctly installed on your machine, you can type `node --version` and `npm --version`.
+> **Tip**: To test that you have Node.js and npm correctly installed on your machine, you can type `node --version` and `npm --version`.
 
 To install the Angular CLI, in a terminal or command prompt type:
 
@@ -85,21 +86,21 @@ Press `kbstyle(Escape)` to close the Peek window.
 Let's update the sample application to "Hello World". Go back to the `app.component.ts` file and change the `title` string in `AppComponent` to "Hello World".
 
 ```ts
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  title = 'Hello World';
+  title = "Hello World";
 }
 ```
 
 Once you save the `app.component.ts` file, the running instance of the server will update the web page and you'll see "Welcome to Hello World!!".
 
->**Tip**: VS Code supports Auto Save, which by default saves your files after a delay. Check the **Auto Save** option in the **File** menu to turn on Auto Save or directly configure the `files.autoSave` user [setting](/docs/getstarted/settings.md).
+> **Tip**: VS Code supports Auto Save, which by default saves your files after a delay. Check the **Auto Save** option in the **File** menu to turn on Auto Save or directly configure the `files.autoSave` user [setting](/docs/getstarted/settings.md).
 
 ![hello world](images/angular/hello-world.png)
 
@@ -107,7 +108,7 @@ Once you save the `app.component.ts` file, the running instance of the server wi
 
 To debug the client side Angular code, we'll need to install the [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) extension.
 
->Note: This tutorial assumes you have the Chrome browser installed. There are also debugger extensions for the [Edge](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-edge) and [Firefox](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-firefox-debug) browsers.
+> Note: This tutorial assumes you have the Chrome browser installed. There are also debugger extensions for the [Edge](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-edge) and [Firefox](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-firefox-debug) browsers.
 
 Open the Extensions view (`kb(workbench.view.extensions)`) and type 'chrome' in the search box. You'll see several extensions which reference Chrome.
 
@@ -129,16 +130,16 @@ We need to make one change for our example: change the port of the `url` from `8
 
 ```json
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:4200",
-            "webRoot": "${workspaceFolder}"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
 }
 ```
 

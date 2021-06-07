@@ -34,11 +34,11 @@ To help you set up quickly, you can install the **Coding Pack for Java**, which 
 
 If you are an existing VS Code user, you can also add Java support by installing [Java Extension Pack](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack), which includes these extensions:
 
-* [Language Support for Java(TM) by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java)
-* [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug)
-* [Java Test Runner](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test)
-* [Maven for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven)
-* [Project Manager for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency)
+- [Language Support for Java(TM) by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java)
+- [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug)
+- [Java Test Runner](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-test)
+- [Maven for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven)
+- [Project Manager for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-dependency)
 
 <a class="tutorial-install-extension-btn" href="vscode:extension/vscjava.vscode-java-pack">Install the Java Extension Pack</a>
 
@@ -50,8 +50,8 @@ You can also install extensions separately. The **Extension Guide** is provided 
 
 For this tutorial, the only required extensions are:
 
-* [Language Support for Java(TM) by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java)
-* [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug)
+- [Language Support for Java(TM) by Red Hat](https://marketplace.visualstudio.com/items?itemName=redhat.java)
+- [Debugger for Java](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-debug)
 
 ## Settings for the JDK
 
@@ -75,9 +75,9 @@ Alternatively, you can configure JDK settings using the VS Code Settings editor.
 
 When you need install a JDK, we recommend you to consider installing from one of these sources:
 
-* [Oracle Java SE](https://www.oracle.com/java/technologies/javase-downloads.html)
-* [AdoptOpenJDK](https://adoptopenjdk.net/)
-* [Azul Zulu for Azure - Enterprise Edition](https://www.azul.com/downloads/azure-only/zulu/)
+- [Oracle Java SE](https://www.oracle.com/java/technologies/javase-downloads.html)
+- [AdoptOpenJDK](https://adoptopenjdk.net/)
+- [Azul Zulu for Azure - Enterprise Edition](https://www.azul.com/downloads/azure-only/zulu/)
 
 ## Creating a source code file
 
@@ -87,11 +87,11 @@ Create a folder for your Java program and open the folder with VS Code. Then in 
   <source src="/docs/java/java-tutorial/JavaHelloWorld.Standalone.mp4" type="video/mp4">
 </video>
 
->**Note**: If you open a Java file in VS Code without opening its folder, the Java Language Server might not work properly.
+> **Note**: If you open a Java file in VS Code without opening its folder, the Java Language Server might not work properly.
 
 VS Code will also try to figure out the correct package for the new type and fill the new file from a template. See [Create new file](/docs/java/java-editing.md#create-new-file).
 
-You can also create a Java project using the **Java: Create Java Project** command. Bring up the **Command Palette**  (`kb(workbench.action.showCommands)`) and then type `java` to search for this command. After selecting the command, you will be prompted for the location and name of the project. You can also choose your build tool from this command.
+You can also create a Java project using the **Java: Create Java Project** command. Bring up the **Command Palette** (`kb(workbench.action.showCommands)`) and then type `java` to search for this command. After selecting the command, you will be prompted for the location and name of the project. You can also choose your build tool from this command.
 
 <video autoplay loop muted playsinline controls>
   <source src="/docs/java/java-tutorial/JavaHelloWorld.Project.mp4" type="video/mp4">
@@ -125,9 +125,9 @@ For more information, see [Java Debugging](/docs/java/java-debugging.md).
 
 The editor also has much more capability for your Java workload.
 
-* [Editing Java](/docs/java/java-editing.md) explains how to navigate and edit Java in more details
-* [Debugging](/docs/java/java-debugging.md) illustrates all the key features of the Java Debugger
-* [Testing](/docs/java/java-testing.md) provides comprehensive support for JUnit and TestNG framework
-* [Java Project Management](/docs/java/java-project.md) shows you how to use a project view and work with Maven
-* [Spring Boot](/docs/java/java-spring-boot.md) and [Tomcat and Jetty](/docs/java/java-tomcat-jetty.md) demonstrate great framework support
-* [Java Web Apps](/docs/java/java-webapp.md) shows how to work with Java Web App in VS Code
+- [Editing Java](/docs/java/java-editing.md) explains how to navigate and edit Java in more details
+- [Debugging](/docs/java/java-debugging.md) illustrates all the key features of the Java Debugger
+- [Testing](/docs/java/java-testing.md) provides comprehensive support for JUnit and TestNG framework
+- [Java Project Management](/docs/java/java-project.md) shows you how to use a project view and work with Maven
+- [Spring Boot](/docs/java/java-spring-boot.md) and [Tomcat and Jetty](/docs/java/java-tomcat-jetty.md) demonstrate great framework support
+- [Java Web Apps](/docs/java/java-webapp.md) shows how to work with Java Web App in VS Code

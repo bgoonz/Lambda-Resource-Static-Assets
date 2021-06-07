@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>userdefinedsnippets</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1 id="snippets-in-visual-studio-code">Snippets in Visual Studio Code</h1>
+<p>Code snippets are templates that make it easier to enter repeating code patterns, such as loops or conditional-statements.</p>
+<p>In Visual Studio Code, snippets appear in IntelliSense (<code>kb(editor.action.triggerSuggest)</code>) mixed with other suggestions, as well as in a dedicated snippet picker (<strong>Insert Snippet</strong> in the Command Palette). There is also support for tab-completion: Enable it with <code>"editor.tabCompletion": "on"</code>, type a <strong>snippet prefix</strong> (trigger text), and press <code>kb(insertSnippet)</code> to insert a snippet.</p>
+<p>The snippet syntax follows the <a href="https://manual.macromates.com/en/snippets">TextMate snippet syntax</a> with the exceptions of ‘interpolated shell code’ and the use of <code>\u</code>; both are not supported.</p>
+<figure>
+<img src="images/userdefinedsnippets/ajax-snippet.gif" alt="ajax snippet" /><figcaption>ajax snippet</figcaption>
+</figure>
+<h2 id="built-in-snippets">Built-in snippets</h2>
+<p>VS Code has built-in snippets for a number of languages such as: JavaScript, TypeScript, Markdown, and PHP.</p>
+<figure>
+<img src="images/userdefinedsnippets/builtin-javascript-snippets.png" alt="builtin javascript snippet" /><figcaption>builtin javascript snippet</figcaption>
+</figure>
+<p>You can see the available snippets for a language by running the <strong>Insert Snippet</strong> command in the Command Palette to get a list of the snippets for the language of the current file. However, keep in mind that this list also includes user snippets that you have defined, and any snippets provided by extensions you have installed.</p>
+<h2 id="install-snippets-from-the-marketplace">Install snippets from the Marketplace</h2>
+<p>Many <a href="/docs/editor/extension-marketplace.md">extensions</a> on the <a href="https://marketplace.visualstudio.com/vscode">VS Code Marketplace</a> include snippets. You can search for extensions that contains snippets in the Extensions view (<code>kb(workbench.view.extensions)</code>) using the <code>@category:"snippets"</code> filter.</p>
+<figure>
+<img src="images/userdefinedsnippets/category-snippets.png" alt="Searching for extensions with snippets" /><figcaption>Searching for extensions with snippets</figcaption>
+</figure>
+<p>If you find an extension you want to use, install it, then restart VS Code and the new snippets will be available.</p>
+<h2 id="create-your-own-snippets">Create your own snippets</h2>
+<p>You can easily define your own snippets without any extension. To create or edit your own snippets, select <strong>User Snippets</strong> under <strong>File</strong> &gt; <strong>Preferences</strong> (<strong>Code</strong> &gt; <strong>Preferences</strong> on macOS), and then select the language (by <a href="/docs/languages/identifiers.md">language identifier</a>) for which the snippets should appear, or the <strong>New Global Snippets file</strong> option if they should appear for all languages. VS Code manages the creation and refreshing of the underlying snippets file(s) for you.</p>
+<figure>
+<img src="images/userdefinedsnippets/snippet-dropdown.png" alt="snippet dropdown" /><figcaption>snippet dropdown</figcaption>
+</figure>
+<p>Snippets files are written in JSON, support C-style comments, and can define an unlimited number of snippets. Snippets support most TextMate syntax for dynamic behavior, intelligently format whitespace based on the insertion context, and allow easy multiline editing.</p>
+<p>Below is an example of a <code>for</code> loop snippet for JavaScript:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="er">//</span> <span class="er">in</span> <span class="er">file</span> <span class="er">&#39;Code/User/snippets/javascript.json&#39;</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;For Loop&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb1-4" title="4">    <span class="dt">&quot;prefix&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;for&quot;</span><span class="ot">,</span> <span class="st">&quot;for-const&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-5" title="5">    <span class="dt">&quot;body&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;for (const ${2:element} of ${1:array}) {&quot;</span><span class="ot">,</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">$0&quot;</span><span class="ot">,</span> <span class="st">&quot;}&quot;</span><span class="ot">]</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb1-6" title="6">    <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;A for loop.&quot;</span></a>
+<a class="sourceLine" id="cb1-7" title="7">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<p>In the example above:</p>
+<ul>
+<li>“For Loop” is the snippet name. It is displayed via IntelliSense if no <code>description</code> is provided.</li>
+<li><code>prefix</code> defines one or more trigger words that display the snippet in IntelliSense. Substring matching is performed on prefixes, so in this case, “fc” could match “for-const”.</li>
+<li><code>body</code> is one or more lines of content, which will be joined as multiple lines upon insertion. Newlines and embedded tabs will be formatted according to the context in which the snippet is inserted.</li>
+<li><code>description</code> is an optional description of the snippet displayed by IntelliSense.</li>
+</ul>
+<p>Additionally, the <code>body</code> of the example above has three placeholders (listed in order of traversal): <code>${1:array}</code>, <code>${2:element}</code>, and <code>$0</code>. You can quickly jump to the next placeholder with <code>kb(jumpToNextSnippetPlaceholder)</code>, at which point you may edit the placeholder or jump again the next one. The string after the colon (if any) is the default text, for example <code>element</code> in <code>${2:element}</code>. Placeholder traversal order is ascending by number, starting from one; zero is an optional special case that always comes last, and exits snippet mode with the cursor at the specified position.</p>
+<h2 id="snippet-scope">Snippet scope</h2>
+<p>Snippets are scoped so that only relevant snippets are suggested. Snippets can be scoped by either:</p>
+<ol type="1">
+<li>the <strong>language(s)</strong> to which snippets are scoped (possibly all)</li>
+<li>the <strong>project(s)</strong> to which snippets are scoped (probably all)</li>
+</ol>
+<h3 id="language-snippet-scope">Language snippet scope</h3>
+<p>Every snippet is scoped to one, several, or all (“global”) languages based on whether it is defined in:</p>
+<ol type="1">
+<li>a <strong>language</strong> snippet file</li>
+<li>a <strong>global</strong> snippet file</li>
+</ol>
+<p>Single-language user-defined snippets are defined in a specific language’s snippet file (for example <code>javascript.json</code>), which you can access by language identifier through <strong>Preferences: Configure User Snippets</strong>. A snippet is only accessible when editing the language for which it is defined.</p>
+<p>Multi-language and global user-defined snippets are all defined in “global” snippet files (JSON with the file suffix <code>.code-snippets</code>), which is also accessible through <strong>Preferences: Configure User Snippets</strong>. In a global snippets file, a snippet definition may have an additional <code>scope</code> property that takes one or more language identifiers, which makes the snippet available only for those specified languages. If no <code>scope</code> property is given, then the global snippet is available in <strong>all</strong> languages.</p>
+<p>Most user-defined snippets are scoped to a single language, and so are defined in a language-specific snippet file.</p>
+<h3 id="project-snippet-scope">Project snippet scope</h3>
+<p>You can also have a global snippets file (JSON with file suffix <code>.code-snippets</code>) scoped to your project. Project-folder snippets are created with the <strong>New Snippets file for ‘<folder-name>’…</strong> option in the <strong>Preferences: Configure User Snippets</strong> dropdown menu and are located at the root of the project in a <code>.vscode</code> folder. Project snippet files are useful for sharing snippets with all users working in that project. Project-folder snippets are similar to global snippets and can be scoped to specific languages through the <code>scope</code> property.</p>
+<h2 id="snippet-syntax">Snippet syntax</h2>
+<p>The <code>body</code> of a snippet can use special constructs to control cursors and the text being inserted. The following are supported features and their syntaxes:</p>
+<h3 id="tabstops">Tabstops</h3>
+<p>With tabstops, you can make the editor cursor move inside a snippet. Use <code>$1</code>, <code>$2</code> to specify cursor locations. The number is the order in which tabstops will be visited, whereas <code>$0</code> denotes the final cursor position. Multiple occurrences of the same tabstop are linked and updated in sync.</p>
+<h3 id="placeholders">Placeholders</h3>
+<p>Placeholders are tabstops with values, like <code>${1:foo}</code>. The placeholder text will be inserted and selected such that it can be easily changed. Placeholders can be nested, like <code>${1:another ${2:placeholder}}</code>.</p>
+<h3 id="choice">Choice</h3>
+<p>Placeholders can have choices as values. The syntax is a comma-separated enumeration of values, enclosed with the pipe-character, for example <code>${1|one,two,three|}</code>. When the snippet is inserted and the placeholder selected, choices will prompt the user to pick one of the values.</p>
+<h3 id="variables">Variables</h3>
+<p>With <code>$name</code> or <code>${name:default}</code>, you can insert the value of a variable. When a variable isn’t set, its <strong>default</strong> or the empty string is inserted. When a variable is unknown (that is, its name isn’t defined) the name of the variable is inserted and it is transformed into a placeholder.</p>
+<p>The following variables can be used:</p>
+<ul>
+<li><code>TM_SELECTED_TEXT</code> The currently selected text or the empty string</li>
+<li><code>TM_CURRENT_LINE</code> The contents of the current line</li>
+<li><code>TM_CURRENT_WORD</code> The contents of the word under cursor or the empty string</li>
+<li><code>TM_LINE_INDEX</code> The zero-index based line number</li>
+<li><code>TM_LINE_NUMBER</code> The one-index based line number</li>
+<li><code>TM_FILENAME</code> The filename of the current document</li>
+<li><code>TM_FILENAME_BASE</code> The filename of the current document without its extensions</li>
+<li><code>TM_DIRECTORY</code> The directory of the current document</li>
+<li><code>TM_FILEPATH</code> The full file path of the current document</li>
+<li><code>RELATIVE_FILEPATH</code> The relative (to the opened workspace or folder) file path of the current document</li>
+<li><code>CLIPBOARD</code> The contents of your clipboard</li>
+<li><code>WORKSPACE_NAME</code> The name of the opened workspace or folder</li>
+<li><code>WORKSPACE_FOLDER</code> The path of the opened workspace or folder</li>
+</ul>
+<p>For inserting the current date and time:</p>
+<ul>
+<li><code>CURRENT_YEAR</code> The current year</li>
+<li><code>CURRENT_YEAR_SHORT</code> The current year’s last two digits</li>
+<li><code>CURRENT_MONTH</code> The month as two digits (example ‘02’)</li>
+<li><code>CURRENT_MONTH_NAME</code> The full name of the month (example ‘July’)</li>
+<li><code>CURRENT_MONTH_NAME_SHORT</code> The short name of the month (example ‘Jul’)</li>
+<li><code>CURRENT_DATE</code> The day of the month</li>
+<li><code>CURRENT_DAY_NAME</code> The name of day (example ‘Monday’)</li>
+<li><code>CURRENT_DAY_NAME_SHORT</code> The short name of the day (example ‘Mon’)</li>
+<li><code>CURRENT_HOUR</code> The current hour in 24-hour clock format</li>
+<li><code>CURRENT_MINUTE</code> The current minute</li>
+<li><code>CURRENT_SECOND</code> The current second</li>
+<li><code>CURRENT_SECONDS_UNIX</code> The number of seconds since the Unix epoch</li>
+</ul>
+<p>For inserting random values:</p>
+<ul>
+<li><code>RANDOM</code> 6 random Base-10 digits</li>
+<li><code>RANDOM_HEX</code> 6 random Base-16 digits</li>
+<li><code>UUID</code> A Version 4 UUID</li>
+</ul>
+<p>For inserting line or block comments, honoring the current language:</p>
+<ul>
+<li><code>BLOCK_COMMENT_START</code> Example output: in PHP <code>/*</code> or in HTML <code>&lt;!--</code>
+<ul>
+<li><code>BLOCK_COMMENT_END</code> Example output: in PHP <code>*/</code> or in HTML <code>--&gt;</code></li>
+</ul></li>
+<li><code>LINE_COMMENT</code> Example output: in PHP <code>//</code></li>
+</ul>
+<p>The snippet below inserts <code>/* Hello World */</code> in JavaScript files and <code>&lt;!-- Hello World --&gt;</code> in HTML files:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb2-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="dt">&quot;hello&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="dt">&quot;scope&quot;</span><span class="fu">:</span> <span class="st">&quot;javascript,html&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-4" title="4">    <span class="dt">&quot;prefix&quot;</span><span class="fu">:</span> <span class="st">&quot;hello&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb2-5" title="5">    <span class="dt">&quot;body&quot;</span><span class="fu">:</span> <span class="st">&quot;$BLOCK_COMMENT_START Hello World $BLOCK_COMMENT_END&quot;</span></a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="fu">}</span></a></code></pre></div>
+<h3 id="variable-transforms">Variable transforms</h3>
+<p>Transformations allow you to modify the value of a variable before it is inserted. The definition of a transformation consists of three parts:</p>
+<ol type="1">
+<li>A regular expression that is matched against the value of a variable, or the empty string when the variable cannot be resolved.</li>
+<li>A “format string” that allows to reference matching groups from the regular expression. The format string allows for conditional inserts and simple modifications.</li>
+<li>Options that are passed to the regular expression.</li>
+</ol>
+<p>The following example inserts the name of the current file without its ending, so from <code>foo.txt</code> it makes <code>foo</code>.</p>
+<pre><code>${TM_FILENAME/(.*)\\..+$/$1/}
+  |           |         |  |
+  |           |         |  |-&gt; no options
+  |           |         |
+  |           |         |-&gt; references the contents of the first
+  |           |             capture group
+  |           |
+  |           |-&gt; regex to capture everything before
+  |               the final `.suffix`
+  |
+  |-&gt; resolves to the filename</code></pre>
+<h3 id="placeholder-transform">Placeholder-Transform</h3>
+<p>Like a Variable-Transform, a transformation of a placeholder allows changing the inserted text for the placeholder when moving to the next tab stop. The inserted text is matched with the regular expression and the match or matches - depending on the options - are replaced with the specified replacement format text. Every occurrence of a placeholder can define its own transformation independently using the value of the first placeholder. The format for Placeholder-Transforms is the same as for Variable-Transforms.</p>
+<h3 id="transform-examples">Transform examples</h3>
+<p>The examples are shown within double quotes, as they would appear inside a snippet body, to illustrate the need to double escape certain characters. Sample transformations and the resulting output for the filename <code>example-123.456-TEST.js</code>.</p>
+<table>
+<colgroup>
+<col style="width: 38%" />
+<col style="width: 26%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Example</th>
+<th>Output</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>"${TM_FILENAME/[\\.]/_/}"</code></td>
+<td><code>example-123_456-TEST.js</code></td>
+<td>Replace the first <code>.</code> with <code>_</code></td>
+</tr>
+<tr class="even">
+<td><code>"${TM_FILENAME/[\\.-]/_/g}"</code></td>
+<td><code>example_123_456_TEST_js</code></td>
+<td>Replace each <code>.</code> or <code>-</code> with <code>_</code></td>
+</tr>
+<tr class="odd">
+<td><code>"${TM_FILENAME/(.*)/${1:/upcase}/}"</code></td>
+<td><code>EXAMPLE-123.456-TEST.JS</code></td>
+<td>Change to all uppercase</td>
+</tr>
+<tr class="even">
+<td><code>"${TM_FILENAME/[^0-9^a-z]//gi}"</code></td>
+<td><code>example123456TESTjs</code></td>
+<td>Remove non-alphanumeric characters</td>
+</tr>
+</tbody>
+</table>
+<h3 id="grammar">Grammar</h3>
+<p>Below is the EBNF (<a href="https://en.wikipedia.org/wiki/Extended_Backus-Naur_form">extended Backus-Naur form</a>) for snippets. With <code>\</code> (backslash), you can escape <code>$</code>, <code>}</code>, and <code>\</code>. Within choice elements, the backslash also escapes comma and pipe characters.</p>
+<pre><code>any         ::= tabstop | placeholder | choice | variable | text
+tabstop     ::= &#39;$&#39; int
+                | &#39;${&#39; int &#39;}&#39;
+                | &#39;${&#39; int  transform &#39;}&#39;
+placeholder ::= &#39;${&#39; int &#39;:&#39; any &#39;}&#39;
+choice      ::= &#39;${&#39; int &#39;|&#39; text (&#39;,&#39; text)* &#39;|}&#39;
+variable    ::= &#39;$&#39; var | &#39;${&#39; var &#39;}&#39;
+                | &#39;${&#39; var &#39;:&#39; any &#39;}&#39;
+                | &#39;${&#39; var transform &#39;}&#39;
+transform   ::= &#39;/&#39; regex &#39;/&#39; (format | text)+ &#39;/&#39; options
+format      ::= &#39;$&#39; int | &#39;${&#39; int &#39;}&#39;
+                | &#39;${&#39; int &#39;:&#39; &#39;/upcase&#39; | &#39;/downcase&#39; | &#39;/capitalize&#39; | &#39;/pascalcase&#39; &#39;}&#39;
+                | &#39;${&#39; int &#39;:+&#39; if &#39;}&#39;
+                | &#39;${&#39; int &#39;:?&#39; if &#39;:&#39; else &#39;}&#39;
+                | &#39;${&#39; int &#39;:-&#39; else &#39;}&#39; | &#39;${&#39; int &#39;:&#39; else &#39;}&#39;
+regex       ::= JavaScript Regular Expression value (ctor-string)
+options     ::= JavaScript Regular Expression option (ctor-options)
+var         ::= [_a-zA-Z] [_a-zA-Z0-9]*
+int         ::= [0-9]+
+text        ::= .*</code></pre>
+<h2 id="using-textmate-snippets">Using TextMate snippets</h2>
+<p>You can also use existing TextMate snippets (.tmSnippets) with VS Code. See the <a href="/api/language-extensions/snippet-guide.md#using-textmate-snippets">Using TextMate Snippets</a> topic in our Extension API section to learn more.</p>
+<h2 id="assign-keybindings-to-snippets">Assign keybindings to snippets</h2>
+<p>You can create custom <a href="/docs/getstarted/keybindings.md">keybindings</a> to insert specific snippets. Open <code>keybindings.json</code> (<strong>Preferences: Open Keyboard Shortcuts File</strong>), which defines all your keybindings, and add a keybinding passing <code>"snippet"</code> as an extra argument:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="dt">&quot;key&quot;</span><span class="fu">:</span> <span class="st">&quot;cmd+k 1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;editor.action.insertSnippet&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="dt">&quot;when&quot;</span><span class="fu">:</span> <span class="st">&quot;editorTextFocus&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="dt">&quot;snippet&quot;</span><span class="fu">:</span> <span class="st">&quot;console.log($1)$0&quot;</span></a>
+<a class="sourceLine" id="cb5-7" title="7">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="fu">}</span></a></code></pre></div>
+<p>The keybinding will invoke the <strong>Insert Snippet</strong> command but instead of prompting you to select a snippet, it will insert the provided snippet. You define the custom <a href="/docs/getstarted/keybindings.md">keybinding</a> as usual with a keyboard shortcut, command ID, and optional <a href="/docs/getstarted/keybindings.md#when-clause-contexts">when clause context</a> for when the keyboard shortcut is enabled.</p>
+<p>Also, instead of using the <code>snippet</code> argument value to define your snippet inline, you can reference an existing snippet by using the <code>langId</code> and <code>name</code> arguments. The <code>langId</code> argument is the name of the JSON user snippet file and <code>name</code> is the snippet’s unique name from this file:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb6-1" title="1"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="dt">&quot;key&quot;</span><span class="fu">:</span> <span class="st">&quot;cmd+k 1&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;editor.action.insertSnippet&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="dt">&quot;when&quot;</span><span class="fu">:</span> <span class="st">&quot;editorTextFocus&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-5" title="5">  <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="dt">&quot;langId&quot;</span><span class="fu">:</span> <span class="st">&quot;csharp&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb6-7" title="7">    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;myFavSnippet&quot;</span></a>
+<a class="sourceLine" id="cb6-8" title="8">  <span class="fu">}</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="fu">}</span></a></code></pre></div>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="/docs/editor/command-line.md">Command Line</a> - VS Code has a rich command-line interface to open or diff files and install extensions.</li>
+<li><a href="/api">Extension API</a> - Learn about other ways to extend VS Code.</li>
+<li><a href="/api/language-extensions/snippet-guide.md">Snippet Guide</a> - You can package snippets for use in VS Code.</li>
+</ul>
+<h2 id="common-questions">Common questions</h2>
+<h3 id="what-if-i-want-to-use-existing-textmate-snippets-from-a-.tmsnippet-file">What if I want to use existing TextMate snippets from a .tmSnippet file?</h3>
+<p>You can easily package TextMate snippets files for use in VS Code. See <a href="/api/language-extensions/snippet-guide.md#using-textmate-snippets">Using TextMate Snippets</a> in our Extension API documentation.</p>
+<h3 id="how-do-i-have-a-snippet-place-a-variable-in-the-pasted-script">How do I have a snippet place a variable in the pasted script?</h3>
+<p>To have a variable in the pasted script, you need to escape the ’<span class="math inline">$' of the `$</span>variable` name so that it isn’t parsed by the snippet expansion phase.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb7-1" title="1"><span class="er">&quot;VariableSnippet&quot;:</span><span class="fu">{</span></a>
+<a class="sourceLine" id="cb7-2" title="2">    <span class="dt">&quot;prefix&quot;</span><span class="fu">:</span> <span class="st">&quot;_Var&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="dt">&quot;body&quot;</span><span class="fu">:</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">$MyVar = 2&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb7-4" title="4">    <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;A basic snippet that places a variable into script with the $ prefix&quot;</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="fu">}</span></a></code></pre></div>
+<p>This results in the pasted snippet as:</p>
+<pre class="text"><code>$MyVar = 2</code></pre>
+<h3 id="can-i-remove-snippets-from-intellisense">Can I remove snippets from IntelliSense?</h3>
+<p>Yes, you can hide specific snippets from showing in IntelliSense (completion list) by selecting the <strong>Hide from IntelliSense</strong> button to the right of snippet items in the <strong>Insert Snippet</strong> command dropdown.</p>
+<figure>
+<img src="images/userdefinedsnippets/hide-from-intellisense.png" alt="Hide from IntelliSense button in Insert Snippet dropdown" /><figcaption>Hide from IntelliSense button in Insert Snippet dropdown</figcaption>
+</figure>
+<p>You can still select the snippet with the <strong>Insert Snippet</strong> command but the hidden snippet won’t be displayed in IntelliSense.</p>
+</body>
+</html>

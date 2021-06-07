@@ -8,6 +8,7 @@ DateApproved: 3/31/2021
 MetaDescription: TypeScript debugging with Visual Studio Code.
 MetaSocialImage: images/typescript-tutorial/Languages_typescript.png
 ---
+
 # Debugging TypeScript
 
 Visual Studio Code supports TypeScript debugging through its built-in [Node.js debugger](/docs/nodejs/nodejs-debugging.md) and also through [extensions](/docs/editor/extension-marketplace.md) like [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) to support client-side TypeScript debugging.
@@ -22,12 +23,12 @@ For a simple example of source maps in action, see the [TypeScript tutorial](/do
 
 ```json
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "outDir": "out",
-        "sourceMap": true
-    }
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "out",
+    "sourceMap": true
+  }
 }
 ```
 
@@ -39,22 +40,20 @@ This will create a `launch.json` file in a `.vscode` folder with default values 
 
 ```json
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/helloworld.ts",
-            "preLaunchTask": "tsc: build - tsconfig.json",
-            "outFiles": [
-                "${workspaceFolder}/out/**/*.js"
-            ]
-        }
-    ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/helloworld.ts",
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "outFiles": ["${workspaceFolder}/out/**/*.js"]
+    }
+  ]
 }
 ```
 
@@ -81,7 +80,7 @@ Create a new folder `HelloWeb` and add three files: `helloweb.ts`, `helloweb.htm
 helloweb.ts
 
 ```typescript
-let message : string = "Hello Web";
+let message: string = "Hello Web";
 document.body.innerHTML = message;
 ```
 
@@ -90,10 +89,12 @@ helloweb.html
 ```html
 <!DOCTYPE html>
 <html>
-    <head><title>TypeScript Hello Web</title></head>
-    <body>
-        <script src="out/helloweb.js"></script>
-    </body>
+  <head>
+    <title>TypeScript Hello Web</title>
+  </head>
+  <body>
+    <script src="out/helloweb.js"></script>
+  </body>
 </html>
 ```
 
@@ -101,12 +102,12 @@ tsconfig.json
 
 ```json
 {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "outDir": "out",
-        "sourceMap": true
-    }
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "out",
+    "sourceMap": true
+  }
 }
 ```
 
@@ -122,16 +123,16 @@ Update the `launch.json` to specify the local file URL to `helloweb.html`:
 
 ```json
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "chrome",
-            "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "file:///C:/Users/username/deleteMe/HelloWeb/helloweb.html",
-            "webRoot": "${workspaceFolder}"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "file:///C:/Users/username/deleteMe/HelloWeb/helloweb.html",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
 }
 ```
 

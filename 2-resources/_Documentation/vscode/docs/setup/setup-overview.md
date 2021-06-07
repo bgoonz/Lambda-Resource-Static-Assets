@@ -8,6 +8,7 @@ DateApproved: 3/31/2021
 MetaDescription: Get Visual Studio Code up and running.
 MetaSocialImage: quicksetup_QuickSetup.png
 ---
+
 # Setting up Visual Studio Code
 
 Getting up and running with Visual Studio Code is quick and easy. It is a small download so you can install in a matter of minutes and give VS Code a try.
@@ -18,9 +19,9 @@ VS Code is a free code editor, which runs on the macOS, Linux, and Windows opera
 
 Follow the platform-specific guides below:
 
-* [macOS](/docs/setup/mac.md)
-* [Linux](/docs/setup/linux.md)
-* [Windows](/docs/setup/windows.md)
+- [macOS](/docs/setup/mac.md)
+- [Linux](/docs/setup/linux.md)
+- [Windows](/docs/setup/windows.md)
 
 VS Code is lightweight and should run on most available hardware and platform versions. You can review the [System Requirements](/docs/supporting/requirements.md) to check if your computer configuration is supported.
 
@@ -28,7 +29,7 @@ VS Code is lightweight and should run on most available hardware and platform ve
 
 VS Code releases a new version [each month](/updates) with new features and important bug fixes. Most platforms support auto updating and you will be prompted to install the new release when it becomes available. You can also manually check for updates by running **Help** > **Check for Updates** on Linux and Windows or running **Code** > **Check for Updates** on macOS.
 
->Note: You can [disable auto-update](/docs/supporting/faq.md#how-do-i-opt-out-of-vs-code-autoupdates) if you prefer to update VS Code on your own schedule.
+> Note: You can [disable auto-update](/docs/supporting/faq.md#how-do-i-opt-out-of-vs-code-autoupdates) if you prefer to update VS Code on your own schedule.
 
 ## Insiders nightly build
 
@@ -46,10 +47,10 @@ VS Code is an editor, first and foremost, and prides itself on a small footprint
 
 VS Code [extensions](/docs/editor/extension-marketplace.md) let third parties add support for additional:
 
-* Languages - [C++](/docs/languages/cpp.md), [C#](/docs/languages/csharp.md), [Go](/docs/languages/go.md), [Java](/docs/languages/java.md), [Python](/docs/languages/python.md)
-* Tools - [ESLint](https://marketplace.visualstudio.com/items/dbaeumer.vscode-eslint), [JSHint](https://marketplace.visualstudio.com/items/dbaeumer.jshint) , [PowerShell](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell)
-* Debuggers - [Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome), [PHP XDebug](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug).
-* Keymaps - [Vim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim), [Sublime Text](https://marketplace.visualstudio.com/items?itemName=ms-vscode.sublime-keybindings), [IntelliJ](https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings), [Emacs](https://marketplace.visualstudio.com/items?itemName=hiro-sun.vscode-emacs), [Atom](https://marketplace.visualstudio.com/items?itemName=ms-vscode.atom-keybindings), [Brackets](https://marketplace.visualstudio.com/items?itemName=ms-vscode.brackets-keybindings), [Visual Studio](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vs-keybindings), [Eclipse](https://marketplace.visualstudio.com/items?itemName=alphabotsec.vscode-eclipse-keybindings)
+- Languages - [C++](/docs/languages/cpp.md), [C#](/docs/languages/csharp.md), [Go](/docs/languages/go.md), [Java](/docs/languages/java.md), [Python](/docs/languages/python.md)
+- Tools - [ESLint](https://marketplace.visualstudio.com/items/dbaeumer.vscode-eslint), [JSHint](https://marketplace.visualstudio.com/items/dbaeumer.jshint) , [PowerShell](https://marketplace.visualstudio.com/items?itemName=ms-vscode.PowerShell)
+- Debuggers - [Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome), [PHP XDebug](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug).
+- Keymaps - [Vim](https://marketplace.visualstudio.com/items?itemName=vscodevim.vim), [Sublime Text](https://marketplace.visualstudio.com/items?itemName=ms-vscode.sublime-keybindings), [IntelliJ](https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings), [Emacs](https://marketplace.visualstudio.com/items?itemName=hiro-sun.vscode-emacs), [Atom](https://marketplace.visualstudio.com/items?itemName=ms-vscode.atom-keybindings), [Brackets](https://marketplace.visualstudio.com/items?itemName=ms-vscode.brackets-keybindings), [Visual Studio](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vs-keybindings), [Eclipse](https://marketplace.visualstudio.com/items?itemName=alphabotsec.vscode-eclipse-keybindings)
 
 Extensions integrate into VS Code's UI, commands, and task running systems so you'll find it easy to work with different technologies through VS Code's shared interface. Check out the VS Code extension [Marketplace](https://marketplace.visualstudio.com/vscode) to see what's available.
 
@@ -57,12 +58,12 @@ Extensions integrate into VS Code's UI, commands, and task running systems so yo
 
 Once you have installed and set up VS Code, these topics will help you learn more about VS Code:
 
-* [Additional Components](/docs/setup/additional-components.md) - Learn how to install Git, Node.js, TypeScript, and tools like Yeoman.
-* [User Interface](/docs/getstarted/userinterface.md) - A quick orientation to VS Code.
-* [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
-* [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.
-* [Debugging](/docs/editor/debugging.md) - Debug your source code directly in the VS Code editor.
-* [Proxy Server Support](/docs/setup/network.md) - Configure your proxy settings.
+- [Additional Components](/docs/setup/additional-components.md) - Learn how to install Git, Node.js, TypeScript, and tools like Yeoman.
+- [User Interface](/docs/getstarted/userinterface.md) - A quick orientation to VS Code.
+- [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
+- [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.
+- [Debugging](/docs/editor/debugging.md) - Debug your source code directly in the VS Code editor.
+- [Proxy Server Support](/docs/setup/network.md) - Configure your proxy settings.
 
 If you'd like to get something running quickly, try the [Node.js tutorial](/docs/nodejs/nodejs-tutorial.md) walkthrough that will have you debugging a Node.js web application with VS Code in minutes.
 
@@ -94,6 +95,6 @@ If you want to remove all user data after uninstalling VS Code, you can delete t
 
 The folder locations will vary depending on your platform:
 
-* **Windows** - Delete `%APPDATA%\Code` and `%USERPROFILE%\.vscode`.
-* **macOS** - Delete `$HOME/Library/Application Support/Code` and `~/.vscode`.
-* **Linux** - Delete `$HOME/.config/Code` and `~/.vscode`.
+- **Windows** - Delete `%APPDATA%\Code` and `%USERPROFILE%\.vscode`.
+- **macOS** - Delete `$HOME/Library/Application Support/Code` and `~/.vscode`.
+- **Linux** - Delete `$HOME/.config/Code` and `~/.vscode`.

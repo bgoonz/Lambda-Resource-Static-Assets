@@ -6,20 +6,30 @@ tags:
   - SVG
   - SVG Attribute
 ---
+
 <div>{{SVGRef}}</div>
 
-<p>The <strong><code>azimuth</code></strong> attribute specifies the direction angle for the light source on the XY plane (clockwise), in degrees from the x axis.</p>
+<p>
+  The <strong><code>azimuth</code></strong> attribute specifies the direction
+  angle for the light source on the XY plane (clockwise), in degrees from the x
+  axis.
+</p>
 
-<p>Only one element is using this attribute: {{SVGElement("feDistantLight")}}</p>
+<p>
+  Only one element is using this attribute: {{SVGElement("feDistantLight")}}
+</p>
 
 <div id="topExample">
-<div class="hidden">
-<pre class="brush: css">html, body, svg {
+  <div class="hidden">
+    <pre class="brush: css">
+html, body, svg {
   height: 100%;
-}</pre>
-</div>
+}</pre
+    >
+  </div>
 
-<pre class="brush: html; highlight[4,9]">&lt;svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg"&gt;
+  <pre class="brush: html; highlight[4,9]">
+&lt;svg viewBox="0 0 440 200" xmlns="http://www.w3.org/2000/svg"&gt;
   &lt;filter id="distantLight1"&gt;
     &lt;feDiffuseLighting&gt;
       &lt;feDistantLight azimuth="0" /&gt;
@@ -33,9 +43,10 @@ tags:
 
   &lt;circle cx="100" cy="100" r="80" style="filter: url(#distantLight1);" /&gt;
   &lt;circle cx="100" cy="100" r="80" style="filter: url(#distantLight2); transform: translateX(240px);" /&gt;
-&lt;/svg&gt;</pre>
+&lt;/svg&gt;</pre
+  >
 
-<p>{{EmbedLiveSample("topExample", "420", "200")}}</p>
+  <p>{{EmbedLiveSample("topExample", "420", "200")}}</p>
 </div>
 
 <h2 id="Usage_notes">Usage notes</h2>
@@ -69,12 +80,18 @@ tags:
   </thead>
   <tbody>
     <tr>
-      <td>{{SpecName("Filters 1.0", "#element-attrdef-fedistantlight-azimuth", "azimuth")}}</td>
+      <td>
+        {{SpecName("Filters 1.0", "#element-attrdef-fedistantlight-azimuth",
+        "azimuth")}}
+      </td>
       <td>{{Spec2("Filters 1.0")}}</td>
       <td>No change</td>
     </tr>
     <tr>
-      <td>{{SpecName("SVG1.1", "filters.html#feDistantLightAzimuthAttribute", "azimuth")}}</td>
+      <td>
+        {{SpecName("SVG1.1", "filters.html#feDistantLightAzimuthAttribute",
+        "azimuth")}}
+      </td>
       <td>{{Spec2("SVG1.1")}}</td>
       <td>Initial definition</td>
     </tr>

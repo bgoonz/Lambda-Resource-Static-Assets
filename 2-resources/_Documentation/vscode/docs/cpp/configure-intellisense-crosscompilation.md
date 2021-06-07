@@ -7,6 +7,7 @@ PageTitle: Configure IntelliSense for C++ cross-compilation
 DateApproved: 5/11/2020
 MetaDescription: Configure Visual Studio Code c_cpp_properties.json to get IntelliSense when you are compiling for a different platform
 ---
+
 # IntelliSense for cross-compiling
 
 The article is about configuring the C/C++ extension to provide proper IntelliSense (code completions) in Visual Studio Code when you compile for a different architecture than your development host machine. For example, when your host machine is x64 but you are compiling for ARM.
@@ -19,12 +20,12 @@ These configuration settings are stored in your project's `c_cpp_properties.json
 
 ## Example IntelliSense configuration
 
- The following shows configuring the C/C++ extension for a Linux x64 host machine that targets Linux ARM.  It configures the following IntelliSense settings:
+The following shows configuring the C/C++ extension for a Linux x64 host machine that targets Linux ARM. It configures the following IntelliSense settings:
 
 - **Compiler path**: the extension queries your compiler at this location to retrieve system libraries and compiler defines.
 - **IntelliSense mode**: emulates the target architecture and compiler so that the extension can provide correct IntelliSense and reflect the right sizes of data types such as `pointer`, `size_t`, `long`, and so on.
 
-At a minimum, setting **compiler path** and **IntelliSense mode** provides enough information for the extension to emulate your project's target  architecture.
+At a minimum, setting **compiler path** and **IntelliSense mode** provides enough information for the extension to emulate your project's target architecture.
 
 ### Compiler path
 
@@ -54,20 +55,18 @@ Given the settings above, your `c_cpp_configuration.json` file will look somethi
 
 ```json
 {
-    "configurations": [
-        {
-            "name": "myConfigurationName",
-            "includePath": [
-                "${workspaceFolder}/**"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/arm-none-eabi-g++",
-            "cStandard": "c11",
-            "cppStandard": "c++14",
-            "IntelliSenseMode": "gcc-arm"
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "myConfigurationName",
+      "includePath": ["${workspaceFolder}/**"],
+      "defines": [],
+      "compilerPath": "/usr/bin/arm-none-eabi-g++",
+      "cStandard": "c11",
+      "cppStandard": "c++14",
+      "IntelliSenseMode": "gcc-arm"
+    }
+  ],
+  "version": 4
 }
 ```
 

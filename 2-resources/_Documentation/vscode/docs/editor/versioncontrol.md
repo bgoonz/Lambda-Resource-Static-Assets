@@ -7,6 +7,7 @@ PageTitle: Version Control in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Visual Studio Code source code support with integrated Git support.
 ---
+
 # Using Version Control in VS Code
 
 Visual Studio Code has integrated source control management (SCM) and includes [Git](https://git-scm.com/) support in-the-box. Many other source control providers are available through [extensions](/docs/editor/extension-marketplace.md) on the VS Code Marketplace.
@@ -31,13 +32,13 @@ If you would like to install another SCM provider, you can search on the **scm p
 
 VS Code ships with a Git source control manager (SCM) extension. Most of the source control UI and work flows are common across other SCM extensions, so reading about the general Git support in VS Code will help you understand how to use another provider.
 
->**Note:** If you are new to Git, the [git-scm](https://git-scm.com/documentation) website is a good place to start, with a popular online [book](https://git-scm.com/book), Getting Started [videos](https://git-scm.com/video/what-is-git) and [cheat sheets](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf). The VS Code documentation assumes you are already familiar with Git.
+> **Note:** If you are new to Git, the [git-scm](https://git-scm.com/documentation) website is a good place to start, with a popular online [book](https://git-scm.com/book), Getting Started [videos](https://git-scm.com/video/what-is-git) and [cheat sheets](https://github.github.com/training-kit/downloads/github-git-cheat-sheet.pdf). The VS Code documentation assumes you are already familiar with Git.
 
 ![Overview of Git](images/versioncontrol/overview.png)
 
->**Note:** VS Code will leverage your machine's Git installation, so you need to [install Git](https://git-scm.com/download) first before you get these features. Make sure you install at least version `2.0.0`.
+> **Note:** VS Code will leverage your machine's Git installation, so you need to [install Git](https://git-scm.com/download) first before you get these features. Make sure you install at least version `2.0.0`.
 
->**👉** When you commit, be aware that if your username and/or email is not set in your Git configuration, Git will fall back to using information from your local machine. You can find the details in [Git commit information](https://git-scm.com/docs/git-commit#_commit_information).
+> **👉** When you commit, be aware that if your username and/or email is not set in your Git configuration, Git will fall back to using information from your local machine. You can find the details in [Git commit information](https://git-scm.com/docs/git-commit#_commit_information).
 
 The Source Control icon in the Activity Bar on the left will always indicate an **overview of how many changes** you currently have in your repository. Selecting the icon will show you the details of your current repository changes: **CHANGES**, **STAGED CHANGES** and **MERGE CHANGES**.
 
@@ -55,7 +56,7 @@ You can also find indicators of the **status of your repository** in the bottom-
 
 You can type a commit message above the changes and press `kbstyle(Ctrl+Enter)` (macOS: `kbstyle(⌘+Enter)`) to commit them. If there are any staged changes, only changes will be committed. Otherwise, you'll get a prompt asking you to select what changes you'd like to commit and get the option to change your commit settings.
 
-We've found this to be a great workflow. For example, in the earlier screenshot, only the staged changes to `gulpfile.js` will be included in the commit. A consecutive commit action could commit later changes to `gulpfile.js`, the deletion of `yarn.lock`,  and changes to `tests.js` in a separate commit.
+We've found this to be a great workflow. For example, in the earlier screenshot, only the staged changes to `gulpfile.js` will be included in the commit. A consecutive commit action could commit later changes to `gulpfile.js`, the deletion of `yarn.lock`, and changes to `tests.js` in a separate commit.
 
 More specific **Commit** actions can be found in the **Views and More Actions** `...` menu on the top of the Source Control view.
 
@@ -97,7 +98,7 @@ Given that your repository is connected to some remote and that your checked out
 
 VS Code is able to periodically fetch changes from your remotes. This enables VS Code to show how many changes your local repository is ahead or behind the remote. Starting with VS Code 1.19, this feature is disabled by default and you can use the `git.autofetch` [setting](/docs/getstarted/settings.md) to enable it.
 
->**Tip:** You should [set up a credential helper](https://help.github.com/articles/caching-your-github-password-in-git/) to avoid getting asked for credentials every time VS Code talks to your Git remotes.  If you don't do this, you may want to consider disabling automatic fetching via the `git.autofetch` [setting](/docs/getstarted/settings.md) to reduce the number of prompts you get.
+> **Tip:** You should [set up a credential helper](https://help.github.com/articles/caching-your-github-password-in-git/) to avoid getting asked for credentials every time VS Code talks to your Git remotes. If you don't do this, you may want to consider disabling automatic fetching via the `git.autofetch` [setting](/docs/getstarted/settings.md) to reduce the number of prompts you get.
 
 ## Git Status Bar actions
 
@@ -113,9 +114,9 @@ If there is no upstream branch configured and the Git repository has remotes set
 
 If you open a folder that is a Git repository and begin making changes, VS Code will add useful annotations to the gutter and to the overview ruler.
 
-* A red triangle indicates where lines have been deleted
-* A green bar indicates new added lines
-* A blue bar indicates modified lines
+- A red triangle indicates where lines have been deleted
+- A green bar indicates new added lines
+- A blue bar indicates modified lines
 
 ![Gutter indicators](images/editingevolved/gutter.png)
 
@@ -131,7 +132,7 @@ Our Git tooling supports viewing of diffs within VS Code.
 
 ![A File Diff in VS Code](images/versioncontrol/diff.png)
 
->**Tip:** You can diff any two files by first right clicking on a file in the Explorer or **OPEN EDITORS** list and selecting **Select for Compare** and then right-click on the second file to compare with and select **Compare with 'file_name_you_chose'**.   Alternatively from the keyboard hit `kb(workbench.action.showCommands)` and select **File: Compare Active File With** and you will be presented with a list of recent files.
+> **Tip:** You can diff any two files by first right clicking on a file in the Explorer or **OPEN EDITORS** list and selecting **Select for Compare** and then right-click on the second file to compare with and select **Compare with 'file_name_you_chose'**. Alternatively from the keyboard hit `kb(workbench.action.showCommands)` and select **File: Compare Active File With** and you will be presented with a list of recent files.
 
 ### Diff editor review pane
 
@@ -157,7 +158,7 @@ Visual Studio Code supports more Git history workflows through [extensions](/doc
 
 ## Git output window
 
-You can always peek under the hood to see the Git commands we are using.  This is helpful if something strange is happening or if you are just curious. :)
+You can always peek under the hood to see the Git commands we are using. This is helpful if something strange is happening or if you are just curious. :)
 
 To open the Git output window, run **View** > **Output** and select **Git** from the dropdown list.
 
@@ -176,10 +177,10 @@ When you launch VS Code from the command line, you can pass the `--wait` argumen
 Here are the steps to do so:
 
 1. Make sure you can run `code --help` from the command line and you get help.
-    * if you do not see help, please follow these steps:
-        * macOS: Select **Shell Command: Install 'Code' command in path** from the **Command Palette**.
-        * Windows: Make sure you selected **Add to PATH** during the installation.
-        * Linux: Make sure you installed Code via our new .deb or .rpm packages.
+   - if you do not see help, please follow these steps:
+     - macOS: Select **Shell Command: Install 'Code' command in path** from the **Command Palette**.
+     - Windows: Make sure you selected **Add to PATH** during the installation.
+     - Linux: Make sure you installed Code via our new .deb or .rpm packages.
 2. From the command line, run `git config --global core.editor "code --wait"`
 
 Now you can run `git config --global -e` and use VS Code as editor for configuring Git.
@@ -199,10 +200,10 @@ This leverages the `--diff` option you can pass to VS Code to compare two files 
 
 To summarize, here are some examples of where you can use VS Code as the editor:
 
-* `git rebase HEAD~3 -i` do interactive rebase using VS Code
-* `git commit` use VS Code for the commit message
-* `git add -p` followed by `kbstyle(e)` for interactive add
-* `git difftool <commit>^ <commit>` use VS Code as the diff editor for changes
+- `git rebase HEAD~3 -i` do interactive rebase using VS Code
+- `git commit` use VS Code for the commit message
+- `git add -p` followed by `kbstyle(e)` for interactive add
+- `git difftool <commit>^ <commit>` use VS Code as the diff editor for changes
 
 ## Working with pull requests
 
@@ -210,18 +211,18 @@ Visual Studio Code also supports pull request workflows through the [GitHub Pull
 
 ## Next steps
 
-* [Intro Video - Git Version Control](/docs/introvideos/versioncontrol.md) - An introductory video providing an overview of VS Code Git support.
-* [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
-* [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.
-* [Debugging](/docs/editor/debugging.md) - This is where VS Code really shines
-* [Tasks](/docs/editor/tasks.md) - Running tasks with Gulp, Grunt, and Jake.  Showing Errors and Warnings
-* [Source Control API](/api/extension-guides/scm-provider.md) - If you want to integrate another Source Control provider into VS Code, see our Source Control API.
+- [Intro Video - Git Version Control](/docs/introvideos/versioncontrol.md) - An introductory video providing an overview of VS Code Git support.
+- [Basic Editing](/docs/editor/codebasics.md) - Learn about the powerful VS Code editor.
+- [Code Navigation](/docs/editor/editingevolved.md) - Move quickly through your source code.
+- [Debugging](/docs/editor/debugging.md) - This is where VS Code really shines
+- [Tasks](/docs/editor/tasks.md) - Running tasks with Gulp, Grunt, and Jake. Showing Errors and Warnings
+- [Source Control API](/api/extension-guides/scm-provider.md) - If you want to integrate another Source Control provider into VS Code, see our Source Control API.
 
 ## Common questions
 
 ### I initialized my repo but the actions in the `...` menu are all grayed out
 
-To **push, pull, and sync** you need to have a Git origin set up.  You can get the required URL from the repository host.  Once you have that URL, you need to add it to the Git settings by running a couple of command-line actions. For example:
+To **push, pull, and sync** you need to have a Git origin set up. You can get the required URL from the repository host. Once you have that URL, you need to add it to the Git settings by running a couple of command-line actions. For example:
 
 ```bash
 > git remote add origin https://github.com/<repo owner>/<repo name>.git

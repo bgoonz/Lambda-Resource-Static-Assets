@@ -32,28 +32,26 @@ See [Working with JavaScript](/docs/nodejs/working-with-javascript.md) for infor
 
 A [jsconfig.json](/docs/languages/jsconfig.md) file defines a JavaScript project in VS Code. While `jsconfig.json` files are not required, you will want to create one in cases such as:
 
-* If not all JavaScript files in your workspace should be considered part of a single JavaScript project. `jsconfig.json` files let you exclude some files from showing up in IntelliSense.
-* To ensure that a subset of JavaScript files in your workspace is treated as a single project. This is useful if you are working with legacy code that uses implicit globals dependencies instead of `imports` for dependencies.
-* If your workspace contains more than one project context, such as front-end and back-end JavaScript code. For multi-project workspaces, create a `jsconfig.json` at the root folder of each project.
-* You are using the TypeScript compiler to down-level compile JavaScript source code.
+- If not all JavaScript files in your workspace should be considered part of a single JavaScript project. `jsconfig.json` files let you exclude some files from showing up in IntelliSense.
+- To ensure that a subset of JavaScript files in your workspace is treated as a single project. This is useful if you are working with legacy code that uses implicit globals dependencies instead of `imports` for dependencies.
+- If your workspace contains more than one project context, such as front-end and back-end JavaScript code. For multi-project workspaces, create a `jsconfig.json` at the root folder of each project.
+- You are using the TypeScript compiler to down-level compile JavaScript source code.
 
 To define a basic JavaScript project, add a `jsconfig.json` at the root of your workspace:
 
 ```json
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6"
-    },
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6"
+  },
+  "exclude": ["node_modules"]
 }
 ```
 
 See [Working with JavaScript](/docs/nodejs/working-with-javascript.md) for more advanced `jsconfig.json` configuration.
 
-> **Tip:** To check if a JavaScript file is part of JavaScript project, just open the file in VS Code  and run the **JavaScript: Go to Project Configuration** command. This command opens the `jsconfig.json` that references the JavaScript file. A notification is shown if the file is not part of any `jsconfig.json` project.
+> **Tip:** To check if a JavaScript file is part of JavaScript project, just open the file in VS Code and run the **JavaScript: Go to Project Configuration** command. This command opens the `jsconfig.json` that references the JavaScript file. A notification is shown if the file is not part of any `jsconfig.json` project.
 
 ## Snippets
 
@@ -97,7 +95,7 @@ As you write JavaScript function calls, VS Code shows information about the func
 
 ![Signature help for some DOM methods](images/javascript/signature-help.png)
 
-Signature help is shown automatically when you type a `(` or `,` within a function call. Press `kb(editor.action.triggerParameterHints)`  to manually trigger signature help.
+Signature help is shown automatically when you type a `(` or `,` within a function call. Press `kb(editor.action.triggerParameterHints)` to manually trigger signature help.
 
 ## Auto imports
 
@@ -145,15 +143,15 @@ Set `"javascript.autoClosingTags"` to `false` to disable JSX tag closing.
 
 Code navigation lets you quickly navigate JavaScript projects.
 
-* **Go To Definition** `kb(editor.action.revealDefinition)` - Go to the source code of a symbol definition.
-* **Peek Definition** `kb(editor.action.peekDefinition)` - Bring up a Peek window that shows the definition of a symbol.
-* **Go to References** `kb(editor.action.goToReferences)` - Show all references to a symbol.
-* **Go to Type Definition** `kb(editor.action.goToTypeDefinition)` - Go to the type that defines a symbol. For an instance of a class, this will reveal the class itself instead of where the instance is defined.
+- **Go To Definition** `kb(editor.action.revealDefinition)` - Go to the source code of a symbol definition.
+- **Peek Definition** `kb(editor.action.peekDefinition)` - Bring up a Peek window that shows the definition of a symbol.
+- **Go to References** `kb(editor.action.goToReferences)` - Show all references to a symbol.
+- **Go to Type Definition** `kb(editor.action.goToTypeDefinition)` - Go to the type that defines a symbol. For an instance of a class, this will reveal the class itself instead of where the instance is defined.
 
 You can navigate via symbol search using the **Go to Symbol** commands from the **Command Palette** (`kb(workbench.action.showCommands)`).
 
-* **Go to Symbol in File** `kb(workbench.action.gotoSymbol)`
-* **Go to Symbol in Workspace** `kb(workbench.action.showAllSymbols)`
+- **Go to Symbol in File** `kb(workbench.action.gotoSymbol)`
+- **Go to Symbol in Workspace** `kb(workbench.action.showAllSymbols)`
 
 ## Rename
 
@@ -169,10 +167,10 @@ VS Code includes some handy refactorings for JavaScript such as **Extract functi
 
 Available refactorings include:
 
-* Extract to method or function.
-* Extract to constant.
-* Convert between named imports and namespace imports.
-* Move to new file.
+- Extract to method or function.
+- Extract to constant.
+- Convert between named imports and namespace imports.
+- Move to new file.
 
 See [Refactorings](/docs/editor/refactoring.md) for more information about refactorings and how you can configure keyboard shortcuts for individual refactorings.
 
@@ -230,10 +228,10 @@ You can also set `editor.codeActionsOnSave` to an array of Code Actions to execu
 
 Here are some source actions:
 
-* `"organizeImports"` -  Enables organize imports on save.
-* `"fixAll"` - Auto Fix on Save computes all possible fixes in one round (for all providers including ESLint).
-* `"fixAll.eslint"` -  Auto Fix only for ESLint.
-* `"addMissingImports"` - Adds all missing imports on save.
+- `"organizeImports"` - Enables organize imports on save.
+- `"fixAll"` - Auto Fix on Save computes all possible fixes in one round (for all providers including ESLint).
+- `"fixAll.eslint"` - Auto Fix only for ESLint.
+- `"addMissingImports"` - Adds all missing imports on save.
 
 See [Node.js/JavaScript](/docs/nodejs/working-with-javascript) for more information.
 
@@ -269,9 +267,9 @@ When you move or rename a file that is imported by other files in your JavaScrip
 
 The `javascript.updateImportsOnFileMove.enabled` setting controls this behavior. Valid settings values are:
 
-* `"prompt"` - The default. Asks if paths should be updated for each file move.
-* `"always"` - Always automatically update paths.
-* `"never"` - Do not update paths automatically and do not prompt.
+- `"prompt"` - The default. Asks if paths should be updated for each file move.
+- `"always"` - Always automatically update paths.
+- `"never"` - Do not update paths automatically and do not prompt.
 
 ## Linters
 
@@ -317,23 +315,23 @@ VS Code ships with excellent support for JavaScript but you can additionally ins
 
 Read on to find out about:
 
-* [Working with JavaScript](/docs/nodejs/working-with-javascript.md) - More detailed information about VS Code's JavaScript support and how to troubleshoot common issues.
-* [jsconfig.json](/docs/languages/jsconfig.md) - Detailed description of the `jsconfig.json` project file.
-* [IntelliSense](/docs/editor/intellisense.md) - Learn more about IntelliSense and how to use it effectively for your language.
-* [Debugging](/docs/editor/debugging.md) - Learn how to set up debugging for your application.
-* [Node.js](/docs/nodejs/nodejs-tutorial.md) - A walkthrough to create an Express Node.js application.
-* [TypeScript](/docs/languages/typescript.md) - VS Code has great support for TypeScript, which brings structure and strong typing to your JavaScript code.
+- [Working with JavaScript](/docs/nodejs/working-with-javascript.md) - More detailed information about VS Code's JavaScript support and how to troubleshoot common issues.
+- [jsconfig.json](/docs/languages/jsconfig.md) - Detailed description of the `jsconfig.json` project file.
+- [IntelliSense](/docs/editor/intellisense.md) - Learn more about IntelliSense and how to use it effectively for your language.
+- [Debugging](/docs/editor/debugging.md) - Learn how to set up debugging for your application.
+- [Node.js](/docs/nodejs/nodejs-tutorial.md) - A walkthrough to create an Express Node.js application.
+- [TypeScript](/docs/languages/typescript.md) - VS Code has great support for TypeScript, which brings structure and strong typing to your JavaScript code.
 
 Watch these introductory videos:
 
-* [IntelliSense](/docs/introvideos/intellisense.md) - Tutorial on IntelliSense with JavaScript.
-* [Debugging](/docs/introvideos/debugging.md) - Learn how to debug a Node.js application.
+- [IntelliSense](/docs/introvideos/intellisense.md) - Tutorial on IntelliSense with JavaScript.
+- [Debugging](/docs/introvideos/debugging.md) - Learn how to debug a Node.js application.
 
 ## Common questions
 
 ### Does VS Code support JSX and React Native?
 
-VS Code supports **JSX** and **React Native**. You will get IntelliSense for **React/JSX** and **React Native** from automatically downloaded type declaration (typings) files from the [npmjs](https://www.npmjs.com) type declaration file repository. Additionally, you can install the popular [React Native extension](https://marketplace.visualstudio.com/items?itemName=vsmobile.vscode-react-native) from  the Marketplace.
+VS Code supports **JSX** and **React Native**. You will get IntelliSense for **React/JSX** and **React Native** from automatically downloaded type declaration (typings) files from the [npmjs](https://www.npmjs.com) type declaration file repository. Additionally, you can install the popular [React Native extension](https://marketplace.visualstudio.com/items?itemName=vsmobile.vscode-react-native) from the Marketplace.
 
 To enable ES6 import statements for **React Native**, you need to set the `allowSyntheticDefaultImports` compiler option to `true`. This tells the compiler to create synthetic default members and you get IntelliSense. **React Native** uses **Babel** behind the scenes to create the proper run-time code with default members. If you also want to do debugging of **React Native** code, you can install the [React Native Extension](https://marketplace.visualstudio.com/items?itemName=vsmobile.vscode-react-native).
 
@@ -351,16 +349,13 @@ When you want to use ES6 style imports but some type declaration (typings) files
 
 ```json
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es6",
-        // This is the line you want to add
-        "allowSyntheticDefaultImports": true
-    },
-    "exclude": [
-        "node_modules",
-        "**/node_modules/*"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    // This is the line you want to add
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
 }
 ```
 

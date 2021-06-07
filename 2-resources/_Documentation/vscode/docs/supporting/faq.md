@@ -5,6 +5,7 @@ PageTitle: Visual Studio Code Frequently Asked Questions
 DateApproved: 3/31/2021
 MetaDescription: Visual Studio Code Frequently Asked Questions
 ---
+
 # Visual Studio Code FAQ
 
 Our docs contain a **Common questions** section as needed for specific topics. We've captured items here that don't fit in the other topics.
@@ -45,11 +46,11 @@ VS Code collects data about any crashes that occur and sends it to Microsoft to 
 
 If you don't wish to send crash data to Microsoft, you can change the `enable-crash-reporter` runtime argument to `false`
 
-* Open the Command Palette (`kb(workbench.action.showCommands)`).
-* Run the **Preferences: Configure Runtime Arguments** command.
-* This command will open a `argv.json` file to configure runtime arguments.
-* Edit `"enable-crash-reporter": false`.
-* Restart VS Code.
+- Open the Command Palette (`kb(workbench.action.showCommands)`).
+- Run the **Preferences: Configure Runtime Arguments** command.
+- This command will open a `argv.json` file to configure runtime arguments.
+- Edit `"enable-crash-reporter": false`.
+- Restart VS Code.
 
 ## GDPR and VS Code
 
@@ -57,9 +58,9 @@ Now that the General Data Protection Regulation (GDPR) is in effect, we want to 
 
 To support GDPR:
 
-* The VS Code product notifies all users that they can opt out of telemetry collection.
-* The team actively reviews and classifies all telemetry sent (documented in [our OSS codebase](https://github.com/microsoft/vscode/pull/34997)).
-* There are valid data retention policies in place for any data collected, for example crash dumps.
+- The VS Code product notifies all users that they can opt out of telemetry collection.
+- The team actively reviews and classifies all telemetry sent (documented in [our OSS codebase](https://github.com/microsoft/vscode/pull/34997)).
+- There are valid data retention policies in place for any data collected, for example crash dumps.
 
 You can learn more about VS Code's GDPR compliance in the [telemetry documentation](/docs/getstarted/telemetry.md).
 
@@ -83,7 +84,7 @@ If you use the JSON editor for your settings, add the following line:
 
 You can install a previous release of VS Code by uninstalling your current version and then installing the download provided at the top of a specific [release notes](/updates) page.
 
->**Note:** On Linux: If the VS Code repository was installed correctly then your system package manager should handle auto-updating in the same way as other packages on the system. See [Installing VS Code on Linux](/docs/setup/linux.md).
+> **Note:** On Linux: If the VS Code repository was installed correctly then your system package manager should handle auto-updating in the same way as other packages on the system. See [Installing VS Code on Linux](/docs/setup/linux.md).
 
 ### Opt out of extension updates
 
@@ -151,28 +152,28 @@ You can find links to some release downloads at the top of a version's release n
 
 If you need a type of installation not listed there, you can manually download via the following URLs:
 
-Download type | URL
---- | ---
-Windows 64 bit System installer | https://update.code.visualstudio.com/{version}/win32-x64/stable
-Windows 64 bit User installer| https://update.code.visualstudio.com/{version}/win32-x64-user/stable
-Windows 64 bit zip | https://update.code.visualstudio.com/{version}/win32-x64-archive/stable
-Windows 64 bit ARM System installer | https://update.code.visualstudio.com/{version}/win32-arm64/stable
-Windows 64 bit ARM User installer | https://update.code.visualstudio.com/{version}/win32-arm64-user/stable
-Windows 64 bit ARM zip | https://update.code.visualstudio.com/{version}/win32-arm64-archive/stable
-Windows 32 bit System installer | https://update.code.visualstudio.com/{version}/win32/stable
-Windows 32 bit User installer | https://update.code.visualstudio.com/{version}/win32-user/stable
-Windows 32 bit zip | https://update.code.visualstudio.com/{version}/win32-archive/stable
-macOS | https://update.code.visualstudio.com/{version}/darwin/stable
-Linux 64 bit | https://update.code.visualstudio.com/{version}/linux-x64/stable
-Linux 64 bit debian | https://update.code.visualstudio.com/{version}/linux-deb-x64/stable
-Linux 64 bit rpm | https://update.code.visualstudio.com/{version}/linux-rpm-x64/stable
-Linux 64 bit snap | https://update.code.visualstudio.com/{version}/linux-snap-x64/stable
-Linux ARM | https://update.code.visualstudio.com/{version}/linux-armhf/stable
-Linux ARM debian | https://update.code.visualstudio.com/{version}/linux-deb-armhf/stable
-Linux ARM rpm | https://update.code.visualstudio.com/{version}/linux-rpm-armhf/stable
-Linux 64 bit ARM  | https://update.code.visualstudio.com/{version}/linux-arm64/stable
-Linux 64 bit ARM debian | https://update.code.visualstudio.com/{version}/linux-deb-arm64/stable
-Linux 64 bit ARM rpm | https://update.code.visualstudio.com/{version}/linux-rpm-arm64/stable
+| Download type                       | URL                                                                       |
+| ----------------------------------- | ------------------------------------------------------------------------- |
+| Windows 64 bit System installer     | https://update.code.visualstudio.com/{version}/win32-x64/stable           |
+| Windows 64 bit User installer       | https://update.code.visualstudio.com/{version}/win32-x64-user/stable      |
+| Windows 64 bit zip                  | https://update.code.visualstudio.com/{version}/win32-x64-archive/stable   |
+| Windows 64 bit ARM System installer | https://update.code.visualstudio.com/{version}/win32-arm64/stable         |
+| Windows 64 bit ARM User installer   | https://update.code.visualstudio.com/{version}/win32-arm64-user/stable    |
+| Windows 64 bit ARM zip              | https://update.code.visualstudio.com/{version}/win32-arm64-archive/stable |
+| Windows 32 bit System installer     | https://update.code.visualstudio.com/{version}/win32/stable               |
+| Windows 32 bit User installer       | https://update.code.visualstudio.com/{version}/win32-user/stable          |
+| Windows 32 bit zip                  | https://update.code.visualstudio.com/{version}/win32-archive/stable       |
+| macOS                               | https://update.code.visualstudio.com/{version}/darwin/stable              |
+| Linux 64 bit                        | https://update.code.visualstudio.com/{version}/linux-x64/stable           |
+| Linux 64 bit debian                 | https://update.code.visualstudio.com/{version}/linux-deb-x64/stable       |
+| Linux 64 bit rpm                    | https://update.code.visualstudio.com/{version}/linux-rpm-x64/stable       |
+| Linux 64 bit snap                   | https://update.code.visualstudio.com/{version}/linux-snap-x64/stable      |
+| Linux ARM                           | https://update.code.visualstudio.com/{version}/linux-armhf/stable         |
+| Linux ARM debian                    | https://update.code.visualstudio.com/{version}/linux-deb-armhf/stable     |
+| Linux ARM rpm                       | https://update.code.visualstudio.com/{version}/linux-rpm-armhf/stable     |
+| Linux 64 bit ARM                    | https://update.code.visualstudio.com/{version}/linux-arm64/stable         |
+| Linux 64 bit ARM debian             | https://update.code.visualstudio.com/{version}/linux-deb-arm64/stable     |
+| Linux 64 bit ARM rpm                | https://update.code.visualstudio.com/{version}/linux-rpm-arm64/stable     |
 
 Substitute the specific release you want in the `{version}` placeholder. For example, to download the Linux ARM debian version for 1.50.1, you would use
 
@@ -184,7 +185,7 @@ You can use the version string `latest`, if you'd like to always download the la
 
 ## Prerelease versions
 
-Want an early peek at new VS Code features?  You can try prerelease versions of VS Code by installing the "Insiders" build.  The Insiders build installs side by side to your stable VS Code install and has isolated settings, configurations, and extensions.  The Insiders build is updated nightly so you'll get the latest bug fixes and feature updates from the day before.
+Want an early peek at new VS Code features? You can try prerelease versions of VS Code by installing the "Insiders" build. The Insiders build installs side by side to your stable VS Code install and has isolated settings, configurations, and extensions. The Insiders build is updated nightly so you'll get the latest bug fixes and feature updates from the day before.
 
 To install the Insiders build, go to the [Insiders download page](/insiders).
 
@@ -228,7 +229,7 @@ You may also see the **[Unsupported]** message if VS Code files have been mistak
 
 ## Resolving Shell Environment is Slow (Error, Warning)
 
-*This section applies to macOS and Linux environments only.*
+_This section applies to macOS and Linux environments only._
 
 When VS Code is launched from a terminal (for example, via `code .`), it has access to environment settings defined in your `.bashrc` or `.zshrc` files. This means features like tasks or debug targets also have access to those settings.
 
@@ -244,9 +245,9 @@ If, after 10 seconds, the shell environment has still not been resolved, VS Code
 
 The easiest way to investigate delays in your startup file is to:
 
-* Open your shell's startup file (for example, in VS Code by typing `~/.bashrc` or `~/.zshrc` in quick open).
-* Selectively comment out potentially long running operations.
-* Save and fully restart VS Code until the warning or error disappears.
+- Open your shell's startup file (for example, in VS Code by typing `~/.bashrc` or `~/.zshrc` in quick open).
+- Selectively comment out potentially long running operations.
+- Save and fully restart VS Code until the warning or error disappears.
 
 ## Technical Support
 

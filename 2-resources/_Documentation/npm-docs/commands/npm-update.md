@@ -30,7 +30,7 @@ or local) will be updated.
 ### Example
 
 For the examples below, assume that the current package is `app` and it depends
-on dependencies, `dep1` (`dep2`, .. etc.).  The published versions of `dep1`
+on dependencies, `dep1` (`dep2`, .. etc.). The published versions of `dep1`
 are:
 
 ```json
@@ -73,9 +73,9 @@ However, if `app`'s `package.json` contains:
 }
 ```
 
-In this case, running `npm update` will install `dep1@1.1.2`.  Even though the
+In this case, running `npm update` will install `dep1@1.1.2`. Even though the
 `latest` tag points to `1.2.2`, this version do not satisfy `~1.1.1`, which is
-equivalent to `>=1.1.1 <1.2.0`.  So the highest-sorting version that satisfies
+equivalent to `>=1.1.1 <1.2.0`. So the highest-sorting version that satisfies
 `~1.1.1` is used, which is `1.1.2`.
 
 #### Caret Dependencies below 1.0.0
@@ -102,7 +102,6 @@ If the dependence were on `^0.4.0`:
 Then `npm update` will install `dep1@0.4.1`, because that is the highest-sorting
 version that satisfies `^0.4.0` (`>= 0.4.0 <0.5.0`)
 
-
 #### Updating Globally-Installed Packages
 
 `npm update -g` will apply the `update` action to each globally installed
@@ -116,12 +115,11 @@ need to run `npm install -g [<pkg>...]`
 NOTE: If a package has been upgraded to a version newer than `latest`, it will
 be _downgraded_.
 
-
 ### See Also
 
-* [npm install](/commands/npm-install)
-* [npm outdated](/commands/npm-outdated)
-* [npm shrinkwrap](/commands/npm-shrinkwrap)
-* [npm registry](/using-npm/registry)
-* [npm folders](/configuring-npm/folders)
-* [npm ls](/commands/npm-ls)
+- [npm install](/commands/npm-install)
+- [npm outdated](/commands/npm-outdated)
+- [npm shrinkwrap](/commands/npm-shrinkwrap)
+- [npm registry](/using-npm/registry)
+- [npm folders](/configuring-npm/folders)
+- [npm ls](/commands/npm-ls)

@@ -4,17 +4,47 @@ slug: Web/XSLT/XSLT_JS_interface_in_Gecko/Advanced_Example
 tags:
   - XSLT
 ---
+
 <h2 id="Advanced_Example">Advanced example</h2>
 
-<p>This advanced example sorts several divs based on their content. The example allows sorting the content multiple times, alternating between ascending and descending order. The JavaScript loads the .xsl file only on the first sort and sets the <code>xslloaded</code> variable to true once it has finished loading the file. Using the {{domxref("XSLTProcessor.getParameter()")}} method, the code can figure whether to sort in ascending or descending order. It defaults to ascending if the parameter is empty (the first time the sorting happens, as there is no value for it in the XSLT file). The sorting value is set using {{domxref("XSLTProcessor.setParameter()")}}.</p>
+<p>
+  This advanced example sorts several divs based on their content. The example
+  allows sorting the content multiple times, alternating between ascending and
+  descending order. The JavaScript loads the .xsl file only on the first sort
+  and sets the <code>xslloaded</code> variable to true once it has finished
+  loading the file. Using the {{domxref("XSLTProcessor.getParameter()")}}
+  method, the code can figure whether to sort in ascending or descending order.
+  It defaults to ascending if the parameter is empty (the first time the sorting
+  happens, as there is no value for it in the XSLT file). The sorting value is
+  set using {{domxref("XSLTProcessor.setParameter()")}}.
+</p>
 
-<p>The XSLT file has a parameter called <code>myOrder</code> that JavaScript sets to change the sorting method. The <code>xsl:sort</code> element's order attribute can access the value of the parameter using <code>$myOrder</code>. However, the value needs to be an XPATH expression and not a string, so <code>{$myOrder}</code> is used. Using {} evaluates the content as an XPath expression.</p>
+<p>
+  The XSLT file has a parameter called <code>myOrder</code> that JavaScript sets
+  to change the sorting method. The <code>xsl:sort</code> element's order
+  attribute can access the value of the parameter using <code>$myOrder</code>.
+  However, the value needs to be an XPATH expression and not a string, so
+  <code>{$myOrder}</code> is used. Using {} evaluates the content as an XPath
+  expression.
+</p>
 
-<p>Once the transformation is complete, the result is appended to the document, as shown in this example.</p>
+<p>
+  Once the transformation is complete, the result is appended to the document,
+  as shown in this example.
+</p>
 
-<p><small><strong>Figure 7: Sorting based on div content<span class="comment">view example</span></strong></small></p>
+<p>
+  <small
+    ><strong
+      >Figure 7: Sorting based on div content<span class="comment"
+        >view example</span
+      ></strong
+    ></small
+  >
+</p>
 
-<pre class="brush: js">// XHTML Fragment:
+<pre class="brush: js">
+// XHTML Fragment:
 
 &lt;div id="example"&gt;
   &lt;div&gt;1&lt;/div&gt;

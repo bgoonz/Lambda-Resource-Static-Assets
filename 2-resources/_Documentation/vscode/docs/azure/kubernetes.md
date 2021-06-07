@@ -7,6 +7,7 @@ PageTitle: Working with Kubernetes in Visual Studio Code
 DateApproved: 3/31/2021
 MetaDescription: Working with Kubernetes in Visual Studio Code
 ---
+
 # Working with Kubernetes in VS Code
 
 This document will walk you through the process of deploying an application to [Kubernetes](https://kubernetes.io/) with Visual Studio Code. [Kubernetes](https://kubernetes.io/) is an open-source system for automating deployment, scaling, and management of containerized applications. We will show you how to create a Kubernetes cluster, write a Kubernetes manifest file (usually written in YAML), which tells Kubernetes everything it needs to know about the application, and then finally deploy the application to the Kubernetes cluster.
@@ -71,6 +72,6 @@ Congratulations! Now your app is successfully running in Azure Kubernetes Servic
 
 ## Next steps
 
-* [Overview of Bridge to Kubernetes](https://docs.microsoft.com/visualstudio/containers/overview-bridge-to-kubernetes) - Learn more about Bridge to Kubernetes, a rapid, iterative Kubernetes development experience for teams.
-* [Azure Extensions](/docs/azure/extensions.md) - The VS Code Marketplace has hundreds of extensions for Azure and the cloud.
-* [Deploying to Azure](/docs/azure/deployment.md) - Learn step-by-step how to deploy your application to Azure.
+- [Overview of Bridge to Kubernetes](https://docs.microsoft.com/visualstudio/containers/overview-bridge-to-kubernetes) - Learn more about Bridge to Kubernetes, a rapid, iterative Kubernetes development experience for teams.
+- [Azure Extensions](/docs/azure/extensions.md) - The VS Code Marketplace has hundreds of extensions for Azure and the cloud.
+- [Deploying to Azure](/docs/azure/deployment.md) - Learn step-by-step how to deploy your application to Azure.

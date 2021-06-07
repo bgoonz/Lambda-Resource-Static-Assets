@@ -8,6 +8,7 @@ DateApproved: 04/18/2019
 MetaDescription: Configuring Python Environments in Visual Studio Code
 MetaSocialImage: images/tutorial/social.png
 ---
+
 # Using Python environments in VS Code
 
 An "environment" in Python is the context in which a Python program runs. An environment consists of an interpreter and any number of installed packages. The Python extension for VS Code provides helpful integration features for working with different environments.
@@ -34,7 +35,7 @@ Selecting an interpreter from the list adds an entry for `python.pythonPath` wit
 
 The Python extension uses the selected environment for running Python code (using the **Python: Run Python File in Terminal** command), providing language services (auto-complete, syntax checking, linting, formatting, etc.) when you have a `.py` file open in the editor, and opening a terminal with the **Terminal: Create New Integrated Terminal** command. In the latter case, VS Code automatically activated the selected environment.
 
-> **Tip**: To prevent automatic activation of a selected environment, add  `"python.terminal.activateEnvironment": false` to your `settings.json` file (it can be placed anywhere as a sibling to the existing settings).
+> **Tip**: To prevent automatic activation of a selected environment, add `"python.terminal.activateEnvironment": false` to your `settings.json` file (it can be placed anywhere as a sibling to the existing settings).
 
 > **Note**: By default, VS Code uses the interpreter identified by `python:pythonPath` setting when debugging code. You can override this behavior by specifying a different path in the `pythonPath` property of a debug configuration. See [Choose a debugging environment](#choose-a-debugging-environment).
 
@@ -171,43 +172,43 @@ Then do any of the following steps:
 
 1. Create or modify an entry for `python.pythonPath` with the full path to the Python executable (if you edit `settings.json` directly, add the line below as the setting):
 
-    For example:
+   For example:
 
-    - Windows:
+   - Windows:
 
-      ```json
-      "python.pythonPath": "c:/python36/python.exe",
-      ```
+     ```json
+     "python.pythonPath": "c:/python36/python.exe",
+     ```
 
-    - macOS/Linux:
+   - macOS/Linux:
 
-      ```json
-      "python.pythonPath": "/home/python36/python",
-      ```
+     ```json
+     "python.pythonPath": "/home/python36/python",
+     ```
 
 1. You can also use `python.pythonPath` to point to a virtual environment, for example:
 
-    Windows:
+   Windows:
 
-    ```json
-    "python.pythonPath": "c:/dev/ala/venv/Scripts/python.exe",
-    ```
+   ```json
+   "python.pythonPath": "c:/dev/ala/venv/Scripts/python.exe",
+   ```
 
-    macOS/Linux:
+   macOS/Linux:
 
-    ```json
-    "python.pythonPath": "/home/abc/dev/ala/venv/bin/python",
-    ```
+   ```json
+   "python.pythonPath": "/home/abc/dev/ala/venv/bin/python",
+   ```
 
 1. You can use an environment variable in the path setting using the syntax `${env:VARIABLE}`. For example, if you've created a variable named `PYTHON_INSTALL_LOC` with a path to an interpreter, you can then use the following setting value:
 
-    ```json
-    "python.pythonPath": "${env:PYTHON_INSTALL_LOC}",
-    ```
+   ```json
+   "python.pythonPath": "${env:PYTHON_INSTALL_LOC}",
+   ```
 
-    > **Note**: Variable substitution is only supported in VS Code settings files, it will not work in `.env` environment files.
+   > **Note**: Variable substitution is only supported in VS Code settings files, it will not work in `.env` environment files.
 
-    By using an environment variable, you can easily transfer a project between operating systems where the paths are different, just be sure to set the environment variable on the operating system first.
+   By using an environment variable, you can easily transfer a project between operating systems where the paths are different, just be sure to set the environment variable on the operating system first.
 
 ## Environment variable definitions file
 
@@ -272,7 +273,7 @@ Within this syntax, the following rules apply:
 
 ## Use of the PYTHONPATH variable
 
-The [PYTHONPATH](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH) environment variable specifies additional locations where the Python interpreter should look for modules. In VS Code, PYTHONPATH can be set through the terminal settings (terminal.integrated.env.*) and/or within an `.env` file.
+The [PYTHONPATH](https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH) environment variable specifies additional locations where the Python interpreter should look for modules. In VS Code, PYTHONPATH can be set through the terminal settings (terminal.integrated.env.\*) and/or within an `.env` file.
 
 When the terminal settings are used, PYTHONPATH affects any tools that are run within the terminal by a user, as well as any action the extension performs for a user that is routed through the terminal such as debugging. However, in this case when the extension is performing an action that isn't routed through the terminal, such as the use of a linter or formatter, then this setting will not have an effect on module look-up.
 

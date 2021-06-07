@@ -8,9 +8,10 @@ DateApproved: 10/10/2018
 MetaDescription: Linting Python in Visual Studio Code
 MetaSocialImage: images/tutorial/social.png
 ---
+
 # Linting Python in Visual Studio Code
 
-Linting highlights syntactical and stylistic problems in your Python source code, which oftentimes helps you identify and correct subtle programming errors or unconventional coding practices that can lead to errors. For example, linting detects use of an uninitialized or undefined variable, calls to undefined functions, missing parentheses, and even more subtle issues such as attempting to redefine built-in types or functions. Linting is thus distinct from [Formatting](/docs/python/editing.md#formatting) because linting analyzes how the code runs and detects errors whereas formatting only restructures how code *appears*.
+Linting highlights syntactical and stylistic problems in your Python source code, which oftentimes helps you identify and correct subtle programming errors or unconventional coding practices that can lead to errors. For example, linting detects use of an uninitialized or undefined variable, calls to undefined functions, missing parentheses, and even more subtle issues such as attempting to redefine built-in types or functions. Linting is thus distinct from [Formatting](/docs/python/editing.md#formatting) because linting analyzes how the code runs and detects errors whereas formatting only restructures how code _appears_.
 
 By default, stylistic and syntactical code detection is enabled by the Language Server. If you require third-party linters for additional problem detection, however, you can enable them by using the **Python: Select Linter** command and selecting the appropriate linter. You can easily enable and disable all linting by using the **Python: Enable Linting** command.
 
@@ -47,12 +48,12 @@ The remainder of this article describes settings for linting in general as well 
 
 To change the linting behavior across all enabled linters, modify the following settings:
 
-| Feature | Setting<br/>(python.linting.) | Default value |
-| --- | --- | --- |
-| Linting in general | enabled | `true` |
-| Linting on file save | lintOnSave | `true` |
-| Maximum number of linting messages | maxNumberOfProblems | `100` |
-| Exclude file and folder patterns | ignorePatterns | `[".vscode/*.py", "**/site-packages/**/*.py"]`  |
+| Feature                            | Setting<br/>(python.linting.) | Default value                                  |
+| ---------------------------------- | ----------------------------- | ---------------------------------------------- |
+| Linting in general                 | enabled                       | `true`                                         |
+| Linting on file save               | lintOnSave                    | `true`                                         |
+| Maximum number of linting messages | maxNumberOfProblems           | `100`                                          |
+| Exclude file and folder patterns   | ignorePatterns                | `[".vscode/*.py", "**/site-packages/**/*.py"]` |
 
 You can easily change `python.linting.enabled` by using the **Python: Enable Linting** command.
 
@@ -62,16 +63,16 @@ When enabling `lintOnSave`, you might also want to enable the generic `files.aut
 
 The following table provides a summary of available Python linters and their basic settings. Only Pylint is enabled by default. For descriptions of individual settings, see the [Linter settings reference](/docs/python/settings-reference.md#linting-settings).
 
-| Linter | Package name for `pip install` command | Default state | True/false enable setting<br/>(python.linting.) | Arguments setting<br/>(python.linting.) | Custom path setting<br/>(python.linting.) |
-| --- | --- | --- | --- | --- | --- |
-| [Pylint](#pylint) (default) | [pylint](https://pypi.org/project/pylint/) | Enabled | pylintEnabled | pylintArgs | pylintPath |
-| [Flake8](#flake8) | [flake8](https://pypi.org/project/flake8/) | Disabled | flake8Enabled | flake8Args | flake8Path |
-| [mypy](#mypy) | [mypy](https://pypi.org/project/mypy/) | Disabled | mypyEnabled | mypyArgs | mypyPath |
-| [pydocstyle](#pydocstyle) | [pydocstyle](https://pypi.org/project/pydocstyle/) | Disabled | pydocstyleEnabled | pydocstyleArgs | pydocstylePath |
-| [pycodestyle (pep8)](#pycodestyle-pep8) | [pycodestyle](https://pypi.org/project/pycodestyle/) | Disabled | pycodestyleEnabled | pycodestyleArgs | pycodestylePath |
-| [prospector](#prospector) | [prospector](https://pypi.org/project/prospector/) | Disabled | prospectorEnabled | prospectorArgs | prospectorPath |
-| pylama | [pylama](https://pypi.org/project/pylama/) | Disabled | pylamaEnabled | pylamaArgs | pylamaPath |
-| bandit | [bandit](https://pypi.org/project/bandit/) | Disabled | banditEnabled | banditArgs | banditPath |
+| Linter                                  | Package name for `pip install` command               | Default state | True/false enable setting<br/>(python.linting.) | Arguments setting<br/>(python.linting.) | Custom path setting<br/>(python.linting.) |
+| --------------------------------------- | ---------------------------------------------------- | ------------- | ----------------------------------------------- | --------------------------------------- | ----------------------------------------- |
+| [Pylint](#pylint) (default)             | [pylint](https://pypi.org/project/pylint/)           | Enabled       | pylintEnabled                                   | pylintArgs                              | pylintPath                                |
+| [Flake8](#flake8)                       | [flake8](https://pypi.org/project/flake8/)           | Disabled      | flake8Enabled                                   | flake8Args                              | flake8Path                                |
+| [mypy](#mypy)                           | [mypy](https://pypi.org/project/mypy/)               | Disabled      | mypyEnabled                                     | mypyArgs                                | mypyPath                                  |
+| [pydocstyle](#pydocstyle)               | [pydocstyle](https://pypi.org/project/pydocstyle/)   | Disabled      | pydocstyleEnabled                               | pydocstyleArgs                          | pydocstylePath                            |
+| [pycodestyle (pep8)](#pycodestyle-pep8) | [pycodestyle](https://pypi.org/project/pycodestyle/) | Disabled      | pycodestyleEnabled                              | pycodestyleArgs                         | pycodestylePath                           |
+| [prospector](#prospector)               | [prospector](https://pypi.org/project/prospector/)   | Disabled      | prospectorEnabled                               | prospectorArgs                          | prospectorPath                            |
+| pylama                                  | [pylama](https://pypi.org/project/pylama/)           | Disabled      | pylamaEnabled                                   | pylamaArgs                              | pylamaPath                                |
+| bandit                                  | [bandit](https://pypi.org/project/bandit/)           | Disabled      | banditEnabled                                   | banditArgs                              | banditPath                                |
 
 To select a different linter, use the **Python: Select Linter** command. You can also edit your settings manually to enable multiple linters. Note, however, that using the **Select Linter** command overwrites those edits.
 
@@ -93,17 +94,17 @@ The sections that follow provide additional details for those individual linters
 
 Pylint messages fall into the categories in the following table with the indicated mapping to VS Code categories. You can change the setting to change the mapping.
 
-| Pylint category | Description | VS Code category mapping | Applicable setting<br/>(python.linting.) |
-| --- | --- | --- | --- |
-| Convention (C) | Programming standard violation | Information (green underline) | pylintCategorySeverity.convention |
-| Refactor (R) | Bad code smell | Hint (light bulbs) | pylintCategorySeverity.refactor |
-| Warning (W) | Python-specific problems | Warning | pylintCategorySeverity.warning |
-| Error (E) | Likely code bugs | Error (red underline) | pylintCategorySeverity.error |
-| Fatal (F) | An error prevented further Pylint processing | Error | pylintCategorySeverity.fatal |
+| Pylint category | Description                                  | VS Code category mapping      | Applicable setting<br/>(python.linting.) |
+| --------------- | -------------------------------------------- | ----------------------------- | ---------------------------------------- |
+| Convention (C)  | Programming standard violation               | Information (green underline) | pylintCategorySeverity.convention        |
+| Refactor (R)    | Bad code smell                               | Hint (light bulbs)            | pylintCategorySeverity.refactor          |
+| Warning (W)     | Python-specific problems                     | Warning                       | pylintCategorySeverity.warning           |
+| Error (E)       | Likely code bugs                             | Error (red underline)         | pylintCategorySeverity.error             |
+| Fatal (F)       | An error prevented further Pylint processing | Error                         | pylintCategorySeverity.fatal             |
 
 ### Default Pylint rules
 
-Python in Visual Studio code is configured by default to use a set of linting rules that are friendly to the largest number of  Python developers:
+Python in Visual Studio code is configured by default to use a set of linting rules that are friendly to the largest number of Python developers:
 
 - Enable all Error (E) and Fatal (F) messages.
 - Disable all Convention (C) and Refactor (R) messages.
@@ -220,9 +221,9 @@ pycodestyle options are read from the `[pycodestyle]` section of a `tox.ini` or 
 The Python extension maps pycodestyle message categories to VS Code categories through the following settings. If desired, change the setting to change the mapping.
 
 | pycodestyle category | Applicable setting<br/>(python.linting.) | VS Code category mapping |
-| --- | --- | --- |
-| W | pycodestyleCategorySeverity.W | Warning |
-| E | pycodestyleCategorySeverity.E | Error |
+| -------------------- | ---------------------------------------- | ------------------------ |
+| W                    | pycodestyleCategorySeverity.W            | Warning                  |
+| E                    | pycodestyleCategorySeverity.E            | Error                    |
 
 ## Prospector
 
@@ -236,7 +237,7 @@ See [Prospector Command Line Usage](https://prospector.readthedocs.io/en/master/
 
 It's common with Prospector to use [profiles](https://prospector.readthedocs.io/en/master/profiles.html) to configure how Prospector runs. By default, Prospector loads the profile from a `.prospector.yaml` file in the current folder.
 
-Because Prospector calls other tools, such as Pylint, any configuration files for those tools override tool-specific settings in `.prospector.yaml`.  For example, suppose you specify the following in `.prospector.yaml`:
+Because Prospector calls other tools, such as Pylint, any configuration files for those tools override tool-specific settings in `.prospector.yaml`. For example, suppose you specify the following in `.prospector.yaml`:
 
 ```yaml
 pylint:
@@ -273,10 +274,10 @@ For details, see [Flake8 configuration](https://flake8.pycqa.org/en/latest/user/
 The Python extension maps flake8 message categories to VS Code categories through the following settings. If desired, change the setting to change the mapping.
 
 | Flake8 category | Applicable setting<br/>(python.linting.) | VS Code category mapping |
-| --- | --- | --- |
-| F | flake8CategorySeverity.F | Error |
-| E | flake8CategorySeverity.E | Error |
-| W | flake8CategorySeverity.W | Warning |
+| --------------- | ---------------------------------------- | ------------------------ |
+| F               | flake8CategorySeverity.F                 | Error                    |
+| E               | flake8CategorySeverity.E                 | Error                    |
+| W               | flake8CategorySeverity.W                 | Warning                  |
 
 ## mypy
 
@@ -285,19 +286,19 @@ The Python extension maps flake8 message categories to VS Code categories throug
 The Python extension maps mypy message categories to VS Code categories through the following settings. If desired, change the setting to change the mapping.
 
 | mypy category | Applicable setting<br/>(python.linting.) | VS Code category mapping |
-| --- | --- | --- |
-| error | mypyCategorySeverity.error | Error |
-| note | mypyCategorySeverity.note | Information |
+| ------------- | ---------------------------------------- | ------------------------ |
+| error         | mypyCategorySeverity.error               | Error                    |
+| note          | mypyCategorySeverity.note                | Information              |
 
 ## Troubleshooting linting
 
-| Error message | Cause | Solution |
-| --- | --- | --- |
-| ... unable to import \<module_name\> | The Python extension is using the wrong version of Pylint. | Ensure that the `pythonPath` setting points to a valid Python installation where Pylint is installed. Alternately, set the `python.linting.pylintPath` to an appropriate version of Pylint for the Python interpreter being used. |
-| Linting with \<linter\> failed ... | The path to the Python interpreter is incorrect. | Check the `pythonPath` setting (see [Environments](/docs/python/environments.md)). |
-| | The linter has not been installed in the current Python environment. | Open a command window, navigate to the location of the Python interpreter in the `pythonPath` setting, and run `pip install` for the linter. |
-| | The path to the linter is incorrect. | Ensure that the appropriate `python.linting.<linter>Path` setting for the linter is correct. |
-| | Custom arguments are defined incorrectly. | Check the appropriate `python.linting.<linter>Args` settings, and that the value of the setting is a list of the argument elements that are separated by spaces. For example, `"python.linting.pylintPath": "pylint --load-plugins pylint_django"` is incorrect. The correct syntax is `"python.linting.pylintArgs": ["--load-plugins", "pylint_django"]`. |
+| Error message                        | Cause                                                                | Solution                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------------------ | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ... unable to import \<module_name\> | The Python extension is using the wrong version of Pylint.           | Ensure that the `pythonPath` setting points to a valid Python installation where Pylint is installed. Alternately, set the `python.linting.pylintPath` to an appropriate version of Pylint for the Python interpreter being used.                                                                                                                          |
+| Linting with \<linter\> failed ...   | The path to the Python interpreter is incorrect.                     | Check the `pythonPath` setting (see [Environments](/docs/python/environments.md)).                                                                                                                                                                                                                                                                         |
+|                                      | The linter has not been installed in the current Python environment. | Open a command window, navigate to the location of the Python interpreter in the `pythonPath` setting, and run `pip install` for the linter.                                                                                                                                                                                                               |
+|                                      | The path to the linter is incorrect.                                 | Ensure that the appropriate `python.linting.<linter>Path` setting for the linter is correct.                                                                                                                                                                                                                                                               |
+|                                      | Custom arguments are defined incorrectly.                            | Check the appropriate `python.linting.<linter>Args` settings, and that the value of the setting is a list of the argument elements that are separated by spaces. For example, `"python.linting.pylintPath": "pylint --load-plugins pylint_django"` is incorrect. The correct syntax is `"python.linting.pylintArgs": ["--load-plugins", "pylint_django"]`. |
 
 ## Next steps
 

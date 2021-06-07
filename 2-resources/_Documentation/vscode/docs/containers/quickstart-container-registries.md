@@ -7,6 +7,7 @@ PageTitle: Quickstart - Using container registries
 DateApproved: 01/29/2020
 MetaDescription: Work with Docker container registries in Visual Studio Code
 ---
+
 # Using container registries
 
 A container registry is a storage and content delivery system, holding named Docker images, available in different tagged versions.
