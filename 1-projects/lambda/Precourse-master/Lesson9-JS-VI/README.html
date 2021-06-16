@@ -1,91 +1,232 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>README</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-  </style>
-</head>
-<body>
-<h1 id="lesson-9-javascript-vi-callbacks">Lesson 9: Javascript VI (Callbacks)</h1>
-<p>(Attention: These are the class notes for the <a href="http://www.lambdaschool.com">Lambda School</a> pre-course instruction workshop. This is meant to serve as an accompaniment to the class)</p>
-<p>In this lesson we will cover:</p>
-<ul>
-<li>Callbacks</li>
-<li>More Array Methods</li>
-</ul>
-<h2 id="callbacks">Callbacks</h2>
-<p>A very important concept in Javascript is the ability to pass a function as an arguments to another function. These functions are called <code>callbacks</code>. These functions can be called anytime and passed arguments within the function. We will soon discover why callbacks are so important to Javascript. Convention is to use the <code>cb</code> argument variable as your callback.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">function</span> <span class="at">saysHelloToUser</span>(user) <span class="op">{</span></a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="lesson-9-javascript-vi-callbacks">
+      Lesson 9: Javascript VI (Callbacks)
+    </h1>
+    <p>
+      (Attention: These are the class notes for the
+      <a href="http://www.lambdaschool.com">Lambda School</a> pre-course
+      instruction workshop. This is meant to serve as an accompaniment to the
+      class)
+    </p>
+    <p>In this lesson we will cover:</p>
+    <ul>
+      <li>Callbacks</li>
+      <li>More Array Methods</li>
+    </ul>
+    <h2 id="callbacks">Callbacks</h2>
+    <p>
+      A very important concept in Javascript is the ability to pass a function
+      as an arguments to another function. These functions are called
+      <code>callbacks</code>. These functions can be called anytime and passed
+      arguments within the function. We will soon discover why callbacks are so
+      important to Javascript. Convention is to use the <code>cb</code> argument
+      variable as your callback.
+    </p>
+    <div class="sourceCode" id="cb1">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">function</span> <span class="at">saysHelloToUser</span>(user) <span class="op">{</span></a>
 <a class="sourceLine" id="cb1-2" title="2">  <span class="cf">return</span> <span class="st">&quot;Hello &quot;</span> <span class="op">+</span> user <span class="op">+</span> <span class="st">&quot;!&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="op">}</span></a>
 <a class="sourceLine" id="cb1-4" title="4"></a>
@@ -98,12 +239,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-11" title="11"><span class="op">}</span></a>
 <a class="sourceLine" id="cb1-12" title="12"></a>
 <a class="sourceLine" id="cb1-13" title="13"><span class="at">createGreeting</span>(<span class="st">&quot;Dan&quot;</span><span class="op">,</span> saysHelloToUser)<span class="op">;</span> <span class="co">// &#39;Hello Dan!&#39;</span></a>
-<a class="sourceLine" id="cb1-14" title="14"><span class="at">createGreeting</span>(<span class="st">&quot;Dan&quot;</span><span class="op">,</span> saysGoodbyeToUser)<span class="op">;</span> <span class="co">// &#39;Goodbye Dan!&#39;</span></a></code></pre></div>
-<h2 id="more-array-methods">More Array Methods</h2>
-<p>We already know about and use array methods, <code>.push</code>, <code>.pop</code>, <code>.shift</code>, <code>.unshift</code>, and <code>.length</code>. But there are a lot more methods available to us natively on an array. The methods we are going to talk about here are called higher order methods, because they take callbacks as arguments.</p>
-<h3 id="foreach">.forEach</h3>
-<p><code>.forEach</code> is a built in for loop on every array. <code>.forEach</code> takes a callback as its only argument, and iterates over every item in the array and calls the callback on it. The callback can take two arguments, the first is the item itself, the second is the index of the item, this argument is optional.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">const</span> cars <span class="op">=</span> [<span class="st">&quot;Ford&quot;</span><span class="op">,</span> <span class="st">&quot;Chevrolet&quot;</span><span class="op">,</span> <span class="st">&quot;Toyota&quot;</span><span class="op">,</span> <span class="st">&quot;Tesla&quot;</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="at">createGreeting</span>(<span class="st">&quot;Dan&quot;</span><span class="op">,</span> saysGoodbyeToUser)<span class="op">;</span> <span class="co">// &#39;Goodbye Dan!&#39;</span></a></code></pre>
+    </div>
+    <h2 id="more-array-methods">More Array Methods</h2>
+    <p>
+      We already know about and use array methods, <code>.push</code>,
+      <code>.pop</code>, <code>.shift</code>, <code>.unshift</code>, and
+      <code>.length</code>. But there are a lot more methods available to us
+      natively on an array. The methods we are going to talk about here are
+      called higher order methods, because they take callbacks as arguments.
+    </p>
+    <h3 id="foreach">.forEach</h3>
+    <p>
+      <code>.forEach</code> is a built in for loop on every array.
+      <code>.forEach</code> takes a callback as its only argument, and iterates
+      over every item in the array and calls the callback on it. The callback
+      can take two arguments, the first is the item itself, the second is the
+      index of the item, this argument is optional.
+    </p>
+    <div class="sourceCode" id="cb2">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">const</span> cars <span class="op">=</span> [<span class="st">&quot;Ford&quot;</span><span class="op">,</span> <span class="st">&quot;Chevrolet&quot;</span><span class="op">,</span> <span class="st">&quot;Toyota&quot;</span><span class="op">,</span> <span class="st">&quot;Tesla&quot;</span>]<span class="op">;</span></a>
 <a class="sourceLine" id="cb2-2" title="2"></a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="co">// We can write the callback function itself in the parentheses as an anonymous function</span></a>
 <a class="sourceLine" id="cb2-4" title="4"><span class="va">cars</span>.<span class="at">forEach</span>(<span class="kw">function</span> (item<span class="op">,</span> index) <span class="op">{</span></a>
@@ -117,10 +274,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-12" title="12"><span class="op">}</span></a>
 <a class="sourceLine" id="cb2-13" title="13"></a>
 <a class="sourceLine" id="cb2-14" title="14"><span class="co">// And call that function in the forEach parentheses</span></a>
-<a class="sourceLine" id="cb2-15" title="15"><span class="va">cars</span>.<span class="at">forEach</span>(printNames)<span class="op">;</span></a></code></pre></div>
-<h3 id="reduce">.reduce</h3>
-<p><code>.reduce</code> will run a loop on our array with the intention of reducing each item into one item that is returned. As it’s first argument it takes a callback that takes two arguments, first an ‘accumulator’ (the result of the reduce method until now), and the second is the item it is currently on. The callback must ALWAYS contain a return statement. Reduce also takes an optional second argument, which would be the starting accumulator. If the starting accumulator is not supplied reduce will start at the first item of the array. <code>.reduce</code> will always return the accumulator when it is done iterating through the items.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> nums <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">9</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="va">cars</span>.<span class="at">forEach</span>(printNames)<span class="op">;</span></a></code></pre>
+    </div>
+    <h3 id="reduce">.reduce</h3>
+    <p>
+      <code>.reduce</code> will run a loop on our array with the intention of
+      reducing each item into one item that is returned. As it’s first argument
+      it takes a callback that takes two arguments, first an ‘accumulator’ (the
+      result of the reduce method until now), and the second is the item it is
+      currently on. The callback must ALWAYS contain a return statement. Reduce
+      also takes an optional second argument, which would be the starting
+      accumulator. If the starting accumulator is not supplied reduce will start
+      at the first item of the array. <code>.reduce</code> will always return
+      the accumulator when it is done iterating through the items.
+    </p>
+    <div class="sourceCode" id="cb3">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">const</span> nums <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">9</span>]<span class="op">;</span></a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="kw">const</span> words <span class="op">=</span> [<span class="st">&quot;Hi,&quot;</span><span class="op">,</span> <span class="st">&quot;my&quot;</span><span class="op">,</span> <span class="st">&quot;name&quot;</span><span class="op">,</span> <span class="st">&quot;is&quot;</span><span class="op">,</span> <span class="st">&quot;Dan&quot;</span>]<span class="op">;</span></a>
 <a class="sourceLine" id="cb3-3" title="3"></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="co">// We can write the anonymous function directly into the .reduce parentheses</span></a>
@@ -143,10 +314,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb3-21" title="21"></a>
 <a class="sourceLine" id="cb3-22" title="22"><span class="va">console</span>.<span class="at">log</span>(sums)<span class="op">;</span> <span class="co">// 45</span></a>
 <a class="sourceLine" id="cb3-23" title="23"><span class="va">console</span>.<span class="at">log</span>(products)<span class="op">;</span> <span class="co">// 362880</span></a>
-<a class="sourceLine" id="cb3-24" title="24"><span class="va">console</span>.<span class="at">log</span>(sentence)<span class="op">;</span> <span class="co">// &#39;Sentence: Hi, my name is Dan&#39;</span></a></code></pre></div>
-<h3 id="map">.map</h3>
-<p><code>.map</code> is used when we want to change every item in an array in the same way. <code>.map</code> takes a callback as its only argument. Like the <code>.forEach</code> method, the callback has the optional arguments item and index. Unlike <code>.reduce</code>, <code>.map</code> will return the entire array.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> nums <span class="op">=</span> [<span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-24" title="24"><span class="va">console</span>.<span class="at">log</span>(sentence)<span class="op">;</span> <span class="co">// &#39;Sentence: Hi, my name is Dan&#39;</span></a></code></pre>
+    </div>
+    <h3 id="map">.map</h3>
+    <p>
+      <code>.map</code> is used when we want to change every item in an array in
+      the same way. <code>.map</code> takes a callback as its only argument.
+      Like the <code>.forEach</code> method, the callback has the optional
+      arguments item and index. Unlike <code>.reduce</code>,
+      <code>.map</code> will return the entire array.
+    </p>
+    <div class="sourceCode" id="cb4">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">const</span> nums <span class="op">=</span> [<span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span>]<span class="op">;</span></a>
 <a class="sourceLine" id="cb4-2" title="2"></a>
 <a class="sourceLine" id="cb4-3" title="3"><span class="kw">function</span> <span class="at">multiplyByThree</span>(item) <span class="op">{</span></a>
 <a class="sourceLine" id="cb4-4" title="4">  <span class="cf">return</span> item <span class="op">*</span> <span class="dv">3</span><span class="op">;</span></a>
@@ -159,14 +340,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb4-11" title="11"><span class="kw">const</span> triple <span class="op">=</span> <span class="va">nums</span>.<span class="at">map</span>(multiplyByThree)<span class="op">;</span></a>
 <a class="sourceLine" id="cb4-12" title="12"></a>
 <a class="sourceLine" id="cb4-13" title="13"><span class="va">console</span>.<span class="at">log</span>(double)<span class="op">;</span> <span class="co">// [ 4, 6, 8, 10 ]</span></a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="va">console</span>.<span class="at">log</span>(triple)<span class="op">;</span> <span class="co">// [ 6, 9, 12, 15 ]</span></a></code></pre></div>
-<h2 id="please-open-the-homework-folder-and-complete-the-assignment-described-in-the-readme-file">Please open the homework folder and complete the assignment described in the README file</h2>
-<h2 id="additional-resources">Additional Resources:</h2>
-<ul>
-<li><a href="http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/">Understanding Callback Functions and How to Use Them</a></li>
-<li><a href="https://eloquentjavascript.net/05_higher_order.html">Eloquent Javascript: Higher Order Functions</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function">MDN: Callback function</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">MDN: Array methods</a></li>
-</ul>
-</body>
+<a class="sourceLine" id="cb4-14" title="14"><span class="va">console</span>.<span class="at">log</span>(triple)<span class="op">;</span> <span class="co">// [ 6, 9, 12, 15 ]</span></a></code></pre>
+    </div>
+    <h2
+      id="please-open-the-homework-folder-and-complete-the-assignment-described-in-the-readme-file"
+    >
+      Please open the homework folder and complete the assignment described in
+      the README file
+    </h2>
+    <h2 id="additional-resources">Additional Resources:</h2>
+    <ul>
+      <li>
+        <a
+          href="http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/"
+          >Understanding Callback Functions and How to Use Them</a
+        >
+      </li>
+      <li>
+        <a href="https://eloquentjavascript.net/05_higher_order.html"
+          >Eloquent Javascript: Higher Order Functions</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Glossary/Callback_function"
+          >MDN: Callback function</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+          >MDN: Array methods</a
+        >
+      </li>
+    </ul>
+  </body>
 </html>

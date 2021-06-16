@@ -824,7 +824,7 @@ this.createjs = this.createjs || {};
     "void main(void) {" +
     "vec4 src = texture2D(uMixSampler, vTextureCoord);" +
     "vec4 dst = texture2D(uSampler, vTextureCoord);";
-    // note this is an open bracket on main!
+  // note this is an open bracket on main!
 
   StageGL.BLEND_FRAGMENT_COMPLEX =
     StageGL.BLEND_FRAGMENT_SIMPLE +
@@ -839,7 +839,7 @@ this.createjs = this.createjs || {};
     "srcFactor * srcClr +" +
     "dstFactor * dstClr +" +
     "mixFactor * vec3(";
-    // this should be closed with the cap!
+  // this should be closed with the cap!
   StageGL.BLEND_FRAGMENT_COMPLEX_CAP =
     ")" + ") * totalAlpha, totalAlpha" + ");" + "}";
 

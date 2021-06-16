@@ -1,101 +1,253 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
-<head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="pandoc" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-  <title>README</title>
-  <style type="text/css">
-      code{white-space: pre-wrap;}
-      span.smallcaps{font-variant: small-caps;}
-      span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
-  </style>
-  <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-  </style>
-</head>
-<body>
-<h1 id="aws-s3-demo-with-pern-stack">AWS S3 Demo with PERN Stack</h1>
-<p><a href="https://aws-s3-pern-demo.herokuapp.com">Live Version</a></p>
-<ul>
-<li>Postgres</li>
-<li>Express</li>
-<li>React</li>
-<li>Node</li>
-</ul>
-<h2 id="set-up">Set Up</h2>
-<h4 id="packages-to-install-in-your-backend">Packages to install in your backend</h4>
-<ul>
-<li><a href="https://www.npmjs.com/package/multer">multer</a></li>
-<li><a href="https://www.npmjs.com/package/aws-sdk">aws-sdk</a></li>
-<li><a href="https://www.npmjs.com/package/body-parser">body-parser</a></li>
-</ul>
-<h4 id="create-your-aws-user-and-bucket">Create your AWS User and Bucket</h4>
-<p>Navigate to <a href="https://s3.console.aws.amazon.com/s3/home?region=us-east-1">https://s3.console.aws.amazon.com/s3/home?region=us-east-1</a> click on “create bucket”, enter a name, choose a region, and leave all other options as default.</p>
-<p>Head to <a href="https://console.aws.amazon.com/iam/home?#/users">https://console.aws.amazon.com/iam/home?#/users</a> to create a new user. Name the user whatever you like. Give the user <code>Programmatic access</code>. Proceed to the next step. Now you need to set up the security policy for your new user. This is how they will be allowed to connect. Click ‘Attach existing policies directly’ and then ‘Create Policy’. This will open up a new tab.</p>
-<p>In the new tab, click the <code>JSON</code> tab and paste the following:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>README</title>
+    <style type="text/css">
+      code {
+        white-space: pre-wrap;
+      }
+      span.smallcaps {
+        font-variant: small-caps;
+      }
+      span.underline {
+        text-decoration: underline;
+      }
+      div.column {
+        display: inline-block;
+        vertical-align: top;
+        width: 50%;
+      }
+    </style>
+    <style type="text/css">
+      a.sourceLine {
+        display: inline-block;
+        line-height: 1.25;
+      }
+      a.sourceLine {
+        pointer-events: none;
+        color: inherit;
+        text-decoration: inherit;
+      }
+      a.sourceLine:empty {
+        height: 1.2em;
+      }
+      .sourceCode {
+        overflow: visible;
+      }
+      code.sourceCode {
+        white-space: pre;
+        position: relative;
+      }
+      div.sourceCode {
+        margin: 1em 0;
+      }
+      pre.sourceCode {
+        margin: 0;
+      }
+      @media screen {
+        div.sourceCode {
+          overflow: auto;
+        }
+      }
+      @media print {
+        code.sourceCode {
+          white-space: pre-wrap;
+        }
+        a.sourceLine {
+          text-indent: -1em;
+          padding-left: 1em;
+        }
+      }
+      pre.numberSource a.sourceLine {
+        position: relative;
+        left: -4em;
+      }
+      pre.numberSource a.sourceLine::before {
+        content: attr(title);
+        position: relative;
+        left: -1em;
+        text-align: right;
+        vertical-align: baseline;
+        border: none;
+        pointer-events: all;
+        display: inline-block;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding: 0 4px;
+        width: 4em;
+        color: #aaaaaa;
+      }
+      pre.numberSource {
+        margin-left: 3em;
+        border-left: 1px solid #aaaaaa;
+        padding-left: 4px;
+      }
+      div.sourceCode {
+      }
+      @media screen {
+        a.sourceLine::before {
+          text-decoration: underline;
+        }
+      }
+      code span.al {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Alert */
+      code span.an {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Annotation */
+      code span.at {
+        color: #7d9029;
+      } /* Attribute */
+      code span.bn {
+        color: #40a070;
+      } /* BaseN */
+      code span.bu {
+      } /* BuiltIn */
+      code span.cf {
+        color: #007020;
+        font-weight: bold;
+      } /* ControlFlow */
+      code span.ch {
+        color: #4070a0;
+      } /* Char */
+      code span.cn {
+        color: #880000;
+      } /* Constant */
+      code span.co {
+        color: #60a0b0;
+        font-style: italic;
+      } /* Comment */
+      code span.cv {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* CommentVar */
+      code span.do {
+        color: #ba2121;
+        font-style: italic;
+      } /* Documentation */
+      code span.dt {
+        color: #902000;
+      } /* DataType */
+      code span.dv {
+        color: #40a070;
+      } /* DecVal */
+      code span.er {
+        color: #ff0000;
+        font-weight: bold;
+      } /* Error */
+      code span.ex {
+      } /* Extension */
+      code span.fl {
+        color: #40a070;
+      } /* Float */
+      code span.fu {
+        color: #06287e;
+      } /* Function */
+      code span.im {
+      } /* Import */
+      code span.in {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Information */
+      code span.kw {
+        color: #007020;
+        font-weight: bold;
+      } /* Keyword */
+      code span.op {
+        color: #666666;
+      } /* Operator */
+      code span.ot {
+        color: #007020;
+      } /* Other */
+      code span.pp {
+        color: #bc7a00;
+      } /* Preprocessor */
+      code span.sc {
+        color: #4070a0;
+      } /* SpecialChar */
+      code span.ss {
+        color: #bb6688;
+      } /* SpecialString */
+      code span.st {
+        color: #4070a0;
+      } /* String */
+      code span.va {
+        color: #19177c;
+      } /* Variable */
+      code span.vs {
+        color: #4070a0;
+      } /* VerbatimString */
+      code span.wa {
+        color: #60a0b0;
+        font-weight: bold;
+        font-style: italic;
+      } /* Warning */
+    </style>
+  </head>
+  <body>
+    <h1 id="aws-s3-demo-with-pern-stack">AWS S3 Demo with PERN Stack</h1>
+    <p><a href="https://aws-s3-pern-demo.herokuapp.com">Live Version</a></p>
+    <ul>
+      <li>Postgres</li>
+      <li>Express</li>
+      <li>React</li>
+      <li>Node</li>
+    </ul>
+    <h2 id="set-up">Set Up</h2>
+    <h4 id="packages-to-install-in-your-backend">
+      Packages to install in your backend
+    </h4>
+    <ul>
+      <li><a href="https://www.npmjs.com/package/multer">multer</a></li>
+      <li><a href="https://www.npmjs.com/package/aws-sdk">aws-sdk</a></li>
+      <li>
+        <a href="https://www.npmjs.com/package/body-parser">body-parser</a>
+      </li>
+    </ul>
+    <h4 id="create-your-aws-user-and-bucket">
+      Create your AWS User and Bucket
+    </h4>
+    <p>
+      Navigate to
+      <a href="https://s3.console.aws.amazon.com/s3/home?region=us-east-1"
+        >https://s3.console.aws.amazon.com/s3/home?region=us-east-1</a
+      >
+      click on “create bucket”, enter a name, choose a region, and leave all
+      other options as default.
+    </p>
+    <p>
+      Head to
+      <a href="https://console.aws.amazon.com/iam/home?#/users"
+        >https://console.aws.amazon.com/iam/home?#/users</a
+      >
+      to create a new user. Name the user whatever you like. Give the user
+      <code>Programmatic access</code>. Proceed to the next step. Now you need
+      to set up the security policy for your new user. This is how they will be
+      allowed to connect. Click ‘Attach existing policies directly’ and then
+      ‘Create Policy’. This will open up a new tab.
+    </p>
+    <p>
+      In the new tab, click the <code>JSON</code> tab and paste the following:
+    </p>
+    <div class="sourceCode" id="cb1">
+      <pre
+        class="sourceCode json"
+      ><code class="sourceCode json"><a class="sourceLine" id="cb1-1" title="1"><span class="fu">{</span></a>
 <a class="sourceLine" id="cb1-2" title="2">  <span class="dt">&quot;Version&quot;</span><span class="fu">:</span> <span class="st">&quot;2012-10-17&quot;</span><span class="fu">,</span></a>
 <a class="sourceLine" id="cb1-3" title="3">  <span class="dt">&quot;Statement&quot;</span><span class="fu">:</span> <span class="ot">[</span></a>
 <a class="sourceLine" id="cb1-4" title="4">    <span class="fu">{</span></a>
@@ -105,39 +257,132 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-8" title="8">      <span class="dt">&quot;Resource&quot;</span><span class="fu">:</span> <span class="st">&quot;arn:aws:s3:::&lt;NAME OF BUCKET&gt;/*&quot;</span></a>
 <a class="sourceLine" id="cb1-9" title="9">    <span class="fu">}</span></a>
 <a class="sourceLine" id="cb1-10" title="10">  <span class="ot">]</span></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="fu">}</span></a></code></pre></div>
-<p>Make sure to replace <code>&lt;NAME OF BUCKET&gt;</code> with the name of your bucket. Click Review Policy.</p>
-<p>Give the policy whatever name you like (e.g. s3-access-to-name-of-project). After you save and create the policy, head back over to the other tab/window where you are creating a new user.</p>
-<p>Click the refresh button all the way to the right of the <code>Create Policy</code> button then search for the policy that you just created. Check that policy then head over to the next step. You can skip additional tags. Create the user.</p>
-<p>After you create the user, you will get the <code>Access Key ID</code> and the <code>Secret Access Key</code>. Download the .csv file <strong>Store this somewhere safe on your computer</strong></p>
-<h2 id="update-app.js-in-backend">Update app.js in backend</h2>
-<p>In your app.js import the body-parser you module you installed in your backend node_modules.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">const</span> bodyParser <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;body-parser&quot;</span>)<span class="op">;</span></a></code></pre></div>
-<p>Change the line of code that says <code>app.use(express.json())</code> to the following:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="va">app</span>.<span class="at">use</span>(<span class="va">bodyParser</span>.<span class="at">urlencoded</span>(<span class="op">{</span> <span class="dt">extended</span><span class="op">:</span> <span class="kw">false</span> <span class="op">}</span>))<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="va">app</span>.<span class="at">use</span>(<span class="va">bodyParser</span>.<span class="at">json</span>())<span class="op">;</span></a></code></pre></div>
-<p>You can learn more about the body parser module here: <a href="https://www.npmjs.com/package/body-parser">body-parser</a></p>
-<h2 id="set-up-aws-s3-in-your-backend">Set up AWS S3 in your backend</h2>
-<h3 id="awss3.js"><a href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/backend/awsS3.js"><code>awsS3.js</code></a></h3>
-<p>Make a file called <code>awsS3.js</code> at the root of your backend directory. <a href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/backend/awsS3.js">Link to file</a> Copy the contents of <a href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/backend/awsS3.js">this file</a> into the file you just created.</p>
-<p><strong>Rename the <code>NAME_OF_BUCKET</code> constant at the top of the <code>awsS3.js</code> file to match the name of your bucket.</strong></p>
-<p>In there, you will see that you are using the package, <code>aws-sdk</code>, after setting up your credentials for aws, be sure to add them to your <code>.env</code> file</p>
-<pre><code>AWS_ACCESS_KEY_ID=&lt;Your access key here&gt;
+<a class="sourceLine" id="cb1-11" title="11"><span class="fu">}</span></a></code></pre>
+    </div>
+    <p>
+      Make sure to replace <code>&lt;NAME OF BUCKET&gt;</code> with the name of
+      your bucket. Click Review Policy.
+    </p>
+    <p>
+      Give the policy whatever name you like
+      (e.g. s3-access-to-name-of-project). After you save and create the policy,
+      head back over to the other tab/window where you are creating a new user.
+    </p>
+    <p>
+      Click the refresh button all the way to the right of the
+      <code>Create Policy</code> button then search for the policy that you just
+      created. Check that policy then head over to the next step. You can skip
+      additional tags. Create the user.
+    </p>
+    <p>
+      After you create the user, you will get the <code>Access Key ID</code> and
+      the <code>Secret Access Key</code>. Download the .csv file
+      <strong>Store this somewhere safe on your computer</strong>
+    </p>
+    <h2 id="update-app.js-in-backend">Update app.js in backend</h2>
+    <p>
+      In your app.js import the body-parser you module you installed in your
+      backend node_modules.
+    </p>
+    <div class="sourceCode" id="cb2">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">const</span> bodyParser <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;body-parser&quot;</span>)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      Change the line of code that says <code>app.use(express.json())</code> to
+      the following:
+    </p>
+    <div class="sourceCode" id="cb3">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" title="1"><span class="va">app</span>.<span class="at">use</span>(<span class="va">bodyParser</span>.<span class="at">urlencoded</span>(<span class="op">{</span> <span class="dt">extended</span><span class="op">:</span> <span class="kw">false</span> <span class="op">}</span>))<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="va">app</span>.<span class="at">use</span>(<span class="va">bodyParser</span>.<span class="at">json</span>())<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      You can learn more about the body parser module here:
+      <a href="https://www.npmjs.com/package/body-parser">body-parser</a>
+    </p>
+    <h2 id="set-up-aws-s3-in-your-backend">Set up AWS S3 in your backend</h2>
+    <h3 id="awss3.js">
+      <a
+        href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/backend/awsS3.js"
+        ><code>awsS3.js</code></a
+      >
+    </h3>
+    <p>
+      Make a file called <code>awsS3.js</code> at the root of your backend
+      directory.
+      <a
+        href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/backend/awsS3.js"
+        >Link to file</a
+      >
+      Copy the contents of
+      <a
+        href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/backend/awsS3.js"
+        >this file</a
+      >
+      into the file you just created.
+    </p>
+    <p>
+      <strong
+        >Rename the <code>NAME_OF_BUCKET</code> constant at the top of the
+        <code>awsS3.js</code> file to match the name of your bucket.</strong
+      >
+    </p>
+    <p>
+      In there, you will see that you are using the package,
+      <code>aws-sdk</code>, after setting up your credentials for aws, be sure
+      to add them to your <code>.env</code> file
+    </p>
+    <pre><code>AWS_ACCESS_KEY_ID=&lt;Your access key here&gt;
 AWS_SECRET_ACCESS_KEY=&lt;Your secret access key here&gt;</code></pre>
-<h4 id="how-to-set-up-your-credentials">How to set up your credentials</h4>
-<p>All you need to do is set environmental keys for <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code>. Aws will then automatically use those environment variables. When you deploy to heroku, you will also need to set these environment variables there as well.</p>
-<blockquote>
-<p>You can read more about how AWS uses the environment variables here: <a href="https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-environment.html">https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-environment.html</a></p>
-</blockquote>
-<p><strong>MAKE SURE TO GITIGNORE YOUR .ENV FILE</strong></p>
-<h2 id="private-vs-public-file-uploading">Private vs Public File Uploading</h2>
-<p>If you absolutely don’t want your file images to be publicly available by just any user, you want your files to be private. If you don’t care if users are able to access those files (e.g. on Twitter, posts are public so any photos with those posts can be publicly viewed), then you can set up the files to be publicly read.</p>
-<p>Public upload is recommended for most of the uses cases for your portfolio projects.</p>
-<h3 id="public-files">Public Files</h3>
-<p>How to set up uploading and reading public files on the backend.</p>
-<h4 id="public-file-write-configuration">Public File Write Configuration</h4>
-<p>Take a look at the function <code>singlePublicFileUpload</code> in the your <code>awsS3.js</code>. It accepts a single file which to upload to AWS S3.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">const</span> singlePublicFileUpload <span class="op">=</span> <span class="kw">async</span> (file) <span class="kw">=&gt;</span> <span class="op">{</span></a>
+    <h4 id="how-to-set-up-your-credentials">How to set up your credentials</h4>
+    <p>
+      All you need to do is set environmental keys for
+      <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code>. Aws
+      will then automatically use those environment variables. When you deploy
+      to heroku, you will also need to set these environment variables there as
+      well.
+    </p>
+    <blockquote>
+      <p>
+        You can read more about how AWS uses the environment variables here:
+        <a
+          href="https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-environment.html"
+          >https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-environment.html</a
+        >
+      </p>
+    </blockquote>
+    <p><strong>MAKE SURE TO GITIGNORE YOUR .ENV FILE</strong></p>
+    <h2 id="private-vs-public-file-uploading">
+      Private vs Public File Uploading
+    </h2>
+    <p>
+      If you absolutely don’t want your file images to be publicly available by
+      just any user, you want your files to be private. If you don’t care if
+      users are able to access those files (e.g. on Twitter, posts are public so
+      any photos with those posts can be publicly viewed), then you can set up
+      the files to be publicly read.
+    </p>
+    <p>
+      Public upload is recommended for most of the uses cases for your portfolio
+      projects.
+    </p>
+    <h3 id="public-files">Public Files</h3>
+    <p>How to set up uploading and reading public files on the backend.</p>
+    <h4 id="public-file-write-configuration">
+      Public File Write Configuration
+    </h4>
+    <p>
+      Take a look at the function <code>singlePublicFileUpload</code> in the
+      your <code>awsS3.js</code>. It accepts a single file which to upload to
+      AWS S3.
+    </p>
+    <div class="sourceCode" id="cb5">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">const</span> singlePublicFileUpload <span class="op">=</span> <span class="kw">async</span> (file) <span class="kw">=&gt;</span> <span class="op">{</span></a>
 <a class="sourceLine" id="cb5-2" title="2">  <span class="kw">const</span> <span class="op">{</span> originalname<span class="op">,</span> mimetype<span class="op">,</span> buffer <span class="op">}</span> <span class="op">=</span> <span class="cf">await</span> file<span class="op">;</span></a>
 <a class="sourceLine" id="cb5-3" title="3">  <span class="kw">const</span> path <span class="op">=</span> <span class="at">require</span>(<span class="st">&quot;path&quot;</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb5-4" title="4">  <span class="co">// name of the file in your S3 bucket will be the date in ms plus the extension name</span></a>
@@ -152,16 +397,52 @@ AWS_SECRET_ACCESS_KEY=&lt;Your secret access key here&gt;</code></pre>
 <a class="sourceLine" id="cb5-13" title="13"></a>
 <a class="sourceLine" id="cb5-14" title="14">  <span class="co">// save the name of the file in your bucket as the key in your database to retrieve for later</span></a>
 <a class="sourceLine" id="cb5-15" title="15">  <span class="cf">return</span> <span class="va">result</span>.<span class="at">Location</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb5-16" title="16"><span class="op">};</span></a></code></pre></div>
-<p>You will generate a key on S3 that you can use to identify the file that you will be uploading by using a timestamp which guarantees that they key will always be unique.</p>
-<p><code>const Key = new Date().getTime().toString() + path.extname(originalname);</code></p>
-<p>The upload parameters to S3 include a key-value pair, <code>ACL: "public-read"</code>. This tells the bucket that this file can be publicly read by anyone who has the link to the file.</p>
-<p>S3 sends back data on the saved file which is saved to the variable <code>result</code>.</p>
-<p><code>const result = await s3.upload(uploadParams).promise();</code></p>
-<p>You will be saving this url link that S3 generates for us to your database which can be extracted from <code>result.Location</code></p>
-<p>Now all you need is the file to pass into the <code>singlePublicFileUpload</code> function. In this walkthrough you are going to be importing it to one of your routes - <a href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/backend/routes/api/users.js">Users Routes</a>. But you can use the same logic in any route you’d like.</p>
-<p>In this file, you need to import the <code>singlePublicFileUpload</code> function as well as the <code>singleMulterUpload</code> middleware from the <code>awsS3.js</code> file.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">// Post /api/users ---Sign up</span></a>
+<a class="sourceLine" id="cb5-16" title="16"><span class="op">};</span></a></code></pre>
+    </div>
+    <p>
+      You will generate a key on S3 that you can use to identify the file that
+      you will be uploading by using a timestamp which guarantees that they key
+      will always be unique.
+    </p>
+    <p>
+      <code
+        >const Key = new Date().getTime().toString() +
+        path.extname(originalname);</code
+      >
+    </p>
+    <p>
+      The upload parameters to S3 include a key-value pair,
+      <code>ACL: "public-read"</code>. This tells the bucket that this file can
+      be publicly read by anyone who has the link to the file.
+    </p>
+    <p>
+      S3 sends back data on the saved file which is saved to the variable
+      <code>result</code>.
+    </p>
+    <p><code>const result = await s3.upload(uploadParams).promise();</code></p>
+    <p>
+      You will be saving this url link that S3 generates for us to your database
+      which can be extracted from <code>result.Location</code>
+    </p>
+    <p>
+      Now all you need is the file to pass into the
+      <code>singlePublicFileUpload</code> function. In this walkthrough you are
+      going to be importing it to one of your routes -
+      <a
+        href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/backend/routes/api/users.js"
+        >Users Routes</a
+      >. But you can use the same logic in any route you’d like.
+    </p>
+    <p>
+      In this file, you need to import the
+      <code>singlePublicFileUpload</code> function as well as the
+      <code>singleMulterUpload</code> middleware from the
+      <code>awsS3.js</code> file.
+    </p>
+    <div class="sourceCode" id="cb6">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" title="1"><span class="co">// Post /api/users ---Sign up</span></a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="va">router</span>.<span class="at">post</span>(</a>
 <a class="sourceLine" id="cb6-3" title="3">  <span class="st">&quot;/&quot;</span><span class="op">,</span></a>
 <a class="sourceLine" id="cb6-4" title="4">  <span class="at">singleMulterUpload</span>(<span class="st">&quot;image&quot;</span>)<span class="op">,</span></a>
@@ -182,8 +463,12 @@ AWS_SECRET_ACCESS_KEY=&lt;Your secret access key here&gt;</code></pre>
 <a class="sourceLine" id="cb6-19" title="19">      user<span class="op">,</span></a>
 <a class="sourceLine" id="cb6-20" title="20">    <span class="op">}</span>)<span class="op">;</span></a>
 <a class="sourceLine" id="cb6-21" title="21">  <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb6-22" title="22">)<span class="op">;</span></a></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="co">// in awsS3.js</span></a>
+<a class="sourceLine" id="cb6-22" title="22">)<span class="op">;</span></a></code></pre>
+    </div>
+    <div class="sourceCode" id="cb7">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" title="1"><span class="co">// in awsS3.js</span></a>
 <a class="sourceLine" id="cb7-2" title="2"><span class="kw">const</span> storage <span class="op">=</span> <span class="va">multer</span>.<span class="at">memoryStorage</span>(<span class="op">{</span></a>
 <a class="sourceLine" id="cb7-3" title="3">  <span class="dt">destination</span><span class="op">:</span> <span class="kw">function</span> (req<span class="op">,</span> file<span class="op">,</span> callback) <span class="op">{</span></a>
 <a class="sourceLine" id="cb7-4" title="4">    <span class="at">callback</span>(<span class="kw">null</span><span class="op">,</span> <span class="st">&quot;&quot;</span>)<span class="op">;</span></a>
@@ -192,26 +477,79 @@ AWS_SECRET_ACCESS_KEY=&lt;Your secret access key here&gt;</code></pre>
 <a class="sourceLine" id="cb7-7" title="7"></a>
 <a class="sourceLine" id="cb7-8" title="8"><span class="co">// in awsS3.js</span></a>
 <a class="sourceLine" id="cb7-9" title="9"><span class="kw">const</span> singleMulterUpload <span class="op">=</span> (nameOfKey) <span class="kw">=&gt;</span></a>
-<a class="sourceLine" id="cb7-10" title="10">  <span class="at">multer</span>(<span class="op">{</span> <span class="dt">storage</span><span class="op">:</span> storage <span class="op">}</span>).<span class="at">single</span>(nameOfKey)<span class="op">;</span></a></code></pre></div>
-<p><code>singleMulterUpload</code> is a function that generates the middleware necessary to convert the data from your form into readable fields and files. This function accepts the key to which you expect the files to be saved under in your data (<code>"image"</code> in this case).</p>
-<p>Connect the <code>singleMulterUpload</code> middleware to your <code>POST /api/users</code> route, and then you can access the file in your request under the key of file - <code>req.file</code></p>
-<p>Because the <code>singlePublicFileUpload</code> is an async function, it returns a promise. That promise returns the file URL that you want to save to your database. In this case, you want to save that url under the key of <code>profileImageUrl</code> on the new User.</p>
-<h4 id="public-file-read-configuration">Public File Read Configuration</h4>
-<p><strong>On AWS S3 Console</strong></p>
-<p>Access your bucket public permissions: <img src="assets/block-public-access.png" alt="Access Your Bucket Permissions" /></p>
-<p>Unblock all public access. Your images are going to be accessible to the public for this demo. Be careful when setting this for more sensitive information in the future where you do want to block public access.</p>
-<p>Hit Save</p>
-<p><strong>Sending up the files to your frontend</strong></p>
-<p>All you need to read the files on your frontend is the url path to the file that you saved to the database. Nothing special is needed other than the saved S3 URL.</p>
-<h3 id="multiple-files-backend">Multiple Files Backend</h3>
-<p>Take a look at the <code>multiplePublicFileUpload</code>, and <code>multipleMulterUpload</code> functions in the following file, <a href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/backend/awsS3.js"><code>awsS3.js</code></a>. These functions are used in the same way as the single file upload functions above.</p>
-<h2 id="file-upload-on-the-frontend">File Upload on the Frontend</h2>
-<p>You will be using fetch for this example. To send files, the Content-Type Header must be <code>"multipart/form-data"</code>. In your custom fetch function, <code>csrfFetch</code>, in the csrf.js file you have these lines of code:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="va">options</span>.<span class="at">headers</span>[<span class="st">&quot;Content-Type&quot;</span>] <span class="op">=</span></a>
-<a class="sourceLine" id="cb8-2" title="2">  <span class="va">options</span>.<span class="at">headers</span>[<span class="st">&quot;Content-Type&quot;</span>] <span class="op">||</span> <span class="st">&quot;application/json&quot;</span><span class="op">;</span></a></code></pre></div>
-<p>By adding formData to the body of your request, the browser will automatically set the appropriate headers and boundaries so you need to remove the <code>Content-Type</code> header if it is multipart/form-data.</p>
-<p>The entire if statement should now look like this:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="cf">if</span> (<span class="va">options</span>.<span class="va">method</span>.<span class="at">toUpperCase</span>() <span class="op">!==</span> <span class="st">&quot;GET&quot;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-10" title="10">  <span class="at">multer</span>(<span class="op">{</span> <span class="dt">storage</span><span class="op">:</span> storage <span class="op">}</span>).<span class="at">single</span>(nameOfKey)<span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      <code>singleMulterUpload</code> is a function that generates the
+      middleware necessary to convert the data from your form into readable
+      fields and files. This function accepts the key to which you expect the
+      files to be saved under in your data (<code>"image"</code> in this case).
+    </p>
+    <p>
+      Connect the <code>singleMulterUpload</code> middleware to your
+      <code>POST /api/users</code> route, and then you can access the file in
+      your request under the key of file - <code>req.file</code>
+    </p>
+    <p>
+      Because the <code>singlePublicFileUpload</code> is an async function, it
+      returns a promise. That promise returns the file URL that you want to save
+      to your database. In this case, you want to save that url under the key of
+      <code>profileImageUrl</code> on the new User.
+    </p>
+    <h4 id="public-file-read-configuration">Public File Read Configuration</h4>
+    <p><strong>On AWS S3 Console</strong></p>
+    <p>
+      Access your bucket public permissions:
+      <img
+        src="assets/block-public-access.png"
+        alt="Access Your Bucket Permissions"
+      />
+    </p>
+    <p>
+      Unblock all public access. Your images are going to be accessible to the
+      public for this demo. Be careful when setting this for more sensitive
+      information in the future where you do want to block public access.
+    </p>
+    <p>Hit Save</p>
+    <p><strong>Sending up the files to your frontend</strong></p>
+    <p>
+      All you need to read the files on your frontend is the url path to the
+      file that you saved to the database. Nothing special is needed other than
+      the saved S3 URL.
+    </p>
+    <h3 id="multiple-files-backend">Multiple Files Backend</h3>
+    <p>
+      Take a look at the <code>multiplePublicFileUpload</code>, and
+      <code>multipleMulterUpload</code> functions in the following file,
+      <a
+        href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/backend/awsS3.js"
+        ><code>awsS3.js</code></a
+      >. These functions are used in the same way as the single file upload
+      functions above.
+    </p>
+    <h2 id="file-upload-on-the-frontend">File Upload on the Frontend</h2>
+    <p>
+      You will be using fetch for this example. To send files, the Content-Type
+      Header must be <code>"multipart/form-data"</code>. In your custom fetch
+      function, <code>csrfFetch</code>, in the csrf.js file you have these lines
+      of code:
+    </p>
+    <div class="sourceCode" id="cb8">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" title="1"><span class="va">options</span>.<span class="at">headers</span>[<span class="st">&quot;Content-Type&quot;</span>] <span class="op">=</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="va">options</span>.<span class="at">headers</span>[<span class="st">&quot;Content-Type&quot;</span>] <span class="op">||</span> <span class="st">&quot;application/json&quot;</span><span class="op">;</span></a></code></pre>
+    </div>
+    <p>
+      By adding formData to the body of your request, the browser will
+      automatically set the appropriate headers and boundaries so you need to
+      remove the <code>Content-Type</code> header if it is multipart/form-data.
+    </p>
+    <p>The entire if statement should now look like this:</p>
+    <div class="sourceCode" id="cb9">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="cf">if</span> (<span class="va">options</span>.<span class="va">method</span>.<span class="at">toUpperCase</span>() <span class="op">!==</span> <span class="st">&quot;GET&quot;</span>) <span class="op">{</span></a>
 <a class="sourceLine" id="cb9-2" title="2">  <span class="cf">if</span> (<span class="va">options</span>.<span class="at">headers</span>[<span class="st">&quot;Content-Type&quot;</span>] <span class="op">===</span> <span class="st">&quot;multipart/form-data&quot;</span>) <span class="op">{</span></a>
 <a class="sourceLine" id="cb9-3" title="3">    <span class="kw">delete</span> <span class="va">options</span>.<span class="at">headers</span>[<span class="st">&quot;Content-Type&quot;</span>]<span class="op">;</span></a>
 <a class="sourceLine" id="cb9-4" title="4">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
@@ -219,9 +557,22 @@ AWS_SECRET_ACCESS_KEY=&lt;Your secret access key here&gt;</code></pre>
 <a class="sourceLine" id="cb9-6" title="6">      <span class="va">options</span>.<span class="at">headers</span>[<span class="st">&quot;Content-Type&quot;</span>] <span class="op">||</span> <span class="st">&quot;application/json&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb9-7" title="7">  <span class="op">}</span></a>
 <a class="sourceLine" id="cb9-8" title="8">  <span class="va">options</span>.<span class="at">headers</span>[<span class="st">&quot;XSRF-Token&quot;</span>] <span class="op">=</span> <span class="va">Cookies</span>.<span class="at">get</span>(<span class="st">&quot;XSRF-TOKEN&quot;</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-9" title="9"><span class="op">}</span></a></code></pre></div>
-<p>In the <a href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/frontend/src/store/session.js"><code>session.js</code></a> file, you will be defining your <code>createUser</code> thunk which accepts an object of key value pairs and turns them into <code>FormData</code> entries to send with your request.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="co">// user_actions.js</span></a>
+<a class="sourceLine" id="cb9-9" title="9"><span class="op">}</span></a></code></pre>
+    </div>
+    <p>
+      In the
+      <a
+        href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/frontend/src/store/session.js"
+        ><code>session.js</code></a
+      >
+      file, you will be defining your <code>createUser</code> thunk which
+      accepts an object of key value pairs and turns them into
+      <code>FormData</code> entries to send with your request.
+    </p>
+    <div class="sourceCode" id="cb10">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" title="1"><span class="co">// user_actions.js</span></a>
 <a class="sourceLine" id="cb10-2" title="2"><span class="kw">const</span> SET_USER <span class="op">=</span> <span class="st">&quot;session/setUser&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb10-3" title="3"></a>
 <a class="sourceLine" id="cb10-4" title="4"><span class="kw">const</span> setUser <span class="op">=</span> (user) <span class="kw">=&gt;</span> (<span class="op">{</span></a>
@@ -256,13 +607,28 @@ AWS_SECRET_ACCESS_KEY=&lt;Your secret access key here&gt;</code></pre>
 <a class="sourceLine" id="cb10-33" title="33"></a>
 <a class="sourceLine" id="cb10-34" title="34">  <span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> <span class="va">res</span>.<span class="at">json</span>()<span class="op">;</span></a>
 <a class="sourceLine" id="cb10-35" title="35">  <span class="at">dispatch</span>(<span class="at">setUser</span>(<span class="va">data</span>.<span class="at">user</span>))<span class="op">;</span></a>
-<a class="sourceLine" id="cb10-36" title="36"><span class="op">};</span></a></code></pre></div>
-<p>You can now add a new case to your reducer</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="cf">switch</span> (<span class="va">action</span>.<span class="at">type</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-36" title="36"><span class="op">};</span></a></code></pre>
+    </div>
+    <p>You can now add a new case to your reducer</p>
+    <div class="sourceCode" id="cb11">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" title="1"><span class="cf">switch</span> (<span class="va">action</span>.<span class="at">type</span>) <span class="op">{</span></a>
 <a class="sourceLine" id="cb11-2" title="2">    <span class="cf">case</span> <span class="dt">SET_USER</span><span class="op">:</span></a>
-<a class="sourceLine" id="cb11-3" title="3">      <span class="cf">return</span> <span class="op">{</span> ...<span class="at">state</span><span class="op">,</span> <span class="dt">user</span><span class="op">:</span> <span class="va">action</span>.<span class="at">payload</span> <span class="op">};</span></a></code></pre></div>
-<p>The form itself should look just like a regular React form. Take a look at this form for an example: <a href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/frontend/src/pages/CreateUser.js">CreateUser</a></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="co">// CreateUser.js file</span></a>
+<a class="sourceLine" id="cb11-3" title="3">      <span class="cf">return</span> <span class="op">{</span> ...<span class="at">state</span><span class="op">,</span> <span class="dt">user</span><span class="op">:</span> <span class="va">action</span>.<span class="at">payload</span> <span class="op">};</span></a></code></pre>
+    </div>
+    <p>
+      The form itself should look just like a regular React form. Take a look at
+      this form for an example:
+      <a
+        href="https://github.com/jamesurobertson/aws-s3-pern-demo/blob/master/frontend/src/pages/CreateUser.js"
+        >CreateUser</a
+      >
+    </p>
+    <div class="sourceCode" id="cb12">
+      <pre
+        class="sourceCode javascript"
+      ><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" title="1"><span class="co">// CreateUser.js file</span></a>
 <a class="sourceLine" id="cb12-2" title="2"><span class="im">import</span> <span class="op">{</span> useState <span class="op">}</span> <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb12-3" title="3"><span class="im">import</span> <span class="op">{</span> createUser <span class="op">}</span> <span class="im">from</span> <span class="st">&quot;../store/session&quot;</span><span class="op">;</span></a>
 <a class="sourceLine" id="cb12-4" title="4"><span class="im">import</span> <span class="op">{</span> useDispatch<span class="op">,</span> useSelector <span class="op">}</span> <span class="im">from</span> <span class="st">&quot;react-redux&quot;</span><span class="op">;</span></a>
@@ -370,6 +736,7 @@ AWS_SECRET_ACCESS_KEY=&lt;Your secret access key here&gt;</code></pre>
 <a class="sourceLine" id="cb12-106" title="106">  )<span class="op">;</span></a>
 <a class="sourceLine" id="cb12-107" title="107"><span class="op">};</span></a>
 <a class="sourceLine" id="cb12-108" title="108"></a>
-<a class="sourceLine" id="cb12-109" title="109"><span class="im">export</span> <span class="im">default</span> CreateUser<span class="op">;</span></a></code></pre></div>
-</body>
+<a class="sourceLine" id="cb12-109" title="109"><span class="im">export</span> <span class="im">default</span> CreateUser<span class="op">;</span></a></code></pre>
+    </div>
+  </body>
 </html>

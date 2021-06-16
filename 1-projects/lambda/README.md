@@ -1,20 +1,20 @@
 .
 ├── Atomic-Design-Solution
 │   └── dogs
-│       ├── public
-│       └── src
-│           ├── atoms
-│           ├── molecules
-│           ├── organisms
-│           ├── pages
-│           └── templates
+│   ├── public
+│   └── src
+│   ├── atoms
+│   ├── molecules
+│   ├── organisms
+│   ├── pages
+│   └── templates
 ├── Client-Auth-Solution
 │   ├── public
 │   └── src
-│       ├── actions
-│       ├── components
-│       │   └── HOC
-│       └── reducers
+│   ├── actions
+│   ├── components
+│   │   └── HOC
+│   └── reducers
 ├── Components-BEM-Solution
 │   ├── components
 │   │   ├── Box
@@ -56,20 +56,20 @@
 ├── Data-Structures-and-Algorithms
 │   ├── assets
 │   └── src
-│       ├── algorithms
-│       │   ├── strings
-│       │   │   └── knuth-morris-pratt
-│       │   └── tree
-│       │       ├── breadth-first-search
-│       │       └── depth-first-search
-│       ├── analysis-of-algorithms
-│       │   └── asymptotic-notation
-│       └── data-structures
-│           ├── graph
-│           ├── linked lists
-│           └── tree
-│               ├── binary-search-tree
-│               └── binary-tree
+│   ├── algorithms
+│   │   ├── strings
+│   │   │   └── knuth-morris-pratt
+│   │   └── tree
+│   │   ├── breadth-first-search
+│   │   └── depth-first-search
+│   ├── analysis-of-algorithms
+│   │   └── asymptotic-notation
+│   └── data-structures
+│   ├── graph
+│   ├── linked lists
+│   └── tree
+│   ├── binary-search-tree
+│   └── binary-tree
 ├── LS-Data-Structures-I-Solution
 │   ├── src
 │   └── tests
@@ -92,45 +92,45 @@
 │   │   │   │   ├── less
 │   │   │   │   ├── mail
 │   │   │   │   └── vendor
-│   │   │   │       ├── bootstrap
-│   │   │   │       │   ├── css
-│   │   │   │       │   ├── fonts
-│   │   │   │       │   └── js
-│   │   │   │       ├── font-awesome
-│   │   │   │       │   ├── css
-│   │   │   │       │   ├── fonts
-│   │   │   │       │   ├── less
-│   │   │   │       │   └── scss
-│   │   │   │       └── jquery
+│   │   │   │   ├── bootstrap
+│   │   │   │   │   ├── css
+│   │   │   │   │   ├── fonts
+│   │   │   │   │   └── js
+│   │   │   │   ├── font-awesome
+│   │   │   │   │   ├── css
+│   │   │   │   │   ├── fonts
+│   │   │   │   │   ├── less
+│   │   │   │   │   └── scss
+│   │   │   │   └── jquery
 │   │   │   └── startbootstrap-clean-blog-master
-│   │   │       ├── css
-│   │   │       ├── img
-│   │   │       ├── js
-│   │   │       ├── less
-│   │   │       ├── mail
-│   │   │       └── vendor
-│   │   │           ├── bootstrap
-│   │   │           │   ├── css
-│   │   │           │   ├── fonts
-│   │   │           │   └── js
-│   │   │           ├── font-awesome
-│   │   │           │   ├── css
-│   │   │           │   ├── fonts
-│   │   │           │   ├── less
-│   │   │           │   └── scss
-│   │   │           └── jquery
+│   │   │   ├── css
+│   │   │   ├── img
+│   │   │   ├── js
+│   │   │   ├── less
+│   │   │   ├── mail
+│   │   │   └── vendor
+│   │   │   ├── bootstrap
+│   │   │   │   ├── css
+│   │   │   │   ├── fonts
+│   │   │   │   └── js
+│   │   │   ├── font-awesome
+│   │   │   │   ├── css
+│   │   │   │   ├── fonts
+│   │   │   │   ├── less
+│   │   │   │   └── scss
+│   │   │   └── jquery
 │   │   ├── fonts
 │   │   └── homework
-│   │       ├── bootstrap-3.3.7-dist
-│   │       │   ├── css
-│   │       │   ├── fonts
-│   │       │   └── js
-│   │       └── bootstrap-social-gh-pages
-│   │           └── assets
-│   │               ├── css
-│   │               ├── fonts
-│   │               ├── img
-│   │               └── js
+│   │   ├── bootstrap-3.3.7-dist
+│   │   │   ├── css
+│   │   │   ├── fonts
+│   │   │   └── js
+│   │   └── bootstrap-social-gh-pages
+│   │   └── assets
+│   │   ├── css
+│   │   ├── fonts
+│   │   ├── img
+│   │   └── js
 │   ├── Lesson3
 │   │   └── lswebhomework3
 │   ├── Lesson4
@@ -142,7 +142,7 @@
 │   ├── Lesson7
 │   │   └── lswebhomework7
 │   └── Lesson8
-│       └── lswebhomework8
+│   └── lswebhomework8
 ├── Lambda-School-notes
 │   ├── 10. Data Persistence in Web APIs
 │   │   └── assets
@@ -150,21 +150,21 @@
 │   └── 12. Testing
 ├── LambdaSQL
 │   └── LambdaSQL-master
-│       ├── module1
-│       ├── module2
-│       ├── module3
-│       └── module4
+│   ├── module1
+│   ├── module2
+│   ├── module3
+│   └── module4
 ├── LambdaTA
 │   ├── art
 │   │   └── piazza
 │   └── code_challenges
-│       ├── cc11
-│       ├── cc12
-│       ├── cc16
-│       ├── cc17
-│       ├── cc20
-│       ├── cc27
-│       └── cc39
+│   ├── cc11
+│   ├── cc12
+│   ├── cc16
+│   ├── cc17
+│   ├── cc20
+│   ├── cc27
+│   └── cc39
 ├── Node-Blog
 │   ├── api
 │   │   ├── post
@@ -189,86 +189,86 @@
 │   └── routers
 ├── Node-Express-Gmaps-Solution-Day-I
 │   └── src
-│       ├── controllers
-│       └── models
+│   ├── controllers
+│   └── models
 ├── Node-Express-Gmaps-Solution-Day-II
 │   └── src
-│       ├── controllers
-│       └── models
+│   ├── controllers
+│   └── models
 ├── Node-Express-Gmaps-Solution-Day-II-master
 │   └── src
-│       ├── controllers
-│       └── models
+│   ├── controllers
+│   └── models
 ├── Precourse
 │   ├── Lesson1-Git
 │   ├── Lesson10-JS-VII
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   ├── Lesson11-JS-VIII
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   ├── Lesson12-DOM
 │   │   └── homework
-│   │       ├── __tests__
-│   │       └── assets
+│   │   ├── **tests**
+│   │   └── assets
 │   ├── Lesson2-HTML-CSS
 │   │   └── homework
 │   ├── Lesson3-CSS-Positioning
 │   │   └── homework
-│   │       └── assets
+│   │   └── assets
 │   ├── Lesson4-JS-I
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   ├── Lesson5-JS-II
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   ├── Lesson6-JS-III
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   ├── Lesson7-JS-IV
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   ├── Lesson8-JS-V
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   └── Lesson9-JS-VI
-│       └── homework
-│           └── tests
+│   └── homework
+│   └── tests
 ├── Precourse-master
 │   ├── Lesson1-Git
 │   ├── Lesson10-JS-VII
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   ├── Lesson11-JS-VIII
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   ├── Lesson12-DOM
 │   │   └── homework
-│   │       ├── __tests__
-│   │       └── assets
+│   │   ├── **tests**
+│   │   └── assets
 │   ├── Lesson2-HTML-CSS
 │   │   └── homework
 │   ├── Lesson3-CSS-Positioning
 │   │   └── homework
-│   │       └── assets
+│   │   └── assets
 │   ├── Lesson4-JS-I
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   ├── Lesson5-JS-II
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   ├── Lesson6-JS-III
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   ├── Lesson7-JS-IV
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   ├── Lesson8-JS-V
 │   │   └── homework
-│   │       └── tests
+│   │   └── tests
 │   └── Lesson9-JS-VI
-│       └── homework
-│           └── tests
+│   └── homework
+│   └── tests
 ├── Repos
 │   ├── Data-Structures
 │   │   ├── avl_tree
@@ -293,20 +293,20 @@
 │   ├── Data-Structures-and-Algorithms
 │   │   ├── assets
 │   │   └── src
-│   │       ├── algorithms
-│   │       │   ├── strings
-│   │       │   │   └── knuth-morris-pratt
-│   │       │   └── tree
-│   │       │       ├── breadth-first-search
-│   │       │       └── depth-first-search
-│   │       ├── analysis-of-algorithms
-│   │       │   └── asymptotic-notation
-│   │       └── data-structures
-│   │           ├── graph
-│   │           ├── linked lists
-│   │           └── tree
-│   │               ├── binary-search-tree
-│   │               └── binary-tree
+│   │   ├── algorithms
+│   │   │   ├── strings
+│   │   │   │   └── knuth-morris-pratt
+│   │   │   └── tree
+│   │   │   ├── breadth-first-search
+│   │   │   └── depth-first-search
+│   │   ├── analysis-of-algorithms
+│   │   │   └── asymptotic-notation
+│   │   └── data-structures
+│   │   ├── graph
+│   │   ├── linked lists
+│   │   └── tree
+│   │   ├── binary-search-tree
+│   │   └── binary-tree
 │   ├── data_struct_and_algo
 │   │   └── logs
 │   └── dev-portfolio
@@ -323,16 +323,16 @@
 │   ├── 3-2-advanced-state-mangement
 │   │   └── images
 │   └── 3-3-advanced-web-applications
-│       └── images
+│   └── images
 └── portfolio-main
-    ├── components
-    ├── pages
-    ├── public
-    │   └── static
-    │       ├── favicons
-    │       └── images
-    ├── scripts
-    ├── styles
-    └── utils
+├── components
+├── pages
+├── public
+│   └── static
+│   ├── favicons
+│   └── images
+├── scripts
+├── styles
+└── utils
 
 335 directories
