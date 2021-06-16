@@ -1,0 +1,86 @@
+.expanded {
+    border: 1px red solid;
+}
+
+// .tip-collapsible {
+
+//     &:after {
+//         content: "";
+//         display: block;
+//         width: 100%;
+//         height: 80%;
+//         position: absolute;
+//         bottom: 0;
+//         left: 0;
+//         visibility: visible;
+//         background: linear-gradient(
+//             to top,
+//             rgba(255,255,255,1) 15%,
+//             rgba(255,255,255,0)
+//         );
+//         pointer-events: none;
+//         transition: transform 250ms ease;
+//         transform-origin: 50% 100%;
+//         transform: rotateX(90deg);
+//     }
+
+    
+
+// }
+
+// .tip-collapsed {
+
+//     &:after {
+//         transform:rotateX(0deg);
+//     }
+// }
+
+.expand-enter-active,
+.expand-leave-active {
+  transition: height 1s ease-in-out;
+  overflow: hidden;
+}
+
+.expand-enter,
+.expand-leave-to {
+  height: 0px;
+}
+
+.is-collapsed {
+    height: 0;
+    overflow:hidden;
+}
+
+.tip-window {
+    transition: max-height 0.3s ease-in-out;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 10px 16px;
+}
+
+.tip-window-collapsed {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 1));
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position:absolute;
+}
+
+.tip-list {
+  list-style-type: none;
+  margin-left: 0px;
+}
+
+.tip-list-item {
+  margin-bottom: 25px;
+}
+
+.main-search-bar {
+  margin-bottom: 40px;
+}
+
+::placeholder {
+  opacity: 0.3!important;
+}
