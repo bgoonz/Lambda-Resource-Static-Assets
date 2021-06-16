@@ -1,0 +1,59 @@
+#authPage,
+#resetpassPage,
+#forgotpassPage {
+  display: flex;
+  box-sizing: border-box;
+  color: var(--auth-text);
+  border-radius: var(--app-rad);
+  padding: var(--main-padding);
+  background-color: var(--auth-bg);
+}
+
+/* ......................................................................... */
+#forgotpassPage.sended #forgotpassFormSubmit,
+#forgotpassPage.sended .form-intro div:first-child,
+#forgotpassPage:not(.sended) .form-intro div:last-child {
+  display: none;
+}
+
+/* ......................................................................... */
+#resetpassPage.sended #resetpassFormSubmit,
+#resetpassPage.sended .field,
+#resetpassPage.sended .form-intro div:first-child,
+#resetpassPage.sended .form-btns button,
+#resetpassPage:not(.sended) .form-intro div:last-child,
+#resetpassPage:not(.sended) .form-btns a {
+  display: none;
+}
+
+/* ......................................................................... */
+#authPage a {
+  color: var(--a-text-dark);
+}
+#authPageSignup {
+  grid-area: authPageSignup;
+  color: var(--auth-signup-text);
+  background-color: var(--auth-signup-bg);
+}
+#authPageSignup .field-input {
+  background-color: #fff;
+}
+
+#authPageLogin {
+  grid-area: authPageLogin;
+}
+#authPageLoginForgot {
+  text-align: right;
+  font-size: 12px;
+}
+@media (max-width: 600px) {
+  #authPage {
+    padding: 0;
+    flex-direction: column;
+    background-color: transparent;
+  }
+  #authPageLogin {
+    margin-top: var(--main-padding);
+    background-color: var(--auth-bg);
+  }
+}

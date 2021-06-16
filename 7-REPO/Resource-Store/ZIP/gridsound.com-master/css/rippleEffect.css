@@ -1,0 +1,21 @@
+.rippleEffect {
+  position: relative;
+  overflow: hidden;
+}
+.rippleEffect-circle {
+  position: absolute;
+  margin: -60%;
+  width: 120%;
+  padding-top: 120%;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.6;
+  transform: scale(0);
+  transition-duration: 0s;
+}
+.rippleEffect-active .rippleEffect-circle {
+  transform: scale(2);
+  opacity: 0;
+  transition-duration: 0.7s;
+  transition-property: opacity, transform;
+}

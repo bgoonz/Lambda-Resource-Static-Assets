@@ -1,0 +1,106 @@
+<div class="page" id="userPage">
+  <div id="userPageUser">
+    <div id="userPageUserAvatar" class="userAvatar">
+      <img id="userPageUserAvatarImg" class="userAvatarImg" />
+      <i class="userAvatarDef gsuiIcon" data-icon="musician"></i>
+    </div>
+    <div id="userPageUserInfo">
+      <div id="userPageUserUsername"></div>
+      <div id="userPageUserFirstname"></div>
+      <div id="userPageUserLastname"></div>
+    </div>
+    <div id="userPageUserEmail">
+      <span id="userPageUserEmailAddr">
+        <i id="userPageUserEmailAddrStatus" class="gsuiIcon"></i>
+        <span id="userPageUserEmailAddrText"></span>
+      </span>
+      <a id="userPageUserEmailNot">
+        <i id="userPageUserEmailSending" class="gsuiIcon"></i>
+        <span id="userPageUserEmailToSend">resend the confirmation email</span>
+        <span id="userPageUserEmailSent">email sent</span>
+      </a>
+    </div>
+    <button id="userPageUserEdit" class="gsuiIcon" data-icon="pen"></button>
+  </div>
+  <form id="userPageUserForm" class="pageSection hidden">
+    <div class="pageSectionTitle">
+      <span class="pageSectionTitleLabel">Profile edition</span>
+    </div>
+    <div class="pageSectionBody">
+      <label class="field">
+        <span class="field-label">avatar</span>
+        <div>
+          GridSound accepts, for the moment, only
+          <a
+            href="https://gravatar.com"
+            class="highlight"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="gsuiIcon gsuiIconB" data-icon="wordpress"></i>
+            WordPress&nbsp;- Gravatar
+          </a>
+          as avatar.
+        </div>
+      </label>
+      <label class="field">
+        <span class="field-label">first name</span>
+        <input
+          class="field-input"
+          type="text"
+          name="firstname"
+          spellcheck="false"
+        />
+      </label>
+      <label class="field">
+        <span class="field-label">last name</span>
+        <input
+          class="field-input"
+          type="text"
+          name="lastname"
+          spellcheck="false"
+        />
+      </label>
+      <label class="field">
+        <span class="field-label">email</span>
+        <input
+          class="field-input"
+          type="email"
+          name="email"
+          spellcheck="false"
+        />
+        <span
+          >if the email is changed, a confirmation email has to be sent
+          again</span
+        >
+      </label>
+      <label class="field field-inline">
+        <span class="field-label">email public</span>
+        <div>
+          <input class="field-input" type="checkbox" name="emailpublic" />
+          <span>if checked, your email will be public on your profile</span>
+        </div>
+      </label>
+      <div id="userPageUserFormError"></div>
+      <div id="userPageUserFormBtns">
+        <button id="userPageUserFormCancel" class="btn" type="button">
+          <span class="btn-text">cancel</span>
+        </button>
+        <button
+          id="userPageUserFormSubmit"
+          class="btn btn-submit"
+          type="submit"
+        >
+          <span class="btn-text">save</span>
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="pageSection">
+    <div class="pageSectionTitle">
+      <span class="pageSectionTitleValue" id="userPageNbCompositions"></span>
+      <span class="pageSectionTitleLabel">composition·s</span>
+    </div>
+    <div id="userPageCmps" class="pageSectionBody"></div>
+  </div>
+</div>

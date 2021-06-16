@@ -1,0 +1,79 @@
+<div class="page" id="authPage">
+  <form class="form" id="authPageSignup">
+    <div class="form-title">Create a personal account</div>
+    <label class="field">
+      <span class="field-label">Email</span>
+      <input
+        class="field-input"
+        id="authPageSignupEmail"
+        type="email"
+        name="email"
+        required
+        maxlength="128"
+        placeholder="eg: janedoe@example.com"
+      />
+    </label>
+    <label class="field">
+      <span class="field-label">Username</span>
+      <input
+        class="field-input"
+        id="authPageSignupUsername"
+        type="text"
+        name="username"
+        required
+        minlength="4"
+        maxlength="32"
+        pattern="[a-zA-Z0-9_]*"
+      />
+    </label>
+    <label class="field">
+      <span class="field-label">Password</span>
+      <input
+        class="field-input"
+        id="authPageSignupPass"
+        type="password"
+        name="pass"
+        required
+        minlength="6"
+      />
+    </label>
+    <div class="form-error" id="authPageSignupError"></div>
+    <div class="form-btns">
+      <button id="authPageSignupBtn" type="submit" class="btn btn-submit">
+        <span class="btn-text">Sign up</span>
+      </button>
+    </div>
+  </form>
+  <form class="form" id="authPageLogin">
+    <div class="form-title">Log in to GridSound</div>
+    <label class="field">
+      <span class="field-label">Email (or username)</span>
+      <input
+        class="field-input"
+        id="authPageLoginEmail"
+        type="text"
+        name="email"
+        required
+      />
+    </label>
+    <label class="field">
+      <span class="field-label">Password</span>
+      <input
+        class="field-input"
+        id="authPageLoginPass"
+        type="password"
+        name="pass"
+        required
+      />
+    </label>
+    <div id="authPageLoginForgot">
+      <a href="#/forgotPassword">Forgot password&nbsp;?</a>
+    </div>
+    <div class="form-error" id="authPageLoginError"></div>
+    <div class="form-btns">
+      <button id="authPageLoginBtn" type="submit" class="btn btn-submit">
+        <span class="btn-text">Log in</span>
+      </button>
+    </div>
+  </form>
+</div>

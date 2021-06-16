@@ -1,0 +1,67 @@
+:root {
+  --form-error-color: #f64;
+}
+
+/* ......................................................................... */
+.form {
+  flex: 1;
+  display: grid;
+  grid-gap: var(--auth-padding);
+  border-radius: var(--app-rad);
+  align-content: flex-start;
+}
+.form:not(:only-child) {
+  padding: var(--auth-padding);
+}
+
+/* ......................................................................... */
+.form-title {
+  margin-bottom: 1em;
+  text-align: center;
+}
+.form-intro {
+  font-size: 12px;
+}
+.form-error {
+  color: var(--form-error-color);
+  font-size: 12px;
+  font-weight: bold;
+}
+.form-btns {
+  display: grid;
+  grid-gap: inherit;
+  justify-self: center;
+  grid-auto-flow: column;
+}
+
+/* ......................................................................... */
+.field {
+  display: block;
+}
+.field-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 0.3em;
+}
+.field-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.8em;
+  border: 0;
+  border-radius: 2px;
+  background-color: #eee;
+}
+.field-input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+.field-inline div {
+  display: flex;
+  align-items: center;
+}
+.field-inline .field-input {
+  display: inline-block;
+  margin-right: 0.5em;
+}
