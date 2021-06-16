@@ -1,6 +1,3 @@
-
-
-
 <pre>
 <i>'sorting'</i> Sub-directory contains all 
 <strong>sorting algorithms</strong>.

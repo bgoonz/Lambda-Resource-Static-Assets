@@ -1,47 +1,45 @@
-define(['./kindOf', './isPlainObject', '../object/mixIn'], function (kindOf, isPlainObject, mixIn) {
+define(['./clone', '../object/forOwn', './kindOf', './isPlainObject'], function (clone, forOwn, kindOf, isPlainObject) {
 
     /**
-     * Clone native types.
+     * Recursively clone native types.
      */
-    function clone(val){
-        switch (kindOf(val)) {
+    function deepClone(val, instanceClone) {
+        switch ( kindOf(val) ) {
             case 'Object':
-                return cloneObject(val);
+                return cloneObject(val, instanceClone);
             case 'Array':
-                return cloneArray(val);
-            case 'RegExp':
-                return cloneRegExp(val);
-            case 'Date':
-                return cloneDate(val);
+                return cloneArray(val, instanceClone);
             default:
-                return val;
+                return clone(val);
         }
     }
 
-    function cloneObject(source) {
+    function cloneObject(source, instanceClone) {
         if (isPlainObject(source)) {
-            return mixIn({}, source);
+            var out = {};
+            forOwn(source, function(val, key) {
+                this[key] = deepClone(val, instanceClone);
+            }, out);
+            return out;
+        } else if (instanceClone) {
+            return instanceClone(source);
         } else {
             return source;
         }
     }
 
-    function cloneRegExp(r) {
-        var flags = '';
-        flags += r.multiline ? 'm' : '';
-        flags += r.global ? 'g' : '';
-        flags += r.ignoreCase ? 'i' : '';
-        return new RegExp(r.source, flags);
+    function cloneArray(arr, instanceClone) {
+        var out = [],
+            i = -1,
+            n = arr.length,
+            val;
+        while (++i < n) {
+            out[i] = deepClone(arr[i], instanceClone);
+        }
+        return out;
     }
 
-    function cloneDate(date) {
-        return new Date(+date);
-    }
-
-    function cloneArray(arr) {
-        return arr.slice();
-    }
-
-    return clone;
+    return deepClone;
 
 });
+

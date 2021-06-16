@@ -1,16 +1,13 @@
-define(function () {
+define(['./findLastIndex'], function (findLastIndex) {
 
     /**
-     * Returns last element of array.
+     * Returns last item that matches criteria
      */
-    function last(arr){
-        if (arr == null || arr.length < 1) {
-            return undefined;
-        }
-
-        return arr[arr.length - 1];
+    function findLast(arr, iterator, thisObj){
+        var idx = findLastIndex(arr, iterator, thisObj);
+        return idx >= 0? arr[idx] : void(0);
     }
 
-    return last;
+    return findLast;
 
 });
