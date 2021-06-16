@@ -78,6 +78,7 @@ const LogoutButton = () => {
 ```
 
 > Feel free to visit the Redux Hooks documentation to view [`useSelector`
+>
 > > examples].
 
 Then inside the component you can convert the `props.loggedOut` to simply use
@@ -124,6 +125,7 @@ const LogoutButton = () => {
 ```
 
 > Feel free to visit the Redux Hooks documentation to view [`useDispatch`
+>
 > > examples].
 
 #### Removing `mapStateToProps`, `mapDispatchToProps`, and `connect`
