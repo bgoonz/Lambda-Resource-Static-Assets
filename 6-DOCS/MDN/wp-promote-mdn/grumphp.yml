@@ -1,0 +1,20 @@
+parameters:
+    git_dir: .
+    bin_dir: composer/bin
+    ignore_unstaged_changes: false
+    tasks: 
+        composer:
+            with_dependencies: false
+            strict: false
+        phpcs:
+            standard: PHPCompatibility
+            ignore_patterns: ['/lib/','/tests/']
+        grunt: ~
+        phpmd: ~
+        git_blacklist:
+            keywords:
+                - 'die('
+                - 'print_r('
+                - 'var_dump('
+                - 'codecept_debug('
+            triggered_by: [php]

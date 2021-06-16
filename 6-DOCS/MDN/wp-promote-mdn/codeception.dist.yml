@@ -1,0 +1,53 @@
+actor: Tester
+paths:
+    tests: tests
+    log: tests/_output
+    data: tests/_data
+    helpers: tests/_support
+settings:
+    bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 1024M
+modules:
+    config:
+        WPBrowser:
+            url: 'http://demo.dev'
+            adminUsername: admin
+            adminPassword: admin
+            adminUrl: /wp-admin
+        WPDb:
+            dsn: 'mysql:host=127.0.0.1;dbname=wordpress_unit_tests'
+            user: root
+            password: 
+            dump: tests/_data/dump.sql
+            populate: true
+            cleanup: true
+            url: 'http://demo.dev'
+            tablePrefix: wp_
+        WPLoader:
+            wpRootFolder: '/home/travis/build/wordpress'
+            dbName: wordpress_unit_tests
+            dbHost: 127.0.0.1
+            dbUser: root
+            dbPassword: 
+            wpDebug: true
+            dbCharset: utf8
+            dbCollate: ''
+            tablePrefix: wp_
+            domain: demo.dev
+            adminEmail: admin@wp.dev
+            title: 'WP Tests'
+            phpBinary: php
+            language: ''
+            configFile: 'wp-config-test.php'
+            plugins: ["wp-promote-mdn/promote-mdn.php"]
+            activatePlugins: ["wp-promote-mdn/promote-mdn.php"]
+        WPWebDriver:
+            url: 'http://demo.dev'
+            browser: phantomjs
+            port: 4444
+            restart: true
+            wait: 2
+            adminUsername: admin
+            adminPassword: admin
+            adminUrl: /wp-admin
