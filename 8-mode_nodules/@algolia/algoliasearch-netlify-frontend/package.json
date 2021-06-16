@@ -1,0 +1,63 @@
+{
+  "name": "@algolia/algoliasearch-netlify-frontend",
+  "version": "1.0.7",
+  "private": false,
+  "author": "Algolia Team <contact@algolia.com>",
+  "license": "MIT",
+  "repository": "https://github.com/algolia/algoliasearch-netlify.git",
+  "bugs": {
+    "url": "https://github.com/algolia/algoliasearch-netlify/issues"
+  },
+  "files": [
+    "README.md",
+    "dist/"
+  ],
+  "scripts": {
+    "build": "npx webpack --mode production",
+    "dev": "PORT=9100 npx webpack serve --mode development",
+    "postinstall": "[ -d dist/ ] || npm run build"
+  },
+  "devDependencies": {
+    "@algolia/autocomplete-js": "1.0.0-alpha.45",
+    "@algolia/autocomplete-preset-algolia": "1.0.0-alpha.45",
+    "@algolia/autocomplete-theme-classic": "1.0.0-alpha.45",
+    "@algolia/transporter": "4.8.6",
+    "@babel/core": "7.13.15",
+    "@babel/preset-env": "7.13.15",
+    "@types/react": "17.0.3",
+    "algoliasearch": "4.8.6",
+    "babel-loader": "8.2.2",
+    "clean-webpack-plugin": "3.0.0",
+    "core-js": "3.10.1",
+    "css-loader": "5.2.0",
+    "fork-ts-checker-webpack-plugin": "6.2.1",
+    "mini-css-extract-plugin": "1.4.0",
+    "mustache": "4.2.0",
+    "node-sass": "5.0.0",
+    "postcss": "8.2.10",
+    "postcss-loader": "4.2.0",
+    "postcss-preset-env": "6.7.0",
+    "preact": "10.5.13",
+    "sass-loader": "10.1.1",
+    "terser-webpack-plugin": "4.2.3",
+    "ts-loader": "8.1.0",
+    "webpack": "4.46.0",
+    "webpack-cli": "4.6.0",
+    "webpack-dev-server": "3.11.2"
+  },
+  "keywords": [
+    "algolia",
+    "algoliasearch",
+    "crawl",
+    "crawler",
+    "indexing",
+    "jamstack",
+    "netlify-plugin",
+    "netlify-search",
+    "netlify",
+    "plugin",
+    "robots",
+    "search",
+    "ui"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "@algolia/netlify-plugin-crawler",
+  "version": "1.0.7",
+  "private": false,
+  "author": "Algolia Team <contact@algolia.com>",
+  "license": "MIT",
+  "repository": "https://github.com/algolia/algoliasearch-netlify.git",
+  "bugs": {
+    "url": "https://github.com/algolia/algoliasearch-netlify/issues"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "README.md",
+    "manifest.yml",
+    "dist/"
+  ],
+  "scripts": {
+    "build": "npx tsc -b",
+    "dev": "nodemon --config .nodemon.json --exec '../scripts/dev_plugin.sh'",
+    "postinstall": "[ -d dist/ ] || npm run build"
+  },
+  "dependencies": {
+    "node-fetch": "2.6.1"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "2.5.10",
+    "dotenv": "8.2.0"
+  },
+  "keywords": [
+    "netlify",
+    "netlify-plugin",
+    "search",
+    "crawl",
+    "crawler",
+    "robots",
+    "indexing",
+    "netlify-search",
+    "algolia",
+    "algoliasearch"
+  ]
+}
